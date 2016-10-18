@@ -18,7 +18,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	icon_state = S.hand_state
 
 /obj/item/magic_hand/get_storage_cost()
-	return DO_NOT_STORE
+	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/magic_hand/attack() //can't be used to actually bludgeon things
 	return 1

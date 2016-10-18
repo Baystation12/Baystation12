@@ -1,8 +1,6 @@
 
 // Keep these two together, they *must* be defined on both
 // If /client ever becomes /datum/client or similar, they can be merged
-/client/proc/get_view_variables_header()
-	return "<b>[src]</b>"
 /datum/proc/get_view_variables_header()
 	return "<b>[src]</b>"
 
@@ -32,8 +30,6 @@
 		"}
 
 // Same for these as for get_view_variables_header() above
-/client/proc/get_view_variables_options()
-	return ""
 /datum/proc/get_view_variables_options()
 	return ""
 
@@ -93,49 +89,31 @@
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
 		"}
 
-#define get_variables_from_(X) \
-/X/proc/get_variables() \
+/datum/proc/get_variables()
 	return vars
 
-#define get_variable_value_from_(X) \
-/X/proc/get_variable_value(varname) \
+/datum/proc/get_variable_value(varname)
 	return vars[varname]
 
-#define set_variable_value_for_(X) \
-/X/proc/set_variable_value(varname, value) \
+/datum/proc/set_variable_value(varname, value)
 	vars[varname] = value
 
-#define get_initial_variable_value_for_(X) \
-/X/proc/get_initial_variable_value(varname) \
+/datum/proc/get_initial_variable_value(varname)
 	return null // I don't see how this ever returned anything except null. Used to be: initial(D.vars[varname])
 
-#define make_view_variables_variable_entry_for_(X) \
-/X/proc/make_view_variables_variable_entry(varname, value) \
-	return {" \
-			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>) \
-			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>) \
-			(<a href='?_src_=vars;datummass=\ref[src];varnamemass=[varname]'>M</a>) \
-			"} \
+/datum/proc/make_view_variables_variable_entry(varname, value)
+	return {"
+			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
+			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
+			(<a href='?_src_=vars;datummass=\ref[src];varnamemass=[varname]'>M</a>)
+			"}
 
-get_variables_from_(datum)
-get_variables_from_(client)
-
-get_variable_value_from_(datum)
-get_variable_value_from_(client)
-
-set_variable_value_for_(datum)
-set_variable_value_for_(client)
-
-get_initial_variable_value_for_(datum)
-get_initial_variable_value_for_(client)
-
-make_view_variables_variable_entry_for_(datum)
-make_view_variables_variable_entry_for_(client)
-
-#undef get_variables_from_
-#undef get_variable_value_from_
-#undef set_variable_value_for_
-#undef get_initial_variable_value_for_
+// No mass editing of clients
+/client/make_view_variables_variable_entry(varname, value)
+	return {"
+			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
+			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
+			"}
 
 // These methods are all procs and don't use stored lists to avoid VV exploits
 
@@ -160,13 +138,13 @@ make_view_variables_variable_entry_for_(client)
 /mob/VVckey_edit()
 	return list("key", "ckey")
 
-/client/proc/VVlocked()
+/client/VVlocked()
 	return list("vars", "holder", "mob")
 
-/client/proc/VVicon_edit_lock()
+/client/VVicon_edit_lock()
 	return list()
 
-/client/proc/VVckey_edit()
+/client/VVckey_edit()
 	return list("key", "ckey")
 
 /proc/forbidden_varedit_object_types()

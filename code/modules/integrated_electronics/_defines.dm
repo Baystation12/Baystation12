@@ -1,3 +1,7 @@
+#define IC_TOPIC_UNHANDLED 0
+#define IC_TOPIC_HANDLED 1
+#define IC_TOPIC_REFRESH 2
+
 #define IC_INPUT "input"
 #define IC_OUTPUT "output"
 #define IC_ACTIVATOR "activator"
@@ -10,7 +14,7 @@
 	desc = "It's a tiny chip!  This one doesn't seem to do much, however."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "template"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/extended_desc = null
 	var/list/inputs = list()
 	var/list/outputs = list()
@@ -21,8 +25,12 @@
 	var/cooldown_per_use = 1 SECOND
 	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
-/obj/item/integrated_circuit/examine(mob/user)
+/obj/item/integrated_circuit/examine(mob/user, var/assembly_examine = FALSE)
+	if(assembly_examine)
+		return
+
 	..()
+
 	to_chat(user, "This board has [inputs.len] input pin\s and [outputs.len] output pin\s.")
 	for(var/datum/integrated_io/input/I in inputs)
 		if(I.linked.len)
@@ -41,6 +49,9 @@
 	setup_io(outputs, /datum/integrated_io/output)
 	setup_io(activators, /datum/integrated_io/activate)
 	..()
+
+/obj/item/integrated_circuit/ex_act(severity)
+	..(max(1, severity - 1)) // Circuits are weak
 
 /obj/item/integrated_circuit/proc/setup_io(var/list/io_list, var/io_type)
 	var/list/io_list_copy = io_list.Copy()
@@ -75,13 +86,11 @@
 	set desc = "Rename your circuit, useful to stay organized."
 
 	var/mob/M = usr
-	if(!CanInteract(M, physical_state))
-		return
-
 	var/input = sanitizeSafe(input("What do you want to name the circuit?", "Rename", src.name) as null|text, MAX_NAME_LEN)
-	if(src && input && CanInteract(M, physical_state))
+	if(src && input && input != name && CanInteract(M, physical_state))
 		to_chat(M, "<span class='notice'>The circuit '[src.name]' is now labeled '[input]'.</span>")
 		name = input
+		interact(M)
 
 /obj/item/integrated_circuit/proc/get_pin_ref(var/pin_type, var/pin_number)
 	switch(pin_type)
@@ -108,7 +117,7 @@
 	HTML += "<div align='center'>"
 	HTML += "<table border='1' style='undefined;table-layout: fixed; width: 424px'>"
 
-	HTML += "<br><a href='?src=\ref[src];'>\[Refresh\]</a>  |  "
+	HTML += "<br><a href='?src=\ref[src];refresh=1'>\[Refresh\]</a>  |  "
 	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a>  |  "
 	HTML += "<a href='?src=\ref[src];remove=1'>\[Remove\]</a><br>"
 
@@ -214,14 +223,21 @@
 				debugger.write_data(pin, usr)
 		else
 			to_chat(usr, "<span class='warning'>You can't do a whole lot without the proper tools.</span>")
+		. = 1
 
-	if(href_list["examine"])
+	else if(href_list["refresh"])
+		interact(usr)
+		. = 1
+
+	else if(href_list["examine"])
 		examine(usr)
+		. = 1
 
-	if(href_list["rename"])
+	else if(href_list["rename"])
 		rename_component(usr)
+		. = IC_TOPIC_REFRESH
 
-	if(href_list["remove"])
+	else if(href_list["remove"])
 		if(istype(held_item, /obj/item/weapon/screwdriver))
 			disconnect_all()
 			var/turf/T = get_turf(src)
@@ -230,12 +246,28 @@
 			to_chat(usr, "<span class='notice'>You pop \the [src] out of the case, and slide it out.</span>")
 		else
 			to_chat(usr, "<span class='warning'>You need a screwdriver to remove components.</span>")
-		var/obj/item/device/electronic_assembly/ea = loc
-		if(istype(ea))
-			ea.interact(usr)
-		return
+		interact_with_assembly(usr)
+		. = IC_TOPIC_REFRESH
 
-	interact(usr) // To refresh the UI.
+	else
+		. = OnTopic(href_list, usr)
+
+	if(. == IC_TOPIC_REFRESH)
+		interact_with_assembly(usr)
+
+/obj/item/integrated_circuit/proc/OnTopic(href_list, var/mob/user)
+	return IC_TOPIC_UNHANDLED
+
+/obj/item/integrated_circuit/proc/get_topic_data(mob/user)
+	return list()
+
+/obj/item/integrated_circuit/proc/interact_with_assembly(var/mob/user)
+	var/obj/item/device/electronic_assembly/ea = loc
+	if(!istype(ea))
+		return
+	ea.interact(user)
+	if(ea.opened)
+		interact(user)
 
 /datum/integrated_io
 	var/name = "input/output"
@@ -260,6 +292,15 @@
 
 /datum/integrated_io/nano_host()
 	return holder
+
+/datum/integrated_io/proc/link_io(var/datum/integrated_io/io)
+	if(io_type != io.io_type)
+		CRASH("Attempted to connect incompatible IO types: '[log_info_line(src)]' and '[log_info_line(io)]'")
+	if(holder == io.holder)
+		CRASH("Attempted two pins with the same holder: '[log_info_line(src)]' and '[log_info_line(io)]', belonging to '[log_info_line(holder)]'")
+
+	linked |= io
+	io.linked |= src
 
 /datum/integrated_io/proc/data_as_type(var/as_type)
 	if(!isweakref(data))
@@ -303,7 +344,7 @@
 
 /datum/integrated_io/activate/push_data()
 	for(var/datum/integrated_io/io in linked)
-		io.holder.check_then_do_work()
+		io.holder.check_then_do_work(io)
 
 /datum/integrated_io/proc/pull_data()
 	for(var/datum/integrated_io/io in linked)
@@ -344,13 +385,13 @@
 	for(var/datum/integrated_io/input/I in inputs)
 		I.push_data()
 
-/obj/item/integrated_circuit/proc/check_then_do_work()
+/obj/item/integrated_circuit/proc/check_then_do_work(var/datum/integrated_io/io)
 	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
 		return
 	next_use = world.time + cooldown_per_use
-	do_work()
+	do_work(io)
 
-/obj/item/integrated_circuit/proc/do_work()
+/obj/item/integrated_circuit/proc/do_work(var/datum/integrated_io/io)
 	return
 
 /obj/item/integrated_circuit/proc/disconnect_all()

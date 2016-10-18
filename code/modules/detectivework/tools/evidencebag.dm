@@ -6,7 +6,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "evidenceobj"
 	item_state = ""
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/obj/item/stored_item = null
 
 /obj/item/weapon/evidencebag/MouseDrop(var/obj/item/I as obj)
@@ -45,7 +45,7 @@
 		user << "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>"
 		return
 
-	if(I.w_class > NORMAL_ITEM)
+	if(I.w_class > ITEM_SIZE_NORMAL)
 		user << "<span class='notice'>[I] won't fit in [src].</span>"
 		return
 

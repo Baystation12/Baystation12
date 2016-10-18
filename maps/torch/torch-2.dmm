@@ -1399,7 +1399,7 @@
 "AU" = (/obj/structure/table,/obj/random/junk,/turf/simulated/floor/tiled,/area/vacant/briefing)
 "AV" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/vacant/briefing)
 "AW" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/teleporter/thirddeck)
-"AX" = (/obj/structure/table/standard,/obj/item/weapon/hand_tele,/turf/simulated/floor/tiled/dark,/area/teleporter/thirddeck)
+"AX" = (/obj/structure/table/standard,/obj/prefab/hand_teleporter,/turf/simulated/floor/tiled/dark,/area/teleporter/thirddeck)
 "AY" = (/obj/machinery/camera/network/third_deck{c_tag = "Third Deck - Teleporter"; dir = 1},/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/teleporter/thirddeck)
 "AZ" = (/obj/structure/table/rack,/obj/random/tech_supply,/turf/simulated/floor/tiled/dark,/area/teleporter/thirddeck)
 "Ba" = (/obj/structure/closet/crate,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/obj/random/tank,/turf/simulated/floor/tiled/dark,/area/teleporter/thirddeck)

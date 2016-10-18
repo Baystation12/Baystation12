@@ -51,7 +51,7 @@
 
 /obj/item/weapon/melee/energy/get_storage_cost()
 	if(active)
-		return DO_NOT_STORE
+		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
 /*
@@ -70,7 +70,7 @@
 	throwforce = 10
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	flags = CONDUCT | NOBLOODY
 	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
@@ -101,7 +101,7 @@
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	flags = NOBLOODY
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
@@ -179,7 +179,7 @@
 	throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
-	w_class = 1 //technically it's just energy or something, I dunno
+	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
 	flags = NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
@@ -198,7 +198,7 @@
 	..()
 
 /obj/item/weapon/melee/energy/blade/get_storage_cost()
-	return DO_NOT_STORE
+	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)

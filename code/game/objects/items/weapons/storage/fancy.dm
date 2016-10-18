@@ -49,8 +49,8 @@
 	icon_state = "eggbox"
 	name = "egg box"
 	storage_slots = 12
-	max_w_class = 2
-	w_class = 3
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 
 	key_type = /obj/item/weapon/reagent_containers/food/snacks/egg
 	can_hold = list(
@@ -72,8 +72,8 @@
 	icon_state = "candlebox"
 	opened = 1 //no closed state
 	throwforce = 2
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 5
 	slot_flags = SLOT_BELT
 
@@ -89,8 +89,8 @@
 	desc = "A box of crayons for all your rune drawing needs."
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 
 	key_type = /obj/item/weapon/pen/crayon
@@ -118,8 +118,8 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	startswith = 6
 	throwforce = 2
@@ -239,8 +239,8 @@
 	icon_state = "cigarcase"
 	item_state = "cigpacket"
 	icon = 'icons/obj/cigarettes.dmi'
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
@@ -268,8 +268,8 @@
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox"
 	name = "vial storage box"
-	w_class = 3
-	max_w_class = 1
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
 
 	key_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
@@ -288,8 +288,8 @@
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox0"
 	item_state = "syringe_kit"
-	w_class = 3
-	max_w_class = 1
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = null
 	storage_slots = 12
 	req_access = list(access_virology)

@@ -218,7 +218,7 @@ proc/age2agedescription(age)
 			. = 0
 			break
 
-		if(target_loc && (!target || target_loc != target.loc))
+		if(target_loc && (!target || deleted(target) || target_loc != target.loc))
 			. = 0
 			break
 

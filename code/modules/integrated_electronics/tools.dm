@@ -12,7 +12,7 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "wirer-wire"
 	flags = CONDUCT
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
 
@@ -33,8 +33,7 @@
 			to_chat(user, "<span class='warning'>Those two types of channels are incompatable.  The first is a [selected_io.io_type], \
 			while the second is a [io.io_type].</span>")
 			return
-		selected_io.linked |= io
-		io.linked |= selected_io
+		selected_io.link_io(io)
 
 		to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
 		mode = WIRE
@@ -104,20 +103,24 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "debugger"
 	flags = CONDUCT
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/weakref/data_to_write = null
 	var/accepting_refs = 0
+	var/available_types = list("string","number","null")
+
+/obj/item/device/integrated_electronics/debugger/admin
+	available_types = list("string","number","ref","null")
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
-	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
-	if(!CanInteract(user, physical_state))
+	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in available_types
+	if(!type_to_use || !CanInteract(user, physical_state))
 		return
 
 	var/new_data = null
 	switch(type_to_use)
 		if("string")
 			accepting_refs = 0
-			new_data = input("Now type in a string.","[src] string writing") as null|text
+			new_data = sanitize(input("Now type in a string.","[src] string writing") as null|text)
 			if(istext(new_data) && CanInteract(user, physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
@@ -135,13 +138,16 @@
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
 
-/obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
-	if(accepting_refs && proximity)
-		data_to_write = weakref(target)
-		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
-		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
-		now off.</span>")
-		accepting_refs = 0
+/obj/item/device/integrated_electronics/debugger/admin/MouseDrop(var/atom/over_object)
+	if(!accepting_refs)
+		return ..()
+
+	if(!CanMouseDrop(over_object))
+		return
+	data_to_write = weakref(over_object)
+	visible_message("<span class='notice'>\The [usr] slides \a [src]'s over \the [over_object].</span>")
+	to_chat(usr, "<span class='notice'>You set \the [src]'s memory to a reference to \the [over_object.name]. The ref scanner is now off.</span>")
+	accepting_refs = 0
 
 /obj/item/device/integrated_electronics/debugger/proc/write_data(var/datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)
@@ -157,12 +163,50 @@
 
 	io.holder.interact(user) // This is to update the UI.
 
+/obj/item/device/integrated_electronics/analyzer
+	name = "circuit analuzer"
+	desc = "This tool allows one to analyze custom assemblies and their components from a distance."
+	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon_state = "analyzer"
+	flags = CONDUCT
+	w_class = 2
+	var/last_scan = ""
+
+/obj/item/device/integrated_electronics/analyzer/examine(var/mob/user)
+	. = ..(user, 1)
+	if(.)
+		if(last_scan)
+			to_chat(user, last_scan)
+		else
+			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
+
+/obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
+	if(!istype(assembly))
+		return ..()
+
+	user.visible_message("<span class='notify'>\The [user] begins to scan \the [assembly].</span>", "<span class='notify'>You begin to scan \the [assembly].</span>")
+	if(!do_after(user, assembly.get_part_complexity(), assembly))
+		return
+
+	playsound(src.loc, 'sound/piano/A#6.ogg', 25, 0, -3)
+
+	last_scan = list()
+	last_scan += "Results from the scan of \the [assembly]:"
+	var/found_parts = FALSE
+	for(var/obj/item/integrated_circuit/part in assembly)
+		found_parts = TRUE
+		last_scan += "\t [initial(part.name)]"
+	if(!found_parts)
+		last_scan += "*No Components Found*"
+	last_scan = jointext(last_scan,"\n")
+	to_chat(user, last_scan)
+
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "circuit_kit"
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/weapon/storage/bag/circuits/basic/New()
 	..()

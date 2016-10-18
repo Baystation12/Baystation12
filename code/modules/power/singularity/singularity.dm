@@ -306,7 +306,7 @@
 			step(src, movement_dir)
 		return 1
 	else if(check_turfs_in(movement_dir))
-		last_failed_movement = 0//Reset this because we moved
+		last_failed_movement = 0 // Reset this because we moved
 		spawn(0)
 			step(src, movement_dir)
 		return 1

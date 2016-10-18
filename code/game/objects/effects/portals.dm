@@ -28,11 +28,16 @@
 		return
 	return
 
-/obj/effect/portal/New()
+/obj/effect/portal/New(var/start, var/end)
+	..()
+	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
+	target = end
 	spawn(300)
 		qdel(src)
-		return
-	return
+
+/obj/effect/portal/Destroy()
+	target = null
+	. = ..()
 
 /obj/effect/portal/proc/teleport(atom/movable/M as mob|obj)
 	if(istype(M, /obj/effect)) //sparks don't teleport

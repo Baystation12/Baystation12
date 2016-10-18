@@ -66,7 +66,7 @@
 		slot_l_hand_str = 'icons/mob/items/lefthand_spacesuits.dmi',
 		slot_r_hand_str = 'icons/mob/items/righthand_spacesuits.dmi',
 		)
-	w_class = 4//large item
+	w_class = ITEM_SIZE_LARGE//large item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL

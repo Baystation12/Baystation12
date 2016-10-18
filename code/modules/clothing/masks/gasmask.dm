@@ -5,7 +5,7 @@
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = FACE|EYES
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	item_state = "gas_alt"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
@@ -33,7 +33,7 @@
 	icon_state = "halfgas"
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 55, rad = 0)
 
 //Plague Dr suit can be found in clothing/suits/bio.dm

@@ -58,9 +58,7 @@
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
 	stat = DEAD
-
-	if(plane == HIDING_MOB_PLANE)
-		reset_plane_and_layer()
+	reset_plane_and_layer()
 	update_canmove()
 
 	dizziness = 0

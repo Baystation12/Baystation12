@@ -17,7 +17,7 @@
 
 /obj/item/weapon/a_gift/New()
 	..()
-	if(w_class > 0 && w_class < BULKY_ITEM)
+	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
@@ -115,7 +115,7 @@
 	var/size = 3.0
 	var/obj/item/gift = null
 	item_state = "gift"
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 /obj/item/weapon/gift/New(newloc, obj/item/wrapped = null)
 	..(newloc)
@@ -148,16 +148,16 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
-	var/amount = 2.5*base_storage_cost(BULKY_ITEM)
+	var/amount = 2.5*base_storage_cost(ITEM_SIZE_HUGE)
 
 /obj/item/weapon/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
 		user << "<span class='warning'>You MUST put the paper on a table!</span>"
-	if (W.w_class < BULKY_ITEM)
+	if (W.w_class < ITEM_SIZE_HUGE)
 		if ((istype(user.l_hand, /obj/item/weapon/wirecutters) || istype(user.r_hand, /obj/item/weapon/wirecutters)))
 			var/a_used = W.get_storage_cost()
-			if (a_used == DO_NOT_STORE)
+			if (a_used == ITEM_SIZE_NO_CONTAINER)
 				user << "<span class='warning'>You can't wrap that!</span>" //no gift-wrapping lit welders
 				return
 			if (src.amount < a_used)

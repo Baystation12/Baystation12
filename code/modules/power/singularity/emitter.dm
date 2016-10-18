@@ -26,7 +26,7 @@
 
 	var/_wifi_id
 	var/datum/wifi/receiver/button/emitter/wifi_receiver
-	
+
 /obj/machinery/power/emitter/anchored
 	anchored = 1
 	state = 2
@@ -75,15 +75,15 @@
 		if(!src.locked)
 			if(src.active==1)
 				src.active = 0
-				user << "You turn off [src]."
-				message_admins("Emitter turned off by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+				user << "You turn off \the [src]."
+				message_admins("[src] turned off by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
 				log_game("Emitter turned off by [user.ckey]([user]) in ([x],[y],[z])")
 				investigate_log("turned <font color='red'>off</font> by [user.key]","singulo")
 			else
 				src.active = 1
-				user << "You turn on [src]."
+				user << "You turn on \the [src]."
 				src.shot_number = 0
-				src.fire_delay = 100
+				src.fire_delay = get_initial_fire_delay()
 				message_admins("Emitter turned on by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
 				log_game("Emitter turned on by [user.ckey]([user]) in ([x],[y],[z])")
 				investigate_log("turned <font color='green'>on</font> by [user.key]","singulo")
@@ -127,10 +127,10 @@
 
 		src.last_shot = world.time
 		if(src.shot_number < burst_shots)
-			src.fire_delay = 2
+			src.fire_delay = get_burst_delay()
 			src.shot_number ++
 		else
-			src.fire_delay = rand(min_burst_delay, max_burst_delay)
+			src.fire_delay = get_rand_burst_delay()
 			src.shot_number = 0
 
 		//need to calculate the power per shot as the emitter doesn't fire continuously.
@@ -142,7 +142,7 @@
 			s.set_up(5, 1, src)
 			s.start()
 
-		var/obj/item/projectile/beam/emitter/A = new /obj/item/projectile/beam/emitter( src.loc )
+		var/obj/item/projectile/beam/emitter/A = get_emitter_beam()
 		playsound(src.loc, A.fire_sound, 25, 1)
 		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
 		A.launch( get_step(src.loc, src.dir) )
@@ -227,3 +227,15 @@
 		emagged = 1
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
 		return 1
+
+/obj/machinery/power/emitter/proc/get_initial_fire_delay()
+	return 100
+
+/obj/machinery/power/emitter/proc/get_rand_burst_delay()
+	return rand(min_burst_delay, max_burst_delay)
+
+/obj/machinery/power/emitter/proc/get_burst_delay()
+	return 2
+
+/obj/machinery/power/emitter/proc/get_emitter_beam()
+	return new /obj/item/projectile/beam/emitter(get_turf(src))

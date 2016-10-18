@@ -9,7 +9,7 @@
 	item_state = "pill"
 	randpixel = 7
 	possible_transfer_amounts = null
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 60
 
@@ -143,24 +143,6 @@
 		..()
 		reagents.add_reagent("tramadol", 15)
 
-
-/obj/item/weapon/reagent_containers/pill/methylphenidate
-	name = "Methylphenidate pill"
-	desc = "Improves the ability to concentrate."
-	icon_state = "pill8"
-	New()
-		..()
-		reagents.add_reagent("methylphenidate", 15)
-
-/obj/item/weapon/reagent_containers/pill/citalopram
-	name = "Citalopram pill"
-	desc = "Mild anti-depressant."
-	icon_state = "pill8"
-	New()
-		..()
-		reagents.add_reagent("citalopram", 15)
-
-
 /obj/item/weapon/reagent_containers/pill/inaprovaline
 	name = "Inaprovaline pill"
 	desc = "Used to stabilize patients."
@@ -251,3 +233,31 @@
 	New()
 		..()
 		reagents.add_reagent("lipozine", 2)
+
+//Baycode specific Psychiatry pills.
+/obj/item/weapon/reagent_containers/pill/methylphenidate
+	name = "Methylphenidate pill"
+	desc = "Improves the ability to concentrate."
+	icon_state = "pill8"
+
+/obj/item/weapon/reagent_containers/pill/methylphenidate/New()
+		..()
+		reagents.add_reagent("methylphenidate", 15)
+
+/obj/item/weapon/reagent_containers/pill/citalopram
+	name = "Citalopram pill"
+	desc = "Mild anti-depressant."
+	icon_state = "pill8"
+
+/obj/item/weapon/reagent_containers/pill/citalopram/New()
+		..()
+		reagents.add_reagent("citalopram", 15)
+
+/obj/item/weapon/reagent_containers/pill/paroxetine
+	name = "Paroxetine pill"
+	desc = "Before you swallow a bullet: try swallowing this!"
+	icon_state = "pill20"
+
+/obj/item/weapon/reagent_containers/pill/paroxetine/New()
+		..()
+		reagents.add_reagent("paroxetine", 10)

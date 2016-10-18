@@ -8,9 +8,30 @@
 	var/min_range = 0
 	var/max_range = 3
 
+/obj/item/integrated_circuit/sensor/New()
+	..()
+
+	if(min_range != max_range && max_range)
+		extended_desc = "This sensor has a variable detection range from [min_range] to [max_range] meters away from its location."
+	else if(min_range == max_range)
+		extended_desc = "This sensor has a static detection range of [max_range] meter\s away from its location."
+	if(min_range == 0)
+		extended_desc += "<br>A range of 0 still includes its current location."
+
 /obj/item/integrated_circuit/sensor/proximity
+	complexity = 10
+	var/sensitivity = 2  // How soon, in seconds, the proximity sensor must detect movement again to actually trigger
+	var/last_trigger = 0 // And of course, memory of when it last triggered
 	var/datum/proximity_trigger/proximity_trigger
 	category = /obj/item/integrated_circuit/sensor/proximity
+
+/obj/item/integrated_circuit/sensor/proximity/New()
+	..()
+	var/datum/integrated_io/range = inputs[2]
+	range.data = between(min_range, range.data, max_range)
+
+	if(sensitivity)
+		extended_desc += "<br>This ensor will only trigger if movement is confirmed twice within [sensitivity] second\s (but not necessarily from the same source)"
 
 /obj/item/integrated_circuit/sensor/proximity/initialize()
 	..()
@@ -69,13 +90,19 @@
 		return FALSE
 	if(enterer == loc && istype(loc, /obj/item/device/electronic_assembly))
 		return FALSE
-	return TRUE
+	if(!sensitivity)
+		return TRUE
+
+	if((world.time - last_trigger) <= (sensitivity SECONDS))
+		. = TRUE
+	last_trigger = world.time
 
 /obj/item/integrated_circuit/sensor/proximity/ir
 	name = "IR sensor"
-	desc = "Reacts to movement in a straight line in front of its current facing and trigger immediately upon detection."
+	desc = "Reacts to movement in a straight line in front of its current facing."
 	min_range = 1
 	max_range = 7
+	sensitivity = 0
 	icon_state = "sensor_ir"
 	proximity_trigger = list(/datum/proximity_trigger/line = PROXIMITY_EXCLUDE_HOLDER_TURF)
 	inputs = list("active", "range" = 7, "visible beam" = FALSE)
@@ -106,15 +133,17 @@
 	create_update_and_delete_beams(proximity_trigger.is_active(), current_beam_visibility, dir, seen_turfs, beams)
 
 /obj/item/integrated_circuit/sensor/proximity/proximity
-	name = "proximity sensor"
-	desc = "Reacts to movement in an area around it but will only trigger if movement is confirmed twice within 2 seconds (but not necessarily from the same source)."
+	name = "low-sensitivity proximity sensor"
+	desc = "Reacts to movement in an area around it."
 	min_range = 0
 	max_range = 3
+	sensitivity = 2
 	icon_state = "sensor_proxy"
 	proximity_trigger = /datum/proximity_trigger/square
-	var/last_trigger = 0
 
-/obj/item/integrated_circuit/sensor/proximity/proximity/shall_trigger(var/enterer)
-	if(..() && ((world.time - last_trigger) <= 2 SECONDS))
-		. = TRUE
-	last_trigger = world.time
+/obj/item/integrated_circuit/sensor/proximity/proximity/high
+	name = "high-sensitivity proximity sensor"
+	desc = "Reacts to movement directly in its location."
+	min_range = 0
+	max_range = 0
+	sensitivity = 0

@@ -3,7 +3,7 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0

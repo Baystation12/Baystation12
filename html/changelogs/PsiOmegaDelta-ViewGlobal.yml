@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes:
-  - rscadd: "Staff with sufficient rights can now edit global variables using the 'View Global Variables' verb."
