@@ -29,6 +29,8 @@
 
 	#define USING_MAP_DATUM /datum/map/torch
 
+	#define ZLEVELS
+
 #elif !defined(MAP_OVERRIDE)
 
 	#warn A map has already been included, ignoring Torch
