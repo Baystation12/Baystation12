@@ -5,7 +5,7 @@
 	icon_state = "bookHacking"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/uses = 1
 	var/temp = null
 	var/list/monster = list(/mob/living/simple_animal/familiar/pet/cat,

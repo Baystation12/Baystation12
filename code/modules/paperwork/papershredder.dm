@@ -129,7 +129,7 @@
 	icon_state = "shredp"
 	randpixel = 5
 	throwforce = 0
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	throw_range = 3
 	throw_speed = 1
 

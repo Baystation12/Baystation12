@@ -12,7 +12,7 @@
 	singular_name = "tile"
 	desc = "A non-descript floor tile."
 	randpixel = 7
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	max_amount = 100
 
 /*

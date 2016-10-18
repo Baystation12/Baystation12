@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items.dmi'
 	amount = 5
 	max_amount = 5
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 20
 	var/heal_brute = 0

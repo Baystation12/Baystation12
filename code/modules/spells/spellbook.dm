@@ -24,7 +24,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	icon_state = "spellbook"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	var/uses = 1
 	var/temp = null
 	var/datum/spellbook/spellbook

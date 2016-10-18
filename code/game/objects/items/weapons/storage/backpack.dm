@@ -20,9 +20,9 @@
 	sprite_sheets = list(
 		"Resomi" = 'icons/mob/species/resomi/back.dmi'
 		)
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
-	max_w_class = 4
+	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	
 /obj/item/weapon/storage/backpack/equipped()
@@ -49,7 +49,7 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = list(TECH_BLUESPACE = 4)
 	icon_state = "holdingpack"
-	max_w_class = 3
+	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
 	New()
@@ -74,8 +74,8 @@
 	desc = "Space Santa uses this to deliver toys to all the nice children in space for Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
-	w_class = 5
-	max_w_class = 3
+	w_class = ITEM_SIZE_HUGE
+	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 400 // can store a ton of shit!
 	item_state_slots = null
 
@@ -148,7 +148,7 @@
 	desc = "A large dufflebag for holding extra things."
 	icon_state = "duffle"
 	item_state_slots = null
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
 /obj/item/weapon/storage/backpack/dufflebag/New()

@@ -2152,3 +2152,23 @@
 	result = "luminol"
 	required_reagents = list("hydrogen" = 2, "carbon" = 2, "ammonia" = 2)
 	result_amount = 6
+
+/datum/chemical_reaction/oxyphoron
+	name = "Oxyphoron"
+	id = "oxyphoron"
+	result = "oxyphoron"
+	required_reagents = list("oxygen" = 1, "phoron" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/deuterium
+	name = "Deuterium"
+	id = "deuterium"
+	result = null
+	required_reagents = list("water" = 10)
+	catalysts = list("oxyphoron" = 5)
+	result_amount = 1
+
+/datum/chemical_reaction/deuterium/on_reaction(var/datum/reagents/holder, var/created_volume)
+	var/turf/T = get_turf(holder.my_atom)
+	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
+	return

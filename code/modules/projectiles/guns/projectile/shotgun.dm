@@ -4,7 +4,7 @@
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	max_shells = 4
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -60,7 +60,7 @@
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
 	max_shells = 2
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -97,7 +97,7 @@
 		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
 			item_state = "sawnshotgun"
-			w_class = 3
+			w_class = ITEM_SIZE_NORMAL
 			force = 5
 			requires_two_hands = 0
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
@@ -115,6 +115,6 @@
 	item_state = "sawnshotgun"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	force = 5
 	requires_two_hands = 0

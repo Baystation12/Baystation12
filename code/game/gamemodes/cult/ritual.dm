@@ -439,7 +439,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	return
 
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	var/cultistsonly = 1
 	attack_self(mob/user as mob)
 		if(src.cultistsonly && !iscultist(usr))

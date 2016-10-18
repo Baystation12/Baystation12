@@ -1226,7 +1226,7 @@
 	desc = "A disposal control switch assembly."
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	var/id_tag
 
 /obj/item/disposal_switch_construct/New(var/turf/loc, var/id)

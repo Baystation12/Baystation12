@@ -10,11 +10,11 @@
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	flags = CONDUCT
 	matter = list(DEFAULT_WALL_MATERIAL = 3000)
 	var/list/carrying = list() // List of things on the tray. - Doohl
-	var/max_carry = 2*base_storage_cost(NORMAL_ITEM)
+	var/max_carry = 2*base_storage_cost(ITEM_SIZE_NORMAL)
 
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 

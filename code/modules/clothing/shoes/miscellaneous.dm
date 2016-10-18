@@ -142,7 +142,7 @@
 	item_state = "slippers"
 	force = 0
 	species_restricted = null
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/clothing/shoes/slippers_worn
 	name = "worn bunny slippers"
@@ -150,7 +150,7 @@
 	icon_state = "slippers_worn"
 	item_state = "slippers_worn"
 	force = 0
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/clothing/shoes/laceup
 	name = "laceup shoes"

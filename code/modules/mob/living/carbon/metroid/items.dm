@@ -4,7 +4,7 @@
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey slime extract"
 	force = 1.0
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 6

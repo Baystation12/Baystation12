@@ -3,7 +3,7 @@
 	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/weapon/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
@@ -80,7 +80,7 @@
 	desc = "A piece of sticky tape."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "tape"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	layer = ABOVE_OBJ_LAYER
 	anchored = 1 //it's sticky, no you cant move it
 

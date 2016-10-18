@@ -4,7 +4,7 @@
 	icon_state = "flash"
 	item_state = "flashtool"
 	throwforce = 5
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT

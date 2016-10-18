@@ -21,7 +21,7 @@
 	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "train_keys"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/vehicle/train/cargo/trolley
 	name = "cargo train trolley"
