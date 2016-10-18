@@ -157,13 +157,13 @@
 
 
 //Body temperature effects/heat tranfer coeffs.
-#define TEMPERATURE_DAMAGE_COEFFICIENT  0.667 // This is used in handle_temperature_damage() for humans, and in reagents that affect body temperature. Temperature damage is multiplied by this amount.
-#define BODYTEMP_AUTORECOVERY_DIVISOR   40  // This is the divisor which handles how much of the temperature difference between the current body temperature and 310.15K (optimal temperature) humans auto-regenerate each tick. The higher the number, the slower the recovery. This is applied each tick, so long as the mob is alive.
-#define BODYTEMP_AUTORECOVERY_MINIMUM   0.444 // Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
-#define BODYTEMP_COLD_DIVISOR           13.5  // Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is lower than their body temperature. Make it lower to lose bodytemp faster.
-#define BODYTEMP_HEAT_DIVISOR           13.5  // Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is higher than their body temperature. Make it lower to gain bodytemp faster.
-#define BODYTEMP_COOLING_MAX           -13.3  // The maximum number of degrees that your body can cool down in 1 tick, when in a cold area.
-#define BODYTEMP_HEATING_MAX            13.3  // The maximum number of degrees that your body can heat up in 1 tick,   when in a hot  area.
+#define TEMPERATURE_DAMAGE_COEFFICIENT   0.67 // This is used in handle_temperature_damage() for humans, and in reagents that affect body temperature. Temperature damage is multiplied by this amount.
+#define BODYTEMP_AUTORECOVERY_DIVISOR   75.5  // This is the divisor which handles how much of the temperature difference between the current body temperature and 310.15K (optimal temperature) humans auto-regenerate each tick. The higher the number, the slower the recovery. This is applied each tick, so long as the mob is alive.
+#define BODYTEMP_AUTORECOVERY_MINIMUM    0.2  // Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
+#define BODYTEMP_COLD_DIVISOR            6.5  // Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is lower than their body temperature. Make it lower to lose bodytemp faster.
+#define BODYTEMP_HEAT_DIVISOR            6.5  // Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is higher than their body temperature. Make it lower to gain bodytemp faster.
+#define BODYTEMP_COOLING_MAX            -9.5  // The maximum number of degrees that your body can cool down in 1 tick, when in a cold area.
+#define BODYTEMP_HEATING_MAX             7.5  // The maximum number of degrees that your body can heat up in 1 tick,   when in a hot  area.
 
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
 #define BODYTEMP_COLD_DAMAGE_LIMIT 260.15 // The limit the human body can take before it starts taking damage from coldness.
@@ -187,7 +187,8 @@
  * Had to change these to cope with the faster tickrate we used. (Bay is dev'd for 0.9, as compared to 0.4)
  * The original values are as follows, in case we ever need these.
  *
- * The current values are by multing the previous values by the ratio of tickrates with hand adjustment.
+ * The current values are were based on multing the previous values by the ratio of tickrates,
+ * followed by generous hand adjustment so that the cryo works again. :V
  *
  * TEMPERATURE_DAMAGE_COEFFICIENT  1.5
  * BODYTEMP_AUTORECOVERY_DIVISOR   12
@@ -208,7 +209,7 @@
 
 #define THROWFORCE_SPEED_DIVISOR    5  // The throwing speed value at which the throwforce multiplier is exactly 1.
 #define THROWNOBJ_KNOCKBACK_SPEED   15 // The minumum speed of a w_class 2 thrown object that will cause living mobs it hits to be knocked back. Heavier objects can cause knockback at lower speeds.
-#define THROWNOBJ_KNOCKBACK_DIVISOR 2  // Affects how much speed the mob is knocked back with.
+#define THROWNOBJ_KNOCKBACK_DIVISOR 2  // Affects how much speed the mob is knocked back with
 
 // Suit sensor levels
 #define SUIT_SENSOR_OFF      0
