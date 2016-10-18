@@ -91,3 +91,19 @@
 	display_name = "Cards Against The Galaxy (black deck)"
 	path = /obj/item/weapon/deck/cah/black
 	description = "The ever-popular Cards Against The Galaxy word game. Warning: may include traces of broken fourth wall. This is the black deck."
+
+/datum/gear/cigar
+	display_name = "cigar"
+	path = /obj/item/clothing/mask/smokable/cigarette/cigar
+
+/datum/gear/cigarettes
+	display_name = "cigarette selection"
+	path = /obj/item/weapon/storage/fancy/cigarettes
+
+/datum/gear/cigarettes/New()
+	..()
+	var/list/cigarettes = list()
+	for(var/cigarette in (typesof(/obj/item/weapon/storage/fancy/cigarettes) - typesof(/obj/item/weapon/storage/fancy/cigarettes/killthroat)))
+		var/obj/item/weapon/storage/fancy/cigarettes/cigarette_brand = cigarette
+		cigarettes[initial(cigarette_brand.name)] = cigarette_brand
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cigarettes))
