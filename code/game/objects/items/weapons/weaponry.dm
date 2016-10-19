@@ -112,23 +112,36 @@
 	processing_objects.Add(src)
 
 /obj/effect/energy_net/Destroy()
-	..()
+	if(istype(src.captured, /mob/living/carbon))
+		if(src.captured.handcuffed == src)
+			src.captured.handcuffed = null
+	if(src.captured)
+		unbuckle_mob()
 	processing_objects.Remove(src)
+	src.captured = null
+	..()
 
 /obj/effect/energy_net/process()
 	countdown--
+	if(src.captured.buckled != src)
+		health = 0
+	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
+		countdown = 0
 	if(countdown <= 0)
 		health = 0
 	healthcheck()
 
 
-/obj/effect/energy_net/proc/capture_mob(mob/living/carbon/M)
+
+/obj/effect/energy_net/proc/capture_mob(mob/living/M)
 	src.captured = M
 	if(M.buckled)
 		M.buckled.unbuckle_mob()
 	buckle_mob(M)
 	if(istype(M, /mob/living/carbon))
-		M.handcuffed = src
+		var/mob/living/carbon/C = M
+		if(!C.handcuffed)
+			C.handcuffed = src
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
@@ -148,10 +161,7 @@
 			src.visible_message("<span class='warning'>\The [src] fades away!</span>")
 		else
 			src.visible_message("<span class='danger'>\The [src] is torn apart!</span>")
-		if(istype(src.captured, /mob/living/carbon))
-			src.captured.handcuffed = null
-		unbuckle_mob()
-		src.captured = null
+		qdel(src)
 
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
