@@ -206,8 +206,8 @@
 		G.fields["citizenship"]	= H.citizenship
 		G.fields["faction"]		= H.personal_faction
 		G.fields["religion"]	= H.religion
-		G.fields["mil_branch"]  = H.char_branch
-		G.fields["mil_rank"]    = H.char_rank
+		G.fields["mil_branch"]  = H.char_branch.name
+		G.fields["mil_rank"]    = H.char_rank.name
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
 
@@ -242,8 +242,8 @@
 		L.fields["faction"]		= H.personal_faction
 		L.fields["religion"]	= H.religion
 		L.fields["image"]		= getFlatIcon(H)	//This is god-awful
-		L.fields["mil_branch"]   = H.char_branch
-		L.fields["mil_rank"]    = H.char_rank
+		L.fields["mil_branch"]   = H.char_branch.name
+		L.fields["mil_rank"]    = H.char_rank.name
 		if(H.exploit_record && !jobban_isbanned(H, "Records"))
 			L.fields["exploit_record"] = H.exploit_record
 		else
@@ -450,8 +450,8 @@
 	G.fields["photo_front"]	= front
 	G.fields["photo_side"]	= side
 	G.fields["notes"] = "No notes found."
-	G.fields["mil_branch"] = "None"
-	G.fields["mil_rank"] = "None"
+	G.fields["mil_branch"] = null
+	G.fields["mil_rank"] = null
 	general += G
 
 	return G

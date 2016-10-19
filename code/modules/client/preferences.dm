@@ -388,8 +388,8 @@ datum/preferences
 	character.personal_faction = faction
 	character.religion = religion
 	
-	character.char_branch = char_branch
-	character.char_rank = char_rank
+	character.char_branch = mil_branches.get_branch(char_branch)
+	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
