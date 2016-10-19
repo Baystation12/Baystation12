@@ -197,4 +197,20 @@
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/miner
 	allowed_roles = list("Shaft Miner")
 
+/datum/gear/suit/track
+	display_name = "track jacket selection"
+	path = /obj/item/clothing/suit/storage/toggle/track
+
+/datum/gear/suit/track/New()
+	..()
+	var/list/tracks = list()
+	for(var/track_style in typesof(/obj/item/clothing/suit/storage/toggle/track))
+		var/obj/item/clothing/suit/storage/toggle/track/track = track_style
+		tracks[initial(track.name)] = track
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tracks))
+
+/datum/gear/suit/leather_jacket_alt
+	display_name = "leather jacket 2, black"
+	path = /obj/item/clothing/suit/storage/leather_jacket/alt
+
 //EROS FINISH

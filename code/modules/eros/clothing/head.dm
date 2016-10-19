@@ -68,3 +68,9 @@
 /obj/item/clothing/head/techassist
 	name = "technical assistant cap"
 	icon_state = "eros_assistenghat"
+
+/obj/item/clothing/head/soft/black
+	name = "black cap"
+	desc = "It's a peaked cap in a tasteful black color."
+	icon_state = "blacksoft"
+	item_state_slots = list(slot_r_hand_str = "blacksoft", slot_l_hand_str = "blacksoft")

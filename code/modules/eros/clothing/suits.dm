@@ -202,3 +202,43 @@
 	icon_state = "eros_coatminer"
 	item_state_slots = list(slot_r_hand_str = "eros_coatminer", slot_l_hand_str = "eros_coatminer")
 	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/toggle/track
+	name = "track jacket"
+	desc = "a track jacket, for the athletic."
+	icon_state = "eros_trackjacket"
+	item_state_slots = list(slot_r_hand_str = "black_labcoat", slot_l_hand_str = "black_labcoat")
+	icon_open = "eros_trackjacket_open"
+	icon_closed = "eros_trackjacket"
+
+/obj/item/clothing/suit/storage/toggle/track/blue
+	name = "blue track jacket"
+	icon_state = "eros_trackjacketblue"
+	item_state_slots = list(slot_r_hand_str = "blue_labcoat", slot_l_hand_str = "blue_labcoat")
+	icon_open = "eros_trackjacketblue_open"
+	icon_closed = "eros_trackjacketblue"
+
+/obj/item/clothing/suit/storage/toggle/track/green
+	name = "green track jacket"
+	icon_state = "eros_trackjacketgreen"
+	item_state_slots = list(slot_r_hand_str = "green_labcoat", slot_l_hand_str = "green_labcoat")
+	icon_open = "eros_trackjacketgreen_open"
+	icon_closed = "eros_trackjacketgreen"
+
+/obj/item/clothing/suit/storage/toggle/track/red
+	name = "red track jacket"
+	icon_state = "eros_trackjacketred"
+	item_state_slots = list(slot_r_hand_str = "red_labcoat", slot_l_hand_str = "red_labcoat")
+	icon_open = "eros_trackjacketred_open"
+	icon_closed = "eros_trackjacketred"
+
+/obj/item/clothing/suit/storage/toggle/track/white
+	name = "white track jacket"
+	icon_state = "eros_trackjacketwhite"
+	item_state_slots = list(slot_r_hand_str = "labcoat", slot_l_hand_str = "labcoat")
+	icon_open = "eros_trackjacketwhite_open"
+	icon_closed = "eros_trackjacketwhite"
+
+/obj/item/clothing/suit/storage/leather_jacket/alt
+	icon_state = "eros_leather_jacket_alt"
+	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")

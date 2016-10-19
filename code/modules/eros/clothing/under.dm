@@ -288,3 +288,64 @@
 	item_state = "cuttop_red"
 	worn_state = "cuttop_red"
 	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+
+/obj/item/clothing/under/dress/maid
+	name = "maid uniform"
+	desc = "Maid in China."
+	icon_state = "maid"
+	item_state = "maid"
+	worn_state = "maid"
+
+/obj/item/clothing/under/dress/janimaid
+	name = "maid uniform"
+	desc = "A simple maid uniform for housekeeping."
+	icon_state = "janimaid"
+	item_state = "janimaid"
+	worn_state = "janimaid"
+
+/obj/item/clothing/under/hoodiejeans
+	name = "casual hoodie and jeans"
+	desc = "Perfect for lounging about in."
+	icon_state = "eros_hoodiejeans"
+	item_state = "eros_hoodiejeans"
+	worn_state = "eros_hoodiejeans"
+	item_state_slots = list(slot_r_hand_str = "eros_hoodiejeans", slot_l_hand_str = "eros_hoodiejeans")
+
+/obj/item/clothing/under/hoodieskirt
+	name = "casual hoodie and skirt"
+	desc = "Perfect for lounging about in."
+	icon_state = "eros_hoodieskirt"
+	item_state = "eros_hoodieskirt"
+	worn_state = "eros_hoodieskirt"
+	item_state_slots = list(slot_r_hand_str = "eros_hoodieskirt", slot_l_hand_str = "eros_hoodieskirt")
+
+/obj/item/clothing/under/dress/white
+	name = "white wedding dress"
+	desc = "A fancy white dress with a blue underdress."
+	icon_state = "whitedress1"
+	item_state = "whitedress1"
+	worn_state = "whitedress1"
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/white2
+	name = "long dress"
+	desc = "A long dress."
+	icon_state = "whitedress2"
+	item_state = "whitedress2"
+	worn_state = "whitedress2"
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/white3
+	name = "short dress"
+	desc = "A short, plain dress."
+	icon_state = "whitedress3"
+	item_state = "whitedress3"
+	worn_state = "whitedress3"
+
+/obj/item/clothing/under/dress/white4
+	name = "long flared dress"
+	desc = "A long white dress that flares out at the bottom."
+	icon_state = "whitedress4"
+	item_state = "whitedress4"
+	worn_state = "whitedress4"
+	flags_inv = HIDESHOES
