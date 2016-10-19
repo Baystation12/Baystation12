@@ -41,3 +41,7 @@ changes:
  ![experiment logo](burn-exclamation.png)`experiment` - Experiments
  
  ![maptweak logo](map-pencil.png)`maptweak` - Tweaks to the Map(s)
+
+##Questions
+
+Any Questions should be directed to <a href="irc://irc.sorcery.net/codershuttle">#codershuttle</a> On irc.sorcery.net
