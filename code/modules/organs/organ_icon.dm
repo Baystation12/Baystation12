@@ -16,6 +16,7 @@ var/list/limb_icon_cache = list()
 	s_tone = null
 	s_col = null
 	h_col = null
+	h_col = list(human.r_hair, human.g_hair, human.b_hair)
 	if(robotic >= ORGAN_ROBOT)
 		var/datum/robolimb/franchise = all_robolimbs[model]
 		if(!(franchise && franchise.skintone))
@@ -26,7 +27,6 @@ var/list/limb_icon_cache = list()
 		s_tone = human.s_tone
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
-	h_col = list(human.r_hair, human.g_hair, human.b_hair)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
