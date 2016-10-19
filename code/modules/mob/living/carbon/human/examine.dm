@@ -347,7 +347,7 @@
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "[T.He] [T.is] [pose]"
+		msg += "[T.He] [pose]"
 
 	user << jointext(msg, null)
 
