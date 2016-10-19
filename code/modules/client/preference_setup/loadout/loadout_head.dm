@@ -178,3 +178,85 @@
 	display_name = "turban"
 	path = /obj/item/clothing/head/turban
 	flags = GEAR_HAS_COLOR_SELECTION
+
+// EROS BEGIN
+
+/datum/gear/head/cap/black
+	display_name = "cap,black"
+	path = /obj/item/clothing/head/soft/black
+
+/datum/gear/head/hairribbon
+	display_name = "white hair ribbon"
+	path = /obj/item/clothing/head/hairribbon
+
+/datum/gear/head/hairribbonred
+	display_name = "red hair ribbon"
+	path = /obj/item/clothing/head/hairribbon/red
+
+/datum/gear/head/froghat
+	display_name = "froggie hat"
+	path = /obj/item/clothing/head/froghat
+
+/datum/gear/head/maidhat
+	display_name = "maid headband"
+	path = /obj/item/clothing/head/maidhat
+
+/datum/gear/head/beret
+	display_name = "beret, red"
+	path = /obj/item/clothing/head/beret
+
+/datum/gear/head/beret/bsec
+	display_name = "beret, navy (officer)"
+	path = /obj/item/clothing/head/beret/sec/navy/officer
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/head/beret/bsec_warden
+	display_name = "beret, navy (warden)"
+	path = /obj/item/clothing/head/beret/sec/navy/warden
+	allowed_roles = list("Head of Security","Warden")
+
+/datum/gear/head/beret/bsec_hos
+	display_name = "beret, navy (hos)"
+	path = /obj/item/clothing/head/beret/sec/navy/hos
+	allowed_roles = list("Head of Security")
+
+/datum/gear/head/beret/csec
+	display_name = "beret, corporate (officer)"
+	path = /obj/item/clothing/head/beret/sec/corporate/officer
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/head/beret/csec_warden
+	display_name = "beret, corporate (warden)"
+	path = /obj/item/clothing/head/beret/sec/corporate/warden
+	allowed_roles = list("Head of Security","Warden")
+
+/datum/gear/head/beret/csec_hos
+	display_name = "beret, corporate (hos)"
+	path = /obj/item/clothing/head/beret/sec/corporate/hos
+	allowed_roles = list("Head of Security")
+
+/datum/gear/head/beret/eng
+	display_name = "beret, engie-orange"
+	path = /obj/item/clothing/head/beret/engineering
+
+/datum/gear/head/beret/purp
+	display_name = "beret, purple"
+	path = /obj/item/clothing/head/beret/purple
+
+/datum/gear/head/beret/sec
+	display_name = "beret, red (security)"
+	path = /obj/item/clothing/head/beret/sec
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/head/bandana_red
+	display_name = "bandana, pirate-red"
+	path = /obj/item/clothing/head/bandana
+
+/datum/gear/head/bandana_green
+	display_name = "bandana, green"
+	path = /obj/item/clothing/head/greenbandana
+
+/datum/gear/head/bandana_orange
+	display_name = "bandana, orange"
+	path = /obj/item/clothing/head/orangebandana
+//EROS END
