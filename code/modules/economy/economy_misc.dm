@@ -61,6 +61,8 @@
 												/datum/species/vox/pariah        = 1,
 												/datum/species/vox/			     = 1,
 												/datum/species/slime             = 5,
+												/datum/species/lamia             = 5,
+												/datum/species/drider            = 5,
 												/datum/species/akula             = 6
 											)
 
