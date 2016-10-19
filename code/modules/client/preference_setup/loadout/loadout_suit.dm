@@ -209,4 +209,8 @@
 		tracks[initial(track.name)] = track
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tracks))
 
+/datum/gear/suit/leather_jacket_alt
+	display_name = "leather jacket 2, black"
+	path = /obj/item/clothing/suit/storage/leather_jacket/alt
+
 //EROS FINISH
