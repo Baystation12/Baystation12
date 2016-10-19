@@ -36,14 +36,3 @@
 	name = "Halterneck bra"
 	icon_state = "halterneck_bra"
 	has_color = TRUE
-
-/datum/category_item/underwear/top/breast_wrappings
-	name = "Breast wrapping"
-	icon_state = "eros_breast_wrap"
-	has_color = TRUE
-
-//datum/category_item/underwear/top/pasties
-//	name = "Pasties"
-//	icon_state = "eros_pasties"
-//	has_color = TRUE
-//	show_boobs = 1

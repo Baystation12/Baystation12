@@ -115,8 +115,8 @@ Please contact me on #coderbus IRC. ~Carn x
 #define MUTATIONS_LAYER			1
 #define DAMAGE_LAYER			2
 #define SURGERY_LEVEL			3		//bs12 specific.
-#define UNDERWEAR_LAYER         4
-#define GENITALS_LAYER			5		//EROS
+#define GENITALS_LAYER			4		//EROS
+#define UNDERWEAR_LAYER         5
 #define UNIFORM_LAYER			6
 #define ID_LAYER				7
 #define SHOES_LAYER				8
