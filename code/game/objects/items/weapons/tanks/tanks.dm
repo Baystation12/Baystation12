@@ -325,39 +325,6 @@ var/list/global/tank_gauge_cache = list()
 
 
 
-/obj/item/weapon/tank/proc/fragment(var/number_fragments, var/list/frag_type = list(/obj/item/projectile/bullet/pellet/fragment), var/radius = 7)
-
-	var/turf/simulated/T = get_turf(src)
-	var/list/target_turfs = getcircle(T, radius)
-	var/fragments_per_projectile = round(number_fragments/target_turfs.len)
-
-	for(var/turf/O in target_turfs)
-		sleep(0)
-		var/fragtype = pick(frag_type)
-		var/obj/item/projectile/bullet/pellet/fragment/P = new fragtype(T)
-
-		P.pellets = fragments_per_projectile
-		P.shot_from = src.name
-
-		P.launch(O)
-
-		//Make sure to hit any mobs in the source turf
-		for(var/mob/living/M in T)
-
-			//check if it's being held, if so, they're in a heap of trouble.
-			if(P in M.contents && !M.lying)
-				P.attack_mob(M, 0, 40)
-			//lying on a tank while the tank is on the ground causes you to absorb most of the shrapnel.
-			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
-			else if(M.lying && (isturf(src.loc) || P in M.contents) )
-				P.attack_mob(M, 0, 0)
-			else
-				P.attack_mob(M, 0, 85) //otherwise, allow a decent amount of fragments to pass
-
-
-
-
-
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)
 
@@ -476,8 +443,12 @@ var/list/global/tank_gauge_cache = list()
 			pressure = air_contents.return_pressure()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
 
-			var/mult = (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
-			//from pre to post burn. multiplier math is preburn(total_moles^(3/5))/(29^(3/5)) with 29 moles being ~1 full tank at 20C
+			var/mult = ((src.air_contents.volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
+//			var/mult = ((src.air_contents.volume/140)**2/3) * (air_contents.total_moles**2/3)/((29*0.64) **2/3)
+			//tanks appear to be experiencing a reduction on scale of about 0.64 total moles
+			//volume multiplier used to determine if TTV, takes ^2/3 of volume divisor (TTV is 140/140)^2/3 = 1.
+			//from pre to post burn. multiplier math: volume_mult * preburn(total_moles^(2/3))/(29^(2/3))
+			//with 29 moles being ~1 full tank at 20C, and 140L being the volume of a TTV
 
 //			var/mult = max(0.2,(log(2, (air_contents.total_moles/29))) ) //1 + log base 2 of standard sized full (room temperature) tanks (old method)
 
@@ -496,9 +467,8 @@ var/list/global/tank_gauge_cache = list()
 				)
 
 
-			var/num_fragments = round(rand(12,25)* sqrt(strength * mult)/8)
-			src.fragment(num_fragments, list(/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment,/obj/item/projectile/bullet/pellet/fragment/strong))
-
+			var/num_fragments = round(rand(8,10) * sqrt(strength * mult))
+			src.fragmentate(T, num_fragments, 7, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 7,/obj/item/projectile/bullet/pellet/fragment/tank = 2,/obj/item/projectile/bullet/pellet/fragment/strong = 1))
 
 			if(istype(loc, /obj/item/device/transfer_valve))
 				var/obj/item/device/transfer_valve/TTV = loc
@@ -528,12 +498,12 @@ var/list/global/tank_gauge_cache = list()
 			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 
-			var/strength = log(2,(pressure-TANK_RUPTURE_PRESSURE)/TANK_FRAGMENT_SCALE)+1
-			var/mult = max(0.1,log(air_contents.total_moles/25)+1)
+			var/strength = 1+((pressure-TANK_LEAK_PRESSURE)/TANK_FRAGMENT_SCALE)
 
-			var/num_fragments = round(rand(2,8)* strength * mult/20)
-			src.fragment(num_fragments)
+			var/mult = (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 
+			var/num_fragments = round(rand(6,8) * sqrt(strength * mult)) //Less chunks, but bigger
+			src.fragmentate(T, num_fragments, 7, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 1,/obj/item/projectile/bullet/pellet/fragment/tank = 5,/obj/item/projectile/bullet/pellet/fragment/strong = 4))
 
 			if(istype(loc, /obj/item/device/transfer_valve))
 				var/obj/item/device/transfer_valve/TTV = loc
@@ -543,7 +513,7 @@ var/list/global/tank_gauge_cache = list()
 			qdel(src)
 
 		else
-			integrity-= 4
+			integrity-= 5
 
 	if(integrity < maxintegrity)
 		integrity++
@@ -551,15 +521,6 @@ var/list/global/tank_gauge_cache = list()
 			integrity++
 		if(integrity == maxintegrity)
 			leaking = 0
-
-
-
-
-
-
-
-
-
 
 /////////////////////////////////
 ///Pulled from rewritten bomb.dm
@@ -647,3 +608,27 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
 	if(src.assembly)
 		src.assembly.HasProximity(AM)
+
+
+/obj/item/projectile/bullet/pellet/fragment/tank
+	name = "metal fragment"
+	damage = 9  //Big chunks flying off.
+	range_step = 1 //controls damage falloff with distance. projectiles lose a "pellet" each time they travel this distance. Can be a non-integer.
+
+	base_spread = 0 //causes it to be treated as a shrapnel explosion instead of cone
+	spread_step = 20
+
+	silenced = 1
+	fire_sound = null
+	no_attack_log = 1
+	muzzle_type = null
+	pellets = 1
+
+/obj/item/projectile/bullet/pellet/fragment/tank/small
+	name = "small metal fragment"
+	damage = 6
+
+/obj/item/projectile/bullet/pellet/fragment/tank/big
+	name = "large metal fragment"
+	damage = 17
+
