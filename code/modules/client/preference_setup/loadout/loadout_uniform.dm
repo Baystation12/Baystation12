@@ -295,4 +295,39 @@
 	display_name= "winter girls clothes"
 	path = /obj/item/clothing/under/girlwinter
 
+/datum/gear/uniform/shortplaindress
+	display_name = "plain dress"
+	path = /obj/item/clothing/under/dress/white3
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/longdress
+	display_name = "long dress"
+	path = /obj/item/clothing/under/dress/white2
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/longwidedress
+	display_name = "long wide dress"
+	path = /obj/item/clothing/under/dress/white4
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/maid
+	path = /obj/item/clothing/under/dress/maid
+	display_name = "maid uniform"
+
+/datum/gear/uniform/janimaid
+	path = /obj/item/clothing/under/dress/janimaid
+	display_name = "maid uniform, alt"
+
+/datum/gear/uniform/whitewedding
+	display_name= "white wedding dress"
+	path = /obj/item/clothing/under/dress/white
+
+/datum/gear/uniform/hoodiejeans
+	display_name= "casual hoodie and jeans"
+	path = /obj/item/clothing/under/hoodiejeans
+
+/datum/gear/uniform/hoodieskirt
+	display_name= "casual hoodie and skirt"
+	path = /obj/item/clothing/under/hoodieskirt
+
 //EROS FINISH
