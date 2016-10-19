@@ -242,6 +242,50 @@
 	desc = "Flash-resistant goggles with an inbuilt heads-up display."
 	icon_state = "goggles"
 
+/obj/item/clothing/glasses/sunglasses/sechud/toggle
+    name = "HUD aviators"
+    desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
+    icon_state = "sec_hud"
+    off_state = "sec_flash"
+    action_button_name = "Toggle Mode"
+    var/on = 1
+    toggleable = 1
+    activation_sound = 'sound/effects/pop.ogg'
+
+    var/hud_holder
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/New()
+    ..()
+    hud_holder = hud
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/Destroy()
+    qdel(hud_holder)
+    hud_holder = null
+    hud = null
+    . = ..()
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/attack_self(mob/user)
+    if(toggleable && !user.incapacitated())
+        on = !on
+        if(on)
+            flash_protection = FLASH_PROTECTION_NONE
+            src.hud = hud_holder
+            to_chat(user, "You switch the [src] to HUD mode.")
+        else
+            flash_protection = initial(flash_protection)
+            src.hud = null
+            to_chat(user, "You switch the [src] to flash protection mode.")
+        update_icon()
+        user << activation_sound
+        user.update_inv_glasses()
+        user.update_action_buttons()
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/update_icon()
+    if(on)
+        icon_state = initial(icon_state)
+    else
+        icon_state = off_state
+
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"
 	desc = "Thermals in the shape of glasses."
