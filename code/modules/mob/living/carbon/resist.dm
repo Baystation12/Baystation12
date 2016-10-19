@@ -155,6 +155,11 @@
 	return ..()
 
 /mob/living/carbon/escape_buckle()
+	if(src.handcuffed && istype(src.handcuffed, /obj/effect/energy_net))
+		var/obj/effect/energy_net/N = handcuffed
+		spawn N.escape_net() //super snowflake but is literally used NOWHERE ELSE.-Luke
+		return
+
 	setClickCooldown(100)
 	if(!buckled) return
 
