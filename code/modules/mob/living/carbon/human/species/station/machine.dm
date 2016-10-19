@@ -35,7 +35,7 @@
 	heat_level_3 = SYNTH_HEAT_LEVEL_3
 
 	body_temperature = null
-	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
+	passive_temp_gain = 1  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = NO_SCAN | NO_PAIN | NO_POISON
 	spawn_flags = CAN_JOIN

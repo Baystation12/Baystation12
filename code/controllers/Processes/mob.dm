@@ -3,7 +3,7 @@
 
 /datum/controller/process/mob/setup()
 	name = "mob"
-	schedule_interval = 20 // every 2 seconds
+	schedule_interval = 50 // every 2 seconds
 	start_delay = 16
 
 /datum/controller/process/mob/started()
