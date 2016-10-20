@@ -523,8 +523,68 @@ var/list/global/tank_gauge_cache = list()
 			leaking = 0
 
 /////////////////////////////////
+///Prewelded tanks
+/////////////////////////////////
+
+/obj/item/weapon/tank/phoron/welded
+	valve_welded = 1
+/obj/item/weapon/tank/oxygen/welded
+	valve_welded = 1
+
+
+/////////////////////////////////
+///Onetankbombs (added as actual items)
+/////////////////////////////////
+
+/obj/item/weapon/tank/phoron/onetankbomb
+	New()
+		var/phoron_amt = 4 + rand(4)
+		var/oxygen_amt = 6 + rand(8)
+
+		src.air_contents.gas["phoron"] = phoron_amt
+		src.air_contents.gas["oxygen"] = oxygen_amt
+		src.air_contents.total_moles = phoron_amt + oxygen_amt
+		src.valve_welded = 1
+		src.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+
+		src.wired = 1
+
+		var/obj/item/device/assembly_holder/H = new(src)
+		src.proxyassembly.assembly = H
+		H.master = src.proxyassembly
+
+		H.update_icon()
+
+		src.overlays += "bomb_assembly"
+		qdel(src)
+
+/obj/item/weapon/tank/oxygen/onetankbomb
+	New()
+		var/phoron_amt = 4 + rand(4)
+		var/oxygen_amt = 6 + rand(8)
+
+		src.air_contents.gas["phoron"] = phoron_amt
+		src.air_contents.gas["oxygen"] = oxygen_amt
+		src.air_contents.total_moles = phoron_amt + oxygen_amt
+		src.valve_welded = 1
+		src.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+
+		src.wired = 1
+
+		var/obj/item/device/assembly_holder/H = new(src)
+		src.proxyassembly.assembly = H
+		H.master = src.proxyassembly
+
+		H.update_icon()
+
+		src.overlays += "bomb_assembly"
+		qdel(src)
+
+
+/////////////////////////////////
 ///Pulled from rewritten bomb.dm
 /////////////////////////////////
+
 
 
 /obj/item/device/tankassemblyproxy

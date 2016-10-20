@@ -11,3 +11,6 @@ changes:
   - tweak: "Single tank devices are single use only with their igniters. The igniters create a small bit of heat, which may hopefully be enough to get fuelt to its burn temperature (126C)."
   - tweak: "Air from rupturing/exploding tanks now merged into environment instead of deleted."
   - tweak: "Explosion radii based on pressure and gas amount in a rupturing vessel."
+  - rscadd: "Adds prewelded tanks."
+  - rscadd: "Adds actual single tank bomb items (THAT WORK!)."
+  - rscadd: "Special Thanks to Asanadas and Daranz for helping with getting this PR to where it is."

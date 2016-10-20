@@ -216,29 +216,8 @@
 /obj/effect/spawner/onetankbomb/New(newloc) //just needs an assembly.
 	..(newloc)
 
-
-	phoron_amt = 4 + rand(4)
-	oxygen_amt = 6 + rand(8)
-
-	var/type = pick(/obj/item/weapon/tank/phoron, /obj/item/weapon/tank/oxygen)
-	var/obj/item/weapon/tank/K = new type(src.loc)
-
-	K.air_contents.gas["phoron"] = phoron_amt
-	K.air_contents.gas["oxygen"] = oxygen_amt
-	K.air_contents.total_moles = phoron_amt + oxygen_amt
-	K.valve_welded = 1
-	K.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
-
-	K.wired = 1
-
-
-	var/obj/item/device/assembly_holder/H = new(K)
-	K.proxyassembly.assembly = H
-	H.master = K.proxyassembly
-
-	H.update_icon()
-
-	K.overlays += "bomb_assembly"
+	var/type = pick(/obj/item/weapon/tank/phoron/onetankbomb, /obj/item/weapon/tank/oxygen/onetankbomb)
+	new type(src.loc)
 
 	qdel(src)
 
