@@ -194,4 +194,4 @@
 	..()
 	var/datum/nano_module/program/camera_monitor/module = NM
 	if (module.current_camera)
-		user << "It's streaming the feed from [module.current_camera.c_tag]."
+		to_chat(user,"It's streaming the feed from [module.current_camera.c_tag].")

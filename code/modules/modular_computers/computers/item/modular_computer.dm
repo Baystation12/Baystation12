@@ -376,7 +376,7 @@
 		P = hard_drive.find_file_by_name(name)
 
 	if(!P || !istype(P)) // Program not found or it's not executable program.
-		user << "<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>"
+		to_chat(user,"<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>")
 		return
 
 	P.computer = src
@@ -393,11 +393,11 @@
 		return
 
 	if(idle_threads.len >= processor_unit.max_idle_programs+1)
-		user << "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>"
+		to_chat(user,"<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>")
 		return
 
 	if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
-		user << "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>"
+		to_chat(user,"<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>")
 		return
 
 	if(P.run_program(user))
@@ -839,9 +839,9 @@
 
 /obj/item/modular_computer/proc/examine_extra(var/mob/user)
 	if(!enabled)
-		user << "It's turned off."
+		to_chat(user,"It's turned off.")
 		return
 	if(active_program)
 		active_program.examine(user,get_dist(src,user))
 	else
-		user << "Its screen shows a screensaver."
+		to_chat(user,"Its screen shows a screensaver.")
