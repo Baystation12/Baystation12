@@ -220,9 +220,3 @@
 	new type(src.loc)
 
 	qdel(src)
-
-
-/obj/item/device/onetankbomb/New()
-	..()
-	new /obj/effect/spawner/onetankbomb(src.loc)
-	qdel(src)

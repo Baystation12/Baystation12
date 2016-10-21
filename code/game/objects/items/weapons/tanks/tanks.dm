@@ -536,49 +536,35 @@ var/list/global/tank_gauge_cache = list()
 ///Onetankbombs (added as actual items)
 /////////////////////////////////
 
-/obj/item/weapon/tank/phoron/onetankbomb
-	New()
-		var/phoron_amt = 4 + rand(4)
-		var/oxygen_amt = 6 + rand(8)
+/obj/item/weapon/tank/proc/onetankbomb()
+	var/phoron_amt = 4 + rand(4)
+	var/oxygen_amt = 6 + rand(8)
 
-		src.air_contents.gas["phoron"] = phoron_amt
-		src.air_contents.gas["oxygen"] = oxygen_amt
-		src.air_contents.total_moles = phoron_amt + oxygen_amt
-		src.valve_welded = 1
-		src.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+	src.air_contents.gas["phoron"] = phoron_amt
+	src.air_contents.gas["oxygen"] = oxygen_amt
+	src.air_contents.update_values()
+	src.valve_welded = 1
+	src.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
 
-		src.wired = 1
+	src.wired = 1
 
-		var/obj/item/device/assembly_holder/H = new(src)
-		src.proxyassembly.assembly = H
-		H.master = src.proxyassembly
+	var/obj/item/device/assembly_holder/H = new(src)
+	src.proxyassembly.assembly = H
+	H.master = src.proxyassembly
 
-		H.update_icon()
+	H.update_icon()
 
-		src.overlays += "bomb_assembly"
-		qdel(src)
+	src.overlays += "bomb_assembly"
 
-/obj/item/weapon/tank/oxygen/onetankbomb
-	New()
-		var/phoron_amt = 4 + rand(4)
-		var/oxygen_amt = 6 + rand(8)
 
-		src.air_contents.gas["phoron"] = phoron_amt
-		src.air_contents.gas["oxygen"] = oxygen_amt
-		src.air_contents.total_moles = phoron_amt + oxygen_amt
-		src.valve_welded = 1
-		src.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE-1
+/obj/item/weapon/tank/phoron/onetankbomb/New()
+	..()
+	src.onetankbomb()
 
-		src.wired = 1
 
-		var/obj/item/device/assembly_holder/H = new(src)
-		src.proxyassembly.assembly = H
-		H.master = src.proxyassembly
-
-		H.update_icon()
-
-		src.overlays += "bomb_assembly"
-		qdel(src)
+/obj/item/weapon/tank/oxygen/onetankbomb/New()
+	..()
+	src.onetankbomb()
 
 
 /////////////////////////////////
@@ -598,8 +584,6 @@ var/list/global/tank_gauge_cache = list()
 
 
 /obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
-	visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
-	sleep(15)
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
 
