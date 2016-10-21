@@ -534,7 +534,7 @@
 /obj/item/toy/figure/gardener
 	name = "Gardener action figure"
 	desc = "A \"Space Life\" brand Gardener action figure."
-	icon_state = "botanist"
+	icon_state = "gardener"
 
 /obj/item/toy/figure/captain
 	name = "Captain action figure"
