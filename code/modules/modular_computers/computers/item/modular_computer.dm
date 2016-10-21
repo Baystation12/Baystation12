@@ -275,6 +275,11 @@
 		else
 			user << "You press the power button and start up \the [src]"
 		enabled = 1
+		if(hard_drive.find_file_by_name("autorun"))
+			var/datum/computer_file/data/A = hard_drive.find_file_by_name("autorun")
+			var/list/autorun = splittext(A.stored_data,";")
+			for(var/prg in autorun)
+				run_program(prg)
 		update_icon()
 		ui_interact(user)
 	else // Unpowered

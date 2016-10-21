@@ -176,7 +176,7 @@
 	extended_desc = "This program allows remote access to cameras broadcasting on entertainment network. Since it's intended to be run on embedded systems, it lacks use controls aside from picking the channel."
 	nanomodule_path = /datum/nano_module/program/camera_monitor/entertainment
 
-/datum/nano_module/program/camera_monitor/ert
+/datum/nano_module/program/camera_monitor/entertainment
 	name = "Entertainment Media Streaming"
 
 /datum/nano_module/program/camera_monitor/entertainment/modify_networks_list(var/list/networks)
@@ -187,7 +187,7 @@
 
 /datum/nano_module/program/camera_monitor/entertainment/initial_data()
 	var/list/L = ..()
-	L["PC_hasheader"] = null
+	L["PC_showexitprogram"] = null
 	return L
 
 /datum/computer_file/program/camera_monitor/examine(mob/user, distance)
