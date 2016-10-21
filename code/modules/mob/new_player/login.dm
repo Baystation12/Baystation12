@@ -35,7 +35,7 @@
 	loc = null
 	client.screen += lobby_image
 	my_client = client
-	sight |= SEE_TURFS
+	set_sight(sight|SEE_TURFS)
 	player_list |= src
 
 	new_player_panel()

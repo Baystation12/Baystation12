@@ -309,12 +309,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	stop_following()
 	following = target
-	moved_event.register(following, src, /atom/movable/proc/move_to_destination)
+	moved_event.register(following, src, /atom/movable/proc/move_to_turf)
 	dir_set_event.register(following, src, /atom/proc/recursive_dir_set)
 	destroyed_event.register(following, src, /mob/observer/ghost/proc/stop_following)
 
 	to_chat(src, "<span class='notice'>Now following \the [following].</span>")
-	move_to_destination(following, loc, following.loc)
+	move_to_turf(following, loc, following.loc)
 
 /mob/observer/ghost/proc/stop_following()
 	if(following)
@@ -324,7 +324,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		destroyed_event.unregister(following, src)
 		following = null
 
-/mob/observer/ghost/move_to_destination(var/atom/movable/am, var/old_loc, var/new_loc)
+/mob/observer/ghost/move_to_turf(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
 	if(check_is_holy_turf(T))
 		to_chat(src, "<span class='warning'>You cannot follow something standing on holy grounds!</span>")
@@ -581,9 +581,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/observer/ghost/proc/updateghostsight()
 	if (!seedarkness)
-		see_invisible = SEE_INVISIBLE_NOLIGHTING
+		set_see_invisible(SEE_INVISIBLE_NOLIGHTING)
 	else
-		see_invisible = ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING
+		set_see_invisible(ghostvision ? SEE_INVISIBLE_OBSERVER : SEE_INVISIBLE_LIVING)
 	updateghostimages()
 
 /mob/observer/ghost/proc/updateghostimages()

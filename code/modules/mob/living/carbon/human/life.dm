@@ -1159,7 +1159,7 @@
 		if(viewflags < 0)
 			reset_view(null, 0)
 		else if(viewflags)
-			sight |= viewflags
+			set_sight(sight|viewflags)
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
@@ -1175,9 +1175,7 @@
 	update_equipment_vision()
 	species.handle_vision(src)
 
-/mob/living/carbon/human/update_sight()
+/mob/living/carbon/human/update_living_sight()
 	..()
-	if(stat == DEAD)
-		return
 	if(XRAY in mutations)
-		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

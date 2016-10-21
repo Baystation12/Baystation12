@@ -198,7 +198,7 @@
 		if(viewflags < 0)
 			reset_view(null, 0)
 		else if(viewflags)
-			sight |= viewflags
+			set_sight(viewflags)
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
@@ -209,16 +209,17 @@
 	if(stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
-		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_in_dark = initial(see_in_dark)
-		see_invisible = initial(see_invisible)
+		update_living_sight()
+	
+/mob/living/proc/update_living_sight()
+	set_sight(sight&(~(SEE_TURFS|SEE_MOBS|SEE_OBJS)))
+	set_see_in_dark(initial(see_in_dark))
+	set_see_invisible(initial(see_invisible))
 
 /mob/living/proc/update_dead_sight()
-	sight |= SEE_TURFS
-	sight |= SEE_MOBS
-	sight |= SEE_OBJS
-	see_in_dark = 8
-	see_invisible = SEE_INVISIBLE_LEVEL_TWO
+	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+	set_see_in_dark(8)
+	set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()

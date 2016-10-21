@@ -273,16 +273,16 @@ var/list/sacrificed = list()
 				if(usr.seer==1)
 					usr.say("Rash'tla sektath mal[pick("'","`")]zua. Zasan therium viortia.")
 					usr << "<span class='danger'>The world beyond fades from your vision.</span>"
-					usr.see_invisible = SEE_INVISIBLE_LIVING
+					usr.set_see_invisible(SEE_INVISIBLE_LIVING)
 					usr.seer = 0
 				else if(usr.see_invisible!=SEE_INVISIBLE_LIVING)
 					usr << "<span class='warning'>The world beyond flashes your eyes but disappears quickly, as if something is disrupting your vision.</span>"
-					usr.see_invisible = SEE_INVISIBLE_CULT
+					usr.set_see_invisible(SEE_INVISIBLE_CULT)
 					usr.seer = 0
 				else
 					usr.say("Rash'tla sektath mal[pick("'","`")]zua. Zasan therium vivira. Itonis al'ra matum!")
 					usr << "<span class='warning'>The world beyond opens to your eyes.</span>"
-					usr.see_invisible = SEE_INVISIBLE_CULT
+					usr.set_see_invisible(SEE_INVISIBLE_CULT)
 					usr.seer = 1
 				return
 			return fizzle()
