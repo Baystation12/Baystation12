@@ -172,6 +172,7 @@
 #include "code\datums\category.dm"
 #include "code\datums\datacore.dm"
 #include "code\datums\hierarchy.dm"
+#include "code\datums\mil_ranks.dm"
 #include "code\datums\mind.dm"
 #include "code\datums\progressbar.dm"
 #include "code\datums\recipe.dm"
