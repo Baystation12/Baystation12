@@ -4,6 +4,7 @@
 	var/_has_printer = 0
 	var/_has_battery = 0
 	var/_has_aislot = 0
+	var/_autorun
 
 /obj/machinery/modular_computer/console/preset/New()
 	. = ..()
@@ -19,6 +20,10 @@
 	if(_has_aislot)
 		cpu.ai_slot = new/obj/item/weapon/computer_hardware/ai_slot(cpu)
 	install_programs()
+	if(_autorun)
+		var/datum/computer_file/data/autorun = new/datum/computer_file/data(_autorun)
+		autorun.filename = "autorun"
+		cpu.hard_drive.store_file(autorun)
 
 /obj/machinery/modular_computer/console/preset/proc/install_programs()
 	return
@@ -125,3 +130,17 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/aidiag())
+
+// ===== ENTERTAINMENT SCREEN =====
+
+/obj/machinery/modular_computer/console/preset/entertainment
+	console_department = "Civilian"
+	name = "entertainment screen"
+	desc = "A wall-mounted console. Doesn't offer much aside from the mind-numbing entertainment video feed."
+	icon_state = "wall"
+	icon_state_unpowered = "wall"
+	density = 0
+	_autorun = "entcammon"
+
+/obj/machinery/modular_computer/console/preset/entertainment/install_programs()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/entertainment())

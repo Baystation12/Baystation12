@@ -130,4 +130,9 @@
 	// If we have a tesla link on our machinery counterpart, enable it automatically. Lets computer without a battery work.
 	if(machinery_computer && machinery_computer.tesla_link)
 		machinery_computer.tesla_link.enabled = 1
+	if(hard_drive.find_file_by_name("autorun"))
+		var/datum/computer_file/data/A = hard_drive.find_file_by_name("autorun")
+		var/list/autorun = splittext(A.stored_data,";")
+		for(var/prg in autorun)
+			run_program(prg)
 	..()
