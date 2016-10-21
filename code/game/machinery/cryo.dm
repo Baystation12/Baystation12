@@ -197,7 +197,6 @@
 	var/image/I
 
 	I = image(icon, "pod[on]_top")
-	I.plane = plane
 	I.pixel_z = 32
 	overlays += I
 
@@ -205,15 +204,12 @@
 		var/image/pickle = image(occupant.icon, occupant.icon_state)
 		pickle.overlays = occupant.overlays
 		pickle.pixel_z = 18
-		pickle.plane = plane
 		overlays += pickle
 
 	I = image(icon, "lid[on]")
-	I.plane = plane
 	overlays += I
 
 	I = image(icon, "lid[on]_top")
-	I.plane = plane
 	I.pixel_z = 32
 	overlays += I
 
