@@ -26,20 +26,13 @@
 		mode = WIRING
 		update_icon()
 	else if(mode == WIRING)
-		if(io == selected_io)
-			to_chat(user, "<span class='warning'>Wiring \the [selected_io.holder]'s [selected_io.name] into itself is rather pointless.</span>")
-			return
-		if(io.io_type != selected_io.io_type)
-			to_chat(user, "<span class='warning'>Those two types of channels are incompatable.  The first is a [selected_io.io_type], \
-			while the second is a [io.io_type].</span>")
-			return
-		selected_io.link_io(io)
-
-		to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
-		mode = WIRE
-		update_icon()
-		selected_io.holder.interact(user) // This is to update the UI.
-		selected_io = null
+		if(selected_io.link_io(io, user))
+			to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
+			mode = WIRE
+			update_icon()
+			io.holder.interact(user)
+			selected_io.holder.interact(user) // This is to update the UI.
+			selected_io = null
 
 	else if(mode == UNWIRE)
 		selected_io = io
@@ -208,6 +201,9 @@
 	icon_state = "circuit_kit"
 	w_class = ITEM_SIZE_NORMAL
 
+	storage_ui = /datum/storage_ui/tgui
+	allow_quick_empty = FALSE
+
 /obj/item/weapon/storage/bag/circuits/basic/New()
 	..()
 	var/list/types_to_spawn = typesof(/obj/item/integrated_circuit/arithmetic,
@@ -262,7 +258,8 @@
 
 	new /obj/item/device/electronic_assembly(src)
 	new /obj/item/device/integrated_electronics/wirer(src)
-	new /obj/item/device/integrated_electronics/debugger(src)
+	new /obj/item/device/integrated_electronics/debugger/admin(src)
+	new /obj/item/device/integrated_electronics/analyzer(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/screwdriver(src)
 	make_exact_fit()

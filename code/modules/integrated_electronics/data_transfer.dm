@@ -34,13 +34,16 @@
 		"outgoing pulse B"
 	)
 
-/obj/item/integrated_circuit/transfer/activator_splitter/do_work()
-	for(var/datum/integrated_io/activate/A in outputs)
+/obj/item/integrated_circuit/transfer/activator_splitter/do_work(var/io)
+	if(io != activators[1])
+		return
+
+	for(var/datum/integrated_io/activate/A in activators)
 		if(A == activators[1])
 			continue
 		if(A.linked.len)
 			for(var/datum/integrated_io/activate/target in A.linked)
-				target.holder.check_then_do_work()
+				target.holder.check_then_do_work(target)
 
 /obj/item/integrated_circuit/transfer/activator_splitter/medium
 	name = "four activator splitter"

@@ -89,6 +89,9 @@ datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
 
+datum/unit_test/proc/get_standard_turf()
+	return locate(20,20,1)
+
 
 proc/load_unit_test_changes()
 /*

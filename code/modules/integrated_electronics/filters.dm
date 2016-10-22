@@ -12,9 +12,8 @@
 	var/datum/integrated_io/I = inputs[1]
 	var/datum/integrated_io/O = outputs[1]
 
-	if(may_pass(I.data))
-		O.data = I.data
-		O.push_data()
+	O.data = may_pass(I.data) ? I.data : null
+	O.push_data()
 
 /obj/item/integrated_circuit/filter/proc/may_pass(var/input)
 	return FALSE
