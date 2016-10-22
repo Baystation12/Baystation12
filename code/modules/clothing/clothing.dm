@@ -133,7 +133,7 @@
 	desc = "It's probably not in accordance with corporate policy to listen to music on the job... but fuck it."
 	var/headphones_on = 0
 	icon_state = "headphones_off"
-	item_state = "headphones"
+	item_state = "headphones_off"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
 /obj/item/clothing/ears/earmuffs/headphones/verb/togglemusic()
@@ -145,10 +145,12 @@
 
 	if(headphones_on)
 		icon_state = "headphones_off"
+		item_state = "headphones_off"
 		headphones_on = 0
 		usr << "<span class='notice'>You turn the music off.</span>"
 	else
 		icon_state = "headphones_on"
+		item_state = "headphones_on"
 		headphones_on = 1
 		usr << "<span class='notice'>You turn the music on.</span>"
 

@@ -88,7 +88,7 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 
 /datum/ErrorViewer/ErrorCache/showTo(var/user, var/datum/ErrorViewer/back_to, var/linear)
 	var/html = buildHeader(null, linear, refreshable=1)
-	html += "[total_runtimes] runtimes, [total_runtimes_skipped] skipped<br><br>"
+	html += "[total_runtimes] runtime\s, [total_runtimes_skipped] skipped<br><br>"
 	if(!linear)
 		html += "organized | [makeLink("linear", null, 1)]<hr>"
 		var/datum/ErrorViewer/ErrorSource/error_source

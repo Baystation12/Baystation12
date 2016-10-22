@@ -628,8 +628,8 @@
 			return FALSE
 	return TRUE
 
-/decl/vv_set_handler/proc/handle_set_var(O, variable, var_value)
-	return FALSE
+/decl/vv_set_handler/proc/handle_set_var(var/datum/O, variable, var_value)
+	O.vars[variable] = var_value
 
 /decl/vv_set_handler/location_hander
 	handled_type = /atom/movable
@@ -688,5 +688,34 @@
 	handled_type = /mob/observer/ghost
 	handled_vars = list("appearance")
 
-/decl/vv_set_handler/dir_hander/handle_set_var(var/mob/observer/ghost/ghost, variable, var_value, client)
+/decl/vv_set_handler/ghost_appearance_handler/handle_set_var(var/mob/observer/ghost/ghost, variable, var_value, client)
 	ghost.set_appearance(var_value)
+
+/decl/vv_set_handler/virtual_ability_handler
+	handled_type = /mob/observer/virtual
+	handled_vars = list("abilities")
+
+/decl/vv_set_handler/virtual_ability_handler/handle_set_var(var/mob/observer/virtual/virtual, variable, var_value, client)
+	..()
+	virtual.updateicon()
+
+/decl/vv_set_handler/mob_see_invisible_handler
+	handled_type = /mob
+	handled_vars = list("see_invisible")
+
+/decl/vv_set_handler/mob_see_invisible_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+	mob.set_see_invisible(var_value)
+
+/decl/vv_set_handler/mob_sight_handler
+	handled_type = /mob
+	handled_vars = list("sight")
+
+/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+	mob.set_sight(var_value)
+
+/decl/vv_set_handler/mob_see_in_dark_handler
+	handled_type = /mob
+	handled_vars = list("see_in_dark")
+
+/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+	mob.set_see_in_dark(var_value)

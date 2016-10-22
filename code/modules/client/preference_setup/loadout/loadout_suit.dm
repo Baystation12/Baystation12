@@ -31,8 +31,20 @@
 	path = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 
 /datum/gear/suit/hazard_vest
-	display_name = "hazard vest"
+	display_name = "hazard vest, orange"
 	path = /obj/item/clothing/suit/storage/hazardvest
+
+/datum/gear/suit/hazard_vest/blue
+	display_name = "hazard vest, blue"
+	path = /obj/item/clothing/suit/storage/hazardvest/blue
+
+/datum/gear/suit/hazard_vest/white
+	display_name = "hazard vest, white"
+	path = /obj/item/clothing/suit/storage/hazardvest/white
+
+/datum/gear/suit/hazard_vest/green
+	display_name = "hazard vest, green"
+	path = /obj/item/clothing/suit/storage/hazardvest/green
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie, grey"
@@ -85,6 +97,10 @@
 /datum/gear/suit/purple_lawyer_jacket
 	display_name = "suit jacket, purple"
 	path = /obj/item/clothing/suit/storage/lawyer/purpjacket
+
+/datum/gear/suit/internalaffairs/plain
+	display_name = "suit jacket, black"
+	path = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
 
 /datum/gear/suit/suspenders
 	display_name = "suspenders"

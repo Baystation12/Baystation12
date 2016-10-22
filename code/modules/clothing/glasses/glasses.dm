@@ -14,6 +14,16 @@
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
 
+/obj/item/clothing/glasses/New()
+	..()
+	if(ispath(hud))
+		hud = new hud(src)
+
+/obj/item/clothing/glasses/Destroy()
+	qdel(hud)
+	hud = null
+	. = ..()
+
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
 		if(active)
@@ -231,11 +241,7 @@
 	name = "HUDSunglasses"
 	desc = "Sunglasses with a HUD."
 	icon_state = "sunhud"
-
-	New()
-		..()
-		src.hud = new/obj/item/clothing/glasses/hud/security(src)
-		return
+	hud = /obj/item/clothing/glasses/hud/security
 
 /obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
 	name = "HUD goggles"
