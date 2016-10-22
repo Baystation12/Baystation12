@@ -34,6 +34,11 @@
 	path = /obj/item/clothing/glasses/hud/security
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
+/datum/gear/eyes/secaviators
+	display_name = "Security HUD Aviators"
+	path = /obj/item/clothing/glasses/sunglasses/sechud/toggle
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
 /datum/gear/eyes/medical
 	display_name = "Medical HUD"
 	path = /obj/item/clothing/glasses/hud/health

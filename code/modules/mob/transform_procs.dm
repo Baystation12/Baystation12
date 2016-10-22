@@ -50,7 +50,6 @@
 		return
 	for(var/t in organs)
 		qdel(t)
-
 	return ..(move)
 
 /mob/living/carbon/AIize()
@@ -70,7 +69,6 @@
 	var/mob/living/silicon/ai/O = new (loc, base_law_type,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
-
 	if(mind)
 		mind.transfer_to(O)
 		O.mind.original = O
@@ -96,8 +94,7 @@
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
-
-		O.loc = loc_landmark.loc
+		O.forceMove(loc_landmark.loc)
 
 	O.on_mob_init()
 

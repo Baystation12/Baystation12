@@ -46,7 +46,7 @@
 							NETWORK_THUNDER,
 							)
 	evac_controller_type = /datum/evacuation_controller/pods
-
+	
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.

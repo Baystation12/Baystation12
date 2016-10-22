@@ -278,9 +278,9 @@
 		modtype = prefix
 
 	if(istype(mmi, /obj/item/device/mmi/digital/posibrain))
-		braintype = "Robot"
+		braintype = "Android"
 	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
-		braintype = "Drone"
+		braintype = "Robot"
 	else
 		braintype = "Cyborg"
 

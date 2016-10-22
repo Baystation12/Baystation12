@@ -1,74 +1,451 @@
-var/const/SCG_EXPCORP = "Expeditionary Corps"
-var/const/SCG_FLEET = "Fleet"
-var/const/SCG_MARINE = "Marine"
-var/const/SCG_CIVILIAN = "None/Civilian"
+/datum/map/torch
+	branch_types = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/marine_corps,
+		/datum/mil_branch/civilian
+	)
 
-var/global/list/BRANCHES_SCG = list(SCG_CIVILIAN,SCG_EXPCORP,SCG_FLEET,SCG_MARINE)
+	spawn_branch_types = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/marine_corps,
+		/datum/mil_branch/civilian
+	)
 
-//some ranks not meant for public usage, can be VV'd for adminbus
-var/const/CIV_CIVILIAN = "Civilian"
-var/const/CIV_NANOTRASEN = "NanoTrasen employee"
-var/const/CIV_CONTRACTOR = "Contractor"
-var/const/CIV_SYNTHETIC = "Synthetic"
 
-var/const/FLEET_E1 = "Crewman Recruit"
-var/const/FLEET_E2 = "Crewman Apprentice"
-var/const/FLEET_E3 = "Crewman"
-var/const/FLEET_E4 = "Petty Officer Third Class"
-var/const/FLEET_E5 = "Petty Officer Second Class"
-var/const/FLEET_E6 = "Petty Officer First Class"
-var/const/FLEET_E7 = "Chief Petty Officer"
-var/const/FLEET_E8 = "Senior Chief Petty Officer"
-var/const/FLEET_E9 = "Master Chief Petty Officer"
-var/const/FLEET_E9_ALT1 = "Command Master Chief Petty Officer"
-var/const/FLEET_E9_ALT2 = "Fleet Master Chief Petty Officer"
-var/const/FLEET_E9_ALT3 = "Force Master Chief Petty Officer"
-var/const/FLEET_E9_ALT4 = "Master Chief Petty Officer of the Fleet"
-var/const/FLEET_W1 = "Warrant Officer 1"
-var/const/FLEET_W2 = "Chief Warrant Officer 2"
-var/const/FLEET_W3 = "Chief Warrant Officer 3"
-var/const/FLEET_W4 = "Chief Warrant Officer 4"
-var/const/FLEET_W5 = "Chief Warrant Officer 5"
-var/const/FLEET_O1 = "Ensign"
-var/const/FLEET_O2 = "Lieutenant (junior grade)"
-var/const/FLEET_O3 = "Lieutenant"
-var/const/FLEET_O4 = "Lieutenant Commander"
-var/const/FLEET_O5 = "Commander"
-var/const/FLEET_O6 = "Captain"
-var/const/FLEET_O7 = "Rear Admiral (lower half)"
-var/const/FLEET_O8 = "Rear Admiral"
-var/const/FLEET_O9 = "Vice Admiral"
-var/const/FLEET_O10 = "Admiral"
-var/const/FLEET_O10_ALT = "Fleet Admiral"
 
-var/const/MARINE_E1 = "Private"
-var/const/MARINE_E2 = "Private First Class"
-var/const/MARINE_E3 = "Lance Corporal"
-var/const/MARINE_E4 = "Corporal"
-var/const/MARINE_E5 = "Sergeant"
-var/const/MARINE_E6 = "Staff Sergeant"
-var/const/MARINE_E7 = "Gunnery Sergeant"
-var/const/MARINE_E8 = "Master Sergeant"
-var/const/MARINE_E8_ALT = "First Sergeant"
-var/const/MARINE_E9 = "Master Gunnery Sergeant"
-var/const/MARINE_E9_ALT1 = "Sergeant Major"
-var/const/MARINE_E9_ALT2 = "Sergeant Major of the Marine Corps"
-var/const/MARINE_W1 = "Warrant Officer 1"
-var/const/MARINE_W2 = "Chief Warrant Officer 2"
-var/const/MARINE_W3 = "Chief Warrant Officer 3"
-var/const/MARINE_W4 = "Chief Warrant Officer 4"
-var/const/MARINE_W5 = "Chief Warrant Officer 5"
-var/const/MARINE_O1 = "Second Lieutenant"
-var/const/MARINE_O2 = "First Lieutenant"
-var/const/MARINE_O3 = "Captain"
-var/const/MARINE_O4 = "Major"
-var/const/MARINE_O5 = "Lieutenant Colonel"
-var/const/MARINE_O6 = "Colonel"
-var/const/MARINE_O7 = "Brigadier General"
-var/const/MARINE_O8 = "Major General"
-var/const/MARINE_O9 = "Lieutenant General"
-var/const/MARINE_O10 = "General"
+/*
+ *  Branches
+ *  ========
+ */
 
-var/global/list/RANKS_SCG_FLEET = list(FLEET_E2,FLEET_E3,FLEET_E4,FLEET_E5,FLEET_E6,FLEET_E7,FLEET_E8,FLEET_O1,FLEET_O2,FLEET_O3,FLEET_O4,FLEET_O5,FLEET_O6)
-var/global/list/RANKS_SCG_MARINE = list(MARINE_E2,MARINE_E3,MARINE_E4,MARINE_E5,MARINE_E6,MARINE_E7,MARINE_E8,MARINE_O1,MARINE_O2,MARINE_O3,MARINE_O4,MARINE_O5,MARINE_O6)
-var/global/list/RANKS_SCG_CIVILIAN = list(CIV_CIVILIAN,CIV_NANOTRASEN,CIV_CONTRACTOR,CIV_SYNTHETIC)
+/datum/mil_branch/expeditionary_corps
+	name = "Expeditionary Corps"
+	name_short = "SCGEC"
+	
+	rank_types = list(
+		/datum/mil_rank/fleet/e1,
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/fleet/e9_alt2,
+		/datum/mil_rank/fleet/e9_alt3,
+		/datum/mil_rank/fleet/e9_alt4,
+		/datum/mil_rank/fleet/w1,
+		/datum/mil_rank/fleet/w2,
+		/datum/mil_rank/fleet/w3,
+		/datum/mil_rank/fleet/w4,
+		/datum/mil_rank/fleet/w5,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/fleet/o5,
+		/datum/mil_rank/fleet/o6,
+		/datum/mil_rank/fleet/o7,
+		/datum/mil_rank/fleet/o8,
+		/datum/mil_rank/fleet/o9,
+		/datum/mil_rank/fleet/o10,
+		/datum/mil_rank/fleet/o10_alt
+	)
+	
+	spawn_rank_types = list(
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/fleet/o5,
+		/datum/mil_rank/fleet/o6
+	)
+
+/datum/mil_branch/fleet
+	name = "Fleet"
+	name_short = "SCGF"
+	
+	rank_types = list(
+		/datum/mil_rank/fleet/e1,
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/fleet/e9_alt2,
+		/datum/mil_rank/fleet/e9_alt3,
+		/datum/mil_rank/fleet/e9_alt4,
+		/datum/mil_rank/fleet/w1,
+		/datum/mil_rank/fleet/w2,
+		/datum/mil_rank/fleet/w3,
+		/datum/mil_rank/fleet/w4,
+		/datum/mil_rank/fleet/w5,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/fleet/o5,
+		/datum/mil_rank/fleet/o6,
+		/datum/mil_rank/fleet/o7,
+		/datum/mil_rank/fleet/o8,
+		/datum/mil_rank/fleet/o9,
+		/datum/mil_rank/fleet/o10,
+		/datum/mil_rank/fleet/o10_alt
+	)
+	
+	spawn_rank_types = list(
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/fleet/o5,
+		/datum/mil_rank/fleet/o6
+	)
+	
+/datum/mil_branch/marine_corps
+	name = "Marine Corps"
+	name_short = "SCGMC"
+	
+	rank_types = list(
+		/datum/mil_rank/marine/e1,
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/marine/e4,
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/marine/e6,
+		/datum/mil_rank/marine/e7,
+		/datum/mil_rank/marine/e8,
+		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/marine/e9_alt1,
+		/datum/mil_rank/marine/e9_alt2,
+		/datum/mil_rank/marine/w1,
+		/datum/mil_rank/marine/w2,
+		/datum/mil_rank/marine/w3,
+		/datum/mil_rank/marine/w4,
+		/datum/mil_rank/marine/w5,
+		/datum/mil_rank/marine/o1,
+		/datum/mil_rank/marine/o2,
+		/datum/mil_rank/marine/o3,
+		/datum/mil_rank/marine/o4,
+		/datum/mil_rank/marine/o5,
+		/datum/mil_rank/marine/o6,
+		/datum/mil_rank/marine/o7,
+		/datum/mil_rank/marine/o8,
+		/datum/mil_rank/marine/o9,
+		/datum/mil_rank/marine/o10
+	)
+	
+	spawn_rank_types = list(
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/marine/e4,
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/marine/e6,
+		/datum/mil_rank/marine/e7,
+		/datum/mil_rank/marine/e8,
+		/datum/mil_rank/marine/o1,
+		/datum/mil_rank/marine/o2,
+		/datum/mil_rank/marine/o3,
+		/datum/mil_rank/marine/o4,
+		/datum/mil_rank/marine/o5,
+		/datum/mil_rank/marine/o6
+	)
+
+/datum/mil_branch/civilian
+	name = "Civilian"
+	name_short = "civ"
+	
+	rank_types = list(
+		/datum/mil_rank/civ/civ,
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/synthetic
+	)
+	
+	spawn_rank_types = list(
+		/datum/mil_rank/civ/civ,
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/synthetic
+	)
+
+
+/*
+ *  Fleet 
+ *  =====
+ */
+
+/datum/mil_rank/fleet/e1
+	name = "Crewman Recruit"
+	name_short = "CR"
+
+/datum/mil_rank/fleet/e2
+	name = "Crewman Apprentice"
+	name_short = "CA"
+
+/datum/mil_rank/fleet/e3
+	name = "Crewman"
+	name_short = "CN"
+
+/datum/mil_rank/fleet/e4
+	name = "Petty Officer Third Class"
+	name_short = "PO3"
+
+/datum/mil_rank/fleet/e5
+	name = "Petty Officer Second Class"
+	name_short = "PO2"
+
+/datum/mil_rank/fleet/e6
+	name = "Petty Officer First Class"
+	name_short = "PO1"
+
+/datum/mil_rank/fleet/e7
+	name = "Chief Petty Officer"
+	name_short = "CPO"
+
+/datum/mil_rank/fleet/e8
+	name = "Senior Chief Petty Officer"
+	name_short = "SCPO"
+
+/datum/mil_rank/fleet/e9
+	name = "Master Chief Petty Officer"
+	name_short = "MCPO"
+
+/datum/mil_rank/fleet/e9_alt1
+	name = "Command Master Chief Petty Officer"
+	name_short = "CMDCM"
+
+/datum/mil_rank/fleet/e9_alt2
+	name = "Fleet Master Chief Petty Officer"
+	name_short = "FLTCM"
+
+/datum/mil_rank/fleet/e9_alt3
+	name = "Force Master Chief Petty Officer"
+	name_short = "FORCM"
+
+/datum/mil_rank/fleet/e9_alt4
+	name = "Master Chief Petty Officer of the Fleet"
+	name_short = "MCPOF"
+
+/datum/mil_rank/fleet/w1
+	name = "Warrant Officer 1"
+	name_short = "WO1"
+
+/datum/mil_rank/fleet/w2
+	name = "Chief Warrant Officer 2"
+	name_short = "CWO2"
+
+/datum/mil_rank/fleet/w3
+	name = "Chief Warrant Officer 3"
+	name_short = "CWO3"
+
+/datum/mil_rank/fleet/w4
+	name = "Chief Warrant Officer 4"
+	name_short = "CWO4"
+
+/datum/mil_rank/fleet/w5
+	name = "Chief Warrant Officer 5"
+	name_short = "CWO5"
+
+/datum/mil_rank/fleet/o1
+	name = "Ensign"
+	name_short = "ENS"
+
+/datum/mil_rank/fleet/o2
+	name = "Lieutenant (junior grade)"
+	name_short = "LTJG"
+
+/datum/mil_rank/fleet/o3
+	name = "Lieutenant"
+	name_short = "LT"
+
+/datum/mil_rank/fleet/o4
+	name = "Lieutenant Commander"
+	name_short = "LCDR"
+
+/datum/mil_rank/fleet/o5
+	name = "Commander"
+	name_short = "CDR"
+
+/datum/mil_rank/fleet/o6
+	name = "Captain"
+	name_short = "CAPT"
+
+/datum/mil_rank/fleet/o7
+	name = "Rear Admiral (lower half)"
+	name_short = "RDML"
+
+/datum/mil_rank/fleet/o8
+	name = "Rear Admiral"
+	name_short = "RADM"
+
+/datum/mil_rank/fleet/o9
+	name = "Vice Admiral"
+	name_short = "VADM"
+
+/datum/mil_rank/fleet/o10
+	name = "Admiral"
+	name_short = "ADM"
+	
+/datum/mil_rank/fleet/o10_alt
+	name = "Fleet Admiral"
+	name_short = "FADM"
+	
+	
+/*
+ *  Marines
+ *  =======
+ */
+
+/datum/mil_rank/marine/e1
+	name = "Private"
+	name_short = "Pvt"
+
+/datum/mil_rank/marine/e2
+	name = "Private First Class"
+	name_short = "PFC"
+
+/datum/mil_rank/marine/e3
+	name = "Lance Corporal"
+	name_short = "LCpl"
+
+/datum/mil_rank/marine/e4
+	name = "Corporal"
+	name_short = "Cpl"
+
+/datum/mil_rank/marine/e5
+	name = "Sergeant"
+	name_short = "Sgt"
+
+/datum/mil_rank/marine/e6
+	name = "Staff Sergeant"
+	name_short = "SSgt"
+
+/datum/mil_rank/marine/e7
+	name = "Gunnery Sergeant"
+	name_short = "GySgt"
+
+/datum/mil_rank/marine/e8
+	name = "Master Sergeant"
+	name_short = "MSgt"
+
+/datum/mil_rank/marine/e8_alt
+	name = "First Sergeant"
+	name_short = "1st Sgt"
+
+/datum/mil_rank/marine/e9
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySgt"
+
+/datum/mil_rank/marine/e9_alt1
+	name = "Sergeant Major"
+	name_short = "SgtMaj"
+
+/datum/mil_rank/marine/e9_alt2
+	name = "Sergeant Major of the Marine Corps"
+	name_short = "SMMC"
+
+/datum/mil_rank/marine/w1
+	name = "Warrant Officer 1"
+	name_short = "WO"
+
+/datum/mil_rank/marine/w2
+	name = "Chief Warrant Officer 2"
+	name_short = "CWO2"
+
+/datum/mil_rank/marine/w3
+	name = "Chief Warrant Officer 3"
+	name_short = "CWO3"
+
+/datum/mil_rank/marine/w4
+	name = "Chief Warrant Officer 4"
+	name_short = "CWO4"
+
+/datum/mil_rank/marine/w5
+	name = "Chief Warrant Officer 5"
+	name_short = "CWO5"
+
+/datum/mil_rank/marine/o1
+	name = "Second Lieutenant"
+	name_short = "2ndLt"
+
+/datum/mil_rank/marine/o2
+	name = "First Lieutenant"
+	name_short = "1stLt"
+
+/datum/mil_rank/marine/o3
+	name = "Captain"
+	name_short = "Capt"
+
+/datum/mil_rank/marine/o4
+	name = "Major"
+	name_short = "Maj"
+
+/datum/mil_rank/marine/o5
+	name = "Lieutenant Colonel"
+	name_short = "LtCol"
+
+/datum/mil_rank/marine/o6
+	name = "Colonel"
+	name_short = "Col"
+
+/datum/mil_rank/marine/o7
+	name = "Brigadier General"
+	name_short = "BGen"
+
+/datum/mil_rank/marine/o8
+	name = "Major General"
+	name_short = "MajGen"
+
+/datum/mil_rank/marine/o9
+	name = "Lieutenant General"
+	name_short = "LtGen"
+
+/datum/mil_rank/marine/o10
+	name = "General"
+	name_short = "Gen"
+	
+	
+/*
+ *  Civilians
+ *  =========
+ */
+ 
+/datum/mil_rank/civ/civ
+	name = "Civilian"
+	name_short = null
+	
+/datum/mil_rank/civ/nt
+	name = "NanoTrasen employee"
+	name_short = null
+	
+/datum/mil_rank/civ/contractor
+	name = "Contractor"
+	name_short = null		
+
+/datum/mil_rank/civ/synthetic
+	name = "Synthetic"
+	name_short = null

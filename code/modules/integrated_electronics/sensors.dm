@@ -3,7 +3,7 @@
 	complexity = 5
 	inputs = list("active", "range" = 3)
 	outputs = list("triggering ref")
-	activators = list("on triggered")
+	activators = list("update", "on triggered")
 	category = /obj/item/integrated_circuit/sensor
 	var/min_range = 0
 	var/max_range = 3
@@ -50,7 +50,7 @@
 		proximity_trigger = null
 	. = ..()
 
-/obj/item/integrated_circuit/sensor/proximity/on_data_written()
+/obj/item/integrated_circuit/sensor/proximity/do_work()
 	var/datum/integrated_io/active = inputs[1]
 	var/datum/integrated_io/range = inputs[2]
 
@@ -67,14 +67,13 @@
 		proximity_trigger.set_range(range.data)
 	if(turn_on)
 		proximity_trigger.register_turfs()
-	..()
 
 /obj/item/integrated_circuit/sensor/proximity/proc/on_turf_entered(var/enterer)
 	if(!shall_trigger(enterer))
 		return
 
 	var/datum/integrated_io/O = outputs[1]
-	var/datum/integrated_io/A = activators[1]
+	var/datum/integrated_io/A = activators[2]
 
 	O.data = weakref(enterer)
 	O.push_data()

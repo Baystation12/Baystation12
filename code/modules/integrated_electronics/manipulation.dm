@@ -1,4 +1,3 @@
-
 /obj/item/integrated_circuit/manipulation/smoke
 	name = "smoke generator"
 	desc = "Unlike most electronics, creating smoke is completely intentional."
@@ -188,6 +187,13 @@
 	outputs = list()
 	activators = list("prime grenade")
 	var/obj/item/weapon/grenade/attached_grenade
+	var/pre_attached_grenade_type
+
+/obj/item/integrated_circuit/manipulation/grenade/New()
+	..()
+	if(pre_attached_grenade_type)
+		var/grenade = new pre_attached_grenade_type(src)
+		attach_grenade(grenade)
 
 /obj/item/integrated_circuit/manipulation/grenade/Destroy()
 	if(attached_grenade && !attached_grenade.active)
@@ -236,6 +242,9 @@
 	attached_grenade = null
 	size = initial(size)
 	desc = initial(desc)
+
+/obj/item/integrated_circuit/manipulation/grenade/frag
+	pre_attached_grenade_type = /obj/item/weapon/grenade/frag
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift
 	name = "bluespace rift generator"

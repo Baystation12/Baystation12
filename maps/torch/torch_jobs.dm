@@ -11,12 +11,20 @@
 /datum/job/captain
 	title = "Commanding Officer"
 	alt_titles = list("Captain (Fleet)", "Commander", "Colonel", "Lieutenant Colonel")
-	allowed_ranks = list(FLEET_O5,MARINE_O5,FLEET_O6,MARINE_O6)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o5,
+		/datum/mil_rank/marine/o5,
+		/datum/mil_rank/fleet/o6,
+		/datum/mil_rank/marine/o6
+	)
 
 /datum/job/hop
 	title = "Executive Officer"
 	alt_titles = list("Lieutenant Commander", "Major")
-	allowed_ranks = list(FLEET_O4,MARINE_O4)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/marine/o4
+	)
 
 /datum/job/rd
 	supervisors = "NanoTrasen"
@@ -28,39 +36,77 @@
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
-	allowed_ranks = list(CIV_CIVILIAN)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 /datum/job/lawyer
 	title = "SolGov Representative"
-	allowed_ranks = list(CIV_CIVILIAN)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 /datum/job/warden
 	title = "Brig Officer"
-	allowed_ranks = list(FLEET_E5,MARINE_E5,FLEET_E6,MARINE_E6,FLEET_E7,MARINE_E7)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/marine/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/marine/e7
+	)
 
 /datum/job/detective
 	title = "Forensic Technician"
 	alt_titles = list()
-	allowed_ranks = list(FLEET_E3,MARINE_E3,FLEET_E4,MARINE_E4,FLEET_E5,MARINE_E5)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/marine/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/marine/e5
+	)
 
 /datum/job/officer
 	title = "Master at Arms"
 	total_positions = 2
 	spawn_positions = 2
-	allowed_ranks = list(FLEET_E2,MARINE_E2,FLEET_E3,MARINE_E3,FLEET_E4,MARINE_E4)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/marine/e4
+	)
 
 /datum/job/qm
 	title = "Deck Officer"
-	allowed_ranks = list(FLEET_E5,MARINE_E5,FLEET_E6,MARINE_E6,FLEET_E7,MARINE_E7)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/marine/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/marine/e7
+	)
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
-	allowed_ranks = list(FLEET_E2,MARINE_E2,FLEET_E3,MARINE_E3)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e3
+	)
 
 /datum/job/chemist
 	total_positions = 1
 	spawn_positions = 1
-	allowed_ranks = list(FLEET_E3,MARINE_E3,FLEET_E4,MARINE_E4)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/marine/e4
+	)
 
 /datum/job/chaplain
 	department = "Medical"
@@ -70,13 +116,18 @@
 	alt_titles = list("Psychologist", "Psychiatrist", "Counselor")
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels, access_medical, access_medical_equip, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels, access_medical, access_medical_equip, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
-	allowed_ranks = list(FLEET_E2,MARINE_E2,FLEET_E3,MARINE_E3)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e3
+	)
 
 /datum/job/scientist
 	total_positions = 4
 	spawn_positions = 4
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
-	allowed_ranks = list(CIV_CIVILIAN)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 /datum/job/mining
 	title = "Prospector"
@@ -87,7 +138,7 @@
 	alt_titles = list("Scavanger", "Shaft Miner")
 	total_positions = 4
 	spawn_positions = 4
-	allowed_ranks = list(CIV_CIVILIAN)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 /datum/job/contractor
 	title = "Security Contractor"
@@ -105,7 +156,7 @@
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks,
 	              access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	outfit_type = /decl/hierarchy/outfit/job/security/officer/contractor
-	allowed_ranks = list(CIV_CONTRACTOR)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 //Torch Job Loadouts
 
