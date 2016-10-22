@@ -1957,6 +1957,7 @@
 #include "code\modules\ship_combat\reactor.dm"
 #include "code\modules\ship_combat\research.dm"
 #include "code\modules\ship_combat\sensor.dm"
+#include "code\modules\ship_combat\sensor_computer.dm"
 #include "code\modules\ship_combat\shield.dm"
 #include "code\modules\ship_combat\space_battle.dm"
 #include "code\modules\ship_combat\technical.dm"

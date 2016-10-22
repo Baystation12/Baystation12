@@ -143,6 +143,10 @@
 	reconnect()
 		return 0
 
+	examine(var/mob/user)
+		..()
+		user << "<span class='notice'>\The [src]'s ID tag is set to [src.sensor_id]</span>"
+
 	can_sense()
 		var/outcome = ..()
 		if(outcome == 1)

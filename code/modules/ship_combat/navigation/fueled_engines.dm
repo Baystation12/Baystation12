@@ -93,7 +93,7 @@
 	desc = "An engine nozzle, used to propel things through space."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle"
-	var/on = 0
+	var/on = 1
 	var/thrust_limit = 1
 	var/nominal_thrust = 3000
 	component_type = /obj/item/weapon/component/engine

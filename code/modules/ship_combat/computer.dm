@@ -119,7 +119,7 @@
 	proc/find_targets()
 		starts.Cut()
 		if(!linked)
-			return "Incompatible Host!"
+			return "Incompatible Ship!"
 		if(istype(linked, /obj/effect/overmap/ship))
 			var/obj/effect/overmap/ship/S = linked
 			if(!S.is_still())
@@ -515,12 +515,10 @@
 		var/processed = 0
 		var/obj/effect/overmap/them = map_sectors["[T.z]"]
 		var/obj/effect/overmap/us = map_sectors["[linked.z]"]
+		var/missile_range = 1
 		if(loaded)
-			var/missile_range = round(loaded.range * efficiency * guidance_efficiency)
-		else
-			src << "<span class='warning'>Nothing is loaded!</span>"
-			return 0
-		if(get_dist(them, us) > missile_range)
+			missile_range = min(1, round(loaded.range * efficiency * guidance_efficiency, 1))
+		if((!them || !us) || get_dist(them, us) > missile_range)
 			src << "<span class='warning'>\The [them] is out of missile firing range! (Your range is currently [missile_range])</span>"
 			return 0
 		if(linked.firing_angle == "Underhand")

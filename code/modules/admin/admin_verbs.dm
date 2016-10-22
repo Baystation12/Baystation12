@@ -61,6 +61,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/toggleoocdead,	//toggles ooc on/off for everyone who is dead,
 	/datum/admins/proc/toggledsay,		//toggles dsay on/off for everyone,
 	/datum/admins/proc/force_team, 		//forces a specific team into play
+	/datum/admins/proc/tele_ship, 		//teleports ships
 	/client/proc/game_panel,			//game panel, allows to change game-mode etc,
 	/client/proc/cmd_admin_say,			//admin-only ooc chat,
 	/datum/admins/proc/togglehubvisibility, //toggles visibility on the BYOND Hub,

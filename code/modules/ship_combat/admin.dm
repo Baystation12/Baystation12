@@ -21,4 +21,25 @@
 		ticker.forced_teams.Add(inp)
 		message_admins("[key_name_admin(usr)] forced [inp] into play.", 1)
 
+/datum/admins/proc/tele_ship()
+	set category = "Debug"
+	set name = "Teleport Ship"
+	set desc="Teleports a ship to the selected coordinates."
+	var/list/ships = list()
+	for(var/obj/effect/overmap/ship/S in world)
+		ships += S
+	if(!ships.len)
+		usr << "<span class='warning'>No ships found!</span>"
+		return
+	var/obj/effect/overmap/ship/selected = input(usr, "What ship?", "Ship Teleportation") in ships
+	if(!selected || !istype(selected))
+		usr << "<span class='warning'>Invalid!</span>"
+		return
+	var/x_co = input(usr, "Enter X coordinates", "Ship Teleportation") as num
+	x_co = between(1, x_co, OVERMAP_SIZE)
+	var/y_co = input(usr, "Enter Y coordinates", "Ship Teleportation") as num
+	y_co = between(1, y_co, OVERMAP_SIZE)
+	selected.forceMove(locate(x_co, y_co, selected.z))
+
+
 

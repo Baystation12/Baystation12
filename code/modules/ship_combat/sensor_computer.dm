@@ -1,0 +1,1 @@
+/obj/machinery/space_battle/sensor_computer
