@@ -103,11 +103,4 @@
 			return "Insufficient Power"
 		if(use_power == 1)
 			return "Disabled"
-		if(needs_dish)
-			if(!dish)
-				reconnect()
-				if(!dish)
-					return "Wireless Connection Severed: No connected dish."
-			else if(!dish.can_sense())
-				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
-		return strength
+		return ..() == 1 ? strength : 0
