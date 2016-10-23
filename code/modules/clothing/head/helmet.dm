@@ -68,10 +68,10 @@
 /obj/item/clothing/head/helmet/riot/attack_self(mob/user as mob)
 	if(src.icon_state == initial(icon_state))
 		src.icon_state = "[icon_state]_up"
-		user << "You raise the visor on the riot helmet."
+		to_chat(user, "You raise the visor on the [src].")
 	else
 		src.icon_state = initial(icon_state)
-		user << "You lower the visor on the riot helmet."
+		to_chat(user, "You lower the visor on the [src].")
 	update_clothing_icon()
 
 /obj/item/clothing/head/helmet/ablative
