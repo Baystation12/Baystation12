@@ -1,0 +1,57 @@
+"a" = (/turf/space,/area/space)
+"b" = (/obj/effect/landmark/map_data{height = 2},/turf/space,/area/space)
+"c" = (/turf/simulated/wall,/area/maintenance/fsmaint2)
+"d" = (/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"e" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"f" = (/turf/simulated/open,/area/maintenance/fsmaint2)
+"g" = (/obj/machinery/light_switch{pixel_x = 25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"h" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"i" = (/obj/structure/ladder/updown,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"j" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"k" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"l" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"m" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"n" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/air,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"o" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"p" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/empty,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"q" = (/obj/machinery/light_switch{pixel_x = -25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"r" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"s" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"t" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"u" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"v" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaabaaacccccccccccccccaaaaaaaa
+aaaaaaaaacdddeddfddedddcaaaaaaaa
+aaaaaaaaacdddddfffdddddcaaaaaaaa
+aaaaaaaaacdddddfffddddgcaaaaaaaa
+aaaaaaaaachdddifffddddjcaaaaaaaa
+aaaaaaaaacddddddddddkddcaaaaaaaa
+aaaaaaaaacddddddddddlmncaaaaaaaa
+aaaaaaaaacdddddddddddddcaaaaaaaa
+aaaaaaaaacddddddddddompcaaaaaaaa
+aaaaaaaaacqdddddddddrddcaaaaaaaa
+aaaaaaaaachdddddddddddjcaaaaaaaa
+aaaaaaaaacsddddddddddddcaaaaaaaa
+aaaaaaaaactddddddddddddcaaaaaaaa
+aaaaaaaaacuddvdddddvdddcaaaaaaaa
+aaaaaaaaacccccccccccccccaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

@@ -3,9 +3,9 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
-	layer = 3.2//Just above doors
+	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
 	flags = ON_BORDER
 	var/maxhealth = 14.0
@@ -91,11 +91,11 @@
 		index = 0
 		while(index < 2)
 			new shardtype(loc) //todo pooling?
-			if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
+			if(reinf) new /obj/item/stack/rods(loc)
 			index++
 	else
 		new shardtype(loc) //todo pooling?
-		if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
+		if(reinf) new /obj/item/stack/rods(loc)
 	qdel(src)
 	return
 
@@ -399,7 +399,9 @@
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
 	overlays.Cut()
+	layer = FULL_WINDOW_LAYER
 	if(!is_fulltile())
+		layer = SIDE_WINDOW_LAYER
 		icon_state = "[basestate]"
 		return
 	var/list/dirs = list()
@@ -478,6 +480,10 @@
 	//player-constructed windows
 	if (constructed)
 		state = 0
+		
+/obj/structure/window/initialize()
+	..()
+	layer = is_full_window() ? FULL_WINDOW_LAYER : SIDE_WINDOW_LAYER
 
 /obj/structure/window/reinforced/full
     dir = 5

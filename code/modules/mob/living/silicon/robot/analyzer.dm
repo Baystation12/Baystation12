@@ -9,7 +9,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 1, TECH_ENGINEERING = 2)
@@ -68,8 +68,6 @@
 
 			var/mob/living/carbon/human/H = M
 			user << "<span class='notice'>Analyzing Results for \the [H]:</span>"
-			if(H.isSynthetic())
-				user << "System instability: <font color='green'>[H.getToxLoss()]</font>"
 			user << "Key: <font color='#FFA500'>Electronics</font>/<font color='red'>Brute</font>"
 			user << "<span class='notice'>External prosthetics:</span>"
 			var/organ_found

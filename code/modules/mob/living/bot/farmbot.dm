@@ -291,7 +291,7 @@
 	icon_state = "water_arm"
 	var/build_step = 0
 	var/created_name = "Farmbot"
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 
 	New()
 		..()

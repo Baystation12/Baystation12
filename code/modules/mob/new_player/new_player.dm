@@ -72,7 +72,10 @@
 	. = ..()
 
 	if(statpanel("Lobby") && ticker)
-		stat("Game Mode:", PUBLIC_GAME_MODE)
+		if(check_rights(R_INVESTIGATE, 0, src))
+			stat("Game Mode:", "[ticker.mode || master_mode][ticker.hide_mode ? " (Secret)" : ""]")
+		else
+			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 
@@ -104,6 +107,9 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
+		if(!(initialization_stage&INITIALIZATION_COMPLETE))
+			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			return
 
 		if(!config.respawn_delay || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
@@ -117,7 +123,7 @@
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
 				src << "<span class='notice'>Now teleporting.</span>"
-				observer.loc = O.loc
+				observer.forceMove(O.loc)
 			else
 				src << "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>"
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
@@ -126,11 +132,7 @@
 
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
-			observer.appearance = mannequin
-			observer.appearance_flags |= KEEP_TOGETHER // replace KEEP_TOGETHER flag so the ghost looks normal-ish
-			observer.alpha = 127
-			observer.layer = initial(observer.layer)
-			observer.invisibility = initial(observer.invisibility)
+			observer.set_appearance(mannequin)
 			qdel(mannequin)
 
 			if(client.prefs.be_random_name)
@@ -275,6 +277,9 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(!job.is_branch_allowed(client.prefs.char_branch)) return 0
+	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank)) return 0
+
 	return 1
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
@@ -303,6 +308,9 @@
 			if(A.team == team)
 				spawn_turf = get_turf(S)
 
+
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
+	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus)
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
@@ -346,7 +354,7 @@
 		var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
 		empty_playable_ai_cores -= C
 
-		character.loc = C.loc
+		character.forceMove(C.loc)
 
 		AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
 		ticker.mode.handle_latejoin(character)
@@ -537,3 +545,6 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/touch_map_edge()
 	return
+
+/mob/new_player/say(var/message)
+	sanitize_and_communicate(/decl/communication_channel/ooc, src, message)

@@ -2,7 +2,7 @@
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
-	//w_class = 2.0
+	//w_class = ITEM_SIZE_SMALL
 	//slot_flags = SLOT_EYES
 	//var/vision_flags = 0
 	//var/darkness_view = 0//Base human is 2
@@ -13,6 +13,16 @@
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
+
+/obj/item/clothing/glasses/New()
+	..()
+	if(ispath(hud))
+		hud = new hud(src)
+
+/obj/item/clothing/glasses/Destroy()
+	qdel(hud)
+	hud = null
+	. = ..()
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
@@ -79,6 +89,18 @@
 /obj/item/clothing/glasses/night/New()
 	..()
 	overlay = global_hud.nvg
+
+/obj/item/clothing/glasses/tacgoggles //made their own thing, with more extreme flash protection and medium NV, but no more sechud
+	name = "tactical goggles"
+	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
+	icon_state = "swatgoggles"
+	origin_tech = list(TECH_MAGNET = 2)
+	darkness_view = 5
+	toggleable = 1
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	flash_protection = FLASH_PROTECTION_MAJOR
+	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
+	siemens_coefficient = 0.6
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
@@ -204,7 +226,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "tape_cross"
 	item_state = null
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
@@ -219,18 +241,56 @@
 	name = "HUDSunglasses"
 	desc = "Sunglasses with a HUD."
 	icon_state = "sunhud"
+	hud = /obj/item/clothing/glasses/hud/security
 
-	New()
-		..()
-		src.hud = new/obj/item/clothing/glasses/hud/security(src)
-		return
+/obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
+	name = "HUD goggles"
+	desc = "Flash-resistant goggles with an inbuilt heads-up display."
+	icon_state = "goggles"
 
-/obj/item/clothing/glasses/sunglasses/sechud/tactical
-	name = "tactical HUD"
-	desc = "Flash-resistant goggles with inbuilt security information. Made from durable synthetic."
-	icon_state = "swatgoggles"
-	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
-	siemens_coefficient = 0.6
+/obj/item/clothing/glasses/sunglasses/sechud/toggle
+	name = "HUD aviators"
+	desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
+	icon_state = "sec_hud"
+	off_state = "sec_flash"
+	action_button_name = "Toggle Mode"
+	var/on = 1
+	toggleable = 1
+	activation_sound = 'sound/effects/pop.ogg'
+
+	var/hud_holder
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/New()
+	..()
+	hud_holder = hud
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/Destroy()
+	qdel(hud_holder)
+	hud_holder = null
+	hud = null
+	. = ..()
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/attack_self(mob/user)
+	if(toggleable && !user.incapacitated())
+		on = !on
+		if(on)
+			flash_protection = FLASH_PROTECTION_NONE
+			src.hud = hud_holder
+			to_chat(user, "You switch the [src] to HUD mode.")
+		else
+			flash_protection = initial(flash_protection)
+			src.hud = null
+			to_chat(user, "You switch \the [src] to flash protection mode.")
+		update_icon()
+		user << activation_sound
+		user.update_inv_glasses()
+		user.update_action_buttons()
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/update_icon()
+	if(on)
+		icon_state = initial(icon_state)
+	else
+		icon_state = off_state
 
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"

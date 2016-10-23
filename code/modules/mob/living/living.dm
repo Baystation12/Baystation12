@@ -366,7 +366,6 @@ default behaviour is:
 			return 1
 	return 0
 
-
 /mob/living/proc/can_inject(var/mob/user, var/target_zone)
 	return 1
 
@@ -759,3 +758,9 @@ default behaviour is:
 	src << "<span class='notice'>Remember to stay in character for a mob of this type!</span>"
 	return 1
 
+/mob/living/reset_layer()
+	if(hiding)
+		plane = HIDING_MOB_PLANE
+		layer = HIDING_MOB_LAYER
+	else
+		..()

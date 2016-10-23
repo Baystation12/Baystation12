@@ -45,8 +45,8 @@
 	icon_state = "trashbag0"
 	item_state = "trashbag"
 
-	w_class = 2
-	max_w_class = 5 //can fit a backpack inside a trash bag, seems right
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_HUGE //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
@@ -73,8 +73,8 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 
-	w_class = 1
-	max_w_class = 3
+	w_class = ITEM_SIZE_TINY
+	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
@@ -89,6 +89,6 @@
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	max_storage_space = 100
-	max_w_class = 5
-	w_class = 2
+	max_w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_SMALL
 	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)

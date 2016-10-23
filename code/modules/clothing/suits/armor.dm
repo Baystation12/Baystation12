@@ -44,7 +44,7 @@
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
 	item_state = "swat_suit"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.5
@@ -59,7 +59,7 @@
 	icon_state = "riotvest"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/suit/armor/riot/vest/New()
@@ -71,7 +71,7 @@
 	desc = "A suit of armor with heavy plates to protect against ballistic projectiles. Looks like it might impair movement."
 	icon_state = "bulletproof"
 	item_state = "swat_suit"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
@@ -86,7 +86,7 @@
 	icon_state = "bulletproofvest"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/suit/armor/bulletproof/vest/New()
@@ -98,7 +98,7 @@
 	desc = "A suit of armor with advanced shielding to protect against energy weapons. Looks like it might impair movement."
 	icon_state = "reflect"
 	item_state = "swat_suit"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 33, bullet = 33, laser = 77, energy = 50, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
@@ -113,7 +113,7 @@
 	icon_state = "reflectvest"
 	item_state = "armor_reflec"
 	blood_overlay_type = "armor"
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/suit/armor/laserproof/vest/New()
@@ -225,7 +225,7 @@
 	icon_state = "swatarmor"
 	item_state = "armor"
 	var/obj/item/weapon/gun/holstered = null
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
@@ -388,7 +388,7 @@
 	desc = "A suit that protects against some damage."
 	icon_state = "centcom"
 	item_state = "centcom"
-	w_class = 5//bulky item
+	w_class = ITEM_SIZE_HUGE//bulky item
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
@@ -401,7 +401,7 @@
 	desc = "A heavily armored suit that protects against moderate damage."
 	icon_state = "heavy"
 	item_state = "swat_suit"
-	w_class = 5//bulky item
+	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.90
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT

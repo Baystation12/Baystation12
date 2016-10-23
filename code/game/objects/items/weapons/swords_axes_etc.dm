@@ -36,7 +36,7 @@
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
 	slot_flags = SLOT_BELT
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	force = 3
 	var/on = 0
 
@@ -49,7 +49,7 @@
 		"You hear an ominous click.")
 		icon_state = "telebaton_1"
 		item_state = "telebaton_1"
-		w_class = 3
+		w_class = ITEM_SIZE_NORMAL
 		force = 15//quite robust
 		attack_verb = list("smacked", "struck", "slapped")
 	else
@@ -58,7 +58,7 @@
 		"You hear a click.")
 		icon_state = "telebaton_0"
 		item_state = "telebaton_0"
-		w_class = 2
+		w_class = ITEM_SIZE_SMALL
 		force = 3//not so robust now
 		attack_verb = list("hit", "punched")
 

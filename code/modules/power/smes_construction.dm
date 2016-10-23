@@ -11,9 +11,10 @@
 	desc = "Standard superconductive magnetic coil with average capacity and I/O rating."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
-	w_class = 4							// It's LARGE (backpack size)
+	w_class = ITEM_SIZE_LARGE						// It's LARGE (backpack size)
 	var/ChargeCapacity = 30 KILOWATTS
 	var/IOCapacity = 25 KILOWATTS
+
 
 // 20% Charge Capacity, 60% I/O Capacity. Used for substation/outpost SMESs.
 /obj/item/weapon/smes_coil/weak

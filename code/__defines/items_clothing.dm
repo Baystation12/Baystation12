@@ -213,23 +213,6 @@
 	7 - things that are large enough to contain humans, like closets, but smaller than entire turfs
 	8 - things that take up an entire turf, like wall girders or door assemblies
 */
-#define TINY_ITEM   1
-#define SMALL_ITEM  2
-#define NORMAL_ITEM 3
-#define LARGE_ITEM  4
-#define BULKY_ITEM  5
-
-#define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
-
-#define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
-
-//linear increase. Using many small storage containers is more space-efficient than using large ones,
-//in exchange for being limited in the w_class of items that will fit
-#define base_storage_capacity(w_class) (7*(w_class-1))
-
-#define DEFAULT_BACKPACK_STORAGE base_storage_capacity(5)
-#define DEFAULT_LARGEBOX_STORAGE base_storage_capacity(4)
-#define DEFAULT_BOX_STORAGE      base_storage_capacity(3)
 
 var/list/default_onmob_icons = list(
 		slot_l_hand_str = 'icons/mob/items/lefthand.dmi',

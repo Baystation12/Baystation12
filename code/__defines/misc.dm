@@ -10,6 +10,7 @@
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
 #define INVISIBILITY_EYE		          61
+#define INVISIBILITY_SYSTEM               99
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_NOLIGHTING 15
@@ -17,6 +18,9 @@
 #define SEE_INVISIBLE_LEVEL_TWO           45
 #define SEE_INVISIBLE_CULT		          60
 #define SEE_INVISIBLE_OBSERVER            61
+#define SEE_INVISIBLE_SYSTEM              99
+
+#define SEE_IN_DARK_DEFAULT 2
 
 #define SEE_INVISIBLE_MINIMUM 5
 #define INVISIBILITY_MAXIMUM 100
@@ -68,15 +72,6 @@
 
 //Area flags, possibly more to come
 #define RAD_SHIELDED 1 //shielded from radiation, clearly
-
-// Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
-#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
-#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
-#define LIGHTING_LAYER 11
-#define HUD_LAYER 20			//Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
-#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
-#define SCREEN_LAYER 22			//Mob HUD/effects layer
-#define CINEMA_LAYER 23			//Cinematic, fullscreen effects
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -183,3 +178,6 @@
 //Grid for Item Placement
 #define CELLS 8								//Amount of cells per row/column in grid
 #define CELLSIZE (world.icon_size/CELLS)	//Size of a cell in pixels
+
+#define WORLD_ICON_SIZE 32
+#define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32

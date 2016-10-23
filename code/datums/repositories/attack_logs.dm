@@ -25,9 +25,16 @@ var/repository/attack_logs/attack_log_repository = new()
 	attacker = mob_repository.get_lite_mob(mob_attacker)
 	victim = mob_repository.get_lite_mob(mob_victim)
 
-	message = "[attacker.name] [action_message] [victim.name]"
-	intent = mob_attacker ? uppertext(mob_attacker.a_intent) : "N/A"
-	location = mob_attacker ? get_turf(mob_attacker) : (mob_victim ? get_turf(mob_victim) : null)
+	if(mob_attacker && mob_victim)
+		message = "[attacker.name] [action_message] [victim.name]"
+	else if(mob_attacker)
+		message = "[attacker.name] [action_message]"
+	else
+		message = "[victim.name] [action_message]"
 
-/datum/attack_log/proc/mob_to_key_name(var/datum/mob_lite/M)
-	return M ? M.key_name(FALSE) : "*null*"
+	intent = mob_attacker ? uppertext(mob_attacker.a_intent) : "N/A"
+
+	if(mob_attacker)
+		location = get_turf(mob_attacker)
+	if(!location && mob_victim)
+		location = get_turf(mob_victim)

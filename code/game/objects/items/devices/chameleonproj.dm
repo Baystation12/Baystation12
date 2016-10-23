@@ -7,7 +7,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_ILLEGAL = 4, TECH_MAGNET = 4)
 	var/can_use = 1
 	var/obj/effect/dummy/chameleon/active_dummy = null
@@ -46,7 +46,7 @@
 		qdel(active_dummy)
 		active_dummy = null
 		usr << "<span class='notice'>You deactivate the [src].</span>"
-		var/obj/effect/overlay/T = PoolOrNew(/obj/effect/overlay, get_turf(src))
+		var/obj/effect/overlay/T = new /obj/effect/overlay(get_turf(src))
 		T.icon = 'icons/effects/effects.dmi'
 		flick("emppulse",T)
 		spawn(8) qdel(T)
@@ -54,7 +54,7 @@
 		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
 		var/obj/O = new saved_item(src)
 		if(!O) return
-		var/obj/effect/dummy/chameleon/C = PoolOrNew(/obj/effect/dummy/chameleon, usr.loc)
+		var/obj/effect/dummy/chameleon/C = new /obj/effect/dummy/chameleon(usr.loc)
 		C.activate(O, usr, saved_icon, saved_icon_state, saved_overlays, src)
 		qdel(O)
 		usr << "<span class='notice'>You activate the [src].</span>"

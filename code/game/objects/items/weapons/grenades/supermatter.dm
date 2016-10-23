@@ -21,7 +21,7 @@
 /obj/item/weapon/grenade/supermatter/update_icon()
 	overlays.Cut()
 	if(implode_at)
-		overlays += image(icon = 'icons/rust.dmi', icon_state = "emfield_s1")
+		overlays += image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1")
 
 /obj/item/weapon/grenade/supermatter/process()
 	if(!isturf(loc))

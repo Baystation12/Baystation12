@@ -28,7 +28,7 @@
 	return "Color: <font color='[metadata]'>&#9899;</font>"
 
 /datum/gear_tweak/color/get_default()
-	return valid_colors ? valid_colors[1] : COLOR_GRAY
+	return valid_colors ? valid_colors[1] : COLOR_WHITE
 
 /datum/gear_tweak/color/get_metadata(var/user, var/metadata, var/title = "Character Preference")
 	if(valid_colors)

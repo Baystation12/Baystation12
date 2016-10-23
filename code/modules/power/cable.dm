@@ -34,9 +34,19 @@ var/list/possible_cable_coil_colours
 	icon_state = "0-1"
 	var/d1 = 0
 	var/d2 = 1
-	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
+
+	plane = ABOVE_TURF_PLANE
+	layer = EXPOSED_WIRE_LAYER
+
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
+
+/obj/structure/cable/hide(var/do_hide)
+	if(do_hide && level == 1)
+		plane = ABOVE_PLATING_PLANE
+		layer = WIRE_LAYER
+	else
+		reset_plane_and_layer()
 
 /obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -472,7 +482,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = COLOR_RED
 	desc = "A coil of power cable."
 	throwforce = 10
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 20)
@@ -546,9 +556,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/proc/update_wclass()
 	if(amount == 1)
-		w_class = 1.0
+		w_class = ITEM_SIZE_TINY
 	else
-		w_class = 2.0
+		w_class = ITEM_SIZE_SMALL
 
 /obj/item/stack/cable_coil/examine(mob/user)
 	if(get_dist(src, user) > 1)

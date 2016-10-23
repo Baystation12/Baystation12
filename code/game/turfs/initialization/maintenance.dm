@@ -15,27 +15,12 @@
 	T.update_dirt()
 
 	if(prob(2))
-		PoolOrNew(junk(), T)
+		var/new_junk = get_random_junk_type()
+		new new_junk(T)
 	if(prob(2))
-		PoolOrNew(/obj/effect/decal/cleanable/blood/oil, T)
+		new /obj/effect/decal/cleanable/blood/oil(T)
 	if(prob(25))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
-
-var/global/list/random_junk
-/datum/turf_initializer/maintenance/proc/junk()
-	if(prob(25))
-		return /obj/effect/decal/cleanable/generic
-	if(!random_junk)
-		random_junk = subtypesof(/obj/item/trash)
-		random_junk += typesof(/obj/item/weapon/cigbutt)
-		random_junk += /obj/effect/decal/cleanable/spiderling_remains
-		random_junk += /obj/item/remains/mouse
-		random_junk += /obj/item/remains/robot
-		random_junk -= /obj/item/trash/plate
-		random_junk -= /obj/item/trash/snack_bowl
-		random_junk -= /obj/item/trash/syndi_cakes
-		random_junk -= /obj/item/trash/tray
-	return pick(random_junk)
 
 /datum/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
 	var/how_dirty = 0
@@ -54,7 +39,7 @@ var/global/list/random_junk
 		var/turf/neighbour = get_step(T, dir)
 		if(neighbour && neighbour.density)
 			if(dir == WEST)
-				PoolOrNew(/obj/effect/decal/cleanable/cobweb, T)
+				new /obj/effect/decal/cleanable/cobweb(T)
 			if(dir == EAST)
-				PoolOrNew(/obj/effect/decal/cleanable/cobweb2, T)
+				new /obj/effect/decal/cleanable/cobweb2(T)
 			return

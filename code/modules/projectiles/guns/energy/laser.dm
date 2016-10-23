@@ -4,7 +4,7 @@
 	icon_state = "laser"
 	item_state = "laser"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	force = 10
 	requires_two_hands = 2
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -28,7 +28,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 15 //old technology, and a pistol
 
@@ -39,7 +39,7 @@ obj/item/weapon/gun/energy/retro
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	force = 5
 	slot_flags = SLOT_BELT //too unusually shaped to fit in a holster
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
 	max_shots = 5 //to compensate a bit for self-recharging
@@ -54,7 +54,7 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	requires_two_hands = 6 //large and heavy
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 40
 	max_shots = 6
@@ -78,7 +78,7 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	requires_two_hands = 2
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	charge_cost = 15
 	max_shots = 10
 
@@ -88,7 +88,7 @@ obj/item/weapon/gun/energy/retro
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	projectile_type = /obj/item/projectile/beam/xray
 	requires_two_hands = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
 
 /obj/item/weapon/gun/energy/sniperrifle
@@ -104,7 +104,7 @@ obj/item/weapon/gun/energy/retro
 	max_shots = 4
 	fire_delay = 35
 	force = 10
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
 

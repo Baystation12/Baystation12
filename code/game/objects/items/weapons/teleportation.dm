@@ -17,7 +17,7 @@
 	var/broadcasting = null
 	var/listening = 1.0
 	flags = CONDUCT
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
@@ -117,71 +117,3 @@ Frequency:
 				if (M.client)
 					src.attack_self(M)
 	return
-
-
-/*
- * Hand-tele
- */
-/obj/item/weapon/hand_tele
-	name = "hand tele"
-	desc = "A portable item using blue-space technology."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "hand_tele"
-	item_state = "electronic"
-	throwforce = 5
-	w_class = 2.0
-	throw_speed = 3
-	throw_range = 5
-	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
-	matter = list(DEFAULT_WALL_MATERIAL = 10000)
-	var/max_portals = 3
-	var/list/spawned_portals
-
-/obj/item/weapon/hand_tele/New()
-	spawned_portals = list()
-	..()
-
-/obj/item/weapon/hand_tele/Destroy()
-	for(var/portal in spawned_portals)
-		portal_destroyed(portal)
-	. = ..()
-
-/obj/item/weapon/hand_tele/attack_self(mob/user as mob)
-	var/turf/current_location = get_turf(user)//What turf is the user on?
-	if(!current_location || !isPlayerLevel(current_location.z))//If turf was not found or they're on z level outside the what's normally accesible
-		user << "<span class='notice'>\The [src] is malfunctioning.</span>"
-		return
-	if(spawned_portals.len >= max_portals)
-		user.show_message("<span class='notice'>\The [src] is recharging!</span>")
-		return
-
-	var/list/L = list()
-	for(var/obj/machinery/teleport/hub/R in machines)
-		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
-			if(R.icon_state == "tele1")
-				L["[com.id] (Active)"] = com.locked
-			else
-				L["[com.id] (Inactive)"] = com.locked
-	var/random_turf = get_random_turf_in_range(src, 10)
-	if(random_turf)
-		L["None (Dangerous)"] = random_turf
-	var/t1 = input(user, "Please select a teleporter to lock in on.", "Hand Teleporter") as null|anything in L
-	if (!t1 || user.get_active_hand() != src || user.incapacitated())
-		return
-
-	var/T = L[t1]
-	for(var/mob/O in hearers(user, null))
-		O.show_message("<span class='notice'>Locked In.</span>", 2)
-	create_portal(T)
-	add_fingerprint(user)
-
-/obj/item/weapon/hand_tele/proc/create_portal(var/location)
-	var/obj/effect/portal/P = new /obj/effect/portal(get_turf(src))
-	P.target = location
-	destroyed_event.register(P, src, /obj/item/weapon/hand_tele/proc/portal_destroyed)
-	spawned_portals += P
-
-/obj/item/weapon/hand_tele/proc/portal_destroyed(var/portal)
-	spawned_portals -= portal
-	destroyed_event.unregister(portal, src, /obj/item/weapon/hand_tele/proc/portal_destroyed)

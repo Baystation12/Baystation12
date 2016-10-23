@@ -5,7 +5,7 @@
 	name = "small device"
 	desc = "This object menaces with tiny, dull spikes of plastic."
 	icon_state = "jammer"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
 	var/obj/item/weapon/cell/bcell = /obj/item/weapon/cell/high

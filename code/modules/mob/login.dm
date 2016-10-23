@@ -41,7 +41,7 @@
 	hud_used = new /datum/hud(src)
 
 	next_move = 1
-	sight |= SEE_SELF
+	set_sight(sight|SEE_SELF)
 	..()
 
 	if(loc && !isturf(loc))

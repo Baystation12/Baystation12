@@ -5,7 +5,7 @@
 	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
@@ -81,7 +81,9 @@
 	if(scanned in overlay_cache)
 		. = overlay_cache[scanned]
 	else
-		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state, layer = HUD_LAYER)
+		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
+		I.plane = HUD_PLANE
+		I.layer = UNDER_HUD_LAYER
 
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))

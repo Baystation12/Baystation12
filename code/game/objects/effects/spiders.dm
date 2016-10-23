@@ -103,7 +103,7 @@
 			O = loc
 
 		for(var/i=0, i<num, i++)
-			var/spiderling = PoolOrNew(/obj/effect/spider/spiderling, list(src.loc, src))
+			var/spiderling = new /obj/effect/spider/spiderling(loc, src)
 			if(O)
 				O.implants += spiderling
 		qdel(src)
@@ -113,7 +113,8 @@
 	desc = "It never stays still for long."
 	icon_state = "guard"
 	anchored = 0
-	layer = 2.7
+	plane = OBJ_PLANE
+	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
@@ -145,7 +146,7 @@
 
 /obj/effect/spider/spiderling/proc/die()
 	visible_message("<span class='alert'>[src] dies!</span>")
-	PoolOrNew(/obj/effect/decal/cleanable/spiderling_remains, src.loc)
+	new /obj/effect/decal/cleanable/spiderling_remains(loc)
 	qdel(src)
 
 /obj/effect/spider/spiderling/healthcheck()
@@ -242,6 +243,8 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
 	anchored = 1
+	plane = ABOVE_TURF_PLANE
+	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon
 	name = "cocoon"

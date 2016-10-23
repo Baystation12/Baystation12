@@ -10,8 +10,6 @@ var/global/datum/controller/gameticker/ticker
 	var/event_time = null
 	var/event = 0
 
-	var/login_music			// music played in pregame lobby
-
 	var/list/datum/mind/minds = list()//The people in the game. Used for objective tracking.
 
 	var/Bible_icon_state	// icon_state the chaplain has chosen for his bible
@@ -121,8 +119,9 @@ var/global/datum/controller/gameticker/ticker
 	src.mode.pre_setup()
 	job_master.DivideOccupations(src.mode.allowed_factions) // Apparently important for new antagonist system to register specific job antags properly.
 
-	if(!src.mode.can_start())
-		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
+	var/t = src.mode.startRequirements()
+	if(t)
+		world << "<B>Unable to start [mode.name].</B> [t] Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
 		mode.fail_setup()
 		mode = null
@@ -199,7 +198,8 @@ var/global/datum/controller/gameticker/ticker
 		cinematic = new(src)
 		cinematic.icon = 'icons/effects/station_explosion.dmi'
 		cinematic.icon_state = "station_intact"
-		cinematic.layer = CINEMA_LAYER
+		cinematic.plane = HUD_PLANE
+		cinematic.layer = HUD_ABOVE_ITEM_LAYER
 		cinematic.mouse_opacity = 0
 		cinematic.screen_loc = "1,0"
 

@@ -7,7 +7,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -43,19 +43,19 @@
 			return
 
 		//check for an aggressive grab (or robutts)
-		var/can_place
-		if(istype(user, /mob/living/silicon/robot))
-			can_place = 1
-		else
-			for (var/obj/item/weapon/grab/G in C.grabbed_by)
-				if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
-					can_place = 1
-					break
-
-		if(can_place)
+		if(can_place(C, user))
 			place_handcuffs(C, user)
 		else
 			user << "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>"
+
+/obj/item/weapon/handcuffs/proc/can_place(var/mob/target, var/mob/user)
+	if(istype(user, /mob/living/silicon/robot))
+		return 1
+	else
+		for (var/obj/item/weapon/grab/G in target.grabbed_by)
+			if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+				return 1
+	return 0
 
 /obj/item/weapon/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
 	playsound(src.loc, cuff_sound, 30, 1, -2)
@@ -77,9 +77,10 @@
 	if(!do_after(user,30, target))
 		return 0
 
-	H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [H.name] ([H.ckey])</font>")
-	msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(H)]")
+	if(!can_place(target, user)) // victim may have resisted out of the grab in the meantime
+		return 0
+
+	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
 	feedback_add_details("handcuffs","H")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -111,10 +112,8 @@ var/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
 	if (!O) return
 
-	var/s = "<span class='warning'>[H.name] chews on \his [O.name]!</span>"
-	H.visible_message(s, "<span class='warning'>You chew on your [O.name]!</span>")
-	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
-	log_attack("[s] ([H.ckey])")
+	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
+	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	if(O.take_damage(3,0,1,1,"teeth marks"))
 		H:UpdateDamageIcon()

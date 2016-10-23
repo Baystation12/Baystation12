@@ -51,20 +51,36 @@
 	color = "#9D14DB"
 	strength = 30
 	touch_met = 5
+	var/fire_mult = 5
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
-		L.adjust_fire_stacks(amount / 5)
+		L.adjust_fire_stacks(amount / fire_mult)
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
-	if(prob(50))
+	if(prob(10 * fire_mult))
 		M.pl_effects()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
 	T.assume_gas("phoron", volume, T20C)
+	remove_self(volume)
+
+// Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
+/datum/reagent/toxin/phoron/oxygen
+	name = "Oxyphoron"
+	id = "oxyphoron"
+	description = "An exceptionally flammable molecule formed from deuterium synthesis."
+	strength = 80
+	fire_mult = 30
+
+/datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
+	if(!istype(T))
+		return
+	T.assume_gas("oxygen", ceil(volume/2), T20C)
+	T.assume_gas("phoron", ceil(volume/2), T20C)
 	remove_self(volume)
 
 /datum/reagent/toxin/cyanide //Fast and Lethal
@@ -227,9 +243,14 @@
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.take_organ_damage(3 * removed, 0)
-	if(M.losebreath < 15)
-		M.losebreath++
+	if(alien == IS_SKRELL)
+		M.take_organ_damage(2.4 * removed, 0)
+		if(M.losebreath < 22.5)
+			M.losebreath++
+	else
+		M.take_organ_damage(3 * removed, 0)
+		if(M.losebreath < 15)
+			M.losebreath++
 
 /datum/reagent/mutagen
 	name = "Unstable mutagen"
@@ -299,13 +320,17 @@
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-
-	if(dose < 1)
+		
+	var/threshold = 1	
+	if(alien == IS_SKRELL)
+		threshold = 1.2
+		
+	if(dose < 1 * threshold)
 		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(dose < 1.5)
+	else if(dose < 1.5 * threshold)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(dose < 5)
+	else if(dose < 5 * threshold)
 		if(prob(50))
 			M.Weaken(2)
 		M.drowsyness = max(M.drowsyness, 20)
@@ -328,16 +353,20 @@
 	if(alien == IS_DIONA)
 		return
 
-	if(dose == metabolism)
+	var/threshold = 1
+	if(alien == IS_SKRELL)
+		threshold = 1.2
+
+	if(dose == metabolism * threshold)
 		M.confused += 2
 		M.drowsyness += 2
-	else if(dose < 2)
+	else if(dose < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(dose > 1)
+	if(dose > 1 * threshold)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
@@ -366,7 +395,12 @@
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.druggy = max(M.druggy, 15)
+		
+	var/drug_strength = 15
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+		
+	M.druggy = max(M.druggy, drug_strength)
 	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
 	if(prob(7))
@@ -403,8 +437,11 @@
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.make_dizzy(4)
-	M.confused = max(M.confused, 20)
+	var/drug_strength = 4
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+	M.make_dizzy(drug_strength)
+	M.confused = max(M.confused, drug_strength * 5)
 
 /datum/reagent/impedrezene
 	name = "Impedrezene"
@@ -439,7 +476,10 @@
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.hallucination = max(M.hallucination, 100)
+	if(alien == IS_SKRELL)
+		M.hallucination = max(M.hallucination, (100 * 0.8))
+	else
+		M.hallucination = max(M.hallucination, 100)
 
 /datum/reagent/psilocybin
 	name = "Psilocybin"
@@ -453,14 +493,19 @@
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
+		
+	var/threshold = 1
+	if(alien == IS_SKRELL)
+		threshold = 1.2
+		
 	M.druggy = max(M.druggy, 30)
 
-	if(dose < 1)
+	if(dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
-	else if(dose < 2)
+	else if(dose < 2 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)

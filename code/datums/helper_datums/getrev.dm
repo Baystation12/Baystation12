@@ -29,18 +29,19 @@ var/global/datum/getrev/revdata = new()
 	world.log << date
 	world.log << revision
 
-client/verb/showrevinfo()
+/client/verb/showrevinfo()
 	set category = "OOC"
 	set name = "Show Server Revision"
 	set desc = "Check the current server code revision"
 
+	to_chat(src, "<b>Client Version:</b> [byond_version]")
+
 	if(revdata.revision)
-		src << "<b>Server revision:</b> [revdata.branch] - [revdata.date]"
+		var/server_revision = revdata.revision
 		if(config.githuburl)
-			src << "<a href='[config.githuburl]/commit/[revdata.revision]'>[revdata.revision]</a>"
-		else
-			src << revdata.revision
+			server_revision = "<a href='[config.githuburl]/commit/[server_revision]'>[server_revision]</a>"
+		to_chat(src, "<b>Server Revision:</b> [server_revision] - [revdata.branch] - [revdata.date]")
 	else
-		src << "Revision unknown"
+		to_chat(src, "<b>Server Revision:</b> Revision Unknown")
 
 	src << "Game ID: <b>[game_id]</b>"

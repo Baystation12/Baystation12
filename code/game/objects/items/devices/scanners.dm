@@ -17,7 +17,7 @@ REAGENT SCANNER
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
@@ -45,8 +45,7 @@ REAGENT SCANNER
 		user.show_message("<span class='notice'>Key: Suffocation/Toxin/Burns/Brute</span>", 1)
 		user.show_message("<span class='notice'>Body Temperature: ???</span>", 1)
 		return
-	if (!ishuman(user))
-		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
+	if (!user.IsAdvancedToolUser())
 		return
 	user.visible_message("<span class='notice'>[user] has analyzed [M]'s vitals.</span>","<span class='notice'>You have analyzed [M]'s vitals.</span>")
 
@@ -199,7 +198,7 @@ REAGENT SCANNER
 	desc = "A hand-held environmental scanner which reports current gas levels."
 	icon_state = "atmos"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -214,8 +213,7 @@ REAGENT SCANNER
 
 	if (user.incapacitated())
 		return
-	if (!ishuman(user))
-		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
+	if (!user.IsAdvancedToolUser())
 		return
 
 	analyze_gases(user.loc, user)
@@ -226,7 +224,7 @@ REAGENT SCANNER
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT | OPENCONTAINER
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -254,8 +252,7 @@ REAGENT SCANNER
 /obj/item/device/mass_spectrometer/attack_self(mob/user as mob)
 	if (user.incapacitated())
 		return
-	if (!ishuman(user))
-		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
+	if (!user.IsAdvancedToolUser())
 		return
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
@@ -288,7 +285,7 @@ REAGENT SCANNER
 	desc = "A hand-held reagent scanner which identifies chemical agents."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -305,8 +302,7 @@ REAGENT SCANNER
 		return
 	if (user.incapacitated())
 		return
-	if (!ishuman(user))
-		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
+	if (!user.IsAdvancedToolUser())
 		return
 	if(!istype(O))
 		return
@@ -337,7 +333,7 @@ REAGENT SCANNER
 	icon_state = "adv_spectrometer"
 	item_state = "analyzer"
 	origin_tech = list(TECH_BIO = 1)
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	throwforce = 0
 	throw_speed = 3
@@ -380,7 +376,7 @@ REAGENT SCANNER
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	icon_state = "price_scanner"
 	slot_flags = SLOT_BELT
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 3

@@ -3,7 +3,7 @@
 	desc = "a crude but useful lock and bolt."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "largebinemag"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/lock_data
 
 /obj/item/weapon/material/lock_construct/New()

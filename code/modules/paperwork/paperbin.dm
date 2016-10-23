@@ -5,10 +5,10 @@
 	item_state = "sheet-metal"
 	randpixel = 0
 	throwforce = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 3
 	throw_range = 7
-	layer = OBJ_LAYER - 0.1
+	layer = BELOW_OBJ_LAYER
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
 

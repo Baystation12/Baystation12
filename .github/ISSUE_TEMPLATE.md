@@ -35,7 +35,7 @@
 
 
 
-#### Server revision & Game ID
+#### Client version, Server revision & Game ID
 <!-- Found with the "Show server revision" verb in the OOC tab in game. -->
 
 

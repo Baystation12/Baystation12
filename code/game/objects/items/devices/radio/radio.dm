@@ -44,7 +44,7 @@ var/global/list/default_medbay_channels = list(
 	slot_flags = SLOT_BELT
 	throw_speed = 2
 	throw_range = 9
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1

@@ -218,7 +218,7 @@
 	name = "package wrapper"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "deliveryPaper"
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	var/amount = 25.0
 
 
@@ -235,9 +235,6 @@
 		return
 	if(user in target) //no wrapping closets that you are inside - it's not physically possible
 		return
-
-	user.attack_log += text("\[[time_stamp()]\] <font color='blue'>Has used [src.name] on \ref[target]</font>")
-
 
 	if (istype(target, /obj/item) && !(istype(target, /obj/item/weapon/storage) && !istype(target,/obj/item/weapon/storage/box)))
 		var/obj/item/O = target
@@ -327,7 +324,7 @@
 	icon_state = "dest_tagger"
 	var/currTag = 0
 
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT

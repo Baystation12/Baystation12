@@ -11,10 +11,10 @@
 	item_state = "paper"
 	randpixel = 8
 	throwforce = 0
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	throw_range = 1
 	throw_speed = 1
-	layer = 4
+	layer = ABOVE_OBJ_LAYER
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
 	attack_verb = list("bapped")
@@ -72,7 +72,7 @@
 /obj/item/weapon/paper/proc/show_content(mob/user, forceshow)
 	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
 	if(!forceshow && istype(user,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI
+		var/mob/living/silicon/ai/AI = user
 		can_read = get_dist(src, AI.camera) < 2
 	user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
 	onclose(user, "[name]")

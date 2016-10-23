@@ -92,7 +92,7 @@
 	if(oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
 		var/obj/effect/decal/cleanable/blood/gibs/gib = new /obj/effect/decal/cleanable/blood/gibs(loc)
-		var/datum/weakref/g = weakref(gib)
+		var/weakref/g = weakref(gib)
 		ignorelist += g
 		spawn(600)
 			ignorelist -= g
@@ -109,7 +109,7 @@
 			cleanable_loop:
 				for(var/obj/effect/decal/cleanable/D in view(i, src))
 					for(var/item in ignorelist)
-						var/datum/weakref/wr = item
+						var/weakref/wr = item
 						if(wr.resolve() == D)
 							continue cleanable_loop
 					if(!turf_is_targetable(get_turf(D)))
@@ -313,7 +313,7 @@
 	throwforce = 10.0
 	throw_speed = 2
 	throw_range = 5
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	var/created_name = "Cleanbot"
 
 /obj/item/weapon/bucket_sensor/attackby(var/obj/item/O, var/mob/user)

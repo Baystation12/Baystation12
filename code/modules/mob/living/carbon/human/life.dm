@@ -204,7 +204,7 @@
 		var/rn = rand(0, 200)
 		if(getBrainLoss() >= 5)
 			if(0 <= rn && rn <= 3)
-				custom_pain("Your head feels numb and painful.")
+				custom_pain("Your head feels numb and painful.",10)
 		if(getBrainLoss() >= 15)
 			if(4 <= rn && rn <= 6) if(eye_blurry <= 0)
 				src << "<span class='warning'>It becomes hard to see for some reason.</span>"
@@ -560,16 +560,12 @@
 
 	if(reagents)
 		chem_effects.Cut()
-		analgesic = 0
 
 		if(!isSynthetic())
 
 			if(touching) touching.metabolize()
 			if(ingested) ingested.metabolize()
 			if(bloodstr) bloodstr.metabolize()
-
-			if(CE_PAINKILLER in chem_effects)
-				analgesic = chem_effects[CE_PAINKILLER]
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
@@ -665,7 +661,7 @@
 			Paralyse(3)
 
 		if(hallucination)
-			if(hallucination >= 20)
+			if(hallucination >= 20 && !(species.flags & (NO_POISON|IS_PLANT)) )
 				if(prob(3))
 					fake_attack(src)
 				if(!handling_hal)
@@ -680,11 +676,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-			if(halloss >= species.total_health)
-				src << "<span class='warning'>[species.halloss_message_self]</span>"
-				src.visible_message("<B>[src]</B> [species.halloss_message].")
-				Paralyse(10)
-				setHalLoss(species.total_health-1)
+		if(halloss >= species.total_health)
+			src << "<span class='warning'>[species.halloss_message_self]</span>"
+			src.visible_message("<B>[src]</B> [species.halloss_message].")
+			Paralyse(10)
+			setHalLoss(species.total_health-1)
 
 		if(paralysis || sleeping)
 			blinded = 1
@@ -796,7 +792,7 @@
 			clear_fullscreen("brute")
 
 		if(healths)
-			if (analgesic > 100)
+			if (chem_effects[CE_PAINKILLER] > 100)
 				healths.icon_state = "health_numb"
 			else
 				switch(hal_screwyhud)
@@ -960,8 +956,10 @@
 		shock_stage = max(shock_stage-1, 0)
 		return
 
+	if(stat) return 0
+
 	if(shock_stage == 10)
-		src << "<span class='danger'>[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!</span>"
+		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 40)
 
 	if(shock_stage >= 30)
 		if(shock_stage == 30) emote("me",1,"is having trouble keeping their eyes open.")
@@ -1155,13 +1153,13 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(client)
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		if(viewflags < 0)
 			reset_view(null, 0)
 		else if(viewflags)
-			sight |= viewflags
+			set_sight(sight|viewflags)
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
@@ -1177,9 +1175,7 @@
 	update_equipment_vision()
 	species.handle_vision(src)
 
-/mob/living/carbon/human/update_sight()
+/mob/living/carbon/human/update_living_sight()
 	..()
-	if(stat == DEAD)
-		return
 	if(XRAY in mutations)
-		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)

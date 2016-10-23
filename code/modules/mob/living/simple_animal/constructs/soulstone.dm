@@ -7,7 +7,7 @@
 	icon_state = "soulstone"
 	item_state = "electronic"
 	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'. The shard still flickers with a fraction of the full artefacts power."
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 	var/imprinted = "empty"
@@ -27,10 +27,7 @@
 		user << "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>"
 		return..()
 
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their soul captured with [src.name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to capture the soul of [M.name] ([M.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to capture the soul of [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
+	admin_attack_log(user, M, "Used \the [src] to capture the victim's soul.", "Had their soul captured with \a [src].", "captured the soul, using \a [src], of")
 	transfer_soul("VICTIM", M, user)
 	return
 

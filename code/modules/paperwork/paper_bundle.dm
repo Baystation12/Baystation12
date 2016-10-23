@@ -6,10 +6,10 @@
 	item_state = "paper"
 	randpixel = 8
 	throwforce = 0
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	throw_range = 2
 	throw_speed = 1
-	layer = 4
+	layer = ABOVE_OBJ_LAYER
 	attack_verb = list("bapped")
 	var/page = 1    // current page
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
@@ -204,8 +204,8 @@
 
 	usr << "<span class='notice'>You loosen the bundle.</span>"
 	for(var/obj/O in src)
-		O.loc = usr.loc
-		O.layer = initial(O.layer)
+		O.dropInto(usr.loc)
+		O.reset_plane_and_layer()
 		O.add_fingerprint(usr)
 	usr.drop_from_inventory(src)
 	qdel(src)

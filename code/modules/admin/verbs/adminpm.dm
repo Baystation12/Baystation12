@@ -63,10 +63,7 @@
 		//mod PMs are maroon
 		//PMs sent from admins and mods display their rank
 		if(holder)
-			if(!C.holder && holder && holder.fakekey)
-				recieve_pm_type = "Admin"
-			else
-				recieve_pm_type = holder.rank
+			recieve_pm_type = holder.rank
 
 	else if(!C.holder)
 		src << "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>"
@@ -133,10 +130,10 @@
 		rank = holder.rank
 	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	send2adminirc("[rank]PM to [sender] from [key_name(src)]: [html_decode(msg)]")
-	admin_pm_repository.store_pm(src, sender, msg)
+	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
 	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>"
-	
+
 	for(var/client/X in admins)
 		if(X == src)
 			continue

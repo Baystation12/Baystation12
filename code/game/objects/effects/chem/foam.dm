@@ -8,7 +8,7 @@
 	opacity = 0
 	anchored = 1
 	density = 0
-	layer = OBJ_LAYER + 0.9
+	layer = ABOVE_OBJ_LAYER
 	mouse_opacity = 0
 	animate_movement = 0
 	var/amount = 3
@@ -108,7 +108,7 @@
 			F.amount += amount
 			return
 
-		F = PoolOrNew(/obj/effect/effect/foam, list(location, metal))
+		F = new /obj/effect/effect/foam(location, metal)
 		F.amount = amount
 
 		if(!metal) // don't carry other chemicals if a metal foam

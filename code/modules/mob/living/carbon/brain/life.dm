@@ -71,14 +71,10 @@
 
 /mob/living/carbon/brain/handle_chemicals_in_body()
 	chem_effects.Cut()
-	analgesic = 0
 
 	if(touching) touching.metabolize()
 	if(ingested) ingested.metabolize()
 	if(bloodstr) bloodstr.metabolize()
-
-	if(CE_PAINKILLER in chem_effects)
-		analgesic = chem_effects[CE_PAINKILLER]
 
 	confused = max(0, confused - 1)
 	// decrement dizziness counter, clamped to 0
@@ -160,19 +156,7 @@
 	return 1
 
 /mob/living/carbon/brain/handle_regular_hud_updates()
-	if (stat == 2 || (XRAY in src.mutations))
-		sight |= SEE_TURFS
-		sight |= SEE_MOBS
-		sight |= SEE_OBJS
-		see_in_dark = 8
-		see_invisible = SEE_INVISIBLE_LEVEL_TWO
-	else if (stat != 2)
-		sight &= ~SEE_TURFS
-		sight &= ~SEE_MOBS
-		sight &= ~SEE_OBJS
-		see_in_dark = 2
-		see_invisible = SEE_INVISIBLE_LIVING
-
+	update_sight()
 	if (healths)
 		if (stat != 2)
 			switch(health)
@@ -192,22 +176,6 @@
 					healths.icon_state = "health6"
 		else
 			healths.icon_state = "health7"
-
-		if (stat == 2 || (XRAY in src.mutations))
-			sight |= SEE_TURFS
-			sight |= SEE_MOBS
-			sight |= SEE_OBJS
-			see_in_dark = 8
-			see_invisible = SEE_INVISIBLE_LEVEL_TWO
-		else if (stat != 2)
-			sight &= ~SEE_TURFS
-			sight &= ~SEE_MOBS
-			sight &= ~SEE_OBJS
-			see_in_dark = 2
-			see_invisible = SEE_INVISIBLE_LIVING
-	if (client)
-		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
-
 
 	if(stat != DEAD)
 		if(blinded)

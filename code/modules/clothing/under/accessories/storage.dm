@@ -4,9 +4,9 @@
 	icon_state = "webbing"
 	slot = "utility"
 	var/slots = 3
-	var/max_w_class = 2 //pocket sized
+	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
 	var/obj/item/weapon/storage/internal/pockets/hold
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/clothing/accessory/storage/New()
 	..()
@@ -76,7 +76,7 @@
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
 	icon_state = "unathiharness2"
 	slots = 2
-	max_w_class = 3 //for knives
+	max_w_class = ITEM_SIZE_NORMAL //for knives
 
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
@@ -95,7 +95,7 @@
 	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
 	icon_state = "bandolier"
 	slots = 10
-	max_w_class = 3
+	max_w_class = ITEM_SIZE_NORMAL
 
 /obj/item/clothing/accessory/storage/bandolier/New()
 	..()

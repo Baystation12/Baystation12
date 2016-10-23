@@ -66,7 +66,7 @@
 
 /atom/proc/set_opacity(new_opacity)
 	if(opacity != new_opacity)
-		opacity = new_opacity
+		opacity = !!new_opacity
 		var/turf/T = loc
 		if(istype(T))
 			T.reconsider_lights()

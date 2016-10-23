@@ -4,7 +4,7 @@
 	icon_state = "flash"
 	item_state = "flashtool"
 	throwforce = 5
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT
@@ -34,10 +34,7 @@
 //attack_as_weapon
 /obj/item/device/flash/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(!user || !M)	return	//sanity
-
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been flashed (attempt) with [src.name]  by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to flash [M.name] ([M.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) Used the [src.name] to flash [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
 
 	if(!clown_check(user))	return
 	if(broken)
@@ -90,7 +87,8 @@
 	if(isrobot(user))
 		spawn(0)
 			var/atom/movable/overlay/animation = new(user.loc)
-			animation.layer = user.layer + 1
+			animation.plane = user.plane
+			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.master = user
@@ -143,7 +141,8 @@
 	if(user && isrobot(user))
 		spawn(0)
 			var/atom/movable/overlay/animation = new(user.loc)
-			animation.layer = user.layer + 1
+			animation.plane = user.plane
+			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.master = user

@@ -80,7 +80,7 @@
 
 	time_last_drone = world.time
 	if(player.mob && player.mob.mind) player.mob.mind.reset()
-	var/mob/living/silicon/robot/drone/new_drone = PoolOrNew(drone_type, get_turf(src))
+	var/mob/living/silicon/robot/drone/new_drone = new drone_type(get_turf(src))
 	new_drone.transfer_personality(player)
 
 	drone_progress = 0

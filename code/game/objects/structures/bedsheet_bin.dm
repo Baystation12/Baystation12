@@ -12,20 +12,12 @@ LINEN BINS
 	item_state = "bedsheet"
 	randpixel = 0
 	slot_flags = SLOT_BACK
-	layer = 4.0
+	plane = ABOVE_OBJ_PLANE
+	layer = BASE_ABOVE_OBJ_LAYER
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
-	w_class = 2.0
-
-/obj/item/weapon/bedsheet/attack_self(mob/user as mob)
-	user.drop_item()
-	if(layer == initial(layer))
-		layer = MOB_LAYER + 0.1
-	else
-		layer = initial(layer)
-	add_fingerprint(user)
-	return
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
@@ -140,7 +132,7 @@ LINEN BINS
 		sheets.Add(I)
 		amount++
 		user << "<span class='notice'>You put [I] in [src].</span>"
-	else if(amount && !hidden && I.w_class < BULKY_ITEM)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
+	else if(amount && !hidden && I.w_class < ITEM_SIZE_HUGE)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
 		user.drop_item()
 		I.loc = src
 		hidden = I

@@ -310,7 +310,7 @@
 	desc = "Hand-held device which allows rapid deployment and removal of inflatables."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "inf_deployer"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 
 	var/stored_walls = 5
 	var/stored_doors = 2
@@ -319,7 +319,7 @@
 	var/mode = 0 // 0 - Walls   1 - Doors
 
 /obj/item/weapon/inflatable_dispenser/robot
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	stored_walls = 10
 	stored_doors = 5
 	max_walls = 10

@@ -4,7 +4,7 @@
 	icon_state = "door_as_0"
 	anchored = 0
 	density = 1
-	w_class = 8
+	w_class = ITEM_SIZE_NO_CONTAINER
 	var/state = 0
 	var/base_icon_state = ""
 	var/base_name = "Airlock"
@@ -70,6 +70,12 @@
 	base_name = "Virology Airlock"
 	glass_type = "/glass_virology"
 	airlock_type = "/virology"
+
+/obj/structure/door_assembly/door_assembly_sol
+	base_icon_state = "sol"
+	base_name = "Sol Central Government Airlock"
+	glass_type = "/glass_sol"
+	airlock_type = "/sol"
 
 /obj/structure/door_assembly/door_assembly_mai
 	base_icon_state = "mai"

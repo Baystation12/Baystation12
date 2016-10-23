@@ -14,7 +14,7 @@
 	if(!lighting_overlay)
 		var/area/A = loc
 		if(A.lighting_use_dynamic)
-			var/atom/movable/lighting_overlay/O = PoolOrNew(/atom/movable/lighting_overlay, src)
+			var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(src)
 			lighting_overlay = O
 
 	//Make the light sources recalculate us so the lighting overlay updates immediately

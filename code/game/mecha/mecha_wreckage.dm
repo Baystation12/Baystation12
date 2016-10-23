@@ -10,15 +10,14 @@
 	density = 1
 	anchored = 0
 	opacity = 0
+
+	plane = OBJ_PLANE
+	layer = BELOW_OBJ_LAYER
+
 	var/list/welder_salvage = list(/obj/item/stack/material/plasteel,/obj/item/stack/material/steel,/obj/item/stack/rods)
 	var/list/wirecutters_salvage = list(/obj/item/stack/cable_coil)
-	var/list/crowbar_salvage
+	var/list/crowbar_salvage = list()
 	var/salvage_num = 5
-
-	New()
-		..()
-		crowbar_salvage = new
-		return
 
 /obj/effect/decal/mecha_wreckage/ex_act(severity)
 	if(severity < 2)

@@ -2,6 +2,7 @@
 
 /obj/machinery/bot
 	icon = 'icons/obj/aibots.dmi'
+	plane = MOB_PLANE
 	layer = MOB_LAYER
 	light_range = 3
 	use_power = 0
@@ -110,7 +111,7 @@
 /obj/machinery/bot/emp_act(severity)
 	var/was_on = on
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc )
+	var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"

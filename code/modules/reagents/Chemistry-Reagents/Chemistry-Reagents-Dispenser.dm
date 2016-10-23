@@ -55,7 +55,7 @@
 /datum/reagent/carbon
 	name = "Carbon"
 	id = "carbon"
-	description = "A chemical element, the builing block of life."
+	description = "A chemical element, the building block of life."
 	taste_description = "sour chalk"
 	taste_mult = 1.5
 	reagent_state = SOLID

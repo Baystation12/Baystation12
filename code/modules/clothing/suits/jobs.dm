@@ -179,7 +179,9 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 
-
+/obj/item/clothing/suit/storage/toggle/internalaffairs/plain
+	name = "black suit jacket"
+	desc = "A smooth black suit jacket."
 
 //Medical
 /obj/item/clothing/suit/storage/toggle/fr_jacket

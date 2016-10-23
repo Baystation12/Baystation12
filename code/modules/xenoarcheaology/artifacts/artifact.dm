@@ -51,7 +51,9 @@
 /obj/machinery/artifact/Destroy()
 	qdel(my_effect)
 	qdel(secondary_effect)
-	..()
+	my_effect = null
+	secondary_effect = null
+	. = ..()
 
 /obj/machinery/artifact/process()
 	var/turf/L = loc

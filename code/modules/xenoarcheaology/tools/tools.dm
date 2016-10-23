@@ -4,7 +4,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "locator"
 	item_state = "locator"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
 	var/turf/T = get_turf(src)
@@ -15,7 +15,7 @@
 	desc = "A coiled metallic tape used to check dimensions and lengths."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "measuring"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/storage/bag/fossils
 	name = "Fossil Satchel"
@@ -23,10 +23,10 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT | SLOT_POCKET
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 50
 	max_storage_space = 200
-	max_w_class = 3
+	max_w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/weapon/fossil)
 
 /obj/item/weapon/storage/box/samplebags
@@ -46,7 +46,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "flashgun"
 	item_state = "lampgreen"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 
 	var/last_scan_time = 0
@@ -102,7 +102,7 @@
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "crap"
 	item_state = "analyzer"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()
 	var/datum/depth_scan/current

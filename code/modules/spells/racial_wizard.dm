@@ -5,7 +5,7 @@
 	desc = "Legends say that this rock will unlock the true potential of anyone who touches it."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "magic rock"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 1
 	throw_range = 3
 	force = 15

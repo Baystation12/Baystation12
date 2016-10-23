@@ -4,7 +4,7 @@
 	desc = "A generic brand of lipstick."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lipstick"
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	var/colour = "red"
 	var/open = 0
@@ -71,7 +71,7 @@
 /obj/item/weapon/haircomb //sparklysheep's comb
 	name = "purple comb"
 	desc = "A pristine purple comb made from flexible plastic."
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	icon = 'icons/obj/items.dmi'
 	icon_state = "purplecomb"
