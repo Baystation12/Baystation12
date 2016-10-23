@@ -69,7 +69,7 @@
 
 /datum/sprite_accessory/dicks
 	icon = 'icons/eros/mob/extras/dicks.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_none
 		name = "None"
@@ -204,7 +204,7 @@
 
 /datum/sprite_accessory/vaginas
 	icon = 'icons/eros/mob/extras/vaginas.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	vag_none
 		name = "None"
@@ -262,7 +262,7 @@
 
 /datum/sprite_accessory/breasts
 	icon = 'icons/eros/mob/extras/breasts.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_none
 		name = "None"
