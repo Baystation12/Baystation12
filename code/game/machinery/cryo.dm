@@ -6,8 +6,9 @@
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
-	layer = BELOW_OBJ_LAYER
+	plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	interact_offline = 1
+	layer = ABOVE_HUMAN_LAYER
 
 	var/on = 0
 	use_power = 1
@@ -197,7 +198,6 @@
 	var/image/I
 
 	I = image(icon, "pod[on]_top")
-	I.plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	I.pixel_z = 32
 	overlays += I
 
@@ -205,15 +205,12 @@
 		var/image/pickle = image(occupant.icon, occupant.icon_state)
 		pickle.overlays = occupant.overlays
 		pickle.pixel_z = 18
-		pickle.plane = ABOVE_HUMAN_PLANE
 		overlays += pickle
 
 	I = image(icon, "lid[on]")
-	I.plane = ABOVE_HUMAN_PLANE
 	overlays += I
 
 	I = image(icon, "lid[on]_top")
-	I.plane = ABOVE_HUMAN_PLANE
 	I.pixel_z = 32
 	overlays += I
 
