@@ -860,7 +860,7 @@ proc/sort_atoms_by_layer(var/list/atoms)
 		for(var/i = 1; gap + i <= result.len; i++)
 			var/atom/l = result[i]		//Fucking hate
 			var/atom/r = result[gap+i]	//how lists work here
-			if(l.layer > r.layer)		//no "result[i].layer" for me
+			if(l.plane > r.plane || (l.plane == r.plane && l.layer > r.layer))		//no "result[i].layer" for me
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result

@@ -224,7 +224,7 @@ var/list/unwrappable_lists = list("contents","verbs","overlays","underlays","scr
 	. = 0
 	for(var/element in L)
 		if(!islist(element))
-			if(element == A || (!isnum(element) && L[element]) == A)
+			if(element == A || (!isnum(element) && !(list_name in view_variables_no_assoc) && L[element] == A))
 				testing("GC: '[log_info_line(A)]' referenced by [D ? "'[log_info_line(D)]'" : "global list"], list: [list_name]")
 				. += 1
 		else if(islist(element))
