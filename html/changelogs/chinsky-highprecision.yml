@@ -1,0 +1,6 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added hotkeys for target zone selection. Ctrl+Numpad[number] or just Numpad[number] in hotkey mode. Make sure to have NumLock enabled. Numpad8 is head-eyes-mouth (it cycles through those), 4-5-6 are right arm/hand-chest-left arm/hand (cycles again), 1-2-3 are right leg/foot-groin-left leg/foot(you know the drill)"

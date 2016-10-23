@@ -33,7 +33,7 @@ var/global/photo_count = 0
 	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
-	var/icon/tiny
+	var/image/tiny
 	var/photo_size = 3
 
 /obj/item/weapon/photo/New()
@@ -41,6 +41,21 @@ var/global/photo_count = 0
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
+
+/obj/item/weapon/photo/update_icon()
+	overlays.Cut()
+	var/scale = 8/(photo_size*32)
+	var/image/small_img = image(img.icon)
+	small_img.transform *= scale
+	small_img.pixel_x = -32*(photo_size-1)/2 - 3
+	small_img.pixel_y = -32*(photo_size-1)/2
+	overlays |= small_img
+
+	tiny = image(img.icon)
+	tiny.transform *= 0.5*scale
+	tiny.underlays += image('icons/obj/bureaucracy.dmi',"photo")
+	tiny.pixel_x = -32*(photo_size-1)/2 - 3
+	tiny.pixel_y = -32*(photo_size-1)/2 + 3
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen))
@@ -236,22 +251,11 @@ var/global/photo_count = 0
 	var/z_c	= target.z
 	var/icon/photoimage = generate_image(x_c, y_c, z_c, size, CAPTURE_MODE_REGULAR, user)
 
-	var/icon/small_img = icon(photoimage)
-	var/icon/tiny_img = icon(photoimage)
-	var/icon/ic = icon('icons/obj/items.dmi',"photo")
-	var/icon/pc = icon('icons/obj/bureaucracy.dmi', "photo")
-	small_img.Scale(8, 8)
-	tiny_img.Scale(4, 4)
-	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
-	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
-
 	var/obj/item/weapon/photo/p = new()
-	p.name = "photo"
-	p.icon = ic
-	p.tiny = pc
 	p.img = photoimage
 	p.desc = mobs
 	p.photo_size = size
+	p.update_icon()
 
 	return p
 
