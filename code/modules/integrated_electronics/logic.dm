@@ -11,11 +11,11 @@
 	if(activator_pin != activators[1])
 		return
 
-	var/datum/integrated_io/O = outputs[1]
-	var/datum/integrated_io/P = activators[2]
+	var/datum/integrated_io/output/O = outputs[1]
+	var/datum/integrated_io/activate/P = activators[2]
 	O.push_data()
 	if(O.data)
-		P.push_data()
+		P.activate()
 
 /obj/item/integrated_circuit/logic/binary
 	inputs = list("A","B")
@@ -128,7 +128,7 @@
 
 /obj/item/integrated_circuit/logic/multiplexer/do_work()
 	var/datum/integrated_io/input_selection = inputs[1]
-	var/datum/integrated_io/O = outputs[1]
+	var/datum/integrated_io/output/O = outputs[1]
 	O.data = null
 
 	if(isnum(input_selection.data) && (input_selection.data >= 1 && input_selection.data < inputs.len))

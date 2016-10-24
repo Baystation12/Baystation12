@@ -22,10 +22,32 @@
 /obj/item/integrated_circuit/input/button/OnTopic(href_list, user)
 	if(href_list["press"])
 		to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
-		var/datum/integrated_io/A = activators[1]
-		if(A.linked.len)
-			for(var/datum/integrated_io/activate/target in A.linked)
-				target.holder.check_then_do_work()
+		var/datum/integrated_io/activate/A = activators[1]
+		A.activate()
+		return IC_TOPIC_REFRESH
+
+/obj/item/integrated_circuit/input/toggle_button
+	name = "toggle button"
+	desc = "It toggles on, off, on, off..."
+	icon_state = "toggle_button"
+	complexity = 1
+	inputs = list()
+	outputs = list("on" = 0)
+	activators = list("on toggle")
+
+/obj/item/integrated_circuit/input/toggle_button/emp_act()
+	return // This is a mainly physical thing, not affected by electricity
+
+/obj/item/integrated_circuit/input/toggle_button/get_topic_data(mob/user)
+	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")
+
+/obj/item/integrated_circuit/input/toggle_button/OnTopic(href_list, user)
+	if(href_list["toggle"])
+		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
+		to_chat(user, "<span class='notice'>You toggle the button labeled '[src.name]' [get_pin_data(IC_OUTPUT, 1) ? "on" : "off"].</span>")
+
+		var/datum/integrated_io/activate/A = activators[1]
+		A.activate()
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/numberpad
@@ -44,11 +66,11 @@
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
 		if(isnum(new_input) && CanInteract(user, physical_state))
-			var/datum/integrated_io/O = outputs[1]
+			var/datum/integrated_io/output/O = outputs[1]
 			O.data = new_input
 			O.push_data()
-			var/datum/integrated_io/A = activators[1]
-			A.push_data()
+			var/datum/integrated_io/activate/A = activators[1]
+			A.activate()
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/textpad
@@ -61,17 +83,17 @@
 	activators = list("on entered")
 
 /obj/item/integrated_circuit/input/textpad/get_topic_data(mob/user)
-	return list("Enter Words" = "enter_number=1")
+	return list("Enter Words" = "enter_words=1")
 
 /obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
 		if(istext(new_input) && CanInteract(user, physical_state))
-			var/datum/integrated_io/O = outputs[1]
+			var/datum/integrated_io/output/O = outputs[1]
 			O.data = new_input
 			O.push_data()
-			var/datum/integrated_io/A = activators[1]
-			A.push_data()
+			var/datum/integrated_io/activate/A = activators[1]
+			A.activate()
 			return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/med_scanner
@@ -97,9 +119,7 @@
 
 		total.data = total_health
 		missing.data = missing_health
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.push_data()
+	push_data()
 
 /obj/item/integrated_circuit/input/adv_med_scanner
 	name = "integrated advanced medical analyser"
@@ -156,7 +176,7 @@
 	activators = list("locate")
 
 /obj/item/integrated_circuit/input/local_locator/do_work()
-	var/datum/integrated_io/O = outputs[1]
+	var/datum/integrated_io/output/O = outputs[1]
 	O.data = null
 
 	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
@@ -179,7 +199,7 @@
 
 /obj/item/integrated_circuit/input/adjacent_locator/do_work()
 	var/datum/integrated_io/I = inputs[1]
-	var/datum/integrated_io/O = outputs[1]
+	var/datum/integrated_io/output/O = outputs[1]
 	O.data = null
 
 	if(!isweakref(I.data))
@@ -273,8 +293,8 @@
 	if(signal.source == src) // Don't trigger ourselves.
 		return 0
 
-	var/datum/integrated_io/A = activators[2]
-	A.push_data()
+	var/datum/integrated_io/activate/A = activators[2]
+	A.activate()
 
 	for(var/mob/O in hearers(1, get_turf(src)))
 		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
@@ -303,12 +323,12 @@
 
 /obj/item/integrated_circuit/input/teleporter_locator/OnTopic(href_list, user)
 	if(href_list["tport"])
-		var/datum/integrated_io/O = outputs[1]
+		var/datum/integrated_io/output/O = outputs[1]
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		O.data = output && weakref(output)
 		O.push_data()
-		var/datum/integrated_io/A = activators[1]
-		A.push_data()
+		var/datum/integrated_io/activate/A = activators[1]
+		A.activate()
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/output/screen
