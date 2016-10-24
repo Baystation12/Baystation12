@@ -111,4 +111,7 @@
 	display_name = "workboots, alt"
 	path = /obj/item/clothing/shoes/workboots/alt
 
+/datum/gear/shoes/winterboots
+	display_name = "winterboots"
+	path = /obj/item/clothing/shoes/winterboots
 //EROS END
