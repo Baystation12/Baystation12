@@ -244,10 +244,13 @@
 	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
 
 /obj/item/clothing/suit/wcoat/red
+	name = "red waistcoat"
 	icon_state = "eros_wcoat_red"
 
 /obj/item/clothing/suit/wcoat/gray
+	name = "gray waistcoat"
 	icon_state = "eros_wcoat_gray"
 
 /obj/item/clothing/suit/wcoat/brown
+	name = "brown waistcoat"
 	icon_state = "eros_wcoat_brown"
