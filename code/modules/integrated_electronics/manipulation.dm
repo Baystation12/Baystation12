@@ -254,7 +254,6 @@
 					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the local north. \
 					A direction value of 0 will open the rift on top of the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
 	icon_state = "bluespace"
-	flags = OPENCONTAINER
 	complexity = 25
 	size = 3
 	cooldown_per_use = 10 SECONDS

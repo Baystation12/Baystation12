@@ -35,6 +35,18 @@
 	applied_shell = null
 	. = ..()
 
+/obj/item/device/electronic_assembly/GetAccess()
+	. = list()
+	for(var/obj/item/integrated_circuit/part in contents)
+		. |= part.GetAccess()
+
+/obj/item/device/electronic_assembly/GetIdCard()
+	. = list()
+	for(var/obj/item/integrated_circuit/part in contents)
+		var/id_card = part.GetIdCard()
+		if(id_card)
+			return id_card
+
 /obj/item/device/electronic_assembly/verb/rotate()
 	set category = "Object"
 	set name = "Rotate Assembly"
