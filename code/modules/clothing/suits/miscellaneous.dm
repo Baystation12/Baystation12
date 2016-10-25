@@ -92,9 +92,9 @@
 
 
 /obj/item/clothing/suit/wcoat
-	name = "waistcoat"
+	name = "black waistcoat"
 	desc = "For some classy, murderous fun."
-	icon_state = "vest"
+	icon_state = "wcoat"
 	item_state = "wcoat"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO

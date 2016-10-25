@@ -107,13 +107,16 @@
 	path = /obj/item/clothing/suit/suspenders
 
 /datum/gear/suit/wcoat
-	display_name = "waistcoat"
+	display_name = "black waistcoat"
 	path = /obj/item/clothing/suit/wcoat
 	cost = 1
 
 
 //EROS START
 
+/datum/gear/suit/poncho
+	display_name = "poncho selection"
+	description = "A simple, comfortable cloak without sleeves."
 
 /datum/gear/suit/poncho/New()
 	..()
@@ -228,5 +231,20 @@
 /datum/gear/suit/leather_jacket_alt
 	display_name = "leather jacket 2, black"
 	path = /obj/item/clothing/suit/storage/leather_jacket/alt
+
+/datum/gear/suit/wcoat/red
+	display_name = "red waistcoat"
+	path = /obj/item/clothing/suit/wcoat/red
+	cost = 1
+
+/datum/gear/suit/wcoat/gray
+	display_name = "gray waistcoat"
+	path = /obj/item/clothing/suit/wcoat/gray
+	cost = 1
+
+/datum/gear/suit/wcoat/brown
+	display_name = "brown waistcoat"
+	path = /obj/item/clothing/suit/wcoat/brown
+	cost = 1
 
 //EROS FINISH
