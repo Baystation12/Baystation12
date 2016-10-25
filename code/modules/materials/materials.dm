@@ -74,6 +74,7 @@ var/list/name_to_material
 
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
+	var/reflectivity = 0         // How reflective to light is the material?  Currently used for laser defense.
 	var/shard_icon                        // Related to above.
 	var/shard_can_repair = 1              // Can shards be turned into sheets with a welder?
 	var/list/recipes                      // Holder for all recipes usable with a sheet of this material.
@@ -243,6 +244,7 @@ var/list/name_to_material
 	cut_delay = 60
 	icon_colour = "#00FFE1"
 	opacity = 0.4
+	reflectivity = 0.6
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 100
@@ -381,6 +383,22 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
 	hitsound = 'sound/effects/blobattack.ogg'
+
+// Very rare alloy that is reflective, should be used sparingly.
+/material/durasteel
+	name = "durasteel"
+	stack_type = /obj/item/stack/material/durasteel
+	integrity = 600
+	melting_point = 7000
+	icon_base = "metal"
+	icon_reinf = "reinf_metal"
+	icon_colour = "#6EA7BE"
+	explosion_resistance = 75
+	hardness = 100
+	weight = 28
+	reflectivity = 0.7 // Not a perfect mirror, but close.
+	stack_origin_tech = list(TECH_MATERIAL = 8)
+	composite_material = list("plasteel" = SHEET_MATERIAL_AMOUNT, "diamond" = SHEET_MATERIAL_AMOUNT) //shrug
 
 /material/plasteel/titanium
 	name = "titanium"
