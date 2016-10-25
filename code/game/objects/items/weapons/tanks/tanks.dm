@@ -54,13 +54,16 @@ var/list/global/tank_gauge_cache = list()
 	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
-/obj/item/weapon/tank/New()
-	var/obj/item/device/tankassemblyproxy/proxy = new /obj/item/device/tankassemblyproxy()
-	proxy.loc = src
+/obj/item/weapon/tank/proc/init_proxy()
+	var/obj/item/device/tankassemblyproxy/proxy = new /obj/item/device/tankassemblyproxy(src)
+	proxy.tank = src
 	src.proxyassembly = proxy
-	src.proxyassembly.tank = src
+
+
+/obj/item/weapon/tank/New()
 	..()
 
+	src.init_proxy()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
@@ -73,8 +76,8 @@ var/list/global/tank_gauge_cache = list()
 		qdel(air_contents)
 
 	processing_objects.Remove(src)
-	src.proxyassembly = null
 	qdel(src.proxyassembly)
+	src.proxyassembly = null
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
@@ -125,7 +128,8 @@ var/list/global/tank_gauge_cache = list()
 		src.add_fingerprint(user)
 
 	if(istype(W, /obj/item/stack/cable_coil))
-		if(W:use(1))
+		var/obj/item/stack/cable_coil/C = W
+		if(C.use(1))
 			wired = 1
 			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
 			src.add_bomb_overlay()
@@ -210,6 +214,7 @@ var/list/global/tank_gauge_cache = list()
 
 
 /obj/item/weapon/tank/attack_self(mob/user as mob)
+	add_fingerprint(user)
 	if (!(src.air_contents))
 		return
 	ui_interact(user)
@@ -401,34 +406,6 @@ var/list/global/tank_gauge_cache = list()
 	var/pressure = air_contents.return_pressure()
 
 
-	if(pressure > TANK_LEAK_PRESSURE || air_contents.temperature - T0C > failure_temp)
-
-		if((integrity <= 19 || src.leaking) && !valve_welded)
-			var/turf/simulated/T = get_turf(src)
-			if(!T)
-				return
-			var/datum/gas_mixture/environment = loc.return_air()
-			var/env_pressure = environment.return_pressure()
-			var/tank_pressure = src.air_contents.return_pressure()
-
-			var/release_ratio = Clamp(0.002, sqrt(max(tank_pressure-env_pressure,0)/tank_pressure),1)
-			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
-			//dynamic air release based on ambient pressure
-
-			T.assume_air(leaked_gas)
-			if(!leaking)
-				visible_message("\icon[src] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
-				playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
-				leaking = 1
-				#ifdef FIREDBG
-				log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
-				#endif
-
-
-		else
-			integrity-= 2
-
-
 	if(pressure > TANK_FRAGMENT_PRESSURE)
 		if(integrity <= 7)
 			if(!istype(src.loc,/obj/item/device/transfer_valve))
@@ -483,7 +460,7 @@ var/list/global/tank_gauge_cache = list()
 			integrity -=7
 
 
-	if(pressure > TANK_RUPTURE_PRESSURE)
+	else if(pressure > TANK_RUPTURE_PRESSURE)
 		#ifdef FIREDBG
 		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
 		#endif
@@ -515,12 +492,42 @@ var/list/global/tank_gauge_cache = list()
 		else
 			integrity-= 5
 
-	if(integrity < maxintegrity)
-		integrity++
-		if(leaking)
+
+	else if(pressure > TANK_LEAK_PRESSURE || air_contents.temperature - T0C > failure_temp)
+
+		if((integrity <= 19 || src.leaking) && !valve_welded)
+			var/turf/simulated/T = get_turf(src)
+			if(!T)
+				return
+			var/datum/gas_mixture/environment = loc.return_air()
+			var/env_pressure = environment.return_pressure()
+			var/tank_pressure = src.air_contents.return_pressure()
+
+			var/release_ratio = Clamp(0.002, sqrt(max(tank_pressure-env_pressure,0)/tank_pressure),1)
+			var/datum/gas_mixture/leaked_gas = air_contents.remove_ratio(release_ratio)
+			//dynamic air release based on ambient pressure
+
+			T.assume_air(leaked_gas)
+			if(!leaking)
+				visible_message("\icon[src] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
+				playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+				leaking = 1
+				#ifdef FIREDBG
+				log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
+				#endif
+
+
+		else
+			integrity-= 2
+
+
+	else
+		if(integrity < maxintegrity)
 			integrity++
-		if(integrity == maxintegrity)
-			leaking = 0
+			if(leaking)
+				integrity++
+			if(integrity == maxintegrity)
+				leaking = 0
 
 /////////////////////////////////
 ///Prewelded tanks
@@ -579,9 +586,6 @@ var/list/global/tank_gauge_cache = list()
 	var/obj/item/weapon/tank/tank = null
 	var/obj/item/device/assembly_holder/assembly = null
 
-/obj/item/device/tankassemblyproxy/New()
-	..()
-
 
 /obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
@@ -602,7 +606,7 @@ var/list/global/tank_gauge_cache = list()
 
 	src.proxyassembly.assembly = S	//Tell the bomb about its assembly part
 	S.master = src.proxyassembly		//Tell the assembly about its new owner
-	S.loc = src			//Move the assembly
+	S.forceMove(src)			//Move the assembly
 
 	src.update_icon()
 
@@ -640,14 +644,6 @@ var/list/global/tank_gauge_cache = list()
 	else
 		tank.update_icon()
 		tank.overlays -= "bomb_assembly"
-
-////////Not sure what do with this or not.
-/*
-/obj/item/device/tank/attack_self(mob/user as mob) //pressing the bomb accesses its assembly
-	bombassembly.attack_self(user, 1)
-	add_fingerprint(user)
-	return
-*/
 
 /obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
 	if(src.assembly)

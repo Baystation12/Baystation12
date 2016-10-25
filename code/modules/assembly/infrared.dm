@@ -74,10 +74,12 @@
 	onclose(user, "infra")
 
 /obj/item/device/assembly/infra/Topic(href, href_list, state = physical_state)
-	if(..())
-		usr << browse(null, "window=infra")
-		onclose(usr, "infra")
-		return 1
+	..()
+
+	if (!check_Topic())
+		usr << browse(null, "window=prox")
+		onclose(usr, "prox")
+		return
 
 	if(href_list["state"])
 		set_active(!on)

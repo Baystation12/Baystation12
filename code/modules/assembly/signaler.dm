@@ -70,9 +70,9 @@
 
 
 	Topic(href, href_list)
-		if(..()) return 1
+		..()
 
-		if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
+		if (!check_Topic())
 			usr << browse(null, "window=radio")
 			onclose(usr, "radio")
 			return
