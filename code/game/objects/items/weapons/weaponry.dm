@@ -199,7 +199,7 @@
 
 /obj/effect/energy_net/proc/escape_net(mob/user as mob)
 	visible_message(
-		"<span class='danger'>[usr] attempts to free themselves from \the [src]!</span>",
+		"<span class='danger'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
 		)
 	if(do_after(usr, rand(min_free_time, max_free_time), incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
