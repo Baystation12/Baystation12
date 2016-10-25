@@ -210,6 +210,7 @@
 
 /datum/gear/uniform/cheongsam
 	display_name = "cheongsam selection"
+	description = "Traditional silk garment embroidered with floral designs."
 
 /datum/gear/uniform/cheongsam/New()
 	..()
