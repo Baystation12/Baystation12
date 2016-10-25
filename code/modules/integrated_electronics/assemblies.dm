@@ -171,8 +171,8 @@
 	. = ..(user, 2 * w_class) // Larger assemblies are easier to see from a distance
 	to_chat(user, "\The [src] is currently facing [dir2text(dir)].")
 	if(.)
-		for(var/obj/item/integrated_circuit/output/O in contents)
-			O.external_examine(user, opened)
+		for(var/obj/item/integrated_circuit/IO in contents)
+			IO.external_examine(user, opened)
 
 /obj/item/device/electronic_assembly/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/integrated_circuit))

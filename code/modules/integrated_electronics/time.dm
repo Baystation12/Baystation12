@@ -17,9 +17,9 @@
 /obj/item/integrated_circuit/time/delay/do_work()
 	set waitfor = 0  // Don't sleep in a proc that is called by a processor without this set, otherwise it'll delay the entire thing
 
-	var/datum/integrated_io/out_pulse = activators[2]
+	var/datum/integrated_io/activate/out_pulse = activators[2]
 	sleep(delay)
-	out_pulse.push_data()
+	out_pulse.activate()
 
 /obj/item/integrated_circuit/time/delay/five_sec
 	name = "five-sec delay circuit"
@@ -99,8 +99,8 @@
 			ticks_completed -= ticks_to_pulse
 		else
 			ticks_completed = 0
-		var/datum/integrated_io/pulser = activators[1]
-		pulser.push_data()
+		var/datum/integrated_io/activate/pulser = activators[1]
+		pulser.activate()
 
 /obj/item/integrated_circuit/time/ticker/fast
 	name = "fast ticker"

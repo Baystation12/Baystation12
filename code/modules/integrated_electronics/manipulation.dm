@@ -126,9 +126,9 @@
 	create_reagents(60)
 
 /obj/item/integrated_circuit/manipulation/reagent_storage/on_reagent_change()
-	var/datum/integrated_io/A = outputs[1]
-	A.data = reagents.total_volume
-	A.push_data()
+	var/datum/integrated_io/output/O = outputs[1]
+	O.data = reagents.total_volume
+	O.push_data()
 
 /obj/item/integrated_circuit/manipulation/reagent_storage/cryo
 	name = "cryo reagent storage"
