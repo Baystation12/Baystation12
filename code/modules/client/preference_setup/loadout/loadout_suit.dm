@@ -107,7 +107,7 @@
 	path = /obj/item/clothing/suit/suspenders
 
 /datum/gear/suit/wcoat
-	display_name = "black waistcoat"
+	display_name = "waistcoat, black "
 	path = /obj/item/clothing/suit/wcoat
 	cost = 1
 
@@ -233,17 +233,17 @@
 	path = /obj/item/clothing/suit/storage/leather_jacket/alt
 
 /datum/gear/suit/wcoat/red
-	display_name = "red waistcoat"
+	display_name = "waistcoat, red"
 	path = /obj/item/clothing/suit/wcoat/red
 	cost = 1
 
 /datum/gear/suit/wcoat/gray
-	display_name = "gray waistcoat"
+	display_name = "waistcoat, gray"
 	path = /obj/item/clothing/suit/wcoat/gray
 	cost = 1
 
 /datum/gear/suit/wcoat/brown
-	display_name = "brown waistcoat"
+	display_name = "waistcoat, brown"
 	path = /obj/item/clothing/suit/wcoat/brown
 	cost = 1
 
