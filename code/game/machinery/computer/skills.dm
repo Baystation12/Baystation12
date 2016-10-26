@@ -9,9 +9,13 @@
 	light_color = "#00b000"
 	req_one_access = list(access_heads)
 	circuit = /obj/item/weapon/circuitboard/skills
+	
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
-	var/rank = null
+	var/write_access_all = list(access_change_ids)  // access levels required to 
+	var/write_access_any = list()                   // make changes to rank or job
+	var/has_write_access = FALSE  // Is the authenticated user able to change jobs and ranks?
+	
 	var/screen = null
 	var/datum/data/record/active1 = null
 	var/a_id = null
@@ -42,7 +46,7 @@
 	ui_interact(user)
 
 /obj/machinery/computer/skills/ui_interact(mob/user as mob)
-	if (src.z > 6)
+	if (!(src.z in using_map.contact_levels))
 		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!")
 		return
 	var/dat
@@ -196,25 +200,24 @@ What a mess.*/
 				authenticated = null
 				screen = null
 				active1 = null
+				has_write_access = FALSE
 
 			if("Log In")
-				if (istype(usr, /mob/living/silicon/ai))
-					src.active1 = null
-					src.authenticated = usr.name
-					src.rank = "AI"
-					src.screen = 1
-				else if (istype(usr, /mob/living/silicon/robot))
-					src.active1 = null
-					src.authenticated = usr.name
-					var/mob/living/silicon/robot/R = usr
-					src.rank = R.braintype
-					src.screen = 1
-				else if (istype(scan, /obj/item/weapon/card/id))
+				var/list/users_access 
+				
+				if (issilicon(usr) && allowed(usr))
+					authenticated = usr.name
+					users_access = usr.GetAccess()
+				else if (istype(scan, /obj/item/weapon/card/id) && check_access(scan))
+					authenticated = scan.registered_name
+					users_access = scan.GetAccess()
+				
+				if(authenticated)
 					active1 = null
-					if(check_access(scan))
-						authenticated = scan.registered_name
-						rank = scan.assignment
-						screen = 1
+					screen = 1
+					has_write_access = has_access(write_access_all, write_access_any, users_access)
+					
+				
 //RECORD FUNCTIONS
 			if("Search Records")
 				var/t1 = input("Search String: (Partial Name or ID or Fingerprints or Rank)", "Secure. records", null, null)  as text
@@ -346,16 +349,14 @@ What a mess.*/
 								return
 							active1.fields["age"] = t1
 					if("rank")
-						var/list/L = list( "Head of Personnel", "Captain", "AI" )
-						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
-						if ((istype(active1, /datum/data/record) && L.Find(rank)))
+						if (has_write_access)
 							temp = "<h5>Rank:</h5>"
 							temp += "<ul>"
 							for(var/rank in joblist)
 								temp += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
 							temp += "</ul>"
 						else
-							alert(usr, "You do not have the required rank to do this!")
+							alert(usr, "You do not have the required access to do this!")
 					if("species")
 						if (istype(active1, /datum/data/record))
 							var/t1 = sanitize(input("Please enter race:", "General records", active1.fields["species"], null)  as message)
