@@ -47,6 +47,13 @@
 		name = "Emo Fringe"
 		icon_state = "hair_emofringe"
 
+	nia
+		name = "Nia"
+		icon_state = "hair_nia"
+
+	eighties
+		name = "80's"
+		icon_state = "hair_80s"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
