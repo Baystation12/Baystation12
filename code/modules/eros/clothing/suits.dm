@@ -310,3 +310,33 @@
 	icon_open = "eros_pink_labcoat_open"
 	icon_closed = "eros_pink_labcoat"
 	item_state_slots = list(slot_r_hand_str = "eros_pink_labcoat", slot_l_hand_str = "eros_pink_labcoat")
+
+/obj/item/clothing/suit/jacket/puffer
+	name = "puffer jacket"
+	desc = "A thick jacket with a rubbery, water-resistant shell."
+	icon_state = "eros_pufferjacket"
+	item_state_slots = list(slot_r_hand_str = "chainmail", slot_l_hand_str = "chainmail")
+
+/obj/item/clothing/suit/jacket/puffer/vest
+	name = "puffer vest"
+	desc = "A thick vest with a rubbery, water-resistant shell."
+	icon_state = "eros_puffervest"
+	item_state_slots = list(slot_r_hand_str = "chainmail", slot_l_hand_str = "chainmail")
+
+/obj/item/clothing/suit/storage/miljacket
+	name = "military jacket"
+	desc = "A canvas jacket styled after classical American military garb. Feels sturdy, yet comfortable."
+	icon_state = "eros_militaryjacket_nobadge"
+	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
+
+/obj/item/clothing/suit/storage/miljacket/alt
+	name = "military jacket"
+	desc = "A canvas jacket styled after classical American military garb. Feels sturdy, yet comfortable."
+	icon_state = "eros_militaryjacket_badge"
+	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
+
+/obj/item/clothing/suit/storage/miljacket/green
+	name = "military jacket"
+	desc = "A dark green canvas jacket. Feels sturdy, yet comfortable."
+	icon_state = "eros_militaryjacket_green"
+	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
