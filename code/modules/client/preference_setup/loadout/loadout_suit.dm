@@ -247,4 +247,23 @@
 	path = /obj/item/clothing/suit/wcoat/brown
 	cost = 1
 
+/datum/gear/suit/jacket/puffer
+	display_name = "puffer jacket"
+	path = /obj/item/clothing/suit/jacket/puffer
+
+/datum/gear/suit/jacket/puffer/vest
+	display_name = "puffer vest"
+	path = /obj/item/clothing/suit/jacket/puffer/vest
+
+/datum/gear/suit/storage/miljacket
+	display_name = "military jacket"
+	path = /obj/item/clothing/suit/storage/miljacket
+
+/datum/gear/suit/storage/miljacket/alt
+	display_name = "military jacket, alternate"
+	path = /obj/item/clothing/suit/storage/miljacket/alt
+
+/datum/gear/suit/storage/miljacket/green
+	display_name = "military jacket, green"
+	path = /obj/item/clothing/suit/storage/miljacket/green
 //EROS FINISH

@@ -125,7 +125,6 @@
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
-	cost = 2
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
@@ -138,3 +137,16 @@
 	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/red
 	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
+
+/datum/gear/accessory/collar
+	display_name = "collar selection"
+	description = "A collar for your little pets... or the big ones."
+	path = /obj/item/clothing/accessory/collar
+
+/datum/gear/accessory/collar/New()
+	..()
+	var/list/collars = list()
+	for(var/collar in typesof(/obj/item/clothing/accessory/collar))
+		var/obj/item/clothing/accessory/collar/collar_type = collar
+		collars[initial(collar_type.name)] = collar_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(collars))

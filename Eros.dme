@@ -1229,6 +1229,7 @@
 #include "code\modules\economy\Events.dm"
 #include "code\modules\economy\Events_Mundane.dm"
 #include "code\modules\economy\TradeDestinations.dm"
+#include "code\modules\eros\clothing\accessory.dm"
 #include "code\modules\eros\clothing\clothing.dm"
 #include "code\modules\eros\clothing\head.dm"
 #include "code\modules\eros\clothing\hooded.dm"
