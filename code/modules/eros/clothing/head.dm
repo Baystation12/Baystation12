@@ -74,3 +74,30 @@
 	desc = "It's a peaked cap in a tasteful black color."
 	icon_state = "blacksoft"
 	item_state_slots = list(slot_r_hand_str = "blacksoft", slot_l_hand_str = "blacksoft")
+
+/obj/item/clothing/head/santa
+	name = "santa hat"
+	desc = "It's a festive christmas hat, in red!"
+	icon_state = "eros_santahatnorm"
+	item_state_slots = list(slot_r_hand_str = "santahat", slot_l_hand_str = "santahat")
+
+/obj/item/clothing/head/santa/green
+	name = "green santa hat"
+	desc = "It's a festive christmas hat, in green!"
+	icon_state = "eros_santahatgreen"
+	item_state_slots = list(slot_r_hand_str = "santahatgreen", slot_l_hand_str = "santahatgreen")
+
+/obj/item/clothing/head/beanie
+	name = "beanie"
+	desc = "A head-hugging brimless winter cap. This one is tight."
+	icon_state = "eros_beanie"
+
+/obj/item/clothing/head/beanie_loose
+	name = "loose beanie"
+	desc = "A head-hugging brimless winter cap. This one is loose."
+	icon_state = "eros_beanie_hang"
+
+/obj/item/clothing/head/sombrero
+	name = "sombrero"
+	desc = "A wide-brimmed hat popularly worn in Mexico."
+	icon_state = "eros_sombrero"

@@ -27,6 +27,12 @@
 /obj/item/clothing/head/hairflower/yellow
 	icon_state = "hairflower_yellow"
 
+/obj/item/clothing/head/hairflower/violet
+	icon_state = "hairflower_violet"
+
+/obj/item/clothing/head/hairflower/orange
+	icon_state = "hairflower_orange"
+
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
 	desc = "A powdered wig."
