@@ -114,6 +114,14 @@
 	display_name = "hair flower pin, blue"
 	path = /obj/item/clothing/head/hairflower/blue
 
+/datum/gear/head/hairflower/violet
+	display_name = "hair flower pin, violet"
+	path = /obj/item/clothing/head/hairflower/violet
+
+/datum/gear/head/hairflower/orange
+	display_name = "hair flower pin, orange"
+	path = /obj/item/clothing/head/hairflower/orange
+
 /datum/gear/head/hardhat
 	display_name = "hardhat, yellow"
 	path = /obj/item/clothing/head/hardhat
@@ -259,4 +267,24 @@
 /datum/gear/head/bandana_orange
 	display_name = "bandana, orange"
 	path = /obj/item/clothing/head/orangebandana
+
+/datum/gear/head/santa
+	display_name = "santa hat, red"
+	path = /obj/item/clothing/head/santa
+
+/datum/gear/head/santa/green
+	display_name = "santa hat, green"
+	path = /obj/item/clothing/head/santa/green
+
+/datum/gear/head/beanie
+	display_name = "beanie"
+	path = /obj/item/clothing/head/beanie
+
+/datum/gear/head/beanie_loose
+	display_name = "beanie, loose"
+	path = /obj/item/clothing/head/beanie_loose
+
+/datum/gear/head/sombrero
+	display_name = "sombrero"
+	path = /obj/item/clothing/head/sombrero
 //EROS END
