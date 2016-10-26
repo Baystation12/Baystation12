@@ -254,3 +254,89 @@
 /obj/item/clothing/suit/wcoat/brown
 	name = "brown waistcoat"
 	icon_state = "eros_wcoat_brown"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/red
+	name = "red labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is red."
+	icon_state = "eros_red_labcoat_open"
+	icon_open = "eros_red_labcoat_open"
+	icon_closed = "eros_red_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_red_labcoat", slot_l_hand_str = "eros_red_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/blue
+	name = "blue labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is blue."
+	icon_state = "eros_blue_labcoat_open"
+	icon_open = "eros_blue_labcoat_open"
+	icon_closed = "eros_blue_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_blue_labcoat", slot_l_hand_str = "eros_blue_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/purple
+	name = "purple labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is purple."
+	icon_state = "eros_purple_labcoat_open"
+	icon_open = "eros_purple_labcoat_open"
+	icon_closed = "eros_purple_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_purple_labcoat", slot_l_hand_str = "eros_purple_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/orange
+	name = "orange labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is orange."
+	icon_state = "eros_orange_labcoat_open"
+	icon_open = "eros_orange_labcoat_open"
+	icon_closed = "eros_orange_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_orange_labcoat", slot_l_hand_str = "eros_orange_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/green
+	name = "green labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is green."
+	icon_state = "eros_green_labcoat_open"
+	icon_open = "eros_green_labcoat_open"
+	icon_closed = "eros_green_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_green_labcoat", slot_l_hand_str = "eros_green_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/yellow
+	name = "yellow labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is yellow."
+	icon_state = "eros_yellow_labcoat_open"
+	icon_open = "eros_yellow_labcoat_open"
+	icon_closed = "eros_yellow_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_yellow_labcoat", slot_l_hand_str = "eros_yellow_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/pink
+	name = "pink labcoat"
+	desc = "A suit that protects against minor chemical spills. This one is pink."
+	icon_state = "eros_pink_labcoat_open"
+	icon_open = "eros_pink_labcoat_open"
+	icon_closed = "eros_pink_labcoat"
+	item_state_slots = list(slot_r_hand_str = "eros_pink_labcoat", slot_l_hand_str = "eros_pink_labcoat")
+
+/obj/item/clothing/suit/jacket/puffer
+	name = "puffer jacket"
+	desc = "A thick jacket with a rubbery, water-resistant shell."
+	icon_state = "eros_pufferjacket"
+	item_state_slots = list(slot_r_hand_str = "chainmail", slot_l_hand_str = "chainmail")
+
+/obj/item/clothing/suit/jacket/puffer/vest
+	name = "puffer vest"
+	desc = "A thick vest with a rubbery, water-resistant shell."
+	icon_state = "eros_puffervest"
+	item_state_slots = list(slot_r_hand_str = "chainmail", slot_l_hand_str = "chainmail")
+
+/obj/item/clothing/suit/storage/miljacket
+	name = "military jacket"
+	desc = "A canvas jacket styled after classical American military garb. Feels sturdy, yet comfortable."
+	icon_state = "eros_militaryjacket_nobadge"
+	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
+
+/obj/item/clothing/suit/storage/miljacket/alt
+	name = "military jacket"
+	desc = "A canvas jacket styled after classical American military garb. Feels sturdy, yet comfortable."
+	icon_state = "eros_militaryjacket_badge"
+	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
+
+/obj/item/clothing/suit/storage/miljacket/green
+	name = "military jacket"
+	desc = "A dark green canvas jacket. Feels sturdy, yet comfortable."
+	icon_state = "eros_militaryjacket_green"
+	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
