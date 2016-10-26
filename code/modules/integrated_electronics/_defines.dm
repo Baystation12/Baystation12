@@ -372,20 +372,24 @@
 	if(istext(data))
 		write_data_to_pin("ERROR")
 
-/datum/integrated_io/output/scramble()
-	..()
-	push_data()
-
 /datum/integrated_io/activate/scramble(var/severity)
 	if(prob(99/severity))
 		activate()
 
 /datum/integrated_io/proc/write_data_to_pin(var/new_data)
+	if(io_type != DATA_CHANNEL)
+		return FALSE
+
 	if(isnull(new_data) || isnum(new_data) || istext(new_data) || isweakref(new_data)) // Anything else is a type we don't want.
 		data = new_data
 		holder.on_data_written()
 		return TRUE
 	return FALSE
+
+/datum/integrated_io/output/write_data_to_pin(var/new_data)
+	. = ..()
+	if(.)
+		push_data()
 
 /datum/integrated_io/input/proc/pull_data()
 	for(var/datum/integrated_io/io in linked)
@@ -455,3 +459,7 @@
 		O.disconnect()
 	for(var/datum/integrated_io/activate/A in activators)
 		A.disconnect()
+
+/datum/encrypted_ic_data
+	var/name = "encrypted data"
+	var/data
