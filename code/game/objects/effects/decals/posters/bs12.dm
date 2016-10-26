@@ -91,8 +91,8 @@
 
 /datum/poster/bay_19
 	icon_state="bsposter19"
-	name = "Respect a Unathi"
-	desc = "This poster depicts a well dressed looking Unathi receiving a prestigious award. It appears to espouse greater co-operation and harmony between the two races."
+	name = "Respect a Soghun"
+	desc = "This ragged poster depicts a well dressed looking Unathi receiving a prestigious award. It appears to espouse greater co-operation and harmony between the two races. Curiously, the Unathi is adressed as a Soghun, the old and rather speciesist name humans used to give them."
 
 /datum/poster/bay_20
 	icon_state="bsposter20"
