@@ -13,10 +13,10 @@
 	S["preferences_disabled"] >> pref.preferences_disabled
 
 /datum/category_item/player_setup_item/player_global/settings/save_preferences(var/savefile/S)
-	S["lastchangelog"]        << pref.lastchangelog
-	S["default_slot"]         << pref.default_slot
-	S["preferences"]          << pref.preferences_enabled
-	S["preferences_disabled"] << pref.preferences_disabled
+	to_chat(S["lastchangelog"], pref.lastchangelog)
+	to_chat(S["default_slot"], pref.default_slot)
+	to_chat(S["preferences"], pref.preferences_enabled)
+	to_chat(S["preferences_disabled"], pref.preferences_disabled)
 
 /datum/category_item/player_setup_item/player_global/settings/sanitize_preferences()
 	// Ensure our preferences are lists.

@@ -6,7 +6,7 @@
 	S["language"]			>> pref.alternate_languages
 
 /datum/category_item/player_setup_item/general/language/save_character(var/savefile/S)
-	S["language"]			<< pref.alternate_languages
+				to_chat(S["language"], pref.alternate_languages)
 
 /datum/category_item/player_setup_item/general/language/sanitize_character()
 	if(!islist(pref.alternate_languages))	pref.alternate_languages = list()

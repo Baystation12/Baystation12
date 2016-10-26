@@ -9,10 +9,10 @@
 	S["ooccolor"]		>> pref.ooccolor
 
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(var/savefile/S)
-	S["UI_style"]		<< pref.UI_style
-	S["UI_style_color"]	<< pref.UI_style_color
-	S["UI_style_alpha"]	<< pref.UI_style_alpha
-	S["ooccolor"]		<< pref.ooccolor
+			to_chat(S["UI_style"], pref.UI_style)
+		to_chat(S["UI_style_color"], pref.UI_style_color)
+		to_chat(S["UI_style_alpha"], pref.UI_style_alpha)
+			to_chat(S["ooccolor"], pref.ooccolor)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))

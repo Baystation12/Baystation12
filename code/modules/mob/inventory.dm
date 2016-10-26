@@ -29,7 +29,8 @@
 			qdel(W)
 		else
 			if(!disable_warning)
-				src << "\red You are unable to equip that." //Only print if del_on_fail is false
+				to_chat(src, "\red You are unable to equip that.")//Only print if del_on_fail is false
+
 		return 0
 
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
@@ -162,7 +163,7 @@ var/list/slot_equipment_priority = list( \
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
 
-	>>>> *** DO NOT CALL THIS PROC DIRECTLY *** <<<<
+	to_chat(>>>> *** DO NOT CALL THIS PROC DIRECTLY ***, <<)
 
 	It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,

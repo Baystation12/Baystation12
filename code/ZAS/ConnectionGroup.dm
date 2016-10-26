@@ -72,10 +72,10 @@ Class Procs:
 /connection_edge/proc/add_connection(connection/c)
 	coefficient++
 	if(c.direct()) direct++
-	//world << "Connection added: [type] Coefficient: [coefficient]"
+//	to_chat(world, "Connection added: [type] Coefficient: [coefficient]")
 
 /connection_edge/proc/remove_connection(connection/c)
-	//world << "Connection removed: [type] Coefficient: [coefficient-1]"
+//	to_chat(world, "Connection removed: [type] Coefficient: [coefficient-1]")
 	coefficient--
 	if(coefficient <= 0)
 		erase()
@@ -85,7 +85,7 @@ Class Procs:
 
 /connection_edge/proc/erase()
 	air_master.remove_edge(src)
-	//world << "[type] Erased."
+//	to_chat(world, "[type] Erased.")
 
 /connection_edge/proc/tick()
 
@@ -128,7 +128,7 @@ Class Procs:
 	A.edges.Add(src)
 	B.edges.Add(src)
 	//id = edge_id(A,B)
-	//world << "New edge between [A] and [B]"
+//	to_chat(world, "New edge between [A] and [B]")
 
 /connection_edge/zone/add_connection(connection/c)
 	. = ..()
@@ -197,7 +197,7 @@ Class Procs:
 	A.edges.Add(src)
 	air = B.return_air()
 	//id = 52*A.id
-	//world << "New edge from [A] to [B]."
+//	to_chat(world, "New edge from [A] to [B].")
 
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()

@@ -41,7 +41,7 @@ var/list/gear_datums = list()
 	S["gear"] >> pref.gear
 
 /datum/category_item/player_setup_item/loadout/save_character(var/savefile/S)
-	S["gear"] << pref.gear
+	to_chat(S["gear"], pref.gear)
 
 /datum/category_item/player_setup_item/loadout/proc/valid_gear_choices(var/max_cost)
 	. = list()

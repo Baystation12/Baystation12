@@ -24,7 +24,7 @@
 		return
 
 	if(!victim || !victim.Adjacent(user))
-		user << "<span class='danger'>Your victim slipped free!</span>"
+		to_chat(user, "<span class='danger'>Your victim slipped free!</span>")
 		cooking = 0
 		icon_state = off_icon
 		return

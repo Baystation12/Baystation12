@@ -13,14 +13,14 @@
 	S["nanotrasen_relation"]	>> pref.nanotrasen_relation
 
 /datum/category_item/player_setup_item/general/background/save_character(var/savefile/S)
-	S["med_record"]				<< pref.med_record
-	S["sec_record"]				<< pref.sec_record
-	S["gen_record"]				<< pref.gen_record
-	S["home_system"]			<< pref.home_system
-	S["citizenship"]			<< pref.citizenship
-	S["faction"]				<< pref.faction
-	S["religion"]				<< pref.religion
-	S["nanotrasen_relation"]	<< pref.nanotrasen_relation
+					to_chat(S["med_record"], pref.med_record)
+					to_chat(S["sec_record"], pref.sec_record)
+					to_chat(S["gen_record"], pref.gen_record)
+				to_chat(S["home_system"], pref.home_system)
+				to_chat(S["citizenship"], pref.citizenship)
+					to_chat(S["faction"], pref.faction)
+					to_chat(S["religion"], pref.religion)
+		to_chat(S["nanotrasen_relation"], pref.nanotrasen_relation)
 
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"

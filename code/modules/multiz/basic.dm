@@ -7,19 +7,19 @@ var/z_levels = 0 // Each bit represents a connection between adjacent levels.  S
 	ASSERT(height <= z)
 	// Due to the offsets of how connections are stored v.s. how z-levels are indexed, some magic number silliness happened.
 	for(var/i = (z - height) to (z - 2))
-		z_levels |= (1 << i)
+		to_chat(z_levels |= (1, i))
 	qdel(src)
 
 // The storage of connections between adjacent levels means some bitwise magic is needed.
 proc/HasAbove(var/z)
 	if(z >= world.maxz || z > 16 || z < 1)
 		return 0
-	return z_levels & (1 << (z - 1))
+	to_chat(return z_levels & (1, (z - 1)))
 
 proc/HasBelow(var/z)
 	if(z > world.maxz || z > 17 || z < 2)
 		return 0
-	return z_levels & (1 << (z - 2))
+	to_chat(return z_levels & (1, (z - 2)))
 
 // Thankfully, no bitwise magic is needed here.
 proc/GetAbove(var/atom/atom)

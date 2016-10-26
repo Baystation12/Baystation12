@@ -24,7 +24,7 @@
 	for(var/R in cures)
 		if(H.reagents.has_reagent(R))
 			if (cure_message)
-				H <<"\blue [cure_message]"
+				to_chat(H, "\blue [cure_message]")
 			return 1
 	return 0
 

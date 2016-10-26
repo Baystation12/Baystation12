@@ -21,13 +21,13 @@
 	S["char_rank"] 				>> pref.char_rank
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
-	S["alternate_option"]	<< pref.alternate_option
-	S["job_high"]	<< pref.job_high
-	S["job_medium"]	<< pref.job_medium
-	S["job_low"]	<< pref.job_low
-	S["player_alt_titles"]	<< pref.player_alt_titles
-	S["char_branch"] 			<< pref.char_branch
-	S["char_rank"] 				<< pref.char_rank
+		to_chat(S["alternate_option"], pref.alternate_option)
+		to_chat(S["job_high"], pref.job_high)
+		to_chat(S["job_medium"], pref.job_medium)
+		to_chat(S["job_low"], pref.job_low)
+		to_chat(S["player_alt_titles"], pref.player_alt_titles)
+				to_chat(S["char_branch"], pref.char_branch)
+					to_chat(S["char_rank"], pref.char_rank)
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	pref.alternate_option	= sanitize_integer(pref.alternate_option, 0, 2, initial(pref.alternate_option))
@@ -238,7 +238,7 @@
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role)
 	var/datum/job/job = job_master.GetJob(role)
 	if(!job)
-		world << "Nope"
+		to_chat(world, "Nope")
 		return 0
 
 	if(role == "Assistant")

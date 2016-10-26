@@ -7,8 +7,8 @@
 	S["never_be_special"] >> pref.never_be_special_role
 
 /datum/category_item/player_setup_item/antagonism/candidacy/save_character(var/savefile/S)
-	S["be_special"]	<< pref.be_special_role
-	S["never_be_special"] << pref.never_be_special_role
+		to_chat(S["be_special"], pref.be_special_role)
+	to_chat(S["never_be_special"], pref.never_be_special_role)
 
 /datum/category_item/player_setup_item/antagonism/candidacy/sanitize_character()
 	if(!istype(pref.be_special_role))

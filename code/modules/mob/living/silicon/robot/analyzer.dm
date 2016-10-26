@@ -18,7 +18,7 @@
 
 /obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
 	if((CLUMSY in user.mutations) && prob(50))
-		user << text("\red You try to analyze the floor's vitals!")
+		to_chat(user, text("\red You try to analyze the floor's vitals!"))
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("\red [user] has analyzed the floor's vitals!"), 1)
 		user.show_message(text("\blue Analyzing Results for The floor:\n\t Overall Status: Healthy"), 1)
@@ -33,7 +33,7 @@
 	else if(istype(M, /mob/living/carbon/human))
 		scan_type = "prosthetics"
 	else
-		user << "\red You can't analyze non-robotic things!"
+		to_chat(user, "\red You can't analyze non-robotic things!")
 		return
 
 	user.visible_message("<span class='notice'>\The [user] has analyzed [M]'s components.</span>","<span class='notice'>You have analyzed [M]'s components.</span>")
@@ -67,29 +67,29 @@
 		if("prosthetics")
 
 			var/mob/living/carbon/human/H = M
-			user << "<span class='notice'>Analyzing Results for \the [H]:</span>"
-			user << "Key: <font color='#FFA500'>Electronics</font>/<font color='red'>Brute</font>"
-			user << "<span class='notice'>External prosthetics:</span>"
+			to_chat(user, "<span class='notice'>Analyzing Results for \the [H]:</span>")
+			to_chat(user, "Key: <font color='#FFA500'>Electronics</font>/<font color='red'>Brute</font>")
+			to_chat(user, "<span class='notice'>External prosthetics:</span>")
 			var/organ_found
 			if(H.internal_organs.len)
 				for(var/obj/item/organ/external/E in H.organs)
 					if(!(E.robotic >= ORGAN_ROBOT))
 						continue
 					organ_found = 1
-					user << "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#FFA500'>[E.burn_dam]</font>"
+					to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#FFA500'>[E.burn_dam]</font>")
 			if(!organ_found)
-				user << "No prosthetics located."
-			user << "<hr>"
-			user << "<span class='notice'>Internal prosthetics:</span>"
+				to_chat(user, "No prosthetics located.")
+			to_chat(user, "<hr>")
+			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
 			organ_found = null
 			if(H.internal_organs.len)
 				for(var/obj/item/organ/O in H.internal_organs)
 					if(!(O.robotic >= ORGAN_ROBOT))
 						continue
 					organ_found = 1
-					user << "[O.name]: <font color='red'>[O.damage]</font>"
+					to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")
 			if(!organ_found)
-				user << "No prosthetics located."
+				to_chat(user, "No prosthetics located.")
 
 	src.add_fingerprint(user)
 	return
