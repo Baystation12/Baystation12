@@ -99,6 +99,10 @@
 		name = input
 		interact(M)
 
+/obj/item/integrated_circuit/proc/activate_pin(var/pin_number)
+	var/datum/integrated_io/activate/A = activators[pin_number]
+	A.activate()
+
 /obj/item/integrated_circuit/proc/set_pin_data(var/pin_type, var/pin_number, var/new_data)
 	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
 	return pin.write_data_to_pin(new_data)
@@ -106,6 +110,10 @@
 /obj/item/integrated_circuit/proc/get_pin_data(var/pin_type, var/pin_number)
 	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
 	return pin.get_data()
+
+/obj/item/integrated_circuit/proc/get_pin_data_as_type(var/pin_type, var/pin_number, var/as_type)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.data_as_type(as_type)
 
 /obj/item/integrated_circuit/proc/get_pin_ref(var/pin_type, var/pin_number)
 	switch(pin_type)

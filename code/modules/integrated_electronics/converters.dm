@@ -14,12 +14,9 @@
 /obj/item/integrated_circuit/converter/num2text/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && isnum(incoming.data))
 		result = num2text(incoming.data)
-
-	outgoing.data = result
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 /obj/item/integrated_circuit/converter/text2num
 	name = "string to number"
@@ -29,12 +26,10 @@
 /obj/item/integrated_circuit/converter/text2num/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
-	if(incoming.data && istext(incoming.data))
+	if(istext(incoming.data))
 		result = text2num(incoming.data)
 
-	outgoing.data = result
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 /obj/item/integrated_circuit/converter/text2ascii
 	name = "char to ascii"
@@ -45,12 +40,10 @@
 /obj/item/integrated_circuit/converter/text2ascii/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
-	if(incoming.data && istext(incoming.data))
+	if(istext(incoming.data))
 		result = text2ascii(incoming.data)
 
-	outgoing.data = result
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 /obj/item/integrated_circuit/converter/ascii2text
 	name = "ascii to char"
@@ -60,12 +53,10 @@
 /obj/item/integrated_circuit/converter/ascii2text/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
-	if(incoming.data && isnum(incoming.data))
+	if(isnum(incoming.data))
 		result = ascii2text(incoming.data)
 
-	outgoing.data = result
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 /obj/item/integrated_circuit/converter/ref2text
 	name = "reference to string"
@@ -74,11 +65,9 @@
 
 /obj/item/integrated_circuit/converter/ref2text/do_work()
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
 	var/atom/A = incoming.data_as_type(/atom)
 
-	outgoing.data = A && A.name
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, A && A.name)
 
 /obj/item/integrated_circuit/converter/lowercase
 	name = "lowercase string converter"
@@ -88,12 +77,10 @@
 /obj/item/integrated_circuit/converter/lowercase/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && istext(incoming.data))
 		result = lowertext(incoming.data)
 
-	outgoing.data = result
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 /obj/item/integrated_circuit/converter/uppercase
 	name = "uppercase string converter"
@@ -103,12 +90,10 @@
 /obj/item/integrated_circuit/converter/uppercase/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && istext(incoming.data))
 		result = uppertext(incoming.data)
 
-	outgoing.data = result
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 /obj/item/integrated_circuit/converter/concatenatior
 	name = "concatenatior"
@@ -125,6 +110,4 @@
 		if(istext(I.data))
 			result = result + I.data
 
-	var/datum/integrated_io/output/outgoing = outputs[1]
-	outgoing.data = jointext(result,null)
-	outgoing.push_data()
+	set_pin_data(IC_OUTPUT, 1, jointext(result,null))
