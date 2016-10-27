@@ -19,18 +19,8 @@
 
 /obj/effect/overmap/ship/Destroy()
 	current_sector = null
-	if(nav_control)
-		nav_control.linked = null
-		nav_control = null
-	for(var/obj/machinery/space_battle/computer/engine_control/E in eng_controls)
-		E.linked = null
+	nav_control = null
 	eng_controls.Cut()
-	for(var/obj/machinery/space_battle/computer/missile/M in fire_controls)
-		M.linked = null
-	fire_controls.Cut()
-	if(fake)
-		fake_ship = null
-	map_sectors["[z]"] = null
 	return ..()
 
 /obj/effect/overmap/ship/initialize()
