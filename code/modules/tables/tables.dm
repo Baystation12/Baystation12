@@ -83,11 +83,11 @@
 	if(health < maxhealth)
 		switch(health / maxhealth)
 			if(0.0 to 0.5)
-				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
+				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
 			if(0.25 to 0.5)
-				to_chat(user, "<span class='warning'>It looks damaged!</span>")
+				to_chat(user, "<span class='warning'>It looks damaged!</span>")
 			if(0.5 to 1.0)
-				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
+				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
 
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
@@ -116,7 +116,7 @@
 			update_icon()
 			return 1
 		else
-			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
+			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
 
 	if(!reinforced && !carpeted && material && istype(W, /obj/item/weapon/wrench))
 		remove_material(W, user)
@@ -136,7 +136,7 @@
 	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/F = W
 		if(F.welding)
-			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
+			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(!do_after(user, 20, src) || !F.remove_fuel(1, user))
 				return
@@ -164,19 +164,19 @@
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
 	if(reinforced)
-		to_chat(user, "<span class='warning'>\The [src] is already reinforced!</span>")
+		to_chat(user, "<span class='warning'>\The [src] is already reinforced!</span>")
 		return
 
 	if(!can_reinforce)
-		to_chat(user, "<span class='warning'>\The [src] cannot be reinforced!</span>")
+		to_chat(user, "<span class='warning'>\The [src] cannot be reinforced!</span>")
 		return
 
 	if(!material)
-		to_chat(user, "<span class='warning'>Plate \the [src] before reinforcing it!</span>")
+		to_chat(user, "<span class='warning'>Plate \the [src] before reinforcing it!</span>")
 		return
 
 	if(flipped)
-		to_chat(user, "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>")
+		to_chat(user, "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>")
 		return
 
 	reinforced = common_material_add(S, user, "reinforc")
@@ -201,12 +201,12 @@
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
 	var/material/M = S.get_material()
 	if(!istype(M))
-		to_chat(user, "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>")
+		to_chat(user, "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>")
 		return null
 
 	if(manipulating) return M
 	manipulating = 1
-	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>")
+	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>")
 	if(!do_after(user, 20, src) || !S.use(1))
 		manipulating = 0
 		return null
@@ -217,7 +217,7 @@
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding, sound)
 	if(!M.stack_type)
-		to_chat(user, "<span class='warning'>You are unable to remove the [what] from this table!</span>")
+		to_chat(user, "<span class='warning'>You are unable to remove the [what] from this table!</span>")
 		return M
 
 	if(manipulating) return M
@@ -299,13 +299,13 @@
 
 		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
 		for(var/i = 1 to 4)
-			to_chat(I = image(icon, dir = 1, (i-1), icon_state = connections[i]))
+			I = image(icon, dir = 1<<(i-1), icon_state = connections[i])
 			overlays += I
 
 		// Standard table image
 		if(material)
 			for(var/i = 1 to 4)
-				to_chat(I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1, (i-1)))
+				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
 				if(material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
@@ -313,14 +313,14 @@
 		// Reinforcements
 		if(reinforced)
 			for(var/i = 1 to 4)
-				to_chat(I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1, (i-1)))
+				I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1<<(i-1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
 
 		if(carpeted)
 			for(var/i = 1 to 4)
-				to_chat(I = image(icon, "carpet_[connections[i]]", dir = 1, (i-1)))
+				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
 				overlays += I
 	else
 		overlays.Cut()
