@@ -12,9 +12,9 @@
 	S["backbag"]                >> pref.backbag
 
 /datum/category_item/player_setup_item/general/equipment/save_character(var/savefile/S)
-	to_chat(S["all_underwear"], pref.all_underwear)
-	to_chat(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	to_chat(S["backbag"], pref.backbag)
+	S["all_underwear"]          << pref.all_underwear
+	S["all_underwear_metadata"] << pref.all_underwear_metadata
+	S["backbag"]                << pref.backbag
 
 /datum/category_item/player_setup_item/general/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))

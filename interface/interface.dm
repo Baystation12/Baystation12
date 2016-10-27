@@ -6,9 +6,9 @@
 	if( config.wikiurl )
 		if(alert("This will open the wiki in your browser. Are you sure?",,"Yes","No")=="No")
 			return
-		to_chat(src, link(config.wikiurl))
+		src << link(config.wikiurl)
 	else
-		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
+		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
 	return
 
 /client/verb/forum()
@@ -18,9 +18,9 @@
 	if( config.forumurl )
 		if(alert("This will open the forum in your browser. Are you sure?",,"Yes","No")=="No")
 			return
-		to_chat(src, link(config.forumurl))
+		src << link(config.forumurl)
 	else
-		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
+		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
 	return
 
 #define RULES_FILE "config/rules.html"
@@ -145,10 +145,10 @@ Any-Mode: (hotkey doesn't need to be on)
 </font>"}
 
 	if(isrobot(src.mob))
-		to_chat(src, robot_hotkey_mode)
-		to_chat(src, robot_other)
+		to_chat(src, robot_hotkey_mode)
+		to_chat(src, robot_other)
 	else
-		to_chat(src, hotkey_mode)
-		to_chat(src, other)
+		to_chat(src, hotkey_mode)
+		to_chat(src, other)
 	if(holder)
-		to_chat(src, admin)
+		to_chat(src, admin)

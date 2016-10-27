@@ -69,7 +69,9 @@
 
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
-to_chat(#define to_chat(target, message) target, message)
+//#define to_chat(target, message) target << message
+proc/to_chat(target, message)
+	target << message
 
 #define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
 

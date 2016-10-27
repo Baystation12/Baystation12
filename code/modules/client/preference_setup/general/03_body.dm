@@ -33,27 +33,27 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.preview_icon = null
 
 /datum/category_item/player_setup_item/general/body/save_character(var/savefile/S)
-				to_chat(S["species"], pref.species)
-				to_chat(S["hair_red"], pref.r_hair)
-				to_chat(S["hair_green"], pref.g_hair)
-				to_chat(S["hair_blue"], pref.b_hair)
-				to_chat(S["facial_red"], pref.r_facial)
-			to_chat(S["facial_green"], pref.g_facial)
-			to_chat(S["facial_blue"], pref.b_facial)
-				to_chat(S["skin_tone"], pref.s_tone)
-				to_chat(S["skin_red"], pref.r_skin)
-				to_chat(S["skin_green"], pref.g_skin)
-				to_chat(S["skin_blue"], pref.b_skin)
-		to_chat(S["hair_style_name"], pref.h_style)
-		to_chat(S["facial_style_name"], pref.f_style)
-				to_chat(S["eyes_red"], pref.r_eyes)
-				to_chat(S["eyes_green"], pref.g_eyes)
-				to_chat(S["eyes_blue"], pref.b_eyes)
-					to_chat(S["b_type"], pref.b_type)
-			to_chat(S["disabilities"], pref.disabilities)
-				to_chat(S["organ_data"], pref.organ_data)
-				to_chat(S["rlimb_data"], pref.rlimb_data)
-	to_chat(S["has_cortical_stack"], pref.has_cortical_stack)
+	S["species"]			<< pref.species
+	S["hair_red"]			<< pref.r_hair
+	S["hair_green"]			<< pref.g_hair
+	S["hair_blue"]			<< pref.b_hair
+	S["facial_red"]			<< pref.r_facial
+	S["facial_green"]		<< pref.g_facial
+	S["facial_blue"]		<< pref.b_facial
+	S["skin_tone"]			<< pref.s_tone
+	S["skin_red"]			<< pref.r_skin
+	S["skin_green"]			<< pref.g_skin
+	S["skin_blue"]			<< pref.b_skin
+	S["hair_style_name"]	<< pref.h_style
+	S["facial_style_name"]	<< pref.f_style
+	S["eyes_red"]			<< pref.r_eyes
+	S["eyes_green"]			<< pref.g_eyes
+	S["eyes_blue"]			<< pref.b_eyes
+	S["b_type"]				<< pref.b_type
+	S["disabilities"]		<< pref.disabilities
+	S["organ_data"]			<< pref.organ_data
+	S["rlimb_data"]			<< pref.rlimb_data
+	S["has_cortical_stack"] << pref.has_cortical_stack
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
 	if(!pref.species || !(pref.species in playable_species))

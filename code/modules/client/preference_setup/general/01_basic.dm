@@ -14,12 +14,12 @@ datum/preferences
 	S["OOC_Notes"]				>> pref.metadata
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
-					to_chat(S["real_name"], pref.real_name)
-		to_chat(S["name_is_always_random"], pref.be_random_name)
-						to_chat(S["gender"], pref.gender)
-						to_chat(S["age"], pref.age)
-					to_chat(S["spawnpoint"], pref.spawnpoint)
-					to_chat(S["OOC_Notes"], pref.metadata)
+	S["real_name"]				<< pref.real_name
+	S["name_is_always_random"]	<< pref.be_random_name
+	S["gender"]					<< pref.gender
+	S["age"]					<< pref.age
+	S["spawnpoint"]				<< pref.spawnpoint
+	S["OOC_Notes"]				<< pref.metadata
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 	var/datum/species/S = all_species[pref.species ? pref.species : "Human"]
@@ -56,7 +56,7 @@ datum/preferences
 				pref.real_name = new_name
 				return TOPIC_REFRESH
 			else
-				to_chat(user, "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>")
+				user << "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>"
 				return TOPIC_NOACTION
 
 	else if(href_list["random_name"])
@@ -86,7 +86,7 @@ datum/preferences
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
 		if(!choice || !spawntypes[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
 		if(!(choice in using_map.allowed_spawns)) //Don't force their hand, just let them know
-			to_chat(user, "Your chosen spawnpoint ([choice]) is unavailable for the current map. Leaving this setting on the current selection will force you to spawn at one of the allowed spawns.")
+			user << "Your chosen spawnpoint ([choice]) is unavailable for the current map. Leaving this setting on the current selection will force you to spawn at one of the allowed spawns."
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
 

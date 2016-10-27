@@ -6,7 +6,7 @@
 	S["language_prefixes"]	>> pref.language_prefixes
 
 /datum/category_item/player_setup_item/player_global/language/save_preferences(var/savefile/S)
-		to_chat(S["language_prefixes"], pref.language_prefixes)
+	S["language_prefixes"]	<< pref.language_prefixes
 
 /datum/category_item/player_setup_item/player_global/language/sanitize_preferences()
 	if(isnull(pref.language_prefixes) || !pref.language_prefixes.len)

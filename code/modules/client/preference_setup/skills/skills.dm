@@ -8,9 +8,9 @@
 	S["skill_specialization"]	>> pref.skill_specialization
 
 /datum/category_item/player_setup_item/skills/save_character(var/savefile/S)
-						to_chat(S["skills"], pref.skills)
-			to_chat(S["used_skillpoints"], pref.used_skillpoints)
-		to_chat(S["skill_specialization"], pref.skill_specialization)
+	S["skills"]					<< pref.skills
+	S["used_skillpoints"]		<< pref.used_skillpoints
+	S["skill_specialization"]	<< pref.skill_specialization
 
 /datum/category_item/player_setup_item/skills/sanitize_character()
 	if(SKILLS == null)				setup_skills()

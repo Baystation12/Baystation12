@@ -14,7 +14,7 @@ var/list/word_to_uristrune_table = null
 			word_to_uristrune_table[w] = bit
 
 			words -= w
-			to_chat(bit, = 1)
+			bit <<= 1
 
 	return word_to_uristrune_table[word]
 
@@ -69,7 +69,7 @@ var/list/uristrune_cache = list()
 
 	for(var/i = 0, i < 10, i++)
 		if(BITTEST(symbol_bits, i))
-			to_chat(I.Blend(icon('icons/effects/uristrunes.dmi', "rune-[1, i]"), ICON_OVERLAY))
+			I.Blend(icon('icons/effects/uristrunes.dmi', "rune-[1 << i]"), ICON_OVERLAY)
 
 
 	I.SwapColor(rgb(0, 0, 0, 100), rgb(100, 0, 0, 200))
