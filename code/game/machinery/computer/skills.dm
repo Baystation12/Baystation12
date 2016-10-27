@@ -73,7 +73,7 @@
 <tr>
 <th><A href='?src=\ref[src];choice=Sorting;sort=name'>Name</A></th>
 <th><A href='?src=\ref[src];choice=Sorting;sort=id'>ID</A></th>
-<th><A href='?src=\ref[src];choice=Sorting;sort=rank'>Rank</A></th>
+<th><A href='?src=\ref[src];choice=Sorting;sort=rank'>Position</A></th>
 <th><A href='?src=\ref[src];choice=Sorting;sort=fingerprint'>Fingerprints</A></th>
 </tr>"}
 					if(!isnull(data_core.general))
@@ -95,14 +95,22 @@
 					if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
 						var/icon/front = active1.fields["photo_front"]
 						var/icon/side = active1.fields["photo_side"]
+						
+						var/mil_rank_text = ""
+						
 						user << browse_rsc(front, "front.png")
 						user << browse_rsc(side, "side.png")
+						if(using_map.flags & MAP_HAS_BRANCH)
+							mil_rank_text += "Branch: <a href='?src=\ref[src];choice=Edit Field;field=mil_branch'>[active1.fields["mil_branch"] || "None"]</a><br>\n"
+						if(using_map.flags & MAP_HAS_RANK)
+							mil_rank_text += "Rank: <a href='?src=\ref[src];choice=Edit Field;field=mil_rank'>[active1.fields["mil_rank"] || "None"]</a><br>\n"
 						dat += text("<table><tr><td>	\
 						Name: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \
 						ID: <A href='?src=\ref[src];choice=Edit Field;field=id'>[active1.fields["id"]]</A><BR>\n	\
 						Sex: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
 						Age: <A href='?src=\ref[src];choice=Edit Field;field=age'>[active1.fields["age"]]</A><BR>\n	\
-						Rank: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
+						Position: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
+						[mil_rank_text]\
 						Fingerprint: <A href='?src=\ref[src];choice=Edit Field;field=fingerprint'>[active1.fields["fingerprint"]]</A><BR>\n	\
 						Physical Status: [active1.fields["p_stat"]]<BR>\n	\
 						Mental Status: [active1.fields["m_stat"]]<BR><BR>\n	\
@@ -350,13 +358,39 @@ What a mess.*/
 							active1.fields["age"] = t1
 					if("rank")
 						if (has_write_access)
-							temp = "<h5>Rank:</h5>"
-							temp += "<ul>"
+							var/list/options = list("<h5>Position:</h5><ul>")
 							for(var/rank in joblist)
-								temp += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
-							temp += "</ul>"
+								options += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
+							options += "</ul>"
+							
+							temp = jointext(options, null)
 						else
-							alert(usr, "You do not have the required access to do this!")
+							alert(usr, "You do not have the required access to change the position field.")
+							
+					if("mil_branch")
+						if(has_write_access)
+							var/list/options = list("<h5>Branch:</h5><ul>")
+							for(var/branch in mil_branches.branches)
+								options += "<li><a href='?src=\ref[src];choice=change_mil_branch;mil_branch=[branch]'>[branch]</a></li>"
+							options += "</ul>"
+							
+							temp = jointext(options, null)
+						else
+							alert(usr, "You do not have the required access to change the branch field.")
+					if("mil_rank")
+						if(has_write_access)
+							var/datum/mil_branch/branch = mil_branches.get_branch(active1.fields["mil_branch"])
+							if(!istype(branch))
+								alert(usr, "There is currently no branch set.")
+							else
+								var/list/options = list("<h5>Rank:</h5><ul>")
+								for(var/rank in branch.ranks)
+									options += "<li><a href='?src=\ref[src];choice=change_mil_rank;mil_rank=[rank]'>[rank]</a></li>"
+								options += "</ul>"
+								
+								temp = jointext(options, null)
+						else
+							alert(usr, "You do not have the required access to change the rank field.")
 					if("species")
 						if (istype(active1, /datum/data/record))
 							var/t1 = sanitize(input("Please enter race:", "General records", active1.fields["species"], null)  as message)
@@ -367,17 +401,25 @@ What a mess.*/
 //TEMPORARY MENU FUNCTIONS
 			else//To properly clear as per clear screen.
 				temp=null
-				switch(href_list["choice"])
-					if ("Change Rank")
-						if (active1)
+				if(active1)
+					switch(href_list["choice"])
+						if ("Change Rank")
 							if(PDA_Manifest.len)
 								PDA_Manifest.Cut()
 							active1.fields["rank"] = href_list["rank"]
 							if(href_list["rank"] in joblist)
 								active1.fields["real_rank"] = href_list["real_rank"]
-
-					if ("Delete Record (ALL) Execute")
-						if (active1)
+						if("change_mil_branch")
+							if(PDA_Manifest.len)
+								PDA_Manifest.Cut()
+							active1.fields["mil_branch"] = href_list["mil_branch"]
+							active1.fields["mil_rank"] = null  // Previous entry may be invalid for new branch
+							
+						if("change_mil_rank")
+							if(PDA_Manifest.len)
+								PDA_Manifest.Cut()
+							active1.fields["mil_rank"] = href_list["mil_rank"]
+						if ("Delete Record (ALL) Execute")
 							if(PDA_Manifest.len)
 								PDA_Manifest.Cut()
 							for(var/datum/data/record/R in data_core.medical)
@@ -385,8 +427,8 @@ What a mess.*/
 									qdel(R)
 								else
 							qdel(active1)
-					else
-						temp = "This function does not appear to be working at the moment. Our apologies."
+						else
+							temp = "This function does not appear to be working at the moment. Our apologies."
 
 	add_fingerprint(usr)
 	updateUsrDialog()
