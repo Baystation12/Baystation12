@@ -69,6 +69,7 @@
 	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 
 /obj/item/clothing/glasses/science/New()
@@ -82,6 +83,7 @@
 	item_state = "glasses"
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 7
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	off_state = "denight"
@@ -96,6 +98,7 @@
 	icon_state = "swatgoggles"
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 5
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	flash_protection = FLASH_PROTECTION_MAJOR
@@ -122,6 +125,7 @@
 	icon_state = "material"
 	item_state = "glasses"
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	vision_flags = SEE_OBJS
 
