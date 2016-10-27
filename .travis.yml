@@ -71,6 +71,7 @@ script:
   - grep ", 0 warnings" build_log.txt
   - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
   - grep "All Unit Tests Passed" log.txt
+  - grep "Caught 0 Runtimes" log.txt
   - (! grep "runtime error:" log.txt)
   - (! grep 'Process scheduler caught exception processing' log.txt)
   - (! grep "WARNING:" log.txt)
