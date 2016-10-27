@@ -8,15 +8,15 @@
 	anchored = 1
 	density = 1
 
-	var/obj/machinery/gravity_generator = null
+	var/obj/machinery/gravity_generator/gravity_generator = null
 
 	New()
 		..()
 		spawn(30)
-			if(gravity_generator:on)
-				gravity_generator:on = 0
+			if(gravity_generator.on)
+				gravity_generator.on = 0
 
-				for(var/area/A in gravity_generator:localareas)
+				for(var/area/A in gravity_generator.localareas)
 					var/obj/machinery/gravity_generator/G
 					for(G in machines)
 						if((A in G.localareas) && (G.on))
@@ -26,12 +26,12 @@
 
 
 			else
-				for(var/area/A in gravity_generator:localareas)
-					gravity_generator:on = 1
+				for(var/area/A in gravity_generator.localareas)
+					gravity_generator.on = 1
 					A.gravitychange(1,A)
 
 
-/obj/machinery/gravity_generator/
+/obj/machinery/gravity_generator
 	name = "Gravitational Generator"
 	desc = "A device which produces a gravaton field when set up."
 	icon = 'icons/obj/singularity.dmi'

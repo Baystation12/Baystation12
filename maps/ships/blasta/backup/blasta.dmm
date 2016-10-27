@@ -470,7 +470,7 @@
 "jb" = (/obj/structure/table/rack,/obj/item/stack/material/plasteel{amount = 50; pixel_x = -3; pixel_y = -4},/obj/item/stack/material/glass/reinforced{amount = 50},/obj/machinery/light,/obj/machinery/power/apc/battle{name = "south bump"; pixel_y = -27},/obj/structure/cable,/obj/item/device/radio/intercom/locked/ship{dir = 1; pixel_x = 25; pixel_y = -25},/turf/simulated/floor/tiled/dark,/area/ship_battle/blasta/engineering)
 "jc" = (/obj/structure/table/steel,/obj/item/stack/material/phoron{amount = 50},/obj/item/weapon/module/power_control,/turf/simulated/floor/tiled/dark,/area/ship_battle/blasta/engineering)
 "jd" = (/obj/machinery/power/smes/buildable/battle/supercapacitor,/obj/structure/cable/heavyduty{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/ship_battle/blasta)
-"je" = (/obj/machinery/space_battle/laser_control{id_tag = "3blasta_lasers"},/obj/machinery/light/small/battle,/turf/simulated/floor/plating,/area/ship_battle/blasta)
+"je" = (/obj/machinery/space_battle/computer/laser{id_tag = "3blasta_lasers"},/obj/machinery/light/small/battle,/turf/simulated/floor/plating,/area/ship_battle/blasta)
 "jf" = (/obj/structure/shuttle/window{icon_state = "2"},/obj/structure/grille,/turf/simulated/floor/airless,/area/shuttle/mining_shuttle/blasta)
 "jg" = (/obj/machinery/computer/shuttle_control/explore{shuttle_area = /area/shuttle/mining_shuttle/aphrodyte; shuttle_tag = "Mining Shuttle"},/turf/simulated/floor/shuttle/blue,/area/shuttle/mining_shuttle/blasta)
 "jh" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/shuttle/blue,/area/shuttle/mining_shuttle/blasta)

@@ -1,21 +1,10 @@
 #if !defined(USING_MAP_DATUM)
 
-<<<<<<< HEAD
 //	#include "exodus_areas.dm"
 //	#include "exodus_shuttles.dm"
 //	#include "exodus_unit_testing.dm"
 //	#include "exodus_holodecks.dm"
-=======
-	#include "exodus_areas.dm"
-	#include "exodus_holodecks.dm"
-	#include "exodus_shuttles.dm"
 
-	#include "exodus_unit_testing.dm"
-	#include "exodus_zas_tests.dm"
-
-	#include "../shared/exodus_torch_areas.dm"
-	#include "../shared/exodus_torch_zas_tests.dm"
->>>>>>> 97f4095c238bd0b0849a987c5b071c562d6ff601
 
 //	#include "exodus-1.dmm"
 //	#include "exodus-2.dmm"

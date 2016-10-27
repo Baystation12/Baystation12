@@ -1,10 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1474794213
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\modules code\modules\maps code\modules\ship_combat code\modules\ship_combat\navigation 
+LAST_COMPILE_TIME: 1477206521
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\modules code\modules\flufftext code\modules\lobby_music code\modules\modular_computers code\modules\modular_computers\file_system code\modules\modular_computers\file_system\programs code\modules\overmap code\modules\overmap\ships code\modules\power code\modules\ship_combat code\modules\ship_combat\space icons icons\obj maps maps\example maps\overmap_example maps\overmap_example\sector maps\ships maps\ships\prefabs maps\ships\prefabs\two maps\ships\prefabs\two\backup maps\stations maps\stations\derelicts maps\stations\derelicts\mining_platform 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 510.1347
-WINDOW: code\modules\ship_combat\space_battle.dm;code\modules\ship_combat\navigation\communication.dm;code\modules\maps\reader.dm
+WINDOW: code\modules\ship_combat\space_battle.dm;code\modules\modular_computers\file_system\programs\camera.dm;code\modules\ship_combat\computer.dm;code\modules\ship_combat\sensor_computer.dm;code\modules\ship_combat\identification.dm;code\modules\ship_combat\sensor.dm;icons\obj\ship_battles.dmi;code\modules\ship_combat\space\constructor.dm;code\modules\ship_combat\space\missile_construction.dm;code\modules\overmap\sectors.dm;code\modules\overmap\ships\ship.dm
+FILE: code\modules\overmap\sectors.dm
 */
 // END_INTERNALS

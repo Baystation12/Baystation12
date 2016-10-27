@@ -10,6 +10,11 @@
 #define SPACE_TUBES 8
 #define SPACE_COMMON 9
 
+proc/is_space(var/turf/T)
+	if(istype(T, /turf/space))
+		return 1
+	return 0
+
 /datum/admins/proc/force_team()
 	set category = "Server"
 	set name = "Force Team"

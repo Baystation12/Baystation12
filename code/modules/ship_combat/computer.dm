@@ -582,7 +582,7 @@
 				ECM = 1
 			var/miss_chance = (advguidance ? 10*max(linked.sensor.advguidance.get_efficiency(-1,1), guidance_efficiency) : 25*guidance_efficiency)
 			if(ECM || linked.firing_angle == "Flanking" || (!guidance||prob(miss_chance)) && linked.firing_angle != "Carefully Aimed") // Random firing.
-				var/turf/newloc = pick_area_turf(get_area(start_loc), list(/proc/isspace, /proc/not_turf_contains_dense_objects))
+				var/turf/newloc = pick_area_turf(get_area(start_loc), list(/proc/is_space, /proc/not_turf_contains_dense_objects))
 				if(newloc) start_loc = newloc
 				wait_time *= 1.5*efficiency
 				if(!guidance)
@@ -678,14 +678,6 @@
 				return
 			shake_camera(src, 10, 10)
 		firing = 0
-
-
-
-
-/proc/isspace(var/turf/T)
-	if(istype(T, /turf/space))
-		return 1
-	return 0
 
 
 

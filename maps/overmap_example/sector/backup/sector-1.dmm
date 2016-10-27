@@ -1,0 +1,41 @@
+"a" = (/turf/space,/area/space)
+"b" = (/obj/effect/meteor/big,/turf/space,/area/space)
+"c" = (/obj/effect/overmap/sector/test1,/turf/space,/area/space)
+"d" = (/obj/effect/meteor/dust,/turf/space,/area/space)
+"e" = (/turf/space,/area/sector/shuttle/ingoing1)
+"f" = (/turf/space,/area/sector/shuttle/ingoing4)
+"g" = (/turf/simulated/mineral,/area/sector/shuttle/ingoing4)
+"h" = (/turf/space,/area/sector/shuttle/ingoing3)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaabaabbbaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbaaaaaaaaaaaaaa
+aaaaaaaacaaaaaaaadddaaaaaaaaaa
+aaaaaaaaaaeeeeaaaadddaaaaaaaaa
+aaaaaaffffeeeeaaaaaadaaaaaaaaa
+aaaaaaffffeeeeaaaaaaaaaaaaaaaa
+aaaaaaffffeeeeaaaaaaaaaaaaaaaa
+aaaaaaffffeeeeaaaaaaadaaaaaaaa
+aaaaaagfffeeeeaahhhhddaaaaaaaa
+aaaaaaggffaaaaaahhhhddaaaaaaaa
+aaaaaaaaaaaaaaaahhhhadaaaaaaaa
+aaaaaaaaaaaaaaaahhhhaaaaaaaaaa
+aaaaaaaaadddaaadhhhhaaaaaaaaaa
+aaaaaaaaaddaaaddhhhhaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

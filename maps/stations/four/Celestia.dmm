@@ -508,7 +508,7 @@
 "jN" = (/obj/structure/cable/heavyduty{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/ship_battle/celestia/fore_port_maintenance)
 "jO" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/power/smes/buildable/battle/supercapacitor{rcon_id = "4celestia"; RCon_tag = "Operations Supercapacitor"},/turf/simulated/floor/plating,/area/ship_battle/celestia/aft_port_maintenance)
 "jP" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable,/turf/simulated/floor/plating,/area/ship_battle/celestia/aft_port_maintenance)
-"jQ" = (/obj/machinery/disposal,/obj/structure/sign/deathsposal{dir = 4; pixel_x = -32},/turf/simulated/floor/tiled,/area/ship_battle/celestia/xenobiology)
+"jQ" = (/obj/machinery/disposal,/obj/structure/sign/warning/deathsposal{dir = 4; pixel_x = -32},/turf/simulated/floor/tiled,/area/ship_battle/celestia/xenobiology)
 "jR" = (/obj/machinery/smartfridge/secure/extract,/turf/simulated/floor/tiled,/area/ship_battle/celestia/xenobiology)
 "jS" = (/obj/machinery/smartfridge/drying_rack,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/ship_battle/celestia/xenobiology)
 "jT" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/alarm/battle{dir = 8; pixel_x = 30},/turf/simulated/floor/tiled,/area/ship_battle/celestia/xenobiology)

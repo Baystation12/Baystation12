@@ -294,7 +294,7 @@
 "fH" = (/obj/machinery/mineral/output,/obj/machinery/conveyor{dir = 8; id = "0mining_platform_conveyor"},/turf/simulated/floor/plating,/area/ship_battle/asteroid/mining_platform/central)
 "fI" = (/obj/machinery/mineral/processing_unit,/turf/simulated/floor/plating,/area/ship_battle/asteroid/mining_platform/central)
 "fJ" = (/obj/machinery/mineral/unloading_machine,/turf/simulated/floor/plating,/area/ship_battle/asteroid/mining_platform/central)
-"fK" = (/obj/effect/overmap/asteroid{dimensions_x = 75; dimensions_y = 75; icon_state = "asteroid_large"; landing_area = /area/shuttle/mining_shuttle/destination; name = "Huge Asteroid"},/turf/unsimulated/mineral,/area/ship_battle/asteroid/mining_platform)
+"fK" = (/obj/effect/overmap/station/asteroid{dimensions_x = 150; dimensions_y = 150; icon_state = "asteroid_large"; name = "Huge Asteroid"},/turf/unsimulated/mineral,/area/ship_battle/asteroid/mining_platform)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

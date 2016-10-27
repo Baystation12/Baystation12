@@ -22,6 +22,20 @@
 
 	var/em_signature = 0
 
+/obj/effect/overmap/Destroy()
+	fire_controls.Cut()
+	fire_controls.Cut()
+	if(fake)
+		qdel(fake_ship)
+		fake_ship = null
+	map_sectors["[z]"] = null
+	landing_areas.Cut()
+	for(var/obj/machinery/space_battle/O in world)
+		if(O.z in map_z)
+			O.linked = null
+	map_z = null
+	return ..()
+
 /obj/effect/overmap/initialize()
 	if(!config.use_overmap)
 		qdel(src)
