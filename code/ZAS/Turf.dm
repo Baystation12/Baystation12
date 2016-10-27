@@ -55,24 +55,24 @@
 	#ifdef ZLEVELS
 	return 0 //TODO generalize this to multiz.
 	#else
-	
+
 	if(!zone) return 1
-	
+
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
-	
+
 	for(var/dir in list(NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHWEST))
-		
+
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf
 			var/connected_dirs = get_zone_neighbours(get_step(src, dir))
 			if(connected_dirs && (dir & turn(connected_dirs, 180)) == dir)
 				unconnected_dirs &= ~dir //they are, so unflag the cardinals in question
-	
+
 	//it is safe to remove src from the zone if all cardinals are connected by corner turfs
 	return !unconnected_dirs
-	
+
 	#endif
 
 //helper for can_safely_remove_from_zone()
@@ -93,7 +93,7 @@
 	var/s_block = c_airblock(src)
 	if(s_block & AIR_BLOCKED)
 		#ifdef ZASDBG
-		if(verbose) world << "Self-blocked."
+		if(verbose) to_chat(world, "Self-blocked.")
 		//dbg(blocked)
 		#endif
 		if(zone)
@@ -126,7 +126,7 @@
 		if(block & AIR_BLOCKED)
 
 			#ifdef ZASDBG
-			if(verbose) world << "[d] is blocked."
+			if(verbose) to_chat(world, "[d] is blocked.")
 			//unsim.dbg(air_blocked, turn(180,d))
 			#endif
 
@@ -136,7 +136,7 @@
 		if(r_block & AIR_BLOCKED)
 
 			#ifdef ZASDBG
-			if(verbose) world << "[d] is blocked."
+			if(verbose) to_chat(world, "[d] is blocked.")
 			//dbg(air_blocked, d)
 			#endif
 
@@ -162,12 +162,12 @@
 				//Might have assigned a zone, since this happens for each direction.
 				if(!zone)
 
-					//We do not merge if 
+					//We do not merge if
 					//    they are blocking us and we are not blocking them, or if
 					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
 					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))
 						#ifdef ZASDBG
-						if(verbose) world << "[d] is zone blocked."
+						if(verbose) to_chat(world, "[d] is zone blocked.")
 						//dbg(zone_blocked, d)
 						#endif
 
@@ -181,22 +181,22 @@
 
 						#ifdef ZASDBG
 						dbg(assigned)
-						if(verbose) world << "Added to [zone]"
+						if(verbose) to_chat(world, "Added to [zone]")
 						#endif
 
 				else if(sim.zone != zone)
 
 					#ifdef ZASDBG
-					if(verbose) world << "Connecting to [sim.zone]"
+					if(verbose) to_chat(world, "Connecting to [sim.zone]")
 					#endif
 
 					air_master.connect(src, sim)
 
 
 			#ifdef ZASDBG
-				else if(verbose) world << "[d] has same zone."
+				to_chat(else if(verbose) world, "[d] has same zone.")
 
-			else if(verbose) world << "[d] has invalid zone."
+			to_chat(else if(verbose) world, "[d] has invalid zone.")
 			#endif
 
 		else

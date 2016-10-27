@@ -234,7 +234,8 @@ swapmap
 					S.cd="[x-x1+1]"
 					var/turf/T=locate(x,y,z)
 					S["type"] << T.type
-					if(T.loc!=defarea) S["AREA"] << areas[T.loc]
+					if(T.loc!=defarea)
+						S["AREA"] << areas[T.loc]
 					T.Write(S)
 					S.cd=".."
 				S.cd=".."
@@ -382,7 +383,7 @@ swapmap
 	proc/Save()
 		if(id==src) return 0
 		var/savefile/S=mode?(new):new("map_[id].sav")
-		S << src
+		to_chat(S, src)
 		while(locked) sleep(1)
 		if(mode)
 			fdel("map_[id].txt")
@@ -455,23 +456,28 @@ atom
 	Write(savefile/S)
 		for(var/V in vars-"x"-"y"-"z"-"contents"-"icon"-"overlays"-"underlays")
 			if(issaved(vars[V]))
-				if(vars[V]!=initial(vars[V])) S[V]<<vars[V]
+				if(vars[V]!=initial(vars[V]))
+					S[V] << vars[V]
 				else S.dir.Remove(V)
 		if(icon!=initial(icon))
 			if(swapmaps_iconcache && swapmaps_iconcache[icon])
-				S["icon"]<<swapmaps_iconcache[icon]
-			else S["icon"]<<icon
+				S["icon"] << swapmaps_iconcache[icon]
+			else
+				S["icon"] << icon
 		// do not save mobs with keys; do save other mobs
 		var/mob/M
 		for(M in src) if(M.key) break
-		if(overlays.len) S["overlays"]<<overlays
-		if(underlays.len) S["underlays"]<<underlays
+		if(overlays.len)
+			S["overlays"] << overlays
+		if(underlays.len)
+			S["underlays"] << underlays
 		if(contents.len && !isarea(src))
 			var/list/l=contents
 			if(M)
 				l=l.Copy()
 				for(M in src) if(M.key) l-=M
-			if(l.len) S["contents"]<<l
+			if(l.len)
+				S["contents"] << l
 			if(l!=contents) qdel(l)
 	Read(savefile/S)
 		var/list/l

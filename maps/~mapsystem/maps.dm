@@ -14,7 +14,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		else
 			M = new type
 		if(!M.path)
-			world << "<span class=danger>Map '[M]' does not have a defined path, not adding to map list!</span>"
+			to_chat(world, "<span class=danger>Map '[M]' does not have a defined path, not adding to map list!</span>")
 			world.log << "Map '[M]' does not have a defined path, not adding to map list!"
 		else
 			all_maps[M.path] = M

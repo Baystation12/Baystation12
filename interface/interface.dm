@@ -8,7 +8,7 @@
 			return
 		src << link(config.wikiurl)
 	else
-		src << "<span class='warning'>The wiki URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
 	return
 
 /client/verb/forum()
@@ -20,7 +20,7 @@
 			return
 		src << link(config.forumurl)
 	else
-		src << "<span class='warning'>The forum URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
 	return
 
 #define RULES_FILE "config/rules.html"
@@ -145,10 +145,10 @@ Any-Mode: (hotkey doesn't need to be on)
 </font>"}
 
 	if(isrobot(src.mob))
-		src << robot_hotkey_mode
-		src << robot_other
+		to_chat(src, robot_hotkey_mode)
+		to_chat(src, robot_other)
 	else
-		src << hotkey_mode
-		src << other
+		to_chat(src, hotkey_mode)
+		to_chat(src, other)
 	if(holder)
-		src << admin
+		to_chat(src, admin)

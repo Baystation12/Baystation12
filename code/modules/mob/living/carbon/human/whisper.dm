@@ -7,7 +7,7 @@
 
 	if (src.client)
 		if (src.client.prefs.muted & MUTE_IC)
-			src << "\red You cannot whisper (muted)."
+			to_chat(src, "\red You cannot whisper (muted).")
 			return
 
 
@@ -32,7 +32,7 @@
 /mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
 
 	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
 	var/message_range = 1
@@ -111,13 +111,13 @@
 	spawn(30) qdel(speech_bubble)
 
 	for(var/mob/M in listening)
-		M << speech_bubble
+		to_chat(M, speech_bubble)
 		M.hear_say(message, verb, speaking, alt_name, italics, src)
 
 	if (eavesdropping.len)
 		var/new_message = stars(message)	//hopefully passing the message twice through stars() won't hurt... I guess if you already don't understand the language, when they speak it too quietly to hear normally you would be able to catch even less.
 		for(var/mob/M in eavesdropping)
-			M << speech_bubble
+			to_chat(M, speech_bubble)
 			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
 
 	if (watching.len)

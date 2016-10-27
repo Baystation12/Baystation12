@@ -14,12 +14,12 @@
 
 	To add a receiver to an object:
 		Add the following variables to the object:
-			var/_wifi_id		<< variable that can be configured on the map, this is passed to the receiver later
-			var/datum/wifi/receiver/subtype/wifi_receiver		<< the receiver (and subtype itself)
+					to_chat(var/_wifi_id, variable that can be configured on the map, this is passed to the receiver later)
+					to_chat(var/datum/wifi/receiver/subtype/wifi_receiver, the receiver (and subtype itself))
 
 		Add or modify the objects initialize() proc to include:
-			if(_wifi_id)		<< only creates a wifi receiver if an id is set
-				wifi_receiver = new(_wifi_id, src)		<< this needs to be in initialize() as New() is usually too 
+					to_chat(if(_wifi_id), only creates a wifi receiver if an id is set)
+						to_chat(wifi_receiver = new(_wifi_id, src), this needs to be in initialize() as New() is usually too)
 														   early, and the receiver will try to connect to the controller 
 														   before it is setup.
 
