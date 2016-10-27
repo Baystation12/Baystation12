@@ -1,7 +1,7 @@
 /obj/item/device/dociler
 	name = "dociler"
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 2)
 	icon_state = "animal_tagger1"
 	item_icons = list(

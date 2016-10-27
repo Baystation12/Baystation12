@@ -984,11 +984,6 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
-/mob/living/carbon/human/proc/get_full_print()
-	if(!dna ||!dna.uni_identity)
-		return
-	return md5(dna.uni_identity)
-
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
 	gunshot_residue = null
@@ -1043,7 +1038,7 @@
 			"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
 			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
 			"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
-		src << msg
+		custom_pain(msg,40)
 
 	organ.take_damage(rand(1,3), 0, 0)
 	if(!(organ.robotic >= ORGAN_ROBOT) && (should_have_organ(BP_HEART))) //There is no blood in protheses.
@@ -1456,7 +1451,7 @@
 	else if(istype(victim, /obj/item) && !istype(victim, /obj/item/weapon/holder)) //Don't eat holders. They are special.
 		var/obj/item/I = victim
 		var/cost = I.get_storage_cost()
-		if(cost != DO_NOT_STORE)
+		if(cost != ITEM_SIZE_NO_CONTAINER)
 			if((src.species.gluttonous & GLUT_ITEM_TINY) && cost < 4)
 				return DEVOUR_SLOW
 			else if((src.species.gluttonous & GLUT_ITEM_NORMAL) && cost <= 4)

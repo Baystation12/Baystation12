@@ -24,7 +24,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
-	proc/setup_map()
 	var/path
 
 	var/list/station_levels = list() // Z-levels the station exists on
@@ -63,7 +62,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/evac_controller_type = /datum/evacuation_controller
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 
-
+	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
+	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
+	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
+	
+	var/list/branch_types  // list of branch datum paths for military branches available on this map
+	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
+	
 /datum/map/New()
 	..()
 	if(!map_levels)
@@ -71,10 +76,17 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
 
-// Used to apply various post-compile procedural effects to the map.
+/datum/map/proc/setup_map()
+	var/list/lobby_music_tracks = subtypesof(/lobby_music)
+	var/lobby_music_type = /lobby_music
+	if(lobby_music_tracks.len)
+		lobby_music_type = pick(lobby_music_tracks)
+	lobby_music = new lobby_music_type()
+
 /datum/map/proc/perform_map_generation()
 	return
 
+// Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()
 
 	set background = 1

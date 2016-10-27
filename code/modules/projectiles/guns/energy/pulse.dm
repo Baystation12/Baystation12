@@ -8,7 +8,7 @@
 	projectile_type = /obj/item/projectile/beam
 	sel_mode = 2
 	max_shots = 30
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_delay=null, charge_cost=null),
@@ -39,4 +39,4 @@
 	icon_state = "m1911-p"
 	item_state = "pulse"
 	max_shots = 8
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL

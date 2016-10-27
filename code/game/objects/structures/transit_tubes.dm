@@ -7,7 +7,8 @@
 	icon = 'icons/obj/pipes/transit_tube.dmi'
 	icon_state = "E-W"
 	density = 1
-	layer = 3.1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	anchored = 1.0
 	var/list/tube_dirs = null
 	var/exit_delay = 2

@@ -55,7 +55,7 @@
 				density = 0
 				layer = OBJ_LAYER
 
-				loc = user.loc
+				forceMove(user.loc)
 				if(ishuman(user))
 					if(!user.get_active_hand())
 						user.put_in_hands(src)
@@ -104,7 +104,8 @@
 		bmark.pixel_x = p_x
 		bmark.pixel_y = p_y
 		bmark.icon = 'icons/effects/effects.dmi'
-		bmark.layer = 3.5
+		bmark.plane = OBJ_PLANE
+		bmark.layer = ABOVE_OBJ_LAYER
 		bmark.icon_state = "scorch"
 
 		if(decaltype == 1)

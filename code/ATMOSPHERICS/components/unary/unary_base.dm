@@ -1,7 +1,8 @@
 /obj/machinery/atmospherics/unary
 	dir = SOUTH
 	initialize_directions = SOUTH
-	//layer = TURF_LAYER+0.1
+
+	layer = ABOVE_TILE_LAYER
 
 	var/datum/gas_mixture/air_contents
 

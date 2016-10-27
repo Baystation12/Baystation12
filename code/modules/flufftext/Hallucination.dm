@@ -47,7 +47,8 @@ mob/living/carbon/proc/handle_hallucinations()
 						if(!H.r_store) slots_free += ui_storage2
 					if(slots_free.len)
 						halitem.screen_loc = pick(slots_free)
-						halitem.layer = 50
+						halitem.plane = FULLSCREEN_PLANE
+						halitem.layer = HALLUCINATION_LAYER
 						switch(rand(1,6))
 							if(1) //revolver
 								halitem.icon = 'icons/obj/gun.dmi'
@@ -343,8 +344,8 @@ var/list/non_fakeattack_weapons = list(/obj/item/weapon/gun/projectile, /obj/ite
 	/obj/item/weapon/storage/toolbox/syndicate, /obj/item/weapon/aiModule,\
 	/obj/item/device/radio/headset/syndicate,	/obj/item/weapon/plastique,\
 	/obj/item/device/powersink, /obj/item/weapon/storage/box/syndie_kit,\
-	/obj/item/toy/syndicateballoon, /obj/item/weapon/gun/energy/captain,\
-	/obj/item/weapon/hand_tele, /obj/item/weapon/rcd, /obj/item/weapon/tank/jetpack,\
+	/obj/item/toy/balloon, /obj/item/weapon/gun/energy/captain,\
+	/obj/item/weapon/rcd, /obj/item/weapon/tank/jetpack,\
 	/obj/item/clothing/under/rank/captain, /obj/item/weapon/aicard,\
 	/obj/item/clothing/shoes/magboots, /obj/item/blueprints, /obj/item/weapon/disk/nuclear,\
 	/obj/item/clothing/suit/space/void, /obj/item/weapon/tank)

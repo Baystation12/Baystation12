@@ -1,3 +1,4 @@
+#define WORLD_ICON_SIZE 32
 
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()
@@ -70,9 +71,10 @@
 	area = /area/space
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
+	icon_size = WORLD_ICON_SIZE
 
 
-#define RECOMMENDED_VERSION 509
+#define RECOMMENDED_VERSION 510
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
@@ -191,7 +193,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			for(var/client/C in clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue
 					admins[C.key] = C.holder.rank
 				players += C.key
@@ -206,7 +208,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			for(var/client/C in clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue	//so stealthmins aren't revealed by the hub
 					admins++
 				s["player[n]"] = C.key

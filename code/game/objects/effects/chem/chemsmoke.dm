@@ -4,7 +4,8 @@
 /obj/effect/effect/smoke/chem
 	icon = 'icons/effects/chemsmoke.dmi'
 	opacity = 0
-	layer = 6
+	plane = EFFECTS_BELOW_LIGHTING_PLANE
+	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASSTABLE | PASSGRILLE | PASSGLASS //PASSGLASS is fine here, it's just so the visual effect can "flow" around glass
 	var/splash_amount = 10 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
@@ -12,18 +13,18 @@
 
 /obj/effect/effect/smoke/chem/New(var/newloc, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
 	time_to_live = smoke_duration
-	
+
 	..()
-	
+
 	create_reagents(500)
-	
+
 	if(cached_icon)
 		icon = cached_icon
-	
+
 	set_dir(pick(cardinal))
 	pixel_x = -32 + rand(-8, 8)
 	pixel_y = -32 + rand(-8, 8)
-	
+
 	//switching opacity on after the smoke has spawned, and then turning it off before it is deleted results in cleaner
 	//lighting and view range updates (Is this still true with the new lighting system?)
 	opacity = 1
@@ -64,7 +65,7 @@
 // Fades out the smoke smoothly using it's alpha variable.
 /obj/effect/effect/smoke/chem/proc/fadeOut(var/frames = 16)
 	if(!alpha) return //already transparent
-	
+
 	frames = max(frames, 1) //We will just assume that by 0 frames, the coder meant "during one frame".
 	var/alpha_step = round(alpha / frames)
 	while(alpha > 0)
@@ -222,7 +223,7 @@
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
-		smoke = PoolOrNew(/obj/effect/effect/smoke/chem, list(location, smoke_duration + rand(0, 20), T, I))
+		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(0, 20), T, I)
 
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
@@ -233,7 +234,7 @@
 
 
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/smoke_duration, var/icon/I, var/dist = 1)
-	var/obj/effect/effect/smoke/chem/spores = PoolOrNew(/obj/effect/effect/smoke/chem, location)
+	var/obj/effect/effect/smoke/chem/spores = new /obj/effect/effect/smoke/chem(location)
 	spores.name = "cloud of [seed.seed_name] [seed.seed_noun]"
 	..(T, I, smoke_duration, dist, spores)
 

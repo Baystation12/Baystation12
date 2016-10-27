@@ -10,7 +10,9 @@
 			qdel(spell_master)
 		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
-			qdel(AM)
+			var/obj/screen/screenobj = AM
+			if(!istype(screenobj) || !screenobj.globalscreen)
+				qdel(screenobj)
 		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
@@ -63,7 +65,7 @@
 				if(((type & VISIBLE_MESSAGE) && is_blind()))
 					return
 
-	src << msg
+	to_chat(src, msg)
 
 
 
@@ -134,10 +136,10 @@
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
-			. += O.w_class / 5
+			. += between(0, O.w_class, ITEM_SIZE_GARGANTUAN) / 5
 		else if(istype(pulling, /mob))
 			var/mob/M = pulling
-			. += M.mob_size / MOB_MEDIUM
+			. += max(0, M.mob_size) / MOB_MEDIUM
 		else
 			. += 1
 
@@ -452,16 +454,18 @@
 		prefs.save_preferences()
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 
-/mob/verb/observe()
+/mob/new_player/verb/observe()
 	set name = "Observe"
 	set category = "OOC"
+
+	if(!(initialization_stage&INITIALIZATION_COMPLETE))
+		to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+		return
+
 	var/is_admin = 0
 
 	if(client.holder && (client.holder.rights & R_ADMIN))
 		is_admin = 1
-	else if(stat != DEAD || istype(src, /mob/new_player))
-		usr << "\blue You must be observing to use this!"
-		return
 
 	if(is_admin && stat == DEAD)
 		is_admin = 0
@@ -643,7 +647,7 @@
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
 		if(H.pull_damage())
-			src << "\red <B>Pulling \the [H] in their current condition would probably be a bad idea.</B>"
+			src << "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>"
 
 	//Attempted fix for people flying away through space when cuffed and dragged.
 	if(ismob(AM))
@@ -689,13 +693,14 @@
 	if(statpanel("Status"))
 		if(ticker && ticker.current_state != GAME_STATE_PREGAME)
 			stat("Station Time", stationtime2text())
+			stat("Station Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
 		if(client.holder)
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
-			
+
 	if(client.holder && statpanel("Processes"))
 		if(processScheduler)
 			processScheduler.statProcesses()
@@ -755,6 +760,7 @@
 		if(r_hand) unEquip(r_hand)
 	else
 		density = initial(density)
+	reset_layer()
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)
@@ -772,6 +778,12 @@
 
 	return canmove
 
+/mob/proc/reset_layer()
+	if(lying)
+		plane = LYING_MOB_PLANE
+		layer = LYING_MOB_LAYER
+	else
+		reset_plane_and_layer()
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || client.moving || world.time < client.move_delay)
@@ -970,7 +982,7 @@ mob/proc/yank_out_object()
 		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
 			affected.wounds += I
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50)
 
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U

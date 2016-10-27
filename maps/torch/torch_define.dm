@@ -4,6 +4,8 @@
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
+	lobby_icon = 'maps/torch/torch_lobby.dmi'
+
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
 	player_levels = list(1,2,3,4,5,6,7,8,9)
@@ -44,7 +46,7 @@
 							NETWORK_THUNDER,
 							)
 	evac_controller_type = /datum/evacuation_controller/pods
-
+	
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.

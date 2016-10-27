@@ -25,7 +25,8 @@ var/global/list/light_type_cache = list()
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 
 	var/stage = 1
 	var/fixture_type = /obj/machinery/light
@@ -123,7 +124,8 @@ var/global/list/light_type_cache = list()
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	stage = 1
 	fixture_type = /obj/machinery/light/small
 	sheets_refunded = 1
@@ -142,7 +144,8 @@ var/global/list/light_type_cache = list()
 	icon_state = "tube1"
 	desc = "A lighting fixture."
 	anchored = 1
-	layer = 5  					// They were appearing under mobs which is a little weird - Ostaf
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = 2
 	idle_power_usage = 2
 	active_power_usage = 20
@@ -576,7 +579,7 @@ obj/machinery/light/proc/burn_out()
 	icon = 'icons/obj/lighting.dmi'
 	force = 2
 	throwforce = 5
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
@@ -605,7 +608,7 @@ obj/machinery/light/proc/burn_out()
 		)
 
 /obj/item/weapon/light/tube/large
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
 	brightness_range = 12
 	brightness_power = 4

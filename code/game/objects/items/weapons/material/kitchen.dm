@@ -5,7 +5,7 @@
  * Utensils
  */
 /obj/item/weapon/material/kitchen/utensil
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	thrown_force_divisor = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
@@ -85,11 +85,12 @@
 
 // Identical to the tactical knife but nowhere near as stabby.
 // Kind of like the toy esword compared to the real thing.
+//Making the sprite clear that this is a small knife
 /obj/item/weapon/material/kitchen/utensil/knife/boot
-	name = "boot knife"
-	desc = "A small fixed-blade knife for putting inside a boot."
+	name = "small knife"
+	desc = "A small, easily concealed knife."
 	icon = 'icons/obj/weapons.dmi'
-	icon_state = "tacknife"
+	icon_state = "pocketknife_open"
 	item_state = "knife"
 	applies_material_colour = 0
 	unbreakable = 1

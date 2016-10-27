@@ -499,7 +499,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && (robotic < ORGAN_ROBOT))
 		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
 		wounds += I
-		owner.custom_pain("You feel something rip in your [name]!", 1)
+		owner.custom_pain("You feel something rip in your [name]!", 50)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if((damage > 5 || damage + burn_dam >= 15) && type == BURN && (robotic < ORGAN_ROBOT))
@@ -716,7 +716,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
 			if(prob(1 * wound_update_accuracy))
-				owner.custom_pain("You feel a stabbing pain in your [name]!",1)
+				owner.custom_pain("You feel a stabbing pain in your [name]!",50)
 
 		// slow healing
 		var/heal_amt = 0
@@ -887,7 +887,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
 			for(var/obj/item/I in src)
-				if(I.w_class > SMALL_ITEM && !istype(I,/obj/item/organ))
+				if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
 					I.loc = get_turf(src)
 			qdel(src)
 		if(DROPLIMB_BLUNT)
@@ -1159,7 +1159,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	for(var/atom/movable/implant in implants)
 		//large items and non-item objs fall to the floor, everything else stays
 		var/obj/item/I = implant
-		if(istype(I) && I.w_class < NORMAL_ITEM)
+		if(istype(I) && I.w_class < ITEM_SIZE_NORMAL)
 			implant.forceMove(src)
 
 			// let actual implants still inside know they're no longer implanted

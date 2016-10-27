@@ -31,7 +31,9 @@
 	var/force_down //determines if the affecting mob will be pinned to the ground
 	var/dancing //determines if assailant and affecting keep looking at each other. Basically a wrestling position
 
-	layer = 21
+	plane = HUD_PLANE
+	layer = HUD_ITEM_LAYER
+
 	abstract = 1
 	item_state = "nothing"
 	simulated = 0
@@ -65,7 +67,7 @@
 	adjust_position()
 
 /obj/item/weapon/grab/get_storage_cost()
-	return DO_NOT_STORE
+	return ITEM_SIZE_NO_CONTAINER
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
 /obj/item/weapon/grab/proc/throw_held()
@@ -179,7 +181,7 @@
 /obj/item/weapon/grab/proc/reset_position()
 	if(!affecting.buckled)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
-	affecting.layer = initial(affecting.layer)
+	affecting.reset_plane_and_layer()
 
 //Updating pixelshift, position and direction
 //Gets called on process, when the grab gets upgraded or the assailant moves
@@ -195,7 +197,7 @@
 		return
 	var/shift = 0
 	var/adir = get_dir(assailant, affecting)
-	affecting.layer = initial(affecting.layer)
+	affecting.reset_plane_and_layer()
 	switch(state)
 		if(GRAB_PASSIVE)
 			shift = 8
@@ -208,17 +210,18 @@
 			shift = -10
 			adir = assailant.dir
 			affecting.set_dir(assailant.dir)
-			affecting.loc = assailant.loc
+			affecting.forceMove(assailant.loc)
 		if(GRAB_KILL)
 			shift = 0
 			adir = 1
 			affecting.set_dir(SOUTH) //face up
-			affecting.loc = assailant.loc
+			affecting.forceMove(assailant.loc)
 
 	switch(adir)
 		if(NORTH)
 			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
-			affecting.layer = initial(affecting.layer) - 0.1
+			affecting.plane = assailant.plane
+			affecting.layer = assailant.layer - 0.01
 		if(SOUTH)
 			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
 		if(WEST)
@@ -262,9 +265,8 @@
 		state = GRAB_NECK
 		icon_state = "grabbed+1"
 		assailant.set_dir(get_dir(assailant, affecting))
-		affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>"
-		assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>"
-		msg_admin_attack("[key_name(assailant)] grabbed the neck of [key_name(affecting)]")
+		admin_attack_log(assailant, affecting, "Grabbed the neck of their victim.", "Had their neck grabbed", "grabbed the neck of")
+
 		hud.icon_state = "kill"
 		hud.name = "kill"
 		affecting.Stun(10) //10 ticks of ensured grab
@@ -274,9 +276,7 @@
 
 		state = GRAB_KILL
 		assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting]'s neck!</span>")
-		affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has been strangled (kill intent) by [assailant.name] ([assailant.ckey])</font>"
-		assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>"
-		msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
+		admin_attack_log(assailant, affecting, "Strangled their victim", "Was strangled", "strangled")
 
 		affecting.setClickCooldown(10)
 		affecting.set_dir(WEST)
@@ -400,7 +400,7 @@
 	if(affecting)
 		reset_position()
 		affecting.grabbed_by -= src
-		affecting.layer = initial(affecting.layer)
+		affecting.reset_plane_and_layer()
 		affecting = null
 	if(assailant)
 		if(assailant.client)

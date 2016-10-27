@@ -11,10 +11,9 @@
 	anchored = 1
 
 	var/needs_dish = 0
-	var/obj/machinery/space_battle/missile_sensor/dish/dish
+	var/list/dishes = list()
 
 	initialize()
-		..()
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			req_access = list(A.team*10 - SPACE_ENGINEERING)
@@ -25,11 +24,13 @@
 				linked.em_signature += 1
 		spawn(5)
 			reconnect()
+		..()
 
 
 	Destroy()
 		sensor_id = null
-		if(dish)
+		for(var/M in dishes)
+			var/obj/machinery/space_battle/missile_sensor/dish/dish = M
 			dish.linked_sensor = null
 			dish = null
 		if(linked && istype(linked))
@@ -82,12 +83,24 @@
 		if(use_power == 1)
 			return "Disabled"
 		if(needs_dish)
-			if(!dish)
-				reconnect()
-				if(!dish)
+			var/dish_count = 0
+			for(var/M in dishes)
+				var/obj/machinery/space_battle/missile_sensor/dish/D = M
+				if(D && D.can_sense() == 1)
+					dish_count += 1
+					if(dish_count >= needs_dish)
+						break
+			if(dish_count < needs_dish)
+				if(!dishes.len)
 					return "Wireless Connection Severed: No connected dish."
-			else if(dish.can_sense() != 1)
-				return "Wireless Connection Severed: Dish status - [dish.can_sense()]"
+				else
+					var/return_statement = ""
+					var/i = 0
+					for(var/obj/machinery/space_battle/missile_sensor/dish/S in dishes)
+						i++
+						if(S.can_sense() != 1)
+							return_statement += "Dish #[i]: [S.can_sense()]<br>"
+					return return_statement
 		return 1
 
 	examine(var/mob/user)
@@ -102,13 +115,13 @@
 		..()
 
 	reconnect()
-		dish = null
+		dishes.Cut()
 		if(needs_dish && linked)
 			for(var/obj/machinery/space_battle/missile_sensor/dish/D in linked.fire_sensors)
 				if(D.sensor_id == src.sensor_id)
-					dish = D
-					D.linked_sensor = src
-					break
+					D.link_to(src)
+					dishes.Add(D)
+
 
 	proc/toggle_active()
 		if(use_power == 1)
@@ -140,6 +153,11 @@
 
 	var/obj/machinery/space_battle/missile_sensor/linked_sensor
 
+	proc/link_to(var/obj/machinery/space_battle/missile_sensor/linked)
+		if(linked_sensor)
+			linked_sensor.dishes.Remove(src)
+		linked_sensor = linked
+
 	reconnect()
 		return 0
 
@@ -164,7 +182,7 @@
 
 	Destroy()
 		if(linked_sensor)
-			linked_sensor.dish = null
+			linked_sensor.dishes.Remove(src)
 			linked_sensor = null
 		return ..()
 

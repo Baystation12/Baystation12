@@ -19,6 +19,8 @@
 
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
 
+#define isclient(A) istype(A, /client)
+
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
@@ -47,6 +49,8 @@
 
 #define isorgan(A) istype(A, /obj/item/organ/external)
 
+#define isspace(A) istype(A, /area/space)
+
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
@@ -54,6 +58,8 @@
 #define issilicon(A) istype(A, /mob/living/silicon)
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
+
+#define isweakref(A) istype(A, /weakref)
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
 
@@ -72,3 +78,7 @@
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 
 #define any2ref(x) "\ref[x]"
+
+#define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
+
+#define qdel_null(x) if(x) { qdel(x) ; x = null }

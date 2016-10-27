@@ -10,7 +10,7 @@ var/global/list/cached_icons = list()
 	icon_state = "paint_neutral"
 	item_state = "paintcan"
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "10;20;30;60"
 	volume = 60

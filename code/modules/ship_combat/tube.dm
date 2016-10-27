@@ -112,7 +112,7 @@
 			M.power *= (1+(rails.len*0.02))
 		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
 			B.fired()
-			sleep(5)
+			sleep(1)
 		var/list/shields = list()
 		for(var/obj/machinery/space_battle/shield_generator/generator in world)
 			if(generator.z == start.z)

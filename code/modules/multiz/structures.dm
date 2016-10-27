@@ -52,13 +52,20 @@
 		return 0
 	var/obj/structure/ladder/target = target_down ? target_down : target_up
 	if(target_down && target_up)
-		switch(alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel"))
+		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
+		
+		if(direction == "Cancel")
+			return 0
+		
+		if(!M.Adjacent(src))
+			M << "<span class='warning'>You need to be next to \the [src] to start climbing.</span>"
+			return 0
+			
+		switch(direction)
 			if("Up")
 				target = target_up
 			if("Down")
 				target = target_down
-			if("Cancel")
-				return 0
 	if(!target)
 		return 0
 

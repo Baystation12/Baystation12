@@ -4,7 +4,7 @@
 	desc = "Small wall-mounted holographic projector."
 	icon = 'icons/obj/holosign.dmi'
 	icon_state = "sign_off"
-	layer = 4
+	layer = ABOVE_OBJ_LAYER
 	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 70

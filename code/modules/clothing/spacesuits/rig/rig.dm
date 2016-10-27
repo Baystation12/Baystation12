@@ -14,7 +14,7 @@
 	slot_flags = SLOT_BACK
 	req_one_access = list()
 	req_access = list()
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	center_of_mass = null
 
 	// These values are passed on to all component pieces.

@@ -67,7 +67,3 @@
 
 /mob/living/simple_animal/hostile/scarybat/cult/cultify()
 	return
-
-/mob/living/simple_animal/hostile/scarybat/cult/Life()
-	..()
-	check_horde()

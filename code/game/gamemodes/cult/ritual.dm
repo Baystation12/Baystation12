@@ -291,10 +291,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			words[cultwords[V]] = V
 
 	attack(mob/living/M as mob, mob/living/user as mob)
-
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on them by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		admin_attack_log(user, M, "Used [name] on their victim", "Had \the [name] used on them", "used the [src] on")
 
 		if(isghost(M))
 			var/mob/observer/ghost/D = M
@@ -442,7 +439,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	return
 
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	var/cultistsonly = 1
 	attack_self(mob/user as mob)
 		if(src.cultistsonly && !iscultist(usr))

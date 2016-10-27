@@ -104,10 +104,14 @@
 		slot_l_hand_str = "det_hat",
 		slot_r_hand_str = "det_hat",
 		)
-	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
 	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	body_parts_covered = 0
+	flags_inv = BLOCKHEADHAIR
+
+/obj/item/clothing/head/det/attack_self(mob/user)
+	flags_inv ^= BLOCKHEADHAIR
+	user << "<span class='notice'>[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair.</span>"
+	..()
 
 /obj/item/clothing/head/det/grey
 	icon_state = "detective2"
@@ -142,6 +146,7 @@
 	name = "Dermal Armour Patch"
 	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
 	icon_state = "dermal"
+	armor = list(melee = 50, bullet = 50, laser = 50,energy = 25, bomb = 30, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/armor/hos

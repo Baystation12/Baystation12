@@ -80,12 +80,6 @@ LOG_PDA
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
-##Show mods on staffwho
-SHOW_MODS
-
-##Show mentors on staffwho
-SHOW_MENTORS
-
 ## Chooses whether mods have the ability to tempban or not
 MODS_CAN_TEMPBAN
 
@@ -381,10 +375,6 @@ STARLIGHT 0
 
 ## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
 # DEFAULT_LANGUAGE_PREFIXES , # -
-
-## A ; separated list of lobby screens to randomly pick from. The listed screens must exist as icon states in '/icons/misc/title.dmi'.
-## Defaults to 'title' if left unset.
-# LOBBY_SCREENS title
 
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
 # ANNOUNCE_SHUTTLE_DOCK_TO_IRC

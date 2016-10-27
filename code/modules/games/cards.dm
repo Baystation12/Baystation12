@@ -5,7 +5,7 @@
 	var/desc = "regular old playing card."
 
 /obj/item/weapon/deck
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
 
@@ -175,7 +175,7 @@
 
 	icon_state = "card_pack"
 	icon = 'icons/obj/playing_cards.dmi'
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/list/cards = list()
 
 
@@ -196,7 +196,7 @@
 	desc = "Some playing cards."
 	icon = 'icons/obj/playing_cards.dmi'
 	icon_state = "empty"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 	var/concealed = 0
 	var/list/cards = list()

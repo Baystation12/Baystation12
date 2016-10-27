@@ -23,10 +23,6 @@
 			spell_holder.client.screen -= src
 		spell_holder = null
 
-/obj/screen/movable/spell_master/ResetVars(var/list/exclude = list())
-	exclude += "spell_objects"
-	..(exclude)
-
 /obj/screen/movable/spell_master/MouseDrop()
 	if(showing)
 		return
@@ -93,7 +89,7 @@
 	if(spell.spell_flags & NO_BUTTON) //no button to add if we don't get one
 		return
 
-	var/obj/screen/spell/newscreen = PoolOrNew(/obj/screen/spell)
+	var/obj/screen/spell/newscreen = new /obj/screen/spell()
 	newscreen.spellmaster = src
 	newscreen.spell = spell
 

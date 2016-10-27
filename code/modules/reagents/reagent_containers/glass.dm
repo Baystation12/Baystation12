@@ -12,7 +12,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60"
 	volume = 60
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	flags = OPENCONTAINER
 	unacidable = 1 //glass doesn't dissolve in acid
 
@@ -201,7 +201,7 @@
 	center_of_mass = "x=15;y=8"
 	matter = list("glass" = 250)
 	volume = 30
-	w_class = 1 //half the volume of a bottle, half the size
+	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25"
 	flags = OPENCONTAINER
@@ -226,7 +226,7 @@
 	item_state = "bucket"
 	center_of_mass = "x=16;y=9"
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = "10;20;30;60;120"
 	volume = 120
@@ -284,7 +284,7 @@
 	item_state = "canister"
 	m_amt = 300
 	g_amt = 0
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = "10;20;30;60"

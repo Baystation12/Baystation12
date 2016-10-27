@@ -76,7 +76,7 @@
 				user << "<span class='notice'>You need a tighter grip.</span>"
 
 	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
-		if(I.w_class > NORMAL_ITEM)
+		if(I.w_class > ITEM_SIZE_NORMAL)
 			user << "<span class='notice'>\The [I] does not fit.</span>"
 			return
 		if(w_items + I.w_class > 5)
@@ -139,7 +139,8 @@
 	name = "mist"
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mist"
-	layer = MOB_LAYER + 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	anchored = 1
 	mouse_opacity = 0
 
@@ -179,13 +180,13 @@
 			spawn(50)
 				if(src && on)
 					ismist = 1
-					mymist = PoolOrNew(/obj/effect/mist,loc)
+					mymist = new /obj/effect/mist(loc)
 		else
 			ismist = 1
-			mymist = PoolOrNew(/obj/effect/mist,loc)
+			mymist = new /obj/effect/mist(loc)
 	else if(ismist)
 		ismist = 1
-		mymist = PoolOrNew(/obj/effect/mist,loc)
+		mymist = new /obj/effect/mist(loc)
 		spawn(250)
 			if(src && !on)
 				qdel(mymist)

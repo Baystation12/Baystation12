@@ -118,8 +118,8 @@ var/global/list/rad_collectors = list()
 	var/obj/item/weapon/tank/phoron/Z = src.P
 	if (!Z)
 		return
-	Z.loc = get_turf(src)
-	Z.layer = initial(Z.layer)
+	Z.forceMove(get_turf(src))
+	Z.reset_plane_and_layer()
 	src.P = null
 	if(active)
 		toggle_power()

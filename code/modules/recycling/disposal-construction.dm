@@ -79,10 +79,12 @@
 			if(14)
 				base_state = "pipe-tagger-partial"
 				dpdir = dir | flip
-
+			if(15)
+				base_state = "pipe-j1s"
+				dpdir = dir | flip
 
 ///// Z-Level stuff
-		if(!(ptype in list(6, 7, 8, 11, 12, 13, 14)))
+		if(!(ptype in list(6, 7, 8, 11, 12, 13, 14, 15)))
 ///// Z-Level stuff
 			icon_state = "con[base_state]"
 		else
@@ -182,6 +184,8 @@
 				return /obj/structure/disposalpipe/tagger
 			if(14)
 				return /obj/structure/disposalpipe/tagger/partial
+			if(15)
+				return /obj/structure/disposalpipe/diversion_junction
 		return
 
 

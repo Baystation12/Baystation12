@@ -23,8 +23,8 @@
 	var/l_hacking = 0
 	var/emagged = 0
 	var/open = 0
-	w_class = 3
-	max_w_class = 2
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 
 	examine(mob/user)
@@ -149,8 +149,8 @@
 	force = 8.0
 	throw_speed = 1
 	throw_range = 4
-	w_class = 5
-	max_w_class = 3
+	w_class = ITEM_SIZE_HUGE
+	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
 	attack_hand(mob/user as mob)
@@ -178,8 +178,8 @@
 	icon_locking = "safeb"
 	icon_sparking = "safespark"
 	force = 8.0
-	w_class = 8.0
-	max_w_class = 8
+	w_class = ITEM_SIZE_NO_CONTAINER
+	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 56
 	anchored = 1.0
 	density = 0
