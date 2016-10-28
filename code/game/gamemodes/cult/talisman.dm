@@ -29,7 +29,8 @@
 				if("blind")
 					call(/obj/effect/rune/proc/blind)()
 				if("runestun")
-					user << "<span class='warning'>To use this talisman, attack your target directly.</span>"
+					to_chat(user, "<span class='warning'>To use this talisman, attack your target directly.</span>")
+
 					return
 				if("supply")
 					supply()
@@ -39,7 +40,8 @@
 					qdel(src)
 			return
 		else
-			user << "You see strange symbols on the paper. Are they supposed to mean something?"
+			to_chat(user, "You see strange symbols on the paper. Are they supposed to mean something?")
+
 			return
 
 

@@ -89,6 +89,6 @@
 		riftimage.loc = T_mob
 
 		src << riftimage
+
 	else
-		if(riftimage)
-			qdel(riftimage)
+		qdel_null(riftimage)

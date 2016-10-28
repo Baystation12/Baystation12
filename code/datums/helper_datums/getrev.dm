@@ -44,4 +44,5 @@ var/global/datum/getrev/revdata = new()
 	else
 		to_chat(src, "<b>Server Revision:</b> Revision Unknown")
 
-	src << "Game ID: <b>[game_id]</b>"
+	to_chat(src, "Game ID: <b>[game_id]</b>")
+

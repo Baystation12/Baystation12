@@ -35,8 +35,10 @@
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
 /datum/game_mode/meme/announce()
-	world << "<B>The current game mode is - Meme!</B>"
-	world << "<B>An unknown creature has infested the mind of a crew member. Find and destroy it by any means necessary.</B>"
+	to_chat(world, "<B>The current game mode is - Meme!</B>")
+
+	to_chat(world, "<B>An unknown creature has infested the mind of a crew member. Find and destroy it by any means necessary.</B>")
+
 
 /datum/game_mode/meme/can_start()
 	if(!..())
@@ -125,7 +127,8 @@
 
 /datum/game_mode/proc/greet_meme(var/datum/mind/meme, var/you_are=1)
 	if (you_are)
-		meme.current << "<span class='danger'>You are a meme!</span>"
+		to_chat(meme.current, "<span class='danger'>You are a meme!</span>")
+
 	show_objectives(meme)
 	return
 

@@ -23,11 +23,13 @@
 
 	var/turf/T = get_turf(explosion_source)
 	if(isStationLevel(T.z))
-		world << "<span class='danger'>The station was destoyed by the nuclear blast!</span>"
+		to_world("<span class='danger'>The station was destoyed by the nuclear blast!</span>")
+
 		dust_mobs(using_map.station_levels)
 		play_cinematic_station_destroyed()
 	else
-		world << "<span class='danger'>A nuclear device was set off, but the explosion was out of reach of the station!</span>"
+		to_world("<span class='danger'>A nuclear device was set off, but the explosion was out of reach of the station!</span>")
+
 		dust_mobs(list(T.z))
 		play_cinematic_station_unaffected()
 
@@ -67,6 +69,7 @@
 /datum/universal_state/nuclear_explosion/proc/start_cinematic_intro()
 	for(var/mob/M in player_list) //I guess so that people in the lobby only hear the explosion
 		M << sound('sound/machines/Alarm.ogg')
+
 	sleep(100)
 
 	show_cinematic_to_players()
@@ -74,7 +77,9 @@
 	sleep(30)
 
 /datum/universal_state/nuclear_explosion/proc/play_cinematic_station_destroyed()
-	world << sound('sound/effects/explosionfar.ogg') //makes no sense if you're not on the station but whatever
+	world << sound('sound/effects/explosionfar.ogg')//makes no sense if you're not on the station but whatever
+
+
 	flick("station_explode_fade_red",cinematic)
 	cinematic.icon_state = "summary_selfdes"
 	sleep(80)
@@ -83,6 +88,8 @@
 	cinematic.icon_state = "station_intact"
 	sleep(5)
 	world << sound('sound/effects/explosionfar.ogg') //makes no sense if you are on the station but whatever
+
+
 	sleep(75)
 
 
@@ -90,6 +97,7 @@
 /datum/universal_state/nuclear_explosion/malf/start_cinematic_intro()
 	for(var/mob/M in player_list) //I guess so that people in the lobby only hear the explosion
 		M << sound('sound/machines/Alarm.ogg')
+
 	sleep(28)
 
 	show_cinematic_to_players()
