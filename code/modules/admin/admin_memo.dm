@@ -22,7 +22,8 @@
 				return
 			if("")
 				F.dir.Remove(ckey)
-				src << "<b>Memo removed</b>"
+				to_chat(src, "<b>Memo removed</b>")
+
 				return
 		if( findtext(memo,"<script",1,0) )
 			return
@@ -35,7 +36,8 @@
 		var/savefile/F = new(MEMOFILE)
 		if(F)
 			for(var/ckey in F.dir)
-				src << "<center><span class='motd'><b>Admin Memo</b><i> by [F[ckey]]</i></span></center>"
+				to_chat(src, "<center><span class='motd'><b>Admin Memo</b><i> by [F[ckey]]</i></span></center>")
+
 
 //delete your own or somebody else's memo
 /client/proc/admin_memo_delete()
@@ -48,7 +50,8 @@
 			ckey = src.ckey
 		if(ckey)
 			F.dir.Remove(ckey)
-			src << "<b>Removed Memo created by [ckey].</b>"
+			to_chat(src, "<b>Removed Memo created by [ckey].</b>")
+
 
 #undef MEMOFILE
 #undef ENABLE_MEMOS

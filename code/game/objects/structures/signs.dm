@@ -22,7 +22,8 @@
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
 	if(istype(tool, /obj/item/weapon/screwdriver) && !istype(src, /obj/structure/sign/double))
-		user << "You unfasten the sign with your [tool.name]."
+		to_chat(user, "You unfasten the sign with your [tool.name].")
+
 		var/obj/item/sign/S = new(src.loc)
 		S.name = name
 		S.desc = desc
@@ -56,7 +57,8 @@
 		S.name = name
 		S.desc = desc
 		S.icon_state = sign_state
-		user << "You fasten \the [S] with your [tool]."
+		to_chat(user, "You fasten \the [S] with your [tool].")
+
 		qdel(src)
 	else ..()
 
