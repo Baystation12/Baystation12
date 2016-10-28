@@ -87,7 +87,7 @@
 	icon_state = "internalaffairs"
 	item_state = "ba_suit"
 	worn_state = "internalaffairs"
-	starting_accessories = list(/obj/item/clothing/accessory/black)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/black)
 
 /obj/item/clothing/under/rank/internalaffairs/plain
 	desc = "A plain shirt and pair of pressed black pants."
@@ -142,7 +142,7 @@
 	icon_state = "bluesuit"
 	item_state = "ba_suit"
 	worn_state = "bluesuit"
-	starting_accessories = list(/obj/item/clothing/accessory/red)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/red)
 
 
 /obj/item/clothing/under/lawyer/purpsuit

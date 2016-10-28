@@ -62,6 +62,20 @@
 	icon_state = "eros_collar_steel"
 	item_state = "eros_collar_steel"
 
+/obj/item/clothing/accessory/collar/horde
+	name = "Locust Necklace"
+	desc = "A heavy peice of jewely, it's medalion constructed of dense gold and onyx, the immense chain connected to it appears to be made of a crude iron. This doesn't seem made for the average human...or any human for that matter."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "eros_horde"
+	item_state = "eros_horde"
+
+/obj/item/clothing/accessory/collar/collar_iron
+	name = "Iron Collar"
+	desc = "A chunky iron restrait, looks like something from a medievil dungeon, a lengthy chain leads down a ways from it's clasp...why would anyone willingly wear this?"
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "eros_collar_iron"
+	item_state = "eros_collar_iron"
+
 /obj/item/clothing/accessory/collar/collar_holo
 	name = "Holo-collar"
 	desc = "An expensive holo-collar for the modern day pet."
@@ -82,3 +96,75 @@
 		user << "<span class='notice'>You set the [name]'s tag to '[str]'.</span>"
 		name = initial(name) + " ([str])"
 		desc = initial(desc) + " The tag says \"[str]\"."
+
+/obj/item/clothing/accessory/scarf
+	name = "scarf"
+	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "eros_scarf"
+
+/obj/item/clothing/accessory/scarf/red
+	name = "red scarf"
+	icon_state = "eros_redscarf"
+
+/obj/item/clothing/accessory/scarf/green
+	name = "green scarf"
+	icon_state = "eros_greenscarf"
+
+/obj/item/clothing/accessory/scarf/darkblue
+	name = "dark blue scarf"
+	icon_state = "eros_darkbluescarf"
+
+/obj/item/clothing/accessory/scarf/purple
+	name = "purple scarf"
+	icon_state = "eros_purplescarf"
+
+/obj/item/clothing/accessory/scarf/yellow
+	name = "yellow scarf"
+	icon_state = "eros_yellowscarf"
+
+/obj/item/clothing/accessory/scarf/orange
+	name = "orange scarf"
+	icon_state = "eros_orangescarf"
+
+/obj/item/clothing/accessory/scarf/lightblue
+	name = "light blue scarf"
+	icon_state = "eros_lightbluescarf"
+
+/obj/item/clothing/accessory/scarf/white
+	name = "white scarf"
+	icon_state = "eros_whitescarf"
+
+/obj/item/clothing/accessory/scarf/black
+	name = "black scarf"
+	icon_state = "eros_blackscarf"
+
+/obj/item/clothing/accessory/scarf/zebra
+	name = "zebra scarf"
+	icon_state = "eros_zebrascarf"
+
+/obj/item/clothing/accessory/scarf/christmas
+	name = "christmas scarf"
+	icon_state = "eros_christmasscarf"
+
+/obj/item/clothing/accessory/stripedredscarf
+	name = "striped red scarf"
+	icon_state = "eros_stripedredscarf"
+
+/obj/item/clothing/accessory/stripedgreenscarf
+	name = "striped green scarf"
+	icon_state = "eros_stripedgreenscarf"
+
+/obj/item/clothing/accessory/stripedbluescarf
+	name = "striped blue scarf"
+	icon_state = "eros_stripedbluescarf"
+
+/obj/item/clothing/accessory/chaps
+	name = "brown chaps"
+	icon_state = "eros_chaps"
+	item_state = "eros_chaps"
+
+/obj/item/clothing/accessory/chaps/black
+	name = "brown chaps"
+	icon_state = "eros_chaps_black"
+	item_state = "eros_chaps_black"
+
