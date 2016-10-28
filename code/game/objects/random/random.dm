@@ -555,7 +555,7 @@ obj/random/material //Random materials for building stuff
 		return pick(prob(300);/obj/random/tech_supply,\
 					prob(200);/obj/random/medical,\
 					prob(100);/obj/random/firstaid,\
-					prob(10);/obj/random/contraband,\
+					prob(20);/obj/random/contraband,\
 					prob(50);/obj/random/action_figure,\
 					prob(50);/obj/random/plushie,\
 					prob(200);/obj/random/junk,\
@@ -566,7 +566,6 @@ obj/random/material //Random materials for building stuff
 					prob(100);/obj/random/tank,\
 					prob(50);/obj/random/soap,\
 					prob(60);/obj/random/drinkbottle,\
-					prob(10);/obj/random/hardsuit,\
 					prob(500);/obj/random/maintenance/clean)
 
 
