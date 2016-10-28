@@ -147,7 +147,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature < 170)
+	if(M.bodytemperature < 225)
 		M.adjustCloneLoss(-10 * removed)
 		M.adjustOxyLoss(-10 * removed)
 		M.heal_organ_damage(10 * removed, 10 * removed)
@@ -166,7 +166,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature < 170)
+	if(M.bodytemperature < 225)
 		M.adjustCloneLoss(-30 * removed)
 		M.adjustOxyLoss(-30 * removed)
 		M.heal_organ_damage(30 * removed, 30 * removed)
