@@ -72,7 +72,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/unbreakable/slime)
 		)
 
-var/heal_rate = 0.5 // Temp. Regen per tick.
+var/heal_rate = 1 // Temp. Regen per tick.
 
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)
