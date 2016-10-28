@@ -50,7 +50,7 @@
 			src.add_fingerprint(user)
 			tank.add_fingerprint(user)
 			tank = null
-		to_chat(else user, "<span class='warning'>There is no tank in \the [src]!</span>")
+		else to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
 	else if(contained.loc == src && !breather)
 		if(user.wear_mask)
 			to_chat(user, "<span class='notice'>You're already wearing a mask!</span>")
