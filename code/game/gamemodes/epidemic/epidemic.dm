@@ -48,9 +48,7 @@
 	//New message handling won't hurt if someone enables epidemic
 	post_comm_message("Cent. Com. CONFIDENTIAL REPORT", intercepttext)
 
-	world << sound('sound/AI/commandreport.ogg')
-
-
+	sound_to(world, sound('sound/AI/commandreport.ogg'))
 	// add an extra law to the AI to make sure it cooperates with the heads
 	var/extra_law = "Crew authorized to know of pathogen [virus_name]'s existence are: Heads of command. Do not allow unauthorized personnel to gain knowledge of [virus_name]. Aid authorized personnel in quarantining and neutrlizing the outbreak. This law overrides all other laws."
 	for(var/mob/living/silicon/ai/M in world)
@@ -64,9 +62,7 @@
 
 	post_comm_message("Cent. Com. CONFIDENTIAL REPORT", intercepttext)
 
-	world << sound('sound/AI/commandreport.ogg')
-
-
+	sound_to(world, sound('sound/AI/commandreport.ogg'))
 
 /datum/game_mode/epidemic/post_setup()
 	// make sure viral outbreak events don't happen on this mode
@@ -172,7 +168,7 @@
 	ticker.mode:explosion_in_progress = 1
 	for(var/mob/M in world)
 		if(M.client)
-			M << 'sound/machines/Alarm.ogg'
+			sound_to(M, 'sound/machines/Alarm.ogg')
 
 	to_world("<span class='notice'><b>Incoming missile detected.. Impact in 10..</b></span>")
 

@@ -205,7 +205,7 @@
 		if("Cn9")	soundfile = 'sound/piano/Cn9.ogg'
 		else		return
 
-//	hearers(15, src) << sound(soundfile)
+//	sound_to(hearers(15, src), sound(soundfile))
 
 	var/turf/source = get_turf(src)
 	for(var/mob/M in hearers(15, source))

@@ -455,7 +455,7 @@
 	internal_damage |= int_dam_flag
 	pr_internal_damage.start()
 	log_append_to_last("Internal damage of type [int_dam_flag].",1)
-	occupant << sound('sound/machines/warning-buzzer.ogg',wait=0)
+	sound_to(occupant, sound('sound/machines/warning-buzzer.ogg',wait=0))
 	return
 
 /obj/mecha/proc/clearInternalDamage(int_dam_flag)

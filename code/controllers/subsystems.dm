@@ -28,8 +28,7 @@
 /datum/subsystem/proc/Initialize(start_timeofday)
 	var/time = (world.timeofday - start_timeofday) / 10
 	var/msg = "Initialized [name] SubSystem within [time] seconds"
-	world << "<span class='userdanger'>[msg]</span>"
-	world.log << msg
+	log_error("<span class='userdanger'>[msg]</span>")
 
 //hook for printing stats to the "MC" statuspanel for admins to see performance and related stats etc.
 /datum/subsystem/proc/stat_entry()

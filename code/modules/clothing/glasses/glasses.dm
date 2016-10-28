@@ -38,7 +38,7 @@
 			icon_state = initial(icon_state)
 			user.update_inv_glasses()
 			if(activation_sound)
-				usr << activation_sound
+				sound_to(usr, activation_sound)
 
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
@@ -287,7 +287,7 @@
 			src.hud = null
 			to_chat(user, "You switch \the [src] to flash protection mode.")
 		update_icon()
-		user << activation_sound
+		sound_to(user, activation_sound)
 		user.update_inv_glasses()
 		user.update_action_buttons()
 

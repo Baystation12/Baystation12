@@ -33,8 +33,7 @@
 			command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					M << sound('sound/AI/meteors.ogg')
-
+					sound_to(M, sound('sound/AI/meteors.ogg'))
 			spawn(100)
 				meteor_wave()
 				spawn_meteors()
@@ -46,8 +45,7 @@
 			command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					M << sound('sound/AI/granomalies.ogg')
-
+					sound_to(M, sound('sound/AI/granomalies.ogg'))
 			var/turf/T = pick(blobstart)
 			var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 			spawn(rand(50, 300))
@@ -55,8 +53,8 @@
 		/*
 		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
 			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
-			world << sound('sound/AI/spanomalies.ogg')
-
+			sound_to(world, sound('sound/AI/spanomalies.ogg'))
+			
 			var/list/turfs = new
 			var/turf/picked
 			for(var/turf/simulated/floor/T in world)
@@ -121,7 +119,7 @@ var/hadevent    = 0
 
 /proc/alien_infestation(var/spawncount = 1) // -- TLE
 	//command_alert("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
-//	world << sound('sound/AI/aliens.ogg')
+//	sound_to(world, sound('sound/AI/aliens.ogg'))
 
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
