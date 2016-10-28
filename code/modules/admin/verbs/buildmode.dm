@@ -340,7 +340,6 @@
 				holder.buildmode.objholder = text2path("[object.type]")
 				if(holder.buildmode.objsay)	to_chat(usr, "[object.type]")
 
-
 		if(3) // Edit
 			if(pa.Find("left")) //I cant believe this shit actually compiles.
 				if(object.vars.Find(holder.buildmode.varholder))
@@ -354,7 +353,6 @@
 					object.vars[holder.buildmode.varholder] = initial(object.vars[holder.buildmode.varholder])
 				else
 					to_chat(user, "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>")
-
 		if(4) // Throw
 			if(pa.Find("left"))
 				if(istype(object, /atom/movable))
@@ -367,11 +365,9 @@
 			if(pa.Find("left"))
 				holder.buildmode.coordA = get_turf(object)
 				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as point A.</span>")
-
 			if(pa.Find("right"))
 				holder.buildmode.coordB = get_turf(object)
 				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as point B.</span>")
-
 			if(holder.buildmode.coordA && holder.buildmode.coordB)
 				to_chat(user, "<span class='notice'>A and B set, creating rectangle.</span>")
 				holder.buildmode.make_rectangle(
@@ -386,11 +382,9 @@
 			if(pa.Find("left"))
 				holder.buildmode.coordA = get_turf(object)
 				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as upper ladder location.</span>")
-
 			if(pa.Find("right"))
 				holder.buildmode.coordB = get_turf(object)
 				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as lower ladder location.</span>")
-
 			if(holder.buildmode.coordA && holder.buildmode.coordB)
 				to_chat(user, "<span class='notice'>Ladder locations set, building ladders.</span>")
 				var/obj/structure/ladder/A = new /obj/structure/ladder(holder.buildmode.coordA)

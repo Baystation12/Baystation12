@@ -156,7 +156,6 @@
 	set name = "Make Abomination"
 
 	to_chat(usr, "Ruby Mode disabled. Command aborted.")
-
 	return
 	if(!ticker)
 		alert("Wait until the game starts.")
@@ -184,39 +183,29 @@
 				new /obj/item/weapon/book/tome(M.loc)
 			else
 				to_chat(M, "<span class='warning'>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie.</span>")
-
 			var/glimpse=pick("1","2","3","4","5","6","7","8")
 			switch(glimpse)
 				if("1")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["travel"]] is travel...</span>")
-
 				if("2")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["blood"]] is blood...</span>")
-
 				if("3")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["join"]] is join...</span>")
-
 				if("4")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["hell"]] is Hell...</span>")
-
 				if("5")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["destroy"]] is destroy...</span>")
-
 				if("6")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["technology"]] is technology...</span>")
-
 				if("7")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["self"]] is self...</span>")
-
 				if("8")
 					to_chat(M, "<span class='warning'>You remembered one thing from the glimpse... [cultwords["see"]] is see...</span>")
-
 
 			if(M.mind)
 				M.mind.special_role = "Cultist"
 				ticker.mode.cult += M.mind
 			to_chat(src, "Made [M] a cultist.")
-
 */
 
 //TODO: merge the vievars version into this or something maybe mayhaps
@@ -478,22 +467,16 @@
 	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients"))
 		if("Players")
 			to_chat(usr, jointext(player_list,","))
-
 		if("Admins")
 			to_chat(usr, jointext(admins,","))
-
 		if("Mobs")
 			to_chat(usr, jointext(mob_list,","))
-
 		if("Living Mobs")
 			to_chat(usr, jointext(living_mob_list_,","))
-
 		if("Dead Mobs")
 			to_chat(usr, jointext(dead_mob_list_,","))
-
 		if("Clients")
 			to_chat(usr, jointext(clients,","))
-
 
 // DNA2 - Admin Hax
 /client/proc/cmd_admin_toggle_block(var/mob/M,var/block)

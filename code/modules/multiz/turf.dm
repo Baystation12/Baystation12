@@ -148,7 +148,6 @@
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
-
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z))
 		return
@@ -166,5 +165,4 @@
 			return
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
-
 	return

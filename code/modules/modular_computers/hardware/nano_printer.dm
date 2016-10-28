@@ -13,7 +13,6 @@
 	..()
 	to_chat(user, "Paper buffer level: [stored_paper]/[max_paper]")
 
-
 /obj/item/weapon/computer_hardware/nano_printer/proc/print_text(var/text_to_print, var/paper_title = null)
 	if(!stored_paper)
 		return 0
@@ -34,11 +33,9 @@
 	if(istype(W, /obj/item/weapon/paper))
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into [src], but it's paper bin is full")
-
 			return
 
 		to_chat(user, "You insert \the [W] into [src].")
-
 		qdel(W)
 		stored_paper++
 

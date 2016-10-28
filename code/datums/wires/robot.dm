@@ -27,7 +27,6 @@ var/const/BORG_WIRE_CAMERA = 16
 			if(!mended)
 				if (R.lawupdate == 1)
 					to_chat(R, "LawSync protocol engaged.")
-
 					R.show_laws()
 			else
 				if (R.lawupdate == 0 && !R.emagged)
@@ -61,7 +60,6 @@ var/const/BORG_WIRE_CAMERA = 16
 			if(!isnull(R.camera) && R.camera.can_use() && !R.scrambledcodes)
 				R.visible_message("[R]'s camera lense focuses loudly.")
 				to_chat(R, "Your camera lense focuses loudly.")
-
 
 		if(BORG_WIRE_LOCKED_DOWN)
 			R.SetLockdown(!R.lockcharge) // Toggle

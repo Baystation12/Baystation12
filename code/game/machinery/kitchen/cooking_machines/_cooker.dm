@@ -40,17 +40,14 @@
 	if(cooking_obj && Adjacent(usr))
 		to_chat(usr, "You can see \a [cooking_obj] inside.")
 
-
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
-
 		return
 
 	if(cooking)
 		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
-
 		return
 
 	// We are trying to cook a grabbed mob.
@@ -59,12 +56,10 @@
 
 		if(!can_cook_mobs)
 			to_chat(user, "<span class='warning'>That's not going to fit.</span>")
-
 			return
 
 		if(!isliving(G.affecting))
 			to_chat(user, "<span class='warning'>You can't cook that.</span>")
-
 			return
 
 		cook_mob(G.affecting, user)
@@ -74,19 +69,15 @@
 	var/obj/item/weapon/reagent_containers/food/snacks/check = I
 	if(istype(check) && islist(check.cooked) && (cook_type in check.cooked))
 		to_chat(user, "<span class='warning'>\The [check] has already been [cook_type].</span>")
-
 		return 0
 	else if(istype(check, /obj/item/weapon/reagent_containers/glass))
 		to_chat(user, "<span class='warning'>That would probably break [src].</span>")
-
 		return 0
 	else if(istype(check, /obj/item/weapon/disk/nuclear))
 		to_chat(user, "Central Command would kill you if you [cook_type] that.")
-
 		return 0
 	else if(!istype(check) && !istype(check, /obj/item/weapon/holder))
 		to_chat(user, "<span class='warning'>That's not edible.</span>")
-
 		return 0
 
 	// Gotta hurt.
@@ -188,7 +179,6 @@
 
 	if(cooking_obj)
 		to_chat(user, "<span class='notice'>You grab \the [cooking_obj] from \the [src].</span>")
-
 		user.put_in_hands(cooking_obj)
 		cooking = 0
 		cooking_obj = null
@@ -199,7 +189,6 @@
 
 		if(cooking)
 			to_chat(user, "<span class='warning'>\The [src] is in use!</span>")
-
 			return
 
 		var/choice = input("What specific food do you wish to make with \the [src]?") as null|anything in output_options+"Default"
@@ -208,11 +197,9 @@
 		if(choice == "Default")
 			selected_option = null
 			to_chat(user, "<span class='notice'>You decide not to make anything specific with \the [src].</span>")
-
 		else
 			selected_option = choice
 			to_chat(user, "<span class='notice'>You prepare \the [src] to make \a [selected_option].</span>")
-
 
 	..()
 

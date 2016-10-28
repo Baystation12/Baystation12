@@ -19,7 +19,6 @@
 	if(istype(src.loc, /obj/item/weapon/storage))
 		if(!stop_messages)
 			to_chat(user, "<span class='notice'>Take [src] out of [src.loc] first.</span>")
-
 		return 0 //causes problems if the bag expands and becomes larger than src.loc can hold, so disallow it
 	. = ..()
 

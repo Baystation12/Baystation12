@@ -78,7 +78,6 @@
 			return
 
 		to_chat(user, "<span class='notice'>You install \the [O] in \the [src]!</span>")
-
 		if(istype(O, /obj/item/device/mmi/digital))
 			positronic = 1
 			add_language("Robot Talk")

@@ -143,7 +143,6 @@ var/list/status_icons_to_colour = list(
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
 		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
 
-
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)
 		index1 = (length(m1) > CHARS_PER_LINE)

@@ -27,26 +27,20 @@
 		var/obj/machinery/power/apc/A = O
 		if(A.emagged || A.hacker)
 			to_chat(user, "<span class='warning'>There is a software error with the device.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>The device's software appears to be fine.</span>")
-
 		return 1
 	if(istype(O, /obj/machinery/door))
 		var/obj/machinery/door/D = O
 		if(D.operating == -1)
 			to_chat(user, "<span class='warning'>There is a software error with the device.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>The device's software appears to be fine.</span>")
-
 		return 1
 	else if(istype(O, /obj/machinery))
 		var/obj/machinery/A = O
 		if(A.emagged)
 			to_chat(user, "<span class='warning'>There is a software error with the device.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>The device's software appears to be fine.</span>")
-
 		return 1

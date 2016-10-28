@@ -27,7 +27,6 @@
 			src.fuel += F.fuel
 			F.fuel = 0
 			to_chat(user, "You have added the anti-Hydrogen to the storage ring, it now contains [src.fuel]kg")
-
 		if(istype(F, /obj/item/weapon/fuel/H))
 			src.fuel += F.fuel
 			qdel(F)
@@ -37,7 +36,6 @@
 			src.fuel += F.fuel
 			F.fuel = 0
 			to_chat(user, "You have added the Hydrogen to the storage ring, it now contains [src.fuel]kg")
-
 		if(istype(F, /obj/item/weapon/fuel/antiH))
 			src.fuel += F.fuel
 			qdel(src)
@@ -72,7 +70,6 @@
 /obj/item/weapon/fuel/examine(mob/user)
 	if(get_dist(src, user) <= 1)
 		to_chat(user, "A magnetic storage ring, it contains [fuel]kg of [content ? content : "nothing"].")
-
 
 /obj/item/weapon/fuel/proc/injest(mob/M as mob)
 	switch(content)

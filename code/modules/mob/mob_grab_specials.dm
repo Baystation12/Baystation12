@@ -5,60 +5,45 @@
 
 	if(!E || E.is_stump())
 		to_chat(user, "<span class='notice'>[H] is missing that bodypart.</span>")
-
 		return
 
 	user.visible_message("<span class='notice'>[user] starts inspecting [affecting]'s [E.name] carefully.</span>")
 	if(!do_mob(user,H, 10))
 		to_chat(user, "<span class='notice'>You must stand still to inspect [E] for wounds.</span>")
-
 	else if(E.wounds.len)
 		to_chat(user, "<span class='warning'>You find [E.get_wounds_desc()]</span>")
-
 	else
 		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
 
-
 	to_chat(user, "<span class='notice'>Checking bones now...</span>")
-
 	if(!do_mob(user, H, 20))
 		to_chat(user, "<span class='notice'>You must stand still to feel [E] for fractures.</span>")
-
 	else if(E.status & ORGAN_BROKEN)
 		to_chat(user, "<span class='warning'>The [E.encased ? E.encased : "bone in the [E.name]"] moves slightly when you poke it!</span>")
-
 		H.custom_pain("Your [E.name] hurts where it's poked.",40)
 	else
 		to_chat(user, "<span class='notice'>The [E.encased ? E.encased : "bones in the [E.name]"] seem to be fine.</span>")
 
-
 	to_chat(user, "<span class='notice'>Checking skin now...</span>")
-
 	if(!do_mob(user, H, 10))
 		to_chat(user, "<span class='notice'>You must stand still to check [H]'s skin for abnormalities.</span>")
-
 	else
 		var/bad = 0
 		if(H.getToxLoss() >= 40)
 			to_chat(user, "<span class='warning'>[H] has an unhealthy skin discoloration.</span>")
-
 			bad = 1
 		if(H.getOxyLoss() >= 20)
 			to_chat(user, "<span class='warning'>[H]'s skin is unusaly pale.</span>")
-
 			bad = 1
 		if(E.status & ORGAN_DEAD)
 			to_chat(user, "<span class='warning'>[E] is decaying!</span>")
-
 			bad = 1
 		if(!bad)
 			to_chat(user, "<span class='notice'>[H]'s skin is normal.</span>")
 
-
 /obj/item/weapon/grab/proc/jointlock(mob/living/carbon/human/target, mob/attacker, var/target_zone)
 	if(state < GRAB_AGGRESSIVE)
 		to_chat(attacker, "<span class='warning'>You require a better grab to do this.</span>")
-
 		return
 
 	var/obj/item/organ/external/organ = target.get_organ(check_zone(target_zone))
@@ -74,7 +59,6 @@
 	if(armor < 100)
 		to_chat(target, "<span class='danger'>You feel extreme pain!</span>")
 
-
 		var/max_halloss = round(target.species.total_health * 0.8) //up to 80% of passing out
 		affecting.adjustHalLoss(Clamp(0, max_halloss - affecting.halloss, 30))
 
@@ -88,16 +72,13 @@
 		return
 	if(state < GRAB_NECK)
 		to_chat(attacker, "<span class='warning'>You require a better grab to do this.</span>")
-
 		return
 	for(var/obj/item/protection in list(target.head, target.wear_mask, target.glasses))
 		if(protection && (protection.body_parts_covered & EYES))
 			to_chat(attacker, "<span class='danger'>You're going to need to remove the eye covering first.</span>")
-
 			return
 	if(!target.has_eyes())
 		to_chat(attacker, "<span class='danger'>You cannot locate any eyes on [target]!</span>")
-
 		return
 
 	admin_attack_log(attacker, target, "Grab attacked the victim's eyes.", "Had their eyes grab attacked.", "attacked the eyes, using a grab action, of")
@@ -142,7 +123,6 @@
 /obj/item/weapon/grab/proc/dislocate(mob/living/carbon/human/target, mob/living/attacker, var/target_zone)
 	if(state < GRAB_NECK)
 		to_chat(attacker, "<span class='warning'>You require a better grab to do this.</span>")
-
 		return
 	if(target.grab_joint(attacker, target_zone))
 		playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -151,15 +131,12 @@
 /obj/item/weapon/grab/proc/pin_down(mob/target, mob/attacker)
 	if(state < GRAB_AGGRESSIVE)
 		to_chat(attacker, "<span class='warning'>You require a better grab to do this.</span>")
-
 		return
 	if(force_down)
 		to_chat(attacker, "<span class='warning'>You are already pinning [target] to the ground.</span>")
-
 		return
 	if(size_difference(affecting, assailant) > 0)
 		to_chat(attacker, "<span class='warning'>You are too small to do that!</span>")
-
 		return
 
 	attacker.visible_message("<span class='danger'>[attacker] starts forcing [target] to the ground!</span>")

@@ -86,11 +86,9 @@
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
 				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
-
 				return
 			if (G.state < GRAB_AGGRESSIVE)
 				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-
 			else
 				if(user.a_intent == I_HURT)
 					var/blocked = M.run_armor_check(BP_HEAD, "melee")
@@ -135,7 +133,6 @@
 
 	if(can_plate && !material)
 		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
-
 		return
 
 	// Placing stuff on tables

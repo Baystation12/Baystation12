@@ -35,7 +35,6 @@
 		on = 1
 		icon_state = "echair1"
 	to_chat(usr, "<span class='notice'>You switch [on ? "on" : "off"] [src].</span>")
-
 	return
 
 /obj/structure/bed/chair/e_chair/rotate()
@@ -68,7 +67,6 @@
 	if(buckled_mob)
 		buckled_mob.burn_skin(85)
 		to_chat(buckled_mob, "<span class='danger'>You feel a deep shock course through your body!</span>")
-
 		sleep(1)
 		buckled_mob.burn_skin(85)
 		buckled_mob.Stun(600)

@@ -156,7 +156,6 @@
 
 			if(!src.allowed(usr) && !emagged)
 				to_chat(usr, "<span class='warning'>ACCESS DENIED.</span>")
-
 				return
 
 			if(SelectedServer)
@@ -195,7 +194,6 @@
 			if(do_after(user, 20, src))
 				if (src.stat & BROKEN)
 					to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 					new /obj/item/weapon/material/shard( src.loc )
 					var/obj/item/weapon/circuitboard/comm_server/M = new /obj/item/weapon/circuitboard/comm_server( A )
@@ -208,7 +206,6 @@
 					qdel(src)
 				else
 					to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 					var/obj/item/weapon/circuitboard/comm_server/M = new /obj/item/weapon/circuitboard/comm_server( A )
 					for (var/obj/C in src)
@@ -226,6 +223,5 @@
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
 		to_chat(user, "<span class='notice'>You you disable the security protocols</span>")
-
 		src.updateUsrDialog()
 		return 1

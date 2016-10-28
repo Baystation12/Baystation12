@@ -98,15 +98,12 @@ var/list/mob_hat_cache = list()
 		return 0
 	if(!config.allow_drone_spawn)
 		to_chat(src, "<span class='danger'>Playing as drones is not currently permitted.</span>")
-
 		return 0
 	if(too_many_active_drones())
 		to_chat(src, "<span class='danger'>The maximum number of active drones has been reached..</span>")
-
 		return 0
 	if(jobban_isbanned(possessor,"Cyborg"))
 		to_chat(usr, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
-
 		return 0
 	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
 		return 0
@@ -117,7 +114,6 @@ var/list/mob_hat_cache = list()
 		return 0
 	if(src.ckey || src.client)
 		to_chat(possessor, "<span class='warning'>\The [src] already has a player.</span>")
-
 		return 0
 	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
 	log_admin("[key_name(possessor)] took control of \the [src].")
@@ -202,7 +198,6 @@ var/list/mob_hat_cache = list()
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
-
 			return
 		user.unEquip(W)
 		wear_hat(W)
@@ -210,12 +205,10 @@ var/list/mob_hat_cache = list()
 		return
 	else if(istype(W, /obj/item/borg/upgrade/))
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
-
 		return
 
 	else if (istype(W, /obj/item/weapon/crowbar))
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
-
 		return
 
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
@@ -224,12 +217,10 @@ var/list/mob_hat_cache = list()
 
 			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
 				to_chat(user, "<span class='danger'>The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one.</span>")
-
 				return
 
 			if(!allowed(usr))
 				to_chat(user, "<span class='danger'>Access denied.</span>")
-
 				return
 
 			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
@@ -247,7 +238,6 @@ var/list/mob_hat_cache = list()
 			else
 				to_chat(user, "<span class='danger'>Access denied.</span>")
 
-
 		return
 
 	..()
@@ -255,20 +245,15 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
 	if(!client || stat == 2)
 		to_chat(user, "<span class='danger'>There's not much point subverting this heap of junk.</span>")
-
 		return
 
 	if(emagged)
 		to_chat(src, "<span class='danger'>\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt.</span>")
-
 		to_chat(user, "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>")
-
 		return
 
 	to_chat(user, "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>")
-
 	to_chat(src, "<span class='danger'>You feel a sudden burst of malware loaded into your execute-as-root buffer. Your tiny brain methodically parses, loads and executes the script.</span>")
-
 
 	message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
 	log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
@@ -284,10 +269,8 @@ var/list/mob_hat_cache = list()
 	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
 	to_chat(src, "<b>Obey these laws:</b>")
-
 	laws.show_laws(src)
 	to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and \his commands.</span>")
-
 	return 1
 
 //DRONE LIFE/DEATH
@@ -327,10 +310,8 @@ var/list/mob_hat_cache = list()
 	if(stat != 2)
 		if(emagged)
 			to_chat(src, "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>")
-
 		else
 			to_chat(src, "<span class='danger'>A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it.</span>")
-
 			full_law_reset()
 			show_laws()
 
@@ -338,10 +319,8 @@ var/list/mob_hat_cache = list()
 	if(stat != 2)
 		if(emagged)
 			to_chat(src, "<span class='danger'>You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you.</span>")
-
 		else
 			to_chat(src, "<span class='danger'>You feel a system kill order percolate through your tiny brain, and you obediently destroy yourself.</span>")
-
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
@@ -367,19 +346,14 @@ var/list/mob_hat_cache = list()
 
 	lawupdate = 0
 	to_chat(src, "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>.")
-
 	full_law_reset()
 	welcome_drone()
 
 /mob/living/silicon/robot/drone/proc/welcome_drone()
 	to_chat(src, "<b>You are a maintenance drone, a tiny-brained robotic repair machine</b>. You have no individual will, no personality, and no drives or urges other than your laws.")
-
 	to_chat(src, "Remember, you are <b>lawed against interference with the crew</b>, you should leave the area if your actions are interfering, or that the crew does not want your presence.")
-
 	to_chat(src, "You are <b>not required to follow orders from anyone; not the AI, not humans, and not other synthetics.</b>. However, you should respond to presence requests issued from drone controls consoles.")
-
 	to_chat(src, "Use <b>say ;Hello</b> to talk to other drones and <b>say Hello</b> to speak silently to your nearby fellows.")
-
 
 /mob/living/silicon/robot/drone/add_robot_verbs()
 	return
@@ -389,13 +363,9 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/construction/welcome_drone()
 	to_chat(src, "<b>You are a construction drone, an autonomous engineering and fabrication system.</b>.")
-
 	to_chat(src, "You are assigned to a Sol Central construction project. The name is irrelevant. Your task is to complete construction and subsystem integration as soon as possible.")
-
 	to_chat(src, "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows.")
-
 	to_chat(src, "<b>You do not follow orders from anyone; not the AI, not humans, and not other synthetics.</b>.")
-
 
 /mob/living/silicon/robot/drone/construction/init()
 	..()

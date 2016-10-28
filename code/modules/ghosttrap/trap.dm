@@ -65,7 +65,6 @@ var/list/ghost_traps
 			continue
 		if(O.client)
 			to_chat(O, "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
-
 /datum/ghosttrap/proc/target_destroyed(var/destroyed_target)
 	request_timeouts -= destroyed_target
 
@@ -143,7 +142,6 @@ var/list/ghost_traps
 	if(istype(target,/mob/living/carbon/alien/diona))
 		to_chat(target, "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>")
 		to_chat(target, "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>")
-
 /*****************
 * Cortical Borer *
 *****************/
@@ -161,7 +159,6 @@ var/list/ghost_traps
 	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
 	your host and your eventual spawn safe and warm.")
 	to_chat(target, "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers.")
-
 /********************
 * Maintenance Drone *
 *********************/

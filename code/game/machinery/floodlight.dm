@@ -70,7 +70,6 @@
 			to_chat(user, "You try to turn on \the [src] but it does not work.")
 
 
-
 /obj/machinery/floodlight/attack_hand(mob/user as mob)
 	if(open && cell)
 		if(ishuman(user))
@@ -87,7 +86,6 @@
 		on = 0
 		set_light(0)
 		to_chat(user, "You remove the power cell")
-
 		update_icon()
 		return
 
@@ -96,7 +94,6 @@
 	else
 		if(!turn_on(1))
 			to_chat(user, "You try to turn on \the [src] but it does not work.")
-
 
 	update_icon()
 
@@ -107,11 +104,9 @@
 			if(unlocked)
 				unlocked = 0
 				to_chat(user, "You screw the battery panel in place.")
-
 			else
 				unlocked = 1
 				to_chat(user, "You unscrew the battery panel.")
-
 
 	if (istype(W, /obj/item/weapon/crowbar))
 		if(unlocked)
@@ -119,22 +114,18 @@
 				open = 0
 				overlays = null
 				to_chat(user, "You crowbar the battery panel in place.")
-
 			else
 				if(unlocked)
 					open = 1
 					to_chat(user, "You remove the battery panel.")
 
-
 	if (istype(W, /obj/item/weapon/cell))
 		if(open)
 			if(cell)
 				to_chat(user, "There is a power cell already installed.")
-
 			else
 				user.drop_item()
 				W.loc = src
 				cell = W
 				to_chat(user, "You insert the power cell.")
-
 	update_icon()

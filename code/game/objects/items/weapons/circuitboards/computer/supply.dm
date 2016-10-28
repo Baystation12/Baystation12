@@ -40,5 +40,4 @@
 				return
 			else
 				to_chat(user, "DERP! BUG! Report this")
-
 	return

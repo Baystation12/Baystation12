@@ -89,7 +89,6 @@ var/datum/antagonist/ninja/ninjas
 	player.store_memory("<B>Directive:</B> <span class='danger'>[directive]</span><br>")
 	to_chat(player, "<b>Remember your directive:</b> [directive].")
 
-
 /datum/antagonist/ninja/update_antag_mob(var/datum/mind/player)
 	..()
 	var/ninja_title = pick(ninja_titles)
@@ -130,7 +129,6 @@ var/datum/antagonist/ninja/ninjas
 	U.hidden_uplink = T
 	U.lock_code = pda_pass
 	to_chat(player, "A portable information relay has been installed in your [U]. Simply enter the code \"[pda_pass]\" into the ringtone select to unlock its hidden features.")
-
 	player.mind.store_memory("<B>Uplink Passcode:</B> [pda_pass].")
 	U.hidden_uplink.uses = 0
 	player.put_in_hands(U)
@@ -140,7 +138,6 @@ var/datum/antagonist/ninja/ninjas
 			player.internals.icon_state = "internal1"
 		else
 			to_chat(player, "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>")
-
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"[company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.

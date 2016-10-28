@@ -184,7 +184,6 @@
 						src.ears = headset_to_add
 						to_chat(usr, "You fit the headset onto [src].")
 
-
 						clearlist(available_channels)
 						for(var/ch in headset_to_add.channels)
 							switch(ch)
@@ -612,7 +611,6 @@
 			return held_item
 
 	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")
-
 	return 0
 
 /mob/living/simple_animal/parrot/verb/drop_held_item_player()
@@ -645,12 +643,10 @@
 			G.loc = src.loc
 			G.detonate()
 			to_chat(src, "You let go of the [held_item]!")
-
 			held_item = null
 			return 1
 
 	to_chat(src, "You drop the [held_item].")
-
 
 	held_item.loc = src.loc
 	held_item = null

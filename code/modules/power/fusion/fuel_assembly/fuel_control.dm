@@ -27,7 +27,6 @@
 
 	if(!id_tag)
 		to_chat(user, "<span class='warning'>This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool.</span>")
-
 		return
 
 	var/dat = "<B>Reactor Core Fuel Control #[id_tag]</B><BR>"

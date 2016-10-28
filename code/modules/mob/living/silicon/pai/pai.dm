@@ -141,7 +141,6 @@
 
 	src.silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
 	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
-
 	if(prob(20))
 		var/turf/T = get_turf_or_move(src.loc)
 		for (var/mob/M in viewers(T))
@@ -153,7 +152,6 @@
 			src.master = null
 			src.master_dna = null
 			to_chat(src, "<font color=green>You feel unbound.</font>")
-
 		if(2)
 			var/command
 			if(severity  == 1)
@@ -162,10 +160,8 @@
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
 			src.pai_law0 = "[command] your master."
 			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
-
 		if(3)
 			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
-
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
 	if (!C)
@@ -194,7 +190,6 @@
 	nanomanager.update_uis(src)
 	to_chat(usr, "<span class='notice'>You reset your record-viewing software.</span>")
 
-
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
 	set name = "Cancel Camera View"
@@ -214,7 +209,6 @@
 
 	if(usr.stat == 2)
 		to_chat(usr, "You can't change your camera network because you are dead!")
-
 		return
 
 	for (var/obj/machinery/camera/C in Cameras)
@@ -262,7 +256,6 @@
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/obj/item/rig_module))
 		to_chat(src, "There is no room to unfold inside this rig module. You're good and stuck.")
-
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
@@ -350,7 +343,6 @@
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
 		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
-
 
 	canmove = !resting
 

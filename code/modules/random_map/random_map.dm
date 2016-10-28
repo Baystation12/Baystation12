@@ -107,7 +107,6 @@ var/global/list/map_count = list()
 		dat += "<br>"
 	to_chat(user, "[dat]+------+</code>")
 
-
 /datum/random_map/proc/set_map_size()
 	map = list()
 	map.len = limit_x * limit_y

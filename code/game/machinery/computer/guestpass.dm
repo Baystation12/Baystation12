@@ -21,26 +21,19 @@
 	..(user)
 	if (world.time < expiration_time)
 		to_chat(user, "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>")
-
 	else
 		to_chat(user, "<span class='warning'>It expired at [worldtime2stationtime(expiration_time)].</span>")
-
 
 /obj/item/weapon/card/id/guest/read()
 	if (world.time > expiration_time)
 		to_chat(usr, "<span class='notice'>This pass expired at [worldtime2stationtime(expiration_time)].</span>")
-
 	else
 		to_chat(usr, "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>")
 
-
 	to_chat(usr, "<span class='notice'>It grants access to following areas:</span>")
-
 	for (var/A in temp_access)
 		to_chat(usr, "<span class='notice'>[get_access_desc(A)].</span>")
-
 	to_chat(usr, "<span class='notice'>Issuing reason: [reason].</span>")
-
 	return
 
 /////////////////////////////////////////////
@@ -75,7 +68,6 @@
 			updateUsrDialog()
 		else if(giver)
 			to_chat(user, "<span class='warning'>There is already ID card inside.</span>")
-
 		return
 	..()
 
@@ -140,7 +132,6 @@
 						duration = dur
 					else
 						to_chat(usr, "<span class='warning'>Invalid duration.</span>")
-
 			if ("access")
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
@@ -168,7 +159,6 @@
 				for (var/entry in internal_log)
 					dat += "[entry]<br><hr>"
 //				to_chat(usr, "Printing the log, standby...")
-
 				//sleep(50)
 				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
 				P.name = "activity log"
@@ -198,9 +188,7 @@
 					. = 1
 				else if(!giver)
 					to_chat(usr, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
-
 				else if(!accesses.len)
 					to_chat(usr, "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>")
-
 	if(.)
 		updateUsrDialog()

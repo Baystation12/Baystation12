@@ -5,13 +5,11 @@
 
 	if (Victim)
 		to_chat(src, "I am already feeding...")
-
 		return
 
 	var t = invalidFeedTarget(M)
 	if (t)
 		to_chat(src, t)
-
 		return
 
 	Feedon(M)
@@ -65,7 +63,6 @@
 
 			else
 				to_chat(src, "<span class='warning'>[pick("This subject is incompatable", "This subject does not have a life energy", "This subject is empty", "I am not satisified", "I can not feed from this subject", "I do not feel nourished", "This subject is not food")]...</span>")
-
 				Feedstop()
 				break
 
@@ -78,7 +75,6 @@
 					var/mob/living/carbon/C = M
 					if (C.can_feel_pain())
 						to_chat(M, "<span class='danger'>[painMes]</span>")
-
 
 			gain_nutrition(rand(20,25) * hazmat)
 
@@ -109,13 +105,11 @@
 		else
 			to_chat(src, "<span class='notice'>This subject does not have a strong enough life energy anymore...</span>")
 
-
 	Victim = null
 
 /mob/living/carbon/slime/proc/Feedstop()
 	if(Victim)
 		if(Victim.client) to_chat(Victim, "[src] has let go of your head!")
-
 		Victim = null
 
 /mob/living/carbon/slime/proc/UpdateFeed(var/mob/M)
@@ -129,7 +123,6 @@
 
 	if(stat)
 		to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
-
 		return
 
 	if(!is_adult)
@@ -141,10 +134,8 @@
 			name = text("[colour] [is_adult ? "adult" : "baby"] slime ([number])")
 		else
 			to_chat(src, "<span class='notice'>I am not ready to evolve yet...</span>")
-
 	else
 		to_chat(src, "<span class='notice'>I have already evolved...</span>")
-
 
 /mob/living/carbon/slime/verb/Reproduce()
 	set category = "Slime"
@@ -152,14 +143,12 @@
 
 	if(stat)
 		to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
-
 		return
 
 	if(is_adult)
 		if(amount_grown >= 10)
 			if(stat)
 				to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
-
 				return
 
 			var/list/babies = list()
@@ -186,7 +175,5 @@
 			qdel(src)
 		else
 			to_chat(src, "<span class='notice'>I am not ready to reproduce yet...</span>")
-
 	else
 		to_chat(src, "<span class='notice'>I am not old enough to reproduce yet...</span>")
-

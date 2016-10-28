@@ -141,23 +141,17 @@ var/list/holder_mob_icon_cache = list()
 	if(self_grab)
 		if(!grabber.equip_to_slot_if_possible(H, slot_back, del_on_fail=0, disable_warning=1))
 			to_chat(src, "<span class='warning'>You can't climb onto [grabber]!</span>")
-
 			return
 
 		to_chat(grabber, "<span class='notice'>\The [src] clambers onto you!</span>")
-
 		to_chat(src, "<span class='notice'>You climb up onto \the [grabber]!</span>")
-
 	else
 		if(!grabber.put_in_hands(H))
 			to_chat(grabber, "<span class='warning'>Your hands are full!</span>")
-
 			return
 
 		to_chat(grabber, "<span class='notice'>You scoop up \the [src]!</span>")
-
 		to_chat(src, "<span class='notice'>\The [grabber] scoops you up!</span>")
-
 
 	src.forceMove(H)
 

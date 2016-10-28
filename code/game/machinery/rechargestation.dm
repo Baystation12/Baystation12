@@ -127,7 +127,6 @@
 	..(user)
 	to_chat(user, "The charge meter reads: [round(chargepercentage())]%")
 
-
 /obj/machinery/recharge_station/proc/chargepercentage()
 	if(!cell)
 		return 0

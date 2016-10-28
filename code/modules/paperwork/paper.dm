@@ -64,12 +64,10 @@
 	..()
 	if(name != "sheet of paper")
 		to_chat(user, "It's titled '[name]'.")
-
 	if(in_range(user, src) || isghost(user))
 		show_content(usr)
 	else
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
-
 
 /obj/item/weapon/paper/proc/show_content(mob/user, forceshow)
 	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
@@ -86,7 +84,6 @@
 
 	if((CLUMSY in usr.mutations) && prob(50))
 		to_chat(usr, "<span class='warning'>You cut yourself on the paper.</span>")
-
 		return
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
 
@@ -127,7 +124,6 @@
 			var/mob/living/carbon/human/H = M
 			if(H == user)
 				to_chat(user, "<span class='notice'>You wipe off the lipstick with [src].</span>")
-
 				H.lip_style = null
 				H.update_body()
 			else
@@ -259,7 +255,6 @@
 				to_chat(user, "\red You must hold \the [P] steady to burn \the [src].")
 
 
-
 /obj/item/weapon/paper/Topic(href, href_list)
 	..()
 	if(!usr || (usr.stat || usr.restrained()))
@@ -271,7 +266,6 @@
 
 		if(free_space <= 0)
 			to_chat(usr, "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>")
-
 			return
 
 		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0)
@@ -307,7 +301,6 @@
 
 		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
 			to_chat(usr, "<span class='warning'>Too many fields. Sorry, you can't do this.</span>")
-
 			fields = last_fields_value
 			return
 
@@ -340,7 +333,6 @@
 			var/obj/item/weapon/paper/carbon/C = P
 			if (!C.iscopy && !C.copied)
 				to_chat(user, "<span class='notice'>Take off the carbon copy first.</span>")
-
 				add_fingerprint(user)
 				return
 		var/obj/item/weapon/paper_bundle/B = new(src.loc)
@@ -357,7 +349,6 @@
 
 		to_chat(user, "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>")
 
-
 		B.pages.Add(src)
 		B.pages.Add(P)
 		B.update_icon()
@@ -365,7 +356,6 @@
 	else if(istype(P, /obj/item/weapon/pen))
 		if(icon_state == "scrap")
 			to_chat(usr, "<span class='warning'>\The [src] is too crumpled to write on.</span>")
-
 			return
 
 		var/obj/item/weapon/pen/robopen/RP = P
@@ -397,7 +387,6 @@
 		if(istype(P, /obj/item/weapon/stamp/clown))
 			if(!clown)
 				to_chat(user, "<span class='notice'>You are totally unable to use the stamp. HONK!</span>")
-
 				return
 
 		if(!ico)
@@ -411,7 +400,6 @@
 		overlays += stampoverlay
 
 		to_chat(user, "<span class='notice'>You stamp the paper with your rubber stamp.</span>")
-
 
 	else if(istype(P, /obj/item/weapon/flame))
 		burnpaper(P, user)

@@ -16,17 +16,14 @@
 
 	if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
 		to_chat(usr, "<span class='warning'>You can't do that.</span>")
-
 		return
 
 	if(!Adjacent(usr))
 		to_chat(usr, "You can't reach it.")
-
 		return
 
 	if(!istype(loc,/turf))
 		to_chat(usr, "[src] is too bulky!  You'll have to set it down.")
-
 		return
 
 	if(!stored_computer)
@@ -34,7 +31,6 @@
 			for(var/obj/O in contents)
 				O.forceMove(src.loc)
 		to_chat(usr, "\The [src] crumbles to pieces.")
-
 		spawn(5)
 			qdel(src)
 		return
@@ -46,7 +42,6 @@
 		stored_computer.cpu.screen_on = 1
 	loc = stored_computer
 	to_chat(usr, "You open \the [src].")
-
 
 
 /obj/item/laptop/AltClick()
@@ -84,12 +79,10 @@
 
 	if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
 		to_chat(usr, "<span class='warning'>You can't do that.</span>")
-
 		return
 
 	if(!Adjacent(usr))
 		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
-
 		return
 
 	close_laptop(usr)
@@ -109,7 +102,6 @@
 	stat |= MAINT
 	if(user)
 		to_chat(user, "You close \the [src].")
-
 	if(cpu)
 		cpu.screen_on = 0
 

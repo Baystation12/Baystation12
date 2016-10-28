@@ -38,15 +38,12 @@
 		pressure_setting = N
 		to_chat(usr, "You dial the pressure valve to [pressure_setting]%.")
 
-
 /obj/item/weapon/gun/launcher/pneumatic/proc/eject_tank(mob/user) //Remove the tank.
 	if(!tank)
 		to_chat(user, "There's no tank in [src].")
-
 		return
 
 	to_chat(user, "You twist the valve and pop the tank out of [src].")
-
 	user.put_in_hands(tank)
 	tank = null
 	update_icon()
@@ -57,10 +54,8 @@
 		item_storage.remove_from_storage(removing, src.loc)
 		user.put_in_hands(removing)
 		to_chat(user, "You remove [removing] from the hopper.")
-
 	else
 		to_chat(user, "There is nothing to remove in \the [src].")
-
 
 /obj/item/weapon/gun/launcher/pneumatic/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -85,7 +80,6 @@
 		return null
 	if (!tank)
 		to_chat(user, "There is no gas tank in [src]!")
-
 		return null
 
 	var/environment_pressure = 10
@@ -98,7 +92,6 @@
 	fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
 	if(fire_pressure < 10)
 		to_chat(user, "There isn't enough gas in the tank to fire [src].")
-
 		return null
 
 	var/obj/item/launched = item_storage.contents[1]
@@ -109,13 +102,10 @@
 	if(!..(user, 2))
 		return
 	to_chat(user, "The valve is dialed to [pressure_setting]%.")
-
 	if(tank)
 		to_chat(user, "The tank dial reads [tank.air_contents.return_pressure()] kPa.")
-
 	else
 		to_chat(user, "Nothing is attached to the tank valve!")
-
 
 /obj/item/weapon/gun/launcher/pneumatic/update_release_force(obj/item/projectile)
 	if(tank)
@@ -160,15 +150,10 @@
 	..(user)
 	switch(buildstate)
 		if(1) to_chat(user, "It has a pipe segment installed.")
-
 		if(2) to_chat(user, "It has a pipe segment welded in place.")
-
 		if(3) to_chat(user, "It has an outer chassis installed.")
-
 		if(4) to_chat(user, "It has an outer chassis welded in place.")
-
 		if(5) to_chat(user, "It has a transfer valve installed.")
-
 
 /obj/item/weapon/cannonframe/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/pipe))
@@ -176,7 +161,6 @@
 			user.drop_from_inventory(W)
 			qdel(W)
 			to_chat(user, "<span class='notice'>You secure the piping inside the frame.</span>")
-
 			buildstate++
 			update_icon()
 			return
@@ -185,19 +169,16 @@
 			var/obj/item/stack/material/M = W
 			if(M.use(5))
 				to_chat(user, "<span class='notice'>You assemble a chassis around the cannon frame.</span>")
-
 				buildstate++
 				update_icon()
 			else
 				to_chat(user, "<span class='notice'>You need at least five metal sheets to complete this task.</span>")
-
 			return
 	else if(istype(W,/obj/item/device/transfer_valve))
 		if(buildstate == 4)
 			user.drop_from_inventory(W)
 			qdel(W)
 			to_chat(user, "<span class='notice'>You install the transfer valve and connect it to the piping.</span>")
-
 			buildstate++
 			update_icon()
 			return
@@ -208,7 +189,6 @@
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You weld the pipe into place.</span>")
-
 				buildstate++
 				update_icon()
 		if(buildstate == 3)
@@ -217,7 +197,6 @@
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You weld the metal chassis together.</span>")
-
 				buildstate++
 				update_icon()
 		if(buildstate == 5)
@@ -226,7 +205,6 @@
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You weld the valve into place.</span>")
-
 				new /obj/item/weapon/gun/launcher/pneumatic(get_turf(src))
 				qdel(src)
 		return

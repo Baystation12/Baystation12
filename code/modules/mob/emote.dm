@@ -4,7 +4,6 @@
 /mob/proc/custom_emote(var/m_type=VISIBLE_MESSAGE,var/message = null)
 	if(usr && stat || !use_me && usr == src)
 		to_chat(src, "You are unable to emote.")
-
 		return
 
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
@@ -37,18 +36,15 @@
 
 	if(client.prefs.muted & MUTE_DEADCHAT)
 		to_chat(src, "<span class='danger'>You cannot send deadchat emotes (muted).</span>")
-
 		return
 
 	if(!is_preference_enabled(/datum/client_preference/show_dsay))
 		to_chat(src, "<span class='danger'>You have deadchat muted.</span>")
-
 		return
 
 	if(!src.client.holder)
 		if(!config.dsay_allowed)
 			to_chat(src, "<span class='danger'>Deadchat is globally muted.</span>")
-
 			return
 
 

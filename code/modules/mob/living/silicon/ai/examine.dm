@@ -33,7 +33,6 @@
 		msg += "<br>"
 		msg += hardware.get_examine_desc()
 	to_chat(user, msg)
-
 	user.showLaws(src)
 	return
 

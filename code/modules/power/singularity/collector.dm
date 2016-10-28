@@ -90,7 +90,6 @@ var/global/list/rad_collectors = list()
 			if(active)
 				src.locked = !src.locked
 				to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
-
 			else
 				src.locked = 0 //just in case it somehow gets locked
 				to_chat(user, "<span class='warning'>The controls can only be locked when the [src] is active</span>")
@@ -102,7 +101,6 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/examine(mob/user)
 	if (..(user, 3))
 		to_chat(user, "The meter indicates that \the [src] is collecting [last_power] W.")
-
 		return 1
 
 /obj/machinery/power/rad_collector/ex_act(severity)

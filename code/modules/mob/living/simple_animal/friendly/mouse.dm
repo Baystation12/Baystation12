@@ -98,7 +98,6 @@
 		if(!stat)
 			var/mob/M = AM
 			to_chat(M, "<span class='warning'>\icon[src] Squeek!</span>")
-
 			sound_to(M, 'sound/effects/mousesqueek.ogg')
 	..()
 

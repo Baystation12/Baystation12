@@ -207,7 +207,6 @@
 
 	if(stat & NOPOWER)
 		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
-
 		return
 
 	if(accept_check(O))
@@ -229,10 +228,8 @@
 			if(P.contents.len > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 
-
 	else
 		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
-
 	return 1
 
 /obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
@@ -240,7 +237,6 @@
 		emagged = 1
 		locked = -1
 		to_chat(user, "You short out the product lock on [src].")
-
 		return 1
 
 /obj/machinery/smartfridge/proc/stock_item(var/obj/item/O)
@@ -353,6 +349,5 @@
 	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
 		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
 			to_chat(usr, "<span class='warning'>Access denied.</span>")
-
 			return 0
 	return ..()

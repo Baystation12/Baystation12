@@ -33,22 +33,18 @@
 					var/obj/item/stack/cable_coil/C = P
 					if (C.get_amount() < 5)
 						to_chat(user, "<span class='warning'>You need five lengths of cable to add them to the frame.</span>")
-
 						return
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					to_chat(user, "<span class='notice'>You start to add cables to the frame.</span>")
-
 					if(do_after(user, 20, src) && state == 1)
 						if(C.use(5))
 							to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
-
 							state = 2
 							icon_state = "box_1"
 				else
 					if(istype(P, /obj/item/weapon/wrench))
 						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 						to_chat(user, "<span class='notice'>You dismantle the frame</span>")
-
 						new /obj/item/stack/material/steel(src.loc, 5)
 						qdel(src)
 			if(2)
@@ -57,7 +53,6 @@
 					if(B.board_type == "machine")
 						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 						to_chat(user, "<span class='notice'>You add the circuit board to the frame.</span>")
-
 						circuit = P
 						user.drop_item()
 						P.loc = src
@@ -73,15 +68,12 @@
 							req_component_names[A] = initial(ct.name)
 						update_desc()
 						to_chat(user, desc)
-
 					else
 						to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
-
 				else
 					if(istype(P, /obj/item/weapon/wirecutters))
 						playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 						to_chat(user, "<span class='notice'>You remove the cables.</span>")
-
 						state = 1
 						icon_state = "box_0"
 						var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
@@ -95,10 +87,8 @@
 					circuit = null
 					if(components.len == 0)
 						to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
-
 					else
 						to_chat(user, "<span class='notice'>You remove the circuit board and other components.</span>")
-
 						for(var/obj/item/weapon/W in components)
 							W.loc = src.loc
 					desc = initial(desc)
@@ -161,7 +151,5 @@
 									update_desc()
 									break
 							to_chat(user, desc)
-
 							if(P && P.loc != src && !istype(P, /obj/item/stack/cable_coil))
 								to_chat(user, "<span class='warning'>You cannot add that component to the machine!</span>")
-

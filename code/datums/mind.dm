@@ -157,7 +157,6 @@
 			else
 				to_chat(usr, "<span class='warning'>[src] could not be made into a [antag.role_text]!</span>")
 
-
 	else if(href_list["remove_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antagonist"]]
 		if(antag) antag.remove_antagonist(src)
@@ -195,15 +194,12 @@
 		if(mind)
 			if(new_ambition)
 				to_chat(mind.current, "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>")
-
 				log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.")
 			else
 				to_chat(mind.current, "<span class='warning'>Your ambitions have been unmade by higher powers.</span>")
-
 				log_and_message_admins("has cleared [key_name(mind.current)]'s ambitions.")
 		else
 			to_chat(usr, "<span class='warning'>The mind has ceased to be.</span>")
-
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
 		var/datum/objective/objective
@@ -349,11 +345,9 @@
 							qdel(I)
 							break
 				to_chat(H, "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</B></font></span>")
-
 				log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
 			if("add")
 				to_chat(H, "<span class='danger'><font size =3>You somehow have become the recepient of a loyalty transplant, and it just activated!</font></span>")
-
 				H.implant_loyalty(H, override = TRUE)
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 			else
@@ -420,10 +414,8 @@
 	else if (href_list["obj_announce"])
 		var/obj_count = 1
 		to_chat(current, "<span class='notice'>Your current objectives:</span>")
-
 		for(var/datum/objective/objective in objectives)
 			to_chat(current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
-
 			obj_count++
 	edit_memory()
 

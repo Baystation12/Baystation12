@@ -27,7 +27,6 @@
 					return
 			if(!target)
 				to_chat(usr, "Proc call cancelled.")
-
 				return
 		if("Cancel")
 			return
@@ -93,12 +92,10 @@
 	if(hastarget)
 		if(!target)
 			to_chat(usr, "Your callproc target no longer exists.")
-
 			clear()
 			return
 		if(!hascall(target, procname))
 			to_chat(usr, "\The [target] has no call [procname]()")
-
 			clear()
 			return
 
@@ -120,7 +117,6 @@
 	while(!done)
 		if(hastarget && !target)
 			to_chat(usr, "Your callproc target no longer exists.")
-
 			return CANCEL
 		switch(input("Type of [arguments.len+1]\th variable", "argument [arguments.len+1]") as null|anything in list(
 				"finished", "null", "text", "num", "type", "obj reference", "mob reference",
@@ -190,7 +186,6 @@
 				waiting_for_click = 1
 				C.verbs += /client/proc/cancel_callproc_select
 				to_chat(C, "Click an atom to select it. Click an atom then click 'cancel', or use the Cancel-Callproc-Select verb to cancel selecting a target by click.")
-
 				return WAITING
 
 		if(!done)
@@ -224,7 +219,6 @@
 	if(hastarget)
 		if(!target)
 			to_chat(usr, "Your callproc target no longer exists.")
-
 			return
 		log_admin("[key_name(src)] called [target]'s [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].")
 		if(arguments.len)
@@ -236,7 +230,6 @@
 		returnval = call(procname)(arglist(arguments))
 
 	to_chat(usr, "<span class='info'>[procname]() returned: [isnull(returnval) ? "null" : returnval]</span>")
-
 	feedback_add_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #undef CANCEL

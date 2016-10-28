@@ -11,23 +11,18 @@
 
 	if(!istype(P))
 		to_chat(user, "<span class='warning'>No valid connection data in \the [M] buffer.</span>")
-
 		return MT_NOACTION
 
 	var/is_connected = (P in C.pods)
 	if(!is_connected)
 		if(C.connect_pod(P))
 			to_chat(user, "<span class='notice'>You connect \the [P] to \the [C].</span>")
-
 		else
 			to_chat(user, "<span class='warning'>You failed to connect \the [P] to \the [C].</span>")
-
 		return MT_REFRESH
 
 	if(C.release_pod(P))
 		to_chat(user, "<span class='notice'>You disconnect \the [P] from \the [C].</span>")
-
 	else
 		to_chat(user, "<span class='notice'>You failed to disconnect \the [P] from \the [C].</span>")
-
 	return MT_REFRESH

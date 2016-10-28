@@ -9,12 +9,10 @@
 	if(prefs && prefs.ignored_players)
 		if(key_to_ignore in prefs.ignored_players && key_to_ignore != ckey)
 			to_chat(usr, "<span class='warning'>[key_to_ignore] is already being ignored.</span>")
-
 			return
 		prefs.ignored_players |= key_to_ignore
 		prefs.save_preferences()
 		to_chat(usr, "<span class='notice'>Now ignoring <b>[key_to_ignore]</b>.</span>")
-
 
 /client/verb/unignore(key_to_unignore as text)
 	set name = "Unignore"
@@ -27,12 +25,10 @@
 	if(prefs && prefs.ignored_players)
 		if(!(key_to_unignore in prefs.ignored_players))
 			to_chat(usr, "<span class='warning'>[key_to_unignore] isn't being ignored.</span>")
-
 			return
 		prefs.ignored_players -= key_to_unignore
 		prefs.save_preferences()
 		to_chat(usr, "<span class='notice'>Reverted ignore on <b>[key_to_unignore]</b>.</span>")
-
 
 /mob/proc/is_key_ignored(var/key_to_check)
 	if(client)

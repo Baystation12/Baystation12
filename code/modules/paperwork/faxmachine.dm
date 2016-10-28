@@ -97,7 +97,6 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 			copyitem.loc = usr.loc
 			usr.put_in_hands(copyitem)
 			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-
 			copyitem = null
 			updateUsrDialog()
 

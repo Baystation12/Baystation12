@@ -10,15 +10,12 @@ mob/proc/airflow_stun()
 
 	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
 		to_chat(src, "<span class='notice'>You stay upright as the air rushes past you.</span>")
-
 		return 0
 	if(buckled)
 		to_chat(src, "<span class='notice'>Air suddenly rushes past you!</span>")
-
 		return 0
 	if(!lying)
 		to_chat(src, "<span class='warning'>The sudden rush of air knocks you over!</span>")
-
 	Weaken(5)
 	last_airflow_stun = world.time
 
@@ -31,7 +28,6 @@ mob/living/carbon/slime/airflow_stun()
 mob/living/carbon/human/airflow_stun()
 	if(shoes && (shoes.item_flags & NOSLIP))
 		to_chat(src, "<span class='notice'>Air suddenly rushes past you!</span>")
-
 		return 0
 	..()
 
@@ -101,7 +97,6 @@ obj/check_airflow_movable(n)
 		return
 	if(ismob(src))
 		to_chat(src, "<span class='danger'>You are sucked away by airflow!</span>")
-
 	last_airflow = world.time
 	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)
@@ -161,7 +156,6 @@ obj/check_airflow_movable(n)
 		return
 	if(ismob(src))
 		to_chat(src, "<span clas='danger'>You are pushed away by airflow!</span>")
-
 	last_airflow = world.time
 	var/airflow_falloff = 9 - sqrt((x - airflow_dest.x) ** 2 + (y - airflow_dest.y) ** 2)
 	if(airflow_falloff < 1)

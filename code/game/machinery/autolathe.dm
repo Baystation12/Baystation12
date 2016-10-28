@@ -53,7 +53,6 @@
 
 	if(..() || (disabled && !panel_open))
 		to_chat(user, "<span class='danger'>\The [src] is disabled!</span>")
-
 		return
 
 	if(shocked)
@@ -124,7 +123,6 @@
 
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
-
 		return
 
 	if(default_deconstruction_screwdriver(user, O))
@@ -154,7 +152,6 @@
 	var/obj/item/eating = O
 	if(!eating.matter)
 		to_chat(user, "\The [eating] does not contain significant amounts of useful materials and cannot be accepted.")
-
 		return
 
 	var/filltype = 0       // Used to determine message.
@@ -188,14 +185,11 @@
 
 	if(!filltype)
 		to_chat(user, "<span class='notice'>\The [src] is full. Please remove material from the autolathe in order to insert more.</span>")
-
 		return
 	else if(filltype == 1)
 		to_chat(user, "You fill \the [src] to capacity with \the [eating].")
-
 	else
 		to_chat(user, "You fill \the [src] with \the [eating].")
-
 
 	flick("autolathe_o", src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
 
@@ -223,7 +217,6 @@
 
 	if(busy)
 		to_chat(usr, "<span class='notice'>The autolathe is busy. Please wait for completion of previous operation.</span>")
-
 		return
 
 	if(href_list["change_category"])

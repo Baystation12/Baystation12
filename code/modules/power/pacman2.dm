@@ -53,7 +53,6 @@
 	examine(mob/user)
 		..(user)
 		to_chat(user, "<span class='notice'>The generator has [P.air_contents.phoron] units of fuel left, producing [power_gen] per cycle.</span>")
-
 	handleInactive()
 		heat -= 2
 		if (heat < 0)

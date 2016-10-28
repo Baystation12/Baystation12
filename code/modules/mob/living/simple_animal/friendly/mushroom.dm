@@ -31,17 +31,14 @@
 
 	if(stat == 2)
 		to_chat(usr, "<span class='danger'>You are dead; it is too late for that.</span>")
-
 		return
 
 	if(!seed)
 		to_chat(usr, "<span class='danger'>You are sterile!</span>")
-
 		return
 
 	if(world.time < harvest_time + min_explode_time)
 		to_chat(usr, "<span class='danger'>You are not mature enough for that.</span>")
-
 		return
 
 	spore_explode()

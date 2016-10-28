@@ -85,7 +85,6 @@
 
 	to_chat(user, t)
 
-
 /obj/machinery/meter/Click()
 
 	if(istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
@@ -99,7 +98,6 @@
 		return ..()
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-
 	if (do_after(user, 40, src))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \

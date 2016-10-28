@@ -113,7 +113,6 @@
 	if(wrapped)
 		to_chat(user, "It is holding \a [wrapped].")
 
-
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		return wrapped.attack_self(user)
@@ -136,7 +135,6 @@
 		return
 
 	to_chat(src.loc, "<span class='danger'>You drop \the [wrapped].</span>")
-
 	wrapped.loc = get_turf(src)
 	wrapped = null
 	//update_icon()
@@ -193,13 +191,11 @@
 		//We can grab the item, finally.
 		if(grab)
 			to_chat(user, "You collect \the [I].")
-
 			I.loc = src
 			wrapped = I
 			return
 		else
 			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
-
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
@@ -282,16 +278,13 @@
 
 			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
-
 			if(!do_after(D,50,M))
 				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
-
 				return
 
 			if(!M || !D) return
 
 			to_chat(D, "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>")
-
 			qdel(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
@@ -365,10 +358,8 @@
 
 	if(grabbed_something)
 		to_chat(user, "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>")
-
 	else
 		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
-
 	return
 
 //PRETTIER TOOL LIST.
@@ -376,7 +367,6 @@
 
 	if(weapon_lock)
 		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
-
 		return
 
 	if(!module)

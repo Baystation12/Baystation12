@@ -82,7 +82,6 @@
 			open = !open
 			update_icon()
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
-
 	else if(istype(W, /obj/item/weapon/crowbar) && cell && open)
 		remove_cell(user)
 
@@ -98,13 +97,10 @@
 					user.visible_message("\red [user] repairs [src]!","\blue You repair [src]!")
 				else
 					to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
-
 			else
 				to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>Unable to repair while [src] is off.</span>")
-
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
@@ -191,7 +187,6 @@
 		if(locked)
 			locked = 0
 			to_chat(user, "<span class='warning'>You bypass [src]'s controls.</span>")
-
 		return 1
 
 /obj/vehicle/proc/explode()
@@ -251,13 +246,11 @@
 	powercheck()
 	to_chat(usr, "<span class='notice'>You install [C] in [src].</span>")
 
-
 /obj/vehicle/proc/remove_cell(var/mob/living/carbon/human/H)
 	if(!cell)
 		return
 
 	to_chat(usr, "<span class='notice'>You remove [cell] from [src].</span>")
-
 	cell.forceMove(get_turf(H))
 	H.put_in_hands(cell)
 	cell = null

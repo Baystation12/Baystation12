@@ -30,7 +30,6 @@ var/list/sacrificed = list()
 					allrunesloc[index] = R.loc
 			if(index >= 5)
 				to_chat(user, "<span class='danger'>You feel pain, as rune disappears in reality shift caused by too much wear of space-time fabric.</span>")
-
 				if (istype(user, /mob/living))
 					user.take_overall_damage(5, 0)
 				qdel(src)
@@ -68,7 +67,6 @@ var/list/sacrificed = list()
 					runecount++
 			if(runecount >= 2)
 				to_chat(user, "<span class='danger'>You feel pain, as rune disappears in reality shift caused by too much wear of space-time fabric.</span>")
-
 				if (istype(user, /mob/living))
 					user.take_overall_damage(5, 0)
 				qdel(src)
@@ -124,7 +122,6 @@ var/list/sacrificed = list()
 					fizzle()
 				else
 					to_chat(usr, "<span class='danger'>You sense that the power of the dark one is already working away at them.</span>")
-
 				return
 
 			usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
@@ -146,17 +143,13 @@ var/list/sacrificed = list()
 					switch(target.getFireLoss())
 						if(0 to 25)
 							to_chat(target, "<span class='cult'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>")
-
 						if(25 to 45)
 							to_chat(target, "<span class='cult'>Your blood boils and your body burns as the corruption further forces itself into your body and mind.</span>")
-
 						if(45 to 75)
 							to_chat(target, "<span class='cult'>You begin to hallucinate images of a dark and incomprehensible being and your entire body feels like its engulfed in flame as your mental defenses crumble.</span>")
-
 							target.apply_effect(rand(1,10), STUTTER)
 						if(75 to 100)
 							to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
-
 							//broken mind - 5000 may seem like a lot I wanted the effect to really stand out for maxiumum losing-your-mind-spooky
 							//hallucination is reduced when the step off as well, provided they haven't hit the last stage...
 							target.hallucination += 5000
@@ -164,7 +157,6 @@ var/list/sacrificed = list()
 							target.adjustBrainLoss(1)
 						if(100 to INFINITY)
 							to_chat(target, "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>")
-
 							target.hallucination += 5000
 							target.apply_effect(15, STUTTER)
 							target.adjustBrainLoss(1)
@@ -181,9 +173,7 @@ var/list/sacrificed = list()
 					if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, MODE_CULTIST))//putting jobban check here because is_convertable uses mind as argument
 						//waiting_for_input ensures this is only shown once, so they basically auto-resist from here on out. They still need to find a way to get off the freaking rune if they don't want to burn to death, though.
 						to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
-
 						to_chat(target, "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>")
-
 
 					else spawn()
 						var/choice = alert(target,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
@@ -242,7 +232,6 @@ var/list/sacrificed = list()
 							admin_attack_log(usr, D, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
 							var/bdrain = rand(1,25)
 							to_chat(D, "<span class='warning'>You feel weakened.</span>")
-
 							D.take_overall_damage(bdrain, 0)
 							drain += bdrain
 			if(!drain)
@@ -284,18 +273,15 @@ var/list/sacrificed = list()
 				if(usr.seer==1)
 					usr.say("Rash'tla sektath mal[pick("'","`")]zua. Zasan therium viortia.")
 					to_chat(usr, "<span class='danger'>The world beyond fades from your vision.</span>")
-
 					usr.set_see_invisible(SEE_INVISIBLE_LIVING)
 					usr.seer = 0
 				else if(usr.see_invisible!=SEE_INVISIBLE_LIVING)
 					to_chat(usr, "<span class='warning'>The world beyond flashes your eyes but disappears quickly, as if something is disrupting your vision.</span>")
-
 					usr.set_see_invisible(SEE_INVISIBLE_CULT)
 					usr.seer = 0
 				else
 					usr.say("Rash'tla sektath mal[pick("'","`")]zua. Zasan therium vivira. Itonis al'ra matum!")
 					to_chat(usr, "<span class='warning'>The world beyond opens to your eyes.</span>")
-
 					usr.set_see_invisible(SEE_INVISIBLE_CULT)
 					usr.seer = 1
 				return
@@ -320,7 +306,6 @@ var/list/sacrificed = list()
 			if(!corpse_to_raise)
 				if(is_sacrifice_target)
 					to_chat(usr, "<span class='warning'>The Geometer of blood wants this mortal for himself.</span>")
-
 				return fizzle()
 
 
@@ -339,10 +324,8 @@ var/list/sacrificed = list()
 			if(!body_to_sacrifice)
 				if (is_sacrifice_target)
 					to_chat(usr, "<span class='warning'>The Geometer of Blood wants that corpse for himself.</span>")
-
 				else
 					to_chat(usr, "<span class='warning'>The sacrifical corpse is not dead. You must free it from this world of illusions before it may be used.</span>")
-
 				return fizzle()
 
 			var/mob/observer/ghost/ghost
@@ -354,7 +337,6 @@ var/list/sacrificed = list()
 
 			if(!ghost)
 				to_chat(usr, "<span class='warning'>You require a restless spirit which clings to this world. Beckon their prescence with the sacred chants of Nar-Sie.</span>")
-
 				return fizzle()
 
 			corpse_to_raise.revive()
@@ -376,9 +358,7 @@ var/list/sacrificed = list()
 //				ticker.mode.cult |= corpse_to_raise.mind
 
 			to_chat(corpse_to_raise, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
-
 			to_chat(corpse_to_raise, "<span class='cult'>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</span>")
-
 			return
 
 
@@ -402,7 +382,6 @@ var/list/sacrificed = list()
 				else
 					usr.whisper("Kla[pick("'","`")]atu barada nikt'o!")
 					to_chat(usr, "<span class='warning'>Your talisman turns into gray dust, veiling the surrounding runes.</span>")
-
 					for (var/mob/V in orange(1,src))
 						if(V!=usr)
 							V.show_message("<span class='warning'>Dust emanates from [usr]'s hands for a moment.</span>", 3)
@@ -514,7 +493,6 @@ var/list/sacrificed = list()
 			if (!newtalisman)
 				if (unsuitable_newtalisman)
 					to_chat(usr, "<span class='warning'>The blank is tainted. It is unsuitable.</span>")
-
 				return fizzle()
 
 			var/obj/effect/rune/imbued_from
@@ -626,7 +604,6 @@ var/list/sacrificed = list()
 			for(var/datum/mind/H in cult.current_antagonists)
 				if (H.current)
 					to_chat(H.current, "<span class='cult'>[input]</span>")
-
 			qdel(src)
 			return 1
 
@@ -671,21 +648,16 @@ var/list/sacrificed = list()
 							else
 								H.gib()
 							to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice, your objective is now complete.</span>")
-
 						else
 							to_chat(usr, "<span class='warning'>Your target's earthly bonds are too strong. You need more cultists to succeed in this ritual.</span>")
-
 					else
 						if(cultsinrange.len >= 3)
 							if(H.stat !=2)
 								if(prob(80) || worth)
 									to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>")
-
 								else
 									to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 									to_chat(usr, "<span class='warning'>However, this soul was not enough to gain His favor.</span>")
-
 								if(isrobot(H))
 									H.dust()//To prevent the MMI from remaining
 								else
@@ -693,12 +665,9 @@ var/list/sacrificed = list()
 							else
 								if(prob(40) || worth)
 									to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>")
-
 								else
 									to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 									to_chat(usr, "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>")
-
 								if(isrobot(H))
 									H.dust()//To prevent the MMI from remaining
 								else
@@ -706,17 +675,13 @@ var/list/sacrificed = list()
 						else
 							if(H.stat !=2)
 								to_chat(usr, "<span class='warning'>The victim is still alive, you will need more cultists chanting for the sacrifice to succeed.</span>")
-
 							else
 								if(prob(40))
 
 									to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 								else
 									to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 									to_chat(usr, "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>")
-
 								if(isrobot(H))
 									H.dust()//To prevent the MMI from remaining
 								else
@@ -726,12 +691,9 @@ var/list/sacrificed = list()
 						if(H.stat !=2)
 							if(prob(80))
 								to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 							else
 								to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 								to_chat(usr, "<span class='warning'>However, this soul was not enough to gain His favor.</span>")
-
 							if(isrobot(H))
 								H.dust()//To prevent the MMI from remaining
 							else
@@ -739,12 +701,9 @@ var/list/sacrificed = list()
 						else
 							if(prob(40))
 								to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 							else
 								to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 								to_chat(usr, "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>")
-
 							if(isrobot(H))
 								H.dust()//To prevent the MMI from remaining
 							else
@@ -752,16 +711,12 @@ var/list/sacrificed = list()
 					else
 						if(H.stat !=2)
 							to_chat(usr, "<span class='warning'>The victim is still alive, you will need more cultists chanting for the sacrifice to succeed.</span>")
-
 						else
 							if(prob(40))
 								to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 							else
 								to_chat(usr, "<span class='cult'>The Geometer of Blood accepts this sacrifice.</span>")
-
 								to_chat(usr, "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>")
-
 							if(isrobot(H))
 								H.dust()//To prevent the MMI from remaining
 							else
@@ -790,7 +745,6 @@ var/list/sacrificed = list()
 			if(S)
 				if(istype(W,/obj/item/weapon/nullrod))
 					to_chat(usr, "<span class='warning'>Arcane markings suddenly glow from underneath a thin layer of dust!</span>")
-
 					return
 				if(istype(W,/obj/effect/rune))
 					usr.say("Nikt[pick("'","`")]o barada kla'atu!")
@@ -801,7 +755,6 @@ var/list/sacrificed = list()
 				if(istype(W,/obj/item/weapon/paper/talisman))
 					usr.whisper("Nikt[pick("'","`")]o barada kla'atu!")
 					to_chat(usr, "<span class='warning'>Your talisman turns into red dust, revealing the surrounding runes.</span>")
-
 					for (var/mob/V in orange(1,usr.loc))
 						if(V!=usr)
 							V.show_message("<span class='warning'>Red dust emanates from [usr]'s hands for a moment.</span>", 3)
@@ -822,10 +775,8 @@ var/list/sacrificed = list()
 			user.take_organ_damage(2, 0)
 			if(src.density)
 				to_chat(usr, "<span class='danger'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
-
 			else
 				to_chat(usr, "<span class='danger'>Your blood flows into the rune, and you feel as the rune releases its grasp on space.</span>")
-
 			return
 
 /////////////////////////////////////////EIGHTTEENTH RUNE
@@ -855,7 +806,6 @@ var/list/sacrificed = list()
 					(istype(cultist.loc, /obj/machinery/dna_scannernew)&&cultist.loc:locked) \
 				))
 					to_chat(user, "<span class='warning'>The [cultist] is already free.</span>")
-
 					return
 				cultist.buckled = null
 				if (cultist.handcuffed)
@@ -896,7 +846,6 @@ var/list/sacrificed = list()
 					return
 				if(cultist.buckled || cultist.handcuffed || (!isturf(cultist.loc) && !istype(cultist.loc, /obj/structure/closet)))
 					to_chat(user, "<span class='warning'>You cannot summon \the [cultist], for \his shackles of blood are strong.</span>")
-
 					return fizzle()
 				cultist.loc = src.loc
 				cultist.lying = 1
@@ -936,7 +885,6 @@ var/list/sacrificed = list()
 				if(affected.len)
 					usr.say("Sti[pick("'","`")] kaliedir!")
 					to_chat(usr, "<span class='warning'>The world becomes quiet as the deafening rune dissipates into fine dust.</span>")
-
 					admin_attacker_log_many_victims(usr, affected, "Used a deafen rune.", "Was victim of a deafen rune.", "used a deafen rune on")
 					qdel(src)
 				else
@@ -956,7 +904,6 @@ var/list/sacrificed = list()
 				if(affected.len)
 					usr.whisper("Sti[pick("'","`")] kaliedir!")
 					to_chat(usr, "<span class='warning'>Your talisman turns into gray dust, deafening everyone around.</span>")
-
 					admin_attacker_log_many_victims(usr, affected, "Used a deafen rune.", "Was victim of a deafen rune.", "used a deafen rune on")
 					for (var/mob/V in orange(1,src))
 						if(!(iscultist(V)))
@@ -983,7 +930,6 @@ var/list/sacrificed = list()
 				if(affected.len)
 					usr.say("Sti[pick("'","`")] kaliesin!")
 					to_chat(usr, "<span class='warning'>The rune flashes, blinding those who not follow the Nar-Sie, and dissipates into fine dust.</span>")
-
 					admin_attacker_log_many_victims(usr, affected, "Used a blindness rune.", "Was victim of a blindness rune.", "used a blindness rune on")
 					qdel(src)
 				else
@@ -1004,7 +950,6 @@ var/list/sacrificed = list()
 				if(affected.len)
 					usr.whisper("Sti[pick("'","`")] kaliesin!")
 					to_chat(usr, "<span class='warning'>Your talisman turns into gray dust, blinding those who not follow the Nar-Sie.</span>")
-
 					admin_attacker_log_many_victims(usr, affected, "Used a blindness rune.", "Was victim of a blindness rune.", "used a blindness rune on")
 			return
 
@@ -1031,7 +976,6 @@ var/list/sacrificed = list()
 						continue
 					M.take_overall_damage(51,51)
 					to_chat(M, "<span class='danger'>Your blood boils!</span>")
-
 					victims += M
 					if(prob(5))
 						spawn(5)
@@ -1064,10 +1008,8 @@ var/list/sacrificed = list()
 							M.take_overall_damage(0,15)
 							if (R.invisibility>M.see_invisible)
 								to_chat(M, "<span class='danger'>Aargh it burns!</span>")
-
 							else
 								to_chat(M, "<span class='danger'>Rune suddenly ignites, burning you!</span>")
-
 							var/turf/T = get_turf(R)
 							T.hotspot_expose(700,125)
 				for(var/obj/effect/decal/cleanable/blood/B in world)
@@ -1075,7 +1017,6 @@ var/list/sacrificed = list()
 						for(var/mob/living/M in orange(1,B))
 							M.take_overall_damage(0,5)
 							to_chat(M, "<span class='danger'>Blood suddenly ignites, burning you!</span>")
-
 							var/turf/T = get_turf(B)
 							T.hotspot_expose(700,125)
 							qdel(B)

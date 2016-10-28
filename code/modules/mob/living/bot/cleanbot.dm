@@ -256,11 +256,9 @@
 		if("screw")
 			screwloose = !screwloose
 			to_chat(usr, "<span class='notice'>You twiddle the screw.</span>")
-
 		if("oddbutton")
 			oddbutton = !oddbutton
 			to_chat(usr, "<span class='notice'>You press the weird button.</span>")
-
 	attack_hand(usr)
 
 /mob/living/bot/cleanbot/emag_act(var/remaining_uses, var/mob/user)
@@ -268,7 +266,6 @@
 	if(!screwloose || !oddbutton)
 		if(user)
 			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
-
 		oddbutton = 1
 		screwloose = 1
 		return 1
@@ -328,7 +325,6 @@
 		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
 		A.name = created_name
 		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
-
 		user.drop_from_inventory(src)
 		qdel(src)
 

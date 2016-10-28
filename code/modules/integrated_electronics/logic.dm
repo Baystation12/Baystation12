@@ -287,7 +287,6 @@
 	. = ..(user, 1)
 	if(.)
 		to_chat(user, "A small screen displays 'Last configured by: [last_configurator ? last_configurator : "N/A"]'.")
-
 /obj/item/integrated_circuit/logic/unary/access_verifier/do_check(var/datum/integrated_io/access_input)
 	var/list/access = access_input.get_data()
 	if(isnum(access))

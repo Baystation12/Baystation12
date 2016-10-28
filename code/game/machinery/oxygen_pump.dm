@@ -64,7 +64,6 @@
 			to_chat(user, "<span class='warning'>There is no tank installed!</span>")
 	else
 		to_chat(user, "<span class='notice'>\The [contained] has already been taken out!</span>")
-
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
 		contained.forceMove(get_turf(C))

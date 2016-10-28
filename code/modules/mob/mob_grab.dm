@@ -259,7 +259,6 @@
 	else if(state < GRAB_NECK)
 		if(isslime(affecting))
 			to_chat(assailant, "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>")
-
 			return
 
 		assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
@@ -318,7 +317,6 @@
 				if(I_HELP)
 					if(force_down)
 						to_chat(assailant, "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>")
-
 						force_down = 0
 						return
 					if(state >= GRAB_AGGRESSIVE)

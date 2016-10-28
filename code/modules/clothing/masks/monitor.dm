@@ -43,7 +43,6 @@
 		canremove = 0
 		to_chat(H, "<span class='notice'>\The [src] connects to your display output.</span>")
 
-
 /obj/item/clothing/mask/monitor/dropped()
 	canremove = 1
 	return ..()
@@ -56,7 +55,6 @@
 		if(istype(E) && (E.robotic >= ORGAN_ROBOT))
 			return 1
 		to_chat(user, "<span class='warning'>You must have a robotic head to install this upgrade.</span>")
-
 	return 0
 
 /obj/item/clothing/mask/monitor/verb/set_monitor_state()
@@ -70,7 +68,6 @@
 		return
 	if(H.wear_mask != src)
 		to_chat(usr, "<span class='warning'>You have not installed \the [src] yet.</span>")
-
 		return
 	var/choice = input("Select a screen icon.") as null|anything in monitor_states
 	if(choice)

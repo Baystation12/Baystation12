@@ -71,12 +71,10 @@ datum/track/New(var/title_name, var/audio)
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(!anchored)
 		to_chat(usr, "<span class='warning'>You must secure \the [src] first.</span>")
-
 		return
 
 	if(stat & (NOPOWER|BROKEN))
 		to_chat(usr, "\The [src] doesn't appear to function.")
-
 		return
 
 	tg_ui_interact(user)
@@ -124,7 +122,6 @@ datum/track/New(var/title_name, var/audio)
 				emag_play()
 			else if(!current_track)
 				to_chat(usr, "No track selected.")
-
 			else
 				StartPlaying()
 			. = TRUE

@@ -400,13 +400,11 @@
 					lines.Cut(1,2)
 				if(lines.len > 50)
 					to_chat(usr, "Too many lines!")
-
 					lines.Cut(51)
 				var/linenum = 1
 				for(var/l in lines)
 					if(lentext(l) > 50)
 						to_chat(usr, "Line [linenum] too long!")
-
 						lines.Remove(l)
 					else
 						linenum++
@@ -424,7 +422,6 @@
 		if (anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to loosen \the [src]'s casters...</span>")
-
 			if (do_after(user, 40, src))
 				user.visible_message( \
 					"[user] loosens \the [src]'s casters.", \
@@ -434,7 +431,6 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to tighten \the [src] to the floor...</span>")
-
 			if (do_after(user, 20, src))
 				user.visible_message( \
 					"[user] tightens \the [src]'s casters.", \

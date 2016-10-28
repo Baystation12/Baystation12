@@ -251,7 +251,6 @@ var/list/solars_list = list()
 					new /obj/machinery/power/solar(get_turf(src), src)
 			else
 				to_chat(user, "<span class='warning'>You need two sheets of glass to put them into a solar panel.</span>")
-
 				return
 			return 1
 

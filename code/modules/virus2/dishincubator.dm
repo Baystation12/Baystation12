@@ -19,7 +19,6 @@
 
 		if(beaker)
 			to_chat(user, "\The [src] is already loaded.")
-
 			return
 
 		beaker = O
@@ -36,7 +35,6 @@
 
 		if(dish)
 			to_chat(user, "The dish tray is aleady full!")
-
 			return
 
 		dish = O

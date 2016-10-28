@@ -29,7 +29,6 @@
 		if(paper_result)
 			if(paperamount == max_paper)
 				to_chat(user, "<span class='warning'>\The [src] is full; please empty it before you continue.</span>")
-
 				return
 			paperamount += paper_result
 			user.drop_from_inventory(W)
@@ -37,7 +36,6 @@
 			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
 			if(paperamount > max_paper)
 				to_chat(user, "<span class='danger'>\The [src] was too full, and shredded paper goes everywhere!</span>")
-
 				for(var/i=(paperamount-max_paper);i>0;i--)
 					var/obj/item/weapon/shreddedp/SP = get_shredded_paper()
 					SP.loc = get_turf(src)
@@ -57,7 +55,6 @@
 
 	if(!paperamount)
 		to_chat(usr, "<span class='notice'>\The [src] is empty.</span>")
-
 		return
 
 	empty_bin(usr)
@@ -70,7 +67,6 @@
 
 	if(empty_into && empty_into.contents.len >= empty_into.storage_slots)
 		to_chat(user, "<span class='notice'>\The [empty_into] is full.</span>")
-
 		return
 
 	while(paperamount)
@@ -83,14 +79,11 @@
 	if(empty_into)
 		if(paperamount)
 			to_chat(user, "<span class='notice'>You fill \the [empty_into] with as much shredded paper as it will carry.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>You empty \the [src] into \the [empty_into].</span>")
 
-
 	else
 		to_chat(user, "<span class='notice'>You empty \the [src].</span>")
-
 	update_icon()
 
 /obj/machinery/papershredder/proc/get_shredded_paper()
@@ -113,13 +106,11 @@
 		return
 	if(!P.lit)
 		to_chat(user, "<span class='warning'>\The [P] is not lit.</span>")
-
 		return
 	user.visible_message("<span class='warning'>\The [user] holds \the [P] up to \the [src]. It looks like \he's trying to burn it!</span>", \
 		"<span class='warning'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 	if(!do_after(user,20, src))
 		to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
-
 		return
 	user.visible_message("<span class='danger'>\The [user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 		"<span class='danger'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")

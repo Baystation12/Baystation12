@@ -28,7 +28,6 @@
 		force = 3
 		if(icon_base) icon_state = "[icon_base]0"
 		to_chat(user, "You disable the mag-pulse traction system.")
-
 	else
 		item_flags |= NOSLIP
 		magpulse = 1
@@ -36,7 +35,6 @@
 		force = 5
 		if(icon_base) icon_state = "[icon_base]1"
 		to_chat(user, "You enable the mag-pulse traction system.")
-
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
 	user.update_floating()
@@ -48,7 +46,6 @@
 		shoes = H.shoes
 		if(shoes.overshoes)
 			to_chat(user, "You are unable to wear \the [src] as \the [H.shoes] are in the way.")
-
 			shoes = null
 			return 0
 		H.drop_from_inventory(shoes)	//Remove the old shoes so you can put on the magboots.
@@ -62,7 +59,6 @@
 
 	if (shoes)
 		to_chat(user, "You slip \the [src] on over \the [shoes].")
-
 	set_slowdown()
 	wearer = H //TODO clean this up
 	return 1
@@ -92,4 +88,3 @@
 	if(item_flags & NOSLIP)
 		state = "enabled"
 	to_chat(user, "Its mag-pulse traction system appears to be [state].")
-

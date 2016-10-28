@@ -138,7 +138,6 @@
 		if (fire) fire.icon_state = "fire2"
 		if(prob(20))
 			to_chat(src, "<span class='danger'>You feel a searing heat!</span>")
-
 	else
 		if (fire) fire.icon_state = "fire0"
 

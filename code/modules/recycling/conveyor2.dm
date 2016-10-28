@@ -86,7 +86,6 @@
 			C.id = id
 			transfer_fingerprints_to(C)
 		to_chat(user, "<span class='notice'>You remove the conveyor belt.</span>")
-
 		qdel(src)
 		return
 	if(isrobot(user))	return //Carn: fix for borgs dropping their modules on conveyor belts
@@ -208,7 +207,6 @@
 /obj/machinery/conveyor_switch/attack_hand(mob/user)
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access denied.</span>")
-
 		return
 
 	if(position == 0)
@@ -238,7 +236,6 @@
 		C.id = id
 		transfer_fingerprints_to(C)
 		to_chat(user, "<span class='notice'>You deattach the conveyor switch.</span>")
-
 		qdel(src)
 
 /obj/machinery/conveyor_switch/oneway
@@ -279,7 +276,6 @@
 	..()
 	if(istype(I, /obj/item/conveyor_switch_construct))
 		to_chat(user, "<span class='notice'>You link the switch to the conveyor belt assembly.</span>")
-
 		var/obj/item/conveyor_switch_construct/C = I
 		id = C.id
 
@@ -321,7 +317,6 @@
 			break
 	if(!found)
 		to_chat(user, "\icon[src]<span class=notice>The conveyor switch did not detect any linked conveyor belts in range.</span>")
-
 		return
 	var/obj/machinery/conveyor_switch/NC = new/obj/machinery/conveyor_switch(A, id)
 	transfer_fingerprints_to(NC)

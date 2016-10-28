@@ -13,10 +13,8 @@
 			src.name = T_BOARD("RD Console - Robotics")
 			src.build_path = /obj/machinery/computer/rdconsole/robotics
 			to_chat(user, "<span class='notice'>Access protocols set to robotics.</span>")
-
 		else
 			src.name = T_BOARD("RD Console")
 			src.build_path = /obj/machinery/computer/rdconsole/core
 			to_chat(user, "<span class='notice'>Access protocols set to default.</span>")
-
 	return

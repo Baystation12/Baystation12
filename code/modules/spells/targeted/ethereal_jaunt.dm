@@ -107,7 +107,6 @@
 			last_valid_turf = T
 	else
 		to_chat(user, "<span class='warning'>Some strange aura is blocking the way!</span>")
-
 	src.canmove = 0
 	spawn(2) src.canmove = 1
 

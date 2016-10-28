@@ -42,7 +42,6 @@
 /obj/item/weapon/extinguisher/examine(mob/user)
 	if(..(user, 0))
 		to_chat(user, text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume))
-
 	return
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
@@ -50,7 +49,6 @@
 	src.icon_state = "[sprite_name][!safety]"
 	src.desc = "The safety is [safety ? "on" : "off"]."
 	to_chat(user, "The safety is [safety ? "on" : "off"].")
-
 	return
 
 /obj/item/weapon/extinguisher/proc/propel_object(var/obj/O, mob/user, movementdirection)
@@ -78,14 +76,12 @@
 		var/obj/o = target
 		var/amount = o.reagents.trans_to_obj(src, 500)
 		to_chat(user, "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>")
-
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 
 	if (!safety)
 		if (src.reagents.total_volume < 1)
 			to_chat(usr, "<span class='notice'>\The [src] is empty.</span>")
-
 			return
 
 		if (world.time < src.last_use + 20)

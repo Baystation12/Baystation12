@@ -27,14 +27,12 @@
 
 	if(scan)
 		to_chat(usr, "You remove \the [scan] from \the [src].")
-
 		scan.loc = get_turf(src)
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else
 		to_chat(usr, "There is nothing to remove from the console.")
-
 	return
 
 /obj/machinery/computer/med_data/attackby(var/obj/item/O, var/mob/user)
@@ -42,7 +40,6 @@
 		O.loc = src
 		scan = O
 		to_chat(user, "You insert \the [O].")
-
 	else
 		..()
 

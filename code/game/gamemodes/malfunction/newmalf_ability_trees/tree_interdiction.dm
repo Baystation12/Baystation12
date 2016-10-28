@@ -139,7 +139,6 @@
 	if(!L.len)
 		to_chat(user, "<span class='notice'>ERROR: No unlinked cyborgs detected!</span>")
 
-
 	if(target && !istype(target))
 		to_chat(user, "This is not a cyborg.")
 		return
@@ -204,7 +203,6 @@
 	var/list/L = get_other_ais(user)
 	if(!L.len)
 		to_chat(user, "<span class='notice'>ERROR: No other AIs detected!</span>")
-
 	if(target && !istype(target))
 		to_chat(user, "This is not an AI.")
 		return
@@ -240,7 +238,6 @@
 				to_chat(target, "SYSTEM LOG: User: Admin - Connection Lost. Changes Reverted.")
 				return
 			to_chat(target, "SYSTEM LOG: User: Admin - Accessed file: sys//core//laws.db")
-
 			sleep(50)  // 5s
 			if(user.is_dead())
 				to_chat(target, "SYSTEM LOG: User: Admin - Connection Lost. Changes Reverted.")

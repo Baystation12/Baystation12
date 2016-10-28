@@ -23,7 +23,6 @@
 				accept = 1
 		if(!accept)
 			to_chat(user, "[A] doesn't fit into \the [src].")
-
 			return
 		var/mob/L = A
 		user.visible_message("<span class='notice'>[user] scoops [L] into \the [src].</span>", "<span class='notice'>You scoop [L] into \the [src].</span>")
@@ -46,7 +45,6 @@
 			for(var/obj/O in src)
 				O.loc = user.loc
 			to_chat(user, "<span class='notice'>You take money out of \the [src].</span>")
-
 			contains = 0
 			update_icon()
 			return

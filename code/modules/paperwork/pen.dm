@@ -52,7 +52,6 @@
 
 	to_chat(user, "<span class='notice'>Changed color to '[colour].'</span>")
 
-
 /obj/item/weapon/pen/invisible
 	desc = "It's an invisble pen marker."
 	icon_state = "pen"
@@ -171,7 +170,6 @@
 			else
 				colour = COLOR_BLACK
 		to_chat(usr, "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>")
-
 
 
 /*

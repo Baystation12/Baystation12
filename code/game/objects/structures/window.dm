@@ -42,7 +42,6 @@
 			to_chat(user, "<span class='notice'>It is covered in silicate.</span>")
 		else
 			to_chat(user, "<span class='notice'>There is a thick layer of silicate covering it.</span>")
-
 /obj/structure/window/proc/take_damage(var/damage = 0,  var/sound_effect = 1)
 	var/initialhealth = health
 

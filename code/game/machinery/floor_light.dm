@@ -31,7 +31,6 @@ var/list/floor_light_cache = list()
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
-
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(!do_after(user, 20, src))
@@ -63,17 +62,14 @@ var/list/floor_light_cache = list()
 
 		if(!anchored)
 			to_chat(user, "<span class='warning'>\The [src] must be screwed down first.</span>")
-
 			return
 
 		if(stat & BROKEN)
 			to_chat(user, "<span class='warning'>\The [src] is too damaged to be functional.</span>")
-
 			return
 
 		if(stat & NOPOWER)
 			to_chat(user, "<span class='warning'>\The [src] is unpowered.</span>")
-
 			return
 
 		on = !on

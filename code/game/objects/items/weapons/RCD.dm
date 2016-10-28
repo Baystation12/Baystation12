@@ -34,7 +34,6 @@
 	if(src.type == /obj/item/weapon/rcd && loc == usr)
 		to_chat(usr, "It currently holds [stored_matter]/30 matter-units.")
 
-
 /obj/item/weapon/rcd/New()
 	..()
 	src.spark_system = new /datum/effect/effect/system/spark_spread
@@ -51,14 +50,12 @@
 	if(istype(W, /obj/item/weapon/rcd_ammo))
 		if((stored_matter + 10) > 30)
 			to_chat(user, "<span class='notice'>The RCD can't hold any more matter-units.</span>")
-
 			return
 		user.drop_from_inventory(W)
 		qdel(W)
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/30 matter-units.</span>")
-
 		return
 	..()
 
@@ -66,7 +63,6 @@
 	//Change the mode
 	if(++mode > 3) mode = 1
 	to_chat(user, "<span class='notice'>Changed mode to '[modes[mode]]'</span>")
-
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if(prob(20)) src.spark_system.start()
 
@@ -128,14 +124,12 @@
 
 	if(!useResource(build_cost, user))
 		to_chat(user, "Insufficient resources.")
-
 		return 0
 
 	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 
 	working = 1
 	to_chat(user, "[(deconstruct ? "Deconstructing" : "Building")] [build_type]...")
-
 
 	if(build_delay && !do_after(user, build_delay, src))
 		working = 0

@@ -26,19 +26,15 @@
 
 	if(!M)
 		to_chat(src, "There is nothing nearby to merge with.")
-
 	else if(!do_merge(M))
 		to_chat(src, "You fail to merge with \the [M]...")
-
 
 /mob/living/carbon/alien/diona/proc/do_merge(var/mob/living/carbon/human/H)
 	if(!istype(H) || !src || !(src.Adjacent(H)))
 		return 0
 	to_chat(H, "You feel your being twine with that of \the [src] as it merges with your biomass.")
-
 	H.status_flags |= PASSEMOTES
 	to_chat(src, "You feel your being twine with that of \the [H] as you merge with its biomass.")
-
 	loc = H
 	verbs += /mob/living/carbon/alien/diona/proc/split
 	verbs -= /mob/living/carbon/alien/diona/proc/merge
@@ -58,9 +54,7 @@
 		return
 
 	to_chat(src.loc, "You feel a pang of loss as [src] splits away from your biomass.")
-
 	to_chat(src, "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground.")
-
 
 	var/mob/living/M = src.loc
 

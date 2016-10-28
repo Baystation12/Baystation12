@@ -22,12 +22,10 @@
 
 	if(H.wear_mask)
 		to_chat(user, "<span class='warning'>\The [H] is wearing a mask.</span>")
-
 		return
 
 	if(!H.dna || !H.dna.unique_enzymes)
 		to_chat(user, "<span class='warning'>They don't seem to have DNA!</span>")
-
 		return
 
 	if(user != H && H.a_intent != I_HELP && !H.lying)
@@ -37,11 +35,9 @@
 	if(user.zone_sel.selecting == BP_MOUTH)
 		if(!H.organs_by_name[BP_HEAD])
 			to_chat(user, "<span class='warning'>They don't have a head.</span>")
-
 			return
 		if(!H.check_has_mouth())
 			to_chat(user, "<span class='warning'>They don't have a mouth.</span>")
-
 			return
 		user.visible_message("[user] swabs \the [H]'s mouth for a saliva sample.")
 		dna = list(H.dna.unique_enzymes)
@@ -58,7 +54,6 @@
 				has_hand = 1
 		if(!has_hand)
 			to_chat(user, "<span class='warning'>They don't have any hands.</span>")
-
 			return
 		user.visible_message("[user] swabs [H]'s palm for a sample.")
 		sample_type = "GSR"
@@ -78,7 +73,6 @@
 
 	if(is_used())
 		to_chat(user, "<span class='warning'>This swab has already been used.</span>")
-
 		return
 
 	add_fingerprint(user)
@@ -92,7 +86,6 @@
 	var/choice
 	if(!choices.len)
 		to_chat(user, "<span class='warning'>There is no evidence on \the [A].</span>")
-
 		return
 	else if(choices.len == 1)
 		choice = choices[1]
@@ -112,7 +105,6 @@
 		var/obj/item/clothing/B = A
 		if(!istype(B) || !B.gunshot_residue)
 			to_chat(user, "<span class='warning'>There is no residue on \the [A].</span>")
-
 			return
 		gsr = B.gunshot_residue
 		sample_type = "residue"

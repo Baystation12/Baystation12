@@ -31,7 +31,6 @@
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")
 
-
 //WHY?
 /obj/item/weapon/gun/energy/pulse_rifle/M1911
 	name = "\improper M1911-P"

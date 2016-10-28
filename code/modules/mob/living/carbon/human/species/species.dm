@@ -227,11 +227,9 @@
 		if("cold")
 			if(!covered)
 				to_chat(H, "<span class='danger'>[pick(cold_discomfort_strings)]</span>")
-
 		if("heat")
 			if(covered)
 				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
-
 
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)

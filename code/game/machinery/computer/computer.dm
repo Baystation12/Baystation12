@@ -99,13 +99,11 @@
 				C.loc = src.loc
 			if (src.stat & BROKEN)
 				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-
 				new /obj/item/weapon/material/shard( src.loc )
 				A.state = 3
 				A.icon_state = "3"
 			else
 				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-
 				A.state = 4
 				A.icon_state = "4"
 			M.deconstruct(src)

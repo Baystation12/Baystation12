@@ -38,7 +38,6 @@
 	if(prefix)
 		prefix = "\[[prefix]\] "
 	to_chat(src, "<span class='ooc'><span class='looc'>" + create_text_tag("looc", "LOOC:", src) + " <span class='prefix'>[prefix]</span><EM>[display_name][admin_stuff]:</EM> <span class='message'>[message]</span></span></span>")
-
 /mob/proc/looc_prefix()
 	return eyeobj ? "Body" : ""
 

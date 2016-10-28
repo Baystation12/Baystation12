@@ -205,7 +205,6 @@
 				var/mob/living/carbon/C = usr
 				if(C.legcuffed)
 					to_chat(C, "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>")
-
 					C.m_intent = "walk"	//Just incase
 					C.hud_used.move_intent.icon_state = "walking"
 					return 1
@@ -226,7 +225,6 @@
 					if(C.internal)
 						C.internal = null
 						to_chat(C, "<span class='notice'>No longer running on internals.</span>")
-
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
@@ -239,7 +237,6 @@
 
 						if(no_mask)
 							to_chat(C, "<span class='notice'>You are not wearing a suitable mask or helmet.</span>")
-
 							return 1
 						else
 							var/list/nicename = null
@@ -314,7 +311,6 @@
 
 							if(best)
 								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
-
 								C.internal = tankcheck[best]
 
 
@@ -323,7 +319,6 @@
 									C.internals.icon_state = "internal1"
 							else
 								to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
-
 		if("act_intent")
 			usr.a_intent_change("right")
 		if(I_HELP)
@@ -365,7 +360,6 @@
 				else
 					to_chat(R, "You haven't selected a module yet.")
 
-
 		if("radio")
 			if(issilicon(usr))
 				usr:radio_menu()
@@ -381,7 +375,6 @@
 					R.hud_used.update_robot_modules_display()
 				else
 					to_chat(R, "You haven't selected a module yet.")
-
 
 		if("module1")
 			if(istype(usr, /mob/living/silicon/robot))

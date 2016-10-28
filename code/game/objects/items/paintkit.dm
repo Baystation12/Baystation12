@@ -11,7 +11,6 @@
 	..()
 	to_chat(usr, "It has [uses] use\s left.")
 
-
 /obj/item/device/kit/proc/use(var/amt, var/mob/user)
 	uses -= amt
 	playsound(get_turf(user), 'sound/items/Screwdriver.ogg', 50, 1)
@@ -42,7 +41,6 @@
 		if(kit.new_light_overlay)
 			light_overlay = kit.new_light_overlay
 		to_chat(user, "You set about modifying the helmet into [src].")
-
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
 			species_restricted = list(H.species.get_bodytype())
@@ -62,7 +60,6 @@
 		if(kit.new_mob_icon_file)
 			icon_override = kit.new_mob_icon_file
 		to_chat(user, "You set about modifying the suit into [src].")
-
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
 			species_restricted = list(H.species.get_bodytype())
@@ -79,18 +76,14 @@
 /obj/item/device/kit/paint/examine()
 	..()
 	to_chat(usr, "This kit will convert an exosuit into: [new_name].")
-
 	to_chat(usr, "This kit can be used on the following exosuit models:")
-
 	for(var/exotype in allowed_types)
 		to_chat(usr, "- [capitalize(exotype)]")
-
 
 /obj/mecha/attackby(var/obj/item/weapon/W, var/mob/user)
 	if(istype(W, /obj/item/device/kit/paint))
 		if(occupant)
 			to_chat(user, "You can't customize a mech while someone is piloting it - that would be unsafe!")
-
 			return
 
 		var/obj/item/device/kit/paint/P = W
@@ -103,7 +96,6 @@
 
 		if(!found)
 			to_chat(user, "That kit isn't meant for use on this class of exosuit.")
-
 			return
 
 		user.visible_message("[user] opens [P] and spends some quality time customising [src].")

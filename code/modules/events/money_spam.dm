@@ -118,4 +118,3 @@
 
 			if(L)
 				to_chat(L, "\icon[P] <b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)")
-

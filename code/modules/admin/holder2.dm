@@ -63,7 +63,6 @@ proc/admin_proc()
 	if(!check_rights(R_ADMIN)) return
 	to_chat(usr, "you have enough rights!")
 
-
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
 /proc/check_rights(rights_required, show_msg=1, var/client/C = usr)
@@ -140,7 +139,6 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		to_chat(src, "<span class='notice'>You are now stealthed.</span>")
 	else
 		to_chat(src, "<span class='notice'>You are no longer stealthed.</span>")
-
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
 	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

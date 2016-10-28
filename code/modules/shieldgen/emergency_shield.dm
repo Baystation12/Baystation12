@@ -242,11 +242,9 @@
 /obj/machinery/shieldgen/attack_hand(mob/user as mob)
 	if(locked)
 		to_chat(user, "The machine is locked, you are unable to use it.")
-
 		return
 	if(is_open)
 		to_chat(user, "The panel must be closed before operating this machine.")
-
 		return
 
 	if (src.active)
@@ -262,7 +260,6 @@
 			src.shields_up()
 		else
 			to_chat(user, "The device must first be secured to the floor.")
-
 	return
 
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
@@ -284,20 +281,17 @@
 	else if(istype(W, /obj/item/stack/cable_coil) && malfunction && is_open)
 		var/obj/item/stack/cable_coil/coil = W
 		to_chat(user, "<span class='notice'>You begin to replace the wires.</span>")
-
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
 		if(do_after(user, 30,src))
 			if (coil.use(1))
 				health = max_health
 				malfunction = 0
 				to_chat(user, "<span class='notice'>You repair the [src]!</span>")
-
 				update_icon()
 
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(locked)
 			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
-
 			return
 		if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)

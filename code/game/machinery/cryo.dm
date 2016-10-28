@@ -174,7 +174,6 @@
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
-
 			return
 
 		beaker =  G
@@ -187,7 +186,6 @@
 		for(var/mob/living/carbon/slime/M in range(1,G:affecting))
 			if(M.Victim == G:affecting)
 				to_chat(usr, "[G:affecting:name] will not fit into the cryo because they have a slime latched onto their head.")
-
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
@@ -285,23 +283,18 @@
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (stat & (NOPOWER|BROKEN))
 		to_chat(usr, "<span class='warning'>The cryo cell is not functioning.</span>")
-
 		return
 	if (!istype(M))
 		to_chat(usr, "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>")
-
 		return
 	if (occupant)
 		to_chat(usr, "<span class='danger'>The cryo cell is already occupied!</span>")
-
 		return
 	if (M.abiotic())
 		to_chat(usr, "<span class='warning'>Subject may not have abiotic items on.</span>")
-
 		return
 	if(!node)
 		to_chat(usr, "<span class='warning'>The cell is not correctly connected to its pipe network!</span>")
-
 		return
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
@@ -311,7 +304,6 @@
 	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
 		to_chat(M, "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>")
-
 	occupant = M
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(2)
@@ -328,7 +320,6 @@
 		if (usr.stat == 2)//and he's not dead....
 			return
 		to_chat(usr, "<span class='notice'>Release sequence activated. This will take two minutes.</span>")
-
 		sleep(1200)
 		if(!src || !usr || !occupant || (occupant != usr)) //Check if someone's released/replaced/bombed him already
 			return
@@ -347,7 +338,6 @@
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
-
 			return
 	if (usr.stat != 0)
 		return

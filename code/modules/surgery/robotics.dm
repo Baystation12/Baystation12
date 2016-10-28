@@ -190,7 +190,6 @@
 			if(istype(C))
 				if(!C.get_amount() >= 3)
 					to_chat(user, "<span class='danger'>You need three or more cable pieces to repair this damage.</span>")
-
 					return SURGERY_FAILURE
 				C.use(3)
 				return 1
@@ -202,7 +201,6 @@
 		if(istype(C))
 			if(!C.can_use(10))
 				to_chat(user, "<span class='danger'>You need ten or more cable pieces to repair this damage.</span>")//usage amount made more consistent with regular cable repair
-
 
 				return SURGERY_FAILURE
 			C.use(10)
@@ -491,22 +489,18 @@
 
 	if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
-
 		return SURGERY_FAILURE
 
 	if(!(affected.robotic >= ORGAN_ROBOT))
 		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat torso.</span>")
-
 		return SURGERY_FAILURE
 
 	if(!target.should_have_organ(BP_BRAIN))
 		to_chat(user, "<span class='danger'>You're pretty sure [target.species.name_plural] don't normally have a brain.</span>")
-
 		return SURGERY_FAILURE
 
 	if(!isnull(target.internal_organs[BP_BRAIN]))
 		to_chat(user, "<span class='danger'>Your subject already has a brain.</span>")
-
 		return SURGERY_FAILURE
 
 	return 1

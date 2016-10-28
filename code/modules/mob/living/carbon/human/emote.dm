@@ -522,10 +522,8 @@ grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute
 sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,
 wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag, vomit"}
 			to_chat(src, help)
-
 		else
 			to_chat(src, "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>")
-
 
 
 

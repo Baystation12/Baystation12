@@ -18,12 +18,10 @@
 			active = 1
 			workdisk()
 			to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
-
 		else
 			active = 0
 			icon_state = "pinoff"
 			to_chat(usr, "<span>You deactivate the pinpointer</span>")
-
 
 	proc/workdisk()
 		if(!active) return
@@ -50,7 +48,6 @@
 			if(bomb.timing)
 				to_chat(user, "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]")
 
-
 /obj/item/weapon/pinpointer/Destroy()
 	active = 0
 	..()
@@ -73,12 +70,10 @@
 			if(mode == 2)
 				workobj()
 			to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
-
 		else
 			active = 0
 			icon_state = "pinoff"
 			to_chat(usr, "<span class='notice'>You deactivate the pinpointer</span>")
-
 
 
 	proc/worklocation()
@@ -146,7 +141,6 @@
 			to_chat(usr, "You set the pinpointer to locate [locationx],[locationy]")
 
 
-
 			return attack_self()
 
 		if("Disk Recovery")
@@ -165,10 +159,8 @@
 					target=locate(itemlist.possible_items[targetitem])
 					if(!target)
 						to_chat(usr, "Failed to locate [targetitem]!")
-
 						return
 					to_chat(usr, "You set the pinpointer to locate [targetitem]")
-
 				if("DNA")
 					var/DNAstring = input("Input DNA string to search for." , "Please Enter String." , "")
 					if(!DNAstring)
@@ -198,16 +190,13 @@
 		if(!mode)
 			workdisk()
 			to_chat(user, "<span class='notice'>Authentication Disk Locator active.</span>")
-
 		else
 			worklocation()
 			to_chat(user, "<span class='notice'>Shuttle Locator active.</span>")
-
 	else
 		active = 0
 		icon_state = "pinoff"
 		to_chat(user, "<span class='notice'>You deactivate the pinpointer.</span>")
-
 
 
 /obj/item/weapon/pinpointer/nukeop/workdisk()

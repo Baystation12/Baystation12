@@ -36,11 +36,9 @@
 	if(icon_state == icon_closed)
 		icon_state = "[icon_closed]_open"
 		to_chat(usr, "You unbutton [src].")
-
 	else
 		icon_state = icon_closed
 		to_chat(usr, "You button up [src].")
-
 
 	update_clothing_icon()	//so our overlays update
 

@@ -27,7 +27,6 @@
 	. = ..()
 	if(air_contents.total_moles < 5)
 		to_chat(user, "<span class='danger'>The meter on \the [src] indicates you are almost out of gas!</span>")
-
 		playsound(user, 'sound/effects/alert.ogg', 50, 1)
 
 /obj/item/weapon/tank/jetpack/verb/toggle_rockets()
@@ -35,7 +34,6 @@
 	set category = "Object"
 	src.stabilization_on = !( src.stabilization_on )
 	to_chat(usr, "You toggle the stabilization [stabilization_on? "on":"off"].")
-
 
 /obj/item/weapon/tank/jetpack/verb/toggle()
 	set name = "Toggle Jetpack"
@@ -55,7 +53,6 @@
 		M.update_action_buttons()
 
 	to_chat(usr, "You toggle the thrusters [on? "on":"off"].")
-
 
 /obj/item/weapon/tank/jetpack/proc/allow_thrust(num, mob/living/user as mob)
 	if(!(src.on))
@@ -117,7 +114,6 @@
 
 /obj/item/weapon/tank/jetpack/rig/examine()
 	to_chat(usr, "It's a jetpack. If you can see this, report it on the bug tracker.")
-
 	return 0
 
 /obj/item/weapon/tank/jetpack/rig/allow_thrust(num, mob/living/user as mob)

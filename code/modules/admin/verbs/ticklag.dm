@@ -21,4 +21,3 @@
 	else
 		to_chat(src, "<span class='warning'>Error: ticklag(): Invalid world.ticklag value. No changes made.</span>")
 
-

@@ -203,7 +203,6 @@
 		if (do_after(user,40,src))
 			to_chat(user, "<span class='notice'>You removed the windoor electronics!</span>")
 
-
 			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)
 			if (istype(src, /obj/machinery/door/window/brigdoor))
 				wa.secure = "secure_"

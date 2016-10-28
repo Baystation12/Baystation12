@@ -8,12 +8,10 @@
 /obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(holstered && istype(user))
 		to_chat(user, "<span class='warning'>There is already \a [holstered] holstered here!</span>")
-
 		return
 
 	if (!(I.slot_flags & SLOT_HOLSTER))
 		to_chat(user, "<span class='warning'>[I] won't fit in [src]!</span>")
-
 		return
 
 	if(istype(user))
@@ -36,7 +34,6 @@
 
 	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
 		to_chat(user, "<span class='warning'>You need an empty hand to draw \the [holstered]!</span>")
-
 	else
 		if(user.a_intent == I_HURT)
 			usr.visible_message(
@@ -73,10 +70,8 @@
 	..(user)
 	if (holstered)
 		to_chat(user, "A [holstered] is holstered here.")
-
 	else
 		to_chat(user, "It is empty.")
-
 
 /obj/item/clothing/accessory/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
@@ -107,12 +102,10 @@
 	if (!H)
 		to_chat(usr, "<span class='warning'>Something is very wrong.</span>")
 
-
 	if(!H.holstered)
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
 			to_chat(usr, "<span class='warning'>You need your gun equiped to holster it.</span>")
-
 			return
 		H.holster(W, usr)
 	else

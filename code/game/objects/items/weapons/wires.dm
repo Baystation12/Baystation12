@@ -13,8 +13,6 @@
 	if (src.laying)
 		src.laying = 0
 		to_chat(user, "<span class='notice'>You're done laying wire!</span>")
-
 	else
 		to_chat(user, "<span class='warning'>You are not using this to lay wire...</span>")
-
 	return

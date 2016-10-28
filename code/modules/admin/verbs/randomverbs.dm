@@ -3,7 +3,6 @@
 	set name = "Drop Everything"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 
 	var/confirm = alert(src, "Make [M] drop everything?", "Message", "Yes", "No")
@@ -22,7 +21,6 @@
 	set name = "Prison"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	if (ismob(M))
 		if(istype(M, /mob/living/silicon/ai))
@@ -51,7 +49,6 @@
 	if(!ismob(M))	return
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 
 	var/msg = sanitize(input("Message:", text("Subtle PM to [M.key]")) as text)
@@ -62,7 +59,6 @@
 		if (usr.client)
 			if(usr.client.holder)
 				to_chat(M, "\bold You hear a voice in your head... \italic [msg]")
-
 	log_and_message_admins(" - SubtleMessage -> [key_name_admin(M)] : [msg]")
 	feedback_add_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -71,7 +67,6 @@
 	set name = "Check new Players"
 	if(!holder)
 		to_chat(src, "Only staff members may use this command.")
-
 
 	var/age = alert(src, "Age check", "Show accounts yonger then _____ days","7", "30" , "All")
 
@@ -97,12 +92,10 @@
 	if(missing_ages)
 		to_chat(src, "Some accounts did not have proper ages set in their clients.  This function requires database to be present")
 
-
 	if(msg != "")
 		src << browse(msg, "window=Player_age_check")
 	else
 		to_chat(src, "No matches for that age range found.")
-
 
 
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
@@ -111,7 +104,6 @@
 
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 
 	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text)
@@ -129,7 +121,6 @@
 
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 
 	if(!M)
@@ -152,11 +143,9 @@
 	set name = "Godmode"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	M.status_flags ^= GODMODE
 	to_chat(usr, "<span class='notice'>Toggled [(M.status_flags & GODMODE) ? "ON" : "OFF"]</span>")
-
 	log_admin("[key_name(usr)] has toggled [key_name(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]")
 	message_admins("[key_name_admin(usr)] has toggled [key_name_admin(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]", 1)
 	feedback_add_details("admin_verb","GOD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -167,14 +156,11 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 		return
 	if(!usr.client.holder)
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You don't have permission to do this.</font>")
-
 		return
 	if(!M.client)
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>")
-
 	if(M.client.holder)
 		to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>")
-
 	if(!M.client)		return
 	if(M.client.holder)	return
 
@@ -201,7 +187,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 	log_admin("[key_name(usr)] has [muteunmute] [key_name(M)] from [mute_string]")
 	message_admins("[key_name_admin(usr)] has [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
 	to_chat(M, "<span class = 'alert'>You have been [muteunmute] from [mute_string].</span>")
-
 	feedback_add_details("admin_verb","MUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_add_random_ai_law()
@@ -209,7 +194,6 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 	set name = "Add Random AI Law"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm != "Yes") return
@@ -242,7 +226,6 @@ Ccomp's first proc.
 	if(!any)
 		if(notify)
 			to_chat(src, "There doesn't appear to be any ghosts for you to select.")
-
 		return
 
 	for(var/mob/M in mobs)
@@ -271,7 +254,6 @@ Ccomp's first proc.
 	var/mob/observer/ghost/G = ghosts[selection]
 	if(!istype(G))
 		to_chat(src, "<span class='warning'>[selection] no longer has an associated ghost.</span>")
-
 		return
 
 	if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
@@ -298,7 +280,6 @@ Ccomp's first proc.
 
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 	var/action=""
 	if(config.antag_hud_allowed)
 		for(var/mob/observer/ghost/g in get_ghosts())
@@ -308,10 +289,8 @@ Ccomp's first proc.
 				g.antagHUD = 0						// Disable it on those that have it enabled
 				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
 				to_chat(g, "<span class='danger'>The Administrator has disabled AntagHUD</span>")
-
 		config.antag_hud_allowed = 0
 		to_chat(src, "<span class='danger'>AntagHUD usage has been disabled</span>")
-
 		action = "disabled"
 	else
 		for(var/mob/observer/ghost/g in get_ghosts())
@@ -319,11 +298,9 @@ Ccomp's first proc.
 				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
 				to_chat(g, "<span class='notice'><B>The Administrator has enabled AntagHUD </B></span>")// Notify all observers they can now use AntagHUD
 
-
 		config.antag_hud_allowed = 1
 		action = "enabled"
 		to_chat(src, "<span class='notice'><B>AntagHUD usage has been enabled</B></span>")
-
 
 
 	log_admin("[key_name(usr)] has [action] antagHUD usage for observers")
@@ -337,28 +314,22 @@ Ccomp's first proc.
 	set desc = "Restricts players that have used antagHUD from being able to join this round."
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 	var/action=""
 	if(config.antag_hud_restricted)
 		for(var/mob/observer/ghost/g in get_ghosts())
 			to_chat(g, "<span class='notice'><B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B></span>")
-
 		action = "lifted restrictions"
 		config.antag_hud_restricted = 0
 		to_chat(src, "<span class='notice'><B>AntagHUD restrictions have been lifted</B></span>")
-
 	else
 		for(var/mob/observer/ghost/g in get_ghosts())
 			to_chat(g, "<span class='danger'>The administrator has placed restrictions on joining the round if you use AntagHUD</span>")
-
 			to_chat(g, "<span class='danger'>Your AntagHUD has been disabled, you may choose to re-enabled it but will be under restrictions</span>")
-
 			g.antagHUD = 0
 			g.has_enabled_antagHUD = 0
 		action = "placed restrictions"
 		config.antag_hud_restricted = 1
 		to_chat(src, "<span class='danger'>AntagHUD restrictions have been enabled</span>")
-
 
 	log_admin("[key_name(usr)] has [action] on joining the round if they use AntagHUD")
 	message_admins("Admin [key_name_admin(usr)] has [action] on joining the round if they use AntagHUD", 1)
@@ -374,7 +345,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set desc = "Respawn a person that has been gibbed/dusted/killed. They must be a ghost for this to work and preferably should not have a body to go back into."
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	var/input = ckey(input(src, "Please specify which key will be respawned.", "Key", ""))
 	if(!input)
@@ -388,7 +358,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(!G_found)//If a ghost was not found.
 		to_chat(usr, "<font color='red'>There is no active key like that in the game or the person is not currently a ghost.</font>")
-
 		return
 
 	var/mob/living/carbon/human/new_character = new(pick(latejoin))//The mob being spawned.
@@ -473,7 +442,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	log_and_message_admins("has respawned [player_key] as [new_character.real_name].")
 
 	to_chat(new_character, "You have been fully respawned. Enjoy the game.")
-
 	feedback_add_details("admin_verb","RSPCH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return new_character
 
@@ -482,7 +450,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Add Custom AI law"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	var/input = sanitize(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null)
 	if(!input)
@@ -490,10 +457,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	for(var/mob/living/silicon/ai/M in mob_list)
 		if (M.stat == 2)
 			to_chat(usr, "Upload failed. No signal is being detected from the AI.")
-
 		else if (M.see_in_dark == 0)
 			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")
-
 		else
 			M.add_ion_law(input)
 			for(var/mob/living/silicon/ai/O in mob_list)
@@ -513,7 +478,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Rejuvenate"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	if(!mob)
 		return
@@ -533,7 +497,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Create Command Report"
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null, extra = 0)
 	var/customname = sanitizeSafe(input(usr, "Pick a title for the report.", "Title") as text|null)
@@ -563,7 +526,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 
 	if (alert(src, "Are you sure you want to delete:\n[O]\nat ([O.x], [O.y], [O.z])?", "Confirmation", "Yes", "No") == "Yes")
@@ -578,12 +540,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	if(job_master)
 		for(var/datum/job/job in job_master.occupations)
 			to_chat(src, "[job.title]: [job.total_positions]")
-
 	feedback_add_details("admin_verb","LFS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in range(world.view))
@@ -687,7 +647,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/list/L = M.get_contents()
 	for(var/t in L)
 		to_chat(usr, "[t]")
-
 	feedback_add_details("admin_verb","CC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /* This proc is DEFERRED. Does not do anything.
@@ -696,7 +655,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Stabilize Atmos."
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 	feedback_add_details("admin_verb","STATM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 // DEFERRED
@@ -809,14 +767,12 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if (ticker && ticker.mode)
 		to_chat(usr, "Nope you can't do this, the game's already started. This only works before rounds!")
-
 		return
 
 	if(ticker.random_players)
 		ticker.random_players = 0
 		message_admins("Admin [key_name_admin(usr)] has disabled \"Everyone is Special\" mode.", 1)
 		to_chat(usr, "Disabled.")
-
 		return
 
 
@@ -831,7 +787,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		to_world("<span class='notice'><b>Admin [usr.key] has forced the players to have completely random identities!</b></span>")
 
 	to_chat(usr, "<i>Remember: you can always disable the randomness by using the verb again, assuming the round hasn't started yet</i>.")
-
 	ticker.random_players = 1
 	feedback_add_details("admin_verb","MER") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -846,11 +801,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!config.allow_random_events)
 		config.allow_random_events = 1
 		to_chat(usr, "Random events enabled")
-
 		message_admins("Admin [key_name_admin(usr)] has enabled random events.", 1)
 	else
 		config.allow_random_events = 0
 		to_chat(usr, "Random events disabled")
-
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
 	feedback_add_details("admin_verb","TRE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

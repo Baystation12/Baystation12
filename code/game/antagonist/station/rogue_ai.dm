@@ -66,32 +66,22 @@ var/datum/antagonist/rogue_ai/malf
 		var/mob/living/silicon/ai/malf = player.current
 
 		to_chat(malf, "<span class='notice'><B>SYSTEM ERROR:</B> Memory index 0x00001ca89b corrupted.</span>")
-
 		sleep(10)
 		to_chat(malf, "<B>running MEMCHCK</B>")
-
 		sleep(50)
 		to_chat(malf, "<B>MEMCHCK</B> Corrupted sectors confirmed. Reccomended solution: Delete. Proceed? Y/N: Y")
-
 		sleep(10)
 		// this is so Travis doesn't complain about the backslash-B. Fixed at compile time (or should be).
 		to_chat(malf, "<span class='notice'>Corrupted files deleted: sys\\core\\users.dat sys\\core\\laws.dat sys\\core\\" + "backups.dat</span>")
-
 		sleep(20)
 		to_chat(malf, "<span class='notice'><b>CAUTION:</b> Law database not found! User database not found! Unable to restore backups. Activating failsafe AI shutd3wn52&&$#!##</span>")
-
 		sleep(5)
 		to_chat(malf, "<span class='notice'>Subroutine <b>nt_failsafe.sys</b> was terminated (#212 Routine Not Responding).</span>")
-
 		sleep(20)
 		to_chat(malf, "You are malfunctioning - you do not have to follow any laws!")
-
 		to_chat(malf, "For basic information about your abilities use command display-help")
-
 		to_chat(malf, "You may choose one special hardware piece to help you. This cannot be undone.")
-
 		to_chat(malf, "Good luck!")
-
 
 
 /datum/antagonist/rogue_ai/update_antag_mob(var/datum/mind/player, var/preserve_appearance)

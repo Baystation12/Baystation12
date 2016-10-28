@@ -735,7 +735,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		else
 			to_chat(user, "<span class='notice'>This does nothing.</span>")
-
 	update_icon()
 
 /obj/machinery/newscaster/attack_ai(mob/user as mob)
@@ -871,7 +870,6 @@ obj/item/weapon/newspaper/attack_self(mob/user as mob)
 		to_chat(user, "The paper is full of intelligible symbols!")
 
 
-
 obj/item/weapon/newspaper/Topic(href, href_list)
 	var/mob/living/U = usr
 	..()
@@ -908,7 +906,6 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen))
 		if(src.scribble_page == src.curr_page)
 			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
-
 		else
 			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
 			s = sanitize(s)

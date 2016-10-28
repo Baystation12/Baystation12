@@ -31,7 +31,6 @@
 	if(prob(75))
 		src.locked = !src.locked
 		to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
-
 		. = 1
 		updateDialog()
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -45,7 +44,6 @@
 		if(access_captain in C.access || access_security in C.access || access_engine in C.access)
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
-
 			updateDialog()
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
@@ -148,7 +146,6 @@
 
 	if (src.anchored)
 		to_chat(usr, "It is fastened to the floor!")
-
 		return
 	src.set_dir(turn(src.dir, 270))
 	return

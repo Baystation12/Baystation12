@@ -379,13 +379,11 @@
 					lines.Cut(1,2)
 				if(lines.len > 50)
 					to_chat(usr, "Too many lines!")
-
 					lines.Cut(51)
 				var/linenum = 1
 				for(var/l in lines)
 					if(lentext(l) > 50)
 						to_chat(usr, "Line [linenum] too long!")
-
 						lines.Remove(l)
 					else
 						linenum++

@@ -14,7 +14,6 @@
 	imp.loc = get_turf(src)
 	user.put_in_hands(imp)
 	to_chat(user, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
-
 	name = "implanter"
 	imp = null
 	update()
@@ -113,7 +112,6 @@
 	if (!c)	return
 	if (c.scanned == null)
 		to_chat(user, "Please scan an object with the implanter first.")
-
 		return
 	..()
 
@@ -124,7 +122,6 @@
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
 			to_chat(user, "<span class='warning'>Something is already scanned inside the implant!</span>")
-
 			return
 		c.scanned = A
 		if(istype(A.loc,/mob/living/carbon/human))

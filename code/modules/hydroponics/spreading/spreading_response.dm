@@ -97,7 +97,6 @@
 				victim.set_dir(pick(cardinal))
 				to_chat(victim, "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>")
 
-
 /obj/effect/plant/buckle_mob()
 	. = ..()
 	if(.) plant_controller.add_plant(src)

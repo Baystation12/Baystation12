@@ -105,7 +105,6 @@
 		return
 
 	to_chat(user, "You remove \the [initial(name)] from [stuck].")
-
 	user.drop_from_inventory(src)
 	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
@@ -126,7 +125,6 @@
 		dir_offset = get_dir(source_turf, target_turf)
 		if(!(dir_offset in cardinal))
 			to_chat(user, "You cannot reach that from here.")// can only place stuck papers in cardinal directions, to
-
 			return											// reduce papers around corners issue.
 
 	user.drop_from_inventory(src)

@@ -33,7 +33,6 @@
 /obj/item/device/antibody_scanner/proc/report(var/text, mob/user as mob)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] beeps, \"[text]\"</span>")
 
-
 ///////////////VIRUS DISH///////////////
 
 /obj/item/weapon/virusdish
@@ -61,7 +60,6 @@
 	..()
 	if(prob(50))
 		to_chat(user, "<span class='danger'>\The [src] shatters!</span>")
-
 		if(virus2.infectionchance > 0)
 			for(var/mob/living/carbon/target in view(1, get_turf(src)))
 				if(airborne_can_reach(get_turf(src), get_turf(target)))
@@ -72,7 +70,6 @@
 	..()
 	if(basic_info)
 		to_chat(user, "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>")
-
 
 /obj/item/weapon/virusdish/Topic(href, href_list)
 	. = ..()
@@ -94,7 +91,6 @@
 
 	if(prob(50))
 		to_chat(user, "\The [src] shatters!")
-
 		qdel(src)
 
 ///////////////GNA DISK///////////////

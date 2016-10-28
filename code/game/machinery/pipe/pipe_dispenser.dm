@@ -99,7 +99,6 @@
 	src.add_fingerprint(usr)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
 		to_chat(usr, "<span class='notice'>You put \the [W] back into \the [src].</span>")
-
 		user.drop_item()
 		qdel(W)
 		return
@@ -107,7 +106,6 @@
 		if (unwrenched==0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")
-
 			if (do_after(user, 40, src))
 				user.visible_message( \
 					"<span class='notice'>\The [user] unfastens \the [src].</span>", \
@@ -121,7 +119,6 @@
 		else /*if (unwrenched==1)*/
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to fasten \the [src] to the floor...</span>")
-
 			if (do_after(user, 20, src))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fastens \the [src].</span>", \

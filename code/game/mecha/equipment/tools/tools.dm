@@ -852,7 +852,6 @@
 			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<span class='warning'>[fuel] traces minimal. [weapon] cannot be used as fuel.</span>")
 		else if(!result)
 			to_chat(user, "Unit is full.")
-
 		else
 			user.visible_message("[user] loads [src] with [fuel].","[result] unit\s of [fuel] successfully loaded.")
 		return
@@ -1009,7 +1008,6 @@
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
 		to_chat(AM, "<span class='danger'>You tumble out of the destroyed [src.name]!</span>")
-
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)
@@ -1027,10 +1025,8 @@
 			occupant_message("\The [user] boarded.")
 		else if(src.occupant != user)
 			to_chat(user, "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>")
-
 	else
 		to_chat(user, "You stop entering the exosuit.")
-
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/verb/eject()
 	set name = "Eject"
@@ -1041,7 +1037,6 @@
 	if(usr != occupant)
 		return
 	to_chat(occupant, "You climb out from \the [src].")
-
 	go_out()
 	occupant_message("[occupant] disembarked.")
 	log_message("[occupant] disembarked.")
@@ -1104,20 +1099,17 @@
 
 	if (!isturf(usr.loc))
 		to_chat(usr, "<span class='danger'>You can't reach the passenger compartment from here.</span>")
-
 		return
 
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
 			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
-
 			return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
 			to_chat(usr, "<span class='danger'>You're too busy getting your life sucked out of you.</span>")
-
 			return
 
 	//search for a valid passenger compartment
@@ -1138,16 +1130,12 @@
 	switch (feedback)
 		if (OCCUPIED)
 			to_chat(usr, "<span class='danger'>The passenger compartment is already occupied!</span>")
-
 		if (LOCKED)
 			to_chat(usr, "<span class='warning'>The passenger compartment hatch is locked!</span>")
-
 		if (OCCUPIED|LOCKED)
 			to_chat(usr, "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>")
-
 		if (0)
 			to_chat(usr, "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>")
-
 
 #undef LOCKED
 #undef OCCUPIED

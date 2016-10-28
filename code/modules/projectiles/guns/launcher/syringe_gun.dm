@@ -22,7 +22,6 @@
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
 		syringe = I
 		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
-
 		user.remove_from_mob(syringe)
 		syringe.loc = src
 		sharp = 1
@@ -32,7 +31,6 @@
 /obj/item/weapon/syringe_cartridge/attack_self(mob/user)
 	if(syringe)
 		to_chat(user, "<span class='notice'>You remove [syringe] from [src].</span>")
-
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
@@ -108,11 +106,9 @@
 	if(user.get_inactive_hand() == src)
 		if(!darts.len)
 			to_chat(user, "<span class='warning'>[src] is empty.</span>")
-
 			return
 		if(next)
 			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
-
 			return
 		var/obj/item/weapon/syringe_cartridge/C = darts[1]
 		darts -= C
@@ -126,7 +122,6 @@
 		var/obj/item/weapon/syringe_cartridge/C = A
 		if(darts.len >= max_darts)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
-
 			return
 		user.remove_from_mob(C)
 		C.loc = src

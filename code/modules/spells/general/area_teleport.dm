@@ -48,7 +48,6 @@
 
 	if(!L.len)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
-
 		return
 
 	if(user && user.buckled)

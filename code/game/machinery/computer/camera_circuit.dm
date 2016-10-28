@@ -109,9 +109,7 @@
 	if(network)
 		authorised = 1
 		to_chat(user, "<span class='notice'>You authorised the circuit network!</span>")
-
 		updateDialog()
 		return 1
 	else
 		to_chat(user, "<span class='warning'>You must select a camera network circuit!</span>")
-

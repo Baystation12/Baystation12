@@ -33,7 +33,6 @@
 
 /obj/item/weapon/lipstick/attack_self(mob/user as mob)
 	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")
-
 	open = !open
 	if(open)
 		icon_state = "[initial(icon_state)]_[colour]"
@@ -49,7 +48,6 @@
 		var/mob/living/carbon/human/H = M
 		if(H.lip_style)	//if they already have lipstick on
 			to_chat(user, "<span class='notice'>You need to wipe off the old lipstick first!</span>")
-
 			return
 		if(H == user)
 			user.visible_message("<span class='notice'>[user] does their lips with \the [src].</span>", \
@@ -66,7 +64,6 @@
 				H.update_body()
 	else
 		to_chat(user, "<span class='notice'>Where are the lips on that?</span>")
-
 
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 

@@ -38,7 +38,6 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	to_chat(H, "<font color='blue'><b>You are now invisible to normal detection.</b></font>")
-
 	H.cloaked = TRUE
 	H.update_icons()
 
@@ -54,7 +53,6 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	to_chat(H, "<span class='danger'>You are now visible.</span>")
-
 	H.cloaked = FALSE
 	H.update_icons()
 
@@ -98,7 +96,6 @@
 
 	if(!istype(H.loc, /turf))
 		to_chat(H, "<span class='warning'>You cannot teleport out of your current location.</span>")
-
 		return 0
 
 	var/turf/T
@@ -109,27 +106,22 @@
 
 	if(!T)
 		to_chat(H, "<span class='warning'>No valid teleport target found.</span>")
-
 		return 0
 
 	if(T.density)
 		to_chat(H, "<span class='warning'>You cannot teleport into solid walls.</span>")
-
 		return 0
 
 	if(T.z in using_map.admin_levels)
 		to_chat(H, "<span class='warning'>You cannot use your teleporter on this Z-level.</span>")
-
 		return 0
 
 	if(T.contains_dense_objects())
 		to_chat(H, "<span class='warning'>You cannot teleport to a location with solid objects.</span>")
-
 		return 0
 
 	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
 		to_chat(H, "<span class='warning'>You cannot teleport to such a distant object.</span>")
-
 		return 0
 
 	if(!..()) return 0

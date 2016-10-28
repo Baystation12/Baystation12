@@ -14,7 +14,6 @@
 		var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
 		if(!istype(evac_control))
 			to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
-
 			return
 
 		if ((!( istype(W, /obj/item/weapon/card) ) || !( ticker ) || evacuation_controller.has_evacuated() || !( user )))
@@ -26,18 +25,15 @@
 				W = pda.id
 			if (!W:access) //no access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-
 				return
 
 			var/list/cardaccess = W:access
 			if(!istype(cardaccess, /list) || !cardaccess.len) //no access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-
 				return
 
 			if(!(access_heads in W:access)) //doesn't have this access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-
 				return 0
 
 			var/choice = alert(user, text("Would you like to (un)authorize a shortened launch time? [] authorization\s are still needed. Use abort to cancel all authorizations.", src.auth_need - src.authorized.len), "Shuttle Launch", "Authorize", "Repeal", "Abort")

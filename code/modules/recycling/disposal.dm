@@ -58,35 +58,29 @@
 		if(istype(I, /obj/item/weapon/screwdriver))
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
-
 				return
 			if(mode==0) // It's off but still not unscrewed
 				mode=-1 // Set it to doubleoff l0l
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You remove the screws around the power connection.")
-
 				return
 			else if(mode==-1)
 				mode=0
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
-
 				return
 		else if(istype(I,/obj/item/weapon/weldingtool) && mode==-1)
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
-
 				return
 			var/obj/item/weapon/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "You start slicing the floorweld off the disposal unit.")
 
-
 				if(do_after(user,20,src))
 					if(!src || !W.isOn()) return
 					to_chat(user, "You sliced the floorweld off the disposal unit.")
-
 					var/obj/structure/disposalconstruct/C = new (src.loc)
 					src.transfer_fingerprints_to(C)
 					C.ptype = 6 // 6 = disposal unit
@@ -97,12 +91,10 @@
 				return
 			else
 				to_chat(user, "You need more welding fuel to complete this task.")
-
 				return
 
 	if(istype(I, /obj/item/weapon/melee/energy/blade))
 		to_chat(user, "You can't place that item inside the disposal unit.")
-
 		return
 
 	if(istype(I, /obj/item/weapon/storage/bag/trash))
@@ -141,7 +133,6 @@
 		I.forceMove(src)
 
 	to_chat(user, "You place \the [I] into the [src].")
-
 	for(var/mob/M in viewers(src))
 		if(M == user)
 			continue
@@ -178,11 +169,9 @@
 											// must be awake, not stunned or whatever
 		msg = "\The [user] climbs into \the [src]."
 		to_chat(user, "You climb into \the [src].")
-
 	else if(target != user && !user.incapacitated())
 		msg = "\The [user] stuffs \the [target] into \the [src]!"
 		to_chat(user, "You stuff \the [target] into \the [src]!")
-
 		admin_attack_log(user, target, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 	else
 		return
@@ -634,7 +623,6 @@
 			for (var/mob/M in hearers(src.loc.loc))
 				to_chat(M, "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>")
 
-
 		playsound(src.loc, 'sound/effects/clang.ogg', 50, 0, 0)
 
 	// called to vent all gas in holder to a location
@@ -883,17 +871,14 @@
 				var/turf/uloc = user.loc
 				var/atom/wloc = W.loc
 				to_chat(user, "Slicing the disposal pipe.")
-
 				sleep(30)
 				if(!W.isOn()) return
 				if(user.loc == uloc && wloc == W.loc)
 					welded()
 				else
 					to_chat(user, "You must stay still while welding the pipe.")
-
 			else
 				to_chat(user, "You need more welding fuel to cut the pipe.")
-
 				return
 
 	// called when pipe is cut with welder
@@ -1225,7 +1210,6 @@
 /obj/machinery/disposal_switch/attack_hand(mob/user)
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access denied.</span>")
-
 		return
 	on = !on
 	for(var/obj/structure/disposalpipe/diversion_junction/D in junctions)
@@ -1261,7 +1245,6 @@
 			break
 	if(!found)
 		to_chat(user, "\icon[src]<span class=notice>\The [src] is not linked to any junctions!</span>")
-
 		return
 	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch(A, id_tag)
 	transfer_fingerprints_to(NC)
@@ -1529,17 +1512,14 @@
 			var/turf/uloc = user.loc
 			var/atom/wloc = W.loc
 			to_chat(user, "Slicing the disposal pipe.")
-
 			sleep(30)
 			if(!W.isOn()) return
 			if(user.loc == uloc && wloc == W.loc)
 				welded()
 			else
 				to_chat(user, "You must stay still while welding the pipe.")
-
 		else
 			to_chat(user, "You need more welding fuel to cut the pipe.")
-
 			return
 
 	// would transfer to next pipe segment, but we are in a trunk
@@ -1646,24 +1626,20 @@
 				mode=1
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You remove the screws around the power connection.")
-
 				return
 			else if(mode==1)
 				mode=0
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
-
 				return
 		else if(istype(I,/obj/item/weapon/weldingtool) && mode==1)
 			var/obj/item/weapon/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "You start slicing the floorweld off the disposal outlet.")
-
 				if(do_after(user,20, src))
 					if(!src || !W.isOn()) return
 					to_chat(user, "You sliced the floorweld off the disposal outlet.")
-
 					var/obj/structure/disposalconstruct/C = new (src.loc)
 					src.transfer_fingerprints_to(C)
 					C.ptype = 7 // 7 =  outlet
@@ -1674,7 +1650,6 @@
 				return
 			else
 				to_chat(user, "You need more welding fuel to complete this task.")
-
 				return
 
 // called when movable is expelled from a disposal pipe or outlet

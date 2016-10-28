@@ -52,7 +52,6 @@
 		to_chat(usr, "<span class='notice'>The generator is on.</span>")
 	else
 		to_chat(usr, "<span class='notice'>The generator is off.</span>")
-
 /obj/machinery/power/port_gen/emp_act(severity)
 	var/duration = 6000 //ten minutes
 	switch(severity)
@@ -142,7 +141,6 @@
 	to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
 	if(IsBroken()) to_chat(user, "<span class='warning'>\The [src] seems to have broken down.</span>")
 	if(overheating) to_chat(user, "<span class='danger'>\The [src] is overheating!</span>")
-
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
 	if(sheets >= needed_sheets - sheet_left)
@@ -250,7 +248,6 @@
 			to_chat(user, "<span class='notice'>The [src.name] is full!</span>")
 			return
 		to_chat(user, "<span class='notice'>You add [amount] sheet\s to the [src.name].</span>")
-
 		sheets += amount
 		addstack.use(amount)
 		updateUsrDialog()
@@ -261,11 +258,9 @@
 			if(!anchored)
 				connect_to_network()
 				to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
-
 			else
 				disconnect_from_network()
 				to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
-
 
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			anchored = !anchored
@@ -277,7 +272,6 @@
 				to_chat(user, "<span class='notice'>You open the access panel.</span>")
 			else
 				to_chat(user, "<span class='notice'>You close the access panel.</span>")
-
 		else if(istype(O, /obj/item/weapon/crowbar) && open)
 			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 			for(var/obj/item/I in component_parts)

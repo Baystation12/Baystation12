@@ -14,10 +14,8 @@
 	if(feedback)
 		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			to_chat(src, "Where do you intend to put \the [food]? You don't have a mouth!")
-
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
 			to_chat(src, "<span class='warning'>\The [status[2]] is in the way!</span>")
-
 	return 0
 
 /mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
@@ -27,10 +25,8 @@
 	if(feedback)
 		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			to_chat(feeder, "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!")
-
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
 			to_chat(feeder, "<span class='warning'>\The [status[2]] is in the way!</span>")
-
 	return 0
 
 /mob/living/carbon/human/proc/can_eat_status()
@@ -145,20 +141,16 @@
 
 	if(incapacitated())
 		to_chat(src, "<span class='warning'>You need to recover before you can use this ability.</span>")
-
 		return
 	if(world.time < next_sonar_ping)
 		to_chat(src, "<span class='warning'>You need another moment to focus.</span>")
-
 		return
 	if(is_deaf() || is_below_sound_pressure(get_turf(src)))
 		to_chat(src, "<span class='warning'>You are for all intents and purposes currently deaf!</span>")
-
 		return
 	next_sonar_ping += 10 SECONDS
 	var/heard_something = FALSE
 	to_chat(src, "<span class='notice'>You take a moment to listen in to your environment...</span>")
-
 	for(var/mob/living/L in range(client.view, src))
 		var/turf/T = get_turf(L)
 		if(!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
@@ -184,10 +176,8 @@
 			feedback += "right on top of you."
 		feedback += "</span>"
 		to_chat(src, jointext(feedback,null))
-
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
-
 
 /mob/living/carbon/human/reset_layer()
 	if(hiding)

@@ -43,7 +43,6 @@
 	var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
 	if(!istype(evac_control))
 		to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
-
 		return
 
 	var/list/data = host.initial_data()
@@ -130,7 +129,6 @@
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
 					to_chat(usr, "Please allow at least one minute to pass between announcements")
-
 					return TRUE
 				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
@@ -146,7 +144,6 @@
 					if(is_autenthicated(user) && program.computer_emagged && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
 							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
-
 							nanomanager.update_uis(src)
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
@@ -154,7 +151,6 @@
 							return 1
 						Syndicate_announce(input, usr)
 						to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-
 						log_say("[key_name(usr)] has made an illegal announcement: [input]")
 						centcomm_message_cooldown = 1
 						spawn(300)//30 second cooldown
@@ -163,19 +159,16 @@
 				if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 					if(centcomm_message_cooldown)
 						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
-
 						nanomanager.update_uis(src)
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
 						to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
-
 						return 1
 					var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
 						return 1
 					Centcomm_announce(input, usr)
 					to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-
 					log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
@@ -232,7 +225,6 @@
 			else
 				to_chat(usr, "You press button, but red light flashes and nothing happens.")//This should never happen
 
-
 			current_status = STATE_DEFAULT
 		if("viewmessage")
 			. = 1
@@ -253,7 +245,6 @@
 				if(program && program.computer && program.computer.nano_printer)
 					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
 						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
-
 					else
 						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out paper.</span>")
 
@@ -355,31 +346,25 @@ var/last_message_id = 0
 
 	if(!universe.OnShuttleCall(usr))
 		to_chat(user, "<span class='notice'>Cannot establish a bluespace connection.</span>")
-
 		return
 
 	if(deathsquad.deployed)
 		to_chat(user, "[boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
-
 		return
 
 	if(evacuation_controller.deny)
 		to_chat(user, "An evacuation cannot be called at this time. Please try again later.")
-
 		return
 
 	if(evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
 		to_chat(user, evacuation_controller.get_cooldown_message())
 
-
 	if(evacuation_controller.is_evacuating())
 		to_chat(user, "An evacuation is already underway.")
-
 		return
 
 	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
 		to_chat(user, "Under directive 7-10, [station_name()] is quarantined until further notice.")
-
 		return
 
 	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
@@ -394,12 +379,10 @@ var/last_message_id = 0
 
 		if(evacuation_controller.deny)
 			to_chat(user, "[boss_short] does not currently have a shuttle available in your sector. Please try again later.")
-
 			return
 
 		if(world.time < 54000) // 30 minute grace period to let the game get going
 			to_chat(user, "The shuttle is refueling. Please wait another [round((54000-world.time)/60)] minutes before trying again.")
-
 			return
 
 		if(ticker.mode.auto_recall_shuttle)

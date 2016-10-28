@@ -9,7 +9,6 @@
 				to_chat(src, "<span class='notice'>You feel weak.</span>")
 			else//Fluff-wise, since the brain can't detect anything itself, the MMI handles thing like that
 				to_chat(src, "<span class='warning'>STATUS: CRITICAL AMOUNTS OF RADIATION DETECTED.</span>")
-
 		switch(radiation)
 			if(1 to 49)
 				radiation--
@@ -117,7 +116,6 @@
 					if(!alert)//Sounds an alarm, but only once per 'level'
 						emote("alarm")
 						to_chat(src, "<span class='warning'>Major electrical distruption detected: System rebooting.</span>")
-
 						alert = 1
 					if(prob(75))
 						emp_damage -= 1
@@ -134,7 +132,6 @@
 					if(!alert)
 						emote("alert")
 						to_chat(src, "<span class='warning'>Primary systems are now online.</span>")
-
 						alert = 1
 					if(prob(50))
 						emp_damage -= 1
@@ -147,7 +144,6 @@
 					if(!alert)
 						emote("notice")
 						to_chat(src, "<span class='warning'>System reboot nearly complete.</span>")
-
 						alert = 1
 					if(prob(25))
 						emp_damage -= 1

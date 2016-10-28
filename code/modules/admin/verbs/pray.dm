@@ -19,7 +19,6 @@
 				to_chat(C, msg)
 				C << 'sound/effects/ding.ogg'
 	to_chat(usr, "Your prayers have been received by the gods.")
-
 	feedback_add_details("admin_verb","PR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	//log_admin("HELP: [key_name(src)]: [msg]")
 

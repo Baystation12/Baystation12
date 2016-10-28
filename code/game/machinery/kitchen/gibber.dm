@@ -76,7 +76,6 @@
 		return
 	if(operating)
 		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
-
 		return
 	else
 		src.startgibbing(user)
@@ -85,11 +84,9 @@
 	..()
 	to_chat(usr, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
 
-
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
 	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>")
-
 	return 1
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
@@ -100,7 +97,6 @@
 
 	if(G.state < 2)
 		to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-
 		return
 
 	move_into_gibber(user,G.affecting)
@@ -115,28 +111,23 @@
 
 	if(src.occupant)
 		to_chat(user, "<span class='danger'>The gibber is full, empty it first!</span>")
-
 		return
 
 	if(operating)
 		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
-
 		return
 
 	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_animal)) )
 		to_chat(user, "<span class='danger'>This is not suitable for the gibber!</span>")
-
 		return
 
 	if(istype(victim,/mob/living/carbon/human) && !emagged)
 		to_chat(user, "<span class='danger'>The gibber safety guard is engaged!</span>")
-
 		return
 
 
 	if(victim.abiotic(1))
 		to_chat(user, "<span class='danger'>Subject may not have abiotic items on.</span>")
-
 		return
 
 	user.visible_message("<span class='danger'>[user] starts to put [victim] into the gibber!</span>")

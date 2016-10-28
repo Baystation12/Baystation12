@@ -19,7 +19,6 @@
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
-
 			return
 		user.unEquip(W)
 		wear_hat(W)

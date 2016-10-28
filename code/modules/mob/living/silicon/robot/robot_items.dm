@@ -26,13 +26,11 @@
 			var/confirm = alert(user, "This will destroy the item inside forever.  Are you sure?","Confirm Analyze","Yes","No")
 			if(confirm == "Yes") //This is pretty copypasta-y
 				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
-
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 				for(var/T in loaded_item.origin_tech)
 					files.UpdateTech(T, loaded_item.origin_tech[T])
 					to_chat(user, "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)].")
-
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
@@ -54,7 +52,6 @@
 				return
 		else
 			to_chat(user, "The [src] is empty.  Put something inside it first.")
-
 	if(response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in machines)
@@ -66,11 +63,9 @@
 			files.RefreshResearch()
 		if(success)
 			to_chat(user, "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch.")
-
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		else
 			to_chat(user, "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator.")
-
 			playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 1)
 	if(response == "Eject")
 		if(loaded_item)
@@ -80,7 +75,6 @@
 			loaded_item = null
 		else
 			to_chat(user, "The [src] is already empty.")
-
 
 
 /obj/item/weapon/portable_destructive_analyzer/afterattack(var/atom/target, var/mob/living/user, proximity)
@@ -93,7 +87,6 @@
 	if(istype(target,/obj/item))
 		if(loaded_item)
 			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
-
 			return
 		var/obj/item/I = target
 		I.loc = src
@@ -131,7 +124,6 @@
 			T.remove_dead(user)
 	else
 		to_chat(user, "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown.")
-
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
@@ -245,7 +237,6 @@
 				mode = 1
 			to_chat(user, "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'")
 
-
 	return
 
 // Copied over from paper's rename verb
@@ -338,14 +329,11 @@
 	if(!..(user))
 		return
 	to_chat(user, "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
-
 	to_chat(user, "It is set to deploy [mode ? "doors" : "walls"]")
-
 
 /obj/item/weapon/inflatable_dispenser/attack_self()
 	mode = !mode
 	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
-
 
 /obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
 	..(A, user)
@@ -353,7 +341,6 @@
 		return
 	if(!user.Adjacent(A))
 		to_chat(user, "You can't reach!")
-
 		return
 	if(istype(A, /turf))
 		try_deploy_inflatable(A, user)
@@ -364,7 +351,6 @@
 	if(mode) // Door deployment
 		if(!stored_doors)
 			to_chat(user, "\The [src] is out of doors!")
-
 			return
 
 		if(T && istype(T))
@@ -374,7 +360,6 @@
 	else // Wall deployment
 		if(!stored_walls)
 			to_chat(user, "\The [src] is out of walls!")
-
 			return
 
 		if(T && istype(T))
@@ -384,20 +369,17 @@
 	playsound(T, 'sound/items/zip.ogg', 75, 1)
 	to_chat(user, "You deploy the inflatable [mode ? "door" : "wall"]!")
 
-
 /obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
 	if(istype(A, /obj/structure/inflatable))
 		if(istype(A, /obj/structure/inflatable/wall))
 			if(stored_walls >= max_walls)
 				to_chat(user, "\The [src] is full.")
-
 				return
 			stored_walls++
 			qdel(A)
 		else
 			if(stored_doors >= max_doors)
 				to_chat(user, "\The [src] is full.")
-
 				return
 			stored_doors++
 			qdel(A)
@@ -408,14 +390,12 @@
 		if(istype(A, /obj/item/inflatable/wall))
 			if(stored_walls >= max_walls)
 				to_chat(user, "\The [src] is full.")
-
 				return
 			stored_walls++
 			qdel(A)
 		else
 			if(stored_doors >= max_doors)
 				to_chat(usr, "\The [src] is full!")
-
 				return
 			stored_doors++
 			qdel(A)
@@ -423,5 +403,4 @@
 		return
 
 	to_chat(user, "You fail to pick up \the [A] with \the [src]")
-
 	return

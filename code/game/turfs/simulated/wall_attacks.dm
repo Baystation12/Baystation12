@@ -26,12 +26,10 @@
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash against the wall!</span>")
-
 	take_damage(rand(25,75))
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash through the wall!</span>")
-
 	user.do_attack_animation(src)
 	spawn(1)
 		dismantle_wall(1)
@@ -41,10 +39,8 @@
 	if(rotting)
 		if(reinf_material)
 			to_chat(user, "<span class='danger'>\The [reinf_material.display_name] feels porous and crumbly.</span>")
-
 		else
 			to_chat(user, "<span class='danger'>\The [material.display_name] crumbles under your touch!</span>")
-
 			dismantle_wall()
 			return 1
 
@@ -52,7 +48,6 @@
 
 	if(!can_open)
 		to_chat(user, "<span class='notice'>You push the wall, but nothing happens.</span>")
-
 		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
@@ -101,7 +96,6 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (!user.)
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
-
 		return
 
 	//get the user's location
@@ -117,14 +111,12 @@
 			var/obj/item/weapon/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
-
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
 			to_chat(user, "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>")
-
 			src.dismantle_wall(1)
 			return
 
@@ -145,7 +137,6 @@
 
 			EB.spark_system.start()
 			to_chat(user, "<span class='notice'>You slash \the [src] with \the [EB]; the thermite ignites!</span>")
-
 			playsound(src, "sparks", 50, 1)
 			playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 
@@ -163,15 +154,12 @@
 
 		if(WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
-
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
-
 				take_damage(-damage)
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 			return
 		return
 
@@ -188,7 +176,6 @@
 				return
 			if(!WT.remove_fuel(0,user))
 				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = 'sound/items/Welder.ogg'
@@ -206,7 +193,6 @@
 		if(dismantle_verb)
 
 			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
-
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
@@ -217,7 +203,6 @@
 				return
 
 			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
-
 			dismantle_wall()
 			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
 			return
@@ -231,20 +216,17 @@
 					construction_stage = 5
 					new /obj/item/stack/rods( src )
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
-
 					update_icon()
 					return
 			if(5)
 				if (istype(W, /obj/item/weapon/screwdriver))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
-
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
 						return
 					construction_stage = 4
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
-
 					return
 				else if( istype(W, /obj/item/stack/rods) )
 					var/obj/item/stack/O = W
@@ -253,7 +235,6 @@
 						construction_stage = 6
 						update_icon()
 						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")
-
 						return
 			if(4)
 				var/cut_cover
@@ -265,44 +246,37 @@
 						cut_cover=1
 					else
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 						return
 				else if (istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
-
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					if(!do_after(user, 60, src) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
 						return
 					construction_stage = 3
 					update_icon()
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
-
 					return
 			if(3)
 				if (istype(W, /obj/item/weapon/crowbar))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
-
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
 						return
 					construction_stage = 2
 					update_icon()
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
-
 					return
 			if(2)
 				if (istype(W, /obj/item/weapon/wrench))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
-
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
 						return
 					construction_stage = 1
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the bolts anchoring the support rods.</span>")
-
 					return
 			if(1)
 				var/cut_cover
@@ -312,13 +286,11 @@
 						cut_cover=1
 					else
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 						return
 				else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
-
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					if(!do_after(user,70,src) || !istype(src, /turf/simulated/wall) || construction_stage != 1)
 						return
@@ -326,17 +298,14 @@
 					update_icon()
 					new /obj/item/stack/rods(src)
 					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
-
 					return
 			if(0)
 				if(istype(W, /obj/item/weapon/crowbar))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
-
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
 					if(user.loc == T && user.get_active_hand() == W )
 						to_chat(user, "<span class='notice'>You pry off the outer sheath.</span>")
-
 						dismantle_wall()
 					return
 

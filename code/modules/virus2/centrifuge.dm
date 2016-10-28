@@ -16,7 +16,6 @@
 	if(istype(O,/obj/item/weapon/reagent_containers/glass/beaker/vial))
 		if(sample)
 			to_chat(user, "\The [src] is already loaded.")
-
 			return
 
 		sample = O

@@ -4,7 +4,6 @@
 	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
 	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>")
 
-
 /obj/item/organ/internal/stack
 	name = "neural lace"
 	parent_organ = BP_HEAD
@@ -73,7 +72,6 @@
 		owner.visible_message("<span class='danger'>\The [owner] spasms violently!</span>")
 		if(prob(66))
 			to_chat(owner, "<span class='danger'>You fight off the invading tendrils of another mind, holding onto your own body!</span>")
-
 			return
 		owner.ghostize() // Remove the previous owner to avoid their client getting reset.
 	//owner.dna.real_name = backup.name
@@ -85,4 +83,3 @@
 	if(default_language) owner.default_language = default_language
 	owner.languages = languages.Copy()
 	to_chat(owner, "<span class='notice'>Consciousness slowly creeps over you as your new body awakens.</span>")
-

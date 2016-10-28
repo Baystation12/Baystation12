@@ -41,7 +41,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
-
 		user.drop_from_inventory(src)
 		qdel(src)
 		return 0
@@ -55,30 +54,23 @@
 				var/mob/living/carbon/human/H = M
 				if(!H.check_has_mouth())
 					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-
 					return
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-
 					return
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
 			if (fullness <= 50)
 				to_chat(C, "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>")
-
 			if (fullness > 50 && fullness <= 150)
 				to_chat(C, "<span class='notice'>You hungrily begin to eat [src].</span>")
-
 			if (fullness > 150 && fullness <= 350)
 				to_chat(C, "<span class='notice'>You take a bite of [src].</span>")
-
 			if (fullness > 350 && fullness <= 550)
 				to_chat(C, "<span class='notice'>You unwillingly chew a bit of [src].</span>")
-
 			if (fullness > 550)
 				to_chat(C, "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>")
-
 				return 0
 		else
 			if(!M.can_force_feed(user, src))
@@ -117,13 +109,10 @@
 		return
 	else if (bitecount==1)
 		to_chat(user, "<span class='notice'>\The [src] was bitten by someone!</span>")
-
 	else if (bitecount<=3)
 		to_chat(user, "<span class='notice'>\The [src] was bitten [bitecount] time\s!</span>")
-
 	else
 		to_chat(user, "<span class='notice'>\The [src] was bitten multiple times!</span>")
-
 
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/storage))
@@ -139,7 +128,6 @@
 
 			if (U.reagents.total_volume > 0)
 				to_chat(user, "<span class='warning'>You already have something on your [U].</span>")
-
 				return
 
 			user.visible_message( \
@@ -170,7 +158,6 @@
 				return
 
 			to_chat(user, "<span class='warning'>You slip \the [W] inside \the [src].</span>")
-
 			user.drop_from_inventory(W, src)
 			add_fingerprint(user)
 			contents += W
@@ -179,7 +166,6 @@
 		if (has_edge(W))
 			if (!can_slice_here)
 				to_chat(user, "<span class='warning'>You cannot slice \the [src] here! You need a table or at least a tray to do it.</span>")
-
 				return
 
 			var/slices_lost = 0
@@ -509,7 +495,6 @@
 	if(!(proximity && O.is_open_container()))
 		return
 	to_chat(user, "You crack \the [src] into \the [O].")
-
 	reagents.trans_to(O, reagents.total_volume)
 	user.drop_from_inventory(src)
 	qdel(src)
@@ -528,11 +513,9 @@
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
 			to_chat(usr, "<span class='notice'>The egg refuses to take on this color!</span>")
-
 			return
 
 		to_chat(usr, "<span class='notice'>You color \the [src] [clr]</span>")
-
 		icon_state = "egg-[clr]"
 	else
 		..()
@@ -746,13 +729,11 @@
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
 	if(has_been_heated)
 		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
-
 		return
 	has_been_heated = 1
 	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
 	spawn(200)
 		to_chat(user, "You think \the [src] is ready to eat about now.")
-
 		heat()
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket
@@ -1206,7 +1187,6 @@
 	On_Consume()
 		if(prob(unpopped))	//lol ...what's the point?
 			to_chat(usr, "<span class='warning'>You bite down on an un-popped kernel!</span>")
-
 			unpopped = max(0, unpopped-1)
 		..()
 
@@ -1635,7 +1615,6 @@
 		icon_state = "monkeycube"
 		desc = "Just add water!"
 		to_chat(user, "You unwrap the cube.")
-
 		wrapped = 0
 		flags |= OPENCONTAINER
 		return
@@ -2931,7 +2910,6 @@
 		user.put_in_hands( pizza )
 
 		to_chat(user, "<span class='warning'>You take \the [src.pizza] out of \the [src].</span>")
-
 		src.pizza = null
 		update_icon()
 		return
@@ -2946,7 +2924,6 @@
 
 		user.put_in_hands( box )
 		to_chat(user, "<span class='warning'>You remove the topmost [src] from your hand.</span>")
-
 		box.update_icon()
 		update_icon()
 		return
@@ -2986,13 +2963,10 @@
 				update_icon()
 
 				to_chat(user, "<span class='warning'>You put \the [box] ontop of \the [src]!</span>")
-
 			else
 				to_chat(user, "<span class='warning'>The stack is too high!</span>")
-
 		else
 			to_chat(user, "<span class='warning'>Close \the [box] first!</span>")
-
 
 		return
 
@@ -3006,10 +2980,8 @@
 			update_icon()
 
 			to_chat(user, "<span class='warning'>You put \the [I] in \the [src]!</span>")
-
 		else
 			to_chat(user, "<span class='warning'>You try to push \the [I] through the lid but it doesn't work!</span>")
-
 		return
 
 	if( istype(I, /obj/item/weapon/pen/) )
@@ -3083,7 +3055,6 @@
 	if(istype(W,/obj/item/weapon/material/kitchen/rollingpin))
 		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(src)
 		to_chat(user, "You flatten the dough.")
-
 		qdel(src)
 
 // slicable into 3xdoughslices
@@ -3130,7 +3101,6 @@
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/meatball))
 		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
 		to_chat(user, "You make a burger.")
-
 		qdel(W)
 		qdel(src)
 
@@ -3138,7 +3108,6 @@
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/cutlet))
 		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
 		to_chat(user, "You make a burger.")
-
 		qdel(W)
 		qdel(src)
 
@@ -3146,7 +3115,6 @@
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/sausage))
 		new /obj/item/weapon/reagent_containers/food/snacks/hotdog(src)
 		to_chat(user, "You make a hotdog.")
-
 		qdel(W)
 		qdel(src)
 
@@ -3155,7 +3123,6 @@
 	if(istype(W))// && !istype(src,/obj/item/weapon/reagent_containers/food/snacks/cheesewedge))
 		new /obj/item/weapon/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
-
 		qdel(W)
 		qdel(src)
 		return
@@ -3167,7 +3134,6 @@
 	if(istype(W))
 		new /obj/item/weapon/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
-
 		qdel(W)
 		qdel(src)
 		return
@@ -3257,7 +3223,6 @@
 	if(istype(W,/obj/item/weapon/material/kitchen/utensil/knife))
 		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(src)
 		to_chat(user, "You cut the potato.")
-
 		qdel(src)
 	else
 		..()

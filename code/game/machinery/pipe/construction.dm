@@ -444,7 +444,6 @@ Buildable meters
 	for(var/obj/machinery/atmospherics/M in src.loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
 			to_chat(user, "<span class='warning'>There is already a pipe of the same type at this location.</span>")
-
 			return 1
 	// no conflicts found
 
@@ -462,7 +461,6 @@ Buildable meters
 			P.initialize()
 			if (deleted(P))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -482,7 +480,6 @@ Buildable meters
 			P.initialize()
 			if (deleted(P))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -502,7 +499,6 @@ Buildable meters
 			P.initialize()
 			if (deleted(P))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -522,7 +518,6 @@ Buildable meters
 			P.initialize()
 			if (deleted(P))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -540,7 +535,6 @@ Buildable meters
 			P.initialize()
 			if (deleted(P))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -576,7 +570,6 @@ Buildable meters
 			M.initialize()
 			if (deleted(M))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -600,7 +593,6 @@ Buildable meters
 			M.initialize()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
-
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -624,7 +616,6 @@ Buildable meters
 			M.initialize()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
-
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -648,7 +639,6 @@ Buildable meters
 			M.initialize()
 			if (deleted(M))
 				to_chat(usr, pipefailtext)
-
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -676,7 +666,6 @@ Buildable meters
 			M.initialize()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
-
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -704,7 +693,6 @@ Buildable meters
 			M.initialize()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
-
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -728,7 +716,6 @@ Buildable meters
 			P.initialize()
 			if (deleted(P))
 				to_chat(usr, pipefailtext)//"There's nothing to connect this pipe to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
-
 
 				return 1
 			P.build_network()
@@ -1161,12 +1148,10 @@ Buildable meters
 		return ..()
 	if(!locate(/obj/machinery/atmospherics/pipe, src.loc))
 		to_chat(user, "<span class='warning'>You need to fasten it to a pipe</span>")
-
 		return 1
 	new/obj/machinery/meter( src.loc )
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You have fastened the meter to the pipe</span>")
-
 	qdel(src)
 //not sure why these are necessary
 #undef PIPE_SIMPLE_STRAIGHT

@@ -24,7 +24,6 @@
 			silence_time = null
 			to_chat(src, "<font color=green>Communication circuit reinitialized. Speech and messaging functionality restored.</font>")
 
-
 	handle_statuses()
 
 	if(health <= 0)

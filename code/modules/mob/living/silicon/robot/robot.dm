@@ -398,7 +398,6 @@
 	else
 		C.toggled = 1
 		to_chat(src, "<span class='warning'>You enable [C.name].</span>")
-
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
@@ -473,7 +472,6 @@
 					C.electronics_damage = WC.burn
 
 				to_chat(usr, "\blue You install the [W.name].")
-
 				return
 
 	if (istype(W, /obj/item/weapon/weldingtool))
@@ -588,7 +586,6 @@
 			W.loc = src
 			cell = W
 			to_chat(user, "You insert the power cell.")
-
 			C.installed = 1
 			C.wrapped = W
 			C.install()
@@ -601,7 +598,6 @@
 			wires.Interact(user)
 		else
 			to_chat(user, "You can't reach the wiring.")
-
 	else if(istype(W, /obj/item/weapon/screwdriver) && opened && !cell)	// haxing
 		wiresexposed = !wiresexposed
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
@@ -619,7 +615,6 @@
 			radio.attackby(W,user)//GTFO, you have your own procs
 		else
 			to_chat(user, "Unable to locate a radio.")
-
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/card/robot))			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
 			to_chat(user, "The interface seems slightly damaged")
@@ -632,7 +627,6 @@
 				updateicon()
 			else
 				to_chat(user, "<span class='warning'>Access denied.</span>")
-
 	else if(istype(W, /obj/item/borg/upgrade/))
 		var/obj/item/borg/upgrade/U = W
 		if(!opened)
@@ -648,7 +642,6 @@
 				U.loc = src
 			else
 				to_chat(usr, "Upgrade error!")
-
 
 	else
 		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
@@ -977,7 +970,6 @@
 	icon_selected = 1
 	icon_selection_tries = 0
 	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
-
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"
 	set category = "Silicon Commands"
@@ -1016,7 +1008,6 @@
 	switch(notifytype)
 		if(ROBOT_NOTIFICATION_NEW_UNIT) //New Robot
 			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>")
-
 		if(ROBOT_NOTIFICATION_NEW_MODULE) //New Module
 			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].</span><br>")
 		if(ROBOT_NOTIFICATION_MODULE_RESET)
@@ -1024,7 +1015,6 @@
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
 				to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].</span><br>")
-
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
 		sync() // One last sync attempt

@@ -42,11 +42,9 @@ Note: Must be placed within 3 tiles of the R&D Console
 /obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy right now.</span>")
-
 		return
 	if(loaded_item)
 		to_chat(user, "<span class='notice'>There is something already loaded into \the [src].</span>")
-
 		return 1
 	if(default_deconstruction_screwdriver(user, O))
 		if(linked_console)
@@ -59,29 +57,24 @@ Note: Must be placed within 3 tiles of the R&D Console
 		return
 	if(panel_open)
 		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
-
 		return 1
 	if(!linked_console)
 		to_chat(user, "<span class='notice'>\The [src] must be linked to an R&D console first.</span>")
-
 		return
 	if(!loaded_item)
 		if(isrobot(user)) //Don't put your module items in there!
 			return
 		if(!O.origin_tech)
 			to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
-
 			return
 		if(O.origin_tech.len == 0)
 			to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
-
 			return
 		busy = 1
 		loaded_item = O
 		user.drop_item()
 		O.loc = src
 		to_chat(user, "<span class='notice'>You add \the [O] to \the [src].</span>")
-
 		flick("d_analyzer_la", src)
 		spawn(10)
 			update_icon()

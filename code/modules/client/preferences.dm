@@ -185,7 +185,6 @@ datum/preferences
 
 	if(!get_mob_by_key(client_ckey))
 		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
-
 		close_load_dialog(user)
 		return
 
@@ -219,10 +218,8 @@ datum/preferences
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
 			to_chat(user, link(config.forumurl))
-
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
-
 			return
 	ShowChoices(usr)
 	return 1

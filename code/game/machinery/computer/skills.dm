@@ -29,7 +29,6 @@
 		O.loc = src
 		scan = O
 		to_chat(user, "You insert [O].")
-
 	else
 		..()
 
@@ -45,7 +44,6 @@
 /obj/machinery/computer/skills/ui_interact(mob/user as mob)
 	if (src.z > 6)
 		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!")
-
 		return
 	var/dat
 

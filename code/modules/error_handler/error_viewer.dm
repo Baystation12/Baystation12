@@ -53,7 +53,6 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 
 	if(istype(back_to))
 		to_chat(html += "[back_to.makeLink(", <", null, linear)] ")
-
 	if(refreshable)
 		html += "[makeLink("Refresh", null, linear)]"
 	if(html)

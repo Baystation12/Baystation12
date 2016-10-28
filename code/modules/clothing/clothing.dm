@@ -70,7 +70,6 @@
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
-
 				return 0
 	return 1
 
@@ -149,13 +148,11 @@
 		item_state = "headphones_off"
 		headphones_on = 0
 		to_chat(usr, "<span class='notice'>You turn the music off.</span>")
-
 	else
 		icon_state = "headphones_on"
 		item_state = "headphones_on"
 		headphones_on = 1
 		to_chat(usr, "<span class='notice'>You turn the music on.</span>")
-
 
 	update_clothing_icon()
 
@@ -239,7 +236,6 @@ BLIND     // can't see anything
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if (clipped)
 			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
-
 			update_icon()
 			return
 
@@ -293,11 +289,9 @@ BLIND     // can't see anything
 	if(brightness_on)
 		if(!isturf(user.loc))
 			to_chat(user, "You cannot turn the light on while in this [user.loc]")
-
 			return
 		on = !on
 		to_chat(user, "You [on ? "enable" : "disable"] the helmet light.")
-
 		update_flashlight(user)
 	else
 		return ..(user)
@@ -343,10 +337,8 @@ BLIND     // can't see anything
 		return 0
 	else if(success == 2)
 		to_chat(user, "<span class='warning'>You are already wearing a hat.</span>")
-
 	else if(success == 1)
 		to_chat(user, "<span class='notice'>You crawl under \the [src].</span>")
-
 	return 1
 
 /obj/item/clothing/head/update_icon(var/mob/user)
@@ -457,7 +449,6 @@ BLIND     // can't see anything
 		holding = null
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
-
 		holding.forceMove(src)
 
 	if(!holding)
@@ -471,7 +462,6 @@ BLIND     // can't see anything
 	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
 		if(holding)
 			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
-
 			return
 		user.unEquip(I)
 		I.forceMove(src)
@@ -656,16 +646,12 @@ BLIND     // can't see anything
 	switch(src.sensor_mode)
 		if(0)
 			to_chat(user, "Its sensors appear to be disabled.")
-
 		if(1)
 			to_chat(user, "Its binary life sensors appear to be enabled.")
-
 		if(2)
 			to_chat(user, "Its vital tracker appears to be enabled.")
-
 		if(3)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
-
 
 /obj/item/clothing/under/proc/set_sensors(mob/user as mob)
 	var/mob/M = user
@@ -673,18 +659,15 @@ BLIND     // can't see anything
 	if (user.incapacitated()) return
 	if(has_sensor >= SUIT_LOCKED_SENSORS)
 		to_chat(user, "The controls are locked.")
-
 		return 0
 	if(has_sensor <= SUIT_NO_SENSORS)
 		to_chat(user, "This suit does not have any sensors.")
-
 		return 0
 
 	var/list/modes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 	var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
 	if(get_dist(user, src) > 1)
 		to_chat(user, "You have moved too far away.")
-
 		return
 	sensor_mode = modes.Find(switchMode) - 1
 
@@ -737,7 +720,6 @@ BLIND     // can't see anything
 	update_rolldown_status()
 	if(rolled_down == -1)
 		to_chat(usr, "<span class='notice'>You cannot roll down [src]!</span>")
-
 	if((rolled_sleeves == 1) && !(rolled_down))
 		rolled_sleeves = 0
 		return
@@ -761,11 +743,9 @@ BLIND     // can't see anything
 	update_rollsleeves_status()
 	if(rolled_sleeves == -1)
 		to_chat(usr, "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>")
-
 		return
 	if(rolled_down == 1)
 		to_chat(usr, "<span class='notice'>You must roll up your [src] first!</span>")
-
 		return
 
 	rolled_sleeves = !rolled_sleeves
@@ -773,12 +753,10 @@ BLIND     // can't see anything
 		body_parts_covered &= ~(ARMS|HANDS)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
 		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
-
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
-
 	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()

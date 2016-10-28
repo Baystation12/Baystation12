@@ -29,7 +29,6 @@
 			else if(prob(10))
 				to_chat(C, "<span class='warning'>You feel numb.</span>")
 
-
 /datum/artifact_effect/stun/DoEffectPulse()
 	if(holder)
 		var/turf/T = get_turf(holder)

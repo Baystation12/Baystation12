@@ -14,7 +14,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	for (var/word in engwords)
 		to_chat(usr, "[cultwords[word]] is [word]")
 
-
 /proc/runerandom() //randomizes word meaning
 	var/list/runewords=rnwords
 	for (var/word in engwords)
@@ -90,16 +89,13 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			to_chat(user, "This spell circle reads: <i>[word1] [word2] [word3]</i>.")
 
 
-
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
 			to_chat(user, "You retrace your steps, carefully undoing the lines of the rune.")
-
 			qdel(src)
 			return
 		else if(istype(I, /obj/item/weapon/nullrod))
 			to_chat(user, "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>")
-
 			qdel(src)
 			return
 		return
@@ -108,11 +104,9 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	attack_hand(mob/living/user as mob)
 		if(!iscultist(user))
 			to_chat(user, "You can't mouth the arcane scratchings without fumbling over them.")
-
 			return
 		if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
 			to_chat(user, "You are unable to speak the words of the rune.")
-
 			return
 		if(!word1 || !word2 || !word3 || prob(user.getBrainLoss()))
 			return fizzle()
@@ -324,7 +318,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
 
 
-
 	attack_self(mob/living/user as mob)
 		usr = user
 		if(!usr.canmove || usr.stat || usr.restrained())
@@ -338,7 +331,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				C++
 			if (!istype(user.loc,/turf))
 				to_chat(user, "<span class='warning'>You do not have enough space to write a proper rune.</span>")
-
 				return
 
 			if (C>=26 + runedec + cult.current_antagonists.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
@@ -404,7 +396,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 					return
 				if (chosen_rune == "none")
 					to_chat(user, "<span class='notice'>You decide against scribing a rune, perhaps you should take this time to study your notes.</span>")
-
 					return
 				if (chosen_rune == "teleport")
 					dictionary[chosen_rune] += input ("Choose a destination word") in english
@@ -417,7 +408,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			for (var/mob/V in viewers(src))
 				V.show_message("<span class='danger'>\The [user] slices open a finger and begins to chant and paint symbols on the floor.</span>", 3, "<span class='danger'>You hear chanting.</span>", 2)
 			to_chat(user, "<span class='danger'>You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world.</span>")
-
 			user.take_overall_damage((rand(9)+1)/10) // 0.1 to 1.0 damage
 			if(do_after(user, 50))
 				var/area/A = get_area(user)
@@ -427,7 +417,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				var/mob/living/carbon/human/H = user
 				var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
 				to_chat(user, "<span class='notice'>You finish drawing the arcane markings of the Geometer.</span>")
-
 				var/list/required = dictionary[chosen_rune]
 				R.word1 = english[required[1]]
 				R.word2 = english[required[2]]
@@ -438,16 +427,13 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			return
 		else
 			to_chat(user, "The book seems full of illegible scribbles. Is this a joke?")
-
 			return
 
 	examine(mob/user)
 		if(!iscultist(user))
 			to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
-
 		else
 			to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
-
 
 /obj/item/weapon/book/tome/cultify()
 	return
@@ -464,12 +450,10 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			var/r
 			if (!istype(user.loc,/turf))
 				to_chat(user, "<span class='notice'>You do not have enough space to write a proper rune.</span>")
-
 			var/list/runes = list("teleport", "itemport", "tome", "armor", "convert", "tear in reality", "emp", "drain", "seer", "raise", "obscure", "reveal", "astral journey", "manifest", "imbue talisman", "sacrifice", "wall", "freedom", "cultsummon", "deafen", "blind", "bloodboil", "communicate", "stun")
 			r = input("Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 			if(locate(/obj/effect/rune) in user.loc)
 				to_chat(user, "<span class='warning'>There is already a rune in this location.</span>")
-
 				return
 
 			var/obj/effect/rune/R = new /obj/effect/rune(user.loc)

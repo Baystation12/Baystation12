@@ -17,7 +17,6 @@
 
 	if(!isnull(insults))
 		to_chat(usr, "The hailer is fried. The tiny input screen just shows a waving ASCII penis.")
-
 		return
 
 	var/new_message = input(usr, "Please enter new message (leave blank to reset).") as text
@@ -27,7 +26,6 @@
 		use_message = capitalize(copytext(sanitize(new_message), 1, MAX_MESSAGE_LEN))
 
 	to_chat(usr, "You configure the hailer to shout \"[use_message]\".")
-
 /
 obj/item/device/hailer/attack_self(mob/living/carbon/user as mob)
 	if (spamcheck)
@@ -45,7 +43,6 @@ obj/item/device/hailer/attack_self(mob/living/carbon/user as mob)
 		else
 			to_chat(user, "<span class='danger'>*BZZZZZZZZT*</span>")
 
-
 	spamcheck = 1
 	spawn(20)
 		spamcheck = 0
@@ -53,9 +50,7 @@ obj/item/device/hailer/attack_self(mob/living/carbon/user as mob)
 /obj/item/device/hailer/emag_act(var/remaining_charges, var/mob/user)
 	if(isnull(insults))
 		to_chat(user, "<span class='danger'>You overload \the [src]'s voice synthesizer.</span>")
-
 		insults = rand(1, 3)//to prevent dickflooding
 		return 1
 	else
 		to_chat(user, "The hailer is fried. You can't even fit the sequencer into the input slot.")
-

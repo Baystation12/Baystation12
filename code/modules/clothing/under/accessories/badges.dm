@@ -26,7 +26,6 @@
 
 	if(!stored_name)
 		to_chat(user, "You polish your [src.name] fondly, shining up the surface.")
-
 		set_name(user.real_name)
 		return
 
@@ -56,19 +55,16 @@
 /obj/item/clothing/accessory/badge/holo/attack_self(mob/user as mob)
 	if(!stored_name)
 		to_chat(user, "Waving around a holobadge before swiping an ID would be pretty pointless.")
-
 		return
 	return ..()
 
 /obj/item/clothing/accessory/badge/holo/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
 		to_chat(user, "<span class='danger'>\The [src] is already cracked.</span>")
-
 		return
 	else
 		emagged = 1
 		to_chat(user, "<span class='danger'>You crack the holobadge security checks.</span>")
-
 		return 1
 
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -84,11 +80,9 @@
 
 		if(access_security in id_card.access || emagged)
 			to_chat(user, "You imprint your ID details onto the badge.")
-
 			set_name(user.real_name)
 		else
 			to_chat(user, "[src] rejects your insufficient access rights.")
-
 		return
 	..()
 

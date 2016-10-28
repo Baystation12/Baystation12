@@ -60,7 +60,6 @@
 	if(!(hardware_flag & usage_flags))
 		if(loud && computer && user)
 			to_chat(user, "<span class='danger'>\The [computer] flashes an \"Hardware Error - Incompatible software\" warning.</span>")
-
 		return 0
 	return 1
 
@@ -90,14 +89,12 @@
 	if(!I)
 		if(loud)
 			to_chat(user, "<span class='danger'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
-
 		return 0
 
 	if(access_to_check in I.access)
 		return 1
 	else if(loud)
 		to_chat(user, "<span class='danger'>\The [computer] flashes an \"Access Denied\" warning.</span>")
-
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
 // always include the device here in this proc. This proc basically relays the request to whatever is running the program.

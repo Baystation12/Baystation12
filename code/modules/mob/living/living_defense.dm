@@ -74,7 +74,6 @@
 		stun_effect_act(0, P.agony, def_zone, P)
 //		to_chat(src, "<span class='warning'>You have been hit by [P]!</span>")
 
-
 	//Armor
 	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
 	var/proj_sharp = is_sharp(P)

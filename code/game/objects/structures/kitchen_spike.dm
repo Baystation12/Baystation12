@@ -17,7 +17,6 @@
 		return
 	if(occupied)
 		to_chat(user, "<span class = 'danger'>The spike already has something on it, finish collecting its meat first!</span>")
-
 	else
 		if(spike(G.affecting))
 			visible_message("<span class = 'danger'>[user] has forced [G.affecting] onto the spike, killing them instantly!</span>")
@@ -25,7 +24,6 @@
 			qdel(G)
 		else
 			to_chat(user, "<span class='danger'>They are too big for the spike, try something smaller!</span>")
-
 
 /obj/structure/kitchenspike/proc/spike(var/mob/living/victim)
 
@@ -56,9 +54,7 @@
 	new meat_type(get_turf(src))
 	if(src.meat > 1)
 		to_chat(user, "You remove some meat from \the [victim_name].")
-
 	else if(src.meat == 1)
 		to_chat(user, "You remove the last piece of meat from \the [victim_name]!")
-
 		icon_state = "spike"
 		occupied = 0

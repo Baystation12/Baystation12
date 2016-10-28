@@ -104,7 +104,6 @@
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
 
-
 /obj/item/weapon/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		add_beaker(I, user)
@@ -114,11 +113,9 @@
 /obj/item/weapon/gun/projectile/dartgun/proc/add_beaker(var/obj/item/weapon/reagent_containers/glass/B, mob/user)
 	if(!istype(B, container_type))
 		to_chat(user, "<span class='warning'>[B] doesn't seem to fit into [src].</span>")
-
 		return
 	if(beakers.len >= max_beakers)
 		to_chat(user, "<span class='warning'>[src] already has [max_beakers] beakers in it - another one isn't going to fit!</span>")
-
 		return
 	user.drop_from_inventory(B, src)
 	beakers |= B

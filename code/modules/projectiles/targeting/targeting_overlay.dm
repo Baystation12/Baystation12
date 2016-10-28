@@ -77,7 +77,6 @@
 	to_chat(owner, aim_message)
 	if(aiming_at)
 		to_chat(aiming_at, "<span class='[use_span]'>You are [message].</span>")
-
 /obj/aiming_overlay/process()
 	if(!owner)
 		qdel(src)

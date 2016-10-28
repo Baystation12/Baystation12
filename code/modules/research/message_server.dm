@@ -155,7 +155,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		user.drop_item()
 		qdel(O)
 		to_chat(user, "You install additional memory and processors into message server. Its filtering capabilities been enhanced.")
-
 	else
 		..(O, user)
 

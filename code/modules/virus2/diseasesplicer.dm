@@ -20,7 +20,6 @@
 		var/mob/living/carbon/c = user
 		if (dish)
 			to_chat(user, "\The [src] is already loaded.")
-
 			return
 
 		dish = I
@@ -29,7 +28,6 @@
 
 	if(istype(I,/obj/item/weapon/diseasedisk))
 		to_chat(user, "You upload the contents of the disk onto the buffer.")
-
 		memorybank = I:effect
 		species_buffer = I:species
 		analysed = I:analysed

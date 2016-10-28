@@ -15,7 +15,6 @@
 
 	if(dish)
 		to_chat(user, "\The [src] is already loaded.")
-
 		return
 
 	dish = O

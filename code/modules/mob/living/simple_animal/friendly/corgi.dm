@@ -138,7 +138,6 @@
 /mob/living/simple_animal/corgi/puppy/Topic(href, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(usr, "<span class='warning'>You can't fit this on [src]</span>")
-
 		return
 	..()
 

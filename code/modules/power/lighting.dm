@@ -60,14 +60,12 @@ var/global/list/light_type_cache = list()
 		if(1) to_chat(user, "It's an empty frame.")
 		if(2) to_chat(user, "It's wired.")
 		if(3) to_chat(user, "The casing is closed.")
-
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (istype(W, /obj/item/weapon/wrench))
 		if (src.stage == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(usr, "You begin deconstructing \a [src].")
-
 			if (!do_after(usr, 30,src))
 				return
 			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
@@ -77,12 +75,10 @@ var/global/list/light_type_cache = list()
 			qdel(src)
 		if (src.stage == 2)
 			to_chat(usr, "You have to remove the wires first.")
-
 			return
 
 		if (src.stage == 3)
 			to_chat(usr, "You have to unscrew the case first.")
-
 			return
 
 	if(istype(W, /obj/item/weapon/wirecutters))
@@ -275,7 +271,6 @@ var/global/list/light_type_cache = list()
 		return
 	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
 		to_chat(user, "That object is useless to you.")
-
 		return
 	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
 		return
@@ -311,16 +306,12 @@ var/global/list/light_type_cache = list()
 	switch(status)
 		if(LIGHT_OK)
 			to_chat(user, "[desc] It is turned [on? "on" : "off"].")
-
 		if(LIGHT_EMPTY)
 			to_chat(user, "[desc] The [fitting] has been removed.")
-
 		if(LIGHT_BURNED)
 			to_chat(user, "[desc] The [fitting] is burnt out.")
-
 		if(LIGHT_BROKEN)
 			to_chat(user, "[desc] The [fitting] has been smashed.")
-
 
 /obj/machinery/light/proc/get_fitting_name()
 	var/obj/item/weapon/light/L = light_type
@@ -372,15 +363,12 @@ var/global/list/light_type_cache = list()
 	if(istype(W, /obj/item/weapon/light))
 		if(status != LIGHT_EMPTY)
 			to_chat(user, "There is a [get_fitting_name()] already inserted.")
-
 			return
 		if(!istype(W, light_type))
 			to_chat(user, "This type of light requires a [get_fitting_name()].")
-
 			return
 
 		to_chat(user, "You insert [W].")
-
 		insert_bulb(W)
 		src.add_fingerprint(user)
 
@@ -392,7 +380,6 @@ var/global/list/light_type_cache = list()
 		if(prob(1+W.force * 5))
 
 			to_chat(user, "You hit the light, and it smashes!")
-
 			for(var/mob/M in viewers(src))
 				if(M == user)
 					continue
@@ -404,7 +391,6 @@ var/global/list/light_type_cache = list()
 
 		else
 			to_chat(user, "You hit the light!")
-
 
 	// attempt to stick weapon into light socket
 	else if(status == LIGHT_EMPTY)
@@ -418,7 +404,6 @@ var/global/list/light_type_cache = list()
 			return
 
 		to_chat(user, "You stick \the [W] into the light socket!")
-
 		if(powered() && (W.flags & CONDUCT))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
@@ -462,7 +447,6 @@ var/global/list/light_type_cache = list()
 
 	if(status == LIGHT_EMPTY)
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
-
 		return
 
 	if(istype(user,/mob/living/carbon/human))
@@ -491,17 +475,13 @@ var/global/list/light_type_cache = list()
 
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
 			to_chat(user, "You remove the light [get_fitting_name()]")
-
 		else if(TK in user.mutations)
 			to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
-
 		else
 			to_chat(user, "You try to remove the light [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
-
 			return				// if burned, don't remove the light
 	else
 		to_chat(user, "You remove the light [get_fitting_name()].")
-
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
@@ -510,11 +490,9 @@ var/global/list/light_type_cache = list()
 /obj/machinery/light/attack_tk(mob/user)
 	if(status == LIGHT_EMPTY)
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
-
 		return
 
 	to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
-
 	remove_bulb()
 
 // ghost attack - make lights flicker like an AI, but even spookier!
@@ -706,7 +684,6 @@ obj/machinery/light/proc/burn_out()
 		var/obj/item/weapon/reagent_containers/syringe/S = I
 
 		to_chat(user, "You inject the solution into the [src].")
-
 
 		if(S.reagents.has_reagent("phoron", 5))
 

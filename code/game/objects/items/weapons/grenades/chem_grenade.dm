@@ -37,7 +37,6 @@
 		if(stage > 1 && !active && clown_check(user))
 			to_chat(user, "<span class='warning'>You prime \the [name]!</span>")
 
-
 			msg_admin_attack("[user.name] ([user.ckey]) primed \a [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			activate()
@@ -52,15 +51,12 @@
 			var/obj/item/device/assembly_holder/det = W
 			if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
 				to_chat(user, "<span class='warning'>Assembly must contain one igniter.</span>")
-
 				return
 			if(!det.secured)
 				to_chat(user, "<span class='warning'>Assembly must be secured with screwdriver.</span>")
-
 				return
 			path = 1
 			to_chat(user, "<span class='notice'>You add [W] to the metal casing.</span>")
-
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
 			user.remove_from_mob(det)
 			det.loc = src
@@ -79,13 +75,10 @@
 				path = 1
 				if(beakers.len)
 					to_chat(user, "<span class='notice'>You lock the assembly.</span>")
-
 					name = "grenade"
 				else
 //					to_chat(user, "<span class='warning'>You need to add at least one beaker before locking the assembly.</span>")
-
 					to_chat(user, "<span class='notice'>You lock the empty assembly.</span>")
-
 					name = "fake grenade"
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 				icon_state = initial(icon_state) +"_locked"
@@ -93,12 +86,10 @@
 			else if(stage == 2)
 				if(active && prob(95))
 					to_chat(user, "<span class='warning'>You trigger the assembly!</span>")
-
 					detonate()
 					return
 				else
 					to_chat(user, "<span class='notice'>You unlock the assembly.</span>")
-
 					playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 					name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
 					icon_state = initial(icon_state) + (detonator?"_ass":"")
@@ -108,12 +99,10 @@
 			path = 1
 			if(beakers.len == 2)
 				to_chat(user, "<span class='warning'>The grenade can not hold more containers.</span>")
-
 				return
 			else
 				if(W.reagents.total_volume)
 					to_chat(user, "<span class='notice'>You add \the [W] to the assembly.</span>")
-
 					user.drop_item()
 					W.loc = src
 					beakers += W
@@ -122,12 +111,10 @@
 				else
 					to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
 
-
 	examine(mob/user)
 		..(user)
 		if(detonator)
 			to_chat(user, "With attached [detonator.name]")
-
 
 	activate(mob/user as mob)
 		if(active) return

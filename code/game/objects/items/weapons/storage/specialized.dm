@@ -72,7 +72,6 @@
 		if(!istype(W,/obj/item/stack/material))
 			if(!stop_messages)
 				to_chat(user, "The snatcher does not accept [W].")
-
 			return 0
 		var/current = 0
 		for(var/obj/item/stack/material/S in contents)
@@ -80,7 +79,6 @@
 		if(capacity == current)//If it's full, you're done
 			if(!stop_messages)
 				to_chat(user, "<span class='warning'>The snatcher is full.</span>")
-
 			return 0
 		return 1
 

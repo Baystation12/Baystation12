@@ -168,7 +168,6 @@
 /obj/machinery/computer/shuttle_control/emergency/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		to_chat(user, "<span class='notice'>You short out \the [src]'s authorization protocols.</span>")
-
 		emagged = 1
 		return 1
 

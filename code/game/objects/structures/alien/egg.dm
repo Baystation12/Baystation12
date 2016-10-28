@@ -32,7 +32,6 @@
 		for(var/mob/M in dead_mob_list_)
 			if(isghost(M) && M.client && M.client.prefs && (MODE_XENOMORPH in M.client.prefs.be_special_role))
 				to_chat(M, "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, M)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>")
-
 		processing_objects -= src
 		update_icon()
 

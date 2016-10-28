@@ -251,7 +251,6 @@
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
 			to_chat(usr, "<span class='warning'>You need your gun equiped to holster it.</span>")
-
 			return
 		holster.holster(W, usr)
 	else

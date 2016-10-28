@@ -97,7 +97,6 @@
 /obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
-
 		return 1
 	if(default_deconstruction_screwdriver(user, O))
 		if(linked_console)
@@ -112,24 +111,20 @@
 		return 1
 	if(panel_open)
 		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
-
 		return 1
 	if(!linked_console)
 		to_chat(user, "<span class='notice'>\The [src] must be linked to an R&D console first!</span>")
-
 		return 1
 	if(is_robot_module(O))
 		return 0
 	if(!istype(O, /obj/item/stack/material))
 		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
-
 		return 0
 	if(stat)
 		return 1
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
 		to_chat(user, "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>")
-
 		return 1
 
 	var/obj/item/stack/material/stack = O
@@ -155,7 +150,6 @@
 		if(do_after(user, 16,src))
 			if(stack.use(amount))
 				to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
-
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()

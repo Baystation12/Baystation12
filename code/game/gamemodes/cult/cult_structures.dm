@@ -53,23 +53,19 @@
 			set_light(0)
 		else
 			to_chat(user, "You hit the pylon!")
-
 			playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
 	else
 		if(prob(damage * 2))
 			to_chat(user, "You pulverize what was left of the pylon!")
-
 			qdel(src)
 		else
 			to_chat(user, "You hit the pylon!")
-
 		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, 1)
 
 
 /obj/structure/cult/pylon/proc/repair(mob/user as mob)
 	if(isbroken)
 		to_chat(user, "You repair the pylon.")
-
 		isbroken = 0
 		density = 1
 		icon_state = "pylon"
@@ -177,5 +173,4 @@
 			new_mob.key = M.key
 
 		to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes
-
 

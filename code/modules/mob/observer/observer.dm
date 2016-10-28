@@ -83,4 +83,3 @@ mob/observer/check_airflow_movable()
 		throwing = 0
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 
-

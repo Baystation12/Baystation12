@@ -22,7 +22,6 @@
 		return
 	to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 
-
 /obj/item/weapon/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
@@ -33,7 +32,6 @@
 			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 		else
 			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
-
 
 /obj/item/weapon/gun/launcher/rocket/consume_next_projectile()
 	if(rockets.len)

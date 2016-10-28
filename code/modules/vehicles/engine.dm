@@ -36,7 +36,6 @@
 	if(istype(I,/obj/item/weapon/cell))
 		if(cell)
 			to_chat(user, "<span class='warning'>There is already a cell in \the [src].</span>")
-
 		else
 			cell = I
 			user.drop_from_inventory(I)
@@ -45,7 +44,6 @@
 	else if(istype(I,/obj/item/weapon/crowbar))
 		if(cell)
 			to_chat(user, "You pry out \the [cell].")
-
 			cell.forceMove(get_turf(src))
 			cell = null
 			return 1

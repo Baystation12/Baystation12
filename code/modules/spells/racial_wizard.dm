@@ -16,18 +16,15 @@
 /obj/item/weapon/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
 		to_chat(user, "\The [src] can do nothing for such a simple being.")
-
 		return
 	var/mob/living/carbon/human/H = user
 	var/reward = potentials[H.species.get_bodytype()] //we get body type because that lets us ignore subspecies.
 	if(!reward)
 		to_chat(user, "\The [src] does not know what to make of you.")
-
 		return
 	for(var/spell/S in user.spell_list)
 		if(istype(S,reward))
 			to_chat(user, "\The [src] can do no more for you.")
-
 			return
 	user.drop_from_inventory(src)
 	var/a = new reward()
@@ -36,7 +33,6 @@
 	else if(ispath(reward,/obj))
 		H.put_in_hands(a)
 	to_chat(user, "\The [src] crumbles in your hands.")
-
 	qdel(src)
 
 //RESOMI
@@ -226,7 +222,6 @@
 /obj/item/weapon/contract/apprentice/skrell/attack_self(mob/user as mob)
 	if(!linked)
 		to_chat(user, "<span class='warning'>This contract requires a link to a spellbook.</span>")
-
 		return
 	..()
 
@@ -234,7 +229,6 @@
 	if(!linked && istype(A,/obj/item/weapon/spellbook))
 		linked = A
 		to_chat(user, "<span class='notice'>You've linked \the [A] to \the [src]</span>")
-
 		return
 	..()
 

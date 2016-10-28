@@ -22,7 +22,6 @@
 
 	if(!ishuman(usr))
 		to_chat(usr, "<span class='warning'>You must be human to use this verb.</span>")
-
 		return
 
 	var/UI_style_new = input(usr, "Select a style. White is recommended for customization") as null|anything in all_ui_styles
@@ -57,4 +56,3 @@
 		prefs.UI_style_color = UI_style_color_new
 		prefs.save_preferences()
 		to_chat(usr, "UI was saved")
-

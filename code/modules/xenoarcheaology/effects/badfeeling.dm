@@ -32,10 +32,8 @@
 			if(prob(50))
 				if(prob(75))
 					to_chat(H, "<span class='danger'>[pick(drastic_messages)]</span>")
-
 				else
 					to_chat(H, "<span class='warning'>[pick(messages)]</span>")
-
 
 			if(prob(50))
 				H.dizziness += rand(3,5)
@@ -47,10 +45,8 @@
 			if(prob(5))
 				if(prob(75))
 					to_chat(H, "<span class='warning'>[pick(messages)]</span>")
-
 				else
 					to_chat(H, "<span class='danger'>[pick(drastic_messages)]</span>")
-
 
 			if(prob(10))
 				H.dizziness += rand(3,5)
@@ -63,10 +59,8 @@
 			if(prob(50))
 				if(prob(95))
 					to_chat(H, "<span class='danger'>[pick(drastic_messages)]</span>")
-
 				else
 					to_chat(H, "<span class='warning'>[pick(messages)]</span>")
-
 
 			if(prob(50))
 				H.dizziness += rand(3,5)

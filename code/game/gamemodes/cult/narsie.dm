@@ -320,7 +320,6 @@ var/global/list/narsie_list = list()
 		to_chat(target, "<span class='danger'>[capname] HUNGERS FOR YOUR SOUL.</span>")
 	else
 		to_chat(target, "<span class='danger'>[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL.</span>")
-
 /obj/singularity/narsie/on_capture()
 	chained = 1
 	move_self = 0

@@ -68,13 +68,11 @@ default behaviour is:
 				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
-
 					now_pushing = 0
 					return
 				if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restraining [M], you cannot push past</span>")
-
 					now_pushing = 0
 					return
 
@@ -104,7 +102,6 @@ default behaviour is:
 			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
 				if(prob(40) && !(FAT in src.mutations))
 					to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
-
 					now_pushing = 0
 					return
 			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
@@ -181,7 +178,6 @@ default behaviour is:
 		src.adjustOxyLoss(src.health + src.maxHealth * 2) // Deal 2x health in OxyLoss damage, as before but variable.
 		src.health = src.maxHealth - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
-
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
@@ -494,13 +490,10 @@ default behaviour is:
 	if(config.allow_Metadata)
 		if(client)
 			to_chat(usr, "[src]'s Metainfo:<br>[client.prefs.metadata]")
-
 		else
 			to_chat(usr, "[src] does not have any stored infomation!")
-
 	else
 		to_chat(usr, "OOC Metadata is not supported by this server!")
-
 
 	return
 
@@ -640,9 +633,7 @@ default behaviour is:
 	if(istype(M))
 		M.drop_from_inventory(H)
 		to_chat(M, "<span class='warning'>\The [H] wriggles out of your grip!</span>")
-
 		to_chat(src, "<span class='warning'>You wriggle out of \the [M]'s grip!</span>")
-
 
 		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
@@ -654,7 +645,6 @@ default behaviour is:
 		if(holster.holstered == H)
 			holster.clear_holster()
 		to_chat(src, "<span class='warning'>You extricate yourself from \the [holster].</span>")
-
 		H.forceMove(get_turf(H))
 	else if(istype(H.loc,/obj))
 		if(istype(H.loc, /obj/machinery/cooker))
@@ -662,7 +652,6 @@ default behaviour is:
 			C.cooking_obj = null
 			C.check_cooking_obj()
 		to_chat(src, "<span class='warning'>You struggle free of \the [H.loc].</span>")
-
 		H.forceMove(get_turf(H))
 
 	if(loc != H)
@@ -686,7 +675,6 @@ default behaviour is:
 
 	resting = !resting
 	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
-
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
@@ -736,11 +724,9 @@ default behaviour is:
 		return 0
 	if(!possession_candidate)
 		to_chat(possessor, "<span class='warning'>That animal cannot be possessed.</span>")
-
 		return 0
 	if(jobban_isbanned(possessor, "Animal"))
 		to_chat(possessor, "<span class='warning'>You are banned from animal roles.</span>")
-
 		return 0
 	if(!possessor.MayRespawn(1,ANIMAL_SPAWN_DELAY))
 		return 0
@@ -753,7 +739,6 @@ default behaviour is:
 
 	if(src.ckey || src.client)
 		to_chat(possessor, "<span class='warning'>\The [src] already has a player.</span>")
-
 		return 0
 
 	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
@@ -763,20 +748,15 @@ default behaviour is:
 
 	if(round_is_spooky(6)) // Six or more active cultists.
 		to_chat(src, "<span class='notice'>You reach out with tendrils of ectoplasm and invade the mind of \the [src]...</span>")
-
 		to_chat(src, "<b>You have assumed direct control of \the [src].</b>")
-
 		to_chat(src, "<span class='notice'>Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly.</span>")
-
 		src.universal_speak = 1
 		src.universal_understand = 1
 		//src.cultify() // Maybe another time.
 		return
 
 	to_chat(src, "<b>You are now \the [src]!</b>")
-
 	to_chat(src, "<span class='notice'>Remember to stay in character for a mob of this type!</span>")
-
 	return 1
 
 /mob/living/reset_layer()

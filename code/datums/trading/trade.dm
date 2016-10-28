@@ -203,7 +203,6 @@
 			if(istype(offer,/mob))
 				var/text = mob_transfer_message
 				to_chat(offer, replacetext(text, "ORIGIN", origin))
-
 			if(istype(offer, /obj/mecha))
 				var/obj/mecha/M = offer
 				M.wreckage = null //So they don't ruin the illusion

@@ -73,7 +73,6 @@
 	if (!BB)
 		to_chat(user, "This one is spent.")
 
-
 //Gun loading types
 #define SINGLE_CASING 	1	//The gun only accepts ammo_casings. ammo_magazines should never have this as their mag_type.
 #define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
@@ -128,11 +127,9 @@
 		var/obj/item/ammo_casing/C = W
 		if(C.caliber != caliber)
 			to_chat(user, "<span class='warning'>[C] does not fit into [src].</span>")
-
 			return
 		if(stored_ammo.len >= max_ammo)
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
-
 			return
 		user.remove_from_mob(C)
 		C.forceMove(src)
@@ -143,10 +140,8 @@
 /obj/item/ammo_magazine/attack_self(mob/user)
 	if(!stored_ammo.len)
 		to_chat(user, "<span class='notice'>[src] is already empty!</span>")
-
 		return
 	to_chat(user, "<span class='notice'>You empty [src].</span>")
-
 	for(var/obj/item/ammo_casing/C in stored_ammo)
 		C.forceMove(user.loc)
 		C.set_dir(pick(alldirs))
@@ -167,7 +162,6 @@
 /obj/item/ammo_magazine/examine(mob/user)
 	..()
 	to_chat(user, "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!")
-
 
 //magazine icon state caching
 /var/global/list/magazine_icondata_keys = list()

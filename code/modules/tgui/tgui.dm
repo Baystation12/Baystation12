@@ -282,7 +282,6 @@
 			tgui_process.update_uis(src_object)
 		if("tgui:link")
 			to_chat(user, link(params["url"]))
-
 		if("tgui:fancy")
 			user.set_preference(/datum/client_preference/tgui_style, TRUE)
 		if("tgui:nofrills")

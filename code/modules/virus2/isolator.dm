@@ -33,7 +33,6 @@
 
 	if(sample)
 		to_chat(user, "\The [src] is already loaded.")
-
 		return
 
 	sample = S

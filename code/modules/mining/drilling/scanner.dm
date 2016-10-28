@@ -10,7 +10,6 @@
 /obj/item/weapon/mining_scanner/attack_self(mob/user as mob)
 	to_chat(user, "You begin sweeping \the [src] about, scanning for metal deposits.")
 
-
 	if(!do_after(user, 50,src))
 		return
 
@@ -39,7 +38,6 @@
 
 	to_chat(user, "\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>")
 
-
 	for(var/ore_type in metals)
 		var/result = "no sign"
 
@@ -49,4 +47,3 @@
 			if(76 to INFINITY) result = "huge quantities"
 
 		to_chat(user, "- [result] of [ore_type].")
-

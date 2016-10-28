@@ -18,16 +18,12 @@
 	switch(icon_state)
 		if("Off")
 			to_chat(user, "It appears to be switched off.")
-
 		if("narsiebistro")
 			to_chat(user, "It shows a picture of a large black and red being. Spooky!")
-
 		if("on", "empty")
 			to_chat(user, "The lights are on, but there's no picture.")
-
 		else
 			to_chat(user, "It says '[icon_state]'")
-
 
 /obj/structure/sign/double/barsign/New()
 	..()
@@ -45,10 +41,8 @@
 				return
 			icon_state = sign_type
 			to_chat(user, "<span class='notice'>You change the barsign.</span>")
-
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
-
 		return
 
 	return ..()

@@ -118,7 +118,6 @@
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
 		to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
-
 		return 0
 
 	return ..()
@@ -149,11 +148,9 @@ obj/item/weapon/gun/energy/staff/focus
 		if(projectile_type == /obj/item/projectile/forcebolt)
 			charge_cost = 400
 			to_chat(user, "<span class='warning'>The [src.name] will now strike a small area.</span>")
-
 			projectile_type = /obj/item/projectile/forcebolt/strong
 		else
 			charge_cost = 200
 			to_chat(user, "<span class='warning'>The [src.name] will now strike only a single person.</span>")
-
 			projectile_type = /obj/item/projectile/forcebolt"
 	*/

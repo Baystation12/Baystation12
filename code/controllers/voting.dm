@@ -325,12 +325,10 @@ datum/controller/vote
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
 							to_chat(initiator_key, "The current alert status is too high to call for a crew transfer!")
-
 							return 0
 						if(ticker.current_state <= GAME_STATE_SETTING_UP)
 							return 0
 							to_chat(initiator_key, "The crew transfer button has been disabled!")
-
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 						if (config.allow_extra_antags && is_addantag_allowed(1))
@@ -339,7 +337,6 @@ datum/controller/vote
 					if(!is_addantag_allowed(automatic))
 						if(!automatic)
 							to_chat(usr, "The add antagonist vote is unavailable at this time. The game may not have started yet, the game mode may disallow adding antagonists, or you don't have required permissions.")
-
 						return 0
 
 					if(!config.allow_extra_antags)

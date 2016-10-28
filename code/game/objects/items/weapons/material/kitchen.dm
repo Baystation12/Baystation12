@@ -51,7 +51,6 @@
 		return
 	else
 		to_chat(user, "<span class='warning'>You don't have anything on \the [src].</span>")//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
-
 		return
 
 /obj/item/weapon/material/kitchen/utensil/fork

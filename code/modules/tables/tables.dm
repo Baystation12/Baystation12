@@ -88,7 +88,6 @@
 				to_chat(user, "<span class='warning'>It looks damaged!</span>")
 			if(0.5 to 1.0)
 				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
 	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
@@ -117,7 +116,6 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
-
 	if(!reinforced && !carpeted && material && istype(W, /obj/item/weapon/wrench))
 		remove_material(W, user)
 		if(!material)

@@ -36,13 +36,10 @@
 	..(user)
 
 	to_chat(user, "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
-
 	if(panel_open)
 		to_chat(user, "The power cell is [cell ? "installed" : "missing"].")
-
 	else
 		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
-
 	return
 
 /obj/machinery/space_heater/powered()
@@ -63,7 +60,6 @@
 		if(panel_open)
 			if(cell)
 				to_chat(user, "There is already a power cell inside.")
-
 				return
 			else
 				// insert cell
@@ -78,7 +74,6 @@
 					power_change()
 		else
 			to_chat(user, "The hatch must be open to insert a power cell.")
-
 			return
 	else if(istype(I, /obj/item/weapon/screwdriver))
 		panel_open = !panel_open

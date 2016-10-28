@@ -142,7 +142,6 @@
 
 						if(!computer.nano_printer.print_text(contents,"access report"))
 							to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
-
 							return
 						else
 							computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
@@ -153,7 +152,6 @@
 									"}
 					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", stationtime2text())))
 						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
-
 						return
 					else
 						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
@@ -199,7 +197,6 @@
 								break
 						if(!jobdatum)
 							to_chat(usr, "<span class='warning'>No log exists for this job: [t1]</span>")
-
 							return
 
 						access = jobdatum.get_access()

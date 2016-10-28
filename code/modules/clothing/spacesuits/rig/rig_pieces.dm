@@ -81,14 +81,12 @@
 		for(var/obj/item/organ/external/E in user.bad_external_organs)
 			if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
 				to_chat(user, "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>")
-
 				supporting_limbs |= E
 	else
 		// Otherwise, remove the splints.
 		for(var/obj/item/organ/external/E in supporting_limbs)
 			if(E.splinted == src && E.remove_splint(src))
 				to_chat(user, "<span class='notice'>\The [src] stops supporting your [E.name].</span>")
-
 		supporting_limbs.Cut()
 
 /obj/item/clothing/suit/space/rig/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
@@ -96,7 +94,6 @@
 		return
 	if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
 		to_chat(user, "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>")
-
 		supporting_limbs |= E
 
 

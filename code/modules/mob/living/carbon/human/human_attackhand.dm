@@ -87,7 +87,6 @@
 				H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
 				to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 				to_chat(H, "<span class='warning'>Repeat at least every 7 seconds.</span>")
-
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
 			return 1

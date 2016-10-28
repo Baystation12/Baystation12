@@ -90,7 +90,6 @@
 			anchored = !anchored
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
 
-
 			if(anchored)
 				if(dir & (NORTH|SOUTH))
 					initialize_directions = EAST|WEST
@@ -262,7 +261,6 @@
 			anchored = !anchored
 			turbine = null
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
-
 			updateConnection()
 		else
 			..()

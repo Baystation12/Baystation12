@@ -13,7 +13,6 @@
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
 					to_chat(src, "You cannot send IC messages (muted).")
-
 					return
 			if (stat)
 				return
@@ -229,7 +228,6 @@
 			else
 				to_chat(src, "You are not THE LAW, pal.")
 
-
 		if("halt")
 			if (istype(module,/obj/item/weapon/robot_module/security))
 				message = "<B>[src]</B>'s speakers skreech, \"Halt! Security!\"."
@@ -239,13 +237,10 @@
 			else
 				to_chat(src, "You are not security.")
 
-
 		if ("help")
 			to_chat(src, "salute, bow-(none)/mob, clap, flap, aflap, twitch, twitch_s, nod, deathgasp, glare-(none)/mob, stare-(none)/mob, look, beep, ping, \nbuzz, law, halt")
-
 		else
 			to_chat(src, "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>")
-
 
 	if ((message && src.stat == 0))
 		custom_emote(m_type,message)

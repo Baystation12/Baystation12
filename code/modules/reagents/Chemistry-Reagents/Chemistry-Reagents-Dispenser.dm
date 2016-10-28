@@ -15,19 +15,16 @@
 		var/obj/item/weapon/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
-
 		return
 	if(istype(O, /obj/item/weapon/book))
 		if(volume < 5)
 			return
 		if(istype(O, /obj/item/weapon/book/tome))
 			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-
 			return
 		var/obj/item/weapon/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
-
 	return
 
 /datum/reagent/aluminum
@@ -161,19 +158,16 @@
 		var/obj/item/weapon/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
-
 		return
 	if(istype(O, /obj/item/weapon/book))
 		if(volume < 5)
 			return
 		if(istype(O, /obj/item/weapon/book/tome))
 			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-
 			return
 		var/obj/item/weapon/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
-
 	return
 
 /datum/reagent/hydrazine
@@ -310,12 +304,10 @@
 		if(H.head)
 			if(H.head.unacidable)
 				to_chat(H, "<span class='danger'>Your [H.head] protects you from the acid.</span>")
-
 				remove_self(volume)
 				return
 			else if(removed > meltdose)
 				to_chat(H, "<span class='danger'>Your [H.head] melts away!</span>")
-
 				qdel(H.head)
 				H.update_inv_head(1)
 				H.update_hair(1)
@@ -326,12 +318,10 @@
 		if(H.wear_mask)
 			if(H.wear_mask.unacidable)
 				to_chat(H, "<span class='danger'>Your [H.wear_mask] protects you from the acid.</span>")
-
 				remove_self(volume)
 				return
 			else if(removed > meltdose)
 				to_chat(H, "<span class='danger'>Your [H.wear_mask] melts away!</span>")
-
 				qdel(H.wear_mask)
 				H.update_inv_wear_mask(1)
 				H.update_hair(1)
@@ -342,11 +332,9 @@
 		if(H.glasses)
 			if(H.glasses.unacidable)
 				to_chat(H, "<span class='danger'>Your [H.glasses] partially protect you from the acid!</span>")
-
 				removed /= 2
 			else if(removed > meltdose)
 				to_chat(H, "<span class='danger'>Your [H.glasses] melt away!</span>")
-
 				qdel(H.glasses)
 				H.update_inv_glasses(1)
 				removed -= meltdose / 2
@@ -377,7 +365,6 @@
 		I.desc = "Looks like this was \an [O] some time ago."
 		for(var/mob/M in viewers(5, O))
 			to_chat(M, "<span class='warning'>\The [O] melts.</span>")
-
 		qdel(O)
 		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile
 

@@ -94,22 +94,17 @@
 
 	if(!damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
-
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
 			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
-
 		else if(dam <= 0.6)
 			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
-
 		else
 			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
 
-
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
-
 
 //Damage
 
@@ -230,7 +225,6 @@
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
 	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
-
 
 	spawn(100)
 		if(O)

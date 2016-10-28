@@ -108,7 +108,6 @@ proc/airborne_can_reach(turf/source, turf/target)
 	infect_virus2(M,D,1)
 	to_chat(M.hud_updateflag |= 1, STATUS_HUD)
 
-
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease

@@ -47,7 +47,6 @@
 	if(!use_power && istype(W, /obj/item/weapon/wrench))
 		if(!anchored && !connect_to_network())
 			to_chat(user, "<span class='warning'>This device must be placed over an exposed cable.</span>")
-
 			return
 		anchored = !anchored
 		user.visible_message("<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] \the [src].</span>")
@@ -60,14 +59,12 @@
 	if(expended)
 		use_power = 0
 		to_chat(user, "<span class='warning'>\The [src] has used up its charge.</span>")
-
 		return
 
 	if(anchored)
 		return use_power ? deactivate(user) : activate(user)
 	else
 		to_chat(user, "<span class='warning'>You need to secure the beacon with a wrench first!</span>")
-
 		return
 
 /obj/machinery/power/supply_beacon/attack_ai(var/mob/user)
@@ -79,13 +76,11 @@
 		return
 	if(surplus() < 500)
 		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
-
 		return
 	set_light(3, 3, "#00CCAA")
 	icon_state = "beacon_active"
 	use_power = 1
 	if(user) to_chat(user, "<span class='notice'>You activate the beacon. The supply drop will be dispatched soon.</span>")
-
 
 /obj/machinery/power/supply_beacon/proc/deactivate(var/mob/user, var/permanent)
 	if(permanent)
@@ -97,7 +92,6 @@
 	use_power = 0
 	target_drop_time = null
 	if(user) to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
-
 
 /obj/machinery/power/supply_beacon/Destroy()
 	if(use_power)

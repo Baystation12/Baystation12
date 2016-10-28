@@ -256,10 +256,8 @@
 	if(istype(W, /obj/item/weapon/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
 			to_chat(user, "You insert \the [W] into \the [src].")
-
 		else
 			to_chat(user, "\The [src] has no empty slot for \the [W]")
-
 
 /obj/machinery/power/smes/batteryrack/attack_hand(var/mob/user)
 	ui_interact(user)

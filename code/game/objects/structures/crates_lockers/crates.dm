@@ -76,24 +76,20 @@
 		var/obj/item/stack/cable_coil/C = W
 		if(rigged)
 			to_chat(user, "<span class='notice'>[src] is already rigged!</span>")
-
 			return
 		if (C.use(1))
 			to_chat(user, "<span class='notice'>You rig [src].</span>")
-
 			rigged = 1
 			return
 	else if(istype(W, /obj/item/device/radio/electropack))
 		if(rigged)
 			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
-
 			user.drop_item()
 			W.forceMove(src)
 			return
 	else if(istype(W, /obj/item/weapon/wirecutters))
 		if(rigged)
 			to_chat(user, "<span class='notice'>You cut away the wiring.</span>")
-
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			rigged = 0
 			return
@@ -147,17 +143,14 @@
 /obj/structure/closet/crate/secure/proc/togglelock(mob/user as mob)
 	if(src.opened)
 		to_chat(user, "<span class='notice'>Close the crate first.</span>")
-
 		return
 	if(src.broken)
 		to_chat(user, "<span class='warning'>The crate appears to be broken.</span>")
-
 		return
 	if(src.allowed(user))
 		set_locked(!locked, user)
 	else
 		to_chat(user, "<span class='notice'>Access Denied</span>")
-
 
 /obj/structure/closet/crate/secure/proc/set_locked(var/newlocked, mob/user = null)
 	if(locked == newlocked) return
@@ -182,7 +175,6 @@
 		src.togglelock(usr)
 	else
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
-
 
 /obj/structure/closet/crate/secure/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
@@ -211,7 +203,6 @@
 		src.locked = 0
 		src.broken = 1
 		to_chat(user, "<span class='notice'>You unlock \the [src].</span>")
-
 		return 1
 
 /obj/structure/closet/crate/secure/emp_act(severity)

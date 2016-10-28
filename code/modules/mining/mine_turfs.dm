@@ -162,7 +162,6 @@ var/list/mining_floors = list()
 		user.visible_message("<span class='notice'>\The [user] extends [P] towards [src].</span>","<span class='notice'>You extend [P] towards [src].</span>")
 		if(do_after(user,10, src))
 			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
-
 		return
 
 	if (istype(W, /obj/item/weapon/pickaxe))
@@ -186,7 +185,6 @@ var/list/mining_floors = list()
 
 		to_chat(user, "<span class='notice'>You start [P.drill_verb][fail_message].</span>")
 
-
 		if(fail_message && prob(90))
 			if(prob(25))
 				excavate_find(prob(5), finds[1])
@@ -204,7 +202,6 @@ var/list/mining_floors = list()
 					excavate_find(prob(80 * (F.excavation_required - newDepth) / F.clearance_range), F)
 
 			to_chat(user, "<span class='notice'>You finish [P.drill_verb] \the [src].</span>")
-
 
 			if(newDepth >= 200) // This means the rock is mined out fully
 				var/obj/structure/boulder/B
@@ -303,7 +300,6 @@ var/list/mining_floors = list()
 			pain = 1
 		for(var/mob/living/M in range(src, 200))
 			to_chat(M, "<font color='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b></font>")
-
 			if(pain)
 				flick("pain",M.pain)
 				if(prob(50))
@@ -499,7 +495,6 @@ var/list/mining_floors = list()
 		if(!do_after(user,40, src)) return
 
 		to_chat(user, "<span class='notice'>You dug a hole.</span>")
-
 		gets_dug()
 
 	else if(istype(W,/obj/item/weapon/storage/ore))

@@ -103,7 +103,6 @@
 			var/turf/T = locate(usr.x+x-1,usr.y+y-1,usr.z)
 			if(!T)
 				to_chat(src, "<span class='danger'>Error, turf could not be located. Probably out of bounds.</span>")
-
 				return
 			T.ChangeTurf(initial(W.target_turf_type))
 	new /datum/random_map/winding_dungeon(null,usr.x, usr.y, usr.z, variable_list = vars)

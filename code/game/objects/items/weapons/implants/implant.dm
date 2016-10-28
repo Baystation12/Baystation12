@@ -37,7 +37,6 @@
 
 	proc/meltdown()	//breaks it down, making implant unrecongizible
 		to_chat(imp_in, "<span class='warning'>You feel something melting inside [part ? "your [part.name]" : "you"]!</span>")
-
 		if (part)
 			part.take_damage(burn = 15, used_weapon = "Electronics meltdown")
 		else
@@ -220,7 +219,6 @@ Implant Specifics:<BR>"}
 		phrase = replace_characters(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
 		to_chat(usr, "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.")
-
 		return 1
 
 	emp_act(severity)
@@ -314,10 +312,8 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		var/mob/living/carbon/R = src.imp_in
 		src.reagents.trans_to_mob(R, cause, CHEM_BLOOD)
 		to_chat(R, "You hear a faint *beep*.")
-
 		if(!src.reagents.total_volume)
 			to_chat(R, "You hear a faint click from your chest.")
-
 			spawn(0)
 				qdel(src)
 		return
@@ -366,7 +362,6 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		else
 			clear_antag_roles(H.mind, 1)
 			to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [company_name].</span>")
-
 		return 1
 
 
@@ -394,7 +389,6 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		if (emote == "pale")
 			src.uses--
 			to_chat(source, "<span class='notice'>You feel a sudden surge of energy!</span>")
-
 			source.SetStunned(0)
 			source.SetWeakened(0)
 			source.SetParalysis(0)
@@ -405,7 +399,6 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	implanted(mob/source)
 		source.mind.store_memory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", 0, 0)
 		to_chat(source, "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
-
 		return 1
 
 
@@ -510,7 +503,6 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 		if (emote == src.activation_emote)
 			to_chat(source, "The air glows as \the [src.scanned.name] uncompresses.")
-
 			activate()
 
 	activate()
@@ -526,7 +518,6 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		if (source.mind)
 			source.mind.store_memory("Compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 		to_chat(source, "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
-
 		return 1
 
 	islegal()

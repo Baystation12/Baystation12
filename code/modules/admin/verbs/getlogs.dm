@@ -25,18 +25,15 @@
 
 	if(!src.holder)
 		to_chat(src, "<font color='red'>Only Admins may use this command.</font>")
-
 		return
 
 	var/client/target = input(src,"Choose somebody to grant access to the server's runtime logs (permissions expire at the end of each round):","Grant Permissions",null) as null|anything in clients
 	if(!istype(target,/client))
 		to_chat(src, "<font color='red'>Error: giveruntimelog(): Client not found.</font>")
-
 		return
 
 	target.verbs |= /client/proc/getruntimelog
 	to_chat(target, "<font color='red'>You have been granted access to runtime logs. Please use them responsibly or risk being banned.</font>")
-
 	return
 
 
@@ -56,9 +53,7 @@
 
 	message_admins("[key_name_admin(src)] accessed file: [path]")
 	to_chat(src, run( file(path) ))
-
 	to_chat(src, "Attempting to send file, this may take a fair few minutes if the file is very large.")
-
 	return
 
 
@@ -78,9 +73,7 @@
 
 	message_admins("[key_name_admin(src)] accessed file: [path]")
 	to_chat(src, run( file(path) ))
-
 	to_chat(src, "Attempting to send file, this may take a fair few minutes if the file is very large.")
-
 	return
 
 
@@ -95,10 +88,8 @@
 	var/path = "data/logs/[time2text(world.realtime,"YYYY/MM-Month/DD-Day")].log"
 	if( fexists(path) )
 		to_chat(src, run( file(path) ))
-
 	else
 		to_chat(src, "<font color='red'>Error: view_txt_log(): File not found/Invalid path([path]).</font>")
-
 		return
 	feedback_add_details("admin_verb","VTL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -112,12 +103,9 @@
 	var/path = "data/logs/[time2text(world.realtime,"YYYY/MM-Month/DD-Day")] Attack.log"
 	if( fexists(path) )
 		to_chat(src, run( file(path) ))
-
 	else
 		to_chat(src, "<font color='red'>Error: view_atk_log(): File not found/Invalid path([path]).</font>")
-
 		return
 	to_chat(usr, run( file(path) ))
-
 	feedback_add_details("admin_verb","SSAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return

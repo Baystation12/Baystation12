@@ -42,19 +42,14 @@
 				content_size += content_size(AM)
 		if(!content_size)
 			to_chat(user, "It is empty.")
-
 		else if(storage_capacity > content_size*4)
 			to_chat(user, "It is barely filled.")
-
 		else if(storage_capacity > content_size*2)
 			to_chat(user, "It is less than half full.")
-
 		else if(storage_capacity > content_size)
 			to_chat(user, "There is still some free space.")
-
 		else
 			to_chat(user, "It is full.")
-
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0 || wall_mounted)) return 1
@@ -170,7 +165,6 @@
 /obj/structure/closet/proc/toggle(mob/user as mob)
 	if(!(src.opened ? src.close() : src.open()))
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
-
 		return
 	update_icon()
 
@@ -231,7 +225,6 @@
 					return
 				else
 					to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 					return
 			new /obj/item/stack/material/steel(src.loc)
 			for(var/mob/M in viewers(src))
@@ -266,7 +259,6 @@
 				return
 			else
 				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 				return
 		src.welded = !src.welded
 		src.update_icon()
@@ -308,7 +300,6 @@
 	if(!src.open())
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 
-
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	src.toggle(user)
@@ -318,7 +309,6 @@
 	src.add_fingerprint(user)
 	if(!src.toggle())
 		to_chat(usr, "<span class='notice'>It won't budge!</span>")
-
 
 /obj/structure/closet/verb/verb_toggleopen()
 	set src in oview(1)
@@ -333,7 +323,6 @@
 		src.toggle(usr)
 	else
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
-
 
 /obj/structure/closet/update_icon()//Putting the welded stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()
@@ -371,7 +360,6 @@
 	//okay, so the closet is either welded or locked... resist!!!
 	to_chat(escapee, "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>")
 
-
 	visible_message("<span class='danger'>\The [src] begins to shake violently!</span>")
 
 	breakout = 1 //can't think of a better way to do this right now.
@@ -394,7 +382,6 @@
 	//Well then break it!
 	breakout = 0
 	to_chat(escapee, "<span class='warning'>You successfully break out!</span>")
-
 	visible_message("<span class='danger'>\The [escapee] successfully broke out of \the [src]!</span>")
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 	break_open()

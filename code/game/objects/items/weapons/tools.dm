@@ -174,20 +174,16 @@
 		to_chat(user, text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel ))
 
 
-
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(welding)
 			to_chat(user, "<span class='danger'>Stop welding first!</span>")
-
 			return
 		status = !status
 		if(status)
 			to_chat(user, "<span class='notice'>You secure the welder.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>The welder can now be attached and modified.</span>")
-
 		src.add_fingerprint(user)
 		return
 
@@ -226,7 +222,6 @@
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, "<span class='notice'>Welder refueled</span>")
-
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	if (src.welding)
@@ -261,7 +256,6 @@
 	else
 		if(M)
 			to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 		return 0
 
 /obj/item/weapon/weldingtool/proc/burn_fuel(var/amount)
@@ -312,7 +306,6 @@
 		if (get_fuel() > 0)
 			if(M)
 				to_chat(M, "<span class='notice'>You switch the [src] on.</span>")
-
 			else if(T)
 				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			src.force = 15
@@ -323,14 +316,12 @@
 		else
 			if(M)
 				to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 			return
 	//Otherwise
 	else if(!set_welding && welding)
 		processing_objects -= src
 		if(M)
 			to_chat(M, "<span class='notice'>You switch \the [src] off.</span>")
-
 		else if(T)
 			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		src.force = 3
@@ -351,33 +342,27 @@
 		switch(safety)
 			if(FLASH_PROTECTION_MODERATE)
 				to_chat(H, "<span class='warning'>Your eyes sting a little.</span>")
-
 				E.damage += rand(1, 2)
 				if(E.damage > 12)
 					H.eye_blurry += rand(3,6)
 			if(FLASH_PROTECTION_NONE)
 				to_chat(H, "<span class='warning'>Your eyes burn.</span>")
-
 				E.damage += rand(2, 4)
 				if(E.damage > 10)
 					E.damage += rand(4,10)
 			if(FLASH_PROTECTION_REDUCED)
 				to_chat(H, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
-
 				H.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
 		if(safety<FLASH_PROTECTION_MAJOR)
 			if(E.damage > 10)
 				to_chat(user, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
 
-
 			if (E.damage >= E.min_broken_damage)
 				to_chat(H, "<span class='danger'>You go blind!</span>")
-
 				H.sdisabilities |= BLIND
 			else if (E.damage >= E.min_bruised_damage)
 				to_chat(H, "<span class='danger'>You go blind!</span>")
-
 				H.eye_blind = 5
 				H.eye_blurry = 5
 				H.disabilities |= NEARSIGHTED
@@ -449,7 +434,6 @@
 
 		if(!welding)
 			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>")
-
 			return 1
 
 		if(S.robo_repair(15, BRUTE, "some dents", src, user))
@@ -480,10 +464,8 @@
 	..()
 	if(loc == usr && tools.len)
 		to_chat(usr, "It has the following fittings:")
-
 		for(var/obj/item/tool in tools)
 			to_chat(usr, "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]")
-
 
 /obj/item/weapon/combitool/New()
 	..()
@@ -495,10 +477,8 @@
 	var/obj/item/tool = tools[current_tool]
 	if(!tool)
 		to_chat(user, "You can't seem to find any fittings in \the [src].")
-
 	else
 		to_chat(user, "You switch \the [src] to the [tool.name] fitting.")
-
 	return 1
 
 /obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

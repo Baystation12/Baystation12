@@ -60,7 +60,6 @@
 				objs += d
 
 //	to_chat(usr, "Query: [query_text]")
-
 	message_admins("[usr] executed SDQL query: \"[query_text]\".")
 
 	switch(query_tree[1])
@@ -371,7 +370,6 @@
 		else if(char == "'")
 			if(word != "")
 				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</span>")
-
 				return null
 
 			word = "'"
@@ -420,7 +418,6 @@
 
 			if(i > len)
 				to_chat(usr, "<span class='warning'>SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</span>")
-
 				return null
 
 			query_list += "[word]\""

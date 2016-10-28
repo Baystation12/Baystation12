@@ -121,7 +121,6 @@
 				..()
 				return
 			to_chat(user, "<span class='notice'>You unscrew [silenced] from [src].</span>")
-
 			user.put_in_hands(silenced)
 			silenced = initial(silenced)
 			w_class = initial(w_class)
@@ -133,11 +132,9 @@
 	if(istype(I, /obj/item/weapon/silencer))
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
 			to_chat(user, "<span class='notice'>You'll need [src] in your hands to do that.</span>")
-
 			return
 		user.drop_item()
 		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
-
 		silenced = I	//dodgy?
 		w_class = ITEM_SIZE_NORMAL
 		I.forceMove(src)		//put the silencer into the gun

@@ -63,7 +63,6 @@
 	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
 		to_chat(user, "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
 
-
 /obj/machinery/drone_fabricator/proc/create_drone(var/client/player)
 
 	if(stat & NOPOWER)
@@ -97,17 +96,14 @@
 
 	if(ticker.current_state < GAME_STATE_PLAYING)
 		to_chat(user, "<span class='danger'>The game hasn't started yet!</span>")
-
 		return
 
 	if(!(config.allow_drone_spawn))
 		to_chat(user, "<span class='danger'>That verb is not currently permitted.</span>")
-
 		return
 
 	if(jobban_isbanned(user,"Cyborg"))
 		to_chat(user, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
-
 		return
 
 	if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
@@ -123,7 +119,6 @@
 
 		if(!all_fabricators.len)
 			to_chat(user, "<span class='danger'>There are no available drone spawn points, sorry.</span>")
-
 			return
 
 		var/choice = input(user,"Which fabricator do you wish to use?") as null|anything in all_fabricators

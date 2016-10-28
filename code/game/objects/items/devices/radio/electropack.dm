@@ -15,7 +15,6 @@
 /obj/item/device/radio/electropack/attack_hand(mob/user as mob)
 	if(src == user.back)
 		to_chat(user, "<span class='notice'>You need help taking this off!</span>")
-
 		return
 	..()
 
@@ -24,7 +23,6 @@
 	if(istype(W, /obj/item/clothing/head/helmet))
 		if(!b_stat)
 			to_chat(user, "<span class='notice'>[src] is not ready to be attached!</span>")
-
 			return
 		var/obj/item/assembly/shock_kit/A = new /obj/item/assembly/shock_kit( user )
 		A.icon = 'icons/obj/assemblies.dmi'
@@ -95,7 +93,6 @@
 				if(M)
 					M.moved_recently = 0
 		to_chat(M, "<span class='danger'>You feel a sharp shock!</span>")
-
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, M)
 		s.start()

@@ -20,7 +20,6 @@
 	proc/open(mob/user)
 		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 		to_chat(user, "<span class='notice'>You open [src] with an audible pop!</span>")
-
 		flags |= OPENCONTAINER
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
@@ -44,27 +43,23 @@
 	standard_feed_mob(var/mob/user, var/mob/target)
 		if(!is_open_container())
 			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-
 			return 1
 		return ..()
 
 	standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
 		if(!is_open_container())
 			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-
 			return 1
 		return ..()
 
 	standard_pour_into(var/mob/user, var/atom/target)
 		if(!is_open_container())
 			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-
 			return 1
 		return ..()
 
 	self_feed_message(var/mob/user)
 		to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
-
 
 	feed_sound(var/mob/user)
 		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
@@ -74,19 +69,14 @@
 			return
 		if(!reagents || reagents.total_volume == 0)
 			to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
-
 		else if (reagents.total_volume <= volume * 0.25)
 			to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
-
 		else if (reagents.total_volume <= volume * 0.66)
 			to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
-
 		else if (reagents.total_volume <= volume * 0.90)
 			to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
-
 		else
 			to_chat(user, "<span class='notice'>\The [src] is full!</span>")
-
 
 
 ////////////////////////////////////////////////////////////////////////////////

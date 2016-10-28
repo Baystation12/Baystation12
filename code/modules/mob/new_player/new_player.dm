@@ -124,11 +124,9 @@
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
 				to_chat(src, "<span class='notice'>Now teleporting.</span>")
-
 				observer.forceMove(O.loc)
 			else
 				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>")
-
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			announce_ghost_joinleave(src)
@@ -153,7 +151,6 @@
 
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
-
 			return
 		LateChoices() //show the latejoin job selection menu
 
@@ -164,11 +161,9 @@
 
 		if(!config.enter_allowed)
 			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
-
 			return
 		else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
 			to_chat(usr, "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>")
-
 			return
 
 		var/datum/species/S = all_species[client.prefs.species]
@@ -214,7 +209,6 @@
 			var/DBQuery/query_insert = dbcon.NewQuery(sql)
 			query_insert.Execute()
 			to_chat(usr, "<b>Thank you for your vote!</b>")
-
 			usr << browse(null,"window=privacypoll")
 
 	if(!ready && href_list["preference"])
@@ -253,7 +247,6 @@
 
 				if( (id_max - id_min) > 100 )	//Basic exploit prevention
 					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-
 					return
 
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
@@ -273,7 +266,6 @@
 
 				if( (id_max - id_min) > 100 )	//Basic exploit prevention
 					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-
 					return
 
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
@@ -299,11 +291,9 @@
 		return 0
 	if(!config.enter_allowed)
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
-
 		return 0
 	if(!IsJobAvailable(rank))
 		to_chat(src, alert("[rank] is not available. Please try another."))
-
 		return 0
 
 
@@ -323,7 +313,6 @@
 		// Just in case someone stole our position while we were waiting for input from alert() proc
 		if(!IsJobAvailable(rank))
 			to_chat(src, alert("[rank] is not available. Please try another."))
-
 			return 0
 
 	job_master.AssignRole(src, rank, 1)
@@ -499,12 +488,10 @@
 	if(!(S.spawn_flags & CAN_JOIN) && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play on the station."))
-
 		return 0
 	if(!is_alien_whitelisted(src, S))
 		if(show_alert)
 			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
-
 		return 0
 	return 1
 

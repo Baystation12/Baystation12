@@ -307,7 +307,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				break	//That's a suitable name!
 			to_chat(src, "Sorry, that [role]-name wasn't appropriate, please try another. It's possibly too long/short, has bad characters or is already taken.")
 
-
 		if(!newname)	//we'll stick with the oldname then
 			return
 

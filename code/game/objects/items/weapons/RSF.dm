@@ -20,14 +20,12 @@ RSF
 	if(..(user, 0))
 		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
 
-
 /obj/item/weapon/rsf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/rcd_ammo))
 
 		if ((stored_matter + 10) > 30)
 			to_chat(user, "The RSF can't hold any more matter.")
-
 			return
 
 		qdel(W)
@@ -35,7 +33,6 @@ RSF
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
-
 		return
 
 /obj/item/weapon/rsf/attack_self(mob/user as mob)
@@ -43,27 +40,22 @@ RSF
 	if (mode == 1)
 		mode = 2
 		to_chat(user, "Changed dispensing mode to 'Drinking Glass'")
-
 		return
 	if (mode == 2)
 		mode = 3
 		to_chat(user, "Changed dispensing mode to 'Paper'")
-
 		return
 	if (mode == 3)
 		mode = 4
 		to_chat(user, "Changed dispensing mode to 'Pen'")
-
 		return
 	if (mode == 4)
 		mode = 5
 		to_chat(user, "Changed dispensing mode to 'Dice Pack'")
-
 		return
 	if (mode == 5)
 		mode = 1
 		to_chat(user, "Changed dispensing mode to 'Cigarette'")
-
 		return
 
 /obj/item/weapon/rsf/afterattack(atom/A, mob/user as mob, proximity)
@@ -103,7 +95,6 @@ RSF
 			used_energy = 200
 
 	to_chat(user, "Dispensing [product ? product : "product"]...")
-
 	product.loc = get_turf(A)
 
 	if(isrobot(user))
@@ -113,4 +104,3 @@ RSF
 	else
 		stored_matter--
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
-

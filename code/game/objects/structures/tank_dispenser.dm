@@ -55,12 +55,10 @@
 			oxytanks.Add(I)
 			oxygentanks++
 			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-
 			if(oxygentanks < 5)
 				update_icon()
 		else
 			to_chat(user, "<span class='notice'>[src] is full.</span>")
-
 		updateUsrDialog()
 		return
 	if(istype(I, /obj/item/weapon/tank/phoron))
@@ -70,22 +68,18 @@
 			platanks.Add(I)
 			phorontanks++
 			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
-
 			if(oxygentanks < 6)
 				update_icon()
 		else
 			to_chat(user, "<span class='notice'>[src] is full.</span>")
-
 		updateUsrDialog()
 		return
 	if(istype(I, /obj/item/weapon/wrench))
 		if(anchored)
 			to_chat(user, "<span class='notice'>You lean down and unwrench [src].</span>")
-
 			anchored = 0
 		else
 			to_chat(user, "<span class='notice'>You wrench [src] into place.</span>")
-
 			anchored = 1
 		return
 
@@ -104,7 +98,6 @@
 					O = new /obj/item/weapon/tank/oxygen(loc)
 				O.loc = loc
 				to_chat(usr, "<span class='notice'>You take [O] out of [src].</span>")
-
 				oxygentanks--
 				update_icon()
 		if(href_list["phoron"])
@@ -117,7 +110,6 @@
 					P = new /obj/item/weapon/tank/phoron(loc)
 				P.loc = loc
 				to_chat(usr, "<span class='notice'>You take [P] out of [src].</span>")
-
 				phorontanks--
 				update_icon()
 		add_fingerprint(usr)

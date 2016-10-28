@@ -57,7 +57,6 @@
 	..()
 	to_chat(user, "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>")
 
-
 /obj/machinery/organ_printer/RefreshParts()
 	print_delay = initial(print_delay)
 	max_stored_matter = 0
@@ -80,7 +79,6 @@
 
 	if(stored_matter <= products[choice][2])
 		to_chat(user, "<span class='warning'>There is not enough matter in \the [src].</span>")
-
 		return
 
 	stored_matter -= products[choice][2]
@@ -141,18 +139,15 @@
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
 		if((max_stored_matter-stored_matter) < matter_amount_per_sheet)
 			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
-
 			return
 		var/obj/item/stack/S = W
 		var/space_left = max_stored_matter - stored_matter
 		var/sheets_to_take = min(S.amount, Floor(space_left/matter_amount_per_sheet))
 		if(sheets_to_take <= 0)
 			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
-
 			return
 		stored_matter = min(max_stored_matter, stored_matter + (sheets_to_take*matter_amount_per_sheet))
 		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>")
-
 		S.use(sheets_to_take)
 		return
 	return ..()
@@ -205,12 +200,10 @@
 	if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
 		if((max_stored_matter - stored_matter) < amount_per_slab)
 			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
-
 			return
 		stored_matter += amount_per_slab
 		user.drop_item()
 		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>")
-
 		qdel(W)
 		return
 	// DNA sample from syringe.
@@ -220,7 +213,6 @@
 		if(injected && injected.data)
 			loaded_dna = injected.data
 			to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
-
 		return
 	return ..()
 // END FLESH ORGAN PRINTER

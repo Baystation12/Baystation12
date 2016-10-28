@@ -149,7 +149,6 @@
 			if(shuttle.at_station())
 				if (shuttle.forbidden_atoms_check())
 					to_chat(usr, "<span class='warning'>For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons.</span>")
-
 				else
 					shuttle.launch(src)
 			else
@@ -166,7 +165,6 @@
 
 			if(P.cost > supply_controller.points && activeterminal)
 				to_chat(usr, "<span class='notice'>Not enough points to add to cart. Adding to request list.</span>")
-
 				notenoughpoints = 1
 
 			var/timeout = world.time + 1 MINUTE
@@ -235,7 +233,6 @@
 				if(SO.ordernum == id)
 					if(SO.object.cost > supply_controller.points)
 						to_chat(usr, "<span class='warning'>Not enough points to purchase \the [SO.object.name]!</span>")
-
 						return TRUE
 					supply_controller.requestlist -= SO
 					supply_controller.shoppinglist += SO
@@ -300,7 +297,6 @@
 /obj/machinery/computer/supply/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		to_chat(user, "<span class='notice'>Special supplies unlocked.</span>")
-
 		emagged = 1 // why this wasn't set before is beyond me
 		generateSupplyList()
 		return 1

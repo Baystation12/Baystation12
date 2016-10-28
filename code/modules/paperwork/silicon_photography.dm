@@ -27,7 +27,6 @@
 		C.connected_ai.aiCamera.injectaialbum(p.copy(1), " (synced from [C.name])")
 		to_chat(C.connected_ai, "<span class='unconscious'>Image uploaded by [C.name]</span>")
 		to_chat(usr, "<span class='unconscious'>Image synced to remote database</span>")//feedback to the Cyborg player that the picture was taken
-
 	else
 		to_chat(usr, "<span class='unconscious'>Image recorded</span>")
 	// Always save locally
@@ -60,7 +59,6 @@
 
 	selection.show(usr)
 	to_chat(usr, selection.desc)
-
 /obj/item/device/camera/siliconcam/proc/deletepicture(obj/item/device/camera/siliconcam/cam)
 	var/selection = selectpicture(cam)
 
@@ -69,7 +67,6 @@
 
 	aipictures -= selection
 	to_chat(usr, "<span class='unconscious'>Local image deleted</span>")
-
 //Capture Proc for AI / Robot
 /mob/living/silicon/ai/can_capture_turf(turf/T)
 	var/mob/living/silicon/ai = src
@@ -84,15 +81,12 @@
 /obj/item/device/camera/siliconcam/proc/camera_mode_off()
 	src.in_camera_mode = 0
 	to_chat(usr, "<B>Camera Mode deactivated</B>")
-
 /obj/item/device/camera/siliconcam/proc/camera_mode_on()
 	src.in_camera_mode = 1
 	to_chat(usr, "<B>Camera Mode activated</B>")
-
 /obj/item/device/camera/siliconcam/ai_camera/printpicture(mob/user, obj/item/weapon/photo/p)
 	injectaialbum(p)
 	to_chat(usr, "<span class='unconscious'>Image recorded</span>")
-
 /obj/item/device/camera/siliconcam/robot_camera/printpicture(mob/user, obj/item/weapon/photo/p)
 	injectmasteralbum(p)
 

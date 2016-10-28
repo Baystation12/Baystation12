@@ -226,7 +226,6 @@
 
 		to_chat(usr, "<span class='notice'>[shuttle_tag] main computer recieved message.</span>")
 
-
 		if(MS.at_origin)
 			MS.announce_arrival()
 			MS.last_departed = MS.origin

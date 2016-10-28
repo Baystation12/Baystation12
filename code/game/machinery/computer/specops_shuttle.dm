@@ -89,7 +89,6 @@ var/specops_shuttle_timeleft = 0
 		var/mob/M = locate(/mob) in T
 		to_chat(M, "<span class='notice'>You have arrived at [boss_name]. Operation has ended!</span>")
 
-
 	specops_shuttle_at_station = 0
 
 	for(var/obj/machinery/computer/specops_shuttle/S in world)
@@ -137,7 +136,6 @@ var/specops_shuttle_timeleft = 0
 
 	if (!specops_can_move())
 		to_chat(usr, "<span class='warning'>The Special Operations shuttle is unable to leave.</span>")
-
 		return
 
 	//Begin Marauder launchpad.
@@ -234,7 +232,6 @@ var/specops_shuttle_timeleft = 0
 		var/mob/M = locate(/mob) in T
 		to_chat(M, "<span class='notice'>You have arrived to [station_name]. Commence operation!</span>")
 
-
 	for(var/obj/machinery/computer/specops_shuttle/S in world)
 		S.specops_shuttle_timereset = world.time + SPECOPS_RETURN_DELAY
 
@@ -254,11 +251,9 @@ var/specops_shuttle_timeleft = 0
 /obj/machinery/computer/specops_shuttle/emag_act(var/remaining_charges, var/mob/user)
 	to_chat(user, "<span class='notice'>The electronic systems in this console are far too advanced for your primitive hacking peripherals.</span>")
 
-
 /obj/machinery/computer/specops_shuttle/attack_hand(var/mob/user as mob)
 	if(!allowed(user))
 		to_chat(user, "<span class='warning'>Access Denied.</span>")
-
 		return
 
 	if(..())
@@ -290,17 +285,13 @@ var/specops_shuttle_timeleft = 0
 
 		if (!specops_can_move())
 			to_chat(usr, "<span class='notice'>[boss_name] will not allow the Special Operations shuttle to return yet.</span>")
-
 			if(world.timeofday <= specops_shuttle_timereset)
 				if (((world.timeofday - specops_shuttle_timereset)/10) > 60)
 					to_chat(usr, "<span class='notice'>[-((world.timeofday - specops_shuttle_timereset)/10)/60] minutes remain!</span>")
-
 				to_chat(usr, "<span class='notice'>[-(world.timeofday - specops_shuttle_timereset)/10] seconds remain!</span>")
-
 			return
 
 		to_chat(usr, "<span class='notice'>The Special Operations shuttle will arrive at [boss_name] in [(SPECOPS_MOVETIME/10)] seconds.</span>")
-
 
 		temp += "Shuttle departing.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		updateUsrDialog()
@@ -315,11 +306,9 @@ var/specops_shuttle_timeleft = 0
 
 		if (!specops_can_move())
 			to_chat(usr, "<span class='warning'>The Special Operations shuttle is unable to leave.</span>")
-
 			return
 
 		to_chat(usr, "<span class='notice'>The Special Operations shuttle will arrive on [station_name] in [(SPECOPS_MOVETIME/10)] seconds.</span>")
-
 
 		temp += "Shuttle departing.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		updateUsrDialog()

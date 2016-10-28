@@ -71,7 +71,6 @@
 
 		if(src.broken)
 			to_chat(user, "<span class='warning'>It appears to be broken.</span>")
-
 			return
 		if(!I || !I.registered_name)	return
 		if(src.allowed(user) || !src.registered_name || (istype(I) && (src.registered_name == I.registered_name)))
@@ -85,7 +84,6 @@
 				src.desc = "Owned by [I.registered_name]."
 		else
 			to_chat(user, "<span class='warning'>Access Denied</span>")
-
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "The locker has been sliced open by [user] with \an [W]!", "You hear metal being sliced and sparks flying."))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -95,7 +93,6 @@
 			playsound(src.loc, "sparks", 50, 1)
 	else
 		to_chat(user, "<span class='warning'>Access Denied</span>")
-
 	return
 	
 /obj/structure/closet/secure_closet/personal/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback, var/audible_feedback)
@@ -118,10 +115,8 @@
 		src.add_fingerprint(usr)
 		if (src.locked || !src.registered_name)
 			to_chat(usr, "<span class='warning'>You need to unlock it first.</span>")
-
 		else if (src.broken)
 			to_chat(usr, "<span class='warning'>It appears to be broken.</span>")
-
 		else
 			if (src.opened)
 				if(!src.close())

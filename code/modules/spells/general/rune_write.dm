@@ -23,7 +23,6 @@
 	var/r = input(user, "Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 	if(locate(/obj/effect/rune) in user.loc)
 		to_chat(user, "<span class='warning'>There is already a rune in this location.</span>")
-
 		return
 
 	var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
@@ -177,5 +176,4 @@
 					R.check_icon()
 	else
 		to_chat(user, "<span class='warning'> You do not have enough space to write a proper rune.</span>")
-
 	return

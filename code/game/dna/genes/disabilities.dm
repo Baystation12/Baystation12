@@ -36,7 +36,6 @@
 		M.sdisabilities|=sdisability
 	if(activation_message)
 		to_chat(M, "<span class='warning'>[activation_message]</span>")
-
 	else
 		testing("[name] has no activation message.")
 
@@ -49,7 +48,6 @@
 		M.sdisabilities &= (~sdisability)
 	if(deactivation_message)
 		to_chat(M, "<span class='warning'>[deactivation_message]</span>")
-
 	else
 		testing("[name] has no deactivation message.")
 

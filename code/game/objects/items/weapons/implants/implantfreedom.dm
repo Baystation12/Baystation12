@@ -21,7 +21,6 @@
 				src.uses--
 				to_chat(source, "You feel a faint click.")
 
-
 	proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
 		if(!user.handcuffed)
 			return 0
@@ -33,7 +32,6 @@
 	implanted(mob/living/carbon/source)
 		source.mind.store_memory("Freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 		to_chat(source, "The implanted freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
-
 		return 1
 
 	get_data()

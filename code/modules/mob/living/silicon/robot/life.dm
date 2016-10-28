@@ -60,7 +60,6 @@
 	else
 		if (src.has_power)
 			to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
-
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
@@ -315,7 +314,6 @@
 		if(killswitch_time <= 0)
 			if(src.client)
 				to_chat(src, "<span class='danger'>Killswitch Activated</span>")
-
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -327,7 +325,6 @@
 		if(weaponlock_time <= 0)
 			if(src.client)
 				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
-
 			weapon_lock = 0
 			weaponlock_time = 120
 

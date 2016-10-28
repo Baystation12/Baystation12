@@ -217,7 +217,6 @@
 						   "purrs."))
 	else
 		to_chat(usr, "<span class='notice'>[src] ignores you.</span>")
-
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~

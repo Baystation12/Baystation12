@@ -84,7 +84,6 @@ field_generator power level display
 		if(get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
 			if(src.active >= 1)
 				to_chat(user, "You are unable to turn off the [src.name] once it is online.")
-
 				return 1
 			else
 				user.visible_message("[user.name] turns on the [src.name]", \
@@ -96,14 +95,12 @@ field_generator power level display
 				src.add_fingerprint(user)
 	else
 		to_chat(user, "The [src] needs to be firmly secured to the floor first.")
-
 		return
 
 
 /obj/machinery/field_generator/attackby(obj/item/W, mob/user)
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
-
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		switch(state)
@@ -140,7 +137,6 @@ field_generator power level display
 						if(!src || !WT.isOn()) return
 						state = 2
 						to_chat(user, "You weld the field generator to the floor.")
-
 				else
 					return
 			if(2)
@@ -153,7 +149,6 @@ field_generator power level display
 						if(!src || !WT.isOn()) return
 						state = 1
 						to_chat(user, "You cut the [src] free from the floor.")
-
 				else
 					return
 	else

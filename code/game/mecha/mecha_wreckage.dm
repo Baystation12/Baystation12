@@ -34,7 +34,6 @@
 		var/obj/item/weapon/weldingtool/WT = W
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")
-
 			return
 		if (!isemptylist(welder_salvage) && WT.remove_fuel(0,user))
 			var/type = prob(70)?pick(welder_salvage):null
@@ -46,15 +45,12 @@
 				salvage_num--
 			else
 				to_chat(user, "You failed to salvage anything valuable from [src].")
-
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-
 			return
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")
-
 			return
 		else if(!isemptylist(wirecutters_salvage))
 			var/type = prob(70)?pick(wirecutters_salvage):null
@@ -64,7 +60,6 @@
 				salvage_num--
 			else
 				to_chat(user, "You failed to salvage anything valuable from [src].")
-
 	if(istype(W, /obj/item/weapon/crowbar))
 		if(!isemptylist(crowbar_salvage))
 			var/obj/S = pick(crowbar_salvage)
@@ -75,7 +70,6 @@
 			return
 		else
 			to_chat(user, "You don't see anything that can be pried with [W].")
-
 	else
 		..()
 	return

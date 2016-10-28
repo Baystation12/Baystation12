@@ -176,7 +176,6 @@ proc/get_radio_key_from_channel(var/channel)
 
 	if(is_muzzled())
 		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
-
 		return
 
 	message = trim_left(message)
@@ -251,7 +250,6 @@ proc/get_radio_key_from_channel(var/channel)
 
 	for(var/mob/M in listening)
 		to_chat(M, speech_bubble)
-
 		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 
 	for(var/obj/O in listening_obj)

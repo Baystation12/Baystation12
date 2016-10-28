@@ -13,12 +13,10 @@
 	if(query_list.len < 2)
 		if(query_list.len > 0)
 			to_chat(usr, "<span class='warning'>SDQL: Too few discrete tokens in query \"[query_text]\". Please check your syntax and try again.</span>")
-
 		return
 
 	if(!(lowertext(query_list[1]) in list("select", "delete", "update")))
 		to_chat(usr, "<span class='warning'>SDQL: Unknown query type: \"[query_list[1]]\" in query \"[query_text]\". Please check your syntax and try again.</span>")
-
 		return
 
 	var/list/types = list()
@@ -58,7 +56,6 @@
 
 				else
 					to_chat(usr, "<span class='warning'>SDQL: Invalid set parameter in query \"[query_text]\". Please check your syntax and try again.</span>")
-
 					return
 
 				i += 3
@@ -68,7 +65,6 @@
 
 		if(set_vars.len < 1)
 			to_chat(usr, "<span class='warning'>SDQL: Invalid or missing set in query \"[query_text]\". Please check your syntax and try again.</span>")
-
 			return
 
 	var/list/where = list()
@@ -219,7 +215,6 @@
 			var/compare_op = where[i++]
 			if(!(compare_op in list("==", "=", "<>", "<", ">", "<=", ">=", "!=")))
 				to_chat(usr, "<span class='warning'>SDQL: Unknown comparison operator [compare_op] in where clause following [v] in query \"[query_text]\". Please check your syntax and try again.</span>")
-
 				return
 
 			var/j
@@ -271,13 +266,10 @@
 /*
 	for(var/t in types)
 		to_chat(usr, "Type: [t]")
-
 	for(var/t in from)
 		to_chat(usr, "From: [t]")
-
 	for(var/t in set_vars)
 		to_chat(usr, "Set: [t] = [set_vars[t]]")
-
 	if(where.len)
 		var/where_str = ""
 		for(var/t in where)
@@ -285,18 +277,13 @@
 
 		to_chat(usr, "Where: [where_str]")
 
-
 	to_chat(usr, "From objects:")
-
 	for(var/datum/t in from_objs)
 		to_chat(usr, t)
 
-
 	to_chat(usr, "Objects:")
-
 	for(var/datum/t in objs)
 		to_chat(usr, t)
-
 */
 	switch(lowertext(query_list[1]))
 		if("delete")
@@ -359,7 +346,6 @@
 
 	else
 		to_chat(usr, "<span class='warning'>SDQL: Sorry, equations not yet supported :(</span>")
-
 		return null
 
 
@@ -445,7 +431,6 @@
 		else if(char == "'")
 			if(word != "")
 				to_chat(usr, "<span class=*'warning'>SDQL: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</span>")
-
 				return null
 
 			word = "'"
@@ -466,7 +451,6 @@
 
 			if(i > len)
 				to_chat(usr, "<span class='warning'>SDQL: You have an error in your SDQL syntax, unmatched ' in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</span>")
-
 				return null
 
 			query_list += "[word]'"
@@ -475,7 +459,6 @@
 		else if(char == "\"")
 			if(word != "")
 				to_chat(usr, "<span class='warning'>SDQL: You have an error in your SDQL syntax, unexpected \" in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</span>")
-
 				return null
 
 			word = "\""
@@ -496,7 +479,6 @@
 
 			if(i > len)
 				to_chat(usr, "<span class='warning'>SDQL: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</span>")
-
 				return null
 
 			query_list += "[word]\""

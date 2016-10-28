@@ -17,9 +17,7 @@
 	log_ability_use(src, "became malfunctioning AI")
 	// And greet user with some OOC info.
 	to_chat(user, "You are malfunctioning, you do not have to follow any laws.")
-
 	to_chat(user, "Use ai-help command to view relevant information about your abilities")
-
 
 // Safely remove malfunction status, fixing hacked APCs and resetting variables.
 /mob/living/silicon/ai/proc/stop_malf(var/loud = 1)
@@ -48,7 +46,6 @@
 	// Let them know.
 	if(loud)
 		to_chat(user, "You are no longer malfunctioning. Your abilities have been removed.")
-
 
 // Called every tick. Checks if AI is malfunctioning. If yes calls Process on research datum which handles all logic.
 /mob/living/silicon/ai/proc/malf_process()
@@ -94,16 +91,13 @@
 	if(!hardware || !istype(hardware, /datum/malf_hardware/apu_gen))
 		if(!shutup)
 			to_chat(src, "You do not have an APU generator and you shouldn't have this verb. Report this.")
-
 		return
 	if(hardware_integrity() < 50)
 		if(!shutup)
 			to_chat(src, "<span class='notice'>Starting APU... <b>FAULT</b>(System Damaged)</span>")
-
 		return
 	if(!shutup)
 		to_chat(src, "Starting APU... ONLINE")
-
 	log_ability_use(src, "Switched to APU Power", null, 0)
 	APU_power = 1
 
@@ -116,7 +110,6 @@
 		APU_power = 0
 		if(!shutup)
 			to_chat(src, "Shutting down APU... DONE")
-
 		log_ability_use(src, "Switched to external power", null, 0)
 
 // Returns percentage of AI's remaining backup capacitor charge (maxhealth - oxyloss).

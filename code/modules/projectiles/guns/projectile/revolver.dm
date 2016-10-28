@@ -56,7 +56,6 @@
 	if(!M.mind)	return 0
 	if(!M.mind.assigned_role == "Detective")
 		to_chat(M, "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>")
-
 		return 0
 
 	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
@@ -64,7 +63,6 @@
 	if(src && input && !M.stat && in_range(M,src))
 		name = input
 		to_chat(M, "You name the gun [input]. Say hello to your new friend.")
-
 		return 1
 
 // Blade Runner pistol.

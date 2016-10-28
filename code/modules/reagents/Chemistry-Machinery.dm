@@ -51,13 +51,11 @@
 
 		if(src.beaker)
 			to_chat(user, "A beaker is already loaded into the machine.")
-
 			return
 		src.beaker = B
 		user.drop_item()
 		B.loc = src
 		to_chat(user, "You add the beaker to the machine!")
-
 		src.updateUsrDialog()
 		icon_state = "mixer1"
 
@@ -65,14 +63,12 @@
 
 		if(src.loaded_pill_bottle)
 			to_chat(user, "A pill bottle is already loaded into the machine.")
-
 			return
 
 		src.loaded_pill_bottle = B
 		user.drop_item()
 		B.loc = src
 		to_chat(user, "You add the pill bottle into the dispenser slot!")
-
 		src.updateUsrDialog()
 	return
 
@@ -345,7 +341,6 @@
 
 	if(holdingitems && holdingitems.len >= limit)
 		to_chat(usr, "The machine cannot hold anymore items.")
-
 		return 1
 
 	if(!istype(O))
@@ -365,22 +360,18 @@
 
 		if(failed)
 			to_chat(user, "Nothing in the plant bag is usable.")
-
 			return 1
 
 		if(!O.contents.len)
 			to_chat(user, "You empty \the [O] into \the [src].")
-
 		else
 			to_chat(user, "You fill \the [src] from \the [O].")
-
 
 		src.updateUsrDialog()
 		return 0
 
 	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.total_volume))
 		to_chat(user, "\The [O] is not suitable for blending.")
-
 		return 1
 
 	user.remove_from_mob(O)

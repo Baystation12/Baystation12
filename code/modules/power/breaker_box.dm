@@ -33,32 +33,25 @@
 
 /obj/machinery/power/breakerbox/examine(mob/user)
 	to_chat(user, "Large machine with heavy duty switching circuits used for advanced grid control")
-
 	if(on)
 		to_chat(user, "<span class='good'>It seems to be online.</span>")
-
 	else
 		to_chat(user, "<span class='warning'>It seems to be offline.</span>")
-
 
 /obj/machinery/power/breakerbox/attack_ai(mob/user)
 	if(update_locked)
 		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
-
 		return
 
 	if(busy)
 		to_chat(user, "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>")
-
 		return
 
 	busy = 1
 	to_chat(user, "<span class='good'>Updating power settings..</span>")
-
 	if(do_after(user, 50, src))
 		set_state(!on)
 		to_chat(user, "<span class='good'>Update Completed. New setting:[on ? "on": "off"]</span>")
-
 		update_locked = 1
 		spawn(600)
 			update_locked = 0
@@ -68,12 +61,10 @@
 /obj/machinery/power/breakerbox/attack_hand(mob/user)
 	if(update_locked)
 		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
-
 		return
 
 	if(busy)
 		to_chat(user, "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>")
-
 		return
 
 	busy = 1
@@ -96,7 +87,6 @@
 		if(newtag)
 			RCon_tag = newtag
 			to_chat(user, "<span class='notice'>You changed the RCON tag to: [newtag]</span>")
-
 
 
 

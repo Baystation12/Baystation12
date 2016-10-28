@@ -31,7 +31,6 @@
 		if(..(user, 1))
 			to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
-
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(locked)
 			if (istype(W, /obj/item/weapon/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
@@ -136,7 +135,6 @@
 		overlays += image('icons/obj/storage.dmi', icon_locking)
 		locked = 0
 		to_chat(user, (feedback ? feedback : "You short out the lock of \the [src]."))
-
 		return 1
 
 // -----------------------------
@@ -158,7 +156,6 @@
 	attack_hand(mob/user as mob)
 		if ((src.loc == user) && (src.locked == 1))
 			to_chat(usr, "<span class='warning'>[src] is locked and cannot be opened!</span>")
-
 		else if ((src.loc == user) && (!src.locked))
 			src.open(usr)
 		else

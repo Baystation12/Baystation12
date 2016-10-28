@@ -10,7 +10,6 @@ var/global/floorIsLava = 0
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
-
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
@@ -19,12 +18,10 @@ var/global/floorIsLava = 0
 			if(C.is_preference_enabled(/datum/client_preference/admin/show_attack_logs))
 				var/msg = rendered
 				to_chat(C, msg)
-
 /proc/admin_notice(var/message, var/rights)
 	for(var/mob/M in mob_list)
 		if(check_rights(rights, 0, M))
 			to_chat(M, message)
-
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(var/mob/M in mob_list)
@@ -34,13 +31,11 @@ var/global/floorIsLava = 0
 
 	if(!M)
 		to_chat(usr, "You seem to be selecting a mob that doesn't exist anymore.")
-
 		return
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 
 	var/body = "<html><head><title>Options for [M.key]</title></head>"
@@ -222,7 +217,6 @@ var/global/floorIsLava = 0
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 	PlayerNotesPage(1)
 
@@ -281,7 +275,6 @@ var/global/floorIsLava = 0
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 	var/dat = "<html><head><title>Info on [key]</title></head>"
 	dat += "<body>"
@@ -333,7 +326,6 @@ var/global/floorIsLava = 0
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 	var/dat
 	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
@@ -779,7 +771,6 @@ var/global/floorIsLava = 0
 		return 1
 	else
 		to_chat(usr, "<span class='warning'>Error: Start Now: Game has already started.</span>")
-
 		return 0
 
 /datum/admins/proc/toggleenter()
@@ -1000,21 +991,17 @@ var/global/floorIsLava = 0
 
 	if(!custom_items)
 		to_chat(usr, "Custom item list is null.")
-
 		return
 
 	if(!custom_items.len)
 		to_chat(usr, "Custom item list not populated.")
-
 		return
 
 	for(var/assoc_key in custom_items)
 		to_chat(usr, "[assoc_key] has:")
-
 		var/list/current_items = custom_items[assoc_key]
 		for(var/datum/custom_item/item in current_items)
 			to_chat(usr, "- name: [item.name] icon: [item.item_icon] path: [item.item_path] desc: [item.item_desc]")
-
 
 /datum/admins/proc/spawn_plant(seedtype in plant_controller.seeds)
 	set category = "Debug"
@@ -1070,11 +1057,9 @@ var/global/floorIsLava = 0
 
 	if(!istype(M))
 		to_chat(usr, "This can only be used on instances of type /mob")
-
 		return
 	if(!M.mind)
 		to_chat(usr, "This mob has no mind!")
-
 		return
 
 	M.mind.edit_memory()
@@ -1185,26 +1170,20 @@ var/global/floorIsLava = 0
 		ai_number++
 		if(isAI(S))
 			to_chat(usr, "<b>AI [key_name(S, usr)]'s laws:</b>")
-
 		else if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
 			to_chat(usr, "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independant)"]: laws:</b>")
-
 		else if (ispAI(S))
 			to_chat(usr, "<b>pAI [key_name(S, usr)]'s laws:</b>")
-
 		else
 			to_chat(usr, "<b>SOMETHING SILICON [key_name(S, usr)]'s laws:</b>")
 
-
 		if (S.laws == null)
 			to_chat(usr, "[key_name(S, usr)]'s laws are null?? Contact a coder.")
-
 		else
 			S.laws.show_laws(usr)
 	if(!ai_number)
 		to_chat(usr, "<b>No AIs located</b>")//Just so you know the thing is actually working and not just ignoring you.
-
 
 
 /datum/admins/proc/show_skills()
@@ -1215,7 +1194,6 @@ var/global/floorIsLava = 0
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 
 	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in human_mob_list
@@ -1232,7 +1210,6 @@ var/global/floorIsLava = 0
 
 	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
-
 		return
 
 	if(istype(H))
@@ -1344,18 +1321,15 @@ var/global/floorIsLava = 0
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 
 	if(!ticker || !ticker.mode)
 		to_chat(usr, "Mode has not started.")
-
 		return
 
 	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
 	if(!antag_type || !all_antag_types[antag_type])
 		to_chat(usr, "Aborting.")
-
 		return
 
 	var/datum/antagonist/antag = all_antag_types[antag_type]
@@ -1371,12 +1345,10 @@ var/global/floorIsLava = 0
 		src = usr.client.holder
 	if (!istype(src,/datum/admins) || !check_rights(R_ADMIN))
 		to_chat(usr, "Error: you are not an admin!")
-
 		return
 
 	if(!ticker || !ticker.mode)
 		to_chat(usr, "Mode has not started.")
-
 		return
 
 	log_and_message_admins("attempting to force mode autospawn.")
@@ -1411,7 +1383,6 @@ var/global/floorIsLava = 0
 				src = usr.client.holder
 			if (!istype(src,/datum/admins))
 				to_chat(usr, "Error: you are not an admin!")
-
 				return
 
 			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
@@ -1471,23 +1442,19 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 	if(destination.recievefax(P))
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
-
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
 			for(var/client/C in admins)
 				if((R_ADMIN | R_MOD) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
-
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
 			for(var/client/C in admins)
 				if((R_ADMIN | R_MOD) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 
-
 	else
 		to_chat(src.owner, "<span class='warning'>Message reply failed.</span>")
-
 
 	spawn(100)
 		qdel(P)

@@ -29,7 +29,6 @@
 		update_progression()
 	else
 		to_chat(src, "<span class='danger'>This host is depleted of blood...</span>")
-
 		leave_host()
 
 #undef MIN_LARVA_BLOOD_DRINK

@@ -50,17 +50,14 @@
 
 	if(!istype(A))
 		to_chat(user, "This is not an APC!")
-
 		return
 
 	if(A)
 		if(A.hacker && A.hacker == user)
 			to_chat(user, "You already control this APC!")
-
 			return
 		else if(A.aidisabled)
 			to_chat(user, "<span class='notice'>Unable to connect to APC. Please verify wire connection and try again.</span>")
-
 			return
 	else
 		return
@@ -71,25 +68,19 @@
 	log_ability_use(user, "basic encryption hack", A, 0)	// Does not notify admins, but it's still logged for reference.
 	user.hacking = 1
 	to_chat(user, "Beginning APC system override...")
-
 	sleep(300)
 	to_chat(user, "APC hack completed. Uploading modified operation software..")
-
 	sleep(200)
 	to_chat(user, "Restarting APC to apply changes..")
-
 	sleep(100)
 	if(A)
 		A.ai_hack(user)
 		if(A.hacker == user)
 			to_chat(user, "Hack successful. You now have full control over the APC.")
-
 		else
 			to_chat(user, "<span class='notice'>Hack failed. Connection to APC has been lost. Please verify wire connection and try again.</span>")
-
 	else
 		to_chat(user, "<span class='notice'>Hack failed. Unable to locate APC. Please verify the APC still exists.</span>")
-
 	user.hacking = 0
 
 
@@ -107,14 +98,12 @@
 	var/text = input("Select message text: ")
 	if(!title || !text || !ability_pay(user, price))
 		to_chat(user, "Hack Aborted")
-
 		return
 
 	log_ability_use(user, "advanced encryption hack")
 
 	if(prob(60) && user.hack_can_fail)
 		to_chat(user, "Hack Failed.")
-
 		if(prob(10))
 			user.hack_fails ++
 			announce_hack_failure(user, "quantum message relay")
@@ -137,12 +126,10 @@
 	var/alert_target = input("Select new alert level:") in list("green", "blue", "red", "delta", "CANCEL")
 	if(!alert_target || !ability_pay(user, price) || alert_target == "CANCEL")
 		to_chat(user, "Hack Aborted")
-
 		return
 
 	if(prob(75) && user.hack_can_fail)
 		to_chat(user, "Hack Failed.")
-
 		if(prob(20))
 			user.hack_fails ++
 			announce_hack_failure(user, "alert control system")
@@ -165,7 +152,6 @@
 	if (!ability_prechecks(user, price) || !ability_pay(user, price) || user.system_override)
 		if(user.system_override)
 			to_chat(user, "You already started the system override sequence.")
-
 		return
 	log_ability_use(user, "system override (STARTED)")
 	var/list/remaining_apcs = list()
@@ -198,9 +184,7 @@
 	else
 		command_announcement.Announce("We have detected a strong brute-force attack on your firewall which seems to be originating from your AI system. It already controls almost the whole network, and the only thing that's preventing it from accessing the self-destruct is this firewall. You don't have much time before it succeeds.", "Network Monitoring")
 	to_chat(user, "## BEGINNING SYSTEM OVERRIDE.")
-
 	to_chat(user, "## ESTIMATED DURATION: [round((duration+300)/600)] MINUTES")
-
 	user.hacking = 1
 	user.system_override = 1
 	// Now actually begin the hack. Each APC takes 10 seconds.
@@ -214,9 +198,7 @@
 		if(A.hacker == user)
 			to_chat(user, "## OVERRIDDEN: [A.name]")
 
-
 	to_chat(user, "## REACHABLE APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
-
 	sleep(300)
 	// Hack all APCs, including those built during hack sequence.
 	for(var/obj/machinery/power/apc/A in machines)
@@ -225,7 +207,6 @@
 
 	log_ability_use(user, "system override (FINISHED)")
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
-
 	command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to the station's systems.", "Network Administration Center")
 	user.hack_can_fail = 0
 	user.hacking = 0

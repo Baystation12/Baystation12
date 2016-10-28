@@ -36,16 +36,13 @@
 	var/area/A = loc.loc
 	if (!istype(loc, /turf/simulated/floor))
 		to_chat(usr, "<span class='danger'>\The [src] cannot be placed on this spot.</span>")
-
 		return
 	if (A.requires_power == 0 || A.name == "Space")
 		to_chat(usr, "<span class='danger'>\The [src] cannot be placed in this area.</span>")
-
 		return
 
 	if(gotwallitem(loc, ndir))
 		to_chat(usr, "<span class='danger'>There's already an item on this wall!</span>")
-
 		return
 
 	new build_machine_type(loc, ndir, src)

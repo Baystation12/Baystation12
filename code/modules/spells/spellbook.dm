@@ -48,16 +48,13 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	if(user.mind)
 		if(!wizards.is_antagonist(user.mind))
 			to_chat(user, "You can't make heads or tails of this book.")
-
 			return
 		if(spellbook.book_flags & LOCKED)
 			if(user.mind.special_role == "apprentice")
 				to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>")
-
 				return
 			else
 				to_chat(user, "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways.")
-
 
 	interact(user)
 
@@ -72,12 +69,10 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			var/obj/item/stack/S = I
 			if(S.amount < S.max_amount)
 				to_chat(usr, "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>")
-
 				return
 		user.remove_from_mob(I)
 		qdel(I)
 	to_chat(user, "<span class='notice'>Your sacrifice was accepted!</span>")
-
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -198,7 +193,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			return
 		if(uses < spellbook.spells[path])
 			to_chat(usr, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
-
 			return
 		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
@@ -235,7 +229,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			feedback_add_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
 			to_chat(usr, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
-
 
 	src.interact(usr)
 

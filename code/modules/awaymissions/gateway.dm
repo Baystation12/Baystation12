@@ -83,11 +83,9 @@ obj/machinery/gateway/centerstation/process()
 	if(!powered())		return
 	if(!awaygate)
 		to_chat(user, "<span class='notice'>Error: No destination found.</span>")
-
 		return
 	if(world.time < wait)
 		to_chat(user, "<span class='notice'>Error: Warpspace triangulation in progress. Estimated time to completion: [round(((wait - world.time) / 10) / 60)] minutes.</span>")
-
 		return
 
 	for(var/obj/machinery/gateway/G in linked)
@@ -136,7 +134,6 @@ obj/machinery/gateway/centerstation/process()
 /obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/multitool))
 		to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
-
 		return
 
 /////////////////////////////////////Away////////////////////////
@@ -189,7 +186,6 @@ obj/machinery/gateway/centerstation/process()
 	if(linked.len != 8)	return
 	if(!stationgate)
 		to_chat(user, "<span class='notice'>Error: No destination found.</span>")
-
 		return
 
 	for(var/obj/machinery/gateway/G in linked)

@@ -59,7 +59,6 @@
 			cards += P
 		qdel(O)
 		to_chat(user, "You place your cards on the bottom of \the [src].")
-
 		return
 	..()
 
@@ -79,7 +78,6 @@
 
 	if(!cards.len)
 		to_chat(usr, "There are no cards in the deck.")
-
 		return
 
 	var/obj/item/weapon/hand/H
@@ -100,7 +98,6 @@
 	user.visible_message("\The [user] draws a card.")
 	to_chat(user, "It's the [P].")
 
-
 /obj/item/weapon/deck/verb/deal_card()
 
 	set category = "Object"
@@ -112,7 +109,6 @@
 
 	if(!cards.len)
 		to_chat(usr, "There are no cards in the deck.")
-
 		return
 
 	var/list/players = list()
@@ -169,7 +165,6 @@
 
 	if(!cards.len)
 		to_chat(usr, "There are no cards in the deck.")
-
 		return
 
 	deal_at(usr, over)
@@ -242,10 +237,8 @@
 	..(user)
 	if((!concealed || src.loc == user) && cards.len)
 		to_chat(user, "It contains: ")
-
 		for(var/datum/playingcard/P in cards)
 			to_chat(user, "The [P.name].")
-
 
 /obj/item/weapon/hand/update_icon(var/direction = 0)
 

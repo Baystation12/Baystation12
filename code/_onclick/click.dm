@@ -176,7 +176,6 @@
 
 	if(!ticker)
 		to_chat(src, "You cannot attack people before the game has started.")
-
 		return 0
 
 	if(stat)
@@ -306,7 +305,6 @@
 		handle_regular_hud_updates()
 	else
 		to_chat(src, "<span class='warning'>You're out of energy!  You need food!</span>")
-
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

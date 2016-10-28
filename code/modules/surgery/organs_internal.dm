@@ -256,7 +256,6 @@
 
 	if((affected.robotic >= ORGAN_ROBOT) && !(O.robotic >= ORGAN_ROBOT))
 		to_chat(user, "<span class='danger'>You cannot install a naked organ into a robotic body.</span>")
-
 		return SURGERY_FAILURE
 
 	if(!target.species)
@@ -269,14 +268,12 @@
 
 	if(O.damage > (O.max_damage * 0.75))
 		to_chat(user, "<span class='warning'>\The [O.organ_tag] [o_is] in no state to be transplanted.</span>")
-
 		return SURGERY_FAILURE
 
 	if(!target.internal_organs_by_name[O.organ_tag])
 		organ_missing = 1
 	else
 		to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>")
-
 		return SURGERY_FAILURE
 
 	if(O && affected.organ_tag == O.parent_organ)
@@ -287,11 +284,9 @@
 			organ_missing = 1
 		else
 			to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>")
-
 			return SURGERY_FAILURE
 	else
 		to_chat(user, "<span class='warning'>\The [O.organ_tag] [o_do] normally go in \the [affected.name].</span>")
-
 		return SURGERY_FAILURE
 
 	return ..() && organ_missing && organ_compatible

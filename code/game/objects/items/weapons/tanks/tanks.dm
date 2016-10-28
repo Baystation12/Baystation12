@@ -73,7 +73,6 @@ var/list/global/tank_gauge_cache = list()
 				descriptive = "cold"
 		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
 
-
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (istype(src.loc, /obj/item/assembly))
@@ -182,7 +181,6 @@ var/list/global/tank_gauge_cache = list()
 			location.internal = null
 			location.internals.icon_state = "internal0"
 			to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
-
 			if (location.internals)
 				location.internals.icon_state = "internal0"
 		else
@@ -197,12 +195,10 @@ var/list/global/tank_gauge_cache = list()
 			if(can_open_valve)
 				location.internal = src
 				to_chat(user, "<span class='notice'>You open \the [src] valve.</span>")
-
 				if (location.internals)
 					location.internals.icon_state = "internal1"
 			else
 				to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
-
 
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)

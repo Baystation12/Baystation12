@@ -67,7 +67,6 @@
 	else if(istype(mover, /mob/living))
 		if(prob(50))
 			to_chat(mover, "<span class='warning'>You get stuck in \the [src] for a moment.</span>")
-
 			return 0
 	else if(istype(mover, /obj/item/projectile))
 		return prob(30)
@@ -232,7 +231,6 @@
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				to_chat(O.owner, "<span class='notice'>Your [O.name] itches...</span>")
-
 	else if(prob(1))
 		src.visible_message("<span class='notice'>\The [src] skitters.</span>")
 

@@ -185,4 +185,3 @@
 	..(user)
 	if(panel_open)
 		to_chat(user, "The maintenance hatch is open.")
-

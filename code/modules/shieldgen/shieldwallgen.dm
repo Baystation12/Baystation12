@@ -84,15 +84,12 @@
 /obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
 	if(anchored != 1)
 		to_chat(user, "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>")
-
 		return 1
 	if(src.locked && !istype(user, /mob/living/silicon))
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
-
 		return 1
 	if(power != 1)
 		to_chat(user, "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>")
-
 		return 1
 
 	src.ui_interact(user)
@@ -204,20 +201,17 @@
 	if(istype(W, /obj/item/weapon/wrench))
 		if(active)
 			to_chat(user, "Turn off the field generator first.")
-
 			return
 
 		else if(anchored == 0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You secure the external reinforcing bolts to the floor.")
-
 			src.anchored = 1
 			return
 
 		else if(anchored == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You undo the external reinforcing bolts.")
-
 			src.anchored = 0
 			return
 
@@ -225,7 +219,6 @@
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
-
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return

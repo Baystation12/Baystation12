@@ -95,7 +95,6 @@
 		cell.update_icon()
 
 		to_chat(user, "You remove \the [src.cell].")
-
 		src.cell = null
 		update_icon()
 		return
@@ -109,17 +108,14 @@
 		turn_on()
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
-
 /obj/item/device/suit_cooling_unit/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/screwdriver))
 		if(cover_open)
 			cover_open = 0
 			to_chat(user, "You screw the panel into place.")
-
 		else
 			cover_open = 1
 			to_chat(user, "You unscrew the panel.")
-
 		update_icon()
 		return
 
@@ -127,13 +123,11 @@
 		if(cover_open)
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
-
 			else
 				user.drop_item()
 				W.forceMove(src)
 				cell = W
 				to_chat(user, "You insert the [cell].")
-
 		update_icon()
 		return
 
@@ -174,15 +168,11 @@
 
 	if (on)
 		to_chat(user, "It's switched on and running.")
-
 	else
 		to_chat(user, "It is switched off.")
-
 
 	if (cover_open)
 		to_chat(user, "The panel is open.")
 
-
 	if (cell)
 		to_chat(user, "The charge meter reads [round(cell.percent())]%.")
-

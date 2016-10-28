@@ -13,7 +13,6 @@
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
 		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
-
 		return
 
 	user.set_machine(src)
@@ -65,7 +64,6 @@
 
 	if(!L.len)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
-
 		return
 
 	if(user && user.buckled)

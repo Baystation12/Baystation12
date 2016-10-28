@@ -529,7 +529,6 @@ proc/display_roundstart_logout_report()
 	for(var/mob/M in mob_list)
 		if(M.client && M.client.holder)
 			to_chat(M, msg)
-
 proc/get_nt_opposed()
 	var/list/dudes = list()
 	for(var/mob/living/carbon/human/man in player_list)

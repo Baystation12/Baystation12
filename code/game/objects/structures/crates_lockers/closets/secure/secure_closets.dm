@@ -47,26 +47,21 @@
 /obj/structure/closet/secure_closet/proc/togglelock(mob/user as mob)
 	if(src.opened)
 		to_chat(user, "<span class='notice'>Close the locker first.</span>")
-
 		return
 	if(src.broken)
 		to_chat(user, "<span class='warning'>The locker appears to be broken.</span>")
-
 		return
 	if(user.loc == src)
 		to_chat(user, "<span class='notice'>You can't reach the lock from inside.</span>")
-
 		return
 	if(src.allowed(user))
 		src.locked = !src.locked
 		for(var/mob/O in viewers(user, 3))
 			if((O.client && !( O.blinded )))
 				to_chat(O, "<span class='notice'>The locker has been [locked ? null : "un"]locked by [user].</span>")
-
 		update_icon()
 	else
 		to_chat(user, "<span class='notice'>Access Denied</span>")
-
 
 /obj/structure/closet/secure_closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
@@ -78,7 +73,6 @@
 				src.MouseDrop_T(G.affecting, user)	//act like they were dragged onto the closet
 			else
 				to_chat(user, "<span class='notice'>The locker is too small to stuff [G.affecting] into!</span>")
-
 		if(isrobot(user))
 			return
 		if(W.loc != user) // This should stop mounted modules ending up outside the module.
@@ -134,7 +128,6 @@
 		src.togglelock(usr)
 	else
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
-
 
 /obj/structure/closet/secure_closet/update_icon()//Putting the welded stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()

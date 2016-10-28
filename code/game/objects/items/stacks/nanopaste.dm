@@ -24,7 +24,6 @@
 		else
 			to_chat(user, "<span class='notice'>All [R]'s systems are nominal.</span>")
 
-
 	if (istype(M,/mob/living/carbon/human))		//Repairing robolimbs
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
@@ -33,7 +32,6 @@
 			if (S && (S.robotic >= ORGAN_ROBOT))
 				if(!S.get_damage())
 					to_chat(user, "<span class='notice'>Nothing to fix here.</span>")
-
 				else if(can_use(1))
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					S.heal_damage(15, 15, robo_repair = 1)

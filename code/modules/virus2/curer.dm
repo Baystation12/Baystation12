@@ -20,7 +20,6 @@
 	if(istype(I,/obj/item/weapon/virusdish))
 		if(virusing)
 			to_chat(user, "<b>The pathogen materializer is still recharging..</b>")
-
 			return
 		var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)
 

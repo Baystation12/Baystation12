@@ -29,7 +29,6 @@
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
-
 		return
 	if (!istype(M))
 		return
@@ -39,26 +38,21 @@
 		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 		if(!affected)
 			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
-
 			return
 		else if(affected.robotic >= ORGAN_ROBOT)
 			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
-
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
 	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
-
 	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
-
 
 	if(M.reagents)
 		var/contained = reagentlist()
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 		admin_inject_log(user, M, src, contained, trans)
 		to_chat(user, "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>")
-
 
 	return
 
@@ -93,7 +87,5 @@
 	..(user)
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
-
 	else
 		to_chat(user, "<span class='notice'>It is spent.</span>")
-

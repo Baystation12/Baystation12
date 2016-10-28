@@ -168,22 +168,18 @@
 /obj/machinery/artifact/attack_hand(var/mob/user as mob)
 	if (get_dist(user, src) > 1)
 		to_chat(user, "<span class='warning'>You can't reach \the [src] from here.</span>")
-
 		return
 	if(ishuman(user) && user:gloves)
 		to_chat(user, "<b>You touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
-
 		return
 
 	src.add_fingerprint(user)
 
 	if(my_effect.trigger == TRIGGER_TOUCH)
 		to_chat(user, "<b>You touch [src].</b>")
-
 		my_effect.ToggleActivate()
 	else
 		to_chat(user, "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
-
 
 	if(prob(25) && secondary_effect && secondary_effect.trigger == TRIGGER_TOUCH)
 		secondary_effect.ToggleActivate(0)
@@ -270,7 +266,6 @@
 
 			if(warn)
 				to_chat(M, "<b>You accidentally touch [src].</b>")
-
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)

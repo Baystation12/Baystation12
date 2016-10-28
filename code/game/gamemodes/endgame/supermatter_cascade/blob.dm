@@ -59,7 +59,6 @@
 		return attack_hand(user)
 	else
 		to_chat(user, "<span class = \"warning\">What the fuck are you doing?</span>")
-
 	return
 
 // /vg/: Don't let ghosts fuck with this.

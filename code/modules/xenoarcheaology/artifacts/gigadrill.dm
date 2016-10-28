@@ -14,12 +14,10 @@
 		active = 0
 		icon_state = "gigadrill"
 		to_chat(user, "<span class='notice'>You press a button and \the [src] slowly spins down.</span>")
-
 	else
 		active = 1
 		icon_state = "gigadrill_mov"
 		to_chat(user, "<span class='notice'>You press a button and \the [src] shudders to life.</span>")
-
 
 /obj/machinery/giga_drill/Bump(atom/A)
 	if(active && !drilling_turf)

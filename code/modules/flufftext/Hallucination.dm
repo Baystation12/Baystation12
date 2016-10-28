@@ -29,14 +29,12 @@ mob/living/carbon/proc/handle_hallucinations()
 			if(0 to 15)
 				//Screwy HUD
 //				to_chat(src, "Screwy HUD")
-
 				hal_screwyhud = pick(1,2,3,3,4,4)
 				spawn(rand(100,250))
 					hal_screwyhud = 0
 			if(16 to 25)
 				//Strange items
 //				to_chat(src, "Traitor Items")
-
 				if(!halitem)
 					halitem = new
 					var/list/slots_free = list(ui_lhand,ui_rhand)
@@ -86,7 +84,6 @@ mob/living/carbon/proc/handle_hallucinations()
 			if(26 to 40)
 				//Flashes of danger
 //				to_chat(src, "Danger Flash")
-
 				if(!halimage)
 					var/list/possible_points = list()
 					for(var/turf/simulated/floor/F in view(src,world.view))
@@ -97,15 +94,12 @@ mob/living/carbon/proc/handle_hallucinations()
 						switch(rand(1,3))
 							if(1)
 //								to_chat(src, "Space")
-
 								halimage = image('icons/turf/space.dmi',target,"[rand(1,25)]",TURF_LAYER)
 							if(2)
 //								to_chat(src, "Fire")
-
 								halimage = image('icons/effects/fire.dmi',target,"1",TURF_LAYER)
 							if(3)
 //								to_chat(src, "C4")
-
 								halimage = image('icons/obj/assemblies.dmi',target,"plastic-explosive2",OBJ_LAYER+0.01)
 
 
@@ -118,7 +112,6 @@ mob/living/carbon/proc/handle_hallucinations()
 			if(41 to 65)
 				//Strange audio
 //				to_chat(src, "Strange Audio")
-
 				switch(rand(1,12))
 					if(1) src << 'sound/machines/airlock.ogg'
 					if(2)
@@ -155,7 +148,6 @@ mob/living/carbon/proc/handle_hallucinations()
 			if(66 to 70)
 				//Flashes of danger
 //				to_chat(src, "Danger Flash")
-
 				if(!halbody)
 					var/list/possible_points = list()
 					for(var/turf/simulated/floor/F in view(src,world.view))
@@ -268,7 +260,6 @@ proc/check_panel(mob/M)
 			if(prob(30))
 				for(var/mob/O in oviewers(world.view , my_target))
 					to_chat(O, "<span class='danger'>[my_target] stumbles around.</span>")
-
 
 	New()
 		..()

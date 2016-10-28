@@ -141,7 +141,6 @@
 
 		if(!owner.co2_alert && word && prob(warn_prob))
 			to_chat(owner, "<span class='warning'>You feel [word].</span>")
-
 			owner.adjustOxyLoss(oxyloss)
 			owner.co2_alert = alert
 
@@ -191,7 +190,6 @@
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
 
-
 			switch(breath.temperature)
 				if(species.cold_level_3 to species.cold_level_2)
 					damage = COLD_GAS_DAMAGE_LEVEL_3
@@ -205,7 +203,6 @@
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
 				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
-
 
 			switch(breath.temperature)
 				if(species.heat_level_1 to species.heat_level_2)

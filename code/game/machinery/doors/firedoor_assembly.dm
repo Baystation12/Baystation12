@@ -19,14 +19,12 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 		var/obj/item/stack/cable_coil/cable = C
 		if (cable.get_amount() < 1)
 			to_chat(user, "<span class='warning'>You need one length of coil to wire \the [src].</span>")
-
 			return
 		user.visible_message("[user] wires \the [src].", "You start to wire \the [src].")
 		if(do_after(user, 40, src) && !wired && anchored)
 			if (cable.use(1))
 				wired = 1
 				to_chat(user, "<span class='notice'>You wire \the [src].</span>")
-
 
 	else if(istype(C, /obj/item/weapon/wirecutters) && wired )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -35,7 +33,6 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 		if(do_after(user, 40, src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You cut the wires!</span>")
-
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			wired = 0
 
@@ -49,7 +46,6 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			qdel(src)
 		else
 			to_chat(user, "<span class='warning'>You must secure \the [src] first!</span>")
-
 	else if(istype(C, /obj/item/weapon/wrench))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -69,6 +65,5 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 				qdel(src)
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
-
 	else
 		..(C, user)

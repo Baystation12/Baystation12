@@ -459,7 +459,6 @@
 /mob/proc/handle_spaceslipping()
 	if(prob(slip_chance(5)) && !buckled)
 		to_chat(src, "<span class='warning'>You slipped!</span>")
-
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
 		return 1

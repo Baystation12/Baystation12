@@ -68,7 +68,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(.)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
 
-
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
 	icon_state = "pda-m"
@@ -250,7 +249,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	set src in usr
 	if(usr.stat == 2)
 		to_chat(usr, "You can't send PDA messages because you are dead!")
-
 		return
 	var/list/plist = available_pdas()
 	if (plist)
@@ -267,11 +265,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	set src in usr
 	if(usr.stat == 2)
 		to_chat(usr, "You can't do that because you are dead!")
-
 		return
 	toff = !toff
 	to_chat(usr, "<span class='notice'>PDA sender/receiver toggled [(toff ? "Off" : "On")]!</span>")
-
 
 
 /obj/item/device/pda/ai/verb/cmd_toggle_pda_silent()
@@ -280,11 +276,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	set src in usr
 	if(usr.stat == 2)
 		to_chat(usr, "You can't do that because you are dead!")
-
 		return
 	message_silent=!message_silent
 	to_chat(usr, "<span class='notice'>PDA ringer toggled [(message_silent ? "Off" : "On")]!</span>")
-
 
 
 /obj/item/device/pda/ai/verb/cmd_show_message_log()
@@ -293,7 +287,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	set src in usr
 	if(usr.stat == 2)
 		to_chat(usr, "You can't do that because you are dead!")
-
 		return
 	var/HTML = "<html><head><title>AI PDA Message Log</title></head><body>"
 	for(var/index in tnote)
@@ -717,7 +710,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (t)
 					if(src.hidden_uplink && hidden_uplink.check_trigger(U, lowertext(t), lowertext(lock_code)))
 						to_chat(U, "The PDA softly beeps.")
-
 						ui.close()
 					else
 						t = sanitize(t, 20)
@@ -766,7 +758,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						P.honkamt = (rand(15,20))
 				else
 					to_chat(U, "PDA not found.")
-
 			else
 				ui.close()
 				return 0
@@ -783,7 +774,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						P.newstone = "silence"
 				else
 					to_chat(U, "PDA not found.")
-
 			else
 				ui.close()
 				return 0
@@ -840,10 +830,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							detonate_act(P)
 					else
 						to_chat(U, "No charges left.")
-
 				else
 					to_chat(U, "PDA not found.")
-
 			else
 				U.unset_machine()
 				ui.close()
@@ -962,7 +950,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/mob/M = loc
 			M.put_in_hands(id)
 			to_chat(usr, "<span class='notice'>You remove the ID from the [name].</span>")
-
 		else
 			id.loc = get_turf(src)
 		id = null
@@ -995,12 +982,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(reception.message_server && (reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER)) // only send the message if it's stable
 		if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recipient have a broadcaster on their level?
 			to_chat(U, "ERROR: Cannot reach recipient.")
-
 			return
 		var/send_result = reception.message_server.send_pda_message("[P.owner]","[owner]","[t]")
 		if (send_result)
 			to_chat(U, "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'.")
-
 			return
 
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
@@ -1031,7 +1016,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		to_chat(U, "<span class='notice'>ERROR: Messaging server is not responding.</span>")
 
-
 /obj/item/device/pda/proc/new_info(var/beep_silent, var/message_tone, var/reception_message)
 	if (!beep_silent)
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
@@ -1048,7 +1032,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(L)
 		if(reception_message)
 			to_chat(L, reception_message)
-
 		nanomanager.update_user_uis(L, src) // Update the receiving user's PDA UI so that they can see the new message
 
 /obj/item/device/pda/proc/new_news(var/message)
@@ -1095,10 +1078,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		mode = 0
 		nanomanager.update_uis(src)
 		to_chat(usr, "<span class='notice'>You press the reset button on \the [src].</span>")
-
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
-
 
 /obj/item/device/pda/verb/verb_remove_id()
 	set category = "Object"
@@ -1113,10 +1094,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			remove_id()
 		else
 			to_chat(usr, "<span class='notice'>\The [src] does not have an ID in it.</span>")
-
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
-
 
 
 /obj/item/device/pda/verb/verb_remove_pen()
@@ -1135,15 +1114,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if(M.get_active_hand() == null)
 					M.put_in_hands(O)
 					to_chat(usr, "<span class='notice'>You remove \the [O] from \the [src].</span>")
-
 					return
 			O.loc = get_turf(src)
 		else
 			to_chat(usr, "<span class='notice'>\The [src] does not have a pen in it.</span>")
-
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
-
 
 /obj/item/device/pda/verb/verb_remove_cartridge()
 	set category = "Object"
@@ -1155,7 +1131,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if(isnull(cartridge))
 		to_chat(usr, "<span class='notice'>\The [src] does not have a cartridge in it.</span>")
-
 		return
 
 	if (can_use(usr))
@@ -1171,11 +1146,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if (cartridge.radio)
 			cartridge.radio.hostpda = null
 		to_chat(usr, "<span class='notice'>You remove \the [cartridge] from the [name].</span>")
-
 		cartridge = null
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
-
 
 /obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
 	if(choice == 1)
@@ -1206,7 +1179,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		user.drop_item()
 		cartridge.loc = src
 		to_chat(user, "<span class='notice'>You insert [cartridge] into [src].</span>")
-
 		nanomanager.update_uis(src) // update all UIs attached to src
 		if(cartridge.radio)
 			cartridge.radio.hostpda = src
@@ -1215,19 +1187,16 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/obj/item/weapon/card/id/idcard = C
 		if(!idcard.registered_name)
 			to_chat(user, "<span class='notice'>\The [src] rejects the ID.</span>")
-
 			return
 		if(!owner)
 			set_owner_rank_job(idcard.registered_name, idcard.rank, idcard.assignment)
 			name = "PDA-[owner] ([ownjob])"
 			to_chat(user, "<span class='notice'>Card scanned.</span>")
-
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
 			if(((src in user.contents) && (C in user.contents)) || (istype(loc, /turf) && in_range(src, user) && (C in user.contents)) )
 				if(id_check(user, 2))
 					to_chat(user, "<span class='notice'>You put the ID into \the [src]'s slot.</span>")
-
 					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
@@ -1236,18 +1205,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		C.loc = src
 		pai = C
 		to_chat(user, "<span class='notice'>You slot \the [C] into [src].</span>")
-
 		nanomanager.update_uis(src) // update all UIs attached to src
 	else if(istype(C, /obj/item/weapon/pen))
 		var/obj/item/weapon/pen/O = locate() in src
 		if(O)
 			to_chat(user, "<span class='notice'>There is already a pen in \the [src].</span>")
-
 		else
 			user.drop_item()
 			C.loc = src
 			to_chat(user, "<span class='notice'>You slide \the [C] into \the [src].</span>")
-
 	return
 
 /obj/item/device/pda/attack(mob/living/C as mob, mob/living/user as mob)
@@ -1284,22 +1250,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(2)
 				if (!istype(C:dna, /datum/dna))
 					to_chat(user, "<span class='notice'>No fingerprints found on [C]</span>")
-
 				else
 					to_chat(user, text("<span class='notice'>\The [C]'s Fingerprints: [md5(C:dna.uni_identity)]</span>"))
-
 				if ( !(C:blood_DNA) )
 					to_chat(user, "<span class='notice'>No blood found on [C]</span>")
-
 					if(C:blood_DNA)
 						qdel(C:blood_DNA)
 				else
 					to_chat(user, "<span class='notice'>Blood found on [C]. Analysing...</span>")
-
 					spawn(15)
 						for(var/blood in C:blood_DNA)
 							to_chat(user, "<span class='notice'>Blood type: [C:blood_DNA[blood]]\nDNA: [blood]</span>")
-
 
 			if(4)
 				for (var/mob/O in viewers(C, null))
@@ -1322,16 +1283,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if(A.reagents.reagent_list.len > 0)
 					var/reagents_length = A.reagents.reagent_list.len
 					to_chat(user, "<span class='notice'>[reagents_length] chemical agent[reagents_length > 1 ? "s" : ""] found.</span>")
-
 					for (var/re in A.reagents.reagent_list)
 						to_chat(user, "<span class='notice'>    [re]</span>")
-
 				else
 					to_chat(user, "<span class='notice'>No active chemical agents found in [A].</span>")
-
 			else
 				to_chat(user, "<span class='notice'>No significant chemical agents found in [A].</span>")
-
 
 		if(5)
 			analyze_gases(A, user)
@@ -1388,7 +1345,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 
-
 /obj/item/device/pda/proc/explode() //This needs tuning. //Sure did.
 	if(!src.detonate) return
 	var/turf/T = get_turf(src.loc)
@@ -1418,7 +1374,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if (toff)
 		to_chat(usr, "Turn on your receiver in order to send messages.")
-
 		return
 
 	for (var/obj/item/device/pda/P in PDAs)

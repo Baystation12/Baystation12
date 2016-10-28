@@ -135,7 +135,6 @@ obj/item/weapon/gun/energy/retro
 	if(ishuman(M))
 		if(!istype(M.wear_suit, required_vest))
 			to_chat(M, "<span class='warning'>You need to be wearing your laser tag vest!</span>")
-
 			return 0
 	return ..()
 

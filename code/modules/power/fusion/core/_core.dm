@@ -99,7 +99,6 @@ var/list/fusion_cores = list()
 
 	if(owned_field)
 		to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
-
 		return
 
 	if(istype(W, /obj/item/device/multitool))

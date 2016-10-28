@@ -406,11 +406,9 @@ var/world_topic_spam_protect_time = world.timeofday
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 		to_chat(C, message)
 
-
 		for(var/client/A in admins)
 			if(A != C)
 				to_chat(A, amessage)
-
 		return "Message Successful"
 
 	else if(copytext(T,1,6) == "notes")
@@ -467,7 +465,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in clients)
 			to_chat(C, link("byond://[config.server]"))
-
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")

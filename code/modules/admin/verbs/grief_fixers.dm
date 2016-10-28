@@ -18,7 +18,6 @@
 		S.power = 0
 	to_chat(usr, "\[1/5\] - Supermatter depowered")
 
-
 	// Remove all gases from all pipenets
 	for(var/datum/pipe_network/PN in pipe_networks)
 		for(var/datum/gas_mixture/G in PN.gases)
@@ -27,13 +26,11 @@
 
 	to_chat(usr, "\[2/5\] - All pipenets purged of gas.")
 
-
 	// Delete all zones.
 	for(var/zone/Z in world)
 		Z.c_invalidate()
 
 	to_chat(usr, "\[3/5\] - All ZAS Zones removed.")
-
 
 	var/list/unsorted_overlays = list()
 	for(var/id in gas_data.tile_overlay)
@@ -45,7 +42,6 @@
 		T.zone = null
 
 	to_chat(usr, "\[4/5\] - All turfs reset to roundstart values.")
-
 
 	qdel(air_master)
 	air_master = new

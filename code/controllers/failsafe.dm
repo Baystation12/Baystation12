@@ -34,11 +34,9 @@ var/datum/controller/failsafe/Failsafe
 								lighting_defcon++
 							if(4)
 								to_chat(admins, "<font color='red' size='2'><b>Warning. The Lighting Controller has not fired in the last [lighting_defcon*processing_interval] ticks. Automatic restart in [processing_interval] ticks.</b></font>")
-
 								lighting_defcon = 5
 							if(5)
 								to_chat(admins, "<font color='red' size='2'><b>Warning. The Lighting Controller has still not fired within the last [lighting_defcon*processing_interval] ticks. Killing and restarting...</b></font>")
-
 								new /datum/controller/lighting()	//replace the old lighting_controller (hence killing the old one's process)
 								lighting_controller.process()		//Start it rolling again
 								lighting_defcon = 0

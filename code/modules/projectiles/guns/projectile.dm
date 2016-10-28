@@ -103,11 +103,9 @@
 			if(MAGAZINE)
 				if((ispath(allowed_magazines) && !istype(A, allowed_magazines)) || (islist(allowed_magazines) && !is_type_in_list(A, allowed_magazines)))
 					to_chat(user, "<span class='warning'>\The [A] won't fit into [src].</span>")
-
 					return
 				if(ammo_magazine)
 					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>")//already a magazine here
-
 
 					return
 				user.remove_from_mob(AM)
@@ -118,7 +116,6 @@
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
 					to_chat(user, "<span class='warning'>[src] is full!</span>")
-
 					return
 				var/count = 0
 				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
@@ -139,7 +136,6 @@
 			return //incompatible
 		if(loaded.len >= max_shells)
 			to_chat(user, "<span class='warning'>[src] is full.</span>")
-
 			return
 
 		user.remove_from_mob(C)
@@ -183,7 +179,6 @@
 			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
-
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
@@ -219,12 +214,9 @@
 	..(user)
 	if(is_jammed)
 		to_chat(user, "<span class='warning'>It looks jammed.</span>")
-
 	if(ammo_magazine)
 		to_chat(user, "It has \a [ammo_magazine] loaded.")
-
 	to_chat(user, "Has [getAmmo()] round\s remaining.")
-
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()

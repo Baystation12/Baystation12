@@ -65,22 +65,18 @@
 	if(..(user, 2))
 		to_chat(user, "It has [uses] light\s remaining.")
 
-
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
-
 			return
 		else if(G.use(1))
 			AddUses(16) //Autolathe converts 1 sheet into 16 lights.
 			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
-
 			return
 		else
 			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
-
 
 	if(istype(W, /obj/item/weapon/light))
 		var/obj/item/weapon/light/L = W
@@ -88,13 +84,11 @@
 			if(uses < max_uses)
 				AddUses(1)
 				to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
-
 				user.drop_item()
 				qdel(L)
 				return
 		else
 			to_chat(user, "You need a working light.")
-
 			return
 
 /obj/item/device/lightreplacer/attack_self(mob/user)
@@ -104,11 +98,9 @@
 		if(R.emagged)
 			src.Emag()
 			to_chat(usr, "You shortcircuit the [src].")
-
 			return
 	*/
 	to_chat(usr, "It has [uses] lights remaining.")
-
 
 /obj/item/device/lightreplacer/update_icon()
 	icon_state = "lightreplacer[emagged]"
@@ -134,13 +126,10 @@
 
 	if(target.status == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
-
 	else if(!CanUse(U))
 		to_chat(U, failmsg)
-
 	else if(Use(U))
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
-
 
 		if(target.status != LIGHT_EMPTY)
 			target.remove_bulb()

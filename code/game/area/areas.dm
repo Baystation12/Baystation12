@@ -314,7 +314,6 @@ var/list/mob/living/forced_ambiance_list = new
 			H.AdjustWeakened(3)
 		to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
 
-
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()
 	if(theAPC.operating)

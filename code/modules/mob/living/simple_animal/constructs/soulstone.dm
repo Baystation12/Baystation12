@@ -21,12 +21,10 @@
 		return..()
 	if(jobban_isbanned(M, MODE_CULTIST))
 		to_chat(user, "<span class='warning'>This person's soul is too corrupt and cannot be captured!</span>")
-
 		return..()
 
 	if(M.has_brain_worms()) //Borer stuff - RR
 		to_chat(user, "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>")
-
 		return..()
 
 	admin_attack_log(user, M, "Used \the [src] to capture the victim's soul.", "Had their soul captured with \a [src].", "captured the soul, using \a [src], of")
@@ -74,7 +72,6 @@
 				A.status_flags &= ~GODMODE
 				A.canmove = 1
 				to_chat(A, "<b>You have been released from your prison, but you are still bound to [U.name]'s will. Help them suceed in their goals at all costs.</b>")
-
 				A.forceMove(U.loc)
 				A.cancel_camera()
 				src.icon_state = "soulstone"
@@ -106,19 +103,15 @@
 		return;
 	if(src.imprinted != "empty")
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The soul stone has already been imprinted with [src.imprinted]'s mind!")
-
 		return
 	if ((T.health + T.halloss) > config.health_threshold_crit && T.stat != DEAD)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: Kill or maim the victim first!")
-
 		return
 	if(T.client == null)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The soul has already fled it's mortal frame.")
-
 		return
 	if(src.contents.len)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The soul stone is full! Use or free an existing soul to make room.")
-
 		return
 
 	for(var/obj/item/W in T)
@@ -153,11 +146,8 @@
 	src.icon_state = "soulstone2"
 	src.name = "Soul Stone: [S.real_name]"
 	to_chat(S, "Your soul has been captured! You are now bound to [U.name]'s will, help them suceed in their goals at all costs.")
-
 	to_chat(U, "<span class='notice'>Capture successful!</span> : [T.real_name]'s soul has been ripped from their body and stored within the soul stone.")
-
 	to_chat(U, "The soulstone has been imprinted with [S.real_name]'s mind, it will no longer react to other souls.")
-
 	src.imprinted = "[S.name]"
 	qdel(T)
 
@@ -166,15 +156,12 @@
 		return;
 	if (T.stat == DEAD)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The shade has already been banished!")
-
 		return
 	if(src.contents.len)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The soul stone is full! Use or free an existing soul to make room.")
-
 		return
 	if(T.name != src.imprinted)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The soul stone has already been imprinted with [src.imprinted]'s mind!")
-
 		return
 
 	T.loc = src //put shade in stone
@@ -184,14 +171,11 @@
 	src.icon_state = "soulstone2"
 
 	to_chat(T, "Your soul has been recaptured by the soul stone, its arcane energies are reknitting your ethereal form")
-
 	to_chat(U, "<span class='notice'>Capture successful!</span> : [T.name]'s has been recaptured and stored within the soul stone.")
-
 /obj/item/device/soulstone/proc/transfer_construct(var/obj/structure/constructshell/T,var/mob/U)
 	var/mob/living/simple_animal/shade/A = locate() in src
 	if(!A)
 		to_chat(U, "<span class='danger'>Capture failed!</span>: The soul stone is empty! Go kill someone!")
-
 		return;
 	var/construct_class = alert(U, "Please choose which type of construct you wish to create.",,"Juggernaut","Wraith","Artificer")
 	switch(construct_class)
@@ -202,9 +186,7 @@
 				cult.add_antagonist(Z.mind)
 			qdel(T)
 			to_chat(Z, "<B>You are playing a Juggernaut. Though slow, you can withstand extreme punishment, and rip apart enemies and walls alike.</B>")
-
 			to_chat(Z, "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>")
-
 			Z.cancel_camera()
 			qdel(src)
 		if("Wraith")
@@ -214,9 +196,7 @@
 				cult.add_antagonist(Z.mind)
 			qdel(T)
 			to_chat(Z, "<B>You are playing a Wraith. Though relatively fragile, you are fast, deadly, and even able to phase through walls.</B>")
-
 			to_chat(Z, "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>")
-
 			Z.cancel_camera()
 			qdel(src)
 		if("Artificer")
@@ -226,9 +206,7 @@
 				cult.add_antagonist(Z.mind)
 			qdel(T)
 			to_chat(Z, "<B>You are playing an Artificer. You are incredibly weak and fragile, but you are able to construct fortifications, repair allied constructs (by clicking on them), and even create new constructs</B>")
-
 			to_chat(Z, "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>")
-
 			Z.cancel_camera()
 			qdel(src)
 /obj/item/device/soulstone/proc/transfer_soul(var/choice as text, var/target, var/mob/U as mob).

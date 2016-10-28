@@ -480,12 +480,10 @@
 	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, "<span class='warning'>You lose focus...</span>")
-
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, "<span class='notice'>Your mind feels focused and undivided.</span>")
-
 
 /datum/reagent/citalopram
 	name = "Citalopram"
@@ -503,12 +501,10 @@
 	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
-
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, "<span class='notice'>Your mind feels stable... a little stable.</span>")
-
 
 /datum/reagent/paroxetine
 	name = "Paroxetine"
@@ -525,16 +521,13 @@
 	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels much less stable...</span>")
-
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			if(prob(90))
 				to_chat(M, "<span class='notice'>Your mind feels much more stable.</span>")
-
 			else
 				to_chat(M, "<span class='warning'>Your mind breaks apart...</span>")
-
 				M.hallucination += 200
 
 /datum/reagent/nicotine
@@ -556,12 +549,10 @@
 	if(volume <= 0.02 && dose >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 		data = world.time
 		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
-
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 			data = world.time
 			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
-
 
 /datum/reagent/menthol
 	name = "Menthol"
@@ -581,7 +572,6 @@
 	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
 		data = world.time
 		to_chat(M, "<span class='notice'>You feel faintly sore in the throat.</span>")
-
 
 /datum/reagent/rezadone
 	name = "Rezadone"

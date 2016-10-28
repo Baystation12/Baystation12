@@ -230,7 +230,6 @@ Class Procs:
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon)))
 		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
-
 		return 1
 /*
 	//distance checks are made by atom/proc/DblClick
@@ -244,7 +243,6 @@ Class Procs:
 			return 1
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
-
 			return 1
 
 	src.add_fingerprint(user)
@@ -301,7 +299,6 @@ Class Procs:
 	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 	panel_open = !panel_open
 	to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of \the [src].</span>")
-
 	update_icon()
 	return 1
 
@@ -327,16 +324,13 @@ Class Procs:
 						component_parts += B
 						B.loc = null
 						to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
-
 						break
 			update_icon()
 			RefreshParts()
 	else
 		to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
-
 		for(var/var/obj/item/C in component_parts)
 			to_chat(user, "<span class='notice'>    [C.name]</span>")
-
 	return 1
 
 /obj/machinery/proc/dismantle()

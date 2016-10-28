@@ -156,7 +156,6 @@
 	if(istype(W, /obj/item/weapon/am_containment))
 		if(fueljar)
 			to_chat(user, "<span class='warning'>There is already a [fueljar] inside!</span>")
-
 			return
 		fueljar = W
 		user.remove_from_mob(W)

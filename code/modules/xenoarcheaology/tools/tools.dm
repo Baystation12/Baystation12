@@ -10,7 +10,6 @@
 	var/turf/T = get_turf(src)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>")
 
-
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -90,16 +89,12 @@
 
 		if(nearestTargetDist >= 0)
 			to_chat(user, "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
-
 		else if(nearestSimpleTargetDist >= 0)
 			to_chat(user, "Small anomaly detected in a radius of [nearestSimpleTargetDist]m.")
-
 		else
 			to_chat(user, "Background radiation levels detected.")
-
 	else
 		to_chat(user, "Scanning array is recharging.")
-
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
@@ -146,7 +141,6 @@
 
 			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
 
-
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
 		if(B.artifact_find)
@@ -164,7 +158,6 @@
 			positive_locations.Add(D)
 
 			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
-
 
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)

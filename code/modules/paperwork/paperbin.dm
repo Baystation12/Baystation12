@@ -24,11 +24,9 @@
 					temp = H.organs_by_name[BP_L_HAND]
 				if(temp && !temp.is_usable())
 					to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
-
 					return
 
 				to_chat(user, "<span class='notice'>You pick up the [src].</span>")
-
 				user.put_in_hands(src)
 
 	return
@@ -41,7 +39,6 @@
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
 			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
-
 			return
 	var/response = ""
 	if(!papers.len > 0)
@@ -72,10 +69,8 @@
 		P.loc = user.loc
 		user.put_in_hands(P)
 		to_chat(user, "<span class='notice'>You take [P] out of the [src].</span>")
-
 	else
 		to_chat(user, "<span class='notice'>[src] is empty!</span>")
-
 
 	add_fingerprint(user)
 	return
@@ -88,7 +83,6 @@
 	user.drop_item()
 	i.loc = src
 	to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
-
 	papers.Add(i)
 	update_icon()
 	amount++
@@ -98,10 +92,8 @@
 	if(get_dist(src, user) <= 1)
 		if(amount)
 			to_chat(user, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
-
 		else
 			to_chat(user, "<span class='notice'>There are no papers in the bin.</span>")
-
 	return
 
 

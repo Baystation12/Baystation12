@@ -122,10 +122,8 @@
 		if((in_range(src, user) || loc == user))
 			if(secured)
 				to_chat(user, "\The [src] is ready!")
-
 			else
 				to_chat(user, "\The [src] can be attached!")
-
 		return
 
 

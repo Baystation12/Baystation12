@@ -309,7 +309,6 @@
 		attacked += 10
 		if(prob(25))
 			to_chat(user, "<span class='danger'>[W] passes right through [src]!</span>")
-
 			return
 		if(Discipline && prob(50)) // wow, buddy, why am I getting attacked??
 			Discipline = 0

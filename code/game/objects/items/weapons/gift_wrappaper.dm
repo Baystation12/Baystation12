@@ -32,17 +32,14 @@
 		return
 	to_chat(user, "<span class='warning'>You can't move.</span>")
 
-
 /obj/effect/spresent/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
 	if (!istype(W, /obj/item/weapon/wirecutters))
 		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
-
 		return
 
 	to_chat(user, "<span class='notice'>You cut open the present.</span>")
-
 
 	for(var/mob/M in src) //Should only be one but whatever.
 		M.loc = src.loc
@@ -143,7 +140,6 @@
 		src.gift.add_fingerprint(user)
 	else
 		to_chat(user, "<span class='warning'>The gift was empty!</span>")
-
 	qdel(src)
 	return
 
@@ -158,18 +154,15 @@
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
 		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
-
 	if (W.w_class < ITEM_SIZE_HUGE)
 		if ((istype(user.l_hand, /obj/item/weapon/wirecutters) || istype(user.r_hand, /obj/item/weapon/wirecutters)))
 			var/a_used = W.get_storage_cost()
 			if (a_used == ITEM_SIZE_NO_CONTAINER)
 				to_chat(user, "<span class='warning'>You can't wrap that!</span>")//no gift-wrapping lit welders
 
-
 				return
 			if (src.amount < a_used)
 				to_chat(user, "<span class='warning'>You need more paper!</span>")
-
 				return
 			else
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/weapon/gift)) //No gift wrapping gifts!
@@ -188,17 +181,14 @@
 				return
 		else
 			to_chat(user, "<span class='warning'>You need scissors!</span>")
-
 	else
 		to_chat(user, "<span class='warning'>The object is FAR too large!</span>")
-
 	return
 
 
 /obj/item/weapon/wrapping_paper/examine(mob/user)
 	if(..(user, 1))
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
-
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)
 	if (!istype(target, /mob/living/carbon/human)) return
@@ -218,7 +208,5 @@
 
 		else
 			to_chat(user, "<span class='warning'>You need more paper.</span>")
-
 	else
 		to_chat(user, "They are moving around too much. A straightjacket would help.")
-

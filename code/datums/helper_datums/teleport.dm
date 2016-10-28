@@ -160,7 +160,6 @@
 		if(istype(teleatom, /mob/living))
 			var/mob/living/MM = teleatom
 			to_chat(MM, "<span class='danger'>The Bluespace interface on your [teleatom] interferes with the teleport!</span>")
-
 	return 1
 
 /datum/teleport/instant/science/teleportChecks()
@@ -180,7 +179,6 @@
 		if(istype(teleatom, /obj/mecha))
 			var/obj/mecha/MM = teleatom
 			to_chat(MM.occupant, "<span class='danger'>\The [MM] would not survive the jump to a location so far away!</span>")
-
 			return 0
 		if(!isemptylist(teleatom.search_contents_for(/obj/item/weapon/storage/backpack/holding)))
 			teleatom.visible_message("<span class='danger'>\The [teleatom] bounces off of the portal!</span>")

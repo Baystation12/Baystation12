@@ -48,12 +48,10 @@
 	var/turf/simulated/floor/F = A
 	if(!istype(F))
 		to_chat(user, "<span class='warning'>\The [src] can only be used on station flooring.</span>")
-
 		return
 
 	if(!F.flooring || !F.flooring.can_paint || F.broken || F.burnt)
 		to_chat(user, "<span class='warning'>\The [src] cannot paint broken or missing tiles.</span>")
-
 		return
 
 	var/list/decal_data = decals[decal]
@@ -68,12 +66,10 @@
 
 	if(config_error)
 		to_chat(user, "<span class='warning'>\The [src] flashes an error light. You might need to reconfigure it.</span>")
-
 		return
 
 	if(F.decals && F.decals.len > 5 && painting_decal != /obj/effect/floor_decal/reset)
 		to_chat(user, "<span class='warning'>\The [F] has been painted too much; you need to clear it off.</span>")
-
 		return
 
 	var/painting_dir = 0
@@ -119,7 +115,6 @@
 	..(user)
 	to_chat(user, "It is configured to produce the '[decal]' decal with a direction of '[paint_dir]' using [paint_colour] paint.")
 
-
 /obj/item/device/floor_painter/verb/choose_colour()
 	set name = "Choose Colour"
 	set desc = "Choose a floor painter colour."
@@ -132,7 +127,6 @@
 	if(new_colour && new_colour != paint_colour)
 		paint_colour = new_colour
 		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
-
 
 /obj/item/device/floor_painter/verb/choose_decal()
 	set name = "Choose Decal"
@@ -148,7 +142,6 @@
 		decal = new_decal
 		to_chat(usr, "<span class='notice'>You set \the [src] decal to '[decal]'.</span>")
 
-
 /obj/item/device/floor_painter/verb/choose_direction()
 	set name = "Choose Direction"
 	set desc = "Choose a floor painter direction."
@@ -162,4 +155,3 @@
 	if(new_dir && !isnull(paint_dirs[new_dir]))
 		paint_dir = new_dir
 		to_chat(usr, "<span class='notice'>You set \the [src] direction to '[paint_dir]'.</span>")
-

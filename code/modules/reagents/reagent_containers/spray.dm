@@ -34,7 +34,6 @@
 
 	if(reagents.total_volume < amount_per_transfer_from_this)
 		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
-
 		return
 
 	Spray_at(A, user, proximity)
@@ -76,11 +75,9 @@
 	spray_size = next_in_list(spray_size, spray_sizes)
 	to_chat(user, "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
 
-
 /obj/item/weapon/reagent_containers/spray/examine(mob/user)
 	if(..(user, 0) && loc == user)
 		to_chat(user, "[round(reagents.total_volume)] unit\s left.")
-
 	return
 
 /obj/item/weapon/reagent_containers/spray/verb/empty()
@@ -93,7 +90,6 @@
 		return
 	if(isturf(usr.loc))
 		to_chat(usr, "<span class='notice'>You empty \the [src] onto the floor.</span>")
-
 		reagents.splash(usr.loc, reagents.total_volume)
 
 //space cleaner
@@ -136,16 +132,13 @@
 	if(..(user, 1))
 		to_chat(user, "The safety is [safety ? "on" : "off"].")
 
-
 /obj/item/weapon/reagent_containers/spray/pepper/attack_self(var/mob/user)
 	safety = !safety
 	to_chat(usr, "<span class = 'notice'>You switch the safety [safety ? "on" : "off"].</span>")
 
-
 /obj/item/weapon/reagent_containers/spray/pepper/Spray_at(atom/A as mob|obj)
 	if(safety)
 		to_chat(usr, "<span class = 'warning'>The safety is on!</span>")
-
 		return
 	..()
 

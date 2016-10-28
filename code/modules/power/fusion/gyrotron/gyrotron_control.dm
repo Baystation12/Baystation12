@@ -18,7 +18,6 @@
 
 	if(!id_tag)
 		to_chat(user, "<span class='warning'>This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool.</span>")
-
 		return
 
 	var/dat = "<td><b>Gyrotron controller #[id_tag]</b>"
@@ -67,7 +66,6 @@
 		var/new_val = input("Enter new emission power level (1 - 50)", "Modifying power level", G.mega_energy) as num
 		if(!new_val)
 			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
-
 			return 1
 		G.mega_energy = Clamp(new_val, 1, 50)
 		G.active_power_usage = G.mega_energy * 1500
@@ -78,7 +76,6 @@
 		var/new_val = input("Enter new emission rate (1 - 10)", "Modifying emission rate (1/10th sec)", G.rate) as num
 		if(!new_val)
 			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
-
 			return 1
 		G.rate = Clamp(new_val, 10, 100)
 		updateUsrDialog()

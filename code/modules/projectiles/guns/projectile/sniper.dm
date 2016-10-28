@@ -32,16 +32,13 @@
 	if(bolt_open)
 		if(chambered)
 			to_chat(user, "<span class='notice'>You work the bolt open, ejecting [chambered]!</span>")
-
 			chambered.loc = get_turf(src)
 			loaded -= chambered
 			chambered = null
 		else
 			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
-
 	else
 		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
-
 		bolt_open = 0
 	add_fingerprint(user)
 	update_icon()
@@ -49,7 +46,6 @@
 /obj/item/weapon/gun/projectile/heavysniper/special_check(mob/user)
 	if(bolt_open)
 		to_chat(user, "<span class='warning'>You can't fire [src] while the bolt is open!</span>")
-
 		return 0
 	return ..()
 

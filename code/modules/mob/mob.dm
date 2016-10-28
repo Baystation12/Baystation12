@@ -68,7 +68,6 @@
 	to_chat(src, msg)
 
 
-
 // Show a message to all mobs and objects in sight of this one
 // This would be for visible actions by the src mob
 // message is the message output to anyone who can see e.g. "[src] does something!"
@@ -326,7 +325,6 @@
 		mind.show_memory(src)
 	else
 		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
-
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
 	set category = "IC"
@@ -337,7 +335,6 @@
 		mind.store_memory(msg)
 	else
 		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
-
 /mob/proc/store_memory(msg as message, popup, sane = 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
@@ -365,7 +362,6 @@
 	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
 		to_chat(src, "<h2 class='alert'>OOC Warning:</h2>")
 		to_chat(src, "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>")
-
 
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
@@ -399,11 +395,9 @@
 		return
 
 	to_chat(usr, "You can respawn now, enjoy your new life!")
-
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
 	to_chat(usr, "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>")
-
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
@@ -649,7 +643,6 @@
 		var/mob/living/carbon/human/H = AM
 		if(H.pull_damage())
 			to_chat(src, "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>")
-
 	//Attempted fix for people flying away through space when cuffed and dragged.
 	if(ismob(AM))
 		var/mob/pulled = AM
@@ -953,7 +946,6 @@ mob/proc/yank_out_object()
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
 		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
-
 	if(!do_mob(U, S, 30))
 		return
 	if(!selection || !S || !U)
@@ -1030,7 +1022,6 @@ mob/proc/yank_out_object()
 		to_chat(usr, "You are now not facing anything.")
 	else
 		to_chat(usr, "You are now facing [dir2text(facing_dir)].")
-
 /mob/proc/set_face_dir(var/newdir)
 	if(!isnull(facing_dir) && newdir == facing_dir)
 		facing_dir = null
@@ -1108,7 +1099,6 @@ mob/proc/yank_out_object()
 			to_chat(usr, "The game is not currently looking for antags.")
 	else
 		to_chat(usr, "You must be observing or in the lobby to join the antag pool.")
-
 /mob/proc/is_invisible_to(var/mob/viewer)
 	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)
 

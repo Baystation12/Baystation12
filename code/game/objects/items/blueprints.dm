@@ -23,7 +23,6 @@
 	if (!istype(M,/mob/living/carbon/human))
 		to_chat(M, "This stack of blue paper means nothing to you.")//monkeys cannot into projecting
 
-
 		return
 	interact()
 	return
@@ -115,15 +114,12 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		switch(res)
 			if(ROOM_ERR_SPACE)
 				to_chat(usr, "<span class='warning'>The new area must be completely airtight!</span>")
-
 				return
 			if(ROOM_ERR_TOOLARGE)
 				to_chat(usr, "<span class='warning'>The new area too large!</span>")
-
 				return
 			else
 				to_chat(usr, "<span class='warning'>Error! Please notify administration!</span>")
-
 				return
 	var/list/turf/turfs = res
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", ""), MAX_NAME_LEN)
@@ -131,7 +127,6 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		return
 	if(length(str) > 50)
 		to_chat(usr, "<span class='warning'>Name too long.</span>")
-
 		return
 	var/area/A = new
 	A.name = str
@@ -171,12 +166,10 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		return
 	if(length(str) > 50)
 		to_chat(usr, "<span class='warning'>Text too long.</span>")
-
 		return
 	set_area_machinery_title(A,str,prevname)
 	A.name = str
 	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
-
 	interact()
 	return
 
@@ -187,7 +180,6 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		interact()
 		return
 	to_chat(usr, "<span class='notice'>You scrub [A.name] off the blueprint.</span>")
-
 	log_and_message_admins("deleted area [A.name] via station blueprints.")
 	qdel(A)
 	interact()

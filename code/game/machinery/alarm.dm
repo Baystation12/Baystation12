@@ -605,7 +605,6 @@
 
 	if(aidisabled && isAI(user))
 		to_chat(user, "<span class='warning'>AI control for \the [src] interface has been disabled.</span>")
-
 		return STATUS_CLOSE
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
@@ -643,7 +642,6 @@
 		if(isnum(input_temperature))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
 				to_chat(usr, "Temperature must be between [min_temperature]C and [max_temperature]C")
-
 			else
 				target_temperature = input_temperature + T0C
 		return 1
@@ -765,10 +763,8 @@
 		if(2)
 			if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
 //				to_chat(user, "You pop the Air Alarm's maintence panel open.")
-
 				wiresexposed = !wiresexposed
 				to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
-
 				update_icon()
 				return
 
@@ -783,16 +779,13 @@
 			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
 					to_chat(user, "It does nothing")
-
 					return
 				else
 					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						locked = !locked
 						to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>")
-
 					else
 						to_chat(user, "<span class='warning'>Access denied.</span>")
-
 			return
 
 		if(1)
@@ -800,23 +793,19 @@
 				var/obj/item/stack/cable_coil/C = W
 				if (C.use(5))
 					to_chat(user, "<span class='notice'>You wire \the [src].</span>")
-
 					buildstage = 2
 					update_icon()
 					first_run()
 					return
 				else
 					to_chat(user, "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>")
-
 					return
 
 			else if(istype(W, /obj/item/weapon/crowbar))
 				to_chat(user, "You start prying out the circuit.")
-
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,20))
 					to_chat(user, "You pry out the circuit!")
-
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
 					circuit.loc = user.loc
 					buildstage = 0
@@ -825,7 +814,6 @@
 		if(0)
 			if(istype(W, /obj/item/weapon/airalarm_electronics))
 				to_chat(user, "You insert the circuit!")
-
 				qdel(W)
 				buildstage = 1
 				update_icon()
@@ -833,7 +821,6 @@
 
 			else if(istype(W, /obj/item/weapon/wrench))
 				to_chat(user, "You remove the fire alarm assembly from the wall!")
-
 				new /obj/item/frame/air_alarm(get_turf(user))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				qdel(src)
@@ -844,10 +831,8 @@
 	..(user)
 	if (buildstage < 2)
 		to_chat(user, "It is not wired.")
-
 	if (buildstage < 1)
 		to_chat(user, "The circuit is missing.")
-
 /*
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
@@ -962,16 +947,13 @@ FIRE ALARM
 					var/obj/item/stack/cable_coil/C = W
 					if (C.use(5))
 						to_chat(user, "<span class='notice'>You wire \the [src].</span>")
-
 						buildstage = 2
 						return
 					else
 						to_chat(user, "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>")
-
 						return
 				else if(istype(W, /obj/item/weapon/crowbar))
 					to_chat(user, "You pry out the circuit!")
-
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					spawn(20)
 						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
@@ -981,14 +963,12 @@ FIRE ALARM
 			if(0)
 				if(istype(W, /obj/item/weapon/firealarm_electronics))
 					to_chat(user, "You insert the circuit!")
-
 					qdel(W)
 					buildstage = 1
 					update_icon()
 
 				else if(istype(W, /obj/item/weapon/wrench))
 					to_chat(user, "You remove the fire alarm assembly from the wall!")
-
 					new /obj/item/frame/fire_alarm(get_turf(user))
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 					qdel(src)

@@ -42,7 +42,6 @@
 	if(istype(I, /obj/item/weapon/key))
 		if(!key_data)
 			to_chat(user, "<span class='notice'>You imprint \the [I] into \the [src].</span>")
-
 			var/obj/item/weapon/key/K = I
 			key_data = K.key_data
 			update_icon()
@@ -329,7 +328,6 @@
 			cameras.Add(C)
 	if (length(cameras) == 0)
 		to_chat(usr, "<span class='warning'>No bugged functioning cameras found.</span>")
-
 		return
 
 	var/list/friendly_cameras = new/list()

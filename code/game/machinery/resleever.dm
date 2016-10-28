@@ -57,7 +57,6 @@ obj/machinery/resleever/process()
 
 			if(remaining == 90) // 30 seconds left
 				to_chat(occupant, "<span class='notice'>You feel a wash of sensation as your senses begin to flood your mind. You will come to soon.</span>")
-
 		else
 			remaining = 0
 			resleeving = 0
@@ -99,7 +98,6 @@ obj/machinery/resleever/process()
 
 	if(stat & (NOPOWER|BROKEN))
 		to_chat(usr, "\The [src] doesn't appear to function.")
-
 		return
 
 	tg_ui_interact(user)
@@ -159,22 +157,18 @@ obj/machinery/resleever/process()
 	if(default_deconstruction_screwdriver(user, W))
 		if(occupant)
 			to_chat(user, "<span class='warning'>You need to remove the occupant first!</span>")
-
 			return
 	if(default_deconstruction_crowbar(user, W))
 		if(occupant)
 			to_chat(user, "<span class='warning'>You need to remove the occupant first!</span>")
-
 			return
 	if(default_part_replacement(user, W))
 		if(occupant)
 			to_chat(user, "<span class='warning'>You need to remove the occupant first!</span>")
-
 			return
 	if(istype(W, /obj/item/organ/internal/stack))
 		if(isnull(lace))
 			to_chat(user, "<span class='notice'>You insert \the [W] into [src].</span>")
-
 			user.drop_from_inventory(W)
 			lace = W
 			W.forceMove(src)
@@ -182,7 +176,6 @@ obj/machinery/resleever/process()
 				lace_name = lace.backup.name
 		else
 			to_chat(user, "<span class='warning'>\The [src] already has a neural lace inside it!</span>")
-
 			return
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(isnull(occupant))
@@ -196,12 +189,10 @@ obj/machinery/resleever/process()
 		else
 			to_chat(user, "<span class='warning'>Can not do that while [src] is occupied.</span>")
 
-
 	else if(istype(W, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/grab = W
 		if(occupant)
 			to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
-
 			return
 
 		if(!ismob(grab.affecting))

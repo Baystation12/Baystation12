@@ -29,19 +29,16 @@
 			var/obj/item/stack/cable_coil/CC = W
 			if (get_amount() < 1 || CC.get_amount() < 5)
 				to_chat(user, "<span class='warning'>You need five lengths of coil and one sheet of glass to make wired glass.</span>")
-
 				return
 
 			CC.use(5)
 			use(1)
 			to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
-
 			new /obj/item/stack/light_w(user.loc)
 		else if(istype(W, /obj/item/stack/rods))
 			var/obj/item/stack/rods/V  = W
 			if (V.get_amount() < 1 || get_amount() < 1)
 				to_chat(user, "<span class='warning'>You need one rod and one sheet of glass to make reinforced glass.</span>")
-
 				return
 
 			var/obj/item/stack/material/glass/reinforced/RG = new (user.loc)
@@ -73,12 +70,10 @@
 				i++
 				if(i >= 4)
 					to_chat(user, "<span class='warning'>There are too many windows in this location.</span>")
-
 					return 1
 				directions-=win.dir
 				if(!(win.dir in cardinal))
 					to_chat(user, "<span class='warning'>Can't let you do that.</span>")
-
 					return 1
 
 			//Determine the direction. It will first check in the direction the person making the window is facing, if it finds an already made window it will try looking at the next cardinal direction, etc.
@@ -98,11 +93,9 @@
 			if(src.loc != user)	return 1
 			if(src.get_amount() < 4)
 				to_chat(user, "<span class='warning'>You need more glass to do that.</span>")
-
 				return 1
 			if(locate(/obj/structure/window) in user.loc)
 				to_chat(user, "<span class='warning'>There is a window in the way.</span>")
-
 				return 1
 			new created_window( user.loc, SOUTHWEST, 1 )
 			src.use(4)
@@ -114,17 +107,14 @@
 
 			if(isturf(user.loc) && locate(/obj/structure/windoor_assembly/, user.loc))
 				to_chat(user, "<span class='warning'>There is already a windoor assembly in that location.</span>")
-
 				return 1
 
 			if(isturf(user.loc) && locate(/obj/machinery/door/window/, user.loc))
 				to_chat(user, "<span class='warning'>There is already a windoor in that location.</span>")
-
 				return 1
 
 			if(src.get_amount() < 5)
 				to_chat(user, "<span class='warning'>You need more glass to do that.</span>")
-
 				return 1
 
 			new /obj/structure/windoor_assembly(user.loc, user.dir, 1)

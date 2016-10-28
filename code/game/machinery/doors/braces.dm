@@ -29,7 +29,6 @@
 	to_chat(user, examine_health())
 
 
-
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
 /obj/item/weapon/airlock_brace/proc/examine_health()
 	switch(health_percentage())
@@ -83,14 +82,11 @@
 			update_access()
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
-
 				if(do_after(user, 10, airlock))
 					to_chat(user, "\The [src] clicks few times and detaches itself from \the [airlock]!")
-
 					unlock_brace(usr)
 			else
 				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")
-
 		return
 
 	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
@@ -98,10 +94,8 @@
 			return
 		var/obj/item/weapon/crowbar/brace_jack/C = W
 		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
-
 		if(do_after(user, rand(150,300), airlock))
 			to_chat(user, "You finish removing \the [src].")
-
 			unlock_brace(user)
 		return
 
@@ -109,17 +103,14 @@
 		var/obj/item/weapon/weldingtool/C = W
 		if(cur_health == max_health)
 			to_chat(user, "\The [src] does not require repairs.")
-
 			return
 		if(C.remove_fuel(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			cur_health = min(cur_health + rand(80,120), max_health)
 			if(cur_health == max_health)
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
-
 			else
 				to_chat(user, "You repair some dents on \the [src].")
-
 
 
 /obj/item/weapon/airlock_brace/proc/take_damage(var/amount)

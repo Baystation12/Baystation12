@@ -92,7 +92,6 @@
 	if(!isGlass || rag) return
 	if(user.unEquip(R))
 		to_chat(user, "<span class='notice'>You stuff [R] into [src].</span>")
-
 		rag = R
 		rag.forceMove(src)
 		flags &= ~OPENCONTAINER

@@ -11,7 +11,6 @@
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
 		to_chat(src, "<span class='warning'>You cannot tackle in your current state.</span>")
-
 		return
 
 	var/list/choices = list()
@@ -32,7 +31,6 @@
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
 		to_chat(src, "<span class='warning'>You cannot tackle in your current state.</span>")
-
 		return
 
 	last_special = world.time + 50
@@ -55,7 +53,6 @@
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
 		to_chat(src, "<span class='warning'>You cannot leap in your current state.</span>")
-
 		return
 
 	var/list/choices = list()
@@ -76,7 +73,6 @@
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len || stance_damage >= 4 || src.legcuffed)
 		to_chat(src, "<span class='warning'>You cannot leap in your current state.</span>")
-
 		return
 
 	last_special = world.time + (17.5 SECONDS)
@@ -92,7 +88,6 @@
 
 	if(!src.Adjacent(T))
 		to_chat(src, "<span class='warning'>You miss!</span>")
-
 		return
 
 	T.Weaken(3)
@@ -106,7 +101,6 @@
 	if(l_hand)
 		if(r_hand)
 			to_chat(src, "<span class='danger'>You need to have one hand free to grab someone.</span>")
-
 			return
 		else
 			use_hand = "right"
@@ -133,18 +127,15 @@
 
 	if(incapacitated())
 		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
-
 		return
 
 	var/obj/item/weapon/grab/G = locate() in src
 	if(!G || !istype(G))
 		to_chat(src, "<span class='warning'>You are not grabbing anyone.</span>")
-
 		return
 
 	if(G.state < GRAB_AGGRESSIVE)
 		to_chat(src, "<span class='warning'>You must have an aggressive grab to gut your prey!</span>")
-
 		return
 
 	last_special = world.time + 50
@@ -187,20 +178,17 @@
 
 	if(isghost(M) || M.stat == DEAD)
 		to_chat(src, "<span class='warning'>Not even a [src.species.name] can speak to the dead.</span>")
-
 		return
 
 	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
 
 	to_chat(M, "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>")
-
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name == src.species.name)
 			return
 		if(prob(75))
 			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
-
 			H.drip(1)
 
 /mob/living/carbon/human/proc/regurgitate()
@@ -225,9 +213,7 @@
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
 		to_chat(M, "<span class='alium'>You hear a strange, alien voice in your head... <i>[msg]</i></span>")
-
 		to_chat(src, "<span class='alium'>You channel a message: \"[msg]\" to [M]</span>")
-
 	return
 
 /mob/living/carbon/human/proc/diona_split_nymph()

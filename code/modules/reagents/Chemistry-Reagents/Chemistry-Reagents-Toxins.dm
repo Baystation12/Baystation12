@@ -303,7 +303,6 @@
 		return
 	if(prob(10))
 		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
-
 		M.adjustToxLoss(rand(100, 300) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
@@ -536,7 +535,6 @@
 		var/mob/living/carbon/human/H = M
 		if(H.species.name != "Slime")
 			to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
-
 			H.set_species("Slime")
 
 /datum/reagent/aslimetoxin
@@ -551,7 +549,6 @@
 	if(M.transforming)
 		return
 	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
-
 	M.transforming = 1
 	M.canmove = 0
 	M.icon = null

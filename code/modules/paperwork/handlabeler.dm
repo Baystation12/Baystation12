@@ -20,37 +20,29 @@
 
 	if(!labels_left)
 		to_chat(user, "<span class='notice'>No labels left.</span>")
-
 		return
 	if(!label || !length(label))
 		to_chat(user, "<span class='notice'>No text set.</span>")
-
 		return
 	if(length(A.name) + length(label) > 64)
 		to_chat(user, "<span class='notice'>Label too big.</span>")
-
 		return
 	if(ishuman(A))
 		to_chat(user, "<span class='notice'>The label refuses to stick to [A.name].</span>")
-
 		return
 	if(issilicon(A))
 		to_chat(user, "<span class='notice'>The label refuses to stick to [A.name].</span>")
-
 		return
 	if(isobserver(A))
 		to_chat(user, "<span class='notice'>[src] passes through [A.name].</span>")
-
 		return
 	if(istype(A, /obj/item/weapon/reagent_containers/glass))
 		to_chat(user, "<span class='notice'>The label can't stick to the [A.name].  (Try using a pen)</span>")
-
 		return
 	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/tray = A
 		if(!tray.mechanical)
 			to_chat(user, "<span class='notice'>How are you going to label that?</span>")
-
 			return
 		tray.labelled = label
 		spawn(1)
@@ -65,16 +57,12 @@
 	icon_state = "labeler[mode]"
 	if(mode)
 		to_chat(user, "<span class='notice'>You turn on \the [src].</span>")
-
 		//Now let them chose the text.
 		var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_NAME_LEN)
 		if(!str || !length(str))
 			to_chat(user, "<span class='notice'>Invalid text.</span>")
-
 			return
 		label = str
 		to_chat(user, "<span class='notice'>You set the text to '[str]'.</span>")
-
 	else
 		to_chat(user, "<span class='notice'>You turn off \the [src].</span>")
-

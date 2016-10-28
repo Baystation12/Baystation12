@@ -27,7 +27,6 @@
 			if(prob(5))
 				to_chat(M, "<span class='warning'>[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")].</span>")
 
-
 		for(var/obj/item/I in T)
 			if(!suspension_field.contents.len)
 				suspension_field.icon_state = "energynet"
@@ -84,7 +83,6 @@
 					activate()
 				else
 					to_chat(usr, "<span class='warning'>You are unable to activate [src] until it is properly secured on the ground.</span>")
-
 		else
 			deactivate()
 	else if(href_list["insertcard"])
@@ -95,10 +93,8 @@
 			auth_card = I
 			if(attempt_unlock(I, usr))
 				to_chat(usr, "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>")
-
 			else
 				to_chat(usr, "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>")
-
 	else if(href_list["ejectcard"])
 		if(auth_card)
 			if(ishuman(usr))
@@ -129,7 +125,6 @@
 		cell = null
 		to_chat(user, "<span class='info'>You remove the power cell</span>")
 
-
 /obj/machinery/suspension_gen/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!locked && !suspension_field && default_deconstruction_screwdriver(user, W))
 		return
@@ -140,38 +135,31 @@
 			else
 				anchored = 1
 			to_chat(user, "<span class='info'>You wrench the stabilising legs [anchored ? "into place" : "up against the body"].</span>")
-
 			if(anchored)
 				desc = "It is resting securely on four stubby legs."
 			else
 				desc = "It has stubby legs bolted up against it's body for stabilising."
 		else
 			to_chat(user, "<span class='warning'>You are unable to secure [src] while it is active!</span>")
-
 	else if (istype(W, /obj/item/weapon/cell))
 		if(panel_open)
 			if(cell)
 				to_chat(user, "<span class='warning'>There is a power cell already installed.</span>")
-
 			else
 				user.drop_item()
 				W.forceMove(src)
 				cell = W
 				to_chat(user, "<span class='info'>You insert the power cell.</span>")
-
 				icon_state = "suspension1"
 	else if(istype(W, /obj/item/weapon/card))
 		var/obj/item/weapon/card/I = W
 		if(!auth_card)
 			if(attempt_unlock(I, user))
 				to_chat(user, "<span class='info'>You swipe [I], the console flashes \'<i>Access granted.</i>\'</span>")
-
 			else
 				to_chat(user, "<span class='warning'>You swipe [I], console flashes \'<i>Access denied.</i>\'</span>")
-
 		else
 			to_chat(user, "<span class='warning'>Remove [auth_card] first.</span>")
-
 
 /obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C, var/mob/user)
 	if(!panel_open)
@@ -220,7 +208,6 @@
 
 	for(var/mob/living/M in T)
 		to_chat(M, "<span class='info'>You no longer feel like floating.</span>")
-
 		M.weakened = min(M.weakened, 3)
 
 	src.visible_message("<span class='notice'>\icon[src] [src] deactivates with a gentle shudder.</span>")
@@ -239,7 +226,6 @@
 
 	if(anchored)
 		to_chat(usr, "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>")
-
 	else
 		set_dir(turn(dir, 90))
 
@@ -250,7 +236,6 @@
 
 	if(anchored)
 		to_chat(usr, "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>")
-
 	else
 		set_dir(turn(dir, -90))
 

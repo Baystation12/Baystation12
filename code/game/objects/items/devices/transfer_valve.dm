@@ -21,7 +21,6 @@
 	if(istype(item, /obj/item/weapon/tank))
 		if(tank_one && tank_two)
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
-
 			return
 
 		if(!tank_one)
@@ -29,13 +28,11 @@
 			user.drop_item()
 			item.loc = src
 			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
-
 		else if(!tank_two)
 			tank_two = item
 			user.drop_item()
 			item.loc = src
 			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
-
 			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
 
@@ -46,17 +43,14 @@
 		var/obj/item/device/assembly/A = item
 		if(A.secured)
 			to_chat(user, "<span class='notice'>The device is secured.</span>")
-
 			return
 		if(attached_device)
 			to_chat(user, "<span class='warning'>There is already an device attached to the valve, remove it first.</span>")
-
 			return
 		user.remove_from_mob(item)
 		attached_device = A
 		A.loc = src
 		to_chat(user, "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>")
-
 		A.holder = src
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
 

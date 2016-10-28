@@ -103,12 +103,10 @@ obj/structure/ex_act(severity)
 	var/obj/structure/transit_tube/T = locate() in AM.loc
 	if(T)
 		to_chat(AM, "<span class='warning'>The tube's support pylons block your way.</span>")
-
 		return ..()
 	else
 		AM.loc = src.loc
 		to_chat(AM, "<span class='info'>You slip under the tube.</span>")
-
 
 
 /obj/structure/transit_tube/station/New(loc)
@@ -121,7 +119,6 @@ obj/structure/ex_act(severity)
 		for(var/obj/structure/transit_tube_pod/pod in loc)
 			if(pod.contents.len)
 				to_chat(AM, "<span class='notice'>The pod is already occupied.</span>")
-
 				return
 			else if(!pod.moving && pod.dir in directions())
 				AM.loc = pod

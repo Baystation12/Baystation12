@@ -80,9 +80,7 @@
 								"There will be a mandatory tea break every 30 minutes, with a duration of 5 minutes. Anyone caught working during a tea break must be sent a formal, but fairly polite, complaint about their actions, in writing.")
 		var/law = pick(laws)
 		to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
-
 		to_chat(S, law)
-
 		S.add_ion_law(law)
 		S.show_laws()
 
@@ -165,115 +163,73 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			switch(rand(1,14))
 				if(1)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("THERE ARE [amount] [who2] ON THE STATION")
 				if(2)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>[what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
 				if(3)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'> THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION")
 				if(4)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE")
 				if(5)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>THE CAPTAIN, HOP AND HOS ARE [who2]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("THE CAPTAIN, HOP AND HOS ARE [who2]")
 				if(6)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>THE STATION IS BUILT FOR [who2]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("THE STATION IS BUILT FOR [who2]")
 				if(7)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>YOU ARE [amount] [who2]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("YOU ARE [amount] [who2]")
 				if(8)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>YOU MUST ALWAYS [aimust]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("YOU MUST ALWAYS [aimust]")
 				if(9)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>[area] [area2] [amount] [what2]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("[area] [area2] [amount] [what2]")
 				if(10)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>[crew] is [target]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("[crew] is [target]")
 				if(11)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>[define] IS A FORM OF HARM...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("[define] IS A FORM OF HARM")
 				if(12)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS... LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS")
 				if(13)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>[crew] is [allergysev] to [allergy]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
 				if(14)
 					to_chat(M, "<br>")
-
 					to_chat(M, "<span class='warning'>THE STATION IS [who2pref] [who2]...LAWS UPDATED</span>")
-
 					to_chat(M, "<br>")
-
 					M.add_ion_law("THE STATION IS [who2pref] [who2]")
 
 	if(botEmagChance)

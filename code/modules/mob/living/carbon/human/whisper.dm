@@ -33,7 +33,6 @@
 
 	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
 		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
-
 		return
 
 	var/message_range = 1

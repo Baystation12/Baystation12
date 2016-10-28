@@ -152,7 +152,6 @@
 /obj/machinery/mecha_part_fabricator/attackby(var/obj/item/I, var/mob/user)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
-
 		return 1
 	if(default_deconstruction_screwdriver(user, I))
 		return
@@ -172,7 +171,6 @@
 
 	if(!(material in materials))
 		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
-
 		return
 
 	if(materials[material] + amnt <= res_max_amount)
@@ -187,11 +185,9 @@
 				count++
 			to_chat(user, "You insert [count] [count==1 ? stack_singular : stack_plural] into the fabricator.")// 0 steel sheets, 1 steel sheet, 2 steel sheets, etc
 
-
 			update_busy()
 	else
 		to_chat(user, "The fabricator cannot hold more [stack_plural].")// use the plural form even if the given sheet is singular
-
 
 
 /obj/machinery/mecha_part_fabricator/emag_act(var/remaining_charges, var/mob/user)

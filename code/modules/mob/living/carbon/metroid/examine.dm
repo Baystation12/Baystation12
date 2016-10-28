@@ -28,5 +28,4 @@
 
 	msg += "*---------*"
 	to_chat(user, msg)
-
 	return

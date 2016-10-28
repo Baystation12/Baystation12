@@ -44,25 +44,20 @@
 	if(istype(I, /obj/item/weapon/crowbar))
 		if(bcell)
 			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")
-
 			disable()
 			bcell.dropInto(loc)
 			bcell = null
 		else
 			to_chat(user, "<span class='warning'>There is no cell to remove.</span>")
-
 	else if(istype(I, /obj/item/weapon/cell))
 		if(bcell)
 			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
-
 		else if(user.unEquip(I))
 			I.forceMove(src)
 			bcell = I
 			to_chat(user, "<span class='notice'>You insert \the [bcell] into \the [src]..</span>")
-
 		else
 			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
-
 
 /obj/item/device/suit_sensor_jammer/update_icon()
 	overlays.Cut()
@@ -113,7 +108,6 @@ obj/item/device/suit_sensor_jammer/examine(var/user)
 		else
 			message += "is lacking a cell."
 		to_chat(user, jointext(message,.))
-
 
 obj/item/device/suit_sensor_jammer/ui_status(mob/user, datum/ui_state/state)
 	if(!bcell || bcell.charge <= 0)

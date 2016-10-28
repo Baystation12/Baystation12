@@ -101,15 +101,12 @@
 		return
 	if (!ishuman(usr) && !issmall(usr)) //Make sure they're a mob that has dna
 		to_chat(usr, "<span class='notice'>Try as you might, you can not climb up into the scanner.</span>")
-
 		return
 	if (src.occupant)
 		to_chat(usr, "<span class='warning'>The scanner is already occupied!</span>")
-
 		return
 	if (usr.abiotic())
 		to_chat(usr, "<span class='warning'>The subject cannot have abiotic items on.</span>")
-
 		return
 	usr.stop_pulling()
 	usr.reset_view(src)
@@ -123,7 +120,6 @@
 	if(istype(item, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
-
 			return
 
 		beaker = item
@@ -138,11 +134,9 @@
 		return
 	if (src.occupant)
 		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
-
 		return
 	if (G.affecting.abiotic())
 		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
-
 		return
 	put_in(G.affecting)
 	src.add_fingerprint(user)
@@ -168,7 +162,6 @@
 				for(var/mob/observer/ghost/ghost in player_list)
 					if(ghost.mind == M.mind)
 						to_chat(ghost, "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>")
-
 						break
 	return
 
@@ -247,7 +240,6 @@
 			I.loc = src
 			src.disk = I
 			to_chat(user, "You insert \the [I].")
-
 			nanomanager.update_uis(src) // update all UIs attached to src
 			return
 	else

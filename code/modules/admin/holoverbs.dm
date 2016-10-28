@@ -42,5 +42,4 @@
 	AI.holo_icon = I2
 
 	to_chat(AI, "Your hologram icon has been set to [appear].")
-
 	log_and_message_admins("set [key_name(AI)]'s hologram icon to [key_name(appear)]")

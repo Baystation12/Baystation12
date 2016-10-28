@@ -34,7 +34,6 @@
 	..(user)
 	to_chat(user, "It has [spikes] spike\s remaining.")
 
-
 /obj/item/weapon/gun/launcher/spikethrower/update_icon()
 	icon_state = "spikethrower[spikes]"
 
@@ -43,7 +42,6 @@
 		var/mob/living/carbon/human/H = user
 		if(H.species && H.species.get_bodytype() != "Vox")
 			to_chat(user, "<span class='warning'>\The [src] does not respond to you!</span>")
-
 			return 0
 	return ..()
 

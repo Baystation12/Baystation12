@@ -13,7 +13,6 @@
 /obj/item/borg/upgrade/proc/action(var/mob/living/silicon/robot/R)
 	if(R.stat == DEAD)
 		to_chat(usr, "<span class='warning'>The [src] will not function on a deceased robot.</span>")
-
 		return 1
 	return 0
 
@@ -66,13 +65,11 @@
 
 	if(R.intenselight)
 		to_chat(usr, "This cyborg's light was already upgraded")
-
 		return 0
 	else
 		R.intenselight = 1
 		R.update_robot_light()
 		to_chat(R, "Lighting systems upgrade detected.")
-
 	return 1
 
 /obj/item/borg/upgrade/restart
@@ -84,7 +81,6 @@
 /obj/item/borg/upgrade/restart/action(var/mob/living/silicon/robot/R)
 	if(R.health < 0)
 		to_chat(usr, "You have to repair the robot before using this module!")
-
 		return 0
 
 	if(!R.key)
@@ -126,9 +122,7 @@
 
 	if(!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
-
 		to_chat(usr, "There's no mounting point for the module!")
-
 		return 0
 
 	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in R.module
@@ -138,14 +132,11 @@
 		T = locate() in R.module.modules
 	if(!T)
 		to_chat(usr, "This robot has had its taser removed!")
-
 		return 0
 
 	if(T.recharge_time <= 2)
 		to_chat(R, "Maximum cooling achieved for this hardpoint!")
-
 		to_chat(usr, "There's no room for another cooling unit!")
-
 		return 0
 
 	else
@@ -164,9 +155,7 @@
 
 	if(!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
-
 		to_chat(usr, "There's no mounting point for the module!")
-
 		return 0
 	else
 		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide
@@ -186,9 +175,7 @@
 
 	if(!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
-
 		to_chat(usr, "There's no mounting point for the module!")
-
 		return 0
 	else
 		R.module.modules += new/obj/item/weapon/rcd/borg(R.module)

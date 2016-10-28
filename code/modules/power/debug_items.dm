@@ -13,21 +13,14 @@
 /obj/machinery/power/debug_items/proc/show_info(var/mob/user)
 	if(!powernet)
 		to_chat(user, "This device is not connected to a powernet")
-
 		return
 
 	to_chat(user, "Connected to powernet: [powernet]")
-
 	to_chat(user, "Available power: [num2text(powernet.avail, 20)] W")
-
 	to_chat(user, "Load: [num2text(powernet.viewload, 20)] W")
-
 	to_chat(user, "Has alert: [powernet.problem ? "YES" : "NO"]")
-
 	to_chat(user, "Cables: [powernet.cables.len]")
-
 	to_chat(user, "Nodes: [powernet.nodes.len]")
-
 
 
 // An infinite power generator. Adds energy to connected cable.
@@ -44,7 +37,6 @@
 	to_chat(user, "Generator is providing [num2text(power_generation_rate, 20)] W")
 
 
-
 // A cable powersink, without the explosion/network alarms normal powersink causes.
 /obj/machinery/power/debug_items/infinite_cable_powersink
 	name = "Null Point Core"
@@ -58,9 +50,7 @@
 /obj/machinery/power/debug_items/infinite_cable_powersink/show_info(var/mob/user)
 	..()
 	to_chat(user, "Power sink is demanding [num2text(power_usage_rate, 20)] W")
-
 	to_chat(user, "[num2text(last_used, 20)] W was actually used last tick")
-
 
 
 /obj/machinery/power/debug_items/infinite_apc_powersink
@@ -72,6 +62,4 @@
 /obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)
 	..()
 	to_chat(user, "Dummy load is using [num2text(active_power_usage, 20)] W")
-
 	to_chat(user, "Powered: [powered() ? "YES" : "NO"]")
-

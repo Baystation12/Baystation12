@@ -98,13 +98,10 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				sound_to(X, 'sound/effects/adminhelp.ogg')
 			if(X.holder.rights == R_MENTOR)
 				to_chat(X, mentor_msg)// Mentors won't see coloring of names on people with special_roles (Antags, etc.)
-
 			else
 				to_chat(X, msg)
-
 	//show it to the person adminhelping too
 	to_chat(src, "<font color='blue'>PM to-<b>Staff </b>: [original_msg]</font>")
-
 	var/admin_number_present = admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)

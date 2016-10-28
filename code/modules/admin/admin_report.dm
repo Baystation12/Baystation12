@@ -55,7 +55,6 @@ proc/make_report(body, author, okey, cid)
 
 	to_chat(Reports["reports"], reports)
 	to_chat(Reports["lastID"], lastID)
-
 // load the reports from disk
 proc/load_reports()
 	var/savefile/Reports = new("data/reports.sav")
@@ -151,11 +150,9 @@ client/proc/mark_report_done(ID as num)
 			found = N
 	if(!found) to_chat(src, "<b>* An error occured, sorry.</b>")
 
-
 	found.done = 1
 
 	to_chat(Reports["reports"], reports)
-
 client/proc/edit_report(ID as num)
 	if(!src.holder || src.holder.level < 0)
 		to_chat(src, "<b>You tried to modify the news, but you're not an admin!</b>")
@@ -171,7 +168,6 @@ client/proc/edit_report(ID as num)
 		if(N.ID == ID)
 			found = N
 	if(!found) to_chat(src, "<b>* An error occured, sorry.</b>")
-
 	var/body = input(src.mob, "Enter a body for the news", "Body") as null|message
 	if(!body) return
 

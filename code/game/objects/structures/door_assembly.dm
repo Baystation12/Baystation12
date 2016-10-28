@@ -163,7 +163,6 @@
 				if(do_after(user, 40,src))
 					if(!src || !WT.isOn()) return
 					to_chat(user, "<span class='notice'>You welded the [glass] plating off!</span>")
-
 					var/M = text2path("/obj/item/stack/material/[glass]")
 					new M(src.loc, 2)
 					glass = 0
@@ -172,7 +171,6 @@
 				if(do_after(user, 40,src))
 					if(!src || !WT.isOn()) return
 					to_chat(user, "<span class='notice'>You welded the glass panel out!</span>")
-
 					new /obj/item/stack/material/glass/reinforced(src.loc)
 					glass = 0
 			else if(!anchored)
@@ -180,12 +178,10 @@
 				if(do_after(user, 40,src))
 					if(!src || !WT.isOn()) return
 					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
-
 					new /obj/item/stack/material/steel(src.loc, 4)
 					qdel (src)
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
-
 			return
 
 	else if(istype(W, /obj/item/weapon/wrench) && state == 0)
@@ -198,21 +194,18 @@
 		if(do_after(user, 40,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured the airlock assembly!</span>")
-
 			anchored = !anchored
 
 	else if(istype(W, /obj/item/stack/cable_coil) && state == 0 && anchored)
 		var/obj/item/stack/cable_coil/C = W
 		if (C.get_amount() < 1)
 			to_chat(user, "<span class='warning'>You need one length of coil to wire the airlock assembly.</span>")
-
 			return
 		user.visible_message("[user] wires the airlock assembly.", "You start to wire the airlock assembly.")
 		if(do_after(user, 40,src) && state == 0 && anchored)
 			if (C.use(1))
 				src.state = 1
 				to_chat(user, "<span class='notice'>You wire the airlock.</span>")
-
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && state == 1 )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -221,7 +214,6 @@
 		if(do_after(user, 40,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You cut the airlock wires.!</span>")
-
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 
@@ -234,7 +226,6 @@
 			user.drop_item()
 			W.loc = src
 			to_chat(user, "<span class='notice'>You installed the airlock electronics!</span>")
-
 			src.state = 2
 			src.name = "Near finished Airlock Assembly"
 			src.electronics = W
@@ -243,7 +234,6 @@
 		//This should never happen, but just in case I guess
 		if (!electronics)
 			to_chat(user, "<span class='notice'>There was nothing to remove.</span>")
-
 			src.state = 1
 			return
 
@@ -253,7 +243,6 @@
 		if(do_after(user, 40,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
-
 			src.state = 1
 			src.name = "Wired Airlock Assembly"
 			electronics.loc = src.loc
@@ -270,13 +259,11 @@
 					if(do_after(user, 40,src) && !glass)
 						if (S.use(1))
 							to_chat(user, "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>")
-
 							glass = 1
 				else if(material_name)
 					// Ugly hack, will suffice for now. Need to fix it upstream as well, may rewrite mineral walls. ~Z
 					if(!(material_name in list("gold", "silver", "diamond", "uranium", "phoron", "sandstone")))
 						to_chat(user, "You cannot make an airlock out of that material.")
-
 						return
 					if(S.get_amount() >= 2)
 						playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
@@ -284,18 +271,15 @@
 						if(do_after(user, 40,src) && !glass)
 							if (S.use(2))
 								to_chat(user, "<span class='notice'>You installed [material_display_name(material_name)] plating into the airlock assembly.</span>")
-
 								glass = material_name
 
 	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now finishing the airlock.</span>")
 
-
 		if(do_after(user, 40,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You finish the airlock!</span>")
-
 			var/path
 			if(istext(glass))
 				path = text2path("/obj/machinery/door/airlock/[glass]")

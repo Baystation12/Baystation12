@@ -112,7 +112,6 @@ obj/var/contaminated = 0
 		if(rand(1,10000) < vsc.plc.GENETIC_CORRUPTION)
 			randmutb(src)
 			to_chat(src, "<span class='danger'>High levels of toxins cause you to spontaneously mutate!</span>")
-
 			domutcheck(src,null)
 
 
@@ -124,7 +123,6 @@ obj/var/contaminated = 0
 		eye_blurry = min(eye_blurry+1.5,50)
 		if (prob(max(0,E.damage - 15) + 1) &&!eye_blind)
 			to_chat(src, "<span class='danger'>You are blinded!</span>")
-
 			eye_blind += 20
 
 /mob/living/carbon/human/proc/pl_head_protected()

@@ -160,7 +160,6 @@
 		qdel(src)
 	else
 		to_chat(user, "<span class='notice'>You hit the metal foam but bounce off it.</span>")
-
 	return
 
 /obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
@@ -177,7 +176,6 @@
 		qdel(src)
 	else
 		to_chat(user, "<span class='notice'>You hit the metal foam to no effect.</span>")
-
 
 /obj/structure/foamedmetal/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 	if(air_group)

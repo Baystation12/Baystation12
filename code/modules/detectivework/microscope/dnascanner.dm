@@ -19,12 +19,10 @@
 
 	if(bloodsamp)
 		to_chat(user, "<span class='warning'>There is already a sample in the machine.</span>")
-
 		return
 
 	if(closed)
 		to_chat(user, "<span class='warning'>Open the cover before inserting the sample.</span>")
-
 		return
 
 	var/obj/item/weapon/forensics/swab/swab = W
@@ -33,10 +31,8 @@
 		src.bloodsamp = swab
 		swab.loc = src
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
-
 	else
 		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")
-
 		return
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
@@ -72,14 +68,11 @@
 					scanner_progress = 0
 					scanning = 1
 					to_chat(usr, "<span class='notice'>Scan initiated.</span>")
-
 					update_icon()
 				else
 					to_chat(usr, "<span class='notice'>Please close sample lid before initiating scan.</span>")
-
 			else
 				to_chat(usr, "<span class='warning'>Insert an item to scan.</span>")
-
 
 	if(href_list["ejectItem"])
 		if(bloodsamp)
@@ -145,7 +138,6 @@
 
 	if(scanning)
 		to_chat(usr, "<span class='warning'>You can't do that while [src] is scanning!</span>")
-
 		return
 
 	closed = !closed

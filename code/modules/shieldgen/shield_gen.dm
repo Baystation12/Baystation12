@@ -49,7 +49,6 @@
 	if(prob(75))
 		src.locked = !src.locked
 		to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
-
 		. = 1
 		updateDialog()
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -62,7 +61,6 @@
 		if(access_captain in C.access || access_security in C.access || access_engine in C.access)
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
-
 			updateDialog()
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
@@ -221,7 +219,6 @@
 
 		for(var/mob/M in view(5,src))
 			to_chat(M, "\icon[src] You hear heavy droning start up.")
-
 	else
 		for(var/obj/effect/energy_field/D in field)
 			field.Remove(D)
@@ -229,7 +226,6 @@
 
 		for(var/mob/M in view(5,src))
 			to_chat(M, "\icon[src] You hear heavy droning fade out.")
-
 
 /obj/machinery/shield_gen/update_icon()
 	if(stat & BROKEN)

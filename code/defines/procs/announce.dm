@@ -53,7 +53,6 @@ datum/announcement/proc/Message(message as text, message_title as text)
 			to_chat(M, "<span class='alert'>[message]</span>")
 			if (announcer)
 				to_chat(M, "<span class='alert'> -[html_encode(announcer)]</span>")
-
 datum/announcement/minor/Message(message as text, message_title as text)
 	to_world("<b>[message]</b>")
 
@@ -75,7 +74,6 @@ datum/announcement/priority/command/Message(message as text, message_title as te
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, command)
-
 datum/announcement/priority/security/Message(message as text, message_title as text)
 	to_world("<font size=4 color='red'>[message_title]</font>")
 	to_world("<font color='red'>[message]</font>")

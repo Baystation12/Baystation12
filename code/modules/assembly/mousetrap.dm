@@ -12,7 +12,6 @@
 		if(armed)
 			to_chat(user, "It looks like it's armed.")
 
-
 	update_icon()
 		if(armed)
 			icon_state = "mousetraparmed"
@@ -54,7 +53,6 @@
 	attack_self(mob/living/user as mob)
 		if(!armed)
 			to_chat(user, "<span class='notice'>You arm [src].</span>")
-
 		else
 			if((CLUMSY in user.mutations) && prob(50))
 				var/which_hand = BP_L_HAND
@@ -65,7 +63,6 @@
 									 "<span class='warning'>You accidentally trigger [src]!</span>")
 				return
 			to_chat(user, "<span class='notice'>You disarm [src].</span>")
-
 		armed = !armed
 		update_icon()
 		playsound(user.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -3)

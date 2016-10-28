@@ -118,10 +118,8 @@
 		var/transfered = udder.trans_id_to(G, "milk", rand(5,10))
 		if(G.reagents.total_volume >= G.volume)
 			to_chat(user, "<span class='warning'>\The [O] is full.</span>")
-
 		if(!transfered)
 			to_chat(user, "<span class='warning'>The udder is dry. Wait a bit longer...</span>")
-
 	else
 		..()
 
@@ -144,7 +142,6 @@
 											"[src] looks at you with a resigned expression.",
 											"[src] seems resigned to its fate.")
 				to_chat(M, pick(responses))
-
 	else
 		..()
 
@@ -242,7 +239,6 @@ var/global/chicken_count = 0
 				to_chat(user, "<span class='notice'>[name] doesn't seem hungry!</span>")
 		else
 			to_chat(user, "[name] doesn't seem interested in that.")
-
 	else
 		..()
 

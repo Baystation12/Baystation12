@@ -181,17 +181,11 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/on_mob_init()
 	to_chat(src, "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
-
 	to_chat(src, "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>")
-
 	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
-
 	to_chat(src, "To use something, simply click on it.")
-
 	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
-
 	to_chat(src, "For department channels, use the following say commands:")
-
 
 	var/radio_text = ""
 	for(var/i = 1 to common_radio.channels.len)
@@ -203,11 +197,9 @@ var/list/ai_verbs_default = list(
 
 	to_chat(src, radio_text)
 
-
 	if (malf && !(mind in malf.current_antagonists))
 		show_laws()
 		to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
-
 
 	job = "AI"
 	setup_icon()
@@ -305,7 +297,6 @@ var/list/ai_verbs_default = list(
 
 	if(message_cooldown)
 		to_chat(src, "Please allow one minute to pass between announcements.")
-
 		return
 	var/input = input(usr, "Please write a message to announce to the station crew.", "A.I. Announcement")
 	if(!input)
@@ -359,18 +350,15 @@ var/list/ai_verbs_default = list(
 		return
 	if(!is_relay_online())
 		to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
-
 		return
 	if(emergency_message_cooldown)
 		to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
-
 		return
 	var/input = sanitize(input(usr, "Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 	if(!input)
 		return
 	Centcomm_announce(input, usr)
 	to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-
 	log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
 	emergency_message_cooldown = 1
 	spawn(300)
@@ -413,7 +401,6 @@ var/list/ai_verbs_default = list(
 				H.attack_ai(src) //may as well recycle
 			else
 				to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
-
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
@@ -496,7 +483,6 @@ var/list/ai_verbs_default = list(
 			eyeobj.setLoc(get_turf(C))
 			break
 	to_chat(src, "<span class='notice'>Switched to [network] camera network.</span>")
-
 //End of code by Mord_Sith
 
 /mob/living/silicon/ai/proc/ai_statuschange()
@@ -564,7 +550,6 @@ var/list/ai_verbs_default = list(
 
 	camera_light_on = !camera_light_on
 	to_chat(src, "Camera lights [camera_light_on ? "activated" : "deactivated"].")
-
 	if(!camera_light_on)
 		if(camera)
 			camera.set_light(0)
@@ -634,7 +619,6 @@ var/list/ai_verbs_default = list(
 		return
 
 	to_chat(src, "Accessing Subspace Transceiver control...")
-
 	if (src.aiRadio)
 		src.aiRadio.interact(src)
 
@@ -652,30 +636,24 @@ var/list/ai_verbs_default = list(
 	hologram_follow = !hologram_follow
 	to_chat(usr, "<span class='info'>Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you.</span>")
 
-
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)
 		if(feedback) to_chat(src, "<span class='warning'>You are dead!</span>")
-
 		return 1
 
 	if(!has_power())
 		if(feedback) to_chat(src, "<span class='warning'>You lack power!</span>")
-
 		return 1
 
 	if(self_shutdown)
 		if(feedback) to_chat(src, "<span class='warning'>You are offline!</span>")
-
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
 		if(feedback) to_chat(src, "<span class='warning'>Wireless control is disabled!</span>")
-
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
 		if(feedback) to_chat(src, "<span class='warning'>System Error - Transceiver Disabled!</span>")
-
 		return 1
 	return 0
 
@@ -688,7 +666,6 @@ var/list/ai_verbs_default = list(
 
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
-
 
 /mob/living/silicon/ai/updateicon()
 	if(!selected_sprite) selected_sprite = default_ai_icon

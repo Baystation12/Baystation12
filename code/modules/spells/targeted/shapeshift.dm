@@ -24,7 +24,6 @@
 	for(var/mob/living/M in targets)
 		if(M.stat == DEAD)
 			to_chat(user, "[name] can only transform living targets.")
-
 			continue
 		if(M.buckled)
 			M.buckled.unbuckle_mob()

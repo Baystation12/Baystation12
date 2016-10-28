@@ -37,7 +37,6 @@
 	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
 	to_chat(src, "<B>You are now [species.name]. </B>")
-
 	qdel(animation)
 
 	return src
@@ -94,7 +93,6 @@
 					loc_landmark = tripai
 		if (!loc_landmark)
 			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
-
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
@@ -187,7 +185,6 @@
 	new_slime.key = key
 
 	to_chat(new_slime, "<B>You are now a slime. Skreee!</B>")
-
 	qdel(src)
 	return
 
@@ -209,7 +206,6 @@
 	new_corgi.key = key
 
 	to_chat(new_corgi, "<B>You are now a Corgi. Yap Yap!</B>")
-
 	qdel(src)
 	return
 
@@ -243,7 +239,6 @@
 
 
 	to_chat(new_mob, "You suddenly feel more... animalistic.")
-
 	spawn()
 		qdel(src)
 	return
@@ -262,7 +257,6 @@
 	new_mob.key = key
 	new_mob.a_intent = I_HURT
 	to_chat(new_mob, "You feel more... animalistic")
-
 
 	qdel(src)
 

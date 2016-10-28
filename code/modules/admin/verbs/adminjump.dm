@@ -48,7 +48,6 @@
 				mob.jumpTo(T)
 			else
 				to_chat(mob, "This mob is not located in the game world.")
-
 	else
 		alert("Admin jumping disabled")
 
@@ -86,7 +85,6 @@
 	if(config.allow_admin_jump)
 		if(!istype(C))
 			to_chat(usr, "[C] is not a client, somehow.")
-
 			return
 
 		var/mob/M = C.mob

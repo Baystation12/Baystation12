@@ -297,7 +297,6 @@
 
 	if(closed_system)
 		to_chat(user, "You can't remove the dead plant while the lid is shut.")
-
 		return
 
 	seed = null
@@ -308,7 +307,6 @@
 	mutation_mod = 0
 
 	to_chat(user, "You remove the dead plant.")
-
 	lastproduce = 0
 	check_health()
 	return
@@ -365,12 +363,10 @@
 	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		if(labelled)
 			to_chat(usr, "You remove the label.")
-
 			labelled = null
 			update_icon()
 		else
 			to_chat(usr, "There is no label to remove.")
-
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/setlight()
@@ -385,7 +381,6 @@
 		if(new_light)
 			tray_light = new_light
 			to_chat(usr, "You set the tray to a light level of [tray_light] lumens.")
-
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_level_sanity()
@@ -434,17 +429,14 @@
 
 		if(!seed)
 			to_chat(user, "There is nothing to take a sample from in \the [src].")
-
 			return
 
 		if(sampled)
 			to_chat(user, "You have already sampled from this plant.")
-
 			return
 
 		if(dead)
 			to_chat(user, "The plant is dead.")
-
 			return
 
 		// Create a sample.
@@ -470,16 +462,13 @@
 				return ..()
 			else
 				to_chat(user, "There's no plant to inject.")
-
 				return 1
 		else
 			if(seed)
 				//Leaving this in in case we want to extract from plants later.
 				to_chat(user, "You can't get any extract out of this plant.")
-
 			else
 				to_chat(user, "There's nothing to draw something from.")
-
 			return 1
 
 	else if (istype(O, /obj/item/seeds))
@@ -491,12 +480,10 @@
 
 			if(!S.seed)
 				to_chat(user, "The packet seems to be empty. You throw it away.")
-
 				qdel(O)
 				return
 
 			to_chat(user, "You plant the [S.seed.seed_name] [S.seed.seed_noun].")
-
 			lastproduce = 0
 			seed = S.seed //Grab the seed datum.
 			dead = 0
@@ -512,7 +499,6 @@
 		else
 			to_chat(user, "<span class='danger'>\The [src] already has seeds in it!</span>")
 
-
 	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
@@ -521,7 +507,6 @@
 			update_icon()
 		else
 			to_chat(user, "<span class='danger'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
-
 
 	else if (istype(O, /obj/item/weapon/storage/plants))
 
@@ -541,7 +526,6 @@
 		pestlevel -= spray.pest_kill_str
 		weedlevel -= spray.weed_kill_str
 		to_chat(user, "You spray [src] with [O].")
-
 		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
 		qdel(O)
 		check_health()
@@ -555,7 +539,6 @@
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
-
 
 	else if(O.force && seed)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -587,33 +570,25 @@
 
 	if(!seed)
 		to_chat(usr, "[src] is empty.")
-
 		return
 
 	to_chat(usr, "<span class='notice'>[seed.display_name] are growing here.</span>")
-
 
 	if(!Adjacent(usr))
 		return
 
 	to_chat(usr, "Water: [round(waterlevel,0.1)]/100")
-
 	to_chat(usr, "Nutrient: [round(nutrilevel,0.1)]/10")
-
 
 	if(weedlevel >= 5)
 		to_chat(usr, "\The [src] is <span class='danger'>infested with weeds</span>!")
-
 	if(pestlevel >= 5)
 		to_chat(usr, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
 
-
 	if(dead)
 		to_chat(usr, "<span class='danger'>The plant is dead.</span>")
-
 	else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
 		to_chat(usr, "The plant looks <span class='danger'>unhealthy</span>.")
-
 
 	if(mechanical)
 		var/turf/T = loc
@@ -643,7 +618,6 @@
 
 		to_chat(usr, "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
 
-
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"
 	set category = "Object"
@@ -658,5 +632,4 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/close_lid(var/mob/living/user)
 	closed_system = !closed_system
 	to_chat(user, "You [closed_system ? "close" : "open"] the tray's lid.")
-
 	update_icon()

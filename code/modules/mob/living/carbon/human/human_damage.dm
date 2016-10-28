@@ -166,7 +166,6 @@
 				var/obj/item/organ/external/O = pick(candidates)
 				O.mutate()
 				to_chat(src, "<span class = 'notice'>Something is not right with your [O.name]...</span>")
-
 				return
 	else
 		if (prob(heal_prob))
@@ -174,7 +173,6 @@
 				if (O.status & ORGAN_MUTATED)
 					O.unmutate()
 					to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
-
 					return
 
 	if (getCloneLoss() < 1)
@@ -182,7 +180,6 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
-
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.

@@ -14,7 +14,6 @@
 		var/obj/item/assembly/shock_kit/SK = W
 		if(!SK.status)
 			to_chat(user, "<span class='notice'>\The [SK] is not ready to be attached!</span>")
-
 			return
 		user.drop_item()
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
@@ -87,7 +86,6 @@
 	if(usr.stat == DEAD)
 		if(!round_is_spooky())
 			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
-
 			return
 	else if(usr.incapacitated())
 		return

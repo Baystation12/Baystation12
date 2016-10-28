@@ -60,7 +60,6 @@
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
-
 			traitors.add_antagonist(N.mind)
 			traitors.equip(N)
 			message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
@@ -96,7 +95,6 @@
 /obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
 	if(surplus() < 1500)
 		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
-
 		return
 	for(var/obj/singularity/singulo in world)
 		if(singulo.z == z)
@@ -106,7 +104,6 @@
 	machines |= src
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
-
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
@@ -119,7 +116,6 @@
 		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
 
 
-
 /obj/machinery/power/singularity_beacon/attack_ai(mob/user as mob)
 	return
 
@@ -129,7 +125,6 @@
 		return active ? Deactivate(user) : Activate(user)
 	else
 		to_chat(user, "<span class='danger'>You need to screw the beacon to the floor first!</span>")
-
 		return
 
 
@@ -137,23 +132,19 @@
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(active)
 			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
-
 			return
 
 		if(anchored)
 			anchored = 0
 			to_chat(user, "<span class='notice'>You unscrew the beacon from the floor.</span>")
-
 			disconnect_from_network()
 			return
 		else
 			if(!connect_to_network())
 				to_chat(user, "This device must be placed over an exposed cable.")
-
 				return
 			anchored = 1
 			to_chat(user, "<span class='notice'>You screw the beacon to the floor and attach the cable.</span>")
-
 			return
 	..()
 	return

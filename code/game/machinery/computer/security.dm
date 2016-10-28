@@ -33,14 +33,12 @@
 
 	if(scan)
 		to_chat(usr, "You remove \the [scan] from \the [src].")
-
 		scan.loc = get_turf(src)
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else
 		to_chat(usr, "There is nothing to remove from the console.")
-
 	return
 
 /obj/machinery/computer/secure_data/attackby(obj/item/O as obj, user as mob)
@@ -49,7 +47,6 @@
 		O.loc = src
 		scan = O
 		to_chat(user, "You insert [O].")
-
 	..()
 
 /obj/machinery/computer/secure_data/attack_ai(mob/user as mob)
@@ -64,7 +61,6 @@
 /obj/machinery/computer/secure_data/ui_interact(user)
 	if (!isPlayerLevel(z))
 		to_chat(user, "<span class='warning'>Unable to establish a connection:</span> You're too far away from the station!")
-
 		return
 	var/dat
 

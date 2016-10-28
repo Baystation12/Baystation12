@@ -68,7 +68,6 @@
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is undamaged.</span>")
-
 		return
 	return ..()
 
@@ -85,7 +84,6 @@
 	msg += "*---------*</span>"
 
 	to_chat(user, msg)
-
 
 
 /////////////////Juggernaut///////////////

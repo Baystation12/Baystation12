@@ -74,7 +74,6 @@
 
 			to_chat(M, "<span class='danger'>You step on \the [src]!</span>")
 
-
 			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)
 				var/picked = pick(check)

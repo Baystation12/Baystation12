@@ -118,7 +118,6 @@
 		if(connected_port)
 			disconnect()
 			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")
-
 			update_icon()
 			return
 		else
@@ -126,16 +125,13 @@
 			if(possible_port)
 				if(connect(possible_port))
 					to_chat(user, "<span class='notice'>You connect \the [src] to the port.</span>")
-
 					update_icon()
 					return
 				else
 					to_chat(user, "<span class='notice'>\The [src] failed to connect to the port.</span>")
-
 					return
 			else
 				to_chat(user, "<span class='notice'>Nothing happens.</span>")
-
 				return
 
 	else if ((istype(W, /obj/item/device/analyzer)) && Adjacent(user))
@@ -165,7 +161,6 @@
 	if(istype(I, /obj/item/weapon/cell))
 		if(cell)
 			to_chat(user, "There is already a power cell installed.")
-
 			return
 
 		var/obj/item/weapon/cell/C = I
@@ -181,7 +176,6 @@
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(!cell)
 			to_chat(user, "<span class='warning'>There is no power cell installed.</span>")
-
 			return
 
 		user.visible_message("<span class='notice'>[user] opens the panel on [src] and removes [cell].</span>", "<span class='notice'>You open the panel on [src] and remove [cell].</span>")
