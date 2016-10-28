@@ -353,15 +353,15 @@
 /obj/item/clothing/under/rank/cargo/jean
 	name = "quartermaster's jumpjeans"
 	desc = "It's a jumpsuit worn by the quartermaster. Now with jeans!"
-	icon_state = "qmj"
-	worn_state = "qmj"
+	icon_state = "eros_qmj"
+	worn_state = "eros_qmj"
 
 
 /obj/item/clothing/under/rank/cargotech/jean
 	name = "cargo technician's jumpjeans"
 	desc = "They're comfy and easy to wear! Now with jeans!"
-	icon_state = "cargoj"
-	worn_state = "cargoj"
+	icon_state = "eros_cargoj"
+	worn_state = "eros_cargoj"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 /obj/item/clothing/under/dress/darkred
