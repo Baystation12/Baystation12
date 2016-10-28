@@ -519,7 +519,7 @@
 	if(refresh) updateDialog()
 
 /obj/machinery/bot/mulebot/proc/process_bot()
-//	to_chat(if(mode) world, "Mode: [mode]")
+//	if(mode) log_debug("Mode: [mode]")
 
 	switch(mode)
 		if(0)		// idle

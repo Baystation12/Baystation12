@@ -159,15 +159,15 @@
 /obj/item/weapon/cannonframe/examine(mob/user)
 	..(user)
 	switch(buildstate)
-		to_chat(if(1) user, "It has a pipe segment installed.")
+		if(1) to_chat(user, "It has a pipe segment installed.")
 
-		to_chat(if(2) user, "It has a pipe segment welded in place.")
+		if(2) to_chat(user, "It has a pipe segment welded in place.")
 
-		to_chat(if(3) user, "It has an outer chassis installed.")
+		if(3) to_chat(user, "It has an outer chassis installed.")
 
-		to_chat(if(4) user, "It has an outer chassis welded in place.")
+		if(4) to_chat(user, "It has an outer chassis welded in place.")
 
-		to_chat(if(5) user, "It has a transfer valve installed.")
+		if(5) to_chat(user, "It has a transfer valve installed.")
 
 
 /obj/item/weapon/cannonframe/attackby(obj/item/W as obj, mob/user as mob)

@@ -114,7 +114,7 @@
 
 /mob/living/carbon/slime/proc/Feedstop()
 	if(Victim)
-		to_chat(if(Victim.client) Victim, "[src] has let go of your head!")
+		if(Victim.client) to_chat(Victim, "[src] has let go of your head!")
 
 		Victim = null
 

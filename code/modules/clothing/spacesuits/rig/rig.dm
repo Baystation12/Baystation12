@@ -250,7 +250,7 @@
 		if(!instant)
 			wearer.visible_message("<font color='blue'>[wearer]'s suit emits a quiet hum as it begins to adjust its seals.</font>","<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>")
 			if(seal_delay && !do_after(wearer,seal_delay, src))
-				to_chat(if(wearer) wearer, "<span class='warning'>You must remain still while the suit is adjusting the components.</span>")
+				if(wearer) to_chat(wearer, "<span class='warning'>You must remain still while the suit is adjusting the components.</span>")
 
 				failed_to_seal = 1
 
@@ -268,7 +268,7 @@
 					continue
 
 				if(!istype(wearer) || !istype(piece) || !istype(compare_piece) || !msg_type)
-					to_chat(if(wearer) wearer, "<span class='warning'>You must remain still while the suit is adjusting the components.</span>")
+					if(wearer) to_chat(wearer, "<span class='warning'>You must remain still while the suit is adjusting the components.</span>")
 
 					failed_to_seal = 1
 					break
@@ -865,15 +865,15 @@
 			return 0
 
 	if(offline || !cell || !cell.charge || locked_down)
-		to_chat(if(user) user, "<span class='warning'>Your host rig is unpowered and unresponsive.</span>")
+		if(user) to_chat(user, "<span class='warning'>Your host rig is unpowered and unresponsive.</span>")
 
 		return 0
 	if(!wearer || wearer.back != src)
-		to_chat(if(user) user, "<span class='warning'>Your host rig is not being worn.</span>")
+		if(user) to_chat(user, "<span class='warning'>Your host rig is not being worn.</span>")
 
 		return 0
 	if(!wearer.stat && !control_overridden && !ai_override_enabled)
-		to_chat(if(user) user, "<span class='warning'>You are locked out of the suit servo controller.</span>")
+		if(user) to_chat(user, "<span class='warning'>You are locked out of the suit servo controller.</span>")
 
 		return 0
 	return 1

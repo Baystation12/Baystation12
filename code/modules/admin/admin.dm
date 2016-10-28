@@ -313,7 +313,7 @@ var/global/floorIsLava = 0
 			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<br><br>"
-		to_chat(if(update_file) info, infos)
+		if(update_file) info << infos
 
 
 	dat += "<br>"
