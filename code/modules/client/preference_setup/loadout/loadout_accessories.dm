@@ -51,41 +51,17 @@
 	display_name = "holster, waist"
 	path = /obj/item/clothing/accessory/holster/waist
 
-/datum/gear/accessory/tie/blue
-	display_name = "tie, blue"
-	path = /obj/item/clothing/accessory/blue
+/datum/gear/accessory/tie
+	display_name = "tie selection"
+	path = /obj/item/clothing/accessory/tie
 
-/datum/gear/accessory/tie/blueclip
-	display_name = "tie, blue with clip"
-	path = /obj/item/clothing/accessory/blue_clip
-
-/datum/gear/accessory/tie/navy
-	display_name = "tie, navy"
-	path = /obj/item/clothing/accessory/navy
-
-/datum/gear/accessory/tie/red
-	display_name = "tie, red"
-	path = /obj/item/clothing/accessory/red
-
-/datum/gear/accessory/tie/redlong
-	display_name = "tie, red long"
-	path = /obj/item/clothing/accessory/red_long
-
-/datum/gear/accessory/tie/black
-	display_name = "tie, black"
-	path = /obj/item/clothing/accessory/black
-
-/datum/gear/accessory/tie/yellow
-	display_name = "tie, yellow"
-	path = /obj/item/clothing/accessory/yellow
-
-/datum/gear/accessory/tie/horrible
-	display_name = "tie, socially disgraceful"
-	path = /obj/item/clothing/accessory/horrible
-
-/datum/gear/accessory/det_vest
-	display_name = "black vest"
-	path = /obj/item/clothing/accessory/toggleable/vest
+/datum/gear/accessory/tie/New()
+	..()
+	var/list/ties = list()
+	for(var/tie in typesof(/obj/item/clothing/accessory/tie))
+		var/obj/item/clothing/accessory/tie/tie_type = tie
+		ties[initial(tie_type.name)] = tie_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ties))
 
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"
@@ -150,3 +126,49 @@
 		var/obj/item/clothing/accessory/collar/collar_type = collar
 		collars[initial(collar_type.name)] = collar_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(collars))
+
+/datum/gear/accessory/scarf
+	display_name = "scarf selection"
+	path = /obj/item/clothing/accessory/scarf
+
+/datum/gear/accessory/scarf/New()
+	..()
+	var/list/scarves = list()
+	for(var/scarf in typesof(/obj/item/clothing/accessory/scarf))
+		var/obj/item/clothing/accessory/scarf/scarf_type = scarf
+		scarves[initial(scarf_type.name)] = scarf_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(scarves))
+
+/datum/gear/accessory/chaps
+	display_name = "chaps, brown"
+	description = "Why do they not cover the groin?"
+	path = /obj/item/clothing/accessory/chaps
+
+/datum/gear/accessory/chaps/black
+	display_name = "chaps, black"
+	path = /obj/item/clothing/accessory/chaps/black
+
+
+/datum/gear/accessory/suitjacket/det_vest
+	display_name = "suit jacket, vest"
+	path = /obj/item/clothing/accessory/toggleable/vest
+
+/datum/gear/accessory/suitjacket
+	display_name = "suit jacket, tan"
+	path = /obj/item/clothing/accessory/toggleable/tan_jacket
+
+/datum/gear/accessory/suitjacket/charcoal
+	display_name = "suit jacket, charcoal"
+	path = /obj/item/clothing/accessory/toggleable/charcoal_jacket
+
+/datum/gear/accessory/suitjacket/navy
+	display_name = "suit jacket, navy blue"
+	path = /obj/item/clothing/accessory/toggleable/navy_jacket
+
+/datum/gear/accessory/suitjacket/burgundy
+	display_name = "suit jacket, burgundy"
+	path = /obj/item/clothing/accessory/toggleable/burgundy_jacket
+
+/datum/gear/accessory/suitjacket/checkered
+	display_name = "suit jacket, checkered"
+	path = /obj/item/clothing/accessory/toggleable/checkered_jacket

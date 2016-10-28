@@ -81,20 +81,20 @@
 	worn_state = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	starting_accessories = list(/obj/item/clothing/accessory/blue_clip)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/blue_clip)
 
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks."
-	starting_accessories = list(/obj/item/clothing/accessory/red_long)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/red_long)
 
 /obj/item/clothing/under/det/black
 	icon_state = "detective3"
 	worn_state = "detective3"
 	item_state = "sl_suit"
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
-	starting_accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/toggleable/vest)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/red_long, /obj/item/clothing/accessory/toggleable/vest)
 
 /obj/item/clothing/head/det
 	name = "fedora"
