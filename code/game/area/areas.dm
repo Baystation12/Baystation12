@@ -257,8 +257,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	// If we previously were in an area with force-played ambiance, stop it.
 	if(L in forced_ambiance_list)
-		to_chat(L, sound(null, channel = 1))
-
+		sound_to(L, sound(null, channel = 1))
 		forced_ambiance_list -= L
 
 	var/turf/T = get_turf(L)
@@ -276,16 +275,14 @@ var/list/mob/living/forced_ambiance_list = new
 	else
 		if(L.client.ambience_playing)
 			L.client.ambience_playing = 0
-			to_chat(L, sound(null, channel = 2))
-
+			sound_to(L, sound(null, channel = 2))
 
 	if(forced_ambience)
 		if(forced_ambience.len)
 			forced_ambiance_list |= L
 			L.playsound_local(T,sound(pick(forced_ambience), repeat = 1, wait = 0, volume = 25, channel = 1))
 		else
-			to_chat(L, sound(null, channel = 1))
-
+			sound_to(L, sound(null, channel = 1))
 	else if(src.ambience.len && prob(35))
 		if((world.time >= L.client.played + 600))
 			var/sound = pick(ambience)
