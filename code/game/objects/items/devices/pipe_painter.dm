@@ -28,4 +28,5 @@
 
 /obj/item/device/pipe_painter/examine(mob/user)
 	..(user)
-	user << "It is in [mode] mode."
+	to_chat(user, "It is in [mode] mode.")
+

@@ -144,5 +144,6 @@ var/list/uplink_random_selections_
 
 /proc/debug_uplink_item_assoc_list()
 	for(var/key in uplink.items_assoc)
-		world << "[key] - [uplink.items_assoc[key]]"
+		log_debug("[key] - [uplink.items_assoc[key]]")
+
 #endif
