@@ -1,7 +1,6 @@
 /datum/species/slime
 	name = "Slime"
 	name_plural = "slimes"
-	mob_size = MOB_SMALL
 
 	blurb = "< Slime lore here. > \
 	Slimes are not permitted to be Captain, HoP, or HoS."
@@ -15,8 +14,8 @@
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
 	siemens_coefficient = -1
 	darksight = 3
-	brute_mod = 0.5
-	burn_mod = 2
+	brute_mod = 0.7
+	burn_mod = 1.5
 	virus_immune = 1
 
 	health_hud_intensity = 2
@@ -48,9 +47,6 @@
 
 	body_temperature =      310.15
 
-	breath_type = null
-	poison_type = null
-
 	bump_flag = SLIME
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
@@ -58,7 +54,7 @@
 	gluttonous = GLUT_TINY
 	stomach_capacity = MOB_SMALL
 
-	flags = NO_SCAN | NO_SLIP | NO_EMBED
+	flags =  NO_EMBED
 	appearance_flags = HAS_SKIN_COLOR | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_BIOMODS | RADIATION_GLOWS
 	spawn_flags = CAN_JOIN
 
@@ -76,7 +72,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/unbreakable/slime)
 		)
 
-var/heal_rate = 5 // Temp. Regen per tick.
+var/heal_rate = 0.5 // Temp. Regen per tick.
 
 /datum/species/slime/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)
