@@ -25,7 +25,7 @@
 /obj/item/clothing/glasses/hud/health/prescription
 	name = "Prescription Health Scanner HUD"
 	desc = "A medical HUD integrated with a set of prescription glasses"
-	prescription = 1
+	prescription = 7
 	icon_state = "healthhudpresc"
 	item_state = "glasses"
 
@@ -39,7 +39,7 @@
 /obj/item/clothing/glasses/hud/security/prescription
 	name = "Prescription Security HUD"
 	desc = "A security HUD integrated with a set of prescription glasses"
-	prescription = 1
+	prescription = 7
 	icon_state = "sechudpresc"
 	item_state = "glasses"
 
