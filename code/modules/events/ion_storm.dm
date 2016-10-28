@@ -166,7 +166,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 				if(1)
 					to_chat(M, "<br>")
 
-					to_chat(M, "<span class='warning'>THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED</span<")
+					to_chat(M, "<span class='warning'>THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED</span>")
 
 					to_chat(M, "<br>")
 

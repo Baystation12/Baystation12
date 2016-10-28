@@ -104,7 +104,7 @@
 				return
 		if(isscrewdriver(W))
 			if(toggle_secure())
-				to_chat(user, "<span class='notice'>\The [src] is ready!</span<")
+				to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 			else
 				to_chat(user, "<span class='notice'>\The [src] can now be attached!</span>")
 			return

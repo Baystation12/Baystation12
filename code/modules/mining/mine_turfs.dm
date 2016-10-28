@@ -486,7 +486,7 @@ var/list/mining_floors = list()
 
 	if(valid_tool)
 		if (dug)
-			to_chat(user, "<span class='warning'>This area has already been dug</span<")
+			to_chat(user, "<span class='warning'>This area has already been dug</span>")
 			return
 
 		var/turf/T = user.loc

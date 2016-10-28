@@ -153,8 +153,7 @@
 						emp_damage -= 1
 				if(1)
 					alert = 0
-					to_chat(src, "<span class='warning'>All systems restored.</span>")<
-
+					to_chat(src, "<span class='warning'>All systems restored.</span>")
 					emp_damage -= 1
 
 	return 1
