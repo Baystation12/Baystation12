@@ -393,8 +393,7 @@
 	signal.data["sigtype"] = "command"
 
 	radio_connection.post_signal(src, signal, RADIO_FROM_AIRALARM)
-//			to_chat(world, text("Signal [] Broadcasted to []", command, target))
-
+//			log_debug(text("Signal [] Broadcasted to []", command, target))
 
 	return 1
 

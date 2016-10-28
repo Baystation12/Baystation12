@@ -20,8 +20,7 @@ var/global/datum/controller/occupations/job_master
 		occupations_by_type = list()
 		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
-			to_chat(world, "<span class='warning'>Error setting up jobs, no job datums found!</span>")
-
+			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()

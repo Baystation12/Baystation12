@@ -886,8 +886,7 @@
 			return alert(usr, "The game has already started.", null, null, null, null)
 		master_mode = href_list["c_mode2"]
 		log_and_message_admins("set the mode as [master_mode].")
-		to_chat(world, "<span class='notice'><b>The mode is now: [master_mode]</b></span>")
-
+		to_world("<span class='notice'><b>The mode is now: [master_mode]</b></span>")
 		Game() // updates the main game menu
 		world.save_mode(master_mode)
 		.(href, list("c_mode"=1))

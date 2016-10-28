@@ -52,13 +52,11 @@ datum/hSB
 				if("hsbtobj")
 					if(!admin) return
 					if(hsboxspawn)
-						to_chat(world, "<b>Sandbox:  [usr.key] has disabled object spawning!</b>")
-
+						to_world("<b>Sandbox:  [usr.key] has disabled object spawning!</b>")
 						hsboxspawn = 0
 						return
 					if(!hsboxspawn)
-						to_chat(world, "<b>Sandbox:  [usr.key] has enabled object spawning!</b>")
-
+						to_world"<b>Sandbox:  [usr.key] has enabled object spawning!</b>")
 						hsboxspawn = 1
 						return
 				if("hsbsuit")

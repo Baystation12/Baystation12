@@ -34,11 +34,9 @@
 			survivors++
 
 	if(survivors)
-		to_chat(world, "<span class='notice'><B>The following survived the meteor storm</B></span>:[text]")
-
+		to_world("<span class='notice'><B>The following survived the meteor storm</B></span>:[text]")
 	else
-		to_chat(world, "<span class='notice'><B>Nobody survived the meteor storm!</B></span>")
-
+		to_world("<span class='notice'><B>Nobody survived the meteor storm!</B></span>")
 
 	feedback_set_details("round_end_result","end - evacuation")
 	feedback_set("round_end_result",survivors)

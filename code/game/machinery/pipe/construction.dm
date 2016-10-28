@@ -765,13 +765,11 @@ Buildable meters
 			V.initialize()
 			V.build_network()
 			if (V.node1)
-//					to_chat(world, "[V.node1.name] is connected to valve, forcing it to update its nodes.")
-
+//				log_error("[V.node1.name] is connected to valve, forcing it to update its nodes.")
 				V.node1.initialize()
 				V.node1.build_network()
 			if (V.node2)
-//					to_chat(world, "[V.node2.name] is connected to valve, forcing it to update its nodes.")
-
+//				log_error("[V.node2.name] is connected to valve, forcing it to update its nodes.")
 				V.node2.initialize()
 				V.node2.build_network()
 

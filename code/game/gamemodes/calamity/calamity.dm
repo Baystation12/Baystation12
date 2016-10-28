@@ -22,7 +22,6 @@
 	..()
 
 /datum/game_mode/calamity/check_victory()
-	to_chat(world, "<font size = 3><b>This terrible, terrible day has finally ended!</b></font>")
-
+	to_world("<font size = 3><b>This terrible, terrible day has finally ended!</b></font>")
 
 #undef ANTAG_TYPE_RATIO

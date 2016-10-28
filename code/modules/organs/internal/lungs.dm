@@ -230,8 +230,7 @@
 
 		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 		if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-//		to_chat(world, "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
-
+//		log_debug("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
 		owner.bodytemperature += temp_adj
 
 	else if(breath.temperature >= species.heat_discomfort_level)
