@@ -35,7 +35,7 @@
 	to_chat(user, "Large machine with heavy duty switching circuits used for advanced grid control")
 
 	if(on)
-		to_chat(user, "span class='good'>It seems to be online.</span>")
+		to_chat(user, "<span class='good'>It seems to be online.</span>")
 
 	else
 		to_chat(user, "<span class='warning'>It seems to be offline.</span>")

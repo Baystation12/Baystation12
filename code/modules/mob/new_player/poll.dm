@@ -461,7 +461,7 @@
 		var/DBQuery/insert_query = dbcon.NewQuery("INSERT INTO erro_poll_textreply (id ,datetime ,pollid ,ckey ,ip ,replytext ,adminrank) VALUES (null, Now(), [pollid], '[usr.ckey]', '[usr.client.address]', '[replytext]', '[adminrank]')")
 		insert_query.Execute()
 
-		to_chat(usr, "<span class='notice'>Feedback logging successful.</span")
+		to_chat(usr, "<span class='notice'>Feedback logging successful.</span>")
 		usr << browse(null,"window=playerpoll")
 
 

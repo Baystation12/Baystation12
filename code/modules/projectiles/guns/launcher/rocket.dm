@@ -11,7 +11,7 @@
 	slot_flags = 0
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 5)
 	fire_sound = 'sound/effects/bang.ogg'
-	
+
 	release_force = 15
 	throw_distance = 30
 	var/max_rockets = 1
@@ -30,7 +30,7 @@
 			I.loc = src
 			rockets += I
 			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")
-			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span<")
+			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 		else
 			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
 

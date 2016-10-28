@@ -7,7 +7,8 @@
 
 /obj/item/device/shield_disrupter/attack_self(var/mob/user)
 	if(recharging)
-		user << "<span class='warning'>\The [src] is still recharging.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is still recharging.</span>")
+
 		return
 	playsound(src, 'sound/effects/EMPulse.ogg', 50)
 	disrupt_shields()
