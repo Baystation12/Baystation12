@@ -6,9 +6,6 @@
 /decl/global_vars/get_view_variables_options()
 	return "" // Ensuring changes to the base proc never affect us
 
-/decl/global_vars/Destroy()
-	return 1 // Denied
-
 /decl/global_vars/get_variables()
 	return _all_globals
 
