@@ -102,6 +102,7 @@
 	var/available_types = list("string","number","null")
 
 /obj/item/device/integrated_electronics/debugger/admin
+	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
 	available_types = list("string","number","ref","null")
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
