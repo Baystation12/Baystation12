@@ -188,6 +188,15 @@
 /obj/item/stack/material/plasteel/fifty
 	amount = 50
 
+/obj/item/stack/material/durasteel
+	name = "durasteel"
+	icon_state = "sheet-durasteel"
+	item_state = "sheet-metal"
+	default_type = "durasteel"
+
+/obj/item/stack/material/durasteel/fifty
+	amount = 50
+
 /obj/item/stack/material/wood
 	name = "wooden plank"
 	icon_state = "sheet-wood"
