@@ -29,3 +29,6 @@
 // Calls forwarded to COMPUTER running the program should begin with "PC_"
 /datum/topic_manager/program/Topic(href, href_list)
 	return program && program.Topic(href, href_list)
+
+/datum/nano_module/program/initial_data()
+	return host.initial_data()

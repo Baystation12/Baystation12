@@ -275,6 +275,11 @@
 		else
 			user << "You press the power button and start up \the [src]"
 		enabled = 1
+		if(hard_drive.find_file_by_name("autorun"))
+			var/datum/computer_file/data/A = hard_drive.find_file_by_name("autorun")
+			var/list/autorun = splittext(A.stored_data,";")
+			for(var/prg in autorun)
+				run_program(prg)
 		update_icon()
 		ui_interact(user)
 	else // Unpowered
@@ -370,6 +375,41 @@
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data
 
+/obj/item/modular_computer/proc/run_program(name, mob/user)
+	var/datum/computer_file/program/P = null
+	if(hard_drive)
+		P = hard_drive.find_file_by_name(name)
+
+	if(!P || !istype(P)) // Program not found or it's not executable program.
+		to_chat(user,"<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>")
+		return
+
+	P.computer = src
+
+	if(!P.is_supported_by_hardware(hardware_flag, 1, user))
+		return
+
+	// The program is already running. Resume it.
+	if(P in idle_threads)
+		P.program_state = PROGRAM_STATE_ACTIVE
+		active_program = P
+		idle_threads.Remove(P)
+		update_icon()
+		return
+
+	if(idle_threads.len >= processor_unit.max_idle_programs+1)
+		to_chat(user,"<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>")
+		return
+
+	if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
+		to_chat(user,"<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>")
+		return
+
+	if(P.run_program(user))
+		active_program = P
+		update_icon()
+	return 1
+
 // Relays kill program request to currently active program. Use this to quit current program.
 /obj/item/modular_computer/proc/kill_program(var/forced = 0)
 	if(active_program)
@@ -451,41 +491,7 @@
 		user << "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>"
 
 	if( href_list["PC_runprogram"] )
-		var/prog = href_list["PC_runprogram"]
-		var/datum/computer_file/program/P = null
-		var/mob/user = usr
-		if(hard_drive)
-			P = hard_drive.find_file_by_name(prog)
-
-		if(!P || !istype(P)) // Program not found or it's not executable program.
-			user << "<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>"
-			return
-
-		P.computer = src
-
-		if(!P.is_supported_by_hardware(hardware_flag, 1, user))
-			return
-
-		// The program is already running. Resume it.
-		if(P in idle_threads)
-			P.program_state = PROGRAM_STATE_ACTIVE
-			active_program = P
-			idle_threads.Remove(P)
-			update_icon()
-			return
-
-		if(idle_threads.len >= processor_unit.max_idle_programs+1)
-			user << "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>"
-			return
-
-		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
-			user << "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>"
-			return
-
-		if(P.run_program(user))
-			active_program = P
-			update_icon()
-		return 1
+		return run_program(href_list["PC_runprogram"], usr)
 	if(.)
 		update_uis()
 
@@ -831,3 +837,16 @@
 		return active_program.check_eye(user)
 	else
 		return ..()
+
+/obj/item/modular_computer/examine(var/mob/user)
+	..()
+	examine_extra(user)
+
+/obj/item/modular_computer/proc/examine_extra(var/mob/user)
+	if(!enabled)
+		to_chat(user,"It's turned off.")
+		return
+	if(active_program)
+		active_program.examine(user,get_dist(src,user))
+	else
+		to_chat(user,"Its screen shows a screensaver.")

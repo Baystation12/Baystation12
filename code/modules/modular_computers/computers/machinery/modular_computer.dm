@@ -206,3 +206,7 @@ var/list/global_modular_computers = list()
 		return cpu.check_eye(user)
 	return -1
 
+/obj/machinery/modular_computer/examine(var/mob/user)
+	..()
+	if(cpu)
+		return cpu.examine_extra(user)

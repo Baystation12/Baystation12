@@ -155,3 +155,6 @@
 		return NM.check_eye(user)
 	else
 		return -1
+
+/datum/computer_file/program/proc/examine(mob/user, distance)
+	to_chat(user,"[filedesc] is on the screen.")
