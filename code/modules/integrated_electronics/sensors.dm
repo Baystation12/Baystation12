@@ -72,12 +72,12 @@
 	if(!shall_trigger(enterer))
 		return
 
-	var/datum/integrated_io/O = outputs[1]
-	var/datum/integrated_io/A = activators[2]
+	var/datum/integrated_io/output/O = outputs[1]
+	var/datum/integrated_io/activate/A = activators[2]
 
 	O.data = weakref(enterer)
 	O.push_data()
-	A.push_data()
+	A.activate()
 
 /obj/item/integrated_circuit/sensor/proximity/proc/on_turfs_changed(var/list/old_turfs, var/list/new_turfs)
 	return

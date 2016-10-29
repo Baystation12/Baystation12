@@ -110,7 +110,6 @@
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "X"
 	color = COLOR_PURPLE
-	matter = list("plastic" = 100)
 	var/prefab_type
 
 /obj/prefab/initialize()

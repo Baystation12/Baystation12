@@ -14,7 +14,7 @@
 /obj/item/integrated_circuit/converter/num2text/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && isnum(incoming.data))
 		result = num2text(incoming.data)
 
@@ -29,7 +29,7 @@
 /obj/item/integrated_circuit/converter/text2num/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && istext(incoming.data))
 		result = text2num(incoming.data)
 
@@ -45,7 +45,7 @@
 /obj/item/integrated_circuit/converter/text2ascii/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && istext(incoming.data))
 		result = text2ascii(incoming.data)
 
@@ -60,7 +60,7 @@
 /obj/item/integrated_circuit/converter/ascii2text/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && isnum(incoming.data))
 		result = ascii2text(incoming.data)
 
@@ -73,13 +73,11 @@
 	icon_state = "ref-string"
 
 /obj/item/integrated_circuit/converter/ref2text/do_work()
-	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	var/atom/A = incoming.data_as_type(/atom)
-	result = A && A.name
 
-	outgoing.data = result
+	outgoing.data = A && A.name
 	outgoing.push_data()
 
 /obj/item/integrated_circuit/converter/lowercase
@@ -90,7 +88,7 @@
 /obj/item/integrated_circuit/converter/lowercase/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && istext(incoming.data))
 		result = lowertext(incoming.data)
 
@@ -105,7 +103,7 @@
 /obj/item/integrated_circuit/converter/uppercase/do_work()
 	var/result = null
 	var/datum/integrated_io/incoming = inputs[1]
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	if(incoming.data && istext(incoming.data))
 		result = uppertext(incoming.data)
 
@@ -127,6 +125,6 @@
 		if(istext(I.data))
 			result = result + I.data
 
-	var/datum/integrated_io/outgoing = outputs[1]
+	var/datum/integrated_io/output/outgoing = outputs[1]
 	outgoing.data = jointext(result,null)
 	outgoing.push_data()

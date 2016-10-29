@@ -35,6 +35,18 @@
 	applied_shell = null
 	. = ..()
 
+/obj/item/device/electronic_assembly/GetAccess()
+	. = list()
+	for(var/obj/item/integrated_circuit/part in contents)
+		. |= part.GetAccess()
+
+/obj/item/device/electronic_assembly/GetIdCard()
+	. = list()
+	for(var/obj/item/integrated_circuit/part in contents)
+		var/id_card = part.GetIdCard()
+		if(id_card)
+			return id_card
+
 /obj/item/device/electronic_assembly/verb/rotate()
 	set category = "Object"
 	set name = "Rotate Assembly"
@@ -171,8 +183,8 @@
 	. = ..(user, 2 * w_class) // Larger assemblies are easier to see from a distance
 	to_chat(user, "\The [src] is currently facing [dir2text(dir)].")
 	if(.)
-		for(var/obj/item/integrated_circuit/output/O in contents)
-			O.external_examine(user, opened)
+		for(var/obj/item/integrated_circuit/IO in contents)
+			IO.external_examine(user, opened)
 
 /obj/item/device/electronic_assembly/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/integrated_circuit))
