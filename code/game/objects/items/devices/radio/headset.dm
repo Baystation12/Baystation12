@@ -70,6 +70,10 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
+	
+/obj/item/device/radio/headset/syndicate/initialize()
+	..()
+	set_frequency(SYND_FREQ)
 
 /obj/item/device/radio/headset/binary
 	origin_tech = list(TECH_ILLEGAL = 3)
