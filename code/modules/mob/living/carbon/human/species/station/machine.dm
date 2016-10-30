@@ -71,7 +71,7 @@
 	heat_discomfort_strings = list(
 		"Your CPU temperature probes warn you that you are approaching critical heat levels!"
 		)
-	genders = list(MALE, FEMALE, NEUTER)
+	genders = list(MALE, FEMALE, NEUTER, PLURAL)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
