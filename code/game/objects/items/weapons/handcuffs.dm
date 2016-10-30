@@ -49,7 +49,7 @@
 			user << "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>"
 
 /obj/item/weapon/handcuffs/proc/can_place(var/mob/target, var/mob/user)
-	if(istype(user, /mob/living/silicon/robot))
+	if(istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
 		return 1
 	else
 		for (var/obj/item/weapon/grab/G in target.grabbed_by)
