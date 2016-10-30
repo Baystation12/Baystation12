@@ -419,4 +419,10 @@
 /datum/gear/uniform/reddress
 	display_name = "red dress with belt"
 	path = /obj/item/clothing/under/dress/darkred
+
+/datum/gear/uniform/worn_hazard
+	display_name = "Worn Hazard suit"
+	path = /obj/item/clothing/under/worn_hazard
+	allowed_roles = list("Chief Engineer","Station Engineer")
+
 //EROS FINISH

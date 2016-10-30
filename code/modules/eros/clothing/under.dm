@@ -369,4 +369,11 @@
 	desc = "A short, red dress with a black belt. Fancy."
 	icon_state = "eros_darkreddress"
 
-
+/obj/item/clothing/under/worn_hazard
+	name = "Worn hazard jumpsuit"
+	desc = "A high visibility jumpsuit made from heat and radiation resistant materials, this one seems to be a little beat up."
+	icon_state = "eros_wornhazard"
+	item_state = "engi_suit"
+	worn_state = "eros_wornhazard"
+	siemens_coefficient = 0.8
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
