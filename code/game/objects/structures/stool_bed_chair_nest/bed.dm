@@ -172,6 +172,19 @@
 /obj/structure/bed/alien/New(var/newloc)
 	..(newloc,"resin")
 
+/obj/structure/bed/double
+	name = "double bed"
+	icon_state = "doublebed"
+	base_icon = "doublebed"
+
+/obj/structure/bed/double/padded/New(var/newloc)
+	..(newloc,"wood","cotton")
+
+/obj/structure/bed/double/post_buckle_mob(mob/living/M as mob)
+	if(M == buckled_mob)
+		M.pixel_y = 13
+	else
+		M.pixel_y = 0
 /*
  * Roller beds
  */
