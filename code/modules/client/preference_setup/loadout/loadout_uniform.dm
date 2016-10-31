@@ -138,11 +138,11 @@
 /datum/gear/uniform/dress/New()
 	..()
 	var/dresses = list()
-	dresses[flame dress] = /obj/item/clothing/under/dress/dress_fire
-	dresses[green dress] = /obj/item/clothing/under/dress/dress_green
-	dresses[orange dress] = /obj/item/clothing/under/dress/dress_orange
-	dresses[pink dress] = /obj/item/clothing/under/dress/dress_pink
-	dresses[purple dress] = /obj/item/clothing/under/dress/dress_purple
+	dresses["flame dress"] = /obj/item/clothing/under/dress/dress_fire
+	dresses["green dress"] = /obj/item/clothing/under/dress/dress_green
+	dresses["orange dress"] = /obj/item/clothing/under/dress/dress_orange
+	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
+	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
 /datum/gear/uniform/uniform_captain
