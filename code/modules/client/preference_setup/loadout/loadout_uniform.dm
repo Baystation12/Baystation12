@@ -135,6 +135,22 @@
 	display_name = "flame dress"
 	path = /obj/item/clothing/under/dress/dress_fire
 
+/datum/gear/uniform/dress_green
+	display_name = "green dress"
+	path = /obj/item/clothing/under/dress/dress_green
+
+/datum/gear/uniform/dress_orange
+	display_name = "orange dress"
+	path = /obj/item/clothing/under/dress/dress_orange
+
+/datum/gear/uniform/dress_pink
+	display_name = "pink dress"
+	path = /obj/item/clothing/under/dress/dress_pink
+
+/datum/gear/uniform/dress_purple
+	display_name = "purple dress"
+	path = /obj/item/clothing/under/dress/dress_purple
+
 /datum/gear/uniform/uniform_captain
 	display_name = "uniform, captain's dress"
 	path = /obj/item/clothing/under/dress/dress_cap
@@ -196,7 +212,7 @@
 		var/obj/item/clothing/under/pants/short_type = short
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
-	
+
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
