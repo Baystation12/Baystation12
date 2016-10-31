@@ -131,25 +131,19 @@
 	display_name = "sundress, white"
 	path = /obj/item/clothing/under/sundress_white
 
-/datum/gear/uniform/dress_fire
-	display_name = "flame dress"
-	path = /obj/item/clothing/under/dress/dress_fire
+/datum/gear/uniform/dress
+	display_name = "dress selection"
+	path = /obj/item/clothing/under/dress
 
-/datum/gear/uniform/dress_green
-	display_name = "green dress"
-	path = /obj/item/clothing/under/dress/dress_green
-
-/datum/gear/uniform/dress_orange
-	display_name = "orange dress"
-	path = /obj/item/clothing/under/dress/dress_orange
-
-/datum/gear/uniform/dress_pink
-	display_name = "pink dress"
-	path = /obj/item/clothing/under/dress/dress_pink
-
-/datum/gear/uniform/dress_purple
-	display_name = "purple dress"
-	path = /obj/item/clothing/under/dress/dress_purple
+/datum/gear/uniform/dress/New()
+	..()
+	var/dresses = list()
+	dresses[flame dress] = /obj/item/clothing/under/dress/dress_fire
+	dresses[green dress] = /obj/item/clothing/under/dress/dress_green
+	dresses[orange dress] = /obj/item/clothing/under/dress/dress_orange
+	dresses[pink dress] = /obj/item/clothing/under/dress/dress_pink
+	dresses[purple dress] = /obj/item/clothing/under/dress/dress_purple
+	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
 /datum/gear/uniform/uniform_captain
 	display_name = "uniform, captain's dress"
