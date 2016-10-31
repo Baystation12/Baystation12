@@ -254,9 +254,8 @@
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
-	desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
-	icon_state = "sec_hud"
-	off_state = "sec_flash"
+	desc = "Modified aviator glasses that can switch between HUD and flash protection modes."
+	icon_state = "aviator_hud"
 	action_button_name = "Toggle Mode"
 	var/on = 1
 	toggleable = 1
@@ -294,7 +293,7 @@
 	if(on)
 		icon_state = initial(icon_state)
 	else
-		icon_state = off_state
+		icon_state = "[initial(icon_state)]_flash"
 
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"
