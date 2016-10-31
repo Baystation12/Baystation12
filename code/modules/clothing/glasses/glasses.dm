@@ -181,6 +181,13 @@
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
 
+/obj/item/clothing/glasses/welding/stylish
+	name = "stylish welding goggles"
+	desc = "Do -not- protect the eyes from welders, approved by the stylish scientist association."
+	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 100)
+	flash_protection = 0
+	tint = 0
+
 /obj/item/clothing/glasses/welding/attack_self()
 	toggle()
 

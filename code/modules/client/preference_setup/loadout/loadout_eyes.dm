@@ -74,3 +74,13 @@
 /datum/gear/eyes/glasses/shutters
 	display_name = "glasses, shutter"
 	path = /obj/item/clothing/glasses/shutters
+
+/datum/gear/eyes/glasses/welding
+	display_name = "welding goggles (Engineering)"
+	path = /obj/item/clothing/glasses/welding
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
+	cost = 2
+
+/datum/gear/eyes/glasses/welding/stylish
+	display_name = "welding goggles, stylish"
+	path = /obj/item/clothing/glasses/welding/stylish
