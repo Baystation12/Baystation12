@@ -153,4 +153,4 @@
 					continue
 				if(!target.should_have_organ(BP_LUNGS)) //dont breathe so why do they smell it.
 					continue
-			M << "<span class='danger'>A terrible stench emanates from \the [H].</span>"
+			to_chat(M, "<span class='danger'>A terrible stench emanates from \the [H].</span>")

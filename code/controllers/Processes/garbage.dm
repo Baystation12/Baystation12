@@ -175,7 +175,6 @@ var/list/unwrappable_lists = list("contents","verbs","overlays","underlays","scr
 	var/path = text2path(path_text)
 	if(!path)
 		to_chat(src, "Unable to find the path [path_text]")
-
 	var/atom/thing = new path(loc)
 	qdel(thing)
 

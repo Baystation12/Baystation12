@@ -314,7 +314,6 @@ var/bomb_set
 						visible_message("<span class='warning'>The anchoring bolts slide back into the depths of \the [src].</span>")
 				else
 					to_chat(usr, "<span class='warning'>There is nothing to anchor to!</span>")
-
 	return 1
 
 /obj/machinery/nuclearbomb/proc/secure_device()

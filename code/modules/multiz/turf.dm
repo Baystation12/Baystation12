@@ -147,7 +147,7 @@
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "<span class='notice'>You lay down the support lattice.</span>"
+			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z))
 		return
@@ -164,5 +164,5 @@
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
-			user << "<span class='warning'>The plating is going to need some support.</span>"
+			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 	return

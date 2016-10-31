@@ -88,8 +88,8 @@
 
 /obj/item/weapon/cell/examine(mob/user)
 	..()
-	user << "The label states it's capacity is [maxcharge] Wh"
-	user << "The charge meter reads [round(src.percent(), 0.1)]%"
+	to_chat(user, "The label states it's capacity is [maxcharge] Wh")
+	to_chat(user, "The charge meter reads [round(src.percent(), 0.1)]%")
 
 /obj/item/weapon/cell/emp_act(severity)
 	//remove this once emp changes on dev are merged in

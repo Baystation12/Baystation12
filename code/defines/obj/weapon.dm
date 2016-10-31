@@ -41,7 +41,7 @@
 /obj/item/weapon/soap/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/key))
 		if(!key_data)
-			user << "<span class='notice'>You imprint \the [I] into \the [src].</span>"
+			to_chat(user, "<span class='notice'>You imprint \the [I] into \the [src].</span>")
 			var/obj/item/weapon/key/K = I
 			key_data = K.key_data
 			update_icon()
@@ -327,7 +327,7 @@
 		if (C.bugged && C.status)
 			cameras.Add(C)
 	if (length(cameras) == 0)
-		usr << "<span class='warning'>No bugged functioning cameras found.</span>"
+		to_chat(usr, "<span class='warning'>No bugged functioning cameras found.</span>")
 		return
 
 	var/list/friendly_cameras = new/list()

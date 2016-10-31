@@ -88,7 +88,7 @@
 
 	if(isscrewdriver(W) && igniter && !lit)
 		status = !status
-		user << "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>"
+		to_chat(user, "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>")
 		update_icon()
 		return
 
@@ -104,7 +104,7 @@
 
 	if(istype(W,/obj/item/weapon/tank/phoron))
 		if(ptank)
-			user << "<span class='notice'>There appears to already be a phoron tank loaded in [src]!</span>"
+			to_chat(user, "<span class='notice'>There appears to already be a phoron tank loaded in [src]!</span>")
 			return
 		user.drop_item()
 		ptank = W
@@ -124,7 +124,7 @@
 	if(user.stat || user.restrained() || user.lying)	return
 	user.set_machine(src)
 	if(!ptank)
-		user << "<span class='notice'>Attach a phoron tank first!</span>"
+		to_chat(user, "<span class='notice'>Attach a phoron tank first!</span>")
 		return
 	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove phorontank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
 	user << browse(dat, "window=flamethrower;size=600x300")

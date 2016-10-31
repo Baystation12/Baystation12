@@ -35,7 +35,8 @@
 
 /mob/living/silicon/robot/proc/use_power()
 	// Debug only
-	// world << "DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]"
+//	log_debug(life.dm line 35: cyborg use_power() called at tick [controller_iteration]")
+
 	used_power_this_tick = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
@@ -58,7 +59,7 @@
 		src.has_power = 1
 	else
 		if (src.has_power)
-			src << "<span class='warning'>You are now running on emergency backup power.</span>"
+			to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
@@ -312,7 +313,7 @@
 		killswitch_time --
 		if(killswitch_time <= 0)
 			if(src.client)
-				src << "<span class='danger'>Killswitch Activated</span>"
+				to_chat(src, "<span class='danger'>Killswitch Activated</span>")
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -323,7 +324,7 @@
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)
-				src << "<span class='danger'>Weapon Lock Timed Out!</span>"
+				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
 			weapon_lock = 0
 			weaponlock_time = 120
 

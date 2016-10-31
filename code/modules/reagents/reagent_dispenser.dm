@@ -40,7 +40,6 @@
 				to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
 		else
 			to_chat(user, "<span class='notice'>Nothing.</span>")
-
 	verb/set_APTFT() //set amount_per_transfer_from_this
 		set name = "Set transfer amount"
 		set category = "Object"
@@ -97,7 +96,6 @@
 		to_chat(user, "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>")
 	if(rig)
 		to_chat(user, "<span class='notice'>There is some kind of device rigged to the tank.</span>")
-
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
 		usr.visible_message("<span class='notice'>\The [usr] begins to detach [rig] from \the [src].</span>", "<span class='notice'>You begin to detach [rig] from \the [src].</span>")

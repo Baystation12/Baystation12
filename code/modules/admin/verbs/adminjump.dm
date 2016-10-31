@@ -47,7 +47,7 @@
 				feedback_add_details("admin_verb","JM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 				mob.jumpTo(T)
 			else
-				mob << "This mob is not located in the game world."
+				to_chat(mob, "This mob is not located in the game world.")
 	else
 		alert("Admin jumping disabled")
 
@@ -84,7 +84,7 @@
 
 	if(config.allow_admin_jump)
 		if(!istype(C))
-			usr << "[C] is not a client, somehow."
+			to_chat(usr, "[C] is not a client, somehow.")
 			return
 
 		var/mob/M = C.mob

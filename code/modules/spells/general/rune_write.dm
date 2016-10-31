@@ -22,7 +22,7 @@
 	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Communicate", "Stun")
 	var/r = input(user, "Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 	if(locate(/obj/effect/rune) in user.loc)
-		user << "<span class='warning'>There is already a rune in this location.</span>"
+		to_chat(user, "<span class='warning'>There is already a rune in this location.</span>")
 		return
 
 	var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
@@ -175,5 +175,5 @@
 					R.word3=cultwords["technology"]
 					R.check_icon()
 	else
-		user << "<span class='warning'> You do not have enough space to write a proper rune.</span>"
+		to_chat(user, "<span class='warning'> You do not have enough space to write a proper rune.</span>")
 	return

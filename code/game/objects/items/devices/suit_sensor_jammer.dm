@@ -43,21 +43,21 @@
 /obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/crowbar))
 		if(bcell)
-			user << "<span class='notice'>You remove \the [bcell].</span>"
+			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")
 			disable()
 			bcell.dropInto(loc)
 			bcell = null
 		else
-			user << "<span class='warning'>There is no cell to remove.</span>"
+			to_chat(user, "<span class='warning'>There is no cell to remove.</span>")
 	else if(istype(I, /obj/item/weapon/cell))
 		if(bcell)
-			user << "<span class='warning'>There's already a cell in \the [src].</span>"
+			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
 		else if(user.unEquip(I))
 			I.forceMove(src)
 			bcell = I
-			user << "<span class='notice'>You insert \the [bcell] into \the [src]..</span>"
+			to_chat(user, "<span class='notice'>You insert \the [bcell] into \the [src]..</span>")
 		else
-			user << "<span class='warning'>You're unable to insert the battery.</span>"
+			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
 
 /obj/item/device/suit_sensor_jammer/update_icon()
 	overlays.Cut()
@@ -107,7 +107,7 @@ obj/item/device/suit_sensor_jammer/examine(var/user)
 			message += "displays a charge level of [bcell.charge * 100 / bcell.maxcharge]%."
 		else
 			message += "is lacking a cell."
-		user << jointext(message,.)
+		to_chat(user, jointext(message,.))
 
 obj/item/device/suit_sensor_jammer/ui_status(mob/user, datum/ui_state/state)
 	if(!bcell || bcell.charge <= 0)

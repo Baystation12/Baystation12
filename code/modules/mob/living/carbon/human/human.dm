@@ -392,8 +392,7 @@
 												U.handle_regular_hud_updates()
 
 			if(!modified)
-				usr << "\red Unable to locate a data core entry for this person."
-
+				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 	if (href_list["secrecord"])
 		if(hasHUD(usr,"security"))
 			var/perpname = "wot"
@@ -412,18 +411,17 @@
 					for (var/datum/data/record/R in data_core.security)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
-								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-								usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
-								usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
-								usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
-								usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
-								usr << "<b>Notes:</b> [R.fields["notes"]]"
-								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
+								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]")
+								to_chat(usr, "<b>Minor Crimes:</b> [R.fields["mi_crim"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["mi_crim_d"]]")
+								to_chat(usr, "<b>Major Crimes:</b> [R.fields["ma_crim"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["ma_crim_d"]]")
+								to_chat(usr, "<b>Notes:</b> [R.fields["notes"]]")
+								to_chat(usr, "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>")
 								read = 1
 
 			if(!read)
-				usr << "\red Unable to locate a data core entry for this person."
-
+				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 	if (href_list["secrecordComment"])
 		if(hasHUD(usr,"security"))
 			var/perpname = "wot"
@@ -445,15 +443,13 @@
 								read = 1
 								var/counter = 1
 								while(R.fields[text("com_[]", counter)])
-									usr << text("[]", R.fields[text("com_[]", counter)])
+									to_chat(usr, text("[]", R.fields[text("com_[]", counter)]))
 									counter++
 								if (counter == 1)
-									usr << "No comment found"
-								usr << "<a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>"
-
+									to_chat(usr, "No comment found")
+								to_chat(usr, "<a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>")
 			if(!read)
-				usr << "\red Unable to locate a data core entry for this person."
-
+				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 	if (href_list["secrecordadd"])
 		if(hasHUD(usr,"security"))
 			var/perpname = "wot"
@@ -520,8 +516,7 @@
 											U.handle_regular_hud_updates()
 
 			if(!modified)
-				usr << "\red Unable to locate a data core entry for this person."
-
+				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 	if (href_list["medrecord"])
 		if(hasHUD(usr,"medical"))
 			var/perpname = "wot"
@@ -540,19 +535,18 @@
 					for (var/datum/data/record/R in data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								usr << "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
-								usr << "<b>DNA:</b> [R.fields["b_dna"]]"
-								usr << "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
-								usr << "<b>Details:</b> [R.fields["mi_dis_d"]]"
-								usr << "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
-								usr << "<b>Details:</b> [R.fields["ma_dis_d"]]"
-								usr << "<b>Notes:</b> [R.fields["notes"]]"
-								usr << "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>"
+								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]")
+								to_chat(usr, "<b>DNA:</b> [R.fields["b_dna"]]")
+								to_chat(usr, "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["mi_dis_d"]]")
+								to_chat(usr, "<b>Major Disabilities:</b> [R.fields["ma_dis"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["ma_dis_d"]]")
+								to_chat(usr, "<b>Notes:</b> [R.fields["notes"]]")
+								to_chat(usr, "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>")
 								read = 1
 
 			if(!read)
-				usr << "\red Unable to locate a data core entry for this person."
-
+				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 	if (href_list["medrecordComment"])
 		if(hasHUD(usr,"medical"))
 			var/perpname = "wot"
@@ -574,15 +568,13 @@
 								read = 1
 								var/counter = 1
 								while(R.fields[text("com_[]", counter)])
-									usr << text("[]", R.fields[text("com_[]", counter)])
+									to_chat(usr, text("[]", R.fields[text("com_[]", counter)]))
 									counter++
 								if (counter == 1)
-									usr << "No comment found"
-								usr << "<a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>"
-
+									to_chat(usr, "No comment found")
+								to_chat(usr, "<a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>")
 			if(!read)
-				usr << "\red Unable to locate a data core entry for this person."
-
+				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 	if (href_list["medrecordadd"])
 		if(hasHUD(usr,"medical"))
 			var/perpname = "wot"
@@ -670,7 +662,7 @@
 	if(species.has_fine_manipulation)
 		return 1
 	if(!silent)
-		src << "<span class='warning'>You don't have the dexterity to use that!</span>"
+		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
 	return 0
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
@@ -694,7 +686,7 @@
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
-		visible_message("\red \The [src] begins playing \his ribcage like a xylophone. It's quite spooky.","\blue You begin to play a spooky refrain on your ribcage.","\red You hear a spooky xylophone melody.")
+		visible_message("<span class='warning'>\The [src] begins playing \his ribcage like a xylophone. It's quite spooky.</span>","<span class='notice'>You begin to play a spooky refrain on your ribcage.</span>","<span class='warning'>You hear a spooky xylophone melody.</span>")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
 		playsound(loc, song, 50, 1, -1)
 		xylophone = 1
@@ -719,9 +711,9 @@
 		return
 	if(!lastpuke)
 		lastpuke = 1
-		src << "<span class='warning'>You feel nauseous...</span>"
+		to_chat(src, "<span class='warning'>You feel nauseous...</span>")
 		spawn(150)	//15 seconds until second warning
-			src << "<span class='warning'>You feel like you are about to throw up!</span>"
+			to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
 			spawn(100)	//and you have 10 more for mad dash to the bucket
 				Stun(5)
 				if(nutrition < 40)
@@ -826,7 +818,7 @@
 	regenerate_icons()
 	check_dna()
 
-	visible_message("\blue \The [src] morphs and changes [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] appearance!", "\blue You change your appearance!", "\red Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!")
+	visible_message("<span class='notice'>\The [src] morphs and changes [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='warning'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</span>")
 
 /mob/living/carbon/human/proc/remotesay()
 	set name = "Project mind"
@@ -849,10 +841,10 @@
 
 	var/say = sanitize(input("What do you wish to say"))
 	if(mRemotetalk in target.mutations)
-		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
+		target.show_message("<span class='notice'>You hear [src.real_name]'s voice: [say]</span>")
 	else
-		target.show_message("\blue You hear a voice that seems to echo around the room: [say]")
-	usr.show_message("\blue You project your mind into [target.real_name]: [say]")
+		target.show_message("<span class='notice'>You hear a voice that seems to echo around the room: [say]</span>")
+	usr.show_message("<span class='notice'>You project your mind into [target.real_name]: [say]</span>")
 	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
 	for(var/mob/observer/ghost/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
@@ -956,19 +948,19 @@
 		if (prob(round(damage/10)*20))
 			germs++
 		if (germs == 100)
-			world << "Reached stage 1 in [ticks] ticks"
+			log_debug("Reached stage 1 in [ticks] ticks")
 		if (germs > 100)
 			if (prob(10))
 				damage++
 				germs++
 		if (germs == 1000)
-			world << "Reached stage 2 in [ticks] ticks"
+			log_debug("Reached stage 2 in [ticks] ticks")
 		if (germs > 1000)
 			damage++
 			germs++
 		if (germs == 2500)
-			world << "Reached stage 3 in [ticks] ticks"
-	world << "Mob took [tdamage] tox damage"
+			log_debug("Reached stage 3 in [ticks] ticks")
+	log_debug("Mob took [tdamage] tox damage")
 */
 //returns 1 if made bloody, returns 0 otherwise
 
@@ -1024,7 +1016,7 @@
 				if(prob(1))
 					stomach_contents.Remove(O)
 					if(can_feel_pain())
-						src << "<span class='danger'>You feel something rip out of your stomach!</span>"
+						to_chat(src, "<span class='danger'>You feel something rip out of your stomach!</span>")
 						groin.embed(O)
 				else if(prob(5))
 					jossle_internal_object(groin,O)
@@ -1032,7 +1024,7 @@
 /mob/living/carbon/human/proc/jossle_internal_object(var/obj/item/organ/organ, var/obj/item/O)
 	// All kinds of embedded objects cause bleeding.
 	if(!can_feel_pain())
-		src << "<span class='warning'>You feel [O] moving inside your [organ.name].</span>"
+		to_chat(src, "<span class='warning'>You feel [O] moving inside your [organ.name].</span>")
 	else
 		var/msg = pick( \
 			"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
@@ -1064,17 +1056,17 @@
 		"You begin counting your pulse.")
 
 	if(pulse())
-		usr << "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>"
+		to_chat(usr, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
 	else
-		usr << "<span class='danger'>[src] has no pulse!</span>"	//it is REALLY UNLIKELY that a dead person would check his own pulse
+		to_chat(usr, "<span class='danger'>[src] has no pulse!</span>")//it is REALLY UNLIKELY that a dead person would check his own pulse
 		return
 
-	usr << "You must[self ? "" : " both"] remain still until counting is finished."
+	to_chat(usr, "You must[self ? "" : " both"] remain still until counting is finished.")
 	if(do_mob(usr, src, 60))
-		usr << "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
+		var/message = "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
+		to_chat(usr, message)
 	else
-		usr << "<span class='warning'>You failed to check the pulse. Try again.</span>"
-
+		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
 
 	if(!dna)
@@ -1175,26 +1167,26 @@
 		verbs -= /mob/living/carbon/human/proc/bloody_doodle
 
 	if (src.gloves)
-		src << "<span class='warning'>Your [src.gloves] are getting in the way.</span>"
+		to_chat(src, "<span class='warning'>Your [src.gloves] are getting in the way.</span>")
 		return
 
 	var/turf/simulated/T = src.loc
 	if (!istype(T)) //to prevent doodling out of mechs and lockers
-		src << "<span class='warning'>You cannot reach the floor.</span>"
+		to_chat(src, "<span class='warning'>You cannot reach the floor.</span>")
 		return
 
 	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
 	if (direction != "Here")
 		T = get_step(T,text2dir(direction))
 	if (!istype(T))
-		src << "<span class='warning'>You cannot doodle there.</span>"
+		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
 		return
 
 	var/num_doodles = 0
 	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
 		num_doodles++
 	if (num_doodles > 4)
-		src << "<span class='warning'>There is no space to write on!</span>"
+		to_chat(src, "<span class='warning'>There is no space to write on!</span>")
 		return
 
 	var/max_length = bloody_hands * 30 //tweeter style
@@ -1207,8 +1199,7 @@
 
 		if (length(message) > max_length)
 			message += "-"
-			src << "<span class='warning'>You ran out of blood to write with!</span>"
-
+			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
 		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
 		W.basecolor = (hand_blood_color) ? hand_blood_color : "#A10808"
 		W.update_icon()
@@ -1221,11 +1212,11 @@
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
 	if(!affecting)
-		user << "<span class='warning'>They are missing that limb.</span>"
+		to_chat(user, "<span class='warning'>They are missing that limb.</span>")
 		return 0
 
 	if(affecting.robotic >= ORGAN_ROBOT)
-		user << "<span class='warning'>That limb is robotic.</span>"
+		to_chat(user, "<span class='warning'>That limb is robotic.</span>")
 		return 0
 
 	. = CAN_INJECT
@@ -1234,7 +1225,7 @@
 			if(istype(C, /obj/item/clothing/suit/space))
 				. = INJECTION_PORT //it was going to block us, but it's a space suit so it doesn't because it has some kind of port
 			else
-				user << "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>"
+				to_chat(user, "<span class='warning'>There is no exposed flesh or thin material on [src]'s [affecting.name] to inject into.</span>")
 				return 0
 
 
@@ -1323,11 +1314,11 @@
 	usr.setClickCooldown(20)
 
 	if(usr.stat > 0)
-		usr << "You are unconcious and cannot do that!"
+		to_chat(usr, "You are unconcious and cannot do that!")
 		return
 
 	if(usr.restrained())
-		usr << "You are restrained and cannot do that!"
+		to_chat(usr, "You are restrained and cannot do that!")
 		return
 
 	var/mob/S = src
@@ -1347,20 +1338,19 @@
 		return
 
 	if(self)
-		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
+		to_chat(src, "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>")
 	else
-		U << "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>"
-
+		to_chat(U, "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>")
 	if(!do_after(U, 30, src))
 		return
 	if(!current_limb || !S || !U)
 		return
 
 	if(self)
-		src << "<span class='danger'>You pop your [current_limb.joint] back in!</span>"
+		to_chat(src, "<span class='danger'>You pop your [current_limb.joint] back in!</span>")
 	else
-		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
-		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
+		to_chat(U, "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>")
+		to_chat(S, "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>")
 	current_limb.undislocate()
 
 /mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
@@ -1398,7 +1388,7 @@
 
 	if(stat) return
 	pulling_punches = !pulling_punches
-	src << "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>"
+	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 	return
 
 //generates realistic-ish pulse output based on preset levels

@@ -24,7 +24,7 @@
 		return
 
 	if(!victim || !victim.Adjacent(user))
-		user << "<span class='danger'>Your victim slipped free!</span>"
+		to_chat(user, "<span class='danger'>Your victim slipped free!</span>")
 		cooking = 0
 		icon_state = off_icon
 		return
@@ -56,7 +56,6 @@
 		victim.emote("scream")
 	else
 		to_chat(victim, "<span class='danger'>Searing hot oil scorches your [E ? E.name : "flesh"]!</span>")
-
 	if(victim)
 		admin_attack_log("Has [cook_type] their victim in \a [src]", "Has been [cook_type] in \a [src] by the attacker.", "[cook_type], in \a [src], ")
 

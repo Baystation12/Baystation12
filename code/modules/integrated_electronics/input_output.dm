@@ -6,7 +6,6 @@
 	else
 		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
 	to_chat(user, message)
-
 /obj/item/integrated_circuit/input/button
 	name = "button"
 	desc = "This tiny button must do something, right?"
@@ -45,6 +44,8 @@
 		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
 		activate_pin(1)
 		to_chat(user, "<span class='notice'>You toggle the button labeled '[src.name]' [get_pin_data(IC_OUTPUT, 1) ? "on" : "off"].</span>")
+		var/datum/integrated_io/activate/A = activators[1]
+		A.activate()
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/numberpad
@@ -325,7 +326,6 @@
 	. = ..(user, 1)
 	if(.)
 		to_chat(user, "It appears a small section of the board has been fried.")
-
 /obj/item/integrated_circuit/input/access_scanner/emp_act()
 	if(contained_id) // We update access based on whatever an eventual id card returns after being EMPd.
 		contained_id.emp_act()
@@ -344,7 +344,6 @@
 /obj/item/integrated_circuit/input/access_scanner/examine(var/mob/user)
 	. = ..()
 	to_chat(user, "An id card is installed into the board.")
-
 /obj/item/integrated_circuit/input/access_scanner/attackby(var/obj/item/weapon/card/id/id_card, var/mob/user)
 	if(!istype(id_card))
 		return ..()
@@ -408,7 +407,6 @@
 
 /obj/item/integrated_circuit/output/screen/any_examine(mob/user)
 	to_chat(user, "There is a little screen labeled '[name]', which displays [stuff_to_display ? "'[stuff_to_display]'" : "nothing"].")
-
 /obj/item/integrated_circuit/output/screen/get_topic_data()
 	return stuff_to_display ? list(stuff_to_display) : list()
 
@@ -585,7 +583,6 @@
 		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
 	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
 	to_chat(user,jointext(text_output,null))
-
 /obj/item/integrated_circuit/output/led/get_topic_data()
 	return list("\An [initial(name)] that is currently [get_pin_data(IC_INPUT, 1) ? "lit" : "unlit."]")
 

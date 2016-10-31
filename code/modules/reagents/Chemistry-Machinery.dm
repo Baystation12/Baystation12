@@ -50,25 +50,25 @@
 	if(istype(B, /obj/item/weapon/reagent_containers/glass))
 
 		if(src.beaker)
-			user << "A beaker is already loaded into the machine."
+			to_chat(user, "A beaker is already loaded into the machine.")
 			return
 		src.beaker = B
 		user.drop_item()
 		B.loc = src
-		user << "You add the beaker to the machine!"
+		to_chat(user, "You add the beaker to the machine!")
 		src.updateUsrDialog()
 		icon_state = "mixer1"
 
 	else if(istype(B, /obj/item/weapon/storage/pill_bottle))
 
 		if(src.loaded_pill_bottle)
-			user << "A pill bottle is already loaded into the machine."
+			to_chat(user, "A pill bottle is already loaded into the machine.")
 			return
 
 		src.loaded_pill_bottle = B
 		user.drop_item()
 		B.loc = src
-		user << "You add the pill bottle into the dispenser slot!"
+		to_chat(user, "You add the pill bottle into the dispenser slot!")
 		src.updateUsrDialog()
 	return
 
@@ -340,7 +340,7 @@
 			return 0
 
 	if(holdingitems && holdingitems.len >= limit)
-		usr << "The machine cannot hold anymore items."
+		to_chat(usr, "The machine cannot hold anymore items.")
 		return 1
 
 	if(!istype(O))
@@ -359,19 +359,19 @@
 				break
 
 		if(failed)
-			user << "Nothing in the plant bag is usable."
+			to_chat(user, "Nothing in the plant bag is usable.")
 			return 1
 
 		if(!O.contents.len)
-			user << "You empty \the [O] into \the [src]."
+			to_chat(user, "You empty \the [O] into \the [src].")
 		else
-			user << "You fill \the [src] from \the [O]."
+			to_chat(user, "You fill \the [src] from \the [O].")
 
 		src.updateUsrDialog()
 		return 0
 
 	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.total_volume))
-		user << "\The [O] is not suitable for blending."
+		to_chat(user, "\The [O] is not suitable for blending.")
 		return 1
 
 	user.remove_from_mob(O)

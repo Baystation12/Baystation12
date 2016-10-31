@@ -36,7 +36,7 @@
 		return 0
 
 	proc/meltdown()	//breaks it down, making implant unrecongizible
-		imp_in << "<span class='warning'>You feel something melting inside [part ? "your [part.name]" : "you"]!</span>"
+		to_chat(imp_in, "<span class='warning'>You feel something melting inside [part ? "your [part.name]" : "you"]!</span>")
 		if (part)
 			part.take_damage(burn = 15, used_weapon = "Electronics meltdown")
 		else
@@ -218,7 +218,7 @@ Implant Specifics:<BR>"}
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
 		phrase = replace_characters(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
-		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
+		to_chat(usr, "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.")
 		return 1
 
 	emp_act(severity)
@@ -311,9 +311,9 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		if((!cause) || (!src.imp_in))	return 0
 		var/mob/living/carbon/R = src.imp_in
 		src.reagents.trans_to_mob(R, cause, CHEM_BLOOD)
-		R << "You hear a faint *beep*."
+		to_chat(R, "You hear a faint *beep*.")
 		if(!src.reagents.total_volume)
-			R << "You hear a faint click from your chest."
+			to_chat(R, "You hear a faint click from your chest.")
 			spawn(0)
 				qdel(src)
 		return
@@ -361,7 +361,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			return 0
 		else
 			clear_antag_roles(H.mind, 1)
-			H << "<span class='notice'>You feel a surge of loyalty towards [company_name].</span>"
+			to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [company_name].</span>")
 		return 1
 
 
@@ -388,7 +388,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		if (src.uses < 1)	return 0
 		if (emote == "pale")
 			src.uses--
-			source << "<span class='notice'>You feel a sudden surge of energy!</span>"
+			to_chat(source, "<span class='notice'>You feel a sudden surge of energy!</span>")
 			source.SetStunned(0)
 			source.SetWeakened(0)
 			source.SetParalysis(0)
@@ -398,7 +398,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 	implanted(mob/source)
 		source.mind.store_memory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", 0, 0)
-		source << "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate."
+		to_chat(source, "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
 		return 1
 
 
@@ -502,7 +502,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			return 0
 
 		if (emote == src.activation_emote)
-			source << "The air glows as \the [src.scanned.name] uncompresses."
+			to_chat(source, "The air glows as \the [src.scanned.name] uncompresses.")
 			activate()
 
 	activate()
@@ -517,7 +517,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_s", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 		if (source.mind)
 			source.mind.store_memory("Compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
-		source << "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
+		to_chat(source, "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
 		return 1
 
 	islegal()

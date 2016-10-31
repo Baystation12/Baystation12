@@ -247,7 +247,8 @@
 	received_confirm = 0
 
 /datum/computer/file/embedded_program/docking/proc/force_undock()
-	//world << "[id_tag]: forcing undock"
+//	log_debug("[id_tag]: forcing undock")
+
 	if (tag_target)
 		send_docking_command(tag_target, "dock_error")
 	reset()

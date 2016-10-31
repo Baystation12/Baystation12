@@ -143,7 +143,7 @@
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		src.emagged = 1
-		user << "You short out the product lock on \the [src]"
+		to_chat(user, "You short out the product lock on \the [src]")
 		return 1
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -178,7 +178,7 @@
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		src.panel_open = !src.panel_open
-		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
+		to_chat(user, "You [src.panel_open ? "open" : "close"] the maintenance panel.")
 		src.overlays.Cut()
 		if(src.panel_open)
 			src.overlays += image(src.icon, "[initial(icon_state)]-panel")
@@ -194,7 +194,7 @@
 		W.forceMove(src)
 		coin = W
 		categories |= CAT_COIN
-		user << "<span class='notice'>You insert \the [W] into \the [src].</span>"
+		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 		nanomanager.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
@@ -206,7 +206,7 @@
 
 		if(do_after(user, 20, src))
 			if(!src) return
-			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 			anchored = !anchored
 		return
 
@@ -225,7 +225,7 @@
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
-		usr << "\icon[cashmoney] <span class='warning'>That is not enough money.</span>"
+		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
 		return 0
 
 	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
@@ -409,20 +409,20 @@
 
 	if(href_list["remove_coin"] && !istype(usr,/mob/living/silicon))
 		if(!coin)
-			usr << "There is no coin in this machine."
+			to_chat(usr, "There is no coin in this machine.")
 			return
 
 		coin.forceMove(src.loc)
 		if(!usr.get_active_hand())
 			usr.put_in_hands(coin)
-		usr << "<span class='notice'>You remove \the [coin] from \the [src]</span>"
+		to_chat(usr, "<span class='notice'>You remove \the [coin] from \the [src]</span>")
 		coin = null
 		categories &= ~CAT_COIN
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
 			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
-				usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
+				to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 				flick(icon_deny,src)
 				return
 
@@ -436,7 +436,7 @@
 			if(R.price <= 0)
 				src.vend(R, usr)
 			else if(istype(usr,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
-				usr << "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>"
+				to_chat(usr, "<span class='danger'>Artificial unit recognized.  Artificial units cannot complete this transaction.  Purchase canceled.</span>")
 				return
 			else
 				src.currently_vending = R
@@ -458,7 +458,7 @@
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
 	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
-		usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
+		to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 		flick(src.icon_deny,src)
 		return
 	src.vend_ready = 0 //One thing at a time!!
@@ -468,13 +468,13 @@
 
 	if (R.category & CAT_COIN)
 		if(!coin)
-			user << "<span class='notice'>You need to insert a coin to get this item.</span>"
+			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
 			return
 		if(coin.string_attached)
 			if(prob(50))
-				user << "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>"
+				to_chat(user, "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>")
 			else
-				user << "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>"
+				to_chat(user, "<span class='notice'>You weren't able to pull the coin out fast enough, the machine ate it, string and all.</span>")
 				qdel(coin)
 				coin = null
 				categories &= ~CAT_COIN
@@ -514,7 +514,7 @@
 	if(!user.unEquip(W))
 		return
 
-	user << "<span class='notice'>You insert \the [W] in the product receptor.</span>"
+	to_chat(user, "<span class='notice'>You insert \the [W] in the product receptor.</span>")
 	R.add_product(W)
 
 	nanomanager.update_uis(src)

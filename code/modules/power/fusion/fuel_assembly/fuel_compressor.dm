@@ -25,10 +25,10 @@
 		var/obj/item/stack/material/M = thing
 		var/material/mat = M.get_material()
 		if(!mat.is_fusion_fuel)
-			user << "<span class='warning'>It would be pointless to make a fuel rod out of [mat.use_name].</span>"
+			to_chat(user, "<span class='warning'>It would be pointless to make a fuel rod out of [mat.use_name].</span>")
 			return
 		if(M.get_amount() < 25)
-			user << "<span class='warning'>You need at least 25 [mat.sheet_plural_name] to make a fuel rod.</span>"
+			to_chat(user, "<span class='warning'>You need at least 25 [mat.sheet_plural_name] to make a fuel rod.</span>")
 			return
 		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), mat.name)
 		visible_message("<span class='notice'>\The [src] compresses the [mat.use_name] into a new fuel assembly.</span>")

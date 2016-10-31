@@ -52,9 +52,9 @@ var/datum/antagonist/actor/actor
 
 	if(isghostmind(usr.mind) || isnewplayer(usr))
 		if(actor.current_antagonists.len >= actor.hard_cap)
-			usr << "No more actors may spawn at the current time."
+			to_chat(usr, "No more actors may spawn at the current time.")
 			return
 		actor.create_default(usr)
 		return
 
-	usr << "You must be observing or be a new player to spawn as an actor."
+	to_chat(usr, "You must be observing or be a new player to spawn as an actor.")

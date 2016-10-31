@@ -20,7 +20,7 @@ var/global/datum/controller/occupations/job_master
 		occupations_by_type = list()
 		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
-			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
+			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()
@@ -373,7 +373,7 @@ var/global/datum/controller/occupations/job_master
 							permitted = 0
 
 						if(!permitted)
-							H << "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>"
+							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
@@ -383,7 +383,7 @@ var/global/datum/controller/occupations/job_master
 							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
 								custom_equip_leftovers += thing
 							else if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
-								H << "<span class='notice'>Equipping you with \the [thing]!</span>"
+								to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
 								custom_equip_slots.Add(G.slot)
 							else
 								custom_equip_leftovers.Add(thing)
@@ -402,12 +402,12 @@ var/global/datum/controller/occupations/job_master
 				else
 					var/metadata = H.client.prefs.gear[G.display_name]
 					if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
-						H << "<span class='notice'>Equipping you with \the [thing]!</span>"
+						to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
 						custom_equip_slots.Add(G.slot)
 					else
 						spawn_in_storage += thing
 		else
-			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
+			to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
 		H.job = rank
 
@@ -467,15 +467,15 @@ var/global/datum/controller/occupations/job_master
 
 				var/atom/placed_in = H.equip_to_storage(item)
 				if(placed_in)
-					H << "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>"
+					to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
 					continue
 				if(H.equip_to_appropriate_slot(item))
-					H << "<span class='notice'>Placing \the [item] in your inventory!</span>"
+					to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
 					continue
 				if(H.put_in_hands(item))
-					H << "<span class='notice'>Placing \the [item] in your hands!</span>"
+					to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
 					continue
-				H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+				to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
 				qdel(item)
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
@@ -489,15 +489,15 @@ var/global/datum/controller/occupations/job_master
 				W.buckled_mob = H
 				W.add_fingerprint(H)
 
-		H << "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"
+		to_chat(H, "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>")
 
 		if(job.supervisors)
-			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+			to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 
-		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+		to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 
 		if(job.req_admin_notify)
-			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
+			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
@@ -595,7 +595,7 @@ var/global/datum/controller/occupations/job_master
 	if(C.prefs.spawnpoint)
 		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
 			if(H)
-				H << "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>"
+				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
 				
 			spawnpos = null
 		else
@@ -603,7 +603,7 @@ var/global/datum/controller/occupations/job_master
 		
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
-			H << "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([rank]). Spawning you at another spawn point instead.</span>"
+			to_chat(H, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([rank]). Spawning you at another spawn point instead.</span>")
 		spawnpos = null
 	
 	if(!spawnpos)

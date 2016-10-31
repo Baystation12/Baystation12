@@ -307,9 +307,9 @@ var/list/debug_verbs = list (
 			if(i*10+j <= atom_list.len)
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
-		world << line*/
+		log_debug(line) */
 
-	world << "There are [count] objects of type [type_path] on z-level [num_level]"
+	log_debug("There are [count] objects of type [type_path] on z-level [num_level]")
 	feedback_add_details("admin_verb","mOBJZ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/count_objects_all()
@@ -334,9 +334,9 @@ var/list/debug_verbs = list (
 			if(i*10+j <= atom_list.len)
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
-		world << line*/
+		log_debug(line) */
 
-	world << "There are [count] objects of type [type_path] in the game world"
+	log_debug("There are [count] objects of type [type_path] in the game world")
 	feedback_add_details("admin_verb","mOBJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /proc/get_zas_image(var/turf/T, var/icon_state)

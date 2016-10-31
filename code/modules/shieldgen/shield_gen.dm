@@ -48,7 +48,7 @@
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked
-		user << "Controls are now [src.locked ? "locked." : "unlocked."]"
+		to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 		. = 1
 		updateDialog()
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -60,13 +60,13 @@
 		var/obj/item/weapon/card/id/C = W
 		if(access_captain in C.access || access_security in C.access || access_engine in C.access)
 			src.locked = !src.locked
-			user << "Controls are now [src.locked ? "locked." : "unlocked."]"
+			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 			updateDialog()
 		else
-			user << "\red Access denied."
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 	else if(istype(W, /obj/item/weapon/wrench))
 		src.anchored = !src.anchored
-		src.visible_message("\blue \icon[src] [src] has been [anchored?"bolted to the floor":"unbolted from the floor"] by [user].")
+		src.visible_message("<span class='warning'>\icon[src] [src] has been [anchored?"bolted to the floor":"unbolted from the floor"] by [user].</span>")
 
 		if(active)
 			toggle()
@@ -185,7 +185,7 @@
 		return
 	else if( href_list["toggle"] )
 		if (!active && !anchored)
-			usr << "\red The [src] needs to be firmly secured to the floor first."
+			to_chat(usr, "<span class='warning'>The [src] needs to be firmly secured to the floor first.</span>")
 			return
 		toggle()
 	else if( href_list["change_radius"] )
@@ -218,14 +218,14 @@
 		covered_turfs = null
 
 		for(var/mob/M in view(5,src))
-			M << "\icon[src] You hear heavy droning start up."
+			to_chat(M, "\icon[src] You hear heavy droning start up.")
 	else
 		for(var/obj/effect/energy_field/D in field)
 			field.Remove(D)
 			qdel(D)
 
 		for(var/mob/M in view(5,src))
-			M << "\icon[src] You hear heavy droning fade out."
+			to_chat(M, "\icon[src] You hear heavy droning fade out.")
 
 /obj/machinery/shield_gen/update_icon()
 	if(stat & BROKEN)

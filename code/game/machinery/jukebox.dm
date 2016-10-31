@@ -70,11 +70,11 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(!anchored)
-		usr << "<span class='warning'>You must secure \the [src] first.</span>"
+		to_chat(usr, "<span class='warning'>You must secure \the [src] first.</span>")
 		return
 
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
+		to_chat(usr, "\The [src] doesn't appear to function.")
 		return
 
 	tg_ui_interact(user)
@@ -121,7 +121,7 @@ datum/track/New(var/title_name, var/audio)
 			if(emagged)
 				emag_play()
 			else if(!current_track)
-				usr << "No track selected."
+				to_chat(usr, "No track selected.")
 			else
 				StartPlaying()
 			. = TRUE
@@ -190,7 +190,7 @@ datum/track/New(var/title_name, var/audio)
 	var/area/main_area = get_area(src)
 	// Always kill the current sound
 	for(var/mob/living/M in mobs_in_area(main_area))
-		M << sound(null, channel = 1)
+		sound_to(M, sound(null, channel = 1))
 		main_area.forced_ambience = null
 	playing = 0
 	update_use_power(1)

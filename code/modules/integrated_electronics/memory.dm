@@ -29,7 +29,6 @@
 		else if(!isnull(O.data))
 			data = O.data
 		to_chat(user, "\The [src] has [data] saved to address [i].")
-
 /obj/item/integrated_circuit/memory/do_work()
 	for(var/i = 1 to inputs.len)
 		set_pin_data(IC_OUTPUT, i, get_pin_data(IC_INPUT, i))
@@ -93,7 +92,6 @@
 		if("null")
 			O.write_data_to_pin(null)
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
-
 /obj/item/integrated_circuit/memory/constant/afterattack(atom/target, mob/living/user, proximity)
 	if(accepting_refs && proximity)
 		var/datum/integrated_io/O = outputs[1]

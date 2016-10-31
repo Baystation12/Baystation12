@@ -8,7 +8,7 @@
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
 	var/turf/T = get_turf(src)
-	user << "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>"
+	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>")
 
 /obj/item/device/measuring_tape
 	name = "measuring tape"
@@ -88,13 +88,13 @@
 					master_controller.digsite_spawning_turfs.Remove(T)
 
 		if(nearestTargetDist >= 0)
-			user << "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"
+			to_chat(user, "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
 		else if(nearestSimpleTargetDist >= 0)
-			user << "Small anomaly detected in a radius of [nearestSimpleTargetDist]m."
+			to_chat(user, "Small anomaly detected in a radius of [nearestSimpleTargetDist]m.")
 		else
-			user << "Background radiation levels detected."
+			to_chat(user, "Background radiation levels detected.")
 	else
-		user << "Scanning array is recharging."
+		to_chat(user, "Scanning array is recharging.")
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
@@ -139,7 +139,7 @@
 
 			positive_locations.Add(D)
 
-			user << "<span class='notice'>\icon[src] [src] pings.</span>"
+			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -157,7 +157,7 @@
 
 			positive_locations.Add(D)
 
-			user << "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>"
+			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
 
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)

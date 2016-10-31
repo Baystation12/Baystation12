@@ -134,7 +134,7 @@ var/list/organ_cache = list()
 /obj/item/organ/examine(mob/user)
 	..(user)
 	if(status & ORGAN_DEAD)
-		user << "<span class='notice'>The decay has set in.</span>"
+		to_chat(user, "<span class='notice'>The decay has set in.</span>")
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
@@ -351,7 +351,7 @@ var/list/organ_cache = list()
 	if(robotic >= ORGAN_ROBOT)
 		return
 
-	user << "<span class='notice'>You take an experimental bite out of \the [src].</span>"
+	to_chat(user, "<span class='notice'>You take an experimental bite out of \the [src].</span>")
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
 	blood_splatter(src,B,1)
 

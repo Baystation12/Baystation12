@@ -33,7 +33,7 @@
 		var/obj/item/weapon/weldingtool/WT = W
 
 		if(get_amount() < 2)
-			user << "<span class='warning'>You need at least two rods to do this.</span>"
+			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
 
 		if(WT.remove_fuel(0,user))
@@ -80,15 +80,15 @@
 
 	else if(!in_use)
 		if(get_amount() < 2)
-			user << "<span class='warning'>You need at least two rods to do this.</span>"
+			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
-		usr << "<span class='notice'>Assembling grille...</span>"
+		to_chat(usr, "<span class='notice'>Assembling grille...</span>")
 		in_use = 1
 		if (!do_after(usr, 10))
 			in_use = 0
 			return
 		var/obj/structure/grille/F = new /obj/structure/grille/ ( usr.loc )
-		usr << "<span class='notice'>You assemble a grille</span>"
+		to_chat(usr, "<span class='notice'>You assemble a grille</span>")
 		in_use = 0
 		F.add_fingerprint(usr)
 		use(2)

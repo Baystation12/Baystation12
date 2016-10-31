@@ -15,16 +15,16 @@
 
 /obj/item/weapon/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
-		user << "\The [src] can do nothing for such a simple being."
+		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
 	var/mob/living/carbon/human/H = user
 	var/reward = potentials[H.species.get_bodytype()] //we get body type because that lets us ignore subspecies.
 	if(!reward)
-		user << "\The [src] does not know what to make of you."
+		to_chat(user, "\The [src] does not know what to make of you.")
 		return
 	for(var/spell/S in user.spell_list)
 		if(istype(S,reward))
-			user << "\The [src] can do no more for you."
+			to_chat(user, "\The [src] can do no more for you.")
 			return
 	user.drop_from_inventory(src)
 	var/a = new reward()
@@ -32,7 +32,7 @@
 		H.add_spell(a)
 	else if(ispath(reward,/obj))
 		H.put_in_hands(a)
-	user << "\The [src] crumbles in your hands."
+	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
 
 //RESOMI
@@ -221,14 +221,14 @@
 
 /obj/item/weapon/contract/apprentice/skrell/attack_self(mob/user as mob)
 	if(!linked)
-		user << "<span class='warning'>This contract requires a link to a spellbook.</span>"
+		to_chat(user, "<span class='warning'>This contract requires a link to a spellbook.</span>")
 		return
 	..()
 
 /obj/item/weapon/contract/apprentice/skrell/afterattack(atom/A, mob/user as mob, proximity)
 	if(!linked && istype(A,/obj/item/weapon/spellbook))
 		linked = A
-		user << "<span class='notice'>You've linked \the [A] to \the [src]</span>"
+		to_chat(user, "<span class='notice'>You've linked \the [A] to \the [src]</span>")
 		return
 	..()
 

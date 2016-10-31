@@ -12,15 +12,15 @@
 
 /obj/machinery/power/debug_items/proc/show_info(var/mob/user)
 	if(!powernet)
-		user << "This device is not connected to a powernet"
+		to_chat(user, "This device is not connected to a powernet")
 		return
 
-	user << "Connected to powernet: [powernet]"
-	user << "Available power: [num2text(powernet.avail, 20)] W"
-	user << "Load: [num2text(powernet.viewload, 20)] W"
-	user << "Has alert: [powernet.problem ? "YES" : "NO"]"
-	user << "Cables: [powernet.cables.len]"
-	user << "Nodes: [powernet.nodes.len]"
+	to_chat(user, "Connected to powernet: [powernet]")
+	to_chat(user, "Available power: [num2text(powernet.avail, 20)] W")
+	to_chat(user, "Load: [num2text(powernet.viewload, 20)] W")
+	to_chat(user, "Has alert: [powernet.problem ? "YES" : "NO"]")
+	to_chat(user, "Cables: [powernet.cables.len]")
+	to_chat(user, "Nodes: [powernet.nodes.len]")
 
 
 // An infinite power generator. Adds energy to connected cable.
@@ -34,7 +34,7 @@
 
 /obj/machinery/power/debug_items/infinite_generator/show_info(var/mob/user)
 	..()
-	user << "Generator is providing [num2text(power_generation_rate, 20)] W"
+	to_chat(user, "Generator is providing [num2text(power_generation_rate, 20)] W")
 
 
 // A cable powersink, without the explosion/network alarms normal powersink causes.
@@ -49,8 +49,8 @@
 
 /obj/machinery/power/debug_items/infinite_cable_powersink/show_info(var/mob/user)
 	..()
-	user << "Power sink is demanding [num2text(power_usage_rate, 20)] W"
-	user << "[num2text(last_used, 20)] W was actually used last tick"
+	to_chat(user, "Power sink is demanding [num2text(power_usage_rate, 20)] W")
+	to_chat(user, "[num2text(last_used, 20)] W was actually used last tick")
 
 
 /obj/machinery/power/debug_items/infinite_apc_powersink
@@ -61,5 +61,5 @@
 
 /obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)
 	..()
-	user << "Dummy load is using [num2text(active_power_usage, 20)] W"
-	user << "Powered: [powered() ? "YES" : "NO"]"
+	to_chat(user, "Dummy load is using [num2text(active_power_usage, 20)] W")
+	to_chat(user, "Powered: [powered() ? "YES" : "NO"]")

@@ -28,7 +28,7 @@
 	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
 		O.loc = src
 		scan = O
-		user << "You insert [O]."
+		to_chat(user, "You insert [O].")
 	else
 		..()
 
@@ -43,7 +43,7 @@
 
 /obj/machinery/computer/skills/ui_interact(mob/user as mob)
 	if (src.z > 6)
-		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
+		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!")
 		return
 	var/dat
 

@@ -154,13 +154,13 @@
 
 	if(istype(O, /obj/item/weapon/cell))
 		if(cell)
-			user << "The drill already has a cell installed."
+			to_chat(user, "The drill already has a cell installed.")
 		else
 			user.drop_item()
 			O.loc = src
 			cell = O
 			component_parts += O
-			user << "You install \the [O]."
+			to_chat(user, "You install \the [O].")
 		return
 	..()
 
@@ -168,13 +168,13 @@
 	check_supports()
 
 	if (panel_open && cell && user.Adjacent(src))
-		user << "You take out \the [cell]."
+		to_chat(user, "You take out \the [cell].")
 		cell.loc = get_turf(user)
 		component_parts -= cell
 		cell = null
 		return
 	else if(need_player_check)
-		user << "You hit the manual override and reset the drill's error checking."
+		to_chat(user, "You hit the manual override and reset the drill's error checking.")
 		need_player_check = 0
 		if(anchored)
 			get_resource_field()
@@ -189,9 +189,9 @@
 			else
 				visible_message("<span class='notice'>\The [src] shudders to a grinding halt.</span>")
 		else
-			user << "<span class='notice'>The drill is unpowered.</span>"
+			to_chat(user, "<span class='notice'>The drill is unpowered.</span>")
 	else
-		user << "<span class='notice'>Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea.</span>"
+		to_chat(user, "<span class='notice'>Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea.</span>")
 
 	update_icon()
 
@@ -283,9 +283,9 @@
 	if(B)
 		for(var/obj/item/weapon/ore/O in contents)
 			O.loc = B
-		usr << "<span class='notice'>You unload the drill's storage cache into the ore box.</span>"
+		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
 	else
-		usr << "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>"
+		to_chat(usr, "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>")
 
 
 /obj/machinery/mining/brace
@@ -302,7 +302,7 @@
 
 /obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(connected && connected.active)
-		user << "<span class='notice'>You can't work with the brace of a running drill!</span>"
+		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
 		return
 
 	if(default_deconstruction_screwdriver(user, W))
@@ -313,11 +313,11 @@
 	if(istype(W,/obj/item/weapon/wrench))
 
 		if(istype(get_turf(src), /turf/space))
-			user << "<span class='notice'>You can't anchor something to empty space. Idiot.</span>"
+			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")
 			return
 
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		user << "<span class='notice'>You [anchored ? "un" : ""]anchor the brace.</span>"
+		to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]anchor the brace.</span>")
 
 		anchored = !anchored
 		if(anchored)
@@ -365,7 +365,7 @@
 	if(usr.stat) return
 
 	if (src.anchored)
-		usr << "It is anchored in place!"
+		to_chat(usr, "It is anchored in place!")
 		return 0
 
 	src.set_dir(turn(src.dir, 90))

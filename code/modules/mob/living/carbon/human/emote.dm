@@ -111,7 +111,7 @@
 
 			if (src.client)
 				if (client.prefs.muted & MUTE_IC)
-					src << "\red You cannot send IC messages (muted)."
+					to_chat(src, "<span class='warning'>You cannot send IC messages (muted).</span>")
 					return
 			if (stat)
 				return
@@ -516,15 +516,14 @@
 			src.animate_tail_stop()
 
 		if ("help")
-			src << {"blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,
+			var/help = {"blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,
 cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,
 grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,
 sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,
 wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag, vomit"}
-
+			to_chat(src, help)
 		else
-			src << "\blue Unusable emote '[act]'. Say *help for a list."
-
+			to_chat(src, "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>")
 
 
 

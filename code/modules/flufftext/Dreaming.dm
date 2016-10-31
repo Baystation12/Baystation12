@@ -19,7 +19,7 @@ mob/living/carbon/proc/dream()
 
 	spawn(0)
 		for(var/i = rand(1,4),i > 0, i--)
-			src << "\blue <i>... [pick(dreams)] ...</i>"
+			to_chat(src, "\blue <i>... [pick(dreams)] ...</i>")
 			sleep(rand(40,70))
 			if(paralysis <= 0)
 				dreaming = 0

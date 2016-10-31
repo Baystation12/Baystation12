@@ -52,19 +52,19 @@
 		if(!..(user, 2))
 			return
 		if(reagents && reagents.reagent_list.len)
-			user << "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>"
+			to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 		else
-			user << "<span class='notice'>It is empty.</span>"
+			to_chat(user, "<span class='notice'>It is empty.</span>")
 		if(!is_open_container())
-			user << "<span class='notice'>Airtight lid seals it completely.</span>"
+			to_chat(user, "<span class='notice'>Airtight lid seals it completely.</span>")
 
 	attack_self()
 		..()
 		if(is_open_container())
-			usr << "<span class = 'notice'>You put the lid on \the [src].</span>"
+			to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
 			flags ^= OPENCONTAINER
 		else
-			usr << "<span class = 'notice'>You take the lid off \the [src].</span>"
+			to_chat(usr, "<span class = 'notice'>You take the lid off \the [src].</span>")
 			flags |= OPENCONTAINER
 		update_icon()
 
@@ -91,7 +91,7 @@
 			return
 
 		if(reagents.total_volume)
-			user << "<span class='notice'>You splash the solution onto [target].</span>"
+			to_chat(user, "<span class='notice'>You splash the solution onto [target].</span>")
 			reagents.splash(target, reagents.total_volume)
 			return
 
@@ -99,9 +99,9 @@
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
 			var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 			if(length(tmp_label) > 10)
-				user << "<span class='notice'>The label can be at most 10 characters long.</span>"
+				to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
 			else
-				user << "<span class='notice'>You set the label to \"[tmp_label]\".</span>"
+				to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
 				label_text = tmp_label
 				update_name_label()
 
@@ -236,7 +236,7 @@
 /obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
 
 	if(isprox(D))
-		user << "You add [D] to [src]."
+		to_chat(user, "You add [D] to [src].")
 		qdel(D)
 		user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 		user.drop_from_inventory(src)
@@ -244,10 +244,10 @@
 		return
 	else if(istype(D, /obj/item/weapon/mop))
 		if(reagents.total_volume < 1)
-			user << "<span class='warning'>\The [src] is empty!</span>"
+			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
 		else
 			reagents.trans_to_obj(D, 5)
-			user << "<span class='notice'>You wet \the [D] in \the [src].</span>"
+			to_chat(user, "<span class='notice'>You wet \the [D] in \the [src].</span>")
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		return
 	else
