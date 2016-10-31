@@ -11,11 +11,14 @@ LINEN BINS
 	icon_state = "sheet"
 	item_state = "bedsheet"
 	randpixel = 0
+	plane = OBJ_PLANE
+	layer = BASE_ABOVE_OBJ_LAYER
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_SMALL
 
+/***
 /obj/item/weapon/bedsheet/attack_self(mob/user as mob)
 	user.drop_item()
 	if(plane == initial(plane))
@@ -24,6 +27,7 @@ LINEN BINS
 		plane = initial(plane)
 	add_fingerprint(user)
 	return
+***/
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
