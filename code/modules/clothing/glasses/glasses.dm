@@ -29,19 +29,18 @@
 		if(active)
 			active = 0
 			icon_state = off_state
-			user.update_inv_glasses()
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE
-			usr << "You deactivate the optical matrix on the [src]."
+			to_chat(usr, "You deactivate the optical matrix on \the [src].")
 		else
 			active = 1
 			icon_state = initial(icon_state)
-			user.update_inv_glasses()
 			if(activation_sound)
 				usr << activation_sound
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
-			usr << "You activate the optical matrix on the [src]."
+			to_chat(usr, "You activate the optical matrix on \the [src].")
+		user.update_inv_glasses()
 		user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
@@ -198,7 +197,7 @@
 			icon_state = initial(icon_state)
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
-			usr << "You flip \the [src] down to protect your eyes."
+			to_chat(usr, "You flip \the [src] down to protect your eyes.")
 		else
 			src.up = !src.up
 			flags_inv &= ~HIDEEYES
@@ -206,7 +205,7 @@
 			icon_state = "[initial(icon_state)]up"
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE
-			usr << "You push \the [src] up out of your face."
+			to_chat(usr, "You push \the [src] up out of your face.")
 		update_clothing_icon()
 		usr.update_action_buttons()
 
@@ -254,9 +253,9 @@
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
-	desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
-	icon_state = "sec_hud"
-	off_state = "sec_flash"
+	desc = "Modified aviator glasses that can switch between HUD and flash protection modes."
+	icon_state = "aviator_hud"
+	off_state = "aviator_hud_flash"
 	action_button_name = "Toggle Mode"
 	var/on = 1
 	toggleable = 1
@@ -280,11 +279,11 @@
 		if(on)
 			flash_protection = FLASH_PROTECTION_NONE
 			src.hud = hud_holder
-			to_chat(user, "You switch the [src] to HUD mode.")
+			to_chat(usr, "You switch \the [src] to HUD mode.")
 		else
 			flash_protection = initial(flash_protection)
 			src.hud = null
-			to_chat(user, "You switch \the [src] to flash protection mode.")
+			to_chat(usr, "You switch \the [src] to flash protection mode.")
 		update_icon()
 		user << activation_sound
 		user.update_inv_glasses()
