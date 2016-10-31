@@ -84,12 +84,7 @@ var/list/solars_list = list()
 	if (src.health <= 0)
 		if(!(stat & BROKEN))
 			broken()
-		else
-			new /obj/item/weapon/material/shard(src.loc)
-			new /obj/item/weapon/material/shard(src.loc)
-			qdel(src)
-			return
-	return
+
 
 
 /obj/machinery/power/solar/update_icon()
@@ -138,9 +133,13 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/proc/broken()
 	stat |= BROKEN
+	health = 0
+	new /obj/item/weapon/material/shard(src.loc)
+	new /obj/item/weapon/material/shard(src.loc)
+	var/obj/item/solar_assembly/S = locate() in src
+	S.glass_type = null
 	unset_control()
 	update_icon()
-	return
 
 
 /obj/machinery/power/solar/ex_act(severity)
