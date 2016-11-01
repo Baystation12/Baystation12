@@ -471,7 +471,7 @@
 					C.brute_damage = WC.brute
 					C.electronics_damage = WC.burn
 
-				to_chat(usr, "\blue You install the [W.name].")
+				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
 				return
 
 	if (istype(W, /obj/item/weapon/weldingtool))

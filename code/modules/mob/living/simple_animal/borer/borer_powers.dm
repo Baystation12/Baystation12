@@ -223,7 +223,7 @@
 	if(!chem || chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return
 
-	to_chat(src, "\red <B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B>")
+	to_chat(src, "<span class='danger'>You squirt a measure of [chem] from your reservoirs into \the [host]'s bloodstream.</span>")
 	host.reagents.add_reagent(chem, 10)
 	chemicals -= 50
 
@@ -261,8 +261,8 @@
 		to_chat(src, "You cannot infest someone who is already infested!")
 		return
 
-	to_chat(src, "\red You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.")
-	to_chat(M, "\red You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing.")
+	to_chat(src, "<span class='warning'>You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.</span>")
+	to_chat(M, "<span class='wanring'>You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing.</span>")
 	M.Weaken(10)
 
 	used_dominate = world.time
@@ -292,8 +292,8 @@
 			return
 		else
 
-			to_chat(src, "\red <B>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</B>")
-			to_chat(host, "\red <B>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</B>")
+			to_chat(src, "<span class='danger'>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</span>")
+			to_chat(host, "<span class='danger'>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</span>")
 			host.add_language("Cortical Link")
 
 			// host -> brain

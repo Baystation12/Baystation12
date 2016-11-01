@@ -35,7 +35,7 @@
 			return
 
 	if(P.stored_plasma < cost)
-		to_chat(src, "\red You don't have enough phoron stored to do that.")
+		to_chat(src, "<span class='warning'>You don't have enough phoron stored to do that.</span>")
 		return 0
 
 	if(needs_foundation)
@@ -46,7 +46,7 @@
 			if(!(istype(T,/turf/space)))
 				has_foundation = 1
 		if(!has_foundation)
-			to_chat(src, "\red You need a solid foundation to do that on.")
+			to_chat(src, "<span class='warning'>You need a solid foundation to do that on.</span>")
 			return 0
 
 	P.stored_plasma -= cost

@@ -206,7 +206,7 @@ var/global/list/breach_burn_descriptors = list(
 	else if(istype(W, /obj/item/weapon/weldingtool))
 
 		if(istype(src.loc,/mob/living))
-			to_chat(user, "\red How do you intend to patch a hardsuit while someone is wearing it?")
+			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
 			return
 
 		if (!damage || ! brute_damage)
@@ -215,7 +215,7 @@ var/global/list/breach_burn_descriptors = list(
 
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(5))
-			to_chat(user, "\red You need more welding fuel to repair this suit.")
+			to_chat(user, "<span class='warning'>You need more welding fuel to repair this suit.</span>")
 			return
 
 		repair_breaches(BRUTE, 3, user)
@@ -227,4 +227,4 @@ var/global/list/breach_burn_descriptors = list(
 	..(user)
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
-			to_chat(user, "\red <B>It has \a [B.descriptor].</B>")
+			to_chat(user, "<span class='danger'>It has \a [B.descriptor].</span>")
