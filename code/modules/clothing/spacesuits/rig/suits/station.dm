@@ -136,6 +136,8 @@
 	offline_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
 
+	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/back.dmi')
+
 	chest_type = /obj/item/clothing/suit/space/rig/ce
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	boot_type = null
