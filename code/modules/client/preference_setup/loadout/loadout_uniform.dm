@@ -131,9 +131,19 @@
 	display_name = "sundress, white"
 	path = /obj/item/clothing/under/sundress_white
 
-/datum/gear/uniform/dress_fire
-	display_name = "flame dress"
-	path = /obj/item/clothing/under/dress/dress_fire
+/datum/gear/uniform/dress
+	display_name = "dress selection"
+	path = /obj/item/clothing/under/dress
+
+/datum/gear/uniform/dress/New()
+	..()
+	var/dresses = list()
+	dresses["flame dress"] = /obj/item/clothing/under/dress/dress_fire
+	dresses["green dress"] = /obj/item/clothing/under/dress/dress_green
+	dresses["orange dress"] = /obj/item/clothing/under/dress/dress_orange
+	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
+	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
+	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
 /datum/gear/uniform/uniform_captain
 	display_name = "uniform, captain's dress"
@@ -196,7 +206,7 @@
 		var/obj/item/clothing/under/pants/short_type = short
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
-	
+
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
