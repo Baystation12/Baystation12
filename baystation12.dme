@@ -1981,6 +1981,7 @@
 #include "code\modules\security levels\security levels.dm"
 #include "code\modules\shield_generators\floor_diffuser.dm"
 #include "code\modules\shield_generators\handheld_diffuser.dm"
+#include "code\modules\shield_generators\modes.dm"
 #include "code\modules\shield_generators\shield.dm"
 #include "code\modules\shield_generators\shield_generator.dm"
 #include "code\modules\shieldgen\emergency_shield.dm"

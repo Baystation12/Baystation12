@@ -10,7 +10,7 @@
 // In a theoretical assault scenario, it is best to combine all damage types, so mitigation can't build up. The value is capped to prevent full scale invulnerability.
 
 #define MAX_MITIGATION_BASE 50		// % Base maximal reachable mitigation.
-#define MAX_MITIGATION_RESEARCH 10	// % Added to MAX_MITIGATION_BASE when generator is built using more advanced components. Actual maximum should be 80% in this case (with best components).
+#define MAX_MITIGATION_RESEARCH 10	// % Added to MAX_MITIGATION_BASE when generator is built using more advanced components. This value is added for each "tier" of used component, ie. basic one has 1, the best one has 3. Actual maximum should be 80% in this case (with best components). Make sure you won't get above 100%!
 #define MITIGATION_HIT_GAIN 5		// Mitigation gain per hit of respective damage type.
 #define MITIGATION_HIT_LOSS 4		// Mitigation loss per hit. If we get hit once by EM damage type, EM mitigation will grow, while Physical and Heat mitigation values drop.
 #define MITIGATION_LOSS_PASSIVE 0.5	// Mitigation of all damage types will drop by this every tick, up to 0.
@@ -18,14 +18,14 @@
 // Shield modes allow you to calibrate the field to fit specific needs. It is, for example, possible to create a field that will block airflow, but let people pass by calibrating it
 // properly. Each enabled shield mode adds up to the upkeep power usage, however. The following defines are a multiplier - 1.5 means the power usage will be increased 1.5x.
 
-#define MODEUSAGE_HYPERKINETIC 1.2			// Blocks meteors and projectile based weapons. Relatively low as the shields are primarily intended as an anti-meteor countermeasure.
-#define MODEUSAGE_PHOTONIC 1.3				// Blocks energy weapons, and makes the field opaque.
-#define MODEUSAGE_NONHUMANS 1.5				// Blocks most organic lifeforms, with an exception being humanoid mobs. Typical uses include carps.
-#define MODEUSAGE_HUMANOIDS 1.5				// Blocks humanoid mobs.
-#define MODEUSAGE_ANORGANIC 1.5				// Blocks silicon-based mobs (cyborgs, drones, FBPs, IPCs, ..)
-#define MODEUSAGE_ATMOSPHERIC 1.3			// Blocks airflow.
+#define MODEUSAGE_HYPERKINETIC 			// Blocks meteors and projectile based weapons. Relatively low as the shields are primarily intended as an anti-meteor countermeasure.
+#define MODEUSAGE_PHOTONIC 				// Blocks energy weapons, and makes the field opaque.
+#define MODEUSAGE_NONHUMANS 				// Blocks most organic lifeforms, with an exception being humanoid mobs. Typical uses include carps.
+#define MODEUSAGE_HUMANOIDS 			// Blocks humanoid mobs.
+#define MODEUSAGE_ANORGANIC 				// Blocks silicon-based mobs (cyborgs, drones, FBPs, IPCs, ..)
+#define MODEUSAGE_ATMOSPHERIC 			// Blocks airflow.
 #define MODEUSAGE_HULL 1					// Enables hull shielding mode, which changes a square shaped field into a field that covers external hull only.
-#define MODEUSAGE_BYPASS 3					// Attempts to counter shield diffusers. Puts very large EM strain on the shield when doing so. Has to be hacked.
+#define MODEUSAGE_BYPASS 					// Attempts to counter shield diffusers. Puts very large EM strain on the shield when doing so. Has to be hacked.
 #define MODEUSAGE_OVERCHARGE 3				// Overcharges the shield, causing it to shock anyone who touches a field segment. Best used with MODE_ORGANIC_HUMANOIDS. Has to be hacked.
 #define MODEUSAGE_MODULATE 2				// Modulates the shield, enabling the mitigation system.
 

@@ -26,6 +26,7 @@
 	var/input_cut = 0					// Whether the input wire is cut.
 	var/mode_changes_locked = 0			// Whether the control wire is cut, locking out changes.
 	var/ai_control_disabled = 0			// Whether the AI control is disabled.
+	var/list/mode_list = null			// A list of shield_mode datums.
 
 /obj/machinery/power/shield_generator/update_icon()
 	if(running)
@@ -46,11 +47,17 @@
 	connect_to_network()
 	wires = new(src)
 
+	mode_list = list()
+	for(var/st in subtypesof(/datum/shield_mode/))
+		var/datum/shield_mode/SM = new st()
+		mode_list.Add(SM)
+
 
 /obj/machinery/power/shield_generator/Destroy()
 	shutdown_field()
 	field_segments = null
 	damaged_segments = null
+	mode_list = null
 	qdel(wires)
 	. = ..()
 
@@ -110,26 +117,11 @@
 // Recalculates and updates the upkeep multiplier
 /obj/machinery/power/shield_generator/proc/update_upkeep_multiplier()
 	var/new_upkeep = 1
-	if(check_flag(MODEFLAG_HYPERKINETIC))
-		new_upkeep *= MODEUSAGE_HYPERKINETIC
-	if(check_flag(MODEFLAG_PHOTONIC))
-		new_upkeep *= MODEUSAGE_PHOTONIC
-	if(check_flag(MODEFLAG_NONHUMANS))
-		new_upkeep *= MODEUSAGE_NONHUMANS
-	if(check_flag(MODEFLAG_HUMANOIDS))
-		new_upkeep *= MODEUSAGE_HUMANOIDS
-	if(check_flag(MODEFLAG_ANORGANIC))
-		new_upkeep *= MODEUSAGE_ANORGANIC
-	if(check_flag(MODEFLAG_ATMOSPHERIC))
-		new_upkeep *= MODEUSAGE_ATMOSPHERIC
-	if(check_flag(MODEFLAG_HULL))
-		new_upkeep *= MODEUSAGE_HULL
-	if(check_flag(MODEFLAG_BYPASS))
-		new_upkeep *= MODEUSAGE_BYPASS
-	if(check_flag(MODEFLAG_OVERCHARGE))
-		new_upkeep *= MODEUSAGE_OVERCHARGE
-	if(check_flag(MODEFLAG_MODULATE))
-		new_upkeep *= MODEUSAGE_MODULATE
+
+	for(var/datum/shield_mode/SM in mode_list)
+		if(SM.mode_flag & shield_modes)
+			upkeep_multiplier *= SM.multiplier
+
 	upkeep_multiplier = new_upkeep
 
 
@@ -378,98 +370,26 @@
 		mitigation_heat = 0
 
 
-// Gets NanoUI format of existing flags, with user-friendly descriptions and names, as well as current status.
 /obj/machinery/power/shield_generator/proc/get_flag_descriptions()
 	var/list/all_flags = list()
-	all_flags.Add(list(list(
-		"name" = "Hyperkinetic Projectiles",
-		"desc" = "This mode blocks various fast moving physical objects, such as bullets, blunt weapons, meteors and other.",
-		"flag" = MODEFLAG_HYPERKINETIC,
-		"status" = check_flag(MODEFLAG_HYPERKINETIC),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_HYPERKINETIC
-		)))
-	all_flags.Add(list(list(
-		"name" = "Photonic Dispersion",
-		"desc" = "This mode blocks majority of light. This includes beam weaponry and most of the visible light spectrum.",
-		"flag" = MODEFLAG_PHOTONIC,
-		"status" = check_flag(MODEFLAG_PHOTONIC),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_PHOTONIC
-		)))
-	all_flags.Add(list(list(
-		"name" = "Humanoid Lifeforms",
-		"desc" = "This mode blocks various humanoid lifeforms. Does not affect fully synthetic humanoids.",
-		"flag" = MODEFLAG_HUMANOIDS,
-		"status" = check_flag(MODEFLAG_HUMANOIDS),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_HUMANOIDS
-		)))
-	all_flags.Add(list(list(
-		"name" = "Silicon Lifeforms",
-		"desc" = "This mode blocks various silicon based lifeforms.",
-		"flag" = MODEFLAG_ANORGANIC,
-		"status" = check_flag(MODEFLAG_ANORGANIC),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_ANORGANIC
-		)))
-	all_flags.Add(list(list(
-		"name" = "Unknown Lifeforms",
-		"desc" = "This mode blocks various other non-humanoid and non-silicon lifeforms. Typical uses include blocking carps.",
-		"flag" = MODEFLAG_NONHUMANS,
-		"status" = check_flag(MODEFLAG_NONHUMANS),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_NONHUMANS
-		)))
-	all_flags.Add(list(list(
-		"name" = "Atmospheric Containment",
-		"desc" = "This mode blocks air flow and acts as atmosphere containment.",
-		"flag" = MODEFLAG_ATMOSPHERIC,
-		"status" = check_flag(MODEFLAG_ATMOSPHERIC),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_ATMOSPHERIC
-		)))
-	all_flags.Add(list(list(
-		"name" = "Hull Shielding",
-		"desc" = "This mode recalibrates the field to cover surface of the installation instead of projecting a bubble shaped field.",
-		"flag" = MODEFLAG_HULL,
-		"status" = check_flag(MODEFLAG_HULL),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_HULL
-		)))
-	all_flags.Add(list(list(
-		"name" = "Adaptive Field Harmonics",
-		"desc" = "This mode modulates the shield harmonic frequencies, allowing the field to adapt to various damage types..",
-		"flag" = MODEFLAG_MODULATE,
-		"status" = check_flag(MODEFLAG_MODULATE),
-		"hacked" = 0,
-		"multiplier" = MODEUSAGE_MODULATE
-		)))
-
-	if(!hacked)
-		return all_flags
-	// Hacked modes below. Won't show in the UI if the generator is not hacked.
-	all_flags.Add(list(list(
-		"name" = "Diffuser Bypass",
-		"desc" = "This mode disables the built-in safeties which allows the generator to counter effect of various shield diffusers. This tends to create a very large strain on the generator. Does not work with enabled safety protocols.",
-		"flag" = MODEFLAG_BYPASS,
-		"status" = check_flag(MODEFLAG_BYPASS),
-		"hacked" = 1,
-		"multiplier" = MODEUSAGE_BYPASS
-		)))
-	all_flags.Add(list(list(
-		"name" = "Field Overcharge",
-		"desc" = "This mode polarises the field, causing damage on contact. Does not work with enabled safety protocols.",
-		"flag" = MODEFLAG_OVERCHARGE,
-		"status" = check_flag(MODEFLAG_OVERCHARGE),
-		"hacked" = 1,
-		"multiplier" = MODEUSAGE_OVERCHARGE
+	for(var/datum/shield_mode/SM in mode_list)
+		if(SM.hacked_only && !hacked)
+			continue
+		all_flags.Add(list(list(
+			"name" = SM.mode_name,
+			"desc" = SM.mode_desc,
+			"flag" = SM.mode_flag,
+			"status" = check_flag(SM.mode_flag),
+			"hacked" = SM.hacked_only,
+			"multiplier" = SM.multiplier
 		)))
 	return all_flags
 
 
-// These two procs determine tiles that should be shielded given the field range.
+// These two procs determine tiles that should be shielded given the field range. They are quite CPU intensive and may trigger BYOND infinite loop checks, therefore they are set
+// as background procs to prevent locking up the server. They are only called when the field is generated, or when hull mode is toggled on/off.
 /obj/machinery/power/shield_generator/proc/fieldtype_square()
+	set background = 1
 	var/list/out = list()
 	var/turf/gen_turf = get_turf(src)
 	var/turf/T

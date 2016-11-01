@@ -180,7 +180,13 @@
 	if(air_group)
 		return !gen.check_flag(MODEFLAG_ATMOSPHERIC)
 
-	return mover.can_pass_shield(gen)
+	if(mover)
+		return mover.can_pass_shield(gen)
+	return 1
+
+
+/obj/effect/shield/c_airblock(turf/other)
+	return gen.check_flag(MODEFLAG_ATMOSPHERIC)
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
