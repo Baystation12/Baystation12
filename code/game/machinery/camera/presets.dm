@@ -1,35 +1,3 @@
-// PRESETS
-var/global/list/station_networks = list(
-										NETWORK_CALYPSO,
-										NETWORK_CIVILIAN_EAST,
-										NETWORK_CIVILIAN_WEST,
-										NETWORK_COMMAND,
-										NETWORK_ENGINE,
-										NETWORK_ENGINEERING,
-										NETWORK_ENGINEERING_OUTPOST,
-										NETWORK_EXODUS,
-										NETWORK_EXPEDITION,
-										NETWORK_FIRST_DECK,
-										NETWORK_FOURTH_DECK,
-										NETWORK_MEDICAL,
-										NETWORK_MINE,
-										NETWORK_RESEARCH,
-										NETWORK_RESEARCH_OUTPOST,
-										NETWORK_ROBOTS,
-										NETWORK_POD,
-										NETWORK_PRISON,
-										NETWORK_SECOND_DECK,
-										NETWORK_SECURITY,
-										NETWORK_SUPPLY,
-										NETWORK_THIRD_DECK
-										)
-var/global/list/engineering_networks = list(
-										NETWORK_ENGINE,
-										NETWORK_ENGINEERING,
-										NETWORK_ENGINEERING_OUTPOST,
-										"Atmosphere Alarms",
-										"Fire Alarms",
-										"Power Alarms")
 /obj/machinery/camera/network/calypso
 	network = list(NETWORK_CALYPSO)
 
@@ -56,6 +24,9 @@ var/global/list/engineering_networks = list(
 
 /obj/machinery/camera/network/ert
 	network = list(NETWORK_ERT)
+	
+/obj/machinery/camera/network/mercenary
+	network = list(NETWORK_MERCENARY)
 
 /obj/machinery/camera/network/exodus
 	network = list(NETWORK_EXODUS)

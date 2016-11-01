@@ -502,7 +502,7 @@
 		qdel(S)
 		var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
 		user.put_in_hands(A)
-		user << "You add the signaler to the helmet."
+		to_chat(user, "You add the signaler to the helmet.")
 		user.drop_from_inventory(src)
 		qdel(src)
 	else
@@ -524,12 +524,12 @@
 		if(WT.remove_fuel(0, user))
 			build_step = 1
 			overlays += image('icons/obj/aibots.dmi', "hs_hole")
-			user << "You weld a hole in \the [src]."
+			to_chat(user, "You weld a hole in \the [src].")
 
 	else if(isprox(O) && (build_step == 1))
 		user.drop_item()
 		build_step = 2
-		user << "You add \the [O] to [src]."
+		to_chat(user, "You add \the [O] to [src].")
 		overlays += image('icons/obj/aibots.dmi', "hs_eye")
 		name = "helmet/signaler/prox sensor assembly"
 		qdel(O)
@@ -537,14 +537,14 @@
 	else if((istype(O, /obj/item/robot_parts/l_arm) || istype(O, /obj/item/robot_parts/r_arm)) && build_step == 2)
 		user.drop_item()
 		build_step = 3
-		user << "You add \the [O] to [src]."
+		to_chat(user, "You add \the [O] to [src].")
 		name = "helmet/signaler/prox sensor/robot arm assembly"
 		overlays += image('icons/obj/aibots.dmi', "hs_arm")
 		qdel(O)
 
 	else if(istype(O, /obj/item/weapon/melee/baton) && build_step == 3)
 		user.drop_item()
-		user << "You complete the Securitron! Beep boop."
+		to_chat(user, "You complete the Securitron! Beep boop.")
 		var/mob/living/bot/secbot/S = new /mob/living/bot/secbot(get_turf(src))
 		S.name = created_name
 		qdel(O)

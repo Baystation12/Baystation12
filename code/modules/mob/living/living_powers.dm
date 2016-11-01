@@ -1,24 +1,17 @@
-/mob/living/proc/ventcrawl()
-	set name = "Crawl through Vent"
-	set desc = "Enter an air vent and crawl through the pipe system."
-	set category = "Abilities"
-
-	if(stat == DEAD || paralysis || weakened || stunned || restrained())
-		return
-
-	handle_ventcrawl()
+/mob/living
+	var/hiding
 
 /mob/living/proc/hide()
 	set name = "Hide"
 	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
 	set category = "Abilities"
 
-	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+	if(incapacitated())
 		return
 
-	if (layer != 2.45)
-		layer = 2.45 //Just above cables with their 2.44
-		src << text("\blue You are now hiding.")
+	hiding = !hiding
+	if(hiding)
+		to_chat(src, "<span class='notice'>You are now hiding.</span>")
 	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
+		to_chat(src, "<span class='notice'>You have stopped hiding.</span>")
+	reset_layer()

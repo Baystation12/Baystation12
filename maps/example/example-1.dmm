@@ -7,7 +7,7 @@
 "g" = (/obj/effect/landmark/start,/turf/simulated/floor/tiled,/area/constructionsite)
 "h" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/constructionsite)
 "i" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/constructionsite)
-"j" = (/obj/structure/cable,/obj/machinery/power/fractal_reactor,/turf/simulated/floor/tiled,/area/constructionsite)
+"j" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/turf/simulated/floor/tiled,/area/constructionsite)
 "k" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/constructionsite)
 "l" = (/obj/effect/landmark{name = "tdome1"},/turf/simulated/floor/tiled,/area/constructionsite)
 "m" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/tiled,/area/constructionsite)
@@ -20,6 +20,8 @@
 "t" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
 "u" = (/obj/machinery/light_switch{pixel_x = -25},/turf/simulated/floor/tiled,/area/constructionsite)
 "v" = (/obj/machinery/light_switch{pixel_x = 25},/turf/simulated/floor/tiled,/area/constructionsite)
+"x" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
+"w" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/constructionsite)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -33,9 +35,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaabbbbbbbbbbbbbbbaaaaaaaa
 aaaaaaaaabcccdcccccdcccbaaaaaaaa
-aaaaaaaaabclllcccccccccbaaaaaaaa
-aaaaaaaaabclllccccccccvbaaaaaaaa
-aaaaaaaaabelllccccccccfbaaaaaaaa
+aaaaaaaaabclllcwbwcccccbaaaaaaaa
+aaaaaaaaabclllcwwwccccvbaaaaaaaa
+aaaaaaaaabelllxwwwccccfbaaaaaaaa
 aaaaaaaaabccccccccccsccbaaaaaaaa
 aaaaaaaaabccccccccccmonbaaaaaaaa
 aaaaaaaaabccccccgccccccbaaaaaaaa
@@ -55,4 +57,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

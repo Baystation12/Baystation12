@@ -14,7 +14,6 @@
 	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 	using.screen_loc = ui_acti
-	using.layer = SCREEN_LAYER
 	src.adding += using
 	move_intent = using
 
@@ -33,4 +32,3 @@
 	mymob.client.screen = list()
 	mymob.client.screen += list( mymob.healths, mymob.fire)
 	mymob.client.screen += src.adding + src.other
-	common_hud()

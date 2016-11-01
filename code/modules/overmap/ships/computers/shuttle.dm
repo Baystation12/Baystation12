@@ -1,42 +1,55 @@
 //Shuttle controller computer for shuttles going between sectors
+var/list/sector_shuttles = list()
+
 /datum/shuttle/ferry/var/range = 0	//how many overmap tiles can shuttle go, for picking destinatiosn and returning.
 /obj/machinery/computer/shuttle_control/explore
 	name = "exploration shuttle console"
 	shuttle_tag = "Exploration"
 	req_access = list()
-	var/landing_type	//area for shuttle ship-side
-	var/obj/effect/map/destination //current destination
-	var/obj/effect/map/home //current destination
+	var/area/shuttle_area	//area for shuttle ship-side
+	var/list/shuttle_size   // x y dimensions for shuttle
+	var/obj/effect/overmap/destination //current destination
+	var/obj/effect/overmap/home //home port for shuttle
 
 /obj/machinery/computer/shuttle_control/explore/initialize()
 	..()
-	home = map_sectors["[z]"]
 	shuttle_tag = "[shuttle_tag]-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
-		var/datum/shuttle/ferry/shuttle = new()
+		var/datum/shuttle/ferry/shuttle = new(shuttle_tag)
+		sector_shuttles += shuttle
 		shuttle.warmup_time = 10
-		shuttle.area_station = locate(landing_type)
+		if(ispath(shuttle_area))
+			shuttle_area = locate(shuttle_area)
+			shuttle_size = shuttle_area.get_dimensions()
+		shuttle.area_station = shuttle_area
 		shuttle.area_offsite = shuttle.area_station
-		shuttle_controller.shuttles[shuttle_tag] = shuttle
-		shuttle_controller.process_shuttles += shuttle
 		testing("Exploration shuttle '[shuttle_tag]' at zlevel [z] successfully added.")
 
 //Sets destination to new sector. Can be null.
-/obj/machinery/computer/shuttle_control/explore/proc/update_destination(var/obj/effect/map/D)
-	destination = D
-	if(destination && shuttle_controller.shuttles[shuttle_tag])
+/obj/machinery/computer/shuttle_control/explore/proc/update_destination(area/A)
+	if(A && shuttle_controller.shuttles[shuttle_tag])
 		var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
-		shuttle.area_offsite = destination.shuttle_landing
-		testing("Shuttle controller [shuttle_tag] now sends shuttle to [destination]")
-		shuttle_controller.shuttles[shuttle_tag] = shuttle
+		shuttle.area_offsite = A
+		destination = map_sectors["[A.z]"]
+	else
+		destination = null
 
 //Gets all sectors with landing zones in shuttle's range
 /obj/machinery/computer/shuttle_control/explore/proc/get_possible_destinations()
 	var/list/res = list()
 	var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
-	for (var/obj/effect/map/S in orange(shuttle.range, home))
-		if(S.shuttle_landing)
-			res += S
+	var/obj/effect/overmap/cur_loc = map_sectors["[shuttle.location ? shuttle.area_offsite.z : shuttle.area_station.z]"]
+	if(ispath(shuttle_area))
+		shuttle_area = locate(shuttle_area)
+	for (var/obj/effect/overmap/S in orange(shuttle.range, cur_loc))
+		for(var/A in S.landing_areas)
+			var/area/LZ = locate(A)
+			if(LZ && LZ.free())
+				var/lz_size = LZ.get_dimensions()
+				if(lz_size["x"] >= shuttle_size["x"] && lz_size["y"] >= shuttle_size["y"])
+					res["[S.name] - [LZ.name]"] = LZ
+		if(S == home)
+			res["Return to [home]"] = shuttle_area
 	return res
 
 //Checks if current destination is still reachable
@@ -56,17 +69,10 @@
 
 	//check if shuttle can fly at all
 	var/can_go = !isnull(destination)
-	var/current_destination = destination ? destination.name : "None"
-	//shuttle doesn't need destination set to return home, as long as it's in range.
-	if(shuttle.location)
-		current_destination = "Return"
-		var/area/offsite = shuttle.area_offsite
-		var/obj/effect/map/cur_loc = map_sectors["[offsite.z]"]
-		can_go = (get_dist(home,cur_loc) <= shuttle.range)
-
+	var/current_destination = destination && shuttle.area_offsite ? "[destination.name] - [shuttle.area_offsite.name]" : "None"
 	//disable picking locations if there are none, or shuttle is already off-site
 	var/list/possible_d = get_possible_destinations()
-	var/can_pick = !shuttle.location && possible_d.len
+	var/can_pick = possible_d.len && shuttle.moving_status == SHUTTLE_IDLE
 
 	var/shuttle_state
 	switch(shuttle.moving_status)
@@ -123,13 +129,13 @@
 		return
 
 	if(href_list["pick"])
-		var/obj/effect/map/self = map_sectors["[z]"]
+		var/obj/effect/overmap/self = map_sectors["[z]"]
 		if(self)
 			var/list/possible_d = get_possible_destinations()
-			var/obj/effect/map/D
+			var/D
 			if(possible_d.len)
 				D = input("Choose shuttle destination", "Shuttle Destination") as null|anything in possible_d
-			update_destination(D)
+			update_destination(possible_d[D])
 
 	if(href_list["move"])
 		shuttle.launch(src)

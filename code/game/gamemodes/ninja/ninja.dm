@@ -11,5 +11,5 @@
 	config_tag = "ninja"
 	required_players = 1
 	required_enemies = 1
-	end_on_antag_death = 1
+	end_on_antag_death = 0
 	antag_tags = list(MODE_NINJA)

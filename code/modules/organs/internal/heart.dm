@@ -42,7 +42,7 @@
 			pulse = Clamp(pulse + owner.chem_effects[CE_PULSE], PULSE_SLOW, PULSE_2FAST)
 
 /obj/item/organ/internal/heart/proc/handle_heartbeat()
-	if(pulse >= PULSE_2FAST || owner.shock_stage >= 10 || istype(get_turf(owner), /turf/space))
+	if(pulse >= PULSE_2FAST || owner.shock_stage >= 10 || is_below_sound_pressure(get_turf(owner)))
 		//PULSE_THREADY - maximum value for pulse, currently it 5.
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
@@ -50,7 +50,7 @@
 
 		if(heartbeat >= rate)
 			heartbeat = 0
-			owner << sound(beat_sound,0,0,0,50)
+			sound_to(owner, sound(beat_sound,0,0,0,50))
 		else
 			heartbeat++
 
@@ -77,7 +77,7 @@
 	switch(blood_volume)
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			if(prob(1))
-				owner << "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>"
+				to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>")
 			if(owner.getOxyLoss() < 20)
 				owner.adjustOxyLoss(3)
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
@@ -87,12 +87,12 @@
 			owner.adjustOxyLoss(1)
 			if(prob(15))
 				owner.Paralyse(rand(1,3))
-				owner << "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>"
+				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 			owner.adjustOxyLoss(5)
 			owner.adjustToxLoss(3)
 			if(prob(15))
-				owner << "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>"
+				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
 			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
 			owner.adjustOxyLoss(10)

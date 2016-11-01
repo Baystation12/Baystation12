@@ -123,6 +123,7 @@
 
 //Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
 /datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
+
 	if (total_moles == 0)
 		return 0
 

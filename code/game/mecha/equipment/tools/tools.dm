@@ -2,7 +2,7 @@
 	name = "hydraulic clamp"
 	icon_state = "mecha_clamp"
 	equip_cooldown = 15
-	energy_drain = 10
+	energy_drain = 1 KILOWATTS
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
 	required_type = /obj/mecha/working
@@ -221,7 +221,7 @@
 
 			for(var/a = 1 to 5)
 				spawn(0)
-					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
+					var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
 					var/turf/my_target
 					if(a == 1)
 						my_target = T
@@ -252,7 +252,7 @@
 	icon_state = "mecha_rcd"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4)
 	equip_cooldown = 10
-	energy_drain = 250
+	energy_drain = 25 KILOWATTS
 	range = MELEE|RANGED
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
@@ -355,7 +355,7 @@
 	icon_state = "mecha_teleport"
 	origin_tech = list(TECH_BLUESPACE = 10)
 	equip_cooldown = 150
-	energy_drain = 1000
+	energy_drain = 200 KILOWATTS
 	range = RANGED
 
 	action(atom/target)
@@ -375,7 +375,7 @@
 	icon_state = "mecha_wholegen"
 	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
-	energy_drain = 300
+	energy_drain = 50 KILOWATTS
 	range = RANGED
 
 
@@ -425,7 +425,7 @@
 	icon_state = "mecha_teleport"
 	origin_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3)
 	equip_cooldown = 10
-	energy_drain = 100
+	energy_drain = 10 KILOWATTS
 	range = MELEE|RANGED
 	var/atom/movable/locked
 	var/mode = 1 //1 - gravsling 2 - gravpush
@@ -500,7 +500,7 @@
 	desc = "Powered armor-enhancing mech equipment."
 	icon_state = "mecha_abooster_proj"
 	equip_cooldown = 10
-	energy_drain = 50
+	energy_drain = 5 KILOWATTS
 	range = 0
 	var/deflect_coeff = 1
 	var/damage_coeff = 1
@@ -590,7 +590,7 @@
 	icon_state = "repair_droid"
 	origin_tech = list(TECH_MAGNET = 3, TECH_DATA = 3)
 	equip_cooldown = 20
-	energy_drain = 100
+	energy_drain = 10 KILOWATTS
 	range = 0
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
@@ -777,7 +777,7 @@
 	var/max_fuel = 150000
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
-	var/power_per_cycle = 20
+	var/power_per_cycle = 1 KILOWATTS
 
 	New()
 		..()
@@ -851,7 +851,7 @@
 		if(isnull(result))
 			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<span class='warning'>[fuel] traces minimal. [weapon] cannot be used as fuel.</span>")
 		else if(!result)
-			user << "Unit is full."
+			to_chat(user, "Unit is full.")
 		else
 			user.visible_message("[user] loads [src] with [fuel].","[result] unit\s of [fuel] successfully loaded.")
 		return
@@ -908,7 +908,7 @@
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
-	power_per_cycle = 50
+	power_per_cycle = 5 KILOWATTS
 	var/rad_per_cycle = 0.3
 
 	init()
@@ -997,7 +997,7 @@
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
-	energy_drain = 10
+	energy_drain = 1 KILOWATTS
 	range = MELEE
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
@@ -1007,7 +1007,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
-		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!</span>"
+		to_chat(AM, "<span class='danger'>You tumble out of the destroyed [src.name]!</span>")
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)
@@ -1024,9 +1024,9 @@
 			log_message("\The [user] boarded.")
 			occupant_message("\The [user] boarded.")
 		else if(src.occupant != user)
-			user << "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>"
+			to_chat(user, "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>")
 	else
-		user << "You stop entering the exosuit."
+		to_chat(user, "You stop entering the exosuit.")
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/verb/eject()
 	set name = "Eject"
@@ -1036,7 +1036,7 @@
 
 	if(usr != occupant)
 		return
-	occupant << "You climb out from \the [src]."
+	to_chat(occupant, "You climb out from \the [src].")
 	go_out()
 	occupant_message("[occupant] disembarked.")
 	log_message("[occupant] disembarked.")
@@ -1098,18 +1098,18 @@
 		return
 
 	if (!isturf(usr.loc))
-		usr << "<span class='danger'>You can't reach the passenger compartment from here.</span>"
+		to_chat(usr, "<span class='danger'>You can't reach the passenger compartment from here.</span>")
 		return
 
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			usr << "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>"
+			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
 			return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
-			usr << "<span class='danger'>You're too busy getting your life sucked out of you.</span>"
+			to_chat(usr, "<span class='danger'>You're too busy getting your life sucked out of you.</span>")
 			return
 
 	//search for a valid passenger compartment
@@ -1129,13 +1129,13 @@
 	//didn't find anything
 	switch (feedback)
 		if (OCCUPIED)
-			usr << "<span class='danger'>The passenger compartment is already occupied!</span>"
+			to_chat(usr, "<span class='danger'>The passenger compartment is already occupied!</span>")
 		if (LOCKED)
-			usr << "<span class='warning'>The passenger compartment hatch is locked!</span>"
+			to_chat(usr, "<span class='warning'>The passenger compartment hatch is locked!</span>")
 		if (OCCUPIED|LOCKED)
-			usr << "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>"
+			to_chat(usr, "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>")
 		if (0)
-			usr << "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>"
+			to_chat(usr, "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>")
 
 #undef LOCKED
 #undef OCCUPIED

@@ -202,7 +202,7 @@
 		for(var/offer in offers)
 			if(istype(offer,/mob))
 				var/text = mob_transfer_message
-				offer << replacetext(text, "ORIGIN", origin)
+				to_chat(offer, replacetext(text, "ORIGIN", origin))
 			if(istype(offer, /obj/mecha))
 				var/obj/mecha/M = offer
 				M.wreckage = null //So they don't ruin the illusion
@@ -249,3 +249,6 @@
 	for(var/offer in offers)
 		. += get_value(offer) * want_multiplier
 		qdel(offer)
+
+/datum/trader/proc/bribe_to_stay_longer(var/amt)
+	return get_response("bribe_refusal", "How about... no?")

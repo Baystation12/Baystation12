@@ -17,7 +17,7 @@ var/list/_client_preferences_by_type
 	if(ispath(preference))
 		return get_client_preference_by_type(preference)
 	return get_client_preference_by_key(preference)
-    
+
 /proc/get_client_preference_by_key(var/preference)
 	if(!_client_preferences_by_key)
 		_client_preferences_by_key = list()
@@ -61,9 +61,9 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_lobby_music/toggled(var/mob/preference_mob, var/enabled)
 	if(enabled)
-		preference_mob << sound(ticker.login_music, repeat = 1, wait = 0, volume = 85, channel = 1)
+		using_map.lobby_music.play_to(preference_mob)
 	else
-		preference_mob << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))
 
 /datum/client_preference/play_ambiance
 	description ="Play ambience"
@@ -71,8 +71,8 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_ambiance/toggled(var/mob/preference_mob, var/enabled)
 	if(!enabled)
-		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 1)
-		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 2)
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = 1))
+		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = 2))
 
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"

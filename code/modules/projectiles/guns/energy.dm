@@ -6,7 +6,7 @@
 	fire_sound_text = "laser blast"
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
-	var/charge_cost = 200 //How much energy is needed to fire.
+	var/charge_cost = 20 //How much energy is needed to fire.
 	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
 	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice
@@ -84,7 +84,7 @@
 /obj/item/weapon/gun/energy/examine(mob/user)
 	..(user)
 	var/shots_remaining = round(power_supply.charge / charge_cost)
-	user << "Has [shots_remaining] shot\s remaining."
+	to_chat(user, "Has [shots_remaining] shot\s remaining.")
 	return
 
 /obj/item/weapon/gun/energy/update_icon()

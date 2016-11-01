@@ -100,7 +100,7 @@ var/global/list/additional_antag_types = list()
 			message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 	else if(href_list["remove_antag_type"])
 		if(antag_tags && (href_list["remove_antag_type"] in antag_tags))
-			usr << "Cannot remove core mode antag type."
+			to_chat(usr, "Cannot remove core mode antag type.")
 			return
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antag_type"]]
 		if(antag_templates && antag_templates.len && antag && (antag in antag_templates) && (antag.id in additional_antag_types))
@@ -126,9 +126,9 @@ var/global/list/additional_antag_types = list()
 				return
 
 /datum/game_mode/proc/announce() //to be called when round starts
-	world << "<B>The current game mode is [capitalize(name)]!</B>"
-	if(round_description) world << "[round_description]"
-	if(round_autoantag) world << "Antagonists will be added to the round automagically as needed."
+	to_world("<B>The current game mode is [capitalize(name)]!</B>")
+	if(round_description) to_world("[round_description]")
+	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
 	if(antag_templates && antag_templates.len)
 		var/antag_summary = "<b>Possible antagonist types:</b> "
 		var/i = 1
@@ -142,23 +142,24 @@ var/global/list/additional_antag_types = list()
 			i++
 		antag_summary += "."
 		if(antag_templates.len > 1 && master_mode != "secret")
-			world << "[antag_summary]"
+			to_world("[antag_summary]")
 		else
 			message_admins("[antag_summary]")
 
-///can_start()
-///Checks to see if the game can be setup and ran with the current number of players or whatnot.
-/datum/game_mode/proc/can_start(var/do_not_spawn)
+// startRequirements()
+// Checks to see if the game can be setup and ran with the current number of players or whatnot.
+// Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
+/datum/game_mode/proc/startRequirements()
 	var/playerC = 0
 	for(var/mob/new_player/player in player_list)
 		if((player.client)&&(player.ready))
 			playerC++
 
 	if(playerC < required_players)
-		return 0
+		return "Not enough players, [src.required_players] players needed."
 
 	if(!(antag_templates && antag_templates.len))
-		return 1
+		return 0
 
 	var/enemy_count = 0
 	if(antag_tags && antag_tags.len)
@@ -173,11 +174,11 @@ var/global/list/additional_antag_types = list()
 				potential = antag.candidates
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
-					return 0
+					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
-					return 1
-	return 0
+					return 0
+	return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
@@ -219,8 +220,8 @@ var/global/list/additional_antag_types = list()
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
 
-	if(emergency_shuttle && auto_recall_shuttle)
-		emergency_shuttle.auto_recall = 1
+	if(evacuation_controller && auto_recall_shuttle)
+		evacuation_controller.recall = 1
 
 	feedback_set_details("round_start","[time2text(world.realtime)]")
 	if(ticker && ticker.mode)
@@ -271,7 +272,7 @@ var/global/list/additional_antag_types = list()
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 
 /datum/game_mode/proc/check_finished()
-	if(emergency_shuttle.returned() || station_was_nuked)
+	if(evacuation_controller.round_over() || station_was_nuked)
 		return 1
 	if(end_on_antag_death && antag_templates && antag_templates.len)
 		var/has_antags = 0
@@ -280,7 +281,7 @@ var/global/list/additional_antag_types = list()
 				has_antags = 1
 				break
 		if(!has_antags)
-			emergency_shuttle.auto_recall = 0
+			evacuation_controller.recall = 0
 			return 1
 	return 0
 
@@ -312,49 +313,29 @@ var/global/list/additional_antag_types = list()
 	var/ghosts = 0
 	var/escaped_humans = 0
 	var/escaped_total = 0
-	var/escaped_on_pod_1 = 0
-	var/escaped_on_pod_2 = 0
-	var/escaped_on_pod_3 = 0
-	var/escaped_on_pod_5 = 0
-	var/escaped_on_shuttle = 0
-
-	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
 
 	for(var/mob/M in player_list)
 		if(M.client)
 			clients++
-			if(ishuman(M))
-				if(M.stat != DEAD)
-					surviving_humans++
-					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
-						escaped_humans++
 			if(M.stat != DEAD)
 				surviving_total++
-				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
+				if(ishuman(M))
+					surviving_humans++
+				var/area/A = get_area(M)
+				if(A && is_type_in_list(A, using_map.post_round_safe_areas))
 					escaped_total++
-
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape/centcom)
-					escaped_on_shuttle++
-
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod1/centcom)
-					escaped_on_pod_1++
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod2/centcom)
-					escaped_on_pod_2++
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod3/centcom)
-					escaped_on_pod_3++
-				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod5/centcom)
-					escaped_on_pod_5++
-
-			if(isghost(M))
+					if(ishuman(M))
+						escaped_humans++
+			else if(isghost(M))
 				ghosts++
 
 	var/text = ""
 	if(surviving_total > 0)
 		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
-		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
+		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
-	world << text
+	to_world(text)
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
@@ -368,18 +349,8 @@ var/global/list/additional_antag_types = list()
 		feedback_set("escaped_human",escaped_humans)
 	if(escaped_total > 0)
 		feedback_set("escaped_total",escaped_total)
-	if(escaped_on_shuttle > 0)
-		feedback_set("escaped_on_shuttle",escaped_on_shuttle)
-	if(escaped_on_pod_1 > 0)
-		feedback_set("escaped_on_pod_1",escaped_on_pod_1)
-	if(escaped_on_pod_2 > 0)
-		feedback_set("escaped_on_pod_2",escaped_on_pod_2)
-	if(escaped_on_pod_3 > 0)
-		feedback_set("escaped_on_pod_3",escaped_on_pod_3)
-	if(escaped_on_pod_5 > 0)
-		feedback_set("escaped_on_pod_5",escaped_on_pod_5)
 
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivors, [ghosts] ghosts.")
+	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 
 	return 0
 
@@ -429,7 +400,7 @@ var/global/list/additional_antag_types = list()
 	//New message handling
 	post_comm_message("Cent. Com. Status Summary", intercepttext)
 
-	world << sound('sound/AI/commandreport.ogg')
+	sound_to(world, sound('sound/AI/commandreport.ogg'))
 
 /datum/game_mode/proc/get_players_for_role(var/role, var/antag_id)
 	var/list/players = list()
@@ -557,8 +528,7 @@ proc/display_roundstart_logout_report()
 
 	for(var/mob/M in mob_list)
 		if(M.client && M.client.holder)
-			M << msg
-
+			to_chat(M, msg)
 proc/get_nt_opposed()
 	var/list/dudes = list()
 	for(var/mob/living/carbon/human/man in player_list)
@@ -578,9 +548,9 @@ proc/get_nt_opposed()
 		return
 
 	var/obj_count = 1
-	player.current << "<span class='notice'>Your current objectives:</span>"
+	to_chat(player.current, "<span class='notice'>Your current objectives:</span>")
 	for(var/datum/objective/objective in player.objectives)
-		player.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++
 
 /mob/verb/check_round_info()
@@ -588,15 +558,15 @@ proc/get_nt_opposed()
 	set category = "OOC"
 
 	if(!ticker || !ticker.mode)
-		usr << "Something is terribly wrong; there is no gametype."
+		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
 
 	if(master_mode != "secret")
-		usr << "<b>The roundtype is [capitalize(ticker.mode.name)]</b>"
+		to_chat(usr, "<b>The roundtype is [capitalize(ticker.mode.name)]</b>")
 		if(ticker.mode.round_description)
-			usr << "<i>[ticker.mode.round_description]</i>"
+			to_chat(usr, "<i>[ticker.mode.round_description]</i>")
 		if(ticker.mode.extended_round_description)
-			usr << "[ticker.mode.extended_round_description]"
+			to_chat(usr, "[ticker.mode.extended_round_description]")
 	else
-		usr << "<i>Shhhh</i>. It's a secret."
+		to_chat(usr, "<i>Shhhh</i>. It's a secret.")
 	return

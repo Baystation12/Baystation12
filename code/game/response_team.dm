@@ -12,16 +12,16 @@ var/can_call_ert
 	set desc = "Send an emergency response team to the station"
 
 	if(!holder)
-		usr << "<span class='danger'>Only administrators may use this command.</span>"
+		to_chat(usr, "<span class='danger'>Only administrators may use this command.</span>")
 		return
 	if(!ticker)
-		usr << "<span class='danger'>The game hasn't started yet!</span>"
+		to_chat(usr, "<span class='danger'>The game hasn't started yet!</span>")
 		return
 	if(ticker.current_state == 1)
-		usr << "<span class='danger'>The round hasn't started yet!</span>"
+		to_chat(usr, "<span class='danger'>The round hasn't started yet!</span>")
 		return
 	if(send_emergency_team)
-		usr << "<span class='danger'>[boss_name] has already dispatched an emergency response team!</span>"
+		to_chat(usr, "<span class='danger'>[boss_name] has already dispatched an emergency response team!</span>")
 		return
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
 		return
@@ -30,7 +30,7 @@ var/can_call_ert
 			if("No")
 				return
 	if(send_emergency_team)
-		usr << "<span class='danger'>Looks like somebody beat you to it!</span>"
+		to_chat(usr, "<span class='danger'>Looks like somebody beat you to it!</span>")
 		return
 
 	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
@@ -43,22 +43,22 @@ client/verb/JoinResponseTeam()
 	set category = "IC"
 
 	if(!MayRespawn(1))
-		usr << "<span class='warning'>You cannot join the response team at this time.</span>"
+		to_chat(usr, "<span class='warning'>You cannot join the response team at this time.</span>")
 		return
 
 	if(isghost(usr) || isnewplayer(usr))
 		if(!send_emergency_team)
-			usr << "No emergency response team is currently being sent."
+			to_chat(usr, "No emergency response team is currently being sent.")
 			return
 		if(jobban_isbanned(usr, MODE_ERT) || jobban_isbanned(usr, "Security Officer"))
-			usr << "<span class='danger'>You are jobbanned from the emergency reponse team!</span>"
+			to_chat(usr, "<span class='danger'>You are jobbanned from the emergency reponse team!</span>")
 			return
 		if(ert.current_antagonists.len >= ert.hard_cap)
-			usr << "The emergency response team is already full!"
+			to_chat(usr, "The emergency response team is already full!")
 			return
 		ert.create_default(usr)
 	else
-		usr << "You need to be an observer or new player to use this."
+		to_chat(usr, "You need to be an observer or new player to use this.")
 
 // returns a number of dead players in %
 proc/percentage_dead()
@@ -119,7 +119,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		return
 
 	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[boss_name]")
-	emergency_shuttle.add_can_call_predicate(new/datum/emergency_shuttle_predicate/ert())
+	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1
@@ -127,18 +127,18 @@ proc/trigger_armed_response_team(var/force = 0)
 	sleep(600 * 5)
 	send_emergency_team = 0 // Can no longer join the ERT.
 
-/datum/emergency_shuttle_predicate/ert
+/datum/evacuation_predicate/ert
 	var/prevent_until
 
-/datum/emergency_shuttle_predicate/ert/New()
+/datum/evacuation_predicate/ert/New()
 	..()
 	prevent_until = world.time + 30 MINUTES
 
-/datum/emergency_shuttle_predicate/ert/is_valid()
+/datum/evacuation_predicate/ert/is_valid()
 	return world.time < prevent_until
 
-/datum/emergency_shuttle_predicate/ert/can_call(var/user)
+/datum/evacuation_predicate/ert/can_call(var/user)
 	if(world.time >= prevent_until)
 		return TRUE
-	user << "<span class='warning'>An emergency response team has been dispatched. Emergency shuttle requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>"
+	to_chat(user, "<span class='warning'>An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>")
 	return FALSE

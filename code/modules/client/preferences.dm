@@ -1,4 +1,4 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
+#define SAVE_RESET -1
 
 var/list/preferences_datums = list()
 
@@ -57,6 +57,8 @@ datum/preferences
 	var/faction = "None"                //Antag faction/general associated faction.
 	var/religion = "None"               //Religious association.
 
+	var/char_branch	= "None"            // military branch
+	var/char_rank = "None"              // military rank
 		//Mob preview
 	var/icon/preview_icon = null
 
@@ -182,7 +184,7 @@ datum/preferences
 	if(!user || !user.client)	return
 
 	if(!get_mob_by_key(client_ckey))
-		user << "<span class='danger'>No mob exists for the given client!</span>"
+		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
 		close_load_dialog(user)
 		return
 
@@ -192,6 +194,7 @@ datum/preferences
 		dat += "Slot - "
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
 		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
 
 	else
@@ -214,9 +217,9 @@ datum/preferences
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
-			user << link(config.forumurl)
+			to_chat(user, link(config.forumurl))
 		else
-			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
 	ShowChoices(usr)
 	return 1
@@ -240,6 +243,9 @@ datum/preferences
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
+	else if(href_list["resetslot"])
+		load_character(SAVE_RESET)
+		sanitize_preferences()
 	else
 		return 0
 
@@ -381,6 +387,9 @@ datum/preferences
 	character.citizenship = citizenship
 	character.personal_faction = faction
 	character.religion = religion
+	
+	character.char_branch = mil_branches.get_branch(char_branch)
+	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints

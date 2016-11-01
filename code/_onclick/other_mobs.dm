@@ -143,7 +143,7 @@
 			custom_emote(1,"[friendly] [A]!")
 			return
 		if(ckey)
-			add_logs(src, A, attacktext)
+			admin_attack_log(src, A, "Has [attacktext] its victim.", "Has been [attacktext] by its attacker.", attacktext)
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
 	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)

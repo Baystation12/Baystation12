@@ -22,6 +22,11 @@ var/list/event_listen_count = list()
 		event_sources_count[event_source] -= 1
 		event_listen_count[listener] -= 1
 
+		if(event_sources_count[event_source] <= 0)
+			event_sources_count -= event_source
+		if(event_listen_count[listener] <= 0)
+			event_listen_count -= listener
+
 /decl/observ/register_global(var/datum/listener, var/proc_call)
 	. = ..()
 	if(.)
@@ -31,6 +36,8 @@ var/list/event_listen_count = list()
 	. = ..()
 	if(.)
 		global_listen_count[listener] -= 1
+		if(global_listen_count[listener] <= 0)
+			global_listen_count -= listener
 
 /proc/cleanup_global_listener(listener, listen_count)
 	global_listen_count -= listener

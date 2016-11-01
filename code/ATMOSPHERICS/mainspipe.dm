@@ -34,7 +34,6 @@ obj/machinery/atmospherics/pipe/mains_component
 
 obj/machinery/atmospherics/mains_pipe
 	icon = 'icons/obj/atmospherics/mainspipe.dmi'
-	layer = 2.4 //under wires with their 2.5
 
 	var/volume = 0
 
@@ -647,7 +646,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 
 		attack_hand(mob/user as mob)
 			if(!src.allowed(user))
-				user << "<span class='warning'>Access denied.</span>"
+				to_chat(user, "<span class='warning'>Access denied.</span>")
 				return
 			..()
 

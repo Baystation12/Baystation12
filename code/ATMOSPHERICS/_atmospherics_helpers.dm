@@ -19,7 +19,7 @@
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	M.debug = !M.debug
-	usr << "[M]: Debug messages toggled [M.debug? "on" : "off"]."
+	to_chat(usr, "[M]: Debug messages toggled [M.debug? "on" : "off"].")
 
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.

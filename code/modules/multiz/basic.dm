@@ -33,3 +33,10 @@ proc/GetBelow(var/atom/atom)
 	if(!turf)
 		return null
 	return HasBelow(turf.z) ? get_step(turf, DOWN) : null
+
+proc/GetConnectedZlevels(z)
+	. = list(z)
+	for(var/level = z, HasBelow(level), level--)
+		. |= level-1
+	for(var/level = z, HasAbove(level), level++)
+		. |= level+1

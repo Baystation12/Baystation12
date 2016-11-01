@@ -208,9 +208,13 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/powercell
 	build_type = PROTOLATHE | MECHFAB
+	category = "Misc"
 
 /datum/design/item/powercell/AssembleDesignName()
 	name = "Power cell model ([item_name])"
+
+/datum/design/item/powercell/device/AssembleDesignName()
+	name = "Device cell model ([item_name])"
 
 /datum/design/item/powercell/AssembleDesignDesc()
 	if(build_path)
@@ -224,22 +228,18 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/powercell/basic
 	name = "basic"
-	build_type = PROTOLATHE | MECHFAB
 	id = "basic_cell"
 	req_tech = list(TECH_POWER = 1)
 	materials = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 	build_path = /obj/item/weapon/cell
-	category = "Misc"
 	sort_string = "DAAAA"
 
 /datum/design/item/powercell/high
 	name = "high-capacity"
-	build_type = PROTOLATHE | MECHFAB
 	id = "high_cell"
 	req_tech = list(TECH_POWER = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
 	build_path = /obj/item/weapon/cell/high
-	category = "Misc"
 	sort_string = "DAAAB"
 
 /datum/design/item/powercell/super
@@ -248,7 +248,6 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
 	build_path = /obj/item/weapon/cell/super
-	category = "Misc"
 	sort_string = "DAAAC"
 
 /datum/design/item/powercell/hyper
@@ -257,8 +256,24 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 400, "gold" = 150, "silver" = 150, "glass" = 70)
 	build_path = /obj/item/weapon/cell/hyper
-	category = "Misc"
 	sort_string = "DAAAD"
+
+/datum/design/item/powercell/device/standard
+	name = "basic"
+	id = "device_cell_standard"
+	req_tech = list(TECH_POWER = 1)
+	materials = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 5)
+	build_path = /obj/item/weapon/cell/device/standard
+	sort_string = "DAAAE"
+
+/datum/design/item/powercell/device/high
+	name = "high-capacity"
+	build_type = PROTOLATHE | MECHFAB
+	id = "device_cell_high"
+	req_tech = list(TECH_POWER = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 6)
+	build_path = /obj/item/weapon/cell/device/high
+	sort_string = "DAAAF"
 
 /datum/design/item/hud
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
@@ -652,7 +667,7 @@ other types of metals and chemistry for reagents).
 	id = "intellicard"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
-	build_path = /obj/item/device/aicard
+	build_path = /obj/item/weapon/aicard
 	sort_string = "VACAA"
 
 /datum/design/item/posibrain
@@ -963,6 +978,17 @@ other types of metals and chemistry for reagents).
 	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
+
+// Intellicard Slot
+/datum/design/item/modularcomponent/aislot
+	name = "intellicard slot"
+	id = "aislot"
+	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
+	build_type = IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	chemicals = list("sacid" = 20)
+	build_path = /obj/item/weapon/computer_hardware/ai_slot
+	sort_string = "VBAAZ"
 /*
 CIRCUITS BELOW
 */
@@ -1002,12 +1028,6 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
 	sort_string = "MABAA"
-
-/datum/design/circuit/seccamera
-	name = "security camera monitor"
-	id = "seccamera"
-	build_path = /obj/item/weapon/circuitboard/security
-	sort_string = "DAAAA"
 
 /datum/design/circuit/secdata
 	name = "security records console"
@@ -1115,13 +1135,6 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/circuitboard/rdconsole
 	sort_string = "HAAAE"
-
-/datum/design/circuit/aifixer
-	name = "AI integrity restorer"
-	id = "aifixer"
-	req_tech = list(TECH_DATA = 3, TECH_BIO = 2)
-	build_path = /obj/item/weapon/circuitboard/aifixer
-	sort_string = "HAAAF"
 
 /datum/design/circuit/comm_monitor
 	name = "telecommunications monitoring console"
@@ -1740,17 +1753,6 @@ CIRCUITS BELOW
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 50)
 	build_path = /obj/item/weapon/airlock_brace
 	sort_string = "VBAAP"
-
-/datum/design/item/brace_keycard
-	name = "brace keycard design"
-	desc = "A small card resembling an ID, it can be paired with airlock braces for quick access."
-	id = "bracecard"
-	req_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 2)
-	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
-	chemicals = list("sacid" = 20)
-	build_type = IMPRINTER
-	build_path = /obj/item/weapon/brace_keycard
-	sort_string = "VBAAR"
 
 /datum/design/item/brace_jack
 	name = "maintenance jack design"

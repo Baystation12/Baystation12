@@ -9,7 +9,6 @@
 	name = "Mulebot"
 	desc = "A Multiple Utility Load Effector bot."
 	icon_state = "mulebot0"
-	layer = MOB_LAYER
 	density = 1
 	anchored = 1
 	animate_movement=1
@@ -47,8 +46,8 @@
 	var/auto_return = 1	// true if auto return to home beacon after unload
 	var/auto_pickup = 1 // true if auto-pickup at beacon
 
-	var/obj/item/weapon/cell/cell
-						// the installed power cell
+	var/obj/item/weapon/cell/cell	// the installed power cell
+	var/movement_power_usage = 250	// Power usage in joules per tile
 
 	// constants for internal wiring bitflags
 	var/datum/wires/mulebot/wires = null
@@ -61,8 +60,6 @@
 	botcard = new(src)
 	botcard.access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	cell = new(src)
-	cell.charge = 2000
-	cell.maxcharge = 2000
 
 	spawn(5)	// must wait for map loading to finish
 		if(radio_controller)
@@ -99,7 +96,7 @@
 		updateDialog()
 	else if(istype(I,/obj/item/weapon/screwdriver))
 		if(locked)
-			user << "<span class='notice'>The maintenance hatch cannot be opened or closed while the controls are locked.</span>"
+			to_chat(user, "<span class='notice'>The maintenance hatch cannot be opened or closed while the controls are locked.</span>")
 			return
 
 		open = !open
@@ -121,13 +118,13 @@
 				"<span class='notice'>You repair \the [src]!</span>"
 			)
 		else
-			user << "<span class='notice'>[src] does not need a repair!</span>"
+			to_chat(user, "<span class='notice'>[src] does not need a repair!</span>")
 	else if(load && ismob(load))  // chance to knock off rider
 		if(prob(1+I.force * 2))
 			unload(0)
 			user.visible_message("<span class='warning'>[user] knocks [load] off [src] with \the [I]!</span>", "<span class='warning'>You knock [load] off [src] with \the [I]!</span>")
 		else
-			user << "You hit [src] with \the [I] but to no effect."
+			to_chat(user, "You hit [src] with \the [I] but to no effect.")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	else
 		..()
@@ -135,7 +132,7 @@
 
 /obj/machinery/bot/mulebot/emag_act(var/remaining_charges, var/user)
 	locked = !locked
-	user << "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>"
+	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>")
 	flick("mulebot-emagged", src)
 	playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1
@@ -158,6 +155,7 @@
 	if(prob(25))
 		src.visible_message("<span class='warning'>Something shorts out inside [src]!</span>")
 		var/index = 1<< (rand(0,9))
+
 		if(wires & index)
 			wires &= ~index
 		else
@@ -256,14 +254,14 @@
 					locked = !locked
 					updateDialog()
 				else
-					usr << "<span class='warning'>Access denied.</span>"
+					to_chat(usr, "<span class='warning'>Access denied.</span>")
 					return
 			if("power")
 				if (src.on)
 					turn_off()
 				else if (cell && !open)
 					if (!turn_on())
-						usr << "<span class='warning'>You can't switch on [src].</span>"
+						to_chat(usr, "<span class='warning'>You can't switch on [src].</span>")
 						return
 				else
 					return
@@ -414,16 +412,17 @@
 	if(istype(crate))
 		crate.close()
 
-	C.loc = src.loc
+	C.forceMove(loc)
 	sleep(2)
 	if(C.loc != src.loc) //To prevent you from going onto more thano ne bot.
 		return
-	C.loc = src
+	C.forceMove(src)
 	load = C
 
 	C.pixel_y += 9
 	if(C.layer < layer)
 		C.layer = layer + 0.1
+	C.plane = plane
 	overlays += C
 
 	if(ismob(C))
@@ -445,9 +444,9 @@
 	mode = 1
 	overlays.Cut()
 
-	load.loc = src.loc
+	load.forceMove(loc)
 	load.pixel_y -= 9
-	load.layer = initial(load.layer)
+	load.reset_plane_and_layer()
 	if(ismob(load))
 		var/mob/M = load
 		if(M.client)
@@ -472,8 +471,8 @@
 	for(var/atom/movable/AM in src)
 		if(AM == cell || AM == botcard) continue
 
-		AM.loc = src.loc
-		AM.layer = initial(AM.layer)
+		AM.forceMove(loc)
+		AM.reset_plane_and_layer()
 		AM.pixel_y = initial(AM.pixel_y)
 		if(ismob(AM))
 			var/mob/M = AM
@@ -489,7 +488,8 @@
 		return
 	if(on)
 		var/speed = (wires.Motor1() ? 1:0) + (wires.Motor2() ? 2:0)
-		//world << "speed: [speed]"
+//		log_debug("speed: [speed]")
+
 		switch(speed)
 			if(0)
 				// do nothing
@@ -513,7 +513,8 @@
 	if(refresh) updateDialog()
 
 /obj/machinery/bot/mulebot/proc/process_bot()
-	//if(mode) world << "Mode: [mode]"
+//	if(mode) log_debug("Mode: [mode]")
+
 	switch(mode)
 		if(0)		// idle
 			icon_state = "mulebot0"
@@ -536,7 +537,8 @@
 
 
 				if(istype( next, /turf/simulated))
-					//world << "at ([x],[y]) moving to ([next.x],[next.y])"
+//					log_debug("at ([x],[y]) moving to ([next.x],[next.y])")
+
 
 
 					if(bloodiness)
@@ -556,9 +558,10 @@
 
 
 					var/moved = step_towards(src, next)	// attempt to move
-					if(cell) cell.use(1)
+					if(cell) cell.use(movement_power_usage * CELLRATE)
 					if(moved)	// successful move
-						//world << "Successful move."
+//						log_debug("Successful move.")
+
 						blockcount = 0
 						path -= loc
 
@@ -574,7 +577,8 @@
 
 					else		// failed to move
 
-						//world << "Unable to move."
+//						log_debug("Unable to move.")
+
 
 
 
@@ -601,16 +605,19 @@
 				else
 					src.visible_message("[src] makes an annoyed buzzing sound", "You hear an electronic buzzing sound.")
 					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
-					//world << "Bad turf."
+//					log_debug("Bad turf.")
+
 					mode = 5
 					return
 			else
-				//world << "No path."
+//				log_debug("No path.")
+
 				mode = 5
 				return
 
 		if(5)		// calculate new path
-			//world << "Calc new path."
+//			log_debug("Calc new path.")
+
 			mode = 6
 			spawn(0)
 
@@ -628,9 +635,11 @@
 
 					mode = 7
 		//if(6)
-			//world << "Pending path calc."
+//			log_debug("Pending path calc.")
+
 		//if(7)
-			//world << "No dest / no route."
+//			log_debug("No dest / no route.")
+
 	return
 
 
@@ -835,7 +844,8 @@
 	//for(var/key in keyval)
 	//	signal.data[key] = keyval[key]
 	signal.data = keyval
-		//world << "sent [key],[keyval[key]] on [freq]"
+//		log_debug("sent [key],[keyval[key]] on [freq]")
+
 	if (signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
 	else if (signal.data["type"] == "mulebot")
@@ -872,8 +882,8 @@
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	PoolOrNew(/obj/item/stack/rods, Tsec)
-	PoolOrNew(/obj/item/stack/rods, Tsec)
+	new /obj/item/stack/rods(Tsec)
+	new /obj/item/stack/rods(Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 	if (cell)
 		cell.loc = Tsec

@@ -67,14 +67,10 @@
 
 /mob/living/carbon/slime/handle_chemicals_in_body()
 	chem_effects.Cut()
-	analgesic = 0
 
 	if(touching) touching.metabolize()
 	if(ingested) ingested.metabolize()
 	if(bloodstr) bloodstr.metabolize()
-
-	if(CE_PAINKILLER in chem_effects)
-		analgesic = chem_effects[CE_PAINKILLER]
 
 	src.updatehealth()
 
@@ -153,7 +149,7 @@
 		nutrition = 0
 		adjustToxLoss(rand(1,3))
 		if (client && prob(5))
-			src << "<span class='danger'>You are starving!</span>"
+			to_chat(src, "<span class='danger'>You are starving!</span>")
 
 	else if (nutrition >= get_grow_nutrition() && amount_grown < 10)
 		nutrition -= 20

@@ -1,4 +1,5 @@
 /obj
+	layer = OBJ_LAYER
 	//Used to store information about the contents of the object.
 	var/list/matter
 	var/w_class // Size of the object.
@@ -31,7 +32,7 @@
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
 	if(user.CanUseObjTopic(src))
 		return ..()
-	user << "<span class='danger'>\icon[src]Access Denied!</span>"
+	to_chat(user, "<span class='danger'>\icon[src]Access Denied!</span>")
 	return STATUS_CLOSE
 
 /mob/living/silicon/CanUseObjTopic(var/obj/O)

@@ -9,7 +9,7 @@ var/global/universe_has_ended = 0
 
 /datum/universal_state/supermatter_cascade/OnShuttleCall(var/mob/user)
 	if(user)
-		user << "<span class='sinister'>All you hear on the frequency is static and panicked screaming. There will be no shuttle call today.</span>"
+		to_chat(user, "<span class='sinister'>All you hear on the frequency is static and panicked screaming. There will be no shuttle call today.</span>")
 	return 0
 
 /datum/universal_state/supermatter_cascade/OnTurfChange(var/turf/T)
@@ -38,16 +38,14 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/OnEnter()
 	set background = 1
 	garbage_collector.garbage_collect = 0
-	world << "<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>"
-
-	world << sound('sound/effects/cascade.ogg')
+	to_world("<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>")
+	sound_to(world, sound('sound/effects/cascade.ogg'))
 
 	for(var/mob/M in player_list)
 		M.flash_eyes()
 
-	if(emergency_shuttle.can_recall())
-		priority_announcement.Announce("The emergency shuttle has returned due to bluespace distortion.")
-		emergency_shuttle.recall()
+	if(evacuation_controller.cancel_evacuation())
+		priority_announcement.Announce("The evacuation has been aborted due to bluespace distortion.")
 
 	AreaSet()
 	MiscSet()

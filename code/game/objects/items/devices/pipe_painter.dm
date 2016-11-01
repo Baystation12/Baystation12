@@ -17,7 +17,7 @@
 	if(!proximity)
 		return
 
-	if(!istype(A,/obj/machinery/atmospherics/pipe) || istype(A,/obj/machinery/atmospherics/pipe/tank) || istype(A,/obj/machinery/atmospherics/pipe/vent) || istype(A,/obj/machinery/atmospherics/pipe/simple/heat_exchanging) || istype(A,/obj/machinery/atmospherics/pipe/simple/insulated) || !in_range(user, A))
+	if(!istype(A,/obj/machinery/atmospherics/pipe) || istype(A,/obj/machinery/atmospherics/pipe/tank) || istype(A,/obj/machinery/atmospherics/pipe/vent) || istype(A,/obj/machinery/atmospherics/pipe/simple/heat_exchanging) || !in_range(user, A))
 		return
 	var/obj/machinery/atmospherics/pipe/P = A
 
@@ -28,4 +28,4 @@
 
 /obj/item/device/pipe_painter/examine(mob/user)
 	..(user)
-	user << "It is in [mode] mode."
+	to_chat(user, "It is in [mode] mode.")

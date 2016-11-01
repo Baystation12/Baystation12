@@ -13,3 +13,12 @@
 	if(prob(-disposition) || refuse_comms)
 		duration_of_stay--
 	return --duration_of_stay > 0
+
+/datum/trader/ship/bribe_to_stay_longer(var/amt)
+	if(prob(-disposition))
+		return get_response("bribe_refusal", "How about.... no?")
+
+	var/length = round(amt/100)
+	duration_of_stay += length
+	. = get_response("bribe_accept", "Sure, I'll stay for TIME more minutes.")
+	. = replacetext(., "TIME", length)

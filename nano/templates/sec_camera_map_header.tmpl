@@ -1,38 +1,48 @@
-<!--
-Title: Security Camera Console (Map header)
-Used In File(s): \code\game\machinery\computer\camera.dm
--->
-{{:helper.link('Show Camera List', 'script', {'showMap' : 0})}}
-{{:helper.link('Reset', 'refresh', {'reset' : 1})}}
-<div style="float:left;">
-    <div class='item'>
-        <div class='itemLabel'>Current Camera:&nbsp;</div>
-        {{if data.current_camera}}
-            <div class='itemContent'><b>{{:data.current_camera.name}}</b></div>
-        {{else}}
-            <div class='itemContent'>None</div>
-        {{/if}}
-    </div>
+<div class='item'>
+	{{:helper.link('Show Camera List', 'script', {'showMap' : 0})}}
+	{{:helper.link('Reset', 'refresh', {'reset' : 1})}}
 </div>
 
-<div style="float: right; width: 240px;">
-	<span style="float: left;">Z Level:&nbsp;</span>
+<div class='item'>
+	<div class='itemLabel'>Current Camera:</div>
+	{{if data.current_camera}}
+		<div class='itemContentWide'><b>{{:data.current_camera.name}}</b></div>
+	{{else}}
+		<div class='itemContentWide'>None</div>
+	{{/if}}
+</div>
+
+<div class='item'>
+	<div class='itemLabel'>
+		Z-Level:
+	</div>
+	<div class='itemContentWide'>
 	{{for config.mapZLevels :zValue:zIndex}}
 		{{:helper.link(zValue, 'close', {'mapZLevel' : zValue}, null, config.mapZLevel == zValue ? 'selected' : null)}}
 	{{/for}}
+	</div>
 </div>
 
-<div style="float: right; width: 240px;">
-    <span style="float: left;">Zoom Level:&nbsp;</span>
-    <div unselectable="on" class="link zoomLink" data-zoom-level="4">x1.0</div>
-    <div unselectable="on" class="link zoomLink" data-zoom-level="6">x1.5</div>
-    <div unselectable="on" class="link zoomLink" data-zoom-level="8">x2.0</div>
-    <div unselectable="on" class="link zoomLink" data-zoom-level="12">x2.5</div>
+<div class='item'>
+	<div class='itemLabel'>
+		Zoom Level:
+	</div>
+	<div class='itemContentWide'>
+		<div unselectable="on" class="link zoomLink" data-zoom-level="4">x1.0</div>
+		<div unselectable="on" class="link zoomLink" data-zoom-level="6">x1.5</div>
+		<div unselectable="on" class="link zoomLink" data-zoom-level="8">x2.0</div>
+		<div unselectable="on" class="link zoomLink" data-zoom-level="12">x2.5</div>
+	</div>
 </div>
-</div>
+
 <div class='item'>
 	<div class='itemLabel'>Networks:</div>
 </div>
+
 {{for data.networks}}
-	{{:helper.link(value, '', {'switch_network' : value}, null, data.current_network == value ? 'selected' : null)}}
+	{{if value.has_access}}
+		{{:helper.link(value.tag, '', {'switch_network' : value.tag}, null, data.current_network == value.tag ? 'selected' : null)}}
+	{{else}}
+		{{:helper.link(value.tag, '', {}, null, data.current_network == value.tag ? 'selected' : 'redButton')}}
+	{{/if}}
 {{/for}}

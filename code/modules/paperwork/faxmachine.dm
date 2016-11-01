@@ -96,7 +96,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 		if(copyitem)
 			copyitem.loc = usr.loc
 			usr.put_in_hands(copyitem)
-			usr << "<span class='notice'>You take \the [copyitem] out of \the [src].</span>"
+			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
 			copyitem = null
 			updateUsrDialog()
 
@@ -217,5 +217,5 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 	for(var/client/C in admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))
-			C << msg
-			C << 'sound/machines/dotprinter.ogg'
+			to_chat(C, msg)
+			sound_to(C, 'sound/machines/dotprinter.ogg')

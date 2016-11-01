@@ -55,13 +55,42 @@
 	display_name = "tie, blue"
 	path = /obj/item/clothing/accessory/blue
 
+/datum/gear/accessory/tie/blueclip
+	display_name = "tie, blue with clip"
+	path = /obj/item/clothing/accessory/blue_clip
+
+/datum/gear/accessory/tie/navy
+	display_name = "tie, navy"
+	path = /obj/item/clothing/accessory/navy
+
 /datum/gear/accessory/tie/red
 	display_name = "tie, red"
 	path = /obj/item/clothing/accessory/red
 
+/datum/gear/accessory/tie/redlong
+	display_name = "tie, red long"
+	path = /obj/item/clothing/accessory/red_long
+
+/datum/gear/accessory/tie/black
+	display_name = "tie, black"
+	path = /obj/item/clothing/accessory/black
+
+/datum/gear/accessory/tie/yellow
+	display_name = "tie, yellow"
+	path = /obj/item/clothing/accessory/yellow
+
 /datum/gear/accessory/tie/horrible
 	display_name = "tie, socially disgraceful"
 	path = /obj/item/clothing/accessory/horrible
+
+/datum/gear/accessory/det_vest
+	display_name = "black vest"
+	path = /obj/item/clothing/accessory/toggleable/vest
+
+/datum/gear/accessory/stethoscope
+	display_name = "stethoscope (medical)"
+	path = /obj/item/clothing/accessory/stethoscope
+	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
 
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, engineering"
@@ -82,3 +111,15 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
+
+/datum/gear/accessory/hawaii
+	display_name = "hawaii shirt"
+	path = /obj/item/clothing/accessory/toggleable/hawaii
+
+/datum/gear/accessory/hawaii/New()
+	..()
+	var/list/shirts = list()
+	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii
+	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/red
+	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
+	gear_tweaks += new/datum/gear_tweak/path(shirts)

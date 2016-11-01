@@ -9,44 +9,40 @@
 	throw_speed = 1
 	throw_range = 4
 	throwforce = 10
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
-
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-
-	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 	//if(user != M)
 	if(M.spell_list.len)
 		M.silence_spells(300) //30 seconds
-		M << "<span class='danger'>You've been silenced!</span>"
+		to_chat(M, "<span class='danger'>You've been silenced!</span>")
 		return
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		user << "<span class='danger'>You don't have the dexterity to do this!</span>"
+		to_chat(user, "<span class='danger'>You don't have the dexterity to do this!</span>")
 		return
 
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='danger'>The rod slips out of your hand and hits your head.</span>"
+		to_chat(user, "<span class='danger'>The rod slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10)
 		user.Paralyse(20)
 		return
 
 	if (M.stat !=2)
 		if(cult && (M.mind in cult.current_antagonists) && prob(33))
-			M << "<span class='danger'>The power of [src] clears your mind of the cult's influence!</span>"
-			user << "<span class='danger'>You wave [src] over [M]'s head and see their eyes become clear, their mind returning to normal.</span>"
+			to_chat(M, "<span class='danger'>The power of [src] clears your mind of the cult's influence!</span>")
+			to_chat(user, "<span class='danger'>You wave [src] over [M]'s head and see their eyes become clear, their mind returning to normal.</span>")
 			cult.remove_antagonist(M.mind)
 			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 		else if(prob(10))
-			user << "<span class='danger'>The rod slips in your hand.</span>"
+			to_chat(user, "<span class='danger'>The rod slips in your hand.</span>")
 			..()
 		else
-			user << "<span class='danger'>The rod appears to do nothing.</span>"
+			to_chat(user, "<span class='danger'>The rod appears to do nothing.</span>")
 			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 			return
 
@@ -54,7 +50,7 @@
 	if(!proximity)
 		return
 	if (istype(A, /turf/simulated/floor))
-		user << "<span class='notice'>You hit the floor with the [src].</span>"
+		to_chat(user, "<span class='notice'>You hit the floor with the [src].</span>")
 		call(/obj/effect/rune/proc/revealrunes)(src)
 
 /obj/item/weapon/energy_net
@@ -115,11 +111,12 @@
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
 	if(buckled_mob)
-		layer = M.layer+1
+		plane = ABOVE_HUMAN_PLANE
+		layer = ABOVE_HUMAN_LAYER
 		visible_message("\The [M] was caught in an energy net!")
 	else
-		M << "You are free of the net!"
-		layer = initial(layer)
+		to_chat(M, "You are free of the net!")
+		reset_plane_and_layer()
 		qdel(src)
 
 /obj/effect/energy_net/proc/healthcheck()
@@ -152,7 +149,7 @@
 	else
 		health -= rand(5,8)
 
-	H << "<span class='danger'>You claw at the energy net.</span>"
+	to_chat(H, "<span class='danger'>You claw at the energy net.</span>")
 
 	healthcheck()
 	return

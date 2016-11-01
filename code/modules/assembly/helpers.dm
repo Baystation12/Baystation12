@@ -8,11 +8,6 @@
 		return 1
 	return 0
 
-/proc/isinfared(O)
-	if(istype(O, /obj/item/device/assembly/infra))
-		return 1
-	return 0
-
 /proc/isprox(O)
 	if(istype(O, /obj/item/device/assembly/prox_sensor))
 		return 1

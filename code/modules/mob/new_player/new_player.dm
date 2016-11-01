@@ -72,7 +72,10 @@
 	. = ..()
 
 	if(statpanel("Lobby") && ticker)
-		stat("Game Mode:", PUBLIC_GAME_MODE)
+		if(check_rights(R_INVESTIGATE, 0, src))
+			stat("Game Mode:", "[ticker.mode || master_mode][ticker.hide_mode ? " (Secret)" : ""]")
+		else
+			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
 
@@ -104,33 +107,33 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
+		if(!(initialization_stage&INITIALIZATION_COMPLETE))
+			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			return
 
 		if(!config.respawn_delay || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
-			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
+			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
+
 
 			observer.started_as_observer = 1
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				src << "<span class='notice'>Now teleporting.</span>"
-				observer.loc = O.loc
+				to_chat(src, "<span class='notice'>Now teleporting.</span>")
+				observer.forceMove(O.loc)
 			else
-				src << "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>"
+				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			announce_ghost_joinleave(src)
 
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
-			observer.appearance = mannequin
-			observer.appearance_flags |= KEEP_TOGETHER // replace KEEP_TOGETHER flag so the ghost looks normal-ish
-			observer.alpha = 127
-			observer.layer = initial(observer.layer)
-			observer.invisibility = initial(observer.invisibility)
+			observer.set_appearance(mannequin)
 			qdel(mannequin)
 
 			if(client.prefs.be_random_name)
@@ -147,7 +150,7 @@
 	if(href_list["late_join"])
 
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-			usr << "<span class='warning'>The round is either not ready, or has already finished...</span>"
+			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 			return
 		LateChoices() //show the latejoin job selection menu
 
@@ -157,10 +160,10 @@
 	if(href_list["SelectedJob"])
 
 		if(!config.enter_allowed)
-			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 			return
 		else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
-			usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
+			to_chat(usr, "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>")
 			return
 
 		var/datum/species/S = all_species[client.prefs.species]
@@ -205,7 +208,7 @@
 			var/sql = "INSERT INTO erro_privacy VALUES (null, Now(), '[src.ckey]', '[option]')"
 			var/DBQuery/query_insert = dbcon.NewQuery(sql)
 			query_insert.Execute()
-			usr << "<b>Thank you for your vote!</b>"
+			to_chat(usr, "<b>Thank you for your vote!</b>")
 			usr << browse(null,"window=privacypoll")
 
 	if(!ready && href_list["preference"])
@@ -243,7 +246,7 @@
 				var/id_max = text2num(href_list["maxid"])
 
 				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					usr << "The option ID difference is too big. Please contact administration or the database admin."
+					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
 					return
 
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
@@ -262,7 +265,7 @@
 				var/id_max = text2num(href_list["maxoptionid"])
 
 				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					usr << "The option ID difference is too big. Please contact administration or the database admin."
+					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
 					return
 
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
@@ -275,23 +278,28 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(!job.is_branch_allowed(client.prefs.char_branch)) return 0
+	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank)) return 0
+	
 	return 1
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if(src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-		usr << "\red The round is either not ready, or has already finished..."
+		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 		return 0
 	if(!config.enter_allowed)
-		usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
 	if(!IsJobAvailable(rank))
-		src << alert("[rank] is not available. Please try another.")
+		to_chat(src, alert("[rank] is not available. Please try another."))
 		return 0
 
-	var/turf/T = job_master.LateSpawn(client, rank, 1)
-	var/airstatus = IsTurfAtmosUnsafe(T)
+
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
+	var/turf/spawn_turf = pick(spawnpoint.turfs)
+	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus)
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
 		You may die shortly after spawning. It is possible to select different spawn point via character preferences. \
@@ -304,7 +312,7 @@
 
 		// Just in case someone stole our position while we were waiting for input from alert() proc
 		if(!IsJobAvailable(rank))
-			src << alert("[rank] is not available. Please try another.")
+			to_chat(src, alert("[rank] is not available. Please try another."))
 			return 0
 
 	job_master.AssignRole(src, rank, 1)
@@ -326,7 +334,7 @@
 		var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
 		empty_playable_ai_cores -= C
 
-		character.loc = C.loc
+		character.forceMove(C.loc)
 
 		AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
 		ticker.mode.handle_latejoin(character)
@@ -335,8 +343,8 @@
 		qdel(src)
 		return
 
-	//Find our spawning point.
-	var/join_message = job_master.LateSpawn(character.client, rank)
+	// Move them to the spawnpoint turf
+	character.forceMove(spawn_turf)
 
 	character.lastarea = get_area(loc)
 	// Moving wheelchair if they have one
@@ -352,9 +360,9 @@
 
 			//Grab some data from the character prefs for use in random news procs.
 
-			AnnounceArrival(character, rank, join_message)
+			AnnounceArrival(character, rank, spawnpoint.msg)
 		else
-			AnnounceCyborg(character, rank, join_message)
+			AnnounceCyborg(character, rank, spawnpoint.msg)
 
 	qdel(src)
 
@@ -372,14 +380,13 @@
 	dat += "<b>Welcome, [name].<br></b>"
 	dat += "Round Duration: [roundduration2text()]<br>"
 
-	if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
-		if(emergency_shuttle.going_to_centcom()) //Shuttle is going to centcomm, not recalled
-			dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
-		if(emergency_shuttle.online())
-			if (emergency_shuttle.evac)	// Emergency shuttle is past the point of no recall
-				dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
-			else						// Crew transfer initiated
-				dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
+	if(evacuation_controller.has_evacuated())
+		dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
+	else if(evacuation_controller.is_evacuating())
+		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
+			dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
+		else                                           // Crew transfer initiated
+			dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 	dat += "Choose from the following open/valid positions:<br>"
 	for(var/datum/job/job in job_master.occupations)
@@ -431,7 +438,8 @@
 	else
 		client.prefs.copy_to(new_character)
 
-	src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
+	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
+
 
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually
@@ -479,11 +487,11 @@
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
 	if(!(S.spawn_flags & CAN_JOIN) && !has_admin_rights())
 		if(show_alert)
-			src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play on the station."))
 		return 0
 	if(!is_alien_whitelisted(src, S))
 		if(show_alert)
-			src << alert("You are currently not whitelisted to play [client.prefs.species].")
+			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
 		return 0
 	return 1
 
@@ -518,3 +526,6 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/touch_map_edge()
 	return
+
+/mob/new_player/say(var/message)
+	sanitize_and_communicate(/decl/communication_channel/ooc, src, message)

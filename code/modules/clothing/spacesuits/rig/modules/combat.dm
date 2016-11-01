@@ -22,6 +22,7 @@
 	desc = "A shoulder-mounted micro-explosive dispenser."
 	selectable = 1
 	icon_state = "grenadelauncher"
+	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -51,10 +52,10 @@
 		return 0
 
 	if(accepted_item.charges >= 5)
-		user << "<span class='danger'>Another grenade of that type will not fit into the module.</span>"
+		to_chat(user, "<span class='danger'>Another grenade of that type will not fit into the module.</span>")
 		return 0
 
-	user << "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>"
+	to_chat(user, "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>")
 	user.drop_from_inventory(input_device)
 	qdel(input_device)
 	accepted_item.charges++
@@ -71,7 +72,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!charge_selected)
-		H << "<span class='danger'>You have not selected a grenade type.</span>"
+		to_chat(H, "<span class='danger'>You have not selected a grenade type.</span>")
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -80,7 +81,7 @@
 		return 0
 
 	if(charge.charges <= 0)
-		H << "<span class='danger'>Insufficient grenades!</span>"
+		to_chat(H, "<span class='danger'>Insufficient grenades!</span>")
 		return 0
 
 	charge.charges--
@@ -164,8 +165,8 @@
 	usable = 0
 	selectable = 1
 	toggleable = 1
-	use_power_cost = 50
-	active_power_cost = 10
+	use_power_cost = 10 KILOWATTS
+	active_power_cost = 500
 	passive_power_cost = 0
 
 	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
@@ -186,7 +187,7 @@
 	var/mob/living/M = holder.wearer
 
 	if(M.l_hand && M.r_hand)
-		M << "<span class='danger'>Your hands are full.</span>"
+		to_chat(M, "<span class='danger'>Your hands are full.</span>")
 		deactivate()
 		return
 
@@ -213,7 +214,7 @@
 	desc = "A self-contained microfactory system for hardsuit integration."
 	selectable = 1
 	usable = 1
-	use_power_cost = 15
+	use_power_cost = 5 KILOWATTS
 	icon_state = "enet"
 
 	engage_string = "Fabricate Star"
@@ -239,11 +240,11 @@
 		firing.throw_at(target,fire_force,fire_distance)
 	else
 		if(H.l_hand && H.r_hand)
-			H << "<span class='danger'>Your hands are full.</span>"
+			to_chat(H, "<span class='danger'>Your hands are full.</span>")
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)
-			H << "<font color='blue'><b>You quickly fabricate \a [new_weapon].</b></font>"
+			to_chat(H, "<font color='blue'><b>You quickly fabricate \a [new_weapon].</b></font>")
 			H.put_in_hands(new_weapon)
 
 	return 1

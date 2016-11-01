@@ -39,5 +39,5 @@
 			if("Cancel")
 				return
 			else
-				user << "DERP! BUG! Report this (And what you were doing to cause it) to Agouri"
+				to_chat(user, "DERP! BUG! Report this")
 	return

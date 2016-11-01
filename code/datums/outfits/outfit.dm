@@ -50,6 +50,10 @@ var/list/outfits_decls_by_type_
 
 	var/id_pda_assignment
 
+	var/backpack = /obj/item/weapon/storage/backpack
+	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel_norm
+	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
+
 	var/flags // Specific flags
 
 /decl/hierarchy/outfit/New()
@@ -61,8 +65,12 @@ var/list/outfits_decls_by_type_
 	dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
-	//to be overriden for customization depending on client prefs,species etc
-	return
+	if(flags & OUTFIT_HAS_BACKPACK)
+		switch(H.backbag)
+			if(2) back = backpack
+			if(3) back = satchel_one
+			if(4) back = satchel_two
+			else back = null
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
@@ -75,8 +83,8 @@ var/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
 	equip_base(H)
 
-	rank = id_pda_assignment ? id_pda_assignment : rank
-	assignment = id_pda_assignment ? id_pda_assignment : (assignment ? assignment : rank)
+	rank = id_pda_assignment || rank
+	assignment = id_pda_assignment || assignment || rank
 	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
 	if(W)
 		rank = W.rank
@@ -90,6 +98,8 @@ var/list/outfits_decls_by_type_
 
 	post_equip(H)
 	H.regenerate_icons()
+	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
+		H.set_id_info(W)
 	return 1
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)

@@ -188,10 +188,9 @@ var/list/debug_verbs = list (
 	testZAScolors_zones += Z
 	if(recurse_level > 10)
 		return
-	var/icon/yellow = new('icons/misc/debug_group.dmi', "yellow")
 
 	for(var/turf/T in Z.contents)
-		images += image(yellow, T, "zasdebug", TURF_LAYER)
+		images += get_zas_image(T, "yellow")
 		testZAScolors_turfs += T
 	for(var/connection_edge/zone/edge in Z.edges)
 		var/zone/connected = edge.get_connected_zone(Z)
@@ -209,31 +208,27 @@ var/list/debug_verbs = list (
 
 	var/turf/simulated/location = get_turf(usr)
 
-	if(!istype(location, /turf/simulated)) // We're in space, let's not cause runtimes.
-		usr << "\red this debug tool cannot be used from space"
+	if(!istype(location, /turf/simulated))
+		to_chat(src, "<Span class='warning'>This debug tool can only be used while on a simulated turf.</span>")
 		return
 
-	var/icon/red = new('icons/misc/debug_group.dmi', "red")		//created here so we don't have to make thousands of these.
-	var/icon/green = new('icons/misc/debug_group.dmi', "green")
-	var/icon/blue = new('icons/misc/debug_group.dmi', "blue")
-
 	if(!usedZAScolors)
-		usr << "ZAS Test Colors"
-		usr << "Green = Zone you are standing in"
-		usr << "Blue = Connected zone to the zone you are standing in"
-		usr << "Yellow = A zone that is connected but not one adjacent to your connected zone"
-		usr << "Red = Not connected"
+		to_chat(src, "ZAS Test Colors")
+		to_chat(src, "Green = Zone you are standing in")
+		to_chat(src, "Blue = Connected zone to the zone you are standing in")
+		to_chat(src, "Yellow = A zone that is connected but not one adjacent to your connected zone")
+		to_chat(src, "Red = Not connected")
 		usedZAScolors = 1
 
 	testZAScolors_zones += location.zone
 	for(var/turf/T in location.zone.contents)
-		images += image(green, T,"zasdebug", TURF_LAYER)
+		images += get_zas_image(T, "green")
 		testZAScolors_turfs += T
 	for(var/connection_edge/zone/edge in location.zone.edges)
 		var/zone/Z = edge.get_connected_zone(location.zone)
 		testZAScolors_zones += Z
 		for(var/turf/T in Z.contents)
-			images += image(blue, T,"zasdebug",TURF_LAYER)
+			images += get_zas_image(T, "blue")
 			testZAScolors_turfs += T
 		for(var/connection_edge/zone/z_edge in Z.edges)
 			var/zone/connected = z_edge.get_connected_zone(Z)
@@ -246,7 +241,7 @@ var/list/debug_verbs = list (
 			continue
 		if(T in testZAScolors_turfs)
 			continue
-		images += image(red, T, "zasdebug", TURF_LAYER)
+		images += get_zas_image(T, "red")
 		testZAScolors_turfs += T
 
 /client/proc/testZAScolors_remove()
@@ -256,10 +251,9 @@ var/list/debug_verbs = list (
 	testZAScolors_turfs.Cut()
 	testZAScolors_zones.Cut()
 
-	if(images.len)
-		for(var/image/i in images)
-			if(i.icon_state == "zasdebug")
-				images.Remove(i)
+	for(var/image/i in images)
+		if(i.icon == 'icons/misc/debug_group.dmi')
+			images.Remove(i)
 
 /client/proc/rebootAirMaster()
 	set category = "ZAS"
@@ -313,9 +307,9 @@ var/list/debug_verbs = list (
 			if(i*10+j <= atom_list.len)
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
-		world << line*/
+		log_debug(line) */
 
-	world << "There are [count] objects of type [type_path] on z-level [num_level]"
+	log_debug("There are [count] objects of type [type_path] on z-level [num_level]")
 	feedback_add_details("admin_verb","mOBJZ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/count_objects_all()
@@ -340,7 +334,10 @@ var/list/debug_verbs = list (
 			if(i*10+j <= atom_list.len)
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
-		world << line*/
+		log_debug(line) */
 
-	world << "There are [count] objects of type [type_path] in the game world"
+	log_debug("There are [count] objects of type [type_path] in the game world")
 	feedback_add_details("admin_verb","mOBJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/proc/get_zas_image(var/turf/T, var/icon_state)
+	return image_repository.atom_image(T, 'icons/misc/debug_group.dmi', icon_state, plane = ABOVE_TURF_PLANE, layer = ABOVE_TILE_LAYER)

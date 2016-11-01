@@ -15,6 +15,7 @@
 	var/safe_toxins_max = 0.2
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
+	var/breathing = 0
 
 /obj/item/organ/internal/lungs/robotize()
 	. = ..()
@@ -22,6 +23,16 @@
 
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()
+	sync_breath_types()
+
+/obj/item/organ/internal/lungs/replaced()
+	..()
+	sync_breath_types()
+
+/**
+ *  Set these lungs' breath types based on the lungs' species
+ */
+/obj/item/organ/internal/lungs/proc/sync_breath_types()
 	min_breath_pressure = species.breath_pressure
 	breath_type = species.breath_type ? species.breath_type : "oxygen"
 	poison_type = species.poison_type ? species.poison_type : "phoron"
@@ -48,7 +59,7 @@
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
-		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 1)
+		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50)
 	bruise()
 
 /obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath)
@@ -56,10 +67,15 @@
 		return 1
 	if(!breath)
 		return 1
+
+	var/breath_pressure = breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature/BREATH_VOLUME
 	//exposure to extreme pressures can rupture lungs
-	if(breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-		if(!is_bruised() && prob(5)) //only rupture if NOT already ruptured
-			rupture()
+	if(breath_pressure < species.hazard_low_pressure || breath_pressure > species.hazard_high_pressure)
+		var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
+		var/env_pressure = environment.return_pressure()
+		if(env_pressure < species.hazard_low_pressure || env_pressure > species.hazard_high_pressure)
+			if(!is_bruised() && prob(5)) //only rupture if NOT already ruptured
+				rupture()
 	if(breath.total_moles == 0)
 		return 1
 
@@ -70,7 +86,6 @@
 	else if(is_bruised())
 		safe_pressure_min *= 1.25
 
-	var/breath_pressure = (breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
 
 	var/failed_inhale = 0
 	var/failed_exhale = 0
@@ -125,7 +140,7 @@
 			owner.co2_alert = 0
 
 		if(!owner.co2_alert && word && prob(warn_prob))
-			owner << "<span class='warning'>You feel [word].</span>"
+			to_chat(owner, "<span class='warning'>You feel [word].</span>")
 			owner.adjustOxyLoss(oxyloss)
 			owner.co2_alert = alert
 
@@ -155,6 +170,12 @@
 	var/failed_breath = failed_inhale || failed_exhale
 	if (!failed_breath)
 		owner.adjustOxyLoss(-5)
+		if(robotic < ORGAN_ROBOT && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
+			if(breathing || owner.shock_stage >= 10)
+				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
+				breathing = 0
+			else
+				breathing = 1
 
 	handle_temperature_effects(breath)
 
@@ -167,7 +188,7 @@
 		var/damage = 0
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))
-				owner << "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>"
+				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
 
 			switch(breath.temperature)
 				if(species.cold_level_3 to species.cold_level_2)
@@ -181,7 +202,7 @@
 			owner.fire_alert = 1
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
-				owner << "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>"
+				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
 			switch(breath.temperature)
 				if(species.heat_level_1 to species.heat_level_2)
@@ -206,7 +227,7 @@
 
 		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 		if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-		//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
+//		log_debug("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
 		owner.bodytemperature += temp_adj
 
 	else if(breath.temperature >= species.heat_discomfort_level)

@@ -6,7 +6,7 @@
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
 	flags = NOBLUDGEON
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_ILLEGAL = 2)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
@@ -27,7 +27,7 @@
 /obj/item/weapon/plastique/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		open_panel = !open_panel
-		user << "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>"
+		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
 	else if(istype(I, /obj/item/weapon/wirecutters) || istype(I, /obj/item/device/multitool) || istype(I, /obj/item/device/assembly/signaler ))
 		wires.Interact(user)
 	else
@@ -38,33 +38,31 @@
 	if(user.get_active_hand() == src)
 		newtime = Clamp(newtime, 10, 60000)
 		timer = newtime
-		user << "Timer set for [timer] seconds."
+		to_chat(user, "Timer set for [timer] seconds.")
 
 /obj/item/weapon/plastique/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
 	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
 		return
-	user << "Planting explosives..."
+	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
 	if(do_after(user, 50, target) && in_range(user, target))
 		user.drop_item()
 		src.target = target
-		loc = null
+		forceMove(null)
 
 		if (ismob(target))
-			add_logs(user, target, "planted [name] on")
+			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
 			user.visible_message("<span class='danger'>[user.name] finished planting an explosive on [target.name]!</span>")
-			message_admins("[key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) planted [src.name] on [key_name(target)](<A HREF='?_src_=holder;adminmoreinfo=\ref[target]'>?</A>) with [timer] second fuse",0,1)
 			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
 
 		else
-			message_admins("[key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) planted [src.name] on [target.name] at ([target.x],[target.y],[target.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>) with [timer] second fuse",0,1)
-			log_game("[key_name(user)] planted [src.name] on [target.name] at ([target.x],[target.y],[target.z]) with [timer] second fuse")
+			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
 
 		target.overlays += image_overlay
-		user << "Bomb has been planted. Timer counting down from [timer]."
+		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
 		spawn(timer*10)
 			explode(get_turf(target))
 

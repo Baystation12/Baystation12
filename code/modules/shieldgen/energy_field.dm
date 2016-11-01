@@ -7,7 +7,8 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shieldsparkles"
 	anchored = 1
-	layer = 4.1		//just above mobs
+	plane = EFFECTS_BELOW_LIGHTING_PLANE
+	layer = PROJECTILE_LAYER
 	density = 0
 	invisibility = 101
 	var/strength = 0

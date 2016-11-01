@@ -8,7 +8,8 @@
 
 	//luminosity = 5
 	//l_color="#0066FF"
-	layer = LIGHTING_LAYER+1
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	layer = SUPERMATTER_WALL_LAYER
 
 	var/next_check=0
 	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST)
@@ -57,7 +58,7 @@
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
-		user << "<span class = \"warning\">What the fuck are you doing?</span>"
+		to_chat(user, "<span class = \"warning\">What the fuck are you doing?</span>")
 	return
 
 // /vg/: Don't let ghosts fuck with this.

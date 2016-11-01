@@ -6,7 +6,6 @@
 	var/is_adult = 0
 	speak_emote = list("chirps")
 
-	layer = 5
 	maxHealth = 150
 	health = 150
 	gender = NEUTER
@@ -309,7 +308,7 @@
 	if(W.force > 0)
 		attacked += 10
 		if(prob(25))
-			user << "<span class='danger'>[W] passes right through [src]!</span>"
+			to_chat(user, "<span class='danger'>[W] passes right through [src]!</span>")
 			return
 		if(Discipline && prob(50)) // wow, buddy, why am I getting attacked??
 			Discipline = 0
@@ -381,8 +380,3 @@
 			powerlevel = 10
 			adjustToxLoss(-10)
 	nutrition = max(nutrition, get_max_nutrition())
-
-/mob/living/carbon/slime/cannot_use_vents()
-	if(Victim)
-		return "You cannot ventcrawl while feeding."
-	return null

@@ -9,7 +9,7 @@
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 3
 	force = 3
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/obj/item/weapon/reagent_containers/syringe/syringe
 
 /obj/item/weapon/syringe_cartridge/update_icon()
@@ -21,7 +21,7 @@
 /obj/item/weapon/syringe_cartridge/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
 		syringe = I
-		user << "<span class='notice'>You carefully insert [syringe] into [src].</span>"
+		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
 		user.remove_from_mob(syringe)
 		syringe.loc = src
 		sharp = 1
@@ -30,7 +30,7 @@
 
 /obj/item/weapon/syringe_cartridge/attack_self(mob/user)
 	if(syringe)
-		user << "<span class='notice'>You remove [syringe] from [src].</span>"
+		to_chat(user, "<span class='notice'>You remove [syringe] from [src].</span>")
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
@@ -66,7 +66,7 @@
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon_state = "syringegun"
 	item_state = "syringegun"
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	force = 7
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	slot_flags = SLOT_BELT
@@ -105,10 +105,10 @@
 /obj/item/weapon/gun/launcher/syringe/attack_hand(mob/living/user as mob)
 	if(user.get_inactive_hand() == src)
 		if(!darts.len)
-			user << "<span class='warning'>[src] is empty.</span>"
+			to_chat(user, "<span class='warning'>[src] is empty.</span>")
 			return
 		if(next)
-			user << "<span class='warning'>[src]'s cover is locked shut.</span>"
+			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
 			return
 		var/obj/item/weapon/syringe_cartridge/C = darts[1]
 		darts -= C
@@ -121,7 +121,7 @@
 	if(istype(A, /obj/item/weapon/syringe_cartridge))
 		var/obj/item/weapon/syringe_cartridge/C = A
 		if(darts.len >= max_darts)
-			user << "<span class='warning'>[src] is full!</span>"
+			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
 		user.remove_from_mob(C)
 		C.loc = src

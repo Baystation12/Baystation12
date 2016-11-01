@@ -67,12 +67,21 @@ var/list/global_modular_computers = list()
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/machinery/modular_computer/verb/eject_usb()
-	set name = "Eject Portable Device"
+	set name = "Eject Portable Storage"
 	set category = "Object"
 	set src in view(1)
 
 	if(cpu)
 		cpu.eject_usb()
+
+// Eject AI Card
+/obj/machinery/modular_computer/verb/eject_ai()
+	set name = "Eject AI Storage"
+	set category = "Object"
+	set src in view(1)
+
+	if(cpu)
+		cpu.eject_ai()
 
 /obj/machinery/modular_computer/New()
 	..()
@@ -192,5 +201,8 @@ var/list/global_modular_computers = list()
 	if(cpu)
 		cpu.bullet_act(Proj)
 
-
+/obj/machinery/modular_computer/check_eye(var/mob/user)
+	if(cpu)
+		return cpu.check_eye(user)
+	return -1
 

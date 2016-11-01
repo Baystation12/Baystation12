@@ -20,7 +20,7 @@
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
 	..()
-	if(ammo_magazine)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "secguncomp"
 	else
 		icon_state = "secguncomp-e"
@@ -35,7 +35,7 @@
 
 /obj/item/weapon/gun/projectile/sec/wood/update_icon()
 	..()
-	if(ammo_magazine)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "secgundark"
 	else
 		icon_state = "secgundark-e"
@@ -44,7 +44,7 @@
 	name = "silenced pistol"
 	desc = "A handgun with an integral silencer. Uses .45 rounds."
 	icon_state = "silenced_pistol"
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	caliber = ".45"
 	silenced = 1
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
@@ -101,7 +101,7 @@
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	item_state = null
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	caliber = "9mm"
 	silenced = 0
 	fire_delay = 1
@@ -120,7 +120,7 @@
 			if(user.l_hand != src && user.r_hand != src)
 				..()
 				return
-			user << "<span class='notice'>You unscrew [silenced] from [src].</span>"
+			to_chat(user, "<span class='notice'>You unscrew [silenced] from [src].</span>")
 			user.put_in_hands(silenced)
 			silenced = initial(silenced)
 			w_class = initial(w_class)
@@ -131,12 +131,12 @@
 /obj/item/weapon/gun/projectile/pistol/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
-			user << "<span class='notice'>You'll need [src] in your hands to do that.</span>"
+			to_chat(user, "<span class='notice'>You'll need [src] in your hands to do that.</span>")
 			return
 		user.drop_item()
-		user << "<span class='notice'>You screw [I] onto [src].</span>"
+		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
 		silenced = I	//dodgy?
-		w_class = 3
+		w_class = ITEM_SIZE_NORMAL
 		I.forceMove(src)		//put the silencer into the gun
 		update_icon()
 		return
@@ -148,13 +148,15 @@
 		icon_state = "pistol-silencer"
 	else
 		icon_state = "pistol"
+	if(!(ammo_magazine && ammo_magazine.stored_ammo.len))
+		icon_state = "[icon_state]-e"
 
 /obj/item/weapon/silencer
 	name = "silencer"
 	desc = "A silencer."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/gun/projectile/pirate
 	name = "zip gun"

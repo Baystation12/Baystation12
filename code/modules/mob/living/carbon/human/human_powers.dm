@@ -10,7 +10,7 @@
 		return
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
-		src << "<span class='warning'>You cannot tackle in your current state.</span>"
+		to_chat(src, "<span class='warning'>You cannot tackle in your current state.</span>")
 		return
 
 	var/list/choices = list()
@@ -30,7 +30,7 @@
 		return
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
-		src << "<span class='warning'>You cannot tackle in your current state.</span>"
+		to_chat(src, "<span class='warning'>You cannot tackle in your current state.</span>")
 		return
 
 	last_special = world.time + 50
@@ -52,7 +52,7 @@
 		return
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len)
-		src << "<span class='warning'>You cannot leap in your current state.</span>"
+		to_chat(src, "<span class='warning'>You cannot leap in your current state.</span>")
 		return
 
 	var/list/choices = list()
@@ -72,7 +72,7 @@
 		return
 
 	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len || stance_damage >= 4 || src.legcuffed)
-		src << "<span class='warning'>You cannot leap in your current state.</span>"
+		to_chat(src, "<span class='warning'>You cannot leap in your current state.</span>")
 		return
 
 	last_special = world.time + (17.5 SECONDS)
@@ -87,7 +87,7 @@
 	if(status_flags & LEAPING) status_flags &= ~LEAPING
 
 	if(!src.Adjacent(T))
-		src << "<span class='warning'>You miss!</span>"
+		to_chat(src, "<span class='warning'>You miss!</span>")
 		return
 
 	T.Weaken(3)
@@ -100,7 +100,7 @@
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
-			src << "<span class='danger'>You need to have one hand free to grab someone.</span>"
+			to_chat(src, "<span class='danger'>You need to have one hand free to grab someone.</span>")
 			return
 		else
 			use_hand = "right"
@@ -126,16 +126,16 @@
 		return
 
 	if(incapacitated())
-		src << "<span class='warning'>You cannot do that in your current state.</span>"
+		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
 		return
 
 	var/obj/item/weapon/grab/G = locate() in src
 	if(!G || !istype(G))
-		src << "<span class='warning'>You are not grabbing anyone.</span>"
+		to_chat(src, "<span class='warning'>You are not grabbing anyone.</span>")
 		return
 
 	if(G.state < GRAB_AGGRESSIVE)
-		src << "<span class='warning'>You must have an aggressive grab to gut your prey!</span>"
+		to_chat(src, "<span class='warning'>You must have an aggressive grab to gut your prey!</span>")
 		return
 
 	last_special = world.time + 50
@@ -177,18 +177,18 @@
 	var/mob/M = targets[target]
 
 	if(isghost(M) || M.stat == DEAD)
-		src << "<span class='warning'>Not even a [src.species.name] can speak to the dead.</span>"
+		to_chat(src, "<span class='warning'>Not even a [src.species.name] can speak to the dead.</span>")
 		return
 
 	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
 
-	M << "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>"
+	to_chat(M, "<span class='notice'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i></span>")
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name == src.species.name)
 			return
 		if(prob(75))
-			H << "<span class='warning'>Your nose begins to bleed...</span>"
+			to_chat(H, "<span class='warning'>Your nose begins to bleed...</span>")
 			H.drip(1)
 
 /mob/living/carbon/human/proc/regurgitate()
@@ -212,8 +212,8 @@
 	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
-		M << "<span class='alium'>You hear a strange, alien voice in your head... <i>[msg]</i></span>"
-		src << "<span class='alium'>You channel a message: \"[msg]\" to [M]</span>"
+		to_chat(M, "<span class='alium'>You hear a strange, alien voice in your head... <i>[msg]</i></span>")
+		to_chat(src, "<span class='alium'>You channel a message: \"[msg]\" to [M]</span>")
 	return
 
 /mob/living/carbon/human/proc/diona_split_nymph()

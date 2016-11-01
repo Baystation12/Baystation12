@@ -5,7 +5,7 @@
 	density = 1
 	var/health = 100.0
 	flags = CONDUCT
-	w_class = 6
+	w_class = ITEM_SIZE_GARGANTUAN
 
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
@@ -220,9 +220,6 @@ update_flag
 
 	air_contents.react() //cooking up air cans - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 
-/obj/machinery/portable_atmospherics/canister/return_air()
-	return air_contents
-
 /obj/machinery/portable_atmospherics/canister/proc/return_temperature()
 	var/datum/gas_mixture/GM = src.return_air()
 	if(GM && GM.volume>0)
@@ -261,7 +258,7 @@ update_flag
 			transfer_moles = pressure_delta*thejetpack.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)//Actually transfer the gas
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 			thejetpack.merge(removed)
-			user << "You pulse-pressurize your jetpack from the tank."
+			to_chat(user, "You pulse-pressurize your jetpack from the tank.")
 		return
 
 	..()

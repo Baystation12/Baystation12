@@ -17,9 +17,6 @@
 
 	var/dP = 0
 
-	var/obj/machinery/atmospherics/node1
-	var/obj/machinery/atmospherics/node2
-
 	var/datum/pipe_network/network1
 	var/datum/pipe_network/network2
 
@@ -91,7 +88,7 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/wrench))
 			anchored = !anchored
-			user << "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>"
+			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
 
 			if(anchored)
 				if(dir & (NORTH|SOUTH))
@@ -263,7 +260,7 @@
 		if(istype(W, /obj/item/weapon/wrench))
 			anchored = !anchored
 			turbine = null
-			user << "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>"
+			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
 			updateConnection()
 		else
 			..()

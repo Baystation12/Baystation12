@@ -36,7 +36,7 @@
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
-	use_power_cost = 0.5
+	use_power_cost = 50
 
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -46,6 +46,7 @@
 	icon_state = "scanner"
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
+	use_power_cost = 200
 
 	device_type = /obj/item/device/healthanalyzer
 
@@ -57,7 +58,7 @@
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
-	use_power_cost = 0.1
+	use_power_cost = 75
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
@@ -68,6 +69,7 @@
 	interface_name = "Alden-Saraspova counter"
 	interface_desc = "An exotic particle detector commonly used by xenoarchaeologists."
 	engage_string = "Begin Scan"
+	use_power_cost = 200
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/device/ano_scanner
@@ -81,6 +83,7 @@
 	engage_string = "Begin Scan"
 	usable = 1
 	selectable = 0
+	use_power_cost = 200
 	device_type = /obj/item/weapon/mining_scanner
 
 /obj/item/rig_module/device/rcd
@@ -91,6 +94,7 @@
 	interface_desc = "A device for building or removing walls. Cell-powered."
 	usable = 1
 	engage_string = "Configure RCD"
+	use_power_cost = 100 KILOWATTS // Matter fabrication is a very energy-demanding process.
 
 	device_type = /obj/item/weapon/rcd/mounted
 
@@ -125,6 +129,7 @@
 	selectable = 0
 	toggleable = 0
 	disruptive = 0
+	use_power_cost = 500
 
 	engage_string = "Inject"
 
@@ -165,7 +170,7 @@
 		return 0
 
 	if(!input_item.reagents || !input_item.reagents.total_volume)
-		user << "\The [input_item] is empty."
+		to_chat(user, "\The [input_item] is empty.")
 		return 0
 
 	// Magical chemical filtration system, do not question it.
@@ -187,9 +192,9 @@
 				break
 
 	if(total_transferred)
-		user << "<font color='blue'>You transfer [total_transferred] units into the suit reservoir.</font>"
+		to_chat(user, "<font color='blue'>You transfer [total_transferred] units into the suit reservoir.</font>")
 	else
-		user << "<span class='danger'>None of the reagents seem suitable.</span>"
+		to_chat(user, "<span class='danger'>None of the reagents seem suitable.</span>")
 	return 1
 
 /obj/item/rig_module/chem_dispenser/engage(atom/target)
@@ -200,7 +205,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!charge_selected)
-		H << "<span class='danger'>You have not selected a chemical type.</span>"
+		to_chat(H, "<span class='danger'>You have not selected a chemical type.</span>")
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -210,7 +215,7 @@
 
 	var/chems_to_use = 10
 	if(charge.charges <= 0)
-		H << "<span class='danger'>Insufficient chems!</span>"
+		to_chat(H, "<span class='danger'>Insufficient chems!</span>")
 		return 0
 	else if(charge.charges < chems_to_use)
 		chems_to_use = charge.charges
@@ -225,8 +230,8 @@
 		target_mob = H
 
 	if(target_mob != H)
-		H << "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>"
-	target_mob << "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>"
+		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
+	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
 	target_mob.reagents.add_reagent(charge.display_name, chems_to_use)
 
 	charge.charges -= chems_to_use
@@ -270,6 +275,7 @@
 	selectable = 0
 	toggleable = 0
 	disruptive = 0
+	active_power_cost = 100
 
 	engage_string = "Configure Synthesiser"
 
@@ -301,17 +307,17 @@
 		if("Enable")
 			active = 1
 			voice_holder.active = 1
-			usr << "<font color='blue'>You enable the speech synthesiser.</font>"
+			to_chat(usr, "<font color='blue'>You enable the speech synthesiser.</font>")
 		if("Disable")
 			active = 0
 			voice_holder.active = 0
-			usr << "<font color='blue'>You disable the speech synthesiser.</font>"
+			to_chat(usr, "<font color='blue'>You disable the speech synthesiser.</font>")
 		if("Set Name")
 			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = raw_choice
-			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
+			to_chat(usr, "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>")
 	return 1
 
 /obj/item/rig_module/maneuvering_jets
@@ -323,6 +329,7 @@
 	toggleable = 1
 	selectable = 0
 	disruptive = 0
+	active_power_cost = 50
 
 	suit_overlay_active = "maneuvering_active"
 	suit_overlay_inactive = null //"maneuvering_inactive"
@@ -390,6 +397,7 @@
 	interface_name = "paper dispenser"
 	interface_desc = "Dispenses warm, clean, and crisp sheets of paper."
 	engage_string = "Dispense"
+	use_power_cost = 200
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/weapon/paper_bin
@@ -437,8 +445,8 @@
 	if(!target)
 		if(device == iastamp)
 			device = deniedstamp
-			holder.wearer << "<span class='notice'>Switched to denied stamp.</span>"
+			to_chat(holder.wearer, "<span class='notice'>Switched to denied stamp.</span>")
 		else if(device == deniedstamp)
 			device = iastamp
-			holder.wearer << "<span class='notice'>Switched to internal affairs stamp.</span>"
+			to_chat(holder.wearer, "<span class='notice'>Switched to internal affairs stamp.</span>")
 		return 1

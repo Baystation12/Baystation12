@@ -16,42 +16,46 @@ obj/machinery/recharger
 	var/portable = 1
 
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
+	if(istype(user,/mob/living/silicon))
+		var/held = 0
+		for(var/obj/item/weapon/gripper/GR in user)
+			if(GR.wrapped == G)
+				held = 1
+				break
+		if(!held)
+			return
+
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1
 
 	if(allowed)
 		if(charging)
-			user << "<span class='warning'>\A [charging] is already charging here.</span>"
+			to_chat(user, "<span class='warning'>\A [charging] is already charging here.</span>")
 			return
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
 		if(!powered())
-			user << "<span class='warning'>The [name] blinks red as you try to insert the item!</span>"
+			to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the item!</span>")
 			return
-		if (istype(G, /obj/item/weapon/gun/energy))
-			var/obj/item/weapon/gun/energy/E = G
-			if(E.use_external_power)
-				user << "<span class='notice'>This weapon can not be recharged using this device.</span>"
-				return
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
-			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
+			to_chat(user, "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>")
 			return
 		if (istype(G, /obj/item/weapon/gun/energy/staff))
 			return
 		if(istype(G, /obj/item/laptop))
 			var/obj/item/laptop/L = G
 			if(!L.stored_computer.cpu.battery_module)
-				user << "There's no battery in it!"
+				to_chat(user, "There's no battery in it!")
 				return
 		if(istype(G, /obj/item/modular_computer))
 			var/obj/item/modular_computer/C = G
 			if(!C.battery_module)
-				user << "This device does not have a battery installed."
+				to_chat(user, "This device does not have a battery installed.")
 				return
 		if(istype(G, /obj/item/device/suit_sensor_jammer))
 			var/obj/item/device/suit_sensor_jammer/J = G
 			if(!J.bcell)
-				user << "This device does not have a battery installed."
+				to_chat(user, "This device does not have a battery installed.")
 				return
 
 		if(user.unEquip(G))
@@ -60,14 +64,17 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 			update_icon()
 	else if(portable && istype(G, /obj/item/weapon/wrench))
 		if(charging)
-			user << "<span class='warning'>Remove [charging] first!</span>"
+			to_chat(user, "<span class='warning'>Remove [charging] first!</span>")
 			return
 		anchored = !anchored
-		user << "You [anchored ? "attached" : "detached"] the recharger."
+		to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 obj/machinery/recharger/attack_hand(mob/user as mob)
-	if(istype(user,/mob/living/silicon/ai))
+	if(isAI(user))
+		return
+
+	if(issilicon(user) && !Adjacent(user))
 		return
 
 	add_fingerprint(user)

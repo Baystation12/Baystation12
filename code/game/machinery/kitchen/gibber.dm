@@ -75,18 +75,18 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(operating)
-		user << "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>"
+		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
 		return
 	else
 		src.startgibbing(user)
 
 /obj/machinery/gibber/examine()
 	..()
-	usr << "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"]."
+	to_chat(usr, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
 
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
-	user << "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>"
+	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>")
 	return 1
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
@@ -96,7 +96,7 @@
 		return ..()
 
 	if(G.state < 2)
-		user << "<span class='danger'>You need a better grip to do that!</span>"
+		to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 		return
 
 	move_into_gibber(user,G.affecting)
@@ -110,24 +110,24 @@
 /obj/machinery/gibber/proc/move_into_gibber(var/mob/user,var/mob/living/victim)
 
 	if(src.occupant)
-		user << "<span class='danger'>The gibber is full, empty it first!</span>"
+		to_chat(user, "<span class='danger'>The gibber is full, empty it first!</span>")
 		return
 
 	if(operating)
-		user << "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>"
+		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
 		return
 
 	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_animal)) )
-		user << "<span class='danger'>This is not suitable for the gibber!</span>"
+		to_chat(user, "<span class='danger'>This is not suitable for the gibber!</span>")
 		return
 
 	if(istype(victim,/mob/living/carbon/human) && !emagged)
-		user << "<span class='danger'>The gibber safety guard is engaged!</span>"
+		to_chat(user, "<span class='danger'>The gibber safety guard is engaged!</span>")
 		return
 
 
 	if(victim.abiotic(1))
-		user << "<span class='danger'>Subject may not have abiotic items on.</span>"
+		to_chat(user, "<span class='danger'>Subject may not have abiotic items on.</span>")
 		return
 
 	user.visible_message("<span class='danger'>[user] starts to put [victim] into the gibber!</span>")
@@ -211,10 +211,7 @@
 			if(src.occupant.reagents)
 				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
 
-	src.occupant.attack_log += "\[[time_stamp()]\] Was gibbed by <b>[user]/[user.ckey]</b>" //One shall not simply gib a mob unnoticed!
-	user.attack_log += "\[[time_stamp()]\] Gibbed <b>[src.occupant]/[src.occupant.ckey]</b>"
-	msg_admin_attack("[user.name] ([user.ckey]) gibbed [src.occupant] ([src.occupant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
+	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
 	src.occupant.ghostize()
 
 	spawn(gib_time)

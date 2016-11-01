@@ -4,14 +4,15 @@
 	icon_state = "intercom"
 	randpixel = 0
 	anchored = 1
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
+	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 
 /obj/item/device/radio/intercom/get_storage_cost()
-	return DO_NOT_STORE
+	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/device/radio/intercom/custom
 	name = "station intercom (Custom)"

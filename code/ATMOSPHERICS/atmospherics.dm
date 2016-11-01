@@ -20,7 +20,8 @@ Pipelines + Other Objects -> Pipe network
 	var/nodealert = 0
 	var/power_rating //the maximum amount of power the machine can use to do work, affects how powerful the machine is, in Watts
 
-	layer = 2.4 //under wires with their 2.44
+	plane = ABOVE_TURF_PLANE
+	layer = EXPOSED_PIPE_LAYER
 
 	var/connect_types = CONNECT_TYPE_REGULAR
 	var/icon_connect_type = "" //"-supply" or "-scrubbers"
@@ -29,6 +30,8 @@ Pipelines + Other Objects -> Pipe network
 	var/pipe_color
 
 	var/global/datum/pipe_icon_manager/icon_manager
+	var/obj/machinery/atmospherics/node1
+	var/obj/machinery/atmospherics/node2
 
 /obj/machinery/atmospherics/New()
 	if(!icon_manager)
@@ -41,6 +44,13 @@ Pipelines + Other Objects -> Pipe network
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
 	..()
+
+/obj/machinery/atmospherics/hide(var/do_hide)
+	if(do_hide && level == 1)
+		plane = ABOVE_PLATING_PLANE
+		layer = PIPE_LAYER
+	else
+		reset_plane_and_layer()
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))

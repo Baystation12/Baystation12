@@ -5,7 +5,7 @@
 	icon_state = "bluetie"
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	var/slot = "decor"
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
@@ -25,9 +25,12 @@
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
 			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
+	inv_overlay.color = color
 	return inv_overlay
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
+	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
+		return ..()
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
@@ -53,7 +56,7 @@
 	has_suit.overlays += get_inv_overlay()
 
 	if(user)
-		user << "<span class='notice'>You attach \the [src] to \the [has_suit].</span>"
+		to_chat(user, "<span class='notice'>You attach \the [src] to \the [has_suit].</span>")
 		src.add_fingerprint(user)
 
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)

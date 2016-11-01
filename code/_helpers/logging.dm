@@ -31,11 +31,16 @@
 /proc/log_debug(text)
 	if (config.log_debug)
 		game_log("DEBUG", text)
+	to_debug_listeners(text)
 
+/proc/log_error(text)
+	error(text)
+	to_debug_listeners(text, "ERROR")
+
+/proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C in admins)
 		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
-			C << "DEBUG: [text]"
-
+			to_chat(C, "[prefix]: [text]")
 /proc/log_game(text)
 	if (config.log_game)
 		game_log("GAME", text)
@@ -137,10 +142,7 @@
 		if(include_link && C)
 			. += "<a href='?priv_msg=\ref[C]'>"
 
-		if(C && C.holder && C.holder.fakekey && !include_name)
-			. += "Administrator"
-		else
-			. += key
+		. += key
 
 		if(include_link)
 			if(C)	. += "</a>"
@@ -166,3 +168,25 @@
 
 /proc/key_name_admin(var/whom, var/include_name = 1)
 	return key_name(whom, 1, include_name)
+
+// Helper procs for building detailed log lines
+/datum/proc/get_log_info_line()
+	return "[src] ([type]) ([any2ref(src)])"
+
+/area/get_log_info_line()
+	return "[..()] ([isnum(z) ? "[x],[y],[z]" : "0,0,0"])"
+
+/turf/get_log_info_line()
+	return "[..()] ([x],[y],[z]) ([loc ? loc.type : "NULL"])"
+
+/atom/movable/get_log_info_line()
+	var/turf/t = get_turf(src)
+	return "[..()] ([t ? t : "NULL"]) ([t ? "[t.x],[t.y],[t.z]" : "0,0,0"]) ([t ? t.type : "NULL"])"
+
+/mob/get_log_info_line()
+	return ckey ? "[..()] ([ckey])" : ..()
+
+/proc/log_info_line(var/datum/d)
+	if(!istype(d))
+		return
+	return d.get_log_info_line()

@@ -1,7 +1,3 @@
-#define FULLSCREEN_LAYER 18
-#define DAMAGE_LAYER FULLSCREEN_LAYER + 0.1
-#define BLIND_LAYER DAMAGE_LAYER + 0.1
-#define CRIT_LAYER BLIND_LAYER + 0.1
 
 /mob
 	var/list/screens = list()
@@ -20,7 +16,7 @@
             return null
 
     if(!screen)
-        screen = PoolOrNew(type)
+        screen = new type()
 
     screen.icon_state = "[initial(screen.icon_state)][severity]"
     screen.severity = severity
@@ -67,7 +63,7 @@
 	icon = 'icons/mob/screen_full.dmi'
 	icon_state = "default"
 	screen_loc = "CENTER-7,CENTER-7"
-	layer = FULLSCREEN_LAYER
+	plane = FULLSCREEN_PLANE
 	mouse_opacity = 0
 	var/severity = 0
 
@@ -93,6 +89,7 @@
 
 /obj/screen/fullscreen/impaired
 	icon_state = "impairedoverlay"
+	layer = IMPAIRED_LAYER
 
 /obj/screen/fullscreen/blurry
 	icon = 'icons/mob/screen1.dmi'
@@ -111,8 +108,3 @@
 	icon = 'icons/mob/screen1.dmi'
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	icon_state = "druggy"
-
-#undef FULLSCREEN_LAYER
-#undef BLIND_LAYER
-#undef DAMAGE_LAYER
-#undef CRIT_LAYER

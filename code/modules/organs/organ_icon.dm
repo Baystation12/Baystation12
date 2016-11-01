@@ -15,28 +15,30 @@ var/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	s_tone = null
 	s_col = null
-	h_col = null
+	h_col = list(human.r_hair, human.g_hair, human.b_hair)
 	if(robotic >= ORGAN_ROBOT)
-		return
+		var/datum/robolimb/franchise = all_robolimbs[model]
+		if(!(franchise && franchise.skintone))
+			return
 	if(species && human.species && species.name != human.species.name)
 		return
 	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = human.s_tone
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
-	h_col = list(human.r_hair, human.g_hair, human.b_hair)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
 	s_col = null
-	h_col = null
+	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(robotic >= ORGAN_ROBOT)
-		return
+		var/datum/robolimb/franchise = all_robolimbs[model]
+		if(!(franchise && franchise.skintone))
+			return
 	if(!isnull(dna.GetUIValue(DNA_UI_SKIN_TONE)) && (species.appearance_flags & HAS_SKIN_TONE))
 		s_tone = dna.GetUIValue(DNA_UI_SKIN_TONE)
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
-	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
@@ -99,7 +101,6 @@ var/list/limb_icon_cache = list()
 
 	if(model)
 		icon_cache_key += "_model_[model]"
-
 	dir = EAST
 	icon = mob_icon
 
@@ -123,23 +124,33 @@ var/list/limb_icon_cache = list()
 			overlays |= lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
 
-		if(owner.f_style)
-			var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
-			if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype() in facial_hair_style.species_allowed))
-				var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-				if(facial_hair_style.do_colouration)
-					facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
-				overlays |= facial_s
-
-		if(owner.h_style && !(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR)))
-			var/datum/sprite_accessory/hair_style = hair_styles_list[owner.h_style]
-			if(hair_style && (species.get_bodytype() in hair_style.species_allowed))
-				var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-				if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
-					hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
-				overlays |= hair_s
+		overlays |= get_hair_icon()
 
 	return mob_icon
+
+/obj/item/organ/external/head/proc/get_hair_icon()
+	var/image/res = image('icons/mob/human_face.dmi',"bald_s")
+	if(owner.f_style)
+		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
+		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype() in facial_hair_style.species_allowed))
+			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+			if(facial_hair_style.do_colouration)
+				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
+			res.overlays |= facial_s
+
+	if(owner.h_style)
+		var/style = owner.h_style
+		var/datum/sprite_accessory/hair/hair_style = hair_styles_list[style]
+		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
+			if(!hair_style.veryshort)
+				hair_style = hair_styles_list["Short Hair"]
+		if(hair_style && (species.get_bodytype() in hair_style.species_allowed))
+			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+			if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
+				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
+			res.overlays |= hair_s
+	return res
+
 
 /obj/item/organ/external/proc/get_icon()
 	update_icon()

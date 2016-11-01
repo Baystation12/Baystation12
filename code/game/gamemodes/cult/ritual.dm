@@ -12,7 +12,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	if(!cultwords["travel"])
 		runerandom()
 	for (var/word in engwords)
-		usr << "[cultwords[word]] is [word]"
+		to_chat(usr, "[cultwords[word]] is [word]")
 
 /proc/runerandom() //randomizes word meaning
 	var/list/runewords=rnwords
@@ -86,16 +86,16 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	examine(mob/user)
 		..()
 		if(iscultist(user))
-			user << "This spell circle reads: <i>[word1] [word2] [word3]</i>."
+			to_chat(user, "This spell circle reads: <i>[word1] [word2] [word3]</i>.")
 
 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
-			user << "You retrace your steps, carefully undoing the lines of the rune."
+			to_chat(user, "You retrace your steps, carefully undoing the lines of the rune.")
 			qdel(src)
 			return
 		else if(istype(I, /obj/item/weapon/nullrod))
-			user << "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>"
+			to_chat(user, "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>")
 			qdel(src)
 			return
 		return
@@ -103,10 +103,10 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 	attack_hand(mob/living/user as mob)
 		if(!iscultist(user))
-			user << "You can't mouth the arcane scratchings without fumbling over them."
+			to_chat(user, "You can't mouth the arcane scratchings without fumbling over them.")
 			return
 		if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
-			user << "You are unable to speak the words of the rune."
+			to_chat(user, "You are unable to speak the words of the rune.")
 			return
 		if(!word1 || !word2 || !word3 || prob(user.getBrainLoss()))
 			return fizzle()
@@ -184,7 +184,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	throw_speed = 1
 	throw_range = 5
 	unique = 1
-	var/notedat = ""
 	var/tomedat = ""
 	var/list/words = list("ire" = "ire", "ego" = "ego", "nahlizet" = "nahlizet", "certum" = "certum", "veri" = "veri", "jatkaa" = "jatkaa", "balaq" = "balaq", "mgar" = "mgar", "karazet" = "karazet", "geeri" = "geeri")
 
@@ -284,63 +283,15 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				</html>
 				"}
 
-
-	Topic(href,href_list[])
-		if (src.loc == usr)
-			var/number = text2num(href_list["number"])
-			if (usr.stat|| usr.restrained())
-				return
-			switch(href_list["action"])
-				if("clear")
-					words[words[number]] = words[number]
-				if("change")
-					words[words[number]] = input("Enter the translation for [words[number]]", "Word notes") in engwords
-					for (var/w in words)
-						if ((words[w] == words[words[number]]) && (w != words[number]))
-							words[w] = w
-			notedat = {"
-						<br><b>Word translation notes</b> <br>
-						[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-						[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-						[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-						[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-						[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-						[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-						[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-						[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-						[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-						[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-						"}
-			usr << browse("[notedat]", "window=notes")
-//		call(/obj/item/weapon/book/tome/proc/edit_notes)()
-		else
-			usr << browse(null, "window=notes")
-			return
-
-
-//	proc/edit_notes()     FUCK IT. Cant get it to work properly. - K0000
-//		world << "its been called! [usr]"
-//		notedat = {"
-//		<br><b>Word translation notes</b> <br>
-//			[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-//			[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-//			[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-//			[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-//			[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-//			[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-//			[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-//			[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-//			[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-//			[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-//					"}
-//		usr << "whatev"
-//		usr << browse(null, "window=tank")
+	New()
+		..()
+		if(!cultwords["travel"])
+			runerandom()
+		for(var/V in cultwords)
+			words[cultwords[V]] = V
 
 	attack(mob/living/M as mob, mob/living/user as mob)
-
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on them by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		admin_attack_log(user, M, "Used [name] on their victim", "Had \the [name] used on them", "used the [src] on")
 
 		if(isghost(M))
 			var/mob/observer/ghost/D = M
@@ -364,7 +315,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		M.take_organ_damage(0,rand(5,20)) //really lucky - 5 hits for a crit
 		for(var/mob/O in viewers(M, null))
 			O.show_message("<span class='warning'>\The [user] beats \the [M] with \the [src]!</span>", 1)
-		M << "<span class='danger'>You feel searing heat inside!</span>"
+		to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
 
 
 	attack_self(mob/living/user as mob)
@@ -379,39 +330,20 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			for(var/obj/effect/rune/N in world)
 				C++
 			if (!istype(user.loc,/turf))
-				user << "<span class='warning'>You do not have enough space to write a proper rune.</span>"
+				to_chat(user, "<span class='warning'>You do not have enough space to write a proper rune.</span>")
 				return
 
 			if (C>=26 + runedec + cult.current_antagonists.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
 				alert("The cloth of reality can't take that much of a strain. Remove some runes first!")
 				return
 			else
-				switch(alert("You open the tome",,"Read it","Scribe a rune", "Notes")) //Fuck the "Cancel" option. Rewrite the whole tome interface yourself if you want it to work better. And input() is just ugly. - K0000
+				switch(alert("You open the tome",,"Read it","Scribe a rune", "Cancel"))
 					if("Cancel")
 						return
 					if("Read it")
 						if(usr.get_active_hand() != src)
 							return
 						user << browse("[tomedat]", "window=Arcane Tome")
-						return
-					if("Notes")
-						if(usr.get_active_hand() != src)
-							return
-						notedat = {"
-					<br><b>Word translation notes</b> <br>
-					[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-					[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-					[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-					[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-					[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-					[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-					[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-					[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-					[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-					[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-					"}
-//						call(/obj/item/weapon/book/tome/proc/edit_notes)()
-						user << browse("[notedat]", "window=notes")
 						return
 			if(usr.get_active_hand() != src)
 				return
@@ -463,7 +395,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				if (!chosen_rune)
 					return
 				if (chosen_rune == "none")
-					user << "<span class='notice'>You decide against scribing a rune, perhaps you should take this time to study your notes.</span>"
+					to_chat(user, "<span class='notice'>You decide against scribing a rune, perhaps you should take this time to study your notes.</span>")
 					return
 				if (chosen_rune == "teleport")
 					dictionary[chosen_rune] += input ("Choose a destination word") in english
@@ -475,7 +407,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 			for (var/mob/V in viewers(src))
 				V.show_message("<span class='danger'>\The [user] slices open a finger and begins to chant and paint symbols on the floor.</span>", 3, "<span class='danger'>You hear chanting.</span>", 2)
-			user << "<span class='danger'>You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world.</span>"
+			to_chat(user, "<span class='danger'>You slice open one of your fingers and begin drawing a rune on the floor whilst chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world.</span>")
 			user.take_overall_damage((rand(9)+1)/10) // 0.1 to 1.0 damage
 			if(do_after(user, 50))
 				var/area/A = get_area(user)
@@ -484,7 +416,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 					return
 				var/mob/living/carbon/human/H = user
 				var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
-				user << "<span class='notice'>You finish drawing the arcane markings of the Geometer.</span>"
+				to_chat(user, "<span class='notice'>You finish drawing the arcane markings of the Geometer.</span>")
 				var/list/required = dictionary[chosen_rune]
 				R.word1 = english[required[1]]
 				R.word2 = english[required[2]]
@@ -494,35 +426,20 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
 			return
 		else
-			user << "The book seems full of illegible scribbles. Is this a joke?"
+			to_chat(user, "The book seems full of illegible scribbles. Is this a joke?")
 			return
-
-	attackby(obj/item/weapon/book/tome/T as obj, mob/living/user as mob)
-		if(istype(T, /obj/item/weapon/book/tome)) // sanity check to prevent a runtime error
-			switch(alert("Copy the runes from your tome?",,"Copy", "Cancel"))
-				if("cancel")
-					return
-	//		var/list/nearby = viewers(1,src) //- Fuck this as well. No clue why this doesnt work. -K0000
-	//			if (T.loc != user)
-	//				return
-	//		for(var/mob/M in nearby)
-	//			if(M == user)
-			for(var/entry in words)
-				words[entry] = T.words[entry]
-			user << "You copy the translation notes from your tome."
-
 
 	examine(mob/user)
 		if(!iscultist(user))
-			user << "An old, dusty tome with frayed edges and a sinister looking cover."
+			to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 		else
-			user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
+			to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/weapon/book/tome/cultify()
 	return
 
 /obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	var/cultistsonly = 1
 	attack_self(mob/user as mob)
 		if(src.cultistsonly && !iscultist(usr))
@@ -532,11 +449,11 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		if(user)
 			var/r
 			if (!istype(user.loc,/turf))
-				user << "<span class='notice'>You do not have enough space to write a proper rune.</span>"
+				to_chat(user, "<span class='notice'>You do not have enough space to write a proper rune.</span>")
 			var/list/runes = list("teleport", "itemport", "tome", "armor", "convert", "tear in reality", "emp", "drain", "seer", "raise", "obscure", "reveal", "astral journey", "manifest", "imbue talisman", "sacrifice", "wall", "freedom", "cultsummon", "deafen", "blind", "bloodboil", "communicate", "stun")
 			r = input("Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 			if(locate(/obj/effect/rune) in user.loc)
-				user << "<span class='warning'>There is already a rune in this location.</span>"
+				to_chat(user, "<span class='warning'>There is already a rune in this location.</span>")
 				return
 
 			var/obj/effect/rune/R = new /obj/effect/rune(user.loc)

@@ -1,6 +1,7 @@
+#define WORLD_ICON_SIZE 32
 
 /var/game_id = null
-/proc/generate_gameid()
+/hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
 	game_id = ""
@@ -17,6 +18,7 @@
 	for(var/_ = 1 to 3)
 		game_id = "[c[(t % l) + 1]][game_id]"
 		t = round(t / l)
+	return 1
 
 // Find mobs matching a given string
 //
@@ -69,9 +71,10 @@
 	area = /area/space
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
+	icon_size = WORLD_ICON_SIZE
 
 
-#define RECOMMENDED_VERSION 509
+#define RECOMMENDED_VERSION 510
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
@@ -190,7 +193,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			for(var/client/C in clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue
 					admins[C.key] = C.holder.rank
 				players += C.key
@@ -205,7 +208,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			for(var/client/C in clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue	//so stealthmins aren't revealed by the hub
 					admins++
 				s["player[n]"] = C.key
@@ -400,14 +403,12 @@ var/world_topic_spam_protect_time = world.timeofday
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]
 
-		C << 'sound/effects/adminhelp.ogg'
-		C << message
-
+		sound_to(C, 'sound/effects/adminhelp.ogg')
+		to_chat(C, message)
 
 		for(var/client/A in admins)
 			if(A != C)
-				A << amessage
-
+				to_chat(A, amessage)
 		return "Message Successful"
 
 	else if(copytext(T,1,6) == "notes")
@@ -455,21 +456,26 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Reboot(var/reason)
 	/*spawn(0)
-		world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')) // random end sounds!! - LastyBatsy
+		sound_to(world, sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')))// random end sounds!! - LastyBatsy
+
 		*/
 
 	processScheduler.stop()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in clients)
-			C << link("byond://[config.server]")
+			to_chat(C, link("byond://[config.server]"))
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")
-		world << "<span class=danger>World reboot waiting for external scripts. Please be patient.</span>"
+		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
 		return
 
 	..(reason)
+
+/world/Del()
+	callHook("shutdown")
+	return ..()
 
 /hook/startup/proc/loadMode()
 	world.load_mode()
@@ -489,7 +495,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/F = file("data/mode.txt")
 	fdel(F)
 	F << the_mode
-
 
 /hook/startup/proc/loadMOTD()
 	world.load_motd()

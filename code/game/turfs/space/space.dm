@@ -1,4 +1,5 @@
 /turf/space
+	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
@@ -9,8 +10,10 @@
 //	heat_capacity = 700000 No.
 
 /turf/space/New()
+	if(icon_state == "0")
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	if(!istype(src, /turf/space/transit))
-		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
 	..()
 
@@ -38,7 +41,7 @@
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "<span class='notice'>Constructing support lattice ...</span>"
+			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ReplaceWithLattice()
 		return
@@ -55,7 +58,7 @@
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
-			user << "<span class='warning'>The plating is going to need some support.</span>"
+			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 	return
 
 
@@ -92,9 +95,10 @@
 		target_z = y_arr[cur_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Target Z = [target_z]"
-		world << "Next X = [next_x]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Target Z = [target_z]")
+		log_debug("Next X = [next_x]")
+
 		//debug
 */
 		if(target_z)
@@ -117,9 +121,10 @@
 		target_z = y_arr[cur_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Target Z = [target_z]"
-		world << "Next X = [next_x]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Target Z = [target_z]")
+		log_debug("Next X = [next_x]")
+
 		//debug
 */
 		if(target_z)
@@ -141,9 +146,10 @@
 		target_z = y_arr[next_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Next Y = [next_y]"
-		world << "Target Z = [target_z]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Next Y = [next_y]")
+		log_debug("Target Z = [target_z]")
+
 		//debug
 */
 		if(target_z)
@@ -166,9 +172,10 @@
 		target_z = y_arr[next_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Next Y = [next_y]"
-		world << "Target Z = [target_z]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Next Y = [next_y]")
+		log_debug("Target Z = [target_z]")
+
 		//debug
 */
 		if(target_z)
@@ -181,3 +188,8 @@
 
 /turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	return ..(N, tell_universe, 1)
+
+//Bluespace turfs for shuttles and possible future transit use
+/turf/space/bluespace
+	name = "bluespace"
+	icon_state = "bluespace"

@@ -39,6 +39,12 @@
 	crew_announcement.newscast = 1
 
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+
+	var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
+	if(!istype(evac_control))
+		to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
+		return
+
 	var/list/data = host.initial_data()
 
 	if(program)
@@ -75,12 +81,12 @@
 	if(current_viewing_message)
 		data["message_current"] = current_viewing_message
 
-	if(emergency_shuttle.location())
+	if(evac_control.shuttle.location)
 		data["have_shuttle"] = 1
-		if(emergency_shuttle.online())
-			data["have_shuttle_called"] = 1
-		else
+		if(evac_control.is_idle())
 			data["have_shuttle_called"] = 0
+		else
+			data["have_shuttle_called"] = 1
 	else
 		data["have_shuttle"] = 0
 
@@ -122,7 +128,7 @@
 				else
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
-					usr << "Please allow at least one minute to pass between announcements"
+					to_chat(usr, "Please allow at least one minute to pass between announcements")
 					return TRUE
 				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
@@ -137,14 +143,14 @@
 				if(program)
 					if(is_autenthicated(user) && program.computer_emagged && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
-							usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 							nanomanager.update_uis(src)
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 						if(!input || !can_still_topic())
 							return 1
 						Syndicate_announce(input, usr)
-						usr << "<span class='notice'>Message transmitted.</span>"
+						to_chat(usr, "<span class='notice'>Message transmitted.</span>")
 						log_say("[key_name(usr)] has made an illegal announcement: [input]")
 						centcomm_message_cooldown = 1
 						spawn(300)//30 second cooldown
@@ -152,17 +158,17 @@
 			else if(href_list["target"] == "regular")
 				if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 					if(centcomm_message_cooldown)
-						usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 						nanomanager.update_uis(src)
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
-						usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
+						to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
 						return 1
 					var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
 						return 1
 					Centcomm_announce(input, usr)
-					usr << "<span class='notice'>Message transmitted.</span>"
+					to_chat(usr, "<span class='notice'>Message transmitted.</span>")
 					log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
@@ -174,6 +180,7 @@
 					var/confirm = alert("Are you sure you want to call the shuttle?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
 						call_shuttle_proc(usr)
+
 				if(href_list["target"] == "cancel" && !issilicon(usr))
 					var/confirm = alert("Are you sure you want to cancel the shuttle?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
@@ -216,7 +223,8 @@
 							if(SEC_LEVEL_BLUE)
 								feedback_inc("alert_comms_blue",1)
 			else
-				usr << "You press button, but red light flashes and nothing happens." //This should never happen
+				to_chat(usr, "You press button, but red light flashes and nothing happens.")//This should never happen
+
 			current_status = STATE_DEFAULT
 		if("viewmessage")
 			. = 1
@@ -236,7 +244,7 @@
 			if(is_autenthicated(user) && ntn_comm)
 				if(program && program.computer && program.computer.nano_printer)
 					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
-						usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
+						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
 					else
 						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out paper.</span>")
 
@@ -311,15 +319,15 @@ var/last_message_id = 0
 	frequency.post_signal(src, status_signal)
 
 /proc/cancel_call_proc(var/mob/user)
-	if (!( ticker ) || !emergency_shuttle.can_recall())
+	if (!ticker || !evacuation_controller)
 		return
 	if((ticker.mode.name == "blob")||(ticker.mode.name == "Meteor"))
 		return
 
-	if(!emergency_shuttle.going_to_centcom()) //check that shuttle isn't already heading to centcomm
-		emergency_shuttle.recall()
-		log_game("[key_name(user)] has recalled the shuttle.")
-		message_admins("[key_name_admin(user)] has recalled the shuttle.", 1)
+	if(evacuation_controller.cancel_evacuation())
+		log_game("[key_name(user)] has cancelled the evacuation.")
+		message_admins("[key_name_admin(user)] has cancelled the evacuation.", 1)
+
 	return
 
 
@@ -329,88 +337,61 @@ var/last_message_id = 0
             return 1
     return 0
 
-/proc/enable_prison_shuttle(var/mob/user)
-	for(var/obj/machinery/computer/prison_shuttle/PS in machines)
-		PS.allowedtocall = !(PS.allowedtocall)
-
-/proc/call_shuttle_proc(var/mob/user)
-	if ((!( ticker ) || !emergency_shuttle.location()))
+/proc/call_shuttle_proc(var/mob/user, var/emergency)
+	if (!ticker || !evacuation_controller)
 		return
 
+	if(isnull(emergency))
+		emergency = 1
+
 	if(!universe.OnShuttleCall(usr))
-		user << "<span class='notice'>Cannot establish a bluespace connection.</span>"
+		to_chat(user, "<span class='notice'>Cannot establish a bluespace connection.</span>")
 		return
 
 	if(deathsquad.deployed)
-		user << "[boss_short] will not allow the shuttle to be called. Consider all contracts terminated."
+		to_chat(user, "[boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
 		return
 
-	if(emergency_shuttle.deny_shuttle)
-		user << "The emergency shuttle may not be sent at this time. Please try again later."
+	if(evacuation_controller.deny)
+		to_chat(user, "An evacuation cannot be called at this time. Please try again later.")
 		return
 
-	if(world.time < 6000) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
-		user << "The emergency shuttle is refueling. Please wait another [round((6000-world.time)/600)] minute\s before trying again."
-		return
+	if(evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
+		to_chat(user, evacuation_controller.get_cooldown_message())
 
-	if(emergency_shuttle.going_to_centcom())
-		user << "The emergency shuttle may not be called while returning to [boss_short]."
-		return
-
-	if(emergency_shuttle.online())
-		user << "The emergency shuttle is already on its way."
+	if(evacuation_controller.is_evacuating())
+		to_chat(user, "An evacuation is already underway.")
 		return
 
 	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
-		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+		to_chat(user, "Under directive 7-10, [station_name()] is quarantined until further notice.")
 		return
 
-	if(!emergency_shuttle.call_evac(user))
-		return
-	log_and_message_admins("has called the shuttle.")
+	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
+		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
 /proc/init_shift_change(var/mob/user, var/force = 0)
-	if ((!( ticker ) || !emergency_shuttle.location()))
-		return
-
-	if(emergency_shuttle.going_to_centcom())
-		user << "The shuttle may not be called while returning to [boss_short]."
-		return
-
-	if(emergency_shuttle.online())
-		user << "The shuttle is already on its way."
+	if (!ticker || !evacuation_controller)
 		return
 
 	// if force is 0, some things may stop the shuttle call
 	if(!force)
-		if(emergency_shuttle.deny_shuttle)
-			user << "[boss_short] does not currently have a shuttle available in your sector. Please try again later."
-			return
 
-		if(deathsquad.deployed == 1)
-			user << "[boss_short] will not allow the shuttle to be called. Consider all contracts terminated."
+		if(evacuation_controller.deny)
+			to_chat(user, "[boss_short] does not currently have a shuttle available in your sector. Please try again later.")
 			return
 
 		if(world.time < 54000) // 30 minute grace period to let the game get going
-			user << "The shuttle is refueling. Please wait another [round((54000-world.time)/60)] minutes before trying again."
+			to_chat(user, "The shuttle is refueling. Please wait another [round((54000-world.time)/60)] minutes before trying again.")
 			return
 
 		if(ticker.mode.auto_recall_shuttle)
 			//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
-			emergency_shuttle.auto_recall = 1
-
-		if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
-			user << "Under directive 7-10, [station_name()] is quarantined until further notice."
-			return
-
-	emergency_shuttle.call_transfer()
+			evacuation_controller.auto_recall(1)
 
 	//delay events in case of an autotransfer
 	if (isnull(user))
 		event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
 		event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
 
-	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
-	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
-
-	return
+	return call_shuttle_proc(user, 0)

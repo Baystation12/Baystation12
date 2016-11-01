@@ -1,6 +1,7 @@
 /mob
 	density = 1
-	layer = 4.0
+	plane = MOB_PLANE
+
 	animate_movement = 2
 	flags = PROXMOVE
 	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
@@ -107,8 +108,8 @@
 
 //	var/job = null//Living
 
-	var/can_pull_size = 10              // Maximum w_class the mob can pull.
-	var/can_pull_mobs = MOB_PULL_LARGER // Whether or not the mob can pull other mobs.
+	var/can_pull_size = ITEM_SIZE_NO_CONTAINER // Maximum w_class the mob can pull.
+	var/can_pull_mobs = MOB_PULL_LARGER       // Whether or not the mob can pull other mobs.
 
 	var/datum/dna/dna = null//Carbon
 	var/list/active_genes=list()

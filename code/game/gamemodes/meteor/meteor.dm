@@ -24,21 +24,19 @@
 	var/survivors = 0
 	for(var/mob/living/player in player_list)
 		if(player.stat != DEAD)
-			var/turf/location = get_turf(player.loc)
-			if(!location)	continue
-			switch(location.loc.type)
-				if( /area/shuttle/escape/centcom )
-					text += "<br><b><font size=2>[player.real_name] escaped on the emergency shuttle</font></b>"
-				if( /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom )
-					text += "<br><font size=2>[player.real_name] escaped in a life pod.</font>"
-				else
-					text += "<br><font size=1>[player.real_name] survived but is stranded without any hope of rescue.</font>"
+			var/area/A = get_area(player)
+			if(!A)
+				continue
+			if(is_type_in_list(A, using_map.post_round_safe_areas))
+				text += "<br><b><font size=2>[player.real_name] escaped in an emergenchy vehicle.</font></b>"
+			else
+				text += "<br><font size=1>[player.real_name] survived but is stranded without any hope of rescue.</font>"
 			survivors++
 
 	if(survivors)
-		world << "<span class='notice'><B>The following survived the meteor storm</B></span>:[text]"
+		to_world("<span class='notice'><B>The following survived the meteor storm</B></span>:[text]")
 	else
-		world << "<span class='notice'><B>Nobody survived the meteor storm!</B></span>"
+		to_world("<span class='notice'><B>Nobody survived the meteor storm!</B></span>")
 
 	feedback_set_details("round_end_result","end - evacuation")
 	feedback_set("round_end_result",survivors)
@@ -47,3 +45,4 @@
 	return 1
 
 #undef METEOR_DELAY
+

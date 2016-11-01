@@ -84,8 +84,6 @@
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		newmaxcharge += C.maxcharge
 
-	newmaxcharge /= CELLRATE		// Convert to Joules
-	newmaxcharge *= SMESRATE		// And to SMES charge units (which are for some reason different than CELLRATE)
 	capacity = newmaxcharge
 	charge = between(0, charge, newmaxcharge)
 
@@ -178,9 +176,6 @@
 	charge = 0
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		charge += C.charge
-	charge /= CELLRATE		// Convert to Joules
-	charge *= SMESRATE		// And to SMES charge units (which are for some reason different than CELLRATE)
-
 
 	..()
 	ui_tick = !ui_tick
@@ -260,9 +255,9 @@
 		return
 	if(istype(W, /obj/item/weapon/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
-			user << "You insert \the [W] into \the [src]."
+			to_chat(user, "You insert \the [W] into \the [src].")
 		else
-			user << "\The [src] has no empty slot for \the [W]"
+			to_chat(user, "\The [src] has no empty slot for \the [W]")
 
 /obj/machinery/power/smes/batteryrack/attack_hand(var/mob/user)
 	ui_interact(user)

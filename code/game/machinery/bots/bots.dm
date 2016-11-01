@@ -2,6 +2,7 @@
 
 /obj/machinery/bot
 	icon = 'icons/obj/aibots.dmi'
+	plane = MOB_PLANE
 	layer = MOB_LAYER
 	light_range = 3
 	use_power = 0
@@ -36,7 +37,7 @@
 	if(locked && !emagged)
 		locked = 0
 		emagged = 1
-		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
+		to_chat(user, "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>")
 		log_and_message_admins("emagged [src]'s maintenance hatch lock")
 		return 1
 
@@ -49,16 +50,16 @@
 	..(user)
 	if (src.health < maxhealth)
 		if (src.health > maxhealth/3)
-			user << "<span class='warning'>[src]'s parts look loose.</span>"
+			to_chat(user, "<span class='warning'>[src]'s parts look loose.</span>")
 		else
-			user << "<span class='danger'>[src]'s parts look very loose!</span>"
+			to_chat(user, "<span class='danger'>[src]'s parts look very loose!</span>")
 	return
 
 /obj/machinery/bot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(!locked)
 			open = !open
-			user << "<span class='notice'>Maintenance panel is now [src.open ? "opened" : "closed"].</span>"
+			to_chat(user, "<span class='notice'>Maintenance panel is now [src.open ? "opened" : "closed"].</span>")
 	else if(istype(W, /obj/item/weapon/weldingtool))
 		if(health < maxhealth)
 			if(open)
@@ -66,9 +67,9 @@
 				user.visible_message("<span class='warning'>[user] repairs [src]!</span>","<span class='notice'>You repair [src]!</span>")
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			else
-				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
+				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 		else
-			user << "<span class='notice'>[src] does not need a repair.</span>"
+			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 	else
 		if(hasvar(W,"force") && hasvar(W,"damtype"))
 			switch(W.damtype)
@@ -110,7 +111,7 @@
 /obj/machinery/bot/emp_act(severity)
 	var/was_on = on
 	stat |= EMPED
-	var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc )
+	var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"

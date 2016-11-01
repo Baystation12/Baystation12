@@ -178,7 +178,12 @@
 
 /datum/autolathe/recipe/taperecorder
 	name = "tape recorder"
-	path = /obj/item/device/taperecorder
+	path = /obj/item/device/taperecorder/empty
+	category = "General"
+
+/datum/autolathe/recipe/tape
+	name = "tape"
+	path = /obj/item/device/tape
 	category = "General"
 
 /datum/autolathe/recipe/airlockmodule
@@ -453,3 +458,8 @@
 	path = /obj/item/weapon/handcuffs
 	hidden = 1
 	category = "General"
+
+/datum/autolathe/recipe/cell_device
+	name = "device cell"
+	path = /obj/item/weapon/cell/device/standard
+	category = "Devices and Components"

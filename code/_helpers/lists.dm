@@ -46,6 +46,13 @@ proc/isemptylist(list/list)
 			return 1
 	return 0
 
+//Checks for specific paths in a list
+/proc/is_path_in_list(var/path, var/list/L)
+	for(var/type in L)
+		if(ispath(path, type))
+			return 1
+	return 0
+
 /proc/instances_of_type_in_list(var/atom/A, var/list/L)
 	var/instances = 0
 	for(var/type in L)
@@ -596,6 +603,14 @@ proc/dd_sortedTextList(list/incoming)
 	if(!istype(L))	L = list()
 	for(var/path in subtypesof(prototype))
 		L += new path()
+	return L
+
+//creates every subtype of prototype (excluding prototype) and adds it to list L as a type/instance pair.
+//if no list/L is provided, one is created.
+/proc/init_subtypes_assoc(prototype, list/L)
+	if(!istype(L))	L = list()
+	for(var/path in subtypesof(prototype))
+		L[path] = new path()
 	return L
 
 #define listequal(A, B) (A.len == B.len && !length(A^B))

@@ -21,7 +21,8 @@
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/smes_coil
+		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/computer_hardware
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -38,7 +39,6 @@
 	/obj/item/weapon/circuitboard/miningdrill
 	)
 
-
 /obj/item/weapon/gripper/gun
 	name = "firearm gripper"
 	desc = "A special gripper for picking up and manipulating various firearms."
@@ -53,11 +53,11 @@
 		// This seems to be necessary in order to ensure the gripper held weapon can be manipulated (for example, placed into recharger) while allowing targeting and shooting to work.
 		// In short, if it's an obj subtype it's most likely a machine of some sort, so use regular gripper functionality for that (lets us use rechargers, and build turrets for example).
 		// In other cases (turf or mob especially), relay the afterattack to the held gun, which allows us to shoot and target things.
-		if(istype(A, /obj/))
+		if(istype(A, /obj/) && adjacent)
 			return ..()
 		else
 			. = wrapped.afterattack(A, user, adjacent, params)
-			update_icon() // An extra icon update here, as the gun overlay changes quite often for some weapons
+			update_icon()	// An extra icon update here, as the gun overlay changes quite often for some weapons
 
 /obj/item/weapon/gripper/paperwork
 	name = "paperwork gripper"
@@ -99,7 +99,8 @@
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/mecha_parts
+		/obj/item/mecha_parts,
+		/obj/item/weapon/computer_hardware
 		)
 
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
@@ -111,7 +112,8 @@
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food,
 		/obj/item/seeds,
-		/obj/item/weapon/grown
+		/obj/item/weapon/grown,
+		/obj/item/weapon/glass_extra
 		)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
@@ -137,11 +139,12 @@
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		. = wrapped.attack_self(user)
+		update_icon()
 	else
 		. = ..()
-	update_icon()
 
 /obj/item/weapon/gripper/verb/drop_item()
+
 	set name = "Drop Item"
 	set desc = "Release an item from your magnetic gripper."
 	set category = "Silicon Commands"
@@ -149,29 +152,28 @@
 	if(!wrapped)
 		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 		for(var/obj/item/thing in src.contents)
-			thing.loc = get_turf(src)
+			thing.forceMove(get_turf(src))
+			update_icon()
 		return
 
 	if(wrapped.loc != src)
 		wrapped = null
 		return
 
-	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
+	to_chat(src.loc, "<span class='danger'>You drop \the [wrapped].</span>")
 	wrapped.forceMove(get_turf(src))
 	wrapped = null
 	update_icon()
 
-/obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	// Don't fall through and smack people with gripper, instead just no-op
-	return 0
-
-// Draw the held item over our sprite. Probably not the visually nicest method, but it's useful.
 /obj/item/weapon/gripper/update_icon()
 	overlays.Cut()
 	if(wrapped)
 		wrapped.update_icon()
 		overlays += image(wrapped.icon, wrapped.icon_state)
 
+/obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	// Don't fall through and smack people with gripper, instead just no-op
+	return 0
 
 /obj/item/weapon/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
 
@@ -201,7 +203,6 @@
 			wrapped.loc = src
 		else
 			wrapped = null
-			update_icon()
 			return
 
 	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
@@ -221,13 +222,13 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			user << "You collect \the [I]."
+			to_chat(user, "You collect \the [I].")
 			I.forceMove(src)
 			wrapped = I
 			update_icon()
 			return
 		else
-			user << "<span class='danger'>Your gripper cannot hold \the [target].</span>"
+			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
@@ -238,7 +239,7 @@
 
 				A.cell.add_fingerprint(user)
 				A.cell.update_icon()
-				A.cell.loc = src
+				A.cell.forceMove(src)
 				A.cell = null
 
 				A.charging = 0
@@ -256,12 +257,11 @@
 				A.cell.add_fingerprint(user)
 				A.cell.update_icon()
 				A.updateicon()
-				A.cell.loc = src
+				A.cell.forceMove(src)
 				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 	update_icon()
-
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
@@ -310,15 +310,15 @@
 			if(!istype(D))
 				return
 
-			D << "<span class='danger'>You begin decompiling [M].</span>"
+			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
 			if(!do_after(D,50,M))
-				D << "<span class='danger'>You need to remain still while decompiling such a large object.</span>"
+				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
 				return
 
 			if(!M || !D) return
 
-			D << "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>"
+			to_chat(D, "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>")
 			qdel(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
@@ -391,16 +391,16 @@
 		grabbed_something = 1
 
 	if(grabbed_something)
-		user << "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>"
+		to_chat(user, "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>")
 	else
-		user << "<span class='danger'>Nothing on \the [T] is useful to you.</span>"
+		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
 	return
 
 //PRETTIER TOOL LIST.
 /mob/living/silicon/robot/drone/installed_modules()
 
 	if(weapon_lock)
-		src << "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>"
+		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
 		return
 
 	if(!module)

@@ -19,6 +19,7 @@ var/datum/robolimb/basic_robolimb
 	var/can_eat
 	var/use_eye_icon = "eyes_s"
 	var/can_feel_pain
+	var/skintone
 	var/list/species_cannot_use = list("Resomi")
 	var/list/restricted_to = list()
 	var/list/applies_to_part = list() //TODO.
@@ -124,3 +125,5 @@ var/datum/robolimb/basic_robolimb
 	company = "Vey-Med"
 	desc = "This high quality limb is nearly indistinguishable from an organic one."
 	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main.dmi'
+	can_eat = 1
+	skintone = 1

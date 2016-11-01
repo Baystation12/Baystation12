@@ -8,7 +8,7 @@
 	projectile_type = /obj/item/projectile/beam
 	sel_mode = 2
 	max_shots = 30
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_delay=null, charge_cost=null),
@@ -26,10 +26,10 @@
 	cell_type = /obj/item/weapon/cell/super
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse
-	charge_cost=400
+	charge_cost=40
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
-	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"
+	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")
 
 //WHY?
 /obj/item/weapon/gun/energy/pulse_rifle/M1911
@@ -39,4 +39,4 @@
 	icon_state = "m1911-p"
 	item_state = "pulse"
 	max_shots = 8
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL

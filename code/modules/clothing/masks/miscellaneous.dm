@@ -4,7 +4,7 @@
 	icon_state = "muzzle"
 	item_state = "muzzle"
 	body_parts_covered = FACE
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 	voicechange = 1
 
@@ -14,7 +14,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "tape_cross"
 	item_state = null
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 /obj/item/clothing/mask/muzzle/New()
     ..()
@@ -32,7 +32,7 @@
 	desc = "A sterile mask designed to help prevent the spread of diseases."
 	icon_state = "sterile"
 	item_state = "sterile"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = FACE
 	item_flags = FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.90
@@ -62,7 +62,7 @@
 	item_state = "blueneckscarf"
 	body_parts_covered = FACE
 	item_flags = FLEXIBLEMATERIAL
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
 /obj/item/clothing/mask/redscarf
@@ -72,7 +72,7 @@
 	item_state = "redwhite_scarf"
 	body_parts_covered = FACE
 	item_flags = FLEXIBLEMATERIAL
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
 /obj/item/clothing/mask/greenscarf
@@ -82,7 +82,7 @@
 	item_state = "green_scarf"
 	body_parts_covered = FACE
 	item_flags = FLEXIBLEMATERIAL
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
 /obj/item/clothing/mask/ninjascarf
@@ -92,7 +92,7 @@
 	item_state = "ninja_scarf"
 	body_parts_covered = FACE
 	item_flags = FLEXIBLEMATERIAL
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
 
@@ -102,7 +102,7 @@
 	icon_state = "pig"
 	item_state = "pig"
 	flags_inv = HIDEFACE|BLOCKHAIR
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 0.9
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -113,7 +113,7 @@
 	item_state = "horsehead"
 	flags_inv = HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/mask/horsehead/New()
@@ -152,7 +152,7 @@
 	if(user.incapacitated())
 		return
 	active = !active
-	user << "<span class='notice'>You [active ? "" : "dis"]engage \the [src].</span>"
+	to_chat(user, "<span class='notice'>You [active ? "" : "dis"]engage \the [src].</span>")
 	if(active)
 		engage_mask(user)
 	else
@@ -173,10 +173,10 @@
 		return
 
 	eye.possess(user)
-	eye.owner << "<span class='notice'>You feel disorented for a moment as your mind connects to the camera network.</span>"
+	to_chat(eye.owner, "<span class='notice'>You feel disorented for a moment as your mind connects to the camera network.</span>")
 
 /obj/item/clothing/mask/ai/proc/disengage_mask(var/mob/user)
 	if(user == eye.owner)
-		eye.owner << "<span class='notice'>You feel disorented for a moment as your mind disconnects from the camera network.</span>"
+		to_chat(eye.owner, "<span class='notice'>You feel disorented for a moment as your mind disconnects from the camera network.</span>")
 		eye.release(eye.owner)
 		eye.forceMove(src)

@@ -15,7 +15,7 @@ proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 		log_game("EMP with size ([heavy_range], [light_range]) in area [epicenter.loc.name] ")
 
 	if(heavy_range > 1)
-		var/obj/effect/overlay/pulse = PoolOrNew(/obj/effect/overlay, epicenter)
+		var/obj/effect/overlay/pulse = new/obj/effect/overlay(epicenter)
 		pulse.icon = 'icons/effects/effects.dmi'
 		pulse.icon_state = "emppulse"
 		pulse.name = "emp pulse"
@@ -27,7 +27,7 @@ proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 		light_range = heavy_range
 
 	for(var/mob/M in range(heavy_range, epicenter))
-		M << 'sound/effects/EMPulse.ogg'
+		sound_to(M, 'sound/effects/EMPulse.ogg')
 
 	for(var/atom/T in range(light_range, epicenter))
 		#ifdef EMPDEBUG

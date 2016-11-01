@@ -2,7 +2,7 @@
 	name = "engine"
 	desc = "An engine used to power a small vehicle."
 	icon = 'icons/obj/objects.dmi'
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	var/stat = 0
 	var/trail_type
 	var/cost_per_move = 5
@@ -29,12 +29,13 @@
 	desc = "A battery-powered engine used to power a small vehicle."
 	icon_state = "engine_electric"
 	trail_type = /datum/effect/effect/system/trail/ion
+	cost_per_move = 200	// W
 	var/obj/item/weapon/cell/cell
 
 /obj/item/weapon/engine/electric/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/weapon/cell))
 		if(cell)
-			user << "<span class='warning'>There is already a cell in \the [src].</span>"
+			to_chat(user, "<span class='warning'>There is already a cell in \the [src].</span>")
 		else
 			cell = I
 			user.drop_from_inventory(I)
@@ -42,7 +43,7 @@
 		return 1
 	else if(istype(I,/obj/item/weapon/crowbar))
 		if(cell)
-			user << "You pry out \the [cell]."
+			to_chat(user, "You pry out \the [cell].")
 			cell.forceMove(get_turf(src))
 			cell = null
 			return 1
@@ -54,7 +55,7 @@
 /obj/item/weapon/engine/electric/use_power()
 	if(!cell)
 		return 0
-	return cell.use(cost_per_move)
+	return cell.use(cost_per_move * CELLRATE)
 
 /obj/item/weapon/engine/electric/rev_engine(var/atom/movable/M)
 	M.audible_message("\The [M] beeps, spinning up.")

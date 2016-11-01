@@ -55,17 +55,17 @@
 				var/mob/living/carbon/C = usr
 				C.toggle_throw_mode()
 			else
-				usr << "\red This mob type cannot throw items."
+				to_chat(usr, "<span class='warning'>This mob type cannot throw items.</span>")
 			return
 		if(NORTHWEST)
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
 				if(!C.get_active_hand())
-					usr << "\red You have nothing to drop in your hand."
+					to_chat(usr, "<span class='warning'>You have nothing to drop in your hand.</span>")
 					return
 				drop_item()
 			else
-				usr << "\red This mob type cannot drop items."
+				to_chat(usr, "<span class='warning'>This mob type cannot drop items.</span>")
 			return
 
 //This gets called when you press the delete button.
@@ -73,7 +73,7 @@
 	set hidden = 1
 
 	if(!usr.pulling)
-		usr << "\blue You are not pulling anything."
+		to_chat(usr, "<span class='notice'>You are not pulling anything.</span>")
 		return
 	usr.stop_pulling()
 
@@ -174,7 +174,7 @@
 		if(mob.control_object.density)
 			step(mob.control_object,direct)
 			if(!mob.control_object)	return
-			mob.control_object.dir = direct
+			mob.control_object.set_dir(direct)
 		else
 			mob.control_object.forceMove(get_step(mob.control_object,direct))
 	return
@@ -261,13 +261,13 @@
 			for(var/mob/M in range(mob, 1))
 				if(M.pulling == mob)
 					if(!M.restrained() && M.stat == 0 && M.canmove && mob.Adjacent(M))
-						src << "\blue You're restrained! You can't move!"
+						to_chat(src, "<span class='notice'>You're restrained! You can't move!</span>")
 						return 0
 					else
 						M.stop_pulling()
 
 		if(mob.pinned.len)
-			src << "\blue You're pinned to a wall by [mob.pinned[1]]!"
+			to_chat(src, "<span class='notice'>You're pinned to a wall by [mob.pinned[1]]!</span>")
 			return 0
 
 		move_delay = world.time//set move delay
@@ -392,13 +392,13 @@
 ///Allows mobs to run though walls
 /client/proc/Process_Incorpmove(direct)
 	var/turf/T = get_step(mob, direct)
-	if(mob.check_holy(T))
-		mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
+	if(mob.check_is_holy_turf(T))
+		to_chat(mob, "<span class='warning'>You cannot enter holy grounds while you are in this plane of existence!</span>")
 		return
 
 	if(T)
 		mob.forceMove(T)
-	mob.dir = direct
+	mob.set_dir(direct)
 
 	mob.Post_Incorpmove()
 	return 1
@@ -458,7 +458,7 @@
 //return 1 if slipped, 0 otherwise
 /mob/proc/handle_spaceslipping()
 	if(prob(slip_chance(5)) && !buckled)
-		src << "<span class='warning'>You slipped!</span>"
+		to_chat(src, "<span class='warning'>You slipped!</span>")
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
 		return 1

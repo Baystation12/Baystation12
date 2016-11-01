@@ -1,5 +1,4 @@
 
-
 /obj/structure/reagent_dispensers
 	name = "Dispenser"
 	desc = "..."
@@ -8,30 +7,39 @@
 	density = 1
 	anchored = 0
 
+	var/initial_capacity = 1000
+	var/initial_reagents = "{}" // A list of reagents and their ratio relative the initial capacity in json format. "{'water':0,5}" would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
-	var/possible_transfer_amounts = "10;25;50;100"
+	var/possible_transfer_amounts = "10;25;50;100;500"
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
 
 	New()
-		var/datum/reagents/R = new/datum/reagents(1000)
+		var/datum/reagents/R = new/datum/reagents(initial_capacity)
 		reagents = R
 		R.my_atom = src
+
 		if (!possible_transfer_amounts)
 			src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
+
+		if(istext(initial_reagents))
+			var/list/initial_reagent_list = json_decode(initial_reagents)
+			for(var/reagent in initial_reagent_list)
+				var/reagent_ratio = initial_reagent_list[reagent]
+				reagents.add_reagent(reagent, reagent_ratio * initial_capacity)
+
 		..()
 
 	examine(mob/user)
 		if(!..(user, 2))
 			return
-		user << "\blue It contains:"
+		to_chat(user, "<span class='notice'>It contains:</span>")
 		if(reagents && reagents.reagent_list.len)
 			for(var/datum/reagent/R in reagents.reagent_list)
-				user << "\blue [R.volume] units of [R.name]"
+				to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
 		else
-			user << "\blue Nothing."
-
+			to_chat(user, "<span class='notice'>Nothing.</span>")
 	verb/set_APTFT() //set amount_per_transfer_from_this
 		set name = "Set transfer amount"
 		set category = "Object"
@@ -60,10 +68,6 @@
 
 
 
-
-
-
-
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
 	name = "watertank"
@@ -71,9 +75,9 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
-	New()
-		..()
-		reagents.add_reagent("water",1000)
+	possible_transfer_amounts = "10;25;50;100"
+	initial_capacity = 50000
+	initial_reagents = "{'water':1}"
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
@@ -83,18 +87,15 @@
 	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/obj/item/device/assembly_holder/rig = null
-	New()
-		..()
-		reagents.add_reagent("fuel",1000)
+	initial_reagents = "{'fuel':1}"
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	if(!..(user, 2))
 		return
 	if (modded)
-		user << "\red Fuel faucet is wrenched open, leaking the fuel!"
+		to_chat(user, "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>")
 	if(rig)
-		user << "<span class='notice'>There is some kind of device rigged to the tank.</span>"
-
+		to_chat(user, "<span class='notice'>There is some kind of device rigged to the tank.</span>")
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
 		usr.visible_message("<span class='notice'>\The [usr] begins to detach [rig] from \the [src].</span>", "<span class='notice'>You begin to detach [rig] from \the [src].</span>")
@@ -114,9 +115,9 @@
 			message_admins("[key_name_admin(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
 			log_game("[key_name(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel.")
 			leak_fuel(amount_per_transfer_from_this)
-	if (istype(W,/obj/item/device/assembly_holder))
+	else if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
-			user << "<span class='warning'>There is another device in the way.</span>"
+			to_chat(user, "<span class='warning'>There is another device in the way.</span>")
 			return ..()
 		user.visible_message("\The [user] begins rigging [W] to \the [src].", "You begin rigging [W] to \the [src]")
 		if(do_after(user, 20, src))
@@ -135,6 +136,12 @@
 			test.Shift(NORTH,1)
 			test.Shift(EAST,6)
 			overlays += test
+
+	else if(isflamesource(W))
+		log_and_message_admins("triggered a fueltank explosion with \a [W].")
+		user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put your [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+		src.explode()
+		return
 
 	return ..()
 
@@ -188,9 +195,7 @@
 	anchored = 1
 	density = 0
 	amount_per_transfer_from_this = 45
-	New()
-		..()
-		reagents.add_reagent("condensedcapsaicin",1000)
+	initial_reagents = "{'condensedcapsaicin':1}"
 
 
 /obj/structure/reagent_dispensers/water_cooler
@@ -201,9 +206,8 @@
 	icon_state = "water_cooler"
 	possible_transfer_amounts = null
 	anchored = 1
-	New()
-		..()
-		reagents.add_reagent("water",500)
+	initial_capacity = 500
+	initial_reagents = "{'water':1}"
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W,/obj/item/weapon/wrench))
@@ -215,7 +219,7 @@
 
 		if(do_after(user, 20, src))
 			if(!src) return
-			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 			anchored = !anchored
 		return
 	else
@@ -227,9 +231,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "beertankTEMP"
 	amount_per_transfer_from_this = 10
-	New()
-		..()
-		reagents.add_reagent("beer",1000)
+	initial_reagents = "{'beer':1}"
 
 /obj/structure/reagent_dispensers/virusfood
 	name = "Virus Food Dispenser"
@@ -238,10 +240,7 @@
 	icon_state = "virusfoodtank"
 	amount_per_transfer_from_this = 10
 	anchored = 1
-
-	New()
-		..()
-		reagents.add_reagent("virusfood", 1000)
+	initial_reagents = "{'virusfood':1}"
 
 /obj/structure/reagent_dispensers/acid
 	name = "Sulphuric Acid Dispenser"
@@ -250,7 +249,4 @@
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
 	anchored = 1
-
-	New()
-		..()
-		reagents.add_reagent("sacid", 1000)
+	initial_reagents = "{'sacid':1}"

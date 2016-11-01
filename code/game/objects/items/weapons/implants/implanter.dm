@@ -5,7 +5,7 @@
 	item_state = "syringe_0"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	var/obj/item/weapon/implant/imp = null
 
 /obj/item/weapon/implanter/attack_self(var/mob/user)
@@ -13,7 +13,7 @@
 		return ..()
 	imp.loc = get_turf(src)
 	user.put_in_hands(imp)
-	user << "<span class='notice'>You remove \the [imp] from \the [src].</span>"
+	to_chat(user, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
 	name = "implanter"
 	imp = null
 	update()
@@ -111,7 +111,7 @@
 	var/obj/item/weapon/implant/compressed/c = imp
 	if (!c)	return
 	if (c.scanned == null)
-		user << "Please scan an object with the implanter first."
+		to_chat(user, "Please scan an object with the implanter first.")
 		return
 	..()
 
@@ -121,7 +121,7 @@
 	if(istype(A,/obj/item) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
-			user << "<span class='warning'>Something is already scanned inside the implant!</span>"
+			to_chat(user, "<span class='warning'>Something is already scanned inside the implant!</span>")
 			return
 		c.scanned = A
 		if(istype(A.loc,/mob/living/carbon/human))
