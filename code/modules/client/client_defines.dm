@@ -1,4 +1,8 @@
 /client
+		//////////////////////
+		//BLACK MAGIC THINGS//
+		//////////////////////
+	parent_type = /datum
 		////////////////
 		//ADMIN THINGS//
 		////////////////
@@ -14,7 +18,6 @@
 	var/move_delay		= 1
 	var/moving			= null
 	var/adminobs		= null
-	var/area			= null
 
 	var/adminhelped = 0
 
@@ -43,5 +46,4 @@
 	var/related_accounts_cid = "Requires database"	//So admins know why it isn't working - Used to determine what other accounts previously logged in from this computer id
 
 	preload_rsc = 0 // This is 0 so we can set it to an URL once the player logs in and have them download the resources from a different server.
-	var/global/obj/screen/click_catcher/void
-
+	var/static/obj/screen/click_catcher/void

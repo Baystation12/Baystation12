@@ -20,8 +20,8 @@
 
 /obj/item/integrated_circuit/transfer/splitter/do_work()
 	var/datum/integrated_io/I = inputs[1]
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = I.data
+	for(var/i = 1 to outputs.len)
+		set_pin_data(IC_OUTPUT, i, I.data)
 
 /obj/item/integrated_circuit/transfer/activator_splitter
 	name = "activator splitter"
@@ -34,13 +34,14 @@
 		"outgoing pulse B"
 	)
 
-/obj/item/integrated_circuit/transfer/activator_splitter/do_work()
-	for(var/datum/integrated_io/activate/A in outputs)
+/obj/item/integrated_circuit/transfer/activator_splitter/do_work(var/io)
+	if(io != activators[1])
+		return
+
+	for(var/datum/integrated_io/activate/A in activators)
 		if(A == activators[1])
 			continue
-		if(A.linked.len)
-			for(var/datum/integrated_io/activate/target in A.linked)
-				target.holder.check_then_do_work()
+		A.activate()
 
 /obj/item/integrated_circuit/transfer/activator_splitter/medium
 	name = "four activator splitter"

@@ -58,17 +58,15 @@
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
 	stat = DEAD
-
-	if(plane == HIDING_MOB_PLANE)
-		reset_plane_and_layer()
+	reset_plane_and_layer()
 	update_canmove()
 
 	dizziness = 0
 	jitteriness = 0
 
-	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
-	see_in_dark = 8
-	see_invisible = SEE_INVISIBLE_LEVEL_TWO
+	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+	set_see_in_dark(8)
+	set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
 	drop_r_hand()
 	drop_l_hand()

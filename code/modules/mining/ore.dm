@@ -3,7 +3,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
 	randpixel = 8
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/datum/geosample/geologic_data
 	var/ore/ore = null // set to a type to find the right instance on init
 
@@ -44,7 +44,7 @@
 	..()
 	var/mob/living/carbon/human/H = hit_atom
 	if(istype(H) && H.has_eyes() && prob(85))
-		H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
+		to_chat(H, "<span class='danger'>Some of \the [src] gets in your eyes!</span>")
 		H.eye_blind += 5
 		H.eye_blurry += 10
 		spawn(1)

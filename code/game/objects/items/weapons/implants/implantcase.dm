@@ -8,7 +8,7 @@
 	item_state = "implantcase"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	var/obj/item/weapon/implant/imp = null
 
 /obj/item/weapon/implantcase/proc/update()
@@ -35,11 +35,11 @@
 		if(!src.imp)	return
 		if(!src.imp.allow_reagents)	return
 		if(src.imp.reagents.total_volume >= src.imp.reagents.maximum_volume)
-			user << "<span class='warning'>\The [src] is full.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is full.</span>")
 		else
 			spawn(5)
 				I.reagents.trans_to_obj(src.imp, 5)
-				user << "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>"
+				to_chat(user, "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>")
 	else if (istype(I, /obj/item/weapon/implanter))
 		var/obj/item/weapon/implanter/M = I
 		if (M.imp)

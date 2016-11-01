@@ -37,7 +37,7 @@ datum/book_manager/proc/freeid()
 	set desc = "Permamently deletes a book from the database."
 	set category = "Admin"
 	if(!src.holder)
-		src << "Only administrators may use this command."
+		to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/isbn = input("ISBN number?", "Delete Book") as num | null
@@ -52,7 +52,7 @@ datum/book_manager/proc/freeid()
 		else
 			var/DBQuery/query = dbcon.NewQuery("DELETE FROM library WHERE id=[isbn]")
 			if(!query.Execute())
-				usr << query.ErrorMsg()
+				to_chat(usr, query.ErrorMsg())
 			dbcon.Disconnect()
 	else
 		book_mgr.remove(isbn)
@@ -85,7 +85,7 @@ datum/archived_book/New(var/path)
 
 	if (isnull(version) || version < BOOK_VERSION_MIN || version > BOOK_VERSION_MAX)
 		fdel(path)
-		usr << "What book?"
+		to_chat(usr, "What book?")
 		return 0
 
 	F["author"] >> author

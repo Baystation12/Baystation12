@@ -1,4 +1,3 @@
-
 /obj/item/integrated_circuit/manipulation/smoke
 	name = "smoke generator"
 	desc = "Unlike most electronics, creating smoke is completely intentional."
@@ -43,30 +42,34 @@
 	create_reagents(30)
 
 /obj/item/integrated_circuit/manipulation/injector/proc/inject_amount()
-	var/datum/integrated_io/amount = inputs[2]
-	if(isnum(amount.data))
-		return Clamp(amount.data, 0, 30)
+	var/amount = get_pin_data(IC_INPUT, 2)
+	if(isnum(amount))
+		return Clamp(amount, 0, 30)
 
 /obj/item/integrated_circuit/manipulation/injector/do_work()
 	set waitfor = 0 // Don't sleep in a proc that is called by a processor without this set, otherwise it'll delay the entire thing
-	var/datum/integrated_io/target = inputs[1]
-	var/atom/movable/AM = target.data_as_type(/atom/movable)
+
+	var/assembly = get_assembly(loc)
+	if(!assembly)
+		return // Bad circuit, bad.
+
+	var/atom/movable/AM = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
 	if(!istype(AM)) //Invalid input
 		return
 	if(!reagents.total_volume) // Empty
 		return
-	if(AM.can_be_injected_by(src))
+	if(AM.can_be_injected_by(assembly))
 		if(isliving(AM))
 			var/turf/T = get_turf(AM)
-			T.visible_message("<span class='warning'>[src] is trying to inject [AM]!</span>")
+			T.visible_message("<span class='warning'>\The [assembly] is trying to inject \the [AM]!</span>")
 			sleep(3 SECONDS)
-			if(!AM.can_be_injected_by(src))
+			if(!AM.can_be_injected_by(assembly))
 				return
 			var/contained = reagents.get_reagents()
-			var/trans = reagents.trans_to_mob(target, inject_amount(), CHEM_BLOOD)
-			message_admins("[src] injected \the [AM] with [trans]u of [english_list(contained)].")
+			var/trans = reagents.trans_to_mob(AM, inject_amount(), CHEM_BLOOD)
+			message_admins("\The [assembly] injected \the [AM] with [trans]u of [english_list(contained)].")
 			to_chat(AM, "<span class='notice'>You feel a tiny prick!</span>")
-			visible_message("<span class='warning'>[src] injects [AM]!</span>")
+			visible_message("<span class='warning'>\The [assembly] injects \the [AM]!</span>")
 		else
 			reagents.trans_to(AM, inject_amount())
 
@@ -85,16 +88,13 @@
 	var/transfer_amount = 10
 
 /obj/item/integrated_circuit/manipulation/reagent_pump/on_data_written()
-	var/datum/integrated_io/amount = inputs[3]
-	if(isnum(amount.data))
-		amount.data = Clamp(amount.data, 0, 50)
-		transfer_amount = amount.data
+	var/amount = get_pin_data(IC_INPUT, 3)
+	if(isnum(amount))
+		transfer_amount = Clamp(amount, 0, 50)
 
 /obj/item/integrated_circuit/manipulation/reagent_pump/do_work()
-	var/datum/integrated_io/A = inputs[1]
-	var/datum/integrated_io/B = inputs[2]
-	var/atom/movable/source = A.data_as_type(/atom/movable)
-	var/atom/movable/target = B.data_as_type(/atom/movable)
+	var/atom/movable/source = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
+	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 2, /atom/movable)
 	if(!istype(source) || !istype(target)) //Invalid input
 		return
 	var/turf/T = get_turf(src)
@@ -127,9 +127,7 @@
 	create_reagents(60)
 
 /obj/item/integrated_circuit/manipulation/reagent_storage/on_reagent_change()
-	var/datum/integrated_io/A = outputs[1]
-	A.data = reagents.total_volume
-	A.push_data()
+	set_pin_data(IC_OUTPUT, 1, reagents && reagents.total_volume)
 
 /obj/item/integrated_circuit/manipulation/reagent_storage/cryo
 	name = "cryo reagent storage"
@@ -188,11 +186,18 @@
 	outputs = list()
 	activators = list("prime grenade")
 	var/obj/item/weapon/grenade/attached_grenade
+	var/pre_attached_grenade_type
+
+/obj/item/integrated_circuit/manipulation/grenade/New()
+	..()
+	if(pre_attached_grenade_type)
+		var/grenade = new pre_attached_grenade_type(src)
+		attach_grenade(grenade)
 
 /obj/item/integrated_circuit/manipulation/grenade/Destroy()
 	if(attached_grenade && !attached_grenade.active)
 		attached_grenade.dropInto(loc)
-	attached_grenade = null
+	detach_grenade()
 	. =..()
 
 /obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
@@ -200,10 +205,8 @@
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
 		else if(user.unEquip(G, target = src))
-			attached_grenade = G
-			size += G.w_class
-			desc += " \An [attached_grenade] is attached to it!"
 			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
+			attach_grenade(G)
 	else
 		..()
 
@@ -211,9 +214,7 @@
 	if(attached_grenade)
 		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
 		user.put_in_any_hand_if_possible(attached_grenade) || attached_grenade.dropInto(loc)
-		attached_grenade = null
-		size = initial(size)
-		desc = initial(desc)
+		detach_grenade()
 	else
 		..()
 
@@ -225,3 +226,62 @@
 		attached_grenade.activate()
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
+
+// These procs do not relocate the grenade, that's the callers responsibility
+/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/weapon/grenade/G)
+	attached_grenade = G
+	destroyed_event.register(attached_grenade, src, /obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade)
+	size += G.w_class
+	desc += " \An [attached_grenade] is attached to it!"
+
+/obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade()
+	if(!attached_grenade)
+		return
+	destroyed_event.unregister(attached_grenade, src, /obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade)
+	attached_grenade = null
+	size = initial(size)
+	desc = initial(desc)
+
+/obj/item/integrated_circuit/manipulation/grenade/frag
+	pre_attached_grenade_type = /obj/item/weapon/grenade/frag
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift
+	name = "bluespace rift generator"
+	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
+	extended_desc = "If a valid teleporter console is supplied as input then its selected teleporter beacon will be used as destination point, \
+					and if not an undefined destination point is selected. \
+					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the local north. \
+					A direction value of 0 will open the rift on top of the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
+	icon_state = "bluespace"
+	complexity = 25
+	size = 3
+	cooldown_per_use = 10 SECONDS
+	inputs = list("teleporter", "rift direction" = 0)
+	outputs = list()
+	activators = list("open rift")
+
+	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 10000)
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
+	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
+	var/step_dir = get_pin_data(IC_INPUT, 2)
+
+	var/turf/rift_location = get_turf(src)
+	if(!rift_location || !isPlayerLevel(rift_location.z))
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+		return
+
+	if(isnum(step_dir) && (!step_dir || (step_dir in cardinal)))
+		rift_location = get_step(rift_location, step_dir) || rift_location
+	else
+		rift_location = get_step(rift_location, dir) || rift_location
+
+	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
+		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
+	else
+		var/turf/destination = get_random_turf_in_range(src, 10)
+		if(destination)
+			new /obj/effect/portal(rift_location, destination)
+		else
+			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)

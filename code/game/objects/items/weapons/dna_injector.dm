@@ -8,7 +8,7 @@
 	var/s_time = 10.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 1.0
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	var/uses = 1
 	var/nofail
@@ -121,7 +121,7 @@
 
 	var/mob/living/carbon/human/H = M
 	if(!istype(H))
-		user << "<span class='warning'>Apparently it didn't work...</span>"
+		to_chat(user, "<span class='warning'>Apparently it didn't work...</span>")
 		return
 
 	// Used by admin log.

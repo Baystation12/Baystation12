@@ -158,13 +158,17 @@
 			return "Supply"
 
 /proc/get_access_desc(id)
-	var/list/AS = get_all_access_datums_by_id()
+	var/list/AS = priv_all_access_datums_id || get_all_access_datums_by_id()
 	var/datum/access/A = AS["[id]"]
 
 	return A ? A.desc : ""
 
 /proc/get_centcom_access_desc(A)
 	return get_access_desc(A)
+
+/proc/get_access_by_id(id)
+	var/list/AS = priv_all_access_datums_id || get_all_access_datums_by_id()
+	return AS[num2text(id)]
 
 /proc/get_all_jobs()
 	var/list/all_jobs = list()
@@ -215,9 +219,8 @@
 	. = list()
 	for(var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
-		var/obj/item/weapon/card/id = I ? I.GetIdCard() : null
-		if(id)
-			. |= id.GetAccess()
+		if(I)
+			. |= I.GetAccess()
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()

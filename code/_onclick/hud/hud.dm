@@ -192,11 +192,11 @@ datum/hud/New(mob/owner)
 	set hidden = 1
 
 	if(!hud_used)
-		usr << "<span class='warning'>This mob type does not use a HUD.</span>"
+		to_chat(usr, "<span class='warning'>This mob type does not use a HUD.</span>")
 		return
 
 	if(!ishuman(src))
-		usr << "<span class='warning'>Inventory hiding is currently only supported for human mobs, sorry.</span>"
+		to_chat(usr, "<span class='warning'>Inventory hiding is currently only supported for human mobs, sorry.</span>")
 		return
 
 	if(!client) return
@@ -288,6 +288,8 @@ datum/hud/New(mob/owner)
 /mob/proc/add_click_catcher()
 	if(!client.void)
 		client.void = create_click_catcher()
+	if(!client.screen)
+		client.screen = list()
 	client.screen |= client.void
 
 /mob/new_player/add_click_catcher()

@@ -10,7 +10,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	w_class = NORMAL_ITEM
+	w_class = ITEM_SIZE_NORMAL
 	var/c_uid
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
@@ -88,8 +88,8 @@
 
 /obj/item/weapon/cell/examine(mob/user)
 	..()
-	user << "The label states it's capacity is [maxcharge] Wh"
-	user << "The charge meter reads [round(src.percent(), 0.1)]%"
+	to_chat(user, "The label states it's capacity is [maxcharge] Wh")
+	to_chat(user, "The charge meter reads [round(src.percent(), 0.1)]%")
 
 /obj/item/weapon/cell/emp_act(severity)
 	//remove this once emp changes on dev are merged in
@@ -127,7 +127,7 @@
 	name = "device power cell"
 	desc = "A small power cell designed to power handheld devices."
 	icon_state = "device"
-	w_class = SMALL_ITEM
+	w_class = ITEM_SIZE_SMALL
 	force = 0
 	throw_speed = 5
 	throw_range = 7

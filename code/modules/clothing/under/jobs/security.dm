@@ -110,7 +110,7 @@
 
 /obj/item/clothing/head/det/attack_self(mob/user)
 	flags_inv ^= BLOCKHEADHAIR
-	user << "<span class='notice'>[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair.</span>"
+	to_chat(user, "<span class='notice'>[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair.</span>")
 	..()
 
 /obj/item/clothing/head/det/grey
@@ -146,6 +146,7 @@
 	name = "Dermal Armour Patch"
 	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
 	icon_state = "dermal"
+	armor = list(melee = 50, bullet = 50, laser = 50,energy = 25, bomb = 30, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/armor/hos

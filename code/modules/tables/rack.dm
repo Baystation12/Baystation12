@@ -26,5 +26,5 @@
 	return
 
 /obj/structure/table/rack/holorack/dismantle(obj/item/weapon/wrench/W, mob/user)
-	user << "<span class='warning'>You cannot dismantle \the [src].</span>"
+	to_chat(user, "<span class='warning'>You cannot dismantle \the [src].</span>")
 	return

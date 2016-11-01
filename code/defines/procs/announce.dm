@@ -49,20 +49,19 @@
 datum/announcement/proc/Message(message as text, message_title as text)
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			M << "<h2 class='alert'>[title]</h2>"
-			M << "<span class='alert'>[message]</span>"
+			to_chat(M, "<h2 class='alert'>[title]</h2>")
+			to_chat(M, "<span class='alert'>[message]</span>")
 			if (announcer)
-				M << "<span class='alert'> -[html_encode(announcer)]</span>"
-
+				to_chat(M, "<span class='alert'> -[html_encode(announcer)]</span>")
 datum/announcement/minor/Message(message as text, message_title as text)
-	world << "<b>[message]</b>"
+	to_world("<b>[message]</b>")
 
 datum/announcement/priority/Message(message as text, message_title as text)
-	world << "<h1 class='alert'>[message_title]</h1>"
-	world << "<span class='alert'>[message]</span>"
+	to_world("<h1 class='alert'>[message_title]</h1>")
+	to_world("<span class='alert'>[message]</span>")
 	if(announcer)
-		world << "<span class='alert'> -[html_encode(announcer)]</span>"
-	world << "<br>"
+		to_world("<span class='alert'> -[html_encode(announcer)]</span>")
+	to_world("<br>")
 
 datum/announcement/priority/command/Message(message as text, message_title as text)
 	var/command
@@ -74,11 +73,10 @@ datum/announcement/priority/command/Message(message as text, message_title as te
 	command += "<br>"
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			M << command
-
+			to_chat(M, command)
 datum/announcement/priority/security/Message(message as text, message_title as text)
-	world << "<font size=4 color='red'>[message_title]</font>"
-	world << "<font color='red'>[message]</font>"
+	to_world("<font size=4 color='red'>[message_title]</font>")
+	to_world("<font color='red'>[message]</font>")
 
 datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(!newscast)
@@ -97,14 +95,14 @@ datum/announcement/proc/PlaySound(var/message_sound)
 		return
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			M << message_sound
+			sound_to(M, message_sound)
 
 datum/announcement/proc/Sound(var/message_sound)
 	PlaySound(message_sound)
 
 datum/announcement/priority/Sound(var/message_sound)
 	if(message_sound)
-		world << message_sound
+		sound_to(world, message_sound)
 
 datum/announcement/priority/command/Sound(var/message_sound)
 	PlaySound(message_sound)

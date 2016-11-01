@@ -3,7 +3,7 @@
 	desc = "A small empty jar."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "jar"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	matter = list("glass" = 200)
 	flags = NOBLUDGEON
 	var/list/accept_mobs = list(/mob/living/simple_animal/lizard, /mob/living/simple_animal/mouse)
@@ -22,7 +22,7 @@
 			if(istype(A, D))
 				accept = 1
 		if(!accept)
-			user << "[A] doesn't fit into \the [src]."
+			to_chat(user, "[A] doesn't fit into \the [src].")
 			return
 		var/mob/L = A
 		user.visible_message("<span class='notice'>[user] scoops [L] into \the [src].</span>", "<span class='notice'>You scoop [L] into \the [src].</span>")
@@ -44,7 +44,7 @@
 		if(1)
 			for(var/obj/O in src)
 				O.loc = user.loc
-			user << "<span class='notice'>You take money out of \the [src].</span>"
+			to_chat(user, "<span class='notice'>You take money out of \the [src].</span>")
 			contains = 0
 			update_icon()
 			return

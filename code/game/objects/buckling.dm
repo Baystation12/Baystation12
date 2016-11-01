@@ -59,14 +59,14 @@
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
 	if(!ticker) //why do we need to check this?
-		user << "<span class='warning'>You can't buckle anyone in before the game starts.</span>"
+		to_chat(user, "<span class='warning'>You can't buckle anyone in before the game starts.</span>")
 		return 0
 	if(!user.Adjacent(M) || user.restrained() || user.lying || user.stat || istype(user, /mob/living/silicon/pai))
 		return 0
 	if(M == buckled_mob)
 		return 0
 	if(istype(M, /mob/living/carbon/slime))
-		user << "<span class='warning'>The [M] is too squishy to buckle in.</span>"
+		to_chat(user, "<span class='warning'>The [M] is too squishy to buckle in.</span>")
 		return 0
 
 	add_fingerprint(user)

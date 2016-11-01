@@ -113,14 +113,14 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		panel_open = !panel_open
-		user << "You [panel_open ? "open" : "close"] the maintenance hatch"
+		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance hatch")
 		return
 	if(istype(W, /obj/item/weapon/crowbar))
 		if(!panel_open)
-			user << "Open the maintenance panel first."
+			to_chat(user, "Open the maintenance panel first.")
 			return
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		user << "You disassemble \the [src]!"
+		to_chat(user, "You disassemble \the [src]!")
 
 		for(var/atom/movable/A in component_parts)
 			A.forceMove(src.loc)

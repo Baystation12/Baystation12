@@ -25,7 +25,7 @@
 			M.weakened = max(M.weakened, 3)
 			cell.use(power_use * CELLRATE)
 			if(prob(5))
-				M << "<span class='warning'>[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")].</span>"
+				to_chat(M, "<span class='warning'>[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")].</span>")
 
 		for(var/obj/item/I in T)
 			if(!suspension_field.contents.len)
@@ -82,7 +82,7 @@
 				if(anchored)
 					activate()
 				else
-					usr << "<span class='warning'>You are unable to activate [src] until it is properly secured on the ground.</span>"
+					to_chat(usr, "<span class='warning'>You are unable to activate [src] until it is properly secured on the ground.</span>")
 		else
 			deactivate()
 	else if(href_list["insertcard"])
@@ -92,9 +92,9 @@
 			I.forceMove(src)
 			auth_card = I
 			if(attempt_unlock(I, usr))
-				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>"
+				to_chat(usr, "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>")
 			else
-				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>"
+				to_chat(usr, "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>")
 	else if(href_list["ejectcard"])
 		if(auth_card)
 			if(ishuman(usr))
@@ -123,7 +123,7 @@
 
 		icon_state = "suspension0"
 		cell = null
-		user << "<span class='info'>You remove the power cell</span>"
+		to_chat(user, "<span class='info'>You remove the power cell</span>")
 
 /obj/machinery/suspension_gen/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!locked && !suspension_field && default_deconstruction_screwdriver(user, W))
@@ -134,32 +134,32 @@
 				anchored = 0
 			else
 				anchored = 1
-			user << "<span class='info'>You wrench the stabilising legs [anchored ? "into place" : "up against the body"].</span>"
+			to_chat(user, "<span class='info'>You wrench the stabilising legs [anchored ? "into place" : "up against the body"].</span>")
 			if(anchored)
 				desc = "It is resting securely on four stubby legs."
 			else
 				desc = "It has stubby legs bolted up against it's body for stabilising."
 		else
-			user << "<span class='warning'>You are unable to secure [src] while it is active!</span>"
+			to_chat(user, "<span class='warning'>You are unable to secure [src] while it is active!</span>")
 	else if (istype(W, /obj/item/weapon/cell))
 		if(panel_open)
 			if(cell)
-				user << "<span class='warning'>There is a power cell already installed.</span>"
+				to_chat(user, "<span class='warning'>There is a power cell already installed.</span>")
 			else
 				user.drop_item()
 				W.forceMove(src)
 				cell = W
-				user << "<span class='info'>You insert the power cell.</span>"
+				to_chat(user, "<span class='info'>You insert the power cell.</span>")
 				icon_state = "suspension1"
 	else if(istype(W, /obj/item/weapon/card))
 		var/obj/item/weapon/card/I = W
 		if(!auth_card)
 			if(attempt_unlock(I, user))
-				user << "<span class='info'>You swipe [I], the console flashes \'<i>Access granted.</i>\'</span>"
+				to_chat(user, "<span class='info'>You swipe [I], the console flashes \'<i>Access granted.</i>\'</span>")
 			else
-				user << "<span class='warning'>You swipe [I], console flashes \'<i>Access denied.</i>\'</span>"
+				to_chat(user, "<span class='warning'>You swipe [I], console flashes \'<i>Access denied.</i>\'</span>")
 		else
-			user << "<span class='warning'>Remove [auth_card] first.</span>"
+			to_chat(user, "<span class='warning'>Remove [auth_card] first.</span>")
 
 /obj/machinery/suspension_gen/proc/attempt_unlock(var/obj/item/weapon/card/C, var/mob/user)
 	if(!panel_open)
@@ -207,7 +207,7 @@
 	var/turf/T = get_turf(suspension_field)
 
 	for(var/mob/living/M in T)
-		M << "<span class='info'>You no longer feel like floating.</span>"
+		to_chat(M, "<span class='info'>You no longer feel like floating.</span>")
 		M.weakened = min(M.weakened, 3)
 
 	src.visible_message("<span class='notice'>\icon[src] [src] deactivates with a gentle shudder.</span>")
@@ -225,7 +225,7 @@
 	set category = "Object"
 
 	if(anchored)
-		usr << "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>"
+		to_chat(usr, "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>")
 	else
 		set_dir(turn(dir, 90))
 
@@ -235,7 +235,7 @@
 	set category = "Object"
 
 	if(anchored)
-		usr << "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>"
+		to_chat(usr, "<span class='warning'>You cannot rotate [src], it has been firmly fixed to the floor.</span>")
 	else
 		set_dir(turn(dir, -90))
 

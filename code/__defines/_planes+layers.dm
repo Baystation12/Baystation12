@@ -71,6 +71,7 @@ What is the naming convention for planes or layers?
 #define ABOVE_PLATING_PLANE          -20
 
 	#define HOLOMAP_LAYER        1 // NOTE: ENSURE this is equal to the one at ABOVE_TURF_PLANE!
+	#define DECAL_PLATING_LAYER  2
 	#define DISPOSALS_PIPE_LAYER 3
 	#define LATTICE_LAYER        4
 	#define PIPE_LAYER           5
@@ -84,15 +85,15 @@ What is the naming convention for planes or layers?
 
 #define ABOVE_TURF_PLANE              -18 // For items which should appear above turfs but below other objects and hiding mobs, eg: wires & pipes
 
-	#define HOLOMAP_LAYER               1
+	#define HOLOMAP_LAYER               1 // NOTE: ENSURE this is equal to the one at ABOVE_PLATING_PLANE!
 	#define RUNE_LAYER                  2
 	#define DECAL_LAYER                 3
 	#define ABOVE_TILE_LAYER            4
 	#define EXPOSED_PIPE_LAYER          5
 	#define EXPOSED_WIRE_LAYER          6
 	#define EXPOSED_WIRE_TERMINAL_LAYER 7
-	#define MOUSETRAP_LAYER             8
-	#define BLOOD_LAYER                 9
+	#define BLOOD_LAYER                 8
+	#define MOUSETRAP_LAYER             9
 	#define PLANT_LAYER                 10
 	#define TURF_FIRE_LAYER             11
 
@@ -116,11 +117,15 @@ What is the naming convention for planes or layers?
 
 #define LYING_MOB_PLANE               -14 // other mobs that are lying down.
 
+	#define LYING_MOB_LAYER 0
+
 #define LYING_HUMAN_PLANE             -13 // humans that are lying down
+
+	#define LYING_HUMAN_LAYER 0
 
 #define ABOVE_OBJ_PLANE               -12 // for objects that are below humans when they are standing but above them when they are not. - eg, blankets.
 
-	#define ABOVE_OBJ_LAYER 0
+	#define BASE_ABOVE_OBJ_LAYER 0
 
 #define HUMAN_PLANE                   -11 // For Humans that are standing up.
 	// MOB_LAYER 4
@@ -190,6 +195,10 @@ What is the naming convention for planes or layers?
 
 /image
 	plane = FLOAT_PLANE			// this is defunct, lummox fixed this on recent compilers, but it will bug out if I remove it for coders not on the most recent compile.
+
+/image/proc/plating_decal_layerise()
+	plane = ABOVE_PLATING_PLANE
+	layer = DECAL_PLATING_LAYER
 
 /image/proc/turf_decal_layerise()
 	plane = ABOVE_TURF_PLANE

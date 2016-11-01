@@ -24,10 +24,10 @@
 			if(!O.completed && !O.check_completion())
 				result = 0
 		if(result && victory_text)
-			world << "<span class='danger'><font size = 3>[victory_text]</font></span>"
+			to_world("<span class='danger'><font size = 3>[victory_text]</font></span>")
 			if(victory_feedback_tag) feedback_set_details("round_end_result","[victory_feedback_tag]")
 		else if(loss_text)
-			world << "<span class='danger'><font size = 3>[loss_text]</font></span>"
+			to_world("<span class='danger'><font size = 3>[loss_text]</font></span>")
 			if(loss_feedback_tag) feedback_set_details("round_end_result","[loss_feedback_tag]")
 
 
@@ -46,7 +46,7 @@
 		if(antagonist && antagonist.is_antagonist(src.mind))
 			antagonist.create_objectives(src.mind,1)
 
-	src << "<b><font size=3>These objectives are completely voluntary. You are not required to complete them.</font></b>"
+	to_chat(src, "<b><font size=3>These objectives are completely voluntary. You are not required to complete them.</font></b>")
 	show_objectives(src.mind)
 
 /mob/living/proc/write_ambition()
@@ -57,8 +57,8 @@
 	if(!mind)
 		return
 	if(!is_special_character(mind))
-		src << "<span class='warning'>While you may perhaps have goals, this verb's meant to only be visible \
-		to antagonists.  Please make a bug report!</span>"
+		to_chat(src, "<span class='warning'>While you may perhaps have goals, this verb's meant to only be visible \
+		to antagonists.  Please make a bug report!</span>")
 		return
 	var/new_ambitions = input(src, "Write a short sentence of what your character hopes to accomplish \
 	today as an antagonist.  Remember that this is purely optional.  It will be shown at the end of the \
@@ -68,9 +68,9 @@
 	new_ambitions = sanitize(new_ambitions)
 	mind.ambitions = new_ambitions
 	if(new_ambitions)
-		src << "<span class='notice'>You've set your goal to be '[new_ambitions]'.</span>"
+		to_chat(src, "<span class='notice'>You've set your goal to be '[new_ambitions]'.</span>")
 	else
-		src << "<span class='notice'>You leave your ambitions behind.</span>"
+		to_chat(src, "<span class='notice'>You leave your ambitions behind.</span>")
 	log_and_message_admins("has set their ambitions to now be: [new_ambitions].")
 
 //some antagonist datums are not actually antagonists, so we might want to avoid

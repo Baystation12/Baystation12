@@ -7,7 +7,7 @@
 
 	if (src.client)
 		if (src.client.prefs.muted & MUTE_IC)
-			src << "\red You cannot whisper (muted)."
+			to_chat(src, "<span class='warning'>You cannot whisper (muted).</span>")
 			return
 
 
@@ -32,7 +32,7 @@
 /mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
 
 	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
 	var/message_range = 1

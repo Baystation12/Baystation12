@@ -17,7 +17,7 @@
 
 /obj/item/weapon/a_gift/New()
 	..()
-	if(w_class > 0 && w_class < BULKY_ITEM)
+	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
@@ -30,16 +30,16 @@
 /obj/effect/spresent/relaymove(mob/user as mob)
 	if (user.stat)
 		return
-	user << "<span class='warning'>You can't move.</span>"
+	to_chat(user, "<span class='warning'>You can't move.</span>")
 
 /obj/effect/spresent/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
 	if (!istype(W, /obj/item/weapon/wirecutters))
-		user << "<span class='warning'>I need wirecutters for that.</span>"
+		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
 		return
 
-	user << "<span class='notice'>You cut open the present.</span>"
+	to_chat(user, "<span class='notice'>You cut open the present.</span>")
 
 	for(var/mob/M in src) //Should only be one but whatever.
 		M.loc = src.loc
@@ -115,7 +115,7 @@
 	var/size = 3.0
 	var/obj/item/gift = null
 	item_state = "gift"
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 
 /obj/item/weapon/gift/New(newloc, obj/item/wrapped = null)
 	..(newloc)
@@ -139,7 +139,7 @@
 		user.put_in_active_hand(gift)
 		src.gift.add_fingerprint(user)
 	else
-		user << "<span class='warning'>The gift was empty!</span>"
+		to_chat(user, "<span class='warning'>The gift was empty!</span>")
 	qdel(src)
 	return
 
@@ -148,20 +148,21 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
-	var/amount = 2.5*base_storage_cost(BULKY_ITEM)
+	var/amount = 2.5*base_storage_cost(ITEM_SIZE_HUGE)
 
 /obj/item/weapon/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
-		user << "<span class='warning'>You MUST put the paper on a table!</span>"
-	if (W.w_class < BULKY_ITEM)
+		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
+	if (W.w_class < ITEM_SIZE_HUGE)
 		if ((istype(user.l_hand, /obj/item/weapon/wirecutters) || istype(user.r_hand, /obj/item/weapon/wirecutters)))
 			var/a_used = W.get_storage_cost()
-			if (a_used == DO_NOT_STORE)
-				user << "<span class='warning'>You can't wrap that!</span>" //no gift-wrapping lit welders
+			if (a_used == ITEM_SIZE_NO_CONTAINER)
+				to_chat(user, "<span class='warning'>You can't wrap that!</span>")//no gift-wrapping lit welders
+
 				return
 			if (src.amount < a_used)
-				user << "<span class='warning'>You need more paper!</span>"
+				to_chat(user, "<span class='warning'>You need more paper!</span>")
 				return
 			else
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/weapon/gift)) //No gift wrapping gifts!
@@ -179,15 +180,15 @@
 				qdel(src)
 				return
 		else
-			user << "<span class='warning'>You need scissors!</span>"
+			to_chat(user, "<span class='warning'>You need scissors!</span>")
 	else
-		user << "<span class='warning'>The object is FAR too large!</span>"
+		to_chat(user, "<span class='warning'>The object is FAR too large!</span>")
 	return
 
 
 /obj/item/weapon/wrapping_paper/examine(mob/user)
 	if(..(user, 1))
-		user << text("There is about [] square units of paper left!", src.amount)
+		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)
 	if (!istype(target, /mob/living/carbon/human)) return
@@ -206,6 +207,6 @@
 			admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
 
 		else
-			user << "<span class='warning'>You need more paper.</span>"
+			to_chat(user, "<span class='warning'>You need more paper.</span>")
 	else
-		user << "They are moving around too much. A straightjacket would help."
+		to_chat(user, "They are moving around too much. A straightjacket would help.")

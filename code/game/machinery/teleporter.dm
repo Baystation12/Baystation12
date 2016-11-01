@@ -11,7 +11,7 @@
 						 //Setting this to 1 will set src.locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
 
 /obj/machinery/computer/teleporter/New()
-	src.id = "[rand(1000, 9999)]"
+	src.id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 	..()
 	underlays.Cut()
 	underlays += image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires")
@@ -51,8 +51,8 @@
 
 
 		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
-			usr << "You insert the coordinates into the machine."
-			usr << "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the station at all times."
+			to_chat(usr, "You insert the coordinates into the machine.")
+			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the station at all times.")
 			user.drop_item()
 			qdel(I)
 
@@ -222,7 +222,7 @@
 	if (istype(M, /mob/living))
 		var/mob/living/MM = M
 		if(MM.check_contents_for(/obj/item/weapon/disk/nuclear))
-			MM << "<span class='warning'>Something you are carrying seems to be unable to pass through the portal. Better drop it if you want to go through.</span>"
+			to_chat(MM, "<span class='warning'>Something you are carrying seems to be unable to pass through the portal. Better drop it if you want to go through.</span>")
 			return
 	var/disky = 0
 	for (var/atom/O in M.contents) //I'm pretty sure this accounts for the maximum amount of container in container stacking. --NeoFite
@@ -249,7 +249,7 @@
 	if (istype(M, /mob/living))
 		var/mob/living/MM = M
 		if(MM.check_contents_for(/obj/item/weapon/storage/backpack/holding))
-			MM << "<span class='warning'>The Bluespace interface on your Bag of Holding interferes with the teleport!</span>"
+			to_chat(MM, "<span class='warning'>The Bluespace interface on your Bag of Holding interferes with the teleport!</span>")
 			precision = rand(1,100)
 	if (istype(M, /obj/item/weapon/storage/backpack/holding))
 		precision = rand(1,100)

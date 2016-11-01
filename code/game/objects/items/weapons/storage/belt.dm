@@ -5,7 +5,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	storage_slots = 7
-	max_w_class = 3
+	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/belt.dmi')
@@ -16,7 +16,7 @@
 	set category = "Object"
 
 	if(show_above_suit == -1)
-		usr << "<span class='notice'>\The [src] cannot be worn above your suit!</span>"
+		to_chat(usr, "<span class='notice'>\The [src] cannot be worn above your suit!</span>")
 		return
 	show_above_suit = !show_above_suit
 	update_icon()

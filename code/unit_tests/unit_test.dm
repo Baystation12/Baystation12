@@ -89,6 +89,17 @@ datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
 
+/datum/unit_test/proc/get_named_instance(var/instance_type, var/instance_loc, var/instance_name)
+	var/atom/movable/am = new instance_type(instance_loc)
+	am.name = "[instance_name ? instance_name : name] ([name])"
+	if(ismob(am))
+		var/mob/M = am
+		M.real_name = name
+	return am
+
+datum/unit_test/proc/get_standard_turf()
+	return locate(20,20,1)
+
 
 proc/load_unit_test_changes()
 /*
@@ -101,7 +112,8 @@ proc/load_unit_test_changes()
 
 
 
-proc/initialize_unit_tests()
+/proc/initialize_unit_tests()
+	set waitfor = 0
 	#ifndef UNIT_TEST_COLOURED
 	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
 		ascii_esc = ""
@@ -143,6 +155,7 @@ proc/initialize_unit_tests()
 
 	var/list/test_datums = get_test_datums()
 	run_unit_tests(test_datums)
+	log_unit_test("Caught [total_runtimes] Runtime\s.")
 	del(world)
 
 /proc/run_unit_tests(var/list/test_datums, var/skip_disabled_tests = TRUE)

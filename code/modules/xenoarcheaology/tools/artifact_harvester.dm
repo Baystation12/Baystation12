@@ -23,13 +23,13 @@
 /obj/machinery/artifact_harvester/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I,/obj/item/weapon/anobattery))
 		if(!inserted_battery)
-			user << "\blue You insert [I] into [src]."
+			to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 			user.drop_item()
 			I.loc = src
 			src.inserted_battery = I
 			updateDialog()
 		else
-			user << "\red There is already a battery in [src]."
+			to_chat(user, "<span class='warning'>There is already a battery in [src].</span>")
 	else
 		return..()
 

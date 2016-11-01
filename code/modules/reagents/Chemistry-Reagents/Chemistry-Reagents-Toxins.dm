@@ -51,20 +51,36 @@
 	color = "#9D14DB"
 	strength = 30
 	touch_met = 5
+	var/fire_mult = 5
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
-		L.adjust_fire_stacks(amount / 5)
+		L.adjust_fire_stacks(amount / fire_mult)
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
-	if(prob(50))
+	if(prob(10 * fire_mult))
 		M.pl_effects()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
 	T.assume_gas("phoron", volume, T20C)
+	remove_self(volume)
+
+// Produced during deuterium synthesis. Super poisonous, SUPER flammable (doesn't need oxygen to burn).
+/datum/reagent/toxin/phoron/oxygen
+	name = "Oxyphoron"
+	id = "oxyphoron"
+	description = "An exceptionally flammable molecule formed from deuterium synthesis."
+	strength = 80
+	fire_mult = 30
+
+/datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
+	if(!istype(T))
+		return
+	T.assume_gas("oxygen", ceil(volume/2), T20C)
+	T.assume_gas("phoron", ceil(volume/2), T20C)
 	remove_self(volume)
 
 /datum/reagent/toxin/cyanide //Fast and Lethal
@@ -286,7 +302,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(prob(10))
-		M << "<span class='danger'>Your insides are burning!</span>"
+		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
 		M.adjustToxLoss(rand(100, 300) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
@@ -518,7 +534,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name != "Slime")
-			M << "<span class='danger'>Your flesh rapidly mutates!</span>"
+			to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
 			H.set_species("Slime")
 
 /datum/reagent/aslimetoxin
@@ -532,7 +548,7 @@
 /datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
 	if(M.transforming)
 		return
-	M << "<span class='danger'>Your flesh rapidly mutates!</span>"
+	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
 	M.transforming = 1
 	M.canmove = 0
 	M.icon = null

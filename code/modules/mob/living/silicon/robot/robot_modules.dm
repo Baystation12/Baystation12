@@ -16,7 +16,7 @@ var/global/list/robot_modules = list(
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"
-	w_class = 100.0
+	w_class = ITEM_SIZE_NO_CONTAINER
 	item_state = "electronic"
 	flags = CONDUCT
 	var/hide_on_manifest = 0
@@ -595,7 +595,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
-	src.emag = new /obj/item/weapon/hand_tele(src)
+	src.emag = new /obj/prefab/hand_teleporter(src)
 
 	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
 	synths += nanite

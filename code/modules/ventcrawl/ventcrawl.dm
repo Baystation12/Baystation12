@@ -128,7 +128,6 @@ var/list/ventcrawl_machinery = list(
 						to_chat(src, "<span class='warning'>You feel a hot wash coming from the vent.</span>")
 					if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
 						to_chat(src, "<span class='danger'>You feel a searing heat coming from the vent!</span>")
-
 				switch(vent_found.air_contents.return_pressure())
 					if(0 to HAZARD_LOW_PRESSURE)
 						to_chat(src, "<span class='danger'>You feel a rushing draw pulling you into the vent!</span>")
@@ -138,7 +137,6 @@ var/list/ventcrawl_machinery = list(
 						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
 					if(HAZARD_HIGH_PRESSURE to INFINITY)
 						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
-
 			if(!do_after(src, 45, vent_found, 1, 1))
 				return
 			if(!can_ventcrawl())
@@ -151,10 +149,8 @@ var/list/ventcrawl_machinery = list(
 
 		else
 			to_chat(src, "This vent is not connected to anything.")
-
 	else
 		to_chat(src, "You must be standing on or beside an air vent to enter it.")
-
 /mob/living/proc/add_ventcrawl(obj/machinery/atmospherics/starting_machine)
 	is_ventcrawling = 1
 	//candrop = 0

@@ -205,7 +205,8 @@ var/global/list/string_slot_flags = list(
 			var/list/L = chemical_reactions_list[reaction]
 			for(var/t in L)
 				. += "    has: [t]\n"
-	world << .
+	log_debug(.)
+
 */
 
 //*** params cache

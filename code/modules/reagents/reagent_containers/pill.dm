@@ -9,7 +9,7 @@
 	item_state = "pill"
 	randpixel = 7
 	possible_transfer_amounts = null
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 60
 
@@ -25,7 +25,7 @@
 			if(!M.can_eat(src))
 				return
 
-			M << "<span class='notice'>You swallow \the [src].</span>"
+			to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
 				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
@@ -61,9 +61,9 @@
 
 		if(target.is_open_container() && target.reagents)
 			if(!target.reagents.total_volume)
-				user << "<span class='notice'>[target] is empty. Can't dissolve \the [src].</span>"
+				to_chat(user, "<span class='notice'>[target] is empty. Can't dissolve \the [src].</span>")
 				return
-			user << "<span class='notice'>You dissolve \the [src] in [target].</span>"
+			to_chat(user, "<span class='notice'>You dissolve \the [src] in [target].</span>")
 
 			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 			reagents.trans_to(target, reagents.total_volume)
@@ -142,24 +142,6 @@
 	New()
 		..()
 		reagents.add_reagent("tramadol", 15)
-
-
-/obj/item/weapon/reagent_containers/pill/methylphenidate
-	name = "Methylphenidate pill"
-	desc = "Improves the ability to concentrate."
-	icon_state = "pill8"
-	New()
-		..()
-		reagents.add_reagent("methylphenidate", 15)
-
-/obj/item/weapon/reagent_containers/pill/citalopram
-	name = "Citalopram pill"
-	desc = "Mild anti-depressant."
-	icon_state = "pill8"
-	New()
-		..()
-		reagents.add_reagent("citalopram", 15)
-
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline
 	name = "Inaprovaline pill"
@@ -251,3 +233,31 @@
 	New()
 		..()
 		reagents.add_reagent("lipozine", 2)
+
+//Baycode specific Psychiatry pills.
+/obj/item/weapon/reagent_containers/pill/methylphenidate
+	name = "Methylphenidate pill"
+	desc = "Improves the ability to concentrate."
+	icon_state = "pill8"
+
+/obj/item/weapon/reagent_containers/pill/methylphenidate/New()
+		..()
+		reagents.add_reagent("methylphenidate", 15)
+
+/obj/item/weapon/reagent_containers/pill/citalopram
+	name = "Citalopram pill"
+	desc = "Mild anti-depressant."
+	icon_state = "pill8"
+
+/obj/item/weapon/reagent_containers/pill/citalopram/New()
+		..()
+		reagents.add_reagent("citalopram", 15)
+
+/obj/item/weapon/reagent_containers/pill/paroxetine
+	name = "Paroxetine pill"
+	desc = "Before you swallow a bullet: try swallowing this!"
+	icon_state = "pill20"
+
+/obj/item/weapon/reagent_containers/pill/paroxetine/New()
+		..()
+		reagents.add_reagent("paroxetine", 10)

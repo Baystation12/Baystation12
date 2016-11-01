@@ -1,0 +1,457 @@
+// temperature of the core of the sun
+#define FUSION_HEAT_CAP 1.57e7
+#define FUSION_ENERGY_PER_K 50
+
+/obj/effect/fusion_em_field
+	name = "electromagnetic field"
+	desc = "A coruscating, barely visible field of energy. It is shaped like a slightly flattened torus."
+	icon = 'icons/obj/machines/power/fusion.dmi'
+	icon_state = "emfield_s1"
+	alpha = 50
+	layer = 4
+	light_color = COLOR_BLUE
+
+	var/size = 1
+	var/energy = 0
+	var/plasma_temperature = 0
+	var/radiation = 0
+	var/field_strength = 0.01
+	var/tick_instability = 0
+	var/percent_unstable = 0
+
+	var/obj/machinery/power/fusion_core/owned_core
+	var/list/dormant_reactant_quantities = list()
+	var/list/particle_catchers = list()
+
+	var/light_min_range = 2
+	var/light_min_power = 3
+	var/light_max_range = 10
+	var/light_max_power = 10
+
+	var/last_range
+	var/last_power
+
+/obj/effect/fusion_em_field/New(loc, var/obj/machinery/power/fusion_core/new_owned_core)
+	..()
+
+	set_light(light_min_range,light_min_power)
+	last_range = light_min_range
+	last_power = light_min_power
+
+	owned_core = new_owned_core
+	if(!owned_core)
+		qdel(src)
+
+	//create the gimmicky things to handle field collisions
+	var/obj/effect/fusion_particle_catcher/catcher
+
+	catcher = new (locate(src.x,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(1)
+	particle_catchers.Add(catcher)
+
+	catcher = new (locate(src.x-1,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(3)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x+1,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(3)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x,src.y+1,src.z))
+	catcher.parent = src
+	catcher.SetSize(3)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x,src.y-1,src.z))
+	catcher.parent = src
+	catcher.SetSize(3)
+	particle_catchers.Add(catcher)
+
+	catcher = new (locate(src.x-2,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(5)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x+2,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(5)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x,src.y+2,src.z))
+	catcher.parent = src
+	catcher.SetSize(5)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x,src.y-2,src.z))
+	catcher.parent = src
+	catcher.SetSize(5)
+	particle_catchers.Add(catcher)
+
+	catcher = new (locate(src.x-3,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(7)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x+3,src.y,src.z))
+	catcher.parent = src
+	catcher.SetSize(7)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x,src.y+3,src.z))
+	catcher.parent = src
+	catcher.SetSize(7)
+	particle_catchers.Add(catcher)
+	catcher = new (locate(src.x,src.y-3,src.z))
+	catcher.parent = src
+	catcher.SetSize(7)
+	particle_catchers.Add(catcher)
+
+	processing_objects.Add(src)
+
+/obj/effect/fusion_em_field/process()
+	//make sure the field generator is still intact
+	if(!owned_core)
+		qdel(src)
+
+	//let the particles inside the field react
+	React()
+
+	// Dump power to our powernet.
+	owned_core.add_avail(FUSION_ENERGY_PER_K * plasma_temperature)
+
+	// Energy decay.
+	if(plasma_temperature >= 1)
+		var/lost = plasma_temperature*0.01
+		radiation += lost
+		plasma_temperature -= lost
+
+	//handle some reactants formatting
+	for(var/reactant in dormant_reactant_quantities)
+		var/amount = dormant_reactant_quantities[reactant]
+		if(amount < 1)
+			dormant_reactant_quantities.Remove(reactant)
+		else if(amount >= 1000000)
+			var/radiate = rand(3 * amount / 4, amount / 4)
+			dormant_reactant_quantities[reactant] -= radiate
+			radiation += radiate
+
+	var/use_range
+	var/use_power
+	if(plasma_temperature <= 6000)
+		use_range = light_min_range
+		use_power = light_min_power
+	else if(plasma_temperature >= 25000)
+		use_range = light_max_range
+		use_power = light_max_power
+	else
+		var/temp_mod = ((plasma_temperature-5000)/20000)
+		use_range = light_min_range + ceil((light_max_range-light_min_range)*temp_mod)
+		use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
+
+	if(last_range != use_range || last_power != use_power)
+		set_light(use_range,use_power)
+		last_range = use_range
+		last_power = use_power
+
+	check_instability()
+	Radiate()
+	return 1
+
+/obj/effect/fusion_em_field/proc/check_instability()
+	if(tick_instability > 0)
+		percent_unstable += (tick_instability*size)/1000000
+		tick_instability = 0
+	else
+		if(percent_unstable < 0)
+			percent_unstable = 0
+		else
+			if(percent_unstable > 100)
+				percent_unstable = 100
+			if(percent_unstable > 0)
+				percent_unstable = max(0, percent_unstable-rand(0.01,0.03))
+
+	if(percent_unstable >= 1)
+		owned_core.Shutdown(force_rupture=1)
+	else
+		if(percent_unstable > 0.5 && prob(percent_unstable*100))
+			if(plasma_temperature < 2000)
+				visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
+			else
+				var/flare
+				var/fuel_loss
+				var/rupture
+				if(percent_unstable < 0.7)
+					visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
+					fuel_loss = prob(5)
+				else if(percent_unstable < 0.9)
+					visible_message("<span class='danger'>\The [src] undulates violently, shedding plumes of plasma!</span>")
+					flare = prob(50)
+					fuel_loss = prob(20)
+					rupture = prob(5)
+				else
+					visible_message("<span class='danger'>\The [src] is wracked by a series of horrendous distortions, buckling and twisting like a living thing!</span>")
+					flare = 1
+					fuel_loss = prob(50)
+					rupture = prob(25)
+
+				if(rupture)
+					owned_core.Shutdown(force_rupture=1)
+				else
+					var/lost_plasma = (plasma_temperature*percent_unstable)
+					radiation += lost_plasma
+					plasma_temperature -= lost_plasma
+
+					if(flare)
+						var/turf/T = get_turf(owned_core)
+						var/datum/gas_mixture/GM = T.return_air()
+						GM.adjust_gas("oxygen", (size*50)*percent_unstable, 0)
+						GM.adjust_gas("phoron", (size*50)*percent_unstable, 0)
+						radiation += plasma_temperature/2
+
+					if(fuel_loss)
+						for(var/particle in dormant_reactant_quantities)
+							var/lost_fuel = dormant_reactant_quantities[particle]*percent_unstable
+							radiation += lost_fuel
+							dormant_reactant_quantities[particle] -= lost_fuel
+							if(dormant_reactant_quantities[particle] <= 0)
+								dormant_reactant_quantities.Remove(particle)
+					Radiate()
+	return
+
+/obj/effect/fusion_em_field/proc/Rupture()
+	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
+	set_light(15, 15, "#CCCCFF")
+	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
+	sleep(5)
+	RadiateAll()
+	explosion(get_turf(owned_core),-1,-1,8,10) // Blow out all the windows.
+	return
+
+/obj/effect/fusion_em_field/proc/ChangeFieldStrength(var/new_strength)
+	var/calc_size = 1
+	if(new_strength <= 50)
+		calc_size = 1
+	else if(new_strength <= 200)
+		calc_size = 3
+	else if(new_strength <= 500)
+		calc_size = 5
+	else
+		calc_size = 7
+	field_strength = new_strength
+	change_size(calc_size)
+
+/obj/effect/fusion_em_field/proc/AddEnergy(var/a_energy, var/a_plasma_temperature)
+	energy += a_energy
+	plasma_temperature += a_plasma_temperature
+	if(a_energy && percent_unstable > 0)
+		percent_unstable -= a_energy/1000
+		if(percent_unstable < 0)
+			percent_unstable = 0
+	while(energy >= 100)
+		energy -= 100
+		plasma_temperature += 1
+
+/obj/effect/fusion_em_field/proc/AddParticles(var/name, var/quantity = 1)
+	if(name in dormant_reactant_quantities)
+		dormant_reactant_quantities[name] += quantity
+	else if(name != "proton" && name != "electron" && name != "neutron")
+		dormant_reactant_quantities.Add(name)
+		dormant_reactant_quantities[name] = quantity
+
+/obj/effect/fusion_em_field/proc/RadiateAll(var/ratio_lost = 1)
+
+	// Create our plasma field and dump it into our environment.
+	var/turf/T = get_turf(src)
+	if(istype(T))
+		var/datum/gas_mixture/plasma = new
+		plasma.adjust_gas("oxygen", (size*100), 0)
+		plasma.adjust_gas("phoron", (size*100), 0)
+		plasma.temperature = (plasma_temperature/2)
+		plasma.update_values()
+		T.assume_air(plasma)
+		T.hotspot_expose(plasma_temperature)
+		plasma = null
+
+	// Radiate all our unspent fuel and energy.
+	for(var/particle in dormant_reactant_quantities)
+		radiation += dormant_reactant_quantities[particle]
+		dormant_reactant_quantities.Remove(particle)
+	radiation += plasma_temperature/2
+	plasma_temperature = 0
+
+	Radiate()
+
+/obj/effect/fusion_em_field/proc/Radiate()
+	if(istype(loc, /turf))
+		var/empsev = max(1, min(3, ceil(size/2)))
+		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
+			if(AM == src || AM == owned_core)
+				continue
+			AM.emp_act(empsev)
+		for(var/mob/living/L in range(max(1,ceil(radiation/5)),loc))
+			L.apply_effect(radiation,IRRADIATE, blocked = L.getarmor(null, "rad"))
+	radiation = 0
+
+/obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
+	var/changed = 0
+	switch(newsize)
+		if(1)
+			size = 1
+			icon = 'icons/obj/machines/power/fusion.dmi'
+			icon_state = "emfield_s1"
+			pixel_x = 0
+			pixel_y = 0
+			//
+			changed = 1
+		if(3)
+			size = 3
+			icon = 'icons/effects/96x96.dmi'
+			icon_state = "emfield_s3"
+			pixel_x = -32 * PIXEL_MULTIPLIER
+			pixel_y = -32 * PIXEL_MULTIPLIER
+			//
+			changed = 3
+		if(5)
+			size = 5
+			icon = 'icons/effects/160x160.dmi'
+			icon_state = "emfield_s5"
+			pixel_x = -64 * PIXEL_MULTIPLIER
+			pixel_y = -64 * PIXEL_MULTIPLIER
+			//
+			changed = 5
+		if(7)
+			size = 7
+			icon = 'icons/effects/224x224.dmi'
+			icon_state = "emfield_s7"
+			pixel_x = -96 * PIXEL_MULTIPLIER
+			pixel_y = -96 * PIXEL_MULTIPLIER
+			//
+			changed = 7
+	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
+		catcher.UpdateSize()
+	return changed
+
+//the !!fun!! part
+/obj/effect/fusion_em_field/proc/React()
+	//loop through the reactants in random order
+	var/list/react_pool = dormant_reactant_quantities.Copy()
+
+	//cant have any reactions if there aren't any reactants present
+	if(react_pool.len)
+		//determine a random amount to actually react this cycle, and remove it from the standard pool
+		//this is a hack, and quite nonrealistic :(
+		for(var/reactant in react_pool)
+			react_pool[reactant] = rand(Floor(react_pool[reactant]/2),react_pool[reactant])
+			dormant_reactant_quantities[reactant] -= react_pool[reactant]
+			if(!react_pool[reactant])
+				react_pool -= reactant
+
+		//loop through all the reacting reagents, picking out random reactions for them
+		var/list/produced_reactants = new/list
+		var/list/p_react_pool = react_pool.Copy()
+		while(p_react_pool.len)
+			//pick one of the unprocessed reacting reagents randomly
+			var/cur_p_react = pick(p_react_pool)
+			p_react_pool.Remove(cur_p_react)
+
+			//grab all the possible reactants to have a reaction with
+			var/list/possible_s_reacts = react_pool.Copy()
+			//if there is only one of a particular reactant, then it can not react with itself so remove it
+			possible_s_reacts[cur_p_react] -= 1
+			if(possible_s_reacts[cur_p_react] < 1)
+				possible_s_reacts.Remove(cur_p_react)
+
+			//loop through and work out all the possible reactions
+			var/list/possible_reactions = new/list
+			for(var/cur_s_react in possible_s_reacts)
+				if(possible_s_reacts[cur_s_react] < 1)
+					continue
+				var/decl/fusion_reaction/cur_reaction = get_fusion_reaction(cur_p_react, cur_s_react)
+				if(cur_reaction && plasma_temperature >= cur_reaction.minimum_energy_level)
+					possible_reactions.Add(cur_reaction)
+
+			//if there are no possible reactions here, abandon this primary reactant and move on
+			if(!possible_reactions.len)
+				continue
+
+			//split up the reacting atoms between the possible reactions
+			while(possible_reactions.len)
+				var/decl/fusion_reaction/cur_reaction = pick(possible_reactions)
+				possible_reactions.Remove(cur_reaction)
+
+				//set the randmax to be the lower of the two involved reactants
+				var/max_num_reactants = react_pool[cur_reaction.p_react] > react_pool[cur_reaction.s_react] ? \
+				react_pool[cur_reaction.s_react] : react_pool[cur_reaction.p_react]
+				if(max_num_reactants < 1)
+					continue
+
+				//make sure we have enough energy
+				if(plasma_temperature < cur_reaction.minimum_reaction_temperature)
+					continue
+
+				if(plasma_temperature < max_num_reactants * cur_reaction.energy_consumption)
+					max_num_reactants = round(plasma_temperature / cur_reaction.energy_consumption)
+					if(max_num_reactants < 1)
+						continue
+
+				//randomly determined amount to react
+				var/amount_reacting = rand(1, max_num_reactants)
+
+				//removing the reacting substances from the list of substances that are primed to react this cycle
+				//if there aren't enough of that substance (there should be) then modify the reactant amounts accordingly
+				if( react_pool[cur_reaction.p_react] - amount_reacting >= 0 )
+					react_pool[cur_reaction.p_react] -= amount_reacting
+				else
+					amount_reacting = react_pool[cur_reaction.p_react]
+					react_pool[cur_reaction.p_react] = 0
+				//same again for secondary reactant
+				if(react_pool[cur_reaction.s_react] - amount_reacting >= 0 )
+					react_pool[cur_reaction.s_react] -= amount_reacting
+				else
+					react_pool[cur_reaction.p_react] += amount_reacting - react_pool[cur_reaction.p_react]
+					amount_reacting = react_pool[cur_reaction.s_react]
+					react_pool[cur_reaction.s_react] = 0
+
+				plasma_temperature -= max_num_reactants * cur_reaction.energy_consumption  // Remove the consumed energy.
+				plasma_temperature += max_num_reactants * cur_reaction.energy_production   // Add any produced energy.
+				radiation +=   max_num_reactants * cur_reaction.radiation           // Add any produced radiation.
+				tick_instability += max_num_reactants * cur_reaction.instability
+
+				// Create the reaction products.
+				for(var/reactant in cur_reaction.products)
+					var/success = 0
+					for(var/check_reactant in produced_reactants)
+						if(check_reactant == reactant)
+							produced_reactants[reactant] += cur_reaction.products[reactant] * amount_reacting
+							success = 1
+							break
+					if(!success)
+						produced_reactants[reactant] = cur_reaction.products[reactant] * amount_reacting
+
+				// Handle anything special. If this proc returns true, abort the current reaction.
+				if(cur_reaction.handle_reaction_special(src))
+					return
+
+				// This reaction is done, and can't be repeated this sub-cycle.
+				possible_reactions.Remove(cur_reaction.s_react)
+
+		// Loop through the newly produced reactants and add them to the pool.
+		for(var/reactant in produced_reactants)
+			AddParticles(reactant, produced_reactants[reactant])
+
+		// Check whether there are reactants left, and add them back to the pool.
+		for(var/reactant in react_pool)
+			AddParticles(reactant, react_pool[reactant])
+
+/obj/effect/fusion_em_field/Destroy()
+	set_light(0)
+	RadiateAll()
+	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
+		qdel(catcher)
+	if(owned_core)
+		owned_core.owned_field = null
+		owned_core = null
+	processing_objects.Remove(src)
+	. = ..()
+
+/obj/effect/fusion_em_field/bullet_act(var/obj/item/projectile/Proj)
+	AddEnergy(Proj.damage * 20, 0, 1)
+	update_icon()
+	return 0
+
+#undef FUSION_HEAT_CAP

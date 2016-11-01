@@ -7,6 +7,8 @@
 
 //obtain a weak reference to a datum
 /proc/weakref(datum/D)
+	if(!istype(D))
+		return
 	if(D.gcDestroyed)
 		return
 	if(!D.weakref)

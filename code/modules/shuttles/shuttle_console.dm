@@ -14,7 +14,7 @@
 		return
 	//src.add_fingerprint(user)	//shouldn't need fingerprints just for looking at it.
 	if(!allowed(user))
-		user << "\red Access Denied."
+		to_chat(user, "<span class='warning'>Access Denied.</span>")
 		return 1
 
 	ui_interact(user)
@@ -89,7 +89,7 @@
 		req_access = list()
 		req_one_access = list()
 		hacked = 1
-		user << "You short out the console's ID checking system. It's now available to everyone!"
+		to_chat(user, "You short out the console's ID checking system. It's now available to everyone!")
 		return 1
 
 /obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)

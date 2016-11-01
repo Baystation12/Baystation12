@@ -112,7 +112,7 @@
 
 	if(charges >= 0.1)
 		if(prob(5))
-			src.visible_message("\red \icon[src] [src]'s eyes glow ruby red for a moment!")
+			src.visible_message("<span class='warning'>\icon[src] [src]'s eyes glow ruby red for a moment!</span>")
 			charges -= 0.1
 
 	//check on our shadow wights
@@ -142,7 +142,7 @@
 
 		var/target = pick(M.organs_by_name)
 		M.apply_damage(rand(5, 10), BRUTE, target)
-		M << "\red The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out."
+		to_chat(M, "<span class='warning'>The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out.</span>")
 		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
 		B.target_turf = pick(range(1, src))
 		B.blood_DNA = list()
@@ -221,4 +221,4 @@
 		processing_objects.Remove(src)
 
 /obj/effect/shadow_wight/Bump(var/atom/obstacle)
-	obstacle << "<span class='warning'>You feel a chill run down your spine!</span>"
+	to_chat(obstacle, "<span class='warning'>You feel a chill run down your spine!</span>")

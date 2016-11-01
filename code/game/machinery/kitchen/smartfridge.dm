@@ -206,7 +206,7 @@
 		return
 
 	if(stat & NOPOWER)
-		user << "<span class='notice'>\The [src] is unpowered and useless.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
 		return
 
 	if(accept_check(O))
@@ -226,17 +226,17 @@
 		if(plants_loaded)
 			user.visible_message("<span class='notice'>\The [user] loads \the [src] with \the [P].</span>", "<span class='notice'>You load \the [src] with \the [P].</span>")
 			if(P.contents.len > 0)
-				user << "<span class='notice'>Some items were refused.</span>"
+				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 
 	else
-		user << "<span class='notice'>\The [src] smartly refuses [O].</span>"
+		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
 	return 1
 
 /obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		emagged = 1
 		locked = -1
-		user << "You short out the product lock on [src]."
+		to_chat(user, "You short out the product lock on [src].")
 		return 1
 
 /obj/machinery/smartfridge/proc/stock_item(var/obj/item/O)
@@ -348,6 +348,6 @@
 	if(stat & (NOPOWER|BROKEN)) return 0
 	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
 		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
-			usr << "<span class='warning'>Access denied.</span>"
+			to_chat(usr, "<span class='warning'>Access denied.</span>")
 			return 0
 	return ..()

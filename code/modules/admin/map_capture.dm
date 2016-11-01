@@ -4,17 +4,17 @@
 	set desc = "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range (captures part of a map originating from bottom left corner)"
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_SERVER))
-		usr << "You are not allowed to use this command"
+		to_chat(usr, "You are not allowed to use this command")
 		return
 
 	if(isnull(tx) || isnull(ty) || isnull(tz) || isnull(range))
-		usr << "Capture Map Part, captures part of a map using camara like rendering."
-		usr << "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range"
-		usr << "Target coordinates specify bottom left corner of the capture, range defines render distance to opposite corner."
+		to_chat(usr, "Capture Map Part, captures part of a map using camara like rendering.")
+		to_chat(usr, "Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range")
+		to_chat(usr, "Target coordinates specify bottom left corner of the capture, range defines render distance to opposite corner.")
 		return
 
 	if(range > 32 || range <= 0)
-		usr << "Capturing range is incorrect, it must be within 1-32."
+		to_chat(usr, "Capturing range is incorrect, it must be within 1-32.")
 		return
 
 	if(locate(tx,ty,tz))
@@ -23,16 +23,16 @@
 			ligths = 1
 		var/cap = generate_image(tx ,ty ,tz ,range, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[tx]_y[ty]_z[tz]_r[range].png"
-		usr << "Saved capture in cache as [file_name]."
+		to_chat(usr, "Saved capture in cache as [file_name].")
 		usr << browse_rsc(cap, file_name)
 	else
-		usr << "Target coordinates are incorrect."
+		to_chat(usr, "Target coordinates are incorrect.")
 
 /datum/admins/proc/capture_map_capture_next(currentz, currentx, currenty, ligths)
 	if(locate(currentx, currenty, currentz))
 		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
-		usr << "Saved capture in cache as [file_name]."
+		to_chat(usr, "Saved capture in cache as [file_name].")
 		usr << browse_rsc(cap, file_name)
 		currentx = currentx + 32
 		spawn (1)
@@ -43,13 +43,13 @@
 		if(locate(currentx, currenty, currentz))
 			var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 			var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
-			usr << "Saved capture in cache as [file_name]."
+			to_chat(usr, "Saved capture in cache as [file_name].")
 			usr << browse_rsc(cap, file_name)
 			currentx = currentx + 32
 			spawn (1)
 				.(currentz, currentx, currenty, ligths)
 		else
-			usr << "End of map, capture is done."
+			to_chat(usr, "End of map, capture is done.")
 
 /datum/admins/proc/capture_map(tz as null|num)
 	set category = "Server"
@@ -57,17 +57,17 @@
 	set desc = "Usage: Capture-Map target_z_cord (captures map)"
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_SERVER))
-		usr << "You are not allowed to use this command"
+		to_chat(usr, "You are not allowed to use this command")
 		return
 
 	if(isnull(tz))
-		usr << "Map Part, map using camara like rendering."
-		usr << "Usage: Capture-Map target_z_cord"
-		usr << "Target Z coordinates define z level to capture."
+		to_chat(usr, "Map Part, map using camara like rendering.")
+		to_chat(usr, "Usage: Capture-Map target_z_cord")
+		to_chat(usr, "Target Z coordinates define z level to capture.")
 		return
 
 	if(!locate(1, 1, tz))
-		usr << "Target z-level is incorrect."
+		to_chat(usr, "Target z-level is incorrect.")
 		return
 
 	var/ligths = 0

@@ -58,7 +58,7 @@
 				var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
 				sleep(15*B.pages.len)
 			else
-				usr << "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>"
+				to_chat(usr, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
 				break
 
 			use_power(active_power_usage)
@@ -67,7 +67,7 @@
 		if(copyitem)
 			copyitem.loc = usr.loc
 			usr.put_in_hands(copyitem)
-			usr << "<span class='notice'>You take \the [copyitem] out of \the [src].</span>"
+			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
 			copyitem = null
 			updateUsrDialog()
 	else if(href_list["min"])
@@ -107,25 +107,25 @@
 			user.drop_item()
 			copyitem = O
 			O.loc = src
-			user << "<span class='notice'>You insert \the [O] into \the [src].</span>"
+			to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
 			flick(insert_anim, src)
 			updateUsrDialog()
 		else
-			user << "<span class='notice'>There is already something in \the [src].</span>"
+			to_chat(user, "<span class='notice'>There is already something in \the [src].</span>")
 	else if(istype(O, /obj/item/device/toner))
 		if(toner <= 10) //allow replacing when low toner is affecting the print darkness
 			user.drop_item()
-			user << "<span class='notice'>You insert the toner cartridge into \the [src].</span>"
+			to_chat(user, "<span class='notice'>You insert the toner cartridge into \the [src].</span>")
 			var/obj/item/device/toner/T = O
 			toner += T.toner_amount
 			qdel(O)
 			updateUsrDialog()
 		else
-			user << "<span class='notice'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>"
+			to_chat(user, "<span class='notice'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>")
 	else if(istype(O, /obj/item/weapon/wrench))
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		anchored = !anchored
-		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 	return
 
 /obj/machinery/photocopier/ex_act(severity)
@@ -186,18 +186,14 @@
 
 /obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy, var/need_toner=1)
 	var/obj/item/weapon/photo/p = photocopy.copy()
-	p.loc = src.loc
+	p.forceMove(get_turf(src))
 
-	var/icon/I = icon(photocopy.icon, photocopy.icon_state)
 	if(toner > 10)	//plenty of toner, go straight greyscale
-		I.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))		//I'm not sure how expensive this is, but given the many limitations of photocopying, it shouldn't be an issue.
-		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-		p.tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
+		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))//I'm not sure how expensive this is, but given the many limitations of photocopying, it shouldn't be an issue.
+		p.update_icon()
 	else			//not much toner left, lighten the photo
-		I.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
 		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
-		p.tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
-	p.icon = I
+		p.update_icon()
 	if(need_toner)
 		toner -= 5	//photos use a lot of ink!
 	if(toner < 0)

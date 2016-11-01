@@ -4,7 +4,7 @@
 	req_access = list(access_cent_specops)
 
 /obj/machinery/computer/shuttle_control/specops/attack_ai(user as mob)
-	user << "\red Access Denied."
+	to_chat(user, "<span class='warning'>Access Denied.</span>")
 	return 1
 
 //for shuttles that may use a different docking port at each location
@@ -64,14 +64,14 @@
 		var/obj/machinery/computer/C = user
 
 		if(world.time <= reset_time)
-			C.visible_message("\blue [boss_name] will not allow the Special Operations shuttle to launch yet.")
+			C.visible_message("<span class='notice'>[boss_name] will not allow the Special Operations shuttle to launch yet.</span>")
 			if (((world.time - reset_time)/10) > 60)
-				C.visible_message("\blue [-((world.time - reset_time)/10)/60] minutes remain!")
+				C.visible_message("<span class='notice'>[-((world.time - reset_time)/10)/60] minutes remain!</span>")
 			else
-				C.visible_message("\blue [-(world.time - reset_time)/10] seconds remain!")
+				C.visible_message("<span class='notice'>[-(world.time - reset_time)/10] seconds remain!</span>")
 			return
 
-		C.visible_message("\blue The Special Operations shuttle will depart in [(specops_countdown_time/10)] seconds.")
+		C.visible_message("<span class='notice'>The Special Operations shuttle will depart in [(specops_countdown_time/10)] seconds.</span>")
 
 	if (location)	//returning
 		radio_announce("THE SPECIAL OPERATIONS SHUTTLE IS PREPARING TO RETURN")
@@ -95,12 +95,12 @@
 		if (!location)	//just arrived home
 			for(var/turf/T in get_area_turfs(destination))
 				var/mob/M = locate(/mob) in T
-				M << "<span class='danger'>You have arrived at [boss_name]. Operation has ended!</span>"
+				to_chat(M, "<span class='danger'>You have arrived at [boss_name]. Operation has ended!</span>")
 		else	//just left for the station
 			launch_mauraders()
 			for(var/turf/T in get_area_turfs(destination))
 				var/mob/M = locate(/mob) in T
-				M << "<span class='danger'>You have arrived at [station_name]. Commence operation!</span>"
+				to_chat(M, "<span class='danger'>You have arrived at [station_name]. Commence operation!</span>")
 
 				var/obj/machinery/light/small/readylight/light = locate() in T
 				if(light) light.set_state(1)
@@ -113,8 +113,7 @@
 	radio_announce("ALERT: LAUNCH SEQUENCE ABORTED")
 	if (istype(in_use, /obj/machinery/computer))
 		var/obj/machinery/computer/C = in_use
-		C.visible_message("\red Launch sequence aborted.")
-
+		C.visible_message("<span class='warning'>Launch sequence aborted.</span>")
 	..()
 
 

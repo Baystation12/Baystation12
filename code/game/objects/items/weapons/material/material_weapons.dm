@@ -7,7 +7,7 @@
 	gender = NEUTER
 	throw_speed = 3
 	throw_range = 7
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	sharp = 0
 	edge = 0
 
@@ -45,7 +45,8 @@
 	force = round(force*force_divisor)
 	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
 	//spawn(1)
-	//	world << "[src] has force [force] and throwforce [throwforce] when made from default material [material.name]"
+//		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
+
 
 /obj/item/weapon/material/proc/set_material(var/new_material)
 	material = get_material_by_name(new_material)

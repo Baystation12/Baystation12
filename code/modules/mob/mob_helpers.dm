@@ -16,7 +16,7 @@
 	return round(log(2, mob_size_A/mob_size_B), 1)
 
 /mob/proc/can_wield_item(obj/item/W)
-	if(W.w_class >= LARGE_ITEM && issmall(src))
+	if(W.w_class >= ITEM_SIZE_LARGE && issmall(src))
 		return FALSE //M is too small to wield this
 	return TRUE
 
@@ -458,7 +458,7 @@ proc/is_blind(A)
 					else										// Everyone else (dead people who didn't ghost yet, etc.)
 						lname = name
 				lname = "<span class='name'>[lname]</span> "
-			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>"
+			to_chat(M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>")
 
 //Announces that a ghost has joined/left, mainly for use with wizards
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")

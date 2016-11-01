@@ -70,6 +70,7 @@ var/list/name_to_material
 	var/flags = 0                         // Various status modifiers.
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
+	var/is_fusion_fuel
 
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
@@ -94,6 +95,7 @@ var/list/name_to_material
 	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
 	var/explosion_resistance = 5 // Only used by walls currently.
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
+	var/luminescence
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
@@ -120,10 +122,10 @@ var/list/name_to_material
 // Placeholders for light tiles and rglass.
 /material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!rod_product)
-		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
+		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
 		return
 	if(used_stack.get_amount() < 1 || target_stack.get_amount() < 1)
-		user << "<span class='warning'>You need one rod and one sheet of [display_name] to make anything useful.</span>"
+		to_chat(user, "<span class='warning'>You need one rod and one sheet of [display_name] to make anything useful.</span>")
 		return
 	used_stack.use(1)
 	target_stack.use(1)
@@ -133,15 +135,15 @@ var/list/name_to_material
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
-		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
+		to_chat(user, "<span class='warning'>You cannot make anything out of \the [target_stack]</span>")
 		return
 	if(used_stack.get_amount() < 5 || target_stack.get_amount() < 1)
-		user << "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>"
+		to_chat(user, "<span class='warning'>You need five wires and one sheet of [display_name] to make anything useful.</span>")
 		return
 
 	used_stack.use(5)
 	target_stack.use(1)
-	user << "<span class='notice'>You attach wire to the [name].</span>"
+	to_chat(user, "<span class='notice'>You attach wire to the [name].</span>")
 	var/obj/item/product = new wire_product(get_turf(user))
 	if(!(user.l_hand && user.r_hand))
 		user.put_in_hands(product)
@@ -284,6 +286,15 @@ var/list/name_to_material
 	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
+	is_fusion_fuel = 1
+
+/material/phoron/supermatter
+	name = "supermatter"
+	icon_colour = "#FFFF00"
+	radioactivity = 20
+	stack_origin_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 6, TECH_PHORON = 4)
+	stack_type = null
+	luminescence = 3
 
 /*
 // Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
@@ -404,12 +415,12 @@ var/list/name_to_material
 		return 0
 
 	if(!user.IsAdvancedToolUser())
-		user << "<span class='warning'>This task is too complex for your clumsy hands.</span>"
+		to_chat(user, "<span class='warning'>This task is too complex for your clumsy hands.</span>")
 		return 1
 
 	var/turf/T = user.loc
 	if(!istype(T))
-		user << "<span class='warning'>You must be standing on open flooring to build a window.</span>"
+		to_chat(user, "<span class='warning'>You must be standing on open flooring to build a window.</span>")
 		return 1
 
 	var/title = "Sheet-[used_stack.name] ([used_stack.get_amount()] sheet\s left)"
@@ -442,12 +453,12 @@ var/list/name_to_material
 				failed_to_build = 1
 			if(!failed_to_build && choice == "Windoor")
 				if(!is_reinforced())
-					user << "<span class='warning'>This material is not reinforced enough to use for a door.</span>"
+					to_chat(user, "<span class='warning'>This material is not reinforced enough to use for a door.</span>")
 					return
 				if((locate(/obj/structure/windoor_assembly) in T.contents) || (locate(/obj/machinery/door/window) in T.contents))
 					failed_to_build = 1
 	if(failed_to_build)
-		user << "<span class='warning'>There is no room in this location.</span>"
+		to_chat(user, "<span class='warning'>There is no room in this location.</span>")
 		return 1
 
 	var/build_path = /obj/structure/windoor_assembly
@@ -458,7 +469,7 @@ var/list/name_to_material
 		build_path = created_window
 
 	if(used_stack.get_amount() < sheets_needed)
-		user << "<span class='warning'>You need at least [sheets_needed] sheets to build this.</span>"
+		to_chat(user, "<span class='warning'>You need at least [sheets_needed] sheets to build this.</span>")
 		return 1
 
 	// Build the structure and update sheet count etc.
@@ -549,12 +560,23 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	is_fusion_fuel = 1
+
+/material/deuterium
+	name = "deuterium"
+	stack_type = /obj/item/stack/material/deuterium
+	icon_colour = "#999999"
+	stack_origin_tech = list(TECH_MATERIAL = 3)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	is_fusion_fuel = 1
 
 /material/mhydrogen
 	name = "mhydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#E6C5DE"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
+	is_fusion_fuel = 1
 
 /material/platinum
 	name = "platinum"

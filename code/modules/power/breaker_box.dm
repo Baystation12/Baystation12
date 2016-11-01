@@ -32,26 +32,26 @@
 	set_state(1)
 
 /obj/machinery/power/breakerbox/examine(mob/user)
-	user << "Large machine with heavy duty switching circuits used for advanced grid control"
+	to_chat(user, "Large machine with heavy duty switching circuits used for advanced grid control")
 	if(on)
-		user << "\green It seems to be online."
+		to_chat(user, "<span class='good'>It seems to be online.</span>")
 	else
-		user << "<span class='warning'>It seems to be offline.</span>"
+		to_chat(user, "<span class='warning'>It seems to be offline.</span>")
 
 /obj/machinery/power/breakerbox/attack_ai(mob/user)
 	if(update_locked)
-		user << "<span class='warning'>System locked. Please try again later.</span>"
+		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
 		return
 
 	if(busy)
-		user << "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>"
+		to_chat(user, "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>")
 		return
 
 	busy = 1
-	user << "\green Updating power settings.."
+	to_chat(user, "<span class='good'>Updating power settings..</span>")
 	if(do_after(user, 50, src))
 		set_state(!on)
-		user << "\green Update Completed. New setting:[on ? "on": "off"]"
+		to_chat(user, "<span class='good'>Update Completed. New setting:[on ? "on": "off"]</span>")
 		update_locked = 1
 		spawn(600)
 			update_locked = 0
@@ -60,16 +60,16 @@
 
 /obj/machinery/power/breakerbox/attack_hand(mob/user)
 	if(update_locked)
-		user << "<span class='warning'>System locked. Please try again later.</span>"
+		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
 		return
 
 	if(busy)
-		user << "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>"
+		to_chat(user, "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>")
 		return
 
 	busy = 1
 	for(var/mob/O in viewers(user))
-		O.show_message(text("\red [user] started reprogramming [src]!"), 1)
+		O.show_message(text("<span class='warning'>\The [user] started reprogramming \the [src]!</span>"), 1)
 
 	if(do_after(user, 50,src))
 		set_state(!on)
@@ -86,7 +86,7 @@
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 		if(newtag)
 			RCon_tag = newtag
-			user << "<span class='notice'>You changed the RCON tag to: [newtag]</span>"
+			to_chat(user, "<span class='notice'>You changed the RCON tag to: [newtag]</span>")
 
 
 

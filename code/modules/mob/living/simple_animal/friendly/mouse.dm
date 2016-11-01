@@ -31,14 +31,14 @@
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
 
-	can_pull_size = TINY_ITEM
+	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
 
 /mob/living/simple_animal/mouse/Life()
 	..()
 	if(!stat && prob(speak_chance))
 		for(var/mob/M in view())
-			M << 'sound/effects/mousesqueek.ogg'
+			sound_to(M, 'sound/effects/mousesqueek.ogg')
 
 	if(!ckey && stat == CONSCIOUS && prob(0.5))
 		stat = UNCONSCIOUS
@@ -97,8 +97,8 @@
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
-			M << "\blue \icon[src] Squeek!"
-			M << 'sound/effects/mousesqueek.ogg'
+			to_chat(M, "<span class='warning'>\icon[src] Squeek!</span>")
+			sound_to(M, 'sound/effects/mousesqueek.ogg')
 	..()
 
 /*

@@ -75,7 +75,7 @@
 
 		H.mind.initial_account = M
 
-	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
+	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
@@ -117,3 +117,53 @@
 
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
+	
+/**
+ *  Check if members of the given branch are allowed in the job
+ *
+ *  This proc should only be used after the global branch list has been initialized. 
+ *
+ *  branch_name - String key for the branch to check
+ */
+/datum/job/proc/is_branch_allowed(var/branch_name)
+	if(!allowed_branches || !using_map || !(using_map.flags & MAP_HAS_BRANCH))
+		return 1
+	if(branch_name == "None")
+		return 0
+		
+	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
+	
+	if(!branch)
+		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
+		return 0
+		
+	if(is_type_in_list(branch, allowed_branches))
+		return 1
+	else
+		return 0
+		
+/**
+ *  Check if people with given rank are allowed in this job
+ *
+ *  This proc should only be used after the global branch list has been initialized. 
+ *
+ *  branch_name - String key for the branch to which the rank belongs
+ *  rank_name - String key for the rank itself
+ */
+/datum/job/proc/is_rank_allowed(var/branch_name, var/rank_name)
+	if(!allowed_ranks || !using_map || !(using_map.flags & MAP_HAS_RANK))
+		return 1
+	if(branch_name == "None" || rank_name == "None")
+		return 0
+
+	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
+
+	if(!rank)
+		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
+		return 0
+		
+	if(is_type_in_list(rank, allowed_ranks))
+		return 1
+	else
+		return 0
+		

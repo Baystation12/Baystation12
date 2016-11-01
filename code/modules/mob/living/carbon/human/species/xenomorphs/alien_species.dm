@@ -135,7 +135,7 @@
 		H.adjustOxyLoss(-heal_rate)
 		H.adjustToxLoss(-heal_rate)
 		if (prob(5))
-			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
+			to_chat(H, "<span class='alium'>You feel a soothing sensation come over you...</span>")
 		return 1
 
 	//next internal organs
@@ -143,7 +143,7 @@
 		if(I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
-				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
+				to_chat(H, "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>")
 			return 1
 
 	//next mend broken bones, approx 10 ticks each
@@ -151,7 +151,7 @@
 		if (E.status & ORGAN_BROKEN)
 			if (prob(mend_prob))
 				if (E.mend_fracture())
-					H << "<span class='alium'>You feel something mend itself inside your [E.name].</span>"
+					to_chat(H, "<span class='alium'>You feel something mend itself inside your [E.name].</span>")
 			return 1
 
 	return 0

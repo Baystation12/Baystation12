@@ -67,7 +67,7 @@
 	adjust_position()
 
 /obj/item/weapon/grab/get_storage_cost()
-	return DO_NOT_STORE
+	return ITEM_SIZE_NO_CONTAINER
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
 /obj/item/weapon/grab/proc/throw_held()
@@ -258,7 +258,7 @@
 		hud.icon_state = "reinforce1"
 	else if(state < GRAB_NECK)
 		if(isslime(affecting))
-			assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
+			to_chat(assailant, "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>")
 			return
 
 		assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
@@ -316,7 +316,7 @@
 			switch(assailant.a_intent)
 				if(I_HELP)
 					if(force_down)
-						assailant << "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>"
+						to_chat(assailant, "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>")
 						force_down = 0
 						return
 					if(state >= GRAB_AGGRESSIVE)

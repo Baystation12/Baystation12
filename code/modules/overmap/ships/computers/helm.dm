@@ -123,7 +123,7 @@
 			sec_name = "Sector #[known_sectors.len]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
-			usr << "<span class='warning'>Sector with that name already exists, please input a different name.</span>"
+			to_chat(usr, "<span class='warning'>Sector with that name already exists, please input a different name.</span>")
 			return
 		switch(href_list["add"])
 			if("current")

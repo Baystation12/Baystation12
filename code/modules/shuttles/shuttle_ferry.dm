@@ -40,7 +40,8 @@
 	..(origin, destination)
 
 /datum/shuttle/ferry/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
-	//world << "shuttle/ferry/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]"
+//	log_debug("shuttle/ferry/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]")
+
 	if(isnull(location))
 		return
 
@@ -80,7 +81,8 @@
 		if (WAIT_LAUNCH)
 			if (skip_docking_checks() || docking_controller.can_launch())
 
-				//world << "shuttle/ferry/process: area_transition=[area_transition], travel_time=[travel_time]"
+//				log_debug("shuttle/ferry/process: area_transition=[area_transition], travel_time=[travel_time]")
+
 				if (move_time && area_transition)
 					long_jump(interim=area_transition, travel_time=move_time, direction=transit_direction)
 				else

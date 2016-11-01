@@ -1,7 +1,7 @@
 /obj/item/device/dociler
 	name = "dociler"
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 2)
 	icon_state = "animal_tagger1"
 	item_icons = list(
@@ -15,7 +15,7 @@
 
 /obj/item/device/dociler/examine(var/mob/user)
 	..(user)
-	user << "<span class='notice'>It is currently set to [mode] docile mode.</span>"
+	to_chat(user, "<span class='notice'>It is currently set to [mode] docile mode.</span>")
 
 /obj/item/device/dociler/attack_self(var/mob/user)
 	if(mode == "somewhat")
@@ -23,19 +23,19 @@
 	else
 		mode = "somewhat"
 
-	user << "You set \the [src] to [mode] docile mode."
+	to_chat(user, "You set \the [src] to [mode] docile mode.")
 
 /obj/item/device/dociler/attack(var/mob/living/L, var/mob/user)
 	if(!istype(L, /mob/living/simple_animal))
-		user << "<span class='warning'>\The [src] cannot not work on \the [L].</span>"
+		to_chat(user, "<span class='warning'>\The [src] cannot not work on \the [L].</span>")
 		return
 
 	if(!loaded)
-		user << "<span class='warning'>\The [src] isn't loaded!</span>"
+		to_chat(user, "<span class='warning'>\The [src] isn't loaded!</span>")
 		return
 
 	user.visible_message("\The [user] thrusts \the [src] deep into \the [L]'s head, injecting something!")
-	L << "<span class='notice'>You feel pain as \the [user] injects something into you. All of a sudden you feel as if [user] is the friendliest and nicest person you've ever know. You want to be friends with him and all his friends.</span>"
+	to_chat(L, "<span class='notice'>You feel pain as \the [user] injects something into you. All of a sudden you feel as if [user] is the friendliest and nicest person you've ever know. You want to be friends with him and all his friends.</span>")
 	if(mode == "somewhat")
 		L.faction = user.faction
 	else

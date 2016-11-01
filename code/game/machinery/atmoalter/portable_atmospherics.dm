@@ -117,21 +117,21 @@
 	else if (istype(W, /obj/item/weapon/wrench))
 		if(connected_port)
 			disconnect()
-			user << "<span class='notice'>You disconnect \the [src] from the port.</span>"
+			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")
 			update_icon()
 			return
 		else
 			var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector/) in loc
 			if(possible_port)
 				if(connect(possible_port))
-					user << "<span class='notice'>You connect \the [src] to the port.</span>"
+					to_chat(user, "<span class='notice'>You connect \the [src] to the port.</span>")
 					update_icon()
 					return
 				else
-					user << "<span class='notice'>\The [src] failed to connect to the port.</span>"
+					to_chat(user, "<span class='notice'>\The [src] failed to connect to the port.</span>")
 					return
 			else
-				user << "<span class='notice'>Nothing happens.</span>"
+				to_chat(user, "<span class='notice'>Nothing happens.</span>")
 				return
 
 	else if ((istype(W, /obj/item/device/analyzer)) && Adjacent(user))
@@ -160,7 +160,7 @@
 /obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/cell))
 		if(cell)
-			user << "There is already a power cell installed."
+			to_chat(user, "There is already a power cell installed.")
 			return
 
 		var/obj/item/weapon/cell/C = I
@@ -175,7 +175,7 @@
 
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(!cell)
-			user << "<span class='warning'>There is no power cell installed.</span>"
+			to_chat(user, "<span class='warning'>There is no power cell installed.</span>")
 			return
 
 		user.visible_message("<span class='notice'>[user] opens the panel on [src] and removes [cell].</span>", "<span class='notice'>You open the panel on [src] and remove [cell].</span>")

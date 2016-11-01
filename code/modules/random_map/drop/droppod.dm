@@ -177,7 +177,7 @@
 				candidates |= player
 
 		if(!candidates.len)
-			usr << "There are no candidates for a drop pod launch."
+			to_chat(usr, "There are no candidates for a drop pod launch.")
 			return
 
 		// Get a player and a mob type.

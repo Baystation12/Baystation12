@@ -17,7 +17,7 @@ REAGENT SCANNER
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
 	throw_range = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
@@ -36,7 +36,7 @@ REAGENT SCANNER
 
 /obj/item/device/healthanalyzer/proc/scan_mob(mob/living/M, mob/living/user)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << text("<span class='warning'>You try to analyze the floor's vitals!</span>")
+		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
 		for(var/mob/O in viewers(M, null))
 			O.show_message("<span class='warning'>\The [user] has analyzed the floor's vitals!</span>", 1)
 		user.show_message("<span class='notice'>Analyzing Results for The floor:</span>", 1)
@@ -118,11 +118,11 @@ REAGENT SCANNER
 			var/unknown = 0
 			for(var/datum/reagent/R in C.ingested.reagent_list)
 				if(R.scannable)
-					user << "<span class='notice'>[R.name] found in subject's stomach.</span>"
+					to_chat(user, "<span class='notice'>[R.name] found in subject's stomach.</span>")
 				else
 					++unknown
 			if(unknown)
-				user << "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
+				to_chat(user, "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>")
 		if(C.virus2.len)
 			for (var/ID in C.virus2)
 				if (ID in virusDB)
@@ -151,9 +151,9 @@ REAGENT SCANNER
 			var/limb = e.name
 			if(e.status & ORGAN_BROKEN)
 				if(((e.name == BP_L_ARM) || (e.name == BP_R_ARM) || (e.name == BP_L_LEG) || (e.name == BP_R_LEG)) && (!e.splinted))
-					user << "<span class='warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
+					to_chat(user, "<span class='warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>")
 			if(e.has_infected_wound())
-				user << "<span class='warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
+				to_chat(user, "<span class='warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>")
 
 		if (H.internal_organs_by_name[BP_STACK])
 			user.show_message("<span class='notice'>Subject has a neural lace implant.</span>")
@@ -188,9 +188,9 @@ REAGENT SCANNER
 	mode = !mode
 	switch (mode)
 		if(1)
-			usr << "The scanner now shows specific limb damage."
+			to_chat(usr, "The scanner now shows specific limb damage.")
 		if(0)
-			usr << "The scanner no longer shows limb damage."
+			to_chat(usr, "The scanner no longer shows limb damage.")
 
 
 /obj/item/device/analyzer
@@ -198,7 +198,7 @@ REAGENT SCANNER
 	desc = "A hand-held environmental scanner which reports current gas levels."
 	icon_state = "atmos"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -224,7 +224,7 @@ REAGENT SCANNER
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT | OPENCONTAINER
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -259,7 +259,7 @@ REAGENT SCANNER
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.id != "blood")
 				reagents.clear_reagents()
-				user << "<span class='warning'>The sample was contaminated! Please insert another sample</span>"
+				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
 				return
 			else
 				blood_traces = params2list(R.data["trace_chem"])
@@ -270,7 +270,7 @@ REAGENT SCANNER
 				dat += "[R] ([blood_traces[R]] units) "
 			else
 				dat += "[R] "
-		user << "[dat]"
+		to_chat(user, "[dat]")
 		reagents.clear_reagents()
 	return
 
@@ -285,7 +285,7 @@ REAGENT SCANNER
 	desc = "A hand-held reagent scanner which identifies chemical agents."
 	icon_state = "spectrometer"
 	item_state = "analyzer"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -314,11 +314,11 @@ REAGENT SCANNER
 			for (var/datum/reagent/R in O.reagents.reagent_list)
 				dat += "\n \t <span class='notice'>[R][details ? ": [R.volume / one_percent]%" : ""]"
 		if(dat)
-			user << "<span class='notice'>Chemicals found: [dat]</span>"
+			to_chat(user, "<span class='notice'>Chemicals found: [dat]</span>")
 		else
-			user << "<span class='notice'>No active chemical agents found in [O].</span>"
+			to_chat(user, "<span class='notice'>No active chemical agents found in [O].</span>")
 	else
-		user << "<span class='notice'>No significant chemical agents found in [O].</span>"
+		to_chat(user, "<span class='notice'>No significant chemical agents found in [O].</span>")
 
 	return
 
@@ -333,7 +333,7 @@ REAGENT SCANNER
 	icon_state = "adv_spectrometer"
 	item_state = "analyzer"
 	origin_tech = list(TECH_BIO = 1)
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
 	throwforce = 0
 	throw_speed = 3
@@ -342,7 +342,7 @@ REAGENT SCANNER
 
 /obj/item/device/slime_scanner/attack(mob/living/M as mob, mob/living/user as mob)
 	if (!isslime(M))
-		user << "<B>This device can only scan slimes!</B>"
+		to_chat(user, "<B>This device can only scan slimes!</B>")
 		return
 	var/mob/living/carbon/slime/T = M
 	user.show_message("Slime scan results:")
@@ -376,7 +376,7 @@ REAGENT SCANNER
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	icon_state = "price_scanner"
 	slot_flags = SLOT_BELT
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 3

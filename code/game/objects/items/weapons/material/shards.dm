@@ -8,7 +8,7 @@
 	randpixel = 8
 	sharp = 1
 	edge = 1
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	force_divisor = 0.2 // 6 with hardness 30 (glass)
 	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
@@ -72,7 +72,7 @@
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
 				return
 
-			M << "<span class='danger'>You step on \the [src]!</span>"
+			to_chat(M, "<span class='danger'>You step on \the [src]!</span>")
 
 			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)

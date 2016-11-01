@@ -10,11 +10,7 @@
 
 /obj/item/integrated_circuit/filter/do_work()
 	var/datum/integrated_io/I = inputs[1]
-	var/datum/integrated_io/O = outputs[1]
-
-	if(may_pass(I.data))
-		O.data = I.data
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, may_pass(I.data) ? I.data : null)
 
 /obj/item/integrated_circuit/filter/proc/may_pass(var/input)
 	return FALSE
@@ -73,8 +69,9 @@
 /obj/item/integrated_circuit/filter/ref/custom
 	name = "custom filter"
 	desc = "Allows custom filtering. Apply the circuit to the type of object to filter on before assembly."
-	complexity = 20
-	size = 2
+	description_info = "Application is done by click-drag-dropping the circuit unto an adjacent object that you wish to scan."
+	complexity = 25
+	size = 3
 	icon_state = "filter_custom"
 
 /obj/item/integrated_circuit/filter/ref/custom/may_pass(var/weakref/data)
@@ -84,9 +81,14 @@
 		return FALSE
 	return istype(data.resolve(), filter_type)
 
-/obj/item/integrated_circuit/filter/ref/custom/resolve_attackby(atom/A, mob/user, click_params)
-	add_fingerprint(user)
-	filter_type = A.type
-	extended_desc = "[initial(extended_desc)] - This circuit strictly filters on types heuristically determined to be [filter_type]."
-	to_chat(user, "<span class='notice'>You change the filtering parameter of \the [src] to [filter_type].</span>")
+/obj/item/integrated_circuit/filter/ref/custom/MouseDrop(var/atom/over_object)
+	if(!CanMouseDrop(over_object))
+		return
+
+	add_fingerprint(usr)
+	over_object.add_fingerprint(usr)
+
+	filter_type = over_object.type
+	extended_desc = "[initial(extended_desc)] - This circuit heuristically filters objects determined to be sufficiently similar to \an [over_object]."
+	to_chat(usr, "<span class='notice'>You change the filtering parameter of \the [src] to objects similar to \the [over_object].</span>")
 	return 1

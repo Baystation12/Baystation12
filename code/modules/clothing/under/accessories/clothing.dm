@@ -35,10 +35,10 @@
 /obj/item/clothing/accessory/toggleable/proc/do_toggle(user)
 	if(icon_state == icon_closed)
 		icon_state = "[icon_closed]_open"
-		usr << "You unbutton [src]."
+		to_chat(usr, "You unbutton [src].")
 	else
 		icon_state = icon_closed
-		usr << "You button up [src]."
+		to_chat(usr, "You button up [src].")
 
 	update_clothing_icon()	//so our overlays update
 

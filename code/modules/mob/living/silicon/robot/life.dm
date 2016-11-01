@@ -35,7 +35,8 @@
 
 /mob/living/silicon/robot/proc/use_power()
 	// Debug only
-	// world << "DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]"
+//	log_debug(life.dm line 35: cyborg use_power() called at tick [controller_iteration]")
+
 	used_power_this_tick = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
@@ -58,7 +59,7 @@
 		src.has_power = 1
 	else
 		if (src.has_power)
-			src << "<span class='warning'>You are now running on emergency backup power.</span>"
+			to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
@@ -267,34 +268,29 @@
 /mob/living/silicon/robot/handle_vision()
 	..()
 
-	if (src.stat == 2 || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
-		src.sight |= SEE_TURFS
-		src.sight |= SEE_MOBS
-		src.sight |= SEE_OBJS
-		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
+	if (src.stat == DEAD || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
+		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		set_see_in_dark(8)
+		set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 	else if ((src.sight_mode & BORGMESON) && (src.sight_mode & BORGTHERM))
-		src.sight |= SEE_TURFS
-		src.sight |= SEE_MOBS
-		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_NOLIGHTING
+		set_sight(sight|SEE_TURFS|SEE_MOBS)
+		set_see_in_dark(8)
+		set_see_invisible(SEE_INVISIBLE_NOLIGHTING)
 	else if (src.sight_mode & BORGMESON)
-		src.sight |= SEE_TURFS
-		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_NOLIGHTING
+		set_sight(sight|SEE_TURFS)
+		set_see_in_dark(8)
+		set_see_invisible(SEE_INVISIBLE_NOLIGHTING)
 	else if (src.sight_mode & BORGMATERIAL)
-		src.sight |= SEE_OBJS
-		src.see_in_dark = 8
+		set_sight(sight|SEE_OBJS)
+		set_see_in_dark(8)
 	else if (src.sight_mode & BORGTHERM)
-		src.sight |= SEE_MOBS
-		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
-	else if (src.stat != 2)
-		src.sight &= ~SEE_MOBS
-		src.sight &= ~SEE_TURFS
-		src.sight &= ~SEE_OBJS
-		src.see_in_dark = 8 			 // see_in_dark means you can FAINTLY see in the dark, humans have a range of 3 or so, tajaran have it at 8
-		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
+		set_sight(sight|SEE_MOBS)
+		set_see_in_dark(8)
+		set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
+	else if (src.stat != DEAD)
+		set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
+		set_see_in_dark(8) 			 // see_in_dark means you can FAINTLY see in the dark, humans have a range of 3 or so, tajaran have it at 8
+		set_see_invisible(SEE_INVISIBLE_LIVING) // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
 							 // has a "invisible" value of 15
 
 
@@ -317,7 +313,7 @@
 		killswitch_time --
 		if(killswitch_time <= 0)
 			if(src.client)
-				src << "<span class='danger'>Killswitch Activated</span>"
+				to_chat(src, "<span class='danger'>Killswitch Activated</span>")
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -328,7 +324,7 @@
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)
-				src << "<span class='danger'>Weapon Lock Timed Out!</span>"
+				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
 			weapon_lock = 0
 			weaponlock_time = 120
 
