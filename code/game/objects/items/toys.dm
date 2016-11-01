@@ -20,6 +20,7 @@
 
 
 /obj/item/toy
+	icon = 'icons/obj/toy.dmi'
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
