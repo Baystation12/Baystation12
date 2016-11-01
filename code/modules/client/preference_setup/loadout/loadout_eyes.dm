@@ -79,7 +79,7 @@
 	display_name = "welding goggles (Engineering)"
 	path = /obj/item/clothing/glasses/welding
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
-	cost = 2
+	cost = 3
 
 /datum/gear/eyes/glasses/welding/stylish
 	display_name = "welding goggles, stylish"
