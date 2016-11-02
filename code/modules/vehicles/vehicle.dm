@@ -94,7 +94,7 @@
 				if(open)
 					health = min(maxhealth, health+10)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-					user.visible_message("\red [user] repairs [src]!","\blue You repair [src]!")
+					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 				else
 					to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 			else

@@ -46,7 +46,7 @@
 		new /obj/item/weapon/ectoplasm (src.loc)
 		for(var/mob/M in viewers(src, null))
 			if((M.client && !( M.blinded )))
-				M.show_message("\red [src] lets out a contented sigh as their form unwinds. ")
+				M.show_message("<span class='warning'>[src] lets out a contented sigh as their form unwinds.</span>")
 				ghostize()
 		qdel(src)
 		return

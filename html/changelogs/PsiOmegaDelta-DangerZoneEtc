@@ -1,0 +1,4 @@
+author: Siegdermaus
+delete-after: True
+changes: 
+  - imageadd: "Adds a new icon for turret and blast area caution signs."
