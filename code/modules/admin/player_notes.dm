@@ -103,7 +103,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	infos += P
 	info << infos
 
-	message_admins("\blue [key_name_admin(user)] has edited [key]'s notes.")
+	message_admins("<span class='notice'>[key_name_admin(user)] has edited [key]'s notes.</span>")
 	log_admin("[key_name(user)] has edited [key]'s notes.")
 
 	del(info) // savefile, so NOT qdel
