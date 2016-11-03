@@ -128,3 +128,9 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main.dmi'
 	can_eat = 1
 	skintone = 1
+
+/datum/robolimb/scorpius
+	company = "Scorpius"
+	desc = "This high quality limb is covered in thin layer of synth-fur."
+	icon = 'icons/mob/human_races/cyberlimbs/scorpius/scorpius_main.dmi'
+	can_eat = 1
