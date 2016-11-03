@@ -217,7 +217,7 @@ datum/preferences
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
-			to_chat(user, link(config.forumurl))
+			user << link(config.forumurl)
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
@@ -387,7 +387,7 @@ datum/preferences
 	character.citizenship = citizenship
 	character.personal_faction = faction
 	character.religion = religion
-	
+
 	character.char_branch = mil_branches.get_branch(char_branch)
 	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
 
