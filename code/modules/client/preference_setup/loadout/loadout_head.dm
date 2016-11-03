@@ -182,3 +182,17 @@
 	display_name = "turban"
 	path = /obj/item/clothing/head/turban
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/welding
+	display_name = "welding mask selection"
+	path = /obj/item/clothing/head/welding
+	allowed_roles = list("Roboticist","Station Engineer","Atmospheric Technician","Chief Engineer")
+
+/datum/gear/head/welding/New()
+	..()
+	var/welding_masks = list()
+	welding_masks += /obj/item/clothing/head/welding/demon
+	welding_masks += /obj/item/clothing/head/welding/engie
+	welding_masks += /obj/item/clothing/head/welding/fancy
+	welding_masks += /obj/item/clothing/head/welding/knight
+	gear_tweaks += new/datum/gear_tweak/path(assoc_by_proc(welding_masks, /proc/get_initial_name))
