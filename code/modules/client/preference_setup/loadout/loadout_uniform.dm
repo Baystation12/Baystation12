@@ -152,3 +152,15 @@
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
+	
+/datum/gear/uniform/sweater
+	display_name = "pants selection"
+	path = /obj/item/clothing/under/pants/white
+
+/datum/gear/uniform/sweater/New()
+	..()
+	var/list/sweaters = list()
+	for(var/pant in typesof(/obj/item/clothing/under/rank/psych/turtleneck))
+		var/obj/item/clothing/under/rank/psych/turtleneck/sweater_type = sweater
+		sweater[initial(sweater_type.name)] = sweater_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sweaters))
