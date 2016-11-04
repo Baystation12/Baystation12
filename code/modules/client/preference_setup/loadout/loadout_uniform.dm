@@ -155,12 +155,11 @@
 	
 /datum/gear/uniform/sweater
 	display_name = "pants selection"
-	path = /obj/item/clothing/under/pants/white
+	path = /obj/item/clothing/under/rank/psych/turtleneck
 
 /datum/gear/uniform/sweater/New()
-	..()
-	var/list/sweaters = list()
-	for(var/pant in typesof(/obj/item/clothing/under/rank/psych/turtleneck))
-		var/obj/item/clothing/under/rank/psych/turtleneck/sweater_type = sweater
-		sweater[initial(sweater_type.name)] = sweater_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sweaters))
+ +	..()
+ +	var/sweaters = list()
+ +	sweaters["green sweater"] = /obj/item/clothing/under/greenturtleneck
+ +	sweaters["red sweater"] = /obj/item/clothing/under/redturtleneck
+ +	sweaters["purple sweater"] = /obj/item/clothing/under/purpleturtleneck
