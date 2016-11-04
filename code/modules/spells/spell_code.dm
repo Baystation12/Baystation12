@@ -76,7 +76,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			silenced = max(0,silenced-1)
 			sleep(1)
 		if(connected_button)
-			var/obj/screen/spell/S = connected_button
+			var/obj/screen/ability/spell/S = connected_button
 			if(!istype(S))
 				return
 			S.update_charge(1)

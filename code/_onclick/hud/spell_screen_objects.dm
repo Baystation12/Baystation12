@@ -118,12 +118,6 @@
 	else
 		qdel(src)
 
-/obj/screen/movable/spell_master/proc/silence_spells(var/amount)
-	for(var/obj/screen/spell/spell in spell_objects)
-		spell.spell.silenced = amount
-		spell.spell.process()
-		spell.update_charge(1)
-
 /obj/screen/movable/spell_master/proc/update_spells(forced = 0, mob/user)
 	if(user && user.client)
 		if(!(src in user.client.screen))
