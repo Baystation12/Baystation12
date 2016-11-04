@@ -152,3 +152,19 @@
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
+	
+/datum/gear/uniform/psychturtle
+	display_name = "turqouise sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck
+
+/datum/gear/uniform/redturtleneck
+	display_name = "red sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck/red
+	
+/datum/gear/uniform/greenturtleneck
+	display_name = "green sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck/green
+	
+/datum/gear/uniform/purpleturtleneck
+	display_name = "purple sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck/purple
