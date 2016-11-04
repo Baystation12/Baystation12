@@ -30,7 +30,7 @@
 				H.drowsyness = min(H.drowsyness + 1 * weakness, 25 * weakness)
 				H.eye_blurry = min(H.eye_blurry + 1 * weakness, 25 * weakness)
 		for (var/mob/living/silicon/robot/R in range(src.effectrange,holder))
-			to_chat(R, "\red SYSTEM ALERT: CPU cycles slowing down.")
+			to_chat(R, "<span class='warning'>SYSTEM ALERT: CPU cycles slowing down.</span>")
 		return 1
 
 /datum/artifact_effect/sleepy/DoEffectPulse()

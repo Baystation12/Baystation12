@@ -53,6 +53,8 @@
 	else
 		to_chat(usr, "<span class='notice'>The generator is off.</span>")
 /obj/machinery/power/port_gen/emp_act(severity)
+	if(!active)
+		return
 	var/duration = 6000 //ten minutes
 	switch(severity)
 		if(1)

@@ -206,7 +206,7 @@ var/savefile/Banlistjob
 /datum/admins/proc/unjobbanpanel()
 	var/count = 0
 	var/dat
-	//var/dat = "<HR><B>Unban Player:</B> \blue(U) = Unban , (E) = Edit Ban\green (Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >"
+	//var/dat = "<HR><B>Unban Player:</B> <span class='notice'>(U) = Unban , (E) = Edit Ban</span> <span class='good'>(Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 ></span>"
 	Banlistjob.cd = "/base"
 	for (var/A in Banlistjob.dir)
 		count++
@@ -225,8 +225,7 @@ var/savefile/Banlistjob
 			to_chat(M, "<span class='warning'>To try to resolve this matter head to [config.banappeals]</span>")
 		else
 			to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
-		log_admin("[usr.client.ckey] has banned from [job] [ckey].\nReason: [reason]\nThis is a permanent ban.")
-		message_admins("\blue[usr.client.ckey] has banned from [job] [ckey].\nReason: [reason]\nThis is a permanent ban.")
+		log_and_message_admins("has banned from [job] [ckey].\nReason: [reason]\nThis is a permanent ban.")
 /datum/admins/proc/timejobban(ckey, computerid, reason, bannedby, temp, minutes, rank)
 	if(AddBanjob(ckey, computerid, reason, usr.ckey, 1, mins, job))
 		to_chat(M, "<span class='danger'>You have been jobbanned from [job] by [usr.client.ckey].\nReason: [reason].</span>")
@@ -235,8 +234,7 @@ var/savefile/Banlistjob
 			to_chat(M, "<span class='warning'>To try to resolve this matter head to [config.banappeals]</span>")
 		else
 			to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
-		log_admin("[usr.client.ckey] has jobbanned from [job] [ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
-		message_admins("\blue[usr.client.ckey] has banned from [job] [ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")*/
+		log_and_message_admins("has banned from [job] [ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")*/
 //////////////////////////////////// DEBUG ////////////////////////////////////
 
 /proc/CreateBansjob()

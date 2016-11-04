@@ -6,7 +6,7 @@
 	if( config.wikiurl )
 		if(alert("This will open the wiki in your browser. Are you sure?",,"Yes","No")=="No")
 			return
-		to_chat(src, link(config.wikiurl))
+		src << link(config.wikiurl)
 	else
 		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
 	return
@@ -18,7 +18,7 @@
 	if( config.forumurl )
 		if(alert("This will open the forum in your browser. Are you sure?",,"Yes","No")=="No")
 			return
-		to_chat(src, link(config.forumurl))
+		src << link(config.forumurl)
 	else
 		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
 	return

@@ -240,7 +240,7 @@ BLIND     // can't see anything
 			return
 
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		user.visible_message("\red [user] cuts the fingertips off of the [src].","\red You cut the fingertips off of the [src].")
+		user.visible_message("<span class='warning'>\The [user] cuts the fingertips off of \the [src].</span>","<span class='warning'>You cut the fingertips off of \the [src].</span>")
 
 		clipped = 1
 		name = "modified [name]"

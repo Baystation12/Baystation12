@@ -192,6 +192,7 @@
 			return
 		new_ambition = sanitize(new_ambition)
 		if(mind)
+			mind.ambitions = new_ambition
 			if(new_ambition)
 				to_chat(mind.current, "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>")
 				log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.")

@@ -80,9 +80,9 @@
 
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
-		visible_message("\red [src] was shocked by \the [source]!", \
-			"\red <B>Energy pulse detected, system damaged!</B>", \
-			"\red You hear an electrical crack")
+		visible_message("<span class='warning'>\The [src] was shocked by \the [source]!</span>", \
+			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
+			"<span class='warning'>You hear an electrical crack</span>")
 		if(prob(20))
 			Stun(2)
 		return
