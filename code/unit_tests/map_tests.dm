@@ -69,7 +69,7 @@ datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
 //=======================================================================================
 
 datum/unit_test/wire_test
-	name = "MAP: Cable Test Z level 1"
+	name = "MAP: Cable Test"
 
 datum/unit_test/wire_test/start_test()
 	var/wire_test_count = 0
@@ -80,11 +80,8 @@ datum/unit_test/wire_test/start_test()
 	var/list/dirs_checked = list()
 
 	for(C in world)
-		T = null
-
 		T = get_turf(C)
-		if(T && T.z == 1)
-			cable_turfs |= get_turf(C)
+		cable_turfs |= get_turf(C)
 
 	for(T in cable_turfs)
 		var/bad_msg = "[ascii_red]--------------- [T.name] \[[T.x] / [T.y] / [T.z]\]"
@@ -173,21 +170,21 @@ datum/unit_test/map_image_map_test/start_test()
 
 datum/unit_test/correct_allowed_spawn_test
 	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
-	
+
 datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/failed = FALSE
-	
+
 	for(var/spawn_name in using_map.allowed_spawns)
 		var/datum/spawnpoint/spawnpoint = spawntypes[spawn_name]
 		if(!spawnpoint.turfs.len)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
-			
+
 	if(failed)
 		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
 	else
 		pass("All entries in allowed_spawns have spawnpoints.")
-		
+
 	return 1
 
 //=======================================================================================

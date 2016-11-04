@@ -1152,8 +1152,9 @@
 
 		if(!isobserver(usr))	C.admin_ghost()
 		var/mob/observer/ghost/G = C.mob
-		sleep(2)
-		G.ManualFollow(M)
+		if(istype(G))
+			sleep(2)
+			G.ManualFollow(M)
 
 	else if(href_list["check_antagonist"])
 		check_antagonists()
@@ -1828,16 +1829,24 @@ mob/living/carbon/human/can_centcom_reply()
 mob/living/silicon/ai/can_centcom_reply()
 	return common_radio != null && !check_unable(2)
 
-/atom/proc/extra_admin_link()
+/datum/proc/extra_admin_link()
 	return
 
+/atom/movable/extra_admin_link(var/source)
+	return "<A HREF='?[source];adminplayerobservefollow=\ref[src]'>JMP</A>"
+
+/client/extra_admin_link(source)
+	return mob.extra_admin_link(source)
+
 /mob/extra_admin_link(var/source)
+	. = ..()
 	if(client && eyeobj)
-		return "|<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>EYE</A>"
+		return "[.]|<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>EYE</A>"
 
 /mob/observer/ghost/extra_admin_link(var/source)
+	. = ..()
 	if(mind && (mind.current && !isghost(mind.current)))
-		return "|<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>BDY</A>"
+		return "[.]|<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>BDY</A>"
 
 /proc/admin_jump_link(var/atom/target, var/source)
 	if(!target) return
@@ -1846,6 +1855,14 @@ mob/living/silicon/ai/can_centcom_reply()
 		source = "src=\ref[source]"
 	else
 		source = "_src_=holder"
+	return target.extra_admin_link(source)
 
-	. = "<A HREF='?[source];adminplayerobservefollow=\ref[target]'>JMP</A>"
-	. += target.extra_admin_link(source)
+/datum/proc/get_admin_jump_link(var/atom/target)
+	return
+
+/mob/get_admin_jump_link(var/atom/target)
+	return client && client.get_admin_jump_link(target)
+
+/client/get_admin_jump_link(var/atom/target)
+	if(holder)
+		return admin_jump_link(target, src)
