@@ -31,6 +31,7 @@ var/global/list/robot_modules = list(
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
+	var/job_flags = 0
 	var/list/modules = list()
 	var/list/datum/matter_synth/synths = list()
 	var/obj/item/emag = null
@@ -205,6 +206,7 @@ var/global/list/robot_modules = list(
 // Medical module. Can act as EMT/simple chemist/surgeon.
 /obj/item/weapon/robot_module/robot/medical
 	name = "medical robot module"
+	job_flags = BORGMODULE_MEDIC
 	sprites = list(
 				"Basic" = "Medbot",
 				"Standard" = "surgeon",
@@ -289,6 +291,7 @@ var/global/list/robot_modules = list(
 // Engineering module. Can perform various engineering related tasks such as repairs and construction. Supports RCD upgrade.
 /obj/item/weapon/robot_module/robot/engineering
 	name = "engineering robot module"
+	job_flags = BORGMODULE_ENGINEER
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/datum/nano_module/power_monitor)
@@ -399,6 +402,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/security
 	name = "security robot module"
 	channels = list("Security" = 1)
+	job_flags = BORGMODULE_SECURITY
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(/datum/nano_module/crew_monitor)
 	can_be_pushed = 0
@@ -569,6 +573,7 @@ var/global/list/robot_modules = list(
 // Research module. Equipped with portable research tools. Capable of performing robotics too.
 /obj/item/weapon/robot_module/robot/research
 	name = "research module"
+	job_flags = BORGMODULE_SCIENTIST
 	channels = list("Science" = 1)
 	sprites = list(
 					"Droid" = "droid-science",
