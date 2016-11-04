@@ -457,12 +457,12 @@
 	ear_kitsune_colour
 		name = "Kitsune Ears"
 		icon_state = "kitsune"
-		do_colouration = 0
+		extra = 1
 
 	ear_mouse
 		name = "Mouse Ears"
 		icon_state = "mouse"
-		do_colouration = 0
+		extra = 1
 
 	ear_squirrel
 		name = "Squirrel Ears"
@@ -471,7 +471,7 @@
 	ear_wolf
 		name = "Wolf Ears"
 		icon_state = "wolf"
-		do_colouration = 0
+		extra = 1
 
 	ear_dog
 		name = "Dog Ears"		// Citadel
@@ -480,7 +480,7 @@
 	ear_cow
 		name = "Cow Ears + Horns"		// Citadel
 		icon_state = "cow"
-		do_colouration = 0
+		extra = 1
 
 	ear_lop
 		name = "Lop Bunny Ears"		// Citadel
@@ -497,7 +497,7 @@
 	ear_deer2
 		name = "Deer Ears + Antlers"		// Citadel
 		icon_state = "deer2"
-		do_colouration = 0
+		extra = 1
 
 	ear_antlers
 		name = "Antlers (Brown)"		// Citadel
