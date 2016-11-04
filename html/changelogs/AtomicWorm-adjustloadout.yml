@@ -1,0 +1,5 @@
+author: Broseph Stylin
+delete-after: True
+changes: 
+  - tweak: "Most loadout items with multiple variants can now be found under lists in their respective categories. This change WILL mess up your saved loadouts, so be sure to redo them."
+
