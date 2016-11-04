@@ -1,4 +1,6 @@
 
+/datum/sprite_accessory/
+	var/extra = 0
 
 /*
 ////////////////////////////
@@ -618,6 +620,7 @@
 	tal_kitsune
 		name = "Kitsune Tails"
 		icon_state = "kitsune"
+		extra = 1
 
 	tal_squirrel
 		name = "Squirrel Tail"
@@ -638,6 +641,7 @@
 	tal_fox
 		name = "Fox Tail"
 		icon_state = "fox"
+		extra = 1
 
 	tal_xeno
 		name = "Xenomorph Tail"
