@@ -1,0 +1,8 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - tweak: "Added a moderate delay to the opening and closing of robotic maintenance hatches. No more quickscope-cellsniping."
+  - bugfix: "Can no longer run away from a robot while removing its MMI and allow the process to succeed."
+  - bugfix: "Fixed a one-pixel mistake in one of the robotic maintenance step images."
