@@ -63,6 +63,7 @@
 	gen = null
 	update_nearby_tiles()
 	forceMove(null, 1)
+	qdel_null(s)
 
 
 // Temporarily collapses this shield segment.
@@ -78,6 +79,7 @@
 	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()
+	update_explosion_resistance()
 
 
 // Regenerates this shield segment.
@@ -93,6 +95,7 @@
 		invisibility = 0
 		update_nearby_tiles()
 		update_icon()
+		update_explosion_resistance()
 		gen.damaged_segments -= src
 
 
@@ -112,6 +115,7 @@
 	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()
+	update_explosion_resistance()
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage(damage, SHIELD_DAMTYPE_PHYSICAL)
@@ -239,21 +243,7 @@
 	if(!gen)
 		qdel(src)
 		return 0
-	if(istype(mover, /obj/effect/meteor))
-		// We don't block meteors. Let it pass as if we weren't here.
-		if(!gen.check_flag(MODEFLAG_HYPERKINETIC))
-			return ..()
-		var/obj/effect/meteor/M = mover
-		take_damage(M.get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, M)
-		visible_message("<span class='danger'>\The [M] breaks into dust!</span>")
-		M.make_debris()
-		qdel(M)
-		return 0
-	if(istype(mover, /mob/living/))
-		if(!gen.check_flag(MODEFLAG_OVERCHARGE))
-			return
-		overcharge_shock(mover)
-		return 0
+	mover.shield_impact(src)
 	return ..()
 
 
@@ -272,7 +262,13 @@
 	// Update airflow
 	update_nearby_tiles()
 	update_icon()
+	update_explosion_resistance()
 
+/obj/effect/shield/proc/update_explosion_resistance()
+	if(gen && gen.check_flag(MODEFLAG_HYPERKINETIC))
+		explosion_resistance = INFINITY
+	else
+		explosion_resistance = 0
 
 
 // Shield collision checks below
@@ -303,3 +299,21 @@
 // Beams
 /obj/item/projectile/beam/can_pass_shield(var/obj/machinery/power/shield_generator/gen)
 	return !gen.check_flag(MODEFLAG_PHOTONIC)
+
+
+// Shield on-impact logic here. This is called only if the object is actually blocked by the field (can_pass_shield applies first)
+/atom/movable/proc/shield_impact(var/obj/effect/shield/S)
+	return
+
+/mob/living/shield_impact(var/obj/effect/shield/S)
+	if(!S.gen.check_flag(MODEFLAG_OVERCHARGE))
+		return
+	S.overcharge_shock(src)
+
+/obj/effect/meteor/shield_impact(var/obj/effect/shield/S)
+	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
+		return
+	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, src)
+	visible_message("<span class='danger'>\The [src] breaks into dust!</span>")
+	make_debris()
+	qdel(src)

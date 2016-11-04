@@ -58,7 +58,7 @@
 	field_segments = null
 	damaged_segments = null
 	mode_list = null
-	qdel(wires)
+	qdel_null(wires)
 	. = ..()
 
 
@@ -116,11 +116,10 @@
 
 // Recalculates and updates the upkeep multiplier
 /obj/machinery/power/shield_generator/proc/update_upkeep_multiplier()
-	var/new_upkeep = 1
-
+	var/new_upkeep = 1.0
 	for(var/datum/shield_mode/SM in mode_list)
-		if(SM.mode_flag & shield_modes)
-			upkeep_multiplier *= SM.multiplier
+		if(check_flag(SM.mode_flag))
+			new_upkeep *= SM.multiplier
 
 	upkeep_multiplier = new_upkeep
 

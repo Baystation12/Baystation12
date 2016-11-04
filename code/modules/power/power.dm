@@ -15,7 +15,7 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
-/obj/machinery/power/New()
+/obj/machinery/power/initialize()
 	..()
 	connect_to_network()
 

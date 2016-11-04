@@ -116,10 +116,10 @@
 
 	. = ..() //process movement...
 
-	if(. && !istype(get_turf(src), /turf/space/))
+	if(.)
 		var/turf/T = get_turf(loc)
 		ram_turf(T)
-		if(prob(20))
+		if(prob(20) && !istype(loc, /turf/space/))
 			get_hit()
 
 	return .
