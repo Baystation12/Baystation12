@@ -158,8 +158,8 @@
 	path = /obj/item/clothing/under/rank/psych/turtleneck
 
 /datum/gear/uniform/sweater/New()
- +	..()
- +	var/sweaters = list()
- +	sweaters["green sweater"] = /obj/item/clothing/under/greenturtleneck
- +	sweaters["red sweater"] = /obj/item/clothing/under/redturtleneck
- +	sweaters["purple sweater"] = /obj/item/clothing/under/purpleturtleneck
+ 	..()
+ 	var/sweaters = list()
+ 	sweaters["green sweater"] = /obj/item/clothing/under/greenturtleneck
+ 	sweaters["red sweater"] = /obj/item/clothing/under/redturtleneck
+ 	sweaters["purple sweater"] = /obj/item/clothing/under/purpleturtleneck
