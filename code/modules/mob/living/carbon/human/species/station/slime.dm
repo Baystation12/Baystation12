@@ -14,9 +14,8 @@
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
 	siemens_coefficient = -1
 	darksight = 3
-	brute_mod = 0.7
-	burn_mod = 1.5
 	virus_immune = 1
+	total_health = 50
 
 	health_hud_intensity = 2
 
