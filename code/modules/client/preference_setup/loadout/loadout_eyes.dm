@@ -81,6 +81,6 @@
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
 	cost = 3
 
-/datum/gear/eyes/glasses/welding/stylish
+/datum/gear/eyes/glasses/stylish/welding
 	display_name = "welding goggles, stylish"
 	path = /obj/item/clothing/glasses/welding/stylish
