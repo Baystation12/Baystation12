@@ -90,30 +90,48 @@
 	default_type = "iron"
 	apply_colour = 1
 
+/obj/item/stack/material/iron/fifty
+	amount = 50
+
 /obj/item/stack/material/sandstone
 	name = "sandstone brick"
 	icon_state = "sheet-sandstone"
 	default_type = "sandstone"
+
+/obj/item/stack/material/sandstone/fifty
+	amount = 50
 
 /obj/item/stack/material/marble
 	name = "marble brick"
 	icon_state = "sheet-marble"
 	default_type = "marble"
 
+/obj/item/stack/material/marble/fifty
+	amount = 50
+
 /obj/item/stack/material/diamond
 	name = "diamond"
 	icon_state = "sheet-diamond"
 	default_type = "diamond"
+
+/obj/item/stack/material/diamond/fifty
+	amount = 50
 
 /obj/item/stack/material/uranium
 	name = "uranium"
 	icon_state = "sheet-uranium"
 	default_type = "uranium"
 
+/obj/item/stack/material/uranium/fifty
+	amount = 50
+
 /obj/item/stack/material/phoron
 	name = "solid phoron"
 	icon_state = "sheet-phoron"
 	default_type = "phoron"
+
+/obj/item/stack/material/phoron/fifty
+	amount = 50
 
 /obj/item/stack/material/plastic
 	name = "plastic"
@@ -128,10 +146,16 @@
 	icon_state = "sheet-gold"
 	default_type = "gold"
 
+/obj/item/stack/material/gold/fifty
+	amount = 50
+
 /obj/item/stack/material/silver
 	name = "silver"
 	icon_state = "sheet-silver"
 	default_type = "silver"
+
+/obj/item/stack/material/silver/fifty
+	amount = 50
 
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
@@ -139,11 +163,17 @@
 	icon_state = "sheet-adamantine"
 	default_type = "platinum"
 
+/obj/item/stack/material/platinum/fifty
+	amount = 50
+
 //Extremely valuable to Research.
 /obj/item/stack/material/mhydrogen
 	name = "metallic hydrogen"
 	icon_state = "sheet-mythril"
 	default_type = "mhydrogen"
+
+/obj/item/stack/material/mhydrogen/fifty
+	amount = 50
 
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
@@ -160,6 +190,9 @@
 	icon_state = "sheet-silver"
 	default_type = "osmium"
 	apply_colour = 1
+
+/obj/item/stack/material/osmium/fifty
+	amount = 50
 
 // Fusion fuel.
 /obj/item/stack/material/deuterium
@@ -210,6 +243,9 @@
 	icon_state = "sheet-cloth"
 	default_type = "cloth"
 
+/obj/item/stack/material/cloth/fifty
+	amount = 50
+
 /obj/item/stack/material/cardboard
 	name = "cardboard"
 	icon_state = "sheet-card"
@@ -237,6 +273,9 @@
 	icon_state = "sheet-rglass"
 	default_type = "rglass"
 
+/obj/item/stack/material/glass/reinforced/fifty
+	amount = 50
+
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures."
@@ -244,9 +283,15 @@
 	icon_state = "sheet-phoronglass"
 	default_type = "phglass"
 
+/obj/item/stack/material/glass/phoronglass/fifty
+	amount = 50
+
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
 	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
 	default_type = "rphglass"
+
+/obj/item/stack/material/glass/phoronrglass/fifty
+	amount = 50
