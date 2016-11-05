@@ -1,0 +1,8 @@
+author: Irrationalist
+
+delete-after: True
+
+changes:
+  - bugfix: "Fixed stun-batons being unuseable by synthetics due to hitcost increasing each (de)activation"
+  - bugfix: "Fixed stun-batons not properly updating their icons"
+  - tweak: "Stun-batons now always cost 10% of user synthetic's max power capacity, per hit. With one exception; 100 for cells with rating of 1000 W or smaller"
