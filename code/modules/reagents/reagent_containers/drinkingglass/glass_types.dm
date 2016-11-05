@@ -1,8 +1,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/glass2/square
-	name = "half-pint glass"
+	name = "highball glass"
 	base_name = "glass"
 	base_icon = "square"
-	desc = "Your standard drinking glass."
 	filling_states = "20;40;60;80;100"
 	volume = 30
 	possible_transfer_amounts = "5;10;15;30"
