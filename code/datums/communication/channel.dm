@@ -30,22 +30,19 @@
 		to_chat(communicator, "<span class='danger'>[name] is globally muted.</span>")
 		return FALSE
 
-	if(requires_client_to_send())
-		var/client/C = communicator.get_client()
-		if(!C)
-			return FALSE
+	var/client/C = communicator.get_client()
 
-		if(show_preference_setting && C.is_preference_disabled(show_preference_setting) && !check_rights(R_INVESTIGATE,0,C))
-			to_chat(communicator, "<span class='warning'>You have [name] muted.</span>")
-			return FALSE
+	if(C && show_preference_setting && C.is_preference_disabled(show_preference_setting) && !check_rights(R_INVESTIGATE,0,C))
+		to_chat(communicator, "<span class='warning'>You have [name] muted.</span>")
+		return FALSE
 
-		if(mute_setting && (C.prefs.muted & mute_setting))
-			to_chat(communicator, "<span class='danger'>You cannot use [name] (muted).</span>")
-			return FALSE
+	if(C && mute_setting && (C.prefs.muted & mute_setting))
+		to_chat(communicator, "<span class='danger'>You cannot use [name] (muted).</span>")
+		return FALSE
 
-		if((flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key))
-			to_chat(communicator, "<span class='danger'>Guests may not use the [name] channel.</span>")
-			return FALSE
+	if(C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key))
+		to_chat(communicator, "<span class='danger'>Guests may not use the [name] channel.</span>")
+		return FALSE
 
 	return TRUE
 
@@ -68,30 +65,15 @@
 		do_receive_communication(arglist(args))
 
 /decl/communication_channel/proc/can_receive_communication(var/datum/receiver)
-	if(requires_client_to_receive())
+	if(show_preference_setting)
 		var/client/C = receiver.get_client()
-		if(!C)
-			return FALSE
 		// Admins (investigators) are expected to monitor channels. They can deadmin if they don't wish to see everything.
-		if(C.is_preference_disabled(show_preference_setting) && !check_rights(R_INVESTIGATE, 0 , C))
+		if(C && C.is_preference_disabled(show_preference_setting) && !check_rights(R_INVESTIGATE, 0 , C))
 			return FALSE
 	return TRUE
 
 /decl/communication_channel/proc/do_receive_communication(var/datum/communicator, var/datum/receiver, var/message)
 	to_chat(receiver, message)
-
-// These proc returns true if any of the current settings requires a client to send or receive
-/decl/communication_channel/proc/requires_client_to_send()
-	if(flags & COMMUNICATION_NO_GUESTS)
-		return TRUE
-	if(mute_setting)
-		return TRUE
-	if(show_preference_setting)
-		return TRUE
-	return FALSE
-
-/decl/communication_channel/proc/requires_client_to_receive()
-	return show_preference_setting
 
 // Misc. helpers
 /datum/proc/communication_identifier()

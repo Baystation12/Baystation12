@@ -43,7 +43,7 @@
 		return TRUE
 	if(M.is_preference_disabled(/datum/client_preference/show_dsay))
 		return FALSE
-	if(M.is_key_ignored(C.key))
+	if(istype(C) && M.is_key_ignored(C.key))
 		return FALSE
 	if(M.client.holder && !is_mentor(M.client))
 		return TRUE
@@ -127,3 +127,6 @@
 
 /decl/dsay_communication/direct/get_message(var/client/communicator, var/mob/M, var/message)
 	return message
+
+#undef DSAY_CAN_COMMUNICATE
+#undef DSAY_ASK_BASE
