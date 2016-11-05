@@ -906,7 +906,7 @@
 "arv" = (/obj/machinery/button/remote/blast_door{id = "Cell 1"; name = "Cell 1 Door"; pixel_x = 30; pixel_y = 1; req_access = list(2)},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/tiled,/area/security/brig)
 "arw" = (/obj/structure/table/standard,/obj/item/weapon/dice/d20,/obj/machinery/light/small{dir = 4},/turf/simulated/floor/wood,/area/maintenance/dormitory)
 "arx" = (/turf/simulated/wall,/area/security/brig/solitaryB)
-"ary" = (/obj/structure/closet/secure_closet/brig{id = "Cell 2"; name = "Cell 2 Locker"},/obj/machinery/camera/network/prison{c_tag = "Security - Brig Cell 1"},/obj/effect/floor_decal/corner/red{dir = 6},/turf/simulated/floor/tiled,/area/security/prison)
+"ary" = (/obj/structure/closet/secure_closet/brig{id = "Cell 1"; name = "Cell 1 Locker"},/obj/machinery/camera/network/prison{c_tag = "Security - Brig Cell 1"},/obj/effect/floor_decal/corner/red{dir = 6},/turf/simulated/floor/tiled,/area/security/prison)
 "arz" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "eva_inner"; locked = 1; name = "EVA Internal Access"; req_access = list(13)},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/maintenance/evahallway)
 "arA" = (/turf/simulated/wall/r_wall,/area/hallway/primary/fore)
 "arB" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled,/area/security/prison)
