@@ -12,7 +12,6 @@
 	num_alternate_languages = 3
 
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
-	siemens_coefficient = -1
 	darksight = 3
 	virus_immune = 1
 	total_health = 50
