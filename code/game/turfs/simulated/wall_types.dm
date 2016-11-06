@@ -48,4 +48,4 @@
 /turf/simulated/wall/durasteel/New(var/newloc)
 	..(newloc,"durasteel", "durasteel")
 /turf/simulated/wall/plasteelwood/New(var/newloc)
-	..(newloc,"wood", "iron")
+	..(newloc,"wood", "steel")
