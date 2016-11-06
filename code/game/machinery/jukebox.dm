@@ -20,18 +20,6 @@ datum/track/New(var/title_name, var/audio)
 	idle_power_usage = 10
 	active_power_usage = 100
 
-/obj/machinery/media/jukebox/mixer
-	name = "space mixer"
-	icon = 'icons/obj/jukebox.dmi'
-	icon_state = "mixer-nopower"
-	state_base = "mixer"
-	anchored = 1
-	density = 1
-	power_channel = EQUIP
-	use_power = 1
-	idle_power_usage = 10
-	active_power_usage = 100
-
 	var/playing = 0
 
 	var/datum/track/current_track
@@ -231,3 +219,9 @@ datum/track/New(var/title_name, var/audio)
 	update_use_power(2)
 	update_icon()
 
+
+/obj/machinery/media/jukebox/mixer
+	name = "space mixer"
+	icon = 'icons/obj/jukebox.dmi'
+	icon_state = "mixer-nopower"
+	state_base = "mixer"
