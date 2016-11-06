@@ -221,7 +221,7 @@
 		message = "<B>[speaker]</B> [verb], \"[message]\""
 	else
 		var/adverb
-		var/length = message.len * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.
+		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.
 		switch(length)
 			if(0 to 12) 	adverb = " briefly"
 			if(12 to 30)	adverb = " a short message" 
