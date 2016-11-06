@@ -706,5 +706,4 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
-	world << "[src]: [mob_icon], [mob_state]"
 	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
