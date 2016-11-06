@@ -233,18 +233,12 @@
 	filename = "sci_cardmod"
 	filedesc = "Research ID card modification program"
 	nanomodule_path = /datum/nano_module/program/card_mod/rd
-	program_icon_state = "id"
 	extended_desc = "Program for programming employee ID cards to access Research & Science departments of the station."
 	required_access = access_rd
-	requires_ntnet = 0
-	size = 8
 
 
 /datum/nano_module/program/card_mod/rd
 	name = "Research ID card modification program"
-	mod_mode = 1
-	is_centcom = 0
-	show_assignments = 0
 
 
 /datum/nano_module/program/card_mod/rd/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
