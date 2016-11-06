@@ -28,10 +28,17 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
 		new/datum/track("D`Bert", 'sound/music/title2.ogg'),
 		new/datum/track("D`Fort", 'sound/ambience/song_game.ogg'),
-		new/datum/track("Floating", 'sound/music/main.ogg'),
 		new/datum/track("Endless Space", 'sound/music/space.ogg'),
+		new/datum/track("Fanciful", 'sound/music/Fanciful.ogg'),
+		new/datum/track("Floating", 'sound/music/main.ogg'),
+		new/datum/track("Fragrance Of Dark Coffee", 'sound/music/FragranceOfDarkCoffee.ogg'),
+		new/datum/track("Gentle Conversation", 'sound/music/Gentle_Conversation.ogg'),
+		new/datum/track("Losing Control", 'sound/music/Losing_Control.ogg'),
+		new/datum/track("Northern Lights", 'sound/music/Northern_Lights.ogg'),
 		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
+		new/datum/track("September Rain", 'sound/music/September_Rain.ogg'),
+		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
@@ -211,3 +218,10 @@ datum/track/New(var/title_name, var/audio)
 	playing = 1
 	update_use_power(2)
 	update_icon()
+
+
+/obj/machinery/media/jukebox/mixer
+	name = "space mixer"
+	icon = 'icons/obj/jukebox.dmi'
+	icon_state = "mixer-nopower"
+	state_base = "mixer"

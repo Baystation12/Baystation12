@@ -527,6 +527,16 @@
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
 
+/area/crew_quarters/cafe
+	name = "\improper Cafe"
+	icon_state = "bar"
+	sound_env = LARGE_SOFTFLOOR
+
+/area/crew_quarters/nightclub
+	name = "\improper Nightclub"
+	icon_state = "bar"
+	sound_env = LARGE_SOFTFLOOR
+
 /area/library
  	name = "\improper Library"
  	icon_state = "library"
