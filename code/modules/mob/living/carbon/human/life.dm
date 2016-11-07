@@ -28,7 +28,7 @@
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
-#define RADIATION_SPEED_COEFFICIENT 0.1
+#define RADIATION_SPEED_COEFFICIENT 0.025
 
 /mob/living/carbon/human
 	var/oxygen_alert = 0
