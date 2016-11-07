@@ -674,6 +674,17 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
+/obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/icon_state)
+	if(!sprite_sheets || !sprite_sheets[bodytype])
+		return 0
+	if(slot == slot_r_hand_str || slot == slot_l_hand_str)
+		return 0
+
+	if(icon_state in icon_states(sprite_sheets[bodytype]))
+		return 1
+
+	return (slot != slot_wear_suit_str && slot != slot_head_str)
+
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
@@ -695,7 +706,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
-	else if(sprite_sheets && sprite_sheets[bodytype] && ((slot != slot_wear_suit && slot != slot_head) || (mob_state in icon_states(sprite_sheets[bodytype]))) && !(slot == slot_r_hand_str || slot == slot_l_hand_str))
+	else if(use_spritesheet(bodytype, slot, mob_state))
 		if(slot == slot_l_ear)
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
