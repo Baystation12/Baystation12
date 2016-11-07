@@ -124,10 +124,8 @@
 	data["beakerLabel"] = null
 	data["beakerVolume"] = 0
 	if(beaker)
-		data["beakerLabel"] = beaker.label_text ? beaker.label_text : null
-		if (beaker.reagents && beaker.reagents.reagent_list.len)
-			for(var/datum/reagent/R in beaker.reagents.reagent_list)
-				data["beakerVolume"] += R.volume
+		data["beakerLabel"] = beaker.name
+		data["beakerVolume"] = beaker.reagents.total_volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
