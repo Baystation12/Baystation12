@@ -56,6 +56,12 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 
+	if(reinf_material)
+		if(Proj.damage_type == BURN)
+			proj_damage /= reinf_material.burn_armor
+		else if(Proj.damage_type == BRUTE)
+			proj_damage /= reinf_material.brute_armor
+
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
 	var/damage = min(proj_damage, 100)
 

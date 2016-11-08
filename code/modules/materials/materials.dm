@@ -91,6 +91,8 @@ var/list/name_to_material
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/ignition_point           // K, point at which the material catches on fire.
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
+	var/brute_armor = 2	 		 // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
+	var/burn_armor				 // Same as above, but for Burn damage type. If blank brute_armor's value is used.
 	var/integrity = 150          // General-use HP value for products.
 	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
 	var/explosion_resistance = 5 // Only used by walls currently.
@@ -159,6 +161,8 @@ var/list/name_to_material
 		adjective_name = display_name
 	if(!shard_icon)
 		shard_icon = shard_type
+	if(!burn_armor)
+		burn_armor = brute_armor
 
 // This is a placeholder for proper integration of windows/windoors into the system.
 /material/proc/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
@@ -246,6 +250,8 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 100
+	brute_armor = 10
+	burn_armor = 50		// Diamond walls are immune to fire, therefore it makes sense for them to be almost undamageable by burn damage type.
 	stack_origin_tech = list(TECH_MATERIAL = 6)
 	conductive = 0
 
@@ -322,6 +328,7 @@ var/list/name_to_material
 	shard_type = SHARD_STONE_PIECE
 	weight = 22
 	hardness = 55
+	brute_armor = 3
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
@@ -332,6 +339,7 @@ var/list/name_to_material
 	icon_colour = "#AAAAAA"
 	weight = 26
 	hardness = 100
+	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
 
@@ -339,6 +347,7 @@ var/list/name_to_material
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
 	integrity = 150
+	brute_armor = 5
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
@@ -376,6 +385,8 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#777777"
 	explosion_resistance = 25
+	brute_armor = 6
+	burn_armor = 10
 	hardness = 80
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
@@ -384,6 +395,10 @@ var/list/name_to_material
 
 /material/plasteel/titanium
 	name = "titanium"
+	brute_armor = 10
+	burn_armor = 8
+	integrity = 200
+	melting_point = 3000
 	stack_type = null
 	icon_base = "metal"
 	door_icon_base = "metal"
@@ -400,7 +415,10 @@ var/list/name_to_material
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	hardness = 50
+	melting_point = T0C + 100
 	weight = 14
+	brute_armor = 1
+	burn_armor = 2
 	door_icon_base = "stone"
 	destruction_desc = "shatters"
 	window_options = list("One Direction" = 1, "Full Window" = 4)
@@ -491,9 +509,12 @@ var/list/name_to_material
 	icon_colour = "#00E1FF"
 	opacity = 0.3
 	integrity = 100
+	melting_point = T0C + 750
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
 	weight = 17
+	brute_armor = 2
+	burn_armor = 3
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
@@ -507,6 +528,9 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
 	integrity = 70
+	brute_armor = 2
+	burn_armor = 5
+	melting_point = T0C + 2000
 	icon_colour = "#FC2BC5"
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	created_window = /obj/structure/window/phoronbasic
@@ -515,6 +539,9 @@ var/list/name_to_material
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
+	brute_armor = 3
+	burn_armor = 10
+	melting_point = T0C + 4000
 	display_name = "reinforced borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = list(TECH_MATERIAL = 5)
@@ -625,6 +652,7 @@ var/list/name_to_material
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks
 	hardness = 15
+	brute_armor = 1
 	weight = 18
 	melting_point = T0C+300 //okay, not melting in this case, but hot enough to destroy wood
 	ignition_point = T0C+288
@@ -652,6 +680,7 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#AAAAAA"
 	hardness = 1
+	brute_armor = 1
 	weight = 1
 	ignition_point = T0C+232 //"the temperature at which book-paper catches fire, and burns." close enough
 	melting_point = T0C+232 //temperature at which cardboard walls would be destroyed
@@ -667,6 +696,7 @@ var/list/name_to_material
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	flags = MATERIAL_PADDING
+	brute_armor = 1
 	conductive = 0
 
 /material/cult
