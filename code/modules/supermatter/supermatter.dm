@@ -84,13 +84,13 @@
 	//How much hallucination should it produce per unit of power?
 	var/config_hallucination_power = 0.1
 
-	var/obj/item/device/radio/radio
+	var/obj/item/device/radio/headset/headset_eng/radio
 
 	var/debug = 0
 
 /obj/machinery/power/supermatter/initialize()
 	..()
-	radio = new /obj/item/device/radio{channels=list("Engineering")}(src)
+	//radio = new /obj/item/device/radio{channels=list("Engineering")}(src)
 
 /obj/machinery/power/supermatter/Destroy()
 	qdel(radio)
