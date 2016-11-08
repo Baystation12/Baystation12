@@ -1,7 +1,8 @@
 /datum/event/meteor_wave
-	startWhen		= 5
-	endWhen 		= 7
-	var/next_meteor = 6
+	startWhen		= 30	// About one minute early warning
+	endWhen 		= 60	// Adjusted automatically in tick()
+	var/alarmWhen   = 30
+	var/next_meteor = 40
 	var/waves = 1
 	var/start_side
 
@@ -18,16 +19,21 @@
 			command_announcement.Announce("The station is now in a meteor shower.", "Meteor Alert")
 
 /datum/event/meteor_wave/tick()
+	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
+	if(alarmWhen < activeFor)
+		for(var/obj/machinery/shield_diffuser/SD in machines)
+			if(SD.z in using_map.station_levels)
+				SD.meteor_alarm(10)
+
 	if(waves && activeFor >= next_meteor)
 		var/pick_side = prob(80) ? start_side : (prob(50) ? turn(start_side, 90) : turn(start_side, -90))
-
 		spawn() spawn_meteors(severity * rand(1,2), get_meteors(), pick_side)
 		next_meteor += rand(15, 30) / severity
 		waves--
 		endWhen = worst_case_end()
 
 /datum/event/meteor_wave/proc/worst_case_end()
-	return activeFor + ((30 / severity) * waves) + 10
+	return activeFor + ((30 / severity) * waves) + 30
 
 /datum/event/meteor_wave/end()
 	switch(severity)
