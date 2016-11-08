@@ -40,11 +40,12 @@
 	var/dat = "<b>Multi-phase mobile suspension field generator MK II \"Steadfast\"</b><br>"
 	if(cell)
 		var/colour = "red"
-		if(cell.charge / cell.maxcharge > 0.66)
+		var/percent = cell.percent()
+		if(percent > 66)
 			colour = "green"
-		else if(cell.charge / cell.maxcharge > 0.33)
+		else if(percent > 33)
 			colour = "orange"
-		dat += "<b>Energy cell</b>: <font color='[colour]'>[100 * cell.charge / cell.maxcharge]%</font><br>"
+		dat += "<b>Energy cell</b>: <font color='[colour]'>[percent]%</font><br>"
 	else
 		dat += "<b>Energy cell</b>: None<br>"
 	if(auth_card)
