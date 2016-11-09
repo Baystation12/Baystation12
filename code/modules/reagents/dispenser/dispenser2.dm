@@ -158,6 +158,12 @@
 			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[label]
 			C.reagents.trans_to(container, amount)
 
+	else if(href_list["emptyBeaker"])
+		if(container)
+			var/obj/item/weapon/reagent_containers/B = container
+			var/datum/reagents/R = B.reagents
+			R.clear_reagents()
+
 	else if(href_list["ejectBeaker"])
 		if(container)
 			var/obj/item/weapon/reagent_containers/B = container
