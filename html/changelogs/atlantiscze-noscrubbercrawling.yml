@@ -1,6 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - rscdel: "It is no longer possible to ventcrawl through scrubbers."
