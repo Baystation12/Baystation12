@@ -399,26 +399,33 @@ What a mess.*/
 							active1.fields["species"] = t1
 
 //TEMPORARY MENU FUNCTIONS
-			else//To properly clear as per clear screen.
+			else if (temp)
 				temp=null
 				if(active1)
 					switch(href_list["choice"])
 						if ("Change Rank")
-							if(PDA_Manifest.len)
-								PDA_Manifest.Cut()
-							active1.fields["rank"] = href_list["rank"]
-							if(href_list["rank"] in joblist)
-								active1.fields["real_rank"] = href_list["real_rank"]
+							if(has_write_access)
+								active1.fields["rank"] = href_list["rank"]
+								if(href_list["rank"] in joblist)
+									active1.fields["real_rank"] = href_list["real_rank"]
+									
+								if(PDA_Manifest.len)
+									PDA_Manifest.Cut()
 						if("change_mil_branch")
-							if(PDA_Manifest.len)
-								PDA_Manifest.Cut()
-							active1.fields["mil_branch"] = href_list["mil_branch"]
-							active1.fields["mil_rank"] = null  // Previous entry may be invalid for new branch
+							if(has_write_access && mil_branches.get_branch(href_list["mil_branch"]))  // Check for name validity
+								active1.fields["mil_branch"] = href_list["mil_branch"]
+								active1.fields["mil_rank"] = null  // Previous entry may be invalid for new branch
+								
+								if(PDA_Manifest.len)
+									PDA_Manifest.Cut()
 							
 						if("change_mil_rank")
-							if(PDA_Manifest.len)
-								PDA_Manifest.Cut()
-							active1.fields["mil_rank"] = href_list["mil_rank"]
+							if(has_write_access && mil_branches.get_rank(active1.fields["mil_branch"], href_list["mil_rank"]))
+								active1.fields["mil_rank"] = href_list["mil_rank"]
+								
+								if(PDA_Manifest.len)
+									PDA_Manifest.Cut()
+								
 						if ("Delete Record (ALL) Execute")
 							if(PDA_Manifest.len)
 								PDA_Manifest.Cut()
