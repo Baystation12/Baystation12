@@ -1,4 +1,4 @@
-/var/const/meteor_wave_delay = 625 //minimum wait between waves in tenths of seconds
+/var/const/meteor_wave_delay = 1 MINUTE //minimum wait between waves in tenths of seconds
 //set to at least 100 unless you want evarr ruining every round
 
 //Meteors probability of spawning during a given wave
@@ -10,6 +10,9 @@
 
 /var/list/meteors_catastrophic = list(/obj/effect/meteor/medium=5, /obj/effect/meteor/big=75, \
 						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
+
+/var/list/meteors_armageddon = list(/obj/effect/meteor/medium=3, /obj/effect/meteor/big=25, \
+						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 3) //Meteor mode only. Good Luck.
 
 /var/list/meteors_dust = list(/obj/effect/meteor/dust) //for space dust event
 
