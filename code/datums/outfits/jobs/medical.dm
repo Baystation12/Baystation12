@@ -67,6 +67,7 @@
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_chem
 	id_type = /obj/item/weapon/card/id/medical/chemist
 	pda_type = /obj/item/device/pda/chemist
+	backpack_contents = list(/obj/item/weapon/storage/chemical = 1)
 
 /decl/hierarchy/outfit/job/medical/geneticist
 	name = OUTFIT_JOB_NAME("Geneticist")
