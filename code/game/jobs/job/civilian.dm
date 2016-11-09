@@ -76,7 +76,7 @@
 /datum/job/mining
 	title = "Shaft Miner"
 	department = "Cargo"
-	department_flag = CIV
+	department_flag = CIV|CRG
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
