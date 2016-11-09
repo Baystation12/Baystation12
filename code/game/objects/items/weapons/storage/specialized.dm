@@ -33,7 +33,7 @@
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbag"
 	slot_flags = SLOT_BELT
-	max_storage_space = 100
+	max_storage_space = 50
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
@@ -49,9 +49,9 @@
 	name = "chemical satchel"
 	desc = "This bag can be used to store chemical containers."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "chembag"
+	icon_state = "chembag" //"Maybe anything else to tweak?" "the sprite - Tuesday"
 	slot_flags = SLOT_BELT
-	max_storage_space = 100
+	max_storage_space = 25
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/reagent_containers/glass/bottle)
