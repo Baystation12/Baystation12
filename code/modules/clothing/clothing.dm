@@ -242,13 +242,22 @@ BLIND     // can't see anything
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		user.visible_message("<span class='warning'>\The [user] cuts the fingertips off of \the [src].</span>","<span class='warning'>You cut the fingertips off of \the [src].</span>")
 
-		clipped = 1
-		name = "modified [name]"
-		desc = "[desc]<br>They have had the fingertips cut off of them."
-		if("exclude" in species_restricted)
-			species_restricted -= "Unathi"
-			species_restricted -= "Tajara"
+		cut_fingertops() // apply change, so relevant xenos can wear these
 		return
+
+// Applies "clipped" and removes relevant restricted species from the list,
+// making them wearable by the specified species, does nothing if already cut
+/obj/item/clothing/gloves/proc/cut_fingertops()
+	if (clipped)
+		return
+
+	clipped = 1
+	name = "modified [name]"
+	desc = "[desc]<br>They have had the fingertips cut off of them."
+	if("exclude" in species_restricted)
+		species_restricted -= "Unathi"
+		species_restricted -= "Tajara"
+	return
 
 ///////////////////////////////////////////////////////////////////////
 //Head
