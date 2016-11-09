@@ -188,5 +188,5 @@
 
 /proc/log_info_line(var/datum/d)
 	if(!istype(d))
-		return
+		return json_encode(d)
 	return d.get_log_info_line()
