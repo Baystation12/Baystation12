@@ -10,6 +10,7 @@
 #define INVISIBILITY_LEVEL_TWO            45
 #define INVISIBILITY_OBSERVER             60
 #define INVISIBILITY_EYE		          61
+#define INVISIBILITY_SYSTEM               99
 
 #define SEE_INVISIBLE_LIVING              25
 #define SEE_INVISIBLE_NOLIGHTING 15
@@ -17,6 +18,9 @@
 #define SEE_INVISIBLE_LEVEL_TWO           45
 #define SEE_INVISIBLE_CULT		          60
 #define SEE_INVISIBLE_OBSERVER            61
+#define SEE_INVISIBLE_SYSTEM              99
+
+#define SEE_IN_DARK_DEFAULT 2
 
 #define SEE_INVISIBLE_MINIMUM 5
 #define INVISIBILITY_MAXIMUM 100
@@ -177,3 +181,13 @@
 
 #define WORLD_ICON_SIZE 32
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
+
+//MultiZ directions for ZAS checks.
+#define NORTHUP (NORTH|UP)
+#define EASTUP (EAST|UP)
+#define SOUTHUP (SOUTH|UP)
+#define WESTUP (WEST|UP)
+#define NORTHDOWN (NORTH|DOWN)
+#define EASTDOWN (EAST|DOWN)
+#define SOUTHDOWN (SOUTH|DOWN)
+#define WESTDOWN (WEST|DOWN)

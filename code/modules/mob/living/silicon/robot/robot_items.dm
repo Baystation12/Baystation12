@@ -25,12 +25,12 @@
 		if(loaded_item)
 			var/confirm = alert(user, "This will destroy the item inside forever.  Are you sure?","Confirm Analyze","Yes","No")
 			if(confirm == "Yes") //This is pretty copypasta-y
-				user << "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down."
+				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 				for(var/T in loaded_item.origin_tech)
 					files.UpdateTech(T, loaded_item.origin_tech[T])
-					user << "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)]."
+					to_chat(user, "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)].")
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
@@ -51,7 +51,7 @@
 			else
 				return
 		else
-			user << "The [src] is empty.  Put something inside it first."
+			to_chat(user, "The [src] is empty.  Put something inside it first.")
 	if(response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in machines)
@@ -62,10 +62,10 @@
 			success = 1
 			files.RefreshResearch()
 		if(success)
-			user << "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch."
+			to_chat(user, "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch.")
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		else
-			user << "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator."
+			to_chat(user, "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator.")
 			playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 1)
 	if(response == "Eject")
 		if(loaded_item)
@@ -74,7 +74,7 @@
 			icon_state = initial(icon_state)
 			loaded_item = null
 		else
-			user << "The [src] is already empty."
+			to_chat(user, "The [src] is already empty.")
 
 
 /obj/item/weapon/portable_destructive_analyzer/afterattack(var/atom/target, var/mob/living/user, proximity)
@@ -86,7 +86,7 @@
 		return
 	if(istype(target,/obj/item))
 		if(loaded_item)
-			user << "Your [src] already has something inside.  Analyze or eject it first."
+			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
 			return
 		var/obj/item/I = target
 		I.loc = src
@@ -123,7 +123,7 @@
 		else if(T.dead) //It's probably dead otherwise.
 			T.remove_dead(user)
 	else
-		user << "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown."
+		to_chat(user, "Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown.")
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
@@ -139,7 +139,7 @@
 	if ( !target )
 		return
 	// pick up items, mostly copied from base tray pickup proc
-	// see code\game\objects\items\weapons\kitchen.dm line 241
+	// see code/game/objects/items/weapons/kitchen.dm line 241
 	if ( istype(target,/obj/item))
 		if ( !isturf(target.loc) ) // Don't load up stuff if it's inside a container or mob!
 			return
@@ -160,12 +160,12 @@
 				overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
 				addedSomething = 1
 		if ( addedSomething )
-			user.visible_message("\blue [user] load some items onto their service tray.")
+			user.visible_message("<span class='notice'>\The [user] load some items onto their service tray.</span>")
 
 		return
 
 	// Unloads the tray, copied from base item's proc dropped() and altered
-	// see code\game\objects\items\weapons\kitchen.dm line 263
+	// see code/game/objects/items/weapons/kitchen.dm line 263
 
 	if ( isturf(target) || istype(target,/obj/structure/table) )
 		var foundtable = istype(target,/obj/structure/table/)
@@ -200,9 +200,9 @@
 							sleep(rand(2,4))
 		if ( droppedSomething )
 			if ( foundtable )
-				user.visible_message("\blue [user] unloads their service tray.")
+				user.visible_message("<span class='notice'>[user] unloads their service tray.</span>")
 			else
-				user.visible_message("\blue [user] drops all the items on their tray.")
+				user.visible_message("<span class='notice'>[user] drops all the items on their tray.</span>")
 
 	return ..()
 
@@ -235,12 +235,12 @@
 				mode = 2
 			else
 				mode = 1
-			user << "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'"
+			to_chat(user, "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'")
 
 	return
 
 // Copied over from paper's rename verb
-// see code\modules\paperwork\paper.dm line 62
+// see code/modules/paperwork/paper.dm line 62
 
 /obj/item/weapon/pen/robopen/proc/RenamePaper(mob/user as mob,obj/paper as obj)
 	if ( !user || !paper )
@@ -278,7 +278,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/weapon/form_printer/proc/deploy_paper(var/turf/T)
-	T.visible_message("\blue \The [src.loc] dispenses a sheet of crisp white paper.")
+	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
 	new /obj/item/weapon/paper(T)
 
 
@@ -328,19 +328,19 @@
 /obj/item/weapon/inflatable_dispenser/examine(var/mob/user)
 	if(!..(user))
 		return
-	user << "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored."
-	user << "It is set to deploy [mode ? "doors" : "walls"]"
+	to_chat(user, "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
+	to_chat(user, "It is set to deploy [mode ? "doors" : "walls"]")
 
 /obj/item/weapon/inflatable_dispenser/attack_self()
 	mode = !mode
-	usr << "You set \the [src] to deploy [mode ? "doors" : "walls"]."
+	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
 
 /obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
 	..(A, user)
 	if(!user)
 		return
 	if(!user.Adjacent(A))
-		user << "You can't reach!"
+		to_chat(user, "You can't reach!")
 		return
 	if(istype(A, /turf))
 		try_deploy_inflatable(A, user)
@@ -350,7 +350,7 @@
 /obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
 	if(mode) // Door deployment
 		if(!stored_doors)
-			user << "\The [src] is out of doors!"
+			to_chat(user, "\The [src] is out of doors!")
 			return
 
 		if(T && istype(T))
@@ -359,7 +359,7 @@
 
 	else // Wall deployment
 		if(!stored_walls)
-			user << "\The [src] is out of walls!"
+			to_chat(user, "\The [src] is out of walls!")
 			return
 
 		if(T && istype(T))
@@ -367,19 +367,19 @@
 			stored_walls--
 
 	playsound(T, 'sound/items/zip.ogg', 75, 1)
-	user << "You deploy the inflatable [mode ? "door" : "wall"]!"
+	to_chat(user, "You deploy the inflatable [mode ? "door" : "wall"]!")
 
 /obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
 	if(istype(A, /obj/structure/inflatable))
 		if(istype(A, /obj/structure/inflatable/wall))
 			if(stored_walls >= max_walls)
-				user << "\The [src] is full."
+				to_chat(user, "\The [src] is full.")
 				return
 			stored_walls++
 			qdel(A)
 		else
 			if(stored_doors >= max_doors)
-				user << "\The [src] is full."
+				to_chat(user, "\The [src] is full.")
 				return
 			stored_doors++
 			qdel(A)
@@ -389,18 +389,18 @@
 	if(istype(A, /obj/item/inflatable))
 		if(istype(A, /obj/item/inflatable/wall))
 			if(stored_walls >= max_walls)
-				user << "\The [src] is full."
+				to_chat(user, "\The [src] is full.")
 				return
 			stored_walls++
 			qdel(A)
 		else
 			if(stored_doors >= max_doors)
-				usr << "\The [src] is full!"
+				to_chat(usr, "\The [src] is full!")
 				return
 			stored_doors++
 			qdel(A)
 		visible_message("\The [user] picks up \the [A] with \the [src]!")
 		return
 
-	user << "You fail to pick up \the [A] with \the [src]"
+	to_chat(user, "You fail to pick up \the [A] with \the [src]")
 	return

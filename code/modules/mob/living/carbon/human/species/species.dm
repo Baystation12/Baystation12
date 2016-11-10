@@ -226,10 +226,10 @@
 	switch(msg_type)
 		if("cold")
 			if(!covered)
-				H << "<span class='danger'>[pick(cold_discomfort_strings)]</span>"
+				to_chat(H, "<span class='danger'>[pick(cold_discomfort_strings)]</span>")
 		if("heat")
 			if(covered)
-				H << "<span class='danger'>[pick(heat_discomfort_strings)]</span>"
+				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
 
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)
@@ -375,20 +375,19 @@
 
 /datum/species/proc/handle_vision(var/mob/living/carbon/human/H)
 	H.update_sight()
-	H.sight |= get_vision_flags(H)
-	H.sight |= H.equipment_vision_flags
+	H.set_sight(H.sight|get_vision_flags(H)|H.equipment_vision_flags)
 
 	if(H.stat == DEAD)
 		return 1
 
 	if(!H.druggy)
-		H.see_in_dark = (H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight + H.equipment_darkness_modifier, 8)
+		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight + H.equipment_darkness_modifier, 8))
 		if(H.seer)
 			var/obj/effect/rune/R = locate() in H.loc
 			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				H.see_invisible = SEE_INVISIBLE_CULT
+				H.set_see_invisible(SEE_INVISIBLE_CULT)
 		if(H.see_invisible != SEE_INVISIBLE_CULT && H.equipment_see_invis)
-			H.see_invisible = min(H.see_invisible, H.equipment_see_invis)
+			H.set_see_invisible(min(H.see_invisible, H.equipment_see_invis))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
 		H.eye_blind = max(H.eye_blind, 1)

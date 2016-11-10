@@ -31,7 +31,7 @@
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
 	if(!metal&&!on)
-		user << "<span class='warning'>\The [src] doesn't work without metal.</span>"
+		to_chat(user, "<span class='warning'>\The [src] doesn't work without metal.</span>")
 		return
 	on=!on
 	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
@@ -54,9 +54,9 @@
 
 		var/result = load_metal(W)
 		if(isnull(result))
-			user << "<span class='warning'>Unable to load [W] - no metal found.</span>"
+			to_chat(user, "<span class='warning'>Unable to load [W] - no metal found.</span>")
 		else if(!result)
-			user << "<span class='notice'>\The [src] is full.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is full.</span>")
 		else
 			user.visible_message("<span class='notice'>[user] has loaded metal into \the [src].</span>", "<span class='notice'>You load metal into \the [src]</span>")
 
@@ -74,13 +74,13 @@
 				MM.amount = m
 				user.visible_message("<span class='notice'>[user] removes [m] sheet\s of metal from the \the [src].</span>", "<span class='notice'>You remove [m] sheet\s of metal from \the [src]</span>")
 		else
-			user << "\The [src] is empty."
+			to_chat(user, "\The [src] is empty.")
 		return
 	..()
 
 /obj/machinery/pipelayer/examine(mob/user)
 	..()
-	user << "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated."
+	to_chat(user, "\The [src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated.")
 
 /obj/machinery/pipelayer/proc/reset()
 	on=0

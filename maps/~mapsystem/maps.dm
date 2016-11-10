@@ -14,8 +14,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		else
 			M = new type
 		if(!M.path)
-			world << "<span class=danger>Map '[M]' does not have a defined path, not adding to map list!</span>"
-			world.log << "Map '[M]' does not have a defined path, not adding to map list!"
+			log_error("Map '[M]' does not have a defined path, not adding to map list!")
 		else
 			all_maps[M.path] = M
 	return 1
@@ -65,6 +64,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
+
+	var/list/branch_types  // list of branch datum paths for military branches available on this map
+	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
 
 /datum/map/New()
 	..()

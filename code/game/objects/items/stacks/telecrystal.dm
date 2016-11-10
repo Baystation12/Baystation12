@@ -19,7 +19,7 @@
 			I.hidden_uplink.update_nano_data()
 			nanomanager.update_uis(I.hidden_uplink)
 			use(amount)
-			user << "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>"
+			to_chat(user, "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>")
 
 /obj/item/stack/telecrystal/attack_self(var/mob/user)
 	if(use(ceil(DEFAULT_TELECRYSTAL_AMOUNT/20)))

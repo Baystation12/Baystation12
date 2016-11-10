@@ -34,14 +34,14 @@ var/global/list/power_update_requests_by_area = list()
 	if(enable_power_update_profiling)
 		enable_power_update_profiling = 0
 
-		usr << "Area power update profiling disabled."
+		to_chat(usr, "Area power update profiling disabled.")
 		message_admins("[key_name(src)] toggled area power update profiling off.")
 		log_admin("[key_name(src)] toggled area power update profiling off.")
 	else
 		enable_power_update_profiling = 1
 		power_last_profile_time = world.time
 
-		usr << "Area power update profiling enabled."
+		to_chat(usr, "Area power update profiling enabled.")
 		message_admins("[key_name(src)] toggled area power update profiling on.")
 		log_admin("[key_name(src)] toggled area power update profiling on.")
 
@@ -54,9 +54,9 @@ var/global/list/power_update_requests_by_area = list()
 
 	if(!check_rights(R_DEBUG))	return
 
-	usr << "Total profiling time: [power_profiled_time] ticks"
+	to_chat(usr, "Total profiling time: [power_profiled_time] ticks")
 	for (var/M in power_update_requests_by_machine)
-		usr << "[M] = [power_update_requests_by_machine[M]]"
+		to_chat(usr, "[M] = [power_update_requests_by_machine[M]]")
 
 /client/proc/view_power_update_stats_area()
 	set name = "View Area Power Update Statistics By Area"
@@ -65,7 +65,7 @@ var/global/list/power_update_requests_by_area = list()
 
 	if(!check_rights(R_DEBUG))	return
 
-	usr << "Total profiling time: [power_profiled_time] ticks"
-	usr << "Total profiling time: [power_profiled_time] ticks"
+	to_chat(usr, "Total profiling time: [power_profiled_time] ticks")
+	to_chat(usr, "Total profiling time: [power_profiled_time] ticks")
 	for (var/A in power_update_requests_by_area)
-		usr << "[A] = [power_update_requests_by_area[A]]"
+		to_chat(usr, "[A] = [power_update_requests_by_area[A]]")

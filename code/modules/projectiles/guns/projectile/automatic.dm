@@ -201,9 +201,9 @@
 /obj/item/weapon/gun/projectile/automatic/z8/examine(mob/user)
 	..()
 	if(launcher.chambered)
-		user << "\The [launcher] has \a [launcher.chambered] loaded."
+		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
 	else
-		user << "\The [launcher] is empty."
+		to_chat(user, "\The [launcher] is empty.")
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
@@ -237,13 +237,13 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
-		user << "<span class='warning'>[src]'s cover is open! Close it before firing!</span>"
+		to_chat(user, "<span class='warning'>[src]'s cover is open! Close it before firing!</span>")
 		return 0
 	return ..()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/proc/toggle_cover(mob/user)
 	cover_open = !cover_open
-	user << "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>"
+	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
 	update_icon()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
@@ -272,12 +272,12 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/load_ammo(var/obj/item/A, mob/user)
 	if(!cover_open)
-		user << "<span class='warning'>You need to open the cover to load that into [src].</span>"
+		to_chat(user, "<span class='warning'>You need to open the cover to load that into [src].</span>")
 		return
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, var/allow_dump=1)
 	if(!cover_open)
-		user << "<span class='warning'>You need to open the cover to unload [src].</span>"
+		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
 		return
 	..()

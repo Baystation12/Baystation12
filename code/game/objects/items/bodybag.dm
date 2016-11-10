@@ -59,7 +59,7 @@
 	//..() //Doesn't need to run the parent. Since when can fucking bodybags be welded shut? -Agouri
 		return
 	else if(istype(W, /obj/item/weapon/wirecutters))
-		user << "You cut the tag off the bodybag"
+		to_chat(user, "You cut the tag off the bodybag")
 		src.name = "body bag"
 		src.overlays.Cut()
 		return
@@ -160,7 +160,7 @@
 /obj/structure/closet/body_bag/cryobag/examine(mob/user)
 	..()
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		user << "<span class='info'>You peer into \the [src].</span>"
+		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		for(var/mob/living/L in contents)
 			L.examine(user)
 

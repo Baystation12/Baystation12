@@ -1,16 +1,20 @@
 /datum/gear/head
-	display_name = "bandana, pirate-red"
-	path = /obj/item/clothing/head/bandana
+	display_name = "natural philosopher's wig"
+	path = /obj/item/clothing/head/philosopher_wig
 	slot = slot_head
 	sort_category = "Hats and Headwear"
 
-/datum/gear/head/bandana_green
-	display_name = "bandana, green"
-	path = /obj/item/clothing/head/greenbandana
+/datum/gear/head/bandana
+	display_name = "bandana selection"
+	path = /obj/item/clothing/head/bandana
 
-/datum/gear/head/bandana_orange
-	display_name = "bandana, orange"
-	path = /obj/item/clothing/head/orangebandana
+/datum/gear/head/bandana/New()
+	..()
+	var/bandanas = list()
+	bandanas["green bandana"] = /obj/item/clothing/head/greenbandana
+	bandanas["orange bandana"] = /obj/item/clothing/head/orangebandana
+	bandanas["pirate bandana"] = /obj/item/clothing/head/bandana
+	gear_tweaks += new/datum/gear_tweak/path(bandanas)
 
 /datum/gear/head/beret
 	display_name = "beret, red"
@@ -32,8 +36,9 @@
 	allowed_roles = list("Head of Security")
 
 /datum/gear/head/beret/eng
-	display_name = "beret, engie-orange"
+	display_name = "beret, engineering"
 	path = /obj/item/clothing/head/beret/engineering
+	allowed_roles = list("Station Engineer","Chief Engineer","Atmospheric Technician")
 
 /datum/gear/head/beret/purp
 	display_name = "beret, purple"
@@ -44,120 +49,79 @@
 	path = /obj/item/clothing/head/beret/sec
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
-/datum/gear/head/cap/blue
-	display_name = "cap, blue"
-	path = /obj/item/clothing/head/soft/blue
+/datum/gear/head/cap
+	display_name = "cap selection"
+	path = /obj/item/clothing/head/soft
 
-/datum/gear/head/cap/mailman
-	display_name = "cap, blue station"
-	path = /obj/item/clothing/head/mailman
-
-/datum/gear/head/cap/flat
-	display_name = "cap, brown-flat"
-	path = /obj/item/clothing/head/flatcap
+/datum/gear/head/cap/New()
+	..()
+	var/caps = list()
+	caps["black cap"] = /obj/item/clothing/head/soft/black
+	caps["blue cap"] = /obj/item/clothing/head/soft/blue
+	caps["flat cap"] = /obj/item/clothing/head/flatcap
+	caps["green cap"] = /obj/item/clothing/head/soft/green
+	caps["grey cap"] = /obj/item/clothing/head/soft/grey
+	caps["mailman cap"] = /obj/item/clothing/head/mailman
+	caps["orange cap"] = /obj/item/clothing/head/soft/orange
+	caps["purple cap"] = /obj/item/clothing/head/soft/purple
+	caps["rainbow cap"] = /obj/item/clothing/head/soft/rainbow
+	caps["red cap"] = /obj/item/clothing/head/soft/red
+	caps["white cap"] = /obj/item/clothing/head/soft/mime
+	caps["yellow cap"] = /obj/item/clothing/head/soft/yellow
+	gear_tweaks += new/datum/gear_tweak/path(caps)
 
 /datum/gear/head/cap/corp
-	display_name = "cap, corporate (Security)"
+	display_name = "cap, corporate security"
 	path = /obj/item/clothing/head/soft/sec/corp
 	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
-/datum/gear/head/cap/green
-	display_name = "cap, green"
-	path = /obj/item/clothing/head/soft/green
-
-/datum/gear/head/cap/grey
-	display_name = "cap, grey"
-	path = /obj/item/clothing/head/soft/grey
-
-/datum/gear/head/cap/orange
-	display_name = "cap, orange"
-	path = /obj/item/clothing/head/soft/orange
-
-/datum/gear/head/cap/purple
-	display_name = "cap, purple"
-	path = /obj/item/clothing/head/soft/purple
-
-/datum/gear/head/cap/rainbow
-	display_name = "cap, rainbow"
-	path = /obj/item/clothing/head/soft/rainbow
-
-/datum/gear/head/cap/red
-	display_name = "cap, red"
-	path = /obj/item/clothing/head/soft/red
-
 /datum/gear/head/cap/sec
-	display_name = "cap, security (Security)"
+	display_name = "cap, security"
 	path = /obj/item/clothing/head/soft/sec
 	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
-/datum/gear/head/cap/yellow
-	display_name = "cap, yellow"
-	path = /obj/item/clothing/head/soft/yellow
-
-/datum/gear/head/cap/white
-	display_name = "cap, white"
-	path = /obj/item/clothing/head/soft/mime
-
 /datum/gear/head/hairflower
-	display_name = "hair flower pin, red"
+	display_name = "hair flower pin"
 	path = /obj/item/clothing/head/hairflower
 
-/datum/gear/head/hairflower/yellow
-	display_name = "hair flower pin, yellow"
-	path = /obj/item/clothing/head/hairflower/yellow
-
-/datum/gear/head/hairflower/pink
-	display_name = "hair flower pin, pink"
-	path = /obj/item/clothing/head/hairflower/pink
-
-/datum/gear/head/hairflower/blue
-	display_name = "hair flower pin, blue"
-	path = /obj/item/clothing/head/hairflower/blue
+/datum/gear/head/hairflower/New()
+	..()
+	var/pins = list()
+	pins["blue pin"] = /obj/item/clothing/head/hairflower/blue
+	pins["pink pin"] = /obj/item/clothing/head/hairflower/pink
+	pins["red pin"] = /obj/item/clothing/head/hairflower
+	pins["yellow pin"] = /obj/item/clothing/head/hairflower/yellow
+	gear_tweaks += new/datum/gear_tweak/path(pins)
 
 /datum/gear/head/hardhat
-	display_name = "hardhat, yellow"
+	display_name = "hardhat selection"
 	path = /obj/item/clothing/head/hardhat
 	cost = 2
 
-/datum/gear/head/hardhat/blue
-	display_name = "hardhat, blue"
-	path = /obj/item/clothing/head/hardhat/dblue
+/datum/gear/head/hardhat/New()
+	..()
+	var/hardhats = list()
+	hardhats["blue hardhat"] = /obj/item/clothing/head/hardhat/dblue
+	hardhats["orange hardhat"] = /obj/item/clothing/head/hardhat/orange
+	hardhats["red hardhat"] = /obj/item/clothing/head/hardhat/red
+	hardhats["yellow hardhat"] = /obj/item/clothing/head/hardhat
 
-/datum/gear/head/hardhat/orange
-	display_name = "hardhat, orange"
-	path = /obj/item/clothing/head/hardhat/orange
+/datum/gear/head/hat
+	display_name = "hat selection"
+	path = /obj/item/clothing/head/hasturhood
 
-/datum/gear/head/hardhat/red
-	display_name = "hardhat, red"
-	path = /obj/item/clothing/head/hardhat/red
-
-/datum/gear/head/boater
-	display_name = "hat, boatsman"
-	path = /obj/item/clothing/head/boaterhat
-
-/datum/gear/head/bowler
-	display_name = "hat, bowler"
-	path = /obj/item/clothing/head/bowler
-
-/datum/gear/head/cowboy_hat
-	display_name = "hat, cowboy"
-	path = /obj/item/clothing/head/cowboy_hat
-
-/datum/gear/head/fez
-	display_name = "hat, fez"
-	path = /obj/item/clothing/head/fez
-
-/datum/gear/head/tophat
-	display_name = "hat, tophat"
-	path = /obj/item/clothing/head/that
-
-/datum/gear/head/philosopher_wig
-	display_name = "natural philosopher's wig"
-	path = /obj/item/clothing/head/philosopher_wig
-
-/datum/gear/head/ushanka
-	display_name = "ushanka"
-	path = /obj/item/clothing/head/ushanka
+/datum/gear/head/hat/New()
+	..()
+	var/hats = list()
+	hats["boatsman hat"] = /obj/item/clothing/head/boaterhat
+	hats["bowler hat"] = /obj/item/clothing/head/bowler
+	hats["cowboy hat"] = /obj/item/clothing/head/cowboy_hat
+	hats["fedora"] = /obj/item/clothing/head/fedora //m'lady
+	hats["feather thrilby"] = /obj/item/clothing/head/feathertrilby
+	hats["fez"] = /obj/item/clothing/head/fez
+	hats["top hat"] = /obj/item/clothing/head/that
+	hats["ushanka"] = /obj/item/clothing/head/ushanka
+	gear_tweaks += new/datum/gear_tweak/path(hats)
 
 /datum/gear/head/zhan_scarf
 	display_name = "Zhan headscarf"
@@ -178,3 +142,17 @@
 	display_name = "turban"
 	path = /obj/item/clothing/head/turban
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/welding
+	display_name = "welding mask selection"
+	path = /obj/item/clothing/head/welding
+	allowed_roles = list("Roboticist","Station Engineer","Atmospheric Technician","Chief Engineer")
+
+/datum/gear/head/welding/New()
+	..()
+	var/welding_masks = list()
+	welding_masks += /obj/item/clothing/head/welding/demon
+	welding_masks += /obj/item/clothing/head/welding/engie
+	welding_masks += /obj/item/clothing/head/welding/fancy
+	welding_masks += /obj/item/clothing/head/welding/knight
+	gear_tweaks += new/datum/gear_tweak/path(assoc_by_proc(welding_masks, /proc/get_initial_name))

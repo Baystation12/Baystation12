@@ -24,8 +24,8 @@
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 	if(join_motd)
-		src << "<div class=\"motd\">[join_motd]</div>"
-	src << "<div class='info'>Game ID: <div class='danger'>[game_id]</div></div>"
+		to_chat(src, "<div class=\"motd\">[join_motd]</div>")
+	to_chat(src, "<div class='info'>Game ID: <div class='danger'>[game_id]</div></div>")
 
 	if(!mind)
 		mind = new /datum/mind(key)
@@ -35,7 +35,7 @@
 	loc = null
 	client.screen += lobby_image
 	my_client = client
-	sight |= SEE_TURFS
+	set_sight(sight|SEE_TURFS)
 	player_list |= src
 
 	new_player_panel()

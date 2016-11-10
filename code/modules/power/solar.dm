@@ -84,12 +84,7 @@ var/list/solars_list = list()
 	if (src.health <= 0)
 		if(!(stat & BROKEN))
 			broken()
-		else
-			new /obj/item/weapon/material/shard(src.loc)
-			new /obj/item/weapon/material/shard(src.loc)
-			qdel(src)
-			return
-	return
+
 
 
 /obj/machinery/power/solar/update_icon()
@@ -138,9 +133,13 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/proc/broken()
 	stat |= BROKEN
+	health = 0
+	new /obj/item/weapon/material/shard(src.loc)
+	new /obj/item/weapon/material/shard(src.loc)
+	var/obj/item/solar_assembly/S = locate() in src
+	S.glass_type = null
 	unset_control()
 	update_icon()
-	return
 
 
 /obj/machinery/power/solar/ex_act(severity)
@@ -250,7 +249,7 @@ var/list/solars_list = list()
 				else
 					new /obj/machinery/power/solar(get_turf(src), src)
 			else
-				user << "<span class='warning'>You need two sheets of glass to put them into a solar panel.</span>"
+				to_chat(user, "<span class='warning'>You need two sheets of glass to put them into a solar panel.</span>")
 				return
 			return 1
 
@@ -289,7 +288,7 @@ var/list/solars_list = list()
 	var/lastgen = 0
 	var/track = 0			// 0= off  1=timed  2=auto (tracker)
 	var/trackrate = 600		// 300-900 seconds
-	var/nexttime = 0		// time for a panel to rotate of 1° in manual tracking
+	var/nexttime = 0		// time for a panel to rotate of 1Â° in manual tracking
 	var/obj/machinery/power/tracker/connected_tracker = null
 	var/list/connected_panels = list()
 
@@ -405,7 +404,7 @@ var/list/solars_list = list()
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20,src))
 			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
+				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 				new /obj/item/weapon/material/shard( src.loc )
 				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
@@ -417,7 +416,7 @@ var/list/solars_list = list()
 				A.anchored = 1
 				qdel(src)
 			else
-				user << "\blue You disconnect the monitor."
+				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
 				for (var/obj/C in src)
@@ -443,9 +442,9 @@ var/list/solars_list = list()
 			connected_tracker.unset_control()
 
 	if(track==1 && trackrate) //manual tracking and set a rotation speed
-		if(nexttime <= world.time) //every time we need to increase/decrease the angle by 1°...
+		if(nexttime <= world.time) //every time we need to increase/decrease the angle by 1Â°...
 			targetdir = (targetdir + trackrate/abs(trackrate) + 360) % 360 	//... do it
-			nexttime += 36000/abs(trackrate) //reset the counter for the next 1°
+			nexttime += 36000/abs(trackrate) //reset the counter for the next 1Â°
 
 	updateDialog()
 

@@ -9,6 +9,8 @@
 #define DATA_CHANNEL "data channel"
 #define PULSE_CHANNEL "pulse channel"
 
+#define get_assembly(X) get_holder_of_type(X, /obj/item/device/electronic_assembly)
+
 /obj/item/integrated_circuit
 	name = "integrated circuit"
 	desc = "It's a tiny chip!  This one doesn't seem to do much, however."
@@ -25,24 +27,29 @@
 	var/cooldown_per_use = 1 SECOND
 	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
-/obj/item/integrated_circuit/examine(mob/user, var/assembly_examine = FALSE)
-	if(assembly_examine)
-		return
+/obj/item/integrated_circuit/examine(mob/user)
+	. = ..()
+	external_examine(user)
 
-	..()
+/obj/item/integrated_circuit/proc/external_examine(mob/user)
+	any_examine(user)
 
-	to_chat(user, "This board has [inputs.len] input pin\s and [outputs.len] output pin\s.")
+/obj/item/integrated_circuit/proc/internal_examine(mob/user)
+	to_chat(user, "This board has [inputs.len] input pin\s, [outputs.len] output pin\s and [activators.len] activation pin\s.")
 	for(var/datum/integrated_io/input/I in inputs)
 		if(I.linked.len)
-			to_chat(user, "The [I] is connected to [I.get_linked_to_desc()].")
+			to_chat(user, "The '[I]' is connected to [I.get_linked_to_desc()].")
 	for(var/datum/integrated_io/output/O in outputs)
 		if(O.linked.len)
-			to_chat(user, "The [O] is connected to [O.get_linked_to_desc()].")
+			to_chat(user, "The '[O]' is connected to [O.get_linked_to_desc()].")
 	for(var/datum/integrated_io/activate/A in activators)
 		if(A.linked.len)
-			to_chat(user, "The [A] is connected to [A.get_linked_to_desc()].")
-
+			to_chat(user, "The '[A]' is connected to [A.get_linked_to_desc()].")
+	any_examine(user)
 	interact(user)
+
+/obj/item/integrated_circuit/proc/any_examine(mob/user)
+	return
 
 /obj/item/integrated_circuit/New()
 	setup_io(inputs, /datum/integrated_io/input)
@@ -78,7 +85,7 @@
 
 /obj/item/integrated_circuit/emp_act(severity)
 	for(var/datum/integrated_io/io in inputs + outputs + activators)
-		io.scramble()
+		io.scramble(severity)
 
 /obj/item/integrated_circuit/verb/rename_component()
 	set name = "Rename Circuit"
@@ -91,6 +98,22 @@
 		to_chat(M, "<span class='notice'>The circuit '[src.name]' is now labeled '[input]'.</span>")
 		name = input
 		interact(M)
+
+/obj/item/integrated_circuit/proc/activate_pin(var/pin_number)
+	var/datum/integrated_io/activate/A = activators[pin_number]
+	A.activate()
+
+/obj/item/integrated_circuit/proc/set_pin_data(var/pin_type, var/pin_number, var/new_data)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.write_data_to_pin(new_data)
+
+/obj/item/integrated_circuit/proc/get_pin_data(var/pin_type, var/pin_number)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.get_data()
+
+/obj/item/integrated_circuit/proc/get_pin_data_as_type(var/pin_type, var/pin_number, var/as_type)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.data_as_type(as_type)
 
 /obj/item/integrated_circuit/proc/get_pin_ref(var/pin_type, var/pin_number)
 	switch(pin_type)
@@ -205,13 +228,17 @@
 
 	onclose(user, "circuit-\ref[src]")
 
+/obj/item/integrated_circuit/proc/is_in_open_assembly()
+	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
+	return assembly  && assembly.opened
+
 /obj/item/integrated_circuit/Topic(href, href_list, state = physical_state)
 	if(..())
 		return 1
 	var/pin = locate(href_list["pin"]) in inputs + outputs + activators
 
 	var/obj/held_item = usr.get_active_hand()
-	if(href_list["wire"])
+	if(href_list["wire"] && is_in_open_assembly())
 		if(istype(held_item, /obj/item/device/integrated_electronics/wirer))
 			var/obj/item/device/integrated_electronics/wirer/wirer = held_item
 			if(pin)
@@ -229,20 +256,19 @@
 		interact(usr)
 		. = 1
 
-	else if(href_list["examine"])
-		examine(usr)
+	else if(href_list["examine"] && is_in_open_assembly())
+		internal_examine(usr)
 		. = 1
 
-	else if(href_list["rename"])
+	else if(href_list["rename"] && is_in_open_assembly())
 		rename_component(usr)
 		. = IC_TOPIC_REFRESH
 
-	else if(href_list["remove"])
+	else if(href_list["remove"] && is_in_open_assembly())
 		if(istype(held_item, /obj/item/weapon/screwdriver))
 			disconnect_all()
-			var/turf/T = get_turf(src)
-			forceMove(T)
-			playsound(T, 'sound/items/Crowbar.ogg', 50, 1)
+			dropInto(loc)
+			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 			to_chat(usr, "<span class='notice'>You pop \the [src] out of the case, and slide it out.</span>")
 		else
 			to_chat(usr, "<span class='warning'>You need a screwdriver to remove components.</span>")
@@ -293,20 +319,45 @@
 /datum/integrated_io/nano_host()
 	return holder
 
-/datum/integrated_io/proc/link_io(var/datum/integrated_io/io)
+/datum/integrated_io/proc/link_io(var/datum/integrated_io/io, var/mob/user)
+	if(src == io)
+		to_chat(user, "<span class='warning'>Wiring \the [io.holder]'s [io.name] into itself is rather pointless.</span>")
+		return FALSE
+
 	if(io_type != io.io_type)
-		CRASH("Attempted to connect incompatible IO types: '[log_info_line(src)]' and '[log_info_line(io)]'")
-	if(holder == io.holder)
-		CRASH("Attempted two pins with the same holder: '[log_info_line(src)]' and '[log_info_line(io)]', belonging to '[log_info_line(holder)]'")
+		to_chat(user, "<span class='warning'>Those two types of channels are incompatable. The first is \a [io_type], while the second is \a [io.io_type].</span>")
+		return FALSE
+
+	var/io_assembly = get_assembly(io.holder.loc)
+	if(!io_assembly) // Separating null assembly and same assembly checks to be extra sure wiring cannot happen in weird situations
+		to_chat(user, "<span class='warning'>\The [io.holder] must be in an assembly for wiring to be possible.</span>")
+		return FALSE
+
+	if((holder != io.holder) && get_assembly(holder.loc) != get_assembly(io.holder.loc)) // This test is only necessary if we belong to different holders
+		to_chat(user, "<span class='warning'>The circuits must be in the same assembly for wiring to be possible.</span>")
+		return FALSE
+
+	if(io in linked) // NOTE: We don't return here on failure, make sure to add any additional checks above this line
+		to_chat(user, "<span class='warning'>These pins are already wired.</span>")
+		. = FALSE
+	else
+		. = TRUE
 
 	linked |= io
-	io.linked |= src
+	io.linked |= src // We still link them to each other just ensure we're in a consistent state
 
 /datum/integrated_io/proc/data_as_type(var/as_type)
 	if(!isweakref(data))
 		return
 	var/output = data.resolve()
 	return istype(output, as_type) ? output : null
+
+/datum/integrated_io/proc/get_data()
+	if(isnull(data))
+		return
+	if(isweakref(data))
+		return data.resolve()
+	return data
 
 /datum/integrated_io/proc/display_data()
 	if(isnull(data))
@@ -328,27 +379,37 @@
 		write_data_to_pin(rand(-10000, 10000))
 	if(istext(data))
 		write_data_to_pin("ERROR")
-	push_data()
 
-/datum/integrated_io/activate/scramble()
-	push_data()
+/datum/integrated_io/activate/scramble(var/severity)
+	if(prob(99/severity))
+		activate()
 
 /datum/integrated_io/proc/write_data_to_pin(var/new_data)
+	if(io_type != DATA_CHANNEL)
+		return FALSE
+
 	if(isnull(new_data) || isnum(new_data) || istext(new_data) || isweakref(new_data)) // Anything else is a type we don't want.
 		data = new_data
 		holder.on_data_written()
+		return TRUE
+	return FALSE
 
-/datum/integrated_io/proc/push_data()
+/datum/integrated_io/output/write_data_to_pin(var/new_data)
+	. = ..()
+	if(.)
+		push_data()
+
+/datum/integrated_io/input/proc/pull_data()
+	for(var/datum/integrated_io/io in linked)
+		write_data_to_pin(io.data)
+
+/datum/integrated_io/output/proc/push_data()
 	for(var/datum/integrated_io/io in linked)
 		io.write_data_to_pin(data)
 
-/datum/integrated_io/activate/push_data()
+/datum/integrated_io/activate/proc/activate()
 	for(var/datum/integrated_io/io in linked)
 		io.holder.check_then_do_work(io)
-
-/datum/integrated_io/proc/pull_data()
-	for(var/datum/integrated_io/io in linked)
-		write_data_to_pin(io.data)
 
 /datum/integrated_io/proc/get_linked_to_desc()
 	if(linked.len)
@@ -356,6 +417,7 @@
 	return "nothing"
 
 /datum/integrated_io/proc/disconnect()
+	data = null
 	//First we iterate over everything we are linked to.
 	for(var/datum/integrated_io/their_io in linked)
 		//While doing that, we iterate them as well, and disconnect ourselves from them.
@@ -377,13 +439,17 @@
 	name = "activation pin"
 	io_type = PULSE_CHANNEL
 
+/obj/item/integrated_circuit/proc/pull_data()
+	for(var/datum/integrated_io/input/I in inputs)
+		I.pull_data()
+
 /obj/item/integrated_circuit/proc/push_data()
 	for(var/datum/integrated_io/output/O in outputs)
 		O.push_data()
 
-/obj/item/integrated_circuit/proc/pull_data()
-	for(var/datum/integrated_io/input/I in inputs)
-		I.push_data()
+/obj/item/integrated_circuit/proc/activate()
+	for(var/datum/integrated_io/activate/A in activators)
+		A.activate()
 
 /obj/item/integrated_circuit/proc/check_then_do_work(var/datum/integrated_io/io)
 	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
@@ -401,3 +467,7 @@
 		O.disconnect()
 	for(var/datum/integrated_io/activate/A in activators)
 		A.disconnect()
+
+/datum/encrypted_ic_data
+	var/name = "encrypted data"
+	var/data

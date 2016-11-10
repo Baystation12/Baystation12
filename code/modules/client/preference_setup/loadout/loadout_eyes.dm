@@ -6,24 +6,18 @@
 	sort_category = "Glasses and Eyewear"
 
 /datum/gear/eyes/glasses
-	display_name = "Glasses, prescription"
+	display_name = "glasses"
 	path = /obj/item/clothing/glasses/regular
 
-/datum/gear/eyes/glasses/green
-	display_name = "Glasses, green"
-	path = /obj/item/clothing/glasses/gglasses
-
-/datum/gear/eyes/glasses/prescriptionhipster
-	display_name = "Glasses, hipster"
-	path = /obj/item/clothing/glasses/regular/hipster
-
-/datum/gear/eyes/glasses/monocle
-	display_name = "Monocle"
-	path = /obj/item/clothing/glasses/monocle
-
-/datum/gear/eyes/scanning_goggles
-	display_name = "scanning goggles"
-	path = /obj/item/clothing/glasses/regular/scanners
+/datum/gear/eyes/glasses/New()
+	..()
+	var/glasses = list()
+	glasses["prescription glasses"] = /obj/item/clothing/glasses/regular
+	glasses["green glasses"] = /obj/item/clothing/glasses/gglasses
+	glasses["hipster glasses"] = /obj/item/clothing/glasses/regular/hipster
+	glasses["monocle"] = /obj/item/clothing/glasses/monocle
+	glasses["scanning goggles"] = /obj/item/clothing/glasses/regular/scanners
+	gear_tweaks += new/datum/gear_tweak/path(glasses)
 
 /datum/gear/eyes/sciencegoggles
 	display_name = "Science Goggles"
@@ -32,6 +26,11 @@
 /datum/gear/eyes/security
 	display_name = "Security HUD"
 	path = /obj/item/clothing/glasses/hud/security
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/eyes/security/prescription
+	display_name = "Security HUD, prescription"
+	path = /obj/item/clothing/glasses/hud/security/prescription
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/eyes/secaviators
@@ -44,10 +43,15 @@
 	path = /obj/item/clothing/glasses/hud/health
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
 
+/datum/gear/eyes/medical/prescription
+	display_name = "Medical HUD, prescription"
+	path = /obj/item/clothing/glasses/hud/health/prescription
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
+
 /datum/gear/eyes/shades
-	display_name = "Sunglasses, fat"
+	display_name = "sunglasses, fat"
 	path = /obj/item/clothing/glasses/sunglasses/big
-	allowed_roles = list("Security Officer","Head of Security","Warden","Captain","Head of Personnel","Quartermaster","Internal Affairs Agent","Detective")
+	cost = 2
 
 /datum/gear/eyes/shades/prescriptionsun
 	display_name = "sunglasses, presciption"

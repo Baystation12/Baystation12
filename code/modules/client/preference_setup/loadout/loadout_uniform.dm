@@ -30,110 +30,63 @@
 	path = /obj/item/clothing/under/rank/roboticist/skirt
 	allowed_roles = list("Roboticist")
 
-/datum/gear/uniform/suit  //amish
-	display_name = "suit, amish"
-	path = /obj/item/clothing/under/sl_suit
-
-/datum/gear/uniform/suit/black
-	display_name = "suit, black"
-	path = /obj/item/clothing/under/suit_jacket
-
-/datum/gear/uniform/suit/shinyblack
-	display_name = "suit, shiny-black"
-	path = /obj/item/clothing/under/lawyer/black
-
-/datum/gear/uniform/suit/blue
-	display_name = "suit, blue"
-	path = /obj/item/clothing/under/lawyer/blue
-
-/datum/gear/uniform/suit/burgundy
-	display_name = "suit, burgundy"
-	path = /obj/item/clothing/under/suit_jacket/burgundy
-
-/datum/gear/uniform/suit/checkered
-	display_name = "suit, checkered"
-	path = /obj/item/clothing/under/suit_jacket/checkered
-
-/datum/gear/uniform/suit/charcoal
-	display_name = "suit, charcoal"
-	path = /obj/item/clothing/under/suit_jacket/charcoal
-
-/datum/gear/uniform/suit/exec
-	display_name = "suit, executive"
-	path = /obj/item/clothing/under/suit_jacket/really_black
-
-/datum/gear/uniform/suit/femaleexec
-	display_name = "suit, female-executive"
-	path = /obj/item/clothing/under/suit_jacket/female
-
-/datum/gear/uniform/suit/gentle
-	display_name = "suit, gentlemen"
-	path = /obj/item/clothing/under/gentlesuit
-
-/datum/gear/uniform/suit/navy
-	display_name = "suit, navy"
-	path = /obj/item/clothing/under/suit_jacket/navy
-
-/datum/gear/uniform/suit/red
-	display_name = "suit, red"
-	path = /obj/item/clothing/under/suit_jacket/red
-
-/datum/gear/uniform/suit/redlawyer
-	display_name = "suit, lawyer-red"
-	path = /obj/item/clothing/under/lawyer/red
-
-/datum/gear/uniform/suit/oldman
-	display_name = "suit, old-man"
-	path = /obj/item/clothing/under/lawyer/oldman
-
-/datum/gear/uniform/suit/purple
-	display_name = "suit, purple"
-	path = /obj/item/clothing/under/lawyer/purpsuit
-
-/datum/gear/uniform/suit/tan
-	display_name = "suit, tan"
-	path = /obj/item/clothing/under/suit_jacket/tan
-
-/datum/gear/uniform/suit/white
-	display_name = "suit, white"
-	path = /obj/item/clothing/under/scratch
-
-/datum/gear/uniform/suit/whiteblue
-	display_name = "suit, white-blue"
+/datum/gear/uniform/suit
+	display_name = "suit selection"
 	path = /obj/item/clothing/under/lawyer/bluesuit
 
+/datum/gear/uniform/suit/New()
+	..()
+	var/suits = list()
+	suits["amish suit"] = /obj/item/clothing/under/sl_suit
+	suits["black suit"] = /obj/item/clothing/under/suit_jacket
+	suits["blue suit"] = /obj/item/clothing/under/lawyer/blue
+	suits["burgundy suit"] = /obj/item/clothing/under/suit_jacket/burgundy
+	suits["charcoal suit"] = /obj/item/clothing/under/suit_jacket/charcoal
+	suits["checkered suit"] = /obj/item/clothing/under/suit_jacket/checkered
+	suits["executive suit"] = /obj/item/clothing/under/suit_jacket/really_black
+	suits["female executive suit"] = /obj/item/clothing/under/suit_jacket/female
+	suits["gentleman suit"] = /obj/item/clothing/under/gentlesuit
+	suits["navy suit"] = /obj/item/clothing/under/suit_jacket/navy
+	suits["old man suit"] = /obj/item/clothing/under/lawyer/oldman
+	suits["purple suit"] = /obj/item/clothing/under/lawyer/purpsuit
+	suits["red suit"] = /obj/item/clothing/under/suit_jacket/red
+	suits["red lawyer suit"] = /obj/item/clothing/under/lawyer/red
+	suits["shiny black suit"] = /obj/item/clothing/under/lawyer/black
+	suits["tan suit"] = /obj/item/clothing/under/suit_jacket/tan
+	suits["white suit"] = /obj/item/clothing/under/scratch
+	suits["white-blue suit"] = /obj/item/clothing/under/lawyer/bluesuit
+	gear_tweaks += new/datum/gear_tweak/path(suits)
+
 /datum/gear/uniform/scrubs
-	display_name = "scrubs, black"
+	display_name = "medical scrubs"
 	path = /obj/item/clothing/under/rank/medical/black
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
 
-/datum/gear/uniform/scrubs/blue
-	display_name = "scrubs, blue"
-	path = /obj/item/clothing/under/rank/medical/blue
+/datum/gear/uniform/scrubs/New()
+	..()
+	var/scrubcolor = list()
+	scrubcolor["black scrubs"] = /obj/item/clothing/under/rank/medical/black
+	scrubcolor["blue scrubs"] = /obj/item/clothing/under/rank/medical/blue
+	scrubcolor["green scrubs"] = /obj/item/clothing/under/rank/medical/green
+	scrubcolor["navy blue scrubs"] = /obj/item/clothing/under/rank/medical/navyblue
+	scrubcolor["purple scrubs"] = /obj/item/clothing/under/rank/medical/purple
+	gear_tweaks += new/datum/gear_tweak/path(scrubcolor)
 
-/datum/gear/uniform/scrubs/purple
-	display_name = "scrubs, purple"
-	path = /obj/item/clothing/under/rank/medical/purple
+/datum/gear/uniform/dress
+	display_name = "dress selection"
+	path = /obj/item/clothing/under/dress
 
-/datum/gear/uniform/scrubs/green
-	display_name = "scrubs, green"
-	path = /obj/item/clothing/under/rank/medical/green
-
-/datum/gear/uniform/scrubs/navyblue
-	display_name = "scrubs, navy blue"
-	path = /obj/item/clothing/under/rank/medical/navyblue
-
-/datum/gear/uniform/sundress
-	display_name = "sundress"
-	path = /obj/item/clothing/under/sundress
-
-/datum/gear/uniform/sundress/white
-	display_name = "sundress, white"
-	path = /obj/item/clothing/under/sundress_white
-
-/datum/gear/uniform/dress_fire
-	display_name = "flame dress"
-	path = /obj/item/clothing/under/dress/dress_fire
+/datum/gear/uniform/dress/New()
+	..()
+	var/dresses = list()
+	dresses["flame dress"] = /obj/item/clothing/under/dress/dress_fire
+	dresses["green dress"] = /obj/item/clothing/under/dress/dress_green
+	dresses["orange dress"] = /obj/item/clothing/under/dress/dress_orange
+	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
+	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
+	dresses["sundress"] = /obj/item/clothing/under/sundress
+	dresses["white sundress"] = /obj/item/clothing/under/sundress_white
+	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
 /datum/gear/uniform/uniform_captain
 	display_name = "uniform, captain's dress"
@@ -153,7 +106,6 @@
 /datum/gear/uniform/uniform_hr
 	display_name = "uniform, HR director (HoP)"
 	path = /obj/item/clothing/under/dress/dress_hr
-
 	allowed_roles = list("Head of Personnel")
 
 /datum/gear/uniform/navysecsuit
@@ -196,7 +148,7 @@
 		var/obj/item/clothing/under/pants/short_type = short
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
-	
+
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool

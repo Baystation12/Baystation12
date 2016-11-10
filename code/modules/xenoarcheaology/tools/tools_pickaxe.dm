@@ -148,4 +148,4 @@
 		var/obj/item/weapon/pickaxe/smallest = picksToSort[selected]
 		smallest.loc = src
 		picksToSort -= smallest
-	orient2hud()
+	prepare_ui()

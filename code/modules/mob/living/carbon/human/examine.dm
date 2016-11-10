@@ -208,9 +208,9 @@
 		spawn(15)
 			if(distance <= 1 && usr.stat != 1)
 				if(pulse() == PULSE_NONE)
-					usr << "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>"
+					to_chat(usr, "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>")
 				else
-					usr << "<span class='deadsay'>[T.He] [T.has] a pulse!</span>"
+					to_chat(usr, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
 	if(fire_stacks)
 		msg += "[T.He] [T.is] covered in some liquid.\n"
@@ -349,7 +349,7 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "[T.He] [T.is] [pose]"
 
-	user << jointext(msg, null)
+	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)

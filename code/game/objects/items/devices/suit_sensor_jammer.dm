@@ -43,35 +43,36 @@
 /obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/crowbar))
 		if(bcell)
-			user << "<span class='notice'>You remove \the [bcell].</span>"
+			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")
 			disable()
 			bcell.dropInto(loc)
 			bcell = null
 		else
-			user << "<span class='warning'>There is no cell to remove.</span>"
+			to_chat(user, "<span class='warning'>There is no cell to remove.</span>")
 	else if(istype(I, /obj/item/weapon/cell))
 		if(bcell)
-			user << "<span class='warning'>There's already a cell in \the [src].</span>"
+			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
 		else if(user.unEquip(I))
 			I.forceMove(src)
 			bcell = I
-			user << "<span class='notice'>You insert \the [bcell] into \the [src]..</span>"
+			to_chat(user, "<span class='notice'>You insert \the [bcell] into \the [src]..</span>")
 		else
-			user << "<span class='warning'>You're unable to insert the battery.</span>"
+			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
 
 /obj/item/device/suit_sensor_jammer/update_icon()
 	overlays.Cut()
 	if(bcell)
-		switch(bcell.charge/bcell.maxcharge)
-			if(0 to 0.25)
+		var/percent = bcell.percent()
+		switch(percent)
+			if(0 to 25)
 				overlays += "forth_quarter"
-			if(0.25 to 0.50)
+			if(25 to 50)
 				overlays += "one_quarter"
 				overlays += "third_quarter"
-			if(0.50 to 0.75)
+			if(50 to 75)
 				overlays += "two_quarters"
 				overlays += "second_quarter"
-			if(0.75 to 0.99)
+			if(75 to 99)
 				overlays += "three_quarters"
 				overlays += "first_quarter"
 			else
@@ -104,10 +105,10 @@ obj/item/device/suit_sensor_jammer/examine(var/user)
 		var/list/message = list()
 		message += "This device appears to be [active ? "" : "in"]active and "
 		if(bcell)
-			message += "displays a charge level of [bcell.charge * 100 / bcell.maxcharge]%."
+			message += "displays a charge level of [bcell.percent()]%."
 		else
 			message += "is lacking a cell."
-		user << jointext(message,.)
+		to_chat(user, jointext(message,.))
 
 obj/item/device/suit_sensor_jammer/ui_status(mob/user, datum/ui_state/state)
 	if(!bcell || bcell.charge <= 0)

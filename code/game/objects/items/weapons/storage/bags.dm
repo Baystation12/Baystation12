@@ -18,7 +18,7 @@
 /obj/item/weapon/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(istype(src.loc, /obj/item/weapon/storage))
 		if(!stop_messages)
-			user << "<span class='notice'>Take [src] out of [src.loc] first.</span>"
+			to_chat(user, "<span class='notice'>Take [src] out of [src.loc] first.</span>")
 		return 0 //causes problems if the bag expands and becomes larger than src.loc can hold, so disallow it
 	. = ..()
 

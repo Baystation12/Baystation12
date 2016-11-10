@@ -55,7 +55,7 @@ var/global/list/breach_burn_descriptors = list(
 /obj/item/clothing/suit/space/proc/repair_breaches(var/damtype, var/amount, var/mob/user)
 
 	if(!can_breach || !breaches || !breaches.len || !damage)
-		user << "There are no breaches to repair on \the [src]."
+		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
 	var/list/valid_breaches = list()
@@ -65,7 +65,7 @@ var/global/list/breach_burn_descriptors = list(
 			valid_breaches += B
 
 	if(!valid_breaches.len)
-		user << "There are no breaches to repair on \the [src]."
+		to_chat(user, "There are no breaches to repair on \the [src].")
 		return
 
 	var/amount_left = amount
@@ -190,11 +190,11 @@ var/global/list/breach_burn_descriptors = list(
 			return
 		
 		if(istype(src.loc,/mob/living))
-			user << "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>"
+			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
 			return
 
 		if(!damage || !burn_damage)
-			user << "There is no surface damage on \the [src] to repair."
+			to_chat(user, "There is no surface damage on \the [src] to repair.")
 			return
 
 		var/obj/item/stack/P = W
@@ -206,16 +206,16 @@ var/global/list/breach_burn_descriptors = list(
 	else if(istype(W, /obj/item/weapon/weldingtool))
 
 		if(istype(src.loc,/mob/living))
-			user << "\red How do you intend to patch a hardsuit while someone is wearing it?"
+			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
 			return
 
 		if (!damage || ! brute_damage)
-			user << "There is no structural damage on \the [src] to repair."
+			to_chat(user, "There is no structural damage on \the [src] to repair.")
 			return
 
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(5))
-			user << "\red You need more welding fuel to repair this suit."
+			to_chat(user, "<span class='warning'>You need more welding fuel to repair this suit.</span>")
 			return
 
 		repair_breaches(BRUTE, 3, user)
@@ -227,4 +227,4 @@ var/global/list/breach_burn_descriptors = list(
 	..(user)
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
-			user << "\red <B>It has \a [B.descriptor].</B>"
+			to_chat(user, "<span class='danger'>It has \a [B.descriptor].</span>")

@@ -49,7 +49,7 @@
 		temp = null
 	if(href_list["path"])
 		if(uses == 0)
-			usr << "This book is out of uses."
+			to_chat(usr, "This book is out of uses.")
 			return
 
 		var/datum/ghosttrap/ghost = get_ghost_trap("wizard familiar")
@@ -72,9 +72,9 @@
 				else
 					F.faction = usr.faction
 					F.add_spell(new /spell/contract/return_master(usr), "const_spell_ready")
-					F << "<span class='notice'>You are a familiar.</span>"
-					F << "<b>You have been summoned by the wizard [usr] to assist in all matters magical and not.</b>"
-					F << "<b>Do their bidding and help them with their goals.</b>"
+					to_chat(F, "<span class='notice'>You are a familiar.</span>")
+					to_chat(F, "<b>You have been summoned by the wizard [usr] to assist in all matters magical and not.</b>")
+					to_chat(F, "<b>Do their bidding and help them with their goals.</b>")
 					uses--
 	if(Adjacent(usr))
 		src.interact(usr)

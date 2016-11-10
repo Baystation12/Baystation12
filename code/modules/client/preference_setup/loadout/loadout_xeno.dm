@@ -122,3 +122,8 @@
 	sort_category = "Xenowear"
 	whitelisted = "Machine"
 	cost = 1
+
+/datum/gear/shoes/toeless
+	display_name = "toeless jackboots"
+	path = /obj/item/clothing/shoes/jackboots/unathi
+	sort_category = "Xenowear"

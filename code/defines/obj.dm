@@ -76,51 +76,98 @@ var/global/list/PDA_Manifest = list()
 		var/isactive = t.fields["p_stat"]
 		var/department = 0
 		var/depthead = 0 			// Department Heads will be placed at the top of their lists.
+		
+		var/mil_branch = null		
+		var/mil_rank = null
+		
+		if(using_map.flags & MAP_HAS_BRANCH && t.fields["mil_branch"] && t.fields["mil_branch"] != "None")
+			var/datum/mil_branch/branch_datum = mil_branches.get_branch(t.fields["mil_branch"])
+			if(branch_datum)
+				mil_branch = list("full" = branch_datum.name, "short" = branch_datum.name_short)
+		
+		if(using_map.flags & MAP_HAS_RANK && t.fields["mil_rank"] && t.fields["mil_rank"] != "None")
+			var/datum/mil_rank/mil_rank_datum = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
+			if(mil_rank_datum)
+				mil_rank = list("full" = mil_rank_datum.name, "short" = mil_rank_datum.name_short)
+			
+		
 		if(real_rank in command_positions)
-			heads[++heads.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			heads[++heads.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			depthead = 1
 			if(rank=="Captain" && heads.len != 1)
 				heads.Swap(1,heads.len)
 
 		if(real_rank in security_positions)
-			sec[++sec.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			sec[++sec.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			if(depthead && sec.len != 1)
 				sec.Swap(1,sec.len)
 
 		if(real_rank in engineering_positions)
-			eng[++eng.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			eng[++eng.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			if(depthead && eng.len != 1)
 				eng.Swap(1,eng.len)
 
 		if(real_rank in medical_positions)
-			med[++med.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			med[++med.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			if(depthead && med.len != 1)
 				med.Swap(1,med.len)
 
 		if(real_rank in science_positions)
-			sci[++sci.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			sci[++sci.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			if(depthead && sci.len != 1)
 				sci.Swap(1,sci.len)
 
 		if(real_rank in cargo_positions)
-			car[++car.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			car[++car.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			if(depthead && car.len != 1)
 				car.Swap(1,car.len)
 
 		if(real_rank in civilian_positions)
-			civ[++civ.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			civ[++civ.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 			department = 1
 			if(depthead && civ.len != 1)
 				civ.Swap(1,civ.len)
 
 		if(!department && !(name in heads))
-			misc[++misc.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			misc[++misc.len] = list("name" = name, 
+				"rank" = rank, 
+				"active" = isactive, 
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
 
 
 	// Silicons do not have records. See also /datum/datacore/proc/get_manifest 

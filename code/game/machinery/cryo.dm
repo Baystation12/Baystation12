@@ -6,8 +6,9 @@
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
-	layer = BELOW_OBJ_LAYER
+	plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	interact_offline = 1
+	layer = ABOVE_HUMAN_LAYER
 
 	var/on = 0
 	use_power = 1
@@ -123,10 +124,8 @@
 	data["beakerLabel"] = null
 	data["beakerVolume"] = 0
 	if(beaker)
-		data["beakerLabel"] = beaker.label_text ? beaker.label_text : null
-		if (beaker.reagents && beaker.reagents.reagent_list.len)
-			for(var/datum/reagent/R in beaker.reagents.reagent_list)
-				data["beakerVolume"] += R.volume
+		data["beakerLabel"] = beaker.name
+		data["beakerVolume"] = beaker.reagents.total_volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -172,7 +171,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "<span class='warning'>A beaker is already loaded into the machine.</span>"
+			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
 
 		beaker =  G
@@ -184,7 +183,7 @@
 			return
 		for(var/mob/living/carbon/slime/M in range(1,G:affecting))
 			if(M.Victim == G:affecting)
-				usr << "[G:affecting:name] will not fit into the cryo because they have a slime latched onto their head."
+				to_chat(usr, "[G:affecting:name] will not fit into the cryo because they have a slime latched onto their head.")
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
@@ -197,7 +196,6 @@
 	var/image/I
 
 	I = image(icon, "pod[on]_top")
-	I.plane = ABOVE_HUMAN_PLANE // this needs to be fairly high so it displays over most things, but it needs to be under lighting
 	I.pixel_z = 32
 	overlays += I
 
@@ -205,15 +203,12 @@
 		var/image/pickle = image(occupant.icon, occupant.icon_state)
 		pickle.overlays = occupant.overlays
 		pickle.pixel_z = 18
-		pickle.plane = ABOVE_HUMAN_PLANE
 		overlays += pickle
 
 	I = image(icon, "lid[on]")
-	I.plane = ABOVE_HUMAN_PLANE
 	overlays += I
 
 	I = image(icon, "lid[on]_top")
-	I.plane = ABOVE_HUMAN_PLANE
 	I.pixel_z = 32
 	overlays += I
 
@@ -285,19 +280,19 @@
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (stat & (NOPOWER|BROKEN))
-		usr << "<span class='warning'>The cryo cell is not functioning.</span>"
+		to_chat(usr, "<span class='warning'>The cryo cell is not functioning.</span>")
 		return
 	if (!istype(M))
-		usr << "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>"
+		to_chat(usr, "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>")
 		return
 	if (occupant)
-		usr << "<span class='danger'>The cryo cell is already occupied!</span>"
+		to_chat(usr, "<span class='danger'>The cryo cell is already occupied!</span>")
 		return
 	if (M.abiotic())
-		usr << "<span class='warning'>Subject may not have abiotic items on.</span>"
+		to_chat(usr, "<span class='warning'>Subject may not have abiotic items on.</span>")
 		return
 	if(!node)
-		usr << "<span class='warning'>The cell is not correctly connected to its pipe network!</span>"
+		to_chat(usr, "<span class='warning'>The cell is not correctly connected to its pipe network!</span>")
 		return
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
@@ -306,7 +301,7 @@
 	M.loc = src
 	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
-		M << "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>"
+		to_chat(M, "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>")
 	occupant = M
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(2)
@@ -322,7 +317,7 @@
 	if(usr == occupant)//If the user is inside the tube...
 		if (usr.stat == 2)//and he's not dead....
 			return
-		usr << "<span class='notice'>Release sequence activated. This will take two minutes.</span>"
+		to_chat(usr, "<span class='notice'>Release sequence activated. This will take two minutes.</span>")
 		sleep(1200)
 		if(!src || !usr || !occupant || (occupant != usr)) //Check if someone's released/replaced/bombed him already
 			return
@@ -340,7 +335,7 @@
 	set src in oview(1)
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
-			usr << "You're too busy getting your life sucked out of you."
+			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return
 	if (usr.stat != 0)
 		return

@@ -1,12 +1,16 @@
-/obj/item/integrated_circuit/input
-	var/can_be_asked_input = 0
-
+/obj/item/integrated_circuit/input/external_examine(var/mob/user)
+	var/initial_name = initial(name)
+	var/message
+	if(initial_name == name)
+		message = "There is \a [src]."
+	else
+		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
+	to_chat(user, message)
 /obj/item/integrated_circuit/input/button
 	name = "button"
 	desc = "This tiny button must do something, right?"
 	icon_state = "button"
 	complexity = 1
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list()
 	activators = list("on pressed")
@@ -17,10 +21,31 @@
 /obj/item/integrated_circuit/input/button/OnTopic(href_list, user)
 	if(href_list["press"])
 		to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
-		var/datum/integrated_io/A = activators[1]
-		if(A.linked.len)
-			for(var/datum/integrated_io/activate/target in A.linked)
-				target.holder.check_then_do_work()
+		activate_pin(1)
+		return IC_TOPIC_REFRESH
+
+/obj/item/integrated_circuit/input/toggle_button
+	name = "toggle button"
+	desc = "It toggles on, off, on, off..."
+	icon_state = "toggle_button"
+	complexity = 1
+	inputs = list()
+	outputs = list("on" = 0)
+	activators = list("on toggle")
+
+/obj/item/integrated_circuit/input/toggle_button/emp_act()
+	return // This is a mainly physical thing, not affected by electricity
+
+/obj/item/integrated_circuit/input/toggle_button/get_topic_data(mob/user)
+	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")
+
+/obj/item/integrated_circuit/input/toggle_button/OnTopic(href_list, user)
+	if(href_list["toggle"])
+		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
+		activate_pin(1)
+		to_chat(user, "<span class='notice'>You toggle the button labeled '[src.name]' [get_pin_data(IC_OUTPUT, 1) ? "on" : "off"].</span>")
+		var/datum/integrated_io/activate/A = activators[1]
+		A.activate()
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/numberpad
@@ -28,7 +53,6 @@
 	desc = "This small number pad allows someone to input a number into the system."
 	icon_state = "numberpad"
 	complexity = 2
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("number entered")
 	activators = list("on entered")
@@ -40,11 +64,8 @@
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
 		if(isnum(new_input) && CanInteract(user, physical_state))
-			var/datum/integrated_io/O = outputs[1]
-			O.data = new_input
-			O.push_data()
-			var/datum/integrated_io/A = activators[1]
-			A.push_data()
+			set_pin_data(IC_OUTPUT, 1, new_input)
+			activate_pin(1)
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/textpad
@@ -52,23 +73,19 @@
 	desc = "This small text pad allows someone to input a string into the system."
 	icon_state = "textpad"
 	complexity = 2
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("string entered")
 	activators = list("on entered")
 
 /obj/item/integrated_circuit/input/textpad/get_topic_data(mob/user)
-	return list("Enter Words" = "enter_number=1")
+	return list("Enter Words" = "enter_words=1")
 
 /obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
 		if(istext(new_input) && CanInteract(user, physical_state))
-			var/datum/integrated_io/O = outputs[1]
-			O.data = new_input
-			O.push_data()
-			var/datum/integrated_io/A = activators[1]
-			A.push_data()
+			set_pin_data(IC_OUTPUT, 1, new_input)
+			activate_pin(1)
 			return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/med_scanner
@@ -81,22 +98,16 @@
 	activators = list("scan")
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
-	var/datum/integrated_io/I = inputs[1]
-	var/mob/living/carbon/human/H = I.data_as_type(/mob/living/carbon/human)
+	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/human)
 	if(!istype(H)) //Invalid input
 		return
 	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
 		var/total_health = round(H.health/H.maxHealth, 0.1)*100
 		var/missing_health = H.maxHealth - H.health
 
-		var/datum/integrated_io/total = outputs[1]
-		var/datum/integrated_io/missing = outputs[2]
-
-		total.data = total_health
-		missing.data = missing_health
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.push_data()
+		set_pin_data(IC_OUTPUT, 1, total_health)
+		set_pin_data(IC_OUTPUT, 2, missing_health)
+	push_data()
 
 /obj/item/integrated_circuit/input/adv_med_scanner
 	name = "integrated advanced medical analyser"
@@ -125,24 +136,13 @@
 		var/total_health = round(H.health/H.maxHealth, 0.1)*100
 		var/missing_health = H.maxHealth - H.health
 
-		var/datum/integrated_io/total = outputs[1]
-		var/datum/integrated_io/missing = outputs[2]
-		var/datum/integrated_io/brute = outputs[3]
-		var/datum/integrated_io/burn = outputs[4]
-		var/datum/integrated_io/tox = outputs[5]
-		var/datum/integrated_io/oxy = outputs[6]
-		var/datum/integrated_io/clone = outputs[7]
-
-		total.data = total_health
-		missing.data = missing_health
-		brute.data = H.getBruteLoss()
-		burn.data = H.getFireLoss()
-		tox.data = H.getToxLoss()
-		oxy.data = H.getOxyLoss()
-		clone.data = H.getCloneLoss()
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.push_data()
+		set_pin_data(IC_OUTPUT, 1, total_health)
+		set_pin_data(IC_OUTPUT, 2, missing_health)
+		set_pin_data(IC_OUTPUT, 3, H.getBruteLoss())
+		set_pin_data(IC_OUTPUT, 4, H.getFireLoss())
+		set_pin_data(IC_OUTPUT, 5, H.getToxLoss())
+		set_pin_data(IC_OUTPUT, 6, H.getOxyLoss())
+		set_pin_data(IC_OUTPUT, 7, H.getCloneLoss())
 
 /obj/item/integrated_circuit/input/local_locator
 	name = "local locator"
@@ -153,14 +153,14 @@
 	activators = list("locate")
 
 /obj/item/integrated_circuit/input/local_locator/do_work()
-	var/datum/integrated_io/O = outputs[1]
-	O.data = null
-	if(istype(src.loc, /obj/item/device/electronic_assembly)) // Check to make sure we're actually in a machine.
-		var/obj/item/device/electronic_assembly/assembly = src.loc
-		if(istype(assembly.loc, /mob/living)) // Now check if someone's holding us.
-			O.data = weakref(assembly.loc)
+	var/new_data = null
 
-	O.push_data()
+	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
+	if(assembly) // Check to make sure we're actually in a machine.
+		if(istype(assembly.loc, /mob/living)) // Now check if someone's holding us.
+			new_data = weakref(assembly.loc)
+
+	set_pin_data(IC_OUTPUT, 1, new_data)
 
 /obj/item/integrated_circuit/input/adjacent_locator
 	name = "adjacent locator"
@@ -174,26 +174,21 @@
 	activators = list("locate")
 
 /obj/item/integrated_circuit/input/adjacent_locator/do_work()
-	var/datum/integrated_io/I = inputs[1]
-	var/datum/integrated_io/O = outputs[1]
-	O.data = null
+	var/new_data = null
 
-	if(!isweakref(I.data))
-		return
-	var/atom/A = I.data.resolve()
-	if(!A)
-		return
-	var/desired_type = A.type
+	var/atom/A =  get_pin_data_as_type(IC_INPUT, 1, /atom)
+	if(A)
+		var/desired_type = A.type
 
-	var/list/nearby_things = range(1, get_turf(src))
-	var/list/valid_things = list()
-	for(var/atom/thing in nearby_things)
-		if(thing.type != desired_type)
-			continue
-		valid_things.Add(thing)
-	if(valid_things.len)
-		O.data = weakref(pick(valid_things))
-	O.push_data()
+		var/list/nearby_things = range(1, get_turf(src))
+		var/list/valid_things = list()
+		for(var/atom/thing in nearby_things)
+			if(thing.type != desired_type)
+				continue
+			valid_things.Add(thing)
+		if(valid_things.len)
+			new_data = weakref(pick(valid_things))
+	set_pin_data(IC_OUTPUT, 1, new_data)
 
 /obj/item/integrated_circuit/input/signaler
 	name = "integrated signaler"
@@ -269,8 +264,7 @@
 	if(signal.source == src) // Don't trigger ourselves.
 		return 0
 
-	var/datum/integrated_io/A = activators[2]
-	A.push_data()
+	activate_pin(2)
 
 	for(var/mob/O in hearers(1, get_turf(src)))
 		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
@@ -280,7 +274,6 @@
 	desc = "This circuit can locate and allow for selection of teleporter computers."
 	icon_state = "gps"
 	complexity = 5
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("teleporter")
 	activators = list("on selected")
@@ -300,13 +293,104 @@
 
 /obj/item/integrated_circuit/input/teleporter_locator/OnTopic(href_list, user)
 	if(href_list["tport"])
-		var/datum/integrated_io/O = outputs[1]
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
-		O.data = output && weakref(output)
-		O.push_data()
-		var/datum/integrated_io/A = activators[1]
-		A.push_data()
+		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
+		activate_pin(1)
 		return IC_TOPIC_REFRESH
+
+/obj/item/integrated_circuit/input/access_scanner
+	name = "access scanner"
+	desc = "This circuit can either acquire access privileges from external sources or have an access card installed, the latter making the circuit act as an id card itself."
+	description_antag = "If emagged this circuit will remember the access of the last scanned card and will allow itself, or the assembly installed into, to act as a backup id."
+	icon_state = "card_reader"
+	complexity = 6
+	outputs = list("scanned access")
+	activators = list("access scanned")
+
+	var/emagged = FALSE
+	var/datum/encrypted_ic_data/scanned_access
+	var/obj/item/weapon/card/id/contained_id
+
+/obj/item/integrated_circuit/input/access_scanner/New()
+	..()
+	scanned_access = new()
+
+/obj/item/integrated_circuit/input/access_scanner/Destroy()
+	qdel_null(scanned_access)
+	if(contained_id)
+		contained_id.dropInto(loc)
+		contained_id = null
+	. = ..()
+
+/obj/item/integrated_circuit/input/access_scanner/examine(var/mob/user)
+	. = ..(user, 1)
+	if(.)
+		to_chat(user, "It appears a small section of the board has been fried.")
+/obj/item/integrated_circuit/input/access_scanner/emp_act()
+	if(contained_id) // We update access based on whatever an eventual id card returns after being EMPd.
+		contained_id.emp_act()
+		scanned_access.data = json_encode(contained_id.GetAccess())
+		activate_pin(1)
+	else
+		..()
+
+/obj/item/integrated_circuit/input/access_scanner/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged && remaining_charges > 0)
+		emagged = TRUE
+		to_chat(user, "<span class='warning'>You scramble the board's access protection logic.</span>")
+		return 1
+	return ..()
+
+/obj/item/integrated_circuit/input/access_scanner/examine(var/mob/user)
+	. = ..()
+	to_chat(user, "An id card is installed into the board.")
+/obj/item/integrated_circuit/input/access_scanner/attackby(var/obj/item/weapon/card/id/id_card, var/mob/user)
+	if(!istype(id_card))
+		return ..()
+	if(contained_id)
+		to_chat(user, "The board already has an installed id card.")
+	if(user.unEquip(id_card))
+		id_card.forceMove(src)
+		contained_id = id_card
+		scanned_access.data = json_encode(contained_id.GetAccess())
+		user.visible_message("<span class='notice'>\The [user] installs an id card into the board.</span>", "<span class='notice'>You install the id card into the board.</span>")
+
+/obj/item/integrated_circuit/input/access_scanner/attack_self(var/mob/user)
+	if(contained_id)
+		user.visible_message("<span class='notice'>\The [user] removes an id card from the board.</span>", "<span class='notice'>You remove the id card from the board.</span>")
+		contained_id.dropInto(loc)
+		user.put_in_any_hand_if_possible(contained_id)
+		contained_id = null
+		if(!emagged)
+			scanned_access.data = null
+	else
+		return ..()
+
+/obj/item/integrated_circuit/input/access_scanner/get_topic_data(mob/user)
+	return contained_id ? ..() : list("Access Scan" = "access_scan=1")
+
+/obj/item/integrated_circuit/input/access_scanner/OnTopic(href_list, var/mob/user)
+	if(href_list["access_scan"])
+		if(contained_id)
+			return
+
+		scanned_access.data = json_encode(user && user.GetAccess())
+		set_pin_data(IC_OUTPUT, 1, weakref(scanned_access))
+
+		activate_pin(1)
+		return IC_TOPIC_REFRESH
+
+/obj/item/integrated_circuit/input/access_scanner/GetAccess()
+	if(contained_id)
+		return contained_id.GetAccess()
+	if(emagged)
+		var/list/access_list = json_decode(scanned_access.data)
+		if(istype(access_list))
+			return access_list
+	return ..()
+
+/obj/item/integrated_circuit/input/access_scanner/GetIdCard()
+	return contained_id
 
 /obj/item/integrated_circuit/output/screen
 	name = "screen"
@@ -317,13 +401,12 @@
 	activators = list("load data")
 	var/stuff_to_display = null
 
-/obj/item/integrated_circuit/output/screen/examine(mob/user, var/assembly_examine = FALSE)
-	if(assembly_examine)
-		if(stuff_to_display)
-			to_chat(user, "There's a little screen labeled '[name]', which displays '[stuff_to_display]'.")
-	else
-		..()
+/obj/item/integrated_circuit/output/screen/disconnect_all()
+	..()
+	stuff_to_display = null
 
+/obj/item/integrated_circuit/output/screen/any_examine(mob/user)
+	to_chat(user, "There is a little screen labeled '[name]', which displays [stuff_to_display ? "'[stuff_to_display]'" : "nothing"].")
 /obj/item/integrated_circuit/output/screen/get_topic_data()
 	return stuff_to_display ? list(stuff_to_display) : list()
 
@@ -419,7 +502,7 @@
 	var/datum/integrated_io/ID = inputs[1]
 	var/datum/integrated_io/vol = inputs[2]
 	var/datum/integrated_io/frequency = inputs[3]
-	if(istext(ID.data) && isnum(vol.data) && isnum(frequency.data))
+	if(istext(ID.data) && isnum(vol.data) && (!frequency.data || isnum(frequency.data)))
 		var/selected_sound = sounds[ID.data]
 		if(!selected_sound)
 			return
@@ -473,3 +556,68 @@
 	var/datum/integrated_io/text = inputs[1]
 	if(istext(text.data))
 		audible_message("\The [istype(loc, /obj/item/device/electronic_assembly) ? loc : src] states, \"[text.data]\"")
+
+/obj/item/integrated_circuit/output/led
+	name = "light-emitting diode"
+	desc = "This a LED that is lit whenever there is TRUE-equivalent data on its input."
+	extended_desc = "TRUE-equivalent values are: Non-empty strings, non-zero numbers, and valid refs."
+	complexity = 0.1
+	size = 0.1
+	icon_state = "led"
+	inputs = list("lit")
+	outputs = list()
+	activators = list()
+
+	var/led_color
+	category = /obj/item/integrated_circuit/output/led
+
+/obj/item/integrated_circuit/output/led/any_examine(mob/user)
+	var/text_output = list()
+	var/initial_name = initial(name)
+
+	// Doing all this work just to have a color-blind friendly output.
+	text_output += "There is "
+	if(name == initial_name)
+		text_output += "\an [name]"
+	else
+		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
+	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
+	to_chat(user,jointext(text_output,null))
+/obj/item/integrated_circuit/output/led/get_topic_data()
+	return list("\An [initial(name)] that is currently [get_pin_data(IC_INPUT, 1) ? "lit" : "unlit."]")
+
+/obj/item/integrated_circuit/output/led/red
+	name = "red LED"
+	led_color = COLOR_RED
+
+/obj/item/integrated_circuit/output/led/orange
+	name = "orange LED"
+	led_color = COLOR_ORANGE
+
+/obj/item/integrated_circuit/output/led/yellow
+	name = "yellow LED"
+	led_color = COLOR_YELLOW
+
+/obj/item/integrated_circuit/output/led/green
+	name = "green LED"
+	led_color = COLOR_GREEN
+
+/obj/item/integrated_circuit/output/led/blue
+	name = "blue LED"
+	led_color = COLOR_BLUE
+
+/obj/item/integrated_circuit/output/led/purple
+	name = "purple LED"
+	led_color = COLOR_PURPLE
+
+/obj/item/integrated_circuit/output/led/cyan
+	name = "cyan LED"
+	led_color = COLOR_CYAN
+
+/obj/item/integrated_circuit/output/led/white
+	name = "white LED"
+	led_color = COLOR_WHITE
+
+/obj/item/integrated_circuit/output/led/pink
+	name = "pink LED"
+	led_color = COLOR_PINK

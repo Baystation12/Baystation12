@@ -13,7 +13,7 @@
 
 		var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
 		if(!istype(evac_control))
-			user << "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>"
+			to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
 			return
 
 		if ((!( istype(W, /obj/item/weapon/card) ) || !( ticker ) || evacuation_controller.has_evacuated() || !( user )))
@@ -24,16 +24,16 @@
 				var/obj/item/device/pda/pda = W
 				W = pda.id
 			if (!W:access) //no access
-				user << "The access level of [W:registered_name]\'s card is not high enough. "
+				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
 				return
 
 			var/list/cardaccess = W:access
 			if(!istype(cardaccess, /list) || !cardaccess.len) //no access
-				user << "The access level of [W:registered_name]\'s card is not high enough. "
+				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
 				return
 
 			if(!(access_heads in W:access)) //doesn't have this access
-				user << "The access level of [W:registered_name]\'s card is not high enough. "
+				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
 				return 0
 
 			var/choice = alert(user, text("Would you like to (un)authorize a shortened launch time? [] authorization\s are still needed. Use abort to cancel all authorizations.", src.auth_need - src.authorized.len), "Shuttle Launch", "Authorize", "Repeal", "Abort")
@@ -46,11 +46,11 @@
 					if (src.auth_need - src.authorized.len > 0)
 						message_admins("[key_name_admin(user)] has authorized early shuttle launch")
 						log_game("[user.ckey] has authorized early shuttle launch")
-						world << text("<span class='notice'><b>Alert: [] authorizations needed until shuttle is launched early</b></span>", src.auth_need - src.authorized.len)
+						to_world(text("<span class='notice'><b>Alert: [] authorizations needed until shuttle is launched early</b></span>", src.auth_need - src.authorized.len))
 					else
 						message_admins("[key_name_admin(user)] has launched the shuttle")
 						log_game("[user.ckey] has launched the shuttle early")
-						world << "<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>"
+						to_world("<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>")
 						evacuation_controller.set_launch_time(world.time+100)
 						//src.authorized = null
 						qdel(src.authorized)
@@ -58,10 +58,10 @@
 
 				if("Repeal")
 					src.authorized -= W:registered_name
-					world << text("<span class='notice'><b>Alert: [] authorizations needed until shuttle is launched early</b></span>", src.auth_need - src.authorized.len)
+					to_world(text("<span class='notice'><b>Alert: [] authorizations needed until shuttle is launched early</b></span>", src.auth_need - src.authorized.len))
 
 				if("Abort")
-					world << "<span class='notice'><b>All authorizations to shortening time for shuttle launch have been revoked!</b></span>"
+					to_world("<span class='notice'><b>All authorizations to shortening time for shuttle launch have been revoked!</b></span>")
 					src.authorized.len = 0
 					src.authorized = list(  )
 
@@ -71,7 +71,7 @@
 			if(!emagged && !evacuation_controller.is_prepared() && user.get_active_hand() == W)
 				switch(choice)
 					if("Launch")
-						world << "<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>"
+						to_world("<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>")
 						evacuation_controller.set_launch_time(world.time+100)
 						emagged = 1
 					if("Cancel")

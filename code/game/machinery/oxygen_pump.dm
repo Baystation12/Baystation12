@@ -31,16 +31,16 @@
 	return ..()
 
 /obj/machinery/oxygen_pump/MouseDrop(over_object, src_location, over_location)
-    ..()
-    if(in_range(src, usr) && ishuman(over_object) && Adjacent(over_object))
-        var/mob/living/carbon/human/target = over_object
-        if(target.wear_mask)
-            usr << "<span class='warning'>\The [target] is already wearing a mask!</span>"
-            return
-        usr.visible_message("\The [usr] begins placing the mask onto [target]..")
-        if(do_after(usr, 50))
-            attach_mask(target)
-            src.add_fingerprint(usr)
+	..()
+	if(in_range(src, usr) && ishuman(over_object) && Adjacent(over_object))
+		var/mob/living/carbon/human/target = over_object
+		if(target.wear_mask)
+			to_chat(usr, "<span class='warning'>\The [target] is already wearing a mask!</span>")
+			return
+		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
+		if(do_after(usr, 50))
+			attach_mask(target)
+			src.add_fingerprint(usr)
 
 /obj/machinery/oxygen_pump/attack_hand(var/mob/living/carbon/user)
 	if(stat & MAINT)
@@ -50,10 +50,10 @@
 			src.add_fingerprint(user)
 			tank.add_fingerprint(user)
 			tank = null
-		else user << "<span class='warning'>There is no tank in \the [src]!</span>"
+		else to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
 	else if(contained.loc == src && !breather)
 		if(user.wear_mask)
-			user << "<span class='notice'>You're already wearing a mask!</span>"
+			to_chat(user, "<span class='notice'>You're already wearing a mask!</span>")
 			return
 		user.visible_message("<span class='notice'>\The [user] takes \the [contained] out of \the [src]!</span>", "<span class='notice'>You take \the [contained] out of \the [src]!</span>")
 		attach_mask(user)
@@ -61,10 +61,9 @@
 		if(tank)
 			tank.ui_interact(user)
 		else
-			user << "<span class='warning'>There is no tank installed!</span>"
+			to_chat(user, "<span class='warning'>There is no tank installed!</span>")
 	else
-		user << "<span class='notice'>\The [contained] has already been taken out!</span>"
-
+		to_chat(user, "<span class='notice'>\The [contained] has already been taken out!</span>")
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
 		contained.forceMove(get_turf(C))
@@ -86,7 +85,7 @@
 		//TO-DO: Open icon
 	if(istype(I, /obj/item/weapon/tank) && (stat & MAINT))
 		if(tank)
-			user << "<span class='warning'>\The [src] already has a tank installed!</span>"
+			to_chat(user, "<span class='warning'>\The [src] already has a tank installed!</span>")
 		else
 			user.drop_item()
 			I.forceMove(src)
@@ -94,7 +93,7 @@
 			user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
 			src.add_fingerprint(user)
 	if(I == contained)
-		user << "<span class='notice'>You place \the [contained] back into \the [src].</span>"
+		to_chat(user, "<span class='notice'>You place \the [contained] back into \the [src].</span>")
 		if(tank)
 			tank.forceMove(src)
 		breather.remove_from_mob(contained)
@@ -106,9 +105,9 @@
 /obj/machinery/oxygen_pump/examine(var/mob/user)
 	..()
 	if(tank)
-		user << "The meter shows [round(tank.air_contents.return_pressure())]"
+		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")
 	else
-		user << "<span class='warning'>It is missing a tank!</span>"
+		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
 	return
 
 

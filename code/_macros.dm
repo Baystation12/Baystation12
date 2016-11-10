@@ -70,6 +70,9 @@
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
 #define to_chat(target, message) target << message
+#define to_world(message) world << message
+
+#define sound_to(target, sound) target << sound
 
 #define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
 
@@ -80,3 +83,5 @@
 #define any2ref(x) "\ref[x]"
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
+
+#define qdel_null(x) if(x) { qdel(x) ; x = null }

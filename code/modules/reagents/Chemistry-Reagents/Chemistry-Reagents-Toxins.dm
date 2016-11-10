@@ -302,7 +302,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(prob(10))
-		M << "<span class='danger'>Your insides are burning!</span>"
+		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
 		M.adjustToxLoss(rand(100, 300) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
@@ -534,7 +534,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name != "Slime")
-			M << "<span class='danger'>Your flesh rapidly mutates!</span>"
+			to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
 			H.set_species("Slime")
 
 /datum/reagent/aslimetoxin
@@ -548,7 +548,7 @@
 /datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
 	if(M.transforming)
 		return
-	M << "<span class='danger'>Your flesh rapidly mutates!</span>"
+	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
 	M.transforming = 1
 	M.canmove = 0
 	M.icon = null

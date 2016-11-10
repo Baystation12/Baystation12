@@ -63,7 +63,7 @@
 	if(M.get_buffer() == buffer && buffer)
 		receive_buffer(M, buffer, user)
 	else if(!buffer)
-		user << "<span class='warning'>Unable to acquire data from the buffered object. Purging from memory.</span>"
+		to_chat(user, "<span class='warning'>Unable to acquire data from the buffered object. Purging from memory.</span>")
 	return MT_REFRESH
 
 /datum/extension/interactive/multitool/proc/receive_buffer(var/obj/item/device/multitool/M, var/atom/buffer, var/mob/user)

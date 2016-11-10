@@ -39,7 +39,7 @@
 		var/obj/item/device/measuring_tape/P = I
 		user.visible_message("<span class='notice'>\The [user] extends \the [P] towards \the [src].</span>", "<span class='notice'>You extend \the [P] towards \the [src].</span>")
 		if(do_after(user, 15))
-			user << "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>"
+			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>")
 		return
 
 	if(istype(I, /obj/item/weapon/pickaxe))
@@ -49,12 +49,12 @@
 			return
 		last_act = world.time
 
-		user << "<span class='warning'>You start [P.drill_verb] [src].</span>"
+		to_chat(user, "<span class='warning'>You start [P.drill_verb] [src].</span>")
 
 		if(!do_after(user, P.digspeed))
 			return
 
-		user << "<span class='notice'>You finish [P.drill_verb] [src].</span>"
+		to_chat(user, "<span class='notice'>You finish [P.drill_verb] [src].</span>")
 		excavation_level += P.excavation_amount
 
 		if(excavation_level > 200)

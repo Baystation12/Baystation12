@@ -3,7 +3,7 @@
 	complexity = 5
 	inputs = list("active", "range" = 3)
 	outputs = list("triggering ref")
-	activators = list("on triggered")
+	activators = list("update", "on triggered")
 	category = /obj/item/integrated_circuit/sensor
 	var/min_range = 0
 	var/max_range = 3
@@ -50,11 +50,11 @@
 		proximity_trigger = null
 	. = ..()
 
-/obj/item/integrated_circuit/sensor/proximity/on_data_written()
-	var/datum/integrated_io/active = inputs[1]
-	var/datum/integrated_io/range = inputs[2]
+/obj/item/integrated_circuit/sensor/proximity/do_work()
+	var/active = set_pin_data(IC_INPUT, 1)
+	var/range = set_pin_data(IC_INPUT, 2)
 
-	var/do_activate = isnum(active.data) && active.data
+	var/do_activate = isnum(active) && active
 	var/turn_on = !proximity_trigger.is_active() && do_activate
 	var/turn_off = proximity_trigger.is_active() && !do_activate
 
@@ -62,23 +62,18 @@
 	//  As the time this code was written on_data_written() is called once per pin write instead of after all pins have been written but this is the future proof variant.
 	if(turn_off)
 		proximity_trigger.unregister_turfs()
-	if(isnum(range.data))
-		range.data = between(min_range, range.data, max_range)
-		proximity_trigger.set_range(range.data)
+	if(isnum(range))
+		range = between(min_range, range, max_range)
+		proximity_trigger.set_range(range)
 	if(turn_on)
 		proximity_trigger.register_turfs()
-	..()
 
 /obj/item/integrated_circuit/sensor/proximity/proc/on_turf_entered(var/enterer)
 	if(!shall_trigger(enterer))
 		return
 
-	var/datum/integrated_io/O = outputs[1]
-	var/datum/integrated_io/A = activators[1]
-
-	O.data = weakref(enterer)
-	O.push_data()
-	A.push_data()
+	set_pin_data(IC_OUTPUT, 1, weakref(enterer))
+	activate_pin(2)
 
 /obj/item/integrated_circuit/sensor/proximity/proc/on_turfs_changed(var/list/old_turfs, var/list/new_turfs)
 	return
@@ -118,9 +113,9 @@
 
 /obj/item/integrated_circuit/sensor/proximity/ir/on_data_written()
 	..()
-	var/datum/integrated_io/visible_beam = inputs[3]
-	if(isnum(visible_beam.data))
-		var/new_beam_visibility = !!visible_beam.data
+	var/visible_beam = get_pin_data(IC_INPUT, 3)
+	if(isnum(visible_beam))
+		var/new_beam_visibility = !!visible_beam
 		if(current_beam_visibility != new_beam_visibility)
 			current_beam_visibility = new_beam_visibility
 			update_beam()

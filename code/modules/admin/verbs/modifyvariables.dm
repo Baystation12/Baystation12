@@ -121,7 +121,6 @@
 /client/proc/mod_list(var/list/L, atom/O, original_name, objectvar)
 	if(!check_rights(R_VAREDIT))	return
 	if(!istype(L,/list)) to_chat(src, "Not a List.")
-
 	if(L.len > 1000)
 		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
 		if(confirm != "Continue")
@@ -171,7 +170,6 @@
 
 	if(isnull(variable))
 		to_chat(usr, "Unable to determine variable type.")
-
 	else if(isnum(variable))
 		to_chat(usr, "Variable appears to be <b>NUM</b>.")
 		default = "num"
@@ -230,7 +228,6 @@
 
 		if(dir)
 			to_chat(usr, "If a direction, direction is: [dir]")
-
 	var/class = "text"
 	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
 
@@ -432,7 +429,6 @@
 		var/default
 		if(isnull(var_value))
 			to_chat(usr, "Unable to determine variable type.")
-
 		else if(isnum(var_value))
 			to_chat(usr, "Variable appears to be <b>NUM</b>.")
 			default = "num"
@@ -490,7 +486,6 @@
 					dir = null
 			if(dir)
 				to_chat(usr, "If a direction, direction is: [dir]")
-
 		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()
@@ -628,8 +623,8 @@
 			return FALSE
 	return TRUE
 
-/decl/vv_set_handler/proc/handle_set_var(O, variable, var_value)
-	return FALSE
+/decl/vv_set_handler/proc/handle_set_var(var/datum/O, variable, var_value)
+	O.vars[variable] = var_value
 
 /decl/vv_set_handler/location_hander
 	handled_type = /atom/movable
@@ -663,7 +658,6 @@
 			AM.forceMove(T)
 		else
 			to_chat(client, "<span class='warning'>Unable to locate a turf at [x]-[y]-[z].</span>")
-
 /decl/vv_set_handler/opacity_hander
 	handled_type = /atom
 	handled_vars = list("opacity")
@@ -673,7 +667,6 @@
 		A.set_opacity(var_value)
 	else
 		to_chat(client, "<span class='warning'>May only assign numerals to opacity.</span>")
-
 /decl/vv_set_handler/dir_hander
 	handled_type = /atom
 	handled_vars = list("dir")
@@ -688,5 +681,34 @@
 	handled_type = /mob/observer/ghost
 	handled_vars = list("appearance")
 
-/decl/vv_set_handler/dir_hander/handle_set_var(var/mob/observer/ghost/ghost, variable, var_value, client)
+/decl/vv_set_handler/ghost_appearance_handler/handle_set_var(var/mob/observer/ghost/ghost, variable, var_value, client)
 	ghost.set_appearance(var_value)
+
+/decl/vv_set_handler/virtual_ability_handler
+	handled_type = /mob/observer/virtual
+	handled_vars = list("abilities")
+
+/decl/vv_set_handler/virtual_ability_handler/handle_set_var(var/mob/observer/virtual/virtual, variable, var_value, client)
+	..()
+	virtual.updateicon()
+
+/decl/vv_set_handler/mob_see_invisible_handler
+	handled_type = /mob
+	handled_vars = list("see_invisible")
+
+/decl/vv_set_handler/mob_see_invisible_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+	mob.set_see_invisible(var_value)
+
+/decl/vv_set_handler/mob_sight_handler
+	handled_type = /mob
+	handled_vars = list("sight")
+
+/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+	mob.set_sight(var_value)
+
+/decl/vv_set_handler/mob_see_in_dark_handler
+	handled_type = /mob
+	handled_vars = list("see_in_dark")
+
+/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+	mob.set_see_in_dark(var_value)

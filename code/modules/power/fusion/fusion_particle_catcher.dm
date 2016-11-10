@@ -37,5 +37,5 @@
 
 /obj/effect/fusion_particle_catcher/Bumped(atom/AM)
 	if(ismob(AM) && density)
-		AM << "<span class='warning'>A powerful force pushes you back.</span>"
+		to_chat(AM, "<span class='warning'>A powerful force pushes you back.</span>")
 	return 0

@@ -1,4 +1,3 @@
-
 #define NITROGEN_RETARDATION_FACTOR 0.15	//Higher == N2 slows reaction more
 #define THERMAL_RELEASE_MODIFIER 10000		//Higher == more heat released during reaction
 #define PHORON_RELEASE_MODIFIER 1500		//Higher == less phoron released by reaction
@@ -20,19 +19,32 @@
 #define DECAY_FACTOR 700			//Affects how fast the supermatter power decays
 #define CRITICAL_TEMPERATURE 5000	//K
 #define CHARGING_FACTOR 0.05
-#define DAMAGE_RATE_LIMIT 3			//damage rate cap at power = 300, scales linearly with power
+#define DAMAGE_RATE_LIMIT 4.5		//damage rate cap at power = 300, scales linearly with power
 
 
-//These would be what you would get at point blank, decreases with distance
-#define DETONATION_RADS 200
-#define DETONATION_HALLUCINATION 600
+// Base variants are applied to everyone on the same Z level
+// Range variants are applied on per-range basis: numbers here are on point blank, it scales with the map size (assumes square shaped Z levels)
+#define DETONATION_RADS_RANGE 200
+#define DETONATION_RADS_BASE 200
+#define DETONATION_HALLUCINATION_BASE 300
+#define DETONATION_HALLUCINATION_RANGE 300
 
+#define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
+
+// Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
+// This does pretty much the same thing as an electrical storm, it just affects the whole Z level instantly.
+#define DETONATION_APC_OVERLOAD_PROB 10		// prob() of overloading an APC's lights.
+#define DETONATION_SHUTDOWN_APC 120			// Regular APC.
+#define DETONATION_SHUTDOWN_CRITAPC 10		// Critical APC. AI core and such. Considerably shorter as we don't want to kill the AI with a single blast. Still a nuisance.
+#define DETONATION_SHUTDOWN_SMES 60			// SMES
+#define DETONATION_SHUTDOWN_RNG_FACTOR 20	// RNG factor. Above shutdown times can be +- X%, where this setting is the percent. Do not set to 100 or more.
+#define DETONATION_SOLAR_BREAK_CHANCE 60	// prob() of breaking solar arrays (this is per-panel, and only affects the Z level SM is on)
 
 #define WARNING_DELAY 20			//seconds between warnings.
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
-	desc = "A strangely translucent and iridescent crystal. \red You get headaches just from looking at it."
+	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon = 'icons/obj/engine.dmi'
 	icon_state = "darkmatter"
 	density = 1
@@ -98,23 +110,69 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
-	log_and_message_admins("Supermatter exploded at [x] [y] [z]")
+	set waitfor = 0
+
+	if(exploded)
+		return
+
+	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
 	anchored = 1
 	grav_pulling = 1
 	exploded = 1
+	sleep(pull_time)
+	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
+
+	// Effect 1: Radiation, weakening and hallucinations to all mobs on Z level
 	for(var/mob/living/mob in living_mob_list_)
-		var/turf/T = get_turf(mob)
-		if(T && (loc.z == T.z))
+		var/turf/TM = get_turf(mob)
+
+		if(TS && TM && (TS.z == TM.z))
+			var/range_multiplier = between(0, get_dist(mob, src) / world.maxx, 1)
+			var/rads = DETONATION_RADS_BASE + (range_multiplier * DETONATION_RADS_RANGE)
+			var/hallucinations = DETONATION_HALLUCINATION_BASE + (range_multiplier * DETONATION_HALLUCINATION_RANGE)
+			mob.apply_effect(rads, IRRADIATE, mob.getarmor(null, "rad"))
 			if(istype(mob, /mob/living/carbon/human))
-				//Hilariously enough, running into a closet should make you get hit the hardest.
 				var/mob/living/carbon/human/H = mob
-				H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-			var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
-			mob.apply_effect(rads, IRRADIATE)
-	spawn(pull_time)
-		explosion(get_turf(src), explosion_power, explosion_power * 1.25, explosion_power * 1.5, explosion_power * 1.75, 1)
+				H.hallucination += hallucinations
+			mob.Weaken(DETONATION_MOB_CONCUSSION)
+			to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
+
+	// Effect 2: Z-level wide electrical pulse
+	for(var/obj/machinery/power/apc/A in machines)
+		if(A.z != TS.z)
+			continue
+
+		// Overloads lights
+		if(prob(DETONATION_APC_OVERLOAD_PROB))
+			A.overload_lighting()
+		// Causes the APCs to go into system failure mode.
+		var/random_change = rand(100 - DETONATION_SHUTDOWN_RNG_FACTOR, 100 + DETONATION_SHUTDOWN_RNG_FACTOR) / 100
+		if(A.is_critical)
+			A.energy_fail(round(DETONATION_SHUTDOWN_CRITAPC * random_change))
+		else
+			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
+
+	for(var/obj/machinery/power/smes/buildable/S in machines)
+		if(S.z != TS.z)
+			continue
+		// Causes SMESes to shut down for a bit
+		var/random_change = rand(100 - DETONATION_SHUTDOWN_RNG_FACTOR, 100 + DETONATION_SHUTDOWN_RNG_FACTOR) / 100
+		S.energy_fail(round(DETONATION_SHUTDOWN_SMES * random_change))
+
+	// Effect 3: Break solar arrays
+
+	for(var/obj/machinery/power/solar/S in machines)
+		if(S.z != TS.z)
+			continue
+		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
+			S.broken()
+
+
+
+	// Effect 4: Medium scale explosion
+	spawn(0)
+		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
 		qdel(src)
-		return
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
@@ -155,19 +213,6 @@
 			radio.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
 
-
-/obj/machinery/power/supermatter/get_transit_zlevel()
-	//don't send it back to the station -- most of the time
-	if(prob(99))
-		var/list/candidates = accessible_z_levels.Copy()
-		for(var/zlevel in using_map.station_levels)
-			candidates.Remove("[zlevel]")
-		candidates.Remove("[src.z]")
-
-		if(candidates.len)
-			return text2num(pickweight(candidates))
-
-	return ..()
 
 /obj/machinery/power/supermatter/process()
 
@@ -234,9 +279,6 @@
 
 		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
-
-		//We've generated power, now let's transfer it to the collectors for storing/usage
-		//transfer_energy()
 
 		var/device_energy = power * REACTION_POWER_MODIFIER
 
@@ -329,16 +371,6 @@
 		ui.set_auto_update(1)
 
 
-/*
-/obj/machinery/power/supermatter/proc/transfer_energy()
-	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		var/distance = get_dist(R, src)
-		if(distance <= 15)
-			//for collectors using standard phoron tanks at 1013 kPa, the actual power generated will be this power*POWER_FACTOR*20*29 = power*POWER_FACTOR*580
-			R.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2)
-	return
-*/
-
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
 		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
@@ -395,7 +427,7 @@
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "Supermatter Shard"
-	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. \red You get headaches just from looking at it."
+	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
 
@@ -410,3 +442,27 @@
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
+
+
+#undef NITROGEN_RETARDATION_FACTOR
+#undef THERMAL_RELEASE_MODIFIER
+#undef PHORON_RELEASE_MODIFIER
+#undef OXYGEN_RELEASE_MODIFIER
+#undef REACTION_POWER_MODIFIER
+#undef POWER_FACTOR
+#undef DECAY_FACTOR
+#undef CRITICAL_TEMPERATURE
+#undef CHARGING_FACTOR
+#undef DAMAGE_RATE_LIMIT
+#undef DETONATION_RADS_RANGE
+#undef DETONATION_RADS_BASE
+#undef DETONATION_HALLUCINATION_BASE
+#undef DETONATION_HALLUCINATION_RANGE
+#undef DETONATION_MOB_CONCUSSION
+#undef DETONATION_APC_OVERLOAD_PROB
+#undef DETONATION_SHUTDOWN_APC
+#undef DETONATION_SHUTDOWN_CRITAPC
+#undef DETONATION_SHUTDOWN_SMES
+#undef DETONATION_SHUTDOWN_RNG_FACTOR
+#undef DETONATION_SOLAR_BREAK_CHANCE
+#undef WARNING_DELAY

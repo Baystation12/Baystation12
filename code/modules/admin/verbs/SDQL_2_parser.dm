@@ -67,7 +67,7 @@
 
 /datum/SDQL_parser/proc/parse_error(error_message)
 	error = 1
-	usr << "\red SQDL2 Parsing Error: [error_message]"
+	to_chat(usr, "<span class='warning'>SQDL2 Parsing Error: [error_message]</span>")
 	return query.len + 1
 
 /datum/SDQL_parser/proc/parse()

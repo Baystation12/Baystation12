@@ -56,6 +56,12 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 
+	if(reinf_material)
+		if(Proj.damage_type == BURN)
+			proj_damage /= reinf_material.burn_armor
+		else if(Proj.damage_type == BRUTE)
+			proj_damage /= reinf_material.brute_armor
+
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
 	var/damage = min(proj_damage, 100)
 
@@ -93,18 +99,18 @@
 	. = ..(user)
 
 	if(!damage)
-		user << "<span class='notice'>It looks fully intact.</span>"
+		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
-			user << "<span class='warning'>It looks slightly damaged.</span>"
+			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
 		else if(dam <= 0.6)
-			user << "<span class='warning'>It looks moderately damaged.</span>"
+			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
 		else
-			user << "<span class='danger'>It looks heavily damaged.</span>"
+			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		user << "<span class='warning'>There is fungus growing on [src].</span>"
+		to_chat(user, "<span class='warning'>There is fungus growing on [src].</span>")
 
 //Damage
 
@@ -224,7 +230,7 @@
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	user << "<span class='warning'>The thermite starts melting through the wall.</span>"
+	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
 
 	spawn(100)
 		if(O)

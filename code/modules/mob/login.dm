@@ -26,7 +26,7 @@
 		if(is_multikeying && !client.warned_about_multikeying)
 			client.warned_about_multikeying = 1
 			spawn(1 SECOND)
-				src << "<b>WARNING:</b> It would seem that you are sharing connection or computer with another player. If you haven't done so already, please contact the staff via the Adminhelp verb to resolve this situation. Failure to do so may result in administrative action. You have been warned."
+				to_chat(src, "<b>WARNING:</b> It would seem that you are sharing connection or computer with another player. If you haven't done so already, please contact the staff via the Adminhelp verb to resolve this situation. Failure to do so may result in administrative action. You have been warned.")
 
 
 /mob/Login()
@@ -41,7 +41,7 @@
 	hud_used = new /datum/hud(src)
 
 	next_move = 1
-	sight |= SEE_SELF
+	set_sight(sight|SEE_SELF)
 	..()
 
 	if(loc && !isturf(loc))

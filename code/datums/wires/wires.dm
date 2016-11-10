@@ -94,7 +94,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 	for(var/colour in wires)
 		html += "<tr>"
-		html += "<td[row_options1]><font color='[colour]'>[capitalize(colour)]</font></td>"
+		html += "<td[row_options1]><font color='[colour]'>&#9724;</font>[capitalize(colour)]</td>"
 		html += "<td[row_options2]>"
 		html += "<A href='?src=\ref[src];action=1;cut=[colour]'>[IsColourCut(colour) ? "Mend" :  "Cut"]</A>"
 		html += " <A href='?src=\ref[src];action=1;pulse=[colour]'>Pulse</A>"
@@ -120,15 +120,13 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 					var/colour = href_list["cut"]
 					CutWireColour(colour)
 				else
-					L << "<span class='error'>You need wirecutters!</span>"
-
+					to_chat(L, "<span class='error'>You need wirecutters!</span>")
 			else if(href_list["pulse"])
 				if(istype(I, /obj/item/device/multitool))
 					var/colour = href_list["pulse"]
 					PulseColour(colour)
 				else
-					L << "<span class='error'>You need a multitool!</span>"
-
+					to_chat(L, "<span class='error'>You need a multitool!</span>")
 			else if(href_list["attach"])
 				var/colour = href_list["attach"]
 				// Detach
@@ -143,8 +141,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 						L.drop_item()
 						Attach(colour, I)
 					else
-						L << "<span class='error'>You need a remote signaller!</span>"
-
+						to_chat(L, "<span class='error'>You need a remote signaller!</span>")
 
 
 

@@ -33,8 +33,8 @@
 /obj/item/device/spy_bug/examine(mob/user)
 	. = ..(user, 0)
 	if(.)
-		user << "It's a tiny camera, microphone, and transmission device in a happy union."
-		user << "Needs to be both configured and brought in contact with monitor device to be fully functional."
+		to_chat(user, "It's a tiny camera, microphone, and transmission device in a happy union.")
+		to_chat(user, "Needs to be both configured and brought in contact with monitor device to be fully functional.")
 
 /obj/item/device/spy_bug/attack_self(mob/user)
 	radio.attack_self(user)
@@ -77,7 +77,7 @@
 /obj/item/device/spy_monitor/examine(mob/user)
 	. = ..(user, 1)
 	if(.)
-		user << "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made."
+		to_chat(user, "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
 
 /obj/item/device/spy_monitor/attack_self(mob/user)
 	if(operating)
@@ -94,10 +94,10 @@
 
 /obj/item/device/spy_monitor/proc/pair(var/obj/item/device/spy_bug/SB, var/mob/living/user)
 	if(SB.camera in cameras)
-		user << "<span class='notice'>\The [SB] has been unpaired from \the [src].</span>"
+		to_chat(user, "<span class='notice'>\The [SB] has been unpaired from \the [src].</span>")
 		cameras -= SB.camera
 	else
-		user << "<span class='notice'>\The [SB] has been paired with \the [src].</span>"
+		to_chat(user, "<span class='notice'>\The [SB] has been paired with \the [src].</span>")
 		cameras += SB.camera
 
 /obj/item/device/spy_monitor/proc/view_cameras(mob/user)
@@ -120,7 +120,7 @@
 			if(!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
 				user.unset_machine()
 				user.reset_view(null)
-				user << "<span class='notice'>[selected_camera] unavailable.</span>"
+				to_chat(user, "<span class='notice'>[selected_camera] unavailable.</span>")
 				sleep(90)
 			else
 				user.set_machine(selected_camera)
@@ -134,8 +134,8 @@
 		return
 
 	if(!cameras.len)
-		user << "<span class='warning'>No paired cameras detected!</span>"
-		user << "<span class='warning'>Bring a bug in contact with this device to pair the camera.</span>"
+		to_chat(user, "<span class='warning'>No paired cameras detected!</span>")
+		to_chat(user, "<span class='warning'>Bring a bug in contact with this device to pair the camera.</span>")
 		return
 
 	return 1
