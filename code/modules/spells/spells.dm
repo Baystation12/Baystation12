@@ -28,6 +28,7 @@ proc/restore_spells(var/mob/H)
 
 		for(var/spell/spell_to_add in spells)
 			H.add_spell(spell_to_add)
+	H.ability_master.update_abilities(0,H)
 
 /mob/proc/add_spell(var/spell/spell_to_add, var/spell_base = "wiz_spell_ready")
 	if(!ability_master)

@@ -22,7 +22,7 @@
 	if(!reward)
 		user << "\The [src] does not know what to make of you."
 		return
-	for(var/spell/S in user.spell_list)
+	for(var/spell/S in user.mind.learned_spells)
 		if(istype(S,reward))
 			user << "\The [src] can do no more for you."
 			return

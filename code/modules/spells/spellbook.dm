@@ -268,7 +268,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 
 /obj/item/weapon/spellbook/proc/add_spell(var/mob/user, var/spell_path)
-	for(var/spell/S in user.spell_list)
+	for(var/spell/S in user.mind.learned_spells)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
 				return

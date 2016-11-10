@@ -35,8 +35,6 @@
 	var/obj/screen/wizard/energy/wiz_energy_display = null
 	var/obj/screen/wizard/instability/wiz_instability_display = null
 
-	//spells hud icons - this interacts with add_spell and remove_spell
-	var/list/obj/screen/movable/spell_master/spell_masters = null
 	var/obj/screen/movable/ability_master/ability_master = null
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
@@ -129,9 +127,6 @@
 
 //The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
-
-//Wizard mode, but can be used in other modes thanks to the brand new "Give Spell" badmin button
-	var/spell/list/spell_list = list()
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 

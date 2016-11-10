@@ -146,6 +146,8 @@
 	if(!ability)
 		return
 	ability_objects.Remove(ability)
+	if(istype(ability,/obj/screen/ability/spell))
+		spell_objects.Remove(ability)
 	qdel(ability)
 
 
@@ -187,8 +189,8 @@
 /mob/Login()
 	..()
 	if(ability_master)
+		ability_master.update_abilities(1, src)
 		ability_master.toggle_open(1)
-		client.screen -= ability_master
 
 /mob/New()
 	..()
@@ -389,6 +391,12 @@
 	var/spell_base
 	var/last_charge = 0
 	var/icon/last_charged_icon
+
+/obj/screen/ability/spell/Destroy()
+	if(spell)
+		spell.connected_button = null
+		spell = null
+	..()
 
 /obj/screen/movable/ability_master/proc/add_spell(var/spell/spell)
 	if(!spell) return
