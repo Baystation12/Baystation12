@@ -79,23 +79,6 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	else
 		icon_state = "circuit_imprinter"
 
-/obj/machinery/r_n_d/circuit_imprinter/proc/TotalMaterials()
-	var/t = 0
-	for(var/f in materials)
-		t += materials[f]
-	return t
-
-/obj/machinery/r_n_d/circuit_imprinter/dismantle()
-	for(var/obj/I in component_parts)
-		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to_obj(I, reagents.total_volume)
-	for(var/f in materials)
-		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
-			var/path = getMaterialType(f)
-			if(path)
-				var/obj/item/stack/S = new f(loc)
-				S.amount = round(materials[f] / SHEET_MATERIAL_AMOUNT)
-	..()
 
 /obj/machinery/r_n_d/circuit_imprinter/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
@@ -143,8 +126,8 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 	busy = 1
 	use_power(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
-	var/stacktype = stack.type
-	var/t = getMaterialName(stacktype)
+
+	var/t = stack.material.name
 	if(t)
 		if(do_after(usr, 16, src))
 			if(stack.use(amount))
@@ -169,20 +152,6 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		if(!reagents.has_reagent(C, D.chemicals[C]))
 			return 0
 	return 1
-
-/obj/machinery/r_n_d/circuit_imprinter/proc/getLackingMaterials(var/datum/design/D)
-	var/ret = ""
-	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
-			if(ret != "")
-				ret += ", "
-			ret += "[D.materials[M] - materials[M]] [M]"
-	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C]))
-			if(ret != "")
-				ret += ", "
-			ret += C
-	return ret
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/build(var/datum/design/D)
 	var/power = active_power_usage
