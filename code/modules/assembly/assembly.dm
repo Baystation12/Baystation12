@@ -88,25 +88,19 @@
 	return secured
 
 
-	attach_assembly(var/obj/item/device/assembly/A, var/mob/user)
-		holder = new/obj/item/device/assembly_holder(get_turf(src))
-		if(holder.attach(A,src,user))
-			to_chat(user, "<span class='notice'>You attach \the [A] to \the [src]!</span>")
-			return 1
-		return 0
+/obj/item/device/assembly/attach_assembly(var/obj/item/device/assembly/A, var/mob/user)
+	holder = new/obj/item/device/assembly_holder(get_turf(src))
+	if(holder.attach(A,src,user))
+		to_chat(user, "<span class='notice'>You attach \the [A] to \the [src]!</span>")
+		return 1
+	return 0
 
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(isassembly(W))
-			var/obj/item/device/assembly/A = W
-			if((!A.secured) && (!secured))
-				attach_assembly(A,user)
-				return
-		if(isscrewdriver(W))
-			if(toggle_secure())
-				to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
-			else
-				to_chat(user, "<span class='notice'>\The [src] can now be attached!</span>")
+/obj/item/device/assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(isassembly(W))
+		var/obj/item/device/assembly/A = W
+		if((!A.secured) && (!secured))
+			attach_assembly(A,user)
 			return
 	if(isscrewdriver(W))
 		if(toggle_secure())
@@ -123,14 +117,14 @@
 	return
 
 
-	examine(mob/user)
-		..(user)
-		if((in_range(src, user) || loc == user))
-			if(secured)
-				to_chat(user, "\The [src] is ready!")
-			else
-				to_chat(user, "\The [src] can be attached!")
-		return
+/obj/item/device/assembly/examine(mob/user)
+	..(user)
+	if((in_range(src, user) || loc == user))
+		if(secured)
+			to_chat(user, "\The [src] is ready!")
+		else
+			to_chat(user, "\The [src] can be attached!")
+	return
 
 
 /obj/item/device/assembly/attack_self(mob/user as mob)
