@@ -138,6 +138,7 @@
 
 	return 1
 
+
 /obj/item/rig_module/fabricator/energy_net
 
 	name = "net projector"
