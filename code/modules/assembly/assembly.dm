@@ -110,9 +110,9 @@
 			return
 	if(isscrewdriver(W))
 		if(toggle_secure())
-			user << "\blue \The [src] is ready!"
+			to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 		else
-			user << "\blue \The [src] can now be attached!"
+			to_chat(user, "<span class='notice'>\The [src] can now be attached!</span>")
 		return
 	..()
 	return
@@ -138,12 +138,6 @@
 	user.set_machine(src)
 	interact(user)
 	return 1
-
-/obj/item/device/assembly/proc/check_Topic(mob/user as mob)
-	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-		return 0
-	return 1
-
 
 /obj/item/device/assembly/interact(mob/user as mob)
 	return //HTML MENU FOR WIRES GOES HERE

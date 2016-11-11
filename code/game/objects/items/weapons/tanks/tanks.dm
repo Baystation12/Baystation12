@@ -421,13 +421,9 @@ var/list/global/tank_gauge_cache = list()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
 
 			var/mult = ((src.air_contents.volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
-//			var/mult = ((src.air_contents.volume/140)**2/3) * (air_contents.total_moles**2/3)/((29*0.64) **2/3)
 			//tanks appear to be experiencing a reduction on scale of about 0.64 total moles
-			//volume multiplier used to determine if TTV, takes ^2/3 of volume divisor (TTV is 140/140)^2/3 = 1.
-			//from pre to post burn. multiplier math: volume_mult * preburn(total_moles^(2/3))/(29^(2/3))
-			//with 29 moles being ~1 full tank at 20C, and 140L being the volume of a TTV
 
-//			var/mult = max(0.2,(log(2, (air_contents.total_moles/29))) ) //1 + log base 2 of standard sized full (room temperature) tanks (old method)
+
 
 			var/turf/simulated/T = get_turf(src)
 			T.hotspot_expose(src.air_contents.temperature, 70, 1)
