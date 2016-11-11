@@ -76,7 +76,7 @@
 /turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
 	. = 0
 	if(istype(T) && T.zone)
-		var/to_check = cardinal
+		var/to_check = cardinal.Copy()
 		#ifdef MULTIZAS
 		to_check += list(UP, DOWN)
 		#endif
