@@ -46,7 +46,7 @@
 						if(ghost.mind == H.mind)
 							to_chat(ghost,"<b><font color = #330033><font size = 3>The Technomancer [user.real_name] is trying to \
 							revive you. Return to your body if you want to be resurrected!</b> \
-							(Verbs -> Ghost -> Re-enter corpse)</font>")
+							(Verbs -> Ghost -> Re-enter corpse)</font></font>")
 							break
 
 				sleep(10 SECONDS)

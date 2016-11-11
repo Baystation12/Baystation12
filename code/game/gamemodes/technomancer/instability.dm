@@ -140,7 +140,7 @@
 						to_chat(src,"<span class='danger'>Your chassis alerts you to extreme overheating from an unknown external force!</span>")
 					if(3)
 						adjustBruteLoss(instability * 0.3) //30 brute @ 100 instability
-						to_chat(src,"pan class='danger'>Your chassis makes the sound of metal groaning and tearing!</span>")
+						to_chat(src,"<span class='danger'>Your chassis makes the sound of metal groaning and tearing!</span>")
 
 			if(101 to 200) //Lethal
 				rng = rand(0,4)

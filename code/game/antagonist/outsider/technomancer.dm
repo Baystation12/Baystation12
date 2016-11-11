@@ -4,7 +4,7 @@ var/datum/antagonist/technomancer/technomancers
 	id = MODE_TECHNOMANCER
 	role_text = "Technomancer"
 	role_text_plural = "Technomancers"
-	landmark_id = "wizard"
+	landmark_id = "ninjastart"
 	welcome_text = "You will need to purchase <b>functions</b> and perhaps some <b>equipment</b> from the various machines around your \
 	base. Choose your technological arsenal carefully.  Remember that without the <b>core</b> on your back, your functions are \
 	powerless, and therefore you will be as well.<br>\

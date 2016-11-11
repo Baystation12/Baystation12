@@ -59,6 +59,14 @@
 /obj/item/weapon/storage/belt/medical/technomancer
 	name = "hypo belt"
 	desc = "A medical belt designed to carry autoinjectors and other medical equipment."
+	startswith = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/brute = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/burn = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/toxin = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/oxy = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/purity = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/pain = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/organ = 1,
+				/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/combat = 1)
 
 /obj/item/weapon/storage/belt/medical/technomancer/New()
 	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/brute(src)

@@ -178,7 +178,7 @@
 
 			if(I_HURT)
 				adjustBruteLoss(harm_intent_damage)
-				M.visible_message("\red [M] [response_harm] \the [src]")
+				M.visible_message("<span class='warning'>[M] [response_harm] \the [src]</span>")
 				M.do_attack_animation(src)
 
 	return

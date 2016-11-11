@@ -34,7 +34,6 @@
 				H.adjustOxyLoss(5)
 				var/health_lost = H.maxHealth - H.getOxyLoss() + H.getToxLoss() + H.getFireLoss() + H.getBruteLoss() + H.getCloneLoss()
 				H.adjustOxyLoss(round(abs(health_lost * 0.25)))
-				//world << "Inflicted [round(abs(health_lost * 0.25))] damage!"
 				pulses--
 			if(src) //We might've been dispelled at this point and deleted, better safe than sorry.
 				on_expire()
@@ -65,11 +64,9 @@
 	if(previous_damage + health_lost >= victim.maxHealth) // We're probably going to hardcrit
 		to_chat(victim,"<span class='danger'><font size='3'>A feeling of immense dread starts to overcome you as everything starts \
 		to fade to black...</font></span>")
-		//world << "Predicted hardcrit."
 		return 1
 	else if(predicted_damage >= victim.species.total_health / 2) // Or perhaps we're gonna go into 'oxy crit'.
 		to_chat(victim,"<span class='danger'>You feel really light-headed, and everything seems to be fading...</span>")
-		//world << "Predicted oxycrit."
 		return 1
 	//If we're at this point, the spell is not going to result in critting.
 	return 0
