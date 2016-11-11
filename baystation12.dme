@@ -234,6 +234,7 @@
 #include "code\datums\outfits\outfit.dm"
 #include "code\datums\outfits\pirates.dm"
 #include "code\datums\outfits\spec_op.dm"
+#include "code\datums\outfits\technomancy.dm"
 #include "code\datums\outfits\tournament.dm"
 #include "code\datums\outfits\wizardry.dm"
 #include "code\datums\outfits\jobs\_defines.dm"

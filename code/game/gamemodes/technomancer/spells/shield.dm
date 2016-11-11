@@ -24,7 +24,7 @@
 
 /obj/item/weapon/spell/shield/Destroy()
 	spark_system = null
-	..()
+	return ..()
 
 /obj/item/weapon/spell/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())

@@ -21,7 +21,7 @@
 
 /obj/item/weapon/spell/radiance/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/item/weapon/spell/radiance/process()
 	var/turf/T = get_turf(src)

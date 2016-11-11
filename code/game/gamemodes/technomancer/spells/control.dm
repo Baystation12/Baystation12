@@ -117,7 +117,7 @@
 	for(var/mob/living/simple_animal/hostile/SM in controlled_mobs)
 		deselect(SM)
 	controlled_mobs = list()
-	..()
+	return ..()
 
 /obj/item/weapon/spell/control/on_use_cast(mob/living/user)
 	if(controlled_mobs.len != 0)

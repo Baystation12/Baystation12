@@ -42,7 +42,7 @@
 /obj/item/weapon/technomancer_core/Destroy()
 	dismiss_all_summons()
 	processing_objects.Remove(src)
-	..()
+	return ..()
 
 // Add the spell buttons to the HUD.
 /obj/item/weapon/technomancer_core/equipped(mob/user)
@@ -140,9 +140,9 @@
 	if(!path || !ispath(path))
 		message_admins("ERROR: /obj/spellbutton/New() was not given a proper path!")
 		qdel(src)
+	..()
 	src.name = new_name
 	src.spellpath = path
-	src.loc = loc
 	src.core = loc
 	src.ability_icon_state = new_icon_state
 
@@ -270,7 +270,7 @@
 	instability_modifer = 0.6
 
 /obj/item/weapon/technomancer_core/recycling/pay_energy(amount)
-	..()
+	. = ..()
 	if(.)
 		if(prob(30))
 			give_energy(round(amount / 2))

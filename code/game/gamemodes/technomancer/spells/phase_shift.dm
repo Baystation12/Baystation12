@@ -35,7 +35,7 @@
 	for(var/atom/movable/AM in contents) //Eject everything out.
 		AM.forceMove(get_turf(src))
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/effect/phase_shift/process()
 	for(var/mob/living/L in contents)

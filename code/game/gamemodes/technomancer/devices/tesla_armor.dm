@@ -19,7 +19,7 @@
 	var/cooldown_to_charge = 20 SECONDS
 
 /obj/item/clothing/suit/armor/tesla/New()
-	. = ..()
+	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/tesla/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")

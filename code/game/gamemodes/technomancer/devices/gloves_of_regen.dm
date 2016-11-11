@@ -44,7 +44,7 @@
 /obj/item/clothing/gloves/regen/Destroy()
 	wearer = null
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/item/clothing/gloves/regen/process()
 	if(!wearer || wearer.isSynthetic() || wearer.stat == DEAD || wearer.nutrition >= 10)

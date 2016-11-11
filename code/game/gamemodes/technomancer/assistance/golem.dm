@@ -43,8 +43,9 @@
 	core = new core(src)
 
 /mob/living/simple_animal/hostile/technomancer_golem/Destroy()
-	qdel(core)
-	..()
+	qdel_null(core)
+	master = null
+	return ..()
 
 /mob/living/simple_animal/hostile/technomancer_golem/proc/bind_to_mob(mob/user)
 	if(!user || master)

@@ -33,4 +33,4 @@
 
 /obj/effect/temporary_effect/fire_blast/Destroy()
 	explosion(get_turf(src), -1, 1, 2, 5, adminlog = 1)
-	..()
+	return ..()

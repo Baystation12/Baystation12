@@ -52,7 +52,7 @@
 			s2.start()
 			L.throw_at(get_step(get_turf(src),get_turf(L)), 4, 1, src)
 			user.drop_item(src)
-			src.loc = null
+			src.forceMove(null)
 
 			spawn(1 SECOND)
 				if(!user.Adjacent(L))

@@ -22,7 +22,7 @@
 			to_chat(user,"<span class='warning'>You cannot combine \the [spell] with \the [src], as the aspects are incompatable.</span>")
 			return
 		user.drop_item(src)
-		src.loc = null
+		src.forceMove(null)
 		spawn(1)
 			switch(spell.aspect)
 				if(ASPECT_FIRE)
@@ -48,7 +48,7 @@
 
 /obj/item/weapon/spell/aura/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/item/weapon/spell/aura/process()
 	return

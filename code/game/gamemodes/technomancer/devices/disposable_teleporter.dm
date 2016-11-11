@@ -24,7 +24,7 @@
 
 /obj/item/weapon/disposable_teleporter/examine(mob/user)
 	..()
-	to_chat(user,"[uses] uses remaining.")
+	to_chat(user,"[uses] use\s remaining.")
 
 /obj/item/weapon/disposable_teleporter/attack_self(mob/user as mob)
 	if(!uses)
@@ -36,7 +36,7 @@
 		if(!A)
 			return
 
-		if (user.stat || user.restrained())
+		if (user.incapacitated())
 			return
 
 		if(!((user == loc || (in_range(src, user) && istype(src.loc, /turf)))))

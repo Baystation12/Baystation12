@@ -19,9 +19,10 @@
 		update_abilities(0, owner)
 	else
 		message_admins("ERROR: ability_master's New() was not given an owner argument.  This is a bug.")
+	..()
 
 /obj/screen/movable/ability_master/Destroy()
-	..()
+	. = ..()
 	//Get rid of the ability objects.
 	remove_all_abilities()
 	ability_objects.Cut()
@@ -109,32 +110,8 @@
 
 /obj/screen/movable/ability_master/proc/add_ability(var/name_given)
 	if(!name) return
-
-//	if(spell.connected_button) //we have one already, for some reason
-//		if(spell.connected_button in spell_objects)
-//			return
-//		else
-//			spell_objects.Add(spell.connected_button)
-//			if(spell_holder.client)
-//				toggle_open(2)
-//			return
-
-//	if(spell.spell_flags & NO_BUTTON) //no button to add if we don't get one
-//		return
-
 	var/obj/screen/ability/new_button = new /obj/screen/ability
 	new_button.ability_master = src
-//	new_button.spell = spell
-
-//	spell.connected_button = newscreen
-
-//	if(!spell.override_base) //if it's not set, we do basic checks
-//		if(spell.spell_flags & CONSTRUCT_CHECK)
-//			newscreen.spell_base = "const" //construct spells
-//		else
-//			newscreen.spell_base = "wiz" //wizard spells
-//	else
-//		newscreen.spell_base = spell.override_base
 	new_button.name = name_given
 	new_button.ability_icon_state = name_given
 	new_button.update_icon(1)
@@ -205,11 +182,7 @@
 	maptext_x = 3
 	var/background_base_state = "grey"
 	var/ability_icon_state = null
-
-//	var/spell/spell = null
 	var/obj/screen/movable/ability_master/ability_master
-
-//	var/icon/last_charged_icon
 
 /obj/screen/ability/Destroy()
 	if(ability_master)
@@ -223,44 +196,10 @@
 	..()
 
 /obj/screen/ability/update_icon()
-//	if(!spell)
-//		qdel(src)
-//		return
-
-//	if((last_charge == spell.charge_counter || !handle_icon_updates) && !forced_update)
-//		return //nothing to see here
-
-//	overlays -= spell.hud_state
-
-//	if(spell.charge_type == Sp_RECHARGE || spell.charge_type == Sp_CHARGES)
-//		if(spell.charge_counter < spell.charge_max)
-//			icon_state = "[background_base_state]_spell_base"
-//			if(spell.charge_counter > 0)
-//				var/icon/partial_charge = icon(src.icon, "[spell_base]_spell_ready")
-//				partial_charge.Crop(1, 1, partial_charge.Width(), round(partial_charge.Height() * spell.charge_counter / spell.charge_max))
-//				overlays += partial_charge
-//				if(last_charged_icon)
-//					overlays -= last_charged_icon
-//				last_charged_icon = partial_charge
-//			else if(last_charged_icon)
-//				overlays -= last_charged_icon
-//				last_charged_icon = null
-//		else
-//			icon_state = "[spell_base]_spell_ready"
-//			if(last_charged_icon)
-//				overlays -= last_charged_icon
-//	else
-//		icon_state = "[spell_base]_spell_ready"
 	overlays.Cut()
 	icon_state = "[background_base_state]_spell_base"
 
 	overlays += ability_icon_state
-
-//	last_charge = spell.charge_counter
-
-//	overlays -= "silence"
-//	if(spell.silenced)
-//		overlays += "silence"
 
 /obj/screen/ability/Click()
 	if(!usr)
@@ -270,7 +209,7 @@
 
 // Makes the ability be triggered.  The subclasses of this are responsible for carrying it out in whatever way it needs to.
 /obj/screen/ability/proc/activate()
-	world << "[src] had activate() called."
+	to_world("[src] had activate() called.")
 	return
 
 // This checks if the ability can be used.
@@ -304,12 +243,6 @@
 /obj/screen/ability/verb_based/activate()
 	if(object_used && verb_to_call)
 		call(object_used,verb_to_call)(arguments_to_use)
-//		call(object_used,verb_to_call)(arguments_to_use)
-//		world << "Attempted to call([object_used],[verb_to_call])([arguments_to_use])"
-//		if(hascall(object_used, verb_to_call))
-//			call(object_used,verb_to_call)(arguments_to_use)
-//		else
-//			message_admins("ERROR: activate() on [ability_master.my_mob]'s [src] failed the hascall([object_used],[verb_to_call]) check.")
 
 /obj/screen/movable/ability_master/proc/add_verb_ability(var/object_given, var/verb_given, var/name_given, var/ability_icon_given, var/arguments)
 	if(!object_given)
@@ -396,7 +329,7 @@
 	if(spell)
 		spell.connected_button = null
 		spell = null
-	..()
+	return ..()
 
 /obj/screen/movable/ability_master/proc/add_spell(var/spell/spell)
 	if(!spell) return

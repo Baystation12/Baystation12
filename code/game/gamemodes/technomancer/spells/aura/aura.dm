@@ -13,7 +13,7 @@
 
 /obj/item/weapon/spell/aura/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/item/weapon/spell/aura/process()
 	return

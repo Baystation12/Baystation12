@@ -103,6 +103,10 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 /obj/item/weapon/technomancer_catalog/attack_self(mob/user)
 	if(!user)
 		return 0
+
+	if(H.incapacitated())
+		return
+
 	if(owner && user != owner)
 		to_chat(user,"<span class='danger'>\The [src] knows that you're not the original owner, and has locked you out of it!</span>")
 		return 0
@@ -193,17 +197,12 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 // Parameters: 2 (href - don't know, href_list - the choice that the person using the interface above clicked on.)
 // Description: Acts upon clicks on links for the catelog, if they are the rightful owner.
 /obj/item/weapon/technomancer_catalog/Topic(href, href_list)
-	..()
-	var/mob/living/carbon/human/H = usr
+	if(..())
+		return 1
 
-	if(H.stat || H.restrained())
-		return
+	var/mob/living/carbon/human/H = usr
 	if(!istype(H, /mob/living/carbon/human))
 		return 1 //why does this return 1?
-
-	if(H != owner)
-		to_chat(H,"\The [src] won't allow you to do that, as you don't own \the [src]!")
-		return
 
 	if(loc == H || (in_range(src, H) && istype(loc, /turf)))
 		H.set_machine(src)
@@ -257,7 +256,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 
 
 		if(href_list["refund_functions"])
-			if(H.z != 2)
+			if(!isAdminLevel(H.z))
 				to_chat(H,"<span class='danger'>You can only refund at your base, it's too late now!</span>")
 				return
 			var/obj/item/weapon/technomancer_core/core = null

@@ -29,7 +29,7 @@
 
 /obj/item/weapon/spell/reflect/Destroy()
 	spark_system = null
-	..()
+	return ..()
 
 /obj/item/weapon/spell/reflect/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())
