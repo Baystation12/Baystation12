@@ -21,7 +21,7 @@
 		if(istype(host, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = host
 			H.force_max_speed = 1
-			H << "<span class='notice'>You suddenly find it much easier to move.</span>"
+			to_chat(H,"<span class='notice'>You suddenly find it much easier to move.</span>")
 			H.adjust_instability(10)
 			spawn(5 SECONDS)
 				if(src)
@@ -31,5 +31,5 @@
 	if(istype(host, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
 		H.force_max_speed = 0
-		H << "<span class='warning'>You feel slow again.</span>"
+		to_chat(H,"<span class='warning'>You feel slow again.</span>")
 		..()

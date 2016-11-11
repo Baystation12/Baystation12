@@ -17,13 +17,13 @@
 	if(ishuman(hit_atom))
 		var/mob/living/carbon/human/H = hit_atom
 		if(H == user)
-			user << "<span class='warning'>Draining instability out of you to put it back seems a bit pointless.</span>"
+			to_chat(user,"<span class='warning'>Draining instability out of you to put it back seems a bit pointless.</span>")
 			return 0
 		if(!H.instability)
-			user << "<span class='warning'>\The [H] has no instability to drain.</span>"
+			to_chat(user,"<span class='warning'>\The [H] has no instability to drain.</span>")
 			return 0
 		if(pay_energy(500))
 			var/instability_to_drain = min(H.instability, 25)
-			user << "<span class='notice'>You draw instability away from \the [H] and towards you.</span>"
+			to_chat(user,"<span class='notice'>You draw instability away from \the [H] and towards you.</span>")
 			adjust_instability(instability_to_drain)
 			H.adjust_instability(-instability_to_drain)

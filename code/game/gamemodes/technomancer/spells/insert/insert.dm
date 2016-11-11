@@ -40,7 +40,7 @@
 		if(!allow_stacking)
 			for(var/obj/item/weapon/inserted_spell/IS in L.contents)
 				if(IS.type == inserting)
-					user << "<span class='warning'>\The [L] is already affected by \the [src].</span>"
+					to_chat(user,"<span class='warning'>\The [L] is already affected by \the [src].</span>")
 					return
 		new inserting(L,user,src)
 		qdel(src)

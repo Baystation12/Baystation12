@@ -25,7 +25,7 @@
 	if(H && H.gloves == src)
 		wearer = H
 		if(wearer.can_feel_pain())
-			H << "<span class='danger'>You feel a stabbing sensation in your hands as you slide \the [src] on!</span>"
+			to_chat(H,"<span class='danger'>You feel a stabbing sensation in your hands as you slide \the [src] on!</span>")
 			wearer.custom_pain("You feel a sharp pain in your hands!",1)
 	..()
 
@@ -33,7 +33,7 @@
 	..()
 	if(wearer)
 		if(wearer.can_feel_pain())
-			wearer << "<span class='danger'>You feel the hypodermic needles as you slide \the [src] off!</span>"
+			to_chat(wearer,"<span class='danger'>You feel the hypodermic needles as you slide \the [src] off!</span>")
 			wearer.custom_pain("Your hands hurt like hell!",1)
 		wearer = null
 

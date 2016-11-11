@@ -26,5 +26,5 @@
 	var/turf/T = get_turf(hit_atom)
 	if(T)
 		new spawner_type(T)
-		user << "<span class='notice'>You shift \the [src] onto \the [T].</span>"
+		to_chat(user,"<span class='notice'>You shift \the [src] onto \the [T].</span>")
 		qdel(src)

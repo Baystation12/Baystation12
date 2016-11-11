@@ -19,7 +19,7 @@
 	if(istype(W, /obj/item/weapon/spell))
 		var/obj/item/weapon/spell/spell = W
 		if(!spell.aspect || spell.aspect == ASPECT_CHROMATIC)
-			user << "<span class='warning'>You cannot combine \the [spell] with \the [src], as the aspects are incompatable.</span>"
+			to_chat(user,"<span class='warning'>You cannot combine \the [spell] with \the [src], as the aspects are incompatable.</span>")
 			return
 		user.drop_item(src)
 		src.loc = null
@@ -132,4 +132,4 @@
 
 /obj/item/weapon/spell/aura/biomed/on_use_cast(mob/living/user)
 	heal_allies_only = !heal_allies_only
-	user << "Your aura will now heal [heal_allies_only ? "your allies" : "everyone"] near you."
+	to_chat(user,"Your aura will now heal [heal_allies_only ? "your allies" : "everyone"] near you.")

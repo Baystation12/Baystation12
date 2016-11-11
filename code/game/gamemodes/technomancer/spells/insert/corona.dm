@@ -32,5 +32,5 @@
 	if(isliving(host))
 		var/mob/living/L = host
 		L.evasion += 2
-		L << "<span class='notice'>Your glow has ended.</span>"
+		to_chat(L,"<span class='notice'>Your glow has ended.</span>")
 		..()

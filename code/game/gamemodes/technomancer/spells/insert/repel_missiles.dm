@@ -21,7 +21,7 @@
 		if(isliving(host))
 			var/mob/living/L = host
 			L.evasion += 2
-			L << "<span class='notice'>You have a repulsion field around you, which will attempt to deflect projectiles.</span>"
+			to_chat(L,"<span class='notice'>You have a repulsion field around you, which will attempt to deflect projectiles.</span>")
 			spawn(5 MINUTES)
 				if(src)
 					on_expire()
@@ -30,5 +30,5 @@
 	if(isliving(host))
 		var/mob/living/L = host
 		L.evasion -= 2
-		L << "<span class='warning'>Your repulsion field has expired.</span>"
+		to_chat(L,"<span class='warning'>Your repulsion field has expired.</span>")
 		..()

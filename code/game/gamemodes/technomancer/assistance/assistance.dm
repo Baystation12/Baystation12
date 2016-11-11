@@ -32,9 +32,9 @@
 
 /obj/item/weapon/technomancer_apprentice/attack_self(mob/user)
 	if(used)
-		user << "<span class='warning'>You've already summoned an apprentice using this teleporter!</span>"
+		to_chat(user,"<span class='warning'>You've already summoned an apprentice using this teleporter!</span>")
 		return
-	user << "<span class='notice'>Teleporter attempting to lock on to your apprentice.</span>"
+	to_chat(user,"<span class='notice'>Teleporter attempting to lock on to your apprentice.</span>")
 	searching = 1
 	icon_state = "oldshieldon"
 	var/datum/ghosttrap/ghost = get_ghost_trap("technomancer's apprentice")
@@ -44,7 +44,7 @@
 		searching = 0
 		icon_state = "oldshieldoff"
 		if(temp.client)
-			user << "<span class='warning'>The teleporter failed to find your apprentice.  Perhaps you could try again later?</span>"
+			to_chat(user,"<span class='warning'>The teleporter failed to find your apprentice.  Perhaps you could try again later?</span>")
 		else
 			spawn_antag(temp.client,get_turf(src))
 		qdel(temp)
@@ -55,10 +55,10 @@
 	C.prefs.copy_to(H)
 	H.key = C.key
 
-	H << "<b>You are the Technomancer's apprentice!  Your goal is to assist them in their mission at the [station_name()].</b>"
-	H << "<b>Your service has not gone unrewarded, however. Studying under them, you have learned how to use a Manipulation Core \
-	of your own.  You also have a Catelog, to purchase your own functions and equipment as you see fit.</b>"
-	H << "<b>It would be wise to speak to your master, and learn what their plans are for today.</b>"
+	to_chat(H,"<b>You are the Technomancer's apprentice!  Your goal is to assist them in their mission at the [station_name()].</b>")
+	to_chat(H,"<b>Your service has not gone unrewarded, however. Studying under them, you have learned how to use a Manipulation Core \
+	of your own.  You also have a Catelog, to purchase your own functions and equipment as you see fit.</b>")
+	to_chat(H,"<b>It would be wise to speak to your master, and learn what their plans are for today.</b>")
 
 	spawn(1)
 		technomancers.add_antagonist(H.mind, 0, 1, 0, 0, 0)

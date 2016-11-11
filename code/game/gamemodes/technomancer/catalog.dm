@@ -104,7 +104,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 	if(!user)
 		return 0
 	if(owner && user != owner)
-		user << "<span class='danger'>\The [src] knows that you're not the original owner, and has locked you out of it!</span>"
+		to_chat(user,"<span class='danger'>\The [src] knows that you're not the original owner, and has locked you out of it!</span>")
 		return 0
 	else if(!owner)
 		bind_to_owner(user)
@@ -202,7 +202,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 		return 1 //why does this return 1?
 
 	if(H != owner)
-		H << "\The [src] won't allow you to do that, as you don't own \the [src]!"
+		to_chat(H,"\The [src] won't allow you to do that, as you don't own \the [src]!")
 		return
 
 	if(loc == H || (in_range(src, H) && istype(loc, /turf)))
@@ -227,13 +227,13 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 				if(new_spell.cost <= budget)
 					if(!core.has_spell(new_spell))
 						budget -= new_spell.cost
-						H << "<span class='notice'>You have just bought [new_spell.name].</span>"
+						to_chat(H,"<span class='notice'>You have just bought [new_spell.name].</span>")
 						core.add_spell(new_spell.obj_path, new_spell.name, new_spell.ability_icon_state)
 					else //We already own it.
-						H << "<span class='danger'>You already have [new_spell.name]!</span>"
+						to_chat(H,"<span class='danger'>You already have [new_spell.name]!</span>")
 						return
 				else //Can't afford.
-					H << "<span class='danger'>You can't afford that!</span>"
+					to_chat(H,"<span class='danger'>You can't afford that!</span>")
 					return
 
 		// This needs less copypasta.
@@ -247,18 +247,18 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 			if(desired_object)
 				if(desired_object.cost <= budget)
 					budget -= desired_object.cost
-					H << "<span class='notice'>You have just bought \a [desired_object.name].</span>"
+					to_chat(H,"<span class='notice'>You have just bought \a [desired_object.name].</span>")
 					var/obj/O = new desired_object.obj_path(get_turf(H))
 					technomancer_belongings.Add(O) // Used for the Track spell.
 
 				else //Can't afford.
-					H << "<span class='danger'>You can't afford that!</span>"
+					to_chat(H,"<span class='danger'>You can't afford that!</span>")
 					return
 
 
 		if(href_list["refund_functions"])
 			if(H.z != 2)
-				H << "<span class='danger'>You can only refund at your base, it's too late now!</span>"
+				to_chat(H,"<span class='danger'>You can only refund at your base, it's too late now!</span>")
 				return
 			var/obj/item/weapon/technomancer_core/core = null
 			if(istype(H.back, /obj/item/weapon/technomancer_core))

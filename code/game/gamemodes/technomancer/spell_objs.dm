@@ -156,13 +156,13 @@
 	if(!core)
 		core = locate(/obj/item/weapon/technomancer_core) in owner
 		if(!core)
-			owner << "<span class='danger'>You need to be wearing a core on your back!</span>"
+			to_chat(owner,"<span class='danger'>You need to be wearing a core on your back!</span>")
 			return 0
 	if(core.loc != owner || owner.back != core) //Make sure the core's being worn.
-		owner << "<span class='danger'>You need to be wearing a core on your back!</span>"
+		to_chat(owner,"<span class='danger'>You need to be wearing a core on your back!</span>")
 		return 0
 	if(!technomancers.is_antagonist(owner.mind)) //Now make sure the person using this is the actual antag.
-		owner << "<span class='danger'>You can't seem to figure out how to make the machine work properly.</span>"
+		to_chat(owner,"<span class='danger'>You can't seem to figure out how to make the machine work properly.</span>")
 		return 0
 	return 1
 
@@ -264,7 +264,7 @@
 			if(l_spell.aspect == ASPECT_CHROMATIC) //Check the other hand too.
 				l_spell.on_combine_cast(S, src)
 		else //Welp
-			src << "<span class='warning'>You require a free hand to use this function.</span>"
+			to_chat(src,"<span class='warning'>You require a free hand to use this function.</span>")
 			return 0
 
 	if(S.run_checks())

@@ -43,7 +43,7 @@
 				L.buckled.unbuckle_mob()
 		AM.forceMove(destination)
 		AM.visible_message("<span class='notice'>\The [AM] vanishes!</span>")
-		AM << "<span class='notice'>You suddenly appear somewhere else!</span>"
+		to_chat(AM,"<span class='notice'>You suddenly appear somewhere else!</span>")
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(3, 0, starting)
 		sparks.start()

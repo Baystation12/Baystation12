@@ -32,15 +32,15 @@
 	if(!siphoning)
 		return
 	if(!pay_energy(100))
-		owner << "<span class='warning'>You can't afford to maintain the siphon link!</span>"
+		to_chat(owner,"<span class='warning'>You can't afford to maintain the siphon link!</span>")
 		stop_siphoning()
 		return
 	if(get_dist(siphoning, get_turf(src)) > 4)
-		owner << "<span class='warning'>\The [siphoning] is too far to drain from!</span>"
+		to_chat(owner,"<span class='warning'>\The [siphoning] is too far to drain from!</span>")
 		stop_siphoning()
 		return
 	if(!(siphoning in view(owner)))
-		owner << "<span class='warning'>\The [siphoning] cannot be seen!</span>"
+		to_chat(owner,"<span class='warning'>\The [siphoning] cannot be seen!</span>")
 		stop_siphoning()
 		return
 	siphon(siphoning, owner)
@@ -52,7 +52,7 @@
 		var/atom/movable/AM = hit_atom
 		populate_siphon_list(AM)
 		if(!things_to_siphon.len)
-			user << "<span class='warning'>You cannot steal energy from \a [AM].</span>"
+			to_chat(user,"<span class='warning'>You cannot steal energy from \a [AM].</span>")
 			return 0
 		siphoning = AM
 		update_icon()
@@ -143,19 +143,19 @@
 	// Now we can actually fill up the core.
 	if(core.energy < core.max_energy)
 		give_energy(charge_to_give)
-		user << "<span class='notice'>Stolen [charge_to_give * CELLRATE] kJ and converted to [charge_to_give] Core energy.</span>"
+		to_chat(user,"<span class='notice'>Stolen [charge_to_give * CELLRATE] kJ and converted to [charge_to_give] Core energy.</span>")
 		if( (core.max_energy - core.energy) < charge_to_give ) // We have some overflow, if this is true.
 			var/mob/living/carbon/human/H = user
 			if(H.isSynthetic()) // Let's do something with it, if we're a robot.
 				charge_to_give = charge_to_give - (core.max_energy - core.energy)
 				H.nutrition =  min(H.nutrition + (charge_to_give / SIPHON_FBP_TO_ENERGY), 400)
-				H << "<span class='notice'>Redirected energy to internal microcell.</span>"
+				to_chat(H,"<span class='notice'>Redirected energy to internal microcell.</span>")
 	else
-		user << "<span class='notice'>Stolen [charge_to_give * CELLRATE] kJ.</span>"
+		to_chat(user,"<span class='notice'>Stolen [charge_to_give * CELLRATE] kJ.</span>")
 	adjust_instability(2)
 
 	if(flow_remaining == flow_rate) // We didn't drain anything.
-		user << "<span class='warning'>\The [siphoning] cannot be drained any further.</span>"
+		to_chat(user,"<span class='warning'>\The [siphoning] cannot be drained any further.</span>")
 		stop_siphoning()
 
 /obj/item/weapon/spell/energy_siphon/update_icon()

@@ -29,7 +29,7 @@ var/list/technomancer_belongings = list()
 /obj/item/weapon/spell/track/on_use_cast(mob/user)
 	if(tracking)
 		tracking = 0
-		user << "<span class='notice'>You stop tracking for \the [tracked]'s whereabouts.</span>"
+		to_chat(user,"<span class='notice'>You stop tracking for \the [tracked]'s whereabouts.</span>")
 		tracked = null
 		return
 

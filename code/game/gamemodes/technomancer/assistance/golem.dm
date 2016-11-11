@@ -55,8 +55,8 @@
 /mob/living/simple_animal/hostile/technomancer_golem/examine(mob/user)
 	..()
 	if(user.mind && technomancers.is_antagonist(user.mind))
-		user << "Your pride and joy.  It's a very special synthetic robot, capable of using functions similar to you, and you built it \
-		yourself!  It'll always stand by your side, ready to help you out.  You have no idea what GOLEM stands for, however..."
+		to_chat(user,"Your pride and joy.  It's a very special synthetic robot, capable of using functions similar to you, and you built it \
+		yourself!  It'll always stand by your side, ready to help you out.  You have no idea what GOLEM stands for, however...")
 
 /mob/living/simple_animal/hostile/technomancer_golem/Life()
 	handle_ai()

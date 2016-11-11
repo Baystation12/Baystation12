@@ -54,13 +54,13 @@
 
 /mob/living/simple_animal/ward/death()
 	if(creator)
-		creator << "<span class='danger'>Your ward inside [get_area(src)] was killed!</span>"
+		to_chat(creator,"<span class='danger'>Your ward inside [get_area(src)] was killed!</span>")
 	..()
 	qdel(src)
 
 /mob/living/simple_animal/ward/proc/expire()
 	if(creator && src)
-		creator << "<span class='warning'>Your ward inside [get_area(src)] expired.</span>"
+		to_chat(creator,"<span class='warning'>Your ward inside [get_area(src)] expired.</span>")
 		qdel(src)
 
 /mob/living/simple_animal/ward/Life()
@@ -101,9 +101,9 @@
 			newly_seen_mobs.Add(L)
 			if(creator)
 				if(true_sight)
-					creator << "<span class='notice'>Your ward at [get_area(src)] detected [english_list(newly_seen_mobs)].</span>"
+					to_chat(creator,"<span class='notice'>Your ward at [get_area(src)] detected [english_list(newly_seen_mobs)].</span>")
 				else
-					creator << "<span class='notice'>Your ward at [get_area(src)] detected something.</span>"
+					to_chat(creator,"<span class='notice'>Your ward at [get_area(src)] detected something.</span>")
 
 	// Now get rid of old mobs that left vision.
 	for(var/mob/living/L in seen_mobs)

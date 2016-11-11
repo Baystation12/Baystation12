@@ -37,7 +37,7 @@
 		spawn(cooldown_to_charge)
 			ready = 1
 			update_icon()
-			user << "<span class='notice'>\The [src] is ready to protect you once more.</span>"
+			to_chat(user,"<span class='notice'>\The [src] is ready to protect you once more.</span>")
 		visible_message("<span class='danger'>\The [user]'s [src.name] blocks [attack_text]!</span>")
 		update_icon()
 		return 1

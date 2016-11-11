@@ -22,7 +22,7 @@
 		if(pay_energy(500))
 			copied = AM
 			update_icon()
-			user << "<span class='notice'>You've copied \the [AM]'s appearance.</span>"
+			to_chat(user,"<span class='notice'>You've copied \the [AM]'s appearance.</span>")
 			user << 'sound/weapons/flash.ogg'
 			return 1
 	else if(istype(hit_atom, /turf))
@@ -37,7 +37,7 @@
 					var/mob/living/carbon/human/H = copied
 					// This is to try to have the illusion move at the same rate the real mob world.
 					illusion.step_delay = max(H.movement_delay() + 4, 3)
-				user << "<span class='notice'>An illusion of \the [copied] is made on \the [T].</span>"
+				to_chat(user,"<span class='notice'>An illusion of \the [copied] is made on \the [T].</span>")
 				user << 'sound/effects/pop.ogg'
 				return 1
 		else

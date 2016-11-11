@@ -27,7 +27,7 @@
 			summon_underlay.alpha = 127
 			L.underlays |= summon_underlay
 			on_summon(L)
-			user << "<span class='notice'>You've successfully teleported \a [L] to you!</span>"
+			to_chat(user,"<span class='notice'>You've successfully teleported \a [L] to you!</span>")
 			visible_message("<span class='warning'>\A [L] appears from no-where!</span>")
 			user.adjust_instability(instability_cost)
 
