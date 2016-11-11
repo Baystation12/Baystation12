@@ -1,4 +1,5 @@
 var/list/ventcrawl_machinery = list(
+	/obj/machinery/atmospherics/unary/vent_scrubber,
 	/obj/machinery/atmospherics/unary/vent_pump
 	)
 

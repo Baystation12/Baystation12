@@ -52,6 +52,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/can_crawl_through()
 	return !welded
 
+/obj/machinery/atmospherics/unary/vent_scrubber/can_crawl_through()
+	return !welded
+
 /obj/machinery/atmospherics/proc/findConnecting(var/direction)
 	for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 		if(target.initialize_directions & get_dir(target,src))
