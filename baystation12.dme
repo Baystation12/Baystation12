@@ -2234,3 +2234,4 @@
 #include "maps\~mapsystem\maps_unit_testing.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
+#include "code\modules\clothing\suits\toggles.dm"
