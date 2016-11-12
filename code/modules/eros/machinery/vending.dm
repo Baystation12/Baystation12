@@ -30,3 +30,21 @@
 					/obj/item/clothing/head/collectable/rabbitears = 200,)
 
 	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2)
+
+/obj/machinery/vending/adult/hacked
+	name = "Strange XXXVend"
+
+	prices = list(/obj/item/weapon/eros/sex/dildos/bigblackdick = 0,
+					/obj/item/weapon/eros/sex/dildos/metal_dildo = 0,
+					/obj/item/weapon/eros/sex/dildos/canine = 0,
+					/obj/item/weapon/eros/sex/dildos/floppydick = 0,
+					/obj/item/weapon/eros/sex/dildos/purpledong = 0,
+					/obj/item/weapon/eros/sex/dildos/blue = 0,
+					/obj/item/weapon/eros/sex/fleshlight = 0,
+					/obj/item/weapon/eros/sex/bulletvibe = 0,
+					/obj/item/weapon/storage/belt/eros/strap_c = 0,
+					/obj/item/weapon/storage/belt/eros/strap_h = 0,
+					/obj/item/clothing/under/bunny_suit = 0,
+					/obj/item/clothing/head/collectable/rabbitears = 0,)
+
+	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2)
