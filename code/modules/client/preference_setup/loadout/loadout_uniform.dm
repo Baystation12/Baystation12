@@ -169,16 +169,16 @@
 	path = /obj/item/clothing/under/loose_dress
 
 /datum/gear/uniform/cheongsam
-	display_name = "cheongsam selection"
-	description = "Traditional silk garment embroidered with floral designs."
+	display_name = "cheongsam, red"
+	path = /obj/item/clothing/under/cheongsam/red
 
-/datum/gear/uniform/cheongsam/New()
-	..()
-	var/list/cheongasms = list()
-	for(var/cheongasm in typesof(/obj/item/clothing/under/cheongsam))
-		var/obj/item/clothing/under/cheongsam/cheongasm_type = cheongasm
-		cheongasms[initial(cheongasm_type.name)] = cheongasm_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cheongasms))
+/datum/gear/uniform/cheongsam
+	display_name = "cheongsam, blue"
+	path = /obj/item/clothing/under/cheongsam/blue
+
+/datum/gear/uniform/cheongsam
+	display_name = "cheongsam, black"
+	path = /obj/item/clothing/under/cheongsam/black
 
 /datum/gear/uniform/croptop
 	display_name = "croptop, NT"
