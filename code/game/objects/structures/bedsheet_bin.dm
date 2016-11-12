@@ -11,27 +11,21 @@ LINEN BINS
 	icon_state = "sheet"
 	item_state = "bedsheet"
 	randpixel = 0
-	plane = OBJ_PLANE
+	slot_flags = SLOT_BACK
+	plane = ABOVE_OBJ_PLANE
+	layer = BASE_ABOVE_OBJ_LAYER
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/bedsheet/attack_self(mob/user)
-	user.drop_item()
-	if(plane == initial(plane))
-		plane = ABOVE_HUMAN_PLANE
-	else
-		plane = initial(plane)
-	add_fingerprint(user)
-
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
-		user.visible_message("<span class='notice'>\The [user] begins cutting up [src] with [I].</span>", "<span class='notice'>You begin cutting up [src] with [I].</span>")
-		if(do_after(user, 50))
-			user << "<span class='notice'>You cut [src] into pieces!</span>"
+		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [I].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [I].</span>")
+		if(do_after(user, 50, src))
+			to_chat(user, "<span class='notice'>You cut \the [src] into pieces!</span>")
 			for(var/i in 1 to rand(2,5))
-				new /obj/item/weapon/reagent_containers/glass/rag(src.loc)
+				new /obj/item/weapon/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
 		return
 	..()
@@ -70,7 +64,7 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet/clown
 	icon_state = "sheetclown"
-	item_state = "sheetrainbow"
+	item_state = "sheetclown"
 
 /obj/item/weapon/bedsheet/captain
 	icon_state = "sheetcaptain"
@@ -187,12 +181,12 @@ LINEN BINS
 	..(user)
 
 	if(amount < 1)
-		user << "There are no bed sheets in the bin."
+		to_chat(user, "There are no bed sheets in the bin.")
 		return
 	if(amount == 1)
-		user << "There is one bed sheet in the bin."
+		to_chat(user, "There is one bed sheet in the bin.")
 		return
-	user << "There are [amount] bed sheets in the bin."
+	to_chat(user, "There are [amount] bed sheets in the bin.")
 
 
 /obj/structure/bedsheetbin/update_icon()
@@ -208,12 +202,12 @@ LINEN BINS
 		I.loc = src
 		sheets.Add(I)
 		amount++
-		user << "<span class='notice'>You put [I] in [src].</span>"
-	else if(amount && !hidden && I.w_class < 4)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
+		to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+	else if(amount && !hidden && I.w_class < ITEM_SIZE_HUGE)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
 		user.drop_item()
 		I.loc = src
 		hidden = I
-		user << "<span class='notice'>You hide [I] among the sheets.</span>"
+		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
 
 /obj/structure/bedsheetbin/attack_hand(mob/user as mob)
 	if(amount >= 1)
@@ -229,11 +223,11 @@ LINEN BINS
 
 		B.loc = user.loc
 		user.put_in_hands(B)
-		user << "<span class='notice'>You take [B] out of [src].</span>"
+		to_chat(user, "<span class='notice'>You take [B] out of [src].</span>")
 
 		if(hidden)
 			hidden.loc = user.loc
-			user << "<span class='notice'>[hidden] falls out of [B]!</span>"
+			to_chat(user, "<span class='notice'>[hidden] falls out of [B]!</span>")
 			hidden = null
 
 
@@ -252,7 +246,7 @@ LINEN BINS
 			B = new /obj/item/weapon/bedsheet(loc)
 
 		B.loc = loc
-		user << "<span class='notice'>You telekinetically remove [B] from [src].</span>"
+		to_chat(user, "<span class='notice'>You telekinetically remove [B] from [src].</span>")
 		update_icon()
 
 		if(hidden)
@@ -261,3 +255,4 @@ LINEN BINS
 
 
 	add_fingerprint(user)
+

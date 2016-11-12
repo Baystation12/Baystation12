@@ -6,12 +6,12 @@
 		// spawn or admin privileges to see info about viruses
 		if(!check_rights(R_ADMIN|R_SPAWN)) return
 
-		usr << "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]"
-		usr << "Affected species: [english_list(affected_species)]"
-		usr << "Effects:"
+		to_chat(usr, "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]")
+		to_chat(usr, "Affected species: [english_list(affected_species)]")
+		to_chat(usr, "Effects:")
 		for(var/datum/disease2/effectholder/E in effects)
-			usr << "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]"
-		usr << "Antigens: [antigens2string(antigen)]"
+			to_chat(usr, "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]")
+		to_chat(usr, "Antigens: [antigens2string(antigen)]")
 
 		return 1
 
@@ -178,7 +178,7 @@
 							candidates["[G.name][G.client ? "" : " (no client)"]"] = G
 						else
 							candidates["[G.name] ([G.species.get_bodytype()])[G.client ? "" : " (no client)"]"] = G
-				if(!candidates.len) usr << "No possible candidates found!"
+				if(!candidates.len) to_chat(usr, "No possible candidates found!")
 
 				var/I = input("Choose initial infectee", "Infectee", infectee) as null|anything in candidates
 				if(!I || !candidates[I]) return

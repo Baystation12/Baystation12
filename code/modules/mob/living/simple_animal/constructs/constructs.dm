@@ -67,7 +67,7 @@
 			adjustBruteLoss(-5)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
-			user << "<span class='notice'>\The [src] is undamaged.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is undamaged.</span>")
 		return
 	return ..()
 
@@ -83,7 +83,7 @@
 		msg += "</span>"
 	msg += "*---------*</span>"
 
-	user << msg
+	to_chat(user, msg)
 
 
 /////////////////Juggernaut///////////////

@@ -45,24 +45,24 @@
 
 	loc = sanitize(loc)
 	if(!loc)
-		src << "<span class='warning'>Must supply a location name</span>"
+		to_chat(src, "<span class='warning'>Must supply a location name</span>")
 		return
 
 	if(stored_locations.len >= max_locations)
-		src << "<span class='warning'>Cannot store additional locations. Remove one first</span>"
+		to_chat(src, "<span class='warning'>Cannot store additional locations. Remove one first</span>")
 		return
 
 	if(loc in stored_locations)
-		src << "<span class='warning'>There is already a stored location by this name</span>"
+		to_chat(src, "<span class='warning'>There is already a stored location by this name</span>")
 		return
 
 	var/L = src.eyeobj.getLoc()
 	if (InvalidPlayerTurf(get_turf(L)))
-		src << "<span class='warning'>Unable to store this location</span>"
+		to_chat(src, "<span class='warning'>Unable to store this location</span>")
 		return
 
 	stored_locations[loc] = L
-	src << "Location '[loc]' stored"
+	to_chat(src, "Location '[loc]' stored")
 
 /mob/living/silicon/ai/proc/sorted_stored_locations()
 	return sortList(stored_locations)
@@ -73,7 +73,7 @@
 	set desc = "Returns to the selected camera location"
 
 	if (!(loc in stored_locations))
-		src << "<span class='warning'>Location [loc] not found</span>"
+		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
 		return
 
 	var/L = stored_locations[loc]
@@ -85,11 +85,11 @@
 	set desc = "Deletes the selected camera location"
 
 	if (!(loc in stored_locations))
-		src << "<span class='warning'>Location [loc] not found</span>"
+		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
 		return
 
 	stored_locations.Remove(loc)
-	src << "Location [loc] removed"
+	to_chat(src, "Location [loc] removed")
 
 // Used to allow the AI is write in mob names/camera name from the CMD line.
 /datum/trackable
@@ -132,7 +132,7 @@
 	set desc = "Select who you would like to track."
 
 	if(src.stat == 2)
-		src << "You can't follow [target_name] with cameras because you are dead!"
+		to_chat(src, "You can't follow [target_name] with cameras because you are dead!")
 		return
 	if(!target_name)
 		src.cameraFollow = null
@@ -145,7 +145,7 @@
 	if(!cameraFollow)
 		return
 
-	src << "Follow camera mode [forced ? "terminated" : "ended"]."
+	to_chat(src, "Follow camera mode [forced ? "terminated" : "ended"].")
 	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
@@ -159,7 +159,7 @@
 	if(U.cameraFollow)
 		U.ai_cancel_tracking()
 	U.cameraFollow = target
-	U << "Now tracking [target.name] on camera."
+	to_chat(U, "Now tracking [target.name] on camera.")
 	target.tracking_initiated()
 
 	spawn (0)
@@ -169,7 +169,7 @@
 
 			switch(target.tracking_status())
 				if(TRACKING_NO_COVERAGE)
-					U << "Target is not near any active cameras."
+					to_chat(U, "Target is not near any active cameras.")
 					sleep(100)
 					continue
 				if(TRACKING_TERMINATE)
@@ -260,14 +260,14 @@ mob/living/proc/tracking_initiated()
 mob/living/silicon/robot/tracking_initiated()
 	tracking_entities++
 	if(tracking_entities == 1 && has_zeroth_law())
-		src << "<span class='warning'>Internal camera is currently being accessed.</span>"
+		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
 
 mob/living/proc/tracking_cancelled()
 
 mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
 	if(!tracking_entities && has_zeroth_law())
-		src << "<span class='notice'>Internal camera is no longer being accessed.</span>"
+		to_chat(src, "<span class='notice'>Internal camera is no longer being accessed.</span>")
 
 
 #undef TRACKING_POSSIBLE

@@ -80,12 +80,12 @@
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
 	icon_state = "axe1"
-	user << "<span class='notice'>\The [src] is now energised.</span>"
+	to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 
 /obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
 	..()
 	icon_state = initial(icon_state)
-	user << "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>"
+	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
 
 /*
  * Energy Sword
@@ -130,14 +130,14 @@
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
-		user << "<span class='notice'>\The [src] is now energised.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 	..()
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	icon_state = "sword[blade_color]"
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	if(active)
-		user << "<span class='notice'>\The [src] deactivates!</span>"
+		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
 	..()
 	attack_verb = list()
 	icon_state = initial(icon_state)

@@ -30,9 +30,9 @@
 
 /obj/item/modular_computer/processor/examine(var/mob/user)
 	if(damage > broken_damage)
-		user << "<span class='danger'>It is heavily damaged!</span>"
+		to_chat(user, "<span class='danger'>It is heavily damaged!</span>")
 	else if(damage)
-		user << "It is damaged."
+		to_chat(user, "It is damaged.")
 
 // Power interaction is handled by our machinery part, due to machinery having APC connection.
 /obj/item/modular_computer/processor/handle_power()
@@ -98,7 +98,7 @@
 /obj/item/modular_computer/processor/try_install_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0)
 	if(istype(H, /obj/item/weapon/computer_hardware/tesla_link))
 		if(machinery_computer.tesla_link)
-			user << "This computer's tesla link slot is already occupied by \the [machinery_computer.tesla_link]."
+			to_chat(user, "This computer's tesla link slot is already occupied by \the [machinery_computer.tesla_link].")
 			return
 		var/obj/item/weapon/computer_hardware/tesla_link/L = H
 		L.holder = machinery_computer

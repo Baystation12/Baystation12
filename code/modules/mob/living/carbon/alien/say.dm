@@ -4,7 +4,7 @@
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			src << "\red You cannot speak in IC (Muted)."
+			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
 			return
 
 	message = sanitize(message)

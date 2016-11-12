@@ -140,7 +140,7 @@
 			owner.co2_alert = 0
 
 		if(!owner.co2_alert && word && prob(warn_prob))
-			owner << "<span class='warning'>You feel [word].</span>"
+			to_chat(owner, "<span class='warning'>You feel [word].</span>")
 			owner.adjustOxyLoss(oxyloss)
 			owner.co2_alert = alert
 
@@ -172,7 +172,7 @@
 		owner.adjustOxyLoss(-5)
 		if(robotic < ORGAN_ROBOT && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
-				owner << sound(species.breathing_sound,0,0,0,5)
+				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
 				breathing = 0
 			else
 				breathing = 1
@@ -188,7 +188,7 @@
 		var/damage = 0
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))
-				owner << "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>"
+				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
 
 			switch(breath.temperature)
 				if(species.cold_level_3 to species.cold_level_2)
@@ -202,7 +202,7 @@
 			owner.fire_alert = 1
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
-				owner << "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>"
+				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
 			switch(breath.temperature)
 				if(species.heat_level_1 to species.heat_level_2)
@@ -227,7 +227,7 @@
 
 		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 		if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-		//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
+//		log_debug("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
 		owner.bodytemperature += temp_adj
 
 	else if(breath.temperature >= species.heat_discomfort_level)

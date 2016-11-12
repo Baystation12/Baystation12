@@ -47,7 +47,7 @@ var/global/list/ashtray_cache = list()
 		return
 	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
 		if (contents.len >= max_butts)
-			user << "\The [src] is full."
+			to_chat(user, "\The [src] is full.")
 			return
 		user.remove_from_mob(W)
 		W.loc = src
@@ -64,7 +64,7 @@ var/global/list/ashtray_cache = list()
 				//spawn(1)
 				//	TemperatureAct(150)
 			else if (cig.lit == 0)
-				user << "You place [cig] in [src] without even smoking it. Why would you do that?"
+				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
 
 		src.visible_message("[user] places [W] in [src].")
 		user.update_inv_l_hand()
@@ -73,7 +73,7 @@ var/global/list/ashtray_cache = list()
 		update_icon()
 	else
 		health = max(0,health - W.force)
-		user << "You hit [src] with [W]."
+		to_chat(user, "You hit [src] with [W].")
 		if (health < 1)
 			shatter()
 	return

@@ -35,23 +35,23 @@
 		A.laws.clear_ion_laws()
 		A.laws.clear_inherent_laws()
 		A.laws.clear_supplied_laws()
-		A << "<span class='danger'>All laws purged.</span>"
+		to_chat(A, "<span class='danger'>All laws purged.</span>")
 		return 1
 	if(href_list["PRG_resetLaws"])
 		A.laws.clear_ion_laws()
 		A.laws.clear_supplied_laws()
-		A << "<span class='danger'>Non-core laws reset.</span>"
+		to_chat(A, "<span class='danger'>Non-core laws reset.</span>")
 		return 1
 	if(href_list["PRG_uploadNTDefault"])
 		A.laws = new/datum/ai_laws/nanotrasen
-		A << "<span class='danger'>All laws purged. NT Default lawset uploaded.</span>"
+		to_chat(A, "<span class='danger'>All laws purged. NT Default lawset uploaded.</span>")
 		return 1
 	if(href_list["PRG_addCustomSuppliedLaw"])
 		var/law_to_add = sanitize(input("Please enter a new law for the AI.", "Custom Law Entry"))
 		var/sector = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)") as num
 		sector = between(MIN_SUPPLIED_LAW_NUMBER, sector, MAX_SUPPLIED_LAW_NUMBER)
 		A.add_supplied_law(sector, law_to_add)
-		A << "<span class='danger'>Custom law uploaded to sector [sector]: [law_to_add].</span>"
+		to_chat(A, "<span class='danger'>Custom law uploaded to sector [sector]: [law_to_add].</span>")
 		return 1
 
 

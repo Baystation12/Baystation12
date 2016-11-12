@@ -69,7 +69,7 @@
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
-				H << "<span class='danger'>Your species cannot wear [src].</span>"
+				to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
 				return 0
 	return 1
 
@@ -147,12 +147,12 @@
 		icon_state = "headphones_off"
 		item_state = "headphones_off"
 		headphones_on = 0
-		usr << "<span class='notice'>You turn the music off.</span>"
+		to_chat(usr, "<span class='notice'>You turn the music off.</span>")
 	else
 		icon_state = "headphones_on"
 		item_state = "headphones_on"
 		headphones_on = 1
-		usr << "<span class='notice'>You turn the music on.</span>"
+		to_chat(usr, "<span class='notice'>You turn the music on.</span>")
 
 	update_clothing_icon()
 
@@ -235,20 +235,29 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if (clipped)
-			user << "<span class='notice'>The [src] have already been clipped!</span>"
+			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
 			update_icon()
 			return
 
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		user.visible_message("\red [user] cuts the fingertips off of the [src].","\red You cut the fingertips off of the [src].")
+		user.visible_message("<span class='warning'>\The [user] cuts the fingertips off of \the [src].</span>","<span class='warning'>You cut the fingertips off of \the [src].</span>")
 
-		clipped = 1
-		name = "modified [name]"
-		desc = "[desc]<br>They have had the fingertips cut off of them."
-		if("exclude" in species_restricted)
-			species_restricted -= "Unathi"
-			species_restricted -= "Tajara"
+		cut_fingertops() // apply change, so relevant xenos can wear these
 		return
+
+// Applies "clipped" and removes relevant restricted species from the list,
+// making them wearable by the specified species, does nothing if already cut
+/obj/item/clothing/gloves/proc/cut_fingertops()
+	if (clipped)
+		return
+
+	clipped = 1
+	name = "modified [name]"
+	desc = "[desc]<br>They have had the fingertips cut off of them."
+	if("exclude" in species_restricted)
+		species_restricted -= "Unathi"
+		species_restricted -= "Tajara"
+	return
 
 ///////////////////////////////////////////////////////////////////////
 //Head
@@ -288,10 +297,10 @@ BLIND     // can't see anything
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))
-			user << "You cannot turn the light on while in this [user.loc]"
+			to_chat(user, "You cannot turn the light on while in this [user.loc]")
 			return
 		on = !on
-		user << "You [on ? "enable" : "disable"] the helmet light."
+		to_chat(user, "You [on ? "enable" : "disable"] the helmet light.")
 		update_flashlight(user)
 	else
 		return ..(user)
@@ -336,9 +345,9 @@ BLIND     // can't see anything
 	if(!success)
 		return 0
 	else if(success == 2)
-		user << "<span class='warning'>You are already wearing a hat.</span>"
+		to_chat(user, "<span class='warning'>You are already wearing a hat.</span>")
 	else if(success == 1)
-		user << "<span class='notice'>You crawl under \the [src].</span>"
+		to_chat(user, "<span class='notice'>You crawl under \the [src].</span>")
 	return 1
 
 /obj/item/clothing/head/update_icon(var/mob/user)
@@ -448,7 +457,7 @@ BLIND     // can't see anything
 		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
 		holding = null
 	else
-		usr << "<span class='warning'>Your need an empty, unbroken hand to do that.</span>"
+		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
 
 	if(!holding)
@@ -461,7 +470,7 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
 	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
 		if(holding)
-			user << "<span class='warning'>\The [src] is already holding \a [holding].</span>"
+			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
 			return
 		user.unEquip(I)
 		I.forceMove(src)
@@ -645,29 +654,29 @@ BLIND     // can't see anything
 	..(user)
 	switch(src.sensor_mode)
 		if(0)
-			user << "Its sensors appear to be disabled."
+			to_chat(user, "Its sensors appear to be disabled.")
 		if(1)
-			user << "Its binary life sensors appear to be enabled."
+			to_chat(user, "Its binary life sensors appear to be enabled.")
 		if(2)
-			user << "Its vital tracker appears to be enabled."
+			to_chat(user, "Its vital tracker appears to be enabled.")
 		if(3)
-			user << "Its vital tracker and tracking beacon appear to be enabled."
+			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
 /obj/item/clothing/under/proc/set_sensors(mob/user as mob)
 	var/mob/M = user
 	if (isobserver(M)) return
 	if (user.incapacitated()) return
 	if(has_sensor >= SUIT_LOCKED_SENSORS)
-		user << "The controls are locked."
+		to_chat(user, "The controls are locked.")
 		return 0
 	if(has_sensor <= SUIT_NO_SENSORS)
-		user << "This suit does not have any sensors."
+		to_chat(user, "This suit does not have any sensors.")
 		return 0
 
 	var/list/modes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 	var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
 	if(get_dist(user, src) > 1)
-		user << "You have moved too far away."
+		to_chat(user, "You have moved too far away.")
 		return
 	sensor_mode = modes.Find(switchMode) - 1
 
@@ -719,7 +728,7 @@ BLIND     // can't see anything
 
 	update_rolldown_status()
 	if(rolled_down == -1)
-		usr << "<span class='notice'>You cannot roll down [src]!</span>"
+		to_chat(usr, "<span class='notice'>You cannot roll down [src]!</span>")
 	if((rolled_sleeves == 1) && !(rolled_down))
 		rolled_sleeves = 0
 		return
@@ -742,21 +751,21 @@ BLIND     // can't see anything
 
 	update_rollsleeves_status()
 	if(rolled_sleeves == -1)
-		usr << "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>"
+		to_chat(usr, "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>")
 		return
 	if(rolled_down == 1)
-		usr << "<span class='notice'>You must roll up your [src] first!</span>"
+		to_chat(usr, "<span class='notice'>You must roll up your [src] first!</span>")
 		return
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(ARMS|HANDS)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
-		usr << "<span class='notice'>You roll up your [src]'s sleeves.</span>"
+		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
-		usr << "<span class='notice'>You roll down your [src]'s sleeves.</span>"
+		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()

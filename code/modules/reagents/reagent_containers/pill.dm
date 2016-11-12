@@ -25,7 +25,7 @@
 			if(!M.can_eat(src))
 				return
 
-			M << "<span class='notice'>You swallow \the [src].</span>"
+			to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
 				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
@@ -61,9 +61,9 @@
 
 		if(target.is_open_container() && target.reagents)
 			if(!target.reagents.total_volume)
-				user << "<span class='notice'>[target] is empty. Can't dissolve \the [src].</span>"
+				to_chat(user, "<span class='notice'>[target] is empty. Can't dissolve \the [src].</span>")
 				return
-			user << "<span class='notice'>You dissolve \the [src] in [target].</span>"
+			to_chat(user, "<span class='notice'>You dissolve \the [src] in [target].</span>")
 
 			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 			reagents.trans_to(target, reagents.total_volume)

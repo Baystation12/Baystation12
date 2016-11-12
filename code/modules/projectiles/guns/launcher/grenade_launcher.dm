@@ -37,24 +37,24 @@
 	if(next)
 		grenades -= next //Remove grenade from loaded list.
 		chambered = next
-		M << "<span class='warning'>You pump [src], loading \a [next] into the chamber.</span>"
+		to_chat(M, "<span class='warning'>You pump [src], loading \a [next] into the chamber.</span>")
 	else
-		M << "<span class='warning'>You pump [src], but the magazine is empty.</span>"
+		to_chat(M, "<span class='warning'>You pump [src], but the magazine is empty.</span>")
 	update_icon()
 
 /obj/item/weapon/gun/launcher/grenade/examine(mob/user)
 	if(..(user, 2))
 		var/grenade_count = grenades.len + (chambered? 1 : 0)
-		user << "Has [grenade_count] grenade\s remaining."
+		to_chat(user, "Has [grenade_count] grenade\s remaining.")
 		if(chambered)
-			user << "\A [chambered] is chambered."
+			to_chat(user, "\A [chambered] is chambered.")
 
 /obj/item/weapon/gun/launcher/grenade/proc/load(obj/item/weapon/grenade/G, mob/user)
 	if(!can_load_grenade_type(G, user))
 		return
 
 	if(grenades.len >= max_grenades)
-		user << "<span class='warning'>\The [src] is full.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is full.</span>")
 		return
 	user.drop_from_inventory(G, src)
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
@@ -67,7 +67,7 @@
 		user.put_in_hands(G)
 		user.visible_message("\The [user] removes \a [G] from [src].", "<span class='notice'>You remove \a [G] from \the [src].</span>")
 	else
-		user << "<span class='warning'>\The [src] is empty.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
 
 /obj/item/weapon/gun/launcher/grenade/attack_self(mob/user)
 	pump(user)
@@ -98,7 +98,7 @@
 
 /obj/item/weapon/gun/launcher/grenade/proc/can_load_grenade_type(obj/item/weapon/grenade/G, mob/user)
 	if(is_type_in_list(G, blacklisted_grenades) && ! is_type_in_list(G, whitelisted_grenades))
-		user << "<span class='warning'>\The [G] doesn't seem to fit in \the [src]!</span>"
+		to_chat(user, "<span class='warning'>\The [G] doesn't seem to fit in \the [src]!</span>")
 		return FALSE
 	return TRUE
 
@@ -138,7 +138,7 @@
 		return
 
 	if(chambered)
-		user << "<span class='warning'>\The [src] is already loaded.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is already loaded.</span>")
 		return
 	user.drop_from_inventory(G, src)
 	chambered = G
@@ -150,4 +150,4 @@
 		user.visible_message("\The [user] removes \a [chambered] from \the[src].", "<span class='notice'>You remove \a [chambered] from \the [src].</span>")
 		chambered = null
 	else
-		user << "<span class='warning'>\The [src] is empty.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is empty.</span>")

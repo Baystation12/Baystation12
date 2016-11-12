@@ -72,7 +72,7 @@
 	var/radiation = (energy*2)
 	M.apply_effect((radiation*3),IRRADIATE,blocked = M.getarmor(null, "rad"))
 	M.updatehealth()
-	//M << "\red You feel odd."
+//	to_chat(M, "<span class='warning'>You feel odd.</span>")
 	return
 
 

@@ -163,14 +163,15 @@
 	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
-	//world << "multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]"
+//	log_debug("multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]")
+
 
 	if(href_list["refresh"])
 		updateUsrDialog()
 		return
 
 	if (MS.moving_status != SHUTTLE_IDLE)
-		usr << "\blue [shuttle_tag] vessel is moving."
+		to_chat(usr, "<span class='notice'>[shuttle_tag] vessel is moving.</span>")
 		return
 
 	if(href_list["dock_command"])
@@ -183,11 +184,11 @@
 
 	if(href_list["start"])
 		if(MS.at_origin)
-			usr << "\red You are already at your home base."
+			to_chat(usr, "<span class='warning'>You are already at your home base.</span>")
 			return
 
 		if((MS.last_move + MS.cooldown*10) > world.time)
-			usr << "\red The ship's drive is inoperable while the engines are charging."
+			to_chat(usr, "<span class='warning'>The ship's drive is inoperable while the engines are charging.</span>")
 			return
 
 		if(!check_docking(MS))
@@ -195,7 +196,7 @@
 			return
 
 		if(!MS.return_warning)
-			usr << "\red Returning to your home base will end your mission. If you are sure, press the button again."
+			to_chat(usr, "<span class='warning'>Returning to your home base will end your mission. If you are sure, press the button again.</span>")
 			//TODO: Actually end the mission.
 			MS.return_warning = 1
 			return
@@ -208,11 +209,12 @@
 	if(href_list["toggle_cloak"])
 
 		MS.cloaked = !MS.cloaked
-		usr << "\red Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival."
-
+		to_chat(usr, "<span class='warning'>Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival.</span>")
+		
+		
 	if(href_list["move_multi"])
 		if((MS.last_move + MS.cooldown*10) > world.time)
-			usr << "\red The ship's drive is inoperable while the engines are charging."
+			to_chat(usr, "<span class='warning'>The ship's drive is inoperable while the engines are charging.</span>")
 			return
 
 		if(!check_docking(MS))
@@ -222,7 +224,7 @@
 		var/choice = input("Select a destination.") as null|anything in MS.destinations
 		if(!choice) return
 
-		usr << "\blue [shuttle_tag] main computer recieved message."
+		to_chat(usr, "<span class='notice'>[shuttle_tag] main computer recieved message.</span>")
 
 		if(MS.at_origin)
 			MS.announce_arrival()

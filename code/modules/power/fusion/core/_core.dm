@@ -98,7 +98,7 @@ var/list/fusion_cores = list()
 /obj/machinery/power/fusion_core/attackby(var/obj/item/W, var/mob/user)
 
 	if(owned_field)
-		user << "<span class='warning'>Shut \the [src] off first!</span>"
+		to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 		return
 
 	if(istype(W, /obj/item/device/multitool))

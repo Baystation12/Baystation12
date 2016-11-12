@@ -55,7 +55,7 @@
 
 /obj/machinery/organ_printer/examine(var/mob/user)
 	..()
-	user << "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>"
+	to_chat(user, "<span class='notice'>It is loaded with [stored_matter]/[max_stored_matter] matter units.</span>")
 
 /obj/machinery/organ_printer/RefreshParts()
 	print_delay = initial(print_delay)
@@ -78,7 +78,7 @@
 		return
 
 	if(stored_matter <= products[choice][2])
-		user << "<span class='warning'>There is not enough matter in \the [src].</span>"
+		to_chat(user, "<span class='warning'>There is not enough matter in \the [src].</span>")
 		return
 
 	stored_matter -= products[choice][2]
@@ -138,16 +138,16 @@
 /obj/machinery/organ_printer/robot/attackby(var/obj/item/weapon/W, var/mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
 		if((max_stored_matter-stored_matter) < matter_amount_per_sheet)
-			user << "<span class='warning'>\The [src] is too full.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
 			return
 		var/obj/item/stack/S = W
 		var/space_left = max_stored_matter - stored_matter
 		var/sheets_to_take = min(S.amount, Floor(space_left/matter_amount_per_sheet))
 		if(sheets_to_take <= 0)
-			user << "<span class='warning'>\The [src] is too full.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
 			return
 		stored_matter = min(max_stored_matter, stored_matter + (sheets_to_take*matter_amount_per_sheet))
-		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>"
+		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>")
 		S.use(sheets_to_take)
 		return
 	return ..()
@@ -199,11 +199,11 @@
 	// Load with matter for printing.
 	if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
 		if((max_stored_matter - stored_matter) < amount_per_slab)
-			user << "<span class='warning'>\The [src] is too full.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
 			return
 		stored_matter += amount_per_slab
 		user.drop_item()
-		user << "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>"
+		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>")
 		qdel(W)
 		return
 	// DNA sample from syringe.
@@ -212,7 +212,7 @@
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
 		if(injected && injected.data)
 			loaded_dna = injected.data
-			user << "<span class='info'>You inject the blood sample into the bioprinter.</span>"
+			to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
 		return
 	return ..()
 // END FLESH ORGAN PRINTER

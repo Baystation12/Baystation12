@@ -129,7 +129,7 @@
 	update_coverage()
 	// DECONSTRUCTION
 	if(isscrewdriver(W))
-		//user << "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>"
+//		to_chat(user, "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>")
 		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
 		user.visible_message("<span class='warning'>[user] screws the camera's panel [panel_open ? "open" : "closed"]!</span>",
@@ -150,10 +150,10 @@
 				assembly.dir = src.dir
 				if(stat & BROKEN)
 					assembly.state = 2
-					user << "<span class='notice'>You repaired \the [src] frame.</span>"
+					to_chat(user, "<span class='notice'>You repaired \the [src] frame.</span>")
 				else
 					assembly.state = 1
-					user << "<span class='notice'>You cut \the [src] free from the wall.</span>"
+					to_chat(user, "<span class='notice'>You cut \the [src] free from the wall.</span>")
 					new /obj/item/stack/cable_coil(src.loc, length=2)
 				assembly = null //so qdel doesn't eat it.
 			qdel(src)
@@ -175,22 +175,22 @@
 			P = W
 			itemname = P.name
 			info = P.notehtml
-		U << "You hold \a [itemname] up to the camera ..."
+		to_chat(U, "You hold \a [itemname] up to the camera ...")
 		for(var/mob/living/silicon/ai/O in living_mob_list_)
 			if(!O.client) continue
-			if(U.name == "Unknown") O << "<b>[U]</b> holds \a [itemname] up to one of your cameras ..."
-			else O << "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ..."
+			if(U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
+			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
 	else if (istype(W, /obj/item/weapon/camera_bug))
 		if (!src.can_use())
-			user << "<span class='warning'>Camera non-functional.</span>"
+			to_chat(user, "<span class='warning'>Camera non-functional.</span>")
 			return
 		if (src.bugged)
-			user << "<span class='notice'>Camera bug removed.</span>"
+			to_chat(user, "<span class='notice'>Camera bug removed.</span>")
 			src.bugged = 0
 		else
-			user << "<span class='notice'>Camera bugged.</span>"
+			to_chat(user, "<span class='notice'>Camera bugged.</span>")
 			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
@@ -346,7 +346,7 @@
 		return 0
 
 	// Do after stuff here
-	user << "<span class='notice'>You start to weld the [src]..</span>"
+	to_chat(user, "<span class='notice'>You start to weld the [src]..</span>")
 	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 	WT.eyecheck(user)
 	busy = 1
@@ -363,7 +363,7 @@
 		return
 
 	if(stat & BROKEN)
-		user << "<span class='warning'>\The [src] is broken.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is broken.</span>")
 		return
 
 	user.set_machine(src)

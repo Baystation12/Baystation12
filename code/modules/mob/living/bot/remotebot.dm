@@ -21,7 +21,7 @@
 /mob/living/bot/remotebot/examine(mob/user)
 	..(user)
 	if(holding)
-		user << "<span class='notice'>It is holding \the \icon[holding] [holding].</span>"
+		to_chat(user, "<span class='notice'>It is holding \the \icon[holding] [holding].</span>")
 
 /mob/living/bot/remotebot/explode()
 	on = 0
@@ -43,7 +43,7 @@
 /mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/living/user)
 	if(istype(I, /obj/item/device/bot_controller) && !controller)
 		user.visible_message("\The [user] waves \the [I] over \the [src].")
-		user << "<span class='notice'>You link \the [src] to \the [I].</span>"
+		to_chat(user, "<span class='notice'>You link \the [src] to \the [I].</span>")
 		var/obj/item/device/bot_controller/B = I
 		B.bot = src
 		controller = B
@@ -162,7 +162,7 @@
 	icon_state = "remotebot"
 
 /obj/item/device/bot_kit/attack_self(var/mob/living/user)
-	user << "You quickly dismantle the box and retrieve the controller and the remote bot itself."
+	to_chat(user, "You quickly dismantle the box and retrieve the controller and the remote bot itself.")
 	var/turf/T = get_turf(src.loc)
 	new /mob/living/bot/remotebot(T)
 	new /obj/item/device/bot_controller(T)

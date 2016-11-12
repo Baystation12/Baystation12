@@ -80,7 +80,7 @@
 	set src in view(usr, 1)
 	set name = "Print Data"
 	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
-		usr << "No."
+		to_chat(usr, "No.")
 		return
 
 	var/scan_data = ""
@@ -172,16 +172,16 @@
 		src.wdata = list()
 		src.chemtraces = list()
 		src.timeofdeath = null
-		user << "<span class='notice'>A new patient has been registered. Purging data for previous patient.</span>"
+		to_chat(user, "<span class='notice'>A new patient has been registered. Purging data for previous patient.</span>")
 
 	src.timeofdeath = M.timeofdeath
 
 	var/obj/item/organ/external/S = M.get_organ(user.zone_sel.selecting)
 	if(!S)
-		usr << "<span class='warning'>You can't scan this body part.</span>"
+		to_chat(usr, "<span class='warning'>You can't scan this body part.</span>")
 		return
 	if(!S.open)
-		usr << "<span class='warning'>You have to cut [S] open first!</span>"
+		to_chat(usr, "<span class='warning'>You have to cut [S] open first!</span>")
 		return
 	M.visible_message("<span class='notice'>\The [user] scans the wounds on [M]'s [S.name] with [src]</span>")
 

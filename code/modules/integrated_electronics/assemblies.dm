@@ -56,7 +56,6 @@
 		return
 	set_dir(turn(dir, -90))
 	to_chat(usr, "\The src is now facing [dir2text(dir)].")
-
 /obj/item/device/electronic_assembly/proc/get_part_complexity()
 	. = 0
 	for(var/obj/item/integrated_circuit/part in contents)

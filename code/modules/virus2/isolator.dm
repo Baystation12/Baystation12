@@ -32,7 +32,7 @@
 	var/obj/item/weapon/reagent_containers/syringe/S = O
 
 	if(sample)
-		user << "\The [src] is already loaded."
+		to_chat(user, "\The [src] is already loaded.")
 		return
 
 	sample = S

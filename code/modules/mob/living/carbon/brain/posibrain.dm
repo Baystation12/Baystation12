@@ -16,7 +16,7 @@
 /obj/item/device/mmi/digital/posibrain/attack_self(mob/user as mob)
 	if(brainmob && !brainmob.key && searching == 0)
 		//Start the process of searching for a new user.
-		user << "<span class='notice'>You carefully locate the manual activation switch and start the positronic brain's boot process.</span>"
+		to_chat(user, "<span class='notice'>You carefully locate the manual activation switch and start the positronic brain's boot process.</span>")
 		icon_state = "posibrain-searching"
 		src.searching = 1
 		var/datum/ghosttrap/G = get_ghost_trap("positronic brain")
@@ -61,7 +61,7 @@
 	else
 		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
 	msg += "</span><span class='info'>*---------*</span>"
-	user << msg
+	to_chat(user, msg)
 	return
 
 /obj/item/device/mmi/digital/posibrain/emp_act(severity)

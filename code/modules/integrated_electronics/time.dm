@@ -57,9 +57,9 @@
 	inputs = list("delay time")
 
 /obj/item/integrated_circuit/time/delay/custom/do_work()
-	var/datum/integrated_io/delay_input = inputs[1]
-	if(delay_input.data && isnum(delay_input.data) )
-		var/new_delay = min(delay_input.data, 1)
+	var/delay_input = get_pin_data(IC_INPUT, 1)
+	if(isnum(delay_input))
+		var/new_delay = min(delay_input, 1)
 		new_delay = max(new_delay, 36000) //An hour.
 		delay = new_delay
 
@@ -99,8 +99,7 @@
 			ticks_completed -= ticks_to_pulse
 		else
 			ticks_completed = 0
-		var/datum/integrated_io/activate/pulser = activators[1]
-		pulser.activate()
+		activate_pin(1)
 
 /obj/item/integrated_circuit/time/ticker/fast
 	name = "fast ticker"
@@ -125,14 +124,7 @@
 	activators = list("update")
 
 /obj/item/integrated_circuit/time/clock/do_work()
-	var/datum/integrated_io/time = outputs[1]
-	var/datum/integrated_io/hour = outputs[2]
-	var/datum/integrated_io/min = outputs[3]
-	var/datum/integrated_io/sec = outputs[4]
-
-	time.data = time2text(station_time_in_ticks, "hh:mm:ss")
-	hour.data = text2num(time2text(station_time_in_ticks, "hh"))
-	min.data = text2num(time2text(station_time_in_ticks, "mm"))
-	sec.data = text2num(time2text(station_time_in_ticks, "ss"))
-
-	push_data()
+	set_pin_data(IC_OUTPUT, 1, time2text(station_time_in_ticks, "hh:mm:ss"))
+	set_pin_data(IC_OUTPUT, 2, text2num(time2text(station_time_in_ticks, "hh")))
+	set_pin_data(IC_OUTPUT, 3, text2num(time2text(station_time_in_ticks, "mm")))
+	set_pin_data(IC_OUTPUT, 4, text2num(time2text(station_time_in_ticks, "ss")))

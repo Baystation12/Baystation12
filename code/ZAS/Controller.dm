@@ -190,7 +190,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		#ifdef ZASDBG
 		if(updated != updating.len)
 			tick_progress = "[updating.len - updated] tiles left unupdated."
-			world << "<span class='danger'>[tick_progress]</span>"
+			log_debug("<span class='danger'>[tick_progress]</span>")
 			. = 0
 		#endif
 
@@ -347,9 +347,9 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	if(istype(E, /connection_edge/zone/))
 		var/connection_edge/zone/ZE = E
-		world << "ZASDBG: Active edge! Areas: [get_area(pick(ZE.A.contents))] / [get_area(pick(ZE.B.contents))]"
+		log_debug("ZASDBG: Active edge! Areas: [get_area(pick(ZE.A.contents))] / [get_area(pick(ZE.B.contents))]")
 	else
-		world << "ZASDBG: Active edge! Area: [get_area(pick(E.A.contents))]"
+		log_debug("ZASDBG: Active edge! Area: [get_area(pick(E.A.contents))]")
 	#endif
 
 /datum/controller/air_system/proc/equivalent_pressure(zone/A, zone/B)

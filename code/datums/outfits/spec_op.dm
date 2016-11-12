@@ -50,3 +50,20 @@
 /decl/hierarchy/outfit/syndicate_command/equip(var/mob/living/carbon/human/H)
 	commandos.equip(H)
 	return 1
+
+/decl/hierarchy/outfit/mercenary
+	name = "Spec ops - Mercenary"
+	uniform = /obj/item/clothing/under/syndicate
+	shoes = /obj/item/clothing/shoes/combat
+	l_ear = /obj/item/device/radio/headset/syndicate
+	belt = /obj/item/weapon/storage/belt/security
+	glasses = /obj/item/clothing/glasses/sunglasses
+	gloves = /obj/item/clothing/gloves/thick/swat
+
+	l_pocket = /obj/item/weapon/reagent_containers/pill/cyanide
+
+	id_slot = slot_wear_id
+	id_type = /obj/item/weapon/card/id/syndicate
+	id_pda_assignment = "Mercenary"
+
+	flags = OUTFIT_HAS_BACKPACK

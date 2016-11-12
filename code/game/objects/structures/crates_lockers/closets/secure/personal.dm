@@ -70,7 +70,7 @@
 		var/obj/item/weapon/card/id/I = W.GetIdCard()
 
 		if(src.broken)
-			user << "<span class='warning'>It appears to be broken.</span>"
+			to_chat(user, "<span class='warning'>It appears to be broken.</span>")
 			return
 		if(!I || !I.registered_name)	return
 		if(src.allowed(user) || !src.registered_name || (istype(I) && (src.registered_name == I.registered_name)))
@@ -83,7 +83,7 @@
 				src.registered_name = I.registered_name
 				src.desc = "Owned by [I.registered_name]."
 		else
-			user << "<span class='warning'>Access Denied</span>"
+			to_chat(user, "<span class='warning'>Access Denied</span>")
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "The locker has been sliced open by [user] with \an [W]!", "You hear metal being sliced and sparks flying."))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -92,7 +92,7 @@
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
 	else
-		user << "<span class='warning'>Access Denied</span>"
+		to_chat(user, "<span class='warning'>Access Denied</span>")
 	return
 	
 /obj/structure/closet/secure_closet/personal/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback, var/audible_feedback)
@@ -114,9 +114,9 @@
 	if(ishuman(usr))
 		src.add_fingerprint(usr)
 		if (src.locked || !src.registered_name)
-			usr << "<span class='warning'>You need to unlock it first.</span>"
+			to_chat(usr, "<span class='warning'>You need to unlock it first.</span>")
 		else if (src.broken)
-			usr << "<span class='warning'>It appears to be broken.</span>"
+			to_chat(usr, "<span class='warning'>It appears to be broken.</span>")
 		else
 			if (src.opened)
 				if(!src.close())

@@ -22,7 +22,7 @@
 		return
 
 	if(flipped < 0 || !flip(get_cardinal_dir(usr,src)))
-		usr << "<span class='notice'>It won't budge.</span>"
+		to_chat(usr, "<span class='notice'>It won't budge.</span>")
 		return
 
 	usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
@@ -39,7 +39,7 @@
 
 	var/obj/occupied = turf_is_crowded()
 	if(occupied)
-		usr << "There's \a [occupied] in the way."
+		to_chat(usr, "There's \a [occupied] in the way.")
 		return 0
 
 	var/list/L = list()
@@ -65,7 +65,7 @@
 		return
 
 	if (!unflipping_check())
-		usr << "<span class='notice'>It won't budge.</span>"
+		to_chat(usr, "<span class='notice'>It won't budge.</span>")
 		return
 	unflip()
 

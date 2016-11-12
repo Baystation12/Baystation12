@@ -38,7 +38,8 @@
 
 	// Display the results.
 	text += "<br>"
-	world << jointext(text,null)
+	to_world(jointext(text,null))
+
 
 /datum/antagonist/proc/print_objective(var/datum/objective/O, var/num, var/append_success)
 	var/text = "<br><b>Objective [num]:</b> [O.explanation_text] "

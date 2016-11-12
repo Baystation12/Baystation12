@@ -83,13 +83,13 @@
 
 /obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
 	if(anchored != 1)
-		user << "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>"
+		to_chat(user, "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>")
 		return 1
 	if(src.locked && !istype(user, /mob/living/silicon))
-		user << "<span class='warning'>The controls are locked!</span>"
+		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 		return 1
 	if(power != 1)
-		user << "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>"
+		to_chat(user, "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>")
 		return 1
 
 	src.ui_interact(user)
@@ -145,7 +145,7 @@
 		src.active = 2
 	if(src.active >= 1)
 		if(src.power == 0)
-			src.visible_message("\red The [src.name] shuts down due to lack of power!", \
+			src.visible_message("<span class='warning'>The [src.name] shuts down due to lack of power!</span>", \
 				"You hear heavy droning fade out")
 			src.active = 0
 			update_icon()
@@ -200,27 +200,27 @@
 /obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weapon/wrench))
 		if(active)
-			user << "Turn off the field generator first."
+			to_chat(user, "Turn off the field generator first.")
 			return
 
 		else if(anchored == 0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			user << "You secure the external reinforcing bolts to the floor."
+			to_chat(user, "You secure the external reinforcing bolts to the floor.")
 			src.anchored = 1
 			return
 
 		else if(anchored == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			user << "You undo the external reinforcing bolts."
+			to_chat(user, "You undo the external reinforcing bolts.")
 			src.anchored = 0
 			return
 
 	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 		if (src.allowed(user))
 			src.locked = !src.locked
-			user << "Controls are now [src.locked ? "locked." : "unlocked."]"
+			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 		else
-			user << "\red Access denied."
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	else

@@ -240,7 +240,6 @@
 			else
 				if(user.unEquip(W))
 					to_chat(user, "<span class='warning'>God damnit!</span>")
-
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
 
@@ -274,7 +273,6 @@
 			to_chat(usr, "\The [src] now picks up all items in a tile at once.")
 		if(0)
 			to_chat(usr, "\The [src] now picks up one item at a time.")
-
 /obj/item/weapon/storage/verb/quick_empty()
 	set name = "Empty Contents"
 	set category = "Object"

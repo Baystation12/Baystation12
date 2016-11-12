@@ -207,13 +207,13 @@
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
-			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
+			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return
 		if(health >= maxhealth)
-			user << "<span class='notice'>Nothing to fix!</span>"
+			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return
 		if(!density)
-			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return
 
 		//figure out how much metal we need
@@ -225,7 +225,7 @@
 		if (repairing)
 			transfer = stack.transfer_to(repairing, amount_needed - repairing.amount)
 			if (!transfer)
-				user << "<span class='warning'>You must weld or remove \the [repairing] from \the [src] before you can add anything else.</span>"
+				to_chat(user, "<span class='warning'>You must weld or remove \the [repairing] from \the [src] before you can add anything else.</span>")
 		else
 			repairing = stack.split(amount_needed)
 			if (repairing)
@@ -233,21 +233,21 @@
 				transfer = repairing.amount
 
 		if (transfer)
-			user << "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>"
+			to_chat(user, "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/weldingtool))
 		if(!density)
-			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return
 
 		var/obj/item/weapon/weldingtool/welder = I
 		if(welder.remove_fuel(0,user))
-			user << "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>"
+			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
-				user << "<span class='notice'>You finish repairing the damage to \the [src].</span>"
+				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
 				qdel(repairing)
@@ -255,7 +255,7 @@
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
-		user << "<span class='notice'>You remove \the [repairing].</span>"
+		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.loc = user.loc
 		repairing = null
@@ -316,11 +316,11 @@
 /obj/machinery/door/examine(mob/user)
 	. = ..()
 	if(src.health < src.maxhealth / 4)
-		user << "\The [src] looks like it's about to break!"
+		to_chat(user, "\The [src] looks like it's about to break!")
 	else if(src.health < src.maxhealth / 2)
-		user << "\The [src] looks seriously damaged!"
+		to_chat(user, "\The [src] looks seriously damaged!")
 	else if(src.health < src.maxhealth * 3/4)
-		user << "\The [src] shows signs of damage!"
+		to_chat(user, "\The [src] shows signs of damage!")
 
 
 /obj/machinery/door/proc/set_broken()

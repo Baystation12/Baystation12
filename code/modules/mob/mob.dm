@@ -68,7 +68,6 @@
 	to_chat(src, msg)
 
 
-
 // Show a message to all mobs and objects in sight of this one
 // This would be for visible actions by the src mob
 // message is the message output to anyone who can see e.g. "[src] does something!"
@@ -226,7 +225,7 @@
 	set category = "IC"
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
-		src << "<span class='notice'>Something is there but you can't see it.</span>"
+		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
 		return 1
 
 	face_atom(A)
@@ -325,8 +324,7 @@
 	if(mind)
 		mind.show_memory(src)
 	else
-		src << "The game appears to have misplaced your mind datum, so we can't show you your notes."
-
+		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
 	set category = "IC"
@@ -336,8 +334,7 @@
 	if(mind)
 		mind.store_memory(msg)
 	else
-		src << "The game appears to have misplaced your mind datum, so we can't show you your notes."
-
+		to_chat(src, "The game appears to have misplaced your mind datum, so we can't show you your notes.")
 /mob/proc/store_memory(msg as message, popup, sane = 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
@@ -355,7 +352,7 @@
 /mob/proc/update_flavor_text()
 	set src in usr
 	if(usr != src)
-		usr << "No."
+		to_chat(usr, "No.")
 	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
 
 	if(msg != null)
@@ -363,16 +360,16 @@
 
 /mob/proc/warn_flavor_changed()
 	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
-		src << "<h2 class='alert'>OOC Warning:</h2>"
-		src << "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>"
+		to_chat(src, "<h2 class='alert'>OOC Warning:</h2>")
+		to_chat(src, "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>")
 
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
 		var/msg = replacetext(flavor_text, "\n", " ")
 		if(lentext(msg) <= 40)
-			return "\blue [msg]"
+			return "<span class='notice'>[msg]</span>"
 		else
-			return "\blue [copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
+			return "<span class='notice'>[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a></span>"
 
 /*
 /mob/verb/help()
@@ -386,23 +383,21 @@
 	set category = "OOC"
 
 	if (!( config.abandon_allowed ))
-		usr << "<span class='notice'>Respawn is disabled.</span>"
+		to_chat(usr, "<span class='notice'>Respawn is disabled.</span>")
 		return
 	if ((stat != DEAD || !( ticker )))
-		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
+		to_chat(usr, "<span class='notice'><B>You must be dead to use this!</B></span>")
 		return
 	if (ticker.mode && ticker.mode.deny_respawn)
-		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
+		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
 		return
 	else if(!MayRespawn(1, config.respawn_delay))
 		return
 
-	usr << "You can respawn now, enjoy your new life!"
-
+	to_chat(usr, "You can respawn now, enjoy your new life!")
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
-	usr << "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
-
+	to_chat(usr, "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>")
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
@@ -598,22 +593,22 @@
 		return
 
 	if (AM.anchored)
-		src << "<span class='warning'>It won't budge!</span>"
+		to_chat(src, "<span class='warning'>It won't budge!</span>")
 		return
 
 	var/mob/M = AM
 	if(ismob(AM))
 
 		if(!can_pull_mobs || !can_pull_size)
-			src << "<span class='warning'>It won't budge!</span>"
+			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return
 
 		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
-			src << "<span class='warning'>It won't budge!</span>"
+			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return
 
 		if((mob_size == M.mob_size) && (can_pull_mobs == MOB_PULL_SMALLER))
-			src << "<span class='warning'>It won't budge!</span>"
+			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return
 
 		// If your size is larger than theirs and you have some
@@ -628,7 +623,7 @@
 	else if(isobj(AM))
 		var/obj/I = AM
 		if(!can_pull_size || can_pull_size < I.w_class)
-			src << "<span class='warning'>It won't budge!</span>"
+			to_chat(src, "<span class='warning'>It won't budge!</span>")
 			return
 
 	if(pulling)
@@ -647,8 +642,7 @@
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
 		if(H.pull_damage())
-			src << "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>"
-
+			to_chat(src, "<span class='danger'>Pulling \the [H] in their current condition would probably be a bad idea.</span>")
 	//Attempted fix for people flying away through space when cuffed and dragged.
 	if(ismob(AM))
 		var/mob/pulled = AM
@@ -677,7 +671,7 @@
 /mob/proc/see(message)
 	if(!is_active())
 		return 0
-	src << message
+	to_chat(src, message)
 	return 1
 
 /mob/proc/show_viewers(message)
@@ -923,11 +917,11 @@ mob/proc/yank_out_object()
 	usr.setClickCooldown(20)
 
 	if(usr.stat == 1)
-		usr << "You are unconcious and cannot do that!"
+		to_chat(usr, "You are unconcious and cannot do that!")
 		return
 
 	if(usr.restrained())
-		usr << "You are restrained and cannot do that!"
+		to_chat(usr, "You are restrained and cannot do that!")
 		return
 
 	var/mob/S = src
@@ -941,18 +935,17 @@ mob/proc/yank_out_object()
 	valid_objects = get_visible_implants(0)
 	if(!valid_objects.len)
 		if(self)
-			src << "You have nothing stuck in your body that is large enough to remove."
+			to_chat(src, "You have nothing stuck in your body that is large enough to remove.")
 		else
-			U << "[src] has nothing stuck in their wounds that is large enough to remove."
+			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
 		return
 
 	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 
 	if(self)
-		src << "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>"
+		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
-		U << "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>"
-
+		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
 	if(!do_mob(U, S, 30))
 		return
 	if(!selection || !S || !U)
@@ -1026,10 +1019,9 @@ mob/proc/yank_out_object()
 	set_face_dir()
 
 	if(!facing_dir)
-		usr << "You are now not facing anything."
+		to_chat(usr, "You are now not facing anything.")
 	else
-		usr << "You are now facing [dir2text(facing_dir)]."
-
+		to_chat(usr, "You are now facing [dir2text(facing_dir)].")
 /mob/proc/set_face_dir(var/newdir)
 	if(!isnull(facing_dir) && newdir == facing_dir)
 		facing_dir = null
@@ -1099,15 +1091,14 @@ mob/proc/yank_out_object()
 		if(ticker && ticker.looking_for_antags)
 			if(src.mind in ticker.antag_pool)
 				ticker.antag_pool -= src.mind
-				usr << "You have left the antag pool."
+				to_chat(usr, "You have left the antag pool.")
 			else
 				ticker.antag_pool += src.mind
-				usr << "You have joined the antag pool. Make sure you have the needed role set to high!"
+				to_chat(usr, "You have joined the antag pool. Make sure you have the needed role set to high!")
 		else
-			usr << "The game is not currently looking for antags."
+			to_chat(usr, "The game is not currently looking for antags.")
 	else
-		usr << "You must be observing or in the lobby to join the antag pool."
-
+		to_chat(usr, "You must be observing or in the lobby to join the antag pool.")
 /mob/proc/is_invisible_to(var/mob/viewer)
 	return (!alpha || !mouse_opacity || viewer.see_invisible < invisibility)
 

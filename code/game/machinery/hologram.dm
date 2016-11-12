@@ -53,13 +53,13 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	if(alert(user,"Would you like to request an AI's presence?",,"Yes","No") == "Yes")
 		if(last_request + 200 < world.time) //don't spam the AI with requests you jerk!
 			last_request = world.time
-			user << "<span class='notice'>You request an AI's presence.</span>"
+			to_chat(user, "<span class='notice'>You request an AI's presence.</span>")
 			var/area/area = get_area(src)
 			for(var/mob/living/silicon/ai/AI in living_mob_list_)
 				if(!AI.client)	continue
-				AI << "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>"
+				to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>")
 		else
-			user << "<span class='notice'>A request for AI presence was already sent recently.</span>"
+			to_chat(user, "<span class='notice'>A request for AI presence was already sent recently.</span>")
 
 /obj/machinery/hologram/holopad/attack_ai(mob/living/silicon/ai/user)
 	if (!istype(user))
@@ -78,12 +78,12 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 /obj/machinery/hologram/holopad/proc/activate_holo(mob/living/silicon/ai/user)
 	if(!(stat & NOPOWER) && user.eyeobj.loc == src.loc)//If the projector has power and client eye is on it
 		if (user.holo)
-			user << "<span class='danger'>ERROR:</span> Image feed in progress."
+			to_chat(user, "<span class='danger'>ERROR:</span> Image feed in progress.")
 			return
 		create_holo(user)//Create one.
 		src.visible_message("A holographic image of [user] flicks to life right before your eyes!")
 	else
-		user << "<span class='danger'>ERROR:</span> Unable to project hologram."
+		to_chat(user, "<span class='danger'>ERROR:</span> Unable to project hologram.")
 	return
 
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
@@ -233,7 +233,8 @@ Holographic project of everything else.
 		flat_icon.AddAlphaMask(alpha_mask)//Finally, let's mix in a distortion effect.
 		hologram.icon = flat_icon
 
-		world << "Your icon should appear now."
+		log_debug("Your icon should appear now.")
+
 	return
 */
 

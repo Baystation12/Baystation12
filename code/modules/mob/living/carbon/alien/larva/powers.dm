@@ -2,18 +2,18 @@
 	if(!src)
 		return 0
 	if(!istype(loc, /turf))
-		src << "<span class='danger'>You cannot infest a target in your current position.</span>"
+		to_chat(src, "<span class='danger'>You cannot infest a target in your current position.</span>")
 		return 0
 	if(incapacitated())
-		src << "<span class='danger'>You cannot infest a target in your current state.</span>"
+		to_chat(src, "<span class='danger'>You cannot infest a target in your current state.</span>")
 		return 0
 	if(!M)
 		return 1
 	if(!M.lying)
-		src << "<span class='danger'>\The [M] is not prone.</span>"
+		to_chat(src, "<span class='danger'>\The [M] is not prone.</span>")
 		return 0
 	if(!(src.Adjacent(M)))
-		src << "<span class='danger'>\The [M] is not in range.</span>"
+		to_chat(src, "<span class='danger'>\The [M] is not in range.</span>")
 		return 0
 	return 1
 
@@ -34,7 +34,7 @@
 			choices += H
 
 	if(!choices.len)
-		src << "<span class='danger'>There are no viable hosts within range.</span>"
+		to_chat(src, "<span class='danger'>There are no viable hosts within range.</span>")
 		return
 
 	var/mob/living/carbon/human/H = input(src,"Who do you wish to infest?") as null|anything in choices
@@ -50,7 +50,7 @@
 		return
 
 	var/obj/item/organ/external/E = pick(H.organs)
-	src << "<span class='danger'>You burrow deeply into \the [H]'s [E.name]!</span>"
+	to_chat(src, "<span class='danger'>You burrow deeply into \the [H]'s [E.name]!</span>")
 	var/obj/item/weapon/holder/holder = new (loc)
 	src.loc = holder
 	holder.name = src.name
@@ -62,20 +62,20 @@
 	set desc = "Release your host."
 
 	if(incapacitated())
-		src << "You cannot leave your host in your current state."
+		to_chat(src, "You cannot leave your host in your current state.")
 		return
 
 	if(!loc || !loc.loc)
-		src << "You are not inside a host."
+		to_chat(src, "You are not inside a host.")
 		return
 
 	var/mob/living/carbon/human/H = loc.loc
 
 	if(!istype(H))
-		src << "You are not inside a host."
+		to_chat(src, "You are not inside a host.")
 		return
 
-	src << "<span class='danger'>You begin writhing your way free of \the [H]'s flesh...</span>"
+	to_chat(src, "<span class='danger'>You begin writhing your way free of \the [H]'s flesh...</span>")
 
 	if(!do_after(src, 30, H))
 		return
@@ -87,11 +87,11 @@
 
 /mob/living/carbon/alien/larva/proc/leave_host()
 	if(!loc || !loc.loc)
-		src << "You are not inside a host."
+		to_chat(src, "You are not inside a host.")
 		return
 	var/mob/living/carbon/human/H = loc.loc
 	if(!istype(H))
-		src << "You are not inside a host."
+		to_chat(src, "You are not inside a host.")
 		return
 	var/obj/item/weapon/holder/holder = loc
 	var/obj/item/organ/external/affected
@@ -106,6 +106,6 @@
 	else
 		src.loc = get_turf(src)
 	if(affected)
-		src << "<span class='danger'>You crawl out of \the [H]'s [affected.name] and plop to the ground.</span>"
+		to_chat(src, "<span class='danger'>You crawl out of \the [H]'s [affected.name] and plop to the ground.</span>")
 	else
-		src << "<span class='danger'>You plop to the ground.</span>"
+		to_chat(src, "<span class='danger'>You plop to the ground.</span>")

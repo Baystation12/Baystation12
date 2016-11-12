@@ -100,9 +100,9 @@
 				if(I.reagents.total_volume < 10)
 					I.reagents.add_reagent("sugar", 10 - I.reagents.total_volume)
 			else
-				user << "<span class='warning'>There is not enough icecream left!</span>"
+				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else
-			user << "<span class='notice'>[O] already has icecream in it.</span>"
+			to_chat(user, "<span class='notice'>[O] already has icecream in it.</span>")
 		return 1
 	else if(O.is_open_container())
 		return
@@ -125,7 +125,7 @@
 		else
 			src.visible_message("<span class='info'>[user] whips up some [flavour] icecream.</span>")
 	else
-		user << "<span class='warning'>You don't have the ingredients to make this.</span>"
+		to_chat(user, "<span class='warning'>You don't have the ingredients to make this.</span>")
 
 /obj/machinery/icecream_vat/Topic(href, href_list)
 
@@ -148,7 +148,7 @@
 			I.desc = "Delicious [cone_name] cone, but no ice cream."
 			src.visible_message("<span class='info'>[usr] dispenses a crunchy [cone_name] cone from [src].</span>")
 		else
-			usr << "<span class='warning'>There are no [cone_name] cones left!</span>"
+			to_chat(usr, "<span class='warning'>There are no [cone_name] cones left!</span>")
 
 	if(href_list["make"])
 		var/amount = (text2num(href_list["amount"]))

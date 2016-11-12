@@ -56,7 +56,7 @@ datum/preferences
 				pref.real_name = new_name
 				return TOPIC_REFRESH
 			else
-				user << "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>"
+				to_chat(user, "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>")
 				return TOPIC_NOACTION
 
 	else if(href_list["random_name"])
@@ -86,7 +86,7 @@ datum/preferences
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
 		if(!choice || !spawntypes[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
 		if(!(choice in using_map.allowed_spawns)) //Don't force their hand, just let them know
-			user << "Your chosen spawnpoint ([choice]) is unavailable for the current map. Leaving this setting on the current selection will force you to spawn at one of the allowed spawns."
+			to_chat(user, "Your chosen spawnpoint ([choice]) is unavailable for the current map. Leaving this setting on the current selection will force you to spawn at one of the allowed spawns.")
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
 

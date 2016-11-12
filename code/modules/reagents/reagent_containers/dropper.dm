@@ -24,11 +24,11 @@
 		if(reagents.total_volume)
 
 			if(!target.reagents.get_free_space())
-				user << "<span class='notice'>[target] is full.</span>"
+				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
 			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
-				user << "<span class='notice'>You cannot directly fill this object.</span>"
+				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 
 			var/trans = 0
@@ -74,21 +74,21 @@
 
 			else
 				trans = reagents.splash(target, amount_per_transfer_from_this, max_spill=0) //sprinkling reagents on generic non-mobs. Droppers are very precise
-				user << "<span class='notice'>You transfer [trans] units of the solution.</span>"
+				to_chat(user, "<span class='notice'>You transfer [trans] units of the solution.</span>")
 
 		else // Taking from something
 
 			if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
-				user << "<span class='notice'>You cannot directly remove reagents from [target].</span>"
+				to_chat(user, "<span class='notice'>You cannot directly remove reagents from [target].</span>")
 				return
 
 			if(!target.reagents || !target.reagents.total_volume)
-				user << "<span class='notice'>[target] is empty.</span>"
+				to_chat(user, "<span class='notice'>[target] is empty.</span>")
 				return
 
 			var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 
-			user << "<span class='notice'>You fill the dropper with [trans] units of the solution.</span>"
+			to_chat(user, "<span class='notice'>You fill the dropper with [trans] units of the solution.</span>")
 
 		return
 

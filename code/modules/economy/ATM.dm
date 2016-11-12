@@ -65,14 +65,14 @@
 
 		//display a message to the user
 		var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
-		user << "\icon[src] <span class='warning'>The [src] beeps: \"[response]\"</span>"
+		to_chat(user, "\icon[src] <span class='warning'>The [src] beeps: \"[response]\"</span>")
 		return 1
 
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/card))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
-			user << "\icon[src] <span class='warning'>CARD READER ERROR. This system has been compromised!</span>"
+			to_chat(user, "\icon[src] <span class='warning'>CARD READER ERROR. This system has been compromised!</span>")
 			return
 
 		var/obj/item/weapon/card/id/idcard = I
@@ -103,7 +103,7 @@
 			T.time = stationtime2text()
 			authenticated_account.transaction_log.Add(T)
 
-			user << "<span class='info'>You insert [I] into [src].</span>"
+			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
 			src.attack_hand(user)
 			qdel(I)
 	else
@@ -116,7 +116,7 @@
 /obj/machinery/atm/interact(mob/user)
 
 	if(istype(user, /mob/living/silicon))
-		user << "\icon[src] <span class='warning'>Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005.</span>"
+		to_chat(user, "\icon[src] <span class='warning'>Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005.</span>")
 		return
 
 	if(get_dist(src,user) <= 1)
@@ -246,7 +246,7 @@
 						var/target_account_number = text2num(href_list["target_acc_number"])
 						var/transfer_purpose = href_list["purpose"]
 						if(charge_to_account(target_account_number, authenticated_account.owner_name, transfer_purpose, machine_id, transfer_amount))
-							usr << "\icon[src]<span class='info'>Funds transfer successful.</span>"
+							to_chat(usr, "\icon[src]<span class='info'>Funds transfer successful.</span>")
 							authenticated_account.money -= transfer_amount
 
 							//create an entry in the account transaction log
@@ -259,10 +259,10 @@
 							T.amount = "([transfer_amount])"
 							authenticated_account.transaction_log.Add(T)
 						else
-							usr << "\icon[src]<span class='warning'>Funds transfer failed.</span>"
+							to_chat(usr, "\icon[src]<span class='warning'>Funds transfer failed.</span>")
 
 					else
-						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("view_screen")
 				view_screen = text2num(href_list["view_screen"])
 			if("change_security_level")
@@ -314,11 +314,11 @@
 									T.time = stationtime2text()
 									failed_account.transaction_log.Add(T)
 							else
-								usr << "\icon[src] <span class='warning'>Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.</span>"
+								to_chat(usr, "\icon[src] <span class='warning'>Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.</span>")
 								previous_account_number = tried_account_num
 								playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 1)
 						else
-							usr << "\icon[src] <span class='warning'>Unable to log in to account, additional information may be required.</span>"
+							to_chat(usr, "\icon[src] <span class='warning'>Unable to log in to account, additional information may be required.</span>")
 							number_incorrect_tries = 0
 					else
 						playsound(src, 'sound/machines/twobeep.ogg', 50, 1)
@@ -334,7 +334,7 @@
 						T.time = stationtime2text()
 						authenticated_account.transaction_log.Add(T)
 
-						usr << "\icon[src] <span class='info'>Access granted. Welcome user '[authenticated_account.owner_name].'</span>"
+						to_chat(usr, "\icon[src] <span class='info'>Access granted. Welcome user '[authenticated_account.owner_name].'</span>")
 
 					previous_account_number = tried_account_num
 			if("e_withdrawal")
@@ -362,7 +362,7 @@
 						T.time = stationtime2text()
 						authenticated_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
@@ -387,7 +387,7 @@
 						T.time = stationtime2text()
 						authenticated_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("balance_statement")
 				if(authenticated_account)
 					var/obj/item/weapon/paper/R = new(src.loc)
@@ -459,7 +459,7 @@
 				if(!held_card)
 					//this might happen if the user had the browser window open when somebody emagged it
 					if(emagged > 0)
-						usr << "\icon[src] <span class='warning'>The ATM card reader rejected your ID because this machine has been sabotaged!</span>"
+						to_chat(usr, "\icon[src] <span class='warning'>The ATM card reader rejected your ID because this machine has been sabotaged!</span>")
 					else
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/weapon/card/id))

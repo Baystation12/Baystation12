@@ -250,20 +250,20 @@
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
-		user << "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>"
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
 		return 1
 	var/turf/T = src.loc
 	if (node && node.level==1 && isturf(T) && !T.is_plating())
-		user << "<span class='warning'>You must remove the plating first.</span>"
+		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 		return 1
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>"
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 		add_fingerprint(user)
 		return 1
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	if (do_after(user, 40, src))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
@@ -274,9 +274,9 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user)
 	if(..(user, 1))
-		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 	else
-		user << "You are too far away to read the gauge."
+		to_chat(user, "You are too far away to read the gauge.")
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	if(initial_loc)

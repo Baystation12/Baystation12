@@ -41,7 +41,6 @@
 	for(var/client/C in admins)
 		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
 			to_chat(C, "[prefix]: [text]")
-
 /proc/log_game(text)
 	if (config.log_game)
 		game_log("GAME", text)
@@ -189,5 +188,5 @@
 
 /proc/log_info_line(var/datum/d)
 	if(!istype(d))
-		return
+		return json_encode(d)
 	return d.get_log_info_line()

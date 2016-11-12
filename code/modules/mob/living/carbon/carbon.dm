@@ -79,16 +79,23 @@
 		M.loc = src.loc
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
-				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
+				N.show_message(text("<span class='danger'>[M] bursts out of [src]!</span>"), 2)
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
-	if(!iscarbon(M))
-		return
-	if(ishuman(M))
+	if(!istype(M, /mob/living/carbon)) return
+
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(!H.can_use_active_hand())
+
+		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
+		if (H.hand)
+			temp = H.organs_by_name[BP_L_HAND]
+		if(temp && !temp.is_usable())
+			to_chat(H, "<span class='warning'>You can't use your [temp.name]</span>")
 			return
+
+	return
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -100,17 +107,17 @@
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
-			"\red [src] was shocked by the [source]!", \
-			"\red <B>You feel a powerful shock course through your body!</B>", \
-			"\red You hear a heavy electrical crack." \
+			"<span class='warning'>[src] was shocked by the [source]!</span>", \
+			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
+			"<span class='warning'>You hear a heavy electrical crack.</span>" \
 		)
 		Stun(10)//This should work for now, more is really silly and makes you lay there forever
 		Weaken(10)
 	else
 		src.visible_message(
-			"\red [src] was mildly shocked by the [source].", \
-			"\red You feel a mild shock course through your body.", \
-			"\red You hear a light zapping." \
+			"<span class='warning'>[src] was mildly shocked by the [source].</span>", \
+			"<span class='warning'>You feel a mild shock course through your body.</span>", \
+			"<span class='warning'>You hear a light zapping.</span>" \
 		)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -151,8 +158,8 @@
 		if(src == M && istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
 			src.visible_message( \
-				text("\blue [src] examines [].",src.gender==MALE?"himself":"herself"), \
-				"\blue You check yourself for injuries." \
+				text("<span class='notice'>[src] examines [].</span>",src.gender==MALE?"himself":"herself"), \
+				"<span class='notice'>You check yourself for injuries.</span>" \
 				)
 
 			for(var/obj/item/organ/external/org in H.organs)
@@ -388,7 +395,7 @@
 	set category = "IC"
 
 	if(usr.sleeping)
-		usr << "\red You are already sleeping"
+		to_chat(usr, "<span class='warning'>You are already sleeping</span>")
 		return
 	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
 		usr.sleeping = 20 //Short nap
@@ -404,7 +411,7 @@
 	if(buckled)
 		return 0
 	stop_pulling()
-	src << "<span class='warning'>You slipped on [slipped_on]!</span>"
+	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
 	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
@@ -472,8 +479,7 @@
 /mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
 	return metabolism
 
-/mob/living/carbon/return_air_for_internal_lifeform()
-	var/datum/gas_mixture/GM = new /datum/gas_mixture
-	GM.adjust_multi("oxygen", MOLES_O2STANDARD, "nitrogen", MOLES_N2STANDARD)
-	GM.temperature = bodytemperature
-	return GM
+
+
+
+

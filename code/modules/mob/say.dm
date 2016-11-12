@@ -28,11 +28,11 @@
 /mob/proc/say_dead(var/message)
 	if(!src.client.holder)
 		if(!config.dsay_allowed)
-			src << "<span class='danger'>Deadchat is globally muted.</span>"
+			to_chat(src, "<span class='danger'>Deadchat is globally muted.</span>")
 			return
 
 	if(!is_preference_enabled(/datum/client_preference/show_dsay))
-		usr << "<span class='danger'>You have deadchat muted.</span>"
+		to_chat(usr, "<span class='danger'>You have deadchat muted.</span>")
 		return
 
 	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)

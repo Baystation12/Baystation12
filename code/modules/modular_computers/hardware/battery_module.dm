@@ -63,7 +63,7 @@
 
 /obj/item/weapon/computer_hardware/battery_module/diagnostics(var/mob/user)
 	..()
-	user << "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
+	to_chat(user, "Internal battery charge: [battery.charge]/[battery.maxcharge] CU")
 
 /obj/item/weapon/computer_hardware/battery_module/New()
 	battery = new/obj/item/weapon/cell(src)

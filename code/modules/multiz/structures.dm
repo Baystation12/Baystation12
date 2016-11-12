@@ -48,7 +48,7 @@
 
 /obj/structure/ladder/proc/moveOccupant(var/mob/M)
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
-		M << "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>"
+		to_chat(M, "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>")
 		return 0
 	var/obj/structure/ladder/target = target_down ? target_down : target_up
 	if(target_down && target_up)
@@ -58,7 +58,7 @@
 			return 0
 		
 		if(!M.Adjacent(src))
-			M << "<span class='warning'>You need to be next to \the [src] to start climbing.</span>"
+			to_chat(M, "<span class='warning'>You need to be next to \the [src] to start climbing.</span>")
 			return 0
 			
 		switch(direction)
@@ -72,7 +72,7 @@
 	var/turf/T = target.loc
 	for(var/atom/A in T)
 		if(!A.CanPass(M))
-			M << "<span class='notice'>\The [A] is blocking \the [src].</span>"
+			to_chat(M, "<span class='notice'>\The [A] is blocking \the [src].</span>")
 			return 0
 	if(M.Move(T))
 		return target == target_up ? UP : DOWN

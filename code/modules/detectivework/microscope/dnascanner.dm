@@ -18,11 +18,11 @@
 /obj/machinery/dnaforensics/attackby(var/obj/item/W, mob/user as mob)
 
 	if(bloodsamp)
-		user << "<span class='warning'>There is already a sample in the machine.</span>"
+		to_chat(user, "<span class='warning'>There is already a sample in the machine.</span>")
 		return
 
 	if(closed)
-		user << "<span class='warning'>Open the cover before inserting the sample.</span>"
+		to_chat(user, "<span class='warning'>Open the cover before inserting the sample.</span>")
 		return
 
 	var/obj/item/weapon/forensics/swab/swab = W
@@ -30,9 +30,9 @@
 		user.unEquip(W)
 		src.bloodsamp = swab
 		swab.loc = src
-		user << "<span class='notice'>You insert \the [W] into \the [src].</span>"
+		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 	else
-		user << "<span class='warning'>\The [src] only accepts used swabs.</span>"
+		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")
 		return
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
@@ -67,12 +67,12 @@
 				if(closed == 1)
 					scanner_progress = 0
 					scanning = 1
-					usr << "<span class='notice'>Scan initiated.</span>"
+					to_chat(usr, "<span class='notice'>Scan initiated.</span>")
 					update_icon()
 				else
-					usr << "<span class='notice'>Please close sample lid before initiating scan.</span>"
+					to_chat(usr, "<span class='notice'>Please close sample lid before initiating scan.</span>")
 			else
-				usr << "<span class='warning'>Insert an item to scan.</span>"
+				to_chat(usr, "<span class='warning'>Insert an item to scan.</span>")
 
 	if(href_list["ejectItem"])
 		if(bloodsamp)
@@ -111,7 +111,7 @@
 		if(bloodsamp.dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of [bloodsamp.dna.len] strings of DNA.<br><br>"
 			for(var/blood in bloodsamp.dna)
-				data += "\blue Blood type: [bloodsamp.dna[blood]]<br>\nDNA: [blood]<br><br>"
+				data += "<span class='notice'>Blood type: [bloodsamp.dna[blood]]<br>\nDNA: [blood]</span><br><br>"
 		else
 			data += "No DNA found.<br>"
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
@@ -137,7 +137,7 @@
 		return
 
 	if(scanning)
-		usr << "<span class='warning'>You can't do that while [src] is scanning!</span>"
+		to_chat(usr, "<span class='warning'>You can't do that while [src] is scanning!</span>")
 		return
 
 	closed = !closed

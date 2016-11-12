@@ -46,11 +46,11 @@
 	if(colour != "#ffffff" && shadeColour != "#000000")
 		colour = "#ffffff"
 		shadeColour = "#000000"
-		user << "You will now draw in white and black with this crayon."
+		to_chat(user, "You will now draw in white and black with this crayon.")
 	else
 		colour = "#000000"
 		shadeColour = "#ffffff"
-		user << "You will now draw in black and white with this crayon."
+		to_chat(user, "You will now draw in black and white with this crayon.")
 	return
 
 /obj/item/weapon/pen/crayon/rainbow
@@ -72,34 +72,34 @@
 		switch(drawtype)
 			if("letter")
 				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
-				user << "You start drawing a letter on the [target.name]."
+				to_chat(user, "You start drawing a letter on the [target.name].")
 			if("graffiti")
-				user << "You start drawing graffiti on the [target.name]."
+				to_chat(user, "You start drawing graffiti on the [target.name].")
 			if("rune")
-				user << "You start drawing a rune on the [target.name]."
+				to_chat(user, "You start drawing a rune on the [target.name].")
 			if("arrow")
 				drawtype = input("Choose the arrow.", "Crayon scribbles") in list("left", "right", "up", "down")
-				user << "You start drawing an arrow on the [target.name]."
+				to_chat(user, "You start drawing an arrow on the [target.name].")
 		if(instant || do_after(user, 50))
 			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
-			user << "You finish drawing."
+			to_chat(user, "You finish drawing.")
 			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
 			if(uses)
 				uses--
 				if(!uses)
-					user << "<span class='warning'>You used up your crayon!</span>"
+					to_chat(user, "<span class='warning'>You used up your crayon!</span>")
 					qdel(src)
 	return
 
 /obj/item/weapon/pen/crayon/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(istype(M) && M == user)
-		M << "You take a bite of the crayon and swallow it."
+		to_chat(M, "You take a bite of the crayon and swallow it.")
 		M.nutrition += 1
 		M.reagents.add_reagent("crayon_dust",min(5,uses)/3)
 		if(uses)
 			uses -= 5
 			if(uses <= 0)
-				M << "<span class='warning'>You ate your crayon!</span>"
+				to_chat(M, "<span class='warning'>You ate your crayon!</span>")
 				qdel(src)
 	else
 		..()

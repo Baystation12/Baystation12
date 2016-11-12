@@ -38,7 +38,7 @@
 		return
 	if(isscrewdriver(O) && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
-		user << "<span class='warning'>It is too hot to mess with!</span>"
+		to_chat(user, "<span class='warning'>It is too hot to mess with!</span>")
 		return
 
 	..()
@@ -62,7 +62,7 @@
 			update_icon()
 			return 1
 		else
-			user << "<span class='notice'>A no server error appears on the screen.</span>"
+			to_chat(user, "<span class='notice'>A no server error appears on the screen.</span>")
 
 /obj/machinery/computer/message_monitor/update_icon()
 	if(emag || hacking)
@@ -263,10 +263,10 @@
 
 /obj/machinery/computer/message_monitor/proc/BruteForce(mob/user as mob)
 	if(isnull(linkedServer))
-		user << "<span class='warning'>Could not complete brute-force: Linked Server Disconnected!</span>"
+		to_chat(user, "<span class='warning'>Could not complete brute-force: Linked Server Disconnected!</span>")
 	else
 		var/currentKey = src.linkedServer.decryptkey
-		user << "<span class='warning'>Brute-force completed! The key is '[currentKey]'.</span>"
+		to_chat(user, "<span class='warning'>Brute-force completed! The key is '[currentKey]'.</span>")
 	src.hacking = 0
 	update_icon()
 	src.screen = 0 // Return the screen back to normal
@@ -476,7 +476,7 @@
 				if(auth)
 					src.screen = 4
 
-			//usr << href_list["select"]
+//			to_chat(usr, href_list["select"])
 
 		if(href_list["spam"])
 			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))

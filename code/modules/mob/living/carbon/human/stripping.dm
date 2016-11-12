@@ -70,7 +70,7 @@
 		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
 			return
 		if(!target_slot.mob_can_unequip(src, text2num(slot_to_strip_text), disable_warning=1))
-			user << "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>"
+			to_chat(user, "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>")
 			return
 
 		visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [target_slot.name]!</span>")
@@ -93,7 +93,7 @@
 // Empty out everything in the target's pockets.
 /mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
 	if(!r_store && !l_store)
-		user << "<span class='warning'>\The [src] has nothing in their pockets.</span>"
+		to_chat(user, "<span class='warning'>\The [src] has nothing in their pockets.</span>")
 		return
 	if(r_store)
 		unEquip(r_store)
@@ -110,17 +110,17 @@
 	if(!l_store)
 		if(equip_to_slot_if_possible(I, slot_l_store, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return
-	user << "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>"
+	to_chat(user, "<span class='warning'>You are unable to place [I] in [src]'s pockets.</span>")
 	user.put_in_active_hand(I)
 
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
 	var/obj/item/clothing/under/suit = w_uniform
 	if(!suit)
-		user << "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
 		return
 	if (suit.has_sensor >= 2)
-		user << "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>"
+		to_chat(user, "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>")
 		return
 
 	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
@@ -133,7 +133,7 @@
 		if (o && o.splinted)
 			var/obj/item/S = o.splinted
 			if(!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
-				user << "<span class='warning'>You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks.</span>"
+				to_chat(user, "<span class='warning'>You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks.</span>")
 			else
 				S.add_fingerprint(user)
 				if(o.remove_splint())
@@ -142,7 +142,7 @@
 	if(removed_splint)
 		visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
 	else
-		user << "<span class='warning'>\The [src] has no splints that can be removed.</span>"
+		to_chat(user, "<span class='warning'>\The [src] has no splints that can be removed.</span>")
 
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)

@@ -35,7 +35,7 @@
 /obj/item/weapon/engine/electric/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/weapon/cell))
 		if(cell)
-			user << "<span class='warning'>There is already a cell in \the [src].</span>"
+			to_chat(user, "<span class='warning'>There is already a cell in \the [src].</span>")
 		else
 			cell = I
 			user.drop_from_inventory(I)
@@ -43,7 +43,7 @@
 		return 1
 	else if(istype(I,/obj/item/weapon/crowbar))
 		if(cell)
-			user << "You pry out \the [cell]."
+			to_chat(user, "You pry out \the [cell].")
 			cell.forceMove(get_turf(src))
 			cell = null
 			return 1

@@ -13,7 +13,7 @@
 		I.forceMove(src)
 
 /obj/structure/largecrate/attack_hand(mob/user as mob)
-	user << "<span class='notice'>You need a crowbar to pry this open!</span>"
+	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
 	return
 
 /obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)

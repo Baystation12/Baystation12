@@ -38,15 +38,15 @@
 		return 0
 
 	if(!target.reagents || !target.reagents.total_volume)
-		user << "<span class='notice'>[target] is empty.</span>"
+		to_chat(user, "<span class='notice'>[target] is empty.</span>")
 		return 1
 
 	if(reagents && !reagents.get_free_space())
-		user << "<span class='notice'>[src] is full.</span>"
+		to_chat(user, "<span class='notice'>[src] is full.</span>")
 		return 1
 
 	var/trans = target.reagents.trans_to_obj(src, target:amount_per_transfer_from_this)
-	user << "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>"
+	to_chat(user, "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>")
 	return 1
 
 /obj/item/weapon/reagent_containers/proc/standard_splash_mob(var/mob/user, var/mob/target) // This goes into afterattack
@@ -54,11 +54,11 @@
 		return
 
 	if(!reagents || !reagents.total_volume)
-		user << "<span class='notice'>[src] is empty.</span>"
+		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 		return 1
 
 	if(target.reagents && !target.reagents.get_free_space())
-		user << "<span class='notice'>[target] is full.</span>"
+		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
 	var/contained = reagentlist()
@@ -69,7 +69,7 @@
 	return 1
 
 /obj/item/weapon/reagent_containers/proc/self_feed_message(var/mob/user)
-	user << "<span class='notice'>You eat \the [src]</span>"
+	to_chat(user, "<span class='notice'>You eat \the [src]</span>")
 
 /obj/item/weapon/reagent_containers/proc/other_feed_message_start(var/mob/user, var/mob/target)
 	user.visible_message("<span class='warning'>[user] is trying to feed [target] \the [src]!</span>")
@@ -85,18 +85,18 @@
 		return 0
 
 	if(!reagents || !reagents.total_volume)
-		user << "<span class='notice'>\The [src] is empty.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 		return 1
 
 	if(target == user)
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
 			if(!H.check_has_mouth())
-				user << "Where do you intend to put \the [src]? You don't have a mouth!"
+				to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
 				return
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
-				user << "<span class='warning'>\The [blocked] is in the way!</span>"
+				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 				return
 
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
@@ -108,11 +108,11 @@
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
 			if(!H.check_has_mouth())
-				user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
+				to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")
 				return
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
-				user << "<span class='warning'>\The [blocked] is in the way!</span>"
+				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 				return
 
 		other_feed_message_start(user, target)
@@ -136,20 +136,20 @@
 
 	// Ensure we don't splash beakers and similar containers.
 	if(!target.is_open_container() && istype(target, /obj/item/weapon/reagent_containers))
-		user << "<span class='notice'>\The [target] is closed.</span>"
+		to_chat(user, "<span class='notice'>\The [target] is closed.</span>")
 		return 1
 	// Otherwise don't care about splashing.
 	else if(!target.is_open_container())
 		return 0
 
 	if(!reagents || !reagents.total_volume)
-		user << "<span class='notice'>[src] is empty.</span>"
+		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 		return 1
 
 	if(!target.reagents.get_free_space())
-		user << "<span class='notice'>[target] is full.</span>"
+		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
-	user << "<span class='notice'>You transfer [trans] units of the solution to [target].</span>"
+	to_chat(user, "<span class='notice'>You transfer [trans] units of the solution to [target].</span>")
 	return 1

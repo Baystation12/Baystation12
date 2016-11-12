@@ -75,18 +75,18 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(operating)
-		user << "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>"
+		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
 		return
 	else
 		src.startgibbing(user)
 
 /obj/machinery/gibber/examine()
 	..()
-	usr << "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"]."
+	to_chat(usr, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
 
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged
-	user << "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>"
+	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>")
 	return 1
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
@@ -96,7 +96,7 @@
 		return ..()
 
 	if(G.state < 2)
-		user << "<span class='danger'>You need a better grip to do that!</span>"
+		to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 		return
 
 	move_into_gibber(user,G.affecting)
@@ -110,24 +110,24 @@
 /obj/machinery/gibber/proc/move_into_gibber(var/mob/user,var/mob/living/victim)
 
 	if(src.occupant)
-		user << "<span class='danger'>The gibber is full, empty it first!</span>"
+		to_chat(user, "<span class='danger'>The gibber is full, empty it first!</span>")
 		return
 
 	if(operating)
-		user << "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>"
+		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
 		return
 
 	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_animal)) )
-		user << "<span class='danger'>This is not suitable for the gibber!</span>"
+		to_chat(user, "<span class='danger'>This is not suitable for the gibber!</span>")
 		return
 
 	if(istype(victim,/mob/living/carbon/human) && !emagged)
-		user << "<span class='danger'>The gibber safety guard is engaged!</span>"
+		to_chat(user, "<span class='danger'>The gibber safety guard is engaged!</span>")
 		return
 
 
 	if(victim.abiotic(1))
-		user << "<span class='danger'>Subject may not have abiotic items on.</span>"
+		to_chat(user, "<span class='danger'>Subject may not have abiotic items on.</span>")
 		return
 
 	user.visible_message("<span class='danger'>[user] starts to put [victim] into the gibber!</span>")

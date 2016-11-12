@@ -40,9 +40,9 @@
 /obj/item/stack/examine(mob/user)
 	if(..(user, 1))
 		if(!uses_charge)
-			user << "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack."
+			to_chat(user, "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack.")
 		else
-			user << "There is enough charge for [get_amount()]."
+			to_chat(user, "There is enough charge for [get_amount()].")
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -108,21 +108,21 @@
 
 	if (!can_use(required))
 		if (produced>1)
-			user << "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>"
+			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>")
 		else
-			user << "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>"
+			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>")
 		return
 
 	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
-		user << "<span class='warning'>There is another [recipe.title] here!</span>"
+		to_chat(user, "<span class='warning'>There is another [recipe.title] here!</span>")
 		return
 
 	if (recipe.on_floor && !isfloor(user.loc))
-		user << "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>"
+		to_chat(user, "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>")
 		return
 
 	if (recipe.time)
-		user << "<span class='notice'>Building [recipe.title] ...</span>"
+		to_chat(user, "<span class='notice'>Building [recipe.title] ...</span>")
 		if (!do_after(user, recipe.time))
 			return
 
@@ -292,7 +292,7 @@
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			user << "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>"
+			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
 		if(!amount)
 			break
 

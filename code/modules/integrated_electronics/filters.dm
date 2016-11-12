@@ -10,10 +10,7 @@
 
 /obj/item/integrated_circuit/filter/do_work()
 	var/datum/integrated_io/I = inputs[1]
-	var/datum/integrated_io/output/O = outputs[1]
-
-	O.data = may_pass(I.data) ? I.data : null
-	O.push_data()
+	set_pin_data(IC_OUTPUT, 1, may_pass(I.data) ? I.data : null)
 
 /obj/item/integrated_circuit/filter/proc/may_pass(var/input)
 	return FALSE

@@ -12,7 +12,7 @@
 /spell/hand/cast(list/targets, mob/user)
 	for(var/mob/M in targets)
 		if(M.get_active_hand())
-			user << "<span class='warning'>You need an empty hand to cast this spell.</span>"
+			to_chat(user, "<span class='warning'>You need an empty hand to cast this spell.</span>")
 			return
 		var/obj/item/magic_hand/H = new(src)
 		if(!M.put_in_active_hand(H))
@@ -39,9 +39,9 @@
 	. = ..()
 	if(.)
 		casts = max_casts
-		user << "You ready the [name] spell ([casts]/[casts] charges)."
+		to_chat(user, "You ready the [name] spell ([casts]/[casts] charges).")
 
 /spell/hand/charges/cast_hand()
 	if(casts-- && ..())
-		holder << "<span class='notice'>The [name] spell has [casts] out of [max_casts] charges left</span>"
+		to_chat(holder, "<span class='notice'>The [name] spell has [casts] out of [max_casts] charges left</span>")
 	return !!casts

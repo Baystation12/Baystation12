@@ -69,7 +69,7 @@
 	if(!T)
 		return
 
-	for(var/mob/observer/virtual/v_mob in viewers(world.view, viewing_vmob))
+	for(var/mob/observer/virtual/v_mob in viewers(world.view, T))
 		if(!(v_mob.abilities & VIRTUAL_ABILITY_SEE))
 			continue
 		var/atom/movable/host = v_mob.host
@@ -82,7 +82,7 @@
 	. = list()
 
 	var/atom/movable/viewing_host = viewing_vmob.host
-	for(var/mob/observer/virtual/seen_vmob in view(world.view, viewing_vmob))
+	for(var/mob/observer/virtual/seen_vmob in view(world.view, get_turf(viewing_vmob)))
 		if(viewing_host.virtual_can_see_turf(get_turf(seen_vmob)))
 			. += seen_vmob.host
 
@@ -92,7 +92,7 @@
 /proc/mobs_in_viewing_range(var/atom/viewing_vmob)
 	. = list()
 
-	for(var/mob/observer/virtual/v_mob in viewers(world.view, viewing_vmob))
+	for(var/mob/observer/virtual/v_mob in viewers(world.view, get_turf(viewing_vmob)))
 		if(ismob(v_mob.host)) // Also note how we don't check for VIRTUAL_ABILITY_SEE
 			. += v_mob.host
 

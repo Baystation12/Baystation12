@@ -16,7 +16,7 @@
 	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
 	visible_message("<span class='danger'>[user] [attack_verb] \the [src]!</span>")
 	if(damage_threshold > damage)
-		user << "<span class='danger'>Your strike is deflected by the reinforced glass!</span>"
+		to_chat(user, "<span class='danger'>Your strike is deflected by the reinforced glass!</span>")
 		return
 	if(shattered)
 		return
@@ -45,7 +45,7 @@
 
 /obj/structure/fireaxecabinet/attack_hand(var/mob/user)
 	if(!unlocked)
-		user << "<span class='warning'>\The [src] is locked.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is locked.</span>")
 		return
 	toggle_open(user)
 
@@ -56,11 +56,11 @@
 			return
 
 		if(!open)
-			user << "<span class='warning'>\The [src] is closed.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is closed.</span>")
 			return
 
 		if(!fireaxe)
-			user << "<span class='warning'>\The [src] is empty.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
 			return
 
 		fireaxe.forceMove(get_turf(user))
@@ -85,11 +85,11 @@
 	if(istype(O, /obj/item/weapon/material/twohanded/fireaxe))
 		if(open)
 			if(fireaxe)
-				user << "<span class='warning'>There is already \a [fireaxe] inside \the [src].</span>"
+				to_chat(user, "<span class='warning'>There is already \a [fireaxe] inside \the [src].</span>")
 			else if(user.unEquip(O))
 				O.forceMove(src)
 				fireaxe = O
-				user << "<span class='notice'>You place \the [fireaxe] into \the [src].</span>"
+				to_chat(user, "<span class='notice'>You place \the [fireaxe] into \the [src].</span>")
 				update_icon()
 			return
 
@@ -107,7 +107,7 @@
 	else
 		user.setClickCooldown(10)
 		open = !open
-		user << "<span class='notice'>You [open ? "open" : "close"] \the [src].</span>"
+		to_chat(user, "<span class='notice'>You [open ? "open" : "close"] \the [src].</span>")
 	update_icon()
 
 /obj/structure/fireaxecabinet/proc/toggle_lock(var/mob/user)
@@ -121,7 +121,7 @@
 		unlocked = 1
 	else
 		user.setClickCooldown(10)
-		user << "<span class='notice'>You begin [unlocked ? "enabling" : "disabling"] \the [src]'s maglock.</span>"
+		to_chat(user, "<span class='notice'>You begin [unlocked ? "enabling" : "disabling"] \the [src]'s maglock.</span>")
 
 		if(!do_after(user, 20,src))
 			return
@@ -130,6 +130,6 @@
 
 		unlocked = !unlocked
 		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
-		user << "<span class = 'notice'>You [unlocked ? "disable" : "enable"] the maglock.</span>"
+		to_chat(user, "<span class = 'notice'>You [unlocked ? "disable" : "enable"] the maglock.</span>")
 
 	update_icon()

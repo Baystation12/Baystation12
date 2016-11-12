@@ -1,32 +1,24 @@
 /datum/gear/accessory
-	display_name = "armband, red"
-	path = /obj/item/clothing/accessory/armband
+	display_name = "necklace"
+	path = /obj/item/clothing/accessory/necklace
 	slot = slot_tie
 	sort_category = "Accessories"
 
-/datum/gear/accessory/cargo
-	display_name = "armband, cargo"
-	path = /obj/item/clothing/accessory/armband/cargo
+/datum/gear/accessory/armband
+	display_name = "armband selection"
+	path = /obj/item/clothing/accessory/armband
 
-/datum/gear/accessory/emt
-	display_name = "armband, EMT"
-	path = /obj/item/clothing/accessory/armband/medgreen
-
-/datum/gear/accessory/engineering
-	display_name = "armband, engineering"
-	path = /obj/item/clothing/accessory/armband/engine
-
-/datum/gear/accessory/hydroponics
-	display_name = "armband, hydroponics"
-	path = /obj/item/clothing/accessory/armband/hydro
-
-/datum/gear/accessory/medical
-	display_name = "armband, medical"
-	path = /obj/item/clothing/accessory/armband/med
-
-/datum/gear/accessory/science
-	display_name = "armband, science"
-	path = /obj/item/clothing/accessory/armband/science
+/datum/gear/accessory/armband/New()
+	..()
+	var/armbands = list()
+	armbands["red armband"] = /obj/item/clothing/accessory/armband
+	armbands["cargo armband"] = /obj/item/clothing/accessory/armband/cargo
+	armbands["EMT armband"] = /obj/item/clothing/accessory/armband/medgreen
+	armbands["medical armband"] = /obj/item/clothing/accessory/armband/med
+	armbands["engineering armband"] = /obj/item/clothing/accessory/armband/engine
+	armbands["hydroponics armband"] = /obj/item/clothing/accessory/armband/hydro
+	armbands["science armband"] = /obj/item/clothing/accessory/armband/science
+	gear_tweaks += new/datum/gear_tweak/path(armbands)
 
 /datum/gear/accessory/wallet
 	display_name = "wallet"
@@ -39,29 +31,30 @@
 	cost = 2
 
 /datum/gear/accessory/holster
-	display_name = "holster, armpit"
-	path = /obj/item/clothing/accessory/holster/armpit
+	display_name = "holster selection"
+	path = /obj/item/clothing/accessory/holster
 	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective")
 
-/datum/gear/accessory/holster/hip
-	display_name = "holster, hip"
-	path = /obj/item/clothing/accessory/holster/hip
-
-/datum/gear/accessory/holster/waist
-	display_name = "holster, waist"
-	path = /obj/item/clothing/accessory/holster/waist
+/datum/gear/accessory/holster/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
-	path = /obj/item/clothing/accessory/tie
+	path = /obj/item/clothing/accessory
 
 /datum/gear/accessory/tie/New()
 	..()
-	var/list/ties = list()
-	for(var/tie in typesof(/obj/item/clothing/accessory/tie))
-		var/obj/item/clothing/accessory/tie/tie_type = tie
-		ties[initial(tie_type.name)] = tie_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ties))
+	var/ties = list()
+	ties["blue tie"] = /obj/item/clothing/accessory/tie/blue
+	ties["red tie"] = /obj/item/clothing/accessory/tie/red
+	ties["blue tie, clip"] = /obj/item/clothing/accessory/tie/blue_clip
+	ties["red long tie"] = /obj/item/clothing/accessory/tie/red_long
+	ties["black tie"] = /obj/item/clothing/accessory/tie/black
+	ties["yellow tie"] = /obj/item/clothing/accessory/tie/yellow
+	ties["navy tie"] = /obj/item/clothing/accessory/tie/navy
+	ties["horrible tie"] = /obj/item/clothing/accessory/tie/horrible
+	gear_tweaks += new/datum/gear_tweak/path(ties)
 
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"
@@ -101,6 +94,7 @@
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
+	cost = 2
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
@@ -114,6 +108,8 @@
 	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
 
+// EROS START
+
 /datum/gear/accessory/collar
 	display_name = "collar selection"
 	description = "A collar for your little pets... or the big ones."
@@ -121,11 +117,7 @@
 
 /datum/gear/accessory/collar/New()
 	..()
-	var/list/collars = list()
-	for(var/collar in typesof(/obj/item/clothing/accessory/collar))
-		var/obj/item/clothing/accessory/collar/collar_type = collar
-		collars[initial(collar_type.name)] = collar_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(collars))
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/collar)
 
 /datum/gear/accessory/scarf
 	display_name = "scarf selection"
@@ -133,11 +125,7 @@
 
 /datum/gear/accessory/scarf/New()
 	..()
-	var/list/scarves = list()
-	for(var/scarf in typesof(/obj/item/clothing/accessory/scarf))
-		var/obj/item/clothing/accessory/scarf/scarf_type = scarf
-		scarves[initial(scarf_type.name)] = scarf_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(scarves))
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/scarf)
 
 /datum/gear/accessory/chaps
 	display_name = "chaps, brown"
@@ -148,27 +136,19 @@
 	display_name = "chaps, black"
 	path = /obj/item/clothing/accessory/chaps/black
 
-
-/datum/gear/accessory/suitjacket/det_vest
-	display_name = "suit jacket, vest"
+/datum/gear/accessory/suitjacket
+	display_name = "suitjacket selection"
 	path = /obj/item/clothing/accessory/toggleable/vest
 
-/datum/gear/accessory/suitjacket
-	display_name = "suit jacket, tan"
-	path = /obj/item/clothing/accessory/toggleable/tan_jacket
+/datum/gear/accessory/suitjacket/New()
+	..()
+	var/list/suitjacket = list()
+	suitjacket["suit jacket, vest"] = /obj/item/clothing/accessory/toggleable/vest
+	suitjacket["suit jacket, tan"] = /obj/item/clothing/accessory/toggleable/tan_jacket
+	suitjacket["suit jacket, charcoal"] = /obj/item/clothing/accessory/toggleable/charcoal_jacket
+	suitjacket["suit jacket, navy blue"] = /obj/item/clothing/accessory/toggleable/navy_jacket
+	suitjacket["suit jacket, burgundy"] = /obj/item/clothing/accessory/toggleable/burgundy_jacket
+	suitjacket["suit jacket, checkered"] = /obj/item/clothing/accessory/toggleable/checkered_jacket
+	gear_tweaks += new/datum/gear_tweak/path(suitjacket)
 
-/datum/gear/accessory/suitjacket/charcoal
-	display_name = "suit jacket, charcoal"
-	path = /obj/item/clothing/accessory/toggleable/charcoal_jacket
-
-/datum/gear/accessory/suitjacket/navy
-	display_name = "suit jacket, navy blue"
-	path = /obj/item/clothing/accessory/toggleable/navy_jacket
-
-/datum/gear/accessory/suitjacket/burgundy
-	display_name = "suit jacket, burgundy"
-	path = /obj/item/clothing/accessory/toggleable/burgundy_jacket
-
-/datum/gear/accessory/suitjacket/checkered
-	display_name = "suit jacket, checkered"
-	path = /obj/item/clothing/accessory/toggleable/checkered_jacket
+//EROS FINISH

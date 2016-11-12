@@ -52,7 +52,6 @@
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	to_chat(src, msg)
-
 /client/verb/staffwho()
 	set category = "Admin"
 	set name = "Staffwho"

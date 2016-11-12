@@ -18,44 +18,44 @@ RSF
 
 /obj/item/weapon/rsf/examine(mob/user)
 	if(..(user, 0))
-		user << "It currently holds [stored_matter]/30 fabrication-units."
+		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
 
 /obj/item/weapon/rsf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/rcd_ammo))
 
 		if ((stored_matter + 10) > 30)
-			user << "The RSF can't hold any more matter."
+			to_chat(user, "The RSF can't hold any more matter.")
 			return
 
 		qdel(W)
 
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
-		user << "The RSF now holds [stored_matter]/30 fabrication-units."
+		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
 		return
 
 /obj/item/weapon/rsf/attack_self(mob/user as mob)
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if (mode == 1)
 		mode = 2
-		user << "Changed dispensing mode to 'Drinking Glass'"
+		to_chat(user, "Changed dispensing mode to 'Drinking Glass'")
 		return
 	if (mode == 2)
 		mode = 3
-		user << "Changed dispensing mode to 'Paper'"
+		to_chat(user, "Changed dispensing mode to 'Paper'")
 		return
 	if (mode == 3)
 		mode = 4
-		user << "Changed dispensing mode to 'Pen'"
+		to_chat(user, "Changed dispensing mode to 'Pen'")
 		return
 	if (mode == 4)
 		mode = 5
-		user << "Changed dispensing mode to 'Dice Pack'"
+		to_chat(user, "Changed dispensing mode to 'Dice Pack'")
 		return
 	if (mode == 5)
 		mode = 1
-		user << "Changed dispensing mode to 'Cigarette'"
+		to_chat(user, "Changed dispensing mode to 'Cigarette'")
 		return
 
 /obj/item/weapon/rsf/afterattack(atom/A, mob/user as mob, proximity)
@@ -94,7 +94,7 @@ RSF
 			product = new /obj/item/weapon/storage/pill_bottle/dice()
 			used_energy = 200
 
-	user << "Dispensing [product ? product : "product"]..."
+	to_chat(user, "Dispensing [product ? product : "product"]...")
 	product.loc = get_turf(A)
 
 	if(isrobot(user))
@@ -103,4 +103,4 @@ RSF
 			R.cell.use(used_energy)
 	else
 		stored_matter--
-		user << "The RSF now holds [stored_matter]/30 fabrication-units."
+		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
