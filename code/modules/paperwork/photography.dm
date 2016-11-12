@@ -219,13 +219,10 @@ var/global/photo_count = 0
 
 //Proc for capturing check
 /mob/living/proc/can_capture_turf(turf/T)
-	var/mob/dummy = new(T)	//Go go visibility check dummy
 	var/viewer = src
 	if(src.client)		//To make shooting through security cameras possible
 		viewer = src.client.eye
-	var/can_see = (dummy in viewers(world.view, viewer))
-
-	qdel(dummy)
+	var/can_see = (T in view(viewer))
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/living/user, flag)
@@ -233,8 +230,8 @@ var/global/photo_count = 0
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
 	var/mobs = ""
-	for(var/i = 1; i <= size; i++)
-		for(var/j = 1; j <= size; j++)
+	for(var/i = 1 to size)
+		for(var/j = 1 to size)
 			var/turf/T = locate(x_c, y_c, z_c)
 			if(user.can_capture_turf(T))
 				mobs += get_mobs(T)
