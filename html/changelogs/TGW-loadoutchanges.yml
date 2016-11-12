@@ -1,0 +1,18 @@
+# Your name.  
+author: TheGreyWolf
+ 
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+# Any changes you've made.  See valid prefix list above.
+# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
+# SCREW THIS UP AND IT WON'T WORK.
+# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
+# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
+changes: 
+  - rscadd: "added department ponchos to the custom loadout."
+  - rscadd: "added department and normal winter coats to the custom loadout."
+  - rscadd: "added scarves to the custom loadout."
+  - rscadd: "added lockets to the custom loadout."
+  - rscadd: "made the server load a new file."
+  - rscadd: "added a new file making clothing able to take up their hoods if they have them."
