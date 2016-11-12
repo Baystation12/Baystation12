@@ -319,31 +319,91 @@
 	icon_state = "swim_red"
 	siemens_coefficient = 1
 
-/obj/item/clothing/suit/poncho
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+/obj/item/clothing/suit/poncho/colored
+=======
+/obj/item/clothing/suit/poncho/poncho
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+/obj/item/clothing/suit/poncho/poncho
+>>>>>>> c82e53d... quick fix for ponchos
+=======
+/obj/item/clothing/suit/poncho/colored
+>>>>>>> 5c6c2d8... Add files via upload
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	icon_state = "classicponcho"
 	item_state = "classicponcho"
 
-/obj/item/clothing/suit/poncho/green
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+/obj/item/clothing/suit/poncho/colored/green
+=======
+/obj/item/clothing/suit/poncho/poncho/green
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+/obj/item/clothing/suit/poncho/poncho/green
+>>>>>>> c82e53d... quick fix for ponchos
+=======
+/obj/item/clothing/suit/poncho/colored/green
+>>>>>>> 5c6c2d8... Add files via upload
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
 	icon_state = "greenponcho"
 	item_state = "greenponcho"
 
-/obj/item/clothing/suit/poncho/red
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+/obj/item/clothing/suit/poncho/colored/red
+=======
+/obj/item/clothing/suit/poncho/poncho/red
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+/obj/item/clothing/suit/poncho/poncho/red
+>>>>>>> c82e53d... quick fix for ponchos
+=======
+/obj/item/clothing/suit/poncho/colored/red
+>>>>>>> 5c6c2d8... Add files via upload
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
 	icon_state = "redponcho"
 	item_state = "redponcho"
 
-/obj/item/clothing/suit/poncho/purple
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+/obj/item/clothing/suit/poncho/colored/purple
+=======
+/obj/item/clothing/suit/poncho/poncho/purple
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+/obj/item/clothing/suit/poncho/poncho/purple
+>>>>>>> c82e53d... quick fix for ponchos
+=======
+/obj/item/clothing/suit/poncho/colored/purple
+>>>>>>> 5c6c2d8... Add files via upload
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
 	icon_state = "purpleponcho"
 	item_state = "purpleponcho"
 
-/obj/item/clothing/suit/poncho/blue
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+/obj/item/clothing/suit/poncho/colored/blue
+=======
+/obj/item/clothing/suit/poncho/poncho/blue
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+/obj/item/clothing/suit/poncho/poncho/blue
+>>>>>>> c82e53d... quick fix for ponchos
+=======
+/obj/item/clothing/suit/poncho/colored/blue
+>>>>>>> 5c6c2d8... Add files via upload
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
 	icon_state = "blueponcho"
@@ -412,4 +472,97 @@
 	icon_state = "mbill"
 	item_state = "mbill"
 
+/obj/item/clothing/suit/storage/hooded/wintercoat
+	name = "winter coat"
+	desc = "A heavy jacket made from 'synthetic' animal furs."
+	icon_state = "coatwinter"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	hooded = 1
+	action_button_name = "Toggle Winter Hood"
+	hoodtype = /obj/item/clothing/head/winterhood
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+
+/obj/item/clothing/head/winterhood
+	name = "winter hood"
+	desc = "A hood attached to a heavy winter jacket."
+	icon_state = "generic_hood"
+	body_parts_covered = HEAD
+	cold_protection = HEAD
+	flags_inv = HIDEEARS | BLOCKHAIR
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/captain
+	name = "captain's winter coat"
+	icon_state = "coatcaptain"
+	armor = list(melee = 20, bullet = 15, laser = 20, energy = 10, bomb = 15, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/security
+	name = "security winter coat"
+	icon_state = "coatsecurity"
+	armor = list(melee = 25, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/medical
+	name = "medical winter coat"
+	icon_state = "coatmedical"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/science
+	name = "science winter coat"
+	icon_state = "coatscience"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/engineering
+	name = "engineering winter coat"
+	icon_state = "coatengineer"
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 20)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/engineering/atmos
+	name = "atmospherics winter coat"
+	icon_state = "coatatmos"
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/hydro
+	name = "hydroponics winter coat"
+	icon_state = "coathydro"
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/cargo
+	name = "cargo winter coat"
+	icon_state = "coatcargo"
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/miner
+	name = "mining winter coat"
+	icon_state = "coatminer"
+	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/poncho/roles/security
+	name = "security poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is black and red, standard NanoTrasen Security colors."
+	icon_state = "secponcho"
+	item_state = "secponcho"
+
+/obj/item/clothing/suit/poncho/roles/medical
+	name = "medical poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with green and blue tint, standard Medical colors."
+	icon_state = "medponcho"
+	item_state = "medponcho"
+
+/obj/item/clothing/suit/poncho/roles/engineering
+	name = "engineering poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, standard Engineering colors."
+	icon_state = "engiponcho"
+	item_state = "engiponcho"
+
+/obj/item/clothing/suit/poncho/roles/science
+	name = "science poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with purple trim, standard NanoTrasen Science colors."
+	icon_state = "sciponcho"
+	item_state = "sciponcho"
+
+/obj/item/clothing/suit/poncho/roles/cargo
+	name = "cargo poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, the colors of Cargo."
+	icon_state = "cargoponcho"
+	item_state = "cargoponcho"
 

@@ -542,3 +542,74 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+
+//Scarves
+/obj/item/clothing/accessory/scarf
+	name = "scarf"
+	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "whitescarf"
+<<<<<<< HEAD
+=======
+//Scarves
+=======
+>>>>>>> 998b6d8... scarf icon fix
+
+//Scarves
+/obj/item/clothing/accessory/scarf
+	name = "scarf"
+	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "whitescarf"
+<<<<<<< HEAD
+=======
+//Scarves
+=======
+>>>>>>> 998b6d8... scarf icon fix
+
+//Scarves
+/obj/item/clothing/accessory/scarf
+	name = "scarf"
+	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "whitescarf"
+<<<<<<< HEAD
+>>>>>>> 035bfca... add new clothing.
+
+/obj/item/clothing/accessory/scarf/black
+	name = "black scarf"
+	icon_state = "blackscarf"
+
+/obj/item/clothing/accessory/scarf/zebra
+	name = "zebra scarf"
+	icon_state = "zebrascarf"
+
+/obj/item/clothing/accessory/scarf/christmas
+	name = "christmas scarf"
+	icon_state = "christmasscarf"
+
+/obj/item/clothing/accessory/stripedredscarf
+	name = "striped red scarf"
+	icon_state = "stripedredscarf"
+
+/obj/item/clothing/accessory/stripedgreenscarf
+	name = "striped green scarf"
+	icon_state = "stripedgreenscarf"
+
+/obj/item/clothing/accessory/stripedbluescarf
+	name = "striped blue scarf"
+	icon_state = "stripedbluescarf"
+<<<<<<< HEAD
+>>>>>>> 035bfca... add new clothing.
+=======
+>>>>>>> 998b6d8... scarf icon fix
+=======
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+>>>>>>> 035bfca... add new clothing.
+=======
+>>>>>>> 998b6d8... scarf icon fix

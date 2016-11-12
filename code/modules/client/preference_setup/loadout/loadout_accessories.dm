@@ -96,3 +96,44 @@
 	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/red
 	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
+
+/datum/gear/accessory/scarf
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
+=======
+=======
+>>>>>>> 56d8dd7... add new clothing to the custom loadout
+    display_name = "scarf selection"
+    path = /obj/item/clothing/accessory/scarf
+/datum/gear/accessory/scarf/New()
+    ..()
+    gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/scarf)
+<<<<<<< HEAD
+>>>>>>> 56d8dd7... add new clothing to the custom loadout
+=======
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
+>>>>>>> f9e9971... fix for the scarf
+=======
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
+>>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+>>>>>>> 56d8dd7... add new clothing to the custom loadout
+=======
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
+>>>>>>> f9e9971... fix for the scarf
+
+/datum/gear/accessory/locket
+	display_name = "locket"
+	path = /obj/item/clothing/accessory/locket
