@@ -277,9 +277,7 @@ var/global/list/default_medbay_channels = list(
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
 	
-	if(speaking.flags & NONVERBAL) return 0
-	
-	if(speaking.flags & SIGNLANG) return 0
+	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
 
 	if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
 
