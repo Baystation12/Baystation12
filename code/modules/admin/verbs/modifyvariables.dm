@@ -710,5 +710,5 @@
 	handled_type = /mob
 	handled_vars = list("see_in_dark")
 
-/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
+/decl/vv_set_handler/mob_see_in_dark_handler/handle_set_var(var/mob/mob, variable, var_value, client)
 	mob.set_see_in_dark(var_value)
