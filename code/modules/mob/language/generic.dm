@@ -69,4 +69,4 @@
 	signlang_verb = list("gestures")
 	colour = "say_quote"
 	key = "s"
-	flags = SIGNLANG | NO_STUTTER | NO_TALK_MSG
+	flags = SIGNLANG | NO_STUTTER | NONVERBAL
