@@ -28,11 +28,11 @@ var/global/list/sparring_attack_cache = list()
 		return 0
 
 	// Check if they have a functioning hand.
-	var/obj/item/organ/external/E = user.get_organ(BP_L_HAND)
+	var/obj/item/organ/external/E = user.organs_by_name[BP_L_HAND]
 	if(E && !E.is_stump())
 		return 1
 
-	E = user.get_organ(BP_R_HAND)
+	E = user.organs_by_name[BP_R_HAND]
 	if(E && !E.is_stump())
 		return 1
 
@@ -101,7 +101,7 @@ var/global/list/sparring_attack_cache = list()
 		eyes.take_damage(rand(3,4), 1)
 		user.visible_message("<span class='danger'>[user] presses \his [eye_attack_text] into [target]'s [eyes.name]!</span>")
 		var/eye_pain = eyes.can_feel_pain()
-		target << "<span class='danger'>You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]</span>"
+		to_chat(target, "<span class='danger'>You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]</span>")
 		return
 	user.visible_message("<span class='danger'>[user] attempts to press \his [eye_attack_text] into [target]'s eyes, but they don't have any!</span>")
 

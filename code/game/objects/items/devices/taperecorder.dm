@@ -40,13 +40,13 @@
 /obj/item/device/taperecorder/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/device/tape))
 		if(mytape)
-			user << "<span class='notice'>There's already a tape inside.</span>"
+			to_chat(user, "<span class='notice'>There's already a tape inside.</span>")
 			return
 		if(!user.unEquip(I))
 			return
 		I.forceMove(src)
 		mytape = I
-		user << "<span class='notice'>You insert [I] into [src].</span>"
+		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 		update_icon()
 		return
 	..()
@@ -73,15 +73,15 @@
 	if(usr.incapacitated())
 		return
 	if(!mytape)
-		usr << "<span class='notice'>There's no tape in \the [src].</span>"
+		to_chat(usr, "<span class='notice'>There's no tape in \the [src].</span>")
 		return
 	if(emagged)
-		usr << "<span class='notice'>The tape seems to be stuck inside.</span>"
+		to_chat(usr, "<span class='notice'>The tape seems to be stuck inside.</span>")
 		return
 
 	if(playing || recording)
 		stop()
-	usr << "<span class='notice'>You remove [mytape] from [src].</span>"
+	to_chat(usr, "<span class='notice'>You remove [mytape] from [src].</span>")
 	usr.put_in_hands(mytape)
 	mytape = null
 	update_icon()
@@ -120,17 +120,17 @@
 	if(emagged == 0)
 		emagged = 1
 		recording = 0
-		user << "<span class='warning'>PZZTTPFFFT</span>"
+		to_chat(user, "<span class='warning'>PZZTTPFFFT</span>")
 		update_icon()
 		return 1
 	else
-		user << "<span class='warning'>It is already emagged!</span>"
+		to_chat(user, "<span class='warning'>It is already emagged!</span>")
 
 /obj/item/device/taperecorder/proc/explode()
 	var/turf/T = get_turf(loc)
 	if(ismob(loc))
 		var/mob/M = loc
-		M << "<span class='danger'>\The [src] explodes!</span>"
+		to_chat(M, "<span class='danger'>\The [src] explodes!</span>")
 	if(T)
 		T.hotspot_expose(700,125)
 		explosion(T, -1, -1, 0, 4)
@@ -144,22 +144,22 @@
 	if(usr.incapacitated())
 		return
 	if(!mytape)
-		usr << "<span class='notice'>There's no tape!</span>"
+		to_chat(usr, "<span class='notice'>There's no tape!</span>")
 		return
 	if(mytape.ruined)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(recording)
-		usr << "<span class='notice'>You're already recording!</span>"
+		to_chat(usr, "<span class='notice'>You're already recording!</span>")
 		return
 	if(playing)
-		usr << "<span class='notice'>You can't record when playing!</span>"
+		to_chat(usr, "<span class='notice'>You can't record when playing!</span>")
 		return
 	if(emagged)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(mytape.used_capacity < mytape.max_capacity)
-		usr << "<span class='notice'>Recording started.</span>"
+		to_chat(usr, "<span class='notice'>Recording started.</span>")
 		recording = 1
 		update_icon()
 
@@ -172,14 +172,14 @@
 			if(mytape.used_capacity >= mytape.max_capacity)
 				if(ismob(loc))
 					var/mob/M = loc
-					M << "<span class='notice'>The tape is full.</span>"
+					to_chat(M, "<span class='notice'>The tape is full.</span>")
 				stop_recording()
 
 
 		update_icon()
 		return
 	else
-		usr << "<span class='notice'>The tape is full.</span>"
+		to_chat(usr, "<span class='notice'>The tape is full.</span>")
 
 
 /obj/item/device/taperecorder/proc/stop_recording()
@@ -189,7 +189,7 @@
 	mytape.record_speech("Recording stopped.")
 	if(ismob(loc))
 		var/mob/M = loc
-		M << "<span class='notice'>Recording stopped.</span>"
+		to_chat(M, "<span class='notice'>Recording stopped.</span>")
 
 
 /obj/item/device/taperecorder/verb/stop()
@@ -204,10 +204,10 @@
 	else if(playing)
 		playing = 0
 		update_icon()
-		usr << "<span class='notice'>Playback stopped.</span>"
+		to_chat(usr, "<span class='notice'>Playback stopped.</span>")
 		return
 	else
-		usr << "<span class='notice'>Stop what?</span>"
+		to_chat(usr, "<span class='notice'>Stop what?</span>")
 
 
 /obj/item/device/taperecorder/verb/wipe_tape()
@@ -217,19 +217,19 @@
 	if(usr.incapacitated())
 		return
 	if(emagged)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(mytape.ruined)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(recording || playing)
-		usr << "<span class='notice'>You can't wipe the tape while playing or recording!</span>"
+		to_chat(usr, "<span class='notice'>You can't wipe the tape while playing or recording!</span>")
 		return
 	else
 		if(mytape.storedinfo)	mytape.storedinfo.Cut()
 		if(mytape.timestamp)	mytape.timestamp.Cut()
 		mytape.used_capacity = 0
-		usr << "<span class='notice'>You wipe the tape.</span>"
+		to_chat(usr, "<span class='notice'>You wipe the tape.</span>")
 		return
 
 
@@ -240,20 +240,20 @@
 	if(usr.incapacitated())
 		return
 	if(!mytape)
-		usr << "<span class='notice'>There's no tape!</span>"
+		to_chat(usr, "<span class='notice'>There's no tape!</span>")
 		return
 	if(mytape.ruined)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(recording)
-		usr << "<span class='notice'>You can't playback when recording!</span>"
+		to_chat(usr, "<span class='notice'>You can't playback when recording!</span>")
 		return
 	if(playing)
-		usr << "<span class='notice'>You're already playing!</span>"
+		to_chat(usr, "<span class='notice'>You're already playing!</span>")
 		return
 	playing = 1
 	update_icon()
-	usr << "<span class='notice'>Playing started.</span>"
+	to_chat(usr, "<span class='notice'>Playing started.</span>")
 	for(var/i=1 , i < mytape.max_capacity , i++)
 		if(!mytape || !playing)
 			break
@@ -312,22 +312,22 @@
 	if(usr.incapacitated())
 		return
 	if(!mytape)
-		usr << "<span class='notice'>There's no tape!</span>"
+		to_chat(usr, "<span class='notice'>There's no tape!</span>")
 		return
 	if(mytape.ruined)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(emagged)
-		usr << "<span class='warning'>The tape recorder makes a scratchy noise.</span>"
+		to_chat(usr, "<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(!canprint)
-		usr << "<span class='notice'>The recorder can't print that fast!</span>"
+		to_chat(usr, "<span class='notice'>The recorder can't print that fast!</span>")
 		return
 	if(recording || playing)
-		usr << "<span class='notice'>You can't print the transcript while playing or recording!</span>"
+		to_chat(usr, "<span class='notice'>You can't print the transcript while playing or recording!</span>")
 		return
 
-	usr << "<span class='notice'>Transcript printed.</span>"
+	to_chat(usr, "<span class='notice'>Transcript printed.</span>")
 	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(get_turf(src))
 	var/t1 = "<B>Transcript:</B><BR><BR>"
 	for(var/i=1,mytape.storedinfo.len >= i,i++)
@@ -388,7 +388,7 @@
 
 /obj/item/device/tape/attack_self(mob/user)
 	if(!ruined)
-		user << "<span class='notice'>You pull out all the tape!</span>"
+		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
 		ruin()
 
 
@@ -415,9 +415,9 @@
 
 /obj/item/device/tape/attackby(obj/item/I, mob/user, params)
 	if(ruined && istype(I, /obj/item/weapon/screwdriver))
-		user << "<span class='notice'>You start winding the tape back in...</span>"
+		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
 		if(do_after(user, 120, target = src))
-			user << "<span class='notice'>You wound the tape back in.</span>"
+			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
 	else if(istype(I, /obj/item/weapon/pen))
@@ -427,10 +427,10 @@
 			new_name = sanitizeSafe(new_name)
 			if(new_name)
 				name = "tape - '[new_name]'"
-				user << "<span class='notice'>You label the tape '[new_name]'.</span>"
+				to_chat(user, "<span class='notice'>You label the tape '[new_name]'.</span>")
 			else
 				name = "tape"
-				user << "<span class='notice'>You scratch off the label.</span>"
+				to_chat(user, "<span class='notice'>You scratch off the label.</span>")
 		return
 	..()
 

@@ -83,7 +83,7 @@
 		return
 	if((!isnull(occupant)) && (occupant.stat != 2))
 		var/completion = (100 * ((occupant.health + 50) / (heal_level + 100))) // Clones start at -150 health
-		user << "Current clone cycle is [round(completion)]% complete."
+		to_chat(user, "Current clone cycle is [round(completion)]% complete.")
 	return
 
 //Clonepod
@@ -131,7 +131,7 @@
 		clonemind.transfer_to(H)
 		if(R.ckey)
 			H.ckey = R.ckey
-			H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
+			to_chat(H, "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>")
 
 	// -- Mode/mind specific stuff goes here
 	callHook("clone", list(H))
@@ -223,25 +223,25 @@
 	var/id = W.GetIdCard()
 	if(id)
 		if(!check_access(id))
-			user << "<span class='warning'>Access Denied.</span>"
+			to_chat(user, "<span class='warning'>Access Denied.</span>")
 			return
 		if((!locked) || (isnull(occupant)))
 			return
 		if((occupant.health < -20) && (occupant.stat != 2))
-			user << "<span class='warning'>Access Refused.</span>"
+			to_chat(user, "<span class='warning'>Access Refused.</span>")
 			return
 		else
 			locked = 0
-			user << "System unlocked."
+			to_chat(user, "System unlocked.")
 	else if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
-		user << "<span class='notice'>\The [src] processes \the [W].</span>"
+		to_chat(user, "<span class='notice'>\The [src] processes \the [W].</span>")
 		biomass += 50
 		user.drop_item()
 		qdel(W)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(locked && (anchored || occupant))
-			user << "<span class='warning'>Can not do that while [src] is in use.</span>"
+			to_chat(user, "<span class='warning'>Can not do that while [src] is in use.</span>")
 		else
 			if(anchored)
 				anchored = 0
@@ -260,7 +260,7 @@
 /obj/machinery/clonepod/emag_act(var/remaining_charges, var/mob/user)
 	if(isnull(occupant))
 		return NO_EMAG_ACT
-	user << "You force an emergency ejection."
+	to_chat(user, "You force an emergency ejection.")
 	locked = 0
 	go_out()
 	return 1
@@ -450,11 +450,11 @@
 
 /obj/item/weapon/disk/data/attack_self(mob/user as mob)
 	read_only = !read_only
-	user << "You flip the write-protect tab to [read_only ? "protected" : "unprotected"]."
+	to_chat(user, "You flip the write-protect tab to [read_only ? "protected" : "unprotected"].")
 
 /obj/item/weapon/disk/data/examine(mob/user)
 	..(user)
-	user << text("The write-protect tab is set to [read_only ? "protected" : "unprotected"].")
+	to_chat(user, text("The write-protect tab is set to [read_only ? "protected" : "unprotected"]."))
 	return
 
 /*

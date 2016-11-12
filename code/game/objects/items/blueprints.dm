@@ -21,7 +21,8 @@
 
 /obj/item/blueprints/attack_self(mob/M as mob)
 	if (!istype(M,/mob/living/carbon/human))
-		M << "This stack of blue paper means nothing to you." //monkeys cannot into projecting
+		to_chat(M, "This stack of blue paper means nothing to you.")//monkeys cannot into projecting
+
 		return
 	interact()
 	return
@@ -106,31 +107,33 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	return AREA_SPECIAL
 
 /obj/item/blueprints/proc/create_area()
-	//world << "DEBUG: create_area"
+//	log_debug("create_area")
+
 	var/res = detect_room(get_turf(usr))
 	if(!istype(res,/list))
 		switch(res)
 			if(ROOM_ERR_SPACE)
-				usr << "<span class='warning'>The new area must be completely airtight!</span>"
+				to_chat(usr, "<span class='warning'>The new area must be completely airtight!</span>")
 				return
 			if(ROOM_ERR_TOOLARGE)
-				usr << "<span class='warning'>The new area too large!</span>"
+				to_chat(usr, "<span class='warning'>The new area too large!</span>")
 				return
 			else
-				usr << "<span class='warning'>Error! Please notify administration!</span>"
+				to_chat(usr, "<span class='warning'>Error! Please notify administration!</span>")
 				return
 	var/list/turf/turfs = res
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", ""), MAX_NAME_LEN)
 	if(!str || !length(str)) //cancel
 		return
 	if(length(str) > 50)
-		usr << "<span class='warning'>Name too long.</span>"
+		to_chat(usr, "<span class='warning'>Name too long.</span>")
 		return
 	var/area/A = new
 	A.name = str
 	//var/ma
 	//ma = A.master ? "[A.master]" : "(null)"
-	//world << "DEBUG: create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]"
+//	log_debug(create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]")
+
 	A.power_equip = 0
 	A.power_light = 0
 	A.power_environ = 0
@@ -141,7 +144,8 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 
 	spawn(5)
 		//ma = A.master ? "[A.master]" : "(null)"
-		//world << "DEBUG: create_area(5): <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]"
+//		log_debug)create_area(5): <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]")
+
 		interact()
 	return
 
@@ -154,17 +158,18 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 
 /obj/item/blueprints/proc/edit_area()
 	var/area/A = get_area()
-	//world << "DEBUG: edit_area"
+//	log_debug(edit_area")
+
 	var/prevname = "[A.name]"
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", prevname), MAX_NAME_LEN)
 	if(!str || !length(str) || str==prevname) //cancel
 		return
 	if(length(str) > 50)
-		usr << "<span class='warning'>Text too long.</span>"
+		to_chat(usr, "<span class='warning'>Text too long.</span>")
 		return
 	set_area_machinery_title(A,str,prevname)
 	A.name = str
-	usr << "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>"
+	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
 	interact()
 	return
 
@@ -174,7 +179,7 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	if (get_area_type(A)!=AREA_STATION || A.apc) //let's just check this one last time, just in case
 		interact()
 		return
-	usr << "<span class='notice'>You scrub [A.name] off the blueprint.</span>"
+	to_chat(usr, "<span class='notice'>You scrub [A.name] off the blueprint.</span>")
 	log_and_message_admins("deleted area [A.name] via station blueprints.")
 	qdel(A)
 	interact()

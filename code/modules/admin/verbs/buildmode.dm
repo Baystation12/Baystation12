@@ -73,60 +73,60 @@
 	Click()
 		switch(master.cl.buildmode)
 			if(1) // Basic Build
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button        = Construct / Upgrade</span>"
-				usr << "<span class='notice'>Right Mouse Button       = Deconstruct / Delete / Downgrade</span>"
-				usr << "<span class='notice'>Left Mouse Button + ctrl = R-Window</span>"
-				usr << "<span class='notice'>Left Mouse Button + alt  = Airlock</span>"
-				usr << ""
-				usr << "<span class='notice'>Use the button in the upper left corner to</span>"
-				usr << "<span class='notice'>change the direction of built objects.</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button        = Construct / Upgrade</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button       = Deconstruct / Delete / Downgrade</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button + ctrl = R-Window</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button + alt  = Airlock</span>")
+				to_chat(usr, "")
+				to_chat(usr, "<span class='notice'>Use the button in the upper left corner to</span>")
+				to_chat(usr, "<span class='notice'>change the direction of built objects.</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(2) // Adv. Build
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Set object type</span>"
-				usr << "<span class='notice'>Middle Mouse Button on buildmode button= On/Off object type saying</span>"
-				usr << "<span class='notice'>Middle Mouse Button on turf/obj        = Capture object type</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj          = Place objects</span>"
-				usr << "<span class='notice'>Right Mouse Button                     = Delete objects</span>"
-				usr << "<span class='notice'>Mouse Button + ctrl                    = Copy object type</span>"
-				usr << ""
-				usr << "<span class='notice'>Use the button in the upper left corner to</span>"
-				usr << "<span class='notice'>change the direction of built objects.</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Set object type</span>")
+				to_chat(usr, "<span class='notice'>Middle Mouse Button on buildmode button= On/Off object type saying</span>")
+				to_chat(usr, "<span class='notice'>Middle Mouse Button on turf/obj        = Capture object type</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj          = Place objects</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button                     = Delete objects</span>")
+				to_chat(usr, "<span class='notice'>Mouse Button + ctrl                    = Copy object type</span>")
+				to_chat(usr, "")
+				to_chat(usr, "<span class='notice'>Use the button in the upper left corner to</span>")
+				to_chat(usr, "<span class='notice'>change the direction of built objects.</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(3) // Edit
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Select var(type) & value</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Set var(type) & value</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset var's value</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Select var(type) & value</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Set var(type) & value</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset var's value</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(4) // Throw
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Throw</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Throw</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(5) // Room Build
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf              = Select as point A</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf             = Select as point B</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Change floor/wall type</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf              = Select as point A</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf             = Select as point B</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Change floor/wall type</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(6) // Make Ladders
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf              = Set as upper ladder loc</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf             = Set as lower ladder loc</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf              = Set as upper ladder loc</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf             = Set as lower ladder loc</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(7) // Move Into Contents
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Move into selection</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Move into selection</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(8) // Make Lights
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Make it glow</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset glowing</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Change glow properties</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Make it glow</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset glowing</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Change glow properties</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 		return 1
 
 /obj/effect/bmode/buildquit
@@ -335,11 +335,10 @@
 					qdel(object)
 			else if(pa.Find("ctrl"))
 				holder.buildmode.objholder = object.type
-				user << "<span class='notice'>[object]([object.type]) copied to buildmode.</span>"
+				to_chat(user, "<span class='notice'>[object]([object.type]) copied to buildmode.</span>")
 			if(pa.Find("middle"))
 				holder.buildmode.objholder = text2path("[object.type]")
-				if(holder.buildmode.objsay)	usr << "[object.type]"
-
+				if(holder.buildmode.objsay)	to_chat(usr, "[object.type]")
 
 		if(3) // Edit
 			if(pa.Find("left")) //I cant believe this shit actually compiles.
@@ -347,14 +346,13 @@
 					log_admin("[key_name(usr)] modified [object.name]'s [holder.buildmode.varholder] to [holder.buildmode.valueholder]")
 					object.vars[holder.buildmode.varholder] = holder.buildmode.valueholder
 				else
-					user << "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>"
+					to_chat(user, "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>")
 			if(pa.Find("right"))
 				if(object.vars.Find(holder.buildmode.varholder))
 					log_admin("[key_name(usr)] modified [object.name]'s [holder.buildmode.varholder] to [holder.buildmode.valueholder]")
 					object.vars[holder.buildmode.varholder] = initial(object.vars[holder.buildmode.varholder])
 				else
-					user << "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>"
-
+					to_chat(user, "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>")
 		if(4) // Throw
 			if(pa.Find("left"))
 				if(istype(object, /atom/movable))
@@ -366,14 +364,12 @@
 		if(5) // Room build
 			if(pa.Find("left"))
 				holder.buildmode.coordA = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as point A.</span>"
-
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as point A.</span>")
 			if(pa.Find("right"))
 				holder.buildmode.coordB = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as point B.</span>"
-
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as point B.</span>")
 			if(holder.buildmode.coordA && holder.buildmode.coordB)
-				user << "<span class='notice'>A and B set, creating rectangle.</span>"
+				to_chat(user, "<span class='notice'>A and B set, creating rectangle.</span>")
 				holder.buildmode.make_rectangle(
 					holder.buildmode.coordA,
 					holder.buildmode.coordB,
@@ -385,14 +381,12 @@
 		if(6) // Ladders
 			if(pa.Find("left"))
 				holder.buildmode.coordA = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as upper ladder location.</span>"
-
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as upper ladder location.</span>")
 			if(pa.Find("right"))
 				holder.buildmode.coordB = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as lower ladder location.</span>"
-
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as lower ladder location.</span>")
 			if(holder.buildmode.coordA && holder.buildmode.coordB)
-				user << "<span class='notice'>Ladder locations set, building ladders.</span>"
+				to_chat(user, "<span class='notice'>Ladder locations set, building ladders.</span>")
 				var/obj/structure/ladder/A = new /obj/structure/ladder(holder.buildmode.coordA)
 				var/obj/structure/ladder/B = new /obj/structure/ladder(holder.buildmode.coordB)
 				A.target_down = B

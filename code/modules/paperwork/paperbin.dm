@@ -18,10 +18,16 @@
 		if(!istype(usr, /mob/living/carbon/slime) && !istype(usr, /mob/living/simple_animal))
 			if( !usr.get_active_hand() )		//if active hand is empty
 				var/mob/living/carbon/human/H = user
-				if(!H.can_use_active_hand())
+
+				var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
+
+				if (H.hand)
+					temp = H.organs_by_name[BP_L_HAND]
+				if(temp && !temp.is_usable())
+					to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 					return
 
-				user << "<span class='notice'>You pick up the [src].</span>"
+				to_chat(user, "<span class='notice'>You pick up the [src].</span>")
 				user.put_in_hands(src)
 
 	return
@@ -29,7 +35,12 @@
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(!H.can_use_active_hand())
+
+		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
+		if (H.hand)
+			temp = H.organs_by_name[BP_L_HAND]
+		if(temp && !temp.is_usable())
+			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 			return
 	var/response = ""
 	if(!papers.len > 0)
@@ -59,9 +70,9 @@
 
 		P.loc = user.loc
 		user.put_in_hands(P)
-		user << "<span class='notice'>You take [P] out of the [src].</span>"
+		to_chat(user, "<span class='notice'>You take [P] out of the [src].</span>")
 	else
-		user << "<span class='notice'>[src] is empty!</span>"
+		to_chat(user, "<span class='notice'>[src] is empty!</span>")
 
 	add_fingerprint(user)
 	return
@@ -73,7 +84,7 @@
 
 	user.drop_item()
 	i.loc = src
-	user << "<span class='notice'>You put [i] in [src].</span>"
+	to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
 	papers.Add(i)
 	update_icon()
 	amount++
@@ -82,9 +93,9 @@
 /obj/item/weapon/paper_bin/examine(mob/user)
 	if(get_dist(src, user) <= 1)
 		if(amount)
-			user << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+			to_chat(user, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
 		else
-			user << "<span class='notice'>There are no papers in the bin.</span>"
+			to_chat(user, "<span class='notice'>There are no papers in the bin.</span>")
 	return
 
 

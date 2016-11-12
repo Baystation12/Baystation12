@@ -73,10 +73,10 @@
 		else
 			return
 
-	owner << "<span class='[use_span]'>[aiming_at ? "\The [aiming_at] is" : "Your targets are"] [message].</span>"
+	var/aim_message = "<span class='[use_span]'>[aiming_at ? "\The [aiming_at] is" : "Your targets are"] [message].</span>"
+	to_chat(owner, aim_message)
 	if(aiming_at)
-		aiming_at << "<span class='[use_span]'>You are [message].</span>"
-
+		to_chat(aiming_at, "<span class='[use_span]'>You are [message].</span>")
 /obj/aiming_overlay/process()
 	if(!owner)
 		qdel(src)
@@ -111,17 +111,17 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	var/cancel_aim = 1
 
 	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && (owner.l_hand != aiming_with && owner.r_hand != aiming_with)))
-		owner << "<span class='warning'>You must keep hold of your weapon!</span>"
+		to_chat(owner, "<span class='warning'>You must keep hold of your weapon!</span>")
 	else if(owner.eye_blind)
-		owner << "<span class='warning'>You are blind and cannot see your target!</span>"
+		to_chat(owner, "<span class='warning'>You are blind and cannot see your target!</span>")
 	else if(!aiming_at || !istype(aiming_at.loc, /turf))
-		owner << "<span class='warning'>You have lost sight of your target!</span>"
+		to_chat(owner, "<span class='warning'>You have lost sight of your target!</span>")
 	else if(owner.incapacitated() || owner.lying || owner.restrained())
-		owner << "<span class='warning'>You must be conscious and standing to keep track of your target!</span>"
+		to_chat(owner, "<span class='warning'>You must be conscious and standing to keep track of your target!</span>")
 	else if(aiming_at.is_invisible_to(owner))
-		owner << "<span class='warning'>Your target has become invisible!</span>"
+		to_chat(owner, "<span class='warning'>Your target has become invisible!</span>")
 	else if(!(aiming_at in view(owner)))
-		owner << "<span class='warning'>Your target is too far away to track!</span>"
+		to_chat(owner, "<span class='warning'>Your target is too far away to track!</span>")
 	else
 		cancel_aim = 0
 
@@ -141,13 +141,13 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		return
 
 	if(owner.incapacitated())
-		owner << "<span class='warning'>You cannot aim a gun in your current state.</span>"
+		to_chat(owner, "<span class='warning'>You cannot aim a gun in your current state.</span>")
 		return
 	if(owner.lying)
-		owner << "<span class='warning'>You cannot aim a gun while prone.</span>"
+		to_chat(owner, "<span class='warning'>You cannot aim a gun while prone.</span>")
 		return
 	if(owner.restrained())
-		owner << "<span class='warning'>You cannot aim a gun while handcuffed.</span>"
+		to_chat(owner, "<span class='warning'>You cannot aim a gun while handcuffed.</span>")
 		return
 
 	if(aiming_at)
@@ -160,7 +160,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 	if(owner.client)
 		owner.client.add_gun_icons()
-	target << "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>"
+	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
 	aiming_with = thing
 	aiming_at = target
 	if(istype(aiming_with, /obj/item/weapon/gun))
@@ -197,10 +197,10 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 	if(owner.client)
 		if(active)
-			owner << "<span class='notice'>You will now aim rather than fire.</span>"
+			to_chat(owner, "<span class='notice'>You will now aim rather than fire.</span>")
 			owner.client.add_gun_icons()
 		else
-			owner << "<span class='notice'>You will no longer aim rather than fire.</span>"
+			to_chat(owner, "<span class='notice'>You will no longer aim rather than fire.</span>")
 			owner.client.remove_gun_icons()
 		owner.gun_setting_icon.icon_state = "gun[active]"
 

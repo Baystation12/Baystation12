@@ -134,7 +134,7 @@ obj/item/weapon/gun/energy/retro
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))
 		if(!istype(M.wear_suit, required_vest))
-			M << "<span class='warning'>You need to be wearing your laser tag vest!</span>"
+			to_chat(M, "<span class='warning'>You need to be wearing your laser tag vest!</span>")
 			return 0
 	return ..()
 

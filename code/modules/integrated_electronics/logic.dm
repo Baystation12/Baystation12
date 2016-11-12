@@ -12,10 +12,9 @@
 		return
 
 	var/datum/integrated_io/output/O = outputs[1]
-	var/datum/integrated_io/activate/P = activators[2]
 	O.push_data()
 	if(O.data)
-		P.activate()
+		activate_pin(2)
 
 /obj/item/integrated_circuit/logic/binary
 	inputs = list("A","B")
@@ -125,15 +124,12 @@
 	extended_desc += " This multiplexer has a range from 1 to [inputs.len - 1]."
 
 /obj/item/integrated_circuit/logic/multiplexer/do_work()
-	var/datum/integrated_io/input_selection = inputs[1]
-	var/datum/integrated_io/output/O = outputs[1]
-	O.data = null
+	var/input_index = get_pin_data(IC_INPUT, 1)
+	var/output = null
 
-	if(isnum(input_selection.data) && (input_selection.data >= 1 && input_selection.data < inputs.len))
-		var/datum/integrated_io/selected_input = inputs[input_selection.data + 1]
-		O.data = selected_input.data
-
-	O.push_data()
+	if(isnum(input_index) && (input_index >= 1 && input_index < inputs.len))
+		output = get_pin_data(IC_INPUT, input_index)
+	set_pin_data(IC_OUTPUT, 1, output)
 
 /obj/item/integrated_circuit/logic/multiplexer/medium
 	number_of_inputs = 4
@@ -168,17 +164,11 @@
 	extended_desc += " This demultiplexer has a range from 1 to [outputs.len]."
 
 /obj/item/integrated_circuit/logic/demultiplexer/do_work()
-	var/datum/integrated_io/output_selection = inputs[1]
-	var/datum/integrated_io/input = inputs[2]
+	var/output_index = get_pin_data(IC_INPUT, 1)
+	var/output = get_pin_data(IC_INPUT, 2)
 
-	for(var/datum/integrated_io/O in outputs)
-		O.data = null
-
-	if(isnum(output_selection.data) && (output_selection.data >= 1 && output_selection.data <= outputs.len))
-		var/datum/integrated_io/selected_output = outputs[output_selection.data]
-		selected_output.data = input.data
-
-	push_data()
+	for(var/i = 1 to outputs.len)
+		set_pin_data(IC_OUTPUT, i, i == output_index ? output : null)
 
 /obj/item/integrated_circuit/logic/demultiplexer/medium
 	icon_state = "dmux4"
@@ -297,7 +287,6 @@
 	. = ..(user, 1)
 	if(.)
 		to_chat(user, "A small screen displays 'Last configured by: [last_configurator ? last_configurator : "N/A"]'.")
-
 /obj/item/integrated_circuit/logic/unary/access_verifier/do_check(var/datum/integrated_io/access_input)
 	var/list/access = access_input.get_data()
 	if(isnum(access))

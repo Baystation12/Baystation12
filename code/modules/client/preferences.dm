@@ -208,7 +208,7 @@ datum/preferences
 	if(!user || !user.client)	return
 
 	if(!get_mob_by_key(client_ckey))
-		user << "<span class='danger'>No mob exists for the given client!</span>"
+		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
 		close_load_dialog(user)
 		return
 
@@ -243,7 +243,7 @@ datum/preferences
 		if(config.forumurl)
 			user << link(config.forumurl)
 		else
-			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
 	ShowChoices(usr)
 	return 1
@@ -437,7 +437,7 @@ datum/preferences
 	character.citizenship = citizenship
 	character.personal_faction = faction
 	character.religion = religion
-	
+
 	character.char_branch = mil_branches.get_branch(char_branch)
 	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
 

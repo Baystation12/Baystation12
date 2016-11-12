@@ -96,7 +96,7 @@
 		updateDialog()
 	else if(istype(I,/obj/item/weapon/screwdriver))
 		if(locked)
-			user << "<span class='notice'>The maintenance hatch cannot be opened or closed while the controls are locked.</span>"
+			to_chat(user, "<span class='notice'>The maintenance hatch cannot be opened or closed while the controls are locked.</span>")
 			return
 
 		open = !open
@@ -118,13 +118,13 @@
 				"<span class='notice'>You repair \the [src]!</span>"
 			)
 		else
-			user << "<span class='notice'>[src] does not need a repair!</span>"
+			to_chat(user, "<span class='notice'>[src] does not need a repair!</span>")
 	else if(load && ismob(load))  // chance to knock off rider
 		if(prob(1+I.force * 2))
 			unload(0)
 			user.visible_message("<span class='warning'>[user] knocks [load] off [src] with \the [I]!</span>", "<span class='warning'>You knock [load] off [src] with \the [I]!</span>")
 		else
-			user << "You hit [src] with \the [I] but to no effect."
+			to_chat(user, "You hit [src] with \the [I] but to no effect.")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	else
 		..()
@@ -132,7 +132,7 @@
 
 /obj/machinery/bot/mulebot/emag_act(var/remaining_charges, var/user)
 	locked = !locked
-	user << "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>"
+	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>")
 	flick("mulebot-emagged", src)
 	playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1
@@ -155,6 +155,7 @@
 	if(prob(25))
 		src.visible_message("<span class='warning'>Something shorts out inside [src]!</span>")
 		var/index = 1<< (rand(0,9))
+
 		if(wires & index)
 			wires &= ~index
 		else
@@ -253,14 +254,14 @@
 					locked = !locked
 					updateDialog()
 				else
-					usr << "<span class='warning'>Access denied.</span>"
+					to_chat(usr, "<span class='warning'>Access denied.</span>")
 					return
 			if("power")
 				if (src.on)
 					turn_off()
 				else if (cell && !open)
 					if (!turn_on())
-						usr << "<span class='warning'>You can't switch on [src].</span>"
+						to_chat(usr, "<span class='warning'>You can't switch on [src].</span>")
 						return
 				else
 					return
@@ -487,7 +488,8 @@
 		return
 	if(on)
 		var/speed = (wires.Motor1() ? 1:0) + (wires.Motor2() ? 2:0)
-		//world << "speed: [speed]"
+//		log_debug("speed: [speed]")
+
 		switch(speed)
 			if(0)
 				// do nothing
@@ -511,7 +513,8 @@
 	if(refresh) updateDialog()
 
 /obj/machinery/bot/mulebot/proc/process_bot()
-	//if(mode) world << "Mode: [mode]"
+//	if(mode) log_debug("Mode: [mode]")
+
 	switch(mode)
 		if(0)		// idle
 			icon_state = "mulebot0"
@@ -534,7 +537,8 @@
 
 
 				if(istype( next, /turf/simulated))
-					//world << "at ([x],[y]) moving to ([next.x],[next.y])"
+//					log_debug("at ([x],[y]) moving to ([next.x],[next.y])")
+
 
 
 					if(bloodiness)
@@ -556,7 +560,8 @@
 					var/moved = step_towards(src, next)	// attempt to move
 					if(cell) cell.use(movement_power_usage * CELLRATE)
 					if(moved)	// successful move
-						//world << "Successful move."
+//						log_debug("Successful move.")
+
 						blockcount = 0
 						path -= loc
 
@@ -572,7 +577,8 @@
 
 					else		// failed to move
 
-						//world << "Unable to move."
+//						log_debug("Unable to move.")
+
 
 
 
@@ -599,16 +605,19 @@
 				else
 					src.visible_message("[src] makes an annoyed buzzing sound", "You hear an electronic buzzing sound.")
 					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
-					//world << "Bad turf."
+//					log_debug("Bad turf.")
+
 					mode = 5
 					return
 			else
-				//world << "No path."
+//				log_debug("No path.")
+
 				mode = 5
 				return
 
 		if(5)		// calculate new path
-			//world << "Calc new path."
+//			log_debug("Calc new path.")
+
 			mode = 6
 			spawn(0)
 
@@ -626,9 +635,11 @@
 
 					mode = 7
 		//if(6)
-			//world << "Pending path calc."
+//			log_debug("Pending path calc.")
+
 		//if(7)
-			//world << "No dest / no route."
+//			log_debug("No dest / no route.")
+
 	return
 
 
@@ -833,7 +844,8 @@
 	//for(var/key in keyval)
 	//	signal.data[key] = keyval[key]
 	signal.data = keyval
-		//world << "sent [key],[keyval[key]] on [freq]"
+//		log_debug("sent [key],[keyval[key]] on [freq]")
+
 	if (signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
 	else if (signal.data["type"] == "mulebot")

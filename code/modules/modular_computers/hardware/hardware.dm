@@ -16,27 +16,27 @@
 /obj/item/weapon/computer_hardware/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
 	// Multitool. Runs diagnostics
 	if(istype(W, /obj/item/device/multitool))
-		user << "***** DIAGNOSTICS REPORT *****"
+		to_chat(user, "***** DIAGNOSTICS REPORT *****")
 		diagnostics(user)
-		user << "******************************"
+		to_chat(user, "******************************")
 		return 1
 	// Nanopaste. Repair all damage if present for a single unit.
 	var/obj/item/stack/S = W
 	if(istype(S, /obj/item/stack/nanopaste))
 		if(!damage)
-			user << "\The [src] doesn't seem to require repairs."
+			to_chat(user, "\The [src] doesn't seem to require repairs.")
 			return 1
 		if(S.use(1))
-			user << "You apply a bit of \the [W] to \the [src]. It immediately repairs all damage."
+			to_chat(user, "You apply a bit of \the [W] to \the [src]. It immediately repairs all damage.")
 			damage = 0
 		return 1
 	// Cable coil. Works as repair method, but will probably require multiple applications and more cable.
 	if(istype(S, /obj/item/stack/cable_coil))
 		if(!damage)
-			user << "\The [src] doesn't seem to require repairs."
+			to_chat(user, "\The [src] doesn't seem to require repairs.")
 			return 1
 		if(S.use(1))
-			user << "You patch up \the [src] with a bit of \the [W]."
+			to_chat(user, "You patch up \the [src] with a bit of \the [W].")
 			take_damage(-10)
 		return 1
 	return ..()
@@ -44,7 +44,7 @@
 
 // Called on multitool click, prints diagnostic information to the user.
 /obj/item/weapon/computer_hardware/proc/diagnostics(var/mob/user)
-	user << "Hardware Integrity Test... (Corruption: [damage]/[max_damage]) [damage > damage_failure ? "FAIL" : damage > damage_malfunction ? "WARN" : "PASS"]"
+	to_chat(user, "Hardware Integrity Test... (Corruption: [damage]/[max_damage]) [damage > damage_failure ? "FAIL" : damage > damage_malfunction ? "WARN" : "PASS"]")
 
 /obj/item/weapon/computer_hardware/New(var/obj/L)
 	w_class = hardware_size
@@ -76,11 +76,11 @@
 /obj/item/weapon/computer_hardware/examine(var/mob/user)
 	. = ..()
 	if(damage > damage_failure)
-		user << "<span class='danger'>It seems to be severely damaged!</span>"
+		to_chat(user, "<span class='danger'>It seems to be severely damaged!</span>")
 	else if(damage > damage_malfunction)
-		user << "<span class='notice'>It seems to be damaged!</span>"
+		to_chat(user, "<span class='notice'>It seems to be damaged!</span>")
 	else if(damage)
-		user << "It seems to be slightly damaged."
+		to_chat(user, "It seems to be slightly damaged.")
 
 // Damages the component. Contains necessary checks. Negative damage "heals" the component.
 /obj/item/weapon/computer_hardware/proc/take_damage(var/amount)

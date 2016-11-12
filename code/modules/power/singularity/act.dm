@@ -21,9 +21,9 @@
 		for(var/obj/item/hand in handlist)
 			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && unEquip(hand))
 				step_towards(hand, S)
-				src << "<span class = 'warning'>\The [S] pulls \the [hand] from your grip!</span>"
+				to_chat(src, "<span class = 'warning'>\The [S] pulls \the [hand] from your grip!</span>")
 		if(!lying && (!shoes || !(shoes.item_flags & NOSLIP)) && (!species || !(species.flags & NOSLIP)) && prob(current_size*5))
-			src << "<span class='danger'>A strong gravitational force slams you to the ground!</span>"
+			to_chat(src, "<span class='danger'>A strong gravitational force slams you to the ground!</span>")
 			Weaken(current_size)
 	..()
 

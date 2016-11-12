@@ -83,7 +83,6 @@
 			mode = UNWIRE
 	update_icon()
 	to_chat(user, "<span class='notice'>You set \the [src] to [mode].</span>")
-
 #undef WIRE
 #undef WIRING
 #undef UNWIRE
@@ -131,7 +130,6 @@
 		if("null")
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
-
 /obj/item/device/integrated_electronics/debugger/admin/MouseDrop(var/atom/over_object)
 	if(!accepting_refs)
 		return ..()
@@ -154,7 +152,6 @@
 	else if(io.io_type == PULSE_CHANNEL)
 		io.holder.check_then_do_work()
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
-
 	io.holder.interact(user) // This is to update the UI.
 
 /obj/item/device/integrated_electronics/analyzer
@@ -173,7 +170,6 @@
 			to_chat(user, last_scan)
 		else
 			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
-
 /obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
 	if(!istype(assembly))
 		return ..()
@@ -194,7 +190,6 @@
 		last_scan += "*No Components Found*"
 	last_scan = jointext(last_scan,"\n")
 	to_chat(user, last_scan)
-
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."

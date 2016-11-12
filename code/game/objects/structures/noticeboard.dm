@@ -24,9 +24,9 @@
 			user.drop_from_inventory(O,src)
 			notices++
 			icon_state = "nboard0[notices]"	//update sprite
-			user << "<span class='notice'>You pin the paper to the noticeboard.</span>"
+			to_chat(user, "<span class='notice'>You pin the paper to the noticeboard.</span>")
 		else
-			user << "<span class='notice'>You reach to pin your paper to the board but hesitate. You are certain your paper will not be seen among the many others already attached.</span>"
+			to_chat(user, "<span class='notice'>You reach to pin your paper to the board but hesitate. You are certain your paper will not be seen among the many others already attached.</span>")
 
 /obj/structure/noticeboard/attack_hand(var/mob/user)
 	examine(user)
@@ -73,7 +73,7 @@
 					add_fingerprint(usr)
 					P.attackby(usr.l_hand, usr)
 				else
-					usr << "<span class='notice'>You'll need something to write with!</span>"
+					to_chat(usr, "<span class='notice'>You'll need something to write with!</span>")
 	if(href_list["read"])
 		var/obj/item/weapon/paper/P = locate(href_list["read"])
 		if((P && P.loc == src))

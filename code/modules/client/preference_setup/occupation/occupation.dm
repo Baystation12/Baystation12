@@ -241,7 +241,6 @@
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role)
 	var/datum/job/job = job_master.GetJob(role)
 	if(!job)
-		world << "Nope"
 		return 0
 
 	if(role == "Assistant")

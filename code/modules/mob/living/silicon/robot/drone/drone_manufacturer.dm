@@ -61,7 +61,7 @@
 /obj/machinery/drone_fabricator/examine(mob/user)
 	..(user)
 	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
-		user << "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>"
+		to_chat(user, "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
 
 /obj/machinery/drone_fabricator/proc/create_drone(var/client/player)
 
@@ -95,15 +95,15 @@
 /proc/try_drone_spawn(var/mob/user, var/obj/machinery/drone_fabricator/fabricator)
 
 	if(ticker.current_state < GAME_STATE_PLAYING)
-		user << "<span class='danger'>The game hasn't started yet!</span>"
+		to_chat(user, "<span class='danger'>The game hasn't started yet!</span>")
 		return
 
 	if(!(config.allow_drone_spawn))
-		user << "<span class='danger'>That verb is not currently permitted.</span>"
+		to_chat(user, "<span class='danger'>That verb is not currently permitted.</span>")
 		return
 
 	if(jobban_isbanned(user,"Cyborg"))
-		user << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
+		to_chat(user, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return
 
 	if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
@@ -118,7 +118,7 @@
 			all_fabricators[DF.fabricator_tag] = DF
 
 		if(!all_fabricators.len)
-			user << "<span class='danger'>There are no available drone spawn points, sorry.</span>"
+			to_chat(user, "<span class='danger'>There are no available drone spawn points, sorry.</span>")
 			return
 
 		var/choice = input(user,"Which fabricator do you wish to use?") as null|anything in all_fabricators

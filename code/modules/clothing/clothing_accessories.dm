@@ -12,7 +12,7 @@
 	if(istype(I, /obj/item/clothing/accessory))
 
 		if(!valid_accessory_slots || !valid_accessory_slots.len)
-			usr << "<span class='warning'>You cannot attach accessories of any kind to \the [src].</span>"
+			to_chat(usr, "<span class='warning'>You cannot attach accessories of any kind to \the [src].</span>")
 			return
 
 		var/obj/item/clothing/accessory/A = I
@@ -21,7 +21,7 @@
 			attach_accessory(user, A)
 			return
 		else
-			user << "<span class='warning'>You cannot attach more accessories of this type to [src].</span>"
+			to_chat(user, "<span class='warning'>You cannot attach more accessories of this type to [src].</span>")
 		return
 
 	if(accessories.len)
@@ -62,7 +62,7 @@
 	..(user)
 	if(accessories.len)
 		for(var/obj/item/clothing/accessory/A in accessories)
-			user << "\A [A] is attached to it."
+			to_chat(user, "\A [A] is attached to it.")
 
 /**
  *  Attach accessory A to src

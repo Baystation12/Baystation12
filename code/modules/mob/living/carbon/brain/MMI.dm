@@ -48,10 +48,10 @@
 
 		var/obj/item/organ/internal/brain/B = O
 		if(B.health <= 0)
-			user << "<span class='warning'>That brain is well and truly dead.</span>"
+			to_chat(user, "<span class='warning'>That brain is well and truly dead.</span>")
 			return
 		else if(!B.brainmob)
-			user << "<span class='notice'>You aren't sure where this brain came from, but you're pretty sure it's a useless brain.</span>"
+			to_chat(user, "<span class='notice'>You aren't sure where this brain came from, but you're pretty sure it's a useless brain.</span>")
 			return
 
 		user.visible_message("<span class='notice'>\The [user] sticks \a [O] into \the [src].</span>")
@@ -79,9 +79,9 @@
 	if((istype(O,/obj/item/weapon/card/id)||istype(O,/obj/item/device/pda)) && brainmob)
 		if(allowed(user))
 			locked = !locked
-			user << "<span class='notice'>You [locked ? "lock" : "unlock"] the brain holder.</span>"
+			to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the brain holder.</span>")
 		else
-			user << "<span class='warning'>Access denied.</span>"
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	if(brainmob)
 		O.attack(brainmob, user)//Oh noooeeeee
@@ -91,11 +91,11 @@
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 /obj/item/device/mmi/attack_self(mob/user as mob)
 	if(!brainmob)
-		user << "<span class='warning'>You upend the MMI, but there's nothing in it.</span>"
+		to_chat(user, "<span class='warning'>You upend the MMI, but there's nothing in it.</span>")
 	else if(locked)
-		user << "<span class='warning'>You upend the MMI, but the brain is clamped into place.</span>"
+		to_chat(user, "<span class='warning'>You upend the MMI, but the brain is clamped into place.</span>")
 	else
-		user << "<span class='notice'>You upend the MMI, spilling the brain onto the floor.</span>"
+		to_chat(user, "<span class='notice'>You upend the MMI, spilling the brain onto the floor.</span>")
 		var/obj/item/organ/internal/brain/brain
 		if (brainobj)	//Pull brain organ out of MMI.
 			brainobj.loc = user.loc
@@ -161,10 +161,10 @@
 			set popup_menu = 0//Will not appear when right clicking.
 
 			if(brainmob.stat)//Only the brainmob will trigger these so no further check is necessary.
-				brainmob << "Can't do that while incapacitated or dead."
+				to_chat(brainmob, "Can't do that while incapacitated or dead.")
 
 			radio.broadcasting = radio.broadcasting==1 ? 0 : 1
-			brainmob << "<span class='notice'>Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting.</span>"
+			to_chat(brainmob, "<span class='notice'>Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting.</span>")
 
 		Toggle_Listening()
 			set name = "Toggle Listening"
@@ -174,10 +174,10 @@
 			set popup_menu = 0
 
 			if(brainmob.stat)
-				brainmob << "Can't do that while incapacitated or dead."
+				to_chat(brainmob, "Can't do that while incapacitated or dead.")
 
 			radio.listening = radio.listening==1 ? 0 : 1
-			brainmob << "<span class='notice'>Radio is [radio.listening==1 ? "now" : "no longer"] receiving broadcast.</span>"
+			to_chat(brainmob, "<span class='notice'>Radio is [radio.listening==1 ? "now" : "no longer"] receiving broadcast.</span>")
 
 /obj/item/device/mmi/emp_act(severity)
 	if(!brainmob)

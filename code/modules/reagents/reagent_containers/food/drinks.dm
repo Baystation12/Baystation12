@@ -19,7 +19,7 @@
 
 	proc/open(mob/user)
 		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
-		user << "<span class='notice'>You open [src] with an audible pop!</span>"
+		to_chat(user, "<span class='notice'>You open [src] with an audible pop!</span>")
 		flags |= OPENCONTAINER
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
@@ -42,24 +42,24 @@
 
 	standard_feed_mob(var/mob/user, var/mob/target)
 		if(!is_open_container())
-			user << "<span class='notice'>You need to open [src]!</span>"
+			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
 			return 1
 		return ..()
 
 	standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
 		if(!is_open_container())
-			user << "<span class='notice'>You need to open [src]!</span>"
+			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
 			return 1
 		return ..()
 
 	standard_pour_into(var/mob/user, var/atom/target)
 		if(!is_open_container())
-			user << "<span class='notice'>You need to open [src]!</span>"
+			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
 			return 1
 		return ..()
 
 	self_feed_message(var/mob/user)
-		user << "<span class='notice'>You swallow a gulp from \the [src].</span>"
+		to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
 
 	feed_sound(var/mob/user)
 		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
@@ -68,15 +68,15 @@
 		if(!..(user, 1))
 			return
 		if(!reagents || reagents.total_volume == 0)
-			user << "<span class='notice'>\The [src] is empty!</span>"
+			to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
 		else if (reagents.total_volume <= volume * 0.25)
-			user << "<span class='notice'>\The [src] is almost empty!</span>"
+			to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
 		else if (reagents.total_volume <= volume * 0.66)
-			user << "<span class='notice'>\The [src] is half full!</span>"
+			to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
 		else if (reagents.total_volume <= volume * 0.90)
-			user << "<span class='notice'>\The [src] is almost full!</span>"
+			to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
 		else
-			user << "<span class='notice'>\The [src] is full!</span>"
+			to_chat(user, "<span class='notice'>\The [src] is full!</span>")
 
 
 ////////////////////////////////////////////////////////////////////////////////

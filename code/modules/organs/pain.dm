@@ -18,7 +18,7 @@ mob/living/carbon/proc/custom_pain(message, power, force)
 	// Anti message spam checks
 	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
 		last_pain_message = message
-		src << message
+		to_chat(src, message)
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()

@@ -19,10 +19,7 @@
 		I.pull_data()
 		if(isnum(I.data))
 			result = result + I.data
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 // -Subtracting- //
 
@@ -37,10 +34,7 @@
 		I.pull_data()
 		if(isnum(I.data))
 			result = result - I.data
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 // *Multiply* //
 
@@ -55,10 +49,7 @@
 		I.pull_data()
 		if(isnum(I.data))
 			result = result * I.data
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 // /Division/  //
 
@@ -73,10 +64,7 @@
 		I.pull_data()
 		if(isnum(I.data) && I.data != 0) //No runtimes here.
 			result = result / I.data
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 // Absolute //
 
@@ -92,10 +80,7 @@
 		I.pull_data()
 		if(isnum(I.data) && I.data != 0)
 			result = abs(result)
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 // Averaging //
 
@@ -115,10 +100,7 @@
 
 	if(inputs_used)
 		result = result / inputs_used
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)
 
 // Pi, because why the hell not? //
 /obj/item/integrated_circuit/arithmetic/pi
@@ -128,9 +110,7 @@
 	inputs = list()
 
 /obj/item/integrated_circuit/arithmetic/pi/do_work()
-	var/datum/integrated_io/output/O = outputs[1]
-	O.data = 3.14159
-	O.push_data()
+	set_pin_data(IC_OUTPUT, 1, 3.14159)
 
 // Random //
 /obj/item/integrated_circuit/arithmetic/random
@@ -146,7 +126,4 @@
 
 	if(isnum(L.data) && isnum(H.data))
 		result = rand(L.data, H.data)
-
-	for(var/datum/integrated_io/output/O in outputs)
-		O.data = result
-		O.push_data()
+	set_pin_data(IC_OUTPUT, 1, result)

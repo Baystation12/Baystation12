@@ -95,7 +95,7 @@
 			if(victim.loc == src.loc)
 				buckle_mob(victim)
 				victim.set_dir(pick(cardinal))
-				victim << "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>"
+				to_chat(victim, "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>")
 
 /obj/effect/plant/buckle_mob()
 	. = ..()

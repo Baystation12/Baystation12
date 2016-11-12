@@ -1,117 +1,66 @@
 // Shoelocker
 /datum/gear/shoes
-	display_name = "jackboots"
-	path = /obj/item/clothing/shoes/jackboots
+	display_name = "sandals"
+	path = /obj/item/clothing/shoes/sandal
 	slot = slot_shoes
 	sort_category = "Shoes and Footwear"
 
-/datum/gear/shoes/toeless
-	display_name = "toe-less jackboots"
-	path = /obj/item/clothing/shoes/jackboots/unathi
-
-/datum/gear/shoes/workboots
-	display_name = "workboots"
-	path = /obj/item/clothing/shoes/workboots
-
-/datum/gear/shoes/sandals
-	display_name = "sandals"
-	path = /obj/item/clothing/shoes/sandal
-
-/datum/gear/shoes/black
-	display_name = "shoes, black"
+/datum/gear/shoes/color
+	display_name = "shoe selection"
 	path = /obj/item/clothing/shoes/black
 
-/datum/gear/shoes/blue
-	display_name = "shoes, blue"
-	path = /obj/item/clothing/shoes/blue
+/datum/gear/shoes/color/New()
+	..()
+	var/shoes = list()
+	shoes["black shoes"] = /obj/item/clothing/shoes/black
+	shoes["blue shoes"] = /obj/item/clothing/shoes/blue
+	shoes["brown shoes"] = /obj/item/clothing/shoes/brown
+	shoes["dress shoes"] = /obj/item/clothing/shoes/laceup
+	shoes["green shoes"] = /obj/item/clothing/shoes/green
+	shoes["leather shoes"] = /obj/item/clothing/shoes/leather
+	shoes["orange shoes"] = /obj/item/clothing/shoes/orange
+	shoes["purple shoes"] = /obj/item/clothing/shoes/purple
+	shoes["rainbow shoes"] = /obj/item/clothing/shoes/rainbow
+	shoes["red shoes"] = /obj/item/clothing/shoes/red
+	shoes["white shoes"] = /obj/item/clothing/shoes/white
+	shoes["yellow shoes"] = /obj/item/clothing/shoes/yellow
+	gear_tweaks += new/datum/gear_tweak/path(shoes)
 
-/datum/gear/shoes/brown
-	display_name = "shoes, brown"
-	path = /obj/item/clothing/shoes/brown
+/datum/gear/shoes/boots
+	display_name = "boot selection"
+	path = /obj/item/clothing/shoes/jackboots
 
-/datum/gear/shoes/lacey
-	display_name = "shoes, classy"
-	path = /obj/item/clothing/shoes/laceup
-
-/datum/gear/shoes/dress
-	display_name = "shoes, dress"
-	path = /obj/item/clothing/shoes/laceup
-
-/datum/gear/shoes/green
-	display_name = "shoes, green"
-	path = /obj/item/clothing/shoes/green
-
-/datum/gear/shoes/leather
-	display_name = "shoes, leather"
-	path = /obj/item/clothing/shoes/leather
-
-/datum/gear/shoes/orange
-	display_name = "shoes, orange"
-	path = /obj/item/clothing/shoes/orange
-
-/datum/gear/shoes/purple
-	display_name = "shoes, purple"
-	path = /obj/item/clothing/shoes/purple
-
-/datum/gear/shoes/rainbow
-	display_name = "shoes, rainbow"
-	path = /obj/item/clothing/shoes/rainbow
-
-/datum/gear/shoes/red
-	display_name = "shoes, red"
-	path = /obj/item/clothing/shoes/red
-
-/datum/gear/shoes/white
-	display_name = "shoes, white"
-	path = /obj/item/clothing/shoes/white
-
-/datum/gear/shoes/yellow
-	display_name = "shoes, yellow"
-	path = /obj/item/clothing/shoes/yellow
+/datum/gear/shoes/boots/New()
+	..()
+	var/boots = list()
+	boots["jackboots"] = /obj/item/clothing/shoes/jackboots
+	boots["workboots"] = /obj/item/clothing/shoes/workboots
+	boots["workboots, alt"] = /obj/item/clothing/shoes/workboots/alt
+	boots["cowboy boots"] = /obj/item/clothing/shoes/cowboy
+	boots["winterboots"] = /obj/item/clothing/shoes/winterboots
+	gear_tweaks += new/datum/gear_tweak/path(boots)
 
 //EROS START
+	
+/datum/gear/shoes/flats
+	display_name = "flats selection"
+	path = /obj/item/clothing/shoes/flats
 
-/datum/gear/shoes/cowboy
-	display_name = "cowboy boots"
-	path = /obj/item/clothing/shoes/cowboy
+/datum/gear/shoes/flats/New()
+	..()
+	var/flats = list()
+	flats["flats, black"] = /obj/item/clothing/shoes/flats
+	flats["flats, white"] = /obj/item/clothing/shoes/flats/white
+	flats["flats, red"] = /obj/item/clothing/shoes/flats/red
+	flats["flats, purple"] = /obj/item/clothing/shoes/flats/purple
+	flats["flats, blue"] = /obj/item/clothing/shoes/flats/blue
+	flats["flats, brown"] = /obj/item/clothing/shoes/flats/brown
+	flats["flats, orange"] = /obj/item/clothing/shoes/flats/orange
+
+	gear_tweaks += new/datum/gear_tweak/path(flats)
 
 /datum/gear/shoes/flipflops
 	display_name = "flip flops"
 	path = /obj/item/clothing/shoes/flipflop
 
-/datum/gear/shoes/flats
-	display_name = "flats, black"
-	path = /obj/item/clothing/shoes/flats
-
-/datum/gear/shoes/flats/white
-	display_name = "flats, white"
-	path = /obj/item/clothing/shoes/flats/white
-
-/datum/gear/shoes/flats/red
-	display_name = "flats, red"
-	path = /obj/item/clothing/shoes/flats/red
-
-/datum/gear/shoes/flats/purple
-	display_name = "flats, purple"
-	path = /obj/item/clothing/shoes/flats/purple
-
-/datum/gear/shoes/flats/blue
-	display_name = "flats, blue"
-	path = /obj/item/clothing/shoes/flats/blue
-
-/datum/gear/shoes/flats/brown
-	display_name = "flats, brown"
-	path = /obj/item/clothing/shoes/flats/brown
-
-/datum/gear/shoes/flats/orange
-	display_name = "flats, orange"
-	path = /obj/item/clothing/shoes/flats/orange
-
-/datum/gear/shoes/workbootsalt
-	display_name = "workboots, alt"
-	path = /obj/item/clothing/shoes/workboots/alt
-
-/datum/gear/shoes/winterboots
-	display_name = "winterboots"
-	path = /obj/item/clothing/shoes/winterboots
 //EROS END

@@ -399,22 +399,22 @@
 			if(istype(usr,/mob/living/carbon))
 				var/mob/living/carbon/M = usr
 				if(prob(50))
-					usr << "<span class='warning'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>"
+					to_chat(usr, "<span class='warning'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>")
 					M.hallucination += 50
 				else
-					usr << "<span class='danger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>"
+					to_chat(usr, "<span class='danger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>")
 					M.take_organ_damage(10)
 			else
-				usr << "<span class='warning'>The sounds of battle fill your ears...</span>"
+				to_chat(usr, "<span class='warning'>The sounds of battle fill your ears...</span>")
 		if(ORION_TRAIL_ILLNESS)
 			if(istype(usr,/mob/living/carbon/human))
 				var/mob/living/carbon/human/M = usr
-				M << "<span class='warning'>An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit.</span>"
+				to_chat(M, "<span class='warning'>An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit.</span>")
 				M.vomit()
 			else
-				usr << "<span class='warning'>You feel ill.</span>"
+				to_chat(usr, "<span class='warning'>You feel ill.</span>")
 		if(ORION_TRAIL_CARP)
-			usr << "<span class='danger'> Something bit you!</span>"
+			to_chat(usr, "<span class='danger'> Something bit you!</span>")
 			var/mob/living/M = usr
 			M.adjustBruteLoss(10)
 		if(ORION_TRAIL_FLUX)
@@ -424,7 +424,7 @@
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
 				M.take_organ_damage(10)
 			else
-				usr << "<span class='warning'>A violent gale blows past you, and you barely manage to stay standing!</span>"
+				to_chat(usr, "<span class='warning'>A violent gale blows past you, and you barely manage to stay standing!</span>")
 		if(ORION_TRAIL_MALFUNCTION)
 			if(supplies["3"])
 				return
@@ -439,7 +439,7 @@
 			else
 				src.visible_message("Something slams into the floor around \the [src] - luckily, it didn't get through!", "You hear something crack.")
 		if(ORION_TRAIL_GAMEOVER)
-			usr << "<span class='danger'><font size=3>You're never going to make it to Orion...</font></span>"
+			to_chat(usr, "<span class='danger'><font size=3>You're never going to make it to Orion...</font></span>")
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
 			M << browse (null,"window=arcade")
@@ -480,15 +480,15 @@
 	if(!(in_range(user, src)))
 		return
 	if(!active)
-		user << "<span class='notice'>There's a little switch on the bottom. It's flipped down.</span>"
+		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped down.</span>")
 	else
-		user << "<span class='notice'>There's a little switch on the bottom. It's flipped up.</span>"
+		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped up.</span>")
 /obj/item/weapon/orion_ship/attack_self(mob/user)
 	if(active)
 		return
 	message_admins("[key_name_admin(usr)] primed an explosive Orion ship for detonation.")
 	log_game("[key_name(usr)] primed an explosive Orion ship for detonation.")
-	user << "<span class='warning'>You flip the switch on the underside of [src].</span>"
+	to_chat(user, "<span class='warning'>You flip the switch on the underside of [src].</span>")
 	active = 1
 	src.visible_message("<span class='notice'>[src] softly beeps and whirs to life!</span>")
 	src.audible_message("<b>\The [src]</b> says, 'This is ship ID #[rand(1,1000)] to Orion Port Authority. We're coming in for landing, over.'")

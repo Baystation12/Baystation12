@@ -8,7 +8,7 @@
 	if(!deploy_path)
 		return
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
-	user << "<span class='notice'>You inflate \the [src].</span>"
+	to_chat(user, "<span class='notice'>You inflate \the [src].</span>")
 	var/obj/structure/inflatable/R = new deploy_path(user.loc)
 	src.transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
@@ -236,7 +236,7 @@
 	icon_state = "folded_wall_torn"
 
 	attack_self(mob/user)
-		user << "<span class='notice'>The inflatable wall is too torn to be inflated!</span>"
+		to_chat(user, "<span class='notice'>The inflatable wall is too torn to be inflated!</span>")
 		add_fingerprint(user)
 
 /obj/item/inflatable/door/torn
@@ -246,7 +246,7 @@
 	icon_state = "folded_door_torn"
 
 	attack_self(mob/user)
-		user << "<span class='notice'>The inflatable door is too torn to be inflated!</span>"
+		to_chat(user, "<span class='notice'>The inflatable door is too torn to be inflated!</span>")
 		add_fingerprint(user)
 
 /obj/item/weapon/storage/briefcase/inflatable

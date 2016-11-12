@@ -306,6 +306,13 @@
 	item_state = "p_suit"
 	worn_state = "dress_pink"
 
+/obj/item/clothing/under/dress/dress_purple
+	name = "purple dress"
+	desc= "A simple, tight fitting purple dress."
+	icon_state = "tian_dress"
+	item_state = "p_suit"
+	worn_state = "tian_dress"
+
 /obj/item/clothing/under/dress/dress_yellow
 	name = "yellow dress"
 	desc = "A flirty, little yellow dress."

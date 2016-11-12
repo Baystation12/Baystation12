@@ -10,7 +10,7 @@
 		var/mob/living/carbon/C = toucher
 		var/susceptibility = GetAnomalySusceptibility(C)
 		if(prob(susceptibility * 100))
-			C << "\red A powerful force overwhelms your consciousness."
+			to_chat(C, "<span class='warning'>A powerful force overwhelms your consciousness.</span>")
 			C.Weaken(rand(1,10) * susceptibility)
 			C.stuttering += 30 * susceptibility
 			C.Stun(rand(1,10) * susceptibility)
@@ -21,13 +21,13 @@
 		for (var/mob/living/carbon/C in range(src.effectrange,T))
 			var/susceptibility = GetAnomalySusceptibility(C)
 			if(prob(10 * susceptibility))
-				C << "\red Your body goes numb for a moment."
+				to_chat(C, "<span class='warning'>Your body goes numb for a moment.</span>")
 				C.Weaken(2)
 				C.stuttering += 2
 				if(prob(10))
 					C.Stun(1)
 			else if(prob(10))
-				C << "\red You feel numb."
+				to_chat(C, "<span class='warning'>You feel numb.</span>")
 
 /datum/artifact_effect/stun/DoEffectPulse()
 	if(holder)
@@ -35,7 +35,7 @@
 		for (var/mob/living/carbon/C in range(src.effectrange,T))
 			var/susceptibility = GetAnomalySusceptibility(C)
 			if(prob(100 * susceptibility))
-				C << "\red A wave of energy overwhelms your senses!"
+				to_chat(C, "<span class='warning'>A wave of energy overwhelms your senses!</span>")
 				C.SetWeakened(4 * susceptibility)
 				C.stuttering = 4 * susceptibility
 				if(prob(10))

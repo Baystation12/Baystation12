@@ -32,7 +32,8 @@
 	var/list/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 
-	//world << "Replacing [src.type] with [N]"
+//	log_debug("Replacing [src.type] with [N]")
+
 
 	if(connections) connections.erase_all()
 

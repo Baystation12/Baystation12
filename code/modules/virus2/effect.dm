@@ -81,14 +81,14 @@
 			var/mob/living/carbon/human/H = mob
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(prob(25))
-				mob << "<span class='warning'>Your [O.name] feels as if it might burst!</span>"
+				to_chat(mob, "<span class='warning'>Your [O.name] feels as if it might burst!</span>")
 			if(prob(10))
 				spawn(50)
 					if(O)
 						O.droplimb(0,DROPLIMB_BLUNT)
 		else
 			if(prob(75))
-				mob << "<span class='warning'>Your whole body feels like it might fall apart!</span>"
+				to_chat(mob, "<span class='warning'>Your whole body feels like it might fall apart!</span>")
 			if(prob(10))
 				mob.adjustBruteLoss(25*multiplier)
 
@@ -143,7 +143,7 @@
 			var/obj/item/organ/external/E = H.organs_by_name[organ]
 			if (!(E.status & ORGAN_DEAD))
 				E.status |= ORGAN_DEAD
-				H << "<span class='notice'>You can't feel your [E.name] anymore...</span>"
+				to_chat(H, "<span class='notice'>You can't feel your [E.name] anymore...</span>")
 				for (var/obj/item/organ/external/C in E.children)
 					C.status |= ORGAN_DEAD
 			H.update_body(1)
@@ -174,7 +174,7 @@
 	deactivate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			H << "<span class='notice'>You suddenly feel hurt and old...</span>"
+			to_chat(H, "<span class='notice'>You suddenly feel hurt and old...</span>")
 			H.age += 8
 		var/backlash_amt = 5*multiplier
 		mob.apply_damages(backlash_amt,backlash_amt,backlash_amt,backlash_amt)
@@ -252,7 +252,7 @@
 	name = "Topographical Cretinism"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class='notice'>You have trouble telling right and left apart all of a sudden.</span>"
+		to_chat(mob, "<span class='notice'>You have trouble telling right and left apart all of a sudden.</span>")
 		mob.confused += 10
 
 /datum/disease2/effect/mutation
@@ -343,7 +343,7 @@
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
 			if(H.species.name == "Human" && !(H.h_style == "Bald") && !(H.h_style == "Balding Hair"))
-				H << "<span class='danger'>Your hair starts to fall out in clumps...</span>"
+				to_chat(H, "<span class='danger'>Your hair starts to fall out in clumps...</span>")
 				spawn(50)
 					H.h_style = "Balding Hair"
 					H.update_hair()
@@ -352,7 +352,7 @@
 	name = "Adrenaline Extra"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class='notice'>You feel a rush of energy inside you!</span>"
+		to_chat(mob, "<span class='notice'>You feel a rush of energy inside you!</span>")
 		if (mob.reagents.get_reagent_amount("hyperzine") < 10)
 			mob.reagents.add_reagent("hyperzine", 4)
 		if (prob(30))
@@ -365,7 +365,7 @@
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if (prob(30))
-			mob << "<span class='warning'>You feel like you are about to sneeze!</span>"
+			to_chat(mob, "<span class='warning'>You feel like you are about to sneeze!</span>")
 		sleep(5)
 		mob.say("*sneeze")
 		for(var/mob/living/carbon/M in get_step(mob,mob.dir))
@@ -378,7 +378,7 @@
 	name = "Flemmingtons"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class='warning'>Mucous runs down the back of your throat.</span>"
+		to_chat(mob, "<span class='warning'>Mucous runs down the back of your throat.</span>")
 
 /datum/disease2/effect/drool
 	name = "Saliva Effect"
@@ -398,4 +398,4 @@
 	name = "Headache"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class='warning'>Your head hurts a bit.</span>"
+		to_chat(mob, "<span class='warning'>Your head hurts a bit.</span>")

@@ -100,7 +100,8 @@ var/datum/antagonist/wizard/wizards
 		break
 	if(!survivor)
 		feedback_set_details("round_end_result","loss - wizard killed")
-		world << "<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>"
+		to_world("<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>")
+
 
 /datum/antagonist/wizard/print_player_summary()
 	..()
@@ -115,7 +116,8 @@ var/datum/antagonist/wizard/wizards
 				text += "<br><b>[spell.name]</b> - "
 				text += "Speed: [spell.spell_levels["speed"]] Power: [spell.spell_levels["power"]]"
 		text += "<br>"
-		world << text
+		to_world(text)
+
 
 //To batch-remove wizard spells. Linked to mind.dm.
 /mob/proc/spellremove()
@@ -132,18 +134,18 @@ obj/item/clothing
 /*Checks if the wizard is wearing the proper attire.
 Made a proc so this is not repeated 14 (or more) times.*/
 /mob/proc/wearing_wiz_garb()
-	src << "Silly creature, you're not a human. Only humans can cast this spell."
+	to_chat(src, "Silly creature, you're not a human. Only humans can cast this spell.")
 	return 0
 
 // Humans can wear clothes.
 /mob/living/carbon/human/wearing_wiz_garb()
 	if(!is_wiz_garb(src.wear_suit) && (!src.species.hud || (slot_wear_suit in src.species.hud.equip_slots)))
-		src << "<span class='warning'>I don't feel strong enough without my robe.</span>"
+		to_chat(src, "<span class='warning'>I don't feel strong enough without my robe.</span>")
 		return 0
 	if(!is_wiz_garb(src.shoes) && (!species.hud || (slot_shoes in src.species.hud.equip_slots)))
-		src << "<span class='warning'>I don't feel strong enough without my sandals.</span>"
+		to_chat(src, "<span class='warning'>I don't feel strong enough without my sandals.</span>")
 		return 0
 	if(!is_wiz_garb(src.head) && (!species.hud || (slot_head in src.species.hud.equip_slots)))
-		src << "<span class='warning'>I don't feel strong enough without my hat.</span>"
+		to_chat(src, "<span class='warning'>I don't feel strong enough without my hat.</span>")
 		return 0
 	return 1

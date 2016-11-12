@@ -87,7 +87,7 @@
 		return 0
 	var/zone = user.zone_sel.selecting
 	if(zone in M.op_stage.in_progress) //Can't operate on someone repeatedly.
-		user << "<span class='warning'>You can't operate on this area while surgery is already in progress.</span>"
+		to_chat(user, "<span class='warning'>You can't operate on this area while surgery is already in progress.</span>")
 		return 1
 	for(var/datum/surgery_step/S in surgery_steps)
 		//check if tool is right or close enough and if this step is possible
@@ -104,7 +104,7 @@
 				else if ((src in user.contents) && user.Adjacent(M))			//or
 					S.fail_step(user, M, zone, src)		//malpractice~
 				else // This failing silently was a pain.
-					user << "<span class='warning'>You must remain close to your patient to conduct surgery.</span>"
+					to_chat(user, "<span class='warning'>You must remain close to your patient to conduct surgery.</span>")
 				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
@@ -112,7 +112,7 @@
 				return	1	  												//don't want to do weapony things after surgery
 
 	if (user.a_intent == I_HELP)
-		user << "<span class='warning'>You can't see any useful way to use [src] on [M].</span>"
+		to_chat(user, "<span class='warning'>You can't see any useful way to use [src] on [M].</span>")
 		return 1
 	return 0
 

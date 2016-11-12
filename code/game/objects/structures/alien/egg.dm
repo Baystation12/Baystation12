@@ -31,7 +31,7 @@
 	if(progress >= MAX_PROGRESS)
 		for(var/mob/M in dead_mob_list_)
 			if(isghost(M) && M.client && M.client.prefs && (MODE_XENOMORPH in M.client.prefs.be_special_role))
-				M << "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, M)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>"
+				to_chat(M, "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, M)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>")
 		processing_objects -= src
 		update_icon()
 
@@ -48,7 +48,7 @@
 		return
 
 	if(progress < MAX_PROGRESS)
-		user << "\The [src] has not yet matured."
+		to_chat(user, "\The [src] has not yet matured.")
 		return
 
 	if(!user.MayRespawn(1))
@@ -56,7 +56,7 @@
 
 	// Check for bans properly.
 	if(jobban_isbanned(user, MODE_XENOMORPH))
-		user << "<span class='danger'>You are banned from playing a Xenomorph.</span>"
+		to_chat(user, "<span class='danger'>You are banned from playing a Xenomorph.</span>")
 		return
 
 	var/confirm = alert(user, "Are you sure you want to join as a Xenomorph larva?", "Become Larva", "No", "Yes")
@@ -68,7 +68,7 @@
 		return
 
 	if(progress == -1) //Egg has been hatched.
-		user << "Too slow..."
+		to_chat(user, "Too slow...")
 		return
 
 	flick("egg_opening",src)

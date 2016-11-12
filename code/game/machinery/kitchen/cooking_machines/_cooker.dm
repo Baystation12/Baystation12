@@ -38,16 +38,16 @@
 /obj/machinery/cooker/examine()
 	..()
 	if(cooking_obj && Adjacent(usr))
-		usr << "You can see \a [cooking_obj] inside."
+		to_chat(usr, "You can see \a [cooking_obj] inside.")
 
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
-		user << "<span class='warning'>\The [src] is not working.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
 		return
 
 	if(cooking)
-		user << "<span class='warning'>\The [src] is running!</span>"
+		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
 		return
 
 	// We are trying to cook a grabbed mob.
@@ -55,11 +55,11 @@
 	if(istype(G))
 
 		if(!can_cook_mobs)
-			user << "<span class='warning'>That's not going to fit.</span>"
+			to_chat(user, "<span class='warning'>That's not going to fit.</span>")
 			return
 
 		if(!isliving(G.affecting))
-			user << "<span class='warning'>You can't cook that.</span>"
+			to_chat(user, "<span class='warning'>You can't cook that.</span>")
 			return
 
 		cook_mob(G.affecting, user)
@@ -68,16 +68,16 @@
 	// We're trying to cook something else. Check if it's valid.
 	var/obj/item/weapon/reagent_containers/food/snacks/check = I
 	if(istype(check) && islist(check.cooked) && (cook_type in check.cooked))
-		user << "<span class='warning'>\The [check] has already been [cook_type].</span>"
+		to_chat(user, "<span class='warning'>\The [check] has already been [cook_type].</span>")
 		return 0
 	else if(istype(check, /obj/item/weapon/reagent_containers/glass))
-		user << "<span class='warning'>That would probably break [src].</span>"
+		to_chat(user, "<span class='warning'>That would probably break [src].</span>")
 		return 0
 	else if(istype(check, /obj/item/weapon/disk/nuclear))
-		user << "Central Command would kill you if you [cook_type] that."
+		to_chat(user, "Central Command would kill you if you [cook_type] that.")
 		return 0
 	else if(!istype(check) && !istype(check, /obj/item/weapon/holder))
-		user << "<span class='warning'>That's not edible.</span>"
+		to_chat(user, "<span class='warning'>That's not edible.</span>")
 		return 0
 
 	// Gotta hurt.
@@ -178,7 +178,7 @@
 /obj/machinery/cooker/attack_hand(var/mob/user)
 
 	if(cooking_obj)
-		user << "<span class='notice'>You grab \the [cooking_obj] from \the [src].</span>"
+		to_chat(user, "<span class='notice'>You grab \the [cooking_obj] from \the [src].</span>")
 		user.put_in_hands(cooking_obj)
 		cooking = 0
 		cooking_obj = null
@@ -188,7 +188,7 @@
 	if(output_options.len)
 
 		if(cooking)
-			user << "<span class='warning'>\The [src] is in use!</span>"
+			to_chat(user, "<span class='warning'>\The [src] is in use!</span>")
 			return
 
 		var/choice = input("What specific food do you wish to make with \the [src]?") as null|anything in output_options+"Default"
@@ -196,10 +196,10 @@
 			return
 		if(choice == "Default")
 			selected_option = null
-			user << "<span class='notice'>You decide not to make anything specific with \the [src].</span>"
+			to_chat(user, "<span class='notice'>You decide not to make anything specific with \the [src].</span>")
 		else
 			selected_option = choice
-			user << "<span class='notice'>You prepare \the [src] to make \a [selected_option].</span>"
+			to_chat(user, "<span class='notice'>You prepare \the [src] to make \a [selected_option].</span>")
 
 	..()
 

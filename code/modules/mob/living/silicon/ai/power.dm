@@ -6,7 +6,7 @@
 	if(aiRestorePowerRoutine != 1)
 		return
 
-	src << "<span class='danger'>Main power lost. System switched to internal capacitor. Beginning diagnostics.</span>"
+	to_chat(src, "<span class='danger'>Main power lost. System switched to internal capacitor. Beginning diagnostics.</span>")
 	var/obj/machinery/power/apc/theAPC = null
 	var/connection_failures = 0
 	while(aiRestorePowerRoutine)
@@ -17,12 +17,12 @@
 		sleep(5 SECONDS)
 
 		if(self_shutdown)
-			src << "<span class='notice'>Systems offline. Power restoration routine aborted.</span>"
+			to_chat(src, "<span class='notice'>Systems offline. Power restoration routine aborted.</span>")
 			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
 			return
 
 		if(has_power(0))
-			src << "<span class='notice'>Main power restored. All systems returning to normal mode.</span>"
+			to_chat(src, "<span class='notice'>Main power restored. All systems returning to normal mode.</span>")
 			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
 			updateicon()
 			return
@@ -32,10 +32,10 @@
 
 		switch(aiRestorePowerRoutine)
 			if(AI_RESTOREPOWER_DIAGNOSTICS)
-				src << "<span class='notice'>Diagnostics completed. Failure confirmed: Main power connection nonfunctional.</span>"
+				to_chat(src, "<span class='notice'>Diagnostics completed. Failure confirmed: Main power connection nonfunctional.</span>")
 				continue
 			if(AI_RESTOREPOWER_CONNECTING)
-				src << "<span class='notice'>Attempting to connect to area power controller.</span>"
+				to_chat(src, "<span class='notice'>Attempting to connect to area power controller.</span>")
 				continue
 			// step 3 tries to locate an APC. It tries up to three times before failing, relying on external influence to restore power only.
 			if(AI_RESTOREPOWER_CONNECTED)
@@ -43,42 +43,42 @@
 				theAPC = A.get_apc()
 
 				if(!istype(theAPC))
-					src << "<span class='notice'>Error processing connection to APC: Attempt [connection_failures+1]/[AI_POWER_RESTORE_MAX_ATTEMPTS]</span>"
+					to_chat(src, "<span class='notice'>Error processing connection to APC: Attempt [connection_failures+1]/[AI_POWER_RESTORE_MAX_ATTEMPTS]</span>")
 					connection_failures++
 					if(connection_failures == AI_POWER_RESTORE_MAX_ATTEMPTS)
 						aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
-						src << "<span class='danger'>Unable to connect to APC after [AI_POWER_RESTORE_MAX_ATTEMPTS] attempts. Aborting power restoration sequence.</span>"
+						to_chat(src, "<span class='danger'>Unable to connect to APC after [AI_POWER_RESTORE_MAX_ATTEMPTS] attempts. Aborting power restoration sequence.</span>")
 						continue
 					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					continue
-				src << "<span class='notice'>APC connection confirmed: [theAPC]. Sending emergency reset signal...</span>"
+				to_chat(src, "<span class='notice'>APC connection confirmed: [theAPC]. Sending emergency reset signal...</span>")
 				continue
 			// step 4 tries to reset the APC, if we still have connection to it.
 			if(AI_RESTOREPOWER_COMPLETED)
 				// The APC was destroyed since last step
 				if(!istype(theAPC))
-					src << "<span class='danger'>Connection to APC lost. Attempting to re-connect.</span>"
+					to_chat(src, "<span class='danger'>Connection to APC lost. Attempting to re-connect.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					connection_failures = 0
 					continue
 				// Our area has changed.
 				if(get_area(src) != get_area(theAPC))
-					src << "<span class='danger'>APC change detected. Attempting to locate new APC.</span>"
+					to_chat(src, "<span class='danger'>APC change detected. Attempting to locate new APC.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					connection_failures = 0
 					continue
 				// The APC is damaged
 				if(theAPC.stat & BROKEN)
-					src << "<span class='danger'>APC internal diagnostics reports hardware failure. Unable to reset. Aborting power restoration sequence.</span>"
+					to_chat(src, "<span class='danger'>APC internal diagnostics reports hardware failure. Unable to reset. Aborting power restoration sequence.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// APC's cell is removed and/or below 1% charge. This prevents the AI from briefly regaining power as we force the APC on, only to lose it again next tick due to 0% cell charge.
 				if(theAPC.cell && theAPC.cell.percent() < 1)
-					src << "<span class='danger'>APC internal power reserves are critical. Unable to restore main power.</span>"
+					to_chat(src, "<span class='danger'>APC internal power reserves are critical. Unable to restore main power.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// Success!
-				src << "<span class='notice'>Reset signal successfully transmitted. Sequence completed.</span>"
+				to_chat(src, "<span class='notice'>Reset signal successfully transmitted. Sequence completed.</span>")
 				reset_apc(theAPC)
 
 
@@ -155,9 +155,9 @@
 	power_override_active = !power_override_active
 
 	if(power_override_active)
-		src << "You have enabled power override. Should you lose power you will remain normally operational, but your backup capacitor will run out much faster."
+		to_chat(src, "You have enabled power override. Should you lose power you will remain normally operational, but your backup capacitor will run out much faster.")
 	else
-		src << "You have disabled power override. Should you lose power you will enter diagnostics and low power mode, which will prolong the time for which you can remain operational."
+		to_chat(src, "You have disabled power override. Should you lose power you will enter diagnostics and low power mode, which will prolong the time for which you can remain operational.")
 
 // This verb allows the AI to disable or enable the power override mode.
 /mob/living/silicon/ai/proc/ai_shutdown()
@@ -166,14 +166,14 @@
 	set desc = "Allows you to shut yourself down, sacrificing most functions for considerably reduced power usage."
 
 	if(self_shutdown)
-		src << "<span class='notice'>System rebooted. Camera, communication and network systems operational.</span>"
+		to_chat(src, "<span class='notice'>System rebooted. Camera, communication and network systems operational.</span>")
 		self_shutdown = 0
 		return
 
 	var/confirm = alert("Are you sure that you want to shut yourself down? You can reboot yourself later by using the \"Shutdown\" command again. This will put you into reduced power usage mode, at the cost of losing most functions.", "Confirm Shutdown", "Yes", "No")
 
 	if(confirm == "Yes")
-		src << "<span class='notice'>Shutting down. Minimal power mode: Enabled. You may reboot yourself by using the \"Shutdown\" command again.</span>"
+		to_chat(src, "<span class='notice'>Shutting down. Minimal power mode: Enabled. You may reboot yourself by using the \"Shutdown\" command again.</span>")
 		self_shutdown = 1
 		return
 

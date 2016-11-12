@@ -4,7 +4,7 @@
 
 	var/air_contents = A.return_air()
 	if(!air_contents)
-		user << "<span class='warning'>Your [src] flashes a red light as it fails to analyze \the [A].</span>"
+		to_chat(user, "<span class='warning'>Your [src] flashes a red light as it fails to analyze \the [A].</span>")
 		return 0
 
 	var/list/result = atmosanalyzer_scan(A, air_contents)
@@ -13,7 +13,7 @@
 
 /proc/print_atmos_analysis(user, var/list/result)
 	for(var/line in result)
-		user << "<span class='notice'>[line]</span>"
+		to_chat(user, "<span class='notice'>[line]</span>")
 
 /proc/atmosanalyzer_scan(var/atom/target, var/datum/gas_mixture/mixture)
 	. = list()

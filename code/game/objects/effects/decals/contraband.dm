@@ -31,12 +31,12 @@
 	//must place on a wall and user must not be inside a closet/mecha/whatever
 	var/turf/W = A
 	if (!iswall(W) || !isturf(user.loc))
-		user << "<span class='warning'>You can't place this here!</span>"
+		to_chat(user, "<span class='warning'>You can't place this here!</span>")
 		return
 
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in cardinal))
-		user << "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>"
+		to_chat(user, "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>")
 		return
 
 	//just check if there is a poster on or adjacent to the wall
@@ -52,10 +52,11 @@
 			break
 
 	if (stuff_on_wall)
-		user << "<span class='notice'>There is already a poster there!</span>"
+		to_chat(user, "<span class='notice'>There is already a poster there!</span>")
 		return
 
-	user << "<span class='notice'>You start placing the poster on the wall...</span>" //Looks like it's uncluttered enough. Place the poster.
+	to_chat(user, "<span class='notice'>You start placing the poster on the wall...</span>")//Looks like it's uncluttered enough. Place the poster.
+
 
 	var/obj/structure/sign/poster/P = new(user.loc, placement_dir=get_dir(user, W), serial=serial_number)
 
@@ -68,7 +69,7 @@
 		if(!P) return
 
 		if(iswall(W) && user && P.loc == user.loc) //Let's check if everything is still there
-			user << "<span class='notice'>You place the poster!</span>"
+			to_chat(user, "<span class='notice'>You place the poster!</span>")
 		else
 			P.roll_and_drop(P.loc)
 
@@ -124,10 +125,10 @@
 	if(istype(W, /obj/item/weapon/wirecutters))
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
-			user << "<span class='notice'>You remove the remnants of the poster.</span>"
+			to_chat(user, "<span class='notice'>You remove the remnants of the poster.</span>")
 			qdel(src)
 		else
-			user << "<span class='notice'>You carefully remove the poster from the wall.</span>"
+			to_chat(user, "<span class='notice'>You carefully remove the poster from the wall.</span>")
 			roll_and_drop(user.loc)
 		return
 

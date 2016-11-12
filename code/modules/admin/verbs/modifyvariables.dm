@@ -121,7 +121,6 @@
 /client/proc/mod_list(var/list/L, atom/O, original_name, objectvar)
 	if(!check_rights(R_VAREDIT))	return
 	if(!istype(L,/list)) to_chat(src, "Not a List.")
-
 	if(L.len > 1000)
 		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
 		if(confirm != "Continue")
@@ -171,7 +170,6 @@
 
 	if(isnull(variable))
 		to_chat(usr, "Unable to determine variable type.")
-
 	else if(isnum(variable))
 		to_chat(usr, "Variable appears to be <b>NUM</b>.")
 		default = "num"
@@ -230,7 +228,6 @@
 
 		if(dir)
 			to_chat(usr, "If a direction, direction is: [dir]")
-
 	var/class = "text"
 	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
 
@@ -432,7 +429,6 @@
 		var/default
 		if(isnull(var_value))
 			to_chat(usr, "Unable to determine variable type.")
-
 		else if(isnum(var_value))
 			to_chat(usr, "Variable appears to be <b>NUM</b>.")
 			default = "num"
@@ -490,7 +486,6 @@
 					dir = null
 			if(dir)
 				to_chat(usr, "If a direction, direction is: [dir]")
-
 		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()
@@ -663,7 +658,6 @@
 			AM.forceMove(T)
 		else
 			to_chat(client, "<span class='warning'>Unable to locate a turf at [x]-[y]-[z].</span>")
-
 /decl/vv_set_handler/opacity_hander
 	handled_type = /atom
 	handled_vars = list("opacity")
@@ -673,7 +667,6 @@
 		A.set_opacity(var_value)
 	else
 		to_chat(client, "<span class='warning'>May only assign numerals to opacity.</span>")
-
 /decl/vv_set_handler/dir_hander
 	handled_type = /atom
 	handled_vars = list("dir")

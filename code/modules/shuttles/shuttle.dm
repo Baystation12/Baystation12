@@ -56,7 +56,8 @@
 		moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
-	//world << "shuttle/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]"
+//	log_debug("shuttle/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]")
+
 	if(moving_status != SHUTTLE_IDLE) return
 
 	//it would be cool to play a sound here
@@ -104,13 +105,13 @@
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump() or long_jump()
 /datum/shuttle/proc/move(var/area/origin, var/area/destination, var/direction=null)
 
-	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
-
-	//world << "area_coming_from: [origin]"
-	//world << "destination: [destination]"
+//	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
+//	log_degug("area_coming_from: [origin]")
+//	log_debug("destination: [destination]")
 
 	if(origin == destination)
-		//world << "cancelling move, shuttle will overlap."
+//		log_debug("cancelling move, shuttle will overlap.")
+
 		return
 
 	if (docking_controller && !docking_controller.undocked())
@@ -142,10 +143,10 @@
 		if(M.client)
 			spawn(0)
 				if(M.buckled)
-					M << "\red Sudden acceleration presses you into your chair!"
+					to_chat(M, "<span class='warning'>Sudden acceleration presses you into your chair!</span>")
 					shake_camera(M, 3, 1)
 				else
-					M << "\red The floor lurches beneath you!"
+					to_chat(M, "<span class='warning'>The floor lurches beneath you!</span>")
 					shake_camera(M, 10, 1)
 		if(istype(M, /mob/living/carbon))
 			if(!M.buckled)

@@ -71,7 +71,7 @@ var/list/global/tank_gauge_cache = list()
 				descriptive = "room temperature"
 			else
 				descriptive = "cold"
-		user << "<span class='notice'>\The [src] feels [descriptive].</span>"
+		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -180,7 +180,7 @@ var/list/global/tank_gauge_cache = list()
 		if(location.internal == src)
 			location.internal = null
 			location.internals.icon_state = "internal0"
-			user << "<span class='notice'>You close the tank release valve.</span>"
+			to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
 			if (location.internals)
 				location.internals.icon_state = "internal0"
 		else
@@ -194,11 +194,11 @@ var/list/global/tank_gauge_cache = list()
 
 			if(can_open_valve)
 				location.internal = src
-				user << "<span class='notice'>You open \the [src] valve.</span>"
+				to_chat(user, "<span class='notice'>You open \the [src] valve.</span>")
 				if (location.internals)
 					location.internals.icon_state = "internal1"
 			else
-				user << "<span class='warning'>You need something to connect to \the [src].</span>"
+				to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
 
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)

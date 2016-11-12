@@ -23,7 +23,7 @@
 	playsound(get_turf(user),cast_sound,50,1)
 	for(var/mob/living/M in targets)
 		if(M.stat == DEAD)
-			user << "[name] can only transform living targets."
+			to_chat(user, "[name] can only transform living targets.")
 			continue
 		if(M.buckled)
 			M.buckled.unbuckle_mob()

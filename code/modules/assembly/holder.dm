@@ -88,9 +88,9 @@
 		..(user)
 		if ((in_range(src, user) || src.loc == user))
 			if (src.secured)
-				user << "\The [src] is ready!"
+				to_chat(user, "\The [src] is ready!")
 			else
-				user << "\The [src] can be attached!"
+				to_chat(user, "\The [src] can be attached!")
 		return
 
 
@@ -146,15 +146,15 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(isscrewdriver(W))
 			if(!a_left || !a_right)
-				user << "\red BUG:Assembly part missing, please report this!"
+				to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")
 				return
 			a_left.toggle_secure()
 			a_right.toggle_secure()
 			secured = !secured
 			if(secured)
-				user << "\blue \The [src] is ready!"
+				to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 			else
-				user << "\blue \The [src] can now be taken apart!"
+				to_chat(user, "<span class='notice'>\The [src] can now be taken apart!</span>")
 			update_icon()
 			return
 		else if(W.IsSpecialAssembly())
@@ -168,7 +168,7 @@
 		src.add_fingerprint(user)
 		if(src.secured)
 			if(!a_left || !a_right)
-				user << "\red Assembly part missing!"
+				to_chat(user, "<span class='warning'>Assembly part missing!</span>")
 				return
 			if(istype(a_left,a_right.type))//If they are the same type it causes issues due to window code
 				switch(alert("Which side would you like to use?",,"Left","Right"))
@@ -269,18 +269,18 @@
 			if(!istype(tmr,/obj/item/device/assembly/timer))
 				tmr = holder.a_right
 			if(!istype(tmr,/obj/item/device/assembly/timer))
-				usr << "<span class='notice'>This detonator has no timer.</span>"
+				to_chat(usr, "<span class='notice'>This detonator has no timer.</span>")
 				return
 
 			if(tmr.timing)
-				usr << "<span class='notice'>Clock is ticking already.</span>"
+				to_chat(usr, "<span class='notice'>Clock is ticking already.</span>")
 			else
 				var/ntime = input("Enter desired time in seconds", "Time", "5") as num
 				if (ntime>0 && ntime<1000)
 					tmr.time = ntime
 					name = initial(name) + "([tmr.time] secs)"
-					usr << "<span class='notice'>Timer set to [tmr.time] seconds.</span>"
+					to_chat(usr, "<span class='notice'>Timer set to [tmr.time] seconds.</span>")
 				else
-					usr << "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>"
+					to_chat(usr, "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>")
 		else
-			usr << "<span class='notice'>You cannot do this while [usr.stat?"unconscious/dead":"restrained"].</span>"
+			to_chat(usr, "<span class='notice'>You cannot do this while [usr.stat?"unconscious/dead":"restrained"].</span>")

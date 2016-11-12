@@ -28,7 +28,8 @@
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	if(!isturf(user.loc))
-		user << "You cannot turn the light on while in this [user.loc]." //To prevent some lighting anomalities.
+		to_chat(user, "You cannot turn the light on while in this [user.loc].")//To prevent some lighting anomalities.
+
 		return 0
 	on = !on
 	update_icon()
@@ -47,18 +48,18 @@
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
 				if(istype(C) && (C.body_parts_covered & EYES))
-					user << "<span class='warning'>You're going to need to remove [C] first.</span>"
+					to_chat(user, "<span class='warning'>You're going to need to remove [C] first.</span>")
 					return
 
 			var/obj/item/organ/vision
 			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
-				user << "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>"
+				to_chat(user, "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>")
 				return
 
 			vision = H.internal_organs_by_name[H.species.vision_organ]
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
-				user << "<span class='warning'>\The [H] is missing \his [initial(vision.name)]!</span>"
+				to_chat(user, "<span class='warning'>\The [H] is missing \his [initial(vision.name)]!</span>")
 				return
 
 			user.visible_message("<span class='notice'>\The [user] directs [src] into [M]'s [vision.name].</span>", \
@@ -80,25 +81,25 @@
 	if(vision.robotic < ORGAN_ROBOT )
 
 		if(vision.owner.stat == DEAD || H.blinded)	//mob is dead or fully blind
-			user << "<span class='warning'>\The [H]'s pupils do not react to the light!</span>"
+			to_chat(user, "<span class='warning'>\The [H]'s pupils do not react to the light!</span>")
 			return
 		if(XRAY in H.mutations)
-			user << "<span class='notice'>\The [H]'s pupils give an eerie glow!</span>"
+			to_chat(user, "<span class='notice'>\The [H]'s pupils give an eerie glow!</span>")
 		if(vision.damage)
-			user << "<span class='warning'>There's visible damage to [H]'s [vision.name]!</span>"
+			to_chat(user, "<span class='warning'>There's visible damage to [H]'s [vision.name]!</span>")
 		else if(H.eye_blurry)
-			user << "<span class='notice'>\The [H]'s pupils react slower than normally.</span>"
+			to_chat(user, "<span class='notice'>\The [H]'s pupils react slower than normally.</span>")
 		if(H.getBrainLoss() > 15)
-			user << "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>"
+			to_chat(user, "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>")
 
 		var/list/pinpoint = list("oxycodone"=1,"tramadol"=5)
 		var/list/dilating = list("space_drugs"=5,"mindbreaker"=1)
 		if(H.reagents.has_any_reagent(pinpoint) || H.ingested.has_any_reagent(pinpoint))
-			user << "<span class='notice'>\The [H]'s pupils are already pinpoint and cannot narrow any more.</span>"
+			to_chat(user, "<span class='notice'>\The [H]'s pupils are already pinpoint and cannot narrow any more.</span>")
 		else if(H.reagents.has_any_reagent(dilating) || H.ingested.has_any_reagent(dilating))
-			user << "<span class='notice'>\The [H]'s pupils narrow slightly, but are still very dilated.</span>"
+			to_chat(user, "<span class='notice'>\The [H]'s pupils narrow slightly, but are still very dilated.</span>")
 		else
-			user << "<span class='notice'>\The [H]'s pupils narrow.</span>"
+			to_chat(user, "<span class='notice'>\The [H]'s pupils narrow.</span>")
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
 
@@ -197,7 +198,7 @@
 		return FALSE
 	if(!fuel)
 		if(user)
-			user << "<span class='notice'>It's out of fuel.</span>"
+			to_chat(user, "<span class='notice'>It's out of fuel.</span>")
 		return FALSE
 	on = TRUE
 	force = on_damage

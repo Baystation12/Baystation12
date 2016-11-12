@@ -672,7 +672,6 @@ var/list/worths = list(
 					/obj/machinery/artifact_scanpad = -1800,
 					/obj/machinery/suspension_gen = -3000,
 					/obj/machinery/keycard_auth = -100,
-					/obj/machinery/shield_gen = -15000,
 					/obj/machinery/power/supermatter/shard = 100000,
 					/obj/machinery/power/supermatter = 500000,
 					/obj/machinery/disease2/diseaseanalyser = -8000,

@@ -49,7 +49,7 @@ var/list/fuel_injectors = list()
 	if(istype(W, /obj/item/weapon/fuel_assembly))
 
 		if(injecting)
-			user << "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>"
+			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
 			return
 
 		if(cur_assembly)
@@ -68,7 +68,7 @@ var/list/fuel_injectors = list()
 
 	if(istype(W, /obj/item/weapon/wrench))
 		if(injecting)
-			user << "<span class='warning'>Shut \the [src] off first!</span>"
+			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 			return
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -83,7 +83,7 @@ var/list/fuel_injectors = list()
 /obj/machinery/fusion_fuel_injector/attack_hand(mob/user)
 
 	if(injecting)
-		user << "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>"
+		to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
 		return
 
 	if(cur_assembly)
@@ -93,7 +93,7 @@ var/list/fuel_injectors = list()
 		cur_assembly = null
 		return
 	else
-		user << "<span class='warning'>There is no fuel rod in \the [src].</span>"
+		to_chat(user, "<span class='warning'>There is no fuel rod in \the [src].</span>")
 		return
 
 /obj/machinery/fusion_fuel_injector/proc/BeginInjecting()

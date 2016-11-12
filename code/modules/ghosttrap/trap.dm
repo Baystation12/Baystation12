@@ -42,7 +42,7 @@ var/list/ghost_traps
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
 			if(jobban_isbanned(candidate, "[bantype]"))
-				candidate << "You are banned from one or more required roles and hence cannot enter play as \a [object]."
+				to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
 				return 0
 	return 1
 
@@ -64,8 +64,7 @@ var/list/ghost_traps
 		if(pref_check && !(pref_check in O.client.prefs.be_special_role))
 			continue
 		if(O.client)
-			O << "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])"
-
+			to_chat(O, "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
 /datum/ghosttrap/proc/target_destroyed(var/destroyed_target)
 	request_timeouts -= destroyed_target
 
@@ -81,10 +80,10 @@ var/list/ghost_traps
 		if(candidate != usr)
 			return
 		if(request_timeouts[target] && world.time > request_timeouts[target])
-			candidate << "This occupation request is no longer valid."
+			to_chat(candidate, "This occupation request is no longer valid.")
 			return
 		if(target.key)
-			candidate << "The target is already occupied."
+			to_chat(candidate, "The target is already occupied.")
 			return
 		if(assess_candidate(candidate, target))
 			transfer_personality(candidate,target)
@@ -104,10 +103,10 @@ var/list/ghost_traps
 
 // Fluff!
 /datum/ghosttrap/proc/welcome_candidate(var/mob/target)
-	target << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
-	target << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
-	target << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
-	target << "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>"
+	to_chat(target, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+	to_chat(target, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
+	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>")
+	to_chat(target, "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>")
 	var/turf/T = get_turf(target)
 	var/obj/item/device/mmi/digital/posibrain/P = target.loc
 	T.visible_message("<span class='notice'>\The [P] chimes quietly.</span>")
@@ -138,12 +137,11 @@ var/list/ghost_traps
 	ghost_trap_role = "Plant"
 
 /datum/ghosttrap/plant/welcome_candidate(var/mob/target)
-	target << "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>"
+	to_chat(target, "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>")
 	// This is a hack, replace with some kind of species blurb proc.
 	if(istype(target,/mob/living/carbon/alien/diona))
-		target << "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
-		target << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
-
+		to_chat(target, "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>")
+		to_chat(target, "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>")
 /*****************
 * Cortical Borer *
 *****************/
@@ -157,11 +155,10 @@ var/list/ghost_traps
 	list_as_special_role = FALSE
 
 /datum/ghosttrap/borer/welcome_candidate(var/mob/target)
-	target << "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
+	to_chat(target, "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
 	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
-	your host and your eventual spawn safe and warm."
-	target << "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers."
-
+	your host and your eventual spawn safe and warm.")
+	to_chat(target, "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers.")
 /********************
 * Maintenance Drone *
 *********************/

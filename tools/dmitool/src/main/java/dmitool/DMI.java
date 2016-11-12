@@ -44,6 +44,9 @@ public class DMI implements Comparator<IconState> {
     }
     
     public DMI(File f) throws DMIException, FileNotFoundException {
+        if(!f.canRead()) {
+            throw new FileNotFoundException("File cannot be found or is unreadable!");
+        }
         if(f.length() == 0) { // Empty .dmi is empty file
             w = 32;
             h = 32;

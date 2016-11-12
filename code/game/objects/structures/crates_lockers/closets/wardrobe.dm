@@ -63,6 +63,9 @@
 	new /obj/item/clothing/head/that(src)
 	new /obj/item/clothing/head/that(src)
 	new /obj/item/clothing/head/that(src)
+	new /obj/item/clothing/head/soft/black(src)
+	new /obj/item/clothing/head/soft/black(src)
+	new /obj/item/clothing/head/soft/black(src)
 	return
 
 

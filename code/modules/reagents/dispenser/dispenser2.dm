@@ -27,32 +27,32 @@
 
 /obj/machinery/chemical_dispenser/examine(mob/user)
 	..()
-	user << "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more."
+	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
 
 /obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/weapon/reagent_containers/chem_disp_cartridge/C, mob/user)
 	if(!istype(C))
 		if(user)
-			user << "<span class='warning'>\The [C] will not fit in \the [src]!</span>"
+			to_chat(user, "<span class='warning'>\The [C] will not fit in \the [src]!</span>")
 		return
 
 	if(cartridges.len >= DISPENSER_MAX_CARTRIDGES)
 		if(user)
-			user << "<span class='warning'>\The [src] does not have any slots open for \the [C] to fit into!</span>"
+			to_chat(user, "<span class='warning'>\The [src] does not have any slots open for \the [C] to fit into!</span>")
 		return
 
 	if(!C.label)
 		if(user)
-			user << "<span class='warning'>\The [C] does not have a label!</span>"
+			to_chat(user, "<span class='warning'>\The [C] does not have a label!</span>")
 		return
 
 	if(cartridges[C.label])
 		if(user)
-			user << "<span class='warning'>\The [src] already contains a cartridge with that label!</span>"
+			to_chat(user, "<span class='warning'>\The [src] already contains a cartridge with that label!</span>")
 		return
 
 	if(user)
 		user.drop_from_inventory(C)
-		user << "<span class='notice'>You add \the [C] to \the [src].</span>"
+		to_chat(user, "<span class='notice'>You add \the [C] to \the [src].</span>")
 
 	C.loc = src
 	cartridges[C.label] = C
@@ -67,7 +67,7 @@
 /obj/machinery/chemical_dispenser/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		user << "<span class='notice'>You begin to [anchored ? "un" : ""]fasten \the [src].</span>"
+		to_chat(user, "<span class='notice'>You begin to [anchored ? "un" : ""]fasten \the [src].</span>")
 		if (do_after(user, 20, src))
 			user.visible_message(
 				"<span class='notice'>\The [user] [anchored ? "un" : ""]fastens \the [src].</span>",
@@ -75,7 +75,7 @@
 				"You hear a ratchet.")
 			anchored = !anchored
 		else
-			user << "<span class='notice'>You decide not to [anchored ? "un" : ""]fasten \the [src].</span>"
+			to_chat(user, "<span class='notice'>You decide not to [anchored ? "un" : ""]fasten \the [src].</span>")
 
 	else if(istype(W, /obj/item/weapon/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
@@ -85,28 +85,28 @@
 		if(!label) return
 		var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
 		if(C)
-			user << "<span class='notice'>You remove \the [C] from \the [src].</span>"
+			to_chat(user, "<span class='notice'>You remove \the [C] from \the [src].</span>")
 			C.loc = loc
 
 	else if(istype(W, /obj/item/weapon/reagent_containers/glass) || istype(W, /obj/item/weapon/reagent_containers/food))
 		if(container)
-			user << "<span class='warning'>There is already \a [container] on \the [src]!</span>"
+			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return
 
 		var/obj/item/weapon/reagent_containers/RC = W
 
 		if(!accept_drinking && istype(RC,/obj/item/weapon/reagent_containers/food))
-			user << "<span class='warning'>This machine only accepts beakers!</span>"
+			to_chat(user, "<span class='warning'>This machine only accepts beakers!</span>")
 			return
 
 		if(!RC.is_open_container())
-			user << "<span class='warning'>You don't see how \the [src] could dispense reagents into \the [RC].</span>"
+			to_chat(user, "<span class='warning'>You don't see how \the [src] could dispense reagents into \the [RC].</span>")
 			return
 
 		container =  RC
 		user.drop_from_inventory(RC)
 		RC.loc = src
-		user << "<span class='notice'>You set \the [RC] on \the [src].</span>"
+		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
 		nanomanager.update_uis(src) // update all UIs attached to src
 
 	else
