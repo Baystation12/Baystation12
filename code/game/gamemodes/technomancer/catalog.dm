@@ -104,7 +104,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 	if(!user)
 		return 0
 
-	if(H.incapacitated())
+	if(user.incapacitated())
 		return
 
 	if(owner && user != owner)
