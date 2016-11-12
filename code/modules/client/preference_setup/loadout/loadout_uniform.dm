@@ -5,9 +5,17 @@
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
+/datum/gear/uniform/cheongsam
+	display_name = "cheongsam, white"
+	path = /obj/item/clothing/under/cheongsam
+
 /datum/gear/uniform/kilt
 	display_name = "kilt"
 	path = /obj/item/clothing/under/kilt
+
+/datum/gear/uniform/jumpskirt
+	display_name = "jumpskirt, black"
+	path = /obj/item/clothing/under/blackjumpskirt
 
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
@@ -145,6 +153,10 @@
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
 
+/datum/gear/uniform/turtleneck
+	display_name = "sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+	flags = GEAR_HAS_COLOR_SELECTION
 
 //EROS START
 
