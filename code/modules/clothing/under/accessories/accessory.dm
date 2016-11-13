@@ -542,64 +542,9 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
-//Scarves
 
+//Scarves
 /obj/item/clothing/accessory/scarf
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
-
-/obj/item/clothing/accessory/scarf/red
-	name = "red scarf"
-	icon_state = "redscarf"
-
-/obj/item/clothing/accessory/scarf/green
-	name = "green scarf"
-	icon_state = "greenscarf"
-
-/obj/item/clothing/accessory/scarf/darkblue
-	name = "dark blue scarf"
-	icon_state = "darkbluescarf"
-
-/obj/item/clothing/accessory/scarf/purple
-	name = "purple scarf"
-	icon_state = "purplescarf"
-
-/obj/item/clothing/accessory/scarf/yellow
-	name = "yellow scarf"
-	icon_state = "yellowscarf"
-
-/obj/item/clothing/accessory/scarf/orange
-	name = "orange scarf"
-	icon_state = "orangescarf"
-
-/obj/item/clothing/accessory/scarf/lightblue
-	name = "light blue scarf"
-	icon_state = "lightbluescarf"
-
-/obj/item/clothing/accessory/scarf/white
-	name = "white scarf"
 	icon_state = "whitescarf"
-
-/obj/item/clothing/accessory/scarf/black
-	name = "black scarf"
-	icon_state = "blackscarf"
-
-/obj/item/clothing/accessory/scarf/zebra
-	name = "zebra scarf"
-	icon_state = "zebrascarf"
-
-/obj/item/clothing/accessory/scarf/christmas
-	name = "christmas scarf"
-	icon_state = "christmasscarf"
-
-/obj/item/clothing/accessory/stripedredscarf
-	name = "striped red scarf"
-	icon_state = "stripedredscarf"
-
-/obj/item/clothing/accessory/stripedgreenscarf
-	name = "striped green scarf"
-	icon_state = "stripedgreenscarf"
-
-/obj/item/clothing/accessory/stripedbluescarf
-	name = "striped blue scarf"
-	icon_state = "stripedbluescarf"
