@@ -49,12 +49,12 @@
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
-	path = /obj/item/clothing/suit/poncho/poncho
+	path = /obj/item/clothing/suit/poncho/colored
 	cost = 1
 
 /datum/gear/suit/poncho/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/poncho/poncho)
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/poncho/colored)
 
 /datum/gear/suit/roles/poncho/security
 	display_name = "poncho, security"
