@@ -98,11 +98,9 @@
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
 
 /datum/gear/accessory/scarf
-    display_name = "scarf selection"
-    path = /obj/item/clothing/accessory/scarf
-/datum/gear/accessory/scarf/New()
-    ..()
-    gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/scarf)
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/locket
 	display_name = "locket"
