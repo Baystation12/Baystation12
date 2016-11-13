@@ -1,8 +1,13 @@
 /datum/gear/accessory
-	display_name = "necklace"
-	path = /obj/item/clothing/accessory/necklace
+	display_name = "black vest"
+	path = /obj/item/clothing/accessory/toggleable/vest
 	slot = slot_tie
 	sort_category = "Accessories"
+
+/datum/gear/accessory/necklace
+	display_name = "necklace"
+	path = /obj/item/clothing/accessory/necklace
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/armband
 	display_name = "armband selection"
@@ -55,10 +60,6 @@
 	ties["navy tie"] = /obj/item/clothing/accessory/navy
 	ties["horrible tie"] = /obj/item/clothing/accessory/horrible
 	gear_tweaks += new/datum/gear_tweak/path(ties)
-
-/datum/gear/accessory/det_vest
-	display_name = "black vest"
-	path = /obj/item/clothing/accessory/toggleable/vest
 
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"
