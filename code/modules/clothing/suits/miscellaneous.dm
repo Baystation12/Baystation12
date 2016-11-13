@@ -319,31 +319,31 @@
 	icon_state = "swim_red"
 	siemens_coefficient = 1
 
-/obj/item/clothing/suit/poncho/poncho
+/obj/item/clothing/suit/poncho/colored
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	icon_state = "classicponcho"
 	item_state = "classicponcho"
 
-/obj/item/clothing/suit/poncho/poncho/green
+/obj/item/clothing/suit/poncho/colored/green
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
 	icon_state = "greenponcho"
 	item_state = "greenponcho"
 
-/obj/item/clothing/suit/poncho/poncho/red
+/obj/item/clothing/suit/poncho/colored/red
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
 	icon_state = "redponcho"
 	item_state = "redponcho"
 
-/obj/item/clothing/suit/poncho/poncho/purple
+/obj/item/clothing/suit/poncho/colored/purple
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
 	icon_state = "purpleponcho"
 	item_state = "purpleponcho"
 
-/obj/item/clothing/suit/poncho/poncho/blue
+/obj/item/clothing/suit/poncho/colored/blue
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
 	icon_state = "blueponcho"
