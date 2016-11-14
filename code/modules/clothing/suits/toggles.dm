@@ -60,5 +60,5 @@
 /obj/item/clothing/suit/storage/hooded/update_icon()
 	if(suittoggled)
 		icon_state = "[initial(icon_state)]_t"
-    	else
+	else
 		icon_state = "[initial(icon_state)]"
