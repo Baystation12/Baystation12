@@ -54,6 +54,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	path = /obj/item/clothing/suit/poncho/colored
 =======
 	path = /obj/item/clothing/suit/poncho/poncho
@@ -70,6 +71,9 @@
 =======
 	path = /obj/item/clothing/suit/poncho/colored
 >>>>>>> 0d0d969... Update loadout_suit.dm
+=======
+	path = /obj/item/clothing/suit/poncho/colored
+>>>>>>> origin/dev
 	cost = 1
 
 /datum/gear/suit/poncho/New()
@@ -81,8 +85,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+>>>>>>> origin/dev
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/poncho/colored)
 
 /datum/gear/suit/roles/poncho/security
@@ -109,6 +116,7 @@
 	display_name = "poncho, cargo"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 	allowed_roles = list("Quartermaster","Cargo Technician")
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -183,6 +191,8 @@
 	display_name = "poncho, cargo"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 	allowed_roles = list("Quartermaster","Cargo Technician")
+=======
+>>>>>>> origin/dev
 
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
@@ -247,6 +257,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allowed_roles = list("Chief Engineer", "Atmospheric Technician","Station Engineer")
 =======
 	allowed_roles = list("Chief Engineer", "Atmospheric Technician")
@@ -263,6 +274,9 @@
 =======
 	allowed_roles = list("Chief Engineer", "Atmospheric Technician","Station Engineer")
 >>>>>>> b1e3e3e... fix winter coat job restriction
+=======
+	allowed_roles = list("Chief Engineer", "Atmospheric Technician","Station Engineer")
+>>>>>>> origin/dev
 
 /datum/gear/suit/wintercoat/hydro
 	display_name = "winter coat, hydroponics"
@@ -272,6 +286,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allowed_roles = list("Gardener", "Xenobiologist")
 =======
 	allowed_roles = list("Botanist", "Xenobiologist")
@@ -288,6 +303,9 @@
 =======
 	allowed_roles = list("Gardener", "Xenobiologist")
 >>>>>>> b1e3e3e... fix winter coat job restriction
+=======
+	allowed_roles = list("Gardener", "Xenobiologist")
+>>>>>>> origin/dev
 
 /datum/gear/suit/wintercoat/cargo
 	display_name = "winter coat, cargo"
@@ -302,6 +320,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	allowed_roles = list("Shaft Miner")
 =======
 	allowed_roles = list("Shaft Miner")
@@ -318,3 +337,6 @@
 =======
 	allowed_roles = list("Shaft Miner")
 >>>>>>> 0d0d969... Update loadout_suit.dm
+=======
+	allowed_roles = list("Shaft Miner")
+>>>>>>> origin/dev

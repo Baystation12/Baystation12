@@ -103,6 +103,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	display_name = "scarf"
 	path = /obj/item/clothing/accessory/scarf
 	flags = GEAR_HAS_COLOR_SELECTION
@@ -133,6 +134,11 @@
 	path = /obj/item/clothing/accessory/scarf
 	flags = GEAR_HAS_COLOR_SELECTION
 >>>>>>> f9e9971... fix for the scarf
+=======
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
+>>>>>>> origin/dev
 
 /datum/gear/accessory/locket
 	display_name = "locket"

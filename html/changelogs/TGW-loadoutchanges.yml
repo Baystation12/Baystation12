@@ -15,17 +15,21 @@ changes:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 541ac40... Update TGW-loadoutchanges.yml
 =======
 >>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
 =======
 >>>>>>> 541ac40... Update TGW-loadoutchanges.yml
+=======
+>>>>>>> origin/dev
   - rscadd: "Added department ponchos to the custom loadout."
   - rscadd: "Added department and normal winter coats to the custom loadout."
   - rscadd: "Added scarves to the custom loadout."
   - rscadd: "Added lockets to the custom loadout."
   - rscadd: "Added a new file making clothing able to take up their hoods if they have them."
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -48,3 +52,5 @@ changes:
 >>>>>>> d476c85... Rename TGW-loadout.yml to TGW-loadoutchanges.yml
 =======
 >>>>>>> 541ac40... Update TGW-loadoutchanges.yml
+=======
+>>>>>>> origin/dev

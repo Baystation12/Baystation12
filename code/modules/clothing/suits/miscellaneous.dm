@@ -322,6 +322,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /obj/item/clothing/suit/poncho/colored
 =======
 /obj/item/clothing/suit/poncho/poncho
@@ -332,6 +333,9 @@
 =======
 /obj/item/clothing/suit/poncho/colored
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+/obj/item/clothing/suit/poncho/poncho
+>>>>>>> origin/dev
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	icon_state = "classicponcho"
@@ -340,6 +344,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /obj/item/clothing/suit/poncho/colored/green
 =======
 /obj/item/clothing/suit/poncho/poncho/green
@@ -350,6 +355,9 @@
 =======
 /obj/item/clothing/suit/poncho/colored/green
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+/obj/item/clothing/suit/poncho/poncho/green
+>>>>>>> origin/dev
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
 	icon_state = "greenponcho"
@@ -358,6 +366,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /obj/item/clothing/suit/poncho/colored/red
 =======
 /obj/item/clothing/suit/poncho/poncho/red
@@ -368,6 +377,9 @@
 =======
 /obj/item/clothing/suit/poncho/colored/red
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+/obj/item/clothing/suit/poncho/poncho/red
+>>>>>>> origin/dev
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
 	icon_state = "redponcho"
@@ -376,6 +388,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /obj/item/clothing/suit/poncho/colored/purple
 =======
 /obj/item/clothing/suit/poncho/poncho/purple
@@ -386,6 +399,9 @@
 =======
 /obj/item/clothing/suit/poncho/colored/purple
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+/obj/item/clothing/suit/poncho/poncho/purple
+>>>>>>> origin/dev
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
 	icon_state = "purpleponcho"
@@ -394,6 +410,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /obj/item/clothing/suit/poncho/colored/blue
 =======
 /obj/item/clothing/suit/poncho/poncho/blue
@@ -404,6 +421,9 @@
 =======
 /obj/item/clothing/suit/poncho/colored/blue
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+/obj/item/clothing/suit/poncho/poncho/blue
+>>>>>>> origin/dev
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
 	icon_state = "blueponcho"

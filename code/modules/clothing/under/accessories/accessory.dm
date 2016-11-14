@@ -547,14 +547,18 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 4232663... Add in ponchos, winter coats, scarves and a locket
+=======
+>>>>>>> origin/dev
 
 //Scarves
 /obj/item/clothing/accessory/scarf
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
 	icon_state = "whitescarf"
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 //Scarves
@@ -613,3 +617,5 @@
 >>>>>>> 035bfca... add new clothing.
 =======
 >>>>>>> 998b6d8... scarf icon fix
+=======
+>>>>>>> origin/dev

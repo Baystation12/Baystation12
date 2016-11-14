@@ -13,6 +13,7 @@
 /obj/item/clothing/suit/storage/hooded/Destroy()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	qdel_null(hood)
 =======
 	qdel(hood)
@@ -20,6 +21,9 @@
 =======
 	qdel_null(hood)
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+	qdel_null(hood)
+>>>>>>> origin/dev
 	return ..()
 
 /obj/item/clothing/suit/storage/hooded/proc/MakeHood()
@@ -38,6 +42,7 @@
 /obj/item/clothing/suit/storage/hooded/proc/RemoveHood()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	suittoggled = 0
 	update_icon()
 =======
@@ -48,10 +53,15 @@
 	suittoggled = 0
 	update_icon()
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+	suittoggled = 0
+	update_icon()
+>>>>>>> origin/dev
 	if(ishuman(hood.loc))
 		var/mob/living/carbon/H = hood.loc
 		H.unEquip(hood, 1)
 		H.update_inv_wear_suit()
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	hood.forceMove(src)
@@ -61,6 +71,9 @@
 =======
 	hood.forceMove(src)
 >>>>>>> 5c6c2d8... Add files via upload
+=======
+	hood.forceMove(src)
+>>>>>>> origin/dev
 
 /obj/item/clothing/suit/storage/hooded/dropped()
 	RemoveHood()
@@ -80,6 +93,9 @@
 				suittoggled = 1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 				update_icon()
 				H.update_inv_wear_suit()
 	else
@@ -90,6 +106,7 @@
 		icon_state = "[initial(icon_state)]_t"
 	else
 		icon_state = "[initial(icon_state)]"
+<<<<<<< HEAD
 =======
 				icon_state = "[initial(icon_state)]_t"
 				H.update_inv_wear_suit()
@@ -113,3 +130,5 @@
 	else
 		icon_state = "[initial(icon_state)]"
 >>>>>>> 34f4898... Update toggles.dm
+=======
+>>>>>>> origin/dev
