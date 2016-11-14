@@ -119,7 +119,7 @@
 		unbuckle_mob()
 	processing_objects.Remove(src)
 	src.captured = null
-	..()
+	return ..()
 
 /obj/effect/energy_net/process()
 	countdown--
