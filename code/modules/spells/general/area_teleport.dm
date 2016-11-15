@@ -29,7 +29,7 @@
 		if(!thearea) return
 	else
 		thearea = pick(teleportlocs)
-	return(teleportlocs[thearea])
+	return list(teleportlocs[thearea])
 
 /spell/area_teleport/cast(area/thearea, mob/user)
 	if(!istype(thearea))
