@@ -140,6 +140,19 @@
 	display_name = "suitjacket selection"
 	path = /obj/item/clothing/accessory/toggleable/vest
 
+<<<<<<< HEAD
+/datum/gear/accessory/suitjacket/checkered
+	display_name = "suit jacket, checkered"
+	path = /obj/item/clothing/accessory/toggleable/checkered_jacket
+
+/datum/gear/accessory/warmer/armwarmers
+	display_name = "arm Warmers"
+	path = /obj/item/clothing/accessory/warmers/armwarmers
+
+/datum/gear/accessory/warmer/legarmers
+	display_name = "leg Warmers"
+	path = /obj/item/clothing/accessory/warmers/legwarmers
+=======
 /datum/gear/accessory/suitjacket/New()
 	..()
 	var/list/suitjacket = list()
@@ -152,3 +165,4 @@
 	gear_tweaks += new/datum/gear_tweak/path(suitjacket)
 
 //EROS FINISH
+>>>>>>> refs/remotes/ErosResearchPlatform/dev

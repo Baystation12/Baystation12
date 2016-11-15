@@ -69,6 +69,13 @@
 	icon_state = "eros_horde"
 	item_state = "eros_horde"
 
+/obj/item/clothing/accessory/collar/collar_GreyChurch
+	name = "Lying Cross Necklace"
+	desc = "Your not sure why, but this necklace fills with dread and sorrow.Perhaps if you wear it the pain will go away..."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "eros_greycollar"
+	item_state = "eros_greycollar"
+
 /obj/item/clothing/accessory/collar/collar_iron
 	name = "Iron Collar"
 	desc = "A chunky iron restrait, looks like something from a medievil dungeon, a lengthy chain leads down a ways from it's clasp...why would anyone willingly wear this?"
@@ -168,3 +175,16 @@
 	icon_state = "eros_chaps_black"
 	item_state = "eros_chaps_black"
 
+/obj/item/clothing/accessory/warmers/armwarmers
+	name = "Arm Warmers"
+	desc = "A set of cozy sleeves for your arms, cute and functional."
+	slot_flags = SLOT_TIE | SLOT_GLOVES
+	icon_state = "eros_armwarmers"
+	item_state = "eros_armwarmers"
+
+/obj/item/clothing/accessory/warmers/legwarmers
+	name = "Leg Warmers"
+	desc = "A set of cozy sleeves for your legs, cute and functional."
+	slot_flags = SLOT_TIE | SLOT_FEET
+	icon_state = "eros_legwarmers"
+	item_state = "eros_legwarmers"
