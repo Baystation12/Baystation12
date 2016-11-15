@@ -33,14 +33,14 @@ var/list/default_material_composition = list("steel" = 0, "glass" = 0, "gold" = 
 /obj/machinery/r_n_d/proc/eject(var/material, var/amount)
 	if(!(material in materials))
 		return
-	var/obj/item/stack/material/sheetType = get_material_by_name(material)
+	var/material/mat = get_material_by_name(material)
+	var/obj/item/stack/material/sheetType = mat.stack_type
 	var/perUnit = initial(sheetType.perunit)
 	var/eject = round(materials[material] / perUnit)
 	eject = amount == -1 ? eject : min(eject, amount)
 	if(eject < 1)
 		return
-	var/obj/item/stack/material/S = new sheetType(loc)
-	S.amount = eject
+	new sheetType(loc, eject)
 	materials[material] -= eject * perUnit
 
 /obj/machinery/r_n_d/proc/TotalMaterials()

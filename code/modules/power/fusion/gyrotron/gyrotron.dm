@@ -10,7 +10,7 @@ var/list/gyrotrons = list()
 	active_power_usage = 15000
 
 	var/id_tag
-	var/rate = 10
+	var/rate = 3
 	var/mega_energy = 10
 
 /obj/machinery/power/emitter/gyrotron/anchored
@@ -26,10 +26,10 @@ var/list/gyrotrons = list()
 	return ..()
 
 /obj/machinery/power/emitter/gyrotron/get_rand_burst_delay()
-	return rate
+	return rate*10
 
 /obj/machinery/power/emitter/gyrotron/get_burst_delay()
-	return rate
+	return rate*10
 
 /obj/machinery/power/emitter/gyrotron/get_emitter_beam()
 	var/obj/item/projectile/beam/emitter/E = ..()

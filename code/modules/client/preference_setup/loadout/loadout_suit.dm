@@ -42,6 +42,10 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/blue_labcoat
+	display_name = "blue-edged labcoat"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
+
 /datum/gear/suit/overalls
 	display_name = "overalls"
 	path = /obj/item/clothing/suit/apron/overalls

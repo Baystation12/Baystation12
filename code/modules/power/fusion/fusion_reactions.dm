@@ -48,7 +48,6 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	s_react = "deuterium"
 	energy_consumption = 1
 	energy_production = 1.75
-	radiation = 1
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
