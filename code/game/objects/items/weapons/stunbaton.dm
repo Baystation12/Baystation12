@@ -178,8 +178,6 @@
 	bcell = null
 	hitcost = 100
 
-	var/min_hitcost = 100
-
 // Override proc for the stun baton module, found in PC Security synthetics
 // Refactored to fix #14470 - old proc defination increased the hitcost beyond
 // usability without proper checks.
@@ -198,11 +196,10 @@
 	return
 
 /obj/item/weapon/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
-	update_cell(isrobot(user) ? user : null) // update the cost and status before we apply the effects
+	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects
 	return ..()
 
-// Updates both the baton's cell to use user's own cell and update the hitcost
-// to cost 10% of cell's max capacity
+// Updates the baton's cell to use user's own cell
 // Otherwise, if null (when the user isn't a robot), render it unuseable
 /obj/item/weapon/melee/baton/robot/proc/update_cell(mob/living/silicon/robot/user)
 	if (!user)
@@ -210,9 +207,6 @@
 		set_status(0)
 	else if (!bcell || bcell != user.cell)
 		bcell = user.cell // if it is null, nullify it anyway
-		if (bcell) // null failcheck
-			var/new_cost = bcell.maxcharge/10 // 10% of the battery's max charge
-			hitcost = new_cost <= min_hitcost ? min_hitcost : new_cost // the new cost has to be at least 100 (see min_hitcost)
 
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/weapon/melee/baton/cattleprod
