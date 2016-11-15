@@ -215,3 +215,43 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	max_ammo = 7
 	multiple_sprites = 1
+
+//---------- EROS BEGIN - MAGAZINES, BALLISTIC
+
+/obj/item/ammo_magazine/clip/a762
+	name = "ammo clip (7.62mm)"
+	icon_state = "clip_rifle"
+	caliber = "a762"
+	ammo_type = /obj/item/ammo_casing/a762
+	matter = list(DEFAULT_WALL_MATERIAL = 1000) // metal costs are very roughly based around one 7.62 casing = 200 metal
+	max_ammo = 5
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/clip/a762mmr
+	name = "ammo clip (7.62x54mmR)"
+	icon_state = "clip_rifle"
+	caliber = "a762mmr"
+	ammo_type = /obj/item/ammo_casing/a762mmr
+	matter = list(DEFAULT_WALL_MATERIAL = 1000) // metal costs are very roughly based around one 7.62 casing = 200 metal
+	max_ammo = 5
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/a762svt
+	name = "magazine (7.62x54mmR, SVT-40)"
+	icon_state = "762svt"
+	mag_type = MAGAZINE
+	caliber = "a762mmr"
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	ammo_type = /obj/item/ammo_casing/a762mmr
+	max_ammo = 10
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/c762ppsh41
+	name = "magazine (7.62x25mm, PPSh-41)"
+	icon_state = "ppsh41"
+	mag_type = MAGAZINE
+	caliber = "c762tokarev"
+	matter = list(DEFAULT_WALL_MATERIAL = 2100)
+	ammo_type = /obj/item/ammo_casing/c762tokarev
+	max_ammo = 35
+	multiple_sprites = 1
