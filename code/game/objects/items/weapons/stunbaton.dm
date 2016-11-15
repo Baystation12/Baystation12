@@ -56,16 +56,18 @@
 	else
 		set_light(0)
 
-// TODO: Change the description for the robot-module version - if you can figure that out
 /obj/item/weapon/melee/baton/examine(mob/user)
 	if(!..(user, 1))
 		return 0
+	examine_cell(user)
+	return 1
 
+// Addition made by Techhead0, thanks for fullfilling the todo!
+/obj/item/weapon/melee/baton/proc/examine_cell(mob/user)
 	if(bcell)
 		to_chat(user, "<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>")
 	if(!bcell)
 		to_chat(user, "<span class='warning'>The baton does not have a power source installed.</span>")
-	return 1
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/cell/device))
@@ -177,6 +179,10 @@
 /obj/item/weapon/melee/baton/robot
 	bcell = null
 	hitcost = 100
+
+// Addition made by Techhead0, thanks for fullfilling the todo!
+/obj/item/weapon/melee/baton/robot/examine_cell(mob/user)
+	to_chat(user, "<span class='notice'>The baton is running off an external power supply.</span>")
 
 // Override proc for the stun baton module, found in PC Security synthetics
 // Refactored to fix #14470 - old proc defination increased the hitcost beyond
