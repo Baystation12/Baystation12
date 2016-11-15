@@ -253,3 +253,14 @@
 /obj/item/projectile/bullet/pistol/cap/process()
 	loc = null
 	qdel(src)
+
+//---------- EROS BEGIN - PROJECTILES, BALLISTIC
+
+//7.62x54mmR
+/obj/item/projectile/bullet/rifle/a762mmr
+	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
+	damage = 32
+
+//7.62x25mm Tokarev
+/obj/item/projectile/bullet/pistol/tokarev
+	damage = 15 //Poor quality ammunition
