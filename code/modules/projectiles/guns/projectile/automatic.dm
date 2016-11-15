@@ -281,3 +281,34 @@
 		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
 		return
 	..()
+
+//---------- EROS BEGIN - FIREARMS, AUTOMATIC
+
+/obj/item/weapon/gun/projectile/automatic/ppsh41
+	name = "PPSh-41"
+	desc = "PPSh-41. Papasha. Burp gun. There are many things to call this homely, nigh-on ancient design of uncontrollably excessive rate of fire, but recent is not one of them. This one has an inscrutable mark on the barrel, and the receiver is by Chen-Iltchenko. Uses 35-round 7.62x25mm magazines."
+	icon_state = "ppsh41"
+	item_state = null
+	w_class = ITEM_SIZE_NORMAL
+	force = 10
+	caliber = "c762tokarev"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 1) //It's stamped and welded sheet metal with a sawn and chromed mosin barrel, what did you expect?
+	slot_flags = SLOT_BELT|SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/c762ppsh41
+	allowed_magazines = /obj/item/ammo_magazine/c762ppsh41
+	requires_two_hands = 1
+
+	//Cribbed numbers off the assault rifle with tweaks to reflect it's a kick-yourself-in-the-ass-for-using-it gun.
+	firemodes = list(
+		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, requires_two_hands=1, burst_accuracy=null, dispersion=null),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=5,    requires_two_hands=2, burst_accuracy=list(0,-1,-2),       dispersion=list(0.2, 0.6, 1.2)),
+		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=5,    requires_two_hands=4, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.2, 1.2, 1.5, 1.5)),
+		)
+
+/obj/item/weapon/gun/projectile/automatic/ppsh41/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "ppsh41"
+	else
+		icon_state = "ppsh41-empty"
