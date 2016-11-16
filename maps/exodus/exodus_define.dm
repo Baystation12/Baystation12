@@ -1,7 +1,7 @@
 
 /datum/map/exodus
-	name = "Exodus"
-	full_name = "NSS Exodus"
+	name = "Eros"
+	full_name = "Eros Research Platform"
 	path = "exodus"
 
 	lobby_icon = 'maps/exodus/exodus_lobby.dmi'
