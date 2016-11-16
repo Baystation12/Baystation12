@@ -37,7 +37,7 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
-	minimal_player_age = 7
+	minimal_player_age = 5
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist
 
 /datum/job/xenobiologist
@@ -53,7 +53,7 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
 	minimal_access = list(access_research, access_xenobiology, access_hydroponics)
 	alt_titles = list("Xenobotanist")
-	minimal_player_age = 7
+	minimal_player_age = 5
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
 
 /datum/job/roboticist
