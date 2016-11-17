@@ -29,13 +29,8 @@
 	if (locate(/mob) in src)
 		return 1
 	else
-		return 0				//Prevents Airlocks from closing on Bodybags with people inside
+		return 0				//Prevents Airlocks from closing on Bodybags and Cryobags with people inside
 	
-/obj/structure/closet/body_bag/cryobag/blocks_airlock()
-	if (locate(/mob) in src)
-		return 1
-	else
-		return 0				//Same for Cryobags
 
 //*** Airlock Crushing
 
