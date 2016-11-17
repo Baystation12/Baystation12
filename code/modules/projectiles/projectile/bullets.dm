@@ -264,3 +264,10 @@
 //7.62x25mm Tokarev
 /obj/item/projectile/bullet/pistol/tokarev
 	damage = 15 //Poor quality ammunition
+
+/obj/item/projectile/bullet/rifle/a762/ap
+	damage = 20
+	armor_penetration = 50 // At 40 or more armor, this will do more damage than standard rounds.
+
+/obj/item/projectile/bullet/rifle/practice
+	damage = 5
