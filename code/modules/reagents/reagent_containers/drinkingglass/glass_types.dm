@@ -1,7 +1,12 @@
+//Glass 'costs' are based both on  glass(vol)=571.122621(ln vol)-1734.24483,
+//                             and glass(vol)=(50/7)vol+(1000/7),
+//and put on a 1:5 log-lin weighted average. -Alice
+
 /obj/item/weapon/reagent_containers/food/drinks/glass2/square
 	name = "highball glass"
 	base_name = "glass"
 	base_icon = "square"
+	matter = list("glass" = 350)
 	filling_states = "20;40;60;80;100"
 	volume = 30
 	possible_transfer_amounts = "5;10;15;30"
@@ -11,6 +16,7 @@
 	name = "rocks glass"
 	base_name = "glass"
 	base_icon = "rocks"
+	matter = list("glass" = 250)
 	filling_states = "25;50;75;100"
 	volume = 20
 	possible_transfer_amounts = "5;10;20"
@@ -20,6 +26,7 @@
 	name = "milkshake glass"
 	base_name = "glass"
 	base_icon = "shake"
+	matter = list("glass" = 375) //Stemware
 	filling_states = "25;50;75;100"
 	volume = 30
 	possible_transfer_amounts = "5;10;15;30"
@@ -29,6 +36,7 @@
 	name = "cocktail glass"
 	base_name = "glass"
 	base_icon = "cocktail"
+	matter = list("glass" = 250) //Stemware
 	filling_states = "33;66;100"
 	volume = 15
 	possible_transfer_amounts = "5;10;15"
@@ -38,6 +46,7 @@
 	name = "shot glass"
 	base_name = "shot"
 	base_icon = "shot"
+	matter = list("glass" = 100)
 	filling_states = "33;66;100"
 	volume = 5
 	possible_transfer_amounts = "1;2;5"
@@ -47,6 +56,7 @@
 	name = "pint glass"
 	base_name = "pint"
 	base_icon = "pint"
+	matter = list("glass" = 600) //Fat tunc
 	filling_states = "16;33;50;66;83;100"
 	volume = 60
 	possible_transfer_amounts = "5;10;15;30;60"
@@ -56,6 +66,7 @@
 	name = "glass mug"
 	base_name = "mug"
 	base_icon = "mug"
+	matter = list("glass" = 475) //Handle
 	filling_states = "25;50;75;100"
 	volume = 40
 	possible_transfer_amounts = "5;10;20;40"
@@ -65,6 +76,7 @@
 	name = "wine glass"
 	base_name = "glass"
 	base_icon = "wine"
+	matter = list("glass" = 350) //Stemware
 	filling_states = "20;40;60;80;100"
 	volume = 25
 	possible_transfer_amounts = "5;10;15;25"

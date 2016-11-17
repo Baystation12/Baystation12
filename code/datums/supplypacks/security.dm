@@ -414,3 +414,26 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Tactical Suit Locker"
 	access = access_armory
+
+/decl/hierarchy/supply_pack/security/bolt_rifles_mosin
+	name = "Surplus militia rifle crate"
+	contains = list(/obj/item/weapon/gun/projectile/shotgun/pump/rifle/mosin = 3,
+					/obj/item/ammo_magazine/clip/a762mmr = 6)
+	cost = 40
+	hidden = 1
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper Weapons crate"
+
+/decl/hierarchy/supply_pack/security/slavshit
+	name = "Surplus militia squad crate"
+	contains = list(/obj/item/weapon/gun/projectile/shotgun/pump/rifle/mosin = 4,
+					/obj/item/weapon/gun/projectile/svt40,
+					/obj/item/weapon/gun/projectile/automatic/ppsh41,
+					/obj/item/ammo_magazine/clip/a762mmr = 8,
+					/obj/item/ammo_magazine/a762svt = 2,
+					/obj/item/ammo_magazine/c762ppsh41 = 2,
+					/obj/item/clothing/under/soviet = 6)
+	cost = 100
+	hidden = 1
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper Weapons crate"

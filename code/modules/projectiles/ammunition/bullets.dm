@@ -174,3 +174,32 @@
 	caliber = "caps"
 	color = "#FF0000"
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
+
+// ---------- EROS BEGIN - CARTRIDGES, BALLISTIC
+
+/obj/item/ammo_casing/a762/ap
+	desc = "A 7.62mm armor-piercing bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/a762/ap
+
+/obj/item/ammo_casing/a762p
+	desc = "A 7.62mm practice bullet casing."
+	caliber = "a762"
+	icon_state = "rifle-casing" // Need to make an icon for these
+	projectile_type = /obj/item/projectile/bullet/rifle/practice
+
+/obj/item/ammo_casing/a762/blank
+	desc = "A blank 7.62mm bullet casing."
+	projectile_type = /obj/item/projectile/bullet/blank
+	matter = list(DEFAULT_WALL_MATERIAL = 90)
+
+/obj/item/ammo_casing/a762mmr
+	desc = "A 7.62x54mmR bullet casing."
+	caliber = "a762mmr"
+	icon_state = "rifle-casing"
+	spent_icon = "rifle-casing-spent"
+	projectile_type = /obj/item/projectile/bullet/rifle/a762mmr
+
+/obj/item/ammo_casing/c762tokarev
+	desc = "A 7.62x25mm bullet casing."
+	caliber = "c762tokarev"
+	projectile_type = /obj/item/projectile/bullet/pistol/tokarev

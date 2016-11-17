@@ -429,6 +429,30 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/clip_762
+	name = "ammunition (clip, 7.62mm)"
+	path = /obj/item/ammo_magazine/clip/a762
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/clip_762mmr
+	name = "ammunition (clip, 7.62x54mmR)"
+	path = /obj/item/ammo_magazine/clip/a762mmr
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_svt40
+	name = "ammunition (magazine, 7.62mmx54mmR)"
+	path = /obj/item/ammo_magazine/a762svt
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_ppsh41
+	name = "ammunition (magazine, 7.62x25mm)"
+	path = /obj/item/ammo_magazine/c762ppsh41
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/rcd
 	name = "rapid construction device"
 	path = /obj/item/weapon/rcd
