@@ -1,14 +1,5 @@
 //Here goes the partials that complement the clothes of eros.
 
-/obj/item/clothing/under
-	var/show_boobs = 0
-	var/show_genitals = 0
-
-
-/obj/item/clothing/suit
-	var/show_boobs = 0
-	var/show_genitals = 0
-
 /obj/item/clothing/under/verb/rollsuit()
 	set name = "Roll Down Clothes"
 	set category = "Object"

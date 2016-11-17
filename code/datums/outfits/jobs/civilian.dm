@@ -97,3 +97,67 @@
 	l_hand = /obj/item/weapon/storage/bible
 	id_type = /obj/item/weapon/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
+
+//EROS START
+
+/decl/hierarchy/outfit/job/entertainer
+	name = OUTFIT_JOB_NAME("Entertainer")
+	uniform = /obj/item/clothing/under/rank/internalaffairs
+	shoes = /obj/item/clothing/shoes/chameleon
+	backpack = /obj/item/weapon/storage/backpack/chameleon
+	satchel_one = /obj/item/weapon/storage/backpack/chameleon/entertainer
+	satchel_two = /obj/item/weapon/storage/backpack/chameleon/entertainer
+	id_type = /obj/item/weapon/card/id/civilian/entertainer
+	pda_type = /obj/item/device/pda
+	backpack_contents = list(/obj/item/weapon/storage/box/syndie_kit/chameleon/entertainer = 1, /obj/item/clothing/suit/chameleon/entertainer = 1, /obj/item/clothing/under/chameleon/entertainer = 1)
+
+/decl/hierarchy/outfit/job/entertainer/clown
+	name = OUTFIT_JOB_NAME("Clown")
+	uniform = /obj/item/clothing/under/rank/clown
+	shoes = /obj/item/clothing/shoes/clown_shoes
+	mask = /obj/item/clothing/mask/gas/clown_hat
+	backpack = /obj/item/weapon/storage/backpack/clown
+	satchel_one = /obj/item/weapon/storage/backpack/clown
+	satchel_two = /obj/item/weapon/storage/backpack/clown
+	pda_type = /obj/item/device/pda/clown
+	l_hand = /obj/item/weapon/bikehorn
+	backpack_contents = list(/obj/item/weapon/pen/crayon/rainbow = 1, /obj/item/toy/waterflower = 1, /obj/item/weapon/reagent_containers/food/snacks/egg/rainbow  = 3)
+
+/decl/hierarchy/outfit/job/entertainer/mime
+	name = OUTFIT_JOB_NAME("Mime")
+	uniform = /obj/item/clothing/under/mime
+	suit = /obj/item/clothing/suit/suspenders
+	shoes = /obj/item/clothing/shoes/mime
+	mask = /obj/item/clothing/mask/gas/mime
+	head = /obj/item/clothing/head/beret
+	backpack = /obj/item/weapon/storage/backpack
+	satchel_one = /obj/item/weapon/storage/backpack/satchel_norm
+	satchel_two = /obj/item/weapon/storage/backpack/satchel
+	pda_type = /obj/item/device/pda/mime
+	backpack_contents = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing = 1, /obj/item/weapon/pen/crayon/mime = 1, /obj/item/clothing/gloves/white = 1)
+
+/decl/hierarchy/outfit/job/entertainer/artist
+	name = OUTFIT_JOB_NAME("Artist")
+	uniform = /obj/item/clothing/under/color/rainbow
+	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	shoes = /obj/item/clothing/shoes/rainbow
+	head = /obj/item/clothing/head/beret
+	backpack = /obj/item/weapon/storage/backpack
+	satchel_one = /obj/item/weapon/storage/backpack/satchel_norm
+	satchel_two = /obj/item/weapon/storage/backpack/satchel
+	l_hand = /obj/item/device/floor_painter
+	backpack_contents = list(/obj/item/weapon/pen/multi = 1, /obj/item/weapon/storage/fancy/crayons = 2, /obj/item/device/cable_painter = 1,  /obj/item/stack/cable_coil/random = 3)
+
+/decl/hierarchy/outfit/job/entertainer/violinist
+	name = OUTFIT_JOB_NAME("Violinist")
+	uniform = /obj/item/clothing/under/rank/internalaffairs
+	suit = /obj/item/clothing/suit/wcoat
+	shoes = /obj/item/clothing/shoes/laceup
+	backpack = /obj/item/weapon/storage/backpack
+	satchel_one = /obj/item/weapon/storage/backpack/satchel_norm
+	satchel_two = /obj/item/weapon/storage/backpack/satchel
+	l_hand = /obj/item/device/violin
+	backpack_contents = list(/obj/item/device/violin/secondary = 1, /obj/item/device/violin/backup = 1, /obj/item/device/violin/emergency = 1)
+
+
+//EROS FINISH

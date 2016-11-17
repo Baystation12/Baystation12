@@ -14,6 +14,8 @@
 	item_state = copy.item_state
 	body_parts_covered = copy.body_parts_covered
 	flags_inv = copy.flags_inv
+	show_genitals = copy.show_genitals
+	show_boobs = copy.show_boobs
 
 	if(copy.item_icons)
 		item_icons = copy.item_icons.Copy()

@@ -34,6 +34,8 @@
 	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
 	var/flags_inv = 0
 	var/body_parts_covered = 0 //see setup.dm for appropriate bit flags
+	var/show_genitals = 0 //used for blocking genitals
+	var/show_boobs = 0 //used for blocking boobs
 
 	var/item_flags = 0 //Miscellaneous flags pertaining to equippable objects.
 

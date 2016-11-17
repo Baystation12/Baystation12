@@ -1233,6 +1233,7 @@
 #include "code\modules\economy\TradeDestinations.dm"
 #include "code\modules\eros\clothing\accessory.dm"
 #include "code\modules\eros\clothing\clothing.dm"
+#include "code\modules\eros\clothing\entertainer.dm"
 #include "code\modules\eros\clothing\glasses.dm"
 #include "code\modules\eros\clothing\head.dm"
 #include "code\modules\eros\clothing\hooded.dm"
