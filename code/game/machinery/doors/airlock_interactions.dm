@@ -25,11 +25,17 @@
 /mob/living/blocks_airlock()
 	return 1
 	
-/obj/structure/closet/body_bag/blocks_airlock() //These two lines prevent Airlocks from closing on Body- and stasisbags, thus ejecting the occupant
-	return 1
-
+/obj/structure/closet/body_bag/blocks_airlock()
+	if (locate(/mob) in src)
+		return 1
+	else
+		return 0				//Prevents Airlocks from closing on Bodybags with people inside
+	
 /obj/structure/closet/body_bag/cryobag/blocks_airlock()
-	return 1
+	if (locate(/mob) in src)
+		return 1
+	else
+		return 0				//Same for Cryobags
 
 //*** Airlock Crushing
 
