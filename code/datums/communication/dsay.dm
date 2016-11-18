@@ -29,8 +29,8 @@
 	for(var/mob/M in player_list)
 		if(!speech_method.can_receive(communicator, M))
 			continue
-		message = speech_method.get_message(communicator, M, message)
-		receive_communication(communicator, M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [message]</span>")
+		var/sent_message = speech_method.get_message(communicator, M, message)
+		receive_communication(communicator, M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [sent_message]</span>")
 
 /decl/dsay_communication/proc/can_communicate(var/client/communicator, var/message)
 	if(communicator.mob.stat != DEAD)
