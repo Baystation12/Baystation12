@@ -24,6 +24,13 @@
 
 /mob/living/blocks_airlock()
 	return 1
+	
+/obj/structure/closet/body_bag/blocks_airlock()
+	if (locate(/mob) in src)
+		return 1
+	else
+		return 0				//Prevents Airlocks from closing on Bodybags and Cryobags with people inside
+	
 
 //*** Airlock Crushing
 
