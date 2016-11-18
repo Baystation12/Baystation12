@@ -76,12 +76,3 @@
 	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
 	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/lawyer/purpjacket
 	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
-
-/datum/gear/suit/suspenders
-	display_name = "suspenders"
-	path = /obj/item/clothing/suit/suspenders
-
-/datum/gear/suit/wcoat
-	display_name = "waistcoat"
-	path = /obj/item/clothing/suit/wcoat
-	cost = 1

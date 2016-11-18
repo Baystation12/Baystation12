@@ -1559,7 +1559,7 @@
 "DZ" = (/turf/simulated/shuttle/wall{icon_state = "swall_t"; dir = 4},/area/shuttle/escape/centcom)
 "Ea" = (/turf/simulated/floor/shuttle/white,/area/shuttle/escape/centcom)
 "Eb" = (/obj/structure/bed/roller,/turf/simulated/floor/shuttle/white,/area/shuttle/escape/centcom)
-"Ec" = (/obj/structure/table/woodentable{dir = 5},/obj/item/clothing/under/suit_jacket,/obj/item/clothing/suit/wcoat,/obj/item/clothing/head/that{pixel_x = 4; pixel_y = 6},/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/holding)
+"Ec" = (/obj/structure/table/woodentable{dir = 5},/obj/item/clothing/under/suit_jacket,/obj/item/clothing/accessory/wcoat,/obj/item/clothing/head/that{pixel_x = 4; pixel_y = 6},/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/holding)
 "Ed" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor/shuttle/white,/area/skipjack_station/start)
 "Ee" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/spesslaw,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
 "Ef" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/candiedapple,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
