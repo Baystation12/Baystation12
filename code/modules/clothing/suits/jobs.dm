@@ -216,10 +216,10 @@
 	/obj/item/weapon/cautery,/obj/item/weapon/bonegel,/obj/item/weapon/FixOVein)
 
 //Mime
-/obj/item/clothing/suit/suspenders
-	name = "suspenders"
-	desc = "They suspend the illusion of the mime's play."
-	icon = 'icons/obj/clothing/belts.dmi'
-	icon_state = "suspenders"
-	blood_overlay_type = "armor" //it's the less thing that I can put here
-	body_parts_covered = 0
+///obj/item/clothing/suit/suspenders
+//	name = "suspenders"
+//	desc = "They suspend the illusion of the mime's play."
+//	icon = 'icons/obj/clothing/belts.dmi'
+//	icon_state = "suspenders"
+//	blood_overlay_type = "armor" //it's the less thing that I can put here
+//	body_parts_covered = 0
