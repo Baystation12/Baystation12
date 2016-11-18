@@ -96,8 +96,9 @@
 
 /obj/item/clothing/under/rank/scientist/skirt
 	name = "scientist's jumpskirt"
-	icon_state = "sciencewhitef"
-	worn_state = "sciencewhitef"
+	icon_state = "sciencef"
+	item_state = "sciencef"
+	worn_state = "sciencef"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 
@@ -108,8 +109,9 @@
 
 /obj/item/clothing/under/rank/medical/chemist/skirt
 	name = "chemist's jumpskirt"
-	icon_state = "chemistrywhitef"
-	worn_state = "chemistrywhitef"
+	icon_state = "chemistryf"
+	item_state = "chemistryf"
+	worn_state = "chemistryf"
 
 /obj/item/clothing/under/rank/medical/chief_medical_officer/skirt
 	desc = "It's a jumpskirt worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
@@ -124,8 +126,9 @@
 
 /obj/item/clothing/under/rank/medical/virologist/skirt
 	name = "virologist's jumpskirt"
-	icon_state = "virologywhitef"
-	worn_state = "virologywhitef"
+	icon_state = "virologyf"
+	item_state = "virologyf"
+	worn_state = "virologyf"
 
 /obj/item/clothing/under/rank/security/skirt
 	name = "security officer's jumpskirt"
@@ -146,6 +149,6 @@
 /obj/item/clothing/under/rank/security/head_of_security/skirt
 	desc = "It's a fashionable jumpskirt worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
 	name = "head of security's jumpskirt"
-	icon_state = "hosredf"
-	item_state = "r_suit"
-	worn_state = "hosredf"
+	icon_state = "hosf"
+	item_state = "hosf"
+	worn_state = "hosf"

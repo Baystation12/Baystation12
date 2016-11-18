@@ -16,6 +16,7 @@
 	desc = "A discreet, versatile vibrator, and don't you let its size fool you. Still one of the most popular vibes on the market."
 	icon_state = "bulletvibe"
 	item_state = "bulletvibe"
+	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30) // Same as a welder, fun fact. -A
 	attack_verb = list("pleasured", "vibrated", "teased", "poked")
 
 
@@ -45,6 +46,7 @@
 	desc = "That metal is unyielding and unforgiving."
 	icon_state = "metal_dildo"
 	item_state = "metal_dildo"
+	matter = list(DEFAULT_WALL_MATERIAL = 300) //HARD AS SOLID STEEL -A
 
 /obj/item/weapon/eros/sex/dildos/canine
 	name = "canine dildo"

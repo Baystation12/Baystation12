@@ -35,6 +35,7 @@
 	icon_state = "lantern"
 	desc = "A mining lantern."
 	brightness_on = 6			// luminosity when on
+	matter = list(DEFAULT_WALL_MATERIAL = 5000,"glass" = 2000) //For autolathe fuckery. Light is brighter and looks heavy duty.
 
 /*****************************Pickaxe********************************/
 

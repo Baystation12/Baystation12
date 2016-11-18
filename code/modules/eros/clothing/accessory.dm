@@ -108,62 +108,77 @@
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
 	icon_state = "eros_scarf"
+	item_state = "eros_scarf"
 
 /obj/item/clothing/accessory/scarf/red
 	name = "red scarf"
 	icon_state = "eros_redscarf"
+	item_state = "eros_redscarf"
 
 /obj/item/clothing/accessory/scarf/green
 	name = "green scarf"
 	icon_state = "eros_greenscarf"
+	item_state = "eros_greenscarf"
 
 /obj/item/clothing/accessory/scarf/darkblue
 	name = "dark blue scarf"
 	icon_state = "eros_darkbluescarf"
+	item_state = "eros_darkbluescarf"
 
 /obj/item/clothing/accessory/scarf/purple
 	name = "purple scarf"
 	icon_state = "eros_purplescarf"
+	item_state = "eros_purplescarf"
 
 /obj/item/clothing/accessory/scarf/yellow
 	name = "yellow scarf"
 	icon_state = "eros_yellowscarf"
+	item_state = "eros_yellowscarf"
 
 /obj/item/clothing/accessory/scarf/orange
 	name = "orange scarf"
 	icon_state = "eros_orangescarf"
+	item_state = "eros_orangescarf"
 
 /obj/item/clothing/accessory/scarf/lightblue
 	name = "light blue scarf"
 	icon_state = "eros_lightbluescarf"
+	item_state = "eros_lightbluescarf"
 
 /obj/item/clothing/accessory/scarf/white
 	name = "white scarf"
 	icon_state = "eros_whitescarf"
+	item_state = "eros_whitescarf"
 
 /obj/item/clothing/accessory/scarf/black
 	name = "black scarf"
 	icon_state = "eros_blackscarf"
+	item_state = "eros_blackscarf"
 
 /obj/item/clothing/accessory/scarf/zebra
 	name = "zebra scarf"
 	icon_state = "eros_zebrascarf"
+	item_state = "eros_zebrascarf"
 
 /obj/item/clothing/accessory/scarf/christmas
 	name = "christmas scarf"
 	icon_state = "eros_christmasscarf"
+	item_state = "eros_christmasscarf"
 
 /obj/item/clothing/accessory/stripedredscarf
 	name = "striped red scarf"
 	icon_state = "eros_stripedredscarf"
+	item_state = "eros_stripedredscarf"
 
 /obj/item/clothing/accessory/stripedgreenscarf
 	name = "striped green scarf"
 	icon_state = "eros_stripedgreenscarf"
+	item_state = "eros_stripedgreenscarf"
 
 /obj/item/clothing/accessory/stripedbluescarf
 	name = "striped blue scarf"
 	icon_state = "eros_stripedbluescarf"
+	item_state = "eros_stripedbluescarf"
 
 /obj/item/clothing/accessory/chaps
 	name = "brown chaps"
