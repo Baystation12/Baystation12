@@ -41,7 +41,7 @@
 	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/device/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
-	suit = /obj/item/clothing/suit/wcoat
+	suit = /obj/item/clothing/accessory/wcoat
 	l_pocket = /obj/item/weapon/melee/energy/sword
 
 	id_slot = slot_wear_id
