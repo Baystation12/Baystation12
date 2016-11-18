@@ -67,6 +67,11 @@
 	path = /obj/item/device/flashlight
 	category = "General"
 
+/datum/autolathe/recipe/lantern
+	name = "lantern"
+	path = /obj/item/device/flashlight/lantern
+	category = "General"
+
 /datum/autolathe/recipe/floor_light
 	name = "floor light"
 	path = /obj/machinery/floor_light
