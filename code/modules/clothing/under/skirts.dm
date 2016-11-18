@@ -126,8 +126,8 @@
 
 /obj/item/clothing/under/rank/medical/virologist/skirt
 	name = "virologist's jumpskirt"
-	icon_state = "virologywhitef"
-	item_state = "virologywhitef"
+	icon_state = "virologyf"
+	item_state = "virologyf"
 	worn_state = "virologyf"
 
 /obj/item/clothing/under/rank/security/skirt
