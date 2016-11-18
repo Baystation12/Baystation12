@@ -492,3 +492,15 @@
 	name = "device cell"
 	path = /obj/item/weapon/cell/device/standard
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/metal_dildo
+	name = "metal dildo"
+	path = /obj/item/weapon/eros/sex/dildos/metal_dildo
+	hidden = 1
+	category = "General"
+
+/datum/autolathe/recipe/bulletvibe
+	name = "bullet vibrator"
+	path = /obj/item/weapon/eros/sex/bulletvibe
+	hidden = 1
+	category = "General"
