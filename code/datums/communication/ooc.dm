@@ -46,8 +46,8 @@
 	for(var/client/target in clients)
 		if(target.is_key_ignored(communicator.key)) // If we're ignored by this person, then do nothing.
 			continue
-		message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> <span class='message'>[message]</span>"
+		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> <span class='message'>[message]</span>"
 		if(can_badmin)
-			receive_communication(communicator, target, "<font color='[ooc_color]'><span class='ooc'>[message]</font></span>")
+			receive_communication(communicator, target, "<font color='[ooc_color]'><span class='ooc'>[sent_message]</font></span>")
 		else
-			receive_communication(communicator, target, "<span class='ooc'><span class='[ooc_style]'>[message]</span></span>")
+			receive_communication(communicator, target, "<span class='ooc'><span class='[ooc_style]'>[sent_message]</span></span>")
