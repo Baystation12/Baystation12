@@ -1,0 +1,6 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "The AI can now speak all languages that are available to station races."
