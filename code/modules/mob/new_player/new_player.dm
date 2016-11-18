@@ -6,7 +6,6 @@
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
-	var/highjob
 	universal_speak = 1
 
 	invisibility = 101
@@ -36,8 +35,6 @@
 	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
 		if(ready)
 			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
-			highjob = input("what job(s) do you have selected?") as text
-
 		else
 			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
 
@@ -90,7 +87,10 @@
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in player_list)
-				stat("[player.key]", (player.ready)?("(Playing) as [highjob]"):(null))
+				var/highjob
+				if(player.client && player.client.prefs.job_high)
+ 					highjob = " as [player.client.prefs.job_high]"
+				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
