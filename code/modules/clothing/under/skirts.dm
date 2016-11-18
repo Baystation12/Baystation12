@@ -109,8 +109,8 @@
 
 /obj/item/clothing/under/rank/medical/chemist/skirt
 	name = "chemist's jumpskirt"
-	icon_state = "chemistrywhitef"
-	item_state = "chemistrywhitef"
+	icon_state = "chemistryf"
+	item_state = "chemistryf"
 	worn_state = "chemistryf"
 
 /obj/item/clothing/under/rank/medical/chief_medical_officer/skirt
