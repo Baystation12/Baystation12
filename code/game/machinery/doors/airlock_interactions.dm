@@ -64,7 +64,9 @@
 	SetStunned(round(crush_damage / 8, 1))
 	SetWeakened(round(crush_damage / 8, 1))
 
-	var/turf/T = get_turf(src)
+	var/turf/T = loc
+	if(!istype(T))
+		return	
 
 	var/list/valid_turfs = list()
 	for(var/dir_to_test in cardinal)
