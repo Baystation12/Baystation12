@@ -21,7 +21,7 @@
 
 /atom/movable/New()
 	..()
-	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
+	if(auto_init && (initialization_stage & INITIALIZATION_COMPLETE))
 		initialize()
 
 /atom/movable/Del()
