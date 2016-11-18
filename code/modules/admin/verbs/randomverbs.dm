@@ -51,7 +51,7 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	var/msg = sanitize(input("Message:", text("Subtle PM to [M.key]")) as text)
+	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text
 
 	if (!msg)
 		return
@@ -106,7 +106,7 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text)
+	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text
 
 	if (!msg)
 		return
@@ -129,7 +129,7 @@
 	if(!M)
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+	var/msg = input("Message:", text("Enter the text you wish to appear to your target:")) as text
 
 	if( !msg )
 		return
