@@ -2,7 +2,7 @@
 	if(config.use_irc_bot && config.irc_bot_host)
 		if(config.irc_bot_export)
 			spawn(-1) // spawn here prevents hanging in the case that the bot isn't reachable
-				world.Export("http://[config.irc_bot_host]:45678?[list2params(list(pwd=config.comms_password, chan=channel, mesg=msg))]")
+				world.Export("http://[config.irc_bot_host]:45678?[list2params(list(pwd=config.comms_password, type="msg", chan=channel, mesg=msg))]")
 		else
 			if(config.use_lib_nudge)
 				var/nudge_lib
@@ -17,6 +17,11 @@
 				spawn(0)
 					ext_python("ircbot_message.py", "[config.comms_password] [config.irc_bot_host] [channel] [msg]")
 	return
+
+/proc/runtimes2irc(runtimes, revision)
+	if(config.use_irc_bot && config.irc_bot_host && config.irc_bot_export)
+		spawn(-1)
+			world.Export("http://[config.irc_bot_host]:45678?[list2params(list(pwd=config.comms_password, type="runtime", runtimes=runtimes, revision=revision))]")
 
 /proc/send2mainirc(var/msg)
 	if(config.main_irc)
