@@ -87,7 +87,10 @@
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in player_list)
-				stat("[player.key]", (player.ready)?("(Playing)"):(null))
+				var/highjob
+				if(player.client && player.client.prefs.job_high)
+					highjob = " as [player.client.prefs.job_high]"
+				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
