@@ -1236,6 +1236,7 @@
 #include "code\modules\economy\TradeDestinations.dm"
 #include "code\modules\error_handler\_defines.dm"
 #include "code\modules\error_handler\error_handler.dm"
+#include "code\modules\error_handler\error_reporting.dm"
 #include "code\modules\error_handler\error_viewer.dm"
 #include "code\modules\error_handler\~defines.dm"
 #include "code\modules\events\apc_damage.dm"
