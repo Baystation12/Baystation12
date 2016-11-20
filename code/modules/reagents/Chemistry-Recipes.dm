@@ -2155,7 +2155,7 @@
 	name = "Oxyphoron"
 	id = "oxyphoron"
 	result = "oxyphoron"
-	required_reagents = list("water" = 1, "phoron" = 1)
+	required_reagents = list("radium" = 1, "phoron" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/deuterium
