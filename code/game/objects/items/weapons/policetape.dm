@@ -350,7 +350,7 @@ var/list/tape_roll_applications = list()
 
 
 
-/obj/item/tape/proc/breaktape(mob/user as mob)
+/obj/item/tape/proc/breaktape(mob/user)
 	if(user.a_intent == I_HELP)
 		to_chat(user, "<span class='warning'>You refrain from breaking \the [src].</span>")
 		return
