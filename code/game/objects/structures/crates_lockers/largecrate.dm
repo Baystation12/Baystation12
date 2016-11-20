@@ -81,3 +81,24 @@
 	name = "chicken crate"
 	held_count = 5
 	held_type = /mob/living/simple_animal/chick
+
+//---------- EROS BEGIN - SPECIAL LARGE CRATES
+
+/obj/structure/largecrate/anomaly
+	name = "anomaly crate"
+	desc = "A specially designed crate filled with argon gas and lined with Etherium-482 \"Telekill\" alloy to suppress and contain anomalous effects."
+	icon_state = "anomalycrate"
+
+/obj/structure/largecrate/anomaly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/crowbar))
+		new /obj/item/stack/material/steel(src)
+		new /obj/machinery/artifact(src)
+		var/turf/T = get_turf(src)
+		for(var/atom/movable/AM in contents)
+			if(AM.simulated) AM.forceMove(T)
+		user.visible_message("<span class='notice'>[user] pries \the [src] apart. The inert gas escapes, making the alloy lining evaporate.</span>", \
+							 "<span class='notice'>You pry \the [src] apart. The inert gas escapes, making the alloy lining evaporate.</span>", \
+							 "<span class='notice'>You hear groaning metal and a momentary rush of wind.</span>")
+		qdel(src)
+	else
+		return attack_hand(user)
