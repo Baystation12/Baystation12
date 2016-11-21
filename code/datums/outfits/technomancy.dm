@@ -7,12 +7,14 @@
 	hierarchy_type = /decl/hierarchy/outfit/technomancer
 
 /decl/hierarchy/outfit/technomancer/master
+	name = "Technomancer Master"
 	uniform = /obj/item/clothing/under/technomancer/master
 	head = /obj/item/clothing/head/technomancer/master
 	l_pocket = /obj/item/weapon/technomancer_catalog
 	id_pda_assignment = "Technomagus"
 
 /decl/hierarchy/outfit/technomancer/apprentice
+	name = "Technomancer Apprentice"
 	uniform = /obj/item/clothing/under/technomancer/apprentice
 	head = /obj/item/clothing/head/technomancer/apprentice
 	l_pocket = /obj/item/weapon/technomancer_catalog/apprentice
