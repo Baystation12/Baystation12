@@ -1651,6 +1651,7 @@
 #include "code\modules\mob\observer\freelook\ai\chunk.dm"
 #include "code\modules\mob\observer\freelook\ai\eye.dm"
 #include "code\modules\mob\observer\freelook\ai\update_triggers.dm"
+#include "code\modules\mob\observer\ghost\follow.dm"
 #include "code\modules\mob\observer\ghost\ghost.dm"
 #include "code\modules\mob\observer\ghost\login.dm"
 #include "code\modules\mob\observer\ghost\logout.dm"
