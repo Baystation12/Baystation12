@@ -8,3 +8,7 @@
 
 # force changelog merging to use union
 html/changelog.html merge=union
+
+# Always give the following files Windows-style line endings
+*.dm  text eol=crlf
+*.dmm text eol=crlf
