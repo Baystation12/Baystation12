@@ -4,6 +4,9 @@
 
 	animate_movement = 2
 	flags = PROXMOVE
+
+	virtual_mob = /mob/observer/virtual/mob
+
 	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 

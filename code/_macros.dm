@@ -13,6 +13,8 @@
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
+#define isatom(A) istype(A, /atom)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
@@ -59,6 +61,8 @@
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
+#define isvirtualmob(A) istype(A, /mob/observer/virtual)
+
 #define isweakref(A) istype(A, /weakref)
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
@@ -85,3 +89,5 @@
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 
 #define qdel_null(x) if(x) { qdel(x) ; x = null }
+
+#define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }

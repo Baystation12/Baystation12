@@ -413,53 +413,6 @@ proc/is_blind(A)
 			mobs += M
 	return mobs
 
-//Direct dead say used both by emote and say
-//It is somewhat messy. I don't know what to do.
-//I know you can't see the change, but I rewrote the name code. It is significantly less messy now
-/proc/say_dead_direct(var/message, var/mob/subject = null)
-	var/name
-	var/keyname
-	if(subject && subject.client)
-		var/client/C = subject.client
-		keyname = C.key
-		if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
-			var/mindname
-			var/realname = C.mob.real_name
-			if(C.mob.mind)
-				mindname = C.mob.mind.name
-				if(C.mob.mind.original && C.mob.mind.original.real_name)
-					realname = C.mob.mind.original.real_name
-			if(mindname && mindname != realname)
-				name = "[realname] died as [mindname]"
-			else
-				name = realname
-
-	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
-			var/follow
-			var/lname
-			if(subject)
-				if(M.is_key_ignored(subject.client.key)) // If we're ignored, do nothing.
-					continue
-				if(subject != M)
-					follow = "([ghost_follow_link(subject, M)]) "
-				if(M.stat != DEAD && M.client.holder)
-					follow = "([admin_jump_link(subject, M.client.holder)]) "
-				var/mob/observer/ghost/DM
-				if(isghost(subject))
-					DM = subject
-				if(M.client.holder) 							// What admins see
-					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
-				else
-					if(DM && DM.anonsay)						// If the person is actually observer they have the option to be anonymous
-						lname = "Ghost of [name]"
-					else if(DM)									// Non-anons
-						lname = "[keyname] ([name])"
-					else										// Everyone else (dead people who didn't ghost yet, etc.)
-						lname = name
-				lname = "<span class='name'>[lname]</span> "
-			to_chat(M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>")
-
 //Announces that a ghost has joined/left, mainly for use with wizards
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
 	var/client/C
@@ -491,9 +444,10 @@ proc/is_blind(A)
 		if(!name)
 			name = C.key
 		if(joined_ghosts)
-			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
+			message = "The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]"
 		else
-			say_dead_direct("<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")
+			message = "<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]"
+		communicate(/decl/communication_channel/dsay, C || O, message, /decl/dsay_communication/direct)
 
 /mob/proc/switch_to_camera(var/obj/machinery/camera/C)
 	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded || !canmove))

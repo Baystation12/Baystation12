@@ -33,27 +33,4 @@
 				audible_message(message, checkghosts = /datum/client_preference/ghost_sight)
 
 /mob/proc/emote_dead(var/message)
-
-	if(client.prefs.muted & MUTE_DEADCHAT)
-		to_chat(src, "<span class='danger'>You cannot send deadchat emotes (muted).</span>")
-		return
-
-	if(!is_preference_enabled(/datum/client_preference/show_dsay))
-		to_chat(src, "<span class='danger'>You have deadchat muted.</span>")
-		return
-
-	if(!src.client.holder)
-		if(!config.dsay_allowed)
-			to_chat(src, "<span class='danger'>Deadchat is globally muted.</span>")
-			return
-
-
-	var/input
-	if(!message)
-		input = sanitize(input(src, "Choose an emote to display.") as text|null)
-	else
-		input = message
-
-	if(input)
-		log_emote("Ghost/[src.key] : [input]")
-		say_dead_direct(input, src)
+	sanitize_and_communicate(/decl/communication_channel/dsay, client, message, /decl/dsay_communication/emote)

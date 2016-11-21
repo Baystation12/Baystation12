@@ -350,25 +350,38 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weapon/weldingtool))
+
 		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>Now welding the vent.</span>")
-			if(do_after(user, 20, src))
-				if(!src || !WT.isOn()) return
-				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
-				if(!welded)
-					user.visible_message("<span class='notice'>\The [user] welds the vent shut.</span>", "<span class='notice'>You weld the vent shut.</span>", "You hear welding.")
-					welded = 1
-					update_icon()
-				else
-					user.visible_message("<span class='notice'>[user] unwelds the vent.</span>", "<span class='notice'>You unweld the vent.</span>", "You hear welding.")
-					welded = 0
-					update_icon()
-			else
-				to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
-		else
+
+		if(!WT.isOn())
+			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
+			return 1
+
+		if(!WT.remove_fuel(0,user))
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			return 1
+
+		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
+		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+
+		if(!do_after(user, 20, src))
+			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
+			return 1
+
+		if(!src)
+			return 1
+
+		if(!WT.isOn())
+			to_chat(user, "<span class='notice'>The welding tool needs to be on to finish this task.</span>")
+			return 1
+
+		welded = !welded
+		update_icon()
+		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
+			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
+			"You hear welding.")
+		return 1
+
 	else
 		..()
 

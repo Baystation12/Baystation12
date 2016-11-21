@@ -36,12 +36,11 @@
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
-	uniform = /obj/item/clothing/under/suit_jacket
+	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/device/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
-	suit = /obj/item/clothing/suit/wcoat
 	l_pocket = /obj/item/weapon/melee/energy/sword
 
 	id_slot = slot_wear_id

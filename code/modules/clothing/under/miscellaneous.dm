@@ -614,4 +614,9 @@
 	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 
+/obj/item/clothing/under/rank/psych/turtleneck/sweater
+	desc = "A warm looking sweater and a pair of dark blue slacks."
+	name = "sweater"
+	icon_state = "turtleneck"
+	worn_state = "turtleneck"
 

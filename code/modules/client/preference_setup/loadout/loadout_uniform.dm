@@ -152,3 +152,8 @@
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
+
+/datum/gear/uniform/turtleneck
+	display_name = "sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+	flags = GEAR_HAS_COLOR_SELECTION

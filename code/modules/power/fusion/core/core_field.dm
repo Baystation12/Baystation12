@@ -283,7 +283,7 @@
 			if(AM == src || AM == owned_core)
 				continue
 			AM.emp_act(empsev)
-		for(var/mob/living/L in range(max(1,ceil(radiation/5)),loc))
+		for(var/mob/living/L in range(max(1,ceil(radiation/100)),loc))
 			L.apply_effect(radiation,IRRADIATE, blocked = L.getarmor(null, "rad"))
 	radiation = 0
 

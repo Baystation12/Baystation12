@@ -1967,7 +1967,7 @@
 "aLT" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/bloodsoup,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
 "aLU" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/tofukabob,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
 "aLV" = (/obj/structure/table/woodentable{dir = 5},/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,/turf/unsimulated/floor{tag = "icon-wood"; icon_state = "wood"},/area/centcom/holding)
-"aLW" = (/obj/structure/table/woodentable{dir = 5},/obj/item/clothing/under/suit_jacket,/obj/item/clothing/suit/wcoat,/obj/item/clothing/head/that{pixel_x = 4; pixel_y = 6},/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/holding)
+"aLW" = (/obj/structure/table/woodentable{dir = 5},/obj/item/clothing/under/suit_jacket,/obj/item/clothing/accessory/wcoat,/obj/item/clothing/head/that{pixel_x = 4; pixel_y = 6},/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/holding)
 "aLX" = (/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/holding)
 "aLY" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
 "aLZ" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)

@@ -1,18 +1,5 @@
 /mob/observer/ghost/say(var/message)
-	message = sanitize(message)
-
-	if (!message)
-		return
-
-	log_say("Ghost/[src.key] : [message]")
-
-	if (src.client)
-		if(src.client.prefs.muted & MUTE_DEADCHAT)
-			to_chat(src, "<span class='warning'>You cannot talk in deadchat (muted)</span>.")
-			return
-
-	. = src.say_dead(message)
-
+	sanitize_and_communicate(/decl/communication_channel/dsay, client, message)
 
 /mob/observer/ghost/emote(var/act, var/type, var/message)
 	//message = sanitize(message) - already sanitized in verb/me_verb()
