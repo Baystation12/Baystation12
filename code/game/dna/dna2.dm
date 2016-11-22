@@ -113,9 +113,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.species=species
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
-		if(b<=DNA_UI_LENGTH)
-			new_dna.UI[b]=UI[b]
-	new_dna.UpdateUI()
+	for(var/b=1;b<=DNA_UI_LENGTH;b++) //This used to be in an if statement in the above loop but it
+		new_dna.UI[b]=UI[b]           //was painfully stupid and more importantly broke cloning. In
+	new_dna.UpdateUI()                //our code there's more UI than SE. Two fors is nicer. -Alice
 	new_dna.UpdateSE()
 	return new_dna
 ///////////////////////////////////////
