@@ -123,9 +123,6 @@
 //		to_chat(src, "<span class='notice'>[msg]</span>")
 //		return
 
-	var/rank = "Player"
-	if(holder)
-		rank = holder.rank
 	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	adminmsg2adminirc(src, sender, html_decode(msg))
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
