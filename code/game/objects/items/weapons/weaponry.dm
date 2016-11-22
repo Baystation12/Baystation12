@@ -197,6 +197,11 @@
 	healthcheck()
 	..()
 
+obj/effect/energy_net/user_unbuckle_mob(mob/user)
+	return src.escape_net(user)
+
+
+
 /obj/effect/energy_net/proc/escape_net(mob/user as mob)
 	visible_message(
 		"<span class='danger'>\The [user] attempts to free themselves from \the [src]!</span>",
@@ -206,3 +211,6 @@
 		if(src)
 			src.health = 0
 			src.healthcheck()
+			return 1
+	else
+		return 0
