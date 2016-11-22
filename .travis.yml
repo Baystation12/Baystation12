@@ -14,6 +14,7 @@ env:
     - MAP_PATH=example
     - MAP_PATH=exodus
     - MAP_PATH=torch
+    - MAP_PATH=eros
     - MAP_PATH=overmap_example
 
 cache:
