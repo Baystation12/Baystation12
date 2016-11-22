@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - rscadd: "There is now a character preference, Ghost Follow Links, to toggle between short and long follow links."
