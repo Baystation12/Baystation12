@@ -1004,6 +1004,11 @@ area/rnd/test_area
 	name = "\improper Secondary Emergency Storage 2"
 	icon_state = "emergencystorage_secondary"
 
+/area/engineering/backup_smes
+	name = "\improper Backup SMES"
+	icon_state = "engine_smes_backup"
+	sound_env = SMALL_ENCLOSED
+
 /area/stbd_engineering
 	name = "\improper Starboard Engineering"
 	icon_state = "stbd_engineering"
