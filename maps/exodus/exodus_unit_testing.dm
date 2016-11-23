@@ -29,7 +29,7 @@
 		// /area/medical/genetics = NO_APC, This is genetics yiffstation among other things. So we need our DNA mods. --Alice
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
-		// /area/outpost/abandoned = NO_SCRUBBER|NO_VENT|NO_APC, This used to be ruins, now it's all gild and flash. --Alice
+		/area/outpost/abandoned = NO_APC, //This used to be ruins, now it's all gild and flash. --Alice
 		/area/outpost/mining_main/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/rnd/test_area = NO_SCRUBBER|NO_VENT,
