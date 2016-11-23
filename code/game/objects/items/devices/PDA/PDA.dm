@@ -53,9 +53,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/list/feeds = list()		// The list of feeds as we last knew them
 	var/list/feed_info = list()	// The data and contents of each feed as we last knew them
 
-	var/list/cartmodes = list(40, 42, 43, 433, 44, 441, 45, 451, 46, 48, 47, 49) // If you add more cartridge modes add them to this list as well.
-	var/list/no_auto_update = list(1, 40, 43, 44, 441, 45, 451)		     // These modes we turn off autoupdate
-	var/list/update_every_five = list(3, 41, 433, 46, 47, 48, 49)			     // These we update every 5 ticks
+	var/list/cartmodes = list(40, 42, 43, 433, 44, 441, 45, 451, 46, 461, 47, 48, 49, 50) // If you add more cartridge modes add them to this list as well.
+	var/list/no_auto_update = list(1, 40, 43, 44, 441, 45, 451, 46, 461)		     // These modes we turn off autoupdate
+	var/list/update_every_five = list(3, 41, 433, 47, 48, 49, 50)			     // These we update every 5 ticks
 
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above - this is assignment (potentially alt title)

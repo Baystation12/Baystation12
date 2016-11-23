@@ -272,8 +272,14 @@
 			values["sensor_reading"] = MS.return_reading_data()
 
 
-	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
-	if(mode == 44 || mode == 441 || mode == 45 || mode ==451)
+	/*		General Records (Mode: 44 / 441 / 45 / 451 / 46 / 461)	*/
+	
+	if(mode == 44 || mode == 441 || mode == 45 || mode == 451 || mode == 46 || mode ==461)
+		var/genData[0]
+		for(var/datum/data/record/R in sortRecord(data_core.general))
+			genData[++genData.len] = list(Name = R.fields["name"],"ref" = "\ref[R]")
+		values["general_records"] = genData
+
 		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
@@ -283,9 +289,9 @@
 
 
 
-	/*		Medical Records (Mode: 44 / 441)	*/
+	/*		Medical Records (Mode: 45 / 451)	*/
 
-	if(mode == 44 || mode == 441)
+	if(mode == 45 || mode == 451)
 		var/medData[0]
 		for(var/datum/data/record/R in sortRecord(data_core.general))
 			medData[++medData.len] = list(Name = R.fields["name"],"ref" = "\ref[R]")
@@ -297,9 +303,9 @@
 		else
 			values["medical_exists"] = 0
 
-	/*		Security Records (Mode:45 / 451)	*/
+	/*		Security Records (Mode:46 / 461)	*/
 
-	if(mode == 45 || mode == 451)
+	if(mode == 46 || mode == 461)
 		var/secData[0]
 		for (var/datum/data/record/R in sortRecord(data_core.general))
 			secData[++secData.len] = list(Name = R.fields["name"], "ref" = "\ref[R]")
@@ -311,9 +317,9 @@
 		else
 			values["security_exists"] = 0
 
-	/*		Security Bot Control (Mode: 46)		*/
+	/*		Security Bot Control (Mode: 47)		*/
 
-	if(mode==46)
+	if(mode==47)
 		var/botsData[0]
 		var/beepskyData[0]
 		if(istype(radio,/obj/item/radio/integrated/beepsky))
@@ -348,9 +354,45 @@
 		values["beepsky"] = beepskyData
 
 
-	/*		MULEBOT Control	(Mode: 48)		*/
+	/*	Supply Shuttle Requests Menu (Mode: 48)		*/
 
 	if(mode==48)
+		var/supplyData[0]
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+		if (shuttle)
+			supplyData["shuttle_moving"] = shuttle.has_arrive_time()
+			supplyData["shuttle_eta"] = shuttle.eta_minutes()
+			supplyData["shuttle_loc"] = shuttle.at_station() ? "Station" : "Dock"
+		var/supplyOrderCount = 0
+		var/supplyOrderData[0]
+		for(var/S in supply_controller.shoppinglist)
+			var/datum/supply_order/SO = S
+
+			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+		if(!supplyOrderData.len)
+			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
+
+		supplyData["approved"] = supplyOrderData
+		supplyData["approved_count"] = supplyOrderCount
+
+		var/requestCount = 0
+		var/requestData[0]
+		for(var/S in supply_controller.requestlist)
+			var/datum/supply_order/SO = S
+			requestCount++
+			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+		if(!requestData.len)
+			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
+
+		supplyData["requests"] = requestData
+		supplyData["requests_count"] = requestCount
+
+
+		values["supply"] = supplyData
+
+	/*		MULEBOT Control	(Mode: 49)		*/
+
+	if(mode==49)
 		var/muleData[0]
 		var/mulebotsData[0]
 		if(istype(radio,/obj/item/radio/integrated/mule))
@@ -386,48 +428,9 @@
 
 		values["mulebot"] = muleData
 
-
-
-	/*	Supply Shuttle Requests Menu (Mode: 47)		*/
-
-	if(mode==47)
-		var/supplyData[0]
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
-		if (shuttle)
-			supplyData["shuttle_moving"] = shuttle.has_arrive_time()
-			supplyData["shuttle_eta"] = shuttle.eta_minutes()
-			supplyData["shuttle_loc"] = shuttle.at_station() ? "Station" : "Dock"
-		var/supplyOrderCount = 0
-		var/supplyOrderData[0]
-		for(var/S in supply_controller.shoppinglist)
-			var/datum/supply_order/SO = S
-
-			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
-		if(!supplyOrderData.len)
-			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
-
-		supplyData["approved"] = supplyOrderData
-		supplyData["approved_count"] = supplyOrderCount
-
-		var/requestCount = 0
-		var/requestData[0]
-		for(var/S in supply_controller.requestlist)
-			var/datum/supply_order/SO = S
-			requestCount++
-			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
-		if(!requestData.len)
-			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
-
-		supplyData["requests"] = requestData
-		supplyData["requests_count"] = requestCount
-
-
-		values["supply"] = supplyData
-
-
-
-	/* 	Janitor Supplies Locator  (Mode: 49)      */
-	if(mode==49)
+	/* 	Janitor Supplies Locator  (Mode: 50)      */
+	
+	if(mode==50)
 		var/JaniData[0]
 		var/turf/cl = get_turf(src)
 
@@ -510,11 +513,22 @@
 
 
 	switch(href_list["choice"])
+		if("General Records")
+			var/datum/data/record/R = locate(href_list["target"])
+			loc:mode = 441
+			mode = 441
+			if (R in data_core.general)
+				for (var/datum/data/record/E in data_core.general)
+					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
+						R = E
+						break
+				active1 = R
+
 		if("Medical Records")
 			var/datum/data/record/R = locate(href_list["target"])
 			var/datum/data/record/M = locate(href_list["target"])
-			loc:mode = 441
-			mode = 441
+			loc:mode = 451
+			mode = 451
 			if (R in data_core.general)
 				for (var/datum/data/record/E in data_core.medical)
 					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
@@ -526,8 +540,8 @@
 		if("Security Records")
 			var/datum/data/record/R = locate(href_list["target"])
 			var/datum/data/record/S = locate(href_list["target"])
-			loc:mode = 451
-			mode = 451
+			loc:mode = 461
+			mode = 461
 			if (R in data_core.general)
 				for (var/datum/data/record/E in data_core.security)
 					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
