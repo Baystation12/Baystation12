@@ -523,3 +523,10 @@
 /area/outpost/abandoned
 	name = "Abandoned Outpost"
 	icon_state = "dark"
+
+// ---------- EROS BEGIN, AREAS SHARED
+
+/area/engineering/backup_smes
+	name = "\improper Backup SMES"
+	icon_state = "engine_smes_backup"
+	sound_env = SMALL_ENCLOSED

@@ -419,10 +419,6 @@
 	name = "\improper Security Maintenance - Starboard"
 	icon_state = "maint_security_starboard"
 
-/area/maintenance/exterior
-	name = "\improper Exterior Reinforcements"
-	icon_state = "maint_security_starboard"
-
 // Hallway
 
 /area/hallway/primary/
@@ -533,12 +529,7 @@
 
 /area/crew_quarters/cafe
 	name = "\improper Cafe"
-	icon_state = "bar"
-	sound_env = LARGE_SOFTFLOOR
-
-/area/crew_quarters/nightclub
-	name = "\improper Nightclub"
-	icon_state = "bar"
+	icon_state = "cafeteria"
 	sound_env = LARGE_SOFTFLOOR
 
 /area/library
@@ -992,3 +983,46 @@ area/rnd/test_area
 
 /area/outpost/research/disposal
 	name = "Research Outpost Waste Disposal"
+
+
+// ---------- EROS BEGIN, EXODUS AREAS
+
+/area/maintenance/arrivals_south
+	name = "\improper Arrivals Maintenance South"
+	icon_state = "maint_arrivals_south"
+
+/area/storage/warehouse
+	name = "\improper Abandoned Warehouse"
+	icon_state = "abandonedstorage"
+
+/area/storage/emergency_secondary_1
+	name = "\improper Secondary Emergency Storage 1"
+	icon_state = "emergencystorage_secondary"
+
+/area/storage/emergency_secondary_2
+	name = "\improper Secondary Emergency Storage 2"
+	icon_state = "emergencystorage_secondary"
+
+/area/stbd_engineering
+	name = "\improper Starboard Engineering"
+	icon_state = "stbd_engineering"
+
+/area/stbd_engineering/stbd_engineering_break
+	name = "\improper Starboard Engineering Lounge"
+	icon_state = "stbd_engineering_break"
+
+/area/stbd_engineering/stbd_engineering_storage
+	name = "\improper Starboard Engineering Storage"
+	icon_state = "stbd_engineering_storage"
+
+/area/stbd_engineering/stbd_engineering_atmos
+	name = "\improper Starboard Engineering Canister Storage"
+	icon_state = "stbd_atmos_storage"
+
+/area/stbd_engineering/stbd_engineering_workshop
+	name = "\improper Starboard Engineering Workshop"
+	icon_state = "stbd_engineering_workshop"
+
+/area/stbd_engineering/stbd_engineering_supply
+	name = "\improper Starboard Engineering Supply Room"
+	icon_state = "stbd_engineering_supply"
