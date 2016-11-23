@@ -504,10 +504,11 @@
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
 
-/area/crew_quarters/sleep/bedrooms
-	name = "\improper Dormitory Bedroom One"
-	icon_state = "Sleep"
-	sound_env = SMALL_SOFTFLOOR
+// We don't need this for now. -Alice
+//	/area/crew_quarters/sleep/bedrooms
+//	name = "\improper Dormitory Bedroom One"
+//	icon_state = "Sleep"
+//	sound_env = SMALL_SOFTFLOOR
 
 /area/crew_quarters/locker/locker_toilet
 	name = "\improper Locker Toilets"
@@ -1010,6 +1011,7 @@ area/rnd/test_area
 /area/stbd_engineering/stbd_engineering_break
 	name = "\improper Starboard Engineering Lounge"
 	icon_state = "stbd_engineering_break"
+	sound_env = SMALL_SOFTFLOOR
 
 /area/stbd_engineering/stbd_engineering_storage
 	name = "\improper Starboard Engineering Storage"
@@ -1026,3 +1028,33 @@ area/rnd/test_area
 /area/stbd_engineering/stbd_engineering_supply
 	name = "\improper Starboard Engineering Supply Room"
 	icon_state = "stbd_engineering_supply"
+
+/area/crew_quarters/sleep/bedroom_1
+	name = "\improper Dormitory 1"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/sleep/bedroom_2
+	name = "\improper Dormitory 2"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/sleep/bedroom_3
+	name = "\improper Dormitory 3"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/sleep/bedroom_4
+	name = "\improper Dormitory 4"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/sleep/bedroom_5
+	name = "\improper Dormitory 5"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR
+
+/area/crew_quarters/sleep/bedroom_6
+	name = "\improper Dormitory 6"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR

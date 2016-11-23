@@ -17,7 +17,7 @@
 		/area/maintenance/auxsolarstarboard = NO_SCRUBBER,
 		/area/maintenance/dormitory = NO_SCRUBBER,
 		/area/maintenance/engi_shuttle = NO_SCRUBBER,
-		/area/maintenance/evahallway = NO_SCRUBBER,
+		/area/maintenance/security_port = NO_SCRUBBER,
 		/area/maintenance/medbay = NO_SCRUBBER,
 		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/foresolar = NO_SCRUBBER,
@@ -26,10 +26,10 @@
 		/area/maintenance/research_starboard = NO_SCRUBBER,
 		/area/maintenance/starboardsolar = NO_SCRUBBER,
 		/area/maintenance/substation/command = 0,
-		/area/medical/genetics = NO_APC,
+		// /area/medical/genetics = NO_APC, This is genetics yiffstation among other things. So we need our DNA mods. --Alice
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/outpost/abandoned = NO_SCRUBBER|NO_VENT|NO_APC,
+		// /area/outpost/abandoned = NO_SCRUBBER|NO_VENT|NO_APC, This used to be ruins, now it's all gild and flash. --Alice
 		/area/outpost/mining_main/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/rnd/test_area = NO_SCRUBBER|NO_VENT,
@@ -40,6 +40,8 @@
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/storage/emergency = NO_SCRUBBER|NO_VENT,
 		/area/storage/emergency2 = NO_SCRUBBER|NO_VENT,
+		/area/storage/emergency_secondary_1 = NO_SCRUBBER|NO_VENT,
+		/area/storage/emergency_secondary_2 = NO_SCRUBBER|NO_VENT,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC
 	)
