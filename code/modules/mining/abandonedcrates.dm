@@ -130,7 +130,7 @@
 			new/obj/item/clothing/gloves/white(src)
 			new/obj/item/clothing/mask/gas/mime(src)
 			new/obj/item/clothing/head/beret(src)
-			new/obj/item/clothing/suit/suspenders(src)
+			new/obj/item/clothing/accessory/suspenders(src)
 			new/obj/item/weapon/pen/crayon/mime(src)
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(src)
 		if(96)
@@ -149,7 +149,7 @@
 	if(!locked)
 		return
 
-	user << "<span class='notice'>The crate is locked with a Deca-code lock.</span>"
+	to_chat(user, "<span class='notice'>The crate is locked with a Deca-code lock.</span>")
 	var/input = input(user, "Enter [codelen] digits.", "Deca-Code Lock", "") as text
 	if(!Adjacent(user))
 		return

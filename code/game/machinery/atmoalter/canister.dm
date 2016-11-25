@@ -47,6 +47,7 @@
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled
 	name = "\improper Canister: \[O2 (Cryo)\]"
+	start_pressure = 20 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "\improper Canister \[Phoron\]"

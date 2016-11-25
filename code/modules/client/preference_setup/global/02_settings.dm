@@ -83,7 +83,7 @@
 /client/proc/is_preference_enabled(var/preference)
 	var/datum/client_preference/cp = get_client_preference(preference)
 	return cp && (cp.key in prefs.preferences_enabled)
-	
+
 /client/proc/is_preference_disabled(var/preference)
 	return !is_preference_enabled(preference)
 
@@ -124,6 +124,11 @@
 	if(!client)
 		return FALSE
 	return client.is_preference_enabled(preference)
+
+/mob/proc/is_preference_disabled(var/preference)
+	if(!client)
+		return TRUE
+	return client.is_preference_disabled(preference)
 
 /mob/proc/set_preference(var/preference, var/set_preference)
 	if(!client)

@@ -1,3 +1,14 @@
+/obj/item/clothing/accessory/wcoat
+	name = "waistcoat"
+	desc = "For some classy, murderous fun."
+	icon_state = "vest"
+	item_state = "wcoat"
+
+/obj/item/clothing/accessory/suspenders
+	name = "suspenders"
+	desc = "They suspend the illusion of the mime's play."
+	icon_state = "suspenders"
+
 /obj/item/clothing/accessory/toggleable
 	var/icon_closed
 /obj/item/clothing/accessory/toggleable/New()

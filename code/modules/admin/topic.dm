@@ -1152,8 +1152,9 @@
 
 		if(!isobserver(usr))	C.admin_ghost()
 		var/mob/observer/ghost/G = C.mob
-		sleep(2)
-		G.ManualFollow(M)
+		if(istype(G))
+			sleep(2)
+			G.ManualFollow(M)
 
 	else if(href_list["check_antagonist"])
 		check_antagonists()
@@ -1828,24 +1829,41 @@ mob/living/carbon/human/can_centcom_reply()
 mob/living/silicon/ai/can_centcom_reply()
 	return common_radio != null && !check_unable(2)
 
-/atom/proc/extra_admin_link()
-	return
+/datum/proc/extra_admin_link(var/prefix, var/sufix, var/short_links)
+	return list()
 
-/mob/extra_admin_link(var/source)
+/atom/movable/extra_admin_link(var/source, var/prefix, var/sufix, var/short_links)
+	return list("<A HREF='?[source];adminplayerobservefollow=\ref[src]'>[prefix][short_links ? "J" : "JMP"][sufix]</A>")
+
+/client/extra_admin_link(source, var/prefix, var/sufix, var/short_links)
+	return mob.extra_admin_link(source, prefix, sufix, short_links)
+
+/mob/extra_admin_link(var/source, var/prefix, var/sufix, var/short_links)
+	. = ..()
 	if(client && eyeobj)
-		return "|<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>EYE</A>"
+		. += "<A HREF='?[source];adminplayerobservefollow=\ref[eyeobj]'>[prefix][short_links ? "E" : "EYE"][sufix]</A>"
 
-/mob/observer/ghost/extra_admin_link(var/source)
+/mob/observer/ghost/extra_admin_link(var/source, var/prefix, var/sufix, var/short_links)
+	. = ..()
 	if(mind && (mind.current && !isghost(mind.current)))
-		return "|<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>BDY</A>"
+		. += "<A HREF='?[source];adminplayerobservefollow=\ref[mind.current]'>[prefix][short_links ? "B" : "BDY"][sufix]</A>"
 
-/proc/admin_jump_link(var/atom/target, var/source)
+/proc/admin_jump_link(var/atom/target, var/source, var/delimiter = "|", var/prefix, var/sufix, var/short_links)
 	if(!target) return
 	// The way admin jump links handle their src is weirdly inconsistent...
 	if(istype(source, /datum/admins))
 		source = "src=\ref[source]"
 	else
 		source = "_src_=holder"
+	return jointext(target.extra_admin_link(source, prefix, sufix, short_links), delimiter)
 
-	. = "<A HREF='?[source];adminplayerobservefollow=\ref[target]'>JMP</A>"
-	. += target.extra_admin_link(source)
+/datum/proc/get_admin_jump_link(var/atom/target)
+	return
+
+/mob/get_admin_jump_link(var/atom/target, var/delimiter, var/prefix, var/sufix)
+	return client && client.get_admin_jump_link(target, delimiter, prefix, sufix)
+
+/client/get_admin_jump_link(var/atom/target, var/delimiter, var/prefix, var/sufix)
+	if(holder)
+		var/short_links = is_preference_enabled(/datum/client_preference/ghost_follow_link_length)
+		return admin_jump_link(target, src, delimiter, prefix, sufix, short_links)
