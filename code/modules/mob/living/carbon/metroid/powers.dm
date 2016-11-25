@@ -38,8 +38,9 @@
 	return 0
 
 /mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
+	set waitfor = 0
 	Victim = M
-	loc = M.loc
+	forceMove(M.loc)
 
 	sleep(20) // A small delay to give the victim a chance to shake them off
 
