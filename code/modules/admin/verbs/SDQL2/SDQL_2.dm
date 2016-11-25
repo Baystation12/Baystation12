@@ -25,7 +25,7 @@
 	if(!query_text || length(query_text) < 1)
 		return
 
-//	world << query_text
+//	to_world(query_text)
 
 	var/list/query_list = SDQL2_tokenize(query_text)
 
@@ -413,7 +413,7 @@
 			var/list/L = v
 			var/index = SDQL_expression(source, expression[start + 2])
 			if(isnum(index) && (!IsInteger(index) || L.len < index))
-				world << "<span class='danger'>Invalid list index: [index]</span>"
+				to_world("<span class='danger'>Invalid list index: [index]</span>")
 				return null
 			return L[index]
 

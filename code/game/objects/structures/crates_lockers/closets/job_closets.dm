@@ -29,8 +29,8 @@
 	new /obj/item/clothing/under/rank/bartender(src)
 	new /obj/item/clothing/under/rank/bartender(src)
 	new /obj/item/clothing/under/dress/dress_saloon(src)
-	new /obj/item/clothing/suit/wcoat(src)
-	new /obj/item/clothing/suit/wcoat(src)
+	new /obj/item/clothing/accessory/wcoat(src)
+	new /obj/item/clothing/accessory/wcoat(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 

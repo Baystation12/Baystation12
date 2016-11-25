@@ -309,7 +309,7 @@ var/global/list/damage_icon_parts = list()
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in organs)
-			if(part.no_blend) // organs that are larger than the mob sprite must be rendered as an overlay
+			if(part.no_blend) // organs larger than the mob can't be rendered correctly by Blend()
 				continue
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
@@ -355,7 +355,7 @@ var/global/list/damage_icon_parts = list()
 		if(E.no_blend)
 			var/image/S = image("icon" = E.get_icon(skeleton), "icon_state" = E.icon_state, "pixel_x" = E.offset_x, "pixel_y" = E.offset_y)
 			overlays_standing[ORGAN_OVERLAY_LAYER] = S
-			continue
+			break // Only one works right now.
 
 	if(update_icons)
 		update_icons()
@@ -711,6 +711,7 @@ var/global/list/damage_icon_parts = list()
 						dicks_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
 					genitals_standing.Blend(dicks_s, ICON_OVERLAY)
 		overlays_standing[GENITALS_LAYER] = image(genitals_standing)
+
 	if(update_icons)
 		update_icons()
 
@@ -720,9 +721,8 @@ var/global/list/damage_icon_parts = list()
 	if(species.appearance_flags & HAS_BIOMODS) //change has underwear to a more sane flag when needed
 		var/icon/tail_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
 		var/datum/sprite_accessory/tail = body_tails_list[tail_type]
-		if (wear_suit && wear_suit.flags_inv & HIDETAIL)
-		else
-			if(tail && tail.species_allowed && (src.species.get_bodytype() in tail.species_allowed))
+		if (!(wear_suit && wear_suit.flags_inv & HIDETAIL))
+			if(tail && tail.species_allowed && (species.get_bodytype() in tail.species_allowed))
 				var/icon/tail_s = new/icon("icon" = tail.icon, "icon_state" = tail.icon_state)
 				if(tail.do_colouration)
 					tail_s.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
@@ -752,8 +752,6 @@ var/global/list/damage_icon_parts = list()
 				var/icon/ears_e = new/icon("icon" = ears.icon, "icon_state" = "[ears.icon_state]_e")
 				ears_standing.Blend(ears_e, ICON_OVERLAY)
 		overlays_standing[NATURAL_EARS_LAYER] = image(ears_standing)
-	if(update_icons)
-		update_icons()
 
 /mob/living/carbon/human/proc/update_wings(var/update_icons=1)
 	overlays_standing[WINGS_LAYER] = null
@@ -769,11 +767,7 @@ var/global/list/damage_icon_parts = list()
 				var/icon/wings_e = new/icon("icon" = wings.icon, "icon_state" = "[wings.icon_state]_e")
 				wings_standing.Blend(wings_e, ICON_OVERLAY)
 		overlays_standing[WINGS_LAYER] = image(wings_standing)
-	if(update_icons)
-		update_icons()
 
-
-//EROS FINISH
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi

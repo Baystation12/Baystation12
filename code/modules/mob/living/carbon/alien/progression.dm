@@ -36,6 +36,13 @@
 
 	if(mind)
 		mind.transfer_to(adult)
+		if (can_namepick_as_adult)
+			var/newname = sanitize(input(adult, "You have become an adult. Choose a name for yourself.", "Adult Name") as null|text, MAX_NAME_LEN)
+
+			if(!newname)
+				adult.fully_replace_character_name("[src.adult_name] ([instance_num])")
+			else
+				adult.fully_replace_character_name(newname)
 	else
 		adult.key = src.key
 

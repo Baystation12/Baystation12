@@ -126,7 +126,7 @@
 /decl/hierarchy/outfit/job/entertainer/mime
 	name = OUTFIT_JOB_NAME("Mime")
 	uniform = /obj/item/clothing/under/mime
-	suit = /obj/item/clothing/suit/suspenders
+//	suit = /obj/item/clothing/suit/suspenders
 	shoes = /obj/item/clothing/shoes/mime
 	mask = /obj/item/clothing/mask/gas/mime
 	head = /obj/item/clothing/head/beret
@@ -135,6 +135,16 @@
 	satchel_two = /obj/item/weapon/storage/backpack/satchel
 	pda_type = /obj/item/device/pda/mime
 	backpack_contents = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing = 1, /obj/item/weapon/pen/crayon/mime = 1, /obj/item/clothing/gloves/white = 1)
+
+/decl/hierarchy/outfit/job/entertainer/mime/post_equip(var/mob/living/carbon/human/H)
+	..()
+	var/obj/item/clothing/uniform = H.w_uniform
+	if(uniform)
+		var/obj/item/clothing/accessory/suspenders/mime_susp = new()
+		if(uniform.can_attach_accessory(mime_susp))
+			uniform.attach_accessory(null, mime_susp)
+		else
+			qdel(mime_susp)
 
 /decl/hierarchy/outfit/job/entertainer/artist
 	name = OUTFIT_JOB_NAME("Artist")
