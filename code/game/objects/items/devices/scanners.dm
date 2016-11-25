@@ -352,7 +352,7 @@ REAGENT SCANNER
 		user << "<span class='alert'>Warning: the slime is starving!</span>"
 	else if (T.nutrition < T.get_hunger_nutrition())
 		user << "<span class='warning'>Warning: the slime is hungry.</span>"
-	user << "Electric change strength: [T.powerlevel]"
+	user << "Electric charge strength: [T.powerlevel]"
 	user << "Health: [round(T.health / T.maxHealth)]%"
 
 	var/list/mutations = T.GetMutations()

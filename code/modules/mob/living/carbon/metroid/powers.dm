@@ -38,6 +38,7 @@
 	return 0
 
 /mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
+	set waitfor = 1
 	Victim = M
 	loc = M.loc
 
@@ -117,7 +118,7 @@
 
 /mob/living/carbon/slime/proc/UpdateFeed()
 	if(Victim)
-		loc = Victim.loc // simple "attach to head" effect!
+		forceMove(Victim.loc) // simple "attach to head" effect!
 
 /mob/living/carbon/slime/verb/Evolve()
 	set category = "Slime"
