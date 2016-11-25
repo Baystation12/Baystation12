@@ -58,7 +58,7 @@
 				user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 				"You start treating damage to [target]'s [I.name] with [tool_name]." )
 
-	target.custom_pain("The pain in your [affected.name] is living hell!",1)
+	target.custom_pain("The pain in your [affected.name] is living hell!",100)
 	..()
 
 /datum/surgery_step/internal/fix_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -144,7 +144,7 @@
 /datum/surgery_step/internal/detatch_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to separate [target]'s [target.op_stage.current_organ] with \the [tool].", \
 	"You start to separate [target]'s [target.op_stage.current_organ] with \the [tool]." )
-	target.custom_pain("Someone's ripping out your [target.op_stage.current_organ]!",1)
+	target.custom_pain("Someone's ripping out your [target.op_stage.current_organ]!",100)
 	..()
 
 /datum/surgery_step/internal/detatch_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -205,7 +205,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts removing [target]'s [target.op_stage.current_organ] with \the [tool].", \
 	"You start removing [target]'s [target.op_stage.current_organ] with \the [tool].")
-	target.custom_pain("The pain in your [affected.name] is living hell!",1)
+	target.custom_pain("The pain in your [affected.name] is living hell!",100)
 	..()
 
 /datum/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -255,7 +255,7 @@
 		return 0
 
 	if((affected.robotic >= ORGAN_ROBOT) && !(O.robotic >= ORGAN_ROBOT))
-		user << "<span class='danger'>You cannot install a naked organ into a robotic body.</span>"
+		to_chat(user, "<span class='danger'>You cannot install a naked organ into a robotic body.</span>")
 		return SURGERY_FAILURE
 
 	if(!target.species)
@@ -267,13 +267,13 @@
 	var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
 	if(O.damage > (O.max_damage * 0.75))
-		user << "<span class='warning'>\The [O.organ_tag] [o_is] in no state to be transplanted.</span>"
+		to_chat(user, "<span class='warning'>\The [O.organ_tag] [o_is] in no state to be transplanted.</span>")
 		return SURGERY_FAILURE
 
 	if(!target.internal_organs_by_name[O.organ_tag])
 		organ_missing = 1
 	else
-		user << "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>"
+		to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>")
 		return SURGERY_FAILURE
 
 	if(O && affected.organ_tag == O.parent_organ)
@@ -283,10 +283,10 @@
 		if(!target.internal_organs_by_name[O.organ_tag])
 			organ_missing = 1
 		else
-			user << "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>"
+			to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>")
 			return SURGERY_FAILURE
 	else
-		user << "<span class='warning'>\The [O.organ_tag] [o_do] normally go in \the [affected.name].</span>"
+		to_chat(user, "<span class='warning'>\The [O.organ_tag] [o_do] normally go in \the [affected.name].</span>")
 		return SURGERY_FAILURE
 
 	return ..() && organ_missing && organ_compatible
@@ -295,7 +295,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts transplanting \the [tool] into [target]'s [affected.name].", \
 	"You start transplanting \the [tool] into [target]'s [affected.name].")
-	target.custom_pain("Someone's rooting around in your [affected.name]!",1)
+	target.custom_pain("Someone's rooting around in your [affected.name]!",100)
 	..()
 
 /datum/surgery_step/internal/replace_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -359,7 +359,7 @@
 /datum/surgery_step/internal/attach_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] begins reattaching [target]'s [target.op_stage.current_organ] with \the [tool].", \
 	"You start reattaching [target]'s [target.op_stage.current_organ] with \the [tool].")
-	target.custom_pain("Someone's digging needles into your [target.op_stage.current_organ]!",1)
+	target.custom_pain("Someone's digging needles into your [target.op_stage.current_organ]!",100)
 	..()
 
 /datum/surgery_step/internal/attach_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

@@ -120,14 +120,14 @@
 	if(istype(I, /obj/item/weapon/key) && lock)
 		var/obj/item/weapon/key/K = I
 		if(!lock.toggle(I))
-			user << "<span class='warning'>\The [K] does not fit in the lock!</span>"
+			to_chat(user, "<span class='warning'>\The [K] does not fit in the lock!</span>")
 		return
 	if(lock && lock.pick_lock(I,user))
 		return
 
 	if(istype(I,/obj/item/weapon/material/lock_construct))
 		if(lock)
-			user << "<span class='warning'>\The [src] already has a lock.</span>"
+			to_chat(user, "<span class='warning'>\The [src] already has a lock.</span>")
 		else
 			var/obj/item/weapon/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
@@ -135,13 +135,13 @@
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
-			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
+			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return
 		if(health >= maxhealth)
-			user << "<span class='notice'>Nothing to fix!</span>"
+			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return
 		if(!density)
-			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return
 
 		//figure out how much metal we need
@@ -149,7 +149,7 @@
 		var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
 		var/used = min(amount_needed,stack.amount)
 		if (used)
-			user << "<span class='notice'>You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>"
+			to_chat(user, "<span class='notice'>You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 			stack.use(used)
 			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
 		return
@@ -171,7 +171,7 @@
 	if(src.operating) return
 
 	if(lock && lock.isLocked())
-		user << "\The [src] is locked!"
+		to_chat(user, "\The [src] is locked!")
 
 	if(operable())
 		if(src.density)
@@ -184,7 +184,7 @@
 
 /obj/machinery/door/unpowered/simple/examine(mob/user)
 	if(..(user,1) && lock)
-		user << "<span class='notice'>It appears to have a lock.</span>"
+		to_chat(user, "<span class='notice'>It appears to have a lock.</span>")
 
 /obj/machinery/door/unpowered/simple/can_open()
 	if(!..() || (lock && lock.isLocked()))

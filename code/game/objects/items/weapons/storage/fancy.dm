@@ -35,10 +35,10 @@
 
 	var/key_name = initial(key_type.name)
 	if(!contents.len)
-		user << "There are no [key_name]s left in the box."
+		to_chat(user, "There are no [key_name]s left in the box.")
 	else
 		var/key_count = count_by_type(contents, key_type)
-		user << "There [key_count == 1? "is" : "are"] [key_count] [key_name]\s in the box."
+		to_chat(user, "There [key_count == 1? "is" : "are"] [key_count] [key_name]\s in the box.")
 
 /*
  * Egg Box
@@ -49,8 +49,8 @@
 	icon_state = "eggbox"
 	name = "egg box"
 	storage_slots = 12
-	max_w_class = 2
-	w_class = 3
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 
 	key_type = /obj/item/weapon/reagent_containers/food/snacks/egg
 	can_hold = list(
@@ -72,8 +72,8 @@
 	icon_state = "candlebox"
 	opened = 1 //no closed state
 	throwforce = 2
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 5
 	slot_flags = SLOT_BELT
 
@@ -89,8 +89,8 @@
 	desc = "A box of crayons for all your rune drawing needs."
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 
 	key_type = /obj/item/weapon/pen/crayon
@@ -118,12 +118,13 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	startswith = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
+	var/brand = "\improper Trans-Stellar Duty-free"
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
@@ -133,6 +134,10 @@
 	flags |= NOREACT
 	create_reagents(5 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	flags |= OPENCONTAINER
+	if(brand)
+		for(var/obj/item/clothing/mask/smokable/cigarette/C in src)
+			C.brand = brand
+			C.desc += " This one is \a [brand]."
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
 	// Don't try to transfer reagents to lighters
@@ -153,7 +158,7 @@
 			break
 
 		if(cig == null)
-			user << "<span class='notice'>Looks like the packet is out of cigarettes.</span>"
+			to_chat(user, "<span class='notice'>Looks like the packet is out of cigarettes.</span>")
 			return
 
 		// Instead of running equip_to_slot_if_possible() we check here first,
@@ -167,7 +172,7 @@
 		user.equip_to_slot(cig, slot_wear_mask)
 
 		reagents.maximum_volume = 5 * contents.len
-		user << "<span class='notice'>You take a cigarette out of the pack.</span>"
+		to_chat(user, "<span class='notice'>You take a cigarette out of the pack.</span>")
 		update_icon()
 	else
 		..()
@@ -176,11 +181,13 @@
 	name = "pack of Dromedary Co. cigarettes"
 	desc = "A packet of six imported Dromedary Company cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
 	icon_state = "Dpacket"
+	brand = "\improper Dromedary Co. cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
 	name = "pack of Acme Co. cigarettes"
 	desc = "A packet of six Acme Company cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
 	icon_state = "Bpacket"
+	brand = "\improper Acme Co. cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
@@ -193,18 +200,21 @@
 	desc = "A mellow blend made from synthetic, pod-grown tobacco. The commercial jingle is guaranteed to get stuck in your head."
 	icon_state = "LSpacket"
 	item_state = "Dpacket" //I actually don't mind cig packs not showing up in the hand. whotf doesn't just keep them in their pockets/coats //
+	brand = "\improper Lucky Star"
 
 /obj/item/weapon/storage/fancy/cigarettes/jerichos
 	name = "pack of Jerichos"
 	desc = "Typically seen dangling from the lips of Martian soldiers and border world hustlers. Tastes like hickory smoke, feels like warm liquid death down your lungs."
 	icon_state = "Jpacket"
 	item_state = "Dpacket"
+	brand = "\improper Jericho"
 
 /obj/item/weapon/storage/fancy/cigarettes/menthols
 	name = "pack of Temperamento Menthols"
 	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
 	icon_state = "TMpacket"
 	item_state = "Dpacket"
+	brand = "\improper Temperamento Menthol"
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette/menthol
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
@@ -214,12 +224,14 @@
 	desc = "This unknown brand was slated for the chopping block, until they were publicly endorsed by an old Earthling gonzo journalist. The rest is history. They sell a variety for cats, too. Yes, actual cats."
 	icon_state = "CApacket"
 	item_state = "Dpacket"
+	brand = "\improper Carcinoma Angel"
 
 /obj/item/weapon/storage/fancy/cigarettes/professionals
 	name = "pack of Professional 120s"
 	desc = "Let's face it - if you're smoking these, you're either trying to look upper-class or you're 80 years old. That's the only excuse. They taste disgusting, too."
 	icon_state = "P100packet"
 	item_state = "Dpacket"
+	brand = "\improper Professional 120"
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
@@ -227,8 +239,8 @@
 	icon_state = "cigarcase"
 	item_state = "cigpacket"
 	icon = 'icons/obj/cigarettes.dmi'
-	w_class = 2
-	max_w_class = 1
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
@@ -256,8 +268,8 @@
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox"
 	name = "vial storage box"
-	w_class = 3
-	max_w_class = 1
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_TINY
 	storage_slots = 12
 
 	key_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
@@ -276,8 +288,8 @@
 	icon = 'icons/obj/vialbox.dmi'
 	icon_state = "vialbox0"
 	item_state = "syringe_kit"
-	w_class = 3
-	max_w_class = 1
+	w_class = ITEM_SIZE_NORMAL
+	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = null
 	storage_slots = 12
 	req_access = list(access_virology)

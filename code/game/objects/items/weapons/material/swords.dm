@@ -4,7 +4,7 @@
 	icon_state = "claymore"
 	item_state = "claymore"
 	slot_flags = SLOT_BELT
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	force_divisor = 0.5 // 30 when wielded with hardnes 60 (steel)
 	thrown_force_divisor = 0.5 // 10 when thrown with weight 20 (steel)
 	sharp = 1

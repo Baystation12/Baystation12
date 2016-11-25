@@ -1,5 +1,3 @@
-var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglier code in nanoUI.
-
 // Power Cells
 /obj/item/weapon/cell
 	name = "power cell"
@@ -12,18 +10,19 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	w_class = NORMAL_ITEM
+	w_class = ITEM_SIZE_NORMAL
 	var/c_uid
-	var/charge = 0			// Current charge
-	var/maxcharge = 1000	// Capacity in Wh
+	var/charge			                // Current charge
+	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 
 /obj/item/weapon/cell/New()
+	if(isnull(charge))
+		charge = maxcharge
+	c_uid = sequential_id(/obj/item/weapon/cell)
 	..()
-	charge = maxcharge
-	c_uid = cell_uid++
 
 /obj/item/weapon/cell/initialize()
 	..()
@@ -44,7 +43,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 /obj/item/weapon/cell/update_icon()
 
 	var/new_overlay_state = null
-	if(charge/maxcharge >= 0.95)
+	if(percent() >= 95)
 		new_overlay_state = "cell-o2"
 	else if(charge >= 0.05)
 		new_overlay_state = "cell-o1"
@@ -56,7 +55,7 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 			overlays += image('icons/obj/power.dmi', overlay_state)
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
-	return 100.0*charge/maxcharge
+	return maxcharge && (100.0*charge/maxcharge)
 
 /obj/item/weapon/cell/proc/fully_charged()
 	return (charge == maxcharge)
@@ -89,8 +88,8 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 
 /obj/item/weapon/cell/examine(mob/user)
 	..()
-	user << "The label states it's capacity is [maxcharge] Wh"
-	user << "The charge meter reads [round(src.percent(), 0.1)]%"
+	to_chat(user, "The label states it's capacity is [maxcharge] Wh")
+	to_chat(user, "The charge meter reads [round(src.percent(), 0.1)]%")
 
 /obj/item/weapon/cell/emp_act(severity)
 	//remove this once emp changes on dev are merged in
@@ -127,20 +126,28 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 /obj/item/weapon/cell/device
 	name = "device power cell"
 	desc = "A small power cell designed to power handheld devices."
-	icon_state = "cell" //placeholder
-	w_class = SMALL_ITEM
+	icon_state = "device"
+	w_class = ITEM_SIZE_SMALL
 	force = 0
 	throw_speed = 5
 	throw_range = 7
-	maxcharge = 1000
-	matter = list("metal" = 350, "glass" = 50)
+	maxcharge = 100
+	matter = list("metal" = 70, "glass" = 5)
 
 /obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
-	..(newloc)
 	maxcharge = charge_amount
-	charge = maxcharge
-	update_icon()
+	..(newloc)
 
+/obj/item/weapon/cell/device/standard
+	name = "standard device power cell"
+	maxcharge = 25
+
+/obj/item/weapon/cell/device/high
+	name = "advanced device power cell"
+	desc = "A small power cell designed to power more energy-demanding devices."
+	icon_state = "hdevice"
+	maxcharge = 100
+	matter = list("metal" = 70, "glass" = 6)
 
 /obj/item/weapon/cell/crap
 	name = "old power cell"
@@ -149,10 +156,8 @@ var/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglie
 	maxcharge = 100
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
 
-/obj/item/weapon/cell/crap/empty/New()
-	..()
+/obj/item/weapon/cell/crap/empty
 	charge = 0
-
 
 /obj/item/weapon/cell/standard
 	name = "standard power cell"

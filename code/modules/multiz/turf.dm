@@ -2,7 +2,7 @@
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
 	icon_state = "empty"
-	layer = 0
+	plane = SPACE_PLANE
 	density = 0
 	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
 
@@ -22,7 +22,7 @@
 /turf/simulated/open/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	if(!istype(N,/turf/simulated/open))
 		update_cliff(src)
-	..()
+	return ..()
 
 /turf/simulated/open/proc/update_cliff(turf/ignore)
 	var/turf/simulated/open/O = get_step(src,SOUTH)
@@ -147,7 +147,7 @@
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "<span class='notice'>You lay down the support lattice.</span>"
+			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z))
 		return
@@ -164,5 +164,5 @@
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
-			user << "<span class='warning'>The plating is going to need some support.</span>"
+			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 	return

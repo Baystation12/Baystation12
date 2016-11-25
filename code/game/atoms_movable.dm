@@ -1,5 +1,6 @@
 /atom/movable
-	layer = 3
+	plane = OBJ_PLANE
+
 	appearance_flags = TILE_BOUND
 	var/last_move = null
 	var/anchored = 0
@@ -20,7 +21,7 @@
 
 /atom/movable/New()
 	..()
-	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
+	if(auto_init && (initialization_stage & INITIALIZATION_COMPLETE))
 		initialize()
 
 /atom/movable/Del()

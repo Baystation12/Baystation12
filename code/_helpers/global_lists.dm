@@ -62,7 +62,6 @@ var/datum/visualnet/camera/cameranet = new()
 
 // Runes
 var/global/list/rune_list = new()
-var/global/list/escape_list = list()
 var/global/list/endgame_exits = list()
 var/global/list/endgame_safespawns = list()
 
@@ -206,7 +205,8 @@ var/global/list/string_slot_flags = list(
 			var/list/L = chemical_reactions_list[reaction]
 			for(var/t in L)
 				. += "    has: [t]\n"
-	world << .
+	log_debug(.)
+
 */
 
 //*** params cache

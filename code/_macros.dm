@@ -13,11 +13,15 @@
 
 #define isairlock(A) istype(A, /obj/machinery/door/airlock)
 
+#define isatom(A) istype(A, /atom)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)
 
 #define iscolorablegloves(A) (istype(A, /obj/item/clothing/gloves/color)||istype(A, /obj/item/clothing/gloves/insulated)||istype(A, /obj/item/clothing/gloves/thick))
+
+#define isclient(A) istype(A, /client)
 
 #define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
 
@@ -47,6 +51,8 @@
 
 #define isorgan(A) istype(A, /obj/item/organ/external)
 
+#define isspace(A) istype(A, /area/space)
+
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
@@ -54,6 +60,10 @@
 #define issilicon(A) istype(A, /mob/living/silicon)
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
+
+#define isvirtualmob(A) istype(A, /mob/observer/virtual)
+
+#define isweakref(A) istype(A, /weakref)
 
 #define attack_animation(A) if(istype(A)) A.do_attack_animation(src)
 
@@ -64,9 +74,20 @@
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
 #define to_chat(target, message) target << message
+#define to_world(message) world << message
+
+#define sound_to(target, sound) target << sound
 
 #define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
 
 #define map_image_file_name(z_level) "[using_map.path]-[z_level].png"
 
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+
+#define any2ref(x) "\ref[x]"
+
+#define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
+
+#define qdel_null(x) if(x) { qdel(x) ; x = null }
+
+#define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }

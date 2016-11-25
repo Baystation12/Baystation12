@@ -1,6 +1,10 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
 	level = 1
+
+	plane = TURF_PLANE
+	layer = BASE_TURF_LAYER
+
 	var/holy = 0
 
 	// Initial air contents (in moles)
@@ -126,7 +130,7 @@ var/const/enterloopsanity = 100
 		var/mob/M = A
 		if(!M.check_solid_ground())
 			inertial_drift(M)
-			//we'll end up checking solid ground again but we still need to check the other things. 
+			//we'll end up checking solid ground again but we still need to check the other things.
 			//Ususally most people aren't in space anyways so hopefully this is acceptable.
 			M.update_floating()
 		else
@@ -217,7 +221,7 @@ var/const/enterloopsanity = 100
 		clean_blood()
 		remove_cleanables()
 	else
-		user << "<span class='warning'>\The [source] is too dry to wash that.</span>"
+		to_chat(user, "<span class='warning'>\The [source] is too dry to wash that.</span>")
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 
 /turf/proc/remove_cleanables()

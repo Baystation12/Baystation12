@@ -11,7 +11,7 @@
 		return
 
 	if(user.hardware)
-		user << "You have already selected your hardware."
+		to_chat(user, "You have already selected your hardware.")
 		return
 
 	var/hardware_list = list()
@@ -39,7 +39,7 @@
 	if(C)
 		note = C.desc
 	else
-		user << "This hardware does not exist! Probably a bug in game. Please report this."
+		to_chat(user, "This hardware does not exist! Probably a bug in game. Please report this.")
 		return
 
 
@@ -49,10 +49,11 @@
 
 	var/confirmation = alert("[note] - Is this what you want?", "Hardware selection", "Yes", "No")
 	if(confirmation != "Yes")
-		user << "Selection cancelled. Use command again to select"
+		to_chat(user, "Selection cancelled. Use command again to select")
 		return
 
 	if(C)
+		log_ability_use(src, "Picked hardware [C.name]")
 		C.owner = user
 		C.install()
 
@@ -89,7 +90,8 @@
 	if(!tar)
 		return
 	res.focus = tar
-	user << "Research set: [tar.name]"
+	to_chat(user, "Research set: [tar.name]")
+	log_ability_use(src, "Selected research: [tar.name]", null, 0)
 
 // HELPER PROCS
 // Proc: ability_prechecks()
@@ -99,25 +101,25 @@
 	if(!user)
 		return 0
 	if(!istype(user))
-		user << "GAME ERROR: You tried to use ability that is only available for malfunctioning AIs, but you are not AI! Please report this."
+		to_chat(user, "GAME ERROR: You tried to use ability that is only available for malfunctioning AIs, but you are not AI! Please report this.")
 		return 0
 	if(!user.malfunctioning)
-		user << "GAME ERROR: You tried to use ability that is only available for malfunctioning AIs, but you are not malfunctioning. Please report this."
+		to_chat(user, "GAME ERROR: You tried to use ability that is only available for malfunctioning AIs, but you are not malfunctioning. Please report this.")
 		return 0
 	if(!user.research)
-		user << "GAME ERROR: No research datum detected. Please report this."
+		to_chat(user, "GAME ERROR: No research datum detected. Please report this.")
 		return 0
 	if(user.research.max_cpu < check_price)
-		user << "Your CPU storage is not large enough to use this ability. Hack more APCs to continue."
+		to_chat(user, "Your CPU storage is not large enough to use this ability. Hack more APCs to continue.")
 		return 0
 	if(user.research.stored_cpu < check_price)
-		user << "You do not have enough CPU power stored. Please wait a moment."
+		to_chat(user, "You do not have enough CPU power stored. Please wait a moment.")
 		return 0
 	if(user.hacking && !override)
-		user << "Your system is busy processing another task. Please wait until completion."
+		to_chat(user, "Your system is busy processing another task. Please wait until completion.")
 		return 0
 	if(user.APU_power && !override)
-		user << "Low power. Unable to proceed."
+		to_chat(user, "Low power. Unable to proceed.")
 		return 0
 	return 1
 
@@ -128,16 +130,16 @@
 	if(!user)
 		return 0
 	if(user.APU_power)
-		user << "Low power. Unable to proceed."
+		to_chat(user, "Low power. Unable to proceed.")
 		return 0
 	if(!user.research)
-		user << "GAME ERROR: No research datum detected. Please report this."
+		to_chat(user, "GAME ERROR: No research datum detected. Please report this.")
 		return 0
 	if(user.research.max_cpu < price)
-		user << "Your CPU storage is not large enough to use this ability. Hack more APCs to continue."
+		to_chat(user, "Your CPU storage is not large enough to use this ability. Hack more APCs to continue.")
 		return 0
 	if(user.research.stored_cpu < price)
-		user << "You do not have enough CPU power stored. Please wait a moment."
+		to_chat(user, "You do not have enough CPU power stored. Please wait a moment.")
 		return 0
 	user.research.stored_cpu -= price
 	return 1
@@ -165,14 +167,22 @@
 
 // Proc: get_unhacked_apcs()
 // Parameters: None
-// Description: Returns a list of all unhacked APCs
+// Description: Returns a list of all unhacked APCs. APCs on station Zs are on top of the list.
 /proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
-	var/list/H = list()
+	var/list/station_apcs = list()
+	var/list/offstation_apcs = list()
+
 	for(var/obj/machinery/power/apc/A in machines)
 		if(A.hacker && A.hacker == user)
 			continue
-		H.Add(A)
-	return H
+		if(A.z in using_map.station_levels)
+			station_apcs.Add(A)
+		else
+			offstation_apcs.Add(A)
+
+	// Append off-station APCs to the end of station APCs list and return it.
+	station_apcs.Add(offstation_apcs)
+	return station_apcs
 
 
 // Helper procs which return lists of relevant mobs.
@@ -204,3 +214,11 @@
 			continue
 		L.Add(AT)
 	return L
+
+/proc/log_ability_use(var/mob/living/silicon/ai/A, var/ability_name, var/atom/target = null, var/notify_admins = 1)
+	var/message
+	if(target)
+		message = text("used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")
+	else
+		message = text("used malf ability/function: [ability_name].")
+	admin_attack_log(A, null, message, null, message)

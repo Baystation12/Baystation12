@@ -68,7 +68,7 @@ proc/cardinalrange(var/center)
 /obj/machinery/am_shielding/Destroy()
 	if(control_unit)	control_unit.remove_shielding(src)
 	if(processing)	shutdown_core()
-	visible_message("\red The [src.name] melts!")
+	visible_message("<span class='warning'>\The [src] melts!</span>")
 	//Might want to have it leave a mess on the floor but no sprites for now
 	..()
 	return
@@ -191,7 +191,7 @@ proc/cardinalrange(var/center)
 	icon = 'icons/obj/machines/antimatter.dmi'
 	icon_state = "box"
 	item_state = "electronic"
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	flags = CONDUCT
 	throwforce = 5
 	throw_speed = 1

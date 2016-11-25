@@ -49,13 +49,13 @@
 		camera.set_status(!camera.status)
 		if(camera.status)
 			camera.c_tag = FindNameFromID(usr)
-			usr << "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>"
+			to_chat(usr, "<span class='notice'>User scanned as [camera.c_tag]. Camera activated.</span>")
 		else
-			usr << "<span class='notice'>Camera deactivated.</span>"
+			to_chat(usr, "<span class='notice'>Camera deactivated.</span>")
 
 /obj/item/clothing/head/helmet/space/examine(var/mob/user)
 	if(..(user, 1) && camera)
-		user << "This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active."
+		to_chat(user, "This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
@@ -66,7 +66,7 @@
 		slot_l_hand_str = 'icons/mob/items/lefthand_spacesuits.dmi',
 		slot_r_hand_str = 'icons/mob/items/righthand_spacesuits.dmi',
 		)
-	w_class = 4//large item
+	w_class = ITEM_SIZE_LARGE//large item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL

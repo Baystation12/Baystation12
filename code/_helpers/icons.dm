@@ -167,7 +167,7 @@ mob
 
 		Output_Icon()
 			set name = "2. Output Icon"
-			src<<"Icon is: \icon[getFlatIcon(src)]"
+			to_chat(src, "Icon is: \icon[getFlatIcon(src)]")
 
 		Label_Icon()
 			set name = "3. Label Icon"
@@ -204,7 +204,8 @@ obj/effect/overlayTest
 	icon_state = "blue"
 	pixel_x = -24
 	pixel_y = 24
-	layer = TURF_LAYER // Should appear below the rest of the overlays
+	plane = ABOVE_TURF_PLANE
+	layer = HOLOMAP_LAYER
 
 world
 	view = "7x7"
@@ -859,7 +860,7 @@ proc/sort_atoms_by_layer(var/list/atoms)
 		for(var/i = 1; gap + i <= result.len; i++)
 			var/atom/l = result[i]		//Fucking hate
 			var/atom/r = result[gap+i]	//how lists work here
-			if(l.layer > r.layer)		//no "result[i].layer" for me
+			if(l.plane > r.plane || (l.plane == r.plane && l.layer > r.layer))		//no "result[i].layer" for me
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result

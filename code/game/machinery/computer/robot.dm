@@ -36,7 +36,7 @@
 		return
 	var/mob/user = usr
 	if(!src.allowed(user))
-		user << "Access Denied"
+		to_chat(user, "Access Denied")
 		return
 
 	// Destroys the cyborg
@@ -45,11 +45,11 @@
 		if(!target || !istype(target))
 			return
 		if(isAI(user) && (target.connected_ai != user))
-			user << "Access Denied. This robot is not linked to you."
+			to_chat(user, "Access Denied. This robot is not linked to you.")
 			return
 		// Cyborgs may blow up themselves via the console
 		if(isrobot(user) && user != target)
-			user << "Access Denied."
+			to_chat(user, "Access Denied.")
 			return
 		var/choice = input("Really detonate [target.name]?") in list ("Yes", "No")
 		if(choice != "Yes")
@@ -59,12 +59,12 @@
 
 		// Antagonistic cyborgs? Left here for downstream
 		if(target.mind && target.mind.special_role && target.emagged)
-			target << "Extreme danger.  Termination codes detected.  Scrambling security codes and automatic AI unlink triggered."
+			to_chat(target, "Extreme danger.  Termination codes detected.  Scrambling security codes and automatic AI unlink triggered.")
 			target.ResetSecurityCodes()
 		else
 			message_admins("<span class='notice'>[key_name_admin(usr)] detonated [target.name]!</span>")
 			log_game("[key_name(usr)] detonated [target.name]!")
-			target << "<span class='danger'>Self-destruct command received.</span>"
+			to_chat(target, "<span class='danger'>Self-destruct command received.</span>")
 			spawn(10)
 				target.self_destruct()
 
@@ -77,11 +77,11 @@
 			return
 
 		if(isAI(user) && (target.connected_ai != user))
-			user << "<span class='warning'>Access Denied. This robot is not linked to you.</span>"
+			to_chat(user, "<span class='warning'>Access Denied. This robot is not linked to you.</span>")
 			return
 
 		if(isrobot(user))
-			user << "<span class='warning'>Access Denied.</span>"
+			to_chat(user, "<span class='warning'>Access Denied.</span>")
 			return
 
 		var/choice = input("Really [target.lockcharge ? "unlock" : "lockdown"] [target.name] ?") in list ("Yes", "No")
@@ -95,11 +95,11 @@
 			message_admins("<span class='notice'>[key_name_admin(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!</span>")
 			log_game("[key_name(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!")
 			if(target.lockcharge)
-				target << "<span class='danger'>You have been locked down!</span>"
+				to_chat(target, "<span class='danger'>You have been locked down!</span>")
 			else
-				target << "<span class='notice'>Your lockdown has been lifted!</span>"
+				to_chat(target, "<span class='notice'>Your lockdown has been lifted!</span>")
 		else
-			user << "<span class='warning'>ERROR: Lockdown attempt failed.</span>"
+			to_chat(user, "<span class='warning'>ERROR: Lockdown attempt failed.</span>")
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
 	else if (href_list["hack"])
@@ -109,11 +109,11 @@
 
 		// Antag AI checks
 		if(!istype(user, /mob/living/silicon/ai) || !(user.mind.special_role && user.mind.original == user))
-			user << "Access Denied"
+			to_chat(user, "Access Denied")
 			return
 
 		if(target.emagged)
-			user << "Robot is already hacked."
+			to_chat(user, "Robot is already hacked.")
 			return
 
 		var/choice = input("Really hack [target.name]? This cannot be undone.") in list("Yes", "No")
@@ -126,24 +126,24 @@
 		message_admins("<span class='notice'>[key_name_admin(usr)] emagged [target.name] using robotic console!</span>")
 		log_game("[key_name(usr)] emagged [target.name] using robotic console!")
 		target.emagged = 1
-		target << "<span class='notice'>Failsafe protocols overriden. New tools available.</span>"
+		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
 
 	// Arms the emergency self-destruct system
 	else if(href_list["arm"])
 		if(istype(user, /mob/living/silicon))
-			user << "Access Denied"
+			to_chat(user, "Access Denied")
 			return
 
 		safety = !safety
-		user << "You [safety ? "disarm" : "arm"] the emergency self destruct"
+		to_chat(user, "You [safety ? "disarm" : "arm"] the emergency self destruct")
 
 	// Destroys all accessible cyborgs if safety is disabled
 	else if(href_list["nuke"])
 		if(istype(user, /mob/living/silicon))
-			user << "Access Denied"
+			to_chat(user, "Access Denied")
 			return
 		if(safety)
-			user << "Self-destruct aborted - safety active"
+			to_chat(user, "Self-destruct aborted - safety active")
 			return
 
 		message_admins("<span class='notice'>[key_name_admin(usr)] detonated all cyborgs!</span>")
@@ -155,7 +155,7 @@
 			// Ignore antagonistic cyborgs
 			if(R.scrambledcodes)
 				continue
-			R << "<span class='danger'>Self-destruct command received.</span>"
+			to_chat(R, "<span class='danger'>Self-destruct command received.</span>")
 			spawn(10)
 				R.self_destruct()
 

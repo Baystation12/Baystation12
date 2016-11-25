@@ -17,11 +17,11 @@
 		return
 
 	if(handcuffed || legcuffed)
-		src << "<span class='warning'>You cannot evolve when you are cuffed.</span>"
+		to_chat(src, "<span class='warning'>You cannot evolve when you are cuffed.</span>")
 		return
 
 	if(amount_grown < max_grown)
-		src << "<span class='warning'>You are not fully grown.</span>"
+		to_chat(src, "<span class='warning'>You are not fully grown.</span>")
 		return
 
 	// confirm_evolution() handles choices and other specific requirements.
@@ -36,6 +36,13 @@
 
 	if(mind)
 		mind.transfer_to(adult)
+		if (can_namepick_as_adult)
+			var/newname = sanitize(input(adult, "You have become an adult. Choose a name for yourself.", "Adult Name") as null|text, MAX_NAME_LEN)
+
+			if(!newname)
+				adult.fully_replace_character_name("[src.adult_name] ([instance_num])")
+			else
+				adult.fully_replace_character_name(newname)
 	else
 		adult.key = src.key
 

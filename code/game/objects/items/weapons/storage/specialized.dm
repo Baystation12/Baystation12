@@ -1,5 +1,5 @@
 /*
-	Mining and plant bags, can store a ridiculous number of items in order to deal with the ridiculous amount of ores or plant products 
+	Mining and plant bags, can store a ridiculous number of items in order to deal with the ridiculous amount of ores or plant products
 	that can be produced by mining or (xeno)botany, however it can only hold those items.
 
 	These storages typically should also support quick gather and quick empty to make managing large numbers of items easier.
@@ -16,8 +16,8 @@
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT
 	max_storage_space = 200
-	max_w_class = 3
-	w_class = 4
+	max_w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/weapon/ore)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
@@ -35,8 +35,8 @@
 	icon_state = "plantbag"
 	slot_flags = SLOT_BELT
 	max_storage_space = 100
-	max_w_class = 2
-	w_class = 3
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
@@ -56,8 +56,10 @@
 	icon_state = "sheetsnatcher"
 	desc = "A patented storage system designed for any kind of mineral sheet."
 
+	storage_ui = /datum/storage_ui/default/sheetsnatcher
+
 	var/capacity = 300; //the number of sheets it can carry.
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
 
 	allow_quick_empty = 1 // this function is superceded
@@ -69,14 +71,14 @@
 	can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 		if(!istype(W,/obj/item/stack/material))
 			if(!stop_messages)
-				user << "The snatcher does not accept [W]."
+				to_chat(user, "The snatcher does not accept [W].")
 			return 0
 		var/current = 0
 		for(var/obj/item/stack/material/S in contents)
 			current += S.amount
 		if(capacity == current)//If it's full, you're done
 			if(!stop_messages)
-				user << "<span class='warning'>The snatcher is full.</span>"
+				to_chat(user, "<span class='warning'>The snatcher is full.</span>")
 			return 0
 		return 1
 
@@ -109,25 +111,9 @@
 				qdel(S)
 			usr.update_icons()	//update our overlays
 
-		orient2hud(usr)
-		if(usr.s_active)
-			usr.s_active.show_to(usr)
+		prepare_ui(usr)
 		update_icon()
 		return 1
-
-
-// Sets up numbered display to show the stack size of each stored mineral
-// NOTE: numbered display is turned off currently because it's broken
-	orient2hud(mob/user as mob)
-		var/adjusted_contents = contents.len
-
-		var/row_num = 0
-		var/col_count = min(7,storage_slots) -1
-		if (adjusted_contents > 7)
-			row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
-		src.arrange_item_slots(row_num, col_count)
-		return
-
 
 // Modified quick_empty verb drops appropriate sized stacks
 	quick_empty()
@@ -140,7 +126,7 @@
 				S.amount -= stacksize
 			if(!S.amount)
 				qdel(S) // todo: there's probably something missing here
-		orient2hud(usr)
+		prepare_ui()
 		if(usr.s_active)
 			usr.s_active.show_to(usr)
 		update_icon()

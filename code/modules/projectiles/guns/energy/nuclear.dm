@@ -26,7 +26,7 @@
 	icon_state = "nucgun"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
 	slot_flags = SLOT_BELT
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
 	modifystate = null
@@ -45,20 +45,20 @@
 	if(charge_tick < 4) return 0
 	charge_tick = 0
 	if(!power_supply) return 0
-	if((power_supply.charge / power_supply.maxcharge) != 1)
+	if(power_supply.percent() < 100)
 		power_supply.give(charge_cost)
 		update_icon()
 	return 1
 
 /obj/item/weapon/gun/energy/gun/nuclear/proc/update_charge()
-	var/ratio = power_supply.charge / power_supply.maxcharge
-	ratio = round(ratio, 0.25) * 100
+	var/ratio = power_supply.percent()
+	ratio = round(ratio, 25)
 	overlays += "nucgun-[ratio]"
 
 /obj/item/weapon/gun/energy/gun/nuclear/proc/update_reactor()
 	if(lightfail)
 		overlays += "nucgun-medium"
-	else if ((power_supply.charge/power_supply.maxcharge) <= 0.5)
+	else if (power_supply.percent() <= 50)
 		overlays += "nucgun-light"
 	else
 		overlays += "nucgun-clean"

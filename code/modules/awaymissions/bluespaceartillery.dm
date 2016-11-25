@@ -32,16 +32,17 @@
 	onclose(user, "scroll")
 	return
 
-/obj/machinery/artillerycontrol/Topic(href, href_list)
-	..()
-	if (usr.stat || usr.restrained())
-		return
+/obj/machinery/artillerycontrol/Topic(href, href_list, state = physical_state)
+	if(..())
+		return 1
+
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-		var/A
-		A = input("Area to jump bombard", "Open Fire", A) in teleportlocs
-		var/area/thearea = teleportlocs[A]
-		if (usr.stat || usr.restrained()) return
-		if(src.reload < 180) return
+		var/area/thearea = input("Area to jump bombard", "Open Fire") as null|anything in teleportlocs
+		thearea = thearea ? teleportlocs[thearea] : thearea
+		if (!thearea || CanUseTopic(usr, physical_state) != STATUS_INTERACTIVE)
+			return
+		if (src.reload < 180)
+			return
 		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 			command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
 			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
@@ -51,16 +52,3 @@
 			var/loc = pick(L)
 			explosion(loc,2,5,11)
 			reload = 0
-
-/*mob/proc/openfire()
-	var/A
-	A = input("Area to jump bombard", "Open Fire", A) in teleportlocs
-	var/area/thearea = teleportlocs[A]
-	command_alert("Bluespace artillery fire detected. Brace for impact.")
-	spawn(30)
-	var/list/L = list()
-
-	for(var/turf/T in get_area_turfs(thearea))
-		L+=T
-	var/loc = pick(L)
-	explosion(loc,2,5,11)*/

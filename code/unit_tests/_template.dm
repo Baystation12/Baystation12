@@ -5,13 +5,13 @@
  *
  */
 
-datum/unit_test/template
+/datum/unit_test/template
 	name = "Test Template - Change My name"		// If it's a template leave the word "template" in it's name so it's not ran.
-	
-	async = 1 // Set if we should continue testing elsewhere and come back and check on the results.
-	
 
-datum/unit_test/template/start_test()
+	async = 1 // Set if we should continue testing elsewhere and come back and check on the results.
+
+
+/datum/unit_test/template/start_test()
 	// This must return something, if it's null the unit_test runner will think we runtimed.
 	// If your test requires any kind of delay use async so we can finish tests faster.
 	// Be sure and have a pass/fail procs in here if it's not using async.
@@ -24,12 +24,12 @@ datum/unit_test/template/start_test()
 
 	return 1
 
-datum/unit_test/template/check_result()
+/datum/unit_test/template/check_result()
 	// Only Ran if async is set.  Use this proc for checking back if the test passed or not.
 	// Return 0 if we need to come back again and check this.
 	// Return 1 if the test is complete.
 
-	// 
+	//
 
 	pass("Winner is you")
 

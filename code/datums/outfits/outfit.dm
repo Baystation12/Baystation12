@@ -50,6 +50,10 @@ var/list/outfits_decls_by_type_
 
 	var/id_pda_assignment
 
+	var/backpack = /obj/item/weapon/storage/backpack
+	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel_norm
+	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
+
 	var/flags // Specific flags
 
 /decl/hierarchy/outfit/New()
@@ -61,8 +65,12 @@ var/list/outfits_decls_by_type_
 	dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
-	//to be overriden for customization depending on client prefs,species etc
-	return
+	if(flags & OUTFIT_HAS_BACKPACK)
+		switch(H.backbag)
+			if(2) back = backpack
+			if(3) back = satchel_one
+			if(4) back = satchel_two
+			else back = null
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
@@ -72,11 +80,38 @@ var/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
+// A proc for non-human species, specially Unathi and Tajara, since they e.g.
+// can't normally wear gloves as humans. Correct this issue by trying again, but
+// apply some changes to the said item.
+//
+// Currently checks for gloves
+//
+// If you want to add more items that has species restriction, consider follow-
+// ing the same format as the gloves shown in the code below. Thanks.
+/decl/hierarchy/outfit/proc/check_and_try_equip_xeno(mob/living/carbon/human/H)
+	var/datum/species/S = H.species
+	if (!S || istype(S, /datum/species/human)) // null failcheck & get out here you damn humans
+		return
+
+	// Gloves
+	if (gloves && !H.get_equipped_item(slot_gloves)) // does mob not have gloves, despite the outfit has one specified?
+		var/obj/item/clothing/gloves/G = new gloves(H) // we've no use of a null object, instantize one
+		if (S.get_bodytype() in G.species_restricted) // what was the problem?
+			if ("exclude" in G.species_restricted) // are they excluded?
+				G.cut_fingertops()
+				// I could optimize this bit when we are trying to apply the gloves to e.g. Vox, a species still restricted despite G.cut_fingertops(). But who cares if this is codebase is like a plate of spaghetti twice over the brim, right? RIGHT?
+				H.equip_to_slot_or_del(G,slot_gloves) // try again
+		else
+			qdel(G)
+	// end Gloves
+
+// end of check_and_try_equip_xeno
+
 /decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
 	equip_base(H)
 
-	rank = id_pda_assignment ? id_pda_assignment : rank
-	assignment = id_pda_assignment ? id_pda_assignment : (assignment ? assignment : rank)
+	rank = id_pda_assignment || rank
+	assignment = id_pda_assignment || assignment || rank
 	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
 	if(W)
 		rank = W.rank
@@ -90,6 +125,8 @@ var/list/outfits_decls_by_type_
 
 	post_equip(H)
 	H.regenerate_icons()
+	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
+		H.set_id_info(W)
 	return 1
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
@@ -133,6 +170,7 @@ var/list/outfits_decls_by_type_
 		H.put_in_r_hand(new r_hand(H))
 	if(H.species)
 		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
+	check_and_try_equip_xeno(H)
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot)

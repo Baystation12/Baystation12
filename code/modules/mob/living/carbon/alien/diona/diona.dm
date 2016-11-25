@@ -2,6 +2,8 @@
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	adult_form = /mob/living/carbon/human
+	can_namepick_as_adult = 1
+	adult_name = "diona gestalt"
 	speak_emote = list("chirrups")
 	icon_state = "nymph"
 	item_state = "nymph"
@@ -10,7 +12,7 @@
 	universal_understand = 1
 	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
 
-	can_pull_size = SMALL_ITEM
+	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	holder_type = /obj/item/weapon/holder/diona

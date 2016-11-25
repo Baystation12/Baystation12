@@ -25,7 +25,8 @@ var/global/list/light_type_cache = list()
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 
 	var/stage = 1
 	var/fixture_type = /obj/machinery/light
@@ -56,16 +57,15 @@ var/global/list/light_type_cache = list()
 		return
 
 	switch(src.stage)
-		if(1) user << "It's an empty frame."
-		if(2) user << "It's wired."
-		if(3) user << "The casing is closed."
-
+		if(1) to_chat(user, "It's an empty frame.")
+		if(2) to_chat(user, "It's wired.")
+		if(3) to_chat(user, "The casing is closed.")
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (istype(W, /obj/item/weapon/wrench))
 		if (src.stage == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			usr << "You begin deconstructing \a [src]."
+			to_chat(usr, "You begin deconstructing \a [src].")
 			if (!do_after(usr, 30,src))
 				return
 			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
@@ -74,11 +74,11 @@ var/global/list/light_type_cache = list()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
 			qdel(src)
 		if (src.stage == 2)
-			usr << "You have to remove the wires first."
+			to_chat(usr, "You have to remove the wires first.")
 			return
 
 		if (src.stage == 3)
-			usr << "You have to unscrew the case first."
+			to_chat(usr, "You have to unscrew the case first.")
 			return
 
 	if(istype(W, /obj/item/weapon/wirecutters))
@@ -123,7 +123,8 @@ var/global/list/light_type_cache = list()
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	stage = 1
 	fixture_type = /obj/machinery/light/small
 	sheets_refunded = 1
@@ -142,7 +143,8 @@ var/global/list/light_type_cache = list()
 	icon_state = "tube1"
 	desc = "A lighting fixture."
 	anchored = 1
-	layer = 5  					// They were appearing under mobs which is a little weird - Ostaf
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = 2
 	idle_power_usage = 2
 	active_power_usage = 20
@@ -268,7 +270,7 @@ var/global/list/light_type_cache = list()
 	if(!damage)
 		return
 	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
-		user << "That object is useless to you."
+		to_chat(user, "That object is useless to you.")
 		return
 	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
 		return
@@ -303,13 +305,13 @@ var/global/list/light_type_cache = list()
 	var/fitting = get_fitting_name()
 	switch(status)
 		if(LIGHT_OK)
-			user << "[desc] It is turned [on? "on" : "off"]."
+			to_chat(user, "[desc] It is turned [on? "on" : "off"].")
 		if(LIGHT_EMPTY)
-			user << "[desc] The [fitting] has been removed."
+			to_chat(user, "[desc] The [fitting] has been removed.")
 		if(LIGHT_BURNED)
-			user << "[desc] The [fitting] is burnt out."
+			to_chat(user, "[desc] The [fitting] is burnt out.")
 		if(LIGHT_BROKEN)
-			user << "[desc] The [fitting] has been smashed."
+			to_chat(user, "[desc] The [fitting] has been smashed.")
 
 /obj/machinery/light/proc/get_fitting_name()
 	var/obj/item/weapon/light/L = light_type
@@ -360,13 +362,13 @@ var/global/list/light_type_cache = list()
 	// attempt to insert light
 	if(istype(W, /obj/item/weapon/light))
 		if(status != LIGHT_EMPTY)
-			user << "There is a [get_fitting_name()] already inserted."
+			to_chat(user, "There is a [get_fitting_name()] already inserted.")
 			return
 		if(!istype(W, light_type))
-			user << "This type of light requires a [get_fitting_name()]."
+			to_chat(user, "This type of light requires a [get_fitting_name()].")
 			return
 
-		user << "You insert [W]."
+		to_chat(user, "You insert [W].")
 		insert_bulb(W)
 		src.add_fingerprint(user)
 
@@ -377,7 +379,7 @@ var/global/list/light_type_cache = list()
 
 		if(prob(1+W.force * 5))
 
-			user << "You hit the light, and it smashes!"
+			to_chat(user, "You hit the light, and it smashes!")
 			for(var/mob/M in viewers(src))
 				if(M == user)
 					continue
@@ -388,7 +390,7 @@ var/global/list/light_type_cache = list()
 			broken()
 
 		else
-			user << "You hit the light!"
+			to_chat(user, "You hit the light!")
 
 	// attempt to stick weapon into light socket
 	else if(status == LIGHT_EMPTY)
@@ -401,7 +403,7 @@ var/global/list/light_type_cache = list()
 			qdel(src)
 			return
 
-		user << "You stick \the [W] into the light socket!"
+		to_chat(user, "You stick \the [W] into the light socket!")
 		if(powered() && (W.flags & CONDUCT))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
@@ -444,14 +446,14 @@ var/global/list/light_type_cache = list()
 	add_fingerprint(user)
 
 	if(status == LIGHT_EMPTY)
-		user << "There is no [get_fitting_name()] in this light."
+		to_chat(user, "There is no [get_fitting_name()] in this light.")
 		return
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			for(var/mob/M in viewers(src))
-				M.show_message("\red [user.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
+				M.show_message("<span class='warning'>[user.name] smashed the light!</span>", 3, "You hear a tinkle of breaking glass", 2)
 			broken()
 			return
 
@@ -472,14 +474,14 @@ var/global/list/light_type_cache = list()
 			prot = 1
 
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
-			user << "You remove the light [get_fitting_name()]"
+			to_chat(user, "You remove the light [get_fitting_name()]")
 		else if(TK in user.mutations)
-			user << "You telekinetically remove the light [get_fitting_name()]."
+			to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
 		else
-			user << "You try to remove the light [get_fitting_name()], but it's too hot and you don't want to burn your hand."
+			to_chat(user, "You try to remove the light [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
 			return				// if burned, don't remove the light
 	else
-		user << "You remove the light [get_fitting_name()]."
+		to_chat(user, "You remove the light [get_fitting_name()].")
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
@@ -487,10 +489,10 @@ var/global/list/light_type_cache = list()
 
 /obj/machinery/light/attack_tk(mob/user)
 	if(status == LIGHT_EMPTY)
-		user << "There is no [get_fitting_name()] in this light."
+		to_chat(user, "There is no [get_fitting_name()] in this light.")
 		return
 
-	user << "You telekinetically remove the light [get_fitting_name()]."
+	to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
 	remove_bulb()
 
 // ghost attack - make lights flicker like an AI, but even spookier!
@@ -576,7 +578,7 @@ obj/machinery/light/proc/burn_out()
 	icon = 'icons/obj/lighting.dmi'
 	force = 2
 	throwforce = 5
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
@@ -605,7 +607,7 @@ obj/machinery/light/proc/burn_out()
 		)
 
 /obj/item/weapon/light/tube/large
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
 	brightness_range = 12
 	brightness_power = 4
@@ -681,7 +683,7 @@ obj/machinery/light/proc/burn_out()
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
 		var/obj/item/weapon/reagent_containers/syringe/S = I
 
-		user << "You inject the solution into the [src]."
+		to_chat(user, "You inject the solution into the [src].")
 
 		if(S.reagents.has_reagent("phoron", 5))
 
@@ -710,7 +712,7 @@ obj/machinery/light/proc/burn_out()
 
 /obj/item/weapon/light/proc/shatter()
 	if(status == LIGHT_OK || status == LIGHT_BURNED)
-		src.visible_message("\red [name] shatters.","\red You hear a small glass object shatter.")
+		src.visible_message("<span class='warning'>[name] shatters.</span>","<span class='warning'>You hear a small glass object shatter.</span>")
 		status = LIGHT_BROKEN
 		force = 5
 		sharp = 1

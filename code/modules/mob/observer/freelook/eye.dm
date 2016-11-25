@@ -8,7 +8,6 @@
 	var/name_sufix = "Eye"
 	icon = 'icons/mob/eye.dmi'
 	icon_state = "default-eye"
-	alpha = 127
 
 	var/sprint = 10
 	var/cooldown = 0

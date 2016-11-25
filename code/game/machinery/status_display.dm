@@ -19,6 +19,7 @@ var/list/status_icons_to_colour = list(
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "status display"
+	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
 	density = 0
 	use_power = 1
@@ -140,7 +141,7 @@ var/list/status_icons_to_colour = list(
 /obj/machinery/status_display/examine(mob/user)
 	. = ..(user)
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
-		user << "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]"
+		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)

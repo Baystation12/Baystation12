@@ -3,6 +3,7 @@
 	name = "plating"
 	icon = 'icons/turf/flooring/plating.dmi'
 	icon_state = "plating"
+	plane = PLATING_PLANE
 
 /turf/simulated/floor/carpet
 	name = "carpet"

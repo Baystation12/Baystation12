@@ -19,8 +19,6 @@
 
 /datum/nano_module/program/merchant
 	name = "Merchant's List"
-	available_to_ai = 1
-
 
 /datum/computer_file/program/merchant/proc/get_merchant(var/num)
 	if(num > traders.len)

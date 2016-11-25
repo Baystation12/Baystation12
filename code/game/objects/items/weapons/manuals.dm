@@ -147,6 +147,43 @@
 				</body>
 			</html>"}
 
+
+
+/obj/item/weapon/book/manual/rust_engine
+	name = "R-UST Operating Manual"
+	icon_state = "bookSupermatter"
+	author = "Anonymous"
+	title = "R-UST Operating Manual"
+
+/obj/item/weapon/book/manual/rust_engine/New()
+	..()
+	dat = {"<html>
+				<head>
+				<style>
+				h1 {font-size: 18px; margin: 15px 0px 5px;}
+				h2 {font-size: 15px; margin: 15px 0px 5px;}
+				li {margin: 2px 0px 2px 15px;}
+				ul {margin: 5px; padding: 0px;}
+				ol {margin: 5px; padding: 0px 15px;}
+				body {font-size: 13px; font-family: Verdana;}
+				</style>
+				</head>
+				<body>
+				<i>This guide appears to have been scribbled in haste on the back of a WetSkrell magazine...</i>
+				<br><br>
+				<ol>
+				<li>Put uranium in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core.</li>
+				<li>Enable and max output on the SMES in the engine room. This is to power the gyrotron.</li>
+				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 501. Any bigger and it will start EMPing the doors. Any smaller and the fuel pellets might miss.</li>
+				<li>Interact with the gyrotron control computer, set power to 50 and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
+				<li>Go into the engine room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
+				<li>Go back to the control room and turn the fuel injectors on. This will start firing pellets into the field.</li>
+				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop). Turn the gyrotron power to 1. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium instability isn't a problem and you can turn the gyrotron off.</li>
+				<li>Configure the SMES, turn the PACMAN off before it explodes.</li>
+				</ol>
+				</body>
+			</html>"}
+
 /obj/item/weapon/book/manual/engineering_hacking
 	name = "Hacking"
 	icon_state ="bookHacking"
@@ -725,6 +762,95 @@
 
 		"}
 
+
+/obj/item/weapon/book/manual/solgov_law
+	name = "Sol Central Government Law"
+	desc = "A brief overview of SolGov Law."
+	icon_state = "bookSolGovLaw"
+	author = "The Sol Central Government"
+	title = "Sol Central Government Law"
+
+/obj/item/weapon/book/manual/solgov_law/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Sol_Central_Government_Law&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
+
+/obj/item/weapon/book/manual/military_law
+	name = "The Sol Code of Military Justice"
+	desc = "A brief overview of military law."
+	icon_state = "bookSolGovLaw"
+	author = "The Sol Central Government"
+	title = "The Sol Code of Military Justice"
+
+/obj/item/weapon/book/manual/military_law/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Sol_Code_of_Military_Justice&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
+/obj/item/weapon/book/manual/sol_sop
+	name = "Standard Operating Procedure"
+	desc = "SOP aboard the SEV Torch."
+	icon_state = "booksolregs"
+	author = "The Sol Central Government"
+	title = "Standard Operating Procedure"
+
+/obj/item/weapon/book/manual/sol_sop/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]SEV_Torch_Standard_Operating_Procedure&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
+/obj/item/weapon/book/manual/nt_regs
+	name = "NanoTrasen Regulations"
+	desc = "A set of corporate guidelines for employees of NanoTrasen."
+	icon_state = "booknanoregs"
+	author = "NanoTrasen"
+	title = "NanoTrasen Regulations"
+
+/obj/item/weapon/book/manual/nt_regs/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
 
 
 /obj/item/weapon/book/manual/medical_diagnostics_manual

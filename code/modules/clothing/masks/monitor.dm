@@ -41,7 +41,7 @@
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_mask == src)
 		canremove = 0
-		H << "<span class='notice'>\The [src] connects to your display output.</span>"
+		to_chat(H, "<span class='notice'>\The [src] connects to your display output.</span>")
 
 /obj/item/clothing/mask/monitor/dropped()
 	canremove = 1
@@ -54,7 +54,7 @@
 		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
 		if(istype(E) && (E.robotic >= ORGAN_ROBOT))
 			return 1
-		user << "<span class='warning'>You must have a robotic head to install this upgrade.</span>"
+		to_chat(user, "<span class='warning'>You must have a robotic head to install this upgrade.</span>")
 	return 0
 
 /obj/item/clothing/mask/monitor/verb/set_monitor_state()
@@ -67,7 +67,7 @@
 	if(!istype(H) || H != usr)
 		return
 	if(H.wear_mask != src)
-		usr << "<span class='warning'>You have not installed \the [src] yet.</span>"
+		to_chat(usr, "<span class='warning'>You have not installed \the [src] yet.</span>")
 		return
 	var/choice = input("Select a screen icon.") as null|anything in monitor_states
 	if(choice)

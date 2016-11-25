@@ -1,32 +1,37 @@
 /datum/gear/accessory
-	display_name = "armband, red"
-	path = /obj/item/clothing/accessory/armband
+	display_name = "black vest"
+	path = /obj/item/clothing/accessory/toggleable/vest
 	slot = slot_tie
 	sort_category = "Accessories"
 
-/datum/gear/accessory/cargo
-	display_name = "armband, cargo"
-	path = /obj/item/clothing/accessory/armband/cargo
+/datum/gear/accessory/suspenders
+	display_name = "suspenders"
+	path = /obj/item/clothing/accessory/suspenders
 
-/datum/gear/accessory/emt
-	display_name = "armband, EMT"
-	path = /obj/item/clothing/accessory/armband/medgreen
+/datum/gear/accessory/wcoat
+	display_name = "waistcoat"
+	path = /obj/item/clothing/accessory/wcoat
 
-/datum/gear/accessory/engineering
-	display_name = "armband, engineering"
-	path = /obj/item/clothing/accessory/armband/engine
+/datum/gear/accessory/necklace
+	display_name = "necklace"
+	path = /obj/item/clothing/accessory/necklace
+	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/accessory/hydroponics
-	display_name = "armband, hydroponics"
-	path = /obj/item/clothing/accessory/armband/hydro
+/datum/gear/accessory/armband
+	display_name = "armband selection"
+	path = /obj/item/clothing/accessory/armband
 
-/datum/gear/accessory/medical
-	display_name = "armband, medical"
-	path = /obj/item/clothing/accessory/armband/med
-
-/datum/gear/accessory/science
-	display_name = "armband, science"
-	path = /obj/item/clothing/accessory/armband/science
+/datum/gear/accessory/armband/New()
+	..()
+	var/armbands = list()
+	armbands["red armband"] = /obj/item/clothing/accessory/armband
+	armbands["cargo armband"] = /obj/item/clothing/accessory/armband/cargo
+	armbands["EMT armband"] = /obj/item/clothing/accessory/armband/medgreen
+	armbands["medical armband"] = /obj/item/clothing/accessory/armband/med
+	armbands["engineering armband"] = /obj/item/clothing/accessory/armband/engine
+	armbands["hydroponics armband"] = /obj/item/clothing/accessory/armband/hydro
+	armbands["science armband"] = /obj/item/clothing/accessory/armband/science
+	gear_tweaks += new/datum/gear_tweak/path(armbands)
 
 /datum/gear/accessory/wallet
 	display_name = "wallet"
@@ -39,29 +44,35 @@
 	cost = 2
 
 /datum/gear/accessory/holster
-	display_name = "holster, armpit"
-	path = /obj/item/clothing/accessory/holster/armpit
+	display_name = "holster selection"
+	path = /obj/item/clothing/accessory/holster
 	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective")
 
-/datum/gear/accessory/holster/hip
-	display_name = "holster, hip"
-	path = /obj/item/clothing/accessory/holster/hip
+/datum/gear/accessory/holster/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
 
-/datum/gear/accessory/holster/waist
-	display_name = "holster, waist"
-	path = /obj/item/clothing/accessory/holster/waist
+/datum/gear/accessory/tie
+	display_name = "tie selection"
+	path = /obj/item/clothing/accessory
 
-/datum/gear/accessory/tie/blue
-	display_name = "tie, blue"
-	path = /obj/item/clothing/accessory/blue
+/datum/gear/accessory/tie/New()
+	..()
+	var/ties = list()
+	ties["blue tie"] = /obj/item/clothing/accessory/blue
+	ties["red tie"] = /obj/item/clothing/accessory/red
+	ties["blue tie, clip"] = /obj/item/clothing/accessory/blue_clip
+	ties["red long tie"] = /obj/item/clothing/accessory/red_long
+	ties["black tie"] = /obj/item/clothing/accessory/black
+	ties["yellow tie"] = /obj/item/clothing/accessory/yellow
+	ties["navy tie"] = /obj/item/clothing/accessory/navy
+	ties["horrible tie"] = /obj/item/clothing/accessory/horrible
+	gear_tweaks += new/datum/gear_tweak/path(ties)
 
-/datum/gear/accessory/tie/red
-	display_name = "tie, red"
-	path = /obj/item/clothing/accessory/red
-
-/datum/gear/accessory/tie/horrible
-	display_name = "tie, socially disgraceful"
-	path = /obj/item/clothing/accessory/horrible
+/datum/gear/accessory/stethoscope
+	display_name = "stethoscope (medical)"
+	path = /obj/item/clothing/accessory/stethoscope
+	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
 
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, engineering"
@@ -85,12 +96,12 @@
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
-	path = /obj/item/clothing/accessory/hawaii
+	path = /obj/item/clothing/accessory/toggleable/hawaii
 
 /datum/gear/accessory/hawaii/New()
 	..()
 	var/list/shirts = list()
-	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/hawaii
-	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
-	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
+	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii
+	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/red
+	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)

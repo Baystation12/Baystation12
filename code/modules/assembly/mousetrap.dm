@@ -10,7 +10,7 @@
 	examine(mob/user)
 		..(user)
 		if(armed)
-			user << "It looks like it's armed."
+			to_chat(user, "It looks like it's armed.")
 
 	update_icon()
 		if(armed)
@@ -41,10 +41,10 @@
 				H.updatehealth()
 		else if(ismouse(target))
 			var/mob/living/simple_animal/mouse/M = target
-			visible_message("\red <b>SPLAT!</b>")
+			visible_message("<span class='danger'>SPLAT!</span>")
 			M.splat()
 		playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
-		layer = MOB_LAYER - 0.2
+		reset_plane_and_layer()
 		armed = 0
 		update_icon()
 		pulse(0)
@@ -52,7 +52,7 @@
 
 	attack_self(mob/living/user as mob)
 		if(!armed)
-			user << "<span class='notice'>You arm [src].</span>"
+			to_chat(user, "<span class='notice'>You arm [src].</span>")
 		else
 			if((CLUMSY in user.mutations) && prob(50))
 				var/which_hand = BP_L_HAND
@@ -62,7 +62,7 @@
 				user.visible_message("<span class='warning'>[user] accidentally sets off [src], breaking their fingers.</span>", \
 									 "<span class='warning'>You accidentally trigger [src]!</span>")
 				return
-			user << "<span class='notice'>You disarm [src].</span>"
+			to_chat(user, "<span class='notice'>You disarm [src].</span>")
 		armed = !armed
 		update_icon()
 		playsound(user.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -3)
@@ -120,8 +120,9 @@
 	set name = "Hide"
 	set category = "Object"
 
-	if(usr.stat)
+	if(usr.incapacitated())
 		return
 
-	layer = TURF_LAYER+0.2
-	usr << "<span class='notice'>You hide [src].</span>"
+	plane = ABOVE_TURF_PLANE
+	layer = MOUSETRAP_LAYER
+	to_chat(usr, "<span class='notice'>You hide [src].</span>")

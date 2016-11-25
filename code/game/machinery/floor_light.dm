@@ -5,7 +5,8 @@ var/list/floor_light_cache = list()
 	icon = 'icons/obj/machines/floor_light.dmi'
 	icon_state = "base"
 	desc = "A backlit floor panel."
-	layer = TURF_LAYER+0.001
+	plane = ABOVE_TURF_PLANE
+	layer = ABOVE_TILE_LAYER
 	anchored = 0
 	use_power = 2
 	idle_power_usage = 2
@@ -29,7 +30,7 @@ var/list/floor_light_cache = list()
 	else if(istype(W, /obj/item/weapon/weldingtool) && (damaged || (stat & BROKEN)))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
-			user << "<span class='warning'>\The [src] must be on to complete this task.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(!do_after(user, 20, src))
@@ -60,15 +61,15 @@ var/list/floor_light_cache = list()
 	else
 
 		if(!anchored)
-			user << "<span class='warning'>\The [src] must be screwed down first.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be screwed down first.</span>")
 			return
 
 		if(stat & BROKEN)
-			user << "<span class='warning'>\The [src] is too damaged to be functional.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is too damaged to be functional.</span>")
 			return
 
 		if(stat & NOPOWER)
-			user << "<span class='warning'>\The [src] is unpowered.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is unpowered.</span>")
 			return
 
 		on = !on
@@ -110,6 +111,7 @@ var/list/floor_light_cache = list()
 			if(!floor_light_cache[cache_key])
 				var/image/I = image("on")
 				I.color = default_light_colour
+				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
 			overlays |= floor_light_cache[cache_key]
@@ -120,6 +122,7 @@ var/list/floor_light_cache = list()
 			if(!floor_light_cache[cache_key])
 				var/image/I = image("flicker[damaged]")
 				I.color = default_light_colour
+				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
 			overlays |= floor_light_cache[cache_key]

@@ -605,6 +605,14 @@ proc/dd_sortedTextList(list/incoming)
 		L += new path()
 	return L
 
+//creates every subtype of prototype (excluding prototype) and adds it to list L as a type/instance pair.
+//if no list/L is provided, one is created.
+/proc/init_subtypes_assoc(prototype, list/L)
+	if(!istype(L))	L = list()
+	for(var/path in subtypesof(prototype))
+		L[path] = new path()
+	return L
+
 #define listequal(A, B) (A.len == B.len && !length(A^B))
 
 /proc/filter_list(var/list/L, var/type)
@@ -613,7 +621,6 @@ proc/dd_sortedTextList(list/incoming)
 		if(istype(entry, type))
 			. += entry
 
-
 /proc/group_by(var/list/group_list, var/key, var/value)
 	var/values = group_list[key]
 	if(!values)
@@ -621,3 +628,12 @@ proc/dd_sortedTextList(list/incoming)
 		group_list[key] = values
 
 	values += value
+
+/proc/assoc_by_proc(var/list/plain_list, var/get_initial_value)
+	. = list()
+	for(var/entry in plain_list)
+		.[call(get_initial_value)(entry)] = entry
+
+/proc/get_initial_name(var/atom/atom_type)
+	var/atom/A = atom_type
+	return initial(A.name)

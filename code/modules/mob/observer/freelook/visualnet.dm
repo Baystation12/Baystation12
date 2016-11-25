@@ -95,13 +95,15 @@
 	return position && is_turf_visible(position)
 
 /datum/visualnet/proc/is_turf_visible(var/turf/position)
+	if(!position)
+		return FALSE
 	var/datum/chunk/chunk = get_chunk(position.x, position.y, position.z)
 	if(chunk)
 		if(chunk.dirty)
 			chunk.update(TRUE) // Update now, no matter if it's visible or not.
 		if(position in chunk.visibleTurfs)
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 // Never access this proc directly!!!!
 // This will update the chunk and all the surrounding chunks.

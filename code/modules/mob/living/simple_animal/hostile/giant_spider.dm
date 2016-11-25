@@ -74,7 +74,7 @@
 		if(L.reagents)
 			L.reagents.add_reagent("toxin", poison_per_bite)
 			if(prob(poison_per_bite))
-				L << "<span class='warning'>You feel a tiny prick.</span>"
+				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 				L.reagents.add_reagent(poison_type, 5)
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
@@ -84,7 +84,7 @@
 		if(prob(poison_per_bite))
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(!(O.robotic >= ORGAN_ROBOT))
-				var/eggs = PoolOrNew(/obj/effect/spider/eggcluster/, list(O, src))
+				var/eggs = new /obj/effect/spider/eggcluster(O, src)
 				O.implants += eggs
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
@@ -149,7 +149,7 @@
 							if(busy == LAYING_EGGS)
 								E = locate() in get_turf(src)
 								if(!E)
-									PoolOrNew(/obj/effect/spider/eggcluster, list(loc, src))
+									new /obj/effect/spider/eggcluster(loc, src)
 									fed--
 								busy = 0
 								stop_automated_movement = 0

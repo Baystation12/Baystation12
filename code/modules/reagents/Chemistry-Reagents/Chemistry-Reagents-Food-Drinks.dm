@@ -314,12 +314,12 @@
 			return
 	if(dose < agony_dose)
 		if(prob(5) || dose == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
-			M << discomfort_message
+			to_chat(M, discomfort_message)
 	else
 		M.apply_effect(agony_amount, AGONY, 0)
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
-			M << "<span class='danger'>You feel like your insides are burning!</span>"
+			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature += rand(0, 15) + slime_temp_adj
 	holder.remove_reagent("frostoil", 5)
@@ -344,6 +344,11 @@
 	var/no_pain = 0
 	var/obj/item/eye_protection = null
 	var/obj/item/face_protection = null
+	
+	var/effective_strength = 5
+	
+	if(alien == IS_SKRELL)	//Larger eyes means bigger targets.
+		effective_strength = 8
 
 	var/list/protection
 	if(istype(M, /mob/living/carbon/human))
@@ -370,11 +375,11 @@
 	else
 		message = "<span class='warning'>The pepperspray gets in your eyes!</span>"
 		if(mouth_covered)
-			M.eye_blurry = max(M.eye_blurry, 15)
-			M.eye_blind = max(M.eye_blind, 5)
+			M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
+			M.eye_blind = max(M.eye_blind, effective_strength)
 		else
-			M.eye_blurry = max(M.eye_blurry, 25)
-			M.eye_blind = max(M.eye_blind, 10)
+			M.eye_blurry = max(M.eye_blurry, effective_strength * 5)
+			M.eye_blind = max(M.eye_blind, effective_strength * 2)
 
 	if(mouth_covered)
 		if(!message)
@@ -392,7 +397,7 @@
 		if(!H.can_feel_pain())
 			return
 	if(dose == metabolism)
-		M << "<span class='danger'>You feel like your insides are burning!</span>"
+		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	else
 		M.apply_effect(4, AGONY, 0)
 		if(prob(5))

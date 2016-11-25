@@ -96,7 +96,6 @@ var/list/adminlog  = list()
 var/list/powernets = list()
 
 var/Debug2 = 0
-var/datum/debug/debugobj
 
 var/gravity_is_on = 1
 
@@ -179,6 +178,6 @@ var/static/list/scarySounds = list(
 var/max_explosion_range = 14
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
-var/global/obj/item/device/radio/intercom/global_announcer = new(null)
+var/global/obj/item/device/radio/intercom/global_announcer = new /obj/item/device/radio/intercom{channels=list("Engineering")}(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")

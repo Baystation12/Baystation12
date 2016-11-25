@@ -15,6 +15,10 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
+/obj/machinery/power/initialize()
+	..()
+	connect_to_network()
+
 /obj/machinery/power/Destroy()
 	disconnect_from_network()
 	disconnect_terminal()

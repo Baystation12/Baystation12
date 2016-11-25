@@ -2,7 +2,7 @@
 /obj/item/stack/material
 	force = 5.0
 	throwforce = 5
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	throw_speed = 3
 	throw_range = 3
 	max_amount = 60
@@ -152,11 +152,24 @@
 	default_type = "tritium"
 	apply_colour = 1
 
+/obj/item/stack/material/tritium/fifty
+	amount = 50
+
 /obj/item/stack/material/osmium
 	name = "osmium"
 	icon_state = "sheet-silver"
 	default_type = "osmium"
 	apply_colour = 1
+
+// Fusion fuel.
+/obj/item/stack/material/deuterium
+	name = "deuterium"
+	icon_state = "sheet-silver"
+	default_type = "deuterium"
+	apply_colour = 1
+
+/obj/item/stack/material/deuterium/fifty
+	amount = 50
 
 /obj/item/stack/material/steel
 	name = DEFAULT_WALL_MATERIAL

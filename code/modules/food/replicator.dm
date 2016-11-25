@@ -41,7 +41,7 @@
 	else if(istype(O, /obj/item/weapon/storage/plants))
 		if(!O.contents || !O.contents.len)
 			return
-		user << "You empty \the [O] into \the [src]"
+		to_chat(user, "You empty \the [O] into \the [src]")
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
 			var/obj/item/weapon/storage/S = O
 			S.remove_from_storage(G, null)
@@ -58,7 +58,7 @@
 
 		if(do_after(user, 20, src))
 			if(!src) return
-			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
+			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 			anchored = !anchored
 		return
 	else if(default_deconstruction_screwdriver(user, O))
@@ -168,4 +168,4 @@
 /obj/machinery/food_replicator/examine(mob/user)
 	..(user)
 	if(panel_open)
-		user << "The maintenance hatch is open."
+		to_chat(user, "The maintenance hatch is open.")

@@ -40,7 +40,8 @@
 	density = 0
 	icon = 'icons/obj/hydroponics_growing.dmi'
 	icon_state = "bush4-1"
-	layer = 3
+	plane = OBJ_PLANE
+	layer = OBJ_LAYER
 	pass_flags = PASSTABLE
 	mouse_opacity = 2
 
@@ -81,7 +82,8 @@
 	if(!plant_controller)
 		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
 	if(!plant_controller)
-		world << "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>"
+		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
+
 		qdel(src)
 		return
 
@@ -184,12 +186,12 @@
 		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
 
 	if(growth>2 && growth == max_growth)
-		layer = (seed && seed.force_layer) ? seed.force_layer : 5
+		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		opacity = 1
 		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
 			density = 1
 	else
-		layer = (seed && seed.force_layer) ? seed.force_layer : 5
+		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		density = 0
 
 /obj/effect/plant/proc/calc_dir()
@@ -235,16 +237,16 @@
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if(sampled)
-			user << "<span class='warning'>\The [src] has already been sampled recently.</span>"
+			to_chat(user, "<span class='warning'>\The [src] has already been sampled recently.</span>")
 			return
 		if(!is_mature())
-			user << "<span class='warning'>\The [src] is not mature enough to yield a sample yet.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is not mature enough to yield a sample yet.</span>")
 			return
 		if(!seed)
-			user << "<span class='warning'>There is nothing to take a sample from.</span>"
+			to_chat(user, "<span class='warning'>There is nothing to take a sample from.</span>")
 			return
 		if(sampled)
-			user << "<span class='danger'>You cannot take another sample from \the [src].</span>"
+			to_chat(user, "<span class='danger'>You cannot take another sample from \the [src].</span>")
 			return
 		if(prob(70))
 			sampled = 1

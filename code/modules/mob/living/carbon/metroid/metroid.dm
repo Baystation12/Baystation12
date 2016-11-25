@@ -5,7 +5,6 @@
 	pass_flags = PASSTABLE
 	speak_emote = list("chirps")
 
-	layer = 5
 	maxHealth = 150
 	health = 150
 	gender = NEUTER
@@ -285,7 +284,7 @@
 	if(W.force > 0)
 		attacked += 10
 		if(prob(25))
-			user << "<span class='danger'>\The [W] passes right through \the [src]!</span>"
+			to_chat(user, "<span class='danger'>\The [W] passes right through \the [src]!</span>")
 			return
 
 	. = ..()

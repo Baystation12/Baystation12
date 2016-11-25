@@ -37,7 +37,7 @@
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.remove_fuel(0, user))
 				overlays.Cut()
-				usr << "You slice off [src]'s uneven chunks of aluminum and scorch marks."
+				to_chat(usr, "You slice off [src]'s uneven chunks of aluminum and scorch marks.")
 				return
 
 
@@ -55,14 +55,14 @@
 				density = 0
 				layer = OBJ_LAYER
 
-				loc = user.loc
+				forceMove(user.loc)
 				if(ishuman(user))
 					if(!user.get_active_hand())
 						user.put_in_hands(src)
-						user << "You take the target out of the stake."
+						to_chat(user, "You take the target out of the stake.")
 				else
 					src.loc = get_turf(user)
-					user << "You take the target out of the stake."
+					to_chat(user, "You take the target out of the stake.")
 
 				stake.pinned_target = null
 				return
@@ -96,7 +96,7 @@
 		if(hp <= 0)
 			for(var/mob/O in oviewers())
 				if ((O.client && !( O.blinded )))
-					O << "<span class='warning'>\The [src] breaks into tiny pieces and collapses!</span>"
+					to_chat(O, "<span class='warning'>\The [src] breaks into tiny pieces and collapses!</span>")
 			qdel(src)
 
 		// Create a temporary object to represent the damage
@@ -104,7 +104,8 @@
 		bmark.pixel_x = p_x
 		bmark.pixel_y = p_y
 		bmark.icon = 'icons/effects/effects.dmi'
-		bmark.layer = 3.5
+		bmark.plane = OBJ_PLANE
+		bmark.layer = ABOVE_OBJ_LAYER
 		bmark.icon_state = "scorch"
 
 		if(decaltype == 1)

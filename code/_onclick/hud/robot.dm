@@ -17,7 +17,6 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "radio"
 	using.screen_loc = ui_movi
-	using.layer = SCREEN_LAYER
 	src.adding += using
 
 //Module select
@@ -28,7 +27,6 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv1"
 	using.screen_loc = ui_inv1
-	using.layer = SCREEN_LAYER
 	src.adding += using
 	mymob:inv1 = using
 
@@ -38,7 +36,6 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv2"
 	using.screen_loc = ui_inv2
-	using.layer = SCREEN_LAYER
 	src.adding += using
 	mymob:inv2 = using
 
@@ -48,7 +45,6 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv3"
 	using.screen_loc = ui_inv3
-	using.layer = SCREEN_LAYER
 	src.adding += using
 	mymob:inv3 = using
 
@@ -61,7 +57,6 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
-	using.layer = SCREEN_LAYER
 	src.adding += using
 	action_intent = using
 
@@ -92,7 +87,6 @@ var/obj/screen/robot_inventory
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "panel"
 	using.screen_loc = ui_borg_panel
-	using.layer = SCREEN_LAYER
 	src.adding += using
 
 //Store
@@ -170,11 +164,11 @@ var/obj/screen/robot_inventory
 		//r.client.screen += robot_inventory	//"store" icon
 
 		if(!r.module)
-			usr << "<span class='danger'>No module selected</span>"
+			to_chat(usr, "<span class='danger'>No module selected</span>")
 			return
 
 		if(!r.module.modules)
-			usr << "<span class='danger'>Selected module has no modules to select</span>"
+			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
 			return
 
 		if(!r.robot_modules_background)
@@ -202,10 +196,10 @@ var/obj/screen/robot_inventory
 				//Module is not currently active
 				r.client.screen += A
 				if(x < 0)
-					A.screen_loc = "CENTER[x]:16,SOUTH+[y]:7"
+					A.screen_loc = "CENTER[x]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"
 				else
-					A.screen_loc = "CENTER+[x]:16,SOUTH+[y]:7"
-				A.layer = SCREEN_LAYER
+					A.screen_loc = "CENTER+[x]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"
+				A.hud_layerise()
 
 				x++
 				if(x == 4)

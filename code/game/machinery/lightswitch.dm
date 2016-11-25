@@ -28,7 +28,9 @@
 
 /obj/machinery/light_switch/update_icon()
 	if(!overlay)
-		overlay = image(icon, "light1-overlay", LIGHTING_LAYER+0.1)
+		overlay = image(icon, "light1-overlay")
+		overlay.plane = LIGHTING_PLANE
+		overlay.layer = ABOVE_LIGHTING_LAYER
 
 	overlays.Cut()
 	if(stat & (NOPOWER|BROKEN))
@@ -42,7 +44,7 @@
 
 /obj/machinery/light_switch/examine(mob/user)
 	if(..(user, 1))
-		user << "A light switch. It is [on? "on" : "off"]."
+		to_chat(user, "A light switch. It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/proc/set_state(var/newstate)
 	if(on != newstate)

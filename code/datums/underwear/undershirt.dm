@@ -41,6 +41,7 @@
 /datum/category_item/underwear/undershirt/shirt_button
 	name = "Shirt, button down"
 	icon_state = "shirt_long_s"
+	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/shirt_expedition
 	name = "Shirt, Expeditionary Corps"
