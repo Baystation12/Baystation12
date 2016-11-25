@@ -4,6 +4,8 @@
 	src.brainmob = new(src)
 	src.brainmob.stat = CONSCIOUS
 	src.brainmob.add_language("Robot Talk")
+	src.brainmob.add_language("Encoded Audio Language")
+
 	src.brainmob.container = src
 	src.brainmob.silent = 0
 	PickName()
