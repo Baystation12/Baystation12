@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - maptweak: "Adjusted armory layout and inventory."
