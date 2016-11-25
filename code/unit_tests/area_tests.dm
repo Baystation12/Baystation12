@@ -57,7 +57,6 @@
 
 /datum/unit_test/areas_shall_be_used
 	name = "AREA: Areas shall be used"
-	disabled = 0
 
 /datum/unit_test/areas_shall_be_used/start_test()
 	var/unused_areas = 0

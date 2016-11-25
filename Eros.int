@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+DIR: icons icons\mob icons\obj icons\obj\clothing maps maps\exodus 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+WINDOW: icons\obj\clothing\ties.dmi;maps\exodus\exodus-1.dmm
+FILE: maps\exodus\exodus-1.dmm
 */
 // END_INTERNALS

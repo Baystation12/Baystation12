@@ -105,7 +105,7 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 	if(!istype(e))
 		return // Abnormal exception, don't even bother
 
-	var/erroruid = "[e.file][e.line]"
+	var/erroruid = "[e.file],[e.line]"
 	var/datum/ErrorViewer/ErrorSource/error_source = error_sources[erroruid]
 	if(!error_source)
 		error_source = new(e)
@@ -147,7 +147,9 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 /datum/ErrorViewer/ErrorEntry
 	var/datum/ErrorViewer/ErrorSource/error_source
 	var/exception/exc
-	var/desc = ""
+	var/desc = "" // HTML-formatted trace/info/etc
+	var/info_name = "" // human-readable name/title for runtime, eg "Runtime in foo.dm,12: division by zero"; this is also the first line of `info`.
+	var/info = "" // plain file/line/trace/info/etc, to send to the IRC bot at end of round
 	var/srcRef
 	var/srcType
 	var/turf/srcLoc
@@ -164,11 +166,14 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 		isSkipCount = TRUE
 		return
 	name = "\[[time_stamp()]] Runtime in [e.file],[e.line]: [e]"
+	info_name = "Runtime in [e.file],[e.line]: [e]"
+	info = info_name
 	exc = e
 	if(istype(desclines))
 		for(var/line in desclines)
 			// There's probably a better way to do this than non-breaking spaces...
 			desc += "&nbsp;&nbsp;" + html_encode(line) + "<br>"
+			info += "\n  " + line
 	if(istype(e_src))
 		srcRef = "\ref[e_src]"
 		srcType = e_src.type

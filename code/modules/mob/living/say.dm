@@ -84,7 +84,7 @@ proc/get_radio_key_from_channel(var/channel)
 /mob/living/proc/get_default_language()
 	return default_language
 
-/mob/living/proc/is_muzzled()
+/mob/proc/is_muzzled()
 	return 0
 
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
@@ -228,6 +228,7 @@ proc/get_radio_key_from_channel(var/channel)
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
+			log_say("[name]/[key] : SIGN: [message]")
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
 	if(T)

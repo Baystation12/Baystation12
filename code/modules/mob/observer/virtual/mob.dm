@@ -1,6 +1,3 @@
-/mob
-	virtual_mob = /mob/observer/virtual/mob
-
 /mob/observer/virtual/mob
 	host_type = /mob
 

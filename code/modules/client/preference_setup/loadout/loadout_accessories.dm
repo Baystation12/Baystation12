@@ -1,8 +1,21 @@
 /datum/gear/accessory
-	display_name = "necklace"
-	path = /obj/item/clothing/accessory/necklace
+	display_name = "black vest"
+	path = /obj/item/clothing/accessory/toggleable/vest
 	slot = slot_tie
 	sort_category = "Accessories"
+
+/datum/gear/accessory/suspenders
+	display_name = "suspenders"
+	path = /obj/item/clothing/accessory/suspenders
+
+/datum/gear/accessory/wcoat
+	display_name = "waistcoat"
+	path = /obj/item/clothing/accessory/wcoat
+
+/datum/gear/accessory/necklace
+	display_name = "necklace"
+	path = /obj/item/clothing/accessory/necklace
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/armband
 	display_name = "armband selection"

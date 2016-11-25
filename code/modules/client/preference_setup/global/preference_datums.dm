@@ -92,6 +92,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "All Chatter"
 	disabled_description = "Nearby"
 
+/datum/client_preference/ghost_follow_link_length
+	description ="Ghost Follow Links"
+	key = "CHAT_GHOSTFOLLOWLINKLENGTH"
+	enabled_description = "Short"
+	disabled_description = "Long"
+
 /datum/client_preference/chat_tags
 	description ="Chat tags"
 	key = "CHAT_SHOWICONS"

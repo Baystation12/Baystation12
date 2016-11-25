@@ -56,7 +56,7 @@
 	has_suit.overlays += get_inv_overlay()
 
 	if(user)
-		user << "<span class='notice'>You attach \the [src] to \the [has_suit].</span>"
+		to_chat(user, "<span class='notice'>You attach \the [src] to \the [has_suit].</span>")
 		src.add_fingerprint(user)
 
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
@@ -549,8 +549,9 @@
 //Necklaces
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
-	desc = "A simple silver necklace."
-	icon_state = "locket"
+	desc = "A simple necklace."
+	icon_state = "necklace"
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 
 //Misc
@@ -558,3 +559,10 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
+
+// ---------- EROS BEGIN - ACCESSORIES
+/obj/item/clothing/accessory/locket
+	name = "locket"
+	desc = "A simple silver locket."
+	icon_state = "locket"
+	slot_flags = SLOT_MASK | SLOT_TIE

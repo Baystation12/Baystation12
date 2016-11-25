@@ -49,14 +49,14 @@ world/loop_checks = 0
 	while(destroyed.len && --checkRemain >= 0)
 		if(remaining_force_dels <= 0)
 			#ifdef GC_DEBUG
-			testing("GC: Reached max force dels per tick [dels] vs [maxDels]")
+			testing("GC: Reached max force dels per tick ([remaining_force_dels] remaining of [GC_FORCE_DEL_PER_RUN])")
 			#endif
 			break // Server's already pretty pounded, everything else can wait 2 seconds
 		var/refID = destroyed[1]
 		var/GCd_at_time = destroyed[refID]
 		if(GCd_at_time > time_to_kill)
 			#ifdef GC_DEBUG
-			testing("GC: [refID] not old enough, breaking at [world.time] for [GCd_at_time - time_to_kill] deciseconds until [GCd_at_time + collection_timeout]")
+			testing("GC: [refID] not old enough, breaking at [world.time] for [GCd_at_time - time_to_kill] deciseconds until [GCd_at_time + GC_COLLECTION_TIMEOUT]")
 			#endif
 			break // Everything else is newer, skip them
 		var/datum/A = locate(refID)

@@ -2,6 +2,8 @@
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	adult_form = /mob/living/carbon/human
+	can_namepick_as_adult = 1
+	adult_name = "diona gestalt"
 	speak_emote = list("chirrups")
 	icon_state = "nymph"
 	item_state = "nymph"

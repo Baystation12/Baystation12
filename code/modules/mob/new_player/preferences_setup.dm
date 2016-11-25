@@ -195,7 +195,7 @@ datum/preferences
 	copy_to(mannequin, TRUE)
 
 	var/datum/job/previewJob
-	if(equip_preview_mob)
+	if(equip_preview_mob && job_master)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
 		if("Assistant" in job_low)
 			previewJob = job_master.GetJob("Assistant")
