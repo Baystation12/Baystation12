@@ -38,7 +38,6 @@
 	return 0
 
 /mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
-	set waitfor = 1
 	Victim = M
 	loc = M.loc
 
