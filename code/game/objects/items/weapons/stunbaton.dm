@@ -58,8 +58,12 @@
 
 /obj/item/weapon/melee/baton/examine(mob/user)
 	if(!..(user, 1))
-		return
+		return 0
+	examine_cell(user)
+	return 1
 
+// Addition made by Techhead0, thanks for fullfilling the todo!
+/obj/item/weapon/melee/baton/proc/examine_cell(mob/user)
 	if(bcell)
 		to_chat(user, "<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>")
 	if(!bcell)
@@ -92,16 +96,24 @@
 /obj/item/weapon/melee/baton/proc/set_status(var/newstatus, mob/user)
 	if(bcell && bcell.charge > hitcost)
 		if(status != newstatus)
-			status = newstatus
+			change_status(newstatus)
 			to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
 			playsound(loc, "sparks", 75, 1, -1)
-			update_icon()
 	else
-		status = 0
+		change_status(0)
 		if(!bcell)
 			to_chat(user, "<span class='warning'>[src] does not have a power source!</span>")
 		else
 			to_chat(user,  "<span class='warning'>[src] is out of charge.</span>")
+
+// Proc to -actually- change the status, and update the icons as well.
+// Also exists to ease "helpful" admin-abuse in case an bug prevents attack_self
+// to occur would appear. Hopefully it wasn't necessary.
+/obj/item/weapon/melee/baton/proc/change_status(var/s)
+	if (status != s)
+		status = s
+		update_icon()
+
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='danger'>You accidentally hit yourself with the [src]!</span>")
@@ -163,19 +175,44 @@
 		bcell.emp_act(severity)	//let's not duplicate code everywhere if we don't have to please.
 	..()
 
-//secborg stun baton module
+// Stunbaton module for Security synthetics
+/obj/item/weapon/melee/baton/robot
+	bcell = null
+	hitcost = 100
+
+// Addition made by Techhead0, thanks for fullfilling the todo!
+/obj/item/weapon/melee/baton/robot/examine_cell(mob/user)
+	to_chat(user, "<span class='notice'>The baton is running off an external power supply.</span>")
+
+// Override proc for the stun baton module, found in PC Security synthetics
+// Refactored to fix #14470 - old proc defination increased the hitcost beyond
+// usability without proper checks.
+// Also hard-coded to be unuseable outside their righteous synthetic owners.
 /obj/item/weapon/melee/baton/robot/attack_self(mob/user)
-	//try to find our power cell
-	var/mob/living/silicon/robot/R = loc
-	if (istype(R))
-		if(bcell && bcell != R.cell)
-			bcell.dropInto(loc)
-		bcell = R.cell
-		hitcost = hitcost * 10
-	return ..()
+	var/mob/living/silicon/robot/R = isrobot(user) ? user : null // null if the user is NOT a robot
+	update_cell(R) // takes both robots and null
+	if (R)
+		return ..()
+	else	// Stop pretending and get out of your cardborg suit, human.
+		to_chat(user, "<span class='warning'>You don't seem to be able interacting with this by yourself..</span>")
+		add_fingerprint(user)
+	return 0
 
 /obj/item/weapon/melee/baton/robot/attackby(obj/item/weapon/W, mob/user)
 	return
+
+/obj/item/weapon/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects
+	return ..()
+
+// Updates the baton's cell to use user's own cell
+// Otherwise, if null (when the user isn't a robot), render it unuseable
+/obj/item/weapon/melee/baton/robot/proc/update_cell(mob/living/silicon/robot/user)
+	if (!user)
+		bcell = null
+		set_status(0)
+	else if (!bcell || bcell != user.cell)
+		bcell = user.cell // if it is null, nullify it anyway
 
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/weapon/melee/baton/cattleprod
