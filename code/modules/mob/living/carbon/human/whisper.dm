@@ -38,7 +38,7 @@
 	var/message_range = 1
 	var/eavesdropping_range = 2
 	var/watching_range = 5
-	var/italics = 1
+	var/italics = 0 // Whispers should be itallics but it doesn't work well with how ghosts parse radio messages; this is set to 0 pending whisper code rewrite
 
 	var/not_heard //the message displayed to people who could not hear the whispering
 	var/adverb
@@ -78,7 +78,9 @@
 	listening |= src
 
 	//ghosts
-	for (var/mob/M in dead_mob_list_)	//does this include players who joined as observers as well?
+	for (var/mob/M in player_list)
+		if (istype(M, /mob/new_player))
+			continue
 		if (!(M.client))
 			continue
 		if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
