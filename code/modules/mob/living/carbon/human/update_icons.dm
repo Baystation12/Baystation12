@@ -123,26 +123,25 @@ Please contact me on #coderbus IRC. ~Carn x
 #define GLOVES_LAYER			9
 #define BELT_LAYER				10
 #define SUIT_LAYER				11
-#define ORGAN_OVERLAY_LAYER		12		// for any organs that are bigger than a standard human (Blend() crops images, so it has to have special handling)
-#define TAIL_LAYER				13		//bs12 specific. this hack is probably gonna come back to haunt me
-#define WINGS_LAYER				14		//EROS
-#define GLASSES_LAYER			15
-#define BELT_LAYER_ALT			16
-#define SUIT_STORE_LAYER		17
-#define BACK_LAYER				18
-#define HAIR_LAYER				19		//TODO: make part of head layer?
-#define NATURAL_EARS_LAYER		20
-#define EARS_LAYER				21
-#define FACEMASK_LAYER			22
-#define HEAD_LAYER				23
-#define COLLAR_LAYER			24
-#define HANDCUFF_LAYER			25
-#define LEGCUFF_LAYER			26
-#define L_HAND_LAYER			27
-#define R_HAND_LAYER			28
-#define FIRE_LAYER				29		//If you're on fire
-#define TARGETED_LAYER			30		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			30
+#define TAIL_LAYER				12		//bs12 specific. this hack is probably gonna come back to haunt me
+#define WINGS_LAYER				13		//EROS
+#define GLASSES_LAYER			14
+#define BELT_LAYER_ALT			15
+#define SUIT_STORE_LAYER		16
+#define BACK_LAYER				17
+#define HAIR_LAYER				18		//TODO: make part of head layer?
+#define NATURAL_EARS_LAYER		19
+#define EARS_LAYER				20
+#define FACEMASK_LAYER			21
+#define HEAD_LAYER				22
+#define COLLAR_LAYER			23
+#define HANDCUFF_LAYER			24
+#define LEGCUFF_LAYER			25
+#define L_HAND_LAYER			26
+#define R_HAND_LAYER			27
+#define FIRE_LAYER				28		//If you're on fire
+#define TARGETED_LAYER			29		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			29
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -340,7 +339,7 @@ var/global/list/damage_icon_parts = list()
 			var/icon/mask = new(base_icon)
 			var/icon/husk_over = new(species.icobase,"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
-			husk_over.Blend(mask, ICON_ADD)
+			husk_over.Blend(mask, ICON_MULTIPLY)
 			base_icon.Blend(husk_over, ICON_OVERLAY)
 
 		human_icon_cache[icon_key] = base_icon
@@ -350,8 +349,7 @@ var/global/list/damage_icon_parts = list()
 
 	for(var/obj/item/organ/external/E in organs)
 		if(E.no_blend)
-			var/image/S = image("icon" = E.get_icon(skeleton), "icon_state" = E.icon_state, "pixel_x" = E.offset_x, "pixel_y" = E.offset_y)
-			overlays_standing[ORGAN_OVERLAY_LAYER] = S
+//			var/image/S = image("icon" = E.get_icon(skeleton), "icon_state" = E.icon_state, "pixel_x" = E.offset_x, "pixel_y" = E.offset_y)
 			continue
 
 	if(update_icons)
@@ -709,8 +707,8 @@ var/global/list/damage_icon_parts = list()
 					genitals_standing.Blend(dicks_s, ICON_OVERLAY)
 		overlays_standing[GENITALS_LAYER] = image(genitals_standing)
 	if(species.tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
-		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species.tail]_s")
+//		var/icon/tail_s = get_tail_icon()
+//		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species.tail]_s")
 		animate_tail_reset(0)
 
 	if(update_icons)
@@ -719,15 +717,26 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
 
-	if(species.tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
-		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species.tail]_s")
-		animate_tail_reset(0)
+	if(species.appearance_flags & HAS_BIOMODS) //change has underwear to a more sane flag when needed
+		var/icon/tail_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
+		var/datum/sprite_accessory/tail = body_tails_list[tail_type]
+		if (wear_suit && wear_suit.flags_inv & HIDETAIL)
+		else
+			if(tail && tail.species_allowed && (src.species.get_bodytype() in tail.species_allowed))
+				var/icon/tail_s = new/icon("icon" = tail.icon, "icon_state" = tail.icon_state)
+				if(tail.do_colouration)
+					tail_s.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
+				tail_standing.Blend(tail_s, ICON_OVERLAY)
+				if (tail.extra)
+					var/icon/tail_e = new/icon("icon" = tail.icon, "icon_state" = "[tail.icon_state]_e")
+					tail_standing.Blend(tail_e, ICON_OVERLAY)
+		overlays_standing[TAIL_LAYER] = image(tail_standing)
 
 	if(update_icons)
 		update_icons()
 
-/mob/living/carbon/human/proc/get_tail_icon()
+ /***
+ /mob/living/carbon/human/proc/get_tail_icon()
 	var/icon_key = "[species.race_key][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
@@ -742,8 +751,7 @@ var/global/list/damage_icon_parts = list()
 		tail_icon_cache[icon_key] = tail_icon
 
 	return tail_icon
-
-
+***/
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
 	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
 
@@ -762,14 +770,16 @@ var/global/list/damage_icon_parts = list()
 		return //let the existing animation finish
 
 	tail_overlay = set_tail_state(t_state)
+
+
+
+
+
 	if(tail_overlay)
 		spawn(20)
 			//check that the animation hasn't changed in the meantime
 			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()
-
-	if(update_icons)
-		update_icons()
 
 /mob/living/carbon/human/proc/update_ears(var/update_icons=1)
 	overlays_standing[NATURAL_EARS_LAYER] = null
@@ -788,9 +798,9 @@ var/global/list/damage_icon_parts = list()
 				var/icon/ears_e = new/icon("icon" = ears.icon, "icon_state" = "[ears.icon_state]_e")
 				ears_standing.Blend(ears_e, ICON_OVERLAY)
 		overlays_standing[NATURAL_EARS_LAYER] = image(ears_standing)
+
 /mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
 	set_tail_state("[species.tail]_slow[rand(0,9)]")
-
 	if(update_icons)
 		update_icons()
 
@@ -810,7 +820,6 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[WINGS_LAYER] = image(wings_standing)
 /mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
 	set_tail_state("[species.tail]_loop[rand(0,9)]")
-
 	if(update_icons)
 		update_icons()
 
@@ -830,6 +839,7 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		update_icons()
 
+//EROS FINISH
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
