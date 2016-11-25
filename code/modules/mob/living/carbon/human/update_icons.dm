@@ -244,7 +244,6 @@ var/global/list/damage_icon_parts = list()
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/proc/update_body(var/update_icons=1)
-	overlays_standing[ORGAN_OVERLAY_LAYER] = null
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
@@ -309,8 +308,6 @@ var/global/list/damage_icon_parts = list()
 		base_icon = chest.get_icon()
 
 		for(var/obj/item/organ/external/part in organs)
-			if(part.no_blend) // organs that are larger than the mob sprite must be rendered as an overlay
-				continue
 			var/icon/temp = part.get_icon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -343,7 +340,7 @@ var/global/list/damage_icon_parts = list()
 			var/icon/mask = new(base_icon)
 			var/icon/husk_over = new(species.icobase,"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
-			husk_over.Blend(mask, ICON_MULTIPLY)
+			husk_over.Blend(mask, ICON_ADD)
 			base_icon.Blend(husk_over, ICON_OVERLAY)
 
 		human_icon_cache[icon_key] = base_icon
@@ -711,26 +708,65 @@ var/global/list/damage_icon_parts = list()
 						dicks_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
 					genitals_standing.Blend(dicks_s, ICON_OVERLAY)
 		overlays_standing[GENITALS_LAYER] = image(genitals_standing)
+	if(species.tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+		var/icon/tail_s = get_tail_icon()
+		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species.tail]_s")
+		animate_tail_reset(0)
+
 	if(update_icons)
 		update_icons()
 
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
 
-	if(species.appearance_flags & HAS_BIOMODS) //change has underwear to a more sane flag when needed
-		var/icon/tail_standing	=new /icon('icons/eros/mob/blank.dmi',"blank")
-		var/datum/sprite_accessory/tail = body_tails_list[tail_type]
-		if (wear_suit && wear_suit.flags_inv & HIDETAIL)
-		else
-			if(tail && tail.species_allowed && (src.species.get_bodytype() in tail.species_allowed))
-				var/icon/tail_s = new/icon("icon" = tail.icon, "icon_state" = tail.icon_state)
-				if(tail.do_colouration)
-					tail_s.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
-				tail_standing.Blend(tail_s, ICON_OVERLAY)
-				if (tail.extra)
-					var/icon/tail_e = new/icon("icon" = tail.icon, "icon_state" = "[tail.icon_state]_e")
-					tail_standing.Blend(tail_e, ICON_OVERLAY)
-		overlays_standing[TAIL_LAYER] = image(tail_standing)
+	if(species.tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+		var/icon/tail_s = get_tail_icon()
+		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species.tail]_s")
+		animate_tail_reset(0)
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/get_tail_icon()
+	var/icon_key = "[species.race_key][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
+	var/icon/tail_icon = tail_icon_cache[icon_key]
+	if(!tail_icon)
+		//generate a new one
+		tail_icon = new/icon(icon = (species.tail_animation? species.tail_animation : 'icons/effects/species.dmi'))
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		// The following will not work with animated tails.
+		if(species.tail_hair)
+			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.tail]_[species.tail_hair]")
+			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+			tail_icon.Blend(hair_icon, ICON_OVERLAY)
+		tail_icon_cache[icon_key] = tail_icon
+
+	return tail_icon
+
+
+/mob/living/carbon/human/proc/set_tail_state(var/t_state)
+	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+
+	if(tail_overlay && species.tail_animation)
+		tail_overlay.icon_state = t_state
+		return tail_overlay
+	return null
+
+//Not really once, since BYOND can't do that.
+//Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
+/mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
+	var/t_state = "[species.tail]_once"
+
+	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	if(tail_overlay && tail_overlay.icon_state == t_state)
+		return //let the existing animation finish
+
+	tail_overlay = set_tail_state(t_state)
+	if(tail_overlay)
+		spawn(20)
+			//check that the animation hasn't changed in the meantime
+			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
+				animate_tail_stop()
 
 	if(update_icons)
 		update_icons()
@@ -752,6 +788,9 @@ var/global/list/damage_icon_parts = list()
 				var/icon/ears_e = new/icon("icon" = ears.icon, "icon_state" = "[ears.icon_state]_e")
 				ears_standing.Blend(ears_e, ICON_OVERLAY)
 		overlays_standing[NATURAL_EARS_LAYER] = image(ears_standing)
+/mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
+	set_tail_state("[species.tail]_slow[rand(0,9)]")
+
 	if(update_icons)
 		update_icons()
 
@@ -769,11 +808,28 @@ var/global/list/damage_icon_parts = list()
 				var/icon/wings_e = new/icon("icon" = wings.icon, "icon_state" = "[wings.icon_state]_e")
 				wings_standing.Blend(wings_e, ICON_OVERLAY)
 		overlays_standing[WINGS_LAYER] = image(wings_standing)
+/mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
+	set_tail_state("[species.tail]_loop[rand(0,9)]")
+
 	if(update_icons)
 		update_icons()
 
+/mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
+	if(stat != DEAD)
+		set_tail_state("[species.tail]_idle[rand(0,9)]")
+	else
+		set_tail_state("[species.tail]_static")
 
-//EROS FINISH
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
+	set_tail_state("[species.tail]_static")
+
+	if(update_icons)
+		update_icons()
+
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
