@@ -249,16 +249,33 @@ datum/preferences
 	preview_icon = icon('icons/eros/effects/charpreview.dmi', "greyblack")
 	preview_icon.Scale(48+32, 16+32)
 
+	// Taur rendering (shift stuff around, just for making them fit correctly)
+	// Offsets (we could use a list, but it's technically slower than all of these variables, and they'll die out of scope anyways)
+	var/offset_x1 = 0
+	var/offset_x2 = 0
+	var/offset_y1 = 0
+	var/offset_y2 = 0
+
+	// Check if it has a taur organ
+	if(mannequin.get_organ(BP_TAUR))
+		// If it does, set the offsets, and upscale the image
+		preview_icon.Scale(64+32, 16+32)
+		offset_x1 = -8		// Shift the first image 8 pixels to the left
+		offset_y1 = 2		// And 2 pixels up
+		offset_x2 = -20	// Shift the second image 20 pixels to the left
+		offset_y2 = -8		// Shift the second image 8 pixels down
+
+
 	mannequin.dir = NORTH
 	var/icon/stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 25 + offset_x1, 17 + offset_y1)
 
 	mannequin.dir = WEST
 	stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 1 + offset_x2, 9 + offset_y2)
 
 	mannequin.dir = SOUTH
 	stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1) // We don't need to move this one for taurs, so there's no offsets for it
 
 	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
