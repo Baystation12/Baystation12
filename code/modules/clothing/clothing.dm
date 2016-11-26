@@ -84,10 +84,10 @@
 		else
 			species_restricted = list(target_species)
 
-	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-		icon = sprite_sheets_obj[target_species]
-	else
-		icon = initial(icon)
+//	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+//		icon = sprite_sheets_obj[target_species]
+//	else
+//		icon = initial(icon)
 
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
 	if(!species_restricted)
@@ -102,10 +102,10 @@
 		else
 			species_restricted = list(target_species)
 
-	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-		icon = sprite_sheets_obj[target_species]
-	else
-		icon = initial(icon)
+//	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+//		icon = sprite_sheets_obj[target_species]
+//	else
+//		icon = initial(icon)
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects
@@ -114,7 +114,10 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
+	sprite_sheets = list(
+		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
+		"Human" = 'icons/mob/ears.dmi'
+		)
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -179,6 +182,7 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
+		"Human" = 'icons/mob/eyes.dmi'
 		)
 
 /obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
@@ -212,6 +216,7 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
+		"Human" = 'icons/mob/hands.dmi'
 		)
 	blood_overlay_type = "bloodyhands"
 
@@ -276,8 +281,8 @@ BLIND     // can't see anything
 	var/light_applied
 	var/brightness_on
 	var/on = 0
-
 	sprite_sheets = list(
+		"Human" = 'icons/mob/head.dmi',
 		"Vox" = 'icons/mob/species/vox/head.dmi',
 		"Resomi" = 'icons/mob/species/resomi/head.dmi'
 		)
@@ -368,8 +373,8 @@ BLIND     // can't see anything
 		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype()]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = 'icons/mob/light_overlays.dmi'
-			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
-				use_icon = sprite_sheets[H.species.get_bodytype()]
+//			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+//				use_icon = sprite_sheets[H.species.get_bodytype()]
 			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
 
 	if(H)
@@ -391,6 +396,7 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/masks.dmi',
 		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
+		"Human" = 'icons/mob/mask.dmi'
 		)
 
 	var/voicechange = 0
@@ -435,7 +441,9 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
+		"Human" = 'icons/mob/feet.dmi'
 		)
+
 	blood_overlay_type = "shoeblood"
 
 /obj/item/clothing/shoes/New()
@@ -511,7 +519,8 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/suit.dmi',
-		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
+		"Resomi" = 'icons/mob/species/resomi/suit.dmi',
+		"Human" = 'icons/mob/suit.dmi'
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -557,7 +566,8 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
-		"Resomi" = 'icons/mob/species/resomi/uniform.dmi'
+		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
+		"Human" = 'icons/mob/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
@@ -606,8 +616,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
-		under_icon = sprite_sheets[H.species.get_bodytype()]
+//	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+//		under_icon = sprite_sheets[H.species.get_bodytype()]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
@@ -629,8 +639,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+//	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+//		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
