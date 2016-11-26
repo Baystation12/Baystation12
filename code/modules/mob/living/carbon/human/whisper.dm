@@ -38,7 +38,7 @@
 	var/message_range = 1
 	var/eavesdropping_range = 2
 	var/watching_range = 5
-	var/italics = 0 // Whispers should be itallics but it doesn't work well with how ghosts parse radio messages; this is set to 0 pending whisper code rewrite
+	var/italics = 1
 
 	var/not_heard //the message displayed to people who could not hear the whispering
 	var/adverb
