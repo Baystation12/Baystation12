@@ -44,7 +44,7 @@
 			params["chan"] = config.admin_irc
 			params["msg"] = msg
 			params["src_key"] = source.key
-			params["src_char"] = source.mob.real_name ? source.mob.real_name : source.mob.name
+			params["src_char"] = source.mob.real_name || source.mob.name
 			if(!target)
 				params["type"] = "adminhelp"
 			else if(istext(target))
@@ -54,7 +54,7 @@
 			else
 				params["type"] = "adminpm"
 				params["trg_key"] = target.key
-				params["trg_char"] = target.mob.real_name ? target.mob.real_name : target.mob.real_name
+				params["trg_char"] = target.mob.real_name || target.mob.name
 
 			export2irc(params)
 		else
