@@ -1,3 +1,53 @@
+//Centcomm
+
+//Command
+
+//Maintenance
+/area/maintenance/engineering_east
+	name = "East Engineering Maintenance"
+	icon_state = "maint_eng_e"
+
+/area/maintenance/engineering_west
+	name = "West Engineering Maintenance"
+	icon_state = "maint_eng_w"
+
+/area/maintenance/engineering_north
+	name = "North Engineering Maintenance"
+	icon_state = "maint_eng_n"
+
+
+//Substations
+/area/maintenance/substation
+	name = "Substation"
+	icon_state = "substation"
+	sound_env = SMALL_ENCLOSED
+
+///area/maintenance/substation/example
+//	name = "Example Substation"
+
+/area/maintenance/substation/atmos
+	name = "Atmospherics Substation"
+
+/area/maintenance/substation/engineering
+	name = "Engineering Substation"
+
+//Solars
+/area/solar
+	requires_power = 1
+	always_unpowered = 1
+	lighting_use_dynamic = 0
+	base_turf = /turf/snow
+
+///area/maintenance/solar_example
+//	name = "Solar Example"
+//	icon_state = "SolarcontrolA"
+//	sound_env = SMALL_ENCLOSED
+//
+///area/solar/example
+//	name = "Example Solar Array"
+//	icon_state = "panelsA"
+
+//Engineering
 /area/engineering/
 	name = "\improper Engineering"
 	icon_state = "engineering"
@@ -24,11 +74,11 @@
 
 /area/engineering/hallway/north
 	name = "\improper Engineering North Hallway"
-	icon_state = "engineering"
+	icon_state = "engineering_n_hall"
 
 /area/engineering/lobby
 	name = "\improper Engineering Lobby"
-	icon_state = "engineering"
+	icon_state = "engineering_lobby"
 
 /area/engineering/quarter
 	name = "\improper Engineering Quarters"
@@ -42,13 +92,17 @@
 	name = "\improper Engineering Foyer"
 	icon_state = "engineering_foyer"
 
+/area/engineering/engineering_monitor
+	name = "\improper Engineering Monitoring Room"
+	icon_state = "engine_monitoring"
+
 /area/engineering/CE
-	name = "\improper CE"
+	name = "\improper Engineering - CE's Office"
 	icon_state = "head_quarters"
 
-/area/engineering/breaker
-	name = "\improper Engineering Breaker Room"
-	icon_state = "substation"
+/area/engineering/CE/quarters
+	name = "\improper Engineering - CE's Quarters"
+	icon_state = "Sleep"
 
 /area/engineering/storage
 	name = "\improper Engineering Equipment Storage"
@@ -58,18 +112,36 @@
 	name = "\improper Engineering Hard Storage"
 	icon_state = "engineering_storage"
 
-/area/engineering/atmos/
+/area/engineering/atmos
 	name = "\improper Atmospherics"
 	icon_state = "atmos"
 
-/area/engineering/atmos/monitor
-	name = "\improper Atmospherics Monitoring Room"
-	icon_state = "atmos_monitoring"
+/area/engineering/tech_storage
+	name = "\improper Technical Storage"
+	icon_state = "auxstorage"
 
-/area/engineering/atmos/breaker
-	name = "\improper Atmospherics Breaker Room"
-	icon_state = "substation"
+//Replaced with a shared monitoring room - more social that way.
+///area/engineering/atmos/monitor
+//	name = "\improper Atmospherics Monitoring Room"
+//	icon_state = "atmos_monitoring"
+
+/area/engineering/atmos/storage
+	name = "\improper Atmospherics Storage"
+	icon_state = "atmos_storage"
+	sound_env = SMALL_ENCLOSED
 
 /area/engineering/dronefab
 	name = "\improper Drone Fabricator"
 	icon_state = "drone_fab"
+
+//Research
+
+//Medical
+
+//Security
+
+//Cargo
+
+//Civilian
+
+//Misc.
