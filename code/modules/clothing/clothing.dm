@@ -199,7 +199,7 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
 		"Akula" = 'icons/mob/eyes.dmi',
-		"Slime" = 'icons/mob/eyes.dmi'
+		"Slime" = 'icons/mob/eyes.dmi',
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
 		"Human" = 'icons/mob/eyes.dmi'
@@ -244,7 +244,7 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
 		"Akula" = 'icons/mob/hands.dmi',
 		"Slime" = 'icons/mob/hands.dmi',
-		"Vox" = 'icons/mob/species/vox/gloves.dmi'
+		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
 		"Human" = 'icons/mob/hands.dmi'
@@ -323,7 +323,7 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/head.dmi',
 		"Akula" = 'icons/mob/head.dmi',
 		"Slime" = 'icons/mob/head.dmi',
-		"Vox" = 'icons/mob/species/vox/head.dmi'
+		"Vox" = 'icons/mob/species/vox/head.dmi',
 		"Vox" = 'icons/mob/species/vox/head.dmi',
 		"Resomi" = 'icons/mob/species/resomi/head.dmi'
 		)
@@ -445,7 +445,7 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
 		"Akula" = 'icons/mob/species/akula/mask.dmi',
 		"Slime" = 'icons/mob/mask.dmi',
-		"Vox" = 'icons/mob/species/vox/masks.dmi'
+		"Vox" = 'icons/mob/species/vox/masks.dmi',
 		"Vox" = 'icons/mob/species/vox/masks.dmi',
 		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
 		"Human" = 'icons/mob/mask.dmi'
@@ -501,7 +501,7 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		"Akula" = 'icons/mob/feet.dmi',
 		"Slime" = 'icons/mob/feet.dmi',
-		"Vox" = 'icons/mob/species/vox/shoes.dmi'
+		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		"Human" = 'icons/mob/feet.dmi'
@@ -645,7 +645,7 @@ BLIND     // can't see anything
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
 		"Akula" = 'icons/mob/uniform.dmi',
 		"Slime" = 'icons/mob/uniform.dmi',
-		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
 		"Human" = 'icons/mob/uniform.dmi'
