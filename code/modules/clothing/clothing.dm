@@ -124,7 +124,7 @@
 		"Skrell" = 'icons/mob/ears.dmi',
 		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
 		"Akula" = 'icons/mob/ears.dmi',
-		"Slime" = 'icons/mob/ears.dmi'
+		"Slime" = 'icons/mob/ears.dmi',
 		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
 		"Human" = 'icons/mob/ears.dmi'
 		)
