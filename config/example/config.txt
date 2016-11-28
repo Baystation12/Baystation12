@@ -205,23 +205,23 @@ GUEST_BAN
 # USEWHITELIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
-#SERVER byond://127.0.0.1:33333
+# SERVER byond://127.0.0.1:33333
 
 ## set a server URL for the IRC bot to use; like SERVER, don't include the byond://
 ## Unlike SERVER, this one shouldn't break auto-reconnect
-SERVERURL 127.0.0.1:33333
+# SERVERURL server.net:port
 
 ## forum address
-# FORUMURL //erosresearchplatform.com/forums/index.php
+# FORUMURL http://example.com
 
 ## Wiki address
-# WIKIURL https://wiki.baystation12.net/
+# WIKIURL http://example.com
 
 ## GitHub address
-# GITHUBURL https://github.com/ErosResearchPlatform/Eros
+# GITHUBURL https://github.com/example-user/example-repository
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://erosresearchplatform.com/forums/viewforum.php?f=10
+# BANAPPEALS http://example.com
 
 ## In-game features
 ## spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
@@ -275,22 +275,22 @@ ASSISTANT_MAINT
 #GHOST_INTERACTION
 
 ## Password used for authorizing ircbot and other external tools.
-COMMS_PASSWORD LOLNO
+# COMMS_PASSWORD
 
 ## Uncomment to enable sending data to the IRC bot.
-USE_IRC_BOT
+# USE_IRC_BOT
 
 ## Uncomment if the IRC bot requires using world.Export() instead of nudge.py/libnudge
-#IRC_BOT_EXPORT
+# IRC_BOT_EXPORT
 
 ## Host where the IRC bot is hosted.  Port 45678 needs to be open.
-IRC_BOT_HOST LOLNO
+# IRC_BOT_HOST localhost
 
 ## IRC channel to send information to.  Leave blank to disable.
-MAIN_IRC #LOLNO
+# MAIN_IRC #main
 
 ## IRC channel to send adminhelps to.  Leave blank to disable adminhelps-to-irc.
-ADMIN_IRC #LOLNO
+# ADMIN_IRC #admin
 
 ## Path to the python2 executable on the system.  Leave blank for default.
 ## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
@@ -397,7 +397,7 @@ GENERATE_ASTEROID
 # LOBBY_SCREENS title
 
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
-ANNOUNCE_SHUTTLE_DOCK_TO_IRC
+# ANNOUNCE_SHUTTLE_DOCK_TO_IRC
 
 ## Uncomment to enable map voting; you'll need to use the script at tools/server.sh or an equivalent for it to take effect
 ## You'll also likely need to enable WAIT_FOR_SIGUSR1 below
