@@ -310,6 +310,12 @@
 	icon_state = "swim_red"
 	siemens_coefficient = 1
 
+/obj/item/clothing/suit/poncho
+	name = "poncho"
+	desc = "How did you get this"
+	icon_state = ""
+	item_state = ""
+
 /obj/item/clothing/suit/poncho/colored
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
