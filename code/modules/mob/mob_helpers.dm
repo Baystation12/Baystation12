@@ -29,8 +29,8 @@
 		for(var/obj/item/organ/external/E in organs)
 			if(E.robotic >= ORGAN_ROBOT)
 				robolimb_count++
-		if(robolimb_count == organs.len)
-			full_prosthetic = 1
+		full_prosthetic = (robolimb_count == organs.len)
+		update_emotes()
 	return full_prosthetic
 
 /mob/living/silicon/isSynthetic()
