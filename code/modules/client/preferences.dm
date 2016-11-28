@@ -69,7 +69,7 @@ datum/preferences
 	var/list/job_low    = list() //List of all the things selected for low weight
 
 	//Keeps track of preferrence for not getting any wanted jobs
-	var/alternate_option = 0
+	var/alternate_option = 2
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
