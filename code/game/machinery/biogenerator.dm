@@ -237,7 +237,6 @@
 			new/obj/item/clothing/suit/storage/toggle/bomber(loc)
 		if("wintercoat")
 			new/obj/item/clothing/suit/storage/hooded/wintercoat(loc)	
-
 	processing = 0
 	menustat = "complete"
 	update_icon()
