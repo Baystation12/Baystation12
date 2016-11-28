@@ -134,7 +134,7 @@
 	name = "winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon_state = "coatwinter"
-	item_state_slots = list(slot_r_hand_str = "eros_coatwinter", slot_l_hand_str = "eros_coatwinter")
+	item_state_slots = list(slot_r_hand_str = "coatwinter", slot_l_hand_str = "coatwinter")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
@@ -154,52 +154,52 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat/captain
 	name = "captain's winter coat"
 	icon_state = "coatcaptain"
-	item_state_slots = list(slot_r_hand_str = "eros_coatcaptain", slot_l_hand_str = "eros_coatcaptain")
+	item_state_slots = list(slot_r_hand_str = "coatcaptain", slot_l_hand_str = "coatcaptain")
 	armor = list(melee = 20, bullet = 15, laser = 20, energy = 10, bomb = 15, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/security
 	name = "security winter coat"
 	icon_state = "coatsecurity"
-	item_state_slots = list(slot_r_hand_str = "eros_coatsecurity", slot_l_hand_str = "eros_coatsecurity")
+	item_state_slots = list(slot_r_hand_str = "coatsecurity", slot_l_hand_str = "coatsecurity")
 	armor = list(melee = 25, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical
 	name = "medical winter coat"
 	icon_state = "coatmedical"
-	item_state_slots = list(slot_r_hand_str = "eros_coatmedical", slot_l_hand_str = "eros_coatmedical")
+	item_state_slots = list(slot_r_hand_str = "coatmedical", slot_l_hand_str = "coatmedical")
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/science
 	name = "science winter coat"
 	icon_state = "coatscience"
-	item_state_slots = list(slot_r_hand_str = "coatscience", slot_l_hand_str = "eros_coatscience")
+	item_state_slots = list(slot_r_hand_str = "coatscience", slot_l_hand_str = "coatscience")
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering
 	name = "engineering winter coat"
 	icon_state = "coatengineer"
-	item_state_slots = list(slot_r_hand_str = "eros_coatengineer", slot_l_hand_str = "eros_coatengineer")
+	item_state_slots = list(slot_r_hand_str = "coatengineer", slot_l_hand_str = "coatengineer")
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 20)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering/atmos
 	name = "atmospherics winter coat"
 	icon_state = "coatatmos"
-	item_state_slots = list(slot_r_hand_str = "eros_coatatmos", slot_l_hand_str = "eros_coatatmos")
+	item_state_slots = list(slot_r_hand_str = "coatatmos", slot_l_hand_str = "coatatmos")
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/hydro
 	name = "hydroponics winter coat"
 	icon_state = "coathydro"
-	item_state_slots = list(slot_r_hand_str = "eros_coathydro", slot_l_hand_str = "eros_coathydro")
+	item_state_slots = list(slot_r_hand_str = "coathydro", slot_l_hand_str = "coathydro")
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/cargo
 	name = "cargo winter coat"
 	icon_state = "coatcargo"
-	item_state_slots = list(slot_r_hand_str = "eros_coatcargo", slot_l_hand_str = "eros_coatcargo")
+	item_state_slots = list(slot_r_hand_str = "coatcargo", slot_l_hand_str = "coatcargo")
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/miner
 	name = "mining winter coat"
 	icon_state = "coatminer"
-	item_state_slots = list(slot_r_hand_str = "eros_coatminer", slot_l_hand_str = "eros_coatminer")
+	item_state_slots = list(slot_r_hand_str = "coatminer", slot_l_hand_str = "coatminer")
 	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/storage/toggle/track
