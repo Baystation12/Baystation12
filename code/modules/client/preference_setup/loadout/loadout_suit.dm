@@ -104,43 +104,6 @@
 
 //EROS START
 
-/datum/gear/suit/poncho
-	display_name = "poncho selection"
-	description = "A simple, comfortable cloak without sleeves."
-
-/datum/gear/suit/poncho/New()
-	..()
-	var/list/ponchos = list()
-	for(var/poncho_style in (typesof(/obj/item/clothing/suit/poncho) - typesof(/obj/item/clothing/suit/poncho/roles)))
-		var/obj/item/clothing/suit/storage/toggle/hoodie/poncho = poncho_style
-		ponchos[initial(poncho.name)] = poncho
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ponchos))
-
-/datum/gear/suit/roles/poncho/security
-	display_name = "poncho, security"
-	path = /obj/item/clothing/suit/poncho/roles/security
-	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer")
-
-/datum/gear/suit/roles/poncho/medical
-	display_name = "poncho, medical"
-	path = /obj/item/clothing/suit/poncho/roles/medical
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
-
-/datum/gear/suit/roles/poncho/engineering
-	display_name = "poncho, engineering"
-	path = /obj/item/clothing/suit/poncho/roles/engineering
-	allowed_roles = list("Chief Engineer","Atmospheric Technician", "Station Engineer")
-
-/datum/gear/suit/roles/poncho/science
-	display_name = "poncho, science"
-	path = /obj/item/clothing/suit/poncho/roles/science
-	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
-
-/datum/gear/suit/roles/poncho/cargo
-	display_name = "poncho, cargo"
-	path = /obj/item/clothing/suit/poncho/roles/cargo
-	allowed_roles = list("Quartermaster","Cargo Technician")
-
 /datum/gear/suit/flannel
 	display_name = "grey flannel"
 	path = /obj/item/clothing/suit/storage/flannel
