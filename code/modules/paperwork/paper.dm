@@ -440,4 +440,4 @@
 
 /obj/item/weapon/paper/exodus_holodeck
 	name = "holodeck disclaimer"
-	info = "Brusies sustained in the holodeck can be healed simply by sleeping."
+	info = "Bruises sustained in the holodeck can be healed simply by sleeping."
