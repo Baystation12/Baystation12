@@ -315,6 +315,7 @@
 	desc = "A simple, comfortable poncho."
 	icon_state = "classicponcho"
 	item_state = "classicponcho"
+	show_genitals = 1
 
 /obj/item/clothing/suit/poncho/colored/green
 	name = "green poncho"
