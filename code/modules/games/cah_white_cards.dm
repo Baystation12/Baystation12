@@ -82,7 +82,7 @@
 	"Femboys in space",
 	"Setting up a brothel in the old bar",
 	"Lewding a borg",
-	"Three Resomii, all at once",
+	"Three Resomi, all at once",
 	"Lady sneks",
 	"Bees?",
 	"Blast Hardcheese",
