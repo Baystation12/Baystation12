@@ -1247,6 +1247,7 @@
 #include "code\modules\eros\clothing\clothing.dm"
 #include "code\modules\eros\clothing\entertainer.dm"
 #include "code\modules\eros\clothing\glasses.dm"
+#include "code\modules\eros\clothing\gloves.dm"
 #include "code\modules\eros\clothing\head.dm"
 #include "code\modules\eros\clothing\hooded.dm"
 #include "code\modules\eros\clothing\masks.dm"
