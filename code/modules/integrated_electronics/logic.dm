@@ -121,6 +121,7 @@
 		inputs += "input [i]"
 	complexity = number_of_inputs
 	..()
+	desc += " It has [number_of_inputs] input pins."
 	extended_desc += " This multiplexer has a range from 1 to [inputs.len - 1]."
 
 /obj/item/integrated_circuit/logic/multiplexer/do_work()
@@ -128,7 +129,7 @@
 	var/output = null
 
 	if(isnum(input_index) && (input_index >= 1 && input_index < inputs.len))
-		output = get_pin_data(IC_INPUT, input_index)
+		output = get_pin_data(IC_INPUT, input_index + 1)
 	set_pin_data(IC_OUTPUT, 1, output)
 
 /obj/item/integrated_circuit/logic/multiplexer/medium
@@ -161,6 +162,7 @@
 	complexity = number_of_outputs
 
 	..()
+	desc += " It has [number_of_outputs] output pins."
 	extended_desc += " This demultiplexer has a range from 1 to [outputs.len]."
 
 /obj/item/integrated_circuit/logic/demultiplexer/do_work()

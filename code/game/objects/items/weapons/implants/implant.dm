@@ -51,14 +51,14 @@
 		if(part)
 			part.implants.Remove(src)
 		return ..()
-	
+
 /**
  *  Let the implant know it's no longer implanted
- */ 
+ */
 /obj/item/weapon/implant/proc/removed()
 	imp_in = null
 	implanted = 0
-	
+
 
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
@@ -472,7 +472,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		mobname = source.real_name
 		processing_objects.Add(src)
 		return 1
-		
+
 /obj/item/weapon/implant/death_alarm/removed()
 	..()
 	processing_objects.Remove(src)
@@ -514,7 +514,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		qdel(src)
 
 	implanted(mob/source as mob)
-		src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_s", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
+		src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 		if (source.mind)
 			source.mind.store_memory("Compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 		to_chat(source, "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")

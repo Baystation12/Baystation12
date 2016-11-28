@@ -609,40 +609,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return 1
 
-/datum/proc/extra_ghost_link()
-	return
-
-/atom/movable/extra_ghost_link(var/atom/ghost)
-	if(src == ghost)
-		return
-	return "<a href='byond://?src=\ref[ghost];track=\ref[src]'>F</a>"
-
-/client/extra_ghost_link(var/atom/ghost)
-	return mob.extra_ghost_link(ghost)
-
-/mob/extra_ghost_link(var/atom/ghost)
-	. = ..()
-	if(client && eyeobj)
-		return "[.]|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>E</a>"
-
-/mob/observer/ghost/extra_ghost_link(var/atom/ghost)
-	. = ..()
-	if(mind && (mind.current && !isghost(mind.current)))
-		return "[.]|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>B</a>"
-
-/datum/proc/get_ghost_follow_link(var/atom/target)
-	return
-
-/client/get_ghost_follow_link(var/atom/target)
-	return mob.get_ghost_follow_link(target)
-
-/mob/observer/ghost/get_ghost_follow_link(var/atom/target)
-	return ghost_follow_link(target, src)
-
-/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
-	if((!target) || (!ghost)) return
-	return target.extra_ghost_link(ghost)
-
 /proc/isghostmind(var/datum/mind/player)
 	return player && !isnewplayer(player.current) && (!player.current || isghost(player.current) || (isliving(player.current) && player.current.stat == DEAD) || !player.current.client)
 

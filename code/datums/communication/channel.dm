@@ -54,14 +54,16 @@
 */
 /decl/communication_channel/proc/receive_communication(var/datum/communicator, var/datum/receiver, var/message)
 	if(can_receive_communication(receiver))
-		if(flags & COMMUNICATION_GHOST_FOLLOW)
-			var/extra_links = receiver.get_ghost_follow_link(communicator)
+		var/has_follow_links = FALSE
+		if((flags & COMMUNICATION_ADMIN_FOLLOW))
+			var/extra_links = receiver.get_admin_jump_link(communicator,"","\[","\]")
 			if(extra_links)
-				message = "([extra_links]) [message]"
-		if(flags & COMMUNICATION_ADMIN_FOLLOW)
-			var/extra_links = receiver.get_admin_jump_link(communicator)
+				has_follow_links = TRUE
+				message = "[extra_links] [message]"
+		if(flags & COMMUNICATION_GHOST_FOLLOW && !has_follow_links)
+			var/extra_links = receiver.get_ghost_follow_link(communicator,"","\[","\]")
 			if(extra_links)
-				message = "([extra_links]) [message]"
+				message = "[extra_links] [message]"
 		do_receive_communication(arglist(args))
 
 /decl/communication_channel/proc/can_receive_communication(var/datum/receiver)

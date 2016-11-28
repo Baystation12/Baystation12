@@ -22,3 +22,18 @@
 		CRASH("Expected list input. Was [input ? "[input.type]" : "null"]")
 	if(!istype(predicates))
 		CRASH("Expected predicate list. Was [predicates ? "[predicates.type]" : "null"]")
+
+/proc/is_atom_predicate(var/value, var/feedback_receiver)
+	. = isatom(value)
+	if(!. && feedback_receiver)
+		to_chat(feedback_receiver, "<span class='warning'>Value must be an atom.</span>")
+
+/proc/is_num_predicate(var/value, var/feedback_receiver)
+	. = isnum(value)
+	if(!. && feedback_receiver)
+		to_chat(feedback_receiver, "<span class='warning'>Value must be a numeral.</span>")
+
+/proc/is_dir_predicate(var/value, var/feedback_receiver)
+	. = (value in alldirs)
+	if(!. && feedback_receiver)
+		to_chat(feedback_receiver, "<span class='warning'>Value must be a direction.</span>")
