@@ -86,6 +86,7 @@
 		if(!card.radio)
 			card.radio = new /obj/item/device/radio(src.card)
 		radio = card.radio
+		common_radio = radio
 
 	//Default languages without universal translator software
 	add_language("Sol Common", 1)

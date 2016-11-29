@@ -181,10 +181,6 @@
 /mob/living/simple_animal/gib()
 	..(icon_gib,1)
 
-/mob/living/simple_animal/emote(var/act, var/type, var/desc)
-	if(act)
-		..(act, type, desc)
-
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)
 
