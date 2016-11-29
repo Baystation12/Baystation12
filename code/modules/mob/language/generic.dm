@@ -64,7 +64,7 @@
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
 
 /datum/language/sign
-	name = "Sign language"
+	name = LANGUAGE_SIGN
 	desc = "A sign language commonly used for those who are deaf or mute."
 	signlang_verb = list("gestures")
 	colour = "say_quote"
