@@ -244,7 +244,7 @@ proc/check_panel(mob/M)
 
 /obj/effect/fake_attacker/New(var/loc, var/mob/living/target, var/mob/living/carbon/human/clone)
 	..()
-	
+
 	if(clone.l_hand)
 		if(!(locate(clone.l_hand) in non_fakeattack_weapons))
 			weapon_name = clone.l_hand.name
@@ -260,11 +260,11 @@ proc/check_panel(mob/M)
 	right = image(clone, src, dir = EAST)
 	up = image(clone, src, dir = NORTH)
 	down = image(clone, src, dir = SOUTH)
-	
+
 	step_away(src, my_target, 2)
-	
+
 	updateimage()
-	
+
 	spawn attack_loop()
 	spawn(300)
 		qdel(src)
@@ -332,7 +332,7 @@ proc/check_panel(mob/M)
 				if(weapon_name)
 					sound_to(my_target, sound(pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')))
 					to_chat(my_target, "<span class='danger'>\The [my_target] has been attacked with \the [weapon_name] by \the [src]!</span>")
-					my_target.halloss += 8
+					my_target.adjustHalLoss(8)
 					if(prob(20))
 						my_target.eye_blurry += 3
 					if(prob(33))
@@ -340,7 +340,7 @@ proc/check_panel(mob/M)
 				else
 					sound_to(my_target, sound(pick('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg')))
 					to_chat(my_target, "<span class='danger'>\The [src] has punched \the [my_target]!</span>")
-					my_target.halloss += 4
+					my_target.adjustHalLoss(4)
 					if(prob(33))
 						fake_blood(my_target)
 
@@ -351,7 +351,7 @@ proc/check_panel(mob/M)
 	var/obj/effect/overlay/O = new/obj/effect/overlay(target.loc)
 	O.name = "blood"
 	var/image/I = image('icons/effects/blood.dmi',O,"floor[rand(1,7)]",O.dir,1)
-	target << I
+	target << I
 	spawn(300)
 		qdel(O)
 	return

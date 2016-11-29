@@ -53,13 +53,6 @@ datum/unit_test/human_breath/check_result()
 
 // ============================================================================
 
-//#define BRUTE     "brute"
-//#define BURN      "fire"
-//#define TOX       "tox"
-//#define OXY       "oxy"
-//#define CLONE     "clone"
-//#define HALLOSS   "halloss"
-
 /var/default_mobloc = null
 
 proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living/carbon/human)
@@ -104,7 +97,7 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 			loss = M.getOxyLoss()
 		if(CLONE)
 			loss = M.getCloneLoss()
-		if(HALLOSS)
+		if(PAIN)
 			loss = M.getHalLoss()
 
 	if(!loss && istype(M, /mob/living/carbon/human))
@@ -241,7 +234,7 @@ datum/unit_test/mob_damage/clone
 
 datum/unit_test/mob_damage/halloss
 	name = "MOB: Human Halloss damage check"
-	damagetype = HALLOSS
+	damagetype = PAIN
 
 // =================================================================
 // Unathi
@@ -274,7 +267,7 @@ datum/unit_test/mob_damage/unathi/clone
 
 datum/unit_test/mob_damage/unathi/halloss
 	name = "MOB: Unathi Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
 
 // =================================================================
 // SpessKahjit aka Tajaran
@@ -308,7 +301,7 @@ datum/unit_test/mob_damage/tajaran/clone
 
 datum/unit_test/mob_damage/tajaran/halloss
 	name = "MOB: Tajaran Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
 
 // =================================================================
 // Resomi
@@ -342,7 +335,7 @@ datum/unit_test/mob_damage/resomi/clone
 
 datum/unit_test/mob_damage/resomi/halloss
 	name = "MOB: Resomi Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
 
 // =================================================================
 // Skrell
@@ -374,7 +367,7 @@ datum/unit_test/mob_damage/skrell/clone
 
 datum/unit_test/mob_damage/skrell/halloss
 	name = "MOB: Skrell Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
 
 // =================================================================
 // Vox
@@ -408,7 +401,7 @@ datum/unit_test/mob_damage/vox/clone
 
 datum/unit_test/mob_damage/vox/halloss
 	name = "MOB: Vox Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
 
 // =================================================================
 // Diona
@@ -442,7 +435,8 @@ datum/unit_test/mob_damage/diona/clone
 
 datum/unit_test/mob_damage/diona/halloss
 	name = "MOB: Diona Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
+	expected_vulnerability = IMMUNE
 
 // =================================================================
 // SPECIAL WHITTLE SNOWFLAKES aka IPC
@@ -477,7 +471,8 @@ datum/unit_test/mob_damage/machine/clone
 
 datum/unit_test/mob_damage/machine/halloss
 	name = "MOB: IPC Halloss Damage Check"
-	damagetype = HALLOSS
+	damagetype = PAIN
+	expected_vulnerability = IMMUNE
 
 
 // ==============================================================================

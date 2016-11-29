@@ -373,4 +373,4 @@ var/list/organ_cache = list()
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return (robotic < ORGAN_ROBOT && !(species.flags & NO_PAIN))
+	return (robotic < ORGAN_ROBOT && (!species || !(species.flags & NO_PAIN)))
