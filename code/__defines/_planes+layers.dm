@@ -95,7 +95,6 @@ What is the naming convention for planes or layers?
 	#define BLOOD_LAYER                 8
 	#define MOUSETRAP_LAYER             9
 	#define PLANT_LAYER                 10
-	#define TURF_FIRE_LAYER             11
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 
@@ -142,15 +141,13 @@ What is the naming convention for planes or layers?
 #define BLOB_PLANE                     -5 // For Blobs, which are above humans.
 
 	#define BLOB_SHIELD_LAYER		1
-	#define BLOB_RESOURCE_LAYER		2
-	#define BLOB_FACTORY_LAYER		3
-	#define BLOB_NODE_LAYER			4
-	#define BLOB_CORE_LAYER			5
-	#define BLOB_SPORE_LAYER		6
+	#define BLOB_NODE_LAYER			2
+	#define BLOB_CORE_LAYER			3
 
 #define EFFECTS_BELOW_LIGHTING_PLANE   -4 // For special effects.
 
-	#define BELOW_PROJECTILE_LAYER  3
+	#define BELOW_PROJECTILE_LAYER  2
+	#define FIRE_LAYER              3
 	#define PROJECTILE_LAYER        4
 	#define ABOVE_PROJECTILE_LAYER  5
 	#define SINGULARITY_LAYER       6
