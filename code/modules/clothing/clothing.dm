@@ -84,10 +84,10 @@
 		else
 			species_restricted = list(target_species)
 
-	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-		icon = sprite_sheets_obj[target_species]
-	else
-		icon = initial(icon)
+//	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+//		icon = sprite_sheets_obj[target_species]
+//	else
+//		icon = initial(icon)
 
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
 	if(!species_restricted)
@@ -102,10 +102,10 @@
 		else
 			species_restricted = list(target_species)
 
-	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-		icon = sprite_sheets_obj[target_species]
-	else
-		icon = initial(icon)
+//	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+//		icon = sprite_sheets_obj[target_species]
+//	else
+//		icon = initial(icon)
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects
@@ -114,7 +114,20 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
+	sprite_sheets = list(
+		"Human" = 'icons/mob/ears.dmi',
+		"Machine" = 'icons/mob/ears.dmi',
+		"Drider" = 'icons/mob/ears.dmi',
+		"Lamia" = 'icons/mob/ears.dmi',
+		"Unathi" = 'icons/mob/ears.dmi',
+		"Tajara" = 'icons/mob/ears.dmi',
+		"Skrell" = 'icons/mob/ears.dmi',
+		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
+		"Akula" = 'icons/mob/ears.dmi',
+		"Slime" = 'icons/mob/ears.dmi',
+		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
+		"Human" = 'icons/mob/ears.dmi'
+		)
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -177,8 +190,19 @@ BLIND     // can't see anything
 	var/darkness_view = 0//Base human is 2
 	var/see_invisible = -1
 	sprite_sheets = list(
+		"Human" = 'icons/mob/eyes.dmi',
+		"Machine" = 'icons/mob/eyes.dmi',
+		"Drider" = 'icons/mob/eyes.dmi',
+		"Lamia" = 'icons/mob/eyes.dmi',
+		"Unathi" = 'icons/mob/eyes.dmi',
+		"Tajara" = 'icons/mob/eyes.dmi',
+		"Skrell" = 'icons/mob/eyes.dmi',
+		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
+		"Akula" = 'icons/mob/eyes.dmi',
+		"Slime" = 'icons/mob/eyes.dmi',
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
+		"Human" = 'icons/mob/eyes.dmi'
 		)
 
 /obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
@@ -210,8 +234,20 @@ BLIND     // can't see anything
 	attack_verb = list("challenged")
 	species_restricted = list("exclude","Unathi","Tajara", "Vox")
 	sprite_sheets = list(
+		"Human" = 'icons/mob/hands.dmi',
+		"Machine" = 'icons/mob/hands.dmi',
+		"Drider" = 'icons/mob/hands.dmi',
+		"Lamia" = 'icons/mob/hands.dmi',
+		"Unathi" = 'icons/mob/hands.dmi',
+		"Tajara" = 'icons/mob/hands.dmi',
+		"Skrell" = 'icons/mob/hands.dmi',
+		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
+		"Akula" = 'icons/mob/hands.dmi',
+		"Slime" = 'icons/mob/hands.dmi',
+		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
+		"Human" = 'icons/mob/hands.dmi'
 		)
 	blood_overlay_type = "bloodyhands"
 
@@ -276,8 +312,18 @@ BLIND     // can't see anything
 	var/light_applied
 	var/brightness_on
 	var/on = 0
-
 	sprite_sheets = list(
+		"Human" = 'icons/mob/head.dmi',
+		"Machine" = 'icons/mob/head.dmi',
+		"Drider" = 'icons/mob/head.dmi',
+		"Lamia" = 'icons/mob/head.dmi',
+		"Unathi" = 'icons/mob/head.dmi',
+		"Tajara" = 'icons/mob/head.dmi',
+		"Skrell" = 'icons/mob/head.dmi',
+		"Resomi" = 'icons/mob/species/resomi/head.dmi',
+		"Akula" = 'icons/mob/head.dmi',
+		"Slime" = 'icons/mob/head.dmi',
+		"Vox" = 'icons/mob/species/vox/head.dmi',
 		"Vox" = 'icons/mob/species/vox/head.dmi',
 		"Resomi" = 'icons/mob/species/resomi/head.dmi'
 		)
@@ -368,8 +414,8 @@ BLIND     // can't see anything
 		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype()]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = 'icons/mob/light_overlays.dmi'
-			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
-				use_icon = sprite_sheets[H.species.get_bodytype()]
+//			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+//				use_icon = sprite_sheets[H.species.get_bodytype()]
 			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
 
 	if(H)
@@ -389,8 +435,20 @@ BLIND     // can't see anything
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
+		"Human" = 'icons/mob/mask.dmi',
+		"Machine" = 'icons/mob/mask.dmi',
+		"Drider" = 'icons/mob/mask.dmi',
+		"Lamia" = 'icons/mob/mask.dmi',
+		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
+		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
+		"Skrell" = 'icons/mob/mask.dmi',
+		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
+		"Akula" = 'icons/mob/species/akula/mask.dmi',
+		"Slime" = 'icons/mob/mask.dmi',
+		"Vox" = 'icons/mob/species/vox/masks.dmi',
 		"Vox" = 'icons/mob/species/vox/masks.dmi',
 		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
+		"Human" = 'icons/mob/mask.dmi'
 		)
 
 	var/voicechange = 0
@@ -433,9 +491,22 @@ BLIND     // can't see anything
 	var/overshoes = 0
 	species_restricted = list("exclude","Vox")
 	sprite_sheets = list(
+		"Human" = 'icons/mob/feet.dmi',
+		"Machine" = 'icons/mob/feet.dmi',
+		"Drider" = 'icons/mob/feet.dmi',
+		"Lamia" = 'icons/mob/feet.dmi',
+		"Unathi" = 'icons/mob/feet.dmi',
+		"Tajara" = 'icons/mob/feet.dmi',
+		"Skrell" = 'icons/mob/feet.dmi',
+		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
+		"Akula" = 'icons/mob/feet.dmi',
+		"Slime" = 'icons/mob/feet.dmi',
+		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
+		"Human" = 'icons/mob/feet.dmi'
 		)
+
 	blood_overlay_type = "shoeblood"
 
 /obj/item/clothing/shoes/New()
@@ -510,8 +581,16 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_NORMAL
 
 	sprite_sheets = list(
+		"Human" = 'icons/mob/suit.dmi',
+		"Machine" = 'icons/mob/suit.dmi',
+		"Drider" = 'icons/mob/suit.dmi',
+		"Lamia" = 'icons/mob/suit.dmi',
+		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
+		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
+		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
 		"Vox" = 'icons/mob/species/vox/suit.dmi',
-		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
+		"Resomi" = 'icons/mob/species/resomi/suit.dmi',
+		"Human" = 'icons/mob/suit.dmi'
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -556,8 +635,20 @@ BLIND     // can't see anything
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
+		"Human" = 'icons/mob/uniform.dmi',
+		"Machine" = 'icons/mob/uniform.dmi',
+		"Drider" = 'icons/mob/uniform.dmi',
+		"Lamia" = 'icons/mob/uniform.dmi',
+		"Unathi" = 'icons/mob/uniform.dmi',
+		"Tajara" = 'icons/mob/uniform.dmi',
+		"Skrell" = 'icons/mob/uniform.dmi',
+		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
+		"Akula" = 'icons/mob/uniform.dmi',
+		"Slime" = 'icons/mob/uniform.dmi',
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
-		"Resomi" = 'icons/mob/species/resomi/uniform.dmi'
+		"Vox" = 'icons/mob/species/vox/uniform.dmi',
+		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
+		"Human" = 'icons/mob/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
@@ -606,8 +697,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
-		under_icon = sprite_sheets[H.species.get_bodytype()]
+//	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+//		under_icon = sprite_sheets[H.species.get_bodytype()]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
@@ -629,8 +720,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+//	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+//		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else

@@ -11,7 +11,8 @@
 
 	//Species-specific stuff.
 	species_restricted = list("Human", "Machine")
-	sprite_sheets = list(
+	sprite_sheets = list(\
+		"Human" = 'icons/mob/head.dmi',
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
