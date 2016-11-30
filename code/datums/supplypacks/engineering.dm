@@ -140,6 +140,30 @@
 	containername = "\improper Particle Accelerator crate"
 	access = access_ce
 
+/decl/hierarchy/supply_pack/engineering/ame_controller
+	name = "Antimatter Engine Controller crate"
+	contains = list(/obj/machinery/power/am_control_unit)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Antimatter Engine Controller crate"
+	access = access_engine
+
+/decl/hierarchy/supply_pack/engineering/ame_parts
+	name = "Antimatter Engine parts crate"
+	contains = list(/obj/item/device/am_shielding_container = 12 )
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Antimatter Engine parts crate"
+	access = access_engine
+
+/decl/hierarchy/supply_pack/engineering/ame_fuel
+	name = "Antimatter Containment Jar crate"
+	contains = list(/obj/item/weapon/am_containment = 3 )
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Antimatter Containment Jar crate"
+	access = access_engine
+
 /decl/hierarchy/supply_pack/engineering/pacman_parts
 	name = "P.A.C.M.A.N. portable generator parts"
 	contains = list(/obj/item/weapon/stock_parts/micro_laser,
