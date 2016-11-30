@@ -86,6 +86,6 @@
 
 /decl/hierarchy/supply_pack/supply/circuit_kit
 	name = "Circuit Kits"
-	contains = list(/obj/item/weapon/storage/bag/circuits/basic/New() = 4)
+	contains = list(/obj/item/weapon/storage/bag/circuits/basic = 4)
 	cost = 20
 	containername = "\improper Circuit Kit crate"
