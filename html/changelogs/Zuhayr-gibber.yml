@@ -1,0 +1,6 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - tweak: "The gibber is now called a meat grinder, since that's what it is."
+  - tweak: "Eating a human organ or limb is now done in the exact same manner as any other food. If you try to eat a limb, though, it will not be usable in a transplant, for obvious reasons."
+  - tweak: "Human organs now fit into the reagent grinder."
