@@ -194,6 +194,8 @@
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
 /obj/item/weapon/paper/proc/parsepencode(t, obj/item/weapon/pen/P, mob/user, iscrayon)
+	if(length(t) == 0)
+		return ""
 
 	if(findtext(t, "\[sign\]"))
 		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")

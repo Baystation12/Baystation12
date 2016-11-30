@@ -709,7 +709,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/vomit()
-	if(!check_has_mouth())
+	if(!check_has_mouth() || isSynthetic())
 		return
 	if(stat == DEAD)
 		return

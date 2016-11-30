@@ -1,7 +1,0 @@
-author: Irrationalist
-
-delete-after: True
-
-changes:
-  - bugfix: "Fixed stun-batons being unuseable by synthetics due to hitcost increasing each (de)activation"
-  - bugfix: "Fixed stun-batons not properly updating their icons"

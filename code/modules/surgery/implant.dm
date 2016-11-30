@@ -167,6 +167,11 @@
 /datum/surgery_step/cavity/implant_removal/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/obj/item/organ/internal/brain/sponge = target.internal_organs_by_name[BP_BRAIN]
+
+	// targetted a missing limb/organ
+	if(!affected)
+		return 0
+
 	if(sponge && sponge.parent_organ == affected.organ_tag && sponge.damage)
 		return 0
 	return ..()

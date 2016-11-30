@@ -57,7 +57,7 @@
 	else
 		to_chat(victim, "<span class='danger'>Searing hot oil scorches your [E ? E.name : "flesh"]!</span>")
 	if(victim)
-		admin_attack_log("Has [cook_type] their victim in \a [src]", "Has been [cook_type] in \a [src] by the attacker.", "[cook_type], in \a [src], ")
+		admin_attack_log(user, victim, "Has [cook_type] their victim in \a [src]", "Has been [cook_type] in \a [src] by the attacker.", "[cook_type], in \a [src], ")
 
 	icon_state = off_icon
 	cooking = 0

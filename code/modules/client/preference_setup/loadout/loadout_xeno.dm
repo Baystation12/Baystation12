@@ -101,7 +101,7 @@
 /datum/gear/uniform/resomi/sec
 	display_name = "uniform, Security (Resomi)"
 	path = /obj/item/clothing/under/resomi/red
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Security Officer","Head of Security","Warden","Detective")
 
 /datum/gear/uniform/resomi/med
 	display_name = "uniform, Medical (Resomi)"

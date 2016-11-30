@@ -53,43 +53,12 @@
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
-	path = /obj/item/clothing/suit/poncho
+	path = /obj/item/clothing/suit/poncho/colored
 	cost = 1
 
 /datum/gear/suit/poncho/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/poncho)
-
-/datum/gear/suit/unathi_robe
-	display_name = "roughspun robe"
-	path = /obj/item/clothing/suit/unathi/robe
-	cost = 1
-
-/datum/gear/suit/suit_jacket
-	display_name = "suit jackets"
-	path = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-
-/datum/gear/suit/suit_jacket/New()
-	..()
-	var/suitjackets = list()
-	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
-	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/lawyer/purpjacket
-	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
-
-//EROS START
-
-/datum/gear/suit/poncho
-	display_name = "poncho selection"
-	description = "A simple, comfortable cloak without sleeves."
-
-/datum/gear/suit/poncho/New()
-	..()
-	var/list/ponchos = list()
-	for(var/poncho_style in (typesof(/obj/item/clothing/suit/poncho) - typesof(/obj/item/clothing/suit/poncho/roles)))
-		var/obj/item/clothing/suit/storage/toggle/hoodie/poncho = poncho_style
-		ponchos[initial(poncho.name)] = poncho
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ponchos))
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/poncho/colored)
 
 /datum/gear/suit/roles/poncho/security
 	display_name = "poncho, security"
@@ -116,6 +85,25 @@
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 	allowed_roles = list("Quartermaster","Cargo Technician")
 
+/datum/gear/suit/unathi_robe
+	display_name = "roughspun robe"
+	path = /obj/item/clothing/suit/unathi/robe
+	cost = 1
+
+/datum/gear/suit/suit_jacket
+	display_name = "suit jackets"
+	path = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+
+/datum/gear/suit/suit_jacket/New()
+	..()
+	var/suitjackets = list()
+	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
+	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/lawyer/purpjacket
+	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
+
+//EROS START
+
 /datum/gear/suit/flannel
 	display_name = "grey flannel"
 	path = /obj/item/clothing/suit/storage/flannel
@@ -137,9 +125,9 @@
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
 /datum/gear/suit/wintercoat/captain
-	display_name = "winter coat, station administrator"
+	display_name = "winter coat, captain"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/captain
-	allowed_roles = list("Station Administrator")
+	allowed_roles = list("Captain")
 
 /datum/gear/suit/wintercoat/security
 	display_name = "winter coat, security"
@@ -159,17 +147,17 @@
 /datum/gear/suit/wintercoat/engineering
 	display_name = "winter coat, engineering"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/engineering
-	allowed_roles = list("Chief Engineer", "Station Engineer")
+	allowed_roles = list("Chief Engineer","Atmospheric Technician", "Station Engineer")
 
 /datum/gear/suit/wintercoat/atmos
 	display_name = "winter coat, atmospherics"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/engineering/atmos
-	allowed_roles = list("Chief Engineer", "Station Engineer")
+	allowed_roles = list("Chief Engineer", "Atmospheric Technician", "Station Engineer")
 
 /datum/gear/suit/wintercoat/hydro
 	display_name = "winter coat, hydroponics"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/hydro
-	allowed_roles = list("Botanist", "Xenobiologist")
+	allowed_roles = list("Gardener", "Xenobiologist")
 
 /datum/gear/suit/wintercoat/cargo
 	display_name = "winter coat, cargo"
