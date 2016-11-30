@@ -1,0 +1,13 @@
+author: LorenLuke
+
+delete-after: True
+
+changes: 
+  - rscdel: "Got rid of the awful singletank code."
+  - rscadd: "Created new singletank construction and disassembly code (see below): Single Tank devices must be wired before having assemblies attached."
+  - tweak: "Single tank devices are single use only with their igniters. The igniters create a small bit of heat to get fuel to its burn temperature (126C)."
+  - tweak: "Added relief valve to air tanks. They now trigger leak logic at over 173C or leak pressure. Can be welded shut to prevent leakage."
+  - tweak: "Single Tank devices must be wired before having assemblies attached."
+  - tweak: "Air from rupturing/exploding tanks now merged into environment instead of deleted."
+  - tweak: "Explosion radii based on pressure, gas amount, and volume of rupturing vessel."
+  - bugfix: "Assemblies can now be used when attached."
