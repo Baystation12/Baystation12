@@ -29,12 +29,12 @@
 	else
 		density = 0
 		name = "collector [mysize] OFF"
-
+/*
 /obj/effect/fusion_particle_catcher/bullet_act(var/obj/item/projectile/Proj)
 	parent.AddEnergy(Proj.damage, 0, 1)
 	update_icon()
 	return 0
-
+*/
 /obj/effect/fusion_particle_catcher/Bumped(atom/AM)
 	if(ismob(AM) && density)
 		to_chat(AM, "<span class='warning'>A powerful force pushes you back.</span>")

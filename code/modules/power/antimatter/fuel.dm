@@ -30,6 +30,7 @@
 		if(istype(F, /obj/item/weapon/fuel/H))
 			src.fuel += F.fuel
 			qdel(F)
+			F = null
 			src:annihilation(src.fuel)
 	if(istype(src, /obj/item/weapon/fuel/H))
 		if(istype(F, /obj/item/weapon/fuel/H))
@@ -42,6 +43,7 @@
 			F:annihilation(F.fuel)
 
 /obj/item/weapon/fuel/antiH/proc/annihilation(var/mass)
+
 
 	var/strength = convert2energy(mass)
 
@@ -67,9 +69,9 @@
 	return
 
 
-/obj/item/weapon/fuel/examine(mob/user)
-	if(get_dist(src, user) <= 1)
-		to_chat(user, "A magnetic storage ring, it contains [fuel]kg of [content ? content : "nothing"].")
+/obj/item/weapon/fuel/examine()
+	..()
+	to_chat(src, "<span class='info'>A magnetic storage ring, it contains [fuel]kg of [content ? content : "nothing"].</span>")
 
 /obj/item/weapon/fuel/proc/injest(mob/M as mob)
 	switch(content)
@@ -80,8 +82,11 @@
 	qdel(src)
 	return
 
+//Todo: Figure out what this does.
+/*
 /obj/item/weapon/fuel/attack(mob/M as mob, mob/user as mob)
 	if (user != M)
+		//If you come from the distant future and happen to find this unincluded and derelict file, you may be wondering what this is. In truth, it's better that you don't know.
 		var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 		O.source = user
 		O.target = M
@@ -97,3 +102,4 @@
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("<span class='warning'>[M] ate the [content ? content : "empty canister"]!</span>"), 1)
 		src.injest(M)
+*/
