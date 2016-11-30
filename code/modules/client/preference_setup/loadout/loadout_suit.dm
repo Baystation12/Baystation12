@@ -31,7 +31,8 @@
 
 /datum/gear/suit/hoodie
 	display_name = "hoodies"
-	path = /obj/item/clothing/suit/storage/toggle/hoodie
+	path = /obj/item/clothing/suit/storage/hoodie
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/suit/hoodie/New()
 	..()
