@@ -19,6 +19,9 @@
 /obj/item/device/transfer_valve/attackby(obj/item/item, mob/user)
 	var/turf/location = get_turf(src) // For admin logs
 	if(istype(item, /obj/item/weapon/tank))
+
+		var/T1_weight = 0
+		var/T2_weight = 0
 		if(tank_one && tank_two)
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
 			return
@@ -26,17 +29,24 @@
 		if(!tank_one)
 			tank_one = item
 			user.drop_item()
-			item.loc = src
+			item.forceMove(src)
 			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
 		else if(!tank_two)
+			T1_weight = tank_one.w_class //if just t1 and not T2 versus below with both tanks.
 			tank_two = item
 			user.drop_item()
-			item.loc = src
+			item.forceMove(src)
 			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
 			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
 
+		T1_weight = tank_one.w_class
+		T2_weight = tank_two.w_class
+
+		src.w_class = max(initial(src.w_class),T1_weight,T2_weight) //gets w_class of biggest object, because you shouldn't be able to just shove tanks in and have them be tiny.
+
 		update_icon()
+
 		nanomanager.update_uis(src) // update all UIs attached to src
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
@@ -49,7 +59,7 @@
 			return
 		user.remove_from_mob(item)
 		attached_device = A
-		A.loc = src
+		A.forceMove(src)
 		to_chat(user, "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>")
 		A.holder = src
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
@@ -151,7 +161,8 @@
 	else
 		return
 
-	T.loc = get_turf(src)
+	if(!tank_one && !tank_two) src.w_class = initial(src.w_class) //returns it to just the transfer valve size
+	T.dropInto(loc)
 	update_icon()
 
 /obj/item/device/transfer_valve/proc/merge_gases()
