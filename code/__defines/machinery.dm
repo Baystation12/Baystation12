@@ -46,6 +46,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_FIRST_DECK "First Deck"
 #define NETWORK_FOURTH_DECK "Fourth Deck"
 #define NETWORK_MEDICAL "Medical"
+#define NETWORK_MAINTENANCE "Maintenance Deck"
 #define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"

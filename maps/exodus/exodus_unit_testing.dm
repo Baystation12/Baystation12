@@ -18,6 +18,7 @@
 		/area/maintenance/dormitory = NO_SCRUBBER,
 		/area/maintenance/engi_shuttle = NO_SCRUBBER,
 		/area/maintenance/evahallway = NO_SCRUBBER,
+		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance/medbay = NO_SCRUBBER,
 		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/foresolar = NO_SCRUBBER,
@@ -25,6 +26,12 @@
 		/area/maintenance/research_port = 0,
 		/area/maintenance/research_starboard = NO_SCRUBBER,
 		/area/maintenance/starboardsolar = NO_SCRUBBER,
+		/area/maintenance/sub/aft = NO_SCRUBBER,
+		/area/maintenance/sub/fore = NO_SCRUBBER,
+		/area/maintenance/sub/port = NO_SCRUBBER,
+		/area/maintenance/sub/starboard = NO_SCRUBBER,
+		/area/maintenance/sub/relay_station = 0,
+		/area/maintenance/sub/command = 0,
 		/area/maintenance/substation/command = 0,
 		/area/medical/genetics = NO_APC,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
@@ -41,8 +48,7 @@
 		/area/storage/emergency = NO_SCRUBBER|NO_VENT,
 		/area/storage/emergency2 = NO_SCRUBBER|NO_VENT,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(
