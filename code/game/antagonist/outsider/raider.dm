@@ -58,8 +58,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/suit/storage/toggle/bomber,
 		/obj/item/clothing/suit/storage/leather_jacket,
 		/obj/item/clothing/suit/storage/toggle/brown_jacket,
-		/obj/item/clothing/suit/storage/toggle/hoodie,
-		/obj/item/clothing/suit/storage/toggle/hoodie/black,
+		/obj/item/clothing/suit/storage/hoodie,
 		/obj/item/clothing/suit/unathi/mantle,
 		/obj/item/clothing/suit/poncho/colored,
 		)
