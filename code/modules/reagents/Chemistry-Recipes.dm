@@ -1958,7 +1958,7 @@
 	name = "Mead"
 	id = "mead"
 	result = "mead"
-	required_reagents = list("sugar" = 1, "water" = 1)
+	required_reagents = list("honey" = 1, "water" = 1)
 	catalysts = list("enzyme" = 5)
 	result_amount = 2
 
@@ -2165,6 +2165,14 @@
 	required_reagents = list("water" = 10)
 	catalysts = list("oxyphoron" = 5)
 	result_amount = 1
+	
+/datum/chemical_reaction/rum
+	name = "Rum"
+	id = "rum"
+	result = "rum"
+	required_reagents = list("sugar" = 1, "water" = 1)
+	catalysts = list("enzyme" = 5)
+	result_amount = 2
 
 /datum/chemical_reaction/deuterium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/T = get_turf(holder.my_atom)
