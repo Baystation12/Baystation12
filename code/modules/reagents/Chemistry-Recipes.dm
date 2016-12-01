@@ -2165,7 +2165,7 @@
 	required_reagents = list("water" = 10)
 	catalysts = list("oxyphoron" = 5)
 	result_amount = 1
-	
+
 /datum/chemical_reaction/rum
 	name = "Rum"
 	id = "rum"
