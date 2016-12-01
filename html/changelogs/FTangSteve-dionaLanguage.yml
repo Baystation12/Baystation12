@@ -34,3 +34,4 @@ delete-after: False
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - wip: "RootSpeak is now split into a local and a global variant. For now the global acts as a hivemind."
+  - bugfix: "Diona nymphs now can only speak the local variant of rootspeak"

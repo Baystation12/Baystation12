@@ -227,7 +227,10 @@
 
 	var/mob/living/carbon/alien/diona/S = new(T)
 	S.set_dir(dir)
-	transfer_languages(src, S)
+
+	for(var/datum/language/L in src.languages)
+		S.add_language(L.name, 0)
+
 	if(mind)
 		mind.transfer_to(S)
 
