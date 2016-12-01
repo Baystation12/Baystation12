@@ -140,6 +140,7 @@
 	containername = "\improper Particle Accelerator crate"
 	access = access_ce
 
+/*
 /decl/hierarchy/supply_pack/engineering/ame_controller
 	name = "Antimatter Engine Controller crate"
 	contains = list(/obj/machinery/power/am_control_unit)
@@ -163,6 +164,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Antimatter Containment Jar crate"
 	access = access_engine
+*/
 
 /decl/hierarchy/supply_pack/engineering/pacman_parts
 	name = "P.A.C.M.A.N. portable generator parts"
