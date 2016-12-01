@@ -698,7 +698,7 @@ something, make sure it's not in one of the other lists.*/
 					prob(3);/obj/item/clothing/suit/apron/overalls,\
 					prob(1);/obj/item/clothing/suit/bio_suit/general,\
 					prob(2);/obj/item/clothing/suit/storage/service/expeditionary,\
-					prob(3);/obj/item/clothing/suit/storage/toggle/hoodie/black,\
+					prob(3);/obj/item/clothing/suit/storage/hoodie/,\
 					prob(3);/obj/item/clothing/suit/storage/toggle/brown_jacket,\
 					prob(3);/obj/item/clothing/suit/storage/leather_jacket,\
 					prob(4);/obj/item/clothing/suit/apron,\
