@@ -78,7 +78,7 @@ proc/cardinalrange(var/center)
 
 	if(processing)	shutdown_core()
 
-	visible_message("<span class='danger'> The [src.name] melts!</span>")
+	visible_message("<span class='warning'> The [src.name] melts!</span>")
 
 	//Might want to have it leave a mess on the floor but no sprites for now
 	..()
