@@ -437,3 +437,11 @@
 	hidden = 1
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Weapons crate"
+	
+/decl/hierarchy/supply_pack/security/practicelasers
+	name = "Practice Laser Carbines"
+	contains = list(/obj/item/weapon/gun/energy/laser/practice = 4)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Practice laser carbine crate"
+	access = access_brig
