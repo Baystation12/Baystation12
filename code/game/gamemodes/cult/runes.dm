@@ -448,7 +448,7 @@ var/list/sacrificed = list()
 					chose_name = 1
 					break
 			D.universal_speak = 1
-			D.status_flags &= ~GODMODE
+			D.status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH
 			D.s_tone = 35
 			D.b_eyes = 200
 			D.r_eyes = 200
