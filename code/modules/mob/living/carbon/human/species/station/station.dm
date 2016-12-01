@@ -14,10 +14,10 @@
 	min_age = 17
 	max_age = 100
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
-/datum/species/human/get_bodytype()
+/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return "Human"
 
 /datum/species/unathi
@@ -55,7 +55,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
@@ -119,7 +119,7 @@
 
 	primitive_form = "Farwa"
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
@@ -158,16 +158,16 @@
 
 	min_age = 19
 	max_age = 90
-	
+
 	darksight = 4
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 	base_color = "#006666"
-	
+
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
 	cold_level_3 = 130 //Default 120
@@ -263,7 +263,7 @@
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
 	appearance_flags = 0
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"

@@ -146,7 +146,7 @@
 				else if(href_list["reset"])
 					species = list()
 				if(infectee)
-					if(!infectee.species || !(infectee.species.get_bodytype() in species))
+					if(!infectee.species || !(infectee.species.get_bodytype(infectee) in species))
 						infectee = null
 			if("ichance")
 				var/I = input("Input infection chance", "Infection Chance", infectionchance) as null|num
@@ -174,16 +174,16 @@
 				var/list/candidates = list()
 				for(var/mob/living/carbon/G in living_mob_list_)
 					if(G.stat != DEAD && G.species)
-						if(G.species.get_bodytype() in species)
+						if(G.species.get_bodytype(G) in species)
 							candidates["[G.name][G.client ? "" : " (no client)"]"] = G
 						else
-							candidates["[G.name] ([G.species.get_bodytype()])[G.client ? "" : " (no client)"]"] = G
+							candidates["[G.name] ([G.species.get_bodytype(G)])[G.client ? "" : " (no client)"]"] = G
 				if(!candidates.len) to_chat(usr, "No possible candidates found!")
 
 				var/I = input("Choose initial infectee", "Infectee", infectee) as null|anything in candidates
 				if(!I || !candidates[I]) return
 				infectee = candidates[I]
-				species |= infectee.species.get_bodytype()
+				species |= infectee.species.get_bodytype(infectee)
 			if("go")
 				if(!antigens.len)
 					var/a = alert("This disease has no antigens; it will be impossible to permanently immunise anyone without them.\
