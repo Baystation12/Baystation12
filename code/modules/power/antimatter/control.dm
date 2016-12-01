@@ -1,9 +1,9 @@
 /obj/machinery/power/am_control_unit
 	name = "antimatter control unit"
 	desc = "This device injects antimatter into connected shielding units, the more antimatter injected the more power produced.  Wrench the device to set it up."
-	icon = 'icons/obj/machines/antimatter.dmi'
+	icon = 'icons/obj/machines/new_ame.dmi'
 	icon_state = "control"
-	anchored = 1
+	anchored = 0
 	density = 1
 	use_power = 1
 	idle_power_usage = 100
@@ -35,7 +35,7 @@
 	linked_cores = list()
 
 
-/obj/machinery/power/am_control_unit/Destroy()//Perhaps damage and run stability checks rather than just qdel on the others
+/obj/machinery/power/am_control_unit/Destroy()//Perhaps damage and run stability checks rather than just del on the others
 	for(var/obj/machinery/am_shielding/AMS in linked_shielding)
 		qdel(AMS)
 	..()
@@ -46,9 +46,7 @@
 		explosion(get_turf(src),8,12,18,12)
 		if(src) qdel(src)
 
-	if(update_shield_icons && !shield_icon_delay)
-		check_shield_icons()
-		update_shield_icons = 0
+	check_shield_icons()
 
 	if(stat & (NOPOWER|BROKEN) || !active)//can update the icons even without power
 		return
@@ -75,7 +73,7 @@
 	var/core_damage = 0
 	var/fuel = fueljar.usefuel(fuel_injection)
 
-	stored_power = (fuel/core_power)*fuel*200000
+	stored_power = (fuel/core_power)*fuel*20000
 	//Now check if the cores could deal with it safely, this is done after so you can overload for more power if needed, still a bad idea
 	if(fuel > (2*core_power))//More fuel has been put in than the current cores can deal with
 		if(prob(50))core_damage = 1//Small chance of damage
@@ -120,8 +118,8 @@
 
 
 /obj/machinery/power/am_control_unit/power_change()
-	. = ..()
-	if((stat & NOPOWER) && active)
+	..()
+	if(stat & NOPOWER && active)
 		toggle_power()
 	return
 
@@ -150,16 +148,18 @@
 			src.anchored = 0
 			disconnect_from_network()
 		else
-			to_chat(user, "<span class='warning'>Once bolted and linked to a shielding unit it the [src.name] is unable to be moved!</span>")
+			user << "<span class='warning'>Once bolted and linked to a shielding unit it the [src.name] is unable to be moved!</span>"
 		return
 
 	if(istype(W, /obj/item/weapon/am_containment))
 		if(fueljar)
-			to_chat(user, "<span class='warning'>There is already a [fueljar] inside!</span>")
+			user << "<span class='warning'>There is already a [fueljar] inside!</span>"
 			return
 		fueljar = W
-		user.remove_from_mob(W)
 		W.loc = src
+		if(user.client)
+			user.client.screen -= W
+		user.u_equip(W)
 		user.update_icons()
 		user.visible_message("[user.name] loads an [W.name] into the [src.name].", \
 				"You load an [W.name].", \
@@ -216,7 +216,6 @@
 
 /obj/machinery/power/am_control_unit/proc/check_shield_icons()//Forces icon_update for all shields
 	if(shield_icon_delay) return
-	shield_icon_delay = 1
 	if(update_shield_icons == 2)//2 means to clear everything and rebuild
 		for(var/obj/machinery/am_shielding/AMS in linked_shielding)
 			if(AMS.processing)	AMS.shutdown_core()
@@ -228,8 +227,6 @@
 	else
 		for(var/obj/machinery/am_shielding/AMS in linked_shielding)
 			AMS.update_icon()
-	spawn(20)
-		shield_icon_delay = 0
 	return
 
 
@@ -252,6 +249,8 @@
 			user << browse(null, "window=AMcontrol")
 			return
 	user.set_machine(src)
+	var/kiloWatts = stored_power / 1000
+	var/megaWatts = stored_power / 1000000
 
 	var/dat = ""
 	dat += "AntiMatter Control Panel<BR>"
@@ -266,7 +265,10 @@
 	dat += "Cores: [linked_cores.len]<BR><BR>"
 	dat += "-Current Efficiency: [reported_core_efficiency]<BR>"
 	dat += "-Average Stability: [stored_core_stability] <A href='?src=\ref[src];refreshstability=1'>(update)</A><BR>"
-	dat += "Last Produced: [stored_power]<BR>"
+	if(stored_power > 1000000)
+		dat += "Last Produced: [megaWatts] mW<BR>"
+	else
+		dat += "Last Produced: [kiloWatts] kW<BR>"
 
 	dat += "Fuel: "
 	if(!fueljar)

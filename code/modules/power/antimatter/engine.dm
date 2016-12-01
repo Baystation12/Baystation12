@@ -38,7 +38,8 @@
 
 
 /obj/machinery/power/am_engine/injector/attackby(obj/item/weapon/fuel/F, mob/user)
-	if( (stat & BROKEN) || !connected) return
+	if( (stat & BROKEN) || !connected)
+		return
 
 	if(istype(F, /obj/item/weapon/fuel/H))
 		if(injecting)
@@ -48,6 +49,7 @@
 		injecting = 1
 		var/fuel = F.fuel
 		qdel(F)
+		F = null
 		spawn( 300 )
 			injecting = 0
 			new/obj/item/weapon/fuel(src.loc)
@@ -61,6 +63,7 @@
 		injecting = 1
 		var/fuel = F.fuel
 		qdel(F)
+		F = null
 		spawn( 300 )
 			injecting = 0
 			new /obj/item/weapon/fuel(src.loc)
@@ -82,6 +85,7 @@
 
 
 /obj/machinery/power/am_engine/engine/proc/engine_go()
+
 
 	if( (!src.connected) || (stat & BROKEN) )
 		return
@@ -109,7 +113,7 @@
 			antiH_fuel = residual_matter
 
 	for(var/mob/M in hearers(src, null))
-		M.show_message("<span class='warning'>You hear a loud bang!</span>"))
+		M.show_message(text("<span class='warning'>You hear a loud bang!</span>"))
 
 	//Q = k x (delta T)
 
@@ -122,6 +126,7 @@
 
 
 /obj/machinery/power/am_engine/engine/proc/engine_process()
+
 
 	do
 		if( (!src.connected) || (stat & BROKEN) )
@@ -161,7 +166,7 @@
 
 		if(energy > convert2energy(8e-12))	//TOO MUCH ENERGY
 			for(var/mob/M in hearers(src, null))
-				M.show_message("<span class='warning'>You hear a loud whirring!</span>"))
+				M.show_message(text("<span class='warning'>You hear a loud whirring!</span>"))
 			sleep(20)
 
 			//Q = k x (delta T)
@@ -180,7 +185,7 @@
 
 			if(energy > convert2energy(8e-12))	//FAR TOO MUCH ENERGY STILL
 				for(var/mob/M in hearers(src, null))
-					M.show_message("<span class='danger'><big>BANG!</big></span>"))
+					M.show_message(text("<span class='warning'><big>BANG!</big></span>"))
 				new /obj/effect/bhole(src.loc)
 
 		else	//this amount of energy is okay so it does the proper output thing
