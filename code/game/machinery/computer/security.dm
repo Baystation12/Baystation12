@@ -587,7 +587,7 @@ What a mess.*/
 						activew.fields["charges"] = t1
 
 					if("auth")
-						var/t1 = input("Please input name of authorizing personnel") as text
+						var/t1 = authenticated
 						if (!t1 || activew != aw)
 							return
 						activew.fields["auth"] = t1
@@ -601,8 +601,8 @@ What a mess.*/
 				var/datum/data/record/warrant/W = new()
 				activew = W
 				W.fields["namew"] = "Unknown"
-				W.fields["charges"] = "Unknown"
-				W.fields["auth"] = "Unknown"
+				W.fields["charges"] = "No charges present"
+				W.fields["auth"] = "Unauthorized"
 				screen = 6
 
 			if("Edit Warrant")
