@@ -4,7 +4,7 @@
 	var/obj/effect/blob/core/Blob
 
 /datum/event/blob/announce()
-	level_seven_announcement()
+	level_seven_announcement("\the [get_area(Blob)]")
 
 /datum/event/blob/start()
 	var/turf/T = pick_subarea_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))

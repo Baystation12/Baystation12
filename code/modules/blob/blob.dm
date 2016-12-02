@@ -113,7 +113,7 @@
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		L.take_organ_damage(rand(30, 40))
 		return
-	if(prob(secondary_core_growth_chance))
+	if(!(locate(/obj/effect/blob/core) in range(T, 3)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
 	else
 		new expandType(T, min(health, 30))
@@ -144,8 +144,9 @@
 
 /obj/effect/blob/attackby(var/obj/item/weapon/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	visible_message("<span class='danger'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+	//visible_message("<span class='danger'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>") // Way, waaaay too spammy
 	var/damage = 0
 	switch(W.damtype)
 		if("fire")
@@ -207,13 +208,21 @@
 /obj/effect/blob/core/secondary
 	name = "small blob core"
 	icon = 'icons/mob/blob.dmi'
-	icon_state = "blob_core"
+	icon_state = "blob_node"
 	maxHealth = 100
 	brute_resist = 1
 	fire_resist = 1
 	laser_resist = 5
 	regen_rate = 1
 	growth_range = 3
+
+/obj/effect/blob/core/secondary/update_icon()
+	var/health_percent = (health / maxHealth) * 100
+	switch(health_percent)
+		if(50 to INFINITY)
+			icon_state = "blob_node"
+		if(-INFINITY to 50)
+			icon_state = "blob_factory"
 
 /obj/effect/blob/shield
 	name = "strong blob"
