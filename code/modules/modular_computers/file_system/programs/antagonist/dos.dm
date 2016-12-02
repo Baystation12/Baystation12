@@ -30,8 +30,9 @@
 			error = "Connection to destination relay lost."
 
 /datum/computer_file/program/ntnet_dos/kill_program(var/forced)
-	target.dos_sources.Remove(src)
-	target = null
+	if(target)
+		target.dos_sources.Remove(src)
+		target = null
 	executed = 0
 
 	..(forced)
