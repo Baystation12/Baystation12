@@ -542,6 +542,13 @@
 	required_reagents = list("mindbreaker" = 1, "acetone" = 1, "inaprovaline" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/hairremover
+	name = "Hair Remover"
+	id = "hairremover"
+	result = "hairremover"
+	required_reagents = list("radium" = 1, "potassium" = 1, "hclacid" = 1)
+	result_amount = 3
+
 /* Solidification */
 
 /datum/chemical_reaction/phoronsolidification
