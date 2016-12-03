@@ -40,7 +40,7 @@
 /obj/item/weapon/gun/launcher/spikethrower/special_check(user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species && H.species.get_bodytype() != "Vox")
+		if(H.species && H.species.get_bodytype(H) != "Vox")
 			to_chat(user, "<span class='warning'>\The [src] does not respond to you!</span>")
 			return 0
 	return ..()

@@ -10,9 +10,9 @@
 // unused: 0x8000 - higher than this will overflow
 
 // Species spawn flags
-#define IS_WHITELISTED    0x1    // Must be whitelisted to play.
-#define CAN_JOIN          0x2    // Species is selectable in chargen.
-#define IS_RESTRICTED     0x4    // Is not a core/normally playable species. (castes, mutantraces)
+#define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
+#define SPECIES_IS_RESTRICTED     0x2    // Is not a core/normally playable species. (castes, mutantraces)
+#define SPECIES_CAN_JOIN          0x4    // Species is selectable in chargen.
 
 // Species appearance flags
 #define HAS_SKIN_TONE     0x1    // Skin tone selectable in chargen. (0-255)

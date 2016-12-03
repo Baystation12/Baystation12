@@ -62,10 +62,10 @@
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.get_bodytype() in species_restricted))
+				if(!(H.species.get_bodytype(H) in species_restricted))
 					wearable = 1
 			else
-				if(H.species.get_bodytype() in species_restricted)
+				if(H.species.get_bodytype(H) in species_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
@@ -124,9 +124,6 @@
 		"Skrell" = 'icons/mob/ears.dmi',
 		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
 		"Akula" = 'icons/mob/ears.dmi',
-		"Slime" = 'icons/mob/ears.dmi',
-		"Resomi" = 'icons/mob/species/resomi/ears.dmi',
-		"Human" = 'icons/mob/ears.dmi'
 		)
 
 /obj/item/clothing/ears/update_clothing_icon()
@@ -201,8 +198,6 @@ BLIND     // can't see anything
 		"Akula" = 'icons/mob/eyes.dmi',
 		"Slime" = 'icons/mob/eyes.dmi',
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
-		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
-		"Human" = 'icons/mob/eyes.dmi'
 		)
 
 /obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
@@ -245,9 +240,6 @@ BLIND     // can't see anything
 		"Akula" = 'icons/mob/hands.dmi',
 		"Slime" = 'icons/mob/hands.dmi',
 		"Vox" = 'icons/mob/species/vox/gloves.dmi',
-		"Vox" = 'icons/mob/species/vox/gloves.dmi',
-		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
-		"Human" = 'icons/mob/hands.dmi'
 		)
 	blood_overlay_type = "bloodyhands"
 
@@ -324,8 +316,6 @@ BLIND     // can't see anything
 		"Akula" = 'icons/mob/head.dmi',
 		"Slime" = 'icons/mob/head.dmi',
 		"Vox" = 'icons/mob/species/vox/head.dmi',
-		"Vox" = 'icons/mob/species/vox/head.dmi',
-		"Resomi" = 'icons/mob/species/resomi/head.dmi'
 		)
 	blood_overlay_type = "helmetblood"
 
@@ -334,7 +324,7 @@ BLIND     // can't see anything
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype()
+		bodytype = user_human.species.get_bodytype(user_human)
 	var/cache_key = "[light_overlay]_[bodytype]"
 	if(on && light_overlay_cache[cache_key] && slot == slot_head_str)
 		ret.overlays |= light_overlay_cache[cache_key]
@@ -411,11 +401,11 @@ BLIND     // can't see anything
 		overlays |= light_overlay_cache["[light_overlay]_icon"]
 
 		// Generate and cache the on-mob icon, which is used in update_inv_head().
-		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype()]" : ""]"
+		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype(H)]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = 'icons/mob/light_overlays.dmi'
-//			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
-//				use_icon = sprite_sheets[H.species.get_bodytype()]
+			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+				use_icon = sprite_sheets[H.species.get_bodytype(H)]
 			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
 
 	if(H)
@@ -446,9 +436,6 @@ BLIND     // can't see anything
 		"Akula" = 'icons/mob/species/akula/mask.dmi',
 		"Slime" = 'icons/mob/mask.dmi',
 		"Vox" = 'icons/mob/species/vox/masks.dmi',
-		"Vox" = 'icons/mob/species/vox/masks.dmi',
-		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
-		"Human" = 'icons/mob/mask.dmi'
 		)
 
 	var/voicechange = 0
@@ -502,9 +489,6 @@ BLIND     // can't see anything
 		"Akula" = 'icons/mob/feet.dmi',
 		"Slime" = 'icons/mob/feet.dmi',
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
-		"Vox" = 'icons/mob/species/vox/shoes.dmi',
-		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
-		"Human" = 'icons/mob/feet.dmi'
 		)
 
 	blood_overlay_type = "shoeblood"
@@ -589,8 +573,6 @@ BLIND     // can't see anything
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
 		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
 		"Vox" = 'icons/mob/species/vox/suit.dmi',
-		"Resomi" = 'icons/mob/species/resomi/suit.dmi',
-		"Human" = 'icons/mob/suit.dmi'
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -646,9 +628,6 @@ BLIND     // can't see anything
 		"Akula" = 'icons/mob/uniform.dmi',
 		"Slime" = 'icons/mob/uniform.dmi',
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
-		"Vox" = 'icons/mob/species/vox/uniform.dmi',
-		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
-		"Human" = 'icons/mob/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
@@ -697,8 +676,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-//	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
-//		under_icon = sprite_sheets[H.species.get_bodytype()]
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else

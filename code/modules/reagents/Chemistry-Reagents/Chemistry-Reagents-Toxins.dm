@@ -533,9 +533,11 @@
 /datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.species.name != "Slime")
+		if(H.species.name != "Promethean")
 			to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
-			H.set_species("Slime")
+			H.set_species("Promethean")
+			H.shapeshifter_set_colour("#05FF9B")
+			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
 
 /datum/reagent/aslimetoxin
 	name = "Advanced Mutation Toxin"

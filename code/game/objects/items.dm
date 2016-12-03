@@ -692,7 +692,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype()
+		bodytype = user_human.species.get_bodytype(user_human)
 
 	var/in_hand = is_in_hand_slot(slot)
 

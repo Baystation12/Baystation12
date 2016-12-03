@@ -13,13 +13,11 @@
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 18
 	max_age = 100
-	icobase = 'icons/mob/human_races/r_human.dmi'
-	flesh_color = "#FFDCAA"
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_BIOMODS
 
-/datum/species/human/get_bodytype()
+/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return "Human"
 
 /datum/species/unathi
@@ -58,7 +56,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_BIOMODS
 
 	flesh_color = "#34AF10"
@@ -98,7 +96,7 @@
 	flash_mod = 1.5
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SIIK_MAAS)
+	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
@@ -122,7 +120,7 @@
 
 	primitive_form = "Farwa"
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_BIOMODS
 
 	flesh_color = "#AFA59E"
@@ -161,16 +159,16 @@
 
 	min_age = 19
 	max_age = 90
-	
+
 	darksight = 4
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_BIOMODS
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 	base_color = "#006666"
-	
+
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
 	cold_level_3 = 130 //Default 120
@@ -267,7 +265,7 @@
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
 	appearance_flags = 0
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -329,7 +327,7 @@
 	gluttonous = GLUT_ANYTHING // They eat people! But don't qdel the corpses, and can only carry one at a time.
 	stomach_capacity = MOB_MEDIUM
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	has_limbs = list(
@@ -371,7 +369,7 @@
 	gluttonous = GLUT_SMALLER // They eat smaller creatures.
 	stomach_capacity = MOB_SMALL
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	has_limbs = list(
@@ -400,6 +398,7 @@
 	gluttonous = GLUT_TINY
 	slowdown = 0.5
 	brute_mod = 0.7
+	spawn_flags = SPECIES_CAN_JOIN
 	radiation_mod = 0.1
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SOL_COMMON)
@@ -424,7 +423,7 @@
 	heat_level_2 = 450 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_BIOMODS
 
 	flesh_color = "#99CCCC"

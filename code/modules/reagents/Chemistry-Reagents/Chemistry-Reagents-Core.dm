@@ -92,6 +92,16 @@
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 
+/datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+		return
+	M.adjustToxLoss(2 * removed)
+
+/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+		return
+	M.adjustToxLoss(2 * removed)
+
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
@@ -134,15 +144,15 @@
 			remove_self(amount)
 
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(istype(M, /mob/living/carbon/slime))
-		var/mob/living/carbon/slime/S = M
-		S.adjustToxLoss(5 * removed) // Babies have 150 health, adults have 200; So, 30 units and 40
-		if(!S.client)
-			if(S.Target) // Like cats
-				S.Target = null
-				++S.Discipline
-		if(dose == removed)
-			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+		return
+	M.adjustToxLoss(5 * removed) // Babies have 150 health, adults have 200; So, 30 units and 40
+	if(dose == removed)
+		M.visible_message("<span class='warning'>\The [M]'s flesh sizzles where the water touches it!</span>")
+	var/mob/living/carbon/slime/S = M
+	if(istype(S) && !S.client && S.Target) // Like cats
+		S.Target = null
+		++S.Discipline
 
 /datum/reagent/fuel
 	name = "Welding fuel"

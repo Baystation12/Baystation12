@@ -334,7 +334,15 @@
 //Removed the horrible safety parameter. It was only being used by ninja code anyways.
 //Now checks siemens_coefficient of the affected area by default
 /mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
+
 	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species.siemens_coefficient == -1)
+		if(stored_shock_by_ref["\ref[src]"])
+			stored_shock_by_ref["\ref[src]"] += shock_damage
+		else
+			stored_shock_by_ref["\ref[src]"] = shock_damage
+		return
 
 	if (!def_zone)
 		def_zone = pick(BP_L_HAND, BP_R_HAND)
@@ -1102,6 +1110,7 @@
 		holder_type = null
 
 	species = all_species[new_species]
+	species.handle_pre_spawn(src)
 
 	if(species.language)
 		add_language(species.language)
