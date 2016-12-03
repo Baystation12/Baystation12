@@ -227,10 +227,10 @@ var/global/list/damage_icon_parts = list()
 		if(O.damage_state == "00") continue
 		var/icon/DI
 		var/use_colour = ((O.robotic >= ORGAN_ROBOT) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
-		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.get_bodytype()]"
+		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.get_bodytype(src)]"
 		if(damage_icon_parts[cache_index] == null)
-			DI = new /icon(species.damage_overlays, O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon(species.damage_mask, O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
+			DI = new /icon(species.get_damage_overlays(src), O.damage_state)			// the damage icon for whole human
+			DI.Blend(new /icon(species.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else
@@ -265,7 +265,7 @@ var/global/list/damage_icon_parts = list()
 	if(gender == FEMALE)
 		g = "female"
 
-	var/icon_key = "[species.race_key][g][s_tone][r_skin][g_skin][b_skin]"
+	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else
@@ -282,7 +282,7 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "0"
 			continue
 		if(part)
-			icon_key += "[part.species.race_key]"
+			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 			icon_key += "[part.s_tone]"
 			if(part.s_col && part.s_col.len >= 3)
@@ -339,9 +339,9 @@ var/global/list/damage_icon_parts = list()
 				base_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
 
 		//Handle husk overlay.
-		if(husk && ("overlay_husk" in icon_states(species.icobase)))
+		if(husk && ("overlay_husk" in icon_states(species.get_icobase(src))))
 			var/icon/mask = new(base_icon)
-			var/icon/husk_over = new(species.icobase,"overlay_husk")
+			var/icon/husk_over = new(species.get_icobase(src),"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 			husk_over.Blend(mask, ICON_MULTIPLY)
 			base_icon.Blend(husk_over, ICON_OVERLAY)

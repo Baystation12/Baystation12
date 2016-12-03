@@ -247,9 +247,8 @@
 			set_light(0)
 	else
 		if(species.appearance_flags & RADIATION_GLOWS)
-			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), species.get_flesh_colour(src))	// Slime glow, port from Polaris
-
-	if (radiation)
+			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), species.get_flesh_colour(src))
+		// END DOGSHIT SNOWFLAKE
 
 		var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
 		if(rad_organ && !rad_organ.is_broken())
@@ -278,7 +277,7 @@
 					Weaken(3)
 					if(!lying)
 						emote("collapse")
-				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype() == "Human") //apes go bald
+				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype(src) == "Human") //apes go bald
 					if((h_style != "Bald" || f_style != "Shaved" ))
 						to_chat(src, "<span class='warning'>Your hair falls out.</span>")
 						h_style = "Bald"
@@ -925,24 +924,21 @@
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
-		for(var/A in stomach_contents)
-			if(!(A in contents) || isnull(A))
-				stomach_contents -= A
+		for(var/a in stomach_contents)
+			if(!(a in contents) || isnull(a))
+				stomach_contents.Remove(a)
 				continue
-
-			if(isliving(A))
-				var/mob/living/M = A
+			if(iscarbon(a)|| isanimal(a))
+				var/mob/living/M = a
 				if(M.stat == DEAD)
-					if(species.gluttonous & GLUT_QDEL_MOBS || M.mob_size <= MOB_SMALL)
-						M.death(1)
-						stomach_contents -= M
-						qdel(M)
-
-				if(air_master.current_cycle % 3 == 1)
+					M.death(1)
+					stomach_contents.Remove(M)
+					qdel(M)
+					continue
+				if(air_master.current_cycle%3==1)
 					if(!(M.status_flags & GODMODE))
 						M.adjustBruteLoss(5)
-					nutrition += M.mob_size / 2
-
+					nutrition += 10
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

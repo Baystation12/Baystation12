@@ -26,7 +26,7 @@
 	cold_level_3 = -1
 
 	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_EMBED
-	spawn_flags = IS_RESTRICTED
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 	reagent_tag = IS_XENOS
 
@@ -78,7 +78,7 @@
 
 	genders = list(NEUTER)
 
-/datum/species/xenos/get_bodytype()
+/datum/species/xenos/get_bodytype(var/mob/living/carbon/H)
 	return "Xenomorph"
 
 /datum/species/xenos/get_random_name()
@@ -135,7 +135,7 @@
 		H.adjustOxyLoss(-heal_rate)
 		H.adjustToxLoss(-heal_rate)
 		if (prob(5))
-			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
+			to_chat(H, "<span class='alium'>You feel a soothing sensation come over you...</span>")
 		return 1
 
 	//next internal organs
@@ -143,7 +143,7 @@
 		if(I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
-				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
+				to_chat(H, "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>")
 			return 1
 
 	//next mend broken bones, approx 10 ticks each
@@ -151,7 +151,7 @@
 		if (E.status & ORGAN_BROKEN)
 			if (prob(mend_prob))
 				if (E.mend_fracture())
-					H << "<span class='alium'>You feel something mend itself inside your [E.name].</span>"
+					to_chat(H, "<span class='alium'>You feel something mend itself inside your [E.name].</span>")
 			return 1
 
 	return 0

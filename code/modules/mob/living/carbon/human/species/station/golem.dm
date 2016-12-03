@@ -8,7 +8,7 @@
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
 	flags = NO_PAIN | NO_SCAN | NO_POISON
-	spawn_flags = IS_RESTRICTED
+	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
 	breath_type = null

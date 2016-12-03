@@ -200,8 +200,10 @@
 		if(!(L.flags & NONGLOBAL))
 			if(L == default_language)
 				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
-			else
+			else if (can_speak(L))
 				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
+			else
+				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 
