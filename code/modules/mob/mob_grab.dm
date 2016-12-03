@@ -350,6 +350,9 @@
 		qdel(src)
 
 /obj/item/weapon/grab/proc/reset_kill_state()
+	if(!assailant)
+		qdel(src)
+		return
 	if(state == GRAB_KILL)
 		assailant.visible_message("<span class='warning'>[assailant] lost \his tight grip on [affecting]'s neck!</span>")
 		hud.icon_state = "kill"
