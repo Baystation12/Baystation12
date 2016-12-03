@@ -197,11 +197,13 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 
 	if(s_tone)
 		if(s_tone >= 0)
+			applying.Blend(rgb(s_tone, s_tone, s_tone), ICON_MULTIPLY)
 		else
 			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[s_tone]"
 	else
 		if(s_col && s_col.len >= 3)
+			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_MULTIPLY)
 			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]"
 
 	return applying
