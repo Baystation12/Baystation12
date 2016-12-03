@@ -122,6 +122,7 @@
 				to_chat(user, "<span class='notice'>You add the camera module to [src]</span>")
 				user.drop_item()
 				qdel(CA)
+				desc = "This TV camera assembly has a camera module."
 				buildstep++
 		if(1)
 			if(istype(W, /obj/item/device/taperecorder))
@@ -130,7 +131,7 @@
 				qdel(T)
 				buildstep++
 				to_chat(user, "<span class='notice'>You add the tape recorder to [src]</span>")
-				name = "TV camera assembly with visual/audio sensors."
+				desc = "This TV camera assembly has a camera and audio module."
 				return
 		if(2)
 			if(istype(W, /obj/item/stack/cable_coil))
@@ -142,13 +143,13 @@
 				C.use(3)
 				buildstep++
 				to_chat(user, "<span class='notice'>You wire the assembly</span>")
-				name = "TV camera assembly with wires sticking out."
+				desc = "This TV camera assembly has wires sticking out"
 				return
 		if(3)
 			if(istype(W, /obj/item/weapon/wirecutters))
 				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
-				name = "Barebones TV camera assembly."
+				desc = "This TV camera assembly needs casing."
 				return
 		if(4)
 			if(istype(W, /obj/item/stack/material/steel))
