@@ -774,7 +774,6 @@
 #include "code\game\objects\items\weapons\trays.dm"
 #include "code\game\objects\items\weapons\weaponry.dm"
 #include "code\game\objects\items\weapons\weldbackpack.dm"
-#include "code\game\objects\items\weapons\wires.dm"
 #include "code\game\objects\items\weapons\circuitboards\broken.dm"
 #include "code\game\objects\items\weapons\circuitboards\circuitboard.dm"
 #include "code\game\objects\items\weapons\circuitboards\mecha.dm"
