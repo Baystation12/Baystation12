@@ -1,9 +1,0 @@
-author: ForFoxSake
-
-delete-after: True
-
-changes: 
-  - bugfix: "Fixed a possible href exploit allowing any living player to speak any language."
-  - bugfix: "Organic beings can no longer speak Encoded Audio Language, although they can still understand it just fine."
-  - tweak: "Positronic brains can now speak Encoded Audio Language."
-  - tweak: "Station manufactured Full Body Prosthetics can now speak Encoded Audio Language."
