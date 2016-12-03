@@ -38,7 +38,7 @@
 
 /obj/item/weapon/gun/projectile/New(atom/loc, starts_loaded = 1)
 	..()
-	if (starts_loaded == 1)
+	if (starts_loaded)
 		if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))
 			for(var/i in 1 to max_shells)
 				loaded += new ammo_type(src)

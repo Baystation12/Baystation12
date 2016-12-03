@@ -190,55 +190,55 @@
 	..()
 
 // Zip gun construction.
-/obj/item/weapon/gun/projectile/zipgunframe
+/obj/item/weapon/zipgunframe
 	name = "zip gun frame"
 	desc = "A half-finished zip gun."
 	icon_state = "zipgun0"
 	item_state = "zipgun-solid"
-
 	var/buildstate = 0
 
-/obj/item/weapon/gun/projectile/zipgunframe/update_icon()
+/obj/item/weapon/zipgunframe/update_icon()
 	icon_state = "zipgun[buildstate]"
 
-/obj/item/weapon/gun/projectile/zipgunframe/examine(mob/user)
+/obj/item/weapon/zipgunframe/examine(mob/user)
 	..(user)
 	switch(buildstate)
 		if(1) to_chat(user, "It has a barrel loosely fitted to the stock.")
 		if(2) to_chat(user, "It has a barrel that has been secured to the stock with tape.")
 		if(3) to_chat(user, "It has a trigger and firing pin assembly loosely fitted into place.")
 
-/obj/item/weapon/gun/projectile/zipgunframe/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/weapon/zipgunframe/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/pipe) && buildstate == 0)
 		user.drop_from_inventory(thing)
 		qdel(thing)
-		user.visible_message("<span class='notice'>\The [user] fits \the [thing] to the \the [src] as a crude barrel.</span>")
+		user.visible_message("<span class='notice'>\The [user] fits the [thing] to the \the [src] as a crude barrel.</span>")
+		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(istype(thing,/obj/item/weapon/tape_roll) && buildstate == 1)
-		user.visible_message("<span class='notice'>\The [user] secures \the assembly with \the [thing].</span>")
+		user.visible_message("<span class='notice'>\The [user] secures the assembly with \the [thing].</span>")
+		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(istype(thing,/obj/item/device/assembly/mousetrap) && buildstate == 2)
 		user.drop_from_inventory(thing)
 		qdel(thing)
-		user.visible_message("<span class='notice'>\The [user] takes apart \the [thing] and uses \the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
+		user.visible_message("<span class='notice'>\The [user] takes apart the [thing] and uses \the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
+		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(isscrewdriver(thing) && buildstate == 3)
-		user.visible_message("<span class='notice'>\The [user] secures \the trigger assembly with the [thing].</span>")
+		user.visible_message("<span class='notice'>\The [user] secures the trigger assembly with the [thing].</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/weapon/gun/projectile/pirate/zipgun = new(loc, starts_loaded = 0)
-		var/put_in_hands
-		var/mob/M = src.loc
-		if(istype(M))
-			put_in_hands = M == user
+		if(ismob(loc))
+			var/mob/M = loc
 			M.drop_from_inventory(src)
-		if(put_in_hands)
-			user.put_in_hands(zipgun)
+			M.put_in_hands(zipgun)
+		transfer_fingerprints_to(zipgun)
 		qdel(src)
 		return
 	else
