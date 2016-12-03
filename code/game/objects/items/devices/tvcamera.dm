@@ -118,7 +118,7 @@
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))
-				var/obj/item/device/camera/CA = W
+				var/obj/item/robot_parts/robot_component/camera/CA = W
 				user.drop_item()
 				qdel(CA)
 				buildstep++
