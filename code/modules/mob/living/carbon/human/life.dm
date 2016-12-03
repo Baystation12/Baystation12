@@ -675,7 +675,8 @@
 				if(client && prob(5))
 					client.dir = pick(2,4,8)
 					spawn(rand(20,50))
-						client.dir = 1
+						if(client)
+							client.dir = 1
 
 			hallucination = max(0, hallucination - 2)
 		else
