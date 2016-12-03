@@ -143,12 +143,12 @@
 					return
 				C.use(3)
 				buildstep++
-				to_chat(user, "<span class='notice'>You wire the assembly")
+				to_chat(user, "<span class='notice'>You wire the assembly</span>")
 				name = "TV camera assembly with wires sticking out."
 				return
 		if(3)
 			if(istype(W, /obj/item/weapon/wirecutters))
-				to_chat(user, "<span class='notice'> You trim the wires.")
+				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
 				name = "Barebones TV camera assembly."
 				return
