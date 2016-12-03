@@ -1065,14 +1065,15 @@
 
 	if (BITTEST(hud_updateflag, ID_HUD))
 		var/image/holder = hud_list[ID_HUD]
-		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
-			if(I)
-				holder.icon_state = "hud[ckey(I.GetJobName())]"
+		if(holder)
+			if(wear_id)
+				var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
+				if(I)
+					holder.icon_state = "hud[ckey(I.GetJobName())]"
+				else
+					holder.icon_state = "hudunknown"
 			else
 				holder.icon_state = "hudunknown"
-		else
-			holder.icon_state = "hudunknown"
 
 
 		hud_list[ID_HUD] = holder
