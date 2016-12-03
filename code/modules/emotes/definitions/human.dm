@@ -1,8 +1,8 @@
 /decl/emote/human
 	key = "vomit"
 
-/decl/emote/human/check_user(var/atom/user)
-	return istype(user, /mob/living/carbon/human)
+/decl/emote/human/check_user(var/mob/living/carbon/human/user)
+	return (istype(user) && user.check_has_mouth() && !user.isSynthetic())
 
 /decl/emote/human/do_emote(var/mob/living/carbon/human/user)
 	user.vomit()
