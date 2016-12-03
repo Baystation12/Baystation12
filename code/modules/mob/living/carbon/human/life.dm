@@ -1009,7 +1009,7 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-	if (BITTEST(hud_updateflag, HEALTH_HUD))
+	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "-100" 	// X_X
@@ -1017,7 +1017,7 @@
 			holder.icon_state = RoundHealth((health-config.health_threshold_crit)/(maxHealth-config.health_threshold_crit)*100)
 		hud_list[HEALTH_HUD] = holder
 
-	if (BITTEST(hud_updateflag, LIFE_HUD))
+	if (BITTEST(hud_updateflag, LIFE_HUD) & hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
@@ -1025,7 +1025,7 @@
 			holder.icon_state = "hudhealthy"
 		hud_list[LIFE_HUD] = holder
 
-	if (BITTEST(hud_updateflag, STATUS_HUD))
+	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
 		var/foundVirus = 0
 		for (var/ID in virus2)
 			if (ID in virusDB)
@@ -1063,22 +1063,21 @@
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
 
-	if (BITTEST(hud_updateflag, ID_HUD))
+	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
-		if(holder)
-			if(wear_id)
-				var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
-				if(I)
-					holder.icon_state = "hud[ckey(I.GetJobName())]"
-				else
-					holder.icon_state = "hudunknown"
+		if(wear_id)
+			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
+			if(I)
+				holder.icon_state = "hud[ckey(I.GetJobName())]"
 			else
 				holder.icon_state = "hudunknown"
+		else
+			holder.icon_state = "hudunknown"
 
 
 		hud_list[ID_HUD] = holder
 
-	if (BITTEST(hud_updateflag, WANTED_HUD))
+	if (BITTEST(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
@@ -1129,7 +1128,7 @@
 		hud_list[IMPLOYAL_HUD] = holder2
 		hud_list[IMPCHEM_HUD]  = holder3
 
-	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
+	if (BITTEST(hud_updateflag, SPECIALROLE_HUD) && )
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
 		if(mind && mind.special_role)
