@@ -116,8 +116,8 @@ datum/announcement/proc/Log(message as text, message_title as text)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 
-/proc/level_seven_announcement(var/location)
-	command_announcement.Announce("Confirmed outbreak of level 7 biohazard aboard [station_name()][location ? ", in [location]" : ""]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
+/proc/level_seven_announcement()
+	command_announcement.Announce("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
 
 /proc/ion_storm_announcement()
 	command_announcement.Announce("It has come to our attention that the station passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
