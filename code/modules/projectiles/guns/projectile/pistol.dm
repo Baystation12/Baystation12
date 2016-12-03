@@ -211,7 +211,7 @@
 	if(istype(thing,/obj/item/pipe) && buildstate == 0)
 		user.drop_from_inventory(thing)
 		qdel(thing)
-		user.visible_message("<span class='notice'>\The [user] fits the [thing] to the \the [src] as a crude barrel.</span>")
+		user.visible_message("<span class='notice'>\The [user] fits \the [thing] to \the [src] as a crude barrel.</span>")
 		add_fingerprint(user)
 		buildstate++
 		update_icon()
@@ -225,13 +225,13 @@
 	else if(istype(thing,/obj/item/device/assembly/mousetrap) && buildstate == 2)
 		user.drop_from_inventory(thing)
 		qdel(thing)
-		user.visible_message("<span class='notice'>\The [user] takes apart the [thing] and uses \the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
+		user.visible_message("<span class='notice'>\The [user] takes apart \the [thing] and uses the parts to construct a crude trigger and firing mechanism inside the assembly.</span>")
 		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(isscrewdriver(thing) && buildstate == 3)
-		user.visible_message("<span class='notice'>\The [user] secures the trigger assembly with the [thing].</span>")
+		user.visible_message("<span class='notice'>\The [user] secures the trigger assembly with \the [thing].</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/weapon/gun/projectile/pirate/zipgun = new(loc, starts_loaded = 0)
 		if(ismob(loc))
