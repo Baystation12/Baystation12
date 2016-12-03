@@ -1,5 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - tweak: "Ported Prometheans from Polaris, replacing slime people."
-  - tweak: "Added water reagent interactions for Prometheans equivalent to acid."

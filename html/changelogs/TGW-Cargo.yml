@@ -1,6 +1,0 @@
-author: TheGreyWolf
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added ability for cargo to order a firefighter closet under the engineering tab."
