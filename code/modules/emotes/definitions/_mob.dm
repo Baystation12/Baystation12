@@ -61,6 +61,7 @@
 /mob/living/carbon/human
 	default_emotes = list(
 		/decl/emote/visible/blink,
+		/decl/emote/audible/synth,
 		/decl/emote/audible/synth/ping,
 		/decl/emote/audible/synth/buzz,
 		/decl/emote/audible/synth/confirm,

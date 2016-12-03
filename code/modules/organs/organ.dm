@@ -43,7 +43,9 @@ var/list/organ_cache = list()
 
 /obj/item/organ/New(var/mob/living/carbon/holder, var/internal)
 	..(holder)
-	create_reagents(5)
+	create_reagents(10)
+	reagents.add_reagent("protein", 5)
+
 	if(!max_damage)
 		max_damage = min_broken_damage * 2
 	if(istype(holder))
@@ -346,37 +348,29 @@ var/list/organ_cache = list()
 	target.internal_organs_by_name[organ_tag] = src
 	return 1
 
-/obj/item/organ/proc/bitten(mob/user)
+/obj/item/organ/attack(var/mob/target, var/mob/user)
 
-	if(robotic >= ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+		return ..()
+
+	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
+		to_chat(user, "<span class='notice'>You successfully repress your cannibalistic tendencies.</span>")
 		return
-
-	to_chat(user, "<span class='notice'>You take an experimental bite out of \the [src].</span>")
-	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
-	blood_splatter(src,B,1)
 
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
-	O.icon = icon
-	O.icon_state = icon_state
-
-	// Pass over the blood.
+	O.appearance = src
 	reagents.trans_to(O, reagents.total_volume)
-
-	if(fingerprints) O.fingerprints = fingerprints.Copy()
-	if(fingerprintshidden) O.fingerprintshidden = fingerprintshidden.Copy()
-	if(fingerprintslast) O.fingerprintslast = fingerprintslast
-
+	if(fingerprints)
+		O.fingerprints = fingerprints.Copy()
+	if(fingerprintshidden)
+		O.fingerprintshidden = fingerprintshidden.Copy()
+	if(fingerprintslast)
+		O.fingerprintslast = fingerprintslast
 	user.put_in_active_hand(O)
 	qdel(src)
-
-/obj/item/organ/attack_self(mob/user as mob)
-
-	// Convert it to an edible form, yum yum.
-	if(!robotic && user.a_intent == I_HELP && user.zone_sel.selecting == BP_MOUTH)
-		bitten(user)
-		return
+	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
 	return (robotic < ORGAN_ROBOT && !(species.flags & NO_PAIN))

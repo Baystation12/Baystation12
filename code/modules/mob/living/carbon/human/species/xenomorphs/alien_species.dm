@@ -26,7 +26,7 @@
 	cold_level_3 = -1
 
 	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_EMBED
-	spawn_flags = IS_RESTRICTED
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 	reagent_tag = IS_XENOS
 
@@ -78,7 +78,7 @@
 
 	genders = list(NEUTER)
 
-/datum/species/xenos/get_bodytype()
+/datum/species/xenos/get_bodytype(var/mob/living/carbon/H)
 	return "Xenomorph"
 
 /datum/species/xenos/get_random_name()

@@ -361,7 +361,7 @@
 		PN.trigger_warning(5)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(H.species.siemens_coefficient == 0)
+		if(H.species.siemens_coefficient <= 0)
 			return
 		if(H.gloves)
 			var/obj/item/clothing/gloves/G = H.gloves

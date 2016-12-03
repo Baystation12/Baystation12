@@ -143,7 +143,7 @@
 		var/datum/species/current_species = all_species[current_species_name]
 
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
-			if((current_species.spawn_flags & IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))
+			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))
 				continue
 			if(!is_alien_whitelisted(src, current_species))
 				continue
@@ -158,9 +158,9 @@
 
 /mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
 
-	var/use_species = species.get_bodytype()
+	var/use_species = species.get_bodytype(src)
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
-	if(H) use_species = H.species.get_bodytype()
+	if(H) use_species = H.species.get_bodytype(src)
 
 	var/list/valid_hairstyles = new()
 	for(var/hairstyle in hair_styles_list)
@@ -180,9 +180,9 @@
 
 /mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
 
-	var/use_species = species.get_bodytype()
+	var/use_species = species.get_bodytype(src)
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
-	if(H) use_species = H.species.get_bodytype()
+	if(H) use_species = H.species.get_bodytype(src)
 
 	var/list/valid_facial_hairstyles = new()
 	for(var/facialhairstyle in facial_hair_styles_list)
