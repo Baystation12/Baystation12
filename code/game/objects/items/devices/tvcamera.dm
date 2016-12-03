@@ -117,7 +117,7 @@
 /obj/item/weapon/TVAssembly/attackby(W, mob/user)
 	switch(buildstep)
 		if(0)
-			if(istype(W, /obj/item/device/camera))
+			if(istype(W, /obj/item/robot_parts/robot_component/camera))
 				var/obj/item/device/camera/CA = W
 				user.drop_item()
 				qdel(CA)
