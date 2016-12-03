@@ -68,6 +68,9 @@
 			log_message("[target] loaded. Life support functions engaged.")
 		return
 
+	relaymove(mob, direct)
+		go_out()
+
 	proc/go_out()
 		if(!occupant)
 			return
@@ -218,9 +221,6 @@
 		M.AdjustStunned(-4)
 		M.AdjustWeakened(-4)
 		M.AdjustStunned(-4)
-		M.Paralyse(2)
-		M.Weaken(2)
-		M.Stun(2)
 		if(M.reagents.get_reagent_amount("inaprovaline") < 5)
 			M.reagents.add_reagent("inaprovaline", 5)
 		S.chassis.use_power(S.energy_drain)
