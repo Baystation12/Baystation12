@@ -90,6 +90,8 @@
 
 	if(working == 1)
 		return 0
+	if(!istype(T))
+		return 0
 
 	if(mode == 3 && istype(T,/obj/machinery/door/airlock))
 		build_cost =  10
