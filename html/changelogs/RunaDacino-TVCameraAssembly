@@ -1,0 +1,8 @@
+author: Runa-Dacino
+
+
+delete-after: True
+
+
+changes: 
+  - rscadd: "Adds a means to build a new Journalist's Camera to the roboticist."
