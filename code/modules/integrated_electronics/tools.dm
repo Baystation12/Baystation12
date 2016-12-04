@@ -243,14 +243,16 @@
 	new /obj/item/weapon/screwdriver(src)
 	make_exact_fit()
 
-/obj/item/weapon/storage/bag/circuits/all/New()
+/obj/item/weapon/storage/bag/circuits/debug/New()
 	..()
-	for(var/thing in subtypesof(/obj/item/integrated_circuit))
-		var/obj/item/integrated_circuit/ic = thing
-		if(initial(ic.category) == thing)
+	name = "[name] - not intended for general use"
+	desc = "[desc] - not intended for general use"
+	for(var/subtype in subtypesof(/obj/item/integrated_circuit))
+		var/obj/item/integrated_circuit/ic = subtype
+		if(initial(ic.category) == subtype)
 			continue
 		for(var/i = 1 to 10)
-			new thing(src)
+			new subtype(src)
 
 	new /obj/item/device/electronic_assembly(src)
 	new /obj/item/device/integrated_electronics/wirer(src)

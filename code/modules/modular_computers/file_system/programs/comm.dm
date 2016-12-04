@@ -321,7 +321,7 @@ var/last_message_id = 0
 /proc/cancel_call_proc(var/mob/user)
 	if (!ticker || !evacuation_controller)
 		return
-	if((ticker.mode.name == "blob")||(ticker.mode.name == "Meteor"))
+	if((ticker.mode.name == "blob"))
 		return
 
 	if(evacuation_controller.cancel_evacuation())

@@ -16,14 +16,15 @@
 
 	anchored = 1	//  don't get pushed around
 
+	virtual_mob = null // Hear no evil, speak no evil
+
 /mob/new_player/New()
-	mob_list += src
+	..()
 	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 	new_player_panel_proc()
-
 
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
@@ -85,7 +86,10 @@
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in player_list)
-				stat("[player.key]", (player.ready)?("(Playing)"):(null))
+				var/highjob
+				if(player.client && player.client.prefs.job_high)
+					highjob = " as [player.client.prefs.job_high]"
+				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
@@ -280,7 +284,7 @@
 	if(!job.player_old_enough(src.client))	return 0
 	if(!job.is_branch_allowed(client.prefs.char_branch)) return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank)) return 0
-	
+
 	return 1
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
@@ -485,7 +489,7 @@
 	return check_rights(R_ADMIN, 0, src)
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
-	if(!(S.spawn_flags & CAN_JOIN) && !has_admin_rights())
+	if(!(S.spawn_flags & SPECIES_CAN_JOIN) && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play on the station."))
 		return 0

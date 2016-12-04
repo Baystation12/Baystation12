@@ -35,10 +35,10 @@
 	item_cost = 16
 	path = /obj/item/device/encryptionkey/syndicate
 
-/datum/uplink_item/item/tools/shield_disrupter
-	name = "Shield disrupter"
+/datum/uplink_item/item/tools/shield_diffuser
+	name = "Handheld Shield Diffuser"
 	item_cost = 16
-	path = /obj/item/device/shield_disrupter
+	path = /obj/item/weapon/shield_diffuser
 
 /datum/uplink_item/item/tools/suit_sensor_mobile
 	name = "Suit Sensor Jamming Device"

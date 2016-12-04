@@ -5,6 +5,10 @@
 	set name = "Set Default Language"
 	set category = "IC"
 
+	if(language && !can_speak(language))
+		src << "<span class='notice'>You are unable to speak that language.</span>"
+		return
+
 	if(language)
 		to_chat(src, "<span class='notice'>You will now speak [language] if you do not specify a language when speaking.</span>")
 	else

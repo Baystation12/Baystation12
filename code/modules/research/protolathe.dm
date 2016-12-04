@@ -54,12 +54,6 @@
 			busy = 0
 			update_icon()
 
-/obj/machinery/r_n_d/protolathe/proc/TotalMaterials() //returns the total of all the stored materials. Makes code neater.
-	var/t = 0
-	for(var/f in materials)
-		t += materials[f]
-	return t
-
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
 	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
@@ -74,17 +68,6 @@
 	mat_efficiency = 1 - (T - 2) / 8
 	speed = T / 2
 
-/obj/machinery/r_n_d/protolathe/dismantle()
-	for(var/obj/I in component_parts)
-		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
-			reagents.trans_to_obj(I, reagents.total_volume)
-	for(var/f in materials)
-		if(materials[f] >= SHEET_MATERIAL_AMOUNT)
-			var/path = getMaterialType(f)
-			if(path)
-				var/obj/item/stack/S = new f(loc)
-				S.amount = round(materials[f] / SHEET_MATERIAL_AMOUNT)
-	..()
 
 /obj/machinery/r_n_d/protolathe/update_icon()
 	if(panel_open)
@@ -138,8 +121,7 @@
 		if(max_material_storage - TotalMaterials() < (amount * SHEET_MATERIAL_AMOUNT)) //Can't overfill
 			amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
 
-	var/stacktype = stack.type
-	var/t = getMaterialName(stacktype)
+	var/t = stack.material.name
 	overlays += "protolathe_[t]"
 	spawn(10)
 		overlays -= "protolathe_[t]"
@@ -171,20 +153,6 @@
 		if(!reagents.has_reagent(C, D.chemicals[C]))
 			return 0
 	return 1
-
-/obj/machinery/r_n_d/protolathe/proc/getLackingMaterials(var/datum/design/D)
-	var/ret = ""
-	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
-			if(ret != "")
-				ret += ", "
-			ret += "[D.materials[M] - materials[M]] [M]"
-	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C]))
-			if(ret != "")
-				ret += ", "
-			ret += C
-	return ret
 
 /obj/machinery/r_n_d/protolathe/proc/build(var/datum/design/D)
 	var/power = active_power_usage

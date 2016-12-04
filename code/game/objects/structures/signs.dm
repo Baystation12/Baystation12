@@ -93,6 +93,7 @@
 
 /obj/structure/sign/warning/bomb_range
 	name = "\improper BOMB RANGE"
+	icon_state = "blast"
 
 /obj/structure/sign/warning/caution
 	name = "\improper CAUTION"
@@ -128,6 +129,7 @@
 
 /obj/structure/sign/warning/lethal_turrets
 	name = "\improper LETHAL TURRETS"
+	icon_state = "turrets"
 
 /obj/structure/sign/warning/lethal_turrets/New()
 	..()

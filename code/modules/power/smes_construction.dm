@@ -349,12 +349,12 @@
 					total_system_failure(failure_probability, user)
 					return
 
-				to_chat(usr, "\red You have disassembled the SMES cell!")
+				to_chat(usr, "<span class='warning'>You have disassembled the SMES cell!</span>")
 				var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 				M.state = 2
 				M.icon_state = "box_1"
 				for(var/obj/I in component_parts)
-					I.loc = src.loc
+					I.forceMove(src.loc)
 					component_parts -= I
 				qdel(src)
 				return
@@ -374,7 +374,7 @@
 				W.loc = src
 				recalc_coils()
 			else
-				to_chat(usr, "\red You can't insert more coils to this SMES unit!")
+				to_chat(usr, "<span class='warning'>You can't insert more coils to this SMES unit!</span>")
 
 // Proc: toggle_input()
 // Parameters: None

@@ -306,6 +306,13 @@
 	item_state = "p_suit"
 	worn_state = "dress_pink"
 
+/obj/item/clothing/under/dress/dress_purple
+	name = "purple dress"
+	desc= "A simple, tight fitting purple dress."
+	icon_state = "tian_dress"
+	item_state = "p_suit"
+	worn_state = "tian_dress"
+
 /obj/item/clothing/under/dress/dress_yellow
 	name = "yellow dress"
 	desc = "A flirty, little yellow dress."
@@ -607,4 +614,9 @@
 	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 
+/obj/item/clothing/under/rank/psych/turtleneck/sweater
+	desc = "A warm looking sweater and a pair of dark blue slacks."
+	name = "sweater"
+	icon_state = "turtleneck"
+	worn_state = "turtleneck"
 

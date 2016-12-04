@@ -1,4 +1,4 @@
-/var/const/meteor_wave_delay = 625 //minimum wait between waves in tenths of seconds
+/var/const/meteor_wave_delay = 1 MINUTE //minimum wait between waves in tenths of seconds
 //set to at least 100 unless you want evarr ruining every round
 
 //Meteors probability of spawning during a given wave
@@ -10,6 +10,9 @@
 
 /var/list/meteors_catastrophic = list(/obj/effect/meteor/medium=5, /obj/effect/meteor/big=75, \
 						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
+
+/var/list/meteors_armageddon = list(/obj/effect/meteor/medium=3, /obj/effect/meteor/big=25, \
+						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 3) //Meteor mode only. Good Luck.
 
 /var/list/meteors_dust = list(/obj/effect/meteor/dust) //for space dust event
 
@@ -97,13 +100,17 @@
 	pass_flags = PASSTABLE
 	var/heavy = 0
 	var/z_original
-
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 2
+
+/obj/effect/meteor/proc/get_shield_damage()
+	return max(((max(hits, 2)) * (heavy + 1) * rand(30, 60)) / hitpwr , 0)
+
 
 /obj/effect/meteor/New()
 	..()
 	z_original = z
+
 
 /obj/effect/meteor/Move()
 	if(z != z_original || loc == dest)
@@ -112,11 +119,10 @@
 
 	. = ..() //process movement...
 
-	if(.)//.. if did move, ram the turf we get in
+	if(.)
 		var/turf/T = get_turf(loc)
 		ram_turf(T)
-
-		if(prob(10) && !istype(T, /turf/space))//randomly takes a 'hit' from ramming
+		if(prob(20) && !istype(loc, /turf/space/))
 			get_hit()
 
 	return .
@@ -130,7 +136,8 @@
 	SpinAnimation()
 
 /obj/effect/meteor/Bump(atom/A)
-	if(A)
+	..()
+	if(A && !deleted(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
 		get_hit()
 
@@ -256,21 +263,20 @@
 	// Worst case scenario: Comparable to a standard yield EMP grenade.
 	empulse(src, rand(2, 4), rand(4, 10))
 
+/obj/effect/meteor/emp/get_shield_damage()
+	return ..() * rand(2,4)
+
 //Station buster Tunguska
 /obj/effect/meteor/tunguska
 	name = "tunguska meteor"
 	icon_state = "flaming"
-	desc = "Your life briefly passes before your eyes the moment you lay them on this monstruosity."
-	hits = 30
+	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
+	hits = 10
 	hitpwr = 1
 	heavy = 1
-	meteordrop = /obj/item/weapon/ore/phoron
+	dropamt = 15
+	meteordrop = /obj/item/weapon/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 
 /obj/effect/meteor/tunguska/meteor_effect()
 	..()
-	explosion(src.loc, 5, 10, 15, 20, 0)
-
-/obj/effect/meteor/tunguska/Bump()
-	..()
-	if(prob(20))
-		explosion(src.loc,2,4,6,8)
+	explosion(src.loc, 3, 6, 9, 20, 0)

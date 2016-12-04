@@ -21,7 +21,7 @@ obj/machinery/door/airlock/receive_signal(datum/signal/signal)
 	cur_command = signal.data["command"]
 
 	//if there's no power, recieve the signal but just don't do anything. This allows airlocks to continue to work normally once power is restored
-	if (arePowerSystemsOn()) return //no power
+	if (!arePowerSystemsOn()) return //no power
 
 	spawn()
 		execute_current_command()

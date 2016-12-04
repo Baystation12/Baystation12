@@ -17,7 +17,7 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
-	var/list/attack_verb = list() //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
 
@@ -680,19 +680,57 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
+/obj/item/proc/is_in_hand_slot(var/slot)
+	return (slot == slot_r_hand_str || slot == slot_l_hand_str)
+
+/obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/selected_state)
+	if(!sprite_sheets || !sprite_sheets[bodytype])
+		return 0
+	if(is_in_hand_slot(slot))
+		return 0
+	if(selected_state in icon_states(sprite_sheets[bodytype]))
+		return 1
+	return 0
+
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype()
+		bodytype = user_human.species.get_bodytype(user_human)
+
+	var/in_hand = is_in_hand_slot(slot)
 
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])
 		mob_state = item_state_slots[slot]
-	else if (item_state)
+	else if ( (item_state in icon_states(icon)) || in_hand)
 		mob_state = item_state
 	else
 		mob_state = icon_state
+
+	// STOP! BEFORE WE ENTER! WE MUST CHECK IF THEY GOT WHAT WE WANT!
+	// hack to please the spaghetti code god so we can get the code working
+	if (sprite_sheets && !in_hand)
+		if (item_state in icon_states(sprite_sheets[bodytype]))
+			mob_state = item_state
+		else if (icon_state in icon_states(sprite_sheets[bodytype]))
+			mob_state = icon_state
+
+	// legacy stuff...
+
+	// once upon a time...
+	// someone removed an important line of legacy line,..
+	// causing a 5+ month debugging adventure...
+	// figuring out why xeno clothings didn't use the right sprites
+	// midst an other chaos
+	// and, this two lines of code
+
+	if (istype(src, /obj/item/clothing/under))
+		mob_state = "[mob_state]_s"
+
+	// ...were the legendary code that was missing
+	// that was the story, kids. this why you should not trust
+	// other people
 
 	var/mob_icon
 	if(icon_override)
@@ -701,7 +739,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
-	else if(sprite_sheets && sprite_sheets[bodytype] && !(slot == slot_r_hand_str || slot == slot_l_hand_str))
+	else if(use_spritesheet(bodytype, slot, mob_state))
 		if(slot == slot_l_ear)
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)

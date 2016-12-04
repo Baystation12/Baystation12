@@ -66,9 +66,6 @@
 	var/supernatural = 0
 	var/purge = 0
 
-/mob/living/simple_animal/updatehealth()
-	return
-
 /mob/living/simple_animal/Life()
 	..()
 
@@ -184,10 +181,6 @@
 /mob/living/simple_animal/gib()
 	..(icon_gib,1)
 
-/mob/living/simple_animal/emote(var/act, var/type, var/desc)
-	if(act)
-		..(act, type, desc)
-
 /mob/living/simple_animal/proc/visible_emote(var/act_desc)
 	custom_emote(1, act_desc)
 
@@ -208,10 +201,10 @@
 
 		if(I_HELP)
 			if (health > 0)
-				M.visible_message("\blue [M] [response_help] \the [src]")
+				M.visible_message("<span class='notice'>[M] [response_help] \the [src]</span>")
 
 		if(I_DISARM)
-			M.visible_message("\blue [M] [response_disarm] \the [src]")
+			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src]</span>")
 			M.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
@@ -229,12 +222,12 @@
 			G.affecting = src
 			LAssailant = M
 
-			M.visible_message("\red [M] has grabbed [src] passively!")
+			M.visible_message("<span class='warning'>[M] has grabbed \the [src] passively!</span>")
 			M.do_attack_animation(src)
 
 		if(I_HURT)
 			adjustBruteLoss(harm_intent_damage)
-			M.visible_message("\red [M] [response_harm] \the [src]")
+			M.visible_message("<span class='warning'>[M] [response_harm] \the [src]</span>")
 			M.do_attack_animation(src)
 
 	return
@@ -328,7 +321,20 @@
 	adjustBruteLoss(damage * blocked_mult(getarmor(null, "bomb")))
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
-	health = Clamp(health - damage, 0, maxHealth)
+	..()
+	updatehealth()
+
+/mob/living/simple_animal/adjustFireLoss(damage)
+	..()
+	updatehealth()
+
+/mob/living/simple_animal/adjustToxLoss(damage)
+	..()
+	updatehealth()
+
+/mob/living/simple_anima/adjustOxyLoss(damage)
+	..()
+	updatehealth()
 
 /mob/living/simple_animal/proc/SA_attackable(target_mob)
 	if (isliving(target_mob))

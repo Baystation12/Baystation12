@@ -34,8 +34,8 @@
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		if(user_human.species.get_bodytype() in sprite_sheets)
-			bodytype = user_human.species.get_bodytype()
+		if(user_human.species.get_bodytype(user_human) in sprite_sheets)
+			bodytype = user_human.species.get_bodytype(user_human)
 
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
 		var/use_sprite_sheet = accessory_icons[slot]
@@ -533,8 +533,9 @@
 //Necklaces
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
-	desc = "A simple silver necklace."
-	icon_state = "locket"
+	desc = "A simple necklace."
+	icon_state = "necklace"
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 
 //Misc
@@ -542,3 +543,9 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
+
+//Scarves
+/obj/item/clothing/accessory/scarf
+	name = "scarf"
+	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "whitescarf"

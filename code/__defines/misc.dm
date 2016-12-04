@@ -5,20 +5,20 @@
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
 // Invisibility constants.
-#define INVISIBILITY_LIGHTING             20
-#define INVISIBILITY_LEVEL_ONE            35
-#define INVISIBILITY_LEVEL_TWO            45
-#define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_EYE		          61
-#define INVISIBILITY_SYSTEM               99
+#define INVISIBILITY_LIGHTING    20
+#define INVISIBILITY_LEVEL_ONE   35
+#define INVISIBILITY_LEVEL_TWO   45
+#define INVISIBILITY_OBSERVER    60
+#define INVISIBILITY_EYE         61
+#define INVISIBILITY_SYSTEM      99
 
-#define SEE_INVISIBLE_LIVING              25
+#define SEE_INVISIBLE_LIVING     25
 #define SEE_INVISIBLE_NOLIGHTING 15
-#define SEE_INVISIBLE_LEVEL_ONE           35
-#define SEE_INVISIBLE_LEVEL_TWO           45
-#define SEE_INVISIBLE_CULT		          60
-#define SEE_INVISIBLE_OBSERVER            61
-#define SEE_INVISIBLE_SYSTEM              99
+#define SEE_INVISIBLE_LEVEL_ONE  INVISIBILITY_LEVEL_ONE
+#define SEE_INVISIBLE_LEVEL_TWO  INVISIBILITY_LEVEL_TWO
+#define SEE_INVISIBLE_CULT       INVISIBILITY_OBSERVER
+#define SEE_INVISIBLE_OBSERVER   INVISIBILITY_EYE
+#define SEE_INVISIBLE_SYSTEM     INVISIBILITY_SYSTEM
 
 #define SEE_IN_DARK_DEFAULT 2
 
@@ -27,7 +27,7 @@
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
-#define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
+#define MAX_GEAR_COST 10 // Used in chargen for accessory loadout limit.
 
 // For secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
 #define      HEALTH_HUD 1 // A simple line rounding the mob's number health.
@@ -181,3 +181,13 @@
 
 #define WORLD_ICON_SIZE 32
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
+
+//MultiZ directions for ZAS checks.
+#define NORTHUP (NORTH|UP)
+#define EASTUP (EAST|UP)
+#define SOUTHUP (SOUTH|UP)
+#define WESTUP (WEST|UP)
+#define NORTHDOWN (NORTH|DOWN)
+#define EASTDOWN (EAST|DOWN)
+#define SOUTHDOWN (SOUTH|DOWN)
+#define WESTDOWN (WEST|DOWN)

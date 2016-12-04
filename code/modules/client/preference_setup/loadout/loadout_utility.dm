@@ -8,25 +8,19 @@
 	display_name = "clipboard"
 	path = /obj/item/weapon/clipboard
 
-/datum/gear/utility/folder_blue
-	display_name = "folder, blue"
-	path = /obj/item/weapon/folder/blue
-
-/datum/gear/utility/folder_grey
-	display_name = "folder, grey"
+/datum/gear/utility/folder
+	display_name = "folders"
 	path = /obj/item/weapon/folder
 
-/datum/gear/utility/folder_red
-	display_name = "folder, red"
-	path = /obj/item/weapon/folder/red
-
-/datum/gear/utility/folder_white
-	display_name = "folder, white"
-	path = /obj/item/weapon/folder/white
-
-/datum/gear/utility/folder_yellow
-	display_name = "folder, yellow"
-	path = /obj/item/weapon/folder/yellow
+/datum/gear/utility/folder/New()
+	..()
+	var/folders = list()
+	folders["blue folder"] = /obj/item/weapon/folder/blue
+	folders["grey folder"] = /obj/item/weapon/folder
+	folders["red folder"] = /obj/item/weapon/folder/red
+	folders["white folder"] = /obj/item/weapon/folder/white
+	folders["yellow folder"] = /obj/item/weapon/folder/yellow
+	gear_tweaks += new/datum/gear_tweak/path(folders)
 
 /datum/gear/utility/paicard
 	display_name = "personal AI device"

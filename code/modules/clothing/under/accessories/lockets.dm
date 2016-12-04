@@ -1,6 +1,6 @@
 /obj/item/clothing/accessory/locket
 	name = "silver locket"
-	desc = "This oval shaped, argentium sterling silver locket hangs on an incredibly fine, refractive string, almost thin as hair and microweaved from links to a deceptive strength, of similar material. The edges are engraved very delicately with an elegant curving design, but overall the main is unmarked and smooth to the touch, leaving room for either remaining as a stolid piece or future alterations. There is an obvious internal place for a picture or lock of some sort, but even behind that is a very thin compartment unhinged with the pinch of a thumb and forefinger."
+	desc = "A silver locket that seems to have space for a photo within."
 	icon_state = "locket"
 	item_state = "locket"
 	slot_flags = 0

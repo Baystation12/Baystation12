@@ -35,7 +35,7 @@
 			return
 
 	if(P.stored_plasma < cost)
-		to_chat(src, "\red You don't have enough phoron stored to do that.")
+		to_chat(src, "<span class='warning'>You don't have enough phoron stored to do that.</span>")
 		return 0
 
 	if(needs_foundation)
@@ -46,7 +46,7 @@
 			if(!(istype(T,/turf/space)))
 				has_foundation = 1
 		if(!has_foundation)
-			to_chat(src, "\red You need a solid foundation to do that on.")
+			to_chat(src, "<span class='warning'>You need a solid foundation to do that on.</span>")
 			return 0
 
 	P.stored_plasma -= cost
@@ -213,7 +213,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		to_chat(src, "<span class='warning'>This mindless flesh adds nothing to the hive.</span>")
 		return
 
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]))
+	if(M.species.get_bodytype(M) == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]))
 		to_chat(src, "<span class='warning'>They are already part of the hive.</span>")
 		return
 
@@ -231,7 +231,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		to_chat(src, "<span class='warning'>They are too far away.</span>")
 		return
 
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.robotic >= ORGAN_ROBOT))
+	if(M.species.get_bodytype(M) == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.robotic >= ORGAN_ROBOT))
 		return
 
 	if(!check_alien_ability(500,1,"egg sac"))

@@ -159,7 +159,7 @@
 	desc = "A crisp white SCG Fleet dress jacket with blue and gold accents. Don't get near pasta sauce or vox."
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet/command
-	name = "expeditionary command dress jacket"
+	name = "fleet command dress jacket"
 	desc = "A crisp white SCG Fleet dress jacket dripping with gold accents. So bright it's blinding."
 	icon_state = "whitedress_com"
 	item_state = "labcoat"

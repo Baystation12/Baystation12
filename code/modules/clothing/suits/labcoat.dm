@@ -61,3 +61,10 @@
 	icon_state = "labcoat_tox_open"
 	icon_open = "labcoat_tox_open"
 	icon_closed = "labcoat_tox"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/blue
+	name = "blue-edged labcoat"
+	desc = "A suit that protects against minor chemical spills. This one has blue trim."
+	icon_state = "blue_edge_labcoat_open"
+	icon_open = "blue_edge_labcoat_open"
+	icon_closed = "blue_edge_labcoat"

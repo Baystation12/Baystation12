@@ -46,10 +46,10 @@
 
 	if(istype(target, /obj/item/weapon/cell/))
 		var/obj/item/weapon/cell/C = target
-		if(prob(80))
+		if(prob(80) && C.maxcharge)
 			C.maxcharge -= 200
-			if(C.maxcharge <= 1) //Div by 0 protection
-				C.maxcharge = 1
+			if(C.maxcharge <= 0) //maxcharge of 0! Madness!
+				C.maxcharge = 0
 			C.charge = C.maxcharge
 			charged_item = C
 

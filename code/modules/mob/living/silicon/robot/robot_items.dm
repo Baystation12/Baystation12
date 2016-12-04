@@ -123,7 +123,7 @@
 		else if(T.dead) //It's probably dead otherwise.
 			T.remove_dead(user)
 	else
-		to_chat(user, "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown.")
+		to_chat(user, "Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown.")
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
@@ -139,7 +139,7 @@
 	if ( !target )
 		return
 	// pick up items, mostly copied from base tray pickup proc
-	// see code\game\objects\items\weapons\kitchen.dm line 241
+	// see code/game/objects/items/weapons/kitchen.dm line 241
 	if ( istype(target,/obj/item))
 		if ( !isturf(target.loc) ) // Don't load up stuff if it's inside a container or mob!
 			return
@@ -160,12 +160,12 @@
 				overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
 				addedSomething = 1
 		if ( addedSomething )
-			user.visible_message("\blue [user] load some items onto their service tray.")
+			user.visible_message("<span class='notice'>\The [user] load some items onto their service tray.</span>")
 
 		return
 
 	// Unloads the tray, copied from base item's proc dropped() and altered
-	// see code\game\objects\items\weapons\kitchen.dm line 263
+	// see code/game/objects/items/weapons/kitchen.dm line 263
 
 	if ( isturf(target) || istype(target,/obj/structure/table) )
 		var foundtable = istype(target,/obj/structure/table/)
@@ -200,9 +200,9 @@
 							sleep(rand(2,4))
 		if ( droppedSomething )
 			if ( foundtable )
-				user.visible_message("\blue [user] unloads their service tray.")
+				user.visible_message("<span class='notice'>[user] unloads their service tray.</span>")
 			else
-				user.visible_message("\blue [user] drops all the items on their tray.")
+				user.visible_message("<span class='notice'>[user] drops all the items on their tray.</span>")
 
 	return ..()
 
@@ -240,7 +240,7 @@
 	return
 
 // Copied over from paper's rename verb
-// see code\modules\paperwork\paper.dm line 62
+// see code/modules/paperwork/paper.dm line 62
 
 /obj/item/weapon/pen/robopen/proc/RenamePaper(mob/user as mob,obj/paper as obj)
 	if ( !user || !paper )
@@ -278,7 +278,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/weapon/form_printer/proc/deploy_paper(var/turf/T)
-	T.visible_message("\blue \The [src.loc] dispenses a sheet of crisp white paper.")
+	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
 	new /obj/item/weapon/paper(T)
 
 

@@ -69,7 +69,7 @@ datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
 //=======================================================================================
 
 datum/unit_test/wire_test
-	name = "MAP: Cable Test Z level 1"
+	name = "MAP: Cable Overlap Test"
 
 datum/unit_test/wire_test/start_test()
 	var/wire_test_count = 0
@@ -80,11 +80,8 @@ datum/unit_test/wire_test/start_test()
 	var/list/dirs_checked = list()
 
 	for(C in world)
-		T = null
-
 		T = get_turf(C)
-		if(T && T.z == 1)
-			cable_turfs |= get_turf(C)
+		cable_turfs |= get_turf(C)
 
 	for(T in cable_turfs)
 		var/bad_msg = "[ascii_red]--------------- [T.name] \[[T.x] / [T.y] / [T.z]\]"
@@ -101,6 +98,30 @@ datum/unit_test/wire_test/start_test()
 		fail("\[[bad_tests] / [wire_test_count]\] Some turfs had overlapping wires going the same direction.")
 	else
 		pass("All \[[wire_test_count]\] wires had no overlapping cables going the same direction.")
+
+	return 1
+
+//=======================================================================================
+
+datum/unit_test/wire_dir_and_icon_stat
+	name = "MAP: Cable Dir And Icon State Test"
+
+datum/unit_test/wire_dir_and_icon_stat/start_test()
+	var/list/bad_cables = list()
+
+	for(var/obj/structure/cable/C in world)
+		var/expected_icon_state = "[C.d1]-[C.d2]"
+		if(C.icon_state != expected_icon_state)
+			bad_cables |= C
+			log_bad("[log_info_line(C)] has an invalid icon state. Expected [expected_icon_state], was [C.icon_state]")
+		if(!(C.icon_state in icon_states(C.icon)))
+			bad_cables |= C
+			log_bad("[log_info_line(C)] has an non-existing icon state.")
+
+	if(bad_cables.len)
+		fail("Found [bad_cables.len] cable\s with an unexpected icon state.")
+	else
+		pass("All wires had their expected icon state.")
 
 	return 1
 
@@ -173,21 +194,21 @@ datum/unit_test/map_image_map_test/start_test()
 
 datum/unit_test/correct_allowed_spawn_test
 	name = "MAP: All allowed_spawns entries should have spawnpoints on map."
-	
+
 datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/failed = FALSE
-	
+
 	for(var/spawn_name in using_map.allowed_spawns)
 		var/datum/spawnpoint/spawnpoint = spawntypes[spawn_name]
 		if(!spawnpoint.turfs.len)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
-			
+
 	if(failed)
 		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
 	else
 		pass("All entries in allowed_spawns have spawnpoints.")
-		
+
 	return 1
 
 //=======================================================================================
