@@ -43,7 +43,7 @@
 /obj/item/weapon/cell/update_icon()
 
 	var/new_overlay_state = null
-	if(charge/maxcharge >= 0.95)
+	if(percent() >= 95)
 		new_overlay_state = "cell-o2"
 	else if(charge >= 0.05)
 		new_overlay_state = "cell-o1"
@@ -55,7 +55,7 @@
 			overlays += image('icons/obj/power.dmi', overlay_state)
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
-	return 100.0*charge/maxcharge
+	return maxcharge && (100.0*charge/maxcharge)
 
 /obj/item/weapon/cell/proc/fully_charged()
 	return (charge == maxcharge)

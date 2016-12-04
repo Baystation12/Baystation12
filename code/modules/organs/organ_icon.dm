@@ -73,28 +73,14 @@ var/list/limb_icon_cache = list()
 	else if (owner && (SKELETON in owner.mutations))
 		icon = 'icons/mob/human_races/r_skeleton.dmi'
 	else
-		icon = species.icobase
-	mob_icon = new/icon(icon, icon_state)
-	if(status & ORGAN_DEAD)
-		icon_cache_key += "_dead"
-		mob_icon.ColorTone(rgb(10,50,0))
-		mob_icon.SetIntensity(0.7)
+		icon = species.get_icobase(owner)
 
-	if(s_tone)
-		if(s_tone >= 0)
-			mob_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-		else
-			mob_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-		icon_cache_key += "_tone_[s_tone]"
-	else
-		if(s_col && s_col.len >= 3)
-			mob_icon.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
-			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]"
+	mob_icon = apply_colouration(new/icon(icon, icon_state))
 
 	if(body_hair && islist(h_col) && h_col.len >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
 		if(!limb_icon_cache[cache_key])
-			var/icon/I = icon(species.icobase, "[icon_name]_[body_hair]")
+			var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
 			I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
 			limb_icon_cache[cache_key] = I
 		mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
@@ -132,7 +118,7 @@ var/list/limb_icon_cache = list()
 	var/image/res = image('icons/mob/human_face.dmi',"bald_s")
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype() in facial_hair_style.species_allowed))
+		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype(owner) in facial_hair_style.species_allowed))
 			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 			if(facial_hair_style.do_colouration)
 				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
@@ -144,7 +130,7 @@ var/list/limb_icon_cache = list()
 		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
 			if(!hair_style.veryshort)
 				hair_style = hair_styles_list["Short Hair"]
-		if(hair_style && (species.get_bodytype() in hair_style.species_allowed))
+		if(hair_style && (species.get_bodytype(owner) in hair_style.species_allowed))
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
 			if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
 				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
@@ -192,3 +178,32 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 	var/list/hud_colours = (robotic < ORGAN_ROBOT) ? flesh_hud_colours : robot_hud_colours
 	hud_damage_image.color = hud_colours[max(1,min(ceil(dam_state*hud_colours.len),hud_colours.len))]
 	return hud_damage_image
+
+/obj/item/organ/external/proc/apply_colouration(var/icon/applying)
+
+	if(nonsolid)
+		applying.MapColors("#4D4D4D","#969696","#1C1C1C", "#000000")
+		if(species && species.get_bodytype(owner) != "Human")
+			applying.SetIntensity(1.5)
+		else
+			applying.SetIntensity(0.7)
+		applying += rgb(,,,180) // Makes the icon translucent, SO INTUITIVE TY BYOND
+
+	else if(status & ORGAN_DEAD)
+		icon_cache_key += "_dead"
+		applying.ColorTone(rgb(10,50,0))
+		applying.SetIntensity(0.7)
+
+	if(s_tone)
+		if(s_tone >= 0)
+			applying.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+		else
+			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
+		icon_cache_key += "_tone_[s_tone]"
+	else
+		if(s_col && s_col.len >= 3)
+			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
+			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]"
+
+	return applying
+

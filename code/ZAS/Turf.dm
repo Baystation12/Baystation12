@@ -16,7 +16,7 @@
 		//dbg(blocked)
 		return 1
 
-	#ifdef ZLEVELS
+	#ifdef MULTIZAS
 	for(var/d = 1, d < 64, d *= 2)
 	#else
 	for(var/d = 1, d < 16, d *= 2)
@@ -52,34 +52,35 @@
 */
 
 /turf/simulated/proc/can_safely_remove_from_zone()
-	#ifdef ZLEVELS
-	return 0 //TODO generalize this to multiz.
-	#else
-	
 	if(!zone) return 1
-	
+
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
-	
-	for(var/dir in list(NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHWEST))
-		
+	var/to_check = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+	#ifdef MULTIZAS
+	to_check += list(NORTHUP, EASTUP, WESTUP, SOUTHUP, NORTHDOWN, EASTDOWN, WESTDOWN, SOUTHDOWN)
+	#endif
+	for(var/dir in to_check)
+
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
 			//check that they are connected by the corner turf
 			var/connected_dirs = get_zone_neighbours(get_step(src, dir))
-			if(connected_dirs && (dir & turn(connected_dirs, 180)) == dir)
+			if(connected_dirs && (dir & reverse_dir[connected_dirs]) == dir)
 				unconnected_dirs &= ~dir //they are, so unflag the cardinals in question
-	
+
 	//it is safe to remove src from the zone if all cardinals are connected by corner turfs
 	return !unconnected_dirs
-	
-	#endif
 
 //helper for can_safely_remove_from_zone()
 /turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
 	. = 0
 	if(istype(T) && T.zone)
-		for(var/dir in cardinal)
+		var/to_check = cardinal.Copy()
+		#ifdef MULTIZAS
+		to_check += list(UP, DOWN)
+		#endif
+		for(var/dir in to_check)
 			var/turf/simulated/other = get_step(T, dir)
 			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
 				. |= dir
@@ -111,7 +112,7 @@
 	open_directions = 0
 
 	var/list/postponed
-	#ifdef ZLEVELS
+	#ifdef MULTIZAS
 	for(var/d = 1, d < 64, d *= 2)
 	#else
 	for(var/d = 1, d < 16, d *= 2)
@@ -162,7 +163,7 @@
 				//Might have assigned a zone, since this happens for each direction.
 				if(!zone)
 
-					//We do not merge if 
+					//We do not merge if
 					//    they are blocking us and we are not blocking them, or if
 					//    we are blocking them and not blocking ourselves - this prevents tiny zones from forming on doorways.
 					if(((block & ZONE_BLOCKED) && !(r_block & ZONE_BLOCKED)) || ((r_block & ZONE_BLOCKED) && !(s_block & ZONE_BLOCKED)))

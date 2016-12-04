@@ -55,6 +55,7 @@
 	suits["tan suit"] = /obj/item/clothing/under/suit_jacket/tan
 	suits["white suit"] = /obj/item/clothing/under/scratch
 	suits["white-blue suit"] = /obj/item/clothing/under/lawyer/bluesuit
+	suits["formal outfit"] = /obj/item/clothing/under/rank/internalaffairs/plain
 	gear_tweaks += new/datum/gear_tweak/path(suits)
 
 /datum/gear/uniform/scrubs
@@ -152,3 +153,8 @@
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
+
+/datum/gear/uniform/turtleneck
+	display_name = "sweater"
+	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+	flags = GEAR_HAS_COLOR_SELECTION

@@ -70,14 +70,14 @@
 	caps["yellow cap"] = /obj/item/clothing/head/soft/yellow
 	gear_tweaks += new/datum/gear_tweak/path(caps)
 
-/datum/gear/head/cap/corp
-	display_name = "cap, corporate security"
-	path = /obj/item/clothing/head/soft/sec/corp
-	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
-
-/datum/gear/head/cap/sec
+/datum/gear/head/seccap
 	display_name = "cap, security"
 	path = /obj/item/clothing/head/soft/sec
+	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
+
+/datum/gear/head/seccap/corp
+	display_name = "cap, corporate security"
+	path = /obj/item/clothing/head/soft/sec/corp
 	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
 /datum/gear/head/hairflower
@@ -105,6 +105,7 @@
 	hardhats["orange hardhat"] = /obj/item/clothing/head/hardhat/orange
 	hardhats["red hardhat"] = /obj/item/clothing/head/hardhat/red
 	hardhats["yellow hardhat"] = /obj/item/clothing/head/hardhat
+	gear_tweaks += new/datum/gear_tweak/path(hardhats)
 
 /datum/gear/head/hat
 	display_name = "hat selection"

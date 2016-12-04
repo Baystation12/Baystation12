@@ -98,6 +98,7 @@
 	icon_state = "door_open"
 	density = 0
 	locked = 1
+	opacity = 0
 
 /obj/machinery/door/airlock/sol
 	name = "Airlock"

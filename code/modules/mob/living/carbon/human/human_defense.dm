@@ -95,7 +95,7 @@ meteor_act
 	if (!def_zone)
 		return 1.0
 
-	var/siemens_coefficient = species.siemens_coefficient
+	var/siemens_coefficient = max(species.siemens_coefficient,0)
 
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
 	for(var/obj/item/clothing/C in clothing_items)

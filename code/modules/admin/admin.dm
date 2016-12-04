@@ -976,7 +976,7 @@ var/global/floorIsLava = 0
 
 	var/list/possible_items = custom_items[owner]
 	var/datum/custom_item/item_to_spawn = input("Select an item to spawn.", "Spawn Custom Item") as null|anything in possible_items
-	if(!item_to_spawn)
+	if(!item_to_spawn || !item_to_spawn.is_valid(usr))
 		return
 
 	item_to_spawn.spawn_item(get_turf(usr))

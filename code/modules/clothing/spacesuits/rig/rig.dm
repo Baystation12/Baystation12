@@ -456,7 +456,7 @@
 
 	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
-	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
+	data["chargestatus"] = cell ? Floor(cell.percent()/2) : 0
 
 	data["emagged"] =       subverted
 	data["coverlock"] =     locked
@@ -518,8 +518,8 @@
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
-		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype()])
-			species_icon =  sprite_sheets[wearer.species.get_bodytype()]
+		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype(wearer)])
+			species_icon =  sprite_sheets[wearer.species.get_bodytype(wearer)]
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
 	if(installed_modules.len)

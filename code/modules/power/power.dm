@@ -15,6 +15,10 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
+/obj/machinery/power/initialize()
+	..()
+	connect_to_network()
+
 /obj/machinery/power/Destroy()
 	disconnect_from_network()
 	disconnect_terminal()
@@ -357,7 +361,7 @@
 		PN.trigger_warning(5)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(H.species.siemens_coefficient == 0)
+		if(H.species.siemens_coefficient <= 0)
 			return
 		if(H.gloves)
 			var/obj/item/clothing/gloves/G = H.gloves

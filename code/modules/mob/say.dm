@@ -26,16 +26,7 @@
 		usr.emote(message)
 
 /mob/proc/say_dead(var/message)
-	if(!src.client.holder)
-		if(!config.dsay_allowed)
-			to_chat(src, "<span class='danger'>Deadchat is globally muted.</span>")
-			return
-
-	if(!is_preference_enabled(/datum/client_preference/show_dsay))
-		to_chat(usr, "<span class='danger'>You have deadchat muted.</span>")
-		return
-
-	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
+	communicate(/decl/communication_channel/dsay, client, message)
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
@@ -80,10 +71,6 @@
 		else if(ending == "?")
 			verb ="asks"
 	return verb
-
-/mob/proc/emote(var/act, var/type, var/message)
-	if(act == "me")
-		return custom_emote(type, message)
 
 /mob/proc/get_ear()
 	// returns an atom representing a location on the map from which this

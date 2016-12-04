@@ -317,7 +317,6 @@
 	id = "dexalin"
 	result = "dexalin"
 	required_reagents = list("acetone" = 2, "phoron" = 0.1)
-	catalysts = list("phoron" = 1)
 	inhibitors = list("water" = 1) // Messes with cryox
 	result_amount = 1
 
@@ -369,7 +368,6 @@
 	id = "clonexadone"
 	result = "clonexadone"
 	required_reagents = list("cryoxadone" = 1, "sodium" = 1, "phoron" = 0.1)
-	catalysts = list("phoron" = 5)
 	result_amount = 2
 
 /datum/chemical_reaction/spaceacillin
@@ -2157,7 +2155,7 @@
 	name = "Oxyphoron"
 	id = "oxyphoron"
 	result = "oxyphoron"
-	required_reagents = list("oxygen" = 1, "phoron" = 1)
+	required_reagents = list("water" = 1, "phoron" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/deuterium

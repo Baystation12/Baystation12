@@ -1,8 +1,21 @@
 /datum/gear/accessory
-	display_name = "necklace"
-	path = /obj/item/clothing/accessory/necklace
+	display_name = "black vest"
+	path = /obj/item/clothing/accessory/toggleable/vest
 	slot = slot_tie
 	sort_category = "Accessories"
+
+/datum/gear/accessory/suspenders
+	display_name = "suspenders"
+	path = /obj/item/clothing/accessory/suspenders
+
+/datum/gear/accessory/wcoat
+	display_name = "waistcoat"
+	path = /obj/item/clothing/accessory/wcoat
+
+/datum/gear/accessory/necklace
+	display_name = "necklace"
+	path = /obj/item/clothing/accessory/necklace
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/armband
 	display_name = "armband selection"
@@ -56,10 +69,6 @@
 	ties["horrible tie"] = /obj/item/clothing/accessory/horrible
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
-/datum/gear/accessory/det_vest
-	display_name = "black vest"
-	path = /obj/item/clothing/accessory/toggleable/vest
-
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
@@ -96,3 +105,12 @@
 	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/red
 	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/toggleable/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
+
+/datum/gear/accessory/scarf
+	display_name = "scarf"
+	path = /obj/item/clothing/accessory/scarf
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/locket
+	display_name = "locket"
+	path = /obj/item/clothing/accessory/locket

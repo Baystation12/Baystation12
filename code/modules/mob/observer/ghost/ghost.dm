@@ -609,22 +609,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return 1
 
-/atom/proc/extra_ghost_link()
-	return
-
-/mob/extra_ghost_link(var/atom/ghost)
-	if(client && eyeobj)
-		return "|<a href='byond://?src=\ref[ghost];track=\ref[eyeobj]'>eye</a>"
-
-/mob/observer/ghost/extra_ghost_link(var/atom/ghost)
-	if(mind && (mind.current && !isghost(mind.current)))
-		return "|<a href='byond://?src=\ref[ghost];track=\ref[mind.current]'>body</a>"
-
-/proc/ghost_follow_link(var/atom/target, var/atom/ghost)
-	if((!target) || (!ghost)) return
-	. = "<a href='byond://?src=\ref[ghost];track=\ref[target]'>follow</a>"
-	. += target.extra_ghost_link(ghost)
-
 /proc/isghostmind(var/datum/mind/player)
 	return player && !isnewplayer(player.current) && (!player.current || isghost(player.current) || (isliving(player.current) && player.current.stat == DEAD) || !player.current.client)
 

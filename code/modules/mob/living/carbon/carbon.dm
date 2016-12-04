@@ -422,7 +422,7 @@
 		chem_effects[effect] = magnitude
 
 /mob/living/carbon/get_default_language()
-	if(default_language)
+	if(default_language && can_speak(default_language))
 		return default_language
 
 	if(!species)

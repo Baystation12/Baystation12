@@ -24,7 +24,7 @@
 
 	dat = "<table><tr>"
 	dat += "<td><b>Mode</b></td>"
-	dat += "<td><b>Rate</b></td>"
+	dat += "<td><b>Fire Delay</b></td>"
 	dat += "<td><b>Power</b></td>"
 	dat += "</tr>"
 
@@ -73,11 +73,11 @@
 		return 1
 
 	if(href_list["modifyrate"])
-		var/new_val = input("Enter new emission rate (1 - 10)", "Modifying emission rate (1/10th sec)", G.rate) as num
+		var/new_val = input("Enter new emission delay between 1 and 10 seconds.", "Modifying emission rate", G.rate) as num
 		if(!new_val)
 			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
 			return 1
-		G.rate = Clamp(new_val, 10, 100)
+		G.rate = Clamp(new_val, 1, 10)
 		updateUsrDialog()
 		return 1
 
