@@ -586,23 +586,19 @@
 	reagent_state = LIQUID
 	color = "#535E66"
 
-/datum/reagent/toxin/hairremover
+/datum/reagent/toxin/hair_remover
 	name = "Hair Remover"
-	id = "hairremover"
+	id = "hair_remover"
 	description = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
 	reagent_state = LIQUID
 	color = "#D9FFB3"
+	strength = 1
 	overdose = REAGENTS_OVERDOSE
 
-/datum/reagent/toxin/hairremover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+/datum/reagent/toxin/hair_remover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
 		return
-	if(( (M.h_style != "Bald" || M.h_style != "Tajaran Ears") && M.f_style != "Shaved" ))
-		to_chat(M, "<span class='warning'>Your hair dissolves.</span>")
-		if(alien == IS_TAJARA)
-			M.h_style = "Tajaran Ears"
-		else
-			M.h_style = "Bald"
-		M.f_style = "Shaved"
-		M.update_hair()
+	M.species.set_default_hair(M)
+	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
+	remove_self(volume)
