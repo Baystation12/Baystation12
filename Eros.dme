@@ -1,4 +1,4 @@
-// DM Environment file for baystation12.dme.
+// DM Environment file for Eros.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
  // New source code should be placed in .dm files: choose File/New --> Code File.
 // BEGIN_INTERNALS
@@ -776,7 +776,6 @@
 #include "code\game\objects\items\weapons\trays.dm"
 #include "code\game\objects\items\weapons\weaponry.dm"
 #include "code\game\objects\items\weapons\weldbackpack.dm"
-#include "code\game\objects\items\weapons\wires.dm"
 #include "code\game\objects\items\weapons\circuitboards\broken.dm"
 #include "code\game\objects\items\weapons\circuitboards\circuitboard.dm"
 #include "code\game\objects\items\weapons\circuitboards\mecha.dm"
@@ -1720,6 +1719,7 @@
 #include "code\modules\modular_computers\file_system\programs\comm.dm"
 #include "code\modules\modular_computers\file_system\programs\configurator.dm"
 #include "code\modules\modular_computers\file_system\programs\file_browser.dm"
+#include "code\modules\modular_computers\file_system\programs\game.dm"
 #include "code\modules\modular_computers\file_system\programs\news_browser.dm"
 #include "code\modules\modular_computers\file_system\programs\ntdownloader.dm"
 #include "code\modules\modular_computers\file_system\programs\ntmonitor.dm"

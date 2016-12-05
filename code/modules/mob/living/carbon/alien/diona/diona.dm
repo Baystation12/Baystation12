@@ -7,9 +7,11 @@
 	speak_emote = list("chirrups")
 	icon_state = "nymph"
 	item_state = "nymph"
-	language = "Rootspeak"
+	language = LANGUAGE_ROOTLOCAL
+	species_language = LANGUAGE_ROOTLOCAL
+	only_species_language = 1
 	death_msg = "expires with a pitiful chirrup..."
-	universal_understand = 1
+	universal_understand = 0
 	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
 
 	can_pull_size = ITEM_SIZE_SMALL
@@ -35,3 +37,4 @@
 	hat = new_hat
 	new_hat.loc = src
 	update_icons()
+
