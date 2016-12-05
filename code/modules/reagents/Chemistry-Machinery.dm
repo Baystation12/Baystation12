@@ -388,7 +388,7 @@
 
 /obj/machinery/reagentgrinder/attack_robot(var/mob/user)
 	//Calling for adjacency as I don't think grinders are wireless.
-	if(adjacent(user))
+	if(Adjacent(user))
 		//Calling attack_hand(user) to make ensure no functionality is missed.
 		//If attack_hand is updated, this segment won't have to be updated as well.
 		return attack_hand(user)
