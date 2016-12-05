@@ -174,6 +174,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/changeling/changeling = changeling_power(0,0,100)
 	if(!changeling)	return
+	msg_admin_attack("[name] ([ckey]) attempts to absorb [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 
 	var/obj/item/weapon/grab/G = src.get_active_hand()
 	if(!istype(G))
@@ -226,6 +227,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src << "<span class='notice'>We have absorbed [T]!</span>"
 	src.visible_message("<span class='danger'>[src] sucks the fluids from [T]!</span>")
 	T << "<span class='danger'>You have been absorbed by the changeling!</span>"
+	msg_admin_attack("[name] ([ckey]) absorbed [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 
 	T.dna.real_name = T.real_name //Set this again, just to be sure that it's properly set.
 	changeling.absorbed_dna |= T.dna
@@ -718,6 +720,7 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!T)	return 0
 	spawn(rand(300,600))
 		if(T)	T.hallucination += 400
+	msg_admin_attack("[name] ([ckey]) used Hallucination Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","HS")
 	return 1
 
@@ -729,6 +732,7 @@ var/list/datum/dna/hivemind_bank = list()
 	var/mob/living/carbon/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
 	if(!T)	return 0
 	T.silent += 30
+	msg_admin_attack("[name] ([ckey]) used Silence Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","SS")
 	return 1
 
@@ -744,6 +748,7 @@ var/list/datum/dna/hivemind_bank = list()
 	spawn(300)	T.disabilities &= ~NEARSIGHTED
 	T.eye_blind = 10
 	T.eye_blurry = 20
+	msg_admin_attack("[name] ([ckey]) used Blind Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","BS")
 	return 1
 
@@ -757,6 +762,7 @@ var/list/datum/dna/hivemind_bank = list()
 	T << "<span class='danger'>Your ears pop and begin ringing loudly!</span>"
 	T.sdisabilities |= DEAF
 	spawn(300)	T.sdisabilities &= ~DEAF
+	msg_admin_attack("[name] ([ckey]) used Deafen Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","DS")
 	return 1
 
@@ -769,6 +775,7 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!T)	return 0
 	T << "<span class='danger'>Your muscles begin to painfully tighten.</span>"
 	T.Weaken(20)
+	msg_admin_attack("[name] ([ckey]) used Paralysis Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","PS")
 	return 1
 
@@ -803,6 +810,7 @@ var/list/datum/dna/hivemind_bank = list()
 	T.real_name = chosen_dna.real_name
 	T.UpdateAppearance()
 	domutcheck(T, null)
+	msg_admin_attack("[name] ([ckey]) used Trnsformation Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","TS")
 	return 1
 
@@ -816,6 +824,7 @@ var/list/datum/dna/hivemind_bank = list()
 	T << "<span class='danger'>you feel a small prick as stomach churns violently and you become to feel skinnier.</span>"
 	T.overeatduration = 0
 	T.nutrition -= 100
+	msg_admin_attack("[name] ([ckey]) used Unfat Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","US")
 	return 1
 
@@ -831,6 +840,7 @@ var/list/datum/dna/hivemind_bank = list()
 	T.Paralyse(10)
 	T.make_jittery(1000)
 	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
+	msg_admin_attack("[name] ([ckey]) used Death Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","DTHS")
 	return 1
 
@@ -852,6 +862,6 @@ var/list/datum/dna/hivemind_bank = list()
 	changeling.absorbed_dna |= T.dna
 	if(T.species && !(T.species.name in changeling.absorbed_species))
 		changeling.absorbed_species += T.species.name
-
+	msg_admin_attack("[name] ([ckey]) used Extract DNA Sting on [T.name] ([T.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	feedback_add_details("changeling_powers","ED")
 	return 1
