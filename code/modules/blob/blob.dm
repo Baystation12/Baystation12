@@ -113,7 +113,7 @@
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		L.take_organ_damage(rand(30, 40))
 		return
-	if(!(locate(/obj/effect/blob/core) in range(T, 3)) && prob(secondary_core_growth_chance))
+	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
 	else
 		new expandType(T, min(health, 30))
