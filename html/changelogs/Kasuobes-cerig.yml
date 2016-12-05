@@ -1,6 +1,0 @@
-author: Haswell
-delete-after: True
-changes: 
-  - tweak: "Renamed advanced voidsuit to advanced engineering hardsuit."
-  - tweak: "Advanced engineering hardsuit now comes with in-built magboots and insulated gauntlets that also fit Tajara and Unathi."
-  - tweak: "Added more things that fit on the EVA hardsuit and advanced engineering hardsuit's chestpiece."
