@@ -87,7 +87,7 @@
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in player_list)
 				var/highjob
-				if(player.client && player.client.prefs.job_high)
+				if(player.client && player.client.prefs && player.client.prefs.job_high)
 					highjob = " as [player.client.prefs.job_high]"
 				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
@@ -489,7 +489,7 @@
 	return check_rights(R_ADMIN, 0, src)
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
-	if(!(S.spawn_flags & CAN_JOIN) && !has_admin_rights())
+	if(!(S.spawn_flags & SPECIES_CAN_JOIN) && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play on the station."))
 		return 0

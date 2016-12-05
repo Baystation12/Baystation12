@@ -20,6 +20,8 @@
 	new /obj/item/clothing/mask/snorkel(src)
 	new /obj/item/clothing/shoes/swimmingfins(src)
 	new /obj/item/clothing/shoes/swimmingfins(src)
+	new /obj/item/weapon/towel(src)
+	new /obj/item/weapon/towel(src)
 
 
 

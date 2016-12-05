@@ -8,6 +8,7 @@
 	health = 100
 	maxHealth = 100
 	mob_size = 4
+	species_language = "Xenomorph"
 
 	var/adult_form
 	var/dead_icon

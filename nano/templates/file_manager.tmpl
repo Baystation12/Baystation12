@@ -1,8 +1,8 @@
 {{if data.error}}
-	<h2>An error has occured and this program can not continue.</h2>
+	<h2>An error has occured:</h2>
 	Additional information: {{:data.error}}<br>
 	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
-	{{:helper.link('Restart program', null, { "PRG_closefile" : 1 })}}
+	{{:helper.link('Back to menu', null, { "PRG_closefile" : 1 })}}
 {{else}}
 	{{if data.filename}}
 		<h2>Viewing file {{:data.filename}}</h2>

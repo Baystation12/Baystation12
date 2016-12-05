@@ -14,10 +14,10 @@
 	min_age = 17
 	max_age = 100
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
-/datum/species/human/get_bodytype()
+/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return "Human"
 
 /datum/species/unathi
@@ -55,7 +55,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
@@ -96,7 +96,7 @@
 	burn_mod =  1.15
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SIIK_MAAS)
+	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
@@ -119,7 +119,7 @@
 
 	primitive_form = "Farwa"
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
@@ -158,16 +158,16 @@
 
 	min_age = 19
 	max_age = 90
-	
+
 	darksight = 4
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
 	base_color = "#006666"
-	
+
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
 	cold_level_3 = 130 //Default 120
@@ -197,7 +197,7 @@
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
-	language = LANGUAGE_ROOTSPEAK
+	language = LANGUAGE_ROOTLOCAL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
 	slowdown = 7
@@ -205,8 +205,9 @@
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
-	num_alternate_languages = 1
-	name_language = LANGUAGE_ROOTSPEAK
+	num_alternate_languages = 2
+	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
+	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
 
@@ -263,7 +264,7 @@
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
 	appearance_flags = 0
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"

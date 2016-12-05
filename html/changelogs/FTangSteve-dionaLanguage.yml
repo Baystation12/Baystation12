@@ -22,10 +22,10 @@
 #################################
 
 # Your name.  
-author: Finalsong1
+author: FTangSteve
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
-delete-after: True
+delete-after: False
 
 # Any changes you've made.  See valid prefix list above.
 # INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
@@ -33,4 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Changed the armor values for specialist vests, reinforcing that they're designed to be used against that specific damage type."
+  - wip: "RootSpeak is now split into a local and a global variant. For now the global acts as a hivemind."
+  - bugfix: "Diona nymphs now can only speak the local variant of rootspeak"
