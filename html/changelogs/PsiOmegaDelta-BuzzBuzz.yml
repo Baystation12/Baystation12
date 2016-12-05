@@ -1,0 +1,7 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - experiment: "Sounds are now heard from 14 tiles away by default, rather than 21. If the station becomes too quiet this can be adjusted."
+  - soundadd: "New sounds added for when electrifying the door or rising and dropping bolts. Requires adjacency to hear but ensures some foreplanning is needed to remain stealthy."
+  - soundadd: "The airlock close sound is now different from the airlock open sound."
+  - soundadd: "Changes the airlock-blocked sound and reduces the range at which it's heard."
