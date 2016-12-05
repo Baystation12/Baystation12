@@ -53,5 +53,7 @@
 /obj/structure/table/woodentable_swanky
 	icon_state = "reinf_preview"
 	color = "#824B28"
-	material = get_material_by_name("wood")
-	reinforced = get_material_by_name("gold")
+	New()
+		material = get_material_by_name("wood")
+		reinforced = get_material_by_name("gold")
+		..()
