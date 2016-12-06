@@ -168,7 +168,7 @@
 		if("edit")
 			if(computer && can_run(user, 1))
 				if(href_list["name"])
-					var/temp_name = sanitizeName(input("Enter name.", "Name", id_card.registered_name))
+					var/temp_name = sanitizeName(input("Enter name.", "Name", id_card.registered_name),allow_numbers=TRUE)
 					if(temp_name)
 						id_card.registered_name = temp_name
 					else
