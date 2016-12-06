@@ -1,8 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - rscadd: "SPACE Magazine - Issue 5 is now available in the news browser program"
-  - rscadd: "To reduce clutter, the news program now hides older news articles. They can be shown by toggling a button."
-  - tweak: "News articles now use better data compression, therefore the files are about 50% smaller."

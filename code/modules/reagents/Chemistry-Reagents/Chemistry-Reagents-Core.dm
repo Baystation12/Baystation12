@@ -146,16 +146,13 @@
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
-	var/mob/living/carbon/slime/S = M
-	S.adjustToxLoss(10 * removed) // Babies have 150 health, adults have 200; So, 15 units and 20
-	if(!S.client)
-		if(S.Target) // Like cats
-			S.Target = null
-		if(S.Victim)
-			S.Feedstop()
+	M.adjustToxLoss(5 * removed) // Babies have 150 health, adults have 200; So, 30 units and 40
 	if(dose == removed)
-		S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
-		S.disoriented = max(S.disoriented, 2)
+		M.visible_message("<span class='warning'>\The [M]'s flesh sizzles where the water touches it!</span>")
+	var/mob/living/carbon/slime/S = M
+	if(istype(S) && !S.client && S.Target) // Like cats
+		S.Target = null
+		++S.Discipline
 
 /datum/reagent/fuel
 	name = "Welding fuel"
