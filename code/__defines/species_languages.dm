@@ -36,6 +36,7 @@
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
 #define LANGUAGE_CULT "Cult"
+#define LANGUAGE_SIGN "Sign Language"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
