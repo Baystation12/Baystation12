@@ -1,4 +1,7 @@
 //Contains the rapid construction device.
+#define MODE_CONSTRUCT	 	1
+#define MODE_AIRLOCK		2
+#define MODE_DECONSTRUCT	3
 /obj/item/weapon/rcd
 	name = "rapid construction device"
 	desc = "A device used to rapidly build walls and floors."
@@ -72,83 +75,57 @@
 		return 0
 	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
 		return 0
-	return alter_turf(A,user,(mode == 3))
+	switch(mode)
+		if (MODE_CONSTRUCT)
+			if(isturf(A) && istype(A,get_base_turf_by_area(A)))
+				. = do_work(user, A, 1, 0, /turf/simulated/floor/airless)
+			if(istype(A,/turf/simulated/floor))
+				. = do_work(user, A, 3, 20, /turf/simulated/wall)
+		if (MODE_AIRLOCK)
+			if(istype(A,/turf/simulated/floor))
+				. = do_work(user, A, 10, 50, /obj/machinery/door/airlock)
+		if (MODE_DECONSTRUCT)
+			if(istype(A,/obj/machinery/door/airlock))
+				. = do_work(user, A, 10, 50)
+			if(istype(A,/turf/simulated/floor))
+				. = do_work(user, A, 3, 20, get_base_turf_by_area(A))
+			if(istype(A,/turf/simulated/wall))
+				var/turf/simulated/wall/W = A
+				if (canRwall || !W.reinf_material)
+					. = do_work(user, W, 5, 40, /turf/simulated/floor)
+
+/obj/item/weapon/rcd/proc/do_work(user,target,cost,delay,result)
+	if(working)
+		return 0
+	if(!useResource(cost, user))
+		to_chat(user, "Insufficient resources.")
+		return 0
+	playsound(get_turf(user), 'sound/machines/click.ogg', 50, 1)
+	working = 1
+	to_chat(user, "[(mode ==  MODE_DECONSTRUCT ? "Deconstructing [target]" : "Building")]...")
+
+	if(delay &&!(can_use(user,target) && do_after(user, delay, src)))
+		working = 0
+		return 0
+
+	working = 0
+
+	if(isturf(result))
+		var/turf/T = target
+		T.ChangeTurf(result)
+	else if(result)
+		new result(target)
+	else
+		qdel(target)
+
+	playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
+
+	return 1
 
 /obj/item/weapon/rcd/proc/useResource(var/amount, var/mob/user)
 	if(stored_matter < amount)
 		return 0
 	stored_matter -= amount
-	return 1
-
-/obj/item/weapon/rcd/proc/alter_turf(var/turf/T,var/mob/user,var/deconstruct)
-
-	var/build_cost = 0
-	var/build_type
-	var/build_turf
-	var/build_delay
-	var/build_other
-
-	if(working == 1)
-		return 0
-	if(!istype(T))
-		return 0
-
-	if(mode == 3 && istype(T,/obj/machinery/door/airlock))
-		build_cost =  10
-		build_delay = 50
-		build_type = "airlock"
-	else if(mode == 2 && !deconstruct && istype(T,/turf/simulated/floor))
-		build_cost =  10
-		build_delay = 50
-		build_type = "airlock"
-		build_other = /obj/machinery/door/airlock
-	else if(!deconstruct && (istype(T,/turf/space) || istype(T,get_base_turf_by_area(T))))
-		build_cost =  1
-		build_type =  "floor"
-		build_turf =  /turf/simulated/floor/airless
-	else if(deconstruct && istype(T,/turf/simulated/wall))
-		var/turf/simulated/wall/W = T
-		build_delay = deconstruct ? 50 : 40
-		build_cost =  5
-		build_type =  (!canRwall && W.reinf_material) ? null : "wall"
-		build_turf =  /turf/simulated/floor
-	else if(istype(T,/turf/simulated/floor))
-		build_delay = deconstruct ? 50 : 20
-		build_cost =  deconstruct ? 10 : 3
-		build_type =  deconstruct ? "floor" : "wall"
-		build_turf =  deconstruct ? get_base_turf(T.z) : /turf/simulated/wall
-	else
-		return 0
-
-	if(!build_type)
-		working = 0
-		return 0
-
-	if(!useResource(build_cost, user))
-		to_chat(user, "Insufficient resources.")
-		return 0
-
-	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-
-	working = 1
-	to_chat(user, "[(deconstruct ? "Deconstructing" : "Building")] [build_type]...")
-
-	if(build_delay && !do_after(user, build_delay, src))
-		working = 0
-		return 0
-
-	working = 0
-	if(build_delay && !can_use(user,T))
-		return 0
-
-	if(build_turf)
-		T.ChangeTurf(build_turf)
-	else if(build_other)
-		new build_other(T)
-	else
-		qdel(T)
-
-	playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 	return 1
 
 /obj/item/weapon/rcd_ammo
@@ -196,3 +173,6 @@
 
 /obj/item/weapon/rcd/mounted/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.stat && !user.restrained())
+#undef MODE_CONSTRUCT
+#undef MODE_AIRLOCK
+#undef MODE_DECONSTRUCT
