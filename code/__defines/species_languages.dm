@@ -41,7 +41,6 @@
 #define LANGUAGE_SIGN "Sign Language"
 #define LANGUAGE_DRIDER "Drathi"
 #define LANGUAGE_LAMIA "Sehlin"
-#define LANGUAGE_SIGN "Sign Language"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
