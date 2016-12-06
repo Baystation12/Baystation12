@@ -458,6 +458,7 @@
 
 	proc/ViewManifest()
 		var/dat = "<html><body>"
+		dat += "<style>html{font-family:Tahoma,sans-serif;}</style>"
 		dat += "<h4>Show Crew Manifest</h4>"
 		dat += data_core.get_manifest(OOC = 1)
 
