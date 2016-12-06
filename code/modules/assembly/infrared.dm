@@ -120,7 +120,8 @@
 
 
 	Topic(href, href_list)
-		if(..()) return 1
+		..()
+
 		if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 			usr << browse(null, "window=infra")
 			onclose(usr, "infra")
