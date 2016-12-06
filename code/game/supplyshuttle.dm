@@ -117,6 +117,13 @@ var/list/mechtoys = list(
 	var/points_per_crate = 5
 	var/points_per_platinum = 5 // 5 points per sheet
 	var/points_per_phoron = 5
+	var/pointsfromtime = 0
+	var/pointsfromcrate = 0
+	var/pointsfrommanifest = 0
+	var/pointsfromplatinum = 0
+	var/pointsfromphoron = 0
+	var/pointstotalsum = 0
+	var/pointstotal = 0
 	//control
 	var/ordernum
 	var/list/shoppinglist = list()
@@ -127,6 +134,7 @@ var/list/mechtoys = list(
 	var/datum/shuttle/ferry/supply/shuttle
 
 	var/obj/machinery/computer/supply/primaryterminal //terminal hardcopy forms will be printed to.
+
 
 	New()
 		ordernum = rand(1,9000)
@@ -141,7 +149,12 @@ var/list/mechtoys = list(
 	// This is called by the process scheduler every thirty seconds
 	proc/process()
 		points += points_per_process
+		pointstotalsum += points_per_process
+		pointsfromtime += points_per_process
 
+		if(pointstotal)
+			pointstotalsum += supply_controller.pointstotal
+			pointstotal = 0
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 	proc/forbidden_atoms_check(atom/A)
 		if(istype(A,/mob/living))
@@ -174,6 +187,8 @@ var/list/mechtoys = list(
 				callHook("sell_crate", list(MA, area_shuttle))
 
 				points += points_per_crate
+				pointsfromcrate += points_per_crate
+				supply_controller.pointstotal += pointsfromcrate
 				var/find_slip = 1
 
 				for(var/atom in MA)
@@ -183,6 +198,8 @@ var/list/mechtoys = list(
 						var/obj/item/weapon/paper/manifest/slip = A
 						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
 							points += points_per_slip
+							pointsfrommanifest += points_per_slip
+							supply_controller.pointstotal += points_per_slip
 							find_slip = 0
 						continue
 
@@ -196,9 +213,13 @@ var/list/mechtoys = list(
 
 		if(phoron_count)
 			points += phoron_count * points_per_phoron
+			pointsfromphoron += phoron_count * points_per_phoron
+			supply_controller.pointstotal += pointsfromphoron
 
 		if(plat_count)
 			points += plat_count * points_per_platinum
+			pointsfromplatinum += plat_count * points_per_platinum
+			supply_controller.pointstotal += pointsfromplatinum
 
 	//Buyin
 	proc/buy()

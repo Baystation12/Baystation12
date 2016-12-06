@@ -288,8 +288,9 @@
 			if(lastprint < world.time)
 				var/obj/item/weapon/paper/overview
 				overview = new /obj/item/weapon/paper(src.loc)
+				overview.name = "Export overview"
 				overview.info += "<center><BR><b><large>NSS Exodus</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
-				overview.info += "Passive generation: [supply_controller.pointsfromtime]<BR>"
+				overview.info += "Base station supply: [supply_controller.pointsfromtime]<BR>"
 				overview.info += "From exported manifests: [supply_controller.pointsfrommanifest]<BR>"
 				overview.info += "From exported crates: [supply_controller.pointsfromcrate]<BR>"
 				overview.info += "From exported platinum: [supply_controller.pointsfromplatinum]<BR>"
