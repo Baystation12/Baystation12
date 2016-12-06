@@ -26,6 +26,10 @@
   <ui-section label='Points'>
     <span>{{Math.floor(adata.points)}}</span>
   </ui-section>
+  <ui-section label='Total points earned this shift'>
+    <span>{{data.pointstotalsum}}</span>
+	<ui-button action='printtotal'>Print overview</ui-button>
+  </ui-section>
 </ui-display>
 {{#if data.active}}
   <ui-display title='Cart' button>
