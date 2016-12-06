@@ -346,6 +346,10 @@
 		name = "Overeye Short"
 		icon_state = "hair_shortovereye"
 
+	veryshortovereye
+		name = "Overeye Very Short"
+		icon_state = "hair_veryshortovereye"
+
 	longovereye
 		name = "Overeye Long"
 		icon_state = "hair_longovereye"
