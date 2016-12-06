@@ -11,6 +11,18 @@
 		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
 	return
 
+/client/verb/discord()
+	set name = "discord"
+	set desc = "Visit our discord."
+	set hidden = 1
+	if( config.discordurl )
+		if(alert("This will open the forum in your browser or discord application. Are you sure?",,"Yes","No")=="No")
+			return
+		src << link(config.discordurl)
+	else
+		to_chat(src, "<span class='warning'>The discord URL is not set in the server configuration.</span>")
+	return
+
 /client/verb/forum()
 	set name = "forum"
 	set desc = "Visit the forum."
