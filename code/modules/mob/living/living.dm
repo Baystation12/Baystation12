@@ -596,7 +596,7 @@ default behaviour is:
 
 	if(update_slimes)
 		for(var/mob/living/carbon/slime/M in view(1,src))
-			M.UpdateFeed()
+			M.UpdateFeed(src)
 
 /mob/living/verb/resist()
 	set name = "Resist"
