@@ -97,8 +97,7 @@
 	"<span class='notice'>You cut out one of [target]'s cores with \the [tool]. [target.cores] cores left.</span>")
 
 	if(target.cores >= 0)
-		var/coreType = target.GetCoreType()
-		new coreType(target.loc)
+		new target.coretype(target.loc)
 	if(target.cores <= 0)
 		target.icon_state = "[target.colour] baby slime dead-nocore"
 
