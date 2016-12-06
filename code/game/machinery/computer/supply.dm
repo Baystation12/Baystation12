@@ -124,9 +124,15 @@
 	data["location"] = shuttlestatus
 	data["canlaunch"] = canlaunch
 	data["points"] = supply_controller.points
+	data["pointstotalsum"] = supply_controller.pointstotalsum
 	data["supplies"] = supplylist
 	data["active"] = isActiveTerminal() //merchant terminal
 	data["canorder"] = servicesActive()
+	data["pointsmanifest"] = supply_controller.pointsfrommanifest
+	data["pointscrate"] = supply_controller.pointsfromcrate
+	data["pointsphoron"] = supply_controller.pointsfromphoron
+	data["pointsplatinum"] = supply_controller.pointsfromplatinum
+	data["pointstime"] = supply_controller.pointsfromtime
 	return data
 
 
@@ -143,6 +149,7 @@
 		return
 
 	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+
 
 	switch(action)
 		if("send")
@@ -277,7 +284,22 @@
 						lastprint = world.time + printdelay
 						break
 			. = TRUE
+		if("printtotal")
+			if(lastprint < world.time)
+				var/obj/item/weapon/paper/overview
+				overview = new /obj/item/weapon/paper(src.loc)
+				overview.info += "<center><BR><b><large>NSS Exodus</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
+				overview.info += "Passive generation: [supply_controller.pointsfromtime]<BR>"
+				overview.info += "From exported manifests: [supply_controller.pointsfrommanifest]<BR>"
+				overview.info += "From exported crates: [supply_controller.pointsfromcrate]<BR>"
+				overview.info += "From exported platinum: [supply_controller.pointsfromplatinum]<BR>"
+				overview.info += "From exported phoron: [supply_controller.pointsfromphoron]<BR>"
+				overview.info += "Total: [supply_controller.pointstotalsum]"
 
+				overview.update_icon()	//Fix for appearing blank when printed.
+				playsound(usr.loc,'sound/machines/dotprinter.ogg', 40, 1)
+				return 1
+				. = TRUE
 		if("login") //sign in as merchant
 			if(!src.allowed(usr))
 				return TRUE
