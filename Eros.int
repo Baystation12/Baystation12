@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1481014604
+DIR: code code\__defines code\modules code\modules\mob code\modules\mob\language code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\station code\modules\power code\modules\power\fusion icons icons\obj 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 510.1347
+WINDOW: icons\obj\singularity.dmi;icons\obj\smoothlattice.dmi;icons\obj\stairs.dmi;icons\obj\stationobjs.dmi;code\modules\mob\living\carbon\human\species\station\station.dm;code\modules\power\fusion\fusion_reactions.dm
+FILE: code\modules\mob\living\carbon\human\species\station\station.dm
 */
 // END_INTERNALS

@@ -1958,7 +1958,7 @@
 	name = "Mead"
 	id = "mead"
 	result = "mead"
-	required_reagents = list("sugar" = 1, "water" = 1)
+	required_reagents = list("honey" = 1, "water" = 1)
 	catalysts = list("enzyme" = 5)
 	result_amount = 2
 
@@ -2143,6 +2143,14 @@
 	result = "suidream"
 	required_reagents = list("space_up" = 1, "bluecuracao" = 1, "melonliquor" = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/rum
+	name = "Rum"
+	id = "rum"
+	result = "rum"
+	required_reagents = list("sugar" = 1, "water" = 1)
+	catalysts = list("enzyme" = 5)
+	result_amount = 2
 
 /datum/chemical_reaction/luminol
 	name = "Luminol"
