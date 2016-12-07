@@ -646,6 +646,8 @@
 		var/obj/item/organ/I = internal_organs_by_name[BP_EYES]
 		if(I.status & ORGAN_CUT_AWAY)
 			return FLASH_PROTECTION_MAJOR
+	else // They can't be flashed if they don't have eyes.
+		return FLASH_PROTECTION_MAJOR
 	return flash_protection
 
 //Used by various things that knock people out by applying blunt trauma to the head.
