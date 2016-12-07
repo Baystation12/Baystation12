@@ -89,6 +89,7 @@
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	tail = "tajtail"
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
+	default_h_style = "Tajaran Ears"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
 	slowdown = -0.5
@@ -197,7 +198,7 @@
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
-	language = LANGUAGE_ROOTSPEAK
+	language = LANGUAGE_ROOTLOCAL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	//primitive_form = "Nymph"
 	slowdown = 7
@@ -205,8 +206,9 @@
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
-	num_alternate_languages = 1
-	name_language = LANGUAGE_ROOTSPEAK
+	num_alternate_languages = 2
+	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
+	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
 

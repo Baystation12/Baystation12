@@ -4,7 +4,7 @@
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.032	// kg/mol
 
-	flags = XGM_GAS_OXIDIZER
+	flags = XGM_GAS_OXIDIZER | XGM_GAS_FUSION_FUEL
 
 /decl/xgm_gas/nitrogen
 	id = "nitrogen"
@@ -33,7 +33,7 @@
 
 	tile_overlay = "phoron"
 	overlay_limit = 0.7
-	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT
+	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
 
 /decl/xgm_gas/sleeping_agent
 	id = "sleeping_agent"

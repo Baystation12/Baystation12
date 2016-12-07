@@ -29,7 +29,8 @@ var/global/list/robot_modules = list(
 		LANGUAGE_SIIK_MAAS = 0,
 		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_RESOMI = 0,
-		LANGUAGE_GUTTER = 0)
+		LANGUAGE_GUTTER = 0,
+		LANGUAGE_SIGN = 0)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
@@ -468,7 +469,6 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIIK_TAJR	= 0,
 					LANGUAGE_SKRELLIAN	= 1,
 					LANGUAGE_RESOMI		= 1,
-					LANGUAGE_ROOTSPEAK	= 1,
 					LANGUAGE_TRADEBAND	= 1,
 					LANGUAGE_GUTTER		= 1
 					)
@@ -493,6 +493,8 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/analyzer/plant_analyzer(src)
 	src.modules += new /obj/item/weapon/storage/plants(src)
 	src.modules += new /obj/item/weapon/robot_harvester(src)
+	src.modules += new /obj/item/weapon/material/kitchen/rollingpin(src)
+	src.modules += new /obj/item/weapon/material/knife(src)
 
 	var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
 	M.stored_matter = 30

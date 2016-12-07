@@ -38,7 +38,7 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/process()
 	if (timing)
-		timeleft = max(timeleft - process_schedule_interval("obj"), 0)
+		timeleft = max(timeleft - (process_schedule_interval("machinery") / 10), 0)
 		if (timeleft <= 0)
 			spawn
 				explode()
