@@ -1,0 +1,10 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscadd: "Surgery cyborgs get an update! Now with tramadol synthesizers, an upgraded scalpel, a special organ manipulator, and a roller bed module."
+  - rscadd: "Research cyborgs now possess an upgraded laser scalpel."
+  - rscdel: "Surgery cyborgs no longer have a mini fire extinguisher."
+  - tweak: "Cryo tubes, the genetic DNA scanner, and the advanced body scanner now (also) operate with mouse-drop, instead of grab-put only. Useful for cyborgs."
+  - bugfix: "The infamous sleeper mystery buckle bug has been fixed as a result."
