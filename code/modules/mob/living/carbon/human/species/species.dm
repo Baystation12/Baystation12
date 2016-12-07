@@ -27,6 +27,9 @@
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
 	var/tail_hair
 
+	var/default_h_style = "Bald"
+	var/default_f_style = "Shaved"
+
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/mob_size	= MOB_MEDIUM
@@ -355,3 +358,8 @@
 	if(H.equipment_prescription)
 		. -= H.equipment_prescription
 	return Clamp(., 0, 7)
+
+/datum/species/proc/set_default_hair(var/mob/living/carbon/human/H)
+	H.h_style = H.species.default_h_style
+	H.f_style = H.species.default_f_style
+	H.update_hair()
