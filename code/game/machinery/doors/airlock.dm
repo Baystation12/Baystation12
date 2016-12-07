@@ -94,6 +94,10 @@
 	icon = 'icons/obj/doors/Doorext.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 
+/obj/machinery/door/airlock/external/bolted
+	icon_state = "door_locked"
+	locked = 1
+
 /obj/machinery/door/airlock/external/bolted_open
 	icon_state = "door_open"
 	density = 0
@@ -152,6 +156,10 @@
 	explosion_resistance = 20
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_mhatch
+
+/obj/machinery/door/airlock/maintenance_hatch/bolted
+	locked = 1
+	icon_state = "door_locked"
 
 /obj/machinery/door/airlock/glass_command
 	name = "Maintenance Hatch"
