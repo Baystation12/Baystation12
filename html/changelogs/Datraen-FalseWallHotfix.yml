@@ -1,4 +1,4 @@
 author: Datraen
 delete-after: true
 changes: 
-  - bugfix: "Added a MultiZAS check for turf airchecking."
+  - tweak: "False walls no longer vent up and down."
