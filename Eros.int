@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1481150098
+DIR: maps maps\exodus 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 510.1347
+WINDOW: maps\exodus\exodus-1.dmm;maps\exodus\exodus-0.dmm
+FILE: maps\exodus\exodus-0.dmm
 */
 // END_INTERNALS
