@@ -659,6 +659,7 @@ default behaviour is:
 
 /mob/living/proc/escape_buckle()
 	if(buckled)
+		if(buckled.can_buckle)
 			buckled.user_unbuckle_mob(src)
 		else
 			to_chat(usr, "<span class='warning'>You can't seem to escape from \the [buckled]!</span>")
