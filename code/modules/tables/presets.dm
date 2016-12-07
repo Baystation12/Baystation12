@@ -1,6 +1,7 @@
 /obj/structure/table/standard
 	icon_state = "plain_preview"
 	color = COLOR_OFF_WHITE
+	material = DEFAULT_TABLE_MATERIAL
 
 /obj/structure/table/steel
 	icon_state = "plain_preview"
