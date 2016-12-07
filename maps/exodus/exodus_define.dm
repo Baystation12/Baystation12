@@ -46,6 +46,6 @@
 	evac_controller_type = /datum/evacuation_controller/pods/shuttle
 
 /datum/map/exodus/perform_map_generation()
-	new /datum/random_map/automata/cave_system(null,1,1,5,255,255) // Create the mining Z-level.
-	new /datum/random_map/noise/ore(null, 1, 1, 5, 64, 64)         // Create the mining ore distribution map.
+	new /datum/random_map/automata/cave_system(null, 1, 1, 6, 255, 255) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null, 1, 1, 6, 64, 64)         // Create the mining ore distribution map.
 	return 1
