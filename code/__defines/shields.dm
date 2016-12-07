@@ -40,6 +40,7 @@
 #define MODEFLAG_BYPASS 128
 #define MODEFLAG_OVERCHARGE 256
 #define MODEFLAG_MODULATE 512
+#define MODEFLAG_MULTIZ 1024
 
 // Return codes for shield hits.
 #define SHIELD_ABSORBED 1			// The shield has completely absorbed the hit
