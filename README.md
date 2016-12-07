@@ -28,12 +28,7 @@ The more complicated and easier to update method is using git.  You'll need to d
 
 This will take a while to download, but it provides an easier method for updating.
 
-Once the repository is in place, run this command:
-```bash
-cd Baystation12
-git update-index --assume-unchanged baystation12.int
-```
-Now git will ignore changes to the file baystation12.int.
+---
 
 ### INSTALLATION
 
