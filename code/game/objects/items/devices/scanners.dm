@@ -345,20 +345,20 @@ REAGENT SCANNER
 		to_chat(user, "This device can only scan slimes.")
 		return
 	var/mob/living/carbon/slime/T = M
-	user << "<span class='notice'>Slime scan result for \the [M]:</span>"
-	user << "[T.colour] [T.is_adult ? "adult" : "baby"] slime"
-	user << "Nutrition: [T.nutrition]/[T.get_max_nutrition()]"
+	user.show_message("<span class='notice'>Slime scan result for \the [M]:</span>")
+	user.show_message("[T.colour] [T.is_adult ? "adult" : "baby"] slime")
+	user.show_message("Nutrition: [T.nutrition]/[T.get_max_nutrition()]")
 	if(T.nutrition < T.get_starve_nutrition())
-		user << "<span class='alert'>Warning: the slime is starving!</span>"
+		user.show_message("<span class='alert'>Warning: the slime is starving!</span>")
 	else if (T.nutrition < T.get_hunger_nutrition())
-		user << "<span class='warning'>Warning: the slime is hungry.</span>"
-	user << "Electric charge strength: [T.powerlevel]"
-	user << "Health: [round(T.health / T.maxHealth)]%"
+		user.show_message("<span class='warning'>Warning: the slime is hungry.</span>")
+	user.show_message("Electric charge strength: [T.powerlevel]")
+	user.show_message("Health: [round(T.health / T.maxHealth)]%")
 
 	var/list/mutations = T.GetMutations()
 
 	if(!mutations.len)
-		user << ("This slime will never mutate.")
+		user.show_message("This slime will never mutate.")
 	else
 		var/list/mutationChances = list()
 		for(var/i in mutations)
@@ -373,11 +373,11 @@ REAGENT SCANNER
 		for(var/i in mutationChances)
 			mutationTexts += "[i] ([mutationChances[i]]%)"
 
-		user << "Possible colours on splitting: [english_list(mutationTexts)]"
+		user.show_message("Possible colours on splitting: [english_list(mutationTexts)]")
 
 	if (T.cores > 1)
-		user << "Anomalious slime core amount detected."
-	user << "Growth progress: [T.amount_grown]/10."
+		user.show_message("Anomalious slime core amount detected.")
+	user.show_message("Growth progress: [T.amount_grown]/10.")
 
 /obj/item/device/price_scanner
 	name = "price scanner"
