@@ -21,6 +21,7 @@
 	var/max_shells = 0			//the number of casings that will fit inside
 	var/ammo_type = null		//the type of ammo that the gun comes preloaded with
 	var/list/loaded = list()	//stored ammo
+	var/starts_loaded = 1		//whether the gun starts loaded or not, can be overridden for guns crafted in-game
 
 	//For MAGAZINE guns
 	var/magazine_type = null	//the type of magazine that the gun comes preloaded with
@@ -36,7 +37,7 @@
 	//var/list/icon_keys = list()		//keys
 	//var/list/ammo_states = list()	//values
 
-/obj/item/weapon/gun/projectile/New(atom/loc, starts_loaded = 1)
+/obj/item/weapon/gun/projectile/New()
 	..()
 	if (starts_loaded)
 		if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))

@@ -201,6 +201,7 @@
 	icon_state = "zipgun[buildstate]"
 
 /obj/item/weapon/zipgunframe/examine(mob/user)
+	. = ..()
 	..(user)
 	switch(buildstate)
 		if(1) to_chat(user, "It has a barrel loosely fitted to the stock.")
@@ -233,7 +234,8 @@
 	else if(isscrewdriver(thing) && buildstate == 3)
 		user.visible_message("<span class='notice'>\The [user] secures the trigger assembly with \the [thing].</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		var/obj/item/weapon/gun/projectile/pirate/zipgun = new(loc, starts_loaded = 0)
+		var/obj/item/weapon/gun/projectile/pirate/zipgun
+		zipgun = new/obj/item/weapon/gun/projectile/pirate { starts_loaded = 0 } (loc)
 		if(ismob(loc))
 			var/mob/M = loc
 			M.drop_from_inventory(src)
