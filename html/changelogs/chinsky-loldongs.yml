@@ -1,7 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - tweak: "Mecha sleepers do not KO victimes anymore."
-  - tweak: "You can leave mecha sleepers like normal ones, by walking out."
