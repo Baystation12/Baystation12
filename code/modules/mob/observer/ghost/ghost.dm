@@ -283,104 +283,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_to_turf(T)
 	else
 		to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
-/mob/observer/ghost/verb/follow(input in GetTargetsToFollow())
+/mob/observer/ghost/verb/follow(input in get_follow_targets())
 	set category = "Ghost"
 	set name = "Follow"
 	set desc = "Follow and haunt a mob."
 
-	var/target = GetTargetsToFollow()[input]
+	var/target = get_follow_targets()[input]
 	if(!target) return
 	ManualFollow(target)
-
-/mob/observer/ghost/proc/GetTargetsToFollow()
-	var/list/result = list()
-	
-	var/list/sortmob = sortAtom(mob_list)
-	var/list/additions = list()
-	var/list/names = list()
-	var/list/mobs = list()
-	
-	for(var/mob/observer/eye/M in sortmob)
-		mobs += M
-		additions[M] = " \[Eye\]"
-	for(var/mob/living/silicon/ai/M in sortmob)
-		mobs += M
-		additions[M] = " \[AI\]"
-	for(var/mob/living/silicon/pai/M in sortmob)
-		mobs += M
-		additions[M] = " \[pAI\]"
-	for(var/mob/living/silicon/robot/M in sortmob)
-		mobs += M
-		additions[M] = " \[Synthetic\]"
-	for(var/mob/living/carbon/human/M in sortmob)
-		mobs += M
-		additions[M] = " \[[M.species.name]\]"
-	for(var/mob/living/carbon/brain/M in sortmob)
-		mobs += M
-		additions[M] = " \[Brain\]"
-	for(var/mob/living/carbon/alien/M in sortmob)
-		mobs += M
-		additions[M] = " \[Alien\]"
-	for(var/mob/observer/ghost/M in sortmob)
-		mobs += M
-		additions[M] = " \[Ghost\]"
-	for(var/mob/living/carbon/slime/M in sortmob)
-		mobs += M
-		additions[M] = " \[Slime\]"
-	for(var/mob/living/simple_animal/M in sortmob)
-		mobs += M
-		additions[M] = " \[Animal\]"
-
-	for(var/mob/M in mobs)
-		if(M.name in names)
-			additions[M] += " \[[++names[M.name]]\]"
-		else
-			names[M.name] = 1
-		if (M.real_name && M.real_name != M.name)
-			additions[M] += " \[[M.real_name]\]"
-		additions[M] += ""
-		if (M.stat == DEAD)
-			if(isobserver(M))
-				additions[M] += " \[Observer\]"
-			else
-				additions[M] += " \[Dead\]"
-		result["[M][additions[M]] \[[M.x], [M.y], [M.z]\]"] = M
-
-	var/tmp
-
-	tmp = 1
-	for(var/obj/mecha/S in mechas_list)
-		result["[S] \[[S.occupant ? "[S.occupant]" : "Empty"]\] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/effect/blob/core/S in GhostFollowObjects)
-		if(S.type != /obj/effect/blob/core) // We don't care about secondary cores
-			continue
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/machinery/power/supermatter/S in GhostFollowObjects)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/item/weapon/disk/nuclear/S in nuke_disks)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/machinery/nuclearbomb/S in GhostFollowObjects)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/item/weapon/card/id/captains_spare/S in GhostFollowObjects)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/item/organ/internal/stack/S in GhostFollowObjects)
-		if(S.owner) // We don't care about implanted laces
-			continue
-		result["[S] \[[S.backup ? S.backup.name : "Empty"]\] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-	
-	return result
 
 /mob/observer/ghost/proc/ghost_to_turf(var/turf/target_turf)
 	if(check_is_holy_turf(target_turf))
