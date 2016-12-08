@@ -6,7 +6,7 @@
 "f" = (/turf/simulated/open,/area/maintenance/fsmaint2)
 "g" = (/obj/machinery/light_switch{pixel_x = 25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "h" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
-"i" = (/obj/structure/ladder/updown,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"i" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/ladder,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "j" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "k" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "l" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
@@ -55,3 +55,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

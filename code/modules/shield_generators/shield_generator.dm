@@ -267,13 +267,18 @@
 	if(href_list["emergency_shutdown"])
 		if(!running)
 			return
+
+		var/choice = input(usr, "Are you sure that you want to initiate an emergency shield shutdown? This will instantly drop the shield, and may result in unstable release of stored electromagnetic energy. Proceed at your own risk.") in list("Yes", "No")
+		if((choice != "Yes") || !running)
+			return
+
 		var/temp_integrity = field_integrity()
 		// If the shield would take 5 minutes to disperse and shut down using regular methods, it will take x2 (10 minutes) of this time to cool down after emergency shutdown
 		offline_for = round(current_energy / (SHIELD_SHUTDOWN_DISPERSION_RATE / 2))
 		shutdown_field()
-		if(prob(temp_integrity - 50))
+		if(prob(temp_integrity - 50) * 1.75)
 			spawn()
-				empulse(src, 4, 8)
+				empulse(src, 7, 14)
 		. = 1
 
 	if(mode_changes_locked)
@@ -360,7 +365,7 @@
 	for(var/obj/effect/shield/S in field_segments)
 		S.flags_updated()
 
-	if((flag & MODEFLAG_HULL) && running)
+	if((flag & (MODEFLAG_HULL|MODEFLAG_MULTIZ)) && running)
 		regenerate_field()
 
 	if(flag & MODEFLAG_MODULATE)
@@ -390,45 +395,73 @@
 /obj/machinery/power/shield_generator/proc/fieldtype_square()
 	set background = 1
 	var/list/out = list()
-	var/turf/gen_turf = get_turf(src)
-	var/turf/T
-	if (!gen_turf)
-		return
+	var/list/base_turfs = get_base_turfs()
 
-	for (var/x_offset = -field_radius; x_offset <= field_radius; x_offset++)
-		T = locate(gen_turf.x + x_offset, gen_turf.y - field_radius, gen_turf.z)
-		if(T)
-			out += T
-		T = locate(gen_turf.x + x_offset, gen_turf.y + field_radius, gen_turf.z)
-		if(T)
-			out += T
+	for(var/turf/gen_turf in base_turfs)
+		var/turf/T
+		for (var/x_offset = -field_radius; x_offset <= field_radius; x_offset++)
+			T = locate(gen_turf.x + x_offset, gen_turf.y - field_radius, gen_turf.z)
+			if(T)
+				out += T
+			T = locate(gen_turf.x + x_offset, gen_turf.y + field_radius, gen_turf.z)
+			if(T)
+				out += T
 
-	for (var/y_offset = -field_radius+1; y_offset < field_radius; y_offset++)
-		T = locate(gen_turf.x - field_radius, gen_turf.y + y_offset, gen_turf.z)
-		if(T)
-			out += T
-		T = locate(gen_turf.x + field_radius, gen_turf.y + y_offset, gen_turf.z)
-		if(T)
-			out += T
+		for (var/y_offset = -field_radius+1; y_offset < field_radius; y_offset++)
+			T = locate(gen_turf.x - field_radius, gen_turf.y + y_offset, gen_turf.z)
+			if(T)
+				out += T
+			T = locate(gen_turf.x + field_radius, gen_turf.y + y_offset, gen_turf.z)
+			if(T)
+				out += T
 	return out
 
 
 /obj/machinery/power/shield_generator/proc/fieldtype_hull()
 	set background = 1
 	var/list/out = list()
-	var/turf/gen_turf = get_turf(src)
+	var/list/base_turfs = get_base_turfs()
 
-	if (!gen_turf)
+
+
+
+	for(var/turf/gen_turf in base_turfs)
+		for(var/turf/T in trange(field_radius, gen_turf))
+			// Don't expand to space or on shuttle areas.
+			if(istype(T, /turf/space) || istype(get_area(T), /area/space) || istype(get_area(T), /area/shuttle/))
+				continue
+
+			// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
+			for(var/turf/TN in orange(1, T))
+				if(istype(TN, /turf/space) || (istype(get_area(TN), /area/shuttle/) && !istype(get_area(TN), /area/shuttle/turbolift/)))
+					out |= TN
+					continue
+	return out
+
+// Returns a list of turfs from which a field will propagate. If multi-Z mode is enabled, this will return a "column" of turfs above and below the generator.
+/obj/machinery/power/shield_generator/proc/get_base_turfs()
+	var/list/turfs = list()
+	var/turf/T = get_turf(src)
+
+	if(!istype(T))
 		return
 
-	for(var/turf/T in trange(field_radius, gen_turf))
-		// Don't expand to space or on shuttle areas.
-		if(istype(T, /turf/space) || istype(get_area(T), /area/space) || istype(get_area(T), /area/shuttle/))
-			continue
+	turfs.Add(T)
 
-		// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
-		for(var/turf/TN in orange(1, T))
-			if(istype(TN, /turf/space) || istype(get_area(TN), /area/shuttle/))
-				out |= TN
-				continue
-	return out
+	// Multi-Z mode is disabled
+	if(!check_flag(MODEFLAG_MULTIZ))
+		return turfs
+
+	while(HasAbove(T.z))
+		T = GetAbove(T)
+		if(istype(T))
+			turfs.Add(T)
+
+	T = get_turf(src)
+
+	while(HasBelow(T.z))
+		T = GetBelow(T)
+		if(istype(T))
+			turfs.Add(T)
+
+	return turfs

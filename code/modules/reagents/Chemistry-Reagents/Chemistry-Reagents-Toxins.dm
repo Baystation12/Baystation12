@@ -320,11 +320,11 @@
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-		
-	var/threshold = 1	
+
+	var/threshold = 1
 	if(alien == IS_SKRELL)
 		threshold = 1.2
-		
+
 	if(dose < 1 * threshold)
 		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
@@ -395,11 +395,11 @@
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-		
+
 	var/drug_strength = 15
 	if(alien == IS_SKRELL)
 		drug_strength = drug_strength * 0.8
-		
+
 	M.druggy = max(M.druggy, drug_strength)
 	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
@@ -493,11 +493,11 @@
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-		
+
 	var/threshold = 1
 	if(alien == IS_SKRELL)
 		threshold = 1.2
-		
+
 	M.druggy = max(M.druggy, 30)
 
 	if(dose < 1 * threshold)
@@ -585,3 +585,20 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#535E66"
+
+/datum/reagent/toxin/hair_remover
+	name = "Hair Remover"
+	id = "hair_remover"
+	description = "An extremely effective chemical depilator. Do not ingest."
+	taste_description = "acid"
+	reagent_state = LIQUID
+	color = "#D9FFB3"
+	strength = 1
+	overdose = REAGENTS_OVERDOSE
+
+/datum/reagent/toxin/hair_remover/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
+		return
+	M.species.set_default_hair(M)
+	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
+	remove_self(volume)
