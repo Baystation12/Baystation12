@@ -2734,7 +2734,7 @@
 "baD" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled,/area/hallway/primary/central_one)
 "baE" = (/obj/structure/sign/warning/secure_area{pixel_x = -32},/obj/machinery/door/blast/regular/open{id = "bridge blast"; name = "Bridge Blast Doors"},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/bridge)
 "baF" = (/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled,/area/hallway/primary/central_one)
-"baG" = (/obj/structure/sign/warning/high_voltage,/obj/effect/floor_decal/corner/blue/three_quarters{dir = 8},/turf/simulated/floor/tiled,/area/hallway/primary/central_two)
+"baG" = (/obj/structure/sign/warning/high_voltage{pixel_y = 32},/obj/effect/floor_decal/corner/blue/three_quarters{dir = 8},/turf/simulated/floor/tiled,/area/hallway/primary/central_two)
 "baH" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/floor_decal/corner/blue{dir = 6},/turf/simulated/floor/tiled,/area/hallway/primary/central_one)
 "baI" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/engineering/locker_room)
 "baJ" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/light_switch{pixel_x = -25; pixel_y = -25},/turf/simulated/floor/tiled,/area/bridge)
