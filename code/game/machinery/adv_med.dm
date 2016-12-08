@@ -83,20 +83,13 @@
 		to_chat(user, "<span class='warning'>Subject cannot have abiotic items on.</span>")
 		return
 	var/mob/M = G.affecting
-	if (M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
-	M.loc = src
+	M.forceMove(src)
 	src.occupant = M
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	for(var/obj/O in src)
-		O.loc = src.loc
-		//Foreach goto(154)
+	O.forceMove(loc)
 	src.add_fingerprint(user)
-	//G = null
 	qdel(G)
-	return
 
 //Like grap-put, but for mouse-drop.
 /obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
@@ -115,17 +108,12 @@
 	if(!do_after(user, 30, src))
 		return
 	var/mob/M = target
-	if (M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
-	M.loc = src
+	M.forceMove(src)
 	src.occupant = M
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	for(var/obj/O in src)
-		O.loc = src.loc
+	O.forceMove(loc)
 	src.add_fingerprint(user)
-	return
 
 /obj/machinery/bodyscanner/ex_act(severity)
 	switch(severity)
