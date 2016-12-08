@@ -139,7 +139,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 					dat += "<a href='byond://?src=\ref[src];spell_choice=[spell.name]'>Purchase</a> ([spell.cost])<br><br>"
 				else
 					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
+			show_browser(user,dat, "window=radio")
 			onclose(user, "radio")
 		if(1) //Equipment
 			var/dat = ""
@@ -156,7 +156,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 					dat += "<a href='byond://?src=\ref[src];item_choice=[E.name]'>Purchase</a> ([E.cost])<br><br>"
 				else
 					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
+			show_browser(user,dat, "window=radio")
 			onclose(user, "radio")
 		if(2) //Consumables
 			var/dat = ""
@@ -173,7 +173,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 					dat += "<a href='byond://?src=\ref[src];item_choice=[C.name]'>Purchase</a> ([C.cost])<br><br>"
 				else
 					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
+			show_browser(user,dat, "window=radio")
 			onclose(user, "radio")
 		if(3) //Assistance
 			var/dat = ""
@@ -190,7 +190,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 					dat += "<a href='byond://?src=\ref[src];item_choice=[A.name]'>Purchase</a> ([A.cost])<br><br>"
 				else
 					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
+			show_browser(user,dat, "window=radio")
 			onclose(user, "radio")
 
 // Proc: Topic()
