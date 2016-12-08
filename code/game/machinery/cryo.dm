@@ -321,7 +321,7 @@
 	if(!do_after(user, 30, src))
 		return
 	put_mob(target)
-	return
+
 
 /obj/machinery/atmospherics/unary/cryo_cell/verb/move_eject()
 	set name = "Eject occupant"

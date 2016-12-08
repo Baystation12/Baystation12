@@ -100,7 +100,8 @@
 	desc = "A simple grasping tool for holding and manipulating organic and mechanical organs, both internal and external."
 
 	can_hold = list(
-	/obj/item/organ
+	/obj/item/organ,
+	/obj/item/robot_parts
 	)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item

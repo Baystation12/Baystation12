@@ -87,7 +87,8 @@
 	src.occupant = M
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	O.forceMove(loc)
+	for(var/obj/O in src)
+		O.forceMove(loc)
 	src.add_fingerprint(user)
 	qdel(G)
 
@@ -112,7 +113,8 @@
 	src.occupant = M
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
-	O.forceMove(loc)
+	for(var/obj/O in src)
+		O.forceMove(loc)
 	src.add_fingerprint(user)
 
 /obj/machinery/bodyscanner/ex_act(severity)

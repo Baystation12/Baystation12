@@ -161,7 +161,6 @@
 		return
 	put_in(target)
 	src.add_fingerprint(user)
-	return
 
 /obj/machinery/dna_scannernew/proc/put_in(var/mob/M)
 	if(M.client)
