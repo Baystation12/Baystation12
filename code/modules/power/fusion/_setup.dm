@@ -18,7 +18,7 @@
 		return
 
 	if(!(locate(/obj/machinery/power/fusion_core/mapped) in world))
-		usr << "This map is not appropriate for this verb."
+		to_chat(usr, "This map is not appropriate for this verb.")
 		return
 
 	var/response = input(usr, "Are you sure?", "Engine setup") as null|anything in list("No", "Yes")
