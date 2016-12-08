@@ -16,6 +16,7 @@
 /obj/structure/table/reinforced
 	icon_state = "reinf_preview"
 	color = COLOR_OFF_WHITE
+	material = DEFAULT_TABLE_MATERIAL
 	reinforced = DEFAULT_WALL_MATERIAL
 
 /obj/structure/table/steel_reinforced
