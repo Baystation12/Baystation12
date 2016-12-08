@@ -60,16 +60,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	camera = /obj/machinery/camera/network/mining
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/suit/space/rig/industrial
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/shoes/magboots/rig/industrial
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/gloves/rig/industrial
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/weapon/rig/industrial/equipped
 
@@ -104,16 +104,16 @@
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/suit/space/rig/eva
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/shoes/magboots/rig/eva
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/gloves/rig/eva
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/weapon/rig/eva/equipped
 
@@ -186,16 +186,16 @@
 /obj/item/clothing/head/helmet/space/rig/hazmat
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/research
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/suit/space/rig/hazmat
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/shoes/magboots/rig/hazmat
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/gloves/rig/hazmat
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/weapon/rig/hazmat/equipped
 
@@ -229,16 +229,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera = /obj/machinery/camera/network/medbay
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/suit/space/rig/medical
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/shoes/magboots/rig/medical
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/gloves/rig/medical
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/weapon/rig/medical/equipped
 
@@ -274,16 +274,16 @@
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/security
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/suit/space/rig/hazard
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/shoes/magboots/rig/hazard
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/clothing/gloves/rig/hazard
-	species_restricted = list("Human","Skrell")
+	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
 
 /obj/item/weapon/rig/hazard/equipped
 
