@@ -196,7 +196,6 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
 		"Akula" = 'icons/mob/eyes.dmi',
-		"Slime" = 'icons/mob/eyes.dmi',
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		)
 
@@ -238,7 +237,6 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/hands.dmi',
 		"Resomi" = 'icons/mob/species/resomi/gloves.dmi',
 		"Akula" = 'icons/mob/hands.dmi',
-		"Slime" = 'icons/mob/hands.dmi',
 		"Vox" = 'icons/mob/species/vox/gloves.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
@@ -314,7 +312,6 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/head.dmi',
 		"Resomi" = 'icons/mob/species/resomi/head.dmi',
 		"Akula" = 'icons/mob/head.dmi',
-		"Slime" = 'icons/mob/head.dmi',
 		"Vox" = 'icons/mob/species/vox/head.dmi',
 		)
 	blood_overlay_type = "helmetblood"
@@ -434,7 +431,6 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/mask.dmi',
 		"Resomi" = 'icons/mob/species/resomi/masks.dmi',
 		"Akula" = 'icons/mob/species/akula/mask.dmi',
-		"Slime" = 'icons/mob/mask.dmi',
 		"Vox" = 'icons/mob/species/vox/masks.dmi',
 		)
 
@@ -487,7 +483,6 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/feet.dmi',
 		"Resomi" = 'icons/mob/species/resomi/shoes.dmi',
 		"Akula" = 'icons/mob/feet.dmi',
-		"Slime" = 'icons/mob/feet.dmi',
 		"Vox" = 'icons/mob/species/vox/shoes.dmi',
 		)
 
@@ -573,6 +568,7 @@ BLIND     // can't see anything
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
 		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
 		"Vox" = 'icons/mob/species/vox/suit.dmi',
+		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -626,7 +622,6 @@ BLIND     // can't see anything
 		"Skrell" = 'icons/mob/uniform.dmi',
 		"Resomi" = 'icons/mob/species/resomi/uniform.dmi',
 		"Akula" = 'icons/mob/uniform.dmi',
-		"Slime" = 'icons/mob/uniform.dmi',
 		"Vox" = 'icons/mob/species/vox/uniform.dmi',
 		)
 
