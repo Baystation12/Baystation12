@@ -21,6 +21,8 @@ var/global/list/side_effects = list()				//list of all medical sideeffects types
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
+var/global/list/GhostFollowObjects = list() // List of interesting objects for the ghosts to follow
+
 var/global/list/turfs = list()						//list of all turfs
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)

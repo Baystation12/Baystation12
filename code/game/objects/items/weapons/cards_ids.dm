@@ -241,9 +241,15 @@ var/const/NO_EMAG_ACT = -50
 	item_state = "gold_id"
 	registered_name = "Captain"
 	assignment = "Captain"
+
 /obj/item/weapon/card/id/captains_spare/New()
 	access = get_all_station_access()
+	GhostFollowObjects.Add(src)
 	..()
+
+/obj/item/weapon/card/id/captains_spare/Destroy()
+	GhostFollowObjects.Remove(src)
+	return ..()
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"

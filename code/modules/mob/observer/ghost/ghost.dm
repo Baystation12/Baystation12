@@ -344,36 +344,41 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				additions[M] += " \[Observer\]"
 			else
 				additions[M] += " \[Dead\]"
-		result["[M][additions[M]]"] = M
+		result["[M][additions[M]] \[[M.x], [M.y], [M.z]\]"] = M
 
 	var/tmp
+
 	tmp = 1
-	for(var/obj/effect/blob/core/S in world)
+	for(var/obj/mecha/S in mechas_list)
+		result["[S] \[[S.occupant ? "[S.occupant]" : "Empty"]\] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
+
+	tmp = 1
+	for(var/obj/effect/blob/core/S in GhostFollowObjects)
 		if(S.type != /obj/effect/blob/core) // We don't care about secondary cores
 			continue
-		result["[S] ([tmp++])"] = S
+		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
 
 	tmp = 1
-	for(var/obj/machinery/power/supermatter/S in world)
-		result["[S] ([tmp++])"] = S
+	for(var/obj/machinery/power/supermatter/S in GhostFollowObjects)
+		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
 
 	tmp = 1
-	for(var/obj/item/weapon/disk/nuclear/S in world)
-		result["[S] ([tmp++])"] = S
+	for(var/obj/item/weapon/disk/nuclear/S in nuke_disks)
+		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
 
 	tmp = 1
-	for(var/obj/machinery/nuclearbomb/S in world)
-		result["[S] ([tmp++])"] = S
+	for(var/obj/machinery/nuclearbomb/S in GhostFollowObjects)
+		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
 
 	tmp = 1
-	for(var/obj/item/weapon/card/id/captains_spare/S in world)
-		result["[S] ([tmp++])"] = S
+	for(var/obj/item/weapon/card/id/captains_spare/S in GhostFollowObjects)
+		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
 
 	tmp = 1
-	for(var/obj/item/organ/internal/stack/S in world)
+	for(var/obj/item/organ/internal/stack/S in GhostFollowObjects)
 		if(S.owner) // We don't care about implanted laces
 			continue
-		result["[S] \[[S.backup ? S.backup.name : "Empty"]\] ([tmp++])"] = S
+		result["[S] \[[S.backup ? S.backup.name : "Empty"]\] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
 	
 	return result
 
