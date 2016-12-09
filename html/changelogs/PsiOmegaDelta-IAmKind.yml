@@ -1,0 +1,4 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - rscadd: "Resetting a character slot now requires confirmation."
