@@ -32,7 +32,6 @@
 		/area/maintenance/sub/relay_station = 0,
 		/area/maintenance/sub/command = 0,
 		/area/maintenance/substation/command = 0,
-		/area/medical/genetics = NO_APC,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/outpost/abandoned = NO_APC,
