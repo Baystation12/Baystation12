@@ -1,7 +1,7 @@
 // Map object.
 /obj/turbolift_map_holder
 	name = "turbolift map placeholder"
-	icon = 'icons/obj/turbolift_preview.dmi'
+	icon = 'icons/obj/turbolift_preview_3x3.dmi'
 	dir = SOUTH         // Direction of the holder determines the placement of the lift control panel and doors.
 	var/depth = 1       // Number of floors to generate, including the initial floor.
 	var/lift_size_x = 2 // Number of turfs on each axis to generate in addition to the first
@@ -133,7 +133,8 @@
 
 				// Clear out contents.
 				for(var/atom/movable/thing in checking.contents)
-					qdel(thing)
+					if(thing.simulated)
+						qdel(thing)
 
 				if(tx >= ux && tx <= ex && ty >= uy && ty <= ey)
 					floor_turfs += checking
@@ -149,7 +150,8 @@
 						checking.ChangeTurf(floor_type)
 						checking = locate(tx,ty,cz)
 					for(var/atom/movable/thing in checking.contents)
-						qdel(thing)
+						if(thing.simulated)
+							qdel(thing)
 				if(checking.type == floor_type) // Don't build over empty space on lower levels.
 					var/obj/machinery/door/airlock/lift/newdoor = new door_type(checking)
 					if(internal)

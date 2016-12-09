@@ -349,6 +349,9 @@
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
 
+/area/maintenance/substation/atmospherics
+	name = "Atmospherics Substation"
+
 // Maintenance
 
 /area/maintenance/atmos_control
@@ -419,6 +422,97 @@
 	name = "\improper Security Maintenance - Starboard"
 	icon_state = "maint_security_starboard"
 
+// Dank Maintenance
+/area/maintenance/sub
+	turf_initializer = /decl/turf_initializer/maintenance/heavy
+	ambience = list(
+		'sound/ambience/ambiatm1.ogg',
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambigen12.ogg',
+		'sound/ambience/ambimine.ogg',
+		'sound/ambience/ambimo2.ogg',
+		'sound/ambience/ambisin4.ogg',
+		'sound/effects/wind/wind_2_1.ogg',
+		'sound/effects/wind/wind_2_2.ogg',
+		'sound/effects/wind/wind_3_1.ogg',
+	)
+
+/area/maintenance/sub/relay_station
+	name = "\improper Demolition Scaffold - Relay Station"
+	icon_state = "blue2"
+	turf_initializer = null
+
+/area/maintenance/sub/fore
+	name = "\improper Demolition Scaffold - Fore"
+	icon_state = "sub_maint_fore"
+
+/area/maintenance/sub/aft
+	name = "\improper Demolition Scaffold - Aft"
+	icon_state = "sub_maint_aft"
+
+/area/maintenance/sub/port
+	name = "\improper Demolition Scaffold - Port"
+	icon_state = "sub_maint_port"
+
+/area/maintenance/sub/starboard
+	name = "\improper Demolition Scaffold - Starboard"
+	icon_state = "sub_maint_starboard"
+
+/area/maintenance/sub/central
+	name = "\improper Demolition Scaffold - Central"
+	icon_state = "sub_maint_central"
+
+/area/maintenance/sub/command
+	name = "\improper Demolition Scaffold - Command"
+	icon_state = "sub_maint_command"
+	turf_initializer = null
+
+/////////////
+//ELEVATORS//
+/////////////
+/area/shuttle/turbolift/security_station
+	name = "Station - By Security"
+	lift_announce_str = "Arriving at the station level, by the Security department."
+
+/area/shuttle/turbolift/security_maintenance
+	name = "Maintenance - Below Security"
+	lift_announce_str = "Arriving at the maintenance level, below the Security department."
+	base_turf = /turf/simulated/floor/plating
+
+/area/shuttle/turbolift/research_station
+	name = "Station - By Research"
+	lift_announce_str = "Arriving at the station level, by the R&D department."
+
+/area/shuttle/turbolift/research_maintenance
+	name = "Maintenance - Below Research"
+	lift_announce_str = "Arriving at the maintenance level, below the R&D department."
+	base_turf = /turf/simulated/floor/plating
+
+/area/shuttle/turbolift/engineering_station
+	name = "Station - By Engineering"
+	lift_announce_str = "Arriving at the station level, by the Engineering department."
+
+/area/shuttle/turbolift/engineering_maintenance
+	name = "Maintenance - Below Engineering"
+	lift_announce_str = "Arriving at the maintenance level, below the Engineering department."
+	base_turf = /turf/simulated/floor/plating
+
+/area/shuttle/turbolift/cargo_station
+	name = "Station - By Cargo"
+	lift_announce_str = "Arriving at the station level, by the Cargo department."
+
+/area/shuttle/turbolift/cargo_maintenance
+	name = "Maintenance - Below Cargo"
+	lift_announce_str = "Arriving at the maintenance level, below the Cargo department."
+	base_turf = /turf/simulated/floor/plating
 // Hallway
 
 /area/hallway/primary/
@@ -574,6 +668,9 @@
 /area/engineering/workshop
 	name = "\improper Engineering Workshop"
 	icon_state = "engineering_workshop"
+
+/area/engineering/sublevel_access
+	name = "\improper Demolition Scaffold Access"
 
 // Medbay
 

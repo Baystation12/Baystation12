@@ -358,3 +358,10 @@
 /obj/structure/sign/directions/examroom
 	name = "\improper Exam Room"
 	icon_state = "examroom"
+
+// ----- EROS BEGIN - SIGNS
+
+/obj/structure/sign/decommissioning_notice
+	name = "\improper Decommissioning Notice"
+	desc = "The sign reads: \"NOTICE: The Exodus-class space station EROS-1 is slated to be decommissioned to cover costs related to the construction of the planetside colony EROS-2. Reading this notice constitutes consent to take part in the deconstruction effort as per Nanotrasen corporate regulation. DATE POSTED: 2560-12-08\""
+	icon_state = "demonotice"

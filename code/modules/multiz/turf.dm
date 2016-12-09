@@ -37,6 +37,7 @@
 	..()
 	below = GetBelow(src)
 	ASSERT(HasBelow(z))
+	levelupdate()
 	update_icon()
 
 /turf/simulated/open/Entered(var/atom/movable/mover)
@@ -139,7 +140,6 @@
 		I.pixel_y = S.pixel_y
 		overlays += I
 
-// Straight copy from space.
 /turf/simulated/open/attackby(obj/item/C as obj, mob/user as mob)
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
@@ -165,4 +165,14 @@
 			return
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
+
+	//To lay cable.
+	if(istype(C, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/coil = C
+		coil.turf_place(src, user)
+		return
 	return
+
+//Most things use is_plating to test if there is a cover tile on top (like regular floors)
+/turf/simulated/open/is_plating()
+	return 1
