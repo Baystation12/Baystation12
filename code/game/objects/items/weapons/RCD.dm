@@ -1,7 +1,5 @@
 //Contains the rapid construction device.
-#define MODE_CONSTRUCT	 	1
-#define MODE_AIRLOCK		2
-#define MODE_DECONSTRUCT	3
+
 /obj/item/weapon/rcd
 	name = "rapid construction device"
 	desc = "A device used to rapidly build walls and floors."
@@ -20,22 +18,34 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 50000)
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/stored_matter = 0
-	var/working = 0
-	var/mode = 1
-	var/list/modes = list("Floor & Walls","Airlock","Deconstruct")
+	var/max_stored_matter = 30
+
+	var/work_id = 0
+	var/decl/hierarchy/rcd_mode/work_mode
+	var/static/list/work_modes
+
 	var/canRwall = 0
 	var/disabled = 0
+
+/obj/item/weapon/rcd/initialize()
+	..()
+
+	if(!work_modes)
+		var/decl/hierarchy/h = decls_repository.get_decl(/decl/hierarchy/rcd_mode)
+		work_modes = h.children
+	work_mode = work_modes[1]
 
 /obj/item/weapon/rcd/attack()
 	return 0
 
 /obj/item/weapon/rcd/proc/can_use(var/mob/user,var/turf/T)
-	return (user.Adjacent(T) && user.get_active_hand() == src && !user.stat && !user.restrained())
+	return (user.Adjacent(T) && user.get_active_hand() == src && !user.incapacitated())
 
-/obj/item/weapon/rcd/examine()
-	..()
-	if(src.type == /obj/item/weapon/rcd && loc == usr)
-		to_chat(usr, "It currently holds [stored_matter]/30 matter-units.")
+/obj/item/weapon/rcd/examine(var/user)
+	. = ..()
+	if(src.type == /obj/item/weapon/rcd && loc == user)
+		to_chat(user, "The current mode is '[work_mode]'")
+		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
 
 /obj/item/weapon/rcd/New()
 	..()
@@ -51,21 +61,22 @@
 /obj/item/weapon/rcd/attackby(obj/item/weapon/W, mob/user)
 
 	if(istype(W, /obj/item/weapon/rcd_ammo))
-		if((stored_matter + 10) > 30)
+		if((stored_matter + 10) > max_stored_matter)
 			to_chat(user, "<span class='notice'>The RCD can't hold any more matter-units.</span>")
 			return
 		user.drop_from_inventory(W)
 		qdel(W)
 		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/30 matter-units.</span>")
+		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		return
 	..()
 
 /obj/item/weapon/rcd/attack_self(mob/user)
 	//Change the mode
-	if(++mode > 3) mode = 1
-	to_chat(user, "<span class='notice'>Changed mode to '[modes[mode]]'</span>")
+	work_id++
+	work_mode = next_in_list(work_mode, work_modes)
+	to_chat(user, "<span class='notice'>Changed mode to '[work_mode]'</span>")
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if(prob(20)) src.spark_system.start()
 
@@ -75,52 +86,8 @@
 		return 0
 	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
 		return 0
-	switch(mode)
-		if (MODE_CONSTRUCT)
-			if(isturf(A) && istype(A,get_base_turf_by_area(A)))
-				. = do_work(user, A, 1, 0, /turf/simulated/floor/airless)
-			if(istype(A,/turf/simulated/floor))
-				. = do_work(user, A, 3, 20, /turf/simulated/wall)
-		if (MODE_AIRLOCK)
-			if(istype(A,/turf/simulated/floor))
-				. = do_work(user, A, 10, 50, /obj/machinery/door/airlock)
-		if (MODE_DECONSTRUCT)
-			if(istype(A,/obj/machinery/door/airlock))
-				. = do_work(user, A, 10, 50)
-			if(istype(A,/turf/simulated/floor))
-				. = do_work(user, A, 3, 20, get_base_turf_by_area(A))
-			if(istype(A,/turf/simulated/wall))
-				var/turf/simulated/wall/W = A
-				if (canRwall || !W.reinf_material)
-					. = do_work(user, W, 5, 40, /turf/simulated/floor)
-
-/obj/item/weapon/rcd/proc/do_work(user,target,cost,delay,result)
-	if(working)
-		return 0
-	if(!useResource(cost, user))
-		to_chat(user, "Insufficient resources.")
-		return 0
-	playsound(get_turf(user), 'sound/machines/click.ogg', 50, 1)
-	working = 1
-	to_chat(user, "[(mode ==  MODE_DECONSTRUCT ? "Deconstructing [target]" : "Building")]...")
-
-	if(delay &&!(can_use(user,target) && do_after(user, delay, src)))
-		working = 0
-		return 0
-
-	working = 0
-
-	if(isturf(result))
-		var/turf/T = target
-		T.ChangeTurf(result)
-	else if(result)
-		new result(target)
-	else
-		qdel(target)
-
-	playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
-
-	return 1
+	work_id++
+	work_mode.do_work(src, A, user)
 
 /obj/item/weapon/rcd/proc/useResource(var/amount, var/mob/user)
 	if(stored_matter < amount)
@@ -155,7 +122,7 @@
 	return
 
 /obj/item/weapon/rcd/borg/can_use(var/mob/user,var/turf/T)
-	return (user.Adjacent(T) && !user.stat)
+	return (user.Adjacent(T) && !user.incapacitated())
 
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
@@ -172,7 +139,126 @@
 	return
 
 /obj/item/weapon/rcd/mounted/can_use(var/mob/user,var/turf/T)
-	return (user.Adjacent(T) && !user.stat && !user.restrained())
-#undef MODE_CONSTRUCT
-#undef MODE_AIRLOCK
-#undef MODE_DECONSTRUCT
+	return (user.Adjacent(T) && !user.incapacitated())
+
+
+/decl/hierarchy/rcd_mode
+	hierarchy_type = /decl/hierarchy/rcd_mode
+	var/cost
+	var/delay
+	var/handles_type
+	var/work_type
+
+/decl/hierarchy/rcd_mode/proc/do_work(var/obj/item/weapon/rcd/rcd, var/atom/target, var/user)
+	for(var/child in children)
+		var/decl/hierarchy/rcd_mode/rcdm = child
+		if(!rcdm.can_handle_work(rcd, target))
+			continue
+		if(!rcd.useResource(rcdm.cost, user))
+			to_chat(user, "<span class='warning'>Insufficient resources.</span>")
+			return FALSE
+
+		playsound(get_turf(user), 'sound/machines/click.ogg', 50, 1)
+		rcdm.work_message(target, user, rcd)
+
+		if(rcdm.delay)
+			var/work_id = rcd.work_id
+			if(!(do_after(user, rcdm.delay, target) && work_id == rcd.work_id && rcd.can_use(user, target) && rcdm.can_handle_work(rcd, target)))
+				return FALSE
+
+		rcdm.do_handle_work(target)
+		playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
+		return TRUE
+
+	return FALSE
+
+/decl/hierarchy/rcd_mode/proc/can_handle_work(var/obj/item/weapon/rcd/rcd, var/atom/target)
+	return istype(target, handles_type)
+
+/decl/hierarchy/rcd_mode/proc/do_handle_work(var/atom/target)
+	var/result = get_work_result(target)
+	if(isturf(result))
+		var/turf/T = target
+		T.ChangeTurf(result)
+	else if(result)
+		new result(target)
+	else
+		qdel(target)
+
+/decl/hierarchy/rcd_mode/proc/get_work_result(var/atom/target)
+	return work_type
+
+/decl/hierarchy/rcd_mode/proc/work_message(var/atom/target, var/mob/user, var/rcd)
+	var/message
+	if(work_type)
+		var/atom/work = work_type
+		message = "<span class='notice'>You begin constructing \a [initial(work.name)].</span>"
+	else
+		message = "<span class='notice'>You begin construction.</span>"
+	user.visible_message("<span class='notice'>\The [user] uses \a [rcd] to construct something.</span>", message)
+
+/*
+	Airlock construction
+*/
+/decl/hierarchy/rcd_mode/airlock
+	name = "Airlock"
+
+/decl/hierarchy/rcd_mode/airlock/basic
+	cost = 10
+	delay = 5 SECONDS
+	handles_type = /turf/simulated/floor
+	work_type = /obj/machinery/door/airlock
+
+/decl/hierarchy/rcd_mode/airlock/basic/can_handle_work(var/rcd, var/turf/target)
+	return ..() && !target.contains_dense_objects() && !(locate(/obj/machinery/door/airlock) in target)
+
+/*
+	Floor and Wall construction
+*/
+/decl/hierarchy/rcd_mode/floor_and_walls
+	name = "Floor & Walls"
+
+/decl/hierarchy/rcd_mode/floor_and_walls/base_turf
+	cost = 1
+	delay = 2 SECONDS
+	work_type = /turf/simulated/floor/airless
+
+/decl/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(var/rcd, var/turf/target)
+	return istype(target) && (isspace(target) || istype(target, get_base_turf_by_area(target)))
+
+/decl/hierarchy/rcd_mode/floor_and_walls/floor_turf
+	cost = 3
+	delay = 2 SECONDS
+	handles_type = /turf/simulated/floor
+	work_type = /turf/simulated/wall
+
+/*
+	Deconstruction
+*/
+/decl/hierarchy/rcd_mode/deconstruction
+	name = "Deconstruction"
+
+/decl/hierarchy/rcd_mode/deconstruction/work_message(var/atom/target, var/mob/user, var/rcd)
+	user.visible_message("<span class='warning'>\The [user] is using \a [rcd] to deconstruct \the [target]!</span>", "<span class='warning'>You are deconstructing \the [target]!</span>")
+
+/decl/hierarchy/rcd_mode/deconstruction/airlock
+	cost = 10
+	delay = 5 SECONDS
+	handles_type = /obj/machinery/door/airlock
+
+/decl/hierarchy/rcd_mode/deconstruction/floor
+	cost = 3
+	delay = 2 SECONDS
+	handles_type = /turf/simulated/floor
+
+/decl/hierarchy/rcd_mode/deconstruction/floor/get_work_result(var/target)
+	return get_base_turf_by_area(target)
+
+/decl/hierarchy/rcd_mode/deconstruction/wall
+	cost = 3
+	delay = 2 SECONDS
+	handles_type = /turf/simulated/wall
+	work_type = /turf/simulated/floor
+
+/decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/weapon/rcd/rcd, var/turf/simulated/wall/target)
+	return ..() && (rcd.canRwall || !target.reinf_material)
