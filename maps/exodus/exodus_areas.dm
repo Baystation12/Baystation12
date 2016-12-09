@@ -446,32 +446,32 @@
 	)
 
 /area/maintenance/sub/relay_station
-	name = "\improper Sublevel Maintenance - Relay Station"
+	name = "\improper Demolition Scaffold - Relay Station"
 	icon_state = "blue2"
 	turf_initializer = null
 
 /area/maintenance/sub/fore
-	name = "\improper Sublevel Maintenance - Fore"
+	name = "\improper Demolition Scaffold - Fore"
 	icon_state = "sub_maint_fore"
 
 /area/maintenance/sub/aft
-	name = "\improper Sublevel Maintenance - Aft"
+	name = "\improper Demolition Scaffold - Aft"
 	icon_state = "sub_maint_aft"
 
 /area/maintenance/sub/port
-	name = "\improper Sublevel Maintenance - Port"
+	name = "\improper Demolition Scaffold - Port"
 	icon_state = "sub_maint_port"
 
 /area/maintenance/sub/starboard
-	name = "\improper Sublevel Maintenance - Starboard"
+	name = "\improper Demolition Scaffold - Starboard"
 	icon_state = "sub_maint_starboard"
 
 /area/maintenance/sub/central
-	name = "\improper Sublevel Maintenance - Central"
+	name = "\improper Demolition Scaffold - Central"
 	icon_state = "sub_maint_central"
 
 /area/maintenance/sub/command
-	name = "\improper Sublevel Maintenance - Command"
+	name = "\improper Demolition Scaffold - Command"
 	icon_state = "sub_maint_command"
 	turf_initializer = null
 
@@ -670,7 +670,7 @@
 	icon_state = "engineering_workshop"
 
 /area/engineering/sublevel_access
-	name = "\improper Engineering Sublevel Access"
+	name = "\improper Demolition Scaffold Access"
 
 // Medbay
 
