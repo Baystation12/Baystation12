@@ -204,7 +204,7 @@
 	if(isghost(user) || user.stat == DEAD) // ghosts can see anything
 		distance = 1
 	else
-		get_dist(user,src)
+		distance = get_dist(user,src)
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be asleep.</span>\n"
 		if((stat == DEAD || src.losebreath) && distance <= 3)
