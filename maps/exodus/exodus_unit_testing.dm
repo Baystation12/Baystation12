@@ -61,4 +61,5 @@
 			/area/constructionsite/maintenance,
 			/area/solar/constructionsite,
 			/area/maintenance/exterior,
-			/area/maintenance/incinerator)
+			/area/maintenance/incinerator,
+			/area/security/armoury)
