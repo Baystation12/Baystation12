@@ -17,7 +17,7 @@
 		/area/maintenance/auxsolarstarboard = NO_SCRUBBER,
 		/area/maintenance/dormitory = NO_SCRUBBER,
 		/area/maintenance/engi_shuttle = NO_SCRUBBER,
-		/area/maintenance/evahallway = NO_SCRUBBER,
+-		/area/maintenance/security_port = NO_SCRUBBER,
 		/area/maintenance/medbay = NO_SCRUBBER,
 		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/foresolar = NO_SCRUBBER,
@@ -35,7 +35,7 @@
 		/area/medical/genetics = NO_APC,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/outpost/abandoned = NO_SCRUBBER|NO_VENT|NO_APC,
+-		/area/outpost/abandoned = NO_APC,
 		/area/outpost/mining_main/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/rnd/test_area = NO_SCRUBBER|NO_VENT,
@@ -46,6 +46,8 @@
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/storage/emergency = NO_SCRUBBER|NO_VENT,
 		/area/storage/emergency2 = NO_SCRUBBER|NO_VENT,
+		/area/storage/emergency_secondary_1 = NO_SCRUBBER|NO_VENT,
+		/area/storage/emergency_secondary_2 = NO_SCRUBBER|NO_VENT,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC
 	)
@@ -59,7 +61,7 @@
 			/area/maintenance/incinerator)
 
 	area_coherency_test_subarea_count = list(
-			/area/engineering/atmos = 6,
+			/area/engineering/atmos = 4,
 			/area/constructionsite = 7,
 			/area/constructionsite/maintenance = 14,
 			/area/solar/constructionsite = 3,
