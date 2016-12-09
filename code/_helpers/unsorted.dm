@@ -815,7 +815,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 						newmobs += DuplicateObject(M , 1)
 
 					for(var/mob/M in newmobs)
-						M.forceMove(X
+						M.forceMove(X)
 
 					copiedobjs += newobjs
 					copiedobjs += newmobs
