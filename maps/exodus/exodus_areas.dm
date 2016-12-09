@@ -1090,7 +1090,7 @@ area/rnd/test_area
 	icon_state = "maint_arrivals_south"
 
 /area/storage/warehouse
-	name = "\improper Abandoned Warehouse"
+	name = "\improper Abandoned Warehouse (Demo. Training Room)"
 	icon_state = "abandonedstorage"
 
 /area/storage/emergency_secondary_1
