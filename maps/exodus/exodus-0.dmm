@@ -446,8 +446,8 @@
 "iD" = (/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/visible/red{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/door/airlock/glass_atmos{name = "Atmospherics"; req_access = list(24)},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "iE" = (/obj/machinery/atmospherics/pipe/simple/visible/red{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
 "iF" = (/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/zpipe/up/supply{dir = 1},/obj/machinery/atmospherics/pipe/zpipe/up/cyan{dir = 1},/obj/machinery/atmospherics/pipe/simple/visible/red{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"iG" = (/obj/machinery/atmospherics/pipe/zpipe/up/red{dir = 8},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"iH" = (/obj/structure/disposalpipe/up{dir = 8},/obj/machinery/atmospherics/pipe/zpipe/up{dir = 4},/obj/structure/cable{d1 = 12; d2 = 0; icon_state = "12-0"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"iG" = (/obj/machinery/atmospherics/pipe/zpipe/up/red{dir = 8},/obj/structure/disposalpipe/segment{dir = 4},/obj/structure/cable{d1 = 12; d2 = 0; icon_state = "12-0"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"iH" = (/obj/structure/disposalpipe/up{dir = 8},/obj/machinery/atmospherics/pipe/zpipe/up{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
 "iI" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHWEST)"; icon_state = "intact"; dir = 10},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
 "iJ" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
 "iK" = (/obj/machinery/space_heater,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
@@ -729,22 +729,22 @@
 "oa" = (/obj/machinery/camera/network/engineering{c_tag = "Atmospherics Tank - Gas Mixing"; dir = 1},/turf/simulated/floor/reinforced/airless,/area/engineering/atmos)
 "ob" = (/obj/machinery/alarm{dir = 4; pixel_x = -22},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
 "oc" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/ladder/up,/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"os" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"or" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"oq" = (/obj/machinery/atmospherics/pipe/manifold/hidden,/obj/machinery/meter,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"op" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{frequency = 1379; id_tag = "droneship_airlock"},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"oo" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{id_tag = "droneship_airlock"},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"on" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 4; icon_state = "map"; tag = "icon-manifold-f (EAST)"},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"om" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"ol" = (/obj/machinery/door/airlock/external/bolted,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"ok" = (/obj/machinery/door/airlock/maintenance{name = "Droneship Airlock Maintenance"},/obj/machinery/atmospherics/binary/passive_gate/on,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"oj" = (/obj/machinery/atmospherics/binary/passive_gate/on,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"oi" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"oh" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"og" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"of" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
-"oe" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/simulated/floor/plating,/area/engineering/atmos)
 "od" = (/turf/simulated/floor/plating,/area/engineering/atmos)
+"oe" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/turf/simulated/floor/plating,/area/engineering/atmos)
+"of" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"og" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"oh" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"oi" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"oj" = (/obj/machinery/atmospherics/binary/passive_gate/on,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"ok" = (/obj/machinery/door/airlock/maintenance{name = "Droneship Airlock Maintenance"},/obj/machinery/atmospherics/binary/passive_gate/on,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"ol" = (/obj/machinery/door/airlock/external/bolted,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"om" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"on" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 4; icon_state = "map"; tag = "icon-manifold-f (EAST)"},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"oo" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{id_tag = "droneship_airlock"},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"op" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{frequency = 1379; id_tag = "droneship_airlock"},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"oq" = (/obj/machinery/atmospherics/pipe/manifold/hidden,/obj/machinery/meter,/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"or" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
+"os" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/maintenance/sub/aft)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -1003,3 +1003,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
