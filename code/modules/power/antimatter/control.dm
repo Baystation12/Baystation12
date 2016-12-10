@@ -68,7 +68,7 @@
 
 /obj/machinery/power/am_control_unit/proc/produce_power()
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
-	if(core_power <= 0) return 0//Something is wrong
+	if(reported_num_cores <= 0) return 0//Something is wrong
 	var/core_damage = 0
 	var/fuel = fueljar.usefuel(fuel_injection)
 	var/reactor_cores = reported_num_cores
