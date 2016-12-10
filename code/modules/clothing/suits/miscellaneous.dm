@@ -397,6 +397,17 @@
 	icon_open = "black_hoodie_open"
 	icon_closed = "black_hoodie"
 
+//This isn't in /hoodie/ so it won't be in the hoodies list on the loadout menu; otherwise, the color selection will not work.
+/obj/item/clothing/suit/storage/toggle/rgb_hoodie
+	name = "hoodie"
+	desc = "A warm sweatshirt."
+	icon_state = "rgb_hoodie"
+	item_state = "rgb_hoodie"
+	icon_open = "rgb_hoodie_open"
+	icon_closed = "rgb_hoodie"
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+
 /obj/item/clothing/suit/storage/mbill
 	name = "shipping jacket"
 	desc = "A green jacket bearing the logo of Major Bill's Shipping."
