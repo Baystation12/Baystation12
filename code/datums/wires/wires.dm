@@ -208,6 +208,11 @@ var/const/POWER = 8
 	else
 		CRASH("[colour] is not a key in wires.")
 
+
+/datum/wires/proc/RandomPulse()
+	var/index = rand(1, wires.len)
+	PulseIndex(index)
+
 //
 // Is Index/Colour Cut procs
 //
@@ -257,7 +262,6 @@ var/const/POWER = 8
 		if(S == signallers[colour])
 			PulseColour(colour)
 			break
-
 
 //
 // Cut Wire Colour/Index procs
