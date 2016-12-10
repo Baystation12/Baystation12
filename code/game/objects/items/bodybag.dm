@@ -59,9 +59,17 @@
 	//..() //Doesn't need to run the parent. Since when can fucking bodybags be welded shut? -Agouri
 		return
 	else if(istype(W, /obj/item/weapon/wirecutters))
-		to_chat(user, "You cut the tag off the bodybag")
 		src.name = "body bag"
 		src.overlays.Cut()
+		to_chat(user, "You cut the tag off \the [src].")
+		return
+	else if(istype(W, /obj/item/device/healthanalyzer/) && !opened)
+		if(contains_body)
+			var/obj/item/device/healthanalyzer/HA = W
+			for(var/mob/living/L in contents)
+				HA.scan_mob(L, user)
+		else
+			to_chat(user, "\The [W] reports that \the [src] is empty.")
 		return
 
 /obj/structure/closet/body_bag/store_mobs(var/stored_units)
@@ -163,14 +171,3 @@
 		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		for(var/mob/living/L in contents)
 			L.examine(user)
-
-/obj/structure/closet/body_bag/cryobag/attackby(obj/item/W, mob/user)
-	if(opened)
-		..()
-	else //Allows the bag to respond to a health analyzer by analyzing the mob inside without needing to open it.
-		if(istype(W,/obj/item/device/healthanalyzer))
-			var/obj/item/device/healthanalyzer/analyzer = W
-			for(var/mob/living/L in contents)
-				analyzer.attack(L,user)
-		else
-			..()
