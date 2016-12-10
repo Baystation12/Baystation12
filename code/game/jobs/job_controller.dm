@@ -45,7 +45,10 @@ var/global/datum/controller/occupations/job_master
 				civilian_positions |= job.title
 			if(job.department_flag & MSC)
 				nonhuman_positions |= job.title
-
+			if(job.department_flag & SRV)
+				service_positions |= job.title
+			if(job.department_flag & SUP)
+				supply_positions |= job.title
 
 		return 1
 

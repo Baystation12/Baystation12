@@ -23,7 +23,7 @@
 /datum/mil_branch/expeditionary_corps
 	name = "Expeditionary Corps"
 	name_short = "SCGEC"
-	
+
 	rank_types = list(
 		/datum/mil_rank/fleet/e1,
 		/datum/mil_rank/fleet/e2,
@@ -55,7 +55,7 @@
 		/datum/mil_rank/fleet/o10,
 		/datum/mil_rank/fleet/o10_alt
 	)
-	
+
 	spawn_rank_types = list(
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
@@ -75,7 +75,7 @@
 /datum/mil_branch/fleet
 	name = "Fleet"
 	name_short = "SCGF"
-	
+
 	rank_types = list(
 		/datum/mil_rank/fleet/e1,
 		/datum/mil_rank/fleet/e2,
@@ -107,7 +107,7 @@
 		/datum/mil_rank/fleet/o10,
 		/datum/mil_rank/fleet/o10_alt
 	)
-	
+
 	spawn_rank_types = list(
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
@@ -123,11 +123,11 @@
 		/datum/mil_rank/fleet/o5,
 		/datum/mil_rank/fleet/o6
 	)
-	
+
 /datum/mil_branch/marine_corps
 	name = "Marine Corps"
 	name_short = "SCGMC"
-	
+
 	rank_types = list(
 		/datum/mil_rank/marine/e1,
 		/datum/mil_rank/marine/e2,
@@ -157,7 +157,7 @@
 		/datum/mil_rank/marine/o9,
 		/datum/mil_rank/marine/o10
 	)
-	
+
 	spawn_rank_types = list(
 		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/marine/e3,
@@ -177,14 +177,14 @@
 /datum/mil_branch/civilian
 	name = "Civilian"
 	name_short = "civ"
-	
+
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/synthetic
 	)
-	
+
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
@@ -194,7 +194,7 @@
 
 
 /*
- *  Fleet 
+ *  Fleet
  *  =====
  */
 
@@ -309,12 +309,12 @@
 /datum/mil_rank/fleet/o10
 	name = "Admiral"
 	name_short = "ADM"
-	
+
 /datum/mil_rank/fleet/o10_alt
 	name = "Fleet Admiral"
 	name_short = "FADM"
-	
-	
+
+
 /*
  *  Marines
  *  =======
@@ -349,20 +349,20 @@
 	name_short = "GySgt"
 
 /datum/mil_rank/marine/e8
-	name = "Master Sergeant"
-	name_short = "MSgt"
-
-/datum/mil_rank/marine/e8_alt
 	name = "First Sergeant"
 	name_short = "1st Sgt"
 
-/datum/mil_rank/marine/e9
-	name = "Master Gunnery Sergeant"
-	name_short = "MGySgt"
+/datum/mil_rank/marine/e8_alt
+	name = "Master Sergeant"
+	name_short = "MSgt"
 
-/datum/mil_rank/marine/e9_alt1
+/datum/mil_rank/marine/e9
 	name = "Sergeant Major"
 	name_short = "SgtMaj"
+
+/datum/mil_rank/marine/e9_alt1
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySgt"
 
 /datum/mil_rank/marine/e9_alt2
 	name = "Sergeant Major of the Marine Corps"
@@ -427,24 +427,24 @@
 /datum/mil_rank/marine/o10
 	name = "General"
 	name_short = "Gen"
-	
-	
+
+
 /*
  *  Civilians
  *  =========
  */
- 
+
 /datum/mil_rank/civ/civ
 	name = "Civilian"
 	name_short = null
-	
+
 /datum/mil_rank/civ/nt
-	name = "NanoTrasen employee"
+	name = "NanoTrasen Employee"
 	name_short = null
-	
+
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
-	name_short = null		
+	name_short = null
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
