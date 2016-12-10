@@ -19,7 +19,7 @@
 	var/active = 0//On or not
 	var/fuel_injection = 2//How much fuel to inject
 	var/shield_icon_delay = 0//delays resetting for a short time
-	var/reported_core_efficiency = 0
+	var/reported_num_cores = 0
 
 	var/power_cycle = 0
 	var/power_cycle_delay = 4//How many ticks till produce_power is called
@@ -68,17 +68,24 @@
 
 /obj/machinery/power/am_control_unit/proc/produce_power()
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
-	var/core_power = reported_core_efficiency//Effectively how much fuel we can safely deal with
 	if(core_power <= 0) return 0//Something is wrong
 	var/core_damage = 0
 	var/fuel = fueljar.usefuel(fuel_injection)
+	var/reactor_cores = reported_num_cores
 
-	stored_power = (fuel/core_power)*fuel*20000
+	// For these values, we use the formula below
+	// B=16       (A * ----------- + k) * efficiency
+	// h=16       (    B+|cores-h|    )
+	// k=2500000
+	//Old calc: stored_power = (fuel/reactor_cores)*fuel*20000
+	//                                    --Alice
+
+
 	//Now check if the cores could deal with it safely, this is done after so you can overload for more power if needed, still a bad idea
-	if(fuel > (2*core_power))//More fuel has been put in than the current cores can deal with
+	if(fuel > (2*reactor_cores))//More fuel has been put in than the current cores can deal with
 		if(prob(50))core_damage = 1//Small chance of damage
-		if((fuel-core_power) > 5)	core_damage = 5//Now its really starting to overload the cores
-		if((fuel-core_power) > 10)	core_damage = 20//Welp now you did it, they wont stand much of this
+		if((fuel-reactor_cores) > 5)	core_damage = 5//Now its really starting to overload the cores
+		if((fuel-reactor_cores) > 10)	core_damage = 20//Welp now you did it, they wont stand much of this
 		if(core_damage == 0) return
 		for(var/obj/machinery/am_shielding/AMS in linked_cores)
 			AMS.stability -= core_damage
@@ -263,7 +270,7 @@
 	dat += "Instability: [stability]%<BR>"
 	dat += "Reactor parts: [linked_shielding.len]<BR>"//TODO: perhaps add some sort of stability check
 	dat += "Cores: [linked_cores.len]<BR><BR>"
-	dat += "-Current Efficiency: [reported_core_efficiency]<BR>"
+	dat += "-Current Efficiency: [reported_num_cores]<BR>"
 	dat += "-Average Stability: [stored_core_stability] <A href='?src=\ref[src];refreshstability=1'>(update)</A><BR>"
 	if(stored_power > 1000000)
 		dat += "Last Produced: [megaWatts] mW<BR>"
