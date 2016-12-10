@@ -17,7 +17,7 @@
 	var/can_plate = 1
 
 	var/manipulating = 0
-	var/material/material = DEFAULT_TABLE_MATERIAL
+	var/material/material = null
 	var/material/reinforced = null
 
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.

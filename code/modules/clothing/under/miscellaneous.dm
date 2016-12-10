@@ -435,10 +435,17 @@
 
 /obj/item/clothing/under/blackjumpskirt
 	name = "black jumpskirt"
-	desc = "A black jumpskirt, Sol size 0."
+	desc = "A black jumpskirt, with a pink undershirt."
 	icon_state = "blackjumpskirt"
 	item_state = "bl_suit"
 	worn_state = "blackjumpskirt"
+
+/obj/item/clothing/under/shortjumpskirt
+	name = "short jumpskirt"
+	desc = "A slimming, short jumpskirt."
+	icon_state = "shortjumpskirt"
+	item_state = "w_suit"
+	worn_state = "shortjumpskirt"
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"

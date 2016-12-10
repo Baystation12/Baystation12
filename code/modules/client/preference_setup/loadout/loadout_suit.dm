@@ -85,6 +85,11 @@
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 	allowed_roles = list("Quartermaster","Cargo Technician")
 
+/datum/gear/suit/roles/surgical_apron
+	display_name = "surgical apron"
+	path = /obj/item/clothing/suit/surgicalapron
+	allowed_roles = list("Medical Doctor","Chief Medical Officer")
+
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
 	path = /obj/item/clothing/suit/unathi/robe
