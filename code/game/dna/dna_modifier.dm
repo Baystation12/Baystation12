@@ -143,6 +143,25 @@
 	qdel(G)
 	return
 
+//Like grab-putting, but for mouse-drop.
+/obj/machinery/dna_scannernew/MouseDrop_T(var/mob/target, var/mob/user)
+	if (!CanMouseDrop(target, user))
+		return
+	if (src.occupant)
+		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
+		return
+	if (target.abiotic())
+		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
+		return
+	if (target.buckled)
+		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		return
+	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	if(!do_after(user, 30, src))
+		return
+	put_in(target)
+	src.add_fingerprint(user)
+
 /obj/machinery/dna_scannernew/proc/put_in(var/mob/M)
 	if(M.client)
 		M.client.perspective = EYE_PERSPECTIVE

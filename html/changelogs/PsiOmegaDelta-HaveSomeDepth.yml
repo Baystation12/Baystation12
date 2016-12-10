@@ -1,5 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - maptweak: "Adds a new maintenance tunnel network below the station. It can be accessed by one of 4 elevators and various ladders, assuming one has the access to enter maintenance in the first case."
-  - maptweak: "Atmospherics has been moved down to this maintenance level."
