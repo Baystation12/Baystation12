@@ -72,7 +72,8 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 
 	//rod time!
 	var/obj/effect/immovablerod/immrod = new /obj/effect/immovablerod(locate(startx, starty, 1))
-//	world << "Rod in play, starting at [start.loc.x],[start.loc.y] and going to [end.loc.x],[end.loc.y]"
+//	log_debug("Rod in play, starting at [start.loc.x],[start.loc.y] and going to [end.loc.x],[end.loc.y]")
+
 	var/end = locate(endx, endy, 1)
 	spawn(0)
 		walk_towards(immrod, end,1)

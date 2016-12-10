@@ -28,17 +28,17 @@
 		if (user.hand)
 			temp = H.get_organ(BP_L_HAND)
 		if(!temp)
-			user << "<span class='warning'>You need two hands to pick this up!</span>"
+			to_chat(user, "<span class='warning'>You need two hands to pick this up!</span>")
 			return
 
 	if(user.get_inactive_hand())
-		user << "<span class='warning'>You need your other hand to be empty</span>"
+		to_chat(user, "<span class='warning'>You need your other hand to be empty</span>")
 		return
 	return ..()
 
 /obj/item/weapon/storage/laundry_basket/attack_self(mob/user as mob)
 	var/turf/T = get_turf(user)
-	user << "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>"
+	to_chat(user, "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>")
 	return ..()
 
 /obj/item/weapon/storage/laundry_basket/pickup(mob/user)

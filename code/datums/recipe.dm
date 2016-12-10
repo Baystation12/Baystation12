@@ -102,7 +102,8 @@
 // food-related
 /datum/recipe/proc/make_food(var/obj/container as obj)
 	if(!result)
-		world << "<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>"
+		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
+
 		return
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.InsertedContents()-result_obj))

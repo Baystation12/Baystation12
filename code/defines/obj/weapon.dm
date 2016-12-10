@@ -41,7 +41,7 @@
 /obj/item/weapon/soap/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/key))
 		if(!key_data)
-			user << "<span class='notice'>You imprint \the [I] into \the [src].</span>"
+			to_chat(user, "<span class='notice'>You imprint \the [I] into \the [src].</span>")
 			var/obj/item/weapon/key/K = I
 			key_data = K.key_data
 			update_icon()
@@ -266,17 +266,6 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/wire
-	desc = "This is just a simple piece of regular insulated wire."
-	name = "wire"
-	icon = 'icons/obj/power.dmi'
-	icon_state = "item_wire"
-	var/amount = 1.0
-	var/laying = 0.0
-	var/old_lay = null
-	matter = list(DEFAULT_WALL_MATERIAL = 40)
-	attack_verb = list("whipped", "lashed", "disciplined", "tickled")
-
 /obj/item/weapon/module
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"
@@ -327,7 +316,7 @@
 		if (C.bugged && C.status)
 			cameras.Add(C)
 	if (length(cameras) == 0)
-		usr << "<span class='warning'>No bugged functioning cameras found.</span>"
+		to_chat(usr, "<span class='warning'>No bugged functioning cameras found.</span>")
 		return
 
 	var/list/friendly_cameras = new/list()

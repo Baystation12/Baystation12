@@ -85,7 +85,7 @@
 
 /obj/item/integrated_circuit/emp_act(severity)
 	for(var/datum/integrated_io/io in inputs + outputs + activators)
-		io.scramble()
+		io.scramble(severity)
 
 /obj/item/integrated_circuit/verb/rename_component()
 	set name = "Rename Circuit"
@@ -99,6 +99,10 @@
 		name = input
 		interact(M)
 
+/obj/item/integrated_circuit/proc/activate_pin(var/pin_number)
+	var/datum/integrated_io/activate/A = activators[pin_number]
+	A.activate()
+
 /obj/item/integrated_circuit/proc/set_pin_data(var/pin_type, var/pin_number, var/new_data)
 	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
 	return pin.write_data_to_pin(new_data)
@@ -106,6 +110,10 @@
 /obj/item/integrated_circuit/proc/get_pin_data(var/pin_type, var/pin_number)
 	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
 	return pin.get_data()
+
+/obj/item/integrated_circuit/proc/get_pin_data_as_type(var/pin_type, var/pin_number, var/as_type)
+	var/datum/integrated_io/pin = get_pin_ref(pin_type, pin_number)
+	return pin.data_as_type(as_type)
 
 /obj/item/integrated_circuit/proc/get_pin_ref(var/pin_type, var/pin_number)
 	switch(pin_type)
@@ -371,29 +379,37 @@
 		write_data_to_pin(rand(-10000, 10000))
 	if(istext(data))
 		write_data_to_pin("ERROR")
-	push_data()
 
-/datum/integrated_io/activate/scramble()
-	push_data()
+/datum/integrated_io/activate/scramble(var/severity)
+	if(prob(99/severity))
+		activate()
 
 /datum/integrated_io/proc/write_data_to_pin(var/new_data)
+	if(io_type != DATA_CHANNEL)
+		return FALSE
+
 	if(isnull(new_data) || isnum(new_data) || istext(new_data) || isweakref(new_data)) // Anything else is a type we don't want.
 		data = new_data
 		holder.on_data_written()
 		return TRUE
 	return FALSE
 
-/datum/integrated_io/proc/push_data()
+/datum/integrated_io/output/write_data_to_pin(var/new_data)
+	. = ..()
+	if(.)
+		push_data()
+
+/datum/integrated_io/input/proc/pull_data()
+	for(var/datum/integrated_io/io in linked)
+		write_data_to_pin(io.data)
+
+/datum/integrated_io/output/proc/push_data()
 	for(var/datum/integrated_io/io in linked)
 		io.write_data_to_pin(data)
 
-/datum/integrated_io/activate/push_data()
+/datum/integrated_io/activate/proc/activate()
 	for(var/datum/integrated_io/io in linked)
 		io.holder.check_then_do_work(io)
-
-/datum/integrated_io/proc/pull_data()
-	for(var/datum/integrated_io/io in linked)
-		write_data_to_pin(io.data)
 
 /datum/integrated_io/proc/get_linked_to_desc()
 	if(linked.len)
@@ -423,13 +439,17 @@
 	name = "activation pin"
 	io_type = PULSE_CHANNEL
 
+/obj/item/integrated_circuit/proc/pull_data()
+	for(var/datum/integrated_io/input/I in inputs)
+		I.pull_data()
+
 /obj/item/integrated_circuit/proc/push_data()
 	for(var/datum/integrated_io/output/O in outputs)
 		O.push_data()
 
-/obj/item/integrated_circuit/proc/pull_data()
-	for(var/datum/integrated_io/input/I in inputs)
-		I.push_data()
+/obj/item/integrated_circuit/proc/activate()
+	for(var/datum/integrated_io/activate/A in activators)
+		A.activate()
 
 /obj/item/integrated_circuit/proc/check_then_do_work(var/datum/integrated_io/io)
 	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
@@ -447,3 +467,7 @@
 		O.disconnect()
 	for(var/datum/integrated_io/activate/A in activators)
 		A.disconnect()
+
+/datum/encrypted_ic_data
+	var/name = "encrypted data"
+	var/data

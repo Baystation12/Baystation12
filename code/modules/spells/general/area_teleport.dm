@@ -29,7 +29,7 @@
 		if(!thearea) return
 	else
 		thearea = pick(teleportlocs)
-	return(teleportlocs[thearea])
+	return list(teleportlocs[thearea])
 
 /spell/area_teleport/cast(area/thearea, mob/user)
 	if(!istype(thearea))
@@ -47,7 +47,7 @@
 				L+=T
 
 	if(!L.len)
-		user <<"The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry."
+		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
 
 	if(user && user.buckled)

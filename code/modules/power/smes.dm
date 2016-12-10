@@ -220,7 +220,7 @@
 //Will return 1 on failure
 /obj/machinery/power/smes/proc/make_terminal(const/mob/user)
 	if (user.loc == loc)
-		user << "<span class='warning'>You must not be on the same tile as the [src].</span>"
+		to_chat(user, "<span class='warning'>You must not be on the same tile as the [src].</span>")
 		return 1
 
 	//Direction the terminal will face to
@@ -232,13 +232,13 @@
 			tempDir = WEST
 	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
 	if (istype(tempLoc, /turf/space))
-		user << "<span class='warning'>You can't build a terminal on space.</span>"
+		to_chat(user, "<span class='warning'>You can't build a terminal on space.</span>")
 		return 1
 	else if (istype(tempLoc))
 		if(!tempLoc.is_plating())
-			user << "<span class='warning'>You must remove the floor plating first.</span>"
+			to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
 			return 1
-	user << "<span class='notice'>You start adding cable to the [src].</span>"
+	to_chat(user, "<span class='notice'>You start adding cable to the [src].</span>")
 	if(do_after(user, 50, src))
 		terminal = new /obj/machinery/power/terminal(tempLoc)
 		terminal.set_dir(tempDir)
@@ -268,14 +268,14 @@
 		return
 
 	if (!panel_open)
-		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
+		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
 		return 0
 
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
 		if (CC.get_amount() < 10)
-			user << "<span class='warning'>You need more cables.</span>"
+			to_chat(user, "<span class='warning'>You need more cables.</span>")
 			building_terminal = 0
 			return 0
 		if (make_terminal(user))
@@ -293,13 +293,13 @@
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.isOn())
-			user << "Turn on \the [WT] first!"
+			to_chat(user, "Turn on \the [WT] first!")
 			return 0
 		if(!damage)
-			user << "\The [src] is already fully repaired."
+			to_chat(user, "\The [src] is already fully repaired.")
 			return 0
 		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
-			user << "You repair all structural damage to \the [src]"
+			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
 		return 0
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
@@ -307,9 +307,9 @@
 		var/turf/tempTDir = terminal.loc
 		if (istype(tempTDir))
 			if(!tempTDir.is_plating())
-				user << "<span class='warning'>You must remove the floor plating first.</span>"
+				to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
 			else
-				user << "<span class='notice'>You begin to cut the cables...</span>"
+				to_chat(user, "<span class='notice'>You begin to cut the cables...</span>")
 				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 				if(do_after(user, 50, src))
 					if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
@@ -463,16 +463,16 @@
 
 /obj/machinery/power/smes/examine(var/mob/user)
 	..()
-	user << "The service hatch is [panel_open ? "open" : "closed"]."
+	to_chat(user, "The service hatch is [panel_open ? "open" : "closed"].")
 	if(!damage)
 		return
 	var/damage_percentage = round((damage / maxdamage) * 100)
 	switch(damage_percentage)
 		if(75 to INFINITY)
-			user << "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>"
+			to_chat(user, "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>")
 		if(50 to 74)
-			user << "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>"
+			to_chat(user, "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>")
 		if(25 to 49)
-			user << "<span class='notice'>It's casing is quite seriously damaged.</span>"
+			to_chat(user, "<span class='notice'>It's casing is quite seriously damaged.</span>")
 		if(0 to 24)
-			user << "It's casing has some minor damage."
+			to_chat(user, "It's casing has some minor damage.")

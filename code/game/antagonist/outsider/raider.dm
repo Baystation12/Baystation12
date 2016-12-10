@@ -61,7 +61,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/suit/storage/toggle/hoodie,
 		/obj/item/clothing/suit/storage/toggle/hoodie/black,
 		/obj/item/clothing/suit/unathi/mantle,
-		/obj/item/clothing/suit/poncho,
+		/obj/item/clothing/suit/poncho/colored,
 		)
 
 	var/list/raider_guns = list(
@@ -182,8 +182,8 @@ var/datum/antagonist/raider/raiders
 		else
 			win_msg += "<B>The Raiders were repelled!</B>"
 
-	world << "<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>"
-	world << "[win_msg]"
+	to_world("<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>")
+	to_world("[win_msg]")
 	feedback_set_details("round_end_result","heist - [win_type] [win_group]")
 
 /datum/antagonist/raider/proc/is_raider_crew_safe()
@@ -201,7 +201,7 @@ var/datum/antagonist/raider/raiders
 	if(!..())
 		return 0
 
-	if(player.species && player.species.get_bodytype() == "Vox")
+	if(player.species && player.species.get_bodytype(player) == "Vox")
 		equip_vox(player)
 	else
 		var/new_shoes =   pick(raider_shoes)

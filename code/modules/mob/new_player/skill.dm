@@ -176,7 +176,7 @@ proc/show_skill_window(var/mob/user, var/mob/living/carbon/human/M)
 		setup_skills()
 
 	if(!M.skills || M.skills.len == 0)
-		user << "There are no skills to display."
+		to_chat(user, "There are no skills to display.")
 		return
 
 	var/HTML = "<body>"

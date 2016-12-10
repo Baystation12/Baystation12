@@ -28,7 +28,7 @@
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
-#define RADIATION_SPEED_COEFFICIENT 0.1
+#define RADIATION_SPEED_COEFFICIENT 0.025
 
 /mob/living/carbon/human
 	var/oxygen_alert = 0
@@ -172,7 +172,7 @@
 
 	if (disabilities & EPILEPSY)
 		if ((prob(1) && paralysis < 1))
-			src << "\red You have a seizure!"
+			to_chat(src, "<span class='warning'>You have a seizure!</span>")
 			for(var/mob/O in viewers(src, null))
 				if(O == src)
 					continue
@@ -207,19 +207,19 @@
 				custom_pain("Your head feels numb and painful.",10)
 		if(getBrainLoss() >= 15)
 			if(4 <= rn && rn <= 6) if(eye_blurry <= 0)
-				src << "<span class='warning'>It becomes hard to see for some reason.</span>"
+				to_chat(src, "<span class='warning'>It becomes hard to see for some reason.</span>")
 				eye_blurry = 10
 		if(getBrainLoss() >= 35)
 			if(7 <= rn && rn <= 9) if(get_active_hand())
-				src << "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>"
+				to_chat(src, "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>")
 				drop_item()
 		if(getBrainLoss() >= 45)
 			if(10 <= rn && rn <= 12)
 				if(prob(50))
-					src << "<span class='danger'>You suddenly black out!</span>"
+					to_chat(src, "<span class='danger'>You suddenly black out!</span>")
 					Paralyse(10)
 				else if(!lying)
-					src << "<span class='danger'>Your legs won't respond properly, you fall down!</span>"
+					to_chat(src, "<span class='danger'>Your legs won't respond properly, you fall down!</span>")
 					Weaken(10)
 
 
@@ -240,9 +240,15 @@
 		if(gene.is_active(src))
 			gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,100)
+	radiation = Clamp(radiation,0,500)
 
-	if (radiation)
+	if(!radiation)
+		if(species.appearance_flags & RADIATION_GLOWS)
+			set_light(0)
+	else
+		if(species.appearance_flags & RADIATION_GLOWS)
+			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), species.get_flesh_colour(src))
+		// END DOGSHIT SNOWFLAKE
 
 		var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
 		if(rad_organ && !rad_organ.is_broken())
@@ -267,13 +273,13 @@
 			if(!isSynthetic())
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
-					src << "<span class='warning'>You feel weak.</span>"
+					to_chat(src, "<span class='warning'>You feel weak.</span>")
 					Weaken(3)
 					if(!lying)
 						emote("collapse")
-				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype() == "Human") //apes go bald
+				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype(src) == "Human") //apes go bald
 					if((h_style != "Bald" || f_style != "Shaved" ))
-						src << "<span class='warning'>Your hair falls out.</span>"
+						to_chat(src, "<span class='warning'>Your hair falls out.</span>")
 						h_style = "Bald"
 						f_style = "Shaved"
 						update_hair()
@@ -285,9 +291,12 @@
 				if(prob(5))
 					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
 				if(prob(1))
-					src << "<span class='warning'>You feel strange!</span>"
+					to_chat(src, "<span class='warning'>You feel strange!</span>")
 					adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
 					emote("gasp")
+		if(radiation > 150)
+			damage = 8
+			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
 
 		if(damage)
 			damage *= isSynthetic() ? 0.5 : species.radiation_mod
@@ -481,19 +490,16 @@
 		if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
 			nutrition -= 2
 		var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
-		//world << "Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]"
-//				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
+//		log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 		bodytemperature += recovery_amt
 	else if(species.cold_level_1 <= bodytemperature && bodytemperature <= species.heat_level_1)
 		var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
-		//world << "Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]"
-//				log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
+//		log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 		bodytemperature += recovery_amt
 	else if(bodytemperature > species.heat_level_1) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
 		//We totally need a sweat system cause it totally makes sense...~
 		var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
-		//world << "Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]"
-//				log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
+//		log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 		bodytemperature += recovery_amt
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
@@ -669,7 +675,8 @@
 				if(client && prob(5))
 					client.dir = pick(2,4,8)
 					spawn(rand(20,50))
-						client.dir = 1
+						if(client)
+							client.dir = 1
 
 			hallucination = max(0, hallucination - 2)
 		else
@@ -677,7 +684,7 @@
 				qdel(a)
 
 		if(halloss >= species.total_health)
-			src << "<span class='warning'>[species.halloss_message_self]</span>"
+			to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 			src.visible_message("<B>[src]</B> [species.halloss_message].")
 			Paralyse(10)
 			setHalLoss(species.total_health-1)
@@ -967,22 +974,25 @@
 		stuttering = max(stuttering, 5)
 
 	if(shock_stage == 40)
-		src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
-
+		var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
+		to_chat(src, message)
 	if (shock_stage >= 60)
 		if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
 		if (prob(2))
-			src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
+			var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
+			to_chat(src, message)
 			Weaken(20)
 
 	if(shock_stage >= 80)
 		if (prob(5))
-			src << "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
+			var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
+			to_chat(src, message)
 			Weaken(20)
 
 	if(shock_stage >= 120)
 		if (prob(2))
-			src << "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!</span>"
+			var/message = "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!</span>"
+			to_chat(src, message)
 			Paralyse(5)
 
 	if(shock_stage == 150)
@@ -1000,7 +1010,7 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-	if (BITTEST(hud_updateflag, HEALTH_HUD))
+	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "-100" 	// X_X
@@ -1008,7 +1018,7 @@
 			holder.icon_state = RoundHealth((health-config.health_threshold_crit)/(maxHealth-config.health_threshold_crit)*100)
 		hud_list[HEALTH_HUD] = holder
 
-	if (BITTEST(hud_updateflag, LIFE_HUD))
+	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
@@ -1016,7 +1026,7 @@
 			holder.icon_state = "hudhealthy"
 		hud_list[LIFE_HUD] = holder
 
-	if (BITTEST(hud_updateflag, STATUS_HUD))
+	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
 		var/foundVirus = 0
 		for (var/ID in virus2)
 			if (ID in virusDB)
@@ -1054,7 +1064,7 @@
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
 
-	if (BITTEST(hud_updateflag, ID_HUD))
+	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
 		if(wear_id)
 			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
@@ -1068,7 +1078,7 @@
 
 		hud_list[ID_HUD] = holder
 
-	if (BITTEST(hud_updateflag, WANTED_HUD))
+	if (BITTEST(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name

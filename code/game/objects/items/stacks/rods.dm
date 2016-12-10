@@ -33,7 +33,7 @@
 		var/obj/item/weapon/weldingtool/WT = W
 
 		if(get_amount() < 2)
-			user << "<span class='warning'>You need at least two rods to do this.</span>"
+			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
 
 		if(WT.remove_fuel(0,user))
@@ -80,18 +80,23 @@
 
 	else if(!in_use)
 		if(get_amount() < 2)
-			user << "<span class='warning'>You need at least two rods to do this.</span>"
+			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
-		usr << "<span class='notice'>Assembling grille...</span>"
+		to_chat(usr, "<span class='notice'>Assembling grille...</span>")
 		in_use = 1
 		if (!do_after(usr, 10))
 			in_use = 0
 			return
+<<<<<<< HEAD
 		var/obj/structure/grille/F
 		if(get_turf(user) != /turf/space)
 			F = new /obj/structure/grille ( usr.loc )
 		else F = new /obj/structure/grille/catwalk
 		usr << "<span class='notice'>You assemble a grille</span>"
+=======
+		var/obj/structure/grille/F = new /obj/structure/grille/ ( usr.loc )
+		to_chat(usr, "<span class='notice'>You assemble a grille</span>")
+>>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 		in_use = 0
 		F.add_fingerprint(usr)
 		use(2)

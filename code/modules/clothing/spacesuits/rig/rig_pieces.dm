@@ -13,7 +13,8 @@
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi'
+		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
+		"Resomi" = 'icons/mob/species/resomi/helmet.dmi'
 		)
 	species_restricted = null
 
@@ -50,7 +51,8 @@
 	can_breach = 1
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
-		"Unathi" = 'icons/mob/species/unathi/suit.dmi'
+		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
+		"Resomi" = 'icons/mob/species/resomi/suit.dmi'
 		)
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
@@ -80,20 +82,20 @@
 	if(can_support(user))
 		for(var/obj/item/organ/external/E in user.bad_external_organs)
 			if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
-				user << "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>"
+				to_chat(user, "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>")
 				supporting_limbs |= E
 	else
 		// Otherwise, remove the splints.
 		for(var/obj/item/organ/external/E in supporting_limbs)
 			if(E.splinted == src && E.remove_splint(src))
-				user << "<span class='notice'>\The [src] stops supporting your [E.name].</span>"
+				to_chat(user, "<span class='notice'>\The [src] stops supporting your [E.name].</span>")
 		supporting_limbs.Cut()
 
 /obj/item/clothing/suit/space/rig/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
 	if(!istype(user) || isnull(supporting_limbs) || !can_support(user))
 		return
 	if((E.body_part & body_parts_covered) && E.is_broken() && E.apply_splint(src))
-		user << "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>"
+		to_chat(user, "<span class='notice'>You feel [src] constrict about your [E.name], supporting it.</span>")
 		supporting_limbs |= E
 
 

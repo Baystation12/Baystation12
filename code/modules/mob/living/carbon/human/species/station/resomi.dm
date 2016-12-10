@@ -9,7 +9,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_RESOMI)
 	name_language = LANGUAGE_RESOMI
-	min_age = 12
+	min_age = 15
 	max_age = 45
 	health_hud_intensity = 3
 
@@ -38,7 +38,7 @@
 	blood_volume = 280
 	hunger_factor = 0.2
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL

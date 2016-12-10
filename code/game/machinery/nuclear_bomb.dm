@@ -38,7 +38,7 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/process()
 	if (timing)
-		timeleft = max(timeleft - process_schedule_interval("obj"), 0)
+		timeleft = max(timeleft - (process_schedule_interval("machinery") / 10), 0)
 		if (timeleft <= 0)
 			spawn
 				explode()
@@ -314,7 +314,6 @@ var/bomb_set
 						visible_message("<span class='warning'>The anchoring bolts slide back into the depths of \the [src].</span>")
 				else
 					to_chat(usr, "<span class='warning'>There is nothing to anchor to!</span>")
-
 	return 1
 
 /obj/machinery/nuclearbomb/proc/secure_device()

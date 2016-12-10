@@ -50,43 +50,43 @@
 		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "<span class='notice'>]The [src] is already loaded.</span>"
+			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 		else
 			user.remove_from_mob(O)
 			O.loc = src
 			beaker = O
 			updateUsrDialog()
 	else if(processing)
-		user << "<span class='notice'>\The [src] is currently processing.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
 	else if(istype(O, /obj/item/weapon/storage/plants))
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
-			user << "<span class='notice'>\The [src] is already full! Activate it.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 		else
 			for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
 				G.loc = src
 				i++
 				if(i >= 10)
-					user << "<span class='notice'>You fill \the [src] to its capacity.</span>"
+					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
 					break
 			if(i < 10)
-				user << "<span class='notice'>You empty \the [O] into \the [src].</span>"
+				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
 
 
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		user << "<span class='notice'>You cannot put this in \the [src].</span>"
+		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
-			user << "<span class='notice'>\The [src] is full! Activate it.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is full! Activate it.</span>")
 		else
 			user.remove_from_mob(O)
 			O.loc = src
-			user << "<span class='notice'>You put \the [O] in \the [src]</span>"
+			to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()
 	return
 
@@ -117,6 +117,13 @@
 					dat += "<A href='?src=\ref[src];action=create;item=tbelt;cost=300'>Utility belt</A> <FONT COLOR=blue>([round(300/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=satchel;cost=400'>Leather Satchel</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=cashbag;cost=400'>Cash Bag</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=workboots;cost=400'>Workboots</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=leathershoes;cost=400'>Leather Shoes</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=dressshoes;cost=400'>Dress Shoes</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=leathercoat;cost=500'>Leather Coat</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=leatherjacket;cost=500'>Leather Jacket</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=bomberjacket;cost=500'>Bomber Jacket</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=wintercoat;cost=500'>Winter Coat</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
 					//dat += "Other<BR>"
 					//dat += "<A href='?src=\ref[src];action=create;item=monkey;cost=500'>Monkey</A> <FONT COLOR=blue>(500)</FONT><BR>"
 				else
@@ -143,7 +150,7 @@
 	if (stat) //NOPOWER etc
 		return
 	if(processing)
-		usr << "<span class='notice'>The biogenerator is in the process of working.</span>"
+		to_chat(usr, "<span class='notice'>The biogenerator is in the process of working.</span>")
 		return
 	var/S = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/I in contents)
@@ -216,6 +223,20 @@
 			new/obj/item/weapon/storage/bag/cash(loc)
 		if("monkey")
 			new/mob/living/carbon/human/monkey(loc)
+		if("workboots")
+			new/obj/item/clothing/shoes/workboots(loc)
+		if("leathershoes")
+			new/obj/item/clothing/shoes/leather(loc)
+		if("dressshoes")
+			new/obj/item/clothing/shoes/dress(loc)
+		if("leathercoat")
+			new/obj/item/clothing/suit/leathercoat(loc)
+		if("leatherjacket")
+			new/obj/item/clothing/suit/storage/toggle/brown_jacket(loc)
+		if("bomberjacket")
+			new/obj/item/clothing/suit/storage/toggle/bomber(loc)
+		if("wintercoat")
+			new/obj/item/clothing/suit/storage/hooded/wintercoat(loc)
 	processing = 0
 	menustat = "complete"
 	update_icon()

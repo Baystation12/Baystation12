@@ -54,8 +54,11 @@ var/list/all_virtual_listeners = list()
 
 /atom/movable/initialize()
 	..()
-	if(ispath(virtual_mob) && shall_have_virtual_mob())
-		virtual_mob = new virtual_mob(get_turf(src), src)
+	if(ispath(virtual_mob))
+		if(shall_have_virtual_mob())
+			virtual_mob = new virtual_mob(get_turf(src), src)
+		else
+			virtual_mob = null
 
 /atom/movable/Destroy()
 	if(virtual_mob && !ispath(virtual_mob))

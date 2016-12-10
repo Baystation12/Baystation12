@@ -26,6 +26,7 @@
 	var/last_dam = -1                  // used in healing/processing calculations.
 
 	// Appearance vars.
+	var/nonsolid                       // Snowflake warning, reee. Used for slime limbs.
 	var/icon_name = null               // Icon state base.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
@@ -137,7 +138,7 @@
 		for(var/obj/item/I in contents)
 			if(istype(I, /obj/item/organ))
 				continue
-			usr << "<span class='danger'>There is \a [I] sticking out of it.</span>"
+			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
 	return
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -405,11 +406,11 @@
 
 	if(!damage_amount)
 		if(src.open != 2)
-			user << "<span class='notice'>Nothing to fix!</span>"
+			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 		return 0
 
 	if(damage_amount >= ROBOLIMB_SELF_REPAIR_CAP)
-		user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
+		to_chat(user, "<span class='danger'>The damage is far too severe to patch over externally.</span>")
 		return 0
 
 	if(user == src.owner)
@@ -420,12 +421,12 @@
 			grasp = BP_R_HAND
 
 		if(grasp)
-			user << "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>"
+			to_chat(user, "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>")
 			return 0
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(!do_mob(user, owner, 10))
-		user << "<span class='warning'>You must stand still to do that.</span>"
+		to_chat(user, "<span class='warning'>You must stand still to do that.</span>")
 		return 0
 
 	switch(damage_type)
@@ -683,7 +684,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 30)	//overdosing is necessary to stop severe infections
 		if (!(status & ORGAN_DEAD))
 			status |= ORGAN_DEAD
-			owner << "<span class='notice'>You can't feel your [name] anymore...</span>"
+			to_chat(owner, "<span class='notice'>You can't feel your [name] anymore...</span>")
 			owner.update_body(1)
 
 		germ_level++
@@ -825,6 +826,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(cannot_amputate || !owner)
 		return
 
+	if(disintegrate == DROPLIMB_EDGE && nonsolid)
+		disintegrate = DROPLIMB_BLUNT //splut
+
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
 			if(!clean)
@@ -849,6 +853,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	var/mob/living/carbon/human/victim = owner //Keep a reference for post-removed().
 	var/obj/item/organ/external/parent_organ = parent
+
+	var/use_flesh_colour = species.get_flesh_colour(owner)
+	var/use_blood_colour = species.get_blood_colour(owner)
+
 	removed(null, ignore_children)
 	victim.traumatic_shock += 60
 
@@ -897,10 +905,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			else
 				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
 				if(species)
-					if(species.get_flesh_colour())
-						gore.fleshcolor = species.get_flesh_colour()
-					if(species.get_blood_colour())
-						gore.basecolor = species.get_blood_colour()
+					gore.fleshcolor = use_flesh_colour
+					gore.basecolor =  use_blood_colour
 					gore.update_icon()
 
 			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)

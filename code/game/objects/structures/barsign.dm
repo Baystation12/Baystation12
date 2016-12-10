@@ -17,13 +17,13 @@
 	..()
 	switch(icon_state)
 		if("Off")
-			user << "It appears to be switched off."
+			to_chat(user, "It appears to be switched off.")
 		if("narsiebistro")
-			user << "It shows a picture of a large black and red being. Spooky!"
+			to_chat(user, "It shows a picture of a large black and red being. Spooky!")
 		if("on", "empty")
-			user << "The lights are on, but there's no picture."
+			to_chat(user, "The lights are on, but there's no picture.")
 		else
-			user << "It says '[icon_state]'"
+			to_chat(user, "It says '[icon_state]'")
 
 /obj/structure/sign/double/barsign/New()
 	..()
@@ -40,9 +40,9 @@
 			if(!sign_type)
 				return
 			icon_state = sign_type
-			user << "<span class='notice'>You change the barsign.</span>"
+			to_chat(user, "<span class='notice'>You change the barsign.</span>")
 		else
-			user << "<span class='warning'>Access denied.</span>"
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	return ..()

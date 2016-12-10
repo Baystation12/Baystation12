@@ -47,6 +47,7 @@
 
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled
 	name = "\improper Canister: \[O2 (Cryo)\]"
+	start_pressure = 20 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "\improper Canister \[Phoron\]"
@@ -258,7 +259,7 @@ update_flag
 			transfer_moles = pressure_delta*thejetpack.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)//Actually transfer the gas
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 			thejetpack.merge(removed)
-			user << "You pulse-pressurize your jetpack from the tank."
+			to_chat(user, "You pulse-pressurize your jetpack from the tank.")
 		return
 
 	..()

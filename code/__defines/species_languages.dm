@@ -10,9 +10,9 @@
 // unused: 0x8000 - higher than this will overflow
 
 // Species spawn flags
-#define IS_WHITELISTED    0x1    // Must be whitelisted to play.
-#define CAN_JOIN          0x2    // Species is selectable in chargen.
-#define IS_RESTRICTED     0x4    // Is not a core/normally playable species. (castes, mutantraces)
+#define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
+#define SPECIES_IS_RESTRICTED     0x2    // Is not a core/normally playable species. (castes, mutantraces)
+#define SPECIES_CAN_JOIN          0x4    // Species is selectable in chargen.
 
 // Species appearance flags
 #define HAS_SKIN_TONE     0x1    // Skin tone selectable in chargen. (0-255)
@@ -21,6 +21,7 @@
 #define HAS_UNDERWEAR     0x8    // Underwear is drawn onto the mob icon.
 #define HAS_EYE_COLOR     0x10   // Eye colour selectable in chargen. (RGB)
 #define HAS_HAIR_COLOR    0x20   // Hair colour selectable in chargen. (RGB)
+#define RADIATION_GLOWS   0x40   // Radiation causes this character to glow.
 
 // Languages.
 #define LANGUAGE_EAL "Encoded Audio Language"
@@ -30,10 +31,12 @@
 #define LANGUAGE_SIIK_TAJR "Siik'tajr"
 #define LANGUAGE_SKRELLIAN "Skrellian"
 #define LANGUAGE_RESOMI "Schechi"
-#define LANGUAGE_ROOTSPEAK "Rootspeak"
+#define LANGUAGE_ROOTLOCAL "Local Rootspeak"
+#define LANGUAGE_ROOTGLOBAL "Global Rootspeak"
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
 #define LANGUAGE_CULT "Cult"
+#define LANGUAGE_SIGN "Sign Language"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
@@ -45,3 +48,4 @@
 #define INNATE       64  // All mobs can be assumed to speak and understand this language. (audible emotes)
 #define NO_TALK_MSG  128 // Do not show the "\The [speaker] talks into \the [radio]" message
 #define NO_STUTTER   256 // No stuttering, slurring, or other speech problems
+#define ALT_TRANSMIT 512 // Language is not based on vision or sound (Todo: add this into the say code and use it for the rootspeak languages)

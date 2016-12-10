@@ -29,7 +29,7 @@
 
 /obj/item/device/analyzer/plant_analyzer/proc/print_report(var/mob/living/user)
 	if(!last_data)
-		user << "There is no scan data to print."
+		to_chat(user, "There is no scan data to print.")
 		return
 	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(get_turf(src))
 	P.name = "paper - [form_title]"
@@ -74,7 +74,7 @@
 		grown_reagents = H.reagents
 
 	if(!grown_seed)
-		user << "<span class='danger'>[src] can tell you nothing about \the [target].</span>"
+		to_chat(user, "<span class='danger'>[src] can tell you nothing about \the [target].</span>")
 		return
 
 	form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"

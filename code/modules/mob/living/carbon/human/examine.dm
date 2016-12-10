@@ -46,6 +46,10 @@
 			species_name += "Cyborg "
 		species_name += "[species.name]"
 		msg += ", <b><font color='[species.get_flesh_colour(src)]'> \a [species_name]!</font></b>"
+	var/extra_species_text = species.get_additional_examine_text(src)
+	if(extra_species_text)
+		msg += "[extra_species_text]<br>"
+
 	msg += "<br>"
 
 	//uniform
@@ -208,9 +212,9 @@
 		spawn(15)
 			if(distance <= 1 && usr.stat != 1)
 				if(pulse() == PULSE_NONE)
-					usr << "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>"
+					to_chat(usr, "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>")
 				else
-					usr << "<span class='deadsay'>[T.He] [T.has] a pulse!</span>"
+					to_chat(usr, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
 	if(fire_stacks)
 		msg += "[T.He] [T.is] covered in some liquid.\n"
@@ -349,7 +353,7 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "[T.He] [T.is] [pose]"
 
-	user << jointext(msg, null)
+	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)
@@ -373,3 +377,52 @@
 				return 0
 	else
 		return 0
+
+/mob/living/carbon/human/verb/pose()
+	set name = "Set Pose"
+	set desc = "Sets a description which will be shown when someone examines you."
+	set category = "IC"
+
+	pose =  sanitize(input(usr, "This is [src]. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"] [get_visible_gender() == NEUTER ? "are" : "is"]...", "Pose", null)  as text)
+
+/mob/living/carbon/human/verb/set_flavor()
+	set name = "Set Flavour Text"
+	set desc = "Sets an extended description of your character's features."
+	set category = "IC"
+
+	var/list/HTML = list()
+	HTML += "<body>"
+	HTML += "<tt><center>"
+	HTML += "<b>Update Flavour Text</b> <hr />"
+	HTML += "<br></center>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=general'>General:</a> "
+	HTML += TextPreview(flavor_texts["general"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=head'>Head:</a> "
+	HTML += TextPreview(flavor_texts["head"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=face'>Face:</a> "
+	HTML += TextPreview(flavor_texts["face"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=eyes'>Eyes:</a> "
+	HTML += TextPreview(flavor_texts["eyes"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=torso'>Body:</a> "
+	HTML += TextPreview(flavor_texts["torso"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=arms'>Arms:</a> "
+	HTML += TextPreview(flavor_texts["arms"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=hands'>Hands:</a> "
+	HTML += TextPreview(flavor_texts["hands"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=legs'>Legs:</a> "
+	HTML += TextPreview(flavor_texts["legs"])
+	HTML += "<br>"
+	HTML += "<a href='byond://?src=\ref[src];flavor_change=feet'>Feet:</a> "
+	HTML += TextPreview(flavor_texts["feet"])
+	HTML += "<br>"
+	HTML += "<hr />"
+	HTML +="<a href='?src=\ref[src];flavor_change=done'>\[Done\]</a>"
+	HTML += "<tt>"
+	src << browse(jointext(HTML,null), "window=flavor_changes;size=430x300")

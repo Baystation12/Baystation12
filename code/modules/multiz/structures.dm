@@ -5,7 +5,7 @@
 /obj/structure/ladder
 	name = "ladder"
 	desc = "A ladder.  You can climb it up and down."
-	icon_state = "ladderdown"
+	icon_state = "ladder01"
 	icon = 'icons/obj/structures.dmi'
 	density = 0
 	opacity = 0
@@ -48,19 +48,19 @@
 
 /obj/structure/ladder/proc/moveOccupant(var/mob/M)
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
-		M << "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>"
+		to_chat(M, "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>")
 		return 0
 	var/obj/structure/ladder/target = target_down ? target_down : target_up
 	if(target_down && target_up)
 		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
-		
+
 		if(direction == "Cancel")
 			return 0
-		
+
 		if(!M.Adjacent(src))
-			M << "<span class='warning'>You need to be next to \the [src] to start climbing.</span>"
+			to_chat(M, "<span class='warning'>You need to be next to \the [src] to start climbing.</span>")
 			return 0
-			
+
 		switch(direction)
 			if("Up")
 				target = target_up
@@ -72,7 +72,7 @@
 	var/turf/T = target.loc
 	for(var/atom/A in T)
 		if(!A.CanPass(M))
-			M << "<span class='notice'>\The [A] is blocking \the [src].</span>"
+			to_chat(M, "<span class='notice'>\The [A] is blocking \the [src].</span>")
 			return 0
 	if(M.Move(T))
 		return target == target_up ? UP : DOWN
@@ -89,10 +89,11 @@
 
 /obj/structure/ladder/up
 	allowed_directions = UP
+	icon_state = "ladder10"
 
 /obj/structure/ladder/updown
 	allowed_directions = UP|DOWN
-
+	icon_state = "ladder11"
 
 /obj/structure/stairs
 	name = "Stairs"

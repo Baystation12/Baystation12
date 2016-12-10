@@ -55,9 +55,9 @@
 /obj/item/organ/internal/xenos/hivenode/removed(var/mob/living/user)
 	if(owner && ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		H << "<span class='alium'>You feel your connection to the hivemind fray and fade away...</span>"
+		to_chat(H, "<span class='alium'>You feel your connection to the hivemind fray and fade away...</span>")
 		H.remove_language("Hivemind")
-		if(H.mind && H.species.get_bodytype() != "Xenomorph")
+		if(H.mind && H.species.get_bodytype(H) != "Xenomorph")
 			xenomorphs.remove_antagonist(H.mind)
 	..(user)
 
@@ -67,8 +67,8 @@
 	if(owner && ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		H.add_language("Hivemind")
-		if(H.mind && H.species.get_bodytype() != "Xenomorph")
-			H << "<span class='alium'>You feel a sense of pressure as a vast intelligence meshes with your thoughts...</span>"
+		if(H.mind && H.species.get_bodytype(H) != "Xenomorph")
+			to_chat(H, "<span class='alium'>You feel a sense of pressure as a vast intelligence meshes with your thoughts...</span>")
 			xenomorphs.add_antagonist_mind(H.mind,1, xenomorphs.faction_role_text, xenomorphs.faction_welcome)
 
 	return 1

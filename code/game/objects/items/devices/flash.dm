@@ -16,7 +16,7 @@
 
 /obj/item/device/flash/proc/clown_check(var/mob/user)
 	if(user && (CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>\The [src] slips out of your hand.</span>"
+		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
 		user.drop_item()
 		return 0
 	return 1
@@ -38,7 +38,7 @@
 
 	if(!clown_check(user))	return
 	if(broken)
-		user << "<span class='warning'>\The [src] is broken.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is broken.</span>")
 		return
 
 	flash_recharge()
@@ -50,12 +50,12 @@
 			last_used = world.time
 			if(prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
-				user << "<span class='warning'>The bulb has burnt out!</span>"
+				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 				icon_state = "flashburnt"
 				return
 			times_used++
 		else	//can only use it  5 times a minute
-			user << "<span class='warning'>*click* *click*</span>"
+			to_chat(user, "<span class='warning'>*click* *click*</span>")
 			return
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -128,7 +128,7 @@
 		if(0 to 5)
 			if(prob(2*times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
-				user << "<span class='warning'>The bulb has burnt out!</span>"
+				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 				icon_state = "flashburnt"
 				return
 			times_used++
@@ -189,12 +189,12 @@
 	..()
 	if(!broken)
 		broken = 1
-		user << "<span class='warning'>The bulb has burnt out!</span>"
+		to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 		icon_state = "flashburnt"
 
 /obj/item/device/flash/synthetic/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
 	..()
 	if(!broken)
 		broken = 1
-		user << "<span class='warning'>The bulb has burnt out!</span>"
+		to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 		icon_state = "flashburnt"

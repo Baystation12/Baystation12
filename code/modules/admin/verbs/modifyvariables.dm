@@ -121,7 +121,6 @@
 /client/proc/mod_list(var/list/L, atom/O, original_name, objectvar)
 	if(!check_rights(R_VAREDIT))	return
 	if(!istype(L,/list)) to_chat(src, "Not a List.")
-
 	if(L.len > 1000)
 		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
 		if(confirm != "Continue")
@@ -171,7 +170,6 @@
 
 	if(isnull(variable))
 		to_chat(usr, "Unable to determine variable type.")
-
 	else if(isnum(variable))
 		to_chat(usr, "Variable appears to be <b>NUM</b>.")
 		default = "num"
@@ -230,7 +228,6 @@
 
 		if(dir)
 			to_chat(usr, "If a direction, direction is: [dir]")
-
 	var/class = "text"
 	var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
 
@@ -432,7 +429,6 @@
 		var/default
 		if(isnull(var_value))
 			to_chat(usr, "Unable to determine variable type.")
-
 		else if(isnum(var_value))
 			to_chat(usr, "Variable appears to be <b>NUM</b>.")
 			default = "num"
@@ -490,7 +486,6 @@
 					dir = null
 			if(dir)
 				to_chat(usr, "If a direction, direction is: [dir]")
-
 		var/list/class_input = list("text","num","type","reference","mob reference", "icon","file","list","json","color","edit referenced object","restore to default")
 		if(src.holder)
 			var/datum/marked_datum = holder.marked_datum()
@@ -606,30 +601,36 @@
 		vv_set_handlers = init_subtypes(/decl/vv_set_handler)
 	for(var/vv_handler in vv_set_handlers)
 		var/decl/vv_set_handler/sh = vv_handler
-		if(sh.can_handle_set_var(O, variable))
+		if(sh.can_handle_set_var(O, variable, var_value, client))
 			sh.handle_set_var(O, variable, var_value, client)
 			return TRUE
 	return FALSE
 
 /decl/vv_set_handler
 	var/handled_type
+	var/predicates
 	var/list/handled_vars
 
-/decl/vv_set_handler/proc/can_handle_set_var(var/datum/O, variable)
+/decl/vv_set_handler/proc/can_handle_set_var(var/datum/O, variable, var_value, client)
 	if(!istype(O, handled_type))
 		return FALSE
 	if(!(variable in handled_vars))
 		return FALSE
-	if(istype(O))
-		if(variable in O.vars)
-			return TRUE
-		else
-			log_error("Did not find the variable '[variable]' for the instance [log_info_line(O)].")
-			return FALSE
+	if(istype(O) && !(variable in O.vars))
+		log_error("Did not find the variable '[variable]' for the instance [log_info_line(O)].")
+		return FALSE
+	if(predicates)
+		for(var/predicate in predicates)
+			if(!call(predicate)(var_value, client))
+				return FALSE
 	return TRUE
 
-/decl/vv_set_handler/proc/handle_set_var(var/datum/O, variable, var_value)
-	O.vars[variable] = var_value
+/decl/vv_set_handler/proc/handle_set_var(var/datum/O, variable, var_value, client)
+	var/proc_to_call = handled_vars[variable]
+	if(proc_to_call)
+		call(O, proc_to_call)(var_value)
+	else
+		O.vars[variable] = var_value
 
 /decl/vv_set_handler/location_hander
 	handled_type = /atom/movable
@@ -644,8 +645,7 @@
 	else if(variable == "x" || variable == "y" || variable == "z")
 		if(istext(var_value))
 			var_value = text2num(var_value)
-		if(!isnum(var_value))
-			to_chat(client, "<span class='warning'>May only assign numerals to [variable].</span>")
+		if(!is_num_predicate(var_value, client))
 			return
 		var/x = AM.x
 		var/y = AM.y
@@ -666,34 +666,23 @@
 
 /decl/vv_set_handler/opacity_hander
 	handled_type = /atom
-	handled_vars = list("opacity")
-
-/decl/vv_set_handler/opacity_hander/handle_set_var(var/atom/A, variable, var_value, client)
-	if(isnum(var_value))
-		A.set_opacity(var_value)
-	else
-		to_chat(client, "<span class='warning'>May only assign numerals to opacity.</span>")
+	handled_vars = list("opacity" = /atom/proc/set_opacity)
+	predicates = list(/proc/is_num_predicate)
 
 /decl/vv_set_handler/dir_hander
 	handled_type = /atom
-	handled_vars = list("dir")
-
-/decl/vv_set_handler/dir_hander/handle_set_var(var/atom/A, variable, var_value, client)
-	if (!(var_value in alldirs))
-		to_chat(client, "<span class='warning'>May only assign directional values to dir.</span>")
-	else
-		A.set_dir(var_value)
+	handled_vars = list("dir" = /atom/proc/set_dir)
+	predicates = list(/proc/is_dir_predicate)
 
 /decl/vv_set_handler/ghost_appearance_handler
 	handled_type = /mob/observer/ghost
-	handled_vars = list("appearance")
-
-/decl/vv_set_handler/ghost_appearance_handler/handle_set_var(var/mob/observer/ghost/ghost, variable, var_value, client)
-	ghost.set_appearance(var_value)
+	handled_vars = list("appearance" = /mob/observer/ghost/proc/set_appearance)
+	predicates = list(/proc/is_atom_predicate)
 
 /decl/vv_set_handler/virtual_ability_handler
 	handled_type = /mob/observer/virtual
 	handled_vars = list("abilities")
+	predicates = list(/proc/is_num_predicate)
 
 /decl/vv_set_handler/virtual_ability_handler/handle_set_var(var/mob/observer/virtual/virtual, variable, var_value, client)
 	..()
@@ -701,21 +690,15 @@
 
 /decl/vv_set_handler/mob_see_invisible_handler
 	handled_type = /mob
-	handled_vars = list("see_invisible")
-
-/decl/vv_set_handler/mob_see_invisible_handler/handle_set_var(var/mob/mob, variable, var_value, client)
-	mob.set_see_invisible(var_value)
+	handled_vars = list("see_invisible" = /mob/proc/set_see_invisible)
+	predicates = list(/proc/is_num_predicate)
 
 /decl/vv_set_handler/mob_sight_handler
 	handled_type = /mob
-	handled_vars = list("sight")
-
-/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
-	mob.set_sight(var_value)
+	handled_vars = list("sight" = /mob/proc/set_sight)
+	predicates = list(/proc/is_num_predicate)
 
 /decl/vv_set_handler/mob_see_in_dark_handler
 	handled_type = /mob
-	handled_vars = list("see_in_dark")
-
-/decl/vv_set_handler/mob_sight_handler/handle_set_var(var/mob/mob, variable, var_value, client)
-	mob.set_see_in_dark(var_value)
+	handled_vars = list("see_in_dark" = /mob/proc/set_see_in_dark)
+	predicates = list(/proc/is_num_predicate)

@@ -116,10 +116,8 @@
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 		update_icon()
 		frame.transfer_fingerprints_to(src)
-	else
-		first_run()
 
-/obj/machinery/alarm/proc/first_run()
+/obj/machinery/alarm/initialize()
 	alarm_area = get_area(src)
 	area_uid = alarm_area.uid
 	if (name == "alarm")
@@ -136,8 +134,6 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+40, T0C+66) // K
 
-
-/obj/machinery/alarm/initialize()
 	set_frequency(frequency)
 	if (!master_is_operating())
 		elect_master()
@@ -393,7 +389,7 @@
 	signal.data["sigtype"] = "command"
 
 	radio_connection.post_signal(src, signal, RADIO_FROM_AIRALARM)
-//			world << text("Signal [] Broadcasted to []", command, target)
+//			log_debug(text("Signal [] Broadcasted to []", command, target))
 
 	return 1
 
@@ -604,7 +600,7 @@
 		return STATUS_CLOSE
 
 	if(aidisabled && isAI(user))
-		user << "<span class='warning'>AI control for \the [src] interface has been disabled.</span>"
+		to_chat(user, "<span class='warning'>AI control for \the [src] interface has been disabled.</span>")
 		return STATUS_CLOSE
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
@@ -641,7 +637,7 @@
 		var/input_temperature = input("What temperature would you like the system to mantain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
 		if(isnum(input_temperature))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
-				usr << "Temperature must be between [min_temperature]C and [max_temperature]C"
+				to_chat(usr, "Temperature must be between [min_temperature]C and [max_temperature]C")
 			else
 				target_temperature = input_temperature + T0C
 		return 1
@@ -762,9 +758,9 @@
 	switch(buildstage)
 		if(2)
 			if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
-				//user << "You pop the Air Alarm's maintence panel open."
+//				to_chat(user, "You pop the Air Alarm's maintence panel open.")
 				wiresexposed = !wiresexposed
-				user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
+				to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
 				update_icon()
 				return
 
@@ -778,34 +774,33 @@
 
 			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
-					user << "It does nothing"
+					to_chat(user, "It does nothing")
 					return
 				else
 					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						locked = !locked
-						user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>"
+						to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>")
 					else
-						user << "<span class='warning'>Access denied.</span>"
+						to_chat(user, "<span class='warning'>Access denied.</span>")
 			return
 
 		if(1)
 			if(istype(W, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.use(5))
-					user << "<span class='notice'>You wire \the [src].</span>"
+					to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 					buildstage = 2
 					update_icon()
-					first_run()
 					return
 				else
-					user << "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>"
+					to_chat(user, "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>")
 					return
 
 			else if(istype(W, /obj/item/weapon/crowbar))
-				user << "You start prying out the circuit."
+				to_chat(user, "You start prying out the circuit.")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,20))
-					user << "You pry out the circuit!"
+					to_chat(user, "You pry out the circuit!")
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
 					circuit.loc = user.loc
 					buildstage = 0
@@ -813,14 +808,14 @@
 				return
 		if(0)
 			if(istype(W, /obj/item/weapon/airalarm_electronics))
-				user << "You insert the circuit!"
+				to_chat(user, "You insert the circuit!")
 				qdel(W)
 				buildstage = 1
 				update_icon()
 				return
 
 			else if(istype(W, /obj/item/weapon/wrench))
-				user << "You remove the fire alarm assembly from the wall!"
+				to_chat(user, "You remove the fire alarm assembly from the wall!")
 				new /obj/item/frame/air_alarm(get_turf(user))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				qdel(src)
@@ -830,9 +825,9 @@
 /obj/machinery/alarm/examine(mob/user)
 	..(user)
 	if (buildstage < 2)
-		user << "It is not wired."
+		to_chat(user, "It is not wired.")
 	if (buildstage < 1)
-		user << "The circuit is missing."
+		to_chat(user, "The circuit is missing.")
 /*
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
@@ -946,14 +941,14 @@ FIRE ALARM
 				if(istype(W, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = W
 					if (C.use(5))
-						user << "<span class='notice'>You wire \the [src].</span>"
+						to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 						buildstage = 2
 						return
 					else
-						user << "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>"
+						to_chat(user, "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>")
 						return
 				else if(istype(W, /obj/item/weapon/crowbar))
-					user << "You pry out the circuit!"
+					to_chat(user, "You pry out the circuit!")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					spawn(20)
 						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
@@ -962,13 +957,13 @@ FIRE ALARM
 						update_icon()
 			if(0)
 				if(istype(W, /obj/item/weapon/firealarm_electronics))
-					user << "You insert the circuit!"
+					to_chat(user, "You insert the circuit!")
 					qdel(W)
 					buildstage = 1
 					update_icon()
 
 				else if(istype(W, /obj/item/weapon/wrench))
-					user << "You remove the fire alarm assembly from the wall!"
+					to_chat(user, "You remove the fire alarm assembly from the wall!")
 					new /obj/item/frame/fire_alarm(get_turf(user))
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 					qdel(src)

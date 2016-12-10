@@ -32,16 +32,17 @@
 			user.update_inv_glasses()
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE
-			usr << "You deactivate the optical matrix on the [src]."
+			to_chat(usr, "You deactivate the optical matrix on the [src].")
 		else
 			active = 1
 			icon_state = initial(icon_state)
 			user.update_inv_glasses()
 			if(activation_sound)
-				usr << activation_sound
+				sound_to(usr, activation_sound)
+
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
-			usr << "You activate the optical matrix on the [src]."
+			to_chat(usr, "You activate the optical matrix on the [src].")
 		user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
@@ -69,6 +70,7 @@
 	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 
 /obj/item/clothing/glasses/science/New()
@@ -82,6 +84,7 @@
 	item_state = "glasses"
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 7
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	off_state = "denight"
@@ -96,6 +99,7 @@
 	icon_state = "swatgoggles"
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 5
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	flash_protection = FLASH_PROTECTION_MAJOR
@@ -122,6 +126,7 @@
 	icon_state = "material"
 	item_state = "glasses"
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
+	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	vision_flags = SEE_OBJS
 
@@ -194,7 +199,7 @@
 			icon_state = initial(icon_state)
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
-			usr << "You flip \the [src] down to protect your eyes."
+			to_chat(usr, "You flip \the [src] down to protect your eyes.")
 		else
 			src.up = !src.up
 			flags_inv &= ~HIDEEYES
@@ -202,7 +207,7 @@
 			icon_state = "[initial(icon_state)]up"
 			flash_protection = FLASH_PROTECTION_NONE
 			tint = TINT_NONE
-			usr << "You push \the [src] up out of your face."
+			to_chat(usr, "You push \the [src] up out of your face.")
 		update_clothing_icon()
 		usr.update_action_buttons()
 
@@ -282,7 +287,7 @@
 			src.hud = null
 			to_chat(user, "You switch \the [src] to flash protection mode.")
 		update_icon()
-		user << activation_sound
+		sound_to(user, activation_sound)
 		user.update_inv_glasses()
 		user.update_action_buttons()
 
@@ -307,7 +312,7 @@
 	emp_act(severity)
 		if(istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
-			M << "<span class='danger'>The Optical Thermal Scanner overloads and blinds you!</span>"
+			to_chat(M, "<span class='danger'>The Optical Thermal Scanner overloads and blinds you!</span>")
 			if(M.glasses == src)
 				M.eye_blind = 3
 				M.eye_blurry = 5

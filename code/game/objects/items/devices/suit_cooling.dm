@@ -94,7 +94,7 @@
 		cell.add_fingerprint(user)
 		cell.update_icon()
 
-		user << "You remove \the [src.cell]."
+		to_chat(user, "You remove \the [src.cell].")
 		src.cell = null
 		update_icon()
 		return
@@ -106,28 +106,28 @@
 		turn_off()
 	else
 		turn_on()
-	user << "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>"
+	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
 /obj/item/device/suit_cooling_unit/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/screwdriver))
 		if(cover_open)
 			cover_open = 0
-			user << "You screw the panel into place."
+			to_chat(user, "You screw the panel into place.")
 		else
 			cover_open = 1
-			user << "You unscrew the panel."
+			to_chat(user, "You unscrew the panel.")
 		update_icon()
 		return
 
 	if (istype(W, /obj/item/weapon/cell))
 		if(cover_open)
 			if(cell)
-				user << "There is a [cell] already installed here."
+				to_chat(user, "There is a [cell] already installed here.")
 			else
 				user.drop_item()
 				W.forceMove(src)
 				cell = W
-				user << "You insert the [cell]."
+				to_chat(user, "You insert the [cell].")
 		update_icon()
 		return
 
@@ -167,12 +167,12 @@
 		return
 
 	if (on)
-		user << "It's switched on and running."
+		to_chat(user, "It's switched on and running.")
 	else
-		user << "It is switched off."
+		to_chat(user, "It is switched off.")
 
 	if (cover_open)
-		user << "The panel is open."
+		to_chat(user, "The panel is open.")
 
 	if (cell)
-		user << "The charge meter reads [round(cell.percent())]%."
+		to_chat(user, "The charge meter reads [round(cell.percent())]%.")

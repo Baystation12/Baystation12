@@ -26,7 +26,7 @@
 
 /obj/item/weapon/airlock_brace/examine(var/mob/user)
 	..()
-	user << examine_health()
+	to_chat(user, examine_health())
 
 
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
@@ -81,36 +81,36 @@
 			var/obj/item/weapon/card/id/C = W.GetIdCard()
 			update_access()
 			if(check_access(C))
-				user << "You swipe \the [C] through \the [src]."
+				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))
-					user << "\The [src] clicks few times and detaches itself from \the [airlock]!"
+					to_chat(user, "\The [src] clicks few times and detaches itself from \the [airlock]!")
 					unlock_brace(usr)
 			else
-				user << "You swipe \the [C] through \the [src], but it does not react."
+				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")
 		return
 
 	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
 		if(!airlock)
 			return
 		var/obj/item/weapon/crowbar/brace_jack/C = W
-		user << "You begin forcibly removing \the [src] with \the [C]."
+		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
 		if(do_after(user, rand(150,300), airlock))
-			user << "You finish removing \the [src]."
+			to_chat(user, "You finish removing \the [src].")
 			unlock_brace(user)
 		return
 
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/C = W
 		if(cur_health == max_health)
-			user << "\The [src] does not require repairs."
+			to_chat(user, "\The [src] does not require repairs.")
 			return
 		if(C.remove_fuel(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			cur_health = min(cur_health + rand(80,120), max_health)
 			if(cur_health == max_health)
-				user << "You repair some dents on \the [src]. It is in perfect condition now."
+				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
-				user << "You repair some dents on \the [src]."
+				to_chat(user, "You repair some dents on \the [src].")
 
 
 /obj/item/weapon/airlock_brace/proc/take_damage(var/amount)

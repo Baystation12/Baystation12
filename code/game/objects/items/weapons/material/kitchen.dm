@@ -50,7 +50,7 @@
 		overlays.Cut()
 		return
 	else
-		user << "<span class='warning'>You don't have anything on \the [src].</span>"	//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
+		to_chat(user, "<span class='warning'>You don't have anything on \the [src].</span>")//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
 /obj/item/weapon/material/kitchen/utensil/fork
@@ -97,7 +97,7 @@
 
 /obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>You accidentally cut yourself with \the [src].</span>"
+		to_chat(user, "<span class='warning'>You accidentally cut yourself with \the [src].</span>")
 		user.take_organ_damage(20)
 		return
 	return ..()
@@ -120,7 +120,7 @@
 
 /obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>"
+		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
 		user.drop_from_inventory(src)
 		user.take_organ_damage(10)
 		user.Paralyse(2)

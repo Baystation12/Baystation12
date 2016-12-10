@@ -21,7 +21,7 @@ obj/machinery/door/airlock/receive_signal(datum/signal/signal)
 	cur_command = signal.data["command"]
 
 	//if there's no power, recieve the signal but just don't do anything. This allows airlocks to continue to work normally once power is restored
-	if (arePowerSystemsOn()) return //no power
+	if (!arePowerSystemsOn()) return //no power
 
 	spawn()
 		execute_current_command()
@@ -267,7 +267,7 @@ obj/machinery/access_button/attackby(obj/item/I as obj, mob/user as mob)
 obj/machinery/access_button/attack_hand(mob/user)
 	add_fingerprint(usr)
 	if(!allowed(user))
-		user << "<span class='warning'>Access Denied</span>"
+		to_chat(user, "<span class='warning'>Access Denied</span>")
 
 	else if(radio_connection)
 		var/datum/signal/signal = new

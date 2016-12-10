@@ -69,16 +69,16 @@
 			if(host.reagents.has_reagent("sugar"))
 				if(!docile)
 					if(controlling)
-						host << "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+						to_chat(host, "<span class='notice'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</span>")
 					else
-						src << "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+						to_chat(src, "<span class='notice'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</span>")
 					docile = 1
 			else
 				if(docile)
 					if(controlling)
-						host << "\blue You shake off your lethargy as the sugar leaves your host's blood."
+						to_chat(host, "<span class='notice'>You shake off your lethargy as the sugar leaves your host's blood.</span>")
 					else
-						src << "\blue You shake off your lethargy as the sugar leaves your host's blood."
+						to_chat(src, "<span class='notice'>You shake off your lethargy as the sugar leaves your host's blood.</span>")
 					docile = 0
 
 			if(chemicals < 250)
@@ -86,7 +86,7 @@
 			if(controlling)
 
 				if(docile)
-					host << "\blue You are feeling far too docile to continue controlling your host..."
+					to_chat(host, "<span class='notice'>You are feeling far too docile to continue controlling your host...</span>")
 					host.release_control()
 					return
 
@@ -94,7 +94,7 @@
 					host.adjustBrainLoss(0.1)
 
 				if(prob(host.brainloss/20))
-					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
+					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()

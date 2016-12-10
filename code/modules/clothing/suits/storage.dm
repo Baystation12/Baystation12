@@ -39,12 +39,12 @@
 
 		if(icon_state == icon_open) //Will check whether icon state is currently set to the "open" or "closed" state and switch it around with a message to the user
 			icon_state = icon_closed
-			usr << "You button up the coat."
+			to_chat(usr, "You button up the coat.")
 		else if(icon_state == icon_closed)
 			icon_state = icon_open
-			usr << "You unbutton the coat."
+			to_chat(usr, "You unbutton the coat.")
 		else //in case some goofy admin switches icon states around without switching the icon_open or icon_closed
-			usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
+			to_chat(usr, "You attempt to button-up the velcro on your [src], before promptly realising how silly you are.")
 			return
 		update_clothing_icon()	//so our overlays update
 

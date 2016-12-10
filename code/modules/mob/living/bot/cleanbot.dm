@@ -54,7 +54,7 @@
 //		spawn(0)
 		path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
 		if(!path)
-			custom_emote(2, "can't reach \the [target.name] and is giving up for now.")
+			visible_message("\The [src] can't reach \the [target.name] and is giving up for now.")
 			log_debug("[src] can't reach [target.name] ([target.x], [target.y])")
 			ignorelist |= weakref(target)
 			target = null
@@ -82,7 +82,7 @@
 		return
 
 	if(!screwloose && !oddbutton && prob(5))
-		custom_emote(2, "makes an excited beeping booping sound!")
+		visible_message("\The [src] makes an excited beeping booping sound!")
 
 	if(screwloose && prob(5)) // Make a mess
 		if(istype(loc, /turf/simulated))
@@ -172,7 +172,7 @@
 		return
 
 	cleaning = 1
-	custom_emote(2, "begins to clean up \the [D]")
+	visible_message("\The [src] begins to clean up \the [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime, progress = 0))
@@ -255,17 +255,17 @@
 				beacon_freq = freq
 		if("screw")
 			screwloose = !screwloose
-			usr << "<span class='notice'>You twiddle the screw.</span>"
+			to_chat(usr, "<span class='notice'>You twiddle the screw.</span>")
 		if("oddbutton")
 			oddbutton = !oddbutton
-			usr << "<span class='notice'>You press the weird button.</span>"
+			to_chat(usr, "<span class='notice'>You press the weird button.</span>")
 	attack_hand(usr)
 
 /mob/living/bot/cleanbot/emag_act(var/remaining_uses, var/mob/user)
 	. = ..()
 	if(!screwloose || !oddbutton)
 		if(user)
-			user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
 		oddbutton = 1
 		screwloose = 1
 		return 1
@@ -324,7 +324,7 @@
 		var/turf/T = get_turf(loc)
 		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
 		A.name = created_name
-		user << "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>"
+		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
 		user.drop_from_inventory(src)
 		qdel(src)
 

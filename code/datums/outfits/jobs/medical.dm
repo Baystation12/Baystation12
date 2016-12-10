@@ -97,7 +97,7 @@
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	belt = /obj/item/weapon/storage/belt/medical/emt
 	id_type = /obj/item/weapon/card/id/medical/paramedic
-	flags = OUTFIT_EXTENDED_SURVIVAL
+	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/medical/paramedic/emt
 	name = OUTFIT_JOB_NAME("Emergency medical technician")

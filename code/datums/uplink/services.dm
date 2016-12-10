@@ -71,15 +71,15 @@
 	if(.)
 		switch(state)
 			if(AWAITING_ACTIVATION)
-				user << "It is labeled '[service_label]' and appears to be awaiting activation."
+				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
 			if(CURRENTLY_ACTIVE)
-				user << "It is labeled '[service_label]' and appears to be active."
+				to_chat(user, "It is labeled '[service_label]' and appears to be active.")
 			if(HAS_BEEN_ACTIVATED)
-				user << "It is labeled '[service_label]' and appears to be permanently disabled."
+				to_chat(user, "It is labeled '[service_label]' and appears to be permanently disabled.")
 
 /obj/item/device/uplink_service/attack_self(var/mob/user)
 	if(state != AWAITING_ACTIVATION)
-		user << "<span class='warning'>\The [src] won't activate again.</span>"
+		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
 	if(!enable())
 		return

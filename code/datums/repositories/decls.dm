@@ -32,4 +32,8 @@
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
 	for(var/decl_type in decl_types)
-		. += get_decl(decl_type)
+		.[decl_type] =  get_decl(decl_type)
+
+/decls/Destroy()
+	crash_with("Prevented attempt to delete a decl instance: [log_info_line(src)]")
+	return 1 // Prevents Decl destruction

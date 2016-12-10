@@ -317,7 +317,6 @@
 	id = "dexalin"
 	result = "dexalin"
 	required_reagents = list("acetone" = 2, "phoron" = 0.1)
-	catalysts = list("phoron" = 1)
 	inhibitors = list("water" = 1) // Messes with cryox
 	result_amount = 1
 
@@ -369,7 +368,6 @@
 	id = "clonexadone"
 	result = "clonexadone"
 	required_reagents = list("cryoxadone" = 1, "sodium" = 1, "phoron" = 0.1)
-	catalysts = list("phoron" = 5)
 	result_amount = 2
 
 /datum/chemical_reaction/spaceacillin
@@ -544,6 +542,13 @@
 	required_reagents = list("mindbreaker" = 1, "acetone" = 1, "inaprovaline" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/hair_remover
+	name = "Hair Remover"
+	id = "hair_remover"
+	result = "hair_remover"
+	required_reagents = list("radium" = 1, "potassium" = 1, "hclacid" = 1)
+	result_amount = 3
+
 /* Solidification */
 
 /datum/chemical_reaction/phoronsolidification
@@ -706,7 +711,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "<span class='warning'>The solution spews out foam!</span>"
+		to_chat(M, "<span class='warning'>The solution spews out foam!</span>")
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 0)
@@ -726,7 +731,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "<span class='warning'>The solution spews out a metalic foam!</span>"
+		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 1)
@@ -745,7 +750,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "<span class='warning'>The solution spews out a metalic foam!</span>"
+		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 2)
@@ -1138,7 +1143,7 @@
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/M in range (get_turf(holder.my_atom), 7))
 		M.bodytemperature -= 140
-		M << "<span class='warning'>You feel a chill!</span>"
+		to_chat(M, "<span class='warning'>You feel a chill!</span>")
 
 //Orange
 /datum/chemical_reaction/slime/casp
@@ -1960,7 +1965,7 @@
 	name = "Mead"
 	id = "mead"
 	result = "mead"
-	required_reagents = list("sugar" = 1, "water" = 1)
+	required_reagents = list("honey" = 1, "water" = 1)
 	catalysts = list("enzyme" = 5)
 	result_amount = 2
 
@@ -2146,6 +2151,14 @@
 	required_reagents = list("space_up" = 1, "bluecuracao" = 1, "melonliquor" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/rum
+	name = "Rum"
+	id = "rum"
+	result = "rum"
+	required_reagents = list("sugar" = 1, "water" = 1)
+	catalysts = list("enzyme" = 5)
+	result_amount = 2
+
 /datum/chemical_reaction/luminol
 	name = "Luminol"
 	id = "luminol"
@@ -2157,7 +2170,7 @@
 	name = "Oxyphoron"
 	id = "oxyphoron"
 	result = "oxyphoron"
-	required_reagents = list("oxygen" = 1, "phoron" = 1)
+	required_reagents = list("water" = 1, "phoron" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/deuterium

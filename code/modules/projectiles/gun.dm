@@ -121,7 +121,7 @@
 
 	var/mob/living/M = user
 	if(HULK in M.mutations)
-		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
+		to_chat(M, "<span class='danger'>Your fingers are much too large for the trigger guard!</span>")
 		return 0
 	if((CLUMSY in M.mutations) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
@@ -153,7 +153,7 @@
 		return
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
-		user << "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>"
+		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 
@@ -176,7 +176,7 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!</span>"
+			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
 
 	var/shoot_time = (burst - 1)* burst_delay
@@ -256,24 +256,24 @@
 			switch(requires_two_hands)
 				if(1)
 					if(prob(50)) //don't need to tell them every single time
-						user << "<span class='warning'>Your aim wavers slightly.</span>"
+						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
 				if(2)
-					user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
+					to_chat(user, "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>")
 				if(3)
-					user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
+					to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
 				if(4 to INFINITY)
-					user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
+					to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
 		else if(!user.can_wield_item(src))
 			switch(requires_two_hands)
 				if(1)
 					if(prob(50)) //don't need to tell them every single time
-						user << "<span class='warning'>Your aim wavers slightly.</span>"
+						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
 				if(2)
-					user << "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>"
+					to_chat(user, "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>")
 				if(3)
-					user << "<span class='warning'>You have trouble holding \the [src] steady.</span>"
+					to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
 				if(4 to INFINITY)
-					user << "<span class='warning'>You struggle to hold \the [src] steady!</span>"
+					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
 		spawn()
@@ -390,7 +390,7 @@
 			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
 			user.death()
 		else
-			user << "<span class = 'notice'>Ow...</span>"
+			to_chat(user, "<span class = 'notice'>Ow...</span>")
 			user.apply_effect(110,AGONY,0)
 		qdel(in_chamber)
 		mouthshoot = 0
@@ -424,7 +424,7 @@
 	..()
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
-		user << "The fire selector is set to [current_mode.name]."
+		to_chat(user, "The fire selector is set to [current_mode.name].")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)
@@ -441,5 +441,5 @@
 /obj/item/weapon/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(new_mode)
-		user << "<span class='notice'>\The [src] is now set to [new_mode.name].</span>"
+		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 

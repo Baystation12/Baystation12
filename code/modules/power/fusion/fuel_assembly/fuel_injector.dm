@@ -40,7 +40,7 @@ var/list/fuel_injectors = list()
 
 /obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/device/multitool))
+	if(ismultitool(W))
 		var/new_ident = input("Enter a new ident tag.", "Fuel Injector", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident
@@ -49,7 +49,7 @@ var/list/fuel_injectors = list()
 	if(istype(W, /obj/item/weapon/fuel_assembly))
 
 		if(injecting)
-			user << "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>"
+			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
 			return
 
 		if(cur_assembly)
@@ -66,9 +66,9 @@ var/list/fuel_injectors = list()
 		cur_assembly = W
 		return
 
-	if(istype(W, /obj/item/weapon/wrench))
+	if(iswrench(W))
 		if(injecting)
-			user << "<span class='warning'>Shut \the [src] off first!</span>"
+			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 			return
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -83,7 +83,7 @@ var/list/fuel_injectors = list()
 /obj/machinery/fusion_fuel_injector/attack_hand(mob/user)
 
 	if(injecting)
-		user << "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>"
+		to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
 		return
 
 	if(cur_assembly)
@@ -93,7 +93,7 @@ var/list/fuel_injectors = list()
 		cur_assembly = null
 		return
 	else
-		user << "<span class='warning'>There is no fuel rod in \the [src].</span>"
+		to_chat(user, "<span class='warning'>There is no fuel rod in \the [src].</span>")
 		return
 
 /obj/machinery/fusion_fuel_injector/proc/BeginInjecting()
@@ -123,9 +123,11 @@ var/list/fuel_injectors = list()
 				A.particle_type = reagent
 				A.additional_particles = numparticles - 1
 				A.move(1)
-				cur_assembly.rod_quantities[reagent] -= amount
-				amount_left += cur_assembly.rod_quantities[reagent]
-		cur_assembly.percent_depleted = amount_left / cur_assembly.initial_amount
+				if(cur_assembly)
+					cur_assembly.rod_quantities[reagent] -= amount
+					amount_left += cur_assembly.rod_quantities[reagent]
+		if(cur_assembly)
+			cur_assembly.percent_depleted = amount_left / cur_assembly.initial_amount
 		flick("injector-emitting",src)
 	else
 		StopInjecting()

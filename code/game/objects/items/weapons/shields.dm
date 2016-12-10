@@ -150,7 +150,7 @@
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>You beat yourself in the head with [src].</span>"
+		to_chat(user, "<span class='warning'>You beat yourself in the head with [src].</span>")
 		user.take_organ_damage(5)
 	active = !active
 	if (active)
@@ -158,14 +158,14 @@
 		update_icon()
 		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		user << "<span class='notice'>\The [src] is now active.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is now active.</span>")
 
 	else
 		force = 3
 		update_icon()
 		w_class = ITEM_SIZE_TINY
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		user << "<span class='notice'>\The [src] can now be concealed.</span>"
+		to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user

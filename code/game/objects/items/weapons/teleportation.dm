@@ -49,7 +49,7 @@ Frequency:
 		return
 	var/turf/current_location = get_turf(usr)//What turf is the user on?
 	if(!current_location||current_location.z==2)//If turf was not found or they're on z level 2.
-		usr << "The [src] is malfunctioning."
+		to_chat(usr, "The [src] is malfunctioning.")
 		return
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		usr.set_machine(src)

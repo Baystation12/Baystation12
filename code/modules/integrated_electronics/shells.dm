@@ -1,6 +1,7 @@
 /obj/item/electronic_assembly_shell
 	name = "plastic shell"
 	w_class = 1
+	matter = list("plastic" = 100)
 	var/applied_description
 
 /obj/item/electronic_assembly_shell/proc/can_apply_shell(var/obj/item/device/electronic_assembly/assembly, var/mob/user)

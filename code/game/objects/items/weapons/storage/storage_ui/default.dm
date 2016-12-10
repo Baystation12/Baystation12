@@ -246,5 +246,5 @@
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
-	if(user.s_active)
-		user.s_active.show_to(usr)
+	if(user && user.s_active)
+		user.s_active.show_to(user)

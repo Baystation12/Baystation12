@@ -95,7 +95,7 @@
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
 		if(padding_material)
-			user << "\The [src] is already padded."
+			to_chat(user, "\The [src] is already padded.")
 			return
 		var/obj/item/stack/C = W
 		if(C.get_amount() < 1) // How??
@@ -110,21 +110,21 @@
 			if(M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
-			user << "You cannot pad \the [src] with that."
+			to_chat(user, "You cannot pad \the [src] with that.")
 			return
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
 			src.loc = get_turf(src)
-		user << "You add padding to \the [src]."
+		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
 
 	else if (istype(W, /obj/item/weapon/wirecutters))
 		if(!padding_material)
-			user << "\The [src] has no padding to remove."
+			to_chat(user, "\The [src] has no padding to remove.")
 			return
-		user << "You remove the padding from \the [src]."
+		to_chat(user, "You remove the padding from \the [src].")
 		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 		remove_padding()
 
@@ -216,7 +216,7 @@
 	if(istype(W,/obj/item/roller_holder))
 		var/obj/item/roller_holder/RH = W
 		if(!RH.held)
-			user << "<span class='notice'>You collect the roller bed.</span>"
+			to_chat(user, "<span class='notice'>You collect the roller bed.</span>")
 			src.forceMove(RH)
 			RH.held = src
 			return
@@ -237,10 +237,10 @@
 /obj/item/roller_holder/attack_self(mob/user as mob)
 
 	if(!held)
-		user << "<span class='notice'>The rack is empty.</span>"
+		to_chat(user, "<span class='notice'>The rack is empty.</span>")
 		return
 
-	user << "<span class='notice'>You deploy the roller bed.</span>"
+	to_chat(user, "<span class='notice'>You deploy the roller bed.</span>")
 	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
 	R.add_fingerprint(user)
 	qdel(held)

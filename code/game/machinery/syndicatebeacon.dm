@@ -59,7 +59,7 @@
 				return
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
-			M << "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>"
+			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
 			traitors.add_antagonist(N.mind)
 			traitors.equip(N)
 			message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
@@ -94,7 +94,7 @@
 
 /obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
 	if(surplus() < 1500)
-		if(user) user << "<span class='notice'>The connected wire doesn't have enough current.</span>"
+		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
 		return
 	for(var/obj/singularity/singulo in world)
 		if(singulo.z == z)
@@ -103,7 +103,7 @@
 	active = 1
 	machines |= src
 	if(user)
-		user << "<span class='notice'>You activate the beacon.</span>"
+		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
@@ -113,7 +113,7 @@
 	icon_state = "[icontype]0"
 	active = 0
 	if(user)
-		user << "<span class='notice'>You deactivate the beacon.</span>"
+		to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
 
 
 /obj/machinery/power/singularity_beacon/attack_ai(mob/user as mob)
@@ -124,27 +124,27 @@
 	if(anchored)
 		return active ? Deactivate(user) : Activate(user)
 	else
-		user << "<span class='danger'>You need to screw the beacon to the floor first!</span>"
+		to_chat(user, "<span class='danger'>You need to screw the beacon to the floor first!</span>")
 		return
 
 
 /obj/machinery/power/singularity_beacon/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(active)
-			user << "<span class='danger'>You need to deactivate the beacon first!</span>"
+			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
 			return
 
 		if(anchored)
 			anchored = 0
-			user << "<span class='notice'>You unscrew the beacon from the floor.</span>"
+			to_chat(user, "<span class='notice'>You unscrew the beacon from the floor.</span>")
 			disconnect_from_network()
 			return
 		else
 			if(!connect_to_network())
-				user << "This device must be placed over an exposed cable."
+				to_chat(user, "This device must be placed over an exposed cable.")
 				return
 			anchored = 1
-			user << "<span class='notice'>You screw the beacon to the floor and attach the cable.</span>"
+			to_chat(user, "<span class='notice'>You screw the beacon to the floor and attach the cable.</span>")
 			return
 	..()
 	return

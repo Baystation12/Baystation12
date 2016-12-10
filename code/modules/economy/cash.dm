@@ -37,7 +37,7 @@
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		user << "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>"
+		to_chat(user, "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>")
 		qdel(src)
 
 /obj/item/weapon/spacecash/proc/getMoneyImages()
@@ -179,4 +179,4 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 /obj/item/weapon/spacecash/ewallet/examine(mob/user)
 	..(user)
 	if (!(user in view(2)) && user!=src.loc) return
-	user << "\blue Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth]."
+	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</span>")

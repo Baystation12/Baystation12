@@ -142,7 +142,7 @@
 	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.</span>", \
 	"<span class='notice'>You put \the [tool] inside [target]'s [get_cavity(affected)] cavity.</span>" )
 	if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.robotic >= ORGAN_ROBOT))
-		user << "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>"
+		to_chat(user, "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>")
 		var/datum/wound/internal_bleeding/I = new (10)
 		affected.wounds += I
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1)
@@ -167,6 +167,11 @@
 /datum/surgery_step/cavity/implant_removal/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/obj/item/organ/internal/brain/sponge = target.internal_organs_by_name[BP_BRAIN]
+
+	// targetted a missing limb/organ
+	if(!affected)
+		return 0
+
 	if(sponge && sponge.parent_organ == affected.organ_tag && sponge.damage)
 		return 0
 	return ..()

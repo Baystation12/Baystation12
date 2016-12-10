@@ -306,6 +306,13 @@
 	item_state = "p_suit"
 	worn_state = "dress_pink"
 
+/obj/item/clothing/under/dress/dress_purple
+	name = "purple dress"
+	desc= "A simple, tight fitting purple dress."
+	icon_state = "tian_dress"
+	item_state = "p_suit"
+	worn_state = "tian_dress"
+
 /obj/item/clothing/under/dress/dress_yellow
 	name = "yellow dress"
 	desc = "A flirty, little yellow dress."
@@ -428,10 +435,17 @@
 
 /obj/item/clothing/under/blackjumpskirt
 	name = "black jumpskirt"
-	desc = "A black jumpskirt, Sol size 0."
+	desc = "A black jumpskirt, with a pink undershirt."
 	icon_state = "blackjumpskirt"
 	item_state = "bl_suit"
 	worn_state = "blackjumpskirt"
+
+/obj/item/clothing/under/shortjumpskirt
+	name = "short jumpskirt"
+	desc = "A slimming, short jumpskirt."
+	icon_state = "shortjumpskirt"
+	item_state = "w_suit"
+	worn_state = "shortjumpskirt"
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
@@ -607,4 +621,9 @@
 	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 
+/obj/item/clothing/under/rank/psych/turtleneck/sweater
+	desc = "A warm looking sweater and a pair of dark blue slacks."
+	name = "sweater"
+	icon_state = "turtleneck"
+	worn_state = "turtleneck"
 

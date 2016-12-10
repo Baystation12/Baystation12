@@ -15,7 +15,7 @@
 		return ..()
 	else
 		M.death()
-		user << "<b>ERROR ERROR ERROR</b>"
+		to_chat(user, "<b>ERROR ERROR ERROR</b>")
 
 /obj/item/weapon/aicard/attack_self(mob/user)
 
@@ -59,7 +59,7 @@
 		if(confirm == "Yes" && (CanUseTopic(user, state) == STATUS_INTERACTIVE))
 			admin_attack_log(user, carded_ai, "Wiped using \the [src.name]", "Was wiped with \the [src.name]", "used \the [src.name] to wipe")
 			flush = 1
-			carded_ai << "Your core files are being wiped!"
+			to_chat(carded_ai, "Your core files are being wiped!")
 			while (carded_ai && carded_ai.stat != DEAD)
 				carded_ai.adjustOxyLoss(2)
 				carded_ai.updatehealth()
@@ -67,12 +67,12 @@
 			flush = 0
 	if (href_list["radio"])
 		carded_ai.aiRadio.disabledAi = text2num(href_list["radio"])
-		carded_ai << "<span class='warning'>Your Subspace Transceiver has been [carded_ai.aiRadio.disabledAi ? "disabled" : "enabled"]!</span>"
-		user << "<span class='notice'>You [carded_ai.aiRadio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>"
+		to_chat(carded_ai, "<span class='warning'>Your Subspace Transceiver has been [carded_ai.aiRadio.disabledAi ? "disabled" : "enabled"]!</span>")
+		to_chat(user, "<span class='notice'>You [carded_ai.aiRadio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>")
 	if (href_list["wireless"])
 		carded_ai.control_disabled = text2num(href_list["wireless"])
-		carded_ai << "<span class='warning'>Your wireless interface has been [carded_ai.control_disabled ? "disabled" : "enabled"]!</span>"
-		user << "<span class='notice'>You [carded_ai.control_disabled ? "disable" : "enable"] the AI's wireless interface.</span>"
+		to_chat(carded_ai, "<span class='warning'>Your wireless interface has been [carded_ai.control_disabled ? "disabled" : "enabled"]!</span>")
+		to_chat(user, "<span class='notice'>You [carded_ai.control_disabled ? "disable" : "enable"] the AI's wireless interface.</span>")
 		update_icon()
 	return 1
 
@@ -90,15 +90,15 @@
 
 /obj/item/weapon/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client)
-		user << "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to download."
+		to_chat(user, "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to download.")
 		return 0
 
 	if(carded_ai)
-		user << "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one."
+		to_chat(user, "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one.")
 		return 0
 
 	if(ai.malfunctioning)
-		user << "<span class='danger'>ERROR:</span> Remote transfer interface disabled."
+		to_chat(user, "<span class='danger'>ERROR:</span> Remote transfer interface disabled.")
 		return 0
 
 	if(istype(ai.loc, /turf/))
@@ -117,9 +117,9 @@
 	carded_ai = ai
 
 	if(ai.client)
-		ai << "You have been downloaded to a mobile storage device. Remote access lost."
+		to_chat(ai, "You have been downloaded to a mobile storage device. Remote access lost.")
 	if(user.client)
-		user << "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory."
+		to_chat(user, "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 
 	ai.canmove = 1
 	update_icon()

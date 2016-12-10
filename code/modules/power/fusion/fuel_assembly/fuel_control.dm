@@ -26,7 +26,7 @@
 		return
 
 	if(!id_tag)
-		user << "<span class='warning'>This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool.</span>"
+		to_chat(user, "<span class='warning'>This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool.</span>")
 		return
 
 	var/dat = "<B>Reactor Core Fuel Control #[id_tag]</B><BR>"
@@ -94,7 +94,7 @@
 
 
 /obj/machinery/computer/fusion_fuel_control/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/device/multitool))
+	if(ismultitool(W))
 		var/new_ident = input("Enter a new ident tag.", "Fuel Control", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

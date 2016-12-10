@@ -8,6 +8,7 @@
 	health = 100
 	maxHealth = 100
 	mob_size = 4
+	species_language = "Xenomorph"
 
 	var/adult_form
 	var/dead_icon
@@ -16,6 +17,9 @@
 	var/time_of_birth
 	var/language
 	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
+	var/can_namepick_as_adult = 0
+	var/adult_name
+	var/instance_num
 
 /mob/living/carbon/alien/New()
 
@@ -24,7 +28,8 @@
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
-	name = "[initial(name)] ([rand(1, 1000)])"
+	instance_num = rand(1, 1000)
+	name = "[initial(name)] ([instance_num])"
 	real_name = name
 	regenerate_icons()
 

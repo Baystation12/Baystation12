@@ -22,7 +22,7 @@
 	malf_process()
 
 	if(APU_power && (hardware_integrity() < 50))
-		src << "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>"
+		to_chat(src, "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>")
 		stop_apu(1)
 
 	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.

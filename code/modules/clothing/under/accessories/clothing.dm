@@ -1,3 +1,14 @@
+/obj/item/clothing/accessory/wcoat
+	name = "waistcoat"
+	desc = "For some classy, murderous fun."
+	icon_state = "vest"
+	item_state = "wcoat"
+
+/obj/item/clothing/accessory/suspenders
+	name = "suspenders"
+	desc = "They suspend the illusion of the mime's play."
+	icon_state = "suspenders"
+
 /obj/item/clothing/accessory/toggleable
 	var/icon_closed
 /obj/item/clothing/accessory/toggleable/New()
@@ -35,10 +46,10 @@
 /obj/item/clothing/accessory/toggleable/proc/do_toggle(user)
 	if(icon_state == icon_closed)
 		icon_state = "[icon_closed]_open"
-		usr << "You unbutton [src]."
+		to_chat(usr, "You unbutton [src].")
 	else
 		icon_state = icon_closed
-		usr << "You button up [src]."
+		to_chat(usr, "You button up [src].")
 
 	update_clothing_icon()	//so our overlays update
 

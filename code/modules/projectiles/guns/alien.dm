@@ -32,7 +32,7 @@
 
 /obj/item/weapon/gun/launcher/spikethrower/examine(mob/user)
 	..(user)
-	user << "It has [spikes] spike\s remaining."
+	to_chat(user, "It has [spikes] spike\s remaining.")
 
 /obj/item/weapon/gun/launcher/spikethrower/update_icon()
 	icon_state = "spikethrower[spikes]"
@@ -40,8 +40,8 @@
 /obj/item/weapon/gun/launcher/spikethrower/special_check(user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species && H.species.get_bodytype() != "Vox")
-			user << "<span class='warning'>\The [src] does not respond to you!</span>"
+		if(H.species && H.species.get_bodytype(H) != "Vox")
+			to_chat(user, "<span class='warning'>\The [src] does not respond to you!</span>")
 			return 0
 	return ..()
 

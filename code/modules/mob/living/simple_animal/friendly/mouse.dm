@@ -38,7 +38,7 @@
 	..()
 	if(!stat && prob(speak_chance))
 		for(var/mob/M in view())
-			M << 'sound/effects/mousesqueek.ogg'
+			sound_to(M, 'sound/effects/mousesqueek.ogg')
 
 	if(!ckey && stat == CONSCIOUS && prob(0.5))
 		stat = UNCONSCIOUS
@@ -97,8 +97,8 @@
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
-			M << "\blue \icon[src] Squeek!"
-			M << 'sound/effects/mousesqueek.ogg'
+			to_chat(M, "<span class='warning'>\icon[src] Squeek!</span>")
+			sound_to(M, 'sound/effects/mousesqueek.ogg')
 	..()
 
 /*

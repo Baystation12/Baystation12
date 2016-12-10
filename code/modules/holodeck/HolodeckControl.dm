@@ -137,8 +137,8 @@
 		emagged = 1
 		safety_disabled = 1
 		update_projections()
-		user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
-		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [company_name] maintenance and do not use the simulator."
+		to_chat(user, "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>")
+		to_chat(user, "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [company_name] maintenance and do not use the simulator.")
 		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
 		return 1
 		src.updateUsrDialog()
@@ -257,7 +257,7 @@
 			if(world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 				return
 			for(var/mob/M in range(3,src))
-				M.show_message("\b ERROR. Recalibrating projection apparatus.")
+				M.show_message("<span class='warning'>ERROR. Recalibrating projection apparatus.</span>")
 				last_change = world.time
 				return
 
@@ -316,7 +316,7 @@
 		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
 		for(var/mob/M in range(3,src))
-			M.show_message("\b ERROR. Recalibrating gravity field.")
+			M.show_message("<span class='warning'>ERROR. Recalibrating gravity field.</span>")
 			last_change = world.time
 			return
 

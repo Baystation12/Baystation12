@@ -83,7 +83,6 @@
 			mode = UNWIRE
 	update_icon()
 	to_chat(user, "<span class='notice'>You set \the [src] to [mode].</span>")
-
 #undef WIRE
 #undef WIRING
 #undef UNWIRE
@@ -102,6 +101,7 @@
 	var/available_types = list("string","number","null")
 
 /obj/item/device/integrated_electronics/debugger/admin
+	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
 	available_types = list("string","number","ref","null")
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
@@ -130,7 +130,6 @@
 		if("null")
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
-
 /obj/item/device/integrated_electronics/debugger/admin/MouseDrop(var/atom/over_object)
 	if(!accepting_refs)
 		return ..()
@@ -153,7 +152,6 @@
 	else if(io.io_type == PULSE_CHANNEL)
 		io.holder.check_then_do_work()
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
-
 	io.holder.interact(user) // This is to update the UI.
 
 /obj/item/device/integrated_electronics/analyzer
@@ -172,7 +170,6 @@
 			to_chat(user, last_scan)
 		else
 			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
-
 /obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
 	if(!istype(assembly))
 		return ..()
@@ -193,7 +190,6 @@
 		last_scan += "*No Components Found*"
 	last_scan = jointext(last_scan,"\n")
 	to_chat(user, last_scan)
-
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
@@ -247,14 +243,16 @@
 	new /obj/item/weapon/screwdriver(src)
 	make_exact_fit()
 
-/obj/item/weapon/storage/bag/circuits/all/New()
+/obj/item/weapon/storage/bag/circuits/debug/New()
 	..()
-	for(var/thing in subtypesof(/obj/item/integrated_circuit))
-		var/obj/item/integrated_circuit/ic = thing
-		if(initial(ic.category) == thing)
+	name = "[name] - not intended for general use"
+	desc = "[desc] - not intended for general use"
+	for(var/subtype in subtypesof(/obj/item/integrated_circuit))
+		var/obj/item/integrated_circuit/ic = subtype
+		if(initial(ic.category) == subtype)
 			continue
 		for(var/i = 1 to 10)
-			new thing(src)
+			new subtype(src)
 
 	new /obj/item/device/electronic_assembly(src)
 	new /obj/item/device/integrated_electronics/wirer(src)

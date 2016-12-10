@@ -46,7 +46,7 @@
 	item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 75, bullet = 25, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.5
 
 /obj/item/clothing/suit/armor/riot/New()
@@ -73,7 +73,7 @@
 	item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 25, bullet = 75, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/armor/bulletproof/New()
@@ -100,7 +100,7 @@
 	item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 33, bullet = 33, laser = 77, energy = 50, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 25, bullet = 25, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/armor/laserproof/New()
@@ -202,11 +202,11 @@
 /obj/item/clothing/suit/armor/reactive/attack_self(mob/user as mob)
 	src.active = !( src.active )
 	if (src.active)
-		user << "\blue The reactive armor is now active."
+		to_chat(user, "<span class='notice'>The reactive armor is now active.</span>")
 		src.icon_state = "reactive"
 		src.item_state = "reactive"
 	else
-		user << "\blue The reactive armor is now inactive."
+		to_chat(user, "<span class='notice'>The reactive armor is now inactive.</span>")
 		src.icon_state = "reactiveoff"
 		src.item_state = "reactiveoff"
 		src.add_fingerprint(user)
@@ -250,7 +250,7 @@
 	if(!holster.holstered)
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
-			usr << "<span class='warning'>You need your gun equiped to holster it.</span>"
+			to_chat(usr, "<span class='warning'>You need your gun equiped to holster it.</span>")
 			return
 		holster.holster(W, usr)
 	else

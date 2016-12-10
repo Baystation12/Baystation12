@@ -39,10 +39,10 @@
 	if (usr.stat != 0)
 		return
 	if (src.occupant)
-		usr << "<span class='warning'>The scanner is already occupied!</span>"
+		to_chat(usr, "<span class='warning'>The scanner is already occupied!</span>")
 		return
 	if (usr.abiotic())
-		usr << "<span class='warning'>The subject cannot have abiotic items on.</span>"
+		to_chat(usr, "<span class='warning'>The subject cannot have abiotic items on.</span>")
 		return
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
@@ -77,26 +77,45 @@
 	if ((!( istype(G, /obj/item/weapon/grab) ) || !( ismob(G.affecting) )))
 		return
 	if (src.occupant)
-		user << "<span class='warning'>The scanner is already occupied!</span>"
+		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
 		return
 	if (G.affecting.abiotic())
-		user << "<span class='warning'>Subject cannot have abiotic items on.</span>"
+		to_chat(user, "<span class='warning'>Subject cannot have abiotic items on.</span>")
 		return
 	var/mob/M = G.affecting
-	if (M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
-	M.loc = src
+	M.forceMove(src)
 	src.occupant = M
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
-		O.loc = src.loc
-		//Foreach goto(154)
+		O.forceMove(loc)
 	src.add_fingerprint(user)
-	//G = null
 	qdel(G)
-	return
+
+//Like grap-put, but for mouse-drop.
+/obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
+	if (!CanMouseDrop(target, user))
+		return
+	if (src.occupant)
+		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
+		return
+	if (target.abiotic())
+		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
+		return
+	if (target.buckled)
+		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		return
+	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	if(!do_after(user, 30, src))
+		return
+	var/mob/M = target
+	M.forceMove(src)
+	src.occupant = M
+	update_use_power(2)
+	src.icon_state = "body_scanner_1"
+	for(var/obj/O in src)
+		O.forceMove(loc)
+	src.add_fingerprint(user)
 
 /obj/machinery/bodyscanner/ex_act(severity)
 	switch(severity)
@@ -204,10 +223,10 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
-		user << "<span class='warning'>This console is not connected to a functioning body scanner.</span>"
+		to_chat(user, "<span class='warning'>This console is not connected to a functioning body scanner.</span>")
 		return
 	if(!ishuman(connected.occupant))
-		user << "<span class='warning'>This device can only scan compatible lifeforms.</span>"
+		to_chat(user, "<span class='warning'>This device can only scan compatible lifeforms.</span>")
 		return
 
 	var/dat
@@ -233,14 +252,14 @@
 
 	if (href_list["print"])
 		if (!src.connected)
-			usr << "\icon[src]<span class='warning'>Error: No body scanner connected.</span>"
+			to_chat(usr, "\icon[src]<span class='warning'>Error: No body scanner connected.</span>")
 			return
 		var/mob/living/carbon/human/occupant = src.connected.occupant
 		if (!src.connected.occupant)
-			usr << "\icon[src]<span class='warning'>The body scanner is empty.</span>"
+			to_chat(usr, "\icon[src]<span class='warning'>The body scanner is empty.</span>")
 			return
 		if (!istype(occupant,/mob/living/carbon/human))
-			usr << "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>"
+			to_chat(usr, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return
 		var/obj/item/weapon/paper/R = new(src.loc)
 		R.name = "Body scan report"

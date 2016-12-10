@@ -2,6 +2,7 @@
 	name = "alien thing"
 	desc = "There's something alien about this."
 	icon = 'icons/mob/alien.dmi'
+	layer = ABOVE_OBJ_LAYER
 	var/health = 50
 
 /obj/structure/alien/proc/healthcheck()
