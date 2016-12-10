@@ -21,6 +21,7 @@
 	var/fake = 0
 
 	var/em_signature = 0
+	var/thermal_signature = 0
 
 /obj/effect/overmap/Destroy()
 	fire_controls.Cut()

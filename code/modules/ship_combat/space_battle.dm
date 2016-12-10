@@ -17,6 +17,9 @@
 	var/repairing = 0
 	var/obj/effect/overmap/linked
 
+	var/em_signature = 0
+	var/thermal_signature = 0
+
 	New()
 		..()
 		if(component_type)
@@ -118,6 +121,12 @@
 
 	proc/reconnect()
 		return 1
+
+	proc/fetch_em()
+		return em_signature
+
+	proc/fetch_thermal()
+		return thermal_signature
 
 	bullet_act(var/obj/item/projectile/bullet/P)
 		if(P && istype(P) && P.damage_type == BRUTE)
