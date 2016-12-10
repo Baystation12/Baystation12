@@ -110,9 +110,6 @@
 			lasttouch.client.missiles_loaded += 1
 		if(rails.len)
 			M.power *= (1+(rails.len*0.02))
-		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
-			B.fired()
-			sleep(1)
 		var/list/shields = list()
 		for(var/obj/machinery/space_battle/shield_generator/generator in world)
 			if(generator.z == start.z)
@@ -125,6 +122,8 @@
 			else
 				qdel(M)
 				to_return = "Missile intercepted by shields!"
+		else
+			to_return = M.fire_missile(location, start)
 		use_power(720)
 		if(computer && computer.firing_angle != "Carefully Aimed")
 			if(computer.firing_angle == "Flanking")
@@ -135,6 +134,9 @@
 					jammed()
 			else if(prob(5*efficiency))
 				jammed()
+		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
+			B.fired()
+			sleep(1)
 	if(!count || !to_return)
 		var/junk_count = 0
 		for(var/atom/movable/A in loc)

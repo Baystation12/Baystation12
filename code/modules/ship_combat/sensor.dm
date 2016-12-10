@@ -17,15 +17,9 @@
 		var/area/ship_battle/A = get_area(src)
 		if(A && istype(A))
 			req_access = list(A.team*10 - SPACE_ENGINEERING)
-		if(linked)
-			if(!(src in linked.fire_sensors))
-				linked.fire_sensors += src
-			if(use_power == 2)
-				linked.em_signature += 1
 		spawn(5)
 			reconnect()
 		..()
-
 
 	Destroy()
 		sensor_id = null
@@ -115,6 +109,13 @@
 		..()
 
 	reconnect()
+		if(!linked)
+			linked = map_sectors["[z]"]
+		if(linked)
+			if(!(src in linked.fire_sensors))
+				linked.fire_sensors += src
+			if(use_power == 2)
+				linked.em_signature += 1
 		dishes.Cut()
 		if(needs_dish && linked)
 			for(var/obj/machinery/space_battle/missile_sensor/dish/D in linked.fire_sensors)
@@ -159,6 +160,13 @@
 		linked_sensor = linked
 
 	reconnect()
+		if(!linked)
+			linked = map_sectors["[z]"]
+		if(linked)
+			if(!(src in linked.fire_sensors))
+				linked.fire_sensors += src
+			if(use_power == 2)
+				linked.em_signature += 1
 		return 0
 
 	examine(var/mob/user)
@@ -417,7 +425,8 @@
 		else
 			var/list/targets = list()
 			for(var/obj/effect/overmap/S in range(2, linked))
-				targets += S
+				if(S == linked) continue
+				targets.Add(S)
 				testing("Added [S] to targets")
 			if(targets && targets.len)
 				return targets

@@ -71,7 +71,7 @@
 	if(href_list["strength"])
 		var/nstrength = input(usr, "Enter a new strength(0-3)", "ECM") as num
 		if(isnum(nstrength))
-			radius = min(3, max(0, nstrength))
+			strength = min(3, max(0, nstrength))
 		else
 			usr << "<span class='warning'>That is invalid!</span>"
 	update_power_usage()

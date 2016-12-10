@@ -76,8 +76,10 @@
 		var/mob/living/carbon/human/H
 		if(istype(A, /mob/living/carbon/human))
 			H = A
-		if(isobserver(A))
+		else if(isobserver(A))
 			teleport(A, 1)
+			return
+		else if(istype(A, /mob/missile_eye))
 			return
 		else if(!stat & (BROKEN|NOPOWER))
 			var/turf/T = src.loc

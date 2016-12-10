@@ -281,7 +281,9 @@ var/global/missile_starts = list()
 		qdel(src)
 		return
 
-
+	Bump(atom/hit_atom)
+		boom(hit_atom)
+		..()
 
 	throw_impact(atom/hit_atom)
 		boom(hit_atom)
@@ -293,6 +295,7 @@ var/global/missile_starts = list()
 		if(fuse <= 0)
 			var/turf/T = get_turf(src)
 			throw_impact(T) // Lazy way of doing it.
+			return PROCESS_KILL
 
 	New(var/turf/target_location)
 		..()

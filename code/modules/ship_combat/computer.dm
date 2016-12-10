@@ -137,7 +137,10 @@
 					var/obj/missile_start/M = A
 					if(M.z in S.map_z)
 						starts += M
-		return "Unknown Error!"
+		if(!starts)
+			return "Unknown Error: Ships Inexistant"
+		else
+			return "Unknown Error: Process failure"
 
 	proc/get_firing_targets()
 		return sensor ? sensor.get_firing_targets() : 0
