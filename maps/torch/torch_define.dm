@@ -11,6 +11,8 @@
 	player_levels = list(1,2,3,4,5,6,7,8,9)
 	admin_levels = list(10)
 
+	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30)
+
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 
 	shuttle_docked_message = "Bluespace drive has been spooled up, prepare for launch. Time to jump, approximately %ETD%."
@@ -46,7 +48,7 @@
 							NETWORK_THUNDER,
 							)
 	evac_controller_type = /datum/evacuation_controller/pods
-	
+
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
