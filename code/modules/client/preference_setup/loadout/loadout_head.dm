@@ -66,6 +66,9 @@
 	caps["red cap"] = /obj/item/clothing/head/soft/red
 	caps["white cap"] = /obj/item/clothing/head/soft/mime
 	caps["yellow cap"] = /obj/item/clothing/head/soft/yellow
+	caps["Expeditionary Corps cap"] = /obj/item/clothing/head/soft/sol/expedition
+	caps["fleet cap"] = /obj/item/clothing/head/soft/sol/fleet
+
 	gear_tweaks += new/datum/gear_tweak/path(caps)
 
 /datum/gear/head/seccap
