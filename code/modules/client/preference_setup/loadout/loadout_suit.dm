@@ -225,6 +225,10 @@
 	display_name = "military jacket, green"
 	path = /obj/item/clothing/suit/storage/miljacket/green
 
+/datum/gear/suit/sweater
+	display_name = "sweaters"
+	path = /obj/item/clothing/suit/sweater/snow
+
 /datum/gear/suit/sweater/New()
 	..()
 	var/sweaters = list()

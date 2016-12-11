@@ -21,6 +21,12 @@
 	siemens_coefficient = 0.7
 	can_hold_knife = 1
 
+/obj/item/clothing/shoes/jackboots/white
+	name = "white jackboots"
+	desc = "Tall synthleather boots with an artificial shine. These are white, for the more fasionable types."
+	icon_state = "jackboots_w"
+	item_state = "jackboots_w"
+
 /obj/item/clothing/shoes/jackboots/unathi
 	name = "toe-less jackboots"
 	desc = "Modified pair of jackboots, particularly comfortable for those species whose toes hold claws."
