@@ -25,6 +25,12 @@
 		/area/maintenance/research_port = 0,
 		/area/maintenance/research_starboard = NO_SCRUBBER,
 		/area/maintenance/starboardsolar = NO_SCRUBBER,
+		/area/maintenance/sub/aft = NO_SCRUBBER,
+		/area/maintenance/sub/fore = NO_SCRUBBER,
+		/area/maintenance/sub/port = NO_SCRUBBER,
+		/area/maintenance/sub/starboard = NO_SCRUBBER,
+		/area/maintenance/sub/relay_station = 0,
+		/area/maintenance/sub/command = 0,
 		/area/maintenance/substation/command = 0,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -45,13 +51,17 @@
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
+
 	area_coherency_test_exempt_areas = list(
 			/area/space,
 			/area/mine/explored,
 			/area/mine/unexplored,
 			/area/centcom/control,
-			/area/engineering/atmos,
-			/area/constructionsite,
-			/area/constructionsite/maintenance,
-			/area/solar/constructionsite,
 			/area/maintenance/incinerator)
+
+	area_coherency_test_subarea_count = list(
+			/area/engineering/atmos = 4,
+			/area/constructionsite = 7,
+			/area/constructionsite/maintenance = 14,
+			/area/solar/constructionsite = 3,
+			/area/maintenance/incinerator = 2)

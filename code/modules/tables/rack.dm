@@ -7,6 +7,8 @@
 	can_reinforce = 0
 	flipped = -1
 
+	material = DEFAULT_TABLE_MATERIAL
+
 /obj/structure/table/rack/New()
 	..()
 	verbs -= /obj/structure/table/verb/do_flip
@@ -24,6 +26,9 @@
 
 /obj/structure/table/rack/update_icon()
 	return
+
+/obj/structure/table/rack/can_connect()
+	return FALSE
 
 /obj/structure/table/rack/holorack/dismantle(obj/item/weapon/wrench/W, mob/user)
 	to_chat(user, "<span class='warning'>You cannot dismantle \the [src].</span>")

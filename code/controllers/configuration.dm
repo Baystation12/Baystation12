@@ -99,6 +99,7 @@ var/list/gamemode_cache = list()
 	var/wikiurl
 	var/forumurl
 	var/githuburl
+	var/discordurl
 
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -423,6 +424,9 @@ var/list/gamemode_cache = list()
 
 				if ("githuburl")
 					config.githuburl = value
+
+				if ("discordurl")
+					config.discordurl = value
 
 				if ("ghosts_can_possess_animals")
 					config.ghosts_can_possess_animals = value

@@ -16,8 +16,8 @@
 	disruptable = 1
 	disruptive = 0
 
-	use_power_cost = 5 KILOWATTS
-	active_power_cost = 500
+	use_power_cost = 150 KILOWATTS
+	active_power_cost = 50 KILOWATTS
 	passive_power_cost = 0
 	module_cooldown = 30
 
@@ -69,7 +69,7 @@
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 25 KILOWATTS
+	use_power_cost = 500 KILOWATTS
 	redundant = 1
 	usable = 1
 	selectable = 1

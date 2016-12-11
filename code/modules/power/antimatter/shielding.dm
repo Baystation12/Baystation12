@@ -25,7 +25,7 @@ proc/cardinalrange(var/center)
 	var/obj/machinery/power/am_control_unit/control_unit = null
 	var/processing = 0//To track if we are in the update list or not, we need to be when we are damaged and if we ever
 	var/stability = 100//If this gets low bad things tend to happen
-	var/efficiency = 1//How many cores this core counts for when doing power processing, phoron in the air and stability could affect this
+	var/core_multiplier = 1//How many cores this core counts for when doing power processing, phoron in the air and stability could affect this
 	var/coredirs = 0
 	var/dirs=0
 
@@ -222,7 +222,7 @@ proc/cardinalrange(var/center)
 	if(!control_unit)	return
 
 	control_unit.linked_cores.Add(src)
-	control_unit.reported_core_efficiency += efficiency
+	control_unit.reported_num_cores += core_multiplier
 	return
 
 
@@ -232,7 +232,7 @@ proc/cardinalrange(var/center)
 	if(!control_unit)	return
 
 	control_unit.linked_cores.Remove(src)
-	control_unit.reported_core_efficiency -= efficiency
+	control_unit.reported_num_cores -= core_multiplier
 	return
 
 
@@ -246,13 +246,13 @@ proc/cardinalrange(var/center)
 	return
 
 
-/obj/machinery/am_shielding/proc/recalc_efficiency(var/new_efficiency)//tbh still not 100% sure how I want to deal with efficiency so this is likely temp
+/obj/machinery/am_shielding/proc/recalc_core_multiplier(var/new_core_multiplier)//tbh still not 100% sure how I want to deal with efficiency so this is likely temp
 	if(!control_unit || !processing) return
 
 	if(stability < 50)
-		new_efficiency /= 2
-	control_unit.reported_core_efficiency += (new_efficiency - efficiency)
-	efficiency = new_efficiency
+		new_core_multiplier /= 2
+	control_unit.reported_num_cores += (new_core_multiplier - core_multiplier)
+	core_multiplier = new_core_multiplier
 	return
 
 

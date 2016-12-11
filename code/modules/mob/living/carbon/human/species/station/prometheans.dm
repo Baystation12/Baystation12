@@ -10,6 +10,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 	death_message =    "rapidly loses cohesion, splattering across the ground..."
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
 	remains_type = /obj/effect/decal/cleanable/ash
+	
+	num_alternate_languages = 3
 
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"
@@ -20,7 +22,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	swap_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT
-	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS
+	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS | HAS_UNDERWEAR 
 	spawn_flags =      SPECIES_CAN_JOIN
 
 	breath_type = null
@@ -66,7 +68,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	valid_transform_species = list("Human", "Unathi", "Tajara", "Skrell", "Diona", "Resomi", "Monkey", "Vox", "Vox Pariah", "Akula")
 	monochromatic = 1
 
-	var/heal_rate = 5 // Temp. Regen per tick.
+	var/heal_rate = 3 // Temp. Regen per tick.
 
 /datum/species/shapeshifter/promethean/New()
 	..()
