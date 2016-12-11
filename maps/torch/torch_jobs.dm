@@ -1193,7 +1193,7 @@
 	desc = "Senior Physician"
 	region = ACCESS_REGION_MEDBAY
 
-/var/const/access_senadv = 91
+/var/const/access_senadv = 92
 /datum/access/senadv
 	id = access_senadv
 	desc = "Senior Enlisted Advisor"
@@ -1206,8 +1206,31 @@ TORCH OUTFITS
 Keeping them simple for now, just spawning with basic EC uniforms, and pretty much no gear. Gear instead goes in lockers. Keep this in mind if editing.
 */
 
+/decl/hierarchy/outfit/job/torch
+	name = OUTFIT_JOB_NAME("Torch Outfit")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch
+	uniform = /obj/item/clothing/under/color/grey
+	l_ear = /obj/item/device/radio/headset
+	shoes = /obj/item/clothing/shoes/black
+	pda_type = /obj/item/device/pda
+
+/decl/hierarchy/outfit/job/torch/crew
+	name = OUTFIT_JOB_NAME("Torch Crew Outfit")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew
+	uniform = /obj/item/clothing/under/utility/expeditionary
+	shoes = /obj/item/clothing/shoes/dress
+
+/decl/hierarchy/outfit/job/torch/passenger
+	name = OUTFIT_JOB_NAME("Torch Passenger")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger
+	uniform = /obj/item/clothing/under/utility
 
 //Command Outfits
+/decl/hierarchy/outfit/job/torch/crew/command
+	name = OUTFIT_JOB_NAME("Torch Command Outfit")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/command
+	l_ear = /obj/item/device/radio/headset/headset_com
+
 
 /decl/hierarchy/outfit/job/torch/crew/command/CO
 	name = OUTFIT_JOB_NAME("Commanding Officer")
@@ -1328,7 +1351,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda/engineering
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	name = OUTFIT_JOB_NAME("Roboticist")
+	name = OUTFIT_JOB_NAME("Roboticist - Torch")
 	uniform = /obj/item/clothing/under/rank/roboticist
 	shoes = /obj/item/clothing/shoes/black
 	id_type = /obj/item/weapon/card/id/torch/contractor/engineering/roboticist
@@ -1519,7 +1542,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/scientist
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
-	name = OUTFIT_JOB_NAME("Psychiatrist - Torch")
+	name = OUTFIT_JOB_NAME("Psychologist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector
@@ -1554,7 +1577,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/janitor
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject
-	name = OUTFIT_JOB_NAME("Custodian - Torch")
+	name = OUTFIT_JOB_NAME("Testing Assistant")
 	uniform = /obj/item/clothing/under/color/orange
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger
