@@ -335,13 +335,13 @@
 			qdel(O)
 
 	//Handle job slot/tater cleanup.
-	var/job = occupant.mind.assigned_role
+	if(occupant.mind)
+		var/job = occupant.mind.assigned_role
+		job_master.FreeRole(job)
 
-	job_master.FreeRole(job)
-
-	if(occupant.mind.objectives.len)
-		qdel(occupant.mind.objectives)
-		occupant.mind.special_role = null
+		if(occupant.mind.objectives.len)
+			occupant.mind.objectives = null
+			occupant.mind.special_role = null
 	//else
 		//if(ticker.mode.name == "AutoTraitor")
 			//var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
@@ -367,11 +367,16 @@
 
 
 	//Make an announcement and log the person entering storage.
-	control_computer.frozen_crew += "[occupant.real_name], [occupant.mind.role_alt_title] - [stationtime2text()]"
-	control_computer._admin_logs += "[key_name(occupant)] ([occupant.mind.role_alt_title]) at [stationtime2text()]"
-	log_and_message_admins("[key_name(occupant)] ([occupant.mind.role_alt_title]) entered cryostorage.")
 
-	announce.autosay("[occupant.real_name], [occupant.mind.role_alt_title], [on_store_message]", "[on_store_name]")
+	// Titles should really be fetched from data records
+	//  and records should not be fetched by name as there is no guarantee names are unique
+	var/role_alt_title = occupant.mind ? occupant.mind.role_alt_title : "Unknown"
+
+	control_computer.frozen_crew += "[occupant.real_name], [role_alt_title] - [stationtime2text()]"
+	control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
+	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
+
+	announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
 	//This should guarantee that ghosts don't spawn.
