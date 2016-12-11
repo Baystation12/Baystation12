@@ -30,17 +30,8 @@
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/hazardvest)
 
 /datum/gear/suit/hoodie
-	display_name = "hoodies"
+	display_name = "hoodie"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
-
-/datum/gear/suit/hoodie/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/toggle/hoodie)
-
-//This isn't in /hoodie/ so it won't be in the hoodies list on the loadout menu; otherwise, the color selection will not work.
-/datum/gear/suit/rgb_hoodie
-	display_name = "hoodie color selection"
-	path = /obj/item/clothing/suit/storage/toggle/rgb_hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/suit/labcoat
