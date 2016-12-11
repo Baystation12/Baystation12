@@ -175,6 +175,10 @@
 	display_name = "red hair ribbon"
 	path = /obj/item/clothing/head/hairribbon/red
 
+/datum/gear/head/headbow
+	display_name = "bow"
+	path = /obj/item/clothing/head/hairribbon/color
+
 /datum/gear/head/froghat
 	display_name = "froggie hat"
 	path = /obj/item/clothing/head/froghat
