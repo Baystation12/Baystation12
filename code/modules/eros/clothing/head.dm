@@ -47,6 +47,12 @@
 	desc = "It's a red ribbon, for hair."
 	icon_state = "eros_redribbon"
 
+/obj/item/clothing/head/hairribbon/color
+	name = "bow"
+	desc = "It's a bow, for your head."
+	icon_state = "bow_color"
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /obj/item/clothing/head/froghat
 	name = "froggie hat"
 	desc = "A hat this adorable should probably be breaking laws."

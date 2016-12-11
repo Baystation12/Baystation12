@@ -22,7 +22,7 @@
 #define HAS_EYE_COLOR     0x10   // Eye colour selectable in chargen. (RGB)
 #define HAS_HAIR_COLOR    0x20   // Hair colour selectable in chargen. (RGB)
 #define HAS_BIOMODS       0x40   // Indicates if the mob draws wings, tails and ears.
-#define RADIATION_GLOWS   0x60   // Radiation causes this character to glow.
+#define RADIATION_GLOWS   0x80   // Radiation causes this character to glow.
 
 
 // Languages.

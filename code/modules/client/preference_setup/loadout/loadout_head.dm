@@ -66,6 +66,9 @@
 	caps["red cap"] = /obj/item/clothing/head/soft/red
 	caps["white cap"] = /obj/item/clothing/head/soft/mime
 	caps["yellow cap"] = /obj/item/clothing/head/soft/yellow
+	caps["Expeditionary Corps cap"] = /obj/item/clothing/head/soft/sol/expedition
+	caps["fleet cap"] = /obj/item/clothing/head/soft/sol/fleet
+
 	gear_tweaks += new/datum/gear_tweak/path(caps)
 
 /datum/gear/head/seccap
@@ -175,6 +178,10 @@
 	display_name = "red hair ribbon"
 	path = /obj/item/clothing/head/hairribbon/red
 
+/datum/gear/head/headbow
+	display_name = "bow"
+	path = /obj/item/clothing/head/hairribbon/color
+
 /datum/gear/head/froghat
 	display_name = "froggie hat"
 	path = /obj/item/clothing/head/froghat
@@ -241,10 +248,12 @@
 /datum/gear/head/beanie
 	display_name = "beanie"
 	path = /obj/item/clothing/head/beanie
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/beanie_loose
 	display_name = "beanie, loose"
 	path = /obj/item/clothing/head/beanie_loose
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/sombrero
 	display_name = "sombrero"
