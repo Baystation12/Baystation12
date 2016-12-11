@@ -75,14 +75,14 @@
 
 	// For these values, we use the formula below
 	// A=5000000  (	    (cores-h)     )
-	// B=16       (A * ----------- + k) * efficiency
-	// h=16       (    B+|cores-h|    )
+	// B=12       (A * ----------- + k) * efficiency
+	// h=12       (    B+|cores-h|    )
 	// k=2500000
 	// where efficiency = (fuel/reactor_cores) / 2
 	//Old calc: stored_power = (fuel/reactor_cores)*fuel*20000
 	//                                    --Alice
 
-	stored_power = round((5000000 * ((reactor_cores-16)/(16+abs(reactor_cores-16))) + 2500000) *  ((fuel/reactor_cores)/2))
+	stored_power = round((5000000 * ((reactor_cores-12)/(12+abs(reactor_cores-12))) + 2500000) *  ((fuel/reactor_cores)/2))
 
 	//Now check if the cores could deal with it safely, this is done after so you can overload for more power if needed, still a bad idea
 	if(fuel > (2*reactor_cores))//More fuel has been put in than the current cores can deal with
