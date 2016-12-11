@@ -35,13 +35,16 @@
 	var/boots = list()
 	boots["jackboots"] = /obj/item/clothing/shoes/jackboots
 	boots["workboots"] = /obj/item/clothing/shoes/workboots
-	boots["workboots, alt"] = /obj/item/clothing/shoes/workboots/alt
+	boots["workboots, alt"] = /obj/item/clothing/shoes/workbootsalt
 	boots["cowboy boots"] = /obj/item/clothing/shoes/cowboy
 	boots["winterboots"] = /obj/item/clothing/shoes/winterboots
+	boots["fancy boots"] = /obj/item/clothing/shoes/fancyboots
+	boots["jungle boots"] = /obj/item/clothing/shoes/jungleboots
+	boots["duty boots"] = /obj/item/clothing/shoes/dutyboots
 	gear_tweaks += new/datum/gear_tweak/path(boots)
 
 //EROS START
-	
+
 /datum/gear/shoes/flats
 	display_name = "flats selection"
 	path = /obj/item/clothing/shoes/flats
@@ -61,6 +64,7 @@
 
 /datum/gear/shoes/flipflops
 	display_name = "flip flops"
+	flags = GEAR_HAS_COLOR_SELECTION
 	path = /obj/item/clothing/shoes/flipflop
 
 //EROS END

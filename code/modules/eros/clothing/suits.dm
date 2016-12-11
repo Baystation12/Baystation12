@@ -59,6 +59,24 @@
 	icon_state = "eros_sweater_nt"
 	item_state = "eros_sweater_nt"
 
+/obj/item/clothing/suit/sweater/snow
+	name = "snowman sweater"
+	desc = "This sweater was knit with care and nothing's as comfy.It has a snowy scene with a snowman."
+	icon_state = "eros_cjumper_blue"
+	item_state = "eros_cjumper_blue"
+
+/obj/item/clothing/suit/sweater/tree
+	name = "christmas tree sweater"
+	desc = "This sweater was knit with care and nothing's as comfy.It has a Christmas tree on it"
+	icon_state = "eros_cjumper_red"
+	item_state = "eros_cjumper_red"
+
+/obj/item/clothing/suit/sweater/reindeer
+	name = "ugly holiday sweater"
+	desc = "This sweater was knit with care and nothing's as comfy.It has a reindeer on it."
+	icon_state = "eros_cjumper_green"
+	item_state = "eros_cjumper_green"
+
 /obj/item/clothing/suit/bow
 	name = "red gift bow"
 	desc = "Looks like someone's all wrapped up and ready to open..."

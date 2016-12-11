@@ -88,7 +88,7 @@
 /datum/gear/suit/roles/surgical_apron
 	display_name = "surgical apron"
 	path = /obj/item/clothing/suit/surgicalapron
-	allowed_roles = list("Medical Doctor","Chief Medical Officer")
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
 
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
@@ -224,4 +224,18 @@
 /datum/gear/suit/storage/miljacket/green
 	display_name = "military jacket, green"
 	path = /obj/item/clothing/suit/storage/miljacket/green
+
+/datum/gear/suit/sweater/New()
+	..()
+	var/sweaters = list()
+	sweaters["pink sweater"] = /obj/item/clothing/suit/sweater/pink
+	sweaters["blue sweater"] = /obj/item/clothing/suit/sweater/blue
+	sweaters["blue heart sweater"] = /obj/item/clothing/suit/sweater/blueheart
+	sweaters["mint sweater"] = /obj/item/clothing/suit/sweater/mint
+	sweaters["NT sweater"] = /obj/item/clothing/suit/sweater/nt
+	sweaters["snowman sweater"] = /obj/item/clothing/suit/sweater/snow
+	sweaters["christmas tree sweater"] = /obj/item/clothing/suit/sweater/tree
+	sweaters["ugly holiday sweater"] = /obj/item/clothing/suit/sweater/reindeer
+	gear_tweaks += new/datum/gear_tweak/path(sweaters)
+
 //EROS FINISH

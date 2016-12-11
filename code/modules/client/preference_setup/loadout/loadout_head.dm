@@ -241,10 +241,12 @@
 /datum/gear/head/beanie
 	display_name = "beanie"
 	path = /obj/item/clothing/head/beanie
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/beanie_loose
 	display_name = "beanie, loose"
 	path = /obj/item/clothing/head/beanie_loose
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/sombrero
 	display_name = "sombrero"
