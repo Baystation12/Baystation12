@@ -466,6 +466,10 @@
 	name = "\improper Demolition Scaffold - Starboard"
 	icon_state = "sub_maint_starboard"
 
+/area/maintenance/sub/fore_starboard
+	name = "\improper Demolition Scaffold - Fore Starboard"
+	icon_state = "sub_maint_starboard"
+
 /area/maintenance/sub/central
 	name = "\improper Demolition Scaffold - Central"
 	icon_state = "sub_maint_central"

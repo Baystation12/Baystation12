@@ -28,6 +28,7 @@ proc/cardinalrange(var/center)
 	var/core_multiplier = 1//How many cores this core counts for when doing power processing, phoron in the air and stability could affect this
 	var/coredirs = 0
 	var/dirs=0
+	var/being_deconstructed = 0 //Flag set if we're deconstructing it or not.
 
 
 /obj/machinery/am_shielding/New(loc)
@@ -74,11 +75,15 @@ proc/cardinalrange(var/center)
 
 
 /obj/machinery/am_shielding/Destroy()
-	if(control_unit)	control_unit.remove_shielding(src)
+	if(control_unit) control_unit.remove_shielding(src)
 
-	if(processing)	shutdown_core()
+	if(processing) shutdown_core()
 
-	visible_message("<span class='warning'> The [src.name] melts!</span>")
+	if(being_deconstructed)
+		visible_message("<span class='notice'>The shielding unit neatly self-disassembles into its container.</span>");
+		new/obj/item/device/am_shielding_container(src.loc)
+	else
+		visible_message("<span class='warning'> The [src.name] melts!</span>")
 
 	//Might want to have it leave a mess on the floor but no sprites for now
 	..()
@@ -178,11 +183,16 @@ proc/cardinalrange(var/center)
 
 
 
-/obj/machinery/am_shielding/attackby(obj/item/W, mob/user)
-	if(!istype(W) || !user) return
+/obj/machinery/am_shielding/attackby(obj/item/I, mob/user)
+	if(!istype(I) || !user) return
 
-	if(W.force > 10)
-		stability -= W.force/2
+	if(istype(I, /obj/item/device/multitool) && istype(src.loc,/turf))
+		being_deconstructed = 1
+		src.Destroy()
+		return
+
+	if(I.force > 10)
+		stability -= I.force/2
 		check_stability()
 	..()
 	return
