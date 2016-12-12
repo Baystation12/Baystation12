@@ -376,7 +376,9 @@
 	name = "wreath"
 	desc = "Prickly and festive."
 	icon = 'icons/obj/christmas.dmi'
-	icon_state = "doorwreath"/obj/structure/sign/hard_hat_area
+	icon_state = "doorwreath"
+
+/obj/structure/sign/hard_hat_area
 	name = "\improper Hard Hat Area"
 	desc = "The sign reads <i>\"HARD HAT AREA\"</i> in big letters. To the left of it is a pictograph of a human head with a white hard hat on. This probably designates that the area should be entered with a hard hat and other safety equipment on. Much like the rest of the station."
 	icon_state = "hardhat"
