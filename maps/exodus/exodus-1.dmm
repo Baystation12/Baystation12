@@ -6817,7 +6817,7 @@
 "cDj" = (/obj/random/tech_supply,/turf/simulated/floor/plating,/area/storage/warehouse)
 "cDk" = (/obj/structure/sign/airlock_deconstruction,/turf/simulated/wall,/area/storage/warehouse)
 "cDl" = (/obj/structure/sign/glove_psa,/turf/simulated/wall,/area/storage/warehouse)
-"cDm" = (/obj/machinery/door/airlock/glass{name = "Demolition Training Room"},/turf/simulated/wall,/area/storage/warehouse)
+"cDm" = (/obj/machinery/door/airlock/glass{name = "Demolition Training Room"},/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/tiled,/area/storage/warehouse)
 "cDn" = (/obj/structure/sign/keepcalm{pixel_y = 32},/turf/simulated/floor/tiled,/area/hallway/primary/port)
 "cDo" = (/obj/structure/sign/decomm_moto{pixel_y = 32},/turf/simulated/floor/tiled,/area/hallway/primary/port)
 "cDp" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/sign/keepcalm{pixel_y = -32},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/toilet)
