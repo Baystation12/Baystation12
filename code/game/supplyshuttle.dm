@@ -109,6 +109,21 @@ var/list/mechtoys = list(
 	var/reason = null
 	var/orderedrank = null //used for supply console printing
 
+var/list/point_source_descriptions = list(
+	"time" = "Base station supply",
+	"manifest" = "From exported manifests",
+	"crate" = "From exported crates",
+	"phoron" = "From exported phoron",
+	"platinum" = "From exported platinum",
+	"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
+	)
+
+//Adds the points from different sources together and saves them for the export overview
+/datum/controller/supply/proc/add_points_from_source(amount, source)
+	points += amount
+	point_sources[source] += amount
+	point_sources["total"] += amount
+
 /datum/controller/supply
 	//supply points
 	var/points = 50
@@ -117,11 +132,7 @@ var/list/mechtoys = list(
 	var/points_per_crate = 5
 	var/points_per_platinum = 5 // 5 points per sheet
 	var/points_per_phoron = 5
-	var/pointsfromtime = 0
-	var/pointsfromcrate = 0
-	var/pointsfrommanifest = 0
-	var/pointsfromplatinum = 0
-	var/pointsfromphoron = 0
+	var/point_sources = list()
 	var/pointstotalsum = 0
 	var/pointstotal = 0
 	//control
@@ -145,16 +156,12 @@ var/list/mechtoys = list(
 				for(var/decl/hierarchy/supply_pack/spc in sp.children)
 					master_supply_list += spc
 
+
 	// Supply shuttle ticker - handles supply point regeneration
 	// This is called by the process scheduler every thirty seconds
 	proc/process()
-		points += points_per_process
-		pointstotalsum += points_per_process
-		pointsfromtime += points_per_process
+		add_points_from_source(points_per_process, "time")
 
-		if(pointstotal)
-			pointstotalsum += supply_controller.pointstotal
-			pointstotal = 0
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 	proc/forbidden_atoms_check(atom/A)
 		if(istype(A,/mob/living))
@@ -186,9 +193,7 @@ var/list/mechtoys = list(
 			if(istype(MA,/obj/structure/closet/crate))
 				callHook("sell_crate", list(MA, area_shuttle))
 
-				points += points_per_crate
-				pointsfromcrate += points_per_crate
-				supply_controller.pointstotal += pointsfromcrate
+				add_points_from_source(points_per_crate, "crate")
 				var/find_slip = 1
 
 				for(var/atom in MA)
@@ -197,9 +202,7 @@ var/list/mechtoys = list(
 					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
 						var/obj/item/weapon/paper/manifest/slip = A
 						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
-							points += points_per_slip
-							pointsfrommanifest += points_per_slip
-							supply_controller.pointstotal += points_per_slip
+							add_points_from_source(points_per_slip, "manifest")
 							find_slip = 0
 						continue
 
@@ -212,14 +215,12 @@ var/list/mechtoys = list(
 			qdel(MA)
 
 		if(phoron_count)
-			points += phoron_count * points_per_phoron
-			pointsfromphoron += phoron_count * points_per_phoron
-			supply_controller.pointstotal += pointsfromphoron
+			var/temp = phoron_count * points_per_phoron
+			add_points_from_source(temp, "phoron")
 
 		if(plat_count)
-			points += plat_count * points_per_platinum
-			pointsfromplatinum += plat_count * points_per_platinum
-			supply_controller.pointstotal += pointsfromplatinum
+			var/temp = plat_count * points_per_platinum
+			add_points_from_source(temp, "platinum")
 
 	//Buyin
 	proc/buy()
