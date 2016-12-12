@@ -519,3 +519,12 @@
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
+
+// ----- EROS BEGIN - CRATES
+
+/obj/structure/closet/crate/radiation_empty
+	name = "radioactive gear crate"
+	desc = "A crate with a radiation sign on it."
+	icon_state = "radiation"
+	icon_opened = "radiationopen"
+	icon_closed = "radiation"
