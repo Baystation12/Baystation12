@@ -680,10 +680,6 @@
 	name = "\improper Isolation C"
 	icon_state = "patients"
 
-/area/medical/patient_d
-	name = "\improper Isolation D"
-	icon_state = "patients"
-
 /area/medical/patient_wing
 	name = "\improper Patient Wing"
 	icon_state = "patients"
