@@ -34,6 +34,13 @@
 	linked_shielding = list()
 	linked_cores = list()
 
+/obj/machinery/power/am_control_unit/start_linked
+	anchored = 1
+
+/obj/machinery/power/am_control_unit/start_linked/New()
+	..()
+	connect_to_network()
+
 
 /obj/machinery/power/am_control_unit/Destroy()//Perhaps damage and run stability checks rather than just del on the others
 	for(var/obj/machinery/am_shielding/AMS in linked_shielding)
@@ -276,10 +283,10 @@
 	dat += "Status: [(active?"Injecting":"Standby")] <BR>"
 	dat += "<A href='?src=\ref[src];togglestatus=1'>Toggle Status</A><BR>"
 
-	dat += "Instability: [stability]%<BR>"
+	dat += "Stability: [stability]%<BR>"
 	dat += "Reactor parts: [linked_shielding.len]<BR>"//TODO: perhaps add some sort of stability check
 	dat += "Cores: [linked_cores.len]<BR><BR>"
-	dat += "-Current Efficiency: [reported_num_cores]<BR>"
+	dat += "-Current Effective Cores: [reported_num_cores]<BR>"
 	dat += "-Average Stability: [stored_core_stability] <A href='?src=\ref[src];refreshstability=1'>(update)</A><BR>"
 	if(stored_power > 1000000)
 		dat += "Last Produced: [megaWatts] mW<BR>"
