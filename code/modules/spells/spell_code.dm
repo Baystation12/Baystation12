@@ -171,7 +171,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	for(var/atom/target in targets)
 		var/location = get_turf(target)
 		if(istype(target,/mob/living) && message)
-			target << text("[message]")
+			to_chat(target,text("[message]")
 		if(sparks_spread)
 			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 			sparks.set_up(sparks_amt, 0, location) //no idea what the 0 is
@@ -244,7 +244,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		switch(charge_type)
 			if(Sp_RECHARGE)
 				if(charge_counter < charge_max)
-					user << still_recharging_msg
+					to_chat(user,still_recharging_msg)
 					return 0
 			if(Sp_CHARGES)
 				if(!charge_counter)
