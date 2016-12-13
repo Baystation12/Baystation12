@@ -264,6 +264,7 @@
 
 /obj/item/weapon/reagent_containers/pill/soma
 	name = "Soma pill"
+	desc = "Stimulates the more base parts of the brain. HArmful in higher doses."
 	icon_state = "pill8"
 
 /obj/item/weapon/reagent_containers/pill/soma/New()
