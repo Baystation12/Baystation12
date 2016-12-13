@@ -1,6 +1,0 @@
-author: TheGreyWolf
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added the ability for organ printers to also print out limbs."
