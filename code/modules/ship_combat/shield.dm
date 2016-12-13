@@ -454,39 +454,6 @@
 			else
 				R.update_icon()
 
-/obj/machinery/button/remote/bubble_shield // Refreshes the shield, I guess
-	name = "Regenerate Shield"
-	var/id_desc = "Machine that generates an impenetrable field of energy when activated. This one is remote"
-
-	trigger()
-		for(var/obj/machinery/shield_gen/external/remote/S in world)
-			if(S.id == src.id)
-				var/ps = S.target_field_strength
-				S.target_field_strength = ps+1
-				spawn(25)
-					S.target_field_strength = ps
-				break
-
-/obj/machinery/shield_gen/external/remote
-	name = "remote shield generator"
-	var/id = null
-
-/obj/machinery/shield_gen/external/New()
-	..()
-	spawn(75)
-		if(owned_capacitor)
-			owned_capacitor.anchored = 1
-			owned_capacitor.active = 1
-			owned_capacitor.max_charge = 200000
-			owned_capacitor.stored_charge = 75000
-		anchored = 1
-		field_radius = 15
-		strengthen_rate = 0.5
-		target_field_strength = 5
-		max_field_radius = 17
-		spawn(75)
-			toggle()
-
 
 
 

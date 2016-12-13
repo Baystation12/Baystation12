@@ -3,12 +3,11 @@
 	var/less_populated_team_count = 0
 	var/passed = 0
 	for(var/obj/missile_start/S in world)
-		S.refresh_active()
 		if(S.active && S.team == team)
 			passed = 1
 	if(!passed)
+		testing("[src]: Failed passed!")
 		return 0
-
 	for(var/i=1 to job_master.teams.len)
 		if(job_master.teams[i] in ticker.mode.allowed_factions)
 			var/team_name = job_master.teams[i]
@@ -23,7 +22,20 @@
 			var/team_count = job_master.teams[team_name]
 			if(team_name == less_populated_team || team_count == less_populated_team_count)
 				return ..()
+	testing("[src]: returning 0")
 	return 0
+
+/datum/job/space_battle/player_old_enough(var/client/C)
+	var/true = ..()
+	if(!true)
+		testing("[src]: Player not old enough! ([C])")
+	return true
+
+/datum/job/space_battle/job.is_branch_allowed(var/client/C)
+	var/true = ..()
+	if(!true)
+		testing("[src]: Player character branch not allowed! ([C])")
+	return true
 //access 1-10 = Team One, 11 - 20 = Team Two ... 31-40 = Team Four
 //1 = Common(Halls)
 //2 = Firing Tubes

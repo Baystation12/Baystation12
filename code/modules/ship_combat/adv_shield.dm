@@ -82,8 +82,8 @@
 		generator.online = !generator.online
 	if(href_list["fps"])
 		if(generator.flux_per_tick == generator.max_flux_per_tick)
-			generator.flux_per_tick = 0.25
-		else generator.flux_per_tick += 0.25
+			generator.flux_per_tick = 1
+		else generator.flux_per_tick += 1
 	if(href_list["static"])
 		generator.static_shield = !generator.static_shield
 	if(href_list["capacity"])
@@ -119,9 +119,9 @@
 	//RECHARGING
 	var/current_flux_rate = 0 // Increases depending on power input
 	var/optimal_flux_rate = 0 // Increases depending on flux rate
-	var/max_flux_rate = 10 // Increases depending on the ratio of current to optimal flux.
-	var/flux_per_tick = 1 // Generation modifier.
-	var/max_flux_per_tick = 3
+	var/max_flux_rate = 25 // Increases depending on the ratio of current to optimal flux.
+	var/flux_per_tick = 5 // Generation modifier.
+	var/max_flux_per_tick = 10
 	//DISTRIBUTION
 	var/flux_capacity = 0 // Still needs to be maintained, but at a fifth of the cost of generating flux.
 	var/max_flux_capacity = 500 // Set by the computer.
@@ -138,6 +138,8 @@
 /obj/machinery/space_battle/shield_generator/New()
 	..()
 	locate_tank()
+	if(linked)
+		linked.shielding = src
 
 /obj/machinery/space_battle/shield_generator/initialize()
 	for(var/obj/effect/landmark/shield/marker in world)
@@ -148,6 +150,8 @@
 			shields += shield
 	for(var/obj/effect/adv_shield/placed_shield in shields)
 		placed_shield.update_connections()
+	if(linked && !linked.shielding)
+		linked.shielding = src
 
 
 /obj/machinery/space_battle/shield_generator/process()
@@ -168,7 +172,7 @@
 	..()
 
 /obj/machinery/space_battle/shield_generator/proc/get_cost()
-	return round((current_flux_rate * 0.4 KILOWATTS * flux_per_tick * get_efficiency(-1,1)) + (flux_capacity *  10 * get_efficiency(-1,1)), 5)
+	return round((current_flux_rate * 10 * flux_per_tick * get_efficiency(-1,1)) + (flux_capacity *  2 * get_efficiency(-1,1)), 1)
 
 /obj/machinery/space_battle/shield_generator/proc/get_shield_rate()
 	var/obj/effect/adv_shield/shield = shields[1]
@@ -342,7 +346,7 @@
 		icon_state = "shieldwall"
 		density = 1
 	if(shutdown_time > 0) return 0
-	return consume_flux(current_flux_rate + flux_capacity*0.05) // Maintain our status
+	return consume_flux(current_flux_rate*0.1 + flux_capacity*0.05) // Maintain our status
 
 /obj/effect/adv_shield/proc/consume_flux(var/amount = 0)
 	if(!generator)

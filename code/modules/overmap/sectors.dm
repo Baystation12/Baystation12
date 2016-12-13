@@ -22,6 +22,7 @@
 
 	var/em_signature = 0
 	var/thermal_signature = 0
+	var/obj/machinery/space_battle/shield_generator/shielding
 
 /obj/effect/overmap/Destroy()
 	fire_controls.Cut()
@@ -30,7 +31,8 @@
 		qdel(fake_ship)
 		fake_ship = null
 	map_sectors["[z]"] = null
-	landing_areas.Cut()
+	if(landing_areas)
+		landing_areas.Cut()
 	for(var/obj/machinery/space_battle/O in world)
 		if(O.z in map_z)
 			O.linked = null

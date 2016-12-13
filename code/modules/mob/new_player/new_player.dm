@@ -301,10 +301,8 @@
 		return 0
 
 	var/team = 0
-	var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
-	for(var/datum/job/space_battle/job in all_jobs)
-		if(job.title == rank)
-			team = job.team
+	var/datum/job/space_battle/J = job_master.GetJob(rank)
+	team = J.team
 	var/obj/machinery/space_battle/ship_core/has_core
 	var/turf/spawn_turf
 	for(var/obj/team_start/S in world)
@@ -312,6 +310,8 @@
 		if(A && istype(A))
 			if(A.team == team)
 				spawn_turf = get_turf(S)
+	if(!spawn_turf)
+		usr << "<span class='warning'>Unable to locate spawn position!</span>"
 
 
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)

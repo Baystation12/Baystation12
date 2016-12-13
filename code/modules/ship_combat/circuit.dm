@@ -67,7 +67,7 @@
 				if(prob(30/resistance))
 					internal_wiring[i] = RED
 
-	emp_act(severity)
+/*	emp_act(severity)
 		if(1.0)
 			for(var/i=1 to internal_wiring.len)
 				if(prob(45/resistance))
@@ -85,7 +85,7 @@
 				if(prob(15/resistance))
 					internal_wiring[i] = RED
 		..()
-
+*/
 	proc/get_ratio()
 		var/blues = 0
 		var/greens = 0

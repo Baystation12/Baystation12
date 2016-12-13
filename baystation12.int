@@ -1,10 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1474794213
-DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\modules code\modules\maps code\modules\ship_combat code\modules\ship_combat\navigation 
+LAST_COMPILE_TIME: 1481645040
+DIR: code code\__defines code\_helpers code\_onclick code\_onclick\hud code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\datums code\datums\supplypacks code\datums\trading code\game code\game\area code\game\jobs code\modules code\modules\mob code\modules\mob\new_player code\modules\overmap code\modules\overmap\ships code\modules\overmap\ships\computers code\modules\power code\modules\ship_combat code\modules\ship_combat\jobs icons icons\obj maps maps\ships maps\ships\aphrodyte maps\ships\endurance maps\ships\prefabs\two maps\ships\prefabs\two\backup maps\stations maps\stations\one 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 510.1347
-WINDOW: code\modules\ship_combat\space_battle.dm;code\modules\ship_combat\navigation\communication.dm;code\modules\maps\reader.dm
+WINDOW: code\modules\overmap\ships\computers\helm.dm;code\modules\ship_combat\hacking.dm;code\modules\ship_combat\tube.dm;code\modules\ship_combat\computer.dm;code\modules\overmap\ships\ship.dm;code\modules\ship_combat\adv_shield.dm;code\modules\ship_combat\space_battle.dm;code\modules\overmap\sectors.dm;code\modules\ship_combat\sensor.dm;maps\ships\endurance\endurance.dmm
+FILE: code\modules\ship_combat\adv_shield.dm
 */
 // END_INTERNALS

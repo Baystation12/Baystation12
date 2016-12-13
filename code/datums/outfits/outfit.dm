@@ -110,13 +110,8 @@ var/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
 	equip_base(H)
 
-<<<<<<< HEAD
-//	rank = id_pda_assignment ? id_pda_assignment : rank
-//	assignment = id_pda_assignment ? id_pda_assignment : (assignment ? assignment : rank)
-=======
 	rank = id_pda_assignment || rank
 	assignment = id_pda_assignment || assignment || rank
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
 	if(W)
 		rank = W.rank

@@ -4,18 +4,13 @@
 	icon_state = "mass_driver"
 	resistance = 2.5
 	density = 0
-
 	idle_power_usage = 100
 	power_channel = EQUIP
-
 	var/jammed = 0
 	var/charging = 0
-
 	var/obj/machinery/space_battle/computer/missile/computer
 	var/obj/machinery/space_battle/tube_barrel/barrel
-
 	var/mob/to_kill // Muahaha
-
 	var/list/can_pass = list(/obj/structure/grille, /obj/machinery/shieldwall, /obj/machinery/space_battle/tube_barrel)
 
 	Destroy()
@@ -33,7 +28,7 @@
 
 	rename()
 		if(computer)
-			name = "[initial(name)][computer.id_num]"
+			name = "[initial(name)]([computer.id_num])"
 
 /obj/machinery/space_battle/tube/proc/jammed()
 	if(!barrel)
@@ -57,7 +52,7 @@
 			return -1
 		if(next.current_charge >= next.maxcharge && !(next.stat & (NOPOWER)))
 			rails.Add(next)
-		if(next.stat & BROKEN)
+		if((next.stat & BROKEN) && brokenaffects)
 			break
 		var/turf/T = get_step(next.loc,dir)
 		next = locate() in T
@@ -92,7 +87,7 @@
 		return "ERROR: Firing tube jammed!"
 	for(var/obj/machinery/missile/M in loc)
 		count++
-		if(jammed)
+		if(jammed) //Failsafe
 			return "ERROR: Tube jammed!"
 		if(count >= 2)
 			jammed()
@@ -110,21 +105,17 @@
 			lasttouch.client.missiles_loaded += 1
 		if(rails.len)
 			M.power *= (1+(rails.len*0.02))
-		var/list/shields = list()
-		for(var/obj/machinery/space_battle/shield_generator/generator in world)
-			if(generator.z == start.z)
-				shields |= generator.shields
-				break
-		if(shields.len)
-			var/obj/effect/adv_shield/shield = pick(shields)
-			if(shield.take_damage(M.damage * 0.4))
+		var/obj/effect/overmap/target = map_sectors["[start.z]"]
+		if(target.shielding)
+			var/obj/effect/adv_shield/shield = pick(target.shielding.shields)
+			if(shield && shield.take_damage(M.damage * 0.4))
 				to_return = M.fire_missile(location, start)
 			else
 				qdel(M)
 				to_return = "Missile intercepted by shields!"
 		else
 			to_return = M.fire_missile(location, start)
-		use_power(720)
+		use_power(3000)
 		if(computer && computer.firing_angle != "Carefully Aimed")
 			if(computer.firing_angle == "Flanking")
 				if(prob(10*efficiency))
@@ -134,9 +125,6 @@
 					jammed()
 			else if(prob(5*efficiency))
 				jammed()
-		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
-			B.fired()
-			sleep(1)
 	if(!count || !to_return)
 		var/junk_count = 0
 		for(var/atom/movable/A in loc)
@@ -177,6 +165,10 @@
 					H.ear_damage += rand(0, 5)
 					H.ear_deaf = max(H.ear_deaf,15)
 	flick("mass_driver_anim", src)
+	if(to_return == 1)
+		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
+			B.fired()
+			sleep(1)
 	spawn(5)
 		return to_return
 

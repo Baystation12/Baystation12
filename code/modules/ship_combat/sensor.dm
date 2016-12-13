@@ -143,6 +143,13 @@
 				user.visible_message("<span class='notice'>\The [user] [anchored ? "" : "un"]anchors \the [src]!</span>")
 		..()
 
+	rename(var/id_num)
+		name = "[initial(name)]([id_num])"
+		for(var/O in dishes)
+			var/obj/machinery/M = O
+			M.name = "[initial(M.name)]([id_num])"
+
+
 /obj/machinery/space_battle/missile_sensor/dish
 	name = "radar dish"
 	desc = "A large, metal disc for relaying information through the depths of space."
@@ -338,21 +345,21 @@
 	id_num = computer.id_num
 	if(!id_num) return
 	if(guidance)
-		guidance.name = "[initial(guidance.name)]([id_num])"
+		guidance.rename(id_num)
 	if(tracking)
-		tracking.name = "[initial(tracking.name)]([id_num])"
+		tracking.rename(id_num)
 	if(scanning)
-		scanning.name = "[initial(scanning.name)]([id_num])"
+		scanning.rename(id_num)
 	if(thermal)
-		thermal.name = "[initial(thermal.name)]([id_num])"
+		thermal.rename(id_num)
 	if(microwave)
-		microwave.name = "[initial(microwave.name)]([id_num])"
+		microwave.rename(id_num)
 	if(xray)
-		xray.name = "[initial(xray.name)]([id_num])"
+		xray.rename(id_num)
 	if(advguidance)
-		advguidance.name = "[initial(advguidance.name)]([id_num])"
+		advguidance.rename(id_num)
 	for(var/obj/machinery/space_battle/missile_sensor/radar/R in radars)
-		R.name = "[initial(R.name)]([id_num])"
+		R.rename(id_num)
 	name = "[initial(name)]([id_num])"
 	return
 
@@ -426,6 +433,7 @@
 			var/list/targets = list()
 			for(var/obj/effect/overmap/S in range(2, linked))
 				if(S == linked) continue
+				if(S.team == src.team) continue
 				targets.Add(S)
 				testing("Added [S] to targets")
 			if(targets && targets.len)

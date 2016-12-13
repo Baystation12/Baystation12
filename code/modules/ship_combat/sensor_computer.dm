@@ -11,6 +11,10 @@
 
 /obj/machinery/space_battle/computer/sensor/proc/populate_sensor_list()
 	sensors.Cut()
+	if(!linked)
+		linked = map_sectors["[z]"]
+		if(!linked)
+			return 0
 	for(var/M in linked.fire_sensors)
 		var/obj/machinery/space_battle/missile_sensor/S = M
 		sensors.Add(S)

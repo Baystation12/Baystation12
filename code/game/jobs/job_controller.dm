@@ -538,17 +538,10 @@ var/global/datum/controller/occupations/job_master
 
 		to_chat(H, "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>")
 
-<<<<<<< HEAD
 //		if(job.supervisors)
 //			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 
 		H << "<b>To speak on your ship's radio channels use :i whilst near an intercomm.</b>"
-=======
-		if(job.supervisors)
-			to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
-
-		to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 
 		if(job.req_admin_notify)
 			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
@@ -644,10 +637,15 @@ var/global/datum/controller/occupations/job_master
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
 	var/turf/spawnpos
 	var/datum/job/space_battle/job = job_master.GetJob(rank)
+	world << "Job: [job]"
 	for(var/obj/team_start/start in world)
-		var/area/ship_battle/A = get_area(get_turf(start))
-		if(text2num(A.team) == text2num(job.team))
+		var/area/ship_battle/A = get_area(start)
+		world << "Area found: [A]"
+		if(A && text2num(A.team) == text2num(job.team))
 			spawnpos = get_turf(start)
+			world << "Spawn pos found!"
+	if(!spawnpos)
+		C << "<span class='warning'>No spawn points available!</span>"
 	return spawnpos
 /*
 	var/mob/H = C.mob
@@ -661,7 +659,7 @@ var/global/datum/controller/occupations/job_master
 			return "has arrived on the station"
 =======
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
-				
+
 >>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 			spawnpos = null
 		else

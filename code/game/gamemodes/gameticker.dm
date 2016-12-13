@@ -250,7 +250,7 @@ var/global/datum/controller/gameticker/ticker
 
 			if(2)	//nuke was nowhere nearby	//TODO: a really distant explosion animation
 				sleep(50)
-				sound_to(world, sound('sound/effects/explosionfar.ogg'))				
+				sound_to(world, sound('sound/effects/explosionfar.ogg'))
 			else	//station was destroyed
 				if( mode && !override )
 					override = mode.name
@@ -259,7 +259,7 @@ var/global/datum/controller/gameticker/ticker
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red",cinematic)
-						sound_to(world, sound('sound/effects/explosionfar.ogg'))						
+						sound_to(world, sound('sound/effects/explosionfar.ogg'))
 						cinematic.icon_state = "summary_nukewin"
 					if("AI malfunction") //Malf (screen,explosion,summary)
 						flick("intro_malf",cinematic)
@@ -412,7 +412,6 @@ var/global/datum/controller/gameticker/ticker
 					if(isNotAdminLevel(playerTurf.z))
 						to_chat(Player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>")
 					else
-<<<<<<< HEAD
 						Player << "<font color='green'><b>You managed to survive the battle as [Player.real_name].</b></font>"
 				else if(isAdminLevel(playerTurf.z))
 					Player << "<font color='green'><b>You successfully survived the combat as [Player.real_name].</b></font>"
@@ -420,32 +419,14 @@ var/global/datum/controller/gameticker/ticker
 					Player << "<font color='green'><b>You remain operational after the battle as [Player.real_name].</b></font>"
 				else
 					Player << "<font color='blue'><b>You survived but got stranded as [Player.real_name].</b></font>"
-=======
-						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
-				else if(isAdminLevel(playerTurf.z))
-					to_chat(Player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>")
-				else if(issilicon(Player))
-					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
-				else
-					to_chat(Player, "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>")
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player
 					if(!O.started_as_observer)
-<<<<<<< HEAD
 						Player << "<font color='red'><b>You did not survive the battle..</b></font>"
 				else
 					Player << "<font color='red'><b>You did not survive the battle...</b></font>"
 	world << "<br>"
-=======
-						to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
-				else
-					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
-	to_world("<br>")
-
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
-
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
 		if (aiPlayer.stat != 2)
 			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")

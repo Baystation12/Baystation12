@@ -87,16 +87,11 @@
 		if (!do_after(usr, 10))
 			in_use = 0
 			return
-<<<<<<< HEAD
 		var/obj/structure/grille/F
 		if(get_turf(user) != /turf/space)
 			F = new /obj/structure/grille ( usr.loc )
 		else F = new /obj/structure/grille/catwalk
 		usr << "<span class='notice'>You assemble a grille</span>"
-=======
-		var/obj/structure/grille/F = new /obj/structure/grille/ ( usr.loc )
-		to_chat(usr, "<span class='notice'>You assemble a grille</span>")
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 		in_use = 0
 		F.add_fingerprint(usr)
 		use(2)

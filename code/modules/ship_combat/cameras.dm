@@ -48,7 +48,7 @@
 /datum/nano_module/program/camera_monitor/battle
 	name = "Advanced Camera Monitoring Program"
 	available_to_ai = TRUE
-
+/*
 /datum/nano_module/program/camera_monitor/battle/modify_networks_list(var/list/networks)
 	var/obj/item/modular_computer/movable
 	if(program)
@@ -72,3 +72,4 @@
 			if(4)
 				network.Add("Team Four")
 	return network
+*/

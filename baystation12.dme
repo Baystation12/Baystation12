@@ -1697,7 +1697,6 @@
 #include "code\modules\modular_computers\file_system\programs\ntnrc_client.dm"
 #include "code\modules\modular_computers\file_system\programs\nttransfer.dm"
 #include "code\modules\modular_computers\file_system\programs\antagonist\dos.dm"
-#include "code\modules\modular_computers\file_system\programs\antagonist\hacked_camera.dm"
 #include "code\modules\modular_computers\file_system\programs\antagonist\revelation.dm"
 #include "code\modules\modular_computers\hardware\ai_slot.dm"
 #include "code\modules\modular_computers\hardware\battery_module.dm"
@@ -1999,11 +1998,6 @@
 #include "code\modules\shield_generators\shield_generator.dm"
 #include "code\modules\shieldgen\emergency_shield.dm"
 #include "code\modules\shieldgen\energy_field.dm"
-<<<<<<< HEAD
-#include "code\modules\shieldgen\shield_capacitor.dm"
-#include "code\modules\shieldgen\shield_dis.dm"
-#include "code\modules\shieldgen\shield_gen.dm"
-#include "code\modules\shieldgen\shield_gen_external.dm"
 #include "code\modules\ship_combat\admin.dm"
 #include "code\modules\ship_combat\adv_shield.dm"
 #include "code\modules\ship_combat\ammunition.dm"
@@ -2050,9 +2044,6 @@
 #include "code\modules\ship_combat\space\constructor.dm"
 #include "code\modules\ship_combat\space\fakeship.dm"
 #include "code\modules\ship_combat\space\ship_building.dm"
-=======
-#include "code\modules\shieldgen\shieldwallgen.dm"
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 #include "code\modules\shuttles\_defines.dm"
 #include "code\modules\shuttles\antagonist.dm"
 #include "code\modules\shuttles\departmental.dm"

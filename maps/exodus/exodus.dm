@@ -1,6 +1,5 @@
 #if !defined(USING_MAP_DATUM)
 
-<<<<<<< HEAD
 //	#include "exodus_areas.dm"
 //	#include "exodus_shuttles.dm"
 //	#include "exodus_unit_testing.dm"
@@ -13,26 +12,6 @@
 //	#include "exodus-4.dmm"
 //	#include "exodus-5.dmm"
 //	#include "exodus-6.dmm"
-=======
-	#include "exodus_areas.dm"
-	#include "exodus_elevator.dm"
-	#include "exodus_holodecks.dm"
-	#include "exodus_shuttles.dm"
-
-	#include "exodus_unit_testing.dm"
-	#include "exodus_zas_tests.dm"
-
-	#include "../shared/exodus_torch_areas.dm"
-	#include "../shared/exodus_torch_zas_tests.dm"
-
-	#include "exodus-0.dmm"
-	#include "exodus-1.dmm"
-	#include "exodus-2.dmm"
-	#include "exodus-3.dmm"
-	#include "exodus-4.dmm"
-	#include "exodus-5.dmm"
-	#include "exodus-6.dmm"
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 	#include "../../code/modules/lobby_music/clouds_of_fire.dm"

@@ -10,13 +10,19 @@
 	<div class='item'>
 		<div style='block'>
 			<div class='itemLabel'>Name:</div> </div class='itemContent'>{{data.info.name}}</div><br>
+			
 			<div class='itemLabel'>Status:</div> </div class='itemContent'>{{data.info.status}}</div><br>
+			
 			<div class='itemLabel'>Dish Number:</div> </div class='itemContent'>{{data.info.dish}}</div><br>
+			
 			<div class='itemLabel'>ID Tag:</div> </div class='itemContent'>{{data.info.id_tag}}</div><br>
+			
 			<div class='itemLabel'>Sensor ID:</div> </div class='itemContent'>{{data.info.sensor_id}}</div><br>	
+			
 			<div class='itemLabel'>Enabled:</div> </div class='itemContent'>{{data.info.enabled}}</div><br>
-			<br>
-			{{:helper.link('Back', 'return', { 'return' : 1})}}
+			
+			<br><br>
+			{{:helper.link('Back', 'return', { 'return' : 1})}}<br>
 		</div>
 	</div>
 {{/if}}

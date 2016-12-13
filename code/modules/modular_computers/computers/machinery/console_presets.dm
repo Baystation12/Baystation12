@@ -122,6 +122,6 @@
 	emagged = 1		// Allows download of other antag programs for free.
 
 /obj/machinery/modular_computer/console/preset/mercenary/install_programs()
-	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
+//	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/aidiag())

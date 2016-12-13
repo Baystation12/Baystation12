@@ -99,9 +99,8 @@
 				num++
 				if(C == src)
 					break
-		if(team)
-			id_num = "[team]-#[num]"
-			name = "[initial(name)]([id_num])"
+		id_num = "[team]-#[num]"
+		name = "[initial(name)]([id_num])"
 		if(tube)
 			tube.rename()
 		if(sensor)
@@ -147,7 +146,8 @@
 
 
 	reconnect()
-		if(!linked) return 0
+		if(!linked)
+			linked = map_sectors["[z]"]
 		for(var/obj/machinery/space_battle/tube/T in world)
 			if(T.id_tag == id_tag && T.z == src.z)
 				tube = T
@@ -351,7 +351,7 @@
 		eye = M
 		eye_owner = user
 		spawn(25)
-			eye << "<span class='notice'><b>Head left!</b></span>"
+			eye << "<span class='notice'><b>Targetting Mode engaged. Selected Ship is left of Reticule.</b></span>"
 
 /obj/machinery/space_battle/computer/missile/process()
 	if(eye && !(forced_by && forced_by == eye_owner))

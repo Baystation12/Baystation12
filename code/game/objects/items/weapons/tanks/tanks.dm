@@ -410,29 +410,7 @@ var/list/global/tank_gauge_cache = list()
 		return 0
 
 	var/pressure = air_contents.return_pressure()
-<<<<<<< HEAD
-	if(pressure > TANK_FRAGMENT_PRESSURE*max_pressure_mod)
-		if(!istype(src.loc,/obj/item/device/transfer_valve))
-			message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
-			log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 
-		//Give the gas a chance to build up more pressure through reacting
-		air_contents.react()
-		air_contents.react()
-		air_contents.react()
-
-		pressure = air_contents.return_pressure()
-		var/range = (pressure-TANK_FRAGMENT_PRESSURE*max_pressure_mod)/TANK_FRAGMENT_SCALE
-
-		explosion(
-			get_turf(loc),
-			round(min(BOMBCAP_DVSTN_RADIUS, range*0.25)),
-			round(min(BOMBCAP_HEAVY_RADIUS, range*0.50)),
-			round(min(BOMBCAP_LIGHT_RADIUS, range*1.00)),
-			round(min(BOMBCAP_FLASH_RADIUS, range*1.50)),
-			)
-		qdel(src)
-=======
 
 
 	if(pressure > TANK_FRAGMENT_PRESSURE)
@@ -484,7 +462,6 @@ var/list/global/tank_gauge_cache = list()
 		else
 			integrity -=7
 
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 
 	else if(pressure > TANK_RUPTURE_PRESSURE*max_pressure_mod)
 		#ifdef FIREDBG
@@ -517,14 +494,6 @@ var/list/global/tank_gauge_cache = list()
 
 		else
 			integrity-= 5
-
-<<<<<<< HEAD
-	else if(pressure > TANK_LEAK_PRESSURE*max_pressure_mod)
-		#ifdef FIREDBG
-		log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
-		#endif
-=======
->>>>>>> 0d11ec8a7ef9abafbf9ea79cbe99ff8e7a0c77c2
 
 	else if(pressure > TANK_LEAK_PRESSURE || air_contents.temperature - T0C > failure_temp)
 
