@@ -6,8 +6,8 @@ var/const/CIV               =(1<<4)
 var/const/COM               =(1<<5)
 var/const/CRG               =(1<<6)
 var/const/MSC               =(1<<7)
-var/const/SRV				=(1<<8)
-var/const/SUP				=(1<<9)
+var/const/SRV               =(1<<8)
+var/const/SUP               =(1<<9)
 
 var/list/assistant_occupations = list(
 )
