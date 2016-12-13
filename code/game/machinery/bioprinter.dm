@@ -20,11 +20,19 @@
 
 	// These should be subtypes of /obj/item/organ
 	var/list/products = list(
-		BP_HEART   = list(/obj/item/organ/internal/heart,  50),
-		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  40),
+		BP_HEART   = list(/obj/item/organ/internal/heart,  25),
+		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  25),
 		BP_KIDNEYS = list(/obj/item/organ/internal/kidneys,20),
-		BP_EYES    = list(/obj/item/organ/internal/eyes,   30),
-		BP_LIVER   = list(/obj/item/organ/internal/liver,  50)
+		BP_EYES    = list(/obj/item/organ/internal/eyes,   20),
+		BP_LIVER   = list(/obj/item/organ/internal/liver,  25),
+		BP_L_ARM   = list(/obj/item/organ/external/arm,  65),
+		BP_R_ARM   = list(/obj/item/organ/external/arm/right,  65),
+		BP_L_LEG   = list(/obj/item/organ/external/leg,  65),
+		BP_R_LEG   = list(/obj/item/organ/external/leg/right,  65),
+		BP_L_FOOT   = list(/obj/item/organ/external/foot,  40),
+		BP_R_FOOT   = list(/obj/item/organ/external/foot/right,  40),
+		BP_L_HAND   = list(/obj/item/organ/external/hand,  40),
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right,  40)
 		)
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
