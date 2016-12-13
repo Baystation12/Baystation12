@@ -2177,3 +2177,12 @@
 	var/turf/T = get_turf(holder.my_atom)
 	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
 	return
+
+// EROS START
+
+/datum/chemical_reaction/soma
+	name = "Soma"
+	id = "soma"
+	result = "soma"
+	required_reagents = list("mindbreaker" = 2, "lithium" = 1, "sugar" = 1)
+	result_amount = 4

@@ -215,3 +215,10 @@
 	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 7)
+
+
+/obj/item/weapon/storage/pill_bottle/soma
+	name = "bottle of Soma pills"
+	desc = "Aphrodesiacs, with some nasty side effects if taken in high enough doses. Is this stuff even legal?"
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 7)

@@ -261,3 +261,11 @@
 /obj/item/weapon/reagent_containers/pill/paroxetine/New()
 		..()
 		reagents.add_reagent("paroxetine", 10)
+
+/obj/item/weapon/reagent_containers/pill/soma
+	name = "Soma pill"
+	icon_state = "pill8"
+
+/obj/item/weapon/reagent_containers/pill/soma/New()
+		..()
+		reagents.add_reagent("soma", 15)

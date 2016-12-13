@@ -596,3 +596,75 @@
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
+
+
+// EROS START
+
+var/stage1 		= 0.1
+var/stage2 		= 10
+var/stage3 		= 15
+var/stage1od 	= 20
+
+/datum/reagent/soma
+	name = "Soma"
+	id = "soma"
+	description = "Stimulates the more base parts of the brain."
+	taste_description = "mild sweetness"
+	reagent_state = LIQUID
+	color = "#FF80FF"
+	metabolism = 0.05
+	overdose = REAGENTS_OVERDOSE
+	data = 0
+
+/datum/reagent/soma/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+
+	if(alien == IS_DIONA)
+		return
+
+	if(dose >= stage3od)
+		M.brainloss += 1
+		M.sleeping = max(M.sleeping, 20)
+		M.drowsyness = max(M.drowsyness, 60)
+	if(dose >= stage2od)
+		M.Weaken(2)
+		M.drowsyness = max(M.drowsyness, 20)
+	if(dose >= stage1od)
+		M.eye_blurry = max(M.eye_blurry, 10)
+		if(prob(5))
+			M.emote("yawn")
+	if(dose >= stage3 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.1)
+		data = world.time
+		return
+	if(dose >= stage2 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.5)
+		data = world.time
+		to_chat(M, "<span class='warning'>Your cheeks feel flushed...</span>")
+		return
+	if(dose >= stage1 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		data = world.time
+		to_chat(M, "<span class='warning'>You feel a little frisky...</span>")
+
+
+
+
+/datum/reagent/soma/overdose(var/mob/living/carbon/M, var/alien)
+	return
+
+/*
+	if(alien == IS_DIONA)
+		return
+
+	M.brainloss += 1
+	M.eye_blurry = max(M.eye_blurry, 10)
+
+
+		if(dose == metabolism * 2 || prob(5))
+			M.emote("yawn")
+	else if(dose < REAGENTS_OVERDOSE * 1.1)
+		if(prob(50))
+			M.Weaken(2)
+		M.drowsyness = max(M.drowsyness, 20)
+	else
+		M.sleeping = max(M.sleeping, 20)
+		M.drowsyness = max(M.drowsyness, 60)
+	M.add_chemical_effect(CE_PULSE, -1)
+*/
