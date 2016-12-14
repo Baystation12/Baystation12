@@ -221,4 +221,4 @@
 	name = "bottle of Soma pills"
 	desc = "Aphrodisiacs, with some nasty side effects if taken in high enough doses. Is this stuff even legal?"
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 7)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/soma = 7)
