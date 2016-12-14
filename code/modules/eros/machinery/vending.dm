@@ -29,7 +29,8 @@
 					/obj/item/clothing/under/bunny_suit = 350,
 					/obj/item/clothing/head/collectable/rabbitears = 200,)
 
-	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2)
+	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2,
+						/obj/item/weapon/reagent_containers/pill/soma = 5)
 
 /obj/machinery/vending/adult/hacked
 	name = "Strange XXXVend"
@@ -47,4 +48,5 @@
 					/obj/item/clothing/under/bunny_suit = 0,
 					/obj/item/clothing/head/collectable/rabbitears = 0,)
 
-	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2)
+	contraband = list(/obj/item/weapon/eros/sex/dildos/uglyhorse = 2,
+						/obj/item/weapon/reagent_containers/pill/soma = 5)
