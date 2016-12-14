@@ -636,16 +636,16 @@ var/stage3od	= 30
 			M.emote("yawn")
 	if(dose >= stage3 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.1)
 		data = world.time
-		to_chat(M, "<span class='warning'>The colors start to swirl, and it's hard to think of anything but sex...</span>")
+		to_chat(M, "<span class='love'>The colors start to swirl, and it's hard to think of anything but sex...</span>")
 		M.druggy+= 100
 		return
 	if(dose >= stage2 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.5)
 		data = world.time
-		to_chat(M, "<span class='warning'>Your cheeks feel flushed...</span>")
+		to_chat(M, "<span class='love'>Your cheeks feel flushed...</span>")
 		return
 	if(dose >= stage1 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
-		to_chat(M, "<span class='warning'>You feel a little frisky...</span>")
+		to_chat(M, "<span class='love'>You feel a little frisky...</span>")
 
 
 
