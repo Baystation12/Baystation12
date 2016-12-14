@@ -112,18 +112,18 @@
 	processing_objects.Add(src)
 
 /obj/effect/energy_net/Destroy()
-	if(istype(src.captured, /mob/living/carbon))
-		if(src.captured.handcuffed == src)
-			src.captured.handcuffed = null
-	if(src.captured)
+	if(istype(captured, /mob/living/carbon))
+		if(captured.handcuffed == src)
+			captured.handcuffed = null
+	if(captured)
 		unbuckle_mob()
 	processing_objects.Remove(src)
-	src.captured = null
+	captured = null
 	return ..()
 
 /obj/effect/energy_net/process()
 	countdown--
-	if(src.captured.buckled != src)
+	if(captured.buckled != src)
 		health = 0
 	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
 		countdown = 0
@@ -134,7 +134,7 @@
 
 
 /obj/effect/energy_net/proc/capture_mob(mob/living/M)
-	src.captured = M
+	captured = M
 	if(M.buckled)
 		M.buckled.unbuckle_mob()
 	buckle_mob(M)
@@ -158,9 +158,9 @@
 	if(health <=0)
 		density = 0
 		if(countdown <= 0)
-			src.visible_message("<span class='warning'>\The [src] fades away!</span>")
+			visible_message("<span class='warning'>\The [src] fades away!</span>")
 		else
-			src.visible_message("<span class='danger'>\The [src] is torn apart!</span>")
+			visible_message("<span class='danger'>\The [src] is torn apart!</span>")
 		qdel(src)
 
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
@@ -198,8 +198,7 @@
 	..()
 
 obj/effect/energy_net/user_unbuckle_mob(mob/user)
-	return src.escape_net(user)
-
+	return escape_net(user)
 
 
 /obj/effect/energy_net/proc/escape_net(mob/user as mob)
@@ -207,10 +206,9 @@ obj/effect/energy_net/user_unbuckle_mob(mob/user)
 		"<span class='danger'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
 		)
-	if(do_after(usr, rand(min_free_time, max_free_time), incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
-		if(src)
-			src.health = 0
-			src.healthcheck()
-			return 1
+	if(do_after(user, rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))
+		health = 0
+		healthcheck()
+		return 1
 	else
 		return 0
