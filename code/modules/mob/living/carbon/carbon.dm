@@ -319,6 +319,13 @@
 
 	if(!item) return
 
+	if(!istype(item, /obj/item))
+		return
+	else
+		var/obj/item/I = item
+		if(!I.candrop)
+			return
+
 	var/throw_range = item.throw_range
 	if (istype(item, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = item
