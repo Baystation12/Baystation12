@@ -106,5 +106,6 @@ BIG IMG.icon 			{width: 32px; height: 32px;}
 
 
 /* Eros */
+.love					{color: #ff69bf; font-style: italic;}
 
 </style>"}
