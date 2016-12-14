@@ -35,7 +35,6 @@
 		/area/mine/explored = NO_SCRUBBER|NO_VENT,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/outpost/abandoned = NO_APC,
-		/area/outpost/mining_main/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/rnd/test_area = NO_SCRUBBER|NO_VENT,
 		/area/server = 0,
