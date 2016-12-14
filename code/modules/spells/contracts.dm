@@ -127,10 +127,6 @@
 	path = /spell/aoe_turf/smoke
 	desc = "This contract smells as dank as they come."
 
-/obj/item/weapon/contract/boon/wizard/mindswap
-	path = /spell/targeted/mind_transfer
-	desc = "This contract looks ragged and torn."
-
 /obj/item/weapon/contract/boon/wizard/forcewall
 	path = /spell/aoe_turf/conjure/forcewall
 	contract_master = "\improper Mime Federation"
@@ -147,4 +143,3 @@
 /obj/item/weapon/contract/boon/wizard/charge
 	path = /spell/aoe_turf/charge
 	desc = "This contract is made of 100% post-consumer wizard."
-

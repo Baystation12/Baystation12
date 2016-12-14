@@ -17,7 +17,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 	//if(user != M)
-	if(M.spell_list.len)
+	if(M.mind && M.mind.learned_spells)
 		M.silence_spells(300) //30 seconds
 		to_chat(M, "<span class='danger'>You've been silenced!</span>")
 		return

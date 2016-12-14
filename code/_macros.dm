@@ -77,6 +77,7 @@
 #define to_world(message)                                   world << message
 #define sound_to(target, sound)                             target << sound
 #define to_file(file_entry, file_content)                   file_entry << file_content
+#define image_to(target, image)                             target << image
 #define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 

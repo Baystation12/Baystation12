@@ -211,3 +211,17 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 
 /datum/ghosttrap/familiar/welcome_candidate(var/mob/target)
 	return 0
+
+/**************************
+* Technomancer Apprentice *
+**************************/
+/datum/ghosttrap/technomancer
+	object = "technomancer's apprentice"
+	pref_check = MODE_TECHNOMANCER
+	ghost_trap_message = "They are becoming an apprentice now."
+	ghost_trap_role = "Technomancer's Apprentice"
+	ban_checks = list(MODE_TECHNOMANCER)
+
+/datum/ghosttrap/technomancer/welcome_candidate(var/mob/target)
+	return 0
+

@@ -418,3 +418,15 @@
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 	return 1
+
+/obj/screen/wizard
+	invisibility = 101
+
+/obj/screen/wizard/instability
+	name = "instability"
+	icon_state = "instability-1"
+	invisibility = 0
+
+/obj/screen/wizard/energy
+	name = "energy"
+	icon_state = "wiz_energy"
