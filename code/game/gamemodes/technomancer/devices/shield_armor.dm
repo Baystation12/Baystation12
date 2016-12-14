@@ -75,9 +75,9 @@
 
 /obj/item/clothing/suit/armor/shield/update_icon()
 	if(active)
-		icon_state = "shield_armor"
+		icon_state = "reactiveoff"
 		set_light(2, 1, l_color = "#006AFF")
 	else
-		icon_state = "shield_armor_off"
+		icon_state = "reactiveon"
 		set_light(0, 0, l_color = "#000000")
 	return
