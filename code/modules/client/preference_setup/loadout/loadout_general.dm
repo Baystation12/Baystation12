@@ -90,6 +90,10 @@
 	display_name = "cigarette selection"
 	path = /obj/item/weapon/storage/fancy/cigarettes
 
+/datum/gear/soma
+	display_name = "soma pills"
+	path = /obj/item/weapon/storage/pill_bottle/soma
+
 /datum/gear/cigarettes/New()
 	..()
 	var/list/cigarettes = list()
