@@ -983,21 +983,25 @@ area/rnd/test_area
 /area/outpost/mining_main/eva
 	name = "Mining Outpost EVA storage"
 
+/*
 /area/outpost/mining_main/dorms
 	name = "Mining Outpost Dormitory"
 
 /area/outpost/mining_main/medbay
 	name = "Mining Outpost Medical"
+*/
 
 /area/outpost/mining_main/refinery
 	name = "Mining Outpost Refinery"
 
+/*
 /area/outpost/mining_main/west_hall
 	name = "Mining Outpost West Hallway"
 
 // Mining outpost
 /area/outpost/mining_main/maintenance
 	name = "Mining Outpost Maintenance"
+*/
 
 // Small outposts
 /area/outpost/mining_north
