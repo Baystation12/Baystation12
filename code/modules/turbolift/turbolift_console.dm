@@ -54,10 +54,12 @@
 	name = "elevator button"
 	desc = "A call button for an elevator. Be sure to hit it three hundred times."
 	icon_state = "button"
+	var/light_up = FALSE
 	var/datum/turbolift_floor/floor
 
 /obj/structure/lift/button/proc/reset()
-	icon_state = "button"
+	light_up = FALSE
+	update_icon()
 
 /obj/structure/lift/button/interact(var/mob/user)
 	if(!..())
@@ -66,12 +68,20 @@
 	pressed(user)
 	if(floor == lift.current_floor)
 		spawn(3)
-			icon_state = "button"
+			reset()
 		return
 	lift.queue_move_to(floor)
 
 /obj/structure/lift/button/proc/light_up()
-	icon_state = "button_lit"
+	light_up = TRUE
+	update_icon()
+
+/obj/structure/lift/button/update_icon()
+	if(light_up)
+		icon_state = "button_lit"
+	else
+		icon_state = initial(icon_state)
+
 // End button.
 
 // Panel. Lists floors (HTML), moves with the elevator, schedules a move to a given floor.
@@ -79,11 +89,16 @@
 	name = "elevator control panel"
 	icon_state = "panel"
 
+
+/obj/structure/lift/panel/attack_ghost(var/mob/user)
+	return interact(user)
+
 /obj/structure/lift/panel/interact(var/mob/user)
 	if(!..())
 		return
 
-	var/dat = "<html><body><hr><b>Lift panel</b><hr>"
+	var/dat = list()
+	dat += "<html><body><hr><b>Lift panel</b><hr>"
 	var/i = 0
 	for(var/datum/turbolift_floor/floor in lift.floors)
 		var/area/A = locate(floor.area_ref)
@@ -100,7 +115,7 @@
 	dat += "<hr></body></html>"
 
 	var/datum/browser/popup = new(user, "turbolift_panel", "Lift Panel", 200, 260)
-	popup.set_content(dat)
+	popup.set_content(jointext(dat, null))
 	popup.open()
 	return
 

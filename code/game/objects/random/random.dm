@@ -141,6 +141,7 @@
 					prob(1);/obj/item/weapon/storage/pill_bottle/dexalin_plus,\
 					prob(1);/obj/item/weapon/storage/pill_bottle/dermaline,\
 					prob(1);/obj/item/weapon/storage/pill_bottle/bicaridine,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/soma,\
 					prob(2);/obj/item/weapon/reagent_containers/syringe/antitoxin,\
 					prob(1);/obj/item/weapon/reagent_containers/syringe/antiviral,\
 					prob(2);/obj/item/weapon/reagent_containers/syringe/inaprovaline,\
@@ -162,6 +163,7 @@
 					prob(1);/obj/item/bodybag/cryobag,\
 					prob(3);/obj/item/weapon/reagent_containers/hypospray/autoinjector,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/kelotane,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/soma,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/antitox)
 
 
@@ -191,6 +193,7 @@
 					prob(3);/obj/item/weapon/storage/pill_bottle/tramadol,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/happy,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/zoom,\
+					prob(4);/obj/item/weapon/storage/pill_bottle/soma,\
 					prob(1);/obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin,\
 					prob(1);/obj/item/weapon/reagent_containers/glass/beaker/sulphuric,\
 					prob(5);/obj/item/weapon/contraband/poster,\

@@ -377,3 +377,33 @@
 	desc = "Prickly and festive."
 	icon = 'icons/obj/christmas.dmi'
 	icon_state = "doorwreath"
+
+/obj/structure/sign/hard_hat_area
+	name = "\improper Hard Hat Area"
+	desc = "The sign reads <i>\"HARD HAT AREA\"</i> in big letters. To the left of it is a pictograph of a human head with a white hard hat on. This probably designates that the area should be entered with a hard hat and other safety equipment on. Much like the rest of the station."
+	icon_state = "hardhat"
+
+/obj/structure/sign/airlock_deconstruction
+	name = "Airlock Deconstruction Guide"
+	desc = "This metal-backed poster details the internal workings of common doors and provides very descriptive language on how to deconstruct them."
+	icon_state="poster_door"
+
+/obj/structure/sign/safety_rules
+	name = "Worksite Safety Rules"
+	desc = "A metal-backed poster with a mindnumbing litany of rules of the like of hardhat here, no hardhat there, workgloves here, insulated gloves there, and there's 84 of them."
+	icon_state="poster_rules"
+
+/obj/structure/sign/glove_psa
+	name = "Insulated Glove PSA"
+	desc = "This metal-backed poster details the danger of off-brand and \"budget\" insulated gloves that fail to protect against the massive voltages that superconductive wire can generate. It details vividly the story of the Sheschremi, a Resomi who exploded into gore after using budget gloves."
+	icon_state="poster_gloves"
+
+/obj/structure/sign/decomm_moto
+	name = "Motivational Poster"
+	desc = "This metal-backed poster extols the feeling of accomplishment you get deconstructing your workplace for the profit of your employer. Who approved this, again?"
+	icon_state="poster_moto"
+
+/obj/structure/sign/keepcalm
+	name = "Keep Calm And Work"
+	desc = "The metal-backed poster reads <i>\"KEEP CALM AND WORK\"</i> in block capitals. On the corner, it is stamped \"Authorized for station-wide display on vessels and stations under decommissioning.\" with a Centcom seal."
+	icon_state="poster_kcaw"

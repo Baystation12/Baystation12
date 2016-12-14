@@ -441,3 +441,11 @@
 /obj/item/weapon/paper/exodus_holodeck
 	name = "holodeck disclaimer"
 	info = "Bruises sustained in the holodeck can be healed simply by sleeping."
+
+/obj/item/weapon/paper/eros_antimatter
+	name = "badly written antimatter instructions"
+	info = "Some machine-y character (Maybe a posi, maybe a MMI? unno.) made some Resomi tech not suck. Didjy? Think that's it. Really easy to use. You can use the multitool port to pack the pieces back up, and the multitool to unpack the pieces after. The glowy blue sections in the middle are cores. Stuff the antimatter jars into the big jar hole in the front of the control unit. Inject no more than twice the number of cores, or it'll overload and get damaged. I don't like my things damaged, so you probably don't too. I've got a call. Call Central if you need something else?<br><i>-Al</i></sign>"
+
+/obj/item/weapon/paper/eros_radiation
+	name = "scrawled note"
+	info = "Why even have those radsuits now? The new thing's rads are so low it'd be a good centerpiece for a cyberpunk cafe."
