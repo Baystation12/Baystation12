@@ -108,7 +108,6 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
-
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
@@ -149,21 +148,23 @@
 	display_name = "chaps, black"
 	path = /obj/item/clothing/accessory/chaps/black
 
-/datum/gear/accessory/suitjacket
-	display_name = "suitjacket selection"
-	path = /obj/item/clothing/accessory/toggleable/vest
-
 /datum/gear/accessory/suitjacket/checkered
 	display_name = "suit jacket, checkered"
 	path = /obj/item/clothing/accessory/toggleable/checkered_jacket
 
 /datum/gear/accessory/warmer/armwarmers
-	display_name = "arm Warmers"
+	display_name = "arm warmers"
 	path = /obj/item/clothing/accessory/warmers/armwarmers
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/warmer/legarmers
-	display_name = "leg Warmers"
+	display_name = "leg warmers"
 	path = /obj/item/clothing/accessory/warmers/legwarmers
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/suitjacket
+	display_name = "suitjacket selection"
+	path = /obj/item/clothing/accessory/toggleable/vest
 
 /datum/gear/accessory/suitjacket/New()
 	..()
@@ -176,3 +177,49 @@
 	suitjacket["suit jacket, checkered"] = /obj/item/clothing/accessory/toggleable/checkered_jacket
 	gear_tweaks += new/datum/gear_tweak/path(suitjacket)
 
+/datum/gear/accessory/shirt
+	display_name = "shirt selection"
+	path = /obj/item/clothing/accessory/shirt
+
+/obj/gear/accessory/shirt/New()
+	..()
+	var/list/tops = list()
+	tops["sweater, pink"] = /obj/item/clothing/accessory/shirt/sweaterpink
+	tops["sweater, blue"] = /obj/item/clothing/accessory/shirt/sweaterblue
+	tops["sweater, blue heart"] = /obj/item/clothing/accessory/shirt/sweaterblueheart
+	tops["sweater, mint"] = /obj/item/clothing/accessory/shirt/sweatermint
+	tops["sweater, NT"] = /obj/item/clothing/accessory/shirt/sweaternt
+	tops["sweater, snowman"] = /obj/item/clothing/accessory/shirt/sweatersnow
+	tops["sweater, christmas tree"] = /obj/item/clothing/accessory/shirt/sweatertree
+	tops["sweater, ugly holiday"] = /obj/item/clothing/accessory/shirt/sweaterreindeer
+	tops["singlet, white"] = /obj/item/clothing/accessory/shirt/singletwhite
+	tops["singlet, black"] = /obj/item/clothing/accessory/shirt/singletblack
+	tops["longsleeve, white"] = /obj/item/clothing/accessory/shirt/whitelongsleeve
+	tops["turtleneck, black"] = /obj/item/clothing/accessory/shirt/turtleneckblack
+	tops["turtleneck, winter"] = /obj/item/clothing/accessory/shirt/turtleneckwinter
+	tops["chemise, white"] = /obj/item/clothing/accessory/shirt/chemisewhite
+	tops["tshirt, grey"] = /obj/item/clothing/accessory/shirt/tshirtgrey
+	tops["tshirt, white"] = /obj/item/clothing/accessory/shirt/tshirtwhite
+	tops["tshirt, black"] = /obj/item/clothing/accessory/shirt/tshirtblack
+	tops += new/datum/gear_tweak/path(tops)
+
+
+/datum/gear/accessory/tshirtc
+	display_name = "t-shirt, colorable"
+	path = /obj/item/clothing/accessory/shirt/tshirt
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/chemisec
+	display_name = "chemise, colorable"
+	path = /obj/item/clothing/accessory/shirt/chemise
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/longsleevec
+	display_name = "longsleeve shirt, colorable"
+	path = /obj/item/clothing/accessory/shirt/longsleeve
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/singletc
+	display_name = "singlet, colorable"
+	path = /obj/item/clothing/accessory/shirt/singlet
+	flags = GEAR_HAS_COLOR_SELECTION

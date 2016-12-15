@@ -62,6 +62,15 @@
 	name = "brown cowboy hat"
 	icon_state = "eros_cowboyhat"
 
+/obj/item/clothing/head/cowboy_hat/cowboywide
+	name = "wide-brimmed cowboy hat"
+	icon_state = "brownhat"
+
+/obj/item/clothing/head/cowboy_hat/black
+	name = "black cowboy hat"
+	desc = "Whoever wears this is probably pretty villainous."
+	icon_state = "blackhat"
+
 /obj/item/clothing/head/detectivenoir
 	name = "detective noir hat"
 	desc = "This hat makes you feel serious."
@@ -107,3 +116,37 @@
 	name = "sombrero"
 	desc = "A wide-brimmed hat popularly worn in Mexico."
 	icon_state = "eros_sombrero"
+
+/obj/item/clothing/head/helmet/knight    //  No icon for grey helmet, so the parent is just for defining
+	name = "knight helmet"
+	desc = "A classic metal helmet."
+	armor = list(melee = 41, bullet = 15, laser = 5,energy = 5, bomb = 5, bio = 2, rad = 0, fire = 0, acid = 50)
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
+	body_parts_covered = HEAD|FACE
+	item_flags = THICKMATERIAL
+	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/clothing/head/helmet/knight/green
+	name = "green knight helmet"
+	desc = "A classic metal helmet. It has green decor."
+	icon_state = "eros_knight_green"
+
+/obj/item/clothing/head/helmet/knight/blue
+	name = "blue knight helmet"
+	desc = "A classic metal helmet. It has blue decor."
+	icon_state = "eros_knight_blue"
+
+/obj/item/clothing/head/helmet/knight/red
+	name = "red knight helmet"
+	desc = "A classic metal helmet. It has red decor."
+	icon_state = "eros_knight_red"
+
+/obj/item/clothing/head/helmet/knight/yellow
+	name = "yellow knight helmet"
+	desc = "A classic metal helmet. It has yellow decor."
+	icon_state = "eros_knight_yellow"
+
+/obj/item/clothing/head/helmet/knight/templar
+	name = "crusader helmet"
+	desc = "Deus Vult."
+	icon_state = "eros_knight_templar"
