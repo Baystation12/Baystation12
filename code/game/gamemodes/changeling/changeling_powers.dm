@@ -697,10 +697,10 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 /mob/proc/changeling_lsdsting()
 	set category = "Changeling"
-	set name = "Hallucination Sting (15)"
+	set name = "Hallucination Sting (20)"
 	set desc = "Causes terror in the target."
 
-	var/mob/living/carbon/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
+	var/mob/living/carbon/human/T = changeling_sting(20,/mob/proc/changeling_lsdsting)
 	if(!T)	return 0
 	spawn(rand(300,600))
 		if(T)	T.hallucination += 400
@@ -800,21 +800,6 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	to_chat(T, "<span class='danger'>you feel a small prick as stomach churns violently and you become to feel skinnier.</span>")
 	T.nutrition -= 100
 	feedback_add_details("changeling_powers","US")
-	return 1
-
-/mob/proc/changeling_DEATHsting()
-	set category = "Changeling"
-	set name = "Death Sting (40)"
-	set desc = "Causes spasms onto death."
-
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting)
-	if(!T)	return 0
-	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
-	T.silent = 10
-	T.Paralyse(10)
-	T.make_jittery(1000)
-	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
-	feedback_add_details("changeling_powers","DTHS")
 	return 1
 
 /mob/proc/changeling_extract_dna_sting()
