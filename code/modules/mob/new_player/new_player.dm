@@ -532,4 +532,4 @@ mob/new_player/MayRespawn()
 	return
 
 /mob/new_player/say(var/message)
-	sanitize_and_communicate(/decl/communication_channel/ooc, src, message)
+	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
