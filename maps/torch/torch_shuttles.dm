@@ -1,3 +1,17 @@
+/obj/machinery/computer/shuttle_control/multi/calypso
+	name = "calypso control console"
+	icon_keyboard = "rd_key"
+	icon_screen = "shuttle"
+	//req_access = list(access_mining)
+	shuttle_tag = "Calypso"
+
+/obj/machinery/computer/shuttle_control/multi/guppy
+	name = "general utility pod control console"
+	icon_keyboard = "power_key"
+	icon_screen = "supply"
+	//req_access = list(access_mining)
+	shuttle_tag = "GUP"
+
 //Torch Large Pods
 
 /datum/shuttle/ferry/escape_pod/escape_pod_six

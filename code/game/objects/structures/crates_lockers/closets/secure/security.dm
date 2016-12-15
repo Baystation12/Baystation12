@@ -389,45 +389,6 @@
 		..()
 		new /obj/item/clothing/accessory/armband/medgreen(src)
 		new /obj/item/device/encryptionkey/headset_med(src)
-		return
-
-/obj/structure/closet/secure_closet/security_torch
-	name = "master at arms' locker"
-	req_access = list(access_brig)
-	icon_state = "sec1"
-	icon_closed = "sec"
-	icon_locked = "sec1"
-	icon_opened = "secopen"
-	icon_broken = "secbroken"
-	icon_off = "secoff"
-
-/obj/structure/closet/secure_closet/security_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/security(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_sec(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	new /obj/item/clothing/suit/storage/vest/solgov/security(src)
-	new /obj/item/clothing/head/helmet/solgov/security(src)
-	new /obj/item/weapon/cartridge/security(src)
-	new /obj/item/device/radio/headset/headset_sec(src)
-	new /obj/item/weapon/storage/belt/security(src)
-	new /obj/item/device/flash(src)
-	new /obj/item/weapon/reagent_containers/spray/pepper(src)
-	new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-	new /obj/item/weapon/melee/baton/loaded(src)
-	new /obj/item/clothing/glasses/sunglasses/sechud(src)
-	new /obj/item/clothing/glasses/sunglasses/sechud/goggles(src)
-	new /obj/item/taperoll/police(src)
-	new /obj/item/device/hailer(src)
-	new /obj/item/clothing/accessory/storage/black_vest(src)
-	new /obj/item/weapon/gun/energy/taser(src)
-	new /obj/item/device/megaphone(src)
-	new /obj/item/clothing/accessory/holster/thigh(src)
-	return
-
 
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"

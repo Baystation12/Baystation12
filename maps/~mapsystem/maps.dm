@@ -102,6 +102,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
 
+/datum/map/proc/get_network_access()
+	return
+
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
 	var/list/candidates = using_map.accessible_z_levels.Copy()
@@ -110,3 +113,4 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!candidates.len)
 		return current_z_level
 	return text2num(pickweight(candidates))
+
