@@ -63,7 +63,7 @@
 												/datum/species/lamia             = 6,	// Eros - low baseline pay
 												/datum/species/drider            = 6,	// Eros - low baseline pay
 												/datum/species/akula             = 7	// Eros - uplifted, slightly higher than 'baseline' pay
-												/datum/species/shapeshifter/promethean             = 5,	// Eros - low baseline pay
+												/datum/species/shapeshifter/promethean             = 6,	// Eros - low baseline pay
 											)
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
