@@ -6,6 +6,7 @@
 
 	var/material_name
 
+	rad_power = 1
 	var/percent_depleted = 1
 	var/list/rod_quantities = list()
 	var/fuel_type = "composite"
@@ -44,11 +45,10 @@
 
 /obj/item/weapon/fuel_assembly/process()
 	if(!radioactivity)
-		processing_objects -= src
-		return
+		radiation_repository.sources.Remove(src)
+
 	if(istype(loc, /turf))
-		for(var/mob/living/L in range(1,loc))
-			L.apply_effect(max(1,ceil(radioactivity/30)),IRRADIATE, blocked = L.getarmor(null, "rad"))
+		rad_power = max(1,ceil(radioactivity/30))
 
 /obj/item/weapon/fuel_assembly/Destroy()
 	processing_objects -= src
