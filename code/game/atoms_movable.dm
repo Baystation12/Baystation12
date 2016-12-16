@@ -252,7 +252,7 @@
 	return
 
 /atom/movable/proc/touch_map_edge()
-	if(z in using_map.sealed_levels)
+	if(!z || (z in using_map.sealed_levels))
 		return
 
 	if(config.use_overmap)
@@ -261,7 +261,7 @@
 
 	var/new_x
 	var/new_y
-	var/new_z = src.get_transit_zlevel()
+	var/new_z = using_map.get_transit_zlevel(z)
 	if(new_z)
 		if(x <= TRANSITIONEDGE)
 			new_x = world.maxx - TRANSITIONEDGE - 2
@@ -282,16 +282,3 @@
 		var/turf/T = locate(new_x, new_y, new_z)
 		if(T)
 			forceMove(T)
-
-//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
-var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "6" = 60)
-
-//by default, transition randomly to another zlevel
-/atom/movable/proc/get_transit_zlevel()
-	var/list/candidates = accessible_z_levels.Copy()
-	candidates.Remove("[src.z]")
-
-	if(!candidates.len)
-		return null
-	return text2num(pickweight(candidates))
-

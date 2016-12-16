@@ -32,6 +32,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
+	//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
+	var/list/accessible_z_levels = list()
+
 	var/list/allowed_jobs	       //Job datums to use.
 	                               //Works a lot better so if we get to a point where three-ish maps are used
 	                               //We don't have to C&P ones that are only common between two of them
@@ -97,3 +100,12 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for(var/thing in mining_floors)
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
+
+// By default transition randomly to another zlevel
+/datum/map/proc/get_transit_zlevel(var/current_z_level)
+	var/list/candidates = using_map.accessible_z_levels.Copy()
+	candidates.Remove(num2text(current_z_level))
+
+	if(!candidates.len)
+		return null
+	return text2num(pickweight(candidates))
