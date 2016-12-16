@@ -367,6 +367,8 @@
 	name = "fancy dark red dress"
 	desc = "A short, red dress with a black belt. Fancy."
 	icon_state = "eros_darkreddress"
+	item_state = "eros_darkreddress"
+	worn_state = "eros_darkreddress"
 
 /obj/item/clothing/under/worn_hazard
 	name = "Worn hazard jumpsuit"
@@ -378,52 +380,66 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
 
 
-/obj/item/clothing/under/skirts/grey
+/obj/item/clothing/under/skirt/grey
 	name = "casual grey skirt"
 	desc = "A casual grey skirt for around the office."
 	icon_state = "skirt-gray"
+	item_state = "skirt-gray"
+	worn_state = "skirt-gray"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
-/obj/item/clothing/under/skirts/navy
+/obj/item/clothing/under/skirt/navy
 	name = "casual navy skirt"
 	desc = "A casual navy blue skirt for around the office."
 	icon_state = "skirt-blue"
+	item_state = "skirt-blue"
+	worn_state = "skirt-blue"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
-/obj/item/clothing/under/skirts/blackc
+/obj/item/clothing/under/skirt/blackc
 	name = "casual black skirt"
 	desc = "A casual black blue skirt for around the office."
 	icon_state = "skirt-black"
+	item_state = "skirt-black"
+	worn_state = "skirt-black"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
-/obj/item/clothing/under/skirts/skatered
+/obj/item/clothing/under/skirt/skatered
 	name = "red skater skirt"
 	desc = "Skates not included."
 	icon_state = "skateskirt-red"
+	item_state = "skateskirt-red"
+	worn_state = "skateskirt-red"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
-/obj/item/clothing/under/skirts/skatepink
+/obj/item/clothing/under/skirt/skatepink
 	name = "pink skater skirt"
 	desc = "Skates not included."
 	icon_state = "skateskirt-pink"
+	item_state = "skateskirt-pink"
+	worn_state = "skateskirt-pink"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
-/obj/item/clothing/under/skirts/skateblue
+/obj/item/clothing/under/skirt/skateblue
 	name = "blue skater skirt"
 	desc = "Skates not included."
 	icon_state = "skateskirt-blue"
+	item_state = "skateskirt-blue"
+	worn_state = "skateskirt-blue"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
-/obj/item/clothing/under/skirts/skatewhite
+/obj/item/clothing/under/skirt/skatewhite
 	name = "white skater skirt"
 	desc = "Skates not included."
 	icon_state = "skateskirt-white"
+	item_state = "skateskirt-white"
+	worn_state = "skateskirt-white"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 
@@ -431,6 +447,8 @@
 	name = "skater skirt"
 	desc = "Skates not included."
 	icon_state = "skateskirt-white"
+	item_state = "skateskirt-white"
+	worn_state = "skateskirt-white"
 	body_parts_covered = LOWER_TORSO
 	show_boobs = 1
 

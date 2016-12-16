@@ -61,15 +61,18 @@
 /obj/item/clothing/head/cowboy_hat/cowboy2
 	name = "brown cowboy hat"
 	icon_state = "eros_cowboyhat"
+	item_state = "eros_cowboyhat"
 
 /obj/item/clothing/head/cowboy_hat/cowboywide
 	name = "wide-brimmed cowboy hat"
 	icon_state = "brownhat"
+	item_state = "brownhat"
 
 /obj/item/clothing/head/cowboy_hat/black
 	name = "black cowboy hat"
 	desc = "Whoever wears this is probably pretty villainous."
 	icon_state = "blackhat"
+	item_state = "blackhat"
 
 /obj/item/clothing/head/detectivenoir
 	name = "detective noir hat"
@@ -130,23 +133,28 @@
 	name = "green knight helmet"
 	desc = "A classic metal helmet. It has green decor."
 	icon_state = "eros_knight_green"
+	item_state = "eros_knight_green"
 
 /obj/item/clothing/head/helmet/knight/blue
 	name = "blue knight helmet"
 	desc = "A classic metal helmet. It has blue decor."
 	icon_state = "eros_knight_blue"
+	item_state = "eros_knight_blue"
 
 /obj/item/clothing/head/helmet/knight/red
 	name = "red knight helmet"
 	desc = "A classic metal helmet. It has red decor."
 	icon_state = "eros_knight_red"
+	item_state = "eros_knight_red"
 
 /obj/item/clothing/head/helmet/knight/yellow
 	name = "yellow knight helmet"
 	desc = "A classic metal helmet. It has yellow decor."
 	icon_state = "eros_knight_yellow"
+	item_state = "eros_knight_yellow"
 
 /obj/item/clothing/head/helmet/knight/templar
 	name = "crusader helmet"
 	desc = "Deus Vult."
 	icon_state = "eros_knight_templar"
+	item_state = "eros_knight_templar"

@@ -343,8 +343,8 @@
 /obj/item/clothing/suit/storage/brownjacket
 	name = "brown jacket"
 	desc = "A finely made jacket, in brown leather."
-	icon_state = "jacket_black"
-	item_state = "jacket_black"
+	icon_state = "jacket_brown"
+	item_state = "jacket_brown"
 
 /obj/item/clothing/suit/armor/riot/knight
 	name = "plate armor"
