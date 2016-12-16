@@ -181,6 +181,7 @@
 /datum/gear/head/headbow
 	display_name = "bow"
 	path = /obj/item/clothing/head/hairribbon/color
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/froghat
 	display_name = "froggie hat"
@@ -258,4 +259,16 @@
 /datum/gear/head/sombrero
 	display_name = "sombrero"
 	path = /obj/item/clothing/head/sombrero
+
+/datum/gear/head/cowboy_hat/cowboy/wide
+	display_name = "cowboy hat, wide-brimmed"
+	path = /obj/item/clothing/head/cowboy_hat/cowboywide
+
+/datum/gear/head/cowboy_hat/cowboy/black
+	display_name = "cowboy hat, black"
+	path = /obj/item/clothing/head/cowboy_hat/black
+
+/datum/gear/head/cowboy_hat/cowboy/alt
+	display_name = "cowboy hat, alt"
+	path = /obj/item/clothing/head/cowboy_hat/cowboy2
 //EROS END

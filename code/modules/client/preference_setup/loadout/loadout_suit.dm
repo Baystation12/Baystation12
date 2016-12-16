@@ -1,10 +1,12 @@
 // Suit slot
+
 /datum/gear/suit
 	display_name = "apron, blue"
 	path = /obj/item/clothing/suit/apron
 	slot = slot_wear_suit
 	sort_category = "Suits and Overwear"
-	cost = 2
+	cost = 1
+
 
 /datum/gear/suit/leather
 	display_name = "leather jackets"
@@ -46,10 +48,12 @@
 	display_name = "blue-edged labcoat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/blue
 
+/* coveralls redefined in Eros
 /datum/gear/suit/overalls
 	display_name = "overalls"
 	path = /obj/item/clothing/suit/apron/overalls
 	cost = 1
+*/
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
@@ -225,21 +229,39 @@
 	display_name = "military jacket, green"
 	path = /obj/item/clothing/suit/storage/miljacket/green
 
-/datum/gear/suit/sweater
-	display_name = "sweaters"
-	path = /obj/item/clothing/suit/sweater/snow
+/datum/gear/suit/storage/jacket/brown
+	display_name = "jacket, brown"
+	path = /obj/item/clothing/suit/storage/brownjacket
 
-/datum/gear/suit/sweater/New()
+/datum/gear/suit/storage/jacket/black
+	display_name = "jacket, black"
+	path = /obj/item/clothing/suit/storage/blackjacket
+
+/datum/gear/suit/storage/jacket/shipping
+	display_name = "jacket, shipping"
+	path = /obj/item/clothing/suit/storage/shipping
+
+/datum/gear/suit/apron/overalls
+	display_name = "overalls selection"
+	path = /obj/item/clothing/suit/apron/overalls
+
+/datum/gear/suit/apron/overalls/New()
 	..()
-	var/sweaters = list()
-	sweaters["pink sweater"] = /obj/item/clothing/suit/sweater/pink
-	sweaters["blue sweater"] = /obj/item/clothing/suit/sweater/blue
-	sweaters["blue heart sweater"] = /obj/item/clothing/suit/sweater/blueheart
-	sweaters["mint sweater"] = /obj/item/clothing/suit/sweater/mint
-	sweaters["NT sweater"] = /obj/item/clothing/suit/sweater/nt
-	sweaters["snowman sweater"] = /obj/item/clothing/suit/sweater/snow
-	sweaters["christmas tree sweater"] = /obj/item/clothing/suit/sweater/tree
-	sweaters["ugly holiday sweater"] = /obj/item/clothing/suit/sweater/reindeer
-	gear_tweaks += new/datum/gear_tweak/path(sweaters)
+	var/overall = list()
+	overall["coveralls"] = /obj/item/clothing/suit/apron/overalls
+	overall["brown overalls"] = /obj/item/clothing/suit/apron/overalls/brown
+	overall["electrician overalls"] = /obj/item/clothing/suit/apron/overalls/electrician
+	overall["emergency overalls"] = /obj/item/clothing/suit/apron/overalls/emergency
+	gear_tweaks += new/datum/gear_tweak/path(overall)
+
+/datum/gear/suit/storage/factoryvest
+	display_name = "factory worker's vest"
+	path = /obj/item/clothing/suit/storage/factoryvest
+	cost = 2
+
+/datum/gear/suit/storage/factoryapron
+	display_name = "factory worker's apron"
+	path = /obj/item/clothing/suit/storage/factoryapron
+	cost = 2
 
 //EROS FINISH

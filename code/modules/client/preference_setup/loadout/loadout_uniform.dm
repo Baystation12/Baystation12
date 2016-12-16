@@ -391,8 +391,17 @@
 	path = /obj/item/clothing/under/dress/darkred
 
 /datum/gear/uniform/worn_hazard
-	display_name = "Worn Hazard suit"
+	display_name = "worn hazard suit"
 	path = /obj/item/clothing/under/worn_hazard
 	allowed_roles = list("Chief Engineer","Station Engineer")
+
+/datum/gear/uniform/skatercolor
+	display_name = "skater skirt, colorable"
+	path = /obj/item/clothing/under/skateskirt
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/workman
+	display_name = "workman outfit"
+	path = /obj/item/clothing/under/serviceoveralls
 
 //EROS FINISH

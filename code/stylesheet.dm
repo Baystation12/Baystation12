@@ -104,4 +104,8 @@ h1.alert, h2.alert		{color: #000000;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}
 
+
+/* Eros */
+.love					{color: #ff69bf; font-style: italic;}
+
 </style>"}
