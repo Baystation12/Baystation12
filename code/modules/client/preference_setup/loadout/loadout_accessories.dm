@@ -177,32 +177,31 @@
 	suitjacket["suit jacket, checkered"] = /obj/item/clothing/accessory/toggleable/checkered_jacket
 	gear_tweaks += new/datum/gear_tweak/path(suitjacket)
 
-/datum/gear/accessory/shirt
+/datum/gear/accessory/shirt/
 	display_name = "shirt selection"
-	path = /obj/item/clothing/accessory/shirt
+	path = /obj/item/clothing/accessory/shirt/tshirtwhite
 
-/obj/gear/accessory/shirt/New()
+/datum/gear/accessory/shirt/New()
 	..()
-	var/list/tops = list()
-	tops["sweater, pink"] = /obj/item/clothing/accessory/shirt/sweaterpink
-	tops["sweater, blue"] = /obj/item/clothing/accessory/shirt/sweaterblue
-	tops["sweater, blue heart"] = /obj/item/clothing/accessory/shirt/sweaterblueheart
-	tops["sweater, mint"] = /obj/item/clothing/accessory/shirt/sweatermint
-	tops["sweater, NT"] = /obj/item/clothing/accessory/shirt/sweaternt
-	tops["sweater, snowman"] = /obj/item/clothing/accessory/shirt/sweatersnow
-	tops["sweater, christmas tree"] = /obj/item/clothing/accessory/shirt/sweatertree
-	tops["sweater, ugly holiday"] = /obj/item/clothing/accessory/shirt/sweaterreindeer
-	tops["singlet, white"] = /obj/item/clothing/accessory/shirt/singletwhite
-	tops["singlet, black"] = /obj/item/clothing/accessory/shirt/singletblack
-	tops["longsleeve, white"] = /obj/item/clothing/accessory/shirt/whitelongsleeve
-	tops["turtleneck, black"] = /obj/item/clothing/accessory/shirt/turtleneckblack
-	tops["turtleneck, winter"] = /obj/item/clothing/accessory/shirt/turtleneckwinter
-	tops["chemise, white"] = /obj/item/clothing/accessory/shirt/chemisewhite
-	tops["tshirt, grey"] = /obj/item/clothing/accessory/shirt/tshirtgrey
-	tops["tshirt, white"] = /obj/item/clothing/accessory/shirt/tshirtwhite
-	tops["tshirt, black"] = /obj/item/clothing/accessory/shirt/tshirtblack
-	tops += new/datum/gear_tweak/path(tops)
-
+	var/tshirts = list()
+	tshirts["tshirt, white"] = /obj/item/clothing/accessory/shirt/tshirtwhite
+	tshirts["tshirt, grey"] = /obj/item/clothing/accessory/shirt/tshirtgrey
+	tshirts["tshirt, black"] = /obj/item/clothing/accessory/shirt/tshirtblack
+	tshirts["chemise, white"] = /obj/item/clothing/accessory/shirt/chemisewhite
+	tshirts["longsleeve, white"] = /obj/item/clothing/accessory/shirt/whitelongsleeve
+	tshirts["turtleneck, black"] = /obj/item/clothing/accessory/shirt/turtleneckblack
+	tshirts["turtleneck, winter"] = /obj/item/clothing/accessory/shirt/turtleneckwinter
+	tshirts["singlet, white"] = /obj/item/clothing/accessory/shirt/singletwhite
+	tshirts["singlet, black"] = /obj/item/clothing/accessory/shirt/singletblack
+	tshirts["sweater, pink"] = /obj/item/clothing/accessory/shirt/sweaterpink
+	tshirts["sweater, blue"] = /obj/item/clothing/accessory/shirt/sweaterblue
+	tshirts["sweater, blueh heart"] = /obj/item/clothing/accessory/shirt/sweaterblueheart
+	tshirts["sweater, mint"] = /obj/item/clothing/accessory/shirt/sweatermint
+	tshirts["sweater, NT"] = /obj/item/clothing/accessory/shirt/sweaternt
+	tshirts["sweater, snowman"] = /obj/item/clothing/accessory/shirt/sweatersnow
+	tshirts["sweater, chrismas tree"] = /obj/item/clothing/accessory/shirt/sweatertree
+	tshirts["sweater, reindeer"] = /obj/item/clothing/accessory/shirt/sweaterreindeer
+	gear_tweaks += new/datum/gear_tweak/path(tshirts)
 
 /datum/gear/accessory/tshirtc
 	display_name = "t-shirt, colorable"

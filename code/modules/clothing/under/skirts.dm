@@ -73,6 +73,7 @@
 	desc = "It's a jumpskirt worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."
 	icon_state = "qmf"
 	worn_state = "qmf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/cargotech/skirt
@@ -80,6 +81,7 @@
 	desc = "Skirrrrrts! They're comfy and easy to wear!"
 	icon_state = "cargof"
 	worn_state = "cargof"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/engineer/skirt
@@ -87,6 +89,7 @@
 	name = "engineer's jumpskirt"
 	icon_state = "enginef"
 	worn_state = "enginef"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 10)
 	show_genitals = 1
 
@@ -95,6 +98,7 @@
 	name = "chief engineer's jumpskirt"
 	icon_state = "chieff"
 	worn_state = "chieff"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/engineer/atmospheric_technician/skirt
@@ -102,6 +106,7 @@
 	name = "atmospheric technician's jumpskirt"
 	icon_state = "atmosf"
 	worn_state = "atmosf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/roboticist/skirt
@@ -109,6 +114,7 @@
 	name = "roboticist's jumpskirt"
 	icon_state = "roboticsf"
 	worn_state = "roboticsf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/scientist/skirt
@@ -116,6 +122,7 @@
 	icon_state = "sciencef"
 	item_state = "sciencef"
 	worn_state = "sciencef"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 	show_genitals = 1
@@ -124,6 +131,7 @@
 	name = "medical doctor's jumpskirt"
 	icon_state = "medicalf"
 	worn_state = "medicalf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/medical/chemist/skirt
@@ -131,6 +139,7 @@
 	icon_state = "chemistryf"
 	item_state = "chemistryf"
 	worn_state = "chemistryf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/medical/chief_medical_officer/skirt
@@ -138,12 +147,14 @@
 	name = "chief medical officer's jumpskirt"
 	icon_state = "cmof"
 	worn_state = "cmof"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/medical/geneticist/skirt
 	name = "geneticist's jumpskirt"
 	icon_state = "geneticswhitef"
 	worn_state = "geneticswhitef"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/medical/virologist/skirt
@@ -151,6 +162,7 @@
 	icon_state = "virologyf"
 	item_state = "virologyf"
 	worn_state = "virologyf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/security/skirt
@@ -161,6 +173,7 @@
 	worn_state = "secredf"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/security/warden/skirt
@@ -169,6 +182,7 @@
 	icon_state = "wardenf"
 	item_state = "r_suit"
 	worn_state = "wardenf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/under/rank/security/head_of_security/skirt
@@ -177,4 +191,5 @@
 	icon_state = "hosf"
 	item_state = "hosf"
 	worn_state = "hosf"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	show_genitals = 1
