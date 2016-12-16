@@ -189,10 +189,12 @@
 
 /obj/effect/blob/core/New(loc)
 	processing_objects.Add(src)
+	GhostFollowObjects.Add(src)
 	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
 	processing_objects.Remove(src)
+	GhostFollowObjects.Remove(src)
 	return ..()
 
 /obj/effect/blob/core/process()

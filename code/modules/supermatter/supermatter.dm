@@ -99,7 +99,12 @@
 	var/debug = 0
 
 
+/obj/machinery/power/supermatter/New()
+	. = ..()
+	GhostFollowObjects.Add(src)
+
 /obj/machinery/power/supermatter/Destroy()
+	GhostFollowObjects.Remove(src)
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
