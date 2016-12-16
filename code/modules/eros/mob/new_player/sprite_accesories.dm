@@ -56,6 +56,10 @@
 	eighties
 		name = "80's"
 		icon_state = "hair_80s"
+
+	spikyponytail
+		name = "Spiky Ponytail"
+		icon_state = "hair_spikyponytail"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /

@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+DIR: code code\modules code\modules\eros code\modules\eros\mob code\modules\eros\mob\new_player 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+WINDOW: code\modules\eros\mob\new_player\sprite_accesories.dm
+FILE: code\modules\eros\mob\new_player\sprite_accesories.dm
 */
 // END_INTERNALS
