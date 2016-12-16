@@ -121,7 +121,10 @@
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
+
 	open_sound_powered = 'sound/machines/windowdoor.ogg'
+	close_sound_powered = 'sound/machines/windowdoor.ogg'
+
 	door_crush_damage = DOOR_CRUSH_DAMAGE*0.75
 	maxhealth = 300
 	explosion_resistance = 5
