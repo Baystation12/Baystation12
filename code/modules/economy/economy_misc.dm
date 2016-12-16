@@ -48,23 +48,24 @@
 
 //Note that you have to specify each subspecies individually. Shouldn't be a big deal.
 /var/list/economic_species_modifier = list(
-												/datum/species/human             = 10,
-												/datum/species/human/gravworlder = 10,
-												/datum/species/human/spacer      = 10,
-												/datum/species/human/vatgrown    = 10, //now lore-friendly,
-												/datum/species/skrell            = 12,
-												/datum/species/tajaran           = 7,
-												/datum/species/unathi            = 7,
-												/datum/species/machine           = 7,
-												/datum/species/diona             = 5,
-												/datum/species/resomi            = 5,
-												/datum/species/vox/pariah        = 1,
-												/datum/species/vox/			     = 1,
-												/datum/species/slime             = 5,
-												/datum/species/lamia             = 5,
-												/datum/species/drider            = 5,
-												/datum/species/akula             = 6
-											)
+    /datum/species/human                   = 10,
+    /datum/species/human/gravworlder       = 10,
+    /datum/species/human/spacer            = 10,
+    /datum/species/human/vatgrown          = 10, //now lore-friendly,
+    /datum/species/skrell                  = 12,
+    /datum/species/tajaran                 = 7,
+    /datum/species/unathi                  = 7,
+    /datum/species/machine                 = 7,
+    /datum/species/diona                   = 6,
+    /datum/species/resomi                  = 6,
+    /datum/species/vox/pariah              = 1,
+    /datum/species/vox/                    = 1,
+    /datum/species/slime                   = 6,
+    /datum/species/lamia                   = 6,
+    /datum/species/drider                  = 6,
+    /datum/species/akula                   = 6,
+    /datum/species/shapeshifter/promethean = 6
+    )
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
 //Corporation NanoTrasen - Generalised / high tech research and phoron exploitation.

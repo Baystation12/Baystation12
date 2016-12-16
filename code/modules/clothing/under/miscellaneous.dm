@@ -257,6 +257,7 @@
 	item_state = "kilt"
 	worn_state = "kilt"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|FEET
+	show_genitals = 1
 
 /obj/item/clothing/under/sexymime
 	name = "sexy mime outfit"
@@ -273,6 +274,7 @@
 	item_state = "o_suit"
 	worn_state = "gladiator"
 	body_parts_covered = LOWER_TORSO
+	show_genitals = 1
 
 //dress
 /obj/item/clothing/under/dress
@@ -284,6 +286,7 @@
 	icon_state = "dress_fire"
 	item_state = "bl_suit"
 	worn_state = "dress_fire"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_green
 	name = "green dress"
@@ -291,6 +294,7 @@
 	icon_state = "dress_green"
 	item_state = "g_suit"
 	worn_state = "dress_green"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_orange
 	name = "orange dress"
@@ -298,6 +302,7 @@
 	icon_state = "dress_orange"
 	item_state = "y_suit"
 	worn_state = "dress_orange"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_pink
 	name = "pink dress"
@@ -305,6 +310,7 @@
 	icon_state = "dress_pink"
 	item_state = "p_suit"
 	worn_state = "dress_pink"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_purple
 	name = "purple dress"
@@ -312,6 +318,7 @@
 	icon_state = "tian_dress"
 	item_state = "p_suit"
 	worn_state = "tian_dress"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_yellow
 	name = "yellow dress"
@@ -319,6 +326,7 @@
 	icon_state = "dress_yellow"
 	item_state = "y_suit"
 	worn_state = "dress_yellow"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_saloon
 	name = "saloon girl dress"
@@ -326,6 +334,7 @@
 	icon_state = "dress_saloon"
 	item_state = "p_suit"
 	worn_state = "dress_saloon"
+	show_genitals = 1
 
 
 /obj/item/clothing/under/dress/dress_cap
@@ -335,6 +344,7 @@
 	item_state = "b_suit"
 	worn_state = "dress_cap"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_hop
 	name = "head of personnel dress uniform"
@@ -343,6 +353,7 @@
 	item_state = "b_suit"
 	worn_state = "dress_hop"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/dress_hr
 	name = "human resources director uniform"
@@ -351,12 +362,14 @@
 	item_state = "y_suit"
 	worn_state = "huresource"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/plaid_blue
 	name = "blue plaid skirt"
 	desc = "A preppy blue skirt with a white blouse."
 	icon_state = "plaid_blue"
 	worn_state = "plaid_blue"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/plaid_red
 	name = "red plaid skirt"
@@ -364,6 +377,7 @@
 	icon_state = "plaid_red"
 	item_state = "kilt"
 	worn_state = "plaid_red"
+	show_genitals = 1
 
 /obj/item/clothing/under/dress/plaid_purple
 	name = "blue purple skirt"
@@ -371,6 +385,7 @@
 	icon_state = "plaid_purple"
 	item_state = "kilt"
 	worn_state = "plaid_purple"
+	show_genitals = 1
 
 //wedding stuff
 /obj/item/clothing/under/wedding/
@@ -424,6 +439,7 @@
 	item_state = "bl_suit"
 	worn_state = "sundress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	show_genitals = 1
 
 /obj/item/clothing/under/sundress_white
 	name = "white sundress"
@@ -432,6 +448,7 @@
 	item_state = "sundress_white"
 	worn_state = "sundress_white"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	show_genitals = 1
 
 /obj/item/clothing/under/blackjumpskirt
 	name = "black jumpskirt"
@@ -439,6 +456,7 @@
 	icon_state = "blackjumpskirt"
 	item_state = "bl_suit"
 	worn_state = "blackjumpskirt"
+	show_genitals = 1
 
 /obj/item/clothing/under/shortjumpskirt
 	name = "short jumpskirt"
@@ -446,6 +464,7 @@
 	icon_state = "shortjumpskirt"
 	item_state = "w_suit"
 	worn_state = "shortjumpskirt"
+	show_genitals = 1
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
@@ -467,6 +486,7 @@
 	icon_state = "hos_formal_fem"
 	item_state = "r_suit"
 	worn_state = "hos_formal_fem"
+	show_genitals = 1
 
 /obj/item/clothing/under/assistantformal
 	name = "assistant's formal uniform"

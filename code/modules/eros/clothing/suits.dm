@@ -24,59 +24,6 @@
 	icon_state = "eros_cowboyvest_dark"
 	item_state = "eros_cowboyvest_dark"
 
-/obj/item/clothing/suit/sweater
-	name = "sweater"
-	desc = "This sweater was knit with care and nothing's as comfy."
-	show_genitals = 1
-
-/obj/item/clothing/suit/sweater/pink
-	name = "pink sweater"
-	desc = "This pink sweater was knit with care and nothing's as comfy."
-	icon_state = "eros_sweater_pink"
-	item_state = "eros_sweater_pink"
-
-/obj/item/clothing/suit/sweater/blue
-	name = "blue sweater"
-	desc = "This blue sweater was knit with care and nothing's as comfy."
-	icon_state = "eros_sweater_blue"
-	item_state = "eros_sweater_blue"
-
-/obj/item/clothing/suit/sweater/blueheart
-	name = "blue heart sweater"
-	desc = "This blue sweater was knit with care and nothing's as comfy. It has a cute heart on it."
-	icon_state = "eros_sweater_blueheart"
-	item_state = "eros_sweater_blueheart"
-
-/obj/item/clothing/suit/sweater/mint
-	name = "mint sweater"
-	desc = "This mint green sweater was knit with care and nothing's as comfy."
-	icon_state = "eros_sweater_mint"
-	item_state = "eros_sweater_mint"
-
-/obj/item/clothing/suit/sweater/nt
-	name = "NT sweater"
-	desc = "This sweater was knit with care and nothing's as comfy.It's NT themed."
-	icon_state = "eros_sweater_nt"
-	item_state = "eros_sweater_nt"
-
-/obj/item/clothing/suit/sweater/snow
-	name = "snowman sweater"
-	desc = "This sweater was knit with care and nothing's as comfy.It has a snowy scene with a snowman."
-	icon_state = "eros_cjumper_blue"
-	item_state = "eros_cjumper_blue"
-
-/obj/item/clothing/suit/sweater/tree
-	name = "christmas tree sweater"
-	desc = "This sweater was knit with care and nothing's as comfy.It has a Christmas tree on it"
-	icon_state = "eros_cjumper_red"
-	item_state = "eros_cjumper_red"
-
-/obj/item/clothing/suit/sweater/reindeer
-	name = "ugly holiday sweater"
-	desc = "This sweater was knit with care and nothing's as comfy.It has a reindeer on it."
-	icon_state = "eros_cjumper_green"
-	item_state = "eros_cjumper_green"
-
 /obj/item/clothing/suit/bow
 	name = "red gift bow"
 	desc = "Looks like someone's all wrapped up and ready to open..."
@@ -94,8 +41,8 @@
 /obj/item/clothing/suit/kigu
 	name = "kigurumi"
 	desc = "Cute and warm, good for naps and lazing around."
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HIDEEARS
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL|BLOCKHEADHAIR
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HIDEEARS|HEAD
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|BLOCKHEADHAIR
 
 /obj/item/clothing/suit/kigu/bear
 	name = "bear kigurumi"
@@ -326,3 +273,111 @@
 	desc = "A dark green canvas jacket. Feels sturdy, yet comfortable."
 	icon_state = "eros_militaryjacket_green"
 	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
+
+
+// Overalls
+
+/obj/item/clothing/suit/apron/overalls	// Bay overalls, redefined here for convenience
+	name = "coveralls"
+	desc = "A set of denim overalls."
+	icon_state = "overalls"
+	item_state = "overalls"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/suit/apron/overalls/brown
+	name = "brown overalls"
+	desc = "A plain set of overalls. For the hard working individual"
+	icon_state = "overalls_acc"
+	item_state = "overalls_acc"
+	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, \
+	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency, \
+	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering) // is this list just good enough?
+
+/obj/item/clothing/suit/apron/overalls/electrician
+	name = "electrician overalls"
+	desc = "A pair of insulated leather overalls. Used for wiring and electronic maintenance."
+	icon_state = "electrician-overalls"
+	item_state = "electrician-overalls"
+	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, \
+	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency, \
+	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
+	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/apron/overalls/emergency
+	name = "emergency overalls"
+	desc = "A pair of insulated leather overalls. Used for wiring and electronic maintenance."
+	icon_state = "emergency-overalls"
+	item_state = "emergency-overalls"
+	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, \
+	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency, \
+	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)   // todo - define a list more appropriate here
+	gas_transfer_coefficient = 0.7
+	permeability_coefficient = 0.7
+	heat_protection = UPPER_TORSO|LOWER_TORSO
+	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/suit/storage/factoryvest
+	name = "factory worker's vest"
+	desc = "A rough leather vest used by factory workers. For holding a few small personal items."
+	icon_state = "factoryworker-vest"
+	item_state = "factoryworker-vest"
+
+/obj/item/clothing/suit/storage/factoryapron
+	name = "factory worker's apron"
+	desc = "A long leather apron used by factory workers. Keeps the dust and dirt off and holds a few small items."
+	icon_state = "factoryworker-apron"
+	item_state = "factoryworker-apron"
+
+/obj/item/clothing/suit/storage/shipping
+	name = "shipping jacket"
+	desc = "A green jacket bearing the logo of an obsolete shipping company."
+	icon_state = "mbill"
+	item_state = "mbill"
+
+/obj/item/clothing/suit/storage/blackjacket
+	name = "black jacket"
+	desc = "A finely made jacket, in black leather."
+	icon_state = "jacket_black"
+	item_state = "jacket_black"
+
+/obj/item/clothing/suit/storage/brownjacket
+	name = "brown jacket"
+	desc = "A finely made jacket, in brown leather."
+	icon_state = "jacket_brown"
+	item_state = "jacket_brown"
+
+/obj/item/clothing/suit/armor/riot/knight
+	name = "plate armor"
+	desc = "A classic suit of plate armour, highly effective at stopping melee attacks."
+	icon_state = "eros_knight_grey"
+	item_state = "eros_knight_grey"
+
+/obj/item/clothing/suit/armor/riot/knight/green
+	name = "green plate armor"
+	desc = "A classic suit of plate armour, highly effective at stopping melee attacks. It has green decor."
+	icon_state = "eros_knight_green"
+	item_state = "eros_knight_green"
+
+/obj/item/clothing/suit/armor/riot/knight/yellow
+	name = "yellow plate armor"
+	desc = "A classic suit of plate armour, highly effective at stopping melee attacks. It has yellow decor."
+	icon_state = "eros_knight_yellow"
+	item_state = "eros_knight_yellow"
+
+/obj/item/clothing/suit/armor/riot/knight/blue
+	name = "blue plate armor"
+	desc = "A classic suit of plate armour, highly effective at stopping melee attacks. It has blue decor."
+	icon_state = "eros_knight_blue"
+	item_state = "eros_knight_blue"
+
+/obj/item/clothing/suit/armor/riot/knight/red
+	name = "red plate armor"
+	desc = "A classic suit of plate armour, highly effective at stopping melee attacks. It has red decor."
+	icon_state = "eros_knight_red"
+	item_state = "eros_knight_red"
+
+/obj/item/clothing/suit/armor/riot/knight/templar
+	name = "crusader armor"
+	desc = "God wills it!"
+	icon_state = "eros_knight_templar"
+	item_state = "eros_knight_templar"

@@ -135,8 +135,7 @@
 	item_state_slots = list(slot_r_hand_str = "eros_darkholme", slot_l_hand_str = "eros_darkholme")
 
 /obj/item/clothing/under/cia
-	name = "cia"
-	desc = "Words here."
+	name = "cia uniform"
 	icon_state = "eros_cia"
 	item_state_slots = list(slot_r_hand_str = "eros_cia", slot_l_hand_str = "eros_cia")
 
@@ -223,7 +222,7 @@
 	item_state_slots = list(slot_r_hand_str = "eros_assistsci", slot_l_hand_str = "eros_assistsci")
 
 /obj/item/clothing/under/loose_dress
-	name = "Loose Dress"
+	name = "loose dress"
 	desc = "A dress that leaves very little to the imagination."
 	icon_state = "eros_loosedress"
 	show_genitals = 1
@@ -368,6 +367,8 @@
 	name = "fancy dark red dress"
 	desc = "A short, red dress with a black belt. Fancy."
 	icon_state = "eros_darkreddress"
+	item_state = "eros_darkreddress"
+	worn_state = "eros_darkreddress"
 
 /obj/item/clothing/under/worn_hazard
 	name = "Worn hazard jumpsuit"
@@ -377,3 +378,81 @@
 	worn_state = "hazard"
 	siemens_coefficient = 0.8
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
+
+
+/obj/item/clothing/under/skirt/grey
+	name = "casual grey skirt"
+	desc = "A casual grey skirt for around the office."
+	icon_state = "skirt-gray"
+	item_state = "skirt-gray"
+	worn_state = "skirt-gray"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skirt/navy
+	name = "casual navy skirt"
+	desc = "A casual navy blue skirt for around the office."
+	icon_state = "skirt-blue"
+	item_state = "skirt-blue"
+	worn_state = "skirt-blue"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skirt/blackc
+	name = "casual black skirt"
+	desc = "A casual black blue skirt for around the office."
+	icon_state = "skirt-black"
+	item_state = "skirt-black"
+	worn_state = "skirt-black"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skirt/skatered
+	name = "red skater skirt"
+	desc = "Skates not included."
+	icon_state = "skateskirt-red"
+	item_state = "skateskirt-red"
+	worn_state = "skateskirt-red"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skirt/skatepink
+	name = "pink skater skirt"
+	desc = "Skates not included."
+	icon_state = "skateskirt-pink"
+	item_state = "skateskirt-pink"
+	worn_state = "skateskirt-pink"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skirt/skateblue
+	name = "blue skater skirt"
+	desc = "Skates not included."
+	icon_state = "skateskirt-blue"
+	item_state = "skateskirt-blue"
+	worn_state = "skateskirt-blue"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skirt/skatewhite
+	name = "white skater skirt"
+	desc = "Skates not included."
+	icon_state = "skateskirt-white"
+	item_state = "skateskirt-white"
+	worn_state = "skateskirt-white"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/skateskirt
+	name = "skater skirt"
+	desc = "Skates not included."
+	icon_state = "skateskirt-white"
+	item_state = "skateskirt-white"
+	worn_state = "skateskirt-white"
+	body_parts_covered = LOWER_TORSO
+	show_boobs = 1
+
+/obj/item/clothing/under/serviceoveralls
+	name = "workman outfit"
+	desc = "The very image of a working man. Not that you're probably doing work."
+	icon_state = "mechanic"
