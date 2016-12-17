@@ -70,7 +70,7 @@
 	supervisors = "the chief medical officer and research director"
 	selection_color = "#013d3b"
 	economic_modifier = 7
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist, access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
+	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist, access_robotics, access_research, access_tox)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
 
