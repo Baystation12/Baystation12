@@ -68,6 +68,7 @@
 	var/wiresexposed = 0
 	var/locked = 1
 	var/has_power = 1
+	var/lawpreset = /datum/ai_laws/nanotrasen
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
 	//var/list/laws = list()
@@ -165,7 +166,7 @@
 
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-	laws = new /datum/ai_laws/nanotrasen()
+	laws = new lawpreset()
 	var/new_ai = select_active_ai_with_fewest_borgs()
 	if(new_ai)
 		lawupdate = 1
