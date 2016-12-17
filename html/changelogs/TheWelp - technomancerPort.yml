@@ -1,0 +1,6 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Ports Pol's Technomancer."
+  - tweak: "Spell master merged with new ability master."
+  - tweak: "Minds now are the only thing that hold spells."

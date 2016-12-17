@@ -23,8 +23,8 @@
 		cast_charge(A)
 
 /spell/aoe_turf/charge/proc/mob_charge(var/mob/living/M)
-	if(M.spell_list.len != 0)
-		for(var/spell/S in M.spell_list)
+	if(M.mind && M.mind.learned_spells)
+		for(var/spell/S in M.mind.learned_spells)
 			if(!istype(S, /spell/aoe_turf/charge))
 				S.charge_counter = S.charge_max
 		to_chat(M, "<span class='notice'>You feel raw magic flowing through you, it feels good!</span>")

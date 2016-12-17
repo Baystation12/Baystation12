@@ -9,7 +9,7 @@
 	if(embedded_flag || (stomach_contents && stomach_contents.len))
 		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(CE_SPEEDBOOST in chem_effects)
+	if((CE_SPEEDBOOST in chem_effects) || force_max_speed)
 		return -1
 
 	var/health_deficiency = (maxHealth - health)
