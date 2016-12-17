@@ -80,28 +80,32 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 		blood_volume *= 0.8
 
 	//Effects of bloodloss
+	var/dmg_coef = 1
+	if(CE_STABLE in owner.chem_effects)
+		dmg_coef = 0.5
+
 	switch(blood_volume)
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			if(prob(1))
 				to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>")
-			if(owner.getOxyLoss() < 20)
-				owner.adjustOxyLoss(3)
+			if(owner.getOxyLoss() < 20 * dmg_coef)
+				owner.adjustOxyLoss(3 * dmg_coef)
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 			owner.eye_blurry = max(owner.eye_blurry,6)
-			if(owner.getOxyLoss() < 50)
-				owner.adjustOxyLoss(10)
-			owner.adjustOxyLoss(1)
+			if(owner.getOxyLoss() < 50 * dmg_coef)
+				owner.adjustOxyLoss(10 * dmg_coef)
+			owner.adjustOxyLoss(1 * dmg_coef)
 			if(prob(15))
 				owner.Paralyse(rand(1,3))
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			owner.adjustOxyLoss(5)
-			owner.adjustToxLoss(3)
+			owner.adjustOxyLoss(5 * dmg_coef)
+			owner.adjustToxLoss(3 * dmg_coef)
 			if(prob(15))
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
-			owner.adjustOxyLoss(10)
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth) * dmg_coef)
+			owner.adjustOxyLoss(10 * dmg_coef)
 
 	//Blood regeneration if there is some space
 	if(blood_volume_raw < species.blood_volume)

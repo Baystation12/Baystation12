@@ -250,3 +250,36 @@
 	..()
 	reagents.add_reagent("frostoil", 60)
 	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/saline
+	name = "saline bottle"
+	desc = "A small bottle. Contains hemodextro saline."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/saline/New()
+	..()
+	reagents.add_reagent("saline", 60)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/metorapan
+	name = "metorapan bottle"
+	desc = "A small bottle. Contains metorapan."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/metorapan/New()
+	..()
+	reagents.add_reagent("metorapan", 60)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/kelotane
+	name = "kelotane bottle"
+	desc = "A small bottle. Contains kelotane."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/kelotane/New()
+	..()
+	reagents.add_reagent("kelotane", 60)
+	update_icon()

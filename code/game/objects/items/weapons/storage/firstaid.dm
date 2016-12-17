@@ -8,8 +8,8 @@
  * First Aid Kits
  */
 /obj/item/weapon/storage/firstaid
-	name = "first-aid kit"
-	desc = "It's an emergency medical kit for those serious boo-boos."
+	name = "first aid kit"
+	desc = "An emergency medical kit for treating minor injuries."
 	icon_state = "firstaid"
 	throw_speed = 2
 	throw_range = 8
@@ -18,19 +18,19 @@
 
 /obj/item/weapon/storage/firstaid/empty
 	icon_state = "firstaid"
-	name = "First-Aid (empty)"
+	name = "first aid kit (empty)"
 
 /obj/item/weapon/storage/firstaid/fire
-	name = "fire first-aid kit"
-	desc = "It's an emergency medical kit for when the toxins lab <i>-spontaneously-</i> burns down."
+	name = "fire first aid kit"
+	desc = "An emergency medical kit containing basic supplies for treating burns."
 	icon_state = "ointment"
 	item_state = "firstaid-ointment"
 
 	startswith = list(
-		/obj/item/device/healthanalyzer,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/ointment,
-		/obj/item/weapon/reagent_containers/pill/kelotane = 3,
+		/obj/item/stack/medical/advanced/ointment = 2,
+		/obj/item/weapon/reagent_containers/pill/spaceacillin = 2,
+		/obj/item/clothing/gloves/latex,
 		)
 
 /obj/item/weapon/storage/firstaid/fire/New()
@@ -41,68 +41,86 @@
 	icon_state = "firstaid"
 
 	startswith = list(
-		/obj/item/stack/medical/bruise_pack = 3,
+		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 2,
-		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 2,
+		/obj/item/clothing/gloves/latex,
 		)
 
 /obj/item/weapon/storage/firstaid/toxin
-	name = "toxin first aid"
-	desc = "Used to treat when you have a high amount of toxins in your body."
+	name = "toxin first aid kit"
+	desc = "An emergency medical kit containing basic supplies for treating poisoning."
 	icon_state = "antitoxin"
 	item_state = "firstaid-toxin"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,
-		/obj/item/weapon/reagent_containers/pill/antitox = 3,
-		/obj/item/device/healthanalyzer,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/weapon/reagent_containers/pill/charcoal = 4,
+		/obj/item/clothing/gloves/latex,
 		)
-
 /obj/item/weapon/storage/firstaid/toxin/New()
 	..()
 	icon_state = pick("antitoxin","antitoxfirstaid","antitoxfirstaid2","antitoxfirstaid3")
 
+/obj/item/weapon/storage/firstaid/radiation
+	name = "radiation first aid kit"
+	desc = "An emergency medical kit containing basic supplies for treating radiation poisoning."
+	icon_state = "radfirstaid"
+	item_state = "firstaid-advanced"
+
+	startswith = list(
+		/obj/item/device/geiger,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/weapon/reagent_containers/pill/hyronalin = 4,
+		/obj/item/clothing/gloves/latex,
+		)
+
+/obj/item/weapon/storage/firstaid/radiation/New()
+	..()
+	icon_state = pick("radfirstaid","radfirstaid2","radfirstaid3")
+
 /obj/item/weapon/storage/firstaid/o2
-	name = "oxygen deprivation first aid"
-	desc = "A box full of oxygen goodies."
+	name = "oxygen deprivation first aid kit"
+	desc = "An emergency medical kit containing basic supplies for treating oxygen deprivation."
 	icon_state = "o2"
 	item_state = "firstaid-o2"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/pill/dexalin = 4,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/weapon/reagent_containers/syringe/inaprovaline,
-		/obj/item/device/healthanalyzer,
+		/obj/item/weapon/reagent_containers/pill/chloromydride = 4,
+		/obj/item/clothing/gloves/latex,
 		)
 
 /obj/item/weapon/storage/firstaid/adv
-	name = "advanced first-aid kit"
-	desc = "Contains advanced medical treatments."
+	name = "trauma first aid kit"
+	desc = "An emergency medical kit containing basic supplies for treating traumas."
 	icon_state = "advfirstaid"
 	item_state = "firstaid-advanced"
 
 	startswith = list(
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/advanced/bruise_pack = 3,
-		/obj/item/stack/medical/advanced/ointment = 2,
+		/obj/item/stack/medical/advanced/bruise_pack = 2,
 		/obj/item/stack/medical/splint,
+		/obj/item/weapon/reagent_containers/pill/spaceacillin = 2,
+		/obj/item/clothing/gloves/latex,
 		)
 
 /obj/item/weapon/storage/firstaid/combat
 	name = "combat medical kit"
-	desc = "Contains advanced medical treatments."
+	desc = "Contains highly advanced medical treatments."
 	icon_state = "bezerk"
 	item_state = "firstaid-advanced"
 
 	startswith = list(
-		/obj/item/weapon/storage/pill_bottle/bicaridine,
-		/obj/item/weapon/storage/pill_bottle/dermaline,
-		/obj/item/weapon/storage/pill_bottle/dexalin_plus,
-		/obj/item/weapon/storage/pill_bottle/dylovene,
 		/obj/item/weapon/storage/pill_bottle/tramadol,
 		/obj/item/weapon/storage/pill_bottle/spaceacillin,
+		/obj/item/weapon/storage/pill_bottle/charcoal,
 		/obj/item/stack/medical/splint,
+		/obj/item/weapon/reagent_containers/syringe/chloromydride = 2,
+		/obj/item/weapon/reagent_containers/syringe/synaptizine,
+		/obj/item/weapon/reagent_containers/syringe/peridaxon,
+		/obj/item/weapon/reagent_containers/syringe/primordapine,
+		/obj/item/weapon/reagent_containers/syringe/sarcohemalazapine,
 		)
 
 /obj/item/weapon/storage/firstaid/surgery
@@ -120,11 +138,29 @@
 		/obj/item/weapon/bonegel,
 		/obj/item/weapon/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/clothing/gloves/latex,
 		)
 
 /obj/item/weapon/storage/firstaid/surgery/New()
 	..()
 	make_exact_fit()
+
+/obj/item/weapon/storage/firstaid/personal
+	name = "personal first aid kit"
+	desc = "An emergency medical kit tailored for healthcare providers."
+	icon_state = "purplefirstaid"
+	item_state = "firstaid-advanced"
+
+	startswith = list(
+		/obj/item/clothing/gloves/latex,
+		/obj/item/device/healthanalyzer,
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/stack/medical/advanced/ointment,
+		/obj/item/stack/medical/splint,
+		/obj/item/weapon/reagent_containers/glass/bottle/saline,
+		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/reagent_containers/syringe/chloromydride,
+		)
 
 /*
  * Pill Bottles
@@ -149,11 +185,29 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/antitox = 7)
 
+/obj/item/weapon/storage/pill_bottle/charcoal
+	name = "bottle of Activated Charcoal pills"
+	desc = "Contains pills used to counter toxins."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/charcoal = 7)
+
 /obj/item/weapon/storage/pill_bottle/bicaridine
 	name = "bottle of Bicaridine pills"
 	desc = "Contains pills used to stabilize the severely injured."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/bicaridine = 7)
+
+/obj/item/weapon/storage/pill_bottle/metorapan
+	name = "bottle of Metorapan pills"
+	desc = "Contains pills used to stabilize the injured."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/metorapan = 7)
+
+/obj/item/weapon/storage/pill_bottle/dexalin
+	name = "bottle of Dexalin pills"
+	desc = "Contains pills used to treat cases of oxygen deprivation."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/dexalin = 7)
 
 /obj/item/weapon/storage/pill_bottle/dexalin_plus
 	name = "bottle of Dexalin Plus pills"
@@ -167,17 +221,17 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/dermaline = 7)
 
-/obj/item/weapon/storage/pill_bottle/dylovene
-	name = "bottle of Dylovene pills"
-	desc = "Contains pills used to treat toxic substances in the blood."
-
-	startswith = list(/obj/item/weapon/reagent_containers/pill/dylovene = 7)
-
 /obj/item/weapon/storage/pill_bottle/inaprovaline
 	name = "bottle of Inaprovaline pills"
 	desc = "Contains pills used to stabilize patients."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/inaprovaline = 7)
+
+/obj/item/weapon/storage/pill_bottle/chloromydride
+	name = "bottle of Chloromydride pills"
+	desc = "Contains pills used to stabilize patients."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/chloromydride = 7)
 
 /obj/item/weapon/storage/pill_bottle/kelotane
 	name = "bottle of kelotane pills"
@@ -196,6 +250,12 @@
 	desc = "Contains pills used to relieve pain."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/tramadol = 7)
+
+/obj/item/weapon/storage/pill_bottle/paracetamol
+	name = "bottle of Paracetamol pills"
+	desc = "Contains pills used to relieve pain."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/paracetamol = 7)
 
 //Baycode specific Psychiatry pills.
 /obj/item/weapon/storage/pill_bottle/citalopram

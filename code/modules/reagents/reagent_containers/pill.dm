@@ -79,6 +79,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 //Pills
+/obj/item/weapon/reagent_containers/pill/tricordrazine
+	name = "tricordrazine pill"
+	desc = "Treats a wide range of minor injuries."
+	icon_state = "pill14"
+	New()
+		..()
+		reagents.add_reagent("tricordrazine", 15)
+
 /obj/item/weapon/reagent_containers/pill/antitox
 	name = "Anti-toxins pill"
 	desc = "Neutralizes many common toxins."
@@ -86,6 +94,14 @@
 	New()
 		..()
 		reagents.add_reagent("anti_toxin", 25)
+
+/obj/item/weapon/reagent_containers/pill/charcoal
+	name = "Activated Charcoal pill"
+	desc = "A broad-spectrum anti-toxin."
+	icon_state = "pill18"
+	New()
+		..()
+		reagents.add_reagent("charcoal", 30)
 
 /obj/item/weapon/reagent_containers/pill/tox
 	name = "Toxins pill"
@@ -151,6 +167,14 @@
 		..()
 		reagents.add_reagent("inaprovaline", 30)
 
+/obj/item/weapon/reagent_containers/pill/chloromydride
+	name = "Chloromydride pill"
+	desc = "Used to stabilize patients."
+	icon_state = "pill20"
+	New()
+		..()
+		reagents.add_reagent("chloromydride", 15)
+
 /obj/item/weapon/reagent_containers/pill/dexalin
 	name = "Dexalin pill"
 	desc = "Used to treat oxygen deprivation."
@@ -175,29 +199,21 @@
 		..()
 		reagents.add_reagent("dermaline", 15)
 
-/obj/item/weapon/reagent_containers/pill/dylovene
-	name = "Dylovene pill"
-	desc = "A broad-spectrum anti-toxin."
-	icon_state = "pill13"
-	New()
-		..()
-		reagents.add_reagent("anti_toxin", 15)
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline pill"
-	desc = "Used to stabilize patients."
-	icon_state = "pill20"
-	New()
-		..()
-		reagents.add_reagent("inaprovaline", 30)
-
 /obj/item/weapon/reagent_containers/pill/bicaridine
 	name = "Bicaridine pill"
 	desc = "Used to treat physical injuries."
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("bicaridine", 20)
+		reagents.add_reagent("bicaridine", 15)
+
+/obj/item/weapon/reagent_containers/pill/metorapan
+	name = "Metorapan pill"
+	desc = "Used to treat physical injuries."
+	icon_state = "pill18"
+	New()
+		..()
+		reagents.add_reagent("metorapan", 15)
 
 /obj/item/weapon/reagent_containers/pill/happy
 	name = "Happy pill"
@@ -233,6 +249,14 @@
 	New()
 		..()
 		reagents.add_reagent("lipozine", 2)
+
+/obj/item/weapon/reagent_containers/pill/hyronalin
+	name = "Hyronalin pill"
+	desc = "Contains anti-radiation agents."
+	icon_state = "pill2"
+	New()
+		..()
+		reagents.add_reagent("hyronalin", 15)
 
 //Baycode specific Psychiatry pills.
 /obj/item/weapon/reagent_containers/pill/methylphenidate

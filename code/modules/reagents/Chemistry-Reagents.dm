@@ -1,4 +1,3 @@
-
 //Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
 /proc/initialize_chemical_reagents()
 	var/paths = typesof(/datum/reagent) - /datum/reagent
@@ -121,13 +120,12 @@
 	..()
 	holder = null
 
-/* DEPRECATED - TODO: REMOVE EVERYWHERE */
-
-/datum/reagent/proc/reaction_turf(var/turf/target)
-	touch_turf(target)
-
-/datum/reagent/proc/reaction_obj(var/obj/target)
-	touch_obj(target)
-
-/datum/reagent/proc/reaction_mob(var/mob/target)
-	touch_mob(target)
+/datum/reagent/proc/apply_fatigue_effect(var/mob/living/carbon/M, var/removed, var/min_dose, var/weakened_scale, var/max_weakened, var/max_blurry, var/weakened_prob, var/halloss_scale)
+	if(prob(5))
+		to_chat(M, "<span class='warning'>You feel weak.</span>")
+	if(dose > min_dose && prob((dose - min_dose) * weakened_prob)) //min_dose allows the onset of the side-effect to be delayed
+		if(M.weakened < max_weakened) //so people don't get perma-weakened
+			M.AdjustWeakened(weakened_scale)
+		if(M.eye_blurry < max_blurry)
+			M.eye_blurry += 5
+	M.adjustHalLoss(halloss_scale * removed)

@@ -292,7 +292,6 @@
 			user.visible_message("<span class='danger'>\The [user] fails to apply [src].</span>", "<span class='danger'>You fail to apply [src].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 		return
 
-
 /obj/item/stack/medical/splint/ghetto
 	name = "makeshift splints"
 	singular_name = "makeshift splint"

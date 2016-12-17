@@ -139,10 +139,10 @@
 	charges = list(
 		list("tricordrazine", "tricordrazine", 0, 80),
 		list("tramadol",      "tramadol",      0, 80),
-		list("dexalin plus",  "dexalinp",      0, 80),
+		list("chloromydride",  "chloromydride",      0, 80),
 		list("antibiotics",   "spaceacillin",  0, 80),
 		list("antitoxins",    "anti_toxin",    0, 80),
-		list("nutrients",     "glucose",     0, 80),
+		list("saline",     "saline",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 80),
 		list("radium",        "radium",        0, 80)
 		)
@@ -156,12 +156,28 @@
 	charges = list(
 		list("tricordrazine", "tricordrazine", 0, 20),
 		list("tramadol",      "tramadol",      0, 20),
-		list("dexalin plus",  "dexalinp",      0, 20),
+		list("chloromydride",  "chloromydride",      0, 20),
 		list("antibiotics",   "spaceacillin",  0, 20),
 		list("antitoxins",    "anti_toxin",    0, 20),
-		list("nutrients",     "glucose",     0, 80),
+		list("saline",     "saline",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 20),
 		list("radium",        "radium",        0, 20)
+		)
+
+/obj/item/rig_module/chem_dispenser/adv
+	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant has more advanced chemicals installed."
+
+	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
+	charges = list(
+		list("tramadol",      "tramadol",      0, 80),
+		list("chloromydride",  "chloromydride",      0, 80),
+		list("antibiotics",   "spaceacillin",  0, 80),
+		list("antitoxins",    "anti_toxin",    0, 80),
+		list("saline",     "saline",     0, 80),
+		list("hyronalin",     "hyronalin",     0, 80),
+		list("bicaridine",	"bicaridine",	0, 80),
+		list("dermaline",	"dermaline",	0, 80),
+		list("dexalinp",	"dexalinp",	0, 80)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -248,7 +264,7 @@
 		list("synaptizine",   "synaptizine",   0, 30),
 		list("hyperzine",     "hyperzine",     0, 30),
 		list("oxycodone",     "oxycodone",     0, 30),
-		list("nutrients",     "glucose",     0, 80),
+		list("saline",     "saline",     0, 80),
 		)
 
 	interface_name = "combat chem dispenser"
@@ -264,6 +280,17 @@
 	disruptive = 1
 
 	interface_name = "mounted chem injector"
+	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
+
+/obj/item/rig_module/chem_dispenser/adv/injector
+
+	name = "mounted advanced chemical injector"
+	desc = "A complex web of tubing and a large needle suitable for hardsuit use."
+	usable = 0
+	selectable = 1
+	disruptive = 1
+
+	interface_name = "mounted advanced chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
 
 /obj/item/rig_module/voice

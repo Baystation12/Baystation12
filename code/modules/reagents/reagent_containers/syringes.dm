@@ -300,6 +300,15 @@
 		mode = SYRINGE_INJECT
 		update_icon()
 
+/obj/item/weapon/reagent_containers/syringe/chloromydride
+	name = "Syringe (chloromydride)"
+	desc = "Contains chloromydride - used to stabilize patients."
+	New()
+		..()
+		reagents.add_reagent("chloromydride", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
 /obj/item/weapon/reagent_containers/syringe/antitoxin
 	name = "Syringe (anti-toxin)"
 	desc = "Contains anti-toxins."
@@ -344,3 +353,38 @@
 		reagents.add_reagent("adrenaline",5)
 		reagents.add_reagent("hyperzine",10)
 
+/obj/item/weapon/reagent_containers/syringe/synaptizine
+	name = "Syringe (synaptizine)"
+	desc = "Contains synaptizine."
+	New()
+		..()
+		reagents.add_reagent("synaptizine", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/peridaxon
+	name = "Syringe (peridaxon)"
+	desc = "Contains peridaxon."
+	New()
+		..()
+		reagents.add_reagent("peridaxon", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/primordapine
+	name = "Syringe (primordapine)"
+	desc = "Contains primordapine."
+	New()
+		..()
+		reagents.add_reagent("primordapine", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/sarcohemalazapine
+	name = "Syringe (sarcohemalazapine)"
+	desc = "Contains sarcohemalazapine."
+	New()
+		..()
+		reagents.add_reagent("sarcohemalazapine", 15)
+		mode = SYRINGE_INJECT
+		update_icon()

@@ -53,7 +53,16 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sleeptox,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chloral,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cryoxadone,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/clonexadone
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/clonexadone,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/saline,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chloromydride,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/metorapan,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/charcoal,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aurazapine,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/thrombocytolamine,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/osteolazarazine,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/primordapine,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sarcohemalazapine
 		)
 
 /obj/machinery/chemical_dispenser/bar_soft
