@@ -68,3 +68,15 @@
 	name = "Anti-materiel Rifle with ammunition"
 	item_cost = 68
 	path = /obj/item/weapon/storage/secure/briefcase/heavysniper
+
+/datum/uplink_item/item/visible_weapons/rpg
+	name = "Rocket-Propelled-Grenade Launcher with ammunition"
+	item_cost = 68
+	path = /obj/item/weapon/storage/secure/briefcase/rpg
+
+/datum/uplink_item/item/visible_weapons/combat_shotgun
+	name = "Combat Shotgun"
+	item_cost = 52
+	path = /obj/item/weapon/gun/projectile/shotgun/pump/combat
+
+

@@ -155,6 +155,11 @@
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	startswith = list(/obj/item/ammo_casing/a145 = 7)
 
+/obj/item/weapon/storage/box/rockatammo
+	name = "box of 14.5mm shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	startswith = list(/obj/item/ammo_casing/rocket = 7)
+
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs"
 	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness from repeated use."
@@ -202,7 +207,7 @@
 	desc = "A box containing 5 highly experimental supermatter grenades."
 	icon_state = "radbox"
 	startswith = list(/obj/item/weapon/grenade/supermatter = 5)
-    
+
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."
