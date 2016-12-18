@@ -238,131 +238,154 @@
 /obj/item/clothing/accessory/shirt
 	desc = "A shirt."
 	slot_flags = SLOT_TIE | SLOT_OCLOTHING
-	body_parts_covered = UPPER_TORSO
+	body_parts_covered = UPPER_TORSO|ARMS
 	show_genitals = 1
 
 /obj/item/clothing/accessory/shirt/sweaterpink
 	name = "pink sweater"
 	desc = "This pink sweater was knit with care and nothing's as comfy."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_sweater_pink"
 	item_state = "eros_sweater_pink"
 
 /obj/item/clothing/accessory/shirt/sweaterblue
 	name = "blue sweater"
 	desc = "This blue sweater was knit with care and nothing's as comfy."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_sweater_blue"
 	item_state = "eros_sweater_blue"
 
 /obj/item/clothing/accessory/shirt/sweaterblueheart
 	name = "blue heart sweater"
 	desc = "This blue sweater was knit with care and nothing's as comfy. It has a cute heart on it."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_sweater_blueheart"
 	item_state = "eros_sweater_blueheart"
 
 /obj/item/clothing/accessory/shirt/sweatermint
 	name = "mint sweater"
 	desc = "This mint green sweater was knit with care and nothing's as comfy."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_sweater_mint"
 	item_state = "eros_sweater_mint"
 
 /obj/item/clothing/accessory/shirt/sweaternt
 	name = "NT sweater"
 	desc = "This sweater was knit with care and nothing's as comfy.It's NT themed."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_sweater_nt"
 	item_state = "eros_sweater_nt"
 
 /obj/item/clothing/accessory/shirt/sweatersnow
 	name = "snowman sweater"
 	desc = "This sweater was knit with care and nothing's as comfy.It has a snowy scene with a snowman."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_cjumper_blue"
 	item_state = "eros_cjumper_blue"
 
 /obj/item/clothing/accessory/shirt/sweatertree
 	name = "christmas tree sweater"
 	desc = "This sweater was knit with care and nothing's as comfy.It has a Christmas tree on it"
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_cjumper_red"
 	item_state = "eros_cjumper_red"
 
 /obj/item/clothing/accessory/shirt/sweaterreindeer
 	name = "ugly holiday sweater"
 	desc = "This sweater was knit with care and nothing's as comfy.It has a reindeer on it."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "eros_cjumper_green"
 	item_state = "eros_cjumper_green"
 
 /obj/item/clothing/accessory/shirt/singletwhite
 	name = "white singlet"
 	desc = "A white singlet."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "singlet_white"
 	item_state = "singlet_white"
 
 /obj/item/clothing/accessory/shirt/singletblack
 	name = "black singlet"
 	desc = "A black singlet."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "singlet_black"
 	item_state = "singlet_black"
 
 /obj/item/clothing/accessory/shirt/singlet
 	name = "singlet"
 	desc = "A singlet."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "singlet_white"
 	item_state = "singlet_white"
 
 /obj/item/clothing/accessory/shirt/whitelongsleeve
 	name = "white longsleeve shirt"
 	desc = "A white shirt with long sleeves. Great for any white collar worker."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "longsleeve_white"
 	item_state = "longsleeve_white"
 
 /obj/item/clothing/accessory/shirt/turtleneckblack
 	name = "black turtleneck"
 	desc = "A thick, black turtleneck shirt. For when the air gets a bit chilly."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "turtleneck_black"
 	item_state = "turtleneck_black"
 
 /obj/item/clothing/accessory/shirt/turtleneckwinter
 	name = "winter turtleneck shirt"
 	desc = "A thick, red turtleneck shirt with a wintery design. For when the air gets a bit nippy."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "turtleneck_winterred"
 	item_state = "turtleneck_winterred"
 
 /obj/item/clothing/accessory/shirt/longsleeve
 	name = "longsleeve shirt"
 	desc = "A shirt with long sleeves."
+	body_parts_covered = UPPER_TORSO|ARMS
 	icon_state = "longsleeve_white"
 	item_state = "longsleeve_white"
 
 /obj/item/clothing/accessory/shirt/chemisewhite
 	name = "white chemise"
 	desc = "A plain white chemise."
+	body_parts_covered = UPPER_TORSO
+	show_boobs = 1
 	icon_state = "chemise_white"
 	item_state = "chemise_white"
 
 /obj/item/clothing/accessory/shirt/chemise
 	name = "chemise"
 	desc = "A plain chemise."
+	body_parts_covered = UPPER_TORSO
+	show_boobs = 1
 	icon_state = "chemise_white"
 	item_state = "chemise_white"
 
 /obj/item/clothing/accessory/shirt/tshirtgrey
 	name = "grey t-shirt"
 	desc = "A plain grey t-shirt. A popular piece of human clothing."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "tshirt_grey"
 	item_state = "tshirt_grey"
 
 /obj/item/clothing/accessory/shirt/tshirtwhite
 	name = "white t-shirt"
 	desc = "A plain white t-shirt. A popular piece of human clothing."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "shirt_white"
 	item_state = "shirt_white"
 
 /obj/item/clothing/accessory/shirt/tshirtblack
 	name = "black t-shirt"
 	desc = "A plain black t-shirt. A popular piece of human clothing."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "shirt_black"
 	item_state = "shirt_black"
 
 /obj/item/clothing/accessory/shirt/tshirt
 	name = "t-shirt"
 	desc = "A plain t-shirt. A popular piece of human clothing."
+	body_parts_covered = UPPER_TORSO
 	icon_state = "shirt_white"
 	item_state = "shirt_white"
