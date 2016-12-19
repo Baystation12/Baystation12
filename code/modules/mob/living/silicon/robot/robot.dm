@@ -49,7 +49,7 @@
 
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
-	var/obj/item/weapon/cell/cell = null
+	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/high
 	var/obj/machinery/camera/camera = null
 
 	var/cell_emp_mult = 2
@@ -68,15 +68,12 @@
 	var/wiresexposed = 0
 	var/locked = 1
 	var/has_power = 1
-	var/lawpreset = /datum/ai_laws/nanotrasen
 	var/spawn_module = null
-	var/key_type = null
+	var/radio_key_type = null
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
-	var/cell_type = /obj/item/weapon/cell/high
 	var/pitch_toggle = 1
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
-	//var/list/laws = list()
 	var/viewalerts = 0
 	var/modtype = "Default"
 	var/lower_mod = 0
@@ -138,8 +135,8 @@
 		C.installed = 1
 		C.wrapped = new C.external_type
 
-	if(!cell)
-		cell = new cell_type(src)
+	if(ispath(cell))
+		cell = new cell(src)
 
 	..()
 
@@ -171,11 +168,11 @@
 
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-	laws = new lawpreset()
-	if(spawn_module)
-		new spawn_module(src)
-	if(key_type)
-		radio.keyslot = new key_type(radio)
+	if(ispath(module))
+		new module(src)
+	if(radio_key_type)
+		qdel(radio.keyslot)
+		radio.keyslot = new radio_key_type(radio)
 		radio.recalculateChannels()
 	if(lawupdate)
 		var/new_ai = select_active_ai_with_fewest_borgs()

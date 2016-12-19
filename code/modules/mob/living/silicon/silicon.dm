@@ -24,8 +24,7 @@
 	var/list/datum/alarm/queued_alarms = new()
 
 	var/list/access_rights
-	var/obj/item/weapon/card/id/idcard
-	var/idcard_type = /obj/item/weapon/card/id/synthetic
+	var/obj/item/weapon/card/id/idcard = /obj/item/weapon/card/id/synthetic
 
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -44,10 +43,9 @@
 	..()
 
 /mob/living/silicon/proc/init_id()
-	if(idcard)
-		return
-	idcard = new idcard_type(src)
-	set_id_info(idcard)
+	if(ispath(idcard))
+		idcard = new idcard(src)
+		set_id_info(idcard)
 
 /mob/living/silicon/proc/show_laws()
 	return
