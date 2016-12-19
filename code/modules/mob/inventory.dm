@@ -138,8 +138,8 @@ var/list/slot_equipment_priority = list( \
 
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
-/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null, var/force = null)
-	if(W && (W.candrop || force))
+/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target = null)
+	if(W)
 		remove_from_mob(W, target)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
 		update_icons()
@@ -147,15 +147,21 @@ var/list/slot_equipment_priority = list( \
 	return 0
 
 //Drops the item in our left hand
-/mob/proc/drop_l_hand(var/atom/Target, force)
-	return drop_from_inventory(l_hand, Target, force)
+/mob/proc/drop_l_hand(var/atom/Target, force = FALSE)
+	if(!force && l_hand && istype(l_hand, /obj/item))
+		if(!canDrop(l_hand))
+			return 0
+	return drop_from_inventory(l_hand, Target)
 
 //Drops the item in our right hand
-/mob/proc/drop_r_hand(var/atom/Target, force)
-	return drop_from_inventory(r_hand, Target, force)
+/mob/proc/drop_r_hand(var/atom/Target, force = FALSE)
+	if(!force && r_hand && istype(r_hand, /obj/item))
+		if(!canDrop(r_hand))
+			return 0
+	return drop_from_inventory(r_hand, Target)
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
-/mob/proc/drop_item(var/atom/Target, var/force = 0)
+/mob/proc/drop_item(var/atom/Target, var/force = FALSE)
 	if(hand)	return drop_l_hand(Target, force)
 	else		return drop_r_hand(Target, force)
 
@@ -199,6 +205,15 @@ var/list/slot_equipment_priority = list( \
 	if(!slot)
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
+
+/mob/proc/canDrop(obj/item/I)
+	if(istype(I))
+		if(!I.candrop)
+			return 0
+	else
+		return 0
+	return 1
+
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0

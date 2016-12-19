@@ -319,11 +319,8 @@
 
 	if(!item) return
 
-	if(!istype(item, /obj/item))
-		return
-	else
-		var/obj/item/I = item
-		if(!I.candrop)
+	if(istype(item, /obj/item))
+		if(!canDrop(item))
 			return
 
 	var/throw_range = item.throw_range
