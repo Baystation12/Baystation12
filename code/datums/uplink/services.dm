@@ -195,6 +195,11 @@
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
+	
+	while(null in data_core.general)
+		data_core.general -= null
+		log_error("Found a null entry in data_core.general")
+	
 	if(data_core.general.len)
 		random_general_record	= pick(data_core.general)
 		random_medical_record	= find_medical_record("id", random_general_record.fields["id"])

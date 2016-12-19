@@ -10,7 +10,9 @@
 	opacity = 0
 	anchored = 1
 	mouse_opacity = 2
-	layer = 4
+
+	plane = BLOB_PLANE
+	layer = BLOB_SHIELD_LAYER
 
 	var/maxHealth = 30
 	var/health
@@ -168,6 +170,8 @@
 	laser_resist = 10
 	regen_rate = 2
 
+	layer = BLOB_CORE_LAYER
+
 	expandType = /obj/effect/blob/shield
 	var/blob_may_process = 1
 	var/growth_range = 10 // Maximal distance for new blob pieces from this core.
@@ -185,10 +189,12 @@
 
 /obj/effect/blob/core/New(loc)
 	processing_objects.Add(src)
+	GhostFollowObjects.Add(src)
 	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
 	processing_objects.Remove(src)
+	GhostFollowObjects.Remove(src)
 	return ..()
 
 /obj/effect/blob/core/process()
@@ -214,6 +220,8 @@
 	laser_resist = 5
 	regen_rate = 1
 	growth_range = 3
+
+	layer = BLOB_NODE_LAYER
 
 /obj/effect/blob/core/secondary/update_icon()
 	icon_state = (health / maxHealth >= 0.5) ? "blob_node" : "blob_factory"

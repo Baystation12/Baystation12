@@ -28,12 +28,14 @@ var/bomb_set
 	..()
 	r_code = "[rand(10000, 99999.0)]"//Creates a random code upon object spawn.
 	wires = new/datum/wires/nuclearbomb(src)
+	GhostFollowObjects.Add(src)
 
 /obj/machinery/nuclearbomb/Destroy()
 	qdel(wires)
 	wires = null
 	qdel(auth)
 	auth = null
+	GhostFollowObjects.Remove(src)
 	return ..()
 
 /obj/machinery/nuclearbomb/process()
