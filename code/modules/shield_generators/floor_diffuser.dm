@@ -24,8 +24,7 @@
 		return
 	for(var/direction in cardinal)
 		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
-		var/obj/effect/shield/S = locate() in shielded_tile
-		if(istype(S))
+		for(var/obj/effect/shield/S in shielded_tile)
 			S.diffuse(5)
 
 /obj/machinery/shield_diffuser/attackby(obj/item/O as obj, mob/user as mob)

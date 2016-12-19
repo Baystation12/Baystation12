@@ -1,0 +1,6 @@
+author: TheGreyWolf
+
+delete-after: True
+
+changes: 
+  - rscadd: "Mousetraps are now orderable from cargo."

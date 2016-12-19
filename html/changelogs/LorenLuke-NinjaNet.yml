@@ -1,0 +1,11 @@
+
+author: LorenLuke
+
+delete-after: True
+
+changes: 
+  - bugfix: "Keeps people from just using 'resist' to escape from nets instantly."
+  - tweak: "Makes resist time random between 5 and 9 seconds to exit net."
+  - tweak: "Sets net fabricator cooldown to 10 seconds (greater than max net resist time)."
+  - rscadd: "Makes nets fade away even if not resisted out of after 15 processing_objects ticks."
+  - tweak: "Makes it so that netted people cannot use items (and shoot/baton you while 'restrained' by the net) until freed."
