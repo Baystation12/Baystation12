@@ -190,3 +190,13 @@
 
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 
+/obj/item/weapon/storage/secure/briefcase/rpg
+	startswith = list(
+		/obj/item/weapon/gun/launcher/rocket,
+		/obj/item/weapon/storage/box/rockatammo
+	)
+
+/obj/item/weapon/storage/secure/briefcase/rpg/New()
+	..()
+	make_exact_fit()
+

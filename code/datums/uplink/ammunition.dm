@@ -35,3 +35,13 @@
 	name = "14.5mm"
 	item_cost = 8
 	path = /obj/item/weapon/storage/box/sniperammo
+
+/datum/uplink_item/item/ammo/shotgun_slugs
+	name = "Shotgun Slugs"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunammo
+
+/datum/uplink_item/item/ammo/shotgun_shells
+	name = "Shotgun Shells"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunshells
