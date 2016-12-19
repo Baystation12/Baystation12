@@ -69,14 +69,23 @@
 	item_cost = 68
 	path = /obj/item/weapon/storage/secure/briefcase/heavysniper
 
-/datum/uplink_item/item/visible_weapons/rpg
-	name = "Rocket-Propelled-Grenade Launcher with ammunition"
-	item_cost = 68
-	path = /obj/item/weapon/storage/secure/briefcase/rpg
+/datum/uplink_item/item/visible_weapons/uzi
+	name = "Uzi Submachine Gun"
+	item_cost = 45
+	path = /obj/item/weapon/gun/projectile/automatic/mini_uzi
 
 /datum/uplink_item/item/visible_weapons/combat_shotgun
 	name = "Combat Shotgun"
 	item_cost = 52
 	path = /obj/item/weapon/gun/projectile/shotgun/pump/combat
 
+/datum/uplink_item/item/visible_weapons/sawnoff
+	name = "Sawnoff Shotgun"
+	item_cost = 45
+	path = /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn
 
+
+/datum/uplink_item/item/visible_weapons/deagle
+	name = "Desert Eagle"
+	item_cost = 52
+	path = /obj/item/weapon/gun/projectile/deagle
