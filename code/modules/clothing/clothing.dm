@@ -84,10 +84,10 @@
 		else
 			species_restricted = list(target_species)
 
-//	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-//		icon = sprite_sheets_obj[target_species]
-//	else
-//		icon = initial(icon)
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
 
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
 	if(!species_restricted)
@@ -102,10 +102,10 @@
 		else
 			species_restricted = list(target_species)
 
-//	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
-//		icon = sprite_sheets_obj[target_species]
-//	else
-//		icon = initial(icon)
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects

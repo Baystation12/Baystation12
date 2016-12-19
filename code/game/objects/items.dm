@@ -679,14 +679,17 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/is_in_hand_slot(var/slot)
 	return (slot == slot_r_hand_str || slot == slot_l_hand_str)
 
-/obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/selected_state)
+/obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/icon_state)
 	if(!sprite_sheets || !sprite_sheets[bodytype])
 		return 0
+
 	if(is_in_hand_slot(slot))
 		return 0
-	if(selected_state in icon_states(sprite_sheets[bodytype]))
+
+	if(icon_state in icon_states(sprite_sheets[bodytype]))
 		return 1
-	return 0
+
+	return (slot != slot_wear_suit_str && slot != slot_head_str)
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
@@ -699,7 +702,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])
 		mob_state = item_state_slots[slot]
-	else if ( (item_state in icon_states(icon)) || in_hand)
+	else if (item_state)
 		mob_state = item_state
 	else
 		mob_state = icon_state
@@ -740,6 +743,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
 			mob_state = "[mob_state]_r"
+
 		mob_icon = sprite_sheets[bodytype]
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
