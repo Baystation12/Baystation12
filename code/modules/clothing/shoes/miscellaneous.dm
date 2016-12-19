@@ -152,6 +152,15 @@
 	force = 0
 	w_class = ITEM_SIZE_SMALL
 
+/obj/item/clothing/shoes/footwraps
+	name = "cloth footwraps"
+	desc = "A roll of treated canvas used for wrapping claws or paws"
+	icon_state = "clothwrap"
+	item_state = "clothwrap"
+	force = 0
+	w_class = ITEM_SIZE_SMALL
+	species_restricted = null
+
 /obj/item/clothing/shoes/laceup
 	name = "laceup shoes"
 	desc = "The height of fashion, and they're pre-polished!"

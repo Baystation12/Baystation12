@@ -127,3 +127,9 @@
 	display_name = "toeless jackboots"
 	path = /obj/item/clothing/shoes/jackboots/unathi
 	sort_category = "Xenowear"
+
+/datum/gear/shoes/footwraps
+	display_name = "cloth footwraps"
+	path = /obj/item/clothing/shoes/footwraps
+	sort_category = "Xenowear"
+	cost = 1
