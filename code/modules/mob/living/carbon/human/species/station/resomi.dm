@@ -13,6 +13,7 @@
 	min_age = 18
 	max_age = 65
 	health_hud_intensity = 3
+	can_run_shoeless = 1
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
@@ -39,7 +40,7 @@
 	blood_volume = 280
 	hunger_factor = 0.2
 
-	spawn_flags = SPECIES_CAN_JOIN 
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_BIOMODS
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
