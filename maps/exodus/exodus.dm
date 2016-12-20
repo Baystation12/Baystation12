@@ -1,6 +1,7 @@
 #if !defined(USING_MAP_DATUM)
 
 	#include "exodus_areas.dm"
+	#include "exodus_effects.dm"
 	#include "exodus_elevator.dm"
 	#include "exodus_holodecks.dm"
 	#include "exodus_shuttles.dm"

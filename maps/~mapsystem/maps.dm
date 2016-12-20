@@ -107,5 +107,5 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)
-		return null
+		return current_z_level
 	return text2num(pickweight(candidates))

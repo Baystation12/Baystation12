@@ -228,6 +228,7 @@
 #include "code\datums\observation\see_invisible_set.dm"
 #include "code\datums\observation\sight_set.dm"
 #include "code\datums\observation\task_triggered.dm"
+#include "code\datums\observation\turf_changed.dm"
 #include "code\datums\observation\unequipped.dm"
 #include "code\datums\observation\~cleanup.dm"
 #include "code\datums\outfits\_defines.dm"
