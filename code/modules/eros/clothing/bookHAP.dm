@@ -1,8 +1,8 @@
 // ----- BookHAP RIG MODULE
 /obj/item/weapon/rig/ert/assetprotection/book_hap
-	name = "heavy asset advanced protection suit control module"
+	name = "advanced heavy asset protection suit control module"
 	desc = "A heavier, more modified version of a common asset protection hardsuit. Has blood red highlights. Built like a tank and could go toe to toe with one too."
-	suit_type = "heavy asset advanced protection"
+	suit_type = "advanced heavy asset protection"
 	icon_state = "asset_protection_rig"
 	armor = list(melee = 65, bullet = 55, laser = 55,energy = 45, bomb = 45, bio = 100, rad = 100)
 	cell_type = /obj/item/weapon/cell/hyper
