@@ -25,8 +25,9 @@
 
 /obj/item/weapon/soap/Crossed(AM as mob|obj)
 	if (istype(AM, /mob/living))
-		var/mob/living/M =	AM
-		M.slip("the [src.name]",3)
+		if (istype(src, /obj/item/weapon/soap/syndie) || istype(src, /obj/item/weapon/soap/deluxe))
+			var/mob/living/M =	AM
+			M.slip("the [src.name]",3)
 
 /obj/item/weapon/soap/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
