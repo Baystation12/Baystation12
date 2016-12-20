@@ -79,3 +79,11 @@
 	item_cost = 60
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/weapon/storage/box/supermatters
+
+//EROS START
+
+/datum/uplink_item/item/grenades/soma_grenade
+	name = "Soma Grenade"
+	desc = "This grenade contains Soma, a chemical that has been known to cause brain-washing effects in high enough doses and long enough exposure."
+	item_cost = 8
+	path = /obj/item/weapon/grenade/chem_grenade/soma
