@@ -4,7 +4,7 @@
 	var/vermin_probability = 0
 
 /decl/turf_initializer/maintenance/heavy
-	vermin_probability = 1
+	vermin_probability = 0.5
 	clutter_probability = 5
 	web_probability = 50
 

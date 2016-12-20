@@ -18,7 +18,7 @@ See [here](https://www.gnu.org/licenses/why-affero-gpl.html) for more informatio
 ### GETTING THE CODE
 The simplest way to obtain the code is using the github .zip feature.
 
-Click [here](https://github.com/Baystation12/Baystation12/archive/master.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
+Click [here](https://github.com/Baystation12/Baystation12/archive/dev.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
 
 The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
 

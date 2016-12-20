@@ -1,5 +1,5 @@
 /obj/machinery/door/airlock
-	name = "Airlock"
+	name = "airlock"
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door_closed"
 	power_channel = ENVIRON
@@ -33,6 +33,14 @@
 
 	var/open_sound_powered = 'sound/machines/airlock.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
+	var/open_failure_access_denied = 'sound/machines/buzz-two.ogg'
+
+	var/close_sound_powered = 'sound/machines/AirlockClose.ogg'
+	var/close_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
+	var/close_failure_blocked = 'sound/machines/triple_beep.ogg'
+
+	var/bolts_dropping = 'sound/machines/BoltsDown.ogg'
+	var/bolts_rising = 'sound/machines/BoltsUp.ogg'
 
 	var/door_crush_damage = DOOR_CRUSH_DAMAGE
 
@@ -113,7 +121,10 @@
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
+
 	open_sound_powered = 'sound/machines/windowdoor.ogg'
+	close_sound_powered = 'sound/machines/windowdoor.ogg'
+
 	door_crush_damage = DOOR_CRUSH_DAMAGE*0.75
 	maxhealth = 300
 	explosion_resistance = 5
@@ -478,6 +489,7 @@ About the new airlock wires panel:
 	if(src.isWireCut(AIRLOCK_WIRE_ELECTRIFY) && arePowerSystemsOn())
 		message = text("The electrification wire is cut - Door permanently electrified.")
 		src.electrified_until = -1
+		. = 1
 	else if(duration && !arePowerSystemsOn())
 		message = text("The door is unpowered - Cannot electrify the door.")
 		src.electrified_until = 0
@@ -492,9 +504,13 @@ About the new airlock wires panel:
 			shockedby += text("\[[time_stamp()]\] - EMP)")
 		message = "The door is now electrified [duration == -1 ? "permanently" : "for [duration] second\s"]."
 		src.electrified_until = duration == -1 ? -1 : world.time + SecondsToTicks(duration)
+		. = 1
 
 	if(feedback && message)
 		to_chat(usr, message)
+	if(.)
+		playsound(src, 'sound/effects/sparks3.ogg', 30, 0, -6)
+
 /obj/machinery/door/airlock/proc/set_idscan(var/activate, var/feedback = 0)
 	var/message = ""
 	if(src.isWireCut(AIRLOCK_WIRE_IDSCAN))
@@ -597,7 +613,7 @@ About the new airlock wires panel:
 			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
 				if(secured_wires)
-					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+					playsound(src.loc, open_failure_access_denied, 50, 0)
 	return
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
@@ -961,7 +977,7 @@ About the new airlock wires panel:
 			for(var/atom/movable/AM in turf)
 				if(AM.blocks_airlock())
 					if(world.time > next_beep_at)
-						playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+						playsound(src.loc, close_failure_blocked, 30, 0, -3)
 						next_beep_at = world.time + SecondsToTicks(10)
 					close_door_at = world.time + 6
 					return
@@ -974,9 +990,9 @@ About the new airlock wires panel:
 
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
-		playsound(src.loc, open_sound_powered, 100, 1)
+		playsound(src.loc, close_sound_powered, 100, 1)
 	else
-		playsound(src.loc, open_sound_unpowered, 100, 1)
+		playsound(src.loc, close_sound_unpowered, 100, 1)
 
 	..()
 
@@ -987,8 +1003,8 @@ About the new airlock wires panel:
 	if (operating && !forced) return 0
 
 	src.locked = 1
-	for(var/mob/M in range(1,src))
-		M.show_message("You hear a click from the bottom of the door.", 2)
+	playsound(src, bolts_dropping, 30, 0, -6)
+	audible_message("You hear a click from the bottom of the door.", hearing_distance = 1)
 	update_icon()
 	return 1
 
@@ -997,11 +1013,12 @@ About the new airlock wires panel:
 		return
 
 	if (!forced)
-		if(operating || !src.arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS)) return
+		if(operating || !src.arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
+			return
 
 	src.locked = 0
-	for(var/mob/M in range(1,src))
-		M.show_message("You hear a click from the bottom of the door.", 2)
+	playsound(src, bolts_rising, 30, 0, -6)
+	audible_message("You hear a click from the bottom of the door.", hearing_distance = 1)
 	update_icon()
 	return 1
 

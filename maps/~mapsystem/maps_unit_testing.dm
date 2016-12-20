@@ -5,8 +5,8 @@
 
 	// Unit test vars
 	var/list/apc_test_exempt_areas = list()
-	var/list/area_coherency_test_exempt_areas = list(
-		/area/space)
+	var/list/area_coherency_test_exempt_areas = list(/area/space)
+	var/list/area_coherency_test_subarea_count = list()
 
 	// These areas are used specifically by code and need to be broken out somehow
 	var/list/area_usage_test_exempted_areas = list(

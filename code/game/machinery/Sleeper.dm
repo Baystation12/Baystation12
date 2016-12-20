@@ -133,7 +133,10 @@
 		return
 
 /obj/machinery/sleeper/MouseDrop_T(var/mob/target, var/mob/user)
-	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !ishuman(target))
+	if(!CanMouseDrop(target, user))
+		return
+	if(target.buckled)
+		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
 		return
 	go_in(target, user)
 

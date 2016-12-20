@@ -62,11 +62,8 @@ var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pagetur
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
-
-		var/distance = get_dist(M, turf_source)
-		if(distance <= (world.view + extrarange) * 3)
+		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
 			var/turf/T = get_turf(M)
-
 			if(T && T.z == turf_source.z)
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global)
 

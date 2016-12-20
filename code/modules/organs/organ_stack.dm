@@ -38,6 +38,11 @@
 	..()
 	do_backup()
 	robotize()
+	GhostFollowObjects.Add(src)
+
+/obj/item/organ/internal/stack/Destroy()
+	GhostFollowObjects.Remove(src)
+	return ..()
 
 /obj/item/organ/internal/stack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))

@@ -51,14 +51,17 @@
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
+
 	area_coherency_test_exempt_areas = list(
 			/area/space,
 			/area/mine/explored,
 			/area/mine/unexplored,
 			/area/centcom/control,
-			/area/engineering/atmos,
-			/area/constructionsite,
-			/area/constructionsite/maintenance,
-			/area/solar/constructionsite,
-			/area/maintenance/exterior,
-			/area/maintenance/incinerator)
+			/area/maintenance/exterior)
+
+	area_coherency_test_subarea_count = list(
+			/area/engineering/atmos = 6,
+			/area/constructionsite = 7,
+			/area/constructionsite/maintenance = 14,
+			/area/solar/constructionsite = 3,
+			/area/maintenance/incinerator = 2)
