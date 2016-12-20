@@ -14,6 +14,7 @@
 	siemens_coefficient = 0
 	gluttonous = GLUT_ANYTHING|GLUT_QDEL_MOBS
 	stomach_capacity = MOB_MEDIUM
+	can_run_shoeless = 1
 
 	brute_mod = 0.25 // Hardened carapace.
 	burn_mod = 1.1    // Weak to fire.

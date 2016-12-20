@@ -37,6 +37,7 @@
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2
+	can_run_shoeless = 1
 
 	min_age = 18
 	max_age = 60
@@ -100,6 +101,7 @@
 	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
+	can_run_shoeless = 1
 
 	min_age = 18
 	max_age = 80
@@ -212,6 +214,7 @@
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
+	can_run_shoeless = 1 //Don't need shoes because technically just a bunch of roots, but still slower than christmas
 
 	min_age = 1
 	max_age = 300
@@ -325,6 +328,7 @@
 	min_age = 18
 	max_age = 110
 	slowdown = - 0.5
+	can_run_shoeless = 1 //Danger noodles don't need shoes
 
 	gluttonous = GLUT_ANYTHING // They eat people! But don't qdel the corpses, and can only carry one at a time.
 	stomach_capacity = MOB_MEDIUM
@@ -367,6 +371,7 @@
 	max_age = 110
 	slowdown = - 0.5
 	toxins_mod = 0.25
+	can_run_shoeless = 1 //You need how many shoes again?
 
 	gluttonous = GLUT_SMALLER // They eat smaller creatures.
 	stomach_capacity = MOB_SMALL

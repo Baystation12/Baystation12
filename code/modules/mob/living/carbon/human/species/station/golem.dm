@@ -10,6 +10,7 @@
 	flags = NO_PAIN | NO_SCAN | NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
+	can_run_shoeless = 1
 
 	breath_type = null
 	poison_type = null
