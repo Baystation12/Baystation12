@@ -11,6 +11,31 @@
 	attack_verb = list("cuntslapped", "violated", "teased", "prodded")
 	w_class = 2
 
+/obj/item/weapon/eros/sex/fleshlight/maw
+	name = "maw unahole"
+	desc = "The silicone is shaped like slightly feminine unathi's maw..."
+	icon_state = "unathihole"
+	item_state = "unathihole"
+
+/obj/item/weapon/eros/sex/fleshlight/onahole
+	name = "onahole"
+	desc = "It's a generic-looking unahole, in a pinkish that's probably supposed to be fleshy, but doesn't quite hit the mark."
+	icon_state = "onahole"
+	item_state = "onahole"
+
+/obj/item/weapon/eros/sex/butt/plug
+	name = "butt plug"
+	desc = "That seems.. .big."
+	icon_state = "plug"
+	item_state = "plug"
+
+/obj/item/weapon/eros/sex/butt/beads
+	name = "anal beads"
+	desc = "They have a ring on the end, for safety."
+	icon_state = "beads"
+	item_state = "beads"
+
+
 /obj/item/weapon/eros/sex/bulletvibe
 	name = "bullet vibrator"
 	desc = "A discreet, versatile vibrator, and don't you let its size fool you. Still one of the most popular vibes on the market."
@@ -78,3 +103,9 @@
 	desc = "Oh, god."
 	icon_state = "uglyhorse"
 	item_state = "uglyhorse"
+
+/obj/item/weapon/eros/sex/dildos/knotted
+	name = "knotted dildo"
+	desc = "It's big, pink and knotted."
+	icon_state = "knotted"
+	item_state = "knotted"
