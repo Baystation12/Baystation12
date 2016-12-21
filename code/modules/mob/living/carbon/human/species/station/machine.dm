@@ -16,6 +16,7 @@
 	rarity_value = 2
 	num_alternate_languages = 2
 	name_language = LANGUAGE_EAL
+	can_run_shoeless = 1
 
 	min_age = 18
 	max_age = 90
@@ -38,7 +39,7 @@
 	passive_temp_gain = 1  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = NO_SCAN | NO_PAIN | NO_POISON
-	spawn_flags = SPECIES_CAN_JOIN 
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_UNDERWEAR | HAS_BIOMODS | HAS_HAIR_COLOR | HAS_SKIN_COLOR //IPCs can wear undies too :(
 
 	blood_color = "#1F181F"

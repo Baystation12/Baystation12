@@ -11,6 +11,7 @@
 	darksight = 8
 	has_organ = list()
 	siemens_coefficient = 0
+	can_run_shoeless = 1
 
 	blood_color = "#CCCCCC"
 	flesh_color = "#AAAAAA"

@@ -23,6 +23,7 @@
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
+	can_run_shoeless = 1
 
 	cold_level_1 = 80
 	cold_level_2 = 50
@@ -101,6 +102,7 @@
 	rarity_value = 0.1
 	speech_chance = 60        // No volume control.
 	siemens_coefficient = 0.5 // Ragged scaleless patches.
+	can_run_shoeless = 1
 
 	oxy_mod = 1.4
 	brute_mod = 1.3

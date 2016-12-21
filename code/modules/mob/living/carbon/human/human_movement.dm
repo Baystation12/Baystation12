@@ -37,6 +37,9 @@
 				tally += I.slowdown_general
 				tally += I.slowdown_per_slot[slot]
 
+		if(species.can_run_shoeless && !shoes)
+			tally += SHOES_SLOWDOWN
+
 		var/list/stance_limbs = get_stance_limbs()
 		for(var/obj/item/organ/external/E in stance_limbs)
 			// The () conditionals after += cover variable-amount limbs; if they only have 1 "standing" limb instead of the normal 4, they get 4 times as much damage
