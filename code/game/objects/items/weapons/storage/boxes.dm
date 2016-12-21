@@ -153,6 +153,7 @@
 /obj/item/weapon/storage/box/sniperammo
 	name = "box of 14.5mm shells"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	w_class = ITEM_SIZE_SMALL
 	startswith = list(/obj/item/ammo_casing/a145 = 7)
 
 /obj/item/weapon/storage/box/flashbangs
