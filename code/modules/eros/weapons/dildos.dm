@@ -12,7 +12,7 @@
 	w_class = 2
 
 /obj/item/weapon/eros/sex/fleshlight/maw
-	name = "maw unahole"
+	name = "maw onahole"
 	desc = "The silicone is shaped like slightly feminine unathi's maw..."
 	icon_state = "unathihole"
 	item_state = "unathihole"
