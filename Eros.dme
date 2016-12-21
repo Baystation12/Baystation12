@@ -252,6 +252,7 @@
 #include "code\datums\outfits\jobs\misc.dm"
 #include "code\datums\outfits\jobs\science.dm"
 #include "code\datums\outfits\jobs\security.dm"
+#include "code\datums\outfits\eros.dm"
 #include "code\datums\proximity_trigger\line_proximity.dm"
 #include "code\datums\proximity_trigger\proximity_trigger.dm"
 #include "code\datums\proximity_trigger\square_proximity.dm"
