@@ -1332,6 +1332,7 @@
 #include "code\modules\eros\clothing\suits.dm"
 #include "code\modules\eros\clothing\under.dm"
 #include "code\modules\eros\clothing\underwear.dm"
+#include "code\modules\eros\clothing\bookHAP.dm"
 #include "code\modules\eros\machinery\vending.dm"
 #include "code\modules\eros\mob\new_player\sprite_accesories.dm"
 #include "code\modules\eros\turfs\snow.dm"
