@@ -246,7 +246,6 @@
 	dik_scorpius
 		name = "Scorpius Synthpenis"
 		icon_state = "robo-scorpius"
-		do_colouration = 0
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_unbranded
@@ -470,7 +469,6 @@
 	brt_scorpius
 		name = "Scorpius Synthbreasts"
 		icon_state = "robo-scorpius"
-		do_colouration = 0
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_morpheus
@@ -809,7 +807,6 @@
 	tal_scorpius
 		name = "Scorpius FBP Tail"
 		icon_state = "scorpius"
-		do_colouration = 0
 
 	tal_resomi
 		name = "Resomi Tail"
