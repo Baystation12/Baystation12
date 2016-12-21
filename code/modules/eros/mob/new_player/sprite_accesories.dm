@@ -313,6 +313,60 @@
 		icon_state = "dripping_slime"
 		species_allowed = list ("Promethean")
 
+	vag_bishop
+		name = "Bishop Synthvagina"
+		icon_state = "robo-bishop"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_hesphiastos
+		name = "Hesphiastos Synthvagina"
+		icon_state = "robo-hesphiastos"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_morpheus
+		name = "Morpheus Synthvagina"
+		icon_state = "robo-morpheus"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_wardtakahashi
+		name = "Ward-Takahashi Synthvagina"
+		icon_state = "robo-wardtakahashi"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_zenghu
+		name = "Zeng-hu Synthvagina"
+		icon_state = "robo-zenghu"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_xion
+		name = "Xion Synthvagina"
+		icon_state = "robo-xion"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_nanotrasen
+		name = "NanoTrasen Synthvagina"
+		icon_state = "robo-nanotrasen"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_scorpius
+		name = "Scorpius Synthvagina"
+		icon_state = "robo-scorpius"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_unbranded
+		name = "Unbranded Synthvagina"
+		icon_state = "robo-unbranded"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
 /*
 ///////////////////////////////
 /  =-----------------------=  /
