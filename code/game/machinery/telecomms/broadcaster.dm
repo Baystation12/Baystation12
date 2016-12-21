@@ -608,7 +608,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		"type" = 4, // determines what type of radio input it is: test broadcast
 		"reject" = 0,
 		"done" = 0,
-		"level" = pos.z // The level it is being broadcasted at.
+		"level" = pos ? pos.z : 0 // The level it is being broadcasted at.
 	)
 	signal.frequency = PUB_FREQ// Common channel
 

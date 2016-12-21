@@ -676,10 +676,14 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
+/obj/item/proc/is_in_hand_slot(var/slot)
+	return (slot == slot_r_hand_str || slot == slot_l_hand_str)
+
 /obj/item/proc/use_spritesheet(var/bodytype, var/slot, var/icon_state)
 	if(!sprite_sheets || !sprite_sheets[bodytype])
 		return 0
-	if(slot == slot_r_hand_str || slot == slot_l_hand_str)
+
+	if(is_in_hand_slot(slot))
 		return 0
 
 	if(icon_state in icon_states(sprite_sheets[bodytype]))
@@ -693,6 +697,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		var/mob/living/carbon/human/user_human = user_mob
 		bodytype = user_human.species.get_bodytype(user_human)
 
+	var/in_hand = is_in_hand_slot(slot)
+
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])
 		mob_state = item_state_slots[slot]
@@ -700,6 +706,30 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_state = item_state
 	else
 		mob_state = icon_state
+
+	// STOP! BEFORE WE ENTER! WE MUST CHECK IF THEY GOT WHAT WE WANT!
+	// hack to please the spaghetti code god so we can get the code working
+	if (sprite_sheets && !in_hand)
+		if (item_state in icon_states(sprite_sheets[bodytype]))
+			mob_state = item_state
+		else if (icon_state in icon_states(sprite_sheets[bodytype]))
+			mob_state = icon_state
+
+	// legacy stuff...
+
+	// once upon a time...
+	// someone removed an important line of legacy line,..
+	// causing a 5+ month debugging adventure...
+	// figuring out why xeno clothings didn't use the right sprites
+	// midst an other chaos
+	// and, this two lines of code
+
+	if (istype(src, /obj/item/clothing/under))
+		mob_state = "[mob_state]_s"
+
+	// ...were the legendary code that was missing
+	// that was the story, kids. this why you should not trust
+	// other people
 
 	var/mob_icon
 	if(icon_override)
@@ -713,9 +743,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
 			mob_state = "[mob_state]_r"
+
 		mob_icon = sprite_sheets[bodytype]
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
+
 	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)

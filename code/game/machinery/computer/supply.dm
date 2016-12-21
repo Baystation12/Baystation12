@@ -124,6 +124,7 @@
 	data["location"] = shuttlestatus
 	data["canlaunch"] = canlaunch
 	data["points"] = supply_controller.points
+	data["pointstotalsum"] = supply_controller.point_sources["total"]
 	data["supplies"] = supplylist
 	data["active"] = isActiveTerminal() //merchant terminal
 	data["canorder"] = servicesActive()
@@ -143,6 +144,7 @@
 		return
 
 	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+
 
 	switch(action)
 		if("send")
@@ -277,7 +279,21 @@
 						lastprint = world.time + printdelay
 						break
 			. = TRUE
+		if("printtotal")
+			if(lastprint < world.time)
+				var/obj/item/weapon/paper/overview
+				overview = new /obj/item/weapon/paper(src.loc)
+				overview.name = "Export overview"
+				var/info = list()
+				info += "<center><BR><b><large>NSS Exodus</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
+				for(var/source in point_source_descriptions)
+					info += "[point_source_descriptions[source]]: [supply_controller.point_sources[source] || 0]<br/>"
+				overview.info = jointext(info, null)
 
+				overview.update_icon()	//Fix for appearing blank when printed.
+				playsound(usr.loc,'sound/machines/dotprinter.ogg', 40, 1)
+				return 1
+				. = TRUE
 		if("login") //sign in as merchant
 			if(!src.allowed(usr))
 				return TRUE

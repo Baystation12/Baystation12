@@ -134,3 +134,11 @@ var/datum/robolimb/basic_robolimb
 	desc = "This high quality limb is covered in thin layer of synth-fur."
 	icon = 'icons/mob/human_races/cyberlimbs/scorpius/scorpius_main.dmi'
 	can_eat = 1
+	skintone = 1
+	
+/datum/robolimb/resomi
+	company = "Small prosthetic"
+	desc = "This prosthetic is small and fit for nonhuman proportions."
+	icon = 'icons/mob/human_races/cyberlimbs/resomi/resomi_main.dmi'
+	restricted_to = list("Resomi")
+	species_cannot_use = list()
