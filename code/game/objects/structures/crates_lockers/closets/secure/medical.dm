@@ -166,7 +166,7 @@
 	new /obj/item/clothing/glasses/hud/health(src)
 	return
 
-/obj/structure/closet/secure_closet/medical3/torch/medical_senior
+/obj/structure/closet/secure_closet/medical_torchsenior
 	name = "senior physician's locker"
 	req_access = list(access_medical_equip)
 	icon_state = "securesenmed1"
@@ -176,7 +176,7 @@
 	icon_broken = "securesenmedbroken"
 	icon_off = "securesenmedoff"
 
-/obj/structure/closet/secure_closet/medical3/torch/medical_senior/New()
+/obj/structure/closet/secure_closet/medical_torchsenior/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)
@@ -184,8 +184,25 @@
 		new /obj/item/weapon/storage/backpack/satchel_med(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
+		switch(pick("blue", "green", "purple", "black", "navyblue"))
+			if ("blue")
+				new /obj/item/clothing/under/rank/medical/blue(src)
+				new /obj/item/clothing/head/surgery/blue(src)
+			if ("green")
+				new /obj/item/clothing/under/rank/medical/green(src)
+				new /obj/item/clothing/head/surgery/green(src)
+			if ("purple")
+				new /obj/item/clothing/under/rank/medical/purple(src)
+				new /obj/item/clothing/head/surgery/purple(src)
+			if ("black")
+				new /obj/item/clothing/under/rank/medical/black(src)
+				new /obj/item/clothing/head/surgery/black(src)
+			if ("navyblue")
+				new /obj/item/clothing/under/rank/medical/navyblue(src)
+				new /obj/item/clothing/head/surgery/navyblue(src)
 	new /obj/item/clothing/under/sterile(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+	new /obj/item/clothing/suit/surgicalapron(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/weapon/cartridge/cmo(src)
 	new /obj/item/device/radio/headset/headset_med(src)
