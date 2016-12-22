@@ -14,11 +14,6 @@
 /area/supply/station
 	base_turf = /turf/simulated/floor/plating
 
-/area/maintenance/substation //because for some reason this is a map-datum now
-	name = "Substation"
-	icon_state = "substation"
-	sound_env = SMALL_ENCLOSED
-
 //Fourth Deck (Z-1)
 /area/hallway/primary/fourthdeck/fore
 	name = "\improper Fourth Deck Fore Hallway"
@@ -922,10 +917,6 @@
 /area/rnd/locker
 	name = "\improper Research Locker Room"
 	icon_state = "locker"
-
-/area/rnd/phoron
-	name = "\improper Phoron Lab"
-	icon_state = "toxmix"
 
 /area/rnd/wing
 	name = "\improper Lab Wing"
