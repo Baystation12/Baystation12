@@ -122,7 +122,7 @@
 	name = "plasma pulse"
 	icon_state = "plasma_stun"
 	fire_sound = 'sound/weapons/blaster.ogg'
-	armor_penetration = 20
+	armor_penetration = 10
 	kill_count = 4
 	damage = 5
 	agony = 60
@@ -133,15 +133,16 @@
 
 		to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
 		var/ear_safety = 0
+		var/mob/living/carbon/human/H = M
 		if(iscarbon(M))
 			if(ishuman(M))
-				if(istype(M:l_ear, /obj/item/clothing/ears/earmuffs) || istype(M:r_ear, /obj/item/clothing/ears/earmuffs))
+				if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
 					ear_safety += 2
 				if(HULK in M.mutations)
 					ear_safety += 1
-				if(istype(M:head, /obj/item/clothing/head/helmet))
+				if(istype(H.head, /obj/item/clothing/head/helmet))
 					ear_safety += 1
-		if(ear_safety > 0)
+		if(ear_safety > 0 && ear_safety < 1)
 			M.Stun(5)
 			M.Weaken(2)
 		else if (ear_safety > 1)

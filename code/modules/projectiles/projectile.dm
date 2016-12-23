@@ -65,7 +65,7 @@
 
 	var/fire_sound
 
-	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, the projectile will be deleted if it enters vacuum.
+	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
