@@ -1603,7 +1603,8 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Expand()
 	src.visible_message("<span class='notice'>\The [src] expands!</span>")
-	new monkey_type(get_turf(src))
+	var/mob/monkey = new monkey_type(get_turf(src))
+	monkey.dropInto(src.loc)
 	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(mob/user as mob)
