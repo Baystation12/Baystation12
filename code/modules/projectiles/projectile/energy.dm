@@ -142,7 +142,7 @@
 					ear_safety += 1
 				if(istype(H.head, /obj/item/clothing/head/helmet))
 					ear_safety += 1
-		if(ear_safety > 0 && ear_safety < 1)
+		if(ear_safety == 1)
 			M.Stun(5)
 			M.Weaken(2)
 		else if (ear_safety > 1)
