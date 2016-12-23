@@ -1,0 +1,6 @@
+author: LorenLuke
+delete-after: True
+changes: 
+  - bugfix: "Can now throw held people again."
+  - rscadd: "Clicking a grab while in help intent downgrades the grab a step."
+
