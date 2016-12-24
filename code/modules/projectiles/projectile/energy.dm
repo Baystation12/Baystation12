@@ -129,39 +129,39 @@
 	damage_type = BURN
 	vacuum_traversal = 0
 
-	proc/bang(var/mob/living/carbon/M)
+/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
 
-		to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
-		var/ear_safety = 0
-		var/mob/living/carbon/human/H = M
-		if(iscarbon(M))
-			if(ishuman(M))
-				if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
-					ear_safety += 2
-				if(HULK in M.mutations)
-					ear_safety += 1
-				if(istype(H.head, /obj/item/clothing/head/helmet))
-					ear_safety += 1
-		if(ear_safety == 1)
-			M.Stun(5)
-			M.Weaken(2)
-		else if (ear_safety > 1)
-			M.Stun(2)
-			M.Weaken(1)
-		else if (!ear_safety)
-			M.Stun(10)
-			M.Weaken(3)
-			M.ear_damage += rand(1, 10)
-			M.ear_deaf = max(M.ear_deaf,15)
-		if (M.ear_damage >= 15)
-			to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
-			if (prob(M.ear_damage - 5))
-				to_chat(M, "<span class='danger'>You can't hear anything!</span>")
-				M.sdisabilities |= DEAF
-		else
-			if (M.ear_damage >= 5)
-				to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
-		M.update_icons()
+	to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
+	var/ear_safety = 0
+	var/mob/living/carbon/human/H = M
+	if(iscarbon(M))
+		if(ishuman(M))
+			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
+				ear_safety += 2
+			if(HULK in M.mutations)
+				ear_safety += 1
+			if(istype(H.head, /obj/item/clothing/head/helmet))
+				ear_safety += 1
+	if(ear_safety == 1)
+		M.Stun(5)
+		M.Weaken(2)
+	else if (ear_safety > 1)
+		M.Stun(2)
+		M.Weaken(1)
+	else if (!ear_safety)
+		M.Stun(10)
+		M.Weaken(3)
+		M.ear_damage += rand(1, 10)
+		M.ear_deaf = max(M.ear_deaf,15)
+	if (M.ear_damage >= 15)
+		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+		if (prob(M.ear_damage - 5))
+			to_chat(M, "<span class='danger'>You can't hear anything!</span>")
+			M.sdisabilities |= DEAF
+	else
+		if (M.ear_damage >= 5)
+			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+	M.update_icons()
 
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
 	bang(target)
