@@ -1,19 +1,34 @@
 {{if data.authenticated}}
 	{{if data.state === 1}}
-		<div class=item>{{:helper.link('Make An Announcement', null, {'action' : 'announce'}, data.isAI || !data.net_comms ? 'disabled' : null)}} </div>
-		<div class=item>{{if data.emagged}}
-			{{:helper.link('Send an emergency message to [UNKNOWN]', null, {'action' : 'message', 'target' : 'emagged'}, data.isAI || !data.net_comms ? 'disabled' : null)}}
-		{{else}}
-			{{:helper.link('Send an emergency message to ' + data.boss_short, null, {'action' : 'message', 'target' : 'regular'}, data.isAI || !data.net_comms ? 'disabled' : null)}}
-		{{/if}} </div>
-		<div class=item>{{:helper.link('Change alert level', null, {'action' : 'sw_menu', 'target' : 5}, data.isAI || !data.net_syscont || !data.net_comms ? 'disabled' : null)}} </div>
-		<div class=item>{{if data.have_shuttle && data.have_shuttle_called}}
-			{{:helper.link('Cancel Shuttle Call', null, {'action' : 'shuttle', 'target' : 'cancel'}, data.isAI || !data.net_syscont ? 'disabled' : null)}}
-		{{else data.have_shuttle && !data.have_shuttle_called}}
-			{{:helper.link('Call Emergency Shuttle', null, {'action' : 'shuttle', 'target' : 'call'}, !data.net_syscont ? 'disabled' : null)}}
-		{{/if}} </div>
-		<div class=item>{{:helper.link('Set Status Display', null, {'action' : 'sw_menu', 'target' : 4}, !data.net_syscont ? 'disabled' : null)}} </div>
-		<div class=item>{{:helper.link('Message List', null, {'action' : 'sw_menu', 'target' : 2}, !data.net_comms ? 'disabled' : null)}} </div>
+	
+		<h4>Command</h4>
+		<div class=itemGroup>
+			<div class=item>{{:helper.link('Make an announcement', null, {'action' : 'announce'}, data.isAI || !data.net_comms ? 'disabled' : null)}} </div>
+			<div class=item>{{:helper.link('Change alert level', null, {'action' : 'sw_menu', 'target' : 5}, data.isAI || !data.net_syscont || !data.net_comms ? 'disabled' : null)}} </div>
+			<div class=item>{{:helper.link('Set status display', null, {'action' : 'sw_menu', 'target' : 4}, !data.net_syscont ? 'disabled' : null)}} </div>
+		</div>
+		
+		<h4>Communications</h4>
+		<div class=itemGroup>
+			<div class=item>{{:helper.link('Message list', null, {'action' : 'sw_menu', 'target' : 2}, !data.net_comms ? 'disabled' : null)}} </div>
+			<div class=item>{{if data.emagged}}
+				{{:helper.link('Send an emergency message to [UNKNOWN]', null, {'action' : 'message', 'target' : 'emagged'}, data.isAI || !data.net_comms ? 'disabled' : null)}}
+			{{else}}
+				{{:helper.link('Send an emergency message to ' + data.boss_short, null, {'action' : 'message', 'target' : 'regular'}, data.isAI || !data.net_comms ? 'disabled' : null)}}
+			{{/if}} </div>
+		</div>
+		
+		<h4>Evacuation</h4>
+		<div class=itemGroup>
+			{{for data.evac_options}}
+				<div class="item">
+					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.isAI)) ? 'disabled' : null, 'redButton')}}
+				</div>
+			{{empty}}
+				<div class=bad>No evacuation options available.</div>
+			{{/for}}
+		</div>
+		
 	{{else data.state === 2}}
 		Messages:
 		{{for data.messages}}

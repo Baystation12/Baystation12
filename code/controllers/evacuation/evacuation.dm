@@ -156,3 +156,8 @@ var/datum/evacuation_controller/evacuation_controller
 		if(world.time >= evac_cooldown_time)
 			state = EVAC_IDLE
 
+/datum/evacuation_controller/proc/available_evac_options()
+	return list()
+
+/datum/evacuation_controller/proc/handle_evac_option(var/option_target)
+	return

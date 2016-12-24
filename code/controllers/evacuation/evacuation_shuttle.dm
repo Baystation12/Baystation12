@@ -86,3 +86,36 @@
 		return round(evac_prep_delay/10)/2
 	else
 		return round(evac_transit_delay/10)
+
+/datum/evacuation_controller/pods/shuttle/available_evac_options()
+	if (!shuttle.location)
+		return list()
+	if (is_idle())
+		return list(new /datum/evacuation_option/call_shuttle())
+	else
+		return list(new /datum/evacuation_option/recall_shuttle())
+
+#define EVAC_OPT_CALL_SHUTTLE "call_shuttle"
+#define EVAC_OPT_RECALL_SHUTTLE "recall_shuttle"
+
+/datum/evacuation_controller/pods/shuttle/handle_evac_option(var/option_target)
+	switch (option_target)
+		if (EVAC_OPT_CALL_SHUTTLE)
+			call_shuttle_proc(usr)
+		if (EVAC_OPT_RECALL_SHUTTLE)
+			cancel_call_proc(usr)
+
+/datum/evacuation_option/call_shuttle
+	option_text = "Call emergency shuttle"
+	option_target = EVAC_OPT_CALL_SHUTTLE
+	needs_syscontrol = TRUE
+	silicon_allowed = TRUE
+
+/datum/evacuation_option/recall_shuttle
+	option_text = "Cancel shuttle call"
+	option_target = EVAC_OPT_RECALL_SHUTTLE
+	needs_syscontrol = TRUE
+	silicon_allowed = FALSE
+
+#undef EVAC_OPT_CALL_SHUTTLE
+#undef EVAC_OPT_RECALL_SHUTTLE
