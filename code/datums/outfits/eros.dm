@@ -91,8 +91,8 @@
 			qdel(bando)
 
 
-/decl/hierarchy/outfit/eros_hap_leader
-	name = "Snowflake Ops - Leader"
+/decl/hierarchy/outfit/eros_hap_spotter
+	name = "Snowflake Ops - Spotter"
 	uniform = /obj/item/clothing/under/ert
 	l_ear = /obj/item/device/radio/headset/specops
 	glasses = /obj/item/clothing/glasses/tacgoggles
@@ -141,14 +141,14 @@
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/centcom/ERT
 	id_desc = "Special operations ID."
-	id_pda_assignment = "HAP Special Operations Spotter"
+	id_pda_assignment = "HAP Special Operations Sniper"
 
 /decl/hierarchy/outfit/eros_hap_leader/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
-		var/obj/item/clothing/accessory/storage/bandolier/book_hap_sniper/bando = new()
-		if(uniform.can_attach_accessory(bando))
-			uniform.attach_accessory(null, bando)
+		var/obj/item/clothing/accessory/storage/bandolier/book_hap_sniper/sbando = new()
+		if(uniform.can_attach_accessory(sbando))
+			uniform.attach_accessory(null, sbando)
 		else
 			qdel(bando)
