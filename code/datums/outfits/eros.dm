@@ -80,7 +80,7 @@
 	id_desc = "Special operations ID."
 	id_pda_assignment = "HAP Special Operations Grenadier"
 
-/decl/hierarchy/outfit/eros_hap_grenadier/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/eros_hap_cubanpetesbabybrother/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
@@ -111,7 +111,7 @@
 	id_desc = "Special operations ID."
 	id_pda_assignment = "HAP Special Operations Spotter"
 
-/decl/hierarchy/outfit/eros_hap_leader/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/eros_hap_spotter/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
@@ -143,7 +143,7 @@
 	id_desc = "Special operations ID."
 	id_pda_assignment = "HAP Special Operations Sniper"
 
-/decl/hierarchy/outfit/eros_hap_leader/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/eros_hap_sniper/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)
