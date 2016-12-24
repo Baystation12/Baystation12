@@ -32,7 +32,6 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define AI_CAMERA_LUMINOSITY 6
 
 // Camera networks
-#define NETWORK_CALYPSO "Calypso"
 #define NETWORK_CRESCENT "Crescent"
 #define NETWORK_CIVILIAN_EAST "Civilian East"
 #define NETWORK_CIVILIAN_WEST "Civilian West"
