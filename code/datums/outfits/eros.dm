@@ -151,4 +151,4 @@
 		if(uniform.can_attach_accessory(sbando))
 			uniform.attach_accessory(null, sbando)
 		else
-			qdel(bando)
+			qdel(sbando)
