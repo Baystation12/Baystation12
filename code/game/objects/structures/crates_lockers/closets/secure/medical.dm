@@ -146,7 +146,7 @@
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
-/obj/structure/closet/secure_closet/medical3_contractor/New()
+/obj/structure/closet/secure_closet/medical_contractor/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)
@@ -166,7 +166,7 @@
 	new /obj/item/clothing/glasses/hud/health(src)
 	return
 
-/obj/structure/closet/secure_closet/medical3/torch/medical_senior
+/obj/structure/closet/secure_closet/medical_torchsenior
 	name = "senior physician's locker"
 	req_access = list(access_medical_equip)
 	icon_state = "securesenmed1"
@@ -176,7 +176,7 @@
 	icon_broken = "securesenmedbroken"
 	icon_off = "securesenmedoff"
 
-/obj/structure/closet/secure_closet/medical3/torch/medical_senior/New()
+/obj/structure/closet/secure_closet/medical_torchsenior/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)
@@ -184,7 +184,6 @@
 		new /obj/item/weapon/storage/backpack/satchel_med(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
-	for(var/i = 1 to 2)
 		switch(pick("blue", "green", "purple", "black", "navyblue"))
 			if ("blue")
 				new /obj/item/clothing/under/rank/medical/blue(src)
@@ -209,7 +208,6 @@
 	new /obj/item/device/radio/headset/headset_med(src)
 	new /obj/item/taperoll/medical(src)
 	new /obj/item/weapon/storage/belt/medical(src)
-	new /obj/item/clothing/mask/surgical(src)
 	new /obj/item/device/healthanalyzer(src)
 	new /obj/item/clothing/accessory/stethoscope(src)
 	new /obj/item/device/flashlight/pen(src)

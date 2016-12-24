@@ -13,6 +13,11 @@
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
 
+/area/maintenance/substation //because for some reason this is a map-datum now
+	name = "Substation"
+	icon_state = "substation"
+	sound_env = SMALL_ENCLOSED
+
 // CentCom
 
 /area/centcom/control
@@ -254,10 +259,6 @@
 /area/medical/exam_room
 	name = "\improper Exam Room"
 	icon_state = "exam_room"
-
-/area/medical/genetics_cloning
-	name = "\improper Cloning Lab"
-	icon_state = "cloning"
 
 /area/medical/morgue
 	name = "\improper Morgue"

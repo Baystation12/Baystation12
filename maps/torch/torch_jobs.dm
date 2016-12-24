@@ -963,7 +963,7 @@
 	item_state = "gold_id"
 	registered_name = "Commanding Officer"
 	assignment = "Commanding Officer"
-/obj/item/weapon/card/id/captains_spare/New()
+/obj/item/weapon/card/id/torch/captains_spare/New()
 	access = get_all_station_access()
 	..()
 
