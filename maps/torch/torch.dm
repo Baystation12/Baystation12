@@ -28,6 +28,21 @@
 	#include "structures/closets/services.dm"
 	#include "structures/closets/supply.dm"
 
+	#include "loadout/loadout_accessories.dm"
+	#include "loadout/loadout_cosmetics.dm"
+	#include "loadout/loadout_ears.dm"
+	#include "loadout/loadout_eyes.dm"
+	#include "loadout/loadout_general.dm"
+	#include "loadout/loadout_gloves.dm"
+	#include "loadout/loadout_head.dm"
+	#include "loadout/loadout_mask.dm"
+	#include "loadout/loadout_shoes.dm"
+	#include "loadout/loadout_smoking.dm"
+	#include "loadout/loadout_suit.dm"
+	#include "loadout/loadout_uniform.dm"
+	#include "loadout/loadout_utility.dm"
+	#include "loadout/loadout_xenos.dm"
+
 	#include "../shared/exodus_torch_areas.dm"
 	#include "../shared/exodus_torch_zas_tests.dm"
 
