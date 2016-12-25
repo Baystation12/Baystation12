@@ -1,6 +1,7 @@
 // Uniform slot
 /datum/gear/uniform
-	path = /obj/item/clothing/under
+	display_name = "black shorts" //kept separate because there aren't any other uniforms that every role could have
+	path = /obj/item/clothing/under/shorts/black
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
@@ -186,7 +187,6 @@
 /datum/gear/uniform/ecpt
 	display_name = "Expeditionary Corps PT Uniform"
 	path = /obj/item/clothing/under/pt/expeditionary
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -194,7 +194,6 @@
 /datum/gear/uniform/fleetpt
 	display_name = "Fleet PT Uniform"
 	path = /obj/item/clothing/under/pt/fleet
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -202,7 +201,6 @@
 /datum/gear/uniform/marinept
 	display_name = "Marine PT Uniform"
 	path = /obj/item/clothing/under/pt/marine
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -211,7 +209,6 @@
 	display_name = "(EC) Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -220,63 +217,54 @@
 	display_name = "(EC) Medical Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/medical
-	cost = 0
 	allowed_roles = list("Senior Physician", "Physician")
 
 /datum/gear/uniform/ecmedcomutility
 	display_name = "(EC) Medical Command Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/medical/command
-	cost = 0
 	allowed_roles = list("Chief Medical Officer")
 
 /datum/gear/uniform/ecengutility
 	display_name = "(EC) Engineering Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/engineering
-	cost = 0
 	allowed_roles = list("Senior Engineer", "Engineer")
 
 /datum/gear/uniform/ecengutility
 	display_name = "(EC) Engineering Command Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/engineering/command
-	cost = 0
 	allowed_roles = list("Chief Engineer")
 
 /datum/gear/uniform/ecsuputility
 	display_name = "(EC) Supply Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/supply
-	cost = 0
 	allowed_roles = list("Deck Officer", "Deck Technician")
 
 /datum/gear/uniform/ecsecutility
 	display_name = "(EC) Security Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/security
-	cost = 0
 	allowed_roles = list("Brig Officer", "Forensic Technician", "Master at Arms")
 
 /datum/gear/uniform/ecseccomutility
 	display_name = "(EC) Security Command Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/security/command
-	cost = 0
 	allowed_roles = list("Chief of Security")
 
 /datum/gear/uniform/eccomutility
 	display_name = "(EC) Command Utility Uniform"
 	description = "Utility Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/utility/expeditionary/command
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Senior Enlisted Advisor")
 
 /datum/gear/uniform/ecenlisteddress
 	display_name = "(EC) Enlisted Dress Uniform"
 	description = "Dress Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/mildress/expeditionary
-	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician",
 						"Physician", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
 
@@ -284,14 +272,12 @@
 	display_name = "(EC) Officer's Dress Uniform"
 	description = "Dress Uniform of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/under/mildress/expeditionary/command
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Physician", "Deck Officer")
 
 /datum/gear/uniform/fleetutility
 	display_name = "(FLEET) Coveralls"
 	description = "Utility Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/utility/fleet
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -300,42 +286,36 @@
 	display_name = "(FLEET) Medical Coveralls"
 	description = "Utility Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/utility/fleet/medical
-	cost = 0
 	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician")
 
 /datum/gear/uniform/fleetendutility
 	display_name = "(FLEET) Engineering Coveralls"
 	description = "Utility Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/utility/fleet/engineering
-	cost = 0
 	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer")
 
 /datum/gear/uniform/fleetsuputility
 	display_name = "(FLEET) Supply Coveralls"
 	description = "Utility Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/utility/fleet/supply
-	cost = 0
 	allowed_roles = list("Deck Officer", "Deck Technician")
 
 /datum/gear/uniform/fleetsecutility
 	display_name = "(FLEET) Security Coveralls"
 	description = "Utility Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/utility/fleet/security
-	cost = 0
 	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician")
 
 /datum/gear/uniform/fleetcomutility
 	display_name = "(FLEET) Command Coveralls"
 	description = "Utility Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/utility/fleet/command
-	cost = 0
 	allowed_roles = list("Executive Officer", "Senior Enlisted Advisor")
 
 /datum/gear/uniform/fleetservice
 	display_name = "(FLEET) Service Uniform"
 	description = "Service Uniform of the SCG Fleet"
 	path = /obj/item/clothing/under/service/fleet
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -344,7 +324,6 @@
 	display_name = "(MARINE) Fatigues"
 	description = "Utility Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/utility/marine
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -369,35 +348,30 @@
 	display_name = "(MARINE) Engineering Fatigues"
 	description = "Utility Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/utility/marine/engineering
-	cost = 0
 	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer")
 
 /datum/gear/uniform/marinesuputility
 	display_name = "(MARINE) Supply Fatigues"
 	description = "Utility Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/utility/marine/supply
-	cost = 0
 	allowed_roles = list("Deck Officer", "Deck Technician")
 
 /datum/gear/uniform/marinesecutility
 	display_name = "(MARINE) Security Fatigues"
 	description = "Utility Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/utility/marine/security
-	cost = 0
 	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician")
 
 /datum/gear/uniform/marinecomutility
 	display_name = "(MARINE) Command Fatigues"
 	description = "Utility Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/utility/marine/command
-	cost = 0
 	allowed_roles = list("Executive Officer", "Senior Enlisted Advisor")
 
 /datum/gear/uniform/marineenlistedservice
 	display_name = "(MARINE) Enlisted Service Uniform"
 	description = "Service Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/service/marine
-	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms",
 						"Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
 
@@ -405,14 +379,12 @@
 	display_name = "(MARINE) Officer's Service Uniform"
 	description = "Service Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/service/marine/command
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Deck Officer")
 
 /datum/gear/uniform/marineenlisteddress
 	display_name = "(MARINE) Enlisted Dress Uniform"
 	description = "Dress Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/mildress/marine
-	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms",
 						"Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
 
@@ -420,5 +392,4 @@
 	display_name = "(MARINE) Officer's Dress Uniform"
 	description = "Dress Uniform of the SCG Marine Corps"
 	path = /obj/item/clothing/under/mildress/marine/command
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Deck Officer")

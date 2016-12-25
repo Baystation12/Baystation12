@@ -147,7 +147,6 @@
 	display_name = "(EC) Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -156,63 +155,54 @@
 	display_name = "(EC) Medical Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/medical
-	cost = 0
 	allowed_roles = list("Senior Physician", "Physician")
 
 /datum/gear/suit/ecmedcomservice
 	display_name = "(EC) Medical Command Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/medical/command
-	cost = 0
 	allowed_roles = list("Chief Medical Officer")
 
 /datum/gear/suit/ecengservice
 	display_name = "(EC) Engineering Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/engineering
-	cost = 0
 	allowed_roles = list("Senior Engineer", "Engineer")
 
 /datum/gear/suit/ecengcomservice
 	display_name = "(EC) Engineering Command Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/engineering/command
-	cost = 0
 	allowed_roles = list("Chief Engineer")
 
 /datum/gear/suit/ecsupservice
 	display_name = "(EC) Supply Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/supply
-	cost = 0
 	allowed_roles = list("Deck Officer", "Deck Technician")
 
 /datum/gear/suit/ecsecservice
 	display_name = "(EC) Security Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/security
-	cost = 0
 	allowed_roles = list("Brig Officer", "Forensic Technician", "Master at Arms")
 
 /datum/gear/suit/ecseccomservice
 	display_name = "(EC) Security Command Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/security/command
-	cost = 0
 	allowed_roles = list("Chief of Security")
 
 /datum/gear/suit/eccomservice
 	display_name = "(EC) Command Service Jacket"
 	description = "Service jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/service/expeditionary/command
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Senior Enlisted Advisor")
 
 /datum/gear/suit/ecenlisteddress
 	display_name = "(EC) Enlisted Dress Jacket"
 	description = "Dress jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/dress/expedition
-	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician",
 						"Physician", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
 
@@ -220,14 +210,12 @@
 	display_name = "(EC) Officer's Dress Jacket"
 	description = "Dress jacket of the SCG Expeditionary Corps"
 	path = /obj/item/clothing/suit/dress/expedition/command
-	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Physician", "Deck Officer")
 
 /datum/gear/suit/fleetenlisteddress
 	display_name = "(FLEET) Enlisted Dress Jacket"
 	description = "Dress jacket of the SCG Fleet"
 	path = /obj/item/clothing/suit/storage/toggle/dress/fleet
-	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician",
 						"Physician", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
 
@@ -235,14 +223,12 @@
 	display_name = "(FLEET) Officer's Dress Jacket"
 	description = "Dress jacket of the SCG Fleet"
 	path = /obj/item/clothing/suit/storage/toggle/dress/fleet/command
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Physician", "Deck Officer")
 
 /datum/gear/suit/marineservice
 	display_name = "(MARINE) Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine
-	cost = 0
 	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -251,49 +237,42 @@
 	display_name = "(MARINE) Engineering Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine/engineering
-	cost = 0
 	allowed_roles = list("Senior Engineer", "Engineer")
 
 /datum/gear/suit/marineengcomservice
 	display_name = "(MARINE) Engineering Command Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine/engineering/command
-	cost = 0
 	allowed_roles = list("Chief Engineer")
 
 /datum/gear/suit/marinesupservice
 	display_name = "(MARINE) Supply Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine/supply
-	cost = 0
 	allowed_roles = list("Deck Officer", "Deck Technician")
 
 /datum/gear/suit/marinesecservice
 	display_name = "(MARINE) Security Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine/security
-	cost = 0
 	allowed_roles = list("Brig Officer", "Forensic Technician", "Master at Arms")
 
 /datum/gear/suit/marineseccomservice
 	display_name = "(MARINE) Security Command Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine/security/command
-	cost = 0
 	allowed_roles = list("Chief of Security")
 
 /datum/gear/suit/marinecomservice
 	display_name = "(MARINE) Command Service Jacket"
 	description = "Service coat of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/storage/service/marine/command
-	cost = 0
 	allowed_roles = list("Executive Officer", "Senior Enlisted Advisor")
 
 /datum/gear/suit/marineenlisteddress
 	display_name = "(MARINE) Enlisted Dress Jacket"
 	description = "Dress Jacket of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/dress/marine
-	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms",
 						"Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
 
@@ -301,6 +280,5 @@
 	display_name = "(MARINE) Officer's Dress Jacket"
 	description = "Dress Jacket of the SCG Marine Corps"
 	path = /obj/item/clothing/suit/dress/marine/command
-	cost = 0
 	allowed_roles = list("Executive Officer","Chief Engineer", "Chief of Security", "Deck Officer")
 
