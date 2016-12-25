@@ -19,12 +19,14 @@
 
 	#include "structures/closets.dm"
 	#include "structures/signs.dm"
+	#include "structures/closets/command.dm"
 	#include "structures/closets/engineering.dm"
 	#include "structures/closets/medical.dm"
 	#include "structures/closets/misc.dm"
 	#include "structures/closets/research.dm"
 	#include "structures/closets/security.dm"
 	#include "structures/closets/services.dm"
+	#include "structures/closets/supply.dm"
 
 	#include "../shared/exodus_torch_areas.dm"
 	#include "../shared/exodus_torch_zas_tests.dm"
@@ -41,6 +43,11 @@
 	#include "torch-10.dmm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
+	#include "../../code/modules/lobby_music/absconditus.dm"
+	#include "../../code/modules/lobby_music/clouds_of_fire.dm"
+	#include "../../code/modules/lobby_music/endless_space.dm"
+	#include "../../code/modules/lobby_music/dilbert.dm"
+	#include "../../code/modules/lobby_music/space_oddity.dm"
 
 	#define USING_MAP_DATUM /datum/map/torch
 

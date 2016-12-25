@@ -193,9 +193,11 @@
 		icon_state = "hair_ponytail5"
 		gender = FEMALE
 
+/*Apparently this doesn't exist
 	fringetail
 		name = "Fringetail"
 		icon_state = "hair_fringetail"
+*/
 
 	sideponytail
 		name = "Side Ponytail"
@@ -524,6 +526,58 @@
 		name = "Double-Bun"
 		icon_state = "hair_doublebun"
 
+	lowfade
+		name = "Low Fade"
+		icon_state = "hair_lowfade"
+		gender = MALE
+		veryshort = 1
+
+	medfade
+		name = "Medium Fade"
+		icon_state = "hair_medfade"
+
+	highfade
+		name = "High Fade"
+		icon_state = "hair_highfade"
+		gender = MALE
+		veryshort = 1
+
+	baldfade
+		name = "Balding Fade"
+		icon_state = "hair_baldfade"
+		gender = MALE
+		veryshort = 1
+
+	nofade
+		name = "Regulation Cut"
+		icon_state = "hair_nofade"
+		gender = MALE
+		veryshort = 1
+
+	trimflat
+		name = "Trimmed Flat Top"
+		icon_state = "hair_trimflat"
+		gender = MALE
+		veryshort = 1
+
+	shaved
+		name = "Shaved"
+		icon_state = "hair_shaved"
+		gender = MALE
+		veryshort = 1
+
+	trimmed
+		name = "Trimmed"
+		icon_state = "hair_trimmed"
+		gender = MALE
+		veryshort = 1
+
+	tightbun
+		name = "Tight Bun"
+		icon_state = "hair_tightbun"
+		gender = FEMALE
+		veryshort = 1
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -611,6 +665,30 @@
 	dwarf
 		name = "Dwarf Beard"
 		icon_state = "facial_dwarf"
+
+	threeOclock
+		name = "3 O'clock Shadow"
+		icon_state = "facial_3oclock"
+
+	threeOclockstache
+		name = "3 O'clock Shadow and Moustache"
+		icon_state = "facial_3oclockmoustache"
+
+	fiveOclock
+		name = "5 O'clock Shadow"
+		icon_state = "facial_5oclock"
+
+	fiveOclockstache
+		name = "5 O'clock Shadow and Moustache"
+		icon_state = "facial_5oclockmoustache"
+
+	sevenOclock
+		name = "7 O'clock Shadow"
+		icon_state = "facial_7oclock"
+
+	sevenOclockstache
+		name = "7 O'clock Shadow and Moustache"
+		icon_state = "facial_7oclockmoustache"
 
 /*
 ///////////////////////////////////

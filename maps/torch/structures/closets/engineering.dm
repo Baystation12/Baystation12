@@ -21,6 +21,7 @@
 		/obj/item/weapon/cartridge/ce,
 		/obj/item/device/radio/headset/heads/ce,
 		/obj/item/weapon/storage/toolbox/mechanical,
+		/obj/item/weapon/storage/belt/utility,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/multitool,
@@ -83,7 +84,7 @@
 
 /obj/structure/closet/secure_closet/engineering_contractor
 	name = "engineering contractor's locker"
-	req_access = list(access_engine_equip)
+	req_access = list(access_engine)
 	icon_state = "secureeng1"
 	icon_closed = "secureeng"
 	icon_locked = "secureeng1"
@@ -113,7 +114,7 @@
 
 /obj/structure/closet/secure_closet/engineering_senior
 	name = "senior engineer's locker"
-	req_access = list(access_engine_equip)
+	req_access = list(access_seneng)
 	icon_state = "secureseneng1"
 	icon_closed = "secureseneng"
 	icon_locked = "secureseneng1"

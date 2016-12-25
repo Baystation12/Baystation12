@@ -108,8 +108,12 @@
 		/obj/item/weapon/material/star,
 		/obj/item/weapon/rcd_ammo,
 		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/weapon/syringe_cartridge,
 		/obj/item/weapon/plastique,
-		/obj/item/clothing/mask/smokable
+		/obj/item/clothing/mask/smokable,
+		/obj/item/weapon/screwdriver,
+		/obj/item/device/multitool
 	)
 
