@@ -29,6 +29,8 @@ var/datum/evacuation_controller/evacuation_controller
 
 	var/list/evacuation_predicates = list()
 
+	var/list/evacuation_options = list()
+
 	var/datum/announcement/priority/evac_waiting =  new(0)
 	var/datum/announcement/priority/evac_called =   new(0)
 	var/datum/announcement/priority/evac_recalled = new(0)
@@ -159,5 +161,11 @@ var/datum/evacuation_controller/evacuation_controller
 /datum/evacuation_controller/proc/available_evac_options()
 	return list()
 
-/datum/evacuation_controller/proc/handle_evac_option(var/option_target)
-	return
+/datum/evacuation_controller/proc/handle_evac_option(var/option_target, var/mob/user)
+	var/datum/evacuation_option/selected = evacuation_options[option_target]
+	if (!isnull(selected) && istype(selected))
+		selected.execute(user)
+
+/datum/evacuation_controller/proc/get_evac_option(var/option_target)
+	return null
+

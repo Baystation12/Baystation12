@@ -18,14 +18,14 @@
 			{{/if}} </div>
 		</div>
 		
-		<h4>Evacuation</h4>
+		<h4>Additional</h4>
 		<div class=itemGroup>
 			{{for data.evac_options}}
 				<div class="item">
 					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.isAI)) ? 'disabled' : null, 'redButton')}}
 				</div>
 			{{empty}}
-				<div class=bad>No evacuation options available.</div>
+				<div class=bad>No further options available.</div>
 			{{/for}}
 		</div>
 		

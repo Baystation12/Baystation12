@@ -172,10 +172,17 @@
 						centcomm_message_cooldown = 0
 		if("evac")
 			. = 1
-			if(is_autenthicated(user) && ntn_cont)
-				var/confirm = alert("Are you sure?", name, "No", "Yes")
+			if(is_autenthicated(user))
+				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
+				if (isnull(selected_evac_option) || !istype(selected_evac_option))
+					return
+				if (!selected_evac_option.silicon_allowed && issilicon(user))
+					return
+				if (selected_evac_option.needs_syscontrol && !ntn_cont)
+					return
+				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
 				if (confirm == "Yes" && can_still_topic())
-					evacuation_controller.handle_evac_option(href_list["target"])
+					evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
 		if("setstatus")
 			. = 1
 			if(is_autenthicated(user) && ntn_cont)
