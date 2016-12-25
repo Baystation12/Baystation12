@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscadd: "Silicon mobs (cyborgs, drones) can now move between z-levels."
