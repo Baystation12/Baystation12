@@ -9,8 +9,10 @@
 	#include "torch_unit_testing.dm"
 
 	#include "items/cards_ids.dm"
+	#include "items/clothing.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
+	#include "items/machinery.dm"
 	#include "items/manuals.dm"
 
 	#include "job/access.dm"
@@ -41,7 +43,7 @@
 	#include "loadout/loadout_suit.dm"
 	#include "loadout/loadout_uniform.dm"
 	#include "loadout/loadout_utility.dm"
-	#include "loadout/loadout_xenos.dm"
+	#include "loadout/loadout_xeno.dm"
 
 	#include "../shared/exodus_torch_areas.dm"
 	#include "../shared/exodus_torch_zas_tests.dm"

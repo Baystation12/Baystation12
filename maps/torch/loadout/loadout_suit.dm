@@ -211,7 +211,7 @@
 /datum/gear/suit/ecenlisteddress
 	display_name = "(EC) Enlisted Dress Jacket"
 	description = "Dress jacket of the SCG Expeditionary Corps"
-	path = /obj/item/clothing/suit/storage/dress/expeditionary
+	path = /obj/item/clothing/suit/dress/expedition
 	cost = 0
 	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician",
 						"Physician", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -219,7 +219,7 @@
 /datum/gear/suit/ecofficerdress
 	display_name = "(EC) Officer's Dress Jacket"
 	description = "Dress jacket of the SCG Expeditionary Corps"
-	path = /obj/item/clothing/suit/storage/dress/expeditionary/command
+	path = /obj/item/clothing/suit/dress/expedition/command
 	cost = 0
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Physician", "Deck Officer")
 

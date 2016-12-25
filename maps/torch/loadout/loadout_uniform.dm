@@ -1,13 +1,13 @@
-+// Uniform slot
+// Uniform slot
 /datum/gear/uniform
 	path = /obj/item/clothing/under
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
 /datum/gear/uniform/shortjumpskirt
-    display_name = "short jumpskirt"
-    path = /obj/item/clothing/under/shortjumpskirt
-    flags = GEAR_HAS_COLOR_SELECTION
+	display_name = "short jumpskirt"
+	path = /obj/item/clothing/under/shortjumpskirt
+	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/jumpsuit
@@ -153,7 +153,7 @@
 	path = /obj/item/clothing/under/dress
 	allowed_roles = list("Scientist", "Prospector", "Security Guard", "Research Assistant",
 						"Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant)
+						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
 
 /datum/gear/uniform/corporate/New()
 	..()

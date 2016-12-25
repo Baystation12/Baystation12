@@ -13,7 +13,7 @@
 	display_name = "suspenders"
 	path = /obj/item/clothing/accessory/suspenders
 	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist""Supply Assistant", "Bartender", "Merchant")
+						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Supply Assistant", "Bartender", "Merchant")
 
 /datum/gear/accessory/wcoat
 	display_name = "waistcoat"
@@ -69,7 +69,7 @@
 
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
-	path = /obj/item/clothing/accessory/armband/redwhite
+	path = /obj/item/clothing/accessory/armband/whitered
 	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant")
 
 /datum/gear/accessory/armband_solgov
@@ -123,7 +123,7 @@
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor"
+	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor",
 						"Research Director", "Scientist", "Research Assistant")
 
 /datum/gear/accessory/brown_vest
@@ -182,7 +182,7 @@
 /datum/gear/accessory/solawardmajor
 	display_name = "SolGov major award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
-	path = /obj/item/clothing/medal/iron/star
+	path = /obj/item/clothing/accessory/medal/iron/star
 	cost = 8
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
@@ -204,7 +204,7 @@
 /datum/gear/accessory/solawardminor
 	display_name = "SolGov minor award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
-	path = /obj/item/clothing/medal/iron/sol
+	path = /obj/item/clothing/accessory/medal/iron/sol
 	cost = 5
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
@@ -222,7 +222,7 @@
 /datum/gear/accessory/ntaward
 	display_name = "NanoTrasen award selection"
 	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
-	path = /obj/item/clothing/medal/bronze/nanotrasen
+	path = /obj/item/clothing/accessory/medal/bronze/nanotrasen
 	cost = 8
 	allowed_roles = list("Research Director", "NanoTrasen Liaison")
 
