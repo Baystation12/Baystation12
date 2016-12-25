@@ -6,6 +6,8 @@
 /datum/evacuation_controller/pods
 	name = "escape pod controller"
 
+	transfer_prep_additional_delay = 10 MINUTES
+
 	evacuation_options = list(
 		EVAC_OPT_ABANDON_SHIP = new /datum/evacuation_option/abandon_ship(),
 		EVAC_OPT_BLUESPACE_JUMP = new /datum/evacuation_option/bluespace_jump(),

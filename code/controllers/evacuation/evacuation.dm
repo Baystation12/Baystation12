@@ -20,6 +20,9 @@ var/datum/evacuation_controller/evacuation_controller
 	var/evac_launch_delay =  3 MINUTES
 	var/evac_transit_delay = 2 MINUTES
 
+	var/emergency_prep_additional_delay = 0 MINUTES
+	var/transfer_prep_additional_delay = 0 MINUTES
+
 	var/evac_cooldown_time
 	var/evac_called_at
 	var/evac_no_return
@@ -62,9 +65,11 @@ var/datum/evacuation_controller/evacuation_controller
 	if(ticker && ticker.mode)
 		evac_prep_delay_multiplier = ticker.mode.shuttle_delay
 
+	var/additional_delay = (emergency_evacuation ? emergency_prep_additional_delay : transfer_prep_additional_delay)
+
 	evac_called_at =    world.time
-	evac_no_return =    evac_called_at +    round(evac_prep_delay/2)
-	evac_ready_time =   evac_called_at +    (evac_prep_delay*evac_prep_delay_multiplier)
+	evac_no_return =    evac_called_at +    round(evac_prep_delay/2) + additional_delay
+	evac_ready_time =   evac_called_at +    (evac_prep_delay*evac_prep_delay_multiplier) + additional_delay
 	evac_launch_time =  evac_ready_time +   evac_launch_delay
 	evac_arrival_time = evac_launch_time +  evac_transit_delay
 
