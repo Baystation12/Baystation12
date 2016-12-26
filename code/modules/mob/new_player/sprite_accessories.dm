@@ -193,12 +193,6 @@
 		icon_state = "hair_ponytail5"
 		gender = FEMALE
 
-/*Apparently this doesn't exist
-	fringetail
-		name = "Fringetail"
-		icon_state = "hair_fringetail"
-*/
-
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"

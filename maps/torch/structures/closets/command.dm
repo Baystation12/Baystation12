@@ -93,6 +93,3 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/blue
 	)
-
-/obj/structure/closet/secure_closet/sea/New()
-	..()

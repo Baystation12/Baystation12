@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/liaison
-	name = "/improper NanoTrasen liaison's locker"
+	name = "\improper NanoTrasen liaison's locker"
 	req_access = list(access_liaison)
 	icon_state = "nanottwo1"
 	icon_closed = "nanottwo"
@@ -24,11 +24,8 @@
 		/obj/item/clothing/glasses/sunglasses/big
 	)
 
-/obj/structure/closet/secure_closet/liaison/New()
-	..()
-
 /obj/structure/closet/secure_closet/representative
-	name = "/improper Sol Central Government representative's locker"
+	name = "\improper Sol Central Government representative's locker"
 	req_access = list(access_representative)
 	icon_state = "solsecure1"
 	icon_closed = "solsecure"
@@ -69,8 +66,7 @@
 		/obj/item/device/radio,
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/storage/box,
-		/obj/random/maintenance/solgov/clean = 3
+		/obj/item/weapon/storage/box
 	)
 
 /obj/structure/closet/secure_closet/crew/research
