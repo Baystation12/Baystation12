@@ -54,7 +54,7 @@
 	suits["formal outfit"] = /obj/item/clothing/under/rank/internalaffairs/plain
 	suits["blue blazer"] = /obj/item/clothing/under/blazer
 	suits["black jumpskirt"] = /obj/item/clothing/under/blackjumpskirt
-	suits["kilt"] = /datum/gear/uniform/kilt
+	suits["kilt"] = /obj/item/clothing/under/kilt
 	suits["human resources dress"] = /obj/item/clothing/under/dress/dress_hr
 	suits["frontier overalls"] = /obj/item/clothing/under/frontier
 	gear_tweaks += new/datum/gear_tweak/path(suits)
@@ -89,7 +89,7 @@
 	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
 	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
 	dresses["sundress"] = /obj/item/clothing/under/sundress
-	dresses["white cheongsam"] = /datum/gear/uniform/cheongsam
+	dresses["white cheongsam"] = /obj/item/clothing/under/cheongsam
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
 /datum/gear/uniform/skirt
