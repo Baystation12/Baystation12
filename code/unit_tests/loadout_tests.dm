@@ -38,7 +38,8 @@ datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
 			for(var/path_name in p.valid_paths)
 				var/path_type = p.valid_paths[path_name]
 				if(!type_has_valid_icon_state(path_type))
-					LOADOUT_BAD_STATE_HELPER(G)
+					var/atom/A = path_type
+					log_unit_test("[G] - [path_type] ('[path_name]'): Did not find a gear_tweak's icon_state '[initial(A.icon_state)]' in the icon '[initial(A.icon)]'.")
 					failed = TRUE
 
 	if(failed)
