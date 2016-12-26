@@ -64,15 +64,21 @@
 	if(incapacitated())
 		return 0
 
-	if(istype(back,/obj/item/weapon/tank/jetpack))
-		var/obj/item/weapon/tank/jetpack/jet = back
-		if(jet.allow_thrust(0.01, src))
-			return 1
-		else
-			to_chat(usr, "<span class='warning'>\The [jet] is disabled.</span>")
-			return 0
+	if(Allow_Spacemove())
+		return 1
+
 	if(Check_Shoegrip())	//scaling hull with magboots
 		for(var/turf/simulated/T in trange(1,src))
 			if(T.density)
 				return 1
-	return 0
+
+/mob/living/silicon/robot/can_ztravel()
+	if(incapacitated() || is_dead())
+		return 0
+
+	if(Allow_Spacemove()) //Checks for active jetpack
+		return 1
+
+	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
+		if(T.density)
+			return 1
