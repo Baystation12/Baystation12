@@ -234,6 +234,7 @@
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the Commanding Officer and the Executive Officer"
+	selection_color = "#2f2f7f"
 	minimal_player_age = 21
 	economic_modifier = 8
 	ideal_character_age = 45

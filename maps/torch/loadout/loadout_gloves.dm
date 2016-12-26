@@ -14,6 +14,7 @@
 /datum/gear/gloves/latex
 	display_name = "gloves, latex"
 	path = /obj/item/clothing/gloves/latex
+	cost = 3
 
 /datum/gear/gloves/rainbow
 	display_name = "gloves, rainbow"
@@ -23,6 +24,7 @@
 /datum/gear/gloves/botany
 	display_name = "gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany
+	cost = 3
 	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Merchant")
 
 /datum/gear/gloves/evening
@@ -41,6 +43,7 @@
 /datum/gear/gloves/duty
 	display_name = "gloves, duty"
 	path = /obj/item/clothing/gloves/duty
+	cost = 3
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
@@ -48,3 +51,4 @@
 /datum/gear/gloves/work
 	display_name = "gloves, work"
 	path = /obj/item/clothing/gloves/thick
+	cost = 3

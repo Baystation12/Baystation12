@@ -5,6 +5,7 @@
 	slot = slot_shoes
 	sort_category = "Shoes and Footwear"
 
+/datum/gear/dressshoes
 	display_name = "dress shoes"
 	path = /obj/item/clothing/shoes/dress
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
