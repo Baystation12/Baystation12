@@ -26,7 +26,10 @@
 		return 0
 
 	var/turf/start = get_turf(src)
-	if(!destination.CanPass(src, start))
+	if(!start.CanZPass(src, direction))
+		to_chat(usr, "<span class='warning'>\The [start] is in the way.</span>")
+		return 0
+	if(!destination.CanZPass(src, direction))
 		to_chat(usr, "<span class='warning'>You bump against \the [destination].</span>")
 		return 0
 
