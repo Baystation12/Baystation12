@@ -120,8 +120,7 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
 		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/fleet/o6
+		/datum/mil_rank/fleet/o5
 	)
 
 /datum/mil_branch/marine_corps
@@ -170,8 +169,7 @@
 		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/marine/o3,
 		/datum/mil_rank/marine/o4,
-		/datum/mil_rank/marine/o5,
-		/datum/mil_rank/marine/o6
+		/datum/mil_rank/marine/o5
 	)
 
 /datum/mil_branch/civilian

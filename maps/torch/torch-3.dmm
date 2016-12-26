@@ -848,7 +848,7 @@
 "qp" = (/obj/structure/sign/atmosplaque,/turf/simulated/wall,/area/engineering/engine_eva)
 "qq" = (/turf/simulated/wall,/area/engineering/engine_eva)
 "qr" = (/obj/structure/closet/secure_closet/crew,/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
-"qs" = (/obj/structure/cable/cyan{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/landmark{name = "lightsout"},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
+"qs" = (/obj/structure/cable/cyan{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/landmark{name = "lightsout"},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "qt" = (/obj/machinery/atmospherics/pipe/simple/hidden/red,/obj/structure/cable/cyan{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/steel,/area/engineering/hallway)
 "qu" = (/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 6; icon_state = "intact"; tag = "icon-intact-f (SOUTHEAST)"},/turf/simulated/floor/tiled/steel,/area/engineering/hallway)
 "qv" = (/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{dir = 1; icon_state = "map"; tag = "icon-manifold-f (NORTH)"},/turf/simulated/floor/tiled,/area/engineering/hallway)

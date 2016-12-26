@@ -27,7 +27,7 @@
 
 /datum/gear/uniform/suit
 	display_name = "clothes selection"
-	path = /obj/item/clothing/under/lawyer/bluesuit
+	path = /obj/item/clothing/under/sl_suit
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/suit/New()
@@ -76,19 +76,19 @@
 
 /datum/gear/uniform/dress
 	display_name = "dress selection"
-	path = /obj/item/clothing/under/dress/dress_fire
+	path = /obj/item/clothing/under/sundress_white
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/uniform/dress/New()
 	..()
 	var/dresses = list()
+	dresses["white sundress"] = /obj/item/clothing/under/sundress_white
 	dresses["flame dress"] = /obj/item/clothing/under/dress/dress_fire
 	dresses["green dress"] = /obj/item/clothing/under/dress/dress_green
 	dresses["orange dress"] = /obj/item/clothing/under/dress/dress_orange
 	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
 	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
 	dresses["sundress"] = /obj/item/clothing/under/sundress
-	dresses["white sundress"] = /obj/item/clothing/under/sundress_white
 	dresses["white cheongsam"] = /datum/gear/uniform/cheongsam
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
