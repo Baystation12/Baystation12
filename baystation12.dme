@@ -2244,6 +2244,7 @@
 #include "maps\exodus\exodus_define.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\torch\torch_define.dm"
+#include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\maps.dm"
 #include "maps\~mapsystem\maps_areas.dm"
 #include "maps\~mapsystem\maps_unit_testing.dm"
