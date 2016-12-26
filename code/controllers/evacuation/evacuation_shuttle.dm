@@ -48,6 +48,8 @@
 		autopilot = 1
 		shuttle_launch_time = world.time + (evac_prep_delay/2)
 		evac_ready_time += shuttle.warmup_time*10
+		return 1
+	return 0
 
 /datum/evacuation_controller/pods/shuttle/cancel_evacuation()
 	if(..() && shuttle.moving_status != SHUTTLE_INTRANSIT)
