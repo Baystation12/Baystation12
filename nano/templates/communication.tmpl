@@ -25,7 +25,7 @@
 					{{:helper.link(value.option_text, null, {'action' : 'evac', 'target' : value.option_target}, ((value.needs_syscontrol && !data.net_syscont) || (!value.silicon_allowed && data.isAI)) ? 'disabled' : null, 'redButton')}}
 				</div>
 			{{empty}}
-				<div class=bad>No further options available.</div>
+				<div class=bad>No further options currently available.</div>
 			{{/for}}
 		</div>
 		

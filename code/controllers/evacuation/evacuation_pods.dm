@@ -39,12 +39,15 @@
 		priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_leaving_dock, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
 
 /datum/evacuation_controller/pods/available_evac_options()
+	if (is_on_cooldown())
+		return list()
 	if (is_idle())
-		return list(evacuation_options[EVAC_OPT_ABANDON_SHIP], evacuation_options[EVAC_OPT_BLUESPACE_JUMP])
-	else if (emergency_evacuation)
-		return list(evacuation_options[EVAC_OPT_CANCEL_ABANDON_SHIP])
-	else
-		return list(evacuation_options[EVAC_OPT_CANCEL_BLUESPACE_JUMP])
+		return list(evacuation_options[EVAC_OPT_BLUESPACE_JUMP], evacuation_options[EVAC_OPT_ABANDON_SHIP])
+	if (is_evacuating())
+		if (emergency_evacuation)
+			return list(evacuation_options[EVAC_OPT_CANCEL_ABANDON_SHIP])
+		else
+			return list(evacuation_options[EVAC_OPT_CANCEL_BLUESPACE_JUMP])
 
 /datum/evacuation_option/abandon_ship
 	option_text = "Abandon spacecraft"
@@ -98,9 +101,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_abandon_ship/execute(mob/user)
-	if (!ticker || !evacuation_controller)
-		return
-	if (evacuation_controller.cancel_evacuation())
+	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled abandonment of the spacecraft.")
 
 /datum/evacuation_option/cancel_bluespace_jump
@@ -111,9 +112,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_bluespace_jump/execute(mob/user)
-	if (!ticker || !evacuation_controller)
-		return
-	if (evacuation_controller.cancel_evacuation())
+	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled the bluespace jump.")
 
 #undef EVAC_OPT_ABANDON_SHIP
