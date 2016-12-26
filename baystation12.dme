@@ -139,6 +139,7 @@
 #include "code\controllers\evacuation\evacuation.dm"
 #include "code\controllers\evacuation\evacuation_eta.dm"
 #include "code\controllers\evacuation\evacuation_helpers.dm"
+#include "code\controllers\evacuation\evacuation_option.dm"
 #include "code\controllers\evacuation\evacuation_pods.dm"
 #include "code\controllers\evacuation\evacuation_predicate.dm"
 #include "code\controllers\evacuation\evacuation_shuttle.dm"
