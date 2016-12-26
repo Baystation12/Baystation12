@@ -397,6 +397,8 @@ var/global/datum/controller/occupations/job_master
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
 			job.apply_fingerprints(H)
 
+			if(H.char_rank && H.char_rank.accessory)
+				H.equip_to_slot_or_del(new H.char_rank.accessory, slot_tie)
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]
