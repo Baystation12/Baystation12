@@ -179,10 +179,10 @@
 /datum/storage_ui/default/proc/arrange_item_slots(var/rows, var/cols)
 	var/cx = 4
 	var/cy = 2+rows
-	boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
+	boxes.screen_loc = "4:[WORLD_ICON_SIZE/2],2:[WORLD_ICON_SIZE/2] to [4+cols]:[WORLD_ICON_SIZE/2],[2+rows]:[WORLD_ICON_SIZE/2]"
 
 	for(var/obj/O in storage.contents)
-		O.screen_loc = "[cx]:16,[cy]:16"
+		O.screen_loc = "[cx]:[WORLD_ICON_SIZE/2],[cy]:[WORLD_ICON_SIZE/2]"
 		O.maptext = ""
 		O.hud_layerise()
 		cx++
@@ -190,24 +190,24 @@
 			cx = 4
 			cy--
 
-	closer.screen_loc = "[4+cols+1]:16,2:16"
+	closer.screen_loc = "[4+cols+1]:[WORLD_ICON_SIZE/2],2:[WORLD_ICON_SIZE/2]"
 
 /datum/storage_ui/default/proc/space_orient_objs()
 
 	var/baseline_max_storage_space = DEFAULT_BOX_STORAGE //storage size corresponding to 224 pixels
-	var/storage_cap_width = 2 //length of sprite for start and end of the box representing total storage space
-	var/stored_cap_width = 4 //length of sprite for start and end of the box representing the stored item
-	var/storage_width = min( round( 224 * storage.max_storage_space/baseline_max_storage_space ,1) ,284) //length of sprite for the box representing total storage space
+	var/storage_cap_width = 4 //length of sprite for start and end of the box representing total storage space
+	var/stored_cap_width  = 8//length of sprite for start and end of the box representing the stored item
+	var/storage_width = min( round( 274 * storage.max_storage_space/baseline_max_storage_space ,1) ,334) //length of sprite for the box representing total storage space
 
 	storage_start.overlays.Cut()
 
 	var/matrix/M = matrix()
-	M.Scale((storage_width-storage_cap_width*2+3)/32,1)
+	M.Scale((storage_width-storage_cap_width*2+3)/WORLD_ICON_SIZE,1)
 	storage_continue.transform = M
 
-	storage_start.screen_loc = "4:16,2:16"
-	storage_continue.screen_loc = "4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],2:16"
-	storage_end.screen_loc = "4:[19+storage_width-storage_cap_width],2:16"
+	storage_start.screen_loc = "4:[WORLD_ICON_SIZE/2],2:[WORLD_ICON_SIZE/2]"
+	storage_continue.screen_loc = "4:[storage_cap_width+(storage_width-storage_cap_width*2)/2+2],2:[WORLD_ICON_SIZE/2]"
+	storage_end.screen_loc = "4:[19+storage_width-storage_cap_width],2:[WORLD_ICON_SIZE/2]"
 
 	var/startpoint = 0
 	var/endpoint = 1
@@ -220,8 +220,8 @@
 		var/matrix/M_continue = matrix()
 		var/matrix/M_end = matrix()
 		M_start.Translate(startpoint,0)
-		M_continue.Scale((endpoint-startpoint-stored_cap_width*2)/32,1)
-		M_continue.Translate(startpoint+stored_cap_width+(endpoint-startpoint-stored_cap_width*2)/2 - 16,0)
+		M_continue.Scale((endpoint-startpoint-stored_cap_width*2)/WORLD_ICON_SIZE,1)
+		M_continue.Translate(startpoint+stored_cap_width+(endpoint-startpoint-stored_cap_width*2)/2 - WORLD_ICON_SIZE/2,0)
 		M_end.Translate(endpoint-stored_cap_width,0)
 		stored_start.transform = M_start
 		stored_continue.transform = M_continue
@@ -230,11 +230,11 @@
 		storage_start.overlays += stored_continue
 		storage_start.overlays += stored_end
 
-		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
+		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:[WORLD_ICON_SIZE/2]"
 		O.maptext = ""
 		O.hud_layerise()
 
-	closer.screen_loc = "4:[storage_width+19],2:16"
+	closer.screen_loc = "4:[storage_width+19],2:[WORLD_ICON_SIZE/2]"
 
 // Sets up numbered display to show the stack size of each stored mineral
 // NOTE: numbered display is turned off currently because it's broken
