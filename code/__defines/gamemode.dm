@@ -48,6 +48,7 @@
 #define MODE_LOYALIST "loyalist"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
+#define MODE_TECHNOMANCER "technomancer"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 100
 

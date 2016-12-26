@@ -283,6 +283,16 @@
 		mymob.nutrition_icon.screen_loc = ui_nutrition
 		hud_elements |= mymob.nutrition_icon
 
+	mymob.wiz_instability_display = new /obj/screen/wizard/instability()
+	mymob.wiz_instability_display.screen_loc = ui_wiz_instability_display
+	mymob.wiz_instability_display.icon_state = "wiz_instability_none"
+	hud_elements |= mymob.wiz_instability_display
+
+	mymob.wiz_energy_display = new/obj/screen/wizard/energy()
+	mymob.wiz_energy_display.screen_loc = ui_wiz_energy_display
+	mymob.wiz_energy_display.icon_state = "wiz_energy"
+	hud_elements |= mymob.wiz_energy_display
+
 	mymob.pain = new /obj/screen( null )
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )

@@ -121,7 +121,9 @@ var/datum/antagonist/wizard/wizards
 
 //To batch-remove wizard spells. Linked to mind.dm.
 /mob/proc/spellremove()
-	for(var/spell/spell_to_remove in src.spell_list)
+	if(!mind || !mind.learned_spells)
+		return
+	for(var/spell/spell_to_remove in mind.learned_spells)
 		remove_spell(spell_to_remove)
 
 obj/item/clothing

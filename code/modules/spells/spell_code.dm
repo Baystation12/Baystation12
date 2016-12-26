@@ -76,7 +76,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			silenced = max(0,silenced-1)
 			sleep(1)
 		if(connected_button)
-			var/obj/screen/spell/S = connected_button
+			var/obj/screen/ability/spell/S = connected_button
 			if(!istype(S))
 				return
 			S.update_charge(1)
@@ -171,7 +171,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	for(var/atom/target in targets)
 		var/location = get_turf(target)
 		if(istype(target,/mob/living) && message)
-			to_chat(target, text("[message]"))
+			to_chat(target,text("[message]"))
 		if(sparks_spread)
 			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 			sparks.set_up(sparks_amt, 0, location) //no idea what the 0 is
@@ -193,9 +193,9 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/cast_check(skipcharge = 0,mob/user = usr) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
 
-	if(!(src in user.spell_list) && holder == user)
+	if(!(src in user.mind.learned_spells) && holder == user)
 		error("[user] utilized the spell '[src]' without having it.")
-		to_chat(user, "<span class='warning'>You shouldn't have this spell! Something's wrong.</span>")
+		to_chat(user,"<span class='warning'>You shouldn't have this spell! Something's wrong.</span>")
 		return 0
 
 	if(silenced > 0)
@@ -203,7 +203,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 	var/turf/user_turf = get_turf(user)
 	if(!user_turf)
-		to_chat(user, "<span class='warning'>You cannot cast spells in null space!</span>")
+		to_chat(user,"<span class='warning'>You cannot cast spells in null space!</span>")
 
 	if((spell_flags & Z2NOCAST) && (user_turf.z in using_map.admin_levels)) //Certain spells are not allowed on the centcomm zlevel
 		return 0
@@ -216,7 +216,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(istype(user, /mob/living/simple_animal) && holder == user)
 		var/mob/living/simple_animal/SA = user
 		if(SA.purge)
-			to_chat(SA, "<span class='warning'>The nullrod's power interferes with your own!</span>")
+			to_chat(SA,"<span class='warning'>The nullrod's power interferes with your own!</span>")
 			return 0
 
 	if(!src.check_charge(skipcharge, user)) //sees if we can cast based on charges alone
@@ -224,15 +224,15 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 	if(!(spell_flags & GHOSTCAST) && holder == user)
 		if(user.stat && !(spell_flags & STATALLOWED))
-			to_chat(usr, "Not when you're incapacitated.")
+			to_chat(usr,"Not when you're incapacitated.")
 			return 0
 
 		if(ishuman(user) && !(invocation_type in list(SpI_EMOTE, SpI_NONE)))
 			if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
-				to_chat(user, "Mmmf mrrfff!")
+				to_chat(user,"Mmmf mrrfff!")
 				return 0
 
-	var/spell/noclothes/spell = locate() in user.spell_list
+	var/spell/noclothes/spell = locate() in user.mind.learned_spells
 	if((spell_flags & NEEDSCLOTHES) && !(spell && istype(spell)) && holder == user)//clothes check
 		if(!user.wearing_wiz_garb())
 			return 0
@@ -244,11 +244,11 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		switch(charge_type)
 			if(Sp_RECHARGE)
 				if(charge_counter < charge_max)
-					to_chat(user, still_recharging_msg)
+					to_chat(user,still_recharging_msg)
 					return 0
 			if(Sp_CHARGES)
 				if(!charge_counter)
-					to_chat(user, "<span class='notice'>[name] has no charges left.</span>")
+					to_chat(user,"<span class='notice'>[name] has no charges left.</span>")
 					return 0
 	return 1
 

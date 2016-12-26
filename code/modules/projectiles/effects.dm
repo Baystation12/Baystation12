@@ -129,3 +129,24 @@
 //----------------------------
 /obj/effect/projectile/bullet/muzzle
 	icon_state = "muzzle_bullet"
+
+//----------------------------
+// Lightning beam
+//----------------------------
+/obj/effect/projectile/lightning/tracer
+	icon_state = "lightning"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00C6FF"
+
+/obj/effect/projectile/lightning/muzzle
+	icon_state = "muzzle_lightning"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00C6FF"
+
+/obj/effect/projectile/lightning/impact
+	icon_state = "impact_lightning"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00C6FF"
