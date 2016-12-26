@@ -50,6 +50,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/silver
 	pda_type = /obj/item/device/pda/heads/hop
 
+/decl/hierarchy/outfit/job/torch/crew/command/XO/marine
+	name = OUTFIT_JOB_NAME("Executive Officer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/command
+
+/decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
+	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/command
+
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	name = OUTFIT_JOB_NAME("Research Director - Torch")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
