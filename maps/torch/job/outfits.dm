@@ -451,13 +451,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/crew/supply
 	pda_type = /obj/item/device/pda/cargo
 
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
+/decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
 	name = OUTFIT_JOB_NAME("Deck Technician - Fleet")
 	uniform = /obj/item/clothing/under/utility/fleet/supply
 	head = /obj/item/clothing/head/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/marine
+/decl/hierarchy/outfit/job/torch/crew/supply/tech/marine
 	name = OUTFIT_JOB_NAME("Deck Technician - Marine")
 	uniform = /obj/item/clothing/under/utility/marine/supply
 	head = /obj/item/clothing/head/utility/marine

@@ -778,7 +778,7 @@
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet,
-		/datum/mil_branch/marine_corps /decl/hierarchy/outfit/job/torch/crew/service/crewman/marine
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/service/crewman/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e2,
