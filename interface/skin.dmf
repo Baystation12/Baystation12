@@ -644,6 +644,10 @@ macro "hotkeymode"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "B"
+		command = ".move-down"
+		is-disabled = false
+	elem 
 		name = "D+REP"
 		command = ".east"
 		is-disabled = false
@@ -719,6 +723,10 @@ macro "hotkeymode"
 		name = "T"
 		command = ".say"
 		is-disabled = false
+	elem 
+		name = "V"
+		command = ".move-upwards"
+		is-disabled = false
 	elem "w_key"
 		name = "W+REP"
 		command = ".north"
@@ -750,6 +758,34 @@ macro "hotkeymode"
 	elem 
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
+		is-disabled = false
+	elem 
+		name = "NUMPAD1"
+		command = "body-r-leg"
+		is-disabled = false
+	elem 
+		name = "NUMPAD2"
+		command = "body-groin"
+		is-disabled = false
+	elem 
+		name = "NUMPAD3"
+		command = "body-l-leg"
+		is-disabled = false
+	elem 
+		name = "NUMPAD4"
+		command = "body-r-arm"
+		is-disabled = false
+	elem 
+		name = "NUMPAD5"
+		command = "body-chest"
+		is-disabled = false
+	elem 
+		name = "NUMPAD6"
+		command = "body-l-arm"
+		is-disabled = false
+	elem 
+		name = "NUMPAD8"
+		command = "body-toggle-head"
 		is-disabled = false
 	elem 
 		name = "F1"
@@ -798,34 +834,6 @@ macro "hotkeymode"
 	elem 
 		name = "F12"
 		command = "F12"
-		is-disabled = false
-	elem 
-		name = "NUMPAD8"
-		command = "body-toggle-head"
-		is-disabled = false
-	elem 
-		name = "NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "NUMPAD3"
-		command = "body-l-leg"
 		is-disabled = false
 
 macro "borgmacro"
