@@ -39,7 +39,7 @@
 	berets["health service beret"] = /obj/item/clothing/head/beret/sol/gateway
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
-/datum/gear/head/beret/whitentsec
+/datum/gear/head/whitentberet
 	display_name = "beret, NanoTrasen security"
 	path = /obj/item/clothing/head/beret/guard
 	allowed_roles = list("Security Guard")
