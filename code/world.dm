@@ -174,6 +174,7 @@ var/world_topic_spam_protect_time = world.timeofday
 #define WORLD_TOPIC_ADMINMSG ("adminmsg" in input)
 #define WORLD_TOPIC_NOTES ("notes" in input)
 #define WORLD_TOPIC_AGE ("age" in input)
+#define WORLD_TOPIC_IP ("ip" in input)
 
 /world/Topic(T, addr, master, key)
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
@@ -433,6 +434,24 @@ var/world_topic_spam_protect_time = world.timeofday
 				return "Ckey not found"
 		else
 			return "Database connection failed or not set up"
+
+	if(WORLD_TOPIC_IP)
+		if(!key_valid)
+			return keySpamProtect(addr)
+
+		var/client/C
+		var/req_ckey = ckey(input["ip"])
+
+		for(var/client/K in clients)
+			if(K.ckey == req_ckey)
+				C = K
+				break
+		if(!C)
+			return "No client with that name on server"
+
+		var/address = C.address
+
+		return address
 
 
 /world/Reboot(var/reason)
