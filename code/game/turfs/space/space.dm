@@ -17,6 +17,17 @@
 	update_starlight()
 	..()
 
+/turf/space/initialize()
+	..()
+	if(!HasBelow(z))
+		return
+	var/turf/below = GetBelow(src)
+	if(istype(below, /turf/space))
+		return
+	if(!below.density && istype(below.loc, /area/space))
+		return
+	ChangeTurf(/turf/simulated/floor/airless)
+
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
 	for(var/obj/O in src)
