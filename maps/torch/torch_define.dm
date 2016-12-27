@@ -24,29 +24,6 @@
 	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
 	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
 
-	// Networks that will show up as options in the camera monitor program
-	station_networks = list(
-							NETWORK_CALYPSO,
-							NETWORK_ENGINE,
-							NETWORK_EXPEDITION,
-							NETWORK_FIRST_DECK,
-							NETWORK_FOURTH_DECK,
-							NETWORK_ROBOTS,
-							NETWORK_POD,
-							NETWORK_SECOND_DECK,
-							NETWORK_THIRD_DECK,
-							NETWORK_SUPPLY,
-							NETWORK_COMMAND,
-							NETWORK_ENGINEERING,
-							NETWORK_MEDICAL,
-							NETWORK_RESEARCH,
-							NETWORK_SECURITY,
-							NETWORK_PRISON,
-							NETWORK_ALARM_ATMOS,
-							NETWORK_ALARM_FIRE,
-							NETWORK_ALARM_POWER,
-							NETWORK_THUNDER,
-							)
 	evac_controller_type = /datum/evacuation_controller/pods
 
 /datum/map/torch/perform_map_generation()

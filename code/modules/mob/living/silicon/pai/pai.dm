@@ -10,7 +10,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
-	idcard_type = /obj/item/weapon/card/id
+	idcard = /obj/item/weapon/card/id
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null

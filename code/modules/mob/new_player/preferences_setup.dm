@@ -235,7 +235,7 @@ datum/preferences
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title
-		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], mannequin.char_branch)
 		update_icon = TRUE
 
 	if(update_icon)

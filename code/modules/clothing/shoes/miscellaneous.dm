@@ -27,7 +27,7 @@
 /obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat."
-	icon_state = "duty"
+	icon_state = "jungle"
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	item_flags = NOSLIP

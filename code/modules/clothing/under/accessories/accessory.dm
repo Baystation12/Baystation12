@@ -113,6 +113,10 @@
 	desc = "A neosilk clip-on tie. This one is disgusting."
 	icon_state = "horribletie"
 
+/obj/item/clothing/accessory/brown
+	name = "brown tie"
+	icon_state = "browntie"
+
 /obj/item/clothing/accessory/stethoscope
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
@@ -447,43 +451,43 @@
 	desc = "Insignia denoting the rank of Private."
 	icon_state = "marinerank_enlisted"
 
-/obj/item/clothing/accessory/rank/marine/e2
+/obj/item/clothing/accessory/rank/marine/enlisted/e2
 	name = "ranks (private first class)"
 	desc = "Insignia denoting the rank of Private First Class."
 
-/obj/item/clothing/accessory/rank/marine/e3
+/obj/item/clothing/accessory/rank/marine/enlisted/e3
 	name = "ranks (lance corporal)"
 	desc = "Insignia denoting the rank of Lance Corporal."
 
-/obj/item/clothing/accessory/rank/marine/e4
+/obj/item/clothing/accessory/rank/marine/enlisted/e4
 	name = "ranks (corporal)"
 	desc = "Insignia denoting the rank of Corporal."
 
-/obj/item/clothing/accessory/rank/marine/e5
+/obj/item/clothing/accessory/rank/marine/enlisted/e5
 	name = "ranks (sergeant)"
 	desc = "Insignia denoting the rank of Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e6
+/obj/item/clothing/accessory/rank/marine/enlisted/e6
 	name = "ranks (staff sergeant)"
 	desc = "Insignia denoting the rank of Staff Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e7
+/obj/item/clothing/accessory/rank/marine/enlisted/e7
 	name = "ranks (gunnery sergeant)"
 	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e8
+/obj/item/clothing/accessory/rank/marine/enlisted/e8
 	name = "ranks (master sergeant)"
 	desc = "Insignia denoting the rank of Master Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e8alt
+/obj/item/clothing/accessory/rank/marine/enlisted/e8alt
 	name = "ranks (first sergeant)"
 	desc = "Insignia denoting the rank of First Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e9
+/obj/item/clothing/accessory/rank/marine/enlisted/e9
 	name = "ranks (master gunnery sergeant)"
 	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e9alt
+/obj/item/clothing/accessory/rank/marine/enlisted/e9alt
 	name = "ranks (sergeant major)"
 	desc = "Insignia denoting the rank of Sergeant Major."
 

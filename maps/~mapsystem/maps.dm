@@ -31,6 +31,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/player_levels = list()  // Z-levels a character can typically reach
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
+	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
 
 	//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 	var/list/accessible_z_levels = list()
@@ -101,11 +102,15 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
 
+/datum/map/proc/get_network_access()
+	return
+
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
 	var/list/candidates = using_map.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)
-		return null
+		return current_z_level
 	return text2num(pickweight(candidates))
+

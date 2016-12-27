@@ -1,6 +1,3 @@
-/obj/machinery/camera/network/calypso
-	network = list(NETWORK_CALYPSO)
-
 /obj/machinery/camera/network/crescent
 	network = list(NETWORK_CRESCENT)
 

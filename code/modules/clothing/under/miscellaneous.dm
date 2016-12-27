@@ -276,6 +276,10 @@
 
 //dress
 /obj/item/clothing/under/dress
+	name = "dress"
+	desc = "A fancy dress."
+	icon_state = "dress_fire"
+	worn_state = "dress_fire"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/dress/dress_fire
