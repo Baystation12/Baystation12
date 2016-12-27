@@ -284,6 +284,11 @@
 	desc = "A sign labelling an area as a place where xenobiological entites are researched."
 	icon_state = "xenobio4"
 
+/obj/structure/sign/xenoarch
+	name = "\improper XENOARCHAEOLOGY"
+	desc = "A sign labelling an area as a place where xenoarchaeological finds are researched."
+	icon_state = "xenobio4"
+
 /obj/structure/sign/chemistry
 	name = "\improper CHEMISTRY"
 	desc = "A sign labelling an area containing chemical equipment."

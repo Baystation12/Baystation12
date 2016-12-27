@@ -211,21 +211,6 @@
 					prob(1);/obj/item/weapon/reagent_containers/syringe/drugs)
 
 
-/obj/random/soap
-	name = "Random Cleaning Supplies"
-	desc = "This is a random bar of soap. Soap! SOAP?! SOAP!!!"
-	icon = 'icons/obj/items.dmi'
-	icon_state = "soap"
-	item_to_spawn()
-		return pick(prob(3);/obj/item/weapon/soap,\
-					prob(2);/obj/item/weapon/soap/nanotrasen,\
-					prob(2);/obj/item/weapon/soap/deluxe,\
-					prob(1);/obj/item/weapon/soap/syndie,\
-					prob(1);/obj/item/weapon/soap/gold,\
-					prob(1);/obj/item/weapon/reagent_containers/spray/cleaner,\
-					prob(1);/obj/item/weapon/grenade/chem_grenade/cleaner)
-
-
 /obj/random/drinkbottle
 	name = "random drink"
 	desc = "This is a random drink."
@@ -444,38 +429,6 @@ obj/random/closet/item_to_spawn()
 				/obj/structure/closet/wardrobe/suit,\
 				/obj/structure/closet/wardrobe/orange)
 
-obj/random/obstruction //Large objects to block things off in maintenance
-	name = "random obstruction"
-	desc = "This is a random obstruction."
-	icon = 'icons/obj/cult.dmi'
-	icon_state = "cultgirder"
-	item_to_spawn()
-		return pick(/obj/structure/barricade,\
-					/obj/structure/girder,\
-					/obj/structure/girder/displaced,\
-					/obj/structure/girder/reinforced,\
-					/obj/structure/grille,\
-					/obj/structure/grille/broken,\
-					/obj/structure/foamedmetal,\
-					/obj/structure/inflatable/wall,\
-					/obj/structure/inflatable/door)
-
-
-obj/random/material //Random materials for building stuff
-	name = "random material"
-	desc = "This is a random material."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "sheet-metal"
-	item_to_spawn()
-		return pick(/obj/item/stack/material/steel{amount = 10},\
-					/obj/item/stack/material/glass{amount = 10},\
-					/obj/item/stack/material/glass/reinforced{amount = 10},\
-					/obj/item/stack/material/plastic{amount = 10},\
-					/obj/item/stack/material/wood{amount = 10},\
-					/obj/item/stack/material/cardboard{amount = 10},\
-					/obj/item/stack/rods{amount = 10},\
-					/obj/item/stack/material/plasteel{amount = 10})
-
 
 /obj/random/coin
 	name = "random coin"
@@ -545,90 +498,191 @@ obj/random/material //Random materials for building stuff
 					prob(1);/obj/item/device/suit_cooling_unit)
 
 
-/obj/random/maintenance //Clutter and loot for maintenance and away missions
-	name = "random maintenance item"
-	desc = "This is a random maintenance item."
+obj/random/material //Random materials for building stuff
+	name = "random material"
+	desc = "This is a random material."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "gift1"
+	icon_state = "sheet-metal"
 	item_to_spawn()
-		return pick(prob(300);/obj/random/tech_supply,\
-					prob(200);/obj/random/medical,\
-					prob(100);/obj/random/firstaid,\
-					prob(10);/obj/random/contraband,\
-					prob(50);/obj/random/action_figure,\
-					prob(50);/obj/random/plushie,\
-					prob(200);/obj/random/junk,\
-					prob(200);/obj/random/trash,\
-					prob(200);/obj/random/material,\
-					prob(100);/obj/random/coin,\
-					prob(50);/obj/random/toy,\
-					prob(100);/obj/random/tank,\
-					prob(50);/obj/random/soap,\
-					prob(60);/obj/random/drinkbottle,\
-					prob(10);/obj/random/loot,\
-					prob(500);/obj/random/maintenance/clean)
+		return pick(/obj/item/stack/material/steel{amount = 10},\
+					/obj/item/stack/material/glass{amount = 10},\
+					/obj/item/stack/material/glass/reinforced{amount = 10},\
+					/obj/item/stack/material/plastic{amount = 10},\
+					/obj/item/stack/material/wood{amount = 10},\
+					/obj/item/stack/material/cardboard{amount = 10},\
+					/obj/item/stack/rods{amount = 10},\
+					/obj/item/stack/material/plasteel{amount = 10},
+					/obj/item/stack/material/steel/fifty,\
+					/obj/item/stack/material/glass/fifty,\
+					/obj/item/stack/material/glass/reinforced{amount = 50},\
+					/obj/item/stack/material/plastic/fifty,\
+					/obj/item/stack/material/wood/fifty,\
+					/obj/item/stack/material/cardboard/fifty,\
+					/obj/item/stack/rods{amount = 50},\
+					/obj/item/stack/material/plasteel/fifty)
+
+/obj/random/soap
+	name = "Random Cleaning Supplies"
+	desc = "This is a random bar of soap. Soap! SOAP?! SOAP!!!"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "soap"
+	item_to_spawn()
+		return pick(prob(4);/obj/item/weapon/soap,\
+					prob(3);/obj/item/weapon/soap/nanotrasen,\
+					prob(3);/obj/item/weapon/soap/deluxe,\
+					prob(1);/obj/item/weapon/soap/syndie,\
+					prob(1);/obj/item/weapon/soap/gold,\
+					prob(2);/obj/item/weapon/reagent_containers/glass/rag ,\
+					prob(2);/obj/item/weapon/reagent_containers/spray/cleaner,\
+					prob(1);/obj/item/weapon/grenade/chem_grenade/cleaner)
 
 
-/obj/random/maintenance/clean
-/*Maintenance loot lists without the trash, for use inside things.
-Individual items to add to the maintenance list should go here, if you add
-something, make sure it's not in one of the other lists.*/
-	name = "random clean maintenance item"
-	desc = "This is a random clean maintenance item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift1"
+obj/random/obstruction //Large objects to block things off in maintenance
+	name = "random obstruction"
+	desc = "This is a random obstruction."
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "cultgirder"
 	item_to_spawn()
-		return pick(prob(3);/obj/item/device/flashlight/lantern,\
-					prob(2);/obj/item/device/flashlight/flare,\
-					prob(1);/obj/item/device/flashlight/pen,\
-					prob(5);/obj/item/weapon/storage/fancy/cigarettes,\
+		return pick(/obj/structure/barricade,\
+					/obj/structure/girder,\
+					/obj/structure/girder/displaced,\
+					/obj/structure/girder/reinforced,\
+					/obj/structure/grille,\
+					/obj/structure/grille/broken,\
+					/obj/structure/foamedmetal,\
+					/obj/item/weapon/caution,\
+					/obj/item/weapon/caution/cone,\
+					/obj/structure/inflatable/wall,\
+					/obj/structure/inflatable/door)
+
+
+/obj/random/advdevice
+	name = "random advanced device"
+	desc = "This is a random advanced device."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "game_kit"
+	item_to_spawn()
+		return pick(/obj/item/device/flashlight/lantern,\
+					/obj/item/device/flashlight/flare,\
+					/obj/item/device/flashlight/pen,\
+					/obj/item/device/toner,\
+					/obj/item/device/paicard,\
+					/obj/item/device/destTagger,\
+					/obj/item/weapon/beartrap,\
+					/obj/item/weapon/handcuffs,\
+					/obj/item/weapon/camera_assembly,\
+					/obj/item/device/camera,\
+					/obj/item/device/pda,\
+					/obj/item/weapon/card/emag_broken,\
+					/obj/item/device/radio/headset)
+
+
+/obj/random/smokes
+	name = "random smokeable"
+	desc = "This is a random smokeable item."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "Bpacket"
+	item_to_spawn()
+		return pick(prob(5);/obj/item/weapon/storage/fancy/cigarettes,\
 					prob(4);/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/killthroat,\
+					prob(1);/obj/item/weapon/storage/fancy/cigarettes/killthroat,\
 					prob(3);/obj/item/weapon/storage/fancy/cigarettes/luckystars,\
 					prob(3);/obj/item/weapon/storage/fancy/cigarettes/jerichos,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/menthols,\
+					prob(2);/obj/item/weapon/storage/fancy/cigarettes/menthols,\
 					prob(3);/obj/item/weapon/storage/fancy/cigarettes/carcinomas,\
-					prob(3);/obj/item/weapon/storage/fancy/cigarettes/professionals,\
+					prob(2);/obj/item/weapon/storage/fancy/cigarettes/professionals,\
 					prob(1);/obj/item/weapon/storage/fancy/cigar,\
+					prob(2);/obj/item/clothing/mask/smokable/cigarette,\
+					prob(2);/obj/item/clothing/mask/smokable/cigarette/menthol,\
 					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar,\
 					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar/cohiba,\
-					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar/havana,\
-					prob(2);/obj/item/clothing/mask/gas,\
-					prob(3);/obj/item/clothing/mask/gas/half,\
+					prob(1);/obj/item/clothing/mask/smokable/cigarette/cigar/havana)
+
+
+/obj/random/masks
+	name = "random mask"
+	desc = "This is a random face mask."
+	icon = 'icons/obj/clothing/masks.dmi'
+	icon_state = "gas_mask"
+	item_to_spawn()
+		return pick(prob(4);/obj/item/clothing/mask/gas,\
+					prob(5);/obj/item/clothing/mask/gas/half,\
 					prob(1);/obj/item/clothing/mask/gas/swat,\
 					prob(1);/obj/item/clothing/mask/gas/syndicate,\
-					prob(4);/obj/item/clothing/mask/breath,\
-					prob(2);/obj/item/clothing/mask/breath/medical,\
-					prob(2);/obj/item/clothing/mask/balaclava,\
-					prob(1);/obj/item/clothing/mask/balaclava/tactical,\
-					prob(2);/obj/item/clothing/mask/surgical,\
-					prob(2);/obj/item/weapon/reagent_containers/glass/rag ,\
-					prob(4);/obj/item/weapon/reagent_containers/food/snacks/liquidfood,\
-					prob(2);/obj/item/weapon/storage/secure/briefcase,\
+					prob(6);/obj/item/clothing/mask/breath,\
+					prob(4);/obj/item/clothing/mask/breath/medical,\
+					prob(3);/obj/item/clothing/mask/balaclava,\
+					prob(2);/obj/item/clothing/mask/balaclava/tactical,\
+					prob(4);/obj/item/clothing/mask/surgical)
+
+
+/obj/random/snack
+	name = "random snack"
+	desc = "This is a random snack item."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "sosjerky"
+	item_to_spawn()
+		return pick(/obj/item/weapon/reagent_containers/food/snacks/liquidfood,\
+					/obj/item/weapon/reagent_containers/food/snacks/candy,\
+					/obj/item/weapon/reagent_containers/food/drinks/dry_ramen,\
+					/obj/item/weapon/reagent_containers/food/snacks/chips,\
+					/obj/item/weapon/reagent_containers/food/snacks/sosjerky,\
+					/obj/item/weapon/reagent_containers/food/snacks/no_raisin,\
+					/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie,\
+					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers,\
+					/obj/item/weapon/reagent_containers/food/snacks/tastybread,\
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,\
+					/obj/item/weapon/reagent_containers/food/snacks/syndicake,\
+					/obj/item/weapon/reagent_containers/food/snacks/donut,\
+					/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,\
+					/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,\
+					/obj/item/pizzabox/meat,\
+					/obj/item/pizzabox/vegetable,\
+					/obj/item/pizzabox/margherita,\
+					/obj/item/pizzabox/mushroom,\
+					/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit,\
+					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks)
+
+
+/obj/random/storage
+	name = "random storage item"
+	desc = "This is a storage item."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "idOld"
+	item_to_spawn()
+		return pick(prob(2);/obj/item/weapon/storage/secure/briefcase,\
 					prob(4);/obj/item/weapon/storage/briefcase,\
-					prob(4);/obj/item/weapon/storage/briefcase/inflatable,\
+					prob(3);/obj/item/weapon/storage/briefcase/inflatable,\
 					prob(5);/obj/item/weapon/storage/backpack,\
 					prob(5);/obj/item/weapon/storage/backpack/satchel,\
-					prob(3);/obj/item/weapon/storage/backpack/dufflebag,\
+					prob(2);/obj/item/weapon/storage/backpack/dufflebag,\
 					prob(5);/obj/item/weapon/storage/box,\
 					prob(3);/obj/item/weapon/storage/box/donkpockets,\
-					prob(2);/obj/item/weapon/storage/box/sinpockets,\
-					prob(1);/obj/item/weapon/storage/box/cups,\
+					prob(1);/obj/item/weapon/storage/box/sinpockets,\
+					prob(2);/obj/item/weapon/storage/box/donut,\
+					prob(3);/obj/item/weapon/storage/box/cups,\
 					prob(4);/obj/item/weapon/storage/box/mousetraps,\
 					prob(3);/obj/item/weapon/storage/box/engineer,\
 					prob(2);/obj/item/weapon/storage/box/autoinjectors,\
 					prob(3);/obj/item/weapon/storage/box/beakers,\
 					prob(3);/obj/item/weapon/storage/box/syringes,\
 					prob(3);/obj/item/weapon/storage/box/gloves,\
-					prob(3);/obj/item/weapon/storage/wallet,\
+					prob(2);/obj/item/weapon/storage/box/large,\
+					prob(1);/obj/item/weapon/storage/wallet,\
 					prob(2);/obj/item/weapon/storage/belt/utility/full,\
 					prob(2);/obj/item/weapon/storage/belt/medical/emt,\
 					prob(2);/obj/item/weapon/storage/belt/medical,\
 					prob(2);/obj/item/weapon/storage/belt/security,\
-					prob(4);/obj/item/device/toner,\
-					prob(1);/obj/item/device/paicard,\
-					prob(1);/obj/item/device/destTagger,\
-					prob(3);/obj/item/clothing/shoes/workboots,\
+					prob(1);/obj/item/weapon/storage/belt/security/tactical)
+
+
+/obj/random/shoes
+	name = "random footwear"
+	desc = "This is a random pair of shoes."
+	icon = 'icons/obj/clothing/shoes.dmi'
+	icon_state = "boots"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/clothing/shoes/workboots,\
 					prob(3);/obj/item/clothing/shoes/jackboots,\
 					prob(1);/obj/item/clothing/shoes/swat,\
 					prob(1);/obj/item/clothing/shoes/combat,\
@@ -642,32 +696,63 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/clothing/shoes/tactical,\
 					prob(3);/obj/item/clothing/shoes/dress,\
 					prob(3);/obj/item/clothing/shoes/dress/white,\
-					prob(4);/obj/item/clothing/shoes/leather,\
-					prob(1);/obj/item/clothing/gloves/insulated,\
-					prob(4);/obj/item/clothing/gloves/thick,\
-					prob(3);/obj/item/clothing/gloves/thick/botany,\
-					prob(2);/obj/item/clothing/gloves/latex,\
-					prob(1);/obj/item/clothing/gloves/thick/swat,\
-					prob(1);/obj/item/clothing/gloves/thick/combat,\
+					prob(3);/obj/item/clothing/shoes/sandal,\
+					prob(4);/obj/item/clothing/shoes/brown,\
+					prob(4);/obj/item/clothing/shoes/red,\
+					prob(4);/obj/item/clothing/shoes/blue,\
+					prob(4);/obj/item/clothing/shoes/leather)
+
+
+/obj/random/gloves
+	name = "random gloves"
+	desc = "This is a random pair of gloves."
+	icon = 'icons/obj/clothing/gloves.dmi'
+	icon_state = "rainbow"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/clothing/gloves/insulated,\
+					prob(6);/obj/item/clothing/gloves/thick,\
+					prob(5);/obj/item/clothing/gloves/thick/botany,\
+					prob(4);/obj/item/clothing/gloves/latex,\
+					prob(3);/obj/item/clothing/gloves/thick/swat,\
+					prob(3);/obj/item/clothing/gloves/thick/combat,\
 					prob(5);/obj/item/clothing/gloves/white,\
-					prob(5);/obj/item/clothing/gloves/rainbow,\
-					prob(3);/obj/item/clothing/gloves/duty,\
-					prob(1);/obj/item/clothing/gloves/guards,\
-					prob(1);/obj/item/clothing/gloves/tactical,\
-					prob(2);/obj/item/clothing/gloves/insulated/cheap,\
-					prob(1);/obj/item/clothing/glasses/sunglasses,\
-					prob(3);/obj/item/clothing/glasses/meson,\
-					prob(2);/obj/item/clothing/glasses/meson/prescription,\
-					prob(4);/obj/item/clothing/glasses/science,\
-					prob(3);/obj/item/clothing/glasses/material,\
-					prob(1);/obj/item/clothing/glasses/welding,\
-					prob(2);/obj/item/clothing/glasses/hud/health,\
-					prob(2);/obj/item/clothing/glasses/hud/security,\
-					prob(1);/obj/item/clothing/glasses/sunglasses/sechud,\
+					prob(1);/obj/item/clothing/gloves/rainbow,\
+					prob(5);/obj/item/clothing/gloves/duty,\
+					prob(3);/obj/item/clothing/gloves/guards,\
+					prob(3);/obj/item/clothing/gloves/tactical,\
+					prob(5);/obj/item/clothing/gloves/insulated/cheap)
+
+
+/obj/random/glasses
+	name = "random eyewear"
+	desc = "This is a random pair of glasses."
+	icon = 'icons/obj/clothing/glasses.dmi'
+	icon_state = "leforge"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/clothing/glasses/sunglasses,\
+					prob(7);/obj/item/clothing/glasses/regular,\
+					prob(5);/obj/item/clothing/glasses/meson,\
+					prob(4);/obj/item/clothing/glasses/meson/prescription,\
+					prob(6);/obj/item/clothing/glasses/science,\
+					prob(5);/obj/item/clothing/glasses/material,\
+					prob(3);/obj/item/clothing/glasses/welding,\
+					prob(4);/obj/item/clothing/glasses/hud/health,\
+					prob(3);/obj/item/clothing/glasses/hud/health/prescription,\
+					prob(4);/obj/item/clothing/glasses/hud/security,\
+					prob(3);/obj/item/clothing/glasses/hud/security/prescription,\
+					prob(2);/obj/item/clothing/glasses/sunglasses/sechud,\
+					prob(3);/obj/item/clothing/glasses/sunglasses/sechud/toggle,\
 					prob(1);/obj/item/clothing/glasses/sunglasses/sechud/goggles,\
-					prob(1);/obj/item/clothing/glasses/tacgoggles,\
-					prob(2);/obj/item/clothing/head/helmet,\
-					prob(2);/obj/item/clothing/head/helmet/solgov,\
+					prob(1);/obj/item/clothing/glasses/tacgoggles)
+
+
+/obj/random/hat
+	name = "random headgear"
+	desc = "This is a random hat of some kind."
+	icon = 'icons/obj/clothing/hats.dmi'
+	icon_state = "tophat"
+	item_to_spawn()
+		return pick(prob(2);/obj/item/clothing/head/helmet,\
 					prob(1);/obj/item/clothing/head/helmet/tactical,\
 					prob(1);/obj/item/clothing/head/helmet/space/emergency,\
 					prob(1);/obj/item/clothing/head/bio_hood/general,\
@@ -676,19 +761,46 @@ something, make sure it's not in one of the other lists.*/
 					prob(4);/obj/item/clothing/head/hardhat/red,\
 					prob(4);/obj/item/clothing/head/hardhat/dblue,\
 					prob(3);/obj/item/clothing/head/ushanka,\
-					prob(2);/obj/item/clothing/head/welding,\
-					prob(3);/obj/item/clothing/head/utility/fleet,\
-					prob(3);/obj/item/clothing/head/utility/marine,\
-					prob(2);/obj/item/clothing/head/utility/marine/tan,\
-					prob(2);/obj/item/clothing/head/utility/marine/green,\
-					prob(1);/obj/item/clothing/head/soft/sol/expedition,\
-					prob(3);/obj/item/clothing/head/soft/sol/fleet,\
-					prob(4);/obj/item/clothing/suit/storage/hazardvest,\
+					prob(2);/obj/item/clothing/head/welding)
+
+
+/obj/random/solgov
+	name = "random solgov equipment"
+	desc = "This is a random piece of solgov equipment or clothing."
+	icon = 'icons/obj/clothing/hats.dmi'
+	icon_state = "helmet_sol"
+	item_to_spawn()
+		return pick(prob(4);/obj/item/clothing/head/utility/fleet,\
+					prob(4);/obj/item/clothing/head/utility/marine,\
+					prob(3);/obj/item/clothing/head/utility/marine/tan,\
+					prob(3);/obj/item/clothing/head/utility/marine/green,\
+					prob(2);/obj/item/clothing/head/soft/sol/expedition,\
+					prob(4);/obj/item/clothing/head/soft/sol/fleet,\
+					prob(1);/obj/item/clothing/head/helmet/solgov,\
+					prob(2);/obj/item/clothing/suit/armor/vest/solgov,\
+					prob(1);/obj/item/clothing/suit/storage/vest/solgov,\
+					prob(4);/obj/item/clothing/suit/storage/service/expeditionary,\
+					prob(2);/obj/item/clothing/under/utility/marine/tan,\
+					prob(2);/obj/item/clothing/under/utility/marine/green,\
+					prob(3);/obj/item/clothing/under/utility/marine,\
+					prob(5);/obj/item/clothing/under/utility,\
+					prob(3);/obj/item/clothing/under/utility/fleet,\
+					prob(4);/obj/item/clothing/under/pt/expeditionary,\
+					prob(2);/obj/item/clothing/under/pt/marine,\
+					prob(4);/obj/item/clothing/under/pt/fleet,\
+					prob(3);/obj/item/clothing/accessory/armband/bluegold)
+
+
+/obj/random/suit
+	name = "random suit"
+	desc = "This is a random piece of outerwear."
+	icon = 'icons/obj/clothing/suits.dmi'
+	icon_state = "fire"
+	item_to_spawn()
+		return pick(prob(4);/obj/item/clothing/suit/storage/hazardvest,\
 					prob(4);/obj/item/clothing/suit/storage/toggle/labcoat,\
 					prob(1);/obj/item/clothing/suit/space/emergency,\
 					prob(4);/obj/item/clothing/suit/armor/vest,\
-					prob(2);/obj/item/clothing/suit/armor/vest/solgov,\
-					prob(2);/obj/item/clothing/suit/storage/vest/solgov,\
 					prob(1);/obj/item/clothing/suit/storage/vest/tactical,\
 					prob(3);/obj/item/clothing/suit/storage/vest,\
 					prob(3);/obj/item/clothing/suit/storage/toggle/bomber,\
@@ -696,31 +808,39 @@ something, make sure it's not in one of the other lists.*/
 					prob(2);/obj/item/clothing/suit/surgicalapron,\
 					prob(3);/obj/item/clothing/suit/apron/overalls,\
 					prob(1);/obj/item/clothing/suit/bio_suit/general,\
-					prob(2);/obj/item/clothing/suit/storage/service/expeditionary,\
 					prob(3);/obj/item/clothing/suit/storage/toggle/hoodie/black,\
 					prob(3);/obj/item/clothing/suit/storage/toggle/brown_jacket,\
 					prob(3);/obj/item/clothing/suit/storage/leather_jacket,\
-					prob(4);/obj/item/clothing/suit/apron,\
-					prob(2);/obj/item/clothing/under/syndicate/tacticool,\
-					prob(2);/obj/item/clothing/under/utility/marine/tan,\
-					prob(2);/obj/item/clothing/under/utility/marine/green,\
-					prob(3);/obj/item/clothing/under/utility/marine,\
-					prob(4);/obj/item/clothing/under/utility,\
-					prob(4);/obj/item/clothing/under/utility/fleet,\
+					prob(4);/obj/item/clothing/suit/apron)
+
+
+/obj/random/clothing
+	name = "random clothes"
+	desc = "This is a random piece of clothing."
+	icon = 'icons/obj/clothing/uniforms.dmi'
+	icon_state = "grey"
+	item_to_spawn()
+		return pick(prob(2);/obj/item/clothing/under/syndicate/tacticool,\
 					prob(1);/obj/item/clothing/under/syndicate/combat,\
 					prob(4);/obj/item/clothing/under/hazard,\
 					prob(4);/obj/item/clothing/under/sterile,\
 					prob(1);/obj/item/clothing/under/pt,\
-					prob(3);/obj/item/clothing/under/pt/expeditionary,\
-					prob(3);/obj/item/clothing/under/pt/marine,\
-					prob(4);/obj/item/clothing/under/pt/fleet,\
 					prob(2);/obj/item/clothing/under/pants/camo,\
 					prob(2);/obj/item/clothing/under/frontier,\
 					prob(2);/obj/item/clothing/under/harness,\
 					prob(2);/obj/item/clothing/under/rank/medical/paramedic,\
 					prob(2);/obj/item/clothing/under/overalls,\
-					prob(1);/obj/item/clothing/under/tactical,\
-					prob(3);/obj/item/clothing/accessory/storage/webbing,\
+					prob(2);/obj/item/clothing/ears/earmuffs,\
+					prob(1);/obj/item/clothing/under/tactical)
+
+
+/obj/random/accessory
+	name = "random accessory"
+	desc = "This is a random utility accessory."
+	icon = 'icons/obj/clothing/ties.dmi'
+	icon_state = "horribletie"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/clothing/accessory/storage/webbing,\
 					prob(3);/obj/item/clothing/accessory/storage/webbing_large,\
 					prob(2);/obj/item/clothing/accessory/storage/black_vest,\
 					prob(2);/obj/item/clothing/accessory/storage/brown_vest,\
@@ -730,90 +850,151 @@ something, make sure it's not in one of the other lists.*/
 					prob(1);/obj/item/clothing/accessory/holster/hip,\
 					prob(1);/obj/item/clothing/accessory/holster/waist,\
 					prob(1);/obj/item/clothing/accessory/holster/armpit,\
-					prob(2);/obj/item/clothing/accessory/stethoscope,\
-					prob(3);/obj/item/clothing/ears/earmuffs,\
-					prob(4);/obj/item/weapon/spacecash/bundle/c1,\
+					prob(3);/obj/item/clothing/accessory/kneepads,\
+					prob(2);/obj/item/clothing/accessory/stethoscope)
+
+
+/obj/random/cash
+	name = "random currency"
+	desc = "LOADSAMONEY!"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "spacecash1"
+	item_to_spawn()
+		return pick(prob(4);/obj/item/weapon/spacecash/bundle/c1,\
 					prob(3);/obj/item/weapon/spacecash/bundle/c10,\
 					prob(3);/obj/item/weapon/spacecash/bundle/c20,\
 					prob(2);/obj/item/weapon/spacecash/bundle/c50,\
 					prob(2);/obj/item/weapon/spacecash/bundle/c100,\
-					prob(1);/obj/item/weapon/spacecash/bundle/c1000,\
-					prob(1);/obj/item/weapon/beartrap,\
-					prob(2);/obj/item/weapon/handcuffs,\
-					prob(3);/obj/item/weapon/camera_assembly,\
-					prob(4);/obj/item/weapon/caution,\
-					prob(4);/obj/item/weapon/caution/cone,\
-					prob(1);/obj/item/weapon/card/emag_broken,\
-					prob(2);/obj/item/device/camera,\
-					prob(3);/obj/item/device/pda,\
-					prob(3);/obj/item/device/radio/headset)
+					prob(1);/obj/item/weapon/spacecash/bundle/c1000)
 
+
+/obj/random/maintenance/solgov //can be used for loot on non-torch maps, so not a torch item
+	name = "random maintenance item"
+	desc = "This is a random maintenance item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift1"
+	item_to_spawn()
+		return pick(prob(400);/obj/random/junk,\
+					prob(400);/obj/random/trash,\
+					prob(500);/obj/random/maintenance/solgov/clean)
+
+
+/obj/random/maintenance/solgov/clean
+	name = "random maintenance item"
+	desc = "This is a random maintenance item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift2"
+	item_to_spawn()
+		return pick(
+					prob(300);/obj/random/solgov,\
+					prob(80000);/obj/random/maintenance/clean)
+
+
+/obj/random/maintenance //Clutter and loot for maintenance and away missions
+	name = "random maintenance item"
+	desc = "This is a random maintenance item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift1"
+	item_to_spawn()
+		return pick(prob(400);/obj/random/junk,\
+					prob(400);/obj/random/trash,\
+					prob(500);/obj/random/maintenance/clean)
+
+/obj/random/maintenance/clean
+/*Maintenance loot lists without the trash, for use inside things.
+Individual items to add to the maintenance list should go here, if you add
+something, make sure it's not in one of the other lists.*/
+	name = "random clean maintenance item"
+	desc = "This is a random clean maintenance item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift2"
+	item_to_spawn()
+		return pick(prob(1000);/obj/random/tech_supply,\
+					prob(400);/obj/random/medical,\
+					prob(800);/obj/random/medical/lite,\
+					prob(200);/obj/random/firstaid,\
+					prob(500);/obj/random/powercell,\
+					prob(500);/obj/random/technology_scanner,\
+					prob(800);/obj/random/bomb_supply,\
+					prob(10);/obj/random/contraband,\
+					prob(20);/obj/random/action_figure,\
+					prob(20);/obj/random/plushie,\
+					prob(400);/obj/random/material,\
+					prob(50);/obj/random/coin,\
+					prob(20);/obj/random/toy,\
+					prob(200);/obj/random/tank,\
+					prob(50);/obj/random/soap,\
+					prob(50);/obj/random/drinkbottle,\
+					prob(10);/obj/random/loot,\
+					prob(500);/obj/random/advdevice,\
+					prob(300);/obj/random/smokes,\
+					prob(100);/obj/random/masks,\
+					prob(600);/obj/random/snack,\
+					prob(300);/obj/random/storage,\
+					prob(200);/obj/random/shoes,\
+					prob(100);/obj/random/gloves,\
+					prob(200);/obj/random/glasses,\
+					prob(100);/obj/random/hat,\
+					prob(200);/obj/random/suit,\
+					prob(300);/obj/random/clothing,\
+					prob(200);/obj/random/accessory,\
+					prob(100);/obj/random/cash)
 
 /obj/random/loot /*Better loot for away missions and salvage */
 	name = "random loot"
 	desc = "This is some random loot."
 	icon = 'icons/obj/items.dmi'
-	icon_state = "gift2"
+	icon_state = "gift3"
 	item_to_spawn()
-		return pick(prob(4);/obj/random/powercell,\
-					prob(4);/obj/random/technology_scanner,\
-					prob(4);/obj/random/bomb_supply,\
-					prob(4);/obj/item/stack/cable_coil,\
-					prob(3);/obj/random/toolbox,\
-					prob(4);/obj/random/tool,\
-					prob(4);/obj/random/medical,\
-					prob(3);/obj/random/firstaid,\
-					prob(2);/obj/random/contraband,\
-					prob(4);/obj/random/material,\
-					prob(3);/obj/random/coin,\
-					prob(3);/obj/random/tank,\
-					prob(1);/obj/random/energy,\
-					prob(1);/obj/random/projectile,\
-					prob(1);/obj/random/voidhelmet,\
-					prob(1);/obj/random/voidsuit,\
-					prob(1);/obj/random/hardsuit,\
-					prob(1);/obj/random/maintenance/clean,\
-					prob(1);/obj/item/clothing/mask/muzzle,\
-					prob(3);/obj/item/clothing/mask/gas/vox,\
-					prob(2);/obj/item/clothing/mask/gas/syndicate,\
-					prob(1);/obj/item/clothing/glasses/night,\
+		return pick(
+
+					prob(10);/obj/random/energy,\
+					prob(10);/obj/random/projectile,\
+					prob(10);/obj/random/voidhelmet,\
+					prob(10);/obj/random/voidsuit,\
+					prob(10);/obj/random/hardsuit,\
+					prob(100);/obj/random/maintenance/clean,\
+					prob(7);/obj/item/clothing/mask/muzzle,\
+					prob(8);/obj/item/clothing/mask/gas/vox,\
+					prob(10);/obj/item/clothing/mask/gas/syndicate,\
+					prob(3);/obj/item/clothing/glasses/night,\
 					prob(1);/obj/item/clothing/glasses/thermal,\
-					prob(2);/obj/item/clothing/glasses/welding/superior,\
+					prob(7);/obj/item/clothing/glasses/welding/superior,\
 					prob(4);/obj/item/clothing/head/collectable/petehat,\
-					prob(2);/obj/item/clothing/suit/storage/vest/merc,\
-					prob(1);/obj/item/clothing/suit/straight_jacket,\
-					prob(2);/obj/item/clothing/head/helmet/merc,\
-					prob(2);/obj/item/stack/material/diamond{amount = 10},\
-					prob(2);/obj/item/stack/material/glass/phoronrglass{amount = 10},\
-					prob(3);/obj/item/stack/material/marble{amount = 10},\
-					prob(2);/obj/item/stack/material/phoron{amount = 10},\
-					prob(2);/obj/item/stack/material/gold{amount = 10},\
-					prob(2);/obj/item/stack/material/silver{amount = 10},\
-					prob(2);/obj/item/stack/material/osmium{amount = 10},\
-					prob(3);/obj/item/stack/material/platinum{amount = 10},\
-					prob(2);/obj/item/stack/material/tritium{amount = 10},\
-					prob(2);/obj/item/stack/material/mhydrogen{amount = 10},\
-					prob(3);/obj/item/stack/material/plasteel{amount = 10},\
-					prob(2);/obj/item/weapon/storage/box/monkeycubes,\
-					prob(1);/obj/item/weapon/storage/box/monkeycubes/neaeracubes,\
-					prob(1);/obj/item/weapon/storage/box/monkeycubes/stokcubes,\
-					prob(1);/obj/item/weapon/storage/box/monkeycubes/farwacubes,\
-					prob(1);/obj/item/weapon/storage/firstaid/surgery,\
-					prob(2);/obj/item/weapon/storage/belt/security/tactical,\
+					prob(3);/obj/item/clothing/suit/storage/vest/merc,\
+					prob(6);/obj/item/clothing/suit/straight_jacket,\
+					prob(3);/obj/item/clothing/head/helmet/merc,\
+					prob(7);/obj/item/stack/material/diamond{amount = 10},\
+					prob(7);/obj/item/stack/material/glass/phoronrglass{amount = 10},\
+					prob(8);/obj/item/stack/material/marble{amount = 10},\
+					prob(7);/obj/item/stack/material/phoron{amount = 10},\
+					prob(7);/obj/item/stack/material/gold{amount = 10},\
+					prob(7);/obj/item/stack/material/silver{amount = 10},\
+					prob(7);/obj/item/stack/material/osmium{amount = 10},\
+					prob(8);/obj/item/stack/material/platinum{amount = 10},\
+					prob(7);/obj/item/stack/material/tritium{amount = 10},\
+					prob(6);/obj/item/stack/material/mhydrogen{amount = 10},\
+					prob(9);/obj/item/stack/material/plasteel{amount = 10},\
+					prob(5);/obj/item/weapon/storage/box/monkeycubes,\
+					prob(4);/obj/item/weapon/storage/box/monkeycubes/neaeracubes,\
+					prob(4);/obj/item/weapon/storage/box/monkeycubes/stokcubes,\
+					prob(4);/obj/item/weapon/storage/box/monkeycubes/farwacubes,\
+					prob(4);/obj/item/weapon/storage/firstaid/surgery,\
+					prob(1);/obj/item/weapon/cell/infinite,\
 					prob(2);/obj/item/weapon/archaeological_find,\
 					prob(1);/obj/machinery/artifact,\
 					prob(2);/obj/item/device/multitool/hacktool,\
-					prob(2);/obj/item/weapon/surgicaldrill,\
-					prob(2);/obj/item/weapon/FixOVein,\
-					prob(2);/obj/item/weapon/retractor,\
-					prob(2);/obj/item/weapon/hemostat,\
-					prob(2);/obj/item/weapon/cautery,\
-					prob(2);/obj/item/weapon/bonesetter,\
-					prob(2);/obj/item/weapon/bonegel,\
-					prob(2);/obj/item/weapon/circular_saw,\
-					prob(2);/obj/item/weapon/scalpel,\
-					prob(2);/obj/item/weapon/melee/baton/loaded,\
-					prob(1);/obj/item/device/radio/headset/syndicate)
+					prob(7);/obj/item/weapon/surgicaldrill,\
+					prob(7);/obj/item/weapon/FixOVein,\
+					prob(7);/obj/item/weapon/retractor,\
+					prob(7);/obj/item/weapon/hemostat,\
+					prob(7);/obj/item/weapon/cautery,\
+					prob(7);/obj/item/weapon/bonesetter,\
+					prob(7);/obj/item/weapon/bonegel,\
+					prob(7);/obj/item/weapon/circular_saw,\
+					prob(7);/obj/item/weapon/scalpel,\
+					prob(9);/obj/item/weapon/melee/baton/loaded,\
+					prob(6);/obj/item/device/radio/headset/syndicate)
 
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"

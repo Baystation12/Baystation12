@@ -50,6 +50,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/silver
 	pda_type = /obj/item/device/pda/heads/hop
 
+/decl/hierarchy/outfit/job/torch/crew/command/XO/marine
+	name = OUTFIT_JOB_NAME("Executive Officer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/command
+
+/decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
+	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/command
+
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	name = OUTFIT_JOB_NAME("Research Director - Torch")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
@@ -98,7 +106,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/internalaffairs/plain/nt
 	suit = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
 	shoes = /obj/item/clothing/shoes/laceup
-	id_type = /obj/item/weapon/card/id/torch/research/liaison
+	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
 	pda_type = /obj/item/device/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/representative
@@ -356,12 +364,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard
 	name = OUTFIT_JOB_NAME("Security Guard")
-	uniform = /obj/item/clothing/under/rank/security2 //placeholder for full red/white ensemble
-	gloves = /obj/item/clothing/gloves/thick
+	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
-	id_type = /obj/item/weapon/card/id/torch/research/guard
+	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
 	pda_type = /obj/item/device/pda/security
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
@@ -387,7 +394,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda
 	id_type = /obj/item/weapon/card/id/torch/passenger
 
-/*
+
 /decl/hierarchy/outfit/job/torch/merchant
 	name = OUTFIT_JOB_NAME("Merchant - Torch")
 	uniform = /obj/item/clothing/under/color/black
@@ -395,4 +402,4 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/device/pda
 	id_type = /obj/item/weapon/card/id/torch/merchant
-*/
+

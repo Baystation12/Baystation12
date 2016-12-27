@@ -23,7 +23,7 @@
 /obj/structure/closet/emcloset/New()
 	..()
 
-	switch (pickweight(list("small" = 55, "aid" = 25, "tank" = 10, "both" = 10)))
+	switch (pickweight(list("small" = 50, "aid" = 25, "tank" = 10, "large" = 5, "both" = 10)))
 		if ("small")
 			new /obj/item/weapon/tank/emergency/oxygen(src)
 			new /obj/item/weapon/tank/emergency/oxygen(src)
@@ -43,6 +43,11 @@
 			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
 			new /obj/item/clothing/mask/gas/half(src)
 			new /obj/item/clothing/mask/gas/half(src)
+		if ("large")
+			new /obj/item/weapon/tank/emergency/oxygen/double(src)
+			new /obj/item/weapon/tank/emergency/oxygen/double(src)
+			new /obj/item/clothing/mask/gas(src)
+			new /obj/item/clothing/mask/gas(src)
 		if ("both")
 			new /obj/item/weapon/storage/toolbox/emergency(src)
 			new /obj/item/weapon/tank/emergency/oxygen/engi(src)
@@ -235,7 +240,7 @@
 /obj/structure/closet/medical_wall/filled
 	name = "first-aid closet"
 	desc = "It's wall-mounted storage unit for first aid supplies."
-	
+
 	will_contain = list(
 		/obj/random/firstaid,
 		/obj/random/medical/lite = 12

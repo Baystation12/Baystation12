@@ -149,3 +149,8 @@
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/head/beret/guard
+	name = "corporate security beret"
+	desc = "A white beret adorned with the crest of NanoTrasen. For security guards that are more inclined towards style than safety."
+	icon_state = "beret_corporate_whitered"
+

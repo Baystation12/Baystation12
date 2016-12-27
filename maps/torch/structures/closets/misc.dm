@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/liaison
-	name = "/improper NanoTrasen liaison's locker"
-	req_access = list(access_lawyer)
+	name = "\improper NanoTrasen liaison's locker"
+	req_access = list(access_liaison)
 	icon_state = "nanottwo1"
 	icon_closed = "nanottwo"
 	icon_locked = "nanottwo1"
@@ -19,17 +19,14 @@
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/clothing/shoes/laceup,
-		/obj/item/clothing/under/rank/internalaffairs,
-		/obj/item/clothing/suit/storage/toggle/internalaffairs,
+		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
+		/obj/item/clothing/suit/storage/toggle/internalaffairs/plain,
 		/obj/item/clothing/glasses/sunglasses/big
 	)
 
-/obj/structure/closet/secure_closet/liaison/New()
-	..()
-
 /obj/structure/closet/secure_closet/representative
-	name = "/improper Sol Central Government representative's locker"
-	req_access = list(access_lawyer)
+	name = "\improper Sol Central Government representative's locker"
+	req_access = list(access_representative)
 	icon_state = "solsecure1"
 	icon_closed = "solsecure"
 	icon_locked = "solsecure1"
@@ -48,7 +45,7 @@
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/clothing/shoes/laceup,
-		/obj/item/clothing/under/rank/internalaffairs/plain,
+		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
 		/obj/item/clothing/suit/storage/toggle/internalaffairs/plain,
 		/obj/item/clothing/glasses/sunglasses/big
 	)
@@ -57,6 +54,7 @@
 
 /obj/structure/closet/secure_closet/crew
 	name = "crew equipment locker"
+	req_access = list(access_solgov_crew)
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"
@@ -68,11 +66,12 @@
 		/obj/item/device/radio,
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
-		/obj/random/maintenance/clean = 3
+		/obj/item/weapon/storage/box
 	)
 
 /obj/structure/closet/secure_closet/crew/research
 	name = "research equipment locker"
+	req_access = list(access_nanotrasen)
 	icon_state = "nanot1"
 	icon_closed = "nanot"
 	icon_locked = "nanot1"

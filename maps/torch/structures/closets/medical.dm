@@ -34,7 +34,8 @@
 		/obj/item/clothing/suit/storage/vest/solgov/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
-		/obj/item/weapon/folder/white
+		/obj/item/weapon/folder/white,
+		/obj/item/weapon/storage/firstaid/regular
 	)
 
 /obj/structure/closet/secure_closet/CMO_torch/New()
@@ -64,13 +65,32 @@
 
 /obj/structure/closet/secure_closet/medical_torchsenior
 	name = "senior physician's locker"
-	req_access = list(access_medical_equip)
+	req_access = list(access_senmed)
 	icon_state = "securesenmed1"
 	icon_closed = "securesenmed"
 	icon_locked = "securesenmed1"
 	icon_opened = "securesenmedopen"
 	icon_broken = "securesenmedbroken"
 	icon_off = "securesenmedoff"
+
+	will_contain = list(
+		/obj/item/clothing/under/sterile,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
+		/obj/item/clothing/suit/surgicalapron,
+		/obj/item/clothing/shoes/white,
+		/obj/item/weapon/cartridge/cmo,
+		/obj/item/device/radio/headset/headset_med,
+		/obj/item/taperoll/medical,
+		/obj/item/weapon/storage/belt/medical,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/device/healthanalyzer,
+		/obj/item/clothing/accessory/stethoscope,
+		/obj/item/device/flashlight/pen,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/device/flash,
+		/obj/item/device/megaphone,
+		/obj/item/weapon/storage/firstaid/regular
+	)
 
 /obj/structure/closet/secure_closet/medical_torchsenior/New()
 	..()
@@ -97,21 +117,6 @@
 			if ("navyblue")
 				new /obj/item/clothing/under/rank/medical/navyblue(src)
 				new /obj/item/clothing/head/surgery/navyblue(src)
-	new /obj/item/clothing/under/sterile(src)
-	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
-	new /obj/item/clothing/suit/surgicalapron(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/weapon/cartridge/cmo(src)
-	new /obj/item/device/radio/headset/headset_med(src)
-	new /obj/item/taperoll/medical(src)
-	new /obj/item/weapon/storage/belt/medical(src)
-	new /obj/item/clothing/mask/surgical(src)
-	new /obj/item/device/healthanalyzer(src)
-	new /obj/item/clothing/accessory/stethoscope(src)
-	new /obj/item/device/flashlight/pen(src)
-	new /obj/item/clothing/glasses/hud/health(src)
-	new /obj/item/device/flash(src)
-	new /obj/item/device/megaphone(src)
 
 /obj/structure/closet/secure_closet/medical_torch
 	name = "physician's locker"
@@ -137,7 +142,8 @@
 		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/weapon/storage/box/autoinjectors,
 		/obj/item/device/healthanalyzer,
-		/obj/item/clothing/glasses/hud/health
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/storage/firstaid/regular
 	)
 
 /obj/structure/closet/secure_closet/medical_torch/New()
@@ -151,7 +157,7 @@
 
 /obj/structure/closet/secure_closet/medical_contractor
 	name = "medical contractor's locker"
-	req_access = list(access_medical_equip)
+	req_access = list(access_medical)
 	icon_state = "securemed1"
 	icon_closed = "securemed"
 	icon_locked = "securemed1"
@@ -172,7 +178,7 @@
 		/obj/item/clothing/glasses/hud/health
 	)
 
-/obj/structure/closet/secure_closet/medical3_contractor/New()
+/obj/structure/closet/secure_closet/medical_contractor/New()
 	..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/medic(src)

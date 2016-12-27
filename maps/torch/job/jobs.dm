@@ -38,8 +38,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/XO
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet,
-		/datum/mil_branch/marine_corps
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/XO/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o5,
@@ -98,16 +98,12 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/cmo
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet,
-		/datum/mil_branch/marine_corps
+		/datum/mil_branch/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/marine/o4,
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/marine/o3,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/marine/o2
+		/datum/mil_rank/fleet/o2
 	)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -178,12 +174,12 @@
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_emergency_armory, access_gun)
+			            access_solgov_crew, access_gun)
 	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_emergency_armory, access_gun)
+			            access_solgov_crew, access_gun)
 
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
@@ -238,6 +234,7 @@
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the Commanding Officer and the Executive Officer"
+	selection_color = "#2f2f7f"
 	minimal_player_age = 21
 	economic_modifier = 8
 	ideal_character_age = 45
@@ -563,8 +560,8 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_medical, access_morgue, access_surgery, access_medical_equip)
-	minimal_access = list(access_medical, access_morgue, access_surgery, access_medical_equip)
+	access = list(access_medical, access_morgue, access_surgery)
+	minimal_access = list(access_medical, access_morgue, access_surgery)
 
 
 /datum/job/virologist
@@ -917,7 +914,7 @@
 		/datum/mil_rank/civ/nt
 	)
 
-/* Leaving this in for consultation with Welp, not sure a better way to set this up
+
 /datum/job/merchant
 	title = "merchant"
 	faction = "None"
@@ -932,4 +929,4 @@
 
 	access = list(access_merchant)
 	minimal_access = list(access_merchant)
-*/
+

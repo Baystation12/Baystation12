@@ -26,7 +26,7 @@
 	item_state = "gold_id"
 	registered_name = "Commanding Officer"
 	assignment = "Commanding Officer"
-/obj/item/weapon/card/id/captains_spare/New()
+/obj/item/weapon/card/id/torch/captains_spare/New()
 	access = get_all_station_access()
 	..()
 
@@ -149,16 +149,15 @@
 /obj/item/weapon/card/id/torch/passenger/research/mining
 	job_access_type = /datum/job/mining
 
-/obj/item/weapon/card/id/torch/research/guard
+/obj/item/weapon/card/id/torch/passenger/research/guard
 	job_access_type = /datum/job/guard
 
-/obj/item/weapon/card/id/torch/research/liaison
+/obj/item/weapon/card/id/torch/passenger/research/liaison
 	job_access_type = /datum/job/liaison
 
 //Merchant
-/*
 /obj/item/weapon/card/id/torch/merchant
 	desc = "An identification card issued to Merchants, indicating their right to sell and buy goods."
 	icon_state = "trader"
 	job_access_type = /datum/job/merchant
-*/
+
