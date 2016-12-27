@@ -1,0 +1,6 @@
+author: Legius
+
+delete-after: True
+
+changes: 
+  - maptweak: "Added missing emergency shutters to command section."
