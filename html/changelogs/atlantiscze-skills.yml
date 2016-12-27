@@ -1,0 +1,8 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Skill descriptions in character setup now contain more detailed information on differences between varying skill levels."
+  - tweak: "Command, Cooking and Botany skills are now secondary. Engines skill is no longer secondary. Existing character setups shouldn't be affected, but it is still advised to check that your skills are set correctly."
+  - tweak: "The skills in character setup have been reordered a bit."

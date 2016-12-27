@@ -72,7 +72,6 @@ datum/preferences
 	var/alternate_option = 2
 
 	var/used_skillpoints = 0
-	var/skill_specialization = null
 	var/list/skills = list() // skills can range from 0 to 3
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"
