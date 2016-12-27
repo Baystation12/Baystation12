@@ -237,7 +237,7 @@
 "eC" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/floor_decal/corner/white,/obj/effect/floor_decal/corner/red{dir = 4},/turf/simulated/floor/tiled,/area/hallway/primary/fourthdeck/fore)
 "eD" = (/obj/machinery/light/small{dir = 8},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/forestarboard)
 "eE" = (/obj/structure/disposalpipe/up,/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/forestarboard)
-"eF" = (/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor/plating,/area/vacant/infirmary)
+"eF" = (/obj/structure/closet/secure_closet/medical2,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "eG" = (/obj/item/roller,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "eH" = (/obj/random/trash,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "eI" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/structure/table/rack,/obj/machinery/light/small{dir = 8},/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/turf/simulated/floor/tiled/white,/area/shuttle/escape_pod6/station)

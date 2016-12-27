@@ -9,8 +9,8 @@
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
 						/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
-						/datum/job/crew, /datum/job/assistant
-						/*/datum/job/merchant*/
+						/datum/job/crew, /datum/job/assistant,
+						/datum/job/merchant
 						)
 
 
@@ -447,7 +447,8 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Chief of Security"
-	alt_titles = list() //will add MP if job alt-titles can ever be separated by branch
+	alt_titles = list(
+		"Military Police Officer")
 	economic_modifier = 4
 	minimal_player_age = 10
 	ideal_character_age = 25
@@ -705,7 +706,8 @@
 	supervisors = "the Executive Officer"
 	minimal_player_age = 3
 	ideal_character_age = 20
-	alt_titles = list()
+	alt_titles = list(
+		"Janitor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -729,7 +731,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Executive Officer"
-	alt_titles = list()
+	alt_titles = list(
+		"Chef")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,

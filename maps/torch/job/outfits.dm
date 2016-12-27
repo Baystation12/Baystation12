@@ -17,7 +17,22 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Torch Crew Outfit")
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew
 	uniform = /obj/item/clothing/under/utility/expeditionary
+	head = /obj/item/clothing/head/soft/sol/expedition
 	shoes = /obj/item/clothing/shoes/dress
+
+/decl/hierarchy/outfit/job/torch/crew/fleet
+	name = OUTFIT_JOB_NAME("Torch Fleet Outfit")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/fleet
+	uniform = /obj/item/clothing/under/utility/fleet
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/marine
+	name = OUTFIT_JOB_NAME("Torch Marine Outfit")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/marine
+	uniform = /obj/item/clothing/under/utility/marine
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/passenger
 	name = OUTFIT_JOB_NAME("Torch Passenger")
@@ -37,6 +52,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/expeditionary/command
 	l_ear = /obj/item/device/radio/headset/heads/torchcaptain
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition/co
 	backpack = /obj/item/weapon/storage/backpack/captain
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_cap
 	id_type = /obj/item/weapon/card/id/torch/gold
@@ -47,16 +63,21 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/expeditionary/command
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/silver
 	pda_type = /obj/item/device/pda/heads/hop
-
-/decl/hierarchy/outfit/job/torch/crew/command/XO/marine
-	name = OUTFIT_JOB_NAME("Executive Officer - Marine")
-	uniform = /obj/item/clothing/under/utility/marine/command
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
 	uniform = /obj/item/clothing/under/utility/fleet/command
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/XO/marine
+	name = OUTFIT_JOB_NAME("Executive Officer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/command
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	name = OUTFIT_JOB_NAME("Research Director - Torch")
@@ -72,16 +93,24 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear  =/obj/item/device/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/under/utility/expeditionary/medical/command
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/silver/medical
 	pda_type = /obj/item/device/pda/heads/cmo
 	pda_slot = slot_l_store
 	backpack = /obj/item/weapon/storage/backpack/medic
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
 
+/decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
+	name = OUTFIT_JOB_NAME("Chief Medical Officer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/medical
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	name = OUTFIT_JOB_NAME("Chief Engineer - Torch")
 	uniform = /obj/item/clothing/under/utility/expeditionary/engineering/command
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	l_ear = /obj/item/device/radio/headset/heads/ce
 	id_type = /obj/item/weapon/card/id/torch/silver/engineering
 	pda_type = /obj/item/device/pda/heads/ce
@@ -90,15 +119,40 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
+	name = OUTFIT_JOB_NAME("Chief Engineer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/engineering
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/marine
+	name = OUTFIT_JOB_NAME("Chief Engineer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/engineering
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/cos
 	name = OUTFIT_JOB_NAME("Chief of Security")
 	l_ear = /obj/item/device/radio/headset/heads/cos
 	uniform = /obj/item/clothing/under/utility/expeditionary/security/command
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/silver/security
 	pda_type = /obj/item/device/pda/heads/hos
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
+
+/decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
+	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/security
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/cos/marine
+	name = OUTFIT_JOB_NAME("Chief of Security - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/security
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	name = OUTFIT_JOB_NAME("NanoTrasen Liaison")
@@ -123,8 +177,21 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/expeditionary
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/sea
 	pda_type = /obj/item/device/pda/heads
+
+/decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
+	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/command
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/sea/marine
+	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/command
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 //Engineering Outfits
 
@@ -140,15 +207,41 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Senior Engineer")
 	uniform = /obj/item/clothing/under/utility/expeditionary/engineering
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering/senior
 	pda_type =	/obj/item/device/pda/atmos
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
+	name = OUTFIT_JOB_NAME("Senior Engineer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/engineering
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/marine
+	name = OUTFIT_JOB_NAME("Senior Engineer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/engineering
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	name = OUTFIT_JOB_NAME("Engineer - Torch")
 	uniform = /obj/item/clothing/under/utility/expeditionary/engineering
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering
 	pda_type = /obj/item/device/pda/engineering
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
+	name = OUTFIT_JOB_NAME("Engineer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/engineering
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/engineer/marine
+	name = OUTFIT_JOB_NAME("Engineer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/engineering
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	name = OUTFIT_JOB_NAME("Engineering Assistant")
@@ -177,22 +270,61 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Brig Officer")
 	uniform = /obj/item/clothing/under/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/security/brigofficer
 	pda_type = /obj/item/device/pda/warden
 
+/decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
+	name = OUTFIT_JOB_NAME("Brig Officer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/security
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/security/brig_officer/marine
+	name = OUTFIT_JOB_NAME("Brig Officer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/security
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
-	name = OUTFIT_JOB_NAME("Forensic Technician")
+	name = OUTFIT_JOB_NAME("Forensic Technician - Torch")
 	uniform = /obj/item/clothing/under/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
 	pda_type = /obj/item/device/pda/detective
+
+/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
+	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/security
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine
+	name = OUTFIT_JOB_NAME("Forensic Technician - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/security
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa
 	name = OUTFIT_JOB_NAME("Master at Arms")
 	uniform = /obj/item/clothing/under/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/security
 	pda_type = /obj/item/device/pda/security
+
+/decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
+	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/security
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/security/maa/marine
+	name = OUTFIT_JOB_NAME("Master at Arms - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/security
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 //Medical Outfits
 
@@ -208,13 +340,27 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Senior Physician")
 	uniform = /obj/item/clothing/under/utility/expeditionary/medical
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/medical/senior
+
+/decl/hierarchy/outfit/job/torch/crew/medical/senior/fleet
+	name = OUTFIT_JOB_NAME("Senior Physician - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/medical
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	name = OUTFIT_JOB_NAME("Physician")
 	uniform = /obj/item/clothing/under/utility/expeditionary/medical
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/medical
+
+/decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+	name = OUTFIT_JOB_NAME("Physician - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/medical
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	name = OUTFIT_JOB_NAME("Medical Assistant")
@@ -281,15 +427,41 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Deck Officer")
 	uniform = /obj/item/clothing/under/utility/expeditionary/supply
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	pda_type = /obj/item/device/pda/quartermaster
+
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
+	name = OUTFIT_JOB_NAME("Deck Officer - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/supply
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/marine
+	name = OUTFIT_JOB_NAME("Deck Officer - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/supply
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	name = OUTFIT_JOB_NAME("Deck Technician")
 	uniform = /obj/item/clothing/under/utility/expeditionary/supply
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/supply
 	pda_type = /obj/item/device/pda/cargo
+
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
+	name = OUTFIT_JOB_NAME("Deck Technician - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/supply
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/marine
+	name = OUTFIT_JOB_NAME("Deck Technician - Marine")
+	uniform = /obj/item/clothing/under/utility/marine/supply
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/supply/contractor
 	name = OUTFIT_JOB_NAME("Supply Assistant")
@@ -309,15 +481,41 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Torch")
 	uniform = /obj/item/clothing/under/utility/expeditionary
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
 	pda_type = /obj/item/device/pda/janitor
+
+/decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
+	name = OUTFIT_JOB_NAME("Sanitation Technician - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/janitor/marine
+	name = OUTFIT_JOB_NAME("Sanitation Technician - Marine")
+	uniform = /obj/item/clothing/under/utility/marine
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook
 	name = OUTFIT_JOB_NAME("Cook - Torch")
 	uniform = /obj/item/clothing/under/utility/expeditionary
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
 	pda_type = /obj/item/device/pda/chef
+
+/decl/hierarchy/outfit/job/torch/crew/service/cook/fleet
+	name = OUTFIT_JOB_NAME("Cook - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/cook/marine
+	name = OUTFIT_JOB_NAME("Cook - Marine")
+	uniform = /obj/item/clothing/under/utility/marine
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender - Torch")
@@ -330,8 +528,21 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Crewman")
 	uniform = /obj/item/clothing/under/utility/expeditionary
 	shoes = /obj/item/clothing/shoes/dress
+	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew
 	pda_type = /obj/item/device/pda
+
+/decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
+	name = OUTFIT_JOB_NAME("Crewman - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/crewman/marine
+	name = OUTFIT_JOB_NAME("Crewman - Marine")
+	uniform = /obj/item/clothing/under/utility/marine
+	head = /obj/item/clothing/head/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 //Passenger Outfits
 
@@ -366,6 +577,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Security Guard")
 	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/soft/sec/corp/guard
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
