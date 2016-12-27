@@ -27,7 +27,7 @@
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
 
-/datum/gear/head/beret/New()
+/datum/gear/head/solberet/New()
 	..()
 	var/berets = list()
 	berets["peacekeeper beret"] = /obj/item/clothing/head/beret/sol
