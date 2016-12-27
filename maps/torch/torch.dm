@@ -30,6 +30,9 @@
 	#include "structures/closets/services.dm"
 	#include "structures/closets/supply.dm"
 
+	//START MAP LOADOUT DEFINES
+	#define GEAR_HAS_COLOR_SELECTION 1
+	//DO NOT REMOVE THE ABOVE LINE
 	#include "loadout/loadout_accessories.dm"
 	#include "loadout/loadout_eyes.dm"
 	#include "loadout/loadout_gloves.dm"
@@ -38,6 +41,9 @@
 	#include "loadout/loadout_suit.dm"
 	#include "loadout/loadout_uniform.dm"
 	#include "loadout/loadout_xeno.dm"
+	//END MAP LOADOUT DEFINES
+	#undef GEAR_HAS_COLOR_SELECTION
+	//DO NOT REMOVE THE ABOVE LINE
 
 	#include "../shared/exodus_torch_areas.dm"
 	#include "../shared/exodus_torch_zas_tests.dm"
