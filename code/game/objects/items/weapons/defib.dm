@@ -12,7 +12,7 @@
 	force = 5
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
-	origin_tech = "biotech=4"
+	origin_tech = list(TECH_BIO = 4, TECH_POWER = 2)
 
 	var/on = 0 //if the paddles are equipped (1) or on the defib (0)
 	var/safety = 1 //if you can zap people with the defibs on harm mode
@@ -299,7 +299,7 @@
 	item_state = "defibcompact"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
-	origin_tech = "biotech=5"
+	origin_tech = list(TECH_BIO = 5, TECH_POWER = 3)
 
 
 /obj/item/weapon/defibrillator/compact/loaded/New()
