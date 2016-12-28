@@ -1597,17 +1597,17 @@
 	..()
 	reagents.add_reagent("protein", 10)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/attack_self(mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/attack_self(var/mob/user)
 	if(wrapped)
 		Unwrap(user)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Expand()
 	src.visible_message("<span class='notice'>\The [src] expands!</span>")
-	var/mob/monkey = new monkey_type(get_turf(src))
+	var/mob/monkey = new monkey_type
 	monkey.dropInto(src.loc)
 	qdel(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(var/mob/user)
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, "You unwrap the cube.")
