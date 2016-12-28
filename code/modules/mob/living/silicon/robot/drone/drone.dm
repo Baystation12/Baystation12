@@ -78,6 +78,8 @@ var/list/mob_hat_cache = list()
 	var/z_diff = new_loc.z - old_loc.z
 	if(z_diff == 0)
 		return
+	else if(new_loc.z in using_map.station_levels)
+		return
 	else if(z_diff > 0)  // New is potentially above old
 		var/turf/above_turf = GetAbove(old_loc)
 		while(above_turf && above_turf.z < new_loc.z)
