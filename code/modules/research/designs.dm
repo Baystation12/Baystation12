@@ -1053,7 +1053,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/scan_consolenew
 	sort_string = "FAGAA"
 
-/*
 /datum/design/circuit/clonecontrol
 	name = "cloning control console"
 	id = "clonecontrol"
@@ -1074,7 +1073,6 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3, TECH_BIO = 3)
 	build_path = /obj/item/weapon/circuitboard/clonescanner
 	sort_string = "FAGAG"
-*/
 
 /datum/design/circuit/resleever
 	name = "neural lace resleever"
