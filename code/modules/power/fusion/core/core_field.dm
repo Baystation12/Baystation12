@@ -8,6 +8,7 @@
 	alpha = 50
 	layer = 4
 	light_color = COLOR_BLUE
+	rad_power = 1
 
 	var/size = 1
 	var/energy = 0
@@ -170,6 +171,7 @@
 
 	check_instability()
 	Radiate()
+	rad_power = radiation
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()
@@ -289,6 +291,7 @@
 	radiation += plasma_temperature/2
 	plasma_temperature = 0
 
+	radiation_repository.radiate(src, radiation)
 	Radiate()
 
 /obj/effect/fusion_em_field/proc/Radiate()
@@ -311,10 +314,6 @@
 			AM.visible_message("<span class='danger'>The field buckles visibly around \the [AM]!</span>")
 			tick_instability += rand(15,30)
 			AM.emp_act(empsev)
-
-		if(loc)
-			for(var/mob/living/L in range(max(1,ceil(radiation/100)),loc))
-				L.apply_effect(radiation,IRRADIATE, blocked = L.getarmor(null, "rad"))
 
 	if(owned_core && owned_core.loc)
 		var/datum/gas_mixture/environment = owned_core.loc.return_air()
