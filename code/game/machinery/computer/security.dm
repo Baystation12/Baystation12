@@ -14,6 +14,7 @@
 	var/screen = null
 	var/datum/data/record/active1 = null
 	var/datum/data/record/active2 = null
+	var/datum/data/record/activew = null
 	var/a_id = null
 	var/temp = null
 	var/printing = null
@@ -23,6 +24,11 @@
 	//Sorting Variables
 	var/sortBy = "name"
 	var/order = 1 // -1 = Descending - 1 = Ascending
+
+
+//Warrant Datum
+/datum/data/record/warrant
+/datum/datacore/var/warrant[] = list()
 
 /obj/machinery/computer/secure_data/verb/eject_id()
 	set category = "Object"
@@ -75,6 +81,7 @@
 <p style='text-align:center;'>"}
 					dat += text("<A href='?src=\ref[];choice=Search Records'>Search Records</A><BR>", src)
 					dat += text("<A href='?src=\ref[];choice=New Record (General)'>New Record</A><BR>", src)
+					dat += text("<A href='?src=\ref[];choice=Manage Warrants'>Manage Warrants</A><BR>", src)
 					dat += {"
 </p>
 <table style="text-align:center;" cellspacing="0" width="100%">
@@ -201,6 +208,39 @@
 							dat += text("<td>[]</td></tr>", crimstat)
 						dat += "</table><hr width='75%' />"
 						dat += text("<br><A href='?src=\ref[];choice=Return'>Return to index.</A>", src)
+				if (5.0)
+					dat += "<B>Manage Warrants</B><HR>"
+					dat += "<BR><A href='?src=\ref[src];choice=Add Warrant'>Add Warrant</A><BR><BR><A href='?src=\ref[src];choice=Return'>Back</A>"
+					dat += {"
+</p>
+<table style="text-align:center;" cellspacing="0" width="100%">
+<tr>
+<th>Active Warrants:</th>
+</tr>
+</table>
+<table style="text-align:center;" border="1" cellspacing="0" width="100%">
+<tr>
+<th><A href='?src=\ref[src];choice=Sorting;sort=name'>Name</A></th>
+<th><A href='?src=\ref[src];choice=Sorting;sort=id'>Charges</A></th>
+<th><A href='?src=\ref[src];choice=Sorting;sort=rank'>Authorized by</A></th>
+</tr>"}
+					if(!isnull(data_core.general))
+						for(var/datum/data/record/warrant/W)
+							dat += text("<tr><td><A href='?src=\ref[];choice=Edit Warrant;d_rec=\ref[]'>[]</a></td>", src, W, W.fields["namew"])
+							dat += text("<td>[]</td>", W.fields["charges"])
+							dat += text("<td>[]</td></tr>", W.fields["auth"])
+						dat += "</table><hr width='75%' />"
+
+				if(6.0)
+					dat += "<B>Edit warrant</B><HR>"
+					dat += text("<table><tr><td>	\
+						Name: <A href='?src=\ref[src];choice=Edit Field;field=namew'>[activew.fields["namew"]]</A> <A href='?src=\ref[src];choice=Edit Field;field=namewcustom'>(Custom)</A> <BR> \
+						Charges: <A href='?src=\ref[src];choice=Edit Field;field=charges'>[activew.fields["charges"]]</A><BR>\n \
+						Authorized by: <A href='?src=\ref[src];choice=Edit Field;field=auth'>[activew.fields["auth"]]</A><BR>\n	\
+						</table>")
+
+					dat += "<BR><A href='?src=\ref[src];choice=Save Warrant'>Save Warrant</A>"
+					dat += "<BR><A href='?src=\ref[src];choice=Delete Warrant'>Delete Warrant</A>"
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
@@ -427,6 +467,7 @@ What a mess.*/
 					return
 				var/a1 = active1
 				var/a2 = active2
+				var/aw = activew
 				switch(href_list["field"])
 					if("name")
 						if (istype(active1, /datum/data/record))
@@ -523,6 +564,62 @@ What a mess.*/
 						var/icon/photo = get_photo(usr)
 						if(photo)
 							active1.fields["photo_side"] = photo
+					//Editing Warrant fields
+					if("namew")
+						var/namelist = list()
+						for(var/datum/data/record/t in data_core.general)
+							namelist += t.fields["name"]
+						var/t1 = input("Please input Name") in namelist
+						if (!t1 || activew != aw)
+							return
+						activew.fields["namew"] = t1
+
+					if("namewcustom")
+						var/t1 = input("Please input Name") as text
+						if (!t1 || activew != aw)
+							return
+						activew.fields["namew"] = t1
+
+					if("charges")
+						var/t1 = input("Please input charges") as text
+						if (!t1 || activew != aw)
+							return
+						activew.fields["charges"] = t1
+
+					if("auth")
+						var/t1 = authenticated
+						if (!t1 || activew != aw)
+							return
+						activew.fields["auth"] = t1
+//Warrant Functions
+			if("Manage Warrants")
+				screen = 5
+				active1 = null
+				active2 = null
+
+			if("Add Warrant")
+				var/datum/data/record/warrant/W = new()
+				activew = W
+				W.fields["namew"] = "Unknown"
+				W.fields["charges"] = "No charges present"
+				W.fields["auth"] = "Unauthorized"
+				screen = 6
+
+			if("Edit Warrant")
+				var/datum/data/record/warrant/W = locate(href_list["d_rec"])
+				activew = W
+				screen = 6
+
+			if("Save Warrant")
+				data_core.warrant += activew
+				activew = null
+				screen = 5
+
+			if("Delete Warrant")
+				data_core.warrant -= activew
+				activew = null
+				sleep(10)
+				screen = 5
 
 
 //TEMPORARY MENU FUNCTIONS
