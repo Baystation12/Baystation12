@@ -398,6 +398,26 @@
 	name = "ranks (master chief petty officer)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer."
 
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt1
+	name = "ranks (command master chief petty officer)"
+	desc = "Insignia denoting the rank of Command Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt2
+	name = "ranks (fleet master chief petty officer)"
+	desc = "Insignia denoting the rank of Fleet Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt3
+	name = "ranks (force master chief petty officer)"
+	desc = "Insignia denoting the rank of Force Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt4
+	name = "ranks (master chief petty officer of the Fleet)"
+	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Fleet."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt5
+	name = "ranks (master chief petty officer of the Expeditionary Corps)"
+	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Expeditionary Corps."
+
 /obj/item/clothing/accessory/rank/fleet/officer
 	name = "ranks (ensign)"
 	desc = "Insignia denoting the rank of Ensign."
@@ -408,7 +428,7 @@
 	desc = "Insignia denoting the rank of Lieutenant Junior Grade."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o3
-	name = "ranks (lieutenant ranks)"
+	name = "ranks (lieutenant)"
 	desc = "Insignia denoting the rank of Lieutenant."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o4
@@ -440,6 +460,10 @@
 /obj/item/clothing/accessory/rank/fleet/flag/o10
 	name = "ranks (admiral)"
 	desc = "Insignia denoting the rank of Admiral."
+
+/obj/item/clothing/accessory/rank/fleet/flag/o10_alt
+	name = "ranks (fleet admiral)"
+	desc = "Insignia denoting the rank of Fleet Admiral."
 
 /obj/item/clothing/accessory/rank/marine
 	name = "marine ranks"
@@ -476,20 +500,24 @@
 	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e8
-	name = "ranks (master sergeant)"
-	desc = "Insignia denoting the rank of Master Sergeant."
-
-/obj/item/clothing/accessory/rank/marine/enlisted/e8alt
 	name = "ranks (first sergeant)"
 	desc = "Insignia denoting the rank of First Sergeant."
 
+/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
+	name = "ranks (master sergeant)"
+	desc = "Insignia denoting the rank of Master Sergeant."
+
 /obj/item/clothing/accessory/rank/marine/enlisted/e9
+	name = "ranks (sergeant major)"
+	desc = "Insignia denoting the rank of Sergeant Major."
+
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
 	name = "ranks (master gunnery sergeant)"
 	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9alt
-	name = "ranks (sergeant major)"
-	desc = "Insignia denoting the rank of Sergeant Major."
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt2
+	name = "ranks (sergeant major of the Marine Corps)"
+	desc = "Insignia denoting the rank of Sergeant Major of the Marine Corps."
 
 /obj/item/clothing/accessory/rank/marine/officer
 	name = "ranks (second lieutenant)"
@@ -509,8 +537,8 @@
 	desc = "Insignia denoting the rank of Major."
 
 /obj/item/clothing/accessory/rank/marine/officer/o5
-	name = "ranks (lieutenant commander)"
-	desc = "Insignia denoting the rank of Lieutenant Commander."
+	name = "ranks (lieutenant colonel)"
+	desc = "Insignia denoting the rank of Lieutenant Colonel."
 
 /obj/item/clothing/accessory/rank/marine/officer/o6
 	name = "ranks (colonel)"
@@ -532,6 +560,10 @@
 /obj/item/clothing/accessory/rank/marine/flag/o10
 	name = "ranks (general)"
 	desc = "Insignia denoting the rank of General."
+
+/obj/item/clothing/accessory/rank/marine/flag/o10_alt
+	name = "ranks (commandant of the Marine Corps)"
+	desc = "Insignia denoting the rank of Commandant of the Marine Corps."
 
 
 //Necklaces

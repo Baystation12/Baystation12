@@ -130,7 +130,7 @@
 
 
 /obj/structure/closet/secure_closet/forensics
-	name = "forensics officer's locker"
+	name = "forensics technician's locker"
 	req_access = list(access_forensics_lockers)
 	icon_state = "sec1"
 	icon_closed = "sec"
