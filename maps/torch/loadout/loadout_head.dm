@@ -27,7 +27,7 @@
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
 
-/datum/gear/head/beret/New()
+/datum/gear/head/solberet/New()
 	..()
 	var/berets = list()
 	berets["peacekeeper beret"] = /obj/item/clothing/head/beret/sol
@@ -39,74 +39,7 @@
 	berets["health service beret"] = /obj/item/clothing/head/beret/sol/gateway
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
-/datum/gear/head/beret/expedition
-	display_name = "beret, Expeditionary Corps"
-	description = "A beret worn by members of the SCG Expeditionary Corps."
-	path = /obj/item/clothing/head/beret/sol/expedition
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/beret/expedition/security
-	display_name = "beret, Expeditionary Corps security"
-	path = /obj/item/clothing/head/beret/sol/expedition/security
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
-
-/datum/gear/head/beret/expedition/medical
-	display_name = "beret, Expeditionary Corps medical"
-	path = /obj/item/clothing/head/beret/sol/expedition/medical
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician")
-
-/datum/gear/head/beret/expedition/engineering
-	display_name = "beret, Expeditionary Corps engineering"
-	path = /obj/item/clothing/head/beret/sol/expedition/engineering
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer")
-
-/datum/gear/head/beret/expedition/supply
-	display_name = "beret, Expeditionary Corps supply"
-	path = /obj/item/clothing/head/beret/sol/expedition/supply
-	allowed_roles = list("Deck Officer", "Deck Technician")
-
-/datum/gear/head/beret/expedition/command
-	display_name = "beret, Expeditionary Corps command"
-	path = /obj/item/clothing/head/beret/sol/expedition/command
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor")
-
-/datum/gear/head/beret/fleet
-	display_name = "beret, Expeditionary Corps"
-	description = "A beret worn by members of the SCG Fleet."
-	path = /obj/item/clothing/head/beret/sol/fleet
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/beret/fleet/security
-	display_name = "beret, Fleet security"
-	path = /obj/item/clothing/head/beret/sol/fleet/security
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
-
-/datum/gear/head/beret/fleet/medical
-	display_name = "beret, Fleet medical"
-	path = /obj/item/clothing/head/beret/sol/fleet/medical
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician")
-
-/datum/gear/head/beret/fleet/engineering
-	display_name = "beret, Fleet engineering"
-	path = /obj/item/clothing/head/beret/sol/fleet/engineering
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer")
-
-/datum/gear/head/beret/fleet/supply
-	display_name = "beret, Fleet supply"
-	path = /obj/item/clothing/head/beret/sol/fleet/supply
-	allowed_roles = list("Deck Officer", "Deck Technician")
-
-/datum/gear/head/beret/fleet/command
-	display_name = "beret, Fleet command"
-	path = /obj/item/clothing/head/beret/sol/fleet/command
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor")
-
-
-/datum/gear/head/beret/whitentsec
+/datum/gear/head/whitentberet
 	display_name = "beret, NanoTrasen security"
 	path = /obj/item/clothing/head/beret/guard
 	allowed_roles = list("Security Guard")
@@ -136,11 +69,6 @@
 	caps["major bill's shipping cap"] = /obj/item/clothing/head/soft/mbill
 	gear_tweaks += new/datum/gear_tweak/path(caps)
 
-
-/datum/gear/head/seccap
-	display_name = "cap, NanoTrasen security"
-	path = /obj/item/clothing/head/soft/sec/corp/guard
-	allowed_roles = list("Security Guard")
 
 /datum/gear/head/hairflower
 	display_name = "hair flower pin"
@@ -228,100 +156,3 @@
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
 						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
-
-/datum/gear/head/echat
-	display_name = "Expeditionary Corps Cap"
-	path = /obj/item/clothing/head/soft/sol/expedition
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/ecenlisteddress
-	display_name = "Expeditionary Corps Enlisted Dress Cover"
-	path = /obj/item/clothing/head/dress/expedition
-	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician",
-						"Physician", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/eccommanddress
-	display_name = "Expeditionary Corps Officer Dress Cover"
-	path = /obj/item/clothing/head/dress/expedition/command
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Physician", "Deck Officer")
-
-/datum/gear/head/fleetcap
-	display_name = "Fleet Cap"
-	path = /obj/item/clothing/head/soft/sol/fleet
-	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/fleetutility
-	display_name = "Fleet Utility Cover"
-	path = /obj/item/clothing/head/utility/fleet
-	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/fleetenlisteddress
-	display_name = "Fleet Enlisted Wheel Cover"
-	path = /obj/item/clothing/head/dress/fleet
-	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician",
-						"Physician", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/fleetofficerdress
-	display_name = "Fleet Officer Wheel Cover"
-	path = /obj/item/clothing/head/dress/fleet/command
-	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Physician", "Deck Officer")
-
-/datum/gear/head/marineutility
-	display_name = "Marine Utility Cover"
-	path = /obj/item/clothing/head/utility/marine
-	allowed_roles = list("Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/marineutilitytan
-	display_name = "Tan Marine Utility Cover"
-	path = /obj/item/clothing/head/utility/marine/tan
-	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/marineutilitygreen
-	display_name = "Green Marine Utility Cover"
-	path = /obj/item/clothing/head/utility/marine/green
-	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/marineenlistedservice
-	display_name = "Marine Enlisted Wheel Cover"
-	path = /obj/item/clothing/head/service/marine
-	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms",
-						"Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/marineofficerservice
-	display_name = "Marine Officer Wheel Cover"
-	path = /obj/item/clothing/head/service/marine/command
-	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Deck Officer")
-
-/datum/gear/head/marineenlistedgarrison
-	display_name = "Marine Enlisted Garrison Cap"
-	path = /obj/item/clothing/head/service/marine/garrison
-	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms",
-						"Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/marineofficergarrison
-	display_name = "Marine Officer's Garrison Cap"
-	path = /obj/item/clothing/head/service/marine/garrison/command
-	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Deck Officer")
-
-/datum/gear/head/marineenlisteddress
-	display_name = "Marine Enlisted Dress Cover"
-	path = /obj/item/clothing/head/dress/marine
-	allowed_roles = list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms",
-						"Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-/datum/gear/head/marineofficerdress
-	display_name = "Marine Officer's Dress Cover"
-	path = /obj/item/clothing/head/dress/marine/command
-	allowed_roles = list("Executive Officer", "Chief Engineer", "Chief of Security", "Deck Officer")

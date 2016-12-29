@@ -299,6 +299,7 @@
 	icon = 'icons/obj/doors/Dooruranium.dmi'
 	mineral = "uranium"
 	var/last_event = 0
+	rad_power = 7.5
 
 /obj/machinery/door/airlock/process()
 	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
@@ -311,18 +312,6 @@
 		electrify(0)
 
 	..()
-
-/obj/machinery/door/airlock/uranium/process()
-	if(world.time > last_event+20)
-		if(prob(50))
-			radiate()
-		last_event = world.time
-	..()
-
-/obj/machinery/door/airlock/uranium/proc/radiate()
-	for(var/mob/living/L in range (3,src))
-		L.apply_effect(15,IRRADIATE, blocked = L.getarmor(null, "rad"))
-	return
 
 /obj/machinery/door/airlock/phoron
 	name = "Phoron Airlock"

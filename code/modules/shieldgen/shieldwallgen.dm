@@ -6,7 +6,7 @@
 	icon_state = "Shield_Gen"
 	anchored = 0
 	density = 1
-	req_access = list(access_engine_equip)
+	req_one_access = list(access_engine_equip,access_research)
 	var/active = 0
 	var/power = 0
 	var/locked = 1

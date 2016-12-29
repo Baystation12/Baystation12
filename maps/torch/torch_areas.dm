@@ -414,6 +414,10 @@
 	name = "east of fourth deck"
 	icon_state = "east"
 
+/area/calypso_hangar/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
+
 /area/calypso_hangar/mining
 	name = "mining site"
 	icon_state = "shuttlered"
@@ -458,6 +462,10 @@
 /area/guppy_hangar/fourthdeck
 	name = "north of fourth deck"
 	icon_state = "north"
+
+/area/guppy_hangar/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
 
 /area/guppy_hangar/mining
 	name = "mining site"

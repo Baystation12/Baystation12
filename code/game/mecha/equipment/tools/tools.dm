@@ -926,8 +926,7 @@
 
 	process(var/obj/item/mecha_parts/mecha_equipment/generator/nuclear/EG)
 		if(..())
-			for(var/mob/living/carbon/M in view(EG.chassis))
-				M.apply_effect((EG.rad_per_cycle*3),IRRADIATE, blocked = M.getarmor(null, "rad"))
+			radiation_repository.radiate(EG, (EG.rad_per_cycle * 3))
 		return 1
 
 

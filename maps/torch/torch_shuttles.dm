@@ -173,6 +173,7 @@
 		"West of Third Deck" = /area/calypso_hangar/thirddeck,
 		"East of Fourth Deck" = /area/calypso_hangar/fourthdeck,
 		"Asteroid" = /area/calypso_hangar/mining,
+		"Debris Field" = /area/calypso_hangar/salvage,
 		"Away Site" = /area/calypso_hangar/away,
 		)
 	announcer = "SEV Torch Docking Computer"
@@ -193,6 +194,7 @@
 		"South of Third Deck" = /area/guppy_hangar/thirddeck,
 		"North of Fourth Deck" = /area/guppy_hangar/fourthdeck,
 		"Asteroid" = /area/guppy_hangar/mining,
+		"Debris Field" = /area/guppy_hangar/salvage,
 		)
 
 	announcer = "SEV Torch Docking Computer"
@@ -345,3 +347,12 @@
 	dock_target_station = "specops_centcom_dock"
 	dock_target_offsite = "specops_dock_airlock"
 
+//Cargo drone
+
+/datum/shuttle/ferry/supply/drone
+	name = "Supply Drone"
+	location = 1
+	warmup_time = 10
+	area_offsite = /area/supply/dock
+	area_station = /area/supply/station
+	docking_controller_tag = "" // lands, doesn't dock

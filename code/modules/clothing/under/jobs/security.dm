@@ -72,7 +72,7 @@
 
 /obj/item/clothing/under/rank/guard
 	desc = "A durable uniform worn by NanoTrasen corporate security."
-	name = "/improper NanoTrasen security uniform"
+	name = "\improper NanoTrasen security uniform"
 	icon_state = "ntguard"
 	item_state = "r_suit"
 	worn_state = "ntguard"
