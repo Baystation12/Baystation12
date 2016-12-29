@@ -112,7 +112,7 @@
 		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
 		return
 
-	var/msg = input(src,"Message:", "Reply private message to [sender] on IRC / 400 character limit") as text|null
+	var/msg = input(src,"Message:", "Reply private message to [sender] on Discord / 400 character limit") as text|null
 
 	if(!msg)
 		return
