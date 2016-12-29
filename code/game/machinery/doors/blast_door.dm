@@ -68,6 +68,8 @@
 		icon_state = icon_state_closed
 	else
 		icon_state = icon_state_open
+	var/turf/T = get_turf(src)
+	T.calc_rad_resistance()
 	return
 
 // Proc: force_open()

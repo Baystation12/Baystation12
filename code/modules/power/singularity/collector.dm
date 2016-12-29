@@ -30,6 +30,9 @@ var/global/list/rad_collectors = list()
 	last_power = last_power_new
 	last_power_new = 0
 
+	var/turf/T = get_turf(src)
+	if(T in radiation_repository.irradiated_turfs)
+		receive_pulse((radiation_repository.irradiated_turfs[T] / (50 * 5))) //Maths is hard
 
 	if(P)
 		if(P.air_contents.gas["phoron"] == 0)
@@ -156,4 +159,3 @@ var/global/list/rad_collectors = list()
 		flick("ca_deactive", src)
 	update_icons()
 	return
-
