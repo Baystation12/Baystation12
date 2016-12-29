@@ -144,6 +144,18 @@
 			for (var/obj/item/I in O)
 				qdel(I)
 
+		if (recipe.goes_in_hands)
+			user.put_in_hands(O)
+			if (istype(O, /obj/item/stack))
+				var/obj/item/stack/S = O
+				S.amount = produced
+				S.add_to_stacks(user)
+
+			if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
+				for (var/obj/item/I in O)
+					qdel(I)
+
+
 /obj/item/stack/Topic(href, href_list)
 	..()
 	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))
@@ -343,8 +355,9 @@
 	var/one_per_turf = 0
 	var/on_floor = 0
 	var/use_material
+	var/goes_in_hands = 0
 
-	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null)
+	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null, goes_in_hands = 0)
 		src.title = title
 		src.result_type = result_type
 		src.req_amount = req_amount
@@ -354,6 +367,7 @@
 		src.one_per_turf = one_per_turf
 		src.on_floor = on_floor
 		src.use_material = supplied_material
+		src.goes_in_hands = goes_in_hands
 
 /*
  * Recipe list datum

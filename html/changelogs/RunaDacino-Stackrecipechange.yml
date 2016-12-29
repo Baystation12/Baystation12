@@ -1,0 +1,9 @@
+  
+author: Runa-Dacino
+
+
+delete-after: True
+
+
+  - tweak: "Makes stack recipes spawn carriable objects in the user's hands. Spawns on the ground if full/cyborg like previously"
+
