@@ -323,11 +323,6 @@
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
-/area/maintenance/substation
-	name = "Substation"
-	icon_state = "substation"
-	sound_env = SMALL_ENCLOSED
-
 /area/maintenance/substation/command // AI and central cluster. This one will be between HoP office and meeting room (probably).
 	name = "Command Substation"
 
@@ -675,6 +670,10 @@
 /area/medical/genetics
 	name = "\improper Genetics Lab"
 	icon_state = "genetics"
+
+/area/medical/genetics_cloning
+	name = "\improper Cloning Lab"
+	icon_state = "cloning"
 
 // Solars
 

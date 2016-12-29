@@ -6,7 +6,7 @@
 # Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
 # When it is, any changes listed below will disappear.
 #
-# Valid Prefixes: 
+# Valid Prefixes:
 #   bugfix
 #   wip (For works in progress)
 #   tweak
@@ -21,8 +21,8 @@
 #   experiment
 #################################
 
-# Your name.  
-author: Cirra
+# Your name.
+author: Ravenxales
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -32,5 +32,6 @@ delete-after: True
 # SCREW THIS UP AND IT WON'T WORK.
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
-changes: 
-  - rscadd: "Added a preset combat cyborg which admins can spawn."
+changes:
+  - rscadd: "Add toggleable safety for compressed matter implant, to prevent inadvertant usage and facilitate storage."
+  - bugfix: "Fix compressed matter implants that are placed in storage from destroying the storage with itself inside."

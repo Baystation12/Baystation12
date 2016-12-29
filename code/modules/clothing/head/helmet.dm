@@ -33,7 +33,7 @@
 	icon_state = "helmet_security"
 
 /obj/item/clothing/head/helmet/nt
-	name = "\improper NanoTrasen helmet"
+	name = "\improper corporate security helmet"
 	desc = "A helmet with 'CORPORATE SECURITY' printed on the back in red lettering."
 	icon_state = "helmet_nt"
 
@@ -41,6 +41,11 @@
 	name = "\improper PCRC helmet"
 	desc = "A helmet with 'PRIVATE SECURITY' printed on the back in cyan lettering."
 	icon_state = "helmet_pcrc"
+
+/obj/item/clothing/head/helmet/nt/guard
+	name = "\improper NanoTrasen helmet"
+	desc = "A helmet painted in NanoTrasen colors. Probably belongs to corporate security."
+	icon_state = "helmet_ntguard"
 
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"

@@ -1,5 +1,3 @@
-var/const/base_law_type = /datum/ai_laws/nanotrasen
-
 /datum/ai_law
 	var/law = ""
 	var/index = 0

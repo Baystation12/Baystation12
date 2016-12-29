@@ -26,7 +26,10 @@
 		return 0
 
 	var/turf/start = get_turf(src)
-	if(!destination.CanPass(src, start))
+	if(!start.CanZPass(src, direction))
+		to_chat(usr, "<span class='warning'>\The [start] is in the way.</span>")
+		return 0
+	if(!destination.CanZPass(src, direction))
 		to_chat(usr, "<span class='warning'>You bump against \the [destination].</span>")
 		return 0
 
@@ -61,15 +64,21 @@
 	if(incapacitated())
 		return 0
 
-	if(istype(back,/obj/item/weapon/tank/jetpack))
-		var/obj/item/weapon/tank/jetpack/jet = back
-		if(jet.allow_thrust(0.01, src))
-			return 1
-		else
-			to_chat(usr, "<span class='warning'>\The [jet] is disabled.</span>")
-			return 0
+	if(Allow_Spacemove())
+		return 1
+
 	if(Check_Shoegrip())	//scaling hull with magboots
 		for(var/turf/simulated/T in trange(1,src))
 			if(T.density)
 				return 1
-	return 0
+
+/mob/living/silicon/robot/can_ztravel()
+	if(incapacitated() || is_dead())
+		return 0
+
+	if(Allow_Spacemove()) //Checks for active jetpack
+		return 1
+
+	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
+		if(T.density)
+			return 1

@@ -204,7 +204,7 @@
 	name = "salvage voidsuit helmet"
 	desc = "A heavily modified salvage voidsuit helmet. It has been fitted with radiation-resistant plating."
 	icon_state = "rig0-salvage"
-	item_state = "eng_helm"
+	item_state = "salvage_helm"
 	item_state_slots = list(
 		slot_l_hand_str = "eng_helm",
 		slot_r_hand_str = "eng_helm",

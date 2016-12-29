@@ -60,7 +60,6 @@
 	var/obj/item/s_store = null
 
 	var/used_skillpoints = 0
-	var/skill_specialization = null
 	var/list/skills = list()
 
 	var/icon/stand_icon = null
@@ -100,7 +99,7 @@
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
-	
+
 	var/datum/mil_branch/char_branch = null
 	var/datum/mil_rank/char_rank = null
 

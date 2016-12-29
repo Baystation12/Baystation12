@@ -110,7 +110,7 @@
 
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
-	ident = rand(1, 999)
+	ident = random_id(/mob/living/silicon/robot, 1, 999)
 	module_sprites["Basic"] = "robot"
 	icontype = "Basic"
 	updatename(modtype)
@@ -126,6 +126,7 @@
 		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
 			camera.status = 0
 
+	..()
 	init()
 	initialize_components()
 	//if(!unfinished)
@@ -137,8 +138,6 @@
 
 	if(ispath(cell))
 		cell = new cell(src)
-
-	..()
 
 	if(cell)
 		var/datum/robot_component/cell_component = components["power cell"]
