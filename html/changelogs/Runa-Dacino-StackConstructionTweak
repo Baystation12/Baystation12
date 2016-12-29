@@ -1,0 +1,8 @@
+
+author: Runa-Dacino
+
+
+delete-after: True
+
+ 
+  - tweak: "Changes material stack recipes to, when possible (not borg, not hands full) to spawn objects into hands."
