@@ -16,6 +16,28 @@
 		color = data["blood_colour"]
 	return
 
+/datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
+	data["donor"] = C
+	if (!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= virus_copylist(C.virus2)
+	data["antibodies"] = C.antibodies
+	data["blood_DNA"] = C.dna.unique_enzymes
+	data["blood_type"] = C.dna.b_type
+	var/list/temp_chem = list()
+	for(var/datum/reagent/R in C.reagents.reagent_list)
+		temp_chem += R.id
+		temp_chem[R.id] = R.volume
+	data["trace_chem"] = list2params(temp_chem)
+	data["blood_colour"] = C.species.get_blood_colour(C)
+	color = data["blood_colour"]
+
+/datum/reagent/blood/mix_data(var/newdata, var/newamount)
+	if(!islist(newdata))
+		return
+	data["virus2"] |= newdata["virus2"]
+	data["antibodies"] |= newdata["antibodies"]
+
 /datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
 	var/t = data.Copy()
 	if(t["virus2"])
