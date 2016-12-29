@@ -89,3 +89,8 @@
 	name = "black cap"
 	desc = "It's a peaked cap in a tasteful black color."
 	icon_state = "blacksoft"
+
+/obj/item/clothing/head/soft/sec/corp/guard
+	name = "\improper NanoTrasen security cap"
+	desc = "It's field cap in NanoTrasen colors."
+	icon_state = "ntwhitesoft"

@@ -45,7 +45,10 @@ var/global/datum/controller/occupations/job_master
 				civilian_positions |= job.title
 			if(job.department_flag & MSC)
 				nonhuman_positions |= job.title
-
+			if(job.department_flag & SRV)
+				service_positions |= job.title
+			if(job.department_flag & SUP)
+				supply_positions |= job.title
 
 		return 1
 
@@ -391,9 +394,11 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.setup_account(H)
-			job.equip(H, H.mind ? H.mind.role_alt_title : "")
+			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
 			job.apply_fingerprints(H)
 
+			if(H.char_rank && H.char_rank.accessory)
+				H.equip_to_slot_or_del(new H.char_rank.accessory, slot_tie)
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]

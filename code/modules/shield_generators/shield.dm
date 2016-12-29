@@ -70,9 +70,10 @@
 /obj/effect/shield/proc/fail(var/duration)
 	if(duration <= 0)
 		return
-	if(!disabled_for)
+	if(!disabled_for && (duration > 1))
 		s.set_up(1, 1, src)
 		s.start()
+		
 	gen.damaged_segments |= src
 	disabled_for += duration
 	density = 0
@@ -104,11 +105,11 @@
 	if(gen.check_flag(MODEFLAG_BYPASS) && !diffused_for && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
 		return
-
+		
 	if(!diffused_for && !disabled_for)
 		s.set_up(1, 1, src)
 		s.start()
-
+		
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	density = 0

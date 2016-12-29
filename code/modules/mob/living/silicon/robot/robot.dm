@@ -49,7 +49,7 @@
 
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
-	var/obj/item/weapon/cell/cell = null
+	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/high
 	var/obj/machinery/camera/camera = null
 
 	var/cell_emp_mult = 2
@@ -68,9 +68,12 @@
 	var/wiresexposed = 0
 	var/locked = 1
 	var/has_power = 1
+	var/spawn_module = null
+	var/radio_key_type = null
+	var/spawn_sound = 'sound/voice/liveagain.ogg'
+	var/pitch_toggle = 1
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
-	//var/list/laws = list()
 	var/viewalerts = 0
 	var/modtype = "Default"
 	var/lower_mod = 0
@@ -110,7 +113,7 @@
 	ident = rand(1, 999)
 	module_sprites["Basic"] = "robot"
 	icontype = "Basic"
-	updatename("Default")
+	updatename(modtype)
 	updateicon()
 
 	radio = new /obj/item/device/radio/borg(src)
@@ -132,8 +135,8 @@
 		C.installed = 1
 		C.wrapped = new C.external_type
 
-	if(!cell)
-		cell = new /obj/item/weapon/cell/high(src)
+	if(ispath(cell))
+		cell = new cell(src)
 
 	..()
 
@@ -165,15 +168,21 @@
 
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-	laws = new /datum/ai_laws/nanotrasen()
-	var/new_ai = select_active_ai_with_fewest_borgs()
-	if(new_ai)
-		lawupdate = 1
-		connect_to_ai(new_ai)
-	else
-		lawupdate = 0
+	if(ispath(module))
+		new module(src)
+	if(radio_key_type)
+		qdel(radio.keyslot)
+		radio.keyslot = new radio_key_type(radio)
+		radio.recalculateChannels()
+	if(lawupdate)
+		var/new_ai = select_active_ai_with_fewest_borgs()
+		if(new_ai)
+			lawupdate = 1
+			connect_to_ai(new_ai)
+		else
+			lawupdate = 0
 
-	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+	playsound(loc, spawn_sound, 75, pitch_toggle)
 
 /mob/living/silicon/robot/fully_replace_character_name(pickedName as text)
 	custom_name = pickedName

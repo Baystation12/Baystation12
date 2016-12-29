@@ -244,6 +244,8 @@ datum/preferences
 		sanitize_preferences()
 		close_load_dialog(usr)
 	else if(href_list["resetslot"])
+		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
+			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
 	else
@@ -365,6 +367,9 @@ datum/preferences
 	character.update_hair(0)
 	character.update_icons()
 
+	character.char_branch = mil_branches.get_branch(char_branch)
+	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
+
 	if(is_preview_copy)
 		return
 
@@ -388,9 +393,6 @@ datum/preferences
 	character.personal_faction = faction
 	character.religion = religion
 
-	character.char_branch = mil_branches.get_branch(char_branch)
-	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
-
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
 
@@ -404,7 +406,7 @@ datum/preferences
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
 		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = "/character[i]"
+			S.cd = using_map.character_load_path(S, i)
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)
