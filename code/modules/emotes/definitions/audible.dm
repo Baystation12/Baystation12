@@ -19,6 +19,7 @@
 /decl/emote/audible/gasp
 	key ="gasp"
 	emote_message_3p = "USER gasps."
+	conscious = 0
 
 /decl/emote/audible/scretch
 	key ="scretch"
@@ -27,10 +28,7 @@
 /decl/emote/audible/choke
 	key ="choke"
 	emote_message_3p = "USER chokes."
-
-/decl/emote/audible/moan
-	key ="moan"
-	emote_message_3p = "USER moans!"
+	conscious = 0
 
 /decl/emote/audible/gnarl
 	key ="gnarl"
@@ -77,6 +75,7 @@
 /decl/emote/audible/snore
 	key = "snore"
 	emote_message_3p = "USER snores."
+	conscious = 0
 
 /decl/emote/audible/whimper
 	key = "whimper"
@@ -97,6 +96,7 @@
 /decl/emote/audible/cough
 	key = "cough"
 	emote_message_3p = "USER coughs!"
+	conscious = 0
 
 /decl/emote/audible/cry
 	key = "cry"
@@ -121,10 +121,12 @@
 /decl/emote/audible/groan
 	key = "groan"
 	emote_message_3p = "USER groans!"
+	conscious = 0
 
 /decl/emote/audible/moan
 	key = "moan"
 	emote_message_3p = "USER moans!"
+	conscious = 0
 
 /decl/emote/audible/giggle
 	key = "giggle"

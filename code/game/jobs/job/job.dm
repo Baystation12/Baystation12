@@ -168,3 +168,23 @@
 		return 1
 	else
 		return 0
+
+//Returns human-readable list of branches this job allows.
+/datum/job/proc/get_branches()
+	var/list/res = list()
+	for(var/T in allowed_branches)
+		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+		res += B.name
+	return english_list(res)
+
+//Same as above but ranks
+/datum/job/proc/get_ranks(branch)
+	var/list/res = list()
+	var/datum/mil_branch/B = mil_branches.get_branch(branch)
+	for(var/T in allowed_ranks)
+		var/datum/mil_rank/R = new T
+		if(B && !(R.name in B.ranks))
+			continue
+		res += R.name
+		qdel(R)
+	return english_list(res)

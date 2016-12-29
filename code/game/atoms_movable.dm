@@ -45,6 +45,9 @@
 		pulledby = null
 
 /atom/movable/proc/initialize()
+	if(rad_power)
+		radiation_repository.sources.Add(src)
+
 	if(!isnull(gcDestroyed))
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 

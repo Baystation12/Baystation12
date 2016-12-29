@@ -23,6 +23,7 @@
 
 	set_opacity(material.opacity >= 0.5)
 
+	calc_rad_resistance()
 	update_connections(1)
 	update_icon()
 

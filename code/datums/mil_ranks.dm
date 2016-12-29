@@ -29,6 +29,14 @@ var/datum/mil_branches/mil_branches = new()
 		return branches[branch_name]
 
 /**
+ *  Retrieve branch object by branch type
+ */
+/datum/mil_branches/proc/get_branch_by_type(var/branch_type)
+	for(var/name in branches)
+		if (istype(branches[name], branch_type))
+			return branches[name]
+
+/**
  *  Retrieve a rank object from given branch by name
  */
 /datum/mil_branches/proc/get_rank(var/branch_name, var/rank_name)

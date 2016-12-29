@@ -347,3 +347,12 @@
 	dock_target_station = "specops_centcom_dock"
 	dock_target_offsite = "specops_dock_airlock"
 
+//Cargo drone
+
+/datum/shuttle/ferry/supply/drone
+	name = "Supply Drone"
+	location = 1
+	warmup_time = 10
+	area_offsite = /area/supply/dock
+	area_station = /area/supply/station
+	docking_controller_tag = "" // lands, doesn't dock
