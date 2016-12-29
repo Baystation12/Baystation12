@@ -7,6 +7,7 @@
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = "5;10;15;25;30"
 	var/volume = 30
+	var/label_text
 
 /obj/item/weapon/reagent_containers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"
@@ -32,6 +33,22 @@
 	if(reagents)
 		return reagents.get_reagents()
 	return "No reagent holder"
+
+/obj/item/weapon/reagent_containers/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
+		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
+		if(length(tmp_label) > 10)
+			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
+		else
+			to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
+			label_text = tmp_label
+			update_name_label()
+
+/obj/item/weapon/reagent_containers/proc/update_name_label()
+	if(label_text == "")
+		name = initial(name)
+	else
+		name = "[initial(name)] ([label_text])"
 
 /obj/item/weapon/reagent_containers/proc/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target) // This goes into afterattack
 	if(!istype(target))
