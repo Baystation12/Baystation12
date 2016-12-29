@@ -68,7 +68,7 @@
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// stop the jams for AIs
 
 
-	var/mob/living/silicon/ai/O = new (loc, base_law_type,,1)//No MMI but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc, using_map.default_law_type,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
 	if(mind)

@@ -98,15 +98,6 @@
 
 	var/debug = 0
 
-
-/obj/machinery/power/supermatter/New()
-	. = ..()
-	GhostFollowObjects.Add(src)
-
-/obj/machinery/power/supermatter/Destroy()
-	GhostFollowObjects.Remove(src)
-	. = ..()
-
 /obj/machinery/power/supermatter/proc/explode()
 	set waitfor = 0
 
@@ -306,7 +297,7 @@
 		var/rads = (power / 10) * ( 1 / (radius**2) )
 		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
 */
-	rad_power = power //Better close those shutters!
+	rad_power = power * 2 //Better close those shutters!
 
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 

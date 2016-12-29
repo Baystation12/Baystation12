@@ -182,9 +182,8 @@
 	var/list/res = list()
 	var/datum/mil_branch/B = mil_branches.get_branch(branch)
 	for(var/T in allowed_ranks)
-		var/datum/mil_rank/R = new T
-		if(B && !(R.name in B.ranks))
+		var/datum/mil_rank/R = T
+		if(B && !(initial(R.name) in B.ranks))
 			continue
-		res += R.name
-		qdel(R)
+		res += initial(R.name)
 	return english_list(res)

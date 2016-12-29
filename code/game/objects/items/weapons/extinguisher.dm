@@ -51,6 +51,23 @@
 	to_chat(user, "The safety is [safety ? "on" : "off"].")
 	return
 
+/obj/item/weapon/extinguisher/attack(var/mob/living/M, var/mob/user)
+	if(user.a_intent == I_HELP)
+		if(src.safety || (world.time < src.last_use + 20)) // We still catch help intent to not randomly attack people
+			return
+		if(src.reagents.total_volume < 1)
+			to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
+			return
+
+		src.last_use = world.time
+		reagents.splash(M, min(reagents.total_volume, spray_amount))
+		
+		user.visible_message("<span class='notice'>\The [user] sprays \the [M] with \the [src].</span>")
+		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
+		
+		return 1 // No afterattack
+	return ..()
+
 /obj/item/weapon/extinguisher/proc/propel_object(var/obj/O, mob/user, movementdirection)
 	if(O.anchored) return
 
