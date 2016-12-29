@@ -28,10 +28,10 @@ var/activetype = null //Is this a search or arrest warrtant?
 //hit yourself with it
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
 	if(!storedwarrant.len)
-		user << "There seem to be no warrants stored in the device. Please sync with the station's database."
+		to_chat(user, "There seem to be no warrants stored in the device. Please sync with the station's database.")
 		return
 	var/temp
-	temp = input(usr, "Which warrant would you like to load?") as null|anything in storedwarrant
+	temp = input(user, "Which warrant would you like to load?") as null|anything in storedwarrant
 	for(var/datum/data/record/warrant/W in data_core.warrants)
 		if(W.fields["namewarrant"] == temp)
 			activename = W.fields["namewarrant"]
