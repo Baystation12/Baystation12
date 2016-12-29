@@ -17,9 +17,13 @@ var/list/to_process = list()
 	if(!(source && power)) //Sanity checking
 		return
 
-	var/test = 1
+	var/lower_limit = config.radiation_lower_limit //Lag control
+	if(power > (lower_limit * 1000))
+		lower_limit = (power / 1000)
+
+	var/test = 999
 	var/range = 1
-	while(test >= config.radiation_lower_limit)
+	while(test >= lower_limit)
 		test = (power / (range ** 2))
 		range++ //Calculates the maximum distance the radiation could travel, for trange
 	var/turf/epicentre = get_turf(source)

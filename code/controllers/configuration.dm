@@ -219,7 +219,7 @@ var/list/gamemode_cache = list()
 
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
 	var/radiation_resistance_multiplier = 6
-	var/radiation_lower_limit = 0.25 //If the radiation level for a turf would be below this, ignore it.
+	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
