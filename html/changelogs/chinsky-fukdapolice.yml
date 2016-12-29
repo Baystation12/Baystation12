@@ -1,8 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added some hints for filthy civilian scum. Gosh, some people"
-  - rscadd: "You can click on [WRONG BRANCH KIDDO] type messages to get info on what branch/rank is right for this job."
-  - rscadd: "All open jobslots can be seen again in latejoin, but if you try to pick one with wrong branchrank, you get message about it with hints."
