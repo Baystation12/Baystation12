@@ -119,19 +119,19 @@
 			continue
 		if(job.allowed_branches)
 			if(!player_branch)
-				. += "<del>[rank]</del></td><td><b> \[BRANCH RESTRICTED]</b></td></tr>"
+				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
 				continue
 			if(!is_type_in_list(player_branch, job.allowed_branches))
-				. += "<del>[rank]</del></td><td><b> \[NOT FOR [player_branch.name_short]]</b></td></tr>"
+				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
 				continue
 
 		if(job.allowed_ranks)
 			if(!player_rank)
-				. += "<del>[rank]</del></td><td><b> \[RANK RESTRICTED]</b></td></tr>"
+				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_ranks=[rank]'><b> \[RANK RESTRICTED]</b></a></td></tr>"
 				continue
 
 			if(!is_type_in_list(player_rank, job.allowed_ranks))
-				. += "<del>[rank]</del></td><td><b> \[NOT FOR [player_rank.name_short || player_rank.name]]</b></td></tr>"
+				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_ranks=[rank]'><b> \[NOT FOR [player_rank.name_short || player_rank.name]]</b></a></td></tr>"
 				continue
 
 		if(("Assistant" in pref.job_low) && (rank != "Assistant"))
@@ -225,6 +225,14 @@
 			pref.char_rank = choice
 			prune_job_prefs_for_rank()
 			return TOPIC_REFRESH
+	else if(href_list["show_branches"])
+		var/rank = href_list["show_branches"]
+		var/datum/job/job = job_master.GetJob(rank)
+		to_chat(user, "<span clas='notice'>Valid branches for [rank]: [job.get_branches()]</span>")
+	else if(href_list["show_ranks"])
+		var/rank = href_list["show_ranks"]
+		var/datum/job/job = job_master.GetJob(rank)
+		to_chat(user, "<span clas='notice'>Valid ranks for [rank] ([pref.char_branch]): [job.get_ranks(pref.char_branch)]</span>")
 
 	return ..()
 
