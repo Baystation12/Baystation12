@@ -151,7 +151,8 @@
 
 	if(holder)
 		add_admin_verbs()
-		admin_memo_show()
+		if(holder.rights != R_MOD) // don't let mods see admin memos
+			admin_memo_show()
 
 	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
 	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
