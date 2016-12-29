@@ -72,6 +72,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/branch_types  // list of branch datum paths for military branches available on this map
 	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
 
+	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
+
 /datum/map/New()
 	..()
 	if(!map_levels)
