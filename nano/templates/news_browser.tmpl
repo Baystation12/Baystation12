@@ -35,7 +35,20 @@
 		</div>			
 	</div>
 {{else}}
-	<b>Listing available files</b><hr>
+	<h3>Listing available files</h3>
+	<div class='item'>
+		<div class='itemLabel'>
+			Show archived files:
+		</div>
+		<div class='itemContent'>
+			{{if data.showing_archived}}
+				{{:helper.link('YES', null, { "PRG_toggle_archived" : 1 })}}
+			{{else}}
+				{{:helper.link('NO', null, { "PRG_toggle_archived" : 1 })}}
+			{{/if}}
+		</div>
+	</div>
+	<br><hr>
 	{{for data.all_articles}}
 		<div class='item'>
 			<div class='itemLabel'>

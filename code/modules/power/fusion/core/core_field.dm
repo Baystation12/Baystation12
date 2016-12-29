@@ -1,6 +1,4 @@
-// temperature of the core of the sun
-#define FUSION_HEAT_CAP 1.57e7
-#define FUSION_ENERGY_PER_K 50
+#define FUSION_ENERGY_PER_K 20
 
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
@@ -10,6 +8,7 @@
 	alpha = 50
 	layer = 4
 	light_color = COLOR_BLUE
+	rad_power = 1
 
 	var/size = 1
 	var/energy = 0
@@ -22,6 +21,13 @@
 	var/obj/machinery/power/fusion_core/owned_core
 	var/list/dormant_reactant_quantities = list()
 	var/list/particle_catchers = list()
+
+	var/list/ignore_types = list(
+		/obj/item/projectile,
+		/obj/effect,
+		/obj/structure/cable,
+		/obj/machinery/atmospherics
+		)
 
 	var/light_min_range = 2
 	var/light_min_power = 3
@@ -105,8 +111,23 @@
 
 /obj/effect/fusion_em_field/process()
 	//make sure the field generator is still intact
-	if(!owned_core)
+	if(!owned_core || deleted(owned_core))
 		qdel(src)
+		return
+
+	// Take some gas up from our environment.
+	var/added_particles = FALSE
+	var/datum/gas_mixture/uptake_gas = owned_core.loc.return_air()
+	if(uptake_gas)
+		uptake_gas = uptake_gas.remove_by_flag(XGM_GAS_FUSION_FUEL, rand(50,100))
+	if(uptake_gas && uptake_gas.total_moles)
+		for(var/gasname in uptake_gas.gas)
+			if(uptake_gas.gas[gasname]*10 > dormant_reactant_quantities[gasname])
+				AddParticles(gasname, uptake_gas.gas[gasname]*10)
+				uptake_gas.adjust_gas(gasname, -(uptake_gas.gas[gasname]), update=FALSE)
+				added_particles = TRUE
+		if(added_particles)
+			uptake_gas.update_values()
 
 	//let the particles inside the field react
 	React()
@@ -150,11 +171,12 @@
 
 	check_instability()
 	Radiate()
+	rad_power = radiation
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()
 	if(tick_instability > 0)
-		percent_unstable += (tick_instability*size)/1000000
+		percent_unstable += (tick_instability*size)/10000
 		tick_instability = 0
 	else
 		if(percent_unstable < 0)
@@ -194,14 +216,9 @@
 				else
 					var/lost_plasma = (plasma_temperature*percent_unstable)
 					radiation += lost_plasma
-					plasma_temperature -= lost_plasma
-
 					if(flare)
-						var/turf/T = get_turf(owned_core)
-						var/datum/gas_mixture/GM = T.return_air()
-						GM.adjust_gas("oxygen", (size*50)*percent_unstable, 0)
-						GM.adjust_gas("phoron", (size*50)*percent_unstable, 0)
 						radiation += plasma_temperature/2
+					plasma_temperature -= lost_plasma
 
 					if(fuel_loss)
 						for(var/particle in dormant_reactant_quantities)
@@ -239,7 +256,7 @@
 	energy += a_energy
 	plasma_temperature += a_plasma_temperature
 	if(a_energy && percent_unstable > 0)
-		percent_unstable -= a_energy/1000
+		percent_unstable -= a_energy/10000
 		if(percent_unstable < 0)
 			percent_unstable = 0
 	while(energy >= 100)
@@ -274,17 +291,34 @@
 	radiation += plasma_temperature/2
 	plasma_temperature = 0
 
+	radiation_repository.radiate(src, radiation)
 	Radiate()
 
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(istype(loc, /turf))
 		var/empsev = max(1, min(3, ceil(size/2)))
 		for(var/atom/movable/AM in range(max(1,Floor(size/2)), loc))
-			if(AM == src || AM == owned_core)
+
+			if(AM == src || AM == owned_core || !AM.simulated)
 				continue
+
+			var/skip_obstacle
+			for(var/ignore_path in ignore_types)
+				if(istype(AM, ignore_path))
+					skip_obstacle = TRUE
+					break
+			if(skip_obstacle)
+				continue
+
+			log_debug("R-UST DEBUG: [AM] is [AM.type]")
+			AM.visible_message("<span class='danger'>The field buckles visibly around \the [AM]!</span>")
+			tick_instability += rand(15,30)
 			AM.emp_act(empsev)
-		for(var/mob/living/L in range(max(1,ceil(radiation/100)),loc))
-			L.apply_effect(radiation,IRRADIATE, blocked = L.getarmor(null, "rad"))
+
+	if(owned_core && owned_core.loc)
+		var/datum/gas_mixture/environment = owned_core.loc.return_air()
+		if(environment && environment.temperature < (T0C+1000)) // Putting an upper bound on it to stop it being used in a TEG.
+			environment.add_thermal_energy(plasma_temperature*20000)
 	radiation = 0
 
 /obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
@@ -450,7 +484,7 @@
 	. = ..()
 
 /obj/effect/fusion_em_field/bullet_act(var/obj/item/projectile/Proj)
-	AddEnergy(Proj.damage * 20, 0, 1)
+	AddEnergy(Proj.damage)
 	update_icon()
 	return 0
 

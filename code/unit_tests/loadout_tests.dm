@@ -30,13 +30,15 @@ datum/unit_test/loadout_test_shall_have_valid_icon_states/start_test()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 		if(!type_has_valid_icon_state(G.path))
-			log_unit_test("[G]: [G.path] has a missing icon state.")
+			var/atom/A = G.path
+			log_unit_test("[G] - [G.path]: Did not find the icon state '[initial(A.icon_state)]' in the icon '[initial(A.icon)]'.")
 			failed = TRUE
 		for(var/datum/gear_tweak/path/p in G.gear_tweaks)
 			for(var/path_name in p.valid_paths)
 				var/path_type = p.valid_paths[path_name]
 				if(!type_has_valid_icon_state(path_type))
-					log_unit_test("[G]: [path_type] has a missing icon state.")
+					var/atom/A = path_type
+					log_unit_test("[G] - [path_type] ('[path_name]'): Did not find a gear_tweak's icon_state '[initial(A.icon_state)]' in the icon '[initial(A.icon)]'.")
 					failed = TRUE
 
 	if(failed)

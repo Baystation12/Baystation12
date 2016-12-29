@@ -70,7 +70,7 @@
 	origin_tech = list(TECH_ILLEGAL = 3)
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
-	
+
 /obj/item/device/radio/headset/syndicate/initialize()
 	..()
 	set_frequency(SYND_FREQ)
@@ -159,7 +159,7 @@
 
 /obj/item/device/radio/headset/heads/hos
 	name = "head of security's headset"
-	desc = "The headset of the man who protects your worthless lifes."
+	desc = "The headset of the man who protects your worthless lives."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
@@ -187,7 +187,7 @@
 
 /obj/item/device/radio/headset/headset_cargo
 	name = "supply radio headset"
-	desc = "A headset used by the QM and their slaves."
+	desc = "A headset used by the box pushers."
 	icon_state = "cargo_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_cargo
@@ -219,6 +219,13 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/entertainment
+
+/obj/item/device/radio/headset/specops
+	name = "special operations radio headset"
+	desc = "The headset of the spooks."
+	icon_state = "cent_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/specops
 
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()

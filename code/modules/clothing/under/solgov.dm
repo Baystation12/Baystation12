@@ -204,6 +204,7 @@
 	icon_state = "whiteservice"
 	item_state = "nursesuit"
 	worn_state = "whiteservice"
+	starting_accessories = list(/obj/item/clothing/accessory/navy)
 
 /obj/item/clothing/under/service/marine
 	name = "marine service uniform"
@@ -211,6 +212,7 @@
 	icon_state = "greenservice"
 	item_state = "johnny"
 	worn_state = "greenservice"
+	starting_accessories = list(/obj/item/clothing/accessory/brown)
 
 /obj/item/clothing/under/service/marine/command
 	name = "marine command service uniform"
@@ -218,9 +220,10 @@
 	icon_state = "greenservice_com"
 	item_state = "johnny"
 	worn_state = "greenservice_com"
+	starting_accessories = list(/obj/item/clothing/accessory/brown)
 
 //Dress
-/obj/item/clothing/under/dress
+/obj/item/clothing/under/mildress
 	name = "dress uniform"
 	desc = "A dress uniform of some kind."
 	icon_state = "greydress"
@@ -228,25 +231,25 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/dress/expeditionary
+/obj/item/clothing/under/mildress/expeditionary
 	name = "expeditionary dress uniform"
 	desc = "The dress uniform of the SCG Expeditionary Corps in silver trim."
 	icon_state = "greydress"
 	worn_state = "greydress"
 
-/obj/item/clothing/under/dress/expeditionary/command
+/obj/item/clothing/under/mildress/expeditionary/command
 	name = "expeditionary command dress uniform"
 	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
 	icon_state = "greydress_com"
 	worn_state = "greydress_com"
 
-/obj/item/clothing/under/dress/marine
+/obj/item/clothing/under/mildress/marine
 	name = "marine dress uniform"
 	desc = "The dress uniform of the SCG Marine Corps, class given form."
 	icon_state = "blackdress"
 	worn_state = "blackdress"
 
-/obj/item/clothing/under/dress/marine/command
+/obj/item/clothing/under/mildress/marine/command
 	name = "marine command dress uniform"
 	desc = "The dress uniform of the SCG Marine Corps, even classier in gold."
 	icon_state = "blackdress_com"

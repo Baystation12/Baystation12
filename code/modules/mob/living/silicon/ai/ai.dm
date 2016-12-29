@@ -124,11 +124,8 @@ var/list/ai_verbs_default = list(
 
 	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 
-	if(L)
-		if (istype(L, /datum/ai_laws))
-			laws = L
-	else
-		laws = new base_law_type
+	if(istype(L, /datum/ai_laws))
+		laws = L
 
 	aiMulti = new(src)
 	aiRadio = new(src)
@@ -152,6 +149,7 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_RESOMI, 1)
 	add_language(LANGUAGE_TRADEBAND, 1)
 	add_language(LANGUAGE_GUTTER, 1)
+	add_language(LANGUAGE_SIGN, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.

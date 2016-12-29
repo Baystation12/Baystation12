@@ -3,6 +3,10 @@
 	if(!network)
 		return 0
 
+	. = using_map.get_network_access(network)
+	if(.)
+		return
+
 	switch(network)
 		if(NETWORK_THUNDER)
 			return 0
@@ -12,7 +16,7 @@
 			return access_medical
 		if(NETWORK_RESEARCH,NETWORK_RESEARCH_OUTPOST)
 			return access_research
-		if(NETWORK_MINE,NETWORK_SUPPLY,NETWORK_CIVILIAN_WEST,NETWORK_EXPEDITION,NETWORK_CALYPSO,NETWORK_POD)
+		if(NETWORK_MINE,NETWORK_SUPPLY,NETWORK_CIVILIAN_WEST,NETWORK_EXPEDITION,NETWORK_POD)
 			return access_mailsorting // Cargo office - all cargo staff should have access here.
 		if(NETWORK_COMMAND,NETWORK_TELECOM)
 			return access_heads

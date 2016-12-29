@@ -29,15 +29,17 @@
 	var/list/allowed_branches			  // For Torch, also expandable for other purposes
 	var/list/allowed_ranks				  // Ditto
 
-/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
 
-/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
+	if(allowed_branches && branch)
+		. = allowed_branches[branch.type]
 	. = . ? . : outfit_type
 	. = outfit_by_type(.)
 
@@ -78,8 +80,8 @@
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip_base(H, title, alt_title)
@@ -117,11 +119,11 @@
 
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
-	
+
 /**
  *  Check if members of the given branch are allowed in the job
  *
- *  This proc should only be used after the global branch list has been initialized. 
+ *  This proc should only be used after the global branch list has been initialized.
  *
  *  branch_name - String key for the branch to check
  */
@@ -130,22 +132,22 @@
 		return 1
 	if(branch_name == "None")
 		return 0
-		
+
 	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
-	
+
 	if(!branch)
 		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
 		return 0
-		
+
 	if(is_type_in_list(branch, allowed_branches))
 		return 1
 	else
 		return 0
-		
+
 /**
  *  Check if people with given rank are allowed in this job
  *
- *  This proc should only be used after the global branch list has been initialized. 
+ *  This proc should only be used after the global branch list has been initialized.
  *
  *  branch_name - String key for the branch to which the rank belongs
  *  rank_name - String key for the rank itself
@@ -161,9 +163,27 @@
 	if(!rank)
 		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
 		return 0
-		
+
 	if(is_type_in_list(rank, allowed_ranks))
 		return 1
 	else
 		return 0
-		
+
+//Returns human-readable list of branches this job allows.
+/datum/job/proc/get_branches()
+	var/list/res = list()
+	for(var/T in allowed_branches)
+		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+		res += B.name
+	return english_list(res)
+
+//Same as above but ranks
+/datum/job/proc/get_ranks(branch)
+	var/list/res = list()
+	var/datum/mil_branch/B = mil_branches.get_branch(branch)
+	for(var/T in allowed_ranks)
+		var/datum/mil_rank/R = T
+		if(B && !(initial(R.name) in B.ranks))
+			continue
+		res += initial(R.name)
+	return english_list(res)

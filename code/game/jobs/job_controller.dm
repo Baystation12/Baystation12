@@ -45,7 +45,10 @@ var/global/datum/controller/occupations/job_master
 				civilian_positions |= job.title
 			if(job.department_flag & MSC)
 				nonhuman_positions |= job.title
-
+			if(job.department_flag & SRV)
+				service_positions |= job.title
+			if(job.department_flag & SUP)
+				supply_positions |= job.title
 
 		return 1
 
@@ -391,9 +394,11 @@ var/global/datum/controller/occupations/job_master
 							spawn_in_storage += thing
 			//Equip job items.
 			job.setup_account(H)
-			job.equip(H, H.mind ? H.mind.role_alt_title : "")
+			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
 			job.apply_fingerprints(H)
 
+			if(H.char_rank && H.char_rank.accessory)
+				H.equip_to_slot_or_del(new H.char_rank.accessory, slot_tie)
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]
@@ -427,7 +432,7 @@ var/global/datum/controller/occupations/job_master
 			else
 				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, rank)
 				H.forceMove(pick(spawnpoint.turfs))
-			
+
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
 				H.buckled.forceMove(H.loc)
@@ -502,7 +507,7 @@ var/global/datum/controller/occupations/job_master
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
 			var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(H), slot_glasses)
-			if(equipped != 1)
+			if(equipped)
 				var/obj/item/clothing/glasses/G = H.glasses
 				G.prescription = 7
 
@@ -584,28 +589,28 @@ var/global/datum/controller/occupations/job_master
  *  preference is not set, or the preference is not appropriate for the rank, in
  *  which case a fallback will be selected.
  */
-/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)	
+/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)
 
 	if(!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
-		
+
 	var/mob/H = C.mob
 	var/datum/spawnpoint/spawnpos
-	
+
 	if(C.prefs.spawnpoint)
 		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
 			if(H)
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
-				
+
 			spawnpos = null
 		else
 			spawnpos = spawntypes[C.prefs.spawnpoint]
-		
+
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
 			to_chat(H, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([rank]). Spawning you at another spawn point instead.</span>")
 		spawnpos = null
-	
+
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in using_map.allowed_spawns)
@@ -613,12 +618,12 @@ var/global/datum/controller/occupations/job_master
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break
-		
+
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [rank].")
 		spawnpos = spawntypes[pick(using_map.allowed_spawns)]
-		
+
 	return spawnpos
 
 /datum/controller/occupations/proc/GetJobByType(var/job_type)

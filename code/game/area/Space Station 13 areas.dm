@@ -130,7 +130,7 @@ area/space/atmosalert()
 /area/maintenance
 	flags = RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
-	turf_initializer = new /datum/turf_initializer/maintenance()
+	turf_initializer = /decl/turf_initializer/maintenance
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"

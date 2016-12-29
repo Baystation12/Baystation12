@@ -218,3 +218,14 @@ obj/machinery/atmospherics/pipe/zpipe/down/supply
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+// Colored misc. pipes
+obj/machinery/atmospherics/pipe/zpipe/up/cyan
+	color = PIPE_COLOR_CYAN
+obj/machinery/atmospherics/pipe/zpipe/down/cyan
+	color = PIPE_COLOR_CYAN
+
+obj/machinery/atmospherics/pipe/zpipe/up/red
+	color = PIPE_COLOR_RED
+obj/machinery/atmospherics/pipe/zpipe/down/red
+	color = PIPE_COLOR_RED

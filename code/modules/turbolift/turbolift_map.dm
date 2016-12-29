@@ -1,7 +1,7 @@
 // Map object.
 /obj/turbolift_map_holder
 	name = "turbolift map placeholder"
-	icon = 'icons/obj/turbolift_preview.dmi'
+	icon = 'icons/obj/turbolift_preview_3x3.dmi'
 	dir = SOUTH         // Direction of the holder determines the placement of the lift control panel and doors.
 	var/depth = 1       // Number of floors to generate, including the initial floor.
 	var/lift_size_x = 2 // Number of turfs on each axis to generate in addition to the first
@@ -44,6 +44,10 @@
 	var/door_y1
 	var/door_x2
 	var/door_y2
+	var/light_x1
+	var/light_x2
+	var/light_y1
+	var/light_y2
 
 	var/az = 1
 	var/ex = (ux+lift_size_x)
@@ -64,6 +68,11 @@
 			door_x2 = ex - 1
 			door_y2 = ey + 1
 
+			light_x1 = ux + 1
+			light_y1 = uy + 1
+			light_x2 = ux + lift_size_x - 1
+			light_y2 = uy + 1
+
 		if(SOUTH)
 
 			int_panel_x = ux + Floor(lift_size_x/2)
@@ -75,6 +84,11 @@
 			door_y1 = uy - 1
 			door_x2 = ex - 1
 			door_y2 = uy
+
+			light_x1 = ux + 1
+			light_y1 = uy + 2
+			light_x2 = ux + lift_size_x - 1
+			light_y2 = uy + lift_size_y - 1
 
 		if(EAST)
 
@@ -88,6 +102,11 @@
 			door_x2 = ex + 1
 			door_y2 = ey - 1
 
+			light_x1 = ux + 1
+			light_y1 = uy + 1
+			light_x2 = ux + 1
+			light_y2 = uy + lift_size_x - 1
+
 		if(WEST)
 
 			int_panel_x = ex-1
@@ -99,6 +118,11 @@
 			door_y1 = uy + 1
 			door_x2 = ux
 			door_y2 = ey - 1
+
+			light_x1 = ux + lift_size_x - 1
+			light_y1 = uy + 1
+			light_x2 = ux + lift_size_x - 1
+			light_y2 = uy + lift_size_y - 1
 
 	// Generate each floor and store it in the controller datum.
 	for(var/cz = uz;cz<=ez;cz++)
@@ -133,7 +157,8 @@
 
 				// Clear out contents.
 				for(var/atom/movable/thing in checking.contents)
-					qdel(thing)
+					if(thing.simulated)
+						qdel(thing)
 
 				if(tx >= ux && tx <= ex && ty >= uy && ty <= ey)
 					floor_turfs += checking
@@ -149,7 +174,8 @@
 						checking.ChangeTurf(floor_type)
 						checking = locate(tx,ty,cz)
 					for(var/atom/movable/thing in checking.contents)
-						qdel(thing)
+						if(thing.simulated)
+							qdel(thing)
 				if(checking.type == floor_type) // Don't build over empty space on lower levels.
 					var/obj/machinery/door/airlock/lift/newdoor = new door_type(checking)
 					if(internal)
@@ -165,6 +191,18 @@
 		panel_ext.floor = cfloor
 		panel_ext.set_dir(udir)
 		cfloor.ext_panel = panel_ext
+
+        // Place lights
+		var/turf/placing1 = locate(light_x1, light_y1, cz)
+		var/turf/placing2 = locate(light_x2, light_y2, cz)
+		var/obj/machinery/light/light1 = new(placing1, light)
+		var/obj/machinery/light/light2 = new(placing2, light)
+		if(udir == NORTH || udir == SOUTH)
+			light1.set_dir(WEST)
+			light2.set_dir(EAST)
+		else
+			light1.set_dir(SOUTH)
+			light2.set_dir(NORTH)
 
 		// Update area.
 		if(az > areas_to_use.len)

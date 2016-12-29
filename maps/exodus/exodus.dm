@@ -1,15 +1,27 @@
 #if !defined(USING_MAP_DATUM)
 
 	#include "exodus_areas.dm"
+	#include "exodus_effects.dm"
+	#include "exodus_elevator.dm"
 	#include "exodus_holodecks.dm"
 	#include "exodus_shuttles.dm"
 
 	#include "exodus_unit_testing.dm"
 	#include "exodus_zas_tests.dm"
 
+	#include "loadout/loadout_accessories.dm"
+	#include "loadout/loadout_eyes.dm"
+	#include "loadout/loadout_gloves.dm"
+	#include "loadout/loadout_head.dm"
+	#include "loadout/loadout_shoes.dm"
+	#include "loadout/loadout_suit.dm"
+	#include "loadout/loadout_uniform.dm"
+	#include "loadout/loadout_xeno.dm"
+
 	#include "../shared/exodus_torch_areas.dm"
 	#include "../shared/exodus_torch_zas_tests.dm"
 
+	#include "exodus-0.dmm"
 	#include "exodus-1.dmm"
 	#include "exodus-2.dmm"
 	#include "exodus-3.dmm"

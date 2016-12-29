@@ -11,6 +11,11 @@
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest."
 	icon_state = "expeditionsoft"
 
+/obj/item/clothing/head/soft/sol/expedition/co
+	name = "\improper Expeditionary Corps command cap"
+	desc = "It's a black ballcap bearing the Expeditonary Corps crest. It has golden leaf on the brim."
+	icon_state = "expeditioncomsoft"
+
 /obj/item/clothing/head/soft/sol/fleet
 	name = "fleet cap"
 	desc = "It's a navy blue ballcap with the SCG Fleet crest."

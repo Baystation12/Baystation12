@@ -26,6 +26,8 @@
 	..()
 
 /obj/item/clothing/suit/storage/hooded/proc/RemoveHood()
+	if(!hood)
+		return
 	suittoggled = 0
 	update_icon()
 	if(ishuman(hood.loc))
@@ -60,7 +62,7 @@
 		icon_state = "[initial(icon_state)]_t"
 	else
 		icon_state = "[initial(icon_state)]"
-		
+
 
 /obj/item/clothing/suit/storage/hooded/wintercoat
 	name = "winter coat"

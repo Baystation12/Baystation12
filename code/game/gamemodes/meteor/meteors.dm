@@ -1,20 +1,69 @@
 /var/const/meteor_wave_delay = 1 MINUTE //minimum wait between waves in tenths of seconds
 //set to at least 100 unless you want evarr ruining every round
 
-//Meteors probability of spawning during a given wave
-/var/list/meteors_normal = list(/obj/effect/meteor/dust=3, /obj/effect/meteor/medium=8, /obj/effect/meteor/big=3, \
-						  /obj/effect/meteor/flaming=1, /obj/effect/meteor/irradiated=3) //for normal meteor event
+//Meteor groups, used for various random events and the Meteor gamemode.
 
-/var/list/meteors_threatening = list(/obj/effect/meteor/medium=5, /obj/effect/meteor/big=10, \
-						  /obj/effect/meteor/flaming=3, /obj/effect/meteor/irradiated=3, /obj/effect/meteor/emp=3) //for threatening meteor event
+// Dust, used by space dust event and during earliest stages of meteor mode.
+/var/list/meteors_dust = list(/obj/effect/meteor/dust)
 
-/var/list/meteors_catastrophic = list(/obj/effect/meteor/medium=5, /obj/effect/meteor/big=75, \
-						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
+// Standard meteors, used for the low severity meteor event, and during early stages of the meteor gamemode.
+/var/list/meteors_normal = list(\
+		/obj/effect/meteor/medium=8,\
+		/obj/effect/meteor/dust=3,\
+		/obj/effect/meteor/irradiated=3,\
+		/obj/effect/meteor/big=3,\
+		/obj/effect/meteor/flaming=1,\
+		/obj/effect/meteor/golden=1,\
+		/obj/effect/meteor/silver=1\
+		)
 
-/var/list/meteors_armageddon = list(/obj/effect/meteor/medium=3, /obj/effect/meteor/big=25, \
-						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 3) //Meteor mode only. Good Luck.
+// Threatening meteors, used for medium severity meteor event, and during meteor gamemode.
+/var/list/meteors_threatening = list(\
+		/obj/effect/meteor/big=10,\
+		/obj/effect/meteor/medium=5,\
+		/obj/effect/meteor/golden=3,\
+		/obj/effect/meteor/silver=3,\
+		/obj/effect/meteor/flaming=3,\
+		/obj/effect/meteor/irradiated=3,\
+		/obj/effect/meteor/emp=3\
+		)
 
-/var/list/meteors_dust = list(/obj/effect/meteor/dust) //for space dust event
+// Catastrophic meteors, pretty dangerous without shields and used for high severity meteor event, and during meteor gamemode.
+/var/list/meteors_catastrophic = list(\
+		/obj/effect/meteor/big=75,\
+		/obj/effect/meteor/flaming=10,\
+		/obj/effect/meteor/irradiated=10,\
+		/obj/effect/meteor/emp=10,\
+		/obj/effect/meteor/medium=5,\
+		/obj/effect/meteor/golden=4,\
+		/obj/effect/meteor/silver=4,\
+		/obj/effect/meteor/tunguska=1\
+		)
+
+// Armageddon meteors, very dangerous, and currently used only during the meteor gamemode.
+/var/list/meteors_armageddon = list(\
+		/obj/effect/meteor/big=25,\
+		/obj/effect/meteor/flaming=10,\
+		/obj/effect/meteor/irradiated=10,\
+		/obj/effect/meteor/emp=10,\
+		/obj/effect/meteor/medium=3,\
+		/obj/effect/meteor/tunguska=3,\
+		/obj/effect/meteor/golden=2,\
+		/obj/effect/meteor/silver=2\
+		)
+
+// Cataclysm meteor selection. Very very dangerous and effective even against shields. Used in late game meteor gamemode only.
+/var/list/meteors_cataclysm = list(\
+		/obj/effect/meteor/big=40,\
+		/obj/effect/meteor/emp=20,\
+		/obj/effect/meteor/tunguska=20,\
+		/obj/effect/meteor/irradiated=10,\
+		/obj/effect/meteor/golden=10,\
+		/obj/effect/meteor/silver=10,\
+		/obj/effect/meteor/flaming=10,\
+		/obj/effect/meteor/supermatter=1\
+		)
+
 
 
 ///////////////////////////////
@@ -101,7 +150,7 @@
 	var/heavy = 0
 	var/z_original
 	var/meteordrop = /obj/item/weapon/ore/iron
-	var/dropamt = 2
+	var/dropamt = 1
 
 /obj/effect/meteor/proc/get_shield_damage()
 	return max(((max(hits, 2)) * (heavy + 1) * rand(30, 60)) / hitpwr , 0)
@@ -199,12 +248,13 @@
 	pass_flags = PASSTABLE | PASSGRILLE
 	hits = 1
 	hitpwr = 3
+	dropamt = 1
 	meteordrop = /obj/item/weapon/ore/glass
 
 //Medium-sized
 /obj/effect/meteor/medium
 	name = "meteor"
-	dropamt = 3
+	dropamt = 2
 
 /obj/effect/meteor/medium/meteor_effect()
 	..()
@@ -216,7 +266,7 @@
 	icon_state = "large"
 	hits = 6
 	heavy = 1
-	dropamt = 4
+	dropamt = 3
 
 /obj/effect/meteor/big/meteor_effect()
 	..()
@@ -241,21 +291,30 @@
 	heavy = 1
 	meteordrop = /obj/item/weapon/ore/uranium
 
-
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
 	explosion(src.loc, 0, 0, 4, 3, 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
-	for(var/mob/living/L in view(5, src))
-		L.apply_effect(40, IRRADIATE, blocked = L.getarmor(null, "rad"))
+	radiation_repository.radiate(src, 50)
 
-//
+/obj/effect/meteor/golden
+	name = "golden meteor"
+	icon_state = "glowing"
+	desc = "Shiny! But also deadly."
+	meteordrop = /obj/item/weapon/ore/gold
+
+/obj/effect/meteor/silver
+	name = "silver meteor"
+	icon_state = "glowing_blue"
+	desc = "Shiny! But also deadly."
+	meteordrop = /obj/item/weapon/ore/silver
+
 /obj/effect/meteor/emp
 	name = "conducting meteor"
 	icon_state = "glowing_blue"
 	desc = "Hide your floppies!"
 	meteordrop = /obj/item/weapon/ore/osmium
-	dropamt = 3
+	dropamt = 2
 
 /obj/effect/meteor/emp/meteor_effect()
 	..()
@@ -274,9 +333,24 @@
 	hits = 10
 	hitpwr = 1
 	heavy = 1
-	dropamt = 15
 	meteordrop = /obj/item/weapon/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 
 /obj/effect/meteor/tunguska/meteor_effect()
 	..()
 	explosion(src.loc, 3, 6, 9, 20, 0)
+
+// This is the final solution against shields - a single impact can bring down most shield generators.
+/obj/effect/meteor/supermatter
+	name = "supermatter shard"
+	desc = "Oh god, what will be next..?"
+	icon = 'icons/obj/engine.dmi'
+	icon_state = "darkmatter"
+
+/obj/effect/meteor/supermatter/meteor_effect()
+	..()
+	explosion(src.loc, 1, 2, 3, 4, 0)
+	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
+		A.energy_fail(round(10 * rand(8, 12)))
+
+/obj/effect/meteor/supermatter/get_shield_damage()
+	return ..() * rand(80, 120)

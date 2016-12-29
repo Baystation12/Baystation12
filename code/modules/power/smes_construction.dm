@@ -75,6 +75,14 @@
 	charge = 0
 	should_be_mapped = 1
 
+/obj/machinery/power/smes/buildable/max_cap_in_out/initialize()
+	..()
+	charge = capacity
+	input_attempt = TRUE
+	output_attempt = TRUE
+	input_level = input_level_max
+	output_level = output_level_max
+
 /obj/machinery/power/smes/buildable/Destroy()
 	qdel(wires)
 	wires = null

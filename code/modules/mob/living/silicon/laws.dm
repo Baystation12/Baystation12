@@ -1,10 +1,18 @@
 /mob/living/silicon
-	var/datum/ai_laws/laws = null
+	var/datum/ai_laws/laws
 	var/list/additional_law_channels = list("State" = "")
+
+/mob/living/silicon/New()
+	..()
+	if(!laws)
+		laws = using_map.default_law_type
+	if(ispath(laws))
+		laws = new laws()
+	laws_sanity_check()
 
 /mob/living/silicon/proc/laws_sanity_check()
 	if (!src.laws)
-		laws = new base_law_type
+		laws = new using_map.default_law_type
 
 /mob/living/silicon/proc/has_zeroth_law()
 	return laws.zeroth_law != null

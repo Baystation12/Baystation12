@@ -11,6 +11,7 @@
 /decl/emote/visible/drool
 	key ="drool"
 	emote_message_3p = "USER drools."
+	conscious = 0
 
 /decl/emote/visible/nod
 	key ="nod"
@@ -23,10 +24,6 @@
 /decl/emote/visible/sulk
 	key ="sulk"
 	emote_message_3p = "USER sulks down sadly."
-
-/decl/emote/visible/twitch
-	key ="twitch"
-	emote_message_3p = "USER twitches violently."
 
 /decl/emote/visible/dance
 	key ="dance"
@@ -53,6 +50,7 @@
 /decl/emote/visible/shiver
 	key ="shiver"
 	emote_message_3p = "USER shivers."
+	conscious = 0
 
 /decl/emote/visible/collapse
 	key ="collapse"
@@ -99,10 +97,6 @@
 	check_restraints = TRUE
 	emote_message_3p = "USER flaps USER_THEIR wings ANGRILY!"
 
-/decl/emote/visible/drool
-	key = "drool"
-	emote_message_3p = "USER drools."
-
 /decl/emote/visible/eyebrow
 	key = "eyebrow"
 	emote_message_3p = "USER raises an eyebrow."
@@ -110,10 +104,12 @@
 /decl/emote/visible/twitch
 	key = "twitch"
 	emote_message_3p = "USER twitches."
+	conscious = 0
 
 /decl/emote/visible/twitch_v
 	key = "twitch_v"
 	emote_message_3p = "USER twitches violently."
+	conscious = 0
 
 /decl/emote/visible/faint
 	key = "faint"

@@ -1,0 +1,89 @@
+{{if data.warrantauth}}
+
+	<div class='item'>
+		{{if data.type == "arrest"}}
+			<div class='itemLabel'>
+				Name:
+			</div>
+		{{/if}}
+		{{if data.type == "search"}}
+			<div class='itemLabel'>
+				Location:
+			</div>
+		{{/if}}
+		<div class='itemContent'>
+			{{:data.warrantname}}
+		</div>
+	</div>
+	<div class='item'>
+		{{if data.type == "arrest"}}
+			<div class='itemLabel'>
+				Charges:
+			</div>
+		{{/if}}
+				{{if data.type == "search"}}
+			<div class='itemLabel'>
+				Reason:
+			</div>
+		{{/if}}
+		<div class='itemContent'>
+			{{:data.warrantcharges}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class='itemLabel'>
+			Authorized by:
+		</div>
+		<div class='itemContent'>
+			{{:data.warrantauth}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class='itemLabel'>
+			Actions:
+		</div>
+		<div class='itemContent'>
+			<table>
+				{{if data.type == "arrest"}}
+					<tr><td>{{:helper.link('Edit Name', null, {'editwarrantname' : 1})}}{{:helper.link('Custom Name', null, {'editwarrantnamecustom' : 1})}}
+					<tr><td>{{:helper.link('Edit Charges', null, {'editwarrantcharges' : 1})}}
+				{{/if}}
+				{{if data.type == "search"}}
+					<tr><td>{{:helper.link('Edit Location', null, {'editwarrantnamecustom' : 1})}}
+					<tr><td>{{:helper.link('Edit Reason', null, {'editwarrantcharges' : 1})}}	
+				{{/if}}
+				<tr><td>{{:helper.link('Authorize', null, {'editwarrantauth' : 1})}}
+				<tr><td>{{:helper.link('Save', null, {'savewarrant' : 1})}}
+				<td>{{:helper.link('Delete', null, {'deletewarrant' : 1})}}
+				<tr><td>{{:helper.link('Back to Menu', null, {'back' : 1})}}
+			</table>
+		</div>
+	</div>
+
+{{else}}
+
+	{{:helper.link('Add a Warrant', null, {'addwarrant' : 1})}}<br><hr>
+	<h2>Arrest warrants</h2>
+	<table>
+		<tr><th>Name<th>Charges<th>Authorized By
+		{{for data.allwarrants}}
+			{{if value.arrestsearch == "arrest"}}
+				<tr><td>{{:helper.link(value.warrantname, null, {'editwarrant' : value.id})}}</td>
+				<td>{{:value.charges}}</td>
+				<td>{{:value.auth}}</td>
+			{{/if}}
+		{{/for}}		
+	</table>
+	<h2>Search warrants</h2>
+	<table>
+		<tr><th>Location<th>Reason<th>Authorized By
+		{{for data.allwarrants}}
+			{{if value.arrestsearch == "search"}}
+				<tr><td>{{:helper.link(value.warrantname, null, {'editwarrant' : value.id})}}</td>
+				<td>{{:value.charges}}</td>
+				<td>{{:value.auth}}</td>
+			{{/if}}
+		{{/for}}		
+	</table>
+
+{{/if}}

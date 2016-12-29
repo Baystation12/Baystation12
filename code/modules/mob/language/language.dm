@@ -161,6 +161,10 @@
 /mob/proc/can_speak(datum/language/speaking)
 	if(!speaking)
 		return 0
+
+	if (only_species_language && speaking != all_languages[species_language])
+		return 0
+
 	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
 
 /mob/proc/get_language_prefix()
@@ -210,7 +214,12 @@
 /mob/living/Topic(href, href_list)
 	if(href_list["default_lang"])
 		if(href_list["default_lang"] == "reset")
-			set_default_language(null)
+
+			if (species_language)
+				set_default_language(all_languages[species_language])
+			else
+				set_default_language(null)
+
 		else
 			var/datum/language/L = locate(href_list["default_lang"])
 			if(L && (L in languages))

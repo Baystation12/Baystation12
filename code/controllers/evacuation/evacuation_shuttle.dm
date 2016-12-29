@@ -1,3 +1,6 @@
+#define EVAC_OPT_CALL_SHUTTLE "call_shuttle"
+#define EVAC_OPT_RECALL_SHUTTLE "recall_shuttle"
+
 /datum/evacuation_controller/pods/shuttle
 	name = "escape shuttle controller"
 	evac_waiting =  new(0, new_sound = sound('sound/AI/shuttledock.ogg'))
@@ -8,6 +11,11 @@
 	var/autopilot = 1
 	var/datum/shuttle/ferry/emergency/shuttle // Set in shuttle_emergency.dm
 	var/shuttle_launch_time
+
+	evacuation_options = list(
+		EVAC_OPT_CALL_SHUTTLE = new /datum/evacuation_option/call_shuttle(),
+		EVAC_OPT_RECALL_SHUTTLE = new /datum/evacuation_option/recall_shuttle()
+	)
 
 /datum/evacuation_controller/pods/shuttle/has_evacuated()
 	return departed
@@ -36,14 +44,12 @@
 	. = ..()
 
 /datum/evacuation_controller/pods/shuttle/call_evacuation(var/mob/user, var/_emergency_evac, var/forced)
-	if(..(user, _emergency_evac, forced, skip_announce=1))
+	if(..(user, _emergency_evac, forced))
 		autopilot = 1
 		shuttle_launch_time = world.time + (evac_prep_delay/2)
-		evac_ready_time = world.time + evac_prep_delay + (shuttle.warmup_time*10)
-		if(emergency_evacuation)
-			evac_called.Announce(replacetext(using_map.emergency_shuttle_called_message, "%ETA%", "[round(get_eta()/60)] minute\s."))
-		else
-			priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(get_eta()/60)] minute\s"))
+		evac_ready_time += shuttle.warmup_time*10
+		return 1
+	return 0
 
 /datum/evacuation_controller/pods/shuttle/cancel_evacuation()
 	if(..() && shuttle.moving_status != SHUTTLE_INTRANSIT)
@@ -90,3 +96,34 @@
 		return round(evac_prep_delay/10)/2
 	else
 		return round(evac_transit_delay/10)
+
+/datum/evacuation_controller/pods/shuttle/available_evac_options()
+	if (!shuttle.location)
+		return list()
+	if (is_idle())
+		return list(evacuation_options[EVAC_OPT_CALL_SHUTTLE])
+	else
+		return list(evacuation_options[EVAC_OPT_RECALL_SHUTTLE])
+
+/datum/evacuation_option/call_shuttle
+	option_text = "Call emergency shuttle"
+	option_desc = "call the emergency shuttle"
+	option_target = EVAC_OPT_CALL_SHUTTLE
+	needs_syscontrol = TRUE
+	silicon_allowed = TRUE
+
+/datum/evacuation_option/call_shuttle/execute(mob/user)
+	call_shuttle_proc(user)
+
+/datum/evacuation_option/recall_shuttle
+	option_text = "Cancel shuttle call"
+	option_desc = "recall the emergency shuttle"
+	option_target = EVAC_OPT_RECALL_SHUTTLE
+	needs_syscontrol = TRUE
+	silicon_allowed = FALSE
+
+/datum/evacuation_option/recall_shuttle/execute(mob/user)
+	cancel_call_proc(user)
+
+#undef EVAC_OPT_CALL_SHUTTLE
+#undef EVAC_OPT_RECALL_SHUTTLE

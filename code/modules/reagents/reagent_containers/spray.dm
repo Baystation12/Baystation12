@@ -114,6 +114,14 @@
 	..()
 	reagents.add_reagent("sterilizine", volume)
 
+/obj/item/weapon/reagent_containers/spray/hair_remover
+	name = "hair remover"
+	desc = "Very effective at removing hair, feathers, spines and horns."
+
+/obj/item/weapon/reagent_containers/spray/hair_remover/New()
+	..()
+	reagents.add_reagent("hair_remover", volume)
+
 /obj/item/weapon/reagent_containers/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."

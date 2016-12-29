@@ -13,6 +13,7 @@
 	var/download_netspeed = 0
 	var/downloading = 0
 	var/message = ""
+	var/show_archived = 0
 
 /datum/computer_file/program/newsbrowser/process_tick()
 	if(!downloading)
@@ -38,6 +39,7 @@
 	loaded_article = null
 	download_progress = 0
 	downloading = 0
+	show_archived = 0
 
 /datum/computer_file/program/newsbrowser/Topic(href, href_list)
 	if(..())
@@ -75,6 +77,9 @@
 		var/datum/computer_file/data/news_article/N = loaded_article.clone()
 		N.filename = savename
 		HDD.store_file(N)
+	if(href_list["PRG_toggle_archived"])
+		. = 1
+		show_archived = !show_archived
 	if(.)
 		nanomanager.update_uis(NM)
 
@@ -104,12 +109,16 @@
 	else										// Viewing list of articles
 		var/list/all_articles[0]
 		for(var/datum/computer_file/data/news_article/F in ntnet_global.available_news)
+			if(!PRG.show_archived && F.archived)
+				continue
 			all_articles.Add(list(list(
 				"name" = F.filename,
 				"size" = F.size,
-				"uid" = F.uid
+				"uid" = F.uid,
+				"archived" = F.archived
 			)))
 		data["all_articles"] = all_articles
+		data["showing_archived"] = PRG.show_archived
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

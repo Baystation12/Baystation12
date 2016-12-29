@@ -7,7 +7,7 @@
 
 /obj/machinery/telecomms/relay/preset/station
 	id = "Station Relay"
-	listening_level = 1
+	listening_level = 2
 	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/telecomms
@@ -33,10 +33,6 @@
 /obj/machinery/telecomms/relay/preset/fourthdeck
 	id = "Fourth Deck Relay"
 	autolinkers = list("4_relay")
-
-/obj/machinery/telecomms/relay/preset/shuttle
-	id = "Calypso Relay"
-	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/ruskie
 	id = "Ruskie Relay"

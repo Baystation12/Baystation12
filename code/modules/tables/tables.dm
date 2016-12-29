@@ -26,6 +26,13 @@
 
 	var/list/connections = list("nw0", "ne0", "sw0", "se0")
 
+/obj/structure/table/New()
+	if(istext(material))
+		material = get_material_by_name(material)
+	if(istext(reinforced))
+		reinforced = get_material_by_name(reinforced)
+	..()
+
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth
 	if(!material)
@@ -356,6 +363,9 @@
 		if(carpeted)
 			overlays += "carpet_flip[type]"
 
+/obj/structure/table/proc/can_connect()
+	return TRUE
+
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/proc/update_connections(propagate=0)
 	if(!material)
@@ -387,7 +397,7 @@
 		var/turf/T = get_step(src, D)
 
 		for(var/obj/structure/window/W in T)
-			if(W.is_fulltile() || W.dir & reverse_dir[D])
+			if(W.is_fulltile() || (W.dir & reverse_dir[D]))
 				blocked_dirs |= D
 				break
 
@@ -400,6 +410,7 @@
 	var/list/connection_dirs = list()
 
 	for(var/obj/structure/table/T in orange(src, 1))
+		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)

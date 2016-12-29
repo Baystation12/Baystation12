@@ -308,7 +308,8 @@ var/list/mining_floors = list()
 				M.flash_eyes()
 				if(prob(50))
 					M.Stun(5)
-			M.apply_effect(25, IRRADIATE, blocked = M.getarmor(null, "rad"))
+		radiation_repository.flat_radiate(src, 25, 200)
+
 
 
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)

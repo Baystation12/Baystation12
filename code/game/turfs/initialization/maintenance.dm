@@ -1,4 +1,14 @@
-/datum/turf_initializer/maintenance/initialize(var/turf/simulated/T)
+/decl/turf_initializer/maintenance
+	var/clutter_probability = 2
+	var/web_probability = 25
+	var/vermin_probability = 0
+
+/decl/turf_initializer/maintenance/heavy
+	vermin_probability = 0.5
+	clutter_probability = 5
+	web_probability = 50
+
+/decl/turf_initializer/maintenance/initialize(var/turf/simulated/T)
 	if(T.density)
 		return
 	// Quick and dirty check to avoid placing things inside windows
@@ -7,22 +17,27 @@
 
 	var/cardinal_turfs = T.CardinalTurfs()
 
-	T.dirt = rand(10, 50) + rand(0, 50)
+	T.dirt = get_dirt_amount()
 	// If a neighbor is dirty, then we get dirtier.
 	var/how_dirty = dirty_neighbors(cardinal_turfs)
 	for(var/i = 0; i < how_dirty; i++)
 		T.dirt += rand(0,10)
 	T.update_dirt()
 
-	if(prob(2))
+	if(prob(clutter_probability))
 		var/new_junk = get_random_junk_type()
 		new new_junk(T)
-	if(prob(2))
+	if(prob(vermin_probability))
+		if(prob(80))
+			new /mob/living/simple_animal/mouse(T)
+		else
+			new /mob/living/simple_animal/lizard(T)
+	if(prob(clutter_probability))
 		new /obj/effect/decal/cleanable/blood/oil(T)
-	if(prob(25))	// Keep in mind that only "corners" get any sort of web
+	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
 
-/datum/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
+/decl/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
 	var/how_dirty = 0
 	for(var/turf/simulated/T in cardinal_turfs)
 		// Considered dirty if more than halfway to visible dirt
@@ -30,7 +45,7 @@
 			how_dirty++
 	return how_dirty
 
-/datum/turf_initializer/maintenance/proc/attempt_web(var/turf/simulated/T)
+/decl/turf_initializer/maintenance/proc/attempt_web(var/turf/simulated/T)
 	var/turf/north_turf = get_step(T, NORTH)
 	if(!north_turf || !north_turf.density)
 		return
@@ -43,3 +58,9 @@
 			if(dir == EAST)
 				new /obj/effect/decal/cleanable/cobweb2(T)
 			return
+
+/decl/turf_initializer/maintenance/proc/get_dirt_amount()
+	return rand(10, 50) + rand(0, 50)
+
+/decl/turf_initializer/maintenance/heavy/get_dirt_amount()
+	return ..() + 10

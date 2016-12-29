@@ -47,7 +47,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	p_react = "deuterium"
 	s_react = "deuterium"
 	energy_consumption = 1
-	energy_production = 1.75
+	energy_production = 2
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
@@ -75,6 +75,35 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	products = list("tritium"= 1)
 	instability = 1
 
+// Unideal/material production reactions
+/decl/fusion_reaction/oxygen_oxygen
+	p_react = "oxygen"
+	s_react = "oxygen"
+	energy_consumption = 10
+	energy_production = 0
+	instability = 5
+	radiation = 5
+	products = list("silicon"= 1)
+
+/decl/fusion_reaction/iron_iron
+	p_react = "iron"
+	s_react = "iron"
+	products = list("silver" = 1, "gold" = 1, "platinum" = 1) // Not realistic but w/e
+	energy_consumption = 10
+	energy_production = 0
+	instability = 2
+	minimum_reaction_temperature = 10000
+
+/decl/fusion_reaction/phoron_hydrogen
+	p_react = "hydrogen"
+	s_react = "phoron"
+	energy_consumption = 10
+	energy_production = 0
+	instability = 5
+	products = list("mydrogen" = 1)
+	minimum_reaction_temperature = 8000
+
+// VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
 	p_react = "supermatter"
 	s_react = "phoron"
@@ -90,15 +119,20 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
 	qdel(holder)
+	var/radiation_level = rand(100, 200)
 
-	// Copied from the SM for proof of concept.
+	// Copied from the SM for proof of concept. //Not any more --Cirra
+	for(var/area/A in all_areas)
+		if(A.z == holder.z)
+			for(var/turf/T in A)
+				radiation_repository.irradiated_turfs[T] = radiation_level
+
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (holder.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
 				H.hallucination += rand(100,150)
-			mob.apply_effect(rand(100,200), IRRADIATE)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
 		if(I.cur_assembly && I.cur_assembly.fuel_type == "supermatter")
@@ -113,10 +147,21 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	return 1
 
 
-/*
+// High end reactions.
 /decl/fusion_reaction/boron_hydrogen
-	// very high energy level required
+	p_react = "boron"
+	s_react = "hydrogen"
+	minimum_energy_level = FUSION_HEAT_CAP * 0.5
+	energy_consumption = 3
+	energy_production = 15
+	radiation = 3
+	instability = 3
 
 /decl/fusion_reaction/hydrogen_hydrogen
-	//  Proton-proton at absurd energy levels (using supermatter or something to boost mega-energy that high?)
-*/
+	p_react = "hydrogen"
+	s_react = "hydrogen"
+	minimum_energy_level = FUSION_HEAT_CAP * 0.75
+	energy_consumption = 0
+	energy_production = 20
+	radiation = 5
+	instability = 5

@@ -323,11 +323,6 @@
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
-/area/maintenance/substation
-	name = "Substation"
-	icon_state = "substation"
-	sound_env = SMALL_ENCLOSED
-
 /area/maintenance/substation/command // AI and central cluster. This one will be between HoP office and meeting room (probably).
 	name = "Command Substation"
 
@@ -348,6 +343,9 @@
 
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
+
+/area/maintenance/substation/atmospherics
+	name = "Atmospherics Substation"
 
 // Maintenance
 
@@ -423,6 +421,97 @@
 	name = "\improper Exterior Reinforcements"
 	icon_state = "maint_security_starboard"
 
+// Dank Maintenance
+/area/maintenance/sub
+	turf_initializer = /decl/turf_initializer/maintenance/heavy
+	ambience = list(
+		'sound/ambience/ambiatm1.ogg',
+		'sound/ambience/ambigen3.ogg',
+		'sound/ambience/ambigen4.ogg',
+		'sound/ambience/ambigen5.ogg',
+		'sound/ambience/ambigen6.ogg',
+		'sound/ambience/ambigen7.ogg',
+		'sound/ambience/ambigen8.ogg',
+		'sound/ambience/ambigen9.ogg',
+		'sound/ambience/ambigen10.ogg',
+		'sound/ambience/ambigen11.ogg',
+		'sound/ambience/ambigen12.ogg',
+		'sound/ambience/ambimine.ogg',
+		'sound/ambience/ambimo2.ogg',
+		'sound/ambience/ambisin4.ogg',
+		'sound/effects/wind/wind_2_1.ogg',
+		'sound/effects/wind/wind_2_2.ogg',
+		'sound/effects/wind/wind_3_1.ogg',
+	)
+
+/area/maintenance/sub/relay_station
+	name = "\improper Sublevel Maintenance - Relay Station"
+	icon_state = "blue2"
+	turf_initializer = null
+
+/area/maintenance/sub/fore
+	name = "\improper Sublevel Maintenance - Fore"
+	icon_state = "sub_maint_fore"
+
+/area/maintenance/sub/aft
+	name = "\improper Sublevel Maintenance - Aft"
+	icon_state = "sub_maint_aft"
+
+/area/maintenance/sub/port
+	name = "\improper Sublevel Maintenance - Port"
+	icon_state = "sub_maint_port"
+
+/area/maintenance/sub/starboard
+	name = "\improper Sublevel Maintenance - Starboard"
+	icon_state = "sub_maint_starboard"
+
+/area/maintenance/sub/central
+	name = "\improper Sublevel Maintenance - Central"
+	icon_state = "sub_maint_central"
+
+/area/maintenance/sub/command
+	name = "\improper Sublevel Maintenance - Command"
+	icon_state = "sub_maint_command"
+	turf_initializer = null
+
+/////////////
+//ELEVATORS//
+/////////////
+/area/shuttle/turbolift/security_station
+	name = "Station - By Security"
+	lift_announce_str = "Arriving at the station level, by the Security department."
+
+/area/shuttle/turbolift/security_maintenance
+	name = "Maintenance - Below Security"
+	lift_announce_str = "Arriving at the maintenance level, below the Security department."
+	base_turf = /turf/simulated/floor/plating
+
+/area/shuttle/turbolift/research_station
+	name = "Station - By Research"
+	lift_announce_str = "Arriving at the station level, by the R&D department."
+
+/area/shuttle/turbolift/research_maintenance
+	name = "Maintenance - Below Research"
+	lift_announce_str = "Arriving at the maintenance level, below the R&D department."
+	base_turf = /turf/simulated/floor/plating
+
+/area/shuttle/turbolift/engineering_station
+	name = "Station - By Engineering"
+	lift_announce_str = "Arriving at the station level, by the Engineering department."
+
+/area/shuttle/turbolift/engineering_maintenance
+	name = "Maintenance - Below Engineering"
+	lift_announce_str = "Arriving at the maintenance level, below the Engineering department."
+	base_turf = /turf/simulated/floor/plating
+
+/area/shuttle/turbolift/cargo_station
+	name = "Station - By Cargo"
+	lift_announce_str = "Arriving at the station level, by the Cargo department."
+
+/area/shuttle/turbolift/cargo_maintenance
+	name = "Maintenance - Below Cargo"
+	lift_announce_str = "Arriving at the maintenance level, below the Cargo department."
+	base_turf = /turf/simulated/floor/plating
 // Hallway
 
 /area/hallway/primary/
@@ -573,11 +662,18 @@
 	name = "\improper Engineering Workshop"
 	icon_state = "engineering_workshop"
 
+/area/engineering/sublevel_access
+	name = "\improper Engineering Sublevel Access"
+
 // Medbay
 
 /area/medical/genetics
 	name = "\improper Genetics Lab"
 	icon_state = "genetics"
+
+/area/medical/genetics_cloning
+	name = "\improper Cloning Lab"
+	icon_state = "cloning"
 
 // Solars
 

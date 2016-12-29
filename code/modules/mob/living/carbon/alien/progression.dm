@@ -34,6 +34,8 @@
 	show_evolution_blurb()
 	// TODO: drop a moulted skin. Ew.
 
+	transfer_languages(src, adult)
+
 	if(mind)
 		mind.transfer_to(adult)
 		if (can_namepick_as_adult)

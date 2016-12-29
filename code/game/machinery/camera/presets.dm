@@ -1,6 +1,3 @@
-/obj/machinery/camera/network/calypso
-	network = list(NETWORK_CALYPSO)
-
 /obj/machinery/camera/network/crescent
 	network = list(NETWORK_CRESCENT)
 
@@ -24,7 +21,10 @@
 
 /obj/machinery/camera/network/ert
 	network = list(NETWORK_ERT)
-	
+
+/obj/machinery/camera/network/maintenance
+	network = list(NETWORK_MAINTENANCE)
+
 /obj/machinery/camera/network/mercenary
 	network = list(NETWORK_MERCENARY)
 

@@ -276,6 +276,10 @@
 
 //dress
 /obj/item/clothing/under/dress
+	name = "dress"
+	desc = "A fancy dress."
+	icon_state = "dress_fire"
+	worn_state = "dress_fire"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/dress/dress_fire
@@ -435,10 +439,17 @@
 
 /obj/item/clothing/under/blackjumpskirt
 	name = "black jumpskirt"
-	desc = "A black jumpskirt, Sol size 0."
+	desc = "A black jumpskirt, with a pink undershirt."
 	icon_state = "blackjumpskirt"
 	item_state = "bl_suit"
 	worn_state = "blackjumpskirt"
+
+/obj/item/clothing/under/shortjumpskirt
+	name = "short jumpskirt"
+	desc = "A slimming, short jumpskirt."
+	icon_state = "shortjumpskirt"
+	item_state = "w_suit"
+	worn_state = "shortjumpskirt"
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"

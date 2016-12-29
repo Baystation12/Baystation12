@@ -3,7 +3,6 @@
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime"
 	pass_flags = PASSTABLE
-	var/is_adult = 0
 	speak_emote = list("chirps")
 
 	maxHealth = 150
@@ -11,7 +10,7 @@
 	gender = NEUTER
 
 	update_icon = 0
-	nutrition = 700
+	nutrition = 800
 
 	see_in_dark = 8
 	update_slimes = 0
@@ -20,18 +19,19 @@
 	// for the sake of cleanliness, though, here they are.
 	status_flags = CANPARALYSE|CANPUSH
 
+	var/is_adult = 0
+	var/number = 0 // Used to understand when someone is talking to it
 	var/cores = 1 // the number of /obj/item/slime_extract's the slime has left inside
 	var/mutation_chance = 30 // Chance of mutating, should be between 25 and 35
 
 	var/powerlevel = 0 // 0-10 controls how much electricity they are generating
 	var/amount_grown = 0 // controls how long the slime has been overfed, if 10, grows or reproduces
 
-	var/number = 0 // Used to understand when someone is talking to it
-
 	var/mob/living/Victim = null // the person the slime is currently feeding on
 	var/mob/living/Target = null // AI variable - tells the slime to hunt this down
 	var/mob/living/Leader = null // AI variable - tells the slime to follow this person
 
+	var/disoriented = 0 // Cooldown until the slime can act again
 	var/attacked = 0 // Determines if it's been attacked recently. Can be any number, is a cooloff-ish variable
 	var/rabid = 0 // If set to 1, the slime will attack and eat anything it comes in contact with
 	var/holding_still = 0 // AI variable, cooloff-ish for how long it's going to stay in one place
@@ -44,18 +44,11 @@
 	var/mood = "" // To show its face
 
 	var/AIproc = 0 // If it's 0, we need to launch an AI proc
-	var/Atkcool = 0 // attack cooldown
-	var/SStun = 0 // NPC stun variable. Used to calm them down when they are attacked while feeding, or they will immediately re-attach
-	var/Discipline = 0 // if a slime has been hit with a freeze gun, or wrestled/attacked off a human, they become disciplined and don't attack anymore for a while. The part about freeze gun is a lie
 
 	var/hurt_temperature = T0C-50 // slime keeps taking damage when its bodytemperature is below this
 	var/die_temperature = 50 // slime dies instantly when its bodytemperature is below this
 
-	///////////TIME FOR SUBSPECIES
-
 	var/colour = "grey"
-	var/coretype = /obj/item/slime_extract/grey
-	var/list/slime_mutation[4]
 
 	var/core_removal_stage = 0 //For removing cores.
 
@@ -64,13 +57,10 @@
 	verbs += /mob/living/proc/ventcrawl
 
 	src.colour = colour
-	number = rand(1, 1000)
+	number = random_id(/mob/living/carbon/slime, 1, 1000)
 	name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
 	real_name = name
-	slime_mutation = mutation_table(colour)
 	mutation_chance = rand(25, 35)
-	var/sanitizedcolour = replacetext(colour, " ", "")
-	coretype = text2path("/obj/item/slime_extract/[sanitizedcolour]")
 	regenerate_icons()
 	..(location)
 
@@ -114,12 +104,9 @@
 			if(10)		probab = 95
 		if(prob(probab))
 			if(istype(AM, /obj/structure/window) || istype(AM, /obj/structure/grille))
-				if(nutrition <= get_hunger_nutrition() && !Atkcool)
+				if(nutrition <= get_hunger_nutrition())
 					if (is_adult || prob(5))
 						UnarmedAttack(AM)
-						Atkcool = 1
-						spawn(45)
-							Atkcool = 0
 
 	if(ismob(AM))
 		var/mob/tmob = AM
@@ -209,56 +196,48 @@
 	if(Victim)
 		if(Victim == M)
 			if(prob(60))
-				visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off!</span>")
+				visible_message("<span class='warning'>\The [M] attempts to wrestle \the [src] off!</span>")
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 			else
-				visible_message("<span class='warning'> [M] manages to wrestle \the [name] off!</span>")
+				visible_message("<span class='warning'>\The [M] manages to wrestle \the [src] off!</span>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
-				if(prob(90) && !client)
-					Discipline++
-
-				SStun = 1
-				spawn(rand(45,60))
-					SStun = 0
-
-				Victim = null
-				anchored = 0
-				step_away(src,M)
-
+				disoriented = max(disoriented, 2)
+				Feedstop()
+				UpdateFace()
+				step_away(src, M)
 			return
 
 		else
 			if(prob(30))
-				visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off of [Victim]!</span>")
+				visible_message("<span class='warning'>\The [M] attempts to wrestle \the [src] off \the [Victim]!</span>")
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 			else
-				visible_message("<span class='warning'> [M] manages to wrestle \the [name] off of [Victim]!</span>")
+				visible_message("<span class='warning'>\The [M] manages to wrestle \the [src] off \the [Victim]!</span>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
-				if(prob(80) && !client)
-					Discipline++
-
-					if(!is_adult)
-						if(Discipline == 1)
-							attacked = 0
-
-				SStun = 1
-				spawn(rand(55,65))
-					SStun = 0
-
-				Victim = null
-				anchored = 0
-				step_away(src,M)
-
+				disoriented = max(disoriented, 2)
+				Feedstop()
+				UpdateFace()
+				step_away(src, M)
 			return
 
 	switch(M.a_intent)
 
 		if (I_HELP)
 			help_shake_act(M)
+
+		if (I_DISARM)
+			var/success = prob(40)
+			visible_message("<span class='warning'>\The [M] pushes \the [src]![success ? " \The [src] looks momentarily disoriented!" : ""]</span>")
+			if(success)
+				disoriented = max(disoriented, 2)
+				UpdateFace()
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			else
+				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 		if (I_GRAB)
 			if (M == src || anchored)
@@ -283,11 +262,8 @@
 				if (HULK in M.mutations)
 					damage += 5
 					if(Victim || Target)
-						Victim = null
+						Feedstop()
 						Target = null
-						anchored = 0
-						if(prob(80) && !client)
-							Discipline++
 					spawn(0)
 						step_away(src,M,15)
 						sleep(3)
@@ -304,64 +280,18 @@
 				visible_message("<span class='danger'>[M] has attempted to punch [src]!</span>")
 	return
 
-/mob/living/carbon/slime/attackby(obj/item/W, mob/user)
+/mob/living/carbon/slime/attackby(var/obj/item/W, var/mob/user)
 	if(W.force > 0)
 		attacked += 10
 		if(prob(25))
-			to_chat(user, "<span class='danger'>[W] passes right through [src]!</span>")
+			to_chat(user, "<span class='danger'>\The [W] passes right through \the [src]!</span>")
 			return
-		if(Discipline && prob(50)) // wow, buddy, why am I getting attacked??
-			Discipline = 0
-	if(W.force >= 3)
-		if(is_adult)
-			if(prob(5 + round(W.force/2)))
-				if(Victim || Target)
-					if(prob(80) && !client)
-						Discipline++
 
-					Victim = null
-					Target = null
-					anchored = 0
+	. = ..()
 
-					SStun = 1
-					spawn(rand(5,20))
-						SStun = 0
-
-					spawn(0)
-						if(user)
-							canmove = 0
-							step_away(src, user)
-							if(prob(25 + W.force))
-								sleep(2)
-								if(user)
-									step_away(src, user)
-								canmove = 1
-
-		else
-			if(prob(10 + W.force*2))
-				if(Victim || Target)
-					if(prob(80) && !client)
-						Discipline++
-					if(Discipline == 1)
-						attacked = 0
-					SStun = 1
-					spawn(rand(5,20))
-						SStun = 0
-
-					Victim = null
-					Target = null
-					anchored = 0
-
-					spawn(0)
-						if(user)
-							canmove = 0
-							step_away(src, user)
-							if(prob(25 + W.force*4))
-								sleep(2)
-								if(user)
-									step_away(src, user)
-							canmove = 1
-	..()
+	if(Victim && prob(W.force * 5))
+		Feedstop()
+		step_away(src, user)
 
 /mob/living/carbon/slime/restrained()
 	return 0
@@ -372,6 +302,9 @@
 /mob/living/carbon/slime/toggle_throw_mode()
 	return
 
+/mob/living/carbon/slime/has_eyes()
+	return 0
+
 /mob/living/carbon/slime/proc/gain_nutrition(var/amount)
 	nutrition += amount
 	if(prob(amount * 2)) // Gain around one level per 50 nutrition
@@ -379,4 +312,4 @@
 		if(powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
-	nutrition = max(nutrition, get_max_nutrition())
+	nutrition = min(nutrition, get_max_nutrition())

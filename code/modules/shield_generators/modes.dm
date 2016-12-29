@@ -69,3 +69,9 @@
 	mode_flag = MODEFLAG_OVERCHARGE
 	multiplier = 3
 	hacked_only = 1
+
+/datum/shield_mode/multiz
+	mode_name = "Multi-Dimensional Field Warp"
+	mode_desc = "Recalibrates the field projection array to increase the vertical height of the field, allowing it's usage on multi-deck stations or ships."
+	mode_flag = MODEFLAG_MULTIZ
+	multiplier = 1

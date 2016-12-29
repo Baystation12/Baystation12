@@ -88,3 +88,79 @@
 	camera = null
 	radio = null
 	..()
+	
+//Assembly by roboticist
+	
+		
+/obj/item/robot_parts/head/attackby(var/obj/item/device/assembly/S, mob/user as mob)
+	if ((!istype(S, /obj/item/device/assembly/infra)))
+		..()
+		return
+	var/obj/item/weapon/TVAssembly/A = new(user)
+	qdel(S)
+	user.put_in_hands(A)
+	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
+	user.drop_from_inventory(src)
+	qdel(src)
+	
+//Using camcorder icon as I can't sprite. 
+//Using robohead because of restricting to roboticist		
+/obj/item/weapon/TVAssembly
+	name = "TV Camera assembly"
+	desc = "A robotic head with an infrared sensor inside"
+	icon = 'icons/obj/robot_parts.dmi'
+	icon_state = "head"
+	item_state = "head"
+	var/buildstep = 0
+	w_class = ITEM_SIZE_LARGE
+	
+/obj/item/weapon/TVAssembly/attackby(W, mob/user)
+	switch(buildstep)
+		if(0)
+			if(istype(W, /obj/item/robot_parts/robot_component/camera))
+				var/obj/item/robot_parts/robot_component/camera/CA = W
+				to_chat(user, "<span class='notice'>You add the camera module to [src]</span>")
+				user.drop_item()
+				qdel(CA)
+				desc = "This TV camera assembly has a camera module."
+				buildstep++
+		if(1)
+			if(istype(W, /obj/item/device/taperecorder))
+				var/obj/item/device/taperecorder/T = W
+				user.drop_item()
+				qdel(T)
+				buildstep++
+				to_chat(user, "<span class='notice'>You add the tape recorder to [src]</span>")
+				desc = "This TV camera assembly has a camera and audio module."
+				return
+		if(2)
+			if(istype(W, /obj/item/stack/cable_coil))
+				var/obj/item/stack/cable_coil/C = W
+				if(!C.use(3))
+					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
+					..()
+					return
+				C.use(3)
+				buildstep++
+				to_chat(user, "<span class='notice'>You wire the assembly</span>")
+				desc = "This TV camera assembly has wires sticking out"
+				return
+		if(3)
+			if(istype(W, /obj/item/weapon/wirecutters))
+				to_chat(user, "<span class='notice'> You trim the wires.</span>")
+				buildstep++
+				desc = "This TV camera assembly needs casing."
+				return
+		if(4)
+			if(istype(W, /obj/item/stack/material/steel))
+				var/obj/item/stack/material/steel/S = W
+				buildstep++
+				S.use(1)
+				to_chat(user, "<span class='notice'>You encase the assembly in a Ward-Takeshi casing.</span>")
+				var/turf/T = get_turf(src)
+				new /obj/item/device/tvcamera(T)
+				user.drop_from_inventory(src)
+				qdel(src)
+				return
+				
+	..()

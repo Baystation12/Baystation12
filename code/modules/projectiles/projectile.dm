@@ -65,6 +65,8 @@
 
 	var/fire_sound
 
+	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
+
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
 	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't
@@ -300,6 +302,10 @@
 
 		if(!location)
 			qdel(src)	// if it's left the world... kill it
+			return
+
+		if (is_below_sound_pressure(get_turf(src)) && !vacuum_traversal) //Deletes projectiles that aren't supposed to bein vacuum if they leave pressurised areas
+			qdel(src)
 			return
 
 		before_move()

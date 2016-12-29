@@ -30,12 +30,9 @@
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/hazardvest)
 
 /datum/gear/suit/hoodie
-	display_name = "hoodies"
+	display_name = "hoodie"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
-
-/datum/gear/suit/hoodie/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/toggle/hoodie)
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/suit/labcoat
 	display_name = "labcoat"
@@ -84,6 +81,11 @@
 	display_name = "poncho, cargo"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 	allowed_roles = list("Quartermaster","Cargo Technician")
+
+/datum/gear/suit/roles/surgical_apron
+	display_name = "surgical apron"
+	path = /obj/item/clothing/suit/surgicalapron
+	allowed_roles = list("Medical Doctor","Chief Medical Officer")
 
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"

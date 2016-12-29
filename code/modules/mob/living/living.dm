@@ -596,7 +596,7 @@ default behaviour is:
 
 	if(update_slimes)
 		for(var/mob/living/carbon/slime/M in view(1,src))
-			M.UpdateFeed(src)
+			M.UpdateFeed()
 
 /mob/living/verb/resist()
 	set name = "Resist"
@@ -659,7 +659,11 @@ default behaviour is:
 
 /mob/living/proc/escape_buckle()
 	if(buckled)
-		buckled.user_unbuckle_mob(src)
+		if(buckled.can_buckle)
+			buckled.user_unbuckle_mob(src)
+		else
+			to_chat(usr, "<span class='warning'>You can't seem to escape from \the [buckled]!</span>")
+			return
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0

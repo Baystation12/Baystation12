@@ -117,7 +117,10 @@
 		update_icon()
 
 /obj/effect/overmap/ship/update_icon()
-	if(rotate)
+	overlays.Cut()
+	if(get_speed())
+		var/image/I = image('icons/obj/overmap.dmi',"vector")
 		var/matrix/M = matrix()
 		M.Turn(dir2angle(get_heading()))
-		src.transform = M //Rotate ship
+		I.transform = M
+		overlays |= I

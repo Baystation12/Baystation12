@@ -6,10 +6,15 @@
 
 	lobby_icon = 'maps/exodus/exodus_lobby.dmi'
 
-	station_levels = list(1)
-	admin_levels = list(2)
-	contact_levels = list(1,3,5)
-	player_levels = list(1,3,4,5,6)
+	load_legacy_saves = TRUE
+
+	station_levels = list(1, 2)
+	admin_levels = list(3)
+	contact_levels = list(1,2,4,6)
+	player_levels = list(1,2,4,5,6,7)
+	sealed_levels = list(6)
+	accessible_z_levels = list("1" = 5, "2" = 5, "4" = 10, "5" = 15, "7" = 60)
+	base_turf_by_z = list("6" = /turf/simulated/floor/asteroid) // Moonbase
 
 	shuttle_docked_message = "The scheduled Crew Transfer Shuttle to %Dock_name% has docked with the station. It will depart in approximately %ETD%"
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
@@ -28,6 +33,7 @@
 							NETWORK_ENGINEERING,
 							NETWORK_ENGINEERING_OUTPOST,
 							NETWORK_EXODUS,
+							NETWORK_MAINTENANCE,
 							NETWORK_MEDICAL,
 							NETWORK_MINE,
 							NETWORK_RESEARCH,
@@ -39,12 +45,12 @@
 							NETWORK_ALARM_FIRE,
 							NETWORK_ALARM_POWER,
 							NETWORK_THUNDER,
-							NETWORK_TELECOM,
+							NETWORK_TELECOM
 							)
 
 	evac_controller_type = /datum/evacuation_controller/pods/shuttle
 
 /datum/map/exodus/perform_map_generation()
-	new /datum/random_map/automata/cave_system(null,1,1,5,255,255) // Create the mining Z-level.
-	new /datum/random_map/noise/ore(null, 1, 1, 5, 64, 64)         // Create the mining ore distribution map.
+	new /datum/random_map/automata/cave_system(null, 1, 1, 6, 255, 255) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null, 1, 1, 6, 64, 64)         // Create the mining ore distribution map.
 	return 1

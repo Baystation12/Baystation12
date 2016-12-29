@@ -141,6 +141,8 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 					addPiece(O,H,text2num(s))
 		if(href_list["remove"])
 			var/obj/item/I = board["[selected]"]
+			if(!I)
+				return
 			board["[selected]"] = null
 			board -= "[selected]"
 			board -= null

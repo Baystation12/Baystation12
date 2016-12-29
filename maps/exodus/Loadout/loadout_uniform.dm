@@ -17,6 +17,11 @@
 	display_name = "jumpskirt, black"
 	path = /obj/item/clothing/under/blackjumpskirt
 
+/datum/gear/uniform/shortjumpskirt
+    display_name = "short jumpskirt"
+    path = /obj/item/clothing/under/shortjumpskirt
+    flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
 	path = /obj/item/clothing/under/color/grey

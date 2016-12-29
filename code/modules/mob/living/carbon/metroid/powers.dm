@@ -15,7 +15,7 @@
 	Feedon(M)
 
 /mob/living/carbon/slime/proc/invalidFeedTarget(var/mob/living/M)
-	if (!M || !istype(M))
+	if (!istype(M))
 		return "This subject is incompatible..."
 	if (istype(M, /mob/living/carbon/slime)) // No cannibalism... yet
 		return "I cannot feed on other slimes..."
@@ -34,32 +34,33 @@
 		return "This subject does not have an edible life energy..."
 	for(var/mob/living/carbon/slime/met in view())
 		if(met.Victim == M && met != src)
-			return "The [met.name] is already feeding on this subject..."
+			return "\The [met] is already feeding on this subject..."
 	return 0
 
 /mob/living/carbon/slime/proc/Feedon(var/mob/living/M)
+	set waitfor = 0
 	Victim = M
-	loc = M.loc
-	canmove = 0
-	anchored = 1
+	forceMove(M.loc)
+
+	sleep(20) // A small delay to give the victim a chance to shake them off
 
 	regenerate_icons()
+	var/happyWithFood = 0
+	var/totalDrained = 0
 
-	while(Victim && !invalidFeedTarget(M) && stat != 2)
-		canmove = 0
-
+	while(Victim && stat != 2)
 		if(Adjacent(M))
-			UpdateFeed(M)
+			UpdateFeed()
 
 			var/hazmat = blocked_mult(M.getarmor(null, "bio")) //scale feeding rate by overall bio protection
 			if(istype(M, /mob/living/carbon))
-				Victim.adjustCloneLoss(rand(5,6) * hazmat)
-				Victim.adjustToxLoss(rand(1,2) * hazmat)
+				Victim.adjustCloneLoss(5 * hazmat)
+				Victim.adjustToxLoss(1 * hazmat)
 				if(Victim.health <= 0)
-					Victim.adjustToxLoss(rand(2,4) * hazmat)
+					Victim.adjustToxLoss(1 * hazmat)
 
 			else if(istype(M, /mob/living/simple_animal))
-				Victim.adjustBruteLoss((is_adult ? rand(7, 15) : rand(4, 12)) * hazmat)
+				Victim.adjustBruteLoss(10 * hazmat)
 
 			else
 				to_chat(src, "<span class='warning'>[pick("This subject is incompatable", "This subject does not have a life energy", "This subject is empty", "I am not satisified", "I can not feed from this subject", "I do not feel nourished", "This subject is not food")]...</span>")
@@ -76,7 +77,10 @@
 					if (C.can_feel_pain())
 						to_chat(M, "<span class='danger'>[painMes]</span>")
 
-			gain_nutrition(rand(20,25) * hazmat)
+			gain_nutrition(20 * hazmat)
+			totalDrained += 20 * hazmat
+			if(totalDrained > 200)
+				happyWithFood = 1
 
 			var/heal_amt = 10 * hazmat
 			adjustOxyLoss(-heal_amt) //Heal yourself
@@ -87,16 +91,17 @@
 			if(Victim)
 				Victim.updatehealth()
 
-			sleep(30) // Deal damage every 3 seconds
+			if(invalidFeedTarget(M) && totalDrained > 40) // Drained
+				happyWithFood = 1
+				break
+
+			sleep(20) // Deal damage every 2 seconds
 		else
 			break
 
-	canmove = 1
-	anchored = 0
-
-	if(M && invalidFeedTarget(M)) // This means that the slime drained the victim
+	if(happyWithFood) // This means that the slime has either drained the victim or let it go
 		if(!client)
-			if(Victim && !rabid && !attacked && Victim.LAssailant && Victim.LAssailant != Victim && prob(50))
+			if(Victim && !rabid && !attacked && Victim.LAssailant && Victim.LAssailant != Victim)
 				if(!(Victim.LAssailant in Friends))
 					Friends[Victim.LAssailant] = 1
 				else
@@ -109,13 +114,11 @@
 
 /mob/living/carbon/slime/proc/Feedstop()
 	if(Victim)
-		if(Victim.client) to_chat(Victim, "[src] has let go of your head!")
 		Victim = null
 
-/mob/living/carbon/slime/proc/UpdateFeed(var/mob/M)
+/mob/living/carbon/slime/proc/UpdateFeed()
 	if(Victim)
-		if(Victim == M)
-			loc = M.loc // simple "attach to head" effect!
+		forceMove(Victim.loc) // simple "attach to head" effect!
 
 /mob/living/carbon/slime/verb/Evolve()
 	set category = "Slime"
@@ -139,7 +142,7 @@
 
 /mob/living/carbon/slime/verb/Reproduce()
 	set category = "Slime"
-	set desc = "This will make you split into four Slimes."
+	set desc = "This will make you split into four slimes."
 
 	if(stat)
 		to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
@@ -152,21 +155,19 @@
 				return
 
 			var/list/babies = list()
-			var/new_nutrition = round(nutrition * 0.9)
-			var/new_powerlevel = round(powerlevel / 4)
-			for(var/i = 1, i <= 4, i++)
+			var/list/mutations = GetMutations()
+			for(var/i = 1 to 4)
 				var/t = colour
 				if(prob(mutation_chance))
-					t = slime_mutation[rand(1,4)]
-				var/mob/living/carbon/slime/M = new /mob/living/carbon/slime/(loc, t)
-				if(ckey)	M.nutrition = new_nutrition //Player slimes are more robust at spliting. Once an oversight of poor copypasta, now a feature!
-				M.powerlevel = new_powerlevel
-				if(i != 1) step_away(M, src)
+					t = pick(mutations)
+				var/mob/living/carbon/slime/M = new /mob/living/carbon/slime(loc, t)
+				if(i != 1)
+					step_away(M, src)
 				M.Friends = Friends.Copy()
 				babies += M
 				feedback_add_details("slime_babies_born","slimebirth_[replacetext(M.colour," ","_")]")
 
-			var/mob/living/carbon/slime/new_slime = pick(babies)
+			var/mob/living/carbon/slime/new_slime = babies[1]
 			new_slime.universal_speak = universal_speak
 			if(src.mind)
 				src.mind.transfer_to(new_slime)
