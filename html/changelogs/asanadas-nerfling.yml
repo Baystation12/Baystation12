@@ -1,0 +1,7 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscdel: "Changelings no longer have access to death sting."
+  - tweak: "Hallucination sting's cost has increased in genomes and reagents."

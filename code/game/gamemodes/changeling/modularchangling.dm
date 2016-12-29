@@ -110,20 +110,8 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Hallucination Sting"
 	desc = "We evolve the ability to sting a target with a powerful hallunicationary chemical."
 	helptext = "The target does not notice they have been stung.  The effect occurs after 30 to 60 seconds."
-	genomecost = 3
+	genomecost = 6
 	verbpath = /mob/proc/changeling_lsdsting
-
-/datum/power/changeling/DeathSting
-	name = "Death Sting"
-	desc = "We silently sting a human, filling them with potent chemicals. Their rapid death is all but assured."
-	genomecost = 10
-	verbpath = /mob/proc/changeling_DEATHsting
-
-///datum/power/changeling/unfat_sting
-//	name = "Unfat Sting"
-//	desc = "We silently sting a human, forcing them to rapidly metabolize their fat."
-//	genomecost = 1
-//	verbpath = /mob/proc/changeling_unfat_sting
 
 /datum/power/changeling/boost_range
 	name = "Boost Range"
