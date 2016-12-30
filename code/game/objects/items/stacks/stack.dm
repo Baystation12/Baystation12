@@ -357,7 +357,7 @@
 	var/use_material
 	var/goes_in_hands = 1
 
-	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null, goes_in_hands = 0)
+	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null, goes_in_hands = 1)
 		src.title = title
 		src.result_type = result_type
 		src.req_amount = req_amount
