@@ -47,7 +47,7 @@ var/list/to_process = list()
 				to_process[origin] = max(to_process[origin], working)
 
 	for(var/turf/spot in to_process)
-		irradiated_turfs[spot] = max((((to_process[spot] ? to_process[spot] : 0)) * (1 / (get_dist(epicentre, spot) ** 2))), irradiated_turfs[spot]) //Butchered version of the inverse square law. Works for this purpose
+		irradiated_turfs[spot] = max(((to_process[spot]) * (1 / (get_dist(epicentre, spot) ** 2))), irradiated_turfs[spot]) //Butchered version of the inverse square law. Works for this purpose
 		#ifdef RADDBG
 		var/x = Clamp( irradiated_turfs[spot], 0, 255)
 		spot.color = rgb(5,x,5)
