@@ -1,0 +1,6 @@
+author: HarpyEagle
+
+delete-after: True
+
+changes:
+  - bugfix: "Doors leading to open elevator shafts now require a little more effort to open."
