@@ -1,0 +1,10 @@
+
+
+# Your name.  
+author: Runa-Dacino
+
+
+delete-after: True
+
+
+  - tweak: "Changed stack recipes to spawn product in hands when possible, otherwise spawn on the ground."
