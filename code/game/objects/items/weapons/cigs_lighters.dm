@@ -541,3 +541,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(location)
 		location.hotspot_expose(700, 5)
 	return
+
+
+// EROS BEGIN
+
+/obj/item/clothing/mask/smokable/cigarette/soma
+	name = "strange cigarette"
+	desc = "It smells weird and kind of like formaldehyde. What the hell is in this?"
+
+/obj/item/clothing/mask/smokable/cigarette/soma/New()
+	..()
+	reagents.add_reagent("nicotine", 1)
+	reagents.add_reagent("soma", 2)

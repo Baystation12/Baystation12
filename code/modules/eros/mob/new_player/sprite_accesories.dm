@@ -88,7 +88,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider", "Slime", "Resomi")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider","Resomi","Promethean")
 
 	dik_normal
 		name = "Normal Dick"
@@ -110,9 +110,53 @@
 		name = "Small Dick"
 		icon_state = "small"
 
+	dik_knotteds
+		name = "Knotted Small Dick"
+		icon_state = "knotted_small"
+
 	dik_knotted
 		name = "Knotted Dick"
 		icon_state = "knotted"
+
+	dik_knottedl
+		name = "Knotted Large Dick"
+		icon_state = "knotted_large"
+
+	dik_knotbs
+		name = "Knotted, Barbed Small Dick"
+		icon_state = "barbknot_small"
+
+	dik_knotb
+		name = "Knotted, Barbed Dick"
+		icon_state = "barbknot"
+
+	dik_knotbl
+		name = "Knotted, Barbed Large Dick"
+		icon_state = "barbknot_large"
+
+	dik_tapereds
+		name = "Tapered Small Dick"
+		icon_state = "tapered_small"
+
+	dik_tapered
+		name = "Tapered Dick"
+		icon_state = "tapered"
+
+	dik_taperedl
+		name = "Tapered Large Dick"
+		icon_state = "tapered_large"
+
+	dik_flareds
+		name = "Flared Small Dick"
+		icon_state = "flared_small"
+
+	dik_flared
+		name = "Flared Dick"
+		icon_state = "flared"
+
+	dik_flaredl
+		name = "Flared Large Dick"
+		icon_state = "flared_large"
 
 	dik_feline
 		name = "Feline Dick"
@@ -126,20 +170,24 @@
 		name = "Tentacle Big Dicks"
 		icon_state = "tentacle_big"
 
+	dik_hemi
+		name = "Hemipenes / Claspers"
+		icon_state = "hemi"
+
 	dik_normal_slime
 		name = "Slime Normal Dick"
 		icon_state = "normal_slime"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	dik_small_slime
 		name = "Slime Small Dick"
 		icon_state = "small_slime"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	dik_big2_slime
 		name = "Slime Bigger Dick"
 		icon_state = "big2_slime"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	dik_amputed
 		name = "Amputed Dick"
@@ -198,7 +246,6 @@
 	dik_scorpius
 		name = "Scorpius Synthpenis"
 		icon_state = "robo-scorpius"
-		do_colouration = 0
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	dik_unbranded
@@ -253,17 +300,71 @@
 	vag_normal_slime
 		name = "Slime Normal Vagina"
 		icon_state = "normal_slime"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	vag_gaping_slime
 		name = "Slime Gaping Vagina"
 		icon_state = "gaping_slime"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	vag_dripping_slime
 		name = "Slime Dripping Vagina"
 		icon_state = "dripping_slime"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
+
+	vag_bishop
+		name = "Bishop Synthvagina"
+		icon_state = "robo-bishop"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_hesphiastos
+		name = "Hesphiastos Synthvagina"
+		icon_state = "robo-hesphiastos"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_morpheus
+		name = "Morpheus Synthvagina"
+		icon_state = "robo-morpheus"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_wardtakahashi
+		name = "Ward-Takahashi Synthvagina"
+		icon_state = "robo-wardtakahashi"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_zenghu
+		name = "Zeng-hu Synthvagina"
+		icon_state = "robo-zenghu"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_xion
+		name = "Xion Synthvagina"
+		icon_state = "robo-xion"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_nanotrasen
+		name = "NanoTrasen Synthvagina"
+		icon_state = "robo-nanotrasen"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_scorpius
+		name = "Scorpius Synthvagina"
+		icon_state = "robo-scorpius"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
+
+	vag_unbranded
+		name = "Unbranded Synthvagina"
+		icon_state = "robo-unbranded"
+		do_colouration = 0
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 /*
 ///////////////////////////////
@@ -281,7 +382,7 @@
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider", "Slime", "Resomi")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia", "Drider", "Promethean", "Resomi")
 
 	brt_normala
 		name = "Tiny Breasts"
@@ -306,27 +407,27 @@
 	brt_slimea
 		name = "Slime Tiny Breasts"
 		icon_state = "slime_a"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	brt_slimeb
 		name = "Slime Small Breasts"
 		icon_state = "slime_b"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	brt_slimec
 		name = "Slime Normal Breasts"
 		icon_state = "slime_c"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	brt_slimed
 		name = "Slime Big Breasts"
 		icon_state = "slime_d"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 	brt_slimee
 		name = "Slime Very Big Breasts"
 		icon_state = "slime_e"
-		species_allowed = list ("Slime")
+		species_allowed = list ("Promethean")
 
 
 	brt_bishop
@@ -368,7 +469,6 @@
 	brt_scorpius
 		name = "Scorpius Synthbreasts"
 		icon_state = "robo-scorpius"
-		do_colouration = 0
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia", "Drider", "Machine")
 
 	brt_morpheus
@@ -707,7 +807,6 @@
 	tal_scorpius
 		name = "Scorpius FBP Tail"
 		icon_state = "scorpius"
-		do_colouration = 0
 
 	tal_resomi
 		name = "Resomi Tail"

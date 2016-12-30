@@ -313,3 +313,15 @@
 /obj/item/weapon/storage/lockbox/vials/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	update_icon()
+
+// EROS BEGIN
+
+/obj/item/weapon/storage/fancy/cigarettes/soma
+	name = "pack of strange cigarettes"
+	desc = "The package is as generic as it get. There is no name, no labeling, just cheap grey cardboard. You're a little uncertain about it, but find it strangely alluring."
+	brand = "strange cigarettes"
+	icon_state = "SMpacket"
+	item_state = "Dpacket"
+
+	key_type = /obj/item/clothing/mask/smokable/cigarette/soma
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette/soma = 6)
