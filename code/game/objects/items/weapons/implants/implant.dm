@@ -20,6 +20,29 @@
 	proc/activate()
 		return
 
+	proc/can_implant(mob/M, mob/user, var/target_zone)
+		var/mob/living/carbon/human/H = M
+		if(istype(H) && !H.get_organ(target_zone))
+			to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
+			return FALSE
+		return TRUE
+
+	proc/implant_in_mob(mob/M, var/target_zone)
+		if (ishuman(M))
+			var/mob/living/carbon/human/H = M
+			var/obj/item/organ/external/affected = H.get_organ(target_zone)
+			if(affected)
+				affected.implants += src
+				src.part = affected
+
+			BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+
+		src.forceMove(M)
+		src.imp_in = M
+		src.implanted = 1
+
+		return TRUE
+
 	// What does the implant do upon injection?
 	// return 0 if the implant fails (ex. Revhead and loyalty implant.)
 	// return 1 if the implant succeeds (ex. Nonrevhead and loyalty implant.)
