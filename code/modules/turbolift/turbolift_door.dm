@@ -7,10 +7,6 @@
 	glass = 1
 	icon = 'icons/obj/doors/doorlift.dmi'
 
-	//start bolted
-	icon_state = "door_locked"
-	locked = 1
-
 	var/datum/turbolift/lift
 	var/datum/turbolift_floor/floor
 
@@ -23,3 +19,6 @@
 
 /obj/machinery/door/airlock/lift/bumpopen(var/mob/user)
 	return // No accidental sprinting into open elevator shafts.
+
+/obj/machinery/door/airlock/lift/allowed(mob/M)
+	return FALSE //only the lift machinery is allowed to operate this door
