@@ -40,14 +40,13 @@
 
 
 /obj/item/weapon/grab/New(mob/user, mob/victim)
+	..()
 	loc = user
 	assailant = user
 	affecting = victim
 
 	if(affecting.anchored || !assailant.Adjacent(victim)) //Shouldn't even be created if these aren't met
 		return
-
-	..()
 
 	affecting.grabbed_by += src
 
