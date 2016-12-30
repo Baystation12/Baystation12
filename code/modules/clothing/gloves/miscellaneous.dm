@@ -92,6 +92,12 @@
 	permeability_coefficient = 0.01
 	germ_level = 0
 
+/obj/item/clothing/gloves/latex/nitrile
+	name = "nitrile gloves"
+	desc = "Sterile nitrile gloves"
+	icon_state = "nitrile"
+	item_state = "ngloves"
+
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	name = "botanist's leather gloves"
