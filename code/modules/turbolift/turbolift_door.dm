@@ -7,6 +7,10 @@
 	glass = 1
 	icon = 'icons/obj/doors/doorlift.dmi'
 
+	//start bolted
+	icon_state = "door_locked"
+	locked = 1
+
 	var/datum/turbolift/lift
 	var/datum/turbolift_floor/floor
 
