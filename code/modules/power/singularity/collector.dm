@@ -1,5 +1,4 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-#define RAD_COLLECTION_DIVIDER 50 //Higher values = radiation collectors are less effective for non-singulo radiation.
 var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector
@@ -33,7 +32,7 @@ var/global/list/rad_collectors = list()
 
 	var/turf/T = get_turf(src)
 	if(T in radiation_repository.irradiated_turfs)
-		receive_pulse(radiation_repository.irradiated_turfs[T] / (RAD_COLLECTION_DIVIDER * 6)) //Maths is hard
+		receive_pulse(radiation_repository.irradiated_turfs[T] * 5) //Maths is hard
 
 	if(P)
 		if(P.air_contents.gas["phoron"] == 0)
@@ -160,5 +159,3 @@ var/global/list/rad_collectors = list()
 		flick("ca_deactive", src)
 	update_icons()
 	return
-
-#undef RAD_COLLECTION_DIVIDER
