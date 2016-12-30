@@ -293,7 +293,12 @@
 		return 0
 
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && (brute_dam + brute >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
+	var/damage_amt = brute
+	var/cur_damage = brute_dam
+	if(laser)
+		damage_amt += burn
+		cur_damage += burn_dam
+	if(internal_organs && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
