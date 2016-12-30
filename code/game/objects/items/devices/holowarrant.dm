@@ -14,7 +14,6 @@ var/activename = null
 var/activecharges = null
 var/activeauth = null //Currently active warrant
 var/activetype = null //Is this a search or arrest warrtant?
-var/activemap = using_map.full_name //Are we on Exodus or Torch?
 
 //look at it
 /obj/item/device/holowarrant/examine(mob/user)
@@ -67,7 +66,7 @@ var/activemap = using_map.full_name //Are we on Exodus or Torch?
 		</br>
 		This document serves as authorization and notice for the arrest of _<u>[activename]</u>____ for the crime(s) of:</br>[activecharges]</br>
 		</br>
-		Vessel or habitat: _<u>[activemap]</u>____</br>
+		Vessel or habitat: _<u>[using_map.full_name]</u>____</br>
 		</br>_<u>[activeauth]</u>____</br>
 		<small>Person authorizing arrest</small></br>
 		</BODY></HTML>
@@ -97,7 +96,7 @@ var/activemap = using_map.full_name //Are we on Exodus or Torch?
 		</br>
 		<b>Warrant issued by: </b> [activeauth]</br>
 		</br>
-		Vessel or habitat: _<u>[activemap]</u>____</br>
+		Vessel or habitat: _<u>[using_map.full_name]</u>____</br>
 		</BODY></HTML>
 		"}
 		show_browser(user, output, "window=Search warrant for [activename]")
