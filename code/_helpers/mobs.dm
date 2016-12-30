@@ -1,10 +1,6 @@
 /atom/movable/proc/get_mob()
 	return
 
-/obj/machinery/bot/mulebot/get_mob()
-	if(load && istype(load,/mob/living))
-		return load
-
 /obj/mecha/get_mob()
 	return occupant
 
@@ -12,6 +8,11 @@
 	return buckled_mob
 
 /mob/get_mob()
+	return src
+
+/mob/living/bot/mulebot/get_mob()
+	if(load && istype(load, /mob/living))
+		return list(src, load)
 	return src
 
 //helper for inverting armor blocked values into a multiplier

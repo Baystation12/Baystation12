@@ -8,7 +8,6 @@
 	health = 100
 	maxHealth = 100
 
-	bot_version = 2.6
 	is_ranged = 1
 	preparing_arrest_sounds = new()
 
@@ -19,6 +18,9 @@
 
 	var/shot_delay = 4
 	var/last_shot = 0
+
+/mob/living/bot/secbot/ed209/update_icons()
+	icon_state = "ed2090"
 
 /mob/living/bot/secbot/ed209/explode()
 	visible_message("<span class='warning'>[src] blows apart!</span>")
@@ -44,6 +46,9 @@
 
 	new /obj/effect/decal/cleanable/blood/oil(Tsec)
 	qdel(src)
+
+/mob/living/bot/secbot/ed209/handleRangedTarget()
+	RangedAttack(target)
 
 /mob/living/bot/secbot/ed209/RangedAttack(var/atom/A)
 	if(last_shot + shot_delay > world.time)
