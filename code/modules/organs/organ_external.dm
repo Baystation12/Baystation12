@@ -286,11 +286,15 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (vital || (robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
 
-/obj/item/organ/external/take_damage(brute, burn, sharp, edge, laser, used_weapon = null, list/forbidden_limbs = list())
+/obj/item/organ/external/take_damage(brute, burn, damage_flags, used_weapon = null, list/forbidden_limbs = list())
 	brute = round(brute * brute_mod, 0.1)
 	burn = round(burn * burn_mod, 0.1)
 	if((brute <= 0) && (burn <= 0))
 		return 0
+
+	var/sharp = (damage_flags & DAM_SHARP)
+	var/edge  = (damage_flags & DAM_EDGE)
+	var/laser = (damage_flags & DAM_LASER)
 
 	// High brute damage or sharp objects may damage internal organs
 	var/damage_amt = brute
@@ -337,7 +341,7 @@
 				createwound( BRUISE, brute )
 		if(burn)
 			if(laser)
-				createwound( LASER, burn ) //deeper penetrating burns over a smaller surface area, I guess
+				createwound( LASER, burn )
 			else
 				createwound( BURN, burn )
 	else
@@ -512,11 +516,11 @@ This function completely restores a damaged organ to perfect condition.
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && (robotic < ORGAN_ROBOT))
-		var/fluid_loss_severity //calc fluid loss so that blood volume will reach this amount if the player is dealt exactly enough damage to kill them
+		var/fluid_loss_severity
 		switch(type)
-			if(BURN)  fluid_loss_severity = 0.4
-			if(LASER) fluid_loss_severity = 0.6
-		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume*(1 - fluid_loss_severity)
+			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
+			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
+		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound

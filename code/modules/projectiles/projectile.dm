@@ -72,6 +72,10 @@
 	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't
 										//  have to be recreated multiple times
 
+/obj/item/projectile/New()
+	damtype = damage_type //TODO unify these vars properly
+	..()
+
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	if(blocked >= 100)		return 0//Full block

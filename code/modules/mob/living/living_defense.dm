@@ -76,20 +76,17 @@
 
 	//Armor
 	var/damage = P.damage
-	var/is_laser = istype(P, /obj/item/projectile/beam) //TODO less type hardcoding
-
+	var/flags = P.damage_flags()
 	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
-	var/proj_sharp = is_sharp(P)
-	var/proj_edge = has_edge(P)
-	if ((proj_sharp || proj_edge) && prob(absorb))
-		proj_sharp = 0
-		proj_edge = 0
-	if (is_laser && prob(absorb))
-		damage *= 0.66 //the armour causes the heat energy to spread out, which reduces the damage
-		is_laser = 0   //and prevents internal organ damage, but affects a larger body surface
+	if (prob(absorb))
+		if(flags & DAM_LASER)
+			//the armour causes the heat energy to spread out, which reduces the damage (and the blood loss)
+			//this is mostly so that armour doesn't cause people to lose MORE fluid from lasers than they would otherwise
+			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
+		flags &= ~(DAM_SHARP|DAM_EDGE|DAM_LASER)
 
 	if(!P.nodamage)
-		apply_damage(damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge, laser=is_laser)
+		apply_damage(damage, P.damage_type, def_zone, absorb, flags, P)
 	P.on_hit(src, absorb, def_zone)
 
 	return absorb
@@ -144,13 +141,11 @@
 		effective_force *= 2
 
 	//Apply weapon damage
-	var/weapon_sharp = is_sharp(I)
-	var/weapon_edge = has_edge(I)
+	var/damage_flags = I.damage_flags()
 	if(prob(blocked)) //armour provides a chance to turn sharp/edge weapon attacks into blunt ones
-		weapon_sharp = 0
-		weapon_edge = 0
+		damage_flags &= ~(DAM_SHARP|DAM_EDGE)
 
-	apply_damage(effective_force, I.damtype, hit_zone, blocked, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
+	apply_damage(effective_force, I.damtype, hit_zone, blocked, damage_flags, used_weapon=I)
 
 	return 1
 
@@ -172,7 +167,11 @@
 
 		src.visible_message("<span class='warning'>\The [src] has been hit by \the [O]</span>.")
 		var/armor = run_armor_check(null, "melee")
-		apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
+		if(armor < 100)
+			var/damage_flags = O.damage_flags()
+			if(prob(armor))
+				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
+			apply_damage(throw_damage, dtype, null, armor, damage_flags, O)
 
 		O.throwing = 0		//it hit, so stop moving
 
