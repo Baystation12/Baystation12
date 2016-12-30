@@ -207,12 +207,7 @@ var/list/slot_equipment_priority = list( \
 	return I.mob_can_unequip(src, slot)
 
 /mob/proc/canDrop(obj/item/I)
-	if(istype(I))
-		if(!I.candrop)
-			return 0
-	else
-		return 0
-	return 1
+	return (I && I.candrop)
 
 
 /mob/proc/get_inventory_slot(obj/item/I)
