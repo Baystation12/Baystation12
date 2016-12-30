@@ -57,6 +57,12 @@
 	var/light_up = FALSE
 	var/datum/turbolift_floor/floor
 
+/obj/structure/lift/button/Destroy()
+	if(floor && floor.ext_panel == src)
+		floor.ext_panel = null
+	floor = null
+	return ..()
+
 /obj/structure/lift/button/proc/reset()
 	light_up = FALSE
 	update_icon()
