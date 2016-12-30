@@ -75,15 +75,21 @@
 //		to_chat(src, "<span class='warning'>You have been hit by [P]!</span>")
 
 	//Armor
+	var/damage = P.damage
+	var/is_laser = istype(P, /obj/item/projectile/beam) //TODO less type hardcoding
+
 	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
 	if ((proj_sharp || proj_edge) && prob(absorb))
 		proj_sharp = 0
 		proj_edge = 0
+	if (is_laser && prob(absorb))
+		damage *= 0.66 //the armour causes the heat energy to spread out, which reduces the damage
+		is_laser = 0   //and prevents internal organ damage, but affects a larger body surface
 
 	if(!P.nodamage)
-		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge, laser=istype(P, /obj/item/projectile/beam)) //yuck
+		apply_damage(damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge, laser=is_laser)
 	P.on_hit(src, absorb, def_zone)
 
 	return absorb
