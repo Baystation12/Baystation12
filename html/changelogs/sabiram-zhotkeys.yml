@@ -33,5 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added hotkeys for moving up and down z-levels. The hotkey for moving upwards is V, and the hotkey for moving downwards is B."
-
+  - rscadd: "Added hotkeys for moving up and down z-levels. The hotkey for moving upwards is ,(COMMA), and the hotkey for moving downwards is .(FULL STOP)"
