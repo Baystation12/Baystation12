@@ -572,6 +572,24 @@
 		gender = FEMALE
 		veryshort = 1
 
+	coffeehouse
+		name = "Coffee House Cut"
+		icon_state = "hair_coffeehouse"
+		gender = MALE
+		veryshort = 1
+
+	undercut
+		name = "Undercut"
+		icon_state = "hair_undercut"
+		gender = MALE
+		veryshort = 1
+
+	partfade
+		name = "Parted Fade"
+		icon_state = "hair_shavedpart"
+		gender = MALE
+		veryshort = 1
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
