@@ -51,7 +51,7 @@
 		var/HTML = "<h2>[S.name][S.secondary ? "(secondary)" : ""]</h2>"
 		HTML += "<b>Generic Description</b>: [S.desc]<br><br><b>Unskilled</b>: [S.desc_unskilled]<br>"
 		if(!S.secondary)
-			HTML += "<b>Amateur</b>: [S.desc_amateur]"
+			HTML += "<b>Amateur</b>: [S.desc_amateur]<br>"
 		HTML += "<b>Trained</b>: [S.desc_trained]<br><b>Professional</b>: [S.desc_professional]"
 
 		user << browse(HTML, "window=\ref[user]skillinfo")
