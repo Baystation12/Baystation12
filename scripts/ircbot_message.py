@@ -4,25 +4,19 @@
 # EG: "ircbot_message.py hunter2 example.com #adminchannel ADMINHELP, people are killing me!"
 
 import sys
-import cPickle
 import socket
-import HTMLParser
-
 
 def pack():
-    ht = HTMLParser.HTMLParser()
 
-    passwd = sys.argv[1]
-    ip = sys.argv[3]
     try:
-        data = []
-        for in_data in sys.argv[4:]:  #The rest of the arguments is data
-            data += {ht.unescape(in_data)}
+        data = sys.argv[4:]
+        print(data)
     except:
         data = "NO DATA SPECIFIED"
-    dictionary = {"ip": ip, "data": [passwd] + data}
-    pickled = cPickle.dumps(dictionary)
-    nudge(pickled)
+    data = str(data)
+    data = bytes(data, "ascii")
+    nudge(data)
+
 def nudge(data):
     HOST = sys.argv[2]
     PORT = 45678
