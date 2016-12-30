@@ -18,7 +18,7 @@
 
 /datum/gear/gloves/nitrile
 	display_name = "gloves, nitrile"
-	path = /obj/item/clothing/gloves/nitrile
+	path = /obj/item/clothing/gloves/latex/nitrile
 	cost = 3
 
 /datum/gear/gloves/rainbow
