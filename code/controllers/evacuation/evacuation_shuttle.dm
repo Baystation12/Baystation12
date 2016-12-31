@@ -49,7 +49,7 @@
 /datum/evacuation_controller/pods/shuttle/call_evacuation(var/mob/user, var/_emergency_evac, var/forced)
 	if(..(user, _emergency_evac, forced))
 		autopilot = 1
-		shuttle_launch_time = world.time + (evac_prep_delay/2)
+		shuttle_launch_time = evac_no_return
 		evac_ready_time += shuttle.warmup_time*10
 		return 1
 	return 0
