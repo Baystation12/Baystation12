@@ -245,69 +245,69 @@ default behaviour is:
 
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	bruteloss = min(max(bruteloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	bruteloss = Clamp(bruteloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
 
 /mob/living/proc/adjustOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	oxyloss = min(max(oxyloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	oxyloss = Clamp(oxyloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	oxyloss = amount
+	oxyloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getToxLoss()
 	return toxloss
 
 /mob/living/proc/adjustToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	toxloss = min(max(toxloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	toxloss = Clamp(toxloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	toxloss = amount
+	toxloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getFireLoss()
 	return fireloss
 
 /mob/living/proc/adjustFireLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	fireloss = min(max(fireloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	fireloss = Clamp(fireloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss
 
 /mob/living/proc/adjustCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = min(max(cloneloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	cloneloss = Clamp(cloneloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = amount
+	cloneloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getBrainLoss()
 	return brainloss
 
 /mob/living/proc/adjustBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = min(max(brainloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	brainloss = Clamp(brainloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = amount
+	brainloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getHalLoss()
 	return halloss
 
 /mob/living/proc/adjustHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = min(max(halloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	halloss = Clamp(halloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = amount
+	halloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
