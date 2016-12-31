@@ -126,6 +126,7 @@
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+	blood_color = "#862A51"
 
 	reagent_tag = IS_TAJARA
 
