@@ -7,16 +7,16 @@ var/all_clothing = subtypesof(/obj/item/clothing)
 	icon_state = "pdapainter"
 	idle_power_usage = 2
 	active_power_usage = 300
-	var/obj/item/weapon/card/id/I = null
+	var/obj/item/weapon/card/id/loaded = null
 
 /obj/machinery/uniform_printer/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(I || !W || !user)
+	if(loaded || !W || !user)
 		return 0
 	if(istype(W, /obj/item/weapon/card/id))
 		user.remove_from_mob(W)
-		I = W
-		I.loc = src
-		to_chat(user, "You insert the [I] into the [src].")
+		loaded = W
+		loaded.loc = src
+		to_chat(user, "You insert the [loaded] into the [src].")
 	else
 		to_chat(user, "The [W] doesn't fit!")
 
@@ -25,19 +25,21 @@ var/all_clothing = subtypesof(/obj/item/clothing)
 	if(!choice)
 		return
 	if(choice == "eject ID")
-		if(I)
-			user.put_in_hands(I)
-			I = null
+		if(loaded)
+			user.put_in_hands(loaded)
+			loaded = null
 		else
 			to_chat(user, "There is no ID in the [src].")
 			return
-	else if(choice == "print")
-		if(I)
-			var/user_access = I.access
+	if(choice == "print")
+		if(loaded)
+			var/list/user_access = loaded.access
+			world << user_access //D
 			var/datum/mil_branch/user_branch = null
 			for(var/datum/data/record/t in data_core.general)
-				if(t.fields["name"] = I.registered_name)
+				if(t.fields["name"] = loaded.registered_name)
 					user_branch = mil_branches.get_branch(t.fields["mil_branch"])
+					world << user_branch //D
 					break
 			var/list/available_clothing = list()
 			for(var/obj/item/clothing/C in all_clothing)
@@ -57,8 +59,12 @@ var/all_clothing = subtypesof(/obj/item/clothing)
 						correct++
 				if(correct == required)
 					available_clothing.Add(C)
+					world << "added [C]"
 			var/choice2 = input("What would you like to print?") as null|anything in available_clothing
 			if(!choice2)
 				return
 			var/obj/item/clothing/output = new choice2(src)
 			user.put_in_hands(output)
+		else
+			to_chat(user, "There is no ID in the [src].")
+			return
