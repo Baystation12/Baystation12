@@ -33,11 +33,11 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
 
-/*
+
 /obj/item/device/radio/headset/headset_deckofficer
 	name = "deck officer's radio headset"
 	desc = "The headset of the chief box pusher."
 	icon_state = "cargo_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_deckofficer
-*/
+

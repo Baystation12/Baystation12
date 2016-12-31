@@ -14,7 +14,9 @@
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
 	path = /obj/item/clothing/under/color/grey
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
+						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
+						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
 
 /datum/gear/uniform/jumpsuit/New()
 	..()

@@ -70,6 +70,7 @@
 
 /obj/item/clothing/gloves/rig/industrial
 	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/industrial/equipped
 
@@ -114,6 +115,7 @@
 
 /obj/item/clothing/gloves/rig/eva
 	species_restricted = list("Human","Skrell")
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/eva/equipped
 
