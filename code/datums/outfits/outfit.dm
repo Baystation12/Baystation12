@@ -53,6 +53,7 @@ var/list/outfits_decls_by_type_
 	var/backpack = /obj/item/weapon/storage/backpack
 	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel_norm
 	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
+	var/messenger_bag = /obj/item/weapon/storage/backpack/messenger
 
 	var/flags // Specific flags
 
@@ -70,6 +71,7 @@ var/list/outfits_decls_by_type_
 			if(2) back = backpack
 			if(3) back = satchel_one
 			if(4) back = satchel_two
+			if(5) back = messenger_bag
 			else back = null
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
