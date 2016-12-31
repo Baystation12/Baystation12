@@ -99,12 +99,15 @@
 
 	var/dat = list()
 	dat += "<html><body><hr><b>Lift panel</b><hr>"
-	var/i = 0
-	for(var/datum/turbolift_floor/floor in lift.floors)
+
+	//the floors list stores levels in order of increasing Z
+	//therefore, to display upper levels at the top of the menu and
+	//lower levels at the bottom, we need to go through the list in reverse
+	for(var/i in lift.floors.len to 1 step -1)
+		var/datum/turbolift_floor/floor = lift.floors[i]
 		var/area/A = locate(floor.area_ref)
 		dat += "<font color = '[(floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE]'>"
-		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[i==0 ? "Ground Floor" : "Floor #[i]"]</a>: [A.name]</font><br>"
-		i++
+		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>Level #[i]</a>: [A.name]</font><br>"
 
 	dat += "<hr>"
 	if(lift.doors_are_open())
