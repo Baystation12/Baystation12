@@ -726,26 +726,26 @@
 // Elevator areas.
 /area/turbolift/torch_top
 	name = "lift (upper deck)"
-	lift_floor_label = "Deck 3"
-	lift_floor_name = "Operations Deck"
+	lift_floor_label = "Deck 1"
+	lift_floor_name = "Operations"
 	lift_announce_str = "Arriving at Operations Deck: Bridge. Command Offices. Emergency Armory. Infirmary. Research Wing."
 
 /area/turbolift/torch_second
 	name = "lift (maintenance)"
-	lift_floor_label = "Maint."
-	lift_floor_name = "Maintenance Access"
+	lift_floor_label = "Deck 2"
+	lift_floor_name = "Maintenance"
 	lift_announce_str = "Arriving at Maintenance Deck: Engineering. Atmospherics. AI Core. Sanitation."
 
 /area/turbolift/torch_first
 	name = "lift (second deck)"
-	lift_floor_label = "Deck 2"
-	lift_floor_name = "Habitation Deck"
+	lift_floor_label = "Deck 3"
+	lift_floor_name = "Habitation"
 	lift_announce_str = "Arriving at Habitation Deck: EVA. Security Wing. Telecommunications. Hydroponics. Mess Hall. Cryogenic Storage."
 
 /area/turbolift/torch_ground
 	name = "lift (lower deck)"
-	lift_floor_label = "Deck 1"
-	lift_floor_name = "Hanger Deck"
+	lift_floor_label = "Deck 4"
+	lift_floor_name = "Hangar"
 	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Storage. Main Hangar. Supply Office."
 	base_turf = /turf/simulated/floor
 
