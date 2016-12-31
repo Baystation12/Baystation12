@@ -48,6 +48,7 @@
 	access_scanner.req_one_access = req_one_access.Copy()
 
 /mob/living/bot/initialize()
+	..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else

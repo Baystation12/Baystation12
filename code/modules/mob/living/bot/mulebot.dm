@@ -34,6 +34,8 @@
 	var/turf/home
 	var/homeName
 
+	var/global/amount = 0
+
 /mob/living/bot/mulebot/New()
 	..()
 
@@ -45,8 +47,7 @@
 	else
 		homeName = "Unset"
 
-	suffix = sequential_id(/mob/living/bot/mulebot)
-
+	suffix = num2text(++amount)
 	name = "Mulebot #[suffix]"
 
 /mob/living/bot/mulebot/MouseDrop_T(var/atom/movable/C, var/mob/user)

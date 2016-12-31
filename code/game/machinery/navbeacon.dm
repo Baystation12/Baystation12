@@ -13,7 +13,7 @@ var/global/list/navbeacons = list()
 	var/open = 0		// true if cover is open
 	var/locked = 1		// true if controls are locked
 	var/location = ""	// location response text
-	var/list/codes		// assoc. list of transponder codes
+	var/list/codes = list()		// assoc. list of transponder codes
 
 	req_access = list(access_engine)
 
@@ -376,3 +376,4 @@ Transponder Codes:<UL>"}
 
 /obj/machinery/navbeacon/torch/QM3
 	location = "QM #3"
+	codes = list("delivery" = 1)
