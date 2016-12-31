@@ -222,7 +222,7 @@
 //the damage amount for the stage with the same name as the wound.
 //e.g. /datum/wound/cut/deep should only be applied for 15 damage and up,
 //because in it's stages list, "deep cut" = 15.
-/proc/get_wound_type(var/type = CUT, var/damage)
+/proc/get_wound_type(var/type, var/damage)
 	switch(type)
 		if(CUT)
 			switch(damage)
@@ -252,7 +252,7 @@
 					return /datum/wound/puncture/small
 		if(BRUISE)
 			return /datum/wound/bruise
-		if(BURN)
+		if(BURN, LASER)
 			switch(damage)
 				if(50 to INFINITY)
 					return /datum/wound/burn/carbonised
