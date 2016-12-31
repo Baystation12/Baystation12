@@ -25,14 +25,12 @@
 
 /datum/turbolift/proc/open_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.open()
+		door.command("open")
 	return
 
 /datum/turbolift/proc/close_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.close()
+		door.command("close")
 	return
 
 /datum/turbolift/proc/do_move()
