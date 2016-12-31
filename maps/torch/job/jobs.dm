@@ -674,7 +674,7 @@
 		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/marine/e3,
-			/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/marine/e4
 	)
 
