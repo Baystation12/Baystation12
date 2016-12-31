@@ -7,15 +7,18 @@
 	evac_called =   new(0, new_sound = sound('sound/AI/shuttlecalled.ogg'))
 	evac_recalled = new(0, new_sound = sound('sound/AI/shuttlerecalled.ogg'))
 
-	var/departed = 0
-	var/autopilot = 1
-	var/datum/shuttle/ferry/emergency/shuttle // Set in shuttle_emergency.dm
-	var/shuttle_launch_time
+	emergency_prep_additional_delay = 0 MINUTES
+	transfer_prep_additional_delay = 0 MINUTES
 
 	evacuation_options = list(
 		EVAC_OPT_CALL_SHUTTLE = new /datum/evacuation_option/call_shuttle(),
 		EVAC_OPT_RECALL_SHUTTLE = new /datum/evacuation_option/recall_shuttle()
 	)
+
+	var/departed = 0
+	var/autopilot = 1
+	var/datum/shuttle/ferry/emergency/shuttle // Set in shuttle_emergency.dm
+	var/shuttle_launch_time
 
 /datum/evacuation_controller/pods/shuttle/has_evacuated()
 	return departed
