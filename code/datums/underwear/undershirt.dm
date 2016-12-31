@@ -8,7 +8,7 @@
 	icon_state = "undershirt"
 	has_color = TRUE
 
-/datum/cagegory_item/underwear/undershirt/shirt_long
+/datum/category_item/underwear/undershirt/shirt_long
 	name = "Long Shirt"
 	icon_state = "undershirt_long"
 	has_color = TRUE
