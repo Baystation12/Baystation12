@@ -33,6 +33,7 @@
 		/area/ninja_dojo = NO_SCRUBBER |NO_VENT | NO_APC,
 		/area/outpost/abandoned = NO_SCRUBBER,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/merchant = NO_SCRUBBER|NO_APC,
 		/area/shuttle/merchant/away = NO_SCRUBBER|NO_VENT|NO_APC,
