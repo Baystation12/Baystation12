@@ -191,7 +191,7 @@
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/armor
-	name = "Armor Satchel"
+	name = "armor satchel"
 	desc = "A satchel for when you don't want to try a diplomatic approach."
 	startswith = list(
 		/obj/item/clothing/suit/storage/vest/merc,
