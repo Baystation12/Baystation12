@@ -34,8 +34,6 @@
 	var/turf/home
 	var/homeName
 
-	var/global/amount = 0
-
 /mob/living/bot/mulebot/New()
 	..()
 
@@ -47,7 +45,7 @@
 	else
 		homeName = "Unset"
 
-	suffix = num2text(++amount) // Starts from 1
+	suffix = sequential_id(/mob/living/bot/mulebot)
 
 	name = "Mulebot #[suffix]"
 
@@ -181,7 +179,7 @@
 
 /mob/living/bot/mulebot/emag_act(var/remaining_charges, var/user)
 	locked = !locked
-	user << "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>"
+	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>")
 	flick("mulebot-emagged", src)
 	playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1

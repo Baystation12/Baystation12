@@ -282,3 +282,97 @@ Transponder Codes:<UL>"}
 	location = "Hydroponics"
 	codes = list("delivery" = 1, "dir" = 2)
 
+// Torch types below
+
+/obj/machinery/navbeacon/torch/bridge1
+	location = "bridge1"
+	codes = list("patrol" = 1, "next_patrol" = "bridge2")
+
+/obj/machinery/navbeacon/torch/FDforehallway3
+	location = "FDforehallway3"
+	codes = list("patrol" = 1, "next_patrol" = "FDforehallway4")
+
+/obj/machinery/navbeacon/torch/FDforehallway4
+	location = "FDforehallway4"
+	codes = list("patrol" = 1, "next_patrol" = "FDelevator2")
+
+/obj/machinery/navbeacon/torch/FDelevator2
+	location = "FDelevator2"
+	codes = list("patrol" = 1, "next_patrol" = "Supply")
+
+/obj/machinery/navbeacon/torch/Supply
+	location = "Supply"
+	codes = list("patrol" = 1, "next_patrol" = "FDelevator")
+
+/obj/machinery/navbeacon/torch/FDelevator
+	location = "FDelevator"
+	codes = list("patrol" = 1, "next_patrol" = "FDforehallway1")
+
+/obj/machinery/navbeacon/torch/FDforehallway1
+	location = "FDforehallway1"
+	codes = list("patrol" = 1, "next_patrol" = "FDforehallway2")
+
+/obj/machinery/navbeacon/torch/telecomms
+	location = "telecomms"
+	codes = list("patrol" = 1, "next_patrol" = "briefingroom2")
+
+/obj/machinery/navbeacon/torch/aiupload2
+	location = "aiupload2"
+	codes = list("patrol" = 1, "next_patrol" = "brig")
+
+/obj/machinery/navbeacon/torch/brig
+	location = "brig"
+	codes = list("patrol" = 1, "next_patrol" = "aiupload")
+
+/obj/machinery/navbeacon/torch/aiupload
+	location = "aiupload"
+	codes = list("patrol" = 1, "next_patrol" = "forehallway")
+
+/obj/machinery/navbeacon/torch/briefingroom2
+	location = "briefingroom2"
+	codes = list("patrol" = 1, "next_patrol" = "forehallway2")
+
+/obj/machinery/navbeacon/torch/forehallway2
+	location = "forehallway2"
+	codes = list("patrol" = 1, "next_patrol" = "aiupload2")
+
+/obj/machinery/navbeacon/torch/briefingroom
+	location = "briefingroom"
+	codes = list("patrol" = 1, "next_patrol" = "telecomms")
+
+/obj/machinery/navbeacon/torch/forehallway
+	location = "forehallway"
+	codes = list("patrol" = 1, "next_patrol" = "briefingroom")
+
+/obj/machinery/navbeacon/torch/bridge1
+	location = "bridge1"
+	codes = list("patrol" = 1, "next_patrol" = "bridge2")
+
+/obj/machinery/navbeacon/torch/bridge2
+	location = "bridge2"
+	codes = list("patrol" = 1, "next_patrol" = "rdoffice")
+
+/obj/machinery/navbeacon/torch/vault2
+	location = "vault2"
+	codes = list("patrol" = 1, "next_patrol" = "medical")
+
+/obj/machinery/navbeacon/torch/vault1
+	location = "vault1"
+	codes = list("patrol" = 1, "next_patrol" = "xooffice")
+
+/obj/machinery/navbeacon/torch/medical
+	location = "medical"
+	codes = list("patrol" = 1, "next_patrol" = "vault1")
+
+/obj/machinery/navbeacon/torch/bridge2
+	location = "bridge2"
+	codes = list("patrol" = 1, "next_patrol" = "rdoffice")
+
+/obj/machinery/navbeacon/torch/rdoffice
+	location = "rdoffice"
+	codes = list("patrol" = 1, "next_patrol" = "vault2")
+
+// Torch delivery types
+
+/obj/machinery/navbeacon/torch/QM3
+	location = "QM #3"
