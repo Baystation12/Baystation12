@@ -77,7 +77,7 @@
 		/area/overmap,
 		/area/shuttle/escape/centcom,
 		/area/shuttle/escape,
-		/area/shuttle/turbolift,
+		/area/turbolift,
 		/area/security/prison,
 		/area/shuttle/syndicate_elite/station,
 		/area/shuttle/escape/centcom,
