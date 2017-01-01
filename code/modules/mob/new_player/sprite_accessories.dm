@@ -590,12 +590,6 @@
 		gender = MALE
 		veryshort = 1
 
-	highandtight
-		name = "High and Tight"
-		icon_state = "hair_hightight"
-		gender = MALE
-		veryshort = 1
-
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
