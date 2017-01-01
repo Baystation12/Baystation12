@@ -306,8 +306,10 @@
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
-			I.take_damage(brute / 2)
-			brute -= brute / 2
+			I.take_damage(damage_amt / 2)
+			brute /= 2
+			if(laser)
+				burn /= 2
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
