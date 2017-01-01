@@ -167,6 +167,7 @@
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/marine/o3,

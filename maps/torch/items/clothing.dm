@@ -8,7 +8,7 @@
 /obj/item/clothing/head/helmet/space/rig/hazard/guard
 	camera = /obj/machinery/camera/network/research
 
-/obj/item/weapon/rig/hazard/guard/equipped
+/obj/item/weapon/rig/hazard/guard
 
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,

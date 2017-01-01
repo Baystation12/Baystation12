@@ -109,23 +109,24 @@
 /datum/gear/uniform/resomi/eng
 	display_name = "uniform, Engineering (Resomi)"
 	path = /obj/item/clothing/under/resomi/yellow
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician")
+	allowed_roles = list("Maintenance Assistant", "Roboticist", "Passenger", "Research Assistant")
 
 /datum/gear/uniform/resomi/sec
 	display_name = "uniform, Security (Resomi)"
 	path = /obj/item/clothing/under/resomi/red
-	allowed_roles = list("Security Officer","Head of Security","Warden","Detective")
+	allowed_roles = list("Security Guard", "Passenger", "Research Assistant")
 
 /datum/gear/uniform/resomi/med
 	display_name = "uniform, Medical (Resomi)"
 	path = /obj/item/clothing/under/resomi/medical
+	allowed_roles = list("Medical Assistant", "Virologist", "Chemist", "Counselor", "Passenger", "Research Assistant")
 
 /datum/gear/uniform/resomi/science
 	display_name = "uniform, Science (Resomi)"
 	path = /obj/item/clothing/under/resomi/science
 
 /datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona)"
+	display_name = "gear harness (Full Body Prosthetic, IPC, Diona)"
 	path = /obj/item/clothing/under/harness
 	sort_category = "Xenowear"
 
