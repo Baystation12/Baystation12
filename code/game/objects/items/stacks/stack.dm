@@ -140,21 +140,12 @@
 			S.amount = produced
 			S.add_to_stacks(user)
 
-		if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
-			for (var/obj/item/I in O)
-				qdel(I)
-
 		if (recipe.goes_in_hands)
 			user.put_in_hands(O)
 			if (istype(O, /obj/item/stack))
 				var/obj/item/stack/S = O
 				S.amount = produced
 				S.add_to_stacks(user)
-
-			if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
-				for (var/obj/item/I in O)
-					qdel(I)
-
 
 /obj/item/stack/Topic(href, href_list)
 	..()
