@@ -276,11 +276,10 @@
 					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
 						vote_on_poll(pollid, optionid, 1)
 
-/mob/new_player/proc/IsJobAvailable(rank)
-	var/datum/job/job = job_master.GetJob(rank)
+/mob/new_player/proc/IsJobAvailable(var/datum/job/job)
 	if(!job)	return 0
 	if(!job.is_position_available()) return 0
-	if(jobban_isbanned(src,rank))	return 0
+	if(jobban_isbanned(src, job.title))	return 0
 	if(!job.player_old_enough(src.client))	return 0
 
 	return 1
@@ -301,10 +300,10 @@
 	if(!config.enter_allowed)
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
-	if(!IsJobAvailable(rank))
+	var/datum/job/job = job_master.GetJob(rank)
+	if(!IsJobAvailable(job))
 		alert("[rank] is not available. Please try another.")
 		return 0
-	var/datum/job/job = job_master.GetJob(rank)
 	if(!job.is_branch_allowed(client.prefs.char_branch))
 		alert("Wrong branch of service for [rank]. Valid branches are: [job.get_branches()].")
 		return 0
@@ -327,7 +326,7 @@
 			log_and_message_admins("User [src] spawned at spawn point with dangerous atmosphere.")
 
 		// Just in case someone stole our position while we were waiting for input from alert() proc
-		if(!IsJobAvailable(rank))
+		if(!IsJobAvailable(job))
 			to_chat(src, alert("[rank] is not available. Please try another."))
 			return 0
 
@@ -406,7 +405,7 @@
 
 	dat += "Choose from the following open/valid positions:<br>"
 	for(var/datum/job/job in job_master.occupations)
-		if(job && IsJobAvailable(job.title))
+		if(job && IsJobAvailable(job))
 			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
 				continue
 
