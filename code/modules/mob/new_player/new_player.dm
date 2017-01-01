@@ -285,6 +285,13 @@
 
 	return 1
 
+/mob/new_player/proc/IsJobRestricted(var/datum/job/job, var/branch_pref, var/rank_pref)
+	if(!job.is_branch_allowed(branch_pref))
+		return 1
+	if(!job.is_rank_allowed(branch_pref, rank_pref))
+		return 1
+	return 0
+
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if(src != usr)
 		return 0
@@ -385,7 +392,7 @@
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
 
-	var/dat = "<html><body><center>"
+	var/list/dat = list("<html><body><center>")
 	dat += "<b>Welcome, [name].<br></b>"
 	dat += "Round Duration: [roundduration2text()]<br>"
 
@@ -402,15 +409,19 @@
 		if(job && IsJobAvailable(job.title))
 			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
 				continue
+
 			var/active = 0
 			// Only players with the job assigned and AFK for less than 10 minutes count as active
 			for(var/mob/M in player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
 				active++
-			dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
+
+			if(IsJobRestricted(job, client.prefs.char_branch, client.prefs.char_rank))
+				dat += "<a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
+			else
+				dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
 
 	dat += "</center>"
-	src << browse(dat, "window=latechoices;size=300x640;can_close=1")
-
+	src << browse(jointext(dat, null), "window=latechoices;size=300x640;can_close=1")
 
 /mob/new_player/proc/create_character()
 	spawning = 1
