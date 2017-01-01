@@ -43,6 +43,8 @@
 			to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
 			label_text = tmp_label
 			update_name_label()
+	else
+		return ..()
 
 /obj/item/weapon/reagent_containers/proc/update_name_label()
 	if(label_text == "")
