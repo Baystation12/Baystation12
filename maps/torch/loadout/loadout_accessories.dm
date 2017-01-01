@@ -182,7 +182,7 @@
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
-	allowed_roles = list("Passenger", "Bartender")
+	allowed_roles = list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant")
 
 /datum/gear/accessory/hawaii/New()
 	..()
@@ -205,7 +205,7 @@
 	cost = 8
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
+						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -227,7 +227,7 @@
 	cost = 5
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
+						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
 
 /datum/gear/accessory/solawardminor/New()
 	..()
@@ -258,7 +258,7 @@
 	path = /obj/item/clothing/accessory/badge/tags
 	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
 						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
+						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
 
 /datum/gear/accessory/kneepads
 	display_name = "kneepads"

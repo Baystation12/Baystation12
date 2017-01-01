@@ -355,7 +355,7 @@ datum/preferences
 				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
-	if(backbag > 4 || backbag < 1)
+	if(backbag > 5 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag
 

@@ -14,6 +14,7 @@
 	#include "items/headsets.dm"
 	#include "items/machinery.dm"
 	#include "items/manuals.dm"
+	#include "items/stamps.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"
