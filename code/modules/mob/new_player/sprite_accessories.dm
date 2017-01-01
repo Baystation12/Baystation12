@@ -590,6 +590,12 @@
 		gender = MALE
 		veryshort = 1
 
+	highandtight
+		name = "High and Tight"
+		icon_state = "hair_hightight"
+		gender = MALE
+		veryshort = 1
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -701,6 +707,18 @@
 	sevenOclockstache
 		name = "7 O'clock Shadow and Moustache"
 		icon_state = "facial_7oclockmoustache"
+
+	mutton
+		name = "Mutton Chops"
+		icon_state = "facial_mutton"
+
+	muttonstache
+		name = "Mutton Chops and Moustache"
+		icon_state = "facial_muttonmus"
+
+	walrus
+		name = "Walrus Moustache"
+		icon_state = "facial_walrus"
 
 /*
 ///////////////////////////////////
