@@ -9,8 +9,8 @@
 	dir = EAST
 
 	areas_to_use = list(
-		/area/shuttle/turbolift/security_maintenance,
-		/area/shuttle/turbolift/security_station
+		/area/turbolift/security_maintenance,
+		/area/turbolift/security_station
 		)
 
 /obj/turbolift_map_holder/exodus/research
@@ -18,8 +18,8 @@
 	dir = WEST
 
 	areas_to_use = list(
-		/area/shuttle/turbolift/research_maintenance,
-		/area/shuttle/turbolift/research_station
+		/area/turbolift/research_maintenance,
+		/area/turbolift/research_station
 		)
 
 /obj/turbolift_map_holder/exodus/engineering
@@ -30,14 +30,14 @@
 	lift_size_y = 4
 
 	areas_to_use = list(
-		/area/shuttle/turbolift/engineering_maintenance,
-		/area/shuttle/turbolift/engineering_station
+		/area/turbolift/engineering_maintenance,
+		/area/turbolift/engineering_station
 		)
 
 /obj/turbolift_map_holder/exodus/cargo
 	name = "Exodus turbolift map placeholder - Cargo"
 
 	areas_to_use = list(
-		/area/shuttle/turbolift/cargo_maintenance,
-		/area/shuttle/turbolift/cargo_station
+		/area/turbolift/cargo_maintenance,
+		/area/turbolift/cargo_station
 		)

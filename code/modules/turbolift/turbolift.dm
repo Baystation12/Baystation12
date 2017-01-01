@@ -51,7 +51,7 @@
 		close_doors()
 		return 1
 
-	var/area/shuttle/turbolift/origin = locate(current_floor.area_ref)
+	var/area/turbolift/origin = locate(current_floor.area_ref)
 
 	if(target_floor == current_floor)
 
@@ -73,7 +73,7 @@
 	else
 		next_floor = floors[current_floor_index-1]
 
-	var/area/shuttle/turbolift/destination = locate(next_floor.area_ref)
+	var/area/turbolift/destination = locate(next_floor.area_ref)
 
 	if(!istype(origin) || !istype(destination) || (origin == destination))
 		return 0

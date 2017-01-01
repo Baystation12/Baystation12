@@ -5,9 +5,9 @@
 	lift_size_y = 4
 
 	areas_to_use = list(
-		/area/shuttle/turbolift/torch_ground,
-		/area/shuttle/turbolift/torch_first,
-		/area/shuttle/turbolift/torch_second,
-		/area/shuttle/turbolift/torch_top
+		/area/turbolift/torch_ground,
+		/area/turbolift/torch_first,
+		/area/turbolift/torch_second,
+		/area/turbolift/torch_top
 		)
 
