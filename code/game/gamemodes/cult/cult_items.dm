@@ -19,9 +19,13 @@
 		return ..()
 
 	var/zone = (user.hand ? BP_L_ARM : BP_R_ARM)
+
+	var/obj/item/organ/external/affecting = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/affecting = H.get_organ(zone)
+		affecting = H.get_organ(zone)
+
+	if(affecting)
 		to_chat(user, "<span class='danger'>An unexplicable force rips through your [affecting.name], tearing the sword from your grasp!</span>")
 	else
 		to_chat(user, "<span class='danger'>An unexplicable force rips through you, tearing the sword from your grasp!</span>")
