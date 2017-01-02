@@ -1,3 +1,6 @@
+#define BOLTS_FINE 0
+#define BOLTS_EXPOSED 1
+#define BOLTS_CUT 2
 /obj/machinery/door/airlock
 	name = "airlock"
 	icon = 'icons/obj/doors/Doorint.dmi'
@@ -14,7 +17,7 @@
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = 0
-	var/lock_cut_state = 1	// Not a boolean. If 1, door bolts are fine. If 2, the bolt cover is off. If 3, the bolts have been cut.
+	var/lock_cut_state = BOLTS_FINE
 	var/lights = 1 // bolt lights show by default
 	var/aiDisabledIdScanner = 0
 	var/aiHacking = 0
@@ -779,6 +782,7 @@ About the new airlock wires panel:
 	update_icon()
 	return 1
 
+//returns 1 on success, 0 on failure
 /obj/machinery/door/airlock/proc/cut_bolts(item, user)
 	var/cut_delay = 150
 	var/cut_verb
@@ -808,38 +812,36 @@ About the new airlock wires panel:
 
 	else if(istype(item,/obj/item/weapon/material/twohanded/fireaxe))
 		//special case - zero delay, different message
-		if (src.lock_cut_state == 2)
-			..()
-			return //can't actually cut the bolts, go back to regular smashing
+		if (src.lock_cut_state == BOLTS_EXPOSED)
+			return 0 //can't actually cut the bolts, go back to regular smashing
 		var/obj/item/weapon/material/twohanded/fireaxe/F = item
 		if (!F.wielded)
-			..()
-			return
+			return 0
 		to_chat(user, "You smash the bolt cover open!")
 		playsound(src, 'sound/weapons/smash.ogg', 100, 1)
-		src.lock_cut_state = 2
+		src.lock_cut_state = BOLTS_EXPOSED
 		return
 
 	else
 		// I guess you can't cut bolts with that item. Never mind then.
-		return ..()
+		return 0
 
-	if (src.lock_cut_state == 1)
+	if (src.lock_cut_state == BOLTS_FINE)
 		to_chat(user, "You begin [cut_verb] through the bolt cover.")
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
 			to_chat(user, "You remove the cover and expose the door bolts.")
-			src.lock_cut_state = 2
-		return
+			src.lock_cut_state = BOLTS_EXPOSED
+		return 1
 
-	if (src.lock_cut_state == 2)
+	if (src.lock_cut_state == BOLTS_EXPOSED)
 		to_chat(usr, "You begin [cut_verb] through the door bolts.")
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
 			to_chat(user, "You sever the door bolts, unlocking the door.")
-			src.lock_cut_state = 3
+			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
-		return
+		return 1
 
 /obj/machinery/door/airlock/attackby(var/obj/item/C, var/mob/user)
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
@@ -869,8 +871,9 @@ About the new airlock wires panel:
 
 	src.add_fingerprint(user)
 
-	if (!repairing && (stat & BROKEN) && src.locked && src.lock_cut_state < 3) //bolted and broken
-		cut_bolts(C,user)
+	if (!repairing && (stat & BROKEN) && src.locked) //bolted and broken
+		if (!cut_bolts(C,user))
+			..()
 		return
 
 	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
@@ -1071,7 +1074,7 @@ About the new airlock wires panel:
 
 	if (operating && !forced) return 0
 
-	if (lock_cut_state == 3) return 0 //what bolts?
+	if (lock_cut_state == BOLTS_CUT) return 0 //what bolts?
 
 	src.locked = 1
 	playsound(src, bolts_dropping, 30, 0, -6)
@@ -1203,9 +1206,9 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/examine()
 	..()
-	if (lock_cut_state == 2)
+	if (lock_cut_state == BOLTS_EXPOSED)
 		to_chat(usr, "The bolt cover has been cut open.")
-	if (lock_cut_state == 3)
+	if (lock_cut_state == BOLTS_CUT)
 		to_chat(usr, "The door bolts have been cut.")
 	if(brace)
 		to_chat(usr, "\The [brace] is installed on \the [src], preventing it from opening.")
