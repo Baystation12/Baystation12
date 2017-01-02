@@ -573,17 +573,20 @@
 
 //Somebody cut an important wire and now we're following a new definition of "pitch."
 /obj/machinery/vending/proc/throw_item()
-	var/obj/dispensed_item = null
-	for(var/datum/stored_items/vending_products/R in src.product_records)
-		dispensed_item = R.get_product(loc)
-		if (dispensed_item)
-			break
-
-	if (!dispensed_item)
+	var/obj/throw_item = null
+	var/mob/living/target = locate() in view(7,src)
+	if(!target)
 		return 0
 
-	dispensed_item.forceMove(get_turf(src))
-	visible_message("<span class='warning'>\The [src] shudders and \a [dispensed_item] falls out!</span>")
+	for(var/datum/stored_items/vending_products/R in src.product_records)
+		throw_item = R.get_product(loc)
+		if (throw_item)
+			break
+	if (!throw_item)
+		return 0
+	spawn(0)
+		throw_item.throw_at(target, rand(1,2), 3, src)
+	src.visible_message("<span class='warning'>\The [src] launches \a [throw_item] at \the [target]!</span>")
 	return 1
 
 /*
