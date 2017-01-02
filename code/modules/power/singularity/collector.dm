@@ -32,7 +32,7 @@ var/global/list/rad_collectors = list()
 
 	var/turf/T = get_turf(src)
 	if(T in radiation_repository.irradiated_turfs)
-		receive_pulse((radiation_repository.irradiated_turfs[T] / (50 * 5))) //Maths is hard
+		receive_pulse((radiation_repository.irradiated_turfs[T] * 5)) //Maths is hard
 
 	if(P)
 		if(P.air_contents.gas["phoron"] == 0)
