@@ -647,6 +647,7 @@ other types of metals and chemistry for reagents).
 	sort_string = "UAAAG"
 
 /datum/design/item/device/ano_scanner
+	name = "Alden-Saraspova counter"
 	id = "ano_scanner"
 	desc = "Aids in triangulation of exotic particles."
 	req_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
