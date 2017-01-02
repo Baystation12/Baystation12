@@ -56,8 +56,7 @@
 	if(target_floor == current_floor)
 
 		playsound(control_panel_interior.loc, origin.arrival_sound, 50, 1)
-		open_doors(target_floor)
-		target_floor.ext_panel.reset()
+		target_floor.arrived(src)
 		target_floor = null
 
 		sleep(15)
@@ -99,7 +98,7 @@
 /datum/turbolift/proc/queue_move_to(var/datum/turbolift_floor/floor)
 	if(!floor || !(floor in floors) || (floor in queued_floors))
 		return // STOP PRESSING THE BUTTON.
-	floor.ext_panel.light_up()
+	floor.pending_move(src)
 	queued_floors |= floor
 	turbolift_controller.lift_is_moving(src)
 

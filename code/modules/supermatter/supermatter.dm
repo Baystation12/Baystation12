@@ -307,8 +307,7 @@
 		var/rads = (power / 10) * ( 1 / (radius**2) )
 		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
 */
-	rad_power = power * 2 //Better close those shutters!
-
+	rad_power = power * 1.5 //Better close those shutters!
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 
 	return 1

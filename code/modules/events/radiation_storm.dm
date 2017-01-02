@@ -31,13 +31,8 @@
 
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)
-	for(var/area/A in all_areas)
-		if(!(A.z in using_map.station_levels))
-			continue
-		if(A.flags & RAD_SHIELDED)
-			continue
-		for(var/turf/T in A)
-			radiation_repository.irradiated_turfs[T] = radiation_level
+	for(var/z in using_map.station_levels)
+		radiation_repository.z_radiate(locate(1, 1, z), radiation_level, 1)
 
 	for(var/mob/living/carbon/C in living_mob_list_)
 		var/area/A = get_area(C)
