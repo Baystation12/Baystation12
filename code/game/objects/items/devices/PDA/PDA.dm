@@ -417,8 +417,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					cartdata["radio"] = 1
 				if(istype(cartridge.radio, /obj/item/radio/integrated/signal))
 					cartdata["radio"] = 2
-				if(istype(cartridge.radio, /obj/item/radio/integrated/mule))
-					cartdata["radio"] = 3
 
 		if(mode == 2)
 			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0

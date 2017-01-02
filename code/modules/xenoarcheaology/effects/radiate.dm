@@ -15,16 +15,10 @@
 
 /datum/artifact_effect/radiate/DoEffectAura()
 	if(holder)
-		var/turf/T = get_turf(holder)
-		for (var/mob/living/M in range(src.effectrange,T))
-			M.apply_effect(radiation_amount,IRRADIATE, blocked = M.getarmor(null, "rad"))
-			M.updatehealth()
+		radiation_repository.flat_radiate(holder, radiation_amount, src.effectrange)
 		return 1
 
 /datum/artifact_effect/radiate/DoEffectPulse()
 	if(holder)
-		var/turf/T = get_turf(holder)
-		for (var/mob/living/M in range(src.effectrange,T))
-			M.apply_effect(radiation_amount * 25,IRRADIATE, blocked = M.getarmor(null, "rad"))
-			M.updatehealth()
+		radiation_repository.radiate(holder, ((radiation_amount * 25) * (sqrt(src.effectrange)))) //Need to get feedback on this
 		return 1

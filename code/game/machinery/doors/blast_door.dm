@@ -31,6 +31,7 @@
 	var/begins_closed = TRUE
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
+	var/material/implicit_material
 
 /obj/machinery/door/blast/initialize()
 	..()
@@ -42,6 +43,8 @@
 		density = 0
 		opacity = 0
 		layer = open_layer
+
+	implicit_material = get_material_by_name("plasteel")
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wifi_receiver)
@@ -103,6 +106,9 @@
 		src.force_open()
 	else
 		src.force_close()
+
+/obj/machinery/door/blast/get_material()
+	return implicit_material
 
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)

@@ -55,4 +55,5 @@
 		/obj/item/weapon/storage/excavation,
 		/obj/item/weapon/anobattery,
 		/obj/item/device/ano_scanner,
+		/obj/item/taperoll,
 		/obj/item/weapon/pickaxe/hand)

@@ -40,11 +40,6 @@
 
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 
-	var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
-	if(!istype(evac_control))
-		to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
-		return
-
 	var/list/data = host.initial_data()
 
 	if(program)
@@ -81,14 +76,16 @@
 	if(current_viewing_message)
 		data["message_current"] = current_viewing_message
 
-	if(evac_control.shuttle.location)
-		data["have_shuttle"] = 1
-		if(evac_control.is_idle())
-			data["have_shuttle_called"] = 0
-		else
-			data["have_shuttle_called"] = 1
-	else
-		data["have_shuttle"] = 0
+	var/list/processed_evac_options = list()
+	if(!isnull(evacuation_controller))
+		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+			var/list/option = list()
+			option["option_text"] = EO.option_text
+			option["option_target"] = EO.option_target
+			option["needs_syscontrol"] = EO.needs_syscontrol
+			option["silicon_allowed"] = EO.silicon_allowed
+			processed_evac_options[++processed_evac_options.len] = option
+	data["evac_options"] = processed_evac_options
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
@@ -173,18 +170,19 @@
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
-		if("shuttle")
+		if("evac")
 			. = 1
-			if(is_autenthicated(user) && ntn_cont)
-				if(href_list["target"] == "call")
-					var/confirm = alert("Are you sure you want to call the shuttle?", name, "No", "Yes")
-					if(confirm == "Yes" && can_still_topic())
-						call_shuttle_proc(usr)
-
-				if(href_list["target"] == "cancel" && !issilicon(usr))
-					var/confirm = alert("Are you sure you want to cancel the shuttle?", name, "No", "Yes")
-					if(confirm == "Yes" && can_still_topic())
-						cancel_call_proc(usr)
+			if(is_autenthicated(user))
+				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
+				if (isnull(selected_evac_option) || !istype(selected_evac_option))
+					return
+				if (!selected_evac_option.silicon_allowed && issilicon(user))
+					return
+				if (selected_evac_option.needs_syscontrol && !ntn_cont)
+					return
+				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
+				if (confirm == "Yes" && can_still_topic())
+					evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
 		if("setstatus")
 			. = 1
 			if(is_autenthicated(user) && ntn_cont)

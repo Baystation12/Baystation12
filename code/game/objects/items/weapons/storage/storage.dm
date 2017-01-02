@@ -131,6 +131,14 @@
 				to_chat(user, "<span class='notice'>\The [src] has no more space specifically for \the [W].</span>")
 			return 0
 
+	// Don't allow insertion of unsafed compressed matter implants
+	// Since they are sucking something up now, their afterattack will delete the storage
+	if(istype(W, /obj/item/weapon/implanter/compressed))
+		var/obj/item/weapon/implanter/compressed/impr = W
+		if(!impr.safe)
+			stop_messages = 1
+			return 0
+
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
 			to_chat(user, "<span class='notice'>\The [src] cannot hold \the [W].</span>")

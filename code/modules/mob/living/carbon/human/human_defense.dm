@@ -18,7 +18,6 @@ meteor_act
 		else
 			return PROJECTILE_FORCE_MISS //inside an else so the taur conditional can fall through
 
-	var/obj/item/organ/external/organ = get_organ()
 
 	//Shields
 	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
@@ -31,6 +30,7 @@ meteor_act
 
 	//Shrapnel
 	if(!(species.flags & NO_EMBED) && P.can_embed())
+		var/obj/item/organ/external/organ = get_organ(def_zone)
 		var/armor = getarmor_organ(organ, "bullet")
 		if(prob(20 + max(P.damage - armor, -10)))
 			var/obj/item/weapon/material/shard/shrapnel/SP = new()

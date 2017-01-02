@@ -27,17 +27,14 @@
 		radiate()
 
 /datum/event/solar_storm/proc/radiate()
-	for(var/mob/living/L in living_mob_list_)
-		var/turf/T = get_turf(L)
-		if(!T || !(T.z in using_map.player_levels))
+	var/radiation_level = rand(15, 30)
+	for(var/area/A in all_areas)
+		if(!(A.z in using_map.player_levels))
 			continue
-
-		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
-			continue
-
-		//Todo: Apply some burn damage from the heat of the sun. Until then, enjoy some moderate radiation.
-		L.apply_effect((rand(15,30)),IRRADIATE,blocked = L.getarmor(null, "rad"))
-
+		for(var/turf/T in A)
+			if(!istype(T.loc,/area/space) && !istype(T,/turf/space))
+				continue
+			radiation_repository.irradiated_turfs[T] = radiation_level
 
 /datum/event/solar_storm/end()
 	command_announcement.Announce("The solar storm has passed the station. It is now safe to resume EVA activities. Please report to medbay if you experience any unusual symptoms. ", "Anomaly Alert")

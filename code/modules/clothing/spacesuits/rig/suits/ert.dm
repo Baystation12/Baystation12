@@ -44,7 +44,8 @@
 	suit_type = "Asset Protection engineer"
 	icon_state = "ert_engineer_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 100)
-	siemens_coefficient = 0
+
+	glove_type = /obj/item/clothing/gloves/rig/ert/engineer
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -52,6 +53,9 @@
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/device/rcd
 		)
+
+/obj/item/clothing/gloves/rig/ert/engineer
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ert/janitor
 	name = "asset protection sanitation hardsuit control module"
@@ -98,6 +102,8 @@
 	icon_state = "asset_protection_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
 
+	glove_type = /obj/item/clothing/gloves/rig/ert/assetprotection
+
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
@@ -109,3 +115,6 @@
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/datajack
 		)
+
+/obj/item/clothing/gloves/rig/ert/assetprotection
+	siemens_coefficient = 0

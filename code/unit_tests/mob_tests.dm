@@ -169,9 +169,6 @@ datum/unit_test/mob_damage/start_test()
 
 	H.apply_damage(damage_amount, damagetype, damage_location)
 
-	H.updatehealth() // Just in case, though at this time apply_damage does this for us.
-                         // We operate with the assumption that someone might mess with that proc one day.
-
 	var/ending_damage = damage_check(H, damagetype)
 
 	var/ending_health = H.health

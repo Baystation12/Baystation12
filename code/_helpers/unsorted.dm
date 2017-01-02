@@ -413,6 +413,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		creatures[name] = M
 
 	return creatures
+	
+/proc/get_follow_targets()
+	return follow_repository.get_follow_targets()
 
 //Orders mobs by type then by name
 /proc/sortmobs()

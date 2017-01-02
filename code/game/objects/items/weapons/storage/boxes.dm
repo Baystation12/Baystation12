@@ -79,10 +79,11 @@
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1)
 
 /obj/item/weapon/storage/box/gloves
-	name = "box of latex gloves"
-	desc = "Contains white gloves."
+	name = "box of sterile gloves"
+	desc = "Contains sterile gloves."
 	icon_state = "latex"
-	startswith = list(/obj/item/clothing/gloves/latex = 7)
+	startswith = list(/obj/item/clothing/gloves/latex = 5,
+					/obj/item/clothing/gloves/latex/nitrile = 2)
 
 /obj/item/weapon/storage/box/masks
 	name = "box of sterile masks"
@@ -203,7 +204,7 @@
 	desc = "A box containing 5 highly experimental supermatter grenades."
 	icon_state = "radbox"
 	startswith = list(/obj/item/weapon/grenade/supermatter = 5)
-    
+
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."

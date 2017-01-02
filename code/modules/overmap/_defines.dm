@@ -1,7 +1,7 @@
 //How far from the edge of overmap zlevel could randomly placed objects spawn
 #define OVERMAP_EDGE 2
 //Dimension of overmap (squares 4 lyfe)
-#define OVERMAP_SIZE 30
+#define OVERMAP_SIZE 20
 var/global/list/map_sectors = list()
 
 /area/overmap/
@@ -24,8 +24,30 @@ var/global/list/map_sectors = list()
 /turf/unsimulated/map/New()
 	..()
 	name = "[x]-[y]"
-	if(x == 1 || y == 1)
-		maptext = "<center>[name]</center>"
+	var/list/numbers = list()
+
+	if(x == 1 || x == OVERMAP_SIZE)
+		numbers += list("[round(y/10)]","[round(y%10)]")
+		if(y == 1 || y == OVERMAP_SIZE)
+			numbers += "-"
+	if(y == 1 || y == OVERMAP_SIZE)
+		numbers += list("[round(x/10)]","[round(x%10)]")
+
+	for(var/i = 1 to numbers.len+1)
+		var/image/I = image('icons/effects/numbers.dmi',numbers[i])
+		I.pixel_x = 5*i - 2
+		I.pixel_y = world.icon_size/2 - 3
+		if(y == 1)
+			I.pixel_y = 3
+			I.pixel_x = 5*i + 4
+		if(y == OVERMAP_SIZE)
+			I.pixel_y = world.icon_size - 9
+			I.pixel_x = 5*i + 4
+		if(x == 1)
+			I.pixel_x = 5*i - 2
+		if(x == OVERMAP_SIZE)
+			I.pixel_x = 5*i + 2
+		overlays += I
 
 //list used to track which zlevels are being 'moved' by the proc below
 var/list/moving_levels = list()

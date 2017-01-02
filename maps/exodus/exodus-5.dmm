@@ -816,7 +816,7 @@
 "pJ" = (/obj/structure/table/standard,/obj/item/clothing/suit/straight_jacket{pixel_x = 6},/obj/item/clothing/suit/straight_jacket,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
 "pK" = (/obj/structure/table/standard,/obj/item/clothing/mask/muzzle{pixel_z = 4},/obj/item/clothing/mask/muzzle,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
 "pL" = (/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
-"pM" = (/obj/structure/table/rack,/obj/item/weapon/melee/chainofcommand{damtype = "hallos"; desc = "For when unruly submissives get out of line."; name = "chain of obedience"},/obj/item/weapon/melee/telebaton,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
+"pM" = (/obj/structure/table/rack,/obj/item/weapon/melee/whip/chainofcommand{damtype = "hallos"; desc = "For when unruly submissives get out of line."; name = "chain of obedience"},/obj/item/weapon/melee/telebaton,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
 "pN" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/handcuffs,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
 "pO" = (/obj/structure/table/rack,/obj/item/weapon/legcuffs{pixel_x = 3},/obj/item/weapon/legcuffs{pixel_z = 3},/obj/item/weapon/legcuffs{pixel_y = 3},/obj/item/weapon/legcuffs,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)
 "pP" = (/obj/structure/table/standard,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/outpost/abandoned)

@@ -323,11 +323,6 @@
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
-/area/maintenance/substation
-	name = "Substation"
-	icon_state = "substation"
-	sound_env = SMALL_ENCLOSED
-
 /area/maintenance/substation/command // AI and central cluster. This one will be between HoP office and meeting room (probably).
 	name = "Command Substation"
 
@@ -482,38 +477,38 @@
 /////////////
 //ELEVATORS//
 /////////////
-/area/shuttle/turbolift/security_station
+/area/turbolift/security_station
 	name = "Station - By Security"
 	lift_announce_str = "Arriving at the station level, by the Security department."
 
-/area/shuttle/turbolift/security_maintenance
+/area/turbolift/security_maintenance
 	name = "Maintenance - Below Security"
 	lift_announce_str = "Arriving at the maintenance level, below the Security department."
 	base_turf = /turf/simulated/floor/plating
 
-/area/shuttle/turbolift/research_station
+/area/turbolift/research_station
 	name = "Station - By Research"
 	lift_announce_str = "Arriving at the station level, by the R&D department."
 
-/area/shuttle/turbolift/research_maintenance
+/area/turbolift/research_maintenance
 	name = "Maintenance - Below Research"
 	lift_announce_str = "Arriving at the maintenance level, below the R&D department."
 	base_turf = /turf/simulated/floor/plating
 
-/area/shuttle/turbolift/engineering_station
+/area/turbolift/engineering_station
 	name = "Station - By Engineering"
 	lift_announce_str = "Arriving at the station level, by the Engineering department."
 
-/area/shuttle/turbolift/engineering_maintenance
+/area/turbolift/engineering_maintenance
 	name = "Maintenance - Below Engineering"
 	lift_announce_str = "Arriving at the maintenance level, below the Engineering department."
 	base_turf = /turf/simulated/floor/plating
 
-/area/shuttle/turbolift/cargo_station
+/area/turbolift/cargo_station
 	name = "Station - By Cargo"
 	lift_announce_str = "Arriving at the station level, by the Cargo department."
 
-/area/shuttle/turbolift/cargo_maintenance
+/area/turbolift/cargo_maintenance
 	name = "Maintenance - Below Cargo"
 	lift_announce_str = "Arriving at the maintenance level, below the Cargo department."
 	base_turf = /turf/simulated/floor/plating
@@ -681,6 +676,10 @@
 /area/medical/genetics
 	name = "\improper Genetics Lab"
 	icon_state = "genetics"
+
+/area/medical/genetics_cloning
+	name = "\improper Cloning Lab"
+	icon_state = "cloning"
 
 // Solars
 
