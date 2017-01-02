@@ -8,7 +8,6 @@
 	var/last_burn = 0					//worldtime when ship last acceleated
 	var/list/last_movement = list(0,0)	//worldtime when ship last moved in x,y direction
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
-	var/rotate = 1						//if icon should be rotated to heading
 
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
@@ -102,8 +101,6 @@
 			adjust_speed(0, -get_acceleration())
 
 
-/obj/effect/overmap/ship/proc/rotate(var/direction)
-
 /obj/effect/overmap/ship/process()
 	if(!is_still())
 		var/list/deltas = list(0,0)
@@ -117,10 +114,8 @@
 		update_icon()
 
 /obj/effect/overmap/ship/update_icon()
-	overlays.Cut()
-	if(get_speed())
-		var/image/I = image('icons/obj/overmap.dmi',"vector")
-		var/matrix/M = matrix()
-		M.Turn(dir2angle(get_heading()))
-		I.transform = M
-		overlays |= I
+	if(!is_still())
+		icon_state = "ship_moving"
+		dir = get_heading()
+	else
+		icon_state = "ship"
