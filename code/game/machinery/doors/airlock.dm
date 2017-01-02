@@ -780,7 +780,7 @@ About the new airlock wires panel:
 	return 1
 
 /obj/machinery/door/airlock/proc/cut_bolts(item, user)
-	var/cut_delay = 60
+	var/cut_delay = 150
 	var/cut_verb
 	var/cut_sound
 
