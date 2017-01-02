@@ -26,6 +26,8 @@
 
 	evac_controller_type = /datum/evacuation_controller/pods
 
+	default_law_type = /datum/ai_laws/solgov
+
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.

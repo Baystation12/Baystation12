@@ -100,25 +100,39 @@
 	hardhats["yellow hardhat"] = /obj/item/clothing/head/hardhat
 	gear_tweaks += new/datum/gear_tweak/path(hardhats)
 
-/datum/gear/head/hat
-	display_name = "hat selection"
+/datum/gear/head/formalhat
+	display_name = "formal hat selection"
 	path = /obj/item/clothing/head/hasturhood
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
-/datum/gear/head/hat/New()
+/datum/gear/head/formalhat/New()
 	..()
-	var/hats = list()
-	hats["boatsman hat"] = /obj/item/clothing/head/boaterhat
-	hats["bowler hat"] = /obj/item/clothing/head/bowler
-	hats["cowboy hat"] = /obj/item/clothing/head/cowboy_hat
-	hats["fedora"] = /obj/item/clothing/head/fedora //m'lady
-	hats["feather thrilby"] = /obj/item/clothing/head/feathertrilby
-	hats["fez"] = /obj/item/clothing/head/fez
-	hats["top hat"] = /obj/item/clothing/head/that
-	hats["ushanka"] = /obj/item/clothing/head/ushanka
-	hats["fedora, brown"] = /obj/item/clothing/head/det
-	hats["fedora, grey"] = /obj/item/clothing/head/det/grey
-	gear_tweaks += new/datum/gear_tweak/path(hats)
+	var/formalhats = list()
+	formalhats["boatsman hat"] = /obj/item/clothing/head/boaterhat
+	formalhats["bowler hat"] = /obj/item/clothing/head/bowler
+	formalhats["cowboy hat"] = /obj/item/clothing/head/cowboy_hat
+	formalhats["fedora"] = /obj/item/clothing/head/fedora //m'lady
+	formalhats["feather trilby"] = /obj/item/clothing/head/feathertrilby
+	formalhats["fez"] = /obj/item/clothing/head/fez
+	formalhats["top hat"] = /obj/item/clothing/head/that
+	formalhats["ushanka"] = /obj/item/clothing/head/ushanka
+	formalhats["fedora, brown"] = /obj/item/clothing/head/det
+	formalhats["fedora, grey"] = /obj/item/clothing/head/det/grey
+	gear_tweaks += new/datum/gear_tweak/path(formalhats)
+
+/datum/gear/head/informalhat
+	display_name = "informal hat selection"
+	path = /obj/item/clothing/head/cowboy_hat
+	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
+						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
+						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+
+/datum/gear/head/informalhat/New()
+	..()
+	var/informalhats = list()
+	informalhats["cowboy hat"] = /obj/item/clothing/head/cowboy_hat
+	informalhats["ushanka"] = /obj/item/clothing/head/ushanka
+	gear_tweaks += new/datum/gear_tweak/path(informalhats)
 
 /datum/gear/head/hijab
 	display_name = "hijab"

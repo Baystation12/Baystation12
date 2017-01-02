@@ -7,6 +7,7 @@
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
 	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
+	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 
 /decl/hierarchy/outfit/job/security/hos
 	name = OUTFIT_JOB_NAME("Head of security")

@@ -39,7 +39,7 @@
 		/area/shuttle/syndicate_elite,
 		/area/shuttle/syndicate_elite/mothership,
 		/area/shuttle/syndicate_elite/station,
-		/area/shuttle/turbolift,
+		/area/turbolift,
 		/area/supply,
 		/area/supply/station,
 		/area/syndicate_mothership,

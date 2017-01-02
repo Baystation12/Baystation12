@@ -244,6 +244,18 @@
 	dock_target_station = "admin_shuttle_dock_airlock"
 	dock_target_offsite = "admin_shuttle_bay"
 
+//Transport
+
+/datum/shuttle/ferry/centcom
+	name = "Central Command Transport"
+	location = 1
+	warmup_time = 10
+	area_offsite = /area/shuttle/transport1/centcom
+	area_station = /area/shuttle/transport1/station
+	docking_controller_tag = "centcom_shuttle"
+	dock_target_station = "centcom_shuttle_dock_airlock"
+	dock_target_offsite = "centcom_shuttle_bay"
+
 //Merc
 
 /datum/shuttle/multi_shuttle/mercenary

@@ -25,14 +25,12 @@
 
 /datum/turbolift/proc/open_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.open()
+		door.command("open")
 	return
 
 /datum/turbolift/proc/close_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.close()
+		door.command("close")
 	return
 
 /datum/turbolift/proc/do_move()
@@ -53,7 +51,7 @@
 		close_doors()
 		return 1
 
-	var/area/shuttle/turbolift/origin = locate(current_floor.area_ref)
+	var/area/turbolift/origin = locate(current_floor.area_ref)
 
 	if(target_floor == current_floor)
 
@@ -75,7 +73,7 @@
 	else
 		next_floor = floors[current_floor_index-1]
 
-	var/area/shuttle/turbolift/destination = locate(next_floor.area_ref)
+	var/area/turbolift/destination = locate(next_floor.area_ref)
 
 	if(!istype(origin) || !istype(destination) || (origin == destination))
 		return 0

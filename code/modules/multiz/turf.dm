@@ -124,7 +124,7 @@
 			// Handle people getting hurt, it's funny!
 			if (istype(mover, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mover
-				var/damage = 5
+				var/damage = 10
 				H.apply_damage(rand(0, damage), BRUTE, BP_HEAD)
 				H.apply_damage(rand(0, damage), BRUTE, BP_CHEST)
 				H.apply_damage(rand(0, damage), BRUTE, BP_L_LEG)

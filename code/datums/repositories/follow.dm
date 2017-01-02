@@ -148,7 +148,7 @@
 	followed_type = /mob/living/silicon/robot
 
 /datum/follow_holder/robot/show_entry()
-	var/mob/living/silicon/robot/R = followed_type
+	var/mob/living/silicon/robot/R = followed_instance
 	return ..() && R.braintype
 
 /datum/follow_holder/robot/get_suffix(var/mob/living/silicon/robot/R)
@@ -240,5 +240,6 @@
 	sort_order = 14
 	followed_type = /obj/item/organ/internal/stack
 
-/datum/follow_holder/stack/show_entry(var/obj/item/organ/internal/stack/S)
+/datum/follow_holder/stack/show_entry()
+	var/obj/item/organ/internal/stack/S = followed_instance
 	return ..() && !S.owner

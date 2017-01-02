@@ -433,7 +433,7 @@
 
 			// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
 			for(var/turf/TN in orange(1, T))
-				if(istype(TN, /turf/space) || (istype(get_area(TN), /area/shuttle/) && !istype(get_area(TN), /area/shuttle/turbolift/)))
+				if(istype(TN, /turf/space) || (istype(get_area(TN), /area/shuttle/) && !istype(get_area(TN), /area/turbolift/)))
 					out |= TN
 					continue
 	return out

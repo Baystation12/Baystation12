@@ -125,7 +125,7 @@
 	armor_penetration = 10
 	kill_count = 4
 	damage = 5
-	agony = 60
+	agony = 70
 	damage_type = BURN
 	vacuum_traversal = 0
 
@@ -143,10 +143,8 @@
 			if(istype(H.head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
 	if(ear_safety == 1)
-		M.Stun(5)
 		M.Weaken(2)
 	else if (ear_safety > 1)
-		M.Stun(2)
 		M.Weaken(1)
 	else if (!ear_safety)
 		M.Stun(10)
