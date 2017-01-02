@@ -90,7 +90,7 @@
 	name = "ballistic helmet"
 	desc = "A helmet with reinforced plating to protect against ballistic projectiles."
 	icon_state = "helmet_bulletproof"
-	armor = list(melee = 5, bullet = 82, laser = 15, energy = 5, bomb = 30, bio = 2, rad = 0)
+	armor = list(melee = 5, bullet = 82, laser = 30, energy = 5, bomb = 30, bio = 2, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/helmet/swat

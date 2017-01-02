@@ -5,6 +5,7 @@
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
+	sharp = 1 //concentrated burns
 	check_armour = "laser"
 	eyeblur = 4
 	hitscan = 1
