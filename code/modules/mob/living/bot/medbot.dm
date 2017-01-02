@@ -3,21 +3,16 @@
 	desc = "A little medical robot. He looks somewhat underwhelmed."
 	icon_state = "medibot0"
 	req_one_access = list(access_medical, access_robotics)
-
-	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 	botcard_access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 
+	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
+
 	//AI vars
-	var/frustration = 0
-	var/list/path = list()
-	var/mob/living/carbon/human/patient = null
-	var/mob/ignored = list() // Used by emag
 	var/last_newpatient_speak = 0
 	var/vocal = 1
 
 	//Healing vars
 	var/obj/item/weapon/reagent_containers/glass/reagent_glass = null //Can be set to draw from this for reagents.
-	var/currently_healing = 0
 	var/injection_amount = 15 //How much reagent do we inject at a time?
 	var/heal_threshold = 10 //Start healing when they have this much damage in a category
 	var/use_beaker = 0 //Use reagents in beaker instead of default treatment agents.
@@ -29,47 +24,24 @@
 	var/treatment_emag = "toxin"
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 
-/mob/living/bot/medbot/Life()
-	..()
+/mob/living/bot/medbot/handleIdle()
+	if(vocal && prob(1))
+		var/message = pick("Radar, put a mask on!", "There's always a catch, and it's the best there is.", "I knew it, I should've been a plastic surgeon.", "What kind of medbay is this? Everyone's dropping like dead flies.", "Delicious!")
+		say(message)
 
-	if(!on)
-		return
+/mob/living/bot/medbot/handleAdjacentTarget()
+	UnarmedAttack(target)
 
-	if(!client)
-
-		if(vocal && prob(1))
-			var/message = pick("Radar, put a mask on!", "There's always a catch, and it's the best there is.", "I knew it, I should've been a plastic surgeon.", "What kind of medbay is this? Everyone's dropping like dead flies.", "Delicious!")
-			say(message)
-
-		if(patient)
-			if(Adjacent(patient))
-				if(!currently_healing)
-					UnarmedAttack(patient)
-			else
-				if(path.len && (get_dist(patient, path[path.len]) > 2)) // We have a path, but it's off
-					path = list()
-				if(!path.len && (get_dist(src, patient) > 1))
-					spawn(0)
-						path = AStar(loc, get_turf(patient), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 30, id = botcard)
-						if(!path)
-							path = list()
-				if(path.len)
-					step_to(src, path[1])
-					path -= path[1]
-					++frustration
-				if(get_dist(src, patient) > 7 || frustration > 8)
-					patient = null
-		else
-			for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
-				if(valid_healing_target(H))
-					patient = H
-					frustration = 0
-					if(last_newpatient_speak + 300 < world.time)
-						var/message = pick("Hey, [H.name]! Hold on, I'm coming.", "Wait [H.name]! I want to help!", "[H.name], you appear to be injured!")
-						say(message)
-						custom_emote(1, "points at [H.name].")
-						last_newpatient_speak = world.time
-					break
+/mob/living/bot/medbot/lookForTargets()
+	for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
+		if(confirmTarget(H))
+			target = H
+			if(last_newpatient_speak + 300 < world.time)
+				var/message = pick("Hey, [H.name]! Hold on, I'm coming.", "Wait [H.name]! I want to help!", "[H.name], you appear to be injured!")
+				say(message)
+				custom_emote(1, "points at [H.name].")
+				last_newpatient_speak = world.time
+			break
 
 /mob/living/bot/medbot/UnarmedAttack(var/mob/living/carbon/human/H, var/proximity)
 	if(!..())
@@ -81,17 +53,20 @@
 	if(!istype(H))
 		return
 
+	if(busy)
+		return
+
 	if(H.stat == DEAD)
 		var/death_message = pick("No! NO!", "Live, damnit! LIVE!", "I... I've never lost a patient before. Not today, I mean.")
 		say(death_message)
-		patient = null
+		target = null
 		return
 
-	var/t = valid_healing_target(H)
+	var/t = confirmTarget(H)
 	if(!t)
 		var/message = pick("All patched up!", "An apple a day keeps me away.", "Feel better soon!")
 		say(message)
-		patient = null
+		target = null
 		return
 
 	icon_state = "medibots"
@@ -99,7 +74,7 @@
 	if(declare_treatment)
 		var/area/location = get_area(src)
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
-	currently_healing = 1
+	busy = 1
 	update_icons()
 	if(do_mob(src, H, 30))
 		if(t == 1)
@@ -107,14 +82,14 @@
 		else
 			H.reagents.add_reagent(t, injection_amount)
 		visible_message("<span class='warning'>[src] injects [H] with the syringe!</span>")
-	currently_healing = 0
+	busy = 0
 	update_icons()
 
 /mob/living/bot/medbot/update_icons()
 	overlays.Cut()
 	if(skin)
 		overlays += image('icons/obj/aibots.dmi', "medskin_[skin]")
-	if(currently_healing)
+	if(busy)
 		icon_state = "medibots"
 	else
 		icon_state = "medibot[on]"
@@ -226,13 +201,13 @@
 			to_chat(user, "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>")
 		visible_message("<span class='warning'>[src] buzzes oddly!</span>")
 		flick("medibot_spark", src)
-		patient = null
-		currently_healing = 0
+		target = null
+		busy = 0
 		emagged = 1
 		on = 1
 		update_icons()
 		. = 1
-	ignored |= user
+	ignore_list |= user
 
 /mob/living/bot/medbot/explode()
 	on = 0
@@ -255,12 +230,12 @@
 	qdel(src)
 	return
 
-/mob/living/bot/medbot/proc/valid_healing_target(var/mob/living/carbon/human/H)
-	if(H.stat == DEAD) // He's dead, Jim
-		return null
+/mob/living/bot/medbot/confirmTarget(var/mob/living/carbon/human/H)
+	if(!..())
+		return 0
 
-	if(H in ignored)
-		return null
+	if(H.stat == DEAD) // He's dead, Jim
+		return 0
 
 	if(emagged)
 		return treatment_emag
