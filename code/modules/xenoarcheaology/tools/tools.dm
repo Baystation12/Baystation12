@@ -109,7 +109,7 @@
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 5000,"glass" = 1000)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 1000)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()
