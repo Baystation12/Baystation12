@@ -19,3 +19,6 @@
 
 /obj/machinery/door/airlock/lift/bumpopen(var/mob/user)
 	return // No accidental sprinting into open elevator shafts.
+
+/obj/machinery/door/airlock/lift/allowed(mob/M)
+	return FALSE //only the lift machinery is allowed to operate this door

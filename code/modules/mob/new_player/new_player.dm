@@ -282,8 +282,6 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
 	if(!job.player_old_enough(src.client))	return 0
-	if(!job.is_branch_allowed(client.prefs.char_branch)) return 0
-	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank)) return 0
 
 	return 1
 
@@ -297,7 +295,14 @@
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
 	if(!IsJobAvailable(rank))
-		to_chat(src, alert("[rank] is not available. Please try another."))
+		alert("[rank] is not available. Please try another.")
+		return 0
+	var/datum/job/job = job_master.GetJob(rank)
+	if(!job.is_branch_allowed(client.prefs.char_branch))
+		alert("Wrong branch of service for [rank]. Valid branches are: [job.get_branches()].")
+		return 0
+	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
+		alert("Wrong rank for [rank]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
 		return 0
 
 
@@ -532,4 +537,4 @@ mob/new_player/MayRespawn()
 	return
 
 /mob/new_player/say(var/message)
-	sanitize_and_communicate(/decl/communication_channel/ooc, src, message)
+	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)

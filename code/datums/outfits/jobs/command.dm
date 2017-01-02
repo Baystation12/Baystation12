@@ -10,6 +10,7 @@
 	id_type = /obj/item/weapon/card/id/gold
 	pda_type = /obj/item/device/pda/captain
 	backpack_contents = list(/obj/item/weapon/storage/box/ids = 1)
+	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 
 /decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
 	..()

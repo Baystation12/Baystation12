@@ -17,6 +17,7 @@
 	var/message_type = VISIBLE_MESSAGE // Audible/visual flag
 	var/targetted_emote                // Whether or not this emote needs a target.
 	var/check_restraints               // Can this emote be used while restrained?
+	var/conscious = 1				   // Do we need to be awake to emote this?
 
 /decl/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)

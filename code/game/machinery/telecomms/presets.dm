@@ -34,10 +34,6 @@
 	id = "Fourth Deck Relay"
 	autolinkers = list("4_relay")
 
-/obj/machinery/telecomms/relay/preset/shuttle
-	id = "Calypso Relay"
-	autolinkers = list("s_relay")
-
 /obj/machinery/telecomms/relay/preset/ruskie
 	id = "Ruskie Relay"
 	hide = 1

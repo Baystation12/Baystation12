@@ -54,10 +54,12 @@
 	name = "elevator button"
 	desc = "A call button for an elevator. Be sure to hit it three hundred times."
 	icon_state = "button"
+	var/light_up = FALSE
 	var/datum/turbolift_floor/floor
 
 /obj/structure/lift/button/proc/reset()
-	icon_state = "button"
+	light_up = FALSE
+	update_icon()
 
 /obj/structure/lift/button/interact(var/mob/user)
 	if(!..())
@@ -66,12 +68,20 @@
 	pressed(user)
 	if(floor == lift.current_floor)
 		spawn(3)
-			icon_state = "button"
+			reset()
 		return
 	lift.queue_move_to(floor)
 
 /obj/structure/lift/button/proc/light_up()
-	icon_state = "button_lit"
+	light_up = TRUE
+	update_icon()
+
+/obj/structure/lift/button/update_icon()
+	if(light_up)
+		icon_state = "button_lit"
+	else
+		icon_state = initial(icon_state)
+
 // End button.
 
 // Panel. Lists floors (HTML), moves with the elevator, schedules a move to a given floor.
@@ -79,17 +89,25 @@
 	name = "elevator control panel"
 	icon_state = "panel"
 
+
+/obj/structure/lift/panel/attack_ghost(var/mob/user)
+	return interact(user)
+
 /obj/structure/lift/panel/interact(var/mob/user)
 	if(!..())
 		return
 
-	var/dat = "<html><body><hr><b>Lift panel</b><hr>"
-	var/i = 0
-	for(var/datum/turbolift_floor/floor in lift.floors)
-		var/area/A = locate(floor.area_ref)
+	var/dat = list()
+	dat += "<html><body><hr><b>Lift panel</b><hr>"
+
+	//the floors list stores levels in order of increasing Z
+	//therefore, to display upper levels at the top of the menu and
+	//lower levels at the bottom, we need to go through the list in reverse
+	for(var/i in lift.floors.len to 1 step -1)
+		var/datum/turbolift_floor/floor = lift.floors[i]
+		var/label = floor.label? floor.label : "Level #[i]"
 		dat += "<font color = '[(floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE]'>"
-		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[i==0 ? "Ground Floor" : "Floor #[i]"]</a>: [A.name]</font><br>"
-		i++
+		dat += "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]</font><br>"
 
 	dat += "<hr>"
 	if(lift.doors_are_open())
@@ -99,8 +117,8 @@
 	dat += "<a href='?src=\ref[src];emergency_stop=1'>Emergency Stop</a>"
 	dat += "<hr></body></html>"
 
-	var/datum/browser/popup = new(user, "turbolift_panel", "Lift Panel", 200, 260)
-	popup.set_content(dat)
+	var/datum/browser/popup = new(user, "turbolift_panel", "Lift Panel", 230, 260)
+	popup.set_content(jointext(dat, null))
 	popup.open()
 	return
 

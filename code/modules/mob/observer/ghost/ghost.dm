@@ -283,12 +283,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_to_turf(T)
 	else
 		to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
-/mob/observer/ghost/verb/follow(input in getmobs())
+/mob/observer/ghost/verb/follow(input in get_follow_targets())
 	set category = "Ghost"
 	set name = "Follow"
 	set desc = "Follow and haunt a mob."
 
-	var/target = getmobs()[input]
+	var/target = get_follow_targets()[input]
 	if(!target) return
 	ManualFollow(target)
 

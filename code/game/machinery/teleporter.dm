@@ -194,7 +194,9 @@
 		return
 	if (istype(M, /atom/movable))
 		if(prob(5) && !accurate) //oh dear a problem, put em in deep space
-			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), 3), 2)
+			var/turf/T = get_turf(M)
+			var/destination_z = T ? using_map.get_transit_zlevel(T.z) : pick(using_map.player_levels)
+			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), destination_z), 2)
 		else
 			do_teleport(M, com.locked) //dead-on precision
 

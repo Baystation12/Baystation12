@@ -55,11 +55,12 @@
 	//uniform
 	if(w_uniform && !skipjumpsuit)
 		//Ties
-		var/tie_msg
+		var/list/ties = list()
 		if(istype(w_uniform,/obj/item/clothing/under))
 			var/obj/item/clothing/under/U = w_uniform
-			if(U.accessories.len)
-				tie_msg += ". Attached to it is [lowertext(english_list(U.accessories))]"
+			for(var/accessory in U.accessories)
+				ties += "\icon[accessory] \a [accessory]"
+		var/tie_msg = ties.len? ". Attached to it is [english_list(ties)]" : ""
 
 		if(w_uniform.blood_DNA)
 			msg += "<span class='warning'>[T.He] [T.is] wearing \icon[w_uniform] [w_uniform.gender==PLURAL?"some":"a"] [(w_uniform.blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [w_uniform.name][tie_msg]!</span>\n"
@@ -210,13 +211,13 @@
 		if((stat == DEAD || src.losebreath) && distance <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>\n"
 		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
-			user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
-		spawn(0)
-			if(do_after(user, 15, src))
-				if(pulse() == PULSE_NONE)
-					to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>")
-				else
-					to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
+			spawn(0)
+				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
+				if(do_after(user, 15, src))
+					if(pulse() == PULSE_NONE)
+						to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>")
+					else
+						to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
 	if(fire_stacks)
 		msg += "[T.He] [T.is] covered in some liquid.\n"

@@ -128,7 +128,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     </div>
                     <div class="itemContent">
                         {{:helper.link('Supply Records', 'gear', {'choice' : "47"}, null, 'fixedLeftWide')}}
-                        {{if data.cartridge.radio == 3}} {{:helper.link('Delivery Bot Control', 'gear', {'choice' : "48"}, null, 'fixedLeftWide')}} {{/if}}
+                        {{:helper.link('Delivery Bot Control', 'gear', {'choice' : "48"}, null, 'fixedLeftWide')}}
                          <br>
                     </div>
                 </div>
@@ -770,128 +770,38 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
 
 	{{else data.mode == 48}}
- 		<H2>Mule Control </H2>
-        {{if data.records.mulebot.active == null || data.records.mulebot.active == 0}}
-            {{if data.records.mulebot.count == 0}}
-                <H1><span class="bad">No bots found.</span></H1>
-            {{else}}
-                <H2>Mule List</H2>
-                <div class="item">
-                    Select A Mulebot
-                </div>
-                <br>
-                {{for data.records.mulebot.bots}}
-                    <div class="item">
-                         {{:helper.link(value.Name, 'gear', {'radiomenu' : "1", 'op' : "control",'bot' : value.ref}, null, null)}} (Location: {{:value.Location}})
-                    </div>
-                {{/for}}
-            {{/if}}
-            <br>
-            {{:helper.link('Scan for Bots','gear', {'radiomenu' : "1", 'op' : "scanbots"}, null, null)}}
-        {{else}}
-            {{if data.records.mulebot.botstatus.mode == -1}}
-                <H1><span class="bad">Waiting for response...</span></H1>
-            {{else}}
-                <H1><span class="average">Status:</span></H1>
-                <br>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Location:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">{{:data.records.mulebot.botstatus.loca}}</span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Mode:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">
-                            {{if data.records.mulebot.botstatus.mode ==0}}
-                                Ready
-                            {{else data.records.mulebot.botstatus.mode == 1}}
-                                Loading/Unloading
-                            {{else data.records.mulebot.botstatus.mode ==2}}
-                                Navigating to Delivery Location
-                            {{else data.records.mulebot.botstatus.mode == 3}}
-                                Navigating to Home
-                            {{else data.records.mulebot.botstatus.mode ==4}}
-                                Waiting for Clear Path
-                            {{else data.records.mulebot.botstatus.mode ==5 || data.records.mulebot.botstatus.mode == 6}}
-                                Calculating navigation Path
-                            {{else data.records.mulebot.botstatus.mode ==7}}
-                                Unable to locate destination
-                            {{/if}}
-                        </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Current Load:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">
-                            {{:helper.link(data.records.mulebot.botstatus.load == null ? 'None (Unload)' : data.records.mulebot.botstatus.load + ' (Unload)', 'gear', {'radiomenu' : "1", 'op' : "unload"},data.records.mulebot.botstatus.load == null ? 'disabled' : null, null)}}
-                        </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Power:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">
-                            {{:data.records.mulebot.botstatus.powr}}%
-                        </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Destination:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link(data.records.mulebot.botstatus.dest == null || data.records.mulebot.botstatus.dest == "" ? 'None (Set)': data.records.mulebot.botstatus.dest+ ' (Set)', 'gear', {'radiomenu' : "1", 'op' : "setdest"}, null, null)}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Home:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{if data.records.mulebot.botstatus.home == null}} None {{else}} {{:data.records.mulebot.botstatus.home}} {{/if}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Auto Return:</span>
-                    </div>
-                    <div class="itemContent">
-                       {{:helper.link(data.records.mulebot.botstatus.retn == 1 ? 'ON' : 'OFF', 'gear', {'radiomenu' : "1", 'op' : data.records.mulebot.botstatus.retn==1 ? "retoff" : "reton"}, null, null)}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Auto Pickup:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link(data.records.mulebot.botstatus.pick==1? 'ON' : 'OFF', 'gear', {'radiomenu' : "1", 'op' : data.records.mulebot.botstatus.pick==1 ? "pickoff" : "pickon"}, null, null)}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Functions:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link('Stop', 'gear', {'radiomenu' : "1", 'op' : "stop"}, null, null)}}
-                        {{:helper.link('Proceed', 'gear', {'radiomenu' : "1", 'op' : "go"}, null, null)}}
-                        {{:helper.link('Return Home', 'gear', {'radiomenu' : "1", 'op' : "home"}, null, null)}}
-                    </div>
-                </div>
-                <br><br>
-                {{:helper.link('Return to Bot list', 'gear', {'radiomenu' : "1", 'op' : "botlist"}, null, null)}}
-            {{/if}}
-        {{/if}}
+		<H2>Mule Control</H2>
+		{{if data.records.mulebotcount == 0}}
+			<H1><span class="bad">No bots found.</span></H1>
+		{{else}}
+			<H2>Mule List</H2>
+			{{for data.records.mulebots}}
+				<div class="item">
+					<div class="itemLabel">Mulebot #{{:value.name}}</div>
+					<div class="itemContent">Location: {{:value.location}}<br>Home: {{:value.home}}<br>Target: {{:value.target}}<br>Load: {{:value.load}}</div>
+				</div>
+				<div class="item">
+					<div class="itemLabel">Status:</div>
+					<div class="itemContent">
+						{{if value.mode == 0}}
+							Idle
+						{{else value.mode == 1}}
+							Moving
+						{{else value.mode == 2}}
+							Unloading
+						{{else}}
+							Calculating path
+						{{/if}}
+					</div>
+				</div>
+				<div class="item">
+					{{:helper.link('Go home', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "Home"})}}
+					{{:helper.link('Set destination', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "SetD"})}}
+					{{:helper.link('Go', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "GoTD"})}}
+					{{:helper.link('Stop', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "Stop"})}}
+				</div>
+			{{/for}}
+		{{/if}}
 
 
 	{{else data.mode == 49}}

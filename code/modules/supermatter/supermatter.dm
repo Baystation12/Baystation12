@@ -98,10 +98,6 @@
 
 	var/debug = 0
 
-
-/obj/machinery/power/supermatter/Destroy()
-	. = ..()
-
 /obj/machinery/power/supermatter/proc/explode()
 	set waitfor = 0
 
@@ -302,7 +298,6 @@
 		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
 */
 	rad_power = power * 1.5 //Better close those shutters!
-
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 
 	return 1

@@ -44,6 +44,10 @@
 	var/door_y1
 	var/door_x2
 	var/door_y2
+	var/light_x1
+	var/light_x2
+	var/light_y1
+	var/light_y2
 
 	var/az = 1
 	var/ex = (ux+lift_size_x)
@@ -64,6 +68,11 @@
 			door_x2 = ex - 1
 			door_y2 = ey + 1
 
+			light_x1 = ux + 1
+			light_y1 = uy + 1
+			light_x2 = ux + lift_size_x - 1
+			light_y2 = uy + 1
+
 		if(SOUTH)
 
 			int_panel_x = ux + Floor(lift_size_x/2)
@@ -75,6 +84,11 @@
 			door_y1 = uy - 1
 			door_x2 = ex - 1
 			door_y2 = uy
+
+			light_x1 = ux + 1
+			light_y1 = uy + 2
+			light_x2 = ux + lift_size_x - 1
+			light_y2 = uy + lift_size_y - 1
 
 		if(EAST)
 
@@ -88,6 +102,11 @@
 			door_x2 = ex + 1
 			door_y2 = ey - 1
 
+			light_x1 = ux + 1
+			light_y1 = uy + 1
+			light_x2 = ux + 1
+			light_y2 = uy + lift_size_x - 1
+
 		if(WEST)
 
 			int_panel_x = ex-1
@@ -99,6 +118,11 @@
 			door_y1 = uy + 1
 			door_x2 = ux
 			door_y2 = ey - 1
+
+			light_x1 = ux + lift_size_x - 1
+			light_y1 = uy + 1
+			light_x2 = ux + lift_size_x - 1
+			light_y2 = uy + lift_size_y - 1
 
 	// Generate each floor and store it in the controller datum.
 	for(var/cz = uz;cz<=ez;cz++)
@@ -168,6 +192,18 @@
 		panel_ext.set_dir(udir)
 		cfloor.ext_panel = panel_ext
 
+        // Place lights
+		var/turf/placing1 = locate(light_x1, light_y1, cz)
+		var/turf/placing2 = locate(light_x2, light_y2, cz)
+		var/obj/machinery/light/light1 = new(placing1, light)
+		var/obj/machinery/light/light2 = new(placing2, light)
+		if(udir == NORTH || udir == SOUTH)
+			light1.set_dir(WEST)
+			light2.set_dir(EAST)
+		else
+			light1.set_dir(SOUTH)
+			light2.set_dir(NORTH)
+
 		// Update area.
 		if(az > areas_to_use.len)
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
@@ -178,7 +214,7 @@
 		for(var/thing in floor_turfs)
 			new area_path(thing)
 		var/area/A = locate(area_path)
-		cfloor.area_ref = "\ref[A]"
+		cfloor.set_area_ref("\ref[A]")
 		az++
 
 	// Place lift panel.
