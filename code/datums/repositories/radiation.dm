@@ -38,6 +38,8 @@ var/list/to_process = list()
 			if(!(origin in resistance_cache)) //Only get the resistance if we don't already know it.
 				origin.calc_rad_resistance()
 			working = max((working - (origin.rad_resistance * config.radiation_resistance_multiplier)), 0)
+			if(!working)
+				break //Don't bother continuing to trace
 			if(!to_process[origin])
 				to_process[origin] = working
 
@@ -51,19 +53,26 @@ var/list/to_process = list()
 		spot.color = rgb(5,x,5)
 		#endif
 
-/repository/radiation/proc/flat_radiate(source, power, range) //Sets the radiation in a range to a constant value.
+/repository/radiation/proc/flat_radiate(source, power, range, var/respect_maint=0) //Sets the radiation in a range to a constant value.
 	if(!(source && power && range))
 		return
 	var/turf/epicentre = get_turf(source)
 	range = min(epicentre.x, world.maxx - epicentre.x, epicentre.y, world.maxy - epicentre.y, range)
-	for(var/turf/T in trange(range, epicentre))
-		irradiated_turfs[T] = max(power, irradiated_turfs[T])
+	if(!respect_maint)
+		for(var/turf/T in trange(range, epicentre))
+			irradiated_turfs[T] = max(power, irradiated_turfs[T])
+	else
+		for(var/turf/T in trange(range, epicentre))
+			var/area/A = T.loc
+			if(A.flags & RAD_SHIELDED)
+				continue
+			irradiated_turfs[T] = max(power, irradiated_turfs[T])
 
-/repository/radiation/proc/z_radiate(var/atom/source, power) //Irradiates a full Z-level. Hacky way of doing it, but not too expensive.
+/repository/radiation/proc/z_radiate(var/atom/source, power, var/respect_maint=0) //Irradiates a full Z-level. Hacky way of doing it, but not too expensive.
 	if(!(power && source))
 		return
 	var/turf/epicentre = locate(round(world.maxx / 2), round(world.maxy / 2), source.z)
-	flat_radiate(epicentre, power, world.maxx)
+	flat_radiate(epicentre, power, world.maxx, respect_maint)
 
 /turf/proc/calc_rad_resistance()
 	rad_resistance = 0
