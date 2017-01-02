@@ -10,6 +10,9 @@
 	if(!shuttle_controller.shuttles[shuttle_tag])
 		new/datum/shuttle/ferry/overmap(shuttle_tag, locate(shuttle_area))
 		testing("Exploration shuttle '[shuttle_tag]' at zlevel [z] successfully added.")
+	else
+		var/datum/shuttle/ferry/overmap/S = shuttle_controller.shuttles[shuttle_tag]
+		shuttle_area = S.area_station.type
 
 /obj/machinery/computer/shuttle_control/explore/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
