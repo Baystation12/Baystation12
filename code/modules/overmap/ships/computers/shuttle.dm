@@ -78,7 +78,8 @@
 			D = input("Choose shuttle destination", "Shuttle Destination") as null|anything in possible_d
 		else
 			to_chat(usr,"<span class='warning'>No valid landing sites in range.</span>")
-		if(CanInteract(usr, default_state))
+		possible_d = shuttle.get_possible_destinations()
+		if(CanInteract(usr, default_state) && D in possible_d)
 			shuttle.set_destination_area(possible_d[D])
 
 	if(href_list["move"])
