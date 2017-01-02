@@ -14,6 +14,7 @@
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = 0
+	var/lock_cut_state = 1	// Not a boolean. If 1, door bolts are fine. If 2, the bolt cover is off. If 3, the bolts have been cut.
 	var/lights = 1 // bolt lights show by default
 	var/aiDisabledIdScanner = 0
 	var/aiHacking = 0
@@ -778,6 +779,68 @@ About the new airlock wires panel:
 	update_icon()
 	return 1
 
+/obj/machinery/door/airlock/proc/cut_bolts(item, user)
+	var/cut_delay = 60
+	var/cut_verb
+	var/cut_sound
+
+	if(istype(item,/obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = item
+		if(!WT.isOn())
+			return
+		if(!WT.remove_fuel(0,user))
+			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			return
+		cut_verb = "cutting"
+		cut_sound = 'sound/items/Welder.ogg'
+	else if(istype(item,/obj/item/weapon/pickaxe/plasmacutter))
+		cut_verb = "cutting"
+		cut_sound = 'sound/items/Welder.ogg'
+		cut_delay *= 0.5
+	else if(istype(item,/obj/item/weapon/melee/energy/blade) || istype(item,/obj/item/weapon/melee/energy/sword))
+		cut_verb = "slicing"
+		cut_sound = "sparks"
+		cut_delay *= 0.5
+	else if(istype(item,/obj/item/weapon/circular_saw))
+		cut_verb = "sawing"
+		cut_sound = 'sound/weapons/circsawhit.ogg'
+		cut_delay *= 1.5
+
+	else if(istype(item,/obj/item/weapon/material/twohanded/fireaxe))
+		//special case - zero delay, different message
+		if (src.lock_cut_state == 2)
+			..()
+			return //can't actually cut the bolts, go back to regular smashing
+		var/obj/item/weapon/material/twohanded/fireaxe/F = item
+		if (!F.wielded)
+			..()
+			return
+		to_chat(user, "You smash the bolt cover open!")
+		playsound(src, 'sound/weapons/smash.ogg', 100, 1)
+		src.lock_cut_state = 2
+		return
+
+	else
+		// I guess you can't cut bolts with that item. Never mind then.
+		return ..()
+
+	if (src.lock_cut_state == 1)
+		to_chat(user, "You begin [cut_verb] through the bolt cover.")
+		playsound(src, cut_sound, 100, 1)
+		if (do_after(user, cut_delay, src))
+			to_chat(user, "You remove the cover and expose the door bolts.")
+			src.lock_cut_state = 2
+		return
+
+	if (src.lock_cut_state == 2)
+		to_chat(usr, "You begin [cut_verb] through the door bolts.")
+		playsound(src, cut_sound, 100, 1)
+		if (do_after(user, cut_delay, src))
+			to_chat(user, "You sever the door bolts, unlocking the door.")
+			src.lock_cut_state = 3
+			src.unlock(1) //force it
+		return
+
 /obj/machinery/door/airlock/attackby(var/obj/item/C, var/mob/user)
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
 	if(brace && (istype(C.GetIdCard(), /obj/item/weapon/card/id/) || istype(C, /obj/item/weapon/crowbar/brace_jack)))
@@ -805,6 +868,11 @@ About the new airlock wires panel:
 		return
 
 	src.add_fingerprint(user)
+
+	if (!repairing && (stat & BROKEN) && src.locked && src.lock_cut_state < 3) //bolted and broken
+		cut_bolts(C,user)
+		return
+
 	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0,user))
@@ -877,6 +945,19 @@ About the new airlock wires panel:
 			else
 				spawn(0)	close(1)
 
+	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
+		var/obj/item/weapon/material/twohanded/fireaxe/F = C
+		if (F.wielded)
+			to_chat(user, "You prepare an overhead swing...")
+			if (do_after(user, 20, src))
+				playsound(src, 'sound/weapons/smash.ogg', 100, 1)
+				user.visible_message("<span class='danger'>[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>", "<span class='danger'>You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>")
+				src.health = 0
+				src.set_broken()
+		else
+			..()
+			return
+
 	else if(istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !arePowerSystemsOn())
 		if(locked)
 			to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
@@ -906,8 +987,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/set_broken()
 	src.p_open = 1
 	stat |= BROKEN
-	if (secured_wires)
-		lock()
+	lock()
 	for (var/mob/O in viewers(src, null))
 		if ((O.client && !( O.blinded )))
 			O.show_message("[src.name]'s control panel bursts open, sparks spewing out!")
@@ -990,6 +1070,8 @@ About the new airlock wires panel:
 		return 0
 
 	if (operating && !forced) return 0
+
+	if (lock_cut_state == 3) return 0 //what bolts?
 
 	src.locked = 1
 	playsound(src, bolts_dropping, 30, 0, -6)
@@ -1121,6 +1203,10 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/examine()
 	..()
+	if (lock_cut_state == 2)
+		to_chat(usr, "The bolt cover has been cut open.")
+	if (lock_cut_state == 3)
+		to_chat(usr, "The door bolts have been cut.")
 	if(brace)
 		to_chat(usr, "\The [brace] is installed on \the [src], preventing it from opening.")
 		to_chat(usr, brace.examine_health())
