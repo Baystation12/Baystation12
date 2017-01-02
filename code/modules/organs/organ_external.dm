@@ -286,19 +286,30 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (vital || (robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
 
-/obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+/obj/item/organ/external/take_damage(brute, burn, damage_flags, used_weapon = null, list/forbidden_limbs = list())
 	brute = round(brute * brute_mod, 0.1)
 	burn = round(burn * burn_mod, 0.1)
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
+	var/sharp = (damage_flags & DAM_SHARP)
+	var/edge  = (damage_flags & DAM_EDGE)
+	var/laser = (damage_flags & DAM_LASER)
+
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && (brute_dam + brute >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
+	var/damage_amt = brute
+	var/cur_damage = brute_dam
+	if(laser)
+		damage_amt += burn
+		cur_damage += burn_dam
+	if(internal_organs && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
-			I.take_damage(brute / 2)
-			brute -= brute / 2
+			I.take_damage(damage_amt / 2)
+			brute /= 2
+			if(laser)
+				burn /= 2
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
@@ -331,7 +342,10 @@
 			else
 				createwound( BRUISE, brute )
 		if(burn)
-			createwound( BURN, burn )
+			if(laser)
+				createwound( LASER, burn )
+			else
+				createwound( BURN, burn )
 	else
 		//If there are still hurties to dispense
 		if (spillover)
@@ -497,14 +511,18 @@ This function completely restores a damaged organ to perfect condition.
 
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && (robotic < ORGAN_ROBOT))
+	if((type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30 && prob(damage) && (robotic < ORGAN_ROBOT))
 		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
 		wounds += I
 		owner.custom_pain("You feel something rip in your [name]!", 50)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
-	if((damage > 5 || damage + burn_dam >= 15) && type == BURN && (robotic < ORGAN_ROBOT))
-		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume*(1 - BLOOD_VOLUME_SURVIVE/100)
+	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && (robotic < ORGAN_ROBOT))
+		var/fluid_loss_severity
+		switch(type)
+			if(BURN)  fluid_loss_severity = FLUIDLOSS_WIDE_BURN
+			if(LASER) fluid_loss_severity = FLUIDLOSS_CONC_BURN
+		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume * fluid_loss_severity
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
