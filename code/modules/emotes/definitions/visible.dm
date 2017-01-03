@@ -1,6 +1,6 @@
 /decl/emote/visible
 	key ="tail"
-	emote_message_3p = "USER waves its tail."
+	emote_message_3p = "USER waves USER_THEIR tail."
 	message_type = VISIBLE_MESSAGE
 
 /decl/emote/visible/scratch
@@ -15,7 +15,7 @@
 
 /decl/emote/visible/nod
 	key ="nod"
-	emote_message_3p = "USER nods its head."
+	emote_message_3p = "USER nods USER_THEIR head."
 
 /decl/emote/visible/sway
 	key ="sway"
@@ -37,7 +37,7 @@
 
 /decl/emote/visible/shake
 	key ="shake"
-	emote_message_3p = "USER shakes its head."
+	emote_message_3p = "USER shakes USER_THEIR head."
 
 /decl/emote/visible/jump
 	key ="jump"
@@ -220,7 +220,7 @@
 
 /decl/emote/visible/deathgasp_robot
 	key = "deathgasp"
-	emote_message_3p = "USER shudders violently for a moment, then becomes motionless, its eyes slowly darkening."
+	emote_message_3p = "USER shudders violently for a moment, then becomes motionless, USER_THEIR eyes slowly darkening."
 
 /decl/emote/visible/handshake
 	key = "handshake"
