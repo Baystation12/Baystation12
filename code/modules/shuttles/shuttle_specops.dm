@@ -81,7 +81,7 @@
 	sleep_until_launch()
 
 	if (location)
-		var/obj/machinery/light/small/readylight/light = locate() in get_location_area()
+		var/obj/machinery/light/small/readylight/light = locate() in shuttle_area
 		if(light) light.set_state(0)
 
 	//launch

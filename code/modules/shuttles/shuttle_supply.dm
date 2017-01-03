@@ -1,7 +1,7 @@
 /datum/shuttle/ferry/supply
 	var/away_location = 1	//the location to hide at while pretending to be in-transit
 	var/late_chance = 80
-	var/max_late_time = 300
+	var/max_late_time = (30 SECONDS)
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
 	category = /datum/shuttle/ferry/supply
 
@@ -13,9 +13,9 @@
 		return
 
 	if(!destination)
-		destination = get_location_area(!location)
+		destination = get_location_landmark(!location)
 	if(!origin)
-		origin = get_location_area(location)
+		origin = get_location_landmark(location)
 
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
@@ -32,24 +32,24 @@
 			supply_controller.buy()
 
 		//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
-		var/area/away_area = get_location_area(away_location)
+		var/obj/effect/landmark/shuttle/away_landmark = get_location_landmark(away_location)
 		moving_status = SHUTTLE_INTRANSIT
 
-		//If we are at the away_area then we are just pretending to move, otherwise actually do the move
-		if (origin != away_area)
-			move(origin, away_area)
+		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
+		if (origin != away_landmark)
+			move(origin, away_landmark)
 
 		//wait ETA here.
 		arrive_time = world.time + supply_controller.movetime
 		while (world.time <= arrive_time)
 			sleep(5)
 
-		if (destination != away_area)
+		if (destination != away_landmark)
 			//late
 			if (prob(late_chance))
 				sleep(rand(0,max_late_time))
 
-			move(away_area, destination)
+			move(away_landmark, destination)
 
 		moving_status = SHUTTLE_IDLE
 
@@ -59,9 +59,9 @@
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
 /datum/shuttle/ferry/supply/proc/forbidden_atoms_check()
 	if (!at_station())
-		return 0	//if badmins want to send mobs or a nuke on the supply shuttle from centcom we don't care
+		return 0	//if badmins want to send forbidden atoms on the supply shuttle from centcom we don't care
 
-	return supply_controller.forbidden_atoms_check(get_location_area())
+	return supply_controller.forbidden_atoms_check(shuttle_area)
 
 /datum/shuttle/ferry/supply/proc/at_station()
 	return (!location)

@@ -44,7 +44,7 @@
 		if(!istype(docking_controller))
 			warning("Shuttle with docking tag [docking_controller_tag] could not find it's controller!")
 
-/datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
+/datum/shuttle/proc/short_jump(var/origin,var/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
 	//it would be cool to play a sound here
@@ -57,7 +57,7 @@
 		move(origin, destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
+/datum/shuttle/proc/long_jump(var/departing, var/destination, var/interim, var/travel_time)
 //	log_debug("shuttle/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]")
 
 	if(moving_status != SHUTTLE_IDLE) return
@@ -70,13 +70,13 @@
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
-		move(departing, interim, direction)
+		move(departing, interim)
 
 
 		while (world.time < arrive_time)
 			sleep(5)
 
-		move(interim, destination, direction)
+		move(interim, destination)
 		moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/dock()
@@ -105,7 +105,7 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. move() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump() or long_jump()
-/datum/shuttle/proc/move(var/area/origin, var/area/destination, var/direction=null)
+/datum/shuttle/proc/move(var/origin, var/destination)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
@@ -143,17 +143,17 @@
 	if (HasAbove(some_dest_turf.z))
 		for (var/turf/TD in dstturfs)
 			var/turf/TA = GetAbove(TD)
-			if (TA && istype(TA, get_base_turf_by_area(TA)))
+			if (istype(TA, get_base_turf_by_area(TA)))
 				TA.ChangeTurf(ceiling_type, 1, 1)
 
-	origin.move_contents_to(destination)
+	do_move(origin, destination)
 
 	// if there was a zlevel above our origin, erase our ceiling now we're gone
 	var/turf/some_origin_turf = locate() in origin
 	if (HasAbove(some_origin_turf.z))
 		for (var/turf/TO in origin)
 			var/turf/TA = GetAbove(TO)
-			if (TA && istype(TA, ceiling_type))
+			if (istype(TA, ceiling_type))
 				TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
 
 	for(var/mob/M in destination)
@@ -169,6 +169,7 @@
 			if(!M.buckled)
 				M.Weaken(3)
 
+	//TODO replace these with locate() in destination
 	// Power-related checks. If shuttle contains power related machinery, update powernets.
 	var/update_power = 0
 	for(var/obj/machinery/power/P in destination)
@@ -182,6 +183,11 @@
 	if(update_power)
 		makepowernets()
 	return
+
+//hopefully temporary untill all shuttle subtypes can be converted
+/datum/shuttle/proc/do_move(area/origin, area/destination)
+	origin.move_contents_to(destination)
+
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

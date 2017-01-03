@@ -181,18 +181,15 @@ var/list/point_source_descriptions = list(
 
 	//Sellin
 	proc/sell()
-		var/area/area_shuttle = shuttle.get_location_area()
-		if(!area_shuttle)	return
-
 		var/phoron_count = 0
 		var/plat_count = 0
 
-		for(var/atom/movable/MA in area_shuttle)
+		for(var/atom/movable/MA in shuttle.shuttle_area)
 			if(MA.anchored)	continue
 
 			// Must be in a crate!
 			if(istype(MA,/obj/structure/closet/crate))
-				callHook("sell_crate", list(MA, area_shuttle))
+				callHook("sell_crate", list(MA, shuttle.shuttle_area))
 
 				add_points_from_source(points_per_crate, "crate")
 				var/find_slip = 1
@@ -226,11 +223,9 @@ var/list/point_source_descriptions = list(
 	//Buyin
 	proc/buy()
 		if(!shoppinglist.len) return
-		var/area/area_shuttle = shuttle.get_location_area()
-		if(!area_shuttle)	return
 		var/list/clear_turfs = list()
 
-		for(var/turf/T in area_shuttle)
+		for(var/turf/T in shuttle.shuttle_area)
 			if(T.density)	continue
 			var/contcount
 			for(var/atom/A in T.contents)

@@ -27,15 +27,8 @@
 		var/failed = FALSE
 		if(istype(shuttle, /datum/shuttle/ferry))
 			var/datum/shuttle/ferry/f = shuttle
-			if(!f.area_offsite || !f.area_offsite.x)
-				log_bad("[f.name]: Invalid offsite area.")
-				failed = TRUE
-			if(!f.area_station || !f.area_station.x)
-				log_bad("[f.name]: Invalid station area.")
-				failed = TRUE
-			if(initial(f.area_transition) && (!f.area_transition || !f.area_transition.x))
-				log_bad("[f.name]: Invalid area transition.")
-				failed = TRUE
+			if(!f.shuttle_area || !f.shuttle_area.x)
+				log_bad("[f.name]: Invalid shuttle area.")
 
 		else if(istype(shuttle, /datum/shuttle/multi_shuttle))
 			var/datum/shuttle/multi_shuttle/ms = shuttle
@@ -72,13 +65,7 @@
 	for(var/shuttle_name in shuttle_controller.shuttles)
 		var/datum/shuttle/shuttle = shuttle_controller.shuttles[shuttle_name]
 		var/failed = FALSE
-		if(istype(shuttle, /datum/shuttle/ferry))
-			var/datum/shuttle/ferry/f = shuttle
-			if(is_bad_area_size(f, f.area_station, f.area_offsite))
-				failed = TRUE
-			if(initial(f.area_transition) && is_bad_area_size(f, f.area_station, f.area_transition))
-				failed = TRUE
-		else if(istype(shuttle, /datum/shuttle/multi_shuttle))
+		if(istype(shuttle, /datum/shuttle/multi_shuttle))
 			var/datum/shuttle/multi_shuttle/ms = shuttle
 			if(is_bad_area_size(ms, ms.origin, ms.interim))
 				failed = TRUE
@@ -106,9 +93,8 @@
 		var/datum/shuttle/shuttle = shuttle_controller.shuttles[shuttle_name]
 		if(istype(shuttle, /datum/shuttle/ferry))
 			var/datum/shuttle/ferry/f = shuttle
-			group_by(shuttle_areas, f.area_station.type, SHUTTLE_NAME_AID(f))
-			if(!(f in sector_shuttles))
-				group_by(shuttle_areas, f.area_offsite.type, SHUTTLE_NAME_AID(f))
+			group_by(shuttle_areas, f.shuttle_area.type, SHUTTLE_NAME_AID(f))
+			//TODO sector_shuttles
 		else if(istype(shuttle, /datum/shuttle/multi_shuttle))
 			var/datum/shuttle/multi_shuttle/ms = shuttle
 			group_by(shuttle_areas, ms.origin.type, SHUTTLE_NAME_AID(ms))
