@@ -96,3 +96,45 @@
 	if(pressure < SOUND_MINIMUM_PRESSURE)
 		return TRUE
 	return FALSE
+
+/*
+	Turf manipulation
+*/
+/proc/translate_turfs(atom/src_origin, atom/dst_origin, list/turfs_src, translate_area = TRUE)
+	for(var/turf/source in turfs_src)
+		if(!source.is_solid_structure())
+			continue
+
+		var/x_pos = (source.x - src_origin.x)
+		var/y_pos = (source.y - src_origin.y)
+		var/z_pos = (source.z - src_origin.z)
+
+		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
+
+		if(target)
+			transport_turf_contents(source, target)
+			if(translate_area)
+				var/area/base_area = locate(world.area) //TODO better way of determining the base area?
+
+				source.loc.contents.Add(target)
+				base_area.contents.Add(source)
+
+	//change the old turfs
+	for(var/turf/source in turfs_src)
+		source.ChangeTurf(get_base_turf_by_area(source), 1, 1)
+
+//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
+/proc/transport_turf_contents(turf/source, turf/target)
+
+	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
+	new_turf.transport_properties_from(source)
+
+	for(var/obj/O in source)
+		if(O.simulated)
+			O.forceMove(new_turf)
+
+	for(var/mob/M in source)
+		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
+		M.forceMove(new_turf)
+
+	return new_turf

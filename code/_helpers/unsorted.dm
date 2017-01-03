@@ -629,68 +629,25 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				atoms += A
 	return atoms
 
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/check_solid = 1)
-	//Takes: Area. Optional: turf type to leave behind.
+/area/proc/move_contents_to(var/area/A)
+	//Takes: Area.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
-	//       Movement based on lower left corner. Tiles that do not fit
-	//       into the new area will not be moved.
+	//       Movement based on lower left corner.
 
-	if(!A || !src) return 0
+	if(!A || !src) return
 
 	var/list/turfs_src = get_area_turfs("\ref[src]")
-	var/list/turfs_trg = get_area_turfs("\ref[A]")
 
-	if(!turfs_src.len || !turfs_trg.len) return 0
+	if(!turfs_src.len) return
 
 	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
 	//might be worth doing this with a shuttle core object instead of areas, in the future
-	var/src_min_x = src.x
-	var/src_min_y = src.y
+	var/src_origin = locate(src.x, src.y, src.z)
+	var/trg_origin = locate(A.x, A.y, A.z)
 
-	var/trg_z = A.z //multilevel shuttles are not supported, unfortunately
-	var/trg_min_x = A.x
-	var/trg_min_y = A.y
-
-	//obtain all the source turfs and their relative coords,
-	//then use that to find corresponding targets
-	for(var/turf/source in turfs_src)
-		if(check_solid && !source.is_solid_structure())
-			continue
-
-		var/x_pos = (source.x - src_min_x)
-		var/y_pos = (source.y - src_min_y)
-
-		var/turf/target = locate(trg_min_x + x_pos, trg_min_y + y_pos, trg_z)
-		if(!target || target.loc != A)
-			continue
-
-		transport_turf_contents(source, target)
-
-	//change the old turfs
-	for(var/turf/source in turfs_src)
-		if(turftoleave)
-			source.ChangeTurf(turftoleave, 1, 1)
-		else
-			source.ChangeTurf(get_base_turf_by_area(source), 1, 1)
-
-	//fixes lighting issue caused by turf
-
-//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
-/proc/transport_turf_contents(turf/source, turf/target)
-
-	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
-	new_turf.transport_properties_from(source)
-
-	for(var/obj/O in source)
-		if(O.simulated)
-			O.forceMove(new_turf)
-
-	for(var/mob/M in source)
-		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
-		M.forceMove(new_turf)
-
-	return new_turf
+	if(src_origin && trg_origin)
+		translate_turfs(src_origin, trg_origin, turfs_src)
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)
