@@ -8,6 +8,11 @@
 	icon_state = "undershirt"
 	has_color = TRUE
 
+/datum/category_item/underwear/undershirt/shirt_long
+	name = "Long Shirt"
+	icon_state = "undershirt_long"
+	has_color = TRUE
+
 /datum/category_item/underwear/undershirt/tank_top
 	name = "Tank top"
 	icon_state = "tanktop"
@@ -101,4 +106,8 @@
 /datum/category_item/underwear/undershirt/lowride_shirt
 	name = "Lowride shirt"
 	icon_state = "eros_undershirt_lowride"
+	has_color = TRUE
+/datum/category_item/underwear/undershirt/longjon
+	name = "Long John Shirt"
+	icon_state = "longjont"
 	has_color = TRUE

@@ -28,6 +28,9 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
+		if(!S)
+			to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
+
 		if(S.open >= 2)
 			if (S && (S.robotic >= ORGAN_ROBOT))
 				if(!S.get_damage())

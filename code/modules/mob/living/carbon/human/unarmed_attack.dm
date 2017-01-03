@@ -105,6 +105,9 @@ var/global/list/sparring_attack_cache = list()
 		return
 	user.visible_message("<span class='danger'>[user] attempts to press \his [eye_attack_text] into [target]'s eyes, but they don't have any!</span>")
 
+/datum/unarmed_attack/proc/damage_flags()
+	return (src.sharp? DAM_SHARP : 0)|(src.edge? DAM_EDGE : 0)
+
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")
 	attack_sound = 'sound/weapons/bite.ogg'

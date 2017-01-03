@@ -51,6 +51,9 @@
 	name = "\improper Fourth Deck Teleporter"
 	icon_state = "teleporter"
 
+/area/maintenance/substation/fourthdeck
+	name = "Fourth Deck Substation"
+
 
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore
@@ -99,6 +102,11 @@
 
 /area/maintenance/substation/thirddeck
 	name = "Third Deck Substation"
+
+/area/engineering/atmos
+ 	name = "\improper Atmospherics"
+ 	icon_state = "atmos"
+ 	sound_env = LARGE_ENCLOSED
 
 
 //Second Deck (Z-3)
@@ -406,6 +414,10 @@
 	name = "east of fourth deck"
 	icon_state = "east"
 
+/area/calypso_hangar/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
+
 /area/calypso_hangar/mining
 	name = "mining site"
 	icon_state = "shuttlered"
@@ -450,6 +462,10 @@
 /area/guppy_hangar/fourthdeck
 	name = "north of fourth deck"
 	icon_state = "north"
+
+/area/guppy_hangar/salvage
+	name = "debris field"
+	icon_state = "shuttlered"
 
 /area/guppy_hangar/mining
 	name = "mining site"
@@ -550,6 +566,12 @@
 
 
 //Merc
+
+/area/syndicate_mothership
+	name = "\improper Mercenary Base"
+	icon_state = "syndie-ship"
+	requires_power = 0
+	lighting_use_dynamic = 0
 
 /area/syndicate_station
 	name = "\improper Independant Station"
@@ -702,20 +724,28 @@
 	base_turf = /turf/space/bluespace
 
 // Elevator areas.
-/area/shuttle/turbolift/torch_top
-	name = "First Deck"
+/area/turbolift/torch_top
+	name = "lift (upper deck)"
+	lift_floor_label = "Deck 1"
+	lift_floor_name = "Operations Deck"
 	lift_announce_str = "Arriving at Operations Deck: Bridge. Command Offices. Emergency Armory. Infirmary. Research Wing."
 
-/area/shuttle/turbolift/torch_second
-	name = "Second Deck"
+/area/turbolift/torch_second
+	name = "lift (maintenance)"
+	lift_floor_label = "Deck 2"
+	lift_floor_name = "Maintenance Deck"
 	lift_announce_str = "Arriving at Maintenance Deck: Engineering. Atmospherics. AI Core. Sanitation."
 
-/area/shuttle/turbolift/torch_first
-	name = "Third Deck"
+/area/turbolift/torch_first
+	name = "lift (second deck)"
+	lift_floor_label = "Deck 3"
+	lift_floor_name = "Habitation Deck"
 	lift_announce_str = "Arriving at Habitation Deck: EVA. Security Wing. Telecommunications. Hydroponics. Mess Hall. Cryogenic Storage."
 
-/area/shuttle/turbolift/torch_ground
-	name = "Fourth Deck"
+/area/turbolift/torch_ground
+	name = "lift (lower deck)"
+	lift_floor_label = "Deck 4"
+	lift_floor_name = "Hangar Deck"
 	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Storage. Main Hangar. Supply Office."
 	base_turf = /turf/simulated/floor
 
@@ -862,6 +892,10 @@
 	name = "\improper Deck Officer"
 	icon_state = "quart"
 
+/area/quartermaster/expedition
+	name = "\improper Expedition Preparation"
+	icon_state = "mining"
+
 /area/quartermaster/expedition/eva
 	name = "\improper Expedition EVA"
 	icon_state = "mining"
@@ -899,10 +933,6 @@
 /area/rnd/locker
 	name = "\improper Research Locker Room"
 	icon_state = "locker"
-
-/area/rnd/phoron
-	name = "\improper Phoron Lab"
-	icon_state = "toxmix"
 
 /area/rnd/wing
 	name = "\improper Lab Wing"
@@ -943,6 +973,11 @@
 	name = "\improper Lounge"
 	icon_state = "crew_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
+
+/area/crew_quarters/safe_room/
+	name = "\improper Safe Room"
+	icon_state = "crew_quarters"
+	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/safe_room/thirddeck
 	name = "\improper Third Deck Safe Room"

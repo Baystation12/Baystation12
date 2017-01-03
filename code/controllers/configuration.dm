@@ -218,6 +218,10 @@ var/list/gamemode_cache = list()
 	var/auto_map_vote = 0 // Automatically call a map vote at end of round and switch to the selected map
 	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
+	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
+	var/radiation_resistance_multiplier = 6.5
+	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)

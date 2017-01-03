@@ -358,15 +358,16 @@
 	energy_drain = 200 KILOWATTS
 	range = RANGED
 
-	action(atom/target)
-		if(!action_checks(target) || src.loc.z == 2) return
-		var/turf/T = get_turf(target)
-		if(T)
-			set_ready_state(0)
-			chassis.use_power(energy_drain)
-			do_teleport(chassis, T, 4)
-			do_after_cooldown()
-		return
+/obj/item/mecha_parts/mecha_equipment/teleporter/action(atom/target)
+	if(!action_checks(target)) return
+	var/turf/T = get_turf(target)
+	if(T)
+		if(isAdminLevel(T.z))
+			return		
+		set_ready_state(0)
+		chassis.use_power(energy_drain)
+		do_teleport(chassis, T, 4)
+		do_after_cooldown()
 
 
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator
@@ -925,8 +926,7 @@
 
 	process(var/obj/item/mecha_parts/mecha_equipment/generator/nuclear/EG)
 		if(..())
-			for(var/mob/living/carbon/M in view(EG.chassis))
-				M.apply_effect((EG.rad_per_cycle*3),IRRADIATE, blocked = M.getarmor(null, "rad"))
+			radiation_repository.radiate(EG, (EG.rad_per_cycle * 3))
 		return 1
 
 

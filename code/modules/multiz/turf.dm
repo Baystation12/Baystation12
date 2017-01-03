@@ -1,3 +1,18 @@
+/turf/proc/CanZPass(atom/A, direction)
+	if(z == A.z) //moving FROM this turf
+		return direction == UP //can't go below
+	else
+		if(direction == UP) //on a turf below, trying to enter
+			return 0
+		if(direction == DOWN) //on a turf above, trying to enter
+			return !density
+
+/turf/simulated/open/CanZPass(atom, direction)
+	return 1
+
+/turf/space/CanZPass(atom, direction)
+	return 1
+
 /turf/simulated/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
@@ -13,6 +28,7 @@
 /turf/simulated/open/New()
 	..()
 	update_cliff()
+
 
 /turf/simulated/open/post_change()
 	..()
@@ -108,7 +124,7 @@
 			// Handle people getting hurt, it's funny!
 			if (istype(mover, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mover
-				var/damage = 5
+				var/damage = 10
 				H.apply_damage(rand(0, damage), BRUTE, BP_HEAD)
 				H.apply_damage(rand(0, damage), BRUTE, BP_CHEST)
 				H.apply_damage(rand(0, damage), BRUTE, BP_L_LEG)

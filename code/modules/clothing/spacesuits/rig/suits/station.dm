@@ -41,7 +41,7 @@
 	suit_type = "industrial hardsuit"
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 50)
+	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 50)
 	online_slowdown = 3
 	offline_slowdown = 10
 	vision_restriction = TINT_HEAVY
@@ -114,6 +114,7 @@
 
 /obj/item/clothing/gloves/rig/eva
 	species_restricted = list("exclude","Diona", "Drider", "Lamia", "Xenomorph")
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/eva/equipped
 
@@ -167,7 +168,7 @@
 
 	name = "AMI control module"
 	suit_type = "hazmat hardsuit"
-	desc = "An Anomalous Material Interaction hardsuit that protects against the strangest energies the universe can throw at it."
+	desc = "An Anomalous Material Interaction hardsuit, a prototype NanoTrasen design, protects the wearer against the strangest energies the universe can throw at it."
 	icon_state = "science_rig"
 	armor = list(melee = 45, bullet = 5, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
 	online_slowdown = 1
@@ -213,7 +214,7 @@
 	suit_type = "rescue hardsuit"
 	desc = "A durable suit designed for medical rescue in high risk areas."
 	icon_state = "medical_rig"
-	armor = list(melee = 30, bullet = 15, laser = 20, energy = 60, bomb = 30, bio = 100, rad = 100)
+	armor = list(melee = 30, bullet = 15, laser = 25, energy = 60, bomb = 30, bio = 100, rad = 100)
 	online_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
 
@@ -254,9 +255,9 @@
 /obj/item/weapon/rig/hazard
 	name = "hazard hardsuit control module"
 	suit_type = "hazard hardsuit"
-	desc = "A Security hardsuit designed for prolonged EVA in dangerous environments."
+	desc = "A NanoTrasen security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
-	armor = list(melee = 60, bullet = 40, laser = 30, energy = 15, bomb = 60, bio = 100, rad = 30)
+	armor = list(melee = 60, bullet = 40, laser = 40, energy = 15, bomb = 60, bio = 100, rad = 30)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_BLIND

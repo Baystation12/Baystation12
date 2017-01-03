@@ -35,3 +35,11 @@
 			H.dna.real_name = getName
 			if(H.mind)
 				H.mind.name = H.name
+
+/obj/machinery/acting/changer/mirror
+	name = "Mirror of Many Faces"
+	desc = "For when you need to be someone else right now."
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "mirror_broke"
+	anchored = 1
+	density = 0

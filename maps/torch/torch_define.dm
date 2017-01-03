@@ -15,41 +15,22 @@
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 
-	shuttle_docked_message = "Bluespace drive has been spooled up, prepare for launch. Time to jump, approximately %ETD%."
-	shuttle_leaving_dock = "Jump initiated, entering bluespace in %ETA%."
-	shuttle_called_message = "All hands, bluespace drive is spooling up. Jump in %ETA%."
-	shuttle_recall_message = "Jump sequence aborted, please return to your duties."
-	emergency_shuttle_docked_message = "Emergency escape pods are prepped. You have %ETD% to board the emergency escape pods."
-	emergency_shuttle_leaving_dock = "Emergency escape pods are launched, arriving at rendezvous point in %ETA%."
-	emergency_shuttle_called_message = "Emergency escape pods are being prepped. ETA %ETA%"
-	emergency_shuttle_recall_message = "Emergency escape sequence aborted, please return to your duties."
+	shuttle_docked_message = "Attention all hands: the Bluespace drive has been spooled up, secure all stations for departure. Time to jump: approximately %ETD%."
+	shuttle_leaving_dock = "Attention all hands: Jump initiated, entering Bluespace in %ETA%."
+	shuttle_called_message = "Attention all hands: the Bluespace drive is spooling up. Transit procedures are now in effect. Jump in %ETA%."
+	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
+	emergency_shuttle_docked_message = "Attention all hands: the escape pods are now unlocked. You have %ETD% to board the escape pods."
+	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, arriving at rendezvous point in %ETA%."
+	emergency_shuttle_called_message = "Attention all hands: emergecy evacuation procedures are now in effect. Escape pods will unlock in %ETA%"
+	emergency_shuttle_recall_message = "Attention all hands: emergency evacuation sequence aborted. Return to normal operating conditions."
 
-	// Networks that will show up as options in the camera monitor program
-	station_networks = list(
-							NETWORK_CALYPSO,
-							NETWORK_ENGINE,
-							NETWORK_EXPEDITION,
-							NETWORK_FIRST_DECK,
-							NETWORK_FOURTH_DECK,
-							NETWORK_ROBOTS,
-							NETWORK_POD,
-							NETWORK_SECOND_DECK,
-							NETWORK_THIRD_DECK,
-							NETWORK_SUPPLY,
-							NETWORK_COMMAND,
-							NETWORK_ENGINEERING,
-							NETWORK_MEDICAL,
-							NETWORK_RESEARCH,
-							NETWORK_SECURITY,
-							NETWORK_PRISON,
-							NETWORK_ALARM_ATMOS,
-							NETWORK_ALARM_FIRE,
-							NETWORK_ALARM_POWER,
-							NETWORK_THUNDER,
-							)
 	evac_controller_type = /datum/evacuation_controller/pods
+
+	default_law_type = /datum/ai_laws/solgov
 
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
+	new /datum/random_map/automata/cave_system(null,1,1,9,255,255) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null,1,1,9,64, 64)             // Create the mining ore distribution map.
 	return 1

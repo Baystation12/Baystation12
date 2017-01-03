@@ -294,6 +294,8 @@
 		'html/panels.css',
 		'html/images/loading.gif',
 		'html/images/ntlogo.png',
+		'html/images/bluentlogo.png',
+		'html/images/sollogo.png',
 		'html/images/talisman.png'
 		)
 

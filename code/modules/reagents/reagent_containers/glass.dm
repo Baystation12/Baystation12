@@ -16,7 +16,6 @@
 	flags = OPENCONTAINER
 	unacidable = 1 //glass doesn't dissolve in acid
 
-	var/label_text = ""
 
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
@@ -94,22 +93,6 @@
 			to_chat(user, "<span class='notice'>You splash the solution onto [target].</span>")
 			reagents.splash(target, reagents.total_volume)
 			return
-
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
-			var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
-			if(length(tmp_label) > 10)
-				to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
-			else
-				to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
-				label_text = tmp_label
-				update_name_label()
-
-	proc/update_name_label()
-		if(label_text == "")
-			name = base_name
-		else
-			name = "[base_name] ([label_text])"
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"

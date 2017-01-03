@@ -228,7 +228,7 @@
 			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), hit_zone, armour, sharp=attack.sharp, edge=attack.edge)
+			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), hit_zone, armour, damage_flags=attack.damage_flags())
 
 		if(I_DISARM)
 			if(H in src)

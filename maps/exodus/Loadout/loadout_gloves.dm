@@ -14,6 +14,10 @@
 	display_name = "gloves, latex"
 	path = /obj/item/clothing/gloves/latex
 
+/datum/gear/gloves/nitrile
+	display_name = "gloves, nitrile"
+	path = /obj/item/clothing/gloves/latex/nitrile
+
 /datum/gear/gloves/rainbow
 	display_name = "gloves, rainbow"
 	path = /obj/item/clothing/gloves/rainbow

@@ -18,7 +18,6 @@ meteor_act
 		else
 			return PROJECTILE_FORCE_MISS //inside an else so the taur conditional can fall through
 
-	var/obj/item/organ/external/organ = get_organ()
 
 	//Shields
 	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
@@ -31,6 +30,7 @@ meteor_act
 
 	//Shrapnel
 	if(!(species.flags & NO_EMBED) && P.can_embed())
+		var/obj/item/organ/external/organ = get_organ(def_zone)
 		var/armor = getarmor_organ(organ, "bullet")
 		if(prob(20 + max(P.damage - armor, -10)))
 			var/obj/item/weapon/material/shard/shrapnel/SP = new()
@@ -91,7 +91,7 @@ meteor_act
 			var/obj/item/organ/external/organ = organs_by_name[organ_name]
 			if(organ)
 				var/weight = organ_rel_size[organ_name]
-				armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
+				armorval += (getarmor_organ(organ, type) * weight) //use plain addition here because we are calculating an average
 				total += weight
 	return (armorval/max(total, 1))
 
@@ -354,7 +354,10 @@ meteor_act
 		src.visible_message("<span class='warning'>\The [src] has been hit in the [hit_area] by \the [O].</span>")
 		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
 		if(armor < 100)
-			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
+			var/damage_flags = O.damage_flags()
+			if(prob(armor))
+				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
+			apply_damage(throw_damage, dtype, zone, armor, damage_flags, O)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower

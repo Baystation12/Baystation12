@@ -345,10 +345,6 @@
 		var/obj/mecha/M = target_mob
 		if (M.occupant)
 			return (0)
-	if (istype(target_mob,/obj/machinery/bot))
-		var/obj/machinery/bot/B = target_mob
-		if(B.health > 0)
-			return (0)
 	return 1
 
 /mob/living/simple_animal/say(var/message)

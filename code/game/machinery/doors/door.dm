@@ -104,13 +104,6 @@
 			bumpopen(M)
 		return
 
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
-		if(src.check_access(bot.botcard))
-			if(density)
-				open()
-		return
-
 	if(istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
@@ -353,6 +346,8 @@
 		icon_state = "door1"
 	else
 		icon_state = "door0"
+	var/turf/T = get_turf(src)
+	T.calc_rad_resistance()
 	return
 
 

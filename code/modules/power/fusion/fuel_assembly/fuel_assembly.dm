@@ -4,45 +4,53 @@
 	icon_state = "fuel_assembly"
 	layer = 4
 
-	var/material/material
+	var/material_name
+
+	rad_power = 1
 	var/percent_depleted = 1
 	var/list/rod_quantities = list()
 	var/fuel_type = "composite"
+	var/fuel_colour
+	var/radioactivity = 0
 	var/const/initial_amount = 300
 
-/obj/item/weapon/fuel_assembly/New(var/newloc, var/_material)
-	material = get_material_by_name(_material)
-	if(!material)
-		qdel(src)
+/obj/item/weapon/fuel_assembly/New(var/newloc, var/_material, var/_colour)
+	fuel_type = _material
+	fuel_colour = _colour
 	..(newloc)
 
 /obj/item/weapon/fuel_assembly/initialize()
 	. = ..()
-	name = "[material.use_name] fuel rod assembly"
-	desc = "A fuel rod for a fusion reactor. This one is made from [material.use_name]."
-	if(material.radioactivity)
-		desc += " It is warm to the touch."
+	var/material/material = get_material_by_name(fuel_type)
+	if(istype(material))
+		name = "[material.use_name] fuel rod assembly"
+		desc = "A fuel rod for a fusion reactor. This one is made from [material.use_name]."
+		fuel_colour = material.icon_colour
+		fuel_type = material.use_name
+		if(material.radioactivity)
+			radioactivity = material.radioactivity
+			desc += " It is warm to the touch."
+			processing_objects += src
+		if(material.luminescence)
+			set_light(material.luminescence, material.luminescence, material.icon_colour)
+	else
+		name = "[fuel_type] fuel rod assembly"
+		desc = "A fuel rod for a fusion reactor. This one is made from [fuel_type]."
+
 	icon_state = "blank"
 	var/image/I = image(icon, "fuel_assembly")
-	I.color = material.icon_colour
+	I.color = fuel_colour
 	overlays += list(I, image(icon, "fuel_assembly_bracket"))
-	fuel_type = material.use_name
 	rod_quantities[fuel_type] = initial_amount
-	if(material.luminescence)
-		set_light(material.luminescence, material.luminescence, material.icon_colour)
-	if(material.radioactivity)
-		processing_objects += src
 
 /obj/item/weapon/fuel_assembly/process()
-	if(!material.radioactivity)
-		processing_objects -= src
-		return
+	if(!radioactivity)
+		radiation_repository.sources.Remove(src)
+
 	if(istype(loc, /turf))
-		for(var/mob/living/L in range(1,loc))
-			L.apply_effect(max(1,ceil(material.radioactivity/30)),IRRADIATE, blocked = L.getarmor(null, "rad"))
+		rad_power = max(1,ceil(radioactivity/30))
 
 /obj/item/weapon/fuel_assembly/Destroy()
-	material = null
 	processing_objects -= src
 	return ..()
 

@@ -25,14 +25,12 @@
 
 /datum/turbolift/proc/open_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.open()
+		door.command("open")
 	return
 
 /datum/turbolift/proc/close_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.close()
+		door.command("close")
 	return
 
 /datum/turbolift/proc/do_move()
@@ -53,13 +51,12 @@
 		close_doors()
 		return 1
 
-	var/area/shuttle/turbolift/origin = locate(current_floor.area_ref)
+	var/area/turbolift/origin = locate(current_floor.area_ref)
 
 	if(target_floor == current_floor)
 
 		playsound(control_panel_interior.loc, origin.arrival_sound, 50, 1)
-		open_doors(target_floor)
-		target_floor.ext_panel.reset()
+		target_floor.arrived(src)
 		target_floor = null
 
 		sleep(15)
@@ -75,7 +72,7 @@
 	else
 		next_floor = floors[current_floor_index-1]
 
-	var/area/shuttle/turbolift/destination = locate(next_floor.area_ref)
+	var/area/turbolift/destination = locate(next_floor.area_ref)
 
 	if(!istype(origin) || !istype(destination) || (origin == destination))
 		return 0
@@ -101,7 +98,7 @@
 /datum/turbolift/proc/queue_move_to(var/datum/turbolift_floor/floor)
 	if(!floor || !(floor in floors) || (floor in queued_floors))
 		return // STOP PRESSING THE BUTTON.
-	floor.ext_panel.light_up()
+	floor.pending_move(src)
 	queued_floors |= floor
 	turbolift_controller.lift_is_moving(src)
 

@@ -5,6 +5,8 @@
 	icon_state = "0"
 	dynamic_lighting = 0
 
+	var/dirt = 0
+
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 //	heat_capacity = 700000 No.
@@ -17,6 +19,17 @@
 	update_starlight()
 	..()
 
+/turf/space/initialize()
+	..()
+	if(!HasBelow(z))
+		return
+	var/turf/below = GetBelow(src)
+	if(istype(below, /turf/space))
+		return
+	if(!below.density && istype(below.loc, /area/space))
+		return
+	ChangeTurf(/turf/simulated/floor/airless)
+
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
 	for(var/obj/O in src)
@@ -24,6 +37,9 @@
 
 /turf/space/is_solid_structure()
 	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
+
+/turf/space/proc/update_dirt()
+	dirt = 0
 
 /turf/space/proc/update_starlight()
 	if(!config.starlight)

@@ -9,6 +9,7 @@ var/list/ventcrawl_machinery = list(
 	/obj/item/device/radio/borg,
 	/obj/item/weapon/holder,
 	/obj/machinery/camera,
+	/obj/screen/movable/ability_master,
 	/mob/living/simple_animal/borer
 	)
 

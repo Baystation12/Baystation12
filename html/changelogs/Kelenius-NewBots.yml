@@ -33,5 +33,8 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Ghosts can now follow all sorts of interesting things from their verb, including mechs, dat fukken disk, and the spare ID."
-  - tweak: "Ghost follow list is now also a bit more detailed about the things to follow."
+  - experiment: "Bot AI has been overhauled, hopefully for the better."
+  - experiment: "Navigation beacon (and, therefore, patrol) code has been changed; please report any issues with bot patrolling."
+  - tweak: "Mulebots can't be hacked for speed anymore. They move at moderate speed. Safeties can still be disabled."
+  - tweak: "Floorbots don't try to fix space anymore; instead they will remove broken tiles. They can be configured to cover platings, too."
+  - tweak: "A farmbot has been added to the garden, and a floorbot to engineering storage."

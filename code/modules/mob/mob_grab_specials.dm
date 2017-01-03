@@ -93,18 +93,18 @@
 
 	var/damage = 20
 	var/obj/item/clothing/hat = attacker.head
-	var/is_sharp = 0
+	var/damage_flags = 0
 	if(istype(hat))
 		damage += hat.force * 3
-		is_sharp = hat.sharp
+		damage_flags = hat.damage_flags()
 
-	if(is_sharp)
+	if(damage_flags & DAM_SHARP)
 		attacker.visible_message("<span class='danger'>[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!</span>")
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
 	var/armor = target.run_armor_check(BP_HEAD, "melee")
-	target.apply_damage(damage, BRUTE, BP_HEAD, armor, sharp=is_sharp)
+	target.apply_damage(damage, BRUTE, BP_HEAD, armor, damage_flags)
 	attacker.apply_damage(10, BRUTE, BP_HEAD, attacker.run_armor_check(BP_HEAD, "melee"))
 
 	if(armor < 50 && target.headcheck(BP_HEAD) && prob(damage))

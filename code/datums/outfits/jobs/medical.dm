@@ -6,6 +6,7 @@
 	pda_slot = slot_l_store
 	backpack = /obj/item/weapon/storage/backpack/medic
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
+	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
 
 /decl/hierarchy/outfit/job/medical/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer")

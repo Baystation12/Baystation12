@@ -90,15 +90,20 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
 	qdel(holder)
+	var/radiation_level = rand(100, 200)
 
-	// Copied from the SM for proof of concept.
+	// Copied from the SM for proof of concept. //Not any more --Cirra
+	for(var/area/A in all_areas)
+		if(A.z == holder.z)
+			for(var/turf/T in A)
+				radiation_repository.irradiated_turfs[T] = radiation_level
+
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/T = get_turf(mob)
 		if(T && (holder.z == T.z))
 			if(istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
 				H.hallucination += rand(100,150)
-			mob.apply_effect(rand(100,200), IRRADIATE)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
 		if(I.cur_assembly && I.cur_assembly.fuel_type == "supermatter")
