@@ -146,7 +146,7 @@
 	make_exact_fit()
 
 /obj/item/weapon/storage/firstaid/personal
-	name = "personal first aid kit"
+	name = "advanced first aid kit"
 	desc = "An emergency medical kit tailored for healthcare providers."
 	icon_state = "purplefirstaid"
 	item_state = "firstaid-advanced"

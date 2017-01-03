@@ -35,7 +35,7 @@
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/white,
-		/obj/item/weapon/storage/firstaid/regular
+		/obj/item/weapon/storage/firstaid/personal
 	)
 
 /obj/structure/closet/secure_closet/CMO_torch/New()
@@ -89,7 +89,7 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/storage/firstaid/regular
+		/obj/item/weapon/storage/firstaid/personal
 	)
 
 /obj/structure/closet/secure_closet/medical_torchsenior/New()
@@ -143,7 +143,7 @@
 		/obj/item/weapon/storage/box/autoinjectors,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/regular
+		/obj/item/weapon/storage/firstaid/personal
 	)
 
 /obj/structure/closet/secure_closet/medical_torch/New()
