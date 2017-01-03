@@ -34,6 +34,19 @@
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/suit/hoodie_sel
+	display_name = "hoodies"
+	path = /obj/item/clothing/suit/storage/toggle/hoodie
+
+/datum/gear/suit/hoodie_sel/New()
+	..()
+	var/hoodies = list()
+	hoodies["CTI hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/cti
+	hoodies["mars university hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
+	hoodies["nanotrasen hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/nt
+	hoodies["space mountain wind hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/smw
+	gear_tweaks += new/datum/gear_tweak/path(hoodies)
+
 /datum/gear/suit/labcoat
 	display_name = "labcoat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat

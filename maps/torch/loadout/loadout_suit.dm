@@ -54,6 +54,20 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = list("Passenger", "Bartender")
 
+/datum/gear/suit/hoodie_sel
+	display_name = "hoodies"
+	path = /obj/item/clothing/suit/storage/toggle/hoodie
+	allowed_roles = list("Passenger", "Bartender", "Merchant")
+
+/datum/gear/suit/hoodie_sel/New()
+	..()
+	var/hoodies = list()
+	hoodies["CTI hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/cti
+	hoodies["mars university hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
+	hoodies["nanotrasen hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/nt
+	hoodies["space mountain wind hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/smw
+	gear_tweaks += new/datum/gear_tweak/path(hoodies)
+
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colored"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
@@ -142,5 +156,3 @@
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 	allowed_roles = list("Passenger", "Bartender", "Merchant")
-
-
