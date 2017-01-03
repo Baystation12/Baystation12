@@ -36,7 +36,9 @@
 
 	for(var/obj/machinery/computer/shuttle_control/explore/console in machines)
 		if(console.z in map_z)
-			console.home = src
+			if(!landing_areas)
+				landing_areas = list()
+			landing_areas |= console.shuttle_area
 
 /obj/effect/overmap/sector
 	name = "generic sector"
