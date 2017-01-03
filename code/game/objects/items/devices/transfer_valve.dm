@@ -26,22 +26,19 @@
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
 			return
 
+		user.drop_item()
+		item.forceMove(src)
 		if(!tank_one)
 			tank_one = item
-			user.drop_item()
-			item.forceMove(src)
-			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
-		else if(!tank_two)
-			T1_weight = tank_one.w_class //if just t1 and not T2 versus below with both tanks.
+		else
 			tank_two = item
-			user.drop_item()
-			item.forceMove(src)
-			to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
 			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
+		to_chat(user, "<span class='notice'>You attach the tank to the transfer valve.</span>")
 
 		T1_weight = tank_one.w_class
-		T2_weight = tank_two.w_class
+		if(tank_two)
+			T2_weight = tank_two.w_class
 
 		src.w_class = max(initial(src.w_class),T1_weight,T2_weight) //gets w_class of biggest object, because you shouldn't be able to just shove tanks in and have them be tiny.
 

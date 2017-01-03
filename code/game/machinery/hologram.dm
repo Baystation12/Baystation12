@@ -35,7 +35,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	name = "\improper AI holopad"
 	desc = "It's a floor-mounted device for projecting holographic images. It is activated remotely."
 	icon_state = "holopad0"
-	
+
 	plane = ABOVE_TURF_PLANE
 	layer = ABOVE_TILE_LAYER
 
@@ -67,7 +67,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	/*There are pretty much only three ways to interact here.
 	I don't need to check for client since they're clicking on an object.
 	This may change in the future but for now will suffice.*/
-	if(user.eyeobj.loc != src.loc)//Set client eye on the object if it's not already.
+	if(user.eyeobj && (user.eyeobj.loc != src.loc))//Set client eye on the object if it's not already.
 		user.eyeobj.setLoc(get_turf(src))
 	else if(!masters[user])//If there is no hologram, possibly make one.
 		activate_holo(user)
