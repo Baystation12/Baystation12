@@ -33,11 +33,11 @@ var/all_clothing = subtypesof(/obj/item/clothing)
 			return
 	if(choice == "print")
 		if(loaded)
-			var/list/user_access = loaded.access
+			var/list/user_access = list(loaded.access)
 			world << user_access //D
 			var/datum/mil_branch/user_branch = null
 			for(var/datum/data/record/t in data_core.general)
-				if(t.fields["name"] = loaded.registered_name)
+				if(t.fields["name"] == loaded.registered_name)
 					user_branch = mil_branches.get_branch(t.fields["mil_branch"])
 					world << user_branch //D
 					break

@@ -5,25 +5,21 @@
 	name = "\improper Sol Central Government cap"
 	desc = "It's a blue ballcap in SCG colors."
 	icon_state = "solsoft"
-	required_access = list(80)
 
 /obj/item/clothing/head/soft/sol/expedition
 	name = "\improper Expeditionary Corps cap"
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest."
 	icon_state = "expeditionsoft"
-	required_branch = /datum/mil_branch/expeditionary_corps
 
 /obj/item/clothing/head/soft/sol/expedition/co
 	name = "\improper Expeditionary Corps command cap"
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest. It has golden leaf on the brim."
 	icon_state = "expeditioncomsoft"
-	required_access = list(20)
 
 /obj/item/clothing/head/soft/sol/fleet
 	name = "fleet cap"
 	desc = "It's a navy blue ballcap with the SCG Fleet crest."
 	icon_state = "fleetsoft"
-	required_branch = /datum/mil_branch/fleet
 
 /obj/item/clothing/head/utility
 	name = "utility cover"
@@ -35,7 +31,6 @@
 		)
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
-	required_access = list(80)
 
 /obj/item/clothing/head/utility/fleet
 	name = "fleet utility cover"
@@ -43,14 +38,12 @@
 	icon_state = "navyutility"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
-	required_branch = /datum/mil_branch/fleet
 
 /obj/item/clothing/head/utility/marine
 	name = "marine utility cover"
 	desc = "A grey utility cover bearing the crest of the SCG Marine Corps."
 	icon_state = "greyutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
-	required_branch = /datum/mil_branch/marine_corps
 
 /obj/item/clothing/head/utility/marine/tan
 	name = "tan utility cover"
@@ -74,19 +67,16 @@
 		)
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
-	required_access = list(80)
 
 /obj/item/clothing/head/service/marine
 	name = "marine wheel cover"
 	desc = "A green service uniform cover with an SCG Marine Corps crest."
 	icon_state = "greenwheelcap"
-	required_branch = /datum/mil_branch/marine_corps
 
 /obj/item/clothing/head/service/marine/command
 	name = "marine officer's wheel cover"
 	desc = "A green service uniform cover with an SCG Marine Corps crest and gold stripe."
 	icon_state = "greenwheelcap_com"
-	required_access = list(19)
 
 /obj/item/clothing/head/service/marine/garrison
 	name = "marine garrison cap"
@@ -97,7 +87,6 @@
 	name = "marine officer's garrison cap"
 	desc = "A green garrison cap belonging to the SCG Marine Corps. This one has a gold pin."
 	icon_state = "greengarrisoncap_com"
-	required_access = list(19)
 
 /obj/item/clothing/head/service/marine/campaign
 	name = "campaign cover"
@@ -116,43 +105,36 @@
 		)
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
-	required_access = list(80)
 
 /obj/item/clothing/head/dress/expedition
 	name = "expedition dress cap"
 	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps."
 	icon_state = "greydresscap"
-	required_branch = /datum/mil_branch/expeditionary_corps
 
 /obj/item/clothing/head/dress/expedition/command
 	name = "expedition command dress cap"
 	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
 	icon_state = "greydresscap_com"
-	required_access = list(19)
 
 /obj/item/clothing/head/dress/fleet
 	name = "fleet dress wheel cover"
 	desc = "A white dress uniform cover. This one has an SCG Fleet crest."
 	icon_state = "whitepeakcap"
-	required_branch = /datum/mil_branch/fleet
 
 /obj/item/clothing/head/dress/fleet/command
 	name = "fleet command dress wheel cover"
 	desc = "A white dress uniform cover. This one has a gold stripe and an SCG Fleet crest."
 	icon_state = "whitepeakcap_com"
-	required_access = list(19)
 
 /obj/item/clothing/head/dress/marine
 	name = "marine dress wheel cover"
 	desc = "A white dress uniform cover with an SCG Marine Corps crest."
 	icon_state = "whitewheelcap"
-	required_branch = /datum/mil_branch/marine_corps
 
 /obj/item/clothing/head/dress/marine/command
 	name = "marine officer's dress wheel cover"
 	desc = "A white dress uniform cover with an SCG Marine Corps crest and gold stripe."
 	icon_state = "whitewheelcap_com"
-	required_access = list(19)
 
 //Berets
 
@@ -160,7 +142,6 @@
 	name = "peacekeeper beret"
 	desc = "A beret in Sol Central Government colors. For peacekeepers that are more inclined towards style than safety."
 	icon_state = "beret_lightblue"
-	required_access = list(80)
 
 /obj/item/clothing/head/beret/sol/homeguard
 	name = "home guard beret"
@@ -196,70 +177,58 @@
 	name = "expeditionary beret"
 	desc = "A black beret belonging to the SCG Expeditionary Corps. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black"
-	required_branch = /datum/mil_branch/expeditionary_corps
 
 /obj/item/clothing/head/beret/sol/expedition/security
 	name = "expeditionary security beret"
 	desc = "An SCG Expeditionary Corps beret with a security crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_security"
-	required_access = list(1)
 
 /obj/item/clothing/head/beret/sol/expedition/medical
 	name = "expeditionary medical beret"
 	desc = "An SCG Expeditionary Corps beret with a medical crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_medical"
-	required_access = list(5)
 
 /obj/item/clothing/head/beret/sol/expedition/engineering
 	name = "expeditionary engineering beret"
 	desc = "An SCG Expeditionary Corps beret with an engineering crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_engineering"
-	required_access = list(10)
 
 /obj/item/clothing/head/beret/sol/expedition/supply
 	name = "expeditionary supply beret"
 	desc = "An SCG Expeditionary Corps beret with a supply crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_supply"
-	required_access = list(48, 31)
 
 /obj/item/clothing/head/beret/sol/expedition/command
 	name = "expeditionary command beret"
 	desc = "An SCG Expeditionary Corps beret with a command crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_command"
-	required_access = list(20, 57)
 
 /obj/item/clothing/head/beret/sol/fleet
 	name = "fleet beret"
 	desc = "A navy blue beret belonging to the SCG Fleet. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy"
-	required_branch = /datum/mil_branch/fleet
 
 /obj/item/clothing/head/beret/sol/fleet/security
 	name = "fleet security beret"
 	desc = "An SCG Fleet beret with a security crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_security"
-	required_access = list(1)
 
 /obj/item/clothing/head/beret/sol/fleet/medical
 	name = "fleet medical beret"
 	desc = "An SCG Fleet beret with a medical crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_medical"
-	required_access = list(5)
 
 /obj/item/clothing/head/beret/sol/fleet/engineering
 	name = "fleet engineering beret"
 	desc = "An SCG Fleet with an engineering crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_engineering"
-	required_access = list(10)
 
 /obj/item/clothing/head/beret/sol/fleet/supply
 	name = "fleet supply beret"
 	desc = "An SCG Fleet beret with a supply crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_supply"
-	required_access = list(48, 31)
 
 /obj/item/clothing/head/beret/sol/fleet/command
 	name = "fleet command beret"
 	desc = "An SCG Fleet beret with a command crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_command"
-	required_access = list(19)

@@ -55,7 +55,6 @@
 	armor = list(melee = 40, bullet = 0, laser = 0, energy = 15, bomb = 20, bio = 0, rad = 20)
 	siemens_coefficient = 0.7
 	can_hold_knife = 1
-	required_access = list(80)
 
 /obj/item/clothing/shoes/tactical
 	name = "tactical boots"
@@ -70,7 +69,6 @@
 	name = "dress shoes"
 	desc = "Sharp looking low quarters, perfect for a formal uniform."
 	icon_state = "laceups"
-	required_access = list(80)
 
 /obj/item/clothing/shoes/dress/white
 	name = "white dress shoes"

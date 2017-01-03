@@ -1,6 +1,7 @@
 #if !defined(USING_MAP_DATUM)
 
 	#include "torch_areas.dm"
+	#include "torch_clothing.dm"
 	#include "torch_elevator.dm"
 	#include "torch_holodecks.dm"
 	#include "torch_presets.dm"
