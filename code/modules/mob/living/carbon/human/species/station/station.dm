@@ -63,7 +63,7 @@
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
-	blood_color = "#ea9e2c"
+	blood_color = "#f24b2e"
 
 	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
