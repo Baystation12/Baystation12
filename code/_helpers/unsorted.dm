@@ -629,7 +629,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				atoms += A
 	return atoms
 
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null, var/check_solid = 0)
+/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/check_solid = 1)
 	//Takes: Area. Optional: turf type to leave behind.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
@@ -665,7 +665,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		if(!target || target.loc != A)
 			continue
 
-		transport_turf_contents(source, target, direction)
+		transport_turf_contents(source, target)
 
 	//change the old turfs
 	for(var/turf/source in turfs_src)
@@ -677,7 +677,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	//fixes lighting issue caused by turf
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
-/proc/transport_turf_contents(turf/source, turf/target, var/direction)
+/proc/transport_turf_contents(turf/source, turf/target)
 
 	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
 	new_turf.transport_properties_from(source)

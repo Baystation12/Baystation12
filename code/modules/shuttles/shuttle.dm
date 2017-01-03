@@ -146,7 +146,7 @@
 			if (TA && istype(TA, get_base_turf_by_area(TA)))
 				TA.ChangeTurf(ceiling_type, 1, 1)
 
-	origin.move_contents_to(destination, direction=direction)
+	origin.move_contents_to(destination)
 
 	// if there was a zlevel above our origin, erase our ceiling now we're gone
 	var/turf/some_origin_turf = locate() in origin
