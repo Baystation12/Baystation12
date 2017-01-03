@@ -84,6 +84,12 @@
 	pins["yellow pin"] = /obj/item/clothing/head/hairflower/yellow
 	gear_tweaks += new/datum/gear_tweak/path(pins)
 
+/datum/gear/head/bow
+	display_name = "hair bow"
+	path = /obj/item/clothing/head/hairflower/bow
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender")
+
 /datum/gear/head/hardhat
 	display_name = "hardhat selection"
 	path = /obj/item/clothing/head/hardhat
