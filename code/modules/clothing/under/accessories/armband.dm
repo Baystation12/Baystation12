@@ -50,6 +50,6 @@
 	icon_state = "whitered"
 
 /obj/item/clothing/accessory/armband/medic
-	name = "Medic armband"
+	name = "medic armband"
 	desc = "An armband, worn by crewmembers placed in roles with the purpose of administering first aid. This one has a red cross on it."
 	icon_state = "medicband"
