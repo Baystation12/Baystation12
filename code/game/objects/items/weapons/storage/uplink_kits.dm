@@ -190,3 +190,4 @@
 
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 
+

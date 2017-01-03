@@ -35,3 +35,30 @@
 	name = "14.5mm"
 	item_cost = 8
 	path = /obj/item/weapon/storage/box/sniperammo
+
+/datum/uplink_item/item/ammo/shotgun_slugs
+	name = "Shotgun Slugs"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunammo
+
+/datum/uplink_item/item/ammo/shotgun_shells
+	name = "Shotgun Shells"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunshells
+
+/datum/uplink_item/item/ammo/shotgun_shells
+	name = "Shotgun Shells"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunshells
+
+/datum/uplink_item/item/ammo/c45uzi
+	name = ".45 Uzi Magazine"
+	item_cost = 8
+	path = /obj/item/ammo_magazine/c45uzi
+
+/datum/uplink_item/item/ammo/a50
+	name = ".50 AE"
+	item_cost = 8
+	path = /obj/item/ammo_magazine/a50
+
+
