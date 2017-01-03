@@ -33,7 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes:
-  - rscadd: "Made all doors bolt themselves when broken."
-  - rscadd: "Made it possible to cut the bolts of a broken door."
-  - rscadd: "As a side effect, it is possible to remove bolted, broken doors without an RCD."
-  - rscadd: "Also made the fire axe much more robust against doors."
+  - rscadd: "Alter procedure for dismantling broken, bolted doors"
+  - rscadd: "Made the fire axe more robust against doors."

@@ -784,7 +784,7 @@ About the new airlock wires panel:
 
 //returns 1 on success, 0 on failure
 /obj/machinery/door/airlock/proc/cut_bolts(item, user)
-	var/cut_delay = 150
+	var/cut_delay = 100
 	var/cut_verb
 	var/cut_sound
 
@@ -907,7 +907,7 @@ About the new airlock wires panel:
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
 	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
-		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN)))) )
+		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && !src.locked)) )
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40,src))
@@ -948,15 +948,14 @@ About the new airlock wires panel:
 			else
 				spawn(0)	close(1)
 
-	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && user.a_intent == I_HURT)
+			//if door is unbroken, but at half health or less, hit with fire axe using harm intent
+	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && (src.health <= src.maxhealth / 2) && user.a_intent == I_HURT)
 		var/obj/item/weapon/material/twohanded/fireaxe/F = C
 		if (F.wielded)
-			to_chat(user, "You prepare an overhead swing...")
-			if (do_after(user, 20, src))
-				playsound(src, 'sound/weapons/smash.ogg', 100, 1)
-				user.visible_message("<span class='danger'>[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>", "<span class='danger'>You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>")
-				src.health = 0
-				src.set_broken()
+			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
+			user.visible_message("<span class='danger'>[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>", "<span class='danger'>You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>")
+			src.health = 0
+			src.set_broken()
 		else
 			..()
 			return
@@ -990,7 +989,8 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/set_broken()
 	src.p_open = 1
 	stat |= BROKEN
-	lock()
+	if (secured_wires)
+		lock()
 	for (var/mob/O in viewers(src, null))
 		if ((O.client && !( O.blinded )))
 			O.show_message("[src.name]'s control panel bursts open, sparks spewing out!")
