@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import argparse
+import hashlib
 import os
 import sys
 import re
@@ -35,12 +36,14 @@ except ImportError:
 def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('projectfile')
-	parser.add_argument('outfile', type=argparse.FileType('w'))
+	parser.add_argument('outfile')
 	namespace = parser.parse_args()
 
 	if not os.access(namespace.projectfile, os.F_OK):
 		print("Unable to access file, aborting.")
 		return;
+		
+	print("Beginning global var generation...")
 
 	tree = ""
 	if namespace.projectfile[-4:] == ".txt":
@@ -60,8 +63,22 @@ def main():
 	variables = [x for x in variables if re.match("^[a-z_$][a-z_$0-9]*$", x, re.IGNORECASE) != None and x not in ignores]
 	# print(variables)
 
+	variables.sort()
 	code = GenCode(variables)
-	namespace.outfile.write(code)
+	
+	with open(namespace.outfile, 'wb') as outfile:
+		outfile.write(code)
+	
+	hash = GenerateMD5(namespace.outfile)
+	print("Global var generation complete. MD5 is: " + hash)
+	
+	
+def GenerateMD5(fname):
+    hash_md5 = hashlib.md5()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 
 def CompileFile(filename):
 	compiler_path = FindCompiler()
@@ -104,13 +121,13 @@ def GenCode(variables):
 	for variable in variables:
 		out += 'if("{0}")\n\t\t\tglobal.{0}=newval;\n\t\t'.format(variable)
 
-	out += "\n/var/list/_all_globals=list("
+	out += "\n/var/list/_all_globals=list(\n"
 	for i, variable in enumerate(variables):
-		out += '"{0}"'.format(variable)
+		out += '\t"{0}"'.format(variable)
 		if i != len(variables) - 1:
-			out += ","
+			out += ",\n"
 
-	out += ")\r\n"
+	out += ")\n"
 
 	return out
 
