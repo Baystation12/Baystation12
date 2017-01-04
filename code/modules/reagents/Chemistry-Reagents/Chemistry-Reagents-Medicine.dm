@@ -495,7 +495,7 @@
 	reagent_state = LIQUID
 	color = "#FF3300"
 	metabolism = REM * 0.15
-	overdose = REAGENTS_OVERDOSE * 0.25
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

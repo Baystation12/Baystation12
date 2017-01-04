@@ -188,7 +188,7 @@
 					prob(30);/obj/item/weapon/storage/firstaid/radiation,\
 					prob(40);/obj/item/weapon/storage/firstaid/o2,\
 					prob(40);/obj/item/weapon/storage/firstaid/adv,\
-					prob(1);/obj/item/weapon/storage/firstaid/combat,\
+					prob(3);/obj/item/weapon/storage/firstaid/combat,\
 					prob(20);/obj/item/weapon/storage/firstaid/empty,\
 					prob(40);/obj/item/weapon/storage/firstaid/fire)
 
