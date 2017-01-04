@@ -24,6 +24,7 @@
 	data["antibodies"] = C.antibodies
 	data["blood_DNA"] = C.dna.unique_enzymes
 	data["blood_type"] = C.dna.b_type
+	data["species"] = C.species.name
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem += R.id
