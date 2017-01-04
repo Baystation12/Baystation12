@@ -969,7 +969,7 @@
 		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 40)
 
 	if(shock_stage >= 30)
-		if(shock_stage == 30) visible_message("[src] is having trouble keeping \his eyes open.")
+		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping \his eyes open.")
 		eye_blurry = max(2, eye_blurry)
 		stuttering = max(stuttering, 5)
 
@@ -977,7 +977,7 @@
 		var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 		to_chat(src, message)
 	if (shock_stage >= 60)
-		if(shock_stage == 60) visible_message("[src]'s body becomes limp.")
+		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
 			var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
 			to_chat(src, message)
@@ -996,7 +996,7 @@
 			Paralyse(5)
 
 	if(shock_stage == 150)
-		visible_message("[src] can no longer stand, collapsing!")
+		visible_message("<b>[src]</b> can no longer stand, collapsing!")
 		Weaken(20)
 
 	if(shock_stage >= 150)
