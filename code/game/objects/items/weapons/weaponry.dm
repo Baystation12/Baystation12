@@ -156,7 +156,7 @@
 
 /obj/effect/energy_net/proc/healthcheck()
 	if(health <=0)
-		density = 0
+		set_density(0)
 		if(countdown <= 0)
 			visible_message("<span class='warning'>\The [src] fades away!</span>")
 		else

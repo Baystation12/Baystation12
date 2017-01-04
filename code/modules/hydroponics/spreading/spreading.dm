@@ -189,10 +189,10 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		opacity = 1
 		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
-			density = 1
+			set_density(1)
 	else
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
-		density = 0
+		set_density(0)
 
 /obj/effect/plant/proc/calc_dir()
 	set background = 1

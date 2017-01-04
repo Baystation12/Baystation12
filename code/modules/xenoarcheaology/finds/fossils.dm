@@ -67,7 +67,7 @@
 				usr = user
 				icon_state = "skel"
 				src.bstate = 1
-				src.density = 1
+				src.set_density(1)
 				src.name = "alien skeleton display"
 				if(src.contents.Find(/obj/item/weapon/fossil/skull/horned))
 					src.desc = "A creature made of [src.contents.len-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."

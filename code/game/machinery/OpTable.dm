@@ -37,14 +37,14 @@
 				return
 		if(3.0)
 			if (prob(25))
-				src.density = 0
+				src.set_density(0)
 		else
 	return
 
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
-		src.density = 0
+		src.set_density(0)
 		qdel(src)
 	return
 

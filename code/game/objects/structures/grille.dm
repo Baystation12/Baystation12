@@ -166,7 +166,7 @@
 /obj/structure/grille/proc/healthcheck()
 	if(health <= 0)
 		if(!destroyed)
-			density = 0
+			set_density(0)
 			destroyed = 1
 			update_icon()
 			new /obj/item/stack/rods(get_turf(src))

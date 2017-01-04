@@ -701,11 +701,11 @@
 		canmove = !incapacitated(INCAPACITATION_DISABLED)
 
 	if(lying)
-		density = 0
+		set_density(0)
 		if(l_hand) unEquip(l_hand)
 		if(r_hand) unEquip(r_hand)
 	else
-		density = initial(density)
+		set_density(initial(density))
 	reset_layer()
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)

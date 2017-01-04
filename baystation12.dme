@@ -216,6 +216,7 @@
 #include "code\datums\observation\_debug.dm"
 #include "code\datums\observation\_defines.dm"
 #include "code\datums\observation\death.dm"
+#include "code\datums\observation\density_set.dm"
 #include "code\datums\observation\destroyed.dm"
 #include "code\datums\observation\dir_set.dm"
 #include "code\datums\observation\entered.dm"
