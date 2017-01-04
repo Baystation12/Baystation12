@@ -2,7 +2,6 @@ author: Haswell
 delete-after: True
 changes: 
   - rscadd: "Added lots of new medication that can treat internal bleeding, broken bones and more."
-  - rscadd: "Added bone foam applicator, can splint all body parts."
   - rscadd: "Added new trauma first aid kit."
   - rscadd: "Added more prefilled syringes and premade medicine pills."
   - tweak: "Adjusted the contents of all first aid kits."
@@ -25,7 +24,7 @@ changes:
   - tweak: "Synaptizine: OD 15u; increased metabolism rate; will cause minor brain damage"
   - tweak: "Alkyzine: OD 15u; increased metabolism rate"
   - tweak: "Peridaxon: OD 15u; decreased metabolism rate"
-  - tweak: "Hyperzine: OD 15u; increased metabolism rate; will cause minor brain damage and poisoning"
+  - tweak: "Hyperzine: increased metabolism rate; will cause minor brain damage and poisoning"
   - tweak: "Arithrazine: increased radiation removal"
   - tweak: "Carbon: no longer removes ingested reagents"
   - tweak: "Iron: no longer restores blood"
