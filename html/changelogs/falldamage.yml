@@ -1,6 +1,0 @@
-author: TheGreyWolf
-
-delete-after: True
-
-changes: 
-  - rscadd: "Upped the damage from 5 to 10 brute possible per limb when falling down a z-level."
