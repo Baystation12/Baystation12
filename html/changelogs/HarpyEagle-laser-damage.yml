@@ -1,8 +1,0 @@
-author: HarpyEagle
-
-delete-after: True
-
-changes:
-  - tweak: "Burn damage causes by lasers results in less blood loss."
-  - tweak: "Laser protection offered by many types of armour given a modest boost, bringing laser protection up to match bullet protection in most cases."
-  - rscadd: "Laser beams have a chance of dealing internal organ damage much like brute damage."
