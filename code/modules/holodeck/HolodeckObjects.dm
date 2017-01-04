@@ -195,7 +195,7 @@
 	return
 
 /obj/machinery/door/window/holowindoor/shatter(var/display_message = 1)
-	src.density = 0
+	src.set_density(0)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] fades away as it shatters!")

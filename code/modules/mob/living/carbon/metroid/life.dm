@@ -121,7 +121,7 @@
 	if (src.ear_damage < 25)
 		src.ear_damage = 0
 
-	src.density = !( src.lying )
+	src.set_density(!src.lying)
 
 	if (src.sdisabilities & BLIND)
 		src.blinded = 1

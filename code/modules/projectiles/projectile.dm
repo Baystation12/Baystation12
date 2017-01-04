@@ -275,7 +275,7 @@
 	//stop flying
 	on_impact(A)
 
-	density = 0
+	set_density(0)
 	invisibility = 101
 
 	qdel(src)

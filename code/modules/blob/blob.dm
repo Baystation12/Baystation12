@@ -235,7 +235,7 @@
 	update_nearby_tiles()
 
 /obj/effect/blob/shield/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	..()
 
