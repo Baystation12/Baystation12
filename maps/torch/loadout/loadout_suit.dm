@@ -63,7 +63,7 @@
 	..()
 	var/hoodies = list()
 	hoodies["CTI hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/cti
-	hoodies["mars university hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
+	hoodies["mariner university hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
 	hoodies["nanotrasen hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/nt
 	hoodies["space mountain wind hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/smw
 	gear_tweaks += new/datum/gear_tweak/path(hoodies)
