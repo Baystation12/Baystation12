@@ -397,7 +397,7 @@
 	icon_closed = "cti_hoodie"
 
 /obj/item/clothing/suit/storage/toggle/hoodie/mu
-	name = "\improper mariner university hoodie"
+	name = "\improper Mariner University hoodie"
 	desc = "A warm, gray sweatshirt.  It bears the letters MU on the front, a lettering to the well-known public college, Mariner University."
 	icon_state = "mu_hoodie"
 	icon_open = "mu_hoodie_open"
