@@ -13,12 +13,11 @@ var/all_clothing = subtypesof(/obj/item/clothing)
 	if(loaded || !W || !user)
 		return 0
 	if(istype(W, /obj/item/weapon/card/id))
-		user.remove_from_mob(W)
+		user.drop_from_inventory(W, src)
 		loaded = W
-		loaded.loc = src
-		to_chat(user, "You insert the [loaded] into the [src].")
+		to_chat(user, "<span class='notice'>You insert the [loaded] into the [src].</span>")
 	else
-		to_chat(user, "The [W] doesn't fit!")
+		to_chat(user, "<span class='notice'>The [W] doesn't fit!</span>")
 
 /obj/machinery/uniform_printer/attack_hand(mob/user as mob)
 	var/choice = input("What do you want to do with \the [src]?") as null|anything in list("eject ID", "print") //No idea how to make a proper UI --Cirra
@@ -29,34 +28,40 @@ var/all_clothing = subtypesof(/obj/item/clothing)
 			user.put_in_hands(loaded)
 			loaded = null
 		else
-			to_chat(user, "There is no ID in the [src].")
+			to_chat(user, "<span class='notice'>There is no ID in the [src].</span>")
 			return
 	if(choice == "print")
 		if(loaded)
-			var/list/user_access = list(loaded.access)
-			world << user_access //D
+			var/list/user_access = loaded.access
+			world << json_encode(user_access) //D
 			var/datum/mil_branch/user_branch = null
 			for(var/datum/data/record/t in data_core.general)
 				if(t.fields["name"] == loaded.registered_name)
 					user_branch = mil_branches.get_branch(t.fields["mil_branch"])
 					world << user_branch //D
 					break
+			world << "43"
 			var/list/available_clothing = list()
-			for(var/obj/item/clothing/C in all_clothing)
-				if((!C.required_access) && (!C.required_branch))
+			world << "44"
+			for(var/thing in all_clothing)
+				var/obj/item/clothing/C = thing
+				world << "47 [C]"
+				if((!length(initial(C.required_access))) && (!initial(C.required_branch)))
 					continue
 				var/correct = 0
 				var/required = 0
-				if(C.required_access)
+				if(length(initial(C.required_access)))
 					required++
-					for(var/i in C.required_access)
+					for(var/i in initial(C.required_access))
 						if(i in user_access)
 							correct++
+							world << "57 correct"
 							break
-				if(C.required_branch)
+				if(initial(C.required_branch))
 					required++
-					if(C.required_branch == user_branch)
+					if(initial(C.required_branch) == user_branch)
 						correct++
+						world << "63 correct"
 				if(correct == required)
 					available_clothing.Add(C)
 					world << "added [C]"
