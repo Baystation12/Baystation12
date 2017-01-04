@@ -1,21 +1,21 @@
 /obj/effect/overmap/sector/test1
 	name = "Test Sector #1"
 	color = "#00FF00"
-	landing_areas = list(/area/sector/shuttle/ingoing1,/area/sector/shuttle/ingoing3,/area/sector/shuttle/ingoing4)
+	//landing_spots = list(/area/sector/shuttle/ingoing1,/area/sector/shuttle/ingoing3,/area/sector/shuttle/ingoing4) //TODO
 	start_x = 8
 	start_y = 8
 
 /obj/effect/overmap/sector/test2
 	name = "Test Sector #2"
 	color = "#FF0000"
-	landing_areas = list(/area/sector/shuttle/ingoing2)
+	//landing_areas = list(/area/sector/shuttle/ingoing2) //TODO
 	start_x = 6
 	start_y = 8
 
 /obj/machinery/computer/shuttle_control/explore/test2
 	name = "abandoned pod console"
 	shuttle_tag = "Exploration Pod"
-	shuttle_area = /area/sector/shuttle/outgoing2
+	//parking_spot = /area/sector/shuttle/outgoing2 //TODO
 
 /area/sector/shuttle/
 	name = "\improper Entry Point"

@@ -1,3 +1,4 @@
+/*
 /obj/machinery/computer/shuttle_control/multi/calypso
 	name = "calypso control console"
 	icon_keyboard = "rd_key"
@@ -368,3 +369,4 @@
 	area_offsite = /area/supply/dock
 	area_station = /area/supply/station
 	docking_controller_tag = "" // lands, doesn't dock
+*/

@@ -7,7 +7,8 @@
 	icon_state = "object"
 	var/map_z = list()
 
-	var/list/landing_areas	//areas where inbound exploration shuttles can land
+	//landmarks where inbound exploration shuttles can land
+	var/list/landing_spots
 
 	var/start_x			//coordinates on the
 	var/start_y			//overmap zlevel
@@ -46,11 +47,14 @@
 		using_map.station_levels |= map_z
 		using_map.contact_levels |= map_z
 
-	for(var/obj/machinery/computer/shuttle_control/explore/console in machines)
-		if(console.z in map_z)
-			if(!landing_areas)
-				landing_areas = list()
-			landing_areas |= console.shuttle_area
+	var/list/found_landing_spots = list()
+	for(var/nav_tag in landing_spots)
+		var/obj/effect/shuttle_nav/navpoint = locate(nav_tag)
+		if(!navpoint)
+			log_error("Overmap region \"[name]\" could not find one of it's landing spots: \"[nav_tag]\"")
+		else
+			found_landing_spots += navpoint
+	landing_spots = found_landing_spots
 
 /obj/effect/overmap/sector
 	name = "generic sector"

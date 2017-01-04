@@ -1,18 +1,6 @@
 //Shuttle controller computer for shuttles going between sectors
 /obj/machinery/computer/shuttle_control/explore
 	name = "general shuttle control console"
-	var/area/shuttle_area	//area for shuttle ship-side
-
-/obj/machinery/computer/shuttle_control/explore/initialize()
-	..()
-	if(!shuttle_tag)
-		shuttle_tag = "Explorer-[z]"
-	if(!shuttle_controller.shuttles[shuttle_tag])
-		new/datum/shuttle/ferry/overmap(shuttle_tag, locate(shuttle_area))
-		testing("Exploration shuttle '[shuttle_tag]' at zlevel [z] successfully added.")
-	else
-		var/datum/shuttle/ferry/overmap/S = shuttle_controller.shuttles[shuttle_tag]
-		shuttle_area = S.area_station.type
 
 /obj/machinery/computer/shuttle_control/explore/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -82,7 +70,7 @@
 			to_chat(usr,"<span class='warning'>No valid landing sites in range.</span>")
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, default_state) && (D in possible_d))
-			shuttle.set_destination_area(possible_d[D])
+			shuttle.set_destination_landmark(possible_d[D])
 
 	if(href_list["move"])
 		shuttle.launch(src)
