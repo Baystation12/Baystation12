@@ -319,6 +319,17 @@
 	can_hold = list(/obj/item/toy/snappop)
 	startswith = list(/obj/item/toy/snappop = 8)
 
+
+/obj/item/weapon/storage/box/bluegold
+	name = "peacekeeper armband box"
+	desc = "Contains enough peacekeeper armbands to supply a platoon, guaranteed."
+	startswith = list(/obj/item/clothing/accessory/armband/bluegold = 8)
+
+/obj/item/weapon/storage/box/whitered
+	name = "nT armband box"
+	desc = "Contains enough NanoTrasen armbands for a lifetime. Well, for yours, anyways."
+	startswith = list(/obj/item/clothing/accessory/armband/whitered = 8)
+
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"
 	desc = "A small box of 'Space-Proof' premium matches."
