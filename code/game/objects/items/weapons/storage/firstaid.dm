@@ -16,10 +16,6 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 
-/obj/item/weapon/storage/firstaid/empty
-	icon_state = "firstaid"
-	name = "first aid kit (empty)"
-
 /obj/item/weapon/storage/firstaid/fire
 	name = "fire first aid kit"
 	desc = "An emergency medical kit containing basic supplies for treating burns."

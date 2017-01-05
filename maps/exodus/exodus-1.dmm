@@ -3928,7 +3928,7 @@
 "bxB" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/tiled,/area/assembly/chargebay)
 "bxC" = (/turf/simulated/wall,/area/medical/medbay)
 "bxD" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled,/area/assembly/robotics)
-"bxE" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/empty,/obj/item/weapon/storage/firstaid/empty,/obj/item/weapon/storage/firstaid/empty,/obj/item/device/healthanalyzer,/obj/item/device/healthanalyzer,/obj/item/device/healthanalyzer,/obj/machinery/newscaster{pixel_x = 26; pixel_y = 1},/turf/simulated/floor/tiled/white,/area/assembly/robotics)
+"bxE" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid,/obj/item/weapon/storage/firstaid,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/device/healthanalyzer,/obj/item/device/healthanalyzer,/obj/machinery/newscaster{pixel_x = 26; pixel_y = 1},/turf/simulated/floor/tiled/white,/area/assembly/robotics)
 "bxF" = (/turf/simulated/wall,/area/medical/medbay3)
 "bxG" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/door/airlock/atmos{name = "Atmospherics Maintenance"; req_access = list(12,24)},/turf/simulated/floor/plating,/area/maintenance/atmos_control)
 "bxH" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/ladder,/turf/simulated/floor/plating,/area/maintenance/locker)

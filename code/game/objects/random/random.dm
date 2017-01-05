@@ -189,7 +189,7 @@
 					prob(40);/obj/item/weapon/storage/firstaid/o2,\
 					prob(40);/obj/item/weapon/storage/firstaid/adv,\
 					prob(3);/obj/item/weapon/storage/firstaid/combat,\
-					prob(20);/obj/item/weapon/storage/firstaid/empty,\
+					prob(20);/obj/item/weapon/storage/firstaid,\
 					prob(40);/obj/item/weapon/storage/firstaid/fire)
 
 

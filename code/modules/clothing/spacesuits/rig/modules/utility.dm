@@ -167,7 +167,6 @@
 /obj/item/rig_module/chem_dispenser/adv
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream. This variant has more advanced chemicals installed."
 
-	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("tramadol",      "tramadol",      0, 80),
 		list("chloromydride",  "chloromydride",      0, 80),
