@@ -41,6 +41,7 @@
 #define MODEFLAG_OVERCHARGE 256
 #define MODEFLAG_MODULATE 512
 #define MODEFLAG_MULTIZ 1024
+#define MODEFLAG_ANTIRAD 2048
 
 // Return codes for shield hits.
 #define SHIELD_ABSORBED 1			// The shield has completely absorbed the hit
@@ -54,3 +55,4 @@
 #define SHIELD_RUNNING 2			// The shield is running
 
 #define SHIELD_SHUTDOWN_DISPERSION_RATE (500 KILOWATTS)		// The rate at which shield energy disperses when shutdown is initiated.
+#define SHIELD_RAD_RESISTANCE 150	// How well shields protect against radiation. This should protect against almost anything, except for the strongest radiation sources.

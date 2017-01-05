@@ -73,7 +73,7 @@
 	if(!disabled_for && (duration > 1))
 		s.set_up(1, 1, src)
 		s.start()
-		
+
 	gen.damaged_segments |= src
 	disabled_for += duration
 	set_density(0)
@@ -105,11 +105,11 @@
 	if(gen.check_flag(MODEFLAG_BYPASS) && !diffused_for && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
 		return
-		
+
 	if(!diffused_for && !disabled_for)
 		s.set_up(1, 1, src)
 		s.start()
-		
+
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	set_density(0)
@@ -140,7 +140,7 @@
 		// The closer we are to impact site, the longer it takes for shield to come back up.
 		S.fail(-(-range + get_dist(src, S)) * 2)
 
-/obj/effect/shield/proc/take_damage(var/damage, var/damtype, var/hitby)
+/obj/effect/shield/proc/take_damage(var/damage, var/damtype, var/hitby, var/no_flicker = 0)
 	if(!gen)
 		qdel(src)
 		return
@@ -150,7 +150,8 @@
 
 	damage = round(damage)
 
-	new/obj/effect/shield_impact(get_turf(src))
+	if(!no_flicker)
+		new/obj/effect/shield_impact(get_turf(src))
 
 	switch(gen.take_damage(damage, damtype))
 		if(SHIELD_ABSORBED)
@@ -194,23 +195,30 @@
 	return gen.check_flag(MODEFLAG_ATMOSPHERIC)
 
 
-// EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
+// EMP
 /obj/effect/shield/emp_act(var/severity)
-	if(!disabled_for)
-		take_damage(rand(30,60) / severity, SHIELD_DAMTYPE_EM)
+	if(is_disabled())
+		return
+	take_damage(rand(30,60) / severity, SHIELD_DAMTYPE_EM)
 
 
 // Explosions
 /obj/effect/shield/ex_act(var/severity)
-	if(!disabled_for)
-		take_damage(rand(10,15) / severity, SHIELD_DAMTYPE_PHYSICAL)
-
+	if(!gen || !gen.check_flag(MODEFLAG_HYPERKINETIC) || is_disabled())
+		return
+	take_damage(rand(10,15) / severity, SHIELD_DAMTYPE_PHYSICAL)
 
 // Fire
 /obj/effect/shield/fire_act()
-	if(!disabled_for)
-		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
+	if(!gen || !gen.check_flag(MODEFLAG_ATMOSPHERIC) || is_disabled())
+		return
+	take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
 
+// Radiation
+/obj/effect/shield/rad_act(var/severity)
+	if(!gen || !gen.check_flag(MODEFLAG_ANTIRAD) || is_disabled())
+		return
+	take_damage(severity/100, SHIELD_DAMTYPE_HEAT, 0, (severity > 100 ? 0 : 1))
 
 // Projectiles
 /obj/effect/shield/bullet_act(var/obj/item/projectile/proj)
@@ -271,6 +279,13 @@
 	else
 		explosion_resistance = 0
 
+/obj/effect/shield/get_rad_resistance()
+	if(gen && gen.check_flag(MODEFLAG_ANTIRAD))
+		return SHIELD_RAD_RESISTANCE
+	return 0
+
+/obj/effect/shield/proc/is_disabled()
+	return (disabled_for || diffused_for)
 
 // Shield collision checks below
 

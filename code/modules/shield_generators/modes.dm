@@ -40,7 +40,7 @@
 
 /datum/shield_mode/atmosphere
 	mode_name = "Atmospheric Containment"
-	mode_desc = "This mode blocks air flow and acts as atmosphere containment."
+	mode_desc = "This mode blocks air flow and acts as atmosphere containment. It also protects against fire and similar atmospheric conditions."
 	mode_flag = MODEFLAG_ATMOSPHERIC
 	multiplier = 1.3
 
@@ -75,3 +75,9 @@
 	mode_desc = "Recalibrates the field projection array to increase the vertical height of the field, allowing it's usage on multi-deck stations or ships."
 	mode_flag = MODEFLAG_MULTIZ
 	multiplier = 1
+
+/datum/shield_mode/radiation
+	mode_name = "Radiation Dispersion"
+	mode_desc = "Reduces or completely removes most types of radiation."
+	mode_flag = MODEFLAG_ANTIRAD
+	multiplier = 1.1

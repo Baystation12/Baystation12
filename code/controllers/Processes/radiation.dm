@@ -15,13 +15,13 @@
 		linked.irradiated_turfs[T] -= config.radiation_decay_rate
 		if(linked.irradiated_turfs[T] <= config.radiation_lower_limit)
 			linked.irradiated_turfs.Remove(T)
+		for(var/atom/A in T.contents)
+			A.rad_act(linked.irradiated_turfs[T])
 		SCHECK
 	for(var/mob/living/L in linked.irradiated_mobs)
 		if(!L)
 			linked.irradiated_mobs.Remove(L)
 			continue
-		if(get_turf(L) in linked.irradiated_turfs)
-			L.rad_act(linked.irradiated_turfs[get_turf(L)])
 		if(!L.radiation)
 			linked.irradiated_mobs.Remove(L)
 		SCHECK
