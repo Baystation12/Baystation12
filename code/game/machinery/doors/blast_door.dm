@@ -34,7 +34,6 @@
 	var/material/implicit_material
 
 /obj/machinery/door/blast/initialize()
-	..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
@@ -45,6 +44,7 @@
 		layer = open_layer
 
 	implicit_material = get_material_by_name("plasteel")
+	..()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wifi_receiver)
