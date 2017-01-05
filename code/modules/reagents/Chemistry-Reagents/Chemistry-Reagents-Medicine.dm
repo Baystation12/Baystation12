@@ -14,7 +14,7 @@
 
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.add_chemical_effect(CE_STABLE)
+		M.add_chemical_effect(CE_STABLE, 15)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
 		M.add_chemical_effect(CE_PULSE, 1)
 
@@ -32,7 +32,7 @@
 
 /datum/reagent/chloromydride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.add_chemical_effect(CE_STABLE)
+		M.add_chemical_effect(CE_STABLE, 20)
 		M.adjustOxyLoss(-8 * removed) //flat rate, heals oxloss slower than dexalin, but without the side effects
 		M.add_chemical_effect(CE_PULSE, 3)
 
@@ -163,6 +163,7 @@
 			M.adjustToxLoss(removed * 6)
 			return
 		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -6 * removed) //heals 60 * removed at 100 damage
+		M.add_chemical_effect(CE_STABLE, 30)
 		apply_fatigue_effect(M, removed, 0, 0, 10, 10, 5, 10)
 		M.take_organ_damage(removed * 0.5, 0) //if you're not ODing you'll take 15 brute at most
 
@@ -184,6 +185,7 @@
 			M.adjustToxLoss(removed * 9)
 			return
 		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -12 * removed) //heals 120 * removed at 100 damage
+		M.add_chemical_effect(CE_STABLE, 40)
 		apply_fatigue_effect(M, removed, 0, 0, 10, 10, 5, 15)
 		M.take_organ_damage(removed, 0) //if you're not ODing you'll take 15 brute at most
 		if(dose > 10)
