@@ -44,14 +44,7 @@
 	if(fail_counter > 0)
 		radiation_repository.radiate(src, fail_counter--)
 
-	charge_tick++
-	if(charge_tick < 4) return 0
-	charge_tick = 0
-	if(!power_supply) return 0
-	if(power_supply.percent() < 100)
-		power_supply.give(charge_cost)
-		update_icon()
-	return 1
+	return ..()
 
 /obj/item/weapon/gun/energy/gun/nuclear/emp_act(severity)
 	..()
