@@ -63,7 +63,9 @@
 	set_interface(interface)
 
 	if(title)
-		src.title = sanitize(title)
+		src.title = replacetext(title, "\improper", "")
+		src.title = replacetext(src.title, "\proper", "")
+		src.title = sanitize(src.title)
 	if(width)
 		src.width = width
 	if(height)
@@ -249,6 +251,8 @@
 	json_data["config"] = get_config_data()
 	if(!isnull(data))
 		json_data["data"] = data
+
+	json_data["data"] = replacetext(data, "ÿ", "")
 
 	// Generate the JSON.
 	var/json = json_encode(json_data)

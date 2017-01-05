@@ -123,6 +123,8 @@
 	if (name == "alarm")
 		name = "[alarm_area.name] Air Alarm"
 
+	name = replacetextEx(name, "\improper", "")
+
 	if(!wires)
 		wires = new(src)
 
