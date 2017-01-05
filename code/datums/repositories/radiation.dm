@@ -70,16 +70,14 @@ var/list/to_process = list()
 	var/turf/epicentre = locate(round(world.maxx / 2), round(world.maxy / 2), source.z)
 	flat_radiate(epicentre, power, world.maxx, respect_maint)
 
+/turf/
+	var/rad_resistance = 0
+
 /turf/proc/calc_rad_resistance()
 	rad_resistance = 0
-	for(var/obj/O in src.contents)
-		if(O.rad_resistance) //Override
-			rad_resistance += O.rad_resistance
+	for(var/atom/movable/A in contents)
+		rad_resistance += A.get_rad_resistance()
 
-		else if(O.density) //So doors don't get counted
-			var/material/M = O.get_material()
-			if(!M)	continue
-			rad_resistance += M.weight
 	radiation_repository.resistance_cache[src] = (length(contents) + 1)
 
 /turf/simulated/wall/calc_rad_resistance()
@@ -88,7 +86,16 @@ var/list/to_process = list()
 
 /atom
 	var/rad_power = 0
-	var/rad_resistance = 0
+
+/atom/movable/proc/get_rad_resistance()
+	return 0
+
+/obj/machinery/door/get_rad_resistance()
+	if(density)
+		var/material/M = get_material()
+		if(!M)
+			return 0
+		return M.weight
 
 /atom/Destroy()
 	if(rad_power)
