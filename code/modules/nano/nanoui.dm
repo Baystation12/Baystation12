@@ -86,7 +86,8 @@ nanoui is used to open and update nano browser uis
 	add_template("main", ntemplate_filename)
 
 	if (ntitle)
-		title = sanitize(ntitle)
+		title = strip_improper(ntitle)
+		title = sanitize_a0(title)
 	if (nwidth)
 		width = nwidth
 	if (nheight)
@@ -178,7 +179,8 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/get_config_data()
 	var/name = "[src_object]"
-	name = sanitize(name)
+	name = strip_improper(name)
+	name = sanitize_a0(name)
 	var/list/config_data = list(
 			"title" = title,
 			"srcObject" = list("name" = name),
@@ -477,7 +479,7 @@ nanoui is used to open and update nano browser uis
 
 //	to_chat(user, list2json_usecache(send_data))// used for debugging //NANO DEBUG HOOK
 
-	user << output(list2params(list(strip_improper(json_encode(send_data)))),"[window_id].browser:receiveUpdateData")
+	user << output(list2params(list(extA2U(json_encode(send_data)))),"[window_id].browser:receiveUpdateData")
 
  /**
   * This Topic() proc is called whenever a user clicks on a link within a Nano UI

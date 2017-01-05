@@ -230,6 +230,14 @@
 		else
 			mob.setBrainLoss(10)
 
+/datum/disease2/effect/toxiccomp
+	name = "Toxic Compensation"
+	stage = 3
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob.adjustToxLoss(2*multiplier)
+		mob.adjustBruteLoss(-2*multiplier)
+		mob.adjustFireLoss(-2*multiplier)
+
 /datum/disease2/effect/hallucinations
 	name = "Hallucinational Syndrome"
 	stage = 3
