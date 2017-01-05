@@ -29,6 +29,7 @@
 	var/obj/item/stack/material/repairing
 	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
 	var/close_door_at = 0 //When to automatically close the door, if possible
+	var/max_temperature = 1000	// K, above this temperature doors start taking damage.
 
 	//Multi-tile doors
 	dir = EAST
@@ -68,7 +69,14 @@
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
-	return
+
+/obj/machinery/door/initialize()
+	// If we are made of a specific material, adjust the maximal temperature accordingly
+	var/material/M = get_material()
+	if(!istype(M))
+		return
+	max_temperature = M.melting_point
+
 
 /obj/machinery/door/Destroy()
 	set_density(0)
@@ -155,21 +163,20 @@
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
 	if (damage > 90)
 		destroy_hits--
-		if (destroy_hits <= 0)
-			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
-			switch (Proj.damage_type)
-				if(BRUTE)
-					new /obj/item/stack/material/steel(src.loc, 2)
-					new /obj/item/stack/rods(src.loc, 3)
-				if(BURN)
-					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-			qdel(src)
+		check_break()
 
 	if(damage)
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
 		take_damage(min(damage, 100))
 
+/obj/machinery/door/proc/check_break()
+	if (destroy_hits > 0)
+		return
 
+	visible_message("<span class='danger'>\The [src.name] breaks apart!</span>")
+	new /obj/item/stack/material/steel(src.loc, 2)
+	new /obj/item/stack/rods(src.loc, 3)
+	qdel(src)
 
 /obj/machinery/door/hitby(AM as mob|obj, var/speed=5)
 
@@ -293,7 +300,7 @@
 
 /obj/machinery/door/proc/take_damage(var/damage)
 	var/initialhealth = src.health
-	src.health = max(0, src.health - damage)
+	health -= damage
 	if(src.health <= 0 && initialhealth > 0)
 		src.set_broken()
 	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
@@ -308,7 +315,9 @@
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
-	if(src.health < src.maxhealth / 4)
+	if(src.health <= 0)
+		to_chat(user, "\The [src] is broken.")
+	else if(src.health < src.maxhealth / 4)
 		to_chat(user, "\The [src] looks like it's about to break!")
 	else if(src.health < src.maxhealth / 2)
 		to_chat(user, "\The [src] looks seriously damaged!")
@@ -340,6 +349,15 @@
 				take_damage(150)
 	return
 
+/obj/machinery/door/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	..()
+	if(exposed_temperature > max_temperature)
+		take_damage(exposed_temperature / max_temperature)
+
+		// If the door is very heavily damaged (at least 2x more than the break threshold) have a chance to break apart completely.
+		if(health < (maxhealth * (-1)) && prob(5))
+			destroy_hits--
+			check_break()
 
 /obj/machinery/door/update_icon()
 	if(density)

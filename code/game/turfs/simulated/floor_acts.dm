@@ -43,3 +43,6 @@
 	for(var/obj/structure/window/W in src)
 		if(W.dir == dir_to || W.is_fulltile()) //Same direction or diagonal (full tile)
 			W.fire_act(adj_air, adj_temp, adj_volume)
+
+	for(var/obj/machinery/door/D in src)
+		D.fire_act(adj_air, adj_temp, adj_volume)
