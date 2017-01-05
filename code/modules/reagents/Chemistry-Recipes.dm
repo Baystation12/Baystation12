@@ -1909,7 +1909,7 @@
 	name = "Allies Cocktail"
 	id = "alliescocktail"
 	result = "alliescocktail"
-	required_reagents = list("classicmartini" = 1, "vodka" = 1)
+	required_reagents = list("martini" = 1, "vodka" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/demonsblood
