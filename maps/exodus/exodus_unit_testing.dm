@@ -50,7 +50,8 @@
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/storage/warehouse = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/crew_quarters/cafe = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/crew_quarters/cafe = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/security/nuke_storage = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 
