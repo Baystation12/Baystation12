@@ -176,55 +176,55 @@
 	use_sound = null
 
 /obj/item/weapon/storage/pill_bottle/antitox
-	name = "bottle of Dylovene pills"
+	name = "bottle of dylovene pills"
 	desc = "Contains pills used to counter toxins."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/antitox = 7)
 
 /obj/item/weapon/storage/pill_bottle/charcoal
-	name = "bottle of Activated Charcoal pills"
+	name = "bottle of activated charcoal pills"
 	desc = "Contains pills used to counter toxins."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/charcoal = 7)
 
 /obj/item/weapon/storage/pill_bottle/bicaridine
-	name = "bottle of Bicaridine pills"
+	name = "bottle of bicaridine pills"
 	desc = "Contains pills used to stabilize the severely injured."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/bicaridine = 7)
 
 /obj/item/weapon/storage/pill_bottle/metorapan
-	name = "bottle of Metorapan pills"
+	name = "bottle of metorapan pills"
 	desc = "Contains pills used to stabilize the injured."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/metorapan = 7)
 
 /obj/item/weapon/storage/pill_bottle/dexalin
-	name = "bottle of Dexalin pills"
+	name = "bottle of dexalin pills"
 	desc = "Contains pills used to treat cases of oxygen deprivation."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/dexalin = 7)
 
 /obj/item/weapon/storage/pill_bottle/dexalin_plus
-	name = "bottle of Dexalin Plus pills"
+	name = "bottle of dexalin plus pills"
 	desc = "Contains pills used to treat extreme cases of oxygen deprivation."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/dexalin_plus = 7)
 
 /obj/item/weapon/storage/pill_bottle/dermaline
-	name = "bottle of Dermaline pills"
+	name = "bottle of dermaline pills"
 	desc = "Contains pills used to treat burn wounds."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/dermaline = 7)
 
 /obj/item/weapon/storage/pill_bottle/inaprovaline
-	name = "bottle of Inaprovaline pills"
+	name = "bottle of inaprovaline pills"
 	desc = "Contains pills used to stabilize patients."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/inaprovaline = 7)
 
 /obj/item/weapon/storage/pill_bottle/chloromydride
-	name = "bottle of Chloromydride pills"
+	name = "bottle of chloromydride pills"
 	desc = "Contains pills used to stabilize patients."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/chloromydride = 7)
@@ -236,38 +236,38 @@
 	startswith = list(/obj/item/weapon/reagent_containers/pill/kelotane = 7)
 
 /obj/item/weapon/storage/pill_bottle/spaceacillin
-	name = "bottle of Spaceacillin pills"
+	name = "bottle of spaceacillin pills"
 	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/spaceacillin = 7)
 
 /obj/item/weapon/storage/pill_bottle/tramadol
-	name = "bottle of Tramadol pills"
+	name = "bottle of tramadol pills"
 	desc = "Contains pills used to relieve pain."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/tramadol = 7)
 
 /obj/item/weapon/storage/pill_bottle/paracetamol
-	name = "bottle of Paracetamol pills"
+	name = "bottle of paracetamol pills"
 	desc = "Contains pills used to relieve pain."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paracetamol = 7)
 
 //Baycode specific Psychiatry pills.
 /obj/item/weapon/storage/pill_bottle/citalopram
-	name = "bottle of Citalopram pills"
+	name = "bottle of citalopram pills"
 	desc = "Mild antidepressant. For use in individuals suffering from depression or anxiety. 15u dose per pill."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/citalopram = 7)
 
 /obj/item/weapon/storage/pill_bottle/methylphenidate
-	name = "bottle of Methylphenidate pills"
+	name = "bottle of methylphenidate pills"
 	desc = "Mental stimulant. For use in individuals suffering from ADHD, or general concentration issues. 15u dose per pill."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/methylphenidate = 7)
 
 /obj/item/weapon/storage/pill_bottle/paroxetine
-	name = "bottle of Paroxetine pills"
+	name = "bottle of paroxetine pills"
 	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 7)
