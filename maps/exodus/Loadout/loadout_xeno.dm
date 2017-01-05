@@ -127,3 +127,8 @@
 	display_name = "toeless jackboots"
 	path = /obj/item/clothing/shoes/jackboots/unathi
 	sort_category = "Xenowear"
+
+/datum/gear/shoes/wrk_toeless
+	display_name = "toeless workboots"
+	path = /obj/item/clothing/shoes/workboots/toeless
+	sort_category = "Xenowear"

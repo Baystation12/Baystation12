@@ -7,7 +7,7 @@
 
 /obj/structure/alien/proc/healthcheck()
 	if(health <=0)
-		density = 0
+		set_density(0)
 		qdel(src)
 	return
 

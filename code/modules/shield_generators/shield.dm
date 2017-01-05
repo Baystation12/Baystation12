@@ -76,7 +76,7 @@
 		
 	gen.damaged_segments |= src
 	disabled_for += duration
-	density = 0
+	set_density(0)
 	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()
@@ -92,7 +92,7 @@
 	diffused_for = max(0, diffused_for - 1)
 
 	if(!disabled_for && !diffused_for)
-		density = 1
+		set_density(1)
 		invisibility = 0
 		update_nearby_tiles()
 		update_icon()
@@ -112,7 +112,7 @@
 		
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
-	density = 0
+	set_density(0)
 	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()

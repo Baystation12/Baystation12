@@ -137,7 +137,7 @@
 	update_nearby_tiles(1)
 
 /obj/structure/foamedmetal/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles(1)
 	..()
 

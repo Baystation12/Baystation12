@@ -48,7 +48,7 @@
 			user.do_attack_animation(src)
 			playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
 			isbroken = 1
-			density = 0
+			set_density(0)
 			icon_state = "pylon-broken"
 			set_light(0)
 		else
@@ -67,7 +67,7 @@
 	if(isbroken)
 		to_chat(user, "You repair the pylon.")
 		isbroken = 0
-		density = 1
+		set_density(1)
 		icon_state = "pylon"
 		set_light(5)
 

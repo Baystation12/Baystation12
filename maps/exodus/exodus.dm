@@ -11,15 +11,17 @@
 
 	#include "loadout/loadout_accessories.dm"
 	#include "loadout/loadout_eyes.dm"
-	#include "loadout/loadout_gloves.dm"
 	#include "loadout/loadout_head.dm"
 	#include "loadout/loadout_shoes.dm"
 	#include "loadout/loadout_suit.dm"
 	#include "loadout/loadout_uniform.dm"
 	#include "loadout/loadout_xeno.dm"
 
-	#include "../shared/exodus_torch_areas.dm"
-	#include "../shared/exodus_torch_zas_tests.dm"
+	#include "../shared/exodus_torch/areas.dm"
+	#include "../shared/exodus_torch/zas_tests.dm"
+	#include "../shared/exodus_torch/loadout/loadout_gloves.dm"
+	#include "../shared/exodus_torch/loadout/loadout_head.dm"
+	#include "../shared/exodus_torch/loadout/loadout_suit.dm"
 
 	#include "exodus-0.dmm"
 	#include "exodus-1.dmm"
