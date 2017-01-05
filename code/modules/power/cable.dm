@@ -561,6 +561,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		w_class = ITEM_SIZE_SMALL
 
 /obj/item/stack/cable_coil/examine(mob/user)
+	..()
 	if(get_dist(src, user) > 1)
 		return
 
