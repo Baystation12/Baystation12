@@ -44,6 +44,7 @@
 	#include "../shared/exodus_torch/zas_tests.dm"
 	#include "../shared/exodus_torch/loadout/loadout_gloves.dm"
 	#include "../shared/exodus_torch/loadout/loadout_head.dm"
+	#include "../shared/exodus_torch/loadout/loadout_shoes.dm"
 	#include "../shared/exodus_torch/loadout/loadout_suit.dm"
 
 	#include "torch-1.dmm"
