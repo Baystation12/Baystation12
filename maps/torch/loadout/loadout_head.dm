@@ -39,7 +39,6 @@
 						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
 						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
 
-
 /datum/gear/head/hairflower
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender")
 
