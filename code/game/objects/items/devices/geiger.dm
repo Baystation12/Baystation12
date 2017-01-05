@@ -1,7 +1,7 @@
-#define RAD_LEVEL_LOW 5 //10 // Around the level at which radiation starts to become harmful
-#define RAD_LEVEL_MODERATE 15 //15
-#define RAD_LEVEL_HIGH 50 //50
-#define RAD_LEVEL_VERY_HIGH 100 //100
+#define RAD_LEVEL_LOW 1 // Around the level at which radiation starts to become harmful
+#define RAD_LEVEL_MODERATE 5
+#define RAD_LEVEL_HIGH 25
+#define RAD_LEVEL_VERY_HIGH 75
 
 //Geiger counter
 //Rewritten version of TG's geiger counter
