@@ -25,7 +25,7 @@
 	if(!proximity) return
 	if(user.mind && (user.mind.assigned_role == "Chaplain"))
 		if(A.reagents && A.reagents.has_reagent("water")) //blesses all the water in the holder
-			to_chat(user, "<span class='notice'>You bless [A].</span>")
+			to_chat(user, "<span class='notice'>You bless \the [A].</span>") // I wish it was this easy in nethack
 			var/water2holy = A.reagents.get_reagent_amount("water")
 			A.reagents.del_reagent("water")
 			A.reagents.add_reagent("holywater",water2holy)

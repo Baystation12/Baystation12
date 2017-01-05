@@ -211,3 +211,25 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 
 /datum/ghosttrap/familiar/welcome_candidate(var/mob/target)
 	return 0
+
+/datum/ghosttrap/cult
+	object = "cultist"
+	ban_checks = list("cultist")
+	pref_check = MODE_CULTIST
+	ghost_trap_message = "They are occupying a cultist's body now."
+	ghost_trap_role = "Cultist"
+
+/datum/ghosttrap/cult/welcome_candidate(var/mob/target)
+	var/obj/item/device/soulstone/S = target.loc
+	if(istype(S))
+		if(S.is_evil)
+			cult.add_antagonist(target.mind)
+			target << "<b>Remember, you serve the one who summoned you first, and the cult second.</b>"
+		else
+			target << "<b>This soultone has been purified. You do not belong to the cult.</b>"
+			target << "<b>Remember, you only serve the one who summoned you.</b>"
+
+/datum/ghosttrap/cult/shade
+	object = "soul stone"
+	ghost_trap_message = "They are occupying a soul stone now."
+	ghost_trap_role = "Shade"

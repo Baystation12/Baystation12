@@ -21,16 +21,13 @@
 /turf/unsimulated/beach/cultify()
 	return
 
-/turf/unsimulated/floor/cultify()
-	cultify_floor()
-
 /turf/unsimulated/wall/cultify()
 	cultify_wall()
 
-/turf/proc/cultify_floor()
-	if((icon_state != "cult")&&(icon_state != "cult-narsie"))
-		name = "engraved floor"
-		icon_state = "cult"
+/turf/simulated/floor/proc/cultify_floor()
+	set_flooring(get_flooring_data(/decl/flooring/reinforced/cult))
+	cult.add_cultiness(CULTINESS_PER_TURF)
 
 /turf/proc/cultify_wall()
-	ChangeTurf(/turf/unsimulated/wall/cult)
+	ChangeTurf(/turf/simulated/wall/cult)
+	cult.add_cultiness(CULTINESS_PER_TURF)

@@ -7,6 +7,9 @@
 	icon_state = "cult"
 /turf/simulated/wall/cult/New(var/newloc)
 	..(newloc,"cult","cult2")
+/turf/simulated/wall/cult/dismantle_wall()
+	cult.remove_cultiness(CULTINESS_PER_TURF)
+	..()
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."

@@ -241,8 +241,7 @@
 
 	construct_spells = list(
 			/spell/targeted/harvest,
-			/spell/aoe_turf/knock/harvester,
-			/spell/rune_write
+			/spell/aoe_turf/knock/harvester
 		)
 
 ////////////////Glow//////////////////
