@@ -84,7 +84,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 	var/dmg_coef = 1
 	var/threshold_coef = 1
 	if(CE_STABLE in owner.chem_effects)
-		dmg_coef = 10/owner.chem_effects[CE_STABLE]
+		dmg_coef = min(1, 10/owner.chem_effects[CE_STABLE]) //TODO: add effect for increased damage
 		threshold_coef = min(dmg_coef / CE_STABLE_THRESHOLD, 1)
 
 	switch(blood_volume)
