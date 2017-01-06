@@ -26,3 +26,8 @@
 	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
 						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
 						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+
+/datum/gear/shoes/flats
+	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
+						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
+						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
