@@ -5,16 +5,16 @@
 
 /obj/item/weapon/paper/talisman/attack_self(var/mob/living/user)
 	if(iscultist(user))
-		user << "Attack your target to use this talisman."
+		to_chat(user, "Attack your target to use this talisman.")
 	else
-		user << "You see strange symbols on the paper. Are they supposed to mean something?"
+		to_chat(user, "You see strange symbols on the paper. Are they supposed to mean something?")
 
 /obj/item/weapon/paper/talisman/attack(var/mob/living/M, var/mob/living/user)
 	return
 
 /obj/item/weapon/paper/talisman/stun/attack_self(var/mob/living/user)
 	if(iscultist(user))
-		user << "This is a stun talisman."
+		to_chat(user, "This is a stun talisman.")
 	..()
 
 /obj/item/weapon/paper/talisman/stun/attack(var/mob/living/M, var/mob/living/user)
@@ -30,19 +30,18 @@
 
 	if(issilicon(M))
 		M.Weaken(15)
-		admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
 	else if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(!(HULK in C.mutations))
 			C.silent += 15
 		C.Weaken(25)
 		C.Stun(25)
-		admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
+	admin_attack_log(user, M, "Used a stun talisman.", "Was victim of a stun talisman.", "used a stun talisman on")
 	qdel(src)
 
 /obj/item/weapon/paper/talisman/emp/attack_self(var/mob/living/user)
 	if(iscultist(user))
-		user << "This is an emp talisman."
+		to_chat(user, "This is an emp talisman.")
 	..()
 
 /obj/item/weapon/paper/talisman/emp/afterattack(var/atom/target, var/mob/user, var/proximity)

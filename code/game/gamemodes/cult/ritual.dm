@@ -11,25 +11,25 @@
 	..()
 	if(iscultist(user) && !iscultist(M))
 		M.take_organ_damage(0, rand(5, 20))
-		M << "<span class='danger'>You feel searing heat inside!</span>"
+		to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
 
 /obj/item/weapon/book/tome/attack_self(var/mob/user)
 	if(!iscultist(user))
-		user << "\The [src] seems full of illegible scribbles. Is this a joke?"
+		to_chat(user, "\The [src] seems full of illegible scribbles. Is this a joke?")
 	else
-		user << "Hold \the [src] in your hand while drawing a rune to use it."
+		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
 /obj/item/weapon/book/tome/examine(var/mob/user)
 	if(!iscultist(user))
-		user << "An old, dusty tome with frayed edges and a sinister looking cover."
+		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
-		user << "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
+		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/weapon/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
 	if(A.reagents && A.reagents.has_reagent("holywater"))
-		user << "<span class='notice'>You unbless \the [A].</span>"
+		to_chat(user, "<span class='notice'>You unbless \the [A].</span>")
 		var/holy2water = A.reagents.get_reagent_amount("holywater")
 		A.reagents.del_reagent("holywater")
 		A.reagents.add_reagent("water", holy2water)
@@ -44,19 +44,19 @@
 	if(istype(get_active_hand(), /obj/item/weapon/book/tome) || istype(get_inactive_hand(), /obj/item/weapon/book/tome))
 		has_tome = 1
 	else if(tome_required && mob_needs_tome())
-		src << "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>"
+		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
 		return
 	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
 	if(T.holy)
-		src << "<span class='warning'>This place is blessed, you may not draw runes on it - defile it first.</span>"
+		to_chat(src, "<span class='warning'>This place is blessed, you may not draw runes on it - defile it first.</span>")
 		return
 	if(!istype(T, /turf/simulated))
-		src << "<span class='warning'>You need more space to draw a rune here.</span>"
+		to_chat(src, "<span class='warning'>You need more space to draw a rune here.</span>")
 		return
 	if(locate(/obj/effect/rune) in T)
-		src << "<span class='warning'>There's already a rune here.</span>" // Don't cross the runes
+		to_chat(src, "<span class='warning'>There's already a rune here.</span>") // Don't cross the runes
 		return
 	if(T.icon_state == "cult" || T.icon_state == "cult-narsie")
 		cult_ground = 1
@@ -107,8 +107,8 @@
 	return 0
 
 /mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(vessel && !vessel.has_reagent("blood", 440))
-		src << "<span class='danger'>You are too weak to draw runes.</span>"
+	if(vessel && !vessel.has_reagent("blood", species.blood_volume * 0.7))
+		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()
 
@@ -260,7 +260,7 @@
 	set name = "Communicate"
 
 	if(stat)
-		src << "<span class='warning'>Not when you are incapacitated.</span>"
+		to_chat(src, "<span class='warning'>Not when you are incapacitated.</span>")
 		return
 
 	message_cult_communicate()
@@ -276,11 +276,11 @@
 	log_and_message_admins("used a communicate verb to say '[input]'")
 	for(var/datum/mind/H in cult.current_antagonists)
 		if(H.current)
-			H.current << "<span class='cult'>[input]</span>"
+			to_chat(H.current, "<span class='cult'>[input]</span>")
 
 /mob/living/carbon/cult_communicate()
 	if(handcuffed)
-		src << "<span class='warning'>You need at least your hands free to do this.</span>"
+		to_chat(src, "<span class='warning'>You need at least your hands free to do this.</span>")
 		return
 	..()
 

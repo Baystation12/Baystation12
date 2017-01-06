@@ -31,6 +31,7 @@ var/datum/antagonist/cultist/cult
 	antaghud_indicator = "hudcultist"
 
 	var/allow_narsie = 1
+	var/powerless = 0
 	var/datum/mind/sacrifice_target
 	var/list/obj/effect/rune/teleport/teleport_runes = list()
 	var/list/rune_strokes = list()
@@ -119,7 +120,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 2
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				H.current << "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>"//TODO
+				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")//TODO
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -127,7 +128,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 3
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				H.current << "<span class='cult'>You feel that the fabric of reality is tearing. You can feel the Geometer of Blood's presence growing stronger.</span>"//TODO
+				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing. You can feel the Geometer of Blood's presence growing stronger.</span>")//TODO
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -135,7 +136,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 4
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				H.current << "<span class='cult'>The world is at end. The veil is as thin as ever. The time has come.</span>"//TODO
+				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever. The time has come.</span>")//TODO
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -144,7 +145,7 @@ var/datum/antagonist/cultist/cult
 	if(!iscultist(M) || !M.mind)
 		return
 
-	M << "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>YOU ARE MAKING A MISTAKE</a></span>"
+	to_chat(M, "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>YOU ARE MAKING A MISTAKE</a></span>")
 
 /datum/antagonist/cultist/Topic(href, href_list)
 	if(href_list["confirmleave"])
@@ -233,7 +234,7 @@ var/datum/antagonist/cultist/cult
 	log_and_message_admins("set cult's conversion blurb to '[newblurb]'")
 	for(var/datum/mind/H in cult.current_antagonists)
 		if(H.current)
-			H.current << "<span class='cult'>Conversion blurb is now: '[newblurb]'</span>"
+			to_chat(H.current, "<span class='cult'>Conversion blurb is now: '[newblurb]'</span>")
 
 /mob/proc/cult_ooc(var/msg as text)
 	set name = "Cult OOC"
@@ -248,4 +249,4 @@ var/datum/antagonist/cultist/cult
 
 	for(var/datum/mind/H in cult.current_antagonists)
 		if(H.current)
-			H.current << "<span class='cult'>Cult OOC: [msg]</span>"
+			to_chat(H.current, "<span class='cult'>Cult OOC: [msg]</span>")

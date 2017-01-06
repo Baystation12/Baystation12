@@ -21,7 +21,7 @@
 	set desc = "Flick some lights around you."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	for(var/obj/machinery/light/L in range(3))
@@ -36,7 +36,7 @@
 	set desc = "Write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	var/doodle_color = "#A10808"
@@ -48,7 +48,7 @@
 				choices += B
 
 		if(!choices.len)
-			src << "<span class = 'warning'>There is no blood to use nearby.</span>"
+			to_chat(src, "<span class = 'warning'>There is no blood to use nearby.</span>")
 			return
 
 		var/obj/effect/decal/cleanable/blood/choice = input(src, "What blood would you like to use?") in null|choices
@@ -60,14 +60,14 @@
 
 	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))
-		src << "<span class='warning'>You cannot doodle there.</span>"
+		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
 		return
 
 	var/num_doodles = 0
 	for(var/obj/effect/decal/cleanable/blood/writing/W in T)
 		num_doodles++
 	if(num_doodles > 4)
-		src << "<span class='warning'>There is no space to write on!</span>"
+		to_chat(src, "<span class='warning'>There is no space to write on!</span>")
 		return
 
 	var/max_length = 50
@@ -77,7 +77,7 @@
 	if(message)
 		if(length(message) > max_length)
 			message += "-"
-			src << "<span class='warning'>You ran out of blood to write with!</span>"
+			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
 
 		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
 		W.basecolor = doodle_color
@@ -85,9 +85,9 @@
 		W.message = message
 		W.add_hiddenprint(src)
 		if(!bloodless)
-			W.visible_message("<span class='warning'>Invisible fingers crudely paint something in blood on [T].</span>")
+			W.visible_message("<span class='warning'>Invisible fingers crudely paint something in blood on \the [T].</span>")
 		else
-			W.visible_message("<span class='warning'>Blood appears out of nowhere as invisible fingers crudely paint something on [T].</span>")
+			W.visible_message("<span class='warning'>Blood appears out of nowhere as invisible fingers crudely paint something on \the [T].</span>")
 
 	ghost_magic_cd = world.time + 30 SECONDS
 
@@ -97,7 +97,7 @@
 	set desc = "Make a sound of glass being shattered."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	playsound(loc, "shatter", 50, 1)
@@ -110,7 +110,7 @@
 	set desc = "Make a sound of a sword hit."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1)
@@ -123,7 +123,7 @@
 	set desc = "Move a small item to where you are."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	var/turf/T = get_turf(src)
@@ -134,7 +134,7 @@
 			choices += I
 
 	if(!choices.len)
-		src << "<span class='warning'>There are no suitable items nearby.</span>"
+		to_chat(src, "<span class='warning'>There are no suitable items nearby.</span>")
 		return
 
 	var/obj/item/choice = input(src, "What item would you like to pull?") in null|choices
@@ -152,7 +152,7 @@
 	set desc = "Whisper to a human of your choice. If they are adjusted enough, they'll hear you."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	var/list/mob/living/choices = list()
@@ -167,10 +167,10 @@
 
 	if(message)
 		if(iscultist(choice) || anyone)
-			choice << "<span class='notice'>You hear a faint whisper... It says... \"[message]\"</span>"
+			to_chat(choice, "<span class='notice'>You hear a faint whisper... It says... \"[message]\"</span>")
 		else
-			choice << "<span class='notice'>You hear a faint whisper, but you can't make out the words.</span>"
-		src << "You whisper to \the [choice]. Perhaps they heard you."
+			to_chat(choice, "<span class='notice'>You hear a faint whisper, but you can't make out the words.</span>")
+		to_chat(src, "You whisper to \the [choice]. Perhaps they heard you.")
 
 	ghost_magic_cd = world.time + 100 SECONDS
 
@@ -180,7 +180,7 @@
 	set desc = "Bite or scratch someone."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	var/list/mob/living/carbon/human/choices = list()
@@ -192,9 +192,9 @@
 		return
 
 	var/method = pick("bit", "scratched")
-	choice << "<span class='danger'>Something invisible [method] you!</span>"
+	to_chat(choice, "<span class='danger'>Something invisible [method] you!</span>")
 	choice.apply_effect(5, AGONY, 0)
-	src << "<span class='notice'>You [method] \the [choice].</span>"
+	to_chat(src, "<span class='notice'>You [method] \the [choice].</span>")
 
 	ghost_magic_cd = world.time + 60 SECONDS
 
@@ -204,7 +204,7 @@
 	set desc = "Pass through someone, making them feel the chill of afterlife for a moment."
 
 	if(ghost_magic_cd > world.time)
-		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
 		return
 
 	var/list/mob/living/carbon/human/choices = list()
@@ -215,9 +215,9 @@
 	if(!choice)
 		return
 
-	choice << "<span class='danger'>You feel as if something cold passed through you!</span>"
+	to_chat(choice, "<span class='danger'>You feel as if something cold passed through you!</span>")
 	choice.apply_effect(5, AGONY, 0)
-	src << "<span class='notice'>You pass through \the [choice], giving them a sudden chill.</span>"
+	to_chat(src, "<span class='notice'>You pass through \the [choice], giving them a sudden chill.</span>")
 
 	ghost_magic_cd = world.time + 60 SECONDS
 
