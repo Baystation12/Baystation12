@@ -462,11 +462,3 @@
 	result = "sarcohemalazapine"
 	required_reagents = list("osteolazaraine" = 1, "thrombocytolamine" = 1, "phoron" = 10, "hydrogen" = 10, "uranium" = 10, "radium" = 5, "virusfood" = 1, "mutagen" = 2)
 	result_amount = 1
-
-/datum/chemical_reaction/adminordrazine
-	name = "Adminordrazine"
-	id = "adminordrazine"
-	result = "adminordrazine"
-	required_reagents = list("sodiumchloride" = 1, "potassium_chloride" = 1, "lube" = 1, "chloralhydrate" = 1)
-	catalysts = list("adminordrazine" = 1)
-	result_amount = 3

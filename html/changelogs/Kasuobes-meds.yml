@@ -24,7 +24,7 @@ changes:
   - tweak: "Synaptizine: OD 15u; increased metabolism rate; will cause minor brain damage"
   - tweak: "Alkyzine: OD 15u; increased metabolism rate"
   - tweak: "Peridaxon: OD 15u; decreased metabolism rate"
-  - tweak: "Hyperzine: increased metabolism rate; will cause minor brain damage and poisoning"
+  - tweak: "Hyperzine: increased metabolism rate; prevents pain crit and passing out from pain; will cause minor brain damage and poisoning"
   - tweak: "Arithrazine: increased radiation removal"
   - tweak: "Carbon: no longer removes ingested reagents"
   - tweak: "Iron: no longer restores blood"

@@ -676,7 +676,7 @@
 /datum/reagent/primordapine
 	name = "Primordapine"
 	id = "primordapine"
-	description = "Am experimental, long lasting drug used increase blood production and treat severe burns and traumas."
+	description = "An experimental, long lasting drug used increase blood production and treat severe burns and traumas."
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#FFEA97"
