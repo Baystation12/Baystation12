@@ -95,32 +95,6 @@
 		heal_overall_damage(0, -amount)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
-/mob/living/carbon/human/proc/adjustBruteLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
-	amount = amount*species.brute_mod
-	if (organ_name in organs_by_name)
-		var/obj/item/organ/external/O = get_organ(organ_name)
-
-		if(amount > 0)
-			O.take_damage(amount, 0, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
-		else
-			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
-			O.heal_damage(-amount, 0, internal=0, robo_repair=(O.robotic >= ORGAN_ROBOT))
-
-	BITSET(hud_updateflag, HEALTH_HUD)
-
-/mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
-	amount = amount*species.burn_mod
-	if (organ_name in organs_by_name)
-		var/obj/item/organ/external/O = get_organ(organ_name)
-
-		if(amount > 0)
-			O.take_damage(0, amount, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
-		else
-			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
-			O.heal_damage(0, -amount, internal=0, robo_repair=(O.robotic >= ORGAN_ROBOT))
-
-	BITSET(hud_updateflag, HEALTH_HUD)
-
 /mob/living/carbon/human/Stun(amount)
 	if(HULK in mutations)	return
 	..()
@@ -250,6 +224,8 @@
 	updatehealth()
 
 
+//TODO reorganize damage procs so that there is a clean API for damaging living mobs
+
 /*
 In most cases it makes more sense to use apply_damage() instead! And make sure to check armour if applicable.
 */
@@ -258,11 +234,16 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 //It automatically updates health status
 /mob/living/carbon/human/take_organ_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0)
 	var/list/obj/item/organ/external/parts = get_damageable_organs()
-	if(!parts.len)	return
+	if(!parts.len)
+		return
+
 	var/obj/item/organ/external/picked = pick(parts)
-	if(picked.take_damage(brute,burn,sharp,edge))
+	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
+
+	if(picked.take_damage(brute, burn, damage_flags))
 		UpdateDamageIcon()
 		BITSET(hud_updateflag, HEALTH_HUD)
+
 	updatehealth()
 
 
@@ -292,13 +273,14 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	if(status_flags & GODMODE)	return	//godmode
 	var/list/obj/item/organ/external/parts = get_damageable_organs()
 	var/update = 0
+	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
 	while(parts.len && (brute>0 || burn>0) )
 		var/obj/item/organ/external/picked = pick(parts)
 
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
 
-		update |= picked.take_damage(brute,burn,sharp,edge,used_weapon)
+		update |= picked.take_damage(brute, burn, damage_flags, used_weapon)
 		brute	-= (picked.brute_dam - brute_was)
 		burn	-= (picked.burn_dam - burn_was)
 
