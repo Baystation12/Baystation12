@@ -133,3 +133,33 @@
 	display_name = "toeless workboots"
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
+
+/datum/gear/eyes/tajblind
+	display_name = "embroidered blindfold"
+	path = /obj/item/clothing/glasses/tajblind
+	sort_category = "Xenowear"
+	cost = 0
+
+/datum/gear/eyes/tajblind/sec
+	display_name = "sleek blindfold"
+	path = /obj/item/clothing/glasses/tajblind/sec
+	whitelisted = "Tajara"
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = list("Security Officer","Head of Security","Warden","Detective")
+
+/datum/gear/eyes/tajblind/med
+	display_name = "medical blindfold"
+	path = /obj/item/clothing/glasses/tajblind/med
+	whitelisted = "Tajara"
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
+
+/datum/gear/eyes/tajblind/meson
+	display_name = "industrial blindfold"
+	path = /obj/item/clothing/glasses/tajblind/meson
+	whitelisted = "Tajara"
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician", "Shaft Miner")
