@@ -195,6 +195,12 @@
 			for (var/obj/item/organ/external/E in H.organs)
 				E.min_broken_damage = initial(E.min_broken_damage)
 
+/datum/disease2/effect/eternaly
+	name =  "Eternal Youth"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		to_chat(mob, "<span class='notice'>You feel yourself  a lot younger.</span>")
+
 ////////////////////////STAGE 3/////////////////////////////////
 
 /datum/disease2/effect/toxins
@@ -230,13 +236,30 @@
 		else
 			mob.setBrainLoss(10)
 
+// These below potentially need rebalance - Destinat1on
+
 /datum/disease2/effect/toxiccomp
 	name = "Toxic Compensation"
 	stage = 3
+	var/base_damage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.adjustToxLoss(2*multiplier)
-		mob.adjustBruteLoss(-2*multiplier)
-		mob.adjustFireLoss(-2*multiplier)
+		if(mob.getFireLoss() > 0 || mob.getBruteLoss() > 0)
+			mob.adjustFireLoss(-base_damage * multiplier)
+			mob.adjustBruteLoss(-base_damage * multiplier)
+			mob.adjustToxLoss(base_damage * multiplier)
+
+/datum/disease2/effect/toxicfilter
+	name = "Toxic Filter"
+	stage = 3
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(mob.getToxLoss() > 0)
+			mob.adjustToxLoss(-8 * multiplier)
+
+/datum/disease2/effect/selfrespiration
+	name = "Self Respiration"
+	stage = 3
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob.reagents.add_reagent("dexalin", 1 * multiplier)
 
 /datum/disease2/effect/hallucinations
 	name = "Hallucinational Syndrome"
