@@ -358,3 +358,77 @@
 	desc = "A set of implantable lenses designed to augment your vision."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
+
+/obj/item/clothing/glasses/tajblind
+	name = "embroidered veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes."
+	icon_state = "tajblind"
+	item_state = "tajblind"
+	action_button_name = "Switch Vision Mode"
+	var/up = 0
+	flash_protection = FLASH_PROTECTION_NONE
+	tint = TINT_NONE
+
+/obj/item/clothing/glasses/tajblind/attack_self()
+	toggle()
+
+
+/obj/item/clothing/glasses/tajblind/verb/toggle()
+	set category = "Object"
+	set name = "Switch Vision Mode"
+	set src in usr
+
+	if(usr.canmove && !usr.incapacitated())
+		if(src.up)
+			src.up = !src.up
+			flags_inv |= HIDEEYES
+			body_parts_covered |= EYES
+			icon_state = initial(icon_state)
+			flash_protection = initial(flash_protection)
+			tint = initial(tint)
+			to_chat(usr, "You activate \the [src], allowing you to see.")
+		else
+			src.up = !src.up
+			flags_inv &= HIDEEYES
+			body_parts_covered &= EYES
+			icon_state = initial(icon_state)
+			flash_protection = FLASH_PROTECTION_MAJOR
+			tint = TINT_BLIND
+			to_chat(usr, "You deactivate \the [src], obscuring your vision.")
+		update_clothing_icon()
+		usr.update_action_buttons()
+
+/obj/item/clothing/glasses/tajblind/sec
+	name = "sleek veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
+	icon_state = "tajblind_sec"
+	item_state = "tajblind_sec"
+	action_button_name = "Switch Vision Mode"
+	flash_protection = FLASH_PROTECTION_MAJOR
+	tint = TINT_NONE
+	hud = /obj/item/clothing/glasses/hud/security
+
+
+/obj/item/clothing/glasses/tajblind/med
+	name = "lightweight veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
+	icon_state = "tajblind_med"
+	item_state = "tajblind_med"
+	action_button_name = "Switch Vision Mode"
+	flash_protection = FLASH_PROTECTION_NONE
+	tint = TINT_NONE
+	hud = /obj/item/clothing/glasses/hud/health
+
+/obj/item/clothing/glasses/tajblind/meson
+	name = "industrial veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
+	icon_state = "tajblind_meson"
+	item_state = "tajblind_meson"
+	action_button_name = "Switch Vision Mode"
+	flash_protection = FLASH_PROTECTION_NONE
+	tint = TINT_NONE
+	vision_flags = SEE_TURFS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+/obj/item/clothing/glasses/tajblind/meson/New()
+	..()
+	overlay = global_hud.meson
