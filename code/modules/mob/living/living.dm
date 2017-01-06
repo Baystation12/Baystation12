@@ -195,24 +195,7 @@ default behaviour is:
 
 //sort of a legacy burn method for /electrocute, /shock, and the e_chair
 /mob/living/proc/burn_skin(burn_amount)
-	if(istype(src, /mob/living/carbon/human))
-//		log_debug(burn_skin(), mutations=[mutations]")
-
-		if(mShock in src.mutations) //shockproof
-			return 0
-		if (COLD_RESISTANCE in src.mutations) //fireproof
-			return 0
-		var/mob/living/carbon/human/H = src	//make this damage method divide the damage to be done among all the body parts, then burn each body part for that much damage. will have better effect then just randomly picking a body part
-		var/divided_damage = (burn_amount)/(H.organs.len)
-		var/extradam = 0	//added to when organ is at max dam
-		for(var/obj/item/organ/external/affecting in H.organs)
-			if(!affecting)	continue
-			if(affecting.take_damage(0, divided_damage+extradam))	//TODO: fix the extradam stuff. Or, ebtter yet...rewrite this entire proc ~Carn
-				H.UpdateDamageIcon()
-		H.updatehealth()
-		return 1
-	else if(istype(src, /mob/living/silicon/ai))
-		return 0
+	take_overall_damage(0, burn_amount)
 
 /mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
 	var/temperature = actual
@@ -245,69 +228,69 @@ default behaviour is:
 
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	bruteloss = min(max(bruteloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	bruteloss = Clamp(bruteloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
 
 /mob/living/proc/adjustOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	oxyloss = min(max(oxyloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	oxyloss = Clamp(oxyloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	oxyloss = amount
+	oxyloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getToxLoss()
 	return toxloss
 
 /mob/living/proc/adjustToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	toxloss = min(max(toxloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	toxloss = Clamp(toxloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	toxloss = amount
+	toxloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getFireLoss()
 	return fireloss
 
 /mob/living/proc/adjustFireLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	fireloss = min(max(fireloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	fireloss = Clamp(fireloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss
 
 /mob/living/proc/adjustCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = min(max(cloneloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	cloneloss = Clamp(cloneloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = amount
+	cloneloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getBrainLoss()
 	return brainloss
 
 /mob/living/proc/adjustBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = min(max(brainloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	brainloss = Clamp(brainloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setBrainLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = amount
+	brainloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getHalLoss()
 	return halloss
 
 /mob/living/proc/adjustHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = min(max(halloss + amount, 0),(maxHealth - config.health_threshold_dead))
+	halloss = Clamp(halloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = amount
+	halloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
