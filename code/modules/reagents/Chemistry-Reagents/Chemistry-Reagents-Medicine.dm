@@ -507,6 +507,7 @@
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_STIM)
 	M.stuttering += 1
 	M.make_jittery(5)
 	M.adjustBrainLoss(removed) //very slow brain damage
