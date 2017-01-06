@@ -134,11 +134,6 @@
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
 
-/datum/gear/eyes/tajblind
-	display_name = "embroidered blindfold"
-	path = /obj/item/clothing/glasses/tajblind
-	sort_category = "Xenowear"
-	cost = 0
 
 /datum/gear/eyes/tajblind/sec
 	display_name = "sleek blindfold"
