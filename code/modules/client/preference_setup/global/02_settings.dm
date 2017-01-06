@@ -8,12 +8,14 @@
 
 /datum/category_item/player_setup_item/player_global/settings/load_preferences(var/savefile/S)
 	S["lastchangelog"]        >> pref.lastchangelog
+	S["lastsolchangelog"]     >> pref.lastsolchangelog
 	S["default_slot"]	      >> pref.default_slot
 	S["preferences"]          >> pref.preferences_enabled
 	S["preferences_disabled"] >> pref.preferences_disabled
 
 /datum/category_item/player_setup_item/player_global/settings/save_preferences(var/savefile/S)
 	S["lastchangelog"]        << pref.lastchangelog
+	S["lastsolchangelog"]     << pref.lastsolchangelog
 	S["default_slot"]         << pref.default_slot
 	S["preferences"]          << pref.preferences_enabled
 	S["preferences_disabled"] << pref.preferences_disabled
@@ -47,6 +49,7 @@
 			pref.preferences_disabled -= key
 
 	pref.lastchangelog	= sanitize_text(pref.lastchangelog, initial(pref.lastchangelog))
+	pref.lastsolchangelog	= sanitize_text(pref.lastsolchangelog, initial(pref.lastsolchangelog))
 	pref.default_slot	= sanitize_integer(pref.default_slot, 1, config.character_slots, initial(pref.default_slot))
 
 /datum/category_item/player_setup_item/player_global/settings/content(var/mob/user)
