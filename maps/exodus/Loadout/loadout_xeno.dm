@@ -136,7 +136,7 @@
 
 
 /datum/gear/eyes/tajblind/sec
-	display_name = "sleek blindfold"
+	display_name = "sleek veil"
 	path = /obj/item/clothing/glasses/tajblind/sec
 	whitelisted = "Tajara"
 	sort_category = "Xenowear"
@@ -144,7 +144,7 @@
 	allowed_roles = list("Security Officer","Head of Security","Warden","Detective")
 
 /datum/gear/eyes/tajblind/med
-	display_name = "medical blindfold"
+	display_name = "medical veil"
 	path = /obj/item/clothing/glasses/tajblind/med
 	whitelisted = "Tajara"
 	sort_category = "Xenowear"
@@ -152,7 +152,7 @@
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
 
 /datum/gear/eyes/tajblind/meson
-	display_name = "industrial blindfold"
+	display_name = "industrial veil"
 	path = /obj/item/clothing/glasses/tajblind/meson
 	whitelisted = "Tajara"
 	sort_category = "Xenowear"
