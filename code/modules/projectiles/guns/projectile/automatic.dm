@@ -19,7 +19,7 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    requires_two_hands=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/mini_uzi
+/obj/item/weapon/gun/projectile/automatic/45machine_pistol
 	name = ".45 machine pistol"
 	desc = "An uncommon machine pistol, sometimes refered to as an 'uzi' by the backwater spacers it is often associated with, though its origins have been lost to time. Uses .45 rounds."
 	icon_state = "mini-uzi"

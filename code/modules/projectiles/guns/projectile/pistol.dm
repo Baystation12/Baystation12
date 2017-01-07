@@ -52,8 +52,8 @@
 	magazine_type = /obj/item/ammo_magazine/c45m
 	allowed_magazines = /obj/item/ammo_magazine/c45m
 
-/obj/item/weapon/gun/projectile/deagle
-	name = "desert eagle"
+/obj/item/weapon/gun/projectile/magnum_pistol
+	name = ".50 magnum pistol"
 	desc = "A robust handgun that uses .50 AE ammo."
 	icon_state = "deagle"
 	item_state = "deagle"
