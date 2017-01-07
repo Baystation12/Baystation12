@@ -381,16 +381,12 @@
 	if(usr.canmove && !usr.incapacitated())
 		if(src.up)
 			src.up = !src.up
-			flags_inv |= HIDEEYES
-			body_parts_covered |= EYES
 			icon_state = initial(icon_state)
 			flash_protection = initial(flash_protection)
 			tint = initial(tint)
 			to_chat(usr, "You activate \the [src], allowing you to see.")
 		else
 			src.up = !src.up
-			flags_inv &= HIDEEYES
-			body_parts_covered &= EYES
 			icon_state = initial(icon_state)
 			flash_protection = FLASH_PROTECTION_MAJOR
 			tint = TINT_BLIND
