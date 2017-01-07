@@ -25,9 +25,6 @@
 // Base variants are applied to everyone on the same Z level
 // Range variants are applied on per-range basis: numbers here are on point blank, it scales with the map size (assumes square shaped Z levels)
 #define DETONATION_RADS 20
-#define DETONATION_HALLUCINATION_BASE 300
-#define DETONATION_HALLUCINATION_RANGE 300
-
 #define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
 
 // Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
@@ -112,15 +109,10 @@
 	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
 	radiation_repository.z_radiate(TS, DETONATION_RADS)
 
-	// Effect 1: Radiation, weakening and hallucinations to all mobs on Z level
+	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/TM = get_turf(mob)
 		if(TS && TM && (TS.z == TM.z))
-			var/range_multiplier = between(0, get_dist(mob, src) / world.maxx, 1)
-			var/hallucinations = DETONATION_HALLUCINATION_BASE + (range_multiplier * DETONATION_HALLUCINATION_RANGE)
-			if(istype(mob, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = mob
-				H.hallucination += hallucinations
 			mob.Weaken(DETONATION_MOB_CONCUSSION)
 			to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
 
@@ -446,8 +438,6 @@
 #undef DAMAGE_RATE_LIMIT
 #undef DETONATION_RADS_RANGE
 #undef DETONATION_RADS_BASE
-#undef DETONATION_HALLUCINATION_BASE
-#undef DETONATION_HALLUCINATION_RANGE
 #undef DETONATION_MOB_CONCUSSION
 #undef DETONATION_APC_OVERLOAD_PROB
 #undef DETONATION_SHUTDOWN_APC
