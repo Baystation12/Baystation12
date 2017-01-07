@@ -93,7 +93,7 @@
 #include "code\_onclick\hud\screen_objects.dm"
 #include "code\_onclick\hud\spell_screen_objects.dm"
 #include "code\ATMOSPHERICS\_atmos_setup.dm"
-#include "code\ATMOSPHERICS\_atmospherics_helpers.dm"
+#include "code\ATMOSPHERICS\atmos_primitives.dm"
 #include "code\ATMOSPHERICS\atmospherics.dm"
 #include "code\ATMOSPHERICS\datum_pipe_network.dm"
 #include "code\ATMOSPHERICS\datum_pipeline.dm"
