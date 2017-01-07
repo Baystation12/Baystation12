@@ -403,9 +403,7 @@
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
 	icon_state = "tajblind_sec"
 	item_state = "tajblind_sec"
-	action_button_name = "Switch Vision Mode"
 	flash_protection = FLASH_PROTECTION_MAJOR
-	tint = TINT_NONE
 	hud = /obj/item/clothing/glasses/hud/security
 
 
@@ -414,9 +412,6 @@
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
 	icon_state = "tajblind_med"
 	item_state = "tajblind_med"
-	action_button_name = "Switch Vision Mode"
-	flash_protection = FLASH_PROTECTION_NONE
-	tint = TINT_NONE
 	hud = /obj/item/clothing/glasses/hud/health
 
 /obj/item/clothing/glasses/tajblind/meson
@@ -424,9 +419,6 @@
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
 	icon_state = "tajblind_meson"
 	item_state = "tajblind_meson"
-	action_button_name = "Switch Vision Mode"
-	flash_protection = FLASH_PROTECTION_NONE
-	tint = TINT_NONE
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 /obj/item/clothing/glasses/tajblind/meson/New()
