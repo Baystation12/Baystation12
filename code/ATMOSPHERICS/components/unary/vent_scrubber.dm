@@ -21,7 +21,7 @@
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
 	var/list/scrubbing_gas = list("carbon_dioxide")
 
-	var/panic = 0 //is this scrubber panicked?
+	var/siphon = 0 //is this scrubber siphoning?
 
 	var/area_uid
 	var/radio_filter_out
@@ -104,7 +104,7 @@
 		"timestamp" = world.time,
 		"power" = use_power,
 		"scrubbing" = scrubbing,
-		"panic" = panic,
+		"siphon" = siphon,
 		"filter_o2" = ("oxygen" in scrubbing_gas),
 		"filter_n2" = ("nitrogen" in scrubbing_gas),
 		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
@@ -185,16 +185,16 @@
 	if(signal.data["power_toggle"] != null)
 		use_power = !use_power
 
-	if(signal.data["panic_siphon"]) //must be before if("scrubbing" thing
-		panic = text2num(signal.data["panic_siphon"])
-		if(panic)
+	if(signal.data["siphon"]) //must be before if("scrubbing" thing
+		siphon = text2num(signal.data["siphon"])
+		if(siphon)
 			use_power = 1
 			scrubbing = 0
 		else
 			scrubbing = 1
-	if(signal.data["toggle_panic_siphon"] != null)
-		panic = !panic
-		if(panic)
+	if(signal.data["toggle_siphon"] != null)
+		siphon = !siphon
+		if(siphon)
 			use_power = 1
 			scrubbing = 0
 		else
@@ -203,11 +203,11 @@
 	if(signal.data["scrubbing"] != null)
 		scrubbing = text2num(signal.data["scrubbing"])
 		if(scrubbing)
-			panic = 0
+			siphon = 0
 	if(signal.data["toggle_scrubbing"])
 		scrubbing = !scrubbing
 		if(scrubbing)
-			panic = 0
+			siphon = 0
 
 	var/list/toggle = list()
 
