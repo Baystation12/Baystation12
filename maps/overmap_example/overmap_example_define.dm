@@ -6,6 +6,7 @@
 	lobby_icon = 'maps/overmap_example/overmap_example_lobby.dmi'
 
 	allowed_spawns = list("Arrivals Shuttle")
+	use_overmap = 1
 
 /datum/map/overmap_example/setup_map()
 	..()
