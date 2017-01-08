@@ -64,14 +64,14 @@
 	if(cloaked || isnull(departure_message))
 		return
 
-	command_announcement.Announce(departure_message,(announcer ? announcer : "[boss_name]"))
+	command_announcement.Announce(departure_message,(announcer ? announcer : "[using_map.boss_name]"))
 
 /datum/shuttle/multi_shuttle/proc/announce_arrival()
 
 	if(cloaked || isnull(arrival_message))
 		return
 
-	command_announcement.Announce(arrival_message,(announcer ? announcer : "[boss_name]"))
+	command_announcement.Announce(arrival_message,(announcer ? announcer : "[using_map.boss_name]"))
 
 
 /obj/machinery/computer/shuttle_control/multi
@@ -210,8 +210,8 @@
 
 		MS.cloaked = !MS.cloaked
 		to_chat(usr, "<span class='warning'>Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival.</span>")
-		
-		
+
+
 	if(href_list["move_multi"])
 		if((MS.last_move + MS.cooldown*10) > world.time)
 			to_chat(usr, "<span class='warning'>The ship's drive is inoperable while the engines are charging.</span>")

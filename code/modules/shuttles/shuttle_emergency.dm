@@ -30,7 +30,7 @@
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
 	if(origin == area_station)
 		emergency_controller.shuttle_leaving() // This is a hell of a line. v
-		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? using_map.emergency_shuttle_leaving_dock : using_map.shuttle_leaving_dock), "%dock_name%", "[dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
+		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? using_map.emergency_shuttle_leaving_dock : using_map.shuttle_leaving_dock), "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
 	else if(destination == area_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
 	..(origin, destination)
@@ -193,9 +193,9 @@
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
 			else if (!shuttle.location)
-				shuttle_status = "Standing-by at [station_name]."
+				shuttle_status = "Standing-by at [using_map.station_name]."
 			else
-				shuttle_status = "Standing-by at [dock_name]."
+				shuttle_status = "Standing-by at [using_map.dock_name]."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
