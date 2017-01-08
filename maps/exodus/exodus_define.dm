@@ -16,6 +16,14 @@
 	accessible_z_levels = list("1" = 5, "2" = 5, "4" = 10, "5" = 15, "7" = 60)
 	base_turf_by_z = list("6" = /turf/simulated/floor/asteroid) // Moonbase
 
+	station_name  = "NSS Exodus"
+	station_short = "Exodus"
+	dock_name     = "NAS Crescent"
+	boss_name     = "Central Command"
+	boss_short    = "Centcomm"
+	company_name  = "NanoTrasen"
+	company_short = "NT"
+
 	shuttle_docked_message = "The scheduled Crew Transfer Shuttle to %Dock_name% has docked with the station. It will depart in approximately %ETD%"
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
 	shuttle_called_message = "A crew transfer to %Dock_name% has been scheduled. The shuttle has been called. It will arrive in approximately %ETA%"

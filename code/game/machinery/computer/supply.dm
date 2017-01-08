@@ -327,10 +327,10 @@
 
 		if(isreciept)
 			reqform.name = "Cargo Reciept - [O.object.name]"
-			reqform.info += "<h3>[station_name] Supply Requisition Reciept</h3><hr>"
+			reqform.info += "<h3>[using_map.station_name] Supply Requisition Reciept</h3><hr>"
 		else
 			reqform.name = "Requisition Form - [O.object.name]"
-			reqform.info += "<h3>[station_name] Supply Requisition Form</h3><hr>"
+			reqform.info += "<h3>[using_map.station_name] Supply Requisition Form</h3><hr>"
 
 		reqform.info += "INDEX: #[O.ordernum]<br>"
 		reqform.info += "REQUESTED BY: [O.orderedby]<br>"

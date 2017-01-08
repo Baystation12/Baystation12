@@ -1,5 +1,5 @@
 var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[boss_name]", "Colonial Marshal Service", "[boss_short] Supply")
+var/list/admin_departments = list("[using_map.boss_name]", "Colonial Marshal Service", "[using_map.boss_short] Supply")
 var/list/alldepartments = list()
 
 var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
@@ -24,7 +24,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/New()
 	..()
 	allfaxes += src
-	if(!destination) destination = "[boss_name]"
+	if(!destination) destination = "[using_map.boss_name]"
 	if( !(("[department]" in alldepartments) || ("[department]" in admin_departments)) )
 		alldepartments |= department
 
@@ -49,7 +49,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	dat += "<hr>"
 
 	if(authenticated)
-		dat += "<b>Logged in to:</b> [boss_name] Quantum Entanglement Network<br><br>"
+		dat += "<b>Logged in to:</b> [using_map.boss_name] Quantum Entanglement Network<br><br>"
 
 		if(copyitem)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
@@ -196,11 +196,11 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	adminfaxes += rcvdcopy
 
 	//message badmins that a fax has arrived
-	if (destination == boss_name)
+	if (destination == using_map.boss_name)
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#006100")
 	else if (destination == "Colonial Marshal Service")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1F66A0")
-	else if (destination == "[boss_short] Supply")
+	else if (destination == "[using_map.boss_short] Supply")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5F4519")
 	else
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
