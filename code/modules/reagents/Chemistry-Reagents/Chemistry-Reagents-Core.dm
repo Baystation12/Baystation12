@@ -36,7 +36,11 @@
 /datum/reagent/blood/mix_data(var/newdata, var/newamount)
 	if(!islist(newdata))
 		return
+	if(!data["virus2"])
+		data["virus2"] = list()
 	data["virus2"] |= newdata["virus2"]
+	if(!data["antibodies"])
+		data["antibodies"] = list()
 	data["antibodies"] |= newdata["antibodies"]
 
 /datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
