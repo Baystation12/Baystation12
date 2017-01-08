@@ -72,7 +72,7 @@
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
 	var/pull_time = 300
-	var/explosion_power = 6
+	var/explosion_power = 9
 
 	var/emergency_issued = 0
 
