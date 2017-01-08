@@ -122,7 +122,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 2
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")//TODO
+				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -130,7 +130,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 3
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing. You can feel the Geometer of Blood's presence growing stronger.</span>")//TODO
+				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing.</span>")
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
@@ -138,7 +138,7 @@ var/datum/antagonist/cultist/cult
 		cult_level = 4
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
-				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever. The time has come.</span>")//TODO
+				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever.</span>")
 				add_cult_magic(H.current)
 		for(var/mob/dead/observer/D)
 			add_ghost_magic(D)
