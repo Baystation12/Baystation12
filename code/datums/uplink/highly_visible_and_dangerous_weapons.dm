@@ -69,10 +69,10 @@
 	item_cost = 68
 	path = /obj/item/weapon/storage/secure/briefcase/heavysniper
 
-/datum/uplink_item/item/visible_weapons/uzi
-	name = "Uzi Submachine Gun"
+/datum/uplink_item/item/visible_weapons/machine_pistol
+	name = "Machine Pistol"
 	item_cost = 45
-	path = /obj/item/weapon/gun/projectile/automatic/45machine_pistol
+	path = /obj/item/weapon/gun/projectile/automatic/machine_pistol
 
 /datum/uplink_item/item/visible_weapons/combat_shotgun
 	name = "Combat Shotgun"
@@ -85,7 +85,7 @@
 	path = /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn
 
 /datum/uplink_item/item/visible_weapons/deagle
-	name = "Desert Eagle Magnum"
+	name = "Magnum Pistol"
 	item_cost = 52
 	path = /obj/item/weapon/gun/projectile/magnum_pistol
 
