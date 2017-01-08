@@ -10,22 +10,16 @@
 	display_name = "apron, blue"
 	path = /obj/item/clothing/suit/apron
 	cost = 1
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/overalls
 	display_name = "apron, overalls"
 	path = /obj/item/clothing/suit/apron/overalls
 	cost = 1
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/leather
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/hoodie
 	allowed_roles = list("Passenger", "Bartender")
@@ -34,9 +28,7 @@
 	allowed_roles = list("Passenger", "Bartender", "Merchant")
 
 /datum/gear/suit/labcoat
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
@@ -84,7 +76,7 @@
 	allowed_roles = list("Supply Assistant", "Merchant")
 
 /datum/gear/suit/suit_jacket
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/suit/wintercoat
 	allowed_roles = list("Passenger", "Bartender", "Merchant")

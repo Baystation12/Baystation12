@@ -9,14 +9,12 @@
 	display_name = "short jumpskirt"
 	path = /obj/item/clothing/under/shortjumpskirt
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
 	path = /obj/item/clothing/under/color/grey
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/uniform/jumpsuit/New()
 	..()
@@ -30,7 +28,7 @@
 /datum/gear/uniform/suit
 	display_name = "clothes selection"
 	path = /obj/item/clothing/under/sl_suit
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/suit/New()
 	..()
@@ -82,7 +80,7 @@
 /datum/gear/uniform/dress
 	display_name = "dress selection"
 	path = /obj/item/clothing/under/sundress_white
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/dress/New()
 	..()
@@ -100,7 +98,7 @@
 /datum/gear/uniform/skirt
 	display_name = "skirt selection"
 	path = /obj/item/clothing/under/skirt
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/skirt/New()
 	..()
@@ -113,9 +111,7 @@
 /datum/gear/uniform/pants
 	display_name = "pants selection"
 	path = /obj/item/clothing/under/pants/white
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/uniform/pants/New()
 	..()
@@ -142,7 +138,7 @@
 	display_name = "sweater"
 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"

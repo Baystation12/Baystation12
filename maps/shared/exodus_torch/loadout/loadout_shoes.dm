@@ -41,3 +41,8 @@
 /datum/gear/shoes/dress
 	display_name = "dress shoes"
 	path = /obj/item/clothing/shoes/dress
+
+/datum/gear/shoes/flats
+	display_name = "flats"
+	path = /obj/item/clothing/shoes/flats
+	flags = GEAR_HAS_COLOR_SELECTION
