@@ -19,10 +19,10 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    requires_two_hands=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/mini_uzi
+/obj/item/weapon/gun/projectile/automatic/machine_pistol
 	name = ".45 machine pistol"
 	desc = "An uncommon machine pistol, sometimes refered to as an 'uzi' by the backwater spacers it is often associated with, though its origins have been lost to time. Uses .45 rounds."
-	icon_state = "mini-uzi"
+	icon_state = "mpistolen"
 	item_state = "wt550"
 	w_class = ITEM_SIZE_NORMAL
 	load_method = MAGAZINE
@@ -41,9 +41,9 @@
 /obj/item/weapon/gun/projectile/automatic/mini_uzi/update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "mini-uzi"
+		icon_state = "mpistolen"
 	else
-		icon_state = "mini-uzi-empty"
+		icon_state = "mpistolen-empty"
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "submachine gun"

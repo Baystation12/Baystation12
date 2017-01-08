@@ -68,3 +68,28 @@
 	name = "Anti-materiel Rifle with ammunition"
 	item_cost = 68
 	path = /obj/item/weapon/storage/secure/briefcase/heavysniper
+
+/datum/uplink_item/item/visible_weapons/machine_pistol
+	name = "Machine Pistol"
+	item_cost = 45
+	path = /obj/item/weapon/gun/projectile/automatic/machine_pistol
+
+/datum/uplink_item/item/visible_weapons/combat_shotgun
+	name = "Combat Shotgun"
+	item_cost = 52
+	path = /obj/item/weapon/gun/projectile/shotgun/pump/combat
+
+/datum/uplink_item/item/visible_weapons/sawnoff
+	name = "Sawnoff Shotgun"
+	item_cost = 45
+	path = /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn
+
+/datum/uplink_item/item/visible_weapons/deagle
+	name = "Magnum Pistol"
+	item_cost = 52
+	path = /obj/item/weapon/gun/projectile/magnum_pistol
+
+/datum/uplink_item/item/visible_weapons/detective_revolver
+	name = "Holdout Revolver"
+	item_cost = 38
+	path = /obj/item/weapon/gun/projectile/revolver/detective
