@@ -55,26 +55,13 @@
 /obj/item/weapon/gun/projectile/magnum_pistol
 	name = ".50 magnum pistol"
 	desc = "A robust handgun that uses .50 AE ammo."
-	icon_state = "deagle"
-	item_state = "deagle"
+	icon_state = "magnum"
+	item_state = "magnum"
 	force = 14.0
 	caliber = ".50"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	allowed_magazines = /obj/item/ammo_magazine/a50
-
-/obj/item/weapon/gun/projectile/deagle/gold
-	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
-	icon_state = "deagleg"
-	item_state = "deagleg"
-
-/obj/item/weapon/gun/projectile/deagle/camo
-	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
-	icon_state = "deaglecamo"
-	item_state = "deagleg"
-	auto_eject = 1
-	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
