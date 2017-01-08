@@ -4,7 +4,7 @@
 	full_name = "NSS Solaris"
 	path = "solaris"
 
-	lobby_icon = 'maps/exodus/exodus_lobby.dmi'
+	lobby_icon = 'maps/solaris/solaris_lobby.dmi'
 
 	load_legacy_saves = TRUE
 
