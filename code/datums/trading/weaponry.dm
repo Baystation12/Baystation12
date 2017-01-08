@@ -20,7 +20,7 @@
 
 	possible_trading_items = list(/obj/item/weapon/gun/projectile/pistol    = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/colt        = TRADER_ALL,
-								/obj/item/weapon/gun/projectile/deagle      = TRADER_ALL,
+								/obj/item/weapon/gun/projectile/magnum_pistol= TRADER_ALL,
 								/obj/item/weapon/gun/projectile/sec         = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/sec/MK      = TRADER_BLACKLIST,
 								/obj/item/weapon/gun/projectile/shotgun/pump= TRADER_SUBTYPES_ONLY,
