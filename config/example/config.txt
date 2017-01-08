@@ -293,9 +293,6 @@ REQ_CULT_GHOSTWRITER 6
 ## Sets the number of available character slots
 CHARACTER_SLOTS 10
 
-## Uncomment to use overmap system for zlevel travel
-#USE_OVERMAP
-
 ## Expected round length in minutes
 EXPECTED_ROUND_LENGTH 180
 

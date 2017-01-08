@@ -1,7 +1,6 @@
 //How far from the edge of overmap zlevel could randomly placed objects spawn
 #define OVERMAP_EDGE 2
 //Dimension of overmap (squares 4 lyfe)
-#define OVERMAP_SIZE 20
 var/global/list/map_sectors = list()
 
 /area/overmap/
@@ -26,26 +25,26 @@ var/global/list/map_sectors = list()
 	name = "[x]-[y]"
 	var/list/numbers = list()
 
-	if(x == 1 || x == OVERMAP_SIZE)
+	if(x == 1 || x == using_map.overmap_size)
 		numbers += list("[round(y/10)]","[round(y%10)]")
-		if(y == 1 || y == OVERMAP_SIZE)
+		if(y == 1 || y == using_map.overmap_size)
 			numbers += "-"
-	if(y == 1 || y == OVERMAP_SIZE)
+	if(y == 1 || y == using_map.overmap_size)
 		numbers += list("[round(x/10)]","[round(x%10)]")
 
-	for(var/i = 1 to numbers.len+1)
+	for(var/i = 1 to numbers.len)
 		var/image/I = image('icons/effects/numbers.dmi',numbers[i])
 		I.pixel_x = 5*i - 2
 		I.pixel_y = world.icon_size/2 - 3
 		if(y == 1)
 			I.pixel_y = 3
 			I.pixel_x = 5*i + 4
-		if(y == OVERMAP_SIZE)
+		if(y == using_map.overmap_size)
 			I.pixel_y = world.icon_size - 9
 			I.pixel_x = 5*i + 4
 		if(x == 1)
 			I.pixel_x = 5*i - 2
-		if(x == OVERMAP_SIZE)
+		if(x == using_map.overmap_size)
 			I.pixel_x = 5*i + 2
 		overlays += I
 
