@@ -31,7 +31,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/list/ckeys = list()
 	for(var/mob/M in mob_list)
 		var/list/indexing = list(M.real_name, M.name)
-		if(M.mind)	indexing += M.mind.name
+		if(M.mind)
+			indexing += M.mind.name
 
 		for(var/string in indexing)
 			var/list/L = splittext(string, " ")
@@ -73,7 +74,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 								ai_found = 1
 							msg += "<b><font color='black'>[original_word] (<A HREF='?_src_=holder;adminmoreinfo=\ref[found]'>?</A>)</font></b> "
 							continue
-			msg += "[original_word] "
+		msg += "[original_word] "
 
 	if(!mob) //this doesn't happen
 		return
