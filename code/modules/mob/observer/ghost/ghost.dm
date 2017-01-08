@@ -93,11 +93,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			if(istype(target))
 				ManualFollow(target)
 
-/mob/observer/ghost/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/book/tome))
-		var/mob/observer/ghost/M = src
-		M.manifest()
-
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
 Works together with spawning an observer, noted above.
@@ -418,17 +413,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
 	return 1
 
-/mob/observer/ghost/proc/manifest()
-	if(!is_manifest)
-		is_manifest = TRUE
-		verbs += /mob/observer/ghost/proc/toggle_visibility
-
-	if(src.invisibility > SEE_INVISIBLE_LIVING)
-		toggle_visibility(1)
-		return TRUE
-	else
-		return FALSE
-
 /mob/observer/ghost/proc/show_hud_icon(var/icon_state, var/make_visible)
 	if(!hud_images)
 		hud_images = list()
@@ -442,25 +426,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		remove_client_image(hud_image)
 
-/mob/observer/ghost/proc/toggle_visibility()
-	set category = "Ghost"
-	set name = "Toggle Visibility"
-	set desc = "Allows you to turn (in)visible (almost) at will."
-
-	if(invisibility && !(args.len && args[1]) && world.time < next_visibility_toggle)
-		to_chat(src, "You must gather strength before you can turn visible again...")
-		return
-
-	if(invisibility == 0)
-		next_visibility_toggle = world.time + 1 MINUTE
-		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible.</span>")
-		invisibility = INVISIBILITY_OBSERVER
-		show_hud_icon("cult", FALSE)
-	else
-		to_chat(src, "<span class='info'>You are now visible!</span>")
-		invisibility = 0
-		show_hud_icon("cult", TRUE) // Give the ghost a cult icon which should be visible only to itself
-
 /mob/observer/ghost/verb/toggle_anonsay()
 	set category = "Ghost"
 	set name = "Toggle Anonymous Chat"
@@ -471,6 +436,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='info'>Your key won't be shown when you speak in dead chat.</span>")
 	else
 		to_chat(src, "<span class='info'>Your key will be publicly visible again.</span>")
+
 /mob/observer/ghost/canface()
 	return 1
 

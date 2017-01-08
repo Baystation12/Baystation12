@@ -1,6 +1,6 @@
 #define CULTINESS_PER_CULTIST 20
 #define CULTINESS_PER_SACRIFICE 20
-#define CULTINESS_PER_TURF 2
+#define CULTINESS_PER_TURF 1
 
 var/datum/antagonist/cultist/cult
 
@@ -83,9 +83,11 @@ var/datum/antagonist/cultist/cult
 	if(istype(S))
 		T.loc = S
 
+	/* Removed until a proper AOOC rewrite is made
 	if(cult_level < 2)
 		player.verbs += /mob/proc/set_cult_conversion_blurb
 		player.verbs += /mob/proc/cult_ooc
+		*/
 
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
@@ -152,70 +154,35 @@ var/datum/antagonist/cultist/cult
 		cult.remove_antagonist(usr.mind, 1)
 
 /datum/antagonist/cultist/proc/remove_cultiness(var/amount)
-	cult_rating -= amount
-	if(cult_rating < 0) // Wat
-		cult_rating = 0
+	cult_rating = max(0, cult_rating - amount)
 
 /datum/antagonist/cultist/proc/add_cult_magic(var/mob/M)
-	M.verbs += /mob/proc/convert_rune
-	M.verbs += /mob/proc/teleport_rune
-	M.verbs += /mob/proc/tome_rune
-	M.verbs += /mob/proc/wall_rune
-	M.verbs += /mob/proc/ajorney_rune
-	M.verbs += /mob/proc/defile_rune
+	M.verbs += Tier1Runes
 
 	if(cult_level >= 2)
-		M.verbs += /mob/proc/armor_rune
-		M.verbs += /mob/proc/sacrifice_rune
-		M.verbs += /mob/proc/manifest_rune
-		M.verbs += /mob/proc/drain_rune
+		M.verbs += Tier2Runes
 
+		/*
 		M.verbs -= /mob/proc/set_cult_conversion_blurb
 		M.verbs -= /mob/proc/cult_ooc
+		*/
 
 		if(cult_level >= 3)
-			M.verbs += /mob/proc/weapon_rune
-			M.verbs += /mob/proc/shell_rune
-			M.verbs += /mob/proc/bloodboil_rune
-			M.verbs += /mob/proc/confuse_rune
-			M.verbs += /mob/proc/revive_rune
+			M.verbs += Tier3Runes
 
 			if(cult_level >= 4)
-				M.verbs += /mob/proc/tearreality_rune
-
-	M.verbs += /mob/proc/stun_imbue
-	M.verbs += /mob/proc/emp_imbue
-
-	M.verbs += /mob/proc/cult_communicate
+				M.verbs += Tier4Runes
 
 /datum/antagonist/cultist/proc/remove_cult_magic(var/mob/M)
-	M.verbs -= /mob/proc/convert_rune
-	M.verbs -= /mob/proc/teleport_rune
-	M.verbs -= /mob/proc/tome_rune
-	M.verbs -= /mob/proc/wall_rune
-	M.verbs -= /mob/proc/ajorney_rune
-	M.verbs -= /mob/proc/defile_rune
+	M.verbs -= Tier1Runes
+	M.verbs -= Tier2Runes
+	M.verbs -= Tier3Runes
+	M.verbs -= Tier4Runes
 
-	M.verbs -= /mob/proc/armor_rune
-	M.verbs -= /mob/proc/sacrifice_rune
-	M.verbs -= /mob/proc/manifest_rune
-	M.verbs -= /mob/proc/drain_rune
-
+	/*
 	M.verbs -= /mob/proc/set_cult_conversion_blurb
 	M.verbs -= /mob/proc/cult_ooc
-
-	M.verbs -= /mob/proc/weapon_rune
-	M.verbs -= /mob/proc/shell_rune
-	M.verbs -= /mob/proc/bloodboil_rune
-	M.verbs -= /mob/proc/confuse_rune
-	M.verbs -= /mob/proc/revive_rune
-
-	M.verbs -= /mob/proc/tearreality_rune
-
-	M.verbs -= /mob/proc/stun_imbue
-	M.verbs -= /mob/proc/emp_imbue
-
-	M.verbs -= /mob/proc/cult_communicate
+	*/
 
 /mob/proc/set_cult_conversion_blurb()
 	set name = "Set conversion blurb"

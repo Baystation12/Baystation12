@@ -107,7 +107,7 @@
 	return 0
 
 /mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(vessel && !vessel.has_reagent("blood", species.blood_volume * 0.7))
+	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent("blood", species.blood_volume * 0.7))
 		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
 		return
 	..()
@@ -116,7 +116,8 @@
 	return
 
 /mob/living/carbon/human/pay_for_rune(var/blood)
-	vessel.remove_reagent("blood", blood)
+	if(should_have_organ(BP_HEART))
+		vessel.remove_reagent("blood", blood)
 
 /mob/proc/get_blood_name()
 	return "blood"
@@ -146,6 +147,40 @@
 
 /mob/living/carbon/human/get_rune_color()
 	return species.blood_color
+
+var/list/Tier1Runes = list(
+	/mob/proc/convert_rune,
+	/mob/proc/teleport_rune,
+	/mob/proc/tome_rune,
+	/mob/proc/wall_rune,
+	/mob/proc/ajorney_rune,
+	/mob/proc/defile_rune,
+
+	/mob/proc/stun_imbue,
+	/mob/proc/emp_imbue,
+
+	/mob/proc/cult_communicate
+	)
+
+var/list/Tier2Runes = list(
+	/mob/proc/armor_rune,
+	/mob/proc/sacrifice_rune,
+	/mob/proc/manifest_rune,
+	/mob/proc/drain_rune,
+	/mob/proc/emp_rune
+	)
+
+var/list/Tier3Runes = list(
+	/mob/proc/weapon_rune,
+	/mob/proc/shell_rune,
+	/mob/proc/bloodboil_rune,
+	/mob/proc/confuse_rune,
+	/mob/proc/revive_rune
+)
+
+var/list/Tier4Runes = list(
+	/mob/proc/tearreality_rune
+	)
 
 /mob/proc/convert_rune()
 	set category = "Cult Magic"
@@ -207,6 +242,12 @@
 
 	make_rune(/obj/effect/rune/drain, tome_required = 1)
 
+/mob/proc/emp_rune()
+	set category = "Cult Magic"
+	set name = "Rune: EMP"
+
+	make_rune(/obj/effect/rune/emp, tome_required = 1)
+
 /mob/proc/weapon_rune()
 	set category = "Cult Magic"
 	set name = "Rune: Summon Weapon"
@@ -251,7 +292,7 @@
 
 /mob/proc/emp_imbue()
 	set category = "Cult Magic"
-	set name = "Imbue: Emp"
+	set name = "Imbue: EMP"
 
 	make_rune(/obj/effect/rune/imbue/emp)
 
@@ -259,7 +300,7 @@
 	set category = "Cult Magic"
 	set name = "Communicate"
 
-	if(stat)
+	if(incapacitated())
 		to_chat(src, "<span class='warning'>Not when you are incapacitated.</span>")
 		return
 
@@ -275,7 +316,7 @@
 	input = sanitize(input)
 	log_and_message_admins("used a communicate verb to say '[input]'")
 	for(var/datum/mind/H in cult.current_antagonists)
-		if(H.current)
+		if(H.current && !H.current.stat)
 			to_chat(H.current, "<span class='cult'>[input]</span>")
 
 /mob/living/carbon/cult_communicate()

@@ -51,5 +51,5 @@
 		return
 	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 	user.visible_message("<span class='danger'>\The [user] invokes \the [src] at [target].</span>", "<span class='danger'>You invoke \the [src] at [target].</span>")
-	empulse(get_turf(target), 1, 1, 1)
+	target.emp_act(1)
 	qdel(src)

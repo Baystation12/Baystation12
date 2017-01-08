@@ -176,8 +176,8 @@
 			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 			user.forceMove(src)
 			showOptions(user)
+			var/warning = 0
 			while(user.loc == src)
-				var/warning = 0
 				user.take_organ_damage(0, 2)
 				if(user.getFireLoss() > 50)
 					to_chat(user, "<span class='danger'>Your body can't handle the heat anymore!</span>")
@@ -194,7 +194,7 @@
 					++warning
 				sleep(10)
 	else
-		var/input = input(user, "Choose a new rune name.", "Destination", "")
+		var/input = input(user, "Choose a new rune name.", "Destination", "") as text|null
 		if(!input)
 			return
 		destination = sanitize(input)
@@ -249,13 +249,13 @@
 		if(wall.health >= wall.max_health)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = min(100, wall.max_health - wall.health) // I'm limiting it in case someone edits the wall to have a lot of maxhealth so it won't kill cultists in one cast
+		t = wall.max_health - wall.health
 		wall.health += t
 	else
-		wall = new /obj/effect/cultwall(get_turf(src))
+		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
 		t = wall.health
-	user.pay_for_rune(t / 10)
+	user.pay_for_rune(t / 50)
 	user.say("Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
 
@@ -269,8 +269,14 @@
 	density = 1
 	unacidable = 1
 	var/obj/effect/rune/wall/rune
-	var/health = 50
-	var/max_health = 50
+	var/health
+	var/max_health = 200
+
+/obj/effect/cultwall/New(var/loc, var/bcolor)
+	..()
+	health = max_health
+	if(bcolor)
+		color = bcolor
 
 /obj/effect/cultwall/Destroy()
 	rune.wall = null
@@ -510,7 +516,7 @@
 	victim.vessel.remove_reagent("blood", 20)
 	admin_attack_log(user, victim, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
 	user.say("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
-	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user)))].</span>", "You hear liquid flow.")
+	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user), nothing_text = "you feel no different"))].</span>", "You hear liquid flow.")
 
 /obj/effect/rune/drain/proc/heal_user(var/mob/living/carbon/human/user)
 	if(!istype(user))
@@ -549,13 +555,13 @@
 		statuses += "your body stings less"
 		if(!charges)
 			return statuses
-	if(charges >= 10)
+	if(charges >= 15)
 		for(var/obj/item/organ/external/e in user.organs)
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
 				statuses += "bones in your [e] snap into place"
-				charges -= 10
-				if(charges < 10)
+				charges -= 15
+				if(charges < 15)
 					break
 	if(!charges)
 		return statuses
@@ -571,9 +577,11 @@
 			charges = max(charges - 1, 0)
 			if(fix.damage == 0)
 				damaged -= fix
+	/* this is going to need rebalancing
 	if(charges)
 		user.ingested.add_reagent("hell_water", charges)
 		statuses += "you feel empowered"
+	*/
 	return statuses
 
 /datum/reagent/hell_water
@@ -596,6 +604,15 @@
 	else
 		M.fire_stacks = max(2, M.fire_stacks)
 		M.IgniteMob()
+
+/obj/effect/rune/emp
+	cultname = "emp"
+	strokes = 4
+
+/obj/effect/rune/emp/cast(var/mob/living/user)
+	empulse(get_turf(src), 4, 2, 1)
+	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
+	qdel(src)
 
 /* Tier 3 runes */
 
@@ -711,13 +728,18 @@
 	while(cultists.len >= 3)
 		cultists = get_cultists()
 		for(var/mob/living/carbon/M in viewers(src))
+			if(iscultist(M))
+				continue
 			current |= M
 			var/obj/item/weapon/nullrod/N = locate() in M
 			if(N)
 				continue
 			M.take_overall_damage(5, 5)
 			if(!(M in previous))
-				to_chat(M, "<span class='danger'>Your blood boils!</span>")
+				if(M.should_have_organ(BP_HEART))
+					to_chat(M, "<span class='danger'>Your blood boils!</span>")
+				else
+					to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
 		previous = current.Copy()
 		current.Cut()
 		sleep(10)

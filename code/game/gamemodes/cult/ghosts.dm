@@ -14,6 +14,7 @@
 			if(cult_level >= 4)
 				M.verbs += /mob/dead/observer/proc/whisper_to_anyone
 				M.verbs += /mob/dead/observer/proc/bloodless_doodle
+				M.verbs += /mob/dead/observer/proc/toggle_visiblity
 
 /mob/dead/observer/proc/flick_lights()
 	set category = "Cult"
@@ -234,3 +235,23 @@
 	set desc = "Write a short message in blood on the floor or a wall. You don't need blood nearby to use this."
 
 	bloody_doodle(1)
+
+/mob/dead/observer/proc/toggle_visiblity()
+	set category = "Cult"
+	set name = "Toggle Visibility"
+	set desc = "Allows you to become visible or invisible at will."
+
+	if(invisibility && ghost_magic_cd > world.time)
+		to_chat(src, "<span class='notice'>You need some more time before you can use your abilities.</span>")
+		return
+
+	if(invisibility == 0)
+		ghost_magic_cd = world.time + 60 SECONDS
+		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible.</span>")
+		invisibility = INVISIBILITY_OBSERVER
+		mouse_opacity = 1
+	else
+		ghost_magic_cd = world.time + 60 SECONDS
+		to_chat(src, "<span class='info'>You are now visible!</span>")
+		invisibility = 0
+		mouse_opacity = 0 // This is so they don't make people invincible to melee attacks by hovering over them

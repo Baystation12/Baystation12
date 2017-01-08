@@ -31,7 +31,7 @@
 	..()
 
 /obj/item/device/soulstone/update_icon()
-	if(full == 0 || full == -1)
+	if(full == 0)
 		icon_state = "soulstone"
 	if(full == 1)
 		icon_state = "soulstone2"
