@@ -15,6 +15,8 @@
 	var/flags = SHUTTLE_FLAGS_PROCESS
 	var/category = /datum/shuttle
 
+	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
+
 /datum/shuttle/New(_name)
 	..()
 	if(_name)
@@ -131,13 +133,30 @@
 			if(AM.simulated)
 				AM.Move(D)
 
-	var/turf/T
 	for(var/mob/living/bug in destination)
-		T = get_turf(bug)
+		var/turf/T = get_turf(bug)
 		if(!T || T.is_solid_structure())
 			bug.gib()
 
+	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
+	var/turf/some_dest_turf = locate() in destination
+	if (HasAbove(some_dest_turf.z))
+		var/dest_base_turf_type = get_base_turf_by_area(get_step(some_dest_turf, UP))
+		for (var/turf/TD in dstturfs)
+			var/turf/TA = GetAbove(TD)
+			if (TA && istype(TA, dest_base_turf_type))
+				TA.ChangeTurf(ceiling_type, 1, 1)
+
 	origin.move_contents_to(destination, direction=direction)
+
+	// if there was a zlevel above our origin, erase our ceiling now we're gone
+	var/turf/some_origin_turf = locate() in origin
+	if (HasAbove(some_origin_turf.z))
+		var/origin_base_turf_type = get_base_turf_by_area(get_step(some_origin_turf, UP))
+		for (var/turf/TO in origin)
+			var/turf/TA = GetAbove(TO)
+			if (TA && istype(TA, ceiling_type))
+				TA.ChangeTurf(origin_base_turf_type, 1, 1)
 
 	for(var/mob/M in destination)
 		if(M.client)
