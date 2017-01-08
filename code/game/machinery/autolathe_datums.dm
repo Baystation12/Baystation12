@@ -369,6 +369,12 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_revolver_3
+	name = "ammunition (.38)"
+	path = /obj/item/ammo_magazine/c38
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_stetchkin
 	name = "ammunition (9mm)"
 	path = /obj/item/ammo_magazine/mc9mm
@@ -426,6 +432,18 @@
 /datum/autolathe/recipe/stunshell
 	name = "ammunition (stun cartridge, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/stunshell
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_uzi
+	name = "ammunition (machine.45)"
+	path = /obj/item/ammo_magazine/c45uzi
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_deagle
+	name = "ammunition (.50 AE)"
+	path = /obj/item/ammo_magazine/a50
 	hidden = 1
 	category = "Arms and Ammunition"
 
