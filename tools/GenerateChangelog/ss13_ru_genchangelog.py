@@ -145,7 +145,7 @@ for fileName in glob.glob(os.path.join(args.ymlDir, "*.yml")):
     fileName = os.path.abspath(fileName)
     print(' Reading {}...'.format(fileName))
     cl = {}
-    with open(fileName, 'r') as f:
+    with open(fileName, 'r', encoding="utf8") as f:
         cl = yaml.load(f)
         f.close()
     if today not in all_changelog_entries:
@@ -176,7 +176,7 @@ for fileName in glob.glob(os.path.join(args.ymlDir, "*.yml")):
         continue
 
     cl['changes'] = []
-    with open(fileName, 'w') as f:
+    with open(fileName, 'w', encoding="utf8") as f:
         yaml.dump(cl, f, default_flow_style=False)
 
 targetDir = os.path.dirname(args.targetFile)
