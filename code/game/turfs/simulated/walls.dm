@@ -95,7 +95,7 @@
 
 /turf/simulated/wall/ChangeTurf(var/newtype)
 	clear_plants()
-	..(newtype)
+	return ..(newtype)
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)
