@@ -244,7 +244,7 @@
 	name = "cap"
 	invisibility = 101
 	fire_sound = null
-	damage_type = HALLOSS
+	damage_type = PAIN
 	damage = 0
 	nodamage = 1
 	embed = 0

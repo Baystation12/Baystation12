@@ -44,7 +44,7 @@
 
 			visible_message("<span class='danger'>[H] has punched \the [src]!</span>")
 
-			apply_damage(damage, HALLOSS, affecting, armor_block)
+			apply_damage(damage, PAIN, affecting, armor_block)
 			if(damage >= 9)
 				visible_message("<span class='danger'>[H] has weakened \the [src]!</span>")
 				apply_effect(4, WEAKEN, armor_block)
@@ -222,7 +222,7 @@
 			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), hit_zone, armour, damage_flags=attack.damage_flags())
+			apply_damage(real_damage, (attack.deal_halloss ? PAIN : BRUTE), hit_zone, armour, damage_flags=attack.damage_flags())
 
 		if(I_DISARM)
 			admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")

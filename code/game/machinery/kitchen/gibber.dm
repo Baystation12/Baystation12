@@ -126,6 +126,7 @@
 		to_chat(user, "<span class='danger'>\The [src] safety guard is engaged!</span>")
 		return
 
+
 	if(victim.abiotic(1))
 		to_chat(user, "<span class='danger'>\The [victim] may not have any abiotic items on.</span>")
 		return

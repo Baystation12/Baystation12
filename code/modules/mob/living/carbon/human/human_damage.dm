@@ -21,46 +21,50 @@
 	return
 
 /mob/living/carbon/human/adjustBrainLoss(var/amount)
-
 	if(status_flags & GODMODE)	return 0	//godmode
-
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
 			sponge.take_damage(amount)
-			brainloss = sponge.damage
-		else
-			brainloss = 200
-	else
-		brainloss = 0
 
 /mob/living/carbon/human/setBrainLoss(var/amount)
-
 	if(status_flags & GODMODE)	return 0	//godmode
-
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
 			sponge.damage = min(max(amount, 0),(maxHealth*2))
-			brainloss = sponge.damage
-		else
-			brainloss = 200
-	else
-		brainloss = 0
 
 /mob/living/carbon/human/getBrainLoss()
-
 	if(status_flags & GODMODE)	return 0	//godmode
-
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
-			brainloss = min(sponge.damage,maxHealth*2)
+			return min(sponge.damage,maxHealth*2)
 		else
-			brainloss = 200
-	else
-		brainloss = 0
-	return brainloss
+			return maxHealth*2
+	return 0
+
+/mob/living/carbon/human/getHalLoss()
+	var/amount = 0
+	for(var/obj/item/organ/external/E in organs)
+		amount += E.get_pain()
+	return amount
+
+/mob/living/carbon/human/setHalLoss(var/amount)
+	adjustHalLoss(getHalLoss()-amount)
+
+/mob/living/carbon/human/adjustHalLoss(var/amount)
+	var/heal = (amount < 0)
+	amount = abs(amount)
+	var/list/pick_organs = organs.Copy()
+	while(amount > 0 && pick_organs.len)
+		var/obj/item/organ/external/E = pick(pick_organs)
+		pick_organs -= E
+		if(heal)
+			amount -= E.remove_pain(amount)
+		else
+			amount -= E.add_pain(amount)
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
@@ -111,49 +115,26 @@
 	..()
 
 /mob/living/carbon/human/getCloneLoss()
-	if((species.flags & NO_SCAN) || isSynthetic())
-		cloneloss = 0
-	return ..()
+	var/amount = 0
+	for(var/obj/item/organ/external/E in organs)
+		amount += E.get_genetic_damage()
+	return amount
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
-	if((species.flags & NO_SCAN) || isSynthetic())
-		cloneloss = 0
-	else
-		..()
+	adjustCloneLoss(getCloneLoss()-amount)
 
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
-	..()
+	var/heal = amount < 0
+	amount = abs(amount)
 
-	if((species.flags & NO_SCAN) || isSynthetic())
-		cloneloss = 0
-		return
-
-	var/heal_prob = max(0, 80 - getCloneLoss())
-	var/mut_prob = min(80, getCloneLoss()+10)
-	if (amount > 0)
-		if (prob(mut_prob))
-			var/list/obj/item/organ/external/candidates = list()
-			for (var/obj/item/organ/external/O in organs)
-				if(!(O.status & ORGAN_MUTATED))
-					candidates |= O
-			if (candidates.len)
-				var/obj/item/organ/external/O = pick(candidates)
-				O.mutate()
-				to_chat(src, "<span class = 'notice'>Something is not right with your [O.name]...</span>")
-				return
-	else
-		if (prob(heal_prob))
-			for (var/obj/item/organ/external/O in organs)
-				if (O.status & ORGAN_MUTATED)
-					O.unmutate()
-					to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
-					return
-
-	if (getCloneLoss() < 1)
-		for (var/obj/item/organ/external/O in organs)
-			if (O.status & ORGAN_MUTATED)
-				O.unmutate()
-				to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
+	var/list/pick_organs = organs.Copy()
+	while(amount > 0 && pick_organs.len)
+		var/obj/item/organ/external/E = pick(pick_organs)
+		pick_organs -= E
+		if(heal)
+			amount -= E.remove_genetic_damage(amount)
+		else
+			amount -= E.add_genetic_damage(amount)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
@@ -334,36 +315,33 @@ This function restores all organs.
 		organ = get_organ(check_zone(def_zone))
 
 	//Handle other types of damage
-	if(damagetype != BRUTE && damagetype != BURN)
-		if(!stat && damagetype == HALLOSS && can_feel_pain())
-			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
-				emote("scream")
-
+	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
 		..(damage, damagetype, def_zone, blocked)
 		return 1
 
-	//Handle BRUTE and BURN damage
 	handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 100)	return 0
-
 
 	if(!organ)	return 0
 
 	if(blocked)
 		damage *= blocked_mult(blocked)
 
+	damageoverlaytemp = 20
 	switch(damagetype)
 		if(BRUTE)
-			damageoverlaytemp = 20
 			damage = damage*species.brute_mod
 			if(organ.take_damage(damage, 0, damage_flags, used_weapon))
 				UpdateDamageIcon()
 		if(BURN)
-			damageoverlaytemp = 20
 			damage = damage*species.burn_mod
 			if(organ.take_damage(0, damage, damage_flags, used_weapon))
 				UpdateDamageIcon()
+		if(PAIN)
+			organ.add_pain(damage)
+		if(CLONE)
+			organ.add_genetic_damage(damage)
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()

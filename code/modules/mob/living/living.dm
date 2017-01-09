@@ -184,7 +184,7 @@ default behaviour is:
 		health = 100
 		stat = CONSCIOUS
 	else
-		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss
+		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
 
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
@@ -259,38 +259,32 @@ default behaviour is:
 	if(status_flags & GODMODE)	return 0	//godmode
 	fireloss = Clamp(fireloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
-/mob/living/proc/getCloneLoss()
-	return cloneloss
-
-/mob/living/proc/adjustCloneLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = Clamp(cloneloss + amount, 0, (maxHealth - config.health_threshold_dead))
-
-/mob/living/proc/setCloneLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	cloneloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
-
 /mob/living/proc/getBrainLoss()
-	return brainloss
+	return 0
 
 /mob/living/proc/adjustBrainLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = Clamp(brainloss + amount, 0, (maxHealth - config.health_threshold_dead))
+	return 0
 
 /mob/living/proc/setBrainLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	brainloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
+	return 0
+
+/mob/living/proc/getCloneLoss()
+	return
+
+/mob/living/proc/setCloneLoss(var/amount)
+	return
+
+/mob/living/proc/adjustCloneLoss(var/amount)
+	return
 
 /mob/living/proc/getHalLoss()
-	return halloss
+	return 0
 
 /mob/living/proc/adjustHalLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = Clamp(halloss + amount, 0, (maxHealth - config.health_threshold_dead))
+	adjustBruteLoss(amount * 0.5)
 
 /mob/living/proc/setHalLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	halloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
+	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
