@@ -391,13 +391,6 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list("glass" = 200)
 
-/obj/item/weapon/stock_parts/capacitor
-	name = "capacitor"
-	desc = "A basic capacitor used in the construction of a variety of devices."
-	icon_state = "capacitor"
-	origin_tech = list(TECH_POWER = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
-
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
@@ -427,13 +420,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
 //Rank 2
-
-/obj/item/weapon/stock_parts/capacitor/adv
-	name = "advanced capacitor"
-	desc = "An advanced capacitor used in the construction of a variety of devices."
-	origin_tech = list(TECH_POWER = 3)
-	rating = 2
-	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 /obj/item/weapon/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
@@ -468,13 +454,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
 //Rating 3
-
-/obj/item/weapon/stock_parts/capacitor/super
-	name = "super capacitor"
-	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
-	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
-	rating = 3
-	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 /obj/item/weapon/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"

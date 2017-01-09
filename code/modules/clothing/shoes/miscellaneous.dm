@@ -167,3 +167,8 @@
 /obj/item/clothing/shoes/swimmingfins/New()
 	..()
 	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1
+
+/obj/item/clothing/shoes/athletic
+	name = "athletic shoes"
+	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
+	icon_state = "sportshoe"

@@ -46,7 +46,7 @@
 			src.attach_accessory(null, tie)
 
 //BS12: Species-restricted clothing check.
-/obj/item/clothing/mob_can_equip(M as mob, slot)
+/obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = 0)
 
 	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
 	if (!..())
@@ -68,7 +68,7 @@
 				if(H.species.get_bodytype(H) in species_restricted)
 					wearable = 1
 
-			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
+			if(!disable_warning && !wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
 				return 0
 	return 1

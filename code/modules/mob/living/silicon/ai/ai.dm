@@ -119,7 +119,7 @@ var/list/ai_verbs_default = list(
 	fully_replace_character_name(pickedName)
 	anchored = 1
 	canmove = 0
-	density = 1
+	set_density(1)
 	loc = loc
 
 	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))

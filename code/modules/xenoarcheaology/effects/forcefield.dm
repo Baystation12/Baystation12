@@ -25,7 +25,7 @@
 			var/obj/effect/energy_field/E = new (locate(T.x,T.y,T.z))
 			created_field.Add(E)
 			E.strength = 1
-			E.density = 1
+			E.set_density(1)
 			E.anchored = 1
 			E.invisibility = 0
 		spawn(10)
@@ -48,7 +48,7 @@
 			var/obj/effect/energy_field/E = new (locate(T.x,T.y,T))
 			created_field.Add(E)
 			E.anchored = 1
-			E.density = 1
+			E.set_density(1)
 			E.invisibility = 0
 
 		var/obj/effect/energy_field/E = created_field[1]

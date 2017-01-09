@@ -1163,10 +1163,14 @@
 	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack)
 		create_stack()
 	full_prosthetic = null
-	if(species)
-		return 1
-	else
-		return 0
+
+	//recheck species-restricted clothing
+	for(var/slot in slot_first to slot_last)
+		var/obj/item/clothing/C = get_equipped_item(slot)
+		if(istype(C) && !C.mob_can_equip(src, slot, 1))
+			unEquip(C)
+
+	return 1
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"

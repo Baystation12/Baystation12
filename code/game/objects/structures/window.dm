@@ -348,7 +348,7 @@
 
 
 /obj/structure/window/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	var/turf/location = loc
 	loc = null

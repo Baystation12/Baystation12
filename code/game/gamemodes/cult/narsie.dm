@@ -152,8 +152,8 @@ var/global/list/narsie_list = list()
 	T.desc = "An opening has been made on that wall, but who can say if what you seek truly lies on the other side?"
 	T.icon = 'icons/turf/walls.dmi'
 	T.icon_state = "cult-narsie"
-	T.opacity = 0
-	T.density = 0
+	T.set_opacity(0)
+	T.set_density(0)
 	set_light(1)
 
 /obj/singularity/narsie/large/consume(const/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO

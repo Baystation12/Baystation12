@@ -449,7 +449,7 @@
 				C.ptype = 8 // 8 =  Delivery chute
 				C.update()
 				C.anchored = 1
-				C.density = 1
+				C.set_density(1)
 				qdel(src)
 			return
 		else

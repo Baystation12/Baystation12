@@ -421,7 +421,7 @@
 		screen_shake = initial(screen_shake)
 
 /obj/item/weapon/gun/examine(mob/user)
-	..()
+	. = ..()
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
 		to_chat(user, "The fire selector is set to [current_mode.name].")

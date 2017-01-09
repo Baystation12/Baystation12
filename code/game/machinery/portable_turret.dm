@@ -576,7 +576,7 @@ var/list/turret_icons
 /obj/machinery/porta_turret/proc/set_raised_raising(var/raised, var/raising)
 	src.raised = raised
 	src.raising = raising
-	density = raised || raising
+	set_density(raised || raising)
 
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
 	if(disabled)

@@ -6,24 +6,15 @@
 	category = /datum/gear/gloves
 
 /datum/gear/gloves/colored
-	display_name = "gloves, colored"
-	flags = GEAR_HAS_COLOR_SELECTION
-	path = /obj/item/clothing/gloves/color
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/gloves/latex
-	display_name = "gloves, latex"
-	path = /obj/item/clothing/gloves/latex
 	cost = 3
 
 /datum/gear/gloves/nitrile
-	display_name = "gloves, nitrile"
-	path = /obj/item/clothing/gloves/latex/nitrile
 	cost = 3
 
 /datum/gear/gloves/rainbow
-	display_name = "gloves, rainbow"
-	path = /obj/item/clothing/gloves/rainbow
 	allowed_roles = list("Passenger", "Bartender", "Merchant")
 
 /datum/gear/gloves/botany
@@ -33,9 +24,6 @@
 	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Merchant")
 
 /datum/gear/gloves/evening
-	display_name = "gloves, evening"
-	path = /obj/item/clothing/gloves/color/evening
-	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
 
 /datum/gear/gloves/dress
