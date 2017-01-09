@@ -82,3 +82,92 @@
 	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
 		if(T.density)
 			return 1
+
+//FALLING STUFF
+
+//Holds fall checks that should not be overriden by children
+/atom/movable/proc/fall()
+	var/turf/simulated/open/below = loc
+	if(!istype(loc))
+		return
+
+	below = below.below
+	if(!below)
+		return
+
+	if(!below.CanZPass(src,DOWN))
+		return
+
+	// No gravity in space, apparently.
+	var/area/area = get_area(src)
+	if(!area.has_gravity())
+		return
+
+	if(throwing)
+		return
+
+	if(can_fall())
+		handle_fall(below)
+
+//For children to override
+/atom/movable/proc/can_fall()
+	var/turf/simulated/open/below = loc
+	below = below.below
+
+	if(anchored)
+		return FALSE
+
+	if(locate(/obj/structure/lattice, loc))
+		return FALSE
+	return TRUE
+
+	// See if something prevents us from falling.
+	for(var/atom/A in below)
+		if(A.density)
+			if(!istype(A, /obj/structure/window))
+				return  FALSE
+			else
+				var/obj/structure/window/W = A
+				if(W.is_fulltile())
+					return FALSE
+
+/obj/effect/can_fall()
+	return FALSE
+
+/obj/effect/decal/cleanable/can_fall()
+	return TRUE
+
+/obj/item/pipe/can_fall()
+	var/turf/simulated/open/below = loc
+	below = below.below
+
+	. = ..()
+
+	if(anchored)
+		return FALSE
+
+	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
+		return FALSE
+
+/atom/movable/proc/handle_fall(var/turf/landing)
+	Move(landing)
+	if(locate(/obj/structure/stairs) in landing)
+		return 1
+
+	if(istype(landing, /turf/simulated/open))
+		visible_message("\The [src] falls from the deck above through \the [landing]!", "You hear a whoosh of displaced air.")
+	else
+		visible_message("\The [src] falls from the deck above and slams into \the [landing]!", "You hear something slam into the deck.")
+
+/mob/living/carbon/human/handle_fall(var/turf/landing)
+	if(..())
+		return
+	var/damage = 10
+	apply_damage(rand(0, damage), BRUTE, BP_HEAD)
+	apply_damage(rand(0, damage), BRUTE, BP_CHEST)
+	apply_damage(rand(0, damage), BRUTE, BP_L_LEG)
+	apply_damage(rand(0, damage), BRUTE, BP_R_LEG)
+	apply_damage(rand(0, damage), BRUTE, BP_L_ARM)
+	apply_damage(rand(0, damage), BRUTE, BP_R_ARM)
+	weakened = max(weakened,2)
+	updatehealth()

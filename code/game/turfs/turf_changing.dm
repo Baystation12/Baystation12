@@ -69,7 +69,8 @@
 	. = W
 
 	lighting_overlay = old_lighting_overlay
-	lighting_overlay.update_overlay()
+	if(lighting_overlay)
+		lighting_overlay.update_overlay()
 	affecting_lights = old_affecting_lights
 	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
 		reconsider_lights()
