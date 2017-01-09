@@ -52,6 +52,7 @@
 #include "code\_helpers\files.dm"
 #include "code\_helpers\functional.dm"
 #include "code\_helpers\game.dm"
+#include "code\_helpers\geoip.dm"
 #include "code\_helpers\global_access.dm"
 #include "code\_helpers\global_lists.dm"
 #include "code\_helpers\icons.dm"
