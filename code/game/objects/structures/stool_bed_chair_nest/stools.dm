@@ -49,14 +49,14 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
 	icon_state = ""
-	overlays.Cut()
 	// Base icon.
+	var/list/noverlays = list()
 	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image(icon, "[base_icon]_base")
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
-	overlays |= stool_cache[cache_key]
+	noverlays |= stool_cache[cache_key]
 	// Padding overlay.
 	if(padding_material)
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
@@ -64,7 +64,8 @@ var/global/list/stool_cache = list() //haha stool
 			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
-		overlays |= stool_cache[padding_cache_key]
+		noverlays |= stool_cache[padding_cache_key]
+	overlays = noverlays
 	// Strings.
 	if(padding_material)
 		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
