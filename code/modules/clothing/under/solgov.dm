@@ -28,7 +28,6 @@
 	icon_state = "marinept"
 	worn_state = "marinept"
 
-
 //Utility
 
 /obj/item/clothing/under/utility
