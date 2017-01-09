@@ -276,6 +276,7 @@ BLIND     // can't see anything
 	var/light_applied
 	var/brightness_on
 	var/on = 0
+	var/use64 = 0 //64 pixels icons
 
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/head.dmi',
