@@ -192,7 +192,7 @@
 
 /decl/hierarchy/rcd_mode/proc/do_handle_work(var/atom/target)
 	var/result = get_work_result(target)
-	if(isturf(result))
+	if(ispath(result,/turf))
 		var/turf/T = target
 		T.ChangeTurf(result)
 	else if(result)
