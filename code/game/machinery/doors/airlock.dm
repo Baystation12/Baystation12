@@ -783,8 +783,8 @@ About the new airlock wires panel:
 	return 1
 
 //returns 1 on success, 0 on failure
-/obj/machinery/door/airlock/proc/cut_bolts(item, user)
-	var/cut_delay = 100
+/obj/machinery/door/airlock/proc/cut_bolts(item, var/mob/user)
+	var/cut_delay = (10 SECONDS)
 	var/cut_verb
 	var/cut_sound
 
@@ -817,27 +817,45 @@ About the new airlock wires panel:
 		var/obj/item/weapon/material/twohanded/fireaxe/F = item
 		if (!F.wielded)
 			return 0
-		to_chat(user, "You smash the bolt cover open!")
+		user.visible_message(
+			"<span class='danger'>\The [user] smashes the bolt cover open!</span>",
+			"<span class='warning'>You smash the bolt cover open!</span>"
+			)
 		playsound(src, 'sound/weapons/smash.ogg', 100, 1)
 		src.lock_cut_state = BOLTS_EXPOSED
-		return
+		return 0
 
 	else
 		// I guess you can't cut bolts with that item. Never mind then.
 		return 0
 
 	if (src.lock_cut_state == BOLTS_FINE)
-		to_chat(user, "You begin [cut_verb] through the bolt cover.")
+		user.visible_message(
+			"<span class='notice'>\The [user] begins [cut_verb] through the bolt cover on [src].</span>",
+			"<span class='notice'>You begin [cut_verb] through the bolt cover.</span>"
+			)
+
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
-			to_chat(user, "You remove the cover and expose the door bolts.")
+			user.visible_message(
+				"<span class='notice'>\The [user] removes the bolt cover from [src]</span>",
+				"<span class='notice'>You remove the cover and expose the door bolts.</span>"
+				)
 			src.lock_cut_state = BOLTS_EXPOSED
 		return 1
 
 	if (src.lock_cut_state == BOLTS_EXPOSED)
+		user.visible_message(
+			"<span class='notice'>\The [user] begins [cut_verb] through [src]'s bolts.</span>",
+			"<span class='notice'>You begin [cut_verb] through the door bolts.</span>"
+			)
 		to_chat(usr, "You begin [cut_verb] through the door bolts.")
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
+			user.visible_message(
+				"<span class='notice'>\The [user] severs the door bolts, unlocking [src].</span>",
+				"<span class='notice'>You sever the door bolts, unlocking the door.</span>"
+				)
 			to_chat(user, "You sever the door bolts, unlocking the door.")
 			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
