@@ -4,3 +4,4 @@ delete-after: True
 
 changes: 
   - rscdel: "Removed Stunbatons from Medbay"
+  - maptweak: "Reorganized the Paramedic's Station"
