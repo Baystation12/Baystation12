@@ -121,6 +121,27 @@
 	amputation_point = "left wrist"
 	can_grasp = 1
 
+/obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || (!stun_amount && agony_amount < 5))
+		return
+
+	var/obj/item/dropping
+	if(body_part == HAND_LEFT)
+		dropping = owner.l_hand
+	else if(body_part == HAND_RIGHT)
+		dropping = owner.r_hand
+
+	if(!dropping)
+		return
+
+	msg_admin_attack("[owner.name] ([owner.ckey]) was disarmed by a stun effect")
+	owner.drop_from_inventory(dropping)
+	if(robotic >= ORGAN_ROBOT)
+		owner.emote("me", 1, "drops what they were holding, their [name] malfunctioning!")
+	else
+		var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
+		owner.emote("me", 1, "[can_feel_pain() ? "" : emote_scream]drops what they were holding in their [name]!")
+
 /obj/item/organ/external/hand/removed()
 	owner.drop_from_inventory(owner.gloves)
 	..()
@@ -152,6 +173,9 @@
 	var/can_intake_reagents = 1
 	var/eye_icon = "eyes_s"
 	var/has_lips
+
+/obj/item/organ/external/head/get_agony_multiplier()
+	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
 /obj/item/organ/external/head/robotize(var/company, var/skip_prosthetics, var/keep_organs)
 	if(company)

@@ -61,7 +61,7 @@
 	nodamage = 1
 	taser_effect = 1
 	agony = 40
-	damage_type = HALLOSS
+	damage_type = PAIN
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot
@@ -71,10 +71,10 @@
 	damage_type = BURN
 
 /obj/item/projectile/energy/declone
-	name = "declone"
+	name = "decloner beam"
 	icon_state = "declone"
 	fire_sound = 'sound/weapons/pulse3.ogg'
-	nodamage = 1
+	damage = 30
 	damage_type = CLONE
 	irradiate = 40
 

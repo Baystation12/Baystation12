@@ -130,7 +130,7 @@
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if(istype(G.affecting,/mob/living))
-			grab_smash_attack(G, HALLOSS)
+			grab_smash_attack(G, PAIN)
 			return
 
 	if(W.flags & NOBLUDGEON) return
@@ -210,7 +210,7 @@
 	return
 
 /obj/item/weapon/holo
-	damtype = HALLOSS
+	damtype = PAIN
 	no_attack_log = 1
 
 /obj/item/weapon/holo/esword
@@ -237,7 +237,7 @@
 /obj/item/weapon/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
-		
+
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()

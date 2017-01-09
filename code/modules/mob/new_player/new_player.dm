@@ -350,6 +350,8 @@
 		empty_playable_ai_cores -= C
 
 		character.forceMove(C.loc)
+		var/mob/living/silicon/ai/A = character
+		A.on_mob_init()
 
 		AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
 		ticker.mode.handle_latejoin(character)
