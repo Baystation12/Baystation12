@@ -160,8 +160,6 @@ var/list/ai_verbs_default = list(
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
 
-			on_mob_init()
-
 	create_powersupply()
 
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
