@@ -784,27 +784,27 @@ About the new airlock wires panel:
 
 //returns 1 on success, 0 on failure
 /obj/machinery/door/airlock/proc/cut_bolts(item, var/mob/user)
-	var/cut_delay = (10 SECONDS)
+	var/cut_delay = (15 SECONDS)
 	var/cut_verb
 	var/cut_sound
 
 	if(istype(item,/obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = item
 		if(!WT.isOn())
-			return
+			return 0
 		if(!WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-			return
+			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 	else if(istype(item,/obj/item/weapon/pickaxe/plasmacutter))
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
-		cut_delay *= 0.5
+		cut_delay *= 0.66
 	else if(istype(item,/obj/item/weapon/melee/energy/blade) || istype(item,/obj/item/weapon/melee/energy/sword))
 		cut_verb = "slicing"
 		cut_sound = "sparks"
-		cut_delay *= 0.5
+		cut_delay *= 0.66
 	else if(istype(item,/obj/item/weapon/circular_saw))
 		cut_verb = "sawing"
 		cut_sound = 'sound/weapons/circsawhit.ogg'
