@@ -356,7 +356,7 @@ nanoui is used to open and update nano browser uis
 		template_data_json = strip_improper(json_encode(templates))
 
 	var/list/send_data = get_send_data(initial_data)
-	var/initial_data_json = replacetext(replacetext(json_encode(send_data), "&#34;", "&amp;#34;"), "'", "&#39;")
+	var/initial_data_json = replacetext(replacetext(extA2U(json_encode(send_data)), "&#34;", "&amp;#34;"), "'", "&#39;")
 	initial_data_json = strip_improper(initial_data_json);
 
 	var/url_parameters_json = json_encode(list("src" = "\ref[src]"))
