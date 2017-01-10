@@ -22,7 +22,7 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
 		last_pain_message = message
 		if(power >= 50)
-			to_chat(src, "<font size=3>[message]</font>")
+			to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
 		else
 			to_chat(src, "<span class='danger'>[message]</span>")
 	next_pain_time = world.time + (100-power)
@@ -60,7 +60,7 @@ mob/living/carbon/human/proc/handle_pain()
 			if(91 to 10000)
 				flash_pain()
 				msg = "<font size=3>OH GOD! Your [damaged_organ.name] is [burning ? "on fire" : "hurting terribly"]!</font>"
-		custom_pain(msg, maxdam, prob(10), affecting = damaged_organ)
+		custom_pain(msg, 0, prob(10), affecting = damaged_organ)
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/I in internal_organs)
