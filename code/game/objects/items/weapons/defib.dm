@@ -595,7 +595,7 @@
 					H.emote("gasp")
 					if(tplus > tloss)
 						H.setBrainLoss( max(0, min(99, (100 -((tlimit - tplus) / (tlimit-1200) * 100)))))
-					H.apply_damage(15, BURN, BP_CHEST)
+					H.apply_damage(20, BURN, BP_CHEST)
 					H.Weaken(rand(10,25))
 					log_game(user, M, "revived", defib)
 				if(req_defib)
