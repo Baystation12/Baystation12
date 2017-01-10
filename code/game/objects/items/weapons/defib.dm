@@ -288,11 +288,10 @@
 	return null
 
 /obj/item/weapon/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
-	if(combat) return TRUE //can be used through any clothing
-
-	for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
-		if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & THICKMATERIAL))
-			return TRUE
+	if(!combat)
+		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
+			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & THICKMATERIAL))
+				return TRUE
 	return FALSE
 
 /obj/item/weapon/shockpaddles/proc/check_vital_organs(mob/living/carbon/human/H)
