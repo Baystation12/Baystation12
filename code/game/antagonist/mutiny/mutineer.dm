@@ -15,7 +15,7 @@ var/datum/antagonist/mutineer/mutineers
 
 /datum/antagonist/mutineer/proc/recruit()
 
-/datum/antagonist/mutineer/can_become_antag(var/datum/mind/player)
+/datum/antagonist/mutineer/can_become_antag(var/datum/mind/player, var/ignore_role)
 	if(!..())
 		return 0
 	if(!istype(player.current, /mob/living/carbon/human))
