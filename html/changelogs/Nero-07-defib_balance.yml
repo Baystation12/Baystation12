@@ -33,5 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Lowered defib burn damage by 5."
   - rscadd: "Dead people now keep processing reagents for 15 seconds after they died"
