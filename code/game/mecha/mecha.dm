@@ -608,7 +608,7 @@
 	return
 
 /obj/mecha/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS && !(src.r_deflect_coeff > 1))
+	if(Proj.damage_type == PAIN && !(src.r_deflect_coeff > 1))
 		use_power(Proj.agony * 5)
 
 	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)

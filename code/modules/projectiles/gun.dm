@@ -385,13 +385,13 @@
 			return
 
 		in_chamber.on_hit(M)
-		if (in_chamber.damage_type != HALLOSS)
+		if (in_chamber.damage_type != PAIN)
 			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
 			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, 0, in_chamber.damage_flags(), used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
 			user.death()
 		else
 			to_chat(user, "<span class = 'notice'>Ow...</span>")
-			user.apply_effect(110,AGONY,0)
+			user.apply_effect(110,PAIN,0)
 		qdel(in_chamber)
 		mouthshoot = 0
 		return

@@ -1,0 +1,6 @@
+author: chinsky
+
+delete-after: True
+
+changes: 
+  - experiment: "SM delamination no longer causes hallucinations, but has bigger explosion."

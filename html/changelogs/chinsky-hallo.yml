@@ -1,0 +1,6 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - rscdel: "Removed hallucination part of SM delamination event."

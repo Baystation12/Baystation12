@@ -22,8 +22,10 @@
 			adjustOxyLoss(damage * blocked_mult(blocked))
 		if(CLONE)
 			adjustCloneLoss(damage * blocked_mult(blocked))
-		if(HALLOSS)
+		if(PAIN)
 			adjustHalLoss(damage * blocked_mult(blocked))
+		if(ELECTROCUTE)
+			electrocute_act(damage, used_weapon)
 	flash_weak_pain()
 	updatehealth()
 	return 1
@@ -36,7 +38,7 @@
 	if(tox)		apply_damage(tox, TOX, def_zone, blocked)
 	if(oxy)		apply_damage(oxy, OXY, def_zone, blocked)
 	if(clone)	apply_damage(clone, CLONE, def_zone, blocked)
-	if(halloss) apply_damage(halloss, HALLOSS, def_zone, blocked)
+	if(halloss) apply_damage(halloss, PAIN, def_zone, blocked)
 	return 1
 
 
@@ -50,8 +52,8 @@
 			Weaken(effect * blocked_mult(blocked))
 		if(PARALYZE)
 			Paralyse(effect * blocked_mult(blocked))
-		if(AGONY)
-			halloss += effect * blocked_mult(blocked) // Useful for objects that cause "subdual" damage. PAIN!
+		if(PAIN)
+			adjustHalLoss(effect * blocked_mult(blocked))
 		if(IRRADIATE)
 			radiation += effect * blocked_mult(blocked)
 		if(STUTTER)
@@ -67,12 +69,12 @@
 
 /mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
 	if(blocked >= 2)	return 0
-	if(stun)		apply_effect(stun, STUN, blocked)
-	if(weaken)		apply_effect(weaken, WEAKEN, blocked)
-	if(paralyze)	apply_effect(paralyze, PARALYZE, blocked)
+	if(stun)		apply_effect(stun,      STUN, blocked)
+	if(weaken)		apply_effect(weaken,    WEAKEN, blocked)
+	if(paralyze)	apply_effect(paralyze,  PARALYZE, blocked)
 	if(irradiate)	apply_effect(irradiate, IRRADIATE, blocked)
-	if(stutter)		apply_effect(stutter, STUTTER, blocked)
-	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
-	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
-	if(agony)		apply_effect(agony, AGONY, blocked)
+	if(stutter)		apply_effect(stutter,   STUTTER, blocked)
+	if(eyeblur)		apply_effect(eyeblur,   EYE_BLUR, blocked)
+	if(drowsy)		apply_effect(drowsy,    DROWSY, blocked)
+	if(agony)		apply_effect(agony,     PAIN, blocked)
 	return 1

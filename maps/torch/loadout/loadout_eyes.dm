@@ -12,9 +12,7 @@
 /datum/gear/eyes/fashionglasses
 	display_name = "glasses"
 	path = /obj/item/clothing/glasses/gglasses
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/fashionglasses/New()
 	..()
@@ -80,9 +78,7 @@
 	display_name = "sunglasses, fat"
 	path = /obj/item/clothing/glasses/sunglasses/big
 	cost = 3
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/shades/prescriptionsun
 	display_name = "sunglasses, presciption"

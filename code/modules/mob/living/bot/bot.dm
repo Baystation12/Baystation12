@@ -75,8 +75,6 @@
 		health = maxHealth - getFireLoss() - getBruteLoss()
 	oxyloss = 0
 	toxloss = 0
-	cloneloss = 0
-	halloss = 0
 
 /mob/living/bot/death()
 	explode()
@@ -223,7 +221,7 @@
 /mob/living/bot/proc/getPatrolTurf()
 	var/minDist = INFINITY
 	var/obj/machinery/navbeacon/targ = locate() in get_turf(src)
-	
+
 	if(!targ)
 		for(var/obj/machinery/navbeacon/N in navbeacons)
 			if(!N.codes["patrol"])

@@ -29,33 +29,21 @@
 		icon_state = off_icon
 		return
 
-	var/obj/item/organ/external/E
-	var/nopain
-	if(ishuman(victim) && user.zone_sel.selecting != BP_GROIN && user.zone_sel.selecting != BP_CHEST)
+	var/target_zone = user.zone_sel.selecting
+	if(ishuman(victim) && !(target_zone in list(BP_GROIN, BP_CHEST)))
 		var/mob/living/carbon/human/H = victim
-		E = H.get_organ(user.zone_sel.selecting)
-		if(!E || !E.can_feel_pain())
-			nopain = 2
-		else if(E.robotic >= ORGAN_ROBOT)
-			nopain = 1
+		var/obj/item/organ/external/E = H.get_organ(target_zone)
+		if(!E)
+			to_chat(user, "<span class='warning'>They are missing that body part!</span>")
+		else
+			visible_message("<span class='danger'>\The [user] shoves \the [victim][E ? "'s [E.name]" : ""] into \the [src]!</span>")
+			var/blocked = H.run_armor_check(target_zone, "energy")
+			H.apply_damage(rand(20,30), BURN, target_zone, blocked)
 
-	user.visible_message("<span class='danger'>\The [user] shoves \the [victim][E ? "'s [E.name]" : ""] into \the [src]!</span>")
-
-	if(E)
-		E.take_damage(0, rand(20,30))
-		if(E.children && E.children.len)
-			for(var/obj/item/organ/external/child in E.children)
-				if(nopain && nopain < 2 && !(child.robotic >= ORGAN_ROBOT))
-					nopain = 0
-				child.take_damage(0, rand(20,30))
 	else
-		victim.apply_damage(rand(30,40), BURN, user.zone_sel.selecting)
+		var/blocked = victim.run_armor_check(null, "energy")
+		victim.apply_damage(rand(30,40), BURN, null, blocked)
 
-	if(!nopain)
-		to_chat(victim, "<span class='danger'>Agony consumes you as searing hot oil scorches your [E ? E.name : "flesh"] horribly!</span>")
-		victim.emote("scream")
-	else
-		to_chat(victim, "<span class='danger'>Searing hot oil scorches your [E ? E.name : "flesh"]!</span>")
 	if(victim)
 		admin_attack_log(user, victim, "Has [cook_type] their victim in \a [src]", "Has been [cook_type] in \a [src] by the attacker.", "[cook_type], in \a [src], ")
 

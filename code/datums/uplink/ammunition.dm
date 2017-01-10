@@ -35,3 +35,29 @@
 	name = "14.5mm"
 	item_cost = 8
 	path = /obj/item/weapon/storage/box/sniperammo
+
+/datum/uplink_item/item/ammo/shotgun_shells
+	name = "Shotgun Shells box"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunshells
+
+/datum/uplink_item/item/ammo/shotgun_slugs
+	name = "Shotgun Slugs box"
+	item_cost = 8
+	path = /obj/item/weapon/storage/box/shotgunammo
+
+/datum/uplink_item/item/ammo/c45uzi
+	name = ".45 SMG Magazine"
+	item_cost = 8
+	path = /obj/item/ammo_magazine/c45uzi
+
+/datum/uplink_item/item/ammo/a50
+	name = ".50 AE magazine"
+	item_cost = 8
+	path = /obj/item/ammo_magazine/a50
+
+/datum/uplink_item/item/ammo/c38
+	name = ".38 speedloader"
+	item_cost = 8
+	path = /obj/item/ammo_magazine/c38
+

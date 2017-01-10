@@ -86,4 +86,7 @@
 	if (istype(H, /obj/item/weapon/handcuffs))
 		attach_cuffs(H, user)
 
-
+/obj/item/clothing/shoes/flats
+	name = "flats"
+	desc = "Sleek flats."
+	icon_state = "flatswhite"

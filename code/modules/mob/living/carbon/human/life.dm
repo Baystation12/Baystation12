@@ -648,7 +648,7 @@
 	if(status_flags & GODMODE)	return 0
 
 	//SSD check, if a logged player is awake put them back to sleep!
-	if(species.get_ssd(src) && !client && !teleop)
+	if(ssd_check() && species.get_ssd(src))
 		Sleeping(2)
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		blinded = 1
@@ -683,11 +683,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(halloss >= species.total_health)
-			to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
-			src.visible_message("<B>[src]</B> [species.halloss_message].")
+		if(getHalLoss() >= species.total_health)
+			if(!stat)
+				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
+				src.visible_message("<B>[src]</B> [species.halloss_message].")
 			Paralyse(10)
-			setHalLoss(species.total_health-1)
 
 		if(paralysis || sleeping)
 			blinded = 1
@@ -813,7 +813,7 @@
 						var/no_damage = 1
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 						if(!can_feel_pain())
-							trauma_val = max(traumatic_shock,halloss)/species.total_health
+							trauma_val = max(traumatic_shock,getHalLoss())/species.total_health
 						var/limb_trauma_val = trauma_val*0.5
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()

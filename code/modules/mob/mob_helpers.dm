@@ -593,3 +593,6 @@ proc/is_blind(A)
 	if(dna)
 		dna.real_name = real_name
 	return 1
+
+/mob/proc/ssd_check()
+	return !client && !teleop

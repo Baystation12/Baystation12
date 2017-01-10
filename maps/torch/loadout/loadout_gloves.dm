@@ -6,7 +6,7 @@
 	category = /datum/gear/gloves
 
 /datum/gear/gloves/colored
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/gloves/latex
 	cost = 3
@@ -24,22 +24,18 @@
 	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Merchant")
 
 /datum/gear/gloves/evening
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/gloves/dress
 	display_name = "gloves, dress"
 	path = /obj/item/clothing/gloves/color/white
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/gloves/duty
 	display_name = "gloves, duty"
 	path = /obj/item/clothing/gloves/duty
 	cost = 3
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/gloves/work
 	display_name = "gloves, work"

@@ -196,8 +196,11 @@ proc/age2agedescription(age)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
+	var/target_type = null
+	
 	if(target)
 		target_loc = target.loc
+		target_type = target.type
 
 	var/atom/original_loc = user.loc
 
@@ -219,7 +222,7 @@ proc/age2agedescription(age)
 			. = 0
 			break
 
-		if(target_loc && (!target || deleted(target) || target_loc != target.loc))
+		if(target_loc && (!target || deleted(target) || target_loc != target.loc || target_type != target.type))
 			. = 0
 			break
 
