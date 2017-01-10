@@ -62,7 +62,7 @@ script:
   - awk -f tools/indentation.awk **/*.dm
   - md5sum -c - <<< "4bab08611ef5a6f7478d8c4f8b1aa355 *.gitignore"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
-  - md5sum -c - <<< "83CD72D1BA0071F8E6519203E4D75193 *html/changelogs_solaris/example.yml"
+  - md5sum -c - <<< "83cd72d1ba0071f8e6519203e4d75193 *html/changelogs_solaris/example.yml"
   - python tools/TagMatcher/tag-matcher.py .
   - python tools/PunctuationChecker/punctuation-checker.py .
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
