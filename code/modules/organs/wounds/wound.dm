@@ -24,6 +24,8 @@
 	var/damage_type = CUT      // one of CUT, PIERCE, BRUISE, BURN
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
+	var/obj/item/embedded
+
 	// helper lists
 	var/tmp/list/desc_list = list()
 	var/tmp/list/damage_list = list()
@@ -60,18 +62,20 @@
 	return src.damage / src.amount
 
 /datum/wound/proc/can_autoheal()
-	return (src.wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
+	return ((!embedded || embedded.w_class <= ITEM_SIZE_SMALL) && src.wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
 
 // checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
-	switch(damage_type)
-		if(BRUISE, CUT, PIERCE)
-			return bandaged
-		if(BURN)
-			return salved
+	if(!embedded)
+		switch(damage_type)
+			if(BRUISE, CUT, PIERCE)
+				return bandaged
+			if(BURN)
+				return salved
 
 	// Checks whether other other can be merged into src.
 /datum/wound/proc/can_merge(var/datum/wound/other)
+	if (embedded && other.embedded) return 0
 	if (other.type != src.type) return 0
 	if (other.current_stage != src.current_stage) return 0
 	if (other.damage_type != src.damage_type) return 0
@@ -83,6 +87,7 @@
 	return 1
 
 /datum/wound/proc/merge_wound(var/datum/wound/other)
+	src.embedded = other.embedded
 	src.damage += other.damage
 	src.amount += other.amount
 	src.bleed_timer += other.bleed_timer
@@ -127,10 +132,8 @@
 // than what needed to be healed, return how much heal was left
 // set @heals_internal to also heal internal organ damage
 /datum/wound/proc/heal_damage(amount, heals_internal = 0)
-	if(src.internal && !heals_internal)
-		// heal nothing
-		return amount
-
+	if(embedded || (src.internal && !heals_internal))
+		return amount // heal nothing
 	var/healed_damage = min(src.damage, amount)
 	amount -= healed_damage
 	src.damage -= healed_damage
@@ -172,4 +175,8 @@
 	return 1
 
 /datum/wound/proc/bleeding()
-	return !(internal || (current_stage > max_bleeding_stage) || bandaged || clamped || (bleed_timer <= 0 && wound_damage() <= bleed_threshold))
+	if(embedded && embedded.w_class > ITEM_SIZE_TINY)
+		return FALSE
+	if(internal || bandaged || clamped)
+		return FALSE
+	return (bleed_timer > 0 && wound_damage() > bleed_threshold)

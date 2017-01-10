@@ -83,6 +83,10 @@
 
 /obj/item/organ/external/Destroy()
 
+	for(var/datum/wound/wound in wounds)
+		wound.embedded = null
+	wounds.Cut()
+
 	if(parent && parent.children)
 		parent.children -= src
 
@@ -337,6 +341,8 @@ This function completely restores a damaged organ to perfect condition.
 	germ_level = 0
 	pain = 0
 	genetic_degradation = 0
+	for(var/datum/wound/wound in wounds)
+		wound.embedded = null
 	wounds.Cut()
 	number_wounds = 0
 
@@ -419,7 +425,7 @@ This function completely restores a damaged organ to perfect condition.
 						owner.visible_message("<span class='danger'>The wound on [owner.name]'s [name] widens with a nasty ripping noise.</span>",\
 						"<span class='danger'>The wound on your [name] widens with a nasty ripping noise.</span>",\
 						"<span class='danger'>You hear a nasty ripping noise, as if flesh is being torn apart.</span>")
-				return
+				return W
 
 	//Creating wound
 	var/wound_type = get_wound_type(type, damage)
@@ -435,6 +441,7 @@ This function completely restores a damaged organ to perfect condition.
 				break
 		if(W)
 			wounds += W
+		return W
 
 /****************************************************
 			   PROCESSING & UPDATING
@@ -1012,7 +1019,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/is_malfunctioning()
 	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
 
-/obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0, var/supplied_message)
+/obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0, var/supplied_message, var/datum/wound/supplied_wound)
 	if(!owner || loc != owner)
 		return
 	if(species.flags & NO_EMBED)
@@ -1022,6 +1029,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.visible_message("<span class='danger'>[supplied_message]</span>")
 		else
 			owner.visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+
+	if(!supplied_wound)
+		for(var/datum/wound/wound in wounds)
+			if((wound.damage_type == CUT || wound.damage_type == PIERCE) && wound.damage >= W.w_class * 5)
+				supplied_wound = wound
+				break
+	if(!supplied_wound)
+		supplied_wound = createwound(PIERCE, W.w_class * 5)
+
+	supplied_wound.embedded = W
 	implants += W
 	owner.embedded_flag = 1
 	owner.verbs += /mob/proc/yank_out_object

@@ -199,7 +199,7 @@
 	..()
 
 /obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon = null)
-	..()
+	. = ..()
 	if (!disfigured)
 		if (brute_dam > 40)
 			if (prob(50))

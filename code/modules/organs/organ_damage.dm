@@ -51,14 +51,15 @@
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
+	var/datum/wound/created_wound
 	if(is_damageable(brute + burn) || !config.limbs_can_break)
 		if(brute)
 			if(can_cut)
 				//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 				if(sharp && !edge)
-					createwound( PIERCE, brute )
+					created_wound = createwound( PIERCE, brute )
 				else
-					createwound( CUT, brute )
+					created_wound = createwound( CUT, brute )
 			else
 				createwound( BRUISE, brute )
 		if(burn)
@@ -101,7 +102,10 @@
 			else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute/3))
 				droplimb(0, DROPLIMB_EDGE)
 
-	return update_damstate()
+	if(owner && update_damstate())
+		owner.UpdateDamageIcon()
+
+	return created_wound
 
 /obj/item/organ/external/proc/heal_damage(brute, burn, internal = 0, robo_repair = 0)
 	if(robotic >= ORGAN_ROBOT && !robo_repair)

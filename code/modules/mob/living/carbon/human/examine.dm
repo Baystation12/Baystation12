@@ -246,6 +246,7 @@
 
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
+	var/list/shown_objects = list()
 
 	for(var/organ_tag in species.has_limbs)
 
@@ -289,6 +290,10 @@
 			if(((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
 				wound_flavor_text[E.name] += "[T.His] [E.name] is dented and swollen!<br>"
 
+		for(var/datum/wound/wound in E.wounds)
+			if(wound.embedded)
+				shown_objects += wound.embedded
+				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [wound.embedded] sticking out of it!<br>"
 
 	msg += "<span class='warning'>"
 	for(var/limb in wound_flavor_text)
@@ -296,6 +301,8 @@
 	msg += "</span>"
 
 	for(var/implant in get_visible_implants(0))
+		if(implant in shown_objects)
+			continue
 		msg += "<span class='danger'>[src] [T.has] \a [implant] sticking out of [T.his] flesh!</span>\n"
 	if(digitalcamo)
 		msg += "[T.He] [T.is] repulsively uncanny!\n"
