@@ -64,7 +64,7 @@
 	if(shade.key || full == 1)
 		to_chat(user, "<span class='notice'>\The [src] is already full.</span>")
 		return
-	if(M.stat == CONSCIOUS || M.health + M.halloss > config.health_threshold_crit)
+	if(M.stat == CONSCIOUS || M.health > config.health_threshold_crit)
 		to_chat(user, "<span class='notice'>Kill or main the victim first.</span>")
 		return
 	for(var/obj/item/W in M)

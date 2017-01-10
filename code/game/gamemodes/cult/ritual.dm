@@ -155,10 +155,8 @@ var/list/Tier1Runes = list(
 	/mob/proc/wall_rune,
 	/mob/proc/ajorney_rune,
 	/mob/proc/defile_rune,
-
 	/mob/proc/stun_imbue,
 	/mob/proc/emp_imbue,
-
 	/mob/proc/cult_communicate
 	)
 

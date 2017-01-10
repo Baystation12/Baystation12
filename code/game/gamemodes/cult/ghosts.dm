@@ -194,7 +194,7 @@
 
 	var/method = pick("bit", "scratched")
 	to_chat(choice, "<span class='danger'>Something invisible [method] you!</span>")
-	choice.apply_effect(5, AGONY, 0)
+	choice.apply_effect(5, PAIN, 0)
 	to_chat(src, "<span class='notice'>You [method] \the [choice].</span>")
 
 	ghost_magic_cd = world.time + 60 SECONDS
@@ -217,7 +217,7 @@
 		return
 
 	to_chat(choice, "<span class='danger'>You feel as if something cold passed through you!</span>")
-	choice.apply_effect(5, AGONY, 0)
+	choice.apply_effect(5, PAIN, 0)
 	to_chat(src, "<span class='notice'>You pass through \the [choice], giving them a sudden chill.</span>")
 
 	ghost_magic_cd = world.time + 60 SECONDS
