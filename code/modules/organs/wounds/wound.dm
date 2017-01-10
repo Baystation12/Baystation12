@@ -169,8 +169,7 @@
 	var/max_wound_damage = 1.5*src.damage_list[1]
 	if (src.damage + damage > max_wound_damage)
 		return 0
-
-		return 1
+	return 1
 
 /datum/wound/proc/bleeding()
 	return !(internal || (current_stage > max_bleeding_stage) || bandaged || clamped || (bleed_timer <= 0 && wound_damage() <= bleed_threshold))
