@@ -12,6 +12,7 @@ env:
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
   matrix:
     - MAP_PATH=example
+    - MAP_PATH=solaris
     - MAP_PATH=exodus
     - MAP_PATH=torch
     - MAP_PATH=overmap_example
@@ -60,9 +61,11 @@ script:
   - awk -f tools/indentation.awk **/*.dm
   - md5sum -c - <<< "4bab08611ef5a6f7478d8c4f8b1aa355 *.gitignore"
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
+  - md5sum -c - <<< "83CD72D1BA0071F8E6519203E4D75193 *html/changelogs_solaris/example.yml"
   - python tools/TagMatcher/tag-matcher.py .
   - python tools/PunctuationChecker/punctuation-checker.py .
   - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
+  - python tools/GenerateChangelog/ss13_ru_genchangelog.py html/changelog_solaris.html html/changelogs_solaris
   - cd tgui && gulp
   - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
