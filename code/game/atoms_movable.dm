@@ -228,7 +228,7 @@
 	src.throwing = 0
 	src.thrower = null
 	src.throw_source = null
-
+	fall()
 
 //Overlays
 /atom/movable/overlay
