@@ -485,7 +485,7 @@ This function completely restores a damaged organ to perfect condition.
 	if((type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30 && prob(damage) && (robotic < ORGAN_ROBOT))
 		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
 		wounds += I
-		owner.custom_pain("You feel something rip in your [name]!", 50)
+		owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && (robotic < ORGAN_ROBOT))
@@ -709,7 +709,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
 			if(prob(1 * wound_update_accuracy))
-				owner.custom_pain("You feel a stabbing pain in your [name]!",50)
+				owner.custom_pain("You feel a stabbing pain in your [name]!",50, affecting = src)
 
 		// slow healing
 		var/heal_amt = 0
@@ -1219,7 +1219,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(brute_dam + force < min_broken_damage/5)	//no papercuts moving bones
 		return
 	if(internal_organs.len && prob(brute_dam + force))
-		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50)
+		owner.custom_pain("A piece of bone in your [encased ? encased : name] moves painfully!", 50, affecting = src)
 		var/obj/item/organ/I = pick(internal_organs)
 		I.take_damage(rand(3,5))
 

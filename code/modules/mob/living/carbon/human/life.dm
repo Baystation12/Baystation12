@@ -966,7 +966,7 @@
 	if(stat) return 0
 
 	if(shock_stage == 10)
-		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 40)
+		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 0)
 
 	if(shock_stage >= 30)
 		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping \his eyes open.")
