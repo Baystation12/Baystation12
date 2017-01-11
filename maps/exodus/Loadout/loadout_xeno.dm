@@ -90,8 +90,9 @@
 	path = /obj/item/clothing/under/resomi/rainbow
 
 /datum/gear/uniform/resomi/white
-	display_name = "smock, white (Resomi)"
+	display_name = "smock, colored (Resomi)"
 	path = /obj/item/clothing/under/resomi/white
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/resomi/eng
 	display_name = "uniform, Engineering (Resomi)"

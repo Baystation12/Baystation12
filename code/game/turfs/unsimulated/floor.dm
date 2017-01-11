@@ -16,3 +16,6 @@
 
 /turf/unsimulated/floor/rescue_base
 	icon_state = "asteroidfloor"
+
+/turf/unsimulated/floor/shuttle_ceiling
+	icon_state = "reinforced"

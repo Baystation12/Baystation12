@@ -24,7 +24,7 @@
 	company_short = "SolGov"
 
 	shuttle_docked_message = "Attention all hands: the Bluespace drive has been spooled up, secure all stations for departure. Time to jump: approximately %ETD%."
-	shuttle_leaving_dock = "Attention all hands: Jump initiated, entering Bluespace in %ETA%."
+	shuttle_leaving_dock = "Attention all hands: Jump initiated, exiting Bluespace in %ETA%."
 	shuttle_called_message = "Attention all hands: the Bluespace drive is spooling up. Transit procedures are now in effect. Jump in %ETA%."
 	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
 	emergency_shuttle_docked_message = "Attention all hands: the escape pods are now unlocked. You have %ETD% to board the escape pods."

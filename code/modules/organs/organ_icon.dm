@@ -143,14 +143,14 @@ var/list/limb_icon_cache = list()
 	return mob_icon
 
 // Returns an image for use by the human health dolly HUD element.
-// If the user has traumatic shock, it will be passed in as a minimum
-// damage amount to represent the pain of the injuries involved.
+// If the limb is in pain, it will be used as a minimum damage
+// amount to represent the obfuscation of being in agonizing pain.
 
 // Global scope, used in code below.
 var/list/flesh_hud_colours = list("#00FF00","#AAFF00","#FFFF00","#FFAA00","#FF0000","#AA0000","#660000")
 var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#666666","#444444","#222222","#000000")
 
-/obj/item/organ/external/proc/get_damage_hud_image(var/min_dam_state)
+/obj/item/organ/external/proc/get_damage_hud_image()
 
 	// Generate the greyscale base icon and cache it for later.
 	// icon_cache_key is set by any get_icon() calls that are made.
@@ -169,10 +169,11 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 		hud_damage_image = image(null)
 		hud_damage_image.overlays += temp
 
+
 	// Calculate the required color index.
 	var/dam_state = min(1,((brute_dam+burn_dam)/max(1,max_damage)))
-	// Apply traumatic shock min damage state.
-	if(!isnull(min_dam_state) && dam_state < min_dam_state && can_feel_pain())
+	var/min_dam_state = min(1,(get_pain()/max(1,max_damage)))
+	if(min_dam_state && dam_state < min_dam_state)
 		dam_state = min_dam_state
 	// Apply colour and return product.
 	var/list/hud_colours = (robotic < ORGAN_ROBOT) ? flesh_hud_colours : robot_hud_colours
