@@ -1,14 +1,16 @@
 /datum/controller/process/radiation
 	var/repository/radiation/linked = null
+	var/counter = 1
 
 /datum/controller/process/radiation/setup()
 	name = "radiation controller"
-	schedule_interval = 20 // every 2 seconds
+	schedule_interval = 30 // every 3 seconds
 	linked = radiation_repository
 
 /datum/controller/process/radiation/doWork()
 //	set background = 1
-	for(var/turf/T in linked.irradiated_turfs)
+	for(var/thing in linked.irradiated_turfs)
+		var/turf/T = thing
 		if(!T)
 			linked.irradiated_turfs.Remove(T)
 			continue
@@ -16,7 +18,8 @@
 		if(linked.irradiated_turfs[T] <= config.radiation_lower_limit)
 			linked.irradiated_turfs.Remove(T)
 		SCHECK
-	for(var/mob/living/L in linked.irradiated_mobs)
+	for(var/thing in linked.irradiated_mobs)
+		var/mob/living/L = thing
 		if(!L)
 			linked.irradiated_mobs.Remove(L)
 			continue
@@ -33,11 +36,13 @@
 		linked.radiate(emitter, emitter.rad_power)
 		to_process.Cut()
 		SCHECK
-	for(var/thing in linked.resistance_cache)
-		if(!thing)
-			linked.resistance_cache.Remove(thing)
-			continue
-		var/turf/T = thing
-		if((length(T.contents) + 1) != linked.resistance_cache[T])
-			T.calc_rad_resistance()
-		SCHECK
+	counter++
+	if((counter % 2) == 0)
+		for(var/thing in linked.resistance_cache)
+			if(!thing)
+				linked.resistance_cache.Remove(thing)
+				continue
+			var/turf/T = thing
+			if((length(T.contents) + 1) != linked.resistance_cache[T])
+				T.calc_rad_resistance()
+			SCHECK
