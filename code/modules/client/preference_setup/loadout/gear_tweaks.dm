@@ -153,6 +153,7 @@
 	var/list/ValidNetworkCards = list(/obj/item/weapon/computer_hardware/network_card, /obj/item/weapon/computer_hardware/network_card/advanced)
 	var/list/ValidNanoPrinters = list(null, /obj/item/weapon/computer_hardware/nano_printer)
 	var/list/ValidCardSlots = list(null, /obj/item/weapon/computer_hardware/card_slot)
+	var/list/ValidTeslaLinks = list(null, /obj/item/weapon/computer_hardware/tesla_link)
 
 /datum/gear_tweak/tablet/get_contents(var/list/metadata)
 	var/list/names = list()
@@ -174,11 +175,14 @@
 	O = ValidCardSlots[metadata[6]]
 	if(O)
 		names += initial(O.name)
+	O = ValidTeslaLinks[metadata[7]]
+	if(O)
+		names += initial(O.name)
 	return "[english_list(names, and_text = ", ")]"
 
 /datum/gear_tweak/tablet/get_metadata(var/user, var/metadata)
 	. = list()
-	
+
 	var/list/names = list()
 	var/counter = 1
 	for(var/i in ValidProcessors)
@@ -187,10 +191,10 @@
 			names[initial(O.name)] = counter++
 		else
 			names["None"] = counter++
-	
+
 	var/entry = input(user, "Choose a processor.", "Character Preference") in names
 	. += names[entry]
-	
+
 	names = list()
 	counter = 1
 	for(var/i in ValidBatteries)
@@ -199,10 +203,10 @@
 			names[initial(O.name)] = counter++
 		else
 			names["None"] = counter++
-	
+
 	entry = input(user, "Choose a battery.", "Character Preference") in names
 	. += names[entry]
-	
+
 	names = list()
 	counter = 1
 	for(var/i in ValidHardDrives)
@@ -211,10 +215,10 @@
 			names[initial(O.name)] = counter++
 		else
 			names["None"] = counter++
-	
+
 	entry = input(user, "Choose a hard drive.", "Character Preference") in names
 	. += names[entry]
-	
+
 	names = list()
 	counter = 1
 	for(var/i in ValidNetworkCards)
@@ -223,10 +227,10 @@
 			names[initial(O.name)] = counter++
 		else
 			names["None"] = counter++
-	
+
 	entry = input(user, "Choose a network card.", "Character Preference") in names
 	. += names[entry]
-	
+
 	names = list()
 	counter = 1
 	for(var/i in ValidNanoPrinters)
@@ -235,10 +239,10 @@
 			names[initial(O.name)] = counter++
 		else
 			names["None"] = counter++
-	
+
 	entry = input(user, "Choose a nanoprinter.", "Character Preference") in names
 	. += names[entry]
-	
+
 	names = list()
 	counter = 1
 	for(var/i in ValidCardSlots)
@@ -247,12 +251,24 @@
 			names[initial(O.name)] = counter++
 		else
 			names["None"] = counter++
-	
+
 	entry = input(user, "Choose a card slot.", "Character Preference") in names
 	. += names[entry]
 
+	names = list()
+	counter = 1
+	for(var/i in ValidTeslaLinks)
+		if(i)
+			var/obj/O = i
+			names[initial(O.name)] = counter++
+		else
+			names["None"] = counter++
+
+	entry = input(user, "Choose a tesla link.", "Character Preference") in names
+	. += names[entry]
+
 /datum/gear_tweak/tablet/get_default()
-	return list(1, 1, 1, 1, 1, 1)
+	return list(1, 1, 1, 1, 1, 1, 1)
 
 /datum/gear_tweak/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
 	if(ValidProcessors[metadata[1]])
@@ -274,3 +290,6 @@
 	if(ValidCardSlots[metadata[6]])
 		var/t = ValidCardSlots[metadata[6]]
 		I.card_slot = new t(I)
+	if(ValidTeslaLinks[metadata[7]])
+		var/t = ValidTeslaLinks[metadata[7]]
+		I.tesla_link = new t(I)
