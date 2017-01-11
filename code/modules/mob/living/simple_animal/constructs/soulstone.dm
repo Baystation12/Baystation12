@@ -25,10 +25,8 @@
 	shade = new /mob/living/simple_animal/shade(src)
 
 /obj/item/device/soulstone/Destroy()
-	if(shade)
-		qdel(shade)
-		shade = null
-	..()
+	qdel_null(shade)
+	return ..()
 
 /obj/item/device/soulstone/update_icon()
 	if(full == 0)

@@ -83,12 +83,6 @@ var/datum/antagonist/cultist/cult
 	if(istype(S))
 		T.loc = S
 
-	/* Removed until a proper AOOC rewrite is made
-	if(cult_level < 2)
-		player.verbs += /mob/proc/set_cult_conversion_blurb
-		player.verbs += /mob/proc/cult_ooc
-		*/
-
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
 		return 0
@@ -112,7 +106,7 @@ var/datum/antagonist/cultist/cult
 		player.current.remove_language(LANGUAGE_CULT)
 
 /datum/antagonist/cultist/update_antag_mob(var/datum/mind/player)
-	..()
+	. = ..()
 	add_cultiness(CULTINESS_PER_CULTIST)
 	add_cult_magic(player.current)
 
@@ -140,7 +134,7 @@ var/datum/antagonist/cultist/cult
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/dead/observer/D)
+		for(var/mob/dead/observer/D in mob_list)
 			add_ghost_magic(D)
 
 /datum/antagonist/cultist/proc/offer_uncult(var/mob/M)
@@ -162,11 +156,6 @@ var/datum/antagonist/cultist/cult
 	if(cult_level >= 2)
 		M.verbs += Tier2Runes
 
-		/*
-		M.verbs -= /mob/proc/set_cult_conversion_blurb
-		M.verbs -= /mob/proc/cult_ooc
-		*/
-
 		if(cult_level >= 3)
 			M.verbs += Tier3Runes
 
@@ -178,42 +167,3 @@ var/datum/antagonist/cultist/cult
 	M.verbs -= Tier2Runes
 	M.verbs -= Tier3Runes
 	M.verbs -= Tier4Runes
-
-	/*
-	M.verbs -= /mob/proc/set_cult_conversion_blurb
-	M.verbs -= /mob/proc/cult_ooc
-	*/
-
-/mob/proc/set_cult_conversion_blurb()
-	set name = "Set conversion blurb"
-	set desc = "Sets a blurb that appears to fresh converts. This is only for providing fluff, do not put any round information here. This verb will be removed once you hit the second cult stage."
-	set category = "OOC"
-
-	if(!iscultist(src))
-		verbs -= /mob/proc/set_cult_conversion_blurb
-		return
-
-	var/newblurb = input("Choose a new conversion blurb.", "Blurb", cult.conversion_blurb)
-
-	if(newblurb)
-		cult.conversion_blurb = newblurb
-
-	log_and_message_admins("set cult's conversion blurb to '[newblurb]'")
-	for(var/datum/mind/H in cult.current_antagonists)
-		if(H.current)
-			to_chat(H.current, "<span class='cult'>Conversion blurb is now: '[newblurb]'</span>")
-
-/mob/proc/cult_ooc(var/msg as text)
-	set name = "Cult OOC"
-	set desc = "Allows you to communicate with other cultists OOCly. Do not use it to reveal any round-related information. This is purely for the fluff discussion. This verb will be removed once you hit the second cult stage. Unlike AOOC, other antagonist types can't see it."
-	set category = "OOC"
-
-	msg = sanitize(msg)
-	if(!msg)
-		return
-
-	log_ooc("(CULT) [name]/[key] : [msg]")
-
-	for(var/datum/mind/H in cult.current_antagonists)
-		if(H.current)
-			to_chat(H.current, "<span class='cult'>Cult OOC: [msg]</span>")

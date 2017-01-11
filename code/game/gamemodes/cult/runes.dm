@@ -5,7 +5,8 @@
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
 	unacidable = 1
-	layer = TURF_LAYER
+	plane = ABOVE_TURF_PLANE
+	layer = RUNE_LAYER
 
 	var/blood
 	var/bcolor
@@ -161,6 +162,7 @@
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/A in contents)
 		A.forceMove(T)
+	return ..()
 
 /obj/effect/rune/teleport/examine(var/mob/user)
 	..()
@@ -241,7 +243,7 @@
 /obj/effect/rune/wall/Destroy()
 	if(wall)
 		qdel(wall)
-	..()
+	return ..()
 
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
@@ -279,8 +281,10 @@
 		color = bcolor
 
 /obj/effect/cultwall/Destroy()
-	rune.wall = null
-	..()
+	if(rune)
+		rune.wall = null
+		rune = null
+	return ..()
 
 /obj/effect/cultwall/examine(var/mob/user)
 	..()
@@ -470,7 +474,7 @@
 	if(puppet)
 		puppet.dust()
 		puppet = null
-	..()
+	return ..()
 
 /obj/effect/rune/manifest/cast(var/mob/living/user)
 	if(puppet)

@@ -127,10 +127,7 @@
 
 /mob/living/carbon/human/get_blood_name()
 	if(species)
-		if(istype(species, /datum/species/machine))
-			return "oil"
-		if(istype(species, /datum/species/diona))
-			return "sap"
+		return species.get_blood_name()
 	return "blood"
 
 /mob/living/simple_animal/construct/get_blood_name()
