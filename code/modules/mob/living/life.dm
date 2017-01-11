@@ -34,6 +34,11 @@
 		handle_stomach()
 
 		. = 1
+	else if(timeofdeath && (world.time - timeofdeath < 150))
+		//This is to make dead people process reagents for a few ticks, so they can be treated and defibrilated
+		handle_chemicals_in_body()
+
+		. = 1
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
@@ -210,7 +215,7 @@
 		update_dead_sight()
 	else
 		update_living_sight()
-	
+
 /mob/living/proc/update_living_sight()
 	set_sight(sight&(~(SEE_TURFS|SEE_MOBS|SEE_OBJS)))
 	set_see_in_dark(initial(see_in_dark))

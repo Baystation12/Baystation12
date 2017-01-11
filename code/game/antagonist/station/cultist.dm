@@ -118,7 +118,7 @@ var/datum/antagonist/cultist/cult
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/dead/observer/D)
+		for(var/mob/dead/observer/D in mob_list)
 			add_ghost_magic(D)
 	if(cult_rating >= 200 && cult_level < 3)
 		cult_level = 3
@@ -126,7 +126,7 @@ var/datum/antagonist/cultist/cult
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/dead/observer/D)
+		for(var/mob/dead/observer/D in mob_list)
 			add_ghost_magic(D)
 	if(cult_rating >= 300 && cult_level < 4)
 		cult_level = 4

@@ -27,11 +27,20 @@
 	path = /obj/item/device/paicard
 
 /datum/gear/utility/cheaptablet
-	display_name = "cheap tablet computer"
+	display_name = "tablet computer: cheap"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
 	cost = 3
 
 /datum/gear/utility/normaltablet
-	display_name = "tablet computer"
+	display_name = "tablet computer: advanced"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
 	cost = 4
+
+/datum/gear/utility/customtablet
+	display_name = "tablet computer: custom"
+	path = /obj/item/modular_computer/tablet
+	cost = 4
+
+/datum/gear/utility/customtablet/New()
+	..()
+	gear_tweaks += new /datum/gear_tweak/tablet()

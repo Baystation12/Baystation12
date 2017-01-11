@@ -59,7 +59,7 @@
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(istype(parent))
-		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50)
+		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()
 
 /obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath)

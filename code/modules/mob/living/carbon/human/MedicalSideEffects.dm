@@ -87,13 +87,15 @@
 	cure_message = "Your head stops throbbing..."
 
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
-	switch(strength)
-		if(1 to 10)
-			H.custom_pain("You feel a light pain in your head.",0)
-		if(11 to 30)
-			H.custom_pain("You feel a throbbing pain in your head!",1)
-		if(31 to INFINITY)
-			H.custom_pain("You feel an excrutiating pain in your head!",1)
+	var/obj/item/organ/external/head/head = H.get_organ("head")
+	if(istype(head))
+		switch(strength)
+			if(1 to 10)
+				H.custom_pain("You feel a light pain in your head.",0, affecting = head)
+			if(11 to 30)
+				H.custom_pain("You feel a throbbing pain in your head!",1, affecting = head)
+			if(31 to INFINITY)
+				H.custom_pain("You feel an excrutiating pain in your head!",1, affecting = head)
 
 // BAD STOMACH
 // ===========

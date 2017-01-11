@@ -84,7 +84,7 @@
 
 	var/name_archive //For admin things like possession
 
-	var/timeofdeath = 0.0
+	var/timeofdeath = 0
 
 	var/bodytemperature = 310.055	//98.7 F
 	var/default_pixel_x = 0
