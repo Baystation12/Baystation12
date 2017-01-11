@@ -88,7 +88,7 @@
 //Holds fall checks that should not be overriden by children
 /atom/movable/proc/fall()
 	var/turf/simulated/open/below = loc
-	if(!istype(loc))
+	if(!istype(below))
 		return
 
 	below = below.below
