@@ -439,7 +439,6 @@
 
 /obj/item/weapon/shockpaddles/proc/make_alive(mob/living/carbon/human/M) //This revives the mob
 	M.switch_from_dead_to_living_mob_list()
-	M.tod = null
 	M.timeofdeath = 0
 	M.stat = UNCONSCIOUS //Life() can bring them back to consciousness if it needs to.
 	M.regenerate_icons()
