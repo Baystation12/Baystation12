@@ -502,7 +502,8 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e7
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e6
 	)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_emergency_storage,
