@@ -13,8 +13,8 @@
 	var/last_battery_percent = 0							// Used for deciding if battery percentage has chandged
 	var/last_world_time = "00:00"
 	var/list/last_header_icons
-	var/computer_emagged = 0								// Whether the computer is emagged.
-
+	var/computer_emagged = FALSE								// Whether the computer is emagged.
+	var/apc_powered = FALSE
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
 	var/base_idle_power_usage = 5							// Power usage when the computer is idle and screen is off (currently only applies to laptops)
 
@@ -39,12 +39,14 @@
 	var/obj/item/weapon/computer_hardware/processor_unit/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
 	var/obj/item/weapon/computer_hardware/network_card/network_card					// Network Card component of this computer. Allows connection to NTNet
 	var/obj/item/weapon/computer_hardware/hard_drive/hard_drive						// Hard Drive component of this computer. Stores programs and files.
-	var/obj/item/weapon/computer_hardware/battery_module/battery_module				// An internal power source for this computer. Can be recharged.
+
 	// Optional hardware (improves functionality, but is not critical for computer to work)
+	var/obj/item/weapon/computer_hardware/battery_module/battery_module				// An internal power source for this computer. Can be recharged.
 	var/obj/item/weapon/computer_hardware/card_slot/card_slot						// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
 	var/obj/item/weapon/computer_hardware/nano_printer/nano_printer					// Nano Printer component of this computer, for your everyday paperwork needs.
 	var/obj/item/weapon/computer_hardware/hard_drive/portable/portable_drive		// Portable data storage
 	var/obj/item/weapon/computer_hardware/ai_slot/ai_slot							// AI slot, an intellicard housing that allows modifications of AIs.
+	var/obj/item/weapon/computer_hardware/tesla_link/tesla_link						// Tesla Link, Allows remote charging from nearest APC.
 
 	var/list/idle_threads = list()							// Idle programs on background. They still receive process calls but can't be interacted with.
 
@@ -194,17 +196,13 @@
 	else
 		overlays.Add(icon_state_menu)
 
-// Used by child types if they have other power source than battery
-/obj/item/modular_computer/proc/check_power_override()
-	return 0
-
 // Operates NanoUI
 /obj/item/modular_computer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!screen_on || !enabled)
 		if(ui)
 			ui.close()
 		return 0
-	if((!battery_module || !battery_module.battery.charge) && !check_power_override())
+	if(!apc_power(0) && !battery_power(0))
 		if(ui)
 			ui.close()
 		return 0
@@ -262,6 +260,8 @@
 	qdel()
 
 /obj/item/modular_computer/proc/turn_on(var/mob/user)
+	if(tesla_link)
+		tesla_link.enabled = 1
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
 	if(damage > broken_damage)
 		if(issynth)
@@ -269,7 +269,7 @@
 		else
 			to_chat(user, "You press the power button, but the computer fails to boot up, displaying variety of errors before shutting down again.")
 		return
-	if(processor_unit && ((battery_module && battery_module.battery.charge && battery_module.check_functionality()) || check_power_override())) // Battery-run and charged or non-battery but powered by APC.
+	if(processor_unit && (apc_power(0) || battery_power(0))) // Battery-run and charged or non-battery but powered by APC.
 		if(issynth)
 			to_chat(user, "You send an activation signal to \the [src], turning it on")
 		else
@@ -302,17 +302,17 @@
 
 	if(active_program)
 		if(active_program.program_state != PROGRAM_STATE_KILLED)
-			active_program.process_tick()
 			active_program.ntnet_status = get_ntnet_status()
 			active_program.computer_emagged = computer_emagged
+			active_program.process_tick()
 		else
 			active_program = null
 
 	for(var/datum/computer_file/program/P in idle_threads)
 		if(P.program_state != PROGRAM_STATE_KILLED)
-			P.process_tick()
 			P.ntnet_status = get_ntnet_status()
 			P.computer_emagged = computer_emagged
+			P.process_tick()
 		else
 			idle_threads.Remove(P)
 
@@ -343,6 +343,9 @@
 		data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "N/C"
 		data["PC_showbatteryicon"] = battery_module ? 1 : 0
+
+	if(tesla_link && tesla_link.enabled && apc_powered)
+		data["PC_apclinkicon"] = "charging.gif"
 
 	switch(get_ntnet_status())
 		if(0)
@@ -492,32 +495,55 @@
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure(var/malfunction = 0)
 	if(enabled) // Shut down the computer
-		visible_message("<span class='danger'>\The [src]'s screen flickers \"BATTERY [malfunction ? "MALFUNCTION" : "CRITICAL"]\" warning as it shuts down unexpectedly.</span>")
+		visible_message("<span class='danger'>\The [src]'s screen flickers briefly and then goes dark.</span>")
 		if(active_program)
 			active_program.event_powerfailure(0)
 		for(var/datum/computer_file/program/PRG in idle_threads)
 			PRG.event_powerfailure(1)
 		shutdown_computer(0)
 
+// Tries to use power from battery. Passing 0 as parameter results in this proc returning whether battery is functional or not.
+/obj/item/modular_computer/proc/battery_power(var/power_usage = 0)
+	apc_powered = FALSE
+	if(!battery_module || !battery_module.check_functionality() || battery_module.battery.charge <= 0)
+		return FALSE
+	if(battery_module.battery.use(power_usage * CELLRATE) || ((power_usage == 0) && battery_module.battery.charge))
+		return TRUE
+	return FALSE
+
+// Tries to use power from APC, if present.
+/obj/item/modular_computer/proc/apc_power(var/power_usage = 0)
+	apc_powered = TRUE
+	// Tesla link was originally limited to machinery only, but this probably works too, and the benefit of being able to power all devices from an APC outweights
+	// the possible minor performance loss.
+	if(!tesla_link || !tesla_link.check_functionality())
+		return FALSE
+	var/area/A = get_area(src)
+	if(!istype(A) || !A.powered(EQUIP))
+		return FALSE
+
+	// At this point, we know that APC can power us for this tick. Check if we also need to charge our battery, and then actually use the power.
+	if(battery_module && (battery_module.battery.charge < battery_module.battery.maxcharge) && (power_usage > 0))
+		power_usage += tesla_link.passive_charging_rate
+		battery_module.battery.give(tesla_link.passive_charging_rate * CELLRATE)
+
+	A.use_power(power_usage, EQUIP)
+	return TRUE
+
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged
 /obj/item/modular_computer/proc/handle_power()
-	if(!battery_module || battery_module.battery.charge <= 0) // Battery-run but battery is depleted.
-		power_failure()
-		return 0
-
 	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
-
 	for(var/obj/item/weapon/computer_hardware/H in get_all_components())
 		if(H.enabled)
 			power_usage += H.power_usage
-
-	if(battery_module)
-		if(!battery_module.check_functionality())
-			power_failure(1)
-			return
-		battery_module.battery.use(power_usage * CELLRATE)
-
 	last_power_usage = power_usage
+
+	// First tries to charge from an APC, if APC is unavailable switches to battery power. If neither works the computer fails.
+	if(apc_power(power_usage))
+		return
+	if(battery_power(power_usage))
+		return
+	power_failure()
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/card/id)) // ID Card, try to insert it.
@@ -658,6 +684,12 @@
 			return
 		found = 1
 		ai_slot = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/tesla_link))
+		if(tesla_link)
+			to_chat(user, "This computer's tesla link slot is already occupied by \the [tesla_link].")
+			return
+		found = 1
+		tesla_link = H
 	if(found)
 		to_chat(user, "You install \the [H] into \the [src]")
 		H.holder2 = src
@@ -692,6 +724,9 @@
 	if(ai_slot == H)
 		ai_slot = null
 		found = 1
+	if(tesla_link == H)
+		tesla_link = null
+		found = 1
 	if(found)
 		if(user)
 			to_chat(user, "You remove \the [H] from \the [src].")
@@ -722,6 +757,8 @@
 		return processor_unit
 	if(ai_slot && (ai_slot.name == name))
 		return ai_slot
+	if(tesla_link && (tesla_link.name == name))
+		return tesla_link
 	return null
 
 // Returns list of all components
@@ -743,6 +780,8 @@
 		all_components.Add(processor_unit)
 	if(ai_slot)
 		all_components.Add(ai_slot)
+	if(tesla_link)
+		all_components.Add(tesla_link)
 	return all_components
 
 /obj/item/modular_computer/proc/update_uis()

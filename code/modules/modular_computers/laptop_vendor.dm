@@ -23,9 +23,10 @@
 	var/dev_battery = 1						// 1: Default, 2: Upgraded, 3: Advanced
 	var/dev_disk = 1						// 1: Default, 2: Upgraded, 3: Advanced
 	var/dev_netcard = 0						// 0: None, 1: Basic, 2: Long-Range
-	var/dev_tesla = 0						// 0: None, 1: Standard (LAPTOP ONLY)
+	var/dev_tesla = 0						// 0: None, 1: Standard
 	var/dev_nanoprint = 0					// 0: None, 1: Standard
 	var/dev_card = 0						// 0: None, 1: Standard
+	var/dev_aislot = 0						// 0: None, 1: Standard
 
 // Removes all traces of old order and allows you to begin configuration from scratch.
 /obj/machinery/lapvend/proc/reset_order()
@@ -44,6 +45,7 @@
 	dev_tesla = 0
 	dev_nanoprint = 0
 	dev_card = 0
+	dev_aislot = 0
 
 // Recalculates the price and optionally even fabricates the device.
 /obj/machinery/lapvend/proc/fabricate_and_recalc_price(var/fabricate = 0)
@@ -96,7 +98,7 @@
 		if(dev_tesla)
 			total_price += 399
 			if(fabricate)
-				fabricated_laptop.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(fabricated_laptop)
+				fabricated_laptop.cpu.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(fabricated_laptop.cpu)
 		if(dev_nanoprint)
 			total_price += 99
 			if(fabricate)
@@ -105,6 +107,10 @@
 			total_price += 199
 			if(fabricate)
 				fabricated_laptop.cpu.card_slot = new/obj/item/weapon/computer_hardware/card_slot(fabricated_laptop.cpu)
+		if(dev_aislot)
+			total_price += 499
+			if(fabricate)
+				fabricated_laptop.cpu.ai_slot = new/obj/item/weapon/computer_hardware/ai_slot(fabricated_laptop.cpu)
 
 		return total_price
 	else if(devtype == 2) 	// Tablet, more expensive, not everyone could probably afford this.
@@ -153,6 +159,14 @@
 			total_price += 199
 			if(fabricate)
 				fabricated_tablet.card_slot = new/obj/item/weapon/computer_hardware/card_slot(fabricated_tablet)
+		if(dev_tesla)
+			total_price += 399
+			if(fabricate)
+				fabricated_tablet.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(fabricated_tablet)
+		if(dev_aislot)
+			total_price += 499
+			if(fabricate)
+				fabricated_tablet.ai_slot = new/obj/item/weapon/computer_hardware/ai_slot(fabricated_tablet)
 		return total_price
 	return 0
 
@@ -208,6 +222,10 @@
 		dev_card = text2num(href_list["hw_card"])
 		fabricate_and_recalc_price(0)
 		return 1
+	if(href_list["hw_aislot"])
+		dev_aislot = text2num(href_list["hw_aislot"])
+		fabricate_and_recalc_price(0)
+		return 1
 	return 0
 
 /obj/machinery/lapvend/attack_hand(var/mob/user)
@@ -230,6 +248,7 @@
 		data["hw_nanoprint"] = dev_nanoprint
 		data["hw_card"] = dev_card
 		data["hw_cpu"] = dev_cpu
+		data["hw_aislot"] = dev_aislot
 	if(state == 1 || state == 2)
 		data["totalprice"] = total_price
 
