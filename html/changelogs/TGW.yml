@@ -1,0 +1,4 @@
+author: TheGreyWolf
+delete-after: True
+changes: 
+  - rscadd: "Restricted Resomi prosthetics to limbs only. No more Resomi FBP."
