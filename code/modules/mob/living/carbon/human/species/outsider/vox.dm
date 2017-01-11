@@ -121,7 +121,7 @@
 		BP_BRAIN =    /obj/item/organ/internal/pariah_brain,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
-	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_CAN_JOIN
+	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_CAN_JOIN | SPECIES_CAN_NOT_BE_CYBORG
 	flags = NO_SCAN
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
