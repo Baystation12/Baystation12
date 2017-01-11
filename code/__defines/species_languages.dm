@@ -13,6 +13,7 @@
 #define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
 #define SPECIES_IS_RESTRICTED     0x2    // Is not a core/normally playable species. (castes, mutantraces)
 #define SPECIES_CAN_JOIN          0x4    // Species is selectable in chargen.
+#define SPECIES_CAN_NOT_BE_CYBORG 0x8    // FBP of this species can't be made in-game.
 
 // Species appearance flags
 #define HAS_SKIN_TONE     0x1    // Skin tone selectable in chargen. (0-255)
