@@ -419,7 +419,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.remove_changeling_powers()
 
 	C.emote("gasp")
-	C.tod = stationtime2text()
 
 	spawn(rand(800,2000))
 		if(changeling_power(20,1,100,DEAD))

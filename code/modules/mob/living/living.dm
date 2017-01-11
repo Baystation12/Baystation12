@@ -438,7 +438,6 @@ default behaviour is:
 	// remove the character from the list of the dead
 	if(stat == DEAD)
 		switch_from_dead_to_living_mob_list()
-		tod = null
 		timeofdeath = 0
 
 	// restore us to conciousness
