@@ -1,5 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - tweak: "The limb damage indicator on the HUD now uses local limb pain, not traumatic shock."
-  - tweak: "custom_pain() (used in surgery, moving bones, etc, to make a pain message) now increases pain on the limb calling it. In other words, non-anesthetised surgical pain now has a purpose other than giant red text."  
