@@ -37,6 +37,8 @@
 	var/active = 0
 
 	var/memory
+	var/list/known_connections //list of known (RNG) relations between people
+	var/gen_relations_info
 
 	var/assigned_role
 	var/special_role
@@ -63,6 +65,7 @@
 
 	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
 	var/ambitions
+
 
 /datum/mind/New(var/key)
 	src.key = key
