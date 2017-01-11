@@ -6,26 +6,37 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (vital || (robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
 
-/obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+/obj/item/organ/external/take_damage(brute, burn, damage_flags, used_weapon = null)
 	brute = round(brute * brute_mod, 0.1)
 	burn = round(burn * burn_mod, 0.1)
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
+	var/sharp = (damage_flags & DAM_SHARP)
+	var/edge  = (damage_flags & DAM_EDGE)
+	var/laser = (damage_flags & DAM_LASER)
+
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs && (brute_dam + brute >= max_damage || (((sharp && brute >= 5) || brute >= 10) && prob(5))))
+	var/damage_amt = brute
+	var/cur_damage = brute_dam
+	if(laser)
+		damage_amt += burn
+		cur_damage += burn_dam
+	if(internal_organs && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
-			I.take_damage(brute / 2)
-			brute -= brute / 2
+			I.take_damage(damage_amt / 2)
+			brute /= 2
+			if(laser)
+				burn /= 2
 
-	if(status & ORGAN_BROKEN && prob(40) && brute)
-		if(!can_feel_pain())
-			owner.emote("scream") //getting hit on broken hand hurts
+	if(status & ORGAN_BROKEN && brute)
+		jostle_bone(brute)
+		if(can_feel_pain() && prob(40))
+			owner.emote("scream")	//getting hit on broken hand hurts
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
-
 	var/can_cut = (prob(brute*2) || sharp) && (robotic < ORGAN_ROBOT)
 	var/spillover = 0
 	var/pure_brute = brute
@@ -51,7 +62,10 @@
 			else
 				createwound( BRUISE, brute )
 		if(burn)
-			createwound( BURN, burn )
+			if(laser)
+				createwound( LASER, burn )
+			else
+				createwound( BURN, burn )
 	else
 		//If there are still hurties to dispense
 		if (spillover)
