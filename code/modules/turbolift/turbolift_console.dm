@@ -73,6 +73,7 @@
 	light_up()
 	pressed(user)
 	if(floor == lift.current_floor)
+		lift.open_doors()
 		spawn(3)
 			reset()
 		return
