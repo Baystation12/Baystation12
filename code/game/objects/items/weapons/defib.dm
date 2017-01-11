@@ -390,6 +390,13 @@
 	var/adjust_health = barely_in_crit - H.health //need to increase health by this much
 	H.adjustOxyLoss(-adjust_health)
 
+	//if removing oxyloss wasn't enough, remove some toxloss too
+	if(H.health < barely_in_crit)
+		//but not so much that either toxloss goes below H.maxHealth/2, or that we cure more than 25% of their current toxloss
+		var/cure_limit = min(H.getToxLoss() - H.maxHealth/2, H.getToxLoss()*0.25)
+		adjust_health = Clamp(barely_in_crit - H.health, 0, cure_limit)
+		H.adjustToxLoss(-adjust_health)
+
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
 
