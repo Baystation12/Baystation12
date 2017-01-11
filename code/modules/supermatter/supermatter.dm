@@ -332,8 +332,10 @@
 
 	data["integrity_percentage"] = round(get_integrity())
 	var/datum/gas_mixture/env = null
-	if(!istype(src.loc, /turf/space))
-		env = src.loc.return_air()
+	var/turf/T = get_turf(src)
+
+	if(istype(T))
+		env = T.return_air()
 
 	if(!env)
 		data["ambient_temp"] = 0
