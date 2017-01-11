@@ -437,6 +437,8 @@
 	admin_attack_log(user, H, "Electrocuted using \a [src]", "Was electrocuted with \a [src]", "used \a [src] to electrocute")
 
 /obj/item/weapon/shockpaddles/proc/make_alive(mob/living/carbon/human/M) //This revives the mob
+	var/deadtime = world.time - M.timeofdeath
+
 	M.switch_from_dead_to_living_mob_list()
 	M.tod = null
 	M.timeofdeath = 0
@@ -448,7 +450,6 @@
 	M.emote("gasp")
 	M.Weaken(rand(10,25))
 
-	var/deadtime = world.time - M.timeofdeath
 	apply_brain_damage(M, deadtime)
 
 /obj/item/weapon/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H, var/deadtime)
