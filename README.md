@@ -1,6 +1,6 @@
-# baystation12
+# Hpatia Station
 
-[Website](http://baystation12.net/) - [Code](http://github.com/Baystation12/Baystation12/) - [IRC](http://baystation12.net/forums/viewtopic.php?f=12&t=5088)
+[Website](http://hypatia.net) - [Code](http://github.com/buddhisthead/Baystation12/Baystation12/) - [Forum](http://hypatiastation.net/forum/index.php?sid=9182554ed0e7bcaaa53b735c02c74c1a)
 
 ---
 
