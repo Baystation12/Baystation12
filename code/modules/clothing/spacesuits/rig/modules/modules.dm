@@ -16,7 +16,10 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 20000, "plastic" = 30000, "glass" = 5000)
 
 	var/damage = 0
+	var/damaged_threshold = 20
+	var/destroyed_threshold = 50
 	var/obj/item/weapon/rig/holder
+	var/has_damaged_use = 0             // Determines if it uses a different proc when damaged
 
 	var/module_cooldown = 10
 	var/next_use = 0
@@ -58,11 +61,11 @@
 /obj/item/rig_module/examine()
 	..()
 	switch(damage)
-		if(0)
+		if(0 to damaged_threshold-1)
 			to_chat(usr, "It is undamaged.")
-		if(1)
+		if(damaged_threshold to destroyed_threshold-1)
 			to_chat(usr, "It is badly damaged.")
-		if(2)
+		if(destroyed_threshold to INFINITY)
 			to_chat(usr, "It is almost completely destroyed.")
 
 /obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
@@ -177,6 +180,10 @@
 // Proc for toggling on active abilities.
 /obj/item/rig_module/proc/activate()
 
+	if(has_damaged_use)
+		activate_damaged()
+		return 0
+
 	if(active || !engage())
 		return 0
 
@@ -190,6 +197,9 @@
 		holder.update_icon()
 
 	return 1
+
+/obj/item/rig_module/proc/activate_damaged()
+	return
 
 // Proc for toggling off active abilities.
 /obj/item/rig_module/proc/deactivate()
@@ -213,6 +223,39 @@
 /obj/item/rig_module/proc/removed()
 	deactivate()
 	holder = null
+	return
+
+// Called when a disruptive action is taken.
+/obj/item/rig_module/proc/disrupted()
+	if(!disruptable)
+		return
+
+/obj/item/rig_module/proc/take_hit(hit_damage = 0, source = null, is_emp = 0) //can be used with things like cloak to decloak or whatnot on hit.
+	if(!hit_damage)
+		return
+
+	var/initial_damage = damage
+
+	if(damage > destroyed_threshold)
+		return
+
+	if(is_emp)
+		hit_damage = rand(hit_damage/3, hit_damage)
+
+	damage += hit_damage
+
+	if(!source)
+		source = "hit"
+
+	if(holder.wearer)
+		if(damage >= destroyed_threshold)
+			to_chat(holder.wearer, "<span class='danger'>The [source] has disabled your [interface_name]!</span>")
+			holder.wearer.visible_message("<span class='danger'>\The [interface_name] burst into a shower of sparks!</span>")
+			deactivate()
+		else if(damage >= damaged_threshold && initial_damage < damaged_threshold)
+			to_chat(holder.wearer, "<span class='warning'>The [source] has damaged your [interface_name]!</span>")
+			holder.wearer.visible_message("<span class='danger'>\The [interface_name] begins sparking!</span>")
+			deactivate()
 	return
 
 // Called by the hardsuit each rig process tick.
