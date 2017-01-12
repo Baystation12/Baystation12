@@ -361,13 +361,13 @@
 	activate_string = "Enable Power Sink"
 	deactivate_string = "Disable Power Sink"
 
-	interface_name = "niling d-sink"
+	interface_name = "nulling d-sink"
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
 	var/atom/interfaced_with // Currently draining power from this device.
 	var/total_power_drained = 0
 	var/drain_loc
-	var/max_draining_rate = 120 KILOWATTS // The same as unupgraded cyborg recharger.
+	var/max_draining_rate = 250 KILOWATTS
 
 /obj/item/rig_module/power_sink/deactivate()
 
@@ -436,6 +436,10 @@
 	holder.spark_system.start()
 	playsound(H.loc, 'sound/effects/sparks2.ogg', 50, 1)
 
+	var/target_drained = interfaced_with.drain_power(0,0,max_draining_rate)
+	holder.cell.give(target_drained * CELLRATE)
+	total_power_drained += target_drained
+
 	if(!holder.cell)
 		to_chat(H, "<span class = 'danger'>Your power sink flashes an error; there is no cell in your rig.</span>")
 		drain_complete(H)
@@ -451,14 +455,13 @@
 		drain_complete(H)
 		return
 
-	var/target_drained = interfaced_with.drain_power(0,0,max_draining_rate)
+
 	if(target_drained <= 0)
 		to_chat(H, "<span class = 'danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>")
 		drain_complete(H)
 		return
 
-	holder.cell.give(target_drained * CELLRATE)
-	total_power_drained += target_drained
+
 
 	return
 
