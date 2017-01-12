@@ -51,6 +51,7 @@
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
+
 	var/datum/wound/created_wound
 	if(is_damageable(brute + burn) || !config.limbs_can_break)
 		if(brute)
@@ -207,3 +208,15 @@
 
 /obj/item/organ/external/proc/get_agony_multiplier()
 	return 1
+
+/obj/item/organ/external/proc/sever_artery()
+	if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && species && species.has_organ[BP_HEART])
+		status |= ORGAN_ARTERY_CUT
+		return TRUE
+	return FALSE
+
+/obj/item/organ/external/proc/sever_tendon()
+	if(has_tendon && robotic < ORGAN_ROBOT && !(status & ORGAN_TENDON_CUT))
+		status |= ORGAN_TENDON_CUT
+		return TRUE
+	return FALSE

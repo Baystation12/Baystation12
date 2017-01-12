@@ -291,9 +291,9 @@
 				wound_flavor_text[E.name] += "[T.His] [E.name] is dented and swollen!<br>"
 
 		for(var/datum/wound/wound in E.wounds)
-			if(wound.embedded)
-				shown_objects += wound.embedded
-				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [wound.embedded] sticking out of it!<br>"
+			if(wound.embedded_objects.len)
+				shown_objects += wound.embedded_objects
+				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(wound.embedded_objects, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
 
 	msg += "<span class='warning'>"
 	for(var/limb in wound_flavor_text)

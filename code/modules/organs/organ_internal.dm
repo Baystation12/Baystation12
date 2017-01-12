@@ -5,6 +5,7 @@
 ****************************************************/
 /obj/item/organ/internal
 	var/dead_icon // Icon to use when the organ has died.
+	var/surface_accessible = FALSE
 
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	..()
@@ -103,6 +104,7 @@
 	gender = PLURAL
 	organ_tag = BP_EYES
 	parent_organ = BP_HEAD
+	surface_accessible = TRUE
 	var/list/eye_colour = list(0,0,0)
 
 /obj/item/organ/internal/eyes/optics
@@ -262,8 +264,7 @@
 					owner.Weaken(10)
 
 				var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-				var/datum/wound/W = new /datum/wound/internal_bleeding(20)
-				E.wounds += W
+				E.sever_artery()
 				E.germ_level = max(INFECTION_LEVEL_TWO, E.germ_level)
 				owner.adjustToxLoss(25)
 				removed()

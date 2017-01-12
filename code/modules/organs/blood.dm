@@ -29,6 +29,7 @@
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration
+/mob/living/carbon/human/var/next_blood_squirt = 0
 /mob/living/carbon/human/handle_blood()
 	if(in_stasis)
 		return
@@ -43,30 +44,79 @@
 
 	//Bleeding out
 	var/blood_max = 0
+	var/list/do_spray = list()
 	for(var/obj/item/organ/external/temp in organs)
-		if(!(temp.status & ORGAN_BLEEDING) || (temp.robotic >= ORGAN_ROBOT))
-			continue
-		for(var/datum/wound/W in temp.wounds)
-			if(W.bleeding())
-				if(temp.applied_pressure)
-					if(ishuman(temp.applied_pressure))
-						var/mob/living/carbon/human/H = temp.applied_pressure
-						H.bloody_hands(src, 0)
-					//somehow you can apply pressure to every wound on the organ at the same time
-					//you're basically forced to do nothing at all, so let's make it pretty effective
-					var/min_eff_damage = max(0, W.damage - 10) / 6 //still want a little bit to drip out, for effect
-					blood_max += max(min_eff_damage, W.damage - 30) / 40
-				else
-					blood_max += W.damage / 40
 
+		if(temp.robotic >= ORGAN_ROBOT)
+			continue
+
+		var/open_wound
+		if(temp.status & ORGAN_BLEEDING)
+			for(var/datum/wound/W in temp.wounds)
+
+				if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
+					open_wound = TRUE
+
+				if(W.bleeding())
+					if(temp.applied_pressure)
+						if(ishuman(temp.applied_pressure))
+							var/mob/living/carbon/human/H = temp.applied_pressure
+							H.bloody_hands(src, 0)
+						//somehow you can apply pressure to every wound on the organ at the same time
+						//you're basically forced to do nothing at all, so let's make it pretty effective
+						var/min_eff_damage = max(0, W.damage - 10) / 6 //still want a little bit to drip out, for effect
+						blood_max += max(min_eff_damage, W.damage - 30) / 40
+					else
+						blood_max += W.damage / 40
+
+		if(temp.status & ORGAN_ARTERY_CUT)
+			var/bleed_amount = Floor(vessel.total_volume / (temp.applied_pressure ? 400 : 250))
+			if(bleed_amount)
+				if(open_wound)
+					blood_max += bleed_amount
+					do_spray += temp.artery_name
+				else
+					vessel.remove_reagent("blood", bleed_amount)
 		if (temp.open)
 			blood_max += 2  //Yer stomach is cut open
-	drip(blood_max)
+
+	if(world.time >= next_blood_squirt && istype(loc, /turf) && do_spray.len)
+		visible_message("<span class='danger'>Blood squirts from \the [src]'s [pick(do_spray)]!</span>")
+		// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
+		next_blood_squirt = world.time + 100
+		var/turf/sprayloc = get_turf(src)
+		blood_max -= drip(ceil(blood_max/3), sprayloc)
+		if(blood_max > 0)
+			blood_max -= blood_squirt(blood_max, sprayloc)
+			if(blood_max > 0)
+				drip(blood_max, get_turf(src))
+	else
+		drip(blood_max)
 
 //Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/carbon/human/proc/drip(var/amt)
+/mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	if(remove_blood(amt))
-		blood_splatter(src,src)
+		blood_splatter(tar,src,ddir)
+		return amt
+	return 0
+
+#define BLOOD_SPRAY_DISTANCE 2
+/mob/living/carbon/human/proc/blood_squirt(var/amt, var/turf/sprayloc)
+	if(amt <= 0 || !istype(sprayloc))
+		return
+	var/spraydir = pick(alldirs)
+	amt = ceil(amt/BLOOD_SPRAY_DISTANCE)
+	var/bled = 0
+	spawn(0)
+		for(var/i = 1 to BLOOD_SPRAY_DISTANCE)
+			sprayloc = get_step(sprayloc, spraydir)
+			if(!istype(sprayloc) || sprayloc.density)
+				break
+			drip(amt, sprayloc, spraydir)
+			bled += amt
+			sleep(1)
+	return bled
+#undef BLOOD_SPRAY_DISTANCE
 
 /mob/living/carbon/human/proc/remove_blood(var/amt)
 	if(!should_have_organ(BP_HEART)) //TODO: Make drips come from the reagents instead.
@@ -176,7 +226,7 @@ proc/blood_incompatible(donor,receiver,donor_species,receiver_species)
 		//AB is a universal receiver.
 	return 0
 
-proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
+proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 
 	var/obj/effect/decal/cleanable/blood/B
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
@@ -213,6 +263,9 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 	if(source.data["blood_colour"])
 		B.basecolor = source.data["blood_colour"]
 		B.update_icon()
+	if(spray_dir)
+		B.icon_state = "squirt"
+		B.dir = spray_dir
 
 	// Update blood information.
 	if(source.data["blood_DNA"])

@@ -59,6 +59,9 @@
 	var/amputation_point               // Descriptive string used in amputation.
 	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
 	var/encased                        // Needs to be opened with a saw to access the organs.
+	var/has_tendon = FALSE             // Can this limb be hamstrung?
+	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
+	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
 
 	// Surgery vars.
 	var/open = 0
@@ -66,7 +69,6 @@
 	var/cavity = 0
 	var/atom/movable/applied_pressure
 	var/atom/movable/splinted
-
 
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
@@ -84,7 +86,7 @@
 /obj/item/organ/external/Destroy()
 
 	for(var/datum/wound/wound in wounds)
-		wound.embedded = null
+		wound.embedded_objects.Cut()
 	wounds.Cut()
 
 	if(parent && parent.children)
@@ -342,7 +344,7 @@ This function completely restores a damaged organ to perfect condition.
 	pain = 0
 	genetic_degradation = 0
 	for(var/datum/wound/wound in wounds)
-		wound.embedded = null
+		wound.embedded_objects.Cut()
 	wounds.Cut()
 	number_wounds = 0
 
@@ -384,16 +386,22 @@ This function completely restores a damaged organ to perfect condition.
 	..()
 
 /obj/item/organ/external/proc/createwound(var/type = CUT, var/damage)
-	if(damage == 0) return
+
+	if(damage == 0)
+		return
 
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
-
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if((type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30 && prob(damage) && (robotic < ORGAN_ROBOT))
-		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
-		wounds += I
-		owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
+	if((type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30)
+
+		var/internal_damage
+		if(prob(damage) && sever_artery())
+			internal_damage = TRUE
+		if(prob(ceil(damage/4)) && sever_tendon())
+			internal_damage = TRUE
+		if(internal_damage)
+			owner.custom_pain("You feel something rip in your [name]!", 50, affecting = src)
 
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if((type in list(BURN, LASER)) && (damage > 5 || damage + burn_dam >= 15) && (robotic < ORGAN_ROBOT))
@@ -607,22 +615,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			continue
 			// let the GC handle the deletion of the wound
 
-		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
-		if(W.internal && owner.bodytemperature >= 170)
-			var/bicardose = owner.reagents.get_reagent_amount("bicaridine")
-			var/inaprovaline = owner.reagents.get_reagent_amount("inaprovaline")
-			if(!(W.can_autoheal() || (bicardose && inaprovaline)))	//bicaridine and inaprovaline stop internal wounds from growing bigger with time, unless it is so small that it is already healing
-				W.open_wound(0.1 * wound_update_accuracy)
-			if(bicardose >= 30)	//overdose of bicaridine begins healing IB
-				W.damage = max(0, W.damage - 0.2)
-
-			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
-			if(prob(1 * wound_update_accuracy))
-				owner.custom_pain("You feel a stabbing pain in your [name]!",50, affecting = src)
-
 		// slow healing
 		var/heal_amt = 0
-
 		// if damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
 		if (W.can_autoheal() && W.wound_damage() < 50)
 			heal_amt += 0.5
@@ -661,22 +655,20 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	//update damage counts
 	for(var/datum/wound/W in wounds)
-		if(!W.internal) //so IB doesn't count towards crit/paincrit
-			if(W.damage_type == BURN)
-				burn_dam += W.damage
-			else
-				brute_dam += W.damage
+		if(W.damage_type == BURN)
+			burn_dam += W.damage
+		else
+			brute_dam += W.damage
 
 		if(!(robotic >= ORGAN_ROBOT) && W.bleeding() && (H && H.should_have_organ(BP_HEART)))
 			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
 		clamped |= W.clamped
-
 		number_wounds += W.amount
 
 	//things tend to bleed if they are CUT OPEN
-	if (open && !clamped && (H && H.should_have_organ(BP_HEART)))
+	if (H && H.should_have_organ(BP_HEART) && (open && !clamped))
 		status |= ORGAN_BLEEDING
 
 	//Bone fractures
@@ -772,8 +764,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 				stump.robotize()
 			stump.wounds |= W
 			victim.organs |= stump
+			if(disintegrate != DROPLIMB_BURN)
+				stump.sever_artery()
 			stump.update_damages()
-
 	spawn(1)
 		victim.updatehealth()
 		victim.UpdateDamageIcon()
@@ -844,7 +837,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 // checks if all wounds on the organ are bandaged
 /obj/item/organ/external/proc/is_bandaged()
 	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
 		if(!W.bandaged)
 			return 0
 	return 1
@@ -852,7 +844,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 // checks if all wounds on the organ are salved
 /obj/item/organ/external/proc/is_salved()
 	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
 		if(!W.salved)
 			return 0
 	return 1
@@ -860,7 +851,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 // checks if all wounds on the organ are disinfected
 /obj/item/organ/external/proc/is_disinfected()
 	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
 		if(!W.disinfected)
 			return 0
 	return 1
@@ -869,7 +859,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/rval = 0
 	status &= ~ORGAN_BLEEDING
 	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
 		rval |= !W.bandaged
 		W.bandaged = 1
 	return rval
@@ -884,7 +873,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/disinfect()
 	var/rval = 0
 	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
 		rval |= !W.disinfected
 		W.disinfected = 1
 		W.germ_level = 0
@@ -894,7 +882,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/rval = 0
 	src.status &= ~ORGAN_BLEEDING
 	for(var/datum/wound/W in wounds)
-		if(W.internal) continue
 		rval |= !W.clamped
 		W.clamped = 1
 	return rval
@@ -1014,7 +1001,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return 0
 
 /obj/item/organ/external/is_usable()
-	return ..() && (!can_feel_pain() || pain < pain_disability_threshold)
+	return ..() && !(status & ORGAN_TENDON_CUT) && (!can_feel_pain() || pain < pain_disability_threshold)
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
@@ -1038,7 +1025,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!supplied_wound)
 		supplied_wound = createwound(PIERCE, W.w_class * 5)
 
-	supplied_wound.embedded = W
+	if(W in supplied_wound.embedded_objects) // Just in case.
+		return
+
+	supplied_wound.embedded_objects += W
 	implants += W
 	owner.embedded_flag = 1
 	owner.verbs += /mob/proc/yank_out_object
@@ -1167,9 +1157,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	else if (open)
 		wound_descriptors["an incision"] = 1
 	for(var/datum/wound/W in wounds)
-		if(W.internal && !open) continue // can't see internal wounds
 		var/this_wound_desc = W.desc
-
 		if(W.damage_type == BURN && W.salved)
 			this_wound_desc = "salved [this_wound_desc]"
 

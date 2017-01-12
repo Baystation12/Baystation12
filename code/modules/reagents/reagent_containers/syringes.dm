@@ -245,15 +245,11 @@
 				return
 
 			user.visible_message("<span class='danger'>[user] stabs [target] in \the [hit_area] with [src.name]!</span>")
-
-			if(affecting.take_damage(3))
-				H.UpdateDamageIcon()
+			affecting.take_damage(3)
 
 		else
 			user.visible_message("<span class='danger'>[user] stabs [target] with [src.name]!</span>")
 			target.take_organ_damage(3)// 7 is the same as crowbar punch
-
-
 
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		var/contained_reagents = reagents.get_reagents()

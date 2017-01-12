@@ -61,8 +61,7 @@
 					var/mob/living/carbon/human/H = src
 					var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
 					if (istype(organ))
-						if(organ.take_damage(d, 0))
-							H.UpdateDamageIcon()
+						organ.take_damage(d, 0)
 					H.updatehealth()
 				else
 					src.take_organ_damage(d)
