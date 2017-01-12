@@ -55,11 +55,9 @@
 		O.hide(0)
 
 /turf/simulated/open/update_icon()
-	underlays.Cut()
-	overlays.Cut()
 	if(below)
-		underlays += image(icon = below.icon, icon_state = below.icon_state)
-//		underlays += below.overlays
+		underlays = list(image(icon = below.icon, icon_state = below.icon_state))
+
 	var/list/noverlays = list()
 	if(!istype(below,/turf/space))
 		noverlays += image(icon =icon, icon_state = "empty", layer = ABOVE_WIRE_LAYER)
