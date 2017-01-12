@@ -427,6 +427,13 @@
 	required_reagents = list("carbon" = 1, "water" = 5)
 	result_amount = 6
 
+/datum/chemical_reaction/polyglobulin
+	name = "Polyglobulin"
+	id = "polyglobulin"
+	result = "polyglobulin"
+	required_reagents = list("chloromydride" = 1, "anti_toxin" = 2, "saline" = 1, "spaceacillin" = 1)
+	result_amount = 5
+
 /datum/chemical_reaction/aurazapine
 	name = "Aurazapine"
 	id = "aurazapine"

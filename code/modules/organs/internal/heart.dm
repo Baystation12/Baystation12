@@ -107,7 +107,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 			if(prob(15))
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth) * threshold_coef)
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth * threshold_coef))
 			owner.adjustOxyLoss(10 * dmg_coef)
 
 	//Blood regeneration if there is some space

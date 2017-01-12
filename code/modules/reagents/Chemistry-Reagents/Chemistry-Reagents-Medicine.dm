@@ -16,6 +16,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE, 15)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
+		M.adjustOxyLoss(-5 * removed)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/chloromydride
@@ -50,7 +51,7 @@
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 0.6 * removed, 0) //heals 6 * removed at 100 damage
+		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 0.7 * removed, 0) //heals 7 * removed at 100 damage
 		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 10)
 
 
@@ -68,7 +69,7 @@
 
 /datum/reagent/metorapan/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(15 / (sqrt(M.getBruteLoss()) +  1) * removed, 0) //heals 2.5 * removed at 25 damage
+		M.heal_organ_damage(16 / (sqrt(M.getBruteLoss()) +  1) * removed, 0) //heals 2.67 * removed at 25 damage
 		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5)
 
 /datum/reagent/kelotane
@@ -84,7 +85,7 @@
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 15 / (sqrt(M.getFireLoss()) +  1) * removed) //heals 2.5 * removed at 25 damage
+		M.heal_organ_damage(0, 16 / (sqrt(M.getFireLoss()) +  1) * removed) //heals 2.67 * removed at 25 damage
 		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5)
 
 /datum/reagent/dermaline
@@ -101,13 +102,13 @@
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, sqrt(M.getFireLoss()) * 0.6 * removed) //heals 6 * removed at 100 damage
+		M.heal_organ_damage(0, sqrt(M.getFireLoss()) * 0.7 * removed) //heals 7 * removed at 100 damage
 		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 10)
 
 /datum/reagent/dylovene
 	name = "Dylovene"
 	id = "anti_toxin"
-	description = "Dylovene is a broad-spectrum antitoxin effective against severe poisoning. May cause nausea."
+	description = "Dylovene is a broad-spectrum antitoxin effective against moderate poisoning."
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00A000"
@@ -117,7 +118,7 @@
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustToxLoss(sqrt(M.getToxLoss()) * -0.3 * removed)
+		M.adjustToxLoss(sqrt(M.getToxLoss()) * -0.6 * removed)
 		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5)
 
 /datum/reagent/charcoal
@@ -137,13 +138,30 @@
 
 /datum/reagent/charcoal/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustToxLoss(-1.5 * removed) //flat rate, worse than dylo at above 25 toxloss, better at below
+		M.adjustToxLoss(-3 * removed) //flat rate, worse than dylo at above 25 toxloss, better at below
 		if(M.ingested && M.ingested.reagent_list.len > 1)
 			var/effect = 1 / (M.ingested.reagent_list.len - 1)
 			for(var/datum/reagent/R in M.ingested.reagent_list)
 				if(R == src)
 					continue
 				M.ingested.remove_reagent(R.id, removed * effect)
+
+/datum/reagent/polyglobulin
+	name = "Polyglobulin"
+	id = "polyglobulin"
+	description = "Polyglobulin is a very effective toxin inhibitor used to treat severe poisoning and illnesses. May decrease blood oxygen levels."
+	taste_description = "putrid mucus"
+	reagent_state = LIQUID
+	color = "#E6FFE6"
+	overdose = REAGENTS_OVERDOSE * 0.5
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/polyglobulin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		M.adjustToxLoss(sqrt(M.getToxLoss()) * -3 * removed)
+		M.adjustOxyLoss(removed * 2)
+		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 10)
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -158,14 +176,14 @@
 
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		holder.remove_reagent("lexorin", 2 * removed) //yes, it works for vox too
+		holder.remove_reagent("lexorin", 3 * removed) //yes, it works for vox too
 		if(alien == IS_VOX)
 			M.adjustToxLoss(removed * 6)
 			return
-		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -6 * removed) //heals 60 * removed at 100 damage
-		M.add_chemical_effect(CE_STABLE, 30)
+		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -8 * removed) //heals 80 * removed at 100 damage
+		M.add_chemical_effect(CE_STABLE, 40)
 		apply_fatigue_effect(M, removed, 0, 0, 10, 10, 5, 10)
-		M.take_organ_damage(removed * 0.5, 0) //if you're not ODing you'll take 15 brute at most
+		M.take_organ_damage(removed, 0) //if you're not ODing you'll take 30 brute at most, spread across all limbs
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
@@ -180,14 +198,14 @@
 
 /datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		holder.remove_reagent("lexorin", 4 * removed)
+		holder.remove_reagent("lexorin", 6 * removed)
 		if(alien == IS_VOX)
 			M.adjustToxLoss(removed * 9)
 			return
-		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -12 * removed) //heals 120 * removed at 100 damage
-		M.add_chemical_effect(CE_STABLE, 40)
+		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -14 * removed) //heals 140 * removed at 100 damage
+		M.add_chemical_effect(CE_STABLE, 50)
 		apply_fatigue_effect(M, removed, 0, 0, 10, 10, 5, 15)
-		M.take_organ_damage(removed, 0) //if you're not ODing you'll take 15 brute at most
+		M.take_organ_damage(removed * 2, 0) //if you're not ODing you'll take 15 brute at most
 		if(dose > 10)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
@@ -316,7 +334,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 200)
+	M.add_chemical_effect(CE_PAINKILLER, 150)
 
 /datum/reagent/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -345,7 +363,7 @@
 	M.AdjustWeakened(-1)
 	holder.remove_reagent("mindbreaker", 5 * removed)
 	M.hallucination = max(0, M.hallucination - 10)
-	M.adjustToxLoss(5 * removed)
+	M.adjustToxLoss(3 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 	M.adjustBrainLoss(removed) //very slow brain damage
 
@@ -510,8 +528,8 @@
 	M.add_chemical_effect(CE_STIM)
 	M.stuttering += 1
 	M.make_jittery(5)
-	M.adjustBrainLoss(removed) //very slow brain damage
-	M.adjustToxLoss(removed * 0.5) // slow poisoning
+	M.adjustBrainLoss(removed * 0.5) //very slow brain damage
+	M.adjustToxLoss(removed) // slow poisoning
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
