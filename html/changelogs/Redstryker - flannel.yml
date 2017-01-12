@@ -33,4 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added flannels in four varieties: white and black (colorable), purple and yellow, red and green, and green and blue. All are on the loadout. They can have their sleeves rolled up, be buttoned, or be tucked in and any combination thereof."
+  - rscadd: "Added flannels. It is on the loadout with the color selection datum. It can have its sleeves rolled up, be buttoned, or be tucked in and any combination thereof."

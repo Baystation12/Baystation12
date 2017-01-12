@@ -188,18 +188,3 @@
 	if(buttoned)
 		icon_state += "b"
 	update_clothing_icon()
-
-/obj/item/clothing/accessory/toggleable/flannel/red
-	name = "red flannel shirt"
-	desc = "A comfy, plaid red and green flannel shirt."
-	icon_state = "flannelred"
-
-/obj/item/clothing/accessory/toggleable/flannel/green
-	name = "green flannel shirt"
-	desc = "A comfy, plaid green and blue flannel shirt."
-	icon_state = "flannelgrn"
-
-/obj/item/clothing/accessory/toggleable/flannel/purple
-	name = "purple flannel shirt"
-	desc = "A comfy, plaid purple and yellow flannel shirt."
-	icon_state = "flannelprp"

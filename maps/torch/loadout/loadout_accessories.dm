@@ -236,6 +236,3 @@
 
 /datum/gear/accessory/flannel
 	allowed_roles = NON_MILITARY_ROLES
-
-/datum/gear/accessory/flannel/selection
-	allowed_roles = NON_MILITARY_ROLES
