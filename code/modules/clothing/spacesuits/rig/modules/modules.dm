@@ -61,8 +61,10 @@
 /obj/item/rig_module/examine()
 	..()
 	switch(damage)
-		if(0 to damaged_threshold-1)
+		if(0)
 			to_chat(usr, "It is undamaged.")
+		if(1 to damaged_threshold-1)
+			to_chat(usr, "It is slightly damaged.")
 		if(damaged_threshold to destroyed_threshold-1)
 			to_chat(usr, "It is badly damaged.")
 		if(destroyed_threshold to INFINITY)
@@ -180,7 +182,7 @@
 // Proc for toggling on active abilities.
 /obj/item/rig_module/proc/activate()
 
-	if(has_damaged_use)
+	if(has_damaged_use && damage >= damaged_threshold)
 		activate_damaged()
 		return 0
 
@@ -228,7 +230,7 @@
 // Called when a disruptive action is taken.
 /obj/item/rig_module/proc/disrupted()
 	if(!disruptable)
-		return
+		return 0
 
 /obj/item/rig_module/proc/take_hit(hit_damage = 0, source = null, is_emp = 0) //can be used with things like cloak to decloak or whatnot on hit.
 	if(!hit_damage)
@@ -249,12 +251,10 @@
 
 	if(holder.wearer)
 		if(damage >= destroyed_threshold)
-			to_chat(holder.wearer, "<span class='danger'>The [source] has disabled your [interface_name]!</span>")
-			holder.wearer.visible_message("<span class='danger'>\The [interface_name] burst into a shower of sparks!</span>")
+			holder.wearer.visible_message("<span class='danger'>\The [interface_name] burst into a shower of sparks!</span>","<span class='danger'>The [source] has disabled your [interface_name]!</span>")
 			deactivate()
 		else if(damage >= damaged_threshold && initial_damage < damaged_threshold)
-			to_chat(holder.wearer, "<span class='warning'>The [source] has damaged your [interface_name]!</span>")
-			holder.wearer.visible_message("<span class='danger'>\The [interface_name] begins sparking!</span>")
+			holder.wearer.visible_message("<span class='danger'>\The [interface_name] begins sparking!</span>","<span class='danger'>The [source] has disabled your [interface_name]!</span>")
 			deactivate()
 	return
 
