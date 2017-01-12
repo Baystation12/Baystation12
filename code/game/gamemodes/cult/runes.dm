@@ -241,8 +241,7 @@
 	var/obj/effect/cultwall/wall = null
 
 /obj/effect/rune/wall/Destroy()
-	if(wall)
-		qdel(wall)
+	qdel_null(wall)
 	return ..()
 
 /obj/effect/rune/wall/cast(var/mob/living/user)
