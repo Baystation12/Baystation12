@@ -392,7 +392,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		// Full prosthetic bodies without a brain are borderline unkillable so make sure they have a brain to remove/destroy.
 		var/datum/species/current_species = all_species[pref.species]
-		if(!current_species.has_organ[BP_BRAIN])
+		if(current_species.spawn_flags & SPECIES_CAN_NOT_BE_CYBORG)
 			limb_selection_list -= "Full Body"
 		else if(pref.organ_data[BP_CHEST] == "cyborg")
 			limb_selection_list |= "Head"
