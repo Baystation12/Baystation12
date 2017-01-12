@@ -7,6 +7,7 @@
 	icon_living = "carp"
 	icon_dead = "carp_dead"
 	icon_gib = "carp_gib"
+	flags = TABLEPASS
 	speak_chance = 0
 	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
