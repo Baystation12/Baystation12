@@ -56,6 +56,7 @@
 					bluespaced |= M
 
 /datum/evacuation_controller/pods/finish_evacuation()
+	..()
 	if (emergency_evacuation)
 		return
 	for(var/mob/living/M in bluespaced)
