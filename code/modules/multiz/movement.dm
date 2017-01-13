@@ -95,7 +95,7 @@
 		return
 
 	var/turf/T = loc
-	if(!T.CanZPass(src, DOWN) && !below.CanZPass(src, DOWN))
+	if(!T.CanZPass(src, DOWN) || !below.CanZPass(src, DOWN))
 		return
 
 	// No gravity in space, apparently.
