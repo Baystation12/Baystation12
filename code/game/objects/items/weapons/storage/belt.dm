@@ -116,6 +116,28 @@
 	desc = "A sturdy black webbing belt with attached pouches."
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
+	can_hold = list(
+		/obj/item/device/healthanalyzer,
+		/obj/item/weapon/dnainjector,
+		/obj/item/weapon/reagent_containers/dropper,
+		/obj/item/weapon/reagent_containers/glass/beaker,
+		/obj/item/weapon/reagent_containers/glass/bottle,
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/flame/lighter/zippo,
+		/obj/item/weapon/storage/fancy/cigarettes,
+		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/stack/medical,
+		/obj/item/device/flashlight/pen,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/head/surgery,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/weapon/crowbar,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/extinguisher/mini
+		)
 
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
