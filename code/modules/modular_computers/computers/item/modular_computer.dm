@@ -274,14 +274,22 @@
 			to_chat(user, "You send an activation signal to \the [src], turning it on")
 		else
 			to_chat(user, "You press the power button and start up \the [src]")
-		enabled = 1
-		update_icon()
-		ui_interact(user)
+		onboot(user)
 	else // Unpowered
 		if(issynth)
 			to_chat(user, "You send an activation signal to \the [src] but it does not respond")
 		else
 			to_chat(user, "You press the power button but \the [src] does not respond")
+
+/obj/item/modular_computer/proc/onboot(var/mob/user)
+	enabled = 1
+	update_icon()
+	var/datum/computer_file/data/A = hard_drive.find_file_by_name("autorun")
+	if(A)
+		var/list/autorun = splittext(A.stored_data,";")
+		for(var/prg in autorun)
+			run_program(prg)
+	ui_interact(user)
 
 // Process currently calls handle_power(), may be expanded in future if more things are added.
 /obj/item/modular_computer/process()
@@ -425,16 +433,7 @@
 		return 1
 	if( href_list["PC_minimize"] )
 		var/mob/user = usr
-		if(!active_program || !processor_unit)
-			return
-
-		idle_threads.Add(active_program)
-		active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
-		nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
-		active_program = null
-		update_icon()
-		if(user && istype(user))
-			ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
+		minimize_program(user)
 
 	if( href_list["PC_killprogram"] )
 		var/prog = href_list["PC_killprogram"]
@@ -451,43 +450,58 @@
 		to_chat(user, "<span class='notice'>Program [P.filename].[P.filetype] with PID [rand(100,999)] has been killed.</span>")
 
 	if( href_list["PC_runprogram"] )
-		var/prog = href_list["PC_runprogram"]
-		var/datum/computer_file/program/P = null
-		var/mob/user = usr
-		if(hard_drive)
-			P = hard_drive.find_file_by_name(prog)
-
-		if(!P || !istype(P)) // Program not found or it's not executable program.
-			to_chat(user, "<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run program\" warning.</span>")
-			return
-
-		P.computer = src
-
-		if(!P.is_supported_by_hardware(hardware_flag, 1, user))
-			return
-
-		// The program is already running. Resume it.
-		if(P in idle_threads)
-			P.program_state = PROGRAM_STATE_ACTIVE
-			active_program = P
-			idle_threads.Remove(P)
-			update_icon()
-			return
-
-		if(idle_threads.len >= processor_unit.max_idle_programs+1)
-			to_chat(user, "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>")
-			return
-
-		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
-			to_chat(user, "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>")
-			return
-
-		if(P.run_program(user))
-			active_program = P
-			update_icon()
-		return 1
+		return run_program(href_list["PC_runprogram"])
 	if(.)
 		update_uis()
+
+/obj/item/modular_computer/proc/minimize_program(mob/user)
+	if(!active_program || !processor_unit)
+		return
+
+	idle_threads.Add(active_program)
+	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
+	nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
+	active_program = null
+	update_icon()
+	if(istype(user))
+		ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
+
+/obj/item/modular_computer/proc/run_program(prog)
+	var/datum/computer_file/program/P = null
+	var/mob/user = usr
+	if(hard_drive)
+		P = hard_drive.find_file_by_name(prog)
+
+	if(!P || !istype(P)) // Program not found or it's not executable program.
+		to_chat(user, "<span class='danger'>\The [src]'s screen shows \"I/O ERROR - Unable to run [prog]\" warning.</span>")
+		return
+
+	P.computer = src
+
+	if(!P.is_supported_by_hardware(hardware_flag, 1, user))
+		return
+	if(P in idle_threads)
+		P.program_state = PROGRAM_STATE_ACTIVE
+		active_program = P
+		idle_threads.Remove(P)
+		update_icon()
+		return
+
+	if(idle_threads.len >= processor_unit.max_idle_programs+1)
+		to_chat(user, "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>")
+		return
+
+	if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature)) // The program requires NTNet connection, but we are not connected to NTNet.
+		to_chat(user, "<span class='danger'>\The [src]'s screen shows \"NETWORK ERROR - Unable to connect to NTNet. Please retry. If problem persists contact your system administrator.\" warning.</span>")
+		return
+
+	if(active_program)
+		minimize_program(user)
+
+	if(P.run_program(user))
+		active_program = P
+		update_icon()
+	return 1
 
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure(var/malfunction = 0)

@@ -44,7 +44,7 @@
 /obj/machinery/modular_computer/console/preset/medical/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
-
+	cpu.hard_drive.store_file(new/datum/computer_file/data/autorun("sensormonitor"))
 
 // ===== RESEARCH CONSOLE =====
 /obj/machinery/modular_computer/console/preset/research
@@ -84,6 +84,7 @@
 
 /obj/machinery/modular_computer/console/preset/security/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	cpu.hard_drive.store_file(new/datum/computer_file/data/autorun("cammon"))
 
 
 // ===== CIVILIAN CONSOLE =====
