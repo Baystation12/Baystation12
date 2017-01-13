@@ -307,7 +307,7 @@
 	. = list()
 	for(var/N in playable_species)
 		var/datum/species/S = all_species[N]
-		if(S.spawn_flags & SPECIES_CAN_NOT_BE_CYBORG)
+		if(S.spawn_flags & SPECIES_NO_FBP_CONSTRUCTION)
 			continue
 		. += N
 
