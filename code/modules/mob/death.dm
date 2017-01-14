@@ -57,7 +57,7 @@
 	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
-	stat = DEAD
+	set_stat(DEAD)
 	reset_plane_and_layer()
 	update_canmove()
 

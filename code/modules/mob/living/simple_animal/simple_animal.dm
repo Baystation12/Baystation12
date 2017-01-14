@@ -74,7 +74,7 @@
 		if(health > 0)
 			icon_state = icon_living
 			switch_from_dead_to_living_mob_list()
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 			set_density(1)
 		return 0
 

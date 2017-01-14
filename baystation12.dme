@@ -230,6 +230,7 @@
 #include "code\datums\observation\see_in_dark_set.dm"
 #include "code\datums\observation\see_invisible_set.dm"
 #include "code\datums\observation\sight_set.dm"
+#include "code\datums\observation\stat_set.dm"
 #include "code\datums\observation\task_triggered.dm"
 #include "code\datums\observation\turf_changed.dm"
 #include "code\datums\observation\unequipped.dm"

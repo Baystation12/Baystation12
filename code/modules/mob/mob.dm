@@ -995,6 +995,10 @@ mob/proc/yank_out_object()
 	else
 		return ..()
 
+/mob/proc/set_stat(var/new_stat)
+	. = stat != new_stat
+	stat = new_stat
+
 /mob/verb/northfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(NORTH))
