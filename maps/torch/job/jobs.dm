@@ -196,11 +196,11 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 
-	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
+	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research, access_RC_announce, access_keycard_auth,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_calypso, access_guppy)
-	minimal_access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
+	minimal_access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research, access_RC_announce, access_keycard_auth,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_calypso, access_guppy)
@@ -220,10 +220,12 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
-	access = list(access_representative, access_security,access_medical, access_engine,
-			            access_heads, access_cargo, access_solgov_crew, access_calypso, access_guppy)
+	access = list(access_representative, access_security,access_brig, access_medical, access_engine,
+			            access_heads, access_cargo, access_solgov_crew, access_calypso, access_guppy,
+				    access_RC_announce, access_keycard_auth)
 	minimal_access = list(access_representative, access_security,access_medical, access_engine,
-			            access_heads, access_cargo, access_solgov_crew, access_calypso, access_guppy)
+			            access_heads, access_cargo, access_solgov_crew, access_calypso, access_guppy,
+				    access_research, access_RC_announce, access_keycard_auth, access_brig)
 
 
 /datum/job/sea
