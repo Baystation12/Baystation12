@@ -506,12 +506,6 @@
 				src.reagents.splash(target, reagents.total_volume)//splashes all of target contains, replace with standard_splash_mob(var/mob/user, var/mob/target)
 				spawn(5) src.reagents.clear_reagents()
 				return
-			else//splashing onto floor/smth else ? Need to fix this, aint working
-				to_chat(user, "<span class='notice'>You splash the solution of glass onto [target].</span>")
-				src.reagents.splash(target, reagents.total_volume)
-				spawn(5) src.reagents.clear_reagents()
-				return
-
 		else
 			if(user.a_intent == I_HELP)
 				amount_per_transfer_from_this = volume/10
@@ -525,11 +519,14 @@
 		..()
 		return
 
-	/*afterattack(obj/target, mob/user)
-	if(reagents)
-		to_chat(user, "<span class='notice'>You splash the solution of glass onto [target].</span>")
-		src.reagents.splash(target, reagents.total_volume)
-		return*/
+	afterattack(obj/target, mob/user, proximity)//splashing onto turf/floor etc.
+		amount_per_transfer_from_this = volume
+		if(isturf(target))
+			if(user.a_intent == I_HURT)
+				to_chat(user, "<span class='notice'>You splash the solution from your glass onto [target].</span>")
+				src.reagents.splash(target, reagents.total_volume)
+				spawn(5) src.reagents.clear_reagents()
+				return
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda
 	New()
