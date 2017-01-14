@@ -33,8 +33,8 @@ var/global/datum/matchmaker/matchmaker = new()
 //Types of relations
 
 /datum/relation
-	var/name = "Acquintance"
-	var/desc = "You just know the guy."
+	var/name = "Acquaintance"
+	var/desc = "You just know them."
 	var/list/can_connect_to	//What relations (names) can matchmaking join us with? Defaults to own name.
 	var/list/incompatible 	//If we have relation like this with the mob, we can't join
 	var/datum/mind/holder
