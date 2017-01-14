@@ -1,8 +1,3 @@
-#define TELECOMMS_RECEPTION_NONE 0
-#define TELECOMMS_RECEPTION_SENDER 1
-#define TELECOMMS_RECEPTION_RECEIVER 2
-#define TELECOMMS_RECEPTION_BOTH 3
-
 /proc/register_radio(source, old_frequency, new_frequency, radio_filter)
 	if(old_frequency)
 		radio_controller.remove_object(source, old_frequency)
