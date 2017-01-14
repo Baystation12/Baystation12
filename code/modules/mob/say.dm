@@ -11,7 +11,7 @@
 	set category = "IC"
 	
 	if(typing_indicator)
-		typing_indicator.destroy_self()
+		qdel(typing_indicator)
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
@@ -21,7 +21,7 @@
 	message = sanitize(message)
 
 	if(typing_indicator)
-		typing_indicator.destroy_self()
+		qdel(typing_indicator)
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
 	else
