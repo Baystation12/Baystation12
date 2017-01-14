@@ -110,6 +110,7 @@
 	handle_silent()
 	handle_drugged()
 	handle_slurring()
+	handle_slowed()
 
 /mob/living/proc/handle_stunned()
 	if(stunned)
@@ -151,6 +152,12 @@
 		if(!paralysis)
 			update_icons()
 	return paralysis
+
+/mob/living/proc/handle_slowed()
+	if(slowed)
+		slowed = max(slowed-1, 0)
+	return slowed
+
 
 /mob/living/proc/handle_disabilities()
 	handle_impaired_vision()

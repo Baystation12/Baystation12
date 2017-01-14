@@ -52,7 +52,8 @@
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 0.7 * removed, 0) //heals 7 * removed at 100 damage
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 10)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
+		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 
 
 /datum/reagent/metorapan
@@ -70,7 +71,7 @@
 /datum/reagent/metorapan/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(16 / (sqrt(M.getBruteLoss()) +  1) * removed, 0) //heals 2.67 * removed at 25 damage
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -86,7 +87,7 @@
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 16 / (sqrt(M.getFireLoss()) +  1) * removed) //heals 2.67 * removed at 25 damage
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/dermaline
 	name = "Dermaline"
@@ -103,7 +104,8 @@
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, sqrt(M.getFireLoss()) * 0.7 * removed) //heals 7 * removed at 100 damage
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 10)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
+		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 
 /datum/reagent/dylovene
 	name = "Dylovene"
@@ -118,8 +120,8 @@
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustToxLoss(sqrt(M.getToxLoss()) * -0.6 * removed)
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5)
+		M.adjustToxLoss(sqrt(M.getToxLoss()) * -0.5 * removed)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/charcoal
 	name = "Activated Charcoal"
@@ -138,7 +140,7 @@
 
 /datum/reagent/charcoal/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustToxLoss(-3 * removed) //flat rate, worse than dylo at above 25 toxloss, better at below
+		M.adjustToxLoss(-2.5 * removed)
 		if(M.ingested && M.ingested.reagent_list.len > 1)
 			var/effect = 1 / (M.ingested.reagent_list.len - 1)
 			for(var/datum/reagent/R in M.ingested.reagent_list)
@@ -161,7 +163,8 @@
 	if(alien != IS_DIONA)
 		M.adjustToxLoss(sqrt(M.getToxLoss()) * -3 * removed)
 		M.adjustOxyLoss(removed * 2)
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 10)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
+		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -182,7 +185,8 @@
 			return
 		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -8 * removed) //heals 80 * removed at 100 damage
 		M.add_chemical_effect(CE_STABLE, 40)
-		apply_fatigue_effect(M, removed, 0, 0, 10, 10, 5, 10)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
+		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 		M.take_organ_damage(removed, 0) //if you're not ODing you'll take 30 brute at most, spread across all limbs
 
 /datum/reagent/dexalinp
@@ -204,8 +208,9 @@
 			return
 		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -14 * removed) //heals 140 * removed at 100 damage
 		M.add_chemical_effect(CE_STABLE, 50)
-		apply_fatigue_effect(M, removed, 0, 0, 10, 10, 5, 15)
-		M.take_organ_damage(removed * 2, 0) //if you're not ODing you'll take 15 brute at most
+		apply_fatigue_effect(M, removed, 0, 10, 10, 30, 15)
+		apply_weakened_effect(M, removed, 0, 10, 10, 10, 20)
+		M.take_organ_damage(removed * 2, 0)
 		if(dose > 10)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
@@ -228,7 +233,7 @@
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(6 / (sqrt(M.getBruteLoss()) +  1) * removed, 6 / (sqrt(M.getFireLoss()) +  1) * removed) //heals 1.2 * removed at 25 damage
 		M.adjustToxLoss(-6 / (sqrt(M.getToxLoss()) +  1) * removed)
-		apply_fatigue_effect(M, removed, 0, 0, 0, 10, 5, 0) //blurry eyes only
+		apply_fatigue_effect(M, removed, 0, 10, 10, 5, 2)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
@@ -254,7 +259,8 @@
 		M.heal_organ_damage(1 * removed, 1 * removed)
 		M.adjustToxLoss(-1 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 10)
+	apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
+	apply_weakened_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -280,7 +286,8 @@
 		M.heal_organ_damage(2 * removed, 2 * removed)
 		M.adjustToxLoss(-2 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 15)
+	apply_fatigue_effect(M, removed, 0, 10, 10, 30, 15)
+	apply_weakened_effect(M, removed, 0, 10, 10, 10, 5)
 
 /* Painkillers */
 
@@ -382,8 +389,9 @@
 /datum/reagent/alkysine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.adjustBrainLoss(-30 * removed)
+	M.adjustBrainLoss(-10 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
+	apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/imidazoline
 	name = "Imidazoline"
@@ -439,7 +447,8 @@
 		for(var/obj/item/organ/I in H.internal_organs)
 			if((I.damage > 0) && !(I.robotic >= ORGAN_ROBOT)) //Peridaxon heals only non-robotic organs
 				I.damage = max(I.damage - removed, 0)
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 30) //growing organs back is painful
+	apply_fatigue_effect(M, removed, 0, 10, 10, 30, 15)
+	apply_weakened_effect(M, removed, 0, 10, 10, 20, 30)
 
 /datum/reagent/thrombocytolamine
 	name = "Thrombocytolamine"
@@ -462,7 +471,8 @@
 					W.damage = max(W.damage - removed, 0)
 					if(W.damage <= 0)
 						O.wounds -= W
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 15) //growing blood vessels, maybe not so painful
+	apply_fatigue_effect(M, removed, 0, 10, 10, 30, 20)
+	apply_weakened_effect(M, removed, 0, 10, 10, 20, 30)
 
 /datum/reagent/osteolazarazine
 	name = "Osteolazarazine"
@@ -481,10 +491,11 @@
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/O in H.bad_external_organs)
 			if(O.status & ORGAN_BROKEN)
-				if(dose >= 4)
+				if(dose >= 14)
 					O.mend_fracture()
 					H.custom_pain("You feel a terrible agony tear through your bones!",60)
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 50) //growing bones, super god damn painful
+	apply_fatigue_effect(M, removed, 0, 10, 10, 40, 30)
+	apply_weakened_effect(M, removed, 0, 10, 10, 30, 50)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
@@ -550,7 +561,6 @@
 		for(var/datum/reagent/R in M.ingested.reagent_list)
 			if(istype(R, /datum/reagent/ethanol))
 				R.dose = max(R.dose - removed * 5, 0)
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 0)
 
 /datum/reagent/hyronalin
 	name = "Hyronalin"
@@ -567,7 +577,7 @@
 /datum/reagent/hyronalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.radiation = max(M.radiation - 30 * removed, 0)
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 5, 5) //it stings
+		apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/arithrazine
 	name = "Arithrazine"
@@ -587,7 +597,7 @@
 		M.adjustHalLoss(20 * removed)
 		if(prob(60))
 			M.take_organ_damage(4 * removed, 0)
-		apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 10) //it stings harder
+		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
 
 /datum/reagent/spaceacillin
 	name = "Spaceacillin"
@@ -694,7 +704,7 @@
 /datum/reagent/primordapine
 	name = "Primordapine"
 	id = "primordapine"
-	description = "An experimental, long lasting drug used increase blood production and treat severe burns and traumas."
+	description = "An experimental, long lasting drug used to increase blood production and treat severe burns and traumas."
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#FFEA97"
@@ -706,8 +716,8 @@
 /datum/reagent/primordapine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_BLOODRESTORE, 6 * removed)
-		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 0.8 * removed, sqrt(M.getFireLoss()) * 0.8 * removed)
-		apply_fatigue_effect(M, removed, 0, 0, 0, 10, 5, 5) //no weakness, some blurry eyes and stinging
+		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 1.2 * removed, sqrt(M.getFireLoss()) * 1.2 * removed)
+		apply_fatigue_effect(M, removed, 0, 10, 10, 5, 2)
 
 /datum/reagent/sarcohemalazapine
 	name = "Sarcohemalazapine"
@@ -728,13 +738,13 @@
 			if(O.status & ORGAN_BROKEN)
 				if(dose >= 4)
 					O.mend_fracture()
-					H.custom_pain("You feel a terrible agony tear through your bones!",60)
+					H.custom_pain("You feel a tingling sensation through your bones!",40)
 			for(var/datum/wound/W in O.wounds)
 				if(W.internal)
 					W.damage = max(W.damage - removed, 0)
 					if(W.damage <= 0)
 						O.wounds -= W
-	apply_fatigue_effect(M, removed, 0, 1, 10, 10, 10, 40) //growing tumors is not painful, nuh uh, not painful at all
+	apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
 
 /* Antidepressants */
 

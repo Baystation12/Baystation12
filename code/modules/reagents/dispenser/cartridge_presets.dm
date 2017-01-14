@@ -95,6 +95,7 @@
 	chloromydride	spawn_reagent = "chloromydride"
 	metorapan	spawn_reagent = "metorapan"
 	charcoal	spawn_reagent = "charcoal"
+	polyglobulin	spawn_reagent = "polyglobulin"
 	aurazapine	spawn_reagent = "aurazapine"
 	thrombocytolamine	spawn_reagent = "thrombocytolamine"
 	osteolazarazine	spawn_reagent = "osteolazarazine"

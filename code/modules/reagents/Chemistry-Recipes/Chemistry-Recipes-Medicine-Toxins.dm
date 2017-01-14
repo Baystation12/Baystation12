@@ -456,6 +456,7 @@
 	catalysts = list("phoron" = 10)
 	result_amount = 2
 
+/*
 /datum/chemical_reaction/primordapine
 	name = "Primordapine"
 	id = "primordapine"
@@ -469,3 +470,4 @@
 	result = "sarcohemalazapine"
 	required_reagents = list("osteolazaraine" = 1, "thrombocytolamine" = 1, "phoron" = 10, "hydrogen" = 10, "uranium" = 10, "radium" = 5, "virusfood" = 1, "mutagen" = 2)
 	result_amount = 1
+*/

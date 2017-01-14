@@ -120,12 +120,19 @@
 	..()
 	holder = null
 
-/datum/reagent/proc/apply_fatigue_effect(var/mob/living/carbon/M, var/removed, var/min_dose, var/weakened_scale, var/max_weakened, var/max_blurry, var/weakened_prob, var/halloss_scale)
+/datum/reagent/proc/apply_fatigue_effect(var/mob/living/carbon/M, var/removed, var/min_dose, var/effect_prob, var/max_blurry, var/dizzy_scale, var/slow_scale)
 	if(prob(5))
-		to_chat(M, "<span class='warning'>You feel weak.</span>")
-	if(dose > min_dose && prob((dose - min_dose) * weakened_prob)) //min_dose allows the onset of the side-effect to be delayed
-		if(M.weakened < max_weakened) //so people don't get perma-weakened
-			M.AdjustWeakened(weakened_scale)
+		to_chat(M, "<span class='warning'>You feel heavy.</span>")
+	if(dose > min_dose && prob((dose - min_dose) * effect_prob)) //min_dose allows the onset of the side-effect to be delayed
 		if(M.eye_blurry < max_blurry)
 			M.eye_blurry += 5
+	M.make_dizzy(dizzy_scale * 2 * removed)
+	M.AdjustSlowed(slow_scale * removed)
+
+/datum/reagent/proc/apply_weakened_effect(var/mob/living/carbon/M, var/removed, var/min_dose, var/effect_prob, var/max_weakened, var/weakened_scale, var/halloss_scale)
+	if(prob(5))
+		to_chat(M, "<span class='warning'>You feel weak.</span>")
+	if(dose > min_dose && prob((dose - min_dose) * effect_prob)) //min_dose allows the onset of the side-effect to be delayed
+		if(M.weakened < max_weakened) //so people don't get perma-weakened
+			M.AdjustWeakened(weakened_scale)
 	M.adjustHalLoss(halloss_scale * removed)

@@ -58,6 +58,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chloromydride,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/metorapan,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/charcoal,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/polyglobulin,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aurazapine,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/thrombocytolamine,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/osteolazarazine,
