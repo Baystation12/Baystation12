@@ -2,48 +2,42 @@
 	icon = 'icons/mob/talk.dmi'
 	icon_state = "typing"
 	
-/atom/movable/overlay/typing_indicator/proc/destroy_self(var/mob/master)
-	if(master)
-		master.typing_indicator = null
-		master = null
+/atom/movable/overlay/typing_indicator/proc/follow_master()
+	//master is the mob that creates the indicator and calls the follow proc
+	name = master
+	invisibility = master.invisibility
+	moved_event.register(master, src, /atom/movable/proc/move_to_turf)
+	destroyed_event.register(master, src, /atom/movable/overlay/typing_indicator/proc/destroy_self)
+	
+/atom/movable/overlay/typing_indicator/proc/destroy_self(var/mob/M)
+	M = master
+	moved_event.unregister(M, src)
+	destroyed_event.unregister(M, src)
+	if(M)
+		M.typing_indicator = null
+		M = null
 	qdel(src)
 
-mob/var/atom/movable/overlay/typing_indicator = null
-
-/mob/proc/typing_indicator_follow_me(var/atom/movable/overlay/typing_indicator/follower)
-	if(follower)
-		return
-	
-	follower = typing_indicator
-	moved_event.register(src, follower, /atom/movable/proc/move_to_turf)
-	destroyed_event.register(src, follower, /atom/movable/overlay/typing_indicator/proc/destroy_self)
-
-	move_to_turf(follower, loc, usr.loc)
+mob/var/atom/movable/overlay/typing_indicator/typing_indicator = null
 	
 /mob/proc/create_typing_indicator()
 	if(client && !stat && is_preference_enabled(/datum/client_preference/show_typing_indicator))
 		if(!typing_indicator)
-			typing_indicator = new /atom/movable/overlay/typing_indicator(loc)
-			typing_indicator.name = name
-			typing_indicator.invisibility = invisibility
+			typing_indicator = new(loc)
 			typing_indicator.master = usr
-		typing_indicator_follow_me()
+		typing_indicator.follow_master()
 	else 
 		if(typing_indicator)
-			destroy_typing_indicator()
-			
-/mob/proc/destroy_typing_indicator()
-	if(typing_indicator)
-		qdel(typing_indicator)
-		typing_indicator = null
+			typing_indicator.destroy_self()
 		
 /mob/verb/say_wrapper()
 	set name = ".Say"
 	set hidden = 1
-
+	
 	create_typing_indicator()
 	var/message = input("","say (text)") as text
-	destroy_typing_indicator()
+	if(typing_indicator)
+		typing_indicator.destroy_self()
 	if(message)
 		say_verb(message)
 
@@ -53,16 +47,17 @@ mob/var/atom/movable/overlay/typing_indicator = null
 
 	create_typing_indicator()
 	var/message = input("","me (text)") as text
-	destroy_typing_indicator()
+	if(typing_indicator)
+		typing_indicator.destroy_self()
 	if(message)
 		me_verb(message)
 
 /mob/Logout()
 	..()
 	if(typing_indicator)
-		destroy_typing_indicator()
+		typing_indicator.destroy_self()
 	
 /mob/death()
 	..()
 	if(typing_indicator)
-		destroy_typing_indicator()
+		typing_indicator.destroy_self()
