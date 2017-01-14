@@ -221,7 +221,6 @@
 					S.gather_all(src.loc, user)
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
-	return ..()
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
