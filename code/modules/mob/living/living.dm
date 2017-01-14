@@ -182,7 +182,7 @@ default behaviour is:
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
 		health = 100
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()
 
@@ -441,7 +441,7 @@ default behaviour is:
 		timeofdeath = 0
 
 	// restore us to conciousness
-	stat = CONSCIOUS
+	set_stat(CONSCIOUS)
 
 	// make the icons look correct
 	regenerate_icons()

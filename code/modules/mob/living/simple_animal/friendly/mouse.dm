@@ -41,14 +41,14 @@
 			sound_to(M, 'sound/effects/mousesqueek.ogg')
 
 	if(!ckey && stat == CONSCIOUS && prob(0.5))
-		stat = UNCONSCIOUS
+		set_stat(UNCONSCIOUS)
 		icon_state = "mouse_[body_color]_sleep"
 		wander = 0
 		speak_chance = 0
 		//snuffles
 	else if(stat == UNCONSCIOUS)
 		if(ckey || prob(1))
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 			icon_state = "mouse_[body_color]"
 			wander = 1
 		else if(prob(5))
