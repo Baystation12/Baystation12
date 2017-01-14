@@ -10,6 +10,7 @@
 	var/datum/geosample/geological_data
 	var/datum/artifact_find/artifact_find
 	var/last_act = 0
+	var/delay = 10 //Spam protection
 
 /obj/structure/boulder/New()
 	..()
@@ -76,6 +77,47 @@
 			else
 				user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='notice'>\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.</span>")
 			qdel(src)
+
+	if(istype(I, /obj/item/weapon/wrench))
+		if(last_act + delay > world.time)
+			return
+		last_act = world.time
+		
+		if(!anchored)
+			to_chat(user, "<span class='notice'>The [src] is already dislodged.</span>")
+			return
+	
+		else
+			playsound(src, 'sound/weapons/Genhit.ogg', 75, 1)
+			to_chat(user, "You slowly chip the [src] loose...")
+			
+			if(do_after(user, 120,src)) //Why a wrench? Because Xenoarchs have enough junk to lug around.
+				if(!src) return
+				to_chat(user, "<span class='notice'>You've broken the [src] free!</span>")
+				playsound(src, 'sound/weapons/Genhit.ogg', 75, 1)
+				anchored = !anchored
+			return
+
+
+	if(istype(I, /obj/item/weapon/crowbar))
+		if(last_act + delay > world.time)
+			return
+		last_act = world.time
+		
+		if(!anchored)
+			to_chat(user, "<span class='notice'>The [src] is already dislodged.</span>")
+			return
+			
+		else
+			playsound(src, 'sound/items/Crowbar.ogg', 75, 1)
+			to_chat(user, "You begin to pry the [src] loose...")
+			
+			if(do_after(user, 40,src)) //Much faster than a wrench, obviously.
+				if(!src) return
+				to_chat(user, "<span class='notice'>You've broken the [src] free!</span>")
+				playsound(src, 'sound/weapons/Genhit.ogg', 75, 1)
+				anchored = !anchored
+			return
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()
