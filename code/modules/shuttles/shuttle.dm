@@ -119,6 +119,8 @@
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
 
+	//TODO
+	/*
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
 
@@ -137,7 +139,9 @@
 		var/turf/T = get_turf(bug)
 		if(!T || T.is_solid_structure())
 			bug.gib()
+	*/
 
+	/*
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
 	var/turf/some_dest_turf = locate() in destination
 	if (HasAbove(some_dest_turf.z))
@@ -145,9 +149,11 @@
 			var/turf/TA = GetAbove(TD)
 			if (istype(TA, get_base_turf_by_area(TA)))
 				TA.ChangeTurf(ceiling_type, 1, 1)
+	*/
 
 	do_move(origin, destination)
 
+	/*
 	// if there was a zlevel above our origin, erase our ceiling now we're gone
 	var/turf/some_origin_turf = locate() in origin
 	if (HasAbove(some_origin_turf.z))
@@ -155,6 +161,7 @@
 			var/turf/TA = GetAbove(TO)
 			if (istype(TA, ceiling_type))
 				TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
+	*/
 
 	for(var/mob/M in destination)
 		if(M.client)
@@ -184,7 +191,7 @@
 		makepowernets()
 	return
 
-//hopefully temporary untill all shuttle subtypes can be converted
+//hopefully temporary
 /datum/shuttle/proc/do_move(area/origin, area/destination)
 	origin.move_contents_to(destination)
 

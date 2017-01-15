@@ -1,9 +1,22 @@
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
-/obj/effect/landmark/shuttle
+//making this separate from /obj/effect/landmark until that mess can be dealt with
+/obj/effect/shuttle_nav
 	name = "nav point"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
+	anchored = 1
+	unacidable = 1
+	simulated = 0
+	invisibility = 101
+
+//Can shuttle go here without doing weird stuff?
+/obj/effect/shuttle_nav/proc/free()
+	return TRUE 
+
+	//TODO: scan a footprint around the landmark shaped like the shuttle area, for other shuttle areas and the edge of the map
+	//Also maybe look for structural turfs with density
+
 
 /datum/shuttle/ferry
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
@@ -12,14 +25,14 @@
 
 	var/in_use = null	//tells the controller whether this shuttle needs processing
 
-	var/obj/effect/landmark/shuttle/landmark_transition
+	var/obj/effect/shuttle_nav/landmark_transition
 	var/move_time = 0		//the time spent in the transition area
 	var/transit_direction = null	//needed for area/move_contents_to() to properly handle shuttle corners - not exactly sure how it works.
 
 	var/area/shuttle_area
 
-	var/obj/effect/landmark/shuttle/landmark_station
-	var/obj/effect/landmark/shuttle/landmark_offsite
+	var/obj/effect/shuttle_nav/landmark_station
+	var/obj/effect/shuttle_nav/landmark_offsite
 
 	//TODO: change location to a string and use a mapping for area and dock targets.
 	var/dock_target_station
@@ -35,20 +48,18 @@
 	shuttle_area = locate(shuttle_area)
 
 	if(landmark_station)
-		landmark_station = locate(landmark_station)
+		landmark_station = locate(landmark_station) in world
 	if(landmark_offsite)
-		landmark_offsite = locate(landmark_offsite)
+		landmark_offsite = locate(landmark_offsite) in world
 	if(landmark_transition)
-		landmark_transition = locate(landmark_transition)
+		landmark_transition = locate(landmark_transition) in world
 
-/datum/shuttle/ferry/proc/find_landmarks(var/station_tag = null, var/offsite_tag = null, var/transition_tag = null)
-
-
-/datum/shuttle/ferry/do_move(var/obj/effect/landmark/shuttle/origin, var/obj/effect/landmark/shuttle/destination)
+//Temporary untill all shuttles are converted
+/datum/shuttle/ferry/do_move(var/obj/effect/shuttle_nav/origin, var/obj/effect/shuttle_nav/destination)
 	var/list/shuttle_turfs = get_area_turfs("\ref[shuttle_area]")
 	translate_turfs(origin, destination, shuttle_turfs)
 
-/datum/shuttle/ferry/short_jump(var/obj/effect/landmark/shuttle/origin, var/obj/effect/landmark/shuttle/destination)
+/datum/shuttle/ferry/short_jump(var/obj/effect/shuttle_nav/origin, var/obj/effect/shuttle_nav/destination)
 	if(isnull(location))
 		return
 

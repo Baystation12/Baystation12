@@ -32,7 +32,7 @@
 			supply_controller.buy()
 
 		//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
-		var/obj/effect/landmark/shuttle/away_landmark = get_location_landmark(away_location)
+		var/obj/effect/shuttle_nav/away_landmark = get_location_landmark(away_location)
 		moving_status = SHUTTLE_INTRANSIT
 
 		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
