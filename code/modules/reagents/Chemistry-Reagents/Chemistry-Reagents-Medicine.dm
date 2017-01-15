@@ -370,9 +370,9 @@
 	M.AdjustWeakened(-1)
 	holder.remove_reagent("mindbreaker", 5 * removed)
 	M.hallucination = max(0, M.hallucination - 10)
-	M.adjustToxLoss(3 * removed)
+	M.adjustToxLoss(2 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 20)
-	M.adjustBrainLoss(removed) //very slow brain damage
+	M.adjustBrainLoss(removed * 0.5) //very slow brain damage
 
 /datum/reagent/alkysine
 	name = "Alkysine"
