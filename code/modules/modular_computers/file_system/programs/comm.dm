@@ -5,7 +5,7 @@
 #define STATE_ALERT_LEVEL	5
 /datum/computer_file/program/comm
 	filename = "comm"
-	filedesc = "Command and communications program."
+	filedesc = "Command and communications program"
 	program_icon_state = "comm"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control the station. Can relay long-range communications. This program can not be run on tablet computers."

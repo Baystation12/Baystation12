@@ -226,3 +226,83 @@
 
 /datum/computer_file/program/card_mod/proc/apply_access(var/obj/item/weapon/card/id/id_card, var/list/accesses)
 	id_card.access |= accesses
+
+// ===== SNOWFLAKE RD ACCESS CODE ATTEMPT 1 =====
+
+/datum/computer_file/program/card_mod/rd
+	filename = "sci_cardmod"
+	filedesc = "Research ID card modification program"
+	nanomodule_path = /datum/nano_module/program/card_mod/rd
+	extended_desc = "Program for programming employee ID cards to access Research & Science departments of the station."
+	required_access = access_rd
+
+
+/datum/nano_module/program/card_mod/rd
+	name = "Research ID card modification program"
+
+
+/datum/nano_module/program/card_mod/rd/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+	var/list/data = host.initial_data()
+
+	data["src"] = "\ref[src]"
+	data["station_name"] = station_name()
+	data["manifest"] = data_core ? data_core.get_manifest(0) : null
+	data["assignments"] = show_assignments
+	if(program && program.computer)
+		data["have_id_slot"] = !!program.computer.card_slot
+		data["have_printer"] = !!program.computer.nano_printer
+		data["authenticated"] = program.can_run(user)
+		if(!program.computer.card_slot)
+			mod_mode = 0 //We can't modify IDs when there is no card reader
+	else
+		data["have_id_slot"] = 0
+		data["have_printer"] = 0
+		data["authenticated"] = 0
+	data["mmode"] = mod_mode
+	data["centcom_access"] = is_centcom
+
+	if(program && program.computer && program.computer.card_slot)
+		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
+		data["has_id"] = !!id_card
+		data["id_account_number"] = id_card ? id_card.associated_account_number : null
+		data["id_rank"] = id_card && id_card.assignment ? id_card.assignment : "Unassigned"
+		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
+		data["id_name"] = id_card ? id_card.name : "-----"
+
+
+	data["science_jobs"] = format_jobs(science_positions)
+
+	data["regions"] = get_accesses()
+
+	if(program.computer.card_slot.stored_card)
+		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
+		if(is_centcom)
+			var/list/all_centcom_access = list()
+			for(var/access in get_all_centcom_access())
+				all_centcom_access.Add(list(list(
+					"desc" = replacetext(get_centcom_access_desc(access), " ", "&nbsp"),
+					"ref" = access,
+					"allowed" = (access in id_card.access) ? 1 : 0)))
+			data["all_centcom_access"] = all_centcom_access
+		else
+			var/list/regions = list()
+			for(var/i = 3; i <= 3; i++) //3 is the warlock number for Science.
+				var/list/accesses = list()
+				for(var/access in get_region_accesses(i))
+					if (get_access_desc(access))
+						accesses.Add(list(list(
+							"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
+							"ref" = access,
+							"allowed" = (access in id_card.access) ? 1 : 0)))
+
+				regions.Add(list(list(
+					"name" = get_region_accesses_name(i),
+					"accesses" = accesses)))
+			data["regions"] = regions
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "identification_computer.tmpl", name, 600, 700, state = state)
+		ui.auto_update_layout = 1
+		ui.set_initial_data(data)
+		ui.open()

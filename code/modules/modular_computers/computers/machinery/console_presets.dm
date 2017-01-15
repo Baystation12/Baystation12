@@ -59,6 +59,16 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/aidiag())
 
+// ===== TORCH RD CONSOLE ===== -- The same, but with a specialized card mod program.
+/obj/machinery/modular_computer/console/preset/research/torch_rd
+	desc = "A stationary computer. This one is preloaded with tools for the Research Director."
+	_has_printer = 1
+	_has_id_slot = 1
+
+/obj/machinery/modular_computer/console/preset/research/torch_rd/install_programs()
+	..()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod/rd())
+
 
 // ===== COMMAND CONSOLE =====
 /obj/machinery/modular_computer/console/preset/command
@@ -126,3 +136,4 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/camera_monitor/hacked())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/aidiag())
+
