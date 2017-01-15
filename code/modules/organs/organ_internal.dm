@@ -33,6 +33,9 @@
 		if(istype(E)) E.internal_organs -= src
 	..()
 
+/obj/item/organ/internal/is_usable()
+	return ..() && !is_broken()
+
 // Brain is defined in brain_item.dm.
 /obj/item/organ/internal/kidneys
 	name = "kidneys"
