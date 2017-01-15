@@ -224,6 +224,7 @@
 #include "code\datums\observation\helpers.dm"
 #include "code\datums\observation\life.dm"
 #include "code\datums\observation\logged_in.dm"
+#include "code\datums\observation\logged_out.dm"
 #include "code\datums\observation\moved.dm"
 #include "code\datums\observation\observation.dm"
 #include "code\datums\observation\opacity_set.dm"
