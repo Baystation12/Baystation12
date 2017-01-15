@@ -32,7 +32,7 @@
 	faction = "spiders"
 	var/busy = 0
 	pass_flags = PASSTABLE
-	move_to_delay = 6
+	move_to_delay = 5
 	speed = 3
 
 //nursemaids - these create webs and eggs
@@ -61,7 +61,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 20
 	poison_per_bite = 5
-	move_to_delay = 4
+	move_to_delay = 3
 
 /mob/living/simple_animal/hostile/giant_spider/New(var/location, var/atom/parent)
 	get_light_and_color(parent)
