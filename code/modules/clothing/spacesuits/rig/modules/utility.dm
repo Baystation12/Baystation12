@@ -450,3 +450,12 @@
 			device = iastamp
 			to_chat(holder.wearer, "<span class='notice'>Switched to internal affairs stamp.</span>")
 		return 1
+
+/obj/item/rig_module/device/decompiler
+	name = "mounted matter decompiler"
+	desc = "A drone matter decompiler reconfigured for hardsuit use."
+	icon_state = "ewar"
+	interface_name = "mounted matter decompiler"
+	interface_desc = "Eats trash like no one's business."
+
+	device_type = /obj/item/weapon/matter_decompiler
