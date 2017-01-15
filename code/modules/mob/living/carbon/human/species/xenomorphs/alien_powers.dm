@@ -30,7 +30,7 @@
 		if(!I)
 			to_chat(src, "<span class='danger'>Your [needs_organ] has been removed!</span>")
 			return
-		else if((I.status & ORGAN_CUT_AWAY) || I.is_broken())
+		else if(!I.is_usable() || I.is_broken())
 			to_chat(src, "<span class='danger'>Your [needs_organ] is too damaged to function!</span>")
 			return
 

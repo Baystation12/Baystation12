@@ -280,7 +280,7 @@
 			else
 				if(!is_synth && E.robotic >= ORGAN_ROBOT && (E.parent && E.parent.robotic < ORGAN_ROBOT))
 					wound_flavor_text["[E.name]"] = "[T.He] [T.has] a [E.name].\n"
-				if(E.wounds.len || E.open)
+				if(E.wounds.len || E.open || E.status)
 					wound_flavor_text["[E.name]"] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.name].<br>"
 
 		if(!hidden || distance <=1)
