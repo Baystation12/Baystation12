@@ -111,8 +111,8 @@ var/list/_client_preferences_by_type
 	disabled_description = "Hide"
 
 /datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
-	if(!enabled && preference_mob.typing_indicator)
-		qdel(preference_mob.typing_indicator)
+	if(!enabled)
+		qdel_null(preference_mob.typing_indicator)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
