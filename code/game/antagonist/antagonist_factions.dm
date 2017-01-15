@@ -21,7 +21,7 @@
 		to_chat(src, "<span class='warning'>\The [player.current]'s loyalties seem to be elsewhere...</span>")
 		return
 
-	if(!faction.can_become_antag(player))
+	if(!faction.can_become_antag(player, 1))
 		to_chat(src, "<span class='warning'>\The [player.current] cannot be \a [faction.faction_role_text]!</span>")
 		return
 
