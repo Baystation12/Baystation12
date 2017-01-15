@@ -111,16 +111,11 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(other && other.finalized)
 		var/datum/data/record/R1 = find_general_record("name", holder.name)
 		var/datum/data/record/R2 = find_general_record("name", other.holder.name)
-		if(!R1.fields["connections"])
-			R1.fields["connections"] =  list()
-		if(!R2.fields["connections"])
-			R2.fields["connections"] =  list()
-		if(prob(60))
-			R1.fields["connections"] |= get_desc_string()
-			R2.fields["connections"] |= get_desc_string()
-		else
-			R1.fields["connections"] |= "[holder] and [other.holder] know each other, but the exact nature of their relationship is unclear."
-			R2.fields["connections"] |= "[holder] and [other.holder] know each other, but the exact nature of their relationship is unclear."
+		var/info = prob(60) ? get_desc_string() : "[holder] and [other.holder] know each other, but the exact nature of their relationship is unclear."
+		if(R1)
+			R1.fields["connections"] |= info
+		if(R2)
+			R2.fields["connections"] |= info
 		var/list/candidates = filter_list(player_list, /mob/living/carbon/human)
 		candidates -= holder.current
 		candidates -= other.holder.current
@@ -129,8 +124,9 @@ var/global/datum/matchmaker/matchmaker = new()
 				candidates -= M
 				continue
 			var/datum/job/coworker = job_master.GetJob(M.job)
-			if(coworker.department_flag & holder.assigned_job.department_flag || coworker.department_flag & other.holder.assigned_job.department_flag)
-				candidates[M] = 5	//coworkers are 5 times as likely to know about your relations
+			if(coworker && holder.assigned_job && other.holder.assigned_job)
+				if((coworker.department_flag & holder.assigned_job.department_flag) || (coworker.department_flag & other.holder.assigned_job.department_flag))
+					candidates[M] = 5	//coworkers are 5 times as likely to know about your relations
 
 		for(var/i=1 to 5)
 			if(!candidates.len)
@@ -187,13 +183,13 @@ var/global/datum/matchmaker/matchmaker = new()
 		return 1
 	if(href_list["del_relation"])
 		var/datum/relation/R = locate(href_list["del_relation"])
-		if(R)
+		if(istype(R))
 			R.sever()
 			see_relationship_info()
 			return 1
 	if(href_list["info_relation"])
 		var/datum/relation/R = locate(href_list["info_relation"])
-		if(R)
+		if(istype(R))
 			var/info = sanitize(input("What would you like the other party for this connection to know about your character?","Character info",R.info) as message|null)
 			if(info)
 				R.info = info

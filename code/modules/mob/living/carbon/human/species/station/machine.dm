@@ -38,7 +38,7 @@
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = NO_SCAN | NO_PAIN | NO_POISON
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_CAN_NOT_BE_CYBORG
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_UNDERWEAR //IPCs can wear undies too :(
 
 	blood_color = "#1F181F"

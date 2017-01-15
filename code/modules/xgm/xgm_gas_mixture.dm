@@ -15,8 +15,18 @@
 	//List of active tile overlays for this gas_mixture.  Updated by check_tile_graphic()
 	var/list/graphic = list()
 
-/datum/gas_mixture/New(vol = CELL_VOLUME)
-	volume = vol
+/datum/gas_mixture/New(_volume = CELL_VOLUME, _temperature = 0, _group_multiplier = 1)
+	volume = _volume
+	temperature = _temperature
+	group_multiplier = _group_multiplier
+
+/datum/gas_mixture/proc/get_gas(gasid)
+	if(!gas.len)
+		return 0 //if the list is empty BYOND treats it as a non-associative list, which runtimes
+	return gas[gasid] * group_multiplier
+
+/datum/gas_mixture/proc/get_total_moles()
+	return total_moles * group_multiplier
 
 //Takes a gas string and the amount of moles to adjust by.  Calls update_values() if update isn't 0.
 /datum/gas_mixture/proc/adjust_gas(gasid, moles, update = 1)
