@@ -1,0 +1,6 @@
+author: Cirra
+
+delete-after: True
+
+changes: 
+  - tweak: "Maintenance drones now have access to Meson vision and a T-ray scanner."

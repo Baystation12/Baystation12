@@ -670,11 +670,13 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone/New(var/mob/living/silicon/robot/robot)
 	src.modules += new /obj/item/weapon/weldingtool(src)
+	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
 	src.modules += new /obj/item/device/multitool(src)
+	src.modules += new /obj/item/device/t_scanner(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/soap(src)
