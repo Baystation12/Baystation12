@@ -1,8 +1,8 @@
 //Copied from TauCeti, 14.01.2017, 3 hours (c)jtb
 //drinks_port was different from original drinks, so it was replaced for this, not deleted.
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
-	name = "glass"
-	desc = "Your standard drinking glass."
+	name = "special glass"
+	desc = "Your not standard drinking glass."
 	icon = 'icons/obj/drinks_port.dmi'
 	icon_state = "glass_empty"
 	amount_per_transfer_from_this = 5
