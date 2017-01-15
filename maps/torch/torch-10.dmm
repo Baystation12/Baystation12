@@ -1473,7 +1473,7 @@
 "aCq" = (/obj/machinery/telecomms/bus/preset_cent,/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aCr" = (/obj/machinery/telecomms/processor/preset_cent,/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aCs" = (/obj/machinery/telecomms/server/presets/centcomm,/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
-"aCt" = (/obj/machinery/account_database{name = "CentComm Accounts database"},/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
+"aCt" = (/obj/machinery/computer/account_database{name = "CentComm Accounts database"},/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aCu" = (/obj/machinery/computer/teleporter,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aCv" = (/obj/machinery/teleport/station,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "aCw" = (/obj/machinery/teleport/hub,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)

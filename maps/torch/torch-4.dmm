@@ -556,7 +556,7 @@
 "kJ" = (/obj/effect/floor_decal/corner/grey{dir = 10},/obj/structure/table/steel,/obj/item/weapon/packageWrap,/obj/item/weapon/hand_labeler,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
 "kK" = (/obj/structure/table/steel,/obj/effect/floor_decal/corner/grey{dir = 10},/obj/machinery/photocopier/faxmachine{department = "XO"},/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
 "kL" = (/obj/effect/floor_decal/corner/grey{dir = 10},/obj/structure/table/steel,/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 7},/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
-"kM" = (/obj/effect/floor_decal/corner/grey{dir = 10},/obj/machinery/account_database,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
+"kM" = (/obj/effect/floor_decal/corner/grey{dir = 10},/obj/machinery/computer/account_database,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
 "kN" = (/obj/effect/floor_decal/corner/grey{dir = 10},/obj/machinery/modular_computer/console/preset/command,/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
 "kO" = (/obj/structure/bed/chair/office/dark,/obj/effect/floor_decal/corner/grey{dir = 10},/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
 "kP" = (/obj/effect/floor_decal/corner/grey/three_quarters{dir = 4},/obj/structure/table/steel,/obj/machinery/computer/skills,/obj/machinery/keycard_auth{pixel_x = 24; pixel_y = 6},/obj/machinery/button/remote/blast_door{desc = "A remote control-switch for shutters."; id = "hop_office_desk"; name = "Desk Privacy Shutter"; pixel_x = 24; pixel_y = -6},/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/xo)
