@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - tweak: "Drone lawset wording has been reverted to using the key-word 'interact' once more."
