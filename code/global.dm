@@ -3,6 +3,10 @@
 #warn This compiler is out of date. You may experience issues with projectile animations.
 #endif
 
+#if DM_VERSION > 509
+#warn THIS BRANCH OF BAYSTATION IS STALE AND NOT BEEN UPDATED TO VERSION 510, PLEASE USE THE DEV BRANCH.
+#endif
+
 // Items that ask to be called every cycle.
 var/global/datum/datacore/data_core = null
 var/global/list/all_areas                = list()
