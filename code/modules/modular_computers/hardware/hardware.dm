@@ -48,11 +48,6 @@
 
 /obj/item/weapon/computer_hardware/New(var/obj/L)
 	w_class = hardware_size
-	if(istype(L, /obj/machinery/modular_computer))
-		var/obj/machinery/modular_computer/C = L
-		if(C.cpu)
-			holder2 = C.cpu
-			return
 	if(istype(L, /obj/item/modular_computer))
 		holder2 = L
 		return

@@ -24,6 +24,8 @@
 
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "laptop-open"
+	center_of_mass = null									// No pixelshifting by placing on tables, etc.
+	randpixel = 0											// And no random pixelshifting on-creation either.
 	var/icon_state_unpowered = null							// Icon state when the computer is turned off
 	var/icon_state_menu = "menu"							// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
 	var/max_hardware_size = 0								// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
@@ -170,8 +172,19 @@
 	else if(damage)
 		to_chat(user, "It is damaged.")
 
+// Used to perform preset-specific hardware changes.
+/obj/item/modular_computer/proc/install_default_hardware()
+	return 1
+
+// Used to install preset-specific programs
+/obj/item/modular_computer/proc/install_default_programs()
+	return 1
+
 /obj/item/modular_computer/New()
 	processing_objects.Add(src)
+	install_default_hardware()
+	if(hard_drive)
+		install_default_programs()
 	update_icon()
 	..()
 
@@ -242,9 +255,9 @@
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
 /obj/item/modular_computer/attack_self(mob/user)
-	if(enabled)
+	if(enabled && screen_on)
 		ui_interact(user)
-	else
+	else if(!enabled && screen_on)
 		turn_on(user)
 
 /obj/item/modular_computer/proc/break_apart()
@@ -274,22 +287,14 @@
 			to_chat(user, "You send an activation signal to \the [src], turning it on")
 		else
 			to_chat(user, "You press the power button and start up \the [src]")
-		onboot(user)
+		enabled = 1
+		update_icon()
+		ui_interact(user)
 	else // Unpowered
 		if(issynth)
 			to_chat(user, "You send an activation signal to \the [src] but it does not respond")
 		else
 			to_chat(user, "You press the power button but \the [src] does not respond")
-
-/obj/item/modular_computer/proc/onboot(var/mob/user)
-	enabled = 1
-	update_icon()
-	var/datum/computer_file/data/A = hard_drive.find_file_by_name("autorun")
-	if(A)
-		var/list/autorun = splittext(A.stored_data,";")
-		for(var/prg in autorun)
-			run_program(prg)
-	ui_interact(user)
 
 // Process currently calls handle_power(), may be expanded in future if more things are added.
 /obj/item/modular_computer/process()
@@ -558,6 +563,11 @@
 	if(battery_power(power_usage))
 		return
 	power_failure()
+
+/obj/item/modular_computer/attack_hand(var/mob/user)
+	if(anchored)
+		return attack_self(user)
+	return ..()
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/card/id)) // ID Card, try to insert it.
