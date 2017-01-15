@@ -38,6 +38,10 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
+	down_gas_transfer_coefficient = 1
+	down_body_parts_covered = null
+	down_icon_state = "steriledown"
+	pull_mask = 1
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
