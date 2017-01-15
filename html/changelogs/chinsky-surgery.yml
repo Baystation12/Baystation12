@@ -1,5 +1,5 @@
 author: Chinsky
 delete-after: True
 changes: 
-  - rscfix: "When reattaching limb, hemostat finish step is REQUIRED now. On the other hand, limbs are now properly reattached without leaving cut-away status forever."
-  - rscadd: "For bone gel steps you can use duct tape now. Screwdrivers aren't used anymore. Also reworded messages there to be less awkward."
+  - bugfix: "When reattaching limb, hemostat finish step is REQUIRED now. On the other hand, limbs are now properly reattached without leaving cut-away status forever."
+  - tweak: "For bone gel steps you can use duct tape now. Screwdrivers aren't used anymore. Also reworded messages there to be less awkward."
