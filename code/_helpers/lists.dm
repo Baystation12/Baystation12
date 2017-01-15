@@ -40,11 +40,14 @@ proc/isemptylist(list/list)
 	return 0
 
 //Checks for specific types in a list
-/proc/is_type_in_list(var/atom/A, var/list/L)
-	for(var/type in L)
-		if(istype(A, type))
-			return 1
-	return 0
+/proc/is_type_in_list(datum/A, list/L)
+	if (!A || !L.len)
+		return 0
+	if (!isnum(L[L[1]]))
+		for(var/type in L)
+			for(var/T in typesof(type))
+				L[T] = 1
+	return L[A.type]
 
 //Checks for specific paths in a list
 /proc/is_path_in_list(var/path, var/list/L)
