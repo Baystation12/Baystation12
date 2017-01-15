@@ -156,17 +156,29 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 	var/usrRef
 	var/turf/usrLoc
 	var/isSkipCount
+	
+#define CORRECT_EXTENSION ".dm"
+/datum/ErrorViewer/ErrorEntry/proc/isValidFile(var/exception/e)
+	var/filelen = length(e.file)
+	var/fileend = copytext(e.file,filelen-2)
+		
+	return cmptext(fileend, CORRECT_EXTENSION)
+	
+#undef CORRECT_EXTENSION
 
 /datum/ErrorViewer/ErrorEntry/New(var/exception/e, var/list/desclines, var/skipCount, var/datum/e_src)
 	if(!istype(e))
 		name = "\[[time_stamp()]] Uncaught exception: [e]"
 		return
+	var/errname = e.file
+	if(!isValidFile(e))
+		errname = "an unknown file"
 	if(skipCount)
-		name = "\[[time_stamp()]] Skipped [skipCount] runtimes in [e.file],[e.line]."
+		name = "\[[time_stamp()]] Skipped [skipCount] runtimes in [errname],[e.line]."
 		isSkipCount = TRUE
 		return
-	name = "\[[time_stamp()]] Runtime in [e.file],[e.line]: [e]"
-	info_name = "Runtime in [e.file],[e.line]: [e]"
+	name = "\[[time_stamp()]] Runtime in [errname],[e.line]: [e]"
+	info_name = "Runtime in [errname],[e.line]: [e]"
 	info = info_name
 	exc = e
 	if(istype(desclines))
