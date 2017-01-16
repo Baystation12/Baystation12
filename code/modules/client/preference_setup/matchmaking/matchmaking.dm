@@ -79,7 +79,7 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/proc/get_copy()
 	var/datum/relation/R = new type
 	R.holder = holder
-	R.info = info
+	R.info = holder.current && holder.current.client ? holder.current.client.prefs.relations_info[R.name] : info
 	R.open = 0
 	return R
 
