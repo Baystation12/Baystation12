@@ -124,7 +124,7 @@ var/global/list/SKILLS = null
 /datum/skill/secondary/law
     ID = "law"
     name = "Law"
-    desc = "Your knowledge of NanoTrasen law and procedures. This includes Corporate Regulations, as well as general station rulings and procedures. A low level in this skill is typical for security officers, a high level in this skill is typical for captains."
+    desc = "Your knowledge of SolGov law and procedures. This includes Corporate Regulations and SOP. A low level in this skill is typical of law enforcement, high is typical of people in command of a station or vessel."
     desc_unskilled = "You know most of what's legal and illegal in your everyday life and work, though you're fuzzy on the finer points of the law, especially if it doesn't apply to your own daily experience."
     desc_trained = "You know and understand the law in a practical sense. You know the punishments for crimes and you can read and understand a legal document easily. You may be in Security or Command."
     desc_professional = "You have a law degree or the equivalent amount of knowledge. You can draw up legal contracts, interpret the minutiae of the law, settle disagreements, and argue a case in court."
