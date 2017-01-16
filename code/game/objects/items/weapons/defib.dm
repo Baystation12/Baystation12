@@ -123,7 +123,7 @@
 
 	if(!slot_check())
 		to_chat(user, "<span class='warning'>You need to equip [src] before taking out [paddles].</span>")
-	else 
+	else
 		if(!usr.put_in_hands(paddles)) //Detach the paddles into the user's hands
 			to_chat(user, "<span class='warning'>You need a free hand to hold the paddles!</span>")
 		update_icon() //success
@@ -299,7 +299,7 @@
 		var/obj/item/organ/O = H.species.has_organ[organ_tag]
 		var/name = initial(O.name)
 		var/vital = initial(O.vital) //check for vital organs
-		if(vital) 
+		if(vital)
 			O = H.internal_organs_by_name[organ_tag]
 			if(!O)
 				return "buzzes, \"Resuscitation failed - Patient is missing vital organ ([name]). Further attempts futile.\""
@@ -394,6 +394,7 @@
 	if(H.health < barely_in_crit)
 		//but not so much that either toxloss goes below H.maxHealth/2, or that we cure more than 25% of their current toxloss
 		var/cure_limit = min(H.getToxLoss() - H.maxHealth/2, H.getToxLoss()*0.25)
+		cure_limit = max(cure_limit, 0)
 		adjust_health = Clamp(barely_in_crit - H.health, 0, cure_limit)
 		H.adjustToxLoss(-adjust_health)
 
@@ -455,7 +456,7 @@
 
 	M.emote("gasp")
 	M.Weaken(rand(10,25))
-
+	M.updatehealth()
 	apply_brain_damage(M, deadtime)
 
 /obj/item/weapon/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H, var/deadtime)
@@ -497,7 +498,7 @@
 		update_icon()
 	..()
 
-/* 
+/*
 	Shockpaddles that are linked to a base unit
 */
 /obj/item/weapon/shockpaddles/linked
