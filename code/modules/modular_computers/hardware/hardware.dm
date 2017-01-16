@@ -63,6 +63,9 @@
 
 // Handles damage checks
 /obj/item/weapon/computer_hardware/proc/check_functionality()
+	// Turned off
+	if(!enabled)
+		return 0
 	// Too damaged to work at all.
 	if(damage > damage_failure)
 		return 0

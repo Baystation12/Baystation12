@@ -70,7 +70,7 @@
 /mob/living/bot/updatehealth()
 	if(status_flags & GODMODE)
 		health = maxHealth
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getFireLoss() - getBruteLoss()
 	oxyloss = 0

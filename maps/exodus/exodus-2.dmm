@@ -1022,7 +1022,7 @@
 "tH" = (/obj/machinery/autolathe{desc = "Your typical Autolathe. It appears to have much more options than your regular one, however..."; hacked = 1; name = "Unlocked Autolathe"},/turf/simulated/floor/shuttle/red,/area/shuttle/administration/centcom)
 "tI" = (/obj/machinery/telecomms/processor/preset_cent,/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "tJ" = (/obj/machinery/telecomms/bus/preset_cent,/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
-"tK" = (/obj/machinery/account_database{name = "CentComm Accounts database"},/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
+"tK" = (/obj/machinery/computer/account_database{name = "CentComm Accounts database"},/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "tL" = (/obj/machinery/telecomms/server/presets/centcomm,/obj/effect/floor_decal/corner/green{dir = 5},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "tM" = (/obj/machinery/computer/teleporter,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)
 "tN" = (/obj/machinery/teleport/hub,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/control)

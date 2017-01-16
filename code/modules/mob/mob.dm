@@ -150,7 +150,6 @@
 /mob/proc/Life()
 //	if(organStructure)
 //		organStructure.ProcessOrgans()
-	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
 #define UNBUCKLED 0
@@ -994,6 +993,10 @@ mob/proc/yank_out_object()
 			return ..(facing_dir)
 	else
 		return ..()
+
+/mob/proc/set_stat(var/new_stat)
+	. = stat != new_stat
+	stat = new_stat
 
 /mob/verb/northfaceperm()
 	set hidden = 1

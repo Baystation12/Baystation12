@@ -361,7 +361,7 @@ var/last_message_id = 0
 		to_chat(user, "An evacuation is already underway.")
 		return
 
-	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
+	if(ticker.mode.name == "blob")
 		to_chat(user, "Under directive 7-10, [station_name()] is quarantined until further notice.")
 		return
 

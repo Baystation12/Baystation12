@@ -14,8 +14,9 @@ var/datum/antagonist/cultist/cult
 	id = MODE_CULTIST
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
-	restricted_jobs = list("Chaplain", "AI", "Cyborg")
-	protected_jobs = list("Internal Affairs Agent", "Head of Security", "Captain", "Security Officer", "Warden", "Detective")
+	restricted_jobs = list("Internal Affairs Agent", "Head of Security", "Captain")
+	protected_jobs = list("Security Officer", "Warden", "Detective")
+	blacklisted_jobs = list("AI", "Cyborg", "Chaplain")
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
@@ -93,7 +94,7 @@ var/datum/antagonist/cultist/cult
 	remove_cult_magic(player.current)
 	remove_cultiness(CULTINESS_PER_CULTIST)
 
-/datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
+/datum/antagonist/cultist/add_antagonist(var/datum/mind/player, var/ignore_role)
 	. = ..()
 	if(.)
 		to_chat(player, "<span class='cult'>[conversion_blurb]</span>")
@@ -105,6 +106,7 @@ var/datum/antagonist/cultist/cult
 	if(. && player.current && !istype(player.current, /mob/living/simple_animal/construct))
 		player.current.remove_language(LANGUAGE_CULT)
 
+<<<<<<< HEAD
 /datum/antagonist/cultist/update_antag_mob(var/datum/mind/player)
 	. = ..()
 	add_cultiness(CULTINESS_PER_CULTIST)

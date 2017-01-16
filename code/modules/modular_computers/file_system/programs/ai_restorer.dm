@@ -66,7 +66,7 @@
 	A.updatehealth()
 	// If the AI is dead, revive it.
 	if (A.health >= -100 && A.stat == DEAD)
-		A.stat = CONSCIOUS
+		A.set_stat(CONSCIOUS)
 		A.lying = 0
 		A.switch_from_dead_to_living_mob_list()
 		A.add_ai_verbs()

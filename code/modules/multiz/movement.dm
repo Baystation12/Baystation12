@@ -87,15 +87,15 @@
 
 //Holds fall checks that should not be overriden by children
 /atom/movable/proc/fall()
-	var/turf/simulated/open/below = loc
-	if(!istype(loc))
+	if(!isturf(loc))
 		return
 
-	below = below.below
+	var/turf/below = GetBelow(src)
 	if(!below)
 		return
 
-	if(!below.CanZPass(src,DOWN))
+	var/turf/T = loc
+	if(!T.CanZPass(src, DOWN) || !below.CanZPass(src, DOWN))
 		return
 
 	// No gravity in space, apparently.
@@ -111,25 +111,19 @@
 
 //For children to override
 /atom/movable/proc/can_fall()
-	var/turf/simulated/open/below = loc
-	below = below.below
-
 	if(anchored)
 		return FALSE
 
 	if(locate(/obj/structure/lattice, loc))
 		return FALSE
-	return TRUE
 
 	// See if something prevents us from falling.
+	var/turf/below = GetBelow(src)
 	for(var/atom/A in below)
-		if(A.density)
-			if(!istype(A, /obj/structure/window))
-				return  FALSE
-			else
-				var/obj/structure/window/W = A
-				if(W.is_fulltile())
-					return FALSE
+		if(!A.CanPass(src, src.loc))
+			return FALSE
+
+	return TRUE
 
 /obj/effect/can_fall()
 	return FALSE

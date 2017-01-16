@@ -259,15 +259,15 @@
 		if (success)
 			
 			// Species selection.
-			var/species = input(user, "Select a species for the prosthetic.") as null|anything in playable_species
+			var/species = input(user, "Select a species for the prosthetic.") as null|anything in GetCyborgSpecies()
 			if(!species)
-				species = "Human"
+				return
 			var/name = sanitizeSafe(input(user,"Set a name for the new prosthetic."), MAX_NAME_LEN)
 			if(!name)
 				name = "prosthetic ([random_id("prosthetic_id", 1, 999)])"
 
 			// Create a new, nonliving human.
-			var/mob/living/carbon/human/H = new /mob/living/carbon/human(loc)
+			var/mob/living/carbon/human/H = new /mob/living/carbon/human(get_turf(loc))
 			H.death(0, "no message")
 			H.set_species(species)
 			H.fully_replace_character_name(name)
@@ -302,6 +302,14 @@
 			qdel(W)
 			qdel(src)
 	return
+
+/obj/item/robot_parts/chest/proc/GetCyborgSpecies()
+	. = list()
+	for(var/N in playable_species)
+		var/datum/species/S = all_species[N]
+		if(S.spawn_flags & SPECIES_NO_FBP_CONSTRUCTION)
+			continue
+		. += N
 
 /obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
 	..()

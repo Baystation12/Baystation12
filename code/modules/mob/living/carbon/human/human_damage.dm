@@ -3,7 +3,7 @@
 
 	if(status_flags & GODMODE)
 		health = maxHealth
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 		return
 	var/total_burn  = 0
 	var/total_brute = 0
