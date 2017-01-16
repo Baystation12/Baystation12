@@ -25,7 +25,7 @@
 
 	var/atom/movable/load
 
-	var/paused = 0
+	var/paused = 1
 	var/crates_only = 1
 	var/auto_return = 1
 	var/safety = 1
@@ -59,98 +59,63 @@
 
 	load(C)
 
-/mob/living/bot/mulebot/attack_hand(var/mob/user)
-	interact(user)
+/mob/living/bot/mulebot/GetInteractTitle()
+	. = "<head><title>Mulebot [suffix ? "([suffix])" : ""]</title></head>"
+	. += "<b>Multiple Utility Load Effector Mk. III</b>"
+	. += "<br>ID: [suffix]"
 
-/mob/living/bot/mulebot/proc/interact(var/mob/user)
-	var/dat
-	dat += "<TT><B>Multiple Utility Load Effector Mk. III</B></TT><BR><BR>"
-	dat += "ID: [suffix]<BR>"
-	dat += "Power: [on ? "On" : "Off"]<BR>"
+/mob/living/bot/mulebot/GetInteractStatus()
+	. = ..()
+	. += "<br>Current Load: [load ? load.name : "<i>none</i>"]"
 
-	if(!open)
-		dat += "<BR>Current Load: [load ? load.name : "<i>none</i>"]<BR>"
+/mob/living/bot/mulebot/GetInteractPanel()
+	. += "<a href='?src=\ref[src];command=stop'>Stop</a>"
+	. += "<br><a href='?src=\ref[src];command=go'>Proceed</a>"
+	. += "<br><a href='?src=\ref[src];command=home'>Return to home</a>"
+	. += "<br><a href='?src=\ref[src];command=destination'>Set destination</a>"
+	. += "<br><a href='?src=\ref[src];command=sethome'>Set home</a>"
+	. += "<br><a href='?src=\ref[src];command=autoret'>Toggle auto return home</a> ([auto_return ? "On" : "Off"])"
+	. += "<br><a href='?src=\ref[src];command=cargotypes'>Toggle non-standard cargo</a> ([crates_only ? "Off" : "On"])"
 
-		if(locked)
-			dat += "<HR>Controls are locked"
-		else
-			dat += "<HR>Controls are unlocked<BR><BR>"
+	if(load)
+		. += "<br><a href='?src=\ref[src];command=unload'>Unload now</a>"
 
-		if(!locked || issilicon(user))
-			dat += "<A href='byond://?src=\ref[src];op=power'>Toggle power</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];op=stop'>Stop</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];op=go'>Proceed</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];op=home'>Return to home</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];op=destination'>Set destination</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];op=sethome'>Set home</A><BR>"
-			dat += "<A href='byond://?src=\ref[src];op=autoret'>Toggle auto return home</A> ([auto_return ? "On" : "Off"])<BR>"
-			dat += "<A href='byond://?src=\ref[src];op=cargotypes'>Toggle non-standard cargo</A> ([crates_only ? "Off" : "On"])<BR>"
+/mob/living/bot/mulebot/GetInteractMaintenance()
+	. = "<a href='?src=\ref[src];command=safety'>Toggle safety</a> ([safety ? "On" : "Off - DANGER"])"
 
-			if(load)
-				dat += "<A href='byond://?src=\ref[src];op=unload'>Unload now</A><BR>"
-			dat += "<HR>The maintenance hatch is closed.<BR>"
+/mob/living/bot/mulebot/ProcessCommand(var/mob/user, var/command, var/href_list)
+	..()
+	if(CanAccessPanel(user))
+		switch(command)
+			if("stop")
+				obeyCommand("Stop")
+			if("go")
+				obeyCommand("GoTD")
+			if("home")
+				obeyCommand("Home")
+			if("destination")
+				obeyCommand("SetD")
+			if("sethome")
+				var/new_dest
+				var/list/beaconlist = GetBeaconList()
+				if(beaconlist.len)
+					new_dest = input("Select new home tag", "Mulebot [suffix ? "([suffix])" : ""]", null) in null|beaconlist
+				else
+					alert("No destination beacons available.")
+				if(new_dest)
+					home = get_turf(beaconlist[new_dest])
+					homeName = new_dest
+			if("unload")
+				unload()
+			if("autoret")
+				auto_return = !auto_return
+			if("cargotypes")
+				crates_only = !crates_only
 
-	else
-		if(!issilicon(user))
-			dat += "The maintenance hatch is open.<BR><BR>"
-
-			dat += "<A href='byond://?src=\ref[src];op=safety'>Toggle safety</A> ([safety ? "On" : "Off - DANGER"])<BR>"
-		else
-			dat += "The bot is in maintenance mode and cannot be controlled.<BR>"
-
-	user << browse("<HEAD><TITLE>Mulebot [suffix ? "([suffix])" : ""]</TITLE></HEAD>[dat]", "window=mulebot;size=350x500")
-	onclose(user, "mulebot")
-	return
-
-/mob/living/bot/mulebot/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	add_fingerprint(usr)
-	switch(href_list["op"])
-		if("power")
-			if(on)
-				turn_off()
-			else
-				turn_on()
-			visible_message("[usr] switches [on ? "on" : "off"] [src].")
-
-		if("stop")
-			obeyCommand("Stop")
-
-		if("go")
-			obeyCommand("GoTD")
-
-		if("home")
-			obeyCommand("Home")
-
-		if("destination")
-			obeyCommand("SetD")
-
-		if("sethome")
-			var/new_dest
-			var/list/beaconlist = GetBeaconList()
-			if(beaconlist.len)
-				new_dest = input("Select new home tag", "Mulebot [suffix ? "([suffix])" : ""]", null) in null|beaconlist
-			else
-				alert("No destination beacons available.")
-			if(new_dest)
-				home = get_turf(beaconlist[new_dest])
-				homeName = new_dest
-
-		if("unload")
-			unload()
-
-		if("autoret")
-			auto_return = !auto_return
-
-		if("cargotypes")
-			crates_only = !crates_only
-
-		if("safety")
-			safety = !safety
-
-	interact(usr)
+	if(CanAccessMaintenance(user))
+		switch(command)
+			if("safety")
+				safety = !safety
 
 /mob/living/bot/mulebot/attackby(var/obj/item/O, var/mob/user)
 	..()
@@ -180,7 +145,7 @@
 
 /mob/living/bot/mulebot/emag_act(var/remaining_charges, var/user)
 	locked = !locked
-	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>")
+	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls.</span>")
 	flick("mulebot-emagged", src)
 	playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1

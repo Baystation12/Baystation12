@@ -26,22 +26,45 @@
 	else
 		icon_state = "floorbot[on]e"
 
-/mob/living/bot/floorbot/attack_hand(var/mob/user)
-	user.set_machine(src)
-	var/dat
-	dat += "<TT><B>Automatic Station Floor Repairer v1.0</B></TT><BR><BR>"
-	dat += "Status: <A href='?src=\ref[src];operation=start'>[src.on ? "On" : "Off"]</A><BR>"
-	dat += "Maintenance panel is [open ? "opened" : "closed"]<BR>"
-	dat += "Tiles left: [amount]<BR>"
-	dat += "Behvaiour controls are [locked ? "locked" : "unlocked"]<BR>"
-	if(!locked || issilicon(user))
-		dat += "Improves floors: <A href='?src=\ref[src];operation=improve'>[improvefloors ? "Yes" : "No"]</A><BR>"
-		dat += "Finds tiles: <A href='?src=\ref[src];operation=tiles'>[eattiles ? "Yes" : "No"]</A><BR>"
-		dat += "Make singles pieces of metal into tiles when empty: <A href='?src=\ref[src];operation=make'>[maketiles ? "Yes" : "No"]</A><BR>"
+/mob/living/bot/floorbot/GetInteractTitle()
+	. = "<head><title>Repairbot v1.0 controls</title></head>"
+	. += "<b>Automatic Station Floor Repairer v1.0</b>"
 
-	user << browse("<HEAD><TITLE>Repairbot v1.0 controls</TITLE></HEAD>[dat]", "window=autorepair")
-	onclose(user, "autorepair")
-	return
+/mob/living/bot/floorbot/GetInteractStatus()
+	. = ..()
+	. += "<br>Tiles left: [amount]"
+
+/mob/living/bot/floorbot/GetInteractPanel()
+	. = "Improves floors: <a href='?src=\ref[src];command=improve'>[improvefloors ? "Yes" : "No"]</a>"
+	. += "<br>Finds tiles: <a href='?src=\ref[src];command=tiles'>[eattiles ? "Yes" : "No"]</a>"
+	. += "<br>Make singles pieces of metal into tiles when empty: <a href='?src=\ref[src];command=make'>[maketiles ? "Yes" : "No"]</a>"
+
+/mob/living/bot/floorbot/GetInteractMaintenance()
+	. = "Station disassembly mode: "
+	switch(emagged)
+		if(0)
+			. += "<a href='?src=\ref[src];command=emag'>Off</a>"
+		if(1)
+			. += "<a href='?src=\ref[src];command=emag'>On (Caution)</a>"
+		if(2)
+			. += "ERROROROROROR-----"
+
+/mob/living/bot/floorbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+	..()
+	if(CanAccessPanel(user))
+		switch(command)
+			if("improve")
+				improvefloors = !improvefloors
+			if("tiles")
+				eattiles = !eattiles
+			if("make")
+				maketiles = !maketiles
+
+	if(CanAccessMaintenance(user))
+		switch(command)
+			if("emag")
+				if(emagged < 2)
+					emagged = !emagged
 
 /mob/living/bot/floorbot/emag_act(var/remaining_charges, var/mob/user)
 	. = ..()
@@ -50,25 +73,6 @@
 		if(user)
 			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
 		return 1
-
-/mob/living/bot/floorbot/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	add_fingerprint(usr)
-	switch(href_list["operation"])
-		if("start")
-			if (on)
-				turn_off()
-			else
-				turn_on()
-		if("improve")
-			improvefloors = !improvefloors
-		if("tiles")
-			eattiles = !eattiles
-		if("make")
-			maketiles = !maketiles
-	attack_hand(usr)
 
 /mob/living/bot/floorbot/handleRegular()
 	++tilemake
@@ -107,14 +111,13 @@
 	if(A.loc.name == "Space")
 		return 0
 
-	if(emagged)
-		return (istype(A, /turf/simulated/floor))
-
-	if(!amount)
-		return 0
-
 	var/turf/simulated/floor/T = A
-	return (istype(T) && (T.broken || T.burnt || (improvefloors && !T.flooring)) && (get_turf(T) == loc || prob(40)))
+	if(istype(T))
+		if(emagged)
+			if(T.flooring)
+				return 1
+		else
+			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
 /mob/living/bot/floorbot/UnarmedAttack(var/atom/A, var/proximity)
 	if(!..())
@@ -130,15 +133,10 @@
 		var/turf/simulated/floor/F = A
 		busy = 1
 		update_icons()
-		if(F.is_plating())
-			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor!</span>")
+		if(F.flooring)
+			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor.</span>")
 			if(do_after(src, 50, F))
 				F.break_tile_to_plating()
-				addTiles(1)
-		else
-			visible_message("<span class='danger'>[src] begins to tear through the floor!</span>")
-			if(do_after(src, 150, F)) // Extra time because this can and will kill.
-				F.ReplaceWithLattice()
 				addTiles(1)
 		target = null
 		busy = 0

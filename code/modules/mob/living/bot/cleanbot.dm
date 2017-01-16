@@ -101,47 +101,35 @@
 	else
 		icon_state = "cleanbot[on]"
 
-/mob/living/bot/cleanbot/attack_hand(var/mob/user)
-	var/dat
-	dat += "<TT><B>Automatic Station Cleaner v1.0</B></TT><BR><BR>"
-	dat += "Status: <A href='?src=\ref[src];operation=start'>[on ? "On" : "Off"]</A><BR>"
-	dat += "Behaviour controls are [locked ? "locked" : "unlocked"]<BR>"
-	dat += "Maintenance panel is [open ? "opened" : "closed"]"
-	if(!locked || issilicon(user))
-		dat += "<BR>Cleans Blood: <A href='?src=\ref[src];operation=blood'>[blood ? "Yes" : "No"]</A><BR>"
-		dat += "<BR>Patrol station: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
-	if(open && !locked)
-		dat += "Odd looking screw twiddled: <A href='?src=\ref[src];operation=screw'>[screwloose ? "Yes" : "No"]</A><BR>"
-		dat += "Weird button pressed: <A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A>"
+/mob/living/bot/cleanbot/GetInteractTitle()
+	. = "<head><title>Cleanbot controls</title></head>"
+	. += "<b>Automatic Station Cleaner v1.0</b>"
 
-	user << browse("<HEAD><TITLE>Cleaner v1.0 controls</TITLE></HEAD>[dat]", "window=autocleaner")
-	onclose(user, "autocleaner")
-	return
+/mob/living/bot/cleanbot/GetInteractPanel()
+	. = "Cleans blood: <a href='?src=\ref[src];command=blood'>[blood ? "Yes" : "No"]</a>"
+	. += "<br>Patrol station: <a href='?src=\ref[src];command=patrol'>[will_patrol ? "Yes" : "No"]</a>"
 
-/mob/living/bot/cleanbot/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	add_fingerprint(usr)
-	switch(href_list["operation"])
-		if("start")
-			if(on)
-				turn_off()
-			else
-				turn_on()
-		if("blood")
-			blood = !blood
-			get_targets()
-		if("patrol")
-			will_patrol = !will_patrol
-			patrol_path = null
-		if("screw")
-			screwloose = !screwloose
-			to_chat(usr, "<span class='notice'>You twiddle the screw.</span>")
-		if("oddbutton")
-			oddbutton = !oddbutton
-			to_chat(usr, "<span class='notice'>You press the weird button.</span>")
-	attack_hand(usr)
+/mob/living/bot/cleanbot/GetInteractMaintenance()
+	. = "Odd looking screw twiddled: <a href='?src=\ref[src];command=screw'>[screwloose ? "Yes" : "No"]</a>"
+	. += "<br>Weird button pressed: <a href='?src=\ref[src];command=oddbutton'>[oddbutton ? "Yes" : "No"]</a>"
+
+/mob/living/bot/cleanbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+	..()
+	if(CanAccessPanel(user))
+		switch(command)
+			if("blood")
+				blood = !blood
+				get_targets()
+			if("patrol")
+				will_patrol = !will_patrol
+				patrol_path = null
+
+	if(CanAccessMaintenance(user))
+		switch(command)
+			if("screw")
+				screwloose = !screwloose
+			if("oddbutton")
+				oddbutton = !oddbutton
 
 /mob/living/bot/cleanbot/emag_act(var/remaining_uses, var/mob/user)
 	. = ..()

@@ -31,6 +31,7 @@
 	var/min_target_dist = 1 // How close we try to get to the target
 	var/max_target_dist = 50 // How far we are willing to go
 	var/max_patrol_dist = 250
+	var/RequiresAccessToToggle = 0 // If 1, will check access to be turned on/off
 
 	var/target_patience = 5
 	var/frustration = 0
@@ -81,22 +82,20 @@
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
 	if(O.GetIdCard())
-		if(access_scanner.allowed(user) && !open && !emagged)
+		if(access_scanner.allowed(user) && !open)
 			locked = !locked
 			to_chat(user, "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>")
-			attack_hand(user)
+			Interact(usr)
+		else if(open)
+			to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 		else
-			if(emagged)
-				to_chat(user, "<span class='warning'>ERROR</span>")
-			if(open)
-				to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
-			else
-				to_chat(user, "<span class='warning'>Access denied.</span>")
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	else if(istype(O, /obj/item/weapon/screwdriver))
 		if(!locked)
 			open = !open
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
+			Interact(usr)
 		else
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
@@ -104,17 +103,93 @@
 		if(health < maxHealth)
 			if(open)
 				health = min(maxHealth, health + 10)
-				user.visible_message("<span class='notice'>[user] repairs [src].</span>","<span class='notice'>You repair [src].</span>")
+				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
 			else
 				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 		else
-			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
+			to_chat(user, "<span class='notice'>\The [src] does not need a repair.</span>")
 		return
 	else
 		..()
 
 /mob/living/bot/attack_ai(var/mob/user)
-	return attack_hand(user)
+	Interact(user)
+
+/mob/living/bot/attack_hand(var/mob/user)
+	Interact(user)
+
+/mob/living/bot/proc/Interact(var/mob/user)
+	add_fingerprint(user)
+	var/dat
+
+	var/curText = GetInteractTitle()
+	if(curText)
+		dat += curText
+		dat += "<hr>"
+
+	curText = GetInteractStatus()
+	if(curText)
+		dat += curText
+		dat += "<hr>"
+
+	curText = (CanAccessPanel(user)) ? GetInteractPanel() : "The access panel is locked."
+	if(curText)
+		dat += curText
+		dat += "<hr>"
+
+	curText = (CanAccessMaintenance(user)) ? GetInteractMaintenance() : "The maintenance panel is locked."
+	if(curText)
+		dat += curText
+
+	var/datum/browser/popup = new(user, "botpanel", "[src] controls")
+	popup.set_content(dat)
+	popup.open()
+
+/mob/living/bot/Topic(var/href, var/href_list)
+	if(..())
+		return 1
+
+	if(!issilicon(usr) && !Adjacent(usr))
+		return
+
+	if(usr.incapacitated())
+		return
+
+	if(href_list["command"])
+		ProcessCommand(usr, href_list["command"], href_list)
+
+	Interact(usr)
+
+/mob/living/bot/proc/GetInteractTitle()
+	return
+
+/mob/living/bot/proc/GetInteractStatus()
+	. = "Status: <A href='?src=\ref[src];command=toggle'>[on ? "On" : "Off"]</A>"
+	. += "<BR>Behaviour controls are [locked ? "locked" : "unlocked"]"
+	. += "<BR>Maintenance panel is [open ? "opened" : "closed"]"
+
+/mob/living/bot/proc/GetInteractPanel()
+	return
+
+/mob/living/bot/proc/GetInteractMaintenance()
+	return
+
+/mob/living/bot/proc/ProcessCommand(var/mob/user, var/command, var/href_list)
+	if(command == "toggle" && CanToggle(user))
+		if(on)
+			turn_off()
+		else
+			turn_on()
+	return
+
+/mob/living/bot/proc/CanToggle(var/mob/user)
+	return (!RequiresAccessToToggle || access_scanner.allowed(user) || issilicon(user))
+
+/mob/living/bot/proc/CanAccessPanel(var/mob/user)
+	return (!locked || issilicon(user))
+
+/mob/living/bot/proc/CanAccessMaintenance(var/mob/user)
+	return (open || issilicon(user))
 
 /mob/living/bot/say(var/message)
 	var/verb = "beeps"
