@@ -100,7 +100,7 @@
 
 /datum/category_item/underwear/undershirt/longjon
 	name = "Long John Shirt"
-	icon_state = "longjont"
+	icon_state = "ljont"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/longstripe_black
