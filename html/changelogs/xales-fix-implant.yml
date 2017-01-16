@@ -1,6 +1,0 @@
-author: Ravenxales
-
-delete-after: True
-
-changes: 
-  - bugfix: "Make implants work properly again (can configure triggers, etc.)."

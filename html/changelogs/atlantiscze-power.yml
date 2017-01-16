@@ -1,9 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - tweak: "All modular computers now support a tesla link, allowing them to run off an APC. This includes tablets."
-  - tweak: "Both tablet presets from custom loadout now have a tesla link by default."
-  - bugfix: "Tesla link now also works for laptops when they are closed."
-  - tweak: "Size of tesla link and intellicard slot reduced, which means they can now actually fit into tablets."
