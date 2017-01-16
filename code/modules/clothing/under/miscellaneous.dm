@@ -281,6 +281,9 @@
 	icon_state = "dress_fire"
 	worn_state = "dress_fire"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	icon_state = "dress_fire"
+	item_state = "bl_suit"
+	worn_state = "dress_fire"
 
 /obj/item/clothing/under/dress/dress_fire
 	name = "flame dress"
@@ -377,8 +380,11 @@
 	worn_state = "plaid_purple"
 
 //wedding stuff
-/obj/item/clothing/under/wedding/
+/obj/item/clothing/under/wedding
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	icon_state = "bride_orange"
+	item_state = "y_suit"
+	worn_state = "bride_orange"
 
 /obj/item/clothing/under/wedding/bride_orange
 	name = "orange wedding dress"
