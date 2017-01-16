@@ -257,6 +257,14 @@
 	face_atom(A)
 	return 1
 
+/mob/verb/saluted(mob/living/carbon/human/M as mob in oview(6))
+	set name = "Salute"
+	set category = "IC"
+
+	face_atom(M)
+	if(ishuman(M))
+		usr.visible_message("[usr] salutes [M]")
+
 
 /mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
 	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
