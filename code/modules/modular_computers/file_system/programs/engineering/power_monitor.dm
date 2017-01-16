@@ -1,3 +1,32 @@
+/datum/computer_file/program/power_monitor
+	filename = "powermonitor"
+	filedesc = "Power Monitoring"
+	nanomodule_path = /datum/nano_module/power_monitor/
+	program_icon_state = "power_monitor"
+	extended_desc = "This program connects to sensors around the station to provide information about electrical systems"
+	ui_header = "power_norm.gif"
+	required_access = access_engine
+	requires_ntnet = 1
+	network_destination = "power monitoring system"
+	size = 9
+	var/has_alert = 0
+
+/datum/computer_file/program/power_monitor/process_tick()
+	..()
+	var/datum/nano_module/power_monitor/NMA = NM
+	if(istype(NMA) && NMA.has_alarm())
+		if(!has_alert)
+			program_icon_state = "power_monitor_warn"
+			ui_header = "power_warn.gif"
+			update_computer_icon()
+			has_alert = 1
+	else
+		if(has_alert)
+			program_icon_state = "power_monitor"
+			ui_header = "power_norm.gif"
+			update_computer_icon()
+			has_alert = 0
+
 /datum/nano_module/power_monitor
 	name = "Power monitor"
 	var/list/grid_sensors

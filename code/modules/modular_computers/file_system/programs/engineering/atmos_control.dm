@@ -1,3 +1,16 @@
+/datum/computer_file/program/atmos_control
+	filename = "atmoscontrol"
+	filedesc = "Atmosphere Control"
+	nanomodule_path = /datum/nano_module/atmos_control
+	program_icon_state = "atmos_control"
+	extended_desc = "This program allows remote control of air alarms around the station. This program can not be run on tablet computers."
+	required_access = access_atmospherics
+	requires_ntnet = 1
+	network_destination = "atmospheric control system"
+	requires_ntnet_feature = NTNET_SYSTEMCONTROL
+	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
+	size = 17
+
 /datum/nano_module/atmos_control
 	name = "Atmospherics Control"
 	var/obj/access = new()

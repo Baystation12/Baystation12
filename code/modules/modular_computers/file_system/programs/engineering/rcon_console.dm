@@ -1,3 +1,16 @@
+/datum/computer_file/program/rcon_console
+	filename = "rconconsole"
+	filedesc = "RCON Remote Control"
+	nanomodule_path = /datum/nano_module/rcon
+	program_icon_state = "generic"
+	extended_desc = "This program allows remote control of power distribution systems around the station. This program can not be run on tablet computers."
+	required_access = access_engine
+	requires_ntnet = 1
+	network_destination = "RCON remote control system"
+	requires_ntnet_feature = NTNET_SYSTEMCONTROL
+	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
+	size = 19
+
 /datum/nano_module/rcon
 	name = "Power RCON"
 	var/list/known_SMESs = null
