@@ -28,6 +28,7 @@
 	randpixel = 0											// And no random pixelshifting on-creation either.
 	var/icon_state_unpowered = null							// Icon state when the computer is turned off
 	var/icon_state_menu = "menu"							// Icon state overlay when the computer is turned on, but no program is loaded that would override the screen.
+	var/icon_state_screensaver = null
 	var/max_hardware_size = 0								// Maximal hardware size. Currently, tablets have 1, laptops 2 and consoles 3. Limits what hardware types can be installed.
 	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 	var/light_strength = 0
@@ -201,6 +202,8 @@
 
 	overlays.Cut()
 	if(!enabled)
+		if(icon_state_screensaver)
+			overlays.Add(icon_state_screensaver)
 		set_light(0)
 		return
 	set_light(light_strength)
@@ -233,6 +236,8 @@
 		visible_message("\The [src] beeps three times, it's screen displaying \"DISK ERROR\" warning.")
 		return // No HDD, No HDD files list or no stored files. Something is very broken.
 
+	var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
+
 	var/list/data = get_header_data()
 
 	var/list/programs = list()
@@ -240,6 +245,7 @@
 		var/list/program = list()
 		program["name"] = P.filename
 		program["desc"] = P.filedesc
+		program["autorun"] = (istype(autorun) && (autorun.stored_data == P.filename)) ? 1 : 0
 		if(P in idle_threads)
 			program["running"] = 1
 		programs.Add(list(program))
@@ -287,9 +293,8 @@
 			to_chat(user, "You send an activation signal to \the [src], turning it on")
 		else
 			to_chat(user, "You press the power button and start up \the [src]")
-		enabled = 1
-		update_icon()
-		ui_interact(user)
+		enable_computer(user)
+
 	else // Unpowered
 		if(issynth)
 			to_chat(user, "You send an activation signal to \the [src] but it does not respond")
@@ -417,7 +422,18 @@
 		visible_message("\The [src] shuts down.")
 	enabled = 0
 	update_icon()
-	return
+
+/obj/item/modular_computer/proc/enable_computer(var/mob/user = null)
+	enabled = 1
+	update_icon()
+
+	// Autorun feature
+	var/datum/computer_file/data/autorun = hard_drive ? hard_drive.find_file_by_name("autorun") : null
+	if(istype(autorun))
+		run_program(autorun.stored_data)
+
+	if(user)
+		ui_interact(user)
 
 // Handles user's GUI input
 /obj/item/modular_computer/Topic(href, href_list)
@@ -459,6 +475,20 @@
 
 	if( href_list["PC_runprogram"] )
 		return run_program(href_list["PC_runprogram"])
+
+	if( href_list["PC_setautorun"] )
+		if(!hard_drive)
+			return
+		var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
+		if(!istype(autorun))
+			autorun = new/datum/computer_file/data()
+			autorun.filename = "autorun"
+			hard_drive.store_file(autorun)
+		if(autorun.stored_data == href_list["PC_setautorun"])
+			autorun.stored_data = null
+		else
+			autorun.stored_data = href_list["PC_setautorun"]
+
 	if(.)
 		update_uis()
 
