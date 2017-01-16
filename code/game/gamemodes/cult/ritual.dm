@@ -6,6 +6,7 @@
 	throw_range = 5
 	w_class = 2
 	unique = 1
+	carved = 2 // Don't carve it
 
 /obj/item/weapon/book/tome/attack(var/mob/living/M, var/mob/living/user as mob)
 	..()
@@ -315,7 +316,7 @@ var/list/Tier4Runes = list(
 			to_chat(H.current, "<span class='cult'>[input]</span>")
 
 /mob/living/carbon/cult_communicate()
-	if(handcuffed)
+	if(incapacitated(INCAPACITATION_RESTRAINED))
 		to_chat(src, "<span class='warning'>You need at least your hands free to do this.</span>")
 		return
 	..()

@@ -106,7 +106,6 @@ var/datum/antagonist/cultist/cult
 	if(. && player.current && !istype(player.current, /mob/living/simple_animal/construct))
 		player.current.remove_language(LANGUAGE_CULT)
 
-<<<<<<< HEAD
 /datum/antagonist/cultist/update_antag_mob(var/datum/mind/player)
 	. = ..()
 	add_cultiness(CULTINESS_PER_CULTIST)
@@ -120,7 +119,7 @@ var/datum/antagonist/cultist/cult
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/dead/observer/D in mob_list)
+		for(var/mob/observer/ghost/D in mob_list)
 			add_ghost_magic(D)
 	if(cult_rating >= 200 && cult_level < 3)
 		cult_level = 3
@@ -128,7 +127,7 @@ var/datum/antagonist/cultist/cult
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/dead/observer/D in mob_list)
+		for(var/mob/observer/ghost/D in mob_list)
 			add_ghost_magic(D)
 	if(cult_rating >= 300 && cult_level < 4)
 		cult_level = 4
@@ -136,14 +135,14 @@ var/datum/antagonist/cultist/cult
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/dead/observer/D in mob_list)
+		for(var/mob/observer/ghost/D in mob_list)
 			add_ghost_magic(D)
 
 /datum/antagonist/cultist/proc/offer_uncult(var/mob/M)
 	if(!iscultist(M) || !M.mind)
 		return
 
-	to_chat(M, "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>YOU ARE MAKING A MISTAKE</a></span>")
+	to_chat(M, "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>ACCEPT</a></span>")
 
 /datum/antagonist/cultist/Topic(href, href_list)
 	if(href_list["confirmleave"])

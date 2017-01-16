@@ -168,7 +168,7 @@
 		to_chat(user, "This book is completely blank!")
 
 /obj/item/weapon/book/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(carved)
+	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
 				user.drop_item()
