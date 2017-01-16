@@ -102,5 +102,5 @@
 /*
 	Misc Helpers
 */
-#define teleportlocs area_repository.get_areas_by_name(is_player_but_not_space_or_shuttle_area)
-#define stationlocs area_repository.get_areas_by_name(is_player_but_not_space_or_shuttle_area, 0)
+#define teleportlocs area_repository.get_areas_by_name_and_coords(is_player_but_not_space_or_shuttle_area)
+#define stationlocs area_repository.get_areas_by_name(is_player_but_not_space_or_shuttle_area)

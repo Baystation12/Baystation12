@@ -225,3 +225,9 @@ var/syndicate_code_response//Code response for traitors.
 			code_phrase += ", "
 
 	return code_phrase
+
+/proc/get_name(var/atom/A)
+	return A.name
+
+/proc/get_name_and_coordinates(var/atom/A)
+	return "[A.name] \[[A.x],[A.y],[A.z]\]"
