@@ -574,7 +574,9 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					/obj/item/device/camera,\
 					/obj/item/device/pda,\
 					/obj/item/weapon/card/emag_broken,\
-					/obj/item/device/radio/headset)
+					/obj/item/device/radio/headset,\
+					/obj/item/device/flashlight/glowstick/yellow,\
+					/obj/item/device/flashlight/glowstick/orange)
 
 
 /obj/random/smokes
@@ -668,6 +670,7 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					prob(3);/obj/item/weapon/storage/box/syringes,\
 					prob(3);/obj/item/weapon/storage/box/gloves,\
 					prob(2);/obj/item/weapon/storage/box/large,\
+					prob(3);/obj/item/weapon/storage/box/glowsticks,\
 					prob(1);/obj/item/weapon/storage/wallet,\
 					prob(2);/obj/item/weapon/storage/belt/utility/full,\
 					prob(2);/obj/item/weapon/storage/belt/medical/emt,\

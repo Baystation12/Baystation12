@@ -21,15 +21,14 @@
 /obj/machinery/modular_computer/console/buildable/New()
 	..()
 	// User-built consoles start as empty frames.
-	qdel(tesla_link)
+	qdel(cpu.tesla_link)
 	qdel(cpu.network_card)
 	qdel(cpu.hard_drive)
 
 /obj/machinery/modular_computer/console/New()
 	..()
-	cpu.battery_module = null
 	cpu.network_card = new/obj/item/weapon/computer_hardware/network_card/wired(src)
-	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
+	cpu.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 	cpu.hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/super(src) // Consoles generally have better HDDs due to lower space limitations
 	var/area/A = get_area(src)
 	// Attempts to set this console's tag according to our area. Since some areas have stuff like "XX - YY" in their names we try to remove that too.

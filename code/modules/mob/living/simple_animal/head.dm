@@ -38,7 +38,7 @@
 	if(stat == DEAD)
 		if(health > 0)
 			icon_state = icon_living
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 			set_density(1)
 		return
 	else if(health < 1)

@@ -90,4 +90,4 @@ In short:
 /datum/universal_state/hell/proc/KillMobs()
 	for(var/mob/living/simple_animal/M in mob_list)
 		if(M && !M.client)
-			M.stat = DEAD
+			M.set_stat(DEAD)

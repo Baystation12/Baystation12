@@ -1,6 +1,0 @@
-author: Ravenxales
-
-delete-after: True
-
-changes: 
-  - bugfix: "Made turbolift doors more robust. Small mobs will be displaced, large mobs will make the lift give up and reopen."

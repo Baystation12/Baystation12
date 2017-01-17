@@ -10,8 +10,9 @@ var/datum/antagonist/cultist/cult
 	id = MODE_CULTIST
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
-	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Head of Security", "Captain")
+	restricted_jobs = list("Internal Affairs Agent", "Head of Security", "Captain")
 	protected_jobs = list("Security Officer", "Warden", "Detective")
+	blacklisted_jobs = list("AI", "Cyborg", "Chaplain")
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
 	welcome_text = "You have a talisman in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
@@ -83,7 +84,7 @@ var/datum/antagonist/cultist/cult
 	if(show_message)
 		player.current.visible_message("<FONT size = 3>[player.current] looks like they just reverted to their old faith!</FONT>")
 
-/datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
+/datum/antagonist/cultist/add_antagonist(var/datum/mind/player, var/ignore_role)
 	. = ..()
 	if(.)
 		to_chat(player, "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back.")
@@ -95,7 +96,7 @@ var/datum/antagonist/cultist/cult
 	if(. && player.current && !istype(player.current, /mob/living/simple_animal/construct))
 		player.current.remove_language(LANGUAGE_CULT)
 
-/datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
+/datum/antagonist/cultist/can_become_antag(var/datum/mind/player, var/ignore_role)
 	if(!..())
 		return 0
 	for(var/obj/item/weapon/implant/loyalty/L in player.current)

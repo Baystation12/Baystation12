@@ -356,3 +356,6 @@ var/list/mob/living/forced_ambiance_list = new
 	res["x"] = res["x"] - min["x"] + 1
 	res["y"] = res["y"] - min["y"] + 1
 	return res
+
+/area/proc/has_turfs()
+	return !!(locate(/turf) in src)
