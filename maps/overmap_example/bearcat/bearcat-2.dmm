@@ -22,7 +22,7 @@
 "av" = (/obj/machinery/light_switch{pixel_x = 28},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled/dark,/area/ship/scrap/command)
 "aw" = (/turf/simulated/wall/r_wall,/area/ship/scrap/command/captain)
 "ax" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled{icon_state = "white"},/area/ship/scrap/command/captain)
-"ay" = (/obj/machinery/account_database,/turf/simulated/floor/bluegrid,/area/ship/scrap/comms)
+"ay" = (/obj/machinery/computer/account_database,/turf/simulated/floor/bluegrid,/area/ship/scrap/comms)
 "az" = (/turf/simulated/floor/bluegrid,/area/ship/scrap/comms)
 "aA" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/structure/window/reinforced{dir = 8},/obj/machinery/power/apc{dir = 1; name = "Communications APC"},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/light_switch{pixel_x = 28},/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled/dark,/area/ship/scrap/comms)
 "aB" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/machinery/power/apc{dir = 4; name = "Bridge APC"},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled/dark,/area/ship/scrap/command)
