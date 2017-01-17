@@ -8,6 +8,7 @@
 	battery_module.charge_to_full()
 	hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/micro(src)
 	network_card = new/obj/item/weapon/computer_hardware/network_card(src)
+	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 
 // Alternative version, an average one, for higher ranked positions mostly
 /obj/item/modular_computer/tablet/preset/custom_loadout/advanced/New()
@@ -19,3 +20,4 @@
 	network_card = new/obj/item/weapon/computer_hardware/network_card(src)
 	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 	card_slot = new/obj/item/weapon/computer_hardware/card_slot(src)
+	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)

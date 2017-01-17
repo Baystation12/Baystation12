@@ -201,20 +201,13 @@
 				L.resist()
 
 		if("mov_intent")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				if(C.legcuffed)
-					to_chat(C, "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>")
-					C.m_intent = "walk"	//Just incase
-					C.hud_used.move_intent.icon_state = "walking"
-					return 1
-				switch(usr.m_intent)
-					if("run")
-						usr.m_intent = "walk"
-						usr.hud_used.move_intent.icon_state = "walking"
-					if("walk")
-						usr.m_intent = "run"
-						usr.hud_used.move_intent.icon_state = "running"
+			switch(usr.m_intent)
+				if("run")
+					usr.m_intent = "walk"
+					usr.hud_used.move_intent.icon_state = "walking"
+				if("walk")
+					usr.m_intent = "run"
+					usr.hud_used.move_intent.icon_state = "running"
 
 		if("Reset Machine")
 			usr.unset_machine()

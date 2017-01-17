@@ -62,7 +62,7 @@
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
 
-	if(usr && stat || !use_me && usr == src)
+	if((usr && stat) || (!use_me && usr == src))
 		to_chat(src, "You are unable to emote.")
 		return
 

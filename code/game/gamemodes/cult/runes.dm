@@ -170,7 +170,7 @@ var/list/sacrificed = list()
 				if(!waiting_for_input[target]) //so we don't spam them with dialogs if they hesitate
 					waiting_for_input[target] = 1
 
-					if(!cult.can_become_antag(target.mind) || jobban_isbanned(target, MODE_CULTIST))//putting jobban check here because is_convertable uses mind as argument
+					if(!cult.can_become_antag(target.mind, 1))
 						//waiting_for_input ensures this is only shown once, so they basically auto-resist from here on out. They still need to find a way to get off the freaking rune if they don't want to burn to death, though.
 						to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
 						to_chat(target, "<span class='danger'>And you were able to force it out of your mind. You now know the truth, there's something horrible out there, stop it and its minions at all costs.</span>")
@@ -179,7 +179,7 @@ var/list/sacrificed = list()
 						var/choice = alert(target,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
 						waiting_for_input[target] = 0
 						if(choice == "Submit") //choosing 'Resist' does nothing of course.
-							cult.add_antagonist(target.mind)
+							cult.add_antagonist(target.mind, 1)
 							converting -= target
 							target.hallucination = 0 //sudden clarity
 
@@ -810,8 +810,6 @@ var/list/sacrificed = list()
 				cultist.buckled = null
 				if (cultist.handcuffed)
 					cultist.drop_from_inventory(cultist.handcuffed)
-				if (cultist.legcuffed)
-					cultist.drop_from_inventory(cultist.legcuffed)
 				if (istype(cultist.wear_mask, /obj/item/clothing/mask/muzzle))
 					cultist.drop_from_inventory(cultist.wear_mask)
 				if(istype(cultist.loc, /obj/structure/closet)&&cultist.loc:welded)
