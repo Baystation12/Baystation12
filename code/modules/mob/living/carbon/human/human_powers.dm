@@ -71,7 +71,7 @@
 	if(last_special > world.time)
 		return
 
-	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len || stance_damage >= 4 || src.legcuffed)
+	if(incapacitated(INCAPACITATION_DISABLED) || buckled || pinned.len || stance_damage >= 4)
 		to_chat(src, "<span class='warning'>You cannot leap in your current state.</span>")
 		return
 
