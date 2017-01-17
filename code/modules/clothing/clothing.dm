@@ -402,7 +402,7 @@ BLIND     // can't see anything
 	var/pull_mask = 0
 	var/hanging = 0
 	blood_overlay_type = "maskblood"
-	
+
 /obj/item/clothing/mask/New()
 	if(pull_mask)
 		action_button_name = "Adjust Mask"
