@@ -197,7 +197,12 @@
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
 		if(A != src)
-			A.ex_act(hitpwr)
+			var/obj/machinery/power/supermatter/SM = A
+			if (istype(SM))
+				SM.Consume(src)
+				return
+			else
+				A.ex_act(hitpwr)
 
 	//then, ram the turf if it still exists
 	if(T)
