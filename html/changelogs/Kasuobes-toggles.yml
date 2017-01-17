@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - tweak: "Masks that can be pulled up/down now have action buttons for toggling."
