@@ -17,7 +17,7 @@
 	disruptive = 0
 
 	use_power_cost = 250 KILOWATTS
-	active_power_cost = 6 KILOWATTS		// 30 min battery life /w best (3kWh) cell
+	active_power_cost = 36 KILOWATTS		// ~5 min battery life /w best (3kWh) cell
 	passive_power_cost = 0
 	module_cooldown = 10 SECONDS
 
@@ -29,6 +29,9 @@
 
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
+
+	var/last_flick = 0
+	var/turf/last_turf
 
 /obj/item/rig_module/stealth_field/activate()
 
@@ -44,6 +47,9 @@
 	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
 	H.visible_message("[H.name] vanishes into thin air!",1)
+
+	last_flick = 0
+	last_turf = get_turf(holder.wearer)
 
 /obj/item/rig_module/stealth_field/deactivate()
 
@@ -64,12 +70,29 @@
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
 
-/obj/item/rig_module/teleporter
+/obj/item/rig_module/stealth_field/process()
+	if(!active)
+		return
 
+	var/mob/living/carbon/human/H = holder.wearer
+	var/turf/new_turf = get_turf(holder.wearer)
+	last_flick += (5*round(get_dist(new_turf,last_turf)**0.5)) //increases flick chance related to sqrt of distance between turf of last process
+
+	if(prob(last_flick))
+		anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null) //just a flicker
+		if(prob(last_flick/5))
+			anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir) //if we're really unlucky it flicks that humanoid overlay
+		last_flick = 0
+	else
+		last_flick += 2
+
+	last_turf = new_turf
+
+/obj/item/rig_module/teleporter
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 25 KILOWATTS
+	use_power_cost = 375 KILOWATTS
 	redundant = 1
 	usable = 1
 	selectable = 1
@@ -186,6 +209,7 @@
 	var/blink_solid_time = 20
 	var/activation_check = 0 //used to detect whether proc was called via 'activate' or 'engage'
 	var/self_destructing = 0 //used to prevent toggling the switch, then dying and having it toggled again
+	var/death_activation = 0
 
 /obj/item/rig_module/self_destruct/small
 	explosion_values = list(0,0,3,4)
@@ -242,6 +266,9 @@
 	//OH SHIT.
 	if(holder.wearer.stat == DEAD)
 		if(src.active)
+			blink_time *= 5 //Manually activating it should have a shorter time to detonate
+			blink_rapid_time *= 4 //On-death triggering has a bit longer, for people to decide to leave without just having ten seconds to meta.
+			blink_solid_time *= 2
 			engage(1)
 
 /obj/item/rig_module/self_destruct/proc/blink()
