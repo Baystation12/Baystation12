@@ -114,8 +114,7 @@
 	var/turf/simulated/floor/T = A
 	if(istype(T))
 		if(emagged)
-			if(T.flooring)
-				return 1
+			return 1
 		else
 			return (amount && (T.broken || T.burnt || (improvefloors && !T.flooring)))
 
@@ -137,6 +136,11 @@
 			visible_message("<span class='warning'>[src] begins to tear the floor tile from the floor.</span>")
 			if(do_after(src, 50, F))
 				F.break_tile_to_plating()
+				addTiles(1)
+		else
+			visible_message("<span class='danger'>[src] begins to tear through the floor!</span>")
+			if(do_after(src, 150, F)) // Extra time because this can and will kill.
+				F.ReplaceWithLattice()
 				addTiles(1)
 		target = null
 		busy = 0

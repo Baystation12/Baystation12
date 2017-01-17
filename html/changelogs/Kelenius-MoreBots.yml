@@ -36,4 +36,3 @@ changes:
   - bugfix: "Fixed issues where you were unable to turn the bots on and off when you should have been. Farmbot specifically."
   - tweak: "Synthetics can always control all bot settings."
   - tweak: "Synthetics and anyone who opens the bot's panel (screwdriver) can toggle bot safeties, giving it a 'temporal' emag effect that can be fixed in the same way. Emags break them permanently, but this is obvious when the panel is open."
-  - tweak: "Emagged floorbots don't breach the station anymore. That was too deadly. They'll just tear up the tiles."
