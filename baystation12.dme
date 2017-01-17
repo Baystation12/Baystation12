@@ -987,6 +987,7 @@
 #include "code\modules\admin\secrets\random_events\trigger_cordical_borer_infestation.dm"
 #include "code\modules\admin\secrets\random_events\trigger_xenomorph_infestation.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"
+#include "code\modules\admin\verbs\adminfreeze.dm"
 #include "code\modules\admin\verbs\adminjump.dm"
 #include "code\modules\admin\verbs\adminpm.dm"
 #include "code\modules\admin\verbs\adminsay.dm"
