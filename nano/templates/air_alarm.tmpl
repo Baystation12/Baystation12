@@ -2,12 +2,9 @@
 Title: Air Alarm
 Used In File(s): \code\game\machinery\alarm.dm
 
-#define AALARM_MODE_SCRUBBING	1
-#define AALARM_MODE_REPLACEMENT	2 //like scrubbing, but faster.
-#define AALARM_MODE_PANIC		3 //constantly sucks all air
-#define AALARM_MODE_CYCLE		4 //sucks off all air, then refill and switches to scrubbing
-#define AALARM_MODE_FILL		5 //emergency fill
-#define AALARM_MODE_OFF			6 //Shuts it all down.
+#define AALARM_MODE_SCRUBBING	1 //vents and filters on
+#define AALARM_MODE_SIPHON		2 //vents off, filters on siphon
+#define AALARM_MODE_OFF			3 //shuts it all down.
 
 #define AALARM_SCREEN_MAIN		1
 #define AALARM_SCREEN_VENT		2
@@ -106,10 +103,10 @@ Used In File(s): \code\game\machinery\alarm.dm
                 {{:helper.link('Sensor Settings', null, { 'screen' : 5})}}
             </div>
         <hr>
-            {{if data.mode==3}}
-                {{:helper.link('PANIC SIPHON ACTIVE - Turn siphoning off', null, { 'mode' : 1}, null, 'redButton')}}
+            {{if data.mode==2}}
+                {{:helper.link('SIPHON ACTIVE - Turn siphoning off', null, { 'mode' : 1}, null, 'redButton')}}
 			{{else}}
-                {{:helper.link('ACTIVATE PANIC SIPHON IN AREA', null, { 'mode' : 3}, null, 'yellowButton')}}
+                {{:helper.link('ACTIVATE SIPHON IN AREA', null, { 'mode' : 2}, null, 'yellowButton')}}
             {{/if}}
     {{else data.screen == 2}}
 		{{for data.vents}}
