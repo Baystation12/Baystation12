@@ -204,6 +204,8 @@
 				var/mob/M = I
 				if(M.client)
 					hear += M
+				else if(istype(M, /mob/living/carbon/slime))
+					hear += M
 		else if(istype(I,/obj/))
 			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
 			if(include_objects)
