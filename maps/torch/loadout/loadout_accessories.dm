@@ -45,6 +45,11 @@
 	path = /obj/item/clothing/accessory/armband/medgreen
 	allowed_roles = list("Physician", "Medical Assistant")
 
+/datum/gear/accessor/armband_emt
+	display_name = "medic armband"
+	path = /obj/item/clothing/accessory/armband/medic
+	allowed_roles = list("Physician", "Medical Assistant")
+
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical corps armband"
 	path = /obj/item/clothing/accessory/armband/medblue

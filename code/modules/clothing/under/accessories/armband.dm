@@ -48,3 +48,8 @@
 	name = "\improper NanoTrasen armband"
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is white and red."
 	icon_state = "whitered"
+
+/obj/item/clothing/accessory/armband/medic
+	name = "medic armband"
+	desc = "An armband, worn by crewmembers placed in roles with the purpose of administering first aid. This one has a red cross on it."
+	icon_state = "medicband"
