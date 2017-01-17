@@ -16,6 +16,8 @@
 	target_speed = 3
 	light_strength = 0 //stunbaton makes it's own light
 
+	RequiresAccessToToggle = 1 // Haha no
+
 	var/idcheck = 0 // If true, arrests for having weapons without authorization.
 	var/check_records = 0 // If true, arrests people without a record.
 	var/check_arrest = 1 // If true, arrests people who are set to arrest.
@@ -61,55 +63,62 @@
 /mob/living/bot/secbot/update_icons()
 	icon_state = "secbot[on]"
 
-/mob/living/bot/secbot/attack_hand(var/mob/user)
-	user.set_machine(src)
-	var/list/dat = list()
-	dat += "<TT><B>Automatic Security Unit</B></TT><BR><BR>"
-	dat += "Status: <A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A><BR>"
-	dat += "Behaviour controls are [locked ? "locked" : "unlocked"]<BR>"
-	dat += "Maintenance panel is [open ? "opened" : "closed"]"
-	if(!locked || issilicon(user))
-		dat += "<BR>Check for Weapon Authorization: <A href='?src=\ref[src];operation=idcheck'>[idcheck ? "Yes" : "No"]</A><BR>"
-		dat += "Check Security Records: <A href='?src=\ref[src];operation=ignorerec'>[check_records ? "Yes" : "No"]</A><BR>"
-		dat += "Check Arrest Status: <A href='?src=\ref[src];operation=ignorearr'>[check_arrest ? "Yes" : "No"]</A><BR>"
-		dat += "Report Arrests: <A href='?src=\ref[src];operation=declarearrests'>[declare_arrests ? "Yes" : "No"]</A><BR>"
-		dat += "Auto Patrol: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "On" : "Off"]</A>"
-	var/datum/browser/popup = new(user, "autosec", "Securitron controls")
-	popup.set_content(jointext(dat,null))
-	popup.open()
+/mob/living/bot/secbot/GetInteractTitle()
+	. = "<head><title>Securitron controls</title></head>"
+	. += "<b>Automatic Security Unit</b>"
 
-/mob/living/bot/secbot/Topic(href, href_list)
-	if(..())
-		return
+/mob/living/bot/secbot/GetInteractPanel()
+	. = "Check for weapon authorization: <a href='?src=\ref[src];command=idcheck'>[idcheck ? "Yes" : "No"]</a>"
+	. += "<br>Check security records: <a href='?src=\ref[src];command=ignorerec'>[check_records ? "Yes" : "No"]</a>"
+	. += "<br>Check arrest status: <a href='?src=\ref[src];command=ignorearr'>[check_arrest ? "Yes" : "No"]</a>"
+	. += "<br>Report arrests: <a href='?src=\ref[src];command=declarearrests'>[declare_arrests ? "Yes" : "No"]</a>"
+	. += "<br>Auto patrol: <a href='?src=\ref[src];command=patrol'>[will_patrol ? "On" : "Off"]</a>"
 
-	usr.set_machine(src)
-	add_fingerprint(usr)
+/mob/living/bot/secbot/GetInteractMaintenance()
+	. = "Threat identifier status: "
+	switch(emagged)
+		if(0)
+			. += "<a href='?src=\ref[src];command=emag'>Normal</a>"
+		if(1)
+			. += "<a href='?src=\ref[src];command=emag'>Scrambled (DANGER)</a>"
+		if(2)
+			. += "ERROROROROROR-----"
 
-	if((href_list["power"]) && (access_scanner.allowed(usr)))
-		if(on)
-			turn_off()
-		else
-			turn_on()
-		return
+/mob/living/bot/secbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+	..()
+	if(CanAccessPanel(user))
+		switch(command)
+			if("idcheck")
+				idcheck = !idcheck
+			if("ignorerec")
+				check_records = !check_records
+			if("ignorearr")
+				check_arrest = !check_arrest
+			if("patrol")
+				will_patrol = !will_patrol
+			if("declarearrests")
+				declare_arrests = !declare_arrests
 
-	switch(href_list["operation"])
-		if("idcheck")
-			idcheck = !idcheck
-		if("ignorerec")
-			check_records = !check_records
-		if("ignorearr")
-			check_arrest = !check_arrest
-		if("patrol")
-			will_patrol = !will_patrol
-		if("declarearrests")
-			declare_arrests = !declare_arrests
-	attack_hand(usr)
+	if(CanAccessMaintenance(user))
+		switch(command)
+			if("emag")
+				if(emagged < 2)
+					emagged = !emagged
 
 /mob/living/bot/secbot/attackby(var/obj/item/O, var/mob/user)
 	var/curhealth = health
 	. = ..()
 	if(health < curhealth)
 		react_to_attack(user)
+
+/mob/living/bot/secbot/emag_act(var/remaining_charges, var/mob/user)
+	. = ..()
+	if(!emagged)
+		if(user)
+			to_chat(user, "<span class='notice'>You short out [src]'s threat identificator.</span>")
+			ignore_list |= user
+		emagged = 2
+		return 1
 
 /mob/living/bot/secbot/bullet_act(var/obj/item/projectile/P)
 	var/curhealth = health
