@@ -123,8 +123,8 @@ var/global/list/SKILLS = null
 
 /datum/skill/secondary/law
     ID = "law"
-    name = "NanoTrasen Corporate Regulations"
-    desc = "Your knowledge of NanoTrasen law and procedures. This includes Corporate Regulations, as well as general station rulings and procedures. A low level in this skill is typical for security officers, a high level in this skill is typical for captains."
+    name = "Legal"
+    desc = "Your knowledge of law and procedures. This includes SolGov law, Corporate Regulations, SOP, or other law systems. A low level in this skill is typical of law enforcement, high is typical of people in command of a station or vessel."
     desc_unskilled = "You know most of what's legal and illegal in your everyday life and work, though you're fuzzy on the finer points of the law, especially if it doesn't apply to your own daily experience."
     desc_trained = "You know and understand the law in a practical sense. You know the punishments for crimes and you can read and understand a legal document easily. You may be in Security or Command."
     desc_professional = "You have a law degree or the equivalent amount of knowledge. You can draw up legal contracts, interpret the minutiae of the law, settle disagreements, and argue a case in court."
@@ -212,14 +212,23 @@ var/global/list/SKILLS = null
 	desc_trained = "You can set up the engine, and you probably won't botch it up too badly. You know how to protect yourself from radiation in the engine room. You can read the engine monitors and keep the engine going. You're familiar with engine types other than the one you work with. An engine malfunction may stump you, but you can probably work out how to fix it... let's just hope you do so quickly enough to prevent serious damage."
 	desc_professional = "Your engine is your baby and you know every minute detail of its workings. You can optimize the engine and you probably have your own favorite custom setup. You could build an engine from the ground up. When things go wrong, you know exactly what has happened and how to fix the problem. You can safely handle singularities and supermatter."
 
-/datum/skill/engineering/pilot
-    ID = "pilot"
+/datum/skill/engineering/mech
+    ID = "mech"
     name = "Heavy Machinery Operation"
     desc = "Describes your experience and understanding of operating heavy machinery, which includes mechs and other large exosuits. Used in piloting mechs."
     desc_unskilled = "You know what a mech is, and if you see one you can recognize which type it is. If your department uses exosuits, you know roughly what their capabilities are. If you were to get into one, you'd have about fifty-fifty odds of getting it moving in the direction you wanted it to go."
     desc_amateur = "You can drive an exosuit safely, but you specialize in only one type of mech that your department regularly uses. You're not an expert and you fumble the controls sometimes, but you're going where you want to go and you're pretty sure you know what those buttons do. If you're a miner, you can set up a mining drill safely; if you have the electrical skills, you probably know how to operate a shield generator and set up a laser emitter."
     desc_trained = "You are very comfortable using the type of exosuit you're most familiar with. You may spend entire shifts piloting one, and you're familiar with its functions. You can do basic maintenance. You can use most types of exosuits, unless they're very exotic or specialized. If you're an electrician or engineer, you can set up a shield generator solo. Miners at this level can place and use mining drills with high efficiency."
     desc_professional = "You can use any type of mech comfortably and automatically. To you, a mech is more like a second skin than a vehicle. You can maintain, repair, and probably build exosuits. You can maintain, repair, and modify drills and shield generators."
+
+/datum/skill/engineering/pilot
+    ID = "pilot"
+    name = "Piloting"
+    desc = "Describes your experience and understanding of piloting spacecraft, from small and short-range pods to even corvette sized craft."
+    desc_unskilled = "You know what a spacecraft is, and you might have a rough understanding of the differences between different craft. If your department is involved in the use of spacecraft, you know roughly what their capabilities are. You might be able to fly a spacecraft in a videogame. If you were to take the Helm of a smaller craft, you might be able to move it with proper guidance."
+    desc_amateur = "You can pilot a small, short-range craft safely, but larger ships are out of your area of expertise. You are by no means an expert, and probably don't have much formal training. Skills of this level are typical for deck crew."
+    desc_trained = "You are a trained pilot, and can safely pilot anything from a small craft to a corvette. You can spend extended periods of time piloting a spacecraft, and you're versed in the abilities of different ships, and what makes them function. You can do basic maintenance on smaller vessels, and perform most basic maneuvers. You can use armed spacecraft. You can make basic calculations relating to piloting. Skills of this level are typical for newer pilots. You have probably recieved formal piloting training."
+    desc_professional = "You are an experienced pilot, and can safety take the Helm of many types of craft. You could probably live in a spacecraft, and you're very well versed in essentially everything related to space-faring vessels. Not only can you fly a ship, but you can perform difficult maneuvers, and make certain calculations relating to flying some vessels. You can maintain a ship. Skills of this level are typical for very experienced pilots. You have recieved formal piloting training."
 
 // Category: Research
 
