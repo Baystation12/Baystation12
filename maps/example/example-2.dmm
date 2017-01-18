@@ -20,6 +20,7 @@
 "t" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "u" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "v" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"w" = (/obj/effect/shuttle_landmark{name = "nav point - offsite"; tag = "nav_example_offsite"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -34,7 +35,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaabaaacccccccccccccccaaaaaaaa
 aaaaaaaaacdddeddfddedddcaaaaaaaa
 aaaaaaaaacdddddfffdddddcaaaaaaaa
-aaaaaaaaacdddddfffddddgcaaaaaaaa
+aaaaaaaaacdddddfffddddgcaaaawaaa
 aaaaaaaaachdddifffddddjcaaaaaaaa
 aaaaaaaaacddddddddddkddcaaaaaaaa
 aaaaaaaaacddddddddddlmncaaaaaaaa
