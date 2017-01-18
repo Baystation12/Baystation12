@@ -1,65 +1,61 @@
 var/list/sector_shuttles = list()
 
-/datum/shuttle/ferry/overmap
+/datum/shuttle/autodock/overmap
 	warmup_time = 10
-	location = 0
-	category = /datum/shuttle/ferry/overmap
-	var/obj/effect/overmap/current_location
-	var/obj/effect/overmap/destination //current destination sector
+
+	var/obj/effect/shuttle_nav/current_landmark
+	var/obj/effect/shuttle_nav/destination_landmark
+
+	category = /datum/shuttle/autodock/overmap
+	var/obj/effect/overmap/current_sector
+	var/obj/effect/overmap/destination_sector //current destination sector
 	var/range = 0	//how many overmap tiles can shuttle go, for picking destinations and returning.
 
-/datum/shuttle/ferry/overmap/New(_name)
+/datum/shuttle/autodock/overmap/New(_name)
 	..(_name)
-	if(!landmark_station)
-		log_debug("<span class='danger>[name]: has no home landmark</span>")
+
+	current_landmark = locate(current_landmark)
+	if(!istype(current_landmark))
 		CRASH("Shuttle \"[name]\" has no home landmark.")
-	set_destination_landmark(landmark_station)
-	update_location()
+
+	update_sector()
 	sector_shuttles += src
 
-/datum/shuttle/ferry/overmap/move(var/area/origin,var/area/destination)
+/datum/shuttle/autodock/overmap/move(var/origin, var/destination)
 	..()
-	update_location()
+	update_sector()
 
-/datum/shuttle/ferry/overmap/proc/is_valid_landing(obj/effect/shuttle_nav/A)
+/datum/shuttle/autodock/overmap/proc/is_valid_landing(obj/effect/shuttle_nav/A)
 	if(!istype(A))
 		return 0
-	if(A == get_location_landmark())
+	if(A == current_landmark)
 		return 0 //already there
 	if(!A.free())
 		return 0
 	return 1
 
-/datum/shuttle/ferry/overmap/proc/can_go()
-	if(!destination)
+/datum/shuttle/autodock/overmap/proc/can_go()
+	if(!destination_sector)
 		return
-	update_location()
-	if(!current_location)
+	update_sector()
+	if(!current_sector)
 		log_error("[name] is not on overmap-friendly zlevel.")
 		return
-	return get_dist(current_location, destination) <= range
+	return get_dist(current_sector, destination_sector) <= range
 
-/datum/shuttle/ferry/overmap/proc/update_location()
-	current_location = map_sectors["[shuttle_area.z]"]
+/datum/shuttle/autodock/overmap/proc/update_sector()
+	current_sector = map_sectors["[shuttle_area.z]"]
 
-/datum/shuttle/ferry/overmap/proc/set_destination_landmark(obj/effect/shuttle_nav/A)
-	if(!A)
-		return
-	destination = map_sectors["[A.z]"]
+/datum/shuttle/autodock/overmap/proc/set_destination_landmark(obj/effect/shuttle_nav/A)
+	if(!A) return
 
-	//TODO, factor out the code common to overmap shuttles and ferry shuttles
-	//so that we don't have to do stuff like this.
-	if(location)
-		landmark_offsite = get_location_landmark()
-		landmark_station = A
-	else
-		landmark_station = get_location_landmark()
-		landmark_offsite = A
+	destination_landmark = A
+	destination_sector = map_sectors["[A.z]"]
 
-/datum/shuttle/ferry/overmap/proc/get_possible_destinations()
+/datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
-	update_location()
-	for (var/obj/effect/overmap/S in range(current_location, range))
+	update_sector()
+	for (var/obj/effect/overmap/S in range(current_sector, range))
 		var/i = 1
 		for(var/obj/effect/shuttle_nav/LZ in S.landing_spots)
 			if(is_valid_landing(LZ))
@@ -67,11 +63,21 @@ var/list/sector_shuttles = list()
 	return res
 
 //TODO nav landmark names
-/datum/shuttle/ferry/overmap/proc/get_location_name()
-	update_location()
-	var/obj/effect/shuttle_nav/A = get_location_landmark()
-	return "[location] - [A.name]"
+/datum/shuttle/autodock/overmap/proc/get_location_name()
+	update_sector()
+	return "[current_sector] - [current_landmark.name]"
 
-/datum/shuttle/ferry/overmap/proc/get_destination_name()
-	var/obj/effect/shuttle_nav/A = get_location_landmark(!location)
-	return destination ? "[destination] - [A.name]": "None"
+/datum/shuttle/autodock/overmap/proc/get_destination_name()
+	return destination_sector ? "[destination_sector] - [destination_landmark.name]": "None"
+
+/datum/shuttle/autodock/overmap/get_origin()
+	return current_landmark
+
+/datum/shuttle/autodock/overmap/get_destination()
+	return destination_landmark
+
+/datum/shuttle/autodock/overmap/get_docking_controller()
+	return null //TODO implement nav datum
+
+/datum/shuttle/autodock/overmap/get_dock_target()
+	return null //TODO implement nav datum

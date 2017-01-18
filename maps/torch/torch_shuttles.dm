@@ -15,7 +15,7 @@
 
 //Torch Large Pods
 
-/datum/shuttle/ferry/escape_pod/escape_pod_six
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_six
 	name = "Escape Pod 6"
 	location = 0
 	warmup_time = 10
@@ -27,7 +27,7 @@
 	dock_target_offsite = "escape_pod_6_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_seven
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_seven
 	name = "Escape Pod 7"
 	location = 0
 	warmup_time = 0
@@ -39,7 +39,7 @@
 	dock_target_offsite = "escape_pod_7_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_eight
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_eight
 	name = "Escape Pod 8"
 	location = 0
 	warmup_time = 0
@@ -51,7 +51,7 @@
 	dock_target_offsite = "escape_pod_8_recovery"
 	transit_direction = SOUTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_nine
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_nine
 	name = "Escape Pod 9"
 	location = 0
 	warmup_time = 0
@@ -63,7 +63,7 @@
 	dock_target_offsite = "escape_pod_9_recovery"
 	transit_direction = SOUTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_ten
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_ten
 	name = "Escape Pod 10"
 	location = 0
 	warmup_time = 0
@@ -75,7 +75,7 @@
 	dock_target_offsite = "escape_pod_10_recovery"
 	transit_direction = WEST
 
-/datum/shuttle/ferry/escape_pod/escape_pod_eleven
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_eleven
 	name = "Escape Pod 11"
 	location = 0
 	warmup_time = 0
@@ -89,7 +89,7 @@
 
 //Torch Small Pods
 
-/datum/shuttle/ferry/escape_pod/escape_pod_twelve
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_twelve
 	name = "Escape Pod 12"
 	location = 0
 	warmup_time = 0
@@ -101,7 +101,7 @@
 	dock_target_offsite = "escape_pod_12_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_thirteen
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_thirteen
 	name = "Escape Pod 13"
 	location = 0
 	warmup_time = 0
@@ -113,7 +113,7 @@
 	dock_target_offsite = "escape_pod_13_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_fourteen
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_fourteen
 	name = "Escape Pod 14"
 	location = 0
 	warmup_time = 0
@@ -125,7 +125,7 @@
 	dock_target_offsite = "escape_pod_14_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_fifthteen
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_fifthteen
 	name = "Escape Pod 15"
 	location = 0
 	warmup_time = 0
@@ -137,7 +137,7 @@
 	dock_target_offsite = "escape_pod_15_recovery"
 	transit_direction = SOUTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_sixteen
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_sixteen
 	name = "Escape Pod 16"
 	location = 0
 	warmup_time = 0
@@ -149,7 +149,7 @@
 	dock_target_offsite = "escape_pod_16_recovery"
 	transit_direction = SOUTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_seventeen
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_seventeen
 	name = "Escape Pod 17"
 	location = 0
 	warmup_time = 0
@@ -224,7 +224,7 @@
 
 //Merchant
 
-/datum/shuttle/ferry/merchant
+/datum/shuttle/autodock/ferry/merchant
 	name = "Merchant"
 	warmup_time = 10
 	docking_controller_tag = "merchant_ship_dock"
@@ -235,7 +235,7 @@
 
 //Admin
 
-/datum/shuttle/ferry/administration
+/datum/shuttle/autodock/ferry/administration
 	name = "Administration"
 	location = 1
 	warmup_time = 10	//want some warmup time so people can cancel.
@@ -247,7 +247,7 @@
 
 //Transport
 
-/datum/shuttle/ferry/centcom
+/datum/shuttle/autodock/ferry/centcom
 	name = "Central Command Transport"
 	location = 1
 	warmup_time = 10
@@ -348,7 +348,7 @@
 
 //SCGMC Assault Pod
 
-/datum/shuttle/ferry/multidock/specops/ert
+/datum/shuttle/autodock/ferry/multidock/specops/ert
 	name = "Special Operations"
 	location = 0
 	warmup_time = 10
@@ -362,7 +362,7 @@
 
 //Cargo drone
 
-/datum/shuttle/ferry/supply/drone
+/datum/shuttle/autodock/ferry/supply/drone
 	name = "Supply Drone"
 	location = 1
 	warmup_time = 10

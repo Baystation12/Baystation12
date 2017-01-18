@@ -111,7 +111,7 @@ datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async=1				// We're moving the shuttle using built in procs.
 
-	var/datum/shuttle/ferry/supply/shuttle = null
+	var/datum/shuttle/autodock/ferry/supply/shuttle = null
 
 	var/testtime = 0	//Used as a timer.
 

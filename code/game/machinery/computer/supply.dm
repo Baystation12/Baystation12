@@ -79,7 +79,7 @@
 
 /obj/machinery/computer/supply/ui_data(mob/user)
 	var/list/data = list()
-	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
 	var/shuttlestatus = ""
 	var/canlaunch = 0
 
@@ -143,7 +143,7 @@
 	if(..())
 		return
 
-	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
 
 
 	switch(action)

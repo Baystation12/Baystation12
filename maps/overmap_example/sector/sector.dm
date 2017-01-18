@@ -17,11 +17,11 @@
 	shuttle_tag = "Exploration Pod"
 	//parking_spot = /area/sector/shuttle/outgoing2 //TODO
 
-/datum/shuttle/ferry/overmap/abandoned_pod
+/datum/shuttle/autodock/overmap/abandoned_pod
 	name = "Exploration Pod"
 	shuttle_area = /area/sector/shuttle/outgoing2
-	landmark_station = "nav_abandoned_pod"
-	transit_direction = NORTH
+	current_landmark = "nav_abandoned_pod"
+	//transit_direction = NORTH
 
 /area/sector/shuttle/
 	name = "\improper Entry Point"

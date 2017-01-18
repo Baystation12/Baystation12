@@ -1,3 +1,4 @@
+/*
 //This is a holder for things like the Skipjack and Nuke shuttle.
 /datum/shuttle/multi_shuttle
 	flags = SHUTTLE_FLAGS_NONE
@@ -51,6 +52,10 @@
 
 /datum/shuttle/multi_shuttle/current_dock_target()
 	return destination_dock_targets[last_location]
+
+/datum/shuttle/autodock/ferry/get_docking_controller()
+	. = locate(docking_controller_tag)
+	docking_controller = . //Temporary
 
 /datum/shuttle/multi_shuttle/move(var/area/origin, var/area/destination)
 	..()
@@ -246,3 +251,4 @@
 		MS.last_location = choice
 
 	updateUsrDialog()
+*/

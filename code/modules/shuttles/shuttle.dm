@@ -8,8 +8,10 @@
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
-	var/docking_controller_tag	//tag of the controller used to coordinate docking
-	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
+	//TODO move docking stuff up to autodock
+
+	//var/docking_controller_tag	//tag of the controller used to coordinate docking
+	//var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = SHUTTLE_FLAGS_PROCESS
@@ -38,11 +40,13 @@
 		supply_controller.shuttle = null
 	. = ..()
 
+/*
 /datum/shuttle/proc/init_docking_controllers()
 	if(docking_controller_tag)
 		docking_controller = locate(docking_controller_tag)
 		if(!istype(docking_controller))
 			warning("Shuttle with docking tag [docking_controller_tag] could not find it's controller!")
+*/
 
 /datum/shuttle/proc/short_jump(var/origin,var/destination)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -79,7 +83,8 @@
 		move(interim, destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/dock()
+/*
+/datum/shuttle/proc/dock() //TODO move this up to autodock
 	if (!docking_controller)
 		return
 
@@ -101,6 +106,7 @@
 	if (!docking_controller || !current_dock_target())
 		return 1	//shuttles without docking controllers or at locations without docking ports act like old-style shuttles
 	return 0
+*/
 
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. move() must absolutely not, under any circumstances, fail to move the shuttle.
@@ -116,11 +122,11 @@
 
 		return
 
+	//TODO
+	/*
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
 
-	//TODO
-	/*
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
 

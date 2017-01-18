@@ -1,3 +1,4 @@
+/*
 /datum/unit_test/shuttle
 	name = "SHUTTLE template"
 	async = 0
@@ -25,8 +26,8 @@
 	for(var/shuttle_name in shuttle_controller.shuttles)
 		var/datum/shuttle/shuttle = shuttle_controller.shuttles[shuttle_name]
 		var/failed = FALSE
-		if(istype(shuttle, /datum/shuttle/ferry))
-			var/datum/shuttle/ferry/f = shuttle
+		if(istype(shuttle, /datum/shuttle/autodock/ferry))
+			var/datum/shuttle/autodock/ferry/f = shuttle
 			if(!f.shuttle_area || !f.shuttle_area.x)
 				log_bad("[f.name]: Invalid shuttle area.")
 
@@ -91,8 +92,8 @@
 	var/list/shuttle_areas = list()
 	for(var/shuttle_name in shuttle_controller.shuttles)
 		var/datum/shuttle/shuttle = shuttle_controller.shuttles[shuttle_name]
-		if(istype(shuttle, /datum/shuttle/ferry))
-			var/datum/shuttle/ferry/f = shuttle
+		if(istype(shuttle, /datum/shuttle/autodock/ferry))
+			var/datum/shuttle/autodock/ferry/f = shuttle
 			group_by(shuttle_areas, f.shuttle_area.type, SHUTTLE_NAME_AID(f))
 			//TODO sector_shuttles
 		else if(istype(shuttle, /datum/shuttle/multi_shuttle))
@@ -124,3 +125,4 @@
 
 	log_bad("[shuttle]: [main_area.type] had a size of [main_size] but [checked_area.type] had a size of [checked_size].")
 	return TRUE
+*/

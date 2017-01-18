@@ -4,7 +4,7 @@
 
 /obj/machinery/computer/shuttle_control/explore/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
-	var/datum/shuttle/ferry/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		to_chat(usr,"<span class='warning'>Unable to establish link with the shuttle.</span>")
 		return
@@ -29,14 +29,16 @@
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 
+	var/datum/computer/file/embedded_program/docking/docking_controller = shuttle.get_docking_controller()
+
 	data = list(
 		"destination_name" = shuttle.get_destination_name(),
 		"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
-		"has_docking" = shuttle.docking_controller? 1 : 0,
-		"docking_status" = shuttle.docking_controller? shuttle.docking_controller.get_docking_status() : null,
-		"docking_override" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
+		"has_docking" = docking_controller? 1 : 0,
+		"docking_status" = docking_controller? docking_controller.get_docking_status() : null,
+		"docking_override" = docking_controller? docking_controller.override_enabled : null,
 		"can_launch" = shuttle.can_go() && shuttle.can_launch(),
 		"can_cancel" = shuttle.can_go() && shuttle.can_cancel(),
 		"can_force" = shuttle.can_go() && shuttle.can_force(),
@@ -57,7 +59,7 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/datum/shuttle/ferry/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
 

@@ -20,7 +20,7 @@
 	. = ..()
 	// Arm the escape pods.
 	if (emergency_evacuation)
-		for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
 			if (pod.arming_controller)
 				pod.arming_controller.arm()
 
@@ -30,7 +30,7 @@
 
 	// Launch the pods!
 	if (emergency_evacuation)
-		for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
 			if (!pod.arming_controller || pod.arming_controller.armed)
 				pod.move_time = (evac_transit_delay/10)
 				pod.launch(src)

@@ -10,8 +10,8 @@
 	name = "exploration shuttle console"
 	shuttle_tag = "Exploration"
 
-/datum/shuttle/ferry/overmap/exploration
+/datum/shuttle/autodock/overmap/exploration
 	name = "Exploration"
 	shuttle_area = /area/ship/scrap/shuttle/outgoing
-	landmark_station = "nav_outgoing"
-	transit_direction = NORTH
+	current_landmark = "nav_outgoing"
+	//transit_direction = NORTH

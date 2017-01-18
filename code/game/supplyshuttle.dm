@@ -143,7 +143,7 @@ var/list/point_source_descriptions = list(
 	var/list/master_supply_list = list()
 	//shuttle movement
 	var/movetime = 1200
-	var/datum/shuttle/ferry/supply/shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle
 
 	var/obj/machinery/computer/supply/primaryterminal //terminal hardcopy forms will be printed to.
 

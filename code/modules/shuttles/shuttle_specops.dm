@@ -8,14 +8,20 @@
 	return 1
 
 //for shuttles that may use a different docking port at each location
-/datum/shuttle/ferry/multidock
+/datum/shuttle/autodock/ferry/multidock/
 	var/docking_controller_tag_station
 	var/docking_controller_tag_offsite
-	var/datum/computer/file/embedded_program/docking/docking_controller_station
-	var/datum/computer/file/embedded_program/docking/docking_controller_offsite
-	category = /datum/shuttle/ferry/multidock
+	category = /datum/shuttle/autodock/ferry/multidock
 
-/datum/shuttle/ferry/multidock/init_docking_controllers()
+/datum/shuttle/autodock/ferry/multidock/get_docking_controller()
+	if(location)
+		. = locate(docking_controller_tag_offsite)
+	else
+		. = locate(docking_controller_tag_station)
+	docking_controller = . //Temporary
+
+/*
+/datum/shuttle/autodock/ferry/multidock/init_docking_controllers()
 	if(docking_controller_tag_station)
 		docking_controller_station = locate(docking_controller_tag_station)
 		if(!istype(docking_controller_station))
@@ -28,15 +34,9 @@
 		docking_controller = docking_controller_station
 	else
 		docking_controller = docking_controller_offsite
+*/
 
-/datum/shuttle/ferry/multidock/move(var/area/origin,var/area/destination)
-	..(origin, destination)
-	if (!location)
-		docking_controller = docking_controller_station
-	else
-		docking_controller = docking_controller_offsite
-
-/datum/shuttle/ferry/multidock/specops
+/datum/shuttle/autodock/ferry/multidock/specops
 	var/specops_return_delay = 6000		//After moving, the amount of time that must pass before the shuttle may move again
 	var/specops_countdown_time = 600	//Length of the countdown when moving the shuttle
 
@@ -44,19 +44,19 @@
 	var/reset_time = 0	//the world.time at which the shuttle will be ready to move again.
 	var/launch_prep = 0
 	var/cancel_countdown = 0
-	category = /datum/shuttle/ferry/multidock/specops
+	category = /datum/shuttle/autodock/ferry/multidock/specops
 
-/datum/shuttle/ferry/multidock/specops/New()
+/datum/shuttle/autodock/ferry/multidock/specops/New()
 	..()
 	announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
 	announcer.config(list("Response Team" = 0))
 
-/datum/shuttle/ferry/multidock/specops/proc/radio_announce(var/message)
+/datum/shuttle/autodock/ferry/multidock/specops/proc/radio_announce(var/message)
 	if(announcer)
 		announcer.autosay(message, "A.L.I.C.E.", "Response Team")
 
 
-/datum/shuttle/ferry/multidock/specops/launch(var/user)
+/datum/shuttle/autodock/ferry/multidock/specops/launch(var/user)
 	if (!can_launch())
 		return
 
@@ -88,7 +88,7 @@
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
 	..(user)
 
-/datum/shuttle/ferry/multidock/specops/move(var/area/origin,var/area/destination)
+/datum/shuttle/autodock/ferry/multidock/specops/move(var/area/origin,var/area/destination)
 	..(origin, destination)
 
 	spawn(20)
@@ -105,7 +105,7 @@
 				var/obj/machinery/light/small/readylight/light = locate() in T
 				if(light) light.set_state(1)
 
-/datum/shuttle/ferry/multidock/specops/cancel_launch()
+/datum/shuttle/autodock/ferry/multidock/specops/cancel_launch()
 	if (!can_cancel())
 		return
 
@@ -118,21 +118,21 @@
 
 
 
-/datum/shuttle/ferry/multidock/specops/can_launch()
+/datum/shuttle/autodock/ferry/multidock/specops/can_launch()
 	if(launch_prep)
 		return 0
 	return ..()
 
 //should be fine to allow forcing. process_state only becomes WAIT_LAUNCH after the countdown is over.
-///datum/shuttle/ferry/multidock/specops/can_force()
+///datum/shuttle/autodock/ferry/multidock/specops/can_force()
 //	return 0
 
-/datum/shuttle/ferry/multidock/specops/can_cancel()
+/datum/shuttle/autodock/ferry/multidock/specops/can_cancel()
 	if(launch_prep)
 		return 1
 	return ..()
 
-/datum/shuttle/ferry/multidock/specops/proc/sleep_until_launch()
+/datum/shuttle/autodock/ferry/multidock/specops/proc/sleep_until_launch()
 	var/message_tracker[] = list(0,1,2,3,5,10,30,45)//Create a a list with potential time values.
 
 	var/launch_time = world.time + specops_countdown_time

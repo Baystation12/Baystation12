@@ -8,7 +8,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 /datum/shuttle_controller/proc/process()
 	//process ferry shuttles
-	for (var/datum/shuttle/ferry/shuttle in process_shuttles)
+	for (var/datum/shuttle/autodock/shuttle in process_shuttles)
 		if (shuttle.process_state)
 			shuttle.process()
 
@@ -19,8 +19,10 @@ var/global/datum/shuttle_controller/shuttle_controller
 		if(initial(shuttle.category) == shuttle_type)
 			continue
 		shuttle = new shuttle()
-		shuttle.init_docking_controllers()
-		shuttle.dock() //makes all shuttles docked to something at round start go into the docked state
+
+		//TODO refactor these out
+		//shuttle.init_docking_controllers()
+		//shuttle.dock() //makes all shuttles docked to something at round start go into the docked state
 
 	for(var/obj/machinery/embedded_controller/C in machines)
 		if(istype(C.program, /datum/computer/file/embedded_program/docking))
