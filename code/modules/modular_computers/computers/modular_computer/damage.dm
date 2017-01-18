@@ -14,7 +14,6 @@
 		H.forceMove(newloc)
 		if(prob(25))
 			H.take_damage(rand(10,30))
-	relay_qdel()
 	qdel()
 
 /obj/item/modular_computer/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)

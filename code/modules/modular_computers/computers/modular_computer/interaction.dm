@@ -150,7 +150,6 @@
 			return
 		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
 		src.visible_message("\The [src] has been disassembled by [user].")
-		relay_qdel()
 		qdel(src)
 		return
 	if(istype(W, /obj/item/weapon/weldingtool))

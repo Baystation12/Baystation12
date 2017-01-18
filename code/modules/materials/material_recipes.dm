@@ -79,10 +79,13 @@
 	recipes += new/datum/stack_recipe("apc frame", /obj/item/frame/apc, 2)
 	recipes += new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2)
 	recipes += new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2)
-	recipes += new/datum/stack_recipe("modular console frame", /obj/item/modular_computer/console, 20)
-	recipes += new/datum/stack_recipe("modular laptop frame", /obj/item/modular_computer/laptop, 10)
-	recipes += new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5)
 
+	recipes += new/datum/stack_recipe_list("modular computer frames", list( \
+		new/datum/stack_recipe("modular console frame", /obj/item/modular_computer/console, 20),\
+		new/datum/stack_recipe("modular telescreen frame", /obj/item/modular_computer/telescreen, 10),\
+		new/datum/stack_recipe("modular laptop frame", /obj/item/modular_computer/laptop, 10),\
+		new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5),\
+	))
 /material/plasteel/generate_recipes()
 	..()
 	recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
