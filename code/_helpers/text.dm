@@ -138,7 +138,6 @@
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
-
 //Old variant. Haven't dared to replace in some places.
 /proc/sanitize_old(var/t,var/list/repl_chars = list("ÿ"="___255_"))
 	return replacetext(html_encode(replace_characters(t,repl_chars)), "___255_", "&#255;")

@@ -1309,7 +1309,7 @@
 "zi" = (/obj/structure/table/reinforced,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
 "zj" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "specops_centcom_dock_door"; locked = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
 "zk" = (/obj/structure/sign/warning/nosmoking_2,/turf/unsimulated/wall,/area/centcom/control)
-"zl" = (/obj/structure/table/rack,/obj/item/device/lightreplacer,/obj/item/device/lightreplacer,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
+"zl" = (/obj/structure/table/rack,/obj/item/device/lightreplacer,/obj/item/device/lightreplacer,/obj/item/weapon/rig/ert/janitor,/obj/item/weapon/rig/ert/janitor,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
 "zm" = (/obj/effect/floor_decal/corner/red{dir = 9},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)
 "zn" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/belt/medical,/obj/item/weapon/storage/belt/medical,/obj/item/weapon/storage/belt/medical,/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,/obj/item/weapon/reagent_containers/hypospray,/obj/item/weapon/reagent_containers/hypospray,/obj/item/weapon/reagent_containers/hypospray,/obj/item/weapon/storage/box/syringes,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
 "zo" = (/obj/effect/floor_decal/corner/green{dir = 1},/obj/effect/floor_decal/industrial/warning/corner{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)

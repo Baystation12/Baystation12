@@ -90,6 +90,14 @@
 	new_grenade.activate(H)
 	new_grenade.throw_at(target,fire_force,fire_distance)
 
+/obj/item/rig_module/grenade_launcher/cleaner
+	name = "mounted cleaning grenade launcher"
+	desc = "A specialty shoulder-mounted micro-explosive dispenser."
+
+	charges = list(
+		list("cleaning grenade",   "cleaning grenade",   /obj/item/weapon/grenade/chem_grenade/cleaner,  9),
+		)
+
 /obj/item/rig_module/mounted
 
 	name = "mounted laser cannon"
@@ -248,3 +256,13 @@
 			H.put_in_hands(new_weapon)
 
 	return 1
+
+/obj/item/rig_module/fabricator/wf_sign
+	name = "wet floor sign fabricator"
+	use_power_cost = 50 KILOWATTS
+	engage_string = "Fabricate Sign"
+
+	interface_name = "work saftey launcher"
+	interface_desc = "An integrated microfactory that produces wet floor signs from thin air and electricity."
+
+	fabrication_type = /obj/item/weapon/caution
