@@ -3,8 +3,8 @@ var/list/sector_shuttles = list()
 /datum/shuttle/autodock/overmap
 	warmup_time = 10
 
-	var/obj/effect/shuttle_nav/current_landmark
-	var/obj/effect/shuttle_nav/destination_landmark
+	var/obj/effect/shuttle_landmark/current_landmark
+	var/obj/effect/shuttle_landmark/destination_landmark
 
 	category = /datum/shuttle/autodock/overmap
 	var/obj/effect/overmap/current_sector
@@ -57,7 +57,7 @@ var/list/sector_shuttles = list()
 	update_sector()
 	for (var/obj/effect/overmap/S in range(current_sector, range))
 		var/i = 1
-		for(var/obj/effect/shuttle_nav/LZ in S.landing_spots)
+		for(var/obj/effect/shuttle_landmark/LZ in S.landing_spots)
 			if(is_valid_landing(LZ))
 				res["([i++]) [S.name] - [LZ.name]"] = LZ
 	return res

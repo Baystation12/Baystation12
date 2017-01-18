@@ -40,7 +40,7 @@
 "N" = (/obj/structure/cable{tag = "icon-5-8"; icon_state = "5-8"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "O" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/obj/machinery/power/apc,/obj/structure/cable{d2 = 5; icon_state = "0-5"; tag = "icon-0-6"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "P" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
-"Q" = (/obj/effect/shuttle_nav{tag = "nav_pod"},/turf/space,/area/space)
+"Q" = (/obj/effect/shuttle_landmark{tag = "nav_pod"},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

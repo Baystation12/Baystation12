@@ -49,7 +49,7 @@
 
 	var/list/found_landing_spots = list()
 	for(var/nav_tag in landing_spots)
-		var/obj/effect/shuttle_nav/navpoint = locate(nav_tag)
+		var/obj/effect/shuttle_landmark/navpoint = locate(nav_tag)
 		if(!navpoint)
 			log_error("Overmap region \"[name]\" could not find one of it's landing spots: \"[nav_tag]\"")
 		else

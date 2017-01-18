@@ -4,8 +4,8 @@
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
 
-	var/obj/effect/shuttle_nav/landmark_station
-	var/obj/effect/shuttle_nav/landmark_offsite
+	var/obj/effect/shuttle_landmark/landmark_station
+	var/obj/effect/shuttle_landmark/landmark_offsite
 	var/dock_target_station
 	var/dock_target_offsite
 
@@ -34,11 +34,11 @@
 		return landmark_station
 	return landmark_offsite
 
-/datum/shuttle/autodock/ferry/short_jump(var/obj/effect/shuttle_nav/origin, var/obj/effect/shuttle_nav/destination)
+/datum/shuttle/autodock/ferry/short_jump(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination)
 	direction = !location
 	..()
 
-/datum/shuttle/autodock/ferry/long_jump(var/obj/effect/shuttle_nav/origin, var/obj/effect/shuttle_nav/destination, var/obj/effect/shuttle_nav/interim, var/travel_time)
+/datum/shuttle/autodock/ferry/long_jump(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
 	direction = !location
 	..()
 

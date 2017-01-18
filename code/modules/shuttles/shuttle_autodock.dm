@@ -6,7 +6,7 @@
 	var/last_dock_attempt_time = 0
 	var/current_dock_target
 
-	var/obj/effect/shuttle_nav/landmark_transition
+	var/obj/effect/shuttle_landmark/landmark_transition
 	var/move_time = 0		//the time spent in the transition area
 
 	var/area/shuttle_area //TODO move to shuttle
@@ -27,7 +27,7 @@
 	//TODO initial dock
 
 //Temporary untill all shuttles are converted
-/datum/shuttle/autodock/do_move(var/obj/effect/shuttle_nav/origin, var/obj/effect/shuttle_nav/destination)
+/datum/shuttle/autodock/do_move(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination)
 	var/list/shuttle_turfs = get_area_turfs("\ref[shuttle_area]")
 	translate_turfs(origin, destination, shuttle_turfs)
 
