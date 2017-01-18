@@ -20,7 +20,7 @@
 /datum/shuttle/autodock/overmap/abandoned_pod
 	name = "Exploration Pod"
 	shuttle_area = /area/sector/shuttle/outgoing2
-	current_landmark = "nav_abandoned_pod"
+	current_location = "nav_abandoned_pod"
 	//transit_direction = NORTH
 
 /area/sector/shuttle/

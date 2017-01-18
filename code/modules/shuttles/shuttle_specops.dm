@@ -88,17 +88,17 @@
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
 	..(user)
 
-/datum/shuttle/autodock/ferry/multidock/specops/move(var/area/origin,var/area/destination)
-	..(origin, destination)
+/datum/shuttle/autodock/ferry/multidock/specops/move(var/atom/destination)
+	..(destination)
 
-	spawn(20)
+	spawn(2 SECONDS)
 		if (!location)	//just arrived home
-			for(var/turf/T in get_area_turfs(destination))
+			for(var/turf/T in get_area_turfs(shuttle_area))
 				var/mob/M = locate(/mob) in T
 				to_chat(M, "<span class='danger'>You have arrived at [using_map.boss_name]. Operation has ended!</span>")
 		else	//just left for the station
 			launch_mauraders()
-			for(var/turf/T in get_area_turfs(destination))
+			for(var/turf/T in get_area_turfs(shuttle_area))
 				var/mob/M = locate(/mob) in T
 				to_chat(M, "<span class='danger'>You have arrived at [using_map.station_name]. Commence operation!</span>")
 

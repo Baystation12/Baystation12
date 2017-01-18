@@ -24,16 +24,16 @@
 		var/obj/machinery/computer/shuttle_control/emergency/C = in_use
 		C.reset_authorization()
 
-/datum/shuttle/autodock/ferry/emergency/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
-	..(departing, destination, interim, emergency_controller.get_long_jump_time(), direction)
+/datum/shuttle/autodock/ferry/emergency/long_jump(var/destination, var/interim, var/travel_time, var/direction)
+	..(destination, interim, emergency_controller.get_long_jump_time(), direction)
 
-/datum/shuttle/autodock/ferry/emergency/move(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination)
-	if(origin == landmark_station)
+/datum/shuttle/autodock/ferry/emergency/move(var/atom/destination)
+	if(current_location == landmark_station)
 		emergency_controller.shuttle_leaving() // This is a hell of a line. v
 		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? using_map.emergency_shuttle_leaving_dock : using_map.shuttle_leaving_dock), "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
 	else if(destination == landmark_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
-	..(origin, destination)
+	..(destination)
 
 /datum/shuttle/autodock/ferry/emergency/can_launch(var/user)
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))

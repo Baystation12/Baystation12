@@ -6,19 +6,16 @@
 	var/last_dock_attempt_time = 0
 	var/current_dock_target
 
+	var/datum/shuttle_destination/current_destination
+	var/datum/computer/file/embedded_program/docking/active_docking_controller
+
 	var/obj/effect/shuttle_landmark/landmark_transition
 	var/move_time = 0		//the time spent in the transition area
-
-	var/area/shuttle_area //TODO move to shuttle
 
 	category = /datum/shuttle/autodock
 
 /datum/shuttle/autodock/New(_name)
 	..(_name)
-
-	shuttle_area = locate(shuttle_area)
-	if(!istype(shuttle_area))
-		CRASH("Shuttle \"[name]\" has no area.") //TODO move to shuttle
 
 	//Optional
 	if(landmark_transition)
@@ -26,18 +23,22 @@
 
 	//TODO initial dock
 
-//Temporary untill all shuttles are converted
-/datum/shuttle/autodock/do_move(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination)
-	var/list/shuttle_turfs = get_area_turfs("\ref[shuttle_area]")
-	translate_turfs(origin, destination, shuttle_turfs)
+/datum/shuttle/autodock/Destroy()
+	current_destination = null
+	active_docking_controller = null
+	landmark_transition = null
+
+	return ..()
+
+/datum/shuttle/autodock/move(var/atom/destination)
+	if(active_docking_controller)
+		active_docking_controller.force_undock() //bye
+	..()
 
 /*
 	Docking stuff
 */
 //TODO refactor out the need for these, make launch(), force_launch() set current_destination, update current_location in move()
-/datum/shuttle/autodock/proc/get_origin()
-	return null //To be implemented by subtypes
-
 /datum/shuttle/autodock/proc/get_destination()
 	return null //To be implemented by subtypes
 
@@ -100,12 +101,11 @@
 				arrived()
 
 /datum/shuttle/autodock/proc/process_launch()
-	var/origin = get_origin()
 	var/destination = get_destination()
 	if (move_time && landmark_transition)
-		long_jump(origin, destination, landmark_transition, move_time)
+		long_jump(destination, landmark_transition, move_time)
 	else
-		short_jump(origin, destination)
+		short_jump(destination)
 
 /*
 	Guards

@@ -3,7 +3,6 @@ var/list/sector_shuttles = list()
 /datum/shuttle/autodock/overmap
 	warmup_time = 10
 
-	var/obj/effect/shuttle_landmark/current_landmark
 	var/obj/effect/shuttle_landmark/destination_landmark
 
 	category = /datum/shuttle/autodock/overmap
@@ -14,21 +13,17 @@ var/list/sector_shuttles = list()
 /datum/shuttle/autodock/overmap/New(_name)
 	..(_name)
 
-	current_landmark = locate(current_landmark)
-	if(!istype(current_landmark))
-		CRASH("Shuttle \"[name]\" has no home landmark.")
-
 	update_sector()
 	sector_shuttles += src
 
-/datum/shuttle/autodock/overmap/move(var/origin, var/destination)
+/datum/shuttle/autodock/overmap/move(var/atom/destination)
 	..()
 	update_sector()
 
-/datum/shuttle/autodock/overmap/proc/is_valid_landing(obj/effect/shuttle_nav/A)
+/datum/shuttle/autodock/overmap/proc/is_valid_landing(obj/effect/shuttle_landmark/A)
 	if(!istype(A))
 		return 0
-	if(A == current_landmark)
+	if(A == current_location)
 		return 0 //already there
 	if(!A.free())
 		return 0
@@ -46,7 +41,7 @@ var/list/sector_shuttles = list()
 /datum/shuttle/autodock/overmap/proc/update_sector()
 	current_sector = map_sectors["[shuttle_area.z]"]
 
-/datum/shuttle/autodock/overmap/proc/set_destination_landmark(obj/effect/shuttle_nav/A)
+/datum/shuttle/autodock/overmap/proc/set_destination_landmark(obj/effect/shuttle_landmark/A)
 	if(!A) return
 
 	destination_landmark = A
@@ -65,13 +60,10 @@ var/list/sector_shuttles = list()
 //TODO nav landmark names
 /datum/shuttle/autodock/overmap/proc/get_location_name()
 	update_sector()
-	return "[current_sector] - [current_landmark.name]"
+	return "[current_sector] - [current_location.name]"
 
 /datum/shuttle/autodock/overmap/proc/get_destination_name()
 	return destination_sector ? "[destination_sector] - [destination_landmark.name]": "None"
-
-/datum/shuttle/autodock/overmap/get_origin()
-	return current_landmark
 
 /datum/shuttle/autodock/overmap/get_destination()
 	return destination_landmark

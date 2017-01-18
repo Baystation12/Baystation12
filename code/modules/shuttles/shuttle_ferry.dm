@@ -16,12 +16,12 @@
 	var/datum/computer/file/embedded_program/docking/docking_controller
 
 /datum/shuttle/autodock/ferry/New(_name)
-	..(_name)
-
 	if(landmark_station)
 		landmark_station = locate(landmark_station)
 	if(landmark_offsite)
 		landmark_offsite = locate(landmark_offsite)
+
+	..(_name, get_location_landmark(location))
 
 	get_docking_controller()
 
@@ -34,23 +34,20 @@
 		return landmark_station
 	return landmark_offsite
 
-/datum/shuttle/autodock/ferry/short_jump(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination)
+/datum/shuttle/autodock/ferry/short_jump(var/destination)
 	direction = !location
 	..()
 
-/datum/shuttle/autodock/ferry/long_jump(var/obj/effect/shuttle_landmark/origin, var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
+/datum/shuttle/autodock/ferry/long_jump(var/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
 	direction = !location
 	..()
 
-/datum/shuttle/autodock/ferry/move(var/area/origin, var/area/destination)
+/datum/shuttle/autodock/ferry/move(var/atom/destination)
 	..()
 
 	if (destination == landmark_station) location = 0
 	if (destination == landmark_offsite) location = 1
 	//if (destination == landmark_transition) //do nothing, retain the previous location until the long_jump completes
-
-/datum/shuttle/autodock/ferry/get_origin()
-	return get_location_landmark(location)
 
 /datum/shuttle/autodock/ferry/get_destination()
 	return get_location_landmark(!location) //go to where we are not

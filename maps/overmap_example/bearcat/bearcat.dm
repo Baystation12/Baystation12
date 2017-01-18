@@ -13,5 +13,5 @@
 /datum/shuttle/autodock/overmap/exploration
 	name = "Exploration"
 	shuttle_area = /area/ship/scrap/shuttle/outgoing
-	current_landmark = "nav_outgoing"
+	current_location = "nav_outgoing"
 	//transit_direction = NORTH

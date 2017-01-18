@@ -5,17 +5,12 @@
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
 	category = /datum/shuttle/autodock/ferry/supply
 
-/datum/shuttle/autodock/ferry/supply/short_jump(var/area/origin,var/area/destination)
+/datum/shuttle/autodock/ferry/supply/short_jump(var/area/destination)
 	if(moving_status != SHUTTLE_IDLE)
 		return
 
 	if(isnull(location))
 		return
-
-	if(!destination)
-		destination = get_location_landmark(!location)
-	if(!origin)
-		origin = get_location_landmark(location)
 
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
@@ -36,8 +31,8 @@
 		moving_status = SHUTTLE_INTRANSIT
 
 		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
-		if (origin != away_landmark)
-			move(origin, away_landmark)
+		if (current_location != away_landmark)
+			move(away_landmark)
 
 		//wait ETA here.
 		arrive_time = world.time + supply_controller.movetime
@@ -49,7 +44,7 @@
 			if (prob(late_chance))
 				sleep(rand(0,max_late_time))
 
-			move(away_landmark, destination)
+			move(destination)
 
 		moving_status = SHUTTLE_IDLE
 

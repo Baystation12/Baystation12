@@ -8,10 +8,8 @@
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
-	//TODO move docking stuff up to autodock
-
-	//var/docking_controller_tag	//tag of the controller used to coordinate docking
-	//var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
+	var/area/shuttle_area
+	var/atom/current_location
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = SHUTTLE_FLAGS_PROCESS
@@ -19,12 +17,25 @@
 
 	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
 
-/datum/shuttle/New(_name)
+/datum/shuttle/New(_name, var/atom/initial_location)
 	..()
 	if(_name)
 		src.name = _name
+
 	if(src.name in shuttle_controller.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
+
+	shuttle_area = locate(shuttle_area)
+	if(!istype(shuttle_area))
+		CRASH("Shuttle \"[name]\" has no area.")
+
+	if(initial_location)
+		current_location = initial_location //so that subtypes may supply a current_location
+	else
+		current_location = locate(current_location)
+		if(!istype(current_location))
+			CRASH("Shuttle \"[name]\" has no home landmark.")
+
 	shuttle_controller.shuttles[src.name] = src
 	if(flags & SHUTTLE_FLAGS_PROCESS)
 		shuttle_controller.process_shuttles += src
@@ -34,21 +45,16 @@
 		supply_controller.shuttle = src
 
 /datum/shuttle/Destroy()
+	current_location = null
+
 	shuttle_controller.shuttles -= src.name
 	shuttle_controller.process_shuttles -= src
 	if(supply_controller.shuttle == src)
 		supply_controller.shuttle = null
+
 	. = ..()
 
-/*
-/datum/shuttle/proc/init_docking_controllers()
-	if(docking_controller_tag)
-		docking_controller = locate(docking_controller_tag)
-		if(!istype(docking_controller))
-			warning("Shuttle with docking tag [docking_controller_tag] could not find it's controller!")
-*/
-
-/datum/shuttle/proc/short_jump(var/origin,var/destination)
+/datum/shuttle/proc/short_jump(var/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
 	//it would be cool to play a sound here
@@ -58,10 +64,10 @@
 			return	//someone cancelled the launch
 
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
-		move(origin, destination)
+		move(destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/long_jump(var/departing, var/destination, var/interim, var/travel_time)
+/datum/shuttle/proc/long_jump(var/destination, var/interim, var/travel_time)
 //	log_debug("shuttle/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]")
 
 	if(moving_status != SHUTTLE_IDLE) return
@@ -74,13 +80,13 @@
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
-		move(departing, interim)
+		move(interim)
 
 
 		while (world.time < arrive_time)
 			sleep(5)
 
-		move(interim, destination)
+		move(destination)
 		moving_status = SHUTTLE_IDLE
 
 /*
@@ -111,22 +117,19 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. move() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump() or long_jump()
-/datum/shuttle/proc/move(var/origin, var/destination)
+/datum/shuttle/proc/move(var/atom/destination)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
 //	log_debug("destination: [destination]")
 
-	if(origin == destination)
+	if(current_location == destination)
 //		log_debug("cancelling move, shuttle will overlap.")
 
-		return
+		return //TODO more complete check for overlap
 
 	//TODO
 	/*
-	if (docking_controller && !docking_controller.undocked())
-		docking_controller.force_undock()
-
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
 
@@ -157,17 +160,17 @@
 				TA.ChangeTurf(ceiling_type, 1, 1)
 	*/
 
-	do_move(origin, destination)
+	var/list/shuttle_turfs = get_area_turfs("\ref[shuttle_area]")
+	translate_turfs(current_location, destination, shuttle_turfs)
+	current_location = destination
 
-	/*
 	// if there was a zlevel above our origin, erase our ceiling now we're gone
-	var/turf/some_origin_turf = locate() in origin
+	var/turf/some_origin_turf = shuttle_turfs[1]
 	if (HasAbove(some_origin_turf.z))
-		for (var/turf/TO in origin)
+		for (var/turf/TO in shuttle_turfs)
 			var/turf/TA = GetAbove(TO)
 			if (istype(TA, ceiling_type))
 				TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
-	*/
 
 	for(var/mob/M in destination)
 		if(M.client)
@@ -196,11 +199,6 @@
 	if(update_power)
 		makepowernets()
 	return
-
-//hopefully temporary
-/datum/shuttle/proc/do_move(area/origin, area/destination)
-	origin.move_contents_to(destination)
-
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
