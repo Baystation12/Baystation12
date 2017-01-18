@@ -385,7 +385,6 @@ BLIND     // can't see anything
 /obj/item/clothing/mask
 	name = "mask"
 	icon = 'icons/obj/clothing/masks.dmi'
-	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
@@ -400,9 +399,14 @@ BLIND     // can't see anything
 	var/down_body_parts_covered = 0
 	var/down_icon_state = 0
 	var/down_item_flags = 0
-	var/pull_mask = -1
+	var/pull_mask = 0
 	var/hanging = 0
 	blood_overlay_type = "maskblood"
+
+/obj/item/clothing/mask/New()
+	if(pull_mask)
+		action_button_name = "Adjust Mask"
+	..()
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -422,7 +426,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/mask/proc/adjust_mask(var/mob/user)
 	if(!user.incapacitated())
-		if(pull_mask == -1)
+		if(!pull_mask)
 			to_chat(usr, "<span class ='notice'>You cannot pull down your [src].</span>")
 			return
 		else
@@ -440,9 +444,11 @@ BLIND     // can't see anything
 				item_flags = initial(item_flags)
 				usr << "You pull the [src] up to cover your face."
 			update_clothing_icon()
+			user.update_action_buttons()
 
-/obj/item/clothing/mask/breath/attack_self(mob/user)
-	adjust_mask(user)
+/obj/item/clothing/mask/attack_self(mob/user)
+	if(pull_mask)
+		adjust_mask(user)
 
 /obj/item/clothing/mask/verb/toggle()
 	set category = "Object"
