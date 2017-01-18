@@ -28,3 +28,15 @@
 	desc = "A scarf of coarse fabric. Seems to have ear-holes."
 	icon_state = "zhan_scarf"
 	body_parts_covered = HEAD|FACE
+
+//Resomi clothing
+
+/obj/item/clothing/suit/storage/toggle/Resomicoat
+ 	name = "small coat"
+ 	desc = "A coat that seems too small to fit a human."
+ 	icon_state = "resomicoat"
+ 	item_state = "resomicoat"
+ 	icon_open = "resomicoat_open"
+ 	icon_closed = "resomicoat"
+ 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
+ 	species_restricted = list("Resomi")

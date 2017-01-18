@@ -22,7 +22,7 @@
 #################################
 
 # Your name.  
-author: Kelenius
+author: Ithalan
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -32,7 +32,5 @@ delete-after: True
 # SCREW THIS UP AND IT WON'T WORK.
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
-changes:
-  - bugfix: "Fixed issues where you were unable to turn the bots on and off when you should have been. Farmbot specifically."
-  - tweak: "Synthetics can always control all bot settings."
-  - tweak: "Synthetics and anyone who opens the bot's panel (screwdriver) can toggle bot safeties, giving it a 'temporal' emag effect that can be fixed in the same way. Emags break them permanently, but this is obvious when the panel is open."
+changes: 
+  - bugfix: "Fixed spawning of wrong version of the medical hardsuit in medical."
