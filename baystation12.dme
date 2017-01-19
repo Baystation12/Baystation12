@@ -1286,6 +1286,7 @@
 #include "code\modules\examine\descriptions\medical.dm"
 #include "code\modules\examine\descriptions\mobs.dm"
 #include "code\modules\examine\descriptions\paperwork.dm"
+#include "code\modules\examine\descriptions\smokeables.dm"
 #include "code\modules\examine\descriptions\stacks.dm"
 #include "code\modules\examine\descriptions\structures.dm"
 #include "code\modules\examine\descriptions\turfs.dm"
