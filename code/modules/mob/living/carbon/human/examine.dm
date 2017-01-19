@@ -254,7 +254,7 @@
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
 
 		if(!E)
-			wound_flavor_text["[organ_descriptor]"] = "<b>[T.He] [T.is] missing [T.his] [organ_descriptor].</b>\n"
+			wound_flavor_text[organ_descriptor] = "<b>[T.He] [T.is] missing [T.his] [organ_descriptor].</b>\n"
 			continue
 
 		wound_flavor_text["[E.name]"] = ""
@@ -274,7 +274,7 @@
 				wound_flavor_text["[hidden.name]"] = "[T.He] [T.has] blood soaking through [hidden]!<br>"
 		else
 			if(E.is_stump())
-				wound_flavor_text["[E.name]"] += "<b>[T.He] [T.has] a stump where [T.his] [E.name] should be.</b>\n"
+				wound_flavor_text[E.name] += "<b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b>\n"
 				if((E.wounds.len || E.open) && E.parent)
 					wound_flavor_text["[E.name]"] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
 			else
