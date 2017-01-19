@@ -29,6 +29,26 @@
 		if(istype(E)) E.internal_organs -= src
 	return ..()
 
+/obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+
+	if(!istype(target))
+		return 0
+
+	if(status & ORGAN_CUT_AWAY)
+		return 0 //organs don't work very well in the body when they aren't properly attached
+
+	// robotic organs emulate behavior of the equivalent flesh organ of the species
+	if(robotic >= ORGAN_ROBOT || !species)
+		species = target.species
+
+	..()
+
+	processing_objects -= src
+	target.internal_organs |= src
+	affected.internal_organs |= src
+	target.internal_organs_by_name[organ_tag] = src
+	return 1
+
 /obj/item/organ/internal/die()
 	..()
 	if((status & ORGAN_DEAD) && dead_icon)

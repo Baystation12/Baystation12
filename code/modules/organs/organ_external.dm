@@ -243,8 +243,7 @@
 
 
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
-	owner = target
-	forceMove(owner)
+	..()
 
 	if(istype(owner))
 		owner.organs_by_name[organ_tag] = src
