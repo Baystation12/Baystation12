@@ -374,3 +374,6 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/can_feel_pain()
 	return (robotic < ORGAN_ROBOT && (!species || !(species.flags & NO_PAIN)))
+
+/obj/item/organ/proc/is_usable()
+	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
