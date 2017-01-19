@@ -6,10 +6,17 @@
 /obj/item/organ/internal
 	var/dead_icon // Icon to use when the organ has died.
 
-/obj/item/organ/internal/die()
+/obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	..()
-	if((status & ORGAN_DEAD) && dead_icon)
-		icon_state = dead_icon
+	if(istype(holder))
+		holder.internal_organs |= src
+
+		var/mob/living/carbon/human/H = holder
+		if(istype(H))
+			var/obj/item/organ/external/E = H.get_organ(parent_organ)
+			if(!E)
+				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
+			E.internal_organs |= src
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
@@ -21,6 +28,11 @@
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
 		if(istype(E)) E.internal_organs -= src
 	return ..()
+
+/obj/item/organ/internal/die()
+	..()
+	if((status & ORGAN_DEAD) && dead_icon)
+		icon_state = dead_icon
 
 /obj/item/organ/internal/remove_rejuv()
 	if(owner)
