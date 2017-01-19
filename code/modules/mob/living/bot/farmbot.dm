@@ -33,6 +33,10 @@
 	name = "Old Ben"
 	on = 0
 
+/mob/living/bot/farmbot/premade/xenobio
+	name = "Linnaeus"
+
+/mob/living/bot/farmbot/attack_hand(var/mob/user as mob)
 /mob/living/bot/farmbot/GetInteractTitle()
 	. = "<head><title>Farmbot controls</title></head>"
 	. += "<b>Automatic Hyrdoponic Assisting Unit v1.0</b>"
