@@ -1,11 +1,11 @@
 /obj/item/weapon/storage/fancy/cigarettes
-	description_fluff = "The Trans-Stellar Duty-Free cigarette is an unbranded cigarette produced for the purpose of selling in areas with with high volumes of civilian and tourist traffic. They are about as average as cigarettes get, and have been regularly rated by critics as "tasteless". However, due to their low price, nonexistent tariffs, and omnipresent marketing, they are still the most well-known and widespread cigarettes in human space."
+	description_fluff = "The Trans-Stellar Duty-Free cigarette is an unbranded cigarette produced for the purpose of selling in areas with with high volumes of civilian and tourist traffic. They are about as average as cigarettes get, and have been regularly rated by critics as 'tasteless'. However, due to their low price, nonexistent tariffs, and omnipresent marketing, they are still the most well-known and widespread cigarettes in human space."
 
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco
-	description_fluff = "DromedaryCo is one of the oldest companies that produces cigarettes. Being a company that has changed hands and names several times through the years, their cigarettes are now very different from the original, and old-timers tend to complain about the quality of their current product. While their profits have dwindled in the last decade due to media reports of of "unethical" marketing schemes, they still remain on the forefront of the smokeable industry."
+	description_fluff = "DromedaryCo is one of the oldest companies that produces cigarettes. Being a company that has changed hands and names several times through the years, their cigarettes are now very different from the original, and old-timers tend to complain about the quality of their current product. While their profits have dwindled in the last decade due to media reports of of 'unethical' marketing schemes, they still remain on the forefront of the smokeable industry."
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
-	description_fluff = "AcmeCo, better known for their signature high-tar cigarettes, recently released a Killthroats as a "Novelty Cigarette," which pops loudly upon being lit. AcmeCo has declined to comment on the additional health risks of this new product."
+	description_fluff = "AcmeCo, better known for their signature high-tar cigarettes, recently released a Killthroats as a 'Novelty Cigarette,' which pops loudly upon being lit. AcmeCo has declined to comment on the additional health risks of this new product."
 
 /obj/item/weapon/storage/fancy/cigarettes/luckystars
 	description_fluff = "Lucky Stars were created on Venus by a researcher seeking to make a high-quality cigarette from pod-based tobacco plants. While some purists prefer tobacco grown on the homeworld, the researcher's company continues to make a heathy profit off of their mellow pod blend."
