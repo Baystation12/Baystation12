@@ -1,8 +1,47 @@
 /************
 * SEV Torch *
 ************/
+/var/const/access_hangar = 73
+/datum/access/hangar
+	id = access_hangar
+	desc = "Hangar Deck"
+	region = ACCESS_REGION_GENERAL
 
-// These need to be here so lockers work
+/var/const/access_petrov = 74
+/datum/access/petrov
+	id = access_petrov
+	desc = "Petrov"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_petrov_helm = 75
+/datum/access/petrov_helm
+	id = access_petrov_helm
+	desc = "Petrov Helm"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_guppy_helm = 76
+/datum/access/guppy_helm
+	id = access_guppy_helm
+	desc = "General Utility Pod Helm"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_calypso_helm = 77
+/datum/access/calypso_helm
+	id = access_calypso_helm
+	desc = "Calypso Helm"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_aquila = 78
+/datum/access/aquila
+	id = access_aquila
+	desc = "Aquila"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_aquila_helm = 79
+/datum/access/aquila_helm
+	id = access_aquila_helm
+	desc = "Aquila Helm"
+	region = ACCESS_REGION_GENERAL
 
 /var/const/access_solgov_crew = 80
 /datum/access/solgov_crew

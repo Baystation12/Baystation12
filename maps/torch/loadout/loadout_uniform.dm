@@ -9,7 +9,7 @@
 	display_name = "short jumpskirt"
 	path = /obj/item/clothing/under/shortjumpskirt
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = FORMAL_ROLES
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
@@ -65,7 +65,7 @@
 /datum/gear/uniform/scrubs
 	display_name = "medical scrubs"
 	path = /obj/item/clothing/under/rank/medical/black
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/uniform/scrubs/New()
 	..()
@@ -111,7 +111,7 @@
 /datum/gear/uniform/pants
 	display_name = "pants selection"
 	path = /obj/item/clothing/under/pants/white
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/uniform/pants/New()
 	..()
@@ -124,7 +124,7 @@
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans
-	allowed_roles = list("Passenger", "Bartender", "Supply Assistant", "Merchant")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/shorts/New()
 	..()
@@ -143,7 +143,7 @@
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
-	allowed_roles = list("Passenger", "Bartender", "Merchant")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
@@ -168,14 +168,14 @@
 /datum/gear/uniform/sterile
 	display_name = "sterile jumpsuit"
 	path = /obj/item/clothing/under/sterile
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/uniform/hazard
 	display_name = "hazard jumpsuit"
 	path = /obj/item/clothing/under/hazard
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
+	allowed_roles = ENGINEERING_ROLES
 
 /datum/gear/uniform/utility
 	display_name = "Contractor Utility Uniform"
 	path = /obj/item/clothing/under/utility
-	allowed_roles = list("Maintenance Assistant", "Roboticist", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender")
+	allowed_roles = CONTRACTOR_ROLES

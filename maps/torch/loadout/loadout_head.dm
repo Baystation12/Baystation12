@@ -11,7 +11,7 @@
 	display_name = "SolGov beret selection"
 	description = "A beret denoting service in an organization within SolGov."
 	path = /obj/item/clothing/head/beret/sol
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/head/solberet/New()
 	..()
@@ -48,7 +48,7 @@
 
 /datum/gear/head/informalhat
 	path = /obj/item/clothing/head/cowboy_hat
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/head/welding
 	allowed_roles = list("Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician",
@@ -57,4 +57,4 @@
 /datum/gear/head/solhat
 	display_name = "Sol Central Government Cap"
 	path = /obj/item/clothing/head/soft/sol
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = SOLGOV_ROLES

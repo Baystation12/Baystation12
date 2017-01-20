@@ -78,3 +78,12 @@
 	icon_opened = "nanotopen"
 	icon_broken = "nanotbroken"
 	icon_off = "nanotoff"
+
+/obj/structure/closet/secure_closet/guncabinet/sidearm
+	name = "sidearm cabinet"
+	req_access = list()
+	req_one_access = list(access_armory,access_heads)
+
+	will_contain = list(
+		/obj/item/weapon/gun/energy/gun = 4
+	)
