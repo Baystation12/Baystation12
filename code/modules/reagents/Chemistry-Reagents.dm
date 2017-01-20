@@ -126,7 +126,8 @@
 	if(dose > min_dose && prob((dose - min_dose) * effect_prob)) //min_dose allows the onset of the side-effect to be delayed
 		if(M.eye_blurry < max_blurry)
 			M.eye_blurry += 5
-	M.make_dizzy(dizzy_scale * 2 * removed)
+	if(M.dizziness < 300)
+		M.make_dizzy(dizzy_scale * 2 * removed)
 	M.AdjustSlowed(slow_scale * removed)
 
 /datum/reagent/proc/apply_weakened_effect(var/mob/living/carbon/M, var/removed, var/min_dose, var/effect_prob, var/max_weakened, var/weakened_scale, var/halloss_scale)
