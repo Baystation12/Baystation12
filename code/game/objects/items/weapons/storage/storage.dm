@@ -172,7 +172,6 @@
 	if(istype(W.loc, /mob))
 		var/mob/M = W.loc
 		M.remove_from_mob(W)
-		M.update_icons()
 	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)

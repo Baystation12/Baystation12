@@ -75,7 +75,7 @@
 					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
 					break
 			if(!hadPlants)
-				to_chat(user, "<span class='notice'>\The [P] has no plants inside.</span>")
+				to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
 			else if(i < 10)
 				to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
 
@@ -134,13 +134,13 @@
 				else
 					dat += "<BR><FONT COLOR=red>No beaker inside. Please insert a beaker.</FONT><BR>"
 			if("nopoints")
-				dat += "You do not have biomass to create products.<BR>Please, put plants into reactor and activate it.<BR>"
+				dat += "You do not have biomass to create products.<BR>Please, put produce into reactor and activate it.<BR>"
 				dat += "<A href='?src=\ref[src];action=menu'>Return to menu</A>"
 			if("complete")
 				dat += "Operation complete.<BR>"
 				dat += "<A href='?src=\ref[src];action=menu'>Return to menu</A>"
 			if("void")
-				dat += "<FONT COLOR=red>Error: No plants inside.</FONT><BR>Please, put plants into reactor.<BR>"
+				dat += "<FONT COLOR=red>Error: No produce inside.</FONT><BR>Please, put produce into reactor.<BR>"
 				dat += "<A href='?src=\ref[src];action=menu'>Return to menu</A>"
 	user << browse(dat, "window=biogenerator")
 	onclose(user, "biogenerator")
