@@ -59,20 +59,25 @@
 	else if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
 	else if(istype(O, /obj/item/weapon/storage/plants))
+		var/obj/item/weapon/storage/plants/P = O
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
 			to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 		else
-			for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
-				G.loc = src
+			var/hadPlants = 0
+			for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in P.contents)
+				hadPlants = 1
+				P.remove_from_storage(G, src)
 				i++
 				if(i >= 10)
 					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
 					break
-			if(i < 10)
-				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
+			if(!hadPlants)
+				to_chat(user, "<span class='notice'>\The [P] has no growns inside.</span>")
+			else if(i < 10)
+				to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
 
 
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
@@ -85,7 +90,7 @@
 			to_chat(user, "<span class='notice'>\The [src] is full! Activate it.</span>")
 		else
 			user.remove_from_mob(O)
-			O.loc = src
+			O.forceMove(src)
 			to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()
 	return
