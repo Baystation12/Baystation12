@@ -271,7 +271,7 @@
 
 		if(hidden && user != src)
 			if(E.status & ORGAN_BLEEDING && !(hidden.item_flags & THICKMATERIAL)) //not through a spacesuit
-				wound_flavor_text[hidden.name] = "[T.He] [T.has] blood soaking through [hidden]!<br>"
+				wound_flavor_text[hidden.name] = "<span class='danger'>[T.He] [T.has] blood soaking through [hidden]!</span><br>"
 		else
 			if(E.is_stump())
 				wound_flavor_text[E.name] += "<b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b>\n"
