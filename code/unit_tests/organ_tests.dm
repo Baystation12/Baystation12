@@ -106,3 +106,129 @@ datum/unit_test/species_organ_creation/start_test()
 		pass("All species mobs were created with valid organ configuration.")
 
 	return 1
+
+datum/unit_test/species_organ_lists_update
+	name = "ORGAN: Species Mob Organ Lists Update when Organs are Removed and Replaced."
+
+datum/unit_test/species_organ_lists_update/proc/check_internal_organ_present(var/mob/living/carbon/human/H, var/obj/item/organ/internal/I)
+	if(!(I in H.internal_organs))
+		fail("[H.species.name] internal organ [I] not in internal_organs.")
+		return 0
+	var/found = H.internal_organs_by_name[I.organ_tag]
+	if(I != found)
+		fail("[H.species.name] internal organ [I] not in internal_organs_by_name. Organ tag was \"[I.organ_tag]\", found [found? found : "nothing"] instead.")
+		return 0
+	var/obj/item/organ/external/parent = H.organs_by_name[I.parent_organ]
+	if(!istype(parent))
+		fail("[H.species.name] internal organ [I] could not find its parent in organs_by_name. Parent tag was \"[I.parent_organ]\".")
+		return 0
+	if(!(I in parent.internal_organs))
+		fail("[H.species.name] internal organ [I] was not in parent's internal_organs. Parent was [parent]. Parent tag was \"[I.parent_organ]\".")
+		return 0
+	return 1
+
+datum/unit_test/species_organ_lists_update/proc/check_internal_organ_removed(var/mob/living/carbon/human/H, var/obj/item/organ/internal/I, var/obj/item/organ/external/old_parent)
+	if(I in H.internal_organs)
+		fail("[H.species.name] internal organ [I] was not removed from internal_organs.")
+		return 0
+	var/found = H.internal_organs_by_name[I.organ_tag]
+	if(found)
+		fail("[H.species.name] internal organ [I] was not removed from internal_organs_by_name. Organ tag was \"[I.organ_tag]\".")
+		return 0
+	if(I in old_parent.internal_organs)
+		fail("[H.species.name] internal organ [I] was not removed from parent's internal_organs. Parent was [old_parent].")
+		return 0
+	return 1
+
+datum/unit_test/species_organ_lists_update/proc/check_external_organ_present(var/mob/living/carbon/human/H, var/obj/item/organ/external/E)
+	if(!(E in H.organs))
+		fail("[H.species.name] external organ [E] not in organs.")
+		return 0
+	var/found = H.organs_by_name[E.organ_tag]
+	if(E != found)
+		fail("[H.species.name] external organ [E] not in organs_by_name. Organ tag was \"[E.organ_tag]\", found [found? found : "nothing"] instead.")
+		return 0
+	if(E.parent_organ)
+		var/obj/item/organ/external/parent = E.parent
+		if(!istype(parent))
+			fail("[H.species.name] external organ [E] had no parent. Parent tag was \"[E.parent_organ]\".")
+			return 0
+		if(parent.organ_tag != E.parent_organ)
+			fail("[H.species.name] external organ [E] parent tag mismatch. Parent tag was \"[E.parent_organ]\", actual tag was \"[parent.organ_tag]\".")
+			return 0
+		if(!(E in parent.children))
+			fail("[H.species.name] external organ [E] was not in parent's children. Parent was [parent]. Parent tag was \"[E.parent_organ]\".")
+			return 0
+	return 1
+
+datum/unit_test/species_organ_lists_update/proc/check_external_organ_removed(var/mob/living/carbon/human/H, var/obj/item/organ/external/E, var/obj/item/organ/external/old_parent = null)
+	if(E in H.organs)
+		fail("[H.species.name] external organ [E] was not removed from organs.")
+		return 0
+	var/found = H.organs_by_name[E.organ_tag]
+	if(found)
+		fail("[H.species.name] external organ [E] was not removed from organs_by_name. Organ tag was \"[E.organ_tag]\".")
+		return 0
+	if(old_parent)
+		if(!(E in old_parent.children))
+			fail("[H.species.name] external organ [E] was not removed from parent's children. Parent was [old_parent].")
+			return 0
+	return 1
+
+datum/unit_test/species_organ_lists_update/proc/test_internal_organ(var/mob/living/carbon/human/H, var/obj/item/organ/internal/I)
+	if(!check_internal_organ_present(H, I))
+		fail("[H.species.name] internal organ [I] failed initial presence check.")
+		return 0
+
+	var/obj/item/organ/external/parent = H.organs_by_name[I.parent_organ]
+
+	I.removed()
+	if(!check_internal_organ_removed(H, I, parent))
+		fail("[H.species.name] internal organ [I] was not removed correctly.")
+		return 0
+
+	I.replaced(H, parent)
+	if(!check_internal_organ_present(H, I))
+		fail("[H.species.name] internal organ [I] was not replaced correctly.")
+		return 0
+
+	return 1
+
+datum/unit_test/species_organ_lists_update/proc/test_external_organ(var/mob/living/carbon/human/H, var/obj/item/organ/external/E)
+	if(!check_external_organ_removed(H, E))
+		fail("[H.species.name] internal organ [E] failed initial presence check.")
+		return 0
+
+	var/obj/item/organ/external/parent = E.parent
+
+	E.removed()
+	if(!check_internal_organ_removed(H, E, parent))
+		fail("[H.species.name] internal organ [E] was not removed correctly.")
+		return 0
+
+	E.replaced(H)
+	if(!check_internal_organ_present(H, E))
+		fail("[H.species.name] internal organ [E] was not replaced correctly.")
+		return 0
+
+	return 1
+
+datum/unit_test/species_organ_lists_update/start_test()
+	var/failcount = 0
+	for(var/datum/species/species in all_species)
+		var/mob/living/carbon/human/test_subject = new(null, species.name)
+
+		for(var/O in test_subject.internal_organs)
+			if(!test_internal_organ(test_subject, O))
+				failcount++
+		
+		for(var/O in test_subject.organs)
+			if(!test_external_organ(test_subject, O))
+				failcount++
+
+	if(failcount)
+		fail("[failcount] organs failed to be removed and replaced correctly.")
+	else
+		pass("All organs were removed and replaced correctly.")
+
+	return 1
