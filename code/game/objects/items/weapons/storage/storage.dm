@@ -188,8 +188,7 @@
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 
 		if(!NoUpdate)
-			prepare_ui()
-			storage_ui.on_insertion(usr)
+			update_ui_after_item_insertion()
 	update_icon()
 	return 1
 
@@ -217,8 +216,7 @@
 	W.forceMove(new_location)
 
 	if(usr && !NoUpdate)
-		prepare_ui()
-		storage_ui.on_post_remove(usr)
+		update_ui_after_item_removal()
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
