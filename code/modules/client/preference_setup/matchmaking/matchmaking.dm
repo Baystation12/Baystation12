@@ -111,7 +111,7 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(other && other.finalized)
 		var/datum/data/record/R1 = find_general_record("name", holder.name)
 		var/datum/data/record/R2 = find_general_record("name", other.holder.name)
-		var/info = prob(60) ? get_desc_string() : "[holder.original.real_name] and [other.holder.original.real_name] know each other, but the exact nature of their relationship is unclear."
+		var/info = prob(60) ? get_desc_string() : "[holder] and [other.holder] know each other, but the exact nature of their relationship is unclear."
 		if(R1)
 			R1.fields["connections"] |= info
 		if(R2)
@@ -138,10 +138,10 @@ var/global/datum/matchmaker/matchmaker = new()
 			if(prob(70))
 				M.mind.known_connections += get_desc_string()
 			else
-				M.mind.known_connections += "[holder.original.real_name] and [other.holder.original.real_name] seem to know each other, but you're not sure on the details."
+				M.mind.known_connections += "[holder] and [other.holder] seem to know each other, but you're not sure on the details."
 
 /datum/relation/proc/get_desc_string()
-	return "[holder.original.real_name] and [other.holder.original.real_name] know each other."
+	return "[holder] and [other.holder] know each other."
 
 /mob/living/verb/see_relationship_info()
 	set name = "See Relationship Info"
@@ -155,9 +155,7 @@ var/global/datum/matchmaker/matchmaker = new()
 		dat += "<b>Things they all know about you:</b><br>[mind.gen_relations_info]<br>"
 		dat += "<br>"
 	for(var/datum/relation/R in relations)
-		var/n = R.other.holder.original ? R.other.holder.original.real_name : R.other.holder
-		var/j = R.other.holder.original ? R.other.holder.original.job : R.other.holder
-		dat += "<b>[n]</b>[j ? ", [R.other.holder.original.job]":""]."
+		dat += "<b>[R.other.holder]</b>[R.other.holder.role_alt_title ? R.other.holder.role_alt_title : R.other.holder.assigned_role]."
 		if (!R.finalized)
 			dat += " <a href='?src=\ref[src];del_relation=\ref[R]'>Remove</a>"
 			editable = 1
