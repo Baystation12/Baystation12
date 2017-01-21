@@ -52,6 +52,7 @@
 	plane = PLATING_PLANE
 
 	if(flooring)
+		flooring.on_remove()
 		if(flooring.build_type && place_product)
 			new flooring.build_type(src)
 		flooring = null
