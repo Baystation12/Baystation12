@@ -27,19 +27,19 @@
 			supply_controller.buy()
 
 		//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
-		var/obj/effect/shuttle_landmark/away_landmark = get_location_landmark(away_location)
+		var/datum/shuttle_waypoint/away_waypoint = get_location_waypoint(away_location)
 		moving_status = SHUTTLE_INTRANSIT
 
 		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
-		if (current_location != away_landmark)
-			move(away_landmark)
+		if (next_waypoint == away_waypoint)
+			move(away_waypoint.landmark_turf)
 
 		//wait ETA here.
 		arrive_time = world.time + supply_controller.movetime
 		while (world.time <= arrive_time)
 			sleep(5)
 
-		if (destination != away_landmark)
+		if (next_waypoint != away_waypoint)
 			//late
 			if (prob(late_chance))
 				sleep(rand(0,max_late_time))

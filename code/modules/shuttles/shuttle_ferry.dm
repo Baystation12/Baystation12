@@ -4,35 +4,29 @@
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
 
-	var/obj/effect/shuttle_landmark/landmark_station
-	var/obj/effect/shuttle_landmark/landmark_offsite
-	var/dock_target_station
-	var/dock_target_offsite
+	var/datum/shuttle_waypoint/waypoint_station
+	var/datum/shuttle_waypoint/waypoint_offsite
 
 	category = /datum/shuttle/autodock/ferry
 
-	//Temporary
-	var/docking_controller_tag //TODO replace with nav datum
-	var/datum/computer/file/embedded_program/docking/docking_controller
-
 /datum/shuttle/autodock/ferry/New(_name)
-	if(landmark_station)
-		landmark_station = locate(landmark_station)
-	if(landmark_offsite)
-		landmark_offsite = locate(landmark_offsite)
+	if(waypoint_station)
+		waypoint_station = waypoint_repository.waypoints[waypoint_station]
+	if(waypoint_offsite)
+		waypoint_offsite = waypoint_repository.waypoints[waypoint_offsite]
 
-	..(_name, get_location_landmark(location))
+	..(_name, get_location_waypoint(location))
 
-	get_docking_controller()
+	next_waypoint = get_location_waypoint(!location)
 
 //Gets the shuttle landmark associated with the given location (defaults to current location)
-/datum/shuttle/autodock/ferry/proc/get_location_landmark(location_id = null)
+/datum/shuttle/autodock/ferry/proc/get_location_waypoint(location_id = null)
 	if (isnull(location_id))
 		location_id = location
 
 	if (!location_id)
-		return landmark_station
-	return landmark_offsite
+		return waypoint_station
+	return waypoint_offsite
 
 /datum/shuttle/autodock/ferry/short_jump(var/destination)
 	direction = !location
@@ -45,18 +39,10 @@
 /datum/shuttle/autodock/ferry/move(var/atom/destination)
 	..()
 
-	if (destination == landmark_station) location = 0
-	if (destination == landmark_offsite) location = 1
+	if (next_waypoint == waypoint_station) location = 0
+	if (next_waypoint == waypoint_offsite) location = 1
 	//if (destination == landmark_transition) //do nothing, retain the previous location until the long_jump completes
 
-/datum/shuttle/autodock/ferry/get_destination()
-	return get_location_landmark(!location) //go to where we are not
-
-/datum/shuttle/autodock/ferry/get_docking_controller()
-	. = locate(docking_controller_tag)
-	docking_controller = . //Temporary
-
-/datum/shuttle/autodock/ferry/get_dock_target()
-	if (!location)	//station
-		return dock_target_station
-	return dock_target_offsite
+/datum/shuttle/autodock/ferry/process_arrived()
+	..()
+	next_waypoint = get_location_waypoint(!location)

@@ -130,7 +130,7 @@ datum/unit_test/zas_supply_shuttle_moved/start_test()
 
 	// Initiate the Move.
 	supply_controller.movetime = 5 // Speed up the shuttle movement.
-	shuttle.short_jump(shuttle.landmark_offsite, shuttle.landmark_station)
+	shuttle.short_jump(shuttle.get_location_waypoint(!shuttle.location)) //TODO
 
 	return 1
 

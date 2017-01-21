@@ -270,6 +270,7 @@
 #include "code\datums\repositories\repository.dm"
 #include "code\datums\repositories\unique.dm"
 #include "code\datums\repositories\uplink_purchases.dm"
+#include "code\datums\repositories\waypoints.dm"
 #include "code\datums\repositories\~defines.dm"
 #include "code\datums\repositories\crew\_defines.dm"
 #include "code\datums\repositories\crew\binary.dm"

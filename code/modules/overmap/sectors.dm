@@ -7,8 +7,8 @@
 	icon_state = "object"
 	var/map_z = list()
 
-	//landmarks where inbound exploration shuttles can land
-	var/list/landing_spots
+	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
+	var/list/restricted_waypoints = list() //waypoints for specific shuttles
 
 	var/start_x			//coordinates on the
 	var/start_y			//overmap zlevel
@@ -47,14 +47,12 @@
 		using_map.station_levels |= map_z
 		using_map.contact_levels |= map_z
 
-	var/list/found_landing_spots = list()
-	for(var/nav_tag in landing_spots)
-		var/obj/effect/shuttle_landmark/navpoint = locate(nav_tag)
-		if(!navpoint)
-			log_error("Overmap region \"[name]\" could not find one of it's landing spots: \"[nav_tag]\"")
-		else
-			found_landing_spots += navpoint
-	landing_spots = found_landing_spots
+/obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
+	. = list()
+	for(var/waypoint in generic_waypoints)
+		. += waypoint_repository.waypoints[waypoint]
+	for(var/waypoint in restricted_waypoints[shuttle_name])
+		. += waypoint_repository.waypoints[waypoint]
 
 /obj/effect/overmap/sector
 	name = "generic sector"

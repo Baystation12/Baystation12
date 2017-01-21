@@ -87,8 +87,10 @@
 		shuttlestatus = "In transit ([shuttle.eta_minutes()] Mins.)"
 	else
 		if (shuttle.at_station())
-			if (shuttle.docking_controller)
-				switch(shuttle.docking_controller.get_docking_status())
+			if (!shuttle.active_docking_controller)
+				shuttlestatus = "Undocked"
+			else
+				switch(shuttle.active_docking_controller.get_docking_status())
 					if ("docked")
 						shuttlestatus = "Docked at station"
 					if ("undocked") shuttlestatus = "Undocked from station"

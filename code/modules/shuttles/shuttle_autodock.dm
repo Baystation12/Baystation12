@@ -6,7 +6,7 @@
 	var/last_dock_attempt_time = 0
 	var/current_dock_target
 
-	var/datum/shuttle_destination/current_destination
+	var/datum/shuttle_waypoint/next_waypoint
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
 	var/obj/effect/shuttle_landmark/landmark_transition
@@ -14,62 +14,56 @@
 
 	category = /datum/shuttle/autodock
 
-/datum/shuttle/autodock/New(_name)
-	..()
+/datum/shuttle/autodock/New(var/_name, var/datum/shuttle_waypoint/start_waypoint)
+	..(_name, start_waypoint.landmark_turf)
 
-	//Optional
+	//Initial dock
+	active_docking_controller = start_waypoint.docking_controller
+	dock()
+
+	//Optional transition area
 	if(landmark_transition)
 		landmark_transition = locate(landmark_transition)
 
-	//TODO initial dock
-
 /datum/shuttle/autodock/Destroy()
-	current_destination = null
+	next_waypoint = null
 	active_docking_controller = null
 	landmark_transition = null
 
 	return ..()
 
 /datum/shuttle/autodock/move(var/atom/destination)
-	if(active_docking_controller)
-		active_docking_controller.force_undock() //bye
+	force_undock() //bye!
 	..()
 
 /*
 	Docking stuff
 */
-//TODO refactor out the need for these, make launch(), force_launch() set current_destination, update current_location in move()
-/datum/shuttle/autodock/proc/get_destination()
-	return null //To be implemented by subtypes
-
 /datum/shuttle/autodock/proc/get_docking_controller()
-	return null //To be implemented by subtypes
-
-/datum/shuttle/autodock/proc/get_dock_target()
-	return null //To be implemented by subtypes
+	return 
 
 /datum/shuttle/autodock/proc/dock(var/dock_target)
-	var/datum/computer/file/embedded_program/docking/docking_controller = get_docking_controller()
-	if(docking_controller)
+	if(active_docking_controller)
 		current_dock_target = dock_target
-		docking_controller.initiate_docking(dock_target)
+		active_docking_controller.initiate_docking(dock_target)
 		last_dock_attempt_time = world.time
 
 /datum/shuttle/autodock/proc/undock()
-	var/datum/computer/file/embedded_program/docking/docking_controller = get_docking_controller()
-	if(docking_controller)
-		docking_controller.initiate_undocking()
+	if(active_docking_controller)
+		active_docking_controller.initiate_undocking()
+
+/datum/shuttle/autodock/proc/force_undock()
+	if(active_docking_controller)
+		active_docking_controller.force_undock()
 
 /datum/shuttle/autodock/proc/check_docked()
-	var/datum/computer/file/embedded_program/docking/docking_controller = get_docking_controller()
-	if(docking_controller)
-		return docking_controller.docked()
+	if(active_docking_controller)
+		return active_docking_controller.docked()
 	return TRUE
 
 /datum/shuttle/autodock/proc/check_undocked()
-	var/datum/computer/file/embedded_program/docking/docking_controller = get_docking_controller()
-	if(docking_controller)
-		return docking_controller.can_launch()
+	if(active_docking_controller)
+		return active_docking_controller.can_launch()
 	return TRUE
 
 /*
@@ -79,7 +73,8 @@
 /datum/shuttle/autodock/proc/process()
 	switch(process_state)
 		if (WAIT_LAUNCH)
-			if(!current_dock_target || check_undocked())
+			if(check_undocked())
+				//*** ready to go
 				process_launch()
 				process_state = WAIT_ARRIVE
 
@@ -89,43 +84,42 @@
 
 		if (WAIT_ARRIVE)
 			if (moving_status == SHUTTLE_IDLE)
-				current_dock_target = get_dock_target() //TODO ugly
-				dock(current_dock_target)
-
-				in_use = null	//release lock
+				//*** we made it to the destination, update stuff
+				process_arrived()
 				process_state = WAIT_FINISH
 
 		if (WAIT_FINISH)
-			if (!current_dock_target || world.time > last_dock_attempt_time + DOCK_ATTEMPT_TIMEOUT || check_docked())
+			if (world.time > last_dock_attempt_time + DOCK_ATTEMPT_TIMEOUT || check_docked())
+				//*** all done here
 				process_state = IDLE_STATE
 				arrived()
 
+//not to be confused with the arrived() proc
+/datum/shuttle/autodock/proc/process_arrived()
+	active_docking_controller = next_waypoint.docking_controller
+	dock(current_dock_target)
+
+	next_waypoint = null
+	in_use = null	//release lock
+
+
 /datum/shuttle/autodock/proc/process_launch()
-	var/destination = get_destination()
 	if (move_time && landmark_transition)
-		long_jump(destination, landmark_transition, move_time)
+		long_jump(next_waypoint.landmark_turf, landmark_transition, move_time)
 	else
-		short_jump(destination)
+		short_jump(next_waypoint.landmark_turf)
 
 /*
 	Guards
 */
 /datum/shuttle/autodock/proc/can_launch()
-	if (moving_status != SHUTTLE_IDLE)
-		return 0
-	if (in_use)
-		return 0
-	return 1
+	return (next_waypoint && moving_status == SHUTTLE_IDLE && !in_use)
 
 /datum/shuttle/autodock/proc/can_force()
-	if (moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
-		return 1
-	return 0
+	return (next_waypoint && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
 
 /datum/shuttle/autodock/proc/can_cancel()
-	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
-		return 1
-	return 0
+	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
 
 /*
 	"Public" procs
@@ -152,10 +146,8 @@
 	process_state = WAIT_FINISH
 	in_use = null
 
-	var/datum/computer/file/embedded_program/docking/docking_controller = get_docking_controller()
-	if(docking_controller && !docking_controller.undocked())
-		docking_controller.force_undock()
-
+	//whatever we were doing with docking: stop it, then redock
+	force_undock()
 	spawn(1 SECOND)
 		dock(current_dock_target)
 

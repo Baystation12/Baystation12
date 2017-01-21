@@ -39,9 +39,9 @@
 		"has_docking" = docking_controller? 1 : 0,
 		"docking_status" = docking_controller? docking_controller.get_docking_status() : null,
 		"docking_override" = docking_controller? docking_controller.override_enabled : null,
-		"can_launch" = shuttle.can_go() && shuttle.can_launch(),
-		"can_cancel" = shuttle.can_go() && shuttle.can_cancel(),
-		"can_force" = shuttle.can_go() && shuttle.can_force(),
+		"can_launch" = shuttle.can_launch(),
+		"can_cancel" = shuttle.can_cancel(),
+		"can_force" = shuttle.can_force(),
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -72,7 +72,7 @@
 			to_chat(usr,"<span class='warning'>No valid landing sites in range.</span>")
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, default_state) && (D in possible_d))
-			shuttle.set_destination_landmark(possible_d[D])
+			shuttle.set_destination(possible_d[D])
 
 	if(href_list["move"])
 		shuttle.launch(src)

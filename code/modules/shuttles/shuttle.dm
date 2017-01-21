@@ -1,6 +1,3 @@
-//These lists are populated in /datum/shuttle_controller/New()
-//Shuttle controller is instantiated in master_controller.dm.
-
 //shuttle moving state defines are in setup.dm
 
 /datum/shuttle
@@ -22,20 +19,16 @@
 	if(_name)
 		src.name = _name
 
-	if(src.name in shuttle_controller.shuttles)
-		CRASH("A shuttle with the name '[name]' is already defined.")
-
 	shuttle_area = locate(shuttle_area)
 	if(!istype(shuttle_area))
 		CRASH("Shuttle \"[name]\" has no area.")
 
-	if(initial_location)
-		current_location = initial_location //so that subtypes may supply a current_location
-	else
-		current_location = locate(current_location)
-		if(!istype(current_location))
-			CRASH("Shuttle \"[name]\" has no home landmark.")
+	current_location = initial_location
+	if(!istype(current_location))
+		CRASH("Shuttle \"[name]\" has no starting location.")
 
+	if(src.name in shuttle_controller.shuttles)
+		CRASH("A shuttle with the name '[name]' is already defined.")
 	shuttle_controller.shuttles[src.name] = src
 	if(flags & SHUTTLE_FLAGS_PROCESS)
 		shuttle_controller.process_shuttles += src
@@ -88,31 +81,6 @@
 
 		move(destination)
 		moving_status = SHUTTLE_IDLE
-
-/*
-/datum/shuttle/proc/dock() //TODO move this up to autodock
-	if (!docking_controller)
-		return
-
-	var/dock_target = current_dock_target()
-	if (!dock_target)
-		return
-
-	docking_controller.initiate_docking(dock_target)
-
-/datum/shuttle/proc/undock()
-	if (!docking_controller)
-		return
-	docking_controller.initiate_undocking()
-
-/datum/shuttle/proc/current_dock_target()
-	return null
-
-/datum/shuttle/proc/skip_docking_checks()
-	if (!docking_controller || !current_dock_target())
-		return 1	//shuttles without docking controllers or at locations without docking ports act like old-style shuttles
-	return 0
-*/
 
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. move() must absolutely not, under any circumstances, fail to move the shuttle.
