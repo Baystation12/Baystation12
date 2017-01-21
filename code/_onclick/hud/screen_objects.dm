@@ -380,6 +380,18 @@
 		if("module3")
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
+
+		if("shields")
+			to_chat(usr, "The shields give a short flicker as new power strengthens them")
+
+		if("weapon")
+			var/obj/fighter/F = usr.loc
+			F.pewpew()
+
+		if("computer")
+			var/obj/fighter = usr.loc
+			return fighter.ui_interact(usr)
+
 		else
 			return 0
 	return 1
