@@ -24,6 +24,9 @@
 	var/turf/below = GetBelow(src)
 	if(istype(below, /turf/space))
 		return
+	var/area/A = below.loc
+	if(A.flags & AREA_EXTERNAL)
+		return
 	if(!below.density && istype(below.loc, /area/space))
 		return
 	ChangeTurf(/turf/simulated/floor/airless)
