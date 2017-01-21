@@ -1,6 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds universal action HUD element."
-  - rscadd: "Moves spells to new action HUD."
-  - rscdel: "Removes mind transfer."
