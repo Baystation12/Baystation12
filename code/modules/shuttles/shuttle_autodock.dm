@@ -15,7 +15,7 @@
 	category = /datum/shuttle/autodock
 
 /datum/shuttle/autodock/New(_name)
-	..(_name)
+	..()
 
 	//Optional
 	if(landmark_transition)
