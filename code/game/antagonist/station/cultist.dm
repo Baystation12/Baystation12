@@ -82,7 +82,7 @@ var/datum/antagonist/cultist/cult
 			break
 	var/obj/item/weapon/storage/S = locate() in player.contents
 	if(istype(S))
-		T.loc = S
+		T.forceMove(S)
 
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())

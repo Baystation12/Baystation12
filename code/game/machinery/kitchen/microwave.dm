@@ -115,7 +115,7 @@
 		else
 		//	user.remove_from_mob(O)	//This just causes problems so far as I can tell. -Pete
 			user.drop_item()
-			O.loc = src
+			O.forceMove(src)
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -257,7 +257,7 @@
 			wzhzhzh(4)
 			muck_finish()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 		else if (has_extra_item())
 			if (!wzhzhzh(4))
@@ -265,7 +265,7 @@
 				return
 			broke()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 		else
 			if (!wzhzhzh(10))
@@ -273,7 +273,7 @@
 				return
 			stop()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 	else
 		var/halftime = round(recipe.time/10/2)
@@ -283,12 +283,12 @@
 		if (!wzhzhzh(halftime))
 			abort()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 		cooked = recipe.make_food(src)
 		stop()
 		if(cooked)
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 		return
 
 /obj/machinery/microwave/proc/wzhzhzh(var/seconds as num) // Whoever named this proc is fucking literally Satan. ~ Z
@@ -327,7 +327,7 @@
 
 /obj/machinery/microwave/proc/dispose()
 	for (var/obj/O in InsertedContents())
-		O.loc = src.loc
+		O.dropInto(loc)
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()

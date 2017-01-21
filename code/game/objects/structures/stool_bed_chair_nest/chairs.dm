@@ -20,7 +20,7 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
 		E.part = SK
-		SK.loc = E
+		SK.forceMove(E)
 		SK.master = E
 		qdel(src)
 
