@@ -21,6 +21,8 @@
 "u" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "v" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "w" = (/obj/effect/shuttle_landmark{name = "nav point - offsite"; tag = "nav_example_offsite"},/turf/space,/area/space)
+"x" = (/obj/machinery/door/airlock/external/bolted{id_tag = "upper_level_dock_hatch"},/turf/space,/area/maintenance/fsmaint2)
+"y" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "upper_level_dock"; pixel_x = 8; pixel_y = -25},/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -35,9 +37,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaabaaacccccccccccccccaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacdddeddfddedddcaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacdddddfffdddddcaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaacdddddfffddddgcaaaawaaaaaaaaaaa
-aaaaaaaaaaaaaaaaachdddifffddddjcaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaacddddddddddkddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddfffddddgccccawaaaaaaaaaaa
+aaaaaaaaaaaaaaaaachdddifffddddjddyxaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddkddccccaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacddddddddddlmncaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacdddddddddddddcaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacddddddddddompcaaaaaaaaaaaaaaaa
