@@ -4,9 +4,10 @@
 	critical = 0
 	enabled = 1
 	icon_state = "teslalink"
-	hardware_size = 2		// Can't be installed into tablets
+	hardware_size = 1
 	origin_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	var/obj/machinery/modular_computer/holder
+	var/passive_charging_rate = 250			// W
 
 /obj/item/weapon/computer_hardware/tesla_link/New(var/obj/L)
 	if(istype(L, /obj/machinery/modular_computer))
@@ -15,6 +16,6 @@
 	..(L)
 
 /obj/item/weapon/computer_hardware/tesla_link/Destroy()
-	if(holder && (holder.tesla_link == src))
-		holder.tesla_link = null
+	if(holder2 && (holder2.tesla_link == src))
+		holder2.tesla_link = null
 	..()

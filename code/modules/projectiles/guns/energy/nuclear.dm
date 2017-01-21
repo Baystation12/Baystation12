@@ -12,7 +12,7 @@
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energystun", charge_cost=30),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
 
@@ -35,7 +35,7 @@
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, charge_cost=30),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam),
 		)
 

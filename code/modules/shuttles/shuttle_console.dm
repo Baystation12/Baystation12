@@ -36,14 +36,14 @@
 		if(IDLE_STATE)
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
-			else if (!shuttle.location)
-				shuttle_status = "Standing-by at station."
 			else
-				shuttle_status = "Standing-by at offsite location."
+				var/datum/shuttle_waypoint/cur_waypoint = shuttle.get_location_waypoint()
+				shuttle_status = "Standing-by at [cur_waypoint.name]."
+
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
-			shuttle_status = "Proceeding to destination."
+			shuttle_status = "Proceeding to [shuttle.next_waypoint.name]."
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 

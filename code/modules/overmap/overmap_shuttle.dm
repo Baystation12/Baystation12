@@ -67,7 +67,7 @@ var/list/sector_shuttles = list()
 
 //TODO nav landmark names
 /datum/shuttle/autodock/overmap/proc/get_location_name()
-	return "[current_sector] - [current_waypoint.name]"
+	return "[current_waypoint.sector] - [current_waypoint.name]"
 
 /datum/shuttle/autodock/overmap/proc/get_destination_name()
 	var/datum/shuttle_waypoint/overmap/next = next_waypoint

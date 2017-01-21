@@ -15,7 +15,7 @@
 	..()
 	// This is very ghetto way of rebooting an IPC. TODO better way.
 	if(owner && owner.stat == DEAD)
-		owner.stat = 0
+		owner.set_stat(CONSCIOUS)
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
 // Used for an MMI or posibrain being installed into a human.
@@ -61,7 +61,7 @@
 	icon_state = stored_mmi.icon_state
 
 	if(owner && owner.stat == DEAD)
-		owner.stat = 0
+		owner.set_stat(CONSCIOUS)
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 

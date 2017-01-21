@@ -1641,7 +1641,7 @@
 		O.aiRestorePowerRoutine = 0
 		O.control_disabled = 1 // Can't control things remotely if you're stuck in a card!
 		O.laws = AI.laws
-		O.stat = AI.stat
+		O.set_stat(AI.stat)
 		O.oxyloss = AI.getOxyLoss()
 		O.fireloss = AI.getFireLoss()
 		O.bruteloss = AI.getBruteLoss()

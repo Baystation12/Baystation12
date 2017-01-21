@@ -14,6 +14,7 @@
 	var/x_offset = 0 //so that waypoints for different shuttles can use the same landmarks
 	var/y_offset = 0
 	var/docking_target = null
+	var/landmark_tag
 
 	var/turf/landmark_turf
 	var/datum/computer/file/embedded_program/docking/docking_controller
@@ -32,7 +33,6 @@
 	waypoint_repository.waypoints[id] = src
 
 /datum/shuttle_waypoint/proc/find_landmarks()
-	var/landmark_tag = landmark_turf
 	var/obj/effect/shuttle_landmark/landmark = locate(landmark_tag)
 	if(landmark)
 		landmark_turf = locate(landmark.x + x_offset, landmark.y + y_offset, landmark.z)

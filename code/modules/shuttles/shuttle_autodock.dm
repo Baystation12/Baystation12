@@ -19,7 +19,7 @@
 
 	//Initial dock
 	active_docking_controller = start_waypoint.docking_controller
-	dock()
+	dock(start_waypoint.docking_target)
 
 	//Optional transition area
 	if(landmark_transition)
@@ -97,7 +97,7 @@
 //not to be confused with the arrived() proc
 /datum/shuttle/autodock/proc/process_arrived()
 	active_docking_controller = next_waypoint.docking_controller
-	dock(current_dock_target)
+	dock(next_waypoint.docking_target)
 
 	next_waypoint = null
 	in_use = null	//release lock

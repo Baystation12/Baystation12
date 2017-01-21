@@ -21,7 +21,7 @@
 
 /atom/movable/New()
 	..()
-	if(auto_init && (initialization_stage & INITIALIZATION_COMPLETE))
+	if(auto_init && (initialization_stage & INITIALIZATION_HAS_BEGUN))
 		initialize()
 
 /atom/movable/Del()
@@ -236,8 +236,7 @@
 	anchored = 1
 
 /atom/movable/overlay/New()
-	for(var/x in src.verbs)
-		src.verbs -= x
+	src.verbs.Cut()
 	..()
 
 /atom/movable/overlay/Destroy()

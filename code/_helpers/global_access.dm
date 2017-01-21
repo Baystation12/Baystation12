@@ -11,8 +11,6 @@
 			return global.is_player_but_not_space_or_shuttle_area;
 		if("delta_index")
 			return global.delta_index;
-		if("acting_rank_prefixes")
-			return global.acting_rank_prefixes;
 		if("meteors_dust")
 			return global.meteors_dust;
 		if("meteors_normal")
@@ -43,6 +41,8 @@
 			return global.priv_region_access;
 		if("alien_whitelist")
 			return global.alien_whitelist;
+		if("acting_rank_prefixes")
+			return global.acting_rank_prefixes;
 		if("view_variables_hide_vars")
 			return global.view_variables_hide_vars;
 		if("view_variables_dont_expand")
@@ -137,6 +137,8 @@
 			return global.autolathe_recipes;
 		if("autolathe_categories")
 			return global.autolathe_categories;
+		if("PDA_Manifest")
+			return global.PDA_Manifest;
 		if("id_card_states")
 			return global.id_card_states;
 		if("asset_datums")
@@ -155,14 +157,14 @@
 			return global.text_tag_icons;
 		if("scheduler")
 			return global.scheduler;
-		if("priority_announcement")
-			return global.priority_announcement;
-		if("command_announcement")
-			return global.command_announcement;
 		if("security_announcement_up")
 			return global.security_announcement_up;
 		if("security_announcement_down")
 			return global.security_announcement_down;
+		if("priority_announcement")
+			return global.priority_announcement;
+		if("command_announcement")
+			return global.command_announcement;
 		if("gas_data")
 			return global.gas_data;
 		if("area_repository")
@@ -597,10 +599,6 @@
 			return global.global_huds;
 		if("robot_inventory")
 			return global.robot_inventory;
-		if("pipe_colors")
-			return global.pipe_colors;
-		if("pipe_networks")
-			return global.pipe_networks;
 		if("transfer_controller")
 			return global.transfer_controller;
 		if("radiochannels")
@@ -679,6 +677,8 @@
 			return global.life_event;
 		if("logged_in_event")
 			return global.logged_in_event;
+		if("logged_out_event")
+			return global.logged_out_event;
 		if("moved_event")
 			return global.moved_event;
 		if("opacity_set_event")
@@ -689,6 +689,8 @@
 			return global.see_invisible_set_event;
 		if("sight_set_event")
 			return global.sight_set_event;
+		if("stat_set_event")
+			return global.stat_set_event;
 		if("task_triggered_event")
 			return global.task_triggered_event;
 		if("turf_changed_event")
@@ -741,8 +743,6 @@
 			return global.same_wires;
 		if("wireColours")
 			return global.wireColours;
-		if("PDA_Manifest")
-			return global.PDA_Manifest;
 		if("newscaster_standard_feeds")
 			return global.newscaster_standard_feeds;
 		if("announced_news_types")
@@ -773,6 +773,8 @@
 			return global.page_sound;
 		if("fracture_sound")
 			return global.fracture_sound;
+		if("lighter_sound")
+			return global.lighter_sound;
 		if("supply_controller")
 			return global.supply_controller;
 		if("mechtoys")
@@ -853,16 +855,14 @@
 			return global.narsie_cometh;
 		if("narsie_list")
 			return global.narsie_list;
-		if("cultwords")
-			return global.cultwords;
-		if("runedec")
-			return global.runedec;
-		if("engwords")
-			return global.engwords;
-		if("rnwords")
-			return global.rnwords;
-		if("sacrificed")
-			return global.sacrificed;
+		if("Tier1Runes")
+			return global.Tier1Runes;
+		if("Tier2Runes")
+			return global.Tier2Runes;
+		if("Tier3Runes")
+			return global.Tier3Runes;
+		if("Tier4Runes")
+			return global.Tier4Runes;
 		if("universe_has_ended")
 			return global.universe_has_ended;
 		if("Holiday")
@@ -959,10 +959,6 @@
 			return global.message_delay;
 		if("telecomms_list")
 			return global.telecomms_list;
-		if("word_to_uristrune_table")
-			return global.word_to_uristrune_table;
-		if("uristrune_cache")
-			return global.uristrune_cache;
 		if("explosion_turfs")
 			return global.explosion_turfs;
 		if("explosion_in_progress")
@@ -987,8 +983,6 @@
 			return global.activetype;
 		if("uplink_random_selections_")
 			return global.uplink_random_selections_;
-		if("chatrooms")
-			return global.chatrooms;
 		if("PDAs")
 			return global.PDAs;
 		if("default_internal_channels")
@@ -1083,6 +1077,10 @@
 			return global.debug_verbs;
 		if("sounds_cache")
 			return global.sounds_cache;
+		if("pipe_colors")
+			return global.pipe_colors;
+		if("pipe_networks")
+			return global.pipe_networks;
 		if("asset_cache")
 			return global.asset_cache;
 		if("preferences_datums")
@@ -1403,26 +1401,6 @@
 			return global.responsive_carriers;
 		if("finds_as_strings")
 			return global.finds_as_strings;
-		if("all_unit_tests_passed")
-			return global.all_unit_tests_passed;
-		if("failed_unit_tests")
-			return global.failed_unit_tests;
-		if("skipped_unit_tests")
-			return global.skipped_unit_tests;
-		if("total_unit_tests")
-			return global.total_unit_tests;
-		if("currently_running_tests")
-			return global.currently_running_tests;
-		if("ascii_esc")
-			return global.ascii_esc;
-		if("ascii_red")
-			return global.ascii_red;
-		if("ascii_green")
-			return global.ascii_green;
-		if("ascii_yellow")
-			return global.ascii_yellow;
-		if("ascii_reset")
-			return global.ascii_reset;
 		if("air_master")
 			return global.air_master;
 		if("tick_multiplier")
@@ -1447,6 +1425,26 @@
 			return global.contamination_overlay;
 		if("vsc")
 			return global.vsc;
+		if("all_unit_tests_passed")
+			return global.all_unit_tests_passed;
+		if("failed_unit_tests")
+			return global.failed_unit_tests;
+		if("skipped_unit_tests")
+			return global.skipped_unit_tests;
+		if("total_unit_tests")
+			return global.total_unit_tests;
+		if("currently_running_tests")
+			return global.currently_running_tests;
+		if("ascii_esc")
+			return global.ascii_esc;
+		if("ascii_red")
+			return global.ascii_red;
+		if("ascii_green")
+			return global.ascii_green;
+		if("ascii_yellow")
+			return global.ascii_yellow;
+		if("ascii_reset")
+			return global.ascii_reset;
 		if("using_map")
 			return global.using_map;
 		if("all_maps")
@@ -1466,8 +1464,6 @@
 			global.is_player_but_not_space_or_shuttle_area=newval;
 		if("delta_index")
 			global.delta_index=newval;
-		if("acting_rank_prefixes")
-			global.acting_rank_prefixes=newval;
 		if("meteors_dust")
 			global.meteors_dust=newval;
 		if("meteors_normal")
@@ -1498,6 +1494,8 @@
 			global.priv_region_access=newval;
 		if("alien_whitelist")
 			global.alien_whitelist=newval;
+		if("acting_rank_prefixes")
+			global.acting_rank_prefixes=newval;
 		if("view_variables_hide_vars")
 			global.view_variables_hide_vars=newval;
 		if("view_variables_dont_expand")
@@ -1592,6 +1590,8 @@
 			global.autolathe_recipes=newval;
 		if("autolathe_categories")
 			global.autolathe_categories=newval;
+		if("PDA_Manifest")
+			global.PDA_Manifest=newval;
 		if("id_card_states")
 			global.id_card_states=newval;
 		if("asset_datums")
@@ -1610,14 +1610,14 @@
 			global.text_tag_icons=newval;
 		if("scheduler")
 			global.scheduler=newval;
-		if("priority_announcement")
-			global.priority_announcement=newval;
-		if("command_announcement")
-			global.command_announcement=newval;
 		if("security_announcement_up")
 			global.security_announcement_up=newval;
 		if("security_announcement_down")
 			global.security_announcement_down=newval;
+		if("priority_announcement")
+			global.priority_announcement=newval;
+		if("command_announcement")
+			global.command_announcement=newval;
 		if("gas_data")
 			global.gas_data=newval;
 		if("area_repository")
@@ -2052,10 +2052,6 @@
 			global.global_huds=newval;
 		if("robot_inventory")
 			global.robot_inventory=newval;
-		if("pipe_colors")
-			global.pipe_colors=newval;
-		if("pipe_networks")
-			global.pipe_networks=newval;
 		if("transfer_controller")
 			global.transfer_controller=newval;
 		if("radiochannels")
@@ -2134,6 +2130,8 @@
 			global.life_event=newval;
 		if("logged_in_event")
 			global.logged_in_event=newval;
+		if("logged_out_event")
+			global.logged_out_event=newval;
 		if("moved_event")
 			global.moved_event=newval;
 		if("opacity_set_event")
@@ -2144,6 +2142,8 @@
 			global.see_invisible_set_event=newval;
 		if("sight_set_event")
 			global.sight_set_event=newval;
+		if("stat_set_event")
+			global.stat_set_event=newval;
 		if("task_triggered_event")
 			global.task_triggered_event=newval;
 		if("turf_changed_event")
@@ -2196,8 +2196,6 @@
 			global.same_wires=newval;
 		if("wireColours")
 			global.wireColours=newval;
-		if("PDA_Manifest")
-			global.PDA_Manifest=newval;
 		if("newscaster_standard_feeds")
 			global.newscaster_standard_feeds=newval;
 		if("announced_news_types")
@@ -2228,6 +2226,8 @@
 			global.page_sound=newval;
 		if("fracture_sound")
 			global.fracture_sound=newval;
+		if("lighter_sound")
+			global.lighter_sound=newval;
 		if("supply_controller")
 			global.supply_controller=newval;
 		if("mechtoys")
@@ -2308,16 +2308,14 @@
 			global.narsie_cometh=newval;
 		if("narsie_list")
 			global.narsie_list=newval;
-		if("cultwords")
-			global.cultwords=newval;
-		if("runedec")
-			global.runedec=newval;
-		if("engwords")
-			global.engwords=newval;
-		if("rnwords")
-			global.rnwords=newval;
-		if("sacrificed")
-			global.sacrificed=newval;
+		if("Tier1Runes")
+			global.Tier1Runes=newval;
+		if("Tier2Runes")
+			global.Tier2Runes=newval;
+		if("Tier3Runes")
+			global.Tier3Runes=newval;
+		if("Tier4Runes")
+			global.Tier4Runes=newval;
 		if("universe_has_ended")
 			global.universe_has_ended=newval;
 		if("Holiday")
@@ -2414,10 +2412,6 @@
 			global.message_delay=newval;
 		if("telecomms_list")
 			global.telecomms_list=newval;
-		if("word_to_uristrune_table")
-			global.word_to_uristrune_table=newval;
-		if("uristrune_cache")
-			global.uristrune_cache=newval;
 		if("explosion_turfs")
 			global.explosion_turfs=newval;
 		if("explosion_in_progress")
@@ -2442,8 +2436,6 @@
 			global.activetype=newval;
 		if("uplink_random_selections_")
 			global.uplink_random_selections_=newval;
-		if("chatrooms")
-			global.chatrooms=newval;
 		if("PDAs")
 			global.PDAs=newval;
 		if("default_internal_channels")
@@ -2538,6 +2530,10 @@
 			global.debug_verbs=newval;
 		if("sounds_cache")
 			global.sounds_cache=newval;
+		if("pipe_colors")
+			global.pipe_colors=newval;
+		if("pipe_networks")
+			global.pipe_networks=newval;
 		if("asset_cache")
 			global.asset_cache=newval;
 		if("preferences_datums")
@@ -2858,26 +2854,6 @@
 			global.responsive_carriers=newval;
 		if("finds_as_strings")
 			global.finds_as_strings=newval;
-		if("all_unit_tests_passed")
-			global.all_unit_tests_passed=newval;
-		if("failed_unit_tests")
-			global.failed_unit_tests=newval;
-		if("skipped_unit_tests")
-			global.skipped_unit_tests=newval;
-		if("total_unit_tests")
-			global.total_unit_tests=newval;
-		if("currently_running_tests")
-			global.currently_running_tests=newval;
-		if("ascii_esc")
-			global.ascii_esc=newval;
-		if("ascii_red")
-			global.ascii_red=newval;
-		if("ascii_green")
-			global.ascii_green=newval;
-		if("ascii_yellow")
-			global.ascii_yellow=newval;
-		if("ascii_reset")
-			global.ascii_reset=newval;
 		if("air_master")
 			global.air_master=newval;
 		if("tick_multiplier")
@@ -2902,6 +2878,26 @@
 			global.contamination_overlay=newval;
 		if("vsc")
 			global.vsc=newval;
+		if("all_unit_tests_passed")
+			global.all_unit_tests_passed=newval;
+		if("failed_unit_tests")
+			global.failed_unit_tests=newval;
+		if("skipped_unit_tests")
+			global.skipped_unit_tests=newval;
+		if("total_unit_tests")
+			global.total_unit_tests=newval;
+		if("currently_running_tests")
+			global.currently_running_tests=newval;
+		if("ascii_esc")
+			global.ascii_esc=newval;
+		if("ascii_red")
+			global.ascii_red=newval;
+		if("ascii_green")
+			global.ascii_green=newval;
+		if("ascii_yellow")
+			global.ascii_yellow=newval;
+		if("ascii_reset")
+			global.ascii_reset=newval;
 		if("using_map")
 			global.using_map=newval;
 		if("all_maps")
@@ -2909,4 +2905,4 @@
 		if("init")
 			global.init=newval;
 		
-/var/list/_all_globals=list("tagger_locations","is_station_but_not_space_or_shuttle_area","is_contact_but_not_space_or_shuttle_area","is_player_but_not_space_or_shuttle_area","delta_index","acting_rank_prefixes","meteors_dust","meteors_normal","meteors_threatening","meteors_catastrophic","meteors_armageddon","meteors_cataclysm","priv_all_access_datums","priv_all_access_datums_id","priv_all_access_datums_region","priv_all_access","priv_station_access","priv_centcom_access","priv_syndicate_access","priv_region_access","alien_whitelist","view_variables_hide_vars","view_variables_dont_expand","view_variables_no_assoc","custom_items","economic_species_modifier","lighting_update_lights","lighting_update_overlays","gender_datums","chemical_reaction_logs","server_name","game_id","log_end","atmosphere_alarm","camera_alarm","fire_alarm","motion_alarm","power_alarm","admin_state","conscious_state","contained_state","default_state","outside_state","hands_state","interactive_state","inventory_state","deep_inventory_state","physical_state","self_state","z_state","tg_admin_state","tg_always_state","tg_conscious_state","tg_contained_state","tg_deep_inventory_state","tg_default_state","tg_hands_state","tg_human_adjacent_state","tg_inventory_state","tg_not_contained_state","tg_not_incapacitated_state","not_incapacitated_turf_state","tg_physical_state","tg_self_state","tg_z_state","machinery_sort_required","autolathe_recipes","autolathe_categories","id_card_states","asset_datums","magazine_icondata_keys","magazine_icondata_states","account_hack_attempted","spacevines_spawned","sent_spiders_to_station","text_tag_icons","scheduler","priority_announcement","command_announcement","security_announcement_up","security_announcement_down","gas_data","area_repository","decls_repository","follow_repository","image_repository","waypoint_repository","create_mob_html","create_object_html","create_turf_html","global_vars_","all_ui_styles","lobby_image","security_level","default_mobloc","data_core","all_areas","machines","processing_objects","processing_power_items","active_diseases","med_hud_users","sec_hud_users","hud_icon_reference","traders","listening_objects","global_mutations","universe","global_map","hit_appends","diary","href_logfile","game_version","changelog_hash","game_year","round_progressing","master_mode","secondary_mode","tertiary_mode","secret_force_mode","host","jobMax","bombers","admin_log","lastsignalers","lawchanges","reg_dna","monkeystart","wizardstart","newplayer_start","latejoin","latejoin_gateway","latejoin_cryo","latejoin_cyborg","prisonwarp","xeno_spawn","tdome1","tdome2","tdomeobserve","tdomeadmin","prisonsecuritywarp","prisonwarped","ninjastart","cardinal","cornerdirs","alldirs","reverse_dir","config","sun","combatlog","IClog","OOClog","adminlog","powernets","Debug2","gravity_is_on","join_motd","nanomanager","event_manager","awaydestinations","sqladdress","sqlport","sqldb","sqllogin","sqlpass","sqlfdbkdb","sqlfdbklogin","sqlfdbkpass","sqllogging","forumsqladdress","forumsqlport","forumsqldb","forumsqllogin","forumsqlpass","forum_activated_group","forum_authenticated_group","fileaccess_timer","custom_event_msg","dbcon","dbcon_old","alphabet_uppercase","robot_module_types","scarySounds","max_explosion_range","global_announcer","station_departments","ai_names","wizard_first","wizard_second","ninja_titles","ninja_names","commando_names","first_names_male","first_names_female","last_names","clown_names","verbs","adjectives","world_topic_spam_protect_ip","world_topic_spam_protect_time","failed_db_connections","failed_old_db_connections","ghost_master","BLINDBLOCK","DEAFBLOCK","HULKBLOCK","TELEBLOCK","FIREBLOCK","XRAYBLOCK","CLUMSYBLOCK","FAKEBLOCK","COUGHBLOCK","GLASSESBLOCK","EPILEPSYBLOCK","TWITCHBLOCK","NERVOUSBLOCK","MONKEYBLOCK","BLOCKADD","DIFFMUT","HEADACHEBLOCK","NOBREATHBLOCK","REMOTEVIEWBLOCK","REGENERATEBLOCK","INCREASERUNBLOCK","REMOTETALKBLOCK","MORPHBLOCK","BLENDBLOCK","HALLUCINATIONBLOCK","NOPRINTSBLOCK","SHOCKIMMUNITYBLOCK","SMALLSIZEBLOCK","default_onmob_icons","defer_powernet_rebuild","restricted_camera_networks","gear_tweak_free_color_choice_","clients","admins","directory","player_list","mob_list","human_mob_list","silicon_mob_list","living_mob_list_","dead_mob_list_","cable_list","chemical_reactions_list","chemical_reagents_list","landmarks_list","surgery_steps","side_effects","mechas_list","joblist","turfs","all_species","all_languages","language_keys","whitelisted_species","playable_species","mannequins_","poster_designs","world_uplinks","hair_styles_list","hair_styles_male_list","hair_styles_female_list","facial_hair_styles_list","facial_hair_styles_male_list","facial_hair_styles_female_list","skin_styles_female_list","global_underwear","backbaglist","exclude_jobs","visual_nets","cameranet","rune_list","endgame_exits","endgame_safespawns","syndicate_access","string_part_flags","string_slot_flags","paramslist_cache","church_name","command_name","religion_name","syndicate_name","syndicate_code_phrase","syndicate_code_response","roundstart_hour","station_date","next_station_date_change","next_duration_update","last_round_duration","round_start_time","common_tools","WALLITEMS","dview_mob","global_hud","global_huds","robot_inventory","pipe_colors","pipe_networks","transfer_controller","radiochannels","CENT_FREQS","ANTAG_FREQS","DEPT_FREQS","radio_controller","gamemode_cache","master_controller","controller_iteration","last_tick_duration","air_processing_killed","pipe_processing_killed","initialization_stage","shuttle_controller","vote","evacuation_controller","list_of_ais","alarm_manager","chemistryProcess","garbage_collector","delayed_garbage","tgui_process","tickerProcess","processing_turfs","wirelessProcess","processScheduler","mil_branches","appearance_manager","revdata","all_observable_events","death_event","density_set_event","destroyed_event","dir_set_event","entered_event","mob_equipped_event","item_equipped_event","life_event","logged_in_event","moved_event","opacity_set_event","see_in_dark_set_event","see_invisible_set_event","sight_set_event","task_triggered_event","turf_changed_event","mob_unequipped_event","item_unequipped_event","global_listen_count","event_sources_count","event_listen_count","outfits_decls_","outfits_decls_root_","outfits_decls_by_type_","admin_pm_repository","attack_log_repository","camera_repository","client_repository","mob_repository","radiation_repository","to_process","uniqueness_repository","uplink_purchase_repository","crew_repository","cargo_supply_pack_root","cargo_supply_packs","supply_methods_","uplink","same_wires","wireColours","PDA_Manifest","newscaster_standard_feeds","announced_news_types","send_emergency_team","ert_base_chance","can_call_ert","shatter_sound","explosion_sound","spark_sound","rustle_sound","punch_sound","clown_sound","swing_hit_sound","hiss_sound","page_sound","fracture_sound","supply_controller","mechtoys","point_source_descriptions","all_antag_types","all_antag_spawnpoints","antag_names_to_ids","borers","xenomorphs","actor","commandos","deathsquad","ert","mercs","ninjas","raiders","wizards","cult","highlanders","loyalists","renegades","revs","malf","traitors","forced_ambiance_list","dna_activity_bounds","assigned_blocks","dna_genes","eventchance","hadevent","antag_add_finished","additional_antag_types","ticker","all_objectives","possible_changeling_IDs","hivemind_bank","powers","powerinstances","narsie_behaviour","narsie_cometh","narsie_list","cultwords","runedec","engwords","rnwords","sacrificed","universe_has_ended","Holiday","nuke_disks","job_master","assistant_occupations","command_positions","engineering_positions","medical_positions","science_positions","cargo_positions","civilian_positions","security_positions","nonhuman_positions","service_positions","supply_positions","whitelist","captain_announcement","doppler_arrays","floor_light_cache","navbeacons","news_network","allCasters","bomb_set","turret_icons","req_console_assistance","req_console_supplies","req_console_information","allConsoles","status_icons_to_colour","ai_status_emotions","priority_air_alarms","minor_air_alarms","air_alarm_topic","specops_shuttle_moving_to_station","specops_shuttle_moving_to_centcom","specops_shuttle_at_station","specops_shuttle_can_send","specops_shuttle_time","specops_shuttle_timeleft","syndicate_elite_shuttle_moving_to_station","syndicate_elite_shuttle_moving_to_mothership","syndicate_elite_shuttle_at_station","syndicate_elite_shuttle_can_send","syndicate_elite_shuttle_time","syndicate_elite_shuttle_timeleft","recentmessages","message_delay","telecomms_list","word_to_uristrune_table","uristrune_cache","explosion_turfs","explosion_in_progress","slot_flags_enumeration","BUMP_TELEPORTERS","splatter_cache","fluidtrack_cache","storedwarrant","activename","activecharges","activeauth","activetype","uplink_random_selections_","chatrooms","PDAs","default_internal_channels","default_medbay_channels","last_chew","cached_icons","hazard_overlays","tape_roll_applications","ashtray_cache","tank_gauge_cache","multi_point_spawns","random_junk_","random_useful_","stool_cache","flooring_types","floor_decals","flooring_cache","BSACooldown","floorIsLava","admin_ranks","admin_secrets","admin_verbs_default","admin_verbs_admin","admin_verbs_ban","admin_verbs_sounds","admin_verbs_fun","admin_verbs_spawn","admin_verbs_server","admin_verbs_debug","admin_verbs_paranoid_debug","admin_verbs_possess","admin_verbs_permissions","admin_verbs_rejuv","admin_verbs_hideable","admin_verbs_mod","admin_verbs_mentor","jobban_runonce","jobban_keylist","admin_datums","CMinutes","Banlist","adminhelp_ignored_words","checked_for_inactives","inactive_keys","camera_range_display_status","intercom_range_display_status","debug_verbs","sounds_cache","asset_cache","preferences_datums","seen_citizenships","seen_systems","seen_factions","seen_religions","citizenship_choices","home_system_choices","faction_choices","religion_choices","spawntypes","client_preference_stats_","uplink_locations","valid_bloodtypes","_client_preferences","_client_preferences_by_key","_client_preferences_by_type","loadout_categories","gear_datums","matchmaker","breach_brute_descriptors","breach_burn_descriptors","current_date_string","vendor_account","station_account","department_accounts","num_financial_terminals","next_account_number","all_money_accounts","economy_init","weighted_randomevent_locations","weighted_mundaneevent_locations","error_last_seen","error_cooldown","total_runtimes","total_runtimes_skipped","error_cache","severity_to_string","event_last_fired","description_icons","dreams","non_fakeattack_weapons","ghost_traps","fruit_icon_cache","plant_controller","plant_seed_sprites","wax_recipes","worths","license_to_url","maploader","_preloader","swapmaps_iconcache","swapmaps_mode","swapmaps_compiled_maxx","swapmaps_compiled_maxy","swapmaps_compiled_maxz","swapmaps_initialized","swapmaps_loaded","swapmaps_byname","name_to_material","mining_walls","mining_floors","ore_data","ores_by_type","holder_mob_icon_cache","slot_equipment_priority","base_miss_chance","organ_rel_size","intents","department_radio_keys","channel_to_radio_key","sparring_attack_cache","human_icon_cache","tail_icon_cache","light_overlay_cache","damage_icon_parts","stored_shock_by_ref","wrapped_species_by_ref","prometheans","ai_list","ai_verbs_default","default_ai_icon","ai_icons","empty_playable_ai_cores","paiController","pai_emotions","pai_software_by_key","default_pai_software","robot_custom_icons","robot_modules","mob_hat_cache","chicken_count","protected_objects","hidden_skill_types","SKILLS","cameranet_","ghost_darkness_images","ghost_sightless_images","all_virtual_listeners","global_modular_computers","file_uid","comm_message_listeners","global_message_listener","last_message_id","warrant_uid","nttransfer_uid","ntnet_card_uid","ntnet_global","ntnrc_uid","z_levels","organ_cache","limb_icon_cache","flesh_hud_colours","robot_hud_colours","all_robolimbs","chargen_robolimbs","basic_robolimb","map_sectors","moving_levels","sector_shuttles","cached_space","ship_engines","allfaxes","admin_departments","alldepartments","adminfaxes","photo_count","possible_cable_coil_colours","light_type_cache","solar_gen_rate","solars_list","fusion_reactions","fusion_cores","fuel_injectors","gyrotrons","rad_collectors","random_maps","map_count","supply_drop","maze_cell_count","lunchables_lunches_","lunchables_snacks_","lunchables_drinks_","lunchables_drink_reagents_","lunchables_ethanol_reagents_","message_servers","blackbox","default_material_composition","maint_all_access","escape_pods","escape_pods_by_name","spells","artefact_feedback","turbolifts","turbolift_controller","ventcrawl_machinery","ALL_ANTIGENS","virusDB","responsive_carriers","finds_as_strings","all_unit_tests_passed","failed_unit_tests","skipped_unit_tests","total_unit_tests","currently_running_tests","ascii_esc","ascii_red","ascii_green","ascii_yellow","ascii_reset","air_master","tick_multiplier","assigned","created","merged","invalid_zone","air_blocked","zone_blocked","blocked","mark","contamination_overlay","vsc","using_map","all_maps","init")
+/var/list/_all_globals=list("tagger_locations","is_station_but_not_space_or_shuttle_area","is_contact_but_not_space_or_shuttle_area","is_player_but_not_space_or_shuttle_area","delta_index","meteors_dust","meteors_normal","meteors_threatening","meteors_catastrophic","meteors_armageddon","meteors_cataclysm","priv_all_access_datums","priv_all_access_datums_id","priv_all_access_datums_region","priv_all_access","priv_station_access","priv_centcom_access","priv_syndicate_access","priv_region_access","alien_whitelist","acting_rank_prefixes","view_variables_hide_vars","view_variables_dont_expand","view_variables_no_assoc","custom_items","economic_species_modifier","lighting_update_lights","lighting_update_overlays","gender_datums","chemical_reaction_logs","server_name","game_id","log_end","atmosphere_alarm","camera_alarm","fire_alarm","motion_alarm","power_alarm","admin_state","conscious_state","contained_state","default_state","outside_state","hands_state","interactive_state","inventory_state","deep_inventory_state","physical_state","self_state","z_state","tg_admin_state","tg_always_state","tg_conscious_state","tg_contained_state","tg_deep_inventory_state","tg_default_state","tg_hands_state","tg_human_adjacent_state","tg_inventory_state","tg_not_contained_state","tg_not_incapacitated_state","not_incapacitated_turf_state","tg_physical_state","tg_self_state","tg_z_state","machinery_sort_required","autolathe_recipes","autolathe_categories","PDA_Manifest","id_card_states","asset_datums","magazine_icondata_keys","magazine_icondata_states","account_hack_attempted","spacevines_spawned","sent_spiders_to_station","text_tag_icons","scheduler","security_announcement_up","security_announcement_down","priority_announcement","command_announcement","gas_data","area_repository","decls_repository","follow_repository","image_repository","create_mob_html","create_object_html","create_turf_html","global_vars_","all_ui_styles","lobby_image","security_level","default_mobloc","data_core","all_areas","machines","processing_objects","processing_power_items","active_diseases","med_hud_users","sec_hud_users","hud_icon_reference","traders","listening_objects","global_mutations","universe","global_map","hit_appends","diary","href_logfile","game_version","changelog_hash","game_year","round_progressing","master_mode","secondary_mode","tertiary_mode","secret_force_mode","host","jobMax","bombers","admin_log","lastsignalers","lawchanges","reg_dna","monkeystart","wizardstart","newplayer_start","latejoin","latejoin_gateway","latejoin_cryo","latejoin_cyborg","prisonwarp","xeno_spawn","tdome1","tdome2","tdomeobserve","tdomeadmin","prisonsecuritywarp","prisonwarped","ninjastart","cardinal","cornerdirs","alldirs","reverse_dir","config","sun","combatlog","IClog","OOClog","adminlog","powernets","Debug2","gravity_is_on","join_motd","nanomanager","event_manager","awaydestinations","sqladdress","sqlport","sqldb","sqllogin","sqlpass","sqlfdbkdb","sqlfdbklogin","sqlfdbkpass","sqllogging","forumsqladdress","forumsqlport","forumsqldb","forumsqllogin","forumsqlpass","forum_activated_group","forum_authenticated_group","fileaccess_timer","custom_event_msg","dbcon","dbcon_old","alphabet_uppercase","robot_module_types","scarySounds","max_explosion_range","global_announcer","station_departments","ai_names","wizard_first","wizard_second","ninja_titles","ninja_names","commando_names","first_names_male","first_names_female","last_names","clown_names","verbs","adjectives","world_topic_spam_protect_ip","world_topic_spam_protect_time","failed_db_connections","failed_old_db_connections","ghost_master","BLINDBLOCK","DEAFBLOCK","HULKBLOCK","TELEBLOCK","FIREBLOCK","XRAYBLOCK","CLUMSYBLOCK","FAKEBLOCK","COUGHBLOCK","GLASSESBLOCK","EPILEPSYBLOCK","TWITCHBLOCK","NERVOUSBLOCK","MONKEYBLOCK","BLOCKADD","DIFFMUT","HEADACHEBLOCK","NOBREATHBLOCK","REMOTEVIEWBLOCK","REGENERATEBLOCK","INCREASERUNBLOCK","REMOTETALKBLOCK","MORPHBLOCK","BLENDBLOCK","HALLUCINATIONBLOCK","NOPRINTSBLOCK","SHOCKIMMUNITYBLOCK","SMALLSIZEBLOCK","default_onmob_icons","defer_powernet_rebuild","restricted_camera_networks","gear_tweak_free_color_choice_","clients","admins","directory","player_list","mob_list","human_mob_list","silicon_mob_list","living_mob_list_","dead_mob_list_","cable_list","chemical_reactions_list","chemical_reagents_list","landmarks_list","surgery_steps","side_effects","mechas_list","joblist","turfs","all_species","all_languages","language_keys","whitelisted_species","playable_species","mannequins_","poster_designs","world_uplinks","hair_styles_list","hair_styles_male_list","hair_styles_female_list","facial_hair_styles_list","facial_hair_styles_male_list","facial_hair_styles_female_list","skin_styles_female_list","global_underwear","backbaglist","exclude_jobs","visual_nets","cameranet","rune_list","endgame_exits","endgame_safespawns","syndicate_access","string_part_flags","string_slot_flags","paramslist_cache","church_name","command_name","religion_name","syndicate_name","syndicate_code_phrase","syndicate_code_response","roundstart_hour","station_date","next_station_date_change","next_duration_update","last_round_duration","round_start_time","common_tools","WALLITEMS","dview_mob","global_hud","global_huds","robot_inventory","transfer_controller","radiochannels","CENT_FREQS","ANTAG_FREQS","DEPT_FREQS","radio_controller","gamemode_cache","master_controller","controller_iteration","last_tick_duration","air_processing_killed","pipe_processing_killed","initialization_stage","shuttle_controller","vote","evacuation_controller","list_of_ais","alarm_manager","chemistryProcess","garbage_collector","delayed_garbage","tgui_process","tickerProcess","processing_turfs","wirelessProcess","processScheduler","mil_branches","appearance_manager","revdata","all_observable_events","death_event","density_set_event","destroyed_event","dir_set_event","entered_event","mob_equipped_event","item_equipped_event","life_event","logged_in_event","logged_out_event","moved_event","opacity_set_event","see_in_dark_set_event","see_invisible_set_event","sight_set_event","stat_set_event","task_triggered_event","turf_changed_event","mob_unequipped_event","item_unequipped_event","global_listen_count","event_sources_count","event_listen_count","outfits_decls_","outfits_decls_root_","outfits_decls_by_type_","admin_pm_repository","attack_log_repository","camera_repository","client_repository","mob_repository","radiation_repository","to_process","uniqueness_repository","uplink_purchase_repository","crew_repository","cargo_supply_pack_root","cargo_supply_packs","supply_methods_","uplink","same_wires","wireColours","newscaster_standard_feeds","announced_news_types","send_emergency_team","ert_base_chance","can_call_ert","shatter_sound","explosion_sound","spark_sound","rustle_sound","punch_sound","clown_sound","swing_hit_sound","hiss_sound","page_sound","fracture_sound","lighter_sound","supply_controller","mechtoys","point_source_descriptions","all_antag_types","all_antag_spawnpoints","antag_names_to_ids","borers","xenomorphs","actor","commandos","deathsquad","ert","mercs","ninjas","raiders","wizards","cult","highlanders","loyalists","renegades","revs","malf","traitors","forced_ambiance_list","dna_activity_bounds","assigned_blocks","dna_genes","eventchance","hadevent","antag_add_finished","additional_antag_types","ticker","all_objectives","possible_changeling_IDs","hivemind_bank","powers","powerinstances","narsie_behaviour","narsie_cometh","narsie_list","Tier1Runes","Tier2Runes","Tier3Runes","Tier4Runes","universe_has_ended","Holiday","nuke_disks","job_master","assistant_occupations","command_positions","engineering_positions","medical_positions","science_positions","cargo_positions","civilian_positions","security_positions","nonhuman_positions","service_positions","supply_positions","whitelist","captain_announcement","doppler_arrays","floor_light_cache","navbeacons","news_network","allCasters","bomb_set","turret_icons","req_console_assistance","req_console_supplies","req_console_information","allConsoles","status_icons_to_colour","ai_status_emotions","priority_air_alarms","minor_air_alarms","air_alarm_topic","specops_shuttle_moving_to_station","specops_shuttle_moving_to_centcom","specops_shuttle_at_station","specops_shuttle_can_send","specops_shuttle_time","specops_shuttle_timeleft","syndicate_elite_shuttle_moving_to_station","syndicate_elite_shuttle_moving_to_mothership","syndicate_elite_shuttle_at_station","syndicate_elite_shuttle_can_send","syndicate_elite_shuttle_time","syndicate_elite_shuttle_timeleft","recentmessages","message_delay","telecomms_list","explosion_turfs","explosion_in_progress","slot_flags_enumeration","BUMP_TELEPORTERS","splatter_cache","fluidtrack_cache","storedwarrant","activename","activecharges","activeauth","activetype","uplink_random_selections_","PDAs","default_internal_channels","default_medbay_channels","last_chew","cached_icons","hazard_overlays","tape_roll_applications","ashtray_cache","tank_gauge_cache","multi_point_spawns","random_junk_","random_useful_","stool_cache","flooring_types","floor_decals","flooring_cache","BSACooldown","floorIsLava","admin_ranks","admin_secrets","admin_verbs_default","admin_verbs_admin","admin_verbs_ban","admin_verbs_sounds","admin_verbs_fun","admin_verbs_spawn","admin_verbs_server","admin_verbs_debug","admin_verbs_paranoid_debug","admin_verbs_possess","admin_verbs_permissions","admin_verbs_rejuv","admin_verbs_hideable","admin_verbs_mod","admin_verbs_mentor","jobban_runonce","jobban_keylist","admin_datums","CMinutes","Banlist","adminhelp_ignored_words","checked_for_inactives","inactive_keys","camera_range_display_status","intercom_range_display_status","debug_verbs","sounds_cache","pipe_colors","pipe_networks","asset_cache","preferences_datums","seen_citizenships","seen_systems","seen_factions","seen_religions","citizenship_choices","home_system_choices","faction_choices","religion_choices","spawntypes","client_preference_stats_","uplink_locations","valid_bloodtypes","_client_preferences","_client_preferences_by_key","_client_preferences_by_type","loadout_categories","gear_datums","matchmaker","breach_brute_descriptors","breach_burn_descriptors","current_date_string","vendor_account","station_account","department_accounts","num_financial_terminals","next_account_number","all_money_accounts","economy_init","weighted_randomevent_locations","weighted_mundaneevent_locations","error_last_seen","error_cooldown","total_runtimes","total_runtimes_skipped","error_cache","severity_to_string","event_last_fired","description_icons","dreams","non_fakeattack_weapons","ghost_traps","fruit_icon_cache","plant_controller","plant_seed_sprites","wax_recipes","worths","license_to_url","maploader","_preloader","swapmaps_iconcache","swapmaps_mode","swapmaps_compiled_maxx","swapmaps_compiled_maxy","swapmaps_compiled_maxz","swapmaps_initialized","swapmaps_loaded","swapmaps_byname","name_to_material","mining_walls","mining_floors","ore_data","ores_by_type","holder_mob_icon_cache","slot_equipment_priority","base_miss_chance","organ_rel_size","intents","department_radio_keys","channel_to_radio_key","sparring_attack_cache","human_icon_cache","tail_icon_cache","light_overlay_cache","damage_icon_parts","stored_shock_by_ref","wrapped_species_by_ref","prometheans","ai_list","ai_verbs_default","default_ai_icon","ai_icons","empty_playable_ai_cores","paiController","pai_emotions","pai_software_by_key","default_pai_software","robot_custom_icons","robot_modules","mob_hat_cache","chicken_count","protected_objects","hidden_skill_types","SKILLS","cameranet_","ghost_darkness_images","ghost_sightless_images","all_virtual_listeners","global_modular_computers","file_uid","comm_message_listeners","global_message_listener","last_message_id","warrant_uid","nttransfer_uid","ntnet_card_uid","ntnet_global","ntnrc_uid","z_levels","organ_cache","limb_icon_cache","flesh_hud_colours","robot_hud_colours","all_robolimbs","chargen_robolimbs","basic_robolimb","map_sectors","moving_levels","sector_shuttles","cached_space","ship_engines","allfaxes","admin_departments","alldepartments","adminfaxes","photo_count","possible_cable_coil_colours","light_type_cache","solar_gen_rate","solars_list","fusion_reactions","fusion_cores","fuel_injectors","gyrotrons","rad_collectors","random_maps","map_count","supply_drop","maze_cell_count","lunchables_lunches_","lunchables_snacks_","lunchables_drinks_","lunchables_drink_reagents_","lunchables_ethanol_reagents_","message_servers","blackbox","default_material_composition","maint_all_access","escape_pods","escape_pods_by_name","spells","artefact_feedback","turbolifts","turbolift_controller","ventcrawl_machinery","ALL_ANTIGENS","virusDB","responsive_carriers","finds_as_strings","air_master","tick_multiplier","assigned","created","merged","invalid_zone","air_blocked","zone_blocked","blocked","mark","contamination_overlay","vsc","all_unit_tests_passed","failed_unit_tests","skipped_unit_tests","total_unit_tests","currently_running_tests","ascii_esc","ascii_red","ascii_green","ascii_yellow","ascii_reset","using_map","all_maps","init")

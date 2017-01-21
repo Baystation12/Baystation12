@@ -1,5 +1,5 @@
 /obj/item/weapon/tape_roll
-	name = "tape roll"
+	name = "duct tape"
 	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
@@ -76,7 +76,7 @@
 	user.put_in_hands(tape)
 
 /obj/item/weapon/ducttape
-	name = "tape"
+	name = "piece of tape"
 	desc = "A piece of sticky tape."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "tape"

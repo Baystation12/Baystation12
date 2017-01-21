@@ -42,27 +42,27 @@
 /datum/shuttle_waypoint/overmap/ingoing1
 	name = "Navpoint #1"
 	id = "ingoing1"
-	landmark_turf = "nav_ingoing1"
+	landmark_tag = "nav_ingoing1"
 
 /datum/shuttle_waypoint/overmap/ingoing2
 	name = "Navpoint #2"
 	id = "ingoing2"
-	landmark_turf = "nav_ingoing2"
+	landmark_tag = "nav_ingoing2"
 
 /datum/shuttle_waypoint/overmap/ingoing3
 	name = "Navpoint #3"
 	id = "ingoing3"
-	landmark_turf = "nav_ingoing3"
+	landmark_tag = "nav_ingoing3"
 
 /datum/shuttle_waypoint/overmap/ingoing4
 	name = "Navpoint #4"
 	id = "ingoing4"
-	landmark_turf = "nav_ingoing4"
+	landmark_tag = "nav_ingoing4"
 
 /datum/shuttle_waypoint/overmap/pod
 	name = "Navpoint #5"
 	id = "abandoned_pod"
-	landmark_turf = "nav_abandoned_pod"
+	landmark_tag = "nav_abandoned_pod"
 
 // TODO: get rid of these
 /area/sector/shuttle/ingoing1

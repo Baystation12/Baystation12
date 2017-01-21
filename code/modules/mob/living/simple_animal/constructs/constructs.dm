@@ -85,6 +85,12 @@
 
 	to_chat(user, msg)
 
+/obj/item/weapon/ectoplasm
+	name = "ectoplasm"
+	desc = "Spooky."
+	gender = PLURAL
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "ectoplasm"
 
 /////////////////Juggernaut///////////////
 
@@ -241,8 +247,7 @@
 
 	construct_spells = list(
 			/spell/targeted/harvest,
-			/spell/aoe_turf/knock/harvester,
-			/spell/rune_write
+			/spell/aoe_turf/knock/harvester
 		)
 
 ////////////////Glow//////////////////

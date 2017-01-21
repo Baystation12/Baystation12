@@ -2,7 +2,7 @@
 
 /obj/item/device/mmi/digital/New()
 	src.brainmob = new(src)
-	src.brainmob.stat = CONSCIOUS
+	src.brainmob.set_stat(CONSCIOUS)
 	src.brainmob.add_language("Robot Talk")
 	src.brainmob.add_language("Encoded Audio Language")
 
@@ -23,7 +23,7 @@
 /obj/item/device/mmi/digital/transfer_identity(var/mob/living/carbon/H)
 	brainmob.dna = H.dna
 	brainmob.timeofhostdeath = H.timeofdeath
-	brainmob.stat = 0
+	brainmob.set_stat(CONSCIOUS)
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 	return
@@ -62,7 +62,7 @@
 		B.brainmob = null
 		brainmob.forceMove(src)
 		brainmob.container = src
-		brainmob.stat = 0
+		brainmob.set_stat(CONSCIOUS)
 		brainmob.switch_from_dead_to_living_mob_list() //Update dem lists
 
 		user.drop_item()

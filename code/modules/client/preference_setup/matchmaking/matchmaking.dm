@@ -33,8 +33,8 @@ var/global/datum/matchmaker/matchmaker = new()
 //Types of relations
 
 /datum/relation
-	var/name = "Acquintance"
-	var/desc = "You just know the guy."
+	var/name = "Acquaintance"
+	var/desc = "You just know them."
 	var/list/can_connect_to	//What relations (names) can matchmaking join us with? Defaults to own name.
 	var/list/incompatible 	//If we have relation like this with the mob, we can't join
 	var/datum/mind/holder
@@ -79,7 +79,7 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/proc/get_copy()
 	var/datum/relation/R = new type
 	R.holder = holder
-	R.info = info
+	R.info = holder.current && holder.current.client ? holder.current.client.prefs.relations_info[R.name] : info
 	R.open = 0
 	return R
 
@@ -111,7 +111,7 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(other && other.finalized)
 		var/datum/data/record/R1 = find_general_record("name", holder.name)
 		var/datum/data/record/R2 = find_general_record("name", other.holder.name)
-		var/info = prob(60) ? get_desc_string() : "[holder] and [other.holder] know each other, but the exact nature of their relationship is unclear."
+		var/info = prob(60) ? get_desc_string() : "[holder.original.real_name] and [other.holder.original.real_name] know each other, but the exact nature of their relationship is unclear."
 		if(R1)
 			R1.fields["connections"] |= info
 		if(R2)
@@ -138,10 +138,10 @@ var/global/datum/matchmaker/matchmaker = new()
 			if(prob(70))
 				M.mind.known_connections += get_desc_string()
 			else
-				M.mind.known_connections += "[holder] and [other.holder] seem to know each other, but you're not sure on the details."
+				M.mind.known_connections += "[holder.original.real_name] and [other.holder.original.real_name] seem to know each other, but you're not sure on the details."
 
 /datum/relation/proc/get_desc_string()
-	return "[holder] and [other.holder] know each other."
+	return "[holder.original.real_name] and [other.holder.original.real_name] know each other."
 
 /mob/living/verb/see_relationship_info()
 	set name = "See Relationship Info"
@@ -155,7 +155,10 @@ var/global/datum/matchmaker/matchmaker = new()
 		dat += "<b>Things they all know about you:</b><br>[mind.gen_relations_info]<br>"
 		dat += "<br>"
 	for(var/datum/relation/R in relations)
-		dat += "<b>[R.other.holder]</b>"
+		if(R.other.holder.original)
+			dat += "<b>[R.other.holder.original.real_name]</b>[R.other.holder.original.job]."
+		else
+			dat += "<b>[R.other.holder]</b>."
 		if (!R.finalized)
 			dat += " <a href='?src=\ref[src];del_relation=\ref[R]'>Remove</a>"
 			editable = 1

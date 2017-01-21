@@ -233,3 +233,6 @@
 /datum/gear/accessory/kneepads
 	display_name = "kneepads"
 	path = /obj/item/clothing/accessory/kneepads
+
+/datum/gear/accessory/flannel
+	allowed_roles = NON_MILITARY_ROLES

@@ -24,14 +24,14 @@
 /datum/shuttle_waypoint/overmap/docking_arm_port
 	name = "Bearcat Port-side Docking Arm"
 	id = "outgoing"
-	landmark_turf = "nav_outgoing"
+	landmark_tag = "nav_outgoing"
 
 /datum/shuttle_waypoint/overmap/docking_arm_starboard
 	name = "Bearcat Starboard-side Docking Arm"
 	id = "incoming"
-	landmark_turf = "nav_incoming"
+	landmark_tag = "nav_incoming"
 
 /datum/shuttle_waypoint/overmap/below_deck
 	name = "Near CSV Bearcat"
 	id = "bearcat_below"
-	landmark_turf = "nav_pod"
+	landmark_tag = "nav_pod"

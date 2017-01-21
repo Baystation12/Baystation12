@@ -21,3 +21,6 @@
 
 /datum/gear/shoes/flats
 	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/shoes/high
+	allowed_roles = NON_MILITARY_ROLES

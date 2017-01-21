@@ -119,14 +119,25 @@
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if(istype(user,/mob/living/silicon/robot))
-			return
+			return FALSE
 		if(affected && affected.cavity)
-			var/total_volume = tool.w_class
+			var/max_w_class = get_max_wclass(affected)
+			var/max_volume = base_storage_capacity(max_w_class)
+
+			if(tool.w_class > max_w_class)
+				to_chat(user, "<span class='warning'>\The [tool] is too big for this cavity.</span>")
+				return FALSE
+
+			var/total_volume = tool.get_storage_cost()
 			for(var/obj/item/I in affected.implants)
 				if(istype(I,/obj/item/weapon/implant))
 					continue
-				total_volume += I.w_class
-			return total_volume <= get_max_wclass(affected)
+				total_volume += I.get_storage_cost()
+			if(total_volume > max_volume)
+				to_chat(user, "<span class='warning'>There isn't enough space left in this cavity for [tool].</span>")
+				return FALSE
+			return TRUE
+
 
 /datum/surgery_step/cavity/place_item/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

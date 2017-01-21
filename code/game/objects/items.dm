@@ -2,6 +2,7 @@
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	w_class = ITEM_SIZE_NORMAL
+	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
@@ -364,9 +365,6 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 		if(slot_handcuffed)
 			if(!istype(src, /obj/item/weapon/handcuffs))
-				return 0
-		if(slot_legcuffed)
-			if(!istype(src, /obj/item/weapon/legcuffs))
 				return 0
 		if(slot_in_backpack) //used entirely for equipping spawned mobs or at round start
 			var/allow = 0

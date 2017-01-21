@@ -388,9 +388,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	O.adjustBruteLoss(C.getBruteLoss())
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
-	O.stat = C.stat
+	O.set_stat(C.stat)
 	for (var/obj/item/weapon/implant/I in implants)
-		I.loc = O
+		I.forceMove(O)
 		I.implanted = O
 
 	C.mind.transfer_to(O)
@@ -477,7 +477,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.chem_charges -= 45
 
 	var/mob/living/carbon/human/C = src
-	C.stat = 0
+	C.set_stat(CONSCIOUS)
 	C.SetParalysis(0)
 	C.SetStunned(0)
 	C.SetWeakened(0)
