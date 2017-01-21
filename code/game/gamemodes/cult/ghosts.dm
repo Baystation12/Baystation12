@@ -30,8 +30,6 @@
 	if(!ghost_ability_check())
 		return
 
-	log_and_message_admins("used ghost magic to flick lights - [x]-[y]-[z]")
-
 	for(var/obj/machinery/light/L in range(3))
 		L.flicker()
 
@@ -99,7 +97,7 @@
 		else
 			W.visible_message("<span class='warning'>Blood appears out of nowhere as invisible fingers crudely paint something on \the [T].</span>")
 
-		log_and_message_admins("used ghost magic to write '[message]' - [x]-[y]-[z]")
+		log_admin("[src] ([src.key]) used ghost magic to write '[message]' - [x]-[y]-[z]")
 
 	ghost_magic_cd = world.time + 30 SECONDS
 
@@ -113,8 +111,6 @@
 
 	playsound(loc, "shatter", 50, 1)
 
-	log_and_message_admins("used ghost magic make glass shatter sound - [x]-[y]-[z]")
-
 	ghost_magic_cd = world.time + 5 SECONDS
 
 /mob/observer/ghost/proc/slice()
@@ -124,8 +120,6 @@
 
 	if(!ghost_ability_check())
 		return
-
-	log_and_message_admins("used ghost magic make slice sound - [x]-[y]-[z]")
 
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1)
 
@@ -160,8 +154,6 @@
 	if(step_to(choice, T))
 		choice.visible_message("<span class='warning'>\The [choice] suddenly moves!</span>")
 
-	log_and_message_admins("used ghost magic move \the [choice] - [x]-[y]-[z]")
-
 	ghost_magic_cd = world.time + 60 SECONDS
 
 /mob/observer/ghost/proc/whisper_to_cultist(var/anyone = 0)
@@ -188,10 +180,10 @@
 	if(message)
 		if(iscultist(choice) || anyone)
 			to_chat(choice, "<span class='notice'>You hear a faint whisper... It says... \"[message]\"</span>")
-			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] and was heard - [x]-[y]-[z]")
+			log_admin("[src] ([src.key]) used ghost magic to say '[message]' to \the [choice] and was heard - [x]-[y]-[z]")
 		else
 			to_chat(choice, "<span class='notice'>You hear a faint whisper, but you can't make out the words.</span>")
-			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] but wasn't heard - [x]-[y]-[z]")
+			log_admin("[src] ([src.key]) used ghost magic to say '[message]' to \the [choice] but wasn't heard - [x]-[y]-[z]")
 		to_chat(src, "You whisper to \the [choice]. Perhaps they heard you.")
 
 
@@ -281,10 +273,8 @@
 		visible_message("<span class='emote'>It fades from sight...</span>")
 		invisibility = INVISIBILITY_OBSERVER
 		mouse_opacity = 1
-		log_and_message_admins("used ghost magic to become invisible - [x]-[y]-[z]")
 	else
 		ghost_magic_cd = world.time + 60 SECONDS
 		to_chat(src, "<span class='info'>You are now visible.</span>")
 		invisibility = 0
 		mouse_opacity = 0 // This is so they don't make people invincible to melee attacks by hovering over them
-		log_and_message_admins("used ghost magic to become visible - [x]-[y]-[z]")
