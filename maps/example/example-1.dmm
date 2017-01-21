@@ -27,10 +27,11 @@
 "A" = (/obj/machinery/computer/shuttle_control{shuttle_tag = "Example"},/turf/simulated/floor/plating,/area/shuttle/escape)
 "B" = (/obj/structure/bed/chair{dir = 1},/obj/effect/shuttle_landmark{name = "nav point - station"; tag = "nav_example_station"},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_starboard"; pixel_x = 28; tag = "example_shuttle_starboard"},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_port"; pixel_x = -28; tag = "example_shuttle_port"},/turf/simulated/floor/plating,/area/shuttle/escape)
 "C" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/shuttle/escape)
-"D" = (/obj/machinery/door/airlock/external/bolted{id_tag = "example_shuttle_port_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
-"E" = (/obj/machinery/door/airlock/external/bolted{id_tag = "example_shuttle_starboard_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
-"F" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "lower_level_dock"; pixel_x = -8; pixel_y = -25},/turf/simulated/floor/tiled,/area/constructionsite)
-"G" = (/obj/machinery/door/airlock/external/bolted{id_tag = "lower_level_dock_hatch"},/turf/space,/area/constructionsite)
+"D" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_port_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"E" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_starboard_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"F" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "lower_level_dock"; pixel_x = -8; pixel_y = -25},/turf/simulated/floor,/area/constructionsite)
+"G" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "lower_level_dock_hatch"},/turf/simulated/floor,/area/constructionsite)
+"H" = (/turf/simulated/floor,/area/constructionsite)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -49,9 +50,9 @@ aaaaaaaaaaaaaaaaabclllcwwwccccvbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaabelllxwwwccccfbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaabccccccccccsccbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaayyyaabccccccccccmonbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaazAzaabccccccgccccccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaazAzaabucccccgccccccbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaazBzbbbccccccccccpoqbaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaDCEGFcucccccccccrccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaDCEGFHccccccccccrccbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaayyybbbectttcccccccfbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaabhctttccccccccbaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaabictttccccccccbaaaaaaaaaaaaaaaa
