@@ -80,3 +80,6 @@
 
 /datum/gear/suit/wintercoat
 	allowed_roles = list("Passenger", "Bartender", "Merchant")
+
+/datum/gear/suit/track
+	allowed_roles = NON_MILITARY_ROLES

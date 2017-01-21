@@ -46,3 +46,11 @@
 	display_name = "flats"
 	path = /obj/item/clothing/shoes/flats
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/shoes/high
+	display_name = "high tops selection"
+	path = /obj/item/clothing/shoes/hightops
+
+/datum/gear/shoes/high/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/shoes/hightops)

@@ -45,7 +45,7 @@ datum/controller/game_controller/proc/setup()
 
 	transfer_controller = new
 
-	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
+	report_progress("Initializations complete")
 	initialization_stage |= INITIALIZATION_COMPLETE
 
 #ifdef UNIT_TEST
@@ -67,30 +67,32 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
-	admin_notice("<span class='danger'>Initializing turbolifts</span>", R_DEBUG)
+	initialization_stage |= INITIALIZATION_HAS_BEGUN
+
+	report_progress("Initializing turbolifts")
 	for(var/thing in turbolifts)
 		if(!deleted(thing))
 			var/obj/turbolift_map_holder/lift = thing
 			lift.initialize()
 			CHECK_SLEEP_MASTER
 
-	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
+	report_progress("Initializing objects")
 	for(var/atom/movable/object in world)
 		if(!deleted(object))
 			object.initialize()
 			CHECK_SLEEP_MASTER
 
-	admin_notice("<span class='danger'>Initializing areas</span>", R_DEBUG)
+	report_progress("Initializing areas")
 	for(var/area/area in all_areas)
 		area.initialize()
 		CHECK_SLEEP_MASTER
 
-	admin_notice("<span class='danger'>Initializing pipe networks</span>", R_DEBUG)
+	report_progress("Initializing pipe networks")
 	for(var/obj/machinery/atmospherics/machine in machines)
 		machine.build_network()
 		CHECK_SLEEP_MASTER
 
-	admin_notice("<span class='danger'>Initializing atmos machinery.</span>", R_DEBUG)
+	report_progress("Initializing atmos machinery")
 	for(var/obj/machinery/atmospherics/unary/U in machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
@@ -101,3 +103,9 @@ datum/controller/game_controller/proc/setup_objects()
 		CHECK_SLEEP_MASTER
 
 #undef CHECK_SLEEP_MASTER
+
+datum/controller/game_controller/proc/report_progress(var/progress_message)
+	admin_notice("<span class='danger'>[progress_message]</span>", R_DEBUG)
+#ifdef UNIT_TEST
+	to_world_log("\[[time2text(world.realtime, "hh:mm:ss")]\] [progress_message]")
+#endif

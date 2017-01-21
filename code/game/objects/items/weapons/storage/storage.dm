@@ -166,11 +166,12 @@
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/obj/item/weapon/storage/proc/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
-	if(!istype(W)) return 0
-	if(usr)
-		usr.remove_from_mob(W)
-		usr.update_icons()	//update our overlays
+/obj/item/weapon/storage/proc/handle_item_insertion(var/obj/item/W, var/prevent_warning = 0, var/NoUpdate = 0)
+	if(!istype(W))
+		return 0
+	if(istype(W.loc, /mob))
+		var/mob/M = W.loc
+		M.remove_from_mob(W)
 	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
@@ -185,13 +186,21 @@
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 
-		prepare_ui()
-		storage_ui.on_insertion(usr)
+		if(!NoUpdate)
+			update_ui_after_item_insertion()
 	update_icon()
 	return 1
 
+/obj/item/weapon/storage/proc/update_ui_after_item_insertion()
+	prepare_ui()
+	storage_ui.on_insertion(usr)
+
+/obj/item/weapon/storage/proc/update_ui_after_item_removal()
+	prepare_ui()
+	storage_ui.on_post_remove(usr)
+
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-/obj/item/weapon/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location)
+/obj/item/weapon/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, var/NoUpdate = 0)
 	if(!istype(W)) return 0
 	new_location = new_location || get_turf(src)
 
@@ -205,9 +214,8 @@
 		W.reset_plane_and_layer()
 	W.forceMove(new_location)
 
-	if(usr)
-		prepare_ui()
-		storage_ui.on_post_remove(usr)
+	if(usr && !NoUpdate)
+		update_ui_after_item_removal()
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
@@ -271,24 +279,22 @@
 	src.add_fingerprint(user)
 	return
 
-/obj/item/weapon/storage/proc/gather_all(turf/T as turf, mob/user as mob)
-	var/list/rejections = list()
+/obj/item/weapon/storage/proc/gather_all(var/turf/T, var/mob/user)
 	var/success = 0
 	var/failure = 0
 
 	for(var/obj/item/I in T)
-		if(I.type in rejections) // To limit bag spamming: any given type only complains once
-			continue
-		if(!can_be_inserted(I, user))	// Note can_be_inserted still makes noise when the answer is no
-			rejections += I.type	// therefore full bags are still a little spammy
+		if(!can_be_inserted(I, user, 0))	// Note can_be_inserted still makes noise when the answer is no
 			failure = 1
 			continue
 		success = 1
-		handle_item_insertion(I, 1)	//The 1 stops the "You put the [src] into [S]" insertion message from being displayed.
+		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
 	if(success && !failure)
-		to_chat(user, "<span class='notice'>You put everything in [src].</span>")
+		to_chat(user, "<span class='notice'>You put everything into \the [src].</span>")
+		update_ui_after_item_insertion()
 	else if(success)
-		to_chat(user, "<span class='notice'>You put some things in [src].</span>")
+		to_chat(user, "<span class='notice'>You put some things into \the [src].</span>")
+		update_ui_after_item_insertion()
 	else
 		to_chat(user, "<span class='notice'>You fail to pick anything up with \the [src].</span>")
 
@@ -302,6 +308,7 @@
 			to_chat(usr, "\The [src] now picks up all items in a tile at once.")
 		if(0)
 			to_chat(usr, "\The [src] now picks up one item at a time.")
+
 /obj/item/weapon/storage/verb/quick_empty()
 	set name = "Empty Contents"
 	set category = "Object"
@@ -312,7 +319,8 @@
 	var/turf/T = get_turf(src)
 	hide_from(usr)
 	for(var/obj/item/I in contents)
-		remove_from_storage(I, T)
+		remove_from_storage(I, T, 1)
+	update_ui_after_item_removal()
 
 /obj/item/weapon/storage/New()
 	..()

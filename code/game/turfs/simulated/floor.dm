@@ -44,9 +44,6 @@
 /turf/simulated/floor/proc/make_plating(var/place_product, var/defer_icon_update)
 
 	overlays.Cut()
-	if(islist(decals))
-		decals.Cut()
-		decals = null
 
 	name = base_name
 	desc = base_desc
@@ -74,6 +71,6 @@
 		O.hide(O.hides_under_flooring() && src.flooring)
 
 	if(flooring)
-		reset_plane_and_layer()
+		plane = TURF_PLANE
 	else
 		plane = PLATING_PLANE

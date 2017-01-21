@@ -500,6 +500,8 @@
 			world.log << "## DEBUG: mind_initialize(): No ticker ready yet! Please inform Carn"
 	if(!mind.name)	mind.name = real_name
 	mind.current = src
+	if(player_is_antag(mind))
+		src.client.verbs += /client/proc/aooc
 
 //HUMAN
 /mob/living/carbon/human/mind_initialize()

@@ -33,75 +33,67 @@
 	name = "Old Ben"
 	on = 0
 
-/mob/living/bot/farmbot/attack_hand(var/mob/user as mob)
-	. = ..()
-	if(.)
-		return
-	var/dat = ""
-	dat += "<TT><B>Automatic Hyrdoponic Assisting Unit v1.0</B></TT><BR><BR>"
-	dat += "Status: <A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A><BR>"
-	dat += "Water Tank: "
-	if (tank)
-		dat += "[tank.reagents.total_volume]/[tank.reagents.maximum_volume]"
-	else
-		dat += "Error: Watertank not found"
-	dat += "<br>Behaviour controls are [locked ? "locked" : "unlocked"]<hr>"
-	if(!locked)
-		dat += "<TT>Watering controls:<br>"
-		dat += "Water plants : <A href='?src=\ref[src];water=1'>[waters_trays ? "Yes" : "No"]</A><BR>"
-		dat += "Refill watertank : <A href='?src=\ref[src];refill=1'>[refills_water ? "Yes" : "No"]</A><BR>"
-		dat += "<br>Weeding controls:<br>"
-		dat += "Weed plants: <A href='?src=\ref[src];weed=1'>[uproots_weeds ? "Yes" : "No"]</A><BR>"
-		dat += "<br>Nutriment controls:<br>"
-		dat += "Replace fertilizer: <A href='?src=\ref[src];replacenutri=1'>[replaces_nutriment ? "Yes" : "No"]</A><BR>"
-		dat += "<br>Plant controls:<br>"
-		dat += "Collect produce: <A href='?src=\ref[src];collect=1'>[collects_produce ? "Yes" : "No"]</A><BR>"
-		dat += "Remove dead plants: <A href='?src=\ref[src];removedead=1'>[removes_dead ? "Yes" : "No"]</A><BR>"
-		dat += "</TT>"
+/mob/living/bot/farmbot/GetInteractTitle()
+	. = "<head><title>Farmbot controls</title></head>"
+	. += "<b>Automatic Hyrdoponic Assisting Unit v1.0</b>"
 
-	user << browse("<HEAD><TITLE>Farmbot v1.0 controls</TITLE></HEAD>[dat]", "window=autofarm")
-	onclose(user, "autofarm")
-	return
+/mob/living/bot/farmbot/GetInteractStatus()
+	. = ..()
+	. += "<br>Water tank: "
+	if(tank)
+		. += "[tank.reagents.total_volume]/[tank.reagents.maximum_volume]"
+	else
+		. += "error: not found"
+
+/mob/living/bot/farmbot/GetInteractPanel()
+	. = "Water plants : <a href='?src=\ref[src];command=water'>[waters_trays ? "Yes" : "No"]</a>"
+	. += "<br>Refill watertank : <a href='?src=\ref[src];command=refill'>[refills_water ? "Yes" : "No"]</a>"
+	. += "<br>Weed plants: <a href='?src=\ref[src];command=weed'>[uproots_weeds ? "Yes" : "No"]</a>"
+	. += "<br>Replace fertilizer: <a href='?src=\ref[src];command=replacenutri'>[replaces_nutriment ? "Yes" : "No"]</a>"
+	. += "<br>Collect produce: <a href='?src=\ref[src];command=collect'>[collects_produce ? "Yes" : "No"]</a>"
+	. += "<br>Remove dead plants: <a href='?src=\ref[src];command=removedead'>[removes_dead ? "Yes" : "No"]</a>"
+
+/mob/living/bot/farmbot/GetInteractMaintenance()
+	. = "Plant identifier status: "
+	switch(emagged)
+		if(0)
+			. += "<a href='?src=\ref[src];command=emag'>Normal</a>"
+		if(1)
+			. += "<a href='?src=\ref[src];command=emag'>Scrambled (DANGER)</a>"
+		if(2)
+			. += "ERROROROROROR-----"
+
+/mob/living/bot/farmbot/ProcessCommand(var/mob/user, var/command, var/href_list)
+	..()
+	if(CanAccessPanel(user))
+		switch(command)
+			if("water")
+				waters_trays = !waters_trays
+			if("refill")
+				refills_water = !refills_water
+			if("weed")
+				uproots_weeds = !uproots_weeds
+			if("replacenutri")
+				replaces_nutriment = !replaces_nutriment
+			if("collect")
+				collects_produce = !collects_produce
+			if("removedead")
+				removes_dead = !removes_dead
+
+	if(CanAccessMaintenance(user))
+		switch(command)
+			if("emag")
+				if(emagged < 2)
+					emagged = !emagged
 
 /mob/living/bot/farmbot/emag_act(var/remaining_charges, var/mob/user)
 	. = ..()
 	if(!emagged)
 		if(user)
 			to_chat(user, "<span class='notice'>You short out [src]'s plant identifier circuits.</span>")
-		spawn(rand(30, 50))
-			visible_message("<span class='warning'>[src] buzzes oddly.</span>")
-			emagged = 1
+			ignore_list |= user
+		emagged = 2
 		return 1
-
-/mob/living/bot/farmbot/Topic(href, href_list)
-	if(..())
-		return
-	usr.machine = src
-	add_fingerprint(usr)
-	if((href_list["power"]) && (access_scanner.allowed(usr)))
-		if(on)
-			turn_off()
-		else
-			turn_on()
-
-	if(locked)
-		return
-
-	if(href_list["water"])
-		waters_trays = !waters_trays
-	else if(href_list["refill"])
-		refills_water = !refills_water
-	else if(href_list["weed"])
-		uproots_weeds = !uproots_weeds
-	else if(href_list["replacenutri"])
-		replaces_nutriment = !replaces_nutriment
-	else if(href_list["collect"])
-		collects_produce = !collects_produce
-	else if(href_list["removedead"])
-		removes_dead = !removes_dead
-
-	attack_hand(usr)
-	return
 
 /mob/living/bot/farmbot/update_icons()
 	if(on && action)
