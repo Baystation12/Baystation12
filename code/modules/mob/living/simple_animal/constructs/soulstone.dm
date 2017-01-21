@@ -109,7 +109,11 @@
 /obj/structure/constructshell/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/device/soulstone))
 		var/obj/item/device/soulstone/S = I
-		if(!S.shade || S.shade.loc != S)
+		if(!S.shade.client)
+			to_chat(user, "<span class='notice'>\The [I] has essence, but no soul. Activate it in your hand to find a soul for it first.</span>"
+			return
+		if(S.shade.loc != S)
+			to_chat(user, "<span class='notice'>Recapture the shade back into \the [I] first.</span>"
 			return
 		var/construct = alert(user, "Please choose which type of construct you wish to create.",,"Artificer", "Wraith", "Juggernaut")
 		var/ctype

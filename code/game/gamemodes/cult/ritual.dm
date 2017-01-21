@@ -160,7 +160,7 @@ var/list/Tier1Runes = list(
 
 var/list/Tier2Runes = list(
 	/mob/proc/armor_rune,
-	/mob/proc/sacrifice_rune,
+	/mob/proc/offering_rune,
 	/mob/proc/manifest_rune,
 	/mob/proc/drain_rune,
 	/mob/proc/emp_rune
@@ -220,11 +220,11 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/armor, tome_required = 1)
 
-/mob/proc/sacrifice_rune()
+/mob/proc/offering_rune()
 	set category = "Cult Magic"
-	set name = "Rune: Sacrifice"
+	set name = "Rune: Offering"
 
-	make_rune(/obj/effect/rune/sacrifice, tome_required = 1)
+	make_rune(/obj/effect/rune/offering, tome_required = 1)
 
 /mob/proc/manifest_rune()
 	set category = "Cult Magic"
@@ -325,4 +325,4 @@ var/list/Tier4Runes = list(
 	return
 
 /mob/living/carbon/human/message_cult_communicate()
-	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of his hand.</span>")
+	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")

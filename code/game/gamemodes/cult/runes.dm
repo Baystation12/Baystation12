@@ -81,6 +81,8 @@
 	for(var/mob/living/M in range(1))
 		if(iscultist(M))
 			. += M
+	for(var/mob/living/carbon/alien/diona/A in range(1))
+		. += A
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a fizzle.")
@@ -114,7 +116,8 @@
 		to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
 		to_chat(target, "<span class='danger'>Are you going insane?</span>")
 	else
-		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? <a href='?src=\ref[src];join=1'>YES</a></span>")
+		to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
+		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? You can choose to ignore offer... <a href='?src=\ref[src];join=1'>Join the cult</a>.</span>")
 
 	spamcheck = 1
 	spawn(40)
@@ -399,17 +402,20 @@
 
 	qdel(src)
 
-/obj/effect/rune/sacrifice
-	cultname = "sacrifice"
+/obj/effect/rune/offering
+	cultname = "offering"
 	strokes = 3
+	var/mob/living/victim
 
-/obj/effect/rune/sacrifice/cast(var/mob/living/user)
+/obj/effect/rune/offering/cast(var/mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
+	if(victim)
+		to_chat(user, "<span class='warning'>You are already sarcificing \the [victim] on this rune.</span>")
+		return
 	if(cultists.len < 3)
 		to_chat(user, "<span class='warning'>You need three cultists around this rune to make it work.</span>")
 		return fizzle(user)
 	var/turf/T = get_turf(src)
-	var/mob/living/victim
 	for(var/mob/living/M in T)
 		if(M.stat != DEAD && !iscultist(M))
 			victim = M
@@ -433,7 +439,7 @@
 		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
 		var/obj/item/device/soulstone/full/F = new(get_turf(src))
 		for(var/mob/M in cultists | get_cultists())
-			to_chat(M, "<span class='warning'>The Geometer of Blood accepts this sacrifice.</span>")
+			to_chat(M, "<span class='warning'>The Geometer of Blood accepts this offering.</span>")
 		visible_message("<span class='notice'>\The [F] appears over \the [src].</span>")
 		cult.sacrificed += victim.mind
 		if(victim.mind == cult.sacrifice_target)
@@ -462,7 +468,9 @@
 		*/
 		to_chat(victim, "<span class='cult'>The Geometer of Blood claims your body.</span>")
 		victim.dust()
-	victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
+	if(victim)
+		victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
+		victim = null
 
 /obj/effect/rune/manifest
 	cultname = "manifest"
@@ -759,11 +767,15 @@
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
 	if(!cult.allow_narsie)
 		return
+	if(the_end_comes)
+		to_chat(user, "<span class='cult'>You are already summoning! Be patient!</span>")
+		return
 	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 5)
 		return fizzle()
 	for(var/mob/living/M in cultists)
 		M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
+		to_chat(M, "<span class='cult'>You are staring to tear the reality to bring Him back... stay around the rune!</span>")
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
