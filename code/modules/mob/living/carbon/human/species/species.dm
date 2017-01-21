@@ -187,6 +187,12 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
+	//Build organ descriptors
+	for(var/limb_type in has_limbs)
+		var/list/organ_data = has_limbs[limb_type]
+		var/obj/item/organ/limb_path = organ_data["path"]
+		organ_data["descriptor"] = initial(limb_path.name)
+
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)
 
@@ -218,8 +224,7 @@
 	for(var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
-		var/obj/item/organ/O = new limb_path(H)
-		organ_data["descriptor"] = O.name
+		new limb_path(H)
 
 	for(var/organ_tag in has_organ)
 		var/organ_type = has_organ[organ_tag]
