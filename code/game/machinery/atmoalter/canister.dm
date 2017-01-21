@@ -183,7 +183,7 @@ update_flag
 		update_icon()
 
 		if (src.holding)
-			src.holding.loc = src.loc
+			src.holding.dropInto(loc)
 			src.holding = null
 
 		return 1

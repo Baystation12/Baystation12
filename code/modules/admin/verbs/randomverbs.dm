@@ -32,7 +32,7 @@
 		//teleport person to cell
 		M.Paralyse(5)
 		sleep(5)	//so they black out before warping
-		M.loc = pick(prisonwarp)
+		M.forceMove(pick(prisonwarp))
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/prisoner = M
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), slot_w_uniform)

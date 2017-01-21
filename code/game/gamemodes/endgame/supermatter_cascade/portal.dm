@@ -39,7 +39,7 @@
 		if(L.buckled && istype(L.buckled,/obj/structure/bed/))
 			var/turf/O = L.buckled
 			do_teleport(O, pick(endgame_safespawns))
-			L.loc = O.loc
+			L.forceMove(O.loc)
 		else
 			do_teleport(L, pick(endgame_safespawns)) //dead-on precision
 

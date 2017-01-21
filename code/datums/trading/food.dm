@@ -29,7 +29,7 @@
 	if(.)
 		var/atom/movable/M = .
 		var/obj/item/pizzabox/box = new(location)
-		M.loc = box
+		M.forceMove(box)
 		box.pizza = M
 		box.boxtag = "A special order from [origin]"
 
