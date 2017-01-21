@@ -2241,6 +2241,7 @@
 #include "code\unit_tests\mob_tests.dm"
 #include "code\unit_tests\movement_tests.dm"
 #include "code\unit_tests\observation_tests.dm"
+#include "code\unit_tests\organ_tests.dm"
 #include "code\unit_tests\reagent_tests.dm"
 #include "code\unit_tests\shuttle_tests.dm"
 #include "code\unit_tests\test_obj.dm"
