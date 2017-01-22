@@ -39,7 +39,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 			qdel(src)
 
 		if(clong && prob(25))
-			src.loc = clong.loc
+			src.forceMove(clong.loc)
 
 /proc/immovablerod()
 	var/startx = 0

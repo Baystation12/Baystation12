@@ -290,7 +290,7 @@
 	if(tmploc==null)
 		return
 
-	M.loc = tmploc
+	M.forceMove(tmploc)
 	sleep(2)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

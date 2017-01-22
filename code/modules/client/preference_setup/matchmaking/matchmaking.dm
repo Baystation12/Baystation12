@@ -155,9 +155,10 @@ var/global/datum/matchmaker/matchmaker = new()
 		dat += "<b>Things they all know about you:</b><br>[mind.gen_relations_info]<br>"
 		dat += "<br>"
 	for(var/datum/relation/R in relations)
-		var/n = R.other.holder.original ? R.other.holder.original.real_name : R.other.holder
-		var/j = R.other.holder.original ? R.other.holder.original.job : R.other.holder
-		dat += "<b>[n]</b>[j ? ", [R.other.holder.original.job]":""]."
+		if(R.other.holder.original)
+			dat += "<b>[R.other.holder.original.real_name]</b>[R.other.holder.original.job]."
+		else
+			dat += "<b>[R.other.holder]</b>."
 		if (!R.finalized)
 			dat += " <a href='?src=\ref[src];del_relation=\ref[R]'>Remove</a>"
 			editable = 1

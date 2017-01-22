@@ -92,3 +92,6 @@
 			if(E.robotic < ORGAN_ROBOT)
 				E.robotize("Morpheus")
 		return
+
+/datum/species/machine/get_blood_name()
+	return "oil"

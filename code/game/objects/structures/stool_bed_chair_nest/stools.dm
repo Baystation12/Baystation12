@@ -148,7 +148,7 @@ var/global/list/stool_cache = list() //haha stool
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
-			src.loc = get_turf(src)
+			src.dropInto(loc)
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return

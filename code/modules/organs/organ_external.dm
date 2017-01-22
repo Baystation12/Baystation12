@@ -71,6 +71,16 @@
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
 
+/obj/item/organ/external/New(var/mob/living/carbon/holder)
+	..()
+	if(isnull(pain_disability_threshold))
+		pain_disability_threshold = (max_damage * 0.75)
+	if(owner)
+		replaced(owner)
+		sync_colour_to_human(owner)
+	spawn(1)
+		get_icon()
+
 /obj/item/organ/external/Destroy()
 
 	if(parent && parent.children)
@@ -232,19 +242,8 @@
 	return
 
 
-/obj/item/organ/external/New(var/mob/living/carbon/holder)
-	..(holder, 0)
-	if(isnull(pain_disability_threshold))
-		pain_disability_threshold = (max_damage * 0.75)
-	if(owner)
-		replaced(owner)
-		sync_colour_to_human(owner)
-	spawn(1)
-		get_icon()
-
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
-	owner = target
-	forceMove(owner)
+	..()
 
 	if(istype(owner))
 		owner.organs_by_name[organ_tag] = src
@@ -450,7 +449,7 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/proc/need_process()
 	if(get_pain())
 		return 1
-	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_MUTATED))
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED))
 		return 1
 	if((brute_dam || burn_dam) && (robotic < ORGAN_ROBOT)) //Robot limbs don't autoheal and thus don't need to process when damaged
 		return 1
@@ -1007,8 +1006,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			return 1
 	return 0
 
-/obj/item/organ/external/proc/is_usable()
-	return (!can_feel_pain() || pain < pain_disability_threshold) && !(status & (ORGAN_MUTATED|ORGAN_DEAD))
+/obj/item/organ/external/is_usable()
+	return ..() && (!can_feel_pain() || pain < pain_disability_threshold)
 
 /obj/item/organ/external/proc/is_malfunctioning()
 	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
@@ -1142,7 +1141,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return english_list(descriptors)
 
 	var/list/flavor_text = list()
-	if((status & ORGAN_DESTROYED) && !is_stump())
+	if((status & ORGAN_CUT_AWAY) && !is_stump() && !(parent && parent.status & ORGAN_CUT_AWAY))
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()

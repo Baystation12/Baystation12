@@ -108,7 +108,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	// Replace completely missing limbs.
 	for(var/limb_type in has_limbs)
 		var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-		if(E && (E.is_stump() || (E.status & (ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_MUTATED))))
+		if(E && !E.is_usable())
 			E.removed()
 			qdel(E)
 			E = null
