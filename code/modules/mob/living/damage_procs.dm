@@ -25,7 +25,7 @@
 		if(PAIN)
 			adjustHalLoss(damage * blocked_mult(blocked))
 		if(ELECTROCUTE)
-			electrocute_act(damage, used_weapon)
+			electrocute_act(damage, used_weapon, 1.0, def_zone)
 	flash_weak_pain()
 	updatehealth()
 	return 1

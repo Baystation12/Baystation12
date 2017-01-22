@@ -20,7 +20,7 @@
 		to_chat(user, "<span class='notice'>You must stand still to feel [E] for fractures.</span>")
 	else if(E.status & ORGAN_BROKEN)
 		to_chat(user, "<span class='warning'>The [E.encased ? E.encased : "bone in the [E.name]"] moves slightly when you poke it!</span>")
-		H.custom_pain("Your [E.name] hurts where it's poked.",40)
+		H.custom_pain("Your [E.name] hurts where it's poked.",40, affecting = E)
 	else
 		to_chat(user, "<span class='notice'>The [E.encased ? E.encased : "bones in the [E.name]"] seem to be fine.</span>")
 

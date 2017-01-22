@@ -18,11 +18,11 @@ LIMBS_CAN_BREAK 1
 
 ## multiplier which enables organs to take more damage before bones breaking or limbs being destroyed
 ## 100 means normal, 50 means half
-ORGAN_HEALTH_MULTIPLIER 100
+ORGAN_HEALTH_MULTIPLIER 90
 
 ## multiplier which influences how fast organs regenerate naturally
 ## 100 means normal, 50 means half
-ORGAN_REGENERATION_MULTIPLIER 75
+ORGAN_REGENERATION_MULTIPLIER 25
 
 ### REVIVAL ###
 
@@ -46,7 +46,7 @@ REVIVAL_BRAIN_LIFE -1
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied. 
 RUN_SPEED 2
-WALK_SPEED 5
+WALK_SPEED 1
 
 
 ## The variables below affect the movement of specific mob types.

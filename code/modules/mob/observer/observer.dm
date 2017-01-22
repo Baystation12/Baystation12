@@ -56,6 +56,9 @@ mob/observer/check_airflow_movable()
 /mob/observer/is_deaf() 	//Nor deaf.
 	return
 
+/mob/observer/set_stat()
+	stat = DEAD // They are also always dead
+
 /proc/updateallghostimages()
 	for (var/mob/observer/ghost/O in player_list)
 		O.updateghostimages()

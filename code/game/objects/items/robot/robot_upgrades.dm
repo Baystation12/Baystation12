@@ -88,7 +88,7 @@
 			if(ghost.mind && ghost.mind.current == R)
 				R.key = ghost.key
 
-	R.stat = CONSCIOUS
+	R.set_stat(CONSCIOUS)
 	R.switch_from_dead_to_living_mob_list()
 	R.notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 	return 1

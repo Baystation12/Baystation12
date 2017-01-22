@@ -40,6 +40,7 @@
 		src.forceMove(M)
 		src.imp_in = M
 		src.implanted = 1
+		src.implanted(M)
 
 		return TRUE
 

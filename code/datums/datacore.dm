@@ -281,6 +281,7 @@
 		G.fields["notes"] = H.gen_record
 	G.fields["mil_branch"] = H ? H.char_branch && H.char_branch.name : null
 	G.fields["mil_rank"] = H ? H.char_rank && H.char_rank.name : null
+	G.fields["connections"] =  list()
 	general += G
 
 	return G

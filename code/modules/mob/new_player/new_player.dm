@@ -11,7 +11,7 @@
 	invisibility = 101
 
 	density = 0
-	stat = 2
+	stat = DEAD
 	canmove = 0
 
 	anchored = 1	//  don't get pushed around
@@ -380,7 +380,7 @@
 			AnnounceArrival(character, rank, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, rank, spawnpoint.msg)
-
+		matchmaker.do_matchmaking()
 	qdel(src)
 
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
@@ -461,10 +461,16 @@
 
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// MAD JAMS cant last forever yo
 
-
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually
 		mind.original = new_character
+		if(client.prefs.relations.len)
+			for(var/T in client.prefs.relations)
+				var/TT = matchmaker.relation_types[T]
+				var/datum/relation/R = new TT
+				R.holder = mind
+				R.info = client.prefs.relations_info[T]
+			mind.gen_relations_info = client.prefs.relations_info["general"]
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.name = real_name

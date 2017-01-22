@@ -23,6 +23,8 @@
 	#include "../shared/exodus_torch/loadout/loadout_head.dm"
 	#include "../shared/exodus_torch/loadout/loadout_shoes.dm"
 	#include "../shared/exodus_torch/loadout/loadout_suit.dm"
+	#include "../shared/exodus_torch/loadout/loadout_accessories.dm"
+	#include "../shared/exodus_torch/loadout/loadout_xeno.dm"
 
 	#include "exodus-0.dmm"
 	#include "exodus-1.dmm"

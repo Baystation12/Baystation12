@@ -74,7 +74,7 @@
 					break
 			spawn(rand(3000, 6000)) //Delayed announcements to keep the crew on their toes.
 				command_alert("Confirmed outbreak of level 7 viral biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
-				sound_to(world, sound('sound/AI/outbreak7.ogg'))
+				sound_to(world, sound('sound/AI/outbreak7.ogg'))
 	Tick()
 		ActiveFor = Lifetime //killme
 

@@ -113,11 +113,11 @@ var/list/gamemode_cache = list()
 	//game_options.txt configs
 
 	var/health_threshold_softcrit = 0
-	var/health_threshold_crit = 0
+	var/health_threshold_crit = -50
 	var/health_threshold_dead = -100
 
-	var/organ_health_multiplier = 1
-	var/organ_regeneration_multiplier = 1
+	var/organ_health_multiplier = 0.9
+	var/organ_regeneration_multiplier = 0.25
 	var/organs_decay
 	var/default_brain_health = 400
 
@@ -125,8 +125,8 @@ var/list/gamemode_cache = list()
 	//so that it's similar to PAIN. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
 	var/organ_damage_spillover_multiplier = 0.5
 
-	var/bones_can_break = 0
-	var/limbs_can_break = 0
+	var/bones_can_break = 1
+	var/limbs_can_break = 1
 
 	var/revival_pod_plants = 1
 	var/revival_cloning = 1
@@ -140,8 +140,8 @@ var/list/gamemode_cache = list()
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
-	var/run_speed = 0
-	var/walk_speed = 0
+	var/run_speed = 2
+	var/walk_speed = 1
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
