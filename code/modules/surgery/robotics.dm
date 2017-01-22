@@ -18,7 +18,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (affected == null)
 		return 0
-	if (affected.status & ORGAN_DESTROYED)
+	if (affected.status & ORGAN_CUT_AWAY)
 		return 0
 	if (!(affected.robotic >= ORGAN_ROBOT))
 		return 0

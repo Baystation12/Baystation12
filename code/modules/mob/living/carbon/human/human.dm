@@ -641,7 +641,7 @@
 /mob/living/carbon/human/eyecheck()
 	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
 		var/obj/item/organ/I = internal_organs_by_name[BP_EYES]
-		if(I.status & ORGAN_CUT_AWAY)
+		if(!I.is_usable())
 			return FLASH_PROTECTION_MAJOR
 	else // They can't be flashed if they don't have eyes.
 		return FLASH_PROTECTION_MAJOR
@@ -1310,7 +1310,7 @@
 /mob/living/carbon/human/has_eyes()
 	if(internal_organs_by_name[BP_EYES])
 		var/obj/item/organ/internal/eyes = internal_organs_by_name[BP_EYES]
-		if(eyes && istype(eyes) && !(eyes.status & ORGAN_CUT_AWAY))
+		if(eyes && eyes.is_usable())
 			return 1
 	return 0
 

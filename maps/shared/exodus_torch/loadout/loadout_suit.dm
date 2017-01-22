@@ -88,3 +88,11 @@
 /datum/gear/suit/wintercoat
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
+
+/datum/gear/suit/track
+	display_name = "track jacket selection"
+	path = /obj/item/clothing/suit/storage/toggle/track
+
+/datum/gear/suit/track/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/toggle/track)

@@ -34,6 +34,11 @@
 	shadeColour = "#810cff"
 	colourName = "purple"
 
+/obj/item/weapon/pen/crayon/random/initialize()
+	var/crayon_type = pick(subtypesof(/obj/item/weapon/pen/crayon) - /obj/item/weapon/pen/crayon/random)
+	new crayon_type(loc)
+	qdel(src)
+
 /obj/item/weapon/pen/crayon/mime
 	icon_state = "crayonmime"
 	desc = "A very sad-looking crayon."

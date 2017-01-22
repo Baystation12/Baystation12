@@ -24,3 +24,8 @@
 /obj/item/clothing/suit/space/void/merc/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
+
+/obj/item/clothing/suit/space/void/merc/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/merc
+	boots = new /obj/item/clothing/shoes/magboots
