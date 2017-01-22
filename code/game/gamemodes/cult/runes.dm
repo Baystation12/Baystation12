@@ -81,8 +81,6 @@
 	for(var/mob/living/M in range(1))
 		if(iscultist(M))
 			. += M
-	for(var/mob/living/carbon/alien/diona/A in range(1))
-		. += A
 
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a fizzle.")
@@ -112,11 +110,10 @@
 	user.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
 
+	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
 	if(!cult.can_become_antag(target.mind, 1))
-		to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
 		to_chat(target, "<span class='danger'>Are you going insane?</span>")
 	else
-		to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
 		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? You can choose to ignore offer... <a href='?src=\ref[src];join=1'>Join the cult</a>.</span>")
 
 	spamcheck = 1
