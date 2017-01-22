@@ -36,7 +36,7 @@ var/datum/antagonist/cultist/cult
 	var/datum/mind/sacrifice_target
 	var/list/obj/effect/rune/teleport/teleport_runes = list()
 	var/list/rune_strokes = list()
-	var/list/sacrificed
+	var/list/sacrificed = list()
 	var/cult_rating = 0
 	var/cult_level = 1
 	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
