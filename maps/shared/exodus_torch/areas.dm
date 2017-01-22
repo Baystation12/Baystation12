@@ -52,6 +52,13 @@
 	icon_state = "SolarcontrolS"
 	sound_env = SMALL_ENCLOSED
 
+/area/solar
+	flags = AREA_EXTERNAL
+	requires_power = 1
+	always_unpowered = 1
+	lighting_use_dynamic = 0
+	base_turf = /turf/space
+
 /area/solar/auxstarboard
 	name = "\improper Fore Starboard Solar Array"
 	icon_state = "panelsA"
