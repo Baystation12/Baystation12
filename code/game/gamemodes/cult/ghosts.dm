@@ -46,23 +46,6 @@
 
 	var/doodle_color = "#A10808"
 
-	if(!bloodless)
-		var/list/choices = list()
-		for(var/obj/effect/decal/cleanable/blood/B in range(1))
-			if(B.amount > 0)
-				choices += B
-
-		if(!choices.len)
-			to_chat(src, "<span class = 'warning'>There is no blood to use nearby.</span>")
-			return
-
-		var/obj/effect/decal/cleanable/blood/choice = input(src, "What blood would you like to use?") as null|anything in choices
-		if(!choice)
-			return
-
-		if(choice.basecolor)
-			doodle_color = choice.basecolor
-
 	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))
 		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
@@ -75,6 +58,24 @@
 		to_chat(src, "<span class='warning'>There is no space to write on!</span>")
 		return
 
+	var/obj/effect/decal/cleanable/blood/choice
+	if(!bloodless)
+		var/list/choices = list()
+		for(var/obj/effect/decal/cleanable/blood/B in range(1))
+			if(B.amount > 0)
+				choices += B
+
+		if(!choices.len)
+			to_chat(src, "<span class = 'warning'>There is no blood to use nearby.</span>")
+			return
+
+		choice = input(src, "What blood would you like to use?") as null|anything in choices
+		if(!choice)
+			return
+
+		if(choice.basecolor)
+			doodle_color = choice.basecolor
+
 	var/max_length = 50
 
 	var/message = sanitize(input("Write a message. It cannot be longer than [max_length] characters.", "Blood writing", ""))
@@ -82,7 +83,7 @@
 	if(!ghost_ability_check())
 		return
 
-	if(message)
+	if(message && (bloodless || (choice && (choice in range(1)))))
 		if(length(message) > max_length)
 			message += "-"
 			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
@@ -145,7 +146,7 @@
 		return
 
 	var/obj/item/choice = input(src, "What item would you like to pull?") as null|anything in choices
-	if(!choice || choice.w_class > 2)
+	if(!choice || !(choice in range(1)) || choice.w_class > 2)
 		return
 
 	if(!ghost_ability_check())
