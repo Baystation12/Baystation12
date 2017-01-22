@@ -29,6 +29,7 @@
 		return
 
 /obj/item/modular_computer/processor/examine(var/mob/user)
+	. = ..()
 	if(damage > broken_damage)
 		to_chat(user, "<span class='danger'>It is heavily damaged!</span>")
 	else if(damage)

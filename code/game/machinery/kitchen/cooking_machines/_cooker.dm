@@ -36,7 +36,7 @@
 	return ..()
 
 /obj/machinery/cooker/examine()
-	..()
+	. = ..()
 	if(cooking_obj && Adjacent(usr))
 		to_chat(usr, "You can see \a [cooking_obj] inside.")
 

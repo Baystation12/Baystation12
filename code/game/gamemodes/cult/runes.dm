@@ -40,7 +40,7 @@
 	desc = "A strange collection of symbols drawn in [blood]."
 
 /obj/effect/rune/examine(var/mob/user)
-	..()
+	. = ..()
 	if(iscultist(user))
 		to_chat(user, "This is \a [cultname] rune.")
 
@@ -165,7 +165,7 @@
 	return ..()
 
 /obj/effect/rune/teleport/examine(var/mob/user)
-	..()
+	. = ..()
 	if(iscultist(user))
 		to_chat(user, "Its name is [destination].")
 
@@ -286,7 +286,7 @@
 	return ..()
 
 /obj/effect/cultwall/examine(var/mob/user)
-	..()
+	. = ..()
 	if(iscultist(user))
 		if(health == max_health)
 			to_chat(user, "<span class='notice'>It is fully intact.</span>")

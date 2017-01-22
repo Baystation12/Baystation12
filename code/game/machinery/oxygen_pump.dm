@@ -103,7 +103,7 @@
 		use_power = 1
 
 /obj/machinery/oxygen_pump/examine(var/mob/user)
-	..()
+	. = ..()
 	if(tank)
 		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")
 	else

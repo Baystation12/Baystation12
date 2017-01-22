@@ -15,7 +15,7 @@
 
 /obj/effect/shield
 	name = "energy shield"
-	desc = "Impenetrable field of energy, capable of blocking anything as long as it's active."
+	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	anchored = 1
@@ -68,7 +68,7 @@
 /obj/effect/shield/proc/fail(var/duration)
 	if(duration <= 0)
 		return
-		
+
 	gen.damaged_segments |= src
 	disabled_for += duration
 	set_density(0)
@@ -100,7 +100,7 @@
 	if(gen.check_flag(MODEFLAG_BYPASS) && !diffused_for && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
 		return
-		
+
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	set_density(0)

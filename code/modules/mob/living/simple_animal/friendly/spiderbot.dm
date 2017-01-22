@@ -273,7 +273,7 @@
 	return 0
 
 /mob/living/simple_animal/spiderbot/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(src.held_item)
 		to_chat(user, "It is carrying \icon[src.held_item] \a [src.held_item].")
 /mob/living/simple_animal/spiderbot/binarycheck()

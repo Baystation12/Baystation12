@@ -17,7 +17,7 @@ var/activetype = null //Is this a search or arrest warrtant?
 
 //look at it
 /obj/item/device/holowarrant/examine(mob/user)
-	..()
+	. = ..()
 	if(activename)
 		to_chat(user, "It's a holographic warrant for '[activename]'.")
 	if(in_range(user, src) || isghost(user))

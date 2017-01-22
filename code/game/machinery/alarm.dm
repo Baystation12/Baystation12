@@ -823,7 +823,7 @@
 	return ..()
 
 /obj/machinery/alarm/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (buildstage < 2)
 		to_chat(user, "It is not wired.")
 	if (buildstage < 1)
