@@ -180,10 +180,10 @@
 	if(message)
 		if(iscultist(choice) || anyone)
 			to_chat(choice, "<span class='notice'>You hear a faint whisper... It says... \"[message]\"</span>")
-			log_admin("[src] ([src.key]) used ghost magic to say '[message]' to \the [choice] and was heard - [x]-[y]-[z]")
+			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] and was heard - [x]-[y]-[z]")
 		else
 			to_chat(choice, "<span class='notice'>You hear a faint whisper, but you can't make out the words.</span>")
-			log_admin("[src] ([src.key]) used ghost magic to say '[message]' to \the [choice] but wasn't heard - [x]-[y]-[z]")
+			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] but wasn't heard - [x]-[y]-[z]")
 		to_chat(src, "You whisper to \the [choice]. Perhaps they heard you.")
 
 
