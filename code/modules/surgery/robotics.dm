@@ -400,7 +400,10 @@
 		O.dropInto(target.loc)
 		target.op_stage.current_organ = null
 		playsound(target.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
+	if(istype(O, /obj/item/organ/internal/mmi_holder/posibrain))
+		var/obj/item/organ/internal/mmi_holder/posibrain/brain = O
+		brain.transfer_and_delete()
+	else if(istype(O, /obj/item/organ/internal/mmi_holder))
 		var/obj/item/organ/internal/mmi_holder/brain = O
 		brain.transfer_and_delete()
 
