@@ -52,7 +52,7 @@ def main():
 
 	else:
 		tree = CompileFile(namespace.projectfile)
-		with open("dump.txt", "wb") as f:
+		with open("dump.txt", "wt") as f:
 			f.write(tree)
 
 
@@ -83,7 +83,7 @@ def GenerateMD5(fname):
 def CompileFile(filename):
 	compiler_path = FindCompiler()
 
-	return subprocess.check_output([compiler_path, "-code_tree", filename])
+	return subprocess.check_output([compiler_path, "-code_tree", filename], universal_newlines=True)
 
 def FindCompiler():
 	compiler_path = None;
