@@ -60,7 +60,7 @@
 	initial_flooring = /decl/flooring/carpet/blue
 
 /turf/simulated/floor/tiled
-	name = "floor"
+	name = "steel floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
@@ -122,15 +122,6 @@
 	initial_flooring = /decl/flooring/tiling/dark
 
 /turf/simulated/floor/tiled/dark/airless
-	oxygen = 0
-	nitrogen = 0
-
-/turf/simulated/floor/tiled/steel
-	name = "steel floor"
-	icon_state = "steel"
-	initial_flooring = /decl/flooring/tiling/steel
-
-/turf/simulated/floor/tiled/steel/airless
 	oxygen = 0
 	nitrogen = 0
 
