@@ -24,6 +24,7 @@ SOFTWARE.
 """
 import argparse
 import hashlib
+import io
 import os
 import sys
 import re
@@ -47,12 +48,12 @@ def main():
 
 	tree = ""
 	if namespace.projectfile[-4:] == ".txt":
-		with open(namespace.projectfile, "r") as f:
+		with io.open(namespace.projectfile, "r", newline="\r\n") as f:
 			tree = f.read()
 
 	else:
 		tree = CompileFile(namespace.projectfile)
-		with open("dump.txt", "wt") as f:
+		with io.open("dump.txt", "wt", newline="\r\n") as f:
 			f.write(tree)
 
 
@@ -66,7 +67,7 @@ def main():
 	variables.sort()
 	code = GenCode(variables)
 	
-	with open(namespace.outfile, 'wb') as outfile:
+	with io.open(namespace.outfile, 'wb', newline="\r\n") as outfile:
 		outfile.write(code)
 	
 	hash = GenerateMD5(namespace.outfile)
@@ -75,7 +76,7 @@ def main():
 	
 def GenerateMD5(fname):
     hash_md5 = hashlib.md5()
-    with open(fname, "rb") as f:
+    with io.open(fname, "rb", newline="\r\n") as f:
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
