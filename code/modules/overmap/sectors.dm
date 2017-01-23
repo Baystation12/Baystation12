@@ -47,12 +47,26 @@
 		using_map.station_levels |= map_z
 		using_map.contact_levels |= map_z
 
+	//find shuttle waypoints
+	var/list/found_waypoints = list()
+	for(var/waypoint_tag in generic_waypoints)
+		var/obj/effect/shuttle_landmark/WP = locate(waypoint_tag)
+		if(WP)
+			found_waypoints += WP
+	generic_waypoints = found_waypoints
+
+	for(var/shuttle_name in restricted_waypoints)
+		found_waypoints = list()
+		for(var/waypoint_tag in restricted_waypoints[shuttle_name])
+			var/obj/effect/shuttle_landmark/WP = locate(waypoint_tag)
+			if(WP)
+				found_waypoints += WP
+		restricted_waypoints[shuttle_name] = found_waypoints
+
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
-	. = list()
-	for(var/waypoint in generic_waypoints)
-		. += waypoint_repository.waypoints[waypoint]
-	for(var/waypoint in restricted_waypoints[shuttle_name])
-		. += waypoint_repository.waypoints[waypoint]
+	. = generic_waypoints.Copy()
+	if(shuttle_name in restricted_waypoints)
+		. += restricted_waypoints[shuttle_name]
 
 /obj/effect/overmap/sector
 	name = "generic sector"

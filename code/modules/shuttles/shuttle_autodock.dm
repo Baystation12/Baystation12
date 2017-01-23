@@ -6,7 +6,7 @@
 	var/last_dock_attempt_time = 0
 	var/current_dock_target
 
-	var/datum/shuttle_waypoint/next_waypoint
+	var/obj/effect/shuttle_landmark/next_waypoint
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
 	var/obj/effect/shuttle_landmark/landmark_transition
@@ -14,8 +14,8 @@
 
 	category = /datum/shuttle/autodock
 
-/datum/shuttle/autodock/New(var/_name, var/datum/shuttle_waypoint/start_waypoint)
-	..(_name, start_waypoint.landmark_turf)
+/datum/shuttle/autodock/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
+	..(_name, start_waypoint)
 
 	//Initial dock
 	active_docking_controller = start_waypoint.docking_controller
@@ -105,9 +105,9 @@
 
 /datum/shuttle/autodock/proc/process_launch()
 	if (move_time && landmark_transition)
-		long_jump(next_waypoint.landmark_turf, landmark_transition, move_time)
+		long_jump(next_waypoint, landmark_transition, move_time)
 	else
-		short_jump(next_waypoint.landmark_turf)
+		short_jump(next_waypoint)
 
 /*
 	Guards

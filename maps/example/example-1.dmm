@@ -25,7 +25,7 @@
 "y" = (/turf/simulated/wall/iron,/area/shuttle/escape)
 "z" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/shuttle/escape)
 "A" = (/obj/machinery/computer/shuttle_control{shuttle_tag = "Example"},/turf/simulated/floor/plating,/area/shuttle/escape)
-"B" = (/obj/structure/bed/chair{dir = 1},/obj/effect/shuttle_landmark{name = "nav point - station"; tag = "nav_example_station"},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_starboard"; pixel_x = 28; tag = "example_shuttle_starboard"},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_port"; pixel_x = -28; tag = "example_shuttle_port"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"B" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_starboard"; pixel_x = 28; tag = "example_shuttle_starboard"},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_port"; pixel_x = -28; tag = "example_shuttle_port"},/obj/effect/shuttle_landmark/lower_level,/turf/simulated/floor/plating,/area/shuttle/escape)
 "C" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/shuttle/escape)
 "D" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_port_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
 "E" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_starboard_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)

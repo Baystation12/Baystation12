@@ -129,7 +129,7 @@
 	*/
 
 	var/list/shuttle_turfs = get_area_turfs("\ref[shuttle_area]")
-	translate_turfs(current_location, destination, shuttle_turfs)
+	translate_turfs(get_turf(current_location), get_turf(destination), shuttle_turfs)
 	current_location = destination
 
 	// if there was a zlevel above our origin, erase our ceiling now we're gone

@@ -100,7 +100,7 @@
 /*
 	Turf manipulation
 */
-/proc/translate_turfs(atom/src_origin, atom/dst_origin, list/turfs_src, translate_area = TRUE)
+/proc/translate_turfs(turf/src_origin, turf/dst_origin, list/turfs_src, translate_area = TRUE)
 	for(var/turf/source in turfs_src)
 		if(!source.is_solid_structure())
 			continue

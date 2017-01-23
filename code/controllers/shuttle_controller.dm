@@ -14,8 +14,6 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 //This is called by gameticker after all the machines and radio frequencies have been properly initialized
 /datum/shuttle_controller/proc/initialize_shuttles()
-	waypoint_repository.initialize_waypoints()
-
 	for(var/shuttle_type in subtypesof(/datum/shuttle))
 		var/datum/shuttle/shuttle = shuttle_type
 		if(initial(shuttle.category) == shuttle_type)

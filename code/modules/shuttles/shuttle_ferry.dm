@@ -4,16 +4,16 @@
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
 
-	var/datum/shuttle_waypoint/waypoint_station
-	var/datum/shuttle_waypoint/waypoint_offsite
+	var/obj/effect/shuttle_landmark/waypoint_station
+	var/obj/effect/shuttle_landmark/waypoint_offsite
 
 	category = /datum/shuttle/autodock/ferry
 
 /datum/shuttle/autodock/ferry/New(_name)
 	if(waypoint_station)
-		waypoint_station = waypoint_repository.waypoints[waypoint_station]
+		waypoint_station = locate(waypoint_station)
 	if(waypoint_offsite)
-		waypoint_offsite = waypoint_repository.waypoints[waypoint_offsite]
+		waypoint_offsite = locate(waypoint_offsite)
 
 	..(_name, get_location_waypoint(location))
 

@@ -37,7 +37,7 @@
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
 			else
-				var/datum/shuttle_waypoint/cur_waypoint = shuttle.get_location_waypoint()
+				var/obj/effect/shuttle_landmark/cur_waypoint = shuttle.get_location_waypoint()
 				shuttle_status = "Standing-by at [cur_waypoint.name]."
 
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
