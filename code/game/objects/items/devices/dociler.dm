@@ -14,7 +14,7 @@
 	var/mode = "completely"
 
 /obj/item/device/dociler/examine(var/mob/user)
-	..(user)
+	. = ..(user)
 	to_chat(user, "<span class='notice'>It is currently set to [mode] docile mode.</span>")
 
 /obj/item/device/dociler/attack_self(var/mob/user)

@@ -3,7 +3,7 @@
 
 /obj/machinery/atmospherics/unary/freezer
 	name = "gas cooling system"
-	desc = "Cools gas when connected to pipe network."
+	desc = "Cools gas when connected to a pipe network."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "freezer_0"
 	density = 1
@@ -182,6 +182,6 @@
 	..()
 
 /obj/machinery/atmospherics/unary/freezer/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(panel_open)
 		to_chat(user, "The maintenance hatch is open.")

@@ -56,7 +56,7 @@
 	var/list/stat_rig_module/stat_modules = new()
 
 /obj/item/rig_module/examine()
-	..()
+	. = ..()
 	switch(damage)
 		if(0)
 			to_chat(usr, "It is undamaged.")

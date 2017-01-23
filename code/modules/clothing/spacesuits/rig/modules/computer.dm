@@ -43,7 +43,7 @@
 	interface_desc = "A socket that supports a range of artificial intelligence systems."
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
-	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
+	var/obj/item/ai_card  // Reference to the MMI, posibrain, inteliCard or pAI card previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
 
 /mob
@@ -90,7 +90,7 @@
 		if(!card)
 			card = new /obj/item/weapon/aicard(src)
 
-		// Terminal interaction only works with an intellicarded AI.
+		// Terminal interaction only works with an inteliCarded AI.
 		if(!istype(card))
 			return 0
 

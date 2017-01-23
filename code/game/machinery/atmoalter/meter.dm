@@ -1,6 +1,6 @@
 /obj/machinery/meter
 	name = "meter"
-	desc = "It measures something."
+	desc = "A gas flow meter."
 	icon = 'icons/obj/meter.dmi'
 	icon_state = "meterX"
 	var/obj/machinery/atmospherics/pipe/target = null
@@ -66,24 +66,23 @@
 		radio_connection.post_signal(src, signal)
 
 /obj/machinery/meter/examine(mob/user)
-	var/t = "A gas flow meter. "
+	. = ..()
 
 	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
-		t += "<span class='warning'>You are too far away to read it.</span>"
+		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
 
 	else if(stat & (NOPOWER|BROKEN))
-		t += "<span class='warning'>The display is off.</span>"
+		to_chat(user, "<span class='warning'>The display is off.</span>")
 
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
-			t += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)"
+			to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
 		else
-			t += "The sensor error light is blinking."
+			to_chat(user, "The sensor error light is blinking.")
 	else
-		t += "The connect error light is blinking."
+		to_chat(user, "The connect error light is blinking.")
 
-	to_chat(user, t)
 
 /obj/machinery/meter/Click()
 

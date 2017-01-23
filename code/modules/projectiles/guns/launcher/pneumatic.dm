@@ -147,7 +147,7 @@
 	icon_state = "pneumatic[buildstate]"
 
 /obj/item/weapon/cannonframe/examine(mob/user)
-	..(user)
+	. = ..(user)
 	switch(buildstate)
 		if(1) to_chat(user, "It has a pipe segment installed.")
 		if(2) to_chat(user, "It has a pipe segment welded in place.")

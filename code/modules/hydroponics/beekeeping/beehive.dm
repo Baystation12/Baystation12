@@ -31,7 +31,7 @@
 				overlays += "bees3"
 
 /obj/machinery/beehive/examine(var/mob/user)
-	..()
+	. = ..()
 	if(!closed)
 		to_chat(user, "The lid is open.")
 

@@ -58,7 +58,7 @@
 
 /obj/machinery/chemical_dispenser/bar_soft
 	name = "soft drink dispenser"
-	desc = "A soda machine."
+	desc = "A soft drink machine." //Doesn't just serve soda --BlueNexus
 	icon_state = "soda_dispenser"
 	ui_title = "Soda Dispenser"
 	accept_drinking = 1

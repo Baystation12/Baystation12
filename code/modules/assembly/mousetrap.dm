@@ -8,7 +8,7 @@
 
 
 	examine(mob/user)
-		..(user)
+		. = ..(user)
 		if(armed)
 			to_chat(user, "It looks like it's armed.")
 
