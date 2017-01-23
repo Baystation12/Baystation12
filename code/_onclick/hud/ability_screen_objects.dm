@@ -13,7 +13,7 @@
 
 	var/mob/my_mob = null // The mob that possesses this hud object.
 
-/obj/screen/movable/ability_master/New(owner)
+/obj/screen/movable/ability_master/New(newloc,owner)
 	if(owner)
 		my_mob = owner
 		update_abilities(0, owner)
@@ -164,7 +164,7 @@
 
 /mob/New()
 	..()
-	ability_master = new /obj/screen/movable/ability_master(src)
+	ability_master = new /obj/screen/movable/ability_master(null,src)
 
 ///////////ACTUAL ABILITIES////////////
 //This is what you click to do things//
