@@ -258,7 +258,7 @@
 	name = "green skimpy dress"
 	desc = "A rather skimpy green dress."
 	icon_state = "stripper_g_over"
-	item_state = "stripper_g"
+	//item_state = "stripper_g"
 	siemens_coefficient = 1
 
 /obj/item/clothing/under/stripper/mankini
@@ -271,7 +271,7 @@
 	name = "xenos suit"
 	desc = "A suit made out of chitinous alien hide."
 	icon_state = "xenos"
-	item_state = "xenos_helm"
+	//item_state = "xenos_helm"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0

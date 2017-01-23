@@ -13,7 +13,7 @@
 	name = "Captain's armor"
 	desc = "A bulky, heavy-duty piece of exclusive corporate armor. YOU are in charge!"
 	icon_state = "caparmor"
-	item_state = "capspacesuit"
+	//item_state = "capspacesuit"
 	w_class = ITEM_SIZE_HUGE
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
@@ -58,7 +58,6 @@
 	name = "Santa's suit"
 	desc = "Festive!"
 	icon_state = "santa"
-	item_state = "santa"
 	item_flags = STOPPRESSUREDAMAGE
 	allowed = list(/obj/item) //for stuffing exta special presents
 
@@ -103,7 +102,6 @@
 /obj/item/clothing/suit/space/emergency
 	name = "Emergency Softsuit"
 	icon_state = "syndicate-orange"
-	item_state = "syndicate-orange"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 
 /obj/item/clothing/suit/space/emergency/New()

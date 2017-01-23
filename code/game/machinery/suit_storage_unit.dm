@@ -1085,7 +1085,7 @@
 			if(suit)
 				suit.name = "engineering voidsuit"
 				suit.icon_state = "rig-engineering"
-				suit.item_state = "eng_voidsuit"
+				//suit.item_state = "eng_voidsuit"
 		if("Mining")
 			if(helmet)
 				helmet.name = "mining voidsuit helmet"
@@ -1094,7 +1094,7 @@
 			if(suit)
 				suit.name = "mining voidsuit"
 				suit.icon_state = "rig-mining"
-				suit.item_state = "mining_voidsuit"
+				//suit.item_state = "mining_voidsuit"
 		if("Science")
 			if(helmet)
 				helmet.name = "excavation voidsuit helmet"
@@ -1103,7 +1103,7 @@
 			if(suit)
 				suit.name = "excavation voidsuit"
 				suit.icon_state = "rig-excavation"
-				suit.item_state = "excavation_voidsuit"
+				//suit.item_state = "excavation_voidsuit"
 		if("Medical")
 			if(helmet)
 				helmet.name = "medical voidsuit helmet"
@@ -1112,7 +1112,7 @@
 			if(suit)
 				suit.name = "medical voidsuit"
 				suit.icon_state = "rig-medical"
-				suit.item_state = "medical_voidsuit"
+				//suit.item_state = "medical_voidsuit"
 		if("Security")
 			if(helmet)
 				helmet.name = "security voidsuit helmet"
@@ -1121,7 +1121,7 @@
 			if(suit)
 				suit.name = "security voidsuit"
 				suit.icon_state = "rig-sec"
-				suit.item_state = "sec_voidsuit"
+				//suit.item_state = "sec_voidsuit"
 		if("Atmos")
 			if(helmet)
 				helmet.name = "atmospherics voidsuit helmet"
@@ -1130,7 +1130,7 @@
 			if(suit)
 				suit.name = "atmospherics voidsuit"
 				suit.icon_state = "rig-atmos"
-				suit.item_state = "atmos_voidsuit"
+				//suit.item_state = "atmos_voidsuit"
 		if("^%###^%$" || "Mercenary")
 			if(helmet)
 				helmet.name = "blood-red voidsuit helmet"
@@ -1138,7 +1138,7 @@
 				helmet.item_state = "syndie_helm"
 			if(suit)
 				suit.name = "blood-red voidsuit"
-				suit.item_state = "syndie_voidsuit"
+				//suit.item_state = "syndie_voidsuit"
 				suit.icon_state = "rig-syndie"
 
 	if(helmet) helmet.name = "refitted [helmet.name]"
