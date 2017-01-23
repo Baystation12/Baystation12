@@ -1283,6 +1283,7 @@
 #include "code\modules\examine\stat_icons.dm"
 #include "code\modules\examine\descriptions\armor.dm"
 #include "code\modules\examine\descriptions\atmospherics.dm"
+#include "code\modules\examine\descriptions\drink_containers.dm"
 #include "code\modules\examine\descriptions\engineering.dm"
 #include "code\modules\examine\descriptions\machinery.dm"
 #include "code\modules\examine\descriptions\medical.dm"
