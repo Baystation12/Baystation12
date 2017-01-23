@@ -63,6 +63,7 @@
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
+	blood_color = "#f24b2e"
 
 	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
@@ -267,7 +268,7 @@
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
 	appearance_flags = 0
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -310,3 +311,6 @@
 			qdel(D)
 
 	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+
+/datum/species/diona/get_blood_name()
+	return "sap"

@@ -145,6 +145,8 @@
 
 //Like grab-putting, but for mouse-drop.
 /obj/machinery/dna_scannernew/MouseDrop_T(var/mob/target, var/mob/user)
+	if(!istype(target))
+		return
 	if (!CanMouseDrop(target, user))
 		return
 	if (src.occupant)

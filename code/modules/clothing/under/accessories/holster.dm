@@ -67,7 +67,7 @@
 	..()
 
 /obj/item/clothing/accessory/holster/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (holstered)
 		to_chat(user, "A [holstered] is holstered here.")
 	else

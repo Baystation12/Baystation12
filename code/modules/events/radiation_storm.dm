@@ -2,7 +2,7 @@
 	var/const/enterBelt		= 30
 	var/const/radIntervall 	= 5	// Enough time between enter/leave belt for 10 hits, as per original implementation
 	var/const/leaveBelt		= 80
-	var/const/revokeAccess	= 135
+	var/const/revokeAccess	= 165 //Hopefully long enough for radiation levels to dissipate.
 	startWhen				= 2
 	announceWhen			= 1
 	endWhen					= revokeAccess
@@ -27,17 +27,12 @@
 		radiate()
 
 	else if(activeFor == leaveBelt)
-		command_announcement.Announce("The station has passed the radiation belt. Please report to medbay if you experience any unusual symptoms. Maintenance will lose all access again shortly.", "Anomaly Alert")
+		command_announcement.Announce("The station has passed the radiation belt. Please allow for up to one minute while radiation levels dissipate, and report to medbay if you experience any unusual symptoms. Maintenance will lose all access again shortly.", "Anomaly Alert")
 
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)
-	for(var/area/A in all_areas)
-		if(!(A.z in using_map.station_levels))
-			continue
-		if(A.flags & RAD_SHIELDED)
-			continue
-		for(var/turf/T in A)
-			radiation_repository.irradiated_turfs[T] = radiation_level
+	for(var/z in using_map.station_levels)
+		radiation_repository.z_radiate(locate(1, 1, z), radiation_level, 1)
 
 	for(var/mob/living/carbon/C in living_mob_list_)
 		var/area/A = get_area(C)

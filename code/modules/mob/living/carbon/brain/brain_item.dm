@@ -76,13 +76,15 @@
 	callHook("debrain", list(brainmob))
 
 /obj/item/organ/internal/brain/examine(mob/user) // -- TLE
-	..(user)
+	. = ..(user)
 	if(brainmob && brainmob.client)//if thar be a brain inside... the brain.
 		to_chat(user, "You can feel the small spark of life still left in this one.")
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
 /obj/item/organ/internal/brain/removed(var/mob/living/user)
+	if(!istype(owner))
+		return ..()
 
 	if(name == initial(name))
 		name = "\the [owner.real_name]'s [initial(name)]"
@@ -92,9 +94,7 @@
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
-	var/obj/item/organ/internal/brain/B = src
-	if(istype(B) && istype(owner))
-		B.transfer_identity(owner)
+	transfer_identity(owner)
 
 	..()
 

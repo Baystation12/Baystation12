@@ -1,6 +1,6 @@
 #define PUBLIC_GAME_MODE (ticker ? (ticker.hide_mode == 0 ? master_mode : "Secret") : "Unknown")
 
-#define Clamp(x, y, z) 	(x <= y ? y : (x >= z ? z : x))
+#define Clamp(value, low, high) 	(value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
 #define get_turf(A) get_step(A,0)
@@ -75,8 +75,10 @@
 
 #define to_chat(target, message)                            target << message
 #define to_world(message)                                   world << message
+#define to_world_log(message)                               world.log << message
 #define sound_to(target, sound)                             target << sound
-#define to_file(file_entry, file_content)                   file_entry << file_content
+#define to_file(file_entry, source_var)                     file_entry << source_var
+#define from_file(file_entry, target_var)                   file_entry >> target_var
 #define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 

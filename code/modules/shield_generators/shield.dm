@@ -15,7 +15,7 @@
 
 /obj/effect/shield
 	name = "energy shield"
-	desc = "Impenetrable field of energy, capable of blocking anything as long as it's active."
+	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	anchored = 1
@@ -26,7 +26,6 @@
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
 	var/diffused_for = 0
-	var/datum/effect/effect/system/spark_spread/s
 
 
 /obj/effect/shield/update_icon()
@@ -51,32 +50,28 @@
 /obj/effect/shield/New()
 	..()
 	update_nearby_tiles()
-	s = new /datum/effect/effect/system/spark_spread(src)
 
 
 /obj/effect/shield/Destroy()
 	. = ..()
-	if(gen && (src in gen.field_segments))
-		gen.field_segments -= src
-	if(gen && (src in gen.damaged_segments))
-		gen.damaged_segments -= src
-	gen = null
+	if(gen)
+		if(src in gen.field_segments)
+			gen.field_segments -= src
+		if(src in gen.damaged_segments)
+			gen.damaged_segments -= src
+		gen = null
 	update_nearby_tiles()
 	forceMove(null, 1)
-	qdel_null(s)
 
 
 // Temporarily collapses this shield segment.
 /obj/effect/shield/proc/fail(var/duration)
 	if(duration <= 0)
 		return
-	if(!disabled_for && (duration > 1))
-		s.set_up(1, 1, src)
-		s.start()
-		
+
 	gen.damaged_segments |= src
 	disabled_for += duration
-	density = 0
+	set_density(0)
 	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()
@@ -92,7 +87,7 @@
 	diffused_for = max(0, diffused_for - 1)
 
 	if(!disabled_for && !diffused_for)
-		density = 1
+		set_density(1)
 		invisibility = 0
 		update_nearby_tiles()
 		update_icon()
@@ -105,14 +100,10 @@
 	if(gen.check_flag(MODEFLAG_BYPASS) && !diffused_for && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
 		return
-		
-	if(!diffused_for && !disabled_for)
-		s.set_up(1, 1, src)
-		s.start()
-		
+
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
-	density = 0
+	set_density(0)
 	invisibility = INVISIBILITY_MAXIMUM
 	update_nearby_tiles()
 	update_icon()

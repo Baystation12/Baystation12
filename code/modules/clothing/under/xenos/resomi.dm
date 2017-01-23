@@ -7,7 +7,7 @@
 	species_restricted = list("Resomi")
 
 /obj/item/clothing/under/resomi/white
-	name = "small white smock"
+	name = "small smock"
 	icon_state = "resomi_white"
 	worn_state = "resomi_white"
 

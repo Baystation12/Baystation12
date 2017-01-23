@@ -1,6 +1,6 @@
 /obj/machinery/power/shield_generator
 	name = "advanced shield generator"
-	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shield at large distance."
+	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
 	density = 1
@@ -419,7 +419,7 @@
 
 /obj/machinery/power/shield_generator/proc/fieldtype_hull()
 	set background = 1
-	var/list/out = list()
+	. = list()
 	var/list/base_turfs = get_base_turfs()
 
 
@@ -433,10 +433,9 @@
 
 			// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
 			for(var/turf/TN in orange(1, T))
-				if(istype(TN, /turf/space) || (istype(get_area(TN), /area/shuttle/) && !istype(get_area(TN), /area/shuttle/turbolift/)))
-					out |= TN
+				if(istype(TN, /turf/space) || (istype(get_area(TN), /area/shuttle/) && !istype(get_area(TN), /area/turbolift/)))
+					. |= TN
 					continue
-	return out
 
 // Returns a list of turfs from which a field will propagate. If multi-Z mode is enabled, this will return a "column" of turfs above and below the generator.
 /obj/machinery/power/shield_generator/proc/get_base_turfs()

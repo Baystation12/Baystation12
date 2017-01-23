@@ -29,8 +29,8 @@
 			s.start()
 		if(istype(computer, /obj/item/modular_computer/processor))
 			var/obj/item/modular_computer/processor/P = computer
-			if(P.machinery_computer.tesla_link && prob(50))
-				qdel(P.machinery_computer.tesla_link)
+			if(P.tesla_link && prob(50))
+				qdel(P.tesla_link)
 				computer.visible_message("<span class='notice'>\The [computer]'s tesla link explodes in rain of sparks.</span>")
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(10, 1, computer.loc)

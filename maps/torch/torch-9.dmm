@@ -20,7 +20,7 @@
 "at" = (/obj/structure/table,/obj/random/toolbox,/turf/simulated/floor/tiled/steel,/area/outpost/abandoned)
 "au" = (/turf/unsimulated/mask,/area/outpost/abandoned)
 "av" = (/obj/structure/table/glass,/obj/item/weapon/newspaper,/obj/effect/floor_decal/corner/paleblue/diagonal,/turf/simulated/floor/tiled/white,/area/outpost/abandoned)
-"aw" = (/obj/structure/table/glass,/obj/item/weapon/phone,/obj/effect/floor_decal/corner/paleblue/diagonal,/turf/simulated/floor/tiled/white,/area/outpost/abandoned)
+"aw" = (/obj/structure/table/glass,/obj/item/device/radio/phone,/obj/effect/floor_decal/corner/paleblue/diagonal,/turf/simulated/floor/tiled/white,/area/outpost/abandoned)
 "ax" = (/obj/structure/table,/obj/effect/floor_decal/corner/paleblue/diagonal,/obj/item/mecha_parts/part/durand_right_leg,/turf/simulated/floor/tiled/white,/area/outpost/abandoned)
 "ay" = (/obj/effect/floor_decal/corner/paleblue/diagonal,/turf/simulated/floor/tiled/white,/area/outpost/abandoned)
 "az" = (/turf/simulated/floor/diona,/area/outpost/abandoned)

@@ -51,8 +51,6 @@ In short:
 	KillMobs()
 	OverlayAndAmbientSet()
 
-	runedec += 9000	//basically removing the rune cap
-
 
 /datum/universal_state/hell/proc/AreaSet()
 	for(var/area/A in all_areas)
@@ -90,4 +88,4 @@ In short:
 /datum/universal_state/hell/proc/KillMobs()
 	for(var/mob/living/simple_animal/M in mob_list)
 		if(M && !M.client)
-			M.stat = DEAD
+			M.set_stat(DEAD)

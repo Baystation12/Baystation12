@@ -128,7 +128,7 @@ area/space/atmosalert()
 	icon_state = "sec_prison"
 
 /area/maintenance
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
 	turf_initializer = /decl/turf_initializer/maintenance
 
@@ -241,7 +241,7 @@ area/space/atmosalert()
 	for(var/mob/living/carbon/human/H in src)
 		if(H.client)
 			mysound.status = SOUND_UPDATE
-			to_chat(H, mysound)
+			to_chat(H, mysound)
 			if(S)
 				spawn(sound_delay)
 					sound_to(H, S)

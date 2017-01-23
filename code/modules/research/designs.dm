@@ -347,6 +347,14 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
 	sort_string = "KAAAE"
 
+/datum/design/item/device/depth_scanner
+	desc = "Used to check spatial depth and density of rock outcroppings."
+	id = "depth_scanner"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 1000)
+	build_path = /obj/item/device/depth_scanner
+	sort_string = "KAAAF"
+
 /datum/design/item/medical
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 20)
 
@@ -638,6 +646,15 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/stock_parts/subspace/transmitter
 	sort_string = "UAAAG"
 
+/datum/design/item/device/ano_scanner
+	name = "Alden-Saraspova counter"
+	id = "ano_scanner"
+	desc = "Aids in triangulation of exotic particles."
+	req_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
+	materials = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 5000)
+	build_path = /obj/item/device/ano_scanner
+	sort_string = "UAAAH"
+
 /datum/design/item/light_replacer
 	name = "Light replacer"
 	desc = "A device to automatically replace lights. Refill with working lightbulbs."
@@ -655,10 +672,10 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/paicard
 	sort_string = "VABAI"
 
-/datum/design/item/intellicard
-	name = "'intelliCard', AI preservation and transportation system"
-	desc = "Allows for the construction of an intelliCard."
-	id = "intellicard"
+/datum/design/item/intelicard
+	name = "'inteliCard', AI preservation and transportation system"
+	desc = "Allows for the construction of an inteliCard."
+	id = "intelicard"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
 	build_path = /obj/item/weapon/aicard
@@ -701,6 +718,24 @@ other types of metals and chemistry for reagents).
 	materials = list (DEFAULT_WALL_MATERIAL = 20, "glass" = 10)
 	build_path = /obj/item/device/radio/beacon
 	sort_string = "VADAA"
+
+/datum/design/item/gps
+	name = "Triangulating device design"
+	desc = "Triangulates approximate co-ordinates using a nearby satellite network."
+	id = "gps"
+	req_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 500)
+	build_path = /obj/item/device/gps
+	sort_string = "VADAB"
+
+/datum/design/item/beacon_locator
+	name = "Beacon tracking pinpointer"
+	desc = "Used to scan and locate signals on a particular frequency."
+	id = "beacon_locator"
+	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 500)
+	build_path = /obj/item/device/beacon_locator
+	sort_string = "VADAC"
 
 /datum/design/item/bag_holding
 	name = "'Bag of Holding', an infinite capacity bag prototype"
@@ -973,9 +1008,9 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
 
-// Intellicard Slot
+// inteliCard Slot
 /datum/design/item/modularcomponent/aislot
-	name = "intellicard slot"
+	name = "inteliCard slot"
 	id = "aislot"
 	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	build_type = IMPRINTER

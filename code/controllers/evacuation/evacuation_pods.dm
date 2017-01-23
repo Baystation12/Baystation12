@@ -14,6 +14,7 @@
 		EVAC_OPT_CANCEL_ABANDON_SHIP = new /datum/evacuation_option/cancel_abandon_ship(),
 		EVAC_OPT_CANCEL_BLUESPACE_JUMP = new /datum/evacuation_option/cancel_bluespace_jump()
 	)
+	var/list/bluespaced = list()
 
 /datum/evacuation_controller/pods/finish_preparing_evac()
 	. = ..()
@@ -28,15 +29,46 @@
 	state = EVAC_IN_TRANSIT
 
 	// Launch the pods!
-	for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
-		if (!pod.arming_controller || pod.arming_controller.armed)
-			pod.move_time = (evac_transit_delay/10)
-			pod.launch(src)
-
 	if (emergency_evacuation)
-		priority_announcement.Announce(replacetext(replacetext(using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
+		for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+			if (!pod.arming_controller || pod.arming_controller.armed)
+				pod.move_time = (evac_transit_delay/10)
+				pod.launch(src)
+		priority_announcement.Announce(replacetext(replacetext(using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
 	else
-		priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_leaving_dock, "%dock_name%", "[dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
+		//Bluespace'd!
+		priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_leaving_dock, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
+
+		world.maxz++	//create a place for stragglers
+		using_map.sealed_levels |= world.maxz
+		for(var/mob/living/M in mob_list)
+			if(M.z in using_map.station_levels)
+				var/area/A = get_area(M)
+				if(istype(A,/area/space)) //straggler
+					var/turf/T = locate(M.x,M.y,world.maxz)
+					if(T)
+						M.forceMove(T)
+				else
+					if(M.client)
+						to_chat(M,"<span class='notice'>You feel oddly light.</span>")
+						M.overlay_fullscreen("bluespace", /obj/screen/fullscreen/bluespace_overlay)
+					M.incorporeal_move = 1
+					bluespaced |= M
+
+/datum/evacuation_controller/pods/finish_evacuation()
+	..()
+	if (emergency_evacuation)
+		return
+	for(var/mob/living/M in bluespaced)
+		if(M.client)
+			to_chat(M,"<span class='notice'>You feel rooted in material world again.</span>")
+			M.clear_fullscreen("bluespace")
+		M.incorporeal_move = 0
+		var/turf/T = get_turf(M)
+		if(T.density)
+			to_chat(M,"<span class='danger'>[T] suddenly appears inside you!</span>")
+			M.gib()
+		bluespaced -= M
 
 /datum/evacuation_controller/pods/available_evac_options()
 	if (is_on_cooldown())
@@ -114,6 +146,14 @@
 /datum/evacuation_option/cancel_bluespace_jump/execute(mob/user)
 	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled the bluespace jump.")
+
+/obj/screen/fullscreen/bluespace_overlay
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "mfoam"
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	color = "#FF9900"
+	blend_mode = BLEND_SUBTRACT
+	layer = FULLSCREEN_LAYER
 
 #undef EVAC_OPT_ABANDON_SHIP
 #undef EVAC_OPT_BLUESPACE_JUMP

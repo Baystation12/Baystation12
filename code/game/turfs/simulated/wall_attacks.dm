@@ -12,8 +12,8 @@
 		can_open = WALL_OPENING
 		//flick("[material.icon_base]fwall_opening", src)
 		sleep(15)
-		density = 0
-		opacity = 0
+		set_density(0)
+		set_opacity(0)
 		blocks_air = ZONE_BLOCKED
 		update_icon()
 		update_air()
@@ -21,8 +21,8 @@
 	else
 		can_open = WALL_OPENING
 		//flick("[material.icon_base]fwall_closing", src)
-		density = 1
-		opacity = 1
+		set_density(1)
+		set_opacity(1)
 		blocks_air = AIR_BLOCKED
 		update_icon()
 		update_air()

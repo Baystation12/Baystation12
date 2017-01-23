@@ -1,4 +1,6 @@
 #if !defined(USING_MAP_DATUM)
+	#include "overmap_unit_testing.dm"
+
 	#include "bearcat/bearcat.dm"
 	#include "bearcat/bearcat_areas.dm"
 	#include "bearcat/bearcat-1.dmm"

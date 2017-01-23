@@ -111,7 +111,6 @@ They sell generic supplies and ask for generic supplies.
 								/obj/item/target                    = TRADER_ALL,
 								/obj/structure/dispenser            = TRADER_SUBTYPES_ONLY,
 								/obj/structure/filingcabinet        = TRADER_THIS_TYPE,
-								/obj/structure/showcase             = TRADER_THIS_TYPE,
 								/obj/structure/safe                 = TRADER_THIS_TYPE,
 								/obj/structure/plushie              = TRADER_SUBTYPES_ONLY,
 								/obj/structure/sign                 = TRADER_SUBTYPES_ONLY,

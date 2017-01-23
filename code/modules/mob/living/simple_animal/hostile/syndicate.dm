@@ -62,7 +62,7 @@
 	if(O.force)
 		if(prob(80))
 			var/damage = O.force
-			if (O.damtype == HALLOSS)
+			if (O.damtype == PAIN)
 				damage = 0
 			health -= damage
 			visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by \the [user].</span>")

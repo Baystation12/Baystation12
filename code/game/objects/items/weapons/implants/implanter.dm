@@ -59,24 +59,11 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(M)
 
-		var/turf/T1 = get_turf(M)
-		if (T1 && ((M == user) || do_after(user, 50, M)))
-			if(user && M && (get_turf(M) == T1) && src && src.imp)
+		var/target_zone = user.zone_sel.selecting
+		if(src.imp.can_implant(M, user, target_zone))
+			if(do_after(user, 50, M) && src.imp.implant_in_mob(M, target_zone))
 				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
-
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
-
-				if(src.imp.implanted(M))
-					src.imp.loc = M
-					src.imp.imp_in = M
-					src.imp.implanted = 1
-					if (ishuman(M))
-						var/mob/living/carbon/human/H = M
-						var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
-						affected.implants += src.imp
-						imp.part = affected
-
-						BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 
 				src.imp = null
 				update()

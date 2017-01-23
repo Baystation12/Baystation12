@@ -82,7 +82,7 @@ var/global/list/sparring_attack_cache = list()
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
 				if(!target.lying)
 					target.visible_message("<span class='warning'>[target] gives way slightly.</span>")
-					target.apply_effect(attack_damage*3, AGONY, armour)
+					target.apply_effect(attack_damage*3, PAIN, armour)
 	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 100) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
 			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
@@ -104,6 +104,9 @@ var/global/list/sparring_attack_cache = list()
 		to_chat(target, "<span class='danger'>You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]</span>")
 		return
 	user.visible_message("<span class='danger'>[user] attempts to press \his [eye_attack_text] into [target]'s eyes, but they don't have any!</span>")
+
+/datum/unarmed_attack/proc/damage_flags()
+	return (src.sharp? DAM_SHARP : 0)|(src.edge? DAM_EDGE : 0)
 
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")
@@ -175,9 +178,6 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 
 /datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if (user.legcuffed)
-		return 0
-
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
 		return 0
 
@@ -215,10 +215,6 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-
-	if (user.legcuffed)
-		return 0
-
 	if(!istype(target))
 		return 0
 

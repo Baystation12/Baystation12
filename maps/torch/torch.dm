@@ -31,6 +31,7 @@
 	#include "structures/closets/services.dm"
 	#include "structures/closets/supply.dm"
 
+	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
 	#include "loadout/loadout_eyes.dm"
 	#include "loadout/loadout_gloves.dm"
@@ -39,9 +40,16 @@
 	#include "loadout/loadout_suit.dm"
 	#include "loadout/loadout_uniform.dm"
 	#include "loadout/loadout_xeno.dm"
+	#include "loadout/~defines.dm"
 
-	#include "../shared/exodus_torch_areas.dm"
-	#include "../shared/exodus_torch_zas_tests.dm"
+	#include "../shared/exodus_torch/areas.dm"
+	#include "../shared/exodus_torch/zas_tests.dm"
+	#include "../shared/exodus_torch/loadout/loadout_gloves.dm"
+	#include "../shared/exodus_torch/loadout/loadout_head.dm"
+	#include "../shared/exodus_torch/loadout/loadout_shoes.dm"
+	#include "../shared/exodus_torch/loadout/loadout_suit.dm"
+	#include "../shared/exodus_torch/loadout/loadout_accessories.dm"
+	#include "../shared/exodus_torch/loadout/loadout_xeno.dm"
 
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"

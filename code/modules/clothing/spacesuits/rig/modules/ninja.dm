@@ -16,10 +16,10 @@
 	disruptable = 1
 	disruptive = 0
 
-	use_power_cost = 5 KILOWATTS
-	active_power_cost = 500
+	use_power_cost = 250 KILOWATTS
+	active_power_cost = 6 KILOWATTS		// 30 min battery life /w best (3kWh) cell
 	passive_power_cost = 0
-	module_cooldown = 30
+	module_cooldown = 10 SECONDS
 
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"

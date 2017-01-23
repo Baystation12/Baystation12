@@ -44,13 +44,13 @@
 	var/max_age = 70
 
 	// Language/culture vars.
-	var/default_language = "Galactic Common" // Default language is used when 'say' is used without modifiers.
-	var/language = "Galactic Common"         // Default racial language, if any.
+	var/default_language = LANGUAGE_GALCOM // Default language is used when 'say' is used without modifiers.
+	var/language = LANGUAGE_GALCOM         // Default racial language, if any.
 	var/list/secondary_langs = list()        // The names of secondary languages that are available to this species.
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
-	var/name_language = "Galactic Common"    // The language to use when determining names for this species, or null to use the first name/last name generator
+	var/name_language = LANGUAGE_GALCOM    // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
 	var/total_health = 100                   // Point at which the mob will enter crit.
@@ -187,6 +187,12 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
+	//Build organ descriptors
+	for(var/limb_type in has_limbs)
+		var/list/organ_data = has_limbs[limb_type]
+		var/obj/item/organ/limb_path = organ_data["path"]
+		organ_data["descriptor"] = initial(limb_path.name)
+
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)
 
@@ -218,12 +224,11 @@
 	for(var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
-		var/obj/item/organ/O = new limb_path(H)
-		organ_data["descriptor"] = O.name
+		new limb_path(H)
 
 	for(var/organ_tag in has_organ)
 		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H,1)
+		var/obj/item/organ/O = new organ_type(H)
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
@@ -324,11 +329,7 @@
 
 	if(!H.druggy)
 		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight + H.equipment_darkness_modifier, 8))
-		if(H.seer)
-			var/obj/effect/rune/R = locate() in H.loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				H.set_see_invisible(SEE_INVISIBLE_CULT)
-		if(H.see_invisible != SEE_INVISIBLE_CULT && H.equipment_see_invis)
+		if(H.equipment_see_invis)
 			H.set_see_invisible(min(H.see_invisible, H.equipment_see_invis))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
@@ -363,3 +364,6 @@
 	H.h_style = H.species.default_h_style
 	H.f_style = H.species.default_f_style
 	H.update_hair()
+
+/datum/species/proc/get_blood_name()
+	return "blood"

@@ -69,7 +69,7 @@
 	if(wearing_rig)
 		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
 
-	. = ..(gibbed,species.get_death_message(src))
+	. = ..(gibbed,"no message")
 	if(!gibbed)
 		handle_organs()
 		if(species.death_sound)

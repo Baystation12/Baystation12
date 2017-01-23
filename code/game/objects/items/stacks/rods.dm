@@ -71,7 +71,7 @@
 		for(var/obj/structure/grille/G in usr.loc)
 			if (G.destroyed)
 				G.health = 10
-				G.density = 1
+				G.set_density(1)
 				G.destroyed = 0
 				G.icon_state = "grille"
 				use(1)

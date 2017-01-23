@@ -417,8 +417,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					cartdata["radio"] = 1
 				if(istype(cartridge.radio, /obj/item/radio/integrated/signal))
 					cartdata["radio"] = 2
-				if(istype(cartridge.radio, /obj/item/radio/integrated/mule))
-					cartdata["radio"] = 3
 
 		if(mode == 2)
 			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
@@ -1225,7 +1223,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					O.show_message("<span class='warning'>\The [user] has analyzed [C]'s vitals!</span>", 1)
 
 				user.show_message("<span class='notice'>Analyzing Results for [C]:</span>")
-				user.show_message("<span class='notice'>    Overall Status: [C.stat > 1 ? "dead" : "[C.health - C.halloss]% healthy"]</span>", 1)
+				user.show_message("<span class='notice'>    Overall Status: [C.stat > 1 ? "dead" : "[C.health - C.getHalLoss()]% healthy"]</span>", 1)
 				user.show_message(text("<span class='notice'>    Damage Specifics:</span> <span class='[]'>[]</span>-<span class='[]'>[]</span>-<span class='[]'>[]</span>-<span class='[]'>[]</span>",
 						(C.getOxyLoss() > 50) ? "warning" : "", C.getOxyLoss(),
 						(C.getToxLoss() > 50) ? "warning" : "", C.getToxLoss(),
@@ -1234,8 +1232,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						), 1)
 				user.show_message("<span class='notice'>    Key: Suffocation/Toxin/Burns/Brute</span>", 1)
 				user.show_message("<span class='notice'>    Body Temperature: [C.bodytemperature-T0C]&deg;C ([C.bodytemperature*1.8-459.67]&deg;F)</span>", 1)
-				if(C.tod && (C.stat == DEAD || (C.status_flags & FAKEDEATH)))
-					user.show_message("<span class='notice'>    Time of Death: [C.tod]</span>")
+				if(C.stat == DEAD || (C.status_flags & FAKEDEATH))
+					user.show_message("<span class='notice'>    Time of Death: [time2text(worldtime2stationtime(C.timeofdeath))]</span>")
 				if(istype(C, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = C
 					var/list/damaged = H.get_damaged_organs(1,1)

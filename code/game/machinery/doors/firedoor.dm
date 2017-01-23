@@ -222,7 +222,7 @@
 
 					var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(src.loc)
 					FA.anchored = 1
-					FA.density = 1
+					FA.set_density(1)
 					FA.wired = 1
 					FA.update_icon()
 					qdel(src)

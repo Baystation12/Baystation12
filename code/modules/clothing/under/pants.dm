@@ -55,6 +55,22 @@
 	desc = "A pair of track pants, for the athletic."
 	icon_state = "trackpants"
 
+/obj/item/clothing/under/pants/track/blue
+	name = "blue track pants"
+	icon_state = "trackpantsblue"
+
+/obj/item/clothing/under/pants/track/green
+	name = "green track pants"
+	icon_state = "trackpantsgreen"
+
+/obj/item/clothing/under/pants/track/white
+	name = "white track pants"
+	icon_state = "trackpantswhite"
+
+/obj/item/clothing/under/pants/track/red
+	name = "red track pants"
+	icon_state = "trackpantsred"
+
 /obj/item/clothing/under/pants/khaki
 	name = "khaki pants"
 	desc = "A pair of dust beige khaki pants."

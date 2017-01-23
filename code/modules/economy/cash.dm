@@ -67,7 +67,7 @@
 /obj/item/weapon/spacecash/bundle/update_icon()
 	overlays.Cut()
 	var/list/images = src.getMoneyImages()
-	
+
 	for(var/A in images)
 		var/image/banknote = image('icons/obj/items.dmi', A)
 		var/matrix/M = matrix()
@@ -75,7 +75,7 @@
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 		banknote.transform = M
 		src.overlays += banknote
-	
+
 	src.desc = "They are worth [worth] Thalers."
 	if(worth in denominations)
 		src.name = "[worth] Thaler"
@@ -177,6 +177,6 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
 
 /obj/item/weapon/spacecash/ewallet/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (!(user in view(2)) && user!=src.loc) return
 	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</span>")

@@ -2,14 +2,15 @@
 
 obj/machinery/recharger
 	name = "recharger"
+	desc = "An all-purpose recharger for a variety of devices."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "recharger0"
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 4
-	active_power_usage = 15000	//15 kW
+	active_power_usage = 30 KILOWATTS
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/shield_diffuser)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/gun/magnetic/railgun, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/shield_diffuser)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -49,6 +50,11 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		if(istype(G, /obj/item/device/suit_sensor_jammer))
 			var/obj/item/device/suit_sensor_jammer/J = G
 			if(!J.bcell)
+				to_chat(user, "This device does not have a battery installed.")
+				return
+		if(istype(G, /obj/item/weapon/gun/magnetic/railgun))
+			var/obj/item/weapon/gun/magnetic/railgun/RG = G
+			if(!RG.cell)
 				to_chat(user, "This device does not have a battery installed.")
 				return
 
@@ -108,6 +114,10 @@ obj/machinery/recharger/process()
 		else if(istype(charging, /obj/item/weapon/shield_diffuser))
 			var/obj/item/weapon/shield_diffuser/SD = charging
 			cell = SD.cell
+		else if(istype(charging, /obj/item/weapon/gun/magnetic/railgun))
+			var/obj/item/weapon/gun/magnetic/railgun/RG = charging
+			cell = RG.cell
+
 		if(istype(cell, /obj/item/weapon/cell))
 			var/obj/item/weapon/cell/C = cell
 			if(!C.fully_charged())
@@ -133,6 +143,11 @@ obj/machinery/recharger/emp_act(severity)
 		var/obj/item/weapon/melee/baton/B = charging
 		if(B.bcell)
 			B.bcell.charge = 0
+
+	else if(istype(charging, /obj/item/weapon/gun/magnetic/railgun))
+		var/obj/item/weapon/gun/magnetic/railgun/RG = charging
+		if(RG.cell)
+			RG.cell.charge = 0
 	..(severity)
 
 obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
@@ -144,10 +159,11 @@ obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to 
 
 obj/machinery/recharger/wallcharger
 	name = "wall recharger"
+	desc = "A heavy duty wall recharger specialized for energy weaponry."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "wrecharger0"
-	active_power_usage = 25000	//25 kW , It's more specialized than the standalone recharger (guns and batons only) so make it more powerful
-	allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton)
+	active_power_usage = 50 KILOWATTS	//It's more specialized than the standalone recharger (guns and batons only) so make it more powerful
+	allowed_devices = list(/obj/item/weapon/gun/magnetic/railgun, /obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton)
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"

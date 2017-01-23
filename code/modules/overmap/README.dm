@@ -9,7 +9,7 @@ No actual turfs are moved, you would need exploration shuttles or teleports to m
 0. Map whatever.
 1. Make /obj/effect/overmap/sector/[whatever]
 	If you want explorations shuttles be able to dock here, remember to set *landing_area*
-2. Put /obj/effect/overmap/sector/[whatever] on the map. If it's multiz, only one is needed, on any z.
+2. Put /obj/effect/overmap/sector/[whatever] on the map. Even if it's multiz, only one is needed, on any z.
 3. Done.
 
 *************************************************************
@@ -33,9 +33,11 @@ Lets overmap know this place should be represented on the map as a sector/ship.
 If this zlevel (or any of connected ones for multiz) doesn't have this object, you won't be able to travel there by ovemap means.
 ### HOW TO USE
 1. Create subtype for your ship/sector. Use /ship one for ships.
-2. Put it anywhere on the ship/sector. It will do the rest on its own during init.
+2. Put it anywhere on the ship/sector map. It will do the rest on its own during init.
 If your thing is multiz, only one is needed per multiz sector/ship.
 
+If it's player's main base (e.g Exodus), set 'base' var to 1, so it adds itself to station_levels list.
+If this place cannot be reached or left with EVA, set 'in_space' var to 0
 If you want exploration shuttles (look below) to be able to dock here, set *landing_area* var to the type of area they should use
 e.g. *landing_area* = /area/sector/shuttle/butts_inbound
 

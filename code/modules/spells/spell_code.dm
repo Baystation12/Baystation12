@@ -76,7 +76,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			silenced = max(0,silenced-1)
 			sleep(1)
 		if(connected_button)
-			var/obj/screen/spell/S = connected_button
+			var/obj/screen/ability/spell/S = connected_button
 			if(!istype(S))
 				return
 			S.update_charge(1)
@@ -162,7 +162,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			spell.icon = overlay_icon
 			spell.icon_state = overlay_icon_state
 			spell.anchored = 1
-			spell.density = 0
+			spell.set_density(0)
 			spawn(overlay_lifespan)
 				qdel(spell)
 	return valid_targets
@@ -193,7 +193,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/cast_check(skipcharge = 0,mob/user = usr) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
 
-	if(!(src in user.spell_list) && holder == user)
+	if(!(src in user.mind.learned_spells) && holder == user)
 		error("[user] utilized the spell '[src]' without having it.")
 		to_chat(user, "<span class='warning'>You shouldn't have this spell! Something's wrong.</span>")
 		return 0
@@ -232,7 +232,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 				to_chat(user, "Mmmf mrrfff!")
 				return 0
 
-	var/spell/noclothes/spell = locate() in user.spell_list
+	var/spell/noclothes/spell = locate() in user.mind.learned_spells
 	if((spell_flags & NEEDSCLOTHES) && !(spell && istype(spell)) && holder == user)//clothes check
 		if(!user.wearing_wiz_garb())
 			return 0

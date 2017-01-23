@@ -10,7 +10,7 @@
 	item_state = "apron"
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
-	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/fertilizer,/obj/item/weapon/material/minihoe)
+	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/material/minihoe)
 
 //Captain
 /obj/item/clothing/suit/captunic
@@ -59,7 +59,7 @@
 
 //Chef
 /obj/item/clothing/suit/chef/classic
-	name = "A classic chef's apron."
+	name = "classic chef's apron"
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"

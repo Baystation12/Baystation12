@@ -23,6 +23,9 @@ var/datum/controller/process/turbolift/turbolift_controller
 			if(!lift.do_move())
 				moving_lifts[liftref] = null
 				moving_lifts -= liftref
+				if(lift.target_floor)
+					lift.target_floor.ext_panel.reset()
+					lift.target_floor = null
 			else
 				lift_is_moving(lift)
 			lift.busy = 0

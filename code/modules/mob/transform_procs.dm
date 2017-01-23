@@ -97,8 +97,7 @@
 				if (sloc.name == "AI")
 					loc_landmark = sloc
 		O.forceMove(loc_landmark.loc)
-
-	O.on_mob_init()
+		O.on_mob_init()
 
 	O.add_ai_verbs()
 

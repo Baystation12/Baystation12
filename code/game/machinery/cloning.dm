@@ -233,7 +233,7 @@
 			return
 		if(default_part_replacement(user, W))
 			return
-			
+
 	var/id = W.GetIdCard()
 	if(id)
 		if(!check_access(id))
@@ -317,7 +317,7 @@
 	if(occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
-	occupant.loc = loc
+	occupant.forceMove(loc)
 	eject_wait = 0 //If it's still set somehow.
 	domutcheck(occupant) //Waiting until they're out before possible transforming.
 	occupant = null
@@ -351,21 +351,21 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = loc
+				A.dropInto(loc)
 				ex_act(severity)
 			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = loc
+					A.dropInto(loc)
 					ex_act(severity)
 				qdel(src)
 				return
 		if(3.0)
 			if(prob(25))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = loc
+					A.dropInto(loc)
 					ex_act(severity)
 				qdel(src)
 				return
@@ -453,7 +453,7 @@
 	to_chat(user, "You flip the write-protect tab to [read_only ? "protected" : "unprotected"].")
 
 /obj/item/weapon/disk/data/examine(mob/user)
-	..(user)
+	. = ..(user)
 	to_chat(user, text("The write-protect tab is set to [read_only ? "protected" : "unprotected"]."))
 	return
 

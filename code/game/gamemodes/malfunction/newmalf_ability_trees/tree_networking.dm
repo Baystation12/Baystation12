@@ -168,7 +168,7 @@
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Caution, [station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
+			command_announcement.Announce("Caution, [using_map.station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return

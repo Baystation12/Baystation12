@@ -37,46 +37,23 @@
 					melee_can_hit = 1
 				return
 			*/
-			if(istype(target, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = target
-	//			if (M.health <= 0) return
 
-				var/obj/item/organ/external/temp = H.get_organ(pick(BP_CHEST, BP_CHEST, BP_CHEST, BP_HEAD))
-				if(temp)
-					var/update = 0
-					switch(damtype)
-						if("brute")
-							H.Paralyse(1)
-							update |= temp.take_damage(rand(force/2, force), 0)
-						if("fire")
-							update |= temp.take_damage(0, rand(force/2, force))
-						if("tox")
-							if(H.reagents)
-								if(H.reagents.get_reagent_amount("carpotoxin") + force < force*2)
-									H.reagents.add_reagent("carpotoxin", force)
-								if(H.reagents.get_reagent_amount("cryptobiolin") + force < force*2)
-									H.reagents.add_reagent("cryptobiolin", force)
-						else
-							return
-					if(update)	H.UpdateDamageIcon()
-				H.updatehealth()
+			var/hit_zone = ran_zone()
+			switch(damtype)
+				if("brute")
+					var/blocked = M.run_armor_check(hit_zone, "melee")
+					if(M.apply_damage(rand(force/2, force), BRUTE, hit_zone, blocked))
+						M.Weaken(1)
+				if("fire")
+					var/blocked = M.run_armor_check(hit_zone, "energy")
+					M.apply_damage(rand(force/2, force), BRUTE, hit_zone, blocked)
+				if("tox")
+					if(M.reagents)
+						if(M.reagents.get_reagent_amount("carpotoxin") + force < force*2)
+							M.reagents.add_reagent("carpotoxin", force)
+						if(M.reagents.get_reagent_amount("cryptobiolin") + force < force*2)
+							M.reagents.add_reagent("cryptobiolin", force)
 
-			else
-				switch(damtype)
-					if("brute")
-						M.Paralyse(1)
-						M.take_overall_damage(rand(force/2, force))
-					if("fire")
-						M.take_overall_damage(0, rand(force/2, force))
-					if("tox")
-						if(M.reagents)
-							if(M.reagents.get_reagent_amount("carpotoxin") + force < force*2)
-								M.reagents.add_reagent("carpotoxin", force)
-							if(M.reagents.get_reagent_amount("cryptobiolin") + force < force*2)
-								M.reagents.add_reagent("cryptobiolin", force)
-					else
-						return
-				M.updatehealth()
 			src.occupant_message("You hit [target].")
 			src.visible_message("<font color='red'><b>[src.name] hits [target].</b></font>")
 		else

@@ -62,12 +62,13 @@
 /obj/item/weapon/rcd/attackby(obj/item/weapon/W, mob/user)
 
 	if(istype(W, /obj/item/weapon/rcd_ammo))
-		if((stored_matter + 10) > max_stored_matter)
-			to_chat(user, "<span class='notice'>The RCD can't hold any more matter-units.</span>")
+		var/obj/item/weapon/rcd_ammo/cartridge = W
+		if((stored_matter + cartridge.remaining) > 30)
+			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
 			return
+		stored_matter += cartridge.remaining
 		user.drop_from_inventory(W)
 		qdel(W)
-		stored_matter += 10
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		return
@@ -98,13 +99,26 @@
 
 /obj/item/weapon/rcd_ammo
 	name = "compressed matter cartridge"
-	desc = "Highly compressed matter for the RCD."
+	desc = "A highly-compressed matter cartridge usable in rapid construction (and deconstruction) devices, such as railguns."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "rcd"
 	item_state = "rcdammo"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 15000)
+	var/remaining = 10
+
+/obj/item/weapon/rcd_ammo/examine(var/mob/user)
+	. = ..(user,1)
+	if(.)
+		to_chat(user, "<span class='notice'>It has [remaining] unit\s of matter left.</span>")
+
+/obj/item/weapon/rcd_ammo/large
+	name = "high-capacity matter cartridge"
+	desc = "Do not ingest."
+	matter = list(DEFAULT_WALL_MATERIAL = 90000,"glass" = 45000)
+	remaining = 30
+	origin_tech = list(TECH_MATERIAL = 4)
 
 /obj/item/weapon/rcd/borg
 	canRwall = 1
@@ -178,7 +192,7 @@
 
 /decl/hierarchy/rcd_mode/proc/do_handle_work(var/atom/target)
 	var/result = get_work_result(target)
-	if(isturf(result))
+	if(ispath(result,/turf))
 		var/turf/T = target
 		T.ChangeTurf(result)
 	else if(result)

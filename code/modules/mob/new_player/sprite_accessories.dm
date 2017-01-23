@@ -702,6 +702,18 @@
 		name = "7 O'clock Shadow and Moustache"
 		icon_state = "facial_7oclockmoustache"
 
+	mutton
+		name = "Mutton Chops"
+		icon_state = "facial_mutton"
+
+	muttonstache
+		name = "Mutton Chops and Moustache"
+		icon_state = "facial_muttonmus"
+
+	walrus
+		name = "Walrus Moustache"
+		icon_state = "facial_walrus"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /

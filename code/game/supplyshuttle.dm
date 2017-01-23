@@ -36,6 +36,7 @@ var/list/mechtoys = list(
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 	var/list/mobs_can_pass = list(
+		/mob/living/bot,
 		/mob/living/carbon/slime,
 		/mob/living/simple_animal/mouse,
 		/mob/living/silicon/robot/drone
@@ -259,7 +260,7 @@ var/list/point_source_descriptions = list(
 				slip.is_copy = 0
 				slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 				slip.info +="Order #[SO.ordernum]<br>"
-				slip.info +="Destination: [station_name]<br>"
+				slip.info +="Destination: [using_map.station_name]<br>"
 				slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 				slip.info +="CONTENTS:<br><ul>"
 

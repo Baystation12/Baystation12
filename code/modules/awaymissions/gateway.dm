@@ -10,8 +10,8 @@
 
 /obj/machinery/gateway/initialize()
 	update_icon()
-	if(dir == 2)
-		density = 0
+	if(dir == SOUTH)
+		set_density(0)
 
 
 /obj/machinery/gateway/update_icon()

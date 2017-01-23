@@ -7,18 +7,17 @@
 /datum/gear/accessory/vest
 	display_name = "black vest"
 	path = /obj/item/clothing/accessory/toggleable/vest
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/accessory/suspenders
 	display_name = "suspenders"
 	path = /obj/item/clothing/accessory/suspenders
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/wcoat
 	display_name = "waistcoat"
 	path = /obj/item/clothing/accessory/wcoat
-	allowed_roles = list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant")
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/accessory/necklace
 	display_name = "necklace"
@@ -75,9 +74,7 @@
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
 	path = /obj/item/clothing/accessory/armband/bluegold
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/wallet
 	display_name = "wallet"
@@ -93,9 +90,7 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/holster
 	cost = 3
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "Security Guard", "Merchant")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/holster/New()
 	..()
@@ -203,9 +198,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal/iron/star
 	cost = 8
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -225,9 +218,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
 	path = /obj/item/clothing/accessory/medal/iron/sol
 	cost = 5
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/solawardminor/New()
 	..()
@@ -256,11 +247,11 @@
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/tags
-	allowed_roles = list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor",
-						"Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Senior Physician", "Physician", "Deck Officer",
-						"Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative")
+	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/kneepads
 	display_name = "kneepads"
 	path = /obj/item/clothing/accessory/kneepads
 
+/datum/gear/accessory/flannel
+	allowed_roles = NON_MILITARY_ROLES

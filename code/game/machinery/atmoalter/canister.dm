@@ -179,11 +179,11 @@ update_flag
 
 		src.destroyed = 1
 		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
-		src.density = 0
+		src.set_density(0)
 		update_icon()
 
 		if (src.holding)
-			src.holding.loc = src.loc
+			src.holding.dropInto(loc)
 			src.holding = null
 
 		return 1

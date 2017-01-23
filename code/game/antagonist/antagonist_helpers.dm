@@ -2,6 +2,9 @@
 	if(player.current && jobban_isbanned(player.current, id))
 		return 0
 
+	if(player.assigned_role in blacklisted_jobs)
+		return 0
+
 	if(!ignore_role)
 		if(player.current && player.current.client)
 			var/client/C = player.current.client
@@ -9,8 +12,6 @@
 			if(C && config.use_age_restriction_for_jobs && isnum(C.player_age) && isnum(min_player_age) && (C.player_age < min_player_age))
 				return 0
 		if(player.assigned_role in restricted_jobs)
-			return 0
-		if(config.protect_roles_from_antagonist && (player.assigned_role in protected_jobs))
 			return 0
 		if(player.current && (player.current.status_flags & NO_ANTAG))
 			return 0

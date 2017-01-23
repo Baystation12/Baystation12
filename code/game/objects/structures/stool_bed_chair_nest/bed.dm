@@ -256,10 +256,10 @@
 
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M as mob)
 	if(M == buckled_mob)
-		density = 1
+		set_density(1)
 		icon_state = "up"
 	else
-		density = 0
+		set_density(0)
 		icon_state = "down"
 
 	return ..()

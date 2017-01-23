@@ -2,7 +2,7 @@
 	filename = "aidiag"
 	filedesc = "AI Maintenance Utility"
 	program_icon_state = "generic"
-	extended_desc = "This program is capable of reconstructing damaged AI systems. It can also be used to upload basic laws to the AI. Requires direct AI connection via intellicard slot."
+	extended_desc = "This program is capable of reconstructing damaged AI systems. It can also be used to upload basic laws to the AI. Requires direct AI connection via inteliCard slot."
 	size = 12
 	requires_ntnet = 0
 	required_access = access_heads
@@ -66,7 +66,7 @@
 	A.updatehealth()
 	// If the AI is dead, revive it.
 	if (A.health >= -100 && A.stat == DEAD)
-		A.stat = CONSCIOUS
+		A.set_stat(CONSCIOUS)
 		A.lying = 0
 		A.switch_from_dead_to_living_mob_list()
 		A.add_ai_verbs()

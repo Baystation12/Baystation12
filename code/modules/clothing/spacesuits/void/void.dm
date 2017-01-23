@@ -63,7 +63,7 @@
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
 /obj/item/clothing/suit/space/void/examine(user)
-	..(user)
+	. = ..(user)
 	var/list/part_list = new
 	for(var/obj/item/I in list(helmet,boots,tank))
 		part_list += "\a [I]"

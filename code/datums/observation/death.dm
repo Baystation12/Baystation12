@@ -16,7 +16,7 @@ var/decl/observ/death/death_event = new()
 * Death Handling *
 *****************/
 
-/mob/add_to_dead_mob_list()
+/mob/living/add_to_dead_mob_list()
 	. = ..()
 	if(.)
 		death_event.raise_event(src)

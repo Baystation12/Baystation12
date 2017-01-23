@@ -7,7 +7,6 @@ var/list/global_modular_computers = list()
 	name = "modular computer"
 	desc = "An advanced computer."
 
-	var/battery_powered = 0											// Whether computer should be battery powered. It is set automatically
 	use_power = 0
 	var/hardware_flag = 0											// A flag that describes this device type
 	var/last_power_usage = 0										// Power usage during last tick
@@ -29,9 +28,6 @@ var/list/global_modular_computers = list()
 
 	var/_max_damage = 100
 	var/_break_damage = 50
-
-	var/obj/item/weapon/computer_hardware/tesla_link/tesla_link		// Tesla Link component of this computer. Allows remote charging from nearest APC.
-
 	var/obj/item/modular_computer/processor/cpu = null				// CPU that handles most logic while this type only handles power and other specific things.
 
 /obj/machinery/modular_computer/attack_ghost(var/mob/observer/ghost/user)
@@ -46,7 +42,7 @@ var/list/global_modular_computers = list()
 	overlays.Cut()
 
 	if(!cpu || !cpu.enabled)
-		if (!(stat & NOPOWER) || battery_powered)
+		if (!(stat & NOPOWER))
 			overlays.Add(screen_icon_screensaver)
 		set_light(0)
 		return
@@ -110,72 +106,6 @@ var/list/global_modular_computers = list()
 		// Keep names in sync.
 		cpu.name = src.name
 		cpu.process(1)
-
-// Checks all hardware pieces to determine if name matches, if yes, returns the hardware piece, otherwise returns null
-/obj/machinery/modular_computer/proc/find_hardware_by_name(var/N)
-	if(tesla_link && (tesla_link.name == N))
-		return tesla_link
-	return null
-
-// Used in following function to reduce copypaste
-/obj/machinery/modular_computer/proc/power_failure(var/malfunction = 0)
-	if(cpu && cpu.enabled) // Shut down the computer
-		visible_message("<span class='danger'>\The [src]'s screen flickers [cpu.battery_module ? "\"BATTERY [malfunction ? "MALFUNCTION" : "CRITICAL"]\"" : "\"EXTERNAL POWER LOSS\""] warning as it shuts down unexpectedly.</span>")
-		if(cpu)
-			cpu.shutdown_computer(0)
-		battery_powered = 0
-	stat |= NOPOWER
-	update_icon()
-
-// Called by cpu item's process() automatically, handles our power interaction.
-/obj/machinery/modular_computer/proc/handle_power()
-	if(cpu.battery_module && cpu.battery_module.battery.charge <= 0) // Battery-run but battery is depleted.
-		power_failure()
-		return 0
-	else if(!cpu.battery_module && (!powered() || !tesla_link || !tesla_link.enabled || !tesla_link.check_functionality())) // Not battery run, but lacking APC connection.
-		power_failure()
-		return 0
-	else if(stat & NOPOWER)
-		stat &= ~NOPOWER
-
-	if(cpu.battery_module && cpu.battery_module.battery.charge)
-		battery_powered = 1
-	else
-		battery_powered = 0
-
-	var/power_usage = cpu.screen_on ? base_active_power_usage : base_idle_power_usage
-	for(var/obj/item/weapon/computer_hardware/CH in src.cpu.get_all_components())
-		if(CH.enabled)
-			power_usage += CH.power_usage
-
-	// Wireless APC connection exists.
-	if(tesla_link && tesla_link.enabled && tesla_link.check_functionality())
-		idle_power_usage = power_usage
-		active_power_usage = idle_power_usage + 100 	// APCLink only charges at 100W rate, but covers any power usage.
-		use_power = 1
-		// Battery is not fully charged. Begin slowly recharging.
-		if(cpu.battery_module && (cpu.battery_module.battery.charge < cpu.battery_module.battery.maxcharge))
-			use_power = 2
-
-		if(cpu.battery_module && powered() && (use_power == 2)) // Battery charging itself
-			cpu.battery_module.battery.give(100 * CELLRATE)
-		else if(cpu.battery_module && !powered()) // Unpowered, but battery covers the usage.
-			cpu.battery_module.battery.use(idle_power_usage * CELLRATE)
-
-	else	// No wireless connection run only on battery.
-		use_power = 0
-		if (cpu.battery_module)
-			if(!cpu.battery_module.check_functionality())
-				power_failure(1)
-				return
-			cpu.battery_module.battery.use(power_usage * CELLRATE)
-	cpu.last_power_usage = power_usage
-
-// Modular computers can have battery in them, we handle power in previous proc, so prevent this from messing it up for us.
-/obj/machinery/modular_computer/power_change()
-	if(battery_powered)
-		return
-	..()
 
 /obj/machinery/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(cpu)

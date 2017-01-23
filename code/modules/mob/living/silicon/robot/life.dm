@@ -85,9 +85,9 @@
 	if(health < config.health_threshold_dead && src.stat != 2) //die only once
 		death()
 
-	if (src.stat != 2) //Alive.
+	if (src.stat != DEAD) //Alive.
 		if (src.paralysis || src.stunned || src.weakened || !src.has_power) //Stunned etc.
-			src.stat = 1
+			src.set_stat(UNCONSCIOUS)
 			if (src.stunned > 0)
 				AdjustStunned(-1)
 			if (src.weakened > 0)
@@ -99,13 +99,13 @@
 				src.blinded = 0
 
 		else	//Not stunned.
-			src.stat = 0
+			src.set_stat(CONSCIOUS)
 
 		confused = max(0, confused - 1)
 
 	else //Dead.
 		src.blinded = 1
-		src.stat = 2
+		src.set_stat(DEAD)
 
 	if (src.stuttering) src.stuttering--
 
@@ -118,7 +118,7 @@
 		src.ear_damage -= 0.05
 		src.ear_damage = max(src.ear_damage, 0)
 
-	src.density = !( src.lying )
+	src.set_density(!src.lying)
 
 	if ((src.sdisabilities & BLIND))
 		src.blinded = 1

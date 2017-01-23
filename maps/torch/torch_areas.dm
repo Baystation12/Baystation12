@@ -214,7 +214,7 @@
 //torch large pods
 /area/shuttle/escape_pod6
 	name = "\improper Escape Pod One"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod6/station
 	icon_state = "shuttle2"
@@ -228,7 +228,7 @@
 
 /area/shuttle/escape_pod7
 	name = "\improper Escape Pod Two"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod7/station
 	icon_state = "shuttle2"
@@ -242,7 +242,7 @@
 
 /area/shuttle/escape_pod8
 	name = "\improper Escape Pod Three"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod8/station
 	icon_state = "shuttle2"
@@ -256,7 +256,7 @@
 
 /area/shuttle/escape_pod9
 	name = "\improper Escape Pod Four"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod9/station
 	icon_state = "shuttle2"
@@ -270,7 +270,7 @@
 
 /area/shuttle/escape_pod10
 	name = "\improper Escape Pod Five"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod10/station
 	icon_state = "shuttle2"
@@ -285,7 +285,7 @@
 
 /area/shuttle/escape_pod11
 	name = "\improper Escape Pod Six"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod11/station
 	icon_state = "shuttle2"
@@ -302,7 +302,7 @@
 //torch small pods
 /area/shuttle/escape_pod12
 	name = "\improper Escape Pod Seven"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod12/station
 	icon_state = "shuttle2"
@@ -316,7 +316,7 @@
 
 /area/shuttle/escape_pod13
 	name = "\improper Escape Pod Eight"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod13/station
 	icon_state = "shuttle2"
@@ -330,7 +330,7 @@
 
 /area/shuttle/escape_pod14
 	name = "\improper Escape Pod Nine"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod14/station
 	icon_state = "shuttle2"
@@ -344,7 +344,7 @@
 
 /area/shuttle/escape_pod15
 	name = "\improper Escape Pod Ten"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod15/station
 	icon_state = "shuttle2"
@@ -358,7 +358,7 @@
 
 /area/shuttle/escape_pod16
 	name = "\improper Escape Pod Eleven"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod16/station
 	icon_state = "shuttle2"
@@ -372,7 +372,7 @@
 
 /area/shuttle/escape_pod17
 	name = "\improper Escape Pod Twelve"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod17/station
 	icon_state = "shuttle2"
@@ -391,7 +391,7 @@
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/calypso_hangar/start
 	name = "\improper SEV Torch Hangar Deck"
@@ -439,7 +439,7 @@
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 
 /area/guppy_hangar/start
@@ -482,7 +482,7 @@
 	icon_state = "shuttle"
 	requires_power = 0
 	lighting_use_dynamic = 1
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/turbolift/start
 	name = "\improper Turbolift Start"
@@ -509,7 +509,7 @@
 	icon_state = "green"
 	requires_power = 0
 	lighting_use_dynamic = 1
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/ninja_dojo/dojo
 	name = "\improper Clan Dojo"
@@ -577,7 +577,7 @@
 	name = "\improper Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -673,7 +673,7 @@
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/rescue_base/base
 	name = "\improper Barracks"
@@ -724,20 +724,28 @@
 	base_turf = /turf/space/bluespace
 
 // Elevator areas.
-/area/shuttle/turbolift/torch_top
-	name = "First Deck"
+/area/turbolift/torch_top
+	name = "lift (upper deck)"
+	lift_floor_label = "Deck 1"
+	lift_floor_name = "Operations Deck"
 	lift_announce_str = "Arriving at Operations Deck: Bridge. Command Offices. Emergency Armory. Infirmary. Research Wing."
 
-/area/shuttle/turbolift/torch_second
-	name = "Second Deck"
+/area/turbolift/torch_second
+	name = "lift (maintenance)"
+	lift_floor_label = "Deck 2"
+	lift_floor_name = "Maintenance Deck"
 	lift_announce_str = "Arriving at Maintenance Deck: Engineering. Atmospherics. AI Core. Sanitation."
 
-/area/shuttle/turbolift/torch_first
-	name = "Third Deck"
+/area/turbolift/torch_first
+	name = "lift (second deck)"
+	lift_floor_label = "Deck 3"
+	lift_floor_name = "Habitation Deck"
 	lift_announce_str = "Arriving at Habitation Deck: EVA. Security Wing. Telecommunications. Hydroponics. Mess Hall. Cryogenic Storage."
 
-/area/shuttle/turbolift/torch_ground
-	name = "Fourth Deck"
+/area/turbolift/torch_ground
+	name = "lift (lower deck)"
+	lift_floor_label = "Deck 4"
+	lift_floor_name = "Hangar Deck"
 	lift_announce_str = "Arriving at Hangar Deck: Shuttle Docks. Storage. Main Hangar. Supply Office."
 	base_turf = /turf/simulated/floor
 

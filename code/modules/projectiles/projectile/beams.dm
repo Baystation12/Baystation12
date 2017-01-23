@@ -5,6 +5,7 @@
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
+	sharp = 1 //concentrated burns
 	check_armour = "laser"
 	eyeblur = 4
 	hitscan = 1
@@ -153,11 +154,19 @@
 	name = "stun beam"
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	nodamage = 1
+	check_armour = "energy"
+	sharp = 0 //not a laser
 	taser_effect = 1
 	agony = 40
-	damage_type = HALLOSS
+	damage_type = STUN
 
 	muzzle_type = /obj/effect/projectile/stun/muzzle
 	tracer_type = /obj/effect/projectile/stun/tracer
 	impact_type = /obj/effect/projectile/stun/impact
+
+/obj/item/projectile/beam/stun/shock
+	name = "shock beam"
+	damage_type = ELECTROCUTE
+	damage = 20
+	agony = 20
+	fire_sound='sound/weapons/pulse.ogg'

@@ -104,11 +104,13 @@
 	if (shock_damage<1)
 		return 0
 
-	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+	stun_effect_act(agony_amount=shock_damage, def_zone=def_zone)
+	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
-			"<span class='warning'>[src] was shocked by the [source]!</span>", \
+			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
 			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
 			"<span class='warning'>You hear a heavy electrical crack.</span>" \
 		)
@@ -116,9 +118,9 @@
 		Weaken(10)
 	else
 		src.visible_message(
-			"<span class='warning'>[src] was mildly shocked by the [source].</span>", \
-			"<span class='warning'>You feel a mild shock course through your body.</span>", \
-			"<span class='warning'>You hear a light zapping.</span>" \
+			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
+			"<span class='warning'>You feel a shock course through your body.</span>", \
+			"<span class='warning'>You hear a zapping sound.</span>" \
 		)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -167,11 +169,11 @@
 				var/list/status = list()
 				var/brutedamage = org.brute_dam
 				var/burndamage = org.burn_dam
-				if(halloss > 0)
+				if(getHalLoss() > 0)
 					if(prob(30))
-						brutedamage += halloss
+						brutedamage += getHalLoss()
 					if(prob(30))
-						burndamage += halloss
+						burndamage += getHalLoss()
 				switch(brutedamage)
 					if(1 to 20)
 						status += "bruised"
@@ -382,10 +384,6 @@
 		update_inv_handcuffed()
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
-
-	else if (W == legcuffed)
-		legcuffed = null
-		update_inv_legcuffed()
 	else
 	 ..()
 

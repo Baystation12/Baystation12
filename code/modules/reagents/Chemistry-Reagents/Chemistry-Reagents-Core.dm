@@ -24,6 +24,7 @@
 	data["antibodies"] = C.antibodies
 	data["blood_DNA"] = C.dna.unique_enzymes
 	data["blood_type"] = C.dna.b_type
+	data["species"] = C.species.name
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem += R.id
@@ -35,7 +36,11 @@
 /datum/reagent/blood/mix_data(var/newdata, var/newamount)
 	if(!islist(newdata))
 		return
+	if(!data["virus2"])
+		data["virus2"] = list()
 	data["virus2"] |= newdata["virus2"]
+	if(!data["antibodies"])
+		data["antibodies"] = list()
 	data["antibodies"] |= newdata["antibodies"]
 
 /datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.

@@ -170,6 +170,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>We are already absorbing!</span>")
 		return
 
+	var/obj/item/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
+	if(!affecting)
+		to_chat(src, "<span class='warning'>They are missing that body part!</span>")
+
 	changeling.isabsorbing = 1
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
@@ -182,9 +186,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				to_chat(src, "<span class='notice'>We stab [T] with the proboscis.</span>")
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				to_chat(T, "<span class='danger'>You feel a sharp stabbing pain!</span>")
-				var/obj/item/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
-				if(affecting.take_damage(39,0,1,0,"large organic needle"))
-					T:UpdateDamageIcon()
+				affecting.take_damage(39, 0, DAM_SHARP, "large organic needle")
 
 		feedback_add_details("changeling_powers","A[stage]")
 		if(!do_mob(src, T, 150))
@@ -386,9 +388,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	O.adjustBruteLoss(C.getBruteLoss())
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
-	O.stat = C.stat
+	O.set_stat(C.stat)
 	for (var/obj/item/weapon/implant/I in implants)
-		I.loc = O
+		I.forceMove(O)
 		I.implanted = O
 
 	C.mind.transfer_to(O)
@@ -417,7 +419,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.remove_changeling_powers()
 
 	C.emote("gasp")
-	C.tod = stationtime2text()
 
 	spawn(rand(800,2000))
 		if(changeling_power(20,1,100,DEAD))
@@ -476,7 +477,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.chem_charges -= 45
 
 	var/mob/living/carbon/human/C = src
-	C.stat = 0
+	C.set_stat(CONSCIOUS)
 	C.SetParalysis(0)
 	C.SetStunned(0)
 	C.SetWeakened(0)

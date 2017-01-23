@@ -90,8 +90,9 @@
 	path = /obj/item/clothing/under/resomi/rainbow
 
 /datum/gear/uniform/resomi/white
-	display_name = "smock, white (Resomi)"
+	display_name = "smock, colored (Resomi)"
 	path = /obj/item/clothing/under/resomi/white
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/resomi/eng
 	display_name = "uniform, Engineering (Resomi)"
@@ -126,4 +127,9 @@
 /datum/gear/shoes/toeless
 	display_name = "toeless jackboots"
 	path = /obj/item/clothing/shoes/jackboots/unathi
+	sort_category = "Xenowear"
+
+/datum/gear/shoes/wrk_toeless
+	display_name = "toeless workboots"
+	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"

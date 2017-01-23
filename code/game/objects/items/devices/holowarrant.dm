@@ -17,7 +17,7 @@ var/activetype = null //Is this a search or arrest warrtant?
 
 //look at it
 /obj/item/device/holowarrant/examine(mob/user)
-	..()
+	. = ..()
 	if(activename)
 		to_chat(user, "It's a holographic warrant for '[activename]'.")
 	if(in_range(user, src) || isghost(user))
@@ -66,7 +66,7 @@ var/activetype = null //Is this a search or arrest warrtant?
 		</br>
 		This document serves as authorization and notice for the arrest of _<u>[activename]</u>____ for the crime(s) of:</br>[activecharges]</br>
 		</br>
-		Vessel or habitat: _<u>NSS Exodus</u>____</br>
+		Vessel or habitat: _<u>[using_map.full_name]</u>____</br>
 		</br>_<u>[activeauth]</u>____</br>
 		<small>Person authorizing arrest</small></br>
 		</BODY></HTML>
@@ -96,7 +96,7 @@ var/activetype = null //Is this a search or arrest warrtant?
 		</br>
 		<b>Warrant issued by: </b> [activeauth]</br>
 		</br>
-		Vessel or habitat: _<u>NSS Exodus</u>____</br>
+		Vessel or habitat: _<u>[using_map.full_name]</u>____</br>
 		</BODY></HTML>
 		"}
 		show_browser(user, output, "window=Search warrant for [activename]")

@@ -200,7 +200,7 @@
 			sleep(15)
 			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
 			sleep(30)
-			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [company_name] system operator for future assistance.\"")
+			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [using_map.company_name] system operator for future assistance.\"")
 			req_access = null
 			emagged = 1
 			return 1
