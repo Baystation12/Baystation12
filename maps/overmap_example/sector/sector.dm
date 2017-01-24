@@ -5,9 +5,9 @@
 	start_y = 8
 
 	generic_waypoints = list(
-		"ingoing1",
-		"ingoing3",
-		"ingoing4",
+		"nav_ingoing1",
+		"nav_ingoing3",
+		"nav_ingoing4",
 	)
 
 /obj/effect/overmap/sector/test2
@@ -17,8 +17,8 @@
 	start_y = 8
 
 	generic_waypoints = list(
-		"ingoing2",
-		"abandoned_pod",
+		"nav_ingoing2",
+		"nav_abandoned_pod",
 	)
 
 
@@ -29,8 +29,7 @@
 /datum/shuttle/autodock/overmap/abandoned_pod
 	name = "Exploration Pod"
 	shuttle_area = /area/sector/shuttle/outgoing2
-	current_waypoint = "abandoned_pod"
-	//transit_direction = NORTH
+	current_waypoint = "nav_abandoned_pod"
 
 /area/sector/shuttle
 	name = "\improper Entry Point"
@@ -39,29 +38,24 @@
 	luminosity = 1
 	lighting_use_dynamic = 0
 
-/datum/shuttle_waypoint/overmap/ingoing1
+/obj/effect/shuttle_landmark/ingoing1
 	name = "Navpoint #1"
-	id = "ingoing1"
 	landmark_tag = "nav_ingoing1"
 
-/datum/shuttle_waypoint/overmap/ingoing2
+/obj/effect/shuttle_landmark/ingoing2
 	name = "Navpoint #2"
-	id = "ingoing2"
 	landmark_tag = "nav_ingoing2"
 
-/datum/shuttle_waypoint/overmap/ingoing3
+/obj/effect/shuttle_landmark/ingoing3
 	name = "Navpoint #3"
-	id = "ingoing3"
 	landmark_tag = "nav_ingoing3"
 
-/datum/shuttle_waypoint/overmap/ingoing4
+/obj/effect/shuttle_landmark/ingoing4
 	name = "Navpoint #4"
-	id = "ingoing4"
 	landmark_tag = "nav_ingoing4"
 
-/datum/shuttle_waypoint/overmap/pod
+/obj/effect/shuttle_landmark/pod
 	name = "Navpoint #5"
-	id = "abandoned_pod"
 	landmark_tag = "nav_abandoned_pod"
 
 // TODO: get rid of these
