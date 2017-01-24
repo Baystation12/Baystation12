@@ -370,6 +370,16 @@
 	mode = SYRINGE_INJECT
 	update_icon()
 
+/obj/item/weapon/reagent_containers/syringe/hyperzine
+	name = "Syringe (hyperzine)"
+	desc = "Contains hyperzine."
+
+/obj/item/weapon/reagent_containers/syringe/hyperzine/New()
+	..()
+	reagents.add_reagent("hyperzine", 15)
+	mode = SYRINGE_INJECT
+	update_icon()
+
 /obj/item/weapon/reagent_containers/syringe/peridaxon
 	name = "Syringe (peridaxon)"
 	desc = "Contains peridaxon."

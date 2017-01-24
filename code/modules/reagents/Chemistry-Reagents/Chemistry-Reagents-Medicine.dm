@@ -14,7 +14,7 @@
 
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.add_chemical_effect(CE_STABLE, 15)
+		M.add_chemical_effect(CE_STABLE, 20)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
 		M.adjustOxyLoss(-5 * removed)
 		M.add_chemical_effect(CE_PULSE, 1)
@@ -33,7 +33,7 @@
 
 /datum/reagent/chloromydride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.add_chemical_effect(CE_STABLE, 20)
+		M.add_chemical_effect(CE_STABLE, 40)
 		M.adjustOxyLoss(-8 * removed) //flat rate, heals oxloss slower than dexalin, but without the side effects
 		M.add_chemical_effect(CE_PULSE, 3)
 
@@ -51,9 +51,8 @@
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 0.7 * removed, 0) //heals 7 * removed at 100 damage
+		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 0.6 * removed, 0)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
-		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 
 
 /datum/reagent/metorapan
@@ -70,7 +69,7 @@
 
 /datum/reagent/metorapan/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(16 / (sqrt(M.getBruteLoss()) +  1) * removed, 0) //heals 2.67 * removed at 25 damage
+		M.heal_organ_damage(15 / (sqrt(M.getBruteLoss()) +  1) * removed, 0)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/kelotane
@@ -86,7 +85,7 @@
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 16 / (sqrt(M.getFireLoss()) +  1) * removed) //heals 2.67 * removed at 25 damage
+		M.heal_organ_damage(0, 15 / (sqrt(M.getFireLoss()) +  1) * removed)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/dermaline
@@ -103,9 +102,8 @@
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, sqrt(M.getFireLoss()) * 0.7 * removed) //heals 7 * removed at 100 damage
+		M.heal_organ_damage(0, sqrt(M.getFireLoss()) * 0.6 * removed)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
-		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 
 /datum/reagent/dylovene
 	name = "Dylovene"
@@ -164,7 +162,6 @@
 		M.adjustToxLoss(sqrt(M.getToxLoss()) * -3 * removed)
 		M.adjustOxyLoss(removed * 2)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
-		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -183,11 +180,9 @@
 		if(alien == IS_VOX)
 			M.adjustToxLoss(removed * 6)
 			return
-		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -8 * removed) //heals 80 * removed at 100 damage
-		M.add_chemical_effect(CE_STABLE, 40)
+		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -10 * removed)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
-		apply_weakened_effect(M, removed, 0, 10, 10, 10, 10)
-		M.take_organ_damage(removed, 0) //if you're not ODing you'll take 30 brute at most, spread across all limbs
+		M.take_organ_damage(removed * 2, 0)
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
@@ -206,11 +201,9 @@
 		if(alien == IS_VOX)
 			M.adjustToxLoss(removed * 9)
 			return
-		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -14 * removed) //heals 140 * removed at 100 damage
-		M.add_chemical_effect(CE_STABLE, 50)
+		M.adjustOxyLoss(sqrt(M.getOxyLoss()) * -20 * removed)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 30, 15)
-		apply_weakened_effect(M, removed, 0, 10, 10, 10, 20)
-		M.take_organ_damage(removed * 2, 0)
+		M.take_organ_damage(removed * 4, 0)
 		if(dose > 10)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
@@ -242,25 +235,25 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#8080FF"
+	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition = max(M.nutrition  - removed, 0)
+	M.nutrition = max(M.nutrition - 3 * removed, 0)
 	if(M.bodytemperature <=170 && M.bodytemperature >= 100)
-		M.adjustCloneLoss(-5 * removed)
-		M.adjustOxyLoss(-4 * removed)
-		M.heal_organ_damage(4 * removed, 4 * removed)
-		M.adjustToxLoss(-4 * removed)
+		M.adjustCloneLoss(-8 * removed)
+		M.adjustOxyLoss(-6 * removed)
+		M.heal_organ_damage(6 * removed, 6 * removed)
+		M.adjustToxLoss(-6 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 	else if (M.bodytemperature <=200 && M.bodytemperature >= 50)
-		M.adjustCloneLoss(-3 * removed)
-		M.adjustOxyLoss(-2 * removed)
-		M.heal_organ_damage(2 * removed, 2 * removed)
-		M.adjustToxLoss(-2 * removed)
+		M.adjustCloneLoss(-4 * removed)
+		M.adjustOxyLoss(-3 * removed)
+		M.heal_organ_damage(3 * removed, 3 * removed)
+		M.adjustToxLoss(-3 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 	apply_fatigue_effect(M, removed, 0, 10, 10, 20, 10)
-	apply_weakened_effect(M, removed, 0, 10, 10, 10, 5)
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
@@ -269,25 +262,25 @@
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#80BFFF"
+	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition = max(M.nutrition - 2 * removed, 0)
+	M.nutrition = max(M.nutrition - 5 * removed, 0)
 	if(M.bodytemperature <= 110 && M.bodytemperature >= 90)
-		M.adjustCloneLoss(-10 * removed)
-		M.adjustOxyLoss(-6 * removed)
-		M.heal_organ_damage(6 * removed, 6 * removed)
-		M.adjustToxLoss(-6 * removed)
+		M.adjustCloneLoss(-14 * removed)
+		M.adjustOxyLoss(-10 * removed)
+		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.adjustToxLoss(-10 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 	else if (M.bodytemperature <=140 && M.bodytemperature >= 60)
-		M.adjustCloneLoss(-5 * removed)
-		M.adjustOxyLoss(-3 * removed)
-		M.heal_organ_damage(3 * removed, 3 * removed)
-		M.adjustToxLoss(-3 * removed)
+		M.adjustCloneLoss(-6 * removed)
+		M.adjustOxyLoss(-5 * removed)
+		M.heal_organ_damage(5 * removed, 5 * removed)
+		M.adjustToxLoss(-5 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 	apply_fatigue_effect(M, removed, 0, 10, 10, 30, 15)
-	apply_weakened_effect(M, removed, 0, 10, 10, 10, 5)
 
 /* Painkillers */
 
@@ -370,9 +363,9 @@
 	M.AdjustWeakened(-1)
 	holder.remove_reagent("mindbreaker", 5 * removed)
 	M.hallucination = max(0, M.hallucination - 10)
-	M.adjustToxLoss(2 * removed)
+	M.adjustToxLoss(removed)
 	M.add_chemical_effect(CE_PAINKILLER, 20)
-	M.adjustBrainLoss(removed * 0.5) //very slow brain damage
+	M.adjustBrainLoss(removed * 0.25) //very slow brain damage
 
 /datum/reagent/alkysine
 	name = "Alkysine"
@@ -534,12 +527,12 @@
 		return
 	if(prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
-	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+	M.add_chemical_effect(CE_SPEEDBOOST, 3)
 	M.add_chemical_effect(CE_PULSE, 2)
 	M.add_chemical_effect(CE_STIM)
 	M.stuttering += 1
 	M.make_jittery(5)
-	M.adjustBrainLoss(removed * 0.5) //very slow brain damage
+	M.adjustBrainLoss(removed * 0.25) //very slow brain damage
 	M.adjustToxLoss(removed) // slow poisoning
 
 /datum/reagent/ethylredoxrazine
@@ -664,11 +657,12 @@
 	taste_description = "salty sweetness"
 	reagent_state = LIQUID
 	color = "#E6FFFF"
+	metabolism = REM * 3
 	scannable = 1
 
 /datum/reagent/saline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.add_chemical_effect(CE_BLOODRESTORE, 3 * removed)
+		M.add_chemical_effect(CE_BLOODRESTORE, removed)
 		M.nutrition += removed
 		if(dose > 60) //you'll never reach this number unless you spam saline nonstop
 			M.adjustOxyLoss(removed)
@@ -704,7 +698,7 @@
 /datum/reagent/primordapine
 	name = "Primordapine"
 	id = "primordapine"
-	description = "An experimental, long lasting drug used to increase blood production and treat severe burns and traumas."
+	description = "An experimental, long lasting drug used to increase blood production and treat severe burns and traumas. Also removes toxins from the body."
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#FFEA97"
@@ -717,6 +711,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_BLOODRESTORE, 6 * removed)
 		M.heal_organ_damage(sqrt(M.getBruteLoss()) * 1.2 * removed, sqrt(M.getFireLoss()) * 1.2 * removed)
+		M.adjustToxLoss(sqrt(M.getToxLoss()) * -1.2 * removed)
 		apply_fatigue_effect(M, removed, 0, 10, 10, 5, 2)
 
 /datum/reagent/sarcohemalazapine
@@ -736,7 +731,7 @@
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/O in H.bad_external_organs)
 			if(O.status & ORGAN_BROKEN)
-				if(dose >= 4)
+				if(dose >= 3)
 					O.mend_fracture()
 					H.custom_pain("You feel a tingling sensation through your bones!",40)
 			for(var/datum/wound/W in O.wounds)

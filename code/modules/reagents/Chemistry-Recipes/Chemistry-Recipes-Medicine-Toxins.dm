@@ -417,8 +417,8 @@
 	name = "Metorapan"
 	id = "metorapan"
 	result = "metorapan"
-	required_reagents = list("chloromydride" = 1, "carbon" = 1)
-	result_amount = 2
+	required_reagents = list("saline" = 1, "carbon" = 1, "ethanol" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/charcoal
 	name = "Activated Charcoal"

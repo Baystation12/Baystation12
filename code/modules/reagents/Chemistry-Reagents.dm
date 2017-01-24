@@ -127,7 +127,7 @@
 		if(M.eye_blurry < max_blurry)
 			M.eye_blurry += 5
 	if(M.dizziness < 300)
-		M.make_dizzy(dizzy_scale * 2 * removed)
+		M.make_dizzy(dizzy_scale * removed)
 	M.AdjustSlowed(slow_scale * removed)
 
 /datum/reagent/proc/apply_weakened_effect(var/mob/living/carbon/M, var/removed, var/min_dose, var/effect_prob, var/max_weakened, var/weakened_scale, var/halloss_scale)

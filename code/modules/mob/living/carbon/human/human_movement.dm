@@ -10,7 +10,7 @@
 		handle_embedded_and_stomach_objects() //Moving with objects stuck in you can cause bad times.
 
 	if(CE_SPEEDBOOST in chem_effects)
-		return -1
+		tally -= chem_effects[CE_SPEEDBOOST]
 
 	if(slowed)
 		tally += slowed * 0.2

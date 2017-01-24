@@ -190,6 +190,7 @@
 					prob(40);/obj/item/weapon/storage/firstaid/adv,\
 					prob(3);/obj/item/weapon/storage/firstaid/combat,\
 					prob(20);/obj/item/weapon/storage/firstaid,\
+					prob(20);/obj/item/weapon/storage/firstaid/personal,\
 					prob(40);/obj/item/weapon/storage/firstaid/fire)
 
 

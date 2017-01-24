@@ -17,14 +17,14 @@
 	max_storage_space = DEFAULT_BOX_STORAGE
 
 /obj/item/weapon/storage/firstaid/fire
-	name = "fire first aid kit"
+	name = "burn first aid kit"
 	desc = "An emergency medical kit containing basic supplies for treating burns."
 	icon_state = "ointment"
 	item_state = "firstaid-ointment"
 
 	startswith = list(
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/advanced/ointment = 2,
+		/obj/item/stack/medical/advanced/ointment = 4,
 		/obj/item/weapon/reagent_containers/pill/spaceacillin = 2,
 		/obj/item/clothing/gloves/latex,
 		)
@@ -50,8 +50,8 @@
 	item_state = "firstaid-toxin"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/weapon/reagent_containers/pill/charcoal = 4,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 2,
+		/obj/item/weapon/reagent_containers/pill/charcoal = 8,
 		/obj/item/clothing/gloves/latex,
 		)
 /obj/item/weapon/storage/firstaid/toxin/New()
@@ -66,8 +66,9 @@
 
 	startswith = list(
 		/obj/item/device/geiger,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 2,
 		/obj/item/weapon/reagent_containers/pill/hyronalin = 4,
+		/obj/item/weapon/reagent_containers/pill/charcoal = 2,
 		/obj/item/clothing/gloves/latex,
 		)
 
@@ -82,8 +83,8 @@
 	item_state = "firstaid-o2"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/weapon/reagent_containers/pill/chloromydride = 4,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 3,
+		/obj/item/weapon/reagent_containers/pill/chloromydride = 6,
 		/obj/item/clothing/gloves/latex,
 		)
 
@@ -95,7 +96,7 @@
 
 	startswith = list(
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/advanced/bruise_pack = 2,
+		/obj/item/stack/medical/advanced/bruise_pack = 3,
 		/obj/item/stack/medical/splint,
 		/obj/item/weapon/reagent_containers/pill/spaceacillin = 2,
 		/obj/item/clothing/gloves/latex,
@@ -108,14 +109,14 @@
 	item_state = "firstaid-advanced"
 
 	startswith = list(
+		/obj/item/device/healthanalyzer,
 		/obj/item/weapon/storage/pill_bottle/tramadol,
-		/obj/item/weapon/storage/pill_bottle/spaceacillin,
-		/obj/item/weapon/storage/pill_bottle/charcoal,
-		/obj/item/stack/medical/splint,
 		/obj/item/weapon/reagent_containers/syringe/chloromydride = 2,
+		/obj/item/weapon/reagent_containers/syringe/antiviral,
+		/obj/item/weapon/reagent_containers/syringe/hyperzine,
 		/obj/item/weapon/reagent_containers/syringe/synaptizine,
 		/obj/item/weapon/reagent_containers/syringe/peridaxon,
-		/obj/item/weapon/reagent_containers/syringe/primordapine,
+		/obj/item/weapon/reagent_containers/syringe/primordapine = 3,
 		/obj/item/weapon/reagent_containers/syringe/sarcohemalazapine,
 		)
 
