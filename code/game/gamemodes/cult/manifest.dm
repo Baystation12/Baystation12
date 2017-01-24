@@ -17,7 +17,7 @@
 
 /datum/species/human/cult/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.s_tone = 35
-	H.r_eyes = 138
+	H.r_eyes = 230
 	H.b_eyes = 7
 	H.g_eyes = 7
 	H.update_eyes()

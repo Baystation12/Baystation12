@@ -2,6 +2,16 @@
 #define CULTINESS_PER_SACRIFICE 20
 #define CULTINESS_PER_TURF 1
 
+#define CULT_RUNES_1 100
+#define CULT_RUNES_2 200
+#define CULT_RUNES_3 500
+
+#define CULT_GHOSTS_1 200
+#define CULT_GHOSTS_2 400
+#define CULT_GHOSTS_3 600
+
+#define CULT_MAX_CULTINESS 600 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
+
 var/datum/antagonist/cultist/cult
 
 /proc/iscultist(var/mob/player)
@@ -38,7 +48,8 @@ var/datum/antagonist/cultist/cult
 	var/list/rune_strokes = list()
 	var/list/sacrificed = list()
 	var/cult_rating = 0
-	var/cult_level = 1
+	var/list/cult_rating_bounds = list(CULT_RUNES_1, CULT_RUNES_2, CULT_RUNES_3, CULT_GHOSTS_1, CULT_GHOSTS_2, CULT_GHOSTS_3)
+	var/max_cult_rating = 0
 	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
 
 	faction = "cult"
@@ -94,7 +105,7 @@ var/datum/antagonist/cultist/cult
 	remove_cult_magic(player.current)
 	remove_cultiness(CULTINESS_PER_CULTIST)
 
-/datum/antagonist/cultist/add_antagonist(var/datum/mind/player, var/ignore_role)
+/datum/antagonist/cultist/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
 	. = ..()
 	if(.)
 		to_chat(player, "<span class='cult'>[conversion_blurb]</span>")
@@ -113,28 +124,36 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/proc/add_cultiness(var/amount)
 	cult_rating += amount
-	if(cult_rating >= 100 && cult_level < 2)
-		cult_level = 2
+	var/old_rating = max_cult_rating
+	max_cult_rating = max(max_cult_rating, cult_rating)
+	if(old_rating >= CULT_MAX_CULTINESS)
+		return
+	var/list/to_update = list()
+	for(var/i in cult_rating_bounds)
+		if((old_rating < i) && (max_cult_rating >= i))
+			to_update += i
+
+	if(to_update.len)
+		update_cult_magic(to_update)
+
+/datum/antagonist/cultist/proc/update_cult_magic(var/list/to_update)
+	if(CULT_RUNES_1 in to_update)
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/observer/ghost/D in mob_list)
-			add_ghost_magic(D)
-	if(cult_rating >= 200 && cult_level < 3)
-		cult_level = 3
+	if(CULT_RUNES_2 in to_update)
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing.</span>")
 				add_cult_magic(H.current)
-		for(var/mob/observer/ghost/D in mob_list)
-			add_ghost_magic(D)
-	if(cult_rating >= 300 && cult_level < 4)
-		cult_level = 4
+	if(CULT_RUNES_3 in to_update)
 		for(var/datum/mind/H in cult.current_antagonists)
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever.</span>")
 				add_cult_magic(H.current)
+
+	if((CULT_GHOSTS_1 in to_update) || (CULT_GHOSTS_2 in to_update) || (CULT_GHOSTS_3 in to_update))
 		for(var/mob/observer/ghost/D in mob_list)
 			add_ghost_magic(D)
 
@@ -154,13 +173,13 @@ var/datum/antagonist/cultist/cult
 /datum/antagonist/cultist/proc/add_cult_magic(var/mob/M)
 	M.verbs += Tier1Runes
 
-	if(cult_level >= 2)
+	if(max_cult_rating >= CULT_RUNES_1)
 		M.verbs += Tier2Runes
 
-		if(cult_level >= 3)
+		if(max_cult_rating >= CULT_RUNES_2)
 			M.verbs += Tier3Runes
 
-			if(cult_level >= 4)
+			if(max_cult_rating >= CULT_RUNES_3)
 				M.verbs += Tier4Runes
 
 /datum/antagonist/cultist/proc/remove_cult_magic(var/mob/M)

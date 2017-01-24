@@ -1,22 +1,26 @@
 /mob/observer/ghost/var/ghost_magic_cd = 0
 
 /datum/antagonist/cultist/proc/add_ghost_magic(var/mob/observer/ghost/M)
-	if(cult_level >= 2)
+	if(max_cult_rating >= CULT_GHOSTS_1)
 		M.verbs += /mob/observer/ghost/proc/flick_lights
 		M.verbs += /mob/observer/ghost/proc/bloody_doodle
 		M.verbs += /mob/observer/ghost/proc/shatter_glass
 		M.verbs += /mob/observer/ghost/proc/slice
-		if(cult_level >= 3)
+		if(max_cult_rating >= CULT_GHOSTS_2)
 			M.verbs += /mob/observer/ghost/proc/move_item
 			M.verbs += /mob/observer/ghost/proc/whisper_to_cultist
 			M.verbs += /mob/observer/ghost/proc/bite_someone
 			M.verbs += /mob/observer/ghost/proc/chill_someone
-			if(cult_level >= 4)
+			if(max_cult_rating >= CULT_GHOSTS_3)
 				M.verbs += /mob/observer/ghost/proc/whisper_to_anyone
 				M.verbs += /mob/observer/ghost/proc/bloodless_doodle
 				M.verbs += /mob/observer/ghost/proc/toggle_visiblity
 
 /mob/observer/ghost/proc/ghost_ability_check()
+	var/turf/T = get_turf(src)
+	if(T.holy)
+		to_chat(src, "<span class='notice'>You may not use your abilities on the blessed ground.</span>")
+		return 0
 	if(ghost_magic_cd > world.time)
 		to_chat(src, "<span class='notice'>You need [round((ghost_magic_cd - world.time) / 10)] more seconds before you can use your abilities.</span>")
 		return 0
@@ -35,12 +39,14 @@
 
 	ghost_magic_cd = world.time + 30 SECONDS
 
-//Used for drawing on walls with blood puddles as a spooky ghost.
-/mob/observer/ghost/proc/bloody_doodle(var/bloodless = 0)
+/mob/observer/ghost/proc/bloody_doodle()
 	set category = "Cult"
 	set name = "Write in blood"
 	set desc = "Write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
 
+	bloody_doodle_proc(0)
+
+/mob/observer/ghost/proc/bloody_doodle_proc(var/bloodless = 0)
 	if(!ghost_ability_check())
 		return
 
@@ -157,11 +163,14 @@
 
 	ghost_magic_cd = world.time + 60 SECONDS
 
-/mob/observer/ghost/proc/whisper_to_cultist(var/anyone = 0)
+/mob/observer/ghost/proc/whisper_to_cultist()
 	set category = "Cult"
 	set name = "Whisper to mind"
 	set desc = "Whisper to a human of your choice. If they are adjusted enough, they'll hear you."
 
+	whisper_proc()
+
+/mob/observer/ghost/proc/whisper_proc(var/anyone = 0)
 	if(!ghost_ability_check())
 		return
 
@@ -186,7 +195,6 @@
 			to_chat(choice, "<span class='notice'>You hear a faint whisper, but you can't make out the words.</span>")
 			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] but wasn't heard - [x]-[y]-[z]")
 		to_chat(src, "You whisper to \the [choice]. Perhaps they heard you.")
-
 
 	ghost_magic_cd = world.time + 100 SECONDS
 
@@ -251,14 +259,14 @@
 	set name = "Whisper loudly to mind"
 	set desc = "Whisper to a human of your choice."
 
-	whisper_to_cultist(1)
+	whisper_proc(1)
 
 /mob/observer/ghost/proc/bloodless_doodle()
 	set category = "Cult"
 	set name = "Write in own blood"
 	set desc = "Write a short message in blood on the floor or a wall. You don't need blood nearby to use this."
 
-	bloody_doodle(1)
+	bloody_doodle_proc(1)
 
 /mob/observer/ghost/proc/toggle_visiblity()
 	set category = "Cult"
