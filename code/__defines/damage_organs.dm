@@ -34,17 +34,16 @@
 #define ORGAN_CUT_AWAY   (1<<0)
 #define ORGAN_BLEEDING   (1<<1)
 #define ORGAN_BROKEN     (1<<2)
-#define ORGAN_DESTROYED  (1<<3)
-#define ORGAN_DEAD       (1<<4)
-#define ORGAN_MUTATED    (1<<5)
+#define ORGAN_DEAD       (1<<3)
+#define ORGAN_MUTATED    (1<<4)
 
 #define DROPLIMB_EDGE 0
 #define DROPLIMB_BLUNT 1
 #define DROPLIMB_BURN 2
 
-// These control the amount of blood lost from burns. The loss is calculated so 
+// These control the amount of blood lost from burns. The loss is calculated so
 // that dealing just enough burn damage to kill the player will cause the given
-// proportion of their max blood volume to be lost 
+// proportion of their max blood volume to be lost
 // (e.g. 0.6 == 60% lost if 200 burn damage is taken).
 #define FLUIDLOSS_WIDE_BURN 0.6 //for burns from heat applied over a wider area, like from fire
 #define FLUIDLOSS_CONC_BURN 0.4 //for concentrated burns, like from lasers

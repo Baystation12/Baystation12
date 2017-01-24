@@ -45,7 +45,7 @@
 		var/mob/M = A
 
 		if(M.loc == input_plate)
-			M.loc = src
+			M.forceMove(src)
 			M.gib()
 
 
@@ -80,7 +80,7 @@
 		src.startgibbing(user)
 
 /obj/machinery/gibber/examine()
-	..()
+	. = ..()
 	to_chat(usr, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
 
 /obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
@@ -138,7 +138,7 @@
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE
 			victim.client.eye = src
-		victim.loc = src
+		victim.forceMove(src)
 		src.occupant = victim
 		update_icon()
 
@@ -157,11 +157,11 @@
 	if(operating || !src.occupant)
 		return
 	for(var/obj/O in src)
-		O.loc = src.loc
+		O.dropInto(loc)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
-	src.occupant.loc = src.loc
+	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_icon()
 	return
@@ -227,7 +227,7 @@
 			if(istype(thing,/obj/item/organ) && prob(80))
 				qdel(thing)
 				continue
-			thing.loc = get_turf(thing) // Drop it onto the turf for throwing.
+			thing.dropInto(loc) // Attempts to drop it onto the turf for throwing.
 			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
 		update_icon()
 

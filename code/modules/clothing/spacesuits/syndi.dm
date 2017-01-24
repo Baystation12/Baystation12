@@ -109,7 +109,7 @@
 /obj/item/clothing/head/helmet/space/syndicate/black/med
 	name = "black medical space helmet"
 	icon_state = "syndicate-helm-black-med"
-	item_state_slots = list(slot_head_str = "syndicate-black-med")
+	item_state_slots = list(slot_head_str = "syndicate-helm-black-med")
 
 /obj/item/clothing/suit/space/syndicate/black/med
 	name = "black medical space suit"

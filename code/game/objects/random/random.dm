@@ -5,24 +5,23 @@
 	icon_state = "rup"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 
-
-// creates a new object and deletes itself
 /obj/random/New()
 	..()
-	if (!prob(spawn_nothing_percentage))
-		spawn_item()
+	spawn_item()
 
+// creates a new object and deletes itself
 /obj/random/initialize()
-	..()
 	qdel(src)
 
 // this function should return a specific item to spawn
 /obj/random/proc/item_to_spawn()
 	return 0
 
-
 // creates the random item
 /obj/random/proc/spawn_item()
+	if(prob(spawn_nothing_percentage))
+		return
+
 	var/build_path = item_to_spawn()
 
 	var/atom/A = new build_path(src.loc)
@@ -1113,19 +1112,23 @@ var/list/random_junk_
 var/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
-		random_useful_ = subtypesof(/obj/item/weapon/pen/crayon)
+		random_useful_ = list()
+		random_useful_ += /obj/item/weapon/pen/crayon/random
 		random_useful_ += /obj/item/weapon/pen
 		random_useful_ += /obj/item/weapon/pen/blue
 		random_useful_ += /obj/item/weapon/pen/red
 		random_useful_ += /obj/item/weapon/pen/multi
 		random_useful_ += /obj/item/weapon/storage/box/matches
 		random_useful_ += /obj/item/stack/material/cardboard
+		random_useful_ += /obj/item/weapon/storage/fancy/cigarettes
 	return pick(random_useful_)
 
 /proc/get_random_junk_type()
 	if(prob(20)) // Misc. clutter
 		return /obj/effect/decal/cleanable/generic
-	if(prob(70)) // Misc. junk
+
+	// 80% chance that we reach here
+	if(prob(95)) // Misc. junk
 		if(!random_junk_)
 			random_junk_ = subtypesof(/obj/item/trash)
 			random_junk_ += typesof(/obj/item/weapon/cigbutt)
@@ -1142,5 +1145,12 @@ var/list/random_useful_
 			random_junk_ -= /obj/item/trash/syndi_cakes
 			random_junk_ -= /obj/item/trash/tray
 		return pick(random_junk_)
-	// Misc. actually useful stuff
-	return get_random_useful_type()
+
+	// Misc. actually useful stuff or perhaps even food
+	// 4% chance that we reach here
+	if(prob(75))
+		return get_random_useful_type()
+
+	// 1% chance that we reach here
+	var/lunches = lunchables_lunches()
+	return lunches[pick(lunches)]

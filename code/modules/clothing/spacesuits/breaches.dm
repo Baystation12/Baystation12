@@ -185,10 +185,10 @@ var/global/list/breach_burn_descriptors = list(
 				repair_power = 2
 			if("plastic")
 				repair_power = 1
-		
+
 		if(!repair_power)
 			return
-		
+
 		if(istype(src.loc,/mob/living))
 			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
 			return
@@ -224,7 +224,7 @@ var/global/list/breach_burn_descriptors = list(
 	..()
 
 /obj/item/clothing/suit/space/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
 			to_chat(user, "<span class='danger'>It has \a [B.descriptor].</span>")

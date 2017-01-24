@@ -566,7 +566,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/examine()
 
-	..()
+	. = ..()
 
 	if(!seed)
 		to_chat(usr, "[src] is empty.")

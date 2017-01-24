@@ -63,7 +63,7 @@
 		qdel(src)
 
 /obj/item/device/modkit/examine(mob/user)
-	..(user)
+	. = ..(user)
 	to_chat(user, "It looks as though it modifies hardsuits to fit [target_species] users.")
 
 /obj/item/device/modkit/tajaran

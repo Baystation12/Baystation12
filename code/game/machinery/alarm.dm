@@ -804,7 +804,7 @@
 				if(do_after(user,20))
 					to_chat(user, "You pry out the circuit!")
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
-					circuit.loc = user.loc
+					circuit.dropInto(user.loc)
 					buildstage = 0
 					update_icon()
 				return
@@ -825,7 +825,7 @@
 	return ..()
 
 /obj/machinery/alarm/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (buildstage < 2)
 		to_chat(user, "It is not wired.")
 	if (buildstage < 1)
@@ -954,7 +954,7 @@ FIRE ALARM
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					spawn(20)
 						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
-						circuit.loc = user.loc
+						circuit.dropInto(user.loc)
 						buildstage = 0
 						update_icon()
 			if(0)
