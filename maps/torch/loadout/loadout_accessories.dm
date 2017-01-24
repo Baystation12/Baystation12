@@ -140,6 +140,25 @@
 	cost = 3
 	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Merchant")
 
+/datum/gear/accessory/brown_drop_pouches
+	display_name = "drop pouches, engineering"
+	path = /obj/item/clothing/accessory/storage/brown_drop_pouches
+	cost = 3
+	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician",
+						"Supply Assistant", "Prospector", "Sanitation Technician", "Research Assistant", "Merchant")
+
+/datum/gear/accessory/black_drop_pouches
+	display_name = "drop pouches, security"
+	path = /obj/item/clothing/accessory/storage/black_drop_pouches
+	cost = 3
+	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms", "Security Guard", "Merchant")
+
+/datum/gear/accessory/white_drop_pouches
+	display_name = "webbing, medical"
+	path = /obj/item/clothing/accessory/storage/white_drop_pouches
+	cost = 3
+	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Merchant")
+
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing

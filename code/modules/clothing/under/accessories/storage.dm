@@ -71,6 +71,24 @@
 	icon_state = "vest_white"
 	slots = 5
 
+/obj/item/clothing/accessory/storage/black_drop_pouches
+	name = "black drop pouches"
+	desc = "Robust black synthcotton bags to hold whatever you need, but cannot hold in hands."
+	icon_state = "thigh_black"
+	slots = 5
+
+/obj/item/clothing/accessory/storage/brown_drop_pouches
+	name = "brown drop pouches"
+	desc = "Worn brownish synthcotton bags to hold whatever you need, but cannot hold in hands."
+	icon_state = "thigh_brown"
+	slots = 5
+
+/obj/item/clothing/accessory/storage/white_drop_pouches
+	name = "white drop pouches"
+	desc = "Durable white synthcotton bags to hold whatever you need, but cannot hold in hands."
+	icon_state = "thigh_white"
+	slots = 5
+
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
