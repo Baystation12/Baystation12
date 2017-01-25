@@ -324,6 +324,7 @@
 	mineral = "phoron"
 
 /obj/machinery/door/airlock/phoron/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	..()
 	if(exposed_temperature > 300)
 		PhoronBurn(exposed_temperature)
 

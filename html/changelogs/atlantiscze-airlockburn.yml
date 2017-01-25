@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Doors, Airlocks and Blast Doors now take damage from fire. Maximal temperature is determined from the type of material used to build the door."
+  - tweak: "Engine core no longer has airlocks inside to access it, as these airlocks are generally not heat resistant and would keep breaking all the time."
