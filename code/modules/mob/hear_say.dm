@@ -41,7 +41,10 @@
 				else
 					message = stars(message)
 
-	var/speaker_name = speaker.name
+	var/speaker_name = "<i>unknown</i>"
+	if (speaker)
+		speaker_name = speaker.name
+
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
 		speaker_name = H.GetVoice()
