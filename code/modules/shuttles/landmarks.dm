@@ -16,11 +16,12 @@
 	..()
 	tag = landmark_tag //since tags cannot be set at compile time
 
-
 /obj/effect/shuttle_landmark/initialize()
 	if(docking_controller)
 		var/docking_tag = docking_controller
-		docking_controller = locate(docking_tag)
+		var/obj/machinery/embedded_controller/C = locate(docking_tag)
+		if(istype(C))
+			docking_controller = C.program
 		if(!istype(docking_controller))
 			log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 
