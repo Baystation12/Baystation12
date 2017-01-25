@@ -62,15 +62,14 @@
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/wizard/druid
-	name = "Druid Hood"
-	desc = "A hood made of raw hide adorned with adorable deer skull."
+	name = "crown of Yggdrasil"
+	desc = "Crown created by interlacement of branches and roots of ancient black timber instructed by silver branches."
 	icon_state = "druid"
 	item_state = "druid"
 	item_state_slots = list(
 		slot_l_hand_str = "det_hat",
 		slot_r_hand_str = "det_hat",
 		)
-	body_parts_covered = HEAD|EYES
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/suit/wizrobe
@@ -92,7 +91,7 @@
 	item_state = "redwizrobe"
 
 /obj/item/clothing/suit/wizrobe/druid
-	name = "Druid Robe"
+	name = "druid robe"
 	desc = "A robe made of raw hide that seems to radiate malevolent nature power."
 	icon_state = "druid"
 	item_state = "druid"
