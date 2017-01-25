@@ -85,11 +85,11 @@
 
 /area/storage/tech
 	name = "Technical Storage"
-	icon_state = "auxstorage"
+	icon_state = "storage"
 
 /area/storage/tools
 	name = "Auxiliary Tool Storage"
-	icon_state = "storage"
+	icon_state = "auxstorage"
 
 // Holodecks
 
@@ -252,6 +252,11 @@
 	name = "\improper Engineering Storage"
 	icon_state = "engineering_storage"
 
+/area/engineering/atmos
+ 	name = "\improper Atmospherics"
+ 	icon_state = "atmos"
+ 	sound_env = LARGE_ENCLOSED
+
 // Medical
 
 /area/medical/biostorage
@@ -393,10 +398,6 @@
 	sound_env = LARGE_ENCLOSED
 
 // Crew
-
-/area/crew_quarters/locker
-	name = "\improper Locker Room"
-	icon_state = "locker"
 
 /area/crew_quarters/sleep/cryo
 	name = "\improper Cryogenic Storage"

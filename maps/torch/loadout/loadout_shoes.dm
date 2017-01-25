@@ -17,10 +17,10 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/shoes/athletic
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/flats
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/high
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = FORMAL_ROLES

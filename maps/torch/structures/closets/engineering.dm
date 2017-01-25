@@ -36,6 +36,7 @@
 		/obj/item/clothing/suit/storage/vest/solgov/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
+		/obj/item/device/flashlight,
 		/obj/item/weapon/folder/yellow
 	)
 
@@ -70,6 +71,7 @@
 		/obj/item/weapon/cartridge/engineering,
 		/obj/item/taperoll/engineering,
 		/obj/item/weapon/cartridge/atmos,
+		/obj/item/device/flashlight,
 		/obj/item/taperoll/atmos
 	)
 
@@ -100,6 +102,7 @@
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/weapon/cartridge/engineering,
+		/obj/item/device/flashlight,
 		/obj/item/taperoll/engineering
 	)
 
@@ -138,6 +141,7 @@
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/device/flash,
 		/obj/item/weapon/cartridge/ce,
+		/obj/item/device/flashlight,
 		/obj/item/device/megaphone
 	)
 

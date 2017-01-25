@@ -28,17 +28,17 @@
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo
-	allowed_roles = list("Deck Officer", "Deck Technician", "Supply Assistant")
+	allowed_roles = SUPPLY_ROLES
 
 /datum/gear/accessory/armband_medical
 	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/med
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
@@ -53,7 +53,7 @@
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
 	path = /obj/item/clothing/accessory/armband/engine
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
+	allowed_roles = ENGINEERING_ROLES
 
 /datum/gear/accessory/armband_hydro
 	display_name = "hydroponics armband"
@@ -63,18 +63,17 @@
 /datum/gear/accessory/armband_science
 	display_name = "science armband"
 	path = /obj/item/clothing/accessory/armband/science
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"Passenger", "Roboticist", "Virologist")
+	allowed_roles = RESEARCH_ROLES
 
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant")
+	allowed_roles = NANOTRASEN_ROLES
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
 	path = /obj/item/clothing/accessory/armband/bluegold
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/accessory/wallet
 	display_name = "wallet"
@@ -99,6 +98,7 @@
 /datum/gear/accessory/tie
 	display_name = "tie selection"
 	path = /obj/item/clothing/accessory
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/tie/New()
 	..()
@@ -119,14 +119,14 @@
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
 	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor",
-						"Research Director", "Scientist", "Research Assistant")
+						"Research Director", "Senior Researcher", "Scientist", "Research Assistant")
 
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	cost = 3
 	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician",
-						"Supply Assistant", "Prospector", "Sanitation Technician", "Research Assistant", "Merchant")
+						"Supply Assistant", "Prospector", "Sanitation Technician", "Research Assistant", "Merchant", "SolGov Pilot", "NanoTrasen Pilot")
 
 /datum/gear/accessory/black_vest
 	display_name = "webbing, security"
@@ -177,7 +177,7 @@
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
-	allowed_roles = list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant")
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/accessory/hawaii/New()
 	..()
@@ -191,14 +191,14 @@
 	display_name = "scarf"
 	path = /obj/item/clothing/accessory/scarf
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = list("Passenger", "Bartender")
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/accessory/solawardmajor
 	display_name = "SolGov major award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal/iron/star
 	cost = 8
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -218,7 +218,7 @@
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
 	path = /obj/item/clothing/accessory/medal/iron/sol
 	cost = 5
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/accessory/solawardminor/New()
 	..()
@@ -254,4 +254,4 @@
 	path = /obj/item/clothing/accessory/kneepads
 
 /datum/gear/accessory/flannel
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES

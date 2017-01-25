@@ -583,6 +583,10 @@
 	icon_state = "Sleep"
 	flags = AREA_RAD_SHIELDED
 
+/area/crew_quarters/locker
+	name = "\improper Locker Room"
+	icon_state = "locker"
+
 /area/crew_quarters/toilet
 	name = "\improper Dormitory Toilets"
 	icon_state = "toilet"
@@ -639,11 +643,6 @@
 	name = "\improper Engineering"
 	icon_state = "engineering"
 	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
-
-/area/engineering/atmos
- 	name = "\improper Atmospherics"
- 	icon_state = "atmos"
- 	sound_env = LARGE_ENCLOSED
 
 /area/engineering/engine_airlock
 	name = "\improper Engine Room Airlock"
