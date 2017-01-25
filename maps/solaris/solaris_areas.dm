@@ -64,14 +64,14 @@
 
 /area/shuttle/specops/centcom
 	name = "\improper Special Ops Shuttle"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/administration
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/syndicate_elite
 	name = "\improper Merc Elite Shuttle"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
@@ -94,7 +94,7 @@
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape/station
 	name = "\improper Emergency Shuttle Station"
@@ -107,7 +107,7 @@
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod1/station
 	icon_state = "shuttle2"
@@ -118,7 +118,7 @@
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod2/station
 	icon_state = "shuttle2"
@@ -129,7 +129,7 @@
 
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod3/station
 	icon_state = "shuttle2"
@@ -140,7 +140,7 @@
 
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -181,7 +181,7 @@
 	icon_state = "yellow"
 	requires_power = 0
 	lighting_use_dynamic = 1
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/rescue_base/base
 	name = "\improper Barracks"
@@ -242,7 +242,7 @@
 	name = "\improper Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -581,7 +581,7 @@
 /area/crew_quarters
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
-	flags = RAD_SHIELDED
+	flags = AREA_RAD_SHIELDED
 
 /area/crew_quarters/toilet
 	name = "\improper Dormitory Toilets"
