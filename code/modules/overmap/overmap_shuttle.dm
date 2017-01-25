@@ -47,7 +47,8 @@ var/list/sector_shuttles = list()
 	return ..() && can_go()
 
 /datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
-	next_waypoint = A
+	if(is_valid_landing(A))
+		next_waypoint = A
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
@@ -57,7 +58,7 @@ var/list/sector_shuttles = list()
 				res["[S.name] - [LZ.name]"] = LZ
 	return res
 
-/datum/shuttle/autodock/overmap/proc/get_location_name()
+/datum/shuttle/autodock/overmap/get_location_name()
 	return "[waypoint_sector(current_waypoint)] - [current_waypoint.name]"
 
 /datum/shuttle/autodock/overmap/proc/get_destination_name()

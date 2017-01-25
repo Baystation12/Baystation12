@@ -8,6 +8,8 @@
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.
 
+	var/ui_template = "shuttle_control_console.tmpl"
+
 
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
 	if(..(user))
@@ -19,12 +21,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	var/data[0]
-	var/datum/shuttle/autodock/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
-	if (!istype(shuttle))
-		return
-
+/obj/machinery/computer/shuttle_control/proc/get_ui_data(var/datum/shuttle/autodock/shuttle)
 	var/shuttle_state
 	switch(shuttle.moving_status)
 		if(SHUTTLE_IDLE) shuttle_state = "idle"
@@ -37,8 +34,7 @@
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
 			else
-				var/obj/effect/shuttle_landmark/cur_waypoint = shuttle.get_location_waypoint()
-				shuttle_status = "Standing-by at [cur_waypoint.name]."
+				shuttle_status = "Standing-by at [shuttle.get_location_name()]."
 
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
@@ -47,7 +43,7 @@
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 
-	data = list(
+	return list(
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
 		"has_docking" = shuttle.active_docking_controller? 1 : 0,
@@ -58,10 +54,27 @@
 		"can_force" = shuttle.can_force(),
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+/obj/machinery/computer/shuttle_control/proc/handle_topic_href(var/datum/shuttle/autodock/shuttle, var/list/href_list)
+	if(!istype(shuttle))
+		return
 
-	if (!ui)
-		ui = new(user, src, ui_key, "shuttle_control_console.tmpl", "[shuttle_tag] Shuttle Control", 470, 310)
+	if(href_list["move"])
+		shuttle.launch(src)
+	else if(href_list["force"])
+		shuttle.force_launch(src)
+	else if(href_list["cancel"])
+		shuttle.cancel_launch(src)
+
+/obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/datum/shuttle/autodock/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	if (!istype(shuttle))
+		return
+
+	var/list/data = get_ui_data(shuttle)
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, ui_template, "[shuttle_tag] Shuttle Control", 470, 450)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -70,19 +83,7 @@
 	if(..())
 		return 1
 
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-
-	var/datum/shuttle/autodock/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
-	if (!istype(shuttle))
-		return
-
-	if(href_list["move"])
-		shuttle.launch(src)
-	if(href_list["force"])
-		shuttle.force_launch(src)
-	else if(href_list["cancel"])
-		shuttle.cancel_launch(src)
+	handle_topic_href(shuttle_controller.shuttles[shuttle_tag], href_list)
 
 /obj/machinery/computer/shuttle_control/emag_act(var/remaining_charges, var/mob/user)
 	if (!hacked)

@@ -53,6 +53,8 @@
 		var/obj/effect/shuttle_landmark/WP = locate(waypoint_tag)
 		if(WP)
 			found_waypoints += WP
+		else
+			log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 	generic_waypoints = found_waypoints
 
 	for(var/shuttle_name in restricted_waypoints)
@@ -61,6 +63,8 @@
 			var/obj/effect/shuttle_landmark/WP = locate(waypoint_tag)
 			if(WP)
 				found_waypoints += WP
+			else
+				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)

@@ -46,3 +46,7 @@
 /datum/shuttle/autodock/ferry/process_arrived()
 	..()
 	next_waypoint = get_location_waypoint(!location)
+
+/datum/shuttle/autodock/ferry/get_location_name()
+	var/obj/effect/shuttle_landmark/current_waypoint = get_location_waypoint()
+	return current_waypoint.name

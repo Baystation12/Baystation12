@@ -39,9 +39,6 @@
 /*
 	Docking stuff
 */
-/datum/shuttle/autodock/proc/get_docking_controller()
-	return 
-
 /datum/shuttle/autodock/proc/dock(var/dock_target)
 	if(active_docking_controller)
 		current_dock_target = dock_target
@@ -161,3 +158,5 @@
 /datum/shuttle/autodock/proc/arrived()
 	return	//do nothing for now
 
+/datum/shuttle/autodock/proc/get_location_name()
+	return current_location.name

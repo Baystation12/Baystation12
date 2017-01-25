@@ -29,7 +29,7 @@
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 
-	var/datum/computer/file/embedded_program/docking/docking_controller = shuttle.get_docking_controller()
+	var/datum/computer/file/embedded_program/docking/docking_controller = shuttle.active_docking_controller
 
 	data = list(
 		"destination_name" = shuttle.get_destination_name(),
@@ -56,9 +56,6 @@
 	if(..())
 		return 1
 
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-
 	var/datum/shuttle/autodock/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
@@ -74,9 +71,9 @@
 		if(CanInteract(usr, default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])
 
-	if(href_list["move"])
+	else if(href_list["move"])
 		shuttle.launch(src)
-	if(href_list["force"])
+	else if(href_list["force"])
 		shuttle.force_launch(src)
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)
