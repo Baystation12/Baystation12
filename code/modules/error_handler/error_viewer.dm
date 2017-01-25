@@ -123,7 +123,7 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 	// (Also, make sure config is initialized, or log_debug will runtime)
 	if(config && error_source.next_message_at <= world.time)
 		var/const/viewtext = "\[view]" // Nesting these in other brackets went poorly
-		log_debug("Runtime in [e.file],[e.line]: [html_encode(e.name)] [error_entry.makeLink(viewtext)]")
+		log_debug("Runtime error in [e.file],[e.line]: [html_encode(e.name)] [error_entry.makeLink(viewtext)]")
 		error_source.next_message_at = world.time + ERROR_MSG_DELAY
 
 /datum/ErrorViewer/ErrorSource
@@ -134,7 +134,7 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 	if(!istype(e))
 		name = "\[[time_stamp()]] Uncaught exceptions"
 		return
-	name = "\[[time_stamp()]] Runtime in [e.file],[e.line]: [e]"
+	name = "\[[time_stamp()]] Runtime error in [e.file],[e.line]: [e]"
 
 /datum/ErrorViewer/ErrorSource/showTo(var/user, var/datum/ErrorViewer/back_to, var/linear)
 	if(!istype(back_to))
@@ -148,7 +148,7 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 	var/datum/ErrorViewer/ErrorSource/error_source
 	var/exception/exc
 	var/desc = "" // HTML-formatted trace/info/etc
-	var/info_name = "" // human-readable name/title for runtime, eg "Runtime in foo.dm,12: division by zero"; this is also the first line of `info`.
+	var/info_name = "" // human-readable name/title for runtime, eg "Runtime error in foo.dm,12: division by zero"; this is also the first line of `info`.
 	var/info = "" // plain file/line/trace/info/etc, to send to the IRC bot at end of round
 	var/srcRef
 	var/srcType
@@ -165,8 +165,8 @@ var/global/datum/ErrorViewer/ErrorCache/error_cache = null
 		name = "\[[time_stamp()]] Skipped [skipCount] runtimes in [e.file],[e.line]."
 		isSkipCount = TRUE
 		return
-	name = "\[[time_stamp()]] Runtime in [e.file],[e.line]: [e]"
-	info_name = "Runtime in [e.file],[e.line]: [e]"
+	name = "\[[time_stamp()]] Runtime error in [e.file],[e.line]: [e]"
+	info_name = "Runtime error in [e.file],[e.line]: [e]"
 	info = info_name
 	exc = e
 	if(istype(desclines))
