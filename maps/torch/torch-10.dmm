@@ -2909,7 +2909,7 @@
 "bdW" = (/obj/machinery/alarm{dir = 8; pixel_x = 25; pixel_y = 0; req_one_access = list(201)},/obj/structure/disposalpipe/trunk{dir = 1},/obj/machinery/disposal,/turf/simulated/floor/tiled,/area/merchant_station)
 "bdX" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled,/area/merchant_station)
 "bdY" = (/obj/structure/closet,/obj/item/clothing/shoes/sandal,/obj/item/clothing/shoes/sandal,/obj/item/clothing/under/rank/psych/turtleneck{desc = "A turqouise turtleneck and a pair of dark blue slacks."; name = "turtleneck"},/obj/item/clothing/under/resomi/white,/turf/simulated/floor/tiled,/area/merchant_station)
-"bdZ" = (/obj/structure/table/rack,/turf/simulated/floor/tiled/steel/airless,/area/merchant_station)
+"bdZ" = (/obj/structure/table/rack,/turf/simulated/floor/tiled/airless,/area/merchant_station)
 "bea" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/solar,/obj/effect/floor_decal/solarpanel,/turf/simulated/floor/airless,/area/merchant_station)
 "beb" = (/obj/structure/table/steel,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled,/area/merchant_station)
 "bec" = (/obj/structure/bed/chair/office/dark{dir = 8},/obj/structure/cable/blue{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled,/area/merchant_station)
