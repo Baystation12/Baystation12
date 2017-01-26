@@ -181,3 +181,11 @@
 // Calls forwarded to COMPUTER running the program should begin with "PC_"
 /datum/topic_manager/program/Topic(href, href_list)
 	return program && program.Topic(href, href_list)
+
+/datum/computer_file/program/proc/apply_visual(mob/M)
+	if(NM)
+		NM.apply_visual(M)
+
+/datum/computer_file/program/proc/remove_visual(mob/M)
+	if(NM)
+		NM.remove_visual(M)

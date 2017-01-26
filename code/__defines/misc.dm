@@ -71,7 +71,8 @@
 #define DEFAULT_JOB_TYPE /datum/job/assistant
 
 //Area flags, possibly more to come
-#define RAD_SHIELDED 1 //shielded from radiation, clearly
+#define AREA_RAD_SHIELDED 1 // shielded from radiation, clearly
+#define AREA_EXTERNAL     2
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.

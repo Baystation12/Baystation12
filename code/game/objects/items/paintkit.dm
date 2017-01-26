@@ -8,7 +8,7 @@
 	var/uses = 1        // Uses before the kit deletes itself.
 
 /obj/item/device/kit/examine()
-	..()
+	. = ..()
 	to_chat(usr, "It has [uses] use\s left.")
 
 /obj/item/device/kit/proc/use(var/amt, var/mob/user)
@@ -74,7 +74,7 @@
 	var/list/allowed_types = list()
 
 /obj/item/device/kit/paint/examine()
-	..()
+	. = ..()
 	to_chat(usr, "This kit will convert an exosuit into: [new_name].")
 	to_chat(usr, "This kit can be used on the following exosuit models:")
 	for(var/exotype in allowed_types)

@@ -1,4 +1,0 @@
-author: Haswell
-delete-after: True
-changes: 
-  - tweak: "Clicking on worn or held boots containing a concealed blade will now draw the blade out directly, similar to gun holsters."

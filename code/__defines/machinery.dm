@@ -32,6 +32,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define AI_CAMERA_LUMINOSITY 6
 
 // Camera networks
+#define NETWORK_BRIDGE "Bridge"
 #define NETWORK_CRESCENT "Crescent"
 #define NETWORK_CIVILIAN_EAST "Civilian East"
 #define NETWORK_CIVILIAN_WEST "Civilian West"
@@ -42,6 +43,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
 #define NETWORK_EXPEDITION "Expedition"
+#define NETWORK_FIFTH_DECK "Fifth Deck"
 #define NETWORK_FIRST_DECK "First Deck"
 #define NETWORK_FOURTH_DECK "Fourth Deck"
 #define NETWORK_MEDICAL "Medical"

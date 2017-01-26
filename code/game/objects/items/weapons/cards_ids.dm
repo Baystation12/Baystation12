@@ -248,7 +248,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"
-	desc = "Access module for NanoTrasen Synthetics."
+	desc = "Access module for lawed synthetics."
 	icon_state = "id-robot"
 	item_state = "tdgreen"
 	assignment = "Synthetic"

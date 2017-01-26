@@ -2,7 +2,7 @@
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
 	icon_state = "labcoat_open"
-	item_state = "labcoat" //Is this even used for anything?
+	//item_state = "labcoat" //Is this even used for anything?
 	icon_open = "labcoat_open"
 	icon_closed = "labcoat"
 	blood_overlay_type = "coat"
@@ -14,7 +14,7 @@
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."
 	icon_state = "labcoat_cmo_open"
-	item_state = "labcoat_cmo"
+	//item_state = "labcoat_cmo"
 	icon_open = "labcoat_cmo_open"
 	icon_closed = "labcoat_cmo"
 
@@ -29,7 +29,7 @@
 	name = "The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
 	icon_state = "labgreen_open"
-	item_state = "labgreen"
+	//item_state = "labgreen"
 	icon_open = "labgreen_open"
 	icon_closed = "labgreen"
 

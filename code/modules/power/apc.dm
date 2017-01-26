@@ -246,7 +246,6 @@
 
 /obj/machinery/power/apc/examine(mob/user)
 	if(..(user, 1))
-		to_chat(user, "A control terminal for the area electrical systems.")
 		if(stat & BROKEN)
 			to_chat(user, "Looks broken.")
 			return

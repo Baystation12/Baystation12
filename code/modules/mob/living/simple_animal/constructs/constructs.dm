@@ -72,7 +72,7 @@
 	return ..()
 
 /mob/living/simple_animal/construct/examine(mob/user)
-	..(user)
+	. = ..(user)
 	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
@@ -91,6 +91,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"
+
 /////////////////Juggernaut///////////////
 
 
@@ -246,8 +247,7 @@
 
 	construct_spells = list(
 			/spell/targeted/harvest,
-			/spell/aoe_turf/knock/harvester,
-			/spell/rune_write
+			/spell/aoe_turf/knock/harvester
 		)
 
 ////////////////Glow//////////////////

@@ -26,7 +26,7 @@
 	update_icon()
 
 /obj/item/device/geiger/examine(mob/user)
-	..(user)
+	. = ..(user)
 	to_chat(user, "<span class='warning'>[scanning ? "ambient" : "stored"] radiation level: [radiation_count ? radiation_count : "0"]Bq.</span>")
 
 /obj/item/device/geiger/attack_self(var/mob/user)

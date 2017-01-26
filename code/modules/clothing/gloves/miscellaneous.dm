@@ -12,7 +12,7 @@
 	siemens_coefficient = 1.0
 
 /obj/item/clothing/gloves/insulated
-	desc = "These gloves will protect the wearer from electric shock."
+	desc = "These gloves will protect the wearer from electric shocks."
 	name = "insulated gloves"
 	color = COLOR_YELLOW
 	icon_state = "white"

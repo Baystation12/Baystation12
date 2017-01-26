@@ -2,6 +2,7 @@
 The overmap system allows adding new maps to the big 'galaxy' map.
 There's overmap zlevel, that looks like a map. On it, token objects (overmap objects) are moved, representing ship movement etc.
 No actual turfs are moved, you would need exploration shuttles or teleports to move atoms between different sectors/ships.
+Unless stated otherwise, you just need to place any of things below somewhere on the map and they'll handle the rest.
 
 *************************************************************
 # How to make new sector
@@ -14,15 +15,15 @@ No actual turfs are moved, you would need exploration shuttles or teleports to m
 
 *************************************************************
 # How to make new ship
+*************************************************************
 0. Map whatever.
 1. Make /obj/effect/overmap/ship/[whatever]
-	If you want explorations shuttles be able to dock here, remember to set *landing_area*
+	If you want explorations shuttles be able to dock here, remember to set *landing_areas*
 2. Put /obj/effect/overmap/ship/[whatever] on the map. If it's multiz, only one is needed, on any z.
 3. Put Helm Console anywhere on the map.
 4. Put Engines Control Console anywhere on the map.
 5. Put some engines hooked up to gas supply anywhere on the map.
 6. Done.
-
 
 *************************************************************
 # Overmap object
@@ -38,8 +39,8 @@ If your thing is multiz, only one is needed per multiz sector/ship.
 
 If it's player's main base (e.g Exodus), set 'base' var to 1, so it adds itself to station_levels list.
 If this place cannot be reached or left with EVA, set 'in_space' var to 0
-If you want exploration shuttles (look below) to be able to dock here, set *landing_area* var to the type of area they should use
-e.g. *landing_area* = /area/sector/shuttle/butts_inbound
+If you want exploration shuttles (look below) to be able to dock here, set *landing_areas* var to the list of of area they should use
+e.g. *landing_areas* = list(/area/sector/shuttle/butts_inbound,/area/sector/shuttle/syndicat_approach)
 
 *************************************************************
 # Helm console
@@ -49,17 +50,18 @@ e.g. *landing_area* = /area/sector/shuttle/butts_inbound
 Lets you steer ship around on overmap.
 Lets you use autopilot.
 ### HOW TO USE
-Just place it anywhere on the ship. It will do the rest on its own during init.
+Just place it anywhere on the ship.
 
 *************************************************************
 # Engines control console
 *************************************************************
 /obj/machinery/computer/engines
 ### WHAT IT DOES
-Lets use use engines of your ship.
+Lets use set thrust limits for engines of your ship.
+Lets you shutdown/restart the engines.
 Lets you check status of engines.
 ### HOW TO USE
-Just place it anywhere on the ship. It will do the rest on its own during init.
+Just place it anywhere on the ship.
 
 *************************************************************
 # Thermal engines
@@ -68,8 +70,7 @@ Just place it anywhere on the ship. It will do the rest on its own during init.
 ### WHAT IT DOES
 Lets your ship move on the map at all.
 ### HOW TO USE
-Put them on map, hook up to pipes with any gas. More pressure = more thrust.
-Make sure you have Engines control terminal. It'll handle the rest.
+Put them on map, hook up to pipes with any gas. Heavier gas (CO2/plasma) + More pressure = more thrust.
 
 *************************************************************
 # Exploration shuttle terminal

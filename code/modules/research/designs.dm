@@ -672,10 +672,10 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/paicard
 	sort_string = "VABAI"
 
-/datum/design/item/intellicard
-	name = "'intelliCard', AI preservation and transportation system"
-	desc = "Allows for the construction of an intelliCard."
-	id = "intellicard"
+/datum/design/item/intelicard
+	name = "'inteliCard', AI preservation and transportation system"
+	desc = "Allows for the construction of an inteliCard."
+	id = "intelicard"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
 	build_path = /obj/item/weapon/aicard
@@ -1008,9 +1008,9 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
 
-// Intellicard Slot
+// inteliCard Slot
 /datum/design/item/modularcomponent/aislot
-	name = "intellicard slot"
+	name = "inteliCard slot"
 	id = "aislot"
 	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	build_type = IMPRINTER
