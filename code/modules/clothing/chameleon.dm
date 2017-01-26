@@ -333,9 +333,9 @@
 //**Chameleon Gun**
 //*****************
 /obj/item/weapon/gun/energy/chameleon
-	name = "desert eagle"
+	name = "revolver"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
-	icon_state = "deagle"
+	icon_state = "revolver"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	matter = list()
