@@ -95,7 +95,7 @@
 /obj/item/clothing/head/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -166,7 +166,7 @@
 /obj/item/clothing/shoes/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	item_state = "black"
 	update_icon()
 	update_clothing_icon()
@@ -202,7 +202,7 @@
 /obj/item/weapon/storage/backpack/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	item_state = "backpack"
 	update_icon()
 	if (ismob(src.loc))
@@ -244,7 +244,7 @@
 /obj/item/clothing/gloves/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -279,7 +279,7 @@
 /obj/item/clothing/mask/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -314,7 +314,7 @@
 /obj/item/clothing/glasses/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -376,7 +376,7 @@
 /obj/item/weapon/gun/energy/chameleon/emp_act(severity)
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
