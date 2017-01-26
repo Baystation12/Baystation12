@@ -93,9 +93,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/head, blocked)
 
 /obj/item/clothing/head/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "grey cap"
-	desc = "It's a baseball hat in a tasteful grey colour."
-	icon_state = "greysoft"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	update_icon()
 	update_clothing_icon()
 
@@ -129,9 +129,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/suit, blocked)
 
 /obj/item/clothing/suit/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "armor"
-	desc = "An armored vest that protects against some damage."
-	icon_state = "armor"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	update_icon()
 	update_clothing_icon()
 
@@ -164,9 +164,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/shoes, blocked)
 
 /obj/item/clothing/shoes/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "black shoes"
-	desc = "A pair of black shoes."
-	icon_state = "black"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	item_state = "black"
 	update_icon()
 	update_clothing_icon()
@@ -200,9 +200,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/weapon/storage/backpack, blocked)
 
 /obj/item/weapon/storage/backpack/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "backpack"
-	desc = "You wear this on your back and put items into it."
-	icon_state = "backpack"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	item_state = "backpack"
 	update_icon()
 	if (ismob(src.loc))
@@ -242,9 +242,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/gloves, list(src.type))
 
 /obj/item/clothing/gloves/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "black gloves"
-	desc = "It looks like a pair of gloves, but it seems to have a small dial inside."
-	icon_state = "black"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	update_icon()
 	update_clothing_icon()
 
@@ -277,9 +277,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/mask, list(src.type))
 
 /obj/item/clothing/mask/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "gas mask"
-	desc = "It's a gas mask."
-	icon_state = "gas_alt"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	update_icon()
 	update_clothing_icon()
 
@@ -312,9 +312,9 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/glasses, list(src.type))
 
 /obj/item/clothing/glasses/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = "Optical Meson Scanner"
-	desc = "It's a set of mesons."
-	icon_state = "meson"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(iconstate)
 	update_icon()
 	update_clothing_icon()
 
@@ -376,7 +376,7 @@
 /obj/item/weapon/gun/energy/chameleon/emp_act(severity)
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = "revolver"
+	icon_state = initial(iconstate)
 	update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
