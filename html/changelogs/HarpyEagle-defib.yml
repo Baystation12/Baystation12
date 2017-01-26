@@ -1,0 +1,4 @@
+author: HarpyEagle
+delete-after: True
+changes: 
+  - rscadd: "Defibrillators will now notify when the patient cannot be revived due to excessive blood loss."

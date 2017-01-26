@@ -263,7 +263,7 @@
 	if(H.stat != DEAD)
 		return "buzzes, \"Patient is not in a valid state. Operation aborted.\""
 
-	if(check_contact(H))
+	if(!check_contact(H))
 		return "buzzes, \"Patient's chest is obstructed. Operation aborted.\""
 
 	return null
@@ -281,7 +281,10 @@
 	if(bad_vital_organ)
 		return bad_vital_organ
 
-	//this needs to be last since if any of the 'further attempts futile' conditions are met their messages take precedence
+	if(check_blood_level())
+		return "buzzes, \"Resuscitation failed - Patient is in hypovolemic shock.\""
+
+	//this needs to be last since if any of the 'other conditions are met their messages take precedence
 	if(H.ssd_check())
 		return "buzzes, \"Resuscitation failed - Mental interface error. Further attempts may be successful.\""
 
@@ -291,8 +294,8 @@
 	if(!combat)
 		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
 			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & THICKMATERIAL))
-				return TRUE
-	return FALSE
+				return FALSE
+	return TRUE
 
 /obj/item/weapon/shockpaddles/proc/check_vital_organs(mob/living/carbon/human/H)
 	for(var/organ_tag in H.species.has_organ)
@@ -306,6 +309,19 @@
 			if(O.damage > O.max_damage)
 				return "buzzes, \"Resuscitation failed - Excessive damage to vital organ ([name]). Further attempts futile.\""
 	return null
+
+/obj/item/weapon/shockpaddles/proc/check_blood_level(mob/living/carbon/human/H)
+	if(!H.should_have_organ(BP_HEART))
+		return FALSE
+
+	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
+	if(!heart)
+		return TRUE
+
+	if(heart.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
+		return TRUE
+
+	return FALSE
 
 /obj/item/weapon/shockpaddles/proc/check_charge(var/charge_amt)
 	return 0
