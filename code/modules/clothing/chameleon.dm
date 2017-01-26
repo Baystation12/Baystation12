@@ -167,7 +167,7 @@
 	name = initial(name)
 	desc = initial(desc)
 	icon_state = initial(icon_state)
-	item_state = "black"
+	item_state = initial(item_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -203,7 +203,7 @@
 	name = initial(name)
 	desc = initial(desc)
 	icon_state = initial(icon_state)
-	item_state = "backpack"
+	item_state = initial(item_state)
 	update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -245,6 +245,7 @@
 	name = initial(name)
 	desc = initial(desc)
 	icon_state = initial(icon_state)
+	item_state = initial(item_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -280,6 +281,7 @@
 	name = initial(name)
 	desc = initial(desc)
 	icon_state = initial(icon_state)
+	item_state = initial(item_state)
 	update_icon()
 	update_clothing_icon()
 
@@ -315,6 +317,7 @@
 	name = initial(name)
 	desc = initial(desc)
 	icon_state = initial(icon_state)
+	item_state = initial(item_state)
 	update_icon()
 	update_clothing_icon()
 
