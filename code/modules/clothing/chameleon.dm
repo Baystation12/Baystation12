@@ -131,7 +131,7 @@
 /obj/item/clothing/suit/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 	name = initial(name)
 	desc = initial(desc)
-	icon_state = initial(iconstate)
+	icon_state = initial(icon_state)
 	update_icon()
 	update_clothing_icon()
 
