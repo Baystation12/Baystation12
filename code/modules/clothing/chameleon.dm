@@ -374,9 +374,9 @@
 	return P
 
 /obj/item/weapon/gun/energy/chameleon/emp_act(severity)
-	name = "desert eagle"
-	desc = "It's a desert eagle."
-	icon_state = "deagle"
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = "revolver"
 	update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
