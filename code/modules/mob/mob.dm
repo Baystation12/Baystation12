@@ -260,7 +260,7 @@
 	if (!istype(l_hand, /obj/item/weapon/grab) && !istype(r_hand, /obj/item/weapon/grab))
 		return L
 	if (!L)
-		L = list()
+		L = list(src)
 	for(var/A in list(l_hand,r_hand))
 		if (istype(A, /obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = A
