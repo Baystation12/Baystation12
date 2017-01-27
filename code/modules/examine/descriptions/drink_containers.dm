@@ -1,5 +1,5 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	description_fluff = "Space Cola is the most popular drink made by Centauri Provisions, a subsidiary of Robust Industries LLC. While it is only slightly different from traditional cola recipes, its blend of syrups and sugars is enticing to children and adults alike."
+	description_fluff = "Space Cola is the most popular drink made by Robust Industries LLC. While it is only slightly different from traditional cola recipes, its blend of syrups and sugars is enticing to children and adults alike."
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle
 	description_fluff = "This is a generic, NanoTrasen branded bottle of water, included in vending machines for the benefit of Skrellian employees. The company swears on the quality of the water, saying it comes from the Martian poles. Most people disregard that and assume it's recycled from hydroponics trays."
@@ -20,7 +20,7 @@
 	description_fluff = "This drink is advertised as one of the most carbonated beverages on the market and is advertised for its carbonation, not its flavor. Children will commonly make 'Space-Up Volcanoes' by dropping mints into a can of Space-Up and causing it to create a long stream of fizz upward. Doctors advise that children do not attempt to become 'Space-Up Dragons.'"
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime
-	description_fluff = "This is a Centauri Provisions-branded can of Lemon-Lime soda. Trumpeted as a 'natural' beverage, it contains no fruit or fruit byproducts. It was never as popular as their now discontinued Oh-Range brand."
+	description_fluff = "This is a Robust Industries-branded can of Lemon-Lime soda. Trumpeted as a 'natural' beverage, it contains no fruit or fruit byproducts. It was never as popular as their now discontinued Oh-Range brand."
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea
 	description_fluff = "Vrisk Iced Tea is named after it's creator, Penelope Vrisk. She was a canner for Robust Industries who wanted to create an authentic-tasting Southern iced tea. After finishing her formula and managing to get it produced, the tea became an instant hit."
