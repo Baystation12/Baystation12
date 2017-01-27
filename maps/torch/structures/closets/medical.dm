@@ -35,6 +35,7 @@
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/white,
+		/obj/item/device/holowarrant,
 		/obj/item/weapon/storage/firstaid/regular
 	)
 

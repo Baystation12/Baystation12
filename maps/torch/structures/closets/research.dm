@@ -36,6 +36,7 @@
 		/obj/item/device/camera,
 		/obj/item/taperoll/research,
 		/obj/item/clothing/glasses/welding/superior,
+		/obj/item/device/holowarrant,
 		/obj/item/clothing/suit/armor/vest/nt
 	)
 
