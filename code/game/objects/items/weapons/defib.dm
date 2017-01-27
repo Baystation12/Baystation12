@@ -44,10 +44,11 @@
 	if(paddles) //in case paddles got destroyed somehow.
 		if(paddles.loc == src)
 			new_overlays += "[initial(icon_state)]-paddles"
-		if(bcell && !bcell.check_charge(paddles.chargecost))
-			new_overlays += "[initial(icon_state)]-powered"
-		if(!paddles.safety)
-			new_overlays += "[initial(icon_state)]-emagged"
+		if(bcell && bcell.check_charge(paddles.chargecost))
+			if(!paddles.safety)
+				new_overlays += "[initial(icon_state)]-emagged"
+			else
+				new_overlays += "[initial(icon_state)]-powered"
 
 	if(bcell)
 		var/ratio = Ceiling(bcell.percent()/25) * 25
