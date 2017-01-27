@@ -1094,10 +1094,6 @@
 	name = "Starboard Auxillary Storage"
 	icon_state = "auxstorage"
 
-/area/storage/backup
-	name = "Tertiary Tool Storage"
-	icon_state = "auxstorage"
-
 /area/storage/cargo
 	name = "Cargo Storage"
 	icon_state = "quartstorage"
@@ -1272,6 +1268,14 @@
 /area/security/wing
 	name = "\improper Security Wing"
 	icon_state = "security"
+
+/area/security/bridgecheck
+	name = "\improper Bridge Security Checkpoint"
+	icon_state = "checkpoint"
+
+/area/security/opscheck
+	name = "\improper First Deck Security Office"
+	icon_state = "checkpoint"
 
 // AI
 /area/turret_protected/ai_foyer

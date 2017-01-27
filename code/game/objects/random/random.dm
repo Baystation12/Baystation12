@@ -69,13 +69,15 @@
 	name = "random powercell"
 	desc = "This is a random powercell."
 	icon = 'icons/obj/power.dmi'
-	icon_state = "cell"
+	icon_state = "hcell"
 	item_to_spawn()
 		return pick(prob(10);/obj/item/weapon/cell/crap,\
 					prob(80);/obj/item/weapon/cell,\
-					prob(5);/obj/item/weapon/cell/high,\
-					prob(4);/obj/item/weapon/cell/super,\
-					prob(1);/obj/item/weapon/cell/hyper)
+					prob(50);/obj/item/weapon/cell/high,\
+					prob(20);/obj/item/weapon/cell/super,\
+					prob(10);/obj/item/weapon/cell/hyper,\
+					prob(70);/obj/item/weapon/cell/device/standard,\
+					prob(50);/obj/item/weapon/cell/device/high)
 
 
 /obj/random/bomb_supply
@@ -671,6 +673,7 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					prob(2);/obj/item/weapon/storage/box/large,\
 					prob(3);/obj/item/weapon/storage/box/glowsticks,\
 					prob(1);/obj/item/weapon/storage/wallet,\
+					prob(2);/obj/item/weapon/storage/ore,\
 					prob(2);/obj/item/weapon/storage/belt/utility/full,\
 					prob(2);/obj/item/weapon/storage/belt/medical/emt,\
 					prob(2);/obj/item/weapon/storage/belt/medical,\
