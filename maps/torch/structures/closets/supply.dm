@@ -22,7 +22,6 @@
 		/obj/item/weapon/hand_labeler,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/yellow,
-		/obj/item/device/holowarrant,
 		/obj/item/weapon/packageWrap
 	)
 
@@ -60,6 +59,7 @@
 		/obj/item/weapon/packageWrap,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
+		/obj/item/device/holowarrant,
 		/obj/item/clothing/suit/armor/vest/solgov
 	)
 
