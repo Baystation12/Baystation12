@@ -94,13 +94,6 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
 
-/decl/flooring/tiling/steel
-	name = "floor"
-	icon_base = "steel"
-	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
-	build_type = /obj/item/stack/tile/floor_steel
-
 /decl/flooring/tiling/white
 	name = "floor"
 	desc = "How sterile."

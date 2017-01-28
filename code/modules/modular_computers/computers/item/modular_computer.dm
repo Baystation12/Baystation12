@@ -884,3 +884,11 @@
 		return active_program.check_eye(user)
 	else
 		return ..()
+
+/obj/item/modular_computer/proc/apply_visual(mob/M)
+	if(active_program)
+		active_program.apply_visual(M)
+
+/obj/item/modular_computer/proc/remove_visual(mob/M)
+	if(active_program)
+		active_program.remove_visual(M)

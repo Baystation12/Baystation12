@@ -14,7 +14,10 @@
 	name = "Captain's armor"
 	desc = "A bulky, heavy-duty piece of exclusive corporate armor. YOU are in charge!"
 	icon_state = "caparmor"
-	item_state = "capspacesuit"
+	item_state_slots = list(
+		slot_l_hand_str = "capspacesuit",
+		slot_r_hand_str = "capspacesuit",
+	)
 	w_class = ITEM_SIZE_HUGE
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02

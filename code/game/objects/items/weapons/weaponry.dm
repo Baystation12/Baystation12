@@ -38,6 +38,14 @@
 
 	..()
 
+/obj/item/weapon/nullrod/afterattack(var/atom/A, var/mob/user, var/proximity)
+	if(!proximity)
+		return
+	if(istype(A, /turf/simulated/wall/cult))
+		var/turf/simulated/wall/cult/W = A
+		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src] and it starts fizzling and shifting.</span>", "<span class='notice'>You touch \the [A] with \the [src] and it starts fizzling and shifting.</span>")
+		W.ChangeTurf(/turf/simulated/wall)
+
 /obj/item/weapon/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."

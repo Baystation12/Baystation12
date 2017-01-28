@@ -155,3 +155,11 @@
 		return NM.check_eye(user)
 	else
 		return -1
+
+/datum/computer_file/program/proc/apply_visual(mob/M)
+	if(NM)
+		NM.apply_visual(M)
+
+/datum/computer_file/program/proc/remove_visual(mob/M)
+	if(NM)
+		NM.remove_visual(M)

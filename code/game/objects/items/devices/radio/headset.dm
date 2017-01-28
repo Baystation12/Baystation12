@@ -282,6 +282,11 @@
 
 	return
 
+/obj/item/device/radio/headset/MouseDrop(var/obj/over_object)
+	var/mob/M = usr
+	if((!istype(over_object, /obj/screen)) && (src in M) && CanUseTopic(M))
+		return attack_self(M)
+	return
 
 /obj/item/device/radio/headset/proc/recalculateChannels(var/setDescription = 0)
 	src.channels = list()

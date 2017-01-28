@@ -30,6 +30,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c45
+	magazine_type = /obj/item/ammo_magazine/c45uzi
 	allowed_magazines = /obj/item/ammo_magazine/c45uzi //more damage compared to the wt550, smaller mag size
 
 	firemodes = list(

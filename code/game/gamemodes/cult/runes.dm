@@ -145,7 +145,7 @@
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"])
 		if(usr.loc == loc && !iscultist(usr))
-			cult.add_antagonist(usr.mind, 1)
+			cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
 
 /obj/effect/rune/teleport
 	cultname = "teleport"
@@ -309,6 +309,8 @@
 	else if(I.force)
 		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
 		take_damage(I.force)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
@@ -373,13 +375,13 @@
 	visible_message("<span class='warning'>\The [src] disappears with a flash of red light, and a set of armor appears on \the [user].</span>", "<span class='warning'>You are blinded by the flash of red light. After you're able to see again, you see that you are now wearing a set of armor.</span>")
 
 	var/obj/O = user.get_equipped_item(slot_head) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
-	if(O)
+	if(O && !istype(O, /obj/item/clothing/head/culthood))
 		user.unEquip(O)
 	O = user.get_equipped_item(slot_wear_suit)
-	if(O)
+	if(O && !istype(O, /obj/item/clothing/suit/cultrobes))
 		user.unEquip(O)
 	O = user.get_equipped_item(slot_shoes)
-	if(O)
+	if(O && !istype(O, /obj/item/clothing/shoes/cult))
 		user.unEquip(O)
 
 	user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
@@ -387,13 +389,16 @@
 	user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
 
 	O = user.get_equipped_item(slot_back)
-	if(istype(O, /obj/item/weapon/storage)) // We don't want to make the vox drop their nitrogen tank, though
+	if(istype(O, /obj/item/weapon/storage) && !istype(O, /obj/item/weapon/storage/backpack/cultpack)) // We don't want to make the vox drop their nitrogen tank, though
 		user.unEquip(O)
 		var/obj/item/weapon/storage/backpack/cultpack/C = new /obj/item/weapon/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back)
 		if(C)
 			for(var/obj/item/I in O)
 				I.forceMove(C)
+	else if(!O)
+		var/obj/item/weapon/storage/backpack/cultpack/C = new /obj/item/weapon/storage/backpack/cultpack(user)
+		user.equip_to_slot_or_del(C, slot_back)
 
 	user.update_icons()
 
@@ -476,7 +481,7 @@
 
 /obj/effect/rune/manifest/Destroy()
 	if(puppet)
-		puppet.dust()
+		puppet.death()
 		puppet = null
 	return ..()
 
@@ -498,11 +503,9 @@
 		return fizzle(user)
 	user.say("Gal'h'rfikk harfrandid mud[pick("'","`")]gib!")
 	visible_message("<span class='warning'>A shape forms in the center of the rune. A shape of... a man.</span>", "You hear liquid flow.")
-	puppet = new(get_turf(src))
-	puppet.set_species("Cult")
-	puppet.name = puppet.species.get_random_name()
+	puppet = new(get_turf(src), "Cult")
 	puppet.key = ghost.key
-	cult.add_antagonist(puppet.mind)
+	cult.add_antagonist(puppet.mind, do_not_equip = 1)
 
 	log_and_message_admins("used a manifest rune.")
 
@@ -525,6 +528,7 @@
 	admin_attack_log(user, victim, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
 	user.say("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
 	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user), nothing_text = "you feel no different"))].</span>", "You hear liquid flow.")
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 /obj/effect/rune/drain/proc/heal_user(var/mob/living/carbon/human/user)
 	if(!istype(user))
@@ -541,7 +545,7 @@
 			return statuses
 	if(user.getBruteLoss() || user.getFireLoss())
 		var/healbrute = user.getBruteLoss()
-		var/healburn = user.getBruteLoss()
+		var/healburn = user.getFireLoss()
 		if(healbrute < healburn)
 			healbrute = min(healbrute, charges / 2)
 			charges -= healbrute
@@ -567,7 +571,7 @@
 		for(var/obj/item/organ/external/e in user.organs)
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
-				statuses += "bones in your [e] snap into place"
+				statuses += "bones in your [e.name] snap into place"
 				charges -= 15
 				if(charges < 15)
 					break
@@ -684,7 +688,6 @@
 		if(iscarbon(M))
 			var/mob/living/carbon/C = M
 			C.eye_blurry += 50
-			C.eye_blind += 20
 			C.Weaken(3)
 			C.Stun(5)
 		else if(issilicon(M))

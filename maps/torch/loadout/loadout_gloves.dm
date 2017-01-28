@@ -10,12 +10,14 @@
 
 /datum/gear/gloves/latex
 	cost = 3
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/gloves/nitrile
 	cost = 3
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/gloves/rainbow
-	allowed_roles = list("Passenger", "Bartender", "Merchant")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/gloves/botany
 	display_name = "gloves, botany"

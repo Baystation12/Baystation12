@@ -1,7 +1,7 @@
 //Blood levels. These are percentages based on the species blood_volume far.
-var/const/BLOOD_VOLUME_SAFE =    85
-var/const/BLOOD_VOLUME_OKAY =    75
-var/const/BLOOD_VOLUME_BAD =     60
+var/const/BLOOD_VOLUME_SAFE    = 85
+var/const/BLOOD_VOLUME_OKAY    = 75
+var/const/BLOOD_VOLUME_BAD     = 60
 var/const/BLOOD_VOLUME_SURVIVE = 40
 var/const/CE_STABLE_THRESHOLD = 0.5
 
@@ -61,12 +61,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		else
 			heartbeat++
 
-/obj/item/organ/internal/heart/proc/handle_blood()
-	if(!owner)
-		return
-	if(owner.stat == DEAD || owner.bodytemperature < 170)	//Dead or cryosleep people do not pump the blood.
-		return
-
+/obj/item/organ/internal/heart/proc/get_effective_blood_volume()
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
 	var/blood_volume = round((blood_volume_raw/species.blood_volume)*100) // Percentage.
 
@@ -79,6 +74,16 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		blood_volume *= 0.6
 	else if(damage > 1)
 		blood_volume *= 0.8
+
+	return blood_volume
+
+/obj/item/organ/internal/heart/proc/handle_blood()
+	if(!owner)
+		return
+	if(owner.stat == DEAD || owner.bodytemperature < 170)	//Dead or cryosleep people do not pump the blood.
+		return
+
+	var/blood_volume = get_effective_blood_volume()
 
 	//Effects of bloodloss
 	var/dmg_coef = 1
@@ -111,6 +116,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 			owner.adjustOxyLoss(10 * dmg_coef)
 
 	//Blood regeneration if there is some space
+	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
 	if(blood_volume_raw < species.blood_volume)
 		var/datum/reagent/blood/B = owner.get_blood(owner.vessel)
 		B.volume += 0.1 // regenerate blood VERY slowly
