@@ -281,9 +281,6 @@
 	if(bad_vital_organ)
 		return bad_vital_organ
 
-	if(check_blood_level())
-		return "buzzes, \"Resuscitation failed - Patient is in hypovolemic shock.\""
-
 	//this needs to be last since if any of the 'other conditions are met their messages take precedence
 	if(H.ssd_check())
 		return "buzzes, \"Resuscitation failed - Mental interface error. Further attempts may be successful.\""
@@ -377,6 +374,9 @@
 		make_announcement(error, "warning")
 		playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 		return
+
+	if(check_blood_level())
+		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock.\"", "warning") //also includes heart damage
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
 	if(!do_after(user, chargetime, H))
