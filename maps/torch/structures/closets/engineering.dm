@@ -37,6 +37,7 @@
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
 		/obj/item/device/flashlight,
+		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/yellow
 	)
 

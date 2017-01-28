@@ -32,6 +32,8 @@
 /datum/job/hop
 	title = "Executive Officer"
 	supervisors = "the Commanding Officer"
+	department = "Command"
+	department_flag = COM
 	minimal_player_age = 21
 	economic_modifier = 10
 	ideal_character_age = 45
@@ -1054,15 +1056,20 @@
 
 
 /datum/job/merchant
-	title = "merchant"
-	faction = "None"
-	total_positions = 0 //to be opened by admins when desired
+	title = "Merchant"
+	department = "Civilian"
+	department_flag = CIV
+	faction = "Station"
+	total_positions = 0 //to be opened by admins when desired AT ROUNDSTART ONLY
 	spawn_positions = 0
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"
 	ideal_character_age = 30
 	minimal_player_age = 7
+	create_record = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/merchant
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 
 	access = list(access_merchant)
