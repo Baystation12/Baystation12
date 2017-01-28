@@ -793,6 +793,16 @@
 		paralysis = max(paralysis + amount,0)
 	return
 
+/mob/proc/SetSlowed(amount)
+	if(status_flags & CANSLOW)
+		slowed = max(amount,0)
+	return
+
+/mob/proc/AdjustSlowed(amount)
+	if(status_flags & CANSLOW)
+		slowed = max(slowed + amount,0)
+	return
+
 /mob/proc/Sleeping(amount)
 	facing_dir = null
 	sleeping = max(max(sleeping,amount),0)

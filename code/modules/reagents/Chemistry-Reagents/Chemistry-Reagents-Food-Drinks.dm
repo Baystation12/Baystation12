@@ -661,7 +661,7 @@
 	..()
 	if(alien == IS_DIONA)
 		return
-	M.adjustToxLoss(-0.5 * removed)
+	M.adjustToxLoss(-0.25 * removed)
 
 /datum/reagent/drink/tea/icetea
 	name = "Iced Tea"
@@ -1003,9 +1003,8 @@
 	..()
 	if(alien == IS_DIONA)
 		return
-	M.adjustOxyLoss(-4 * removed)
-	M.heal_organ_damage(2 * removed, 2 * removed)
-	M.adjustToxLoss(-2 * removed)
+	M.heal_organ_damage(0.2 * removed,0.2 * removed)
+	M.adjustToxLoss(-0.2 * removed)
 	if(M.dizziness)
 		M.dizziness = max(0, M.dizziness - 15)
 	if(M.confused)

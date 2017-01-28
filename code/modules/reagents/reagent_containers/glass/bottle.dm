@@ -1,4 +1,3 @@
-
 //Not to be confused with /obj/item/weapon/reagent_containers/food/drinks/bottle
 
 /obj/item/weapon/reagent_containers/glass/bottle
@@ -15,48 +14,48 @@
 	flags = 0
 	volume = 60
 
-	on_reagent_change()
-		update_icon()
-
-	pickup(mob/user)
-		..()
-		update_icon()
-
-	dropped(mob/user)
-		..()
-		update_icon()
-
-	attack_hand()
-		..()
-		update_icon()
-
-	New()
-		..()
-		if(!icon_state)
-			icon_state = "bottle-[rand(1,4)]"
-
+/obj/item/weapon/reagent_containers/glass/bottle/on_reagent_change()
 	update_icon()
-		overlays.Cut()
 
-		if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+/obj/item/weapon/reagent_containers/glass/bottle/pickup(mob/user)
+	..()
+	update_icon()
 
-			var/percent = round((reagents.total_volume / volume) * 100)
-			switch(percent)
-				if(0 to 9)		filling.icon_state = "[icon_state]--10"
-				if(10 to 24) 	filling.icon_state = "[icon_state]-10"
-				if(25 to 49)	filling.icon_state = "[icon_state]-25"
-				if(50 to 74)	filling.icon_state = "[icon_state]-50"
-				if(75 to 79)	filling.icon_state = "[icon_state]-75"
-				if(80 to 90)	filling.icon_state = "[icon_state]-80"
-				if(91 to INFINITY)	filling.icon_state = "[icon_state]-100"
+/obj/item/weapon/reagent_containers/glass/bottle/dropped(mob/user)
+	..()
+	update_icon()
 
-			filling.color = reagents.get_color()
-			overlays += filling
+/obj/item/weapon/reagent_containers/glass/bottle/attack_hand()
+	..()
+	update_icon()
 
-		if (!is_open_container())
-			var/image/lid = image(icon, src, "lid_bottle")
-			overlays += lid
+/obj/item/weapon/reagent_containers/glass/bottle/New()
+	..()
+	if(!icon_state)
+		icon_state = "bottle-[rand(1,4)]"
+
+/obj/item/weapon/reagent_containers/glass/bottle/update_icon()
+	overlays.Cut()
+
+	if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+
+		var/percent = round((reagents.total_volume / volume) * 100)
+		switch(percent)
+			if(0 to 9)		filling.icon_state = "[icon_state]--10"
+			if(10 to 24) 	filling.icon_state = "[icon_state]-10"
+			if(25 to 49)	filling.icon_state = "[icon_state]-25"
+			if(50 to 74)	filling.icon_state = "[icon_state]-50"
+			if(75 to 79)	filling.icon_state = "[icon_state]-75"
+			if(80 to 90)	filling.icon_state = "[icon_state]-80"
+			if(91 to INFINITY)	filling.icon_state = "[icon_state]-100"
+
+		filling.color = reagents.get_color()
+		overlays += filling
+
+	if (!is_open_container())
+		var/image/lid = image(icon, src, "lid_bottle")
+		overlays += lid
 
 
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
@@ -249,4 +248,37 @@
 /obj/item/weapon/reagent_containers/glass/bottle/frostoil/New()
 	..()
 	reagents.add_reagent("frostoil", 60)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/saline
+	name = "saline bottle"
+	desc = "A small bottle. Contains hemodextro saline."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/saline/New()
+	..()
+	reagents.add_reagent("saline", 60)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/metorapan
+	name = "metorapan bottle"
+	desc = "A small bottle. Contains metorapan."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/metorapan/New()
+	..()
+	reagents.add_reagent("metorapan", 60)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/kelotane
+	name = "kelotane bottle"
+	desc = "A small bottle. Contains kelotane."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/kelotane/New()
+	..()
+	reagents.add_reagent("kelotane", 60)
 	update_icon()

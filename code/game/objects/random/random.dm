@@ -133,15 +133,17 @@
 	icon_state = "traumakit"
 	item_to_spawn()
 		return pick(prob(21);/obj/random/medical/lite,\
+					prob(10);/obj/random/medical/adv,\
 					prob(2);/obj/item/bodybag,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,\
 					prob(2);/obj/item/weapon/reagent_containers/glass/bottle/antitoxin,\
+					prob(3);/obj/item/weapon/reagent_containers/glass/bottle/saline,\
 					prob(2);/obj/item/weapon/storage/pill_bottle,\
 					prob(1);/obj/item/weapon/storage/pill_bottle/tramadol,\
 					prob(2);/obj/item/weapon/storage/pill_bottle/citalopram,\
-					prob(1);/obj/item/weapon/storage/pill_bottle/dexalin_plus,\
-					prob(1);/obj/item/weapon/storage/pill_bottle/dermaline,\
-					prob(1);/obj/item/weapon/storage/pill_bottle/bicaridine,\
+					prob(1);/obj/item/weapon/storage/pill_bottle/chloromydride,\
+					prob(1);/obj/item/weapon/storage/pill_bottle/kelotane,\
+					prob(1);/obj/item/weapon/storage/pill_bottle/metorapan,\
 					prob(2);/obj/item/weapon/reagent_containers/syringe/antitoxin,\
 					prob(1);/obj/item/weapon/reagent_containers/syringe/antiviral,\
 					prob(2);/obj/item/weapon/reagent_containers/syringe/inaprovaline,\
@@ -162,8 +164,19 @@
 					prob(1);/obj/item/stack/medical/splint,\
 					prob(1);/obj/item/bodybag/cryobag,\
 					prob(3);/obj/item/weapon/reagent_containers/hypospray/autoinjector,\
-					prob(2);/obj/item/weapon/storage/pill_bottle/kelotane,\
-					prob(2);/obj/item/weapon/storage/pill_bottle/antitox)
+					prob(2);/obj/item/weapon/storage/pill_bottle/charcoal)
+
+/obj/random/medical/adv
+	name = "Random Advanced Medicine"
+	desc = "This is a random advanced medical item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "burnkit"
+	spawn_nothing_percentage = 50
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/storage/pill_bottle/antitox,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/bicaridine,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/dermaline,\
+					prob(1);/obj/item/weapon/storage/pill_bottle/dexalin)
 
 
 /obj/random/firstaid
@@ -172,13 +185,15 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "firstaid"
 	item_to_spawn()
-		return pick(prob(4);/obj/item/weapon/storage/firstaid/regular,\
-					prob(3);/obj/item/weapon/storage/firstaid/toxin,\
-					prob(3);/obj/item/weapon/storage/firstaid/o2,\
-					prob(2);/obj/item/weapon/storage/firstaid/adv,\
-					prob(1);/obj/item/weapon/storage/firstaid/combat,\
-					prob(2);/obj/item/weapon/storage/firstaid/empty,\
-					prob(3);/obj/item/weapon/storage/firstaid/fire)
+		return pick(prob(50);/obj/item/weapon/storage/firstaid/regular,\
+					prob(40);/obj/item/weapon/storage/firstaid/toxin,\
+					prob(30);/obj/item/weapon/storage/firstaid/radiation,\
+					prob(40);/obj/item/weapon/storage/firstaid/o2,\
+					prob(40);/obj/item/weapon/storage/firstaid/adv,\
+					prob(3);/obj/item/weapon/storage/firstaid/combat,\
+					prob(20);/obj/item/weapon/storage/firstaid,\
+					prob(20);/obj/item/weapon/storage/firstaid/personal,\
+					prob(40);/obj/item/weapon/storage/firstaid/fire)
 
 
 /obj/random/contraband

@@ -3,6 +3,7 @@ var/const/BLOOD_VOLUME_SAFE    = 85
 var/const/BLOOD_VOLUME_OKAY    = 75
 var/const/BLOOD_VOLUME_BAD     = 60
 var/const/BLOOD_VOLUME_SURVIVE = 40
+var/const/CE_STABLE_THRESHOLD = 0.5
 
 /obj/item/organ/internal/heart
 	name = "heart"
@@ -85,28 +86,34 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	var/blood_volume = get_effective_blood_volume()
 
 	//Effects of bloodloss
+	var/dmg_coef = 1
+	var/threshold_coef = 1
+	if(CE_STABLE in owner.chem_effects)
+		dmg_coef = min(1, 10/owner.chem_effects[CE_STABLE]) //TODO: add effect for increased damage
+		threshold_coef = min(dmg_coef / CE_STABLE_THRESHOLD, 1)
+
 	switch(blood_volume)
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			if(prob(1))
 				to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>")
-			if(owner.getOxyLoss() < 20)
-				owner.adjustOxyLoss(3)
+			if(owner.getOxyLoss() < 20 * threshold_coef)
+				owner.adjustOxyLoss(3 * dmg_coef)
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 			owner.eye_blurry = max(owner.eye_blurry,6)
-			if(owner.getOxyLoss() < 50)
-				owner.adjustOxyLoss(10)
-			owner.adjustOxyLoss(1)
+			if(owner.getOxyLoss() < 50 * threshold_coef)
+				owner.adjustOxyLoss(10 * dmg_coef)
+			owner.adjustOxyLoss(1 * dmg_coef)
 			if(prob(15))
 				owner.Paralyse(rand(1,3))
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			owner.adjustOxyLoss(5)
-			owner.adjustToxLoss(3)
+			owner.adjustOxyLoss(5 * dmg_coef)
+			owner.adjustToxLoss(3 * dmg_coef)
 			if(prob(15))
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
-			owner.adjustOxyLoss(10)
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth * threshold_coef))
+			owner.adjustOxyLoss(10 * dmg_coef)
 
 	//Blood regeneration if there is some space
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")

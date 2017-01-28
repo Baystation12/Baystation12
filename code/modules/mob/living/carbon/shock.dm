@@ -3,7 +3,7 @@
 
 // proc to find out in how much pain the mob is at the moment
 /mob/living/carbon/proc/updateshock()
-	if (!can_feel_pain())
+	if (!can_feel_pain() || CE_STIM in chem_effects)
 		src.traumatic_shock = 0
 		return 0
 
@@ -25,7 +25,7 @@
 
 /mob/living/carbon/human/updateshock()
 
-	if (!can_feel_pain())
+	if (!can_feel_pain() || CE_STIM in chem_effects)
 		traumatic_shock = 0
 		return 0
 

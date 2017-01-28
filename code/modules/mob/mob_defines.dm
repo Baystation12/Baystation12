@@ -133,7 +133,7 @@
 
 	var/update_icon = 1 //Set to 1 to trigger update_icons() at the next life() call
 
-	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
+	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH|CANSLOW	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
 
 	var/area/lastarea = null
 
@@ -158,6 +158,7 @@
 	var/stunned = 0
 	var/weakened = 0
 	var/drowsyness = 0.0//Carbon
+	var/slowed = 0
 
 	var/memory = ""
 	var/flavor_text = ""
