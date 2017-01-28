@@ -402,17 +402,9 @@
 	H.apply_damage(burn_damage_amt, BURN, BP_CHEST)
 
 	//set oxyloss so that the patient is just barely in crit, if possible
-	var/barely_in_crit = round((8*config.health_threshold_crit + config.health_threshold_dead)/9, 1)
+	var/barely_in_crit = config.health_threshold_crit - 1
 	var/adjust_health = barely_in_crit - H.health //need to increase health by this much
 	H.adjustOxyLoss(-adjust_health)
-
-	//if removing oxyloss wasn't enough, remove some toxloss too
-	if(H.health < barely_in_crit)
-		//but not so much that either toxloss goes below H.maxHealth/2, or that we cure more than 25% of their current toxloss
-		var/cure_limit = min(H.getToxLoss() - H.maxHealth/2, H.getToxLoss()*0.25)
-		cure_limit = max(cure_limit, 0)
-		adjust_health = Clamp(barely_in_crit - H.health, 0, cure_limit)
-		H.adjustToxLoss(-adjust_health)
 
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
