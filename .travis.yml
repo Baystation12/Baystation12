@@ -12,6 +12,7 @@ env:
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
   matrix:
     - MAP_PATH=example
+    - MAP_PATH=solaris
     - MAP_PATH=exodus
     - MAP_PATH=torch
     - MAP_PATH=overmap_example
@@ -27,10 +28,13 @@ addons:
       - libc6-i386
       - libgcc1:i386
       - libstdc++6:i386
+      - python3
 
 install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
   - npm install --no-spin -g gulp-cli
+  - pip3 install --user PyYaml -q
+  - pip3 install --user beautifulsoup4 -q
   - pip install --user PyYaml -q
   - pip install --user beautifulsoup4 -q
 
@@ -54,14 +58,16 @@ script:
   - (num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 12 or less)"; [ $num -le 12 ])
   - (num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting 8 or less)"; [ $num -le 8 ])
   - (num=`grep -E 'world<<|world[[:space:]]<<' **/*.dm | wc -l`; echo "$num world<< uses (expecting 5 or less)"; [ $num -le 5 ])
-  - (num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting 52 or less)"; [ $num -le 52 ])
+  - (num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting 53 or less)"; [ $num -le 53 ])
   - (num=`grep -P '(?<!<)<<(?!<)' **/*.dm | wc -l`; echo "$num << uses (expecting ${ANGLE_BRACKET_COUNT} or less)"; [ $num -le ${ANGLE_BRACKET_COUNT} ])
   - (num=`find ./html/changelogs -not -name "*.yml" | wc -l`; echo "$num non-yml files (expecting exactly 2)"; [ $num -eq 2 ])
   - awk -f tools/indentation.awk **/*.dm
   - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
-  - python tools/TagMatcher/tag-matcher.py .
-  - python tools/PunctuationChecker/punctuation-checker.py .
-  - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
+  - md5sum -c - <<< "83cd72d1ba0071f8e6519203e4d75193 *html/changelogs_solaris/example.yml"
+  - python3 tools/TagMatcher/tag-matcher.py .
+  - python3 tools/PunctuationChecker/punctuation-checker.py .
+  - python3 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
+  - python3 tools/GenerateChangelog/ss13_ru_genchangelog.py html/changelog_solaris.html html/changelogs_solaris
   - cd tgui && gulp
   - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup

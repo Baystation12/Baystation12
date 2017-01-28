@@ -1171,6 +1171,8 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
+		if("sol_changelog_hash")
+			return global.changelog_hash;
 		if("sounds_cache")
 			return global.sounds_cache;
 		if("spacevines_spawned")
@@ -1786,6 +1788,8 @@
 			global.cargo_supply_packs=newval;
 		if("changelog_hash")
 			global.changelog_hash=newval;
+		if("sol_changelog_hash")
+			global.sol_changelog_hash=newval;
 		if("channel_to_radio_key")
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
@@ -3490,6 +3494,7 @@
 	"slot_equipment_priority",
 	"slot_flags_enumeration",
 	"solar_gen_rate",
+	"sol_changelog_hash",
 	"solars_list",
 	"sounds_cache",
 	"spacevines_spawned",

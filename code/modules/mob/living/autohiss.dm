@@ -42,7 +42,8 @@
 
 /datum/species/unathi
 	autohiss_basic_map = list(
-			"s" = list("ss", "sss", "ssss")
+			"s" = list("ss", "sss", "ssss"),
+			"ñ" = list("ññ", "ñññ", "ññññ")
 		)
 	autohiss_extra_map = list(
 			"x" = list("ks", "kss", "ksss")
@@ -51,10 +52,11 @@
 
 /datum/species/tajaran
 	autohiss_basic_map = list(
-			"r" = list("rr", "rrr", "rrrr")
+			"r" = list("rr", "rrr", "rrrr"),
+			"ð" = list("ðð", "ððð", "ðððð")
 		)
 	autohiss_exempt = list(LANGUAGE_SIIK_MAAS)
-	
+
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
 	if(!autohiss_basic_map)

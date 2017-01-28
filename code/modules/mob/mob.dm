@@ -361,7 +361,7 @@
 */
 
 /client/verb/changes()
-	set name = "Changelog"
+	set name = "Baystation 12 Changelog"
 	set category = "OOC"
 	getFiles(
 		'html/88x31.png',
@@ -388,6 +388,35 @@
 		prefs.lastchangelog = changelog_hash
 		prefs.save_preferences()
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
+
+/client/verb/changes_solaris()
+	set name = "Solaris 13 Changelog"
+	set category = "OOC"
+	getFiles(
+		'html/88x31.png',
+		'html/bug-minus.png',
+		'html/cross-circle.png',
+		'html/hard-hat-exclamation.png',
+		'html/image-minus.png',
+		'html/image-plus.png',
+		'html/map-pencil.png',
+		'html/music-minus.png',
+		'html/music-plus.png',
+		'html/tick-circle.png',
+		'html/wrench-screwdriver.png',
+		'html/spell-check.png',
+		'html/burn-exclamation.png',
+		'html/chevron.png',
+		'html/chevron-expand.png',
+		'html/changelog.css',
+		'html/changelog.js',
+		'html/changelog.html'
+		)
+	src << browse('html/changelog_solaris.html', "window=changes;size=675x650")
+	if(prefs.lastsolchangelog != sol_changelog_hash)
+		prefs.lastsolchangelog = sol_changelog_hash
+		prefs.save_preferences()
+		winset(src, "rpane.changelog_solaris", "background-color=none;font-style=;")
 
 /mob/new_player/verb/observe()
 	set name = "Observe"
@@ -899,7 +928,7 @@ mob/proc/yank_out_object()
 
 		affected.implants -= selection
 		H.shock_stage+=20
-		affected.take_damage((selection.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
+		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
 
 		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))

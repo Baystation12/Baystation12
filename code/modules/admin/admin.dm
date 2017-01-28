@@ -56,6 +56,8 @@ var/global/floorIsLava = 0
 		<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a> -
 		<a href='?src=\ref[src];subtlemessage=\ref[M]'>SM</a> -
 		[admin_jump_link(M, src)]\] <br>
+		<b>Last known IP:</b> [M.lastKnownIP]<br>
+		<b>Country:</b> [geoip_country(M.lastKnownIP)]<br>
 		<b>Mob type:</b> [M.type]<br>
 		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
@@ -182,6 +184,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];tdome2=\ref[M]'>Thunderdome 2</A> |
 			<A href='?src=\ref[src];tdomeadmin=\ref[M]'>Thunderdome Admin</A> |
 			<A href='?src=\ref[src];tdomeobserve=\ref[M]'>Thunderdome Observer</A> |
+			<A href='?src=\ref[src];sendbacktolobby=\ref[M]'>Send back to Lobby</A> |
 		"}
 	// language toggles
 	body += "<br><br><b>Languages:</b><br>"

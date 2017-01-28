@@ -61,6 +61,17 @@
 		)
 	siemens_coefficient = 0.8
 
+/obj/item/clothing/head/wizard/druid
+	name = "crown of Yggdrasil"
+	desc = "Crown created by interlacement of branches and roots of ancient black timber instructed by silver branches."
+	icon_state = "druid"
+	item_state = "druid"
+	item_state_slots = list(
+		slot_l_hand_str = "det_hat",
+		slot_r_hand_str = "det_hat",
+		)
+	siemens_coefficient = 0.8
+
 /obj/item/clothing/suit/wizrobe
 	name = "wizard robe"
 	desc = "A magnificant, gem-lined robe that seems to radiate power."
@@ -78,6 +89,12 @@
 	desc = "A magnificant, red, gem-lined robe that seems to radiate power."
 	icon_state = "redwizard"
 	item_state = "redwizrobe"
+
+/obj/item/clothing/suit/wizrobe/druid
+	name = "druid robe"
+	desc = "A robe made of raw hide that seems to radiate malevolent nature power."
+	icon_state = "druid"
+	item_state = "druid"
 
 
 /obj/item/clothing/suit/wizrobe/marisa

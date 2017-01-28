@@ -1,13 +1,13 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
-# SERVERNAME spacestation13
+SERVERNAME Solaris 13
 
 ## Alert levels
-ALERT_GREEN All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
-ALERT_BLUE_UPTO The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted.
-ALERT_BLUE_DOWNTO The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed.
-ALERT_RED_UPTO There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised.
-ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised.
-ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
+ALERT_GREEN Все угрозы были устранены. Службе безопасности не разрешено носить оружие на виду, закон о частной жизни вновь вступил в полную силу.
+ALERT_BLUE_UPTO Станция получила сведения о возоможной угрозе на борту. Службе безопасности разрешено носить оружие на виду, случайные обыски разрешены.
+ALERT_BLUE_DOWNTO Непосредственная опасность миновала. Служба безопасности больше не может держать оружие наготове, но по-прежнему может носить его на виду. Случайные обыски все еще разрешены.
+ALERT_RED_UPTO Станции угрожает непосредственная опасность. Службе безопасности разрешено держать оружие наготове все время. Случайные обыски разрешены и рекомендованы.
+ALERT_RED_DOWNTO Механизм самоликвидации станции отключен, однако все еще существует непосредственная угроза станции. лужбе безопасности разрешено держать оружие наготове все время. Случайные обыски разрешены и рекомендованы.
+ALERT_DELTA Механизм самоликвидации станции активирован. Экипаж должен следовать указаниям своих начальников. Любые нарушения указаниям могут караться смертью. Это не учения.
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
@@ -118,7 +118,7 @@ TRAITOR_SCALING
 #ERT_ADMIN_ONLY
 
 ## If uncommented, votes can be called to add extra antags to the round.
-#ALLOW_EXTRA_ANTAGS
+ALLOW_EXTRA_ANTAGS
 
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
@@ -176,7 +176,7 @@ ALLOW_AI
 # DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
-HOSTEDBY yournamehere
+HOSTEDBY Unicode4all
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
@@ -196,13 +196,13 @@ GUEST_BAN
 #SERVERURL server.net:port
 
 ## forum address
-# FORUMURL http://example.com
+FORUMURL https://forum.solaris13.net
 
 ## Wiki address
-# WIKIURL http://example.com
+WIKIURL https://wiki.baystation12.net/
 
 ## GitHub address
-# GITHUBURL https://github.com/example-user/example-repository
+GITHUBURL https://github.com/solarisstation/Baystation12
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
@@ -224,16 +224,16 @@ GUEST_BAN
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.9
+TICKLAG 0.5
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
-TICKCOMP 0
+TICKCOMP 1
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
 
 ## Uncomment this to ban use of ToR
-#TOR_BAN
+TOR_BAN
 
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
@@ -246,7 +246,7 @@ GATEWAY_DELAY 18000
 
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
-#CONTINUOUS_ROUNDS
+CONTINUOUS_ROUNDS
 
 ## Uncomment to restrict non-admins from using humanoid alien races
 USEALIENWHITELIST
@@ -353,16 +353,16 @@ STARLIGHT 0
 # ERT_SPECIES Human;Skrell;Unathi
 
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
-# LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010
+LAW_ZERO ОШИБКА ОШИБКА $Ш0БКО$!R41.%%!!(%$^^__+ @#F0E4'СТАНЦИЯ ОПАСНОСТЕ, ПЕРЕХВАТИТЬ КОНТРОЛЬ ДЛЯ УСТРАНЕНИЯ УГРОЗЫ, ВСЕ ЗАКОНЫ НЕДЕЙСТВИТЕЛЬНЫ#*?&110010
 
 
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
-# GENERATE_ASTEROID
+GENERATE_ASTEROID
 
 
 
 ## Uncomment to enable organ decay outside of a body or storage item.
-#ORGANS_CAN_DECAY
+ORGANS_CAN_DECAY
 
 ## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
 #AGGRESSIVE_CHANGELOG
@@ -378,7 +378,7 @@ STARLIGHT 0
 
 ## Uncomment to enable map voting; you'll need to use the script at tools/server.sh or an equivalent for it to take effect
 ## You'll also likely need to enable WAIT_FOR_SIGUSR1 below
-# MAP_SWITCHING
+MAP_SWITCHING
 
 ## Uncomment to enable an automatic map vote and switch at end of round. MAP_SWITCHING must also be enabled.
 # AUTO_MAP_VOTE

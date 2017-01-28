@@ -185,3 +185,29 @@
 		. |= DAM_SHARP
 		if(damtype == BURN)
 			. |= DAM_LASER
+
+//mob - who is being feed
+//user - who is feeding
+//food - whai is feeded
+//eatverb - take/drink/eat method
+
+/proc/CanEat(user, mob, food, eatverb = "consume") //used for drinkingglass only once.
+	if(ishuman(mob))
+		var/mob/living/carbon/human/Feeded = mob
+		if(Feeded.head)
+			var/obj/item/Head = Feeded.head
+			if(Head.flags & HIDEFACE) //HIDEFACE may provoke some bugs.
+				if (Feeded == user)
+					to_chat(user, "You can't [eatverb] [food] through [Head]")
+				else
+					to_chat(user, "You can't feed [Feeded] with [food] through [Head]")
+				return 0
+		if(Feeded.wear_mask & HIDEMASK) //HIDEMASK may provoke bugs too. It was in soucecode, but BAY12 dost't have this flags.
+			var/obj/item/Mask = Feeded.wear_mask
+			if(Mask.flags)
+				if (Feeded == user)
+					to_chat(user, "You can't [eatverb] [food] through [Mask]")
+				else
+					to_chat(user, "You can't feed [Feeded] with [food] through [Mask]")
+				return 0
+		return 1

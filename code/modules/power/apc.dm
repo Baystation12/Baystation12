@@ -187,6 +187,8 @@
 		stat |= MAINT
 		src.update_icon()
 
+	name = replacetextEx(name, "\improper", "")
+
 	..()
 
 /obj/machinery/power/apc/initialize()

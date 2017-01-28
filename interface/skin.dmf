@@ -2122,7 +2122,7 @@ window "rpane"
 	elem "rpane"
 		type = MAIN
 		pos = 281,0
-		size = 640x480
+		size = 895x480
 		anchor1 = none
 		anchor2 = none
 		font-family = ""
@@ -2160,8 +2160,8 @@ window "rpane"
 		on-close = ""
 	elem "rpanewindow"
 		type = CHILD
-		pos = 0,0
-		size = 640x499
+		pos = 1,-3
+		size = 895x499
 		anchor1 = 0,0
 		anchor2 = 100,100
 		font-family = ""
@@ -2184,6 +2184,34 @@ window "rpane"
 		splitter = 50
 		show-splitter = true
 		lock = none
+	elem "changelog_solaris"
+		type = BUTTON
+		pos = 528,0
+		size = 155x16
+		anchor1 = none
+		anchor2 = none
+		font-family = ""
+		font-size = 0
+		font-style = ""
+		text-color = #000000
+		background-color = none
+		is-visible = true
+		is-disabled = false
+		is-transparent = false
+		is-default = false
+		border = line
+		drop-zone = false
+		right-click = false
+		saved-params = "is-checked"
+		on-size = ""
+		text = "Solaris 13 Changelog "
+		image = ""
+		command = "Solaris-13-Changelog "
+		is-flat = false
+		stretch = false
+		is-checked = false
+		group = "rpanemode"
+		button-type = pushbutton
 	elem "rulesb"
 		type = BUTTON
 		pos = 278,0
@@ -2214,8 +2242,8 @@ window "rpane"
 		button-type = pushbutton
 	elem "changelog"
 		type = BUTTON
-		pos = 341,0
-		size = 67x16
+		pos = 371,0
+		size = 152x16
 		anchor1 = none
 		anchor2 = none
 		font-family = ""
@@ -2232,9 +2260,9 @@ window "rpane"
 		right-click = false
 		saved-params = "is-checked"
 		on-size = ""
-		text = "Changelog"
+		text = "Baystation 12 Changelog"
 		image = ""
-		command = "Changelog"
+		command = "Baystation-12-Changelog"
 		is-flat = false
 		stretch = false
 		is-checked = false
@@ -2326,7 +2354,7 @@ window "rpane"
 		button-type = pushbox
 	elem "browseb"
 		type = BUTTON
-		pos = 464,0
+		pos = 712,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none

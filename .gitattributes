@@ -8,6 +8,7 @@
 
 # force changelog merging to use union
 html/changelog.html merge=union
+html/changelog_solaris.html merge=union
 
 # Declare files that will always have CRLF line endings on checkout.
 *.dm text eol=crlf
