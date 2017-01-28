@@ -522,6 +522,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Torch")
 	uniform = /obj/item/clothing/under/rank/janitor
 	shoes = /obj/item/clothing/shoes/black
+	head = null
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
 	pda_type = /obj/item/device/pda/janitor
 
@@ -549,6 +550,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Cook - Torch")
 	uniform = /obj/item/clothing/under/rank/chef
 	shoes = /obj/item/clothing/shoes/black
+	head = null
 	id_type = /obj/item/weapon/card/id/torch/crew/service/chef
 	pda_type = /obj/item/device/pda/chef
 
