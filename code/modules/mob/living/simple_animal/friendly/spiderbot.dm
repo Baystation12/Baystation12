@@ -43,8 +43,8 @@
 
 /mob/living/simple_animal/spiderbot/New()
 	..()
-	add_language("Galactic Common")
-	default_language = all_languages["Galactic Common"]
+	add_language(LANGUAGE_GALCOM)
+	default_language = all_languages[LANGUAGE_GALCOM]
 	verbs |= /mob/living/proc/ventcrawl
 	verbs |= /mob/living/proc/hide
 
@@ -273,7 +273,7 @@
 	return 0
 
 /mob/living/simple_animal/spiderbot/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(src.held_item)
 		to_chat(user, "It is carrying \icon[src.held_item] \a [src.held_item].")
 /mob/living/simple_animal/spiderbot/binarycheck()

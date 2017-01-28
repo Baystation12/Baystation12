@@ -83,7 +83,7 @@
 
 
 
-// Handles all necessary power checks: Area power, Intellicard and Malf AI APU power and manual override.
+// Handles all necessary power checks: Area power, inteliCard and Malf AI APU power and manual override.
 /mob/living/silicon/ai/proc/has_power(var/respect_override = 1)
 	if(psupply && psupply.powered())
 		return 1
@@ -210,7 +210,7 @@
 	use_power = get_power_state()
 
 /obj/machinery/ai_powersupply/proc/get_power_state()
-	// Dead, powered by APU, admin power, or inside an item (intellicard/IIS). No power usage.
+	// Dead, powered by APU, admin power, or inside an item (inteliCard/IIS). No power usage.
 	if(!powered_ai.stat == DEAD || powered_ai.APU_power || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item/))
 		return 0
 	// Normal power usage.

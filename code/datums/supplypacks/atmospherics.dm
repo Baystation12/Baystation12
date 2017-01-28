@@ -17,7 +17,8 @@
 					/obj/item/weapon/tank/emergency/oxygen/engi = 4,
 			 		/obj/item/clothing/suit/space/emergency = 4,
 					/obj/item/clothing/head/helmet/space/emergency = 4,
-					/obj/item/clothing/mask/gas = 4)
+					/obj/item/clothing/mask/gas = 4,
+					/obj/item/device/flashlight/glowstick = 5)
 	cost = 45
 
 	containername = "\improper Emergency crate"

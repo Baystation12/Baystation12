@@ -1,3 +1,6 @@
+/obj/machinery/camera/network/bridge
+	network = list(NETWORK_BRIDGE)
+
 /obj/machinery/camera/network/crescent
 	network = list(NETWORK_CRESCENT)
 
@@ -33,6 +36,9 @@
 
 /obj/machinery/camera/network/expedition
 	network = list(NETWORK_EXPEDITION)
+
+/obj/machinery/camera/network/fifth_deck
+	network = list(NETWORK_FIFTH_DECK)
 
 /obj/machinery/camera/network/first_deck
 	network = list(NETWORK_FIRST_DECK)

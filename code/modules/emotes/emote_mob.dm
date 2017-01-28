@@ -5,36 +5,35 @@
 	return (..() && !(silent && emote_type == AUDIBLE_MESSAGE))
 
 /mob/proc/emote(var/act, var/m_type, var/message)
-
-	if (client && (client.prefs.muted & MUTE_IC))
-		to_chat(src, "<span class='warning'>You cannot send IC messages (muted).</span>")
-		return
-
-	if(!can_emote(m_type))
-		to_chat(src, "<span class='warning'>You cannot currently [m_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
-		return
-
-	if(act == "help")
-		to_chat(src,"<b>Usable emotes:</b> [english_list(usable_emotes)]")
-		return
-
 	// s-s-snowflake
 	if(src.stat == DEAD && act != "deathgasp")
 		return
-
-	if(act == "me")
-		return custom_emote(m_type, message)
-
-	if(act == "custom")
-		if(!message)
-			message = sanitize(input("Enter an emote to display.") as text|null)
-		if(!message)
+	if(usr == src) //client-called emote
+		if (client && (client.prefs.muted & MUTE_IC))
+			to_chat(src, "<span class='warning'>You cannot send IC messages (muted).</span>")
 			return
-		if(alert(src, "Is this an audible emote?", "Emote", "Yes", "No") == "No")
-			m_type = VISIBLE_MESSAGE
-		else
-			m_type = AUDIBLE_MESSAGE
-		return custom_emote(m_type, message)
+
+		if(act == "help")
+			to_chat(src,"<b>Usable emotes:</b> [english_list(usable_emotes)]")
+			return
+
+		if(!can_emote(m_type))
+			to_chat(src, "<span class='warning'>You cannot currently [m_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
+			return
+
+		if(act == "me")
+			return custom_emote(m_type, message)
+
+		if(act == "custom")
+			if(!message)
+				message = sanitize(input("Enter an emote to display.") as text|null)
+			if(!message)
+				return
+			if(alert(src, "Is this an audible emote?", "Emote", "Yes", "No") == "No")
+				m_type = VISIBLE_MESSAGE
+			else
+				m_type = AUDIBLE_MESSAGE
+			return custom_emote(m_type, message)
 
 	var/splitpoint = findtext(act, " ")
 	if(splitpoint > 0)
@@ -47,7 +46,7 @@
 		to_chat(src, "<span class='warning'>Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes.</span>")
 		return
 
-	if(m_type != use_emote.message_type && !can_emote(use_emote.message_type))
+	if(m_type != use_emote.message_type && use_emote.conscious && stat != CONSCIOUS)
 		to_chat(src, "<span class='warning'>You cannot currently [use_emote.message_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
 		return
 
@@ -63,7 +62,7 @@
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
 
-	if(usr && stat || !use_me && usr == src)
+	if((usr && stat) || (!use_me && usr == src))
 		to_chat(src, "You are unable to emote.")
 		return
 

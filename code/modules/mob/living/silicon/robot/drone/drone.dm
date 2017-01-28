@@ -75,21 +75,9 @@ var/list/mob_hat_cache = list()
 
 	if(!(old_loc && new_loc)) // Allows inventive admins to move drones between non-adjacent Z-levels by moving them to null space first I suppose
 		return
-	var/z_diff = new_loc.z - old_loc.z
-	if(z_diff == 0)
+	if(AreConnectedZLevels(old_loc.z, new_loc.z))
 		return
-	else if(z_diff > 0)  // New is potentially above old
-		var/turf/above_turf = GetAbove(old_loc)
-		while(above_turf && above_turf.z < new_loc.z)
-			above_turf = GetAbove(above_turf)
-		if(above_turf == new_loc)
-			return
-	else if(z_diff < 0) // New is potentially below old
-		var/turf/below_turf = GetBelow(old_loc)
-		while(below_turf && below_turf.z > new_loc.z)
-			below_turf = GetBelow(below_turf)
-		if(below_turf == new_loc)
-			return
+
 	// None of the tests passed, good bye
 	self_destruct()
 
@@ -156,7 +144,7 @@ var/list/mob_hat_cache = list()
 	if(!laws) laws = new law_type
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -279,7 +267,7 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/updatehealth()
 	if(status_flags & GODMODE)
 		health = 35
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 		return
 	health = 35 - (getBruteLoss() + getFireLoss())
 	return

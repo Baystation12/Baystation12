@@ -124,6 +124,7 @@
 /obj/item/smallDelivery/attack_self(mob/user as mob)
 	if (src.wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
 		wrapped.forceMove(user.loc)
+		user.drop_item()
 		if(ishuman(user))
 			user.put_in_hands(wrapped)
 		else
@@ -221,6 +222,15 @@
 	w_class = ITEM_SIZE_NORMAL
 	var/amount = 25.0
 
+/obj/item/weapon/c_tube
+	name = "cardboard tube"
+	desc = "A tube... of cardboard."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "c_tube"
+	throwforce = 1
+	w_class = ITEM_SIZE_SMALL
+	throw_speed = 4
+	throw_range = 5
 
 /obj/item/weapon/packageWrap/afterattack(var/obj/target as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -449,7 +459,7 @@
 				C.ptype = 8 // 8 =  Delivery chute
 				C.update()
 				C.anchored = 1
-				C.density = 1
+				C.set_density(1)
 				qdel(src)
 			return
 		else

@@ -6,6 +6,7 @@
 
 /obj/item/device/analyzer/plant_analyzer
 	name = "plant analyzer"
+	desc = "A hand-held botanical scanner used to analyze plants."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"

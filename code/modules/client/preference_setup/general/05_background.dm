@@ -32,7 +32,7 @@
 
 /datum/category_item/player_setup_item/general/background/content(var/mob/user)
 	. += "<b>Background Information</b><br>"
-	. += "[company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[pref.nanotrasen_relation]</a><br/>"
+	. += "[using_map.company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[pref.nanotrasen_relation]</a><br/>"
 	. += "Home System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
 	. += "Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
 	. += "Faction: <a href='?src=\ref[src];faction=1'>[pref.faction]</a><br/>"

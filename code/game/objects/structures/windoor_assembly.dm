@@ -39,7 +39,7 @@ obj/structure/windoor_assembly/New(Loc, start_dir=NORTH, constructed=0)
 	update_nearby_tiles(need_rebuild=1)
 
 obj/structure/windoor_assembly/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	..()
 
@@ -209,7 +209,7 @@ obj/structure/windoor_assembly/Destroy()
 
 					if(!src) return
 
-					density = 1 //Shouldn't matter but just incase
+					set_density(1) //Shouldn't matter but just incase
 					to_chat(user, "<span class='notice'>You finish the windoor!</span>")
 
 					if(secure)
@@ -221,7 +221,7 @@ obj/structure/windoor_assembly/Destroy()
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
 						windoor.set_dir(src.dir)
-						windoor.density = 0
+						windoor.set_density(0)
 
 						if(src.electronics.one_access)
 							windoor.req_access = null
@@ -239,7 +239,7 @@ obj/structure/windoor_assembly/Destroy()
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
 						windoor.set_dir(src.dir)
-						windoor.density = 0
+						windoor.set_density(0)
 
 						if(src.electronics.one_access)
 							windoor.req_access = null

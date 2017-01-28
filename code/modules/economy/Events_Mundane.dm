@@ -22,7 +22,7 @@
 			if(RESEARCH_BREAKTHROUGH)
 				body = "A major breakthough in the field of [pick("phoron research","super-compressed materials","nano-augmentation","bluespace research","volatile power manipulation")] \
 				was announced [pick("yesterday","a few days ago","last week","earlier this month")] by a private firm on [affected_dest.name]. \
-				[company_name] declined to comment as to whether this could impinge on profits."
+				[using_map.company_name] declined to comment as to whether this could impinge on profits."
 
 			if(ELECTION)
 				body = "The pre-selection of an additional candidates was announced for the upcoming [pick("supervisors council","advisory board","governership","board of inquisitors")] \
@@ -32,7 +32,7 @@
 				"I will maintain my company's record profits","I believe in our future","We must return to our moral core","Just like... chill out dudes")]'."
 
 			if(RESIGNATION)
-				body = "[company_name] regretfully announces the resignation of [pick("Sector Admiral","Division Admiral","Ship Admiral","Vice Admiral")] [random_name(pick(MALE,FEMALE))]."
+				body = "[using_map.company_name] regretfully announces the resignation of [pick("Sector Admiral","Division Admiral","Ship Admiral","Vice Admiral")] [random_name(pick(MALE,FEMALE))]."
 				if(prob(25))
 					var/locstring = pick("Segunda","Salusa","Cepheus","Andromeda","Gruis","Corona","Aquila","Asellus") + " " + pick("I","II","III","IV","V","VI","VII","VIII")
 					body += " In a ceremony on [affected_dest.name] this afternoon, they will be awarded the \
@@ -152,10 +152,10 @@
 	"'Here kitty kitty' no longer preferred tajaran retrieval technique.",\
 	"Man travels 7000 light years to retrieve lost hankie, 'It was my favourite'.",\
 	"New bowling lane that shoots mini-meteors at bowlers very popular.",\
-	"[pick("Unathi","Spacer")] gets tattoo of Nyx on chest '[pick("[boss_short]","star","starship","asteroid")] tickles most'.",\
+	"[pick("Unathi","Spacer")] gets tattoo of Nyx on chest '[pick("[using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
 	"Skrell marries computer; wedding attended by 100 modems.",\
 	"Chef reports successfully using harmonica as cheese grater.",\
-	"[company_name] invents handkerchief that says 'Bless you' after sneeze.",\
+	"[using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
 	"Clone accused of posing for other clones’s school photo.",\
 	"Clone accused of stealing other clones’s employee of the month award.",\
 	"Woman robs station with hair dryer; crewmen love new style.",\

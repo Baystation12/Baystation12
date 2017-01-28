@@ -101,31 +101,34 @@
 /datum/gear/uniform/resomi/rainbow
 	display_name = "smock, rainbow (Resomi)"
 	path = /obj/item/clothing/under/resomi/rainbow
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/resomi/white
-	display_name = "smock, white (Resomi)"
+	display_name = "smock, colored (Resomi)"
 	path = /obj/item/clothing/under/resomi/white
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/resomi/eng
 	display_name = "uniform, Engineering (Resomi)"
 	path = /obj/item/clothing/under/resomi/yellow
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospherics Technician")
+	allowed_roles = list("Maintenance Assistant", "Roboticist", "Passenger", "Research Assistant", "Merchant")
 
 /datum/gear/uniform/resomi/sec
 	display_name = "uniform, Security (Resomi)"
 	path = /obj/item/clothing/under/resomi/red
-	allowed_roles = list("Security Officer","Head of Security","Warden","Detective")
+	allowed_roles = list("Security Guard", "Passenger", "Research Assistant", "Merchant")
 
 /datum/gear/uniform/resomi/med
 	display_name = "uniform, Medical (Resomi)"
 	path = /obj/item/clothing/under/resomi/medical
+	allowed_roles = list("Medical Assistant", "Virologist", "Chemist", "Counselor", "Passenger", "Research Assistant", "Merchant")
 
 /datum/gear/uniform/resomi/science
 	display_name = "uniform, Science (Resomi)"
 	path = /obj/item/clothing/under/resomi/science
 
 /datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona)"
+	display_name = "gear harness (Full Body Prosthetic, IPC, Diona)"
 	path = /obj/item/clothing/under/harness
 	sort_category = "Xenowear"
 
@@ -141,3 +144,7 @@
 	path = /obj/item/clothing/shoes/jackboots/unathi
 	sort_category = "Xenowear"
 
+/datum/gear/shoes/wrk_toeless
+	display_name = "toeless workboots"
+	path = /obj/item/clothing/shoes/workboots/toeless
+	sort_category = "Xenowear"

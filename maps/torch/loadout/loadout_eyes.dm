@@ -12,9 +12,7 @@
 /datum/gear/eyes/fashionglasses
 	display_name = "glasses"
 	path = /obj/item/clothing/glasses/gglasses
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/fashionglasses/New()
 	..()
@@ -28,33 +26,32 @@
 /datum/gear/eyes/sciencegoggles
 	display_name = "Science Goggles"
 	path = /obj/item/clothing/glasses/science
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"Passenger", "Roboticist", "Medical Assistant", "Virologist", "Chemist")
+	allowed_roles = RESEARCH_ROLES
 
 /datum/gear/eyes/security
 	display_name = "Security HUD"
 	path = /obj/item/clothing/glasses/hud/security
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/eyes/security/prescription
 	display_name = "Security HUD, prescription"
 	path = /obj/item/clothing/glasses/hud/security/prescription
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/eyes/secaviators
 	display_name = "Security HUD Aviators"
 	path = /obj/item/clothing/glasses/sunglasses/sechud/toggle
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/eyes/medical
 	display_name = "Medical HUD"
 	path = /obj/item/clothing/glasses/hud/health
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/eyes/medical/prescription
 	display_name = "Medical HUD, prescription"
 	path = /obj/item/clothing/glasses/hud/health/prescription
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/eyes/meson
 	display_name = "Meson Goggles"
@@ -80,9 +77,7 @@
 	display_name = "sunglasses, fat"
 	path = /obj/item/clothing/glasses/sunglasses/big
 	cost = 3
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/shades/prescriptionsun
 	display_name = "sunglasses, presciption"

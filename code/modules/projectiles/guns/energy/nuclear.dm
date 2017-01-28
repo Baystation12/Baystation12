@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
-	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words: Stun or Kill."
+	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 10
@@ -12,6 +12,7 @@
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
 
@@ -31,46 +32,56 @@
 	self_recharge = 1
 	modifystate = null
 	requires_two_hands = 1 //bulkier than an e-gun, but not quite the size of a carbine
-	
+
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam),
 		)
-	
-	var/lightfail = 0
+
+	var/fail_counter = 0
 
 //override for failcheck behaviour
 /obj/item/weapon/gun/energy/gun/nuclear/process()
-	charge_tick++
-	if(charge_tick < 4) return 0
-	charge_tick = 0
-	if(!power_supply) return 0
-	if(power_supply.percent() < 100)
-		power_supply.give(charge_cost)
-		update_icon()
-	return 1
+	if(fail_counter > 0)
+		radiation_repository.radiate(src, fail_counter--)
 
-/obj/item/weapon/gun/energy/gun/nuclear/proc/update_charge()
+	return ..()
+
+/obj/item/weapon/gun/energy/gun/nuclear/emp_act(severity)
+	..()
+	switch(severity)
+		if(1)
+			fail_counter = max(fail_counter, 30)
+			visible_message("\The [src]'s reactor overloads!")
+		if(2)
+			fail_counter = max(fail_counter, 10)
+			if(ismob(loc))
+				to_chat(loc, "<span class='warning'>\The [src] feels pleasantly warm.</span>")
+
+/obj/item/weapon/gun/energy/gun/nuclear/proc/get_charge_overlay()
 	var/ratio = power_supply.percent()
 	ratio = round(ratio, 25)
-	overlays += "nucgun-[ratio]"
+	return "nucgun-[ratio]"
 
-/obj/item/weapon/gun/energy/gun/nuclear/proc/update_reactor()
-	if(lightfail)
-		overlays += "nucgun-medium"
-	else if (power_supply.percent() <= 50)
-		overlays += "nucgun-light"
-	else
-		overlays += "nucgun-clean"
+/obj/item/weapon/gun/energy/gun/nuclear/proc/get_reactor_overlay()
+	if(fail_counter)
+		return "nucgun-medium"
+	if (power_supply.percent() <= 50)
+		return "nucgun-light"
+	return "nucgun-clean"
 
-/obj/item/weapon/gun/energy/gun/nuclear/proc/update_mode()
+/obj/item/weapon/gun/energy/gun/nuclear/proc/get_mode_overlay()
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	switch(current_mode.name)
-		if("stun") overlays += "nucgun-stun"
-		if("lethal") overlays += "nucgun-kill"
+		if("stun") return "nucgun-stun"
+		if("lethal") return "nucgun-kill"
 
 /obj/item/weapon/gun/energy/gun/nuclear/update_icon()
-	overlays.Cut()
-	update_charge()
-	update_reactor()
-	update_mode()
+	var/list/new_overlays = list()
+
+	new_overlays += get_charge_overlay()
+	new_overlays += get_reactor_overlay()
+	new_overlays += get_mode_overlay()
+
+	overlays = new_overlays

@@ -208,7 +208,7 @@
 	icon_state = "crossbowframe[buildstate]"
 
 /obj/item/weapon/crossbowframe/examine(mob/user)
-	..(user)
+	. = ..(user)
 	switch(buildstate)
 		if(1) to_chat(user, "It has a loose rod frame in place.")
 		if(2) to_chat(user, "It has a steel backbone welded in place.")

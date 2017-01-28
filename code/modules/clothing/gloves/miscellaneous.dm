@@ -12,7 +12,7 @@
 	siemens_coefficient = 1.0
 
 /obj/item/clothing/gloves/insulated
-	desc = "These gloves will protect the wearer from electric shock."
+	desc = "These gloves will protect the wearer from electric shocks."
 	name = "insulated gloves"
 	color = COLOR_YELLOW
 	icon_state = "white"
@@ -61,7 +61,7 @@
 	name = "\improper SWAT Gloves"
 	item_state = "swat_gl"
 	force = 5
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 
 /obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
@@ -71,7 +71,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	force = 5
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
@@ -91,6 +91,12 @@
 	siemens_coefficient = 1.1 //thin latex gloves, much more conductive than fabric gloves (basically a capacitor for AC)
 	permeability_coefficient = 0.01
 	germ_level = 0
+
+/obj/item/clothing/gloves/latex/nitrile
+	name = "nitrile gloves"
+	desc = "Sterile nitrile gloves"
+	icon_state = "nitrile"
+	item_state = "ngloves"
 
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."

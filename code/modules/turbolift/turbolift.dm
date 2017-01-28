@@ -8,6 +8,7 @@
 	var/move_delay = 30                                 // Time between floor changes.
 	var/floor_wait_delay = 85                           // Time to wait at floor stops.
 	var/obj/structure/lift/panel/control_panel_interior // Lift control panel.
+	var/doors_closing = 0								// Whether doors are in the process of closing
 
 	var/tmp/moving_upwards
 	var/tmp/busy
@@ -25,14 +26,12 @@
 
 /datum/turbolift/proc/open_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.open()
+		door.command("open")
 	return
 
 /datum/turbolift/proc/close_doors(var/datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		spawn(0)
-			door.close()
+		door.command("close")
 	return
 
 /datum/turbolift/proc/do_move()
@@ -50,16 +49,25 @@
 			moving_upwards = 0
 
 	if(doors_are_open())
-		close_doors()
-		return 1
+		if(!doors_closing)
+			close_doors()
+			doors_closing = 1
+			return 1
+		else // We failed to close the doors - probably, someone is blocking them; stop trying to move
+			doors_closing = 0
+			open_doors()
+			control_panel_interior.audible_message("\The [current_floor.ext_panel] buzzes loudly.")
+			playsound(control_panel_interior.loc, "sound/machines/buzz-two.ogg", 50, 1)
+			return 0
 
-	var/area/shuttle/turbolift/origin = locate(current_floor.area_ref)
+	doors_closing = 0 // The doors weren't open, so they are done closing
+
+	var/area/turbolift/origin = locate(current_floor.area_ref)
 
 	if(target_floor == current_floor)
 
 		playsound(control_panel_interior.loc, origin.arrival_sound, 50, 1)
-		open_doors(target_floor)
-		target_floor.ext_panel.reset()
+		target_floor.arrived(src)
 		target_floor = null
 
 		sleep(15)
@@ -75,7 +83,7 @@
 	else
 		next_floor = floors[current_floor_index-1]
 
-	var/area/shuttle/turbolift/destination = locate(next_floor.area_ref)
+	var/area/turbolift/destination = locate(next_floor.area_ref)
 
 	if(!istype(origin) || !istype(destination) || (origin == destination))
 		return 0
@@ -101,7 +109,7 @@
 /datum/turbolift/proc/queue_move_to(var/datum/turbolift_floor/floor)
 	if(!floor || !(floor in floors) || (floor in queued_floors))
 		return // STOP PRESSING THE BUTTON.
-	floor.ext_panel.light_up()
+	floor.pending_move(src)
 	queued_floors |= floor
 	turbolift_controller.lift_is_moving(src)
 

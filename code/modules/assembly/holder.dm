@@ -85,7 +85,7 @@
 */
 
 	examine(mob/user)
-		..(user)
+		. = ..(user)
 		if ((in_range(src, user) || src.loc == user))
 			if (src.secured)
 				to_chat(user, "\The [src] is ready!")
@@ -218,7 +218,7 @@
 /obj/item/device/assembly_holder/Destroy()
 	listening_objects -= src
 	return ..()
-	
+
 
 /obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
 	if(a_right)

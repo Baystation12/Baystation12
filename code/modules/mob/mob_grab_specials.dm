@@ -20,7 +20,7 @@
 		to_chat(user, "<span class='notice'>You must stand still to feel [E] for fractures.</span>")
 	else if(E.status & ORGAN_BROKEN)
 		to_chat(user, "<span class='warning'>The [E.encased ? E.encased : "bone in the [E.name]"] moves slightly when you poke it!</span>")
-		H.custom_pain("Your [E.name] hurts where it's poked.",40)
+		H.custom_pain("Your [E.name] hurts where it's poked.",40, affecting = E)
 	else
 		to_chat(user, "<span class='notice'>The [E.encased ? E.encased : "bones in the [E.name]"] seem to be fine.</span>")
 
@@ -60,7 +60,7 @@
 		to_chat(target, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(target.species.total_health * 0.8) //up to 80% of passing out
-		affecting.adjustHalLoss(Clamp(0, max_halloss - affecting.halloss, 30))
+		affecting.adjustHalLoss(Clamp(0, max_halloss - affecting.getHalLoss(), 30))
 
 /obj/item/weapon/grab/proc/attack_eye(mob/living/carbon/human/target, mob/living/carbon/human/attacker)
 	if(!istype(attacker))
@@ -93,18 +93,18 @@
 
 	var/damage = 20
 	var/obj/item/clothing/hat = attacker.head
-	var/is_sharp = 0
+	var/damage_flags = 0
 	if(istype(hat))
 		damage += hat.force * 3
-		is_sharp = hat.sharp
+		damage_flags = hat.damage_flags()
 
-	if(is_sharp)
+	if(damage_flags & DAM_SHARP)
 		attacker.visible_message("<span class='danger'>[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!</span>")
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
 	var/armor = target.run_armor_check(BP_HEAD, "melee")
-	target.apply_damage(damage, BRUTE, BP_HEAD, armor, sharp=is_sharp)
+	target.apply_damage(damage, BRUTE, BP_HEAD, armor, damage_flags)
 	attacker.apply_damage(10, BRUTE, BP_HEAD, attacker.run_armor_check(BP_HEAD, "melee"))
 
 	if(armor < 50 && target.headcheck(BP_HEAD) && prob(damage))

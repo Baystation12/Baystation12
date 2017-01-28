@@ -24,7 +24,7 @@
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
-	
+
 /obj/item/weapon/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
 		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
@@ -306,3 +306,51 @@
 	name = "emergency response team medical backpack"
 	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
 	icon_state = "ert_medical"
+
+/*
+ * Messenger Bags
+ */
+
+/obj/item/weapon/storage/backpack/messenger
+	name = "messenger bag"
+	desc = "A sturdy backpack worn over one shoulder."
+	icon_state = "courierbag"
+
+/obj/item/weapon/storage/backpack/messenger/chem
+	name = "chemistry messenger bag"
+	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
+	icon_state = "courierbagchem"
+
+/obj/item/weapon/storage/backpack/messenger/med
+	name = "medical messenger bag"
+	desc = "A sterile backpack worn over one shoulder used in medical departments."
+	icon_state = "courierbagmed"
+
+/obj/item/weapon/storage/backpack/messenger/viro
+	name = "virology messenger bag"
+	desc = "A sterile backpack worn over one shoulder.  This one is in Virology colors."
+	icon_state = "courierbagviro"
+
+/obj/item/weapon/storage/backpack/messenger/tox
+	name = "research messenger bag"
+	desc = "A backpack worn over one shoulder.  Useful for holding science materials."
+	icon_state = "courierbagtox"
+
+/obj/item/weapon/storage/backpack/messenger/com
+	name = "captain's messenger bag"
+	desc = "A special backpack worn over one shoulder.  This one is made specifically for officers."
+	icon_state = "courierbagcom"
+
+/obj/item/weapon/storage/backpack/messenger/engi
+	name = "engineering messenger bag"
+	icon_state = "courierbagengi"
+
+/obj/item/weapon/storage/backpack/messenger/hyd
+	name = "hydroponics messenger bag"
+	desc = "A backpack worn over one shoulder.  This one is designed for plant-related work."
+	icon_state = "courierbaghyd"
+
+/obj/item/weapon/storage/backpack/messenger/sec
+	name = "security messenger bag"
+	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
+	icon_state = "courierbagsec"

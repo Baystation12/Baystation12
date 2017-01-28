@@ -11,7 +11,7 @@
 
 	req_access = list(access_cent_specops)
 
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 100)
+	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 100)
 	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs, /obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \
 	/obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/device/multitool, \
 	/obj/item/device/radio, /obj/item/device/analyzer,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
@@ -43,8 +43,9 @@
 	desc = "A hardsuit used by many corporate and private asset protection forces. Has orange highlights. Armoured and space ready."
 	suit_type = "Asset Protection engineer"
 	icon_state = "ert_engineer_rig"
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 100)
-	siemens_coefficient = 0
+	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 100)
+
+	glove_type = /obj/item/clothing/gloves/rig/ert/engineer
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -52,6 +53,9 @@
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/device/rcd
 		)
+
+/obj/item/clothing/gloves/rig/ert/engineer
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ert/janitor
 	name = "asset protection sanitation hardsuit control module"
@@ -63,6 +67,9 @@
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/fabricator/wf_sign,
+		/obj/item/rig_module/grenade_launcher/cleaner,
+		/obj/item/rig_module/device/decompiler
 		)
 
 /obj/item/weapon/rig/ert/medical
@@ -98,6 +105,8 @@
 	icon_state = "asset_protection_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
 
+	glove_type = /obj/item/clothing/gloves/rig/ert/assetprotection
+
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
@@ -109,3 +118,6 @@
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/datajack
 		)
+
+/obj/item/clothing/gloves/rig/ert/assetprotection
+	siemens_coefficient = 0

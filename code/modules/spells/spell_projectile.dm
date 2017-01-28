@@ -30,7 +30,7 @@
 		trails += trail
 		trail.icon = proj_trail_icon
 		trail.icon_state = proj_trail_icon_state
-		trail.density = 0
+		trail.set_density(0)
 		spawn(proj_trail_lifespan)
 			trails -= trail
 			qdel(trail)

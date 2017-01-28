@@ -15,7 +15,7 @@
 	name = "armor"
 	desc = "An armored vest that protects against some damage."
 	icon_state = "armor"
-	item_state = "armor"
+	//item_state = "armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	cold_protection = UPPER_TORSO|LOWER_TORSO
@@ -26,13 +26,13 @@
 	name = "security armor"
 	desc = "An armored vest that protects against some damage. This one has a corporate badge."
 	icon_state = "armorsec"
-	item_state = "armor"
+	//item_state = "armor"
 
 /obj/item/clothing/suit/armor/vest/warden
 	name = "warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_jacket"
-	item_state = "armor"
+	//item_state = "armor"
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -43,10 +43,10 @@
 	name = "riot suit"
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
-	item_state = "swat_suit"
+	//item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 75, bullet = 25, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.5
 
 /obj/item/clothing/suit/armor/riot/New()
@@ -57,7 +57,7 @@
 	name = "stab vest"
 	desc = "An armored vest with heavy padding to protect against melee attacks."
 	icon_state = "riotvest"
-	item_state = "armor"
+	//item_state = "armor"
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -70,10 +70,10 @@
 	name = "ballistic suit"
 	desc = "A suit of armor with heavy plates to protect against ballistic projectiles. Looks like it might impair movement."
 	icon_state = "bulletproof"
-	item_state = "swat_suit"
+	//item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 25, bullet = 75, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/armor/bulletproof/New()
@@ -84,7 +84,7 @@
 	name = "ballistic vest"
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
 	icon_state = "bulletproofvest"
-	item_state = "armor"
+	//item_state = "armor"
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -97,10 +97,10 @@
 	name = "ablative suit"
 	desc = "A suit of armor with advanced shielding to protect against energy weapons. Looks like it might impair movement."
 	icon_state = "reflect"
-	item_state = "swat_suit"
+	//item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 25, bullet = 25, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/armor/laserproof/New()
@@ -111,7 +111,7 @@
 	name = "ablative vest"
 	desc = "A vest that excels in protecting the wearer against energy projectiles."
 	icon_state = "reflectvest"
-	item_state = "armor_reflec"
+	//item_state = "armor_reflec"
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -144,7 +144,7 @@
 	name = "officer jacket"
 	desc = "An armored jacket used in special operations."
 	icon_state = "detective"
-	item_state = "det_suit"
+	//item_state = "det_suit"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -155,7 +155,7 @@
 	name = "armor"
 	desc = "An armored vest with a detective's badge on it."
 	icon_state = "detective-armor"
-	item_state = "armor"
+	//item_state = "armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)

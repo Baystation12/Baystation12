@@ -37,6 +37,8 @@
 	var/active = 0
 
 	var/memory
+	var/list/known_connections //list of known (RNG) relations between people
+	var/gen_relations_info
 
 	var/assigned_role
 	var/special_role
@@ -63,6 +65,7 @@
 
 	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
 	var/ambitions
+
 
 /datum/mind/New(var/key)
 	src.key = key
@@ -497,6 +500,8 @@
 			world.log << "## DEBUG: mind_initialize(): No ticker ready yet! Please inform Carn"
 	if(!mind.name)	mind.name = real_name
 	mind.current = src
+	if(player_is_antag(mind))
+		src.client.verbs += /client/proc/aooc
 
 //HUMAN
 /mob/living/carbon/human/mind_initialize()

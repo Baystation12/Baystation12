@@ -1,5 +1,7 @@
 #define WORLD_ICON_SIZE 32
 
+/var/server_name = "Baystation 12"
+
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
@@ -76,6 +78,9 @@
 
 #define RECOMMENDED_VERSION 510
 /world/New()
+	//set window title
+	name = "[server_name] - [using_map.full_name]"
+
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")

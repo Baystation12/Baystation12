@@ -133,12 +133,11 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HEAD_LAYER				19
 #define COLLAR_LAYER			20
 #define HANDCUFF_LAYER			21
-#define LEGCUFF_LAYER			22
-#define L_HAND_LAYER			23
-#define R_HAND_LAYER			24
-#define FIRE_LAYER				25		//If you're on fire
-#define TARGETED_LAYER			26		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			26
+#define L_HAND_LAYER			22
+#define R_HAND_LAYER			23
+#define FIRE_LAYER				24		//If you're on fire
+#define TARGETED_LAYER			25		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			25
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -439,7 +438,6 @@ var/global/list/damage_icon_parts = list()
 	update_inv_r_hand(0)
 	update_inv_l_hand(0)
 	update_inv_handcuffed(0)
-	update_inv_legcuffed(0)
 	update_inv_pockets(0)
 	update_fire(0)
 	update_surgery(0)
@@ -606,14 +604,6 @@ var/global/list/damage_icon_parts = list()
 	else
 		overlays_standing[HANDCUFF_LAYER]	= null
 	if(update_icons)   update_icons()
-
-/mob/living/carbon/human/update_inv_legcuffed(var/update_icons=1)
-	if(legcuffed)
-		overlays_standing[LEGCUFF_LAYER]	= legcuffed.get_mob_overlay(src,slot_legcuffed_str)
-	else
-		overlays_standing[LEGCUFF_LAYER]	= null
-	if(update_icons)   update_icons()
-
 
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)

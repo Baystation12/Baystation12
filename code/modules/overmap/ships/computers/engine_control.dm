@@ -5,19 +5,11 @@
 	icon_keyboard = "tech_key"
 	icon_screen = "id"
 	var/state = "status"
-	var/list/engines = list()
-	var/list/zlevels = list()
 	var/obj/effect/overmap/ship/linked
 
 /obj/machinery/computer/engines/initialize()
 	..()
-	refresh_engines()
-
-/obj/machinery/computer/engines/proc/refresh_engines()
-	engines.Cut()
-	for(var/datum/ship_engine/E in ship_engines)
-		if (E.zlevel in zlevels)
-			engines |= E
+	linked = map_sectors["[z]"]
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
 	if(..())
@@ -31,13 +23,14 @@
 
 /obj/machinery/computer/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		to_chat(user, "<span class='warning'>Unable to connect to ship control systems.</span>")
 		return
 
 	var/data[0]
 	data["state"] = state
 
 	var/list/enginfo[0]
-	for(var/datum/ship_engine/E in engines)
+	for(var/datum/ship_engine/E in linked.engines)
 		var/list/rdata[0]
 		rdata["eng_type"] = E.name
 		rdata["eng_on"] = E.is_on()
@@ -68,31 +61,19 @@
 			var/datum/ship_engine/E = locate(href_list["engine"])
 			var/newlim = input("Input new thrust limit (0..100)", "Thrust limit", E.get_thrust_limit()) as num
 			var/limit = Clamp(newlim/100, 0, 1)
-			if(E)
+			if(istype(E))
 				E.set_thrust_limit(limit)
 
 		if(href_list["limit"])
 			var/datum/ship_engine/E = locate(href_list["engine"])
 			var/limit = Clamp(E.get_thrust_limit() + text2num(href_list["limit"]), 0, 1)
-			if(E)
+			if(istype(E))
 				E.set_thrust_limit(limit)
 
 		if(href_list["toggle"])
 			var/datum/ship_engine/E = locate(href_list["engine"])
-			if(E)
+			if(istype(E))
 				E.toggle()
 
 	add_fingerprint(usr)
 	updateUsrDialog()
-
-/obj/machinery/computer/engines/proc/burn()
-	if(engines.len == 0)
-		return 0
-	var/res = 0
-	for(var/datum/ship_engine/E in engines)
-		res |= E.burn()
-	return res
-
-/obj/machinery/computer/engines/proc/get_total_thrust()
-	for(var/datum/ship_engine/E in engines)
-		. += E.get_thrust()

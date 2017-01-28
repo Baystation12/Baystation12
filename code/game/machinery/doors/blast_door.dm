@@ -31,6 +31,7 @@
 	var/begins_closed = TRUE
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
+	var/material/implicit_material
 
 /obj/machinery/door/blast/initialize()
 	..()
@@ -39,9 +40,11 @@
 
 	if(!begins_closed)
 		icon_state = icon_state_open
-		density = 0
-		opacity = 0
+		set_density(0)
+		set_opacity(0)
 		layer = open_layer
+
+	implicit_material = get_material_by_name("plasteel")
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wifi_receiver)
@@ -65,6 +68,8 @@
 		icon_state = icon_state_closed
 	else
 		icon_state = icon_state_open
+	var/turf/T = get_turf(src)
+	T.calc_rad_resistance()
 	return
 
 // Proc: force_open()
@@ -73,7 +78,7 @@
 /obj/machinery/door/blast/proc/force_open()
 	src.operating = 1
 	flick(icon_state_opening, src)
-	src.density = 0
+	src.set_density(0)
 	update_nearby_tiles()
 	src.update_icon()
 	src.set_opacity(0)
@@ -88,7 +93,7 @@
 	src.operating = 1
 	src.layer = closed_layer
 	flick(icon_state_closing, src)
-	src.density = 1
+	src.set_density(1)
 	update_nearby_tiles()
 	src.update_icon()
 	src.set_opacity(1)
@@ -103,6 +108,9 @@
 		src.force_open()
 	else
 		src.force_close()
+
+/obj/machinery/door/blast/get_material()
+	return implicit_material
 
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)

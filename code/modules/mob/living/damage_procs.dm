@@ -8,7 +8,7 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/used_weapon = null, var/sharp = 0, var/edge = 0)
+/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/used_weapon = null)
 	if(!damage || (blocked >= 100))	return 0
 	switch(damagetype)
 		if(BRUTE)
@@ -22,21 +22,23 @@
 			adjustOxyLoss(damage * blocked_mult(blocked))
 		if(CLONE)
 			adjustCloneLoss(damage * blocked_mult(blocked))
-		if(HALLOSS)
+		if(PAIN)
 			adjustHalLoss(damage * blocked_mult(blocked))
+		if(ELECTROCUTE)
+			electrocute_act(damage, used_weapon, 1.0, def_zone)
 	flash_weak_pain()
 	updatehealth()
 	return 1
 
 
-/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/blocked = 0)
+/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/blocked = 0, var/damage_flags = 0)
 	if(blocked >= 100)	return 0
 	if(brute)	apply_damage(brute, BRUTE, def_zone, blocked)
 	if(burn)	apply_damage(burn, BURN, def_zone, blocked)
 	if(tox)		apply_damage(tox, TOX, def_zone, blocked)
 	if(oxy)		apply_damage(oxy, OXY, def_zone, blocked)
 	if(clone)	apply_damage(clone, CLONE, def_zone, blocked)
-	if(halloss) apply_damage(halloss, HALLOSS, def_zone, blocked)
+	if(halloss) apply_damage(halloss, PAIN, def_zone, blocked)
 	return 1
 
 
@@ -50,8 +52,8 @@
 			Weaken(effect * blocked_mult(blocked))
 		if(PARALYZE)
 			Paralyse(effect * blocked_mult(blocked))
-		if(AGONY)
-			halloss += effect * blocked_mult(blocked) // Useful for objects that cause "subdual" damage. PAIN!
+		if(PAIN)
+			adjustHalLoss(effect * blocked_mult(blocked))
 		if(IRRADIATE)
 			radiation += effect * blocked_mult(blocked)
 		if(STUTTER)
@@ -67,12 +69,12 @@
 
 /mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
 	if(blocked >= 2)	return 0
-	if(stun)		apply_effect(stun, STUN, blocked)
-	if(weaken)		apply_effect(weaken, WEAKEN, blocked)
-	if(paralyze)	apply_effect(paralyze, PARALYZE, blocked)
+	if(stun)		apply_effect(stun,      STUN, blocked)
+	if(weaken)		apply_effect(weaken,    WEAKEN, blocked)
+	if(paralyze)	apply_effect(paralyze,  PARALYZE, blocked)
 	if(irradiate)	apply_effect(irradiate, IRRADIATE, blocked)
-	if(stutter)		apply_effect(stutter, STUTTER, blocked)
-	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
-	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
-	if(agony)		apply_effect(agony, AGONY, blocked)
+	if(stutter)		apply_effect(stutter,   STUTTER, blocked)
+	if(eyeblur)		apply_effect(eyeblur,   EYE_BLUR, blocked)
+	if(drowsy)		apply_effect(drowsy,    DROWSY, blocked)
+	if(agony)		apply_effect(agony,     PAIN, blocked)
 	return 1

@@ -190,7 +190,7 @@
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"
-	desc = "A worn out, curiously comfortable t-shirt with a picture of Ian. You wouldn't go so far as to say it feels like being hugged when you wear it but it's pretty close. Good for sleeping in."
+	desc = "A worn out, curiously comfortable t-shirt with a picture of Ian. You wouldn't go so far as to say it feels like being hugged when you wear it, but it's pretty close. Good for sleeping in."
 	icon_state = "ianshirt"
 	item_state = "ianshirt"
 	body_parts_covered = UPPER_TORSO|ARMS
@@ -258,7 +258,7 @@
 	name = "green skimpy dress"
 	desc = "A rather skimpy green dress."
 	icon_state = "stripper_g_over"
-	item_state = "stripper_g"
+	//item_state = "stripper_g"
 	siemens_coefficient = 1
 
 /obj/item/clothing/under/stripper/mankini
@@ -271,7 +271,7 @@
 	name = "xenos suit"
 	desc = "A suit made out of chitinous alien hide."
 	icon_state = "xenos"
-	item_state = "xenos_helm"
+	//item_state = "xenos_helm"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
@@ -389,6 +389,34 @@
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 
+/obj/item/clothing/suit/storage/toggle/hoodie/cti
+	name = "\improper CTI hoodie"
+	desc = "A warm, black sweatshirt.  It bears the letters CTI on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
+	icon_state = "cti_hoodie"
+	icon_open = "cti_hoodie_open"
+	icon_closed = "cti_hoodie"
+
+/obj/item/clothing/suit/storage/toggle/hoodie/mu
+	name = "\improper Mariner University hoodie"
+	desc = "A warm, gray sweatshirt.  It bears the letters MU on the front, a lettering to the well-known public college, Mariner University."
+	icon_state = "mu_hoodie"
+	icon_open = "mu_hoodie_open"
+	icon_closed = "mu_hoodie"
+
+/obj/item/clothing/suit/storage/toggle/hoodie/nt
+	name = "NanoTrasen hoodie"
+	desc = "A warm, blue sweatshirt.  It proudly bears the silver NanoTrasen insignia lettering on the back.  The edges are trimmed with silver."
+	icon_state = "nt_hoodie"
+	icon_open = "nt_hoodie_open"
+	icon_closed = "nt_hoodie"
+
+/obj/item/clothing/suit/storage/toggle/hoodie/smw
+	name = "Space Mountain Wind hoodie"
+	desc = "A warm, black sweatshirt.  It has the logo for the popular softdrink Space Mountain Wind on both the front and the back."
+	icon_state = "smw_hoodie"
+	icon_open = "smw_hoodie_open"
+	icon_closed = "smw_hoodie"
+
 /obj/item/clothing/suit/storage/toggle/hoodie/black
 	name = "black hoodie"
 	desc = "A warm, black sweatshirt."
@@ -429,3 +457,37 @@
 	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, the colors of Cargo."
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
+
+/*
+ * Track Jackets
+ */
+/obj/item/clothing/suit/storage/toggle/track
+	name = "track jacket"
+	desc = "a track jacket, for the athletic."
+	icon_state = "trackjacket"
+	icon_open = "trackjacket_open"
+	icon_closed = "trackjacket"
+
+/obj/item/clothing/suit/storage/toggle/track/blue
+	name = "blue track jacket"
+	icon_state = "trackjacketblue"
+	icon_open = "trackjacketblue_open"
+	icon_closed = "trackjacketblue"
+
+/obj/item/clothing/suit/storage/toggle/track/green
+	name = "green track jacket"
+	icon_state = "trackjacketgreen"
+	icon_open = "trackjacketgreen_open"
+	icon_closed = "trackjacketgreen"
+
+/obj/item/clothing/suit/storage/toggle/track/red
+	name = "red track jacket"
+	icon_state = "trackjacketred"
+	icon_open = "trackjacketred_open"
+	icon_closed = "trackjacketred"
+
+/obj/item/clothing/suit/storage/toggle/track/white
+	name = "white track jacket"
+	icon_state = "trackjacketwhite"
+	icon_open = "trackjacketwhite_open"
+	icon_closed = "trackjacketwhite"

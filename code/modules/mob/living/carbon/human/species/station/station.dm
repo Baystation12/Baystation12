@@ -13,6 +13,7 @@
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	min_age = 17
 	max_age = 100
+	gluttonous = GLUT_TINY
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
@@ -62,6 +63,7 @@
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
+	blood_color = "#f24b2e"
 
 	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
@@ -125,6 +127,7 @@
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+	blood_color = "#862A51"
 
 	reagent_tag = IS_TAJARA
 
@@ -265,7 +268,7 @@
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
 	appearance_flags = 0
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -308,3 +311,6 @@
 			qdel(D)
 
 	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+
+/datum/species/diona/get_blood_name()
+	return "sap"

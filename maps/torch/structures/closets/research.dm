@@ -36,6 +36,7 @@
 		/obj/item/device/camera,
 		/obj/item/taperoll/research,
 		/obj/item/clothing/glasses/welding/superior,
+		/obj/item/device/holowarrant,
 		/obj/item/clothing/suit/armor/vest/nt
 	)
 
@@ -167,6 +168,7 @@
 		/obj/item/clothing/suit/storage/vest/nt,
 		/obj/item/clothing/head/helmet/nt/guard,
 		/obj/item/clothing/head/soft/sec/corp/guard,
+		/obj/item/clothing/head/beret/guard,
 		/obj/item/clothing/accessory/armband/whitered,
 		/obj/item/device/radio/headset/torchnanotrasen,
 		/obj/item/clothing/mask/gas/half,

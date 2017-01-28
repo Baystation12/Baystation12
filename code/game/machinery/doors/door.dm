@@ -71,7 +71,7 @@
 	return
 
 /obj/machinery/door/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	..()
 	return
@@ -102,13 +102,6 @@
 		M.last_bumped = world.time
 		if(!M.restrained() && (!issmall(M) || ishuman(M)))
 			bumpopen(M)
-		return
-
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
-		if(src.check_access(bot.botcard))
-			if(density)
-				open()
 		return
 
 	if(istype(AM, /mob/living/bot))
@@ -353,6 +346,8 @@
 		icon_state = "door1"
 	else
 		icon_state = "door0"
+	var/turf/T = get_turf(src)
+	T.calc_rad_resistance()
 	return
 
 
@@ -387,7 +382,7 @@
 	icon_state = "door0"
 	set_opacity(0)
 	sleep(3)
-	src.density = 0
+	src.set_density(0)
 	update_nearby_tiles()
 	sleep(7)
 	src.layer = open_layer
@@ -412,7 +407,7 @@
 	close_door_at = 0
 	do_animate("closing")
 	sleep(3)
-	src.density = 1
+	src.set_density(1)
 	explosion_resistance = initial(explosion_resistance)
 	src.layer = closed_layer
 	update_nearby_tiles()

@@ -14,7 +14,7 @@
 		. -= "Off"
 
 /obj/structure/sign/double/barsign/examine(mob/user)
-	..()
+	. = ..()
 	switch(icon_state)
 		if("Off")
 			to_chat(user, "It appears to be switched off.")

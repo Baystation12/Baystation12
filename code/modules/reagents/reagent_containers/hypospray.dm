@@ -84,7 +84,7 @@
 		icon_state = "[initial(icon_state)]0"
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
 	else

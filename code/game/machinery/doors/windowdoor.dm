@@ -51,14 +51,14 @@
 	if(operating == -1)
 		ae.icon_state = "door_electronics_smoked"
 		operating = 0
-	src.density = 0
+	set_density(0)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
 	qdel(src)
 
 /obj/machinery/door/window/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	..()
 
@@ -122,7 +122,7 @@
 	sleep(10)
 
 	explosion_resistance = 0
-	density = 0
+	set_density(0)
 	update_icon()
 	update_nearby_tiles()
 	
@@ -136,7 +136,7 @@
 	operating = 1
 	flick(text("[]closing", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
-	density = 1
+	set_density(1)
 	update_icon()
 	explosion_resistance = initial(explosion_resistance)
 	update_nearby_tiles()

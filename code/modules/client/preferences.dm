@@ -72,7 +72,6 @@ datum/preferences
 	var/alternate_option = 2
 
 	var/used_skillpoints = 0
-	var/skill_specialization = null
 	var/list/skills = list() // skills can range from 0 to 3
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"
@@ -105,6 +104,10 @@ datum/preferences
 	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
+
+	var/list/relations
+	var/list/relations_info
+
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
@@ -356,7 +359,7 @@ datum/preferences
 				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
-	if(backbag > 4 || backbag < 1)
+	if(backbag > 5 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag
 

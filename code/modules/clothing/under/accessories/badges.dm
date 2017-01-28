@@ -116,6 +116,7 @@
 /obj/item/clothing/accessory/badge/tags //child of a badge for now because I'd rather not copy-paste their code
 	name = "dog tags"
 	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
+	gender = PLURAL
 	icon_state = "tags"
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE

@@ -10,13 +10,21 @@
 	contact_levels = list(1,2,3,4,5)
 	player_levels = list(1,2,3,4,5,6,7,8,9)
 	admin_levels = list(10)
-
-	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30)
+	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30,"7"=10,"8"=10)
+	base_turf_by_z = list("9" = /turf/simulated/floor/asteroid)
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 
+	station_name  = "SEV Torch"
+	station_short = "Torch"
+	dock_name     = "TBD"
+	boss_name     = "Expeditionary Command"
+	boss_short    = "Command"
+	company_name  = "Sol Central Government"
+	company_short = "SolGov"
+
 	shuttle_docked_message = "Attention all hands: the Bluespace drive has been spooled up, secure all stations for departure. Time to jump: approximately %ETD%."
-	shuttle_leaving_dock = "Attention all hands: Jump initiated, entering Bluespace in %ETA%."
+	shuttle_leaving_dock = "Attention all hands: Jump initiated, exiting Bluespace in %ETA%."
 	shuttle_called_message = "Attention all hands: the Bluespace drive is spooling up. Transit procedures are now in effect. Jump in %ETA%."
 	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
 	emergency_shuttle_docked_message = "Attention all hands: the escape pods are now unlocked. You have %ETD% to board the escape pods."
@@ -25,6 +33,8 @@
 	emergency_shuttle_recall_message = "Attention all hands: emergency evacuation sequence aborted. Return to normal operating conditions."
 
 	evac_controller_type = /datum/evacuation_controller/pods
+
+	default_law_type = /datum/ai_laws/solgov
 
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.

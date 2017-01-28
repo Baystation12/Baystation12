@@ -442,6 +442,34 @@ macro "macro"
 		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
+		name = "CTRL+NUMPAD1"
+		command = "body-r-leg"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD2"
+		command = "body-groin"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD3"
+		command = "body-l-leg"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD4"
+		command = "body-r-arm"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD5"
+		command = "body-chest"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD6"
+		command = "body-l-arm"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD8"
+		command = "body-toggle-head"
+		is-disabled = false
+	elem 
 		name = "F1"
 		command = "adminhelp"
 		is-disabled = false
@@ -488,34 +516,6 @@ macro "macro"
 	elem 
 		name = "F12"
 		command = "F12"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD8"
-		command = "body-toggle-head"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD3"
-		command = "body-l-leg"
 		is-disabled = false
 
 macro "hotkeymode"
@@ -752,6 +752,34 @@ macro "hotkeymode"
 		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
+		name = "NUMPAD1"
+		command = "body-r-leg"
+		is-disabled = false
+	elem 
+		name = "NUMPAD2"
+		command = "body-groin"
+		is-disabled = false
+	elem 
+		name = "NUMPAD3"
+		command = "body-l-leg"
+		is-disabled = false
+	elem 
+		name = "NUMPAD4"
+		command = "body-r-arm"
+		is-disabled = false
+	elem 
+		name = "NUMPAD5"
+		command = "body-chest"
+		is-disabled = false
+	elem 
+		name = "NUMPAD6"
+		command = "body-l-arm"
+		is-disabled = false
+	elem 
+		name = "NUMPAD8"
+		command = "body-toggle-head"
+		is-disabled = false
+	elem 
 		name = "F1"
 		command = "adminhelp"
 		is-disabled = false
@@ -800,32 +828,12 @@ macro "hotkeymode"
 		command = "F12"
 		is-disabled = false
 	elem 
-		name = "NUMPAD8"
-		command = "body-toggle-head"
+		name = ","
+		command = "move-upwards"
 		is-disabled = false
 	elem 
-		name = "NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "NUMPAD3"
-		command = "body-l-leg"
+		name = "."
+		command = "move-down"
 		is-disabled = false
 
 macro "borgmacro"
@@ -970,6 +978,34 @@ macro "borgmacro"
 		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
+		name = "CTRL+NUMPAD1"
+		command = "body-r-leg"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD2"
+		command = "body-groin"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD3"
+		command = "body-l-leg"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD4"
+		command = "body-r-arm"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD5"
+		command = "body-chest"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD6"
+		command = "body-l-arm"
+		is-disabled = false
+	elem 
+		name = "CTRL+NUMPAD8"
+		command = "body-toggle-head"
+		is-disabled = false
+	elem 
 		name = "F1"
 		command = "adminhelp"
 		is-disabled = false
@@ -1016,34 +1052,6 @@ macro "borgmacro"
 	elem 
 		name = "F12"
 		command = "F12"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD8"
-		command = "body-toggle-head"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD3"
-		command = "body-l-leg"
 		is-disabled = false
 
 
@@ -1824,7 +1832,6 @@ window "mainwindow"
 		right-click = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		on-size = ""
-		title = "Space Station 13"
 		titlebar = true
 		statusbar = true
 		can-close = true

@@ -37,7 +37,7 @@
 /obj/structure/displaycase/proc/healthcheck()
 	if (src.health <= 0)
 		if (!( src.destroyed ))
-			src.density = 0
+			src.set_density(0)
 			src.destroyed = 1
 			new /obj/item/weapon/material/shard( src.loc )
 			playsound(src, "shatter", 70, 1)

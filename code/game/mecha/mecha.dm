@@ -224,7 +224,7 @@
 		return 0
 
 /obj/mecha/examine(mob/user)
-	..(user)
+	. = ..(user)
 	var/integrity = health/initial(health)*100
 	switch(integrity)
 		if(85 to 100)
@@ -608,7 +608,7 @@
 	return
 
 /obj/mecha/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.damage_type == HALLOSS && !(src.r_deflect_coeff > 1))
+	if(Proj.damage_type == PAIN && !(src.r_deflect_coeff > 1))
 		use_power(Proj.agony * 5)
 
 	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
@@ -1641,7 +1641,7 @@
 		O.aiRestorePowerRoutine = 0
 		O.control_disabled = 1 // Can't control things remotely if you're stuck in a card!
 		O.laws = AI.laws
-		O.stat = AI.stat
+		O.set_stat(AI.stat)
 		O.oxyloss = AI.getOxyLoss()
 		O.fireloss = AI.getFireLoss()
 		O.bruteloss = AI.getBruteLoss()

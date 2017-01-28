@@ -221,9 +221,10 @@
 		if(!amount_grown) amount_grown = 1
 		var/obj/item/organ/external/O = loc
 		if(!O.owner || O.owner.stat == DEAD || amount_grown > 80)
+			amount_grown = 20 //reset amount_grown so that people have some time to react to spiderlings before they grow big
 			O.implants -= src
 			src.loc = O.owner ? O.owner.loc : O.loc
-			src.visible_message("<span class='warning'>\A [src] makes its way out of [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
+			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
 				O.owner.apply_damage(1, BRUTE, O.organ_tag)
 		else if(prob(1))

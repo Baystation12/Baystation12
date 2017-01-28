@@ -19,7 +19,7 @@
 	desc = "When you want to turn up the heat."
 	icon_state = "swat"
 	force = 3
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	can_hold_knife = 1
@@ -29,7 +29,7 @@
 	desc = "When you REALLY want to turn up the heat."
 	icon_state = "jungle"
 	force = 5
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	can_hold_knife = 1
@@ -167,3 +167,8 @@
 /obj/item/clothing/shoes/swimmingfins/New()
 	..()
 	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1
+
+/obj/item/clothing/shoes/athletic
+	name = "athletic shoes"
+	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
+	icon_state = "sportshoe"

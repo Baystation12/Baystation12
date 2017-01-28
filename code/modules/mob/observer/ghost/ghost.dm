@@ -66,6 +66,9 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	real_name = name
 
+	if(cult)
+		cult.add_ghost_magic(src)
+
 	ghost_multitool = new(src)
 	..()
 
@@ -89,11 +92,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			var/atom/target = locate(href_list["track"])
 			if(istype(target))
 				ManualFollow(target)
-
-/mob/observer/ghost/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/book/tome))
-		var/mob/observer/ghost/M = src
-		M.manifest()
 
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
@@ -139,6 +137,7 @@ Works together with spawning an observer, noted above.
 		if(G.admin_ghosted)
 			return
 	if(key)
+		hide_fullscreens()
 		var/mob/observer/ghost/ghost = new(src)	//Transfer safety to observer spawning proc.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.stat == DEAD ? src.timeofdeath : world.time
@@ -200,19 +199,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(src, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
-	if(mind.current.ajourn && mind.current.stat != DEAD) //check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
-		var/found_rune
-		for(var/obj/effect/rune/R in mind.current.loc)   //whilst corpse is alive, we can only reenter the body if it's on the rune
-			if(R && R.word1 == cultwords["hell"] && R.word2 == cultwords["travel"] && R.word3 == cultwords["self"]) // Found an astral journey rune.
-				found_rune = 1
-				break
-		if(!found_rune)
-			to_chat(src, "<span class='warning'>The astral cord that ties your body and your spirit has been severed. You are likely to wander the realm beyond until your body is finally dead and thus reunited with you.</span>")
-			return
 	stop_following()
-	mind.current.ajourn=0
 	mind.current.key = key
 	mind.current.teleop = null
+	mind.current.reload_fullscreen()
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -283,104 +273,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_to_turf(T)
 	else
 		to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
-/mob/observer/ghost/verb/follow(input in GetTargetsToFollow())
+/mob/observer/ghost/verb/follow(input in get_follow_targets())
 	set category = "Ghost"
 	set name = "Follow"
 	set desc = "Follow and haunt a mob."
 
-	var/target = GetTargetsToFollow()[input]
+	var/target = get_follow_targets()[input]
 	if(!target) return
 	ManualFollow(target)
-
-/mob/observer/ghost/proc/GetTargetsToFollow()
-	var/list/result = list()
-	
-	var/list/sortmob = sortAtom(mob_list)
-	var/list/additions = list()
-	var/list/names = list()
-	var/list/mobs = list()
-	
-	for(var/mob/observer/eye/M in sortmob)
-		mobs += M
-		additions[M] = " \[Eye\]"
-	for(var/mob/living/silicon/ai/M in sortmob)
-		mobs += M
-		additions[M] = " \[AI\]"
-	for(var/mob/living/silicon/pai/M in sortmob)
-		mobs += M
-		additions[M] = " \[pAI\]"
-	for(var/mob/living/silicon/robot/M in sortmob)
-		mobs += M
-		additions[M] = " \[Synthetic\]"
-	for(var/mob/living/carbon/human/M in sortmob)
-		mobs += M
-		additions[M] = " \[[M.species.name]\]"
-	for(var/mob/living/carbon/brain/M in sortmob)
-		mobs += M
-		additions[M] = " \[Brain\]"
-	for(var/mob/living/carbon/alien/M in sortmob)
-		mobs += M
-		additions[M] = " \[Alien\]"
-	for(var/mob/observer/ghost/M in sortmob)
-		mobs += M
-		additions[M] = " \[Ghost\]"
-	for(var/mob/living/carbon/slime/M in sortmob)
-		mobs += M
-		additions[M] = " \[Slime\]"
-	for(var/mob/living/simple_animal/M in sortmob)
-		mobs += M
-		additions[M] = " \[Animal\]"
-
-	for(var/mob/M in mobs)
-		if(M.name in names)
-			additions[M] += " \[[++names[M.name]]\]"
-		else
-			names[M.name] = 1
-		if (M.real_name && M.real_name != M.name)
-			additions[M] += " \[[M.real_name]\]"
-		additions[M] += ""
-		if (M.stat == DEAD)
-			if(isobserver(M))
-				additions[M] += " \[Observer\]"
-			else
-				additions[M] += " \[Dead\]"
-		result["[M][additions[M]] \[[M.x], [M.y], [M.z]\]"] = M
-
-	var/tmp
-
-	tmp = 1
-	for(var/obj/mecha/S in mechas_list)
-		result["[S] \[[S.occupant ? "[S.occupant]" : "Empty"]\] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/effect/blob/core/S in GhostFollowObjects)
-		if(S.type != /obj/effect/blob/core) // We don't care about secondary cores
-			continue
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/machinery/power/supermatter/S in GhostFollowObjects)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/item/weapon/disk/nuclear/S in nuke_disks)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/machinery/nuclearbomb/S in GhostFollowObjects)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/item/weapon/card/id/captains_spare/S in GhostFollowObjects)
-		result["[S] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-
-	tmp = 1
-	for(var/obj/item/organ/internal/stack/S in GhostFollowObjects)
-		if(S.owner) // We don't care about implanted laces
-			continue
-		result["[S] \[[S.backup ? S.backup.name : "Empty"]\] \[[S.x], [S.y], [S.z]\] ([tmp++])"] = S
-	
-	return result
 
 /mob/observer/ghost/proc/ghost_to_turf(var/turf/target_turf)
 	if(check_is_holy_turf(target_turf))
@@ -509,91 +409,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return 0
 	return M.do_possession(src)
 
-//Used for drawing on walls with blood puddles as a spooky ghost.
-/mob/observer/ghost/verb/bloody_doodle()
-
-	set category = "Ghost"
-	set name = "Write in blood"
-	set desc = "If the round is sufficiently spooky, write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
-
-	if(!(config.cult_ghostwriter))
-		to_chat(src, "<span class='warning'>That verb is not currently permitted.</span>")
-		return
-
-	if (!src.stat)
-		return
-
-	if (usr != src)
-		return 0 //something is terribly wrong
-
-	if(!round_is_spooky())
-		to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
-		return
-
-	var/list/choices = list()
-	for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-		if(B.amount > 0)
-			choices += B
-
-	if(!choices.len)
-		to_chat(src, "<span class = 'warning'>There is no blood to use nearby.</span>")
-		return
-
-	var/obj/effect/decal/cleanable/blood/choice = input(src,"What blood would you like to use?") in null|choices
-
-	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
-	var/turf/simulated/T = src.loc
-	if (direction != "Here")
-		T = get_step(T,text2dir(direction))
-
-	if (!istype(T))
-		to_chat(src, "<span class='warning'>You cannot doodle there.</span>")
-		return
-
-	if(!choice || choice.amount == 0 || !(src.Adjacent(choice)))
-		return
-
-	var/doodle_color = (choice.basecolor) ? choice.basecolor : "#A10808"
-
-	var/num_doodles = 0
-	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
-		num_doodles++
-	if (num_doodles > 4)
-		to_chat(src, "<span class='warning'>There is no space to write on!</span>")
-		return
-
-	var/max_length = 50
-
-	var/message = sanitize(input("Write a message. It cannot be longer than [max_length] characters.","Blood writing", ""))
-
-	if (message)
-
-		if (length(message) > max_length)
-			message += "-"
-			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
-		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
-		W.basecolor = doodle_color
-		W.update_icon()
-		W.message = message
-		W.add_hiddenprint(src)
-		W.visible_message("<span class='warning'>Invisible fingers crudely paint something in blood on [T]...</span>")
-
 /mob/observer/ghost/pointed(atom/A as mob|obj|turf in view())
 	if(!..())
 		return 0
 	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
 	return 1
-
-/mob/observer/ghost/proc/manifest()
-	if(!is_manifest)
-		is_manifest = TRUE
-		verbs += /mob/observer/ghost/proc/toggle_visibility
-
-	if(src.invisibility > SEE_INVISIBLE_LIVING)
-		toggle_visibility(1)
-		return TRUE
-	else
-		return FALSE
 
 /mob/observer/ghost/proc/show_hud_icon(var/icon_state, var/make_visible)
 	if(!hud_images)
@@ -608,25 +428,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		remove_client_image(hud_image)
 
-/mob/observer/ghost/proc/toggle_visibility()
-	set category = "Ghost"
-	set name = "Toggle Visibility"
-	set desc = "Allows you to turn (in)visible (almost) at will."
-
-	if(invisibility && !(args.len && args[1]) && world.time < next_visibility_toggle)
-		to_chat(src, "You must gather strength before you can turn visible again...")
-		return
-
-	if(invisibility == 0)
-		next_visibility_toggle = world.time + 1 MINUTE
-		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible.</span>")
-		invisibility = INVISIBILITY_OBSERVER
-		show_hud_icon("cult", FALSE)
-	else
-		to_chat(src, "<span class='info'>You are now visible!</span>")
-		invisibility = 0
-		show_hud_icon("cult", TRUE) // Give the ghost a cult icon which should be visible only to itself
-
 /mob/observer/ghost/verb/toggle_anonsay()
 	set category = "Ghost"
 	set name = "Toggle Anonymous Chat"
@@ -637,6 +438,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='info'>Your key won't be shown when you speak in dead chat.</span>")
 	else
 		to_chat(src, "<span class='info'>Your key will be publicly visible again.</span>")
+
 /mob/observer/ghost/canface()
 	return 1
 

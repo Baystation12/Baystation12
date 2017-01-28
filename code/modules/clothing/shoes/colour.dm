@@ -86,4 +86,44 @@
 	if (istype(H, /obj/item/weapon/handcuffs))
 		attach_cuffs(H, user)
 
+/obj/item/clothing/shoes/flats
+	name = "flats"
+	desc = "Sleek flats."
+	icon_state = "flatswhite"
 
+/obj/item/clothing/shoes/hightops
+	name = "white high tops"
+	desc = "A pair of shoes that extends past the ankle. Based on a centuries-old, timeless design."
+	icon_state = "whitehi"
+
+/obj/item/clothing/shoes/hightops/red
+	name = "red high tops"
+	icon_state = "redhi"
+
+/obj/item/clothing/shoes/hightops/brown
+	name = "brown high tops"
+	icon_state = "brownhi"
+
+/obj/item/clothing/shoes/hightops/black
+	name = "black high tops"
+	icon_state = "blackhi"
+
+/obj/item/clothing/shoes/hightops/orange
+	name = "orange high tops"
+	icon_state = "orangehi"
+
+/obj/item/clothing/shoes/hightops/blue
+	name = "blue high tops"
+	icon_state = "bluehi"
+
+/obj/item/clothing/shoes/hightops/green
+	name = "green high tops"
+	icon_state = "greenhi"
+
+/obj/item/clothing/shoes/hightops/purple
+	name = "purple high tops"
+	icon_state = "purplehi"
+
+/obj/item/clothing/shoes/hightops/yellow
+	name = "yellow high tops"
+	icon_state = "yellowhi"

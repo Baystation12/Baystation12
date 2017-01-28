@@ -17,13 +17,13 @@
 		if(R_ADMIN & C.holder.rights)
 			if(C.is_preference_enabled(/datum/client_preference/admin/show_chat_prayers))
 				to_chat(C, msg)
-				sound_to(C, 'sound/effects/ding.ogg')
+				sound_to(C, 'sound/effects/ding.ogg')
 	to_chat(usr, "Your prayers have been received by the gods.")
 	feedback_add_details("admin_verb","PR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	//log_admin("HELP: [key_name(src)]: [msg]")
 
 /proc/Centcomm_announce(var/msg, var/mob/Sender, var/iamessage)
-	msg = "<span class='notice'><b><font color=orange>[uppertext(boss_short)]M[iamessage ? " IA" : ""]:</font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) ([admin_jump_link(Sender, src)]) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<A HREF='?_src_=holder;BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A HREF='?_src_=holder;CentcommReply=\ref[Sender]'>RPLY</A>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=orange>[uppertext(using_map.boss_short)]M[iamessage ? " IA" : ""]:</font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) ([admin_jump_link(Sender, src)]) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<A HREF='?_src_=holder;BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A HREF='?_src_=holder;CentcommReply=\ref[Sender]'>RPLY</A>):</b> [msg]</span>"
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)

@@ -48,6 +48,9 @@
 	if(!radiate())
 		return PROCESS_KILL
 
+/turf/simulated/wall/proc/get_material()
+	return material
+
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
 		burn(2500)
@@ -92,7 +95,7 @@
 
 /turf/simulated/wall/ChangeTurf(var/newtype)
 	clear_plants()
-	..(newtype)
+	return ..(newtype)
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)
@@ -221,7 +224,7 @@
 	O.icon = 'icons/effects/fire.dmi'
 	O.icon_state = "2"
 	O.anchored = 1
-	O.density = 1
+	O.set_density(1)
 	O.plane = LIGHTING_PLANE
 	O.layer = FIRE_LAYER
 
@@ -243,8 +246,7 @@
 	if(!total_radiation)
 		return
 
-	for(var/mob/living/L in range(3,src))
-		L.apply_effect(total_radiation, IRRADIATE, blocked = L.getarmor(null, "rad"))
+	radiation_repository.radiate(src, total_radiation)
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)

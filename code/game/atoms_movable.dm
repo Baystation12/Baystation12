@@ -21,7 +21,7 @@
 
 /atom/movable/New()
 	..()
-	if(auto_init && (initialization_stage & INITIALIZATION_COMPLETE))
+	if(auto_init && (initialization_stage & INITIALIZATION_HAS_BEGUN))
 		initialize()
 
 /atom/movable/Del()
@@ -45,6 +45,9 @@
 		pulledby = null
 
 /atom/movable/proc/initialize()
+	if(rad_power)
+		radiation_repository.sources.Add(src)
+
 	if(!isnull(gcDestroyed))
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
@@ -225,7 +228,7 @@
 	src.throwing = 0
 	src.thrower = null
 	src.throw_source = null
-
+	fall()
 
 //Overlays
 /atom/movable/overlay
@@ -233,8 +236,7 @@
 	anchored = 1
 
 /atom/movable/overlay/New()
-	for(var/x in src.verbs)
-		src.verbs -= x
+	src.verbs.Cut()
 	..()
 
 /atom/movable/overlay/Destroy()
@@ -255,7 +257,7 @@
 	if(!z || (z in using_map.sealed_levels))
 		return
 
-	if(config.use_overmap)
+	if(using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
 

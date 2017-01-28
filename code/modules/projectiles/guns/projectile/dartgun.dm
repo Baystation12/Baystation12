@@ -96,7 +96,7 @@
 		fill_dart(dart)
 
 /obj/item/weapon/gun/projectile/dartgun/examine(mob/user)
-	..()
+	. = ..()
 	if (beakers.len)
 		to_chat(user, "<span class='notice'>\The [src] contains:</span>")
 		for(var/obj/item/weapon/reagent_containers/glass/beaker/B in beakers)

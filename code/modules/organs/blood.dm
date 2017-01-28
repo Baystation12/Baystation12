@@ -1,11 +1,6 @@
 /****************************************************
 				BLOOD SYSTEM
 ****************************************************/
-//Blood levels. These are percentages based on the species blood_volume far.
-var/const/BLOOD_VOLUME_SAFE =    85
-var/const/BLOOD_VOLUME_OKAY =    75
-var/const/BLOOD_VOLUME_BAD =     60
-var/const/BLOOD_VOLUME_SURVIVE = 40
 
 /mob/living/carbon/human/var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
 /mob/living/carbon/human/var/var/pale = 0          // Should affect how mob sprite is drawn, but currently doesn't.
@@ -30,8 +25,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 /mob/living/carbon/human/proc/fixblood()
 	for(var/datum/reagent/blood/B in vessel.reagent_list)
 		if(B.id == "blood")
-			B.data = list(	"donor"=src,"viruses"=null,"species"=species.name,"blood_DNA"=dna.unique_enzymes,"blood_colour"= species.get_blood_colour(src),"blood_type"=dna.b_type,	\
-							"resistances"=null,"trace_chem"=null, "virus2" = null, "antibodies" = list())
+			B.data = list("donor" = src, "species" = species.name, "blood_DNA" = dna.unique_enzymes, "blood_colour" = species.get_blood_colour(src), "blood_type" = dna.b_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration
@@ -87,45 +81,31 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 
 //Gets blood from mob to the container, preserving all data in it.
 /mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
-
-	var/datum/reagent/B = get_blood(container.reagents)
-	if(!B) B = new /datum/reagent/blood
-	B.holder = container
-	B.volume += amount
-
-	//set reagent data
-	B.data["donor"] = src
-	if (!B.data["virus2"])
-		B.data["virus2"] = list()
-	B.data["virus2"] |= virus_copylist(src.virus2)
-	B.data["antibodies"] = src.antibodies
-	B.data["blood_DNA"] = copytext(src.dna.unique_enzymes,1,0)
-	B.data["blood_type"] = copytext(src.dna.b_type,1,0)
-
-	// Putting this here due to return shenanigans.
-	if(istype(src,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = src
-		B.data["blood_colour"] = H.species.get_blood_colour(H)
-		B.color = B.data["blood_colour"]
-
-	var/list/temp_chem = list()
-	for(var/datum/reagent/R in src.reagents.reagent_list)
-		temp_chem += R.id
-		temp_chem[R.id] = R.volume
-	B.data["trace_chem"] = list2params(temp_chem)
-	return B
+	var/datum/reagent/blood/B = get_blood(container.reagents)
+	if(!B)
+		B = new /datum/reagent/blood
+		B.sync_to(src)
+		container.reagents.add_reagent("blood", amount, B.data)
+	else
+		B.sync_to(src)
+		B.volume += amount
+	return 1
 
 //For humans, blood does not appear from blue, it comes from vessels.
 /mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
 
 	if(!should_have_organ(BP_HEART))
-		return null
+		reagents.trans_to_obj(container, amount)
+		return 1
 
 	if(vessel.get_reagent_amount("blood") < amount)
 		return null
 
-	. = ..()
-	vessel.remove_reagent("blood",amount) // Removes blood if human
+	//make sure virus/etc data is up to date
+	var/datum/reagent/blood/our = get_blood(vessel)
+	our.sync_to(src)
+	vessel.trans_to_holder(container.reagents,amount)
+	return 1
 
 //Transfers blood from container ot vessels
 /mob/living/carbon/proc/inject_blood(var/datum/reagent/blood/injected, var/amount)

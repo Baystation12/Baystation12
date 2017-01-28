@@ -167,6 +167,7 @@
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/marine/o3,
@@ -182,6 +183,7 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -189,6 +191,7 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -501,6 +504,10 @@
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
 	name_short = null
+
+/datum/mil_rank/civ/offduty
+	name = "Off-Duty Personnel"
+	name_short = "Off-Duty"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"

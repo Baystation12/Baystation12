@@ -8,23 +8,47 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/weapon/implant/imp = null
 
-/obj/item/weapon/implanter/attack_self(var/mob/user)
-	if(!imp)
-		return ..()
-	imp.loc = get_turf(src)
-	user.put_in_hands(imp)
-	to_chat(user, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
-	name = "implanter"
-	imp = null
-	update()
-	return
-
 /obj/item/weapon/implanter/proc/update()
 	if (src.imp)
 		src.icon_state = "implanter1"
 	else
 		src.icon_state = "implanter0"
 	return
+
+/obj/item/weapon/implanter/verb/remove_implant()
+	set category = "Object"
+	set name = "Remove implant"
+	set src in usr
+
+	if(issilicon(usr))
+		return
+
+	if(can_use(usr))
+		if(!imp)
+			to_chat(usr, "<span class='notice'>There is no implant to remove.</span>")
+			return
+		imp.forceMove(get_turf(src))
+		usr.put_in_hands(imp)
+		to_chat(usr, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
+		name = "implanter"
+		imp = null
+		update()
+		return
+	else
+		to_chat(usr, "<span class='notice'>You cannot do this in your current condition.</span>")
+
+/obj/item/weapon/implanter/proc/can_use()
+
+	if(!ismob(loc))
+		return 0
+
+	var/mob/M = loc
+
+	if(M.incapacitated())
+		return 0
+	if((src in M.contents) || (istype(loc, /turf) && in_range(src, M)))
+		return 1
+	return 0
 
 /obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))
@@ -35,24 +59,11 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(M)
 
-		var/turf/T1 = get_turf(M)
-		if (T1 && ((M == user) || do_after(user, 50, M)))
-			if(user && M && (get_turf(M) == T1) && src && src.imp)
+		var/target_zone = user.zone_sel.selecting
+		if(src.imp.can_implant(M, user, target_zone))
+			if(do_after(user, 50, M) && src.imp.implant_in_mob(M, target_zone))
 				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
-
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
-
-				if(src.imp.implanted(M))
-					src.imp.loc = M
-					src.imp.imp_in = M
-					src.imp.implanted = 1
-					if (ishuman(M))
-						var/mob/living/carbon/human/H = M
-						var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
-						affected.implants += src.imp
-						imp.part = affected
-
-						BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 
 				src.imp = null
 				update()
@@ -89,6 +100,8 @@
 /obj/item/weapon/implanter/compressed
 	name = "implanter (C)"
 	icon_state = "cimplanter1"
+	desc = "The matter compressor safety is on."
+	var/safe = 1
 
 /obj/item/weapon/implanter/compressed/New()
 	imp = new /obj/item/weapon/implant/compressed( src )
@@ -111,7 +124,7 @@
 	var/obj/item/weapon/implant/compressed/c = imp
 	if (!c)	return
 	if (c.scanned == null)
-		to_chat(user, "Please scan an object with the implanter first.")
+		to_chat(user, "Please compress an object with the implanter first.")
 		return
 	..()
 
@@ -121,7 +134,12 @@
 	if(istype(A,/obj/item) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
-			to_chat(user, "<span class='warning'>Something is already scanned inside the implant!</span>")
+			if (!istype(A,/obj/item/weapon/storage))
+				to_chat(user, "<span class='warning'>Something is already compressed inside the implant!</span>")
+			return
+		else if(safe)
+			if (!istype(A,/obj/item/weapon/storage))
+				to_chat(user, "<span class='warning'>The matter compressor safeties prevent you from doing that.</span>")
 			return
 		c.scanned = A
 		if(istype(A.loc,/mob/living/carbon/human))
@@ -131,4 +149,14 @@
 			var/obj/item/weapon/storage/S = A.loc
 			S.remove_from_storage(A)
 		A.loc.contents.Remove(A)
+		safe = 2
+		desc = "It currently contains some matter."
 		update()
+
+/obj/item/weapon/implanter/compressed/attack_self(var/mob/user)
+	if(!imp || safe == 2)
+		return ..()
+
+	safe = !safe
+	to_chat(user, "<span class='notice'>You [safe ? "enable" : "disable"] the matter compressor safety.</span>")
+	src.desc = "The matter compressor safety is [safe ? "on" : "off"]."

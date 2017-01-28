@@ -56,6 +56,7 @@
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
 		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini
 		)
 
@@ -106,6 +107,7 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
+		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini
 		)
 
@@ -140,7 +142,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/melee,
 		/obj/item/weapon/gun/projectile/sec,
-		/obj/item/taperoll/police
+		/obj/item/taperoll
 		)
 
 /obj/item/weapon/storage/belt/soulstone

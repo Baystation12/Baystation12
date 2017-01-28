@@ -71,3 +71,8 @@
 /datum/category_item/underwear/bottom/marine_pt_shorts
 	name = "PT shorts, Marine Corps"
 	icon_state = "marine_shorts"
+
+/datum/category_item/underwear/bottom/longjon
+	name = "Long John Bottoms"
+	icon_state = "ljonb"
+	has_color = TRUE

@@ -114,13 +114,7 @@
 			if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
 				visible_message("\The [src] beeps loudly.")
 
-			var/datum/reagent/B = T.take_blood(beaker,amount)
-
-			if (B)
-				beaker.reagents.reagent_list |= B
-				beaker.reagents.update_total()
-				beaker.on_reagent_change()
-				beaker.reagents.handle_reactions()
+			if(T.take_blood(beaker,amount))
 				update_icon()
 
 /obj/machinery/iv_drip/attack_hand(mob/user as mob)
@@ -150,7 +144,7 @@ obj/machinery/iv_drip/attack_ai(mob/user as mob)
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
 /obj/machinery/iv_drip/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (!(user in view(2)) && user!=src.loc) return
 
 	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")

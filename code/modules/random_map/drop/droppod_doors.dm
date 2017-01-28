@@ -71,12 +71,12 @@
 		M.throw_at(get_edge_target_turf(origin,src.dir),rand(0,3),50)
 
 	// Create a decorative ramp bottom and flatten out our current ramp.
-	density = 0
-	opacity = 0
+	set_density(0)
+	set_opacity(0)
 	icon_state = "ramptop"
 	var/obj/structure/droppod_door/door_bottom = new(T)
 	door_bottom.deployed = 1
-	door_bottom.density = 0
-	door_bottom.opacity = 0
-	door_bottom.dir = src.dir
+	door_bottom.set_density(0)
+	door_bottom.set_opacity(0)
+	door_bottom.set_dir(src.dir)
 	door_bottom.icon_state = "rampbottom"

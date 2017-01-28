@@ -55,11 +55,12 @@
 	//uniform
 	if(w_uniform && !skipjumpsuit)
 		//Ties
-		var/tie_msg
+		var/list/ties = list()
 		if(istype(w_uniform,/obj/item/clothing/under))
 			var/obj/item/clothing/under/U = w_uniform
-			if(U.accessories.len)
-				tie_msg += ". Attached to it is [lowertext(english_list(U.accessories))]"
+			for(var/accessory in U.accessories)
+				ties += "\icon[accessory] \a [accessory]"
+		var/tie_msg = ties.len? ". Attached to it is [english_list(ties)]" : ""
 
 		if(w_uniform.blood_DNA)
 			msg += "<span class='warning'>[T.He] [T.is] wearing \icon[w_uniform] [w_uniform.gender==PLURAL?"some":"a"] [(w_uniform.blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [w_uniform.name][tie_msg]!</span>\n"
@@ -210,13 +211,13 @@
 		if((stat == DEAD || src.losebreath) && distance <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>\n"
 		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
-			user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
-		spawn(0)
-			if(do_after(user, 15, src))
-				if(pulse() == PULSE_NONE)
-					to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>")
-				else
-					to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
+			spawn(0)
+				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
+				if(do_after(user, 15, src))
+					if(pulse() == PULSE_NONE)
+						to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse[src.client ? "" : " and [T.his] soul has departed"]...</span>")
+					else
+						to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
 	if(fire_stacks)
 		msg += "[T.He] [T.is] covered in some liquid.\n"
@@ -253,10 +254,10 @@
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
 
 		if(!E)
-			wound_flavor_text["[organ_descriptor]"] = "<b>[T.He] [T.is] missing [T.his] [organ_descriptor].</b>\n"
+			wound_flavor_text[organ_descriptor] = "<b>[T.He] [T.is] missing [T.his] [organ_descriptor].</b>\n"
 			continue
 
-		wound_flavor_text["[E.name]"] = ""
+		wound_flavor_text[E.name] = ""
 
 		if(E.applied_pressure == src)
 			applying_pressure = "<span class='info'>[T.He] is applying pressure to [T.his] [E.name].</span><br>"
@@ -270,23 +271,23 @@
 
 		if(hidden && user != src)
 			if(E.status & ORGAN_BLEEDING && !(hidden.item_flags & THICKMATERIAL)) //not through a spacesuit
-				wound_flavor_text["[hidden.name]"] = "[T.He] [T.has] blood soaking through [hidden]!<br>"
+				wound_flavor_text[hidden.name] = "<span class='danger'>[T.He] [T.has] blood soaking through [hidden]!</span><br>"
 		else
 			if(E.is_stump())
-				wound_flavor_text["[E.name]"] += "<b>[T.He] [T.has] a stump where [T.his] [E.name] should be.</b>\n"
+				wound_flavor_text[E.name] += "<b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b>\n"
 				if((E.wounds.len || E.open) && E.parent)
-					wound_flavor_text["[E.name]"] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
+					wound_flavor_text[E.name] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
 			else
 				if(!is_synth && E.robotic >= ORGAN_ROBOT && (E.parent && E.parent.robotic < ORGAN_ROBOT))
-					wound_flavor_text["[E.name]"] = "[T.He] [T.has] a [E.name].\n"
-				if(E.wounds.len || E.open)
-					wound_flavor_text["[E.name]"] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.name].<br>"
-
+					wound_flavor_text[E.name] = "[T.He] [T.has] a [E.name].\n"
+				var/wounddesc = E.get_wounds_desc()
+				if(wounddesc != "nothing")
+					wound_flavor_text[E.name] += "[T.He] [T.has] [wounddesc] on [T.his] [E.name].<br>"
 		if(!hidden || distance <=1)
 			if(E.dislocated > 0)
-				wound_flavor_text["[E.name]"] += "[T.His] [E.joint] is dislocated!<br>"
+				wound_flavor_text[E.name] += "[T.His] [E.joint] is dislocated!<br>"
 			if(((E.status & ORGAN_BROKEN) && E.brute_dam > E.min_broken_damage) || (E.status & ORGAN_MUTATED))
-				wound_flavor_text["[E.name]"] += "[T.His] [E.name] is dented and swollen!<br>"
+				wound_flavor_text[E.name] += "[T.His] [E.name] is dented and swollen!<br>"
 
 
 	msg += "<span class='warning'>"

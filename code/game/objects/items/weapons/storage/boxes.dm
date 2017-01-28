@@ -79,10 +79,11 @@
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1)
 
 /obj/item/weapon/storage/box/gloves
-	name = "box of latex gloves"
-	desc = "Contains white gloves."
+	name = "box of sterile gloves"
+	desc = "Contains sterile gloves."
 	icon_state = "latex"
-	startswith = list(/obj/item/clothing/gloves/latex = 7)
+	startswith = list(/obj/item/clothing/gloves/latex = 5,
+					/obj/item/clothing/gloves/latex/nitrile = 2)
 
 /obj/item/weapon/storage/box/masks
 	name = "box of sterile masks"
@@ -202,7 +203,7 @@
 	desc = "A box containing 5 highly experimental supermatter grenades."
 	icon_state = "radbox"
 	startswith = list(/obj/item/weapon/grenade/supermatter = 5)
-    
+
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."
@@ -219,8 +220,6 @@
 	startswith = list(/obj/item/weapon/implantcase/chem = 5,
 					/obj/item/weapon/implanter = 1,
 					/obj/item/weapon/implantpad = 1)
-
-
 
 /obj/item/weapon/storage/box/rxglasses
 	name = "box of prescription glasses"
@@ -370,6 +369,13 @@
 	icon_state = "lightmixed"
 	startswith = list(/obj/item/weapon/light/tube = 14,
 					/obj/item/weapon/light/bulb = 7)
+
+/obj/item/weapon/storage/box/glowsticks
+	name = "box of mixed glowsticks"
+	icon_state = "box"
+	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
+					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
+					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"

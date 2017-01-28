@@ -29,7 +29,8 @@
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/device/megaphone,
-		/obj/item/clothing/accessory/holster/thigh
+		/obj/item/clothing/accessory/holster/thigh,
+		/obj/item/device/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/security_torch/New()
@@ -73,7 +74,8 @@
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/device/hailer,
 		/obj/item/weapon/clipboard,
-		/obj/item/weapon/folder/red
+		/obj/item/weapon/folder/red,
+		/obj/item/device/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/cos/New()
@@ -116,7 +118,8 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/red,
-		/obj/item/weapon/hand_labeler
+		/obj/item/weapon/hand_labeler,
+		/obj/item/device/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/brigofficer/New()
@@ -164,7 +167,8 @@
 		/obj/item/device/uv_light,
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/glasses/sunglasses/sechud/toggle
+		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
+		/obj/item/device/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/forensics/New()

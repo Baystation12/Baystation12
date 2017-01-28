@@ -50,6 +50,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \ts = down
 \td = right
 \tw = up
+\t, = move-upwards
+\t. = move-down
 \tq = drop
 \te = equip
 \tr = throw

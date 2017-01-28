@@ -13,7 +13,6 @@ meteor_act
 	if(!has_organ(def_zone))
 		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
 
-
 	//Shields
 	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
 	if(shield_check)
@@ -34,7 +33,7 @@ meteor_act
 			SP.loc = organ
 			organ.embed(SP)
 
-	var/blocked = ..(P , def_zone)
+	var/blocked = ..(P, def_zone)
 
 	projectile_hit_bloody(P, P.damage*blocked_mult(blocked), def_zone)
 
@@ -42,29 +41,15 @@ meteor_act
 
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
 	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
+	if(!affected)
+		return
+
 	var/siemens_coeff = get_siemens_coefficient_organ(affected)
 	stun_amount *= siemens_coeff
 	agony_amount *= siemens_coeff
+	agony_amount *= affected.get_agony_multiplier()
 
-	switch (def_zone)
-		if(BP_HEAD)
-			agony_amount *= 1.50
-		if(BP_L_HAND, BP_R_HAND)
-			var/c_hand
-			if (def_zone == BP_L_HAND)
-				c_hand = l_hand
-			else
-				c_hand = r_hand
-
-			if(c_hand && (stun_amount || agony_amount > 10))
-				msg_admin_attack("[src.name] ([src.ckey]) was disarmed by a stun effect")
-
-				drop_from_inventory(c_hand)
-				if (affected.robotic >= ORGAN_ROBOT)
-					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
-				else
-					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-					emote("me", 1, "[affected.can_feel_pain() ? "" : emote_scream]drops what they were holding in their [affected.name]!")
+	affected.stun_act(stun_amount, agony_amount)
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -86,7 +71,7 @@ meteor_act
 			var/obj/item/organ/external/organ = organs_by_name[organ_name]
 			if(organ)
 				var/weight = organ_rel_size[organ_name]
-				armorval += getarmor_organ(organ, type) * weight //use plain addition here because we are calculating an average
+				armorval += (getarmor_organ(organ, type) * weight) //use plain addition here because we are calculating an average
 				total += weight
 	return (armorval/max(total, 1))
 
@@ -196,7 +181,7 @@ meteor_act
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(hit_appends)	//forcesay checks stat already
-	if((I.damtype == BRUTE || I.damtype == HALLOSS) && prob(25 + (effective_force * 2)))
+	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
@@ -345,11 +330,13 @@ meteor_act
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
 		var/hit_area = affecting.name
-
 		src.visible_message("<span class='warning'>\The [src] has been hit in the [hit_area] by \the [O].</span>")
 		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
 		if(armor < 100)
-			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
+			var/damage_flags = O.damage_flags()
+			if(prob(armor))
+				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
+			apply_damage(throw_damage, dtype, zone, armor, damage_flags, O)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
@@ -405,7 +392,6 @@ meteor_act
 	var/obj/item/organ/external/affecting = get_organ(def_zone)
 	if(affecting)
 		affecting.embed(O)
-
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	if (gloves)

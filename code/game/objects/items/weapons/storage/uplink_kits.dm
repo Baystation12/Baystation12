@@ -56,8 +56,8 @@
 	//name = "\improper EVA gear pack"
 
 	startswith = list(
-		/obj/item/clothing/suit/space/syndicate,
-		/obj/item/clothing/head/helmet/space/syndicate,
+		/obj/item/clothing/suit/space/void/merc,
+		/obj/item/clothing/head/helmet/space/void/merc,
 		/obj/item/clothing/mask/gas/syndicate,
 		/obj/item/weapon/tank/emergency/oxygen/double,
 		)
@@ -190,3 +190,10 @@
 
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
 
+/obj/item/weapon/storage/backpack/satchel/syndie_kit/armor
+	name = "armor satchel"
+	desc = "A satchel for when you don't want to try a diplomatic approach."
+	startswith = list(
+		/obj/item/clothing/suit/storage/vest/merc,
+		/obj/item/clothing/head/helmet/merc
+	)

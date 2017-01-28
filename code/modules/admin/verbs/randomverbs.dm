@@ -32,7 +32,7 @@
 		//teleport person to cell
 		M.Paralyse(5)
 		sleep(5)	//so they black out before warping
-		M.loc = pick(prisonwarp)
+		M.forceMove(pick(prisonwarp))
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/prisoner = M
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), slot_w_uniform)
@@ -513,7 +513,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if("Yes")
 			command_announcement.Announce(input, customname, new_sound = 'sound/AI/commandreport.ogg', msg_sanitized = 1);
 		if("No")
-			to_world("<span class='warning'>New [company_name] Update available at all communication consoles.</span>")
+			to_world("<span class='warning'>New [using_map.company_name] Update available at all communication consoles.</span>")
 			sound_to(world, sound('sound/AI/commandreport.ogg'))
 
 	log_admin("[key_name(src)] has created a command report: [input]")

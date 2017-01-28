@@ -6,8 +6,6 @@
 	qdel(hud_used)
 	clear_fullscreen()
 	if(client)
-		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
-			qdel(spell_master)
 		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
@@ -38,7 +36,7 @@
 	item_use_icon = null
 	gun_move_icon = null
 	gun_setting_icon = null
-	spell_masters = null
+	ability_master = null
 	zone_sel = null
 
 /mob/New()
@@ -88,11 +86,11 @@
 		if(self_message && M == src)
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
-			
+
 		if(M.see_invisible >= invisibility)
 			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
-			
+
 		if(blind_message)
 			M.show_message(blind_message, AUDIBLE_MESSAGE)
 			continue
@@ -150,7 +148,6 @@
 /mob/proc/Life()
 //	if(organStructure)
 //		organStructure.ProcessOrgans()
-	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
 #define UNBUCKLED 0
@@ -258,40 +255,20 @@
 	face_atom(A)
 	return 1
 
-
-/mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
-	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
-		if (!( L ))
-			return null
-		else
-			return L.container
-	else
-		if (!( L ))
-			L = new /obj/effect/list_container/mobl( null )
-			L.container += src
-			L.master = src
-		if (istype(l_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = l_hand
-			if (!( L.container.Find(G.affecting) ))
-				L.container += G.affecting
+//Gets the mob grab conga line.
+/mob/proc/ret_grab(list/L)
+	if (!istype(l_hand, /obj/item/weapon/grab) && !istype(r_hand, /obj/item/weapon/grab))
+		return L
+	if (!L)
+		L = list(src)
+	for(var/A in list(l_hand,r_hand))
+		if (istype(A, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/G = A
+			if (!(G.affecting in L))
+				L += G.affecting
 				if (G.affecting)
-					G.affecting.ret_grab(L, 1)
-		if (istype(r_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = r_hand
-			if (!( L.container.Find(G.affecting) ))
-				L.container += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L, 1)
-		if (!( flag ))
-			if (L.master == src)
-				var/list/temp = list(  )
-				temp += L.container
-				//L = null
-				qdel(L)
-				return temp
-			else
-				return L.container
-	return
+					G.affecting.ret_grab(L)
+	return L
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
@@ -455,17 +432,6 @@
 				namecounts[name] = 1
 			creatures[name] = O
 
-		if(istype(O, /obj/machinery/bot))
-			var/name = "BOT: [O.name]"
-			if (names.Find(name))
-				namecounts[name]++
-				name = "[name] ([namecounts[name]])"
-			else
-				names.Add(name)
-				namecounts[name] = 1
-			creatures[name] = O
-
-
 	for(var/mob/M in sortAtom(mob_list))
 		var/name = M.name
 		if (names.Find(name))
@@ -521,7 +487,7 @@
 /mob/proc/pull_damage()
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		if(H.health - H.halloss <= config.health_threshold_softcrit)
+		if(H.health - H.getHalLoss() <= config.health_threshold_softcrit)
 			for(var/name in H.organs_by_name)
 				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(e && H.lying)
@@ -712,11 +678,11 @@
 		canmove = !incapacitated(INCAPACITATION_DISABLED)
 
 	if(lying)
-		density = 0
+		set_density(0)
 		if(l_hand) unEquip(l_hand)
 		if(r_hand) unEquip(r_hand)
 	else
-		density = initial(density)
+		set_density(initial(density))
 	reset_layer()
 
 	for(var/obj/item/weapon/grab/G in grabbed_by)
@@ -933,12 +899,12 @@ mob/proc/yank_out_object()
 
 		affected.implants -= selection
 		H.shock_stage+=20
-		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
+		affected.take_damage((selection.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
 
 		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
 			affected.wounds += I
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50)
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50, affecting = affected)
 
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U
@@ -1005,6 +971,10 @@ mob/proc/yank_out_object()
 			return ..(facing_dir)
 	else
 		return ..()
+
+/mob/proc/set_stat(var/new_stat)
+	. = stat != new_stat
+	stat = new_stat
 
 /mob/verb/northfaceperm()
 	set hidden = 1

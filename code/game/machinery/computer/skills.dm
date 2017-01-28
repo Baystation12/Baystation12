@@ -9,13 +9,13 @@
 	light_color = "#00b000"
 	req_one_access = list(access_heads)
 	circuit = /obj/item/weapon/circuitboard/skills
-	
+
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
-	var/write_access_all = list(access_change_ids)  // access levels required to 
+	var/write_access_all = list(access_change_ids)  // access levels required to
 	var/write_access_any = list()                   // make changes to rank or job
 	var/has_write_access = FALSE  // Is the authenticated user able to change jobs and ranks?
-	
+
 	var/screen = null
 	var/datum/data/record/active1 = null
 	var/a_id = null
@@ -30,7 +30,7 @@
 
 /obj/machinery/computer/skills/attackby(obj/item/O as obj, var/mob/user)
 	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
-		O.loc = src
+		O.forceMove(src)
 		scan = O
 		to_chat(user, "You insert [O].")
 	else
@@ -95,16 +95,16 @@
 					if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
 						var/icon/front = active1.fields["photo_front"]
 						var/icon/side = active1.fields["photo_side"]
-						
+
 						var/mil_rank_text = ""
-						
+
 						user << browse_rsc(front, "front.png")
 						user << browse_rsc(side, "side.png")
 						if(using_map.flags & MAP_HAS_BRANCH)
 							mil_rank_text += "Branch: <a href='?src=\ref[src];choice=Edit Field;field=mil_branch'>[active1.fields["mil_branch"] || "None"]</a><br>\n"
 						if(using_map.flags & MAP_HAS_RANK)
 							mil_rank_text += "Rank: <a href='?src=\ref[src];choice=Edit Field;field=mil_rank'>[active1.fields["mil_rank"] || "None"]</a><br>\n"
-						dat += text("<table><tr><td>	\
+						dat += "<table><tr><td>	\
 						Name: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \
 						ID: <A href='?src=\ref[src];choice=Edit Field;field=id'>[active1.fields["id"]]</A><BR>\n	\
 						Sex: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
@@ -114,9 +114,15 @@
 						Fingerprint: <A href='?src=\ref[src];choice=Edit Field;field=fingerprint'>[active1.fields["fingerprint"]]</A><BR>\n	\
 						Physical Status: [active1.fields["p_stat"]]<BR>\n	\
 						Mental Status: [active1.fields["m_stat"]]<BR><BR>\n	\
-						Employment/skills summary:<BR> [decode(active1.fields["notes"])]<BR></td>	\
-						<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
-						<img src=side.png height=80 width=80 border=4></td></tr></table>")
+						Employment/skills summary:<BR> [decode(active1.fields["notes"])]<BR><BR>\n	\
+						Known personal relations:<BR>"
+						if(active1.fields["connections"])
+							for(var/I in active1.fields["connections"])
+								dat += "[I]<br>"
+						else
+							dat+= "None of interest.<br>"
+						dat+="</td><td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
+						<img src=side.png height=80 width=80 border=4></td></tr></table>"
 					else
 						dat += "<B>General Record Lost!</B><BR>"
 					dat += text("\n<A href='?src=\ref[];choice=Delete Record (ALL)'>Delete Record (ALL)</A><BR><BR>\n<A href='?src=\ref[];choice=Print Record'>Print Record</A><BR>\n<A href='?src=\ref[];choice=Return'>Back</A><BR>", src, src, src)
@@ -196,12 +202,12 @@ What a mess.*/
 					if(istype(usr,/mob/living/carbon/human) && !usr.get_active_hand())
 						usr.put_in_hands(scan)
 					else
-						scan.loc = get_turf(src)
+						scan.dropInto(loc)
 					scan = null
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
-						I.loc = src
+						I.forceMove(src)
 						scan = I
 
 			if("Log Out")
@@ -211,21 +217,21 @@ What a mess.*/
 				has_write_access = FALSE
 
 			if("Log In")
-				var/list/users_access 
-				
+				var/list/users_access
+
 				if (issilicon(usr) && allowed(usr))
 					authenticated = usr.name
 					users_access = usr.GetAccess()
 				else if (istype(scan, /obj/item/weapon/card/id) && check_access(scan))
 					authenticated = scan.registered_name
 					users_access = scan.GetAccess()
-				
+
 				if(authenticated)
 					active1 = null
 					screen = 1
 					has_write_access = has_access(write_access_all, write_access_any, users_access)
-					
-				
+
+
 //RECORD FUNCTIONS
 			if("Search Records")
 				var/t1 = input("Search String: (Partial Name or ID or Fingerprints or Rank)", "Secure. records", null, null)  as text
@@ -362,18 +368,18 @@ What a mess.*/
 							for(var/rank in joblist)
 								options += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
 							options += "</ul>"
-							
+
 							temp = jointext(options, null)
 						else
 							alert(usr, "You do not have the required access to change the position field.")
-							
+
 					if("mil_branch")
 						if(has_write_access)
 							var/list/options = list("<h5>Branch:</h5><ul>")
 							for(var/branch in mil_branches.branches)
 								options += "<li><a href='?src=\ref[src];choice=change_mil_branch;mil_branch=[branch]'>[branch]</a></li>"
 							options += "</ul>"
-							
+
 							temp = jointext(options, null)
 						else
 							alert(usr, "You do not have the required access to change the branch field.")
@@ -387,7 +393,7 @@ What a mess.*/
 								for(var/rank in branch.ranks)
 									options += "<li><a href='?src=\ref[src];choice=change_mil_rank;mil_rank=[rank]'>[rank]</a></li>"
 								options += "</ul>"
-								
+
 								temp = jointext(options, null)
 						else
 							alert(usr, "You do not have the required access to change the rank field.")
@@ -408,24 +414,24 @@ What a mess.*/
 								active1.fields["rank"] = href_list["rank"]
 								if(href_list["rank"] in joblist)
 									active1.fields["real_rank"] = href_list["real_rank"]
-									
+
 								if(PDA_Manifest.len)
 									PDA_Manifest.Cut()
 						if("change_mil_branch")
 							if(has_write_access && mil_branches.get_branch(href_list["mil_branch"]))  // Check for name validity
 								active1.fields["mil_branch"] = href_list["mil_branch"]
 								active1.fields["mil_rank"] = null  // Previous entry may be invalid for new branch
-								
+
 								if(PDA_Manifest.len)
 									PDA_Manifest.Cut()
-							
+
 						if("change_mil_rank")
 							if(has_write_access && mil_branches.get_rank(active1.fields["mil_branch"], href_list["mil_rank"]))
 								active1.fields["mil_rank"] = href_list["mil_rank"]
-								
+
 								if(PDA_Manifest.len)
 									PDA_Manifest.Cut()
-								
+
 						if ("Delete Record (ALL) Execute")
 							if(PDA_Manifest.len)
 								PDA_Manifest.Cut()

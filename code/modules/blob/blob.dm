@@ -97,10 +97,6 @@
 	if(V)
 		V.ex_act(2)
 		return
-	var/obj/machinery/bot/B = locate() in T
-	if(B)
-		B.ex_act(2)
-		return
 	var/obj/mecha/M = locate() in T
 	if(M)
 		M.visible_message("<span class='danger'>The blob attacks \the [M]!</span>")
@@ -189,12 +185,10 @@
 
 /obj/effect/blob/core/New(loc)
 	processing_objects.Add(src)
-	GhostFollowObjects.Add(src)
 	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
 	processing_objects.Remove(src)
-	GhostFollowObjects.Remove(src)
 	return ..()
 
 /obj/effect/blob/core/process()
@@ -241,7 +235,7 @@
 	update_nearby_tiles()
 
 /obj/effect/blob/shield/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	..()
 

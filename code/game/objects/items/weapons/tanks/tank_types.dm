@@ -23,11 +23,11 @@
 
 
 /obj/item/weapon/tank/oxygen/yellow
-	desc = "A tank of oxygen, this one is yellow."
+	desc = "A tank of oxygen. This one is yellow."
 	icon_state = "oxygen_f"
 
 /obj/item/weapon/tank/oxygen/red
-	desc = "A tank of oxygen, this one is red."
+	desc = "A tank of oxygen. This one is red."
 	icon_state = "oxygen_fr"
 
 

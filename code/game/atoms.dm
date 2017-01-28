@@ -78,6 +78,9 @@
 /atom/proc/emp_act(var/severity)
 	return
 
+/atom/proc/set_density(var/new_density)
+	if(density != new_density)
+		density = !!new_density
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)

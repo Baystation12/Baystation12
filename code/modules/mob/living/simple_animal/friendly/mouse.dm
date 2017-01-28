@@ -41,14 +41,14 @@
 			sound_to(M, 'sound/effects/mousesqueek.ogg')
 
 	if(!ckey && stat == CONSCIOUS && prob(0.5))
-		stat = UNCONSCIOUS
+		set_stat(UNCONSCIOUS)
 		icon_state = "mouse_[body_color]_sleep"
 		wander = 0
 		speak_chance = 0
 		//snuffles
 	else if(stat == UNCONSCIOUS)
 		if(ckey || prob(1))
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 			icon_state = "mouse_[body_color]"
 			wander = 1
 		else if(prob(5))
@@ -77,10 +77,9 @@
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 /mob/living/simple_animal/mouse/proc/splat()
-	src.health = 0
+	icon_dead = "mouse_[body_color]_splat"
+	adjustBruteLoss(maxHealth)  // Enough damage to kill
 	src.death()
-	src.icon_dead = "mouse_[body_color]_splat"
-	src.icon_state = "mouse_[body_color]_splat"
 
 /mob/living/simple_animal/mouse/MouseDrop(atom/over_object)
 

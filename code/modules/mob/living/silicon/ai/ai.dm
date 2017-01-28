@@ -119,7 +119,7 @@ var/list/ai_verbs_default = list(
 	fully_replace_character_name(pickedName)
 	anchored = 1
 	canmove = 0
-	density = 1
+	set_density(1)
 	loc = loc
 
 	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
@@ -140,7 +140,7 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language("Robot Talk", 1)
-	add_language("Galactic Common", 1)
+	add_language(LANGUAGE_GALCOM, 1)
 	add_language(LANGUAGE_EAL, 1)
 	add_language(LANGUAGE_SOL_COMMON, 1)
 	add_language(LANGUAGE_UNATHI, 1)
@@ -159,8 +159,6 @@ var/list/ai_verbs_default = list(
 		else
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
-
-			on_mob_init()
 
 	create_powersupply()
 
@@ -352,12 +350,12 @@ var/list/ai_verbs_default = list(
 	if(emergency_message_cooldown)
 		to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 		return
-	var/input = sanitize(input(usr, "Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
+	var/input = sanitize(input(usr, "Please choose a message to transmit to [using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 	if(!input)
 		return
 	Centcomm_announce(input, usr)
 	to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-	log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
+	log_say("[key_name(usr)] has made an IA [using_map.boss_short] announcement: [input]")
 	emergency_message_cooldown = 1
 	spawn(300)
 		emergency_message_cooldown = 0

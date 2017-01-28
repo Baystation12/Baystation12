@@ -31,7 +31,8 @@
 	var/turf/T = loc
 	T.contents += contents
 	if(beaker)
-		beaker.loc = get_step(loc, SOUTH) //Beaker is carefully ejected from the wreckage of the cryotube
+		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
+		beaker = null
 	..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/initialize()
@@ -157,7 +158,7 @@
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
-			beaker.loc = get_step(loc, SOUTH)
+			beaker.forceMove(get_step(loc, SOUTH))
 			beaker = null
 
 	if(href_list["ejectOccupant"])
@@ -176,7 +177,7 @@
 
 		beaker =  G
 		user.drop_item()
-		G.loc = src
+		G.forceMove(src)
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 	else if(istype(G, /obj/item/weapon/grab))
 		if(!ismob(G:affecting))
@@ -216,11 +217,11 @@
 	if(air_contents.total_moles < 10)
 		return
 	if(occupant)
-		if(occupant.stat == 2)
+		if(occupant.stat == DEAD)
 			return
 		occupant.bodytemperature += 2*(air_contents.temperature - occupant.bodytemperature)*current_heat_capacity/(current_heat_capacity + air_contents.heat_capacity())
 		occupant.bodytemperature = max(occupant.bodytemperature, air_contents.temperature) // this is so ugly i'm sorry for doing it i'll fix it later i promise
-		occupant.stat = 1
+		occupant.set_stat(UNCONSCIOUS)
 		if(occupant.bodytemperature < T0C)
 			occupant.sleeping = max(5, (1/occupant.bodytemperature)*2000)
 			occupant.Paralyse(max(5, (1/occupant.bodytemperature)*3000))
@@ -269,7 +270,7 @@
 	if (occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
-	occupant.loc = get_step(loc, SOUTH)	//this doesn't account for walls or anything, but i don't forsee that being a problem.
+	occupant.forceMove(get_step(loc, SOUTH))	//this doesn't account for walls or anything, but i don't forsee that being a problem.
 	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
 		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
 //	occupant.metabslow = 0
@@ -298,7 +299,7 @@
 		M.client.perspective = EYE_PERSPECTIVE
 		M.client.eye = src
 	M.stop_pulling()
-	M.loc = src
+	M.forceMove(src)
 	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
 		to_chat(M, "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>")

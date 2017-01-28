@@ -65,13 +65,13 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
-	
+
 /obj/item/stack/tile/carpet/fifty
 	amount = 50
 
 /obj/item/stack/tile/floor
-	name = "floor tile"
-	singular_name = "floor tile"
+	name = "steel floor tile"
+	singular_name = "steel floor tile"
 	desc = "Those could work as a pretty decent throwing weapon." //why?
 	icon_state = "tile"
 	force = 6.0
@@ -81,29 +81,21 @@
 	throw_range = 20
 	flags = CONDUCT
 
-/obj/item/stack/tile/floor_steel
-	name = "steel floor tile"
-	singular_name = "steel floor tile"
-	icon_state = "tile_steel"
-	matter = list("plasteel" = 937.5)
-	
-/obj/item/stack/tile/floor_steel/fifty
-	amount = 50
-
 /obj/item/stack/tile/floor_white
 	name = "white floor tile"
 	singular_name = "white floor tile"
 	icon_state = "tile_white"
 	matter = list("plastic" = 937.5)
-	
+
 /obj/item/stack/tile/floor_white/fifty
+	amount = 50
 
 /obj/item/stack/tile/floor_dark
 	name = "dark floor tile"
 	singular_name = "dark floor tile"
 	icon_state = "fr_tile"
 	matter = list("plasteel" = 937.5)
-	
+
 /obj/item/stack/tile/floor_dark/fifty
 	amount = 50
 
@@ -112,7 +104,7 @@
 	singular_name = "freezer floor tile"
 	icon_state = "tile_freezer"
 	matter = list("plastic" = 937.5)
-	
+
 /obj/item/stack/tile/floor_freezer/fifty
 	amount = 50
 
@@ -136,6 +128,6 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
-	
+
 /obj/item/stack/tile/linoleum/fifty
 	amount = 50

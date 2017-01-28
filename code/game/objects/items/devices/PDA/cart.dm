@@ -124,10 +124,6 @@
 	icon_state = "cart-q"
 	access_quartermaster = 1
 
-/obj/item/weapon/cartridge/quartermaster/initialize()
-	radio = new /obj/item/radio/integrated/mule(src)
-	..()
-
 /obj/item/weapon/cartridge/head
 	name = "\improper Easy-Record DELUXE"
 	icon_state = "cart-h"
@@ -140,9 +136,6 @@
 	access_quartermaster = 1
 	access_janitor = 1
 	access_security = 1
-
-/obj/item/weapon/cartridge/hop/initialize()
-	radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/hos
 	name = "\improper R.O.B.U.S.T. DELUXE"
@@ -351,40 +344,26 @@
 	/*		MULEBOT Control	(Mode: 48)		*/
 
 	if(mode==48)
-		var/muleData[0]
 		var/mulebotsData[0]
-		if(istype(radio,/obj/item/radio/integrated/mule))
-			var/obj/item/radio/integrated/mule/QC = radio
-			muleData["active"] = QC.active
-			if(QC.active && !isnull(QC.botstatus))
-				var/area/loca = QC.botstatus["loca"]
-				var/loca_name = sanitize(loca.name)
-				muleData["botstatus"] =  list("loca" = loca_name, "mode" = QC.botstatus["mode"],"home"=QC.botstatus["home"],"powr" = QC.botstatus["powr"],"retn" =QC.botstatus["retn"], "pick"=QC.botstatus["pick"], "load" = QC.botstatus["load"], "dest" = sanitize(QC.botstatus["dest"]))
+		var/count = 0
 
-			else
-				muleData["botstatus"] = list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
+		for(var/mob/living/bot/mulebot/M in living_mob_list_)
+			if(!M.on)
+				continue
+			++count
+			var/muleData[0]
+			muleData["name"] = M.suffix
+			muleData["location"] = get_area(M)
+			muleData["paused"] = M.paused
+			muleData["home"] = M.homeName
+			muleData["target"] = M.targetName
+			muleData["ref"] = "\ref[M]"
+			muleData["load"] = M.load ? M.load.name : "Nothing"
 
+			mulebotsData[++mulebotsData.len] = muleData.Copy()
 
-			var/mulebotsCount=0
-			for(var/obj/machinery/bot/B in QC.botlist)
-				mulebotsCount++
-				if(B.loc)
-					mulebotsData[++mulebotsData.len] = list("Name" = sanitize(B.name), "Location" = sanitize(B.loc.loc.name), "ref" = "\ref[B]")
-
-			if(!mulebotsData.len)
-				mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
-
-			muleData["bots"] = mulebotsData
-			muleData["count"] = mulebotsCount
-
-		else
-			muleData["botstatus"] =  list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
-			muleData["active"] = 0
-			mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
-			muleData["bots"] = mulebotsData
-			muleData["count"] = 0
-
-		values["mulebot"] = muleData
+		values["mulebotcount"] = count
+		values["mulebots"] = mulebotsData
 
 
 
@@ -574,6 +553,11 @@
 			selected_sensor = null
 			loc:mode = 43
 			mode = 43
+
+		if("MULEbot")
+			var/mob/living/bot/mulebot/M = locate(href_list["ref"])
+			if(istype(M))
+				M.obeyCommand(href_list["command"])
 
 
 	return 1

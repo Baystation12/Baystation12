@@ -72,7 +72,7 @@ var/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/clerical)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/space_suit, 50, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/thermal)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_vest)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_armor)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/teleporter, 10, 0)

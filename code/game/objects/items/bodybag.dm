@@ -78,7 +78,7 @@
 
 /obj/structure/closet/body_bag/close()
 	if(..())
-		density = 0
+		set_density(0)
 		return 1
 	return 0
 
@@ -166,7 +166,7 @@
 	..()
 
 /obj/structure/closet/body_bag/cryobag/examine(mob/user)
-	..()
+	. = ..()
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
 		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		for(var/mob/living/L in contents)

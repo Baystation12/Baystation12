@@ -107,7 +107,7 @@ LINEN BINS
 
 
 /obj/structure/bedsheetbin/examine(mob/user)
-	..(user)
+	. = ..(user)
 
 	if(amount < 1)
 		to_chat(user, "There are no bed sheets in the bin.")

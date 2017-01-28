@@ -51,7 +51,7 @@
 		power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
 	examine(mob/user)
-		..(user)
+		. = ..(user)
 		to_chat(user, "<span class='notice'>The generator has [P.air_contents.phoron] units of fuel left, producing [power_gen] per cycle.</span>")
 	handleInactive()
 		heat -= 2
@@ -164,7 +164,7 @@
 				usr << browse(null, "window=port_gen")
 				usr.machine = null
 
-/obj/machinery/power/port_gen/pacman2/emag_act(var/remaining_uses, var/mob/user)				
+/obj/machinery/power/port_gen/pacman2/emag_act(var/remaining_uses, var/mob/user)
 	emagged = 1
 	emp_act(1)
 	return 1

@@ -407,15 +407,13 @@
 	var/toxrange = 10
 	var/toxdamage = 4
 	var/radiation = 15
-	var/radiationmin = 3
 	if (src.energy>200)
 		toxdamage = round(((src.energy-150)/50)*4,1)
 		radiation = round(((src.energy-150)/50)*5,1)
-		radiationmin = round((radiation/5),1)//
+	radiation_repository.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
-		M.apply_effect(rand(radiationmin,radiation), IRRADIATE, blocked = M.getarmor(null, "rad"))
 		toxdamage = (toxdamage - (toxdamage*M.getarmor(null, "rad")))
 		M.apply_effect(toxdamage, TOX)
 	return
@@ -449,13 +447,13 @@
 /obj/singularity/proc/smwave()
 	for(var/mob/living/M in view(10, src.loc))
 		if(prob(67))
-			M.apply_effect(rand(energy), IRRADIATE, blocked = M.getarmor(null, "rad"))
 			to_chat(M, "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
 		else
 			to_chat(M, "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>")
 			M.dust()
+	radiation_repository.radiate(src, rand(energy))
 	return
 
 /obj/singularity/proc/pulse()

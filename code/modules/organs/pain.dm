@@ -1,24 +1,30 @@
 mob/proc/flash_pain()
 	flick("pain",pain)
 
-mob/var/list/pain_stored = list()
-mob/var/last_pain_message = ""
+mob/var/last_pain_message
 mob/var/next_pain_time = 0
 
 // message is the custom message to be displayed
 // power decides how much painkillers will stop the message
-// force means it ignores anti-psam timer
-mob/living/carbon/proc/custom_pain(message, power, force)
+// force means it ignores anti-spam timer
+mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/item/organ/external/affecting)
 	if(!message || stat || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return 0
-	message = "<span class='danger'>[message]</span>"
-	if(power >= 50)
-		message = "<font size=3>[message]</font>"
+
+	// Excessive halloss is horrible, just give them enough to make it visible.
+	if(power)
+		if(affecting)
+			affecting.add_pain(ceil(power/2))
+		else
+			adjustHalLoss(ceil(power/2))
 
 	// Anti message spam checks
 	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
 		last_pain_message = message
-		to_chat(src, message)
+		if(power >= 50)
+			to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
+		else
+			to_chat(src, "<span class='danger'>[message]</span>")
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()
@@ -54,14 +60,14 @@ mob/living/carbon/human/proc/handle_pain()
 			if(91 to 10000)
 				flash_pain()
 				msg = "<font size=3>OH GOD! Your [damaged_organ.name] is [burning ? "on fire" : "hurting terribly"]!</font>"
-		custom_pain(msg, maxdam, prob(10))
+		custom_pain(msg, 0, prob(10), affecting = damaged_organ)
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/I in internal_organs)
 		if((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) continue
 		if(I.damage > 2) if(prob(2))
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
-			src.custom_pain("You feel a sharp pain in your [parent.name]", 50)
+			src.custom_pain("You feel a sharp pain in your [parent.name]", 50, affecting = parent)
 
 	if(prob(2))
 		switch(getToxLoss())

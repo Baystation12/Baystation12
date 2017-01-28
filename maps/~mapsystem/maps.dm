@@ -43,6 +43,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
 
+	var/station_name  = "BAD Station"
+	var/station_short = "Baddy"
+	var/dock_name     = "THE PirateBay"
+	var/boss_name     = "Captain Roger"
+	var/boss_short    = "Cap'"
+	var/company_name  = "BadMan"
+	var/company_short = "BM"
+
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
 	var/shuttle_called_message
@@ -63,6 +71,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
+	var/use_overmap = 0		//If overmap should be used (including overmap space travel override)
+	var/overmap_size = 20		//Dimensions of overmap zlevel if overmap is used.
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 
 	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
@@ -71,6 +81,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/branch_types  // list of branch datum paths for military branches available on this map
 	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
+
+	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
 /datum/map/New()
 	..()

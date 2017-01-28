@@ -11,7 +11,7 @@ var/global/list/stool_cache = list() //haha stool
 	force = 10
 	throwforce = 10
 	w_class = ITEM_SIZE_HUGE
-	var/base_icon = "stool_base"
+	var/base_icon = "stool"
 	var/material/material
 	var/material/padding_material
 
@@ -34,25 +34,38 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
 	..(newloc, "steel", "carpet")
 
+/obj/item/weapon/stool/bar
+	name = "bar stool"
+	icon_state = "bar_stool_preview" //set for the map
+	item_state = "bar_stool"
+	base_icon = "bar_stool"
+
+/obj/item/weapon/stool/bar/padded
+	icon_state = "bar_stool_padded_preview"
+
+/obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
+	..(newloc, "steel", "carpet")
+
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
 	icon_state = ""
-	overlays.Cut()
 	// Base icon.
-	var/cache_key = "stool-[material.name]"
+	var/list/noverlays = list()
+	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image(icon, base_icon)
+		var/image/I = image(icon, "[base_icon]_base")
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
-	overlays |= stool_cache[cache_key]
+	noverlays |= stool_cache[cache_key]
 	// Padding overlay.
 	if(padding_material)
-		var/padding_cache_key = "stool-padding-[padding_material.name]"
+		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image(icon, "stool_padding")
+			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
-		overlays |= stool_cache[padding_cache_key]
+		noverlays |= stool_cache[padding_cache_key]
+	overlays = noverlays
 	// Strings.
 	if(padding_material)
 		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
@@ -135,7 +148,7 @@ var/global/list/stool_cache = list() //haha stool
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
-			src.loc = get_turf(src)
+			src.dropInto(loc)
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return

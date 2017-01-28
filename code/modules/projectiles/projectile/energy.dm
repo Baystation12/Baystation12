@@ -61,7 +61,7 @@
 	nodamage = 1
 	taser_effect = 1
 	agony = 40
-	damage_type = HALLOSS
+	damage_type = PAIN
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot
@@ -71,10 +71,10 @@
 	damage_type = BURN
 
 /obj/item/projectile/energy/declone
-	name = "declone"
+	name = "decloner beam"
 	icon_state = "declone"
 	fire_sound = 'sound/weapons/pulse3.ogg'
-	nodamage = 1
+	damage = 30
 	damage_type = CLONE
 	irradiate = 40
 
@@ -125,7 +125,7 @@
 	armor_penetration = 10
 	kill_count = 4
 	damage = 5
-	agony = 60
+	agony = 70
 	damage_type = BURN
 	vacuum_traversal = 0
 
@@ -143,14 +143,11 @@
 			if(istype(H.head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
 	if(ear_safety == 1)
-		M.Stun(5)
-		M.Weaken(2)
+		M.make_dizzy(120)
 	else if (ear_safety > 1)
-		M.Stun(2)
-		M.Weaken(1)
+		M.make_dizzy(60)
 	else if (!ear_safety)
-		M.Stun(10)
-		M.Weaken(3)
+		M.make_dizzy(300)
 		M.ear_damage += rand(1, 10)
 		M.ear_deaf = max(M.ear_deaf,15)
 	if (M.ear_damage >= 15)

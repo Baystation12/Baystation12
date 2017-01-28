@@ -54,8 +54,8 @@
 
 		if(paralysis && paralysis > 0)
 			blinded = 1
-			stat = UNCONSCIOUS
-			if(halloss > 0)
+			set_stat(UNCONSCIOUS)
+			if(getHalLoss() > 0)
 				adjustHalLoss(-3)
 
 		if(sleeping)
@@ -64,14 +64,14 @@
 				if(mind.active && client != null)
 					sleeping = max(sleeping-1, 0)
 			blinded = 1
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else if(resting)
-			if(halloss > 0)
+			if(getHalLoss() > 0)
 				adjustHalLoss(-3)
 
 		else
-			stat = CONSCIOUS
-			if(halloss > 0)
+			set_stat(CONSCIOUS)
+			if(getHalLoss() > 0)
 				adjustHalLoss(-1)
 
 		// Eyes and blindness.

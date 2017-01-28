@@ -1,6 +1,6 @@
 /decl/emote/visible
 	key ="tail"
-	emote_message_3p = "USER waves its tail."
+	emote_message_3p = "USER waves USER_THEIR tail."
 	message_type = VISIBLE_MESSAGE
 
 /decl/emote/visible/scratch
@@ -11,10 +11,11 @@
 /decl/emote/visible/drool
 	key ="drool"
 	emote_message_3p = "USER drools."
+	conscious = 0
 
 /decl/emote/visible/nod
 	key ="nod"
-	emote_message_3p = "USER nods its head."
+	emote_message_3p = "USER nods USER_THEIR head."
 
 /decl/emote/visible/sway
 	key ="sway"
@@ -23,10 +24,6 @@
 /decl/emote/visible/sulk
 	key ="sulk"
 	emote_message_3p = "USER sulks down sadly."
-
-/decl/emote/visible/twitch
-	key ="twitch"
-	emote_message_3p = "USER twitches violently."
 
 /decl/emote/visible/dance
 	key ="dance"
@@ -40,7 +37,7 @@
 
 /decl/emote/visible/shake
 	key ="shake"
-	emote_message_3p = "USER shakes its head."
+	emote_message_3p = "USER shakes USER_THEIR head."
 
 /decl/emote/visible/jump
 	key ="jump"
@@ -53,6 +50,7 @@
 /decl/emote/visible/shiver
 	key ="shiver"
 	emote_message_3p = "USER shivers."
+	conscious = 0
 
 /decl/emote/visible/collapse
 	key ="collapse"
@@ -99,10 +97,6 @@
 	check_restraints = TRUE
 	emote_message_3p = "USER flaps USER_THEIR wings ANGRILY!"
 
-/decl/emote/visible/drool
-	key = "drool"
-	emote_message_3p = "USER drools."
-
 /decl/emote/visible/eyebrow
 	key = "eyebrow"
 	emote_message_3p = "USER raises an eyebrow."
@@ -110,10 +104,12 @@
 /decl/emote/visible/twitch
 	key = "twitch"
 	emote_message_3p = "USER twitches."
+	conscious = 0
 
 /decl/emote/visible/twitch_v
 	key = "twitch_v"
 	emote_message_3p = "USER twitches violently."
+	conscious = 0
 
 /decl/emote/visible/faint
 	key = "faint"
@@ -224,7 +220,7 @@
 
 /decl/emote/visible/deathgasp_robot
 	key = "deathgasp"
-	emote_message_3p = "USER shudders violently for a moment, then becomes motionless, its eyes slowly darkening."
+	emote_message_3p = "USER shudders violently for a moment, then becomes motionless, USER_THEIR eyes slowly darkening."
 
 /decl/emote/visible/handshake
 	key = "handshake"

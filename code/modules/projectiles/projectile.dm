@@ -1,14 +1,3 @@
-/*
-#define BRUTE "brute"
-#define BURN "burn"
-#define TOX "tox"
-#define OXY "oxy"
-#define CLONE "clone"
-
-#define ADD "add"
-#define SET "set"
-*/
-
 /obj/item/projectile
 	name = "projectile"
 	icon = 'icons/obj/projectiles.dmi'
@@ -37,7 +26,7 @@
 	var/dispersion = 0.0
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, HALLOSS are the only things that should be in here
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, PAIN are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
 	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
@@ -72,6 +61,10 @@
 	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't
 										//  have to be recreated multiple times
 
+/obj/item/projectile/New()
+	damtype = damage_type //TODO unify these vars properly
+	..()
+
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	if(blocked >= 100)		return 0//Full block
@@ -80,7 +73,7 @@
 
 	var/mob/living/L = target
 
-	L.apply_effects(stun, weaken, paralyze, 0, stutter, eyeblur, drowsy, agony, blocked) // add in AGONY!
+	L.apply_effects(stun, weaken, paralyze, 0, stutter, eyeblur, drowsy, agony, blocked)
 	//radiation protection is handled separately from other armour types.
 	L.apply_effect(irradiate, IRRADIATE, L.getarmor(null, "rad"))
 
@@ -271,7 +264,7 @@
 	//stop flying
 	on_impact(A)
 
-	density = 0
+	set_density(0)
 	invisibility = 101
 
 	qdel(src)
@@ -380,7 +373,7 @@
 				P.activate()
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
-	if(ispath(tracer_type))
+	if(ispath(impact_type))
 		var/obj/effect/projectile/P = new impact_type(location.loc)
 
 		if(istype(P))

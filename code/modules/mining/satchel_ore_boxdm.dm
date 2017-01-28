@@ -37,8 +37,7 @@
 			stored_ore[O.name] = 1
 
 /obj/structure/ore_box/examine(mob/user)
-	to_chat(user, "That's an [src].")
-	to_chat(user, desc)
+	. = ..(user)
 
 	// Borgs can now check contents too.
 	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))

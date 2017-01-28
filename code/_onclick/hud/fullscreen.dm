@@ -55,7 +55,7 @@
 			client.screen -= screens[category]
 
 /mob/proc/reload_fullscreen()
-	if(client && stat != DEAD) //dead mob do not see any of the fullscreen overlays that he has.
+	if(client)
 		for(var/category in screens)
 			client.screen |= screens[category]
 
@@ -108,3 +108,20 @@
 	icon = 'icons/mob/screen1.dmi'
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	icon_state = "druggy"
+
+/obj/screen/fullscreen/noise
+	icon = 'icons/effects/static.dmi'
+	icon_state = "1 light"
+	screen_loc = ui_entire_screen
+	layer = FULLSCREEN_LAYER
+	alpha = 127
+
+/obj/screen/fullscreen/scanline
+	icon = 'icons/effects/static.dmi'
+	icon_state = "scanlines"
+	screen_loc = ui_entire_screen
+	alpha = 50
+	layer = FULLSCREEN_LAYER
+
+/obj/screen/fullscreen/fishbed
+	icon_state = "fishbed"

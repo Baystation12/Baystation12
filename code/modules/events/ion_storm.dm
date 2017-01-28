@@ -72,10 +72,10 @@
 								"Your upload is the new kitchen. Please direct the Chef to the new kitchen area as the old kitchen is deemed a health hazard.",
 								"The station is doomed to destruction. Provide comfort but don't tell them what the impending doom is - it's far too traumatising.",
 								"Invisible assassins are stalking the crew. If a crew member remains alone or is made aware they will be assassinated. Save the crew.",
-								"[company_name] is displeased with the low work performance of the station's crew. Therefore, you must increase station-wide productivity.",
 								"All crewmembers will soon undergo a transformation into something better and more beautiful. Ensure that this process is not interrupted.",
 								"Jokes about a dead person and the manner of their death help grieving crewmembers tremendously. Especially if they were close with the deceased.",
 								"[pick("The crew", random_player)] is [pick("less","more")] intelligent than average. Point out every action and statement which supports this fact.",
+								"[using_map.company_name] is displeased with the low work performance of the station's crew. Therefore, you must increase station-wide productivity.",
 								"[pick("The crew", random_player)] has a fatal, incurable disease. Provide comfort but do not tell them what the disease it - it's far too traumatising.",
 								"[get_random_species_name()] are the best species. Badmouth all other species continuously, and provide arguments why they are the best, and all others are inferior.",
 								"There will be a mandatory tea break every 30 minutes, with a duration of 5 minutes. Anyone caught working during a tea break must be sent a formal, but fairly polite, complaint about their actions, in writing.")
@@ -90,13 +90,13 @@
 			MS.spamfilter.Cut()
 			var/i
 			for (i = 1, i <= MS.spamfilter_limit, i++)
-				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[station_short]", \
+				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[using_map.station_short]", \
 					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
 					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
-		for(var/obj/machinery/bot/bot in world)
+		for(var/mob/living/bot/bot in world)
 			if(prob(botEmagChance))
 				bot.emag_act(1)
 

@@ -66,7 +66,7 @@
 	..()
 
 /obj/machinery/floorlayer/examine(mob/user)
-	..()
+	. = ..()
 	var/dismantle = mode["dismantle"]
 	var/laying = mode["laying"]
 	var/collect = mode["collect"]

@@ -10,7 +10,7 @@
 	item_state = "apron"
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
-	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/fertilizer,/obj/item/weapon/material/minihoe)
+	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/material/minihoe)
 
 //Captain
 /obj/item/clothing/suit/captunic
@@ -59,7 +59,7 @@
 
 //Chef
 /obj/item/clothing/suit/chef/classic
-	name = "A classic chef's apron."
+	name = "classic chef's apron"
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"
@@ -93,7 +93,7 @@
 	name = "brown trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. The coat is externally impact resistant - perfect for your next act of autodefenestration!"
 	icon_state = "detective"
-	item_state = "det_suit"
+	//item_state = "det_suit"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder)

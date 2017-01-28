@@ -348,7 +348,7 @@
 
 
 /obj/structure/window/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	var/turf/location = loc
 	loc = null
@@ -552,7 +552,7 @@
 	name = "window tint control"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light0"
-	desc = "A remote control switch for polarized windows."
+	desc = "A remote control switch for electrochromic windows."
 	var/range = 7
 
 /obj/machinery/button/windowtint/attack_hand(mob/user as mob)

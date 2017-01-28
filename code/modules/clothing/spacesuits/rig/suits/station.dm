@@ -41,7 +41,7 @@
 	suit_type = "industrial hardsuit"
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 50)
+	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 50)
 	online_slowdown = 3
 	offline_slowdown = 10
 	vision_restriction = TINT_HEAVY
@@ -70,6 +70,7 @@
 
 /obj/item/clothing/gloves/rig/industrial
 	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/industrial/equipped
 
@@ -114,6 +115,7 @@
 
 /obj/item/clothing/gloves/rig/eva
 	species_restricted = list("Human","Skrell")
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/eva/equipped
 
@@ -213,7 +215,7 @@
 	suit_type = "rescue hardsuit"
 	desc = "A durable suit designed for medical rescue in high risk areas."
 	icon_state = "medical_rig"
-	armor = list(melee = 30, bullet = 15, laser = 20, energy = 60, bomb = 30, bio = 100, rad = 100)
+	armor = list(melee = 30, bullet = 15, laser = 25, energy = 60, bomb = 30, bio = 100, rad = 100)
 	online_slowdown = 1
 	offline_vision_restriction = TINT_HEAVY
 
@@ -256,7 +258,7 @@
 	suit_type = "hazard hardsuit"
 	desc = "A NanoTrasen security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
-	armor = list(melee = 60, bullet = 40, laser = 30, energy = 15, bomb = 60, bio = 100, rad = 30)
+	armor = list(melee = 60, bullet = 40, laser = 40, energy = 15, bomb = 60, bio = 100, rad = 30)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_BLIND
@@ -274,16 +276,16 @@
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/security
-	species_restricted = list("Human","Skrell","Unathi") //still needs taj and resomi sprites
+	species_restricted = list("Human","Skrell","Tajara","Unathi") //still needs Resomi sprites
 
 /obj/item/clothing/suit/space/rig/hazard
-	species_restricted = list("Human","Skrell","Unathi")
+	species_restricted = list("Human","Skrell","Tajara","Unathi")
 
 /obj/item/clothing/shoes/magboots/rig/hazard
-	species_restricted = list("Human","Skrell","Unathi")
+	species_restricted = list("Human","Skrell","Tajara","Unathi")
 
 /obj/item/clothing/gloves/rig/hazard
-	species_restricted = list("Human","Skrell","Unathi")
+	species_restricted = list("Human","Skrell","Tajara","Unathi")
 
 /obj/item/weapon/rig/hazard/equipped
 

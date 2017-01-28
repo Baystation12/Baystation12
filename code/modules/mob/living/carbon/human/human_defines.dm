@@ -60,7 +60,6 @@
 	var/obj/item/s_store = null
 
 	var/used_skillpoints = 0
-	var/skill_specialization = null
 	var/list/skills = list()
 
 	var/icon/stand_icon = null
@@ -100,9 +99,11 @@
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
-	
+
 	var/datum/mil_branch/char_branch = null
 	var/datum/mil_rank/char_rank = null
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
 	var/cloaked // If set, mob will only render its inhands, no other icons will be shown.
+
+	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
