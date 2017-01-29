@@ -85,6 +85,18 @@
 			  {{:helper.link("Custom", '', {'action' : 'assign', 'assign_target' : 'Custom'})}}
 			</td>
 		  </tr>
+		  	<tr>
+			<th style="color: '#cc6600';">Command</th>
+			<td>
+			  {{for data.command_jobs}}
+				{{if index && index % 6 === 0}}
+				  </td></tr><tr><th></th><td>
+				{{/if}}
+				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>
+		  
 		  <tr>
 			<th style="color: '#FFA500';">Engineering</th>
 			<td>
@@ -118,9 +130,20 @@
 			</td>
 		  </tr>
 		  <tr>
-			<th style="color: '#cc6600';">Cargo</th>
+			<th style="color: '#cc6600';">Supply</th>
 			<td>
-			  {{for data.cargo_jobs}}
+			  {{for data.supply_jobs}}
+				{{if index && index % 6 === 0}}
+				  </td></tr><tr><th></th><td>
+				{{/if}}
+				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>
+		  <tr>
+			<th style="color: '#cc6600';">Service</th>
+			<td>
+			  {{for data.service_jobs}}
 				{{if index && index % 6 === 0}}
 				  </td></tr><tr><th></th><td>
 				{{/if}}

@@ -24,6 +24,8 @@ name updates also zero the list; although they are not in data_core, synths are 
 	var/med[0]
 	var/sci[0]
 	var/car[0]
+	var/sup[0]
+	var/srv[0]
 	var/civ[0]
 	var/bot[0]
 	var/misc[0]
@@ -111,6 +113,26 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && car.len != 1)
 				car.Swap(1,car.len)
 
+		if(real_rank in supply_positions)
+			sup[++sup.len] = list("name" = name,
+				"rank" = rank,
+				"active" = isactive,
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
+			department = 1
+			if(depthead && sup.len != 1)
+				sup.Swap(1,sup.len)
+
+		if(real_rank in service_positions)
+			srv[++srv.len] = list("name" = name,
+				"rank" = rank,
+				"active" = isactive,
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
+			department = 1
+			if(depthead && srv.len != 1)
+				srv.Swap(1,srv.len)
+
 		if(real_rank in civilian_positions)
 			civ[++civ.len] = list("name" = name,
 				"rank" = rank,
@@ -148,6 +170,8 @@ name updates also zero the list; although they are not in data_core, synths are 
 		"med" = med,\
 		"sci" = sci,\
 		"car" = car,\
+		"sup" = sup,\
+		"srv" = srv,\
 		"civ" = civ,\
 		"bot" = bot,\
 		"misc" = misc\

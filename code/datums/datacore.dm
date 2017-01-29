@@ -136,6 +136,16 @@
 		for(name in sci)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
+	if(sup.len > 0)
+		dat += "<tr><th colspan=3>Supply</th></tr>"
+		for(name in sup)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(srv.len > 0)
+		dat += "<tr><th colspan=3>Service</th></tr>"
+		for(name in srv)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[srv[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
 	if(car.len > 0)
 		dat += "<tr><th colspan=3>Cargo</th></tr>"
 		for(name in car)
@@ -159,17 +169,6 @@
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[misc[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 
-	if(srv.len > 0)
-		dat += "<tr><th colspan=3Service</th></tr>"
-		for(name in srv)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[srv[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-
-	if(sup.len > 0)
-		dat += "<tr><th colspan=3Supply</th></tr>"
-		for(name in sup)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
 
 	dat += "</table>"
 	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly
