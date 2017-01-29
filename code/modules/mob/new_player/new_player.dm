@@ -370,6 +370,7 @@
 		character.buckled.set_dir(character.dir)
 
 	ticker.mode.handle_latejoin(character)
+	universe.OnPlayerLatejoin(character)
 	if(job_master.ShouldCreateRecords(rank))
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
