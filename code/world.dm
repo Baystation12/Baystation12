@@ -1,4 +1,4 @@
-#define WORLD_ICON_SIZE 32
+#define WORLD_ICON_SIZE 64
 
 /var/server_name = "Baystation 12"
 

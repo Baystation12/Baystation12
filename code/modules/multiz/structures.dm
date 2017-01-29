@@ -156,20 +156,14 @@
 	// type paths to make mapping easier.
 	north
 		dir = NORTH
-		bound_height = 64
-		bound_y = -32
-		pixel_y = -32
+		pixel_y = -WORLD_ICON_SIZE
 
 	south
 		dir = SOUTH
-		bound_height = 64
 
 	east
 		dir = EAST
-		bound_width = 64
-		bound_x = -32
-		pixel_x = -32
+		pixel_x = -WORLD_ICON_SIZE
 
 	west
 		dir = WEST
-		bound_width = 64
