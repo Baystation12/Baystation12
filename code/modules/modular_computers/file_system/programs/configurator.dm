@@ -14,6 +14,7 @@
 	requires_ntnet = 0
 	nanomodule_path = /datum/nano_module/program/computer_configurator/
 
+
 /datum/nano_module/program/computer_configurator
 	name = "NTOS Computer Configuration Tool"
 	var/obj/item/modular_computer/movable = null
@@ -60,3 +61,4 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
+

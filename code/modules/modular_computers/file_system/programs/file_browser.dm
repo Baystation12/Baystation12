@@ -13,12 +13,32 @@
 	var/open_file
 	var/error
 
+/datum/computer_file/program/filemanager/proc/check_password(var/mob/usr, var/datum/computer_file/data/F)
+	if(!F)
+		return 1
+	if(F.password)
+		var/pass_entered = sanitize(input(usr, "Access Denied. Enter password or leave blank to cancel:", "Enter Password"), 16)
+		if(!pass_entered)
+			return 0
+		if(pass_entered != F.password)
+			error = "Incorrect password."
+			return 0
+	return 1
+
 /datum/computer_file/program/filemanager/Topic(href, href_list)
 	if(..())
 		return 1
 
 	if(href_list["PRG_openfile"])
 		. = 1
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		if(!HDD)
+			return 1
+		var/datum/computer_file/data/F = HDD.find_file_by_name(href_list["PRG_openfile"])
+		if(!F)
+			return 1
+		if(!check_password(usr, F))
+			return 1
 		open_file = href_list["PRG_openfile"]
 	if(href_list["PRG_newtextfile"])
 		. = 1
@@ -40,7 +60,31 @@
 		var/datum/computer_file/file = HDD.find_file_by_name(href_list["PRG_deletefile"])
 		if(!file || file.undeletable)
 			return 1
+		if(!check_password(usr, file))
+			return 1
 		HDD.remove_file(file)
+	if(href_list["PRG_lock"])
+		. = 1
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		if(!HDD)
+			return 1
+		var/datum/computer_file/data/F = HDD.find_file_by_name(href_list["PRG_lock"])
+		if(!F || !istype(F))
+			return 1
+		if(F.password)
+			var/pass_entered = sanitize(input(usr, "File [open_file] is password protected. To remove the password, enter the current password or leave blank to cancel", "Enter Password"), 16)
+			if(pass_entered != F.password)
+				error = "Incorrect password."
+				return 1
+			if(!pass_entered)
+				return 1
+			F.password = null
+		else
+			var/pass_entered = sanitize(input(usr, "File [open_file] is not currently password protected. Enter the new password or leave blank to cancel. (Max length is 16 characters)", "Enter Password"), 16)
+			if(!pass_entered)
+				return 1
+			F.password = pass_entered
+
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
 		var/obj/item/weapon/computer_hardware/hard_drive/RHDD = computer.portable_drive
@@ -48,6 +92,8 @@
 			return 1
 		var/datum/computer_file/file = RHDD.find_file_by_name(href_list["PRG_usbdeletefile"])
 		if(!file || file.undeletable)
+			return 1
+		if(!check_password(usr, file))
 			return 1
 		RHDD.remove_file(file)
 	if(href_list["PRG_closefile"])
@@ -62,6 +108,8 @@
 		var/datum/computer_file/F = HDD.find_file_by_name(href_list["PRG_clone"])
 		if(!F || !istype(F))
 			return 1
+		if(!check_password(usr, F))
+			return 1
 		var/datum/computer_file/C = F.clone(1)
 		HDD.store_file(C)
 	if(href_list["PRG_rename"])
@@ -71,6 +119,8 @@
 			return 1
 		var/datum/computer_file/file = HDD.find_file_by_name(href_list["PRG_rename"])
 		if(!file || !istype(file))
+			return 1
+		if(!check_password(usr, file))
 			return 1
 		var/newname = sanitize(input(usr, "Enter new file name:", "File rename", file.filename))
 		if(file && newname)
@@ -84,6 +134,8 @@
 			return 1
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
 		if(!F || !istype(F))
+			return 1
+		if(!check_password(usr, F))
 			return 1
 		if(F.do_not_edit && (alert("WARNING: This file is not compatible with editor. Editing it may result in permanently corrupted formatting or damaged data consistency. Edit anyway?", "Incompatible File", "No", "Yes") == "No"))
 			return 1
@@ -115,6 +167,8 @@
 			return 1
 		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
 		if(!F || !istype(F))
+			return 1
+		if(!check_password(usr, F))
 			return 1
 		if(!computer.nano_printer)
 			error = "Missing Hardware: Your computer does not have required hardware to complete this operation."
