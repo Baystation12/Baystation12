@@ -8,12 +8,6 @@
 	unique = 1
 	carved = 2 // Don't carve it
 
-/obj/item/weapon/book/tome/attack(var/mob/living/M, var/mob/living/user as mob)
-	..()
-	if(iscultist(user) && !iscultist(M))
-		M.take_organ_damage(0, rand(5, 20))
-		to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
-
 /obj/item/weapon/book/tome/attack_self(var/mob/user)
 	if(!iscultist(user))
 		to_chat(user, "\The [src] seems full of illegible scribbles. Is this a joke?")
