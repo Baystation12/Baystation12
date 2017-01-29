@@ -80,7 +80,7 @@
 						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 		if(prob(1))
-			visible_emote(pick("dances around","chases their tail"))
+			visible_emote(pick("dances around.","chases their tail."))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 					set_dir(i)

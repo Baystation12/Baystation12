@@ -114,6 +114,9 @@
 /obj/item/weapon/card/id/torch/crew/service/chef
 	job_access_type = /datum/job/chef
 
+/obj/item/weapon/card/id/torch/crew/service/solgov_pilot
+	job_access_type = /datum/job/solgov_pilot
+
 /obj/item/weapon/card/id/torch/contractor/service //unused
 	job_access_type = /datum/job/assistant
 
@@ -127,11 +130,13 @@
 /obj/item/weapon/card/id/torch/crew/sea
 	job_access_type = /datum/job/sea
 
+/obj/item/weapon/card/id/torch/crew/bridgeofficer
+	job_access_type = /datum/job/bridgeofficer
 
 //NanoTrasen and Passengers
 
 /obj/item/weapon/card/id/torch/passenger
-	desc = "A card issued to passengers aboard the SEV Torch."
+	desc = "A card issued to passengers and off-duty personnel aboard the SEV Torch."
 	icon_state = "id"
 	job_access_type = /datum/job/assistant
 
@@ -142,6 +147,12 @@
 
 /obj/item/weapon/card/id/torch/silver/research
 	job_access_type = /datum/job/rd
+
+/obj/item/weapon/card/id/torch/passenger/research/senior_scientist
+	job_access_type = /datum/job/senior_scientist
+
+/obj/item/weapon/card/id/torch/passenger/research/nt_pilot
+	job_access_type = /datum/job/nt_pilot
 
 /obj/item/weapon/card/id/torch/passenger/research/scientist
 	job_access_type = /datum/job/scientist

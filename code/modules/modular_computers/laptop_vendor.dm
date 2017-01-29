@@ -2,7 +2,7 @@
 
 /obj/machinery/lapvend
 	name = "computer vendor"
-	desc = "A vending machine with microfabricator capable of dispensing various NT-branded computers."
+	desc = "A vending machine with a built-in microfabricator, capable of dispensing various NT-branded computers."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "robotics"
 	layer = BELOW_OBJ_LAYER

@@ -94,5 +94,5 @@
 	return
 
 /obj/item/weapon/evidencebag/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (stored_item) user.examinate(stored_item)

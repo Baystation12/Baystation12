@@ -113,6 +113,7 @@
 	var/obj/item/weapon/rig/holder
 
 /obj/item/weapon/tank/jetpack/rig/examine()
+	. = ..()
 	to_chat(usr, "It's a jetpack. If you can see this, report it on the bug tracker.")
 	return 0
 

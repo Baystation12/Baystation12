@@ -1,6 +1,6 @@
 /obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
-	desc = "You sit in this. Either by will or force."
+	desc = "You sit in this, either by will or force."
 	icon_state = "chair_preview"
 	color = "#666666"
 	base_icon = "chair"

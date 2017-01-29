@@ -233,7 +233,7 @@
 			return
 		if(default_part_replacement(user, W))
 			return
-			
+
 	var/id = W.GetIdCard()
 	if(id)
 		if(!check_access(id))
@@ -453,7 +453,7 @@
 	to_chat(user, "You flip the write-protect tab to [read_only ? "protected" : "unprotected"].")
 
 /obj/item/weapon/disk/data/examine(mob/user)
-	..(user)
+	. = ..(user)
 	to_chat(user, text("The write-protect tab is set to [read_only ? "protected" : "unprotected"]."))
 	return
 

@@ -44,10 +44,11 @@
 	if(paddles) //in case paddles got destroyed somehow.
 		if(paddles.loc == src)
 			new_overlays += "[initial(icon_state)]-paddles"
-		if(bcell && !bcell.check_charge(paddles.chargecost))
-			new_overlays += "[initial(icon_state)]-powered"
-		if(!paddles.safety)
-			new_overlays += "[initial(icon_state)]-emagged"
+		if(bcell && bcell.check_charge(paddles.chargecost))
+			if(!paddles.safety)
+				new_overlays += "[initial(icon_state)]-emagged"
+			else
+				new_overlays += "[initial(icon_state)]-powered"
 
 	if(bcell)
 		var/ratio = Ceiling(bcell.percent()/25) * 25
@@ -263,7 +264,7 @@
 	if(H.stat != DEAD)
 		return "buzzes, \"Patient is not in a valid state. Operation aborted.\""
 
-	if(check_contact(H))
+	if(!check_contact(H))
 		return "buzzes, \"Patient's chest is obstructed. Operation aborted.\""
 
 	return null
@@ -281,7 +282,7 @@
 	if(bad_vital_organ)
 		return bad_vital_organ
 
-	//this needs to be last since if any of the 'further attempts futile' conditions are met their messages take precedence
+	//this needs to be last since if any of the 'other conditions are met their messages take precedence
 	if(H.ssd_check())
 		return "buzzes, \"Resuscitation failed - Mental interface error. Further attempts may be successful.\""
 
@@ -291,8 +292,8 @@
 	if(!combat)
 		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
 			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & THICKMATERIAL))
-				return TRUE
-	return FALSE
+				return FALSE
+	return TRUE
 
 /obj/item/weapon/shockpaddles/proc/check_vital_organs(mob/living/carbon/human/H)
 	for(var/organ_tag in H.species.has_organ)
@@ -306,6 +307,19 @@
 			if(O.damage > O.max_damage)
 				return "buzzes, \"Resuscitation failed - Excessive damage to vital organ ([name]). Further attempts futile.\""
 	return null
+
+/obj/item/weapon/shockpaddles/proc/check_blood_level(mob/living/carbon/human/H)
+	if(!H.should_have_organ(BP_HEART))
+		return FALSE
+
+	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
+	if(!heart)
+		return TRUE
+
+	if(heart.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
+		return TRUE
+
+	return FALSE
 
 /obj/item/weapon/shockpaddles/proc/check_charge(var/charge_amt)
 	return 0
@@ -362,6 +376,9 @@
 		playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 		return
 
+	if(check_blood_level())
+		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock.\"", "warning") //also includes heart damage
+
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
 	if(!do_after(user, chargetime, H))
 		return
@@ -386,17 +403,9 @@
 	H.apply_damage(burn_damage_amt, BURN, BP_CHEST)
 
 	//set oxyloss so that the patient is just barely in crit, if possible
-	var/barely_in_crit = round((8*config.health_threshold_crit + config.health_threshold_dead)/9, 1)
+	var/barely_in_crit = config.health_threshold_crit - 1
 	var/adjust_health = barely_in_crit - H.health //need to increase health by this much
 	H.adjustOxyLoss(-adjust_health)
-
-	//if removing oxyloss wasn't enough, remove some toxloss too
-	if(H.health < barely_in_crit)
-		//but not so much that either toxloss goes below H.maxHealth/2, or that we cure more than 25% of their current toxloss
-		var/cure_limit = min(H.getToxLoss() - H.maxHealth/2, H.getToxLoss()*0.25)
-		cure_limit = max(cure_limit, 0)
-		adjust_health = Clamp(barely_in_crit - H.health, 0, cure_limit)
-		H.adjustToxLoss(-adjust_health)
 
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)

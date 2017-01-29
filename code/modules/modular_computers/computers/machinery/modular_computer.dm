@@ -136,3 +136,10 @@ var/list/global_modular_computers = list()
 		return cpu.check_eye(user)
 	return -1
 
+/obj/machinery/modular_computer/apply_visual(mob/M)
+	if(cpu)
+		cpu.apply_visual(M)
+
+/obj/machinery/modular_computer/remove_visual(mob/M)
+	if(cpu)
+		cpu.remove_visual(M)

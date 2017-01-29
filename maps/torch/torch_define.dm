@@ -10,8 +10,8 @@
 	contact_levels = list(1,2,3,4,5)
 	player_levels = list(1,2,3,4,5,6,7,8,9)
 	admin_levels = list(10)
-
-	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30)
+	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30,"7"=10,"8"=10)
+	base_turf_by_z = list("9" = /turf/simulated/floor/asteroid)
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 

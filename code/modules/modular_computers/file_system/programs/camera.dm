@@ -16,7 +16,7 @@
 			return access_medical
 		if(NETWORK_RESEARCH,NETWORK_RESEARCH_OUTPOST)
 			return access_research
-		if(NETWORK_MINE,NETWORK_SUPPLY,NETWORK_CIVILIAN_WEST,NETWORK_EXPEDITION,NETWORK_POD)
+		if(NETWORK_MINE,NETWORK_SUPPLY,NETWORK_CIVILIAN_WEST)
 			return access_mailsorting // Cargo office - all cargo staff should have access here.
 		if(NETWORK_COMMAND,NETWORK_TELECOM)
 			return access_heads
@@ -173,3 +173,13 @@
 	networks.Add(list(list("tag" = NETWORK_ERT, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_CRESCENT, "has_access" = 1)))
 	return networks
+
+/datum/nano_module/camera_monitor/apply_visual(mob/M)
+	if(current_camera)
+		current_camera.apply_visual(M)
+	else
+		remove_visual(M)
+
+/datum/nano_module/camera_monitor/remove_visual(mob/M)
+	if(current_camera)
+		current_camera.remove_visual(M)

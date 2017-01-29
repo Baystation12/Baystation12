@@ -128,7 +128,7 @@ var/list/organ_cache = list()
 		die()
 
 /obj/item/organ/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(status & ORGAN_DEAD)
 		to_chat(user, "<span class='notice'>The decay has set in.</span>")
 

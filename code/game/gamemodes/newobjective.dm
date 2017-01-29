@@ -1045,7 +1045,7 @@ datum
 					return 20
 			AI
 				steal_target = /obj/structure/AIcore
-				explanation_text = "Steal a finished AI, either by intellicard or stealing the whole construct."
+				explanation_text = "Steal a finished AI, either by inteliCard or stealing the whole construct."
 				weight = 50
 
 				get_points(var/job)

@@ -22,10 +22,10 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/hoodie
-	allowed_roles = list("Passenger", "Bartender")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/hoodie_sel
-	allowed_roles = list("Passenger", "Bartender", "Merchant")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/labcoat
 	allowed_roles = NON_MILITARY_ROLES
@@ -33,7 +33,7 @@
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
 	path = /obj/item/clothing/suit/storage/toggle/fr_jacket
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/suit/medcoat/New()
 	..()
@@ -47,7 +47,7 @@
 	display_name = "trenchcoat selection"
 	path = /obj/item/clothing/suit/storage/det_trench
 	cost = 3
-	allowed_roles = list("Passenger", "Bartender")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/trenchcoat/New()
 	..()
@@ -58,19 +58,19 @@
 	gear_tweaks += new/datum/gear_tweak/path(trenchcoats)
 
 /datum/gear/suit/poncho
-	allowed_roles = list("Passenger", "Bartender", "Merchant")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/roles/poncho/security
-	allowed_roles = list("Security Guard")
+	allowed_roles = list("Security Guard", "Merchant")
 
 /datum/gear/suit/roles/poncho/medical
-	allowed_roles = list("Medical Assistant", "Virologist", "Chemist", "Counselor")
+	allowed_roles = list("Medical Assistant", "Virologist", "Chemist", "Counselor", "Merchant")
 
 /datum/gear/suit/roles/poncho/engineering
-	allowed_roles = list("Maintenance Assistant", "Roboticist")
+	allowed_roles = list("Maintenance Assistant", "Roboticist", "Merchant")
 
 /datum/gear/suit/roles/poncho/science
-	allowed_roles = list("Scientist", "Research Assistant")
+	allowed_roles = list("Scientist", "Research Assistant", "Merchant")
 
 /datum/gear/suit/roles/poncho/cargo
 	allowed_roles = list("Supply Assistant", "Merchant")
@@ -79,7 +79,7 @@
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/suit/wintercoat
-	allowed_roles = list("Passenger", "Bartender", "Merchant")
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/track
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = RESTRICTED_ROLES

@@ -8,12 +8,6 @@
 	unique = 1
 	carved = 2 // Don't carve it
 
-/obj/item/weapon/book/tome/attack(var/mob/living/M, var/mob/living/user as mob)
-	..()
-	if(iscultist(user) && !iscultist(M))
-		M.take_organ_damage(0, rand(5, 20))
-		to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
-
 /obj/item/weapon/book/tome/attack_self(var/mob/user)
 	if(!iscultist(user))
 		to_chat(user, "\The [src] seems full of illegible scribbles. Is this a joke?")
@@ -21,6 +15,7 @@
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
 /obj/item/weapon/book/tome/examine(var/mob/user)
+	. = ..()
 	if(!iscultist(user))
 		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
@@ -160,7 +155,7 @@ var/list/Tier1Runes = list(
 
 var/list/Tier2Runes = list(
 	/mob/proc/armor_rune,
-	/mob/proc/sacrifice_rune,
+	/mob/proc/offering_rune,
 	/mob/proc/manifest_rune,
 	/mob/proc/drain_rune,
 	/mob/proc/emp_rune
@@ -220,11 +215,11 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/armor, tome_required = 1)
 
-/mob/proc/sacrifice_rune()
+/mob/proc/offering_rune()
 	set category = "Cult Magic"
-	set name = "Rune: Sacrifice"
+	set name = "Rune: Offering"
 
-	make_rune(/obj/effect/rune/sacrifice, tome_required = 1)
+	make_rune(/obj/effect/rune/offering, tome_required = 1)
 
 /mob/proc/manifest_rune()
 	set category = "Cult Magic"
@@ -325,4 +320,4 @@ var/list/Tier4Runes = list(
 	return
 
 /mob/living/carbon/human/message_cult_communicate()
-	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of his hand.</span>")
+	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")

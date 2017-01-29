@@ -3,7 +3,7 @@
 	icon_state = "map_connector"
 
 	name = "Connector Port"
-	desc = "For connecting portables devices related to atmospherics control."
+	desc = "For connecting portable devices related to atmospherics control."
 
 	dir = SOUTH
 	initialize_directions = SOUTH
