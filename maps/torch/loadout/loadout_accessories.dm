@@ -154,7 +154,7 @@
 	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms", "Security Guard", "Merchant")
 
 /datum/gear/accessory/white_drop_pouches
-	display_name = "webbing, medical"
+	display_name = "drop pouches, medical"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/white
 	cost = 3
 	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Merchant")
