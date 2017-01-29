@@ -91,6 +91,24 @@
 /obj/item/ammo_magazine/box/c9mm/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/box/emp
+	name = "ammunition box (.38 haywire)"
+	icon_state = "empbox"
+	origin_tech = list(TECH_COMBAT = 2)
+	max_ammo = 10
+	ammo_type = /obj/item/ammo_casing/c38/emp
+	caliber = ".38"
+
+/obj/item/ammo_magazine/box/emp/c45
+	name = "ammunition box (.45 haywire)"
+	ammo_type = /obj/item/ammo_casing/c45/emp
+	caliber = ".45"
+
+/obj/item/ammo_magazine/box/emp/a10mm
+	name = "ammunition box (10mm haywire)"
+	ammo_type = /obj/item/ammo_casing/a10mm/emp
+	caliber = "10mm"
+
 /obj/item/ammo_magazine/mc9mmt
 	name = "top mounted magazine (9mm)"
 	icon_state = "9mmt"
