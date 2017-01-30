@@ -37,32 +37,71 @@
 	IOCapacity = 1.25 MEGAWATTS
 
 
-// SMES SUBTYPES - THESE ARE MAPPED IN AND CONTAIN DIFFERENT TYPES OF COILS
 
-// These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
-// 1M Charge, 150K I/O
+// SMES SUBTYPES - THESE ARE MAPPED IN AND CONTAIN DIFFERENT TYPES OF COILS
+// If you are creating a new SMES subtype, put it on the bottom of this list. Not somewhere else!
+
+// (EXODUS) Used on exodus's outposts as substations. Overall low capacity as regular one would be too good.
 /obj/machinery/power/smes/buildable/outpost_substation/New()
 	..(0)
 	component_parts += new /obj/item/weapon/smes_coil/weak(src)
-	recalc_coils()
+	recalc_and_set_max_input_output_charge(1, 1)
 
-// This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
-// 11M Charge, 2.5M I/O
-/obj/machinery/power/smes/buildable/power_shuttle/New()
+
+// (EXODUS) Exodus basement SMES, powers AI turrets and therefore needs to deliver short intense spikes of energy.
+/obj/machinery/power/smes/buildable/max_cap_in_out/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	recalc_and_set_max_input_output_charge(1, 1)
+
+// (TORCH/EXODUS) High transfer rate, low capacity SMES. Intended for shuttles. High power transfer rate is for bluespace drives, once they are added
+/obj/machinery/power/smes/buildable/torch_shuttle/New()
 	..(0)
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	recalc_and_set_max_input_output_charge(1, 1)
+
+
+// (TORCH) Hangar deck SMES. De facto a "refuelling station" for shuttles.
+/obj/machinery/power/smes/buildable/torch_hangar/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	recalc_and_set_max_input_output_charge(1, 1)
+
+// (EXODUS/TORCH) Used in exodus and some torch substations. A single-coil low grade SMES. Starts uncharged and turned off
+/obj/machinery/power/smes/buildable/substation_basic/New()
+	..(0)
 	component_parts += new /obj/item/weapon/smes_coil(src)
-	recalc_coils()
+	recalc_and_set_max_input_output_charge(0, 0)
 
+// (TORCH) Used in torch deck substations. Has two coils as torch substations in general seem to have higher loads than exodus, due to larger amount of APCs per substation.
+/obj/machinery/power/smes/buildable/substation_advanced/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil(src)
+	component_parts += new /obj/item/weapon/smes_coil(src)
+	recalc_and_set_max_input_output_charge(0, 0)
 
+// (TORCH/EXODUS) Main engine SMES. A pretty good one, but still has room for specialization into better storage or transfer rate, if someone wants to toss in extra coils.
+/obj/machinery/power/smes/buildable/engine_main/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
+	recalc_and_set_max_input_output_charge(1, 1)
 
-
+// (TORCH/EXODUS) Main engine loopback SMES. Runs the engine room. A substation one, but charged and turned on variant
+/obj/machinery/power/smes/buildable/substation_basic_charged/New()
+	..(0)
+	component_parts += new /obj/item/weapon/smes_coil(src)
+	recalc_and_set_max_input_output_charge(1, 1)
 
 
 // END SMES SUBTYPES
+// No more subtypes below!
 
-// SMES itself
 /obj/machinery/power/smes/buildable
 	var/max_coils = 6 			// 250 kWh capacity, 1.5MW input/output when fully upgraded /w default coils
 	var/cur_coils = 1 			// Current amount of installed coils
@@ -75,13 +114,16 @@
 	charge = 0
 	should_be_mapped = 1
 
-/obj/machinery/power/smes/buildable/max_cap_in_out/initialize()
-	..()
-	charge = capacity
-	input_attempt = TRUE
-	output_attempt = TRUE
+// Basically, set the SMES to maximum, turn everything on. Used for mapping presets.
+/obj/machinery/power/smes/buildable/proc/recalc_and_set_max_input_output_charge(var/turn_on, var/charge)
+	recalc_coils()
+	if(turn_on)
+		input_attempt = TRUE
+		output_attempt = TRUE
 	input_level = input_level_max
 	output_level = output_level_max
+	if(charge)
+		charge = capacity
 
 /obj/machinery/power/smes/buildable/Destroy()
 	qdel(wires)

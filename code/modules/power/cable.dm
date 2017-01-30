@@ -24,6 +24,58 @@ By design, d1 is the smallest direction and d2 is the highest
 
 var/list/possible_cable_coil_colours
 
+
+// Vertical cables that connect Z levels. Can connect even three or more Z levels when built on top of each other. Needs open space to work.
+/obj/machinery/zcable
+	level = 1
+	anchored = 1
+	use_power = 0
+	density = 1
+	icon = 'icons/obj/power.dmi'
+	icon_state = "bbox_on"
+	name = "vertical conduit"
+	desc = "A set of high voltage conduits in a wiring closet that allows for power transfer between floors."
+
+
+// Returns a list of zcables above and below this one. Contains checks for open space, and supports multiple Z levels
+/obj/machinery/zcable/proc/get_connected_zcables(var/direction = 0)	// 1: up, 0: both, -1 down
+	var/list/zcables = list()
+	var/turf/T
+
+	T = GetAbove(src)
+	if((direction >= 0) && istype(T, /turf/simulated/open))
+		var/obj/machinery/zcable/ZC = locate() in T
+		if(ZC)
+			zcables |= ZC
+			zcables |= ZC.get_connected_zcables(1)
+
+	T = GetBelow(src)
+	if((direction <= 0) && istype(get_turf(src), /turf/simulated/open))
+		var/obj/machinery/zcable/ZC = locate() in T
+		if(ZC)
+			zcables |= ZC
+			zcables |= ZC.get_connected_zcables(-1)
+
+	return zcables
+
+/obj/machinery/zcable/proc/get_connections()
+	var/list/cables = list()
+	for(var/obj/structure/cable/C in get_turf(src))
+		// Knotted cable, therefore connects to us
+		if(C.d1 == 0 || C.d2 == 0)
+			cables |= C
+	return cables
+
+// On creation try to find a cable and update it's powernet, if necessary.
+/obj/machinery/zcable/initialize()
+	for(var/obj/structure/cable/C in get_turf(src))
+		// Knotted cable, therefore connects to us
+		if(C.d1 == 0 || C.d2 == 0)
+			propagate_network(C, C.powernet)
+			return
+
+
+
 /obj/structure/cable
 	level = 1
 	anchored =1
@@ -368,16 +420,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	. = list()	// this will be a list of all connected power objects
 	var/turf/T
 
-	// Handle up/down cables
-	if(d1 == 11 || d2 == 11)
-		T = GetBelow(src)
-		if(T)
-			. += power_list(T, src, 12, 1)
-
-	if(d1 == 12 || d2 == 12)
-		T = GetAbove(src)
-		if(T)
-			. += power_list(T, src, 11, 1)
+	if(d1 == 0 || d2 == 0)
+		var/obj/machinery/zcable/ZC = locate() in get_turf(src)
+		if(ZC)
+			for(var/obj/machinery/zcable/otherZC in ZC.get_connected_zcables())
+				. |= otherZC.get_connections()
 
 	// Handle standard cables in adjacent turfs
 	for(var/cable_dir in list(d1, d2))
@@ -408,6 +455,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if(P.powernet == 0) continue // exclude APCs with powernet=0
 			if(!powernetless_only || !P.powernet)
 				. += P
+
+
 
 	// if the caller asked for powernetless cables only, dump the ones with powernets
 	if(powernetless_only)
@@ -658,69 +707,33 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
 				to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
 				return
-///// Z-Level Stuff
-		// check if the target is open space
-		if(istype(F, /turf/simulated/open))
-			for(var/obj/structure/cable/LC in F)
-				if((LC.d1 == dirn && LC.d2 == 11 ) || ( LC.d2 == dirn && LC.d1 == 11))
-					to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
-					return
-			if(!use(2))
-				to_chat(user, "You don't have enough cable to do this!")
-				return
 
-			var/obj/structure/cable/C = new(F)
-			var/obj/structure/cable/D = new(GetBelow(F))
+		var/obj/structure/cable/C = new(F)
 
-			C.cableColor(color)
-			C.d1 = 11
-			C.d2 = dirn
-			C.add_fingerprint(user)
-			C.update_icon()
+		C.cableColor(color)
 
+		//set up the new cable
+		C.d1 = 0 //it's a O-X node cable
+		C.d2 = dirn
+		C.add_fingerprint(user)
+		C.update_icon()
 
-			D.cableColor(color)
-			D.d1 = 12
-			D.d2 = 0
-			D.add_fingerprint(user)
-			D.update_icon()
+		//create a new powernet with the cable, if needed it will be merged later
+		var/datum/powernet/PN = new()
+		PN.add_cable(C)
 
-			var/datum/powernet/PN = new()
-			propagate_network(C, PN)
-		// do the normal stuff
-		else
-///// Z-Level Stuff
-			for(var/obj/structure/cable/LC in F)
-				if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
-					to_chat(user, "There's already a cable at that position.")
-					return
+		C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
+		C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
 
-			var/obj/structure/cable/C = new(F)
-
-			C.cableColor(color)
-
-			//set up the new cable
-			C.d1 = 0 //it's a O-X node cable
-			C.d2 = dirn
-			C.add_fingerprint(user)
-			C.update_icon()
-
-			//create a new powernet with the cable, if needed it will be merged later
-			var/datum/powernet/PN = new()
-			PN.add_cable(C)
-
-			C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
-			C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
-
-			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
-				C.mergeDiagonalsNetworks(C.d2)
+		if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+			C.mergeDiagonalsNetworks(C.d2)
 
 
-			use(1)
-			if (C.shock(user, 50))
-				if (prob(50)) //fail
-					new/obj/item/stack/cable_coil(C.loc, 1, C.color)
-					qdel(C)
+		use(1)
+		if (C.shock(user, 50))
+			if (prob(50)) //fail
+				new/obj/item/stack/cable_coil(C.loc, 1, C.color)
+				qdel(C)
 
 // called when cable_coil is click on an installed obj/cable
 // or click on a turf that already contains a "node" cable
