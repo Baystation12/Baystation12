@@ -9,7 +9,7 @@
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
 	player_levels = list(1,2,3,4,5,6,7,8,9)
-	admin_levels = list(10)
+	admin_levels = list(10,11)
 	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30,"7"=10,"8"=10)
 	base_turf_by_z = list("9" = /turf/simulated/floor/asteroid)
 
@@ -37,8 +37,8 @@
 	default_law_type = /datum/ai_laws/solgov
 
 /datum/map/torch/perform_map_generation()
-	new /datum/random_map/automata/cave_system(null,1,1,7,255,255) // Create the mining Z-level.
+	new /datum/random_map/automata/cave_system(null,1,1,7,200,200) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
-	new /datum/random_map/automata/cave_system(null,1,1,9,255,255) // Create the mining Z-level.
+	new /datum/random_map/automata/cave_system(null,1,1,9,200,200) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,9,64, 64)             // Create the mining ore distribution map.
 	return 1
