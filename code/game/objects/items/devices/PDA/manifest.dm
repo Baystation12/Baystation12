@@ -30,7 +30,6 @@ name updates also zero the list; although they are not in data_core, synths are 
 	var/civ[0]
 	var/bot[0]
 	var/misc[0]
-
 	for(var/datum/data/record/t in data_core.general)
 		var/name = sanitize(t.fields["name"])
 		var/rank = sanitize(t.fields["rank"])
@@ -175,7 +174,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 		bot[++bot.len] = list("name" = robot.name, "rank" = "[robot.modtype] [robot.braintype]", "active" = null)
 
 
-	PDA_Manifest = list(
+	PDA_Manifest = list(\
 		"heads" = heads,\
 		"spt" = spt,\
 		"sec" = sec,\
