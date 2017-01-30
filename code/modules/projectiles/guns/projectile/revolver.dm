@@ -72,6 +72,9 @@
 	icon_state = "deckard-empty"
 	ammo_type = /obj/item/ammo_magazine/c38/rubber
 
+/obj/item/weapon/gun/projectile/revolver/deckard/emp
+	ammo_type = /obj/item/ammo_casing/c38/emp
+
 /obj/item/weapon/gun/projectile/revolver/deckard/update_icon()
 	..()
 	if(loaded.len)
