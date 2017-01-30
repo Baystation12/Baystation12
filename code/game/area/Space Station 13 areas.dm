@@ -181,7 +181,7 @@ area/space/atmosalert()
 //All shuttles should now be under shuttle since we have smooth-wall code.
 
 /area/shuttle
-	requires_power = 0
+	requires_power = 1
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
 

@@ -170,7 +170,6 @@
 				M.Weaken(3)
 
 	// Power-related checks. If shuttle contains power related machinery, update powernets.
-	var/update_power = 0
 	for(var/obj/structure/cable/C in destination)
 		if(C.powernet)
 			C.powernet.remove_cable(C)

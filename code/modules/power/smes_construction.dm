@@ -115,14 +115,14 @@
 	should_be_mapped = 1
 
 // Basically, set the SMES to maximum, turn everything on. Used for mapping presets.
-/obj/machinery/power/smes/buildable/proc/recalc_and_set_max_input_output_charge(var/turn_on, var/charge)
+/obj/machinery/power/smes/buildable/proc/recalc_and_set_max_input_output_charge(var/turn_on, var/charge_to_max)
 	recalc_coils()
 	if(turn_on)
 		input_attempt = TRUE
 		output_attempt = TRUE
 	input_level = input_level_max
 	output_level = output_level_max
-	if(charge)
+	if(charge_to_max)
 		charge = capacity
 
 /obj/machinery/power/smes/buildable/Destroy()
