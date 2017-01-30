@@ -49,6 +49,8 @@ var/global/datum/controller/occupations/job_master
 				service_positions |= job.title
 			if(job.department_flag & SUP)
 				supply_positions |= job.title
+			if(job.department_flag & SPT)
+				support_positions |= job.title
 
 		return 1
 

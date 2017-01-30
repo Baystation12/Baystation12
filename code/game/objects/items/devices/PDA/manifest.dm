@@ -19,6 +19,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 	if(PDA_Manifest.len)
 		return
 	var/heads[0]
+	var/spt[0]
 	var/sec[0]
 	var/eng[0]
 	var/med[0]
@@ -29,6 +30,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 	var/civ[0]
 	var/bot[0]
 	var/misc[0]
+
 	for(var/datum/data/record/t in data_core.general)
 		var/name = sanitize(t.fields["name"])
 		var/rank = sanitize(t.fields["rank"])
@@ -62,6 +64,16 @@ name updates also zero the list; although they are not in data_core, synths are 
 			depthead = 1
 			if(rank=="Captain" && heads.len != 1)
 				heads.Swap(1,heads.len)
+
+		if(real_rank in support_positions)
+			spt[++spt.len] = list("name" = name,
+				"rank" = rank,
+				"active" = isactive,
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
+			department = 1
+			if(depthead && spt.len != 1)
+				spt.Swap(1,spt.len)
 
 		if(real_rank in security_positions)
 			sec[++sec.len] = list("name" = name,
@@ -163,8 +175,9 @@ name updates also zero the list; although they are not in data_core, synths are 
 		bot[++bot.len] = list("name" = robot.name, "rank" = "[robot.modtype] [robot.braintype]", "active" = null)
 
 
-	PDA_Manifest = list(\
+	PDA_Manifest = list(
 		"heads" = heads,\
+		"spt" = spt,\
 		"sec" = sec,\
 		"eng" = eng,\
 		"med" = med,\

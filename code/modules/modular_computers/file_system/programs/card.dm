@@ -43,6 +43,7 @@
 		data["id_name"] = id_card ? id_card.name : "-----"
 
 	data["command_jobs"] = format_jobs(command_positions)
+	data["support_jobs"] = format_jobs(support_positions)
 	data["engineering_jobs"] = format_jobs(engineering_positions)
 	data["medical_jobs"] = format_jobs(medical_positions)
 	data["science_jobs"] = format_jobs(science_positions)

@@ -94,7 +94,13 @@
 			</td>
 		  </tr>
 		  <tr>
-		  
+			<th style="color: '#800080';">Support</th>
+			<td>
+			  {{for data.support_jobs}}
+				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>	  
 		  <tr>
 			<th style="color: '#FFA500';">Engineering</th>
 			<td>
@@ -136,7 +142,6 @@
 			</td>
 		  </tr>
 		  <tr>
-		  <tr>
 			<th style="color: '#800080';">Service</th>
 			<td>
 			  {{for data.service_jobs}}
@@ -145,12 +150,10 @@
 			</td>
 		  </tr>
 		  <tr>
-		  <tr>
 			<th style="color: '#808080';">Civilian</th>
 			<td>
 			  {{for data.civilian_jobs}}
 				{{if index && index % 6 === 0}}
-				  </td></tr><tr><th></th><td>
 				{{/if}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
 			  {{/for}}

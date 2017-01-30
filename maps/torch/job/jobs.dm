@@ -185,8 +185,8 @@
 
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -209,8 +209,8 @@
 
 /datum/job/representative
 	title = "SolGov Representative"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -230,8 +230,8 @@
 
 /datum/job/sea
 	title = "Senior Enlisted Advisor"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -265,8 +265,8 @@
 
 /datum/job/bridgeofficer
 	title = "Bridge Officer"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
