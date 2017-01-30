@@ -37,8 +37,8 @@
 	default_law_type = /datum/ai_laws/solgov
 
 /datum/map/torch/perform_map_generation()
-	new /datum/random_map/automata/cave_system(null,1,1,7,200,200) // Create the mining Z-level.
+	new /datum/random_map/automata/cave_system(null,1,1,7,world.maxx,world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
-	new /datum/random_map/automata/cave_system(null,1,1,9,200,200) // Create the mining Z-level.
+	new /datum/random_map/automata/cave_system(null,1,1,9,world.maxx,world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,9,64, 64)             // Create the mining ore distribution map.
 	return 1
