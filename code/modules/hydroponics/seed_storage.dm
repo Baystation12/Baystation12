@@ -88,7 +88,6 @@
 	name = "Xenobotany seed storage"
 	scanner = list("stats", "produce", "soil", "temperature", "light")
 	starting_seeds = list(
-		/obj/item/seeds/ambrosiavulgarisseed = 30,
 		/obj/item/seeds/appleseed = 30,
 		/obj/item/seeds/bananaseed = 30,
 		/obj/item/seeds/berryseed = 30,
