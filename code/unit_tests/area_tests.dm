@@ -79,3 +79,36 @@
 	else
 		pass("All areas are used.")
 	return 1
+
+/datum/unit_test/areas_need_roofs
+	name = "AREA: Interior areas should have ceiling"
+
+/datum/unit_test/areas_need_roofs/start_test()
+	set background = 1	// Loops through a lot of turfs, often triggering infinite loop checks.
+	var/bad_turfs = 0
+
+	for(var/turf/space/T in world)
+		if(!isPlayerLevel(T.z))
+			continue
+
+		var/turf/below = GetBelow(T)
+		if(!below)
+			continue
+
+		if(below.type in list(/turf/space, /turf/simulated/open))
+			continue
+
+		var/area/A = get_area(below)
+
+		if(A.flags & AREA_EXTERNAL)
+			continue
+
+		log_bad("----- Missing ceiling tile on x[T.x] y[T.y] z[T.z].")
+		bad_turfs++
+
+	if(bad_turfs)
+		fail("Found [bad_turfs] missing ceiling tile\s.")
+	else
+		pass("All areas have a ceiling.")
+
+	return 1

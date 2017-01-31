@@ -170,18 +170,41 @@
 				M.Weaken(3)
 
 	// Power-related checks. If shuttle contains power related machinery, update powernets.
-	var/update_power = 0
-	for(var/obj/machinery/power/P in destination)
-		update_power = 1
-		break
+	for(var/obj/structure/cable/C in destination)
+		if(C.powernet)
+			C.powernet.remove_cable(C)
 
 	for(var/obj/structure/cable/C in destination)
-		update_power = 1
-		break
+		if(C.powernet)
+			continue
+		var/datum/powernet/NewPN = new()
+		NewPN.add_cable(C)
+		propagate_network(C, C.powernet)
 
-	if(update_power)
-		makepowernets()
-	return
+	for(var/obj/machinery/power/P in destination)
+		P.connect_to_network()
+
+	var/obj/machinery/power/apc/apc = origin.apc
+
+	if(istype(apc))
+		origin.apc = null
+		origin.power_light = 0
+		origin.power_equip = 0
+		origin.power_environ = 0
+		origin.power_change()
+		destination.apc = apc
+		apc.area = destination
+		apc.name = "\improper [destination.name] APC"
+		apc.update()
+		destination.power_change()
+
+	for(var/obj/machinery/alarm/A in destination)
+		if(A == origin.master_air_alarm)
+			origin.master_air_alarm = null
+			destination.master_air_alarm = A
+		A.alarm_area = destination
+		A.name = "[destination.name] Air Alarm"
+
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()

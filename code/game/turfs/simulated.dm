@@ -18,9 +18,13 @@
 
 /turf/simulated/post_change()
 	..()
+
+	if(!density || istype(src, /turf/simulated/floor))
+		return
 	var/turf/T = GetAbove(src)
-	if(istype(T,/turf/space) || (density && istype(T,/turf/simulated/open)))
-		var/new_turf_type = density ? (istype(T.loc, /area/space) ? /turf/simulated/floor/airless : /turf/simulated/floor/plating) : /turf/simulated/open
+
+	if(istype(T,/turf/space) || istype(T,/turf/simulated/open))
+		var/new_turf_type = istype(T.loc, /area/space) ? /turf/simulated/floor/airless : /turf/simulated/floor/plating
 		T.ChangeTurf(new_turf_type)
 
 // This is not great.

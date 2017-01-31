@@ -297,10 +297,30 @@
 	icon_state = "shuttle"
 	name = "\improper Transport Shuttle"
 
+/area/exterior/torch/
+	name = "Torch Exterior"
+	flags = AREA_EXTERNAL
+
+/area/exterior/torch/deck_1
+	name = "First Deck Exterior"
+
+/area/exterior/torch/deck_2
+	name = "Second Deck Exterior"
+
+/area/exterior/torch/deck_3
+	name = "Third Deck Exterior"
+
+/area/exterior/torch/deck_4
+	name = "Fourth Deck Exterior"
+
+/area/exterior/torch/deck_b
+	name = "Bridge Deck Exterior"
+
 //torch large pods
 /area/shuttle/escape_pod6
 	name = "\improper Escape Pod One"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod6/station
 	icon_state = "shuttle2"
@@ -315,6 +335,7 @@
 /area/shuttle/escape_pod7
 	name = "\improper Escape Pod Two"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod7/station
 	icon_state = "shuttle2"
@@ -329,6 +350,7 @@
 /area/shuttle/escape_pod8
 	name = "\improper Escape Pod Three"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod8/station
 	icon_state = "shuttle2"
@@ -343,6 +365,7 @@
 /area/shuttle/escape_pod9
 	name = "\improper Escape Pod Four"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod9/station
 	icon_state = "shuttle2"
@@ -357,6 +380,7 @@
 /area/shuttle/escape_pod10
 	name = "\improper Escape Pod Five"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod10/station
 	icon_state = "shuttle2"
@@ -372,6 +396,7 @@
 /area/shuttle/escape_pod11
 	name = "\improper Escape Pod Six"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod11/station
 	icon_state = "shuttle2"
@@ -389,6 +414,7 @@
 /area/shuttle/escape_pod12
 	name = "\improper Escape Pod Seven"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod12/station
 	icon_state = "shuttle2"
@@ -403,6 +429,7 @@
 /area/shuttle/escape_pod13
 	name = "\improper Escape Pod Eight"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod13/station
 	icon_state = "shuttle2"
@@ -417,6 +444,7 @@
 /area/shuttle/escape_pod14
 	name = "\improper Escape Pod Nine"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod14/station
 	icon_state = "shuttle2"
@@ -431,6 +459,7 @@
 /area/shuttle/escape_pod15
 	name = "\improper Escape Pod Ten"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod15/station
 	icon_state = "shuttle2"
@@ -445,6 +474,7 @@
 /area/shuttle/escape_pod16
 	name = "\improper Escape Pod Eleven"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod16/station
 	icon_state = "shuttle2"
@@ -459,6 +489,7 @@
 /area/shuttle/escape_pod17
 	name = "\improper Escape Pod Twelve"
 	flags = AREA_RAD_SHIELDED
+	requires_power = 1
 
 /area/shuttle/escape_pod17/station
 	icon_state = "shuttle2"
@@ -473,111 +504,111 @@
 //Calypso
 
 /area/calypso_hangar
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper Calypso"
 	icon_state = "yellow"
 	requires_power = 1
 	lighting_use_dynamic = 1
 	flags = AREA_RAD_SHIELDED
 
 /area/calypso_hangar/start
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper Calypso - SEV Torch Hangar Deck"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
 /area/calypso_hangar/bridge
-	name = "southwest of bridge"
+	name = "Calypso - southwest of bridge"
 	icon_state = "southwest"
 
 /area/calypso_hangar/firstdeck
-	name = "north of first deck"
+	name = "Calypso - north of first deck"
 	icon_state = "north"
 
 /area/calypso_hangar/seconddeck
-	name = "south of second deck"
+	name = "Calypso - south of second deck"
 	icon_state = "south"
 
 /area/calypso_hangar/thirddeck
-	name = "west of third deck"
+	name = "Calypso - west of third deck"
 	icon_state = "west"
 
 /area/calypso_hangar/fourthdeck
-	name = "east of fourth deck"
+	name = "Calypso - east of fourth deck"
 	icon_state = "east"
 
 /area/calypso_hangar/salvage
-	name = "debris field"
+	name = "Calypso - debris field"
 	icon_state = "shuttlered"
 
 /area/calypso_hangar/mining
-	name = "mining site"
+	name = "Calypso - mining site"
 	icon_state = "shuttlered"
 
 /area/calypso_hangar/away
-	name = "away site"
+	name = "Calypso - away site"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/asteroid
 
 /area/calypso_hangar/transit
-	name = "transit"
+	name = "Calypso - transit"
 	icon_state = "shuttle"
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //Aquila
 
 /area/aquila_hangar
-	name = "\improper SEV Torch Landing Area"
+	name = "\improper Aquila"
 	icon_state = "yellow"
 	requires_power = 1
 	lighting_use_dynamic = 1
 	flags = AREA_RAD_SHIELDED
 
 /area/aquila_hangar/start
-	name = "\improper SEV Torch Landing Area"
+	name = "\improper Aquila - SEV Torch Landing Area"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/reinforced/airless
 
 /area/aquila_hangar/bridge
-	name = "northwest of bridge"
+	name = "Aquila - northwest of bridge"
 	icon_state = "northwest"
 
 /area/aquila_hangar/firstdeck
-	name = "north of first deck"
+	name = "Aquila - north of first deck"
 	icon_state = "north"
 
 /area/aquila_hangar/seconddeck
-	name = "south of second deck"
+	name = "Aquila - south of second deck"
 	icon_state = "south"
 
 /area/aquila_hangar/thirddeck
-	name = "west of third deck"
+	name = "Aquila - west of third deck"
 	icon_state = "west"
 
 /area/aquila_hangar/fourthdeck
-	name = "east of fourth deck"
+	name = "Aquila - east of fourth deck"
 	icon_state = "east"
 
 /area/aquila_hangar/salvage
-	name = "debris field"
+	name = "Aquila - debris field"
 	icon_state = "shuttlered"
 
 /area/aquila_hangar/mining
-	name = "mining site"
+	name = "Aquila - mining site"
 	icon_state = "shuttlered"
 
 /area/aquila_hangar/away
-	name = "away site"
+	name = "Aquila - away site"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/asteroid
 
 /area/aquila_hangar/transit
-	name = "transit"
+	name = "Aquila - transit"
 	icon_state = "shuttle"
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
 //Guppy
 
 /area/guppy_hangar
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper GUP"
 	icon_state = "yellow"
 	requires_power = 1
 	lighting_use_dynamic = 1
@@ -585,40 +616,40 @@
 
 
 /area/guppy_hangar/start
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper GUP - SEV Torch Hangar Deck"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
 /area/guppy_hangar/bridge
-	name = "northeast of bridge"
+	name = "GUP - northeast of bridge"
 	icon_state = "northeast"
 
 /area/guppy_hangar/firstdeck
-	name = "east of first deck"
+	name = "GUP - east of first deck"
 	icon_state = "east"
 
 /area/guppy_hangar/seconddeck
-	name = "west of second deck"
+	name = "GUP - west of second deck"
 	icon_state = "west"
 
 /area/guppy_hangar/thirddeck
-	name = "south of third deck"
+	name = "GUP - south of third deck"
 	icon_state = "south"
 
 /area/guppy_hangar/fourthdeck
-	name = "north of fourth deck"
+	name = "GUP - north of fourth deck"
 	icon_state = "north"
 
 /area/guppy_hangar/salvage
-	name = "debris field"
+	name = "GUP - debris field"
 	icon_state = "shuttlered"
 
 /area/guppy_hangar/mining
-	name = "mining site"
+	name = "GUP - mining site"
 	icon_state = "shuttlered"
 
 /area/guppy_hangar/transit
-	name = "transit"
+	name = "GUP - transit"
 	icon_state = "shuttle"
 	base_turf = /turf/space/transit/north/shuttlespace_ns1
 
@@ -1010,11 +1041,6 @@
 	icon_state = "atmos"
 	sound_env = SMALL_ENCLOSED
 
-/area/engineering/auxpower
-	name = "\improper Auxiliary Power Storage"
-	icon_state = "engine_smes"
-	sound_env = SMALL_ENCLOSED
-
 /area/engineering/hallway
 	name = "\improper Engineering Hallway"
 	icon_state = "engineering_workshop"
@@ -1323,30 +1349,6 @@
 	icon_state = "chapel"
 	sound_env = SMALL_ENCLOSED
 
-// Shield Rooms
-/area/shield
-	name = "\improper Shield Generator"
-	icon_state = "engineering"
-	sound_env = SMALL_ENCLOSED
-
-/area/shield/bridge
-	name = "\improper Bridge Shield Generator"
-
-/area/shield/firstdeck
-	name = "\improper First Deck Shield Generator"
-
-/area/shield/seconddeck
-	name = "\improper Second Deck Shield Generator"
-
-/area/shield/thirddeck
-	name = "\improper Third Deck Shield Generator"
-
-/area/shield/fourthdeck
-	name = "\improper Fourth Deck Shield Generator"
-/*
-/area/shield/fifthdeck
-	name = "\improper Fifth Deck Shield Generator"
-*/
 // Misc
 /area/teleporter
 	name = "\improper Teleporter"

@@ -1363,6 +1363,20 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/batteryrack
 	sort_string = "JBABA"
 
+/datum/design/circuit/breaker
+	name = "breaker box"
+	id = "bbox"
+	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/breaker
+	sort_string = "JBABF"
+
+/datum/design/circuit/zconduit
+	name = "vertical conduit"
+	id = "zconduit"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/zconduit
+	sort_string = "JBABH"
+
 /datum/design/circuit/smes_cell
 	name = "'SMES' superconductive magnetic energy storage"
 	desc = "Allows for the construction of circuit boards used to build a SMES."
