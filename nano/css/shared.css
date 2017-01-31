@@ -596,6 +596,12 @@ th.command {
     color: #ffffff;
 }
 
+th.spt {
+    background: #3333FF;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.sec {
     background: #8e0000;
     font-weight: bold;
@@ -626,7 +632,19 @@ th.car {
     color: #ffffff;
 }
 
+th.sup {
+    background: #bb9040;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.civ {
+    background: #a32800;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+th.srv {
     background: #a32800;
     font-weight: bold;
     color: #ffffff;
@@ -637,6 +655,7 @@ th.misc {
     font-weight: bold;
     color: #ffffff;
 }
+
 th.bot {
     background: #414249;
     font-weight: bold;
