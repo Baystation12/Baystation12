@@ -13,7 +13,6 @@
 		/area/constructionsite/teleporter = NO_SCRUBBER,
 		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
-		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
 		/area/engineering/engine_smes = NO_SCRUBBER|NO_VENT,
 		/area/guppy_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -38,7 +37,6 @@
 		/area/outpost/abandoned = NO_SCRUBBER,
 		/area/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/shield = NO_SCRUBBER|NO_VENT,
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/merchant = NO_SCRUBBER|NO_APC,
 		/area/shuttle/merchant/away = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -68,19 +66,38 @@
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/missile = NO_SCRUBBER|NO_VENT,
 		/area/vacant/office = 0,
+		/area/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/shuttle/escape_pod8/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod9/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod6/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod7/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod10/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod11/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod15/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod16/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod17/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod12/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod13/station = NO_SCRUBBER|NO_VENT,
+		/area/shuttle/escape_pod14/station = NO_SCRUBBER|NO_VENT,
+		/area/solar/constructionsite = NO_SCRUBBER|NO_VENT,
 	)
 
 	area_coherency_test_exempt_areas = list(
 		/area/space,
 		/area/mine/explored,
 		/area/mine/unexplored,
-		/area/centcom/control
+		/area/centcom/control,
+		/area/exterior/torch/deck_1,
+		/area/exterior/torch/deck_2,
+		/area/exterior/torch/deck_3,
+		/area/exterior/torch/deck_4,
+		/area/exterior/torch/deck_b
 	)
 
 	area_coherency_test_subarea_count = list(
 			/area/constructionsite = 7,
 			/area/constructionsite/maintenance = 14,
-			/area/solar/constructionsite = 3,
+			/area/solar/constructionsite = 4,
 	)
 
 	area_usage_test_exempted_areas = list(
@@ -98,5 +115,10 @@
 		/area/turbolift/firstdeck,
 		/area/turbolift/seconddeck,
 		/area/turbolift/thirddeck,
-		/area/turbolift/fourthdeck
+		/area/turbolift/fourthdeck,
+		/area/exterior/torch/deck_1,
+		/area/exterior/torch/deck_2,
+		/area/exterior/torch/deck_3,
+		/area/exterior/torch/deck_4,
+		/area/exterior/torch/deck_b
 	)
