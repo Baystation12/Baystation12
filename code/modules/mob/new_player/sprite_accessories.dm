@@ -251,6 +251,12 @@
 		gender = FEMALE
 		species_allowed = list("Human","Unathi")
 
+	bobcutalt
+		name = "Chin Length Bob"
+		icon_state = "hair_bobcutalt"
+		gender = FEMALE
+		species_allowed = list("Human","Unathi")
+
 	bowl
 		name = "Bowl"
 		icon_state = "hair_bowlcut"
