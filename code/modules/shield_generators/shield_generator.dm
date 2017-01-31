@@ -1,6 +1,6 @@
 /obj/machinery/power/shield_generator
 	name = "advanced shield generator"
-	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shield at large distance."
+	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
 	density = 1

@@ -1,7 +1,7 @@
 // Shoelocker
 /datum/gear/shoes
-	display_name = "running shoes"
-	path = /obj/item/clothing/shoes/black
+	display_name = "duty boots"
+	path = /obj/item/clothing/shoes/dutyboots
 	slot = slot_shoes
 	sort_category = "Shoes and Footwear"
 
@@ -17,10 +17,10 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/shoes/athletic
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/flats
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/high
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = FORMAL_ROLES

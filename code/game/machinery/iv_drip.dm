@@ -144,7 +144,7 @@ obj/machinery/iv_drip/attack_ai(mob/user as mob)
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
 /obj/machinery/iv_drip/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (!(user in view(2)) && user!=src.loc) return
 
 	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")

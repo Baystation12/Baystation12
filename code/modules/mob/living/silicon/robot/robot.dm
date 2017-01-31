@@ -302,6 +302,8 @@
 
 	real_name = changed_name
 	name = real_name
+	if(mind)
+		mind.name = changed_name
 
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()

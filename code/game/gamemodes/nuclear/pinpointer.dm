@@ -43,7 +43,7 @@
 		spawn(5) .()
 
 	examine(mob/user)
-		..(user)
+		. = ..(user)
 		for(var/obj/machinery/nuclearbomb/bomb in world)
 			if(bomb.timing)
 				to_chat(user, "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]")

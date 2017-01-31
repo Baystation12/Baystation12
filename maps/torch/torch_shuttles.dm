@@ -3,15 +3,22 @@
 	name = "calypso control console"
 	icon_keyboard = "rd_key"
 	icon_screen = "shuttle"
-	//req_access = list(access_mining)
+	req_access = list(access_calypso_helm)
 	shuttle_tag = "Calypso"
 
 /obj/machinery/computer/shuttle_control/multi/guppy
 	name = "general utility pod control console"
 	icon_keyboard = "power_key"
 	icon_screen = "supply"
-	//req_access = list(access_mining)
+	req_access = list(access_guppy_helm)
 	shuttle_tag = "GUP"
+
+/obj/machinery/computer/shuttle_control/multi/aquila
+	name = "aquila control console"
+	icon_keyboard = "power_key"
+	icon_screen = "shuttle"
+	req_access = list(access_aquila_helm)
+	shuttle_tag = "Aquila"
 
 //Torch Large Pods
 
@@ -169,6 +176,7 @@
 	interim = /area/calypso_hangar/transit
 	start_location = "SEV Torch Hangar Deck"
 	destinations = list(
+		"Southwest of Bridge" = /area/calypso_hangar/bridge,
 		"North of First Deck" = /area/calypso_hangar/firstdeck,
 		"South of Second Deck" = /area/calypso_hangar/seconddeck,
 		"West of Third Deck" = /area/calypso_hangar/thirddeck,
@@ -190,6 +198,7 @@
 	start_location = "SEV Torch Hangar Deck"
 
 	destinations = list(
+		"Northeast of Bridge" = /area/guppy_hangar/bridge,
 		"East of First Deck" = /area/guppy_hangar/firstdeck,
 		"West of Second Deck" = /area/guppy_hangar/seconddeck,
 		"South of Third Deck" = /area/guppy_hangar/thirddeck,
@@ -202,6 +211,41 @@
 	arrival_message = "Attention, General Utility Pod returning. Clear the Hangar Deck."
 	departure_message = "Attention, General Utility Pod departing. Clear the Hangar Deck."
 
+//Aquila.
+/datum/shuttle/multi_shuttle/aquila
+	name = "Aquila"
+	warmup_time = 0
+	origin = /area/aquila_hangar/start
+	interim = /area/aquila_hangar/transit
+	start_location = "SEV Torch Landing Area"
+	destinations = list(
+		"Northwest of Bridge" = /area/aquila_hangar/bridge,
+		"North of First Deck" = /area/aquila_hangar/firstdeck,
+		"South of Second Deck" = /area/aquila_hangar/seconddeck,
+		"West of Third Deck" = /area/aquila_hangar/thirddeck,
+		"East of Fourth Deck" = /area/aquila_hangar/fourthdeck,
+		"Asteroid" = /area/aquila_hangar/mining,
+		"Debris Field" = /area/aquila_hangar/salvage,
+		"Away Site" = /area/aquila_hangar/away,
+		)
+	docking_controller_tag = "aquila_shuttle"
+	destination_dock_targets = list(
+		"Landing Area" = "aquila_dock"
+		)
+	announcer = "SEV Torch Docking Computer"
+	arrival_message = "Attention, SFV Aquila returning. Clear the landing area."
+	departure_message = "Attention, SFV Aquila departing. Clear the landing area."
+
+//Petrov
+
+/datum/shuttle/ferry/petrov
+	name = "Petrov"
+	warmup_time = 10
+	area_offsite = /area/shuttle/petrov/away
+	area_station = /area/shuttle/petrov/docked
+	docking_controller_tag = "petrov_shuttle"
+	dock_target_station = "petrov_shuttle_dock_airlock"
+
 //Ninja Shuttle.
 /datum/shuttle/multi_shuttle/ninja
 	name = "Ninja"
@@ -210,6 +254,7 @@
 	interim = /area/ninja_dojo/transit
 	start_location = "Clan Dojo"
 	destinations = list(
+		"Southeast of Bridge" = /area/ninja_dojo/bridge,
 		"South of First Deck" = /area/ninja_dojo/firstdeck,
 		"North of Second Deck" = /area/ninja_dojo/seconddeck,
 		"East of Third Deck" = /area/ninja_dojo/thirddeck,
@@ -221,6 +266,7 @@
 	announcer = "SEV Torch Sensor Array"
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
+
 
 //Merchant
 
@@ -247,8 +293,8 @@
 
 //Transport
 
-/datum/shuttle/autodock/ferry/centcom
-	name = "Central Command Transport"
+/datum/shuttle/ferry/centcom
+	name = "Centcom"
 	location = 1
 	warmup_time = 10
 	area_offsite = /area/shuttle/transport1/centcom
@@ -266,10 +312,11 @@
 	interim = /area/syndicate_station/transit
 	start_location = "Mercenary Base"
 	destinations = list(
-		"Northeast of first deck" = /area/syndicate_station/firstdeck,
-		"Southeast of the second deck" = /area/syndicate_station/seconddeck,
-		"South of third deck" = /area/syndicate_station/thirddeck,
-		"Northwest of fourth deck" = /area/syndicate_station/fourthdeck,
+		"East of Bridge" = /area/syndicate_station/bridge,
+		"Northeast of First Deck" = /area/syndicate_station/firstdeck,
+		"Southeast of the Second deck" = /area/syndicate_station/seconddeck,
+		"South of Third deck" = /area/syndicate_station/thirddeck,
+		"Northwest of Fourth Deck" = /area/syndicate_station/fourthdeck,
 		"Away Site" = /area/syndicate_station/away,
 		"Debris Field" = /area/syndicate_station/salvage,
 		"Mining Site" = /area/syndicate_station/mining,
@@ -295,10 +342,11 @@
 	origin = /area/skipjack_station/start
 	interim = /area/skipjack_station/transit
 	destinations = list(
-		"Northwest of first deck" = /area/skipjack_station/firstdeck,
-		"Southwest of second deck" = /area/skipjack_station/seconddeck,
-		"Southeast of third deck" = /area/skipjack_station/thirddeck,
-		"Northeast of fourth deck" = /area/skipjack_station/fourthdeck,
+		"South of Bridge" = /area/skipjack_station/bridge,
+		"Northwest of First deck" = /area/skipjack_station/firstdeck,
+		"Southwest of Second deck" = /area/skipjack_station/seconddeck,
+		"Southeast of Third deck" = /area/skipjack_station/thirddeck,
+		"Northeast of Fourth Deck" = /area/skipjack_station/fourthdeck,
 		"Mining Site" = /area/skipjack_station/mining,
 		"Debris Field" = /area/skipjack_station/salvage,
 		"Away Site" = /area/skipjack_station/away,
@@ -325,10 +373,11 @@
 	interim = /area/rescue_base/transit
 	start_location = "Response Team Base"
 	destinations = list(
-		"Southwest of first deck" = /area/rescue_base/firstdeck,
-		"Northwest of second deck" = /area/rescue_base/seconddeck,
-		"North of third deck" = /area/rescue_base/thirddeck,
-		"Southeast of fourth deck" = /area/rescue_base/fourthdeck,
+		"West of Bridge" = /area/rescue_base/bridge,
+		"Southwest of First deck" = /area/rescue_base/firstdeck,
+		"Northwest of Second deck" = /area/rescue_base/seconddeck,
+		"North of Third deck" = /area/rescue_base/thirddeck,
+		"Southeast of Fourth Deck" = /area/rescue_base/fourthdeck,
 		"Away Site" = /area/rescue_base/away,
 		"Debris Field" = /area/rescue_base/salvage,
 		"Mining Site" = /area/rescue_base/mining,

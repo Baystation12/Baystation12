@@ -45,7 +45,7 @@
 	var/obj/item/weapon/computer_hardware/card_slot/card_slot						// ID Card slot component of this computer. Mostly for HoP modification console that needs ID slot for modification.
 	var/obj/item/weapon/computer_hardware/nano_printer/nano_printer					// Nano Printer component of this computer, for your everyday paperwork needs.
 	var/obj/item/weapon/computer_hardware/hard_drive/portable/portable_drive		// Portable data storage
-	var/obj/item/weapon/computer_hardware/ai_slot/ai_slot							// AI slot, an intellicard housing that allows modifications of AIs.
+	var/obj/item/weapon/computer_hardware/ai_slot/ai_slot							// AI slot, an inteliCard housing that allows modifications of AIs.
 	var/obj/item/weapon/computer_hardware/tesla_link/tesla_link						// Tesla Link, Allows remote charging from nearest APC.
 
 	var/list/idle_threads = list()							// Idle programs on background. They still receive process calls but can't be interacted with.
@@ -138,7 +138,7 @@
 		user = usr
 
 	if(!ai_slot || !ai_slot.stored_card)
-		to_chat(user, "There is no intellicard connected to \the [src].")
+		to_chat(user, "There is no inteliCard connected to \the [src].")
 		return
 
 	ai_slot.stored_card.forceMove(get_turf(src))
@@ -164,7 +164,7 @@
 		return 1
 
 /obj/item/modular_computer/examine(var/mob/user)
-	..()
+	. = ..()
 	if(damage > broken_damage)
 		to_chat(user, "<span class='danger'>It is heavily damaged!</span>")
 	else if(damage)
@@ -694,7 +694,7 @@
 		processor_unit = H
 	else if(istype(H, /obj/item/weapon/computer_hardware/ai_slot))
 		if(ai_slot)
-			to_chat(user, "This computer's intellicard slot is already occupied by \the [ai_slot].")
+			to_chat(user, "This computer's inteliCard slot is already occupied by \the [ai_slot].")
 			return
 		found = 1
 		ai_slot = H
@@ -884,3 +884,11 @@
 		return active_program.check_eye(user)
 	else
 		return ..()
+
+/obj/item/modular_computer/proc/apply_visual(mob/M)
+	if(active_program)
+		active_program.apply_visual(M)
+
+/obj/item/modular_computer/proc/remove_visual(mob/M)
+	if(active_program)
+		active_program.remove_visual(M)

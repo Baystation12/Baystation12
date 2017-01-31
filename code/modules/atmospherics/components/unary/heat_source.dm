@@ -170,6 +170,6 @@
 	..()
 
 /obj/machinery/atmospherics/unary/heater/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(panel_open)
 		to_chat(user, "The maintenance hatch is open.")

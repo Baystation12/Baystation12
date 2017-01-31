@@ -112,7 +112,7 @@
 					to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
 
 	examine(mob/user)
-		..(user)
+		. = ..(user)
 		if(detonator)
 			to_chat(user, "With attached [detonator.name]")
 

@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+delete-after: True
+changes: 
+  - tweak: "Climbing ladders now takes 2 seconds. As a side-effect climbing can now also be aborted by moving away."
+  - tweak: "Anyone near the destination ladder are now also made aware that someone is (potentially) about to arrive."

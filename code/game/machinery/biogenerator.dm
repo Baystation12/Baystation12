@@ -53,7 +53,7 @@
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 		else
 			user.remove_from_mob(O)
-			O.loc = src
+			O.forceMove(src)
 			beaker = O
 			updateUsrDialog()
 	else if(processing)
@@ -259,7 +259,7 @@
 			activate()
 		if("detach")
 			if(beaker)
-				beaker.loc = src.loc
+				beaker.dropInto(src.loc)
 				beaker = null
 				update_icon()
 		if("create")

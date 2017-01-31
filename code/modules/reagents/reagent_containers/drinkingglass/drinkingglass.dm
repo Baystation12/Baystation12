@@ -26,7 +26,7 @@
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
-	..()
+	. = ..()
 
 	for(var/I in extras)
 		if(istype(I, /obj/item/weapon/glass_extra))
