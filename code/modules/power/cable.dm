@@ -368,26 +368,15 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	. = list()	// this will be a list of all connected power objects
 	var/turf/T
 
-	// Handle up/down cables
-	if(d1 == 11 || d2 == 11)
-		T = GetBelow(src)
-		if(T)
-			. += power_list(T, src, 12, 1)
-
-	if(d1 == 12 || d2 == 12)
-		T = GetAbove(src)
-		if(T)
-			. += power_list(T, src, 11, 1)
-
 	// Handle standard cables in adjacent turfs
 	for(var/cable_dir in list(d1, d2))
-		if(cable_dir == 11 || cable_dir == 12 || cable_dir == 0)
+		if(cable_dir == 0)
 			continue
 		var/reverse = reverse_dir[cable_dir]
-		T = get_step(src, cable_dir)
+		T = get_zstep(src, cable_dir)
 		if(T)
 			for(var/obj/structure/cable/C in T)
-				if((C.d1 && C.d1 == reverse) || (C.d2 && C.d2 == reverse))
+				if(C.d1 == reverse || C.d2 == reverse)
 					. += C
 		if(cable_dir & (cable_dir - 1)) // Diagonal, check for /\/\/\ style cables along cardinal directions
 			for(var/pair in list(NORTH|SOUTH, EAST|WEST))
@@ -395,7 +384,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				if(T)
 					var/req_dir = cable_dir ^ pair
 					for(var/obj/structure/cable/C in T)
-						if((C.d1 && C.d1 == req_dir) || (C.d2 && C.d2 == req_dir))
+						if(C.d1 == req_dir || C.d2 == req_dir)
 							. += C
 
 	// Handle cables on the same turf as us
