@@ -1,0 +1,4 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Adminhelps now have a TAKE button that allow an admin to claim it, and inform the adminhelper that someone is on the case."

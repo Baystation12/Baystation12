@@ -22,7 +22,7 @@
 	berets["customs and trade beret"] = /obj/item/clothing/head/beret/sol/customs
 	berets["orbital assault beret"] = /obj/item/clothing/head/beret/sol/orbital
 	berets["government research beret"] = /obj/item/clothing/head/beret/sol/research
-	berets["health service beret"] = /obj/item/clothing/head/beret/sol/gateway
+	berets["health service beret"] = /obj/item/clothing/head/beret/sol/health
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
 /datum/gear/head/whitentberet

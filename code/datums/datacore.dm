@@ -18,6 +18,7 @@
 
 /datum/datacore/proc/get_manifest(monochrome, OOC)
 	var/list/heads = new()
+	var/list/spt = new()
 	var/list/sec = new()
 	var/list/eng = new()
 	var/list/med = new()
@@ -72,6 +73,9 @@
 		if(real_rank in command_positions)
 			heads[name] = rank
 			department = 1
+		if(real_rank in support_positions)
+			spt[name] = rank
+			department = 1
 		if(real_rank in security_positions)
 			sec[name] = rank
 			department = 1
@@ -112,9 +116,14 @@
 
 
 	if(heads.len > 0)
-		dat += "<tr><th colspan=3>Heads</th></tr>"
+		dat += "<tr><th colspan=3>Heads of Staff</th></tr>"
 		for(name in heads)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[heads[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(spt.len > 0)
+		dat += "<tr><th colspan=3>Command Support</th></tr>"
+		for(name in spt)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[spt[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(sec.len > 0)
 		dat += "<tr><th colspan=3>Security</th></tr>"
@@ -132,9 +141,19 @@
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[med[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(sci.len > 0)
-		dat += "<tr><th colspan=3>Science</th></tr>"
+		dat += "<tr><th colspan=3>Research</th></tr>"
 		for(name in sci)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(sup.len > 0)
+		dat += "<tr><th colspan=3>Supply</th></tr>"
+		for(name in sup)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(srv.len > 0)
+		dat += "<tr><th colspan=3>Service</th></tr>"
+		for(name in srv)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[srv[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(car.len > 0)
 		dat += "<tr><th colspan=3>Cargo</th></tr>"
@@ -159,17 +178,6 @@
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[misc[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 
-	if(srv.len > 0)
-		dat += "<tr><th colspan=3Service</th></tr>"
-		for(name in srv)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[srv[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-
-	if(sup.len > 0)
-		dat += "<tr><th colspan=3Supply</th></tr>"
-		for(name in sup)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
 
 	dat += "</table>"
 	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly

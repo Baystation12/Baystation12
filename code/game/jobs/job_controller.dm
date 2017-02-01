@@ -31,6 +31,8 @@ var/global/datum/controller/occupations/job_master
 			if(!setup_titles) continue
 			if(job.department_flag & COM)
 				command_positions |= job.title
+			if(job.department_flag & SPT)
+				support_positions |= job.title
 			if(job.department_flag & SEC)
 				security_positions |= job.title
 			if(job.department_flag & ENG)
@@ -39,16 +41,16 @@ var/global/datum/controller/occupations/job_master
 				medical_positions |= job.title
 			if(job.department_flag & SCI)
 				science_positions |= job.title
+			if(job.department_flag & SUP)
+				supply_positions |= job.title
+			if(job.department_flag & SRV)
+				service_positions |= job.title
 			if(job.department_flag & CRG)
 				cargo_positions |= job.title
 			if(job.department_flag & CIV)
 				civilian_positions |= job.title
 			if(job.department_flag & MSC)
 				nonhuman_positions |= job.title
-			if(job.department_flag & SRV)
-				service_positions |= job.title
-			if(job.department_flag & SUP)
-				supply_positions |= job.title
 
 		return 1
 
