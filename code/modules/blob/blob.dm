@@ -21,7 +21,7 @@
 	var/fire_resist = 1
 	var/laser_resist = 5	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
 	var/expandType = /obj/effect/blob
-	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
+	var/secondary_core_growth_chance = 6.25 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 
 /obj/effect/blob/New(loc)
 	health = maxHealth
