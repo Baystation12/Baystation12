@@ -151,7 +151,7 @@ var/list/possible_cable_coil_colours
 		return
 
 	if(istype(W, /obj/item/weapon/wirecutters))
-		if(d1 == 12 || d2 == 12)
+		if(d1 == UP || d2 == UP)
 			to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
 			return
 
@@ -170,11 +170,11 @@ var/list/possible_cable_coil_colours
 		for(var/mob/O in viewers(src, null))
 			O.show_message("<span class='warning'>[user] cuts the cable.</span>", 1)
 
-		if(d1 == 11 || d2 == 11)
+		if(d1 == DOWN || d2 == DOWN)
 			var/turf/turf = GetBelow(src)
 			if(turf)
 				for(var/obj/structure/cable/c in turf)
-					if(c.d1 == 12 || c.d2 == 12)
+					if(c.d1 == UP || c.d2 == UP)
 						qdel(c)
 
 		investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
@@ -292,12 +292,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 // merge with the powernets of power objects in the given direction
 /obj/structure/cable/proc/mergeConnectedNetworks(var/direction)
 
-	var/fdir = (!direction)? 0 : turn(direction, 180) //flip the direction, to match with the source position on its turf
+	var/fdir = direction ? reverse_dir[direction] : 0 //flip the direction, to match with the source position on its turf
 
 	if(!(d1 == direction || d2 == direction)) //if the cable is not pointed in this direction, do nothing
 		return
 
-	var/turf/TB  = get_step(src, direction)
+	var/turf/TB  = get_zstep(src, direction)
 
 	for(var/obj/structure/cable/C in TB)
 
@@ -635,81 +635,27 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		to_chat(user, "You can't lay cable there unless the floor tiles are removed.")
 		return
 
+	var/dirn
+	if(user.loc == F)
+		dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
 	else
-		var/dirn
+		dirn = get_dir(F, user)
 
-		if(user.loc == F)
-			dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
-		else
-			dirn = get_dir(F, user)
+	var/end_dir = 0
+	if(istype(F, /turf/simulated/open))
+		if(!can_use(2))
+			to_chat(user, "You don't have enough cable to do this!")
+			return
+		end_dir = DOWN
 
-		for(var/obj/structure/cable/LC in F)
-			if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
-				to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
-				return
-///// Z-Level Stuff
-		// check if the target is open space
-		if(istype(F, /turf/simulated/open))
-			for(var/obj/structure/cable/LC in F)
-				if((LC.d1 == dirn && LC.d2 == 11 ) || ( LC.d2 == dirn && LC.d1 == 11))
-					to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
-					return
-			if(!use(2))
-				to_chat(user, "You don't have enough cable to do this!")
-				return
+	for(var/obj/structure/cable/LC in F)
+		if((LC.d1 == dirn && LC.d2 == end_dir ) || ( LC.d2 == dirn && LC.d1 == end_dir))
+			to_chat(user, "<span class='warning'>There's already a cable at that position.</span>")
+			return
 
-			var/obj/structure/cable/C = new(F)
-			var/obj/structure/cable/D = new(GetBelow(F))
-
-			C.cableColor(color)
-			C.d1 = 11
-			C.d2 = dirn
-			C.add_fingerprint(user)
-			C.update_icon()
-
-
-			D.cableColor(color)
-			D.d1 = 12
-			D.d2 = 0
-			D.add_fingerprint(user)
-			D.update_icon()
-
-			var/datum/powernet/PN = new()
-			propagate_network(C, PN)
-		// do the normal stuff
-		else
-///// Z-Level Stuff
-			for(var/obj/structure/cable/LC in F)
-				if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
-					to_chat(user, "There's already a cable at that position.")
-					return
-
-			var/obj/structure/cable/C = new(F)
-
-			C.cableColor(color)
-
-			//set up the new cable
-			C.d1 = 0 //it's a O-X node cable
-			C.d2 = dirn
-			C.add_fingerprint(user)
-			C.update_icon()
-
-			//create a new powernet with the cable, if needed it will be merged later
-			var/datum/powernet/PN = new()
-			PN.add_cable(C)
-
-			C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
-			C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
-
-			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
-				C.mergeDiagonalsNetworks(C.d2)
-
-
-			use(1)
-			if (C.shock(user, 50))
-				if (prob(50)) //fail
-					new/obj/item/stack/cable_coil(C.loc, 1, C.color)
-					qdel(C)
+	put_cable(F, user, end_dir, dirn)
+	if(end_dir == DOWN)
+		put_cable(GetBelow(F), user, UP, 0)
 
 // called when cable_coil is click on an installed obj/cable
 // or click on a turf that already contains a "node" cable
@@ -748,32 +694,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				if(LC.d1 == fdirn || LC.d2 == fdirn)
 					to_chat(user, "There's already a cable at that position.")
 					return
-
-			var/obj/structure/cable/NC = new(U)
-			NC.cableColor(color)
-
-			NC.d1 = 0
-			NC.d2 = fdirn
-			NC.add_fingerprint()
-			NC.update_icon()
-
-			//create a new powernet with the cable, if needed it will be merged later
-			var/datum/powernet/newPN = new()
-			newPN.add_cable(NC)
-
-			NC.mergeConnectedNetworks(NC.d2) //merge the powernet with adjacents powernets
-			NC.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
-
-			if(NC.d2 & (NC.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
-				NC.mergeDiagonalsNetworks(NC.d2)
-
-			use(1)
-
-			if (NC.shock(user, 50))
-				if (prob(50)) //fail
-					new/obj/item/stack/cable_coil(NC.loc, 1, NC.color)
-					qdel(NC)
-
+			put_cable(U,user,0,fdirn)
 			return
 
 	// exisiting cable doesn't point at our position, so see if it's a stub
@@ -825,6 +746,37 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 		C.denode()// this call may have disconnected some cables that terminated on the centre of the turf, if so split the powernets.
 		return
+
+/obj/item/stack/cable_coil/proc/put_cable(turf/simulated/F, mob/user, d1, d2)
+	if(!istype(F))
+		return
+
+	var/obj/structure/cable/C = new(F)
+	C.cableColor(color)
+	C.d1 = d1
+	C.d2 = d2
+	C.add_fingerprint(user)
+	C.update_icon()
+
+	//create a new powernet with the cable, if needed it will be merged later
+	var/datum/powernet/PN = new()
+	PN.add_cable(C)
+
+	C.mergeConnectedNetworks(C.d1) //merge the powernets...
+	C.mergeConnectedNetworks(C.d2) //...in the two new cable directions
+	C.mergeConnectedNetworksOnTurf()
+
+	if(C.d1 & (C.d1 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+		C.mergeDiagonalsNetworks(C.d1)
+
+	if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+		C.mergeDiagonalsNetworks(C.d2)
+
+	use(1)
+	if (C.shock(user, 50))
+		if (prob(50)) //fail
+			new/obj/item/stack/cable_coil(C.loc, 1, C.color)
+			qdel(C)
 
 //////////////////////////////
 // Misc.
