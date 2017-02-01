@@ -269,6 +269,7 @@ var/global/floorIsLava = 0
 
 
 /datum/admins/proc/show_player_info(var/key as text)
+
 	set category = "Admin"
 	set name = "Show Player Info"
 	if (!istype(src,/datum/admins))
@@ -276,15 +277,15 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
 		return
-	var/dat = "<html><head><title>Info on [key]</title></head>"
-	dat += "<body>"
+
+	var/list/dat = list()
 
 	var/p_age = "unknown"
 	for(var/client/C in clients)
 		if(C.ckey == key)
 			p_age = C.player_age
 			break
-	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
+	dat += "<b>Player age: [p_age]</b><br><ul id='notes'>"
 
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
@@ -302,20 +303,46 @@ var/global/floorIsLava = 0
 			if(!I.rank)
 				I.rank = "N/A"
 				update_file = 1
-			dat += "<font color=#008800>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color=blue>[I.timestamp]</i></font> "
+			dat += "<li><font color=#7d9177>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color='#8a94a3'>[I.timestamp]</i></font> "
 			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
-			dat += "<br><br>"
+			dat += "<hr></li>"
 		if(update_file) info << infos
 
+	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
 
-	dat += "<br>"
-	dat += "<A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
+	var/html = {"
+		<html>
+		<head>
+			<title>Info on [key]</title>
+			<script src='player_info.js'></script>
+		</head>
+		<body onload='selectTextField(); updateSearch()'; onkeyup='updateSearch()'>
+			<div align='center'>
+			<table width='100%'><tr>
+				<td width='20%'>
+					<div align='center'>
+						<b>Search:</b>
+					</div>
+				</td>
+				<td width='80%'>
+					<input type='text'
+					       id='filter'
+					       name='filter_text'
+					       value=''
+					       style='width:100%;' />
+				</td>
+			</tr></table>
+			<hr/>
+			[jointext(dat, null)]
+		</body>
+		</html>
+		"}
 
-	dat += "</body></html>"
-	usr << browse(dat, "window=adminplayerinfo;size=480x480")
-
-
+	usr << browse_rsc('code/js/player_info.js', "player_info.js")
+	var/datum/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
+	popup.set_content(html)
+	popup.open()
 
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
