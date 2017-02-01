@@ -71,17 +71,16 @@ Small, little HP, poisonous.
 			attach(H)
 
 /mob/living/simple_animal/hostile/voxslug/Life()
-	if(!stat && istype(src.loc, /obj/item/weapon/holder)) //We in somebody
-		var/mob/living/carbon/human/H = src.loc.loc
-		if(prob(1))
-			to_chat(H, "<span class='warning'>You feel strange as \the [src] pulses...</span>")
-		var/datum/reagents/R = H.reagents
-		R.add_reagent("synaptizine", 0.5)
-		return 1
-	return ..() //only do generic stuff if we not in somebody
+	. = ..()
+	if(. && istype(src.loc, /obj/item/weapon/holder) && isliving(src.loc.loc)) //We in somebody
+		var/mob/living/L = src.loc.loc
+		if(src.loc in L.get_visible_implants(0))
+			if(prob(1))
+				to_chat(L, "<span class='warning'>You feel strange as \the [src] pulses...</span>")
+			var/datum/reagents/R = L.reagents
+			R.add_reagent("synaptizine", 0.5)
 
 /obj/item/weapon/holder/voxslug/attack(var/mob/target, var/mob/user)
-
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if(!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
