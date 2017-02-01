@@ -23,9 +23,8 @@
 			return
 		var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)
 
-		var/list/data = list("donor" = null, "blood_DNA" = null, "blood_type" = null, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
-		data["virus2"] |= I:virus2
-		product.reagents.add_reagent("blood",30,data)
+		var/obj/item/weapon/virusdish/V = I
+		product.reagents.add_reagent("blood",30,list("virus2" = V.virus2))
 
 		virusing = 1
 		spawn(1200) virusing = 0

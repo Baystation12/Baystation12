@@ -28,7 +28,7 @@
 		name = "BloodPack ([species], [blood_type])"
 		var/datum/species/species_type = all_species[species]
 		var/blood_colour = species_type.blood_color
-		reagents.add_reagent("blood", 200, list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=blood_type,"species"=species,"resistances"=null,"trace_chem"=null,"blood_colour"=blood_colour))
+		reagents.add_reagent("blood", 200, list("blood_type"=blood_type,"species"=species,"blood_colour"=blood_colour))
 		update_icon()
 
 /obj/item/weapon/reagent_containers/blood/on_reagent_change()
