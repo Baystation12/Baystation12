@@ -81,8 +81,7 @@
 				if(affecting)
 					if(affecting.robotic >= ORGAN_ROBOT)
 						return
-					if(affecting.take_damage(5, 0))
-						H.UpdateDamageIcon()
+					affecting.take_damage(5, 0)
 					H.updatehealth()
 					if(affecting.can_feel_pain())
 						H.Weaken(3)

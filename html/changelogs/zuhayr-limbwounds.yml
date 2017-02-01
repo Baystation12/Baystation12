@@ -1,0 +1,8 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - tweak: "You now need to target head/eyes/mouth when trying to slit a throat."
+  - rscadd: "Added tendons and tendon repair. Tendons can be severed by cutting brute damage or via a grab (similar to cutting a throat) and if cut will render the limb unusable. Hands, feet, arms and legs have tendons."
+  - rscadd: "Added arteries, replacing the previous internal bleeding implementation. Functionally identical to the internal bleeding of yesteryear including repair surgery."
+  - tweak: "As a result of the above, internal bleeding is now static per limb and cannot be treated via bicaridine and inaprovaline overdose."
+  - tweak: "It is no longer required that the skull and ribcage be opened to repair internal bleeding or eye damage. A retracted incision is still required."

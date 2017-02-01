@@ -19,12 +19,12 @@
 
 	/*  These are defined by the wound type and should not be changed */
 	var/list/stages            // stages such as "cut", "deep cut", etc.
-	var/internal = 0           // internal wounds can only be fixed through surgery
 	var/max_bleeding_stage = 0 // maximum stage at which bleeding should still happen. Beyond this stage bleeding is prevented.
 	var/damage_type = CUT      // one of CUT, PIERCE, BRUISE, BURN
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
+	var/tmp/list/embedded_objects = list()
 	var/tmp/list/desc_list = list()
 	var/tmp/list/damage_list = list()
 
@@ -60,15 +60,19 @@
 	return src.damage / src.amount
 
 /datum/wound/proc/can_autoheal()
-	return (src.wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
+	for(var/obj/item/thing in embedded_objects)
+		if(thing.w_class > ITEM_SIZE_SMALL)
+			return 0
+	return (wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
 
 // checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
-	switch(damage_type)
-		if(BRUISE, CUT, PIERCE)
-			return bandaged
-		if(BURN)
-			return salved
+	if(!embedded_objects.len)
+		switch(damage_type)
+			if(BRUISE, CUT, PIERCE)
+				return bandaged
+			if(BURN)
+				return salved
 
 	// Checks whether other other can be merged into src.
 /datum/wound/proc/can_merge(var/datum/wound/other)
@@ -83,6 +87,7 @@
 	return 1
 
 /datum/wound/proc/merge_wound(var/datum/wound/other)
+	src.embedded_objects |= other.embedded_objects
 	src.damage += other.damage
 	src.amount += other.amount
 	src.bleed_timer += other.bleed_timer
@@ -125,12 +130,9 @@
 
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
-// set @heals_internal to also heal internal organ damage
-/datum/wound/proc/heal_damage(amount, heals_internal = 0)
-	if(src.internal && !heals_internal)
-		// heal nothing
-		return amount
-
+/datum/wound/proc/heal_damage(amount)
+	if(embedded_objects.len)
+		return amount // heal nothing
 	var/healed_damage = min(src.damage, amount)
 	amount -= healed_damage
 	src.damage -= healed_damage
@@ -172,4 +174,9 @@
 	return 1
 
 /datum/wound/proc/bleeding()
-	return !(internal || (current_stage > max_bleeding_stage) || bandaged || clamped || (bleed_timer <= 0 && wound_damage() <= bleed_threshold))
+	for(var/obj/item/thing in embedded_objects)
+		if(thing.w_class > ITEM_SIZE_SMALL)
+			return FALSE
+	if(bandaged || clamped)
+		return FALSE
+	return (bleed_timer > 0 && wound_damage() > bleed_threshold)
