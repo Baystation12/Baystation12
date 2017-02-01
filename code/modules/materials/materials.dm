@@ -406,6 +406,21 @@ var/list/name_to_material
 	icon_colour = "#D1E6E3"
 	icon_reinf = "reinf_metal"
 
+/material/plasteel/ocp
+	name = "osmium-carbide plasteel"
+	stack_type = /obj/item/stack/material/ocp
+	integrity = 200
+	melting_point = 9000
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
+	icon_colour = "#9bc6f2"
+	brute_armor = 4
+	burn_armor = 20
+	weight = 27
+	stack_origin_tech = list(TECH_MATERIAL = 3)
+	composite_material = list("plasteel" = 7500, "osmium" = 3750)
+
+
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
