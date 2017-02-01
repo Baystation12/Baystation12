@@ -2,6 +2,13 @@
 	icon_state = "rgeneric"
 /turf/simulated/wall/r_wall/New(var/newloc)
 	..(newloc, "plasteel","plasteel") //3strong
+/turf/simulated/wall/ocp_wall
+	icon_state = "rgeneric"
+/turf/simulated/wall/ocp_wall/New(var/newloc)
+	..(newloc, "osmium-carbide plasteel", "osmium-carbide plasteel")
+
+
+
 
 /turf/simulated/wall/cult
 	icon_state = "cult"
@@ -40,6 +47,7 @@
 	..(newloc,"silver","gold")
 /turf/simulated/wall/sandstonediamond/New(var/newloc)
 	..(newloc,"sandstone","diamond")
+
 
 // Kind of wondering if this is going to bite me in the butt.
 /turf/simulated/wall/voxshuttle/New(var/newloc)
