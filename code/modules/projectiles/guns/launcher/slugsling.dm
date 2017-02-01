@@ -22,7 +22,6 @@
 	if(isliving(AM))
 		if(istype(AM,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = AM
-			world << H.species.get_bodytype() == "Vox" ? "Yes" : "No"
 			if(H.species && H.species.get_bodytype() == "Vox")
 				return
 		else
