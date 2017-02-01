@@ -44,7 +44,7 @@
 	name = "d100"
 	desc = "A dice with ten sides. This one is for the tens digit."
 	icon_state = "d10010"
-	sides = 10
+	sides = 100
 
 /obj/item/weapon/dice/proc/roll_die()
 	var/result = rand(1, sides)
