@@ -86,6 +86,8 @@ var/datum/mil_branches/mil_branches = new()
 	var/list/rank_types       // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
+	var/assistant_job //what people who have the BE_ASSISTANT pref set will attempt to join as
+
 /datum/mil_branch/New()
 	ranks = list()
 	spawn_ranks = list()
