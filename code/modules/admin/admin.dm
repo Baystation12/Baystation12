@@ -218,46 +218,35 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
 		return
-	PlayerNotesPage(1)
+	PlayerNotesPage()
 
-/datum/admins/proc/PlayerNotesPage(page)
-	var/dat = "<B>Player notes</B><HR>"
+/datum/admins/proc/PlayerNotesPage(var/filter_term)
+	var/list/dat = list()
+	dat += "<B>Player notes</B><HR>"
 	var/savefile/S=new("data/player_notes.sav")
 	var/list/note_keys
 	S >> note_keys
+
+	if(filter_term)
+		for(var/t in note_keys)
+			if(findtext(lowertext(t), lowertext(filter_term)))
+				continue
+			note_keys -= t
+
+	dat += "<center><b>Search term:</b> <a href='?src=\ref[src];notes=set_filter'>[filter_term ? filter_term : "-----"]</a></center><hr>"
+
 	if(!note_keys)
 		dat += "No notes found."
 	else
 		dat += "<table>"
 		note_keys = sortList(note_keys)
-
-		// Display the notes on the current page
-		var/number_pages = note_keys.len / PLAYER_NOTES_ENTRIES_PER_PAGE
-		// Emulate ceil(why does BYOND not have ceil)
-		if(number_pages != round(number_pages))
-			number_pages = round(number_pages) + 1
-		var/page_index = page - 1
-		if(page_index < 0 || page_index >= number_pages)
-			return
-
-		var/lower_bound = page_index * PLAYER_NOTES_ENTRIES_PER_PAGE + 1
-		var/upper_bound = (page_index + 1) * PLAYER_NOTES_ENTRIES_PER_PAGE
-		upper_bound = min(upper_bound, note_keys.len)
-		for(var/index = lower_bound, index <= upper_bound, index++)
-			var/t = note_keys[index]
+		for(var/t in note_keys)
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
-
 		dat += "</table><br>"
 
-		// Display a footer to select different pages
-		for(var/index = 1, index <= number_pages, index++)
-			if(index == page)
-				dat += "<b>"
-			dat += "<a href='?src=\ref[src];notes=list;index=[index]'>[index]</a> "
-			if(index == page)
-				dat += "</b>"
-
-	usr << browse(dat, "window=player_notes;size=400x400")
+	var/datum/browser/popup = new(usr, "player_notes", "Player Notes", 400, 400)
+	popup.set_content(jointext(dat, null))
+	popup.open()
 
 
 /datum/admins/proc/player_has_info(var/key as text)
@@ -269,6 +258,7 @@ var/global/floorIsLava = 0
 
 
 /datum/admins/proc/show_player_info(var/key as text)
+
 	set category = "Admin"
 	set name = "Show Player Info"
 	if (!istype(src,/datum/admins))
@@ -276,15 +266,15 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
 		return
-	var/dat = "<html><head><title>Info on [key]</title></head>"
-	dat += "<body>"
+
+	var/list/dat = list()
 
 	var/p_age = "unknown"
 	for(var/client/C in clients)
 		if(C.ckey == key)
 			p_age = C.player_age
 			break
-	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
+	dat += "<b>Player age: [p_age]</b><br><ul id='notes'>"
 
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
@@ -302,20 +292,46 @@ var/global/floorIsLava = 0
 			if(!I.rank)
 				I.rank = "N/A"
 				update_file = 1
-			dat += "<font color=#008800>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color=blue>[I.timestamp]</i></font> "
+			dat += "<li><font color=#7d9177>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color='#8a94a3'>[I.timestamp]</i></font> "
 			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
-			dat += "<br><br>"
+			dat += "<hr></li>"
 		if(update_file) info << infos
 
+	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
 
-	dat += "<br>"
-	dat += "<A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
+	var/html = {"
+		<html>
+		<head>
+			<title>Info on [key]</title>
+			<script src='player_info.js'></script>
+		</head>
+		<body onload='selectTextField(); updateSearch()'; onkeyup='updateSearch()'>
+			<div align='center'>
+			<table width='100%'><tr>
+				<td width='20%'>
+					<div align='center'>
+						<b>Search:</b>
+					</div>
+				</td>
+				<td width='80%'>
+					<input type='text'
+					       id='filter'
+					       name='filter_text'
+					       value=''
+					       style='width:100%;' />
+				</td>
+			</tr></table>
+			<hr/>
+			[jointext(dat, null)]
+		</body>
+		</html>
+		"}
 
-	dat += "</body></html>"
-	usr << browse(dat, "window=adminplayerinfo;size=480x480")
-
-
+	send_rsc(usr,'code/js/player_info.js', "player_info.js")
+	var/datum/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
+	popup.set_content(html)
+	popup.open()
 
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
