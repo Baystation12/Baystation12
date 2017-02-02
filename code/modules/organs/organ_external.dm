@@ -1081,8 +1081,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 		organ.forceMove(src)
 
 	// Remove parent references
-	parent.children -= src
-	parent = null
+	if(parent)
+		parent.children -= src
+		parent = null
 
 	release_restraints(victim)
 	victim.organs -= src
