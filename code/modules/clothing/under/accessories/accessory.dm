@@ -13,6 +13,7 @@
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi')
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
+	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
@@ -38,6 +39,14 @@
 			bodytype = user_human.species.get_bodytype(user_human)
 
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
+
+		if(istype(loc,/obj/item/clothing/under))
+			var/obj/item/clothing/under/C = loc
+			if(on_rolled["down"] && C.rolled_down > 0)
+				tmp_icon_state = on_rolled["down"]
+			else if(on_rolled["sleeves"] && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled["sleeves"]
+
 		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
