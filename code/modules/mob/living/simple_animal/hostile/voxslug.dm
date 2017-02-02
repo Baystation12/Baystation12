@@ -4,7 +4,7 @@ Small, little HP, poisonous.
 
 /mob/living/simple_animal/hostile/voxslug
 	name = "slug"
-	desc = "A viscious little creature, it has a mouth of too many teeth and a penance for blood."
+	desc = "A viscious little creature, it has a mouth of too many teeth and a penchant for blood."
 	icon_state = "voxslug"
 	icon_living = "voxslug"
 	item_state = "voxslug"
@@ -78,7 +78,7 @@ Small, little HP, poisonous.
 			if(prob(1))
 				to_chat(L, "<span class='warning'>You feel strange as \the [src] pulses...</span>")
 			var/datum/reagents/R = L.reagents
-			R.add_reagent("synaptizine", 0.5)
+			R.add_reagent("cryptobiolin", 0.5)
 
 /obj/item/weapon/holder/voxslug/attack(var/mob/target, var/mob/user)
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
