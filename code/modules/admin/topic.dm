@@ -1819,17 +1819,16 @@
 		show_player_info(key)
 
 	if(href_list["notes"])
-		var/ckey = href_list["ckey"]
-		if(!ckey)
-			var/mob/M = locate(href_list["mob"])
-			if(ismob(M))
-				ckey = M.ckey
-
-		switch(href_list["notes"])
-			if("show")
-				show_player_info(ckey)
-			if("list")
-				PlayerNotesPage(text2num(href_list["index"]))
+		if(href_list["notes"] == "set_filter")
+			var/choice = input(usr,"Please specify a text filter to use or cancel to clear.","Player Notes",null) as text|null
+			PlayerNotesPage(choice)
+		else
+			var/ckey = href_list["ckey"]
+			if(!ckey)
+				var/mob/M = locate(href_list["mob"])
+				if(ismob(M))
+					ckey = M.ckey
+			show_player_info(ckey)
 		return
 
 mob/living/proc/can_centcom_reply()
