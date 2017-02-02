@@ -328,7 +328,7 @@ var/global/floorIsLava = 0
 		</html>
 		"}
 
-	usr << browse_rsc('code/js/player_info.js', "player_info.js")
+	send_rsc(usr,'code/js/player_info.js', "player_info.js")
 	var/datum/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
 	popup.set_content(html)
 	popup.open()
