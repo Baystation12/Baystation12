@@ -6,7 +6,7 @@
 	var/last_dock_attempt_time = 0
 	var/current_dock_target
 
-	var/obj/effect/shuttle_landmark/next_waypoint
+	var/obj/effect/shuttle_landmark/next_location
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
 	var/obj/effect/shuttle_landmark/landmark_transition
@@ -26,7 +26,7 @@
 		landmark_transition = locate(landmark_transition)
 
 /datum/shuttle/autodock/Destroy()
-	next_waypoint = null
+	next_location = null
 	active_docking_controller = null
 	landmark_transition = null
 
@@ -93,27 +93,27 @@
 
 //not to be confused with the arrived() proc
 /datum/shuttle/autodock/proc/process_arrived()
-	active_docking_controller = next_waypoint.docking_controller
-	dock(next_waypoint.docking_target)
+	active_docking_controller = next_location.docking_controller
+	dock(next_location.docking_target)
 
-	next_waypoint = null
+	next_location = null
 	in_use = null	//release lock
 
 
 /datum/shuttle/autodock/proc/process_launch()
 	if (move_time && landmark_transition)
-		long_jump(next_waypoint, landmark_transition, move_time)
+		long_jump(next_location, landmark_transition, move_time)
 	else
-		short_jump(next_waypoint)
+		short_jump(next_location)
 
 /*
 	Guards
 */
 /datum/shuttle/autodock/proc/can_launch()
-	return (next_waypoint && moving_status == SHUTTLE_IDLE && !in_use)
+	return (next_location && moving_status == SHUTTLE_IDLE && !in_use)
 
 /datum/shuttle/autodock/proc/can_force()
-	return (next_waypoint && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
+	return (next_location && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
 
 /datum/shuttle/autodock/proc/can_cancel()
 	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
@@ -157,6 +157,3 @@
 //Note that this is called when the shuttle leaves the WAIT_FINISHED state, the proc name is a little misleading
 /datum/shuttle/autodock/proc/arrived()
 	return	//do nothing for now
-
-/datum/shuttle/autodock/proc/get_location_name()
-	return current_location.name

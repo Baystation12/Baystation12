@@ -1,15 +1,10 @@
 /datum/shuttle/autodock/multi
 	var/list/destinations
-	var/obj/effect/shuttle_landmark/current_waypoint
 
 	category = /datum/shuttle/autodock/multi
 
 /datum/shuttle/autodock/multi/New(_name)
-	current_waypoint = locate(current_waypoint)
-	if(!istype(current_waypoint))
-		CRASH("Shuttle '[name]' could not find its starting waypoint.")
-
-	..(_name, current_waypoint)
+	..(_name)
 
 	//build destination list
 	var/list/found_waypoints = list()
@@ -22,21 +17,10 @@
 			log_error("Shuttle [name] could not find waypoint with tag [waypoint_tag]!")
 	destinations = found_waypoints
 
-/datum/shuttle/autodock/multi/Destroy()
-	current_waypoint = null
-	return ..()
-
-/datum/shuttle/autodock/multi/process_arrived()
-	current_waypoint = next_waypoint
-	..()
-
-/datum/shuttle/autodock/multi/get_location_name()
-	return current_waypoint.name
-
 /datum/shuttle/autodock/multi/proc/set_destination(var/destination_key, mob/user)
 	if(moving_status != SHUTTLE_IDLE)
 		return
-	next_waypoint = destinations[destination_key]
+	next_location = destinations[destination_key]
 
 
 //Antag play announcements when they leave/return to their home area
@@ -55,12 +39,15 @@
 
 /datum/shuttle/autodock/multi/antag/New()
 	..()
-	home_waypoint = current_waypoint
+	if(home_waypoint)
+		home_waypoint = locate(home_waypoint)
+	else
+		home_waypoint = current_location
 
 /datum/shuttle/autodock/multi/antag/move()
-	if(current_waypoint == home_waypoint)
+	if(current_location == home_waypoint)
 		announce_arrival()
-	else if(next_waypoint == home_waypoint)
+	else if(next_location == home_waypoint)
 		announce_departure()
 	..()
 

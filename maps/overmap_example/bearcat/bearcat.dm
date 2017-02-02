@@ -18,7 +18,7 @@
 /datum/shuttle/autodock/overmap/exploration
 	name = "Exploration Shuttle"
 	shuttle_area = /area/ship/scrap/shuttle/outgoing
-	current_waypoint = "nav_bearcat_port_dock_shuttle"
+	current_location = "nav_bearcat_port_dock_shuttle"
 
 
 //In case multiple shuttles can dock at a location,

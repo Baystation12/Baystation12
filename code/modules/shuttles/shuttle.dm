@@ -6,7 +6,7 @@
 	var/moving_status = SHUTTLE_IDLE
 
 	var/area/shuttle_area
-	var/atom/current_location
+	var/obj/effect/shuttle_landmark/current_location
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = SHUTTLE_FLAGS_PROCESS
@@ -14,7 +14,7 @@
 
 	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
 
-/datum/shuttle/New(_name, var/atom/initial_location)
+/datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
 		src.name = _name
@@ -23,9 +23,12 @@
 	if(!istype(shuttle_area))
 		CRASH("Shuttle \"[name]\" has no area.")
 
-	current_location = initial_location
+	if(initial_location)
+		current_location = initial_location
+	else
+		current_location = locate(current_location)
 	if(!istype(current_location))
-		CRASH("Shuttle \"[name]\" has no starting location.")
+		CRASH("Shuttle \"[name]\" could not find its starting location.")
 
 	if(src.name in shuttle_controller.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
@@ -85,7 +88,7 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. move() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump() or long_jump()
-/datum/shuttle/proc/move(var/atom/destination)
+/datum/shuttle/proc/move(var/obj/effect/shuttle_landmark/destination)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")

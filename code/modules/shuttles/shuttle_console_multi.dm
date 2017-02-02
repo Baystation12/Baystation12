@@ -5,7 +5,7 @@
 	. = ..()
 	if(istype(shuttle))
 		. += list(
-			"destination_name" = shuttle.next_waypoint? shuttle.next_waypoint.name : "No destination set.",
+			"destination_name" = shuttle.next_location? shuttle.next_location.name : "No destination set.",
 			"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
 		)
 

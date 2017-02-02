@@ -28,10 +28,10 @@
 	..(destination, interim, emergency_controller.get_long_jump_time(), direction)
 
 /datum/shuttle/autodock/ferry/emergency/move(var/atom/destination)
-	if(next_waypoint != waypoint_station)
+	if(next_location != waypoint_station)
 		emergency_controller.shuttle_leaving() // This is a hell of a line. v
 		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? using_map.emergency_shuttle_leaving_dock : using_map.shuttle_leaving_dock), "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
-	else if(next_waypoint == waypoint_offsite && emergency_controller.has_evacuated())
+	else if(next_location == waypoint_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
 	..(destination)
 

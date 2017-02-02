@@ -17,7 +17,7 @@
 
 	..(_name, get_location_waypoint(location))
 
-	next_waypoint = get_location_waypoint(!location)
+	next_location = get_location_waypoint(!location)
 
 //Gets the shuttle landmark associated with the given location (defaults to current location)
 /datum/shuttle/autodock/ferry/proc/get_location_waypoint(location_id = null)
@@ -39,14 +39,10 @@
 /datum/shuttle/autodock/ferry/move(var/atom/destination)
 	..()
 
-	if (next_waypoint == waypoint_station) location = 0
-	if (next_waypoint == waypoint_offsite) location = 1
+	if (next_location == waypoint_station) location = 0
+	if (next_location == waypoint_offsite) location = 1
 	//if (destination == landmark_transition) //do nothing, retain the previous location until the long_jump completes
 
 /datum/shuttle/autodock/ferry/process_arrived()
 	..()
-	next_waypoint = get_location_waypoint(!location)
-
-/datum/shuttle/autodock/ferry/get_location_name()
-	var/obj/effect/shuttle_landmark/current_waypoint = get_location_waypoint()
-	return current_waypoint.name
+	next_location = get_location_waypoint(!location)

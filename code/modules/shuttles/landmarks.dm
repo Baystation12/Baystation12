@@ -25,6 +25,9 @@
 		if(!istype(docking_controller))
 			log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 
+/obj/effect/shuttle_landmark/proc/is_valid(var/shuttle)
+	return TRUE
+
 //Can shuttle go here without doing weird stuff?
 /obj/effect/shuttle_landmark/proc/free(var/shuttle)
 	return TRUE 

@@ -25,7 +25,7 @@
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
-			shuttle_status = "Proceeding to destination."
+			shuttle_status = "Proceeding to [shuttle.get_destination_name()]."
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 

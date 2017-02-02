@@ -31,7 +31,7 @@
 		moving_status = SHUTTLE_INTRANSIT
 
 		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
-		if (next_waypoint == away_waypoint)
+		if (next_location == away_waypoint)
 			move(away_waypoint)
 
 		//wait ETA here.
@@ -39,7 +39,7 @@
 		while (world.time <= arrive_time)
 			sleep(5)
 
-		if (next_waypoint != away_waypoint)
+		if (next_location != away_waypoint)
 			//late
 			if (prob(late_chance))
 				sleep(rand(0,max_late_time))
