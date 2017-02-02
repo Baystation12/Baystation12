@@ -112,12 +112,12 @@
 		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
 
 		if(target)
-			transport_turf_contents(source, target)
+			//update area first so that area/Entered() will be called with the correct area when atoms are moved
 			if(translate_area)
 				var/area/base_area = locate(world.area) //TODO better way of determining the base area?
-
 				source.loc.contents.Add(target)
 				base_area.contents.Add(source)
+			transport_turf_contents(source, target)
 
 	//change the old turfs
 	for(var/turf/source in turfs_src)
