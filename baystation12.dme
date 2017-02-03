@@ -1212,6 +1212,8 @@
 #include "code\modules\clothing\under\jobs\medsci.dm"
 #include "code\modules\clothing\under\jobs\security.dm"
 #include "code\modules\clothing\under\xenos\resomi.dm"
+#include "code\modules\curie\yui\mob_steps.dm"
+#include "code\modules\curie\yui\mob_steps_define.dm"
 #include "code\modules\customitems\item_spawning.dm"
 #include "code\modules\detectivework\footprints.dm"
 #include "code\modules\detectivework\forensics.dm"
