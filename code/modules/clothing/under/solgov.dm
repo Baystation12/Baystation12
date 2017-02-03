@@ -238,7 +238,7 @@
 	worn_state = "greydress"
 
 /obj/item/clothing/under/mildress/expeditionary/command
-	name = "expeditionary command dress uniform"
+	name = "expeditionary officer's dress uniform"
 	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
 	icon_state = "greydress_com"
 	worn_state = "greydress_com"
