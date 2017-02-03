@@ -124,3 +124,31 @@
 	desc = "A tightly furled roll of paper, covered with indecipherable runes."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
+
+/obj/item/organ/internal/brain/process()
+	if(!owner) return
+	//Effects of bloodloss
+	var/blood_volume = round((owner.vessel.get_reagent_amount("blood")/species.blood_volume)*100)
+	switch(blood_volume)
+		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+			if(prob(1))
+				to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>")
+			if(owner.getOxyLoss() < 20)
+				owner.adjustOxyLoss(3)
+		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+			owner.eye_blurry = max(owner.eye_blurry,6)
+			if(owner.getOxyLoss() < 50)
+				owner.adjustOxyLoss(10)
+			owner.adjustOxyLoss(1)
+			if(prob(15))
+				owner.Paralyse(rand(1,3))
+				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
+		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+			owner.adjustOxyLoss(5)
+			if(owner.getToxLoss() < 15)
+				owner.adjustToxLoss(3)
+			if(prob(15))
+				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
+		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
+			owner.adjustOxyLoss(10)

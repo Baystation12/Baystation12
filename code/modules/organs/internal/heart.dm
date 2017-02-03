@@ -13,7 +13,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	var/pulse = PULSE_NORM
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
-	var/efficiency = 1
+	var/tmp/next_blood_squirt = 0
 
 /obj/item/organ/internal/heart/die()
 	if(dead_icon)
@@ -27,7 +27,8 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 /obj/item/organ/internal/heart/process()
 	if(owner)
 		handle_pulse()
-		if(pulse)	handle_heartbeat()
+		if(pulse)
+			handle_heartbeat()
 		handle_blood()
 	..()
 
@@ -60,54 +61,76 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 		else
 			heartbeat++
 
-/obj/item/organ/internal/heart/proc/get_effective_blood_volume()
-	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
-	var/blood_volume = round((blood_volume_raw/species.blood_volume)*100) // Percentage.
-
-	blood_volume *= efficiency
-	// Damaged heart virtually reduces the blood volume, as the blood isn't
-	// being pumped properly anymore.
-	if(is_broken())
-		blood_volume *= 0.3
-	else if(is_bruised())
-		blood_volume *= 0.6
-	else if(damage > 1)
-		blood_volume *= 0.8
-
-	return blood_volume
-
 /obj/item/organ/internal/heart/proc/handle_blood()
+
 	if(!owner)
 		return
-	if(owner.stat == DEAD || owner.bodytemperature < 170)	//Dead or cryosleep people do not pump the blood.
+
+	//Dead or cryosleep people do not pump the blood.
+	if(!owner || owner.in_stasis || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
-	var/blood_volume = get_effective_blood_volume()
+	if(pulse != PULSE_NONE)
+		//Bleeding out
+		var/blood_max = 0
+		var/list/do_spray = list()
+		for(var/obj/item/organ/external/temp in owner.organs)
 
-	//Effects of bloodloss
-	switch(blood_volume)
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			if(prob(1))
-				to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>")
-			if(owner.getOxyLoss() < 20)
-				owner.adjustOxyLoss(3)
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			owner.eye_blurry = max(owner.eye_blurry,6)
-			if(owner.getOxyLoss() < 50)
-				owner.adjustOxyLoss(10)
-			owner.adjustOxyLoss(1)
-			if(prob(15))
-				owner.Paralyse(rand(1,3))
-				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			owner.adjustOxyLoss(5)
-			if(owner.getToxLoss() < 15)
-				owner.adjustToxLoss(3)
-			if(prob(15))
-				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
-		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
-			owner.adjustOxyLoss(10)
+			if(temp.robotic >= ORGAN_ROBOT)
+				continue
+
+			var/open_wound
+			if(temp.status & ORGAN_BLEEDING)
+
+				if (temp.open)
+					blood_max += 2  //Yer stomach is cut open
+
+				for(var/datum/wound/W in temp.wounds)
+
+					if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
+						open_wound = TRUE
+
+					if(W.bleeding())
+						if(temp.applied_pressure)
+							if(ishuman(temp.applied_pressure))
+								var/mob/living/carbon/human/H = temp.applied_pressure
+								H.bloody_hands(src, 0)
+							//somehow you can apply pressure to every wound on the organ at the same time
+							//you're basically forced to do nothing at all, so let's make it pretty effective
+							var/min_eff_damage = max(0, W.damage - 10) / 6 //still want a little bit to drip out, for effect
+							blood_max += max(min_eff_damage, W.damage - 30) / 40
+						else
+							blood_max += W.damage / 40
+
+			if(temp.status & ORGAN_ARTERY_CUT)
+				var/bleed_amount = Floor(owner.vessel.total_volume / (temp.applied_pressure ? 400 : 250))
+				if(bleed_amount)
+					if(open_wound)
+						blood_max += bleed_amount
+						do_spray += temp.artery_name
+					else
+						owner.vessel.remove_reagent("blood", bleed_amount)
+
+		switch(pulse)
+			if(PULSE_SLOW)
+				blood_max *= 0.75
+			if(PULSE_FAST)
+				blood_max *= 1.25
+			if(PULSE_2FAST)
+				blood_max *= 1.5
+
+		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
+			owner.visible_message("<span class='danger'>Blood squirts from \the [src]'s [pick(do_spray)]!</span>")
+			// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
+			next_blood_squirt = world.time + 100
+			var/turf/sprayloc = get_turf(owner)
+			blood_max -= owner.drip(ceil(blood_max/3), sprayloc)
+			if(blood_max > 0)
+				blood_max -= owner.blood_squirt(blood_max, sprayloc)
+				if(blood_max > 0)
+					owner.drip(blood_max, get_turf(owner))
+		else
+			owner.drip(blood_max)
 
 	//Blood regeneration if there is some space
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
@@ -116,10 +139,3 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 		B.volume += 0.1 // regenerate blood VERY slowly
 		if(CE_BLOODRESTORE in owner.chem_effects)
 			B.volume += owner.chem_effects[CE_BLOODRESTORE]
-
-	// Blood loss or liver damage make you lose nutriments
-	if(blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
-		if(owner.nutrition >= 300)
-			owner.nutrition -= 10
-		else if(owner.nutrition >= 200)
-			owner.nutrition -= 3

@@ -317,7 +317,8 @@
 	if(!heart)
 		return TRUE
 
-	if(heart.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
+	var/blood_volume = round((H.vessel.get_reagent_amount("blood")/heart.species.blood_volume)*100)
+	if(blood_volume < BLOOD_VOLUME_SURVIVE)
 		return TRUE
 
 	return FALSE
