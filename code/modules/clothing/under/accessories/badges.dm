@@ -100,6 +100,20 @@
 		return
 
 
+/obj/item/weapon/storage/box/large/holobadge/solgov
+	name = "holobadge box"
+	desc = "A box claiming to contain holobadges, this one has 'Master at Arms' written on it in fine print."
+	New()
+		new /obj/item/clothing/accessory/badge/security(src)
+		new /obj/item/clothing/accessory/badge/security(src)
+		new /obj/item/clothing/accessory/badge/security(src)
+		new /obj/item/clothing/accessory/badge/security(src)
+		new /obj/item/clothing/accessory/badge/security(src)
+		new /obj/item/clothing/accessory/badge/security(src)
+		..()
+		return
+
+
 /obj/item/clothing/accessory/badge/security
 	name = "security forces badge"
 	desc = "A silver law enforcement badge. Stamped with the words 'Master at Arms'."

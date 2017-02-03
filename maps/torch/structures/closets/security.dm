@@ -41,6 +41,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 
 /obj/structure/closet/secure_closet/cos
@@ -86,6 +88,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 /obj/structure/closet/secure_closet/brigofficer
 	name = "brig officer's locker"
@@ -113,7 +117,7 @@
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/hailer,
-		/obj/item/weapon/storage/box/holobadge,
+		/obj/item/weapon/storage/box/large/holobadge/solgov,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,
@@ -130,6 +134,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 
 /obj/structure/closet/secure_closet/forensics
@@ -179,3 +185,5 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
