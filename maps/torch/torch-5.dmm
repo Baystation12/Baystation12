@@ -507,7 +507,7 @@
 "jM" = (/obj/machinery/keycard_auth{pixel_x = 24; pixel_y = 0},/obj/structure/closet/secure_closet/engineering_chief_torch,/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tiled,/area/crew_quarters/heads/office/ce)
 "jN" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/machinery/light,/obj/machinery/vending/snack,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
 "jO" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
-"jP" = (/obj/structure/table/standard,/obj/machinery/recharger{pixel_y = 0},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
+"jP" = (/obj/structure/table/standard,/obj/machinery/recharger{pixel_y = 0},/obj/structure/sign/deck/bridge{pixel_y = -32},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
 "jQ" = (/obj/machinery/disposal,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
 "jR" = (/obj/structure/sign/directions/infirmary{dir = 2; pixel_y = -6},/obj/structure/sign/directions/science{dir = 2; pixel_y = 6},/turf/simulated/wall/r_wall,/area/hallway/primary/bridge/fore)
 "jS" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/hallway/primary/bridge/fore)
@@ -559,7 +559,7 @@
 "kM" = (/obj/effect/floor_decal/corner/blue{dir = 1},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
 "kN" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
 "kO" = (/obj/structure/disposalpipe/segment,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
-"kP" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
+"kP" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/door/firedoor/border_only,/obj/structure/sign/deck/bridge{pixel_y = 32},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
 "kQ" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
 "kR" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/access_button{command = "cycle_interior"; frequency = 1379; master_tag = "bridge_eva_airlock"; name = "interior access button"; pixel_x = -24; pixel_y = 24; req_access = list(13)},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
 "kS" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/hallway/primary/bridge/aft)
@@ -1439,3 +1439,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 xPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
