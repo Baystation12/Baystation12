@@ -32,11 +32,11 @@
 	#include "../../code/modules/lobby_music/endless_space.dm"
 	#include "../../code/modules/lobby_music/dilbert.dm"
 	#include "../../code/modules/lobby_music/space_oddity.dm"
-	//#include "../../code/modules/lobby_music/hardcorner.dm"
-	//#include "../../code/modules/lobby_music/spessbenzaie.dm"
-	//#include "../../code/modules/lobby_music/moonsoon.dm"
-	//#include "../../code/modules/lobby_music/bestfriends.dm"
-	//#include "../../code/modules/lobby_music/soma.dm"
+	#include "../../code/modules/lobby_music/hardcorner.dm"
+	#include "../../code/modules/lobby_music/spessbenzaie.dm"
+	#include "../../code/modules/lobby_music/moonsoon.dm"
+	#include "../../code/modules/lobby_music/bestfriends.dm"
+	#include "../../code/modules/lobby_music/soma.dm"
 
 	#define USING_MAP_DATUM /datum/map/curie
 
