@@ -1,0 +1,8 @@
+author: Lorwp
+
+delete-after: True
+
+changes: 
+    - tweak: "Change's Brig Officer's holobadge box to have Master At Arms Holobadges"
+    - tweak: "Allow Security Messenger Bags to be able to spawn in Security Lockers"
+    - tweak: "All Security and NT Guards spawn with Work Gloves now"
