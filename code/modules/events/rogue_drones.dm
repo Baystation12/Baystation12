@@ -26,7 +26,7 @@
 	if(prob(33))
 		msg = "Attention: unidentified patrol drones detected within proximity to the [station_name()]"
 	else if(prob(50))
-		msg = "Unidentified Unmanned Drones approaching the [station_name()]. All hands take notice.."
+		msg = "Unidentified Unmanned Drones approaching the [station_name()]. All hands take notice."
 	else
 		msg = "Class II Laser Fire detected nearby the [station_name()]."
 	command_announcement.Announce(msg, "[station_name()] Sensor Array")
