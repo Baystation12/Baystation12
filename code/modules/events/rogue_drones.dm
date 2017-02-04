@@ -24,12 +24,12 @@
 /datum/event/rogue_drone/announce()
 	var/msg
 	if(prob(33))
-		msg = "A combat drone wing operating out of the NDV Icarus has failed to return from a sweep of this sector, if any are sighted approach with caution."
+		msg = "Attention: unidentified patrol drones detected within proximity to the [station_name()]"
 	else if(prob(50))
-		msg = "Contact has been lost with a combat drone wing operating out of the NDV Icarus. If any are sighted in the area, approach with caution."
+		msg = "Unidentified Unmanned Drones approaching the [station_name()]. All hands take notice.."
 	else
-		msg = "Unidentified hackers have targetted a combat drone wing deployed from the NDV Icarus. If any are sighted in the area, approach with caution."
-	command_announcement.Announce(msg, "Rogue drone alert")
+		msg = "Class II Laser Fire detected nearby the [station_name()]."
+	command_announcement.Announce(msg, "SEV Torch Sensor Array")
 
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
@@ -44,6 +44,6 @@
 		num_recovered++
 
 	if(num_recovered > drones_list.len * 0.75)
-		command_announcement.Announce("Icarus drone control reports the malfunctioning wing has been recovered safely.", "Rogue drone alert")
+		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "SEV Torch Sensor Array")
 	else
-		command_announcement.Announce("Icarus drone control registers disappointment at the loss of the drones, but the survivors have been recovered.", "Rogue drone alert")
+		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "SEV Torch Sensor Array")
