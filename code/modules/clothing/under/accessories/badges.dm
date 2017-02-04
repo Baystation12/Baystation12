@@ -100,10 +100,11 @@
 		return
 
 
-/obj/item/weapon/storage/box/large/holobadge/solgov
+/obj/item/weapon/storage/box/holobadge/solgov
 	name = "holobadge box"
 	desc = "A box claiming to contain holobadges, this one has 'Master at Arms' written on it in fine print."
-	startswith = list(/obj/item/clothing/accessory/badge/security = 6)
+	startswith = list(/obj/item/clothing/accessory/badge/security = 4)
+	w_class = ITEM_SIZE_TINY
 
 
 /obj/item/clothing/accessory/badge/security

@@ -117,7 +117,7 @@
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/hailer,
-		/obj/item/weapon/storage/box/large/holobadge/solgov,
+		/obj/item/weapon/storage/box/holobadge/solgov,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,

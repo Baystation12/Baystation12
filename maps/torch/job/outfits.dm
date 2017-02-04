@@ -288,6 +288,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/headset_sec
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
+	gloves = /obj/item/clothing/gloves/thick
 	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
@@ -295,7 +296,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dress
 	head = /obj/item/clothing/head/soft/sol/expedition
-	gloves = /obj/item/clothing/gloves/thick
 	id_type = /obj/item/weapon/card/id/torch/crew/security/brigofficer
 	pda_type = /obj/item/device/pda/warden
 
@@ -316,7 +316,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dress
 	head = /obj/item/clothing/head/soft/sol/expedition
-	gloves = /obj/item/clothing/gloves/thick
+	gloves = /obj/item/clothing/gloves/forensic
 	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
 	pda_type = /obj/item/device/pda/detective
 
@@ -337,7 +337,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dress
 	head = /obj/item/clothing/head/soft/sol/expedition
-	gloves = /obj/item/clothing/gloves/thick
 	id_type = /obj/item/weapon/card/id/torch/crew/security
 	pda_type = /obj/item/device/pda/security
 
@@ -678,7 +677,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/soft/sec/corp/guard
-	gloves = /obj/item/clothing/gloves/thick
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
