@@ -80,6 +80,7 @@
 #define to_file(file_entry, source_var)                     file_entry << source_var
 #define from_file(file_entry, target_var)                   file_entry >> target_var
 #define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
+#define show_image(target, image)                           target << image
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 
 #define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
