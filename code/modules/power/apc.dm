@@ -246,7 +246,6 @@
 
 /obj/machinery/power/apc/examine(mob/user)
 	if(..(user, 1))
-		to_chat(user, "A control terminal for the area electrical systems.")
 		if(stat & BROKEN)
 			to_chat(user, "Looks broken.")
 			return
@@ -1265,4 +1264,13 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	update_icon()
 	return 1
 
+/obj/item/weapon/module/power_control
+	name = "power control module"
+	desc = "Heavy-duty switching circuits for power control."
+	icon = 'icons/obj/module.dmi'
+	icon_state = "power_mod"
+	item_state = "electronic"
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+	w_class = ITEM_SIZE_SMALL
+	flags = CONDUCT
 #undef APC_UPDATE_ICON_COOLDOWN

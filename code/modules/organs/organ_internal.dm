@@ -5,11 +5,19 @@
 ****************************************************/
 /obj/item/organ/internal
 	var/dead_icon // Icon to use when the organ has died.
+	var/surface_accessible = FALSE
 
-/obj/item/organ/internal/die()
+/obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	..()
-	if((status & ORGAN_DEAD) && dead_icon)
-		icon_state = dead_icon
+	if(istype(holder))
+		holder.internal_organs |= src
+
+		var/mob/living/carbon/human/H = holder
+		if(istype(H))
+			var/obj/item/organ/external/E = H.get_organ(parent_organ)
+			if(!E)
+				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
+			E.internal_organs |= src
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
@@ -22,6 +30,31 @@
 		if(istype(E)) E.internal_organs -= src
 	return ..()
 
+/obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+
+	if(!istype(target))
+		return 0
+
+	if(status & ORGAN_CUT_AWAY)
+		return 0 //organs don't work very well in the body when they aren't properly attached
+
+	// robotic organs emulate behavior of the equivalent flesh organ of the species
+	if(robotic >= ORGAN_ROBOT || !species)
+		species = target.species
+
+	..()
+
+	processing_objects -= src
+	target.internal_organs |= src
+	affected.internal_organs |= src
+	target.internal_organs_by_name[organ_tag] = src
+	return 1
+
+/obj/item/organ/internal/die()
+	..()
+	if((status & ORGAN_DEAD) && dead_icon)
+		icon_state = dead_icon
+
 /obj/item/organ/internal/remove_rejuv()
 	if(owner)
 		owner.internal_organs -= src
@@ -32,6 +65,9 @@
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
 		if(istype(E)) E.internal_organs -= src
 	..()
+
+/obj/item/organ/internal/is_usable()
+	return ..() && !is_broken()
 
 // Brain is defined in brain_item.dm.
 /obj/item/organ/internal/kidneys
@@ -68,6 +104,7 @@
 	gender = PLURAL
 	organ_tag = BP_EYES
 	parent_organ = BP_HEAD
+	surface_accessible = TRUE
 	var/list/eye_colour = list(0,0,0)
 
 /obj/item/organ/internal/eyes/optics
@@ -114,7 +151,7 @@
 
 /obj/item/organ/internal/eyes/take_damage(amount, var/silent=0)
 	var/oldbroken = is_broken()
-	..()
+	. = ..()
 	if(is_broken() && !oldbroken && owner && !owner.stat)
 		to_chat(owner, "<span class='danger'>You go blind!</span>")
 
@@ -227,8 +264,7 @@
 					owner.Weaken(10)
 
 				var/obj/item/organ/external/E = owner.get_organ(parent_organ)
-				var/datum/wound/W = new /datum/wound/internal_bleeding(20)
-				E.wounds += W
+				E.sever_artery()
 				E.germ_level = max(INFECTION_LEVEL_TWO, E.germ_level)
 				owner.adjustToxLoss(25)
 				removed()

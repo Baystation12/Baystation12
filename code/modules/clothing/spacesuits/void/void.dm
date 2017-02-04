@@ -29,7 +29,7 @@
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon_state = "void"
-	item_state = "syndie_hardsuit"
+	//item_state = "syndie_hardsuit"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
@@ -62,8 +62,10 @@
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
+	action_button_name = "Toggle Helmet"
+
 /obj/item/clothing/suit/space/void/examine(user)
-	..(user)
+	. = ..(user)
 	var/list/part_list = new
 	for(var/obj/item/I in list(helmet,boots,tank))
 		part_list += "\a [I]"
@@ -147,7 +149,7 @@
 	var/mob/living/carbon/human/H = usr
 
 	if(!istype(H)) return
-	if(H.stat) return
+	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
@@ -180,7 +182,7 @@
 	var/mob/living/carbon/human/H = usr
 
 	if(!istype(H)) return
-	if(H.stat) return
+	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
@@ -250,3 +252,6 @@
 		return
 
 	..()
+
+/obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
+	toggle_helmet()

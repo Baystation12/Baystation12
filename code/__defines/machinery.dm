@@ -32,6 +32,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define AI_CAMERA_LUMINOSITY 6
 
 // Camera networks
+#define NETWORK_BRIDGE "Bridge"
 #define NETWORK_CRESCENT "Crescent"
 #define NETWORK_CIVILIAN_EAST "Civilian East"
 #define NETWORK_CIVILIAN_WEST "Civilian West"
@@ -42,6 +43,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_EXODUS "Exodus"
 #define NETWORK_EXPEDITION "Expedition"
+#define NETWORK_FIFTH_DECK "Fifth Deck"
 #define NETWORK_FIRST_DECK "First Deck"
 #define NETWORK_FOURTH_DECK "Fourth Deck"
 #define NETWORK_MEDICAL "Medical"
@@ -111,3 +113,8 @@ var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret
 #define ATMOS_DEFAULT_VOLUME_FILTER 200 // L.
 #define ATMOS_DEFAULT_VOLUME_MIXER  200 // L.
 #define ATMOS_DEFAULT_VOLUME_PIPE   70  // L.
+
+#define TELECOMMS_RECEPTION_NONE 0
+#define TELECOMMS_RECEPTION_SENDER 1
+#define TELECOMMS_RECEPTION_RECEIVER 2
+#define TELECOMMS_RECEPTION_BOTH 3

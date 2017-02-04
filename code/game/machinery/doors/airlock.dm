@@ -949,7 +949,7 @@ About the new airlock wires panel:
 				else
 					if (!electronics) create_electronics()
 
-					electronics.loc = src.loc
+					electronics.dropInto(loc)
 					electronics = null
 
 				qdel(src)
@@ -1125,7 +1125,7 @@ About the new airlock wires panel:
 		assembly_type = assembly.type
 
 		electronics = assembly.electronics
-		electronics.loc = src
+		electronics.forceMove(src)
 
 		//update the door's access to match the electronics'
 		secured_wires = electronics.secure
@@ -1221,7 +1221,7 @@ About the new airlock wires panel:
 		..(amount)
 
 /obj/machinery/door/airlock/examine()
-	..()
+	. = ..()
 	if (lock_cut_state == BOLTS_EXPOSED)
 		to_chat(usr, "The bolt cover has been cut open.")
 	if (lock_cut_state == BOLTS_CUT)

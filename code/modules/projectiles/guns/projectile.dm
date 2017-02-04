@@ -213,7 +213,7 @@
 		update_icon() //make sure to do this after unsetting ammo_magazine
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(is_jammed)
 		to_chat(user, "<span class='warning'>It looks jammed.</span>")
 	if(ammo_magazine)

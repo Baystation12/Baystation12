@@ -13,7 +13,10 @@
 	name = "firesuit"
 	desc = "A suit that protects against fire and heat."
 	icon_state = "fire"
-	item_state = "fire_suit"
+	item_state_slots = list(
+		slot_l_hand_str = "fire_suit",
+		slot_r_hand_str = "fire_suit",
+	)
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -31,14 +34,20 @@
 
 /obj/item/clothing/suit/fire/firefighter
 	icon_state = "firesuit"
-	item_state = "firefighter"
+	item_state_slots = list(
+		slot_l_hand_str = "firefighter",
+		slot_r_hand_str = "firefighter",
+	)
 
 
 /obj/item/clothing/suit/fire/heavy
 	name = "firesuit"
 	desc = "A suit that protects against extreme fire and heat."
 	//icon_state = "thermal"
-	item_state = "ro_suit"
+	item_state_slots = list(
+		slot_l_hand_str = "ro_suit",
+		slot_r_hand_str = "ro_suit",
+	)
 	w_class = ITEM_SIZE_HUGE//bulky item
 
 /obj/item/clothing/suit/fire/heavy/New()
@@ -62,7 +71,6 @@
 	name = "bomb suit"
 	desc = "A suit designed for safety when handling explosives."
 	icon_state = "bombsuit"
-	item_state = "bombsuit"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
@@ -101,7 +109,10 @@
 	name = "Radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
 	icon_state = "rad"
-	item_state = "rad_suit"
+	item_state_slots = list(
+		slot_l_hand_str = "rad_suit",
+		slot_r_hand_str = "rad_suit",
+	)
 	w_class = ITEM_SIZE_HUGE//bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50

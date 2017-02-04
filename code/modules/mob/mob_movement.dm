@@ -391,6 +391,15 @@
 ///Called by client/Move()
 ///Allows mobs to run though walls
 /client/proc/Process_Incorpmove(direct)
+	if(mob.confused)
+		switch(mob.m_intent)
+			if("run")
+				if(prob(75))
+					direct = turn(direct, pick(90, -90))
+			if("walk")
+				if(prob(25))
+					direct = turn(direct, pick(90, -90))
+
 	var/turf/T = get_step(mob, direct)
 	if(mob.check_is_holy_turf(T))
 		to_chat(mob, "<span class='warning'>You cannot enter holy grounds while you are in this plane of existence!</span>")

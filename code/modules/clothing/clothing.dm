@@ -35,7 +35,7 @@
 
 // Aurora forensics port.
 /obj/item/clothing/clean_blood()
-	..()
+	. = ..()
 	gunshot_residue = null
 
 /obj/item/clothing/New()
@@ -176,6 +176,7 @@ BLIND     // can't see anything
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
 	var/see_invisible = -1
+	var/light_protection = 0
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/eyes.dmi',
 		"Resomi" = 'icons/mob/species/resomi/eyes.dmi',
@@ -385,7 +386,6 @@ BLIND     // can't see anything
 /obj/item/clothing/mask
 	name = "mask"
 	icon = 'icons/obj/clothing/masks.dmi'
-	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
@@ -396,7 +396,18 @@ BLIND     // can't see anything
 	var/voicechange = 0
 	var/list/say_messages
 	var/list/say_verbs
+	var/down_gas_transfer_coefficient = 0
+	var/down_body_parts_covered = 0
+	var/down_icon_state = 0
+	var/down_item_flags = 0
+	var/pull_mask = 0
+	var/hanging = 0
 	blood_overlay_type = "maskblood"
+
+/obj/item/clothing/mask/New()
+	if(pull_mask)
+		action_button_name = "Adjust Mask"
+	..()
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -413,6 +424,41 @@ BLIND     // can't see anything
 
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
+
+/obj/item/clothing/mask/proc/adjust_mask(var/mob/user)
+	if(!user.incapacitated())
+		if(!pull_mask)
+			to_chat(usr, "<span class ='notice'>You cannot pull down your [src].</span>")
+			return
+		else
+			src.hanging = !src.hanging
+			if (src.hanging)
+				gas_transfer_coefficient = down_gas_transfer_coefficient
+				body_parts_covered = down_body_parts_covered
+				icon_state = down_icon_state
+				item_flags = down_item_flags
+				to_chat(usr, "You pull the [src] below your chin.")
+			else
+				gas_transfer_coefficient = initial(gas_transfer_coefficient)
+				body_parts_covered = initial(body_parts_covered)
+				icon_state = initial(icon_state)
+				item_flags = initial(item_flags)
+				to_chat(usr, "You pull the [src] up to cover your face.")
+			update_clothing_icon()
+			user.update_action_buttons()
+
+/obj/item/clothing/mask/attack_self(mob/user)
+	if(pull_mask)
+		adjust_mask(user)
+
+/obj/item/clothing/mask/verb/toggle()
+	set category = "Object"
+	set name = "Adjust mask"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	adjust_mask(usr)
 
 ///////////////////////////////////////////////////////////////////////
 //Shoes
@@ -466,6 +512,11 @@ BLIND     // can't see anything
 	update_icon()
 	return
 
+/obj/item/clothing/shoes/attack_hand(var/mob/living/M)
+	if(can_hold_knife && holding && src.loc == M)
+		draw_knife()
+		return
+	..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
 	if(can_hold_knife && is_type_in_list(I, list(/obj/item/weapon/material/shard, /obj/item/weapon/material/butterfly, /obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/tacknife)))
@@ -651,7 +702,7 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/under/examine(mob/user)
-	..(user)
+	. = ..(user)
 	switch(src.sensor_mode)
 		if(0)
 			to_chat(user, "Its sensors appear to be disabled.")

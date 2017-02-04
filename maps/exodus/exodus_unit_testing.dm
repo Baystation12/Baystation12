@@ -61,7 +61,7 @@
 			/area/maintenance/exterior)
 
 	area_coherency_test_subarea_count = list(
-			/area/engineering/atmos = 6,
+			/area/engineering/atmos = 4,
 			/area/constructionsite = 7,
 			/area/constructionsite/maintenance = 14,
 			/area/solar/constructionsite = 3,

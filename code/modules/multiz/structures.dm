@@ -4,7 +4,7 @@
 
 /obj/structure/ladder
 	name = "ladder"
-	desc = "A ladder.  You can climb it up and down."
+	desc = "A ladder. You can climb it up and down."
 	icon_state = "ladder01"
 	icon = 'icons/obj/structures.dmi'
 	density = 0
@@ -14,6 +14,8 @@
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
 	var/obj/structure/ladder/target_down
+
+	var/const/climb_time = 2 SECONDS
 
 /obj/structure/ladder/initialize()
 	// the upper will connect to the lower
@@ -39,50 +41,75 @@
 	return
 
 /obj/structure/ladder/attack_hand(var/mob/M)
-	var/move = moveOccupant(M)
-	if(move)
-		var/text = (move == UP ? "up" : "down")
-		M.visible_message("<span class='notice'>\The [M] climbs [text] \the [src]!</span>",
-		"You climb [text] \the [src]!",
-		"You hear the grunting and clanging of a metal ladder being used.")
+	if(!M.may_climb_ladders(src))
+		return
 
-/obj/structure/ladder/proc/moveOccupant(var/mob/M)
+	var/obj/structure/ladder/target_ladder = getTargetLadder(M)
+	if(!target_ladder)
+		return
+	if(!M.Move(get_turf(src)))
+		to_chat(M, "<span class='notice'>You fail to reach \the [src].</span>")
+		return
+
+	var/direction = target_ladder == target_up ? "up" : "down"
+
+	M.visible_message("<span class='notice'>\The [M] begins climbing [direction] \the [src]!</span>",
+	"You begin climbing [direction] \the [src]!",
+	"You hear the grunting and clanging of a metal ladder being used.")
+
+	target_ladder.audible_message("<span class='notice'>You hear something coming [direction] \the [src]</span>")
+
+	if(do_after(M, climb_time, src))
+		climbLadder(M, target_ladder)
+
+/obj/structure/ladder/attack_ghost(var/mob/M)
+	var/target_ladder = getTargetLadder(M)
+	if(target_ladder)
+		M.forceMove(get_turf(target_ladder))
+
+/obj/structure/ladder/proc/getTargetLadder(var/mob/M)
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
 		to_chat(M, "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>")
-		return 0
-	var/obj/structure/ladder/target = target_down ? target_down : target_up
+		return
 	if(target_down && target_up)
 		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
 
 		if(direction == "Cancel")
-			return 0
+			return
 
-		if(!M.Adjacent(src))
-			to_chat(M, "<span class='warning'>You need to be next to \the [src] to start climbing.</span>")
-			return 0
+		if(!M.may_climb_ladders(src))
+			return
 
 		switch(direction)
 			if("Up")
-				target = target_up
+				return target_up
 			if("Down")
-				target = target_down
-	if(!target)
-		return 0
+				return target_down
+	else
+		return target_down || target_up
 
-	var/turf/T = target.loc
+/mob/proc/may_climb_ladders(var/ladder)
+	if(!Adjacent(ladder))
+		to_chat(src, "<span class='warning'>You need to be next to \the [ladder] to start climbing.</span>")
+		return FALSE
+	if(incapacitated())
+		to_chat(src, "<span class='warning'>You are physically unable to climb \the [ladder].</span>")
+		return FALSE
+	return TRUE
+
+/mob/observer/ghost/may_climb_ladders(var/ladder)
+	return TRUE
+
+/obj/structure/ladder/proc/climbLadder(var/mob/M, var/target_ladder)
+	var/turf/T = get_turf(target_ladder)
 	for(var/atom/A in T)
 		if(!A.CanPass(M))
 			to_chat(M, "<span class='notice'>\The [A] is blocking \the [src].</span>")
-			return 0
-	if(M.Move(T))
-		return target == target_up ? UP : DOWN
-	return 0
+			return FALSE
+	return M.Move(T)
 
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
-
-/obj/structure/ladder/attack_ghost(var/mob/M)
-	moveOccupant(M)
 
 /obj/structure/ladder/update_icon()
 	icon_state = "ladder[!!(allowed_directions & UP)][!!(allowed_directions & DOWN)]"

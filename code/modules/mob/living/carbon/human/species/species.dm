@@ -36,6 +36,7 @@
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted                                    // Permanent weldervision.
+	var/light_sensitive									// Ditto, but requires sunglasses to fix
 	var/blood_volume = 560                               // Initial blood volume.
 	var/hunger_factor = DEFAULT_HUNGER_FACTOR            // Multiplier for hunger.
 	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
@@ -187,6 +188,12 @@
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
 
+	//Build organ descriptors
+	for(var/limb_type in has_limbs)
+		var/list/organ_data = has_limbs[limb_type]
+		var/obj/item/organ/limb_path = organ_data["path"]
+		organ_data["descriptor"] = initial(limb_path.name)
+
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)
 
@@ -218,12 +225,11 @@
 	for(var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
-		var/obj/item/organ/O = new limb_path(H)
-		organ_data["descriptor"] = O.name
+		new limb_path(H)
 
 	for(var/organ_tag in has_organ)
 		var/organ_type = has_organ[organ_tag]
-		var/obj/item/organ/O = new organ_type(H,1)
+		var/obj/item/organ/O = new organ_type(H)
 		if(organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
@@ -324,11 +330,7 @@
 
 	if(!H.druggy)
 		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight + H.equipment_darkness_modifier, 8))
-		if(H.seer)
-			var/obj/effect/rune/R = locate() in H.loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				H.set_see_invisible(SEE_INVISIBLE_CULT)
-		if(H.see_invisible != SEE_INVISIBLE_CULT && H.equipment_see_invis)
+		if(H.equipment_see_invis)
 			H.set_see_invisible(min(H.see_invisible, H.equipment_see_invis))
 
 	if(H.equipment_tint_total >= TINT_BLIND)
@@ -352,14 +354,33 @@
 	return 1
 
 /datum/species/proc/get_how_nearsighted(var/mob/living/carbon/human/H)
-	. = short_sighted
+	var/prescriptions = short_sighted
 	if(H.disabilities & NEARSIGHTED)
-		. += 7
+		prescriptions += 7
 	if(H.equipment_prescription)
-		. -= H.equipment_prescription
-	return Clamp(., 0, 7)
+		prescriptions -= H.equipment_prescription
+
+	var/light = light_sensitive
+	if(light)
+		if(H.eyecheck() > FLASH_PROTECTION_NONE)
+			light = 0
+		else
+			var/turf_brightness = 1
+			var/turf/T = get_turf(H)
+			if(T && T.lighting_overlay)
+				turf_brightness = min(1, (T.lighting_overlay.lum_b + T.lighting_overlay.lum_g + T.lighting_overlay.lum_r) / 3)
+			if(turf_brightness < 0.33)
+				light = 0
+			else
+				light = round(light * turf_brightness)
+				if(H.equipment_light_protection)
+					light -= H.equipment_light_protection
+	return Clamp(max(prescriptions, light), 0, 7)
 
 /datum/species/proc/set_default_hair(var/mob/living/carbon/human/H)
 	H.h_style = H.species.default_h_style
 	H.f_style = H.species.default_f_style
 	H.update_hair()
+
+/datum/species/proc/get_blood_name()
+	return "blood"

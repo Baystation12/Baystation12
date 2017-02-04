@@ -21,7 +21,7 @@
 
 /atom/movable/New()
 	..()
-	if(auto_init && (initialization_stage & INITIALIZATION_COMPLETE))
+	if(auto_init && (initialization_stage & INITIALIZATION_HAS_BEGUN))
 		initialize()
 
 /atom/movable/Del()
@@ -255,6 +255,9 @@
 
 /atom/movable/proc/touch_map_edge()
 	if(!z || (z in using_map.sealed_levels))
+		return
+
+	if(!universe.OnTouchMapEdge(src))
 		return
 
 	if(using_map.use_overmap)

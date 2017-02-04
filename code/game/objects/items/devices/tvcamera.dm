@@ -14,7 +14,7 @@
 	listening_objects += src
 
 /obj/item/device/tvcamera/examine()
-	..()
+	. = ..()
 	to_chat(usr, "Video feed is [camera.status ? "on" : "off"]")
 	to_chat(usr, "Audio feed is [radio.broadcasting ? "on" : "off"]")
 /obj/item/device/tvcamera/initialize()
@@ -88,10 +88,10 @@
 	camera = null
 	radio = null
 	..()
-	
+
 //Assembly by roboticist
-	
-		
+
+
 /obj/item/robot_parts/head/attackby(var/obj/item/device/assembly/S, mob/user as mob)
 	if ((!istype(S, /obj/item/device/assembly/infra)))
 		..()
@@ -102,9 +102,9 @@
 	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
 	user.drop_from_inventory(src)
 	qdel(src)
-	
-//Using camcorder icon as I can't sprite. 
-//Using robohead because of restricting to roboticist		
+
+//Using camcorder icon as I can't sprite.
+//Using robohead because of restricting to roboticist
 /obj/item/weapon/TVAssembly
 	name = "TV Camera assembly"
 	desc = "A robotic head with an infrared sensor inside"
@@ -113,7 +113,7 @@
 	item_state = "head"
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
-	
+
 /obj/item/weapon/TVAssembly/attackby(W, mob/user)
 	switch(buildstep)
 		if(0)
@@ -162,5 +162,5 @@
 				user.drop_from_inventory(src)
 				qdel(src)
 				return
-				
+
 	..()

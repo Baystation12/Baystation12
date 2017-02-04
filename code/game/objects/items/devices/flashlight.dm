@@ -207,6 +207,95 @@
 	update_icon()
 	return 1
 
+//Glowsticks
+/obj/item/device/flashlight/glowstick
+	name = "green glowstick"
+	desc = "A military-grade glowstick."
+	w_class = 2.0
+	brightness_on = 4
+	light_power = 2
+	color = "#49F37C"
+	icon_state = "glowstick"
+	item_state = "glowstick"
+	randpixel = 12
+	var/fuel = 0
+
+/obj/item/device/flashlight/glowstick/New()
+	fuel = rand(1600, 2000)
+	light_color = color
+	..()
+
+/obj/item/device/flashlight/glowstick/process()
+	fuel = max(fuel - 1, 0)
+	if(!fuel)
+		turn_off()
+		processing_objects -= src
+		update_icon()
+
+/obj/item/device/flashlight/glowstick/proc/turn_off()
+	on = 0
+	update_icon()
+
+/obj/item/device/flashlight/glowstick/update_icon()
+	item_state = "glowstick"
+	overlays.Cut()
+	if(!fuel)
+		icon_state = "glowstick-empty"
+		set_light(0)
+	else if (on)
+		var/image/I = overlay_image(icon,"glowstick-on",color)
+		I.blend_mode = BLEND_ADD
+		overlays += I
+		item_state = "glowstick-on"
+		set_light(brightness_on)
+	else
+		icon_state = "glowstick"
+	var/mob/M = loc
+	if(istype(M))
+		if(M.l_hand == src)
+			M.update_inv_l_hand()
+		if(M.r_hand == src)
+			M.update_inv_r_hand()
+
+/obj/item/device/flashlight/glowstick/attack_self(mob/user)
+
+	if(!fuel)
+		to_chat(user,"<span class='notice'>The [src] is spent.</span>")
+		return
+	if(on)
+		to_chat(user,"<span class='notice'>The [src] is already lit.</span>")
+		return
+
+	. = ..()
+	if(.)
+		user.visible_message("<span class='notice'>[user] cracks and shakes the glowstick.</span>", "<span class='notice'>You crack and shake the glowstick, turning it on!</span>")
+		processing_objects += src
+
+/obj/item/device/flashlight/glowstick/red
+	name = "red glowstick"
+	color = "#FC0F29"
+
+/obj/item/device/flashlight/glowstick/blue
+	name = "blue glowstick"
+	color = "#599DFF"
+
+/obj/item/device/flashlight/glowstick/orange
+	name = "orange glowstick"
+	color = "#FA7C0B"
+
+/obj/item/device/flashlight/glowstick/yellow
+	name = "yellow glowstick"
+	color = "#FEF923"
+
+/obj/item/device/flashlight/glowstick/random
+	name = "glowstick"
+	desc = "A party-grade glowstick."
+	color = "#FF00FF"
+
+/obj/item/device/flashlight/glowstick/random/New()
+	color = rgb(rand(50,255),rand(50,255),rand(50,255))
+	..()
+
 /obj/item/device/flashlight/slime
 	gender = PLURAL
 	name = "glowing slime extract"

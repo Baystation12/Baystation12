@@ -93,7 +93,7 @@
 	if (istype(W, /obj/item/weapon/disk/data)) //INSERT SOME DISKETTES
 		if (!src.diskette)
 			user.drop_item()
-			W.loc = src
+			W.forceMove(src)
 			src.diskette = W
 			to_chat(user, "You insert \the [W].")
 			src.updateUsrDialog()
@@ -293,7 +293,7 @@
 				src.temp = "Load successful."
 			if("eject")
 				if (!isnull(src.diskette))
-					src.diskette.loc = src.loc
+					src.diskette.dropInto(loc)
 					src.diskette = null
 
 	else if (href_list["save_disk"]) //Save to disk!

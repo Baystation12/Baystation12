@@ -127,8 +127,54 @@ meteor_act
 		if(.) return
 	return 0
 
+
+/mob/living/carbon/human/attack_throat(var/obj/item/W, var/obj/item/weapon/grab/G, var/mob/user)
+	. = ..()
+	if(.)
+		var/obj/item/organ/external/head = get_organ(BP_HEAD)
+		if(head) head.sever_artery()
+
+/mob/living/carbon/human/proc/check_attack_tendons(var/obj/item/W, var/mob/living/user, var/target_zone)
+
+	if(!W.edge || !W.force || W.damtype != BRUTE)
+		return FALSE
+	var/obj/item/organ/external/affecting = get_organ(target_zone)
+	if(!affecting || affecting.is_stump() || !affecting.has_tendon || (affecting.status & ORGAN_TENDON_CUT))
+		return FALSE
+
+	var/obj/item/weapon/grab/grab
+	if(user.a_intent == I_HURT)
+		for(var/obj/item/weapon/grab/G in src.grabbed_by)
+			if(G.assailant == user && G.state >= GRAB_NECK)
+				grab = G
+				break
+	if(!grab)
+		return FALSE
+
+	user.visible_message("<span class='danger'>\The [user] begins to cut \the [src]'s [affecting.tendon_name] with \the [W]!</span>")
+	user.next_move = world.time + 20
+
+	if(!do_after(user, 20, progress=0))
+		return FALSE
+	if(!grab || grab.assailant != user || grab.affecting != src)
+		return FALSE
+	if(!affecting || affecting.is_stump() || !affecting.sever_tendon())
+		return FALSE
+
+	user.visible_message("<span class='danger'>\The [user] cut \the [src]'s [affecting.tendon_name] with \the [W]!</span>")
+	if(W.hitsound) playsound(loc, W.hitsound, 50, 1, -1)
+	grab.last_action = world.time
+	flick(grab.hud.icon_state, grab.hud)
+	admin_attack_log(user, src, "hamstrung their victim", "was hamstrung", "hamstrung")
+
+	return TRUE
+
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
+
 	if(check_attack_throat(I, user))
+		return null
+
+	if(check_attack_tendons(I, user, target_zone))
 		return null
 
 	if(user == src) // Attacking yourself can't miss
@@ -330,13 +376,15 @@ meteor_act
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
 		var/hit_area = affecting.name
+		var/datum/wound/created_wound
+
 		src.visible_message("<span class='warning'>\The [src] has been hit in the [hit_area] by \the [O].</span>")
 		var/armor = run_armor_check(affecting, "melee", O.armor_penetration, "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
 		if(armor < 100)
 			var/damage_flags = O.damage_flags()
 			if(prob(armor))
 				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
-			apply_damage(throw_damage, dtype, zone, armor, damage_flags, O)
+			created_wound = apply_damage(throw_damage, dtype, zone, armor, damage_flags, O)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
@@ -360,7 +408,7 @@ meteor_act
 				//Sharp objects will always embed if they do enough damage.
 				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
 				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
-					affecting.embed(I)
+					affecting.embed(I, supplied_wound = created_wound)
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5
@@ -386,12 +434,12 @@ meteor_act
 					src.anchored = 1
 					src.pinned += O
 
-/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
+/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	if(!def_zone) ..()
 
 	var/obj/item/organ/external/affecting = get_organ(def_zone)
 	if(affecting)
-		affecting.embed(O)
+		affecting.embed(O, supplied_wound = supplied_wound)
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	if (gloves)

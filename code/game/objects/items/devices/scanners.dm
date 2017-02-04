@@ -167,12 +167,24 @@ REAGENT SCANNER
 			if(e && e.status & ORGAN_BROKEN)
 				user.show_message(text("<span class='warning'>Bone fractures detected. Advanced scanner required for location.</span>"), 1)
 				break
+
+		var/found_bleed
+		var/found_tendon
+		var/found_disloc
 		for(var/obj/item/organ/external/e in H.organs)
-			if(!e)
-				continue
-			for(var/datum/wound/W in e.wounds) if(W.internal)
-				user.show_message(text("<span class='warning'>Internal bleeding detected. Advanced scanner required for location.</span>"), 1)
+			if(e)
+				if(!found_disloc && e.dislocated == 2)
+					user.show_message("<span class='warning'>Dislocation detected. Advanced scanner required for location.</span>", 1)
+					found_disloc = TRUE
+				if(!found_bleed && (e.status & ORGAN_ARTERY_CUT))
+					user.show_message("<span class='warning'>Arterial bleeding detected. Advanced scanner required for location.</span>", 1)
+					found_bleed = TRUE
+				if(!found_tendon && (e.status & ORGAN_TENDON_CUT))
+					user.show_message("<span class='warning'>Tendon or ligament damage detected. Advanced scanner required for location.</span>", 1)
+					found_tendon = TRUE
+			if(found_disloc && found_bleed && found_tendon)
 				break
+
 		if(M:vessel)
 			var/blood_volume = H.vessel.get_reagent_amount("blood")
 			var/blood_percent =  round((blood_volume / H.species.blood_volume)*100)

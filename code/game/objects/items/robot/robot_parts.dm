@@ -267,7 +267,7 @@
 				name = "prosthetic ([random_id("prosthetic_id", 1, 999)])"
 
 			// Create a new, nonliving human.
-			var/mob/living/carbon/human/H = new /mob/living/carbon/human(loc)
+			var/mob/living/carbon/human/H = new /mob/living/carbon/human(get_turf(loc))
 			H.death(0, "no message")
 			H.set_species(species)
 			H.fully_replace_character_name(name)

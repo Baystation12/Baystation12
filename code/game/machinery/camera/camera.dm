@@ -36,6 +36,24 @@
 
 	var/affected_by_emp_until = 0
 
+/obj/machinery/camera/apply_visual(mob/living/carbon/human/M)
+	if(!M.client)
+		return
+	M.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
+	M.overlay_fullscreen("scanlines",/obj/screen/fullscreen/scanline)
+	M.overlay_fullscreen("whitenoise",/obj/screen/fullscreen/noise)
+	M.machine_visual = src
+	return 1
+
+/obj/machinery/camera/remove_visual(mob/living/carbon/human/M)
+	if(!M.client)
+		return
+	M.clear_fullscreen("fishbed",0)
+	M.clear_fullscreen("scanlines")
+	M.clear_fullscreen("whitenoise")
+	M.machine_visual = null
+	return 1
+
 /obj/machinery/camera/New()
 	wires = new(src)
 	assembly = new(src)
@@ -142,7 +160,7 @@
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if(assembly)
-				assembly.loc = src.loc
+				assembly.dropInto(loc)
 				assembly.anchored = 1
 				assembly.camera_name = c_tag
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
@@ -181,17 +199,6 @@
 			if(U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
-
-	else if (istype(W, /obj/item/weapon/camera_bug))
-		if (!src.can_use())
-			to_chat(user, "<span class='warning'>Camera non-functional.</span>")
-			return
-		if (src.bugged)
-			to_chat(user, "<span class='notice'>Camera bug removed.</span>")
-			src.bugged = 0
-		else
-			to_chat(user, "<span class='notice'>Camera bugged.</span>")
-			src.bugged = 1
 
 	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

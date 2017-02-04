@@ -67,6 +67,9 @@
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/fabricator/wf_sign,
+		/obj/item/rig_module/grenade_launcher/cleaner,
+		/obj/item/rig_module/device/decompiler
 		)
 
 /obj/item/weapon/rig/ert/medical

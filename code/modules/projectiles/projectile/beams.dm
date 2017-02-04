@@ -154,6 +154,8 @@
 	name = "stun beam"
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
+	check_armour = "energy"
+	sharp = 0 //not a laser
 	taser_effect = 1
 	agony = 40
 	damage_type = STUN
@@ -165,6 +167,6 @@
 /obj/item/projectile/beam/stun/shock
 	name = "shock beam"
 	damage_type = ELECTROCUTE
-	damage = 10
-	agony = 50
+	damage = 15
+	agony = 25
 	fire_sound='sound/weapons/pulse.ogg'

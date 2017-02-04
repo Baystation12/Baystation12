@@ -59,6 +59,7 @@
 		/obj/item/weapon/packageWrap,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
+		/obj/item/device/holowarrant,
 		/obj/item/clothing/suit/armor/vest/solgov
 	)
 

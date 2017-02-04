@@ -72,6 +72,8 @@
 		/datum/mil_rank/fleet/o6
 	)
 
+	assistant_job = "Crewman"
+
 /datum/mil_branch/fleet
 	name = "Fleet"
 	name_short = "SCGF"
@@ -122,6 +124,8 @@
 		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/fleet/o5
 	)
+
+	assistant_job = "Crewman"
 
 /datum/mil_branch/marine_corps
 	name = "Marine Corps"
@@ -175,6 +179,8 @@
 		/datum/mil_rank/marine/o5
 	)
 
+	assistant_job = "Crewman"
+
 /datum/mil_branch/civilian
 	name = "Civilian"
 	name_short = "civ"
@@ -183,6 +189,7 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
@@ -190,9 +197,11 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/synthetic
 	)
 
+	assistant_job = "Passenger"
 
 /*
  *  Fleet
@@ -502,6 +511,10 @@
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
 	name_short = null
+
+/datum/mil_rank/civ/offduty
+	name = "Off-Duty Personnel"
+	name_short = "Off-Duty"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"

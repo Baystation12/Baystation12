@@ -2,11 +2,21 @@
 	icon_state = "rgeneric"
 /turf/simulated/wall/r_wall/New(var/newloc)
 	..(newloc, "plasteel","plasteel") //3strong
+/turf/simulated/wall/ocp_wall
+	icon_state = "rgeneric"
+/turf/simulated/wall/ocp_wall/New(var/newloc)
+	..(newloc, "osmium-carbide plasteel", "osmium-carbide plasteel")
+
+
+
 
 /turf/simulated/wall/cult
 	icon_state = "cult"
 /turf/simulated/wall/cult/New(var/newloc)
 	..(newloc,"cult","cult2")
+/turf/simulated/wall/cult/dismantle_wall()
+	cult.remove_cultiness(CULTINESS_PER_TURF)
+	..()
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."
@@ -37,6 +47,7 @@
 	..(newloc,"silver","gold")
 /turf/simulated/wall/sandstonediamond/New(var/newloc)
 	..(newloc,"sandstone","diamond")
+
 
 // Kind of wondering if this is going to bite me in the butt.
 /turf/simulated/wall/voxshuttle/New(var/newloc)

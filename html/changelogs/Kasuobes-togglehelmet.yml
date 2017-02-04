@@ -1,0 +1,4 @@
+author: Kasuobes
+delete-after: True
+changes: 
+  - tweak: "Voidsuits can now toggle installed helmets via action button when worn."

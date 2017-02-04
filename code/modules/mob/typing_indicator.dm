@@ -14,32 +14,33 @@ I IS TYPIN'!'
 	..(newloc)
 	if(master.typing_indicator)
 		qdel(master.typing_indicator)
-	
+
 	master.typing_indicator = src
 	src.master = master
 	name = master.name
-	
-	moved_event.register(master, src, /atom/movable/proc/move_to_turf_or_null)
-	death_event.register(master, src, /atom/movable/overlay/typing_indicator/proc/qdel_self)
-	destroyed_event.register(master, src, /atom/movable/overlay/typing_indicator/proc/qdel_self)
 
-//Make this a general helper proc
-/atom/movable/overlay/typing_indicator/proc/qdel_self()
-	qdel(src)
+	moved_event.register(master, src, /atom/movable/proc/move_to_turf_or_null)
+
+	stat_set_event.register(master, src, /datum/proc/qdel_self) // Making the assumption master is conscious at creation
+	logged_out_event.register(master, src, /datum/proc/qdel_self)
+	destroyed_event.register(master, src, /datum/proc/qdel_self)
 
 /atom/movable/overlay/typing_indicator/Destroy()
 	var/mob/M = master
+
 	moved_event.unregister(master, src)
-	death_event.unregister(master, src)
+	stat_set_event.unregister(master, src)
+	logged_out_event.unregister(master, src)
 	destroyed_event.unregister(master, src)
+
 	M.typing_indicator = null
 	master = null
-	..()
+
+	. = ..()
 
 /mob/proc/create_typing_indicator()
-	var/turf/T = get_turf(src)
-	if(client && !stat && T && is_preference_enabled(/datum/client_preference/show_typing_indicator))
-		new/atom/movable/overlay/typing_indicator(T, src)
+	if(client && !stat && is_preference_enabled(/datum/client_preference/show_typing_indicator))
+		new/atom/movable/overlay/typing_indicator(get_turf(src), src)
 
 /mob/proc/remove_typing_indicator() // A bit excessive, but goes with the creation of the indicator I suppose
 	qdel_null(typing_indicator)
@@ -63,8 +64,3 @@ I IS TYPIN'!'
 	remove_typing_indicator()
 	if(message)
 		me_verb(message)
-
-// Make this an event
-/mob/Logout()
-	..()
-	qdel_null(typing_indicator)

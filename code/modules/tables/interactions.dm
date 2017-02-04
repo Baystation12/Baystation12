@@ -138,6 +138,7 @@
 	// Placing stuff on tables
 	if(user.drop_from_inventory(W, src.loc))
 		auto_align(W, click_params)
+		return 1
 
 	return
 

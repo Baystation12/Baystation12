@@ -60,7 +60,7 @@ var/list/to_process = list()
 	else
 		for(var/turf/T in trange(range, epicentre))
 			var/area/A = T.loc
-			if(A.flags & RAD_SHIELDED)
+			if(A.flags & AREA_RAD_SHIELDED)
 				continue
 			irradiated_turfs[T] = max(power, irradiated_turfs[T])
 

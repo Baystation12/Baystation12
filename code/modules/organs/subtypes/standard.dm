@@ -20,6 +20,7 @@
 	cannot_amputate = 1
 	parent_organ = null
 	encased = "ribcage"
+	artery_name = "aorta"
 
 /obj/item/organ/external/groin
 	name = "lower body"
@@ -35,6 +36,7 @@
 	joint = "hip"
 	dislocated = -1
 	gendered_icon = 1
+	artery_name = "iliac artery"
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -48,6 +50,9 @@
 	joint = "left elbow"
 	amputation_point = "left shoulder"
 	can_grasp = 1
+	has_tendon = TRUE
+	tendon_name = "palmaris longus tendon"
+	artery_name = "basilic vein"
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -70,6 +75,9 @@
 	joint = "left knee"
 	amputation_point = "left hip"
 	can_stand = 1
+	has_tendon = TRUE
+	tendon_name = "cruciate ligament"
+	artery_name = "femoral artery"
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -93,6 +101,8 @@
 	joint = "left ankle"
 	amputation_point = "left ankle"
 	can_stand = 1
+	has_tendon = TRUE
+	tendon_name = "Achilles tendon"
 
 /obj/item/organ/external/foot/removed()
 	if(owner) owner.drop_from_inventory(owner.shoes)
@@ -120,6 +130,8 @@
 	joint = "left wrist"
 	amputation_point = "left wrist"
 	can_grasp = 1
+	has_tendon = TRUE
+	tendon_name = "carpal ligament"
 
 /obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || (!stun_amount && agony_amount < 5))
@@ -170,6 +182,8 @@
 	amputation_point = "neck"
 	gendered_icon = 1
 	encased = "skull"
+	artery_name = "cartoid artery"
+
 	var/can_intake_reagents = 1
 	var/eye_icon = "eyes_s"
 	var/has_lips
@@ -199,7 +213,7 @@
 	..()
 
 /obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon = null)
-	..()
+	. = ..()
 	if (!disfigured)
 		if (brute_dam > 40)
 			if (prob(50))

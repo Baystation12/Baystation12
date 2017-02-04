@@ -560,6 +560,38 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
 	sort_string = "TAACB"
 
+/datum/design/item/weapon/ammo_emp_38
+	id = "ammo_emp_38"
+	desc = "A .38 round with an integrated EMP charge."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "uranium" = 750)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/emp
+	sort_string = "TAACC"
+
+/datum/design/item/weapon/ammo_emp_45
+	id = "ammo_emp_45"
+	desc = "A .45 round with an integrated EMP charge."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "uranium" = 750)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/emp/c45
+	sort_string = "TAACD"
+
+/datum/design/item/weapon/ammo_emp_10
+	id = "ammo_emp_10"
+	desc = "A .10mm round with an integrated EMP charge."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "uranium" = 750)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/emp/a10mm
+	sort_string = "TAACE"
+
+/datum/design/item/weapon/ammo_emp_slug
+	id = "ammo_emp_slug"
+	desc = "A shotgun slug with an integrated EMP charge."
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "uranium" = 1000)
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_casing/shotgun/emp
+	sort_string = "TAACF"
+
 /datum/design/item/weapon/chemsprayer
 	desc = "An advanced chem spraying device."
 	id = "chemsprayer"
@@ -672,10 +704,10 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/paicard
 	sort_string = "VABAI"
 
-/datum/design/item/intellicard
-	name = "'intelliCard', AI preservation and transportation system"
-	desc = "Allows for the construction of an intelliCard."
-	id = "intellicard"
+/datum/design/item/intelicard
+	name = "'inteliCard', AI preservation and transportation system"
+	desc = "Allows for the construction of an inteliCard."
+	id = "intelicard"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
 	build_path = /obj/item/weapon/aicard
@@ -1008,9 +1040,9 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
 
-// Intellicard Slot
+// inteliCard Slot
 /datum/design/item/modularcomponent/aislot
-	name = "intellicard slot"
+	name = "inteliCard slot"
 	id = "aislot"
 	req_tech = list(TECH_POWER = 2, TECH_DATA = 3)
 	build_type = IMPRINTER

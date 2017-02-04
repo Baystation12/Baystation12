@@ -6,8 +6,6 @@
 	qdel(hud_used)
 	clear_fullscreen()
 	if(client)
-		for(var/obj/screen/movable/spell_master/spell_master in spell_masters)
-			qdel(spell_master)
 		remove_screen_obj_references()
 		for(var/atom/movable/AM in client.screen)
 			var/obj/screen/screenobj = AM
@@ -38,7 +36,7 @@
 	item_use_icon = null
 	gun_move_icon = null
 	gun_setting_icon = null
-	spell_masters = null
+	ability_master = null
 	zone_sel = null
 
 /mob/New()
@@ -257,40 +255,20 @@
 	face_atom(A)
 	return 1
 
-
-/mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
-	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
-		if (!( L ))
-			return null
-		else
-			return L.container
-	else
-		if (!( L ))
-			L = new /obj/effect/list_container/mobl( null )
-			L.container += src
-			L.master = src
-		if (istype(l_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = l_hand
-			if (!( L.container.Find(G.affecting) ))
-				L.container += G.affecting
+//Gets the mob grab conga line.
+/mob/proc/ret_grab(list/L)
+	if (!istype(l_hand, /obj/item/weapon/grab) && !istype(r_hand, /obj/item/weapon/grab))
+		return L
+	if (!L)
+		L = list(src)
+	for(var/A in list(l_hand,r_hand))
+		if (istype(A, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/G = A
+			if (!(G.affecting in L))
+				L += G.affecting
 				if (G.affecting)
-					G.affecting.ret_grab(L, 1)
-		if (istype(r_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = r_hand
-			if (!( L.container.Find(G.affecting) ))
-				L.container += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L, 1)
-		if (!( flag ))
-			if (L.master == src)
-				var/list/temp = list(  )
-				temp += L.container
-				//L = null
-				qdel(L)
-				return temp
-			else
-				return L.container
-	return
+					G.affecting.ret_grab(L)
+	return L
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
@@ -920,12 +898,13 @@ mob/proc/yank_out_object()
 					affected = organ
 
 		affected.implants -= selection
+		for(var/datum/wound/wound in affected.wounds)
+			wound.embedded_objects -= selection
+
 		H.shock_stage+=20
 		affected.take_damage((selection.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
 
-		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
-			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
-			affected.wounds += I
+		if(prob(selection.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50, affecting = affected)
 
 		if (ishuman(U))

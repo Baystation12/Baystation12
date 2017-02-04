@@ -157,7 +157,7 @@
 		eye_blind =  0
 		blinded =    0
 		eye_blurry = 0
-	else if(!vision || (vision && vision.is_broken()))   // Vision organs cut out or broken? Permablind.
+	else if(!vision || (vision && !vision.is_usable()))   // Vision organs cut out or broken? Permablind.
 		eye_blind =  1
 		blinded =    1
 		eye_blurry = 1
@@ -1163,11 +1163,17 @@
 	full_prosthetic = null
 	..()
 
+/mob/living/carbon/human/reset_view(atom/A)
+	..()
+	if(machine_visual && machine_visual != A)
+		machine_visual.remove_visual(src)
+
 /mob/living/carbon/human/handle_vision()
 	if(client)
 		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
+		machine.apply_visual(src)
 		if(viewflags < 0)
 			reset_view(null, 0)
 		else if(viewflags)

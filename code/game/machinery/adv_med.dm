@@ -47,7 +47,7 @@
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
-	usr.loc = src
+	usr.forceMove(src)
 	src.occupant = usr
 	update_use_power(2)
 	src.icon_state = "body_scanner_1"
@@ -62,12 +62,12 @@
 	if ((!( src.occupant ) || src.locked))
 		return
 	for(var/obj/O in src)
-		O.loc = src.loc
+		O.dropInto(loc)
 		//Foreach goto(30)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
-	src.occupant.loc = src.loc
+	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_use_power(1)
 	src.icon_state = "body_scanner_0"
@@ -123,7 +123,7 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.loc
+				A.dropInto(loc)
 				ex_act(severity)
 				//Foreach goto(35)
 			//SN src = null
@@ -132,7 +132,7 @@
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.dropInto(loc)
 					ex_act(severity)
 					//Foreach goto(108)
 				//SN src = null
@@ -141,7 +141,7 @@
 		if(3.0)
 			if (prob(25))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.dropInto(loc)
 					ex_act(severity)
 					//Foreach goto(181)
 				//SN src = null
@@ -355,13 +355,18 @@
 		var/robot = ""
 		var/splint = ""
 		var/internal_bleeding = ""
+		var/severed_tendon = ""
 		var/lung_ruptured = ""
+		var/dislocation = ""
 
 		dat += "<tr>"
 
-		for(var/datum/wound/W in e.wounds) if(W.internal)
-			internal_bleeding = "<br>Internal bleeding"
-			break
+		if(e.status & ORGAN_ARTERY_CUT)
+			internal_bleeding = "<br>Arterial bleeding"
+		if(e.status & ORGAN_TENDON_CUT)
+			severed_tendon = "<br>Severed tendon"
+		if(e.dislocated == 2) // non-magical constants when
+			dislocation = "<br>Dislocated"
 		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
 			lung_ruptured = "Lung ruptured:"
 		if(e.splinted)
@@ -406,7 +411,7 @@
 		if(!AN && !open && !infected & !imp)
 			AN = "None:"
 		if(!e.is_stump())
-			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][severed_tendon][dislocation][lung_ruptured]</td>"
 		else
 			dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not [e.is_stump() ? "Found" : "Attached Completely"]</td>"
 		dat += "</tr>"

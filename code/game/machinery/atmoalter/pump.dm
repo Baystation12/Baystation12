@@ -154,7 +154,7 @@
 		. = 1
 	if (href_list["remove_tank"])
 		if(holding)
-			holding.loc = loc
+			holding.dropInto(loc)
 			holding = null
 		. = 1
 	if (href_list["pressure_adj"])

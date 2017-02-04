@@ -89,6 +89,21 @@
 	path = /obj/item/clothing/accessory/storage/white_vest
 	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
 
+/datum/gear/accessory/brown_drop_pouches
+	display_name = "drop pouches, engineering"
+	path = /obj/item/clothing/accessory/storage/drop_pouches/brown
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
+
+/datum/gear/accessory/black_drop_pouches
+	display_name = "drop pouches, security"
+	path = /obj/item/clothing/accessory/storage/drop_pouches/black
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/accessory/white_drop_pouches
+	display_name = "drop pouches, medical"
+	path =/obj/item/clothing/accessory/storage/drop_pouches/white
+	allowed_roles = list("Paramedic","Chief Medical Officer","Medical Doctor")
+
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing

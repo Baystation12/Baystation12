@@ -702,3 +702,8 @@
 	handled_type = /mob
 	handled_vars = list("see_in_dark" = /mob/proc/set_see_in_dark)
 	predicates = list(/proc/is_num_predicate)
+
+/decl/vv_set_handler/mob_stat_handler
+	handled_type = /mob
+	handled_vars = list("set_stat" = /mob/proc/set_stat)
+	predicates = list(/proc/is_num_predicate)
