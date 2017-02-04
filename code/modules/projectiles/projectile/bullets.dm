@@ -119,7 +119,7 @@
 	//If this is a shrapnel explosion, allow mobs that are prone to get hit, too
 	if(. && !base_spread && isturf(loc))
 		for(var/mob/living/M in loc)
-			if(M.lying || !M.CanPass(src, loc)) //Bump if lying or if we would normally Bump.
+			if(M.lying || !M.CanPass(src, loc, 0.5, 0)) //Bump if lying or if we would normally Bump.
 				if(Bump(M)) //Bump will make sure we don't hit a mob multiple times
 					return
 

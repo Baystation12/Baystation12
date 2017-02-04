@@ -165,16 +165,7 @@
 	if(z != z_original || loc == dest)
 		qdel(src)
 		return
-
 	. = ..() //process movement...
-
-	if(.)
-		var/turf/T = get_turf(loc)
-		ram_turf(T)
-		if(prob(20) && !istype(loc, /turf/space/))
-			get_hit()
-
-	return .
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
@@ -188,7 +179,7 @@
 	..()
 	if(A && !deleted(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
-		get_hit()
+		get_hit() //should only get hit once per move attempt
 
 /obj/effect/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return istype(mover, /obj/effect/meteor) ? 1 : ..()
@@ -196,13 +187,12 @@
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
-		if(A != src)
+		if(A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us
 			A.ex_act(hitpwr)
 
 	//then, ram the turf if it still exists
-	if(T)
+	if(T && !T.CanPass(src, src.loc, 0.5, 0))
 		T.ex_act(hitpwr)
-
 
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs
