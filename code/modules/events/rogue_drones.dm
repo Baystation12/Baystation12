@@ -29,7 +29,7 @@
 		msg = "Unidentified Unmanned Drones approaching the [station_name()]. All hands take notice.."
 	else
 		msg = "Class II Laser Fire detected nearby the [station_name()]."
-	command_announcement.Announce(msg, "SEV Torch Sensor Array")
+	command_announcement.Announce(msg, "[station_name()] Sensor Array")
 
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
@@ -44,6 +44,6 @@
 		num_recovered++
 
 	if(num_recovered > drones_list.len * 0.75)
-		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "SEV Torch Sensor Array")
+		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "[station_name()] Sensor Array")
 	else
-		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "SEV Torch Sensor Array")
+		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "[station_name()] Sensor Array")
