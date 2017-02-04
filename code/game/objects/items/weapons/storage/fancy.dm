@@ -60,6 +60,8 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 12)
 
+/obj/item/weapon/storage/fancy/egg_box/empty
+	startswith = null
 
 /*
  * Candle Box

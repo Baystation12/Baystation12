@@ -304,6 +304,9 @@
 	icon_state = "mousetraps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
 
+/obj/item/weapon/storage/box/mousetraps/empty
+	startswith = null
+
 /obj/item/weapon/storage/box/pillbottles
 	name = "box of pill bottles"
 	desc = "It has pictures of pill bottles on its front."
@@ -359,10 +362,16 @@
 /obj/item/weapon/storage/box/lights/bulbs
 	startswith = list(/obj/item/weapon/light/bulb = 21)
 
+/obj/item/weapon/storage/box/lights/bulbs/empty
+	startswith = null
+
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
 	startswith = list(/obj/item/weapon/light/tube = 21)
+
+/obj/item/weapon/storage/box/lights/tubes/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
