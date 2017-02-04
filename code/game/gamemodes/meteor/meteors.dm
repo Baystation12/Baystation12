@@ -151,21 +151,25 @@
 	var/z_original
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 1
+	
+	var/move_count = 0
 
 /obj/effect/meteor/proc/get_shield_damage()
 	return max(((max(hits, 2)) * (heavy + 1) * rand(30, 60)) / hitpwr , 0)
-
 
 /obj/effect/meteor/New()
 	..()
 	z_original = z
 
-
 /obj/effect/meteor/Move()
-	if(z != z_original || loc == dest)
-		qdel(src)
-		return
 	. = ..() //process movement...
+	move_count++
+	if(loc == dest)
+		qdel(src)
+
+/obj/effect/meteor/touch_map_edge()
+	if(move_count > TRANSITIONEDGE)
+		qdel(src)
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
