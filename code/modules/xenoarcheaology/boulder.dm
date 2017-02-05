@@ -84,7 +84,7 @@
 		last_act = world.time
 		
 		if(!anchored)
-			to_chat(user, "<span class='notice'>The [src] is already dislodged.</span>")
+			to_chat(user, "<span class='notice'>\The [src] is already dislodged.</span>")
 			return
 	
 		else
@@ -92,8 +92,7 @@
 			to_chat(user, "You slowly chip the [src] loose...")
 			
 			if(do_after(user, 120,src)) //Why a wrench? Because Xenoarchs have enough junk to lug around.
-				if(!src) return
-				to_chat(user, "<span class='notice'>You've broken the [src] free!</span>")
+				to_chat(user, "<span class='notice'>You've broken \the [src] free.</span>")
 				playsound(src, 'sound/weapons/Genhit.ogg', 75, 1)
 				anchored = !anchored
 			return
@@ -105,16 +104,15 @@
 		last_act = world.time
 		
 		if(!anchored)
-			to_chat(user, "<span class='notice'>The [src] is already dislodged.</span>")
+			to_chat(user, "<span class='notice'>\The [src] is already dislodged.</span>")
 			return
 			
 		else
 			playsound(src, 'sound/items/Crowbar.ogg', 75, 1)
-			to_chat(user, "You begin to pry the [src] loose...")
+			to_chat(user, "You begin to pry \the [src] loose...")
 			
 			if(do_after(user, 40,src)) //Much faster than a wrench, obviously.
-				if(!src) return
-				to_chat(user, "<span class='notice'>You've broken the [src] free!</span>")
+				to_chat(user, "<span class='notice'>You've broken \the [src] free.</span>")
 				playsound(src, 'sound/weapons/Genhit.ogg', 75, 1)
 				anchored = !anchored
 			return
