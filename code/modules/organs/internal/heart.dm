@@ -134,11 +134,3 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 					owner.drip(blood_max, get_turf(owner))
 		else
 			owner.drip(blood_max)
-
-	//Blood regeneration if there is some space
-	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
-	if(blood_volume_raw < species.blood_volume)
-		var/datum/reagent/blood/B = owner.get_blood(owner.vessel)
-		B.volume += 0.1 // regenerate blood VERY slowly
-		if(CE_BLOODRESTORE in owner.chem_effects)
-			B.volume += owner.chem_effects[CE_BLOODRESTORE]
