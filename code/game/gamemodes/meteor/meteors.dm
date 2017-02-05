@@ -6,7 +6,7 @@
 // Dust, used by space dust event and during earliest stages of meteor mode.
 /var/list/meteors_dust = list(/obj/effect/meteor/dust)
 
-// Standard meteors, used for the low severity meteor event, and during early stages of the meteor gamemode.
+// Standard meteors, used during early stages of the meteor gamemode.
 /var/list/meteors_normal = list(\
 		/obj/effect/meteor/medium=8,\
 		/obj/effect/meteor/dust=3,\
@@ -17,7 +17,7 @@
 		/obj/effect/meteor/silver=1\
 		)
 
-// Threatening meteors, used for medium severity meteor event, and during meteor gamemode.
+// Threatening meteors, used during the meteor gamemode.
 /var/list/meteors_threatening = list(\
 		/obj/effect/meteor/big=10,\
 		/obj/effect/meteor/medium=5,\
@@ -28,7 +28,7 @@
 		/obj/effect/meteor/emp=3\
 		)
 
-// Catastrophic meteors, pretty dangerous without shields and used for high severity meteor event, and during meteor gamemode.
+// Catastrophic meteors, pretty dangerous without shields and used during the meteor gamemode.
 /var/list/meteors_catastrophic = list(\
 		/obj/effect/meteor/big=75,\
 		/obj/effect/meteor/flaming=10,\
