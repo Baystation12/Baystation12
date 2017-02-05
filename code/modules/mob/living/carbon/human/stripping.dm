@@ -45,26 +45,57 @@
 			return
 		if("tie")
 			var/obj/item/clothing/under/suit = w_uniform
-			if(!istype(suit) || !suit.accessories.len)
-				return
-			var/obj/item/clothing/accessory/A = suit.accessories[1]
-			if(!istype(A))
-				return
-			visible_message("<span class='danger'>\The [usr] is trying to remove \the [src]'s [A.name]!</span>")
+			if(!stripping && istype(held, /obj/item/clothing/accessory))
+				if(!suit.can_attach_accessory(held))
+					to_chat(user, "<span class='warning'>You cannot attach this to [src]'s [suit.name]!</span>")
+					return
 
-			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+				visible_message("<span class='danger'>\The [usr] is trying to attach \a [held] to [src]'s [suit.name]!</span>")
+
+				if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+					return
+
+				user.drop_item()
+				suit.attach_accessory(user, held)
+
+				if(istype(held, /obj/item/clothing/accessory/badge) || istype(held, /obj/item/clothing/accessory/medal))
+					user.visible_message("<span class='danger'>\The [user] pins \the [held] on [src]'s [suit.name]!</span>")
+					admin_attack_log(user, src, "pinned \an [held] on \the [suit].", "Was awarded \an [held] to \the [suit].", "awarded \an [held] to \the [suit] of")
+				else
+					user.visible_message("<span class='danger'>\The [user] attaches \the [held] to [src]'s [suit.name]!</span>")
+					admin_attack_log(user, src, "attached \an [held] to \the [suit].", "Had attached \an [held] to their [suit].", "attached \an [held] to \the [suit] of")
 				return
 
-			if(!A || suit.loc != src || !(A in suit.accessories))
-				return
+			else
+				if(!suit.accessories.len)
+					return
 
-			if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
-				user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
-			admin_attack_log(user, src, "Stripped \an [A] from \the [suit].", "Was stripped of \an [A] from \the [suit].", "stripped \an [A] from \the [suit] of")
-			A.on_removed(user)
-			suit.accessories -= A
-			update_inv_w_uniform()
-			return
+				var/obj/item/clothing/accessory/A = suit.accessories[1]
+				if(!istype(suit) || !suit.accessories.len)
+					return
+
+
+				if(suit.accessories.len > 1)
+					A = input("Select an accessory to remove from [src]") as null|anything in suit.accessories
+
+				if(!istype(A))
+					return
+				if(!user.incapacitated()  && user.Adjacent(src))
+					visible_message("<span class='danger'>\The [usr] is trying to remove \the [src]'s [A.name]!</span>")
+
+				if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+					return
+
+				if(!A || suit.loc != src || !(A in suit.accessories))
+					return
+
+				if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
+					user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
+				admin_attack_log(user, src, "Stripped \an [A] from \the [suit].", "Was stripped of \an [A] from \the [suit].", "stripped \an [A] from \the [suit] of")
+				A.on_removed(user)
+				suit.accessories -= A
+				update_inv_w_uniform()
+				return
 
 	if(stripping)
 		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
