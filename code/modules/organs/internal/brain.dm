@@ -126,9 +126,17 @@
 	icon_state = "scroll"
 
 /obj/item/organ/internal/brain/process()
-	if(!owner) return
+	if(!owner || !owner.should_have_organ(BP_HEART))
+		return
+
+	// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
+	var/blood_volume = owner.get_effective_blood_volume()
+	if(!owner.get_organ(BP_HEART))
+		if(blood_volume > BLOOD_VOLUME_SURVIVE)
+			blood_volume = BLOOD_VOLUME_SURVIVE
+		owner.Paralyse(3)
+
 	//Effects of bloodloss
-	var/blood_volume = round((owner.vessel.get_reagent_amount("blood")/species.blood_volume)*100)
 	switch(blood_volume)
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			if(prob(1))
@@ -148,7 +156,7 @@
 			if(owner.getToxLoss() < 15)
 				owner.adjustToxLoss(3)
 			if(prob(15))
+				owner.Paralyse(3,5)
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
 		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth))
-			owner.adjustOxyLoss(10)
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth+10))

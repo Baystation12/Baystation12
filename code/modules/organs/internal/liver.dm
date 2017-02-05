@@ -66,7 +66,7 @@
 			B.volume += owner.chem_effects[CE_BLOODRESTORE]
 
 	// Blood loss or liver damage make you lose nutriments
-	var/blood_volume = round((blood_volume_raw/species.blood_volume)*100)
+	var/blood_volume = owner.get_effective_blood_volume()
 	if(blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
 		if(owner.nutrition >= 300)
 			owner.nutrition -= 10

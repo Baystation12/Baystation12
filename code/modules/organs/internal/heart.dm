@@ -107,7 +107,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 				if(bleed_amount)
 					if(open_wound)
 						blood_max += bleed_amount
-						do_spray += temp.artery_name
+						do_spray += "the [temp.artery_name] in \the [owner]'s [temp.name]"
 					else
 						owner.vessel.remove_reagent("blood", bleed_amount)
 
@@ -123,7 +123,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 			blood_max *= 0.5
 
 		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
-			owner.visible_message("<span class='danger'>Blood squirts from \the [src]'s [pick(do_spray)]!</span>")
+			owner.visible_message("<span class='danger'>Blood squirts from [pick(do_spray)]!</span>")
 			// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
 			next_blood_squirt = world.time + 100
 			var/turf/sprayloc = get_turf(owner)

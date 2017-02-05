@@ -270,9 +270,19 @@
 	max_duration = 100
 
 /datum/surgery_step/generic/cauterize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected && (affected.open || (affected.is_stump() && (affected.status & ORGAN_ARTERY_CUT))) && target_zone != BP_MOUTH
+
+	if(target_zone == BP_MOUTH)
+		return FALSE
+
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(!affected)
+		return FALSE
+
+	if(affected.is_stump()) // Copypasting some stuff here to avoid having to modify ..() for a single surgery
+		return (!isslime(target) && target_zone != BP_EYES && affected.robotic < ORGAN_ROBOT && (affected.status & ORGAN_ARTERY_CUT))
+	else
+		return (..() && affected.open)
+
 
 /datum/surgery_step/generic/cauterize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

@@ -31,7 +31,7 @@
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	if(remove_blood(amt))
-		blood_splatter(tar,src,ddir)
+		blood_splatter(tar, src, (ddir && ddir>0), spray_dir = ddir)
 		return amt
 	return 0
 
@@ -47,8 +47,38 @@
 			sprayloc = get_step(sprayloc, spraydir)
 			if(!istype(sprayloc) || sprayloc.density)
 				break
+			var/hit_mob
+			for(var/thing in sprayloc)
+				var/atom/A = thing
+				if(!A.simulated)
+					continue
+
+				if(ishuman(A))
+					var/mob/living/carbon/human/H = A
+					if(!H.lying)
+						H.bloody_body(src)
+						H.bloody_hands(src)
+						var/blinding = FALSE
+						if(ran_zone() == BP_HEAD)
+							blinding = TRUE
+							for(var/obj/item/I in list(H.head, H.glasses, H.wear_mask))
+								if(I && (I.body_parts_covered & EYES))
+									blinding = FALSE
+									break
+						if(blinding)
+							H.eye_blurry = max(H.eye_blurry, 10)
+							H.eye_blind = max(H.eye_blind, 5)
+							to_chat(H, "<span class='danger'>You are blinded by a spray of blood!</span>")
+						else
+							to_chat(H, "<span class='danger'>You are hit by a spray of blood!</span>")
+						hit_mob = TRUE
+
+				if(hit_mob || !A.CanPass(src, sprayloc))
+					break
+
 			drip(amt, sprayloc, spraydir)
 			bled += amt
+			if(hit_mob) break
 			sleep(1)
 	return bled
 #undef BLOOD_SPRAY_DISTANCE
@@ -217,3 +247,14 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	B.fluorescent  = 0
 	B.invisibility = 0
 	return B
+
+/mob/living/carbon/human/proc/get_effective_blood_volume()
+	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
+	var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
+	if(!heart || heart.is_broken())
+		blood_volume *= 0.3
+	else if(heart.is_bruised())
+		blood_volume *= 0.6
+	else if(heart.damage > 1)
+		blood_volume *= 0.8
+	return blood_volume
