@@ -15,6 +15,7 @@
 	#include "items/machinery.dm"
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
+	#include "items/uniform_bags.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"
