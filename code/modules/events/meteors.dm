@@ -8,7 +8,10 @@
 
 
 /datum/event/meteor_wave/setup()
-	waves = severity * rand(5,15)
+	waves = 0
+	for(var/n in 1 to severity)
+		waves += rand(5,15)
+
 	start_side = pick(cardinal)
 	endWhen = worst_case_end()
 
