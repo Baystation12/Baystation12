@@ -32,7 +32,7 @@
 
 	return ..()
 
-/datum/shuttle/autodock/move(var/atom/destination)
+/datum/shuttle/autodock/shuttle_moved()
 	force_undock() //bye!
 	..()
 

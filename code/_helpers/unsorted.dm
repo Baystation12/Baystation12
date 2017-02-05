@@ -647,7 +647,8 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	var/trg_origin = locate(A.x, A.y, A.z)
 
 	if(src_origin && trg_origin)
-		translate_turfs(src_origin, trg_origin, turfs_src, FALSE)
+		var/translation = get_turf_translation(src_origin, trg_origin, turfs_src)
+		translate_turfs(translation, null)
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)

@@ -44,7 +44,7 @@
 	else
 		home_waypoint = current_location
 
-/datum/shuttle/autodock/multi/antag/move()
+/datum/shuttle/autodock/multi/antag/shuttle_moved()
 	if(current_location == home_waypoint)
 		announce_arrival()
 	else if(next_location == home_waypoint)

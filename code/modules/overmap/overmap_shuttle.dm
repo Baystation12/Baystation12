@@ -17,13 +17,6 @@ var/list/sector_shuttles = list()
 	sector_shuttles -= src
 	return ..()
 
-/datum/shuttle/autodock/overmap/proc/is_valid_landing(var/obj/effect/shuttle_landmark/A)
-	if(A == current_location)
-		return 0 //already there
-	if(!A.free())
-		return 0
-	return 1
-
 /datum/shuttle/autodock/overmap/proc/can_go()
 	if(!next_location)
 		return FALSE
@@ -38,14 +31,14 @@ var/list/sector_shuttles = list()
 	return ..() && can_go()
 
 /datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
-	if(is_valid_landing(A))
+	if(A != current_location)
 		next_location = A
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
 	for (var/obj/effect/overmap/S in range(waypoint_sector(current_location), range))
 		for(var/obj/effect/shuttle_landmark/LZ in S.get_waypoints(src.name))
-			if(is_valid_landing(LZ))
+			if(LZ != current_location)
 				res["[S.name] - [LZ.name]"] = LZ
 	return res
 

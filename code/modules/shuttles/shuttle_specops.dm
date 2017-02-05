@@ -59,8 +59,8 @@
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
 	..(user)
 
-/datum/shuttle/autodock/ferry/specops/move(var/atom/destination)
-	..(destination)
+/datum/shuttle/autodock/ferry/specops/shuttle_moved()
+	..()
 
 	spawn(2 SECONDS)
 		if (!location)	//just arrived home

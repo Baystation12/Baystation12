@@ -32,7 +32,7 @@
 
 		//If we are at the away_landmark then we are just pretending to move, otherwise actually do the move
 		if (next_location == away_waypoint)
-			move(away_waypoint)
+			attempt_move(away_waypoint)
 
 		//wait ETA here.
 		arrive_time = world.time + supply_controller.movetime
@@ -44,12 +44,17 @@
 			if (prob(late_chance))
 				sleep(rand(0,max_late_time))
 
-			move(destination)
+			attempt_move(destination)
 
 		moving_status = SHUTTLE_IDLE
 
 		if (!at_station())	//at centcom
 			supply_controller.sell()
+
+/datum/shuttle/autodock/ferry/supply/check_collision()
+	if(!..())
+		log_error("Supply shuttle \"[name]\" was obstructed, moving anyways.")
+	return TRUE //obstructing the supply shuttle is not permitted
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
 /datum/shuttle/autodock/ferry/supply/proc/forbidden_atoms_check()

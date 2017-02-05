@@ -100,27 +100,38 @@
 /*
 	Turf manipulation
 */
-/proc/translate_turfs(turf/src_origin, turf/dst_origin, list/turfs_src, translate_area = TRUE)
-	for(var/turf/source in turfs_src)
-		if(!source.is_solid_structure())
-			continue
 
+//Returns an assoc list that describes how turfs would be changed if the
+//turfs in turfs_src were translated by shifting the src_origin to the dst_origin
+/proc/get_turf_translation(turf/src_origin, turf/dst_origin, list/turfs_src)
+	var/list/turf_map = list()
+	for(var/turf/source in turfs_src)
 		var/x_pos = (source.x - src_origin.x)
 		var/y_pos = (source.y - src_origin.y)
 		var/z_pos = (source.z - src_origin.z)
 
 		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
+		turf_map[source] = target //if target is null, preserve that information in the turf map
+
+	return turf_map
+
+
+/proc/translate_turfs(var/list/translation, var/area/base_area = null)
+	for(var/turf/source in translation)
+		if(!source.is_solid_structure())
+			continue
+
+		var/turf/target = translation[source]
 
 		if(target)
 			//update area first so that area/Entered() will be called with the correct area when atoms are moved
-			if(translate_area)
-				var/area/base_area = locate(world.area) //TODO better way of determining the base area?
+			if(base_area)
 				source.loc.contents.Add(target)
 				base_area.contents.Add(source)
 			transport_turf_contents(source, target)
 
 	//change the old turfs
-	for(var/turf/source in turfs_src)
+	for(var/turf/source in translation)
 		source.ChangeTurf(get_base_turf_by_area(source), 1, 1)
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
