@@ -53,6 +53,7 @@
 	has_tendon = TRUE
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
+	arterial_bleed_severity = 0.75
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -78,6 +79,7 @@
 	has_tendon = TRUE
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
+	arterial_bleed_severity = 0.75
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -103,6 +105,7 @@
 	can_stand = 1
 	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
+	arterial_bleed_severity = 0.5
 
 /obj/item/organ/external/foot/removed()
 	if(owner) owner.drop_from_inventory(owner.shoes)
@@ -132,6 +135,7 @@
 	can_grasp = 1
 	has_tendon = TRUE
 	tendon_name = "carpal ligament"
+	arterial_bleed_severity = 0.5
 
 /obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || (!stun_amount && agony_amount < 5))
