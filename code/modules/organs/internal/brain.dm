@@ -158,5 +158,5 @@
 			if(prob(15))
 				owner.Paralyse(3,5)
 				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
-		else if(blood_volume < BLOOD_VOLUME_SURVIVE)
+		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
 			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth+10))

@@ -113,14 +113,14 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 
 		switch(pulse)
 			if(PULSE_SLOW)
-				blood_max *= 0.75
+				blood_max *= 0.8
 			if(PULSE_FAST)
 				blood_max *= 1.25
 			if(PULSE_2FAST)
 				blood_max *= 1.5
 
 		if(CE_STABLE in owner.chem_effects) // inaprovaline
-			blood_max *= 0.5
+			blood_max *= 0.8
 
 		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
 			owner.visible_message("<span class='danger'>Blood squirts from [pick(do_spray)]!</span>")
