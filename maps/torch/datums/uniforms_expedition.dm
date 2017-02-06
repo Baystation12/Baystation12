@@ -42,6 +42,7 @@
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/security
 
+	service_under = /obj/item/clothing/under/utility/expeditionary/security
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/security
 
 /decl/hierarchy/mil_uniform/ec/sec/officer
@@ -66,6 +67,7 @@
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/medical
 
+	service_under = /obj/item/clothing/under/utility/expeditionary/medical
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/medical
 
 /decl/hierarchy/mil_uniform/ec/med/officer
@@ -90,6 +92,7 @@
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/supply
 
+	service_under = /obj/item/clothing/under/utility/expeditionary/supply
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/supply
 
 /decl/hierarchy/mil_uniform/ec/sup/officer

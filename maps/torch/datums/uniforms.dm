@@ -40,7 +40,7 @@ var/decl/hierarchy/mil_uniform/mil_uniforms = new /decl/hierarchy/mil_uniform
 
 	service_under = /obj/item/clothing/under/utility/expeditionary
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary
-	service_shoes = /obj/item/clothing/under/utility/expeditionary
+	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/soft/sol/expedition
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary
