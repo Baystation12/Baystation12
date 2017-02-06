@@ -187,7 +187,7 @@ var/const/NO_EMAG_ACT = -50
 	id_card.age = age
 
 /obj/item/weapon/card/id/proc/dat()
-	var/dat = ("<table><tr><td>")
+	var/list/dat = list("<table><tr><td>")
 	dat += text("Name: []</A><BR>", registered_name)
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
@@ -204,7 +204,7 @@ var/const/NO_EMAG_ACT = -50
 	if(front && side)
 		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
 	dat += "</tr></table>"
-	return dat
+	return jointext(dat,null)
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
