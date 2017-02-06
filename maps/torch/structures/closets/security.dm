@@ -29,6 +29,7 @@
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/device/megaphone,
+		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/device/holowarrant
 	)
@@ -41,6 +42,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 
 /obj/structure/closet/secure_closet/cos
@@ -75,7 +78,8 @@
 		/obj/item/device/hailer,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/red,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		/obj/item/clothing/gloves/thick
 	)
 
 /obj/structure/closet/secure_closet/cos/New()
@@ -86,6 +90,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 /obj/structure/closet/secure_closet/brigofficer
 	name = "brig officer's locker"
@@ -113,13 +119,14 @@
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/hailer,
-		/obj/item/weapon/storage/box/holobadge,
+		/obj/item/weapon/storage/box/holobadge_solgov,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/red,
 		/obj/item/weapon/hand_labeler,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		/obj/item/clothing/gloves/thick
 	)
 
 /obj/structure/closet/secure_closet/brigofficer/New()
@@ -130,6 +137,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 
 /obj/structure/closet/secure_closet/forensics
@@ -179,3 +188,5 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)

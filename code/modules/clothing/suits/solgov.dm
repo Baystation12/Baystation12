@@ -140,7 +140,7 @@
 	item_state = "greydress"
 
 /obj/item/clothing/suit/dress/expedition/command
-	name = "expeditionary command dress jacket"
+	name = "expeditionary officer's dress jacket"
 	desc = "A gold and grey dress jacket belonging to the SCG Expeditionary Corps. The height of fashion."
 	icon_state = "greydress_com"
 	item_state = "greydress_com"
@@ -159,7 +159,7 @@
 	desc = "A crisp white SCG Fleet dress jacket with blue and gold accents. Don't get near pasta sauce or vox."
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet/command
-	name = "fleet command dress jacket"
+	name = "fleet officer's dress jacket"
 	desc = "A crisp white SCG Fleet dress jacket dripping with gold accents. So bright it's blinding."
 	icon_state = "whitedress_com"
 	//item_state = "labcoat"
@@ -174,7 +174,7 @@
 	item_state = "blackdress"
 
 /obj/item/clothing/suit/dress/marine/command
-	name = "marine command dress jacket"
+	name = "marine officer's dress jacket"
 	desc = "A tailored black SCG Marine Corps dress jacket with gold trim. Smells like ceremony."
 	icon_state = "blackdress_com"
 	item_state = "blackdress_com"

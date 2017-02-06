@@ -194,7 +194,7 @@
 "dL" = (/obj/structure/table/rack,/obj/random/maintenance,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
 "dM" = (/obj/random/loot,/turf/simulated/floor/airless,/area/constructionsite/ai)
 "dN" = (/obj/machinery/drone_fabricator/derelict,/turf/simulated/floor/airless,/area/constructionsite/ai)
-"dO" = (/obj/structure/cable/blue{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc/high{dir = 1; name = "north bump"; pixel_y = 24},/turf/simulated/floor/airless,/area/constructionsite/ai)
+"dO" = (/obj/structure/cable/blue{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc/high/inactive{dir = 1; name = "north bump"; pixel_y = 24},/turf/simulated/floor/airless,/area/constructionsite/ai)
 "dP" = (/obj/machinery/computer/drone_control,/turf/simulated/floor/airless,/area/constructionsite/ai)
 "dQ" = (/obj/structure/lattice,/turf/space,/area/constructionsite/maintenance)
 "dR" = (/obj/machinery/door/airlock/highsecurity{name = "Messaging Server"; req_access = list(30)},/turf/simulated/floor/airless,/area/constructionsite/hallway/fore)

@@ -52,8 +52,11 @@
 
 		var/open_wound
 		if(temp.status & ORGAN_BLEEDING)
-			for(var/datum/wound/W in temp.wounds)
 
+			if (temp.open)
+				blood_max += 2  //Yer stomach is cut open
+
+			for(var/datum/wound/W in temp.wounds)
 				if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
 					open_wound = TRUE
 
@@ -77,8 +80,6 @@
 					do_spray += temp.artery_name
 				else
 					vessel.remove_reagent("blood", bleed_amount)
-		if (temp.open)
-			blood_max += 2  //Yer stomach is cut open
 
 	if(world.time >= next_blood_squirt && istype(loc, /turf) && do_spray.len)
 		visible_message("<span class='danger'>Blood squirts from \the [src]'s [pick(do_spray)]!</span>")
