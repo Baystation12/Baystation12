@@ -10,8 +10,8 @@
   else if(istype(M, /mob/living/silicon)) // Check if something that should have footsteps, but is not alive
     return 1
 
-proc/isWalking(mob/living/M) // Gotta be sneaky
-  if(M.m_intent == "walk")
+proc/isWalking(mob/living/carbon/human/M) // Gotta be sneaky
+  if(M.m_intent == "walk" && istype(M))
     return 1
   return 0
 
