@@ -1,4 +1,0 @@
-author: Haswell
-delete-after: True
-changes: 
-  - maptweak: "Reduced Torch map sizes from 255x255 to 200x200. Admin Z is now split into two. Reduced world initialization time by about 2 minutes."

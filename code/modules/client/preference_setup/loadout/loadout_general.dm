@@ -71,3 +71,19 @@
 	display_name = "towel"
 	path = /obj/item/weapon/towel
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/plush_toy
+	display_name = "plush toy"
+	description = "A plush toy."
+	path = /obj/item/toy/plushie
+
+/datum/gear/plush_toy/New()
+	..()
+	var/plushes = list()
+	plushes["diona nymph plush"] = /obj/item/toy/plushie/nymph
+	plushes["mouse plush"] = /obj/item/toy/plushie/mouse
+	plushes["kitten plush"] = /obj/item/toy/plushie/kitten
+	plushes["lizard plush"] = /obj/item/toy/plushie/lizard
+	plushes["spider plush"] = /obj/item/toy/plushie/spider
+	plushes["farwa plush"] = /obj/item/toy/plushie/farwa
+	gear_tweaks += new /datum/gear_tweak/path(plushes)

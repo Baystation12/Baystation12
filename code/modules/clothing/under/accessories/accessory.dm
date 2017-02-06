@@ -13,6 +13,7 @@
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi')
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
+	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
@@ -38,6 +39,14 @@
 			bodytype = user_human.species.get_bodytype(user_human)
 
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
+
+		if(istype(loc,/obj/item/clothing/under))
+			var/obj/item/clothing/under/C = loc
+			if(on_rolled["down"] && C.rolled_down > 0)
+				tmp_icon_state = on_rolled["down"]
+			else if(on_rolled["sleeves"] && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled["sleeves"]
+
 		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
@@ -500,20 +509,20 @@
 	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e8
-	name = "ranks (E-8 first sergeant)"
-	desc = "Insignia denoting the rank of First Sergeant."
-
-/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
 	name = "ranks (E-8 master sergeant)"
 	desc = "Insignia denoting the rank of Master Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9
-	name = "ranks (E-9 sergeant major)"
-	desc = "Insignia denoting the rank of Sergeant Major."
+/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
+	name = "ranks (E-8 first sergeant)"
+	desc = "Insignia denoting the rank of First Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+/obj/item/clothing/accessory/rank/marine/enlisted/e9
 	name = "ranks (E-9 master gunnery sergeant)"
 	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+	name = "ranks (E-9 sergeant major)"
+	desc = "Insignia denoting the rank of Sergeant Major."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e9_alt2
 	name = "ranks (E-9 sergeant major of the Marine Corps)"

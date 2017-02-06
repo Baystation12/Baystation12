@@ -89,6 +89,10 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
+			if(!job.is_branch_allowed(player.get_branch_pref()))
+				return 0
+			if(!job.is_rank_allowed(player.get_branch_pref(), player.get_rank_pref()))
+				return 0
 
 			var/position_limit = job.total_positions
 			if(!latejoin)
@@ -314,23 +318,6 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == GET_RANDOM_JOB)
 				GiveRandomJob(player)
-		/*
-		Old job system
-		for(var/level = 1 to 3)
-			for(var/datum/job/job in occupations)
-				Debug("Checking job: [job]")
-				if(!job)
-					continue
-				if(!unassigned.len)
-					break
-				if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
-					continue
-				var/list/candidates = FindOccupationCandidates(job, level)
-				while(candidates.len && ((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
-					var/mob/new_player/candidate = pick(candidates)
-					Debug("Selcted: [candidate], for: [job.title]")
-					AssignRole(candidate, job.title)
-					candidates -= candidate*/
 
 		Debug("DO, Standard Check end")
 
@@ -340,7 +327,11 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == BE_ASSISTANT)
 				Debug("AC2 Assistant located, Player: [player]")
-				AssignRole(player, "Assistant")
+				if(using_map.flags & MAP_HAS_BRANCH)
+					var/datum/mil_branch/branch = mil_branches.get_branch(player.get_branch_pref())
+					AssignRole(player, branch.assistant_job)
+				else
+					AssignRole(player, "Assistant")
 
 		//For ones returning to lobby
 		for(var/mob/new_player/player in unassigned)
@@ -400,7 +391,17 @@ var/global/datum/controller/occupations/job_master
 			job.apply_fingerprints(H)
 
 			if(H.char_rank && H.char_rank.accessory)
-				H.equip_to_slot_or_del(new H.char_rank.accessory, slot_tie)
+				for(var/accessory_path in H.char_rank.accessory)
+					var/list/accessory_data = H.char_rank.accessory[accessory_path]
+					if(islist(accessory_data))
+						var/amt = accessory_data[1]
+						var/list/accessory_args = accessory_data.Copy()
+						accessory_args[1] = src
+						for(var/i in 1 to amt)
+							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
+					else
+						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]

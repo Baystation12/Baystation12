@@ -86,6 +86,8 @@ var/datum/mil_branches/mil_branches = new()
 	var/list/rank_types       // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
+	var/assistant_job //what people who have the BE_ASSISTANT pref set will attempt to join as
+
 /datum/mil_branch/New()
 	ranks = list()
 	spawn_ranks = list()
@@ -134,5 +136,5 @@ var/datum/mil_branches/mil_branches = new()
 	var/name = "Unknown"
 	var/name_short = "N/A" // Abbreviation of the name. Should be null if the
 	                       // rank doesn't usually serve as a prefix to the individual's name.
-	var/accessory		//type of accesory that will be equipped by job code with this rank
+	var/list/accessory		//type of accesory that will be equipped by job code with this rank
 	var/sort_order = 0 // A numerical equivalent of the rank used to indicate its order when compared to other datums: eg e-1 = 1, o-1 = 11

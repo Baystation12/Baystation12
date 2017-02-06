@@ -62,6 +62,8 @@
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 
+	action_button_name = "Toggle Helmet"
+
 /obj/item/clothing/suit/space/void/examine(user)
 	. = ..(user)
 	var/list/part_list = new
@@ -147,7 +149,7 @@
 	var/mob/living/carbon/human/H = usr
 
 	if(!istype(H)) return
-	if(H.stat) return
+	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
@@ -180,7 +182,7 @@
 	var/mob/living/carbon/human/H = usr
 
 	if(!istype(H)) return
-	if(H.stat) return
+	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
@@ -250,3 +252,6 @@
 		return
 
 	..()
+
+/obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
+	toggle_helmet()

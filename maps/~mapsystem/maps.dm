@@ -30,6 +30,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
 	var/list/player_levels = list()  // Z-levels a character can typically reach
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
+	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
+
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
 
@@ -126,3 +128,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		return current_z_level
 	return text2num(pickweight(candidates))
 
+/datum/map/proc/get_empty_zlevel()
+	if(empty_levels == null)
+		world.maxz++
+		empty_levels = list(world.maxz)
+	return pick(empty_levels)

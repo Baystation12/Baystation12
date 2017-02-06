@@ -45,10 +45,12 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
 	self_recharge = 1
+	var/decl/plantgene/gene = null
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
+		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
@@ -58,6 +60,29 @@
 		Fire(target,user)
 		return
 	..()
+
+/obj/item/weapon/gun/energy/floragun/verb/select_gene()
+	set name = "Select Gene"
+	set category = "Object"
+	set src in view(1)
+	
+	var/genemask = input("Choose a gene to modify.") as null|anything in plant_controller.plant_gene_datums
+	
+	if(!genemask)
+		return
+	
+	gene = plant_controller.plant_gene_datums[genemask]
+	
+	to_chat(usr, "<span class='info'>You set the [src]'s targeted genetic area to [genemask].</span>")
+	
+	return
+	
+	
+/obj/item/weapon/gun/energy/floragun/consume_next_projectile()
+	. = ..()
+	var/obj/item/projectile/energy/floramut/gene/G = .
+	if(istype(G))
+		G.gene = gene
 
 /obj/item/weapon/gun/energy/meteorgun
 	name = "meteor gun"

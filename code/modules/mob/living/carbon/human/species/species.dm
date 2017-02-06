@@ -36,6 +36,7 @@
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted                                    // Permanent weldervision.
+	var/light_sensitive									// Ditto, but requires sunglasses to fix
 	var/blood_volume = 560                               // Initial blood volume.
 	var/hunger_factor = DEFAULT_HUNGER_FACTOR            // Multiplier for hunger.
 	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
@@ -353,12 +354,28 @@
 	return 1
 
 /datum/species/proc/get_how_nearsighted(var/mob/living/carbon/human/H)
-	. = short_sighted
+	var/prescriptions = short_sighted
 	if(H.disabilities & NEARSIGHTED)
-		. += 7
+		prescriptions += 7
 	if(H.equipment_prescription)
-		. -= H.equipment_prescription
-	return Clamp(., 0, 7)
+		prescriptions -= H.equipment_prescription
+
+	var/light = light_sensitive
+	if(light)
+		if(H.eyecheck() > FLASH_PROTECTION_NONE)
+			light = 0
+		else
+			var/turf_brightness = 1
+			var/turf/T = get_turf(H)
+			if(T && T.lighting_overlay)
+				turf_brightness = min(1, (T.lighting_overlay.lum_b + T.lighting_overlay.lum_g + T.lighting_overlay.lum_r) / 3)
+			if(turf_brightness < 0.33)
+				light = 0
+			else
+				light = round(light * turf_brightness)
+				if(H.equipment_light_protection)
+					light -= H.equipment_light_protection
+	return Clamp(max(prescriptions, light), 0, 7)
 
 /datum/species/proc/set_default_hair(var/mob/living/carbon/human/H)
 	H.h_style = H.species.default_h_style

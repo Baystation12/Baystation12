@@ -142,6 +142,7 @@
 	name = "Scanning Goggles"
 	desc = "A very oddly shaped pair of goggles with bits of wire poking out the sides. A soft humming sound emanates from it."
 	icon_state = "uzenwa_sissra_1"
+	light_protection = 7
 
 /obj/item/clothing/glasses/regular/hipster
 	name = "Prescription Glasses"

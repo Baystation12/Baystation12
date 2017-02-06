@@ -1245,6 +1245,8 @@
 			return global.supply_methods_;
 		if("supply_positions")
 			return global.supply_positions;
+		if("support_positions")
+			return global.support_positions;
 		if("surgery_steps")
 			return global.surgery_steps;
 		if("swapmaps_byname")
@@ -2698,6 +2700,8 @@
 			global.supply_methods_=newval;
 		if("supply_positions")
 			global.supply_positions=newval;
+		if("support_positions")
+			global.support_positions=newval;
 		if("surgery_steps")
 			global.surgery_steps=newval;
 		if("swapmaps_byname")
@@ -3528,6 +3532,7 @@
 	"supply_drop",
 	"supply_methods_",
 	"supply_positions",
+	"support_positions",
 	"surgery_steps",
 	"swapmaps_byname",
 	"swapmaps_compiled_maxx",

@@ -93,6 +93,7 @@
 	var/equipment_vision_flags				// Extra vision flags from equipped items
 	var/equipment_see_invis					// Max see invibility level granted by equipped items
 	var/equipment_prescription				// Eye prescription granted by equipped items
+	var/equipment_light_protection
 	var/list/equipment_overlays = list()	// Extra overlays from equipped items
 
 	var/med_record = ""

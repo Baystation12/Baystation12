@@ -7,6 +7,12 @@
 	..()
 	refresh_sensors()
 
+/datum/nano_module/power_monitor/Destroy()
+	for(var/grid_sensor in grid_sensors)
+		remove_sensor(grid_sensor, FALSE)
+	grid_sensors = null
+	. = ..()
+
 // Checks whether there is an active alarm, if yes, returns 1, otherwise returns 0.
 /datum/nano_module/power_monitor/proc/has_alarm()
 	for(var/obj/machinery/power/sensor/S in grid_sensors)
@@ -51,12 +57,22 @@
 	var/turf/T = get_turf(nano_host())
 	if(!T) // Safety check
 		return
+	var/connected_z_levels = GetConnectedZlevels(T.z)
 	for(var/obj/machinery/power/sensor/S in machines)
-		if((T && S.loc.z == T.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
+		if((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
 				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
 			else
 				grid_sensors += S
+				destroyed_event.register(S, src, /datum/nano_module/power_monitor/proc/remove_sensor)
+
+/datum/nano_module/power_monitor/proc/remove_sensor(var/removed_sensor, var/update_ui = TRUE)
+	if(active_sensor == removed_sensor)
+		active_sensor = null
+		if(update_ui)
+			nanomanager.update_uis(src)
+	grid_sensors -= removed_sensor
+	destroyed_event.unregister(removed_sensor, src, /datum/nano_module/power_monitor/proc/remove_sensor)
 
 // Allows us to process UI clicks, which are relayed in form of hrefs.
 /datum/nano_module/power_monitor/Topic(href, href_list)
@@ -64,7 +80,10 @@
 		return 1
 	if( href_list["clear"] )
 		active_sensor = null
+		. = 1
 	if( href_list["refresh"] )
 		refresh_sensors()
+		. = 1
 	else if( href_list["setsensor"] )
 		active_sensor = href_list["setsensor"]
+		. = 1
