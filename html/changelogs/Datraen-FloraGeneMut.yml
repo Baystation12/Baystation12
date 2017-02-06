@@ -1,5 +1,0 @@
-author: Datraen
-delete-after: True
-changes: 
-  - rscadd: "Added a gene-specific mode for the Floral Somatoray."
-  - tweak: "Plant controller now generates the mask/tag list used by the centrifuge, rather than generating it on ui_interact."

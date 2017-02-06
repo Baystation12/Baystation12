@@ -1,4 +1,0 @@
-author: chinsky
-delete-after: True
-changes: 
-  - bugfix: "Fixes surgery openness stage not applying gory overlay. Gore is back."
