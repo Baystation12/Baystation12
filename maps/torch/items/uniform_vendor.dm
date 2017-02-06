@@ -39,7 +39,7 @@
 					spawn_uniform(uniforms[choice])
 				state = 0
 			else
-				to_chat(user, "<span class='warning>\the [src] cannot find any valid uniforms for [I.registered_name]'\s ID!</span>")
+				to_chat(user, "<span class='warning'>\the [src] cannot find any valid uniforms for [I.registered_name]'\s ID!</span>")
 				playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
 				flick(icon_deny, src)
 		else
