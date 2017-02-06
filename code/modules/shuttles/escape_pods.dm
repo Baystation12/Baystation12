@@ -13,22 +13,23 @@ var/list/escape_pods_by_name = list()
 	escape_pods_by_name[name] = src
 	escape_pods += src
 	move_time = round(evacuation_controller.evac_transit_delay/10)
+
 	..()
 
-/*
-/datum/shuttle/autodock/ferry/escape_pod/init_docking_controllers()
-	..()
-	arming_controller = locate(dock_target_station)
+	//find the arming controller (berth)
+	var/arming_controller_tag = arming_controller
+	var/obj/machinery/embedded_controller/C = locate(arming_controller_tag)
+	if(istype(C))
+		arming_controller = C.program
 	if(!istype(arming_controller))
-		warning("Escape pod with station dock tag [dock_target_station] could not find it's dock target!")
+		CRASH("Could not find arming controller for escape pod \"[name]\", tag was '[arming_controller_tag]'.")
 
-	if(docking_controller)
-		var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = docking_controller.master
-		if(!istype(controller_master))
-			warning("Escape pod with docking tag [docking_controller_tag] could not find it's controller master!")
-		else
-			controller_master.pod = src
-*/
+	//find the pod's own controller
+	var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = active_docking_controller
+	if(!istype(controller_master))
+		CRASH("Escape pod \"[docking_controller_tag]\" could not find it's controller master!")
+
+	controller_master.pod = src
 
 /datum/shuttle/autodock/ferry/escape_pod/can_launch()
 	if(arming_controller && !arming_controller.armed)	//must be armed

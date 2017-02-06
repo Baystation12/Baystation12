@@ -18,8 +18,8 @@
 	..(_name, start_waypoint)
 
 	//Initial dock
-	active_docking_controller = start_waypoint.docking_controller
-	dock(start_waypoint.docking_target)
+	active_docking_controller = current_location.docking_controller
+	dock(current_location.docking_target)
 
 	//Optional transition area
 	if(landmark_transition)

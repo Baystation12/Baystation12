@@ -68,6 +68,7 @@
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/datum/shuttle/autodock/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
+		to_chat(usr,"<span class='warning'>Unable to establish link with the shuttle.</span>")
 		return
 
 	var/list/data = get_ui_data(shuttle)
