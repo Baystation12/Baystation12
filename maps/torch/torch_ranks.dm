@@ -64,6 +64,8 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/o9,
+		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -118,6 +120,8 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/o9,
+		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -172,6 +176,7 @@
 		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/marine/e8_alt,
 		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/marine/o3,
@@ -395,23 +400,23 @@
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
 
 /datum/mil_rank/marine/e8
-	name = "First Sergeant"
-	name_short = "1st Sgt"
+	name = "Master Sergeant"
+	name_short = "MSgt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e8)
 
 /datum/mil_rank/marine/e8_alt
-	name = "Master Sergeant"
-	name_short = "MSgt"
+	name = "First Sergeant"
+	name_short = "1st Sgt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt)
 
 /datum/mil_rank/marine/e9
-	name = "Sergeant Major"
-	name_short = "SgtMaj"
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySgt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e9)
 
 /datum/mil_rank/marine/e9_alt1
-	name = "Master Gunnery Sergeant"
-	name_short = "MGySgt"
+	name = "Sergeant Major"
+	name_short = "SgtMaj"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1)
 
 /datum/mil_rank/marine/e9_alt2
