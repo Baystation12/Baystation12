@@ -24,9 +24,7 @@
 /obj/effect/shuttle_landmark/initialize()
 	if(docking_controller)
 		var/docking_tag = docking_controller
-		var/obj/machinery/embedded_controller/C = locate(docking_tag)
-		if(istype(C))
-			docking_controller = C.program
+		docking_controller = locate(docking_tag)
 		if(!istype(docking_controller))
 			log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 

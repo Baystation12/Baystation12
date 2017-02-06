@@ -18,9 +18,7 @@ var/list/escape_pods_by_name = list()
 
 	//find the arming controller (berth)
 	var/arming_controller_tag = arming_controller
-	var/obj/machinery/embedded_controller/C = locate(arming_controller_tag)
-	if(istype(C))
-		arming_controller = C.program
+	arming_controller = locate(arming_controller_tag)
 	if(!istype(arming_controller))
 		CRASH("Could not find arming controller for escape pod \"[name]\", tag was '[arming_controller_tag]'.")
 

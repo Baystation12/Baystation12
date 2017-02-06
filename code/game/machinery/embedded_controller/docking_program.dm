@@ -71,6 +71,11 @@
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
 	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
 
+/datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
+	..()
+	if(id_tag)
+		tag = id_tag //set tags for initialization
+
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
 	var/command = signal.data["command"]
