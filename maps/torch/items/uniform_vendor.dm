@@ -29,9 +29,9 @@
 		to_chat(user, "<span class='notice'>You swipe [I.registered_name]'\s ID through \the [src]!</span>")
 
 		//The following is going to be incredibly gross, but we don't store instances of job datums in IDs.
-		if(I.job_access_type)
-			var/datum/job/temp = new I.job_access_type
-			var/list/uniforms = find_uniforms(I.military_rank, I.military_branch, temp.department_flag)
+		var/datum/job/job = job_master.GetJobByType(I.job_access_type)
+		if(job)
+			var/list/uniforms = find_uniforms(I.military_rank, I.military_branch, job.department_flag)
 			if(uniforms.len) // Any uniforms stored?
 				state = 1
 				var/choice = input(user,"Please select the uniform you wish to receive") as null|anything in uniforms
