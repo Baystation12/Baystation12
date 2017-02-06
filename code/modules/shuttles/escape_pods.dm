@@ -27,7 +27,7 @@ var/list/escape_pods_by_name = list()
 	//find the pod's own controller
 	var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = active_docking_controller
 	if(!istype(controller_master))
-		CRASH("Escape pod \"[docking_controller_tag]\" could not find it's controller master!")
+		CRASH("Escape pod \"[name]\" could not find it's controller master!")
 
 	controller_master.pod = src
 

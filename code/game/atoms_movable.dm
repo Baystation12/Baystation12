@@ -260,6 +260,9 @@
 	if(!z || (z in using_map.sealed_levels))
 		return
 
+	if(!universe.OnTouchMapEdge(src))
+		return
+
 	if(using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return

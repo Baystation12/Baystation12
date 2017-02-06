@@ -1,7 +1,7 @@
 /datum/shuttle/autodock/ferry/emergency
 	category = /datum/shuttle/autodock/ferry/emergency
 	move_time = 10 MINUTES
-	var/datum/evacuation_controller/pods/shuttle/emergency_controller
+	var/datum/evacuation_controller/shuttle/emergency_controller
 
 /datum/shuttle/autodock/ferry/emergency/New()
 	. = ..()

@@ -379,6 +379,7 @@
 #include "code\game\gamemodes\cult\cultify\obj.dm"
 #include "code\game\gamemodes\cult\cultify\turf.dm"
 #include "code\game\gamemodes\endgame\endgame.dm"
+#include "code\game\gamemodes\endgame\bluespace_jump\bluespace_jump.dm"
 #include "code\game\gamemodes\endgame\nuclear_explosion\nuclear_explosion.dm"
 #include "code\game\gamemodes\endgame\supermatter_cascade\blob.dm"
 #include "code\game\gamemodes\endgame\supermatter_cascade\portal.dm"

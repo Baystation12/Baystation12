@@ -200,7 +200,6 @@
 	if(!parts.len)	return
 	var/obj/item/organ/external/picked = pick(parts)
 	if(picked.heal_damage(brute,burn))
-		UpdateDamageIcon()
 		BITSET(hud_updateflag, HEALTH_HUD)
 	updatehealth()
 
@@ -222,7 +221,6 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
 
 	if(picked.take_damage(brute, burn, damage_flags))
-		UpdateDamageIcon()
 		BITSET(hud_updateflag, HEALTH_HUD)
 
 	updatehealth()
@@ -232,14 +230,13 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 /mob/living/carbon/human/heal_overall_damage(var/brute, var/burn)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
 
-	var/update = 0
 	while(parts.len && (brute>0 || burn>0) )
 		var/obj/item/organ/external/picked = pick(parts)
 
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
 
-		update |= picked.heal_damage(brute,burn)
+		picked.heal_damage(brute,burn)
 
 		brute -= (brute_was-picked.brute_dam)
 		burn -= (burn_was-picked.burn_dam)
@@ -247,13 +244,11 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 		parts -= picked
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
-	if(update)	UpdateDamageIcon()
 
 // damage MANY external organs, in random order
 /mob/living/carbon/human/take_overall_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0, var/used_weapon = null)
 	if(status_flags & GODMODE)	return	//godmode
 	var/list/obj/item/organ/external/parts = get_damageable_organs()
-	var/update = 0
 	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
 	while(parts.len && (brute>0 || burn>0) )
 		var/obj/item/organ/external/picked = pick(parts)
@@ -261,14 +256,13 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
 
-		update |= picked.take_damage(brute, burn, damage_flags, used_weapon)
+		picked.take_damage(brute, burn, damage_flags, used_weapon)
 		brute	-= (picked.brute_dam - brute_was)
 		burn	-= (picked.burn_dam - burn_was)
 
 		parts -= picked
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
-	if(update)	UpdateDamageIcon()
 
 
 ////////////////////////////////////////////
@@ -295,7 +289,6 @@ This function restores all organs.
 	var/obj/item/organ/external/E = get_organ(zone)
 	if(istype(E, /obj/item/organ/external))
 		if (E.heal_damage(brute, burn))
-			UpdateDamageIcon()
 			BITSET(hud_updateflag, HEALTH_HUD)
 	else
 		return 0
@@ -328,16 +321,16 @@ This function restores all organs.
 	if(blocked)
 		damage *= blocked_mult(blocked)
 
+	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
 		if(BRUTE)
 			damage = damage*species.brute_mod
-			if(organ.take_damage(damage, 0, damage_flags, used_weapon))
-				UpdateDamageIcon()
+			created_wound = organ.take_damage(damage, 0, damage_flags, used_weapon)
 		if(BURN)
 			damage = damage*species.burn_mod
-			if(organ.take_damage(0, damage, damage_flags, used_weapon))
-				UpdateDamageIcon()
+			created_wound = organ.take_damage(0, damage, damage_flags, used_weapon)
+
 		if(PAIN)
 			organ.add_pain(damage)
 		if(CLONE)
@@ -346,4 +339,4 @@ This function restores all organs.
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
-	return 1
+	return created_wound

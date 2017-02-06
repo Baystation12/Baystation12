@@ -165,8 +165,8 @@
 
 /mob/observer/ghost/proc/whisper_to_cultist()
 	set category = "Cult"
-	set name = "Whisper to mind"
-	set desc = "Whisper to a human of your choice. If they are adjusted enough, they'll hear you."
+	set name = "Whisper to cultist"
+	set desc = "Whisper to a human of your choice. They won't understand you unless they're a cultist though."
 
 	whisper_proc()
 
@@ -256,7 +256,7 @@
 
 /mob/observer/ghost/proc/whisper_to_anyone()
 	set category = "Cult"
-	set name = "Whisper loudly to mind"
+	set name = "Whisper to mind"
 	set desc = "Whisper to a human of your choice."
 
 	whisper_proc(1)

@@ -61,6 +61,7 @@
 	#include "torch-8.dmm"
 	#include "torch-9.dmm"
 	#include "torch-10.dmm"
+	#include "torch-11.dmm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
 	#include "../../code/modules/lobby_music/absconditus.dm"

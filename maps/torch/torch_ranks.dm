@@ -72,6 +72,8 @@
 		/datum/mil_rank/fleet/o6
 	)
 
+	assistant_job = "Crewman"
+
 /datum/mil_branch/fleet
 	name = "Fleet"
 	name_short = "SCGF"
@@ -122,6 +124,8 @@
 		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/fleet/o5
 	)
+
+	assistant_job = "Crewman"
 
 /datum/mil_branch/marine_corps
 	name = "Marine Corps"
@@ -175,6 +179,8 @@
 		/datum/mil_rank/marine/o5
 	)
 
+	assistant_job = "Crewman"
+
 /datum/mil_branch/civilian
 	name = "Civilian"
 	name_short = "civ"
@@ -195,6 +201,7 @@
 		/datum/mil_rank/civ/synthetic
 	)
 
+	assistant_job = "Passenger"
 
 /*
  *  Fleet

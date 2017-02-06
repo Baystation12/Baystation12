@@ -11,7 +11,7 @@
 	attackby(var/obj/item/weapon/card/W as obj, var/mob/user as mob)
 		if(stat & (BROKEN|NOPOWER))	return
 
-		var/datum/evacuation_controller/pods/shuttle/evac_control = evacuation_controller
+		var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller
 		if(!istype(evac_control))
 			to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
 			return

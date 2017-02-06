@@ -275,7 +275,8 @@
 	if (deadtime > DEFIB_TIME_LIMIT)
 		return "buzzes, \"Resuscitation failed - Excessive neural degeneration. Further attempts futile.\""
 
-	if((H.getFireLoss() + H.getBruteLoss() + H.getCloneLoss() + burn_damage_amt) >= (H.maxHealth - config.health_threshold_dead) || HUSK in H.mutations)
+	H.updatehealth()
+	if(H.health + H.getOxyLoss() <= config.health_threshold_dead || (HUSK in H.mutations))
 		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile.\""
 
 	var/bad_vital_organ = check_vital_organs(H)
@@ -376,7 +377,7 @@
 		playsound(get_turf(src), 'sound/machines/defib_failed.ogg', 50, 0)
 		return
 
-	if(check_blood_level())
+	if(check_blood_level(H))
 		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock.\"", "warning") //also includes heart damage
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total

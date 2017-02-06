@@ -355,13 +355,18 @@
 		var/robot = ""
 		var/splint = ""
 		var/internal_bleeding = ""
+		var/severed_tendon = ""
 		var/lung_ruptured = ""
+		var/dislocation = ""
 
 		dat += "<tr>"
 
-		for(var/datum/wound/W in e.wounds) if(W.internal)
-			internal_bleeding = "<br>Internal bleeding"
-			break
+		if(e.status & ORGAN_ARTERY_CUT)
+			internal_bleeding = "<br>Arterial bleeding"
+		if(e.status & ORGAN_TENDON_CUT)
+			severed_tendon = "<br>Severed tendon"
+		if(e.dislocated == 2) // non-magical constants when
+			dislocation = "<br>Dislocated"
 		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
 			lung_ruptured = "Lung ruptured:"
 		if(e.splinted)
@@ -406,7 +411,7 @@
 		if(!AN && !open && !infected & !imp)
 			AN = "None:"
 		if(!e.is_stump())
-			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][severed_tendon][dislocation][lung_ruptured]</td>"
 		else
 			dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not [e.is_stump() ? "Found" : "Attached Completely"]</td>"
 		dat += "</tr>"

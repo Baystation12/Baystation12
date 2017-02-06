@@ -1,0 +1,7 @@
+author: PsiOmegaDelta
+
+delete-after: True
+
+changes: 
+  - rscadd: "Admins can now delete specific obj instances from the VV menu, not only all of the same type."
+  - bugfix: "Power monitors now list all powernet sensors belonging to the current and connected Z-levels."
