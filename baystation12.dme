@@ -1319,6 +1319,7 @@
 #include "code\modules\hydroponics\seed.dm"
 #include "code\modules\hydroponics\seed_controller.dm"
 #include "code\modules\hydroponics\seed_datums.dm"
+#include "code\modules\hydroponics\seed_gene_mut.dm"
 #include "code\modules\hydroponics\seed_machines.dm"
 #include "code\modules\hydroponics\seed_mobs.dm"
 #include "code\modules\hydroponics\seed_packets.dm"
