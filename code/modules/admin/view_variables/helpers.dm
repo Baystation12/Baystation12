@@ -78,6 +78,7 @@
 
 /obj/get_view_variables_options()
 	return ..() + {"
+		<option value='?_src_=vars;delthis=\ref[src]'>Delete instance</option>
 		<option value='?_src_=vars;delall=\ref[src]'>Delete all of type</option>
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>

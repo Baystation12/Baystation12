@@ -162,6 +162,15 @@
 
 		H.ChangeToSkeleton()
 		href_list["datumrefresh"] = href_list["make_skeleton"]
+		
+	else if(href_list["delthis"])
+		if(!check_rights(R_DEBUG|R_SERVER))	return
+		
+		var/obj/O = locate(href_list["delthis"])
+		if(!isobj(O))
+			to_chat(usr, "This can only be used on instances of type /obj")
+			return
+		cmd_admin_delete(O)
 
 	else if(href_list["delall"])
 		if(!check_rights(R_DEBUG|R_SERVER))	return
