@@ -1424,7 +1424,7 @@
 "Bt" = (/obj/structure/undies_wardrobe,/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled/dark,/area/crew_quarters/sleep/bunk)
 "Bu" = (/obj/structure/closet/wardrobe/pjs,/obj/machinery/atmospherics/unary/vent_pump/on,/obj/effect/floor_decal/industrial/outline/grey,/turf/simulated/floor/tiled/dark,/area/crew_quarters/sleep/bunk)
 "Bv" = (/obj/machinery/newscaster{pixel_x = -32},/obj/machinery/modular_computer/console/preset/civilian,/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
-"Bw" = (/obj/structure/closet/secure_closet/personal,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
+"Bw" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/uniform_vendor,/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
 "Bx" = (/obj/machinery/shower{dir = 4; icon_state = "shower"; pixel_x = 0; pixel_y = 0},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/machinery/light/small,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head)
 "By" = (/obj/machinery/shower{dir = 8; icon_state = "shower"; pixel_x = 0; pixel_y = 0},/obj/item/weapon/soap,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head)
 "Bz" = (/obj/structure/reagent_dispensers/watertank,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/storage/tools)
