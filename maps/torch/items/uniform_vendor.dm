@@ -20,6 +20,32 @@
 	//1 card accepted, waiting for uniform selection.
 
 
+/obj/machinery/uniform_vendor/attackby(obj/item/weapon/W as obj, mob/user as mob)
+
+	var/obj/item/weapon/card/id/I = W.GetIdCard()
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+	if(I && state < 1)
+		to_chat(user, "<span class='notice'>You swipe [I.registered_name]'\s ID through \the [src]!</span>")
+
+		//The following is going to be incredibly gross, but we don't store instances of job datums in IDs.
+		if(I.job_access_type)
+			var/datum/job/temp = new I.job_access_type
+			var/list/uniforms = find_uniforms(I.military_rank, I.military_branch, temp.department_flag)
+			if(uniforms.len) // Any uniforms stored?
+				state = 1
+				var/choice = input(user,"Please select the uniform you wish to receive") as null|anything in uniforms
+				if(choice)
+					spawn_uniform(uniforms[choice])
+				state = 0
+			else
+				to_chat(user, "<span class='warning>\the [src] cannot find any valid uniforms for [I.registered_name]'\s ID!</span>")
+				playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
+				flick(icon_deny, src)
+		else
+			to_chat(user, "<span class='warning'>\the [src] does not accept [I.registered_name]'\s ID!</span>")
+			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
+			flick(icon_deny, src)
 
 /*	Outfit structures
 	branch
@@ -90,40 +116,14 @@
 		)
 	return list("PT" = pt_uniform, "Utility" = utility_uniform, "Service" = service_uniform, "Dress" = dress_uniform)
 
-/obj/machinery/uniform_vendor/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
-	var/obj/item/weapon/card/id/I = W.GetIdCard()
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-	if(I && state < 1)
-		to_chat(user, "<span class='notice'>You swipe [I.registered_name]'\s ID through \the [src]!</span>")
-
-		//The following is going to be incredibly gross, but we don't store instances of job datums in IDs.
-		if(I.job_access_type)
-			var/datum/job/temp = new I.job_access_type
-			var/list/uniforms = find_uniforms(I.military_rank, I.military_branch, temp.department_flag)
-			if(uniforms.len) // Any uniforms stored?
-				state = 1
-				var/choice = input(user,"Please select the uniform you wish to receive") as null|anything in uniforms
-				if(choice)
-					spawn_uniform(uniforms[choice])
-				state = 0
-			else
-				to_chat(user, "<span class='warning>\the [src] cannot find any valid uniforms for [I.registered_name]'\s ID!</span>")
-				playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
-				flick(icon_deny, src)
-		else
-			to_chat(user, "<span class='warning'>\the [src] does not accept [I.registered_name]'\s ID!</span>")
-			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
-			flick(icon_deny, src)
-
-
 /obj/machinery/uniform_vendor/proc/spawn_uniform(var/list/selected_outfit)
 	var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
 	for(var/item in selected_outfit)
 		if(item) //Can be null in some cases.
 			new item(bag)
 	bag.forceMove(get_turf(src))
+
+
 
 /obj/item/weapon/clothingbag
 	name = "clothing bag"
