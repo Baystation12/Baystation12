@@ -509,20 +509,20 @@
 	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e8
-	name = "ranks (E-8 first sergeant)"
-	desc = "Insignia denoting the rank of First Sergeant."
-
-/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
 	name = "ranks (E-8 master sergeant)"
 	desc = "Insignia denoting the rank of Master Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9
-	name = "ranks (E-9 sergeant major)"
-	desc = "Insignia denoting the rank of Sergeant Major."
+/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
+	name = "ranks (E-8 first sergeant)"
+	desc = "Insignia denoting the rank of First Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+/obj/item/clothing/accessory/rank/marine/enlisted/e9
 	name = "ranks (E-9 master gunnery sergeant)"
 	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+	name = "ranks (E-9 sergeant major)"
+	desc = "Insignia denoting the rank of Sergeant Major."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e9_alt2
 	name = "ranks (E-9 sergeant major of the Marine Corps)"

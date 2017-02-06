@@ -107,7 +107,10 @@
 	exploded = 1
 	sleep(pull_time)
 	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
-	radiation_repository.z_radiate(TS, DETONATION_RADS)
+	if(!TS)
+		return
+	for(var/z in GetConnectedZlevels(TS.z))
+		radiation_repository.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/mob/living/mob in living_mob_list_)
