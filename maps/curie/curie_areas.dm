@@ -83,6 +83,10 @@
 	name = "\improper Station Arrivals"
 	icon_state = "entry_2"
 
+/area/curie/arrivals/lobby2
+	name = "\improper Station Arrivals 2"
+	icon_state = "entry_3"
+
 /area/curie/maintenance/substation
 	name = "Substation"
 	icon_state = "substation"
