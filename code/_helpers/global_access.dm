@@ -857,8 +857,6 @@
 			return global.meteors_threatening;
 		if("mil_branches")
 			return global.mil_branches;
-		if("mil_uniforms")
-			return global.mil_uniforms;
 		if("mining_floors")
 			return global.mining_floors;
 		if("mining_walls")
@@ -1455,7 +1453,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2314,8 +2312,6 @@
 			global.meteors_threatening=newval;
 		if("mil_branches")
 			global.mil_branches=newval;
-		if("mil_uniforms")
-			global.mil_uniforms=newval;
 		if("mining_floors")
 			global.mining_floors=newval;
 		if("mining_walls")
@@ -2912,7 +2908,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3342,7 +3338,6 @@
 	"meteors_normal",
 	"meteors_threatening",
 	"mil_branches",
-	"mil_uniforms",
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",

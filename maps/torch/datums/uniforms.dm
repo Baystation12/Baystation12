@@ -1,5 +1,3 @@
-var/decl/hierarchy/mil_uniform/mil_uniforms = new /decl/hierarchy/mil_uniform
-
 /decl/hierarchy/mil_uniform
 	name = "Master outfit hierarchy"
 	hierarchy_type = /decl/hierarchy/mil_uniform
