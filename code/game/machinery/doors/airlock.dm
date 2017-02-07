@@ -974,7 +974,6 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/deconstruct(mob/user, var/moved = FALSE)
-
 	var/obj/structure/door_assembly/da = new assembly_type(src.loc)
 	if (istype(da, /obj/structure/door_assembly/multi_tile))
 		da.set_dir(src.dir)
@@ -984,7 +983,12 @@ About the new airlock wires panel:
 	else if(glass && !da.glass)
 		da.glass = 1
 
-	da.anchored = !moved
+	if(moved)
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, src)
+		s.start()
+	else
+		da.anchored = 1
 	da.state = 1
 	da.created_name = src.name
 	da.update_state()
@@ -1001,7 +1005,6 @@ About the new airlock wires panel:
 	qdel(src)
 
 	return da
-
 /obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
 	if(C)
 		ignite(is_hot(C))
