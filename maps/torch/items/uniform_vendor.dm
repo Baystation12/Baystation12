@@ -19,6 +19,7 @@
 	//0 waiting for card
 	//1 card accepted, waiting for uniform selection.
 
+	var/static/decl/hierarchy/mil_uniform/mil_uniforms
 
 /obj/machinery/uniform_vendor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
@@ -57,6 +58,9 @@
 	be in command, and there are no variants as a result. Also no special CO uniform :(
 */
 /obj/machinery/uniform_vendor/proc/find_uniforms(var/datum/mil_rank/user_rank, var/datum/mil_branch/user_branch, var/department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
+	if(!mil_uniforms)
+		mil_uniforms = new()
+
 	var/decl/hierarchy/mil_uniform/user_outfit = mil_uniforms
 	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
 		if(istype(user_branch,child.branch))
