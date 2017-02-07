@@ -750,6 +750,9 @@
 		return
 
 	if(stat != DEAD)
+		if(hud)
+			hud.update()
+
 		if(stat == UNCONSCIOUS && health <= 0)
 			//Critical damage passage overlay
 			var/severity = 0
@@ -798,111 +801,6 @@
 		else
 			clear_fullscreen("brute")
 
-		if(healths)
-			if (chem_effects[CE_PAINKILLER] > 100)
-				healths.icon_state = "health_numb"
-			else
-				switch(hal_screwyhud)
-					if(1)	healths.icon_state = "health6"
-					if(2)	healths.icon_state = "health7"
-					else
-						// Generate a by-limb health display.
-						healths.icon_state = "blank"
-						healths.overlays = null
-
-						var/no_damage = 1
-						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
-						if(!can_feel_pain())
-							trauma_val = max(traumatic_shock,getHalLoss())/species.total_health
-						// Collect and apply the images all at once to avoid appearance churn.
-						var/list/health_images = list()
-						for(var/obj/item/organ/external/E in organs)
-							if(no_damage && (E.brute_dam || E.burn_dam))
-								no_damage = 0
-							health_images += E.get_damage_hud_image()
-
-						// Apply a fire overlay if we're burning.
-						if(on_fire)
-							health_images += image('icons/mob/screen1_health.dmi',"burning")
-
-						// Show a general pain/crit indicator if needed.
-						if(trauma_val)
-							if(can_feel_pain())
-								if(trauma_val > 0.7)
-									health_images += image('icons/mob/screen1_health.dmi',"softcrit")
-								if(trauma_val >= 1)
-									health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
-						else if(no_damage)
-							health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
-
-						healths.overlays += health_images
-
-		if(nutrition_icon)
-			switch(nutrition)
-				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
-				if(350 to 450)					nutrition_icon.icon_state = "nutrition1"
-				if(250 to 350)					nutrition_icon.icon_state = "nutrition2"
-				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
-				else							nutrition_icon.icon_state = "nutrition4"
-
-		if(pressure)
-			pressure.icon_state = "pressure[pressure_alert]"
-		if(toxin)
-			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
-			else									toxin.icon_state = "tox0"
-		if(oxygen)
-			if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"
-			else									oxygen.icon_state = "oxy0"
-		if(fire)
-			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
-			else									fire.icon_state = "fire0"
-
-		if(bodytemp)
-			if (!species)
-				switch(bodytemperature) //310.055 optimal body temp
-					if(370 to INFINITY)		bodytemp.icon_state = "temp4"
-					if(350 to 370)			bodytemp.icon_state = "temp3"
-					if(335 to 350)			bodytemp.icon_state = "temp2"
-					if(320 to 335)			bodytemp.icon_state = "temp1"
-					if(300 to 320)			bodytemp.icon_state = "temp0"
-					if(295 to 300)			bodytemp.icon_state = "temp-1"
-					if(280 to 295)			bodytemp.icon_state = "temp-2"
-					if(260 to 280)			bodytemp.icon_state = "temp-3"
-					else					bodytemp.icon_state = "temp-4"
-			else
-				//TODO: precalculate all of this stuff when the species datum is created
-				var/base_temperature = species.body_temperature
-				if(base_temperature == null) //some species don't have a set metabolic temperature
-					base_temperature = (getSpeciesOrSynthTemp(HEAT_LEVEL_1) + getSpeciesOrSynthTemp(COLD_LEVEL_1))/2
-
-				var/temp_step
-				if (bodytemperature >= base_temperature)
-					temp_step = (getSpeciesOrSynthTemp(HEAT_LEVEL_1) - base_temperature)/4
-
-					if (bodytemperature >= getSpeciesOrSynthTemp(HEAT_LEVEL_1))
-						bodytemp.icon_state = "temp4"
-					else if (bodytemperature >= base_temperature + temp_step*3)
-						bodytemp.icon_state = "temp3"
-					else if (bodytemperature >= base_temperature + temp_step*2)
-						bodytemp.icon_state = "temp2"
-					else if (bodytemperature >= base_temperature + temp_step*1)
-						bodytemp.icon_state = "temp1"
-					else
-						bodytemp.icon_state = "temp0"
-
-				else if (bodytemperature < base_temperature)
-					temp_step = (base_temperature - getSpeciesOrSynthTemp(COLD_LEVEL_1))/4
-
-					if (bodytemperature <= getSpeciesOrSynthTemp(COLD_LEVEL_1))
-						bodytemp.icon_state = "temp-4"
-					else if (bodytemperature <= base_temperature - temp_step*3)
-						bodytemp.icon_state = "temp-3"
-					else if (bodytemperature <= base_temperature - temp_step*2)
-						bodytemp.icon_state = "temp-2"
-					else if (bodytemperature <= base_temperature - temp_step*1)
-						bodytemp.icon_state = "temp-1"
-					else
-						bodytemp.icon_state = "temp0"
 	return 1
 
 /mob/living/carbon/human/handle_random_events()
