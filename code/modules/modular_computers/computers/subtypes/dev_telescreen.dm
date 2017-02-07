@@ -18,6 +18,11 @@
 	broken_damage = 150
 	w_class = ITEM_SIZE_HUGE
 
+/obj/item/modular_computer/telescreen/New()
+	..()
+	// Allows us to create "north bump" "south bump" etc. named objects, for more comfortable mapping.
+	name = "telescreen"
+
 /obj/item/modular_computer/telescreen/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/crowbar))
 		if(anchored)

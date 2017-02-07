@@ -60,6 +60,7 @@
 		H.holder2 = src
 		user.drop_from_inventory(H)
 		H.forceMove(src)
+		update_verbs()
 
 // Uninstalls component. Found and Critical vars may be passed by parent types, if they have additional hardware.
 /obj/item/modular_computer/proc/uninstall_component(var/mob/living/user, var/obj/item/weapon/computer_hardware/H, var/found = 0, var/critical = 0)
@@ -97,6 +98,7 @@
 			to_chat(user, "You remove \the [H] from \the [src].")
 		H.forceMove(get_turf(src))
 		H.holder2 = null
+		update_verbs()
 	if(critical && enabled)
 		if(user)
 			to_chat(user, "<span class='danger'>\The [src]'s screen freezes for few seconds and then displays an \"HARDWARE ERROR: Critical component disconnected. Please verify component connection and reboot the device. If the problem persists contact technical support for assistance.\" warning.</span>")

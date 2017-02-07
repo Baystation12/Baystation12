@@ -47,6 +47,7 @@
 	if(hard_drive)
 		install_default_programs()
 	update_icon()
+	update_verbs()
 	..()
 
 /obj/item/modular_computer/Destroy()

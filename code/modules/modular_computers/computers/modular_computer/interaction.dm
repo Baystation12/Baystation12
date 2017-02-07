@@ -1,3 +1,12 @@
+/obj/item/modular_computer/proc/update_verbs()
+	verbs.Cut()
+	if(ai_slot)
+		verbs |= /obj/item/modular_computer/verb/eject_ai()
+	if(portable_drive)
+		verbs |= /obj/item/modular_computer/verb/eject_usb()
+	if(card_slot)
+		verbs |= /obj/item/modular_computer/verb/eject_id()
+
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/verb/eject_id()
 	set name = "Eject ID"
@@ -31,7 +40,7 @@
 	proc_eject_usb(usr)
 
 /obj/item/modular_computer/verb/eject_ai()
-	set name = "Eject Portable Storage"
+	set name = "Eject AI"
 	set category = "Object"
 	set src in view(1)
 
