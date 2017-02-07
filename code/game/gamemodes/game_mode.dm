@@ -27,7 +27,7 @@ var/global/list/additional_antag_types = list()
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
-	var/addantag_allowed = ADDANTAG_ADMIN | ADDANTAG_AUTO
+	var/addantag_allowed = ADDANTAG_ADMIN | ADDANTAG_AUTO | ADDANTAG_EVENT
 
 	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
 	var/explosion_in_progress = 0            // Sit back and relax
