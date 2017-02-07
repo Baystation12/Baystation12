@@ -50,8 +50,6 @@ var/list/global_huds = list(
 	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay
-	var/obj/screen/blobpwrdisplay
-	var/obj/screen/blobhealthdisplay
 	var/obj/screen/r_hand_hud_object
 	var/obj/screen/l_hand_hud_object
 	var/obj/screen/action_intent
@@ -76,8 +74,6 @@ datum/hud/New(mob/owner)
 	disarm_intent = null
 	help_intent = null
 	lingchemdisplay = null
-	blobpwrdisplay = null
-	blobhealthdisplay = null
 	r_hand_hud_object = null
 	l_hand_hud_object = null
 	action_intent = null
