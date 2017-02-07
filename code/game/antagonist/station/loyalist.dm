@@ -5,7 +5,7 @@ var/datum/antagonist/loyalists/loyalists
 	role_text = "Head Loyalist"
 	role_text_plural = "Loyalists"
 	feedback_tag = "loyalist_objective"
-	antag_indicator = "loyal_head"
+	antag_indicator = "hudheadloyalist"
 	welcome_text = "You belong to the Company, body and soul. Preserve its interests against the conspirators amongst the crew."
 	victory_text = "The heads of staff remained at their posts! The loyalists win!"
 	loss_text = "The heads of staff did not stop the revolution!"
@@ -24,7 +24,7 @@ var/datum/antagonist/loyalists/loyalists
 	faction_descriptor = "Company"
 	faction_verb = /mob/living/proc/convert_to_loyalist
 	faction_welcome = "Preserve NanoTrasen's interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
-	faction_indicator = "loyal"
+	faction_indicator = "hudloyalist"
 	faction_invisible = 1
 	blacklisted_jobs = list("AI", "Cyborg")
 
