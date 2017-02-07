@@ -125,6 +125,8 @@ var/global/nttransfer_uid = 0
 	else
 		var/list/all_servers[0]
 		for(var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
+			if(!P.provided_file)
+				continue
 			all_servers.Add(list(list(
 			"uid" = P.unique_token,
 			"filename" = "[P.provided_file.filename].[P.provided_file.filetype]",

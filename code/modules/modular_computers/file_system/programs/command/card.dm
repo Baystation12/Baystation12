@@ -56,7 +56,7 @@
 	data["all_centcom_access"] = is_centcom ? get_accesses(1) : null
 	data["regions"] = get_accesses()
 
-	if(program.computer.card_slot.stored_card)
+	if(program.computer.card_slot && program.computer.card_slot.stored_card)
 		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
 		if(is_centcom)
 			var/list/all_centcom_access = list()
@@ -90,7 +90,7 @@
 		ui.open()
 
 /datum/nano_module/program/card_mod/proc/format_jobs(list/jobs)
-	var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
+	var/obj/item/weapon/card/id/id_card = program.computer.card_slot ? program.computer.card_slot.stored_card : null
 	var/list/formatted = list()
 	for(var/job in jobs)
 		formatted.Add(list(list(

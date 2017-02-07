@@ -294,7 +294,7 @@ obj/machinery/lapvend/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
 	else
 		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
-	var/datum/money_account/customer_account = get_account(I.associated_account_number)
+	var/datum/money_account/customer_account = I ? get_account(I.associated_account_number) : null
 	if (!customer_account || customer_account.suspended)
 		ping("Connection error. Unable to connect to account.")
 		return 0

@@ -1,11 +1,11 @@
 /obj/item/modular_computer/proc/update_verbs()
 	verbs.Cut()
 	if(ai_slot)
-		verbs |= /obj/item/modular_computer/verb/eject_ai()
+		verbs |= new/obj/item/modular_computer/verb/eject_ai()
 	if(portable_drive)
-		verbs |= /obj/item/modular_computer/verb/eject_usb()
+		verbs |= new/obj/item/modular_computer/verb/eject_usb()
 	if(card_slot)
-		verbs |= /obj/item/modular_computer/verb/eject_id()
+		verbs |= new/obj/item/modular_computer/verb/eject_id()
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/verb/eject_id()

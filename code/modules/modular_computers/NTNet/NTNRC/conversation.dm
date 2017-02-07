@@ -29,7 +29,7 @@ var/global/ntnrc_uid = 0
 		return
 	for(var/message in messages)
 		messages -= message
-		if(messages <= 50)
+		if(messages.len <= 50)
 			return
 
 /datum/ntnet_conversation/proc/add_client(var/datum/computer_file/program/chatclient/C)
