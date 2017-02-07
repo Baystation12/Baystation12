@@ -40,6 +40,10 @@
 	to_chat(user, "<span class='notice'>You overlay \the [src] and \the [supplied], combining the print records.</span>")
 	return 1
 
+/obj/item/weapon/sample/resolve_attackby(atom/A, mob/user, var/click_params)
+	// Fingerprints will be handled in after_attack() to not mess up the samples taken
+	return A.attackby(src, user, click_params)
+
 /obj/item/weapon/sample/attackby(var/obj/O, var/mob/user)
 	if(O.type == src.type)
 		user.unEquip(O)
@@ -139,13 +143,17 @@
 /obj/item/weapon/forensics/sample_kit/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
-	add_fingerprint(user)
 	if(can_take_sample(user, A))
 		take_sample(user,A)
-		return 1
+		. = 1
 	else
 		to_chat(user, "<span class='warning'>You are unable to locate any [evidence_type]s on \the [A].</span>")
-		return ..()
+		. = ..()
+	A.add_fingerprint(user)
+
+/obj/item/weapon/forensics/sample_kit/MouseDrop(atom/over)
+	if(ismob(src.loc) && CanMouseDrop(over))
+		afterattack(over, usr, TRUE)
 
 /obj/item/weapon/forensics/sample_kit/powder
 	name = "fingerprint powder"

@@ -291,6 +291,14 @@
 		return 1
 	return 0
 
+/mob/new_player/proc/get_branch_pref()
+	if(client)
+		return client.prefs.char_branch
+
+/mob/new_player/proc/get_rank_pref()
+	if(client)
+		return client.prefs.char_rank
+
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if(src != usr)
 		return 0
@@ -370,6 +378,7 @@
 		character.buckled.set_dir(character.dir)
 
 	ticker.mode.handle_latejoin(character)
+	universe.OnPlayerLatejoin(character)
 	if(job_master.ShouldCreateRecords(rank))
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)

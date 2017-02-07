@@ -145,17 +145,18 @@
 			if(istype(Target, /mob/living/silicon)) // Glomp the silicons
 				a_intent = I_HURT
 				UnarmedAttack(Target)
-				addedDelay = 5
+				addedDelay = 10
 
 			else if(Target.client && !Target.lying && prob(60 + powerlevel * 4)) // Try to take down the target first
 				a_intent = I_DISARM
 				UnarmedAttack(Target)
-				addedDelay = 5
+				addedDelay = 10
 
 			else
 				a_intent = I_GRAB
 				if(invalidFeedTarget(Target))
 					a_intent = I_HURT //just glomp them instead
+					addedDelay = 10
 				UnarmedAttack(Target)
 
 		else if(Target in view(7, src))

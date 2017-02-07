@@ -112,7 +112,7 @@
 	icon_state = "greydresscap"
 
 /obj/item/clothing/head/dress/expedition/command
-	name = "expedition command dress cap"
+	name = "expedition officer's dress cap"
 	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
 	icon_state = "greydresscap_com"
 
@@ -122,7 +122,7 @@
 	icon_state = "whitepeakcap"
 
 /obj/item/clothing/head/dress/fleet/command
-	name = "fleet command dress wheel cover"
+	name = "fleet officer's dress wheel cover"
 	desc = "A white dress uniform cover. This one has a gold stripe and an SCG Fleet crest."
 	icon_state = "whitepeakcap_com"
 

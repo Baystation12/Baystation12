@@ -61,13 +61,13 @@
 
 /obj/item/clothing/under/utility/expeditionary/engineering
 	name = "expeditionary engineering uniform"
-	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim and organge blazes."
+	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim and orange blazes."
 	icon_state = "blackutility_eng"
 	worn_state = "blackutility_eng"
 
 /obj/item/clothing/under/utility/expeditionary/engineering/command
 	name = "expeditionary engineering command uniform"
-	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim and organge blazes."
+	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim and orange blazes."
 	icon_state = "blackutility_engcom"
 	worn_state = "blackutility_engcom"
 
@@ -238,7 +238,7 @@
 	worn_state = "greydress"
 
 /obj/item/clothing/under/mildress/expeditionary/command
-	name = "expeditionary command dress uniform"
+	name = "expeditionary officer's dress uniform"
 	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
 	icon_state = "greydress_com"
 	worn_state = "greydress_com"

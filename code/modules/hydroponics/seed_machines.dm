@@ -21,11 +21,7 @@
 /obj/item/weapon/storage/box/botanydisk
 	name = "flora disk box"
 	desc = "A box of flora data disks, apparently."
-
-/obj/item/weapon/storage/box/botanydisk/New()
-	..()
-	for(var/i = 0;i<7;i++)
-		new /obj/item/weapon/disk/botany(src)
+	startswith = list(/obj/item/weapon/disk/botany = 14)
 
 /obj/machinery/botany
 	icon = 'icons/obj/hydroponics_machines.dmi'
@@ -138,9 +134,7 @@
 
 	var/list/data = list()
 
-	var/list/geneMasks[0]
-	for(var/gene_tag in plant_controller.gene_tag_masks)
-		geneMasks.Add(list(list("tag" = gene_tag, "mask" = plant_controller.gene_tag_masks[gene_tag])))
+	var/list/geneMasks = plant_controller.gene_masked_list
 	data["geneMasks"] = geneMasks
 
 	data["activity"] = active

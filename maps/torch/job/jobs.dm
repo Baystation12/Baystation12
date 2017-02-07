@@ -32,6 +32,8 @@
 /datum/job/hop
 	title = "Executive Officer"
 	supervisors = "the Commanding Officer"
+	department = "Command"
+	department_flag = COM
 	minimal_player_age = 21
 	economic_modifier = 10
 	ideal_character_age = 45
@@ -183,8 +185,8 @@
 
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -207,8 +209,8 @@
 
 /datum/job/representative
 	title = "SolGov Representative"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -228,8 +230,8 @@
 
 /datum/job/sea
 	title = "Senior Enlisted Advisor"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -245,10 +247,10 @@
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8
+		/datum/mil_rank/marine/e8_alt
 	)
 
 
@@ -263,8 +265,8 @@
 
 /datum/job/bridgeofficer
 	title = "Bridge Officer"
-	department = "Command"
-	department_flag = COM
+	department = "Support"
+	department_flag = SPT
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -312,7 +314,7 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
@@ -428,7 +430,7 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
@@ -1054,15 +1056,20 @@
 
 
 /datum/job/merchant
-	title = "merchant"
-	faction = "None"
-	total_positions = 0 //to be opened by admins when desired
+	title = "Merchant"
+	department = "Civilian"
+	department_flag = CIV
+	faction = "Station"
+	total_positions = 0 //to be opened by admins when desired AT ROUNDSTART ONLY
 	spawn_positions = 0
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"
 	ideal_character_age = 30
 	minimal_player_age = 7
+	create_record = 0
 	outfit_type = /decl/hierarchy/outfit/job/torch/merchant
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 
 	access = list(access_merchant)

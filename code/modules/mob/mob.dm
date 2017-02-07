@@ -260,7 +260,7 @@
 	if (!istype(l_hand, /obj/item/weapon/grab) && !istype(r_hand, /obj/item/weapon/grab))
 		return L
 	if (!L)
-		L = list()
+		L = list(src)
 	for(var/A in list(l_hand,r_hand))
 		if (istype(A, /obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = A
@@ -898,12 +898,13 @@ mob/proc/yank_out_object()
 					affected = organ
 
 		affected.implants -= selection
+		for(var/datum/wound/wound in affected.wounds)
+			wound.embedded_objects -= selection
+
 		H.shock_stage+=20
 		affected.take_damage((selection.w_class * 3), 0, DAM_EDGE, "Embedded object extraction")
 
-		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
-			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
-			affected.wounds += I
+		if(prob(selection.w_class * 5) && affected.sever_artery()) //I'M SO ANEMIC I COULD JUST -DIE-.
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50, affecting = affected)
 
 		if (ishuman(U))

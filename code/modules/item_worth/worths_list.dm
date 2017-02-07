@@ -47,7 +47,7 @@ var/list/worths = list(
 					/obj/item/weapon/gun/launcher/pneumatic/small = 100,
 					/obj/item/weapon/gun/launcher/pneumatic = 200,
 					/obj/item/weapon/gun/launcher/syringe = 150,
-					/obj/item/weapon/gun/launcher/spikethrower = 3500,
+					/obj/item/weapon/gun/launcher/alien = 3500,
 					/obj/item/weapon/gun/launcher = 300,
 //AUTOMATICS,
 					/obj/item/weapon/gun/projectile/automatic/c20r = 3250,

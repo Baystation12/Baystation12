@@ -14,9 +14,9 @@
 /datum/event/meteor_wave/announce()
 	switch(severity)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Meteors have been detected on collision course with the station.", "Meteor Alert", new_sound = 'sound/AI/meteors.ogg')
+			command_announcement.Announce("Meteors have been detected on collision course with the [station_name()].", "[station_name()] Sensor Array", new_sound = 'sound/AI/meteors.ogg')
 		else
-			command_announcement.Announce("The station is now in a meteor shower.", "Meteor Alert")
+			command_announcement.Announce("The [station_name()] is now in a meteor shower.", "[station_name()] Sensor Array")
 
 /datum/event/meteor_wave/tick()
 	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
@@ -38,9 +38,9 @@
 /datum/event/meteor_wave/end()
 	switch(severity)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("The station has cleared the meteor storm.", "Meteor Alert")
+			command_announcement.Announce("The [station_name()] has cleared the meteor storm.", "[station_name()] Sensor Array")
 		else
-			command_announcement.Announce("The station has cleared the meteor shower", "Meteor Alert")
+			command_announcement.Announce("The [station_name()] has cleared the meteor shower", "[station_name()] Sensor Array")
 
 /datum/event/meteor_wave/proc/get_meteors()
 	switch(severity)

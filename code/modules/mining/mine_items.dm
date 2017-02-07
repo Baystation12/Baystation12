@@ -188,60 +188,79 @@
 	amount = 10
 	max_amount = 10
 	icon = 'icons/obj/mining.dmi'
-	var/upright = 0
-	var/base_state
 
-/obj/item/stack/flag/New()
-	..()
-	base_state = icon_state
+	var/upright = 0
+	var/fringe = null
 
 /obj/item/stack/flag/red
 	name = "red flags"
 	singular_name = "red flag"
 	icon_state = "redflag"
+	fringe = "redflag_fringe"
+	light_color = COLOR_RED
 
 /obj/item/stack/flag/yellow
 	name = "yellow flags"
 	singular_name = "yellow flag"
 	icon_state = "yellowflag"
+	fringe = "yellowflag_fringe"
+	light_color = COLOR_YELLOW
 
 /obj/item/stack/flag/green
 	name = "green flags"
 	singular_name = "green flag"
 	icon_state = "greenflag"
+	fringe = "greenflag_fringe"
+	light_color = COLOR_LIME
 
-/obj/item/stack/flag/attackby(obj/item/W as obj, mob/user as mob)
-	if(upright && istype(W,src.type))
-		src.attack_hand(user)
-	else
-		..()
-
-/obj/item/stack/flag/attack_hand(user as mob)
+/obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
 	if(upright)
-		upright = 0
-		icon_state = base_state
-		anchored = 0
-		src.visible_message("<b>[user]</b> knocks down [src].")
-	else
-		..()
+		attack_hand(user)
+		return
+	return ..()
 
-/obj/item/stack/flag/attack_self(mob/user as mob)
+/obj/item/stack/flag/attack_hand(var/mob/user)
+	if(upright)
+		knock_down()
+		user.visible_message("\The [user] knocks down \the [singular_name].")
+		return
+	return ..()
 
+/obj/item/stack/flag/attack_self(var/mob/user)
 	var/turf/T = get_turf(src)
-	if(!T || !istype(T,/turf/simulated/floor/asteroid))
+
+	if(!istype(T, /turf/simulated/floor/asteroid))
 		to_chat(user, "The flag won't stand up in this terrain.")
 		return
 
-	var/obj/item/stack/flag/F = locate() in T
-	if(F && F.upright)
-		to_chat(user, "There is already a flag here.")
-		return
+	for(var/obj/item/stack/flag/F in T)
+		if(F.upright)
+			to_chat(user, "\The [F] is already planted here.")
+			return
 
-	var/obj/item/stack/flag/newflag = new src.type(T)
-	newflag.amount = 1
-	newflag.upright = 1
-	newflag.anchored = 1
-	newflag.name = newflag.singular_name
-	newflag.icon_state = "[newflag.base_state]_open"
-	newflag.visible_message("\The [user] plants \the [newflag] firmly in the ground.")
-	src.use(1)
+	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
+		var/obj/item/stack/flag/newflag = new src.type(T, 1)
+		newflag.set_up()
+		user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
+
+/obj/item/stack/flag/proc/set_up()
+	pixel_x = 0
+	pixel_y = 0
+	upright = 1
+	anchored = 1
+	icon_state = "[initial(icon_state)]_open"
+	if(fringe)
+		set_light(2, 0.1) // Very dim so the rest of the flag is barely visible - if the turf is completely dark, you can't see anything on it, no matter what
+		var/image/addon = image(icon = src.icon, icon_state = fringe) // Bright fringe
+		addon.layer = ABOVE_LIGHTING_LAYER
+		addon.plane = LIGHTING_PLANE
+		overlays += addon
+
+/obj/item/stack/flag/proc/knock_down()
+	pixel_x = rand(-randpixel, randpixel)
+	pixel_y = rand(-randpixel, randpixel)
+	upright = 0
+	anchored = 0
+	icon_state = initial(icon_state)
+	overlays.Cut()
+	set_light(0)

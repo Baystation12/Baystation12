@@ -114,6 +114,7 @@
 	icon_state = "1 light"
 	screen_loc = ui_entire_screen
 	layer = FULLSCREEN_LAYER
+	alpha = 127
 
 /obj/screen/fullscreen/scanline
 	icon = 'icons/effects/static.dmi'

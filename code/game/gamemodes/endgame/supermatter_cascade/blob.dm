@@ -12,7 +12,7 @@
 	layer = SUPERMATTER_WALL_LAYER
 
 	var/next_check=0
-	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST)
+	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
 /turf/unsimulated/wall/supermatter/New()
 	..()
@@ -38,10 +38,12 @@
 	// Choose a direction.
 	var/pdir = pick(avail_dirs)
 	avail_dirs -= pdir
-	var/turf/T=get_step(src,pdir)
+	var/turf/T=get_zstep(src,pdir)
 
 	// EXPAND
 	if(!istype(T,type))
+		if(!T)
+			return
 		// Do pretty fadeout animation for 1s.
 		new /obj/effect/overlay/bluespacify(T)
 		spawn(10)

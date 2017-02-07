@@ -6,11 +6,15 @@
 	damage_type = BURN
 	nodamage = 1
 	check_armour = "energy"
+	var/pulse_range = 1
 
 	on_hit(var/atom/target, var/blocked = 0)
-		empulse(target, 1, 1)
+		empulse(target, pulse_range, pulse_range)
 		return 1
 
+/obj/item/projectile/ion/small
+	name = "ion pulse"
+	pulse_range = 0
 
 /obj/item/projectile/bullet/gyro
 	name ="explosive bolt"
@@ -104,6 +108,16 @@
 			M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 		else
 			return 1
+			
+/obj/item/projectile/energy/floramut/gene
+	name = "gamma somatoray"
+	icon_state = "energy2"
+	fire_sound = 'sound/effects/stealthoff.ogg'
+	damage = 0
+	damage_type = TOX
+	nodamage = 1
+	check_armour = "energy"
+	var/decl/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
 	name = "beta somatoray"

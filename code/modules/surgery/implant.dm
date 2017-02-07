@@ -152,10 +152,8 @@
 
 	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.</span>", \
 	"<span class='notice'>You put \the [tool] inside [target]'s [get_cavity(affected)] cavity.</span>" )
-	if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.robotic >= ORGAN_ROBOT))
+	if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.robotic >= ORGAN_ROBOT) && affected.sever_artery())
 		to_chat(user, "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>")
-		var/datum/wound/internal_bleeding/I = new (10)
-		affected.wounds += I
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1,affecting = affected)
 	user.drop_item()
 	affected.implants += tool
@@ -216,6 +214,10 @@
 			user.visible_message("<span class='notice'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool].</span>", \
 			"<span class='notice'>You take [obj] out of incision on [target]'s [affected.name]s with \the [tool].</span>" )
 			affected.implants -= obj
+			for(var/datum/wound/wound in affected.wounds)
+				if(obj in wound.embedded_objects)
+					wound.embedded_objects -= obj
+					break
 
 			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 

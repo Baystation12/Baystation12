@@ -100,6 +100,12 @@
 		return
 
 
+/obj/item/weapon/storage/box/holobadge_solgov
+	name = "holobadge box"
+	desc = "A box claiming to contain holobadges, this one has 'Master at Arms' written on it in fine print."
+	startswith = list(/obj/item/clothing/accessory/badge/security = 6)
+
+
 /obj/item/clothing/accessory/badge/security
 	name = "security forces badge"
 	desc = "A silver law enforcement badge. Stamped with the words 'Master at Arms'."

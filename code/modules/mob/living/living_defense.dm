@@ -208,7 +208,7 @@
 					src.anchored = 1
 					src.pinned += O
 
-/mob/living/proc/embed(var/obj/O, var/def_zone=null)
+/mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	O.loc = src
 	src.embedded += O
 	src.verbs += /mob/proc/yank_out_object

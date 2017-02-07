@@ -9,7 +9,7 @@ datum/unit_test/loadout_test_shall_have_name_cost_path/start_test()
 		if(!G.display_name)
 			log_unit_test("[G]: Missing display name.")
 			failed = 1
-		else if(G.cost <= 0)
+		else if(isnull(G.cost) || G.cost < 0)
 			log_unit_test("[G]: Invalid cost.")
 			failed = 1
 		else if(!G.path)

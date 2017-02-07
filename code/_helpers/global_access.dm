@@ -3105,6 +3105,8 @@
 			return global.supply_methods_;
 		if("supply_positions")
 			return global.supply_positions;
+		if("support_positions")
+			return global.support_positions;
 		if("surgery_steps")
 			return global.surgery_steps;
 		if("swapmaps_byname")
@@ -3311,7 +3313,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -4599,6 +4601,8 @@
 			global.supply_methods_=newval;
 		if("supply_positions")
 			global.supply_positions=newval;
+		if("support_positions")
+			global.support_positions=newval;
 		if("surgery_steps")
 			global.surgery_steps=newval;
 		if("swapmaps_byname")
@@ -4815,7 +4819,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -5439,6 +5443,7 @@
 	"supply_drop",
 	"supply_methods_",
 	"supply_positions",
+	"support_positions",
 	"surgery_steps",
 	"swapmaps_byname",
 	"swapmaps_compiled_maxx",

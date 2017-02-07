@@ -61,8 +61,7 @@
 					var/mob/living/carbon/human/H = src
 					var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
 					if (istype(organ))
-						if(organ.take_damage(d, 0))
-							H.UpdateDamageIcon()
+						organ.take_damage(d, 0)
 					H.updatehealth()
 				else
 					src.take_organ_damage(d)
@@ -114,14 +113,22 @@
 			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
 			"<span class='warning'>You hear a heavy electrical crack.</span>" \
 		)
-		Stun(10)//This should work for now, more is really silly and makes you lay there forever
-		Weaken(10)
 	else
 		src.visible_message(
 			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
 			"<span class='warning'>You feel a shock course through your body.</span>", \
 			"<span class='warning'>You hear a zapping sound.</span>" \
 		)
+
+	switch(shock_damage)
+		if(16 to 20)
+			Stun(2)
+		if(21 to 25)
+			Weaken(2)
+		if(26 to 25)
+			Weaken(5)
+		if(31 to INFINITY)
+			Weaken(10) //This should work for now, more is really silly and makes you lay there forever
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(5, 1, loc)

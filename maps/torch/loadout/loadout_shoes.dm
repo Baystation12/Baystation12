@@ -1,7 +1,7 @@
 // Shoelocker
 /datum/gear/shoes
-	display_name = "running shoes"
-	path = /obj/item/clothing/shoes/black
+	display_name = "duty boots"
+	path = /obj/item/clothing/shoes/dutyboots
 	slot = slot_shoes
 	sort_category = "Shoes and Footwear"
 

@@ -8,6 +8,11 @@
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
 
+	#include "datums/uniforms.dm"
+	#include "datums/uniforms_expedition.dm"
+	#include "datums/uniforms_fleet.dm"
+	#include "datums/uniforms_marine.dm"
+
 	#include "items/cards_ids.dm"
 	#include "items/clothing.dm"
 	#include "items/encryption_keys.dm"
@@ -15,6 +20,7 @@
 	#include "items/machinery.dm"
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
+	#include "items/uniform_vendor.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"
@@ -61,6 +67,7 @@
 	#include "torch-8.dmm"
 	#include "torch-9.dmm"
 	#include "torch-10.dmm"
+	#include "torch-11.dmm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
 	#include "../../code/modules/lobby_music/absconditus.dm"

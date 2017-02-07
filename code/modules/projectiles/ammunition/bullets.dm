@@ -174,3 +174,33 @@
 	caliber = "caps"
 	color = "#FF0000"
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
+
+// EMP ammo.
+/obj/item/ammo_casing/c38/emp
+	name = ".38 haywire round"
+	desc = "A .38 bullet casing fitted with a single-use ion pulse generator."
+	icon_state = "empcasing"
+	projectile_type = /obj/item/projectile/ion/small
+	matter = list(DEFAULT_WALL_MATERIAL = 130, "uranium" = 100)
+
+/obj/item/ammo_casing/c45/emp
+	name = ".45 haywire round"
+	desc = "A .45 bullet casing fitted with a single-use ion pulse generator."
+	projectile_type = /obj/item/projectile/ion/small
+	icon_state = "empcasing"
+	matter = list(DEFAULT_WALL_MATERIAL = 130, "uranium" = 100)
+
+/obj/item/ammo_casing/a10mm/emp
+	name = "10mm haywire round"
+	desc = "A 10mm bullet casing fitted with a single-use ion pulse generator."
+	projectile_type = /obj/item/projectile/ion/small
+	icon_state = "empcasing"
+	matter = list(DEFAULT_WALL_MATERIAL = 130, "uranium" = 100)
+
+/obj/item/ammo_casing/shotgun/emp
+	name = "haywire slug"
+	desc = "A 12-gauge shotgun slug fitted with a single-use ion pulse generator."
+	icon_state = "empshell"
+	spent_icon = "empshell-spent"
+	projectile_type  = /obj/item/projectile/ion
+	matter = list(DEFAULT_WALL_MATERIAL = 260, "uranium" = 200)
