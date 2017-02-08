@@ -34,29 +34,6 @@
 	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive in approximately %ETA%"
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
-	station_networks = list(
-							NETWORK_CIVILIAN_EAST,
-							NETWORK_CIVILIAN_WEST,
-							NETWORK_COMMAND,
-							NETWORK_ENGINE,
-							NETWORK_ENGINEERING,
-							NETWORK_ENGINEERING_OUTPOST,
-							NETWORK_EXODUS,
-							NETWORK_MAINTENANCE,
-							NETWORK_MEDICAL,
-							NETWORK_MINE,
-							NETWORK_RESEARCH,
-							NETWORK_RESEARCH_OUTPOST,
-							NETWORK_ROBOTS,
-							NETWORK_PRISON,
-							NETWORK_SECURITY,
-							NETWORK_ALARM_ATMOS,
-							NETWORK_ALARM_FIRE,
-							NETWORK_ALARM_POWER,
-							NETWORK_THUNDER,
-							NETWORK_TELECOM
-							)
-
 	evac_controller_type = /datum/evacuation_controller/shuttle
 
 /datum/map/exodus/perform_map_generation()
