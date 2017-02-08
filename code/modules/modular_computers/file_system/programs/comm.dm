@@ -372,8 +372,9 @@ var/last_message_id = 0
 	if (!ticker || !evacuation_controller)
 		return
 
-	//delay events in case of an autotransfer
-	event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
-	event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
-
-	return evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+	if(.)
+		//delay events in case of an autotransfer
+		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
+		event_manager.delay_events(EVENT_LEVEL_MODERATE, delay)
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, delay)
