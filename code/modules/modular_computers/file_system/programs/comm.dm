@@ -368,28 +368,13 @@ var/last_message_id = 0
 	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
-/proc/init_shift_change(var/mob/user, var/force = 0)
+/proc/init_autotransfer()
 	if (!ticker || !evacuation_controller)
 		return
 
-	// if force is 0, some things may stop the shuttle call
-	if(!force)
-
-		if(evacuation_controller.deny)
-			to_chat(user, "[using_map.boss_short] does not currently have a shuttle available in your sector. Please try again later.")
-			return
-
-		if(world.time < 54000) // 30 minute grace period to let the game get going
-			to_chat(user, "The shuttle is refueling. Please wait another [round((54000-world.time)/60)] minutes before trying again.")
-			return
-
-		if(ticker.mode.auto_recall_shuttle)
-			//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
-			evacuation_controller.auto_recall(1)
-
-	//delay events in case of an autotransfer
-	if (isnull(user))
-		event_manager.delay_events(EVENT_LEVEL_MODERATE, 10200) //17 minutes
-		event_manager.delay_events(EVENT_LEVEL_MAJOR, 10200)
-
-	return call_shuttle_proc(user, 0)
+	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+	if(.)
+		//delay events in case of an autotransfer
+		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
+		event_manager.delay_events(EVENT_LEVEL_MODERATE, delay)
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, delay)
