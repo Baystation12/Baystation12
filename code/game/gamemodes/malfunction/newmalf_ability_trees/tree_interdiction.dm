@@ -13,27 +13,27 @@
 	ability = new/datum/game_mode/malfunction/verb/recall_shuttle()
 	price = 75
 	next = new/datum/malf_research_ability/interdiction/unlock_cyborg()
-	name = "Recall Shuttle"
+	name = "T1 - Recall Shuttle"
 
 
 /datum/malf_research_ability/interdiction/unlock_cyborg
 	ability = new/datum/game_mode/malfunction/verb/unlock_cyborg()
 	price = 1200
 	next = new/datum/malf_research_ability/interdiction/hack_cyborg()
-	name = "Unlock Cyborg"
+	name = "T2 - Unlock Cyborg"
 
 
 /datum/malf_research_ability/interdiction/hack_cyborg
 	ability = new/datum/game_mode/malfunction/verb/hack_cyborg()
 	price = 3000
 	next = new/datum/malf_research_ability/interdiction/hack_ai()
-	name = "Hack Cyborg"
+	name = "T3 - Hack Cyborg"
 
 
 /datum/malf_research_ability/interdiction/hack_ai
 	ability = new/datum/game_mode/malfunction/verb/hack_ai()
 	price = 7500
-	name = "Hack AI"
+	name = "T4 - Hack AI"
 
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS

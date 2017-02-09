@@ -195,15 +195,18 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	rcvdcopy.loc = null //hopefully this shouldn't cause trouble
 	adminfaxes += rcvdcopy
 
+	var/mob/intercepted = check_for_interception()
+
+
 	//message badmins that a fax has arrived
 	if (destination == using_map.boss_name)
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#006100")
+		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#006100")
 	else if (destination == "Colonial Marshal Service")
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1F66A0")
+		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#1F66A0")
 	else if (destination == "[using_map.boss_short] Supply")
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5F4519")
+		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#5F4519")
 	else
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
+		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, "UNKNOWN")
 
 	sendcooldown = 1800
 	sleep(50)
