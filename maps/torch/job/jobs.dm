@@ -1075,3 +1075,7 @@
 	access = list(access_merchant)
 	minimal_access = list(access_merchant)
 
+/datum/job/merchant/New()
+	..()
+	if(prob(50))
+		spawn_positions = 0
