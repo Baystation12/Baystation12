@@ -81,17 +81,6 @@
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
 	src.death()
 
-/mob/living/simple_animal/mouse/MouseDrop(atom/over_object)
-
-	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
-
-	if(H.a_intent == I_HELP)
-		get_scooped(H)
-		return
-	else
-		return ..()
-
 /mob/living/simple_animal/mouse/Crossed(AM as mob|obj)
 	if( ishuman(AM) )
 		if(!stat)

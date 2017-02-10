@@ -1388,13 +1388,6 @@
 		return 1
 	return 0
 
-/mob/living/carbon/human/MouseDrop(var/atom/over_object)
-	var/mob/living/carbon/human/H = over_object
-	if(holder_type && istype(H) && H.a_intent == I_HELP && !H.lying && !issmall(H) && Adjacent(H))
-		get_scooped(H, (usr == src))
-		return
-	return ..()
-
 /mob/living/carbon/human/verb/pull_punches()
 	set name = "Pull Punches"
 	set desc = "Try not to hurt them."
