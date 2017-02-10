@@ -15,9 +15,7 @@
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
-	var/state = 0
-	//0 waiting for card
-	//1 card accepted, waiting for uniform selection.
+	var/mob/current_user = null //one person at a time, please
 
 	var/static/decl/hierarchy/mil_uniform/mil_uniforms
 
@@ -26,27 +24,36 @@
 	var/obj/item/weapon/card/id/I = W.GetIdCard()
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-	if(I && state < 1)
-		to_chat(user, "<span class='notice'>You swipe [I.registered_name]'\s ID through \the [src]!</span>")
+	if(current_user)
+		to_chat(user, "<span class='warning'>\The [src] is already processing someone else's request.</span>")
+	else if(I)
+		to_chat(user, "<span class='notice'>You swipe [I.registered_name]'s ID through \the [src]!</span>")
 
 		//The following is going to be incredibly gross, but we don't store instances of job datums in IDs.
+		var/list/uniforms
 		var/datum/job/job = job_master.GetJobByType(I.job_access_type)
 		if(job)
-			var/list/uniforms = find_uniforms(I.military_rank, I.military_branch, job.department_flag)
-			if(uniforms.len) // Any uniforms stored?
-				state = 1
-				var/choice = input(user,"Please select the uniform you wish to receive") as null|anything in uniforms
-				if(choice)
-					spawn_uniform(uniforms[choice])
-				state = 0
-			else
-				to_chat(user, "<span class='warning'>\the [src] cannot find any valid uniforms for [I.registered_name]'\s ID!</span>")
-				playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
-				flick(icon_deny, src)
-		else
-			to_chat(user, "<span class='warning'>\the [src] does not accept [I.registered_name]'\s ID!</span>")
+			uniforms = find_uniforms(I.military_rank, I.military_branch, job.department_flag)
+
+		if(!uniforms)
+			to_chat(user, "<span class='warning'>\The [src] does not accept [I.registered_name]'s ID!</span>")
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
 			flick(icon_deny, src)
+		else if(!uniforms.len) // Any uniforms stored?
+			to_chat(user, "<span class='warning'>\The [src] cannot find any valid uniforms for [I.registered_name]'s ID!</span>")
+			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
+			flick(icon_deny, src)
+		else
+			current_user = user
+			spawn(15 SECONDS) //timeout so that if someone logs at the input dialog it doesn't freeze out everyone else
+				current_user = null
+
+			var/choice = input(user,"Please select the uniform you wish to receive") as null|anything in uniforms
+			if(choice && (!current_user || current_user == user))
+				spawn_uniform(uniforms[choice])
+
+			current_user = null
+
 
 /*	Outfit structures
 	branch
@@ -68,27 +75,29 @@
 
 	if(user_outfit == mil_uniforms) //We haven't found a branch
 		return null //Return no uniforms, which will cause the machine to spit out an error.
-	else // we have found a branch.
-		if(department == COM) //Command only has one variant and they have to be an officer
-			for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-				if(child.departments & COM)
-					user_outfit = child
-		else
-			var/tmp_department = department
-			tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
 
-			for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-				if(child.departments & tmp_department)
-					user_outfit = child
-					break
+	// we have found a branch.
+	if(department == COM) //Command only has one variant and they have to be an officer
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+			if(child.departments & COM)
+				user_outfit = child
+	else
+		var/tmp_department = department
+		tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
 
-			if(user_rank.sort_order >= 11) //user is an officer
-				if(user_outfit.children[1]) // officer outfit exists
-					user_outfit = user_outfit.children[1]
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+			if(child.departments & tmp_department)
+				user_outfit = child
+				break
 
-					if(department & COM) //user is in command of their department
-						if(user_outfit.children[1])// Command outfit exists
-							user_outfit = user_outfit.children[1]
+		if(user_rank.sort_order >= 11) //user is an officer
+			if(user_outfit.children[1]) // officer outfit exists
+				user_outfit = user_outfit.children[1]
+
+				if(department & COM) //user is in command of their department
+					if(user_outfit.children[1])// Command outfit exists
+						user_outfit = user_outfit.children[1]
+
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 
 /obj/machinery/uniform_vendor/proc/populate_uniforms(var/decl/hierarchy/mil_uniform/user_outfit)
