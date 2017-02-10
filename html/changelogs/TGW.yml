@@ -1,0 +1,6 @@
+author: TheGreyWolf
+
+delete-after: True
+
+changes: 
+  - tweak: "Made it so only unbranded, NT and Resomi specific prosthetic brands can be made during gameplay, chargen not changed."
