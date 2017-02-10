@@ -1470,12 +1470,12 @@
 "Cn" = (/obj/random/technology_scanner,/turf/simulated/floor/plating,/area/vacant/monitoring)
 "Co" = (/obj/machinery/door/airlock/engineering{name = "Third Deck Shield Generator"; req_access = list(11)},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/shield/fourthdeck)
 "Cp" = (/turf/simulated/wall/r_wall,/area/shield/fourthdeck)
-"Cq" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 5},/area/shuttle/escape_pod8/station)
-"Cr" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 8},/area/shuttle/escape_pod8/station)
+"Cq" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 1; icon_state = "diagonalWall3"},/area/shuttle/escape_pod8/station)
+"Cr" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 8; icon_state = "diagonalWall3"},/area/shuttle/escape_pod8/station)
 "Cs" = (/obj/effect/floor_decal/corner/red,/obj/effect/floor_decal/corner/white{dir = 8},/obj/effect/floor_decal/corner/red{dir = 1},/obj/machinery/embedded_controller/radio/airlock/docking_port{frequency = 1331; id_tag = "rescue_shuttle_dock_airlock"; pixel_x = -24; pixel_y = -6; req_access = list(0); req_one_access = list(13); tag_airpump = "rescue_shuttle_dock_pump"; tag_chamber_sensor = "rescue_shuttle_dock_sensor"; tag_exterior_door = "rescue_shuttle_dock_outer"; tag_interior_door = "rescue_shuttle_dock_inner"},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/hallway/primary/fourthdeck/center)
 "Ct" = (/obj/effect/floor_decal/corner/red{dir = 8},/obj/effect/floor_decal/corner/white,/obj/effect/floor_decal/corner/red{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/hallway/primary/fourthdeck/center)
-"Cu" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 5},/area/shuttle/escape_pod9/station)
-"Cv" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 8},/area/shuttle/escape_pod9/station)
+"Cu" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 1; icon_state = "diagonalWall3"},/area/shuttle/escape_pod9/station)
+"Cv" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 8; icon_state = "diagonalWall3"},/area/shuttle/escape_pod9/station)
 "Cw" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "Cx" = (/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "Cy" = (/obj/structure/closet/crate,/turf/simulated/floor/tiled,/area/quartermaster/storage)
@@ -1776,3 +1776,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
