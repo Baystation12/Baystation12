@@ -126,7 +126,7 @@
 		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
 			camera.status = 0
 
-	..()
+	..() // Laws, among other things, are initialized in parent New()
 	init()
 	initialize_components()
 	//if(!unfinished)
