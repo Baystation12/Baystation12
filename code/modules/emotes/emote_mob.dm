@@ -51,7 +51,7 @@
 		return
 
 	if(m_type == AUDIBLE_MESSAGE && is_muzzled())
-		audible_message("<b>\The [src]</b> makes a noise.", null, "You hear a muffled sound.")
+		audible_message("<b>\The [src]</b> makes a muffled sound.")
 		return
 	else
 		use_emote.do_emote(src, message)
