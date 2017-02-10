@@ -39,6 +39,9 @@
 //For members of the medical department
 #define MEDICAL_ROLES list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
 
+//For members of the medical department and roboticists
+#define ALL_MEDICAL_ROLES list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Roboticist")
+
 //For members of the engineering department
 #define ENGINEERING_ROLES list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
 

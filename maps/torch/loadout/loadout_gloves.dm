@@ -10,11 +10,11 @@
 
 /datum/gear/gloves/latex
 	cost = 3
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Roboticist")
+	allowed_roles = ALL_MEDICAL_ROLES
 
 /datum/gear/gloves/nitrile
 	cost = 3
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Roboticist")
+	allowed_roles = ALL_MEDICAL_ROLES
 
 /datum/gear/gloves/rainbow
 	allowed_roles = RESTRICTED_ROLES
