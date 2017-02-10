@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - maptweak: "The corners of Escape Pods 3 and 4 should now no longer appear to lead to space."
