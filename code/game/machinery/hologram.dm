@@ -60,8 +60,6 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 /obj/machinery/hologram/holopad/attack_hand(var/mob/living/carbon/human/user) //Carn: Hologram requests.
 	if(!istype(user))
 		return
-	if(masters.len)
-		to_chat(user, "<span class='info'>This holopad is already in use. Please wait or try again from an alternate holopad.</span>")
 	if(incoming_connection&&caller_id)
 		visible_message("The pad hums quietly as it establishes a connection.")
 		if(caller_id.loc!=sourcepad.loc)
@@ -152,16 +150,16 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 		if (user.holo)
 			to_chat(user, "<span class='danger'>ERROR:</span> Image feed in progress.")
 			return
-		create_holo(user)//Create one.
 		src.visible_message("A holographic image of [user] flicks to life right before your eyes!")
+		create_holo(user)//Create one.
 	else
 		to_chat(user, "<span class='danger'>ERROR:</span> Unable to project hologram.")
 	return
 
 /obj/machinery/hologram/holopad/proc/activate_holocall(mob/living/carbon/caller_id)
 	if(caller_id)
-		create_holo(0,caller_id)//Create one.
 		src.visible_message("A holographic image of [caller_id] flicks to life right before your eyes!")
+		create_holo(0,caller_id)//Create one.
 	else
 		to_chat(caller_id, "<span class='danger'>ERROR:</span> Unable to project hologram.")
 	return
@@ -213,7 +211,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	for(var/mob/living/silicon/ai/master in masters)
 		var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
 		master.show_message(rendered, type)
-	if(findtext(msg, "Holopad received,")||findtext(msg, "A holographic image"))
+	if(findtext(msg, "Holopad received,"))
 		return
 	for(var/mob/living/carbon/master in masters)
 		var/rendered = "<i><span class='game say'>The holographic image of <span class='message'>[msg]</span></span></i>"
