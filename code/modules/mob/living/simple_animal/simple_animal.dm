@@ -332,7 +332,7 @@
 	..()
 	updatehealth()
 
-/mob/living/simple_anima/adjustOxyLoss(damage)
+/mob/living/simple_animal/adjustOxyLoss(damage)
 	..()
 	updatehealth()
 
