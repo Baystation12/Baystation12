@@ -31,7 +31,7 @@
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
 		for(I in src.loc)
-			if(I.density || I.anchored || I == src) continue
+			if(I.density || I.anchored || !I.simulated || I == src) continue
 			I.forceMove(src)
 
 /obj/structure/closet/examine(mob/user)
