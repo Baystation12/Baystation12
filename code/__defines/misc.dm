@@ -192,3 +192,7 @@
 #define EASTDOWN (EAST|DOWN)
 #define SOUTHDOWN (SOUTH|DOWN)
 #define WESTDOWN (WEST|DOWN)
+
+#define EX_ACT_MAJOR    1
+#define EX_ACT_MODERATE 2
+#define EX_ACT_MINOR    3
