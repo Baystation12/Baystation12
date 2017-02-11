@@ -249,7 +249,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	return B
 
 /mob/living/carbon/human/proc/get_effective_blood_volume()
-	var/obj/item/organ/internal/heart/heart = get_organ(BP_HEART)
+	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
 	var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
 	if(!heart || heart.is_broken())
 		blood_volume *= 0.3
