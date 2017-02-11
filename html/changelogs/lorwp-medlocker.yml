@@ -3,4 +3,4 @@ author: Lorwp
 delete-after: True
 
 changes:
-    -bugfix: "Added Basic supplies to Department Medical Lockers"
+    - bugfix: "Added Basic supplies to Department Medical Lockers"
