@@ -46,7 +46,7 @@
 #define ENGINEERING_ROLES list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
 
 //For members of Engineering, Cargo, and Research
-#define TECHNICAL_ROLES list("Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician", "Supply Assistant", "Prospector", "Research Assistant", "Merchant", "Research Director", "Senior Researcher", "Scientist", "Chief Engineer")
+#define TECHNICAL_ROLES list("Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician", "Supply Assistant", "Prospector", "Research Assistant", "Merchant", "Research Director", "Senior Researcher", "Scientist", "Chief Engineer", "Sanitation Technician")
 
 //For members of the security department
 #define SECURITY_ROLES list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
