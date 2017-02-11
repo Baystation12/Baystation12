@@ -244,6 +244,7 @@
 	desc = "It's wall-mounted storage unit for first aid supplies."
 
 	will_contain = list(
-		/obj/random/firstaid,
-		/obj/random/medical/lite = 12
+		/obj/item/stack/medical/bruise_pack = 2,
+		/obj/item/stack/medical/ointment = 2,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4
 	)
