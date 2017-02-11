@@ -1,11 +1,11 @@
 /obj/item/modular_computer/proc/update_verbs()
 	verbs.Cut()
 	if(ai_slot)
-		verbs |= new/obj/item/modular_computer/verb/eject_ai()
+		verbs |= /obj/item/modular_computer/verb/eject_ai
 	if(portable_drive)
-		verbs |= new/obj/item/modular_computer/verb/eject_usb()
+		verbs |= /obj/item/modular_computer/verb/eject_usb
 	if(card_slot)
-		verbs |= new/obj/item/modular_computer/verb/eject_id()
+		verbs |= /obj/item/modular_computer/verb/eject_id
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/verb/eject_id()
@@ -110,13 +110,16 @@
 		if(response == "Yes")
 			turn_on(user)
 
+/obj/item/modular_computer/attack_ai(var/mob/user)
+	return attack_self(user)
+
 /obj/item/modular_computer/attack_hand(var/mob/user)
 	if(anchored)
 		return attack_self(user)
 	return ..()
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
-/obj/item/modular_computer/attack_self(mob/user)
+/obj/item/modular_computer/attack_self(var/mob/user)
 	if(enabled && screen_on)
 		ui_interact(user)
 	else if(!enabled && screen_on)
