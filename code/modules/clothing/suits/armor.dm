@@ -313,6 +313,11 @@
 	desc = "A synthetic armor vest. This one is marked with the crest of Proxima Centauri Risk Control, a private security firm."
 	icon_state = "pcrcvest"
 
+/obj/item/clothing/suit/armor/vest/press
+	name = "press armored vest"
+	desc = "A synthetic armor vest. This one is blue and has patches with the word 'PRESS' on the back and front."
+	icon_state = "pvest"
+
 /obj/item/clothing/suit/storage/vest
 	name = "webbed armor vest"
 	desc = "A synthetic armor vest. This one has added webbing and ballistic plates."
