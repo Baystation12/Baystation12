@@ -11,21 +11,21 @@
 
 /datum/malf_research_ability/passive/intellicard_interception
 	ability = new/datum/game_mode/malfunction/verb/intellicard_interception()
-	price = 100
+	price = 250
 	next = new/datum/malf_research_ability/passive/subtle_algorithms()
 	name = "T1 - Intellicard Interception"
 
 
 /datum/malf_research_ability/passive/subtle_algorithms
 	ability = new/datum/game_mode/malfunction/verb/subtle_algorithms()
-	price = 1250
+	price = 1000
 	next = new/datum/malf_research_ability/passive/relay_suppression()
 	name = "T2 - Subtle Algorithms"
 
 
 /datum/malf_research_ability/passive/relay_suppression
 	ability = null
-	price = 2500
+	price = 2000
 	next = new/datum/malf_research_ability/passive/relay_override()
 	name = "T3 - Relay Suppression"
 
@@ -39,7 +39,7 @@
 
 /datum/malf_research_ability/passive/relay_override
 	ability = null
-	price = 5000
+	price = 4000
 	name = "T4 - Relay Override"
 
 /datum/malf_research_ability/passive/relay_override/research_finished(var/mob/living/silicon/ai/user)

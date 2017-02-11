@@ -12,34 +12,34 @@
 
 /datum/malf_research_ability/manipulation/electrical_pulse
 	ability = new/datum/game_mode/malfunction/verb/electrical_pulse()
-	price = 50
+	price = 250
 	next = new/datum/malf_research_ability/manipulation/reboot_camera()
 	name = "T1 - Electrical Pulse"
 
 
 /datum/malf_research_ability/manipulation/reboot_camera
 	ability = new/datum/game_mode/malfunction/verb/reboot_camera()
-	price = 1200
+	price = 1000
 	next = new/datum/malf_research_ability/manipulation/emergency_forcefield()
 	name = "T2 - Reboot Camera"
 
 
 /datum/malf_research_ability/manipulation/emergency_forcefield
 	ability = new/datum/game_mode/malfunction/verb/emergency_forcefield()
-	price = 3000
+	price = 2000
 	next = new/datum/malf_research_ability/manipulation/machine_overload()
 	name = "T3 - Emergency Forcefield"
 
 
 /datum/malf_research_ability/manipulation/machine_overload
 	ability = new/datum/game_mode/malfunction/verb/machine_overload()
-	price = 6000
+	price = 4000
 	next = new/datum/malf_research_ability/manipulation/machine_upgrade()
 	name = "T4 - Machine Overload"
 
 /datum/malf_research_ability/manipulation/machine_upgrade
 	ability = new/datum/game_mode/malfunction/verb/machine_upgrade()
-	price = 7500
+	price = 4000
 	name = "T5 - Machine Upgrade"
 
 // END RESEARCH DATUMS
@@ -57,11 +57,11 @@
 	for(var/obj/machinery/power/apc/AP in machines)
 		if(prob(5))
 			AP.overload_lighting()
-		if(prob(1) && prob(1)) // Very very small chance to actually destroy the APC.
+		if(prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.
 			AP.set_broken()
 	user.hacking = 1
 	log_ability_use(user, "electrical pulse")
-	spawn(150)
+	spawn(15 SECONDS)
 		user.hacking = 0
 
 /datum/game_mode/malfunction/verb/reboot_camera(var/obj/machinery/camera/target in cameranet.cameras)
@@ -104,7 +104,7 @@
 	new/obj/machinery/shield/malfai(T)
 	user.hacking = 1
 	log_ability_use(user, "emergency forcefield", T)
-	spawn(20)
+	spawn(2 SECONDS)
 		user.hacking = 0
 
 
@@ -176,7 +176,7 @@
 
 	log_ability_use(user, "machine overload", M)
 	M.visible_message("<span class='notice'>BZZZZZZZT</span>")
-	spawn(50)
+	spawn(5 SECONDS)
 		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity),round(explosion_intensity * 2))
 		if(M)
 			qdel(M)
