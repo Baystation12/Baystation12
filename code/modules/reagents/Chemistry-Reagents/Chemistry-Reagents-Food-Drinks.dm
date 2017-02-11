@@ -1913,6 +1913,17 @@
 	glass_name = "Screwdriver"
 	glass_desc = "A simple, yet superb mixture of Vodka and orange juice. Just the thing for the tired engineer."
 
+/datum/reagent/ethanol/ships_surgeon
+	name = "Ship's Surgeon"
+	id = "shipssurgeon"
+	description = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
+	taste_description = "black comedy"
+	color = "#524D0F"
+	strength = 15
+
+	glass_name = "ship's surgeon"
+	glass_desc = "Rum qualified for surgical practice by Dr. Gibb. Smooth and steady."
+
 /datum/reagent/ethanol/silencer
 	name = "Silencer"
 	id = "silencer"
