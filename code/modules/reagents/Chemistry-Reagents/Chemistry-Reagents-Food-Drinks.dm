@@ -1918,7 +1918,7 @@
 	id = "shipssurgeon"
 	description = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
 	taste_description = "black comedy"
-	color = "524D0F"
+	color = "#524D0F"
 	strength = 15
 
 	glass_name = "ship's surgeon"
