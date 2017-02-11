@@ -270,24 +270,36 @@
 	max_duration = 100
 
 /datum/surgery_step/generic/cauterize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected && affected.open && target_zone != BP_MOUTH
+
+	if(target_zone == BP_MOUTH)
+		return FALSE
+
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(!affected)
+		return FALSE
+
+	if(affected.is_stump()) // Copypasting some stuff here to avoid having to modify ..() for a single surgery
+		return (!isslime(target) && target_zone != BP_EYES && affected.robotic < ORGAN_ROBOT && (affected.status & ORGAN_ARTERY_CUT))
+	else
+		return (..() && affected.open)
+
 
 /datum/surgery_step/generic/cauterize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] is beginning to cauterize the incision on [target]'s [affected.name] with \the [tool]." , \
-	"You are beginning to cauterize the incision on [target]'s [affected.name] with \the [tool].")
+	user.visible_message("[user] is beginning to cauterize \the [target]'s [affected.name] with \the [tool]." , \
+	"You are beginning to cauterize \the [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("Your [affected.name] is being burned!",40,affecting = affected)
 	..()
 
 /datum/surgery_step/generic/cauterize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] cauterizes the incision on [target]'s [affected.name] with \the [tool].</span>", \
-	"<span class='notice'>You cauterize the incision on [target]'s [affected.name] with \the [tool].</span>")
+	user.visible_message("<span class='notice'>[user] cauterizes \the [target]'s [affected.name] with \the [tool].</span>", \
+	"<span class='notice'>You cauterize \the [target]'s [affected.name] with \the [tool].</span>")
 	affected.open = 0
 	affected.germ_level = 0
 	affected.status &= ~ORGAN_BLEEDING
+	if(affected.is_stump())
+		affected.status &= ~ORGAN_ARTERY_CUT
 
 /datum/surgery_step/generic/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

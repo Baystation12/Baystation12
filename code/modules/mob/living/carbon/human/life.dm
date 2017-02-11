@@ -71,7 +71,6 @@
 
 		//Organs and blood
 		handle_organs()
-		handle_blood()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		handle_shock()
