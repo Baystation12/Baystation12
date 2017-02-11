@@ -98,6 +98,9 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				if(targetpad==src)
 					to_chat(user, "<span class='info'>Using such sophisticated technology, just to talk to yourself seems a bit silly.</span>")
 					return
+				if(targetpad.caller_id)
+					to_chat(user, "<span class='info'>The pad flashes a busy sign. Maybe you should try again later..</span>")
+					return
 				if(targetpad)
 					make_call(targetpad, user)
 			else
