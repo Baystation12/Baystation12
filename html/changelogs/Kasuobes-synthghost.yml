@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - tweak: "Removed ghost verb from AI and pAI due to overlapping function with wipe core and wipe software verbs."
