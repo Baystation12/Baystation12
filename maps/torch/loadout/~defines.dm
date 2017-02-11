@@ -30,6 +30,8 @@
 
 #undef ENGINEERING_ROLES
 
+#undef TECHNICAL_ROLES
+
 #undef SECURITY_ROLES
 
 #undef SUPPLY_ROLES

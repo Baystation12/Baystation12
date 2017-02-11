@@ -39,11 +39,14 @@
 //For members of the medical department
 #define MEDICAL_ROLES list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor")
 
-//For members of the medical department and roboticists
-#define STERILE_ROLES list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Roboticist", "Research Director", "Senior Researcher", "Scientist")
+//For members of the medical department, roboticists, and some Research
+#define STERILE_ROLES list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Roboticist", "Research Director", "Senior Researcher", "Scientist","Research Assistant")
 
 //For members of the engineering department
 #define ENGINEERING_ROLES list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
+
+//For members of Engineering and Research
+#define TECHNICAL_ROLES list("Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician", "Supply Assistant", "Prospector", "Research Assistant", "Merchant", "Research Director", "Senior Researcher", "Chief Engineer")
 
 //For members of the security department
 #define SECURITY_ROLES list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
