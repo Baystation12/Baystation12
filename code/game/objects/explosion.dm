@@ -9,14 +9,17 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		// Handles recursive propagation of explosions.
 		if(z_transfer)
-			var/adj_dev   = max(0, devastation_range - 2 - (shaped ? 2 : 0))
-			var/adj_heavy = max(0, heavy_impact_range - 2 - (shaped ? 2 : 0))
-			var/adj_light = max(0, light_impact_range - 2 - (shaped ? 2 : 0))
+			var/adj_dev   = max(0, devastation_range * 0.35 - (shaped ? 2 : 0))
+			var/adj_heavy = max(0, ((adj_dev*1.25/devastation_range) * heavy_impact_range) - (shaped ? 2 : 0) )
+			var/adj_light = max(0, ((adj_heavy*1.25/heavy_impact_range) * light_impact_range) - (shaped ? 2 : 0) )
+			var/adj_flash = max(0, ((adj_light*1.25/light_impact_range) * flash_range) - (shaped ? 2 : 0) )
+
+
 			if(adj_dev > 0 || adj_heavy > 0)
 				if(HasAbove(epicenter.z) && z_transfer & UP)
-					explosion(GetAbove(epicenter), adj_dev, adj_heavy, adj_light, max(0, flash_range - 2), 0, UP, shaped)
+					explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(flash_range), 0, UP, shaped)
 				if(HasBelow(epicenter.z) && z_transfer & DOWN)
-					explosion(GetBelow(epicenter), adj_dev, adj_heavy, adj_light, max(0, flash_range - 2), 0, DOWN, shaped)
+					explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(flash_range), 0, DOWN, shaped)
 
 		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
 
