@@ -1029,7 +1029,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!supplied_wound)
 		supplied_wound = createwound(PIERCE, W.w_class * 5)
 
-	if(W in supplied_wound.embedded_objects) // Just in case.
+	if(!supplied_wound || (W in supplied_wound.embedded_objects)) // Just in case.
 		return
 
 	supplied_wound.embedded_objects += W
