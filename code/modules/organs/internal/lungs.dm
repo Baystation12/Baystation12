@@ -51,14 +51,14 @@
 	if(is_bruised())
 		if(prob(2))
 			owner.visible_message(
-				"<B>\The [src]</B> coughs up blood!",
+				"<B>\The [owner]</B> coughs up blood!",
 				"<span class='warning'>You cough up blood!</span>",
 				"You hear someone coughing!",
 			)
 			owner.drip(10)
 		if(prob(4))
 			owner.visible_message(
-				"<B>\The [src]</B> gasps for air!",
+				"<B>\The [owner]</B> gasps for air!",
 				"<span class='danger'>You can't breathe!</span>",
 				"You hear someone gasp for air!",
 			)
