@@ -272,15 +272,6 @@ var/last_message_id = 0
 	for (var/datum/comm_message_listener/l in comm_message_listeners)
 		l.Add(message)
 
-	for (var/obj/machinery/modular_computer/console/preset/command/main/computer in global_modular_computers)
-		if(!(computer.stat & (BROKEN | NOPOWER)) && computer.cpu)
-			if(computer.cpu.hard_drive)
-				var/datum/computer_file/program/comm/C = locate(/datum/computer_file/program/comm) in computer.cpu.hard_drive.stored_files
-				if(C)
-					var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper(computer.loc)
-					intercept.name = message_title
-					intercept.info = message_text
-
 /datum/comm_message_listener
 	var/list/messages
 
@@ -318,8 +309,6 @@ var/last_message_id = 0
 
 /proc/cancel_call_proc(var/mob/user)
 	if (!ticker || !evacuation_controller)
-		return
-	if((ticker.mode.name == "blob"))
 		return
 
 	if(evacuation_controller.cancel_evacuation())
@@ -359,10 +348,6 @@ var/last_message_id = 0
 
 	if(evacuation_controller.is_evacuating())
 		to_chat(user, "An evacuation is already underway.")
-		return
-
-	if(ticker.mode.name == "blob")
-		to_chat(user, "Under directive 7-10, [station_name()] is quarantined until further notice.")
 		return
 
 	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))

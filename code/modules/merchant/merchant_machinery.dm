@@ -20,7 +20,3 @@
 		if(a == src || (!istype(a,/obj) && !istype(a,/mob/living)) || istype(a,/obj/effect))
 			continue
 		. += a
-
-/obj/machinery/modular_computer/console/preset/civilian/merchant/install_programs()
-	..()
-	cpu.hard_drive.store_file(new/datum/computer_file/program/merchant())
