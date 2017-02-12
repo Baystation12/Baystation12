@@ -920,7 +920,7 @@
 	name = "lift (upper deck)"
 	lift_floor_label = "Deck 1"
 	lift_floor_name = "Operations Deck"
-	lift_announce_str = "Arriving at Operations Deck: Infirmary. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory. Diplomatic Quarters. Captain's Mess. Pilot's Lounge."
+	lift_announce_str = "Arriving at Operations Deck: Infirmary. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory. Diplomatic Quarters. Officer's Mess. Pilot's Lounge."
 
 /area/turbolift/torch_second
 	name = "lift (maintenance)"
@@ -947,10 +947,13 @@
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
-/area/command/captainmess
-	name = "Captain's Mess"
+/area/command/officermess
+	name = "Officer's Mess"
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
+
+/area/command/officermess/chief
+	name = "Chief Petty Officer's Mess"
 
 /area/command/pilot
 	name = "\improper Pilot Lounge"
@@ -1068,10 +1071,6 @@
 /area/vacant/briefing
 	name = "\improper Briefing Room"
 	icon_state = "conference"
-
-/area/vacant/mess
-	name = "\improper Officer's Mess"
-	icon_state = "bar"
 
 /area/vacant/missile
 	name = "\improper Third Deck Port Missile Pod"
