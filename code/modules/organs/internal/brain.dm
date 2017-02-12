@@ -124,3 +124,39 @@
 	desc = "A tightly furled roll of paper, covered with indecipherable runes."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
+
+/obj/item/organ/internal/brain/process()
+	if(!owner || !owner.should_have_organ(BP_HEART))
+		return
+
+	// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
+	var/blood_volume = owner.get_effective_blood_volume()
+	if(!owner.internal_organs_by_name[BP_HEART])
+		if(blood_volume > BLOOD_VOLUME_SURVIVE)
+			blood_volume = BLOOD_VOLUME_SURVIVE
+		owner.Paralyse(3)
+
+	//Effects of bloodloss
+	switch(blood_volume)
+		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+			if(prob(1))
+				to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woosey","faint")]</span>")
+			if(owner.getOxyLoss() < 20)
+				owner.adjustOxyLoss(3)
+		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+			owner.eye_blurry = max(owner.eye_blurry,6)
+			if(owner.getOxyLoss() < 50)
+				owner.adjustOxyLoss(10)
+			owner.adjustOxyLoss(1)
+			if(prob(15))
+				owner.Paralyse(rand(1,3))
+				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
+		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+			owner.adjustOxyLoss(5)
+			if(owner.getToxLoss() < 15)
+				owner.adjustToxLoss(3)
+			if(prob(15))
+				owner.Paralyse(3,5)
+				to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woosey","faint")]</span>")
+		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
+			owner.setOxyLoss(max(owner.getOxyLoss(), owner.maxHealth+10))

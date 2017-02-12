@@ -133,8 +133,8 @@
 "cC" = (/turf/simulated/wall/r_wall,/area/maintenance/fourthdeck/starboard)
 "cD" = (/obj/structure/closet/toolcloset,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/starboard)
 "cE" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/starboard)
-"cF" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
-"cG" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
+"cF" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/structure/anomaly_container,/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
+"cG" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/structure/anomaly_container,/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
 "cH" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
 "cI" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/quartermaster/expedition/storage)
 "cJ" = (/obj/structure/bed/chair{dir = 4},/obj/machinery/camera/network/calypso{c_tag = "Calypso - Cockpit"; dir = 1},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/machinery/firealarm{dir = 8; pixel_x = -24},/turf/simulated/floor/tiled,/area/calypso_hangar/start)
@@ -1203,7 +1203,7 @@
 "xg" = (/obj/random/closet,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
 "xh" = (/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
 "xi" = (/obj/machinery/vending/tool,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/plating,/area/shuttle/petrov/docked)
-"xj" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/machinery/light/small,/turf/simulated/floor/plating,/area/shuttle/petrov/docked)
+"xj" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/machinery/light/small,/obj/structure/anomaly_container,/turf/simulated/floor/plating,/area/shuttle/petrov/docked)
 "xk" = (/obj/machinery/portable_atmospherics/powered/scrubber,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/plating,/area/shuttle/petrov/docked)
 "xl" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/reinforced,/area/shuttle/petrov/docked)
 "xm" = (/turf/simulated/floor/reinforced,/area/shuttle/petrov/docked)
@@ -1470,12 +1470,12 @@
 "Cn" = (/obj/random/technology_scanner,/turf/simulated/floor/plating,/area/vacant/monitoring)
 "Co" = (/obj/machinery/door/airlock/engineering{name = "Third Deck Shield Generator"; req_access = list(11)},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/shield/fourthdeck)
 "Cp" = (/turf/simulated/wall/r_wall,/area/shield/fourthdeck)
-"Cq" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 5},/area/shuttle/escape_pod8/station)
-"Cr" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 8},/area/shuttle/escape_pod8/station)
+"Cq" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 1; icon_state = "diagonalWall3"},/area/shuttle/escape_pod8/station)
+"Cr" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 8; icon_state = "diagonalWall3"},/area/shuttle/escape_pod8/station)
 "Cs" = (/obj/effect/floor_decal/corner/red,/obj/effect/floor_decal/corner/white{dir = 8},/obj/effect/floor_decal/corner/red{dir = 1},/obj/machinery/embedded_controller/radio/airlock/docking_port{frequency = 1331; id_tag = "rescue_shuttle_dock_airlock"; pixel_x = -24; pixel_y = -6; req_access = list(0); req_one_access = list(13); tag_airpump = "rescue_shuttle_dock_pump"; tag_chamber_sensor = "rescue_shuttle_dock_sensor"; tag_exterior_door = "rescue_shuttle_dock_outer"; tag_interior_door = "rescue_shuttle_dock_inner"},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/hallway/primary/fourthdeck/center)
 "Ct" = (/obj/effect/floor_decal/corner/red{dir = 8},/obj/effect/floor_decal/corner/white,/obj/effect/floor_decal/corner/red{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/hallway/primary/fourthdeck/center)
-"Cu" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 5},/area/shuttle/escape_pod9/station)
-"Cv" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/dark{dir = 8},/area/shuttle/escape_pod9/station)
+"Cu" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 1; icon_state = "diagonalWall3"},/area/shuttle/escape_pod9/station)
+"Cv" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall{dir = 8; icon_state = "diagonalWall3"},/area/shuttle/escape_pod9/station)
 "Cw" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "Cx" = (/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "Cy" = (/obj/structure/closet/crate,/turf/simulated/floor/tiled,/area/quartermaster/storage)
@@ -1565,14 +1565,14 @@
 "Ee" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "Ef" = (/obj/random/closet,/obj/random/maintenance/solgov,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
 "Eg" = (/obj/effect/floor_decal/corner/yellow{dir = 8},/obj/machinery/light,/obj/structure/sign/deck/fourth{pixel_y = -32},/turf/simulated/floor/tiled,/area/hallway/primary/fourthdeck/center)
-"Eo" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
-"En" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/vacant/monitoring)
-"Em" = (/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/vacant/monitoring)
-"El" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
-"Ek" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
-"Ej" = (/obj/random/junk,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
-"Ei" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
 "Eh" = (/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
+"Ei" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
+"Ej" = (/obj/random/junk,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
+"Ek" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
+"El" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
+"Em" = (/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/vacant/monitoring)
+"En" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/vacant/monitoring)
+"Eo" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -1776,3 +1776,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

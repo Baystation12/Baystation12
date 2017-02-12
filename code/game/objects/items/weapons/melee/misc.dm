@@ -32,27 +32,26 @@
 	icon_state = "chain"
 	item_state = "whip"
 
-/obj/item/weapon/melee/officersword
+/obj/item/weapon/material/sword/replica/officersword
 	name = "fleet officer's sword"
 	desc = "A polished sword issued to officers of the fleet."
 	icon_state = "officersword"
 	item_state = "officersword"
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
+	applies_material_colour = FALSE
 
-/obj/item/weapon/melee/officersword/marine
+/obj/item/weapon/material/sword/replica/officersword/marine
 	name = "marine NCO's sword"
 	desc = "A polished sword issued to SCG Marine NCOs."
 	icon_state = "marinesword"
 
-/obj/item/weapon/melee/officersword/marineofficer
+/obj/item/weapon/material/sword/replica/officersword/marineofficer
 	name = "marine officer's sword"
 	desc = "A curved sword issued to SCG Marine officers."
 	icon_state = "marineofficersword"
 	item_state = "marineofficersword"
 
-/obj/item/weapon/melee/officersword/pettyofficer
+/obj/item/weapon/material/sword/replica/officersword/pettyofficer
 	name = "chief petty officer's cutlass"
 	desc = "A polished cutlass issued to chief petty officers of the fleet."
 	icon_state = "pettyofficersword"

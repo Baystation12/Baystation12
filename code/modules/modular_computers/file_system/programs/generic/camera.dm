@@ -2,26 +2,23 @@
 /proc/get_camera_access(var/network)
 	if(!network)
 		return 0
-
 	. = using_map.get_network_access(network)
 	if(.)
 		return
 
 	switch(network)
-		if(NETWORK_THUNDER)
-			return 0
-		if(NETWORK_ENGINE,NETWORK_ENGINEERING,NETWORK_ENGINEERING_OUTPOST,NETWORK_ALARM_ATMOS,NETWORK_ALARM_FIRE,NETWORK_ALARM_POWER)
+		if(NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
 			return access_engine
+		if(NETWORK_CRESCENT, NETWORK_ERT)
+			return access_cent_specops
 		if(NETWORK_MEDICAL)
 			return access_medical
-		if(NETWORK_RESEARCH,NETWORK_RESEARCH_OUTPOST)
-			return access_research
-		if(NETWORK_MINE,NETWORK_SUPPLY,NETWORK_CIVILIAN_WEST)
+		if(NETWORK_MINE)
 			return access_mailsorting // Cargo office - all cargo staff should have access here.
-		if(NETWORK_COMMAND,NETWORK_TELECOM)
-			return access_heads
-		if(NETWORK_CRESCENT,NETWORK_ERT)
-			return access_cent_specops
+		if(NETWORK_RESEARCH)
+			return access_research
+		if(NETWORK_THUNDER)
+			return 0
 
 	return access_security // Default for all other networks
 

@@ -209,7 +209,7 @@ datum/controller/vote
 					tertiary_mode = .[3]
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
-						init_shift_change(null, 1)
+						init_autotransfer()
 					else if(.[1] == "Add Antagonist")
 						spawn(10)
 							autoaddantag()

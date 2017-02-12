@@ -103,7 +103,7 @@
 /obj/structure/ladder/proc/climbLadder(var/mob/M, var/target_ladder)
 	var/turf/T = get_turf(target_ladder)
 	for(var/atom/A in T)
-		if(!A.CanPass(M))
+		if(!A.CanPass(M, M.loc, 1.5, 0))
 			to_chat(M, "<span class='notice'>\The [A] is blocking \the [src].</span>")
 			return FALSE
 	return M.Move(T)

@@ -928,31 +928,7 @@ About the new airlock wires panel:
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40,src))
 				to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
-
-				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
-				if (istype(da, /obj/structure/door_assembly/multi_tile))
-					da.set_dir(src.dir)
-
- 				da.anchored = 1
-				if(mineral)
-					da.glass = mineral
-				//else if(glass)
-				else if(glass && !da.glass)
-					da.glass = 1
-				da.state = 1
-				da.created_name = src.name
-				da.update_state()
-
-				if(operating == -1 || (stat & BROKEN))
-					new /obj/item/weapon/circuitboard/broken(src.loc)
-					operating = 0
-				else
-					if (!electronics) create_electronics()
-
-					electronics.dropInto(loc)
-					electronics = null
-
-				qdel(src)
+				deconstruct(user)
 				return
 		else if(arePowerSystemsOn())
 			to_chat(user, "<span class='notice'>The airlock's motors resist your efforts to force it.</span>")
@@ -997,6 +973,38 @@ About the new airlock wires panel:
 		..()
 	return
 
+/obj/machinery/door/airlock/deconstruct(mob/user, var/moved = FALSE)
+	var/obj/structure/door_assembly/da = new assembly_type(src.loc)
+	if (istype(da, /obj/structure/door_assembly/multi_tile))
+		da.set_dir(src.dir)
+	if(mineral)
+		da.glass = mineral
+	//else if(glass)
+	else if(glass && !da.glass)
+		da.glass = 1
+
+	if(moved)
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, src)
+		s.start()
+	else
+		da.anchored = 1
+	da.state = 1
+	da.created_name = src.name
+	da.update_state()
+
+	if(operating == -1 || (stat & BROKEN))
+		new /obj/item/weapon/circuitboard/broken(src.loc)
+		operating = 0
+	else
+		if (!electronics) create_electronics()
+
+		electronics.dropInto(loc)
+		electronics = null
+
+	qdel(src)
+
+	return da
 /obj/machinery/door/airlock/phoron/attackby(C as obj, mob/user as mob)
 	if(C)
 		ignite(is_hot(C))
