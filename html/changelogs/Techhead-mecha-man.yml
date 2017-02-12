@@ -1,0 +1,6 @@
+author: Techhead
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added 'Mech Pilot' as a Roboticist alt-title."
