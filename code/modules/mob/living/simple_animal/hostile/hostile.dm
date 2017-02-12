@@ -118,8 +118,8 @@
 
 	return L
 
-/mob/living/simple_animal/hostile/death()
-	..()
+/mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
+	..(gibbed, deathmessage, show_dead_message)
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/Life()

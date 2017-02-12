@@ -4,7 +4,7 @@
 
 /obj/item/organ/external/proc/is_damageable(var/additional_damage = 0)
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
-	return (vital || (robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
+	return ((robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
 
 /obj/item/organ/external/take_damage(brute, burn, damage_flags, used_weapon = null)
 	brute = round(brute * brute_mod, 0.1)
@@ -25,12 +25,18 @@
 		cur_damage += burn_dam
 	if(internal_organs && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
 		// Damage an internal organ
-		if(internal_organs && internal_organs.len)
-			var/obj/item/organ/I = pick(internal_organs)
-			I.take_damage(damage_amt / 2)
+		var/list/victims = list()
+		for(var/obj/item/organ/internal/I in internal_organs)
+			if(I.damage < I.max_damage && prob(I.relative_size))
+				victims += I
+		if(!victims.len)
+			victims += pick(internal_organs)
+		for(var/obj/item/organ/victim in victims)
 			brute /= 2
 			if(laser)
 				burn /= 2
+			damage_amt /= 2
+			victim.take_damage(damage_amt)
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
@@ -185,7 +191,7 @@
 	if(owner) owner.update_body()
 
 // Pain/halloss
-/obj/item/organ/external/proc/get_pain(var/amount)
+/obj/item/organ/external/proc/get_pain()
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)
 		return 0
 	var/lasting_pain = 0
@@ -193,7 +199,7 @@
 		lasting_pain += 10
 	else if(is_dislocated())
 		lasting_pain += 5
-	return pain + lasting_pain
+	return pain + lasting_pain + 1.2 * brute_dam + 1.5 * burn_dam
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)

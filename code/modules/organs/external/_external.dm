@@ -46,7 +46,6 @@
 	var/list/internal_organs = list()  // Internal organs of this body part
 	var/sabotaged = 0                  // If a prosthetic limb is emagged, it will detonate when it fails.
 	var/list/implants = list()         // Currently implanted objects.
-	var/organ_rel_size = 25            // Relative size of the organ.
 	var/base_miss_chance = 20          // Chance of missing.
 	var/genetic_degradation = 0
 
@@ -392,7 +391,7 @@ This function completely restores a damaged organ to perfect condition.
 		I.remove_rejuv()
 	..()
 
-/obj/item/organ/external/proc/createwound(var/type = CUT, var/damage)
+/obj/item/organ/external/proc/createwound(var/type = CUT, var/damage, var/surgical)
 
 	if(damage == 0)
 		return
@@ -400,7 +399,7 @@ This function completely restores a damaged organ to perfect condition.
 	//moved these before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Brute damage can possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if((type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30)
+	if(!surgical && (type in list(CUT, PIERCE, BRUISE)) && damage > 15 && local_damage > 30)
 
 		var/internal_damage
 		if(prob(damage) && sever_artery())
@@ -420,7 +419,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
-	if(wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
+	if(!surgical && wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
 		if((type == CUT || type == BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
@@ -449,13 +448,14 @@ This function completely restores a damaged organ to perfect condition.
 		var/datum/wound/W = new wound_type(damage)
 
 		//Check whether we can add the wound to an existing wound
-		for(var/datum/wound/other in wounds)
-			if(other.can_merge(W))
-				other.merge_wound(W)
-				W = null // to signify that the wound was added
-				break
-		if(W)
-			wounds += W
+		if(surgical)
+			W.autoheal_cutoff = 0
+		else
+			for(var/datum/wound/other in wounds)
+				if(other.can_merge(W))
+					other.merge_wound(W)
+					return
+		wounds += W
 		return W
 
 /****************************************************
@@ -750,7 +750,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/use_blood_colour = species.get_blood_colour(owner)
 
 	removed(null, ignore_children)
-	victim.traumatic_shock += 60
+	add_pain(60)
+	if(!clean)
+		victim.shock_stage += min_broken_damage
 
 	if(parent_organ)
 		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
@@ -889,6 +891,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 		rval |= !W.clamped
 		W.clamped = 1
 	return rval
+
+/obj/item/organ/external/proc/clamped()
+	for(var/datum/wound/W in wounds)
+		if(W.clamped)
+			return 1
 
 /obj/item/organ/external/proc/fracture()
 	if(!config.bones_can_break)
@@ -1127,14 +1134,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/get_incision(var/strict)
 	var/datum/wound/cut/incision
 	for(var/datum/wound/cut/W in wounds)
-		if(W.bandaged) // Shit's unusable
+		if(W.bandaged || W.current_stage > W.max_bleeding_stage) // Shit's unusable
 			continue
-		if(W.autoheal_cutoff == 0) //Get nice and clean one
+		if(strict && !W.is_surgical()) //We don't need dirty ones
+			continue
+		if(!incision)
 			incision = W
-			break
-		if(!strict) //any hole will do
-			if(!incision || W.damage > incision.damage) //Failing that get biggest baddest cut
+			continue
+		var/same = W.is_surgical() == incision.is_surgical()
+		if(same) //If they're both dirty or both are surgical, just get bigger one
+			if(W.damage > incision.damage)
 				incision = W
+		else if(W.is_surgical()) //otherwise surgical one takes priority
+			incision = W
 	return incision
 
 /obj/item/organ/external/proc/open()
@@ -1142,11 +1154,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = 0
 	if(!incision)
 		return 0
-	var/smol_threshold = min_broken_damage/5
-	var/beeg_threshold = min_broken_damage/2
+	var/smol_threshold = min_broken_damage * 0.4
+	var/beeg_threshold = min_broken_damage * 0.6
 	if(!incision.autoheal_cutoff == 0) //not clean incision
-		smol_threshold *= 2
-		beeg_threshold = max(beeg_threshold, min(beeg_threshold * 2, incision.damage_list[1])) //wounds can't achieve bigger
+		smol_threshold *= 1.5
+		beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger
 	if(incision.damage >= smol_threshold) //smol incision
 		. = SURGERY_OPEN
 	if(incision.damage >= beeg_threshold) //beeg incision
@@ -1230,3 +1242,28 @@ Note that amputating the affected organ does in fact remove the infection from t
 				flavor_text += "a ton of [wound]\s"
 
 	return english_list(flavor_text)
+
+/obj/item/organ/external/get_scan_results()
+	. = ..()
+	if(status & ORGAN_ARTERY_CUT)
+		. += "[capitalize(artery_name)] ruptured"
+	if(status & ORGAN_TENDON_CUT)
+		. += "Severed [tendon_name]"
+	if(dislocated == 2) // non-magical constants when
+		. += "Dislocated"
+	if(splinted)
+		. += "Splinted"
+	if(status & ORGAN_BLEEDING)
+		. += "Bleeding"
+	if(status & ORGAN_BROKEN)
+		. += capitalize(broken_description)
+	if (implants.len)
+		var/unknown_body = 0
+		for(var/I in implants)
+			var/obj/item/weapon/implant/imp = I
+			if(istype(imp) && imp.known)
+				. += "[capitalize(imp.name)] implanted"
+			else
+				unknown_body++
+		if(unknown_body)
+			. += "Unknown body present"
