@@ -1,8 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - tweak: "Bleed-out rate now depends on pulse rate and size of bleeding limb."
-  - tweak: "This means that potassium chlorophoride, which stops the heart, and inaprovaline, which now slows the heart, are both suitable for emergency treatment of bleeding."
-  - rscadd: "Cautery surgery with no preceeding steps will now cauterize a cut artery in a stump."
-  - tweak: "Arterial bleeding and stumps are now more informative about where the bleed is."
-  - tweak: "Arterial sprays can now splatter/blind people and use the correct icons."
