@@ -851,6 +851,12 @@
 			return global.meteors_catastrophic;
 		if("meteors_dust")
 			return global.meteors_dust;
+		if("meteors_major")
+			return global.meteors_major;
+		if("meteors_minor")
+			return global.meteors_minor;
+		if("meteors_moderate")
+			return global.meteors_moderate;
 		if("meteors_normal")
 			return global.meteors_normal;
 		if("meteors_threatening")
@@ -1453,7 +1459,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2306,6 +2312,12 @@
 			global.meteors_catastrophic=newval;
 		if("meteors_dust")
 			global.meteors_dust=newval;
+		if("meteors_major")
+			global.meteors_major=newval;
+		if("meteors_minor")
+			global.meteors_minor=newval;
+		if("meteors_moderate")
+			global.meteors_moderate=newval;
 		if("meteors_normal")
 			global.meteors_normal=newval;
 		if("meteors_threatening")
@@ -2908,7 +2920,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3335,6 +3347,9 @@
 	"meteors_cataclysm",
 	"meteors_catastrophic",
 	"meteors_dust",
+	"meteors_major",
+	"meteors_minor",
+	"meteors_moderate",
 	"meteors_normal",
 	"meteors_threatening",
 	"mil_branches",
