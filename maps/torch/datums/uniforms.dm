@@ -63,7 +63,6 @@
 	service_over = null
 	service_shoes = /obj/item/clothing/shoes/dress/white
 	service_hat = /obj/item/clothing/head/dress/fleet
-	service_gloves = /obj/item/clothing/gloves/white
 
 	dress_under = /obj/item/clothing/under/service/fleet
 	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet
@@ -87,7 +86,6 @@ decl/hierarchy/mil_uniform/marine
 	service_over = /obj/item/clothing/suit/storage/service/marine
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/service/marine
-	service_gloves = null
 
 	dress_under = /obj/item/clothing/under/mildress/marine
 	dress_over = /obj/item/clothing/suit/dress/marine
