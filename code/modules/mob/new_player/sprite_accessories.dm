@@ -423,7 +423,7 @@
 		gender = FEMALE
 
 	braid
-		name = "Floor Length Braid"
+		name = "Floorlength Braid"
 		icon_state = "hair_braid"
 		gender = FEMALE
 
@@ -465,7 +465,7 @@
 
 	fringetail
 		name = "Fringetail"
-		icon_state = "fringetail"
+		icon_state = "hair_fringetail"
 		gender = FEMALE
 
 	dandypomp
