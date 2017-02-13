@@ -1701,6 +1701,7 @@
 #include "code\modules\modular_computers\file_system\programs\engineering\atmos_control.dm"
 #include "code\modules\modular_computers\file_system\programs\engineering\power_monitor.dm"
 #include "code\modules\modular_computers\file_system\programs\engineering\rcon_console.dm"
+#include "code\modules\modular_computers\file_system\programs\engineering\supermatter_monitor.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\camera.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\configurator.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\file_browser.dm"

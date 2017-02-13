@@ -9,6 +9,7 @@
 /obj/item/modular_computer/console/preset/engineering/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/power_monitor())
+	hard_drive.store_file(new/datum/computer_file/program/supermatter_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	hard_drive.store_file(new/datum/computer_file/program/rcon_console())
