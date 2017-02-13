@@ -4,6 +4,18 @@
 	path = /obj/item/weapon/storage/briefcase
 	sort_category = "Utility"
 
+/datum/gear/utility/waistpack
+	display_name = "waist pack"
+	path = /obj/item/weapon/storage/belt/waistpack
+	slot = slot_belt
+	cost = 2
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/utility/waistpack/big
+	display_name = "large waist pack"
+	path = /obj/item/weapon/storage/belt/waistpack/big
+	cost = 4
+
 /datum/gear/utility/clipboard
 	display_name = "clipboard"
 	path = /obj/item/weapon/clipboard

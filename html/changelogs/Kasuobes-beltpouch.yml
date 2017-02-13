@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - rscadd: "Added waist packs that can be worn around the waist or on the back. They can be found in custom loadouts under utility."
