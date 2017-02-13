@@ -1,0 +1,6 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Added subtypes of meat for cows, goats and chickens. They all act the same way."
+  - rscdel: "Removed livestock crates."
+  - rscadd: "Added crates containing beef, goat meat, chicken meat, eggs, and milk."

@@ -58,3 +58,39 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "\improper Pizza crate"
 	supply_method = /decl/supply_method/randomized
+
+
+/decl/hierarchy/supply_pack/hospitality/beef
+	name = "Beef crate"
+	contains = list(/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 6)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "\improper Beef crate"
+	cost = 20
+
+/decl/hierarchy/supply_pack/hospitality/goat
+	name = "Goat meat crate"
+	contains = list(/obj/item/weapon/reagent_containers/food/snacks/meat/goat = 6)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "\improper Goat meat crate"
+	cost = 20
+
+/decl/hierarchy/supply_pack/hospitality/chicken
+	name = "Chicken meat crate"
+	contains = list(/obj/item/weapon/reagent_containers/food/snacks/meat/chicken = 6)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "\improper Chicken meat crate"
+	cost = 20
+
+/decl/hierarchy/supply_pack/hospitality/eggs
+	name = "Eggs crate"
+	contains = list(/obj/item/weapon/storage/fancy/egg_box = 2)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "\improper Egg crate"
+	cost = 15
+
+/decl/hierarchy/supply_pack/hospitality/milk
+	name = "Milk crate"
+	contains = list(/obj/item/weapon/reagent_containers/food/drinks/milk = 3)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "\improper Milk crate"
+	cost = 15
