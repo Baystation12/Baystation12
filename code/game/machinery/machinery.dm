@@ -348,8 +348,8 @@ Class Procs:
 /obj/machinery/InsertedContents()
 	return (contents - component_parts)
 
-/obj/machinery/proc/apply_visual(mob/M)
+/datum/proc/apply_visual(mob/M)
 	return
 
-/obj/machinery/proc/remove_visual(mob/M)
+/datum/proc/remove_visual(mob/M)
 	return
