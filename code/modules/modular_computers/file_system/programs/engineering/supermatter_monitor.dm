@@ -33,7 +33,7 @@
 	supermatters = null
 
 /datum/nano_module/supermatter_monitor/New()
-	. = ..()
+	..()
 	refresh()
 
 // Refreshes list of active supermatter crystals

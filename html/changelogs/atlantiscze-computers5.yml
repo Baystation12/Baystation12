@@ -6,3 +6,4 @@ changes:
   - rscadd: "Added forced-shutdown verb to modular computers, reachable via rightclick menu. This is equivalent of pressing the Shutdown button in the UI, and is mostly intended to be used when UI bugs out and regular shutdown isn't available."
   - rscadd: "Added Supermatter Monitoring program, available on all devices. It provides various information on the supermatter engine. It is fully variable, and capable of working with multiple supermatter crystals at once (for those enterprising engineers among you)."
   - rscadd: "Among other information, the supermatter monitor program shows engine core EPR value. This value is best kept between 1 and 2, and shows real amount of coolant in the core (in standard canisters worth). Normal EPR with two canisters in each loop is roughly 1.5"
+  - rscdel: "Rightclick open/close laptop verb no longer exists for laptops. Use alt-click instead."
