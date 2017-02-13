@@ -73,12 +73,13 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				else if(dist < light_impact_range)	dist = 3
 				else								continue
 
-				T.ex_act(dist)
 				if(!T)
 					T = locate(x0,y0,z0)
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated)	AM.ex_act(dist)
+
+				T.ex_act(dist)
 
 		var/took = (world.timeofday-start)/10
 		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
