@@ -124,7 +124,7 @@ var/list/ai_verbs_default = list(
 	set_density(1)
 	loc = loc
 
-	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
+	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Default"))
 
 	if(istype(L, /datum/ai_laws))
 		laws = L
@@ -520,21 +520,10 @@ var/list/ai_verbs_default = list(
 			alert("No suitable records found. Aborting.")
 
 	else
-		var/icon_list[] = list(
-		"default",
-		"floating face",
-		"carp"
-		)
-		input = input("Please select a hologram:") as null|anything in icon_list
-		if(input)
+		var/choice = input("Please select a hologram:") as null|anything in icon_states('icons/mob/hologram.dmi')
+		if(choice)
 			qdel(holo_icon)
-			switch(input)
-				if("default")
-					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
-				if("floating face")
-					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
-				if("carp")
-					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo4"))
+			holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi', choice))
 	return
 
 //Toggles the luminosity and applies it by re-entereing the camera.
