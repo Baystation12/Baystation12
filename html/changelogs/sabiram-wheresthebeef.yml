@@ -1,0 +1,6 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Added subtypes of meat for cows, goats and chickens. They all act the same way."
+  - rscadd: "Added crates containing beef, goat meat, chicken meat, eggs, and milk."
+  - tweak: "Increased the price of the livestock crates so that it is much more economical to order the produce you want instead of a live animal."
