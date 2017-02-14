@@ -3235,7 +3235,6 @@
 	"global_listen_count",
 	"global_map",
 	"global_message_listener",
-	"global_modular_computers",
 	"global_mutations",
 	"global_underwear",
 	"global_vars_",
