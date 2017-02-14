@@ -12,6 +12,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/device/pda
+	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/torch/crew
 	name = OUTFIT_JOB_NAME("Torch Crew Outfit")
