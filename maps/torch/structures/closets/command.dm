@@ -61,6 +61,8 @@
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
+		/obj/item/weapon/storage/box/headset,
+		/obj/item/weapon/storage/box/headset/torchxo,
 		/obj/item/weapon/storage/box/ids = 2,
 		/obj/item/weapon/storage/box/PDAs,
 		/obj/item/weapon/clipboard,
