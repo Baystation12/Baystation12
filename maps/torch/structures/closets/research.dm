@@ -40,6 +40,15 @@
 		/obj/item/clothing/suit/armor/vest/nt
 	)
 
+/obj/structure/closet/secure_closet/RD_torch
+	..()
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/toxins(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_tox(src)
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/messenger/tox(src)
+
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch
 	name = "xenoarchaeologist's locker"
 	req_access = list(access_xenoarch)
@@ -115,7 +124,8 @@
 		new /obj/item/weapon/storage/backpack/toxins(src)
 	else
 		new /obj/item/weapon/storage/backpack/satchel_tox(src)
-
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/messenger/tox(src)
 
 /obj/structure/closet/secure_closet/prospector
 	name = "prospector's locker"
@@ -151,6 +161,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_eng(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/engi(src)
 
 /obj/structure/closet/secure_closet/guard
 	name = "security guard's locker"
@@ -198,3 +210,5 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/sec(src)
