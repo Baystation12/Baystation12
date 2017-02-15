@@ -702,6 +702,8 @@
 				else
 					total_yield = get_trait(TRAIT_YIELD) + rand(yield_mod)
 				total_yield = max(1,total_yield)
+			if(user.has_aspect(ASPECT_GREENTHUMB))
+				total_yield = round(total_yield*1.5)
 
 		for(var/i = 0;i<total_yield;i++)
 			var/obj/item/product

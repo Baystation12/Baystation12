@@ -151,6 +151,7 @@ var/list/gamemode_cache = list()
 	var/slime_delay = 0
 	var/animal_delay = 0
 
+	var/max_character_aspects = 5
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
@@ -473,6 +474,7 @@ var/list/gamemode_cache = list()
 				if ("ninjas_allowed")
 					config.ninjas_allowed = 1
 
+
 				if ("objectives_disabled")
 					if(!value)
 						log_misc("Could not find value for objectives_disabled in configuration.")
@@ -769,6 +771,9 @@ var/list/gamemode_cache = list()
 					config.slime_delay = value
 				if("animal_delay")
 					config.animal_delay = value
+
+				if("max_character_aspects")
+					config.max_character_aspects = value
 
 
 				if("use_loyalty_implants")

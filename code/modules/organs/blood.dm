@@ -96,6 +96,9 @@
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
+	if(has_aspect(ASPECT_HAEMOPHILE))
+		amt *= 1.5
+
 	if(remove_blood(amt))
 		blood_splatter(tar,src,ddir)
 		return amt

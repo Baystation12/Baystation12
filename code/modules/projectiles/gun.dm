@@ -180,8 +180,9 @@
 		return
 
 	var/shoot_time = (burst - 1)* burst_delay
-	user.setClickCooldown(shoot_time) //no clicking on things while shooting
-	user.setMoveCooldown(shoot_time) //no moving while shooting either
+	if(!user.has_aspect(ASPECT_SPRAY))
+		user.setClickCooldown(shoot_time) //no clicking on things while shooting
+		user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
@@ -312,11 +313,14 @@
 
 	if(requires_two_hands)
 		if(!held_twohanded)
-			acc_mod += -ceil(requires_two_hands/2)
-			disp_mod += requires_two_hands*0.5 //dispersion per point of two-handedness
+			var/mult = 0.5
+			if(user.has_aspect(ASPECT_DUALWIELD))
+				mult = 0.25
+			acc_mod += -ceil(requires_two_hands*mult)
+			disp_mod += requires_two_hands*mult //dispersion per point of two-handedness
 
 	//Accuracy modifiers
-	P.accuracy = accuracy + acc_mod
+	P.accuracy = accuracy + acc_mod - (user.has_aspect(ASPECT_SPRAY) ? 2 : 0) + (user.has_aspect(ASPECT_MARKSMAN) ? 2 : 0)
 	P.dispersion = disp_mod
 
 	//accuracy bonus from aiming
