@@ -1,0 +1,6 @@
+author: lorwp
+
+delete-after: true
+
+changes:
+    - rscadd: "PAI's can now speak EAL, if they have a Universal Translator'"
