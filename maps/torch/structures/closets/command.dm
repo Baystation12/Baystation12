@@ -27,20 +27,10 @@
 		/obj/item/weapon/storage/box/ids,
 		/obj/item/weapon/clipboard,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/folder/blue
+		/obj/item/weapon/folder/blue,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel_cap)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com))
 	)
-
-/obj/structure/closet/secure_closet/CO/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/captain(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_cap(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger/com(src)
-
 
 /obj/structure/closet/secure_closet/XO
 	name = "executive officer's locker"
@@ -69,19 +59,10 @@
 		/obj/item/weapon/storage/box/PDAs,
 		/obj/item/weapon/clipboard,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/folder/blue
+		/obj/item/weapon/folder/blue,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel_cap)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com))
 	)
-
-/obj/structure/closet/secure_closet/XO/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/captain(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_cap(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger/com(src)
 
 /obj/structure/closet/secure_closet/sea
 	name = "senior enlisted advisor's locker"
@@ -106,15 +87,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/folder/blue
+		/obj/item/weapon/folder/blue,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel_norm)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger))
 	)
-/obj/structure/closet/secure_closet/sea/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_norm(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger(src)

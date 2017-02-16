@@ -32,22 +32,11 @@
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
 		/obj/item/weapon/wirecutters/clippers,
-		/obj/item/weapon/reagent_containers/spray/plantbgone
+		/obj/item/weapon/reagent_containers/spray/plantbgone,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/hydroponics, /obj/item/weapon/storage/backpack/satchel_hyd)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/hyd, 50)
 	)
-
-/obj/structure/closet/secure_closet/hydroponics_torch/New()
-	..()
-	switch(rand(1,2))
-		if(1)
-			new /obj/item/clothing/suit/apron(src)
-		if(2)
-			new /obj/item/clothing/suit/apron/overalls(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/hydroponics(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_hyd(src)
-	if (prob(50))
-		new /obj/item/weapon/storage/backpack/messenger/hyd(src)
 
 /obj/structure/closet/jcloset_torch
 	name = "custodial closet"

@@ -8,43 +8,33 @@
 	icon_state = "toolcloset"
 	icon_closed = "toolcloset"
 	icon_opened = "toolclosetopen"
-
-/obj/structure/closet/toolcloset/excavation/New()
-		..()
-		new /obj/item/weapon/storage/belt/archaeology(src)
-		new /obj/item/weapon/storage/excavation(src)
-		new /obj/item/device/flashlight/lantern(src)
-		new /obj/item/device/ano_scanner(src)
-		new /obj/item/device/depth_scanner(src)
-		new /obj/item/device/core_sampler(src)
-		new /obj/item/device/gps(src)
-		new /obj/item/device/beacon_locator(src)
-		new /obj/item/device/radio/beacon(src)
-		new /obj/item/clothing/glasses/meson(src)
-		new /obj/item/clothing/glasses/science(src)
-		new /obj/item/weapon/pickaxe(src)
-		new /obj/item/device/measuring_tape(src)
-		new /obj/item/weapon/pickaxe/hand(src)
-		new /obj/item/weapon/storage/bag/fossils(src)
-		new /obj/item/weapon/hand_labeler(src)
-		new /obj/item/taperoll/research(src)
+	will_contain = list(
+		/obj/item/weapon/storage/belt/archaeology,
+		/obj/item/weapon/storage/excavation,
+		/obj/item/device/flashlight/lantern,
+		/obj/item/device/ano_scanner,
+		/obj/item/device/depth_scanner,
+		/obj/item/device/core_sampler,
+		/obj/item/device/gps,
+		/obj/item/device/beacon_locator,
+		/obj/item/device/radio/beacon,
+		/obj/item/clothing/glasses/meson,
+		/obj/item/clothing/glasses/science,
+		/obj/item/weapon/pickaxe,
+		/obj/item/device/measuring_tape,
+		/obj/item/weapon/pickaxe/hand,
+		/obj/item/weapon/storage/bag/fossils,
+		/obj/item/weapon/hand_labeler,
+		/obj/item/taperoll/research)
 
 /obj/structure/closet/wardrobe/ptgear
 	name = "pt gear wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
-
-/obj/structure/closet/wardrobe/ptgear/New()
-	..()
-	new /obj/item/clothing/under/pt/expeditionary(src)
-	new /obj/item/clothing/under/pt/expeditionary(src)
-	new /obj/item/clothing/under/pt/expeditionary(src)
-	new /obj/item/clothing/under/pt/expeditionary(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	return
+	will_contain = list(
+		/obj/item/clothing/under/pt/expeditionary = 4,
+		/obj/item/clothing/shoes/white = 2,
+		/obj/item/clothing/shoes/black = 2)
 
 obj/random/torchcloset //Random closets taking into account torch-specific ones
 	name = "random closet"

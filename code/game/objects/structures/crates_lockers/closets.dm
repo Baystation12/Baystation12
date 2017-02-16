@@ -27,6 +27,7 @@
 	..()
 	if(will_contain)
 		create_objects_in_loc(src, will_contain)
+		will_contain = null // Remove reference to allow for garbage collection
 
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
