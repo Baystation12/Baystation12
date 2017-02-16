@@ -159,6 +159,10 @@
 		return
 
 	var/obj/item/thing = get_equipped_item(disarm_slot)
+	
+	if(!thing)
+		return
+	
 	drop_from_inventory(thing)
 
 	if(affected.robotic >= ORGAN_ROBOT)
