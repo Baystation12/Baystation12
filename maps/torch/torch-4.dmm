@@ -2277,7 +2277,7 @@
 "RO" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/wall/r_wall,/area/medical/virology)
 "RP" = (/obj/machinery/atmospherics/unary/vent_scrubber,/turf/simulated/floor/tiled/dark,/area/rnd/xenobiology/xenoflora_storage)
 "RQ" = (/obj/machinery/atmospherics/pipe/manifold4w/visible,/obj/machinery/meter,/turf/simulated/floor/tiled/freezer,/area/rnd/xenobiology/xenoflora)
-"RR" = (/obj/machinery/portable_atmospherics/hydroponics/soil,/obj/effect/wingrille_spawn/reinforced_phoron,/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/reinforced,/area/rnd/xenobiology/xenoflora_storage)
+"RR" = (/obj/effect/wingrille_spawn/reinforced_phoron,/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/reinforced,/area/rnd/xenobiology/xenoflora_storage)
 "RS" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; icon_state = "intact"},/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
 "RT" = (/obj/machinery/atmospherics/pipe/simple/hidden/red,/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
 "RU" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden,/obj/machinery/meter,/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
