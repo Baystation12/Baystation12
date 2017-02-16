@@ -343,6 +343,7 @@
 
 /obj/item/weapon/storage/backpack/messenger/engi
 	name = "engineering messenger bag"
+	desc = "A strong backpack worn over one shoulder. This one is designed for Industrial work."
 	icon_state = "courierbagengi"
 
 /obj/item/weapon/storage/backpack/messenger/hyd

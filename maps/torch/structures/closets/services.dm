@@ -42,6 +42,12 @@
 			new /obj/item/clothing/suit/apron(src)
 		if(2)
 			new /obj/item/clothing/suit/apron/overalls(src)
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/hydroponics(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_hyd(src)
+	if (prob(50))
+		new /obj/item/weapon/storage/backpack/messenger/hyd(src)
 
 /obj/structure/closet/jcloset_torch
 	name = "custodial closet"

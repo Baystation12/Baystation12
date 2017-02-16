@@ -47,6 +47,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_med(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/med(src)
 	switch(pick("blue", "green", "purple", "black", "navyblue"))
 		if ("blue")
 			new /obj/item/clothing/under/rank/medical/blue(src)
@@ -101,6 +103,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_med(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/med(src)
 	for(var/i = 1 to 2)
 		switch(pick("blue", "green", "purple", "black", "navyblue"))
 			if ("blue")
@@ -155,6 +159,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_med(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/med(src)
 
 /obj/structure/closet/secure_closet/medical_contractor
 	name = "medical contractor's locker"
@@ -187,6 +193,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_med(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/med(src)
 
 /obj/structure/closet/wardrobe/medic_torch
 	name = "medical wardrobe"

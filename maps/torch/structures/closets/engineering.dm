@@ -49,6 +49,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_eng(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/engi(src)
 
 /obj/structure/closet/secure_closet/engineering_torch
 	name = "engineer's locker"
@@ -84,6 +86,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_eng(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/engi(src)
 
 /obj/structure/closet/secure_closet/engineering_contractor
 	name = "engineering contractor's locker"
@@ -115,6 +119,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_eng(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/engi(src)
 
 /obj/structure/closet/secure_closet/engineering_senior
 	name = "senior engineer's locker"
@@ -154,6 +160,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_eng(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/engi(src)
 
 /obj/structure/closet/secure_closet/atmos_torch
 	name = "atmospherics equipment locker"

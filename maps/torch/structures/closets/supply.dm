@@ -33,6 +33,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_norm(src)
 	if(prob(25))
 		new /obj/item/weapon/storage/backpack/dufflebag(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger(src)
 
 /obj/structure/closet/secure_closet/deckofficer
 	name = "deck officer's locker"
@@ -71,3 +73,5 @@
 		new /obj/item/weapon/storage/backpack/satchel_norm(src)
 	if(prob(25))
 		new /obj/item/weapon/storage/backpack/dufflebag(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger(src)
