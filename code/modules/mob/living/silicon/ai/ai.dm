@@ -56,6 +56,7 @@ var/list/ai_verbs_default = list(
 	var/aiRestorePowerRoutine = 0
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
+	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
@@ -520,10 +521,17 @@ var/list/ai_verbs_default = list(
 			alert("No suitable records found. Aborting.")
 
 	else
-		var/choice = input("Please select a hologram:") as null|anything in icon_states('icons/mob/hologram.dmi')
+		var/list/hologramsAICanUse = list()
+		var/holograms_by_type = decls_repository.decls_of_subtype(/decl/ai_holo)
+		for (var/holo_type in holograms_by_type)
+			var/decl/ai_holo/holo = holograms_by_type[holo_type]
+			if (holo.may_be_used_by_ai(src))
+				hologramsAICanUse.Add(holo)
+		var/decl/ai_holo/choice = input("Please select a hologram:") as null|anything in hologramsAICanUse
 		if(choice)
 			qdel(holo_icon)
-			holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi', choice))
+			holo_icon = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.icon_colorize)
+			holo_icon_malf = choice.requires_malf
 	return
 
 //Toggles the luminosity and applies it by re-entereing the camera.
