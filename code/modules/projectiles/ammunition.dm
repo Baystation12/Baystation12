@@ -69,7 +69,7 @@
 		icon_state = spent_icon
 
 /obj/item/ammo_casing/examine(mob/user)
-	..()
+	. = ..()
 	if (!BB)
 		to_chat(user, "This one is spent.")
 
@@ -148,6 +148,20 @@
 	stored_ammo.Cut()
 	update_icon()
 
+/obj/item/ammo_magazine/attack_hand(mob/user as mob)
+	if(user.get_inactive_hand() == src)
+
+		if(!stored_ammo.len)
+			to_chat(user, "<span class='notice'>[src] is already empty!</span>")
+			return
+
+		var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+		stored_ammo.Remove(C)
+		C.set_dir(pick(alldirs))
+		user.put_in_hands(C)
+	else
+		return ..()
+
 /obj/item/ammo_magazine/update_icon()
 	if(multiple_sprites)
 		//find the lowest key greater than or equal to stored_ammo.len
@@ -160,7 +174,7 @@
 		icon_state = (new_state)? new_state : initial(icon_state)
 
 /obj/item/ammo_magazine/examine(mob/user)
-	..()
+	. = ..()
 	to_chat(user, "There [(stored_ammo.len == 1)? "is" : "are"] [stored_ammo.len] round\s left!")
 
 //magazine icon state caching
