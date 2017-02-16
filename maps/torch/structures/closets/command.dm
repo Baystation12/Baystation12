@@ -38,6 +38,8 @@
 		new /obj/item/weapon/storage/backpack/satchel_cap(src)
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/com(src)
 
 
 /obj/structure/closet/secure_closet/XO
@@ -72,6 +74,14 @@
 
 /obj/structure/closet/secure_closet/XO/New()
 	..()
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/captain(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_cap(src)
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger/com(src)
 
 /obj/structure/closet/secure_closet/sea
 	name = "senior enlisted advisor's locker"
@@ -98,3 +108,13 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue
 	)
+/obj/structure/closet/secure_closet/sea/New()
+	..()
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/(src)
+	else
+		new /obj/item/weapon/storage/backpack/satchel_norm(src)
+	if(prob(50))
+		new /obj/item/weapon/storage/backpack/dufflebag(src)
+	else
+		new /obj/item/weapon/storage/backpack/messenger(src)
