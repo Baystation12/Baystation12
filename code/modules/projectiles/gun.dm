@@ -78,7 +78,9 @@
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
-
+	
+	var/serial_number = "unreadable"
+	
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -86,6 +88,20 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
+	
+	serial_number = GenerateSerial()
+
+/obj/item/weapon/gun/proc/GenerateSerial()
+	var/numRows = 2
+	var/lenRows = 3
+
+	var/retStr = ""
+	for(var/i = 0 to 2)
+		for(var/j = 0 to 3)
+			retStr += pick("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+		if(i != numRows)
+			retStr += "-"
+	return retStr
 
 /obj/item/weapon/gun/update_twohanding()
 	if(requires_two_hands)
