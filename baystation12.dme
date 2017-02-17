@@ -1685,6 +1685,7 @@
 #include "code\modules\modular_computers\computers\subtypes\dev_tablet.dm"
 #include "code\modules\modular_computers\computers\subtypes\dev_telescreen.dm"
 #include "code\modules\modular_computers\computers\subtypes\preset_console.dm"
+#include "code\modules\modular_computers\computers\subtypes\preset_laptop.dm"
 #include "code\modules\modular_computers\computers\subtypes\preset_tablet.dm"
 #include "code\modules\modular_computers\computers\subtypes\preset_telescreen.dm"
 #include "code\modules\modular_computers\file_system\computer_file.dm"

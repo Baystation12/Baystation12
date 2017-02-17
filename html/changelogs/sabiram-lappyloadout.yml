@@ -1,0 +1,4 @@
+author: sabiram
+delete-after: true
+changes:
+    - rscadd: "Added modular laptops to the utility loadout menu."
