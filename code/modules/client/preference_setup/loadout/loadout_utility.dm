@@ -38,6 +38,10 @@
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
 
+/****************
+modular computers
+****************/
+
 /datum/gear/utility/cheaptablet
 	display_name = "tablet computer: cheap"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
@@ -55,4 +59,14 @@
 
 /datum/gear/utility/customtablet/New()
 	..()
-	gear_tweaks += new /datum/gear_tweak/tablet()
+	gear_tweaks += new /datum/gear_tweak/modular_computer/tablet()
+
+
+/datum/gear/utility/customlaptop
+	display_name = "laptop computer: custom"
+	path = /obj/item/modular_computer/laptop/
+	cost = 6
+
+/datum/gear/utility/customlaptop/New()
+	..()
+	gear_tweaks += new /datum/gear_tweak/modular_computer/laptop()
