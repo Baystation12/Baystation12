@@ -146,7 +146,11 @@
 		. = valid_reagents[metadata]
 	I.reagents.add_reagent(., I.reagents.get_free_space())
 
-/datum/gear_tweak/tablet
+/****************
+modular computers
+****************/
+
+/datum/gear_tweak/modular_computer
 	var/list/ValidProcessors = list(/obj/item/weapon/computer_hardware/processor_unit/small)
 	var/list/ValidBatteries = list(/obj/item/weapon/computer_hardware/battery_module/nano, /obj/item/weapon/computer_hardware/battery_module/micro, /obj/item/weapon/computer_hardware/battery_module)
 	var/list/ValidHardDrives = list(/obj/item/weapon/computer_hardware/hard_drive/micro, /obj/item/weapon/computer_hardware/hard_drive/small, /obj/item/weapon/computer_hardware/hard_drive)
@@ -155,7 +159,7 @@
 	var/list/ValidCardSlots = list(null, /obj/item/weapon/computer_hardware/card_slot)
 	var/list/ValidTeslaLinks = list(null, /obj/item/weapon/computer_hardware/tesla_link)
 
-/datum/gear_tweak/tablet/get_contents(var/list/metadata)
+/datum/gear_tweak/modular_computer/get_contents(var/list/metadata)
 	var/list/names = list()
 	var/obj/O = ValidProcessors[metadata[1]]
 	if(O)
@@ -180,7 +184,7 @@
 		names += initial(O.name)
 	return "[english_list(names, and_text = ", ")]"
 
-/datum/gear_tweak/tablet/get_metadata(var/user, var/metadata)
+/datum/gear_tweak/modular_computer/get_metadata(var/user, var/metadata)
 	. = list()
 
 	var/list/names = list()
@@ -267,10 +271,34 @@
 	entry = input(user, "Choose a tesla link.", "Character Preference") in names
 	. += names[entry]
 
-/datum/gear_tweak/tablet/get_default()
+/datum/gear_tweak/modular_computer/get_default()
 	return list(1, 1, 1, 1, 1, 1, 1)
 
-/datum/gear_tweak/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
+/datum/gear_tweak/modular_computer/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
+	if(ValidProcessors[metadata[1]])
+		var/t = ValidProcessors[metadata[1]]
+		I.processor_unit = new t(I)
+	if(ValidBatteries[metadata[2]])
+		var/t = ValidBatteries[metadata[2]]
+		I.battery_module = new t(I)
+		I.battery_module.charge_to_full()
+	if(ValidHardDrives[metadata[3]])
+		var/t = ValidHardDrives[metadata[3]]
+		I.hard_drive = new t(I)
+	if(ValidNetworkCards[metadata[4]])
+		var/t = ValidNetworkCards[metadata[4]]
+		I.network_card = new t(I)
+	if(ValidNanoPrinters[metadata[5]])
+		var/t = ValidNanoPrinters[metadata[5]]
+		I.nano_printer = new t(I)
+	if(ValidCardSlots[metadata[6]])
+		var/t = ValidCardSlots[metadata[6]]
+		I.card_slot = new t(I)
+	if(ValidTeslaLinks[metadata[7]])
+		var/t = ValidTeslaLinks[metadata[7]]
+		I.tesla_link = new t(I)
+
+/datum/gear_tweak/modular_computer/laptop/tweak_item(var/obj/item/modular_computer/laptop/I, var/list/metadata)
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
 		I.processor_unit = new t(I)
