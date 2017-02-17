@@ -13,6 +13,7 @@ var/warrant_uid = 0
 	filedesc = "Warrant Assistant"
 	extended_desc = "Official NTsec program for creation and handling of warrants."
 	size = 8
+	program_icon_state = "warrant"
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	required_access = access_security
