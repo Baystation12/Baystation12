@@ -1,5 +1,5 @@
 /obj/item/modular_computer/laptop
-	anchored = FALSE //the loadout will not spawn anchored items
+	anchored = TRUE
 	name = "laptop computer"
 	desc = "A portable computer."
 	hardware_flag = PROGRAM_LAPTOP
@@ -32,3 +32,6 @@
 	else
 		overlays.Cut()
 		icon_state = icon_state_closed
+
+/obj/item/modular_computer/laptop/preset
+	anchored = FALSE
