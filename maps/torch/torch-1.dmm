@@ -436,7 +436,7 @@
 "it" = (/obj/structure/table/glass,/obj/item/weapon/storage/box/evidence,/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
 "iu" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
 "iv" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
-"iw" = (/obj/machinery/artifact_harvester{dir = 4},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
+"iw" = (/obj/machinery/artifact_harvester{dir = 2},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
 "ix" = (/obj/machinery/artifact_scanpad,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
 "iy" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/structure/extinguisher_cabinet{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
 "iz" = (/obj/machinery/artifact_analyser,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/white,/area/shuttle/petrov/docked)
