@@ -40,9 +40,9 @@
 				if(piece)
 					var/obj/item/clothing/C = piece
 					if(piece in selected_outfit)
-						dat += "<span class='linkOn'>[initial(C.name)]</span><a href='byond://?src=\ref[src];rem=[piece]'>X</a>"
+						dat += "<span class='linkOn'>[sanitize(initial(C.name))]</span><a href='byond://?src=\ref[src];rem=[piece]'>X</a>"
 					else
-						dat += "<a href='byond://?src=\ref[src];add=[piece]'>[initial(C.name)]</a>"
+						dat += "<a href='byond://?src=\ref[src];add=[piece]'>[sanitize(initial(C.name))]</a>"
 			dat += "<hr>"
 		dat += "<a href='byond://?src=\ref[src];vend=[1]'>Dispense</a>"
 	dat = jointext(dat,"<br>")
@@ -135,33 +135,41 @@
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 
 /obj/machinery/uniform_vendor/proc/populate_uniforms(var/decl/hierarchy/mil_uniform/user_outfit)
-	var/list/pt_uniform = list(
+	var/list/res = list()
+	res["PT"] = list(
 		user_outfit.pt_under,
 		user_outfit.pt_shoes
 		)
 
-	var/list/utility_uniform = list(
+	res["Utility"] = list(
 		user_outfit.utility_under,
 		user_outfit.utility_shoes,
 		user_outfit.utility_hat
 		)
+	if (user_outfit.utility_extra)
+		res["Utility Extras"] = user_outfit.utility_extra
 
-	var/list/service_uniform = list(
+	res["Service"] = list(
 		user_outfit.service_under,
 		user_outfit.service_over,
 		user_outfit.service_shoes,
 		user_outfit.service_hat,
 		user_outfit.service_gloves
 		)
+	if(user_outfit.service_extra)
+		res["Service Extras"] = user_outfit.service_extra
 
-	var/list/dress_uniform = list(
+	res["Dress"] = list(
 		user_outfit.dress_under,
 		user_outfit.dress_over,
 		user_outfit.dress_shoes,
 		user_outfit.dress_hat,
 		user_outfit.dress_gloves
 		)
-	return list("PT" = pt_uniform, "Utility" = utility_uniform, "Service" = service_uniform, "Dress" = dress_uniform)
+	if(user_outfit.service_extra)
+		res["Dress Extras"] = user_outfit.dress_extra
+
+	return res
 
 /obj/machinery/uniform_vendor/proc/spawn_uniform(var/list/selected_outfit)
 	var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
