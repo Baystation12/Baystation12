@@ -110,6 +110,9 @@
 	icon_state = "door_locked"
 	locked = 1
 
+/obj/machinery/door/airlock/external/bolted/cycling
+	frequency = 1379
+
 /obj/machinery/door/airlock/external/bolted_open
 	icon_state = "door_open"
 	density = 0
