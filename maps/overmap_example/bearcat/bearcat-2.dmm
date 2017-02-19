@@ -57,7 +57,7 @@
 "be" = (/turf/space,/area/ship/scrap/shuttle/ingoing)
 "bf" = (/obj/structure/shuttle/window{tag = "icon-2"; icon_state = "2"},/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
 "bg" = (/obj/structure/bed/chair{tag = "icon-chair (NORTH)"; icon_state = "chair"; dir = 1},/obj/structure/bed/chair{tag = "icon-chair_preview (NORTH)"; icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
-"bh" = (/obj/machinery/computer/shuttle_control/explore/bearcat,/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
+"bh" = (/obj/machinery/computer/shuttle_control/explore/bearcat,/obj/effect/shuttle_landmark/docking_arm_port/shuttle,/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
 "bi" = (/obj/structure/window/reinforced,/turf/space,/area/space)
 "bj" = (/obj/structure/window/reinforced,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/space,/area/ship/scrap/dock)
 "bk" = (/obj/structure/sign/warning/vacuum,/turf/simulated/wall/r_wall,/area/ship/scrap/dock)
@@ -70,12 +70,12 @@
 "br" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
 "bs" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled{icon_state = "white"},/area/ship/scrap/dock)
 "bt" = (/turf/simulated/shuttle/wall{tag = "icon-swall3"; icon_state = "swall_straight"; dir = 1},/area/ship/scrap/shuttle/outgoing)
-"bu" = (/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
-"bv" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
-"bw" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"bu" = (/obj/effect/shuttle_landmark/docking_arm_starboard/shuttle,/turf/space,/area/ship/scrap/shuttle/ingoing)
+"bv" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "shuttle_port"; pixel_x = -25; pixel_y = -25; tag = "shuttle_port"},/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
+"bw" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "shuttle_port_hatch"},/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
 "bx" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
 "by" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
-"bz" = (/obj/machinery/door/airlock/external,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"bz" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "shuttle_starboard_hatch"},/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
 "bA" = (/turf/simulated/floor/tiled,/area/ship/scrap/dock)
 "bB" = (/obj/machinery/light/small{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/ship/scrap/dock)
 "bC" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/item/device/radio/intercom{pixel_x = -32},/obj/machinery/atmospherics/unary/vent_pump{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4; layer = 2.4; level = 2},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
@@ -357,7 +357,7 @@
 "gS" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/item/device/radio/intercom{pixel_y = 32},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/obj/structure/closet/toolcloset,/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "gT" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"; tag = ""},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "gU" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light_switch{pixel_y = 25},/obj/structure/table/standard,/obj/item/weapon/material/ashtray/plastic,/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
-"gV" = (/obj/structure/bed/chair/comfy/brown,/obj/effect/landmark/start{name = "Chief Engineer"},/obj/structure/sign/poster{pixel_y = 32},/obj/structure/lattice,/obj/structure/cable{d1 = 32; d2 = 2; icon_state = "32-2"; pixel_y = 1},/turf/simulated/open,/area/ship/scrap/maintenance)
+"gV" = (/obj/structure/bed/chair/comfy/brown,/obj/effect/landmark/start{name = "Chief Engineer"},/obj/structure/sign/poster{pixel_y = 32},/obj/structure/lattice,/obj/structure/cable{d1 = 11; d2 = 2; icon_state = "11-2"; pixel_y = 1},/turf/simulated/open,/area/ship/scrap/maintenance)
 "gW" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk,/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "gX" = (/obj/structure/cable{icon_state = "0-2"; pixel_y = 1; d2 = 2},/obj/machinery/power/apc{dir = 1; name = "Power APC"},/obj/machinery/atmospherics/unary/vent_pump{tag = "icon-off"; icon_state = "off"; dir = 2; layer = 2.4; level = 2},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
 "gY" = (/obj/structure/table/standard,/obj/item/device/flashlight,/obj/item/weapon/storage/toolbox/electrical{pixel_x = 7; pixel_y = 4},/obj/machinery/light_switch{pixel_y = 25},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
@@ -501,6 +501,14 @@
 "jG" = (/obj/machinery/light/small{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/ship/scrap/crew/hallway/starboard)
 "jH" = (/obj/structure/disposalpipe/segment,/obj/structure/closet/walllocker/emerglocker/east,/obj/machinery/light_switch{pixel_x = -25},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/ship/scrap/crew/hallway/port)
 "jI" = (/obj/machinery/light_switch{pixel_x = -25},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/ship/scrap/crew/hallway/starboard)
+"jJ" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "shuttle_starboard"; pixel_x = 25; pixel_y = -25; tag = "shuttle_starboard"},/turf/simulated/floor/shuttle/blue,/area/ship/scrap/shuttle/outgoing)
+"jK" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "bearcat_port_dock_hatch"},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"jL" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "bearcat_port_dock_hatch"},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"jM" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "bearcat_port_dock"; pixel_x = -28; pixel_y = -28},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"jN" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "bearcat_starboard_dock_hatch"},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"jO" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "bearcat_starboard_dock"; pixel_x = 28; pixel_y = 28},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"jP" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "bearcat_starboard_dock_hatch"},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
+"jQ" = (/obj/effect/shuttle_landmark/docking_arm_starboard/pod,/turf/space,/area/ship/scrap/shuttle/ingoing)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -524,9 +532,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaataNazaOataPawaQaRaSawaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatatauatataTawawaxawawaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaUaUaVaUaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaWaXaXaYaaaaaaaUaZbaaUbbbcbdaUaZbaaUaaaaaabebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabfbgbhbfbibibjbkblbmbnbobpbobnbqbrbsbibibibebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabtbububvbwbxbybzbAbBaUbCbDbEaUbFbAbzbybxbwbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabfbgbgbfbGbGbHbsbIbJaUaUbKaUaUbLbAbkbMbGbGbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabfbgbhbfbibibjbkblbmbnbobpbobnbqbrbsbibibibebebubeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabwbvjJbzjKbxbyjLjMbBaUbCbDbEaUbFjOjNbybxjPbejQbebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabtbgbgbtbGbGbHbsbIbJaUaUbKaUaUbLbAbkbMbGbGbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabNbObObPaaaabQaUbRaUaUbSjubUaUaUbRaUbQaaaabebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabVbWbWbVaaaabQbXjvbZaabXjubZaabXjwbZbQbQbQbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQcacbcccbcbjzcecececfcececejAchcicjckchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

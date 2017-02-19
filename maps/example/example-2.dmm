@@ -20,39 +20,44 @@
 "t" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "u" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 "v" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"w" = (/obj/effect/shuttle_landmark/upper_level,/turf/space,/area/space)
+"x" = (/turf/simulated/floor,/area/maintenance/fsmaint2)
+"y" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "upper_level_dock_hatch"},/turf/simulated/floor,/area/maintenance/fsmaint2)
+"z" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "upper_level_dock"; pixel_x = 8; pixel_y = -25},/turf/simulated/floor,/area/maintenance/fsmaint2)
+"A" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaabaaacccccccccccccccaaaaaaaa
-aaaaaaaaacdddeddfddedddcaaaaaaaa
-aaaaaaaaacdddddfffdddddcaaaaaaaa
-aaaaaaaaacdddddfffddddgcaaaaaaaa
-aaaaaaaaachdddifffddddjcaaaaaaaa
-aaaaaaaaacddddddddddkddcaaaaaaaa
-aaaaaaaaacddddddddddlmncaaaaaaaa
-aaaaaaaaacdddddddddddddcaaaaaaaa
-aaaaaaaaacddddddddddompcaaaaaaaa
-aaaaaaaaacqdddddddddrddcaaaaaaaa
-aaaaaaaaachdddddddddddjcaaaaaaaa
-aaaaaaaaacsddddddddddddcaaaaaaaa
-aaaaaaaaactddddddddddddcaaaaaaaa
-aaaaaaaaacuddvdddddvdddcaaaaaaaa
-aaaaaaaaacccccccccccccccaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabaaacccccccccccccccaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddeddfddedddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddfffdddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddfffddddgccccawaaaaaaaaaaa
+aaaaaaaaaaaaaaaaachdddifffdddddxxzyaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddkdAccccaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddlmncaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddddddddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddompcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacqdddddddddrddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaachdddddddddddjcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacsddddddddddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaactddddddddddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacuddvdddddvdddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacccccccccccccccaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 

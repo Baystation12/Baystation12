@@ -46,7 +46,7 @@
 #define SHUTTLE_WARMUP    1
 #define SHUTTLE_INTRANSIT 2
 
-// Ferry shuttle processing status.
+// Autodock shuttle processing status.
 #define IDLE_STATE   0
 #define WAIT_LAUNCH  1
 #define FORCE_LAUNCH 2

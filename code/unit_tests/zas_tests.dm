@@ -111,7 +111,7 @@ datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async=1				// We're moving the shuttle using built in procs.
 
-	var/datum/shuttle/ferry/supply/shuttle = null
+	var/datum/shuttle/autodock/ferry/supply/shuttle = null
 
 	var/testtime = 0	//Used as a timer.
 
@@ -130,7 +130,7 @@ datum/unit_test/zas_supply_shuttle_moved/start_test()
 
 	// Initiate the Move.
 	supply_controller.movetime = 5 // Speed up the shuttle movement.
-	shuttle.short_jump(shuttle.area_offsite, shuttle.area_station)
+	shuttle.short_jump(shuttle.get_location_waypoint(!shuttle.location)) //TODO
 
 	return 1
 

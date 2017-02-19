@@ -1,22 +1,10 @@
 //Shuttle controller computer for shuttles going between sectors
 /obj/machinery/computer/shuttle_control/explore
 	name = "general shuttle control console"
-	var/area/shuttle_area	//area for shuttle ship-side
-
-/obj/machinery/computer/shuttle_control/explore/initialize()
-	..()
-	if(!shuttle_tag)
-		shuttle_tag = "Explorer-[z]"
-	if(!shuttle_controller.shuttles[shuttle_tag])
-		new/datum/shuttle/ferry/overmap(shuttle_tag, locate(shuttle_area))
-		testing("Exploration shuttle '[shuttle_tag]' at zlevel [z] successfully added.")
-	else
-		var/datum/shuttle/ferry/overmap/S = shuttle_controller.shuttles[shuttle_tag]
-		shuttle_area = S.area_station.type
 
 /obj/machinery/computer/shuttle_control/explore/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
-	var/datum/shuttle/ferry/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		to_chat(usr,"<span class='warning'>Unable to establish link with the shuttle.</span>")
 		return
@@ -37,21 +25,23 @@
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
-			shuttle_status = "Proceeding to destination."
+			shuttle_status = "Proceeding to [shuttle.get_destination_name()]."
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
+
+	var/datum/computer/file/embedded_program/docking/docking_controller = shuttle.active_docking_controller
 
 	data = list(
 		"destination_name" = shuttle.get_destination_name(),
 		"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
-		"has_docking" = shuttle.docking_controller? 1 : 0,
-		"docking_status" = shuttle.docking_controller? shuttle.docking_controller.get_docking_status() : null,
-		"docking_override" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
-		"can_launch" = shuttle.can_go() && shuttle.can_launch(),
-		"can_cancel" = shuttle.can_go() && shuttle.can_cancel(),
-		"can_force" = shuttle.can_go() && shuttle.can_force(),
+		"has_docking" = docking_controller? 1 : 0,
+		"docking_status" = docking_controller? docking_controller.get_docking_status() : null,
+		"docking_override" = docking_controller? docking_controller.override_enabled : null,
+		"can_launch" = shuttle.can_launch(),
+		"can_cancel" = shuttle.can_cancel(),
+		"can_force" = shuttle.can_force(),
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -66,10 +56,7 @@
 	if(..())
 		return 1
 
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-
-	var/datum/shuttle/ferry/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/overmap/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
 
@@ -82,11 +69,11 @@
 			to_chat(usr,"<span class='warning'>No valid landing sites in range.</span>")
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, default_state) && (D in possible_d))
-			shuttle.set_destination_area(possible_d[D])
+			shuttle.set_destination(possible_d[D])
 
-	if(href_list["move"])
+	else if(href_list["move"])
 		shuttle.launch(src)
-	if(href_list["force"])
+	else if(href_list["force"])
 		shuttle.force_launch(src)
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)

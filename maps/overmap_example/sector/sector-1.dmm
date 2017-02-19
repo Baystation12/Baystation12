@@ -6,6 +6,9 @@
 "f" = (/turf/space,/area/sector/shuttle/ingoing4)
 "g" = (/turf/simulated/mineral,/area/sector/shuttle/ingoing4)
 "h" = (/turf/space,/area/sector/shuttle/ingoing3)
+"i" = (/obj/effect/shuttle_landmark/ingoing3,/turf/space,/area/sector/shuttle/ingoing3)
+"j" = (/obj/effect/shuttle_landmark/ingoing1,/turf/space,/area/sector/shuttle/ingoing1)
+"k" = (/obj/effect/shuttle_landmark/ingoing4,/turf/space,/area/sector/shuttle/ingoing4)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -19,12 +22,12 @@ aaaaaaaaaabaabbbaaaaaaaaaaaaaa
 aaaaaaaaaaaaaabbaaaaaaaaaaaaaa
 aaaaaaaacaaaaaaaadddaaaaaaaaaa
 aaaaaaaaaaeeeeaaaadddaaaaaaaaa
-aaaaaaffffeeeeaaaaaadaaaaaaaaa
-aaaaaaffffeeeeaaaaaaaaaaaaaaaa
+aaaaaaffffeejeaaaaaadaaaaaaaaa
+aaaaaaffkfeeeeaaaaaaaaaaaaaaaa
 aaaaaaffffeeeeaaaaaaaaaaaaaaaa
 aaaaaaffffeeeeaaaaaaadaaaaaaaa
 aaaaaagfffeeeeaahhhhddaaaaaaaa
-aaaaaaggffaaaaaahhhhddaaaaaaaa
+aaaaaaggffaaaaaahhihddaaaaaaaa
 aaaaaaaaaaaaaaaahhhhadaaaaaaaa
 aaaaaaaaaaaaaaaahhhhaaaaaaaaaa
 aaaaaaaaadddaaadhhhhaaaaaaaaaa
@@ -39,3 +42,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

@@ -33,13 +33,14 @@
 "G" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/alarm{pixel_y = 32},/obj/structure/cable{tag = "icon-6-8"; icon_state = "6-8"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "H" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "I" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light_switch{pixel_y = 25},/obj/structure/table/standard,/obj/item/weapon/material/ashtray/plastic,/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
-"J" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/structure/cable{d1 = 16; d2 = 0; icon_state = "16-0"; pixel_y = 1},/obj/structure/cable{d2 = 10; icon_state = "0-10"; tag = "icon-0-6"},/obj/structure/cable,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
+"J" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/structure/cable{d1 = 12; d2 = 0; icon_state = "12-0"; pixel_y = 1},/obj/structure/cable{d2 = 10; icon_state = "0-10"; tag = "icon-0-6"},/obj/structure/cable,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "K" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled{icon_state = "white"},/area/ship/scrap/maintenance/engine/lower)
 "L" = (/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "M" = (/obj/item/weapon/stool/padded,/obj/structure/cable{tag = "icon-4-9"; icon_state = "4-9"},/obj/structure/cable{tag = "icon-4-10"; icon_state = "4-10"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "N" = (/obj/structure/cable{tag = "icon-5-8"; icon_state = "5-8"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "O" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/obj/machinery/power/apc,/obj/structure/cable{d2 = 5; icon_state = "0-5"; tag = "icon-0-6"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
 "P" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/engine/lower)
+"Q" = (/obj/effect/shuttle_landmark/below_deck,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -80,7 +81,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaabgdddodpbaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaabbqrsddbbaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaatbbbbubbtaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaatttvwxtttaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaattvwxttayyyaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaattvwxttayyyQaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaatavwxatayyyaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaattvwxttayyyaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaatvvwzAtaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -107,3 +108,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

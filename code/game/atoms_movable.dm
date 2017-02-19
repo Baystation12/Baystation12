@@ -254,6 +254,9 @@
 	return
 
 /atom/movable/proc/touch_map_edge()
+	if(!simulated)
+		return
+
 	if(!z || (z in using_map.sealed_levels))
 		return
 

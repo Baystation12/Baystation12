@@ -337,13 +337,6 @@ var/list/mob/living/forced_ambiance_list = new
 		return 1
 	return 0
 
-//Can shuttle go here without doing weird stuff?
-/area/proc/free()
-	for(var/atom/A in src)
-		if(A.density)
-			return 0
-	return 1
-
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)
 	var/list/min = list("x"=world.maxx,"y"=world.maxy)

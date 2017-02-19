@@ -5,10 +5,12 @@
 "e" = (/obj/structure/window/reinforced{dir = 1},/obj/machinery/computer/shuttle_control/explore/test2,/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
 "f" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s10"; icon_state = "swall_s"; dir = 2},/area/sector/shuttle/outgoing2)
 "g" = (/turf/simulated/shuttle/wall{tag = "icon-swall3"; icon_state = "swall_straight"; dir = 1},/area/sector/shuttle/outgoing2)
-"h" = (/obj/structure/bed/chair{tag = "icon-chair_preview (NORTH)"; icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
+"h" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "exploration_pod_hatch"},/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
 "i" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s5"; icon_state = "swall_s"; dir = 1},/area/sector/shuttle/outgoing2)
-"j" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
+"j" = (/obj/structure/bed/chair{tag = "icon-chair_preview (NORTH)"; icon_state = "chair_preview"; dir = 1},/obj/effect/shuttle_landmark/pod,/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "exploration_pod"; pixel_x = 25; pixel_y = 8; tag = "exploration_pod"},/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
 "k" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s9"; icon_state = "swall_s"; dir = 8},/area/sector/shuttle/outgoing2)
+"l" = (/turf/simulated/shuttle/wall{tag = "icon-swall12"; icon_state = "swall_straight"; dir = 4},/area/sector/shuttle/outgoing2)
+"m" = (/obj/effect/shuttle_landmark/ingoing2,/turf/space,/area/sector/shuttle/ingoing2)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -25,11 +27,11 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaabaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaccccaaaaaaaaaaaaaaaaa
-aaaaaaaaaccccaaaaaaaaaaaaaaaaa
+aaaaaaaaaccmcaaaaaaaaaaaaaaaaa
 aaaaaaaaaccccaaaaaaaaaaaaaaaaa
 aaaaaaaaaccccaaadefaaaaaaaaaaa
-aaaaaaaaaccccaaaghgaaaaaaaaaaa
-aaaaaaaaaccccaaaijkaaaaaaaaaaa
+aaaaaaaaaccccaaahjgaaaaaaaaaaa
+aaaaaaaaaccccaaailkaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -42,3 +44,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
