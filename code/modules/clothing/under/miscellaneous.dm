@@ -631,3 +631,14 @@
 	icon_state = "turtleneck"
 	worn_state = "turtleneck"
 
+/obj/item/clothing/under/utility/expeditionary/monkey
+	name = "adjusted expeditionary uniform"
+	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim. It was also mangled to fit a monkey. This better be worth the NJP you'll get for making it."
+	species_restricted = list("Monkey")
+	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/wo1_monkey)
+
+/obj/item/clothing/accessory/rank/fleet/officer/wo1_monkey
+	name = "makeshift ranks (WO-1 warrant officer 1)"
+	desc = "Insignia denoting the elusive rank of Warant Officer. Too bad it's obviously fake."
+	icon_state = "fleetrank_officer"
