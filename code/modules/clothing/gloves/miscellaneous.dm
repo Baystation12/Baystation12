@@ -20,6 +20,13 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 
+/obj/item/clothing/gloves/insulated/hackerman
+	desc = "Insulated gloves for all your hacking needs. They're so bad."
+	name = "white insulated gloves"
+	color = null
+	icon_state = "power_glove"
+	item_state = "power_glove"
+
 /obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
 	name = "budget insulated gloves"

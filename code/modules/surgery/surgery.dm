@@ -99,17 +99,22 @@
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, src)		//start on it
 				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				if(prob(S.tool_quality(src)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
+				var/surgery_time = rand(S.min_duration, S.max_duration)
+				var/effective_quality = S.tool_quality(src)
+				if(user.has_aspect(ASPECT_SAWBONES))
+					effective_quality = min(100, effective_quality * 1.5)
+					surgery_time *= 0.75
+				if(prob(effective_quality) &&  do_mob(user, M, surgery_time))
 					S.end_step(user, M, zone, src)		//finish successfully
 				else if ((src in user.contents) && user.Adjacent(M))			//or
 					S.fail_step(user, M, zone, src)		//malpractice~
 				else // This failing silently was a pain.
-					to_chat(user, "<span class='warning'>You must remain close to your patient to conduct surgery.</span>")
+					user << "<span class='warning'>You must remain close to your patient to conduct surgery.</span>"
 				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					H.update_surgery()
-				return	1	  												//don't want to do weapony things after surgery
+				return	1														//don't want to do weapony things after surgery
 
 	if (user.a_intent == I_HELP)
 		to_chat(user, "<span class='warning'>You can't see any useful way to use [src] on [M].</span>")

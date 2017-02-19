@@ -241,7 +241,11 @@
 		return
 	if(!assailant.canClick())
 		return
-	if(world.time < (last_action + UPGRADE_COOLDOWN))
+
+	var/checktime = UPGRADE_COOLDOWN
+	if(assailant.has_aspect(ASPECT_WRESTLER))
+		checktime *= 0.75
+	if(world.time < (last_action + checktime))
 		return
 	if(!assailant.canmove || assailant.lying)
 		qdel(src)

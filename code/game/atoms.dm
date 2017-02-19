@@ -207,6 +207,8 @@ its easier to just keep the beam vertical.
 
 	to_chat(user, "\icon[src] That's [f_name] [suffix]")
 	to_chat(user, desc)
+	if(user.has_aspect(ASPECT_APPRAISER))
+		to_chat(user, "<span class='notice'>It is worth about [max(1,round(get_value(src)/1000) * 1000)]</span>")
 
 	return distance == -1 || (get_dist(src, user) <= distance)
 

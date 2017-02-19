@@ -73,13 +73,14 @@
 				if (!cpr_time)
 					return 0
 
+				var/cooltime = H.has_aspect(ASPECT_FIRSTAID) ? 15 : 30
 				cpr_time = 0
-				spawn(30)
+				spawn(cooltime)
 					cpr_time = 1
 
 				H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
 
-				if(!do_after(H, 30, src))
+				if(!do_after(H, cooltime, src))
 					return
 
 				adjustOxyLoss(-(min(getOxyLoss(), 5)))
@@ -210,6 +211,8 @@
 
 			var/real_damage = rand_damage
 			real_damage += attack.get_unarmed_damage(H)
+			if(H.has_aspect(ASPECT_BRAWLER))
+				real_damage *= 1.25
 			real_damage *= damage_multiplier
 			rand_damage *= damage_multiplier
 			if(HULK in H.mutations)

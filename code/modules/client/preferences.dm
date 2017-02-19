@@ -73,6 +73,7 @@ datum/preferences
 
 	var/used_skillpoints = 0
 	var/list/skills = list() // skills can range from 0 to 3
+	var/list/aspects = list()
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
