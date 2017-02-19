@@ -183,7 +183,13 @@
 /obj/item/organ/external/proc/get_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)
 		return 0
-	return pain
+	var/lasting_pain = 0
+	lasting_pain += open * 5
+	if(is_broken())
+		lasting_pain += 10
+	else if(is_dislocated())
+		lasting_pain += 5
+	return pain + lasting_pain
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)

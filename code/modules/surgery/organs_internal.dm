@@ -6,6 +6,8 @@
 	priority = 2
 	can_infect = 1
 	blood_level = 1
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/internal/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 

@@ -9,6 +9,8 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/cavity
 	priority = 1
+	shock_level = 40
+	delicate = 1
 /datum/surgery_step/cavity/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!hasorgans(target))
 		return 0
