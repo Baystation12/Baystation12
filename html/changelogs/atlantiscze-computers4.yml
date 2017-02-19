@@ -1,7 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added modular telescreens - wall mounted modular computers that are comparable to laptops in terms of hardware restrictions, and tablets in terms of software restrictions. Few of those have been mapped in, more can be built."
-  - tweak: "Large amount of under-the-hood improvements and tweaks."

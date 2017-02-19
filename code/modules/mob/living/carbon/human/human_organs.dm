@@ -151,7 +151,7 @@
 	var/disarm_slot
 	switch(affected.body_part)
 		if(HAND_LEFT, ARM_LEFT)
-			disarm_slot = slot_r_hand
+			disarm_slot = slot_l_hand
 		if(HAND_RIGHT, ARM_RIGHT)
 			disarm_slot = slot_r_hand
 
@@ -159,6 +159,10 @@
 		return
 
 	var/obj/item/thing = get_equipped_item(disarm_slot)
+	
+	if(!thing)
+		return
+	
 	drop_from_inventory(thing)
 
 	if(affected.robotic >= ORGAN_ROBOT)

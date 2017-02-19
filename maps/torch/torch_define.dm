@@ -4,7 +4,7 @@
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
-	lobby_icon = 'maps/torch/torch_lobby.dmi'
+	lobby_icon = 'maps/torch/icons/lobby.dmi'
 
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
@@ -37,6 +37,8 @@
 	evac_controller_type = /datum/evacuation_controller/starship
 
 	default_law_type = /datum/ai_laws/solgov
+
+	id_hud_icons = 'maps/torch/icons/id_hud.dmi'
 
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,world.maxx,world.maxy) // Create the mining Z-level.

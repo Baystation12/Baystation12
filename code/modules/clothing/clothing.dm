@@ -617,6 +617,15 @@ BLIND     // can't see anything
 	valid_accessory_slots = list("utility","armband","rank","decor")
 	restricted_accessory_slots = list("utility", "armband","rank")
 
+/obj/item/clothing/under/New()
+	..()
+	update_rolldown_status()
+	update_rollsleeves_status()
+	if(rolled_down == -1)
+		verbs -= /obj/item/clothing/under/verb/rollsuit
+	if(rolled_sleeves == -1)
+		verbs -= /obj/item/clothing/under/verb/rollsleeves
+
 /obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 	if(item_state_slots && item_state_slots[slot])
