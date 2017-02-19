@@ -1,0 +1,9 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Surgery changes. Cry, medical."
+  - rscadd: "Self-surgery is legal now. It was possible via a bug, it's a feature now."
+  - rscadd: "As a side effect, you don't have to lie down to be operated on. It is, however, a very bad idea unless it's basic steps like incision etc. Success chance will drop for delicate steps."
+  - rscadd: "Instead of randomly doing nothing, rollerbeds / tables are factored into surgery success chance calculation."
+  - rscadd: "Said success chance: surgery steps now can fail even if you don't move / drop tools etc. Ideal scenario is 'sober surgeon not in pain operating on another person who is lying on an optable'. Deviations from that add chance of failure. Some steps are more robust, some are more delicate. As a rule of a thumb, if you have to touch innards, that's delicate. If you perform internal organ surgery on yourself while sitting on a table piss drunk, nearly passing out from pain and also being blind, it's not going to go very smooth."
+  - rscadd: "Shock will advance fast when being surgery'd on, so take it slow or take some pills."
