@@ -480,7 +480,7 @@
 	flags = AREA_RAD_SHIELDED
 
 /area/calypso_hangar/start
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper Calypso"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
@@ -532,7 +532,7 @@
 	flags = AREA_RAD_SHIELDED
 
 /area/aquila_hangar/start
-	name = "\improper SEV Torch Landing Area"
+	name = "\improper SEV Aquila"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/reinforced/airless
 
@@ -585,7 +585,7 @@
 
 
 /area/guppy_hangar/start
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper Guppy"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
 
@@ -632,7 +632,6 @@
 	flags = AREA_RAD_SHIELDED
 
 /area/shuttle/petrov/docked
-	name = "\improper NSV Petrov - Docked"
 
 /area/shuttle/petrov/away
 	name = "\improper NSV Petrov - Away"
