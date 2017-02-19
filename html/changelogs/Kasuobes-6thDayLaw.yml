@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - maptweak: "Destroyed the cloning lab on Exodus and all technology related to it."
