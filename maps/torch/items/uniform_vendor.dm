@@ -15,45 +15,79 @@
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
-	var/mob/current_user = null //one person at a time, please
-
+	var/obj/item/weapon/card/id/ID
+	var/list/uniforms = list()
+	var/list/selected_outfit = list()
 	var/static/decl/hierarchy/mil_uniform/mil_uniforms
+
+/obj/machinery/uniform_vendor/attack_hand(mob/user)
+	if(..())
+		return
+	user.set_machine(src)
+	var/dat = list()
+	dat += "User ID: <a href='byond://?src=\ref[src];ID=1'>[ID ? "[ID.registered_name], [ID.military_rank], [ID.military_branch]" : "--------"]</a>"
+	dat += "<hr>"
+	if(!ID)
+		dat += "Insert your ID card to proceed."
+	else
+		var/datum/job/job = job_master.GetJobByType(ID.job_access_type)
+		if(job)
+			uniforms = find_uniforms(ID.military_rank, ID.military_branch, job.department_flag)
+		for(var/T in uniforms)
+			dat += "<b>[T]</b> <a href='byond://?src=\ref[src];get_all=[T]'>Select All</a>"
+			var/list/uniform = uniforms[T]
+			for(var/piece in uniform)
+				if(piece)
+					var/obj/item/clothing/C = piece
+					if(piece in selected_outfit)
+						dat += "<span class='linkOn'>[initial(C.name)]</span><a href='byond://?src=\ref[src];rem=[piece]'>X</a>"
+					else
+						dat += "<a href='byond://?src=\ref[src];add=[piece]'>[initial(C.name)]</a>"
+			dat += "<hr>"
+		dat += "<a href='byond://?src=\ref[src];vend=[1]'>Dispense</a>"
+	dat = jointext(dat,"<br>")
+	var/datum/browser/popup = new(user, "Uniform Dispenser","Uniform Dispenser", 300, 700, src)
+	popup.set_content(dat)
+	popup.open()
+
+/obj/machinery/uniform_vendor/Topic(href, href_list)
+	if(..())
+		return 1
+	if(href_list["ID"])
+		var/mob/M = usr
+		if(ID)
+			M.put_in_hands(ID)
+			ID = null
+			selected_outfit.Cut()
+		else
+			var/obj/item/weapon/card/id/I = M.get_active_hand()
+			if(I)
+				ID = I
+				M.drop_from_inventory(I,src)
+		. = 1
+	if(href_list["get_all"])
+		selected_outfit |= uniforms[href_list["get_all"]]
+		. = 1
+	if(href_list["add"])
+		selected_outfit |= text2path(href_list["add"])
+		. = 1
+	if(href_list["rem"])
+		selected_outfit -= text2path(href_list["rem"])
+		. = 1
+	if(href_list["vend"])
+		spawn_uniform(selected_outfit)
+		selected_outfit.Cut()
+		. = 1
+	if(.)
+		attack_hand(usr)
 
 /obj/machinery/uniform_vendor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	var/obj/item/weapon/card/id/I = W.GetIdCard()
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-
-	if(current_user)
-		to_chat(user, "<span class='warning'>\The [src] is already processing someone else's request.</span>")
-	else if(I)
-		to_chat(user, "<span class='notice'>You swipe [I.registered_name]'s ID through \the [src]!</span>")
-
-		//The following is going to be incredibly gross, but we don't store instances of job datums in IDs.
-		var/list/uniforms
-		var/datum/job/job = job_master.GetJobByType(I.job_access_type)
-		if(job)
-			uniforms = find_uniforms(I.military_rank, I.military_branch, job.department_flag)
-
-		if(!uniforms)
-			to_chat(user, "<span class='warning'>\The [src] does not accept [I.registered_name]'s ID!</span>")
-			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
-			flick(icon_deny, src)
-		else if(!uniforms.len) // Any uniforms stored?
-			to_chat(user, "<span class='warning'>\The [src] cannot find any valid uniforms for [I.registered_name]'s ID!</span>")
-			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 100, 1)
-			flick(icon_deny, src)
-		else
-			current_user = user
-			spawn(15 SECONDS) //timeout so that if someone logs at the input dialog it doesn't freeze out everyone else
-				current_user = null
-
-			var/choice = input(user,"Please select the uniform you wish to receive") as null|anything in uniforms
-			if(choice && (!current_user || current_user == user))
-				spawn_uniform(uniforms[choice])
-
-			current_user = null
-
+	if(I && !ID)
+		to_chat(user, "<span class='notice'>You slide [I.registered_name]'s ID into \the [src]!</span>")
+		ID = I
+		user.drop_from_inventory(I,src)
 
 /*	Outfit structures
 	branch
