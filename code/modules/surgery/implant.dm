@@ -9,11 +9,13 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/cavity
 	priority = 1
+	shock_level = 40
+	delicate = 1
 /datum/surgery_step/cavity/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.open == (affected.encased ? 3 : 2) && !(affected.status & ORGAN_BLEEDING)
+	return affected && affected.open >= (affected.encased ? 3 : 2) && !(affected.status & ORGAN_BLEEDING)
 
 /datum/surgery_step/cavity/proc/get_max_wclass(var/obj/item/organ/external/affected)
 	switch (affected.organ_tag)

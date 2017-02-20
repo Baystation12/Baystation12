@@ -10,6 +10,8 @@
 	priority = 2
 	can_infect = 1
 	blood_level = 1
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/open_encased/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
@@ -29,6 +31,7 @@
 
 	min_duration = 50
 	max_duration = 70
+	shock_level = 60
 
 /datum/surgery_step/open_encased/saw/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))

@@ -6,6 +6,31 @@
 		verbs |= /obj/item/modular_computer/verb/eject_usb
 	if(card_slot)
 		verbs |= /obj/item/modular_computer/verb/eject_id
+	verbs |= /obj/item/modular_computer/verb/emergency_shutdown
+
+// Forcibly shut down the device. To be used when something bugs out and the UI is nonfunctional.
+/obj/item/modular_computer/verb/emergency_shutdown()
+	set name = "Forced Shutdown"
+	set category = "Object"
+	set src in view(1)
+
+	if(usr.incapacitated() || !istype(usr, /mob/living))
+		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+		return
+
+	if(!Adjacent(usr))
+		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		return
+
+	if(enabled)
+		bsod = 1
+		update_icon()
+		shutdown_computer()
+		to_chat(usr, "You press a hard-reset button on \the [src]. It displays a brief debug screen before shutting down.")
+		spawn(2 SECONDS)
+			bsod = 0
+			update_icon()
+
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/verb/eject_id()

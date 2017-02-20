@@ -3,7 +3,7 @@
 
 /area/ship/scrap/crew
 	name = "\improper Crew Compartements"
-	icon_state = "hallC"
+	icon_state = "crew_quarters"
 
 /area/ship/scrap/crew/hallway/port
 	name = "\improper Crew Hallway - Port"
@@ -15,9 +15,21 @@
 	name = "\improper Galley"
 	icon_state = "kitchen"
 
-/area/ship/scrap/crew/dorms
-	name = "\improper Dorms"
-	icon_state = "crew_quarters"
+/area/ship/scrap/crew/cryo
+	name = "\improper Cryo Storage"
+	icon_state = "cryo"
+
+/area/ship/scrap/crew/dorms1
+	name = "\improper Crew Cabin #1"
+	icon_state = "green"
+
+/area/ship/scrap/crew/dorms2
+	name = "\improper Crew Cabin #2"
+	icon_state = "purple"
+
+/area/ship/scrap/crew/dorms3
+	name = "\improper Crew Cabin #3"
+	icon_state = "yellow"
 
 /area/ship/scrap/crew/saloon
 	name = "\improper Saloon"
@@ -26,6 +38,7 @@
 /area/ship/scrap/crew/toilets
 	name = "\improper Bathrooms"
 	icon_state = "toilet"
+	turf_initializer = /decl/turf_initializer/maintenance
 
 /area/ship/scrap/crew/wash
 	name = "\improper Washroom"
@@ -44,26 +57,47 @@
 
 /area/ship/scrap/dock
 	name = "\improper Docking Bay"
-	icon_state = "entry"
+	icon_state = "entry_1"
 
-/area/ship/scrap/unused1
-	name = "\improper Atmos Equipment Comparment"
+/area/ship/scrap/fire
+	name = "\improper Firefighting Equipment Comparment"
 	icon_state = "green"
 
-/area/ship/scrap/unused2
-	name = "\improper Unused Compartment #2"
+/area/ship/scrap/unused
+	name = "\improper Compartment 2-B"
+	icon_state = "yellow"
+	turf_initializer = /decl/turf_initializer/maintenance
+
+/area/ship/scrap/hidden
+	name = "\improper Unknown" //shielded compartment
+	icon_state = "auxstorage"
+
+/area/ship/scrap/broken1
+	name = "\improper Compartment 1-A"
+	icon_state = "green"
+
+/area/ship/scrap/broken2
+	name = "\improper Compartment 1-B"
 	icon_state = "yellow"
 
-/area/ship/scrap/unused3
-	name = "\improper Unused Compartment #3"
-	icon_state = "blueold"
+/area/ship/scrap/gambling
+	name = "\improper Compartment 1-C"
+	icon_state = "cave"
 
 /area/ship/scrap/maintenance
 	name = "\improper Maintenance Compartments"
-	icon_state = "storage"
+	icon_state = "amaint"
+
+/area/ship/scrap/maintenance/lower
+	name = "\improper Lower Deck Maintenance Compartments"
+	icon_state = "sub_maint_aft"
 
 /area/ship/scrap/maintenance/storage
 	name = "\improper Tools Storage"
+	icon_state = "engineering_storage"
+
+/area/ship/scrap/maintenance/eva
+	name = "\improper EVA Storage"
 	icon_state = "eva"
 
 /area/ship/scrap/maintenance/atmos
@@ -75,18 +109,16 @@
 	icon_state = "engine_smes"
 
 /area/ship/scrap/maintenance/engine
+	icon_state = "engine"
 
 /area/ship/scrap/maintenance/engine/aft
-	name = "\improper Engine Compartment - Aft"
+	name = "\improper Main Engine Bay"
 
 /area/ship/scrap/maintenance/engine/port
-	name = "\improper Engine Compartment - Port"
+	name = "\improper Port Thruster"
 
 /area/ship/scrap/maintenance/engine/starboard
-	name = "\improper Engine Compartments - Starboard"
-
-/area/ship/scrap/maintenance/engine/lower
-	name = "\improper Lower Engine Compartments"
+	name = "\improper Starboard Thruster"
 
 /area/ship/scrap/command
 	name = "\improper Command Deck"

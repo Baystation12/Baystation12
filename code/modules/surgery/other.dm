@@ -17,6 +17,8 @@
 
 	min_duration = 70
 	max_duration = 90
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/fix_tendon/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!hasorgans(target))
@@ -58,6 +60,8 @@
 
 	min_duration = 70
 	max_duration = 90
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/fix_vein/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!hasorgans(target))
