@@ -40,6 +40,10 @@
 
 	id_hud_icons = 'maps/torch/icons/id_hud.dmi'
 
+/datum/map/torch/setup_map()
+	..()
+	system_name = "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
+
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,world.maxx,world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
