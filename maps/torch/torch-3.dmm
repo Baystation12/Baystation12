@@ -670,7 +670,7 @@
 "mT" = (/obj/structure/sign/warning/fire,/obj/machinery/atmospherics/pipe/simple/visible/black,/turf/simulated/wall/r_wall,/area/engineering/engine_room)
 "mU" = (/obj/random/trash,/turf/simulated/floor/plating,/area/vacant/cannon)
 "mV" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/vacant/cannon)
-"mW" = (/obj/structure/sign/directions/infirmary{dir = 1; pixel_y = -6},/obj/structure/sign/directions/science{dir = 2; pixel_y = 6},/turf/simulated/wall/r_wall,/area/hallway/primary/seconddeck/center)
+"mW" = (/obj/structure/sign/directions/infirmary{dir = 1; pixel_y = -6},/obj/structure/sign/directions/science{dir = 1; pixel_y = 6},/turf/simulated/wall/r_wall,/area/hallway/primary/seconddeck/center)
 "mX" = (/obj/machinery/light/small,/turf/simulated/floor/tiled,/area/hallway/primary/seconddeck/center)
 "mY" = (/obj/structure/sign/deck/second{pixel_y = -32},/turf/simulated/floor/tiled,/area/hallway/primary/seconddeck/center)
 "mZ" = (/obj/structure/stairs/east,/turf/simulated/floor/tiled,/area/hallway/primary/seconddeck/center)
@@ -887,7 +887,7 @@
 "rc" = (/obj/machinery/atmospherics/pipe/simple/visible/green{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "rd" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/green,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "re" = (/obj/machinery/atmospherics/pipe/manifold/visible/green,/obj/machinery/meter,/obj/effect/floor_decal/industrial/warning{dir = 5},/turf/simulated/floor/plating,/area/engineering/engine_room)
-"rf" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 4; icon_state = "intact"; tag = "icon-intact (EAST)"},/obj/machinery/door/airlock/hatch{icon_state = "door_locked"; id_tag = "engine_access_hatch"; locked = 1; req_access = list(11)},/turf/simulated/floor/reinforced,/area/engineering/engine_room)
+"rf" = (/obj/machinery/door/airlock/hatch{icon_state = "door_locked"; id_tag = "engine_access_hatch"; locked = 1; req_access = list(11)},/obj/machinery/atmospherics/pipe/simple/visible/green{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/reinforced,/area/engineering/engine_room)
 "rg" = (/obj/machinery/atmospherics/unary/outlet_injector{dir = 8; frequency = 1438; icon_state = "map_injector"; id = "cooling_in"; name = "Coolant Injector"; pixel_y = 1; power_rating = 30000; use_power = 1; volume_rate = 700},/obj/effect/floor_decal/industrial/warning/corner{dir = 4},/turf/simulated/floor/reinforced{name = "engine floor"; oxygen = 0},/area/engineering/engine_room)
 "rh" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/reinforced{name = "engine floor"; oxygen = 0},/area/engineering/engine_room)
 "ri" = (/obj/structure/artilleryplaceholder{tag = "icon-35"; icon_state = "35"},/turf/simulated/floor/plating,/area/vacant/cannon)
@@ -928,7 +928,7 @@
 "rR" = (/obj/structure/sign/directions/supply{dir = 2; pixel_y = -10},/obj/structure/sign/directions/evac{dir = 2},/obj/structure/sign/directions/engineering{dir = 4; pixel_y = 10},/turf/simulated/wall/r_wall,/area/engineering/foyer)
 "rS" = (/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/tiled,/area/engineering/foyer)
 "rT" = (/obj/machinery/door/firedoor/border_only,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/engineering/foyer)
-"rU" = (/obj/structure/sign/directions/infirmary{dir = 1; pixel_y = -6},/obj/structure/sign/directions/science{dir = 2; pixel_y = 6},/turf/simulated/wall/r_wall,/area/engineering/foyer)
+"rU" = (/obj/structure/sign/directions/infirmary{dir = 1; pixel_y = -6},/obj/structure/sign/directions/science{dir = 1; pixel_y = 6},/turf/simulated/wall/r_wall,/area/engineering/foyer)
 "rV" = (/obj/structure/closet/secure_closet/engineering_welding,/obj/item/clothing/glasses/welding,/obj/item/clothing/glasses/welding,/obj/machinery/computer/guestpass{pixel_x = -32},/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "rW" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/vending/engivend,/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "rX" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/table/steel,/obj/item/device/floor_painter,/obj/item/device/pipe_painter,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled,/area/engineering/locker_room)
@@ -1599,9 +1599,9 @@
 "EM" = (/turf/space,/area/aquila_hangar/seconddeck)
 "EN" = (/turf/space,/area/calypso_hangar/seconddeck)
 "EO" = (/obj/effect/floor_decal/corner/lime{dir = 9},/obj/structure/ladder,/obj/structure/sign/deck/second{pixel_x = -32},/turf/simulated/floor/tiled,/area/engineering/foyer)
-"ER" = (/obj/random_multi/single_item/punitelly,/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
-"EQ" = (/obj/random_multi/single_item/punitelly,/turf/simulated/floor/plating,/area/vacant/chapel)
 "EP" = (/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/obj/random_multi/single_item/punitelly,/turf/simulated/floor/tiled/dark,/area/vacant/mess)
+"EQ" = (/obj/random_multi/single_item/punitelly,/turf/simulated/floor/plating,/area/vacant/chapel)
+"ER" = (/obj/random_multi/single_item/punitelly,/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
