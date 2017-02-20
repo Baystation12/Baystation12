@@ -95,6 +95,38 @@
 
 	var/debug = 0
 
+/obj/machinery/power/supermatter/New()
+	..()
+	uid = gl_uid++
+
+/obj/machinery/power/supermatter/proc/get_status()
+	var/turf/T = get_turf(src)
+	if(!T)
+		return SUPERMATTER_ERROR
+	var/datum/gas_mixture/air = T.return_air()
+	if(!air)
+		return SUPERMATTER_ERROR
+
+	if(grav_pulling || exploded)
+		return SUPERMATTER_DELAMINATING
+
+	if(get_integrity() < 25)
+		return SUPERMATTER_EMERGENCY
+
+	if(get_integrity() < 50)
+		return SUPERMATTER_DANGER
+
+	if((get_integrity() < 100) || (air.temperature > CRITICAL_TEMPERATURE))
+		return SUPERMATTER_WARNING
+
+	if(air.temperature > (CRITICAL_TEMPERATURE * 0.8))
+		return SUPERMATTER_NOTIFY
+
+	if(power > 5)
+		return SUPERMATTER_NORMAL
+	return SUPERMATTER_INACTIVE
+
+
 /obj/machinery/power/supermatter/proc/explode()
 	set waitfor = 0
 

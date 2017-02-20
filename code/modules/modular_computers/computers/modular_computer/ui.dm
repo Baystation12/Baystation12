@@ -140,16 +140,18 @@
 		if(3)
 			data["PC_ntneticon"] = "sig_lan.gif"
 
-	if(idle_threads.len)
-		var/list/program_headers = list()
-		for(var/datum/computer_file/program/P in idle_threads)
-			if(!P.ui_header)
-				continue
-			program_headers.Add(list(list(
-				"icon" = P.ui_header
-			)))
-
-		data["PC_programheaders"] = program_headers
+	var/list/program_headers = list()
+	for(var/datum/computer_file/program/P in idle_threads)
+		if(!P.ui_header)
+			continue
+		program_headers.Add(list(list(
+			"icon" = P.ui_header
+		)))
+	if(active_program && active_program.ui_header)
+		program_headers.Add(list(list(
+			"icon" = active_program.ui_header
+		)))
+	data["PC_programheaders"] = program_headers
 
 	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = 1
