@@ -246,8 +246,7 @@
 	attack_sound = 'sound/weapons/pierce.ogg'
 
 	construct_spells = list(
-			/spell/targeted/harvest,
-			/spell/aoe_turf/knock/harvester
+			/spell/targeted/harvest
 		)
 
 ////////////////Glow//////////////////

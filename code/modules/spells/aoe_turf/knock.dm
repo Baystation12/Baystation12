@@ -30,23 +30,3 @@
 	range *= 2
 
 	return "You've doubled the range of [src]."
-
-//Construct version
-/spell/aoe_turf/knock/harvester
-	name = "Disintegrate Doors"
-	desc = "No door shall stop you."
-
-	spell_flags = CONSTRUCT_CHECK
-
-	charge_max = 100
-	invocation = ""
-	invocation_type = "silent"
-	range = 5
-
-	hud_state = "const_knock"
-
-/spell/aoe_turf/knock/harvester/cast(list/targets)
-	for(var/turf/T in targets)
-		for(var/obj/machinery/door/door in T.contents)
-			spawn door.cultify()
-	return
