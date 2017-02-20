@@ -68,7 +68,7 @@
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Maintenacne Assistant", "Roboticist", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Supply Assistant", "Sanitation Technician", "Cook", "Bartender")
+	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Maintenance Assistant", "Roboticist", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Supply Assistant", "Sanitation Technician", "Cook", "Bartender")
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
