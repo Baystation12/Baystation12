@@ -507,6 +507,12 @@ var/global/datum/controller/occupations/job_master
 		if(job.req_admin_notify)
 			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
+		var/datum/email_account/EA = new/datum/email_account()
+		EA.password = GenerateKey()
+		EA.login = "[replacetext(lowertext(H.real_name), " ", ".")]@freemail.nt"	// TODO: More email domains
+		to_chat(H, "Your email account address is [EA.login] and the password is [EA.password]. This information has also been placed into your notes.")
+		H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
 			var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(H), slot_glasses)
