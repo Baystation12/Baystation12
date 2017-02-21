@@ -39,8 +39,8 @@
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
 	if(allowed_branches && branch)
-		. = allowed_branches[branch.type]
-	. = . ? . : outfit_type
+		. = allowed_branches[branch.type] || .
+	. = . || outfit_type
 	. = outfit_by_type(.)
 
 /datum/job/proc/setup_account(var/mob/living/carbon/human/H)
