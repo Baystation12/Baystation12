@@ -1173,6 +1173,13 @@ About the new airlock wires panel:
 			if(A.closeOtherId == src.closeOtherId && A != src)
 				src.closeOther = A
 				break
+	var/turf/T = loc
+	if(!brace && locate(/obj/item/weapon/airlock_brace) in T)
+		var/obj/item/weapon/airlock_brace/A = locate(/obj/item/weapon/airlock_brace) in T
+		brace = A
+		brace.airlock = src
+		brace.forceMove(src)
+		update_icon()
 	..()
 
 /obj/machinery/door/airlock/Destroy()
