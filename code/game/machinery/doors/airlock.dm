@@ -1174,8 +1174,8 @@ About the new airlock wires panel:
 				src.closeOther = A
 				break
 	var/turf/T = loc
-	if(!brace && locate(/obj/item/weapon/airlock_brace) in T)
-		var/obj/item/weapon/airlock_brace/A = locate(/obj/item/weapon/airlock_brace) in T
+	var/obj/item/weapon/airlock_brace/A = locate(/obj/item/weapon/airlock_brace) in T
+	if(!brace && A)
 		brace = A
 		brace.airlock = src
 		brace.forceMove(src)
