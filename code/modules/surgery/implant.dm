@@ -41,7 +41,7 @@
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>")
-	affected.createwound(CUT, 20)
+	affected.take_damage(20, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 create implant space surgery step
@@ -247,12 +247,11 @@
 
 /datum/surgery_step/cavity/implant_removal/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	..()
-	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-	if (affected.implants.len)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	for(var/obj/item/weapon/implant/imp in affected.implants)
 		var/fail_prob = 10
 		fail_prob += 100 - tool_quality(tool)
 		if (prob(fail_prob))
-			var/obj/item/weapon/implant/imp = affected.implants[1]
 			user.visible_message("<span class='warning'>Something beeps inside [target]'s [affected.name]!</span>")
 			playsound(imp.loc, 'sound/items/countdown.ogg', 75, 1, -3)
 			spawn(25)
