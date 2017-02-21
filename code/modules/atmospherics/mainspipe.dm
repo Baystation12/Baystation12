@@ -49,9 +49,9 @@ obj/machinery/atmospherics/mains_pipe
 	var/minimum_temperature_difference = 300
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
-	var/maximum_pressure = 70*ONE_ATMOSPHERE
-	var/fatigue_pressure = 55*ONE_ATMOSPHERE
-	alert_pressure = 55*ONE_ATMOSPHERE
+	var/maximum_pressure = 210*ONE_ATMOSPHERE
+	var/fatigue_pressure = 170*ONE_ATMOSPHERE
+	alert_pressure = 170*ONE_ATMOSPHERE
 
 	New()
 		..()
