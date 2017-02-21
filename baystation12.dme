@@ -1343,6 +1343,7 @@
 #include "code\modules\integrated_electronics\filters.dm"
 #include "code\modules\integrated_electronics\input_output.dm"
 #include "code\modules\integrated_electronics\logic.dm"
+#include "code\modules\integrated_electronics\machine_printer.dm"
 #include "code\modules\integrated_electronics\manipulation.dm"
 #include "code\modules\integrated_electronics\memory.dm"
 #include "code\modules\integrated_electronics\sensors.dm"
