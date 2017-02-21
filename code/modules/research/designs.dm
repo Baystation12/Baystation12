@@ -1597,7 +1597,7 @@ CIRCUITS BELOW
 	name = "integrated circuit"
 	id = "integrated"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	build_path = /obj/item/weapon/circuitboard/aicore
+	build_path = /obj/item/weapon/circuitboard/integrated_printer
 	sort_string = "WAAAS"
 
 /datum/design/aimodule
