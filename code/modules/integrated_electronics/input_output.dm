@@ -201,73 +201,114 @@
 	inputs = list("frequency","code")
 	outputs = list()
 	activators = list("send signal","on signal received")
-
-	var/frequency = 1457
-	var/code = 30
 	var/datum/radio_frequency/radio_connection
+	var/frequency = 1357
 
 /obj/item/integrated_circuit/input/signaler/initialize()
 	..()
-	set_frequency(frequency)
+
 	var/datum/integrated_io/new_freq = inputs[1]
 	var/datum/integrated_io/new_code = inputs[2]
 	// Set the pins so when someone sees them, they won't show as null
 	new_freq.data = frequency
-	new_code.data = code
+	new_code.data = 30
+	set_frequency(new_freq.data)
 
 /obj/item/integrated_circuit/input/signaler/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
-	frequency = 0
 	. = ..()
 
 /obj/item/integrated_circuit/input/signaler/on_data_written()
 	var/datum/integrated_io/new_freq = inputs[1]
-	var/datum/integrated_io/new_code = inputs[2]
 	if(isnum(new_freq.data) && new_freq.data > 0)
 		set_frequency(new_freq.data)
-	if(isnum(new_code.data))
-		code = new_code.data
 
+/obj/item/integrated_circuit/input/signaler/proc/create_signal()
+	var/datum/integrated_io/code = inputs[2]
+	var/datum/signal/signal = new()
+	signal.source = src
+	signal.encryption = code.data
+	signal.data["message"] = "ACTIVATE"
+	return signal
 
 /obj/item/integrated_circuit/input/signaler/do_work() // Sends a signal.
 	if(!radio_connection)
 		return
 
-	var/datum/signal/signal = new()
-	signal.source = src
-	signal.encryption = code
-	signal.data["message"] = "ACTIVATE"
-	radio_connection.post_signal(src, signal)
+	radio_connection.post_signal(src, create_signal())
 
-/obj/item/integrated_circuit/input/signaler/proc/set_frequency(new_frequency)
-	if(!frequency)
-		return
+/obj/item/integrated_circuit/input/signaler/proc/set_frequency(var/new_frequency)
 	if(!radio_controller)
 		sleep(20)
 	if(!radio_controller)
 		return
+
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
+	radio_connection = radio_controller.add_object(src, new_frequency, RADIO_CHAT)
 
-/obj/item/integrated_circuit/input/signaler/receive_signal(datum/signal/signal)
-	var/datum/integrated_io/new_code = inputs[2]
-	var/code = 0
-
-	if(isnum(new_code.data))
-		code = new_code.data
+/obj/item/integrated_circuit/input/signaler/proc/signal_good(var/datum/signal/signal)
 	if(!signal)
 		return 0
-	if(signal.encryption != code)
+	if(signal.source == src)
 		return 0
-	if(signal.source == src) // Don't trigger ourselves.
+
+	if(signal.encryption)
+		var/datum/integrated_io/cur_code = inputs[2]
+		var/code = 0
+		if(isnum(cur_code.data))
+			code = cur_code.data
+		if(code && signal.encryption != code)
+			return 0
+
+	return 1
+
+/obj/item/integrated_circuit/input/signaler/receive_signal(var/datum/signal/signal)
+
+	if(!signal_good(signal))
 		return 0
 
 	activate_pin(2)
 
 	for(var/mob/O in hearers(1, get_turf(src)))
 		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+
+	return 1
+
+/obj/item/integrated_circuit/input/signaler/advanced
+	name = "advanced integrated signaler"
+	desc = "Signals from a signaler can be received with this, allowing for remote control.  Additionally, it can send signals as well."
+	extended_desc = "When a signal is received from another signaler with the right id tag, the 'on signal received' activator pin will be pulsed and the command output is updated.  \
+	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
+	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message recieved"
+	complexity = 8
+	inputs = list("frequency", "code", "command", "id tag")
+	outputs = list("recieved command")
+
+/obj/item/integrated_circuit/input/signaler/advanced/initialize()
+	..()
+	var/datum/integrated_io/new_com = inputs[3]
+	var/datum/integrated_io/new_id = inputs[4]
+	var/datum/integrated_io/new_rec = outputs[1]
+	new_com.data = "ACTIVATE"
+	new_id.data = "Integrated_Circuit"
+	new_rec.data = "ACTIVATE"
+
+/obj/item/integrated_circuit/input/signaler/advanced/create_signal()
+	var/datum/signal/signal = ..()
+	var/datum/integrated_io/new_com = inputs[3]
+	var/datum/integrated_io/new_id = inputs[4]
+	signal.data["command"] = new_com.data
+	signal.data["id_tag"] = new_id.data
+	return signal
+
+/obj/item/integrated_circuit/input/signaler/advanced/receive_signal(var/datum/signal/signal)
+	if(!..())
+		return 0
+	if(signal.data["command"])
+		set_pin_data(IC_OUTPUT, 1, signal.data["command"])
+	return 1
 
 /obj/item/integrated_circuit/input/teleporter_locator
 	name = "teleporter locator"
