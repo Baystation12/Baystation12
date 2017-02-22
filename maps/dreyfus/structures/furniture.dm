@@ -1,3 +1,5 @@
+//SHELVES
+
 /obj/structure/table/shelf
 	name = "shelf"
 	desc = "Like racks, but taller."
@@ -33,3 +35,30 @@
 /obj/structure/table/shelf/holorack/dismantle(obj/item/weapon/wrench/W, mob/user)
 	to_chat(user, "<span class='warning'>You cannot dismantle \the [src].</span>")
 	return
+
+//SHUTTLE SEAT
+
+/obj/structure/bed/chair/shuttle
+	name = "passenger seat"
+	desc = "Comfortable and sturdy."
+	anchored = 0
+	color = null
+	icon = 'maps/dreyfus/icons/passenger_seat.dmi'
+	base_icon = "chair_passenger"
+	icon_state = "chair_passenger_preview"
+	material_alteration = MATERIAL_ALTERATION_NONE
+
+//CLOSET RESKIN
+
+/obj/structure/closet
+	icon = 'maps/dreyfus/icons/closet.dmi'
+	icon_state = "closed"
+
+/obj/structure/closet/secure_closet
+	icon = 'maps/dreyfus/icons/closet.dmi'
+	icon_state = "secure1"
+
+//CHAIR
+/obj/structure/bed/chair/white
+	color = null
+	material_alteration = MATERIAL_ALTERATION_NONE
