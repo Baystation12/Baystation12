@@ -136,9 +136,6 @@
 					var/mob/living/carbon/human/H = M
 					H.update_surgery()
 				return	1	  												//don't want to do weapony things after surgery
-
-	if (user.a_intent == I_HELP) //they are probably trying to surgery
-		to_chat(user, "<span class='warning'>You can't see any useful way to use [src] on [M] in surgery.</span>")
 	return 0
 
 /proc/sort_surgeries()
