@@ -278,6 +278,7 @@
 
 /obj/item/integrated_circuit/input/signaler/advanced
 	name = "advanced integrated signaler"
+	icon_state = "signal_advanced"
 	desc = "Signals from a signaler can be received with this, allowing for remote control.  Additionally, it can send signals as well."
 	extended_desc = "When a signal is received from another signaler with the right id tag, the 'on signal received' activator pin will be pulsed and the command output is updated.  \
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
