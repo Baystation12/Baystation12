@@ -578,6 +578,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/research
 	name = "research module"
 	channels = list("Science" = 1)
+	networks = list(NETWORK_RESEARCH)
 	sprites = list(
 					"Droid" = "droid-science",
 					"Drone" = "drone-science",

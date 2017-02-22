@@ -10,11 +10,11 @@
 
 /datum/gear/gloves/latex
 	cost = 3
-	allowed_roles = MEDICAL_ROLES
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/nitrile
 	cost = 3
-	allowed_roles = MEDICAL_ROLES
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/rainbow
 	allowed_roles = RESTRICTED_ROLES

@@ -31,19 +31,10 @@
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/accessory/holster/thigh,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
-
-/obj/structure/closet/secure_closet/security_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/security(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_sec(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 
 /obj/structure/closet/secure_closet/cos
@@ -79,19 +70,10 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/red,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/gloves/thick
+		/obj/item/clothing/gloves/thick,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
-
-/obj/structure/closet/secure_closet/cos/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/security(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_sec(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger/sec(src)
 
 /obj/structure/closet/secure_closet/brigofficer
 	name = "brig officer's locker"
@@ -126,20 +108,10 @@
 		/obj/item/weapon/folder/red,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/gloves/thick
+		/obj/item/clothing/gloves/thick,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
-
-/obj/structure/closet/secure_closet/brigofficer/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/security(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_sec(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger/sec(src)
-
 
 /obj/structure/closet/secure_closet/forensics
 	name = "forensics technician's locker"
@@ -177,16 +149,7 @@
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
-
-/obj/structure/closet/secure_closet/forensics/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/security(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_sec(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger/sec(src)

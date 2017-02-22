@@ -10,13 +10,16 @@
 	priority = 2
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
-	/obj/item/stack/cable_coil = 75
+	/obj/item/stack/cable_coil = 75,	\
+	/obj/item/weapon/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1
 
 	min_duration = 70
 	max_duration = 90
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/fix_tendon/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!hasorgans(target))
@@ -42,7 +45,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
-	affected.take_damage(5, 0)
+	affected.take_damage(5, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 IB fix surgery step
@@ -51,13 +54,16 @@
 	priority = 3
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
-	/obj/item/stack/cable_coil = 75
+	/obj/item/stack/cable_coil = 75,	\
+	/obj/item/weapon/tape_roll = 50
 	)
 	can_infect = 1
 	blood_level = 1
 
 	min_duration = 70
 	max_duration = 90
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/fix_vein/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!hasorgans(target))
@@ -84,7 +90,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>" , \
 	"<span class='warning'>Your hand slips, smearing [tool] in the incision in [target]'s [affected.name]!</span>")
-	affected.take_damage(5, 0)
+	affected.take_damage(5, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 Necrotic tissue removal surgery step
@@ -94,6 +100,7 @@
 	allowed_tools = list(
 		/obj/item/weapon/scalpel = 100,		\
 		/obj/item/weapon/material/knife = 75,	\
+		/obj/item/weapon/material/kitchen/utensil/knife = 75,	\
 		/obj/item/weapon/material/shard = 50, 		\
 	)
 
@@ -132,7 +139,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>")
-	affected.createwound(CUT, 20, 1)
+	affected.take_damage(20, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 Peridaxon necrosis treatment surgery step

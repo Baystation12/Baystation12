@@ -10,7 +10,6 @@
 /area/New()
 	icon_state = ""
 	uid = ++global_uid
-	all_areas += src
 
 	if(!requires_power)
 		power_light = 0

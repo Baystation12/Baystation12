@@ -52,8 +52,8 @@
 			if (pod.arming_controller)
 				pod.arming_controller.arm()
 
-/datum/evacuation_controller/shuttle/call_evacuation(var/mob/user, var/_emergency_evac, var/forced)
-	if(..(user, _emergency_evac, forced))
+/datum/evacuation_controller/shuttle/call_evacuation(var/mob/user, var/_emergency_evac, var/forced, var/skip_announce, var/autotransfer)
+	if(..())
 		autopilot = 1
 		shuttle_launch_time = evac_no_return
 		evac_ready_time += shuttle.warmup_time*10

@@ -95,6 +95,7 @@
 
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
+	verbs -= /mob/living/verb/ghost
 
 	//PDA
 	pda = new(src)
@@ -412,15 +413,6 @@
 	grabber.update_inv_l_hand()
 	grabber.update_inv_r_hand()
 	return H
-
-/mob/living/silicon/pai/MouseDrop(atom/over_object)
-	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
-	if(H.a_intent == I_HELP)
-		get_scooped(H)
-		return
-	else
-		return ..()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

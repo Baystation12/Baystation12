@@ -16,25 +16,24 @@
 		activate()
 
 /datum/computer_file/program/revelation/proc/activate()
-	if(computer)
-		computer.visible_message("<span class='notice'>\The [computer]'s screen brightly flashes and loud electrical buzzing is heard.</span>")
-		computer.enabled = 0
-		computer.update_icon()
+	if(!computer)
+		return
+
+	computer.visible_message("<span class='notice'>\The [computer]'s screen brightly flashes and loud electrical buzzing is heard.</span>")
+	computer.enabled = 0
+	computer.update_icon()
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(10, 1, computer.loc)
+	s.start()
+
+	if(computer.hard_drive)
 		qdel(computer.hard_drive)
-		if(computer.battery_module && prob(25))
-			qdel(computer.battery_module)
-			computer.visible_message("<span class='notice'>\The [computer]'s battery explodes in rain of sparks.</span>")
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(10, 1, computer.loc)
-			s.start()
-		if(istype(computer, /obj/item/modular_computer/processor))
-			var/obj/item/modular_computer/processor/P = computer
-			if(P.tesla_link && prob(50))
-				qdel(P.tesla_link)
-				computer.visible_message("<span class='notice'>\The [computer]'s tesla link explodes in rain of sparks.</span>")
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(10, 1, computer.loc)
-				s.start()
+
+	if(computer.battery_module && prob(25))
+		qdel(computer.battery_module)
+
+	if(computer.tesla_link && prob(50))
+		qdel(computer.tesla_link)
 
 /datum/computer_file/program/revelation/Topic(href, href_list)
 	if(..())

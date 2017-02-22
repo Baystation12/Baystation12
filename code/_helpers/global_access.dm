@@ -209,8 +209,6 @@
 			return global.all_antag_spawnpoints;
 		if("all_antag_types")
 			return global.all_antag_types;
-		if("all_areas")
-			return global.all_areas;
 		if("all_languages")
 			return global.all_languages;
 		if("all_maps")
@@ -635,8 +633,6 @@
 			return global.global_map;
 		if("global_message_listener")
 			return global.global_message_listener;
-		if("global_modular_computers")
-			return global.global_modular_computers;
 		if("global_mutations")
 			return global.global_mutations;
 		if("global_underwear")
@@ -851,6 +847,12 @@
 			return global.meteors_catastrophic;
 		if("meteors_dust")
 			return global.meteors_dust;
+		if("meteors_major")
+			return global.meteors_major;
+		if("meteors_minor")
+			return global.meteors_minor;
+		if("meteors_moderate")
+			return global.meteors_moderate;
 		if("meteors_normal")
 			return global.meteors_normal;
 		if("meteors_threatening")
@@ -1453,7 +1455,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1664,8 +1666,6 @@
 			global.all_antag_spawnpoints=newval;
 		if("all_antag_types")
 			global.all_antag_types=newval;
-		if("all_areas")
-			global.all_areas=newval;
 		if("all_languages")
 			global.all_languages=newval;
 		if("all_maps")
@@ -2090,8 +2090,6 @@
 			global.global_map=newval;
 		if("global_message_listener")
 			global.global_message_listener=newval;
-		if("global_modular_computers")
-			global.global_modular_computers=newval;
 		if("global_mutations")
 			global.global_mutations=newval;
 		if("global_underwear")
@@ -2306,6 +2304,12 @@
 			global.meteors_catastrophic=newval;
 		if("meteors_dust")
 			global.meteors_dust=newval;
+		if("meteors_major")
+			global.meteors_major=newval;
+		if("meteors_minor")
+			global.meteors_minor=newval;
+		if("meteors_moderate")
+			global.meteors_moderate=newval;
 		if("meteors_normal")
 			global.meteors_normal=newval;
 		if("meteors_threatening")
@@ -2908,7 +2912,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3014,7 +3018,6 @@
 	"allConsoles",
 	"all_antag_spawnpoints",
 	"all_antag_types",
-	"all_areas",
 	"all_languages",
 	"all_maps",
 	"all_money_accounts",
@@ -3227,7 +3230,6 @@
 	"global_listen_count",
 	"global_map",
 	"global_message_listener",
-	"global_modular_computers",
 	"global_mutations",
 	"global_underwear",
 	"global_vars_",
@@ -3335,6 +3337,9 @@
 	"meteors_cataclysm",
 	"meteors_catastrophic",
 	"meteors_dust",
+	"meteors_major",
+	"meteors_minor",
+	"meteors_moderate",
 	"meteors_normal",
 	"meteors_threatening",
 	"mil_branches",

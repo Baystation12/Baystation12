@@ -108,6 +108,16 @@
 			M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
 		else
 			return 1
+			
+/obj/item/projectile/energy/floramut/gene
+	name = "gamma somatoray"
+	icon_state = "energy2"
+	fire_sound = 'sound/effects/stealthoff.ogg'
+	damage = 0
+	damage_type = TOX
+	nodamage = 1
+	check_armour = "energy"
+	var/decl/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
 	name = "beta somatoray"
