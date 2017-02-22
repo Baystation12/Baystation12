@@ -259,7 +259,7 @@
 		var/code = 0
 		if(isnum(cur_code.data))
 			code = cur_code.data
-		if(code && signal.encryption != code)
+		if(signal.encryption != code)
 			return 0
 
 	return 1
