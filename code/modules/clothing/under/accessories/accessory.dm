@@ -364,11 +364,24 @@
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon_state = "fleetrank"
 	slot = "rank"
+	var/is_set = 0
+
+	attack_self(mob/user as mob)
+		if(src.is_set = 0)
+			rank_set(user)
+		else
+			to_chat(user, "<span class='notice'>You cannot change the rank on [src].</span>")
+
+	//Rework this to be a switch??
+	proc/rank_set(mob/user)
+		//Blah blah code here
+
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"
 	desc = "Insignia denoting naval rank of some kind. These appear blank."
 	icon_state = "fleetrank"
+	is_set = 1
 
 /obj/item/clothing/accessory/rank/fleet/enlisted
 	name = "ranks (E-1 crewman recruit)"
@@ -478,6 +491,7 @@
 	name = "marine ranks"
 	desc = "Insignia denoting marine rank of some kind. These appear blank."
 	icon_state = "marinerank_enlisted"
+	is_set = 1
 
 /obj/item/clothing/accessory/rank/marine/enlisted
 	name = "ranks (E-1 private)"
