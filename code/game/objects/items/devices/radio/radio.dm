@@ -752,7 +752,7 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/announcer/initialize()
 	..()
-	loc = locate(1,1,using_map.contact_levels[1])
+	loc = locate(1,1,using_map.contact_levels.len ? using_map.contact_levels[1] : 1)
 
 /obj/item/device/radio/phone
 	broadcasting = 0
