@@ -750,9 +750,9 @@ var/global/list/default_medbay_channels = list(
 	canhear_range = 0
 	channels=list("Engineering")
 
-/obj/item/device/radio/announcer/New()
+/obj/item/device/radio/announcer/initialize()
 	..()
-	forceMove(locate(1,1,using_map.contact_levels[1]))
+	loc = locate(1,1,using_map.contact_levels[1])
 
 /obj/item/device/radio/phone
 	broadcasting = 0
