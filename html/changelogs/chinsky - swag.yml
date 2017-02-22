@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "PI now spawns with a badge, Journalist with a camera. Also added tape recorder to custom loadout."

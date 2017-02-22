@@ -717,6 +717,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda
 	id_type = /obj/item/weapon/card/id/torch/passenger
 
+/decl/hierarchy/outfit/job/torch/passenger/passenger/PI
+	name = OUTFIT_JOB_NAME("Private Investigator - Torch")
+	backpack_contents = list(/obj/item/clothing/accessory/badge = 1)
+
+/decl/hierarchy/outfit/job/torch/passenger/passenger/journalist
+	name = OUTFIT_JOB_NAME("Journalist - Torch")
+	backpack_contents = list(/obj/item/device/tvcamera = 1)
 
 /decl/hierarchy/outfit/job/torch/merchant
 	name = OUTFIT_JOB_NAME("Merchant - Torch")
