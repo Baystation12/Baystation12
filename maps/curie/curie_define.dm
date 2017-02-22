@@ -32,24 +32,6 @@
 	emergency_shuttle_called_message = "La navette d'évacuation a été appelée. Elle arrivera dans approximativement %ETA%"
 	emergency_shuttle_recall_message = "La navette d'évacuation a été rappelée. Le coût de cette manoevre sera déduit directement de vos salaires."
 
-	station_networks = list(
-							NETWORK_CIVILIAN_EAST,
-							NETWORK_CIVILIAN_WEST,
-							NETWORK_SUPPLY,
-							NETWORK_COMMAND,
-							NETWORK_ENGINEERING,
-							NETWORK_MEDICAL,
-							NETWORK_MINE,
-							NETWORK_RESEARCH,
-							NETWORK_ROBOTS,
-							NETWORK_SECURITY,
-							NETWORK_ALARM_ATMOS,
-							NETWORK_ALARM_FIRE,
-							NETWORK_ALARM_POWER,
-							NETWORK_THUNDER,
-							NETWORK_TELECOM,
-							)
-
 	evac_controller_type = /datum/evacuation_controller/shuttle
 
 /datum/map/curie/perform_map_generation()

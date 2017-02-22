@@ -564,7 +564,7 @@
 "kR" = (/obj/structure/shuttle/engine/propulsion{icon_state = "burst_r"; dir = 8},/turf/space,/area/shuttle/specops/centcom)
 "kS" = (/obj/machinery/r_n_d/server/centcom,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)
 "kT" = (/obj/effect/floor_decal/corner/lime{dir = 6},/obj/machinery/light,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)
-"kU" = (/obj/machinery/account_database{name = "CentComm Accounts database"},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)
+"kU" = (/obj/machinery/computer/account_database{name = "CentComm Accounts database"},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)
 "kV" = (/obj/machinery/light,/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/holding)
 "kW" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/gloves{pixel_x = 3; pixel_y = 4},/obj/item/weapon/storage/box/masks{pixel_x = 0; pixel_y = 0},/obj/machinery/light{dir = 8},/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
 "kX" = (/obj/structure/window/reinforced/crescent{dir = 1},/obj/structure/shuttle/engine/heater,/turf/simulated/floor/airless,/area/shuttle/escape/centcom)
