@@ -81,7 +81,7 @@
 
 /obj/structure/sign/warning/New()
 	..()
-	desc = "A warning sign which reads '[name]'."
+	desc = "A warning sign which reads '[sanitize(name)]'."
 
 /obj/structure/sign/warning/airlock
 	name = "\improper EXTERNAL AIRLOCK"
@@ -112,6 +112,10 @@
 /obj/structure/sign/warning/engineering_access
 	name = "\improper ENGINEERING ACCESS"
 
+/obj/structure/sign/warning/fall
+	name = "\improper FALL HAZARD"
+	icon_state = "falling"
+	
 /obj/structure/sign/warning/fire
 	name = "\improper DANGER: FIRE"
 	icon_state = "fire"
