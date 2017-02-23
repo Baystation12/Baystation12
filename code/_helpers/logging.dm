@@ -187,6 +187,8 @@
 	return ckey ? "[..()] ([ckey])" : ..()
 
 /proc/log_info_line(var/datum/d)
+	if(!d)
+		return "*null*"
 	if(!istype(d))
 		return json_encode(d)
 	return d.get_log_info_line()

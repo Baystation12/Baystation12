@@ -11,6 +11,7 @@
 
 /obj/item/device/electronic_assembly/medium
 	name = "electronic mechanism"
+	desc = "It's a medium sized case, for building electronics with."
 	icon_state = "setup_medium"
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 20
@@ -18,6 +19,7 @@
 
 /obj/item/device/electronic_assembly/large
 	name = "electronic machine"
+	desc = "A large case, for building electronics with."
 	icon_state = "setup_large"
 	w_class = ITEM_SIZE_LARGE
 	max_components = 30
@@ -25,6 +27,7 @@
 
 /obj/item/device/electronic_assembly/drone
 	name = "electronic drone"
+	desc = "A little drone fit to be controlled via electronics."
 	icon_state = "setup_drone"
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 25

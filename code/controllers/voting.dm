@@ -20,7 +20,7 @@ datum/controller/vote
 	New()
 		if(vote != src)
 			if(istype(vote))
-				del(vote)
+				qdel(vote)
 			vote = src
 
 	proc/process()	//called by master_controller
@@ -209,7 +209,7 @@ datum/controller/vote
 					tertiary_mode = .[3]
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
-						init_shift_change(null, 1)
+						init_autotransfer()
 					else if(.[1] == "Add Antagonist")
 						spawn(10)
 							autoaddantag()

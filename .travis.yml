@@ -6,7 +6,7 @@ env:
     BYOND_MAJOR="510"
     BYOND_MINOR="1346"
     NODE_VERSION="4"
-    ANGLE_BRACKET_COUNT=763
+    ANGLE_BRACKET_COUNT=760
 
 # ALL MAPS MUST BE PRESENT HERE
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
@@ -65,6 +65,7 @@ script:
   - cd tgui && gulp
   - cd ..
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
+  - python tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm
   - cp config/example/* config/
   - scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme
   - grep ", 0 warnings" build_log.txt

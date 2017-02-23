@@ -39,7 +39,7 @@
 		return 0
 
 	for(var/atom/A in destination)
-		if(!A.CanPass(src, start))
+		if(!A.CanPass(src, start, 1.5, 0))
 			to_chat(usr, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
 	Move(destination)

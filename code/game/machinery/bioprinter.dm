@@ -85,8 +85,7 @@
 	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
 		return
 
-	if(stored_matter <= products[choice][2])
-		to_chat(user, "<span class='warning'>There is not enough matter in \the [src].</span>")
+	if(!can_print(choice))
 		return
 
 	stored_matter -= products[choice][2]
@@ -105,6 +104,13 @@
 		return
 
 	print_organ(choice)
+
+/obj/machinery/organ_printer/proc/can_print(var/choice)
+	if(stored_matter < products[choice][2])
+		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [products[choice][2]] needed.'</span>")
+		return 0
+
+	return 1
 
 /obj/machinery/organ_printer/proc/print_organ(var/choice)
 	var/new_organ = products[choice][1]
@@ -187,20 +193,25 @@
 	component_parts += new /obj/item/device/healthanalyzer
 	component_parts += new /obj/item/weapon/circuitboard/bioprinter
 
+/obj/machinery/organ_printer/flesh/can_print(var/choice)
+	if(!loaded_dna || !loaded_dna["donor"])
+		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
+		return 0
+
+	return ..()
+
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
+
 	var/obj/item/organ/O = ..()
-	if(loaded_dna)
-		var/mob/living/carbon/C = loaded_dna["donor"]
+	var/mob/living/carbon/C = loaded_dna["donor"]
 
-		O.set_dna(C.dna)
+	O.set_dna(C.dna)
 
-		if(O.species)
-			// This is a very hacky way of doing of what organ/New() does if it has an owner
-			O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
+	if(O.species)
+		// This is a very hacky way of doing of what organ/New() does if it has an owner
+		O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
 
-		visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
-	else
-		visible_message("<span class='info'>\The [src] churns for a moment, then spits out \a [O].</span>")
+	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
 	return O
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/weapon/W, mob/user)

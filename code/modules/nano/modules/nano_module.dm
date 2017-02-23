@@ -44,9 +44,3 @@
 
 /datum/proc/update_layout()
 	return FALSE
-
-/datum/nano_module/proc/apply_visual(mob/M)
-	return
-
-/datum/nano_module/proc/remove_visual(mob/M)
-	return

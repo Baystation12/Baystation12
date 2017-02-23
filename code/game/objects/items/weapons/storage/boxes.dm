@@ -421,3 +421,9 @@
 				/obj/item/weapon/reagent_containers/food/snacks/checker/rook/red = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/checker/queen/red = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/checker/king/red = 1)
+
+
+/obj/item/weapon/storage/box/headset
+	name = "box of spare headsets"
+	desc = "A box full of headsets."
+	startswith = list(/obj/item/device/radio/headset = 7)

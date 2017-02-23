@@ -65,7 +65,7 @@
 /datum/gear/uniform/scrubs
 	display_name = "medical scrubs"
 	path = /obj/item/clothing/under/rank/medical/black
-	allowed_roles = MEDICAL_ROLES
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/uniform/scrubs/New()
 	..()

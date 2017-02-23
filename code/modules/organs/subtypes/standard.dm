@@ -53,6 +53,13 @@
 	has_tendon = TRUE
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
+	arterial_bleed_severity = 0.75
+
+/obj/item/organ/external/arm/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || (!stun_amount && agony_amount < 5))
+		return
+	if(prob(25))
+		owner.grasp_damage_disarm(src)
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -78,6 +85,7 @@
 	has_tendon = TRUE
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
+	arterial_bleed_severity = 0.75
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -103,6 +111,7 @@
 	can_stand = 1
 	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
+	arterial_bleed_severity = 0.5
 
 /obj/item/organ/external/foot/removed()
 	if(owner) owner.drop_from_inventory(owner.shoes)
@@ -132,27 +141,12 @@
 	can_grasp = 1
 	has_tendon = TRUE
 	tendon_name = "carpal ligament"
+	arterial_bleed_severity = 0.5
 
 /obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || (!stun_amount && agony_amount < 5))
 		return
-
-	var/obj/item/dropping
-	if(body_part == HAND_LEFT)
-		dropping = owner.l_hand
-	else if(body_part == HAND_RIGHT)
-		dropping = owner.r_hand
-
-	if(!dropping)
-		return
-
-	msg_admin_attack("[owner.name] ([owner.ckey]) was disarmed by a stun effect")
-	owner.drop_from_inventory(dropping)
-	if(robotic >= ORGAN_ROBOT)
-		owner.emote("me", 1, "drops what they were holding, their [name] malfunctioning!")
-	else
-		var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-		owner.emote("me", 1, "[can_feel_pain() ? "" : emote_scream]drops what they were holding in their [name]!")
+	owner.grasp_damage_disarm(src)
 
 /obj/item/organ/external/hand/removed()
 	owner.drop_from_inventory(owner.gloves)

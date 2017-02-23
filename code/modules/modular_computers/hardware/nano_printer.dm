@@ -43,4 +43,4 @@
 	if(holder2 && (holder2.nano_printer == src))
 		holder2.nano_printer = null
 	holder2 = null
-	..()
+	return ..()

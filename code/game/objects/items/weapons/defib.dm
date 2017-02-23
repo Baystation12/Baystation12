@@ -313,11 +313,8 @@
 	if(!H.should_have_organ(BP_HEART))
 		return FALSE
 
-	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
-	if(!heart)
-		return TRUE
-
-	if(heart.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
+	var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
+	if(!heart || H.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
 		return TRUE
 
 	return FALSE

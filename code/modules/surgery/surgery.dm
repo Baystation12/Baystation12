@@ -17,6 +17,8 @@
 	var/can_infect = 0
 	//How much blood this step can get on surgeon. 1 - hands, 2 - full body.
 	var/blood_level = 0
+	var/shock_level = 0	//what shock level will this step put patient on
+	var/delicate = 0  //if this step NEEDS stable optable or can be done on any valid surface with no penalty
 
 //returns how well tool is suited for this step
 /datum/surgery_step/proc/tool_quality(obj/item/tool)
@@ -58,6 +60,8 @@
 			H.bloody_hands(target,0)
 		if (blood_level > 1)
 			H.bloody_body(target,0)
+	if(shock_level)
+		target.shock_stage = max(target.shock_stage, shock_level)
 	return
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
@@ -68,8 +72,30 @@
 /datum/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return null
 
-
-
+/datum/surgery_step/proc/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = tool_quality(tool)
+	if(user == target)
+		. -= 10
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		. -= round(H.shock_stage * 0.5)
+		if(H.eye_blurry)
+			. -= 20
+		if(H.eye_blind)
+			. -= 60
+	if(delicate)
+		if(user.slurring)
+			. -= 10
+		if(!target.lying)
+			. -= 30
+		var/turf/T = get_turf(target)
+		if(locate(/obj/machinery/optable, T))
+			. -= 0
+		else if(locate(/obj/structure/bed, T))
+			. -= 5
+		else if(locate(/obj/structure/table, T))
+			. -= 10
+	. = max(., 0)
 
 /proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
 	if(!istype(user) || !istype(E)) return
@@ -80,7 +106,7 @@
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
-/obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user)
+/obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user, fuckup_prob)
 	if(!istype(M))
 		return 0
 	if (user.a_intent == I_HURT)	//check for Hippocratic Oath
@@ -99,7 +125,7 @@
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, src)		//start on it
 				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				if(prob(S.tool_quality(src)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
+				if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
 					S.end_step(user, M, zone, src)		//finish successfully
 				else if ((src in user.contents) && user.Adjacent(M))			//or
 					S.fail_step(user, M, zone, src)		//malpractice~
@@ -111,9 +137,8 @@
 					H.update_surgery()
 				return	1	  												//don't want to do weapony things after surgery
 
-	if (user.a_intent == I_HELP)
-		to_chat(user, "<span class='warning'>You can't see any useful way to use [src] on [M].</span>")
-		return 1
+	if (user.a_intent == I_HELP) //they are probably trying to surgery
+		to_chat(user, "<span class='warning'>You can't see any useful way to use [src] on [M] in surgery.</span>")
 	return 0
 
 /proc/sort_surgeries()

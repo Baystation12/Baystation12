@@ -3,7 +3,7 @@ var/datum/antagonist/mercenary/mercs
 /datum/antagonist/mercenary
 	id = MODE_MERCENARY
 	role_text = "Mercenary"
-	antag_indicator = "synd"
+	antag_indicator = "hudsyndicate"
 	role_text_plural = "Mercenaries"
 	landmark_id = "Syndicate-Spawn"
 	leader_welcome_text = "You are the leader of the mercenary strikeforce; hail to the chief. Use :t to speak to your underlings."
