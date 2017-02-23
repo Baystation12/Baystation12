@@ -158,11 +158,6 @@
 	desc = "A purple beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_purpleyellow"
 
-/obj/item/clothing/head/beret/sol/orbital
-	name = "orbital assault beret"
-	desc = "A blue beret denoting orbital assault training. For helljumpers that are more inclined towards style than safety."
-	icon_state = "beret_blue"
-
 /obj/item/clothing/head/beret/sol/research
 	name = "government research beret"
 	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."

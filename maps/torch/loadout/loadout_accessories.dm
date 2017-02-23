@@ -227,6 +227,7 @@
 	solminors["operations medal"] = /obj/item/clothing/accessory/medal/bronze/sol
 	solminors["frontier ribbon"] = /obj/item/clothing/accessory/ribbon/frontier
 	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/instructor
+	solminors["orbital assault pin"] = /obj/item/clothing/accessory/medal/orbital
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
 /datum/gear/accessory/ntaward

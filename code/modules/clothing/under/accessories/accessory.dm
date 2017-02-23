@@ -286,6 +286,11 @@
 	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
 	icon_state = "white_heart"
 
+/obj/item/clothing/accessory/medal/orbital
+	name = "orbital assault pin"
+	desc = "This is the Orbital Assault pin, known informally as the 'Fall Wings'. It is a drop pod and parachute in front of a pair of wings. Owners of this have passed Orbital Assault training, a standard course taken by most Marines."
+	icon_state = "oa_pin"
+
 //Ribbons
 /obj/item/clothing/accessory/ribbon
 	name = "ribbon"
