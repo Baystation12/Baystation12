@@ -2234,6 +2234,7 @@
 #include "code\modules\xgm\gases.dm"
 #include "code\modules\xgm\xgm_gas_data.dm"
 #include "code\modules\xgm\xgm_gas_mixture.dm"
+#include "code\modules\Yui\gunserials.dm"
 #include "code\modules\ZAS\_docs.dm"
 #include "code\modules\ZAS\Airflow.dm"
 #include "code\modules\ZAS\Atom.dm"
