@@ -13,10 +13,15 @@
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
 
-/area/maintenance/substation //because for some reason this is a map-datum now
+/area/maintenance/substation
 	name = "Substation"
 	icon_state = "substation"
 	sound_env = SMALL_ENCLOSED
+
+/area/maintenance/exterior
+	name = "\improper Exterior Reinforcements"
+	icon_state = "maint_security_starboard"
+	flags = AREA_EXTERNAL
 
 // CentCom
 

@@ -25,15 +25,23 @@
 	T.update_dirt()
 
 	if(prob(clutter_probability))
+		new /obj/effect/decal/cleanable/blood/oil(T)
+
+	if(prob(clutter_probability))
 		var/new_junk = get_random_junk_type()
 		new new_junk(T)
+
+	// The random additions below are only added if the turf isn't part of an external area
+	var/area/A = get_area(T)
+	if(A.flags & AREA_EXTERNAL)
+		return
+
 	if(prob(vermin_probability))
 		if(prob(80))
 			new /mob/living/simple_animal/mouse(T)
 		else
 			new /mob/living/simple_animal/lizard(T)
-	if(prob(clutter_probability))
-		new /obj/effect/decal/cleanable/blood/oil(T)
+
 	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
 
