@@ -21,7 +21,7 @@
 
 	else if(istype(I, /obj/item/weapon/surgicaldrill))
 		to_chat(user, "You start beating the shit out of the serial number from [name]")
-		if(do_after(user, crowbarDelay))
+		if(do_after(user, drillDelay))
 			to_chat(user, "You drilled the serial number from [name]")
 			serial_number = "seems to have been precisely carved out"
 
