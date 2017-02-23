@@ -78,9 +78,9 @@
 
 /obj/item/clothing/gloves/lightrig/hacker
 	siemens_coefficient = 0
-	
+
 /obj/item/weapon/rig/light/ninja
-	name = "Ominous voidsuit control module"
+	name = "ominous voidsuit control module"
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
 	icon_state = "ninja_rig"
@@ -88,12 +88,7 @@
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.
 	online_slowdown = 0
-	aimove_power_usage = 50
-	var/has_custom_name = 0
-	var/has_custom_desc = 0
-	var/unique_name 
-	var/unique_desc	
-
+	aimove_power_usage = 50	
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 	glove_type = /obj/item/clothing/gloves/rig/light/ninja
 	cell_type =  /obj/item/weapon/cell/hyper
@@ -137,8 +132,9 @@
 			input = "\improper [input]"
 		name = input
 		to_chat(M, "Suit naming succesful!")
+		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
-	has_custom_name = 1
+	
 	
 /obj/item/weapon/rig/light/ninja/verb/rewrite_suit_desc()
 	set name = "Describe Ninja suit"
@@ -154,8 +150,8 @@
 	if(src && input && !M.incapacitated() && in_range(M,src))
 		desc = input
 		to_chat(M, "Suit description succesful!")
+		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
-	has_custom_desc = 1
 
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"
