@@ -974,7 +974,7 @@
 "sP" = (/obj/effect/floor_decal/corner/lime{dir = 9},/obj/structure/ladder,/turf/simulated/floor/tiled,/area/engineering/foyer)
 "sQ" = (/obj/effect/floor_decal/corner/blue{dir = 6},/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/engineering/foyer)
 "sR" = (/obj/structure/closet/secure_closet/engineering_electrical,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/turf/simulated/floor/tiled,/area/engineering/locker_room)
-"sS" = (/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/structure/table/rack{dir = 8},/obj/item/stack/material/steel{amount = 50},/turf/simulated/floor/tiled,/area/engineering/locker_room)
+"sS" = (/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/structure/table/rack{dir = 8},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "sT" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/table/steel,/obj/item/device/radio/off{pixel_y = 6},/obj/item/device/radio/off{pixel_x = 6; pixel_y = 4},/obj/item/device/radio/off{pixel_x = -6; pixel_y = 4},/obj/item/device/radio/off,/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "sU" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/engineering/engine_eva)
 "sV" = (/obj/structure/dispenser{phorontanks = 0},/obj/machinery/camera/network/engineering{c_tag = "Engineering - EVA"; dir = 8},/turf/simulated/floor/tiled,/area/engineering/engine_eva)

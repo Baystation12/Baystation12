@@ -8,6 +8,7 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 	desc = "A large machine made to print tiny things out of metal."
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "integrated"
+	density = 1
 	var/metal = 100
 	var/maxMetal = 100
 	var/metal_mult = 0.5

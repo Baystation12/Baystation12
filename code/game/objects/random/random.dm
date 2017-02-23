@@ -556,6 +556,18 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					/obj/structure/inflatable/wall,\
 					/obj/structure/inflatable/door)
 
+/obj/random/assembly
+	name = "random assembly"
+	desc = "This is a random circuit assembly."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift1"
+	item_to_spawn()
+		return pick(/obj/item/device/electronic_assembly,\
+					/obj/item/device/electronic_assembly/medium,\
+					/obj/item/device/electronic_assembly/large,\
+					/obj/item/device/electronic_assembly/drone)
+
+
 
 /obj/random/advdevice
 	name = "random advanced device"
