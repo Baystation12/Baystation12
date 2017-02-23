@@ -48,16 +48,6 @@
 	icon_state = "chair_passenger_preview"
 	material_alteration = MATERIAL_ALTERATION_NONE
 
-//CLOSET RESKIN
-
-/obj/structure/closet
-	icon = 'maps/dreyfus/icons/closet.dmi'
-	icon_state = "closed"
-
-/obj/structure/closet/secure_closet
-	icon = 'maps/dreyfus/icons/closet.dmi'
-	icon_state = "secure1"
-
 //CHAIR
 /obj/structure/bed/chair/white
 	color = null
