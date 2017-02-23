@@ -417,10 +417,6 @@
 	name = "\improper Security Maintenance - Starboard"
 	icon_state = "maint_security_starboard"
 
-/area/maintenance/exterior
-	name = "\improper Exterior Reinforcements"
-	icon_state = "maint_security_starboard"
-
 // Dank Maintenance
 /area/maintenance/sub
 	turf_initializer = /decl/turf_initializer/maintenance/heavy

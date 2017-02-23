@@ -25,6 +25,7 @@
 		/area/maintenance/auxsolarbridge = NO_SCRUBBER,
 		/area/maintenance/auxsolarport = NO_SCRUBBER,
 		/area/maintenance/auxsolarstarboard = NO_SCRUBBER,
+		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance/firstdeck/foreport = NO_SCRUBBER,
 		/area/maintenance/firstdeck/forestarboard = NO_SCRUBBER,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER,
@@ -74,7 +75,8 @@
 		/area/space,
 		/area/mine/explored,
 		/area/mine/unexplored,
-		/area/centcom/control
+		/area/centcom/control,
+		/area/maintenance/exterior
 	)
 
 	area_coherency_test_subarea_count = list(

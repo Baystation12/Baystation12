@@ -72,7 +72,7 @@
 
 //Area flags, possibly more to come
 #define AREA_RAD_SHIELDED 1 // shielded from radiation, clearly
-#define AREA_EXTERNAL     2
+#define AREA_EXTERNAL     2 // External as in exposed to space, not outside in a nice, green, forest
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
