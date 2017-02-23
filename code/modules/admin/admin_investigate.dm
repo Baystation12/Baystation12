@@ -4,7 +4,7 @@
 //lists and variables are great. However, they have several major flaws:
 //Firstly, they use memory. TGstation has one of the highest memory usage of all the ss13 branches.
 //Secondly, they are usually stored in an object. This means that they aren't centralised. It also means that
-//the data is lost when the object is deleted! This is especially annoying for things like the singulo engine!
+//the data is lost when the object is deleted! This is especially annoying for things like the singulo reactor!
 #define INVESTIGATE_DIR "data/investigate/"
 
 //SYSTEM

@@ -3,7 +3,7 @@
 	filedesc = "Supermatter Monitoring"
 	nanomodule_path = /datum/nano_module/supermatter_monitor/
 	program_icon_state = "smmon_0"
-	extended_desc = "This program connects to specially calibrated supermatter sensors to provide information on the status of supermatter-based engines."
+	extended_desc = "This program connects to specially calibrated supermatter sensors to provide information on the status of supermatter-based reactors."
 	ui_header = "smmon_0.gif"
 	required_access = access_engine
 	requires_ntnet = 1

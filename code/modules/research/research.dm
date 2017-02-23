@@ -123,12 +123,12 @@ research holder datum.
 	return
 
 // A simple helper proc to find the name of a tech with a given ID.
-/proc/CallTechName(var/ID) 
+/proc/CallTechName(var/ID)
 	for(var/T in subtypesof(/datum/tech))
 		var/datum/tech/check_tech = T
 		if(initial(check_tech.id) == ID)
 			return  initial(check_tech.name)
-	
+
 /***************************************************************
 **						Technology Datums					  **
 **	Includes all the various technoliges and what they make.  **
@@ -145,7 +145,7 @@ research holder datum.
 	desc = "Development of new and improved materials."
 	id = TECH_MATERIAL
 
-/datum/tech/engineering
+/datum/tech/dering
 	name = "Engineering Research"
 	desc = "Development of new and improved engineering parts."
 	id = TECH_ENGINEERING

@@ -15,7 +15,7 @@
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
-		/area/engineering/engine_smes = NO_SCRUBBER|NO_VENT,
+		/area/engineering/reactor_smes = NO_SCRUBBER|NO_VENT,
 		/area/guppy_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/guppy_hangar/start = 0,
 		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,

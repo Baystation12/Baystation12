@@ -74,13 +74,13 @@
 			"}
 
 
-/obj/item/weapon/book/manual/supermatter_engine
-	name = "Supermatter Engine Operating Manual"
+/obj/item/weapon/book/manual/supermatter_reactor
+	name = "Supermatter Reactor Operating Manual"
 	icon_state = "bookSupermatter"
 	author = "Central Engineering Division"
-	title = "Supermatter Engine Operating Manual"
+	title = "Supermatter Reactor Operating Manual"
 
-/obj/item/weapon/book/manual/supermatter_engine/New()
+/obj/item/weapon/book/manual/supermatter_reactor/New()
 	..()
 	dat = {"<html>
 				<head>
@@ -94,17 +94,17 @@
 				</style>
 				</head>
 				<body>
-				<h1>OPERATING MANUAL FOR MK 1 PROTOTYPE THERMOELECTRIC SUPERMATTER ENGINE 'TOMBOLA'</h1>
+				<h1>OPERATING MANUAL FOR MK 1 PROTOTYPE THERMOELECTRIC SUPERMATTER REACTOR 'TOMBOLA'</h1>
 				<br>
 				<h2>OPERATING PRINCIPLES</h2>
 				<br>
-				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out. NOTE: Supermatter radiation will not charge radiation collectors.</li>
+				<li>The supermatter crystal serves as the fundamental power source of the reactor. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out. NOTE: Supermatter radiation will not charge radiation collectors.</li>
 				<br>
 				<li>Air in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
 				<br>
 				<li>Air in the radiator loop is circulated through the radiator bank, located in space. This rapidly cools the air, preserving the temperature differential needed for power generation.</li>
 				<br>
-				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 3000K to 4000K and generate up to 1MW of power. Beyond 1MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
+				<li>The MK 1 Prototype Thermoelectric Supermatter Reactor is designed to operate at reactor temperatures of 3000K to 4000K and generate up to 1MW of power. Beyond 1MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
 				<br>
 				<li>The crystal structure of the supermatter will begin to liquefy if its temperature exceeds 5000K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
 				<br>
@@ -123,10 +123,10 @@
 				<br>
 				<h2>OPERATION AND MAINTENANCE</h2>
 				<ol>
-				<li>Ensure that radiation protection and meson goggles are worn at all times while working in the engine room.</li>
+				<li>Ensure that radiation protection and meson goggles are worn at all times while working in the reactor room.</li>
 				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
 				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
-				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
+				<li>Ensure that reactor room Area Power Controller (APC) and reactor Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
 				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, see EMERGENCY COOLING PROCEDURE.</li>
 				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
 				</ol>
@@ -140,8 +140,8 @@
 				<br>
 				<h2>EJECTION PROCEDURE</h2>
 				<ol>
-				<li>Press Engine Ventilatory Control button to open engine core vent to space.</li>
-				<li>Press Emergency Core Eject button to eject supermatter crystal. NOTE: Attempting crystal ejection while engine core vent is closed will result in ejection failure.</li>
+				<li>Press Reactor Ventilatory Control button to open reactor core vent to space.</li>
+				<li>Press Emergency Core Eject button to eject supermatter crystal. NOTE: Attempting crystal ejection while reactor core vent is closed will result in ejection failure.</li>
 				<li>In event of ejection failure, <i>pending</i></li>
 				</ol>
 				</body>
@@ -149,13 +149,13 @@
 
 
 
-/obj/item/weapon/book/manual/rust_engine
+/obj/item/weapon/book/manual/rust_reactor
 	name = "R-UST Operating Manual"
 	icon_state = "bookSupermatter"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
 
-/obj/item/weapon/book/manual/rust_engine/New()
+/obj/item/weapon/book/manual/rust_reactor/New()
 	..()
 	name = "<s>WetSkrell Magazine, March 2553</s> [name]"
 	dat = {"<html>
@@ -174,10 +174,10 @@
 				<br><br>
 				<ol>
 				<li>Put uranium in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core.</li>
-				<li>Enable and max output on the SMES in the engine room. This is to power the gyrotron.</li>
+				<li>Enable and max output on the SMES in the reactor room. This is to power the gyrotron.</li>
 				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 501. Any bigger and it will start EMPing the doors. Any smaller and the fuel pellets might miss.</li>
 				<li>Interact with the gyrotron control computer, set power as high as the SMES can support, usually around 4, and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
-				<li>Go into the engine room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
+				<li>Go into the reactor room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
 				<li>Go back to the control room and turn the fuel injectors on. This will start firing pellets into the field.</li>
 				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop). Turn the gyrotron power down until it's keeping up with field instability. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium instability isn't a problem and you can turn the gyrotron off.</li>
 				<li>Configure the SMES, turn the PACMAN off before it explodes.</li>
@@ -185,9 +185,9 @@
 				<br>
 				<b>NOTES FOR NEWBIES</b>
 				<br>
-				Anything touching the field will mess with its stability and eventually cause it to rupture. Rupturing is bad. Use the gyrotron to keep instability down if you're running the engine on unstable fuel.
+				Anything touching the field will mess with its stability and eventually cause it to rupture. Rupturing is bad. Use the gyrotron to keep instability down if you're running the reactor on unstable fuel.
 				<br><br>
-				Likewise, no matter how sad the core seems, don't fucking hug it, you'll blow the field out and set the engine room on fire.
+				Likewise, no matter how sad the core seems, don't fucking hug it, you'll blow the field out and set the reactor room on fire.
 				</body>
 			</html>"}
 

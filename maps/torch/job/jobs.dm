@@ -341,7 +341,7 @@
 	ideal_character_age = 30
 	alt_titles = list(
 		"Maintenance Technician",
-		"Engine Technician",
+		"Reactor Technician",
 		"Damage Control Technician",
 		"EVA Technician",
 		"Electrician",

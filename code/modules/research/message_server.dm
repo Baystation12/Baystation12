@@ -85,7 +85,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	//Feel free to move to Helpers.
 	var/newKey
 	newKey += pick("the", "if", "of", "as", "in", "a", "you", "from", "to", "an", "too", "little", "snow", "dead", "drunk", "rosebud", "duck", "al", "le")
-	newKey += pick("diamond", "beer", "mushroom", "assistant", "clown", "captain", "twinkie", "security", "nuke", "small", "big", "escape", "yellow", "gloves", "monkey", "engine", "nuclear", "ai")
+	newKey += pick("diamond", "beer", "mushroom", "assistant", "clown", "captain", "twinkie", "security", "nuke", "small", "big", "escape", "yellow", "gloves", "monkey", "reactor", "nuclear", "ai")
 	newKey += pick("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
 	return newKey
 

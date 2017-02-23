@@ -365,8 +365,8 @@
 	name = "\improper Cargo Maintenance"
 	icon_state = "maint_cargo"
 
-/area/maintenance/engi_engine
-	name = "\improper Engine Maintenance"
+/area/maintenance/engi_reactor
+	name = "\improper Reactor Maintenance"
 	icon_state = "maint_engine"
 
 /area/maintenance/engi_shuttle
@@ -644,12 +644,12 @@
 	icon_state = "engineering"
 	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
 
-/area/engineering/engine_airlock
-	name = "\improper Engine Room Airlock"
+/area/engineering/reactor_airlock
+	name = "\improper Reactor Room Airlock"
 	icon_state = "engine"
 
-/area/engineering/engine_waste
-	name = "\improper Engine Waste Handling"
+/area/engineering/reactor_waste
+	name = "\improper Reactor Waste Handling"
 	icon_state = "engine_waste"
 
 /area/engineering/break_room

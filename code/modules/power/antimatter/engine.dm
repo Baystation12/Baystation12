@@ -1,43 +1,43 @@
-/obj/machinery/power/am_engine
+/obj/machinery/power/am_reactor
 	icon = 'icons/am_engine.dmi'
 	density = 1
 	anchored = 1.0
 	flags = ON_BORDER
 
-/obj/machinery/power/am_engine/bits
-	name = "Antimatter Engine"
+/obj/machinery/power/am_reactor/bits
+	name = "Antimatter Reactor"
 	icon_state = "1"
 
-/obj/machinery/power/am_engine/engine
-	name = "Antimatter Engine"
+/obj/machinery/power/am_reactor/reactor
+	name = "Antimatter Reactor"
 	icon_state = "am_engine"
-	var/engine_id = 0
+	var/reactor_id = 0
 	var/H_fuel = 0
 	var/antiH_fuel = 0
 	var/operating = 0
 	var/stopping = 0
-	var/obj/machinery/power/am_engine/injector/connected = null
+	var/obj/machinery/power/am_reactor/injector/connected = null
 
-/obj/machinery/power/am_engine/injector
+/obj/machinery/power/am_reactor/injector
 	name = "Injector"
 	icon_state = "injector"
-	var/engine_id = 0
+	var/reactor_id = 0
 	var/injecting = 0
 	var/fuel = 0
-	var/obj/machinery/power/am_engine/engine/connected = null
+	var/obj/machinery/power/am_reactor/reactor/connected = null
 
 //injector
 
-/obj/machinery/power/am_engine/injector/New()
+/obj/machinery/power/am_reactor/injector/New()
 	..()
 	spawn( 13 )
 		var/loc = get_step(src, NORTH)
-		src.connected = locate(/obj/machinery/power/am_engine/engine, get_step(loc, NORTH))
+		src.connected = locate(/obj/machinery/power/am_reactor/reactor, get_step(loc, NORTH))
 		return
 	return
 
 
-/obj/machinery/power/am_engine/injector/attackby(obj/item/weapon/fuel/F, mob/user)
+/obj/machinery/power/am_reactor/injector/attackby(obj/item/weapon/fuel/F, mob/user)
 	if( (stat & BROKEN) || !connected) return
 
 	if(istype(F, /obj/item/weapon/fuel/H))
@@ -69,19 +69,19 @@
 	return
 
 
-//engine
+//reactor
 
 
-/obj/machinery/power/am_engine/engine/New()
+/obj/machinery/power/am_reactor/reactor/New()
 	..()
 	spawn( 7 )
 		var/loc = get_step(src, SOUTH)
-		src.connected = locate(/obj/machinery/power/am_engine/injector, get_step(loc, SOUTH))
+		src.connected = locate(/obj/machinery/power/am_reactor/injector, get_step(loc, SOUTH))
 		return
 	return
 
 
-/obj/machinery/power/am_engine/engine/proc/engine_go()
+/obj/machinery/power/am_reactor/reactor/proc/reactor_go()
 
 	if( (!src.connected) || (stat & BROKEN) )
 		return
@@ -121,7 +121,7 @@
 	return
 
 
-/obj/machinery/power/am_engine/engine/proc/engine_process()
+/obj/machinery/power/am_reactor/reactor/proc/reactor_process()
 
 	do
 		if( (!src.connected) || (stat & BROKEN) )

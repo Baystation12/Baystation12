@@ -324,7 +324,7 @@
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 /*
-	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
+	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the reactor monitoring room.
 	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.
 	for(var/mob/living/l in range(src, round(sqrt(power / 2))))
 		var/radius = max(get_dist(l, src), 1)
