@@ -11,7 +11,7 @@
 
 
 /obj/structure/mopbucket/New()
-	create_reagents(100)
+	create_reagents(180)
 	..()
 
 /obj/structure/mopbucket/examine(mob/user)
