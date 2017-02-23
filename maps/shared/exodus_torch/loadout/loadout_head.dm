@@ -118,4 +118,5 @@
 	welding_masks += /obj/item/clothing/head/welding/engie
 	welding_masks += /obj/item/clothing/head/welding/fancy
 	welding_masks += /obj/item/clothing/head/welding/knight
+	welding_masks += /obj/item/clothing/head/welding/carp
 	gear_tweaks += new/datum/gear_tweak/path(assoc_by_proc(welding_masks, /proc/get_initial_name))

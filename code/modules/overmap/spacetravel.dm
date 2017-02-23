@@ -19,9 +19,6 @@ var/list/cached_space = list()
 /obj/effect/overmap/sector/temporary/Destroy()
 	map_sectors["[map_z]"] = null
 	testing("Temporary sector at [x],[y] was deleted.")
-	if (z == world.maxz && can_die())
-		testing("Associated zlevel disappeared.")
-		world.maxz--
 
 /obj/effect/overmap/sector/temporary/proc/can_die(var/mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
@@ -42,8 +39,7 @@ proc/get_deepspace(x,y)
 		res.y = y
 		return res
 	else
-		world.maxz++
-		return new /obj/effect/overmap/sector/temporary(x, y, world.maxz)
+		return new /obj/effect/overmap/sector/temporary(x, y, using_map.get_empty_zlevel())
 
 /atom/movable/proc/lost_in_space()
 	return TRUE

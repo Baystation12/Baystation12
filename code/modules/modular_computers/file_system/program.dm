@@ -82,6 +82,10 @@
 	if(!access_to_check) // No required_access, allow it.
 		return 1
 
+	// Admin override - allows operation of any computer as aghosted admin, as if you had any required access.
+	if(isghost(user) && check_rights(R_ADMIN, 0, user))
+		return 1
+
 	if(!istype(user))
 		return 0
 
@@ -156,10 +160,36 @@
 	else
 		return -1
 
-/datum/computer_file/program/proc/apply_visual(mob/M)
+/obj/item/modular_computer/initial_data()
+	return get_header_data()
+
+/obj/item/modular_computer/update_layout()
+	return TRUE
+
+/datum/nano_module/program
+	available_to_ai = FALSE
+	var/datum/computer_file/program/program = null	// Program-Based computer program that runs this nano module. Defaults to null.
+
+/datum/nano_module/program/New(var/host, var/topic_manager, var/program)
+	..()
+	src.program = program
+
+/datum/topic_manager/program
+	var/datum/program
+
+/datum/topic_manager/program/New(var/datum/program)
+	..()
+	src.program = program
+
+// Calls forwarded to PROGRAM itself should begin with "PRG_"
+// Calls forwarded to COMPUTER running the program should begin with "PC_"
+/datum/topic_manager/program/Topic(href, href_list)
+	return program && program.Topic(href, href_list)
+
+/datum/computer_file/program/apply_visual(mob/M)
 	if(NM)
 		NM.apply_visual(M)
 
-/datum/computer_file/program/proc/remove_visual(mob/M)
+/datum/computer_file/program/remove_visual(mob/M)
 	if(NM)
 		NM.remove_visual(M)

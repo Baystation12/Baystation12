@@ -158,8 +158,15 @@
 		if(!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
 			continue
 		heard_something = TRUE
-		var/feedback = list()
-		feedback += "<span class='notice'>There are noises of movement "
+		var/image/ping_image = image(icon = 'icons/effects/effects.dmi', icon_state = "sonar_ping", loc = src)
+		ping_image.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		ping_image.layer = BEAM_PROJECTILE_LAYER
+		ping_image.pixel_x = (T.x - src.x) * WORLD_ICON_SIZE
+		ping_image.pixel_y = (T.y - src.y) * WORLD_ICON_SIZE
+		show_image(src, ping_image)
+		spawn(8)
+			qdel(ping_image)
+		var/feedback = list("<span class='notice'>There are noises of movement ")
 		var/direction = get_dir(src, L)
 		if(direction)
 			feedback += "towards the [dir2text(direction)], "

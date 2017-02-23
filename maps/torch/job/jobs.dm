@@ -68,7 +68,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_calypso, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_calypso_helm)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila)
 
 
 /datum/job/rd
@@ -233,8 +233,8 @@
 	department = "Support"
 	department_flag = SPT
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 21
@@ -247,10 +247,10 @@
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8
+		/datum/mil_rank/marine/e8_alt
 	)
 
 
@@ -314,7 +314,7 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
@@ -430,7 +430,7 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
@@ -454,7 +454,7 @@
 	economic_modifier = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
-	alt_titles = list()
+	alt_titles = list("Criminal Investigator")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -1035,8 +1035,8 @@
 	selection_color = "#515151"
 	economic_modifier = 1
 	alt_titles = list(
-		"Private Investigator",
-		"Journalist",
+		"Private Investigator" = /decl/hierarchy/outfit/job/torch/passenger/passenger/PI,
+		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
 		"Historian",
 		"Botanist",
 		"Investor",

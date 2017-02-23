@@ -83,12 +83,14 @@
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))
 		return 0
-
 	src.set_dir(other.dir)
 	src.icon_state = other.icon_state
 	src.icon = other.icon
 	src.overlays = other.overlays.Copy()
 	src.underlays = other.underlays.Copy()
+	if(other.decals)
+		src.decals = other.decals.Copy()
+		src.update_icon()
 	return 1
 
 //I would name this copy_from() but we remove the other turf from their air zone for some reason

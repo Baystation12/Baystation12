@@ -2,10 +2,13 @@
 
 	#include "curie_areas.dm"
 	#include "curie_shuttles.dm"
+	#include "curie_presets.dm"
+	#include "curie_jobs.dm"
 
 	#include "../exodus/exodus_areas.dm"
 
 	#include "../shared/exodus_torch/areas.dm"
+	#include "../shared/exodus_torch/presets.dm"
 	#include "../shared/exodus_torch/zas_tests.dm"
 	#include "../shared/exodus_torch/loadout/loadout_gloves.dm"
 	#include "../shared/exodus_torch/loadout/loadout_head.dm"

@@ -180,9 +180,14 @@
 		return
 
 	//Override for somatoray projectiles.
-	if(istype(Proj ,/obj/item/projectile/energy/floramut) && prob(20))
-		mutate(1)
-		return
+	if(istype(Proj ,/obj/item/projectile/energy/floramut)&& prob(20))
+		if(istype(Proj, /obj/item/projectile/energy/floramut/gene))
+			var/obj/item/projectile/energy/floramut/gene/G = Proj
+			if(seed)
+				seed = seed.diverge_mutate_gene(G.gene, get_turf(loc))	//get_turf just in case it's not in a turf.
+		else
+			mutate(1)
+			return
 	else if(istype(Proj ,/obj/item/projectile/energy/florayield) && prob(20))
 		yield_mod = min(10,yield_mod+rand(1,2))
 		return

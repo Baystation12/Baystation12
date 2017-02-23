@@ -5,7 +5,7 @@
 	var/volume = 0
 	use_power = 0
 
-	var/alert_pressure = 80*ONE_ATMOSPHERE
+	var/alert_pressure = 170*ONE_ATMOSPHERE
 		//minimum pressure before check_pressure(...) should be called
 
 	can_buckle = 1
@@ -154,9 +154,9 @@
 	var/minimum_temperature_difference = 300
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
-	var/maximum_pressure = 70*ONE_ATMOSPHERE
-	var/fatigue_pressure = 55*ONE_ATMOSPHERE
-	alert_pressure = 55*ONE_ATMOSPHERE
+	var/maximum_pressure = 210*ONE_ATMOSPHERE
+	var/fatigue_pressure = 170*ONE_ATMOSPHERE
+	alert_pressure = 170*ONE_ATMOSPHERE
 
 	level = 1
 

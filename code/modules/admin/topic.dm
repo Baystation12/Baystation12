@@ -729,7 +729,7 @@
 				to_chat(M, "<span class='warning'>You have been kicked from the server: [reason]</span>")
 			log_and_message_admins("booted [key_name_admin(M)].")
 			//M.client = null
-			del(M.client)
+			qdel(M.client)
 
 	else if(href_list["removejobban"])
 		if(!check_rights(R_BAN))	return
@@ -785,7 +785,7 @@
 					to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
 				log_and_message_admins("has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-				del(M.client)
+				qdel(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
@@ -810,7 +810,7 @@
 				feedback_inc("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
-				del(M.client)
+				qdel(M.client)
 				//qdel(M)
 			if("Cancel")
 				return

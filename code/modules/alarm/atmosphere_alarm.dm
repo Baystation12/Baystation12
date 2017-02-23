@@ -1,5 +1,5 @@
 /datum/alarm_handler/atmosphere
-	category = "Atmosphere Alarms"
+	category = NETWORK_ALARM_ATMOS
 
 /datum/alarm_handler/atmosphere/triggerAlarm(var/atom/origin, var/atom/source, var/duration = 0, var/severity = 1)
 	..()
