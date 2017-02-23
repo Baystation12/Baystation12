@@ -131,6 +131,15 @@ datum/uplink_item/dd_SortValue()
 	if(istype(I) && ishuman(user))
 		var/mob/living/carbon/human/A = user
 		A.put_in_any_hand_if_possible(I)
+
+	// Uplink weapons shall spawn without serial numbers
+	if(istype(I, /obj/item/weapon/gun))
+		I:serial_number = "seems to have never existed"
+	if(I.contents) // In case some sort of bag is spawned instead
+		for(var/o in I)
+			if(istype(o, /obj/item/weapon/gun))
+				o:serial_number = "seems to have never existed"
+
 	return I
 
 /datum/uplink_item/item/get_goods(var/obj/item/device/uplink/U, var/loc)
