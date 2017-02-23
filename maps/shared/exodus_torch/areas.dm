@@ -162,6 +162,7 @@
 /area/constructionsite
 	name = "\improper Construction Site"
 	icon_state = "storage"
+	ambience = list('sound/ambience/spookyspace1.ogg', 'sound/ambience/spookyspace2.ogg')
 
 /area/constructionsite/storage
 	name = "\improper Construction Site Storage Area"

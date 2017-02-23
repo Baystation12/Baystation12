@@ -230,6 +230,10 @@
 		if((damage > emergency_point) && !public_alert)
 			global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT!", "Supermatter Monitor")
 			public_alert = 1
+			for(var/mob/M in player_list)
+				var/turf/T = get_turf(M)
+				if(T && (T.z in using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
 			global_announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
