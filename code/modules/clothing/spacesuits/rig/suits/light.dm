@@ -80,7 +80,7 @@
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/light/ninja
-	name = "ominous voidsuit control module"
+	name = "ominous suit control module"
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
 	icon_state = "ninja_rig"
@@ -121,9 +121,6 @@
 	set desc = "Rename your black voidsuit."
 	set category = "Object"
 	var/mob/M = usr
-	if(has_custom_name)
-		to_chat(M, "Got to live with your choices, pal.")
-		return 
 	if(!M.mind) return 0
 	if(M.incapacitated()) return 0
 	var/input = sanitizeSafe(input("What do you want to name your suit?", "Rename suit"), MAX_NAME_LEN)
@@ -141,9 +138,6 @@
 	set desc = "Give your voidsuit a custom description."
 	set category = "Object"
 	var/mob/M = usr
-	if(has_custom_desc)
-		to_chat(M, "Got to live with your choices, pal.")
-		return 
 	if(!M.mind) return 0
 	if(M.incapacitated()) return 0
 	var/input = sanitizeSafe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
