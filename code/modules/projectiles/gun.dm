@@ -78,9 +78,9 @@
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
-	
-	var/serial_number = "unreadable"
-	
+
+	var/serial_number = "<i>gibberish</i>"
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -88,20 +88,8 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
-	
-	serial_number = GenerateSerial()
 
-/obj/item/weapon/gun/proc/GenerateSerial()
-	var/numRows = 2
-	var/lenRows = 3
-
-	var/retStr = ""
-	for(var/i = 0 to 2)
-		for(var/j = 0 to 3)
-			retStr += pick("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
-		if(i != numRows)
-			retStr += "-"
-	return retStr
+	serial_number = generate_serial()
 
 /obj/item/weapon/gun/update_twohanding()
 	if(requires_two_hands)
@@ -444,6 +432,7 @@
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
 		to_chat(user, "The fire selector is set to [current_mode.name].")
+	to_chat(user, "Serial number reads as follow: [serial_number]")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)
@@ -461,4 +450,3 @@
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
-
