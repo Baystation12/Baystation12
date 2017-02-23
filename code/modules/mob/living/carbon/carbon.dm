@@ -419,7 +419,6 @@
 	stop_pulling()
 	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
 	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
 
