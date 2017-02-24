@@ -1,4 +1,0 @@
-author: Haswell
-delete-after: True
-changes: 
-  - tweak: "Antag preferences now default to never instead of low."
