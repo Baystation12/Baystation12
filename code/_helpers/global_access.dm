@@ -113,14 +113,6 @@
 			return global.acting_rank_prefixes;
 		if("active_diseases")
 			return global.active_diseases;
-		if("activeauth")
-			return global.activeauth;
-		if("activecharges")
-			return global.activecharges;
-		if("activename")
-			return global.activename;
-		if("activetype")
-			return global.activetype;
 		if("actor")
 			return global.actor;
 		if("additional_antag_types")
@@ -689,6 +681,8 @@
 			return global.init;
 		if("initialization_stage")
 			return global.initialization_stage;
+		if("integrated_circuit_blacklist")
+			return global.integrated_circuit_blacklist;
 		if("intents")
 			return global.intents;
 		if("interactive_state")
@@ -1231,8 +1225,6 @@
 			return global.stool_cache;
 		if("stored_shock_by_ref")
 			return global.stored_shock_by_ref;
-		if("storedwarrant")
-			return global.storedwarrant;
 		if("string_part_flags")
 			return global.string_part_flags;
 		if("string_slot_flags")
@@ -1455,7 +1447,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1570,14 +1562,6 @@
 			global.acting_rank_prefixes=newval;
 		if("active_diseases")
 			global.active_diseases=newval;
-		if("activeauth")
-			global.activeauth=newval;
-		if("activecharges")
-			global.activecharges=newval;
-		if("activename")
-			global.activename=newval;
-		if("activetype")
-			global.activetype=newval;
 		if("actor")
 			global.actor=newval;
 		if("additional_antag_types")
@@ -2146,6 +2130,8 @@
 			global.init=newval;
 		if("initialization_stage")
 			global.initialization_stage=newval;
+		if("integrated_circuit_blacklist")
+			global.integrated_circuit_blacklist=newval;
 		if("intents")
 			global.intents=newval;
 		if("interactive_state")
@@ -2688,8 +2674,6 @@
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
 			global.stored_shock_by_ref=newval;
-		if("storedwarrant")
-			global.storedwarrant=newval;
 		if("string_part_flags")
 			global.string_part_flags=newval;
 		if("string_slot_flags")
@@ -2912,7 +2896,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3258,6 +3242,7 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
+	"integrated_circuit_blacklist",
 	"intents",
 	"interactive_state",
 	"intercom_range_display_status",
