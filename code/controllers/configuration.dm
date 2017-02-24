@@ -150,6 +150,7 @@ var/list/gamemode_cache = list()
 	var/alien_delay = 0
 	var/slime_delay = 0
 	var/animal_delay = 0
+	var/maximum_mushrooms = 15 //After this amount alive, mushrooms will not boom boom
 
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
@@ -769,6 +770,8 @@ var/list/gamemode_cache = list()
 					config.slime_delay = value
 				if("animal_delay")
 					config.animal_delay = value
+				if("maximum_mushrooms")
+					config.maximum_mushrooms = value
 
 
 				if("use_loyalty_implants")
