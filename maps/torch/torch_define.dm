@@ -38,7 +38,7 @@
 
 	default_law_type = /datum/ai_laws/solgov
 
-	id_hud_icons = 'maps/torch/icons/id_hud.dmi'
+	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,world.maxx,world.maxy) // Create the mining Z-level.
