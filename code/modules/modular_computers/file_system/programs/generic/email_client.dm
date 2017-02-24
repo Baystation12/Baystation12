@@ -21,10 +21,10 @@
 		else
 			stored_login = ""
 			stored_password = ""
-	..()
+	. = ..()
 
 /datum/computer_file/program/email_client/run_program()
-	..()
+	. = ..()
 	if(NM)
 		var/datum/nano_module/email_client/NME = NM
 		NME.stored_login = stored_login
@@ -41,11 +41,11 @@
 	var/msg_recipient = ""
 	var/folder = "Inbox"
 
-	var/datum/email_account/current_account = null
+	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 
 /datum/nano_module/email_client/proc/log_in()
-	for(var/datum/email_account/account in ntnet_global.email_accounts)
+	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(!account.can_login)
 			continue
 		if(account.login == stored_login)
@@ -63,11 +63,19 @@
 
 /datum/nano_module/email_client/proc/log_out()
 	current_account = null
-	stored_login = ""
-	stored_password = ""
 
 /datum/nano_module/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
+
+	// Password has been changed by other client connected to this email account
+	if(current_account)
+		if(current_account.password != stored_password)
+			log_out()
+			error = "Invalid Password"
+		// Banned.
+		if(current_account.suspended)
+			log_out()
+			error = "This account has been suspended. Please contact the system administrator for assistance."
 
 	if(error)
 		data["error"] = error
@@ -107,6 +115,7 @@
 						"uid" = message.uid
 					)))
 				data["messages"] = all_messages
+				data["messagecount"] = all_messages.len
 	else
 		data["stored_login"] = stored_login
 		data["stored_password"] = stars(stored_password, 0)
@@ -116,6 +125,7 @@
 		ui = new(user, src, ui_key, "email_client.tmpl", "Email Client", 600, 450, state = state)
 		if(host.update_layout())
 			ui.auto_update_layout = 1
+		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -273,6 +283,7 @@
 			return 1
 
 		current_account.password = newpassword1
+		stored_password = newpassword1
 		error = "Your password has been successfully changed!"
 		return 1
 

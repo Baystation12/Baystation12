@@ -1714,6 +1714,7 @@
 #include "code\modules\modular_computers\file_system\programs\generic\nttransfer.dm"
 #include "code\modules\modular_computers\file_system\programs\medical\suit_sensors.dm"
 #include "code\modules\modular_computers\file_system\programs\research\ai_restorer.dm"
+#include "code\modules\modular_computers\file_system\programs\research\email_administration.dm"
 #include "code\modules\modular_computers\file_system\programs\research\ntmonitor.dm"
 #include "code\modules\modular_computers\file_system\programs\security\digitalwarrant.dm"
 #include "code\modules\modular_computers\hardware\_hardware.dm"

@@ -38,6 +38,10 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_emails_list()
 	add_log("NTNet logging system activated.")
 
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+	if(intrusion_detection_enabled)
+		add_log(log_string, source)
+
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
 /datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
 	var/log_text = "[stationtime2text()] - "
@@ -107,7 +111,7 @@ var/global/datum/ntnet/ntnet_global = new()
 
 // Generates service email list. Currently only used by broadcaster service
 /datum/ntnet/proc/build_emails_list()
-	for(var/F in subtypesof(/datum/email_account/service))
+	for(var/F in subtypesof(/datum/computer_file/data/email_account/service))
 		new F()
 
 // Attempts to find a downloadable file according to filename var
@@ -159,7 +163,11 @@ var/global/datum/ntnet/ntnet_global = new()
 			setting_systemcontrol = !setting_systemcontrol
 			add_log("Configuration Updated. Wireless network firewall now [setting_systemcontrol ? "allows" : "disallows"] remote control of station's systems.")
 
-
+/datum/ntnet/proc/does_email_exist(var/login)
+	for(var/datum/computer_file/data/email_account/A in ntnet_global.email_accounts)
+		if(A.login == login)
+			return 1
+	return 0
 
 
 

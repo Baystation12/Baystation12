@@ -4,6 +4,8 @@
 {{else data.current_account}}
 	<b>Welcome to your account, {{:data.current_account}}</b><br>
 	{{:helper.link('New Message', null, {'edit_title' : 1})}}
+	{{:helper.link('Change Password', null, {'changepassword' : 1})}}
+	{{:helper.link('Log Out', null, {'logout' : 1})}}<br><br>
 	{{if data.msg_title}}
 		<div class="item">
 			<div class="itemLabel">
@@ -76,26 +78,30 @@
 		{{:helper.link('Spam', null, {'set_folder' : 'Spam'}, data.folder == 'Spam' ? 'selected' : null)}}
 		{{:helper.link('Deleted', null, {'set_folder' : 'Deleted'}, data.folder == 'Deleted' ? 'selected' : null)}}
 		<br><br>
-		<table>
-			<tr>
-				<th>Source</th>
-				<th>Title</th>
-				<th>Received at</th>
-				<th>Actions</th>
-			</tr>
-		{{for data.messages}}
-			<tr>
-				<td>{{:value.source}}&nbsp</td>
-				<td>{{:value.title}}&nbsp</td>
-				<td>{{:value.timestamp}}&nbsp</td>
-				<td>
-					{{:helper.link('Delete', null, {'delete' : value.uid})}}
-					{{:helper.link('Reply', null, {'reply' :  value.uid})}}
-					{{:helper.link('View', null, {'view' :  value.uid})}}
-				</td>
-			</tr>
-		{{/for}}
-		</table>
+		{{if data.messagecount}}
+			<table>
+				<tr>
+					<th>Source</th>
+					<th>Title</th>
+					<th>Received at</th>
+					<th>Actions</th>
+				</tr>
+				{{for data.messages}}
+					<tr>
+						<td>{{:value.source}}&nbsp</td>
+						<td>{{:value.title}}&nbsp</td>
+						<td>{{:value.timestamp}}&nbsp</td>
+						<td>
+							{{:helper.link('Delete', null, {'delete' : value.uid})}}
+							{{:helper.link('Reply', null, {'reply' :  value.uid})}}
+							{{:helper.link('View', null, {'view' :  value.uid})}}
+						</td>
+					</tr>
+				{{/for}}
+			</table>
+		{{else}}
+			<b>No messages found in selected folder</b>
+		{{/if}}
 	{{/if}}
 {{else}}
 	<b>Welcome to NTNet Email System. Please log in.</b>

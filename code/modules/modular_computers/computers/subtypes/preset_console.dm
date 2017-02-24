@@ -33,6 +33,22 @@
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/aidiag())
+	hard_drive.store_file(new/datum/computer_file/program/email_client())
+
+// Administrator
+/obj/item/modular_computer/console/preset/sysadmin/install_default_hardware()
+	..()
+	ai_slot = new/obj/item/weapon/computer_hardware/ai_slot(src)
+
+/obj/item/modular_computer/console/preset/sysadmin/install_default_programs()
+	..()
+	hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
+	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	hard_drive.store_file(new/datum/computer_file/program/chatclient())
+	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	hard_drive.store_file(new/datum/computer_file/program/aidiag())
+	hard_drive.store_file(new/datum/computer_file/program/email_client())
+	hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
 // Command
 /obj/item/modular_computer/console/preset/command/install_default_hardware()
@@ -46,6 +62,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	hard_drive.store_file(new/datum/computer_file/program/comm())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 // Security
 /obj/item/modular_computer/console/preset/security/install_default_programs()
@@ -59,6 +76,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 // ERT
 /obj/item/modular_computer/console/preset/ert/install_default_hardware()
