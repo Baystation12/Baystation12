@@ -113,14 +113,6 @@
 			return global.acting_rank_prefixes;
 		if("active_diseases")
 			return global.active_diseases;
-		if("activeauth")
-			return global.activeauth;
-		if("activecharges")
-			return global.activecharges;
-		if("activename")
-			return global.activename;
-		if("activetype")
-			return global.activetype;
 		if("actor")
 			return global.actor;
 		if("additional_antag_types")
@@ -1233,8 +1225,6 @@
 			return global.stool_cache;
 		if("stored_shock_by_ref")
 			return global.stored_shock_by_ref;
-		if("storedwarrant")
-			return global.storedwarrant;
 		if("string_part_flags")
 			return global.string_part_flags;
 		if("string_slot_flags")
@@ -1572,14 +1562,6 @@
 			global.acting_rank_prefixes=newval;
 		if("active_diseases")
 			global.active_diseases=newval;
-		if("activeauth")
-			global.activeauth=newval;
-		if("activecharges")
-			global.activecharges=newval;
-		if("activename")
-			global.activename=newval;
-		if("activetype")
-			global.activetype=newval;
 		if("actor")
 			global.actor=newval;
 		if("additional_antag_types")
@@ -2692,8 +2674,6 @@
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
 			global.stored_shock_by_ref=newval;
-		if("storedwarrant")
-			global.storedwarrant=newval;
 		if("string_part_flags")
 			global.string_part_flags=newval;
 		if("string_slot_flags")

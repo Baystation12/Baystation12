@@ -56,6 +56,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/boss_short    = "Cap'"
 	var/company_name  = "BadMan"
 	var/company_short = "BM"
+	var/system_name = "Uncharted System"
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock

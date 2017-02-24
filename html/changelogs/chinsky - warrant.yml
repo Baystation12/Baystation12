@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Holowarrant projectors now autosync when clicked in hand instead of having to use verb manually."
+  - tweak: "You can swipe ID at the holowarrant to authorize it now."
