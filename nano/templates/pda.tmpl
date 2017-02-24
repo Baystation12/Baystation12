@@ -913,7 +913,10 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
     {{else data.mode == 61}}      
         <H2><span class="white">{{:data.feed.channel}}</span></H2>
-        <span class="white">Created by: </span><span class="average">{{:data.feed.author}}<br></span>
+        <div style="overflow: hidden;">
+            <div style="float: left;"><span class="white">Created by: </span><span class="average">{{:data.feed.author}}</span></div>
+            <div style="float: right;"><span class="white">Views: </span><span class="average">{{:data.feed.views}} </span></div>
+        </div>
 		
 		{{if data.reception != 1}}
 			<span class="bad">No reception with newscaster network.</span>

@@ -508,11 +508,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			feed["author"]	= "Unknown"
 			feed["censored"]= 0
 			feed["updated"] = -1
+			feed["views"] = 0
 			feed_info[active_feed] = feed
 
 		if(FC.updated > feed["updated"] && has_reception)
 			feed["author"]	= FC.author
 			feed["updated"]	= FC.updated
+			feed["views"] = ++FC.views
 			feed["censored"] = FC.censored
 
 			var/list/messages = list()
