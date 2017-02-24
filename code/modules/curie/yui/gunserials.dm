@@ -12,18 +12,21 @@
 			if(do_after(user, weldingToolDelay))
 				to_chat(user, "You melted the serial number from [name]")
 				serial_number = "seems to have been molten down"
+				return 1
 
 	else if(istype(I, /obj/item/weapon/crowbar))
 		to_chat(user, "You start beating the shit out of the serial number from [name]")
 		if(do_after(user, crowbarDelay))
 			to_chat(user, "You battered the serial number from [name]")
 			serial_number = "seems to have been battered to gibberish"
+			return 1
 
 	else if(istype(I, /obj/item/weapon/surgicaldrill))
 		to_chat(user, "You start beating the shit out of the serial number from [name]")
 		if(do_after(user, drillDelay))
 			to_chat(user, "You drilled the serial number from [name]")
 			serial_number = "seems to have been precisely carved out"
+			return 1
 
 /obj/item/weapon/gun/proc/generate_serial()
   // ARMORY AREA
