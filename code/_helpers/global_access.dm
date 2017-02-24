@@ -1175,6 +1175,8 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
+		if("sound_player")
+			return global.sound_player;
 		if("sounds_cache")
 			return global.sounds_cache;
 		if("spacevines_spawned")
@@ -2634,6 +2636,8 @@
 			global.solar_gen_rate=newval;
 		if("solars_list")
 			global.solars_list=newval;
+		if("sound_player")
+			global.sound_player=newval;
 		if("sounds_cache")
 			global.sounds_cache=newval;
 		if("spacevines_spawned")
@@ -3505,6 +3509,7 @@
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",
+	"sound_player",
 	"sounds_cache",
 	"spacevines_spawned",
 	"spark_sound",
