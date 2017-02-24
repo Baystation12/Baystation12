@@ -47,6 +47,7 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 		user.unEquip(O)
 		qdel(O)
 		metal += 1
+		metal = min(metal+1,maxMetal)
 		return 1
 	return ..()
 
