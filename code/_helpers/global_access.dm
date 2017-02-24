@@ -689,6 +689,8 @@
 			return global.init;
 		if("initialization_stage")
 			return global.initialization_stage;
+		if("integrated_circuit_blacklist")
+			return global.integrated_circuit_blacklist;
 		if("intents")
 			return global.intents;
 		if("interactive_state")
@@ -1455,7 +1457,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2146,6 +2148,8 @@
 			global.init=newval;
 		if("initialization_stage")
 			global.initialization_stage=newval;
+		if("integrated_circuit_blacklist")
+			global.integrated_circuit_blacklist=newval;
 		if("intents")
 			global.intents=newval;
 		if("interactive_state")
@@ -2912,7 +2916,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3258,6 +3262,7 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
+	"integrated_circuit_blacklist",
 	"intents",
 	"interactive_state",
 	"intercom_range_display_status",
