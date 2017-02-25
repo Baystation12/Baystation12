@@ -9,7 +9,8 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "integrated"
 	density = 1
-	var/metal = 100
+	anchored = 1
+	var/metal = 0
 	var/maxMetal = 100
 	var/metal_mult = 0.5
 	use_power = 1
@@ -41,6 +42,12 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 				metal += num
 				updateUsrDialog()
 				return 1
+	if(istype(O,/obj/item/integrated_circuit))
+		to_chat(user, "<span class='notice'>You insert the circuit into [src]. </span>")
+		user.unEquip(O)
+		qdel(O)
+		metal = min(metal+1,maxMetal)
+		return 1
 	return ..()
 
 /obj/machinery/integrated_circuit_printer/attack_hand(var/mob/user)
