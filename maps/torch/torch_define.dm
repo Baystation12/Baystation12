@@ -38,7 +38,7 @@
 
 	default_law_type = /datum/ai_laws/solgov
 
-	id_hud_icons = 'maps/torch/icons/id_hud.dmi'
+	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
 /datum/map/torch/setup_map()
 	..()

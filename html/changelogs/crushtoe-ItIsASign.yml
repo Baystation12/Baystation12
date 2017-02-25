@@ -1,0 +1,4 @@
+author: Crushtoe
+delete-after: True
+changes: 
+  - imageadd: "New external airlock and mail sign sprites."
