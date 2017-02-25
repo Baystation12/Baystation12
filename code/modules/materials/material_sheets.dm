@@ -168,6 +168,9 @@
 	default_type = "osmium-carbide plasteel"
 	apply_colour = 1
 
+/obj/item/stack/material/ocp/fifty
+	amount = 50
+
 // Fusion fuel.
 /obj/item/stack/material/deuterium
 	name = "deuterium"

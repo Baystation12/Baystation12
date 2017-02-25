@@ -31,6 +31,11 @@
 	cost = 10
 	containername = "\improper Plastic sheets crate"
 
+/decl/hierarchy/supply_pack/engineering/ocp50
+	name = "50 Osmium-Carbide Plasteel sheets"
+	contains = list(/obj/item/stack/material/ocp/fifty)
+	cost = 25
+
 /decl/hierarchy/supply_pack/engineering/smes_circuit
 	name = "Superconducting Magnetic Energy Storage Unit Circuitry"
 	contains = list(/obj/item/weapon/circuitboard/smes)
