@@ -47,7 +47,7 @@ datum/unit_test/human_breath/check_result()
 	if(starting_oxyloss < ending_oxyloss)
 		pass("Oxyloss = [ending_oxyloss]")
 	else
-		fail("Mob is not taking oxygen damage.  Damange is [ending_oxyloss]")
+		fail("Mob is not taking oxygen damage.  Damage is [ending_oxyloss]")
 
 	return 1	// return 1 to show we're done and don't want to recheck the result.
 
