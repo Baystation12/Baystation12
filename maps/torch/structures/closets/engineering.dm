@@ -31,7 +31,7 @@
 		/obj/item/weapon/crowbar/brace_jack,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/welding/superior,
-		/obj/item/weapon/gun/energy/gun,
+		/obj/item/weapon/gun/energy/gun/small,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/suit/storage/vest/solgov/command,
 		/obj/item/clothing/head/helmet/solgov/command,
