@@ -4,6 +4,19 @@
         <ui-button style='{{data.playing ? null : "selected"}}' action='stop'>Stop</ui-button>
     </ui-section>
 </ui-display>
+<ui-display title='Volume'>
+    <ui-section>
+        <ui-bar min='0' max='50' value='{{data.volume}}'>{{data.volume * 2}}%</ui-bar>
+    </ui-section>
+    <ui-section>
+        <ui-button state='{{data.volume == 0  ? "disabled" : null}}' action='volume' params='{"level": "0"}'>0</ui-button>
+        <ui-button state='{{data.volume == 10 ? "disabled" : null}}' action='volume' params='{"level": "10"}'>20</ui-button>
+        <ui-button state='{{data.volume == 20 ? "disabled" : null}}' action='volume' params='{"level": "20"}'>40</ui-button>
+        <ui-button state='{{data.volume == 30 ? "disabled" : null}}' action='volume' params='{"level": "30"}'>60</ui-button>
+        <ui-button state='{{data.volume == 40 ? "disabled" : null}}' action='volume' params='{"level": "40"}'>80</ui-button>
+        <ui-button state='{{data.volume == 50 ? "disabled" : null}}' action='volume' params='{"level": "50"}'>100</ui-button>
+    </ui-section>
+</ui-display>
 <ui-display title='Available tracks:'>
     {{#each data.tracks}}
         <ui-button action='change_track' params='{"title" : {{.}}}'>{{.}}</ui-button><br>
