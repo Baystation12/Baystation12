@@ -29,7 +29,7 @@
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/gun/energy/gun/small,
+		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/suit/storage/vest/solgov/command,
 		/obj/item/clothing/head/helmet/solgov/command,

@@ -1,5 +1,5 @@
 author: Haswell
 delete-after: True
 changes: 
-  - rscadd: "Added mini energy gun variant, small size with 4 shots."
-  - tweak: "Replaced energy guns in lockers with mini variant."
+  - rscadd: "Added small energy gun variant, small size with 4 shots and reduced lethal damage."
+  - rscadd: "Added gun cabinet variant with small energy guns."
