@@ -1,12 +1,18 @@
 /decl/turf_initializer/maintenance
 	var/clutter_probability = 2
-	var/web_probability = 25
+	var/oil_probability = 2
 	var/vermin_probability = 0
+	var/web_probability = 25
 
 /decl/turf_initializer/maintenance/heavy
-	vermin_probability = 0.5
 	clutter_probability = 5
 	web_probability = 50
+	vermin_probability = 0.5
+
+/decl/turf_initializer/maintenance/space
+	clutter_probability = 0
+	vermin_probability = 0
+	web_probability = 0
 
 /decl/turf_initializer/maintenance/initialize(var/turf/simulated/T)
 	if(T.density)
@@ -24,17 +30,12 @@
 		T.dirt += rand(0,10)
 	T.update_dirt()
 
-	if(prob(clutter_probability))
+	if(prob(oil_probability))
 		new /obj/effect/decal/cleanable/blood/oil(T)
 
 	if(prob(clutter_probability))
 		var/new_junk = get_random_junk_type()
 		new new_junk(T)
-
-	// The random additions below are only added if the turf isn't part of an external area
-	var/area/A = get_area(T)
-	if(A.flags & AREA_EXTERNAL)
-		return
 
 	if(prob(vermin_probability))
 		if(prob(80))
@@ -44,6 +45,8 @@
 
 	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
+		if(prob(web_probability))
+			new /obj/effect/spider/spiderling/mundane(T)
 
 /decl/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
 	var/how_dirty = 0
