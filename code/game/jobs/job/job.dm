@@ -29,6 +29,8 @@
 	var/list/allowed_branches			  // For Torch, also expandable for other purposes
 	var/list/allowed_ranks				  // Ditto
 
+	var/announced						  //If their arrival is announced on radio
+
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)

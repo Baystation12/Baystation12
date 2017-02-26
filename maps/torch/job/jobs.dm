@@ -206,6 +206,7 @@
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
+	announced = 1
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -226,6 +227,7 @@
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 	minimal_access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
+	announced = 1
 
 
 /datum/job/sea

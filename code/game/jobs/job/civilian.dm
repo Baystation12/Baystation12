@@ -127,7 +127,8 @@
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 	minimal_player_age = 10
-	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
+	outfit_type = /decl/hierarchy/outfit/job/
+	announced = 1
 
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)
 	. = ..()
