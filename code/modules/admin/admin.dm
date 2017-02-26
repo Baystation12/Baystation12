@@ -1343,6 +1343,7 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Mode has not started.")
 		return
 
+	var/list/all_antag_types = all_antag_types()
 	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
 	if(!antag_type || !all_antag_types[antag_type])
 		to_chat(usr, "Aborting.")
