@@ -1,6 +1,0 @@
-author: TheWelp
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds an advanced integrated circuit radio. Lets players send commands and id_tags."
