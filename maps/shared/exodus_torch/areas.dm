@@ -22,6 +22,7 @@
 	name = "\improper Exterior Reinforcements"
 	icon_state = "maint_security_starboard"
 	flags = AREA_EXTERNAL
+	turf_initializer = /decl/turf_initializer/maintenance/space
 
 // CentCom
 
