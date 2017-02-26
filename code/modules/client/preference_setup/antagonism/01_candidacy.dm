@@ -4,13 +4,13 @@
 
 /datum/category_item/player_setup_item/antagonism/candidacy/load_character(var/savefile/S)
 	from_file(S["be_special"], pref.be_special_role)
-	from_file(S["be_special"], pref.sometimes_be_special_role)
-	from_file(S["be_special"], pref.never_be_special_role)
+	from_file(S["sometimes_be_special"], pref.sometimes_be_special_role)
+	from_file(S["never_be_special"], pref.never_be_special_role)
 
 /datum/category_item/player_setup_item/antagonism/candidacy/save_character(var/savefile/S)
 	to_file(S["be_special"], pref.be_special_role)
-	to_file(S["be_special"], pref.sometimes_be_special_role)
-	to_file(S["be_special"], pref.never_be_special_role)
+	to_file(S["sometimes_be_special"], pref.sometimes_be_special_role)
+	to_file(S["never_be_special"], pref.never_be_special_role)
 
 /datum/category_item/player_setup_item/antagonism/candidacy/sanitize_character()
 	if(!istype(pref.be_special_role))
@@ -82,6 +82,8 @@
 		return TOPIC_REFRESH
 
 	if(href_list["del_special"])
+		if(!(href_list["del_special"] in valid_special_roles()))
+			return TOPIC_HANDLED
 		pref.be_special_role -= href_list["del_special"]
 		pref.sometimes_be_special_role |= href_list["del_special"]
 		pref.never_be_special_role -= href_list["del_special"]
