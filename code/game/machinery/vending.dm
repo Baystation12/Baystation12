@@ -1020,3 +1020,29 @@
 					/obj/item/weapon/lipstick/jade = 100,
 					/obj/item/weapon/storage/wallet/poly = 600
 					)
+
+//Torch XO specific
+/obj/machinery/vending/xo/sword
+	name = "PSword"
+	desc = "A relic from PTech's very rare exploration into military surplus vending. This one handles ceremonial swords."
+	product_slogans = "You'll cut a rug with this one, sir!"
+	icon_state = "cart" //Get a different sprite up someday.
+	icon_deny = "cart-deny"
+	vend_delay = 600 //Don't take all my swords at once.
+	req_access = list(access_hop)
+	products = list(/obj/item/weapon/material/sword/replica/officersword = 4,
+						/obj/item/weapon/material/sword/replica/officersword/marine = 4,
+						/obj/item/weapon/material/sword/replica/officersword/marineofficer = 4,
+						/obj/item/weapon/material/sword/replica/officersword/pettyofficer = 4
+						)
+
+/obj/machinery/vending/xo/ranks
+	name = "PRanks"
+	desc = "A relic from PTech's very rare exploration into military surplus vending. This one stores military ranking pins."
+	product_slogans = "Congratulations on that promotion!"
+	icon_state = "cart"
+	icon_deny = "cart-deny"
+	vend_delay = 300
+	req_access = list(access_hop)
+	products = list(
+					)

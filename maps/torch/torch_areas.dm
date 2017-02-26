@@ -985,6 +985,9 @@
 /area/crew_quarters/heads/office/xo
 	name = "\improper Command - XO's Office"
 
+/area/crew_quarters/heads/office/xo/storage
+	name = "\improper Command - XO's Storage"
+
 /area/crew_quarters/heads/office/rd
 	name = "\improper Command - RD's Office"
 
