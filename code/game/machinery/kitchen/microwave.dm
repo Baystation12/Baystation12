@@ -137,12 +137,12 @@
 		return 1
 	else if(istype(O,/obj/item/weapon/crowbar))
 		user.visible_message( \
-			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
+			"<span class='notice'>\The [user] begins [src.anchored ? "unsecuring" : "securing"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
 		if (do_after(user,20, src))
 			user.visible_message( \
-			"<span class='notice'>\The [user] [src.anchored ? "secures" : "unsecures"] the microwave.</span>", \
+			"<span class='notice'>\The [user] [src.anchored ? "unsecures" : "secures"] the microwave.</span>", \
 			"<span class='notice'>You [src.anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
 			src.anchored = !src.anchored
