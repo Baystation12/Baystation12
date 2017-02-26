@@ -20,6 +20,7 @@
 
 /mob/new_player/New()
 	..()
+	client.prefs.load_character(client.prefs.default_slot)
 	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/verb/new_player_panel()
