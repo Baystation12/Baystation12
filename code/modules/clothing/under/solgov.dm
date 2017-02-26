@@ -164,6 +164,9 @@
 	icon_state = "greyutility_med"
 	worn_state = "greyutility_med"
 
+/obj/item/clothing/under/utility/marine/medical/banded
+	starting_accessories = list(/obj/item/clothing/accessory/armband/medblue)
+
 /obj/item/clothing/under/utility/marine/engineering
 	name = "marine engineering fatigues"
 	desc = "The utility uniform of the SCG Marine Corps, made from durable material. This one has orange markings."

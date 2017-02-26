@@ -1,4 +1,0 @@
-author: Haswell
-delete-after: True
-changes: 
-  - rscadd: "Added crossfire gamemode, mercenary + raiders. Requires 25 readied players and at least 6 antags to start."

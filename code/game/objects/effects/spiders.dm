@@ -121,18 +121,23 @@
 	var/amount_grown = -1
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
+	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 /obj/effect/spider/spiderling/New(var/location, var/atom/parent)
 	greater_form = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
 	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(6,-6)
 	pixel_y = rand(6,-6)
-	processing_objects |= src
-	//50% chance to grow up
-	if(prob(50))
+	
+	if(prob(growth_chance))
 		amount_grown = 1
+		processing_objects |= src
+
 	get_light_and_color(parent)
 	..()
+	
+/obj/effect/spider/spiderling/mundane
+	growth_chance = 0 // Just a simple spider
 
 /obj/effect/spider/spiderling/Destroy()
 	processing_objects -= src
