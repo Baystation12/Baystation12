@@ -12,7 +12,7 @@
 /datum/admins/proc/setup_supermatter()
 	set category = "Debug"
 	set name = "Setup Supermatter"
-	set desc = "Allows you to start the Supermatter engine."
+	set desc = "Allows you to start the Supermatter reactor."
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -20,7 +20,7 @@
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "PH", "Abort")
+	var/response = input(usr, "Are you sure? This will start up the reactor with selected gas as coolant.", "Reactor setup") as null|anything in list("N2", "CO2", "PH", "Abort")
 	if(!response || response == "Abort")
 		return
 
@@ -32,19 +32,19 @@
 
 	// CONFIGURATION PHASE
 	// Coolant canisters, set types according to response.
-	for(var/obj/effect/engine_setup/coolant_canister/C in world)
+	for(var/obj/effect/reactor_setup/coolant_canister/C in world)
 		switch(response)
 			if("N2")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/reactor_setup/
 				continue
 			if("CO2")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/reactor_setup/
 				continue
 			if("PH")
-				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/reactor_setup/
 				continue
 
-	for(var/obj/effect/engine_setup/core/C in world)
+	for(var/obj/effect/reactor_setup/core/C in world)
 		switch(response)
 			if("N2")
 				C.energy_setting = ENERGY_NITROGEN
@@ -56,12 +56,12 @@
 				C.energy_setting = ENERGY_PHORON
 				continue
 
-	for(var/obj/effect/engine_setup/filter/F in world)
+	for(var/obj/effect/reactor_setup/filter/F in world)
 		F.coolant = response
 
 	var/list/delayed_objects = list()
 	// SETUP PHASE
-	for(var/obj/effect/engine_setup/S in world)
+	for(var/obj/effect/reactor_setup/S in world)
 		var/result = S.activate(0)
 		switch(result)
 			if(SETUP_OK)
@@ -79,7 +79,7 @@
 				continue
 
 	if(!errors)
-		for(var/obj/effect/engine_setup/S in delayed_objects)
+		for(var/obj/effect/reactor_setup/S in delayed_objects)
 			var/result = S.activate(1)
 			switch(result)
 				if(SETUP_OK)
@@ -99,8 +99,8 @@
 
 
 
-/obj/effect/engine_setup/
-	name = "Engine Setup Marker"
+/obj/effect/reactor_setup/
+	name = "Reactor Setup Marker"
 	desc = "You shouldn't see this."
 	invisibility = 101
 	anchored = 1
@@ -108,16 +108,16 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x3"
 
-/obj/effect/engine_setup/proc/activate(var/last = 0)
+/obj/effect/reactor_setup/proc/activate(var/last = 0)
 	return 1
 
 
 
 // Tries to locate a pump, enables it, and sets it to MAX. Triggers warning if unable to locate a pump.
-/obj/effect/engine_setup/pump_max/
+/obj/effect/reactor_setup/pump_max/
 	name = "Pump Setup Marker"
 
-/obj/effect/engine_setup/pump_max/activate()
+/obj/effect/reactor_setup/pump_max/activate()
 	..()
 	var/obj/machinery/atmospherics/binary/pump/P = locate() in get_turf(src)
 	if(!P)
@@ -131,10 +131,10 @@
 
 
 // Spawns an empty canister on this turf, if it has a connector port. Triggers warning if unable to find a connector port
-/obj/effect/engine_setup/empty_canister/
+/obj/effect/reactor_setup/empty_canister/
 	name = "Empty Canister Marker"
 
-/obj/effect/engine_setup/empty_canister/activate()
+/obj/effect/reactor_setup/empty_canister/activate()
 	..()
 	var/obj/machinery/atmospherics/portables_connector/P = locate() in get_turf(src)
 	if(!P)
@@ -148,11 +148,11 @@
 
 // Spawns a coolant canister on this turf, if it has a connector port.
 // Triggers error when unable to locate connector port or when coolant canister type is unset.
-/obj/effect/engine_setup/coolant_canister/
+/obj/effect/reactor_setup/coolant_canister/
 	name = "Coolant Canister Marker"
 	var/canister_type = null
 
-/obj/effect/engine_setup/coolant_canister/activate()
+/obj/effect/reactor_setup/coolant_canister/activate()
 	..()
 	var/obj/machinery/atmospherics/portables_connector/P = locate() in get_turf(src)
 	if(!P)
@@ -167,11 +167,11 @@
 
 
 // Energises the supermatter. Errors when unable to locate supermatter.
-/obj/effect/engine_setup/core/
+/obj/effect/reactor_setup/core/
 	name = "Supermatter Core Marker"
 	var/energy_setting = 0
 
-/obj/effect/engine_setup/core/activate(var/last = 0)
+/obj/effect/reactor_setup/core/activate(var/last = 0)
 	if(!last)
 		return SETUP_DELAYED
 	..()
@@ -187,11 +187,11 @@
 
 
 
-// Tries to enable the SMES on max input/output settings. With load balancing it should be fine as long as engine outputs at least ~500kW
-/obj/effect/engine_setup/smes/
+// Tries to enable the SMES on max input/output settings. With load balancing it should be fine as long as reactor outputs at least ~500kW
+/obj/effect/reactor_setup/smes/
 	name = "SMES Marker"
 
-/obj/effect/engine_setup/smes/activate()
+/obj/effect/reactor_setup/smes/activate()
 	..()
 	var/obj/machinery/power/smes/S = locate() in get_turf(src)
 	if(!S)
@@ -207,11 +207,11 @@
 
 
 // Sets up filters. This assumes filters are set to filter out N2 back to the core loop by default!
-/obj/effect/engine_setup/filter/
+/obj/effect/reactor_setup/filter/
 	name = "Omni Filter Marker"
 	var/coolant = null
 
-/obj/effect/engine_setup/filter/activate()
+/obj/effect/reactor_setup/filter/activate()
 	..()
 	var/obj/machinery/atmospherics/omni/filter/F = locate() in get_turf(src)
 	if(!F)

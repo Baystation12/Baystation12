@@ -197,7 +197,7 @@
 	icon_state = "ai"
 
 /area/constructionsite/engineering
-	name = "\improper Construction Site Engine Bay"
+	name = "\improper Construction Site Reactor Bay"
 	icon_state = "engine"
 
 /area/constructionsite/teleporter
@@ -219,8 +219,8 @@
 	icon_state = "atmos_storage"
 	sound_env = SMALL_ENCLOSED
 
-/area/engineering/engine_room
-	name = "\improper Engine Room"
+/area/engineering/reactor_room
+	name = "\improper Reactor Room"
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
 
@@ -233,11 +233,11 @@
 	name = "\improper Engine EVA"
 	icon_state = "engine_eva"
 
-/area/engineering/engine_monitoring
-	name = "\improper Engine Monitoring Room"
+/area/engineering/reactor_monitoring
+	name = "\improper Reactor Monitoring Room"
 	icon_state = "engine_monitoring"
 
-/area/engineering/engine_smes
+/area/engineering/reactor_smes
 	name = "\improper Engineering SMES"
 	icon_state = "engine_smes"
 	sound_env = SMALL_ENCLOSED

@@ -9,7 +9,7 @@
 /datum/admins/proc/setup_fusion()
 	set category = "Debug"
 	set name = "Setup Fusion Core"
-	set desc = "Allows you to start the R-UST engine."
+	set desc = "Allows you to start the R-UST reactor."
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -21,7 +21,7 @@
 		to_chat(usr, "This map is not appropriate for this verb.")
 		return
 
-	var/response = input(usr, "Are you sure?", "Engine setup") as null|anything in list("No", "Yes")
+	var/response = input(usr, "Are you sure?", "Reactor setup") as null|anything in list("No", "Yes")
 	if(!response || response == "No")
 		return
 
@@ -40,7 +40,7 @@
 		var/list/delayed_objects = list()
 
 		// SETUP PHASE
-		for(var/obj/effect/engine_setup/S in world)
+		for(var/obj/effect/reactor_setup/S in world)
 			var/result = S.activate(0)
 			switch(result)
 				if(SETUP_OK)
@@ -58,7 +58,7 @@
 					continue
 
 		if(!errors)
-			for(var/obj/effect/engine_setup/S in delayed_objects)
+			for(var/obj/effect/reactor_setup/S in delayed_objects)
 				var/result = S.activate(1)
 				switch(result)
 					if(SETUP_OK)

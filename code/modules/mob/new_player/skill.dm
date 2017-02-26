@@ -190,7 +190,7 @@ var/global/list/SKILLS = null
     name = "Electrical Engineering"
     desc = "This skill describes your knowledge of electronics and the underlying physics. A low level of this skill implies you know how to lay out wiring and configure powernets, a high level of this skill is required for working complex electronic devices such as circuits or bots."
     desc_unskilled = "You know that electrical wires are dangerous and getting shocked is bad; you can see and report electrical malfunctions such as broken wires or malfunctioning APCs. You can change a light bulb, and you know how to replace a battery or charge up the equipment you normally use."
-    desc_amateur = "You can do basic wiring; you can lay cable for solars or the engine. You can repair broken wiring and build simple electrical equipment like light fixtures or APCs. You know the basics of circuits and understand how to protect yourself from electrical shock. You can probably hack a vending machine."
+    desc_amateur = "You can do basic wiring; you can lay cable for solars or the reactor. You can repair broken wiring and build simple electrical equipment like light fixtures or APCs. You know the basics of circuits and understand how to protect yourself from electrical shock. You can probably hack a vending machine."
     desc_trained = "You can repair and build electrical equipment and do so on a regular basis. You can troubleshoot an electrical system and monitor the station power grid. You can probably hack an airlock."
     desc_professional = "You are an electrical engineer or the equivalent. You can design, upgrade, and modify electrical equipment and you are good at maximizing the efficiency of your power network. You can hack anything on the station; you can deal with power outages and electrical problems easily and efficiently."
 
@@ -199,18 +199,18 @@ var/global/list/SKILLS = null
     name = "Atmospherics"
     desc = "Describes your knowledge of piping, air distribution and gas dynamics."
     desc_unskilled = "You know that the air monitors flash orange when the air is bad and red when it's deadly. You know that a flashing fire door means danger on the other side. You know that some gases are poisonous, that pressure has to be kept in a safe range, and that most creatures need oxygen to live. You can use a fire extinguisher or deploy an inflatable barrier."
-    desc_amateur = "You know how to read an air monitor, how to use an air pump, how to analyze the atmosphere in a space, and how to help seal a breach. You can lay piping and work with gas tanks and canisters. If you work with the engine, you can set up the cooling system. You can use a fire extinguisher easily and place inflatable barriers so that they allow convenient access and airtight breach containment."
+    desc_amateur = "You know how to read an air monitor, how to use an air pump, how to analyze the atmosphere in a space, and how to help seal a breach. You can lay piping and work with gas tanks and canisters. If you work with the reactor, you can set up the cooling system. You can use a fire extinguisher easily and place inflatable barriers so that they allow convenient access and airtight breach containment."
     desc_trained = "You can run the Atmospherics system. You know how to monitor the air quality across the station, detect problems, and fix them. You're trained in dealing with fires, breaches, and gas leaks, and may have exosuit or fire gear training."
     desc_professional = "You are an atmospherics specialist. You monitor, modify, and optimize the station's atmospherics system, and you can quickly and easily deal with emergencies. You can modify atmospherics systems to do pretty much whatever you want them to. You can easily handle a fire or breach, and are proficient at securing an area and rescuing civilians, but you're equally likely to have simply prevented it from happening in the first place."
 
-/datum/skill/engineering/engines
-	ID = "engines"
-	name = "Engines"
-	desc = "Describes your knowledge of the various engine types common on space stations, such as the singularity, supermatter or RUST engine."
-	desc_unskilled = "You know that \"delamination\" is a bad thing and that you should stay away from the singularity. You know the engine provides power, but you're unclear on the specifics. If you were to try to set up the engine, you would need someone to talk you through every detail--and even then, you'd probably make deadly mistakes."
-	desc_amateur = "You know the basic theoretical principles of engine operation. You can try to set up the engine by yourself, but you are likely to need some assistance and supervision, otherwise you are likely to make mistakes."
-	desc_trained = "You can set up the engine, and you probably won't botch it up too badly. You know how to protect yourself from radiation in the engine room. You can read the engine monitors and keep the engine going. You're familiar with engine types other than the one you work with. An engine malfunction may stump you, but you can probably work out how to fix it... let's just hope you do so quickly enough to prevent serious damage."
-	desc_professional = "Your engine is your baby and you know every minute detail of its workings. You can optimize the engine and you probably have your own favorite custom setup. You could build an engine from the ground up. When things go wrong, you know exactly what has happened and how to fix the problem. You can safely handle singularities and supermatter."
+/datum/skill/engineering/reactors
+	ID = "reactors"
+	name = "Reactors"
+	desc = "Describes your knowledge of the various reactor types common on space stations, such as the singularity, supermatter or RUST reactor."
+	desc_unskilled = "You know that \"delamination\" is a bad thing and that you should stay away from the singularity. You know the reactor provides power, but you're unclear on the specifics. If you were to try to set up the reactor, you would need someone to talk you through every detail--and even then, you'd probably make deadly mistakes."
+	desc_amateur = "You know the basic theoretical principles of reactor operation. You can try to set up the reactor by yourself, but you are likely to need some assistance and supervision, otherwise you are likely to make mistakes."
+	desc_trained = "You can set up the reactor, and you probably won't botch it up too badly. You know how to protect yourself from radiation in the reactor room. You can read the reactor monitors and keep the reactor going. You're familiar with reactor types other than the one you work with. A reactor malfunction may stump you, but you can probably work out how to fix it... let's just hope you do so quickly enough to prevent serious damage."
+	desc_professional = "Your reactor is your baby and you know every minute detail of its workings. You can optimize the reactor and you probably have your own favorite custom setup. You could build an reactor from the ground up. When things go wrong, you know exactly what has happened and how to fix the problem. You can safely handle singularities and supermatter."
 
 /datum/skill/engineering/mech
     ID = "mech"
