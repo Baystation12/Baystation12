@@ -34,3 +34,4 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - rscadd: "Pipes with exposed ends (such as those that result from a pipe bursting) will now leak their contents into the air. To stop a pipe from leaking, attach an endcap to the end."
+  - rscadd: "Added Cryogenic Clamps, devices which can be attached to a pipe and turned on in order to halt the flow of gas through that pipe. Useful for sealing off sections of pipe so you can make changes without leaking."
