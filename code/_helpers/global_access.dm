@@ -197,10 +197,10 @@
 			return global.allCasters;
 		if("allConsoles")
 			return global.allConsoles;
-		if("all_antag_spawnpoints")
-			return global.all_antag_spawnpoints;
-		if("all_antag_types")
-			return global.all_antag_types;
+		if("all_antag_spawnpoints_")
+			return global.all_antag_spawnpoints_;
+		if("all_antag_types_")
+			return global.all_antag_types_;
 		if("all_languages")
 			return global.all_languages;
 		if("all_maps")
@@ -233,8 +233,8 @@
 			return global.announced_news_types;
 		if("antag_add_finished")
 			return global.antag_add_finished;
-		if("antag_names_to_ids")
-			return global.antag_names_to_ids;
+		if("antag_names_to_ids_")
+			return global.antag_names_to_ids_;
 		if("appearance_manager")
 			return global.appearance_manager;
 		if("area_repository")
@@ -1447,7 +1447,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1646,10 +1646,10 @@
 			global.allCasters=newval;
 		if("allConsoles")
 			global.allConsoles=newval;
-		if("all_antag_spawnpoints")
-			global.all_antag_spawnpoints=newval;
-		if("all_antag_types")
-			global.all_antag_types=newval;
+		if("all_antag_spawnpoints_")
+			global.all_antag_spawnpoints_=newval;
+		if("all_antag_types_")
+			global.all_antag_types_=newval;
 		if("all_languages")
 			global.all_languages=newval;
 		if("all_maps")
@@ -1682,8 +1682,8 @@
 			global.announced_news_types=newval;
 		if("antag_add_finished")
 			global.antag_add_finished=newval;
-		if("antag_names_to_ids")
-			global.antag_names_to_ids=newval;
+		if("antag_names_to_ids_")
+			global.antag_names_to_ids_=newval;
 		if("appearance_manager")
 			global.appearance_manager=newval;
 		if("area_repository")
@@ -2896,7 +2896,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3000,8 +3000,8 @@
 	"alien_whitelist",
 	"allCasters",
 	"allConsoles",
-	"all_antag_spawnpoints",
-	"all_antag_types",
+	"all_antag_spawnpoints_",
+	"all_antag_types_",
 	"all_languages",
 	"all_maps",
 	"all_money_accounts",
@@ -3018,7 +3018,7 @@
 	"alphabet_uppercase",
 	"announced_news_types",
 	"antag_add_finished",
-	"antag_names_to_ids",
+	"antag_names_to_ids_",
 	"appearance_manager",
 	"area_repository",
 	"artefact_feedback",
