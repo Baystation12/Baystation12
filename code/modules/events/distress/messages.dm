@@ -15,7 +15,7 @@ var/list/start = list(
 
 var/list/sender = list(
 	"a harmless Tajaran merchant ship. ",
-	"the Glaxy Ranger patrol. ",
+	"the Galaxy Ranger patrol. ",
 	"a consular ship on an unrecorded flight. ",
 	"the independent freighter IK-[rand(1300, 6735)]. ",
 	"an official representative of NanoTrasen. "
@@ -28,7 +28,7 @@ var/list/reasons = list(
 	"pirates stole all our supllies. ",
 	"our incinerator unit overheated and melted half the ship. ",
 	"we had an unfortunate run-in with an asteroid. ",
-	"Members of the crew in strange robes are on the loose and causing absolute mayhem. "
+	"members of the crew in strange robes are on the loose and causing absolute mayhem. "
 	)
 
 var/list/status = list(
