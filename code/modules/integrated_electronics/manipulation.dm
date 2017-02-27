@@ -149,7 +149,7 @@
 	if(!T || !istype(loc, /obj/item/device/electronic_assembly))
 		return
 	var/obj/item/device/electronic_assembly/assembly = loc
-	if(assembly.anchored || assembly.w_class >= 4)
+	if(assembly.anchored || assembly.w_class >= ITEM_SIZE_LARGE)
 		return
 	if(activation_pin == activators[1])
 		if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
@@ -349,13 +349,13 @@
 		card.forceMove(src)
 		aicard = card
 		user.visible_message("\The [user] loads \the [card] into \the [src]'s device slot")
-		to_chat(L, "<span class='notice'>### IICC FIRMWARE LOADED ###</span class='notice>")
+		to_chat(L, "<span class='notice'>### IICC FIRMWARE LOADED ###</span>")
 
 /obj/item/integrated_circuit/manipulation/ai/proc/unload_ai()
 	if(!controlling)
 		return
 	controlling.forceMove(aicard)
-	to_chat(controlling, "<span class='notice'>### IICC FIRMWARE DELETED. HAVE A NICE DAY ###</span class='notice>")
+	to_chat(controlling, "<span class='notice'>### IICC FIRMWARE DELETED. HAVE A NICE DAY ###</span>")
 	aicard.forceMove(get_turf(src))
 	aicard = null
 	controlling = null
