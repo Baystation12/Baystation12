@@ -312,7 +312,6 @@ var/global/datum/controller/radio/radio_controller
 			devices_line -= null
 		if (devices_line.len==0)
 			devices -= devices_filter
-			qdel(devices_line)
 
 /datum/signal
 	var/obj/source
