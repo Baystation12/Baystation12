@@ -1,0 +1,6 @@
+author: Haswell
+delete-after: True
+changes: 
+  - tweak: "Removed master chief petty officer and master gunnery sergeant from selectable ranks due to them having no jobs."
+  - rscadd: "Added command senior chief petty officer rank for senior enlisted advisor, removed senior chief petty officer."
+  - rscadd: "Added more support for warrant officer ranks."

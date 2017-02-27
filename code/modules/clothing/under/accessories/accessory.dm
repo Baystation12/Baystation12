@@ -403,6 +403,10 @@
 	name = "ranks (E-8 senior chief petty officer)"
 	desc = "Insignia denoting the rank of Senior Chief Petty Officer."
 
+/obj/item/clothing/accessory/rank/fleet/enlisted/e8_alt1
+	name = "ranks (E-8 command senior chief petty officer)"
+	desc = "Insignia denoting the rank of Command Senior Chief Petty Officer."
+
 /obj/item/clothing/accessory/rank/fleet/enlisted/e9
 	name = "ranks (E-9 master chief petty officer)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer."
@@ -473,6 +477,27 @@
 /obj/item/clothing/accessory/rank/fleet/flag/o10_alt
 	name = "ranks (O-10 fleet admiral)"
 	desc = "Insignia denoting the rank of Fleet Admiral."
+
+/obj/item/clothing/accessory/rank/fleet/officer/w1
+	name = "ranks (W-1 Warrant Officer)"
+	desc = "Insignia denoting the rank of Warrant Officer."
+
+/obj/item/clothing/accessory/rank/fleet/officer/w2
+	name = "ranks (W-2 Chief Warrant Officer Two)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Two."
+
+/obj/item/clothing/accessory/rank/fleet/officer/w3
+	name = "ranks (W-3 Chief Warrant Officer Three)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Three."
+
+/obj/item/clothing/accessory/rank/fleet/officer/w4
+	name = "ranks (W-4 Chief Warrant Officer Four)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Four."
+
+/obj/item/clothing/accessory/rank/fleet/officer/w5
+	name = "ranks (W-5 Chief Warrant Officer Five)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Five."
+
 
 /obj/item/clothing/accessory/rank/marine
 	name = "marine ranks"
@@ -574,6 +599,25 @@
 	name = "ranks (O-10 commandant of the Marine Corps)"
 	desc = "Insignia denoting the rank of Commandant of the Marine Corps."
 
+/obj/item/clothing/accessory/rank/marine/officer/w1
+	name = "ranks (W-1 Warrant Officer)"
+	desc = "Insignia denoting the rank of Warrant Officer."
+
+/obj/item/clothing/accessory/rank/marine/officer/w2
+	name = "ranks (W-2 Chief Warrant Officer Two)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Two."
+
+/obj/item/clothing/accessory/rank/marine/officer/w3
+	name = "ranks (W-3 Chief Warrant Officer Three)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Three."
+
+/obj/item/clothing/accessory/rank/marine/officer/w4
+	name = "ranks (W-4 Chief Warrant Officer Four)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Four."
+
+/obj/item/clothing/accessory/rank/marine/officer/w5
+	name = "ranks (W-5 Chief Warrant Officer Five)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer Five."
 
 //Necklaces
 /obj/item/clothing/accessory/necklace
