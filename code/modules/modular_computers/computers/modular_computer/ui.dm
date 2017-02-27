@@ -89,15 +89,7 @@
 	if( href_list["PC_setautorun"] )
 		if(!hard_drive)
 			return
-		var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
-		if(!istype(autorun))
-			autorun = new/datum/computer_file/data()
-			autorun.filename = "autorun"
-			hard_drive.store_file(autorun)
-		if(autorun.stored_data == href_list["PC_setautorun"])
-			autorun.stored_data = null
-		else
-			autorun.stored_data = href_list["PC_setautorun"]
+		set_autorun(href_list["PC_setautorun"])
 
 	if(.)
 		update_uis()
