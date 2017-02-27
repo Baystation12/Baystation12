@@ -89,6 +89,11 @@
 		ID = I
 		user.drop_from_inventory(I,src)
 
+	if(istype(I, /obj/item/weapon/clothingbag))
+		to_chat(user, "<span class='notice'>You put [I] into \the [src] recycling slot.</span>")
+		qdel(I)
+
+
 /*	Outfit structures
 	branch
 	branch/department
@@ -172,11 +177,15 @@
 	return res
 
 /obj/machinery/uniform_vendor/proc/spawn_uniform(var/list/selected_outfit)
-	var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
-	for(var/item in selected_outfit)
-		if(item) //Can be null in some cases.
+	listclearnulls(selected_outfit)
+	if(selected_outfit.len > 1)
+		var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
+		for(var/item in selected_outfit)
 			new item(bag)
-	bag.forceMove(get_turf(src))
+		bag.forceMove(get_turf(src))
+	else
+		var/obj/item/clothing/C = selected_outfit[1]
+		new C(get_turf(src))
 
 
 

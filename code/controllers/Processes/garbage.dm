@@ -114,12 +114,8 @@ world/loop_checks = 0
 	if(!A)
 		return
 	if(!istype(A))
-		warning("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
-		crash_with("qdel() passed object of type [A.type]. qdel() can only handle /datum types.")
-		del(A)
-		if(garbage_collector)
-			garbage_collector.total_dels++
-			garbage_collector.hard_dels++
+		log_error("qdel() was passed [log_info_line(A)]. qdel() can only handle instances of (sub)type /datum.")
+		crash_with("qdel() was passed [log_info_line(A)]. qdel() can only handle instances of (sub)type /datum.")
 	else if(isnull(A.gcDestroyed))
 		// Let our friend know they're about to get collected
 		. = !A.Destroy()
@@ -134,6 +130,9 @@ world/loop_checks = 0
 		garbage_collector.AddTrash(src)
 	else
 		delayed_garbage |= src
+
+/client/finalize_qdel()
+	del(src)
 
 /icon/finalize_qdel()
 	del(src)

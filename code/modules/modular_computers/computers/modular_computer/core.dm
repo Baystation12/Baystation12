@@ -252,3 +252,16 @@
 		return active_program.check_eye(user)
 	else
 		return ..()
+
+/obj/item/modular_computer/proc/set_autorun(program)
+	if(!hard_drive)
+		return
+	var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
+	if(!istype(autorun))
+		autorun = new/datum/computer_file/data()
+		autorun.filename = "autorun"
+		hard_drive.store_file(autorun)
+	if(autorun.stored_data == program)
+		autorun.stored_data = null
+	else
+		autorun.stored_data = program

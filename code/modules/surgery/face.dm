@@ -48,7 +48,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, slicing [target]'s throat wth \the [tool]!</span>" , \
 	"<span class='warning'>Your hand slips, slicing [target]'s throat wth \the [tool]!</span>" )
-	affected.createwound(CUT, 60)
+	affected.take_damage(40, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	target.losebreath += 10
 
 //////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing skin on [target]'s face with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, tearing skin on [target]'s face with \the [tool]!</span>")
-	target.apply_damage(10, BRUTE, affected, damage_flags=(DAM_SHARP|DAM_EDGE))
+	affected.take_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	facial skin cauterization surgery step
@@ -150,4 +150,4 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, leaving a small burn on [target]'s face with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, leaving a small burn on [target]'s face with \the [tool]!</span>")
-	target.apply_damage(4, BURN, affected)
+	affected.take_damage(0, 4, used_weapon = tool)

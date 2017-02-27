@@ -24,6 +24,10 @@
 	display_name = "folders"
 	path = /obj/item/weapon/folder
 
+/datum/gear/utility/taperecorder
+	display_name = "tape recorder"
+	path = /obj/item/device/taperecorder
+
 /datum/gear/utility/folder/New()
 	..()
 	var/folders = list()

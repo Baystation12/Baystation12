@@ -13,10 +13,16 @@
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
 
-/area/maintenance/substation //because for some reason this is a map-datum now
+/area/maintenance/substation
 	name = "Substation"
 	icon_state = "substation"
 	sound_env = SMALL_ENCLOSED
+
+/area/maintenance/exterior
+	name = "\improper Exterior Reinforcements"
+	icon_state = "maint_security_starboard"
+	flags = AREA_EXTERNAL
+	turf_initializer = /decl/turf_initializer/maintenance/space
 
 // CentCom
 
@@ -162,6 +168,7 @@
 /area/constructionsite
 	name = "\improper Construction Site"
 	icon_state = "storage"
+	ambience = list('sound/ambience/spookyspace1.ogg', 'sound/ambience/spookyspace2.ogg')
 
 /area/constructionsite/storage
 	name = "\improper Construction Site Storage Area"
