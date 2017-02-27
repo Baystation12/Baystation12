@@ -2,6 +2,6 @@ author: Haswell
 delete-after: True
 changes: 
   - rscadd: "Added Siege gamemode, mercenary & revolution. Requires 20 readied players, 5 antags."
-  - rscadd: "Added Unity gamemode, revolution & wizard.  Requires 10 readied players, 4 antags."
+  - rscadd: "Added Unity gamemode, revolution & wizard.  Requires 15 readied players, 5 antags."
   - tweak: "Made Conflux votable, cult & wizard. Requires 15 readied players, 5 antags."
-  - tweak: "Made uprising votable, cult & revolution. Requires 15 readied players, 3 antags."
+  - tweak: "Made uprising votable, cult & revolution. Requires 20 readied players, 6 antags."
