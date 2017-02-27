@@ -1,6 +1,6 @@
 /obj/machinery/clamp
-	name = "cryogenic clamp"
-	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via extreme cold."
+	name = "stasis clamp"
+	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "clamp"
 	var/obj/machinery/atmospherics/pipe/simple/target = null
@@ -104,8 +104,8 @@
 		to_chat(usr, "<span class='warning'>You can't remove \the [src] while it's active!</span>")
 
 /obj/item/clamp
-	name = "cryogenic clamp"
-	desc = "A magnetic clamp which can halt the flow of gas in a pipe, using extreme cold."
+	name = "stasis clamp"
+	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "clamp"
 
