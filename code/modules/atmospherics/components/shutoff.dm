@@ -2,11 +2,12 @@
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "map_vclamp0"
 
-	name = "emergency shutoff valve"
+	name = "automatic shutoff valve"
 	var/threshold = ONE_ATMOSPHERE * 0.9
 	var/lower_threshold = 5
 	var/node1_last_pressure = 0
 	var/node2_last_pressure = 0
+	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR
 
 /obj/machinery/atmospherics/valve/shutoff/update_icon()
 	icon_state = "vclamp[open]"

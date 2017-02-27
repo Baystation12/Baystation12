@@ -35,4 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Pipes with exposed ends (such as those that result from a pipe bursting) will now leak their contents into the air. To stop a pipe from leaking, attach an endcap to the end."
   - rscadd: "Added Stasis Clamps, devices which can be attached to a pipe and turned on in order to halt the flow of gas through that pipe. Useful for sealing off sections of pipe so you can make changes without leaking."
-  - rscadd: "Added Emergency Shutoff Valves, which will automatically close if their internal pressure gets too low, to limit the damage caused by main-loop leaks."
+  - rscadd: "Added and mapped in Automated Shutoff Valves, which will automatically close if their internal pressure gets too low, to limit the damage caused by main-loop leaks."

@@ -46,7 +46,7 @@
 #define PIPE_SCRUBBERS_CAP			42
 ///// Mirrored T-valve ~ because I couldn't be bothered re-sorting all of the defines
 #define PIPE_MTVALVEM				43
-///// I also couldn't be bothered sorting, so emergency shutoff valve.
+///// I also couldn't be bothered sorting, so automatic shutoff valve.
 #define PIPE_SVALVE					44
 
 #define CONNECT_TYPE_REGULAR	1
