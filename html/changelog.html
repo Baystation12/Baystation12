@@ -56,6 +56,192 @@
 		
 		-->
 		<div class="commit sansserif">
+			<h2 class="date">26 February 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Holowarrant projectors now autosync when clicked in hand instead of having to use verb manually.</li>
+				<li class="tweak">You can swipe ID at the holowarrant to authorize it now.</li>
+			</ul>
+			<h3 class="author">Crushtoe updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="imageadd">New external airlock and mail sign sprites.</li>
+			</ul>
+			<h3 class="author">Datraen updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Language sanitation now checks for species second languages in addition to whitelist status.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added crossfire gamemode, mercenary + raiders. Requires 25 readied players and at least 6 antags to start.</li>
+			</ul>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Newschannels now show the number of times they have been viewed.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds an advanced integrated circuit radio. Lets players send commands and id_tags.</li>
+			</ul>
+
+			<h2 class="date">24 February 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">PI now spawns with a badge, Journalist with a camera. Also added tape recorder to custom loadout.</li>
+			</ul>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="soundadd">Added several new sound effects. These include fire extinguisher cabinets, internals activation, flashlight/flare activation, air alarm breach detection, and more.</li>
+				<li class="soundadd">Added ambient sounds to Thermo-Electric Generators.</li>
+				<li class="bugfix">Braces can no longer be removed from an airlock by deconstructing the airlock.</li>
+				<li class="bugfix">Pipes will now correctly burst if the internal pressure is too high. 0-16.9MPa is safe, 17-20.9MPa has a chance of bursting, and 21MPa+ will burst instantly.</li>
+				<li class="maptweak">Osmium-Carbide Plasteel walls have been mapped into the incinerator. It should now be safe to use the incinerator, as a result.</li>
+			</ul>
+			<h3 class="author">Crushtoe updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="imageadd">Two new pAI chassis types: The Mushroom and the Corgi Puppy. Finally, we can have our pAIs join the Mushroom Plague.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Antag preferences now default to never instead of low.</li>
+			</ul>
+			<h3 class="author">Runa-Dacino updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds ability for the player to change the name and description of ninja voidsuit to assist in ninja gimmicks</li>
+				<li class="rscdel">Removed references to the spider clan from ninja voidsuit.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds a integrated circuit printer to the R&D lab.</li>
+			</ul>
+
+			<h2 class="date">21 February 2017</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">You now require an under-clothing (such as a jumpsuit) to wear things on your belt. No more PDA in your boxer waistband.</li>
+				<li class="bugfix">Mushroom soup can now be made with a sane ingredient combination.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Accounts with biggest profits or losses are now announced in round end summary. Get dat greentext.</li>
+				<li class="tweak">Surgery changes. Cry, medical.</li>
+				<li class="rscadd">Self-surgery is legal now. It was possible via a bug, it's a feature now.</li>
+				<li class="rscadd">As a side effect, you don't have to lie down to be operated on. It is, however, a very bad idea unless it's basic steps like incision etc. Success chance will drop for delicate steps.</li>
+				<li class="rscadd">Instead of randomly doing nothing, rollerbeds / tables are factored into surgery success chance calculation.</li>
+				<li class="rscadd">Said success chance: surgery steps now can fail even if you don't move / drop tools etc. Ideal scenario is 'sober surgeon not in pain operating on another person who is lying on an optable'. Deviations from that add chance of failure. Some steps are more robust, some are more delicate. As a rule of a thumb, if you have to touch innards, that's delicate. If you perform internal organ surgery on yourself while sitting on a table piss drunk, nearly passing out from pain and also being blind, it's not going to go very smooth.</li>
+				<li class="rscadd">Shock will advance fast when being surgery'd on, so take it slow or take some pills.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Destroyed the cloning lab on Exodus and all technology related to it.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added forced-shutdown verb to modular computers, reachable via rightclick menu. This is equivalent of pressing the Shutdown button in the UI, and is mostly intended to be used when UI bugs out and regular shutdown isn't available.</li>
+				<li class="rscadd">Added Supermatter Monitoring program, available on all devices. It provides various information on the supermatter engine. It is fully variable, and capable of working with multiple supermatter crystals at once (for those enterprising engineers among you).</li>
+				<li class="rscadd">Among other information, the supermatter monitor program shows engine core EPR value. This value is best kept between 1 and 2, and shows real amount of coolant in the core (in standard canisters worth). Normal EPR with two canisters in each loop is roughly 1.5</li>
+				<li class="rscdel">Rightclick open/close laptop verb no longer exists for laptops. Use alt-click instead.</li>
+			</ul>
+
+			<h2 class="date">18 February 2017</h2>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added boxes of headsets to the Torch XO locker.</li>
+			</ul>
+			<h3 class="author">Lorwp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added Trendy messenger bags to all Job Lockers</li>
+			</ul>
+			<h3 class="author">sabiram updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added modular laptops to the utility loadout menu.</li>
+			</ul>
+
+			<h2 class="date">15 February 2017</h2>
+			<h3 class="author">RedStryker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Allows department-specific messenger bags to be used.</li>
+			</ul>
+			<h3 class="author">lorwp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">PAI's can now speak EAL, if they have a Universal Translator'</li>
+			</ul>
+			<h3 class="author">sabiram updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds some new hairstyles. For the Torch, Short Hime and High and Tight are approved for all Sol personnel; Grande Braid and Fringetail are approved for the Expeditionary Corps only. All new styles are freely available to all civilians.</li>
+				<li class="tweak">Adjusts luminosity on a few hairstyles to correct desaturated spots.</li>
+			</ul>
+
+			<h2 class="date">14 February 2017</h2>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added waist packs that can be worn around the waist or on the back. They can be found in custom loadouts under utility.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added modular telescreens - wall mounted modular computers that are comparable to laptops in terms of hardware restrictions, and tablets in terms of software restrictions. Few of those have been mapped in, more can be built.</li>
+				<li class="tweak">Large amount of under-the-hood improvements and tweaks.</li>
+			</ul>
+			<h3 class="author">sabiram updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added subtypes of meat for cows, goats and chickens. They all act the same way.</li>
+				<li class="rscadd">Added crates containing beef, goat meat, chicken meat, eggs, and milk.</li>
+				<li class="tweak">Increased the price of the livestock crates so that it is much more economical to order the produce you want instead of a live animal.</li>
+			</ul>
+
+			<h2 class="date">12 February 2017</h2>
+			<h3 class="author">Essbie updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added new cocktail and recipe: Ship's Surgeon.</li>
+			</ul>
+			<h3 class="author">HarpyEagle updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixed bluespace jump lag.</li>
+				<li class="bugfix">Fixed latejoins during bluespace jump not being affected by it.</li>
+				<li class="bugfix">Fixed being able to enter/leave the vessel zlevels during bluespace jump.</li>
+				<li class="rscadd">Moving in straight lines during a bluspace jump is now more difficult.</li>
+				<li class="tweak">The amount of toxin damage gained from low blood levels is now limited to around 18.</li>
+				<li class="bugfix">Various defibrillator fixes.</li>
+				<li class="bugfix">Difference between the two cult ghost whisper verbs should be clearer now.</li>
+				<li class="bugfix">Meteors no longer destroy floors or anything else that doesn't block their movement.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Removed ghost verb from AI and pAI due to overlapping function with wipe core and wipe software verbs.</li>
+			</ul>
+			<h3 class="author">Nero07 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Added a busy signal so you can't call already active holopads, which led to message spam.</li>
+				<li class="bugfix">Makes holopads actually function and fixes a few runtimes associated with them.</li>
+			</ul>
+			<h3 class="author">TheGreyWolf updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Made it so only unbranded, NT and Resomi specific prosthetic brands can be made during gameplay, chargen not changed.</li>
+			</ul>
+			<h3 class="author">Zuhayr updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Bleed-out rate now depends on pulse rate and size of bleeding limb.</li>
+				<li class="tweak">This means that potassium chlorophoride, which stops the heart, and inaprovaline, which now slows the heart, are both suitable for emergency treatment of bleeding.</li>
+				<li class="rscadd">Cautery surgery with no preceeding steps will now cauterize a cut artery in a stump.</li>
+				<li class="tweak">Arterial bleeding and stumps are now more informative about where the bleed is.</li>
+				<li class="tweak">Arterial sprays can now splatter/blind people and use the correct icons.</li>
+			</ul>
+
+			<h2 class="date">10 February 2017</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Scrubbers now scrub N2O and Phoron by default.</li>
+				<li class="maptweak">The corners of Escape Pods 3 and 4 should now no longer appear to lead to space.</li>
+				<li class="tweak">Officer swords should now look good from all angles.</li>
+			</ul>
+			<h3 class="author">Haswell updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Mop buckets and janitor carts can now be climbed over.</li>
+			</ul>
+			<h3 class="author">Nero07 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added communications functionality to AI holopads. To use, stand on a holopad and click it. Make a new holocall and select the target pad from the list. The targetpad will light up, emit a sound and inform nearby players about the incoming call. To pick it up, just click the pad. The caller is projected above the holopad and can talk to/emote with all people in view of the holopad. To end the call, step off the holopad. The call can also be ended from the other side by clicking the active holopad.</li>
+			</ul>
+
 			<h2 class="date">07 February 2017</h2>
 			<h3 class="author">Cirra updated:</h3>
 			<ul class="changes bgimages16">

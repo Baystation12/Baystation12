@@ -181,7 +181,7 @@
 		onKill()
 
 		// This should del
-		del(src)
+		qdel(src)
 
 // Do not call this directly - use SHECK or SCHECK_EVERY
 /datum/controller/process/proc/sleepCheck(var/tickId = 0)

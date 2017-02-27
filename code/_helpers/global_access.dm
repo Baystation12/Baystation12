@@ -113,14 +113,6 @@
 			return global.acting_rank_prefixes;
 		if("active_diseases")
 			return global.active_diseases;
-		if("activeauth")
-			return global.activeauth;
-		if("activecharges")
-			return global.activecharges;
-		if("activename")
-			return global.activename;
-		if("activetype")
-			return global.activetype;
 		if("actor")
 			return global.actor;
 		if("additional_antag_types")
@@ -205,12 +197,10 @@
 			return global.allCasters;
 		if("allConsoles")
 			return global.allConsoles;
-		if("all_antag_spawnpoints")
-			return global.all_antag_spawnpoints;
-		if("all_antag_types")
-			return global.all_antag_types;
-		if("all_areas")
-			return global.all_areas;
+		if("all_antag_spawnpoints_")
+			return global.all_antag_spawnpoints_;
+		if("all_antag_types_")
+			return global.all_antag_types_;
 		if("all_languages")
 			return global.all_languages;
 		if("all_maps")
@@ -243,8 +233,8 @@
 			return global.announced_news_types;
 		if("antag_add_finished")
 			return global.antag_add_finished;
-		if("antag_names_to_ids")
-			return global.antag_names_to_ids;
+		if("antag_names_to_ids_")
+			return global.antag_names_to_ids_;
 		if("appearance_manager")
 			return global.appearance_manager;
 		if("area_repository")
@@ -635,8 +625,6 @@
 			return global.global_map;
 		if("global_message_listener")
 			return global.global_message_listener;
-		if("global_modular_computers")
-			return global.global_modular_computers;
 		if("global_mutations")
 			return global.global_mutations;
 		if("global_underwear")
@@ -693,6 +681,8 @@
 			return global.init;
 		if("initialization_stage")
 			return global.initialization_stage;
+		if("integrated_circuit_blacklist")
+			return global.integrated_circuit_blacklist;
 		if("intents")
 			return global.intents;
 		if("interactive_state")
@@ -851,6 +841,12 @@
 			return global.meteors_catastrophic;
 		if("meteors_dust")
 			return global.meteors_dust;
+		if("meteors_major")
+			return global.meteors_major;
+		if("meteors_minor")
+			return global.meteors_minor;
+		if("meteors_moderate")
+			return global.meteors_moderate;
 		if("meteors_normal")
 			return global.meteors_normal;
 		if("meteors_threatening")
@@ -1229,8 +1225,6 @@
 			return global.stool_cache;
 		if("stored_shock_by_ref")
 			return global.stored_shock_by_ref;
-		if("storedwarrant")
-			return global.storedwarrant;
 		if("string_part_flags")
 			return global.string_part_flags;
 		if("string_slot_flags")
@@ -1568,14 +1562,6 @@
 			global.acting_rank_prefixes=newval;
 		if("active_diseases")
 			global.active_diseases=newval;
-		if("activeauth")
-			global.activeauth=newval;
-		if("activecharges")
-			global.activecharges=newval;
-		if("activename")
-			global.activename=newval;
-		if("activetype")
-			global.activetype=newval;
 		if("actor")
 			global.actor=newval;
 		if("additional_antag_types")
@@ -1660,12 +1646,10 @@
 			global.allCasters=newval;
 		if("allConsoles")
 			global.allConsoles=newval;
-		if("all_antag_spawnpoints")
-			global.all_antag_spawnpoints=newval;
-		if("all_antag_types")
-			global.all_antag_types=newval;
-		if("all_areas")
-			global.all_areas=newval;
+		if("all_antag_spawnpoints_")
+			global.all_antag_spawnpoints_=newval;
+		if("all_antag_types_")
+			global.all_antag_types_=newval;
 		if("all_languages")
 			global.all_languages=newval;
 		if("all_maps")
@@ -1698,8 +1682,8 @@
 			global.announced_news_types=newval;
 		if("antag_add_finished")
 			global.antag_add_finished=newval;
-		if("antag_names_to_ids")
-			global.antag_names_to_ids=newval;
+		if("antag_names_to_ids_")
+			global.antag_names_to_ids_=newval;
 		if("appearance_manager")
 			global.appearance_manager=newval;
 		if("area_repository")
@@ -2090,8 +2074,6 @@
 			global.global_map=newval;
 		if("global_message_listener")
 			global.global_message_listener=newval;
-		if("global_modular_computers")
-			global.global_modular_computers=newval;
 		if("global_mutations")
 			global.global_mutations=newval;
 		if("global_underwear")
@@ -2148,6 +2130,8 @@
 			global.init=newval;
 		if("initialization_stage")
 			global.initialization_stage=newval;
+		if("integrated_circuit_blacklist")
+			global.integrated_circuit_blacklist=newval;
 		if("intents")
 			global.intents=newval;
 		if("interactive_state")
@@ -2306,6 +2290,12 @@
 			global.meteors_catastrophic=newval;
 		if("meteors_dust")
 			global.meteors_dust=newval;
+		if("meteors_major")
+			global.meteors_major=newval;
+		if("meteors_minor")
+			global.meteors_minor=newval;
+		if("meteors_moderate")
+			global.meteors_moderate=newval;
 		if("meteors_normal")
 			global.meteors_normal=newval;
 		if("meteors_threatening")
@@ -2684,8 +2674,6 @@
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
 			global.stored_shock_by_ref=newval;
-		if("storedwarrant")
-			global.storedwarrant=newval;
 		if("string_part_flags")
 			global.string_part_flags=newval;
 		if("string_slot_flags")
@@ -3012,9 +3000,8 @@
 	"alien_whitelist",
 	"allCasters",
 	"allConsoles",
-	"all_antag_spawnpoints",
-	"all_antag_types",
-	"all_areas",
+	"all_antag_spawnpoints_",
+	"all_antag_types_",
 	"all_languages",
 	"all_maps",
 	"all_money_accounts",
@@ -3031,7 +3018,7 @@
 	"alphabet_uppercase",
 	"announced_news_types",
 	"antag_add_finished",
-	"antag_names_to_ids",
+	"antag_names_to_ids_",
 	"appearance_manager",
 	"area_repository",
 	"artefact_feedback",
@@ -3227,7 +3214,6 @@
 	"global_listen_count",
 	"global_map",
 	"global_message_listener",
-	"global_modular_computers",
 	"global_mutations",
 	"global_underwear",
 	"global_vars_",
@@ -3256,6 +3242,7 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
+	"integrated_circuit_blacklist",
 	"intents",
 	"interactive_state",
 	"intercom_range_display_status",
@@ -3335,6 +3322,9 @@
 	"meteors_cataclysm",
 	"meteors_catastrophic",
 	"meteors_dust",
+	"meteors_major",
+	"meteors_minor",
+	"meteors_moderate",
 	"meteors_normal",
 	"meteors_threatening",
 	"mil_branches",

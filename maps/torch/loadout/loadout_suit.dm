@@ -64,7 +64,7 @@
 	allowed_roles = list("Security Guard", "Merchant")
 
 /datum/gear/suit/roles/poncho/medical
-	allowed_roles = list("Medical Assistant", "Virologist", "Chemist", "Counselor", "Merchant")
+	allowed_roles = list("Medical Contractor", "Chemist", "Counselor", "Merchant")
 
 /datum/gear/suit/roles/poncho/engineering
 	allowed_roles = list("Maintenance Assistant", "Roboticist", "Merchant")

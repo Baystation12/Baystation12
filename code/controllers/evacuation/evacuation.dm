@@ -20,6 +20,7 @@ var/datum/evacuation_controller/evacuation_controller
 	var/evac_launch_delay =  3 MINUTES
 	var/evac_transit_delay = 2 MINUTES
 
+	var/autotransfer_prep_additional_delay = 0 MINUTES
 	var/emergency_prep_additional_delay = 0 MINUTES
 	var/transfer_prep_additional_delay = 0 MINUTES
 
@@ -54,7 +55,7 @@ var/datum/evacuation_controller/evacuation_controller
 		CRASH("[esp] has already been added as an evacuation predicate")
 	evacuation_predicates += esp
 
-/datum/evacuation_controller/proc/call_evacuation(var/mob/user, var/_emergency_evac, var/forced, var/skip_announce)
+/datum/evacuation_controller/proc/call_evacuation(var/mob/user, var/_emergency_evac, var/forced, var/skip_announce, var/autotransfer)
 
 	if(!can_evacuate(user, forced))
 		return 0
@@ -65,7 +66,13 @@ var/datum/evacuation_controller/evacuation_controller
 	if(ticker && ticker.mode)
 		evac_prep_delay_multiplier = ticker.mode.shuttle_delay
 
-	var/additional_delay = (emergency_evacuation ? emergency_prep_additional_delay : transfer_prep_additional_delay)
+	var/additional_delay
+	if(_emergency_evac)
+		additional_delay = emergency_prep_additional_delay
+	else if(autotransfer)
+		additional_delay = autotransfer_prep_additional_delay
+	else
+		additional_delay = transfer_prep_additional_delay
 
 	evac_called_at =    world.time
 	evac_no_return =    evac_called_at +    round(evac_prep_delay/2) + additional_delay

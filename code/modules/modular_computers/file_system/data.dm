@@ -17,11 +17,3 @@
 
 /datum/computer_file/data/logfile
 	filetype = "LOG"
-
-/datum/computer_file/data/autorun
-	filename = "autorun"
-	filetype = "BAT"
-
-/datum/computer_file/data/autorun/New(list/programs)
-	if(programs)
-		stored_data=jointext(programs,";")

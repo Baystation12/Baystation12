@@ -36,33 +36,18 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/white,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/storage/firstaid/regular
+		/obj/item/weapon/storage/firstaid/regular,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
+		new /datum/atom_creator/weighted(list(
+				list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
+				list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
+				list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
+				list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
+				list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
+			)
+		)
 	)
-
-/obj/structure/closet/secure_closet/CMO_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/medic(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_med(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
-	switch(pick("blue", "green", "purple", "black", "navyblue"))
-		if ("blue")
-			new /obj/item/clothing/under/rank/medical/blue(src)
-			new /obj/item/clothing/head/surgery/blue(src)
-		if ("green")
-			new /obj/item/clothing/under/rank/medical/green(src)
-			new /obj/item/clothing/head/surgery/green(src)
-		if ("purple")
-			new /obj/item/clothing/under/rank/medical/purple(src)
-			new /obj/item/clothing/head/surgery/purple(src)
-		if ("black")
-			new /obj/item/clothing/under/rank/medical/black(src)
-			new /obj/item/clothing/head/surgery/black(src)
-		if ("navyblue")
-			new /obj/item/clothing/under/rank/medical/navyblue(src)
-			new /obj/item/clothing/head/surgery/navyblue(src)
 
 /obj/structure/closet/secure_closet/medical_torchsenior
 	name = "senior physician's locker"
@@ -90,34 +75,17 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/storage/firstaid/regular
+		/obj/item/weapon/storage/firstaid/regular,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
+		new /datum/atom_creator/weighted(list(
+					list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
+					list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
+					list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
+					list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
+					list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
+				)) = 2
 	)
-
-/obj/structure/closet/secure_closet/medical_torchsenior/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/medic(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_med(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
-	for(var/i = 1 to 2)
-		switch(pick("blue", "green", "purple", "black", "navyblue"))
-			if ("blue")
-				new /obj/item/clothing/under/rank/medical/blue(src)
-				new /obj/item/clothing/head/surgery/blue(src)
-			if ("green")
-				new /obj/item/clothing/under/rank/medical/green(src)
-				new /obj/item/clothing/head/surgery/green(src)
-			if ("purple")
-				new /obj/item/clothing/under/rank/medical/purple(src)
-				new /obj/item/clothing/head/surgery/purple(src)
-			if ("black")
-				new /obj/item/clothing/under/rank/medical/black(src)
-				new /obj/item/clothing/head/surgery/black(src)
-			if ("navyblue")
-				new /obj/item/clothing/under/rank/medical/navyblue(src)
-				new /obj/item/clothing/head/surgery/navyblue(src)
 
 /obj/structure/closet/secure_closet/medical_torch
 	name = "physician's locker"
@@ -144,17 +112,10 @@
 		/obj/item/weapon/storage/box/autoinjectors,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/regular
+		/obj/item/weapon/storage/firstaid/regular,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
-
-/obj/structure/closet/secure_closet/medical_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/medic(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_med(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
 
 /obj/structure/closet/secure_closet/medical_contractor
 	name = "medical contractor's locker"
@@ -176,17 +137,10 @@
 		/obj/item/taperoll/medical,
 		/obj/item/weapon/storage/belt/medical/emt,
 		/obj/item/device/healthanalyzer,
-		/obj/item/clothing/glasses/hud/health
+		/obj/item/clothing/glasses/hud/health,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
-
-/obj/structure/closet/secure_closet/medical_contractor/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/medic(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_med(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/med(src)
 
 /obj/structure/closet/wardrobe/medic_torch
 	name = "medical wardrobe"

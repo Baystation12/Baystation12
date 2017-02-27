@@ -95,6 +95,38 @@
 
 	var/debug = 0
 
+/obj/machinery/power/supermatter/New()
+	..()
+	uid = gl_uid++
+
+/obj/machinery/power/supermatter/proc/get_status()
+	var/turf/T = get_turf(src)
+	if(!T)
+		return SUPERMATTER_ERROR
+	var/datum/gas_mixture/air = T.return_air()
+	if(!air)
+		return SUPERMATTER_ERROR
+
+	if(grav_pulling || exploded)
+		return SUPERMATTER_DELAMINATING
+
+	if(get_integrity() < 25)
+		return SUPERMATTER_EMERGENCY
+
+	if(get_integrity() < 50)
+		return SUPERMATTER_DANGER
+
+	if((get_integrity() < 100) || (air.temperature > CRITICAL_TEMPERATURE))
+		return SUPERMATTER_WARNING
+
+	if(air.temperature > (CRITICAL_TEMPERATURE * 0.8))
+		return SUPERMATTER_NOTIFY
+
+	if(power > 5)
+		return SUPERMATTER_NORMAL
+	return SUPERMATTER_INACTIVE
+
+
 /obj/machinery/power/supermatter/proc/explode()
 	set waitfor = 0
 
@@ -109,19 +141,26 @@
 	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
 	if(!TS)
 		return
-	for(var/z in GetConnectedZlevels(TS.z))
-		radiation_repository.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
+
+	var/list/affected_z = GetConnectedZlevels(TS.z)
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
+	for(var/z in affected_z)
+		radiation_repository.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
+
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/TM = get_turf(mob)
-		if(TS && TM && (TS.z == TM.z))
-			mob.Weaken(DETONATION_MOB_CONCUSSION)
-			to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
+		if(!TM)
+			continue
+		if(!(TM.z in affected_z))
+			continue
+
+		mob.Weaken(DETONATION_MOB_CONCUSSION)
+		to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
 
 	// Effect 2: Z-level wide electrical pulse
 	for(var/obj/machinery/power/apc/A in machines)
-		if(A.z != TS.z)
+		if(!(A.z in affected_z))
 			continue
 
 		// Overloads lights
@@ -135,7 +174,7 @@
 			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
 
 	for(var/obj/machinery/power/smes/buildable/S in machines)
-		if(S.z != TS.z)
+		if(!(S.z in affected_z))
 			continue
 		// Causes SMESes to shut down for a bit
 		var/random_change = rand(100 - DETONATION_SHUTDOWN_RNG_FACTOR, 100 + DETONATION_SHUTDOWN_RNG_FACTOR) / 100
@@ -144,7 +183,7 @@
 	// Effect 3: Break solar arrays
 
 	for(var/obj/machinery/power/solar/S in machines)
-		if(S.z != TS.z)
+		if(!(S.z in affected_z))
 			continue
 		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
 			S.broken()
@@ -191,6 +230,10 @@
 		if((damage > emergency_point) && !public_alert)
 			global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT!", "Supermatter Monitor")
 			public_alert = 1
+			for(var/mob/M in player_list)
+				var/turf/T = get_turf(M)
+				if(T && (T.z in using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
 			global_announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0

@@ -508,11 +508,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			feed["author"]	= "Unknown"
 			feed["censored"]= 0
 			feed["updated"] = -1
+			feed["views"] = 0
 			feed_info[active_feed] = feed
 
 		if(FC.updated > feed["updated"] && has_reception)
 			feed["author"]	= FC.author
 			feed["updated"]	= FC.updated
+			feed["views"] = ++FC.views
 			feed["censored"] = FC.censored
 
 			var/list/messages = list()
@@ -976,8 +978,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	last_text = world.time
 	var/datum/reception/reception = get_reception(src, P, t)
 	t = reception.message
-
-	if(reception.message_server && (reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER)) // only send the message if it's stable
+	if(!get_message_server(z))
+		to_chat(U, "<span class='notice'>ERROR: Messaging server is not responding.</span>")
+		return
+	if(!get_message_server(P.z))
+		to_chat(U, "<span class='notice'>ERROR: Receiving messaging server is not responding.</span>")
+		return
+	if(reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER) // only send the message if it's stable
 		if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recipient have a broadcaster on their level?
 			to_chat(U, "ERROR: Cannot reach recipient.")
 			return
@@ -1011,8 +1018,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		P.new_message_from_pda(src, t)
 		nanomanager.update_user_uis(U, src) // Update the sending user's PDA UI so that they can see the new message
-	else
-		to_chat(U, "<span class='notice'>ERROR: Messaging server is not responding.</span>")
 
 /obj/item/device/pda/proc/new_info(var/beep_silent, var/message_tone, var/reception_message)
 	if (!beep_silent)

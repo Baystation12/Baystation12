@@ -81,7 +81,7 @@
 
 /obj/structure/sign/warning/New()
 	..()
-	desc = "A warning sign which reads '[name]'."
+	desc = "A warning sign which reads '[sanitize(name)]'."
 
 /obj/structure/sign/warning/airlock
 	name = "\improper EXTERNAL AIRLOCK"
@@ -112,6 +112,10 @@
 /obj/structure/sign/warning/engineering_access
 	name = "\improper ENGINEERING ACCESS"
 
+/obj/structure/sign/warning/fall
+	name = "\improper FALL HAZARD"
+	icon_state = "falling"
+
 /obj/structure/sign/warning/fire
 	name = "\improper DANGER: FIRE"
 	icon_state = "fire"
@@ -137,6 +141,7 @@
 
 /obj/structure/sign/warning/mail_delivery
 	name = "\improper MAIL DELIVERY"
+	icon_state = "mail"
 
 /obj/structure/sign/warning/moving_parts
 	name = "\improper MOVING PARTS"
@@ -358,23 +363,23 @@
 /obj/structure/sign/directions/examroom
 	name = "\improper Exam Room"
 	icon_state = "examroom"
-	
+
 /obj/structure/sign/deck/bridge
 	name = "\improper Bridge Deck"
 	icon_state = "deck-b"
-	
+
 /obj/structure/sign/deck/first
 	name = "\improper First Deck"
 	icon_state = "deck-1"
-	
+
 /obj/structure/sign/deck/second
 	name = "\improper Second Deck"
 	icon_state = "deck-2"
-	
+
 /obj/structure/sign/deck/third
 	name = "\improper Third Deck"
 	icon_state = "deck-3"
-	
+
 /obj/structure/sign/deck/fourth
 	name = "\improper Fourth Deck"
 	icon_state = "deck-4"

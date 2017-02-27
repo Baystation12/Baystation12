@@ -33,7 +33,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
+
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
+
+	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
+	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
 
 	//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 	var/list/accessible_z_levels = list()
@@ -52,6 +56,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/boss_short    = "Cap'"
 	var/company_name  = "BadMan"
 	var/company_short = "BM"
+	var/system_name = "Uncharted System"
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -61,6 +66,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
 	var/emergency_shuttle_recall_message
+
 	var/list/station_networks = list() 		// Camera networks that will show up on the console.
 
 	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
@@ -85,6 +91,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
 
 	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
+
+	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 /datum/map/New()
 	..()
@@ -116,8 +124,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
 
-/datum/map/proc/get_network_access()
-	return
+/datum/map/proc/get_network_access(var/network)
+	return 0
 
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)

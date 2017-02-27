@@ -10,6 +10,8 @@
 	priority = 2
 	can_infect = 1
 	blood_level = 1
+	shock_level = 40
+	delicate = 1
 
 /datum/surgery_step/open_encased/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
@@ -29,6 +31,7 @@
 
 	min_duration = 50
 	max_duration = 70
+	shock_level = 60
 
 /datum/surgery_step/open_encased/saw/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
@@ -66,7 +69,7 @@
 	user.visible_message("<span class='warning'>[user]'s hand slips, cracking [target]'s [affected.encased] with \the [tool]!</span>" , \
 	"<span class='warning'>Your hand slips, cracking [target]'s [affected.encased] with \the [tool]!</span>" )
 
-	affected.createwound(CUT, 20)
+	affected.take_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	affected.fracture()
 
 //////////////////////////////////////////////////////////////////
@@ -125,7 +128,7 @@
 	var/self_msg = "<span class='warning'>Your hand slips, cracking [target]'s  [affected.encased]!</span>"
 	user.visible_message(msg, self_msg)
 
-	affected.createwound(BRUISE, 20)
+	affected.take_damage(20, used_weapon = tool)
 	affected.fracture()
 
 //////////////////////////////////////////////////////////////////
@@ -181,7 +184,7 @@
 	var/self_msg = "<span class='warning'>Your hand slips, bending [target]'s [affected.encased] the wrong way!</span>"
 	user.visible_message(msg, self_msg)
 
-	affected.createwound(BRUISE, 20)
+	affected.take_damage(20, used_weapon = tool)
 	affected.fracture()
 
 	if(affected.internal_organs && affected.internal_organs.len)

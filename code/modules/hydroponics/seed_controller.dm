@@ -104,7 +104,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 				gene_datums -= D
 		used_masks += gene_mask
 		plant_traits -= gene_tag
-		gene_tag_masks[gene_mask] = gene_tag
+		gene_tag_masks[gene_tag] = gene_mask
 		plant_gene_datums[gene_mask] = G
 		gene_masked_list.Add(list(list("tag" = gene_tag, "mask" = gene_mask)))
 

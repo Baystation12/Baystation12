@@ -37,7 +37,9 @@
 		/obj/item/taperoll/research,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/suit/armor/vest/nt
+		/obj/item/clothing/suit/armor/vest/nt,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel_tox)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
 	)
 
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch
@@ -68,17 +70,10 @@
 		/obj/item/clothing/glasses/science,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/device/radio,
-		/obj/item/device/flashlight/lantern
+		/obj/item/device/flashlight/lantern,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel_tox)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag, 50)
 	)
-
-/obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/toxins(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_tox(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag(src)
 
 /obj/structure/closet/secure_closet/scientist_torch
 	name = "researcher's locker"
@@ -106,16 +101,10 @@
 		/obj/item/device/camera,
 		/obj/item/taperoll/research,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/glasses/science
+		/obj/item/clothing/glasses/science,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel_tox)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
 	)
-
-/obj/structure/closet/secure_closet/scientist_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/toxins(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_tox(src)
-
 
 /obj/structure/closet/secure_closet/prospector
 	name = "prospector's locker"
@@ -140,17 +129,10 @@
 		/obj/item/weapon/pickaxe,
 		/obj/item/weapon/crowbar,
 		/obj/item/clothing/glasses/material,
-		/obj/item/clothing/glasses/meson
+		/obj/item/clothing/glasses/meson,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
-
-/obj/structure/closet/secure_closet/prospector/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/industrial(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_eng(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
 
 /obj/structure/closet/secure_closet/guard
 	name = "security guard's locker"
@@ -187,14 +169,7 @@
 		/obj/item/taperoll/research,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/webbing,
-		/obj/item/device/megaphone
+		/obj/item/device/megaphone,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
-
-/obj/structure/closet/secure_closet/guard/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/security(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_sec(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/sec(src)

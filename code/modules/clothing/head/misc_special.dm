@@ -94,6 +94,15 @@
 		slot_r_hand_str = "engiewelding",
 		)
 
+/obj/item/clothing/head/welding/carp
+	name = "carp welding helmet"
+	desc = "A painted welding helmet, this one has a carp face on it."
+	icon_state = "carpwelding"
+	item_state_slots = list(
+		slot_l_hand_str = "carpwelding",
+		slot_r_hand_str = "carpwelding",
+		)
+
 /*
  * Cakehat
  */

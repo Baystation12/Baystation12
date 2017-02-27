@@ -160,7 +160,7 @@
 	if(holder2 && (holder2.hard_drive == src))
 		holder2.hard_drive = null
 	stored_files = null
-	..()
+	return ..()
 
 /obj/item/weapon/computer_hardware/hard_drive/New()
 	install_default_programs()

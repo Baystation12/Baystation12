@@ -38,17 +38,10 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/device/flashlight,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/folder/yellow
+		/obj/item/weapon/folder/yellow,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
-
-/obj/structure/closet/secure_closet/engineering_chief_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/industrial(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_eng(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
 
 /obj/structure/closet/secure_closet/engineering_torch
 	name = "engineer's locker"
@@ -73,17 +66,10 @@
 		/obj/item/taperoll/engineering,
 		/obj/item/weapon/cartridge/atmos,
 		/obj/item/device/flashlight,
-		/obj/item/taperoll/atmos
+		/obj/item/taperoll/atmos,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
-
-/obj/structure/closet/secure_closet/engineering_torch/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/industrial(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_eng(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
 
 /obj/structure/closet/secure_closet/engineering_contractor
 	name = "engineering contractor's locker"
@@ -104,17 +90,10 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/weapon/cartridge/engineering,
 		/obj/item/device/flashlight,
-		/obj/item/taperoll/engineering
+		/obj/item/taperoll/engineering,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
-
-/obj/structure/closet/secure_closet/engineering_contractor/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/industrial(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_eng(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
 
 /obj/structure/closet/secure_closet/engineering_senior
 	name = "senior engineer's locker"
@@ -143,17 +122,10 @@
 		/obj/item/device/flash,
 		/obj/item/weapon/cartridge/ce,
 		/obj/item/device/flashlight,
-		/obj/item/device/megaphone
+		/obj/item/device/megaphone,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
-
-/obj/structure/closet/secure_closet/engineering_senior/New()
-	..()
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/industrial(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_eng(src)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/dufflebag/eng(src)
 
 /obj/structure/closet/secure_closet/atmos_torch
 	name = "atmospherics equipment locker"
