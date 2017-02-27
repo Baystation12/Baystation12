@@ -1065,6 +1065,7 @@
 #include "code\modules\atmospherics\mainspipe.dm"
 #include "code\modules\atmospherics\pipes.dm"
 #include "code\modules\atmospherics\components\portables_connector.dm"
+#include "code\modules\atmospherics\components\shutoff.dm"
 #include "code\modules\atmospherics\components\tvalve.dm"
 #include "code\modules\atmospherics\components\valve.dm"
 #include "code\modules\atmospherics\components\binary_devices\binary_atmos_base.dm"

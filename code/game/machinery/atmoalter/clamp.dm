@@ -2,7 +2,7 @@
 	name = "stasis clamp"
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
-	icon_state = "clamp"
+	icon_state = "pclamp0"
 	var/obj/machinery/atmospherics/pipe/simple/target = null
 	anchored = 1.0
 	var/open = 1
@@ -56,7 +56,7 @@
 
 
 	open = 1
-
+	icon_state = "pclamp0"
 	return 1
 
 /obj/machinery/clamp/proc/close()
@@ -83,6 +83,7 @@
 
 
 	open = 0
+	icon_state = "pclamp1"
 
 	return 1
 
