@@ -36,8 +36,8 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
 		if(stack.material.name == DEFAULT_WALL_MATERIAL)
-			var/num = min(metal + max(0,round(input("How many sheets do you want to add?") as num)), maxMetal)
-			if(stack.use(num))
+			var/num = Clamp(round(input("How many sheets do you want to add?") as num), 0, maxMetal-metal)
+			if(num && stack.use(num))
 				to_chat(user, "<span class='notice'>You add [num] sheet\s to \the [src].</span>")
 				metal += num
 				updateUsrDialog()

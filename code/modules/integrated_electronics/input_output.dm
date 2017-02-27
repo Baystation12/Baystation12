@@ -460,7 +460,7 @@
 		var/count = 0 //The amount of objects we find.
 		for(var/c in T.contents) //Cycle through the turf's shit
 			var/atom/a = c
-			if(a == src.loc || istype(a, /atom/movable/lighting_overlay) || a.invisibility) //cant see wont see
+			if(a == src.loc || !a.simulated || a.invisibility) //cant see wont see
 				continue
 			if(!first_found) //If we just started, find something first.
 				first_found = a
