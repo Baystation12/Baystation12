@@ -92,6 +92,8 @@
 		var/list/SMS = list()
 		for(var/obj/machinery/power/supermatter/S in supermatters)
 			var/area/A = get_area(S)
+			if(!A)
+				continue
 			SMS.Add(list(list(
 			"area_name" = A.name,
 			"integrity" = S.get_integrity(),

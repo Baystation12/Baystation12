@@ -5,6 +5,7 @@
 	var/source = ""
 	var/spam = FALSE
 	var/timestamp = ""
+	var/datum/computer_file/attachment = null
 
 /datum/computer_file/data/email_message/clone()
 	var/datum/computer_file/data/email_message/temp = ..()
@@ -12,6 +13,7 @@
 	temp.source = source
 	temp.spam = spam
 	temp.timestamp = timestamp
+	temp.attachment = attachment.clone()
 	return temp
 
 
