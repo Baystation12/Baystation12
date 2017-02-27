@@ -16,40 +16,20 @@
 
 
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom
-	name = "boxed freedom implant (with injector)"
+	name = "box (F)"
+	startswith = list(/obj/item/weapon/implanter/freedom)
 
-/obj/item/weapon/storage/box/syndie_kit/imp_freedom/New()
-	..()
-	var/obj/item/weapon/implanter/O = new(src)
-	O.imp = new /obj/item/weapon/implant/freedom(O)
-	O.update()
-	return
+/obj/item/weapon/storage/box/syndie_kit/imp_uplink
+	name = "box (U)"
+	startswith = list(/obj/item/weapon/implanter/uplink)
 
 /obj/item/weapon/storage/box/syndie_kit/imp_compress
 	name = "box (C)"
-
-/obj/item/weapon/storage/box/syndie_kit/imp_compress/New()
-	new /obj/item/weapon/implanter/compressed(src)
-	..()
-	return
+	startswith = list(/obj/item/weapon/implanter/compressed)
 
 /obj/item/weapon/storage/box/syndie_kit/imp_explosive
 	name = "box (E)"
-
-/obj/item/weapon/storage/box/syndie_kit/imp_explosive/New()
-	new /obj/item/weapon/implanter/explosive(src)
-	..()
-	return
-
-/obj/item/weapon/storage/box/syndie_kit/imp_uplink
-	name = "boxed uplink implant (with injector)"
-
-/obj/item/weapon/storage/box/syndie_kit/imp_uplink/New()
-	..()
-	var/obj/item/weapon/implanter/O = new(src)
-	O.imp = new /obj/item/weapon/implant/uplink(O)
-	O.update()
-	return
+	startswith = list(/obj/item/weapon/implanter/explosive)
 
 // Space suit uplink kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/space

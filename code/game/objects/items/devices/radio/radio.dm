@@ -748,7 +748,7 @@ var/global/list/default_medbay_channels = list(
 	invisibility = 101
 	listening = 0
 	canhear_range = 0
-	channels=list("Engineering")
+	channels=list("Engineering","Security", "Medical", "Command")
 
 /obj/item/device/radio/announcer/initialize()
 	..()

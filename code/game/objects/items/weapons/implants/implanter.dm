@@ -8,12 +8,17 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/weapon/implant/imp = null
 
-/obj/item/weapon/implanter/proc/update()
-	if (src.imp)
-		src.icon_state = "implanter1"
+/obj/item/weapon/implanter/New()
+	if(ispath(imp))
+		imp = new imp(src)
+	..()
+	update_icon()
+
+/obj/item/weapon/implanter/update_icon()
+	if (imp)
+		icon_state = "implanter1"
 	else
-		src.icon_state = "implanter0"
-	return
+		icon_state = "implanter0"
 
 /obj/item/weapon/implanter/verb/remove_implant()
 	set category = "Object"
@@ -32,7 +37,7 @@
 		to_chat(usr, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
 		name = "implanter"
 		imp = null
-		update()
+		update_icon()
 		return
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this in your current condition.</span>")
@@ -50,6 +55,15 @@
 		return 1
 	return 0
 
+/obj/item/weapon/implanter/attackby(obj/item/weapon/I, mob/user)
+	if(!imp && istype(I, /obj/item/weapon/implant))
+		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
+		user.drop_from_inventory(I,src)
+		imp = I
+		update_icon()
+	else
+		..()
+
 /obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))
 		return
@@ -66,50 +80,38 @@
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
 
 				src.imp = null
-				update()
+				update_icon()
 
 	return
 
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"
-
-/obj/item/weapon/implanter/loyalty/New()
-	src.imp = new /obj/item/weapon/implant/loyalty( src )
-	..()
-	update()
-	return
+	imp = /obj/item/weapon/implant/loyalty
 
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"
-
-/obj/item/weapon/implanter/explosive/New()
-	src.imp = new /obj/item/weapon/implant/explosive( src )
-	..()
-	update()
-	return
+	imp = /obj/item/weapon/implant/explosive
 
 /obj/item/weapon/implanter/adrenalin
 	name = "implanter-adrenalin"
+	imp = /obj/item/weapon/implant/adrenalin
 
-/obj/item/weapon/implanter/adrenalin/New()
-	src.imp = new /obj/item/weapon/implant/adrenalin(src)
-	..()
-	update()
-	return
+/obj/item/weapon/implanter/freedom
+	name = "implanter (F)"
+	imp = /obj/item/weapon/implant/freedom
+
+/obj/item/weapon/implanter/uplink
+	name = "implanter (U)"
+	imp = /obj/item/weapon/implant/uplink
 
 /obj/item/weapon/implanter/compressed
 	name = "implanter (C)"
 	icon_state = "cimplanter1"
 	desc = "The matter compressor safety is on."
 	var/safe = 1
+	imp = /obj/item/weapon/implant/compressed
 
-/obj/item/weapon/implanter/compressed/New()
-	imp = new /obj/item/weapon/implant/compressed( src )
-	..()
-	update()
-	return
-
-/obj/item/weapon/implanter/compressed/update()
+/obj/item/weapon/implanter/compressed/update_icon()
 	if (imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if(!c.scanned)
@@ -151,7 +153,7 @@
 		A.loc.contents.Remove(A)
 		safe = 2
 		desc = "It currently contains some matter."
-		update()
+		update_icon()
 
 /obj/item/weapon/implanter/compressed/attack_self(var/mob/user)
 	if(!imp || safe == 2)
