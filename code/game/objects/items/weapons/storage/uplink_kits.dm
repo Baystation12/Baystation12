@@ -29,7 +29,10 @@
 
 /obj/item/weapon/storage/box/syndie_kit/imp_explosive
 	name = "box (E)"
-	startswith = list(/obj/item/weapon/implanter/explosive)
+	startswith = list(
+		/obj/item/weapon/implanter/explosive,
+		/obj/item/weapon/implantpad
+		)
 
 // Space suit uplink kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
