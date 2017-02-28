@@ -276,9 +276,3 @@ proc/age2agedescription(age)
 // Returns true if the mob was removed form the dead list
 /mob/proc/remove_from_dead_mob_list()
 	return dead_mob_list_.Remove(src)
-
-// Disables click ma
-/mob/verb/ClickSubstitute()
-	set hidden = 1
-	set name = ".click"
-	log_and_message_admins("attempted to ues a .click macro.")
