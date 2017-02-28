@@ -24,6 +24,8 @@
 	icon_state = "grenadelauncher"
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
 
+	suit_overlay = "grenade"
+
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
 
@@ -107,17 +109,19 @@
 	module_cooldown = 0
 	icon_state = "lcannon"
 
+	suit_overlay = "mounted-lascannon"
+
 	engage_string = "Configure"
 
 	interface_name = "mounted laser cannon"
 	interface_desc = "A shoulder-mounted cell-powered laser cannon."
 
-	var/gun_type = /obj/item/weapon/gun/energy/lasercannon/mounted
-	var/obj/item/weapon/gun/gun
+	var/obj/item/weapon/gun/gun = /obj/item/weapon/gun/energy/lasercannon/mounted
 
 /obj/item/rig_module/mounted/New()
 	..()
-	gun = new gun_type(src)
+	if(gun)
+		gun = new gun(src)
 
 /obj/item/rig_module/mounted/engage(atom/target)
 
@@ -140,7 +144,7 @@
 	interface_name = "mounted energy gun"
 	interface_desc = "A forearm-mounted suit-powered energy gun."
 
-	gun_type = /obj/item/weapon/gun/energy/gun/mounted
+	gun = /obj/item/weapon/gun/energy/gun/mounted
 
 /obj/item/rig_module/mounted/taser
 
@@ -156,7 +160,7 @@
 	interface_name = "mounted taser"
 	interface_desc = "A shoulder-mounted cell-powered taser."
 
-	gun_type = /obj/item/weapon/gun/energy/taser/mounted
+	gun = /obj/item/weapon/gun/energy/taser/mounted
 
 /obj/item/rig_module/mounted/energy_blade
 
@@ -177,7 +181,7 @@
 	active_power_cost = 500
 	passive_power_cost = 0
 
-	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
+	gun = /obj/item/weapon/gun/energy/crossbow/ninja
 
 /obj/item/rig_module/mounted/energy_blade/process()
 
