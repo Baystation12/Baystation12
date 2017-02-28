@@ -1484,3 +1484,55 @@
 
 /mob/living/carbon/human/is_invisible_to(var/mob/viewer)
 	return (cloaked || ..())
+
+/mob/living/carbon/human/help_shake_act(mob/living/carbon/M)
+	if(src != M)
+		..()
+	else
+		visible_message( \
+			"<span class='notice'>[src] examines [gender==MALE ? "himself" : "herself"].</span>", \
+			"<span class='notice'>You check yourself for injuries.</span>" \
+			)
+
+		for(var/obj/item/organ/external/org in organs)
+			var/list/status = list()
+
+			var/feels = 1 + round(org.pain/100, 0.1)
+			var/brutedamage = org.brute_dam * feels
+			var/burndamage = org.burn_dam * feels
+
+			switch(brutedamage)
+				if(1 to 20)
+					status += "bruised"
+				if(20 to 40)
+					status += "wounded"
+				if(40 to INFINITY)
+					status += "mangled"
+
+			switch(burndamage)
+				if(1 to 10)
+					status += "numb"
+				if(10 to 40)
+					status += "blistered"
+				if(40 to INFINITY)
+					status += "peeling away"
+
+			if(org.is_stump())
+				status += "MISSING"
+			if(org.status & ORGAN_MUTATED)
+				status += "misshapen"
+			if(org.dislocated == 2)
+				status += "dislocated"
+			if(org.status & ORGAN_BROKEN)
+				status += "hurts when touched"
+			if(org.status & ORGAN_DEAD)
+				status += "is bruised and necrotic"
+			if(!org.is_usable() || org.is_dislocated())
+				status += "dangling uselessly"
+			if(status.len)
+				src.show_message("My [org.name] is <span class='warning'>[english_list(status)].</span>",1)
+			else
+				src.show_message("My [org.name] is <span class='notice'>OK.</span>",1)
+
+		if((SKELETON in mutations) && (!w_uniform) && (!wear_suit))
+			play_xylophone()
