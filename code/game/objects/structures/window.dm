@@ -144,15 +144,15 @@
 		return 1
 	if(get_dir(O.loc, target) == dir)
 		return 0
-	return 1
+	return 1 
 
 
 /obj/structure/window/hitby(AM as mob|obj)
 	..()
 	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
 	var/tforce = 0
-	if(ismob(AM))
-		tforce = 40
+	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dmA
+		tforce = AM.mob_size * 2 * AM.throw_multiplier
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce
