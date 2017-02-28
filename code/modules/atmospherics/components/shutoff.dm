@@ -20,6 +20,10 @@
 	processing_objects -= src
 	..()
 
+/obj/machinery/atmospherics/valve/shutoff/attack_hand(mob/user as mob)
+	src.add_fingerprint(user)
+	return
+
 /obj/machinery/atmospherics/valve/shutoff/process()
 	..()
 	var/datum/gas_mixture/node1_air = node1.return_air()
@@ -28,7 +32,8 @@
 	var/node2_pressure = node2_air.return_pressure()
 	if(node1_last_pressure && node2_last_pressure)
 		if(open)
-			if(((node1_pressure <= threshold) || (node2_pressure <= threshold)) && (!((node1_pressure >= node1_last_pressure) && (node2_pressure >= node2_last_pressure)))) //I'm not proud of this line. /BlueNexus
+			if(((node1_pressure <= threshold) && (node1_pressure < node1_last_pressure))\
+			|| ((node2_pressure <= threshold) && (node2_pressure < node2_last_pressure)))
 				close()
 		else
 			if((node1_pressure >= node1_last_pressure) && (node2_pressure >= node2_last_pressure))
