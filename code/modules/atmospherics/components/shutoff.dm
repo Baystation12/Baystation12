@@ -14,6 +14,7 @@
 
 /obj/machinery/atmospherics/valve/shutoff/New()
 	processing_objects |= src
+	open()
 	..()
 
 /obj/machinery/atmospherics/valve/shutoff/Destroy()
@@ -32,8 +33,7 @@
 	var/node2_pressure = node2_air.return_pressure()
 	if(node1_last_pressure && node2_last_pressure)
 		if(open)
-			if(((node1_pressure <= threshold) && (node1_pressure < node1_last_pressure))\
-			|| ((node2_pressure <= threshold) && (node2_pressure < node2_last_pressure)))
+			if(((node1_pressure <= threshold) || (node2_pressure <= threshold)) && (!((node1_pressure >= node1_last_pressure) && (node2_pressure >= node2_last_pressure)))) //I'm not proud of this line. /BlueNexus
 				close()
 		else
 			if((node1_pressure >= node1_last_pressure) && (node2_pressure >= node2_last_pressure))
