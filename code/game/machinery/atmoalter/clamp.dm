@@ -108,7 +108,7 @@
 	name = "stasis clamp"
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
-	icon_state = "clamp"
+	icon_state = "pclamp0"
 
 /obj/item/clamp/afterattack(var/atom/A, mob/user as mob, proximity)
 	if(!proximity)
