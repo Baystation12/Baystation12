@@ -50,7 +50,7 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_torchsenior
-	name = "senior physician's locker"
+	name = "physician's locker"
 	req_access = list(access_senmed)
 	icon_state = "securesenmed1"
 	icon_closed = "securesenmed"
@@ -88,7 +88,7 @@
 	)
 
 /obj/structure/closet/secure_closet/medical_torch
-	name = "physician's locker"
+	name = "corpsman's locker"
 	req_access = list(access_medical_equip)
 	icon_state = "securemed1"
 	icon_closed = "securemed"
