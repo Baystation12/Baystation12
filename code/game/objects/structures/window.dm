@@ -152,7 +152,13 @@
 	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))
-		tforce = 40
+		if(isliving(AM))
+			tforce = AM.mob_size
+		else
+			// TODO:
+			// Dont do defaulting. Ever.
+			tforce = 40 
+			log_debug("[AM] ([AM.type]) does not have a mob_size value and hit a window. Report this to a developer")
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce
