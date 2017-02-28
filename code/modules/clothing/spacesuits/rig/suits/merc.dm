@@ -32,3 +32,11 @@
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/electrowarfare_suite, //might as well
 		)
+
+/obj/item/weapon/rig/merc/heavy
+	name = "heavy crimson hardsuit control module"
+	desc = "A blood-red hardsuit featuring some fairly illegal technology and some real curves."
+	icon_state = "merc_rig_heavy"
+	armor = list(melee = 90, bullet = 80, laser = 80, energy = 25, bomb = 90, bio = 100, rad = 70)
+	offline_slowdown = 4
+	online_slowdown = 2
