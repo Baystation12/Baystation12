@@ -581,7 +581,9 @@ BLIND     // can't see anything
 /obj/item/clothing/suit/proc/get_collar()
 	var/icon/C = new('icons/mob/collar.dmi')
 	if(icon_state in C.IconStates())
-		return image(C, icon_state)
+		var/image/I = image(C, icon_state)
+		I.color = color
+		return I
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under
