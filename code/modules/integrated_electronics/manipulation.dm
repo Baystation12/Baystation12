@@ -144,18 +144,15 @@
 	activators = list("step")
 
 /obj/item/integrated_circuit/manipulation/locomotion/do_work(var/activation_pin)
-	..()
 	var/turf/T = get_turf(src)
-	if(!T || !istype(loc, /obj/item/device/electronic_assembly))
+	if(!T || !istype(loc, /obj/item/device/electronic_assembly) || activation_pin != activators[1])
 		return
 	var/obj/item/device/electronic_assembly/assembly = loc
 	if(assembly.anchored || assembly.w_class >= ITEM_SIZE_LARGE)
 		return
-	if(activation_pin == activators[1])
-		if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
-			circuit_move(assembly)
-			return
-	return assembly
+	if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
+		circuit_move(assembly)
+		return
 
 /obj/item/integrated_circuit/manipulation/locomotion/proc/circuit_move(var/obj/item/moving_object)
 	step(moving_object, moving_object.dir)
@@ -169,10 +166,11 @@
 	activators = list("step forward", "turn left", "turn right")
 
 /obj/item/integrated_circuit/manipulation/locomotion/simple/do_work(var/activation_pin)
-	var/obj/item/assembly = ..()
-	if(assembly)
+	var/obj/item/assembly = get_assembly(loc)
+	if(activation_pin != activators[1])
 		assembly.dir = turn(assembly.dir, 90 * (activation_pin == activators[2] ? 1 : -1))
-	return assembly
+	else
+		..()
 
 /obj/item/integrated_circuit/manipulation/locomotion/electronic
 	name = "electronic locomotion circuit"
@@ -356,6 +354,7 @@
 		return
 	controlling.forceMove(aicard)
 	to_chat(controlling, "<span class='notice'>### IICC FIRMWARE DELETED. HAVE A NICE DAY ###</span>")
+	src.visible_message("\The [aicard] pops out of \the [src]!")
 	aicard.forceMove(get_turf(src))
 	aicard = null
 	controlling = null
@@ -369,3 +368,6 @@
 /obj/item/integrated_circuit/manipulation/ai/attack_self(user)
 	unload_ai()
 
+/obj/item/integrated_circuit/manipulation/ai/Destroy()
+	unload_ai()
+	return ..()

@@ -155,7 +155,7 @@
 	outputs = list()
 	activators = list("toggle power", "motion detected")
 	outputs = list("x motion", "y motion", "z motion")
-	var/list/last_location = list()
+	var/list/last_location = list(0,0,0)
 	var/on = 0
 
 /obj/item/integrated_circuit/accelerometer/do_work(var/activated_pin)
@@ -165,12 +165,15 @@
 	if(on)
 		processing_objects.Add(src)
 		var/turf/T = get_turf(src)
-		last_location = list(T.x, T.y, T.z)
+		if(T)
+			last_location = list(T.x, T.y, T.z)
 	else
 		processing_objects.Remove(src)
 
 /obj/item/integrated_circuit/accelerometer/process()
 	var/turf/T = get_turf(src)
+	if(!T)
+		return
 	var/list/cur = list(T.x, T.y, T.z)
 	var/activate = 0
 	for(var/i in 1 to 3)
