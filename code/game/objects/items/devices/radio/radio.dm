@@ -754,6 +754,9 @@ var/global/list/default_medbay_channels = list(
 	..()
 	loc = locate(1,1,using_map.contact_levels.len ? using_map.contact_levels[1] : 1)
 
+/obj/item/device/radio/announcer/subspace
+	subspace_transmission = 1
+
 /obj/item/device/radio/phone
 	broadcasting = 0
 	icon = 'icons/obj/items.dmi'

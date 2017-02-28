@@ -2,3 +2,4 @@ author: Chinsky
 delete-after: True
 changes: 
   - rscadd: "Explosive implants now can be triggered by remote signaler signals. Change frequency and code in implantpad that now comes in the box with implant."
+  - rscadd: "Explosive implants now complain on radio when they are exposed in surgery (after retractor step for skin/ribs). Can set message in implantpad."

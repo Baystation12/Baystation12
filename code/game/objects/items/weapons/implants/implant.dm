@@ -57,7 +57,12 @@
 	imp_in = null
 	if(part)
 		part.implants -= src
+		part = null
 	implanted = 0
+
+//Called in surgery when incision is retracted open / ribs are opened - basically before you can take implant out
+/obj/item/weapon/implant/proc/exposed()
+	return
 
 /obj/item/weapon/implant/proc/get_data()
 	return "No information available"
