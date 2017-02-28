@@ -358,6 +358,11 @@
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
 
+/obj/item/clothing/accessory/speciality/pilot
+	name = "pilot's qualification pin"
+	desc = "An iron pin denoting the qualification to fly in the SGDF."
+	icon_state = "pin_pilot"
+
 //Ranks
 /obj/item/clothing/accessory/rank
 	name = "ranks"
