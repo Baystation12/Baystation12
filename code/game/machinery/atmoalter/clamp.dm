@@ -36,7 +36,7 @@
 		open()
 	else
 		close()
-	to_chat(user, "<span class='notice'>You turn [open ? "on" : "off"] \the [src]</span>")
+	to_chat(user, "<span class='notice'>You turn [open ? "off" : "on"] \the [src]</span>")
 
 /obj/machinery/clamp/proc/open()
 	if(open)
