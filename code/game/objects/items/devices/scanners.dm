@@ -27,14 +27,17 @@ REAGENT SCANNER
 /obj/item/device/healthanalyzer/do_surgery(mob/living/M, mob/living/user)
 	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
 		return ..()
-	scan_mob(M, user) //default surgery behaviour is just to scan as usual
+//	scan_mob(M, user) //default surgery behaviour is just to scan as usual
+	healthscan(M,user, mode)
 	return 1
 
 /obj/item/device/healthanalyzer/attack(mob/living/M, mob/living/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	scan_mob(M, user)
+//	scan_mob(M, user)
+	healthscan(M,user, mode)
 
-/obj/item/device/healthanalyzer/proc/scan_mob(mob/living/M, mob/living/user)
+///obj/item/device/healthanalyzer/proc/scan_mob(mob/living/M, mob/living/user)
+/proc/healthscan(mob/living/M, mob/living/user, var/mode)
 	if ((CLUMSY in user.mutations) && prob(50))
 		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
 		for(var/mob/O in viewers(M, null))

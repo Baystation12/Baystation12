@@ -122,3 +122,48 @@
 	body_parts_covered = 0
 	species_restricted = list("Vox")
 	filtered_gases = list("phoron", "sleeping_agent", "oxygen")
+
+
+// **** Welding gas mask ****
+
+/obj/item/clothing/mask/gas/welding
+	name = "welding gas mask"
+	desc = "A gas mask with built in welding goggles and face shield. It's been redesigned to look and be much more practical."
+	icon_state = "weldingmask"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	origin_tech = "materials=2;engineering=2"
+	action_button_name = "Flip Welding Mask"
+	siemens_coefficient = 0.9
+	w_class = ITEM_SIZE_NORMAL
+	flash_protection = FLASH_PROTECTION_MAJOR
+	tint = TINT_HEAVY
+	var/up = 0
+
+/obj/item/clothing/mask/gas/welding/attack_self()
+	togglemask()
+
+
+/obj/item/clothing/mask/gas/welding/verb/togglemask()
+	set category = "Object"
+	set name = "Adjust welding mask"
+	set src in usr
+
+	if(usr.canmove && !usr.stat && !usr.restrained())
+		if(src.up)
+			src.up = !src.up
+			body_parts_covered |= (EYES|FACE)
+			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+			flash_protection = initial(flash_protection)
+			tint = initial(tint)
+			icon_state = initial(icon_state)
+			to_chat(usr, "You flip the [src] down to protect your eyes.")
+		else
+			src.up = !src.up
+			body_parts_covered &= ~(EYES|FACE)
+			flash_protection = FLASH_PROTECTION_NONE
+			tint = TINT_NONE
+			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+			icon_state = "[initial(icon_state)]up"
+			to_chat(usr, "You push the [src] up out of your face.")
+		update_clothing_icon()	//so our mob-overlays
+		usr.update_action_buttons()
