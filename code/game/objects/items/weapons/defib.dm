@@ -505,6 +505,25 @@
 		update_icon()
 	..()
 
+/obj/item/weapon/shockpaddles/robot
+	name = "defibrillator paddles"
+	desc = "A pair of advanced shockpaddles powered by a robot's internal power cell, able to penetrate thick clothing."
+	chargecost = 50
+	combat = 1
+	icon_state = "defibpaddles0"
+	item_state = "defibpaddles0"
+	cooldowntime = (3 SECONDS)
+
+/obj/item/weapon/shockpaddles/robot/check_charge(var/charge_amt)
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		return (R.cell && R.cell.check_charge(charge_amt))
+
+/obj/item/weapon/shockpaddles/robot/checked_use(var/charge_amt)
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		return (R.cell && R.cell.checked_use(charge_amt))
+
 /*
 	Shockpaddles that are linked to a base unit
 */
@@ -589,25 +608,6 @@
 	combat = 1
 	safety = 0
 	chargetime = (1 SECONDS)
-
-/obj/item/weapon/shockpaddles/robot
-	name = "defibrillator paddles"
-	desc = "A pair of advanced shockpaddles powered by a robot's internal power cell, able to penetrate thick clothing."
-	chargecost = 50
-	combat = 1
-	icon_state = "defibpaddles0"
-	item_state = "defibpaddles0"
-	cooldowntime = (3 SECONDS)
-
-/obj/item/weapon/shockpaddles/robot/check_charge(var/charge_amt)
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		return (R.cell && R.cell.check_charge(charge_amt))
-
-/obj/item/weapon/shockpaddles/robot/checked_use(var/charge_amt)
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		return (R.cell && R.cell.checked_use(charge_amt))
 
 #undef DEFIB_TIME_LIMIT
 #undef DEFIB_TIME_LOSS
