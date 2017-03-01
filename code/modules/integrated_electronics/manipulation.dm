@@ -355,7 +355,7 @@
 	controlling.forceMove(aicard)
 	to_chat(controlling, "<span class='notice'>### IICC FIRMWARE DELETED. HAVE A NICE DAY ###</span>")
 	src.visible_message("\The [aicard] pops out of \the [src]!")
-	aicard.forceMove(get_turf(src))
+	aicard.dropInto(loc)
 	aicard = null
 	controlling = null
 
