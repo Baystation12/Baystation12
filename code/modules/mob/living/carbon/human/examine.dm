@@ -365,7 +365,8 @@
 	var/mob/living/carbon/human/H = usr
 	if(istype(H.glasses, /obj/item/clothing/glasses/hud/health/advanced))
 		var/obj/item/clothing/glasses/hud/health/advanced/A = H.glasses
-		healthscan(usr, src, A.mode)
+		if(A.mode) //If it's not off
+			healthscan(usr,A.mode)
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)

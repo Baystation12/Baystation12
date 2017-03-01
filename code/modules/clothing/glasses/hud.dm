@@ -29,17 +29,25 @@
 	item_state = "adv_med_hud"
 	origin_tech = "magnets=6;biotech=5"
 	w_class = 3
-	var/mode = 1
+	action_button_name = "Adjust Verbosity"
+	var/mode = 0
+
+/obj/item/clothing/glasses/hud/health/advanced/attack_self()
+	toggle_mode()
 
 /obj/item/clothing/glasses/hud/health/advanced/verb/toggle_mode()
 	set name = "Switch Verbosity"
 	set category = "Object"
 	mode = !mode
 	switch (mode)
-		if(1)
+		if(2)
 			to_chat(usr, "The scanner now shows specific limb damage.")
-		if(0)
+		if(1)
 			to_chat(usr, "The scanner no longer shows limb damage.")
+		else
+			to_chat(usr, "The scanner will no longer give a full medical readout.")
+
+		usr.update_action_buttons()
 
 /obj/item/clothing/glasses/hud/health/prescription
 	name = "Prescription Health Scanner HUD"

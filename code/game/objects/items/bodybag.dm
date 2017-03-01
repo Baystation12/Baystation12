@@ -63,14 +63,14 @@
 		src.overlays.Cut()
 		to_chat(user, "You cut the tag off \the [src].")
 		return
-/*	else if(istype(W, /obj/item/device/healthanalyzer/) && !opened) //Why tho
+	else if(istype(W, /obj/item/device/healthanalyzer/) && !opened) //Why tho
 		if(contains_body)
 			var/obj/item/device/healthanalyzer/HA = W
 			for(var/mob/living/L in contents)
-				HA.scan_mob(L, user)
+				L.healthscan(user, HA.mode)
 		else
 			to_chat(user, "\The [W] reports that \the [src] is empty.")
-		return*/
+		return
 
 /obj/structure/closet/body_bag/store_mobs(var/stored_units)
 	contains_body = ..()
