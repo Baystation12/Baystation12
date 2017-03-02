@@ -24,6 +24,7 @@
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
+	announced = 1
 
 /datum/job/engineer
 	title = "Station Engineer"

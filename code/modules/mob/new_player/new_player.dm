@@ -375,11 +375,8 @@
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
-			//Grab some data from the character prefs for use in random news procs.
-
-			AnnounceArrival(character, rank, spawnpoint.msg)
-		else
-			AnnounceCyborg(character, rank, spawnpoint.msg)
+			if(job.announced)
+				AnnounceArrival(character, rank, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	qdel(src)
 
