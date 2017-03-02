@@ -127,7 +127,7 @@
 
 		if(src.wet)
 
-			if(M.buckled || (M.m_intent == "walk" && prob(100/wet)) )
+			if(M.buckled || (M.m_intent == "walk" && prob(min(100, 100/(wet/10))) ) )
 				return
 
 			var/slip_dist = 1

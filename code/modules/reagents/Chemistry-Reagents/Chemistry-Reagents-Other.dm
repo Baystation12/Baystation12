@@ -287,7 +287,9 @@
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
 			S.dirt = 0
+			S.wet = min(S.wet, 1)
 		T.clean_blood()
+
 
 		for(var/mob/living/carbon/slime/M in T)
 			M.adjustToxLoss(rand(5, 10))
@@ -331,7 +333,7 @@
 	if(!istype(T))
 		return
 	if(volume >= 1)
-		T.wet_floor(4)
+		T.wet_floor(80)
 
 /datum/reagent/silicate
 	name = "Silicate"
