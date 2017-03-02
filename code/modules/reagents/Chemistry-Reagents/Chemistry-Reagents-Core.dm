@@ -151,7 +151,12 @@
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
 
 	else if(volume >= 10)
-		T.wet_floor(1)
+		var/turf/simulated/S = T
+		if(!S.wet > 5)
+			S.wet_floor(1)
+		else
+			S.wet = round(S.wet * 0.75)
+
 
 /datum/reagent/water/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
