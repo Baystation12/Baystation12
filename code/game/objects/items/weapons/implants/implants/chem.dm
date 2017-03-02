@@ -1,7 +1,6 @@
 /obj/item/weapon/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
-	allow_reagents = 1
 
 /obj/item/weapon/implant/chem/get_data()
 	return {"
@@ -29,6 +28,17 @@
 	var/mob/living/carbon/R = imp_in
 	reagents.trans_to_mob(R, amount, CHEM_BLOOD)
 	to_chat(R, "<span class='notice'>You hear a faint *beep*.</span>")
+
+/obj/item/weapon/implant/chem/attackby(obj/item/weapon/I, mob/user)
+	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
+		if(reagents.total_volume >= reagents.maximum_volume)
+			to_chat(user, "<span class='warning'>\The [src] is full.</span>")
+		else
+			if(do_after(user,5,src))
+				I.reagents.trans_to_obj(src, 5)
+				to_chat(user, "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>")
+	else
+		..()
 
 /obj/item/weapon/implant/chem/emp_act(severity)
 	if (malfunction)

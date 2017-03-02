@@ -11,7 +11,6 @@
 	var/mob/imp_in = null
 	var/obj/item/organ/external/part = null
 	var/implant_color = "b"
-	var/allow_reagents = 0
 	var/malfunction = 0
 
 /obj/item/weapon/implant/proc/trigger(emote, source)
