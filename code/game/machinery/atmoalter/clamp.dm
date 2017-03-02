@@ -10,7 +10,7 @@
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
 
-/obj/machinery/clamp/New(loc, var/obj/machinery/atmospherics/pipe/simple/to_attach)
+/obj/machinery/clamp/New(loc, var/obj/machinery/atmospherics/pipe/simple/to_attach = null)
 	..()
 	if(to_attach)
 		target = to_attach
@@ -65,13 +65,14 @@
 
 	open = 1
 	icon_state = "pclamp0"
+	target.in_stasis = 0
 	return 1
 
 /obj/machinery/clamp/proc/close()
 	if(!open)
 		return 0
 
-	target.parent = null
+	qdel(target.parent)
 
 	if(network_node1)
 		qdel(network_node1)
@@ -84,14 +85,20 @@
 	var/obj/machinery/atmospherics/pipe/node2 = target.node2
 	var/datum/pipeline/P1 = node1.parent
 	var/datum/pipeline/P2 = node2.parent
-	P1.build_pipeline()
-	P2.build_pipeline()
+//  P1.build_network()
+//  P2.build_network()
+	P1.build_pipeline(node1)
+	P2.build_pipeline(node2)
+	qdel(P1)
+	qdel(P2)
+
 
 	update_networks()
 
 
 	open = 0
 	icon_state = "pclamp1"
+	target.in_stasis = 1
 
 	return 1
 
