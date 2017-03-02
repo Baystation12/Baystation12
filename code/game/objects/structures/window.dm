@@ -152,7 +152,9 @@
 	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))
-		tforce = 40
+		tforce = 3
+		if(ishuman(AM))
+			tforce = 40
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce
