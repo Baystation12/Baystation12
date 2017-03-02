@@ -477,7 +477,8 @@ obj/random/closet/item_to_spawn()
 					/obj/item/toy/prize/seraph,\
 					/obj/item/toy/prize/mauler,\
 					/obj/item/toy/prize/odysseus,\
-					/obj/item/toy/prize/phazon)
+					/obj/item/toy/prize/phazon,\
+					/obj/item/weapon/deck/cards)
 
 
 /obj/random/tank
@@ -1136,6 +1137,7 @@ var/list/random_useful_
 		random_useful_ += /obj/item/weapon/storage/box/matches
 		random_useful_ += /obj/item/stack/material/cardboard
 		random_useful_ += /obj/item/weapon/storage/fancy/cigarettes
+		random_useful_ += /obj/item/weapon/deck/cards
 	return pick(random_useful_)
 
 /proc/get_random_junk_type()
@@ -1154,6 +1156,7 @@ var/list/random_useful_
 			random_junk_ += /obj/item/inflatable/torn
 			random_junk_ += /obj/effect/decal/cleanable/molten_item
 			random_junk_ += /obj/item/weapon/material/shard
+			random_junk_ += /obj/item/weapon/hand/missing_card
 
 			random_junk_ -= /obj/item/trash/plate
 			random_junk_ -= /obj/item/trash/snack_bowl

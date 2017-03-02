@@ -17,6 +17,8 @@
 	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons."
 	icon_state = "blackservice_crew"
 	item_state = "blackservice_crew"
+	valid_accessory_slots = list("armband","medal")
+	restricted_accessory_slots = list("armband")
 
 /obj/item/clothing/suit/storage/service/expeditionary/medical
 	name = "expeditionary medical jacket"
