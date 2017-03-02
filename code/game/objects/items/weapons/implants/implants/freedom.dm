@@ -44,6 +44,15 @@
 	return
 
 /obj/item/weapon/implant/freedom/implanted(mob/living/carbon/source)
+	src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 	source.mind.store_memory("Freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 	to_chat(source, "The implanted freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
 	return TRUE
+
+/obj/item/weapon/implanter/freedom
+	name = "implanter (F)"
+	imp = /obj/item/weapon/implant/freedom
+
+/obj/item/weapon/implantcase/freedom
+	name = "glass case - 'freedom'"
+	imp = /obj/item/weapon/implant/freedom

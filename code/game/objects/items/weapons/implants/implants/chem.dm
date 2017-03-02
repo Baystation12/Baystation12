@@ -45,3 +45,7 @@
 
 	spawn(20)
 		malfunction = 0
+
+/obj/item/weapon/implantcase/chem
+	name = "glass case - 'chem'"
+	imp = /obj/item/weapon/implant/chem

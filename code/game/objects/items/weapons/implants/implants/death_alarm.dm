@@ -30,20 +30,16 @@
 /obj/item/weapon/implant/death_alarm/activate(var/cause)
 	var/mob/M = imp_in
 	var/area/t = get_area(M)
-	var/death_message = "[mobname] has died-zzzzt in-in-in..."
-	switch (cause)
-		if("death")
-			if(!t.requires_power) // We assume areas that don't use power are some sort of special zones
-				var/area/default = world.area
-				death_message = "[mobname] has died in [initial(default.name)]"
-			else
-				death_message = "[mobname] has died in [t.name]!"
-			processing_objects.Remove(src)
-		if ("emp")
-			var/name = prob(50) ? t : pick(teleportlocs)
-			death_message = "[mobname] has died in [name]!"
-		else
-			processing_objects.Remove(src)
+	var/location = t.name
+	if (cause == "emp" && prob(50))
+		location =  pick(teleportlocs)
+	if(!t.requires_power) // We assume areas that don't use power are some sort of special zones
+		var/area/default = world.area
+		location = initial(default.name)
+	var/death_message = "[mobname] has died in [location]!"
+	if(!cause)
+		death_message = "[mobname] has died-zzzzt in-in-in..."
+	processing_objects.Remove(src)
 
 	for(var/channel in list("Security", "Medical", "Command"))
 		global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
@@ -73,3 +69,7 @@
 /obj/item/weapon/implant/death_alarm/removed()
 	..()
 	processing_objects.Remove(src)
+
+/obj/item/weapon/implantcase/death_alarm
+	name = "glass case - 'death alarm'"
+	imp = /obj/item/weapon/implant/death_alarm

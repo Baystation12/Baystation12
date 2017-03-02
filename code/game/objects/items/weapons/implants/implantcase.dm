@@ -68,34 +68,6 @@
 	else
 		return ..()
 
-/obj/item/weapon/implantcase/tracking
-	name = "glass case - 'tracking'"
-	imp = /obj/item/weapon/implant/tracking
-
-/obj/item/weapon/implantcase/explosive
-	name = "glass case - 'explosive'"
-	imp = /obj/item/weapon/implant/explosive
-
-/obj/item/weapon/implantcase/chem
-	name = "glass case - 'chem'"
-	imp = /obj/item/weapon/implant/chem
-
-/obj/item/weapon/implantcase/loyalty
-	name = "glass case - 'loyalty'"
-	imp = /obj/item/weapon/implant/loyalty
-
-/obj/item/weapon/implantcase/death_alarm
-	name = "glass case - 'death alarm'"
-	imp = /obj/item/weapon/implant/death_alarm
-
-/obj/item/weapon/implantcase/freedom
-	name = "glass case - 'freedom'"
-	imp = /obj/item/weapon/implant/freedom
-
-/obj/item/weapon/implantcase/adrenalin
-	name = "glass case - 'adrenalin'"
-	imp = /obj/item/weapon/implant/adrenalin
-
 /obj/item/weapon/implantcase/health
 	name = "glass case - 'health'"
 	imp = /obj/item/weapon/implant/health

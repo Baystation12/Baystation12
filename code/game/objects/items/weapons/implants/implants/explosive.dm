@@ -172,3 +172,11 @@
 	removed()
 	listening_objects -= src
 	return ..()
+
+/obj/item/weapon/implanter/explosive
+	name = "implanter (E)"
+	imp = /obj/item/weapon/implant/explosive
+
+/obj/item/weapon/implantcase/explosive
+	name = "glass case - 'explosive'"
+	imp = /obj/item/weapon/implant/explosive

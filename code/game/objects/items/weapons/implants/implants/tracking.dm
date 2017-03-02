@@ -49,3 +49,7 @@
 
 	spawn(delay)
 		malfunction = 0
+
+/obj/item/weapon/implantcase/tracking
+	name = "glass case - 'tracking'"
+	imp = /obj/item/weapon/implant/tracking

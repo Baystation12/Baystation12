@@ -25,3 +25,11 @@
 		clear_antag_roles(H.mind, 1)
 		to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [using_map.company_name].</span>")
 	return TRUE
+
+/obj/item/weapon/implanter/loyalty
+	name = "implanter-loyalty"
+	imp = /obj/item/weapon/implant/loyalty
+
+/obj/item/weapon/implantcase/loyalty
+	name = "glass case - 'loyalty'"
+	imp = /obj/item/weapon/implant/loyalty

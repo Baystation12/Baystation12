@@ -28,8 +28,19 @@
 
 /obj/item/weapon/implantpad/attackby(obj/item/I, mob/user)
 	..()
-	if(istype(I, /obj/item/weapon/implantcase) || istype(I, /obj/item/weapon/implanter)) //it works since it uses all same vars and procs
+	if(istype(I, /obj/item/weapon/implantcase))
 		var/obj/item/weapon/implantcase/C = I
+		if(!imp && C.imp)
+			C.imp.forceMove(src)
+			imp = C.imp
+			C.imp = null
+		else if (imp && !C.imp)
+			imp.forceMove(C)
+			C.imp = imp
+			imp = null
+		C.update_icon()
+	else if(istype(I, /obj/item/weapon/implanter))
+		var/obj/item/weapon/implanter/C = I
 		if(!imp && C.imp)
 			C.imp.forceMove(src)
 			imp = C.imp
