@@ -16,6 +16,7 @@
 	var/next_beep_at = 0				//World time when we may next beep due to doors being blocked by mobs
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
+	var/welding_in_progress = null
 	var/locked = 0
 	var/lock_cut_state = BOLTS_FINE
 	var/lights = 1 // bolt lights show by default
@@ -863,6 +864,10 @@ About the new airlock wires panel:
 		return 1
 
 /obj/machinery/door/airlock/attackby(var/obj/item/C, var/mob/user)
+	//check if the door is beening welded
+	if(welding_in_progress)
+		to_chat(user, "Welding in progress")
+		return
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
 	if(brace && (istype(C.GetIdCard(), /obj/item/weapon/card/id/) || istype(C, /obj/item/weapon/crowbar/brace_jack)))
 		return brace.attackby(C, user)
@@ -895,16 +900,28 @@ About the new airlock wires panel:
 			..()
 		return
 
-	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
+	if(!welding_in_progress && !repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
 		var/obj/item/weapon/weldingtool/W = C
+		
 		if(W.remove_fuel(0,user))
+			src.welding_in_progress = 1
 			if(!src.welded)
-				src.welded = 1
+				user.visible_message("<span class='notice'>\The [user] begins welding [src] shut.</span>"
+				,"<span class='notice'>You begin welding the door shut.</span>")
 			else
-				src.welded = null
-			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			src.update_icon()
-			return
+				user.visible_message("<span class='notice'>\The [user] begins removing the weld from the [src].</span>"
+				,"<span class='notice'>You begin removing weld from the door.</span>")
+			if(do_after(user, 5 SECONDS))
+				if(!src.welded)
+					src.welded = 1
+					to_chat(user, "The airlock is now welded shut.")
+				else
+					src.welded = null
+					to_chat(user, "The airlock can now be opened.")
+				playsound(src, 'sound/items/Welder.ogg', 100, 1)
+				src.update_icon()
+				src.welding_in_progress = null
+				return
 		else
 			return
 	else if(istype(C, /obj/item/weapon/screwdriver))

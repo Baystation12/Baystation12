@@ -79,6 +79,8 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 
+	var/serial_number = "<i>gibberish</i>"
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -86,6 +88,8 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
+
+	serial_number = generate_serial()
 
 /obj/item/weapon/gun/update_twohanding()
 	if(requires_two_hands)
@@ -428,6 +432,7 @@
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
 		to_chat(user, "The fire selector is set to [current_mode.name].")
+	to_chat(user, "The serial number of the weapon [serial_number]")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)
@@ -445,4 +450,3 @@
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
-
