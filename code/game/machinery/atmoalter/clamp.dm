@@ -10,9 +10,12 @@
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
 
-/obj/machinery/clamp/New()
+/obj/machinery/clamp/New(loc, var/obj/machinery/atmospherics/pipe/simple/to_attach)
 	..()
-	target = locate(/obj/machinery/atmospherics/pipe/simple) in loc
+	if(to_attach)
+		target = to_attach
+	else
+		target = locate(/obj/machinery/atmospherics/pipe/simple) in loc
 	if(target)
 		update_networks()
 		dir = target.dir
@@ -37,6 +40,11 @@
 	else
 		close()
 	to_chat(user, "<span class='notice'>You turn [open ? "off" : "on"] \the [src]</span>")
+
+/obj/machinery/clamp/Destroy()
+	if(!open)
+		spawn(-1) open()
+	..()
 
 /obj/machinery/clamp/proc/open()
 	if(open)
@@ -63,7 +71,7 @@
 	if(!open)
 		return 0
 
-	qdel(target.parent)
+	target.parent = null
 
 	if(network_node1)
 		qdel(network_node1)
