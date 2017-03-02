@@ -321,7 +321,7 @@ datum/design/health_hud_adv
 datum/design/health_security_hud
 	name = "Medical-Security HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their security records, as well as their health status."
-	id = "security_hud"
+	id = "health_security_hud"
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_BIO = 3)
 	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 100)
