@@ -151,7 +151,7 @@
 	..()
 	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
 	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dmA
+	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
 		var/mob/I = AM
 		tforce = I.mob_size * 2 * I.throw_multiplier
 	else if(isobj(AM))
