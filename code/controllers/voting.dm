@@ -334,7 +334,7 @@ datum/controller/vote
 						if (config.allow_extra_antags && is_addantag_allowed(1))
 							choices.Add("Add Antagonist")
 				if("add_antagonist")
-					if(!is_addantag_allowed(automatic))
+					if(!is_addantag_allowed(automatic == 1, automatic == 2))
 						if(!automatic)
 							to_chat(usr, "The add antagonist vote is unavailable at this time. The game may not have started yet, the game mode may disallow adding antagonists, or you don't have required permissions.")
 						return 0
@@ -536,10 +536,12 @@ datum/controller/vote
 		usr.vote()
 
 // Helper proc for determining whether addantag vote can be called.
-datum/controller/vote/proc/is_addantag_allowed(var/automatic)
+datum/controller/vote/proc/is_addantag_allowed(var/automatic = 0, var/event = 0)
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
 	if((ticker.current_state <= 2) || !ticker.mode)
 		return 0
+	if(event)
+		return (ticker.mode.addantag_allowed & ADDANTAG_EVENT) && !antag_add_finished
 	if(automatic)
 		return (ticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_add_finished
 	if(check_rights(R_ADMIN, 0))

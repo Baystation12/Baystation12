@@ -27,6 +27,7 @@
 #define ANTAG_SET_APPEARANCE    0x400 // Causes antagonists to use an appearance modifier on spawn.
 
 // Mode/antag template macros.
+#define MODE_EXTENDED "extended"
 #define MODE_BORER "borer"
 #define MODE_XENOMORPH "xeno"
 #define MODE_LOYALIST "loyalist"
@@ -50,6 +51,7 @@
 #define MODE_TRAITOR "traitor"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 100
+#define DEFAULT_FALLBACK_GAMEMODE MODE_EXTENDED			// Gamemode that will be forced after first, second and third top voted modes fail to start.
 
 /////////////////
 ////WIZARD //////

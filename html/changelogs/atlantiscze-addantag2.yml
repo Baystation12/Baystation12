@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Tweaked Random Antagonist random event. Instead of silently spawning an antagonist, it calls an add antagonist vote instead, allowing players to choose if, and which antag should be picked. Antagonists added via this method are also properly displayed in the Lobby tab when joining the game, so no nasty surprises. This event is disabled in Extended gamemode."
+  - tweak: "When a mode fails to start, time until next mode is tried has been increased from 15 to 60 seconds, to allow for picking of different character/job/etc"

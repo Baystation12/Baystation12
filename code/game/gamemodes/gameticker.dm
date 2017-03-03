@@ -40,7 +40,7 @@ var/global/datum/controller/gameticker/ticker
 		if(!gamemode_voted)
 			pregame_timeleft = 180
 		else
-			pregame_timeleft = 15
+			pregame_timeleft = 60
 			if(!isnull(secondary_mode))
 				master_mode = secondary_mode
 				secondary_mode = null
@@ -58,7 +58,7 @@ var/global/datum/controller/gameticker/ticker
 					to_world("<b>The game mode is now: [master_mode]</b>")
 
 			else
-				master_mode = "extended"
+				master_mode = gamemode_cache[DEFAULT_FALLBACK_GAMEMODE]
 				to_world("<b>Forcing the game mode to extended...</b>")
 
 		to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
@@ -88,6 +88,8 @@ var/global/datum/controller/gameticker/ticker
 	//Create and announce mode
 	if(master_mode=="secret")
 		src.hide_mode = 1
+	else
+		src.hide_mode = 0
 
 	var/list/runnable_modes = config.get_runnable_modes()
 	if((master_mode=="random") || (master_mode=="secret"))

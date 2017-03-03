@@ -41,3 +41,4 @@
 #define ADDANTAG_PLAYER 1	// Any player may call the add antagonist vote.
 #define ADDANTAG_ADMIN 2	// Any player with admin privilegies may call the add antagonist vote.
 #define ADDANTAG_AUTO 4		// The add antagonist vote is available as an alternative for transfer vote.
+#define ADDANTAG_EVENT 8	// A random (low probability) event may call add antagonist vote during the round.
