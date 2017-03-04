@@ -98,3 +98,14 @@ decl/hierarchy/mil_uniform/marine
 	dress_shoes = /obj/item/clothing/shoes/dress
 	dress_hat = /obj/item/clothing/head/dress/marine
 	dress_gloves = /obj/item/clothing/gloves/white
+
+decl/hierarchy/mil_uniform/civilian
+	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
+	hierarchy_type = /decl/hierarchy/mil_uniform/civilian
+	branch = /datum/mil_branch/civilian
+
+	dress_under = /obj/item/clothing/under/rank/internalaffairs/plain
+	dress_over = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
+	dress_shoes = /obj/item/clothing/shoes/dress
+	dress_extra = list(/obj/item/clothing/accessory/wcoat)
+
