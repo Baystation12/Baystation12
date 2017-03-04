@@ -167,9 +167,19 @@
 	tracer_type = /obj/effect/projectile/stun/tracer
 	impact_type = /obj/effect/projectile/stun/impact
 
+/obj/item/projectile/beam/stun/heavy
+	name = "heavy stun beam"
+	agony = 60
+	armor_penetration = 10
+
 /obj/item/projectile/beam/stun/shock
 	name = "shock beam"
 	damage_type = ELECTROCUTE
 	damage = 15
 	agony = 25
 	fire_sound='sound/weapons/pulse.ogg'
+
+/obj/item/projectile/beam/stun/shock/heavy
+	name = "heavy shock beam"
+	damage = 20
+	agony = 40

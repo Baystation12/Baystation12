@@ -1,0 +1,6 @@
+author: Haswell
+delete-after: True
+changes: 
+  - rscadd: "Added ion pistols, 8 shots no AOE, normal size, can be worn on belt and holstered."
+  - rscadd: "Added taser carbines, 10 shots, heavy taser and heavy shock beams, large size, can be worn on belt and back."
+  - rscadd: "Added stun rifles, 12 stun shots, huge size, can be worn on back."
