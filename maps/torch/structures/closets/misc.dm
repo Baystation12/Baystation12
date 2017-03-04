@@ -91,3 +91,8 @@
 	will_contain = list(
 		/obj/item/weapon/gun/energy/gun = 4
 	)
+
+/obj/structure/closet/secure_closet/guncabinet/sidearm/small
+	will_contain = list(
+		/obj/item/weapon/gun/energy/gun/small = 6
+	)

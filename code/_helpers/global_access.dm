@@ -1167,6 +1167,8 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
+		if("sound_player")
+			return global.sound_player;
 		if("sounds_cache")
 			return global.sounds_cache;
 		if("spacevines_spawned")
@@ -1447,7 +1449,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2616,6 +2618,8 @@
 			global.solar_gen_rate=newval;
 		if("solars_list")
 			global.solars_list=newval;
+		if("sound_player")
+			global.sound_player=newval;
 		if("sounds_cache")
 			global.sounds_cache=newval;
 		if("spacevines_spawned")
@@ -2896,7 +2900,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2954,10 +2958,6 @@
 	"account_hack_attempted",
 	"acting_rank_prefixes",
 	"active_diseases",
-	"activeauth",
-	"activecharges",
-	"activename",
-	"activetype",
 	"actor",
 	"additional_antag_types",
 	"adjectives",
@@ -3485,6 +3485,7 @@
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",
+	"sound_player",
 	"sounds_cache",
 	"spacevines_spawned",
 	"spark_sound",
@@ -3514,7 +3515,6 @@
 	"status_icons_to_colour",
 	"stool_cache",
 	"stored_shock_by_ref",
-	"storedwarrant",
 	"string_part_flags",
 	"string_slot_flags",
 	"sun",

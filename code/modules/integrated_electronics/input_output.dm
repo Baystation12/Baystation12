@@ -232,8 +232,8 @@
 	signal.data["message"] = "ACTIVATE"
 	return signal
 
-/obj/item/integrated_circuit/input/signaler/do_work() // Sends a signal.
-	if(!radio_connection)
+/obj/item/integrated_circuit/input/signaler/do_work(var/datum/io) // Sends a signal.
+	if(!radio_connection || io != activators[1])
 		return
 
 	radio_connection.post_signal(src, create_signal())
@@ -433,6 +433,50 @@
 
 /obj/item/integrated_circuit/input/access_scanner/GetIdCard()
 	return contained_id
+
+/obj/item/integrated_circuit/tile_sensor
+	name = "bottom facing sensor"
+	desc = "A small downward facing camera designed to parse nearby objects on the floor."
+	extended_desc = "When the examine activator is pulsed, the examined ref is updated to what the camera senses below the assembly.\
+	next-in-stack is an activator that will move the next examined ref to be that number (from the top) in the stack. \
+	This does not update examined ref, the examine activator will still need to be pulsed. \
+	Should the next-in-stack number be higher than the current number of items in the stack, it will loop around to one. \
+	ref found pulses when the tile finds something. This should always happen unless the area where the assembly is has nothing on it. \
+	If nothing is found, nothing updates."
+	icon_state = "tile"
+	complexity = 8
+	size = 3
+	cooldown_per_use = 2 SECONDS
+	inputs = list()
+	activators = list("examine", "next-in-stack", "ref found")
+	outputs = list("examined ref")
+	var/stack_number = 1
+
+/obj/item/integrated_circuit/tile_sensor/do_work(var/activated_pin)
+	if(activated_pin == activators[1])
+		var/turf/T = get_turf(src)
+		var/first_found //The first valid object we find
+		var/found //The current object we find
+		var/count = 0 //The amount of objects we find.
+		for(var/c in T.contents) //Cycle through the turf's shit
+			var/atom/a = c
+			if(a == src.loc || !a.simulated || a.invisibility || !a.alpha) //cant see wont see
+				continue
+			if(!first_found) //If we just started, find something first.
+				first_found = a
+			if(++count == stack_number) //If we have found the amount of objects we want, set that up.
+				found = a
+				break
+		if(!found) //If we haven't found anything, just use the first thing we found and reset the stack.
+			if(!first_found) //If we have literally nothing do nothing
+				return
+			found = first_found
+			stack_number = 1
+		set_pin_data(IC_OUTPUT, 1, weakref(found)) //Output that and activate the pin
+		activate_pin(3)
+	else if(activated_pin == activators[2])
+		stack_number++
+
 
 /obj/item/integrated_circuit/output/screen
 	name = "screen"

@@ -92,6 +92,7 @@ decl/hierarchy/mil_uniform/marine
 	service_over = /obj/item/clothing/suit/storage/service/marine
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/service/marine
+	service_extra = list(/obj/item/clothing/head/service/marine/garrison)
 
 	dress_under = /obj/item/clothing/under/mildress/marine
 	dress_over = /obj/item/clothing/suit/dress/marine

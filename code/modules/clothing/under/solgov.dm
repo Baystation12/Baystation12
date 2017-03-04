@@ -47,6 +47,9 @@
 	worn_state = "blackutility_crew"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 10)
 
+/obj/item/clothing/under/utility/expeditionary/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/speciality/pilot)
+
 /obj/item/clothing/under/utility/expeditionary/medical
 	name = "expeditionary medical uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim and blue blazes."
@@ -105,6 +108,9 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
+/obj/item/clothing/under/utility/fleet/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/speciality/pilot)
+
 /obj/item/clothing/under/utility/fleet/medical
 	name = "fleet medical coveralls"
 	desc = "The utility uniform of the SCG Fleet, made from an insulated material. This one has blue cuffs."
@@ -143,6 +149,9 @@
 	item_state = "gy_suit"
 	worn_state = "greyutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/under/utility/marine/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/speciality/pilot)
 
 /obj/item/clothing/under/utility/marine/green
 	name = "green fatigues"

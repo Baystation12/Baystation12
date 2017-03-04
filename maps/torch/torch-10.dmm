@@ -1607,7 +1607,7 @@
 "aEU" = (/obj/item/device/radio/intercom/syndicate{dir = 4; pixel_x = -22},/turf/simulated/floor/shuttle/darkred,/area/syndicate_station/start)
 "aEV" = (/obj/item/weapon/screwdriver,/obj/structure/table/steel,/obj/random/tech_supply,/obj/effect/spawner/newbomb/timer/syndicate,/obj/random/loot,/turf/simulated/floor/shuttle/darkred,/area/syndicate_station/start)
 "aEW" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "syndieshutters_workshop"; name = "Blast Doors"; opacity = 0},/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/syndicate_station/start)
-"aEX" = (/obj/structure/table/rack,/obj/item/weapon/rig/merc/empty,/turf/unsimulated/floor{icon_state = "vault"; dir = 8},/area/syndicate_mothership)
+"aEX" = (/obj/structure/table/rack,/obj/item/weapon/rig/merc/empty,/obj/item/weapon/rig/merc/heavy/empty,/turf/unsimulated/floor{icon_state = "vault"; dir = 8},/area/syndicate_mothership)
 "aEY" = (/turf/unsimulated/floor{icon_state = "vault"; dir = 9},/area/centcom/ferry)
 "aEZ" = (/obj/machinery/door/airlock/centcom{name = "Cell"; opacity = 1; req_access = list(103)},/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/ferry)
 "aFa" = (/turf/space,/area/centcom/holding)
