@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Can now put accessories on people via strip menu. Click on the clothing item with accessory in hand to attempt to."
+  - rscadd: "Can now pick which accessory to remove in stirp menu."
