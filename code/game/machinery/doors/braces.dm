@@ -83,7 +83,7 @@
 			if(check_access(C))
 				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))
-					to_chat(user, "\The [src] clicks few times and detaches itself from \the [airlock]!")
+					to_chat(user, "\The [src] clicks a few times and detaches itself from \the [airlock]!")
 					unlock_brace(usr)
 			else
 				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")

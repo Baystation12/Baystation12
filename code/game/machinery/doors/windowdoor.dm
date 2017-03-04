@@ -57,6 +57,9 @@
 		visible_message("[src] shatters!")
 	qdel(src)
 
+/obj/machinery/door/window/deconstruct(mob/user, var/moved = FALSE)
+	shatter()
+
 /obj/machinery/door/window/Destroy()
 	set_density(0)
 	update_nearby_tiles()

@@ -17,10 +17,12 @@
 	var/datum/seed/seed
 	var/harvest_time
 	var/min_explode_time = 1200
+	var/global/total_mushrooms = 0
 
 /mob/living/simple_animal/mushroom/New()
 	..()
 	harvest_time = world.time
+	total_mushrooms++
 
 /mob/living/simple_animal/mushroom/verb/spawn_spores()
 
@@ -44,9 +46,10 @@
 	spore_explode()
 
 /mob/living/simple_animal/mushroom/death()
-	if(prob(30))
+	if(total_mushrooms < config.maximum_mushrooms && prob(30))
 		spore_explode()
 		return
+	total_mushrooms--
 	..()
 
 /mob/living/simple_animal/mushroom/proc/spore_explode()

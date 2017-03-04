@@ -1,8 +1,8 @@
 /obj/item/device/floor_painter
 	name = "floor painter"
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "labeler1"
-	item_state = "flight"
+	icon = 'icons/obj/device.dmi'
+	icon_state = "flpainter"
+	item_state = "fl_painter"
 
 	var/decal =        "remove all decals"
 	var/paint_dir =    "precise"

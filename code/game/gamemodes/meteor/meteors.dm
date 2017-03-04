@@ -6,7 +6,7 @@
 // Dust, used by space dust event and during earliest stages of meteor mode.
 /var/list/meteors_dust = list(/obj/effect/meteor/dust)
 
-// Standard meteors, used for the low severity meteor event, and during early stages of the meteor gamemode.
+// Standard meteors, used during early stages of the meteor gamemode.
 /var/list/meteors_normal = list(\
 		/obj/effect/meteor/medium=8,\
 		/obj/effect/meteor/dust=3,\
@@ -17,7 +17,7 @@
 		/obj/effect/meteor/silver=1\
 		)
 
-// Threatening meteors, used for medium severity meteor event, and during meteor gamemode.
+// Threatening meteors, used during the meteor gamemode.
 /var/list/meteors_threatening = list(\
 		/obj/effect/meteor/big=10,\
 		/obj/effect/meteor/medium=5,\
@@ -28,7 +28,7 @@
 		/obj/effect/meteor/emp=3\
 		)
 
-// Catastrophic meteors, pretty dangerous without shields and used for high severity meteor event, and during meteor gamemode.
+// Catastrophic meteors, pretty dangerous without shields and used during the meteor gamemode.
 /var/list/meteors_catastrophic = list(\
 		/obj/effect/meteor/big=75,\
 		/obj/effect/meteor/flaming=10,\
@@ -151,30 +151,25 @@
 	var/z_original
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 1
+	
+	var/move_count = 0
 
 /obj/effect/meteor/proc/get_shield_damage()
 	return max(((max(hits, 2)) * (heavy + 1) * rand(30, 60)) / hitpwr , 0)
-
 
 /obj/effect/meteor/New()
 	..()
 	z_original = z
 
-
 /obj/effect/meteor/Move()
-	if(z != z_original || loc == dest)
-		qdel(src)
-		return
-
 	. = ..() //process movement...
+	move_count++
+	if(loc == dest)
+		qdel(src)
 
-	if(.)
-		var/turf/T = get_turf(loc)
-		ram_turf(T)
-		if(prob(20) && !istype(loc, /turf/space/))
-			get_hit()
-
-	return .
+/obj/effect/meteor/touch_map_edge()
+	if(move_count > TRANSITIONEDGE)
+		qdel(src)
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
@@ -188,7 +183,7 @@
 	..()
 	if(A && !deleted(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
-		get_hit()
+		get_hit() //should only get hit once per move attempt
 
 /obj/effect/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return istype(mover, /obj/effect/meteor) ? 1 : ..()
@@ -196,13 +191,12 @@
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
-		if(A != src)
+		if(A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us
 			A.ex_act(hitpwr)
 
 	//then, ram the turf if it still exists
-	if(T)
+	if(T && !T.CanPass(src, src.loc, 0.5, 0))
 		T.ex_act(hitpwr)
-
 
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs

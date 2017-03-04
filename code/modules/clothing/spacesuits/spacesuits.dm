@@ -59,7 +59,7 @@
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
-	desc = "A suit that protects against low pressure environments. \"NSS EXODUS\" is written in large block letters on the back."
+	desc = "A suit that protects against low pressure environments."
 	icon_state = "space"
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/items/lefthand_spacesuits.dmi',

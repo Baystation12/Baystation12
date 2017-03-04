@@ -141,8 +141,40 @@
 	activators = list()
 
 /obj/item/integrated_circuit/manipulation/locomotion
-	name = "locomotion circuit"
-	desc = "This allows a machine to move in a given direction."
+	activators = list("step")
+
+/obj/item/integrated_circuit/manipulation/locomotion/do_work(var/activation_pin)
+	var/turf/T = get_turf(src)
+	if(!T || !istype(loc, /obj/item/device/electronic_assembly) || activation_pin != activators[1])
+		return
+	var/obj/item/device/electronic_assembly/assembly = loc
+	if(assembly.anchored || assembly.w_class >= ITEM_SIZE_LARGE)
+		return
+	if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
+		circuit_move(assembly)
+		return
+
+/obj/item/integrated_circuit/manipulation/locomotion/proc/circuit_move(var/obj/item/moving_object)
+	step(moving_object, moving_object.dir)
+
+/obj/item/integrated_circuit/manipulation/locomotion/simple
+	name = "simple locomotion circuit"
+	desc = "This allows a machine to move in a straight direction, or turn left or right."
+	icon_state = "locomotion_simple"
+	extended_desc = "this circuit turns when pulsing the turn left or turn right activators and\
+	only moves forward when the step forward activator is pulsed."
+	activators = list("step forward", "turn left", "turn right")
+
+/obj/item/integrated_circuit/manipulation/locomotion/simple/do_work(var/activation_pin)
+	var/obj/item/assembly = get_assembly(loc)
+	if(activation_pin != activators[1])
+		assembly.dir = turn(assembly.dir, 90 * (activation_pin == activators[2] ? 1 : -1))
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/locomotion/electronic
+	name = "electronic locomotion circuit"
+	desc = "This allows a machine to move in a given direction via electronic data input."
 	icon_state = "locomotion"
 	extended_desc = "The circuit accepts a number as a direction to move towards.<br>  \
 	North/Fore = 1,<br>\
@@ -161,17 +193,10 @@
 	outputs = list()
 	activators = list("step towards dir")
 
-/obj/item/integrated_circuit/manipulation/locomotion/do_work()
-	..()
-	var/turf/T = get_turf(src)
-	if(T && istype(loc, /obj/item/device/electronic_assembly))
-		var/obj/item/device/electronic_assembly/machine = loc
-		if(machine.anchored || machine.w_class >= 4)
-			return
-		if(machine.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
-			var/datum/integrated_io/wanted_dir = inputs[1]
-			if(isnum(wanted_dir.data))
-				step(machine, wanted_dir.data)
+/obj/item/integrated_circuit/manipulation/locomotion/electronic/circuit_move(var/obj/item/moving_object)
+	var/datum/integrated_io/wanted_dir = inputs[1]
+	if(isnum(wanted_dir.data))
+		step(moving_object, wanted_dir.data)
 
 /obj/item/integrated_circuit/manipulation/grenade
 	name = "grenade primer"
@@ -285,3 +310,64 @@
 			new /obj/effect/portal(rift_location, destination)
 		else
 			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+
+/obj/item/integrated_circuit/manipulation/ai
+	name = "integrated intelligence control circuit"
+	desc = "Similar in structure to a intellicard, this circuit allows the AI to pulse four different activators for control of a circuit."
+	extended_desc = "Loading an AI is easy, all that is required is to insert the container into the device's slot. Unloading is a similar process, simply press\
+					down on the device in question and the device/card should pop out (if applicable)."
+	icon_state = "ai"
+	size = 2
+	complexity = 15
+	var/mob/controlling
+	cooldown_per_use = 2 SECONDS
+	var/obj/item/aicard
+	activators = list("Upwards", "Downwards", "Left", "Right")
+	origin_tech = list(TECH_DATA = 4)
+
+/obj/item/integrated_circuit/manipulation/ai/relaymove(var/mob/user, var/direction)
+	switch(direction)
+		if(1)
+			activate_pin(1)
+		if(2)
+			activate_pin(2)
+		if(4)
+			activate_pin(3)
+		if(8)
+			activate_pin(4)
+
+/obj/item/integrated_circuit/manipulation/ai/proc/load_ai(var/mob/user, var/obj/item/card)
+	if(controlling)
+		to_chat(user, "<span class='warning'>There is already a card in there!</span>")
+		return
+	var/mob/living/L = locate(/mob/living) in card.contents
+	if(L && L.key)
+		L.forceMove(src)
+		controlling = L
+		card.forceMove(src)
+		aicard = card
+		user.visible_message("\The [user] loads \the [card] into \the [src]'s device slot")
+		to_chat(L, "<span class='notice'>### IICC FIRMWARE LOADED ###</span>")
+
+/obj/item/integrated_circuit/manipulation/ai/proc/unload_ai()
+	if(!controlling)
+		return
+	controlling.forceMove(aicard)
+	to_chat(controlling, "<span class='notice'>### IICC FIRMWARE DELETED. HAVE A NICE DAY ###</span>")
+	src.visible_message("\The [aicard] pops out of \the [src]!")
+	aicard.dropInto(loc)
+	aicard = null
+	controlling = null
+
+
+/obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/I, var/mob/user)
+	if(is_type_in_list(I, list(/obj/item/weapon/aicard, /obj/item/device/paicard, /obj/item/device/mmi/digital)))
+		load_ai(user, I)
+	else return ..()
+
+/obj/item/integrated_circuit/manipulation/ai/attack_self(user)
+	unload_ai()
+
+/obj/item/integrated_circuit/manipulation/ai/Destroy()
+	unload_ai()
+	return ..()

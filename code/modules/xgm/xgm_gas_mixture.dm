@@ -489,4 +489,6 @@
 		. += gas[g] * gas_data.molar_mass[g] * group_multiplier
 
 /datum/gas_mixture/proc/specific_mass()
-	. = get_mass()/get_total_moles()
+	var/M = get_total_moles()
+	if(M)
+		return get_mass()/M

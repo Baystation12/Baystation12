@@ -41,3 +41,8 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_deckofficer
 
+
+/obj/item/weapon/storage/box/headset/torchxo
+	name = "box of spare executive officer headsets"
+	desc = "A box full of executive officer headsets."
+	startswith = list(/obj/item/device/radio/headset/heads/torchxo = 7)

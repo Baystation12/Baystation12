@@ -25,6 +25,9 @@
 	check_armour = "laser"
 	eyeblur = 2
 
+/obj/item/projectile/beam/smalllaser
+	damage = 25
+
 /obj/item/projectile/beam/midlaser
 	damage = 40
 	armor_penetration = 10

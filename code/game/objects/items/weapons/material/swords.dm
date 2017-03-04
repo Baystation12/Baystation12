@@ -21,6 +21,8 @@
 	return 0
 
 /obj/item/weapon/material/sword/replica
+	edge = 0
+	sharp = 0
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
 
@@ -32,5 +34,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 
 /obj/item/weapon/material/sword/katana/replica
+	edge = 0
+	sharp = 0
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2

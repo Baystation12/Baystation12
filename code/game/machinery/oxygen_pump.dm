@@ -2,6 +2,8 @@
 	name = "emergency oxygen pump"
 	icon = 'icons/obj/walllocker.dmi'
 	icon_state = "emerg"
+	
+	anchored = TRUE
 
 	var/obj/item/weapon/tank/tank
 	var/obj/item/clothing/mask/gas/contained

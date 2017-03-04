@@ -21,7 +21,8 @@
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/smes_coil
+		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/computer_hardware
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -78,7 +79,8 @@
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/mecha_parts
+		/obj/item/mecha_parts,
+		/obj/item/weapon/computer_hardware
 		)
 
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
@@ -144,7 +146,7 @@
 		wrapped = null
 		return
 
-	to_chat(src.loc, "<span class='danger'>You drop \the [wrapped].</span>")
+	to_chat(src.loc, "<span class='warning'>You drop \the [wrapped].</span>")
 	wrapped.loc = get_turf(src)
 	wrapped = null
 	//update_icon()
@@ -200,7 +202,7 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			to_chat(user, "You collect \the [I].")
+			to_chat(user, "<span class='notice'>You collect \the [I].</span>")
 			I.loc = src
 			wrapped = I
 			return

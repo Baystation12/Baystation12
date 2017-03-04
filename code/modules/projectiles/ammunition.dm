@@ -133,7 +133,7 @@
 			return
 		user.remove_from_mob(C)
 		C.forceMove(src)
-		stored_ammo.Insert(1, C) //add to the head of the list
+		stored_ammo.Add(C)
 		update_icon()
 	else ..()
 
@@ -147,6 +147,21 @@
 		C.set_dir(pick(alldirs))
 	stored_ammo.Cut()
 	update_icon()
+
+
+/obj/item/ammo_magazine/attack_hand(mob/user)
+	if(user.get_inactive_hand() == src)
+		if(!stored_ammo.len)
+			to_chat(user, "<span class='notice'>[src] is already empty!</span>")
+		else
+			var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+			stored_ammo-=C
+			user.put_in_hands(C)
+			user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+			update_icon()
+	else
+		..()
+		return
 
 /obj/item/ammo_magazine/update_icon()
 	if(multiple_sprites)

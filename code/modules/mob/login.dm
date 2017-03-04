@@ -29,6 +29,9 @@
 				to_chat(src, "<b>WARNING:</b> It would seem that you are sharing connection or computer with another player. If you haven't done so already, please contact the staff via the Adminhelp verb to resolve this situation. Failure to do so may result in administrative action. You have been warned.")
 
 
+/mob
+	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
+
 /mob/Login()
 
 	player_list |= src
@@ -43,6 +46,8 @@
 	next_move = 1
 	set_sight(sight|SEE_SELF)
 	..()
+
+	my_client = client
 
 	if(loc && !isturf(loc))
 		client.eye = loc

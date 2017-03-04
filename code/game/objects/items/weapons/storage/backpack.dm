@@ -199,8 +199,8 @@
  */
 
 /obj/item/weapon/storage/backpack/satchel
-	name = "leather satchel"
-	desc = "It's a very fancy satchel made with fine leather."
+	name = "brown leather satchel"
+	desc = "It's a very fancy satchel made with fine brown leather."
 	icon_state = "satchel"
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
@@ -274,6 +274,11 @@
 		slot_r_hand_str = "satchel-cap",
 		)
 
+/obj/item/weapon/storage/backpack/satchel_black
+	name = "black leather satchel"
+	desc = "It's a very fancy satchel made with fine black leather."
+	icon_state = "satchel_black"
+
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
 	name = "emergency response team backpack"
@@ -343,6 +348,7 @@
 
 /obj/item/weapon/storage/backpack/messenger/engi
 	name = "engineering messenger bag"
+	desc = "A strong backpack worn over one shoulder. This one is designed for Industrial work."
 	icon_state = "courierbagengi"
 
 /obj/item/weapon/storage/backpack/messenger/hyd

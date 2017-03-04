@@ -30,3 +30,8 @@
 	..()
 	stored_files = list()
 	recalculate_size()
+
+/obj/item/weapon/computer_hardware/hard_drive/portable/Destroy()
+	if(holder2 && (holder2.portable_drive == src))
+		holder2.portable_drive = null
+	return ..()

@@ -340,7 +340,7 @@
 
 	job_master.AssignRole(src, rank, 1)
 
-	var/mob/living/character = create_character()	//creates the human and transfers vars and mind
+	var/mob/living/character = create_character(spawn_turf)	//creates the human and transfers vars and mind
 	if(!character)
 		return 0
 
@@ -368,15 +368,6 @@
 		qdel(src)
 		return
 
-	// Move them to the spawnpoint turf
-	character.forceMove(spawn_turf)
-
-	character.lastarea = get_area(loc)
-	// Moving wheelchair if they have one
-	if(character.buckled && istype(character.buckled, /obj/structure/bed/chair/wheelchair))
-		character.buckled.loc = character.loc
-		character.buckled.set_dir(character.dir)
-
 	ticker.mode.handle_latejoin(character)
 	universe.OnPlayerLatejoin(character)
 	if(job_master.ShouldCreateRecords(rank))
@@ -384,11 +375,8 @@
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
-			//Grab some data from the character prefs for use in random news procs.
-
-			AnnounceArrival(character, rank, spawnpoint.msg)
-		else
-			AnnounceCyborg(character, rank, spawnpoint.msg)
+			if(job.announced)
+				AnnounceArrival(character, rank, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	qdel(src)
 
@@ -433,7 +421,7 @@
 	dat += "</center>"
 	src << browse(jointext(dat, null), "window=latechoices;size=300x640;can_close=1")
 
-/mob/new_player/proc/create_character()
+/mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
 	close_spawn_windows()
 
@@ -443,16 +431,20 @@
 	if(client.prefs.species)
 		chosen_species = all_species[client.prefs.species]
 
+	if(!spawn_turf)
+		var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, get_rank_pref())
+		spawn_turf = pick(spawnpoint.turfs)
+
 	if(chosen_species)
 		if(!check_species_allowed(chosen_species))
 			spawning = 0 //abort
 			return null
-		new_character = new(loc, chosen_species.name)
+		new_character = new(spawn_turf, chosen_species.name)
 
 	if(!new_character)
-		new_character = new(loc)
+		new_character = new(spawn_turf)
 
-	new_character.lastarea = get_area(loc)
+	new_character.lastarea = get_area(spawn_turf)
 
 	for(var/lang in client.prefs.alternate_languages)
 		var/datum/language/chosen_language = all_languages[lang]
@@ -499,6 +491,7 @@
 	new_character.force_update_limbs()
 	new_character.update_eyes()
 	new_character.regenerate_icons()
+
 	new_character.key = key		//Manually transfer the key to log them in
 	return new_character
 
