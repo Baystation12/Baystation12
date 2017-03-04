@@ -216,8 +216,8 @@
 		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
-	if(suit && suit.accessories.len)
-		dat += "<BR><A href='?src=\ref[src];item=tie'>Remove accessory</A>"
+	if(suit)
+		dat += "<BR><A href='?src=\ref[src];item=tie'>Remove/Attach accessory</A>"
 	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
