@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - tweak: "Ghosting messages now show where the player is ghosting from."
