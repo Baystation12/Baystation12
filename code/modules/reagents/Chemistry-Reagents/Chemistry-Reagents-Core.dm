@@ -71,7 +71,7 @@
 		if(vlist.len)
 			for(var/ID in vlist)
 				var/datum/disease2/disease/V = vlist[ID]
-				if(V.spreadtype == "Contact")
+				if(V && V.spreadtype == "Contact")
 					infect_virus2(M, V.getcopy())
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -173,16 +173,16 @@
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
+	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
 	var/mob/living/carbon/slime/S = M
-	S.adjustToxLoss(10 * removed) // Babies have 150 health, adults have 200; So, 15 units and 20
-	if(!S.client)
+	if(!S.client && istype(S))
 		if(S.Target) // Like cats
 			S.Target = null
 		if(S.Victim)
 			S.Feedstop()
 	if(dose == removed)
-		S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
-		S.disoriented = max(S.disoriented, 2)
+		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+		M.confused = max(M.confused, 2)
 
 /datum/reagent/fuel
 	name = "Welding fuel"
