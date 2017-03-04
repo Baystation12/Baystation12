@@ -227,6 +227,9 @@
 	user.visible_message("<span class='notice'>[user] keeps the incision open on [target]'s [affected.name] with \the [tool].</span>",	\
 	"<span class='notice'>You keep the incision open on [target]'s [affected.name] with \the [tool].</span>")
 	affected.open = 2
+	if(!affected.encased)
+		for(var/obj/item/weapon/implant/I in affected.implants)
+			I.exposed()
 
 /datum/surgery_step/generic/retract_skin/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
