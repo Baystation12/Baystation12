@@ -417,7 +417,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(issilicon(Player))
 					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
 				else
-					to_chat(Player, "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>")
+					to_chat(Player, "<font color='blue'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></font>")
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player
