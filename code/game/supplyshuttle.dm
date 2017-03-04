@@ -213,6 +213,12 @@ var/list/point_source_descriptions = list(
 						switch(P.get_material_name())
 							if("phoron") phoron_count += P.get_amount()
 							if("platinum") plat_count += P.get_amount()
+
+				if(global.wishlist) //important for distress call event
+					var/w
+					for(w in global.wishlist)
+						if(MA.type == global.wishlist[w])
+							global.wishlist -= global.wishlist[w]
 			qdel(MA)
 
 		if(phoron_count)
