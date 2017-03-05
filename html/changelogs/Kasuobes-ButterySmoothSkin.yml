@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - tweak: "Improved movement smoothness with /tg/ movement code."
