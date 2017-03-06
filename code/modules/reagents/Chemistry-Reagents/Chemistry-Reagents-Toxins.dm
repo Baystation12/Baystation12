@@ -73,8 +73,8 @@
 	name = "Oxyphoron"
 	id = "oxyphoron"
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
-	strength = 80
-	fire_mult = 30
+	strength = 15
+	fire_mult = 15
 
 /datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
