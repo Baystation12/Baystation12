@@ -3,7 +3,7 @@
 	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	max_shots = 10
+	cell_type = /obj/item/weapon/cell/device/high
 	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 
 	projectile_type = /obj/item/projectile/beam/stun
@@ -11,9 +11,9 @@
 	modifystate = "energystun"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun", charge_cost = 100),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock", charge_cost = 125),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill", charge_cost = 200),
 		)
 
 /obj/item/weapon/gun/energy/gun/small
@@ -21,14 +21,15 @@
 	desc = "A smaller model of the versatile LAEP90 Perun, packing considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon_state = "smallgunstun"
 	max_shots = 4
+	cell_type = /obj/item/weapon/cell/device/standard
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
 	modifystate = "smallgunstun"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="smallgunshock"),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun", charge_cost = 50),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="smallgunshock", charge_cost = 125),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="smallgunkill", charge_cost = 250),
 		)
 
 /obj/item/weapon/gun/energy/gun/mounted
@@ -49,9 +50,9 @@
 	requires_two_hands = 1 //bulkier than an e-gun, but not quite the size of a carbine
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, charge_cost = 100),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, charge_cost = 125),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, charge_cost = 200),
 		)
 
 	var/fail_counter = 0

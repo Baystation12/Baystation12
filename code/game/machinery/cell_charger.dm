@@ -42,6 +42,9 @@
 		return
 
 	if(istype(W, /obj/item/weapon/cell) && anchored)
+		if(istype(W, /obj/item/weapon/cell/device))
+			to_chat(user, "<span class='warning'> The charger isn't fitted for that type of cell.</span>")
+			return
 		if(charging)
 			to_chat(user, "<span class='warning'>There is already a cell in the charger.</span>")
 			return
