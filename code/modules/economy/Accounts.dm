@@ -19,6 +19,7 @@
 	for(var/datum/transaction/T in transaction_log)
 		if(T.purpose == "Account creation")
 			continue
+		T.sanitize_amount()
 		. += T.amount
 
 /datum/transaction
@@ -37,6 +38,15 @@
 	purpose = _purpose
 	amount = _amount
 	source_terminal = _source
+
+/datum/transaction/proc/sanitize_amount() //some place still uses (number) for negative amounts and I can't find it
+	if(!istext(amount))
+		return
+	. = text2num(amount)
+	if(!.) //we got (digits) thing going on
+		var/regex/R = regex("\\d+")
+		R.Find(amount)
+		. = -text2num(R.match)
 
 /proc/create_account(var/new_owner_name = "Default user", var/starting_funds = 0, var/obj/machinery/computer/account_database/source_db)
 
