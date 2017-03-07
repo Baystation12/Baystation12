@@ -93,55 +93,6 @@
 	affected.take_damage(5, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
-//	 Necrotic tissue removal surgery step
-//////////////////////////////////////////////////////////////////
-/datum/surgery_step/fix_dead_tissue		//Debridement
-	priority = 3
-	allowed_tools = list(
-		/obj/item/weapon/scalpel = 100,		\
-		/obj/item/weapon/material/knife = 75,	\
-		/obj/item/weapon/material/kitchen/utensil/knife = 75,	\
-		/obj/item/weapon/material/shard = 50, 		\
-	)
-
-	can_infect = 1
-	blood_level = 1
-
-	min_duration = 110
-	max_duration = 160
-
-/datum/surgery_step/fix_dead_tissue/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!hasorgans(target))
-		return 0
-
-	if (target_zone == BP_MOUTH || target_zone == BP_EYES)
-		return 0
-
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-
-	return affected && affected.open >= 2 && (affected.status & ORGAN_DEAD)
-
-/datum/surgery_step/fix_dead_tissue/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts cutting away necrotic tissue in [target]'s [affected.name] with \the [tool]." , \
-	"You start cutting away necrotic tissue in [target]'s [affected.name] with \the [tool].")
-	target.custom_pain("The pain in [affected.name] is unbearable!",100,affecting = affected)
-	..()
-
-/datum/surgery_step/fix_dead_tissue/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] has cut away necrotic tissue in [target]'s [affected.name] with \the [tool].</span>", \
-		"<span class='notice'>You have cut away necrotic tissue in [target]'s [affected.name] with \the [tool].</span>")
-	affected.status &= ~ORGAN_DEAD
-	playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
-
-/datum/surgery_step/fix_dead_tissue/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='warning'>[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>", \
-	"<span class='warning'>Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!</span>")
-	affected.take_damage(20, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
-
-//////////////////////////////////////////////////////////////////
 //	 Peridaxon necrosis treatment surgery step
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/treat_necrosis
@@ -168,11 +119,8 @@
 	if(!hasorgans(target))
 		return 0
 
-	if (target_zone == BP_MOUTH || target_zone == BP_EYES)
-		return 0
-
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.open == 3 && (affected.status & ORGAN_DEAD)
+	return affected && affected.open >= 2 && (affected.status & ORGAN_DEAD)
 
 /datum/surgery_step/treat_necrosis/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

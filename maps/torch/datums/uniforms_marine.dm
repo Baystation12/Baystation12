@@ -6,7 +6,7 @@
 
 	service_over = /obj/item/clothing/suit/storage/service/marine/command
 	service_hat = /obj/item/clothing/head/service/marine/command
-	service_extra = list(/obj/item/clothing/head/service/marine/garrison)
+	service_extra = list(/obj/item/clothing/head/service/marine/garrison/command)
 
 	dress_over = /obj/item/clothing/suit/dress/marine/command
 	dress_hat = /obj/item/clothing/head/dress/marine/command
@@ -126,7 +126,7 @@
 
 	service_over = /obj/item/clothing/suit/storage/service/marine/command
 	service_extra = list(/obj/item/clothing/head/service/marine/garrison/command)
-	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/marineofficer)
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/marine)
 
 /decl/hierarchy/mil_uniform/marine/spt/officer
 	name = "Marine command support"
@@ -137,3 +137,4 @@
 
 	dress_over = /obj/item/clothing/suit/dress/marine/command
 	dress_hat = /obj/item/clothing/head/dress/marine/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/marineofficer)

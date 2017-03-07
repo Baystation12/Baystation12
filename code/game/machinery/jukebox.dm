@@ -21,6 +21,10 @@ datum/track/New(var/title_name, var/audio)
 	active_power_usage = 100
 
 	var/playing = 0
+	var/volume = 20
+
+	var/sound_id
+	var/datum/sound_token/sound_token
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
@@ -38,6 +42,7 @@ datum/track/New(var/title_name, var/audio)
 /obj/machinery/media/jukebox/New()
 	..()
 	update_icon()
+	sound_id = "[type]_[sequential_id(type)]"
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
@@ -98,7 +103,8 @@ datum/track/New(var/title_name, var/audio)
 	var/list/data = list(
 		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
-		"tracks" = juke_tracks
+		"tracks" = juke_tracks,
+		"volume" = volume
 	)
 
 	return data
@@ -124,6 +130,9 @@ datum/track/New(var/title_name, var/audio)
 				to_chat(usr, "No track selected.")
 			else
 				StartPlaying()
+			. = TRUE
+		if("volume")
+			AdjustVolume(text2num(params["level"]))
 			. = TRUE
 
 /obj/machinery/media/jukebox/proc/emag_play()
@@ -187,14 +196,10 @@ datum/track/New(var/title_name, var/audio)
 		return 1
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
-	var/area/main_area = get_area(src)
-	// Always kill the current sound
-	for(var/mob/living/M in mobs_in_area(main_area))
-		sound_to(M, sound(null, channel = 1))
-		main_area.forced_ambience = null
 	playing = 0
 	update_use_power(1)
 	update_icon()
+	qdel_null(sound_token)
 
 
 /obj/machinery/media/jukebox/proc/StartPlaying()
@@ -202,12 +207,14 @@ datum/track/New(var/title_name, var/audio)
 	if(!current_track)
 		return
 
-	var/area/main_area = get_area(src)
-	main_area.forced_ambience = list(current_track.sound)
-	for(var/mob/living/M in mobs_in_area(main_area))
-		if(M.mind)
-			main_area.play_ambience(M)
+	// Jukeboxes cheat massively and actually don't share id. This is only done because it's music rather than ambient noise.
+	sound_token = sound_player.PlayLoopingSound(src, sound_id, current_track.sound, volume = volume, range = 7, falloff = 3, prefer_mute = TRUE)
 
 	playing = 1
 	update_use_power(2)
 	update_icon()
+
+/obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)
+	volume = Clamp(new_volume, 0, 50)
+	if(sound_token)
+		sound_token.SetVolume(volume)

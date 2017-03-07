@@ -7,7 +7,7 @@
 	taste_mult = 4
 	reagent_state = SOLID
 	metabolism = REM * 4
-	var/nutriment_factor = 30 // Per unit
+	var/nutriment_factor = 10 // Per unit
 	var/injectable = 0
 	color = "#664330"
 
@@ -126,6 +126,10 @@
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/flour(T)
+		if(T.wet > 1)
+			T.wet = min(T.wet, 1)
+		else
+			T.wet = 0
 
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"

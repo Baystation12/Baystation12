@@ -36,10 +36,13 @@
 	var/sender_reception = TELECOMMS_RECEPTION_NONE
 	var/list/receiver_reception = new
 
-/proc/get_message_server()
+/proc/get_message_server(z)
 	if(message_servers)
+		var/list/zlevels = using_map.contact_levels
+		if(z)
+			zlevels = GetConnectedZlevels(z)
 		for (var/obj/machinery/message_server/MS in message_servers)
-			if(MS.active)
+			if(MS.active && (MS.z in zlevels))
 				return MS
 	return null
 

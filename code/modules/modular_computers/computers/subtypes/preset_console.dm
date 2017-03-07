@@ -20,6 +20,7 @@
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	set_autorun("sensormonitor")
 
 // Research
 /obj/item/modular_computer/console/preset/research/install_default_hardware()

@@ -25,7 +25,7 @@
 /datum/uplink_item/item/services/fake_crew_annoncement
 	name = "Crew Arrival Announcement and Records"
 	desc = "Creates a fake crew arrival announcement as well as fake crew records, using your current appearance (including held items!) and worn id card. Prepare well!"
-	item_cost = 32
+	item_cost = 16
 	path = /obj/item/device/uplink_service/fake_crew_announcement
 
 /datum/uplink_item/item/services/suit_sensor_shutdown
@@ -245,5 +245,7 @@
 		medical.fields["b_type"]	= I.blood_type
 		medical.fields["b_dna"]		= I.dna_hash
 
-	AnnounceArrivalSimple(general.fields["name"], general.fields["rank"])
+	var/datum/job/job = job_master.GetJob(general.fields["rank"])
+	if(job && job.announced)
+		AnnounceArrivalSimple(general.fields["name"], general.fields["rank"])
 	. = ..()
