@@ -62,14 +62,27 @@
 	name = "pulse"
 	icon_state = "u_laser"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 50
-	armor_penetration = 30
+	damage = 15 //lower damage, but fires in bursts
+	armor_penetration = 10
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
 	tracer_type = /obj/effect/projectile/laser_pulse/tracer
 	impact_type = /obj/effect/projectile/laser_pulse/impact
 
-/obj/item/projectile/beam/pulse/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/pulse/mid
+	damage = 25
+	armor_penetration = 20
+
+/obj/item/projectile/beam/pulse/heavy
+	damage = 40
+	armor_penetration = 30
+
+/obj/item/projectile/beam/pulse/destroy
+	name = "destroyer pulse"
+	damage = 100 //badmins be badmins I don't give a fuck
+	armor_penetration = 100
+
+/obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
 		target.ex_act(2)
 	..()
@@ -167,9 +180,19 @@
 	tracer_type = /obj/effect/projectile/stun/tracer
 	impact_type = /obj/effect/projectile/stun/impact
 
+/obj/item/projectile/beam/stun/heavy
+	name = "heavy stun beam"
+	agony = 60
+	armor_penetration = 10
+
 /obj/item/projectile/beam/stun/shock
 	name = "shock beam"
 	damage_type = ELECTROCUTE
 	damage = 15
 	agony = 25
 	fire_sound='sound/weapons/pulse.ogg'
+
+/obj/item/projectile/beam/stun/shock/heavy
+	name = "heavy shock beam"
+	damage = 20
+	agony = 40
