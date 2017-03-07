@@ -137,7 +137,7 @@
 
 /datum/gear/eyes/tajblind/sec
 	display_name = "sleek veil"
-	path = /obj/item/clothing/glasses/tajblind/sec
+	path = /obj/item/clothing/glasses/sunglasses/sechud/tajblind
 	whitelisted = "Tajara"
 	sort_category = "Xenowear"
 	cost = 1
@@ -153,7 +153,7 @@
 
 /datum/gear/eyes/tajblind/meson
 	display_name = "industrial veil"
-	path = /obj/item/clothing/glasses/tajblind/meson
+	path = obj/item/clothing/glasses/meson/prescription/tajblind
 	whitelisted = "Tajara"
 	sort_category = "Xenowear"
 	cost = 1
