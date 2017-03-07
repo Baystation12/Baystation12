@@ -65,6 +65,12 @@
 	desc = "Optical Meson Scanner with prescription lenses."
 	prescription = 6
 
+/obj/item/clothing/glasses/meson/prescription/tajblind
+	name = "industrial veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
+	icon_state = "tajblind_meson"
+	item_state = "tajblind_meson"
+
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
 	desc = "The goggles do nothing!"
@@ -248,11 +254,22 @@
 	icon_state = "sunhud"
 	hud = /obj/item/clothing/glasses/hud/security
 
+
 /obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
 	name = "HUD goggles"
 	desc = "Flash-resistant goggles with an inbuilt heads-up display."
 	icon_state = "goggles"
 
+
+/obj/item/clothing/glasses/sunglasses/sechud/tajblind
+	name = "sleek veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
+	icon_state = "tajblind_sec"
+	item_state = "tajblind_sec"
+	flash_protection = FLASH_PROTECTION_MAJOR
+	hud = /obj/item/clothing/glasses/hud/security
+	prescription = 5
+	
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
 	desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
@@ -364,44 +381,7 @@
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes."
 	icon_state = "tajblind"
 	item_state = "tajblind"
-	action_button_name = "Switch Vision Mode"
-	var/up = 0
-	flash_protection = FLASH_PROTECTION_NONE
-	tint = TINT_NONE
-
-/obj/item/clothing/glasses/tajblind/attack_self()
-	toggle()
-
-
-/obj/item/clothing/glasses/tajblind/verb/toggle()
-	set category = "Object"
-	set name = "Switch Vision Mode"
-	set src in usr
-
-	if(usr.canmove && !usr.incapacitated())
-		if(src.up)
-			src.up = !src.up
-			icon_state = initial(icon_state)
-			flash_protection = initial(flash_protection)
-			tint = initial(tint)
-			to_chat(usr, "You activate \the [src], allowing you to see.")
-		else
-			src.up = !src.up
-			icon_state = initial(icon_state)
-			flash_protection = FLASH_PROTECTION_MAJOR
-			tint = TINT_BLIND
-			to_chat(usr, "You deactivate \the [src], obscuring your vision.")
-		update_clothing_icon()
-		usr.update_action_buttons()
-
-/obj/item/clothing/glasses/tajblind/sec
-	name = "sleek veil"
-	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
-	icon_state = "tajblind_sec"
-	item_state = "tajblind_sec"
-	flash_protection = FLASH_PROTECTION_MAJOR
-	hud = /obj/item/clothing/glasses/hud/security
-
+	prescription = 5
 
 /obj/item/clothing/glasses/tajblind/med
 	name = "lightweight veil"
@@ -410,13 +390,3 @@
 	item_state = "tajblind_med"
 	hud = /obj/item/clothing/glasses/hud/health
 
-/obj/item/clothing/glasses/tajblind/meson
-	name = "industrial veil"
-	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
-	icon_state = "tajblind_meson"
-	item_state = "tajblind_meson"
-	vision_flags = SEE_TURFS
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-/obj/item/clothing/glasses/tajblind/meson/New()
-	..()
-	overlay = global_hud.meson
