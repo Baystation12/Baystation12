@@ -158,7 +158,7 @@
 
 /datum/gear/eyes/tajblind/meson
 	display_name = "industrial blindfold"
-	path = /obj/item/clothing/glasses/tajblind/meson
+	path = obj/item/clothing/glasses/meson/prescription/tajblind
 	whitelisted = "Tajara"
 	sort_category = "Xenowear"
 	cost = 1
