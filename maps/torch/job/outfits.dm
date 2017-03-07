@@ -181,7 +181,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/sea
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor")
 	uniform = /obj/item/clothing/under/utility/expeditionary/command
-	l_ear = /obj/item/device/radio/headset/heads/torchxo
+	l_ear = /obj/item/device/radio/headset/heads/torchsea
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/sea
@@ -202,6 +202,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
 	uniform = /obj/item/clothing/under/utility/expeditionary/command
+	l_ear = /obj/item/device/radio/headset/headset_bridgeofficer
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/bridgeofficer
@@ -280,6 +281,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	name = OUTFIT_JOB_NAME("Roboticist - Torch")
+	l_ear = /obj/item/device/radio/headset/headset_rob
 	uniform = /obj/item/clothing/under/rank/roboticist
 	shoes = /obj/item/clothing/shoes/black
 	head = null
@@ -595,7 +597,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/service/solgov_pilot
 	pda_type = /obj/item/device/pda
-	l_ear = /obj/item/device/radio/headset/headset_com
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet
 	name = OUTFIT_JOB_NAME("Pilot - Fleet")
