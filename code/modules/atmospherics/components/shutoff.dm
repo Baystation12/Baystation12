@@ -3,6 +3,7 @@
 	icon_state = "map_vclamp0"
 
 	name = "automatic shutoff valve"
+	desc = "A pipe valve. There is a reset button on the side."
 	var/threshold = 101.15
 	var/node1_last_pressure = 0
 	var/node2_last_pressure = 0
@@ -20,10 +21,6 @@
 /obj/machinery/atmospherics/valve/shutoff/Destroy()
 	processing_objects -= src
 	..()
-
-/obj/machinery/atmospherics/valve/shutoff/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
-	return
 
 /obj/machinery/atmospherics/valve/shutoff/process()
 	..()
