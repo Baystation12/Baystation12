@@ -1,5 +1,0 @@
-author: sabiram
-delete-after: True
-changes: 
-  - rscadd: "Standard and research magnetic grippers can now hold modular computer hardware."
-  - rscadd: "Research module robots now have access to wirecutters."

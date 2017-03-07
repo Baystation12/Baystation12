@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - bugfix: "Fixes not being able to bring up undress menu on help intent."
-  - tweak: "You scoop up resomi/monkeys/nymph on GRAB intent now, not help. Was annoying in surgery etc."

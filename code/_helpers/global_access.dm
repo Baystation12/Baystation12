@@ -615,6 +615,8 @@
 			return global.ghost_traps;
 		if("global_announcer")
 			return global.global_announcer;
+		if("global_headset")
+			return global.global_headset;
 		if("global_hud")
 			return global.global_hud;
 		if("global_huds")
@@ -1053,6 +1055,8 @@
 			return global.recentmessages;
 		if("reg_dna")
 			return global.reg_dna;
+		if("registered_macros_by_ckey_")
+			return global.registered_macros_by_ckey_;
 		if("religion_choices")
 			return global.religion_choices;
 		if("religion_name")
@@ -2066,6 +2070,8 @@
 			global.ghost_traps=newval;
 		if("global_announcer")
 			global.global_announcer=newval;
+		if("global_headset")
+			global.global_headset=newval;
 		if("global_hud")
 			global.global_hud=newval;
 		if("global_huds")
@@ -2504,6 +2510,8 @@
 			global.recentmessages=newval;
 		if("reg_dna")
 			global.reg_dna=newval;
+		if("registered_macros_by_ckey_")
+			global.registered_macros_by_ckey_=newval;
 		if("religion_choices")
 			global.religion_choices=newval;
 		if("religion_name")
@@ -3209,6 +3217,7 @@
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_announcer",
+	"global_headset",
 	"global_hud",
 	"global_huds",
 	"global_listen_count",
@@ -3428,6 +3437,7 @@
 	"random_useful_",
 	"recentmessages",
 	"reg_dna",
+	"registered_macros_by_ckey_",
 	"religion_choices",
 	"religion_name",
 	"renegades",
