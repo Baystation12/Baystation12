@@ -266,8 +266,6 @@
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
 	icon_state = "tajblind_sec"
 	item_state = "tajblind_sec"
-	flash_protection = FLASH_PROTECTION_MAJOR
-	hud = /obj/item/clothing/glasses/hud/security
 	prescription = 5
 	
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
