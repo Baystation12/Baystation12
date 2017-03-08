@@ -67,7 +67,9 @@ datum/pipeline
 
 				if(result.len>0)
 					for(var/obj/machinery/atmospherics/pipe/item in result)
-						if(!members.Find(item) && !item.in_stasis)
+						if(item.in_stasis)
+							continue
+						if(!members.Find(item))
 							members += item
 							possible_expansions += item
 
@@ -78,9 +80,6 @@ datum/pipeline
 
 							if(item.air_temporary)
 								air.merge(item.air_temporary)
-
-						else if(item.in_stasis)
-							edge_check++
 
 						edge_check--
 

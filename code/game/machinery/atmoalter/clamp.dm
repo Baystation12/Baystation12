@@ -12,7 +12,7 @@
 
 /obj/machinery/clamp/New(loc, var/obj/machinery/atmospherics/pipe/simple/to_attach = null)
 	..()
-	if(to_attach)
+	if(istype(to_attach))
 		target = to_attach
 	else
 		target = locate(/obj/machinery/atmospherics/pipe/simple) in loc
