@@ -93,6 +93,8 @@
 	hear(msg)
 
 /obj/item/weapon/implant/explosive/hear(var/msg)
+	if(!phrase)
+		return
 	if(findtext(sanitize_phrase(msg),phrase))
 		activate()
 		qdel(src)
