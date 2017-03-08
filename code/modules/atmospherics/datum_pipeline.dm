@@ -101,11 +101,7 @@ datum/pipeline
 
 		for(var/obj/machinery/atmospherics/pipe/edge in edges)
 			for(var/obj/machinery/atmospherics/result in edge.pipeline_expansion())
-				var/obj/machinery/atmospherics/pipe/P = result
-				if(istype(P))
-					if(!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference) && !P.in_stasis)
-						result.network_expand(new_network, edge)
-				else if(!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
+				if(!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
 					result.network_expand(new_network, edge)
 
 
