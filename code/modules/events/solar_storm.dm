@@ -28,7 +28,7 @@
 
 /datum/event/solar_storm/proc/radiate()
 	var/radiation_level = rand(15, 30)
-	for(var/area/A in all_areas)
+	for(var/area/A)
 		if(!(A.z in using_map.player_levels))
 			continue
 		for(var/turf/T in A)

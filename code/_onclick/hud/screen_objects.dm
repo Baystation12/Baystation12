@@ -304,6 +304,7 @@
 
 							if(best)
 								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
+								playsound(usr, 'sound/effects/internals.ogg', 50, 0)
 								C.internal = tankcheck[best]
 
 

@@ -362,13 +362,15 @@
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
-	startswith = list(/obj/item/weapon/light/tube = 21)
+	startswith = list(/obj/item/weapon/light/tube = 17,
+					/obj/item/weapon/light/tube/large = 4)
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"
-	startswith = list(/obj/item/weapon/light/tube = 14,
-					/obj/item/weapon/light/bulb = 7)
+	startswith = list(/obj/item/weapon/light/tube = 12,
+					/obj/item/weapon/light/tube/large = 4,
+					/obj/item/weapon/light/bulb = 5)
 
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"

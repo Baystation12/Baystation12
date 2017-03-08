@@ -28,28 +28,26 @@
 #define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
 #define ANTAG_RANDOM_EXCEPTED  2048 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
-// Globals.
-var/global/list/all_antag_types = list()
-var/global/list/all_antag_spawnpoints = list()
-var/global/list/antag_names_to_ids = list()
-
 // Global procs.
 /proc/get_antag_data(var/antag_type)
-	if(all_antag_types[antag_type])
-		return all_antag_types[antag_type]
+	if(all_antag_types()[antag_type])
+		return all_antag_types()[antag_type]
 	else
+		var/list/all_antag_types = all_antag_types()
 		for(var/cur_antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[cur_antag_type]
 			if(antag && antag.is_type(antag_type))
 				return antag
 
 /proc/clear_antag_roles(var/datum/mind/player, var/implanted)
+	var/list/all_antag_types = all_antag_types()
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if(!implanted || !(antag.flags & ANTAG_IMPLANT_IMMUNE))
 			antag.remove_antagonist(player, 1, implanted)
 
 /proc/update_antag_icons(var/datum/mind/player)
+	var/list/all_antag_types = all_antag_types()
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if(player)
@@ -59,20 +57,14 @@ var/global/list/antag_names_to_ids = list()
 		else
 			antag.update_all_icons()
 
-/proc/populate_antag_type_list()
-	for(var/antag_type in typesof(/datum/antagonist)-/datum/antagonist)
-		var/datum/antagonist/A = new antag_type
-		all_antag_types[A.id] = A
-		all_antag_spawnpoints[A.landmark_id] = list()
-		antag_names_to_ids[A.role_text] = A.id
-
 /proc/get_antags(var/atype)
-	var/datum/antagonist/antag = all_antag_types[atype]
+	var/datum/antagonist/antag = all_antag_types()[atype]
 	if(antag && islist(antag.current_antagonists))
 		return antag.current_antagonists
 	return list()
 
 /proc/player_is_antag(var/datum/mind/player, var/only_offstation_roles = 0)
+	var/list/all_antag_types = all_antag_types()
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if(only_offstation_roles && !(antag.flags & ANTAG_OVERRIDE_JOB))
@@ -82,3 +74,32 @@ var/global/list/antag_names_to_ids = list()
 		if(player in antag.pending_antagonists)
 			return 1
 	return 0
+
+var/list/all_antag_types_
+var/list/all_antag_spawnpoints_
+var/list/antag_names_to_ids_
+
+/proc/all_antag_types()
+	populate_antag_type_list()
+	return all_antag_types_
+
+/proc/all_antag_spawnpoints()
+	populate_antag_type_list()
+	return all_antag_spawnpoints_
+
+/proc/antag_names_to_ids()
+	populate_antag_type_list()
+	return antag_names_to_ids_
+
+/proc/populate_antag_type_list()
+	if(all_antag_types_ || all_antag_spawnpoints_ || antag_names_to_ids_)
+		return
+	all_antag_types_ = list()
+	all_antag_spawnpoints_ = list()
+	antag_names_to_ids_ = list()
+
+	for(var/antag_type in subtypesof(/datum/antagonist))
+		var/datum/antagonist/A = new antag_type
+		all_antag_types_[A.id] = A
+		all_antag_spawnpoints_[A.landmark_id] = list()
+		antag_names_to_ids_[A.role_text] = A.id

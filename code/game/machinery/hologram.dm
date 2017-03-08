@@ -68,7 +68,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 		take_call(user)
 		return
 	else if(caller_id && !incoming_connection)
-		visible_message("Severing connection to distant holopad.")
+		audible_message("Severing connection to distant holopad.")
 		end_call(user)
 		return
 	switch(alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel"))
@@ -98,7 +98,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				if(targetpad==src)
 					to_chat(user, "<span class='info'>Using such sophisticated technology, just to talk to yourself seems a bit silly.</span>")
 					return
-				if(targetpad.caller_id)
+				if(targetpad && targetpad.caller_id)
 					to_chat(user, "<span class='info'>The pad flashes a busy sign. Maybe you should try again later..</span>")
 					return
 				if(targetpad)
@@ -130,6 +130,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	caller_id.unset_machine()
 	caller_id.reset_view() //Send the caller back to his body
 	clear_holo(0, caller_id) // destroy the hologram
+	caller_id = null
 
 /obj/machinery/hologram/holopad/check_eye(mob/user)
 	return 0
@@ -234,8 +235,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		hologram.overlays += getHologramIcon(icon(tempicon)) // Add the callers image as an overlay to keep coloration!
 	else
 		hologram.overlays += A.holo_icon // Add the AI's configured holo Icon
-	if (A.holo_icon_malf == TRUE)
-		hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
+	if(A)
+		if(A.holo_icon_malf == TRUE)
+			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
 	hologram.mouse_opacity = 0//So you can't click on it.
 	hologram.plane = ABOVE_HUMAN_PLANE
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.

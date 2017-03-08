@@ -62,6 +62,7 @@
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
 	. = list()
+	.+= "Location: [get_area(src)]."
 	if(!powered())
 		.+= "Insufficient power to operate."
 	if(!check_fuel())

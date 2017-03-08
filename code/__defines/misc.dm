@@ -59,6 +59,7 @@
 #define MAX_BOOK_MESSAGE_LEN  9216
 #define MAX_LNAME_LEN         64
 #define MAX_NAME_LEN          26
+#define MAX_DESC_LEN          128
 
 // Event defines.
 #define EVENT_LEVEL_MUNDANE  1
@@ -72,7 +73,7 @@
 
 //Area flags, possibly more to come
 #define AREA_RAD_SHIELDED 1 // shielded from radiation, clearly
-#define AREA_EXTERNAL     2
+#define AREA_EXTERNAL     2 // External as in exposed to space, not outside in a nice, green, forest
 
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
@@ -97,6 +98,8 @@
 #define SHARD_STONE_PIECE "piece"
 #define SHARD_SPLINTER "splinters"
 #define SHARD_NONE ""
+
+#define OBJ_ANCHORABLE 0x1
 
 #define MATERIAL_UNMELTABLE 0x1
 #define MATERIAL_BRITTLE    0x2

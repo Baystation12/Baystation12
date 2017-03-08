@@ -81,15 +81,14 @@
 
 /obj/item/weapon/rig/light/ninja
 	name = "ominous suit control module"
+	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
-	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for Spider Clan assassins."
 	icon_state = "ninja_rig"
 	armor = list(melee = 50, bullet = 15, laser = 30, energy = 10, bomb = 25, bio = 100, rad = 30)
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.
 	online_slowdown = 0
-	aimove_power_usage = 50
-
+	aimove_power_usage = 50	
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 	glove_type = /obj/item/clothing/gloves/rig/light/ninja
 	cell_type =  /obj/item/weapon/cell/hyper
@@ -116,6 +115,37 @@
 	)
 
 	..()
+	
+/obj/item/weapon/rig/light/ninja/verb/rename_suit()
+	set name = "Name Ninja Suit"
+	set desc = "Rename your black voidsuit."
+	set category = "Object"
+	var/mob/M = usr
+	if(!M.mind) return 0
+	if(M.incapacitated()) return 0
+	var/input = sanitizeSafe(input("What do you want to name your suit?", "Rename suit"), MAX_NAME_LEN)
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		to_chat(M, "Suit naming succesful!")
+		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
+		return 1
+	
+	
+/obj/item/weapon/rig/light/ninja/verb/rewrite_suit_desc()
+	set name = "Describe Ninja suit"
+	set desc = "Give your voidsuit a custom description."
+	set category = "Object"
+	var/mob/M = usr
+	if(!M.mind) return 0
+	if(M.incapacitated()) return 0
+	var/input = sanitizeSafe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		desc = input
+		to_chat(M, "Suit description succesful!")
+		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
+		return 1
 
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"

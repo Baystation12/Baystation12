@@ -71,6 +71,9 @@
 	icon_state = icon_state_unpowered
 
 	overlays.Cut()
+	if(bsod)
+		overlays.Add("bsod")
+		return
 	if(!enabled)
 		if(icon_state_screensaver)
 			overlays.Add(icon_state_screensaver)
@@ -83,6 +86,8 @@
 		overlays.Add(icon_state_menu)
 
 /obj/item/modular_computer/proc/turn_on(var/mob/user)
+	if(bsod)
+		return
 	if(tesla_link)
 		tesla_link.enabled = 1
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
@@ -247,3 +252,16 @@
 		return active_program.check_eye(user)
 	else
 		return ..()
+
+/obj/item/modular_computer/proc/set_autorun(program)
+	if(!hard_drive)
+		return
+	var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
+	if(!istype(autorun))
+		autorun = new/datum/computer_file/data()
+		autorun.filename = "autorun"
+		hard_drive.store_file(autorun)
+	if(autorun.stored_data == program)
+		autorun.stored_data = null
+	else
+		autorun.stored_data = program

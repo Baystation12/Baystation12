@@ -149,12 +149,7 @@
 
 /obj/item/weapon/deck/attack_self(var/mob/user as mob)
 
-	var/list/newcards = list()
-	while(cards.len)
-		var/datum/playingcard/P = pick(cards)
-		newcards += P
-		cards -= P
-	cards = newcards
+	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
 
 /obj/item/weapon/deck/MouseDrop(atom/over)
@@ -308,3 +303,28 @@
 
 /obj/item/weapon/hand/pickup(mob/user as mob)
 	src.update_icon()
+
+
+/*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/
+/obj/item/weapon/hand/missing_card
+	name = "missing playing card"
+
+/obj/item/weapon/hand/missing_card/initialize()
+	..()
+
+	var/list/deck_list = list()
+	for(var/obj/item/weapon/deck/D in world)
+		if(isturf(D.loc))		//Decks hiding in inventories are safe. Respect the sanctity of loadout items.
+			deck_list += D
+
+	if(deck_list.len)
+		var/obj/item/weapon/deck/the_deck = pick(deck_list)
+		var/datum/playingcard/the_card = length(the_deck.cards) ? pick(the_deck.cards) : null
+		
+		if(the_card)
+			cards += the_card
+			the_deck.cards -= the_card
+
+			concealed = pick(0,1)	//Maybe up, maybe down.
+
+	update_icon()	//Automatically qdels if no card can be found.

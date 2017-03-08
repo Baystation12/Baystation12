@@ -22,19 +22,10 @@
 		/obj/item/weapon/hand_labeler,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/yellow,
-		/obj/item/weapon/packageWrap
+		/obj/item/weapon/packageWrap,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel_norm = 25)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)
-
-/obj/structure/closet/secure_closet/decktech/New()
-	..()
-	if(prob(75))
-		new /obj/item/weapon/storage/backpack(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_norm(src)
-	if(prob(25))
-		new /obj/item/weapon/storage/backpack/dufflebag(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger(src)
 
 /obj/structure/closet/secure_closet/deckofficer
 	name = "deck officer's locker"
@@ -62,16 +53,7 @@
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/suit/armor/vest/solgov
+		/obj/item/clothing/suit/armor/vest/solgov,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel_norm = 25)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)
-
-/obj/structure/closet/secure_closet/deckofficer/New()
-	..()
-	if(prob(75))
-		new /obj/item/weapon/storage/backpack(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel_norm(src)
-	if(prob(25))
-		new /obj/item/weapon/storage/backpack/dufflebag(src)
-	else
-		new /obj/item/weapon/storage/backpack/messenger(src)

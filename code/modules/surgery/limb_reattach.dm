@@ -10,6 +10,8 @@
 /datum/surgery_step/limb/
 	priority = 3 // Must be higher than /datum/surgery_step/internal
 	can_infect = 0
+	shock_level = 40
+	delicate = 1
 /datum/surgery_step/limb/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
 		return 0
@@ -85,7 +87,7 @@
 	target.UpdateDamageIcon()
 
 /datum/surgery_step/limb/connect/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/organ/external/E = tool
+	var/obj/item/organ/external/E = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
 	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)

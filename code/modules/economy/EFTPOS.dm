@@ -90,7 +90,7 @@
 			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Back[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
 
 			dat += "Transaction purpose: <b>[transaction_purpose]</b><br>"
-			dat += "Value: <b>þ[transaction_amount]</b><br>"
+			dat += "Value: <b>T[transaction_amount]</b><br>"
 			dat += "Linked account: <b>[linked_account ? linked_account.owner_name : "None"]</b><hr>"
 			if(transaction_paid)
 				dat += "<i>This transaction has been processed successfully.</i><hr>"
@@ -101,7 +101,7 @@
 			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Lock in new transaction</a><br><br>"
 
 			dat += "<a href='?src=\ref[src];choice=trans_purpose'>Transaction purpose: [transaction_purpose]</a><br>"
-			dat += "Value: <a href='?src=\ref[src];choice=trans_value'>þ[transaction_amount]</a><br>"
+			dat += "Value: <a href='?src=\ref[src];choice=trans_value'>T[transaction_amount]</a><br>"
 			dat += "Linked account: <a href='?src=\ref[src];choice=link_account'>[linked_account ? linked_account.owner_name : "None"]</a><hr>"
 			dat += "<a href='?src=\ref[src];choice=change_code'>Change access code</a><br>"
 			dat += "<a href='?src=\ref[src];choice=change_id'>Change EFTPOS ID</a><br>"
@@ -131,17 +131,8 @@
 
 						//transfer the money
 						E.worth -= transaction_amount
-						linked_account.money += transaction_amount
-
-						//create entry in the EFTPOS linked account transaction log
-						var/datum/transaction/T = new()
-						T.target_name = E.owner_name //D.owner_name
-						T.purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
-						T.amount = transaction_amount
-						T.source_terminal = machine_id
-						T.date = current_date_string
-						T.time = stationtime2text()
-						linked_account.transaction_log.Add(T)
+						var/datum/transaction/T = new(E.owner_name, (transaction_purpose ? transaction_purpose : "None supplied."), transaction_amount, machine_id)
+						linked_account.do_transaction(T)
 					else
 						to_chat(usr, "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>")
 			else
@@ -251,30 +242,11 @@
 								transaction_paid = 1
 
 								//transfer the money
-								D.money -= transaction_amount
-								linked_account.money += transaction_amount
+								var/datum/transaction/T = new("[linked_account.owner_name] (via [eftpos_name])", transaction_purpose, -transaction_amount, machine_id)
+								D.do_transaction(T)
 
-								//create entries in the two account transaction logs
-								var/datum/transaction/T = new()
-								T.target_name = "[linked_account.owner_name] (via [eftpos_name])"
-								T.purpose = transaction_purpose
-								if(transaction_amount > 0)
-									T.amount = "([transaction_amount])"
-								else
-									T.amount = "[transaction_amount]"
-								T.source_terminal = machine_id
-								T.date = current_date_string
-								T.time = stationtime2text()
-								D.transaction_log.Add(T)
-								//
-								T = new()
-								T.target_name = D.owner_name
-								T.purpose = transaction_purpose
-								T.amount = "[transaction_amount]"
-								T.source_terminal = machine_id
-								T.date = current_date_string
-								T.time = stationtime2text()
-								linked_account.transaction_log.Add(T)
+								T = new(D.owner_name, transaction_purpose, transaction_amount, machine_id)
+								linked_account.do_transaction(T)
 							else
 								to_chat(usr, "\icon[src]<span class='warning'>You don't have that much money!</span>")
 						else

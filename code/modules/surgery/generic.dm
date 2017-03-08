@@ -9,6 +9,7 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/generic/
 	can_infect = 1
+	shock_level = 10
 
 /datum/surgery_step/generic/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (isslime(target))
@@ -68,8 +69,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips as the blade sputters, searing a long gash in [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips as the blade sputters, searing a long gash in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.createwound(CUT, 7.5)
-	affected.createwound(BURN, 12.5)
+	affected.take_damage(12.5, 7.5, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	laser scalpel surgery step
@@ -112,8 +112,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.createwound(CUT, 20)
-	affected.createwound(BURN, 15)
+	affected.take_damage(20, 15, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 scalpel surgery step
@@ -122,6 +121,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/material/knife = 75,	\
+	/obj/item/weapon/material/kitchen/utensil/knife = 75,	\
 	/obj/item/weapon/material/shard = 50, 		\
 	)
 
@@ -156,7 +156,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, slicing open [target]'s [affected.name] in the wrong place with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, slicing open [target]'s [affected.name] in the wrong place with \the [tool]!</span>")
-	affected.createwound(CUT, 10)
+	affected.take_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 bleeder clamping surgery step
@@ -195,7 +195,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, tearing blood vessals and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",	\
 	"<span class='warning'>Your hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.name] with \the [tool]!</span>",)
-	affected.createwound(CUT, 10)
+	affected.take_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 retractor surgery step
@@ -217,43 +217,25 @@
 
 /datum/surgery_step/generic/retract_skin/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/msg = "[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool]."
-	var/self_msg = "You start to pry open the incision on [target]'s [affected.name] with \the [tool]."
-	if (target_zone == BP_CHEST)
-		msg = "[user] starts to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool]."
-		self_msg = "You start to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool]."
-	if (target_zone == BP_GROIN)
-		msg = "[user] starts to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool]."
-		self_msg = "You start to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool]."
-	user.visible_message(msg, self_msg)
+	user.visible_message("[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool].",	\
+	"You start to pry open the incision on [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("It feels like the skin on your [affected.name] is on fire!",40,affecting = affected)
 	..()
 
 /datum/surgery_step/generic/retract_skin/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/msg = "<span class='notice'>[user] keeps the incision open on [target]'s [affected.name] with \the [tool].</span>"
-	var/self_msg = "<span class='notice'>You keep the incision open on [target]'s [affected.name] with \the [tool].</span>"
-	if (target_zone == BP_CHEST)
-		msg = "<span class='notice'>[user] keeps the ribcage open on [target]'s torso with \the [tool].</span>"
-		self_msg = "<span class='notice'>You keep the ribcage open on [target]'s torso with \the [tool].</span>"
-	if (target_zone == BP_GROIN)
-		msg = "<span class='notice'>[user] keeps the incision open on [target]'s lower abdomen with \the [tool].</span>"
-		self_msg = "<span class='notice'>You keep the incision open on [target]'s lower abdomen with \the [tool].</span>"
-	user.visible_message(msg, self_msg)
+	user.visible_message("<span class='notice'>[user] keeps the incision open on [target]'s [affected.name] with \the [tool].</span>",	\
+	"<span class='notice'>You keep the incision open on [target]'s [affected.name] with \the [tool].</span>")
 	affected.open = 2
+	if(!affected.encased)
+		for(var/obj/item/weapon/implant/I in affected.implants)
+			I.exposed()
 
 /datum/surgery_step/generic/retract_skin/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/msg = "<span class='warning'>[user]'s hand slips, tearing the edges of the incision on [target]'s [affected.name] with \the [tool]!</span>"
-	var/self_msg = "<span class='warning'>Your hand slips, tearing the edges of the incision on [target]'s [affected.name] with \the [tool]!</span>"
-	if (target_zone == BP_CHEST)
-		msg = "<span class='warning'>[user]'s hand slips, damaging several organs in [target]'s torso with \the [tool]!</span>"
-		self_msg = "<span class='warning'>Your hand slips, damaging several organs in [target]'s torso with \the [tool]!</span>"
-	if (target_zone == BP_GROIN)
-		msg = "<span class='warning'>[user]'s hand slips, damaging several organs in [target]'s lower abdomen with \the [tool]!</span>"
-		self_msg = "<span class='warning'>Your hand slips, damaging several organs in [target]'s lower abdomen with \the [tool]!</span>"
-	user.visible_message(msg, self_msg)
-	target.apply_damage(12, BRUTE, affected, damage_flags=DAM_SHARP)
+	user.visible_message("<span class='warning'>[user]'s hand slips, tearing the edges of the incision on [target]'s [affected.name] with \the [tool]!</span>",	\
+	"<span class='warning'>Your hand slips, tearing the edges of the incision on [target]'s [affected.name] with \the [tool]!</span>")
+	affected.take_damage(12, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 skin cauterization surgery step
@@ -305,7 +287,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, leaving a small burn on [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, leaving a small burn on [target]'s [affected.name] with \the [tool]!</span>")
-	target.apply_damage(3, BURN, affected)
+	affected.take_damage(0, 3, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
 //	 limb amputation surgery step
@@ -346,5 +328,5 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, sawing through the bone in [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, sawwing through the bone in [target]'s [affected.name] with \the [tool]!</span>")
-	affected.createwound(CUT, 30)
+	affected.take_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	affected.fracture()

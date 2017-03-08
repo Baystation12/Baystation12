@@ -87,6 +87,21 @@
 	path = /obj/item/weapon/crowbar
 	category = "Tools"
 
+/datum/autolathe/recipe/int_wirer
+	name = "integrated circuit wirer"
+	path = /obj/item/device/integrated_electronics/wirer
+	category = "Tools"
+
+/datum/autolathe/recipe/int_debugger
+	name = "integrated circuit debugger"
+	path = /obj/item/device/integrated_electronics/debugger
+	category = "Tools"
+
+/datum/autolathe/recipe/int_analyzer
+	name = "integrated circuit analyzer"
+	path = /obj/item/device/integrated_electronics/analyzer
+	category = "Tools"
+
 /datum/autolathe/recipe/multitool
 	name = "multitool"
 	path = /obj/item/device/multitool
@@ -325,6 +340,11 @@
 	name = "proximity sensor"
 	path = /obj/item/device/assembly/prox_sensor
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/tube/large
+	name = "spotlight tube"
+	path = /obj/item/weapon/light/tube/large
+	category = "General"
 
 /datum/autolathe/recipe/tube
 	name = "light tube"

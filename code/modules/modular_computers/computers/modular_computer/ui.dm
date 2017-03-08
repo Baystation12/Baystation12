@@ -89,15 +89,7 @@
 	if( href_list["PC_setautorun"] )
 		if(!hard_drive)
 			return
-		var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
-		if(!istype(autorun))
-			autorun = new/datum/computer_file/data()
-			autorun.filename = "autorun"
-			hard_drive.store_file(autorun)
-		if(autorun.stored_data == href_list["PC_setautorun"])
-			autorun.stored_data = null
-		else
-			autorun.stored_data = href_list["PC_setautorun"]
+		set_autorun(href_list["PC_setautorun"])
 
 	if(.)
 		update_uis()
@@ -140,16 +132,18 @@
 		if(3)
 			data["PC_ntneticon"] = "sig_lan.gif"
 
-	if(idle_threads.len)
-		var/list/program_headers = list()
-		for(var/datum/computer_file/program/P in idle_threads)
-			if(!P.ui_header)
-				continue
-			program_headers.Add(list(list(
-				"icon" = P.ui_header
-			)))
-
-		data["PC_programheaders"] = program_headers
+	var/list/program_headers = list()
+	for(var/datum/computer_file/program/P in idle_threads)
+		if(!P.ui_header)
+			continue
+		program_headers.Add(list(list(
+			"icon" = P.ui_header
+		)))
+	if(active_program && active_program.ui_header)
+		program_headers.Add(list(list(
+			"icon" = active_program.ui_header
+		)))
+	data["PC_programheaders"] = program_headers
 
 	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = 1

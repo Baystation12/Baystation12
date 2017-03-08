@@ -5,6 +5,7 @@
 	icon_state = "papershredder0"
 	density = 1
 	anchored = 1
+	flags = OBJ_ANCHORABLE
 	var/max_paper = 10
 	var/paperamount = 0
 	var/list/shred_amounts = list(
@@ -43,7 +44,8 @@
 				paperamount = max_paper
 			update_icon()
 			return
-	return ..()
+	..()
+	return
 
 /obj/machinery/papershredder/verb/empty_contents()
 	set name = "Empty bin"

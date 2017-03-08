@@ -17,7 +17,7 @@
 	var/max_carry = 2*base_storage_cost(ITEM_SIZE_NORMAL)
 
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	// Drop all the things. All of them.
 	overlays.Cut()
 	for(var/obj/item/I in carrying)
