@@ -1564,7 +1564,7 @@
 "Ed" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "Ee" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "Ef" = (/obj/random/closet,/obj/random/maintenance/solgov,/turf/simulated/floor/plating,/area/maintenance/fourthdeck/aft)
-"Eg" = (/obj/effect/floor_decal/corner/yellow{dir = 8},/obj/machinery/light,/obj/structure/sign/deck/fourth{pixel_y = -32},/obj/effect/decal/warning_stripes,/obj/machinery/atmospherics/valve/shutoff{dir = 4},/turf/simulated/floor/plating,/area/hallway/primary/fourthdeck/center)
+"Eg" = (/obj/effect/floor_decal/corner/yellow{dir = 8},/obj/machinery/light,/obj/structure/sign/deck/fourth{pixel_y = -32},/obj/machinery/atmospherics/valve/shutoff{dir = 4},/obj/effect/floor_decal/industrial/shutoff{dir = 4},/turf/simulated/floor/tiled,/area/hallway/primary/fourthdeck/center)
 "Eh" = (/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
 "Ei" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
 "Ej" = (/obj/random/junk,/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/foreport)
