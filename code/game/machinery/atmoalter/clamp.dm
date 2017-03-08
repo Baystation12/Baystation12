@@ -62,6 +62,7 @@
 	else if(network_node2)
 		network_node2.update = 1
 
+	update_networks()
 
 	open = 1
 	icon_state = "pclamp0"
@@ -91,9 +92,6 @@
 	P2.build_pipeline(node2)
 	qdel(P1)
 	qdel(P2)
-
-
-	update_networks()
 
 
 	open = 0
