@@ -1,5 +1,0 @@
-author: Haswell
-delete-after: True
-changes: 
-  - tweak: "People now spawn with random hunger levels between hungry and satiated."
-  - tweak: "Reduced amount of satiety from eating by 66%."

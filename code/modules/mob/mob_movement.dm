@@ -209,6 +209,11 @@
 
 	if(mob.transforming)	return//This is sota the goto stop mobs from moving var
 
+	if(Process_Grab())	return
+
+	if(!mob.canmove)
+		return
+
 	if(isliving(mob))
 		var/mob/living/L = mob
 		if(L.incorporeal_move)//Move though walls
@@ -231,10 +236,7 @@
 						b.zoom()
 				*/
 
-	if(Process_Grab())	return
 
-	if(!mob.canmove)
-		return
 
 	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
 	//	if(!mob.Allow_Spacemove(0))	return 0
