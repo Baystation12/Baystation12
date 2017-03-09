@@ -120,17 +120,15 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><hr></td></tr>"
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
+	var/jobs = list()
+	if(pref.job_high || pref.job_medium || pref.job_low)
+		if(pref.job_high) //Is not a list like the others so a check just in case
+			jobs += pref.job_high
+		jobs += pref.job_medium
+		jobs += pref.job_low
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
-		var/jobs = list()
-		if(pref.job_high || pref.job_medium || pref.job_low)
-			if(pref.job_high)
-				jobs += pref.job_high
-			for(var/Q in pref.job_medium)
-				jobs += Q
-			for(var/Q in pref.job_low)
-				jobs += Q
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
@@ -140,12 +138,15 @@ var/list/gear_datums = list()
 			. += "<br><i>"
 			var/ind = 0
 			for(var/J in jobs)
-				++ind
-				if(ind > 2)
-					. += ", "
 				if(J in G.allowed_roles)
+					++ind
+					if(ind > 1)
+						. += ", "
 					. += "<font color=55cc55>[J]</font>"
 				else
+					++ind
+					if(ind > 1)
+						. += ", "
 					. += "<font color=cc5555>[J]</font>"
 			. += "</i>"
 		.+= "</tr>"
