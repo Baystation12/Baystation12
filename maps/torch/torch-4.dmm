@@ -1,4 +1,4 @@
-"aa" = (/turf/space/transit/east,/area/space)
+"aa" = (/turf/space,/area/space)
 "ab" = (/turf/space,/area/aquila_hangar/firstdeck)
 "ac" = (/turf/space,/area/syndicate_station/firstdeck)
 "ad" = (/turf/space,/area/calypso_hangar/firstdeck)
