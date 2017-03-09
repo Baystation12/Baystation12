@@ -123,11 +123,32 @@ var/list/gear_datums = list()
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
+		var/jobs = list()
+		if(pref.job_high || pref.job_medium || pref.job_low)
+			if(pref.job_high)
+				jobs += pref.job_high
+			for(var/Q in pref.job_medium)
+				jobs += Q
+			for(var/Q in pref.job_low)
+				jobs += Q
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
-		. += "<td><font size=2><i>[G.description]</i></font></td></tr>"
+		. += "<td><font size=2>[G.description]</font>"
+		if(G.allowed_roles)
+			. += "<br><i>"
+			var/ind = 0
+			for(var/J in jobs)
+				++ind
+				if(ind > 2)
+					. += ", "
+				if(J in G.allowed_roles)
+					. += "<font color=55cc55>[J]</font>"
+				else
+					. += "<font color=cc5555>[J]</font>"
+			. += "</i>"
+		.+= "</tr>"
 		if(ticked)
 			. += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
