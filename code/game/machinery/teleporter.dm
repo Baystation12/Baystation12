@@ -5,6 +5,8 @@
 	icon_screen = "teleport"
 	circuit = /obj/item/weapon/circuitboard/teleporter
 	dir = 4
+	var/obj/machinery/teleport/station/station = null
+	var/obj/machinery/teleport/hub/hub = null
 	var/obj/item/locked = null
 	var/id = null
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
@@ -19,8 +21,7 @@
 
 /obj/machinery/computer/teleporter/initialize()
 	..()
-	var/obj/machinery/teleport/station/station = locate(/obj/machinery/teleport/station, get_step(src, dir))
-	var/obj/machinery/teleport/hub/hub
+	station = locate(/obj/machinery/teleport/station, get_step(src, dir))
 	if(station)
 		hub = locate(/obj/machinery/teleport/hub, get_step(station, dir))
 
@@ -31,6 +32,17 @@
 	if(istype(hub))
 		hub.com = src
 		hub.set_dir(dir)
+
+/obj/machinery/computer/teleporter/examine(mob/user)
+	. = ..()
+	if(locked)
+		var/turf/T = get_turf(locked)
+		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
+		if(hub.accurate)
+			to_chat(user, "<span class='notice'>Test fire completed.</span>")
+		else
+			to_chat(user, "<span class='warning'>Destination untested. Test firing recommended.</span>")
+
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
@@ -128,6 +140,7 @@
 		return
 
 	src.locked = L[desc]
+	hub.accurate = 0
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
 	src.add_fingerprint(usr)
@@ -208,7 +221,6 @@
 		s.set_up(5, 1, src)
 		s.start()
 		accurate = 1
-		spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes
 		for(var/mob/B in hearers(src, null))
 			B.show_message("<span class='notice'>Test fire completed.</span>")
 	return
@@ -357,6 +369,11 @@
 	src.add_fingerprint(usr)
 	src.engaged = 0
 	return
+
+/obj/machinery/teleport/station/AltClick()
+	if(!usr.incapacitated() && Adjacent(usr))
+		testfire()
+
 
 /obj/machinery/teleport/station/verb/testfire()
 	set name = "Test Fire Teleporter"
