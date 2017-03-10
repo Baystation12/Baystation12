@@ -3,9 +3,11 @@
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
 	var/volume = 0
+	var/leaking = 0
 	use_power = 0
 
 	var/alert_pressure = 170*ONE_ATMOSPHERE
+	var/in_stasis = 0
 		//minimum pressure before check_pressure(...) should be called
 
 	can_buckle = 1
@@ -190,6 +192,8 @@
 /obj/machinery/atmospherics/pipe/simple/process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
+	else if(leaking)
+		parent.mingle_with_turf(loc, volume)
 	else
 		. = PROCESS_KILL
 
@@ -209,6 +213,8 @@
 	else return 1
 
 /obj/machinery/atmospherics/pipe/simple/proc/burst()
+	ASSERT(parent)
+	parent.temporarily_store_air()
 	src.visible_message("<span class='danger'>\The [src] bursts!</span>");
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/datum/effect/effect/system/smoke_spread/smoke = new
@@ -259,8 +265,13 @@
 		qdel(src)
 	else if(node1 && node2)
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
+		if(leaking)
+			leaking = 0
 	else
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
+		if(!leaking)
+			leaking = 1
+			processing_objects |= src
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
