@@ -43,6 +43,8 @@
 /obj/machinery/atmospherics/valve/shutoff/process()
 	..()
 
+	if(!node1 || !node2)
+		return
 	var/datum/gas_mixture/node1_air = node1.return_air()
 	var/datum/gas_mixture/node2_air = node2.return_air()
 	var/node1_pressure = node1_air.return_pressure()
