@@ -289,7 +289,8 @@
 	..()
 	explosion(src.loc, 0, 0, 4, 3, 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
-	spawn(-1) radiation_repository.radiate(src, 50)
+	radiation_repository.radiate(src, 50)
+	sleep()
 
 /obj/effect/meteor/golden
 	name = "golden meteor"
