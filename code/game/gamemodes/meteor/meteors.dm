@@ -284,13 +284,19 @@
 	icon_state = "glowing"
 	heavy = 1
 	meteordrop = /obj/item/weapon/ore/uranium
-
+	
+/obj/effect/meteor/irradiated/get_hit()
+	hits--
+	if(hits <= 0)
+		make_debris()
+		spawn(-1) meteor_effect()
+		qdel(src)
+		
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
 	explosion(src.loc, 0, 0, 4, 3, 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	radiation_repository.radiate(src, 50)
-	sleep()
 
 /obj/effect/meteor/golden
 	name = "golden meteor"
