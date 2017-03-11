@@ -399,6 +399,9 @@ datum/preferences
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
+	
+	if(!character.isSynthetic())
+		character.nutrition = rand(140,360)
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()
