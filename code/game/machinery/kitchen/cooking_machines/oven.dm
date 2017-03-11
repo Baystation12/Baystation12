@@ -1,6 +1,6 @@
 /obj/machinery/cooker/oven
 	name = "oven"
-	desc = "Cookies are ready, dear."
+	desc = "A temperature controlled chamber which cooks its contents by convection."
 	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "oven_off"
 	on_icon = "oven_on"
