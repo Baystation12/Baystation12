@@ -1,0 +1,13 @@
+author: Haswell
+delete-after: True
+changes: 
+  - rscadd: "Added ion pistols, 8 shots no AOE, normal size, can be worn on belt and holstered."
+  - rscadd: "Added taser carbines, 10 shots, heavy taser and heavy shock beams, large size, can be worn on belt and back."
+  - rscadd: "Added stun rifles, 12 stun shots, huge size, can be worn on back."
+  - tweak: "Reinvented pulse weaponry. They now function as burst fire laser weapons, dealing less damage per shot but with higher damage potential than their laser counterparts. Most effective at medium ranges against non-armored targets."
+  - rscadd: "Added pulse rifles. 36 pulse shots, high damage. Huge size, can be worn on back."
+  - rscadd: "Added pulse carbines, 24 pulse shots, medium damage. Large size, can be worn on back and belt."
+  - rscadd: "Added pulse pistols, 21 pulse shots, low damage. Normal size, can be worn on belt and holstered."
+  - maptweak: "Adjusted security and emergency armory contents. Added more guns."
+  - tweak: "Added pulse weapons to uplinks."
+  
