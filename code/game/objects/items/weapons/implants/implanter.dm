@@ -75,9 +75,11 @@
 
 		var/target_zone = user.zone_sel.selecting
 		if(src.imp.can_implant(M, user, target_zone))
+			var/imp_name = imp.name
+
 			if(do_after(user, 50, M) && src.imp.implant_in_mob(M, target_zone))
 				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
-				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
+				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 
 				src.imp = null
 				update_icon()
