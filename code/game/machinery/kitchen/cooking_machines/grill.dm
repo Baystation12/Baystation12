@@ -1,6 +1,6 @@
 /obj/machinery/cooker/grill
-	name = "grill"
-	desc = "Backyard grilling, IN SPACE."
+	name = "griddle"
+	desc = "A flat, wide, and smooth cooking surface."
 	icon_state = "grill_off"
 	cook_type = "grilled"
 	cook_time = 100
