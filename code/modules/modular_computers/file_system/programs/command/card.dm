@@ -107,6 +107,8 @@
 /datum/computer_file/program/card_mod/Topic(href, href_list)
 	if(..())
 		return 1
+	if (!computer.card_slot)
+		return 1
 
 	var/mob/user = usr
 	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
