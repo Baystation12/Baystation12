@@ -46,7 +46,6 @@
 		dna.real_name = real_name
 		sync_organ_dna()
 	make_blood()
-	nutrition = rand(50,200)
 
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src
