@@ -280,7 +280,7 @@
 "ft" = (/obj/item/device/radio/intercom/locked/ai_private{pixel_y = 22},/turf/simulated/floor/reinforced,/area/turret_protected/ai_outer_chamber)
 "fu" = (/obj/machinery/camera/network/command{c_tag = "Bridge Exterior - Starboard"; dir = 2},/turf/simulated/floor/reinforced/airless,/area/space)
 "fv" = (/obj/structure/sign/warning/high_voltage,/turf/simulated/wall/r_wall,/area/bridge)
-"fw" = (/obj/structure/table/glass,/obj/item/weapon/folder{pixel_x = -4},/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc/high{dir = 1; name = "north bump"; pixel_y = 24},/obj/effect/floor_decal/corner/red/three_quarters{dir = 8},/turf/simulated/floor/tiled/dark,/area/bridge)
+"fw" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc/high{dir = 1; name = "north bump"; pixel_y = 24},/obj/effect/floor_decal/corner/red/three_quarters{dir = 8},/obj/structure/closet/secure_closet/guncabinet/sidearm/small,/turf/simulated/floor/tiled/dark,/area/bridge)
 "fx" = (/obj/effect/floor_decal/corner/blue/three_quarters{dir = 1},/obj/machinery/firealarm{dir = 2; pixel_y = 24},/obj/structure/filingcabinet,/turf/simulated/floor/tiled/dark,/area/bridge)
 "fy" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/obj/machinery/door/airlock/sol{name = "Commanding Officer"; req_access = list(20); secured_wires = 1},/turf/simulated/floor/tiled/dark,/area/crew_quarters/heads/office/co)
 "fz" = (/obj/machinery/ai_status_display,/turf/simulated/wall/r_wall,/area/crew_quarters/heads/office/co)
@@ -1022,7 +1022,7 @@
 "tH" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/plating,/area/maintenance/bridge/aftport)
 "tI" = (/obj/structure/table/rack,/obj/random/solgov,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
 "tJ" = (/obj/structure/table/rack,/obj/random/solgov,/obj/random/solgov,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
-"tK" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/secure_closet/guncabinet/sidearm,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
+"tK" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/secure_closet/guncabinet/sidearm/small,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
 "tL" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/floor/plating,/area/aquila_hangar/start)
 "tM" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/antiviral,/obj/item/weapon/reagent_containers/syringe/antiviral,/obj/item/stack/medical/advanced/bruise_pack,/turf/simulated/floor/tiled/white,/area/aquila_hangar/start)
 "tN" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/aquila_hangar/start)
@@ -1454,4 +1454,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 xPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
