@@ -27,10 +27,12 @@
 	else
 		var/obj/machinery/atmospherics/pipe/node1 = target.node1
 		var/obj/machinery/atmospherics/pipe/node2 = target.node2
-		var/datum/pipeline/P1 = node1.parent
-		network_node1 = P1.network
-		var/datum/pipeline/P2 = node2.parent
-		network_node2 = P2.network
+		if(istype(node1))
+			var/datum/pipeline/P1 = node1.parent
+			network_node1 = P1.network
+		if(istype(node2))
+			var/datum/pipeline/P2 = node2.parent
+			network_node2 = P2.network
 
 /obj/machinery/clamp/attack_hand(var/mob/user)
 	if(!target || !user)
@@ -84,14 +86,18 @@
 	target.node2.build_network()
 	var/obj/machinery/atmospherics/pipe/node1 = target.node1
 	var/obj/machinery/atmospherics/pipe/node2 = target.node2
-	var/datum/pipeline/P1 = node1.parent
-	var/datum/pipeline/P2 = node2.parent
+	if(istype(node1))
+		var/datum/pipeline/P1 = node1.parent
+		P1.build_pipeline(node1)
+		qdel(P1)
+	if(istype(node2))
+		var/datum/pipeline/P2 = node2.parent
+		P2.build_pipeline(node2)
+		qdel(P2)
 //  P1.build_network()
 //  P2.build_network()
-	P1.build_pipeline(node1)
-	P2.build_pipeline(node2)
-	qdel(P1)
-	qdel(P2)
+
+
 
 
 	open = 0
