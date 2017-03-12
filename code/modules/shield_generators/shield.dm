@@ -66,7 +66,7 @@
 
 // Temporarily collapses this shield segment.
 /obj/effect/shield/proc/fail(var/duration)
-	if(!duration <= 0)
+	if(duration <= 0)
 		return
 
 	if(gen)
