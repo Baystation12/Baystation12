@@ -1,5 +1,0 @@
-author: Datraen
-delete-after: True
-changes: 
-  - tweak: "Raised the starting nutrition values."
-  - tweak: "Reset the rate of nutrition degradation to the default value."
