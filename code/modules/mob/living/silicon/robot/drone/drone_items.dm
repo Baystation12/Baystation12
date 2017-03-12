@@ -176,7 +176,8 @@
 		if(!resolved && wrapped && target)
 			wrapped.afterattack(target,user,1,params)
 
-		wrapped.force = force_holder
+		if(wrapped)
+			wrapped.force = force_holder
 
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
