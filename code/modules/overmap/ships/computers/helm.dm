@@ -174,3 +174,64 @@
 	add_fingerprint(usr)
 	updateUsrDialog()
 
+
+/obj/machinery/computer/navigation
+	name = "navigation console"
+	var/viewing = 0
+	var/obj/effect/overmap/ship/linked
+	icon_keyboard = "generic_key"
+	icon_screen = "helm"
+
+/obj/machinery/computer/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	if(!linked)
+		return
+
+	var/data[0]
+
+	data["viewing"] = viewing
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Helm Control", 380, 530)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
+
+/obj/machinery/computer/navigation/check_eye(var/mob/user as mob)
+	if (!viewing)
+		return -1
+	if (!get_dist(user, src) > 1 || user.blinded || !linked )
+		viewing = 0
+		return -1
+	return 0
+
+/obj/machinery/computer/navigation/attack_hand(var/mob/user as mob)
+	if(..())
+		user.unset_machine()
+		viewing = 0
+		return
+
+	if(!isAI(user))
+		user.set_machine(src)
+		if(linked)
+			user.reset_view(linked)
+
+	ui_interact(user)
+
+
+/obj/machinery/computer/navigation/Topic(href, href_list)
+	if(..())
+		return 1
+
+	if (!linked)
+		return
+
+	if (href_list["move"])
+		var/mob/user = usr
+		user.unset_machine()
+		viewing = 0
+		return 1
+
+	if (href_list["viewing"])
+		viewing = !viewing
+		return 1

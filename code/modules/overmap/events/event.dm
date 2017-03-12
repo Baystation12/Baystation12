@@ -135,7 +135,7 @@
 
 /datum/overmap_event/meteor
 	name = "asteroid field"
-	event = /datum/event/meteor_wave
+	event = /datum/event/meteor_wave/overmap
 	count = 6
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
 	difficulty = EVENT_LEVEL_MAJOR

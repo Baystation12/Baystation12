@@ -1,0 +1,43 @@
+################################
+# Example Changelog File
+#
+# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
+#
+# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
+# When it is, any changes listed below will disappear.
+#
+# Valid Prefixes: 
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   maptweak
+#   spellcheck (typo fixes)
+#   experiment
+#################################
+
+# Your name.  
+author: Cirra
+
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+# Any changes you've made.  See valid prefix list above.
+# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
+# SCREW THIS UP AND IT WON'T WORK.
+# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
+# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
+changes: 
+  - experiment: "The Torch now uses the Overmap system. This involves a 'system map' which can be flown around, with away sites scattered on the map."
+  - tweak: "The flow of fuel through the HE pipes in the SM chamber can be controlled via an adjustable pressure gate in the Fuel Bay. The higher the 'Target Pressure', the faster the thrusters will regain fuel faster after a burn, and the lower the SM's output."
+  - rscadd: "Added a fuel tank port of atmospherics, and all the necessary piping for overmap."
+  - rscadd: "Converted the four thruster areas on the vessel into engine nacelles. It is possible to switch between direct injection and combustion, via buttons located in the engine monitoring room. Each mode has its own advantages and disadvantages."
+  - rscadd: "Modified the SolGov Pilot job, so they can properly pilot the Torch."
+  - rscadd: "Added randomly placed events to the overmap."
+  - maptweak: "The Calypso, Aquila and Guppy are now overmap-capable, and can travel to away sites on the same overmap tile."
+  - maptweak: "Added Helm and Engine control consoles to the bridge, and Engine controls to engineering monitoring and the fuel bay."

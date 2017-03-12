@@ -491,6 +491,7 @@
 #include "code\game\machinery\spaceheater.dm"
 #include "code\game\machinery\status_display.dm"
 #include "code\game\machinery\status_display_ai.dm"
+#include "code\game\machinery\status_light.dm"
 #include "code\game\machinery\suit_storage_unit.dm"
 #include "code\game\machinery\supply_display.dm"
 #include "code\game\machinery\supplybeacon.dm"

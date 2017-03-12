@@ -364,6 +364,12 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/visible/orange
+	name = "Fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/pipe/simple/hidden
 	icon_state = "intact"
@@ -404,6 +410,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/hidden/orange
+	name = "Fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
@@ -613,6 +625,10 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/visible/orange
+	name = "Fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 
 /obj/machinery/atmospherics/pipe/manifold/hidden
 	icon_state = "map"
@@ -652,6 +668,10 @@
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold/hidden/orange
+	name = "Fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
 
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/atmos/manifold.dmi'
@@ -864,6 +884,10 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold4w/visible/orange
+	name = "4-way fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/manifold4w/hidden
 	icon_state = "map_4way"
 	level = 1
@@ -902,6 +926,11 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/orange
+	name = "4-way fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"

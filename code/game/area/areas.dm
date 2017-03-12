@@ -6,6 +6,7 @@
 /area
 	var/global/global_uid = 0
 	var/uid
+	var/shuttle_locked = null
 
 /area/New()
 	icon_state = ""
