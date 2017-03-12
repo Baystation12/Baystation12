@@ -257,6 +257,8 @@
 	if(!target || !istype(target))
 		return
 
+	// Prevent a divide by zero.
+	multiplier = max(multipler, 1)
 	amount = max(0, min(amount, total_volume, target.get_free_space() / multiplier))
 
 	if(!amount)
