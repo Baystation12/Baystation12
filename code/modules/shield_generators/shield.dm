@@ -66,10 +66,11 @@
 
 // Temporarily collapses this shield segment.
 /obj/effect/shield/proc/fail(var/duration)
-	if(duration <= 0)
+	if(!duration <= 0)
 		return
 
-	gen.damaged_segments |= src
+	if(gen)
+		gen.damaged_segments |= src
 	disabled_for += duration
 	set_density(0)
 	invisibility = INVISIBILITY_MAXIMUM
@@ -143,6 +144,7 @@
 
 	new/obj/effect/shield_impact(get_turf(src))
 
+	var/list/field_segments = gen.field_segments
 	switch(gen.take_damage(damage, damtype))
 		if(SHIELD_ABSORBED)
 			return
@@ -157,7 +159,7 @@
 			return
 		if(SHIELD_BREACHED_FAILURE)
 			fail_adjacent_segments(rand(8, 16), hitby)
-			for(var/obj/effect/shield/S in gen.field_segments)
+			for(var/obj/effect/shield/S in field_segments)
 				S.fail(1)
 			return
 
