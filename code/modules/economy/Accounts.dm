@@ -42,11 +42,16 @@
 /datum/transaction/proc/sanitize_amount() //some place still uses (number) for negative amounts and I can't find it
 	if(!istext(amount))
 		return
-	. = text2num(amount)
-	if(!.) //we got (digits) thing going on
+
+	// Check if the text is numeric.
+	var/text = amount
+	amount = text2num(text)
+
+	// Otherwise, the (digits) thing is going on.
+	if(!amount)
 		var/regex/R = regex("\\d+")
-		R.Find(amount)
-		. = -text2num(R.match)
+		R.Find(text)
+		amount = -text2num(R.match)
 
 /proc/create_account(var/new_owner_name = "Default user", var/starting_funds = 0, var/obj/machinery/computer/account_database/source_db)
 
