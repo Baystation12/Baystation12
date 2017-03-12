@@ -1,6 +1,6 @@
 /obj/machinery/cooker/candy
 	name = "candy machine"
-	desc = "A machine used to produce various confectioneries."
+	desc = "Get yer candied cheese wheels here!"
 	icon_state = "mixer_off"
 	off_icon = "mixer_off"
 	on_icon = "mixer_on"

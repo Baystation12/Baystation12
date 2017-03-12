@@ -1,6 +1,6 @@
 /obj/machinery/cooker/fryer
 	name = "deep fryer"
-	desc = "A two-chamber vat used to heat oil to an appropriate temperature in order to fry food."
+	desc = "Deep fried <i>everything</i>."
 	icon_state = "fryer_off"
 	can_cook_mobs = 1
 	cook_type = "deep fried"

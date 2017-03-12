@@ -1,6 +1,6 @@
 /obj/machinery/cooker/cereal
 	name = "cereal maker"
-	desc = "A device which grinds and blends ingredients with a filler to produce a hard, crunchy and absorbant foodstuff known classically as cereal."
+	desc = "Now with Dann O's available!"
 	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "cereal_off"
 	cook_type = "cerealized"

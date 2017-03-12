@@ -805,7 +805,7 @@
 
 /obj/machinery/vending/wallmed2
 	name = "NanoMed Mini"
-	desc = "A wall-mounted version of the NanoMed, containing only vital first aid equipment.."
+	desc = "A wall-mounted version of the NanoMed, containing only vital first aid equipment."
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?"
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
