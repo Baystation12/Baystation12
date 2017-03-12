@@ -1,5 +1,0 @@
-author: Datraen
-delete-after: True
-changes: 
-  - rscdel: "Removed the hunger section of movement code."
-  - tweak: "Doubled the rate of nutrition degradation."
