@@ -26,7 +26,7 @@
 		mode = WIRING
 		update_icon()
 	else if(mode == WIRING)
-		if(selected_io.link_io(io, user))
+		if(selected_io && selected_io.link_io(io, user))
 			to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
 			mode = WIRE
 			update_icon()

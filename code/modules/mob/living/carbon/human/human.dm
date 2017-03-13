@@ -703,7 +703,7 @@
 /mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
-	if(!H || !H.can_intake_reagents)
+	if(!istype(H) || !H.can_intake_reagents)
 		return 0
 	return 1
 

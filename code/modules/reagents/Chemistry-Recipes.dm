@@ -1166,6 +1166,9 @@
 /datum/chemical_reaction/slime/fire/on_reaction(var/datum/reagents/holder)
 	..()
 	sleep(50)
+	if(!(holder.my_atom && holder.my_atom.loc))
+		return
+
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0, location))
 		target_tile.assume_gas("phoron", 25, 1400)

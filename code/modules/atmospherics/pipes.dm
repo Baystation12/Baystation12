@@ -198,6 +198,10 @@
 		. = PROCESS_KILL
 
 /obj/machinery/atmospherics/pipe/simple/check_pressure(pressure)
+	// Don't ask me, it happened somehow.
+	if (!istype(loc, /turf))
+		return 1
+
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	var/pressure_difference = pressure - environment.return_pressure()

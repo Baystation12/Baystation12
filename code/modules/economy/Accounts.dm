@@ -42,11 +42,16 @@
 /datum/transaction/proc/sanitize_amount() //some place still uses (number) for negative amounts and I can't find it
 	if(!istext(amount))
 		return
-	. = text2num(amount)
-	if(!.) //we got (digits) thing going on
+
+	// Check if the text is numeric.
+	var/text = amount
+	amount = text2num(text)
+
+	// Otherwise, the (digits) thing is going on.
+	if(!amount)
 		var/regex/R = regex("\\d+")
-		R.Find(amount)
-		. = -text2num(R.match)
+		R.Find(text)
+		amount = -text2num(R.match)
 
 /proc/create_account(var/new_owner_name = "Default user", var/starting_funds = 0, var/obj/machinery/computer/account_database/source_db)
 
@@ -119,7 +124,7 @@
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account
 /proc/attempt_account_access(var/attempt_account_number, var/attempt_pin_number, var/security_level_passed = 0)
 	var/datum/money_account/D = get_account(attempt_account_number)
-	if(D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
+	if(D && D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
 		return D
 
 /proc/get_account(var/account_number)

@@ -110,7 +110,10 @@
 
 	var/mob/user = usr
 	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
-	var/obj/item/weapon/card/id/id_card = computer.card_slot.stored_card
+	var/obj/item/weapon/card/id/id_card
+	if (computer.card_slot)
+		id_card = computer.card_slot.stored_card
+
 	var/datum/nano_module/program/card_mod/module = NM
 	switch(href_list["action"])
 		if("switchm")

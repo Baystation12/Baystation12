@@ -150,7 +150,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	return
 
 /obj/machinery/hologram/holopad/proc/activate_holo(mob/living/silicon/ai/user)
-	if(!(stat & NOPOWER) && user.eyeobj.loc == src.loc)//If the projector has power and client eye is on it
+	if(!(stat & NOPOWER) && user.eyeobj && user.eyeobj.loc == src.loc)//If the projector has power and client eye is on it
 		if (user.holo)
 			to_chat(user, "<span class='danger'>ERROR:</span> Image feed in progress.")
 			return
