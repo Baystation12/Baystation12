@@ -33,5 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-- rscadd "Crisis borgs can now pick up pills."
+- rscadd: "Crisis borgs can now pick up pills."
 - rscadd: "Science borgs can now pick up tanks, tank transfer valves, and various other assembly items."
