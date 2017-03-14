@@ -9,8 +9,14 @@
 	requires_two_hands = 2
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	cell_type = /obj/item/weapon/cell/device/super
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
+
+	firemodes = list(
+		list(mode_name="high power", projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 200),
+		list(mode_name="low power", projectile_type=/obj/item/projectile/beam/smalllaser, charge_cost = 125),
+		)
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
@@ -21,6 +27,11 @@
 	name = "practice laser carbine"
 	desc = "A modified version of the HI G40E, this one fires less concentrated energy bolts designed for target practice."
 	projectile_type = /obj/item/projectile/beam/practice
+
+	firemodes = list(
+		list(mode_name="high power", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 200),
+		list(mode_name="low power", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 125),
+		)
 
 obj/item/weapon/gun/energy/retro
 	name = "retro laser"
@@ -42,9 +53,12 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
-	max_shots = 5 //to compensate a bit for self-recharging
 	requires_two_hands = 1 //a little bulky
 	self_recharge = 1
+	fire_delay = 10		//Old pistol
+	charge_cost = 480	//to compensate a bit for self-recharging
+	recharge_time = 3	//Recharges a bit more quickly...
+	charge_delay = 100	//... but it takes a while to get started
 
 /obj/item/weapon/gun/energy/lasercannon
 	name = "laser cannon"
@@ -57,9 +71,14 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 40
-	max_shots = 6
+	battery_lock = 1
 	accuracy = 2
 	fire_delay = 20
+
+	firemodes = list(
+		list(mode_name="high power", projectile_type=/obj/item/projectile/beam/heavylaser, charge_cost = 400),
+		list(mode_name="low power", projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 200),
+		)
 
 /obj/item/weapon/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -79,8 +98,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	requires_two_hands = 2
 	w_class = ITEM_SIZE_LARGE
-	charge_cost = 15
-	max_shots = 10
+	charge_cost = 20
 
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
@@ -101,8 +119,8 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/sniper
 	requires_two_hands = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
-	charge_cost = 40
-	max_shots = 4
+	charge_cost = 50
+	battery_lock = 1
 	fire_delay = 35
 	force = 10
 	w_class = ITEM_SIZE_HUGE

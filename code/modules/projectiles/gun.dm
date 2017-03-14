@@ -79,6 +79,8 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 
+	var/last_shot = 0
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -209,6 +211,8 @@
 		if(!(target && target.loc))
 			target = targloc
 			pointblank = 0
+
+		last_shot = world.time
 
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)

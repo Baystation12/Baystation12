@@ -140,14 +140,39 @@
 
 /obj/item/weapon/cell/device/standard
 	name = "standard device power cell"
-	maxcharge = 25
+	maxcharge = 250
 
 /obj/item/weapon/cell/device/high
 	name = "advanced device power cell"
-	desc = "A small power cell designed to power more energy-demanding devices."
+	desc = "A small power cell designed to power more energy-demanding devices. The number '100' is stenciled on the side."
 	icon_state = "hdevice"
-	maxcharge = 100
+	maxcharge = 1000
 	matter = list("metal" = 70, "glass" = 6)
+
+/obj/item/weapon/cell/device/super
+	name = "enhanced device power cell"
+	desc = "A small power cell designed to power more energy-demanding devices. The number '200' is stenciled on the side."
+	icon_state = "sdevice"
+	maxcharge = 2000
+
+/obj/item/weapon/cell/device/hyper
+	name = "superior device power cell"
+	desc = "A small power cell designed to power more energy-demanding devices. The number '300' is stenciled on the side."
+	icon_state = "hpdevice"
+	maxcharge = 3000
+
+/obj/item/weapon/cell/device/infinite
+	name = "experimental device power cell"
+	desc = "This special experimental device power cell has both very large capacity, and ability to recharge itself by draining power from contained bluespace pocket."
+	icon_state = "idevice"
+	origin_tech =  null
+	maxcharge = 3000
+
+/obj/item/weapon/cell/device/infinite/check_charge()
+	return 1
+
+/obj/item/weapon/cell/device/infinite/use()
+	return 1
 
 /obj/item/weapon/cell/crap
 	name = "old power cell"
