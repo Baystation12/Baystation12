@@ -158,6 +158,7 @@
 #include "code\datums\appearances\automatic\_base.dm"
 #include "code\datums\appearances\automatic\cardborg.dm"
 #include "code\datums\communication\_defines.dm"
+#include "code\datums\communication\aooc.dm"
 #include "code\datums\communication\channel.dm"
 #include "code\datums\communication\dsay.dm"
 #include "code\datums\communication\looc.dm"
