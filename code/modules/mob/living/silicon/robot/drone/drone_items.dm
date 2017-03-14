@@ -58,9 +58,8 @@
 
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/weapon/reagent_containers/pill, // Not having this was kinda silly.
+		/obj/item/weapon/reagent_containers/pill,
 		/obj/item/weapon/storage/pill_bottle
-
 		)
 
 /obj/item/weapon/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
@@ -83,7 +82,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
 		/obj/item/mecha_parts,
 		/obj/item/weapon/computer_hardware,
-		/obj/item/device/transfer_valve, //~~Toxinsssss~~
+		/obj/item/device/transfer_valve,
 		/obj/item/device/assembly/signaler,
 		/obj/item/device/assembly/timer,
 		/obj/item/device/assembly/igniter,
