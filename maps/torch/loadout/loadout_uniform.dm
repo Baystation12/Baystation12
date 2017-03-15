@@ -65,7 +65,7 @@
 /datum/gear/uniform/scrubs
 	display_name = "medical scrubs"
 	path = /obj/item/clothing/under/rank/medical/black
-	allowed_roles = MEDICAL_ROLES
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/uniform/scrubs/New()
 	..()
@@ -149,8 +149,8 @@
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under/mbill
 	allowed_roles = list("Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"Passenger", "Maintenance Assistant", "Roboticist", "Medical Assistant",
-						"Virologist", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+						"Passenger", "Maintenance Assistant", "Roboticist", "Medical Contractor",
+						"Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
 
 /datum/gear/uniform/corporate/New()
 	..()

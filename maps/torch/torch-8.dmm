@@ -165,7 +165,7 @@
 "di" = (/obj/structure/cable/blue{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/blue{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/autolathe,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "dj" = (/obj/structure/window/basic,/obj/machinery/portable_atmospherics/canister/air/airlock,/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (EAST)"; icon_state = "map_connector"; dir = 4},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "dk" = (/obj/machinery/atmospherics/pipe/simple/hidden/blue{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
-"dl" = (/obj/structure/cable/blue,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/power/apc/high{dir = 1; name = "south bump"; pixel_y = -24},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
+"dl" = (/obj/structure/cable/blue,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/power/apc/high/inactive{dir = 2; name = "south bump"; pixel_y = -24},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "dm" = (/turf/space,/area/calypso_hangar/salvage)
 "dn" = (/obj/machinery/pipedispenser,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "do" = (/obj/machinery/pipedispenser/disposal,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
@@ -194,7 +194,7 @@
 "dL" = (/obj/structure/table/rack,/obj/random/maintenance,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
 "dM" = (/obj/random/loot,/turf/simulated/floor/airless,/area/constructionsite/ai)
 "dN" = (/obj/machinery/drone_fabricator/derelict,/turf/simulated/floor/airless,/area/constructionsite/ai)
-"dO" = (/obj/structure/cable/blue{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc/high{dir = 1; name = "north bump"; pixel_y = 24},/turf/simulated/floor/airless,/area/constructionsite/ai)
+"dO" = (/obj/structure/cable/blue{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc/high/inactive{dir = 1; name = "north bump"; pixel_y = 24},/turf/simulated/floor/airless,/area/constructionsite/ai)
 "dP" = (/obj/machinery/computer/drone_control,/turf/simulated/floor/airless,/area/constructionsite/ai)
 "dQ" = (/obj/structure/lattice,/turf/space,/area/constructionsite/maintenance)
 "dR" = (/obj/machinery/door/airlock/highsecurity{name = "Messaging Server"; req_access = list(30)},/turf/simulated/floor/airless,/area/constructionsite/hallway/fore)
@@ -515,3 +515,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

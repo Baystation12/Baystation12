@@ -1,6 +1,3 @@
-/obj/item/device/soulstone/cultify()
-	return
-
 /obj/item/device/soulstone
 	name = "soul stone shard"
 	icon = 'icons/obj/wizard.dmi'
@@ -98,9 +95,6 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
 	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
-
-/obj/structure/constructshell/cultify()
-	return
 
 /obj/structure/constructshell/cult
 	icon_state = "construct-cult"

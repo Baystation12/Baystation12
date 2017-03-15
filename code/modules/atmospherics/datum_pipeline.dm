@@ -9,7 +9,11 @@ datum/pipeline
 
 	var/alert_pressure = 0
 
+	New()
+		processing_objects += src
+
 	Destroy()
+		processing_objects -= src
 		if(network)
 			qdel(network)
 
@@ -26,6 +30,7 @@ datum/pipeline
 		if(pressure > alert_pressure)
 			for(var/obj/machinery/atmospherics/pipe/member in members)
 				if(!member.check_pressure(pressure))
+					members.Remove(member)
 					break //Only delete 1 pipe per process
 
 	proc/temporarily_store_air()
@@ -62,6 +67,8 @@ datum/pipeline
 
 				if(result.len>0)
 					for(var/obj/machinery/atmospherics/pipe/item in result)
+						if(item.in_stasis)
+							continue
 						if(!members.Find(item))
 							members += item
 							possible_expansions += item
@@ -96,6 +103,7 @@ datum/pipeline
 			for(var/obj/machinery/atmospherics/result in edge.pipeline_expansion())
 				if(!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
 					result.network_expand(new_network, edge)
+
 
 		return 1
 
@@ -218,7 +226,7 @@ datum/pipeline
 		// We only get heat from the star on the exposed surface area.
 		// If the HE pipes gain more energy from AVERAGE_SOLAR_RADIATION than they can radiate, then they have a net heat increase.
 		. = AVERAGE_SOLAR_RADIATION * (exposed_surface_ratio * surface) * thermal_conductivity
-		
+
 		// Previously, the temperature would enter equilibrium at 26C or 294K.
 		// Only would happen if both sides (all 2 square meters of surface area) were exposed to sunlight.  We now assume it aligned edge on.
 		// It currently should stabilise at 129.6K or -143.6C

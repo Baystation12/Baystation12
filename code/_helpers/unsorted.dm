@@ -413,7 +413,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		creatures[name] = M
 
 	return creatures
-	
+
 /proc/get_follow_targets()
 	return follow_repository.get_follow_targets()
 
@@ -990,22 +990,27 @@ proc/is_hot(obj/item/W as obj)
 /obj/item/clothing/mask/smokable/cigarette/can_puncture()
 	return src.lit
 
-/proc/is_surgery_tool(obj/item/W as obj)
-	return (	\
-	istype(W, /obj/item/weapon/scalpel)			||	\
-	istype(W, /obj/item/weapon/hemostat)		||	\
-	istype(W, /obj/item/weapon/retractor)		||	\
-	istype(W, /obj/item/weapon/cautery)			||	\
-	istype(W, /obj/item/weapon/bonegel)			||	\
-	istype(W, /obj/item/weapon/bonesetter)
-	)
-
 //check if mob is lying down on something we can operate him on.
-/proc/can_operate(mob/living/carbon/M)
-	return (M.lying && \
-	locate(/obj/machinery/optable, M.loc) || \
-	(locate(/obj/structure/bed/roller, M.loc) && prob(75)) || \
-	(locate(/obj/structure/table/, M.loc) && prob(66)))
+/proc/can_operate(mob/living/carbon/M, mob/living/carbon/user)
+	var/turf/T = get_turf(M)
+	if(locate(/obj/machinery/optable, T))
+		. = TRUE
+	if(locate(/obj/structure/bed, T))
+		. = TRUE
+	if(locate(/obj/structure/table, T))
+		. = TRUE
+
+	if(M == user)
+		var/hitzone = check_zone(user.zone_sel.selecting)
+		var/list/badzones = list(BP_HEAD)
+		if(user.hand)
+			badzones += BP_L_ARM
+			badzones += BP_L_HAND
+		else
+			badzones += BP_R_ARM
+			badzones += BP_R_HAND
+		if(hitzone in badzones)
+			return FALSE
 
 /proc/reverse_direction(var/dir)
 	switch(dir)

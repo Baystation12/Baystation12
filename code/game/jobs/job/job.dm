@@ -29,6 +29,8 @@
 	var/list/allowed_branches			  // For Torch, also expandable for other purposes
 	var/list/allowed_ranks				  // Ditto
 
+	var/announced						  //If their arrival is announced on radio
+
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
@@ -39,8 +41,8 @@
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
 	if(allowed_branches && branch)
-		. = allowed_branches[branch.type]
-	. = . ? . : outfit_type
+		. = allowed_branches[branch.type] || .
+	. = . || outfit_type
 	. = outfit_by_type(.)
 
 /datum/job/proc/setup_account(var/mob/living/carbon/human/H)
@@ -68,7 +70,7 @@
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-		remembered_info += "<b>Your account funds are:</b> þ[M.money]<br>"
+		remembered_info += "<b>Your account funds are:</b> T[M.money]<br>"
 
 		if(M.transaction_log.len)
 			var/datum/transaction/T = M.transaction_log[1]

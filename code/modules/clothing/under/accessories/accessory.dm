@@ -11,7 +11,7 @@
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
-	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi')
+	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi', slot_wear_suit_str = 'icons/mob/ties.dmi')
 	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
@@ -186,6 +186,7 @@
 	name = "medal"
 	desc = "A simple medal."
 	icon_state = "bronze"
+	slot = "medal"
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"
@@ -291,6 +292,7 @@
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
+	slot = "medal"
 
 /obj/item/clothing/accessory/ribbon/marksman
 	name = "marksmanship ribbon"
@@ -357,6 +359,11 @@
 	name = "officer's qualification pin"
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
+
+/obj/item/clothing/accessory/speciality/pilot
+	name = "pilot's qualification pin"
+	desc = "An iron pin denoting the qualification to fly in the SGDF."
+	icon_state = "pin_pilot"
 
 //Ranks
 /obj/item/clothing/accessory/rank
@@ -509,20 +516,20 @@
 	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e8
-	name = "ranks (E-8 first sergeant)"
-	desc = "Insignia denoting the rank of First Sergeant."
-
-/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
 	name = "ranks (E-8 master sergeant)"
 	desc = "Insignia denoting the rank of Master Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9
-	name = "ranks (E-9 sergeant major)"
-	desc = "Insignia denoting the rank of Sergeant Major."
+/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
+	name = "ranks (E-8 first sergeant)"
+	desc = "Insignia denoting the rank of First Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+/obj/item/clothing/accessory/rank/marine/enlisted/e9
 	name = "ranks (E-9 master gunnery sergeant)"
 	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
+
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+	name = "ranks (E-9 sergeant major)"
+	desc = "Insignia denoting the rank of Sergeant Major."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e9_alt2
 	name = "ranks (E-9 sergeant major of the Marine Corps)"

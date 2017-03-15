@@ -52,7 +52,7 @@ var/global/ntnet_card_uid = 1
 	if(holder2 && (holder2.network_card == src))
 		holder2.network_card = null
 	holder2 = null
-	..()
+	return ..()
 
 // Returns a string identifier of this network card
 /obj/item/weapon/computer_hardware/network_card/proc/get_network_tag()
@@ -77,15 +77,17 @@ var/global/ntnet_card_uid = 1
 
 	if(holder2)
 		var/turf/T = get_turf(holder2)
-		if((T && istype(T)) && T.z in using_map.station_levels)
+		if(!istype(T)) //no reception in nullspace
+			return 0
+		if(T.z in using_map.station_levels)
 			// Computer is on station. Low/High signal depending on what type of network card you have
 			if(long_range)
 				return 2
 			else
 				return 1
-
-	if(long_range) // Computer is not on station, but it has upgraded network card. Low signal.
-		return 1
+		if(T.z in using_map.contact_levels) //not on station, but close enough for radio signal to travel
+			if(long_range) // Computer is not on station, but it has upgraded network card. Low signal.
+				return 1
 
 	return 0 // Computer is not on station and does not have upgraded network card. No signal.
 

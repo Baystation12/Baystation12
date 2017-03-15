@@ -57,7 +57,8 @@ proc/restore_spells(var/mob/H)
 
 	if(mind)
 		mind.learned_spells -= spell_to_remove
-	ability_master.remove_ability(ability_master.get_ability_by_spell(spell_to_remove))
+	if (ability_master)
+		ability_master.remove_ability(ability_master.get_ability_by_spell(spell_to_remove))
 	return 1
 
 /mob/proc/silence_spells(var/amount = 0)

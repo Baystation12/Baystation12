@@ -32,6 +32,7 @@
 #define HOSTILE_STANCE_ATTACK    3
 #define HOSTILE_STANCE_ATTACKING 4
 #define HOSTILE_STANCE_TIRED     5
+#define HOSTILE_STANCE_INSIDE    6
 
 #define LEFT  1
 #define RIGHT 2

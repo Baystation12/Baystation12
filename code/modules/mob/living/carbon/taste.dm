@@ -56,6 +56,9 @@ calculate text size per text.
 				intensity_desc = ""
 			else if(percent > minimum_percent * 3)
 				intensity_desc = "the strong flavor of"
-			out += "[intensity_desc] [taste_desc]"
+			if(intensity_desc == "")
+				out += "[taste_desc]"
+			else
+				out += "[intensity_desc] [taste_desc]"
 
 	return english_list(out, "something indescribable")

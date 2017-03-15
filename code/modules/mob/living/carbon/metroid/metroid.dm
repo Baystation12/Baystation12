@@ -31,7 +31,6 @@
 	var/mob/living/Target = null // AI variable - tells the slime to hunt this down
 	var/mob/living/Leader = null // AI variable - tells the slime to follow this person
 
-	var/disoriented = 0 // Cooldown until the slime can act again
 	var/attacked = 0 // Determines if it's been attacked recently. Can be any number, is a cooloff-ish variable
 	var/rabid = 0 // If set to 1, the slime will attack and eat anything it comes in contact with
 	var/holding_still = 0 // AI variable, cooloff-ish for how long it's going to stay in one place
@@ -203,7 +202,7 @@
 				visible_message("<span class='warning'>\The [M] manages to wrestle \the [src] off!</span>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
-				disoriented = max(disoriented, 2)
+				confused = max(confused, 2)
 				Feedstop()
 				UpdateFace()
 				step_away(src, M)
@@ -218,7 +217,7 @@
 				visible_message("<span class='warning'>\The [M] manages to wrestle \the [src] off \the [Victim]!</span>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
-				disoriented = max(disoriented, 2)
+				confused = max(confused, 2)
 				Feedstop()
 				UpdateFace()
 				step_away(src, M)
@@ -233,7 +232,7 @@
 			var/success = prob(40)
 			visible_message("<span class='warning'>\The [M] pushes \the [src]![success ? " \The [src] looks momentarily disoriented!" : ""]</span>")
 			if(success)
-				disoriented = max(disoriented, 2)
+				confused = max(confused, 2)
 				UpdateFace()
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			else

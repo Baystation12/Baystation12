@@ -16,14 +16,19 @@
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
 
-/obj/item/weapon/gun/energy/ionrifle/update_icon()
-	..()
-	if(power_supply.charge < charge_cost)
-		item_state_slots[slot_l_hand_str] = "ionrifle-empty"
-		item_state_slots[slot_r_hand_str] = "ionrifle-empty"
-	else
-		item_state_slots[slot_l_hand_str] = initial(item_state)
-		item_state_slots[slot_r_hand_str] = initial(item_state)
+/obj/item/weapon/gun/energy/ionrifle/small
+	name = "ion pistol"
+	desc = "The NT Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."
+	icon_state = "ionpistol"
+	item_state = "ionpistol"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
+	w_class = ITEM_SIZE_NORMAL
+	force = 5
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	requires_two_hands = 0
+	charge_cost = 20
+	max_shots = 8
+	projectile_type = /obj/item/projectile/ion/small
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"
@@ -45,10 +50,12 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
 	self_recharge = 1
+	var/decl/plantgene/gene = null
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
+		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
@@ -58,6 +65,29 @@
 		Fire(target,user)
 		return
 	..()
+
+/obj/item/weapon/gun/energy/floragun/verb/select_gene()
+	set name = "Select Gene"
+	set category = "Object"
+	set src in view(1)
+
+	var/genemask = input("Choose a gene to modify.") as null|anything in plant_controller.plant_gene_datums
+
+	if(!genemask)
+		return
+
+	gene = plant_controller.plant_gene_datums[genemask]
+
+	to_chat(usr, "<span class='info'>You set the [src]'s targeted genetic area to [genemask].</span>")
+
+	return
+
+
+/obj/item/weapon/gun/energy/floragun/consume_next_projectile()
+	. = ..()
+	var/obj/item/projectile/energy/floramut/gene/G = .
+	if(istype(G))
+		G.gene = gene
 
 /obj/item/weapon/gun/energy/meteorgun
 	name = "meteor gun"

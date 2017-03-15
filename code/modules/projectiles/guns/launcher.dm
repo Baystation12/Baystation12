@@ -25,4 +25,5 @@
 	update_release_force(projectile)
 	projectile.loc = get_turf(user)
 	projectile.throw_at(target, throw_distance, release_force, user)
+	play_fire_sound(user,projectile)
 	return 1

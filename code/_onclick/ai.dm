@@ -10,10 +10,6 @@
 	Note that AI have no need for the adjacency proc, and so this proc is a lot cleaner.
 */
 /mob/living/silicon/ai/DblClickOn(var/atom/A, params)
-	if(client.buildmode) // comes after object.Click to allow buildmode gui objects to be clicked
-		build_click(src, client.buildmode, params, A)
-		return
-
 	if(control_disabled || stat) return
 
 	if(ismob(A))
@@ -26,10 +22,6 @@
 	if(world.time <= next_click)
 		return
 	next_click = world.time + 1
-
-	if(client.buildmode) // comes after object.Click to allow buildmode gui objects to be clicked
-		build_click(src, client.buildmode, params, A)
-		return
 
 	if(stat)
 		return
@@ -168,6 +160,9 @@
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return 1
+
+/obj/machinery/teleport/station/AIAltClick()
+	testfire()
 
 /atom/proc/AIMiddleClick(var/mob/living/silicon/user)
 	return 0

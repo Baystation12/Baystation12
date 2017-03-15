@@ -20,7 +20,7 @@ datum/controller/vote
 	New()
 		if(vote != src)
 			if(istype(vote))
-				del(vote)
+				qdel(vote)
 			vote = src
 
 	proc/process()	//called by master_controller
@@ -209,7 +209,7 @@ datum/controller/vote
 					tertiary_mode = .[3]
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
-						init_shift_change(null, 1)
+						init_autotransfer()
 					else if(.[1] == "Add Antagonist")
 						spawn(10)
 							autoaddantag()
@@ -225,12 +225,12 @@ datum/controller/vote
 								.[i] = pick(choices)
 								to_world("The random antag in [i]\th place is [.[i]].")
 
-						var/antag_type = antag_names_to_ids[.[1]]
+						var/antag_type = antag_names_to_ids()[.[1]]
 						if(ticker.current_state < GAME_STATE_SETTING_UP)
 							additional_antag_types |= antag_type
 						else
 							spawn(0) // break off so we don't hang the vote process
-								var/list/antag_choices = list(all_antag_types[antag_type], all_antag_types[antag_names_to_ids[.[2]]], all_antag_types[antag_names_to_ids[.[3]]])
+								var/list/antag_choices = list(all_antag_types()[antag_type], all_antag_types()[antag_names_to_ids()[.[2]]], all_antag_types()[antag_names_to_ids()[.[3]]])
 								if(ticker.attempt_late_antag_spawn(antag_choices))
 									antag_add_finished = 1
 									if(auto_add_antag)
@@ -341,6 +341,7 @@ datum/controller/vote
 
 					if(!config.allow_extra_antags)
 						return 0
+					var/list/all_antag_types = all_antag_types()
 					for(var/antag_type in all_antag_types)
 						var/datum/antagonist/antag = all_antag_types[antag_type]
 						if(!(antag.id in additional_antag_types) && antag.is_votable())
@@ -537,7 +538,7 @@ datum/controller/vote
 // Helper proc for determining whether addantag vote can be called.
 datum/controller/vote/proc/is_addantag_allowed(var/automatic)
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
-	if((ticker.current_state <= 2) || !ticker.mode)
+	if(!ticker || (ticker.current_state <= 2) || !ticker.mode)
 		return 0
 	if(automatic)
 		return (ticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_add_finished

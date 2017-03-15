@@ -62,6 +62,8 @@ Buildable meters
 			src.pipe_type = PIPE_MANIFOLD
 		else if(istype(make_from, /obj/machinery/atmospherics/unary/vent_pump))
 			src.pipe_type = PIPE_UVENT
+		else if(istype(make_from, /obj/machinery/atmospherics/valve/shutoff))
+			src.pipe_type = PIPE_SVALVE
 		else if(istype(make_from, /obj/machinery/atmospherics/valve))
 			src.pipe_type = PIPE_MVALVE
 		else if(istype(make_from, /obj/machinery/atmospherics/binary/pump/high_power))
@@ -203,6 +205,7 @@ Buildable meters
 		"supply pipe cap", \
 		"scrubbers pipe cap", \
 		"t-valve m", \
+		"svalve", \
 	)
 	name = nlist[pipe_type+1] + " fitting"
 	var/list/islist = list( \
@@ -215,6 +218,7 @@ Buildable meters
 		"junction", \
 		"uvent", \
 		"mvalve", \
+
 		"pump", \
 		"scrubber", \
 		"insulated", \
@@ -253,6 +257,7 @@ Buildable meters
 		"cap", \
 		"cap", \
 		"mtvalvem", \
+		"svalve", \
 	)
 	icon_state = islist[pipe_type + 1]
 
@@ -276,7 +281,7 @@ Buildable meters
 
 	src.set_dir(turn(src.dir, -90))
 
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE))
+	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_SVALVE))
 		if(dir==2)
 			set_dir(1)
 		else if(dir==8)
@@ -291,7 +296,7 @@ Buildable meters
 	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_HE_BENT)) \
 		&& (src.dir in cardinal))
 		src.set_dir(src.dir|turn(src.dir, 90))
-	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE))
+	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_SVALVE))
 		if(dir==2)
 			set_dir(1)
 		else if(dir==8)
@@ -315,6 +320,7 @@ Buildable meters
 			PIPE_VOLUME_PUMP ,\
 			PIPE_PASSIVE_GATE ,\
 			PIPE_MVALVE, \
+			PIPE_SVALVE, \
 			PIPE_SUPPLY_STRAIGHT, \
 			PIPE_SCRUBBERS_STRAIGHT, \
 			PIPE_UNIVERSAL, \
@@ -384,7 +390,7 @@ Buildable meters
 		return ..()
 	if (!isturf(src.loc))
 		return 1
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_MVALVE))
+	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_SVALVE))
 		if(dir==2)
 			set_dir(1)
 		else if(dir==8)
@@ -711,6 +717,24 @@ Buildable meters
 //				log_error("[V.node2.name] is connected to valve, forcing it to update its nodes.")
 				V.node2.initialize()
 				V.node2.build_network()
+
+		if(PIPE_SVALVE)		//shutoff valve
+			var/obj/machinery/atmospherics/valve/shutoff/S = new( src.loc)
+			S.set_dir(dir)
+			S.initialize_directions = pipe_dir
+			if (pipename)
+				S.name = pipename
+			var/turf/T = S.loc
+			S.level = !T.is_plating() ? 2 : 1
+			S.initialize()
+			S.build_network()
+			if (S.node1)
+				S.node1.initialize()
+				S.node1.build_network()
+			if (S.node2)
+				S.node2.initialize()
+				S.node2.build_network()
+
 
 		if(PIPE_PUMP)		//gas pump
 			var/obj/machinery/atmospherics/binary/pump/P = new(src.loc)
@@ -1134,4 +1158,5 @@ Buildable meters
 #undef PIPE_SUPPLY_MANIFOLD
 #undef PIPE_SCRUBBERS_MANIFOLD
 #undef PIPE_UNIVERSAL
+#undef PIPE_SVALVE
 //#undef PIPE_MANIFOLD4W

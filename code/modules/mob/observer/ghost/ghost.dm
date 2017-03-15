@@ -14,7 +14,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/is_manifest = FALSE
 	var/next_visibility_toggle = 0
 	var/can_reenter_corpse
-	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
 							//If you died in the game and are a ghost - this will remain as null.

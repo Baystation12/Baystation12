@@ -85,9 +85,6 @@
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a fizzle.")
 
-/obj/effect/rune/cultify()
-	return
-
 /* Tier 1 runes below */
 
 /obj/effect/rune/convert

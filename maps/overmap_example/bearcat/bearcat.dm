@@ -20,6 +20,12 @@
 	shuttle_area = /area/ship/scrap/shuttle/outgoing
 	current_location = "nav_bearcat_port_dock_shuttle"
 
+/obj/structure/closet/crate/uranium
+	name = "fissibles crate"
+	desc = "A crate with a radiation sign on it."
+	icon_state = "radiation"
+	icon_opened = "radiationopen"
+	icon_closed = "radiation"
 
 //In case multiple shuttles can dock at a location,
 //subtypes can be used to hold the shuttle-specific data
@@ -49,3 +55,8 @@
 /obj/effect/shuttle_landmark/below_deck
 	name = "Near CSV Bearcat"
 	landmark_tag = "nav_bearcat_below"
+
+/obj/structure/closet/crate/uranium/New()
+	..()
+	new /obj/item/stack/material/uranium{amount=50}(src)
+	new /obj/item/stack/material/uranium{amount=50}(src)

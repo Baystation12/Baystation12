@@ -391,7 +391,17 @@ var/global/datum/controller/occupations/job_master
 			job.apply_fingerprints(H)
 
 			if(H.char_rank && H.char_rank.accessory)
-				H.equip_to_slot_or_del(new H.char_rank.accessory, slot_tie)
+				for(var/accessory_path in H.char_rank.accessory)
+					var/list/accessory_data = H.char_rank.accessory[accessory_path]
+					if(islist(accessory_data))
+						var/amt = accessory_data[1]
+						var/list/accessory_args = accessory_data.Copy()
+						accessory_args[1] = src
+						for(var/i in 1 to amt)
+							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
+					else
+						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
 				var/datum/gear/G = gear_datums[thing]
@@ -439,7 +449,7 @@ var/global/datum/controller/occupations/job_master
 			if(department_account)
 				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> þ[department_account.money]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> T[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 

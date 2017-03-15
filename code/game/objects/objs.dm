@@ -185,3 +185,19 @@
 		. |= DAM_SHARP
 		if(damtype == BURN)
 			. |= DAM_LASER
+
+/obj/attackby(obj/item/O as obj, mob/user as mob)
+	if(flags & OBJ_ANCHORABLE)
+		if(istype(O, /obj/item/weapon/wrench))
+			playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+			if(anchored)
+				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+			else
+				user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+			if(do_after(user, 20, src))
+				if(!src) return
+				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
+				anchored = !anchored
+				update_icon()
+			return
+	return ..()

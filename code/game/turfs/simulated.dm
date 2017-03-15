@@ -47,6 +47,8 @@
 
 /turf/simulated/proc/unwet_floor(var/check_very_wet)
 	if(check_very_wet && wet >= 2)
+		wet--
+		task_triggered_event.register(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
 		return
 
 	wet = 0
@@ -125,24 +127,20 @@
 
 		if(src.wet)
 
-			if(M.buckled || (src.wet == 1 && M.m_intent == "walk"))
+			if(M.buckled || (M.m_intent == "walk" && prob(min(100, 100/(wet/10))) ) )
 				return
 
 			var/slip_dist = 1
 			var/slip_stun = 6
 			var/floor_type = "wet"
 
-			switch(src.wet)
-				if(2) // Lube
-					floor_type = "slippery"
-					slip_dist = 4
-					slip_stun = 10
-				if(3) // Ice
-					floor_type = "icy"
-					slip_stun = 4
+			if(2 <= src.wet) // Lube
+				floor_type = "slippery"
+				slip_dist = 4
+				slip_stun = 10
 
-			if(M.slip("the [floor_type] floor",slip_stun))
-				for(var/i = 0;i<slip_dist;i++)
+			if(M.slip("the [floor_type] floor", slip_stun))
+				for(var/i = 1 to slip_dist)
 					step(M, M.dir)
 					sleep(1)
 			else

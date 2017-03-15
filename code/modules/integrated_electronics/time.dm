@@ -14,8 +14,11 @@
 	var/delay = 2 SECONDS
 	activators = list("incoming pulse","outgoing pulse")
 
-/obj/item/integrated_circuit/time/delay/do_work()
+/obj/item/integrated_circuit/time/delay/do_work(var/activated_pulse)
 	set waitfor = 0  // Don't sleep in a proc that is called by a processor without this set, otherwise it'll delay the entire thing
+
+	if(activated_pulse != activators[1])
+		return
 
 	var/datum/integrated_io/activate/out_pulse = activators[2]
 	sleep(delay)

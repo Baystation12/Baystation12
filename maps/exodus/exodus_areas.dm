@@ -103,7 +103,7 @@
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
 	name = "\improper Emergency Shuttle Transit"
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north/shuttlespace_ns1
+	base_turf = /turf/space/transit/north
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
@@ -114,7 +114,7 @@
 
 /area/shuttle/escape_pod1/transit
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north/shuttlespace_ns1
+	base_turf = /turf/space/transit/north
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
@@ -125,7 +125,7 @@
 
 /area/shuttle/escape_pod2/transit
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north/shuttlespace_ns1
+	base_turf = /turf/space/transit/north
 
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
@@ -136,7 +136,7 @@
 
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/east/shuttlespace_ew1
+	base_turf = /turf/space/transit/east
 
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
@@ -147,7 +147,7 @@
 
 /area/shuttle/escape_pod5/transit
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/east/shuttlespace_ew1
+	base_turf = /turf/space/transit/east
 
 // === Trying to remove these areas:
 
@@ -233,7 +233,7 @@
 /area/rescue_base/transit
 	name = "\proper bluespace"
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north/shuttlespace_ns1
+	base_turf = /turf/space/transit/north
 
 //ENEMY
 
@@ -288,7 +288,7 @@
 /area/syndicate_station/transit
 	name = "\proper bluespace"
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north/shuttlespace_ns1
+	base_turf = /turf/space/transit/north
 
 /area/skipjack_station
 	name = "\improper Skipjack"
@@ -298,7 +298,7 @@
 /area/skipjack_station/transit
 	name = "\proper bluespace"
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north/shuttlespace_ns1
+	base_turf = /turf/space/transit/north
 
 /area/skipjack_station/southwest_solars
 	name = "aft port solars"
@@ -415,10 +415,6 @@
 
 /area/maintenance/security_starboard
 	name = "\improper Security Maintenance - Starboard"
-	icon_state = "maint_security_starboard"
-
-/area/maintenance/exterior
-	name = "\improper Exterior Reinforcements"
 	icon_state = "maint_security_starboard"
 
 // Dank Maintenance

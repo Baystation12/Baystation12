@@ -536,6 +536,16 @@
 		wearer.update_inv_back()
 	return
 
+/obj/item/weapon/rig/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(slot != slot_back_str || offline)
+		return ret
+
+	for(var/obj/item/rig_module/module in installed_modules)
+		if(module.suit_overlay)
+			ret.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]")
+	return ret
+
 /obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
 
 	if(!security_check_enabled)
@@ -760,7 +770,10 @@
 
 	var/chance
 	if(!is_emp)
-		chance = 2*max(0, damage - (chest? chest.breach_threshold : 0))
+		var/damage_resistance = 0
+		if(istype(chest, /obj/item/clothing/suit/space))
+			damage_resistance = chest.breach_threshold
+		chance = 2*max(0, damage - damage_resistance)
 	else
 		//Want this to be roughly independant of the number of modules, meaning that X emp hits will disable Y% of the suit's modules on average.
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules

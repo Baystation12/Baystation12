@@ -11,10 +11,6 @@
 		return
 	next_click = world.time + 1
 
-	if(client.buildmode) // comes after object.Click to allow buildmode gui objects to be clicked
-		build_click(src, client.buildmode, params, A)
-		return
-
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
@@ -150,6 +146,9 @@
 
 /obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
 	AIAltClick()
+
+/obj/machinery/teleport/station/BorgAltClick()
+	testfire()
 
 /*
 	As with AI, these are not used in click code,

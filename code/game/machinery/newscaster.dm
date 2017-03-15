@@ -22,6 +22,7 @@
 	var/locked=0
 	var/author=""
 	var/backup_author=""
+	var/views=0
 	var/censored=0
 	var/is_admin_channel=0
 	var/updated = 0
@@ -324,7 +325,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<BR><BR><A href='?src=\ref[src];print_paper=[0]'>Print Paper</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if(9)
-				dat+="<B>[src.viewing_channel.channel_name]: </B><FONT SIZE=1>\[created by: <FONT COLOR='maroon'>[src.viewing_channel.author]</FONT>\]</FONT><HR>"
+				dat+="<B>[src.viewing_channel.channel_name]: </B><FONT SIZE=1>\[created by: <FONT COLOR='maroon'>[src.viewing_channel.author]</FONT>\] \[views: <FONT COLOR='maroon'>[++src.viewing_channel.views]</FONT>\]</FONT><HR>"
 				if(src.viewing_channel.censored)
 					dat+="<FONT COLOR='red'><B>ATTENTION: </B></FONT>This channel has been deemed as threatening to the welfare of the station, and marked with a [using_map.company_name] D-Notice.<BR>"
 					dat+="No further feed story additions are allowed while the D-Notice is in effect.</FONT><BR><BR>"

@@ -112,7 +112,7 @@
 		if(!(lying || resting))
 			if(limb_pain)
 				emote("scream")
-			custom_emote(1, "collapses!")
+			custom_emote(VISIBLE_MESSAGE, "collapses!")
 		Weaken(5) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
@@ -143,45 +143,56 @@
 	for (var/obj/item/organ/external/E in organs)
 		if(!E || !E.can_grasp)
 			continue
+		if(((E.is_broken() || E.is_dislocated()) && !E.splinted) || E.is_malfunctioning())
+			grasp_damage_disarm(E)
 
-		if((E.is_broken() || E.is_dislocated()) && !E.splinted)
-			switch(E.body_part)
-				if(HAND_LEFT, ARM_LEFT)
-					if(!l_hand)
-						continue
-					drop_from_inventory(l_hand)
-				if(HAND_RIGHT, ARM_RIGHT)
-					if(!r_hand)
-						continue
-					drop_from_inventory(r_hand)
 
-			var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
-			var/grasp_name = E.name
-			if((E.body_part in list(ARM_LEFT, ARM_RIGHT)) && E.children.len)
-				var/obj/item/organ/external/hand = pick(E.children)
-				grasp_name = hand.name
+/mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
+	var/disarm_slot
+	switch(affected.body_part)
+		if(HAND_LEFT, ARM_LEFT)
+			disarm_slot = slot_l_hand
+		if(HAND_RIGHT, ARM_RIGHT)
+			disarm_slot = slot_r_hand
 
-			emote("me", 1, "[!E.can_feel_pain() ? "" : emote_scream] drops what they were holding in their [grasp_name]!")
+	if(!disarm_slot)
+		return
 
-		else if(E.is_malfunctioning())
-			switch(E.body_part)
-				if(HAND_LEFT, ARM_LEFT)
-					if(!l_hand)
-						continue
-					drop_from_inventory(l_hand)
-				if(HAND_RIGHT, ARM_RIGHT)
-					if(!r_hand)
-						continue
-					drop_from_inventory(r_hand)
+	var/obj/item/thing = get_equipped_item(disarm_slot)
+	
+	if(!thing)
+		return
+	
+	drop_from_inventory(thing)
 
-			emote("me", 1, "drops what they were holding, their [E.name] malfunctioning!")
+	if(affected.robotic >= ORGAN_ROBOT)
+		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
 
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, src)
-			spark_system.attach(src)
-			spark_system.start()
-			spawn(10)
-				qdel(spark_system)
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, src)
+		spark_system.attach(src)
+		spark_system.start()
+		spawn(10)
+			qdel(spark_system)
+
+	else 
+		var/grasp_name = affected.name
+		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && affected.children.len)
+			var/obj/item/organ/external/hand = pick(affected.children)
+			grasp_name = hand.name
+
+		if(affected.can_feel_pain())
+			var/emote_scream = pick("screams in pain", "lets out a sharp cry", "cries out")
+			var/emote_scream_alt = pick("scream in pain", "let out a sharp cry", "cry out")
+			visible_message(
+				"<B>\The [src]</B> [emote_scream] and drops what they were holding in their [grasp_name]!",
+				null,
+				"You hear someone [emote_scream_alt]!"
+			)
+			custom_pain("The sharp pain in your [affected.name] forces you to drop [thing]!", 30)
+		else
+			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
+
 
 //Handles chem traces
 /mob/living/carbon/human/proc/handle_trace_chems()

@@ -81,7 +81,7 @@ var/datum/uplink/uplink = new()
 		return 0
 
 	for(var/antag_role in antag_roles)
-		var/datum/antagonist/antag = all_antag_types[antag_role]
+		var/datum/antagonist/antag = all_antag_types()[antag_role]
 		if(antag.is_antagonist(U.uplink_owner))
 			return 1
 	return 0
@@ -90,7 +90,7 @@ var/datum/uplink/uplink = new()
 	. = item_cost
 	if(U && U.uplink_owner)
 		for(var/antag_role in antag_costs)
-			var/datum/antagonist/antag = all_antag_types[antag_role]
+			var/datum/antagonist/antag = all_antag_types()[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
 	return max(1, U ?  U.get_item_cost(src, .) : .)

@@ -7,7 +7,7 @@
 	taste_mult = 4
 	reagent_state = SOLID
 	metabolism = REM * 4
-	var/nutriment_factor = 30 // Per unit
+	var/nutriment_factor = 10 // Per unit
 	var/injectable = 0
 	color = "#664330"
 
@@ -126,6 +126,10 @@
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/flour(T)
+		if(T.wet > 1)
+			T.wet = min(T.wet, 1)
+		else
+			T.wet = 0
 
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"
@@ -1912,6 +1916,17 @@
 
 	glass_name = "Screwdriver"
 	glass_desc = "A simple, yet superb mixture of Vodka and orange juice. Just the thing for the tired engineer."
+
+/datum/reagent/ethanol/ships_surgeon
+	name = "Ship's Surgeon"
+	id = "shipssurgeon"
+	description = "Rum and Dr. Gibb. Served ice cold, like the scalpel."
+	taste_description = "black comedy"
+	color = "#524D0F"
+	strength = 15
+
+	glass_name = "ship's surgeon"
+	glass_desc = "Rum qualified for surgical practice by Dr. Gibb. Smooth and steady."
 
 /datum/reagent/ethanol/silencer
 	name = "Silencer"

@@ -4,7 +4,7 @@
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
-						/datum/job/virologist, /datum/job/chemist, /datum/job/psychiatrist,
+						/datum/job/chemist, /datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/solgov_pilot, /datum/job/bartender,
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
@@ -68,7 +68,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_calypso, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_calypso_helm)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila)
 
 
 /datum/job/rd
@@ -206,6 +206,7 @@
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
+	announced = 1
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -226,6 +227,7 @@
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 	minimal_access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
+	announced = 1
 
 
 /datum/job/sea
@@ -233,8 +235,8 @@
 	department = "Support"
 	department_flag = SPT
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 21
@@ -247,10 +249,10 @@
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8
+		/datum/mil_rank/marine/e8_alt
 	)
 
 
@@ -314,7 +316,7 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
@@ -430,7 +432,7 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
@@ -454,7 +456,7 @@
 	economic_modifier = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
-	alt_titles = list()
+	alt_titles = list("Criminal Investigator")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -513,7 +515,7 @@
 
 
 /datum/job/senior_doctor
-	title = "Senior Physician"
+	title = "Physician"
 	department = "Medical"
 	department_flag = MED
 	faction = "Station"
@@ -535,8 +537,6 @@
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e7
 	)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_emergency_storage,
@@ -548,7 +548,7 @@
 
 
 /datum/job/doctor
-	title = "Physician"
+	title = "Corpsman"
 	minimal_player_age = 7
 	total_positions = 3
 	spawn_positions = 3
@@ -556,13 +556,13 @@
 	economic_modifier = 7
 	ideal_character_age = 40
 	alt_titles = list(
-		"Corpsman",
-		"Emergency Physician",
+		"Field Medic" = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic,
+		"Medical Technician",
 		"Nurse")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/doctor,
+		/datum/mil_branch/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
@@ -578,47 +578,28 @@
 
 
 /datum/job/doctor_contractor
-	title = "Medical Assistant"
+	title = "Medical Contractor"
 	department = "Medical"
 	department_flag = MED
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_modifier = 3
 	ideal_character_age = 30
 	alt_titles = list(
 		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
-		"Medical Resident" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/resident,
-		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
-		"Mortician" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus)
+		"Mortician" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus,
+		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
+		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_medical, access_morgue, access_surgery, access_medical_equip, access_solgov_crew)
-	minimal_access = list(access_medical, access_morgue, access_surgery, access_medical_equip, access_solgov_crew)
+	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew)
+	minimal_access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew)
 
-
-/datum/job/virologist
-	title = "Virologist"
-	department = "Medical"
-	department_flag = MED
-	faction = "Station"
-	minimal_player_age = 3
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Chief Medical Officer"
-	selection_color = "#013d3b"
-	economic_modifier = 9
-	ideal_character_age = 40
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/virologist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-
-	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_solgov_crew)
-	minimal_access = list(access_medical, access_morgue, access_crematorium, access_virology, access_solgov_crew)
 
 /datum/job/chemist
 	title = "Chemist"
@@ -1035,8 +1016,8 @@
 	selection_color = "#515151"
 	economic_modifier = 1
 	alt_titles = list(
-		"Private Investigator",
-		"Journalist",
+		"Private Investigator" = /decl/hierarchy/outfit/job/torch/passenger/passenger/PI,
+		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
 		"Historian",
 		"Botanist",
 		"Investor",

@@ -64,12 +64,18 @@ Note: Must be placed within 3 tiles of the R&D Console
 	if(!loaded_item)
 		if(isrobot(user)) //Don't put your module items in there!
 			return
-		if(!O.origin_tech)
-			to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
-			return
-		if(O.origin_tech.len == 0)
-			to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
-			return
+		if(istype(O, /obj/item/device/electronic_assembly)) //A few things
+			var/obj/item/device/electronic_assembly/assembly = O
+			if(!assembly.contents.len) //Make sure they don't use this to get cheap assemblies.
+				return
+		else
+			if(!O.origin_tech)
+				to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
+				return
+			if(O.origin_tech.len == 0)
+				to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
+				return
+
 		busy = 1
 		loaded_item = O
 		user.drop_item()

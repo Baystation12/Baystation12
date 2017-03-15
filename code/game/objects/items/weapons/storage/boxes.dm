@@ -362,13 +362,15 @@
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
-	startswith = list(/obj/item/weapon/light/tube = 21)
+	startswith = list(/obj/item/weapon/light/tube = 17,
+					/obj/item/weapon/light/tube/large = 4)
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"
-	startswith = list(/obj/item/weapon/light/tube = 14,
-					/obj/item/weapon/light/bulb = 7)
+	startswith = list(/obj/item/weapon/light/tube = 12,
+					/obj/item/weapon/light/tube/large = 4,
+					/obj/item/weapon/light/bulb = 5)
 
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"
@@ -421,3 +423,9 @@
 				/obj/item/weapon/reagent_containers/food/snacks/checker/rook/red = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/checker/queen/red = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/checker/king/red = 1)
+
+
+/obj/item/weapon/storage/box/headset
+	name = "box of spare headsets"
+	desc = "A box full of headsets."
+	startswith = list(/obj/item/device/radio/headset = 7)

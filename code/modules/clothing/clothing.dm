@@ -581,7 +581,9 @@ BLIND     // can't see anything
 /obj/item/clothing/suit/proc/get_collar()
 	var/icon/C = new('icons/mob/collar.dmi')
 	if(icon_state in C.IconStates())
-		return image(C, icon_state)
+		var/image/I = image(C, icon_state)
+		I.color = color
+		return I
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under
@@ -596,6 +598,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	w_class = ITEM_SIZE_NORMAL
+	force = 0
 	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
@@ -614,8 +617,17 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list("utility","armband","rank","decor")
+	valid_accessory_slots = list("utility","armband","rank","decor","medal")
 	restricted_accessory_slots = list("utility", "armband","rank")
+
+/obj/item/clothing/under/New()
+	..()
+	update_rolldown_status()
+	update_rollsleeves_status()
+	if(rolled_down == -1)
+		verbs -= /obj/item/clothing/under/verb/rollsuit
+	if(rolled_sleeves == -1)
+		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
 /obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()

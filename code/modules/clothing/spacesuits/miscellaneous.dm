@@ -19,7 +19,7 @@
 	)
 	w_class = ITEM_SIZE_HUGE
 	gas_transfer_coefficient = 0.01
-	permeability_coefficient = 0.02
+	permeability_coefficient = 0
 	item_flags = STOPPRESSUREDAMAGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/tank/emergency, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)

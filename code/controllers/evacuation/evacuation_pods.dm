@@ -8,7 +8,13 @@
 /datum/evacuation_controller/starship
 	name = "escape pod controller"
 
-	transfer_prep_additional_delay = 10 MINUTES
+	evac_prep_delay    = 5 MINUTES
+	evac_launch_delay  = 3 MINUTES
+	evac_transit_delay = 2 MINUTES
+
+	transfer_prep_additional_delay     = 15 MINUTES
+	autotransfer_prep_additional_delay = 5 MINUTES
+	emergency_prep_additional_delay    = 0 MINUTES
 
 	evacuation_options = list(
 		EVAC_OPT_ABANDON_SHIP = new /datum/evacuation_option/abandon_ship(),

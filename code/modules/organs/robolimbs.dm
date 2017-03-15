@@ -28,6 +28,7 @@ var/datum/robolimb/basic_robolimb
 	company = "Bishop"
 	desc = "This limb has a white polymer casing with blue holo-displays."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_main.dmi'
+	unavailable_at_fab = 1
 
 /datum/robolimb/bishop/alt
 	company = "Bishop Alt."
@@ -45,6 +46,7 @@ var/datum/robolimb/basic_robolimb
 	company = "Hephaestus Industries"
 	desc = "This limb has a militaristic black and green casing with gold stripes."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_main.dmi'
+	unavailable_at_fab = 1
 
 /datum/robolimb/hephaestus/alt
 	company = "Hephaestus Alt."
@@ -64,11 +66,13 @@ var/datum/robolimb/basic_robolimb
 	desc = "This limb has a rubbery fleshtone covering with visible seams."
 	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_main.dmi'
 	can_eat = 1
+	unavailable_at_fab = 1
 
 /datum/robolimb/xion
 	company = "Xion"
 	desc = "This limb has a minimalist black and red casing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_main.dmi'
+	unavailable_at_fab = 1
 
 /datum/robolimb/xion/alt
 	company = "Xion Alt."
@@ -93,6 +97,7 @@ var/datum/robolimb/basic_robolimb
 	desc = "This limb features sleek black and white polymers."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_main.dmi'
 	can_eat = 1
+	unavailable_at_fab = 1
 
 /datum/robolimb/wardtakahashi/alt
 	company = "Ward-Takahashi Alt."
@@ -127,6 +132,7 @@ var/datum/robolimb/basic_robolimb
 	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main.dmi'
 	can_eat = 1
 	skintone = 1
+	unavailable_at_fab = 1
 	
 /datum/robolimb/resomi
 	company = "Small prosthetic"

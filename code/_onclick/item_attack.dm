@@ -39,7 +39,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/attackby(obj/item/I, mob/user)
 	if(!ismob(user))
 		return 0
-	if(can_operate(src) && I.do_surgery(src,user)) //Surgery
+	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
 		return 1
 	return I.attack(src, user, user.zone_sel.selecting)
 

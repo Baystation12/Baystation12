@@ -12,12 +12,16 @@
 	layer = SUPERMATTER_WALL_LAYER
 
 	var/next_check=0
-	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST)
+	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
 /turf/unsimulated/wall/supermatter/New()
 	..()
 	processing_turfs.Add(src)
-	next_check = world.time+5 SECONDS
+	next_check = world.time + 5 SECONDS
+
+	// Nom.
+	for(var/atom/movable/A in src)
+		Consume(A)
 
 /turf/unsimulated/wall/supermatter/Destroy()
 	processing_turfs.Remove(src)
@@ -28,26 +32,24 @@
 	if(next_check>world.time) return
 
 	// No more available directions? Shut down process().
-	if(avail_dirs.len==0)
-		processing_turfs.Remove(src)
-		return 1
+	if(!avail_dirs.len)
+		return PROCESS_KILL
 
 	// We're checking, reset the timer.
-	next_check = world.time+5 SECONDS
+	next_check = world.time + 5 SECONDS
 
 	// Choose a direction.
 	var/pdir = pick(avail_dirs)
 	avail_dirs -= pdir
-	var/turf/T=get_step(src,pdir)
+	var/turf/T = get_zstep(src,pdir)
 
 	// EXPAND
-	if(!istype(T,type))
+	if(T && !istype(T,type))
 		// Do pretty fadeout animation for 1s.
 		new /obj/effect/overlay/bluespacify(T)
-		spawn(10)
-			// Nom.
-			for(var/atom/movable/A in T)
-				Consume(A)
+		spawn(1 SECOND)
+			if(istype(T,type)) // In case another blob came first, don't create another blob
+				return
 			T.ChangeTurf(type)
 
 /turf/unsimulated/wall/supermatter/attack_generic(mob/user as mob)
@@ -58,15 +60,14 @@
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
-		to_chat(user, "<span class = \"warning\">What the fuck are you doing?</span>")
-	return
+		user.examinate(src)
 
 // /vg/: Don't let ghosts fuck with this.
 /turf/unsimulated/wall/supermatter/attack_ghost(mob/user as mob)
 	user.examinate(src)
 
 /turf/unsimulated/wall/supermatter/attack_ai(mob/user as mob)
-	return user.examinate(src)
+	user.examinate(src)
 
 /turf/unsimulated/wall/supermatter/attack_hand(mob/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src]... And then blinks out of existance.</span>",\
@@ -87,7 +88,12 @@
 	user.drop_from_inventory(W)
 	Consume(W)
 
-/turf/unsimulated/wall/supermatter/Bumped(atom/AM as mob|obj)
+#define MayConsume(A) (istype(A) && A.simulated && !isobserver(A))
+
+/turf/unsimulated/wall/supermatter/Bumped(var/atom/movable/AM)
+	if(!MayConsume(AM))
+		return
+
 	if(istype(AM, /mob/living))
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
@@ -97,12 +103,13 @@
 		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
 
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
-
 	Consume(AM)
 
-/turf/unsimulated/wall/supermatter/proc/Consume(var/atom/A)
-	if(isobserver(A))
-		return
-	if(!A.simulated)
-		return
-	qdel(A)
+/turf/unsimulated/wall/supermatter/Entered(var/atom/movable/AM)
+	Bumped(AM)
+
+/turf/unsimulated/wall/supermatter/proc/Consume(var/atom/movable/AM)
+	if(MayConsume(AM))
+		qdel(AM)
+
+#undef MayConsume

@@ -8,18 +8,13 @@
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT
-
-var/list/storedwarrant = list() //All the warrants currently stored
-var/activename = null
-var/activecharges = null
-var/activeauth = null //Currently active warrant
-var/activetype = null //Is this a search or arrest warrtant?
+	var/datum/data/record/warrant/active
 
 //look at it
 /obj/item/device/holowarrant/examine(mob/user)
 	. = ..()
-	if(activename)
-		to_chat(user, "It's a holographic warrant for '[activename]'.")
+	if(active)
+		to_chat(user, "It's a holographic warrant for '[active.fields["namewarrant"]]'.")
 	if(in_range(user, src) || isghost(user))
 		show_content(user)
 	else
@@ -27,57 +22,71 @@ var/activetype = null //Is this a search or arrest warrtant?
 
 //hit yourself with it
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
-	if(!storedwarrant.len)
-		to_chat(user, "There seem to be no warrants stored in the device. Please sync with the station's database.")
+	active = null
+	var/list/warrants = list()
+	if(!isnull(data_core.general))
+		for(var/datum/data/record/warrant/W in data_core.warrants)
+			warrants += W.fields["namewarrant"]
+	if(warrants.len == 0)
+		to_chat(user,"<span class='notice'>There are no warrants available</span>")
 		return
 	var/temp
-	temp = input(user, "Which warrant would you like to load?") as null|anything in storedwarrant
+	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
 	for(var/datum/data/record/warrant/W in data_core.warrants)
 		if(W.fields["namewarrant"] == temp)
-			activename = W.fields["namewarrant"]
-			activecharges = W.fields["charges"]
-			activeauth = W.fields ["auth"]
-			activetype = W.fields["arrestsearch"]
+			active = W
+	update_icon()
+
+/obj/item/device/holowarrant/attackby(obj/item/weapon/W, mob/user)
+	if(active)
+		var/obj/item/weapon/card/id/I = W.GetIdCard()
+		if(I)
+			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
+			if(choice == "Yes")
+				active.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
+					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
+			return 1
+	..()
 
 //hit other people with it
 /obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	user.visible_message("<span class='notice'>You show the warrant to [M]. </span>", \
-			"<span class='notice'>[user] holds up a warrant projector and shows the contents to [M]. </span>")
+	user.visible_message("<span class='notice'>You show the warrant to [M].</span>", \
+			"<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>")
 	M.examinate(src)
 
-//sync with database
-/obj/item/device/holowarrant/verb/sync(mob/living/carbon/user as mob)
-	if(!isnull(data_core.general))
-		for(var/datum/data/record/warrant/W in data_core.warrants)
-			storedwarrant += W.fields["namewarrant"]
-		to_chat(usr, "<span class='notice'>The device hums faintly as it syncs with the station database</span>")
-		if(storedwarrant.len == 0)
-			user.visible_message("<span class='notice'>There are no warrants available</span>")
+/obj/item/device/holowarrant/update_icon()
+	if(active)
+		icon_state = "holowarrant_filled"
+	else
+		icon_state = "holowarrant"
 
 /obj/item/device/holowarrant/proc/show_content(mob/user, forceshow)
-	if(activetype == "arrest")
+	if(!active)
+		return
+	if(active.fields["arrestsearch"] == "arrest")
 		var/output = {"
-		<HTML><HEAD><TITLE>[activename]</TITLE></HEAD>
+		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#FFFFFF'><center><large><b>Sol Central Government Colonial Marshal Bureau</b></large></br>
 		in the jurisdiction of the</br>
-		NAS Crescent in Nyx</br>
+		[using_map.boss_name] in [using_map.system_name]</br>
 		</br>
 		<b>ARREST WARRANT</b></center></br>
 		</br>
-		This document serves as authorization and notice for the arrest of _<u>[activename]</u>____ for the crime(s) of:</br>[activecharges]</br>
+		This document serves as authorization and notice for the arrest of _<u>[active.fields["namewarrant"]]</u>____ for the crime(s) of:</br>[active.fields["charges"]]</br>
 		</br>
-		Vessel or habitat: _<u>[using_map.full_name]</u>____</br>
-		</br>_<u>[activeauth]</u>____</br>
+		Vessel or habitat: _<u>[using_map.station_name]</u>____</br>
+		</br>_<u>[active.fields["auth"]]</u>____</br>
 		<small>Person authorizing arrest</small></br>
 		</BODY></HTML>
 		"}
 
-		show_browser(user, output, "window=Warrant for the arrest of [activename]")
-	if(activetype == "search")
+		show_browser(user, output, "window=Warrant for the arrest of [active.fields["namewarrant"]]")
+	if(active.fields["arrestsearch"] ==  "search")
 		var/output= {"
-		<HTML><HEAD><TITLE>Search Warrant: [activename]</TITLE></HEAD>
+		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#FFFFFF'><center>in the jurisdiction of the</br>
-		NAS Crescent in Nyx</br>
+		[using_map.boss_name] in [using_map.system_name]</br>
 		</br>
 		<b>SEARCH WARRANT</b></center></br>
 		</br>
@@ -90,13 +99,13 @@ var/activetype = null //Is this a search or arrest warrtant?
 		to resist/impede this search or flee, they must be taken into custody immediately! </br>
 		All confiscated items must be filed and taken to Evidence!</small></i></br>
 		</br>
-		<b>Suspect's/location name: </b>[activename]</br>
+		<b>Suspect's/location name: </b>[active.fields["namewarrant"]]</br>
 		</br>
-		<b>For the following reasons: </b> [activecharges]</br>
+		<b>For the following reasons: </b> [active.fields["charges"]]</br>
 		</br>
-		<b>Warrant issued by: </b> [activeauth]</br>
+		<b>Warrant issued by: </b> [active.fields ["auth"]]</br>
 		</br>
-		Vessel or habitat: _<u>[using_map.full_name]</u>____</br>
+		Vessel or habitat: _<u>[using_map.station_name]</u>____</br>
 		</BODY></HTML>
 		"}
-		show_browser(user, output, "window=Search warrant for [activename]")
+		show_browser(user, output, "window=Search warrant for [active.fields["namewarrant"]]")

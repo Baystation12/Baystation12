@@ -19,10 +19,10 @@
 
 	if(beaker)
 		var/datum/reagents/reagents = beaker.reagents
+		var/percent = round((reagents.total_volume / beaker.volume) * 100)
 		if(reagents.total_volume)
 			var/image/filling = image('icons/obj/iv_drip.dmi', src, "reagent")
 
-			var/percent = round((reagents.total_volume / beaker.volume) * 100)
 			switch(percent)
 				if(0 to 9)		filling.icon_state = "reagent0"
 				if(10 to 24) 	filling.icon_state = "reagent10"
@@ -31,9 +31,16 @@
 				if(75 to 79)	filling.icon_state = "reagent75"
 				if(80 to 90)	filling.icon_state = "reagent80"
 				if(91 to INFINITY)	filling.icon_state = "reagent100"
-
 			filling.icon += reagents.get_color()
 			overlays += filling
+
+		if(attached)
+			var/image/light = image('icons/obj/iv_drip.dmi', "light_full")
+			if(percent < 15)
+				light.icon_state = "light_low"
+			else if(percent < 60)
+				light.icon_state = "light_mid"
+			overlays += light
 
 /obj/machinery/iv_drip/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))

@@ -91,8 +91,7 @@
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
-
-	..()
+	. = ..()
 
 /obj/effect/spider/eggcluster/process()
 	amount_grown += rand(0,2)
@@ -121,22 +120,57 @@
 	var/amount_grown = -1
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
+	var/dormant = FALSE    // If dormant, does not add the spiderling to the process list unless it's also growing
+	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
+
+	var/shift_range = 6
 
 /obj/effect/spider/spiderling/New(var/location, var/atom/parent)
 	greater_form = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
 	icon_state = initial(greater_form.icon_state)
-	pixel_x = rand(6,-6)
-	pixel_y = rand(6,-6)
-	processing_objects |= src
-	//50% chance to grow up
-	if(prob(50))
+	pixel_x = rand(-shift_range, shift_range)
+	pixel_y = rand(-shift_range, shift_range)
+
+	if(prob(growth_chance))
 		amount_grown = 1
+		dormant = FALSE
+
+	if(dormant)
+		moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	else
+		processing_objects |= src
+
 	get_light_and_color(parent)
 	..()
 
+/obj/effect/spider/spiderling/mundane
+	growth_chance = 0 // Just a simple, non-mutant spider
+
+/obj/effect/spider/spiderling/mundane/dormant
+	dormant = TRUE    // It lies in wait, hoping you will walk face first into its web
+
 /obj/effect/spider/spiderling/Destroy()
+	if(dormant)
+		moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	processing_objects -= src
+	. = ..()
+
+/obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)
 	..()
+	if(health > 0)
+		disturbed()
+
+/obj/effect/spider/spiderling/Crossed(var/mob/living/L)
+	if(dormant && istype(L) && L.mob_size > MOB_TINY)
+		disturbed()
+
+/obj/effect/spider/spiderling/proc/disturbed()
+	if(!dormant)
+		return
+	dormant = FALSE
+
+	moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	processing_objects |= src
 
 /obj/effect/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))
@@ -206,6 +240,14 @@
 				walk_to(src, target_atom, 5)
 				if(prob(25))
 					src.visible_message("<span class='notice'>\The [src] skitters[pick(" away"," around","")].</span>")
+					// Reduces the risk of spiderlings hanging out at the extreme ranges of the shift range.
+					var/min_x = pixel_x <= -shift_range ? 0 : -2
+					var/max_x = pixel_x >=  shift_range ? 0 :  2
+					var/min_y = pixel_y <= -shift_range ? 0 : -2
+					var/max_y = pixel_y >=  shift_range ? 0 :  2
+
+					pixel_x = Clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
+					pixel_y = Clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
 		else if(prob(5))
 			//vent crawl!
 			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
@@ -259,5 +301,5 @@
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
 	for(var/atom/movable/A in contents)
-		A.loc = src.loc
+		A.dropInto(loc)
 	return ..()

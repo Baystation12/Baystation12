@@ -20,6 +20,7 @@
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
+	announced = 1
 
 /datum/job/hos/equip(var/mob/living/carbon/human/H)
 	. = ..()
