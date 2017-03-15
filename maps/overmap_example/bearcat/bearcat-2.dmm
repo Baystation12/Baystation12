@@ -396,7 +396,7 @@
 "hF" = (/obj/machinery/light/small{dir = 8},/obj/machinery/power/port_gen/pacman/super{anchored = 1},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
 "hG" = (/obj/machinery/power/terminal{dir = 4},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
 "hH" = (/obj/machinery/power/smes/buildable{charge = 5e+006},/obj/structure/cable,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
-"hI" = (/obj/effect/shuttle_landmark/docking_arm_starboard/shuttle,/turf/space,/area/ship/scrap/shuttle/ingoing)
+"hI" = (/obj/effect/shuttle_landmark/docking_arm_starboard/shuttle,/turf/space,/area/space)
 "hJ" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/firedoor,/turf/simulated/floor,/area/ship/scrap/maintenance/atmos)
 "hK" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/atmos)
 "hL" = (/obj/machinery/atmospherics/pipe/simple/visible/red,/obj/effect/floor_decal/corner/white{icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/atmos)
@@ -505,7 +505,7 @@
 "jK" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor,/area/ship/scrap/command)
 "jL" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor,/area/ship/scrap/command)
 "jM" = (/obj/structure/grille,/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor,/area/ship/scrap/command)
-"jN" = (/obj/effect/shuttle_landmark/docking_arm_starboard/pod,/turf/space,/area/ship/scrap/shuttle/ingoing)
+"jN" = (/obj/effect/shuttle_landmark/docking_arm_starboard/pod,/turf/space,/area/space)
 "jO" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor,/area/ship/scrap/command)
 "jP" = (/obj/machinery/computer/account_database,/turf/simulated/floor/bluegrid,/area/ship/scrap/command)
 "jQ" = (/obj/structure/table/standard,/obj/machinery/newscaster{pixel_y = -32},/obj/machinery/button/remote/blast_door{id = "scraplock"; name = "External Lockdown"},/obj/random_multi/single_item/captains_spare_id,/turf/simulated/floor/tiled/dark,/area/ship/scrap/command)
@@ -554,12 +554,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajVaFazjWjXjYjZkaaLaMkbaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatkcazkdatkeawaCaDaSawaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatatkfatatkeawawkgawawaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaUaUaPaUaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhkikjkkaaaaaaaUklauaUkmaTknaUklauaUaaaaaabebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajRkpacjRbiaUaUaUafbmbnboaVbobnbqagaUaUaUbibebehIbeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaWaXaiaWanaoapaxaZbaaUbbbcbEaUaEaGaHaIaJaKbejNbebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabfbgbhbfbGbGbjbkblaNaUaUbpaUaUaObrbsbjbHbGbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajRbuaQjRaaaaaUaUbRaUaUbSbDbUaUaUbRaUaUbQbQbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaYaYbdaaaabQbXjvbZaabXbDbZaabXjwbZbQaabQbebebebeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakhkikjkkaaaaaaaUklauaUkmaTknaUklauaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajRkpacjRbiaUaUaUafbmbnboaVbobnbqagaUaUaUbiaaaahIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaWaXaiaWanaoapaxaZbaaUbbbcbEaUaEaGaHaIaJaKaajNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabfbgbhbfbGbGbjbkblaNaUaUbpaUaUaObrbsbjbHbGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaajRbuaQjRaaaaaUaUbRaUaUbSbDbUaUaUbRaUaUbQbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaYaYbdaaaabQbXjvbZaabXbDbZaabXjwbZbQaabQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQbXjvcececejucececebtbZbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQbXjvcpbvbwbxbybzcpjwbZbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQcacbcccbcbjzcpbAbBcfbCbFcpjAchcicjcichaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

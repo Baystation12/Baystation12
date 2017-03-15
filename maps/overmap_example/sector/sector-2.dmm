@@ -10,7 +10,7 @@
 "j" = (/obj/structure/bed/chair{tag = "icon-chair_preview (NORTH)"; icon_state = "chair_preview"; dir = 1},/obj/effect/shuttle_landmark/pod,/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "exploration_pod"; pixel_x = 25; pixel_y = 8; tag = "exploration_pod"},/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
 "k" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s9"; icon_state = "swall_s"; dir = 8},/area/sector/shuttle/outgoing2)
 "l" = (/turf/simulated/shuttle/wall{tag = "icon-swall12"; icon_state = "swall_straight"; dir = 4},/area/sector/shuttle/outgoing2)
-"m" = (/obj/effect/shuttle_landmark/ingoing2,/turf/space,/area/sector/shuttle/ingoing2)
+"m" = (/obj/effect/shuttle_landmark/ingoing2,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -26,12 +26,12 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaabaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaccccaaaaaaaaaaaaaaaaa
-aaaaaaaaaccmcaaaaaaaaaaaaaaaaa
-aaaaaaaaaccccaaaaaaaaaaaaaaaaa
-aaaaaaaaaccccaaadefaaaaaaaaaaa
-aaaaaaaaaccccaaahjgaaaaaaaaaaa
-aaaaaaaaaccccaaailkaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaamaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaadefaaaaaaaaaaa
+aaaaaaaaaaaaaaaahjgaaaaaaaaaaa
+aaaaaaaaaaaaaaaailkaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -44,4 +44,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
