@@ -7,7 +7,7 @@
 	icon_state = "crate"
 	icon_opened = "crateopen"
 	icon_closed = "crate"
-	climbable = 1
+	flags = OBJ_CLIMBABLE
 //	mouse_drag_pointer = MOUSE_ACTIVE_POINTER	//???
 	var/rigged = 0
 
@@ -39,8 +39,8 @@
 	icon_state = icon_opened
 	src.opened = 1
 
-	if(climbable)
-		structure_shaken()
+	if(flags & OBJ_CLIMBABLE)
+		object_shaken()
 	return 1
 
 /obj/structure/closet/crate/close()

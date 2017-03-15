@@ -100,6 +100,7 @@
 #define SHARD_NONE ""
 
 #define OBJ_ANCHORABLE 0x1
+#define OBJ_CLIMBABLE 0x2
 
 #define MATERIAL_UNMELTABLE 0x1
 #define MATERIAL_BRITTLE    0x2

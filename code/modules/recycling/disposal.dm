@@ -26,6 +26,7 @@
 	var/last_sound = 0
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
+	flags = OBJ_CLIMBABLE
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
@@ -1584,6 +1585,7 @@
 	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
+	flags = OBJ_CLIMBABLE
 
 	New()
 		..()
