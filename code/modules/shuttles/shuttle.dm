@@ -96,7 +96,7 @@
 	var/list/translation = get_turf_translation(get_turf(current_location), get_turf(destination), shuttle_area.contents)
 
 	if(check_collision(translation, destination))
-		to_chat(world, "Failed collision check")
+		world << "Failed collision check"
 		return FALSE
 
 	shuttle_moved(destination, translation)
@@ -117,6 +117,8 @@
 		var/turf/dst_turf = turf_translation[src_turf]
 		if(src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
 			for(var/atom/movable/AM in dst_turf)
+				if(!AM.simulated)
+					continue
 				if(isliving(AM))
 					var/mob/living/bug = AM
 					bug.gib()
@@ -150,7 +152,7 @@
 	if(HasAbove(current_location.z))
 		for(var/turf/TD in shuttle_area.contents)
 			var/turf/TA = GetAbove(TD)
-			if(istype(TA, get_base_turf_by_area(TA)))
+			if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
 				TA.ChangeTurf(ceiling_type, 1, 1)
 
 	//TODO replace these with locate() in destination
