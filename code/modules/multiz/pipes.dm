@@ -203,6 +203,11 @@ obj/machinery/atmospherics/pipe/zpipe/up/supply
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+obj/machinery/atmospherics/pipe/zpipe/up/highcap
+	name = "upwards high capacity pipe"
+	desc = "A high capacity pipe segment to connect upwards."
+	color = PIPE_COLOR_ORANGE
+
 obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
 	icon_state = "down-scrubbers"
 	name = "downwards scrubbers pipe"
@@ -218,6 +223,11 @@ obj/machinery/atmospherics/pipe/zpipe/down/supply
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+obj/machinery/atmospherics/pipe/zpipe/down/highcap
+	name = "downwards high capacity pipe"
+	desc = "A high capacity pipe segment to connect downwards."
+	color = PIPE_COLOR_ORANGE
 
 // Colored misc. pipes
 obj/machinery/atmospherics/pipe/zpipe/up/cyan
