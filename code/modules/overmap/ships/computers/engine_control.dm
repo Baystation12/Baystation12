@@ -3,7 +3,7 @@
 /obj/machinery/computer/engines
 	name = "engine control console"
 	icon_keyboard = "tech_key"
-	icon_screen = "id"
+	icon_screen = "engines"
 	var/state = "status"
 	var/obj/effect/overmap/ship/linked
 

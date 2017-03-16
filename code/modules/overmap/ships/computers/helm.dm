@@ -1,7 +1,7 @@
 /obj/machinery/computer/helm
 	name = "helm control console"
-	icon_keyboard = "med_key"
-	icon_screen = "id"
+	icon_keyboard = "teleport_key"
+	icon_screen = "helm"
 	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
