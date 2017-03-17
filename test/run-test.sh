@@ -203,11 +203,13 @@ function run_code_tests {
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
     run_test_fail "ensure nanoui templates unique" "find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano"
     run_test_fail "no invalid spans" "grep -En \"<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>\" **/*.dm"
+    run_test_fail "no map edited tags" "grep -P '{tag = |; tag =' **/*.dmm"
     run_test "code quality checks" "test/check-paths.sh"
     run_test "indentation check" "awk -f tools/indentation.awk **/*.dm"
     run_test "check changelog example unchanged" "md5sum -c - <<< '79e058ac02ed52aad99a489ab4c8f75b *html/changelogs/example.yml'"
     run_test "check tags" "python tools/TagMatcher/tag-matcher.py ."
     run_test "check punctuation" "python tools/PunctuationChecker/punctuation-checker.py ."
+    run test "check map tags and icon states" "python tools/MapIconStateChecker/map-icon_state-checker.py ."
     run_test_ci "check changelog builds" "python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
