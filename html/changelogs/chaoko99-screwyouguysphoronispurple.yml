@@ -36,3 +36,4 @@ changes:
   - imageadd: "Swapped out the orange phoron gas sprite with the purple one."
   - imageadd: "Shifted the hues of phoron related atmos sprites. They are now purple instead of orange. Gives phoron cannisters grape flavor and a hazard line overlay." 
   - imageadd: "Dev resource: Added a hazard stripe overlay sprite that one can overlay to a worryingly unhazardous looking sprite."
+  - imageadd: "Cleaned up the hazard canister sprite."
