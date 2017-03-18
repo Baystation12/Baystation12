@@ -1,0 +1,25 @@
+/mob/living/simple_animal/shafra
+	name = "Shafra"
+	real_name = "Shafra"
+	desc = "A Bogani Hunting Dog"
+	icon = 'icons/mob/shafra.dmi'
+	icon_state = "shade"
+	icon_living = "shade"
+	icon_dead = "shafra_dead"
+	maxHealth = 100
+	health = 100
+	universal_speak = 1
+	speak_emote = list("harks")
+	emote_hear = list("growls")
+	response_help  = "barks"
+	response_disarm = "shoves"
+	response_harm   = "mauls"
+	melee_damage_lower = 25
+	melee_damage_upper = 30
+	attacktext = "mauls and claws with all its might"
+	minbodytemp = 90
+	maxbodytemp = 1000
+	min_oxy = 0
+	max_co2 = 0
+	max_tox = 0
+	speed = 2
