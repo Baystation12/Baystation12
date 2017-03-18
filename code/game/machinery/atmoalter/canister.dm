@@ -51,8 +51,8 @@
 
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "\improper Canister \[Phoron\]"
-	icon_state = "orange"
-	canister_color = "orange"
+	icon_state = "phoron"
+	canister_color = "phoron"
 	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
@@ -88,7 +88,7 @@
 	icon_state = "blue"
 	canister_type = /obj/machinery/portable_atmospherics/canister/oxygen
 /obj/machinery/portable_atmospherics/canister/empty/phoron
-	icon_state = "orange"
+	icon_state = "phoron"
 	canister_type = /obj/machinery/portable_atmospherics/canister/phoron
 /obj/machinery/portable_atmospherics/canister/empty/nitrogen
 	icon_state = "red"
@@ -316,7 +316,7 @@ update_flag
 					"\[N2O\]" = "redws", \
 					"\[N2\]" = "red", \
 					"\[O2\]" = "blue", \
-					"\[Phoron\]" = "orange", \
+					"\[Phoron\]" = "phoron", \
 					"\[CO2\]" = "black", \
 					"\[Air\]" = "grey", \
 					"\[CAUTION\]" = "yellow", \
