@@ -346,7 +346,7 @@
 		"EVA Technician",
 		"Electrician",
 		"Atmospheric Technician",
-		"Junior Engineer")
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -853,12 +853,15 @@
 	department = "Service"
 	department_flag = SRV
 	faction = "Station"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
 	selection_color = "#515151"
 	ideal_character_age = 20
-	minimal_player_age = 3
+	alt_titles = list(
+		"Junior Engineer",
+		"Junior Corpsman",
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
