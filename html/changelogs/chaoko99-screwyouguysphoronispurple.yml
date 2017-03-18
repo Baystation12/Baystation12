@@ -33,5 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - imgadd: "Swapped out the orange phoron gas sprite with the purple one."
-  - imgadd: "Shifted the hues of phoron related atmos sprites. They are now purple instead of orange." 
+  - imageadd: "Swapped out the orange phoron gas sprite with the purple one."
+  - imageadd: "Shifted the hues of phoron related atmos sprites. They are now purple instead of orange." 
