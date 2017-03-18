@@ -11,6 +11,118 @@
 	density = 1
 	blocks_air = 1
 
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog0"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog1"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog2"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog3"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog4"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog5"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog6"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog7"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog8"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog9"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog10"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog11"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog12"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog13"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog14"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
+/turf/simulated/shuttle/wall
+	name = "alien wall"
+	icon_state = "bog15"
+	opacity = 1
+	density = 1
+	blocks_air = 1
+
 /turf/simulated/shuttle/wall/corner
 	var/corner_overlay_state = "diagonalWall"
 	var/image/corner_overlay
@@ -72,4 +184,17 @@
 /turf/simulated/shuttle/wall/corner/dark/se
 	dir = SOUTH|EAST
 /turf/simulated/shuttle/wall/corner/dark/sw
+	dir = SOUTH|WEST
+
+
+/turf/simulated/shuttle/wall/corner/alien
+	icon_state = "corner_alien"
+	corner_overlay_state = "corner_alien"
+/turf/simulated/shuttle/wall/corner/alien/ne
+	dir = NORTH|EAST
+/turf/simulated/shuttle/wall/corner/alien/nw
+	dir = NORTH|WEST
+/turf/simulated/shuttle/wall/corner/alien/se
+	dir = SOUTH|EAST
+/turf/simulated/shuttle/wall/corner/alien/sw
 	dir = SOUTH|WEST
