@@ -34,5 +34,5 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - imageadd: "Swapped out the orange phoron gas sprite with the purple one."
-  - imageadd: "Shifted the hues of phoron related atmos sprites. They are now purple instead of orange." 
-  - imageadd: "Dev resource: Added a "Toxic and Flammable" hazard stripe overlay that one can apply to any given gas can sprite in DM."
+  - imageadd: "Shifted the hues of phoron related atmos sprites. They are now purple instead of orange. Gives phoron cannisters grape flavor and a hazard line overlay." 
+  - imageadd: "Dev resource: Added a hazard stripe overlay sprite that one can overlay to a worryingly unhazardous looking sprite."
