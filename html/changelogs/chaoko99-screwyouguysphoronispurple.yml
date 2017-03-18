@@ -35,3 +35,4 @@ delete-after: True
 changes: 
   - imageadd: "Swapped out the orange phoron gas sprite with the purple one."
   - imageadd: "Shifted the hues of phoron related atmos sprites. They are now purple instead of orange." 
+  - imageadd: "Dev resource: Added a "Toxic and Flammable" hazard stripe overlay that one can apply to any given gas can sprite in DM."
