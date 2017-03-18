@@ -3,4 +3,3 @@
 	path = /obj/item/clothing/suit/storage/toggle/Resomicoat
 	sort_category = "Xenowear"
 	whitelisted = "Resomi"
-  
