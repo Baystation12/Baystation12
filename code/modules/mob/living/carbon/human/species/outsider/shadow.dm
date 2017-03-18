@@ -9,6 +9,7 @@
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/sharp)
 	light_dam = 2
 	darksight = 8
+	radiation_mod = 0.01 //I have a crippling fear of flat zeroes, so let's use something that is effectively zero.
 	has_organ = list()
 	siemens_coefficient = 0
 
