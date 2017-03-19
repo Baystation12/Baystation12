@@ -308,6 +308,36 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/clothing/glasses/meson
 	sort_string = "GAAAC"
 
+datum/design/health_hud_adv
+	name = "Advanced Health Scanner HUD"
+	desc = "A technological breakthrough, allowing doctors wearing these to scan patients as if they were using a normal health analyzer."
+	id = "health_hud_adv"
+	req_tech = list(TECH_BIO = 5, TECH_MAGNET = 6)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 700, "$glass" = 500, "$gold" = 300, "$silver" = 300)
+	build_path = /obj/item/clothing/glasses/hud/health/advanced
+	sort_string = "GAAAD"
+
+datum/design/health_security_hud
+	name = "Medical-Security HUD"
+	desc = "A heads-up display that scans the humans in view and provides accurate data about their security records, as well as their health status."
+	id = "health_security_hud"
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_BIO = 3)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 100)
+	build_path = /obj/item/clothing/glasses/hud/security/health
+	sort_string = "GAAAE"
+
+datum/design/welding_mask
+	name = "Welding Gas Mask"
+	desc = "A gas mask that's had elements of a welding helmet integrated into it."
+	id = "weldingmask"
+	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
+	build_path = /obj/item/clothing/mask/gas/welding
+	sort_string = "GAAAF"
+
 /datum/design/item/weapon/mining/AssembleDesignName()
 	..()
 	name = "Mining equipment design ([item_name])"

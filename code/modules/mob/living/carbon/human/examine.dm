@@ -357,13 +357,16 @@
 
 	msg += "*---------*</span><br>"
 	msg += applying_pressure
-
 	if (pose)
 		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "[T.He] [T.is] [pose]"
-
 	to_chat(user, jointext(msg, null))
+	var/mob/living/carbon/human/H = usr
+	if(istype(H.glasses, /obj/item/clothing/glasses/hud/health/advanced))
+		var/obj/item/clothing/glasses/hud/health/advanced/A = H.glasses
+		if(A.mode) //If it's not off
+			healthscan(usr,A.mode)
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)

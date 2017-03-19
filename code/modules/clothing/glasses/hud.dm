@@ -22,6 +22,33 @@
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
 	process_med_hud(M, 1)
 
+/obj/item/clothing/glasses/hud/health/advanced
+	name = "Advanced Health Scanner HUD"
+	desc = "A technological breakthrough, allowing doctors wearing these to scan patients as if they were using a normal health analyzer. Kinda bulky though."
+	icon_state = "adv_med_hud"
+	item_state = "adv_med_hud"
+	origin_tech = "magnets=6;biotech=5"
+	w_class = 3
+	action_button_name = "Adjust Verbosity"
+	var/mode = 0
+
+/obj/item/clothing/glasses/hud/health/advanced/attack_self()
+	toggle_mode()
+
+/obj/item/clothing/glasses/hud/health/advanced/verb/toggle_mode()
+	set name = "Switch Verbosity"
+	set category = "Object"
+	mode = !mode
+	switch (mode)
+		if(2)
+			to_chat(usr, "The scanner now shows specific limb damage.")
+		if(1)
+			to_chat(usr, "The scanner no longer shows limb damage.")
+		else
+			to_chat(usr, "The scanner will no longer give a full medical readout.")
+
+		usr.update_action_buttons()
+
 /obj/item/clothing/glasses/hud/health/prescription
 	name = "Prescription Health Scanner HUD"
 	desc = "A medical HUD integrated with a set of prescription glasses"
@@ -53,3 +80,13 @@
 
 /obj/item/clothing/glasses/hud/security/process_hud(var/mob/M)
 	process_sec_hud(M, 1)
+
+/obj/item/clothing/glasses/hud/security/health
+	name = "Medical-Security HUD"
+	icon_state = "medsechud"
+	item_state = "medsechud"
+	desc = "A heads-up display that scans the humans in view and provides accurate data about their security records, as well as their health status."
+
+/obj/item/clothing/glasses/hud/security/health/process_hud(var/mob/M)
+	..()
+	process_med_hud(M,1)
