@@ -72,7 +72,6 @@
 
 /obj/item/weapon/pen/reagent
 	flags = OPENCONTAINER
-	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/weapon/pen/reagent/New()
