@@ -33,13 +33,13 @@ var/roundstart_hour
 var/station_date = ""
 var/next_station_date_change = 1 DAY
 
-#define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
-#define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
+#define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm:ss")
+#define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm:ss")
 #define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
 #define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
 
 /proc/stationtime2text()
-	return time2text(station_time_in_ticks, "hh:mm")
+	return time_stamp()
 
 /proc/stationdate2text()
 	var/update_time = FALSE
@@ -49,7 +49,7 @@ var/next_station_date_change = 1 DAY
 	if(!station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+544)) + "-" + time2text(timeofday, "MM-DD")
+		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+config.year_offset)) + "-" + time2text(timeofday, "MM-DD")
 	return station_date
 
 /proc/time_stamp()
@@ -77,20 +77,18 @@ var/round_start_time = 0
 
 /proc/roundduration2text()
 	if(!round_start_time)
-		return "00:00"
-	if(last_round_duration && world.time < next_duration_update)
-		return last_round_duration
+		return "00:00:00"
 
 	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
-	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
+	var/secs = ((mills % 36000) % 600) / 10
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)
 
+	secs = secs < 10 ? add_zero(secs, 1): secs
 	mins = mins < 10 ? add_zero(mins, 1) : mins
 	hours = hours < 10 ? add_zero(hours, 1) : hours
 
-	last_round_duration = "[hours]:[mins]"
-	next_duration_update = world.time + 1 MINUTES
+	last_round_duration = "[hours]:[mins]:[secs]"
 	return last_round_duration
 
 //Can be useful for things dependent on process timing
