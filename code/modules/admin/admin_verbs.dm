@@ -82,7 +82,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/event_manager_panel,
 	/client/proc/empty_ai_core_toggle_latejoin,
 	/client/proc/empty_ai_core_toggle_latejoin,
-	/client/proc/aooc,
+	/client/proc/aoocsay,
 	/client/proc/change_human_appearance_admin,	// Allows an admin to change the basic appearance of human-based mobs ,
 	/client/proc/change_human_appearance_self,	// Allows the human-based mob itself change its basic appearance ,
 	/client/proc/change_security_level,
@@ -304,7 +304,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message, // send an message to somebody as a 'voice in their head',
-	/client/proc/aooc,
+	/client/proc/aoocsay,
 	/datum/admins/proc/paralyze_mob,
 	/datum/admins/proc/sendFax
 
