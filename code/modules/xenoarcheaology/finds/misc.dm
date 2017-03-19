@@ -10,6 +10,9 @@
 /obj/machinery/crystal/New()
 	if(prob(50))
 		icon_state = "crystal2"
+	else
+		if(prob(50))
+			icon_state = "crystal3"
 
 //large finds
 				/*
