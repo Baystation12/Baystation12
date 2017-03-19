@@ -95,6 +95,18 @@
 	icon_state = "impact_u_laser"
 
 //----------------------------
+// Bogani Pulsar beam
+//----------------------------
+/obj/effect/projectile/laser_bogani/tracer
+	icon_state = "bogb"
+
+/obj/effect/projectile/laser_bogani/muzzle
+	icon_state = "muzzle_bogb"
+
+/obj/effect/projectile/laser_bogani/impact
+	icon_state = "impact_bogb"
+
+//----------------------------
 // Pulse muzzle effect only
 //----------------------------
 /obj/effect/projectile/pulse/muzzle
