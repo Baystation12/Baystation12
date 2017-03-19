@@ -6,7 +6,6 @@
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
-	var/abstract = 0
 	var/r_speed = 1.0
 	var/health = null
 	var/burn_point = null
@@ -575,7 +574,7 @@ var/list/global/slot_flags_enumeration = list(
 	set category = "Object"
 
 	var/obj/item/I = get_active_hand()
-	if(I && !I.abstract)
+	if(I && I.simulated)
 		I.showoff(src)
 
 /*

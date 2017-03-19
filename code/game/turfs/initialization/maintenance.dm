@@ -45,8 +45,6 @@
 
 	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
-		if(prob(web_probability))
-			new /obj/effect/spider/spiderling/mundane(T)
 
 /decl/turf_initializer/maintenance/proc/dirty_neighbors(var/list/cardinal_turfs)
 	var/how_dirty = 0
@@ -68,7 +66,10 @@
 				new /obj/effect/decal/cleanable/cobweb(T)
 			if(dir == EAST)
 				new /obj/effect/decal/cleanable/cobweb2(T)
-			return
+			if(prob(web_probability))
+				var/obj/effect/spider/spiderling/spiderling = new /obj/effect/spider/spiderling/mundane/dormant(T)
+				spiderling.pixel_y = spiderling.shift_range
+				spiderling.pixel_x = dir == WEST ? -spiderling.shift_range : spiderling.shift_range
 
 /decl/turf_initializer/maintenance/proc/get_dirt_amount()
 	return rand(10, 50) + rand(0, 50)

@@ -4,6 +4,7 @@ the HUD updates properly! */
 
 // hud overlay image type, used for clearing client.images precisely
 /image/hud_overlay
+	appearance_flags = RESET_COLOR|RESET_TRANSFORM|KEEP_APART
 
 //Medical HUD outputs. Called by the Life() proc of the mob using it, usually.
 proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)

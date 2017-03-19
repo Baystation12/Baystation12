@@ -93,6 +93,8 @@
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small
+	name = "personal sidearm cabinet"
+	req_one_access = list(access_solgov_crew)
 	will_contain = list(
 		/obj/item/weapon/gun/energy/gun/small = 6
 	)

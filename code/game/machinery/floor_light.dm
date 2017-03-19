@@ -154,7 +154,3 @@ var/list/floor_light_cache = list()
 	if(A)
 		on = 0
 	..()
-
-/obj/machinery/floor_light/cultify()
-	default_light_colour = "#FF0000"
-	update_brightness()

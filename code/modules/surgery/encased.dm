@@ -113,6 +113,8 @@
 	user.visible_message(msg, self_msg)
 
 	affected.open = 3
+	for(var/obj/item/weapon/implant/I in affected.implants)
+		I.exposed()
 
 	// Whoops!
 	if(prob(10))

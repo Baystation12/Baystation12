@@ -53,7 +53,7 @@ var/global/list/skin_styles_female_list = list()		//unused
 
 var/datum/category_collection/underwear/global_underwear = new()
 
-var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag")
+var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Brown Satchel", "Messenger Bag", "Black Satchel")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
 // Visual nets

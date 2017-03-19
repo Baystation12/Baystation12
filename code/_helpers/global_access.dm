@@ -615,6 +615,8 @@
 			return global.ghost_traps;
 		if("global_announcer")
 			return global.global_announcer;
+		if("global_headset")
+			return global.global_headset;
 		if("global_hud")
 			return global.global_hud;
 		if("global_huds")
@@ -1053,6 +1055,8 @@
 			return global.recentmessages;
 		if("reg_dna")
 			return global.reg_dna;
+		if("registered_macros_by_ckey_")
+			return global.registered_macros_by_ckey_;
 		if("religion_choices")
 			return global.religion_choices;
 		if("religion_name")
@@ -1167,6 +1171,8 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
+		if("sound_player")
+			return global.sound_player;
 		if("sounds_cache")
 			return global.sounds_cache;
 		if("spacevines_spawned")
@@ -1447,7 +1453,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2064,6 +2070,8 @@
 			global.ghost_traps=newval;
 		if("global_announcer")
 			global.global_announcer=newval;
+		if("global_headset")
+			global.global_headset=newval;
 		if("global_hud")
 			global.global_hud=newval;
 		if("global_huds")
@@ -2502,6 +2510,8 @@
 			global.recentmessages=newval;
 		if("reg_dna")
 			global.reg_dna=newval;
+		if("registered_macros_by_ckey_")
+			global.registered_macros_by_ckey_=newval;
 		if("religion_choices")
 			global.religion_choices=newval;
 		if("religion_name")
@@ -2616,6 +2626,8 @@
 			global.solar_gen_rate=newval;
 		if("solars_list")
 			global.solars_list=newval;
+		if("sound_player")
+			global.sound_player=newval;
 		if("sounds_cache")
 			global.sounds_cache=newval;
 		if("spacevines_spawned")
@@ -2896,7 +2908,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2954,10 +2966,6 @@
 	"account_hack_attempted",
 	"acting_rank_prefixes",
 	"active_diseases",
-	"activeauth",
-	"activecharges",
-	"activename",
-	"activetype",
 	"actor",
 	"additional_antag_types",
 	"adjectives",
@@ -3209,6 +3217,7 @@
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_announcer",
+	"global_headset",
 	"global_hud",
 	"global_huds",
 	"global_listen_count",
@@ -3428,6 +3437,7 @@
 	"random_useful_",
 	"recentmessages",
 	"reg_dna",
+	"registered_macros_by_ckey_",
 	"religion_choices",
 	"religion_name",
 	"renegades",
@@ -3485,6 +3495,7 @@
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",
+	"sound_player",
 	"sounds_cache",
 	"spacevines_spawned",
 	"spark_sound",
@@ -3514,7 +3525,6 @@
 	"status_icons_to_colour",
 	"stool_cache",
 	"stored_shock_by_ref",
-	"storedwarrant",
 	"string_part_flags",
 	"string_slot_flags",
 	"sun",

@@ -331,14 +331,14 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	return 0
 
 
-/mob/proc/abiotic(var/full_body = 0)
-	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask)))
-		return 1
+/mob/proc/abiotic(var/full_body = FALSE)
+	if(full_body && ((src.l_hand && src.l_hand.simulated) || (src.r_hand && src.r_hand.simulated) || (src.back || src.wear_mask)))
+		return TRUE
 
-	if((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )))
-		return 1
+	if((src.l_hand && src.l_hand.simulated) || (src.r_hand && src.r_hand.simulated))
+		return TRUE
 
-	return 0
+	return FALSE
 
 //converts intent-strings into numbers and back
 var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
@@ -443,8 +443,11 @@ proc/is_blind(A)
 					name = M.real_name
 		if(!name)
 			name = C.key
+		var/diedat = ""
+		if(C.mob.lastarea)
+			diedat = " at [C.mob.lastarea]"
 		if(joined_ghosts)
-			message = "The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]"
+			message = "The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead[diedat]. [message]"
 		else
 			message = "<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]"
 		communicate(/decl/communication_channel/dsay, C || O, message, /decl/dsay_communication/direct)

@@ -375,13 +375,12 @@
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
-			//Grab some data from the character prefs for use in random news procs.
-
-			AnnounceArrival(character, rank, spawnpoint.msg)
-		else
-			AnnounceCyborg(character, rank, spawnpoint.msg)
+			if(job.announced)
+				AnnounceArrival(character, rank, spawnpoint.msg)
 		matchmaker.do_matchmaking()
+	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 	qdel(src)
+
 
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 	if (ticker.current_state == GAME_STATE_PLAYING)
@@ -389,6 +388,7 @@
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
 		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+		log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name

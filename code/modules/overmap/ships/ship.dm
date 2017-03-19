@@ -11,6 +11,8 @@
 
 	var/obj/machinery/computer/helm/nav_control
 	var/list/engines = list()
+	var/engines_state = 1 //global on/off toggle for all engines
+	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
 /obj/effect/overmap/ship/initialize()
 	..()

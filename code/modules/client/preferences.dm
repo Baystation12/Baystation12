@@ -360,7 +360,7 @@ datum/preferences
 				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
-	if(backbag > 5 || backbag < 1)
+	if(backbag > 6 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag
 
@@ -399,6 +399,9 @@ datum/preferences
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
+	
+	if(!character.isSynthetic())
+		character.nutrition = rand(140,360)
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()

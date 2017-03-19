@@ -10,7 +10,7 @@
 	var/datum/money_account/detailed_account_view
 	var/creating_new_account = 0
 	var/const/fund_cap = 1000000
-	
+
 	circuit = /obj/item/weapon/circuitboard/account_database
 
 	proc/get_access_level()
@@ -205,7 +205,7 @@
 					text = {"
 						[accounting_letterhead(title)]
 						<u>Holder:</u> [detailed_account_view.owner_name]<br>
-						<u>Balance:</u> þ[detailed_account_view.money]<br>
+						<u>Balance:</u> T[detailed_account_view.money]<br>
 						<u>Status:</u> [detailed_account_view.suspended ? "Suspended" : "Active"]<br>
 						<u>Transactions:</u> ([detailed_account_view.transaction_log.len])<br>
 						<table>
@@ -260,7 +260,7 @@
 								<tr>
 									<td>#[D.account_number]</td>
 									<td>[D.owner_name]</td>
-									<td>þ[D.money]</td>
+									<td>T[D.money]</td>
 									<td>[D.suspended ? "Suspended" : "Active"]</td>
 								</tr>
 						"}

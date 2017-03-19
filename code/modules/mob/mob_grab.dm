@@ -34,7 +34,6 @@
 	plane = HUD_PLANE
 	layer = HUD_ITEM_LAYER
 
-	abstract = 1
 	item_state = "nothing"
 	simulated = 0
 

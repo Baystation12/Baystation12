@@ -85,6 +85,7 @@ obj/item/weapon/gun/energy/retro
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
 	icon_state = "oldxray"
+	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	projectile_type = /obj/item/projectile/beam/xray
 	requires_two_hands = 1
