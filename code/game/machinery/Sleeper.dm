@@ -181,9 +181,6 @@
 			to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
 			return
 		M.stop_pulling()
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
 		M.forceMove(src)
 		update_use_power(2)
 		occupant = M
@@ -192,9 +189,6 @@
 /obj/machinery/sleeper/proc/go_out()
 	if(!occupant)
 		return
-	if(occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.dropInto(loc)
 	occupant = null
 	for(var/atom/movable/A in src) // In case an object was dropped inside or something

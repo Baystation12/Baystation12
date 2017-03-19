@@ -293,7 +293,7 @@
 		usr.machine = src
 
 		if( href_list["view"] )
-			usr.client.eye = src.compressor
+			return
 		else if( href_list["str"] )
 			src.compressor.starter = !src.compressor.starter
 		else if (href_list["doors"])

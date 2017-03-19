@@ -202,22 +202,6 @@
 /mob/proc/restrained()
 	return
 
-/mob/proc/reset_view(atom/A)
-	if (client)
-		A = A ? A : eyeobj
-		if (istype(A, /atom/movable))
-			client.perspective = EYE_PERSPECTIVE
-			client.eye = A
-		else
-			if (isturf(loc))
-				client.eye = client.mob
-				client.perspective = MOB_PERSPECTIVE
-			else
-				client.perspective = EYE_PERSPECTIVE
-				client.eye = loc
-	return
-
-
 /mob/proc/show_inv(mob/user as mob)
 	return
 
@@ -467,7 +451,6 @@
 	set name = "Cancel Camera View"
 	set category = "OOC"
 	unset_machine()
-	reset_view(null)
 
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])

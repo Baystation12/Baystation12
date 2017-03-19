@@ -49,13 +49,6 @@
 
 	my_client = client
 
-	if(loc && !isturf(loc))
-		client.eye = loc
-		client.perspective = EYE_PERSPECTIVE
-	else
-		client.eye = src
-		client.perspective = MOB_PERSPECTIVE
-
 	if(eyeobj)
 		eyeobj.possess(src)
 

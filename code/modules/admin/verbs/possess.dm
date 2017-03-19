@@ -22,7 +22,6 @@
 	usr.forceMove(O)
 	usr.real_name = O.name
 	usr.name = O.name
-	usr.client.eye = O
 	usr.control_object = O
 	feedback_add_details("admin_verb","PO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -40,7 +39,6 @@
 //		usr.regenerate_icons() //So the name is updated properly
 
 	usr.forceMove(O.loc) // Appear where the object you were controlling is -- TLE
-	usr.client.eye = usr
 	usr.control_object = null
 	feedback_add_details("admin_verb","RO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

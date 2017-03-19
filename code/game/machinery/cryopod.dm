@@ -420,10 +420,6 @@
 
 				M.forceMove(src)
 
-				if(M.client)
-					M.client.perspective = EYE_PERSPECTIVE
-					M.client.eye = src
-
 			icon_state = occupied_icon_state
 
 			to_chat(M, "<span class='notice'>[on_enter_occupant_message]</span>")
@@ -494,8 +490,6 @@
 			return
 
 		usr.stop_pulling()
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
 		usr.forceMove(src)
 		set_occupant(usr)
 		if(ishuman(usr) && applies_stasis)
@@ -517,10 +511,6 @@
 
 	if(!occupant)
 		return
-
-	if(occupant.client)
-		occupant.client.eye = src.occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.forceMove(get_turf(src))
 	if(ishuman(occupant) && applies_stasis)

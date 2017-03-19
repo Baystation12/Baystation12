@@ -14,9 +14,10 @@
 /datum/controller/process/mob/doWork()
 	for(last_object in mob_list)
 		var/mob/M = last_object
-		if(istype(M) && isnull(M.gcDestroyed))
+		if(istype(M) && !deleted(M))
 			try
 				M.Life()
+				client_eye_repository.process_mob(M)
 			catch(var/exception/e)
 				catchException(e, M)
 			SCHECK

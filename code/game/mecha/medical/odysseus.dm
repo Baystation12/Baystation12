@@ -33,31 +33,6 @@
 				H.glasses = null
 		..()
 		return
-/*
-	verb/set_perspective()
-		set name = "Set client perspective."
-		set category = "Exosuit Interface"
-		set src = usr.loc
-		var/perspective = input("Select a perspective type.",
-                      "Client perspective",
-                      occupant.client.perspective) in list(MOB_PERSPECTIVE,EYE_PERSPECTIVE)
-		log_debug("[perspective]")
-
-		occupant.client.perspective = perspective
-		return
-
-	verb/toggle_eye()
-		set name = "Toggle eye."
-		set category = "Exosuit Interface"
-		set src = usr.loc
-		if(occupant.client.eye == occupant)
-			occupant.client.eye = src
-		else
-			occupant.client.eye = occupant
-		log_debug("[occupant.client.eye]")
-
-		return
-*/
 
 //TODO - Check documentation for client.eye and client.perspective...
 /obj/item/clothing/glasses/hud/health/mech

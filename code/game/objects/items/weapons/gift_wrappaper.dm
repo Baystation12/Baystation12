@@ -43,9 +43,6 @@
 
 	for(var/mob/M in src) //Should only be one but whatever.
 		M.dropInto(loc)
-		if (M.client)
-			M.client.eye = M.client.mob
-			M.client.perspective = MOB_PERSPECTIVE
 
 	qdel(src)
 
@@ -198,10 +195,6 @@
 		if (src.amount > 2)
 			var/obj/effect/spresent/present = new /obj/effect/spresent (H.loc)
 			src.amount -= 2
-
-			if (H.client)
-				H.client.perspective = EYE_PERSPECTIVE
-				H.client.eye = present
 
 			H.forceMove(present)
 			admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")

@@ -192,18 +192,6 @@
 		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
 
-	if(machine)
-		var/viewflags = machine.check_eye(src)
-		if(viewflags < 0)
-			reset_view(null, 0)
-		else if(viewflags)
-			set_sight(viewflags)
-	else if(eyeobj)
-		if(eyeobj.owner != src)
-			reset_view(null)
-	else if(!client.adminobs)
-		reset_view(null)
-
 /mob/living/proc/update_sight()
 	if(stat == DEAD || eyeobj)
 		update_dead_sight()

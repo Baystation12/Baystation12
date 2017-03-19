@@ -85,9 +85,6 @@
 		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 	else
 		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>", 3)
-	if (C.client)
-		C.client.perspective = EYE_PERSPECTIVE
-		C.client.eye = src
 	C.resting = 1
 	C.dropInto(loc)
 	for(var/obj/O in src)
