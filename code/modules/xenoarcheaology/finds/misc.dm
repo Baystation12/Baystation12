@@ -8,19 +8,25 @@
 	icon_state = "crystal"
 
 
-//Variant crystals, in case you want to spawn those directly.
-
-/obj/machinery/crystal/pink
-	name = "Crystal"
-	icon_state = "crystal2"
-
-/obj/machinery/crystal/orange
-	name = "Crystal"
-	icon_state = "crystal3"
-
 /obj/machinery/crystal/New()
 	..()
 	icon_state = pick("crystal", "crystal2", "crystal3")
+
+
+//Variant crystals, in case you want to spawn/map those directly.
+/obj/machinery/crystal_static/
+	name = "Crystal"
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "crystal"
+
+/obj/machinery/crystal_static/pink
+	name = "Crystal"
+	icon_state = "crystal2"
+
+/obj/machinery/crystal_static/orange
+	name = "Crystal"
+	icon_state = "crystal3"
+
 
 //large finds
 				/*
