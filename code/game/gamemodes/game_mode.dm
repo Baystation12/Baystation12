@@ -213,8 +213,8 @@ var/global/list/additional_antag_types = list()
 
 	spawn (rand(waittime_l, waittime_h))
 		using_map.send_welcome()
-		spawn(rand(100,150))
-			announce_ert_disabled()
+		sleep(rand(100,150))
+		announce_ert_disabled()
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
 	for(var/datum/antagonist/antag in antag_templates)
