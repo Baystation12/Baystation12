@@ -48,7 +48,7 @@
 	description = "Phoron in its liquid form."
 	taste_mult = 1.5
 	reagent_state = LIQUID
-	color = "#9D14DB"
+	color = "#FF3300"
 	strength = 30
 	touch_met = 5
 	var/fire_mult = 5

@@ -309,6 +309,7 @@
 		/obj/item/stack/material/iron = "iron",
 		/obj/item/stack/material/uranium = "uranium",
 		/obj/item/stack/material/phoron = "phoron",
+		/obj/item/stack/material/phoron/fifty = "phoron",
 		/obj/item/stack/material/gold = "gold",
 		/obj/item/stack/material/silver = "silver",
 		/obj/item/stack/material/mhydrogen = "hydrogen"
