@@ -54,8 +54,8 @@
 		welcome_text += "<b>[generate_planet_name()]</b>, \a [generate_planet_type()]<br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
-	to_world("<span class='warning'>New [using_map.company_name] Update available at all communication consoles.</span>")
-	sound_to(world, sound('sound/AI/commandreport.ogg'))
+	var/datum/announcement/minor/announcer = new(new_sound = sound('sound/AI/commandreport.ogg'))
+	announcer.Announce(message = "New [using_map.company_name] Update available at all communication consoles.")
 
 
 
