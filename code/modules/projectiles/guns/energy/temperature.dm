@@ -9,7 +9,7 @@
 	charge_cost = 10
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_POWER = 3, TECH_MAGNET = 2)
 	slot_flags = SLOT_BELT|SLOT_BACK
-	requires_two_hands = 2
+	one_hand_penalty = 2
 
 	projectile_type = /obj/item/projectile/temp
 	cell_type = /obj/item/weapon/cell/high
