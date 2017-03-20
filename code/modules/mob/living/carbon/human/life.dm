@@ -211,6 +211,8 @@
 		if(getBrainLoss() >= 35)
 			if(7 <= rn && rn <= 9) if(get_active_hand())
 				to_chat(src, "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>")
+				if(prob(1))
+					src.say(pick("SUPAMATR AND DUCK TAEP DONT MIX!!!", "WAT R WE TEE GEE NAOW??", "DOUBLE U TEE EFF IZ A BLU NEXIS", "WERE DA EMERSON @"))
 				drop_item()
 		if(getBrainLoss() >= 45)
 			if(10 <= rn && rn <= 12)
