@@ -56,7 +56,10 @@
 	if(href_list["ID"])
 		var/mob/M = usr
 		if(ID)
-			M.put_in_hands(ID)
+			if(!issilicon(usr))
+				M.put_in_hands(ID)
+			else
+				ID.dropInto(loc)
 			ID = null
 			selected_outfit.Cut()
 		else

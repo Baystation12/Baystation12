@@ -286,6 +286,8 @@ var/global/list/narsie_list = list()
 		if(food.stat)
 			continue
 		var/turf/pos = get_turf(food)
+		if(!pos)	//Catches failure of get_turf.
+			continue
 		if(pos.z != src.z)
 			continue
 		cultists += food
