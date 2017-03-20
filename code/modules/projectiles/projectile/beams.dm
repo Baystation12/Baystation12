@@ -62,17 +62,17 @@
 	name = "pulse"
 	icon_state = "u_laser"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 20 //lower damage, but fires in bursts
+	damage = 15 //lower damage, but fires in bursts
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
 	tracer_type = /obj/effect/projectile/laser_pulse/tracer
 	impact_type = /obj/effect/projectile/laser_pulse/impact
 
 /obj/item/projectile/beam/pulse/mid
-	damage = 25
+	damage = 20
 
 /obj/item/projectile/beam/pulse/heavy
-	damage = 30
+	damage = 25
 
 /obj/item/projectile/beam/pulse/destroy
 	name = "destroyer pulse"
