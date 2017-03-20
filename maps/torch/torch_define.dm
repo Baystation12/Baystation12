@@ -42,7 +42,22 @@
 
 /datum/map/torch/setup_map()
 	..()
-	system_name = "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
+	system_name = generate_system_name()
+
+/datum/map/torch/send_welcome()
+	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><hr />"
+	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
+	welcome_text += "Current system:<br /><b>[system_name()]</b><br />"
+	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br />"
+	welcome_text += "Planets in current system:<br />"
+	for(var/i = 0, i < rand(0, 3), i++)
+		welcome_text += "<b>[generate_planet_name()]</b>, \a [generate_planet_type()]<br />"
+
+	post_comm_message("SEV Torch Sensor Readings", welcome_text)
+	to_world("<span class='warning'>New [using_map.company_name] Update available at all communication consoles.</span>")
+	sound_to(world, sound('sound/AI/commandreport.ogg'))
+
+
 
 /datum/map/torch/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null,1,1,7,world.maxx,world.maxy) // Create the mining Z-level.

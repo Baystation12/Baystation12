@@ -35,6 +35,9 @@ var/global/list/additional_antag_types = list()
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
 
+	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
+	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
+
 /datum/game_mode/New()
 	..()
 	// Enforce some formatting.
@@ -208,8 +211,10 @@ var/global/list/additional_antag_types = list()
 	spawn (ROUNDSTART_LOGOUT_REPORT_TIME)
 		display_roundstart_logout_report()
 
-	spawn(rand(100,150))
-		announce_ert_disabled()
+	spawn (rand(waittime_l, waittime_h))
+		using_map.send_welcome()
+		spawn(rand(100,150))
+			announce_ert_disabled()
 
 	//Assign all antag types for this game mode. Any players spawned as antags earlier should have been removed from the pending list, so no need to worry about those.
 	for(var/datum/antagonist/antag in antag_templates)

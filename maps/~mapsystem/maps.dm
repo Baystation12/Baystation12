@@ -108,6 +108,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		lobby_music_type = pick(lobby_music_tracks)
 	lobby_music = new lobby_music_type()
 
+/datum/map/proc/send_welcome()
+	return
+
 /datum/map/proc/perform_map_generation()
 	return
 
