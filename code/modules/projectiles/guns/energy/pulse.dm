@@ -8,7 +8,7 @@
 	projectile_type = /obj/item/projectile/beam/pulse/heavy
 	max_shots = 36
 	w_class = ITEM_SIZE_HUGE
-	requires_two_hands=6
+	one_hand_penalty=6
 	multi_aim = 1
 	burst_delay = 3
 	burst = 3
@@ -24,7 +24,7 @@
 	projectile_type = /obj/item/projectile/beam/pulse/mid
 	max_shots = 24
 	w_class = ITEM_SIZE_LARGE
-	requires_two_hands=3
+	one_hand_penalty=3
 	burst_delay = 2
 	move_delay = 2
 
@@ -37,7 +37,7 @@
 	projectile_type = /obj/item/projectile/beam/pulse
 	max_shots = 21
 	w_class = ITEM_SIZE_NORMAL
-	requires_two_hands=1 //a bit heavy
+	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1
 	move_delay = 1
 

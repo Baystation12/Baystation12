@@ -17,7 +17,7 @@
 	icon_state = "tasercarbine"
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BELT|SLOT_BACK
-	requires_two_hands = 3
+	one_hand_penalty = 3
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	force = 8
 	max_shots = 10
@@ -55,7 +55,7 @@
 	item_state = "stunrifle"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
-	requires_two_hands = 6
+	one_hand_penalty = 6
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	force = 10
 	max_shots = 12
@@ -87,7 +87,7 @@
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = ITEM_SIZE_LARGE
 	force = 10
-	requires_two_hands = 1
+	one_hand_penalty = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large
 

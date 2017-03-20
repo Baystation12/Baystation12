@@ -6,7 +6,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	force = 10
-	requires_two_hands = 2
+	one_hand_penalty = 2
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
@@ -15,7 +15,7 @@
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
-	requires_two_hands = 0 //just in case
+	one_hand_penalty = 0 //just in case
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser carbine"
@@ -43,7 +43,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
 	max_shots = 5 //to compensate a bit for self-recharging
-	requires_two_hands = 1 //a little bulky
+	one_hand_penalty = 1 //a little bulky
 	self_recharge = 1
 
 /obj/item/weapon/gun/energy/lasercannon
@@ -53,7 +53,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = null
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
-	requires_two_hands = 6 //large and heavy
+	one_hand_penalty = 6 //large and heavy
 	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 40
@@ -67,7 +67,7 @@ obj/item/weapon/gun/energy/retro
 	use_external_power = 1
 	recharge_time = 10
 	accuracy = 0 //mounted laser cannons don't need any help, thanks
-	requires_two_hands = 0
+	one_hand_penalty = 0
 
 /obj/item/weapon/gun/energy/xray
 	name = "x-ray laser carbine"
@@ -77,7 +77,7 @@ obj/item/weapon/gun/energy/retro
 	slot_flags = SLOT_BELT|SLOT_BACK
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
-	requires_two_hands = 2
+	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE
 	charge_cost = 15
 	max_shots = 10
@@ -88,7 +88,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	projectile_type = /obj/item/projectile/beam/xray
-	requires_two_hands = 1
+	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
 
@@ -99,7 +99,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = "laser"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
-	requires_two_hands = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
+	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
 	charge_cost = 40
 	max_shots = 4
