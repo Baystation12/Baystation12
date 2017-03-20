@@ -41,7 +41,7 @@ var/list/global/tank_gauge_cache = list()
 	var/leaking = 0
 	var/wired = 0
 
-	description_info = "These tanks are utilised to store any of the various types of gaseous substances on the station. \
+	description_info = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices on station to be filled or emptied. <br>\
 	<br>\
 	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ºC. \

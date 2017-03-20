@@ -779,7 +779,7 @@ var/list/admin_verbs_mentor = list(
 
 /client/proc/change_security_level()
 	set name = "Set security level"
-	set desc = "Sets the station security level"
+	set desc = "Sets the security level"
 	set category = "Admin"
 
 	if(!check_rights(R_ADMIN))	return

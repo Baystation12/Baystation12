@@ -6,7 +6,7 @@ var/global/list/minor_air_alarms = list()
 
 /obj/machinery/computer/atmos_alert
 	name = "atmospheric alert computer"
-	desc = "Used to access the station's atmospheric sensors."
+	desc = "Used to access the atmospheric sensors."
 	circuit = /obj/item/weapon/circuitboard/atmos_alert
 	icon_keyboard = "atmos_key"
 	icon_screen = "alert:0"

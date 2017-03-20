@@ -414,7 +414,7 @@
  */
 /obj/item/weapon/paper/Court
 	name = "Judgement"
-	info = "For crimes against the station, the offender is sentenced to:<BR>\n<BR>\n"
+	info = "For crimes as specified, the offender is sentenced to:<BR>\n<BR>\n"
 
 /obj/item/weapon/paper/crumpled
 	name = "paper scrap"

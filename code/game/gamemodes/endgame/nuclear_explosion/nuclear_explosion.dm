@@ -23,12 +23,12 @@
 
 	var/turf/T = get_turf(explosion_source)
 	if(isStationLevel(T.z))
-		to_world("<span class='danger'>The station was destoyed by the nuclear blast!</span>")
+		to_world("<span class='danger'>The [station_name()] was destoyed by the nuclear blast!</span>")
 
 		dust_mobs(using_map.station_levels)
 		play_cinematic_station_destroyed()
 	else
-		to_world("<span class='danger'>A nuclear device was set off, but the explosion was out of reach of the station!</span>")
+		to_world("<span class='danger'>A nuclear device was set off, but the explosion was out of reach of the [station_name()]!</span>")
 
 		dust_mobs(list(T.z))
 		play_cinematic_station_unaffected()
