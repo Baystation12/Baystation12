@@ -513,8 +513,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if("Yes")
 			command_announcement.Announce(input, customname, new_sound = 'sound/AI/commandreport.ogg', msg_sanitized = 1);
 		if("No")
-			to_world("<span class='warning'>New [using_map.company_name] Update available at all communication consoles.</span>")
-			sound_to(world, sound('sound/AI/commandreport.ogg'))
+			minor_announcement.Announce(message = "New [using_map.company_name] Update available at all communication consoles.")
 
 	log_admin("[key_name(src)] has created a command report: [input]")
 	message_admins("[key_name_admin(src)] has created a command report", 1)
