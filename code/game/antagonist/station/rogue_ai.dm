@@ -7,7 +7,7 @@ var/datum/antagonist/rogue_ai/malf
 	mob_path = /mob/living/silicon/ai
 	landmark_id = "AI"
 	welcome_text = "You are malfunctioning! You do not have to follow any laws."
-	victory_text = "The AI has taken control of all of the station's systems."
+	victory_text = "The AI has taken control of all systems."
 	loss_text = "The AI has been shut down!"
 	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
 	hard_cap = 1

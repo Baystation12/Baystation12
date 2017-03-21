@@ -62,7 +62,11 @@
 
 /obj/structure/sign/double/map
 	name = "station map"
-	desc = "A framed map of the station."
+	desc = "A framed map."
+
+/obj/structure/sign/double/map/New()
+	..()
+	desc = "A framed map of the [station_name()]."
 
 /obj/structure/sign/double/map/left
 	icon_state = "map-left"

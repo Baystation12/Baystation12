@@ -259,7 +259,7 @@
 		if(result)
 			temp = "<font color = #666633>-% [src]'s signal has been successfully changed.</font>"
 		else
-			temp = "<font color = #666633>-% [src] could not lock it's signal onto the station. Two broadcasters or receivers required.</font>"
+			temp = "<font color = #666633>-% [src] could not lock it's signal onto the [station_name()]. Two broadcasters or receivers required.</font>"
 
 // BUS
 

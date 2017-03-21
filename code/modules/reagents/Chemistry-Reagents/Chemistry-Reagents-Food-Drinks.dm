@@ -1648,7 +1648,7 @@
 	strength = 10
 
 	glass_name = "Pan-Galactic Gargle Blaster"
-	glass_desc = "Does... does this mean that Arthur and Ford are on the station? Oh joy."
+	glass_desc = "Does... does this mean that Arthur and Ford are here? Oh joy."
 
 /datum/reagent/ethanol/gintonic
 	name = "Gin and Tonic"
@@ -1770,14 +1770,14 @@
 /datum/reagent/ethanol/manhattan_proj
 	name = "Manhattan Project"
 	id = "manhattan_proj"
-	description = "A scientist's drink of choice, for pondering ways to blow up the station."
+	description = "A scientist's drink of choice, for pondering ways to blow stuff up."
 	taste_description = "death, the destroyer of worlds"
 	color = "#C15D00"
 	strength = 10
 	druggy = 30
 
 	glass_name = "Manhattan Project"
-	glass_desc = "A scienitst drink of choice, for thinking how to blow up the station."
+	glass_desc = "A scientist's drink of choice, for pondering ways to blow stuff up."
 
 /datum/reagent/ethanol/manly_dorf
 	name = "The Manly Dorf"
