@@ -65,6 +65,12 @@
 	desc = "Optical Meson Scanner with prescription lenses."
 	prescription = 6
 
+/obj/item/clothing/glasses/meson/prescription/tajblind
+	name = "industrial veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
+	icon_state = "tajblind_meson"
+	item_state = "tajblind_meson"
+
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
 	desc = "The goggles do nothing!"
@@ -249,11 +255,20 @@
 	icon_state = "sunhud"
 	hud = /obj/item/clothing/glasses/hud/security
 
+
 /obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
 	name = "HUD goggles"
 	desc = "Flash-resistant goggles with an inbuilt heads-up display."
 	icon_state = "goggles"
 
+
+/obj/item/clothing/glasses/sunglasses/sechud/tajblind
+	name = "sleek veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
+	icon_state = "tajblind_sec"
+	item_state = "tajblind_sec"
+	prescription = 5
+	
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
 	desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
@@ -359,3 +374,18 @@
 	desc = "A set of implantable lenses designed to augment your vision."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
+
+/obj/item/clothing/glasses/tajblind
+	name = "embroidered veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes."
+	icon_state = "tajblind"
+	item_state = "tajblind"
+	prescription = 5
+
+/obj/item/clothing/glasses/tajblind/med
+	name = "lightweight veil"
+	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
+	icon_state = "tajblind_med"
+	item_state = "tajblind_med"
+	hud = /obj/item/clothing/glasses/hud/health
+
