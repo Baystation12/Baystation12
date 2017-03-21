@@ -27,8 +27,8 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/rank/scientist
+	name = "\improper NanoTrasen smock and pants"
 	desc = "A fashionable tunic and pair of trousers made from patented biohazard-resistant synthetic fabrics. The colors denote the wearer as a member of NanoTrasen."
-	name = "NanoTrasen smock and pants"
 	icon_state = "ntsmock"
 	item_state = "w_suit"
 	worn_state = "ntsmock"
@@ -36,7 +36,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/under/rank/scientist/executive
-	name = "NanoTrasen executive smock and pants"
+	name = "\improper NanoTrasen executive smock and pants"
 	desc = "A fashionable tunic and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a member of NanoTrasen's higher-ups."
 	icon_state = "ntsmockexec"
 	worn_state = "ntsmockexec"

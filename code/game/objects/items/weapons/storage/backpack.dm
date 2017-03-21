@@ -115,7 +115,7 @@
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/toxins
-	name = "NanoTrasen backpack"
+	name = "\improper NanoTrasen backpack"
 	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions. The colors on it denote it as a NanoTrasen backpack."
 	icon_state = "ntpack"
 
@@ -247,7 +247,7 @@
 	icon_state = "satchel-gen"
 
 /obj/item/weapon/storage/backpack/satchel_tox
-	name = "NanoTrasen satchel"
+	name = "\improper NanoTrasen satchel"
 	desc = "Useful for holding research materials. The colors on it denote it as a NanoTrasen bag."
 	icon_state = "satchel-nt"
 
@@ -337,7 +337,7 @@
 	icon_state = "courierbagviro"
 
 /obj/item/weapon/storage/backpack/messenger/tox
-	name = "NanoTrasen messenger bag"
+	name = "\improper NanoTrasen messenger bag"
 	desc = "A backpack worn over one shoulder.  Useful for holding science materials. The colors on it denote it as a NanoTrasen bag."
 	icon_state = "courierbagnt"
 
