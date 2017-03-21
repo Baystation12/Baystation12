@@ -108,31 +108,14 @@
 		skirts[initial(skirt_type.name)] = skirt_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
 
-/datum/gear/uniform/pants
-	display_name = "pants selection"
-	path = /obj/item/clothing/under/pants/white
-	allowed_roles = SEMIFORMAL_ROLES
+/datum/gear/uniform/casual_pants
+    allowed_roles = SEMIFORMAL_ROLES
 
-/datum/gear/uniform/pants/New()
-	..()
-	var/list/pants = list()
-	for(var/pant in typesof(/obj/item/clothing/under/pants))
-		var/obj/item/clothing/under/pants/pant_type = pant
-		pants[initial(pant_type.name)] = pant_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pants))
+/datum/gear/uniform/formal_pants
+    allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/shorts
-	display_name = "shorts selection"
-	path = /obj/item/clothing/under/shorts/jeans
 	allowed_roles = RESTRICTED_ROLES
-
-/datum/gear/uniform/shorts/New()
-	..()
-	var/list/shorts = list()
-	for(var/short in typesof(/obj/item/clothing/under/shorts))
-		var/obj/item/clothing/under/pants/short_type = short
-		shorts[initial(short_type.name)] = short_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater"

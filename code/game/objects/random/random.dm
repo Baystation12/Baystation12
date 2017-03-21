@@ -843,7 +843,7 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					prob(4);/obj/item/clothing/under/hazard,\
 					prob(4);/obj/item/clothing/under/sterile,\
 					prob(1);/obj/item/clothing/under/pt,\
-					prob(2);/obj/item/clothing/under/pants/camo,\
+					prob(2);/obj/item/clothing/under/casual_pants/camo,\
 					prob(2);/obj/item/clothing/under/frontier,\
 					prob(2);/obj/item/clothing/under/harness,\
 					prob(2);/obj/item/clothing/under/rank/medical/paramedic,\
