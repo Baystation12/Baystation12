@@ -29,10 +29,8 @@
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
 
-	if(!start_x)
-		start_x = rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
-	if(!start_y)
-		start_y = rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
+	start_x = start_x || rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
+	start_y = start_y || rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
 
 	forceMove(locate(start_x, start_y, using_map.overmap_z))
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
@@ -82,5 +80,6 @@
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
-	testing("Overmap created at Z[using_map.overmap_z].")
+
+	testing("Overmap build complete.")
 	return 1
