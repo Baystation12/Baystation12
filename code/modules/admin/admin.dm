@@ -71,6 +71,7 @@ var/global/floorIsLava = 0
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_OOC]'><font color='[(muted & MUTE_OOC)?"red":"blue"]'>OOC</font></a> |
+			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_AOOC]'><font color='[(muted & MUTE_AOOC)?"red":"blue"]'>AOOC</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_PRAY]'><font color='[(muted & MUTE_PRAY)?"red":"blue"]'>PRAY</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ADMINHELP]'><font color='[(muted & MUTE_ADMINHELP)?"red":"blue"]'>ADMINHELP</font></a> |
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
@@ -701,6 +702,22 @@ var/global/floorIsLava = 0
 		to_world("<B>The OOC channel has been globally disabled!</B>")
 	log_and_message_admins("toggled OOC.")
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/toggleaooc()
+	set category = "Server"
+	set desc="Globally Toggles AOOC"
+	set name="Toggle AOOC"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	config.aooc_allowed = !(config.aooc_allowed)
+	if (config.aooc_allowed)
+		to_world("<B>The AOOC channel has been globally enabled!</B>")
+	else
+		to_world("<B>The AOOC channel has been globally disabled!</B>")
+	log_and_message_admins("toggled AOOC.")
+	feedback_add_details("admin_verb","TAOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/togglelooc()
 	set category = "Server"
