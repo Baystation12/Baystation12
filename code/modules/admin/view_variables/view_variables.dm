@@ -3,7 +3,8 @@
 // step_* and bound_* are here because they literally break the game and do nothing else.
 // parent_type is here because it's pointless to show in VV.
 // others are here because they expose sensitive information
-/var/list/view_variables_hide_vars = list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "parent_type", "step_x", "step_y", "step_size", "sqladdress", "forumsqladdress", "sqlport", "forumsqlport", "sqldb", "forumsqldb", "sqllogin", "forumsqllogin", "sqlpass", "forumsqlpass", "sqlfdbkdb", "sqlfdbklogin", "sqlfdbkpass")
+// this var itself is hidden to keep naughty admins from editing it...
+/var/list/view_variables_hide_vars = list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "parent_type", "step_x", "step_y", "step_size", "view_variables_hide_vars", "sqladdress", "forumsqladdress", "sqlport", "forumsqlport", "sqldb", "forumsqldb", "sqllogin", "forumsqllogin", "sqlpass", "forumsqlpass", "sqlfdbkdb", "sqlfdbklogin", "sqlfdbkpass")
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
 /var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
 // Variables that runtime if you try to test associativity of the lists they contain by indexing
