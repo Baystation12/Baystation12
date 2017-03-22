@@ -60,6 +60,9 @@
 	while(amount > 0 && pick_organs.len)
 		var/obj/item/organ/external/E = pick(pick_organs)
 		pick_organs -= E
+		if(!istype(E))
+			continue
+
 		if(heal)
 			amount -= E.remove_pain(amount)
 		else
