@@ -1397,8 +1397,6 @@
 			return global.verbs;
 		if("view_variables_dont_expand")
 			return global.view_variables_dont_expand;
-		if("view_variables_hide_vars")
-			return global.view_variables_hide_vars;
 		if("view_variables_no_assoc")
 			return global.view_variables_no_assoc;
 		if("virusDB")
@@ -1453,7 +1451,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2852,8 +2850,6 @@
 			global.verbs=newval;
 		if("view_variables_dont_expand")
 			global.view_variables_dont_expand=newval;
-		if("view_variables_hide_vars")
-			global.view_variables_hide_vars=newval;
 		if("view_variables_no_assoc")
 			global.view_variables_no_assoc=newval;
 		if("virusDB")
@@ -2908,7 +2904,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3608,7 +3604,6 @@
 	"ventcrawl_machinery",
 	"verbs",
 	"view_variables_dont_expand",
-	"view_variables_hide_vars",
 	"view_variables_no_assoc",
 	"virusDB",
 	"visual_nets",
