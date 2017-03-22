@@ -41,14 +41,7 @@
 		SetValue(new_value)
 
 /datum/build_mode/edit/OnClick(var/atom/A, var/list/parameters)
-	if(var_to_edit in A.VVlocked())
-		if(!check_rights(R_DEBUG))	return
-	if(var_to_edit in A.VVckey_edit())
-		if(!check_rights(R_SPAWN|R_DEBUG)) return
-	if(var_to_edit in A.VVicon_edit_lock())
-		if(!check_rights(R_FUN|R_DEBUG)) return
-	if(!(var_to_edit in A.vars))
-		to_chat(user, "<span class='warning'>\The [A] does not have a var '[var_to_edit]'</span>")
+	if(!A.may_edit_var(usr, var_to_edit))
 		return
 
 	var/old_value = A.vars[var_to_edit]

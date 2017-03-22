@@ -161,12 +161,8 @@
 
 	var/dir
 
-	if(variable in O.VVlocked())
-		if(!check_rights(R_DEBUG))	return
-	if(variable in O.VVckey_edit())
-		if(!check_rights(R_SPAWN|R_DEBUG)) return
-	if(variable in O.VVicon_edit_lock())
-		if(!check_rights(R_FUN|R_DEBUG)) return
+	if(!O.may_edit_var(usr, variable))
+		return
 
 	if(isnull(variable))
 		to_chat(usr, "Unable to determine variable type.")
@@ -354,12 +350,8 @@
 			to_chat(src, "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])")
 			return
 
-		if(param_var_name in O.VVlocked())
-			if(!check_rights(R_DEBUG))	return
-		if(param_var_name in O.VVckey_edit())
-			if(!check_rights(R_SPAWN|R_DEBUG)) return
-		if(param_var_name in O.VVicon_edit_lock())
-			if(!check_rights(R_FUN|R_DEBUG)) return
+		if(!O.may_edit_var(usr, param_var_name))
+			return
 
 		variable = param_var_name
 
@@ -416,12 +408,8 @@
 		if(!variable)	return
 		var_value = O.get_variable_value(variable)
 
-		if(variable in O.VVlocked())
-			if(!check_rights(R_DEBUG)) return
-		if(variable in O.VVckey_edit())
-			if(!check_rights(R_SPAWN|R_DEBUG)) return
-		if(variable in O.VVicon_edit_lock())
-			if(!check_rights(R_FUN|R_DEBUG)) return
+		if(!O.may_edit_var(usr, variable))
+			return
 
 	if(!autodetect_class)
 
