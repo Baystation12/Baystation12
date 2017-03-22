@@ -1052,7 +1052,7 @@
 "aul" = (/turf/simulated/mineral,/area/syndicate_mothership)
 "aum" = (/obj/structure/bed/alien,/turf/unsimulated/floor{icon_state = "dark"},/area/alien)
 "aun" = (/obj/machinery/dna_scannernew,/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
-"auo" = (/obj/machinery/computer/cloning,/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
+"auo" = (/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
 "aup" = (/obj/machinery/clonepod,/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
 "auq" = (/obj/machinery/computer/scan_consolenew,/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
 "aur" = (/obj/machinery/computer/shuttle_control{req_access = list(101); shuttle_tag = "Administration"},/turf/simulated/floor/shuttle/red,/area/shuttle/administration/centcom)
