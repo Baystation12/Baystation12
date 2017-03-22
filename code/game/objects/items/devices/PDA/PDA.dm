@@ -612,7 +612,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Authenticate")//Checks for ID
 			id_check(U, 1)
 		if("UpdateInfo")
-			set_rank_job(id.rank, ownjob)
+			if(id)
+				set_rank_job(id.rank, ownjob)
 		if("Eject")//Ejects the cart, only done from hub.
 			verb_remove_cartridge()
 
