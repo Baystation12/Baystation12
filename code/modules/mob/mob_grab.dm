@@ -34,7 +34,6 @@
 	plane = HUD_PLANE
 	layer = HUD_ITEM_LAYER
 
-	abstract = 1
 	item_state = "nothing"
 	simulated = 0
 
@@ -97,7 +96,9 @@
 	if(gcDestroyed) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
 		return PROCESS_KILL
 
-	confirm()
+	if(!confirm())
+		return PROCESS_KILL	//qdel'd in confirm.
+		
 	if(!assailant)
 		qdel(src) // Same here, except we're trying to delete ourselves.
 		return PROCESS_KILL

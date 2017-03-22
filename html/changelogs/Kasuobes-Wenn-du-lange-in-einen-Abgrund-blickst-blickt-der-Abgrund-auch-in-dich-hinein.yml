@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - rscadd: "Added flashdark device, basically a flashlight that cloaks you in darkness instead of light. Available in uplinks. Pair with thermal scanners for fun."

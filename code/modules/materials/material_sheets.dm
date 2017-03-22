@@ -115,6 +115,9 @@
 	icon_state = "sheet-phoron"
 	default_type = "phoron"
 
+/obj/item/stack/material/phoron/fifty
+	amount = 50
+
 /obj/item/stack/material/plastic
 	name = "plastic"
 	icon_state = "sheet-plastic"

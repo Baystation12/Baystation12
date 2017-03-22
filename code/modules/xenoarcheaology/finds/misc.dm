@@ -7,9 +7,26 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "crystal"
 
+
 /obj/machinery/crystal/New()
-	if(prob(50))
-		icon_state = "crystal2"
+	..()
+	icon_state = pick("crystal", "crystal2", "crystal3")
+
+
+//Variant crystals, in case you want to spawn/map those directly.
+/obj/machinery/crystal_static/
+	name = "Crystal"
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "crystal"
+
+/obj/machinery/crystal_static/pink
+	name = "Crystal"
+	icon_state = "crystal2"
+
+/obj/machinery/crystal_static/orange
+	name = "Crystal"
+	icon_state = "crystal3"
+
 
 //large finds
 				/*

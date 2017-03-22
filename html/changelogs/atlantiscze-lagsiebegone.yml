@@ -1,7 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - experiment: "Removed bunch of NarSie's summon effects. Should considerably help performance."
-  - tweak: "Cult walls now have non-reinforced type, that is used when cultifying non-reinforced walls."

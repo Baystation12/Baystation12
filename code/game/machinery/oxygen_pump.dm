@@ -2,7 +2,7 @@
 	name = "emergency oxygen pump"
 	icon = 'icons/obj/walllocker.dmi'
 	icon_state = "emerg"
-	
+
 	anchored = TRUE
 
 	var/obj/item/weapon/tank/tank
@@ -131,4 +131,4 @@
 /obj/machinery/oxygen_pump/anesthetic
 	name = "anesthetic pump"
 	spawn_type = /obj/item/weapon/tank/anesthetic
-//	icon_state = "anesthetic_tank" //TODO
+	icon_state = "anesthetic_tank"

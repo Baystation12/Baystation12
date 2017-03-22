@@ -6,7 +6,6 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	name = "Magic Hand"
 	icon = 'icons/mob/screen1.dmi'
 	flags = 0
-	abstract = 1
 	simulated = 0
 	icon_state = "spell"
 	var/next_spell_time = 0

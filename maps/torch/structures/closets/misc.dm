@@ -93,6 +93,7 @@
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small
+	name = "personal sidearm cabinet"
 	will_contain = list(
 		/obj/item/weapon/gun/energy/gun/small = 6
 	)

@@ -1,8 +1,35 @@
 <div class="item">
-    {{:helper.link('Overall status', 'note', {'state' :'status'}, null, data.state == 'status' ? 'selected' : null)}}
+    {{:helper.link('Overall info', 'note', {'state' :'status'}, null, data.state == 'status' ? 'selected' : null)}}
     {{:helper.link('Details', 'note', {'state' : 'engines'}, null, data.state == 'engines' ? 'selected' : null)}}
 </div>
-
+<div class="item">
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='average'>Global controls:</span>
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.global_state ? 'Shut all down' : 'Power all up', 'power', {'global_toggle' : 1}, null, data.global_state ? 'selected' : null)}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='average'>Thrust limit:</span>
+		</div>
+		<div class="itemContent">
+			{{:helper.link('', 'circle-plus', { 'global_limit' : 0.1}, null, null)}}
+			{{:helper.link(data.global_limit+'%', null, { 'set_global_limit' : 1 }, null, null)}}
+			{{:helper.link('', 'circle-minus', { 'global_limit' : -0.1}, null, null)}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='average'>Total thrust:</span>
+		</div>
+		<div class="itemContent">
+			<span class='white'>{{:data.total_thrust}}</span>
+		</div>
+	</div>
+</div>
 {{if data.state == "engines"}}
 	{{if data.engines_info}}
 		{{for data.engines_info}}

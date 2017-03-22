@@ -234,6 +234,15 @@
 		..()
 		reagents.add_reagent("lipozine", 2)
 
+/obj/item/weapon/reagent_containers/pill/noexcutite
+	name = "Noexcutite pill"
+	desc = "Feeling jittery? This should calm you down."
+	icon_state = "pill9"
+
+obj/item/weapon/reagent_containers/pill/noexcutite/New()
+		..()
+		reagents.add_reagent("noexcutite", 15)
+
 //Baycode specific Psychiatry pills.
 /obj/item/weapon/reagent_containers/pill/methylphenidate
 	name = "Methylphenidate pill"

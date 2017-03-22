@@ -1300,7 +1300,7 @@
 					<li>If you have modified it manually, is absolutely everything sealed perfectly?</li>
 					<li>Do you either have shoes on under the suit, or magnetic boots on over it?</li>
 					<li>Do you have a mask on and internals on the suit or your back?</li>
-					<li>Do you have a way to communicate with the station in case something goes wrong?</li>
+					<li>Do you have a way to communicate with your fellow crew in case something goes wrong?</li>
 					<li>Do you have a second person watching if this is a training session?</li><BR>
 				</ul>
 

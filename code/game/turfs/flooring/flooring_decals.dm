@@ -261,6 +261,10 @@ var/list/floor_decals = list()
 	icon_state = "outline"
 	alpha = 229
 
+/obj/effect/floor_decal/industrial/shutoff
+	name = "shutoff valve marker"
+	icon_state = "shutoff"
+
 /obj/effect/floor_decal/industrial/outline/blue
 	name = "blue outline"
 	color = "#00B8B2"

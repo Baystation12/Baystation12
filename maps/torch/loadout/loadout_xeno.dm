@@ -148,3 +148,15 @@
 	display_name = "toeless workboots"
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
+
+/datum/gear/uniform/resomi/dress
+	display_name = "small dress (Resomi)"
+	path = /obj/item/clothing/under/resomi/dress
+	
+/datum/gear/uniform/resomi/uniform
+	display_name = "small uniform (Resomi)"
+	path = /obj/item/clothing/under/resomi/uniform
+	
+/datum/gear/uniform/resomi/formal
+	display_name = "small formal uniform (Resomi)"
+	path = /obj/item/clothing/under/resomi/formal

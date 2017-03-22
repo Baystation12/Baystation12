@@ -199,6 +199,7 @@ var/list/gamemode_cache = list()
 	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
+	var/aooc_allowed = 1
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -440,6 +441,9 @@ var/list/gamemode_cache = list()
 				if ("disable_ooc")
 					config.ooc_allowed = 0
 					config.looc_allowed = 0
+
+				if ("disable_aooc")
+					config.aooc_allowed = 0
 
 				if ("disable_entry")
 					config.enter_allowed = 0

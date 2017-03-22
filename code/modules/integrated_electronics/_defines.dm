@@ -17,11 +17,13 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "template"
 	w_class = ITEM_SIZE_TINY
+	matter = list(DEFAULT_WALL_MATERIAL = 10)
 	var/extended_desc = null
 	var/list/inputs = list()
 	var/list/outputs = list()
 	var/list/activators = list()
 	var/next_use = 0 //Uses world.time
+	var/removable = 1 //Whether this part can be removed from the assembly it is in.
 	var/complexity = 1 //This acts as a limitation on building machines, more resource-intensive components cost more 'space'.
 	var/size = 1       //This acts as a limitation on building machines, physically larger units take up more actual space.
 	var/cooldown_per_use = 1 SECOND
@@ -142,7 +144,8 @@
 
 	HTML += "<br><a href='?src=\ref[src];refresh=1'>\[Refresh\]</a>  |  "
 	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a>  |  "
-	HTML += "<a href='?src=\ref[src];remove=1'>\[Remove\]</a><br>"
+	if(removable)
+		HTML += "<a href='?src=\ref[src];remove=1'>\[Remove\]</a><br>"
 
 	HTML += "<colgroup>"
 	HTML += "<col style='width: 121px'>"

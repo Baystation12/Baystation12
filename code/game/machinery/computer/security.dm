@@ -60,7 +60,7 @@
 
 /obj/machinery/computer/secure_data/ui_interact(user)
 	if (!isPlayerLevel(z))
-		to_chat(user, "<span class='warning'>Unable to establish a connection:</span> You're too far away from the station!")
+		to_chat(user, "<span class='warning'>Unable to establish a connection:</span> You're too far away from the [station_name()]!")
 		return
 	var/dat
 
