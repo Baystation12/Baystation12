@@ -186,7 +186,7 @@
 		for(var/item in selected_outfit)
 			new item(bag)
 		bag.forceMove(get_turf(src))
-	else
+	else if (selected_outfit.len)
 		var/obj/item/clothing/C = selected_outfit[1]
 		new C(get_turf(src))
 
