@@ -58,6 +58,7 @@
 
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/weapon/reagent_containers/pill,
 		/obj/item/weapon/storage/pill_bottle
 		)
 
@@ -80,7 +81,13 @@
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
 		/obj/item/mecha_parts,
-		/obj/item/weapon/computer_hardware
+		/obj/item/weapon/computer_hardware,
+		/obj/item/device/transfer_valve,
+		/obj/item/device/assembly/signaler,
+		/obj/item/device/assembly/timer,
+		/obj/item/device/assembly/igniter,
+		/obj/item/device/assembly/infra,
+		/obj/item/weapon/tank
 		)
 
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
