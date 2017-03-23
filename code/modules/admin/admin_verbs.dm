@@ -57,6 +57,7 @@ var/list/admin_verbs_admin = list(
 //	/client/proc/toggle_hear_deadcast,	//toggles whether we hear deadchat,
 	/client/proc/investigate_show,		//various admintools for investigation. Such as a singulo grief-log,
 	/datum/admins/proc/toggleooc,		//toggles ooc on/off for everyone,
+	/datum/admins/proc/toggleaooc,		//toggles aooc on/off for everyone,
 	/datum/admins/proc/togglelooc,		//toggles looc on/off for everyone,
 	/datum/admins/proc/toggleoocdead,	//toggles ooc on/off for everyone who is dead,
 	/datum/admins/proc/toggledsay,		//toggles dsay on/off for everyone,
@@ -302,10 +303,8 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_skills,
 	/datum/admins/proc/show_player_panel,
 	/client/proc/check_antagonists,
-	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message, // send an message to somebody as a 'voice in their head',
 	/client/proc/aooc,
-	/datum/admins/proc/paralyze_mob,
 	/datum/admins/proc/sendFax
 
 )
@@ -779,7 +778,7 @@ var/list/admin_verbs_mentor = list(
 
 /client/proc/change_security_level()
 	set name = "Set security level"
-	set desc = "Sets the station security level"
+	set desc = "Sets the security level"
 	set category = "Admin"
 
 	if(!check_rights(R_ADMIN))	return

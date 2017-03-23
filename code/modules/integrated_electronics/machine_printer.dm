@@ -36,12 +36,13 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
 		if(stack.material.name == DEFAULT_WALL_MATERIAL)
-			var/num = Clamp(round(input("How many sheets do you want to add?") as num), 0, maxMetal-metal)
-			if(num && stack.use(num))
-				to_chat(user, "<span class='notice'>You add [num] sheet\s to \the [src].</span>")
-				metal += num
-				updateUsrDialog()
-				return 1
+			var/num = min(maxMetal - metal, stack.amount)
+			if(do_after(usr, 16, src))
+				if(stack.use(num))
+					to_chat(user, "<span class='notice'>You add [num] sheet\s to \the [src].</span>")
+					metal += num
+					updateUsrDialog()
+					return 1
 	if(default_deconstruction_screwdriver(user, O))
 		new /obj/item/stack/material/steel(get_turf(loc), metal)
 		metal = 0

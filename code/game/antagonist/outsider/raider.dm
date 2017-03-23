@@ -178,7 +178,7 @@ var/datum/antagonist/raider/raiders
 		if(win_group == "Raider")
 			if(win_type == "Minor")
 				win_type = "Major"
-			win_msg += "<B>The Raiders escaped the station!</B>"
+			win_msg += "<B>The Raiders escaped!</B>"
 		else
 			win_msg += "<B>The Raiders were repelled!</B>"
 

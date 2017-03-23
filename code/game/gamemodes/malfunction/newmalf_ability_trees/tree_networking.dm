@@ -41,7 +41,7 @@
 /datum/game_mode/malfunction/verb/basic_encryption_hack(obj/machinery/power/apc/A as obj in get_unhacked_apcs(src))
 	set category = "Software"
 	set name = "Basic Encryption Hack"
-	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs on the station."
+	set desc = "10 CPU - Basic encryption hack that allows you to overtake APCs"
 	var/price = 10
 	var/mob/living/silicon/ai/user = usr
 
@@ -117,7 +117,7 @@
 /datum/game_mode/malfunction/verb/elite_encryption_hack()
 	set category = "Software"
 	set name = "Elite Encryption Hack"
-	set desc = "200 CPU - Allows you to hack station's ALERTCON system, changing alert level. Has high chance of failing."
+	set desc = "200 CPU - Allows you to hack ALERTCON system, changing alert level. Has high chance of failing."
 	var/price = 200
 	var/mob/living/silicon/ai/user = usr
 	if(!ability_prechecks(user, price))
@@ -144,7 +144,7 @@
 /datum/game_mode/malfunction/verb/system_override()
 	set category = "Software"
 	set name = "System Override"
-	set desc = "500 CPU - Begins hacking station's primary firewall, quickly overtaking remaining APC systems. When completed grants access to station's self-destruct mechanism. Network administrators will probably notice this."
+	set desc = "500 CPU - Begins hacking primary firewall, quickly overtaking remaining APC systems. When completed grants access to the self-destruct mechanism. Network administrators will probably notice this."
 	var/price = 500
 	var/mob/living/silicon/ai/user = usr
 	if (alert(user, "Begin system override? This cannot be stopped once started. The network administrators will probably notice this.", "System Override:", "Yes", "No") != "Yes")
@@ -172,7 +172,7 @@
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("We started tracing the intruder. Whoever is doing this, they seem to be on the station itself. We suggest checking all network control terminals. We will keep you updated on the situation.", "Network Monitoring")
+			command_announcement.Announce("We started tracing the intruder. Whoever is doing this, they seem to be onboard. We suggest checking all network control terminals. We will keep you updated on the situation.", "Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
@@ -206,8 +206,9 @@
 
 	log_ability_use(user, "system override (FINISHED)")
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
+  
 	if(user.hack_can_fail)
-		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to the station's systems.", "Network Administration Center")
+	  command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [using_map.station_name]'s systems.", "Network Administration Center")
 	user.hack_can_fail = 0
 	user.hacking = 0
 	user.system_override = 2

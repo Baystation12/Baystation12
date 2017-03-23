@@ -270,7 +270,7 @@
 			to_chat(usr, "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>")
 			return
 
-		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0)
+		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0, trim = 0)
 
 		if(!t)
 			return
@@ -414,7 +414,7 @@
  */
 /obj/item/weapon/paper/Court
 	name = "Judgement"
-	info = "For crimes against the station, the offender is sentenced to:<BR>\n<BR>\n"
+	info = "For crimes as specified, the offender is sentenced to:<BR>\n<BR>\n"
 
 /obj/item/weapon/paper/crumpled
 	name = "paper scrap"

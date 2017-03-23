@@ -47,6 +47,9 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/New(var/mob/living/silicon/robot/R)
 	..()
+	if (!istype(R))
+		return
+
 	R.module = src
 
 	add_camera_networks(R)
@@ -423,11 +426,13 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in src.modules
-	if(T.power_supply.charge < T.power_supply.maxcharge)
-		T.power_supply.give(T.charge_cost * amount)
-		T.update_icon()
-	else
-		T.charge_tick = 0
+	if(T && T.power_supply)
+		if(T.power_supply.charge < T.power_supply.maxcharge)
+			T.power_supply.give(T.charge_cost * amount)
+			T.update_icon()
+		else
+			T.charge_tick = 0
+
 	var/obj/item/weapon/melee/baton/robot/B = locate() in src.modules
 	if(B && B.bcell)
 		B.bcell.give(amount)

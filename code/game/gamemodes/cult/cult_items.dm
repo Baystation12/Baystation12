@@ -11,9 +11,6 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
-/obj/item/weapon/melee/cultblade/cultify()
-	return
-
 /obj/item/weapon/melee/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(iscultist(user))
 		return ..()
@@ -59,9 +56,6 @@
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
-/obj/item/clothing/head/culthood/cultify()
-	return
-
 /obj/item/clothing/head/culthood/magus
 	name = "magus helm"
 	icon_state = "magus"
@@ -82,9 +76,6 @@
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0
 
-/obj/item/clothing/suit/cultrobes/cultify()
-	return
-
 /obj/item/clothing/suit/cultrobes/alt
 	icon_state = "cultrobesalt"
 
@@ -102,9 +93,6 @@
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0
 
-/obj/item/clothing/head/helmet/space/cult/cultify()
-	return
-
 /obj/item/clothing/suit/space/cult
 	name = "cult armour"
 	icon_state = "cult_armour"
@@ -117,6 +105,3 @@
 /obj/item/clothing/suit/space/cult/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
-
-/obj/item/clothing/suit/space/cult/cultify()
-	return

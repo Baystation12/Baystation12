@@ -111,15 +111,7 @@
 		return 1
 
 	var/obj/item/stack/material/stack = O
-	var/amount = round(input("How many sheets do you want to add?") as num)//No decimals
-	if(!O)
-		return
-	if(amount <= 0)//No negative numbers
-		return
-	if(amount > stack.get_amount())
-		amount = stack.get_amount()
-		if(max_material_storage - TotalMaterials() < (amount * SHEET_MATERIAL_AMOUNT)) //Can't overfill
-			amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
+	var/amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
 
 	var/t = stack.material.name
 	overlays += "protolathe_[t]"

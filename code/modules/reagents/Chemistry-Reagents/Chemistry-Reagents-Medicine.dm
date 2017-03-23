@@ -596,3 +596,19 @@
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
+
+/datum/reagent/noexcutite
+	name = "Noexcutite"
+	id = "noexcutite"
+	description = "A thick, syrupy liquid that has a lethargic effect. Used to cure cases of jitteriness."
+	taste_description = "numbing coldness"
+	reagent_state = LIQUID
+	color = "#BC018A"
+	overdose = REAGENTS_OVERDOSE
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/noexcutite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+
+	if(alien != IS_DIONA)
+		M.make_jittery(-50)

@@ -131,7 +131,8 @@
 					S.fail_step(user, M, zone, src)		//malpractice~
 				else // This failing silently was a pain.
 					to_chat(user, "<span class='warning'>You must remain close to your patient to conduct surgery.</span>")
-				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
+				if (M)
+					M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					H.update_surgery()

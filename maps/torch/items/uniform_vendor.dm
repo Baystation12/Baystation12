@@ -56,7 +56,10 @@
 	if(href_list["ID"])
 		var/mob/M = usr
 		if(ID)
-			M.put_in_hands(ID)
+			if(!issilicon(usr))
+				M.put_in_hands(ID)
+			else
+				ID.dropInto(loc)
 			ID = null
 			selected_outfit.Cut()
 		else
@@ -183,7 +186,7 @@
 		for(var/item in selected_outfit)
 			new item(bag)
 		bag.forceMove(get_turf(src))
-	else
+	else if (selected_outfit.len)
 		var/obj/item/clothing/C = selected_outfit[1]
 		new C(get_turf(src))
 

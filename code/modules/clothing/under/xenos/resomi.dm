@@ -35,3 +35,18 @@
 	name = "small science uniform"
 	icon_state = "resomi_science"
 	worn_state = "resomi_science"
+	
+/obj/item/clothing/under/resomi/dress
+	name = "small dress"
+	icon_state = "resomi_dress_cap"
+	worn_state = "resomi_dress_cap"
+	
+/obj/item/clothing/under/resomi/uniform
+	name = "small uniform"
+	icon_state = "resomi_captain"
+	worn_state = "resomi_captain"
+	
+/obj/item/clothing/under/resomi/formal
+	name = "small formal uniform"
+	icon_state = "resomi_captain_formal"
+	worn_state = "resomi_captain_formal"

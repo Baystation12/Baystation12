@@ -1,7 +1,7 @@
 /obj/machinery/computer/helm
 	name = "helm control console"
-	icon_keyboard = "med_key"
-	icon_screen = "id"
+	icon_keyboard = "teleport_key"
+	icon_screen = "helm"
 	var/obj/effect/overmap/ship/linked			//connected overmap object
 	var/autopilot = 0
 	var/manual_control = 0
@@ -35,11 +35,9 @@
 			else
 				linked.decelerate()
 
-		var/brake_path = linked.get_brake_path()
-
-		if(get_dist(linked.loc, T) > brake_path)
+		if(linked.is_still())
 			linked.accelerate(get_dir(linked.loc, T))
-		else
+		else if(get_dist(linked.loc, T) <= linked.get_brake_path())
 			linked.decelerate()
 
 		return

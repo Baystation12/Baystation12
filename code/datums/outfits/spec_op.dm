@@ -6,7 +6,7 @@
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	head = /obj/item/clothing/head/beret/deathsquad
-	belt = /obj/item/weapon/gun/energy/pulse_rifle/M1911
+	belt = /obj/item/weapon/gun/energy/pulse_rifle/pistol
 	back = /obj/item/weapon/storage/backpack/satchel
 	shoes = /obj/item/clothing/shoes/combat
 	gloves = /obj/item/clothing/gloves/thick/combat
