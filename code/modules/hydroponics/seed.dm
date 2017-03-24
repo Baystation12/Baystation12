@@ -703,12 +703,15 @@
 					total_yield = get_trait(TRAIT_YIELD) + rand(yield_mod)
 				total_yield = max(1,total_yield)
 
+		. = list()
 		for(var/i = 0;i<total_yield;i++)
 			var/obj/item/product
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(user),name)
 			else
 				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
+			. += product
+				
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!istype(product, /mob))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
