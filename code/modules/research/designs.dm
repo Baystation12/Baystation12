@@ -1925,7 +1925,7 @@ CIRCUITS BELOW
 /datum/design/item/rig_decompiler
 	name = "RIG module (Matter Decompiler)"
 	desc = "A drone matter decompiler reconfigured to be mounted onto a RIG."
-	id = "rig_anomaly_scanner"
+	id = "rig_decompiler"
 	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 	materials = list(DEFAULT_WALL_MATERIAL = 3000, "plastic" = 2000, "glass" = 1000)
 	build_path = /obj/item/rig_module/device/decompiler
@@ -1961,7 +1961,7 @@ CIRCUITS BELOW
 /datum/design/item/rig_taser
 	name = "RIG module (Taser)"
 	desc = "A taser, mountable on a RIG."
-	id = "rig_anomaly_scanner"
+	id = "rig_taser"
 	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "plastic" = 2500, "glass" = 2000, "gold" = 1000)
 	build_path = /obj/item/rig_module/mounted/taser
