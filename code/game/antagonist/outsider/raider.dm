@@ -229,7 +229,7 @@ var/datum/antagonist/raider/raiders
 	W.handle_item_insertion(id)
 	player.equip_to_slot_or_del(W, slot_wear_id)
 	spawn_money(rand(50,150)*10,W)
-	create_radio(SYND_FREQ, player)
+	create_radio(RAID_FREQ, player)
 
 	return 1
 
