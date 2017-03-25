@@ -1,0 +1,6 @@
+author: TheGreyWolf
+
+delete-after: True
+
+changes: 
+  - bugfix: "fixed taj having R's extended when speaking Siik'tajr."
