@@ -39,7 +39,7 @@
 	name = "\improper NanoTrasen coveralls"
 	desc = "A pair of beige coveralls made out of a strong, canvas-like material. The coloring on the fringes denotes it as a NanoTrasen-branded suit, typically given to their more blue-collared employees."
 	icon_state = "ntwork"
-	icon_state = "lb_suit"
+	item_state = "lb_suit"
 	worn_state = "ntwork"
 	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 
