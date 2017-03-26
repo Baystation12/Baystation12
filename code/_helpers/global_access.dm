@@ -861,6 +861,8 @@
 			return global.mining_walls;
 		if("minor_air_alarms")
 			return global.minor_air_alarms;
+		if("minor_announcement")
+			return global.minor_announcement;
 		if("mob_equipped_event")
 			return global.mob_equipped_event;
 		if("mob_hat_cache")
@@ -1451,7 +1453,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2314,6 +2316,8 @@
 			global.mining_walls=newval;
 		if("minor_air_alarms")
 			global.minor_air_alarms=newval;
+		if("minor_announcement")
+			global.minor_announcement=newval;
 		if("mob_equipped_event")
 			global.mob_equipped_event=newval;
 		if("mob_hat_cache")
@@ -2904,7 +2908,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3336,6 +3340,7 @@
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",
+	"minor_announcement",
 	"mob_equipped_event",
 	"mob_hat_cache",
 	"mob_list",

@@ -1,7 +1,0 @@
-author: memescope
-
-delete-after: True
-
-changes: 
-  - tweak: "Gave the Scientist, RD, Senior Researcher and Research Sssistant access to formal clothing in the loadout."
-  - tweak: "Divided pants into formal and casual pants and put them into different selections in the loadout."
