@@ -31,4 +31,4 @@
 	initial_flooring = /decl/flooring/reinforced/shuttle/black
 
 /turf/simulated/floor/shuttle/alien
-	icon_state = "bfloor"
+	icon_state = "floor_b"

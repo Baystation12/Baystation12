@@ -123,6 +123,12 @@
 	desc = "Senior Enlisted Advisor"
 	region = ACCESS_REGION_COMMAND
 
+/var/const/access_bogani = 202
+/datum/access/bogani
+	id = access_bogani
+	desc = "Bogani"
+	region = ACCESS_REGION_NONE
+
 /************
 * SEV Torch *
 ************/

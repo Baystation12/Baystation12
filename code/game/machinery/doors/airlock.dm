@@ -370,6 +370,13 @@
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
 
+/obj/machinery/door/airlock/alien
+	name = "Alien Airlock"
+	icon = 'icons/obj/doors/doorbogani.dmi'
+	maxhealth = 300
+	explosion_resistance = 5
+	req_one_access = list(access_bogani)
+
 /*
 About the new airlock wires panel:
 *	An airlock wire dialog can be accessed by the normal way or by using wirecutters or a multitool on the door while the wire-panel is open. This would show the following wires, which you can either wirecut/mend or send a multitool pulse through. There are 9 wires.
