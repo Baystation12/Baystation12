@@ -1819,6 +1819,182 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/crowbar/brace_jack
 	sort_string = "VBAAS"
 
+
+//RIG Modules
+//Sidenote; Try to keep a requirement of 5 engineering for each, but keep the rest as similiar to it's original as possible.
+/datum/design/item/rig_meson
+	name = "RIG module (Meson Scanner)"
+	desc = "A layered, translucent visor system for a RIG."
+	id = "rig_meson"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 200, "plastic" = 300)
+	build_path = /obj/item/rig_module/vision/meson
+	sort_string = "VCAAA"
+
+/datum/design/item/rig_medhud
+	name = "RIG module (Medical HUD)"
+	desc = "A simple medical status indicator for a RIG."
+	id = "rig_medhud"
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 200,  "plastic" = 300)
+	build_path = /obj/item/rig_module/vision/medhud
+	sort_string = "VCAAB"
+
+/datum/design/item/rig_sechud
+	name = "RIG module (Medical Scanner)"
+	desc = "A simple security status indicator for a RIG."
+	id = "rig_sechud"
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 200,  "plastic" = 300)
+	build_path = /obj/item/rig_module/vision/sechud
+	sort_string = "VCAAC"
+
+/datum/design/item/rig_nvg
+	name = "RIG module (Night Vision)"
+	desc = "A night vision module, mountable on a RIG."
+	id = "rig_nvg"
+	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 6)
+	materials = list("plastic" = 500, DEFAULT_WALL_MATERIAL = 300, "glass" = 200, "uranium" = 200)
+	build_path = /obj/item/rig_module/vision/nvg
+	sort_string = "VCAAD"
+
+/datum/design/item/rig_healthscanner
+	name = "RIG module (Medical Scanner)"
+	desc = "A device able to distinguish vital signs of the subject, mountable on a RIG."
+	id = "rig_healthscanner"
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
+	materials = list("plastic" = 1000, DEFAULT_WALL_MATERIAL = 700, "glass" = 500)
+	build_path = /obj/item/rig_module/device/healthscanner
+	sort_string = "VCAAE"
+
+/datum/design/item/rig_drill
+	name = "RIG module (Mining Drill)"
+	desc = "A diamond mining drill, mountable on a RIG."
+	id = "rig_drill"
+	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 3500, "glass" = 1500, "diamond" = 2000, "plastic" = 1000)
+	build_path = /obj/item/rig_module/device/drill
+	sort_string = "VCAAF"
+
+/datum/design/item/rig_orescanner
+	name = "RIG module (Ore Scanner)"
+	desc = "A sonar system for detecting large masses of ore, mountable on a RIG."
+	id = "rig_orescanner"
+	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	materials = list("plastic" = 1000, DEFAULT_WALL_MATERIAL = 800, "glass" = 500)
+	build_path = /obj/item/rig_module/device/orescanner
+	sort_string = "VCAAG"
+
+/datum/design/item/rig_plasmacutter
+	name = "RIG module (Plasma Cutter)"
+	desc = "A rock cutter that uses bursts of hot plasma, mountable on a RIG."
+	id = "rig_plasmacutter"
+	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "plastic" = 1000, "gold" = 700, "phoron" = 500)
+	build_path = /obj/item/rig_module/device/plasmacutter
+	sort_string = "VCAAH"
+
+/datum/design/item/rig_anomaly_scanner
+	name = "RIG module (Anomaly Scanner)"
+	desc = "An exotic particle detector commonly used by xenoarchaeologists, mountable on a RIG."
+	id = "rig_anomaly_scanner"
+	req_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
+	materials = list("plastic" = 1000, DEFAULT_WALL_MATERIAL = 800, "glass" = 500)
+	build_path = /obj/item/rig_module/device/anomaly_scanner
+	sort_string = "VCAAI"
+
+/datum/design/item/rig_rcd
+	name = "RIG module (RCD)"
+	desc = "A Rapid Construction Device, mountable on a RIG."
+	id = "rig_rcd"
+	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "plastic" = 1000,"gold" = 700, "silver" = 700)
+	build_path = /obj/item/rig_module/device/rcd
+	sort_string = "VCAAJ"
+
+/datum/design/item/rig_jets
+	name = "RIG module (Maneuvering Jets)"
+	desc = "A compact gas thruster system, mountable on a RIG."
+	id = "rig_jets"
+	req_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "plastic" = 2000, "glass" = 1000)
+	build_path = /obj/item/rig_module/maneuvering_jets
+	sort_string = "VCAAK"
+
+//I think this is like a janitor thing but seems like it could be useful for engis
+/datum/design/item/rig_decompiler
+	name = "RIG module (Matter Decompiler)"
+	desc = "A drone matter decompiler reconfigured to be mounted onto a RIG."
+	id = "rig_decompiler"
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "plastic" = 2000, "glass" = 1000)
+	build_path = /obj/item/rig_module/device/decompiler
+	sort_string = "VCAAL"
+
+/datum/design/item/rig_powersink
+	name = "RIG module (Power Sink)"
+	desc = "A RIG module that allows the user to recharge their RIG's power cell without removing it."
+	id = "rig_powersink"
+	req_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 2000, "gold" = 1000, "plastic" = 1000)
+	build_path = /obj/item/rig_module/power_sink
+	sort_string = "VCAAM"
+
+/datum/design/item/rig_ai_container
+	name = "RIG module (IIS)"
+	desc = "An integrated intelligence system module suitable for most RIGs."
+	id = "rig_ai_container"
+	req_tech = list(TECH_DATA = 6, TECH_MATERIAL = 5, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 1000, "plastic" = 1000, "gold" = 500)
+	build_path = /obj/item/rig_module/ai_container
+	sort_string = "VCAAN"
+
+/datum/design/item/rig_flash
+	name = "RIG module (Flash)"
+	desc = "A normal flash, mountable on a RIG."
+	id = "rig_flash"
+	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+	materials = list("plastic" = 1500, DEFAULT_WALL_MATERIAL = 1000, "glass" = 500)
+	build_path = /obj/item/rig_module/device/flash
+	sort_string = "VCAAM"
+
+/datum/design/item/rig_taser
+	name = "RIG module (Taser)"
+	desc = "A taser, mountable on a RIG."
+	id = "rig_taser"
+	req_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "plastic" = 2500, "glass" = 2000, "gold" = 1000)
+	build_path = /obj/item/rig_module/mounted/taser
+	sort_string = "VCAAN"
+
+/datum/design/item/rig_egun
+	name = "RIG module (Energy Gun)"
+	desc = "An energy gun, mountable on a RIG."
+	id = "rig_egun"
+	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 3000, "plastic" = 2500, "gold" = 2000, "silver" = 1000)
+	build_path = /obj/item/rig_module/mounted/egun
+	sort_string = "VCAAO"
+
+/datum/design/item/rig_enet
+	name = "RIG module (Energy Net)"
+	desc = "An advanced energy-patterning projector used to capture targets, mountable on a RIG."
+	id = "rig_enet"
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ILLEGAL = 4, TECH_ENGINEERING = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 3000, "diamond" = 2000, "plastic" = 2000)
+	build_path = /obj/item/rig_module/fabricator/energy_net
+	sort_string = "VCAAP"
+
+/datum/design/item/rig_stealth
+	name = "RIG module (Active Camouflage)"
+	desc = "An integrated active camouflage system, mountable on a RIG."
+	id = "rig_stealth"
+	req_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ILLEGAL = 6, TECH_ENGINEERING = 7)
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 3000, "diamond" = 2000, "silver" = 2000, "uranium" = 2000, "gold" = 2000, "plastic" = 2000)
+	build_path = /obj/item/rig_module/stealth_field
+	sort_string = "VCAAQ"
+
+
 /datum/design/prefab
 	name = "Device"
 	desc = "A blueprint made from a design built on station."

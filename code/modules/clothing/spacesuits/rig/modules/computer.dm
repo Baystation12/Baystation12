@@ -45,6 +45,7 @@
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, inteliCard or pAI card previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
+	origin_tech = list(TECH_DATA = 6, TECH_MATERIAL = 5, TECH_ENGINEERING = 6)
 
 /mob
 	var/get_rig_stats = 0
@@ -364,6 +365,7 @@
 	interface_name = "niling d-sink"
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."
 
+	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 6)
 	var/atom/interfaced_with // Currently draining power from this device.
 	var/total_power_drained = 0
 	var/drain_loc
