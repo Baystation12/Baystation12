@@ -1,11 +1,13 @@
 //TODO: rewrite and standardise all controller datums to the datum/controller type
 //TODO: allow all controllers to be deleted for clean restarts (see WIP master controller stuff) - MC done - lighting done
-/client/proc/restart_controller(controller in list("Supply"))
+/client/proc/restart_controller(controller as null|anything in list("Supply"))
 	set category = "Debug"
 	set name = "Restart Controller"
 	set desc = "Restart one of the various periodic loop controllers for the game (be careful!)"
 
-	if(!holder)	return
+	if(!holder || !controller)
+		return
+
 	usr = null
 	src = null
 	switch(controller)
@@ -15,22 +17,27 @@
 	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
 	return
 
-/client/proc/debug_antagonist_template(antag_type in all_antag_types())
+/client/proc/debug_antagonist_template(antag_type as null|anything in all_antag_types())
 	set category = "Debug"
 	set name = "Debug Antagonist"
 	set desc = "Debug an antagonist template."
+
+	if (!antag_type)
+		return
 
 	var/datum/antagonist/antag = all_antag_types()[antag_type]
 	if(antag)
 		usr.client.debug_variables(antag)
 		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 
-/client/proc/debug_controller(controller in list("Master","Ticker","Ticker Process","Air","Jobs","Sun","Radio","Supply","Shuttles","Evacuation","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm","Nano","Chemistry","Wireless","Observation","Alt Appearance Manager","Datacore","Military Branches"))
+/client/proc/debug_controller(controller as null|anything in list("Master","Ticker","Ticker Process","Air","Jobs","Sun","Radio","Supply","Shuttles","Evacuation","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data","Event","Plants","Alarm","Nano","Chemistry","Wireless","Observation","Alt Appearance Manager","Datacore","Military Branches"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
 
-	if(!holder)	return
+	if(!holder || !controller)
+		return
+
 	switch(controller)
 		if("Master")
 			debug_variables(master_controller)

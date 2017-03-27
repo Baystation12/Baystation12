@@ -1,7 +1,0 @@
-author: Techhead
-
-delete-after: True
-
-changes: 
-  - rscadd: "Moves Junior Enginner to a Crewman alt-title, accompanied by the new Junior Corpsman."
-  - tweak: "Increased Crewman slots by one and removed age restriction."

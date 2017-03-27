@@ -861,6 +861,8 @@
 			return global.mining_walls;
 		if("minor_air_alarms")
 			return global.minor_air_alarms;
+		if("minor_announcement")
+			return global.minor_announcement;
 		if("mob_equipped_event")
 			return global.mob_equipped_event;
 		if("mob_hat_cache")
@@ -1397,8 +1399,6 @@
 			return global.verbs;
 		if("view_variables_dont_expand")
 			return global.view_variables_dont_expand;
-		if("view_variables_hide_vars")
-			return global.view_variables_hide_vars;
 		if("view_variables_no_assoc")
 			return global.view_variables_no_assoc;
 		if("virusDB")
@@ -2316,6 +2316,8 @@
 			global.mining_walls=newval;
 		if("minor_air_alarms")
 			global.minor_air_alarms=newval;
+		if("minor_announcement")
+			global.minor_announcement=newval;
 		if("mob_equipped_event")
 			global.mob_equipped_event=newval;
 		if("mob_hat_cache")
@@ -2852,8 +2854,6 @@
 			global.verbs=newval;
 		if("view_variables_dont_expand")
 			global.view_variables_dont_expand=newval;
-		if("view_variables_hide_vars")
-			global.view_variables_hide_vars=newval;
 		if("view_variables_no_assoc")
 			global.view_variables_no_assoc=newval;
 		if("virusDB")
@@ -3340,6 +3340,7 @@
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",
+	"minor_announcement",
 	"mob_equipped_event",
 	"mob_hat_cache",
 	"mob_list",
@@ -3608,7 +3609,6 @@
 	"ventcrawl_machinery",
 	"verbs",
 	"view_variables_dont_expand",
-	"view_variables_hide_vars",
 	"view_variables_no_assoc",
 	"virusDB",
 	"visual_nets",

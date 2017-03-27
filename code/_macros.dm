@@ -93,6 +93,8 @@
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 
+#define CanPhysicallyInteract(user) CanInteract(user, physical_state)
+
 #define qdel_null_list(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 
 #define qdel_null(x) if(x) { qdel(x) ; x = null }

@@ -60,11 +60,6 @@
 	path = /obj/item/clothing/accessory/armband/hydro
 	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Passenger")
 
-/datum/gear/accessory/armband_science
-	display_name = "science armband"
-	path = /obj/item/clothing/accessory/armband/science
-	allowed_roles = RESEARCH_ROLES
-
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered

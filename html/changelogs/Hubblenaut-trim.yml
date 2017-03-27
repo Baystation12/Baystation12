@@ -1,6 +1,0 @@
-author: Hubblenaut
-
-delete-after: True
-
-changes: 
-  - bugfix: "Fixes whitespace cropping when writing on paper or using the circuit debugger."

@@ -1388,12 +1388,15 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	ticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/living/H as mob)
+/datum/admins/proc/paralyze_mob(mob/H as mob in player_list)
 	set category = "Admin"
 	set name = "Toggle Paralyze"
 	set desc = "Paralyzes a player. Or unparalyses them."
 
 	var/msg
+
+	if(!isliving(H))
+		return
 
 	if(check_rights(R_ADMIN))
 		if (H.paralysis == 0)

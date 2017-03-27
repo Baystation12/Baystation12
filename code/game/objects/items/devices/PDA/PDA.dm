@@ -612,7 +612,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Authenticate")//Checks for ID
 			id_check(U, 1)
 		if("UpdateInfo")
-			set_rank_job(id.rank, ownjob)
+			if(id)
+				set_rank_job(id.rank, ownjob)
 		if("Eject")//Ejects the cart, only done from hub.
 			verb_remove_cartridge()
 
@@ -959,13 +960,16 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		verb_remove_id()
 
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P, var/tap = 1)
+	if(!istype(P))
+		to_chat(U, "<span class='notice'>ERROR: This user does not accept messages.</span>")
+		return
 	if(tap)
 		U.visible_message("<span class='notice'>\The [U] taps on \his PDA's screen.</span>")
 	var/t = input(U, "Please enter message", P.name, null) as text
 	t = sanitize(t)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
-	if (!t || !istype(P))
+	if (!t)
 		return
 	if (!in_range(src, U) && loc != U)
 		return
@@ -1063,6 +1067,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	update_icon()
 
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
+	if(!istype(sending_unit))
+		to_chat(usr, "<span class='bad'>This destination does not accept messages.</span>")
+		return
 	var/track = ""
 	if(ismob(sending_unit.loc) && isAI(loc))
 		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
