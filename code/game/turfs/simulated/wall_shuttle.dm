@@ -15,10 +15,6 @@
 	name = "alien wall"
 	icon_state = "bog0"
 
-/turf/simulated/shuttle/wall/alien/initialize()
-	icon_state = "bog[dir]"
-	..()
-
 /turf/simulated/shuttle/wall/corner
 	var/corner_overlay_state = "diagonalWall"
 	var/image/corner_overlay
