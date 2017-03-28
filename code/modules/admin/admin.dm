@@ -77,6 +77,11 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
 			(<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)
 		"}
+		body += "<br><br><b>Staff Warning:</b> [M.client.staffwarn ? M.client.staffwarn : "No"]<br>"
+		if (!M.client.staffwarn)
+			body += "<A href='?src=\ref[src];setstaffwarn=\ref[M]'>Set StaffWarn</A>"
+		else
+			body += "<A href='?src=\ref[src];removestaffwarn=\ref[M]'>Remove StaffWarn</A>"
 
 	body += {"<br><br>
 		<A href='?src=\ref[src];jumpto=\ref[M]'><b>Jump to</b></A> |

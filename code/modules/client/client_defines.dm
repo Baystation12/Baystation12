@@ -19,6 +19,8 @@
 
 	var/adminhelped = 0
 
+	var/staffwarn = null
+
 		///////////////
 		//SOUND STUFF//
 		///////////////

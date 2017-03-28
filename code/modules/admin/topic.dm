@@ -1833,6 +1833,40 @@
 					ckey = M.ckey
 			show_player_info(ckey)
 		return
+	if(href_list["setstaffwarn"])
+		var/mob/M = locate(href_list["setstaffwarn"])
+		if(!ismob(M)) return
+
+		if(M.client && M.client.holder) return // admins don't get staffnotify'd about
+
+		switch(alert("Really set staff warn?",,"Yes","No"))
+			if("Yes")
+				var/reason = sanitize(input(usr,"Staff warn message","Staff Warn","Problem Player") as text|null)
+				if (!reason || reason == "")
+					return
+				notes_add(M.ckey,"\[AUTO\] Staff warn enabled: [reason]",usr)
+				reason += "\n-- Set by [usr.client.ckey]([usr.client.holder.rank])"
+				DB_staffwarn_record(M.ckey, reason)
+				M.client.staffwarn = reason
+				feedback_inc("staff_warn",1)
+				log_and_message_admins("has enabled staffwarn on [M.ckey].\nMessage: [reason]\n")
+				show_player_panel(M)
+			if("No")
+				return
+	if(href_list["removestaffwarn"])
+		var/mob/M = locate(href_list["removestaffwarn"])
+		if(!ismob(M)) return
+
+		switch(alert("Really remove staff warn?",,"Yes","No"))
+			if("Yes")
+				notes_add(M.ckey,"\[AUTO\] Staff warn disabled",usr)
+				DB_staffwarn_remove(M.ckey)
+				M.client.staffwarn = null
+				log_and_message_admins("has removed the staffwarn on [M.ckey].\n")
+				show_player_panel(M)
+			if("No")
+				return
+
 
 mob/living/proc/can_centcom_reply()
 	return 0
