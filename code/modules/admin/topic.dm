@@ -1166,6 +1166,7 @@
 		var/mob/M = locate(href_list["take_question"])
 		if(ismob(M))
 			var/take_msg = "<span class='notice'><b>ADMINHELP</b>: <b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message, please don't dogpile them.</span>"
+			send2adminirc("[key_name(usr.client)] is attending to [key_name(M)]'s message, please don't dogpile them.")
 			for(var/client/X in admins)
 				if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
 					to_chat(X, take_msg)
