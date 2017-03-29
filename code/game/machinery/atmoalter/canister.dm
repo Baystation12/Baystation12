@@ -12,6 +12,8 @@
 	var/release_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP //in L/s
 
 	var/canister_color = "yellow"
+	var/icon_open = "can-open"
+	var/icon_connector = "can-connector"
 	var/can_label = 1
 	start_pressure = 45 * ONE_ATMOSPHERE
 	var/temperature_resistance = 1000 + T0C
@@ -69,6 +71,14 @@
 
 /obj/machinery/portable_atmospherics/canister/air/airlock
 	start_pressure = 3 * ONE_ATMOSPHERE
+
+/obj/machinery/portable_atmospherics/canister/chlorine
+	name = "\improper Alien Canister"
+	icon_state = "chlorine"
+	icon_open = "chlorine_open"
+	icon_connector = "chlorine_connector"
+	canister_color = "chlorine"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/empty
 	start_pressure = 0
@@ -151,9 +161,9 @@ update_flag
 	src.overlays = 0
 
 	if(update_flag & 1)
-		overlays += "can-open"
+		overlays += "[icon_open]"
 	if(update_flag & 2)
-		overlays += "can-connector"
+		overlays += "[icon_connector]"
 	if(update_flag & 4)
 		overlays += "can-o0"
 	if(update_flag & 8)
@@ -426,7 +436,11 @@ update_flag
 	src.update_icon()
 	return 1
 
-
+/obj/machinery/portable_atmospherics/canister/chlorine/New()
+	..()
+	src.air_contents.adjust_gas("chlorine", MolesForPressure())
+	src.update_icon()
+	return 1
 
 // Special types used for engine setup admin verb, they contain double amount of that of normal canister.
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/New()

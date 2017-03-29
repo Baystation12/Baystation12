@@ -45,8 +45,8 @@
 
 
 	breath_pressure = 28
-	breath_type = "phoron"
-	poison_type = "oxygen"
+	breath_type = "chlorine"
+	poison_type = list("oxygen")
 	siemens_coefficient = 0.1
 
 	genders = list(NEUTER)
@@ -100,8 +100,8 @@
 
 
 
-	breath_type = "phoron"
-	poison_type = "oxygen"
+	breath_type = "chlorine"
+	poison_type = list("oxygen")
 	siemens_coefficient = 0.9
 
 	genders = list(NEUTER)

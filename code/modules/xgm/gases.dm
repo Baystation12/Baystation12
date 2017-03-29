@@ -44,3 +44,12 @@
 	tile_overlay = "sleeping_agent"
 	overlay_limit = 1
 	flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
+
+/decl/xgm_gas/chlorine
+	id = "chlorine"
+	name = "Chlorine"
+	specific_heat = 20	// J/(mol*K) //Made up number
+	molar_mass = 0.035	// kg/mol
+
+	tile_overlay = "chlorine"
+	overlay_limit = 0.7

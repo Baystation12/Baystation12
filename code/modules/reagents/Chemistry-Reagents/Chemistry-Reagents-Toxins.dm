@@ -53,6 +53,19 @@
 	touch_met = 5
 	var/fire_mult = 5
 
+/datum/reagent/toxin/chlorine
+	name = "Chlorine"
+	id = "chlorine"
+	description = "A highly poisonous liquid. Smells strongly of bleach."
+	reagent_state = LIQUID
+	taste_description = "bleach"
+	color = "#707C13"
+	strength = 15
+	metabolism = REM
+
+//Todo: Implement more effects for chlorine (http://emedicine.medscape.com/article/832336-overview)
+
+
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
