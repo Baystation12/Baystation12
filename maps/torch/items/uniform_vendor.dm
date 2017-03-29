@@ -174,7 +174,7 @@
 		user_outfit.dress_hat,
 		user_outfit.dress_gloves
 		)
-	if(user_outfit.service_extra)
+	if(user_outfit.dress_extra)
 		res["Dress Extras"] = user_outfit.dress_extra
 
 	return res
