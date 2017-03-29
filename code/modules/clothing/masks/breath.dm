@@ -20,3 +20,17 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
+
+/obj/item/clothing/mask/breath/bogani
+	name = "large alien mask"
+	desc = "Some form of alien breathing apparatus."
+	icon_state = "bmask_large"
+	item_state = "bmask_large"
+	pull_mask = 0
+	species_restricted = list("Bogani")
+
+/obj/item/clothing/mask/breath/bogani/egyno
+	name = "alien mask"
+	icon_state = "bmask"
+	item_state = "bmask"
+	species_restricted = list("Egyno")

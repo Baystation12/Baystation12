@@ -24,6 +24,7 @@
 	flash_mod = 1.7                    // Stun from blindness modifier.
 
 	gluttonous = GLUT_TINY
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 	cold_level_1 = 240
 	cold_level_2 = 180

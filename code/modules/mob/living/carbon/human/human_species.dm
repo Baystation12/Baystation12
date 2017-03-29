@@ -43,6 +43,12 @@
 /mob/living/carbon/human/diona/New(var/new_loc)
 	..(new_loc, SPECIES_DIONA)
 
+/mob/living/carbon/human/bogani/New(var/new_loc)
+	..(new_loc, "Bogani")
+
+/mob/living/carbon/human/egyno/New(var/new_loc)
+	..(new_loc, "Egyno")
+
 /mob/living/carbon/human/machine/New(var/new_loc)
 	..(new_loc, SPECIES_IPC)
 

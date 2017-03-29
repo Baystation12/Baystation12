@@ -96,6 +96,27 @@
 	return
 
 /*
+ * Chlorine
+ */
+
+/obj/item/weapon/tank/chlorine
+	name = "alien tank"
+	desc = "A strange, alien tank. What could it contain?"
+	icon_state = "chlorine"
+	gauge_icon = null
+
+	sprite_sheets = list(
+		"Egyno" = 'icons/mob/species/egyno/back.dmi',
+		"Bogani" = 'icons/mob/species/bogani/back.dmi'
+		)
+
+/obj/item/weapon/tank/chlorine/New()
+	..()
+
+	src.air_contents.adjust_gas("chlorine", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+	return
+
+/*
  * Emergency Oxygen
  */
 /obj/item/weapon/tank/emergency
