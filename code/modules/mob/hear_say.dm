@@ -41,7 +41,10 @@
 				else
 					message = stars(message)
 
-	var/speaker_name = speaker.name
+	var/speaker_name = "Unknown"
+	if(speaker)
+		speaker_name = speaker.name
+
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
 		speaker_name = H.GetVoice()
@@ -222,7 +225,7 @@
 		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.
 		switch(length)
 			if(0 to 12) 	adverb = " briefly"
-			if(12 to 30)	adverb = " a short message" 
+			if(12 to 30)	adverb = " a short message"
 			if(30 to 48)	adverb = " a message"
 			if(48 to 90)	adverb = " a lengthy message"
 			else        	adverb = " a very lengthy message"
