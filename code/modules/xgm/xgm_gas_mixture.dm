@@ -105,10 +105,15 @@
 
 	update_values()
 
-
+// Used to equalize the mixture between two zones before sleeping an edge.
 /datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
 	var/our_heatcap = heat_capacity()
 	var/share_heatcap = sharer.heat_capacity()
+
+	// Special exception: there isn't enough air around to be worth processing this edge next tick, zap both to zero.
+	if(total_moles + sharer.total_moles <= MINIMUM_AIR_TO_SUSPEND)
+		gas.Cut()
+		sharer.gas.Cut()
 
 	for(var/g in gas|sharer.gas)
 		var/comb = gas[g] + sharer.gas[g]
@@ -299,8 +304,15 @@
 
 
 //Checks if we are within acceptable range of another gas_mixture to suspend processing or merge.
-/datum/gas_mixture/proc/compare(const/datum/gas_mixture/sample)
+/datum/gas_mixture/proc/compare(const/datum/gas_mixture/sample, var/vacuum_exception = 0)
 	if(!sample) return 0
+
+	if(vacuum_exception)
+		// Special case - If one of the two is zero pressure, the other must also be zero.
+		// This prevents suspending processing when an air-filled room is next to a vacuum,
+		// an edge case which is particually obviously wrong to players
+		if(total_moles == 0 && sample.total_moles != 0 || sample.total_moles == 0 && total_moles != 0)
+			return 0
 
 	var/list/marked = list()
 	for(var/g in gas)
