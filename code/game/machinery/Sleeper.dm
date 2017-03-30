@@ -56,7 +56,7 @@
 		var/list/reagent = list()
 		reagent["id"] = T
 		reagent["name"] = available_chemicals[T]
-		if(occupant)
+		if(occupant && occupant.reagents)
 			reagent["amount"] = occupant.reagents.get_reagent_amount(T)
 		reagents += list(reagent)
 	data["reagents"] = reagents.Copy()
