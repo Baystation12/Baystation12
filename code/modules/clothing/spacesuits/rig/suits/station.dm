@@ -60,16 +60,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	camera = /obj/machinery/camera/network/mining
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/suit/space/rig/industrial
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/shoes/magboots/rig/industrial
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/gloves/rig/industrial
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/industrial/equipped
@@ -105,16 +105,16 @@
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
-	species_restricted = list("Human")
+	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/space/rig/eva
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/shoes/magboots/rig/eva
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/gloves/rig/eva
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/eva/equipped
@@ -137,7 +137,7 @@
 	offline_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
 
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/back.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/back.dmi')
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/rig/ce
@@ -188,16 +188,16 @@
 /obj/item/clothing/head/helmet/space/rig/hazmat
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/research
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/suit/space/rig/hazmat
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/shoes/magboots/rig/hazmat
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/gloves/rig/hazmat
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/weapon/rig/hazmat/equipped
 
@@ -231,16 +231,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera = /obj/machinery/camera/network/medbay
-	species_restricted = list("Human")
+	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/space/rig/medical
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/shoes/magboots/rig/medical
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/gloves/rig/medical
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/weapon/rig/medical/equipped
 
@@ -276,16 +276,16 @@
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/security
-	species_restricted = list("Human","Skrell","Tajara","Unathi") //still needs Resomi sprites
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI) //still needs Resomi sprites
 
 /obj/item/clothing/suit/space/rig/hazard
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/shoes/magboots/rig/hazard
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/gloves/rig/hazard
-	species_restricted = list("Human","Skrell","Tajara","Unathi")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/weapon/rig/hazard/equipped
 

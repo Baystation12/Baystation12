@@ -11,8 +11,8 @@
 	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
-		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/mask.dmi',
 		)
 
 /obj/item/clothing/mask/balaclava/tactical

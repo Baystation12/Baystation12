@@ -19,16 +19,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/combat
 	light_overlay = "helmet_light_dual_green"
-	species_restricted = list("Human")
+	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/space/rig/combat
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/shoes/magboots/rig/combat
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/gloves/rig/combat
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/weapon/rig/combat/equipped
 	initial_modules = list(
@@ -64,16 +64,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/military
 	light_overlay = "helmet_light_dual_green"
-	species_restricted = list("Human")
+	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/space/rig/military
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/shoes/magboots/rig/military
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/clothing/gloves/rig/military
-	species_restricted = list("Human","Skrell")
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
 
 /obj/item/weapon/rig/military/equipped
 	initial_modules = list(

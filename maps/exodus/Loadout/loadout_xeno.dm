@@ -2,14 +2,14 @@
 /datum/gear/suit/zhan_furs
 	display_name = "Zhan-Khazan furs (Tajara)"
 	path = /obj/item/clothing/suit/tajaran/furs
-	whitelisted = list("Tajara")
+	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 
 /datum/gear/suit/unathi_mantle
 	display_name = "hide mantle (Unathi)"
 	path = /obj/item/clothing/suit/unathi/mantle
 	cost = 1
-	whitelisted = list("Unathi")
+	whitelisted = list(SPECIES_UNATHI)
 	sort_category = "Xenowear"
 
 //Skrell Chains
@@ -17,7 +17,7 @@
 	display_name = "headtail chain selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/chain
 	sort_category = "Xenowear"
-	whitelisted = list("Skrell")
+	whitelisted = list(SPECIES_SKRELL)
 
 /datum/gear/ears/skrell/chains/New()
 	..()
@@ -31,7 +31,7 @@
 	display_name = "colored headtail chain (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/chain
 	sort_category = "Xenowear"
-	whitelisted = list("Skrell")
+	whitelisted = list(SPECIES_SKRELL)
 	flags = GEAR_HAS_COLOR_SELECTION
 
 //Skrell Bands
@@ -39,7 +39,7 @@
 	display_name = "headtail band selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/band
 	sort_category = "Xenowear"
-	whitelisted = list("Skrell")
+	whitelisted = list(SPECIES_SKRELL)
 
 /datum/gear/ears/skrell/bands/New()
 	..()
@@ -53,7 +53,7 @@
 	display_name = "colored headtail bands (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/band
 	sort_category = "Xenowear"
-	whitelisted = list("Skrell")
+	whitelisted = list(SPECIES_SKRELL)
 	flags = GEAR_HAS_COLOR_SELECTION
 
 //Skrell Cloth
@@ -61,7 +61,7 @@
 	display_name = "male colored headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_male
 	sort_category = "Xenowear"
-	whitelisted = list("Skrell")
+	whitelisted = list(SPECIES_SKRELL)
 
 /datum/gear/ears/skrell/cloth/male/New()
 	..()
@@ -72,7 +72,7 @@
 	display_name = "female colored headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	sort_category = "Xenowear"
-	whitelisted = list("Skrell")
+	whitelisted = list(SPECIES_SKRELL)
 
 /datum/gear/ears/skrell/cloth/female/New()
 	..()
@@ -83,7 +83,7 @@
 	display_name = "smock, grey (Resomi)"
 	path = /obj/item/clothing/under/resomi
 	sort_category = "Xenowear"
-	whitelisted = list("Resomi")
+	whitelisted = list(SPECIES_RESOMI)
 
 /datum/gear/uniform/resomi/rainbow
 	display_name = "smock, rainbow (Resomi)"
@@ -121,7 +121,7 @@
 	display_name = "display monitor (IPC)"
 	path = /obj/item/clothing/mask/monitor
 	sort_category = "Xenowear"
-	whitelisted = list("Machine")
+	whitelisted = list(SPECIES_IPC)
 	cost = 1
 
 /datum/gear/shoes/toeless

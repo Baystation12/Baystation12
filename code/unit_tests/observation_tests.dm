@@ -100,7 +100,7 @@
 
 /datum/unit_test/observation/moved_observer_shall_register_on_follow/conduct_test()
 	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	O.ManualFollow(H)
@@ -118,7 +118,7 @@
 
 /datum/unit_test/observation/moved_observer_shall_unregister_on_nofollow/conduct_test()
 	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	O.ManualFollow(H)
@@ -137,7 +137,7 @@
 
 /datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners/conduct_test()
 	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	qdel(H.virtual_mob)
 	H.virtual_mob = null
 
@@ -158,7 +158,7 @@
 
 /datum/unit_test/observation/moved_shall_register_recursively_on_new_listener/conduct_test()
 	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
@@ -181,7 +181,7 @@
 
 /datum/unit_test/observation/moved_shall_register_recursively_with_existing_listener/conduct_test()
 	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
