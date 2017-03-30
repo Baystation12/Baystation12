@@ -39,4 +39,4 @@
  	icon_open = "resomicoat_open"
  	icon_closed = "resomicoat"
  	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
- 	species_restricted = list("Resomi")
+ 	species_restricted = list(SPECIES_RESOMI)

@@ -54,7 +54,7 @@ var/list/organ_cache = list()
 			dna = holder.dna.Clone()
 			species = all_species[dna.species]
 		else
-			species = all_species["Human"]
+			species = all_species[SPECIES_HUMAN]
 			log_debug("[src] spawned in [holder] without a proper DNA.")
 
 	if(dna)

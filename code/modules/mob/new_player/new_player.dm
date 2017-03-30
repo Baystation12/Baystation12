@@ -533,7 +533,7 @@
 		chosen_species = all_species[client.prefs.species]
 
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
-		return "Human"
+		return SPECIES_HUMAN
 
 	return chosen_species.name
 

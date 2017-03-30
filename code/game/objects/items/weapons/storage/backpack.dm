@@ -18,7 +18,7 @@
 		slot_r_hand_str = "backpack",
 		)
 	sprite_sheets = list(
-		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+		SPECIES_RESOMI = 'icons/mob/species/resomi/back.dmi'
 		)
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK

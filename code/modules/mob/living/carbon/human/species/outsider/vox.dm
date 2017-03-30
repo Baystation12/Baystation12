@@ -1,6 +1,6 @@
 /datum/species/vox
-	name = "Vox"
-	name_plural = "Vox"
+	name = SPECIES_VOX
+	name_plural = SPECIES_VOX
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	default_language = "Vox-pidgin"
@@ -92,7 +92,7 @@
 
 
 /datum/species/vox/pariah
-	name = "Vox Pariah"
+	name = SPECIES_VOXPARIAH
 	blurb = "Sickly biproducts of Vox society, these creatures are vilified by their own kind \
 	and taken advantage of by enterprising companies for cheap, disposable labor. \
 	They aren't very smart, smell worse than a vox, and vomit constantly, \
@@ -126,7 +126,7 @@
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 /datum/species/vox/pariah/get_bodytype(var/mob/living/carbon/human/H)
-	return "Vox"
+	return SPECIES_VOX
 
 // No combat skills for you.
 /datum/species/vox/pariah/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
