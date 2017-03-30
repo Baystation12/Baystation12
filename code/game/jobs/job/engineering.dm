@@ -27,7 +27,7 @@
 	announced = 1
 
 /datum/job/engineer
-	title = "Station Engineer"
+	title = "Engineer"
 	department = "Engineering"
 	department_flag = ENG
 	faction = "Station"

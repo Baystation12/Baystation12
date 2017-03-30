@@ -117,7 +117,7 @@ var/global/economy_init = 0
 		next_account_number = rand(111111, 999999)
 
 		station_account = new()
-		station_account.owner_name = "[station_name()] Station Account"
+		station_account.owner_name = "[station_name()] Primary Account"
 		station_account.account_number = rand(111111, 999999)
 		station_account.remote_access_pin = rand(1111, 111111)
 		station_account.money = 75000

@@ -28,7 +28,7 @@
 
 /mob/living/bot/floorbot/GetInteractTitle()
 	. = "<head><title>Repairbot v1.0 controls</title></head>"
-	. += "<b>Automatic Station Floor Repairer v1.0</b>"
+	. += "<b>Automatic Floor Repairer v1.0</b>"
 
 /mob/living/bot/floorbot/GetInteractStatus()
 	. = ..()
@@ -40,7 +40,7 @@
 	. += "<br>Make singles pieces of metal into tiles when empty: <a href='?src=\ref[src];command=make'>[maketiles ? "Yes" : "No"]</a>"
 
 /mob/living/bot/floorbot/GetInteractMaintenance()
-	. = "Station disassembly mode: "
+	. = "Disassembly mode: "
 	switch(emagged)
 		if(0)
 			. += "<a href='?src=\ref[src];command=emag'>Off</a>"
@@ -88,7 +88,7 @@
 		UnarmedAttack(target)
 
 /mob/living/bot/floorbot/lookForTargets()
-	for(var/turf/simulated/floor/T in view(src)) 
+	for(var/turf/simulated/floor/T in view(src))
 		if(confirmTarget(T))
 			target = T
 			return

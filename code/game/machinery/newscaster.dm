@@ -59,7 +59,7 @@
 	var/datum/feed_message/wanted_issue
 
 /datum/feed_network/New()
-	CreateFeedChannel("Station Announcements", "SS13", 1, 1, "New Station Announcement Available")
+	CreateFeedChannel("Announcements", "SS13", 1, 1, "New Announcement Available")
 
 /datum/feed_network/proc/CreateFeedChannel(var/channel_name, var/author, var/locked, var/adminChannel = 0, var/announcement_message)
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
@@ -249,7 +249,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					dat+="<BR><A href='?src=\ref[src];menu_censor_channel=1'>Mark Feed Channel with [using_map.company_name] D-Notice</A>"
 				dat+="<BR><HR>The newscaster recognises you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"
 			if(1)
-				dat+= "Station Feed Channels<HR>"
+				dat+= "Local Feed Channels<HR>"
 				if( isemptylist(news_network.network_channels) )
 					dat+="<I>No active channels found...</I>"
 				else
