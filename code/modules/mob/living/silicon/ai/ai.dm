@@ -5,7 +5,6 @@ var/list/ai_list = list()
 var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
-	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
 	/mob/living/silicon/ai/proc/ai_emergency_message,
 	/mob/living/silicon/ai/proc/ai_camera_track,
 	/mob/living/silicon/ai/proc/ai_camera_list,
@@ -87,6 +86,9 @@ var/list/ai_verbs_default = list(
 	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
 	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
 	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
+	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
+	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.
+	var/intercepts_communication = 0			// Whether the AI intercepts fax and emergency transmission communications.
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom

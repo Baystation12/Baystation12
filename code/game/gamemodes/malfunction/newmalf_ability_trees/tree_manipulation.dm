@@ -2,38 +2,45 @@
 //
 // Abilities in this tree allow the AI to physically manipulate systems around the station.
 // T1 - Electrical Pulse - Sends out pulse that breaks some lights and sometimes even APCs. This can actually break the AI's APC so be careful!
-// T2 - Hack Camera - Allows the AI to hack a camera. Deactivated areas may be reactivated, and functional cameras can be upgraded.
+// T2 - Reboot camera - Allows the AI to reactivate a camera.
 // T3 - Emergency Forcefield - Allows the AI to project 1 tile forcefield that blocks movement and air flow. Forcefield´dissipates over time. It is also very susceptible to energetic weaponry.
 // T4 - Machine Overload - Detonates machine of choice in a minor explosion. Two of these are usually enough to kill or K/O someone.
+// T5 - Machine Upgrade - Upgrades a machine of choice. Upgrade behavior can be defined for each machine independently.
 
 
 // BEGIN RESEARCH DATUMS
 
 /datum/malf_research_ability/manipulation/electrical_pulse
 	ability = new/datum/game_mode/malfunction/verb/electrical_pulse()
-	price = 50
-	next = new/datum/malf_research_ability/manipulation/hack_camera()
-	name = "Electrical Pulse"
+	price = 250
+	next = new/datum/malf_research_ability/manipulation/reboot_camera()
+	name = "T1 - Electrical Pulse"
 
 
-/datum/malf_research_ability/manipulation/hack_camera
-	ability = new/datum/game_mode/malfunction/verb/hack_camera()
-	price = 1200
+/datum/malf_research_ability/manipulation/reboot_camera
+	ability = new/datum/game_mode/malfunction/verb/reboot_camera()
+	price = 1000
 	next = new/datum/malf_research_ability/manipulation/emergency_forcefield()
-	name = "Hack Camera"
+	name = "T2 - Reboot Camera"
 
 
 /datum/malf_research_ability/manipulation/emergency_forcefield
 	ability = new/datum/game_mode/malfunction/verb/emergency_forcefield()
-	price = 3000
+	price = 2000
 	next = new/datum/malf_research_ability/manipulation/machine_overload()
-	name = "Emergency Forcefield"
+	name = "T3 - Emergency Forcefield"
 
 
 /datum/malf_research_ability/manipulation/machine_overload
 	ability = new/datum/game_mode/malfunction/verb/machine_overload()
-	price = 7500
-	name = "Machine Overload"
+	price = 4000
+	next = new/datum/malf_research_ability/manipulation/machine_upgrade()
+	name = "T4 - Machine Overload"
+
+/datum/malf_research_ability/manipulation/machine_upgrade
+	ability = new/datum/game_mode/malfunction/verb/machine_upgrade()
+	price = 4000
+	name = "T5 - Machine Upgrade"
 
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
@@ -50,16 +57,16 @@
 	for(var/obj/machinery/power/apc/AP in machines)
 		if(prob(5))
 			AP.overload_lighting()
-		if(prob(1) && prob(1)) // Very very small chance to actually destroy the APC.
+		if(prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.
 			AP.set_broken()
 	user.hacking = 1
 	log_ability_use(user, "electrical pulse")
-	spawn(150)
+	spawn(15 SECONDS)
 		user.hacking = 0
 
-/datum/game_mode/malfunction/verb/hack_camera(var/obj/machinery/camera/target in cameranet.cameras)
-	set name = "Hack Camera"
-	set desc = "100 CPU - Hacks existing camera, allowing you to add upgrade of your choice to it. Alternatively it lets you reactivate broken camera."
+/datum/game_mode/malfunction/verb/reboot_camera(var/obj/machinery/camera/target in cameranet.cameras)
+	set name = "Reboot Camera"
+	set desc = "100 CPU - Reboots a damaged but not completely destroyed camera."
 	set category = "Software"
 	var/price = 100
 	var/mob/living/silicon/ai/user = usr
@@ -71,52 +78,15 @@
 	if(!target)
 		return
 
-	if(!ability_prechecks(user, price))
+	if(!ability_prechecks(user, price) || !ability_pay(user, price))
 		return
 
-	var/action = input("Select required action: ") in list("Reset", "Add X-Ray", "Add Motion Sensor", "Add EMP Shielding")
-	if(!action || !target)
-		return
-
-	switch(action)
-		if("Reset")
-			if(target.wires)
-				if(!ability_pay(user, price))
-					return
-				target.reset_wires()
-				to_chat(user, "Camera reactivated.")
-				log_ability_use(user, "hack camera (reset)", target)
-				return
-		if("Add X-Ray")
-			if(target.isXRay())
-				to_chat(user, "Camera already has X-Ray function.")
-				return
-			else if(ability_pay(user, price))
-				target.upgradeXRay()
-				target.reset_wires()
-				to_chat(user, "X-Ray camera module enabled.")
-				log_ability_use(user, "hack camera (add X-Ray)", target)
-				return
-		if("Add Motion Sensor")
-			if(target.isMotion())
-				to_chat(user, "Camera already has Motion Sensor function.")
-				return
-			else if(ability_pay(user, price))
-				target.upgradeMotion()
-				target.reset_wires()
-				to_chat(user, "Motion Sensor camera module enabled.")
-				log_ability_use(user, "hack camera (add motion)", target)
-				return
-		if("Add EMP Shielding")
-			if(target.isEmpProof())
-				to_chat(user, "Camera already has EMP Shielding function.")
-				return
-			else if(ability_pay(user, price))
-				target.upgradeEmpProof()
-				target.reset_wires()
-				to_chat(user, "EMP Shielding camera module enabled.")
-				log_ability_use(user, "hack camera (add EMP shielding)", target)
-				return
+	target.stat = initial(target.stat)
+	target.reset_wires()
+	target.update_icon()
+	target.update_coverage()
+	to_chat(user, "Camera reactivated.")
+	log_ability_use(user, "reset camera", target)
 
 
 /datum/game_mode/malfunction/verb/emergency_forcefield(var/turf/T as turf in world)
@@ -134,7 +104,7 @@
 	new/obj/machinery/shield/malfai(T)
 	user.hacking = 1
 	log_ability_use(user, "emergency forcefield", T)
-	spawn(20)
+	spawn(2 SECONDS)
 		user.hacking = 0
 
 
@@ -191,7 +161,7 @@
 	if(!ability_pay(user,price))
 		return
 
-	M.use_power(1 MEGAWATTS)
+	M.use_power(250 KILOWATTS)
 
 	// Trigger a powernet alarm. Careful engineers will probably notice something is going on.
 	var/area/temp_area = get_area(M)
@@ -199,17 +169,40 @@
 		var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
 		if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
 			temp_apc.terminal.powernet.trigger_warning(50) // Long alarm
-		if(temp_apc)
-			temp_apc.emp_act(3) // Such power surges are not good for APC electronics/cell in general.
+			 // Such power surges are not good for APC electronics/cell in general.
 			if(prob(explosion_intensity))
-				temp_apc.set_broken()
+				temp_apc.emp_act(1)
 
 
 	log_ability_use(user, "machine overload", M)
 	M.visible_message("<span class='notice'>BZZZZZZZT</span>")
-	spawn(50)
+	spawn(5 SECONDS)
 		explosion(get_turf(M), round(explosion_intensity/4),round(explosion_intensity/2),round(explosion_intensity),round(explosion_intensity * 2))
 		if(M)
 			qdel(M)
+
+
+/datum/game_mode/malfunction/verb/machine_upgrade(obj/machinery/M in machines)
+	set name = "Machine Upgrade"
+	set desc = "800 CPU - Pushes existing hardware to it's technological limits by rapidly upgrading it's software."
+	set category = "Software"
+	var/price = 800
+	var/mob/living/silicon/ai/user = usr
+
+	if(!M)
+		return
+
+	if(!ability_prechecks(user, price))
+		return
+
+	if(M.malf_upgraded)
+		to_chat(user, "\The [M] has already been upgraded.")
+		return
+
+	if(!M.malf_upgrade(user))
+		to_chat(user, "\The [M] cannot be upgraded.")
+		return
+
+	ability_pay(user,price)
 
 // END ABILITY VERBS

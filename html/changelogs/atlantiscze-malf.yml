@@ -1,0 +1,10 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscdel: "Removed Turrets Focus Enhancer malf AI hardware, it is obsolete now."
+  - rscdel: "Hack Camera replaced with Reset Camera. No longer allows camera upgrades, this has been shifted to Machine Upgrade."
+  - rscadd: "Added Quantum Knowledge Databank malf AI hardware. On use it advances all research by one level. Single-use."
+  - rscadd: "Added T5 Machine Upgrade ability, behind Machine Overload. Right now only works on APC, SMES, Turret, Turret control, Camera. It is easily expandable to any machinery in the future."
+  - rscadd: "Adds four new abilities in a new passive tree. T1 prevents intellicard transfers (toggleable), T2 removes BSOD/lockout from APCs, but reduces CPU generation (toggleable), T3 prevents hack failures, and allows you to complete system override silently and T4 prevents fax/emergency messages from going through."

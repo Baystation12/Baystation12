@@ -119,11 +119,19 @@
 	var/updating_icon = 0
 	var/failure_timer = 0
 	var/force_update = 0
+	var/emp_hardened = 0
 	var/global/list/status_overlays_lock
 	var/global/list/status_overlays_charging
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
+
+/obj/machinery/power/apc/malf_upgrade(var/mob/living/silicon/ai/user)
+	..()
+	malf_upgraded = 1
+	emp_hardened = 1
+	to_chat(user, "\The [src] has been upgraded. It is now protected against EM pulses.")
+	return 1
 
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
@@ -215,6 +223,8 @@
 	return ..()
 
 /obj/machinery/power/apc/proc/energy_fail(var/duration)
+	if(emp_hardened)
+		return
 	failure_timer = max(failure_timer, round(duration))
 
 /obj/machinery/power/apc/proc/make_terminal()
@@ -262,7 +272,7 @@
 		else
 			if (stat & MAINT)
 				to_chat(user, "The cover is closed. Something wrong with it: it doesn't work.")
-			else if (hacker)
+			else if (hacker && !hacker.hacked_apcs_hidden)
 				to_chat(user, "The cover is locked.")
 			else
 				to_chat(user, "The cover is closed.")
@@ -384,7 +394,7 @@
 			update_state |= UPDATE_OPENED1
 		if(opened==2)
 			update_state |= UPDATE_OPENED2
-	else if(emagged || hacker || failure_timer)
+	else if(emagged || (hacker && !hacker.hacked_apcs_hidden) || failure_timer)
 		update_state |= UPDATE_BLUESCREEN
 	else if(wiresexposed)
 		update_state |= UPDATE_WIREEXP
@@ -478,7 +488,7 @@
 		else if (opened!=2) //cover isn't removed
 			opened = 0
 			update_icon()
-	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || hacker) )
+	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) )
 		if(coverlocked && !(stat & MAINT))
 			to_chat(user, "<span class='warning'>The cover is locked and cannot be opened.</span>")
 			return
@@ -539,7 +549,7 @@
 			to_chat(user, "You must close the panel")
 		else if(stat & (BROKEN|MAINT))
 			to_chat(user, "Nothing happens.")
-		else if(hacker)
+		else if(hacker && !hacker.hacked_apcs_hidden)
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		else
 			if(src.allowed(usr) && !isWireCut(APC_WIRE_IDSCAN))
@@ -641,7 +651,7 @@
 			"<span class='notice'>You replace the damaged APC frontal panel with a new one.</span>")
 		qdel(W)
 		update_icon()
-	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN) || hacker))
+	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
 		if (has_electronics)
 			to_chat(user, "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>")
 			return
@@ -661,7 +671,7 @@
 				opened = 1
 			update_icon()
 	else
-		if (((stat & BROKEN) || hacker) \
+		if (((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) \
 				&& !opened \
 				&& W.force >= 5 \
 				&& W.w_class >= 3.0 \
@@ -685,7 +695,7 @@
 // attack with hand - remove cell (if cover open) or interact with the APC
 
 /obj/machinery/power/apc/emag_act(var/remaining_charges, var/mob/user)
-	if (!(emagged || hacker))		// trying to unlock with an emag card
+	if (!(emagged || (hacker && !hacker.hacked_apcs_hidden)))		// trying to unlock with an emag card
 		if(opened)
 			to_chat(user, "You must close the cover to swipe an ID card.")
 		else if(wiresexposed)
@@ -872,7 +882,7 @@
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
-		if(hacker)
+		if(hacker && !hacker.hacked_apcs_hidden)
 			if(hacker == AI)
 				permit = 1
 			else if(istype(robot) && robot.connected_ai && robot.connected_ai == hacker) // Cyborgs can use APCs hacked by their AI
@@ -1161,6 +1171,8 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 
 // damage and destruction acts
 /obj/machinery/power/apc/emp_act(severity)
+	if(emp_hardened)
+		return
 	// Fail for 8-12 minutes (divided by severity)
 	// Division by 2 is required, because machinery ticks are every two seconds. Without it we would fail for 16-24 minutes.
 	if(is_critical)

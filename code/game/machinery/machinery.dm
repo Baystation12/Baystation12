@@ -100,6 +100,7 @@ Class Procs:
 
 	var/stat = 0
 	var/emagged = 0
+	var/malf_upgraded = 0
 	var/use_power = 1
 		//0 = dont run the auto
 		//1 = run auto, use idle
@@ -353,3 +354,6 @@ Class Procs:
 
 /datum/proc/remove_visual(mob/M)
 	return
+
+/obj/machinery/proc/malf_upgrade(var/mob/living/silicon/ai/user)
+	return 0

@@ -74,7 +74,7 @@
 	// Off-Station APCs should not count towards CPU generation.
 	for(var/obj/machinery/power/apc/A in hacked_apcs)
 		if(A.z in using_map.station_levels)
-			cpu_gain += 0.004
+			cpu_gain += 0.004 * (hacked_apcs_hidden ? 0.5 : 1)
 			cpu_storage += 10
 
 	research.max_cpu = cpu_storage + override_CPUStorage
