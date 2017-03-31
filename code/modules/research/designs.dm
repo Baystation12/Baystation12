@@ -1625,7 +1625,7 @@ CIRCUITS BELOW
 	sort_string = "XABAB"
 
 /datum/design/aimodule/protectstation
-	name = "ProtectStation"
+	name = "ProtectInstallation"
 	id = "protectstation"
 	req_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
 	build_path = /obj/item/weapon/aiModule/protectStation
