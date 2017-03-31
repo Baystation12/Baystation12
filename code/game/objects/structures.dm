@@ -45,13 +45,14 @@
 			return
 
 /obj/structure/New()
-	..()
-	if(climbable)
-		verbs += /obj/structure/proc/climb_on
 	if(prob(0.85)) //Relatively high since windows and tables aren't eligible
 		if(!is_type_in_list(src, protected_objects))
 			spawn(-1) new /mob/living/simple_animal/hostile/mimic(src.loc, src, null)
 			qdel(src)
+	..()
+	if(climbable)
+		verbs += /obj/structure/proc/climb_on
+
 
 /obj/structure/Destroy()
 	..()
