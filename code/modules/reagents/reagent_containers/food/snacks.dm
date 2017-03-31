@@ -1649,6 +1649,13 @@
 	name = "neaera cube"
 	monkey_type = /mob/living/carbon/human/neaera
 
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/resomicube
+	name = "resomi cube"
+	monkey_type = /mob/living/carbon/human/resomi
+
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/resomicube
+	name = "resomi cube"
+	monkey_type = /mob/living/carbon/human/resomi
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger
 	name = "Spell Burger"
