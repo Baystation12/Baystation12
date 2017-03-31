@@ -82,7 +82,6 @@
 		if(!client)
 			species.handle_npc(src)
 
-
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
 
@@ -145,6 +144,7 @@
 	else
 		return ONE_ATMOSPHERE + pressure_difference
 
+/mob/living/carbon/human/var/next_blink
 /mob/living/carbon/human/handle_impaired_vision()
 	..()
 	//Vision
@@ -165,6 +165,12 @@
 		if(!(sdisabilities & BLIND))
 			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
 				eye_blurry = max(eye_blurry-2, 0)
+
+	if(world.time > next_blink && vision && !vision.robotic < ORGAN_ROBOT && !blinded)
+		to_chat(src, "<span class='warning'>You hadn't blinked in a while. That is not healthy at all!.</span>")
+		if(prob(10))
+			apply_effect(1,EYE_BLUR)
+		next_blink = world.time + 5 MINUTES
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
