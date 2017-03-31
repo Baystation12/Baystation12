@@ -1,4 +1,0 @@
-author: Leshana
-delete-after: True
-changes: 
-  - bugfix: "Fix rooms holding pressure when exposed to space."

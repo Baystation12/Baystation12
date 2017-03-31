@@ -1,4 +1,0 @@
-author: Datraen
-delete-after: True
-changes: 
-  - bugfix: "Updates mechs to be able to interact with ID cards in wallets."

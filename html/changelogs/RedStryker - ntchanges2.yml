@@ -1,8 +1,0 @@
-author: RedStryker
-
-delete-after: True
-
-changes: 
-  - tweak: "Added new lore-consistent PDA, Locker, and Action Figure sprites for NanoTrasen items."
-  - rscdel: "Removed science armband."
-  - tweak: "Recolored research tape to white."
