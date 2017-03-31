@@ -47,7 +47,7 @@
 /obj/structure/New()
 	if(prob(0.85)) //Relatively high since windows and tables aren't eligible
 		if(!is_type_in_list(src, protected_objects))
-			spawn(-1) new /mob/living/simple_animal/hostile/mimic(src.loc, src, null)
+			new /mob/living/simple_animal/hostile/mimic(src.loc, src, null)
 			qdel(src)
 	..()
 	if(climbable)
