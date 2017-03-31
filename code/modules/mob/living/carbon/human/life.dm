@@ -342,6 +342,7 @@
 			internals.icon_state = "internal0"
 	return null
 
+/mob/living/carbon/var/air_warned
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
@@ -353,6 +354,11 @@
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
 
 	if(failed_last_breath)
+		if(!air_warned)
+			air_warned = 1
+			to_chat(src, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you are <span class ='danger'>SUFFOCATING</span>!</b></font>")
+			to_chat(src, "That is NOT good! If you don't breathe air, you might <span class ='danger'>DIE</span>!")
+			to_chat(src, "But don't worry, it's easy to fix! Just get some <span class='alium'>AIR</span> and breathe it in. As simple as that!")
 		if(prob(20))
 			emote("gasp")
 		if(health > config.health_threshold_crit)
