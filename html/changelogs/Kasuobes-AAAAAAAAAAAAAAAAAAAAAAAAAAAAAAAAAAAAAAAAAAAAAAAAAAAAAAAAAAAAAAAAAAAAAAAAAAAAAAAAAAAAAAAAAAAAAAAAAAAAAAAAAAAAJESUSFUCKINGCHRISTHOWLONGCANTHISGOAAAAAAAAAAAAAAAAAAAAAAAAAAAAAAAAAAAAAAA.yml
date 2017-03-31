@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes: 
+  - rscadd: "Added singularity grenades. Works just about as well as you imagine."
