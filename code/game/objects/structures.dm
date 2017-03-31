@@ -49,6 +49,7 @@
 		if(!is_type_in_list(src, protected_objects))
 			new /mob/living/simple_animal/hostile/mimic(src.loc, src, null)
 			qdel(src)
+			return
 	..()
 	if(climbable)
 		verbs += /obj/structure/proc/climb_on
