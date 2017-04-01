@@ -64,6 +64,10 @@
 
 	for(var/turf/space/S in range(W,1))
 		S.update_starlight()
+	for(var/turf/wasteland/Waste in range(W,1))
+		Waste.update_starlight()
+	for(var/turf/road/road in range(W,1))
+		road.update_starlight()
 
 	W.post_change()
 	. = W

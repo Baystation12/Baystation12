@@ -110,6 +110,9 @@
 	icon_state = "sheet-uranium"
 	default_type = "uranium"
 
+/obj/item/stack/material/uranium/fifty
+	amount = 50
+
 /obj/item/stack/material/phoron
 	name = "solid phoron"
 	icon_state = "sheet-phoron"

@@ -33,6 +33,7 @@ var/list/spawntypes = list()
 /datum/spawnpoint/gateway
 	display_name = "Gateway"
 	msg = "has completed translation from offsite gateway"
+	disallow_job = list("Sheriff","Deputy","Frontier Doctor","Hotel Manager","Hotel Maid","Solar Field Engineer","Settler","Merchant")
 
 /datum/spawnpoint/gateway/New()
 	..()
@@ -41,7 +42,7 @@ var/list/spawntypes = list()
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
 	msg = "has completed cryogenic revival"
-	disallow_job = list("Cyborg")
+	disallow_job = list("Cyborg","Sheriff","Deputy","Frontier Doctor","Hotel Manager","Hotel Maid","Solar Field Engineer","Settler","Merchant")
 
 /datum/spawnpoint/cryo/New()
 	..()
@@ -51,7 +52,17 @@ var/list/spawntypes = list()
 	display_name = "Cyborg Storage"
 	msg = "has been activated from storage"
 	restrict_job = list("Cyborg")
+	disallow_job = list("Sheriff","Deputy","Frontier Doctor","Hotel Manager","Hotel Maid","Solar Field Engineer","Settler","Merchant")
 
 /datum/spawnpoint/cyborg/New()
 	..()
 	turfs = latejoin_cyborg
+
+/datum/spawnpoint/wander
+	display_name = "Wander the Wastes"
+	msg = "Has wandered the wastes to arrive at Sunset"
+	restrict_job = list("Sheriff","Deputy","Frontier Doctor","Hotel Manager","Hotel Maid","Solar Field Engineer","Settler","Merchant")
+
+/datum/spawnpoint/wander/New()
+	..()
+	turfs = latejoin_wander
