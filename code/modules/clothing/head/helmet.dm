@@ -125,8 +125,8 @@
 	desc = "An armored helmet capable of being fitted with a multitude of attachments."
 	icon_state = "swathelm"
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi'
 		)
 
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)

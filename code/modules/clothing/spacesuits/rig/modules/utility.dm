@@ -37,7 +37,7 @@
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
 	use_power_cost = 50
-
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
 /obj/item/rig_module/device/healthscanner
@@ -47,7 +47,7 @@
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
 	use_power_cost = 200
-
+	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
 	device_type = /obj/item/device/healthanalyzer
 
 /obj/item/rig_module/device/drill
@@ -59,7 +59,7 @@
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
 	use_power_cost = 75
-
+	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
@@ -73,6 +73,7 @@
 	usable = 1
 	selectable = 0
 	device_type = /obj/item/device/ano_scanner
+	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"
@@ -85,6 +86,7 @@
 	selectable = 0
 	use_power_cost = 200
 	device_type = /obj/item/weapon/mining_scanner
+	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
@@ -95,7 +97,7 @@
 	usable = 1
 	engage_string = "Configure RCD"
 	use_power_cost = 100 KILOWATTS // Matter fabrication is a very energy-demanding process.
-
+	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
 	device_type = /obj/item/weapon/rcd/mounted
 
 /obj/item/rig_module/device/New()
@@ -340,7 +342,7 @@
 
 	interface_name = "maneuvering jets"
 	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
-
+	origin_tech = list(TECH_MATERIAL = 6,  TECH_ENGINEERING = 7)
 	var/obj/item/weapon/tank/jetpack/rig/jets
 
 /obj/item/rig_module/maneuvering_jets/engage()
@@ -457,5 +459,5 @@
 	icon_state = "ewar"
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
-
+	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 	device_type = /obj/item/weapon/matter_decompiler

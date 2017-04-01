@@ -17,7 +17,7 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
 
 /obj/item/device/radio/headset/New()
 	..()
@@ -74,6 +74,15 @@
 /obj/item/device/radio/headset/syndicate/initialize()
 	..()
 	set_frequency(SYND_FREQ)
+
+/obj/item/device/radio/headset/raider
+	origin_tech = list(TECH_ILLEGAL = 2)
+	syndie = 1
+	ks1type = /obj/item/device/encryptionkey/raider
+
+/obj/item/device/radio/headset/raider/initialize()
+	..()
+	set_frequency(RAID_FREQ)
 
 /obj/item/device/radio/headset/binary
 	origin_tech = list(TECH_ILLEGAL = 3)

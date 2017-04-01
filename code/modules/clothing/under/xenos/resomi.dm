@@ -4,7 +4,7 @@
 	icon = 'icons/obj/clothing/species/resomi/uniform.dmi'
 	icon_state = "resomi_grey"
 	worn_state = "resomi_grey"
-	species_restricted = list("Resomi")
+	species_restricted = list(SPECIES_RESOMI)
 
 /obj/item/clothing/under/resomi/white
 	name = "small smock"

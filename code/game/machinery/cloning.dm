@@ -487,7 +487,7 @@
 	<b>That's all there is to it!</b><br>
 	<i>Notice, cloning system cannot scan inorganic life or small primates.  Scan may fail if subject has suffered extreme brain damage.</i><br>
 	<p>Clone profiles may be viewed through the profiles menu. Scanning implants a complementary HEALTH MONITOR IMPLANT into the subject, which may be viewed from each profile.
-	Profile Deletion has been restricted to \[Station Head\] level access.</p>
+	Profile Deletion has been restricted to \[Head\] level access.</p>
 	<h4>Cloning from a profile</h4>
 	Cloning is as simple as pressing the CLONE option at the bottom of the desired profile.<br>
 	Per your company's EMPLOYEE PRIVACY RIGHTS agreement, the H-87 has been blocked from cloning crewmembers while they are still alive.<br>

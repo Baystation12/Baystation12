@@ -239,7 +239,7 @@
 /obj/machinery/telecomms/relay/Options_Menu()
 	var/dat = ""
 	if(src.z == TELECOMM_Z)
-		dat += "<br>Signal Locked to Station: <A href='?src=\ref[src];change_listening=1'>[listening_level == STATION_Z ? "TRUE" : "FALSE"]</a>"
+		dat += "<br>Signal Locked to the [station_name()]: <A href='?src=\ref[src];change_listening=1'>[listening_level == STATION_Z ? "TRUE" : "FALSE"]</a>"
 	dat += "<br>Broadcasting: <A href='?src=\ref[src];broadcast=1'>[broadcasting ? "YES" : "NO"]</a>"
 	dat += "<br>Receiving:    <A href='?src=\ref[src];receive=1'>[receiving ? "YES" : "NO"]</a>"
 	return dat

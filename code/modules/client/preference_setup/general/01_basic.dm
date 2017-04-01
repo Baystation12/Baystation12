@@ -22,8 +22,8 @@ datum/preferences
 	S["OOC_Notes"]				<< pref.metadata
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
-	var/datum/species/S = all_species[pref.species ? pref.species : "Human"]
-	if(!S) S = all_species["Human"]
+	var/datum/species/S = all_species[pref.species ? pref.species : SPECIES_HUMAN]
+	if(!S) S = all_species[SPECIES_HUMAN]
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
 	pref.real_name          = sanitize_name(pref.real_name, pref.species)

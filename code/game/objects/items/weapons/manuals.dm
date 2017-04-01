@@ -7,10 +7,10 @@
 
 
 /obj/item/weapon/book/manual/engineering_construction
-	name = "Station Repairs and Construction"
+	name = "Repairs and Construction"
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
-	title = "Station Repairs and Construction"
+	title = "Repairs and Construction"
 
 /obj/item/weapon/book/manual/engineering_construction/New()
 	..()

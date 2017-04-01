@@ -77,6 +77,11 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
 			(<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)
 		"}
+		body += "<br><br><b>Staff Warning:</b> [M.client.staffwarn ? M.client.staffwarn : "No"]<br>"
+		if (!M.client.staffwarn)
+			body += "<A href='?src=\ref[src];setstaffwarn=\ref[M]'>Set StaffWarn</A>"
+		else
+			body += "<A href='?src=\ref[src];removestaffwarn=\ref[M]'>Remove StaffWarn</A>"
 
 	body += {"<br><br>
 		<A href='?src=\ref[src];jumpto=\ref[M]'><b>Jump to</b></A> |
@@ -373,7 +378,7 @@ var/global/floorIsLava = 0
 				<BR><HR><A href='?src=\ref[src];ac_set_signature=1'>The newscaster recognises you as:<BR> <FONT COLOR='green'>[src.admincaster_signature]</FONT></A>
 			"}
 		if(1)
-			dat+= "Station Feed Channels<HR>"
+			dat+= "Feed Channels<HR>"
 			if( isemptylist(news_network.network_channels) )
 				dat+="<I>No active channels found...</I>"
 			else
@@ -1388,12 +1393,15 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	ticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/living/H as mob)
+/datum/admins/proc/paralyze_mob(mob/H as mob in player_list)
 	set category = "Admin"
 	set name = "Toggle Paralyze"
 	set desc = "Paralyzes a player. Or unparalyses them."
 
 	var/msg
+
+	if(!isliving(H))
+		return
 
 	if(check_rights(R_ADMIN))
 		if (H.paralysis == 0)

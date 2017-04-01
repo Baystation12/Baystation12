@@ -10,18 +10,18 @@
 	siemens_coefficient = 0.4
 
 	//Species-specific stuff.
-	species_restricted = list("Human", "Machine")
+	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
 	sprite_sheets = list(
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
-		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
-		"Resomi" = 'icons/mob/species/resomi/helmet.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/helmet.dmi',
 		)
 	sprite_sheets_obj = list(
-		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
-		"Tajara" = 'icons/obj/clothing/species/tajaran/hats.dmi',
-		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
-		"Resomi" = 'icons/obj/clothing/species/resomi/hats.dmi',
+		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/hats.dmi',
+		SPECIES_TAJARA = 'icons/obj/clothing/species/tajaran/hats.dmi',
+		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/hats.dmi',
+		SPECIES_RESOMI = 'icons/obj/clothing/species/resomi/hats.dmi',
 		)
 
 	light_overlay = "helmet_light"
@@ -38,18 +38,18 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.4
 
-	species_restricted = list("Human", "Skrell", "Machine")
+	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
 	sprite_sheets = list(
-		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
-		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
-		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
-		"Resomi" = 'icons/mob/species/resomi/suit.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi',
 		)
 	sprite_sheets_obj = list(
-		"Unathi" = 'icons/obj/clothing/species/unathi/suits.dmi',
-		"Tajara" = 'icons/obj/clothing/species/tajaran/suits.dmi',
-		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
-		"Resomi" = 'icons/obj/clothing/species/resomi/suits.dmi',
+		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/suits.dmi',
+		SPECIES_TAJARA = 'icons/obj/clothing/species/tajaran/suits.dmi',
+		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/suits.dmi',
+		SPECIES_RESOMI = 'icons/obj/clothing/species/resomi/suits.dmi',
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.

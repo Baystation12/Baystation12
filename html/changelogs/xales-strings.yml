@@ -1,6 +1,0 @@
-author: Ravenxales
-
-delete-after: True
-
-changes:
-  - tweak: "Fix many strings to respect the Torch environment."

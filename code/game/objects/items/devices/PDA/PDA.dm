@@ -11,7 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_ID | SLOT_BELT
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/id.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/id.dmi')
 
 	//Main variables
 	var/owner = null

@@ -57,7 +57,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
 	if(!pref.species || !(pref.species in playable_species))
-		pref.species = "Human"
+		pref.species = SPECIES_HUMAN
 	pref.r_hair			= sanitize_integer(pref.r_hair, 0, 255, initial(pref.r_hair))
 	pref.g_hair			= sanitize_integer(pref.g_hair, 0, 255, initial(pref.g_hair))
 	pref.b_hair			= sanitize_integer(pref.b_hair, 0, 255, initial(pref.b_hair))
@@ -98,7 +98,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	if(config.use_cortical_stacks)
 		. += "Neural lace: "
-		. += pref.has_cortical_stack ? "present." : "<b>not present. <font color='#FF0000'>Character is unclonable.</font></b>"
+		. += pref.has_cortical_stack ? "present." : "<b>not present.</b>"
 		. += " \[<a href='byond://?src=\ref[src];toggle_stack=1'>toggle</a>\]<br>"
 
 	. += "Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</a><br>"
@@ -471,7 +471,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					pref.rlimb_data[second_limb] = null
 
 			if("Prosthesis")
-				var/tmp_species = pref.species ? pref.species : "Human"
+				var/tmp_species = pref.species ? pref.species : SPECIES_HUMAN
 				var/list/usable_manufacturers = list()
 				for(var/company in chargen_robolimbs)
 					var/datum/robolimb/M = chargen_robolimbs[company]
@@ -551,7 +551,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 /datum/category_item/player_setup_item/general/body/proc/SetSpecies(mob/user)
 	if(!pref.species_preview || !(pref.species_preview in all_species))
-		pref.species_preview = "Human"
+		pref.species_preview = SPECIES_HUMAN
 	var/datum/species/current_species = all_species[pref.species_preview]
 	var/dat = "<body>"
 	dat += "<center><h2>[current_species.name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
