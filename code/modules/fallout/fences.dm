@@ -15,7 +15,7 @@
 		density = 0
 	if(istype(I, /obj/item/stack/rods))
 		if(!cut)
-			to_chat(user, "<span class='warning'>You see no use for \the [I] at this time.")
+			to_chat(user, "<span class='warning'>You see no use for \the [I] at this time.</span>")
 		else
 			var/obj/item/stack/rods/replacements = I
 			if(replacements.amount < 5)
