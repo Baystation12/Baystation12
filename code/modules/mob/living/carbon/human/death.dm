@@ -27,6 +27,16 @@
 
 	if(stat == DEAD) return
 
+	to_chat(src, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you <span class ='danger'>DIED</span>!</b></font>")
+	to_chat(src, "If you die, you <span class ='danger'>CAN'T RP</span> anymore! Oh dear! But fear not, you might get revived by <span class='alium'>MAGICAL</span> thingie! Oh yeah!")
+	to_chat(src, "Now, do you wish to display a last emote as you <span class ='danger'>DIE</span>?")
+	var/msg = sanitize(input(usr,"Give message to display on your death... good luck next time... see you space cowboy...","Death emote") as message, extra = 0)
+	if(msg)
+		msg = name + " " + msg
+		if(!stat) //won't see it normally
+			to_chat(src, msg)
+		visible_message(src,msg)
+
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)

@@ -179,7 +179,7 @@
 			mob.control_object.forceMove(get_step(mob.control_object,direct))
 	return
 
-
+/mob/var/movement_warned
 /client/Move(n, direct)
 	if(!mob)
 		return // Moved here to avoid nullrefs below
@@ -380,6 +380,11 @@
 			G.adjust_position()
 
 		moving = 0
+		if(!mob.movement_warned)
+			mob.movement_warned = 1
+			to_chat(src, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you just <span class ='danger'>MOVED</span>!</b></font>")
+			to_chat(src, "That is great! It's usually a <span class='alium'>GOOD THING</span>!")
+			to_chat(src, "But make sure to watch your feet, or you can fall and <span class ='danger'>NOT GET UP</span>!")
 
 		return .
 

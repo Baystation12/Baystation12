@@ -355,7 +355,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			if(1)			return I_DISARM
 			if(2)			return I_GRAB
 			else			return I_HURT
-
+/mob/var/intent_warned
 //change a mob's act-intent. Input the intent as a string such as "help" or use "right"/"left
 /mob/verb/a_intent_change(input as text)
 	set name = "a-intent"
@@ -385,7 +385,11 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				hud_used.action_intent.icon_state = I_HURT
 			else
 				hud_used.action_intent.icon_state = I_HELP
-
+	if(a_intent == I_HURT && !intent_warned)
+		intent_warned = 1
+		to_chat(src, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you've selected the <span class ='danger'>HURT</span> intent!</b></font>")
+		to_chat(src, "If you use it, there is a chance that you might <span class ='danger'>HURT</span> someone, possibly interrupting or even <span class ='danger'>ENDING THEIR RP</span>!")
+		to_chat(src, "In case you never asked for this, just change to good, honest, <span class='alium'>HELP</span> intent!")
 proc/is_blind(A)
 	if(istype(A, /mob/living/carbon))
 		var/mob/living/carbon/C = A
