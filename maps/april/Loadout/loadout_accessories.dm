@@ -30,7 +30,6 @@
 	armbands["medical armband"] = /obj/item/clothing/accessory/armband/med
 	armbands["engineering armband"] = /obj/item/clothing/accessory/armband/engine
 	armbands["hydroponics armband"] = /obj/item/clothing/accessory/armband/hydro
-	armbands["science armband"] = /obj/item/clothing/accessory/armband/science
 	gear_tweaks += new/datum/gear_tweak/path(armbands)
 
 /datum/gear/accessory/wallet
