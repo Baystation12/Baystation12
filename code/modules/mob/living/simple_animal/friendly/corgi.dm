@@ -32,6 +32,7 @@
 	desc = "It's a corgi."
 	var/turns_since_scan = 0
 	var/obj/movement_target
+	speak = list("Help, I've been turned into a dog!")
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"

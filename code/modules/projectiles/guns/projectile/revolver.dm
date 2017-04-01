@@ -88,8 +88,8 @@
 	..()
 
 /obj/item/weapon/gun/projectile/revolver/capgun
-	name = "cap gun"
-	desc = "Looks almost like the real thing! Ages 8 and up."
+	name = "highly illegal revolver"
+	desc = "The Lumoco Arms HE Colt is a choice revolver for when you absolutely, positively need to put a hole in the other guy. Uses .357 ammo."
 	icon_state = "revolver"
 	item_state = "revolver"
 	caliber = "caps"

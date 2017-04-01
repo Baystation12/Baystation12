@@ -42,6 +42,10 @@
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
 
+/datum/gear/utility/revolver
+	display_name = ".357 revolver"
+	path = /obj/item/weapon/gun/projectile/revolver/capgun
+
 /****************
 modular computers
 ****************/
