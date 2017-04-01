@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - wip: "Changed engine charging process to much more effective method. Unwrap resomi cube, add water from sink, put in disposals. Just one resomi is enough to power the engine for the entire round. Be careful!"
