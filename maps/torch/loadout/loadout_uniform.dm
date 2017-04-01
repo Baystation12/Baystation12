@@ -162,3 +162,4 @@
 	display_name = "Contractor Utility Uniform"
 	path = /obj/item/clothing/under/utility
 	allowed_roles = CONTRACTOR_ROLES
+

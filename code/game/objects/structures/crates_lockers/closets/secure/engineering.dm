@@ -22,7 +22,7 @@
 		else
 			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/blueprints(src)
-		new /obj/item/clothing/under/rank/chief_engineer(src)
+		new /obj/item/clothing/under/fallout(src)
 		new /obj/item/clothing/head/hardhat/white(src)
 		new /obj/item/clothing/head/welding(src)
 		new /obj/item/clothing/gloves/insulated(src)

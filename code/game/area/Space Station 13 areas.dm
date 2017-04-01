@@ -60,7 +60,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 //SPACE//
 /////////
 
-/area/space
+/area/space //THIS MAP HAS NO SPACE
 	name = "\improper Space"
 	icon_state = "space"
 	requires_power = 1
@@ -69,7 +69,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
-	has_gravity = 0
+	has_gravity = 1
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
 /area/space/updateicon()
