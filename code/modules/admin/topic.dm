@@ -1859,8 +1859,9 @@
 
 		switch(alert("Really remove staff warn?",,"Yes","No"))
 			if("Yes")
+				if(!DB_staffwarn_remove(M.ckey))
+					return
 				notes_add(M.ckey,"\[AUTO\] Staff warn disabled",usr)
-				DB_staffwarn_remove(M.ckey)
 				M.client.staffwarn = null
 				log_and_message_admins("has removed the staffwarn on [M.ckey].\n")
 				show_player_panel(M)
