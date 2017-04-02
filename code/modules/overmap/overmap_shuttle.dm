@@ -25,8 +25,9 @@ var/list/sector_shuttles = list()
 		return 0
 	if(!A.free())
 		return 0
-	if(A.shuttle_locked)
-		if(A.shuttle_locked != name)
+	var/locked = A.is_shuttle_locked()
+	if(locked)
+		if(locked != name)
 			return 0
 	var/lz_size = A.get_dimensions()
 	if(lz_size["x"] >= shuttle_size["x"] && lz_size["y"] >= shuttle_size["y"])

@@ -34,7 +34,7 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - experiment: "The Torch now uses the Overmap system. This involves a 'system map' which can be flown around, with away sites scattered on the map."
-  - tweak: "The flow of fuel through the HE pipes in the SM chamber can be controlled via an adjustable pressure gate in the Fuel Bay. The higher the 'Target Pressure', the faster the thrusters will regain fuel faster after a burn, and the lower the SM's output."
+  - tweak: "The flow of fuel through the HE pipes in the SM chamber can be controlled via an adjustable pressure gate in the Engine Room. The higher the 'Target Pressure', the faster the thrusters will regain fuel faster after a burn, and the lower the SM's output."
   - rscadd: "Added a fuel tank port of atmospherics, and all the necessary piping for overmap."
   - rscadd: "Converted the four thruster areas on the vessel into engine nacelles. It is possible to switch between direct injection and combustion, via buttons located in the engine monitoring room. Each mode has its own advantages and disadvantages."
   - rscadd: "Modified the SolGov Pilot job, so they can properly pilot the Torch."

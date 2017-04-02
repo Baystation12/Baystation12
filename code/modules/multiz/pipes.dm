@@ -230,14 +230,14 @@ obj/machinery/atmospherics/pipe/zpipe/up/red
 obj/machinery/atmospherics/pipe/zpipe/down/red
 	color = PIPE_COLOR_RED
 
-obj/machinery/atmospherics/pipe/zpipe/up/orange
+obj/machinery/atmospherics/pipe/zpipe/up/fuel
 	name = "upwards fuel pipe"
 	color = PIPE_COLOR_ORANGE
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
 
-obj/machinery/atmospherics/pipe/zpipe/down/orange
+obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	name = "downwards fuel pipe"
 	color = PIPE_COLOR_ORANGE
 	maximum_pressure = 420*ONE_ATMOSPHERE

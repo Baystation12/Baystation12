@@ -482,7 +482,9 @@
 	requires_power = 1
 	lighting_use_dynamic = 1
 	flags = AREA_RAD_SHIELDED
-	shuttle_locked = "Calypso"
+
+/area/calypso_hangar/is_shuttle_locked()
+	return "Calypso"
 
 /area/calypso_hangar/start
 	name = "\improper Calypso"
@@ -535,7 +537,9 @@
 	requires_power = 1
 	lighting_use_dynamic = 1
 	flags = AREA_RAD_SHIELDED
-	shuttle_locked = "Aquila"
+
+/area/aquila_hangar/is_shuttle_locked()
+	return "Aquila"
 
 /area/aquila_hangar/start
 	name = "\improper SEV Aquila"
@@ -588,8 +592,9 @@
 	requires_power = 1
 	lighting_use_dynamic = 1
 	flags = AREA_RAD_SHIELDED
-	shuttle_locked = "Guppy"
 
+/area/guppy_hangar/is_shuttle_locked()
+	return "Guppy"
 
 /area/guppy_hangar/start
 	name = "\improper Guppy"

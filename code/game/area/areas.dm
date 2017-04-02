@@ -6,7 +6,6 @@
 /area
 	var/global/global_uid = 0
 	var/uid
-	var/shuttle_locked = null
 
 /area/New()
 	icon_state = ""
@@ -39,6 +38,9 @@
 	for (var/obj/machinery/camera/C in src)
 		cameras += C
 	return cameras
+
+/area/proc/is_shuttle_locked()
+	return 0
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)

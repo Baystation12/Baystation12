@@ -137,8 +137,9 @@
 
 	if (href_list["remove"])
 		var/datum/data/record/R = locate(href_list["remove"])
-		known_sectors[R.fields["name"]] = null
-		qdel(R)
+		if(R)
+			known_sectors.Remove(R.fields["name"])
+			qdel(R)
 
 	if (href_list["setx"])
 		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
