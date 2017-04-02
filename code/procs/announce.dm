@@ -8,7 +8,7 @@
 	var/log = 0
 	var/sound
 	var/newscast = 0
-	var/channel_name = "Announcement"
+	var/channel_name = "Announcements"
 	var/announcement_type = "Announcement"
 
 /datum/announcement/priority
