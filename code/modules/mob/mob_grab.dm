@@ -86,7 +86,7 @@
 
 //This makes sure that the grab screen object is displayed in the correct hand.
 /obj/item/weapon/grab/proc/synch() //why is this needed?
-	if(deleted(src))
+	if(QDELETED(src))
 		return
 	if(affecting)
 		if(assailant.r_hand == src)
@@ -95,7 +95,7 @@
 			hud.screen_loc = ui_lhand
 
 /obj/item/weapon/grab/process()
-	if(deleted(src)) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
+	if(QDELETED(src)) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
 		return PROCESS_KILL
 
 	if(!confirm())
@@ -238,7 +238,7 @@
 			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
 
 /obj/item/weapon/grab/proc/s_click(obj/screen/S)
-	if(deleted(src))
+	if(QDELETED(src))
 		return
 	if(!affecting)
 		return
@@ -342,7 +342,7 @@
 	return 1
 
 /obj/item/weapon/grab/attack(mob/M, mob/living/user)
-	if(deleted(src))
+	if(QDELETED(src))
 		return
 	if(!affecting)
 		return
@@ -394,7 +394,7 @@
 /obj/item/weapon/grab/dropped()
 	..()
 	loc = null
-	if(!deleted(src))
+	if(!QDELETED(src))
 		qdel(src)
 
 /obj/item/weapon/grab/proc/reset_kill_state()

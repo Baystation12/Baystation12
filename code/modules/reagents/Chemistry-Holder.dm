@@ -23,7 +23,7 @@
 			chemical_reagents_list[D.id] = D
 
 /datum/reagents/Destroy()
-	..()
+	. = ..()
 	if(chemistryProcess)
 		chemistryProcess.active_holders -= src
 

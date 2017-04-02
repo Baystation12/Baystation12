@@ -1070,7 +1070,6 @@
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
-
 	if(!dna)
 		if(!new_species)
 			new_species = SPECIES_HUMAN
