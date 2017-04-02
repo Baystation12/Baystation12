@@ -199,8 +199,8 @@
 	icon_state = "beret_black_supply"
 
 /obj/item/clothing/head/beret/sol/expedition/command
-	name = "expeditionary command beret"
-	desc = "An SCG Expeditionary Corps beret with a command crest. For personnel that are more inclined towards style than safety."
+	name = "expeditionary officer's beret"
+	desc = "An SCG Expeditionary Corps beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_command"
 
 /obj/item/clothing/head/beret/sol/fleet
@@ -229,8 +229,8 @@
 	icon_state = "beret_navy_supply"
 
 /obj/item/clothing/head/beret/sol/fleet/command
-	name = "fleet command beret"
-	desc = "An SCG Fleet beret with a command crest. For personnel that are more inclined towards style than safety."
+	name = "fleet officer's beret"
+	desc = "An SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_command"
 
 /obj/item/clothing/head/ushanka/fleet

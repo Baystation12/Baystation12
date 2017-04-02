@@ -169,6 +169,7 @@
 
 	res["Dress"] = list(
 		user_outfit.dress_under,
+		user_outfit.dress_skirt,
 		user_outfit.dress_over,
 		user_outfit.dress_shoes,
 		user_outfit.dress_hat,
