@@ -112,6 +112,17 @@
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	body_parts_covered = 0
+	var/flipped = 0 // Indicates left or right eye; 0 = on the right
+
+/obj/item/clothing/glasses/eyepatch/attack_self(mob/user) //able to flip to each eye
+	src.flipped = !src.flipped
+	if(src.flipped)
+		icon_state = "[icon_state]_r"
+		to_chat(user, "You change the Eyepatch to cover the left eye.")
+	else
+		src.icon_state = initial(icon_state)
+		to_chat(user, "You change the Eyepatch to cover the right eye..")
+	update_clothing_icon()	// mob-overlays updates
 
 /obj/item/clothing/glasses/monocle
 	name = "monocle"
