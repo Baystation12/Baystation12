@@ -1997,7 +1997,7 @@ CIRCUITS BELOW
 
 /datum/design/prefab
 	name = "Device"
-	desc = "A blueprint made from a design built on station."
+	desc = "A blueprint made from a design built here."
 	materials = list(DEFAULT_WALL_MATERIAL = 200)
 	id = "prefab"
 	build_type = PROTOLATHE

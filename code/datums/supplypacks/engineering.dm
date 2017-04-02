@@ -242,7 +242,7 @@
 					/obj/item/device/floor_painter = 2,
 					/obj/item/device/cable_painter = 2)
 	cost = 10
-	containername = "\improper station painting supplies crate"
+	containername = "\improper painting supplies crate"
 	containertype = /obj/structure/closet/crate
 
 /decl/hierarchy/supply_pack/engineering/bluespacerelay

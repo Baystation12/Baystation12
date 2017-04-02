@@ -27,7 +27,7 @@
 	filedesc = "Camera Monitoring"
 	nanomodule_path = /datum/nano_module/camera_monitor
 	program_icon_state = "cameras"
-	extended_desc = "This program allows remote access to station's camera system. Some camera networks may have additional access requirements."
+	extended_desc = "This program allows remote access to the camera system. Some camera networks may have additional access requirements."
 	size = 12
 	available_on_ntnet = 1
 	requires_ntnet = 1
@@ -155,7 +155,7 @@
 /datum/computer_file/program/camera_monitor/ert
 	filename = "ntcammon"
 	filedesc = "Advanced Camera Monitoring"
-	extended_desc = "This program allows remote access to station's camera system. Some camera networks may have additional access requirements. This version has an integrated database with additional encrypted keys."
+	extended_desc = "This program allows remote access to the camera system. Some camera networks may have additional access requirements. This version has an integrated database with additional encrypted keys."
 	size = 14
 	nanomodule_path = /datum/nano_module/camera_monitor/ert
 	available_on_ntnet = 0

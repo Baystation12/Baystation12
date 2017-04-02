@@ -310,7 +310,7 @@ var/const/NO_EMAG_ACT = -50
 // Department-flavor IDs
 /obj/item/weapon/card/id/medical
 	name = "identification card"
-	desc = "A card issued to station medical staff."
+	desc = "A card issued to medical staff."
 	icon_state = "med"
 	job_access_type = /datum/job/doctor
 
@@ -334,7 +334,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/security
 	name = "identification card"
-	desc = "A card issued to station security staff."
+	desc = "A card issued to security staff."
 	icon_state = "sec"
 	job_access_type = /datum/job/officer
 
@@ -352,7 +352,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/engineering
 	name = "identification card"
-	desc = "A card issued to station engineering staff."
+	desc = "A card issued to engineering staff."
 	icon_state = "eng"
 	job_access_type = /datum/job/engineer
 
@@ -367,7 +367,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/science
 	name = "identification card"
-	desc = "A card issued to station science staff."
+	desc = "A card issued to science staff."
 	icon_state = "sci"
 	job_access_type = /datum/job/scientist
 
@@ -385,7 +385,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/cargo
 	name = "identification card"
-	desc = "A card issued to station cargo staff."
+	desc = "A card issued to cargo staff."
 	icon_state = "cargo"
 	job_access_type = /datum/job/cargo_tech
 
@@ -400,7 +400,7 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/civilian
 	name = "identification card"
-	desc = "A card issued to station civilian staff."
+	desc = "A card issued to civilian staff."
 	icon_state = "civ"
 	job_access_type = /datum/job/assistant
 

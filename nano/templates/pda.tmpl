@@ -18,7 +18,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 	<br>
 	<div class="item">
 		<div class="itemLabelNarrow">
-			<b>Station Time</b>:
+			<b>Local Time</b>:
 		</div>
 		<div class="itemContent">
 			<span class="average">{{:data.stationTime}}</span>
@@ -508,7 +508,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
 
     {{else data.mode == 42}}
-        <H2>Station Status Displays Interlink</H2>
+        <H2>Status Displays Interlink</H2>
         <div class="item">
             <div class="itemLabel">
                 <b>Code</b>:
@@ -763,7 +763,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 			<div class="itemContent">
 				<span class="average">
 					{{if data.records.supply.shuttle_moving}}
-					    Moving to station ({{:data.records.supply.shuttle_eta}})
+					    Moving to dock ({{:data.records.supply.shuttle_eta}})
 					{{else}}
 					    Shuttle at {{:data.records.supply.shuttle_loc}}
 					{{/if}}

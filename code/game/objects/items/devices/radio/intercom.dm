@@ -1,5 +1,5 @@
 /obj/item/device/radio/intercom
-	name = "station intercom (General)"
+	name = "intercom (General)"
 	desc = "Talk through this."
 	icon_state = "intercom"
 	randpixel = 0
@@ -15,16 +15,16 @@
 	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/device/radio/intercom/custom
-	name = "station intercom (Custom)"
+	name = "intercom (Custom)"
 	broadcasting = 0
 	listening = 0
 
 /obj/item/device/radio/intercom/interrogation
-	name = "station intercom (Interrogation)"
+	name = "intercom (Interrogation)"
 	frequency  = 1449
 
 /obj/item/device/radio/intercom/private
-	name = "station intercom (Private)"
+	name = "intercom (Private)"
 	frequency = AI_FREQ
 
 /obj/item/device/radio/intercom/specops
@@ -37,11 +37,11 @@
 	listening = 1
 
 /obj/item/device/radio/intercom/department/medbay
-	name = "station intercom (Medbay)"
+	name = "intercom (Medbay)"
 	frequency = MED_I_FREQ
 
 /obj/item/device/radio/intercom/department/security
-	name = "station intercom (Security)"
+	name = "intercom (Security)"
 	frequency = SEC_I_FREQ
 
 /obj/item/device/radio/intercom/entertainment
@@ -92,7 +92,7 @@
 /obj/item/device/radio/intercom/raider/New()
 	..()
 	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
-	
+
 /obj/item/device/radio/intercom/Destroy()
 	processing_objects -= src
 	..()

@@ -40,7 +40,7 @@
 
 /datum/game_mode/malfunction/verb/electrical_pulse()
 	set name = "Electrical Pulse"
-	set desc = "15 CPU - Sends feedback pulse through station's power grid, overloading some sensitive systems, such as lights."
+	set desc = "15 CPU - Sends feedback pulse through the power grid, overloading some sensitive systems, such as lights."
 	set category = "Software"
 	var/price = 15
 	var/mob/living/silicon/ai/user = usr
@@ -121,7 +121,7 @@
 
 /datum/game_mode/malfunction/verb/emergency_forcefield(var/turf/T as turf in world)
 	set name = "Emergency Forcefield"
-	set desc = "275 CPU - Uses station's emergency shielding system to create temporary barrier which lasts for few minutes, but won't resist gunfire."
+	set desc = "275 CPU - Uses the emergency shielding system to create temporary barrier which lasts for few minutes, but won't resist gunfire."
 	set category = "Software"
 	var/price = 275
 	var/mob/living/silicon/ai/user = usr

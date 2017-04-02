@@ -1,5 +1,5 @@
 /obj/item/blueprints
-	name = "station blueprints"
+	name = "blueprints"
 	desc = "Blueprints..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "blueprints"

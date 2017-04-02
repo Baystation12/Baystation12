@@ -177,7 +177,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				<td class="desc">[candidate.name]&nbsp;</td>
 			</tr>
 			<tr class="d1">
-				<td>What you plan to call yourself. Suggestions: Any character name you would choose for a station character OR an AI.</td>
+				<td>What you plan to call yourself. Suggestions: Any character name that would be suitable for a living character OR an AI.</td>
 			</tr>
 			<tr class="d0">
 				<th rowspan="2"><a href='byond://?src=\ref[src];option=desc;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]'>Description</a>:</th>
