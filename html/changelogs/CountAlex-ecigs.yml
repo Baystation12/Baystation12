@@ -1,0 +1,6 @@
+author: CountAlex
+
+delete-after: True
+
+changes:
+  - rscadd: "Added electronic cigarettes and replaceable cartridges to cigarette vendors. Electronic cigarettes come in three options; the deluxe option will later be added to loadout."
