@@ -15,3 +15,4 @@
 		fail("Some seed icons were missing.")
 	else
 		pass("All seed icons were found.")
+	return 1
