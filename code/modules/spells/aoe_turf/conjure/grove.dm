@@ -34,7 +34,7 @@
 	name = "Sanctuary"
 	desc = "Creates a sanctuary of nature around the wizard as well as creating a healing plant."
 	feedback = "SY"
-	invocation = "Bo k'itan"
+	invocation = "Bo K'Iitan!"
 	invocation_type = SpI_SHOUT
 	spell_flags = IGNOREDENSE | IGNORESPACE | NEEDSCLOTHES | Z2NOCAST | IGNOREPREV
 	cooldown_min = 600

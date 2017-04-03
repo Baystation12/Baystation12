@@ -7,7 +7,7 @@
 	charge_max = 900
 	cooldown_min = 600
 	spell_flags = INCLUDEUSER
-	invocation = "LSET SU G'ET RUCKEND!"
+	invocation = "Llet'Su G'iit Rrkned!" //Let's get wrecked.
 	invocation_type = SpI_SHOUT
 	range = 6
 	max_targets = 0

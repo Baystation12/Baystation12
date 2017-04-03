@@ -5,7 +5,7 @@
 	school = "evocation"
 	charge_max = 150
 	spell_flags = 0
-	invocation = "RAI DI KAAL"
+	invocation = "Rai Di-Kaal!"
 	invocation_type = SpI_SHOUT
 	range = 5
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 0, Sp_POWER = 1)
