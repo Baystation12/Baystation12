@@ -9,6 +9,8 @@
 	service_under = /obj/item/clothing/under/utility/expeditionary/command
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/command
 
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -27,6 +29,8 @@
 	min_rank = 11
 
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -54,6 +58,8 @@
 	min_rank = 11
 
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -81,6 +87,8 @@
 	min_rank = 11
 
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -108,6 +116,8 @@
 	min_rank = 11
 
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -120,6 +130,8 @@
 	min_rank = 11
 
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -137,5 +149,7 @@
 	name = "EC command support CO"
 	min_rank = 11
 
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command

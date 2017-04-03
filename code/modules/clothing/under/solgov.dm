@@ -218,6 +218,12 @@
 	worn_state = "whiteservice"
 	starting_accessories = list(/obj/item/clothing/accessory/navy)
 
+/obj/item/clothing/under/service/fleet/skirt
+	name = "fleet service skirt"
+	desc = "The service uniform skirt of the SCG Fleet, made from immaculate white fabric."
+	icon_state = "whiteservicefem"
+	worn_state = "whiteservicefem"
+
 /obj/item/clothing/under/service/marine
 	name = "marine service uniform"
 	desc = "The service uniform of the SCG Marine Corps. Slimming."
@@ -249,11 +255,23 @@
 	icon_state = "greydress"
 	worn_state = "greydress"
 
+/obj/item/clothing/under/mildress/expeditionary/skirt
+	name = "expeditionary dress skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in silver trim."
+	icon_state = "greydressfem"
+	worn_state = "greydressfem"
+
 /obj/item/clothing/under/mildress/expeditionary/command
 	name = "expeditionary officer's dress uniform"
 	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
 	icon_state = "greydress_com"
 	worn_state = "greydress_com"
+
+/obj/item/clothing/under/mildress/expeditionary/command/skirt
+	name = "expeditionary officer's dress skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in gold trim."
+	icon_state = "greydressfem_com"
+	worn_state = "greydressfem_com"
 
 /obj/item/clothing/under/mildress/marine
 	name = "marine dress uniform"
@@ -261,11 +279,23 @@
 	icon_state = "blackdress"
 	worn_state = "blackdress"
 
+/obj/item/clothing/under/mildress/marine/skirt
+	name = "marine dress skirt"
+	desc = "A  feminine version of the SCG Marine Corps dress uniform, class given form."
+	icon_state = "blackdressfem"
+	worn_state = "blackdressfem"
+
 /obj/item/clothing/under/mildress/marine/command
 	name = "marine command dress uniform"
 	desc = "The dress uniform of the SCG Marine Corps, even classier in gold."
-	icon_state = "blackdress_com"
+	icon_state = "blackdress"
 	worn_state = "blackdress_com"
+
+/obj/item/clothing/under/mildress/marine/command/skirt
+	name = "marine command dress skirt"
+	desc = "A feminine version of the SCG Marine Corps dress uniform, even classier in gold."
+	icon_state = "blackdressfem"
+	worn_state = "blackdressfem_com"
 
 
 //Misc
