@@ -7,7 +7,7 @@
 	school = "evocation"
 	charge_max = 100
 	spell_flags = 0
-	invocation = "ONI SOMA"
+	invocation = "Oni-Soma!"
 	invocation_type = SpI_SHOUT
 	range = 20
 

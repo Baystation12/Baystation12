@@ -16,7 +16,7 @@
 	school = "conjuration"
 	charge_max = 1200
 	spell_flags = NEEDSCLOTHES
-	invocation = "NOUK FHUNMM SACP RISSKA"
+	invocation = "Nouk Fhumm Sacp Risska!"
 	invocation_type = SpI_SHOUT
 	range = 1
 
@@ -31,7 +31,7 @@
 	school = "conjuration"
 	charge_max = 1200
 	spell_flags = 0
-	invocation = "IA IA"
+	invocation = "Ia-Ia! Naomesnalia!"
 	invocation_type = SpI_SHOUT
 	summon_amt = 10
 	range = 3
@@ -47,7 +47,7 @@
 	school = "illusion"
 	charge_max = 1200
 	spell_flags = NEEDSCLOTHES
-	invocation = "NOUK FHUNNM SACP RISSKA"
+	invocation = "Nouk Fhunhm Sacp Risska!"
 	invocation_type = SpI_SHOUT
 	range = 1
 

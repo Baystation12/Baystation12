@@ -5,7 +5,7 @@
 	school = "transmutation"
 	charge_max = 100
 	spell_flags = 0
-	invocation = "AULIE OXIN FIERA"
+	invocation = "Aulie Oxin Fiera."
 	invocation_type = SpI_WHISPER
 	range = 3
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 1)

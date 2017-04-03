@@ -6,7 +6,7 @@
 
 	spell_flags = INCLUDEUSER | NEEDSCLOTHES
 	invocation_type = SpI_WHISPER
-	invocation = "Ria'li  akta"
+	invocation = "Ria'li  akta."
 
 	equipped_summons = list("active hand" = /obj/item/seeds/random)
 	compatible_mobs = list(/mob/living/carbon/human)

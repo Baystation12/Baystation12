@@ -8,7 +8,7 @@
 	holder_var_type = "brainloss"
 	holder_var_amount = 10
 
-	invocation = "joyo!"
+	invocation = "Joyo!"
 	invocation_type = SpI_WHISPER
 
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 0, Sp_POWER = 2)
