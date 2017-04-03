@@ -8,7 +8,7 @@
 		var/datum/seed/S = new subtype()
 		var/sprite = S.get_trait(TRAIT_PLANT_ICON)
 		if(sprite && (!(sprite in plant_controller.plant_sprites)))
-			log_unit_test("[ascii_red]----- [subtype] references nonexistent sprite [sprite][ascii_reset]")
+			log_bad("[subtype] references nonexistent sprite [sprite].")
 			any_failed = TRUE
 
 	if (any_failed)
