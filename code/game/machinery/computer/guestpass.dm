@@ -3,7 +3,7 @@
 /////////////////////////////////////////////
 /obj/item/weapon/card/id/guest
 	name = "guest pass"
-	desc = "Allows temporary access to station areas."
+	desc = "Allows temporary access to restricted areas."
 	icon_state = "guest"
 	light_color = "#0099ff"
 

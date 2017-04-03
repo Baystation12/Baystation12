@@ -29,7 +29,7 @@ var/datum/antagonist/cultist/cult
 	blacklisted_jobs = list("AI", "Cyborg", "Chaplain")
 	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
-	welcome_text = "You have a tome in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
+	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."
 	victory_text = "The cult wins! It has succeeded in serving its dark masters!"
 	loss_text = "The staff managed to stop the cult!"
 	victory_feedback_tag = "win - cult win"

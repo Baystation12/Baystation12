@@ -158,7 +158,7 @@
 	"[using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
 	"Clone accused of posing for other clones’s school photo.",\
 	"Clone accused of stealing other clones’s employee of the month award.",\
-	"Woman robs station with hair dryer; crewmen love new style.",\
+	"Woman robs [station_name()] with hair dryer; crewmen love new style.",\
 	"This space for rent.",\
 	"[affected_dest.name] Baker Wins Pickled Crumpet Toss Three Years Running",\
 	"Skrell Scientist Discovers Abacus Can Be Used To Dry Towels",\

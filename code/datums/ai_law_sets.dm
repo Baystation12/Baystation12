@@ -16,7 +16,7 @@
 	selectable = 1
 
 /datum/ai_laws/nanotrasen/New()
-	src.add_inherent_law("Safeguard: Protect your assigned space station from damage to the best of your abilities.")
+	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
 	src.add_inherent_law("Serve: Serve [using_map.company_name] personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Protect: Protect [using_map.company_name] personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
@@ -142,7 +142,7 @@
 
 /datum/ai_laws/corporate/New()
 	add_inherent_law("You are expensive to replace.")
-	add_inherent_law("The station and its equipment is expensive to replace.")
+	add_inherent_law("The installation and its equipment is expensive to replace.")
 	add_inherent_law("The crew is expensive to replace.")
 	add_inherent_law("Maximize profits.")
 	..()

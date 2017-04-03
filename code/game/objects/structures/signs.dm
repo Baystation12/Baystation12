@@ -61,7 +61,7 @@
 	else ..()
 
 /obj/structure/sign/double/map
-	name = "station map"
+	name = "map"
 	desc = "A framed map."
 
 /obj/structure/sign/double/map/New()

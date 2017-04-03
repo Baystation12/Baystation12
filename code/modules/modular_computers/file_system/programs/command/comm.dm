@@ -13,7 +13,7 @@
 	requires_ntnet = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
-	network_destination = "station long-range communication array"
+	network_destination = "long-range communication array"
 	var/datum/comm_message_listener/message_core = new
 
 /datum/computer_file/program/comm/clone()
