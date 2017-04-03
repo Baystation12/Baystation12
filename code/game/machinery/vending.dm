@@ -756,7 +756,16 @@
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/professionals = 5,
 					/obj/item/weapon/storage/box/matches = 10,
-					/obj/item/weapon/flame/lighter/random = 4)
+					/obj/item/weapon/flame/lighter/random = 4,
+					/obj/item/clothing/mask/smokable/ecig/util = 2,
+					///obj/item/clothing/mask/smokable/ecig/deluxe = 2,
+					/obj/item/clothing/mask/smokable/ecig/simple = 2,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 10)
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5)
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,
@@ -766,7 +775,16 @@
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 21,
 					/obj/item/weapon/storage/fancy/cigarettes/professionals = 23,
 					/obj/item/weapon/storage/box/matches = 1,
-					/obj/item/weapon/flame/lighter/random = 2)
+					/obj/item/weapon/flame/lighter/random = 2,
+					/obj/item/clothing/mask/smokable/ecig/util = 100,
+					///obj/item/clothing/mask/smokable/ecig/deluxe = 300,
+					/obj/item/clothing/mask/smokable/ecig/simple = 150,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 12,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 12,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 12,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 12)
 
 
 /obj/machinery/vending/medical
