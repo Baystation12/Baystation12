@@ -2289,6 +2289,7 @@
 #include "code\unit_tests\unique_tests.dm"
 #include "code\unit_tests\unit_test.dm"
 #include "code\unit_tests\uplink_tests.dm"
+#include "code\unit_tests\seed_tests.dm"
 #include "code\unit_tests\view_variables_test.dm"
 #include "code\unit_tests\virtual_mob_tests.dm"
 #include "code\unit_tests\zas_tests.dm"
