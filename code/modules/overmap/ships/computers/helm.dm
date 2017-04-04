@@ -35,9 +35,11 @@
 			else
 				linked.decelerate()
 
-		if(linked.is_still())
+		var/brake_path = linked.get_brake_path()
+
+		if(get_dist(linked.loc, T) > brake_path)
 			linked.accelerate(get_dir(linked.loc, T))
-		else if(get_dist(linked.loc, T) <= linked.get_brake_path())
+		else
 			linked.decelerate()
 
 		return
