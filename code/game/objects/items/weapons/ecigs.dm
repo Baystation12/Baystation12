@@ -15,6 +15,8 @@
 	item_state = "ecigoff"
 	var/icon_off
 	var/icon_empty
+	var/explode_prob = 0.5
+	var/explode_range = 1
 
 /obj/item/clothing/mask/smokable/ecig/New()
 	..()
@@ -43,8 +45,14 @@
 	icon_off = "ccigoff"
 	icon_empty = "ccigoff"
 	icon_on = "ccigon"
+	explode_prob = 1 //cheap chinese shit
 
 /obj/item/clothing/mask/smokable/ecig/process()
+	if(active)
+		if(prob(explode_prob))
+			explosion(get_turf(src),-1,-1,explode_range,explode_range*2)
+			qdel(src)
+
 	if(ishuman(loc))
 		var/mob/living/carbon/human/C = loc
 		if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
