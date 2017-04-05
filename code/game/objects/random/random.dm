@@ -466,7 +466,7 @@ obj/random/closet/item_to_spawn()
 					/obj/item/toy/water_balloon,\
 					/obj/item/toy/crossbow,\
 					/obj/item/toy/blink,\
-					/obj/item/toy/waterflower,\
+					/obj/item/weapon/reagent_containers/spray/waterflower,\
 					/obj/item/toy/prize/ripley,\
 					/obj/item/toy/prize/fireripley,\
 					/obj/item/toy/prize/deathripley,\
