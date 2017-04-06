@@ -14,8 +14,12 @@
 	icon_state = "cult"
 /turf/simulated/wall/cult/New(var/newloc, var/reinforce = 0)
 	..(newloc,"cult",reinforce ? "cult2" : null)
+	new /obj/effect/overlay/cult/cultwall(src)
+
 /turf/simulated/wall/cult/reinf/New(var/newloc)
 	..(newloc, 1)
+	new /obj/effect/overlay/cult/cultwall(src)
+
 /turf/simulated/wall/cult/dismantle_wall()
 	cult.remove_cultiness(CULTINESS_PER_TURF)
 	..()
