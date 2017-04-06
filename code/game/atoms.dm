@@ -470,7 +470,7 @@ its easier to just keep the beam vertical.
 			var/obj/item/organ/external/affecting
 			var/list/limbs = BP_ALL_LIMBS //sanity check, can otherwise be shortened to affecting = pick(BP_ALL_LIMBS)
 			if(limbs.len)
-				affecting = pick(limbs)
+				affecting = H.get_organ(pick(limbs))
 
 			if(affecting)
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
