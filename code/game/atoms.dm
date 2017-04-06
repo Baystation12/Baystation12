@@ -371,13 +371,11 @@ its easier to just keep the beam vertical.
 		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
 					"<span class='notice'>You shake \the [src].</span>")
 		object_shaken()
-	return ..()
 
 /atom/New()
 	..()
 	if(flags & OBJ_CLIMBABLE)
 		verbs += /atom/proc/climb_on
-	return ..()
 
 /atom/proc/climb_on()
 
@@ -410,7 +408,7 @@ its easier to just keep the beam vertical.
 	if (user.restrained() || user.buckled)
 		to_chat(user, "<span class='notice'>You need your hands and legs free for this.</span>")
 		return 0
-	if (user.stat || user.paralysis || user.sleeping || user.lying || user.weakened)
+	if (user.incapacitated())
 		return 0
 	if (issilicon(user))
 		to_chat(user, "<span class='notice'>You need hands for this.</span>")
@@ -422,8 +420,7 @@ its easier to just keep the beam vertical.
 	if(!T || !istype(T))
 		return 0
 	for(var/obj/O in T.contents)
-		var/obj/S = O
-		if(S.flags & OBJ_CLIMBABLE) continue
+		if(O.flags & OBJ_CLIMBABLE) continue
 		if(O && O.density && !(O.flags & ON_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
 			return O
 	return 0
@@ -432,7 +429,7 @@ its easier to just keep the beam vertical.
 	if (!can_climb(user))
 		return
 
-	usr.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
+	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
 	climbers |= user
 
 	if(!do_after(user,(issmall(user) ? 30 : 50), src))
@@ -443,10 +440,10 @@ its easier to just keep the beam vertical.
 		climbers -= user
 		return
 
-	usr.forceMove(get_turf(src))
+	user.forceMove(get_turf(src))
 
 	if (get_turf(user) == get_turf(src))
-		usr.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
+		user.visible_message("<span class='warning'>\The [user] climbs onto \the [src]!</span>")
 	climbers -= user
 
 /atom/proc/object_shaken()
@@ -471,18 +468,9 @@ its easier to just keep the beam vertical.
 				return
 
 			var/obj/item/organ/external/affecting
-
-			switch(pick(list("ankle","wrist","head","knee","elbow")))
-				if("ankle")
-					affecting = H.get_organ(pick(BP_L_FOOT, BP_R_FOOT))
-				if("knee")
-					affecting = H.get_organ(pick(BP_L_LEG, BP_R_LEG))
-				if("wrist")
-					affecting = H.get_organ(pick(BP_L_HAND, BP_R_HAND))
-				if("elbow")
-					affecting = H.get_organ(pick(BP_L_ARM, BP_R_ARM))
-				if("head")
-					affecting = H.get_organ(BP_HEAD)
+			var/list/limbs = BP_ALL_LIMBS //sanity check, can otherwise be shortened to affecting = pick(BP_ALL_LIMBS)
+			if(limbs.len)
+				affecting = pick(limbs)
 
 			if(affecting)
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
