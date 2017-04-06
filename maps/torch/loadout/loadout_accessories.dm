@@ -24,6 +24,16 @@
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/accessory/bowtie
+	display_name = "bowtie, horrible"
+	path = /obj/item/clothing/accessory/bowtie/ugly
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/bowtie/color
+	display_name = "bowtie, colored"
+	path = /obj/item/clothing/accessory/bowtie/color
+	flags = GEAR_HAS_COLOR_SELECTION
+
 //have to break up armbands to restrict access
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
