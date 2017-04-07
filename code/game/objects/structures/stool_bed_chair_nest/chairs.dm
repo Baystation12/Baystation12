@@ -211,3 +211,8 @@
 /obj/structure/bed/chair/wood/wings
 	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings_preview"
+
+/obj/structure/bed/chair/alien
+	desc = "A strange chair, not from around here."
+	base_icon = "alien chair"
+	icon_state = "alien chair"
