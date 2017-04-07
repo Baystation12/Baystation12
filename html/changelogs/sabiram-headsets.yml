@@ -1,0 +1,7 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "The Roboticist now has access to both the Engineering and Research channels."
+  - rscadd: "Bridge Officers have gained the Service radio channel, in addition to the Command channel they previously had access to."
+  - rscdel: "The Senior Enlisted Advisor has lost the Engineering and Medical channels, leaving Command, Security, Service and Supply."
+  - rscdel: "The SolGov Pilot no longer has Command radio access, and have been given the standard Service radio headset."

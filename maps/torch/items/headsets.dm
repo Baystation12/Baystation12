@@ -33,7 +33,6 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
 
-
 /obj/item/device/radio/headset/headset_deckofficer
 	name = "deck officer's radio headset"
 	desc = "The headset of the chief box pusher."
@@ -41,6 +40,21 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_deckofficer
 
+/obj/item/device/radio/headset/headset_bridgeofficer
+	name = "bridge officer's radio headset"
+	desc = "The headset of the captain's busybodies."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/headset_bridgeofficer
+
+/obj/item/device/radio/headset/heads/torchsea
+	name = "senior enlisted advistor's radio headset"
+	desc = "The designated headset to be used to advise with seniority while enlisted."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/heads/torchsea
+
+//* boxes of headsets *//
 
 /obj/item/weapon/storage/box/headset/torchxo
 	name = "box of spare executive officer headsets"
