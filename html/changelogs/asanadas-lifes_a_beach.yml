@@ -1,0 +1,5 @@
+author: Asanadas
+
+delete-after: True
+changes: 
+  - maptweak: "Flipped beach in the holodeck so you don't have to walk through holowater to get on the holosand."
