@@ -1,7 +1,0 @@
-author: Broseph Stylin
-
-delete-after: True
-
-changes: 
-  - rscadd: "Skirt versions of the dress uniforms are now available for all SCG branches in the uniform dispenser."
-  - bugfix: "Officer's variants of the dress uniform will now show up correctly in the dispenser."
