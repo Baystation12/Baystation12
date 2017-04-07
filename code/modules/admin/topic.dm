@@ -1847,7 +1847,8 @@
 				notes_add(M.ckey,"\[AUTO\] Staff warn enabled: [reason]",usr)
 				reason += "\n-- Set by [usr.client.ckey]([usr.client.holder.rank])"
 				DB_staffwarn_record(M.ckey, reason)
-				M.client.staffwarn = reason
+				if(M.client)
+					M.client.staffwarn = reason
 				feedback_inc("staff_warn",1)
 				log_and_message_admins("has enabled staffwarn on [M.ckey].\nMessage: [reason]\n")
 				show_player_panel(M)
@@ -1862,7 +1863,8 @@
 				if(!DB_staffwarn_remove(M.ckey))
 					return
 				notes_add(M.ckey,"\[AUTO\] Staff warn disabled",usr)
-				M.client.staffwarn = null
+				if(M.client)
+					M.client.staffwarn = null
 				log_and_message_admins("has removed the staffwarn on [M.ckey].\n")
 				show_player_panel(M)
 			if("No")
