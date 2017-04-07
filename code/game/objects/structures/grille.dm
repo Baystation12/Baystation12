@@ -238,3 +238,9 @@
 	if(air_group)
 		return 0 //Make sure air doesn't drain
 	..()
+
+/obj/structure/grille/cult
+	name = "alien grate"
+	desc = "a strange, prison like walling."
+	icon_state = "alien_grate"
+	health = 150 //hella strong
