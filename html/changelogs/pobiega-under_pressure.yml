@@ -1,0 +1,7 @@
+author: Pobiega
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added high capacity pipes, manifolds, caps, etc."
+  - rscadd: "Made pipe dispensers dispense high capacity pipes."

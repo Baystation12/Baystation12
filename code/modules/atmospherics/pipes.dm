@@ -346,6 +346,15 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/visible/highcap
+	name ="High capacity pipe"
+	desc = "A one meter section of high capacity pipe."
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE 
+	fatigue_pressure = 350*ONE_ATMOSPHERE 
+	alert_pressure = 350*ONE_ATMOSPHERE 
+
+
 /obj/machinery/atmospherics/pipe/simple/visible/yellow
 	color = PIPE_COLOR_YELLOW
 
@@ -385,6 +394,14 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/simple/hidden/highcap
+	name ="High capacity pipe"
+	desc = "A one meter section of high capacity pipe."
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE 
+	fatigue_pressure = 350*ONE_ATMOSPHERE 
+	alert_pressure = 350*ONE_ATMOSPHERE 
 
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow
 	color = PIPE_COLOR_YELLOW
@@ -595,6 +612,11 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/visible/highcap
+	name="High capacity pipe manifold"
+	desc = "A manifold composed of high capacity pipes."
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow
 	color = PIPE_COLOR_YELLOW
 
@@ -634,6 +656,11 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold/hidden/highcap
+	name="High capacity pipe manifold"
+	desc = "A manifold composed of high capacity pipes."
+	color = PIPE_COLOR_ORANGE
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/yellow
 	color = PIPE_COLOR_YELLOW
@@ -846,6 +873,11 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold4w/visible/highcap
+	name="4-way high capacity pipe manifold"
+	desc = "A manifold composed of high capacity pipes."
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/manifold4w/visible/yellow
 	color = PIPE_COLOR_YELLOW
 
@@ -884,6 +916,11 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/highcap
+	name="4-way high capacity pipe manifold"
+	desc = "A manifold composed of high capacity pipes."
+	color = PIPE_COLOR_ORANGE
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/yellow
 	color = PIPE_COLOR_YELLOW
@@ -996,6 +1033,11 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/cap/visible/highcap
+	name = "high capacity pipe endcap"
+	desc = "An endcap for high capacity pipes."
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
 	icon_state = "cap"
@@ -1017,6 +1059,10 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/cap/hidden/highcap
+	name = "high capacity pipe endcap"
+	desc = "An endcap for high capacity pipes."
+	color = PIPE_COLOR_ORANGE
 
 /obj/machinery/atmospherics/pipe/tank
 	icon = 'icons/atmos/tank.dmi'
