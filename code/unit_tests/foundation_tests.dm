@@ -20,7 +20,7 @@ datum/unit_test/foundation/step_shall_return_true_on_success/start_test()
 	return 1
 
 datum/unit_test/foundation/proc/TestStep(type_to_test)
-	var/turf/start = locate(20,20,1)
+	var/turf/start = get_safe_turf()
 	var/atom/movable/T = new type_to_test(start)
 
 	. = step(T, NORTH)

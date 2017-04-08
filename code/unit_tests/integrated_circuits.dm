@@ -37,7 +37,7 @@
 		var/decl/prefab/ic_assembly/prefab = decls_repository.get_decl(prefab_type)
 
 		try
-			var/built_item = prefab.create(get_standard_turf())
+			var/built_item = prefab.create(get_safe_turf())
 			if(built_item)
 				qdel(built_item)
 			else

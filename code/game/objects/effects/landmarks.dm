@@ -10,7 +10,7 @@
 
 /obj/effect/landmark/New()
 	..()
-	tag = text("landmark*[]", name)
+	tag = "landmark*[name]"
 
 	switch(name)			//some of these are probably obsolete
 		if("monkey")

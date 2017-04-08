@@ -20,8 +20,10 @@
 "t" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled,/area/constructionsite)
 "u" = (/obj/machinery/light_switch{pixel_x = -25},/turf/simulated/floor/tiled,/area/constructionsite)
 "v" = (/obj/machinery/light_switch{pixel_x = 25},/turf/simulated/floor/tiled,/area/constructionsite)
-"x" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
 "w" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/constructionsite)
+"x" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
+"y" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
+"z" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/constructionsite)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -44,11 +46,11 @@ aaaaaaaaabccccccgccccccbaaaaaaaa
 aaaaaaaaabccccccccccpoqbaaaaaaaa
 aaaaaaaaabucccccccccrccbaaaaaaaa
 aaaaaaaaabectttcccccccfbaaaaaaaa
-aaaaaaaaabhctttccccccccbaaaaaaaa
+aaaaaaaaabhctttccczccccbaaaaaaaa
 aaaaaaaaabictttccccccccbaaaaaaaa
 aaaaaaaaabjcckccccckcccbaaaaaaaa
 aaaaaaaaabbbbbbbbbbbbbbbaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaayaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -57,3 +59,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
