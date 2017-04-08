@@ -1270,9 +1270,9 @@
 "yy" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled,/area/security/processing)
 "yz" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled,/area/security/processing)
 "yA" = (/obj/machinery/photocopier,/obj/machinery/alarm{dir = 8; pixel_x = 25; pixel_y = 0},/turf/simulated/floor/tiled,/area/security/processing)
-"yB" = (/obj/machinery/light{dir = 8},/obj/structure/table/steel,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/security/equipment)
+"yB" = (/obj/machinery/light{dir = 8},/obj/item/modular_computer/console/preset/security,/turf/simulated/floor/tiled,/area/security/equipment)
 "yC" = (/obj/machinery/camera/network/security{c_tag = "Security Wing - Equipment"; dir = 1},/obj/effect/floor_decal/corner/red{dir = 9},/obj/structure/closet/medical_wall/filled{pixel_y = -32},/turf/simulated/floor/tiled,/area/security/equipment)
-"yD" = (/obj/effect/floor_decal/corner/red{dir = 6},/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable/green,/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/floor/tiled,/area/security/equipment)
+"yD" = (/obj/effect/floor_decal/corner/red{dir = 6},/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable/green,/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/structure/table/steel,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/security/equipment)
 "yE" = (/obj/machinery/disposal,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/disposalpipe/trunk{dir = 8},/turf/simulated/floor/tiled,/area/security/equipment)
 "yF" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/portable_atmospherics/canister/air/airlock,/turf/simulated/floor/tiled/dark,/area/ai_monitored/storage/eva)
 "yG" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/portable_atmospherics/canister/air/airlock,/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/ai_monitored/storage/eva)
@@ -2165,4 +2165,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
