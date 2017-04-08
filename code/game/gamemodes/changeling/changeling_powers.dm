@@ -15,6 +15,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/purchasedpowers = list()
 	var/mimicing = ""
 
+
 /datum/changeling/New()
 	..()
 	if(possible_changeling_IDs.len)
@@ -668,7 +669,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	return 1
 
 //Handles the general sting code to reduce on copypasta (seeming as somebody decided to make SO MANY dumb abilities)
-/mob/proc/changeling_sting(var/required_chems=0, var/verb_path)
+/mob/proc/changeling_sting(var/required_chems=0, var/verb_path, var/loud)
 	var/datum/changeling/changeling = changeling_power(required_chems)
 	if(!changeling)								return
 
@@ -689,8 +690,10 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	changeling.sting_range = 1
 	src.verbs -= verb_path
 	spawn(10)	src.verbs += verb_path
-
-	to_chat(src, "<span class='notice'>We stealthily sting [T].</span>")
+	if(!loud)
+		to_chat(src, "<span class='notice'>We stealthily sting [T].</span>")
+	else
+		visible_message("<span class='danger'>[src] fires an organic shard into [T]'s chest, puncturing the stinger into their skin!</span>")
 	if(!T.mind || !T.mind.changeling)	return T	//T will be affected by the sting
 	to_chat(T, "<span class='warning'>You feel a tiny prick.</span>")
 	return
@@ -795,12 +798,11 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set category = "Changeling"
 	set name = "Death Sting (40)"
 	set desc = "Causes spasms onto death."
+	var/loud = 1
 
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting)
+	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
 	if(!T)	return 0
-	visible_message("<span class='warning'>[src] brushes against [T], driving a stinger into their skin!</span>")
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
-
 	T.make_jittery(1000)
 	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
 	feedback_add_details("changeling_powers","DTHS")
