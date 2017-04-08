@@ -166,4 +166,7 @@
 /datum/category_item/underwear/undershirt/expedition_female
 	name = "Shirt, Expeditionary Corps, Female"
 	icon_state = "expedition_female_s"
-	
+
+/datum/category_item/underwear/undershirt/polo_nt
+	name = "Polo, NanoTrasen"
+	icon_state = "ntpolo"
