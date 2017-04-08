@@ -410,7 +410,7 @@ var/list/name_to_material
 	name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
 	integrity = 200
-	melting_point = 9000
+	melting_point = 12000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#9bc6f2"

@@ -364,6 +364,12 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/visible/fuel
+	name = "Fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/pipe/simple/hidden
 	icon_state = "intact"
@@ -404,6 +410,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel
+	name = "Fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
@@ -613,6 +625,10 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel
+	name = "Fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 
 /obj/machinery/atmospherics/pipe/manifold/hidden
 	icon_state = "map"
@@ -652,6 +668,10 @@
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel
+	name = "Fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
 
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/atmos/manifold.dmi'
@@ -864,6 +884,10 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel
+	name = "4-way fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/manifold4w/hidden
 	icon_state = "map_4way"
 	level = 1
@@ -902,6 +926,11 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
+	name = "4-way fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
@@ -996,6 +1025,11 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/cap/visible/fuel
+	name = "fuel pipe endcap"
+	desc = "An endcap for fuel pipes."
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
 	icon_state = "cap"
@@ -1016,6 +1050,12 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/cap/hidden/fuel
+	name = "fuel pipe endcap"
+	desc = "An endcap for fuel pipes."
+	color = PIPE_COLOR_ORANGE
+
 
 
 /obj/machinery/atmospherics/pipe/tank

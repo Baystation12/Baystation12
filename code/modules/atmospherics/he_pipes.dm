@@ -13,6 +13,10 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 
+	maximum_pressure = 360*ONE_ATMOSPHERE
+	fatigue_pressure = 300*ONE_ATMOSPHERE
+	alert_pressure = 360*ONE_ATMOSPHERE
+
 	can_buckle = 1
 	buckle_lying = 1
 

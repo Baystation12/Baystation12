@@ -1,23 +1,3 @@
-/obj/machinery/computer/shuttle_control/multi/calypso
-	name = "calypso control console"
-	icon_keyboard = "rd_key"
-	icon_screen = "shuttle"
-	req_access = list(access_calypso_helm)
-	shuttle_tag = "Calypso"
-
-/obj/machinery/computer/shuttle_control/multi/guppy
-	name = "general utility pod control console"
-	icon_keyboard = "power_key"
-	icon_screen = "supply"
-	req_access = list(access_guppy_helm)
-	shuttle_tag = "GUP"
-
-/obj/machinery/computer/shuttle_control/multi/aquila
-	name = "aquila control console"
-	icon_keyboard = "power_key"
-	icon_screen = "shuttle"
-	req_access = list(access_aquila_helm)
-	shuttle_tag = "Aquila"
 
 //Torch Large Pods
 
@@ -167,73 +147,6 @@
 	dock_target_offsite = "escape_pod_17_recovery"
 	transit_direction = SOUTH
 
-//Calypso.
-/datum/shuttle/multi_shuttle/calypso
-	name = "Calypso"
-	warmup_time = 0
-	origin = /area/calypso_hangar/start
-	interim = /area/calypso_hangar/transit
-	start_location = "SEV Torch Hangar Deck"
-	destinations = list(
-		"Southwest of Bridge" = /area/calypso_hangar/bridge,
-		"North of First Deck" = /area/calypso_hangar/firstdeck,
-		"South of Second Deck" = /area/calypso_hangar/seconddeck,
-		"West of Third Deck" = /area/calypso_hangar/thirddeck,
-		"East of Fourth Deck" = /area/calypso_hangar/fourthdeck,
-		"Asteroid" = /area/calypso_hangar/mining,
-		"Debris Field" = /area/calypso_hangar/salvage,
-		"Away Site" = /area/calypso_hangar/away,
-		)
-	announcer = "SEV Torch Docking Computer"
-	arrival_message = "Attention, shuttle Calypso returning. Clear the Hangar Deck."
-	departure_message = "Attention, shuttle Calypso departing. Clear the Hangar Deck."
-
-//General Utility Pod.
-/datum/shuttle/multi_shuttle/gup
-	name = "GUP"
-	warmup_time = 0
-	origin = /area/guppy_hangar/start
-	interim = /area/guppy_hangar/transit
-	start_location = "SEV Torch Hangar Deck"
-
-	destinations = list(
-		"Northeast of Bridge" = /area/guppy_hangar/bridge,
-		"East of First Deck" = /area/guppy_hangar/firstdeck,
-		"West of Second Deck" = /area/guppy_hangar/seconddeck,
-		"South of Third Deck" = /area/guppy_hangar/thirddeck,
-		"North of Fourth Deck" = /area/guppy_hangar/fourthdeck,
-		"Asteroid" = /area/guppy_hangar/mining,
-		"Debris Field" = /area/guppy_hangar/salvage,
-		)
-
-	announcer = "SEV Torch Docking Computer"
-	arrival_message = "Attention, General Utility Pod returning. Clear the Hangar Deck."
-	departure_message = "Attention, General Utility Pod departing. Clear the Hangar Deck."
-
-//Aquila.
-/datum/shuttle/multi_shuttle/aquila
-	name = "Aquila"
-	warmup_time = 0
-	origin = /area/aquila_hangar/start
-	interim = /area/aquila_hangar/transit
-	start_location = "SEV Torch Landing Area"
-	destinations = list(
-		"Northwest of Bridge" = /area/aquila_hangar/bridge,
-		"North of First Deck" = /area/aquila_hangar/firstdeck,
-		"South of Second Deck" = /area/aquila_hangar/seconddeck,
-		"West of Third Deck" = /area/aquila_hangar/thirddeck,
-		"East of Fourth Deck" = /area/aquila_hangar/fourthdeck,
-		"Asteroid" = /area/aquila_hangar/mining,
-		"Debris Field" = /area/aquila_hangar/salvage,
-		"Away Site" = /area/aquila_hangar/away,
-		)
-	docking_controller_tag = "aquila_shuttle"
-	destination_dock_targets = list(
-		"Landing Area" = "aquila_dock"
-		)
-	announcer = "SEV Torch Docking Computer"
-	arrival_message = "Attention, SFV Aquila returning. Clear the landing area."
-	departure_message = "Attention, SFV Aquila departing. Clear the landing area."
 
 //Petrov
 

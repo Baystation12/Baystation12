@@ -320,12 +320,6 @@
 	name = "\improper Abandoned Ship"
 	icon_state = "yellow"
 
-// Construction
-
-/area/construction
-	name = "\improper Engineering Construction Area"
-	icon_state = "yellow"
-
 // Misc
 /area/AIsattele
 	name = "\improper AI Satellite Teleporter Room"

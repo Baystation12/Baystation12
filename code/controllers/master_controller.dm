@@ -84,6 +84,11 @@ datum/controller/game_controller/proc/setup_objects()
 		area.initialize()
 		CHECK_SLEEP_MASTER
 
+	if(using_map.use_overmap)
+		report_progress("Initializing overmap events")
+		overmap_event_handler.create_events(using_map.overmap_z, using_map.overmap_size, using_map.overmap_event_areas)
+		CHECK_SLEEP_MASTER
+
 	report_progress("Initializing pipe networks")
 	for(var/obj/machinery/atmospherics/machine in machines)
 		machine.build_network()

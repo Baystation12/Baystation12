@@ -1067,3 +1067,7 @@ area/rnd/test_area
 
 /area/outpost/research/disposal
 	name = "Research Outpost Waste Disposal"
+
+/area/construction
+	name = "\improper Engineering Construction Area"
+	icon_state = "yellow"

@@ -1,6 +1,7 @@
 /datum/event/dust
 	startWhen	= 10
 	endWhen		= 30
+	var/prob_norm = 80
 
 /datum/event/dust/announce()
 	command_announcement.Announce("The [station_name()] is now passing through a belt of space dust.", "[station_name()] Sensor Array")
@@ -16,7 +17,10 @@
 		if(EVENT_LEVEL_MUNDANE)
 			return "weak"
 		if(EVENT_LEVEL_MODERATE)
-			return prob(80) ? "norm" : "strong"
+			return prob(prob_norm) ? "norm" : "strong"
 		if(EVENT_LEVEL_MAJOR)
 			return "super"
 	return "weak"
+
+/datum/event/dust/overmap
+	prob_norm = 0
