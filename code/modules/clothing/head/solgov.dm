@@ -173,6 +173,11 @@
 	desc = "A white beret denoting service in the Interstellar Health Service. For medics that are more inclined towards style than safety."
 	icon_state = "beret_white"
 
+/obj/item/clothing/head/beret/sol/marine
+	name = "marine beret"
+	desc = "A red beret with the SGC Marine Corps crest on it. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_marine"
+
 /obj/item/clothing/head/beret/sol/expedition
 	name = "expeditionary beret"
 	desc = "A black beret belonging to the SCG Expeditionary Corps. For personnel that are more inclined towards style than safety."
@@ -232,6 +237,8 @@
 	name = "fleet officer's beret"
 	desc = "An SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_command"
+
+//Ushankas
 
 /obj/item/clothing/head/ushanka/fleet
 	name = "fleet fur hat"
