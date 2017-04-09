@@ -1499,6 +1499,7 @@
 #include "code\modules\mob\living\carbon\alien\progression.dm"
 #include "code\modules\mob\living\carbon\alien\say.dm"
 #include "code\modules\mob\living\carbon\alien\update_icons.dm"
+#include "code\modules\mob\living\carbon\alien\diona\death.dm"
 #include "code\modules\mob\living\carbon\alien\diona\diona.dm"
 #include "code\modules\mob\living\carbon\alien\diona\diona_attacks.dm"
 #include "code\modules\mob\living\carbon\alien\diona\diona_powers.dm"

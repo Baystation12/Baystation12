@@ -21,6 +21,9 @@
 	possession_candidate = 1
 	var/obj/item/hat
 
+	var/mob/living/carbon/alien/diona/next_nymph
+	var/mob/living/carbon/alien/diona/last_nymph
+
 /mob/living/carbon/alien/diona/New()
 
 	..()

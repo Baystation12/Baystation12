@@ -236,18 +236,28 @@
 	log_admin("\The [src] has split into nymphs; player now controls [key_name(S)]")
 
 	var/nymphs = 1
+	var/mob/living/carbon/alien/diona/L = S
 
 	for(var/mob/living/carbon/alien/diona/D in src)
 		nymphs++
 		D.forceMove(T)
 		transfer_languages(src, D, WHITELISTED|RESTRICTED)
 		D.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+		L.set_next_nymph(D)
+		D.set_last_nymph(L)
+		L = D
 
 	if(nymphs < number_of_resulting_nymphs)
 		for(var/i in nymphs to (number_of_resulting_nymphs - 1))
-			var/mob/M = new /mob/living/carbon/alien/diona(T)
+			var/mob/living/carbon/alien/diona/M = new(T)
 			transfer_languages(src, M, WHITELISTED|RESTRICTED)
 			M.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+			L.set_next_nymph(M)
+			M.set_last_nymph(L)
+			L = M
+
+	L.set_next_nymph(S)
+	S.set_last_nymph(L)
 
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
