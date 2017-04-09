@@ -254,5 +254,38 @@ datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, va
 		return FALSE
 	return TRUE
 
+//=======================================================================================
+
+datum/unit_test/landmark_check
+	name = "MAP: Landmark Check"
+
+datum/unit_test/landmark_check/start_test()
+	var/safe_landmarks = 0
+	var/space_landmarks = 0
+
+	for(var/lm in landmarks_list)
+		var/obj/effect/landmark/landmark = lm
+		if(landmark.tag == "landmark*safe_turf")
+			log_debug("Safe landmark found: [log_info_line(landmark)]")
+			safe_landmarks++
+		else if(landmark.tag == "landmark*space_turf")
+			log_debug("Space landmark found: [log_info_line(landmark)]")
+			space_landmarks++
+
+	if(safe_landmarks != 1 || space_landmarks != 1)
+		if(safe_landmarks != 1)
+			log_bad("Found [safe_landmarks] safe landmarks. Expected 1.")
+		if(space_landmarks != 1)
+			log_bad("Found [space_landmarks] space landmarks. Expected 1.")
+		fail("Expected exactly one safe landmark, and one space landmark.")
+	else
+		pass("Exactly one safe landmark, and exactly one space landmark found.")
+
+	return 1
+
+//=======================================================================================
+
+
+
 #undef SUCCESS
 #undef FAILURE

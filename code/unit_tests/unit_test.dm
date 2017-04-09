@@ -89,8 +89,11 @@ datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
 
-datum/unit_test/proc/get_standard_turf()
-	return locate(20,20,1)
+datum/unit_test/proc/get_safe_turf()
+	return locate("landmark*safe_turf")
+
+datum/unit_test/proc/get_space_turf()
+	return locate("landmark*space_turf")
 
 
 proc/load_unit_test_changes()
