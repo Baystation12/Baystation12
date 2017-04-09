@@ -1,0 +1,7 @@
+author: RedStryker
+delete-after: True
+changes: 
+  - tweak: "Separated the NT tunic into an accessory. There is a polo below the tunic. That polo is on the loadout."
+  - tweak: "Changed the color of the NT worksuit."
+  - rscadd: "Added a NT executive suit for the NTL. Also in RD's locker."
+  - tweak: "Changed many things in Research from purple to NT red."

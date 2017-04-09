@@ -27,19 +27,21 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/rank/scientist
-	name = "\improper NanoTrasen smock and pants"
-	desc = "A fashionable tunic and pair of trousers made from patented biohazard-resistant synthetic fabrics. The colors denote the wearer as a member of NanoTrasen."
+	name = "\improper NanoTrasen polo and pants"
+	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics. The colors denote the wearer as a member of NanoTrasen."
 	icon_state = "ntsmock"
 	item_state = "w_suit"
 	worn_state = "ntsmock"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
+	starting_accessories = list(/obj/item/clothing/accessory/nt_tunic)
 
 /obj/item/clothing/under/rank/scientist/executive
-	name = "\improper NanoTrasen executive smock and pants"
-	desc = "A fashionable tunic and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a member of NanoTrasen's higher-ups."
+	name = "\improper NanoTrasen executive polo and pants"
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a member of NanoTrasen's higher-ups."
 	icon_state = "ntsmockexec"
 	worn_state = "ntsmockexec"
+	starting_accessories = list(/obj/item/clothing/accessory/nt_tunic/exec)
 
 /obj/item/clothing/under/rank/chemist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
