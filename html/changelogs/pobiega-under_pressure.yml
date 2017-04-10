@@ -1,8 +1,0 @@
-
-author: Pobiega
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added fuel pipes, manifolds, caps, etc."
-  - rscadd: "Made pipe dispensers dispense fuel pipes."

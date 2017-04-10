@@ -513,6 +513,8 @@
 			return global.eventchance;
 		if("exclude_jobs")
 			return global.exclude_jobs;
+		if("exited_event")
+			return global.exited_event;
 		if("explosion_in_progress")
 			return global.explosion_in_progress;
 		if("explosion_sound")
@@ -951,6 +953,8 @@
 			return global.outfits_decls_root_;
 		if("outside_state")
 			return global.outside_state;
+		if("overmap_event_handler")
+			return global.overmap_event_handler;
 		if("page_sound")
 			return global.page_sound;
 		if("paiController")
@@ -1968,6 +1972,8 @@
 			global.eventchance=newval;
 		if("exclude_jobs")
 			global.exclude_jobs=newval;
+		if("exited_event")
+			global.exited_event=newval;
 		if("explosion_in_progress")
 			global.explosion_in_progress=newval;
 		if("explosion_sound")
@@ -2406,6 +2412,8 @@
 			global.outfits_decls_root_=newval;
 		if("outside_state")
 			global.outside_state=newval;
+		if("overmap_event_handler")
+			global.overmap_event_handler=newval;
 		if("page_sound")
 			global.page_sound=newval;
 		if("paiController")
@@ -3166,6 +3174,7 @@
 	"event_sources_count",
 	"eventchance",
 	"exclude_jobs",
+	"exited_event",
 	"explosion_in_progress",
 	"explosion_sound",
 	"explosion_turfs",
@@ -3385,6 +3394,7 @@
 	"outfits_decls_by_type_",
 	"outfits_decls_root_",
 	"outside_state",
+	"overmap_event_handler",
 	"page_sound",
 	"paiController",
 	"pai_emotions",
