@@ -271,6 +271,8 @@ datum/unit_test/landmark_check/start_test()
 		else if(landmark.tag == "landmark*space_turf")
 			log_debug("Space landmark found: [log_info_line(landmark)]")
 			space_landmarks++
+		else if(istype(landmark, /obj/effect/landmark/test))
+			log_debug("Test landmark with unknown tag found: [log_info_line(landmark)]")
 
 	if(safe_landmarks != 1 || space_landmarks != 1)
 		if(safe_landmarks != 1)
