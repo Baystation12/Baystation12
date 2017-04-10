@@ -16,7 +16,7 @@
 	icon_state = "filingcabinet"
 	density = 1
 	anchored = 1
-	flags = OBJ_ANCHORABLE
+	flags = OBJ_ANCHORABLE|OBJ_CLIMBABLE
 	var/list/can_hold = list(
 		/obj/item/weapon/paper,
 		/obj/item/weapon/folder,

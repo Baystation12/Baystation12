@@ -110,11 +110,7 @@
 	else
 		return ..()
 
-/obj/machinery/optable/verb/climb_on()
-	set name = "Climb On Table"
-	set category = "Object"
-	set src in oview(1)
-
+/obj/machinery/optable/climb_on()
 	if(usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))
 		return
 

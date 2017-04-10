@@ -10,6 +10,7 @@
 	var/set_temperature = T0C + 20	//K
 	var/active = 0
 	var/heating_power = 40000
+	flags = OBJ_CLIMBABLE
 
 
 /obj/machinery/space_heater/New()

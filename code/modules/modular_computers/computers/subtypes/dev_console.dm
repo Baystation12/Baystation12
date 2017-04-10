@@ -16,3 +16,4 @@
 	light_strength = 4
 	max_damage = 300
 	broken_damage = 150
+	flags = OBJ_CLIMBABLE
