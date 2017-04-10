@@ -137,19 +137,19 @@
 /datum/overmap_event/meteor
 	name = "asteroid field"
 	event = /datum/event/meteor_wave/overmap
-	count = 6
+	count = 7
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
 	difficulty = EVENT_LEVEL_MAJOR
 
 /datum/overmap_event/electric
 	name = "electrical storm"
 	event = /datum/event/electrical_storm
-	count = 8
+	count = 9
 	event_icon_states = list("electrical1", "electrical2", "electrical3", "electrical4")
 	difficulty = EVENT_LEVEL_MAJOR
 
 /datum/overmap_event/dust
 	name = "dust cloud"
 	event = /datum/event/dust/overmap //Probability is annoying.
-	count = 10
+	count = 11
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")

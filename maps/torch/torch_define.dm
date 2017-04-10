@@ -13,7 +13,7 @@
 	empty_levels = list(6)
 	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"6"=30,"7"=10,"8"=10)
 	overmap_size = 40
-	overmap_event_areas = 10
+	overmap_event_areas = 12
 	base_turf_by_z = list("9" = /turf/simulated/floor/asteroid)
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
