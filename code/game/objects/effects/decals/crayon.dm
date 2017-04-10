@@ -27,3 +27,15 @@
 		overlays += shadeOverlay
 
 		add_hiddenprint(usr)
+
+/obj/effect/decal/cleanable/guidance
+	name = "guidance"
+	desc = "A helpful (or not) message from your fellow undead."
+	icon = 'icons/obj/rune.dmi'
+	icon_state = "guidance"
+	anchored = 1
+
+	New(location,var/message)
+		..()
+		loc = location
+		desc = "A helpful (or not) message from another crewmember. It reads, '[message]'"

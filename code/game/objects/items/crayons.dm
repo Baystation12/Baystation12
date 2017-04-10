@@ -108,3 +108,91 @@
 				qdel(src)
 	else
 		..()
+
+/obj/item/weapon/pen/soapstone
+	name = "orange guidance soapstone"
+	icon = 'icons/obj/crayons.dmi'
+	icon_state = "soapstone"
+	var/instant = 0
+
+/obj/item/weapon/pen/soapstone/afterattack(atom/target, mob/user as mob, proximity)
+	if(!proximity) return
+	if(istype(target,/turf/simulated/floor))
+		var/catcharacters = list("enemy","tough enemy","soldier","knight","sniper","caster","giant","skeleton","ghost","bug","lizard","flier","golem","statue","monster","strange creature","demon","dragon","boss","saint","wretch","charmer","miscreant","liar","fatty","beanpole","merchant","blacksmith","master","prisoner")
+		var/catobjects = list("bonfire","lever","switch","key","treasure","weapon","shield","projectile","armor","item","trap","amazing key","amazing treasure","amazing chest","amazing weapon","amazing shield","amazing projectile","amazing armor","amazing item","amazing trap")
+		var/cattechniques = list("close-ranged battle","ranged battle","eliminating one at a time","luring it out","beating to a pulp","lying in ambush","stealth","mimicry","pincer attack","hitting them in one swoop","fleeing","serpentine","charging","stabbing in the back","sweeping attack","shield-breaking","headshots","jumping off","sliding down","dashing through")
+		var/catactions = list("rolling","stepping back","jumping","attacking","holding with both hands","kicking","plunging attack","thrusting attack","blocking","parrying")
+		var/catgeography = list("path","hidden path","shortcut","detour","dead end","cave","labyrinth","safe zone","danger zone","sniper spot","bright spot","dark spot","open area","tight spot","hidden place","exchange","gorgeous view","fall")
+		var/catorientation = list("front","back","left","right","up","down","feet","head","back")
+		var/catbodyparts = list("head","neck","stomach","back","arm","leg","heel","rear","tail","wings","anywhere")
+		var/catattributes = list("strike","thrust","slash","magic","fire","bleeding","poison","curses","divine","occult")
+		var/catconcepts = list("chance","hint","secret","happiness","sorrow","life","death","undead","elation","grief","hope","despair","light","dark","bravery","resignation","comfort","tears","apathy","lust")
+		var/basephrase = input("Choose your base phrase.", "Write a message") in list("**** ahead.","Be wary of ****.","Try ****.","Need ****.","Imminent ****...","Weakness: ****","****.","****?","Good luck.","I did it!","Here!","I can't take this...","Praise the Sun!")
+		var/fillphrase
+		var/fillcategory
+		var/inputphrases = list(
+			"**** ahead.",
+			"Be wary of ****.",
+			"Try ****.",
+			"Need ****.",
+			"Imminent ****...",
+			"Weakness: ****",
+			"****.",
+			"****?")
+		if(basephrase in inputphrases)
+			fillcategory = input("Choose a phrase category to fill in the blank.", "Write a message") in list("Characters","Objects","Techniques","Actions","Geography","Orientation","Body Parts","Attributes","Concepts")
+			switch(fillcategory)
+				if("Characters")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catcharacters
+					to_chat(user, "You begin writing...")
+				if("Objects")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catobjects
+					to_chat(user, "You begin writing...")
+				if("Techniques")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in cattechniques
+					to_chat(user, "You begin writing...")
+				if("Actions")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catactions
+					to_chat(user, "You begin writing...")
+				if("Geography")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catgeography
+					to_chat(user, "You begin writing...")
+				if("Orientation")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catorientation
+					to_chat(user, "You begin writing...")
+				if("Body Parts")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catbodyparts
+					to_chat(user, "You begin writing...")
+				if("Attributes")
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catattributes
+					to_chat(user, "You begin writing...")
+				else
+					fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catconcepts
+					to_chat(user, "You begin writing...")
+		else
+			to_chat(user, "You begin writing...")
+		var/message = "blank"
+		switch(basephrase)
+			if("**** ahead.")
+				message = "[fillphrase] ahead."
+			if("Be wary of ****.")
+				message = "Be wary of [fillphrase]."
+			if("Try ****.")
+				message = "Try [fillphrase]."
+			if("Need ****.")
+				message = "Need [fillphrase]."
+			if("Imminent ****...")
+				message = "Imminent [fillphrase]..."
+			if("Weakness: ****")
+				message = "Weakness: [fillphrase]."
+			if("****?")
+				message = "[fillphrase]?"
+			if("****.")
+				message = "[fillphrase]."
+			else
+				message = basephrase
+		if(instant || do_after(user, 50))
+			new /obj/effect/decal/cleanable/guidance(target,message)
+			to_chat(user, "You finish writing your message.")
+			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
+	return
