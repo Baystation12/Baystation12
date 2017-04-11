@@ -38,6 +38,7 @@
 	. = ..()
 	for(var/atom/movable/AM in src)
 		qdel(AM)
+
 	forceMove(null)
 	if (pulledby)
 		if (pulledby.pulling == src)
