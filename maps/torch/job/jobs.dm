@@ -511,8 +511,8 @@
 
 /datum/job/officer
 	title = "Master at Arms"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the Chief of Security"
 	alt_titles = list(
 		"Military Police")
