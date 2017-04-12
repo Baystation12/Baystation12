@@ -79,15 +79,3 @@
 	item_cost = 60
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/weapon/storage/box/supermatters
-
-/datum/uplink_item/item/grenades/singularity
-	name = "1xSingularity Grenade"
-	desc = "Run away after throwing. Seriously"
-	item_cost = 50
-	path = /obj/item/weapon/grenade/spawnergrenade/singularity
-
-/datum/uplink_item/item/grenades/toysingularity
-	name = "1xSingularity Grenade"
-	desc = "This one is cheaper than the other singularity grenade. Must be a bargain."
-	item_cost = 10
-	path = /obj/item/weapon/grenade/spawnergrenade/singularity/toy
