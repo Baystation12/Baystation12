@@ -46,10 +46,3 @@
 	spawner_type = /mob/living/simple_animal/hostile/carp
 	deliveryamt = 5
 	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ILLEGAL = 4)
-
-/obj/item/weapon/grenade/spawnergrenade/singularity
-	name = "singularity grenade"
-	spawner_type = /obj/singularity
-
-/obj/item/weapon/grenade/spawnergrenade/singularity/toy
-	spawner_type = /obj/item/toy/spinningtoy
