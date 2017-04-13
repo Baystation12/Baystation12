@@ -15,7 +15,7 @@
 	uniqueID = rand(0,10000)
 	..()
 
-/datum/disease2/disease/proc/makerandom(var/severity=1)
+/datum/disease2/disease/proc/makerandom(var/severity=2)
 	var/list/excludetypes = list()
 	for(var/i=1 ; i <= max_stage ; i++ )
 		var/datum/disease2/effect/E = get_random_virus2_effect(i, severity, excludetypes)
@@ -77,7 +77,7 @@
 			majormutate()
 
 	//Space antibiotics stop disease completely
-	if(mob.reagents.has_reagent("spaceacillin"))
+	if(mob.chem_effects[CE_ANTIVIRAL] > 4)
 		if(stage == 1 && prob(20))
 			cure(mob)
 		return
@@ -103,7 +103,8 @@
 		e.fire(mob,stage)
 
 	//fever
-	mob.bodytemperature = max(mob.bodytemperature, min(310+5*min(stage,max_stage) ,mob.bodytemperature+5*min(stage,max_stage)))
+	if(mob.chem_effects[CE_ANTIVIRAL] < 1)
+		mob.bodytemperature = max(mob.bodytemperature, min(310+5*min(stage,max_stage) ,mob.bodytemperature+5*min(stage,max_stage)))
 	clicks+=speed
 
 /datum/disease2/disease/proc/cure(var/mob/living/carbon/mob, antigen)
@@ -116,10 +117,8 @@
 	BITSET(mob.hud_updateflag, STATUS_HUD)
 
 /datum/disease2/disease/proc/minormutate()
-	//uniqueID = rand(0,10000)
 	var/datum/disease2/effect/E = pick(effects)
 	E.minormutate()
-	//infectionchance = min(50,infectionchance + rand(0,10))
 
 /datum/disease2/disease/proc/majormutate(badness = 3)
 	uniqueID = rand(0,10000)

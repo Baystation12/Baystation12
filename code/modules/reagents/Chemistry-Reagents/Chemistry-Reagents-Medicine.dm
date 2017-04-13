@@ -418,6 +418,9 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
+/datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_ANTIVIRAL, 5)
+
 /datum/reagent/sterilizine
 	name = "Sterilizine"
 	id = "sterilizine"
@@ -612,3 +615,23 @@
 
 	if(alien != IS_DIONA)
 		M.make_jittery(-50)
+
+/datum/reagent/antidexafen
+	name = "Antidexafen"
+	id = "antidexafen"
+	description = "All-in-one cold medicine. Fever, cough, sneeze, safe for babies."
+	taste_description = "cough syrup"
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose = 60
+	scannable = 1
+	metabolism = 0.02
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/antidexafen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 15)
+	M.add_chemical_effect(CE_ANTIVIRAL, 1)
+
+/datum/reagent/antidexafen/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.hallucination = max(M.hallucination, 2)
