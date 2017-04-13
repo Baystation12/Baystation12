@@ -1,59 +1,52 @@
-/datum/disease2/effectholder
-	var/name = "Holder"
-	var/datum/disease2/effect/effect
-	var/chance = 0 //Chance in percentage each tick
-	var/cure = "" //Type of cure it requires
-	var/happensonce = 0
-	var/multiplier = 1 //The chance the effects are WORSE
-	var/stage = 0
-
-/datum/disease2/effectholder/proc/runeffect(var/mob/living/carbon/human/mob,var/stage)
-	if(happensonce > -1 && effect.stage <= stage && prob(chance))
-		effect.activate(mob, multiplier)
-		if(happensonce == 1)
-			happensonce = -1
-
-/datum/disease2/effectholder/proc/getrandomeffect(var/badness = 1, exclude_types=list())
-	var/list/datum/disease2/effect/list = list()
-	for(var/e in (typesof(/datum/disease2/effect) - /datum/disease2/effect))
-		var/datum/disease2/effect/f = e
-		if(e in exclude_types)
-			continue
-		if(initial(f.badness) > badness)	//we don't want such strong effects
-			continue
-		if(initial(f.stage) <= src.stage)
-			list += f
-	var/type = pick(list)
-	effect = new type()
-	effect.generate()
-	chance = rand(0,effect.chance_maxm)
-	multiplier = rand(1,effect.maxm)
-
-/datum/disease2/effectholder/proc/minormutate()
-	switch(pick(1,2,3,4,5))
-		if(1)
-			chance = rand(0,effect.chance_maxm)
-		if(2)
-			multiplier = rand(1,effect.maxm)
-
-/datum/disease2/effectholder/proc/majormutate(exclude_types=list())
-	getrandomeffect(3, exclude_types)
-
 ////////////////////////////////////////////////////////////////
 ////////////////////////EFFECTS/////////////////////////////////
 ////////////////////////////////////////////////////////////////
+/proc/get_random_virus2_effect(stage, badness, exclude)
+	var/list/datum/disease2/effect/candidates = list()
+	for(var/T in subtypesof(/datum/disease2/effect))
+		var/datum/disease2/effect/E = T
+		if(E in exclude)
+			continue
+		if(initial(E.badness) > badness)	//we don't want such strong effects
+			continue
+		if(initial(E.stage) <= stage)
+			candidates += T
+	var/type = pick(candidates)
+	var/datum/disease2/effect/effect = new type
+	effect.generate()
+	effect.chance = rand(0,effect.chance_max)
+	effect.multiplier = rand(1,effect.multiplier_max)
+	return effect
 
 /datum/disease2/effect
-	var/chance_maxm = 50 //note that disease effects only proc once every 3 ticks for humans
 	var/name = "Blanking effect"
-	var/stage = 4
-	var/maxm = 1
-	var/badness = 1
-	var/data = null // For semi-procedural effects; this should be generated in generate() if used
+	var/chance			//probality to fire every tick
+	var/chance_max = 50
+	var/multiplier = 1	//effect magnitude multiplier
+	var/multiplier_max = 1
+	var/stage = 4		//minimal stage
+	var/badness = 1		//badness from 1 (common cold etc) to 3 (gibbingtons). Used in random generation.
+	var/data = null 	//For semi-procedural effects; this should be generated in generate() if used
+	var/oneshot
 
-	proc/activate(var/mob/living/carbon/mob,var/multiplier)
-	proc/deactivate(var/mob/living/carbon/mob)
-	proc/generate(copy_data) // copy_data will be non-null if this is a copy; it should be used to initialise the data for this effect if present
+/datum/disease2/effect/proc/fire(var/mob/living/carbon/human/mob,var/current_stage)
+	if(oneshot == -1)
+		return
+	if(stage <= current_stage && prob(chance))
+		activate(mob)
+		if(oneshot == 1)
+			oneshot = -1
+
+/datum/disease2/effect/proc/minormutate()
+	switch(pick(1,2,3,4,5))
+		if(1)
+			chance = rand(0,chance_max)
+		if(2)
+			multiplier = rand(1,multiplier_max)
+
+/datum/disease2/effect/proc/activate(var/mob/living/carbon/mob)
+/datum/disease2/effect/proc/deactivate(var/mob/living/carbon/mob)
+/datum/disease2/effect/proc/generate(copy_data) // copy_data will be non-null if this is a copy; it should be used to initialise the data for this effect if present
 
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"
@@ -67,7 +60,7 @@
 	name = "Nil Syndrome"
 	stage = 4
 	badness = 1
-	chance_maxm = 0
+	chance_max = 0
 
 /datum/disease2/effect/gibbingtons
 	name = "Gibbingtons Syndrome"
@@ -95,7 +88,7 @@
 /datum/disease2/effect/radian
 	name = "Radian's Syndrome"
 	stage = 4
-	maxm = 3
+	multiplier_max = 3
 	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.apply_effect(2*multiplier, IRRADIATE, blocked = 0)
@@ -200,14 +193,14 @@
 /datum/disease2/effect/toxins
 	name = "Hyperacidity"
 	stage = 3
-	maxm = 3
+	multiplier_max = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.adjustToxLoss((2*multiplier))
 
 /datum/disease2/effect/shakey
 	name = "World Shaking Syndrome"
 	stage = 3
-	maxm = 3
+	multiplier_max = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		shake_camera(mob,5*multiplier)
 
@@ -264,14 +257,14 @@
 /datum/disease2/effect/groan
 	name = "Groaning Syndrome"
 	stage = 3
-	chance_maxm = 25
+	chance_max = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*groan")
 
 /datum/disease2/effect/chem_synthesis
 	name = "Chemical Synthesis"
 	stage = 3
-	chance_maxm = 25
+	chance_max = 25
 
 	generate(c_data)
 		if(c_data)
@@ -292,7 +285,7 @@
 /datum/disease2/effect/scream
 	name = "Loudness Syndrome"
 	stage = 2
-	chance_maxm = 25
+	chance_max = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*scream")
 
@@ -305,7 +298,7 @@
 /datum/disease2/effect/sleepy
 	name = "Resting Syndrome"
 	stage = 2
-	chance_maxm = 15
+	chance_max = 15
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*collapse")
 
@@ -332,7 +325,7 @@
 /datum/disease2/effect/fridge
 	name = "Refridgerator Syndrome"
 	stage = 2
-	chance_maxm = 25
+	chance_max = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*shiver")
 
@@ -383,14 +376,14 @@
 /datum/disease2/effect/drool
 	name = "Saliva Effect"
 	stage = 1
-	chance_maxm = 25
+	chance_max = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*drool")
 
 /datum/disease2/effect/twitch
 	name = "Twitcher"
 	stage = 1
-	chance_maxm = 25
+	chance_max = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*twitch")
 
