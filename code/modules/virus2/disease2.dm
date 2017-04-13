@@ -3,7 +3,6 @@
 	var/speed = 1
 	var/spreadtype = "Contact" // Can also be "Airborne"
 	var/stage = 1
-	var/stageprob = 10
 	var/dead = 0
 	var/clicks = 0
 	var/uniqueID = 0
@@ -45,7 +44,7 @@
 	var/list/res = list()
 	for (var/specie in all_species)
 		var/datum/species/S = all_species[specie]
-		if((S.spawn_flags & SPECIES_CAN_JOIN) && !picked.greater_form && !S.get_virus_immune())
+		if((S.spawn_flags & SPECIES_CAN_JOIN) && !S.get_virus_immune() && !S.greater_form)
 			meat += S
 	if(meat.len)
 		var/num = rand(1,meat.len)
@@ -145,7 +144,7 @@
 	var/datum/disease2/disease/disease = new /datum/disease2/disease
 	disease.infectionchance = infectionchance
 	disease.spreadtype = spreadtype
-	disease.stageprob = stageprob
+	disease.speed = speed
 	disease.antigen   = antigen
 	disease.uniqueID = uniqueID
 	disease.affected_species = affected_species.Copy()
@@ -207,7 +206,7 @@ var/global/list/virusDB = list()
 	<u>Designation:</u> [name()]<br>
 	<u>Antigen:</u> [antigens2string(antigen)]<br>
 	<u>Transmitted By:</u> [spreadtype]<br>
-	<u>Rate of Progression:</u> [stageprob * 10]<br>
+	<u>Rate of Progression:</u> [speed * 100]%<br>
 	<u>Species Affected:</u> [jointext(affected_species, ", ")]<br>
 "}
 
