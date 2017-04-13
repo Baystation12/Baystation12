@@ -24,9 +24,7 @@
 		effects += E
 	uniqueID = rand(0,10000)
 	switch(severity)
-		if(1)
-			infectionchance = 1
-		if(2)
+		if(1,2)
 			infectionchance = rand(10,20)
 		else
 			infectionchance = rand(60,90)
