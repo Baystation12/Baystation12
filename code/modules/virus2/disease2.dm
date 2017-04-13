@@ -62,9 +62,10 @@
 
 	if(mob.stat == DEAD)
 		return
+
 	if(stage <= 1 && clicks == 0) 	// with a certain chance, the mob may become immune to the disease before it starts properly
 		if(prob(5))
-			mob.antibodies |= antigen // 20% immunity is a good chance IMO, because it allows finding an immune person easily
+			cure(mob, 1)
 
 	// Some species are flat out immune to organic viruses.
 	var/mob/living/carbon/human/H = mob
@@ -79,7 +80,7 @@
 	//Space antibiotics stop disease completely
 	if(mob.reagents.has_reagent("spaceacillin"))
 		if(stage == 1 && prob(20))
-			src.cure(mob)
+			cure(mob)
 		return
 
 	//Virus food speeds up disease progress
@@ -94,8 +95,7 @@
 	//Moving to the next stage
 	if(clicks > max(stage*100, 200) && prob(10))
 		if((stage <= max_stage) && prob(20)) // ~60% of viruses will be cured by the end of S4 with this
-			src.cure(mob)
-			mob.antibodies |= src.antigen
+			cure(mob,1)
 		stage++
 		clicks = 0
 
@@ -104,20 +104,17 @@
 		if(prob(33))
 			e.runeffect(mob,stage)
 
-	//Short airborne spread
-	if(src.spreadtype == "Airborne")
-		for(var/mob/living/carbon/M in oview(1,mob))
-			if(airborne_can_reach(get_turf(mob), get_turf(M)))
-				infect_virus2(M,src)
-
 	//fever
 	mob.bodytemperature = max(mob.bodytemperature, min(310+5*min(stage,max_stage) ,mob.bodytemperature+5*min(stage,max_stage)))
 	clicks+=speed
 
-/datum/disease2/disease/proc/cure(var/mob/living/carbon/mob)
+/datum/disease2/disease/proc/cure(var/mob/living/carbon/mob, antigen)
 	for(var/datum/disease2/effectholder/e in effects)
 		e.effect.deactivate(mob)
 	mob.virus2.Remove("[uniqueID]")
+	if(antigen)
+		mob.antibodies |= antigen
+
 	BITSET(mob.hud_updateflag, STATUS_HUD)
 
 /datum/disease2/disease/proc/minormutate()
