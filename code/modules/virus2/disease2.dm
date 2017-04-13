@@ -45,15 +45,13 @@
 	var/list/res = list()
 	for (var/specie in all_species)
 		var/datum/species/S = all_species[specie]
-		if(!S.get_virus_immune())
+		if((S.spawn_flags & SPECIES_CAN_JOIN) && !picked.greater_form && !S.get_virus_immune())
 			meat += S
 	if(meat.len)
 		var/num = rand(1,meat.len)
 		for(var/i=0,i<num,i++)
 			var/datum/species/picked = pick_n_take(meat)
 			res |= picked.name
-			if(picked.greater_form)
-				res |= picked.greater_form
 			if(picked.primitive_form)
 				res |= picked.primitive_form
 	return res
@@ -63,7 +61,7 @@
 		cure(mob)
 		return
 
-	if(mob.stat == 2)
+	if(mob.stat == DEAD)
 		return
 	if(stage <= 1 && clicks == 0) 	// with a certain chance, the mob may become immune to the disease before it starts properly
 		if(prob(5))
