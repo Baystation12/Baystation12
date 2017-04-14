@@ -171,6 +171,18 @@
 	organ_tag = BP_APPENDIX
 	var/inflamed = 0
 
+/obj/item/organ/internal/appendix/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
+	owner.immunity_norm -= 20
+	..()
+
+/obj/item/organ/internal/appendix/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+	..()
+	target.immunity_norm += 20
+
+/obj/item/organ/internal/appendix/New(var/mob/living/carbon/holder)
+	..()
+	replaced(holder)
+
 /obj/item/organ/internal/appendix/update_icon()
 	..()
 	if(inflamed)
