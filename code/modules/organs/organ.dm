@@ -161,6 +161,8 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
+	if(owner.immunity < 10) //for now just having shit immunity will suppress it
+		return
 	if(dna)
 		if(!rejecting)
 			if(blood_incompatible(dna.b_type, owner.dna.b_type, species, owner.species))
