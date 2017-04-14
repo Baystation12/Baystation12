@@ -61,7 +61,7 @@
 		return
 
 	if(stage <= 1 && clicks == 0) 	// with a certain chance, the mob may become immune to the disease before it starts properly
-		if(prob(5))
+		if(round(mob.immunity * 0.05))
 			cure(mob, 1)
 
 	// Some species are flat out immune to organic viruses.
@@ -91,7 +91,7 @@
 
 	//Moving to the next stage
 	if(clicks > max(stage*100, 200) && prob(10))
-		if((stage <= max_stage) && prob(20)) // ~60% of viruses will be cured by the end of S4 with this
+		if((stage <= max_stage) && prob(round(mob.immunity * 0.2))) // ~60% of viruses will be cured by the end of S4 with this
 			cure(mob,1)
 		stage++
 		clicks = 0

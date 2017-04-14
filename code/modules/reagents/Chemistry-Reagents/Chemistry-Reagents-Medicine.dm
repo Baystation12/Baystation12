@@ -419,7 +419,7 @@
 	scannable = 1
 
 /datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.immunity = max(M.immunity - 0.5, 0)
+	M.immunity = max(M.immunity - 0.75, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, 5)
 
 /datum/reagent/sterilizine

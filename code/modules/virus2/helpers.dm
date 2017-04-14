@@ -92,8 +92,8 @@ proc/airborne_can_reach(turf/source, turf/target)
 			return //not compatible with this species
 
 //	log_debug("Infecting [M]")
-
-	if(forced || (infection_check(M, disease.spreadtype) && prob(disease.infectionchance)))
+	var/immunity_weakness = max(200 - M.immunity, 0)
+	if(forced || (infection_check(M, disease.spreadtype) && prob(disease.infectionchance * immunity_weakness * 0.01) && prob(immunity_weakness)))
 		var/datum/disease2/disease/D = disease.getcopy()
 		D.minormutate()
 //		log_debug("Adding virus")
