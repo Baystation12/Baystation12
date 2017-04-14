@@ -414,17 +414,13 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#C1C1C1"
-	metabolism = REM * 0.05
+	metabolism = REM * 0.1
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
-	var/starttime
 
 /datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(dose < metabolism)
-		starttime = world.time
 	M.immunity = max(M.immunity - 0.5, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, 5)
-	world << "Has been here for [round((world.time-starttime)/10)] seconds, consumed [dose] units."
 
 /datum/reagent/sterilizine
 	name = "Sterilizine"
