@@ -8,21 +8,6 @@
 
 #ifdef UNIT_TEST
 
-
-/obj/effect/landmark/test/New()
-	..()
-	log_unit_test("[ascii_yellow]NEW: [log_info_line(src)][ascii_reset]")
-
-/obj/effect/landmark/test/Destroy()
-	log_unit_test("[ascii_yellow]DESTROY: [log_info_line(src)][ascii_reset]")
-	crash_with("DESTROY")
-	. = ..()
-
-/obj/effect/landmark/test/Del()
-	log_unit_test("[ascii_yellow]DEL: [log_info_line(src)][ascii_reset]")
-	crash_with("DEL")
-	..()
-
 /datum/fake_client
 
 /mob/fake_mob
