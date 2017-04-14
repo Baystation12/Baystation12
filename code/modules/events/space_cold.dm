@@ -14,7 +14,5 @@ datum/event/space_cold/start()
 
 	var/victims = min(rand(1,3), candidates.len)
 	while(victims)
-		var/sucker = pick_n_take(candidates)
-		world << "Infecting [sucker]"
-		infect_virus2(sucker,sniffle,1)
+		infect_virus2(pick_n_take(candidates),sniffle,1)
 		victims--
