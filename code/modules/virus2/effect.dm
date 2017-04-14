@@ -25,7 +25,7 @@
 	var/multiplier = 1	//effect magnitude multiplier
 	var/multiplier_max = 1
 	var/stage = 4		//minimal stage
-	var/badness = 1		//badness from 1 (common cold etc) to 3 (gibbingtons). Used in random generation.
+	var/badness = 1		//badness from 1 (common cold etc) to 2 (random BAD viruses) to 3 (engineered viruses) to 4 (adminbus). Used in random generation.
 	var/data = null 	//For semi-procedural effects; this should be generated in generate() if used
 	var/oneshot
 	var/delay = 5 SECONDS	//minimal time between activations
@@ -99,7 +99,7 @@
 		mob.ear_deaf += 20
 
 /datum/disease2/effect/monkey
-	name = "Monkism Syndrome"
+	name = "Two Percent Syndrome"
 	stage = 4
 	badness = 4
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
@@ -152,6 +152,11 @@
 			if (E.status & ORGAN_BROKEN && prob(30))
 				to_chat(mob, "<span class='notice'>Your [E.name] suddenly feels much better!</span>")
 				E.status ^= ORGAN_BROKEN
+				break
+		for (var/obj/item/organ/internal/I in mob.internal_organs)
+			if (I.damage && prob(30))
+				to_chat(mob, "<span class='notice'>Your [mob.get_organ(I.parent_organ)] feels a bit warm...</span>")
+				I.take_damage(-2*multiplier)
 				break
 		var/heal_amt = -5*multiplier
 		mob.apply_damages(heal_amt,heal_amt,heal_amt,heal_amt)

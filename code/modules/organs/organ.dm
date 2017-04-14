@@ -136,10 +136,10 @@ var/list/organ_cache = list()
 	//** Handle the effects of infections
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
-	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(M.immunity*0.3))
+	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(owner.immunity*0.3))
 		germ_level--
 
-	var/immunity_weakness = max(200 - M.immunity, 0)
+	var/immunity_weakness = max(200 - owner.immunity, 0)
 	if (germ_level >= INFECTION_LEVEL_ONE/2)
 		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
 		if(antibiotics < 5 && prob(round(germ_level/6 * immunity_weakness * 0.01)))
