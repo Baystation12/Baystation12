@@ -175,8 +175,8 @@
 /obj/structure/bed/bogani
 	name = "alien bed"
 	desc = "a strange looking bed, not from something you've seen before."
-	icon_state = "alien bed"
-	base_icon = "alien bed"
+	icon_state = "bogbed"
+
 
 /*
  * Roller beds
