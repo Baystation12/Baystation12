@@ -112,7 +112,7 @@ ALLOW_RANDOM_EVENTS
 TRAITOR_SCALING
 
 ## if objectives are disabled
-#OBJECTIVES_DISABLED
+OBJECTIVES_DISABLED
 
 ## make ERT's be only called by admins
 #ERT_ADMIN_ONLY
