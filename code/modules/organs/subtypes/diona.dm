@@ -203,6 +203,7 @@
 // species (absorbing radiation and light respectively)
 /obj/item/organ/internal/diona/nutrients
 	name = BP_NUTRIENT
+	parent_organ = BP_CHEST
 	organ_tag = BP_NUTRIENT
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
@@ -217,5 +218,5 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
-/obj/item/organ/internal/diona/node/removed()
-	return
+/obj/item/organ/internal/diona/node/removed(var/mob/user)
+	return ..(user, 1)
