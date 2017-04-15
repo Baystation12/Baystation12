@@ -64,7 +64,7 @@
 	utility_under = /obj/item/clothing/under/utility/fleet
 	utility_shoes = /obj/item/clothing/shoes/dutyboots
 	utility_hat = /obj/item/clothing/head/utility/fleet
-	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet, /obj/item/clothing/head/ushanka/fleet)
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet, /obj/item/clothing/head/ushanka/fleet, /obj/item/clothing/head/soft/sol/fleet)
 
 	service_under = /obj/item/clothing/under/service/fleet
 	service_over = null
