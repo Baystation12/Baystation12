@@ -265,10 +265,10 @@ datum/unit_test/landmark_check/start_test()
 
 	for(var/lm in landmarks_list)
 		var/obj/effect/landmark/landmark = lm
-		if(landmark.tag == "landmark*safe_turf")
+		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
 			log_debug("Safe landmark found: [log_info_line(landmark)]")
 			safe_landmarks++
-		else if(landmark.tag == "landmark*space_turf")
+		else if(istype(landmark, /obj/effect/landmark/test/space_turf))
 			log_debug("Space landmark found: [log_info_line(landmark)]")
 			space_landmarks++
 		else if(istype(landmark, /obj/effect/landmark/test))
