@@ -136,8 +136,9 @@
 		qdel(src)
 
 // Copypaste due to eye code, RIP.
-/obj/item/organ/external/head/no_eyes/dion
+/obj/item/organ/external/head/no_eyes/diona
 	can_intake_reagents = 0
+	cannot_break = 1
 	max_damage = 50
 	min_broken_damage = 25
 

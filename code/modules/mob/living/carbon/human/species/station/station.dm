@@ -214,6 +214,7 @@
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
+	hunger_factor = 3
 
 	min_age = 1
 	max_age = 300
@@ -250,7 +251,8 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_split_nymph
+		/mob/living/carbon/human/proc/diona_split_nymph,
+		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
 	warning_low_pressure = 50
