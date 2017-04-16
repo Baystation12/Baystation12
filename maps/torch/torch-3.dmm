@@ -260,7 +260,7 @@
 "eZ" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftstarboard)
 "fa" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 6},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "fb" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/obj/structure/grille,/obj/structure/window/phoronreinforced/full,/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (EAST)"; icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (NORTH)"; icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced{tag = "icon-phoronrwindow (WEST)"; icon_state = "phoronrwindow"; dir = 8},/turf/simulated/floor/plating,/area/engineering/engine_room)
-"fc" = (/obj/machinery/atmospherics/unary/engine{dir = 8},/turf/simulated/floor/reinforced{name = "engine floor"; oxygen = 0},/area/engineering/engine_room)
+"fc" = (/obj/machinery/atmospherics/unary/engine{dir = 8},/turf/simulated/floor/reinforced/airless,/area/engineering/engine_room)
 "fd" = (/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
 "fe" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
 "ff" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/turf/simulated/floor/plating,/area/vacant/chapel)
@@ -752,7 +752,7 @@
 "oB" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/engineering/engine_room)
 "oC" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{dir = 8},/obj/machinery/meter,/obj/effect/floor_decal/industrial/warning{dir = 6},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "oD" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/obj/machinery/door/airlock/hatch{icon_state = "door_locked"; id_tag = "engine_access_hatch"; locked = 1; req_access = list(11)},/turf/simulated/floor/reinforced,/area/engineering/engine_room)
-"oG" = (/obj/machinery/atmospherics/pipe/zpipe/up/fuel{dir = 8},/obj/structure/lattice,/turf/simulated/open,/area/space)
+"oG" = (/turf/simulated/open,/obj/machinery/atmospherics/pipe/zpipe/up/fuel{dir = 8},/obj/structure/lattice,/turf/simulated/open{nitrogen = 0; oxygen = 0},/area/space)
 "oH" = (/obj/structure/sign/warning/vent_port,/turf/simulated/wall/r_wall,/area/space)
 "oI" = (/obj/machinery/door/firedoor/border_only,/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/vacant/cannon)
 "oJ" = (/obj/structure/artilleryplaceholder{tag = "icon-12"; icon_state = "12"},/turf/simulated/floor/plating,/area/vacant/cannon)
@@ -828,7 +828,7 @@
 "qb" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/valve/digital{name = "TEG bypass valve"},/turf/simulated/floor/plating,/area/engineering/engine_room)
 "qc" = (/obj/machinery/door/blast/regular{dir = 4; id = "SupermatterPort"; name = "Reactor Blast Door"},/obj/effect/wingrille_spawn/reinforced_phoron,/turf/simulated/floor/reinforced,/area/engineering/engine_room)
 "qd" = (/obj/machinery/atmospherics/pipe/manifold/visible/fuel{dir = 1},/turf/simulated/floor/reinforced/airless,/area/space)
-"qf" = (/obj/machinery/atmospherics/pipe/zpipe/down/fuel{dir = 1},/obj/structure/lattice,/turf/simulated/open,/area/space)
+"qf" = (/turf/simulated/open,/obj/machinery/atmospherics/pipe/zpipe/down/fuel{dir = 1},/obj/structure/lattice,/turf/simulated/open{nitrogen = 0; oxygen = 0},/area/space)
 "qg" = (/obj/machinery/door/blast/regular{icon_state = "pdoor1"; id = "EngineVent"; name = "Reactor Vent"; p_open = 0},/obj/machinery/atmospherics/pipe/simple/visible/black,/obj/machinery/shield_diffuser,/turf/simulated/floor/reinforced,/area/engineering/engine_room)
 "qh" = (/obj/machinery/door/firedoor/border_only,/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/vacant/cannon)
 "qi" = (/obj/structure/artilleryplaceholder{tag = "icon-24"; icon_state = "24"},/turf/simulated/floor/plating,/area/vacant/cannon)
@@ -1562,7 +1562,7 @@
 "Ev" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor/tiled/dark,/area/maintenance/seconddeck/aftport)
 "Ew" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/obj/machinery/door/airlock/maintenance{req_access = list(12)},/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftport)
 "Ex" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftport)
-"Ey" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/access_button{command = "cycle_exterior"; frequency = 1379; master_tag = "solar_port_airlock"; name = "exterior access button"; pixel_x = -24; pixel_y = 24; req_access = list(11,13)},/turf/simulated/floor/plating,/area/solar/port)
+"Ey" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/access_button{command = "cycle_exterior"; frequency = 1379; master_tag = "solar_port_airlock"; name = "exterior access button"; pixel_x = -24; pixel_y = 24; req_access = list(11,13)},/turf/simulated/floor/airless,/area/solar/port)
 "Ez" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftport)
 "EA" = (/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/machinery/power/solar{id = "auxsolarsport"; name = "Port Auxiliary Solar Array"},/obj/effect/floor_decal/solarpanel,/turf/simulated/floor/airless,/area/solar/port)
 "EB" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/solar/port)
@@ -1850,4 +1850,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
