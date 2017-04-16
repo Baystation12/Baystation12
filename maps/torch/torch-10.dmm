@@ -897,7 +897,7 @@
 "arm" = (/obj/item/device/flashlight/lantern,/turf/unsimulated/floor{icon_state = "asteroid"},/area/rescue_base/base)
 "arn" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/rescue_base/start)
 "aro" = (/obj/structure/closet{name = "Prisoner's Locker"},/obj/item/clothing/shoes/orange,/obj/item/clothing/under/color/orange,/obj/item/device/radio/intercom/specops{dir = 8; pixel_x = 22; pixel_y = 0},/turf/simulated/floor/shuttle/red,/area/rescue_base/start)
-"arp" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced/crescent{dir = 1},/turf/simulated/floor/plating,/area/rescue_base/start)
+"arp" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced/crescent{dir = 1},/turf/simulated/floor/airless,/area/rescue_base/start)
 "arq" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/spray/sterilizine,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/shuttle/white,/area/rescue_base/start)
 "arr" = (/obj/machinery/optable,/turf/simulated/floor/shuttle/white,/area/rescue_base/start)
 "ars" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "rescueinfirm"; name = "Blast Shutters"; opacity = 0},/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/rescue_base/start)

@@ -1022,7 +1022,7 @@
 "tI" = (/obj/structure/table/rack,/obj/random/solgov,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
 "tJ" = (/obj/structure/table/rack,/obj/random/solgov,/obj/random/solgov,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
 "tK" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/secure_closet/guncabinet/sidearm/small,/turf/simulated/floor/tiled,/area/aquila_hangar/start)
-"tL" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/floor/plating,/area/aquila_hangar/start)
+"tL" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/floor/airless,/area/aquila_hangar/start)
 "tM" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/antiviral,/obj/item/weapon/reagent_containers/syringe/antiviral,/obj/item/stack/medical/advanced/bruise_pack,/turf/simulated/floor/tiled/white,/area/aquila_hangar/start)
 "tN" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/aquila_hangar/start)
 "tO" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/aquila_hangar/start)
@@ -1059,7 +1059,7 @@
 "ut" = (/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/maintenance/bridge/aftport)
 "uu" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/plating,/area/maintenance/bridge/aftport)
 "uv" = (/obj/effect/floor_decal/industrial/warning/cee{tag = "icon-warningcee (NORTH)"; icon_state = "warningcee"; dir = 1},/turf/simulated/floor/reinforced/airless,/area/space)
-"uw" = (/obj/structure/shuttle/engine/propulsion{dir = 2},/turf/simulated/floor/plating,/area/aquila_hangar/start)
+"uw" = (/obj/structure/shuttle/engine/propulsion{dir = 2},/turf/simulated/floor/airless,/area/aquila_hangar/start)
 "ux" = (/obj/structure/closet/toolcloset,/obj/random/action_figure,/turf/simulated/floor/plating,/area/maintenance/bridge/foreport)
 "uy" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/bridge/foreport)
 "uz" = (/obj/structure/bed/chair{dir = 4},/obj/machinery/firealarm{dir = 8; pixel_x = -24; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/bridge)
@@ -1455,4 +1455,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 xPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
