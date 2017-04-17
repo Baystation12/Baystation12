@@ -342,7 +342,7 @@
 	return
 		
 /obj/item/projectile/proc/home(var/mob/target)
-	if(target)
+	if(target && (get_dist(src, target) <= smart))
 		targ_turf = get_step(targ_turf, target)
 		setup_trajectory(src.loc, targ_turf, xo, yo)
 		return 1
