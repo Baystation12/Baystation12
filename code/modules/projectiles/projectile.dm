@@ -8,7 +8,7 @@
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
-	var/smart = 0       //Attempt to home in on targets
+	var/smart = 0       //Attempt to home in on targets within this range
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
 	var/silenced = 0	//Attack message
@@ -325,7 +325,7 @@
 
 /obj/item/projectile/proc/before_move()
 	if(!smart)
-		return 0 //This projectile isn't smart enough to home in
+		return //This projectile isn't smart enough to home in
 
 	if(istype(locked_target))
 		home(locked_target)
@@ -333,10 +333,13 @@
 		locked_target = original
 		home(locked_target)
 	else
-		if(var/mob/living/L in view(src, smart))
+		for(var/mob/living/L in view(src, smart))
+			if((L == firer) || (!istype(L))
+				continue
 			locked_target = L
 			home(locked_target)
-	return 1
+			break
+	return
 		
 /obj/item/projectile/proc/home(var/mob/target)
 	if(target)
