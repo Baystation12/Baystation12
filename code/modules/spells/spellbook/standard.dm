@@ -25,7 +25,6 @@
 							/spell/targeted/ethereal_jaunt = 					1,
 							/spell/aoe_turf/knock = 							1,
 							/spell/noclothes = 									2,
-							/obj/item/weapon/gun/energy/staff = 				1,
 							/obj/item/weapon/gun/energy/staff/focus = 			1,
 							/obj/structure/closet/wizard/souls = 				1,
 							/obj/structure/closet/wizard/armor = 				1,

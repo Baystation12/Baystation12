@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscdel: "Staff of change has been removed from the wizard's arsenal."
