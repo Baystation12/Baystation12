@@ -334,7 +334,7 @@
 		home(locked_target)
 	else
 		for(var/mob/living/L in view(src, smart))
-			if((L == firer) || (!istype(L))
+			if((L == firer) || !istype(L))
 				continue
 			locked_target = L
 			home(locked_target)
