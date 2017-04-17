@@ -8,6 +8,7 @@
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
+	var/smart = 0       //Attempt to home in on targets
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
 	var/silenced = 0	//Attack message
@@ -18,6 +19,8 @@
 	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
+	var/turf/targ_turf = null // Where the projectile is currently headed
+	var/mob/living/locked_target = null // Target the projectile is currently locked onto. For smart bullets only.
 
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
@@ -132,6 +135,7 @@
 
 	original = target
 	def_zone = target_zone
+	targ_turf = get_turf(target)
 
 	spawn()
 		setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
@@ -320,6 +324,25 @@
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/before_move()
+	if(!smart)
+		return 0 //This projectile isn't smart enough to home in
+
+	if(istype(locked_target))
+		home(locked_target)
+	else if(istype(original, /mob/living))
+		locked_target = original
+		home(locked_target)
+	else
+		if(var/mob/living/L in view(src, smart))
+			locked_target = L
+			home(locked_target)
+	return 1
+		
+/obj/item/projectile/proc/home(var/mob/target)
+	if(target)
+		targ_turf = get_step(targ_turf, target)
+		setup_trajectory(src.loc, targ_turf, xo, yo)
+		return 1
 	return 0
 
 /obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)
