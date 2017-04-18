@@ -18,6 +18,9 @@
 
 	return
 
+/obj/effect/projectile/tracer
+	icon_state = "tracer"
+
 //----------------------------
 // Laser beam
 //----------------------------

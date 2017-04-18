@@ -109,6 +109,29 @@
 	ammo_type = /obj/item/ammo_casing/a10mm/emp
 	caliber = "10mm"
 
+/obj/item/ammo_magazine/box/smart
+	name = "ammunition box (.38 smart)"
+	icon_state = "smartbox"
+	origin_tech = list(TECH_COMBAT = 3)
+	max_ammo = 10
+	ammo_type = /obj/item/ammo_casing/c38/smart
+	caliber = ".38"
+
+/obj/item/ammo_magazine/box/smart/c45
+	name = "ammunition box (.45 smart)"
+	ammo_type = /obj/item/ammo_casing/c45/smart
+	caliber = ".45"
+
+/obj/item/ammo_magazine/box/smart/a10mm
+	name = "ammunition box (10mm smart)"
+	ammo_type = /obj/item/ammo_casing/a10mm/smart
+	caliber = "10mm"
+
+/obj/item/ammo_magazine/box/smart/c9mm
+	name = "ammunition box (9mm smart)"
+	ammo_type = /obj/item/ammo_casing/c9mm/smart
+	caliber = "9mm"
+
 /obj/item/ammo_magazine/mc9mmt
 	name = "top mounted magazine (9mm)"
 	icon_state = "9mmt"

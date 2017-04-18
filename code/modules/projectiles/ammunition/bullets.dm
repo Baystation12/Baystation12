@@ -24,6 +24,11 @@
 	icon_state = "r-casing"
 	spent_icon = "r-casing-spent"
 
+/obj/item/ammo_casing/c38/smart
+	projectile_type = /obj/item/projectile/bullet/pistol/smart
+	icon_state = "sm-casing"
+	spent_icon = "sm-casing-spent"
+
 /obj/item/ammo_casing/c9mm
 	desc = "A 9mm bullet casing."
 	caliber = "9mm"
@@ -38,6 +43,11 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 	icon_state = "r-casing"
 	spent_icon = "r-casing-spent"
+
+/obj/item/ammo_casing/c9mm/smart
+	projectile_type = /obj/item/projectile/bullet/pistol/smart
+	icon_state = "sm-casing"
+	spent_icon = "sm-casing-spent"
 
 /obj/item/ammo_casing/c9mm/practice
 	desc = "A 9mm practice bullet casing."
@@ -59,6 +69,11 @@
 	icon_state = "r-casing"
 	spent_icon = "r-casing-spent"
 
+/obj/item/ammo_casing/c45/smart
+	projectile_type = /obj/item/projectile/bullet/pistol/medium/smart
+	icon_state = "sm-casing"
+	spent_icon = "sm-casing-spent"
+
 /obj/item/ammo_casing/c45/flash
 	desc = "A .45 flash shell casing."
 	projectile_type = /obj/item/projectile/energy/flash
@@ -67,6 +82,11 @@
 	desc = "A 10mm bullet casing."
 	caliber = "10mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium/smg
+
+/obj/item/ammo_casing/a10mm/smart
+	projectile_type = /obj/item/projectile/bullet/pistol/medium/smg/smart
+	icon_state = "sm-casing"
+	spent_icon = "sm-casing-spent"
 
 
 /obj/item/ammo_casing/shotgun

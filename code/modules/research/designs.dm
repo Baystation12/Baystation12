@@ -592,6 +592,38 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/ammo_casing/shotgun/emp
 	sort_string = "TAACF"
 
+/datum/design/item/weapon/ammo_smart_38
+	id = "ammo_smart_38"
+	desc = "A .38 round with integrated target acquisition and guidance systems."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "gold" = 750)
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/smart
+	sort_string = "TAACG"
+
+/datum/design/item/weapon/ammo_smart_45
+	id = "ammo_smart_45"
+	desc = "A .45 round with integrated target acquisition and guidance systems."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "gold" = 750)
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/smart/c45
+	sort_string = "TAACH"
+
+/datum/design/item/weapon/ammo_smart_10
+	id = "ammo_smart_10"
+	desc = "A 10mm round with integrated target acquisition and guidance systems."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "gold" = 750)
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/smart/a10mm
+	sort_string = "TAACI"
+
+/datum/design/item/weapon/ammo_smart_9
+	id = "ammo_smart_9"
+	desc = "A 9mm round with integrated target acquisition and guidance systems."
+	materials = list(DEFAULT_WALL_MATERIAL = 2500, "gold" = 750)
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
+	build_path = /obj/item/ammo_magazine/box/smart/c9mm
+	sort_string = "TAACJ"
+
 /datum/design/item/weapon/chemsprayer
 	desc = "An advanced chem spraying device."
 	id = "chemsprayer"

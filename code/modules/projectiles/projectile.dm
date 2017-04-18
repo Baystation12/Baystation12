@@ -9,6 +9,7 @@
 	mouse_opacity = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/smart = 0       //Attempt to home in on targets within this range
+	var/smart_iter = 1
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
 	var/silenced = 0	//Attack message
@@ -340,9 +341,9 @@
 			home(locked_target)
 			break
 	return
-		
+
 /obj/item/projectile/proc/home(var/mob/target)
-	if(target && (get_dist(src, target) <= smart))
+	if(target && (get_dist(src, target) <= smart) && (targ_turf != get_turf(target)))
 		targ_turf = get_step(targ_turf, target)
 		setup_trajectory(src.loc, targ_turf, xo, yo)
 		return 1

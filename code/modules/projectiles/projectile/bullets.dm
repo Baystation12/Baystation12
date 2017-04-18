@@ -129,11 +129,22 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 20
 
+/obj/item/projectile/bullet/pistol/smart
+	damage = 15
+	smart = 4
+
 /obj/item/projectile/bullet/pistol/medium
 	damage = 25
 
+/obj/item/projectile/bullet/pistol/medium/smart
+	damage = 18.75
+	smart = 4
+
 /obj/item/projectile/bullet/pistol/medium/smg
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
+
+/obj/item/projectile/bullet/pistol/medium/smg/smart
+	smart = 3
 
 /obj/item/projectile/bullet/pistol/strong //revolvers and matebas
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
