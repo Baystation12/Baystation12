@@ -24,15 +24,13 @@
 				"bribe_accept"      = "Hm. It'll be good for the animals, so sure.",
 				)
 
-	possible_wanted_items = list(/mob/living/simple_animal/adultslime = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/corgi       = TRADER_THIS_TYPE,
+	possible_wanted_items = list(/mob/living/simple_animal/corgi      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/cat         = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/crab        = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/lizard      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/mouse       = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/mushroom    = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/parrot      = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/slime       = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/tindalos    = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/tomato      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/cow         = TRADER_THIS_TYPE,
@@ -46,15 +44,13 @@
 								/mob/living/simple_animal/hostile/retaliate/goat = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/hostile/carp = TRADER_THIS_TYPE)
 
-	possible_trading_items = list(/mob/living/simple_animal/adultslime = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/corgi       = TRADER_THIS_TYPE,
+	possible_trading_items = list(/mob/living/simple_animal/corgi     = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/cat         = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/crab        = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/lizard      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/mouse       = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/mushroom    = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/parrot      = TRADER_THIS_TYPE,
-								/mob/living/simple_animal/slime       = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/tindalos    = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/tomato      = TRADER_THIS_TYPE,
 								/mob/living/simple_animal/cow         = TRADER_THIS_TYPE,
