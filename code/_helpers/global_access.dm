@@ -167,6 +167,8 @@
 			return global.adminfaxes;
 		if("adminhelp_ignored_words")
 			return global.adminhelp_ignored_words;
+		if("adminhelp_repository")
+			return global.adminhelp_repository;
 		if("adminlog")
 			return global.adminlog;
 		if("admins")
@@ -1626,6 +1628,8 @@
 			global.adminfaxes=newval;
 		if("adminhelp_ignored_words")
 			global.adminhelp_ignored_words=newval;
+		if("adminhelp_repository")
+			global.adminhelp_repository=newval;
 		if("adminlog")
 			global.adminlog=newval;
 		if("admins")
@@ -3001,6 +3005,7 @@
 	"admin_verbs_spawn",
 	"adminfaxes",
 	"adminhelp_ignored_words",
+	"adminhelp_repository",
 	"adminlog",
 	"admins",
 	"ai_icons",

@@ -58,6 +58,51 @@
 		cmd_admin_pm(C,null)
 		return
 
+	if(href_list["ah_privmsg"])
+		var/datum/adminhelp/AH = locate(href_list["ah_privmsg"])
+		if(!AH)
+			return
+		if((!AH.archived) && AH.handler && AH.handler.ckey != usr.ckey)
+			var/choice = alert("Someone else ([AH.handler.key_name(FALSE, name=FALSE)]) has already taken this. Really reply?", "Really reply?", "Yes", "No", "Steal")
+			switch(choice)
+				if("Yes")
+					var/client/C = locate(AH.sender.ref)
+					if(!C)
+						C = client_by_ckey(AH.sender.ckey)
+					cmd_admin_pm(C,null)
+					return
+				if("No")
+					return
+				if("Steal")
+					AH.take(src)
+					var/client/C = locate(AH.sender.ref)
+					if(!C)
+						C = client_by_ckey(AH.sender.ckey)
+					cmd_admin_pm(C,null)
+		else if((!AH.archived) && (!AH.handler))
+			var/choice = alert("Nobody has yet taken this message. Also take it?", "Take?", "Yes", "No")
+			switch(choice)
+				if("Yes")
+					if(AH.handler) // in case it's been taken since then...
+						to_chat(src, "<span class='notice'>You've been pre-empted by [AH.handler.key_name(FALSE)]!</span>")
+						return
+					AH.take(src)
+					var/client/C = locate(AH.sender.ref)
+					if(!C)
+						C = client_by_ckey(AH.sender.ckey)
+					cmd_admin_pm(C,null)
+				if("No")
+					var/client/C = locate(AH.sender.ref)
+					if(!C)
+						C = client_by_ckey(AH.sender.ckey)
+					cmd_admin_pm(C,null)
+
+		else
+			var/client/C = locate(AH.sender.ref)
+			if(!C)
+				C = client_by_ckey(AH.sender.ckey)
+			cmd_admin_pm(C,null)
+
 	if(href_list["irc_msg"])
 		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
 			to_chat(usr, "<span class='warning'>You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you</span>")
@@ -186,6 +231,7 @@
 		admins -= src
 	directory -= ckey
 	clients -= src
+	adminhelp_repository.admin_disconnect(src)
 	return ..()
 
 

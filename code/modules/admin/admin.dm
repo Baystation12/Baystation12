@@ -1268,7 +1268,7 @@ var/global/floorIsLava = 0
 		return 1
 	return 0
 
-/proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1)
+/proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1, var/datum/adminhelp/AH)
 	if(!whom)
 		return "<b>(*null*)</b>"
 	var/mob/M
@@ -1281,6 +1281,11 @@ var/global/floorIsLava = 0
 		C = M.client
 	else
 		return "<b>(*not a mob*)</b>"
+
+	var/dest = null
+	if(link && AH)
+		dest = "?ah_privmsg=\ref[AH]"
+
 	switch(detail)
 		if(0)
 			return "<b>[key_name(C, link, name, highlight_special)]</b>"
@@ -1290,15 +1295,15 @@ var/global/floorIsLava = 0
 
 		if(2)	//Admins
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>) (<A HREF='?_src_=holder;take_question=\ref[M]'>TAKE</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special, dest)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>) (<A HREF='?_src_=holder;take_question=\ref[AH]'>TAKE</A>) (<A HREF='?_src_=holder;forward_question=\ref[AH]'>FWD</A>) (<A HREF='?_src_=holder;dismiss_question=\ref[AH]'>DISMISS</A>)</b>"
 
 		if(3)	//Devs
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;take_question=\ref[M]'>TAKE</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special, dest)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;take_question=\ref[AH]'>TAKE</A>) (<A HREF='?_src_=holder;forward_question=\ref[AH]'>FWD</A>) (<A HREF='?_src_=holder;dismiss_question=\ref[AH]'>DISMISS</A>)</b>"
 
 		if(4)	//Mentors
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;take_question=\ref[M]'>TAKE</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special, dest)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;take_question=\ref[AH]'>TAKE</A>) (<A HREF='?_src_=holder;forward_question=\ref[AH]'>FWD</A>) (<A HREF='?_src_=holder;dismiss_question=\ref[AH]'>DISMISS</A>)</b>"
 
 
 /proc/ishost(whom)

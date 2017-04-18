@@ -85,13 +85,14 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0)][ai_cl]:</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1)][ai_cl]:</b> [msg]</span>"
+	var/datum/adminhelp/AH = adminhelp_repository.store_new_adminhelp(client_repository.get_lite_client(mob), original_msg)
+	var/mentor_msg = "<span class='notice'><b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0, AH=AH)][ai_cl]:</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1, AH=AH)][ai_cl]:</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
 	for(var/client/X in admins)
-		if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
+		if(R_ADMINHELP & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
 			if(X.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))

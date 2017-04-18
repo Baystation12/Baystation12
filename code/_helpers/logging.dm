@@ -115,7 +115,7 @@
 	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
 //more or less a logging utility
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1, var/link_dest = null)
 	var/mob/M
 	var/client/C
 	var/key
@@ -145,7 +145,9 @@
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C]'>"
+			if(!link_dest)
+				link_dest = "?priv_msg=\ref[C]"
+			. += "<a href='[link_dest]'>"
 
 		. += key
 
