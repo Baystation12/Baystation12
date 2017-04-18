@@ -56,10 +56,13 @@
 
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
-	var/to_check = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+
 	#ifdef MULTIZAS
-	to_check += list(NORTHUP, EASTUP, WESTUP, SOUTHUP, NORTHDOWN, EASTDOWN, WESTDOWN, SOUTHDOWN)
+	var/to_check = cornerdirsz
+	#else
+	var/to_check = cornerdirs
 	#endif
+
 	for(var/dir in to_check)
 
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
@@ -76,9 +79,10 @@
 /turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
 	. = 0
 	if(istype(T) && T.zone)
-		var/to_check = cardinal.Copy()
 		#ifdef MULTIZAS
-		to_check += list(UP, DOWN)
+		var/to_check = cardinalz
+		#else
+		var/to_check = cardinal
 		#endif
 		for(var/dir in to_check)
 			var/turf/simulated/other = get_step(T, dir)
