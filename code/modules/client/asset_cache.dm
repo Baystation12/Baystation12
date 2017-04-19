@@ -128,6 +128,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	for(var/file in files)
 		if (!client)
 			break
+		client << "<span class='danger'>Downloading asset [file]...</span>"
 		if (register_asset)
 			register_asset(file,files[file])
 		send_asset(client,file)

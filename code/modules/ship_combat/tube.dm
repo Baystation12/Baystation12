@@ -8,10 +8,11 @@
 	power_channel = EQUIP
 	var/jammed = 0
 	var/charging = 0
-	var/obj/machinery/space_battle/computer/missile/computer
+	var/obj/machinery/space_battle/computer/targeting/missile/computer
 	var/obj/machinery/space_battle/tube_barrel/barrel
 	var/mob/to_kill // Muahaha
 	var/list/can_pass = list(/obj/structure/grille, /obj/machinery/shieldwall, /obj/machinery/space_battle/tube_barrel)
+	min_broken = 4
 
 	Destroy()
 		if(computer)
@@ -107,12 +108,11 @@
 			M.power *= (1+(rails.len*0.02))
 		var/obj/effect/overmap/target = map_sectors["[start.z]"]
 		if(target.shielding)
-			var/obj/effect/adv_shield/shield = pick(target.shielding.shields)
-			if(shield && shield.take_damage(M.damage * 0.4))
-				to_return = M.fire_missile(location, start)
-			else
+			if(target.shielding && target.shielding.take_damage(M.damage, PHYSICAL))
 				qdel(M)
 				to_return = "Missile intercepted by shields!"
+			else
+				to_return = M.fire_missile(location, start)
 		else
 			to_return = M.fire_missile(location, start)
 		use_power(3000)
@@ -120,7 +120,7 @@
 			if(computer.firing_angle == "Flanking")
 				if(prob(10*efficiency))
 					jammed()
-			if(computer.firing_angle == "Rapid Fire")
+			else if(computer.firing_angle == "Rapid Fire")
 				if(prob(30*efficiency))
 					jammed()
 			else if(prob(5*efficiency))
@@ -138,19 +138,15 @@
 						var/mob/living/carbon/human/H = A
 						H.apply_damage(rand(20,80), BRUTE, null, 0, 0, 0, "Heavy Impact")
 			if(istype(A, /obj))
-				var/obj/item/weapon/throw_holder = new (get_turf(start))
-				throw_holder.name = A.name
-				throw_holder.icon = A.icon
-				throw_holder.icon_state = A.icon_state
-				qdel(A)
-				step_towards(throw_holder, location)
+				A.forceMove(get_turf(start))
+				step_towards(A, location)
 				spawn(0)
-				throw_holder.throw_at(location, 150, 25, src)
+				A.throw_at(location, 150, 25, src)
 			junk_count++
 		if(!junk_count)
-			return "ERROR: No missile found!"
+			to_return = "ERROR: No missile found!"
 		else
-			return 1
+			to_return = 1
 	var/turf/T = get_turf(src)
 	var/datum/gas_mixture/env = T.return_air()
 	if(env && env.return_pressure())
@@ -169,14 +165,7 @@
 		for(var/obj/machinery/space_battle/tube_barrel/B in rails)
 			B.fired()
 			sleep(1)
-	spawn(5)
-		return to_return
-
-/obj/item/weapon/throw_holder
-
-	throw_impact()
-		explosion(src, 0, 0, 1, 2)
-		qdel(src)
+	return to_return
 
 /obj/machinery/space_battle/tube/attackby(var/obj/item/O, var/mob/user)
 	var/efficiency = get_efficiency(-1,1)

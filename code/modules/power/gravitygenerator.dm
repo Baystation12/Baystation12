@@ -12,22 +12,12 @@
 
 	New()
 		..()
-		spawn(30)
+		spawn(50)
+			if(!gravity_generator) return
+			gravity_generator.on = 1
 			if(gravity_generator.on)
 				gravity_generator.on = 0
-
 				for(var/area/A in gravity_generator.localareas)
-					var/obj/machinery/gravity_generator/G
-					for(G in machines)
-						if((A in G.localareas) && (G.on))
-							break
-					if(!G)
-						A.gravitychange(0,A)
-
-
-			else
-				for(var/area/A in gravity_generator.localareas)
-					gravity_generator.on = 1
 					A.gravitychange(1,A)
 
 

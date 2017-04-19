@@ -136,7 +136,7 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					if(english_only)
 						newletter += "*"
 					else
-						newletter = pick("ø", "Ð", "%", "æ", "µ")
+						newletter = pick("ø", "Ð", "%", "µ")
 				distortion += 0.5 * distortion_speed
 			else if(prob(0.75 * distortion)) // Incomprehensible
 				newletter = pick("<", ">", "!", "$", "%", "^", "&", "*", "~", "#")
@@ -148,20 +148,37 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					newletter = "srgt%$hjc< -BZZT-"
 				new_message += newletter
 				break
-			else if(prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
+			else if(prob(3 * distortion)) // Sound distortion. Still recognisable, mostly.
 				switch(lowertext(newletter))
 					if("s")
 						newletter = "$"
+					if("o")
+						if(!english_only)
+							newletter = "¤"
 					if("e")
-						newletter = "€"
+						if(!english_only)
+							newletter = "€"
+					if("a")
+						newletter = "@"
 					if("w")
-						newletter = "ø"
+						if(!english_only)
+							newletter = "ø"
 					if("y")
-						newletter = "¡"
+						if(!english_only)
+							newletter = "¡"
 					if("x")
-						newletter = "æ"
+						if(english_only || prob(50))
+							newletter = "cs"
+						else
+							newletter = "æ"
 					if("u")
-						newletter = "µ"
+						if(english_only || prob(50))
+							newletter = "oo"
+						else
+							newletter = "µ"
+					if("p")
+						if(!english_only)
+							newletter = "þ"
 		else
 			if(prob(0.2 * distortion))
 				newletter = " *crackle* "

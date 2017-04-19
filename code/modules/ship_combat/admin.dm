@@ -9,6 +9,7 @@
 #define SPACE_COMMAND 7
 #define SPACE_TUBES 8
 #define SPACE_COMMON 9
+/obj/var/can_pull = 1
 
 proc/is_space(var/turf/T)
 	if(istype(T, /turf/space))

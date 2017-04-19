@@ -7,6 +7,7 @@
 	var/obj/item/weapon/card/id/selected_id
 	var/list/new_access = list()
 	var/locked = 1
+	var/printing_new = 0
 
 /obj/machinery/space_battle/identification_computer/New()
 	var/area/ship_battle/A = get_area(src)
@@ -81,6 +82,10 @@
 		selected_id.visible_message("<span class='notice'>\The [selected_id] beeps, \"Access Modification applied!\"</span>")
 		selected_id.access |= new_access
 		new_access.Cut()
+		if(printing_new)
+			selected_id.forceMove(get_turf(src))
+			printing_new = 0
+		selected_id = null
 	if(href_list["mob"])
 		var/mob_name = href_list["mob"]
 		for(var/mob/living/carbon/human/H in team_members)
@@ -99,6 +104,13 @@
 			if(N in new_access)
 				new_access -= N
 			else new_access += N
+	if(href_list["newid"])
+		printing_new = 1
+		if(selected_id)
+			usr << "<span class='warning'>There is already an ID in the machine!</span>"
+			return 1
+		var/obj/item/weapon/card/id/space_battle/I = new(src)
+		selected_id = I
 	src.add_fingerprint(usr)
 	nanomanager.update_uis(src)
 

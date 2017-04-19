@@ -51,7 +51,8 @@ var/global/missile_starts = list()
 	icon = 'icons/obj/missile.dmi'
 	icon_state = "light"
 
-	w_class = 20
+	w_class = 100
+	can_pull = 0
 	density = 0
 
 	var/list/grabs = list()

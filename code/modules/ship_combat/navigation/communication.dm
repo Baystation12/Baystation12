@@ -8,7 +8,7 @@
 	var/list/logs = list()
 	var/ui_state = "home"
 	var/new_message = 0
-	var/transponder = OFF
+	var/transponder = ON
 
 
 	var/obj/machinery/space_battle/missile_sensor/dish/sensor
@@ -35,7 +35,7 @@
 	return ..()
 
 /obj/machinery/space_battle/computer/communication/reconnect()
-	if(!linked) return
+	..()
 	communications.Cut()
 	for(var/obj/machinery/space_battle/computer/communication/C in world)
 		if(C.z != src.z && C.transponder == ON)
@@ -111,7 +111,7 @@
 			if(them && us)
 				var/msg = input(usr, "What message would you like to send?", "Message")
 				if(msg)
-					msg = RadioChat(msg, rand(80,100), transponder ? 1.5*get_efficiency(-1, 1) : 3*get_efficiency(-1,1), 1)
+					msg = RadioChat(usr, msg, (100 - get_efficiency(1,1)), (transponder ? get_efficiency(-1, 1) : 3*get_efficiency(-1,1)), get_dist(them, us), 1)
 					console.logs += "<font color='#006600'>RECEIVED MESSAGE < \[[stationtime2text()]\] [transponder ? "[us.name]" : "[RadioChat("Unknown", 100, 100, 1)]"] - \"[msg]\"</font>"
 					src.logs += "<font color='#800000'><i>SENT MESSAGE > \[[stationtime2text()]\] [them.name] - \"[msg]\"</i></font>"
 					console.visible_message("<span class='notice'>\icon[console.icon_state] \The [console] beeps, \"Message received!\"</span>")

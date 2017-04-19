@@ -16,143 +16,72 @@
 		</div>
 		<div class='item'>
 			<div class='itemLabel'>
-				<span class='average'>Available Power:</span>
+				<span class='average'>Power Draw:</span>
 			</div>	
-			<div style="float:left">
-				{{if data.online}}
-					<span class="good">{{:data.input}}w</span>
-				{{else}}
-					<span class="bad">{{:data.input}}w</span>
-				{{/if}}	
+			<div class='itemContent'>
+				<span class="average">{{:data.power_use}}</span>
 			</div>
 		</div>
 		<div class='item'>
 			<div class='itemLabel'>
-				<span class='average'>Feedback Status:</span>
-			</div>
+				<span class='average'>Power Avail:</span>
+			</div>	
 			<div class='itemContent'>
-				{{if data.feedback < 75}}
-					{{:helper.displayBar(data.feedback, 0, data.max_feedback, 'good')}}
-					<span class="average">{{:data.feedback}}f/{{:data.max_feedback}}f</span>
-				{{else}}
-					<div class='notice'>
-						{{:helper.displayBar(data.feedback, 0, data.max_feedback, 'bad')}}
-						<span class="bad">{{:data.feedback}}f/{{:data.max_feedback}}f</span>
-					</div>	
-				{{/if}}	
-			</div>
-		</div>
-		<div class='item'>
-			<div class='itemLabel'>
-				<span class='average'>Generation Speed:</span>
-			</div>
-			<div class='itemContent'>
-				{{:helper.displayBar(data.generation_speed, 0, data.max_generation_speed, 'good')}}
-				{{:helper.link('Modify', 'wrench', {'fps' : 1})}}
+				<span class="good">{{:data.input}}w</span>
 			</div>
 		</div>		
 		<div class='item'>
 			<div class='itemLabel'>
-				<span class='average'>Flux Satus:</span>
+				<span class='average'>Shields Maintained:</span>
 			</div>
-			<div style="float:left">
-				{{if data.static}}
-					{{:helper.link('MAINTAINING', 'power', {'static' : 1})}}
-				{{else}}
-					{{:helper.link('GENERATING', 'power', {'static' : 1})}}
-				{{/if}}
-			</div>	
+			<div class='itemContent'>
+				{{:helper.displayBar(data.shields_maintained, 0, data.total_shields, 'good')}}
+				<span class="average">{{:data.shields_maintained}}/{{:data.total_shields}}f</span>
+				{{:helper.link('Modify', 'wrench', {'shields_maint' : 1})}}
+			</div>
 		</div>
-	</div>
-</div>
-<div style="float">
-	<h3>Shield Status</h3> 
-	<div class='block'>	
 		<div class='item'>
 			<div class='itemLabel'>
 				<span class='average'>Shield Health:</span>
 			</div>
 			<div class='itemContent'>
-				{{:helper.displayBar(data.damage_count, 0, data.shield_count, 'good')}}
-				<span class="average">{{:data.damage_count}}/{{:data.shield_count}} shields active</span>
+				{{:helper.displayBar(data.active_shields, 0, data.shields_maintained, 'bad')}}
+				<span class="average">{{:data.active_shields}}/{{:data.shields_maintained}}</span>
 			</div>
-		</div>
-		<div class='item'>
-			<div class='itemLabel'>
-				<span class='average'>Shield Flux Rate:</span>
-			</div>
-			<div class='itemContent'>
-				{{:helper.displayBar(data.shield_flux, 0, data.flux_max, 'good')}}
-				<span class="average">{{:data.shield_flux}}/{{:data.flux_max}} shield flux rate.</span>
-			</div>
-			{{:helper.link('Change Shield Rate', 'wrench', {'shield_rate' : 1})}}
-		</div>
-		<div class='item'>
-			<div class='itemLabel'>
-				<span class='average'>Number of Shields Maintained:</span>
-			</div>
-			<div class='itemContent'>
-				{{:helper.displayBar(data.maintaining, 0, data.shield_count, 'average')}}
-				<span class="average">{{:data.maintaining}}/{{:data.shield_count}} shields maintained.</span>
-			</div>
-			{{:helper.link('Change Number', 'wrench', {'maintaining' : 1})}}
 		</div>		
-		<div class='item'>
-			<div class='itemLabel'>
-				<span class='average'>Shield Flux Capacity:</span>
-			</div>
-			<div class='itemContent'>
-				{{:helper.displayBar(data.shield_max_flux, 0, 100, 'good')}}
-				<span class="average">{{:data.shield_max_flux}}/100 shield flux storage</span>
-			</div>
-			{{:helper.link('Change Shield Capacity', 'wrench', {'shield_capacity' : 1})}}
-		</div>			
 	</div>
-</div>	
+</div>
+<br><hr><br>
 <div style="float">
-	<h3>Flux Status:</h3> 
-	<div class='block'>	
+	<h3>Settings</h3> 
+	<div class='block'>
 		<div class='item'>
 			<div class='itemLabel'>
-				<span class='average'>Stored Flux:</span>
+				<span class='average'>Flux Frequency:</span>
 			</div>
 			<div class='itemContent'>
-				{{:helper.displayBar(data.flux_capacity, 0, data.max_flux_capacity, 'good')}}
-				<span class="average">{{:data.flux_capacity}}/{{:data.max_flux_capacity}} flux stored.</span>
+				{{:helper.displayBar(data.flux_frequency, 0, 10, 'good')}}
+				{{:helper.link('Modify', 'wrench', {'freq' : 1})}}
 			</div>
-			{{:helper.link('Change Capacity', 'wrench', {'capacity' : 1})}}
 		</div>	
 		<div class='item'>
 			<div class='itemLabel'>
 				<span class='average'>Flux Rate:</span>
 			</div>
 			<div class='itemContent'>
-				{{:helper.displayBar(data.flux_current, 0, data.flux_max, 'bad')}}
-				<span class="average">{{:data.flux_current}} flux per second</span>
+				{{:helper.displayBar(data.flux_rate, 0, 10, 'bad')}}
+				{{:helper.link('Modify', 'wrench', {'rate' : 1})}}
 			</div>
-		</div>
+		</div>			
 		<div class='item'>
 			<div class='itemLabel'>
-				<span class='average'>Optimal Flux Rate:</span>
+				<span class='average'>{{:helper.link('Flux Allocation:', 'cross', {'allocation' : 1})}}</span>
 			</div>
-			<div class='itemContent'>
-				{{:helper.displayBar(data.flux_optimal, 0, data.flux_max, 'good')}}
-				<span class="average">{{:data.flux_optimal}}/{{:data.flux_max}} flux per second</span>
-			</div>
+			<div style="float:left">
+				{{:data.flux_allocation}}
+			</div>	
 		</div>
-		<div class='item'>
-			<div class='itemLabel'>
-				<span class='average'>Power Usage:</span>
-			</div>
-			<div class='itemContent'>
-				{{:helper.displayBar(data.flux_cost, 0, data.input, 'bad')}}
-				<span class="average">{{:data.flux_cost}}/{{:data.input}}w</span>
-			</div>
-		</div>		
 	</div>
 </div>
-
-	
-			
-	
+		
 	

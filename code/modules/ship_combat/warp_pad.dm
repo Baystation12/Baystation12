@@ -71,7 +71,7 @@
 			src.visible_message("<span class='notice'>\The [user] sets \the [src]'s destination to: [A ? A.name : src.name]!</span>")
 
 	Crossed(atom/movable/A as mob|obj)
-		..()
+//		..()
 		if(teleporting) return
 		var/mob/living/carbon/human/H
 		if(istype(A, /mob/living/carbon/human))
@@ -81,7 +81,7 @@
 			return
 		else if(istype(A, /mob/missile_eye))
 			return
-		else if(!stat & (BROKEN|NOPOWER))
+		if(!stat & (BROKEN|NOPOWER))
 			var/turf/T = src.loc
 			var/obj/structure/cable/C = T.get_cable_node()
 			var/datum/powernet/powernet
@@ -104,6 +104,7 @@
 								else
 									spawn(max(20, (cost / 100) * passed))
 										teleport(A)
+								return 1
 							else if(H)
 								H << "<span class='warning'>\The [src] buzzes, \"Insufficient power!\"</span>"
 						else if(H)
@@ -114,6 +115,7 @@
 					H << "<span class='warning'>\The [src] buzzes, \"No destination!\"</span>"
 			else if(H)
 				H << "<span class='warning'>\The [src] buzzes, \"No connected power cables!\"</span>"
+		return 0
 
 	proc/teleport(var/atom/teleported as obj|mob, var/forced = 0)
 		if(!forced)

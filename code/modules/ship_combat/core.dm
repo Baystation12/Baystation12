@@ -43,7 +43,7 @@
 				if(istype(M, /obj/machinery/space_battle))
 					qdel(M)
 		start = null
-		for(var/obj/machinery/space_battle/computer/missile/computer in world)
+		for(var/obj/machinery/space_battle/computer/targeting/computer in world)
 			computer.find_targets()
 		return ..()
 
@@ -151,9 +151,6 @@
 				break_machine(rand(1,8))
 			if(1)
 				break_machine(rand(0,4))
-
-	emp_act(severity)
-		break_machine(rand(severity,severity*2), 0)
 
 	bullet_act(var/obj/item/projectile/bullet/P)
 		if(prob(50))

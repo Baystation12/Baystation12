@@ -97,6 +97,8 @@
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
 	power_rating = 30000	//15 kW ~ 20 HP
+	use_power = 1
+	icon_state = "map_vent_in"
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/New()
 	..()

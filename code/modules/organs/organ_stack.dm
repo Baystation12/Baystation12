@@ -3,6 +3,11 @@
 	sleep(10)
 	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
 	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>")
+	spawn(50)
+		for(var/obj/machinery/computer/cloning/C in world)
+			var/area/ship_battle/A = get_area(C)
+			if(A.team && A. == get_team())
+				C.scan_mob(src)
 
 /mob/living/carbon/human/proc/get_team()
 	var/obj/item/organ/internal/stack/stack = internal_organs_by_name[BP_STACK]

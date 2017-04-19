@@ -25,7 +25,7 @@
 
 /obj/effect/overmap/ship/initialize()
 	..()
-	for(var/obj/machinery/space_battle/computer/missile/M in world)
+	for(var/obj/machinery/space_battle/computer/targeting/M in world)
 		if (M.z in map_z)
 			fire_controls.Add(M)
 	for(var/obj/machinery/space_battle/computer/engine_control/E in machines)
@@ -82,7 +82,7 @@
 			if(S && istype(S))
 				for(var/obj/machinery/space_battle/computer/engine_control/E in eng_controls)
 					E.stopped()
-				for(var/obj/machinery/space_battle/computer/missile/M in fire_controls)
+				for(var/obj/machinery/space_battle/computer/targeting/M in fire_controls)
 					M.find_targets()
 	else
 		toggle_move_stars(map_z, fore_dir)

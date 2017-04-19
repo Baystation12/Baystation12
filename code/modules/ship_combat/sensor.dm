@@ -100,13 +100,10 @@
 	examine(var/mob/user)
 		..()
 		if(use_power == 1)
-			usr << "<span class='warning'>It's disabled!</span>"
+			usr << "<span class='warning'>It's turned off!</span>"
 
 	emp_act(var/severity = 0)
-		if(severity)
-			if(prob(100/severity))
-				toggle_active()
-		..()
+		toggle_active()
 
 	reconnect()
 		if(!linked)
@@ -127,10 +124,8 @@
 	proc/toggle_active()
 		if(use_power == 1)
 			use_power = 2
-			linked.em_signature += 1
 		else
 			use_power = 1
-			linked.em_signature -= 1
 
 	attackby(var/obj/item/O, var/mob/user)
 		if(!stat & (BROKEN|NOPOWER))
@@ -288,7 +283,7 @@
 	var/obj/machinery/space_battle/missile_sensor/ship_sensor/sensor
 
 	var/list/radars = list()
-	var/obj/machinery/space_battle/computer/missile/computer
+	var/obj/machinery/space_battle/computer/targeting/computer
 
 /obj/machinery/space_battle/missile_sensor/hub/Destroy()
 	guidance = null
@@ -307,7 +302,7 @@
 	linked = map_sectors["[z]"]
 	if(!linked) return
 	for(var/C in linked.fire_controls)
-		var/obj/machinery/space_battle/computer/missile/F = C
+		var/obj/machinery/space_battle/computer/targeting/F = C
 		if(F.id_tag == src.id_tag)
 			F.sensor = src
 			computer = F

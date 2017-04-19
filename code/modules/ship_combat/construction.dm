@@ -17,7 +17,7 @@
 /obj/item/weapon/circuitboard/space_battle/missile_computer
 	name = T_BOARD("missile targetting computer")
 
-	build_path = /obj/machinery/space_battle/computer/missile
+	build_path = /obj/machinery/space_battle/computer/targeting
 
 	req_components = list(/obj/item/stack/cable_coil = 10,
 						  /obj/item/weapon/stock_parts/capacitor = 2,

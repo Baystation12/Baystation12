@@ -31,8 +31,10 @@ var/list/sector_shuttles = list()
 		var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
 		shuttle.area_offsite = A
 		destination = map_sectors["[A.z]"]
+		world << "<span class='notice'>Destination succeeded! [A] : [shuttle_tag]</span>"
 	else
 		destination = null
+		world << "<span class='notice'>Destination failed! [A] : [shuttle_tag]</span>"
 
 //Gets all sectors with landing zones in shuttle's range
 /obj/machinery/computer/shuttle_control/explore/proc/get_possible_destinations()
@@ -66,9 +68,11 @@ var/list/sector_shuttles = list()
 	//If we are already there, or can't reach place anymore, reset destination
 	if(!shuttle.location && !check_destination())
 		destination = null
-
+		world << "<span class='notice'>Destination failed 1! [shuttle_tag]</span>"
 	//check if shuttle can fly at all
 	var/can_go = !isnull(destination)
+	if(!can_go)
+		world << "<span class='notice'>Destination failed 2! [shuttle_tag]</span>"
 
 	var/current_destination = destination && shuttle.area_offsite ? "[destination.name] - [shuttle.area_offsite.name]" : "None"
 	//disable picking locations if there are none, or shuttle is already off-site

@@ -20,7 +20,7 @@
 /obj/machinery/space_battle/computer/update_icon()
 	update_screen()
 
-/obj/machinery/space_battle/computer/missile
+/obj/machinery/space_battle/computer/targeting
 	name = "fire control computer"
 	desc = "A fire control computer."
 
@@ -31,10 +31,7 @@
 	idle_power_usage = 600
 	use_power = 1
 
-	var/obj/machinery/space_battle/tube/tube
 	var/obj/machinery/space_battle/missile_sensor/hub/sensor
-
-	var/obj/machinery/space_battle/deck_gun/gun
 
 	var/mob/missile_eye/eye
 	var/mob/living/carbon/human/eye_owner
@@ -49,22 +46,34 @@
 	var/y_offset = 0
 	var/x_offset = 0
 
+	update_screen()
+		overlays.Cut()
+		if(!stat & (BROKEN|NOPOWER))
+			if(cooldown > world.timeofday)
+				overlays += image(icon, "recalibrated", overlay_layer)
+				if(eye)
+					eye << "<span class='notice'>Sensors recalibrated!</span>"
+			else
+				overlays += image(icon,screen_icon, overlay_layer)
+		else if(stat & BROKEN)
+			overlays += image(icon,"computer_broken", overlay_layer)
+
 	Destroy()
 		if(eye)
 			eye.return_to_owner()
 			eye = null
 		eye_owner = null
 		forced_by = null
-		gun = null
+//		gun = null
 		sensor = null
-		tube = null
+//		tube = null
 		processing_objects.Remove(src)
 		return ..()
 
-	hear_talk(mob/M as mob, text)
-		if(eye)
-			eye << "<span class='notice'>You hear something about...\"[text]\""
-		..()
+//	hear_talk(mob/M as mob, text)
+//		if(eye)
+//			eye << "<span class='notice'>You hear something about...\"[text]\""
+//		..()
 
 	show_message(msg, type, alt, alt_type)
 		if(eye)
@@ -94,15 +103,15 @@
 			team = A.team
 		var/num = 0
 		for(var/S in linked.fire_controls)
-			var/obj/machinery/space_battle/computer/missile/C = S
+			var/obj/machinery/space_battle/computer/targeting/C = S
 			if(C.z == src.z)
 				num++
 				if(C == src)
 					break
 		id_num = "[team]-#[num]"
 		name = "[initial(name)]([id_num])"
-		if(tube)
-			tube.rename()
+//		if(tube)
+//			tube.rename()
 		if(sensor)
 			sensor.rename(id_num)
 
@@ -148,25 +157,20 @@
 	reconnect()
 		if(!linked)
 			linked = map_sectors["[z]"]
-		for(var/obj/machinery/space_battle/tube/T in world)
-			if(T.id_tag == id_tag && T.z == src.z)
-				tube = T
-				T.computer = src
-				break
 		for(var/M in linked.fire_sensors)
 			var/obj/machinery/space_battle/missile_sensor/hub/S = M
 			if(S && istype(S) && S.id_tag == id_tag)
 				sensor = S
 				S.computer = src
 				break
-		if(!tube)
-			for(var/obj/machinery/space_battle/deck_gun/G in world)
-				if(G.id_tag == src.id_tag)
-					gun = G
-					break
 		rename()
 		return
 
+	proc/check_fire(var/mob/user)
+		return 1
+
+	proc/fire_at(var/atom/A, params)
+		return 1
 
 	attack_hand(var/mob/user, var/forced = 0)
 		var/additional_time = 0
@@ -192,63 +196,21 @@
 			if(!sensor)
 				user << "<span class='warning'>There are no connected sensors!</span>"
 				return
-		if(!tube)
-			for(var/obj/machinery/space_battle/tube/T in world)
-				if(T.id_tag == src.id_tag)
-					tube = T
-					break
-		else if(!gun)
-			for(var/obj/machinery/space_battle/deck_gun/D in world)
-				if(D.id_tag == src.id_tag)
-					gun = D
-					break
-		if(!tube && !gun)
-			user << "<span class='warning'>There is no weapon connected to this device!</span>"
-			return
+		if(!check_fire(usr))
+			return 0
 		var/list/choices = list()
 		for(var/obj/S in starts)
 			choices.Add(list("[S.name]" = S))
 		var/choice = input(user, "Which ship would you like to view?", "Targetting") in choices
 		var/obj/missile_start/start = choices[choice]
 		if(!start || !istype(start))
-			if(istype(start, /datum/fake_ship))
-				var/datum/fake_ship/fake_ship = start
-				var/obj/machinery/missile/loaded = locate() in get_turf(tube)
-				if(loaded && istype(loaded))
-					fake_ship.damaged(loaded.damage)
-					var/list/R = sensor.has_radars()
-					var/radar = 0
-					for(var/obj/machinery/space_battle/missile_sensor/radar/M in R)
-						if(M.can_sense())
-							radar += M.get_efficiency(1,1,1)
-						else
-							user << "<span class='danger'>NOTICE: [M.name] inactive: [M.can_sense()]!</span>"
-					radar = max(1, radar)
-					var/wait_time = MISSILE_COOLDOWN
-					switch(tube.dir)
-						if(8)
-							wait_time *= 1.75
-						if(1 to 2)
-							wait_time *= 1.25
-					wait_time = max(50, wait_time / radar)
-					if(loaded && istype(loaded))
-						wait_time += loaded.delay_time
-					wait_time = cooldown(wait_time)
-					user << "<span class='notice'>Sensors are now calibrating. Please wait [(wait_time / 10)] seconds.</span>"
-					qdel(loaded)
-					return
-			user << "<span class='warning'>Invalid sensor target!</span>"
-			return
-
+			return 0
 		var/mob/missile_eye/M = new()
 
 
 		var/can_guide = sensor.has_guidance()
-		if(tube)
-			if(can_guide == 1)
-				M.guidance = 1
-			else
-				user << "<span class='danger'>CAUTION: Missile guidance offline! Fire pattern unpredictable: [can_guide]</span>"
+		if(can_guide == 1)
+			M.guidance = 1
 		var/advguidance = sensor.has_advguidance()
 		if(sensor.advguidance)
 			if(advguidance == 1)
@@ -303,17 +265,6 @@
 		if(cooldown >= world.timeofday)
 			user << "<span class='warning'>Sensors are recalibrating! [time_remaining()] seconds left!</span>"
 
-		if(tube)
-			var/obj/loaded = locate(/obj/machinery/missile) in get_turf(tube)
-			if(loaded)
-				user << "<span class='notice'>Loaded: [loaded]"
-			else
-				loaded = locate(/obj/item) in get_turf(tube)
-				if(loaded && loaded != tube)
-					user << "<span class='notice'>Loaded: [loaded]"
-				else
-					user << "<span class='warning'>Nothing is loaded!</span>"
-
 		M.key = user.key
 		if(!user.key)
 			user.key = "@sb[user.key]"
@@ -343,17 +294,32 @@
 //		M.key = user.ckey
 //		user.key = "@sb[user.name]"
 //		user.teleop = M
+		var/obj/screen/cinematic = new(src)
+		cinematic.icon = 'icons/effects/ship_battle_512x512.dmi'
+		cinematic.icon_state = "enter_targeting"
+		cinematic.plane = HUD_PLANE
+		cinematic.layer = HUD_ABOVE_ITEM_LAYER
+		cinematic.mouse_opacity = 0
+		cinematic.screen_loc = "1,0"
+		M.client.screen += cinematic
+		sleep(5)
+		M.client.screen -= cinematic
+		qdel(cinematic)
 		M.owner = user
 		M.linked = src
 		M.start_loc = start
 		M.wait = additional_time
+		give_verbs(M)
 		process()
 		eye = M
 		eye_owner = user
-		spawn(25)
+		spawn(50)
 			eye << "<span class='notice'><b>Targetting Mode engaged. Selected Ship is left of Reticule.</b></span>"
 
-/obj/machinery/space_battle/computer/missile/process()
+/obj/machinery/space_battle/computer/targeting/proc/give_verbs(var/mob/missile_eye/user)
+	return 1
+
+/obj/machinery/space_battle/computer/targeting/process()
 	if(eye && !(forced_by && forced_by == eye_owner))
 		if(eye_owner && (!forced_by || forced_by != eye_owner))
 			if(get_dist(eye_owner, src) < 2)
@@ -373,6 +339,9 @@
 		eye.return_to_owner()
 	return ..()
 
+/obj/machinery/space_battle/computer/targeting/proc/setup_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha, var/mob/missile_eye/user)
+	return 1
+
 /mob/missile_eye
 	name = "Eye"
 	icon = 'icons/mob/eye.dmi'
@@ -384,10 +353,11 @@
 	status_flags = GODMODE
 	invisibility = INVISIBILITY_EYE
 	layer = FLY_LAYER
+	simulated = FALSE
 
 	var/obj/start_loc
 	var/mob/owner = null
-	var/obj/machinery/space_battle/computer/missile/linked
+	var/obj/machinery/space_battle/computer/targeting/linked
 
 	var/guidance = 0
 	var/advguidance = 0
@@ -417,12 +387,12 @@
 			return 1
 		if(not_turf_contains_dense_objects(T))
 			if(tracking == 1)
-				return ..()
+				return src.forceMove(T)
 			else if(tracking == 2)
 				if(prob(80))
 					Stagger(src, dir)
 				else
-					return ..()
+					return src.forceMove(T)
 		return 0
 
 	Allow_Spacemove()
@@ -475,7 +445,7 @@
 	set desc = "Switch how your guns fire."
 	set category = "Fire Control"
 
-	if(linked && linked.tube)
+	if(linked)
 		if(linked.cooldown > world.timeofday)
 			usr << "<span class='warning'>The sensors are recalibrating! Please wait another [linked.time_remaining()] seocnds!</span>"
 			return
@@ -503,184 +473,12 @@
 
 
 /mob/missile_eye/DblClickOn(var/atom/A, params)
+	if(linked.cooldown > world.timeofday)
+		usr << "<span class='warning'>The sensors are recalibrating! [linked.time_remaining()] seconds left!</span>"
+		return
 	if(firing) return
 	firing = 1
-	if(linked.tube)
-		var/turf/T = A
-		var/efficiency = linked.tube.get_efficiency(-1,1)
-		var/guidance_efficiency = linked.sensor.guidance ? linked.sensor.guidance.get_efficiency(-1,1) : 2
-		if(linked.cooldown > world.timeofday)
-			usr << "<span class='warning'>The sensors are recalibrating! [linked.time_remaining()] seconds left!</span>"
-			firing = 0
-			return
-		var/obj/machinery/missile/loaded = locate() in get_turf(linked.tube)
-		var/wait_time = MISSILE_COOLDOWN
-		var/processed = 0
-		var/obj/effect/overmap/them = map_sectors["[T.z]"]
-		var/obj/effect/overmap/us = map_sectors["[linked.z]"]
-		var/missile_range = 1
-		if(loaded)
-			missile_range = min(1, round(loaded.range * efficiency * guidance_efficiency, 1))
-		if((!them || !us) || get_dist(them, us) > missile_range)
-			src << "<span class='warning'>\The [them] is out of missile firing range! (Your range is currently [missile_range])</span>"
-			return 0
-		if(linked.firing_angle == "Underhand")
-			processed = 1
-			if(!guidance)
-				usr << "<span class='warning'>Guidance is disabled!</span>"
-				return
-			var/area/ship_battle/area = get_area(start_loc)
-			var/list/available_areas = list()
-			if(!area || !istype(area)) return
-			for(var/area/ar in world)
-				if(istype(ar, /area/ship_battle/))
-					var/area/ship_battle/S = ar
-					if(S.z == start_loc.z && S.team == area.team)
-						available_areas += ar.name
-						available_areas[ar.name] = ar
+	linked.fire_at(A, params, src)
 
-			if(available_areas.len)
-				var/choice = input(usr, "Where would you like to aim?", "Underhand") in available_areas
-				var/area/ship_battle/chosen = available_areas[choice]
-				if(prob(50*guidance_efficiency))
-					chosen = pick(available_areas)
-				else
-					var/obj/machinery/space_battle/ecm/ecm = locate() in chosen
-					if(ecm && istype(ecm) && ecm.can_block(1))
-						chosen = pick(available_areas)
-				if(chosen)
-					var/turf/newloc = pick_area_turf(chosen)
-					if(!newloc)
-						newloc = pick_area_turf(chosen)
-						if(!newloc)
-							usr << "<span class='warning'>You are unable to aim there!</span>"
-							return
-					if(newloc)
-						if(!(prob(50*guidance_efficiency)))
-							start_loc = newloc
-							var/R
-							R = linked.tube.fire_missile(start_loc, start_loc) // Dont move, just go boom.
-							if(istext(R))
-								usr << "<span class='warning'>[R]</span>"
-								return
-							else
-								usr << "<span class='notice'>Missile launch successful!</span>"
-						wait_time *= 10*efficiency // Eyup
-				else
-					usr << "<span class='warning'>Invalid choice!</span>"
-					firing = 0
-					return
-			else
-				usr << "<span class='warning'>No available targets!</span>"
-				firing = 0
-				return
-		var/choice
-		if(!processed)
-			choice = alert("Are you sure you wish to launch a missile at [T]?", "Missile", "Yes", "No")
-		if(choice == "Yes" && !processed)
-			var/miss_message = ""
-			var/ECM = 0
-			var/obj/machinery/space_battle/ecm/E = locate(/obj/machinery/space_battle/ecm) in range(MAX_ECM_RANGE, T)
-			if(E && E.can_block(get_dist(T, E)) && E.strength >= eccm)
-				ECM = 1
-			var/miss_chance = (advguidance ? 10*max(linked.sensor.advguidance.get_efficiency(-1,1), guidance_efficiency) : 25*guidance_efficiency)
-			if(ECM || linked.firing_angle == "Flanking" || (!guidance||prob(miss_chance)) && linked.firing_angle != "Carefully Aimed") // Random firing.
-				var/turf/newloc = pick_area_turf(get_area(start_loc), list(/proc/is_space, /proc/not_turf_contains_dense_objects))
-				if(newloc) start_loc = newloc
-				wait_time *= 1.5*efficiency
-				if(!guidance)
-					wait_time *= 1.5*efficiency
-				if(ECM)
-					miss_message = "<span class='danger'>Missile guidance failed to designate control target. Firing pattern uncontrolled.</span>"
-				else if(linked.firing_angle != "Flanking")
-					miss_message = "<span class='warning'>Missile was unable to reach the correct destination: Missed!</span>"
-			var/result
-			var/turf/newloc = get_turf(start_loc)
-			if((linked.firing_angle == "Frontal Assault" || linked.firing_angle == "Carefully Aimed" || linked.firing_angle == "Rapid Fire") && (linked.x_offset || linked.y_offset))
-				var/xo = linked.x_offset
-				var/yo = linked.y_offset
-				while(xo != 0)
-					if(xo < 0)
-						newloc = get_turf(get_step(newloc, 	WEST))
-						xo++
-					else
-						newloc = get_turf(get_step(newloc, EAST))
-						xo--
-				while(yo != 0)
-					if(yo < 0)
-						newloc = get_turf(get_step(newloc, SOUTH))
-						yo++
-					else
-						newloc = get_turf(get_step(newloc, NORTH))
-						yo--
-			result = linked.tube.fire_missile(T, newloc)
-			if(istext(result))
-				usr << "<span class='warning'>[result]</span>"
-				firing = 0
-				return
-			else
-				usr << miss_message
-				usr << "<span class='notice'>Missile launch successful!</span>"
-				if(usr.client)
-					usr.client.missiles_fired += 1
-				for(var/mob/living/mob in world)
-					if(mob.z == src.z && !istype(get_turf(mob), /turf/space))
-						shake_camera(mob, 5, 5)
-						mob << "<span class='warning'>The deck of the ship shakes violently!</span>"
-						if(prob(2))
-							mob.Weaken(10)
-							if(prob(75))
-								mob << "<span class='warning'>You fall over as the deck shakes!</span>"
-							else
-								mob << "<span class='warning'>You fall over as the deck shakes and hit your head hard!</span>"
-								mob.emote("scream")
-								mob.Paralyse(15)
-			if(linked.firing_angle == "Carefully Aimed")
-				wait_time *= 1.5*efficiency
-			if(linked.firing_angle == "Rapid Fire")
-				wait_time *= 0.5*efficiency
-			processed = 1
-
-		else
-			firing = 0
-
-		if(processed)
-			var/radar = 0
-			var/list/radars = linked.sensor.has_radars()
-			for(var/obj/machinery/space_battle/missile_sensor/radar/M in radars)
-				if(M.can_sense())
-					radar += M.get_efficiency(1,1,1)
-				else
-					usr << "<span class='danger'>NOTICE: [M.name] inactive: [M.can_sense()]!</span>"
-			radar = max(1, radar)
-			wait_time += wait
-			switch(linked.tube.dir)
-				if(8)
-					wait_time *= 1.75*efficiency
-				if(1 to 2)
-					wait_time *= 1.25*efficiency
-			wait_time = max(50, wait_time / radar)
-			if(loaded && istype(loaded))
-				wait_time += loaded.delay_time
-			wait_time = linked.cooldown(wait_time)
-			usr << "<span class='notice'>Sensors are now calibrating. Please wait [(wait_time / 10)] seconds.</span>"
-			firing = 0
-
-	else
-		usr << "<span class='notice'>Machine gun found!</span>"
-		var/obj/machinery/space_battle/deck_gun/gun = linked.gun
-		if(gun.firing)
-			usr << "<span class='warning'>\The [gun] is already firing!</span>"
-			return
-		usr << "<span class='notice'>\The [gun] begins spinning up..</span>"
-		gun.visible_message("<span class='notice'>\The [gun] begins spinning up...</span>")
-		spawn(10) // Get yo ass on the ground!
-			var/to_return = gun.fire_at(A, src)
-			if(istext(to_return))
-				usr << "<span class='warning'>[to_return]</span>"
-				return
-			shake_camera(src, 10, 10)
-		firing = 0
-
-
-
+//mob/missile_eye/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
+//	linked.setup_hud(HUD)

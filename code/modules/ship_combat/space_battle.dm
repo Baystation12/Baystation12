@@ -16,6 +16,7 @@
 	var/id_num = 0
 	var/repairing = 0
 	var/obj/effect/overmap/linked
+	var/min_broken = 1
 
 	var/em_signature = 0
 	var/thermal_signature = 0
@@ -29,7 +30,6 @@
 			team = A.team
 
 	initialize()
-		linked = map_sectors["[z]"]
 		reconnect()
 		..()
 
@@ -72,19 +72,7 @@
 			O.ex_act(severity)
 
 	emp_act(severity)
-		switch(severity)
-			if(1)
-				if(prob(55))
-					break_machine(rand(2,4))
-			if(2)
-				if(prob(25))
-					break_machine(rand(1,2))
-			if(3)
-				if(prob(5))
-					break_machine(rand(0,1))
-
-		for(var/obj/item/O in contents)
-			O.emp_act(severity)
+		return 0
 
 	update_icon()
 		if(stat & BROKEN)
@@ -99,8 +87,10 @@
 
 	proc/break_machine(var/dmg = 1)
 		if(!dmg) return
-		stat |= BROKEN
+		dmg = min(dmg, max_damage-1) // So it cannot be one-hitted.
 		damage_level = min(damage_level+dmg, max_damage)
+		if(min_broken <= damage_level)
+			stat |= BROKEN
 		if(can_be_destroyed && damage_level >= max_damage)
 			if(!(stat & NOPOWER))
 				src.visible_message("<span class='danger'>\The [src] fizzles and sparks violently!</span>")
@@ -120,6 +110,7 @@
 		update_icon()
 
 	proc/reconnect()
+		linked = map_sectors["[z]"]
 		return 1
 
 	proc/fetch_em()
