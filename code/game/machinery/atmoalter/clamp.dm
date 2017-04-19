@@ -82,10 +82,15 @@
 	if(network_node2)
 		qdel(network_node2)
 
-	target.node1.build_network()
-	target.node2.build_network()
-	var/obj/machinery/atmospherics/pipe/node1 = target.node1
-	var/obj/machinery/atmospherics/pipe/node2 = target.node2
+	var/obj/machinery/atmospherics/pipe/node1 = null
+	var/obj/machinery/atmospherics/pipe/node2 = null
+
+	if(target.node1)
+		target.node1.build_network()
+		node1 = target.node1
+	if(target.node2)
+		target.node2.build_network()
+		node2 = target.node2
 	if(istype(node1))
 		var/datum/pipeline/P1 = node1.parent
 		P1.build_pipeline(node1)
@@ -137,7 +142,7 @@
 		to_chat(user, "<span class='notice'>You begin to attach \the [src] to \the [A]...</span>")
 		if (do_after(user, 30, src))
 			to_chat(user, "<span class='notice'>You have attached \the [src] to \the [A].</span>")
-			new/obj/machinery/clamp(A.loc)
+			new/obj/machinery/clamp(A.loc, A)
 			user.drop_from_inventory(src)
 			qdel(src)
 

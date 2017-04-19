@@ -139,7 +139,7 @@
 	exploded = 1
 	sleep(pull_time)
 	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
-	if(!TS)
+	if(!istype(TS))
 		return
 
 	var/list/affected_z = GetConnectedZlevels(TS.z)
@@ -225,6 +225,9 @@
 	else
 		alert_msg = null
 	if(alert_msg)
+		if(!global_announcer)
+			global_announcer = new
+			log_debug("The Global Announcer was deleted, or missing.")
 		global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
