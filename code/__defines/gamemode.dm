@@ -50,7 +50,7 @@
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
 
-#define DEFAULT_TELECRYSTAL_AMOUNT 100
+#define DEFAULT_TELECRYSTAL_AMOUNT 130
 
 /////////////////
 ////WIZARD //////
