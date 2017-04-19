@@ -10,6 +10,8 @@
  *  and each branch datum definition, respectively.
  */
 
+var/list/branch_whitelist = list()
+
 var/datum/mil_branches/mil_branches = new()
 
 /**
@@ -75,6 +77,7 @@ var/datum/mil_branches/mil_branches = new()
 /datum/mil_branch
 	var/name = "Unknown"         // Longer name for branch, eg "Sol Central Marine Corps"
 	var/name_short = "N/A"       // Abbreviation of the name, eg "SCMC"
+	var/age_restriction = 0      // Age restriction
 
 
 
@@ -101,6 +104,21 @@ var/datum/mil_branches/mil_branches = new()
 
 		if(rank_path in spawn_rank_types)
 			spawn_ranks[rank.name] = rank
+
+/datum/mil_branch/proc/usable_by(var/mob/M)
+	if(M.client.holder) // staff bypass whitelist
+		return TRUE
+	if(config.use_age_restriction_for_branches && age_restriction)
+		if(isnum(M.client.player_age) && M.client.player_age < age_restriction)
+			return FALSE
+	if((!(lowertext(name) in config.whitelist_branches)))
+		return TRUE
+	if(!(M.ckey in branch_whitelist))
+		return FALSE
+	var/branches = branch_whitelist[M.ckey]
+	if(!(lowertext(name) in branches))
+		return FALSE
+	return TRUE
 
 /**
  *  Populate the global branches list from using_map

@@ -29,13 +29,17 @@ JOBS_HAVE_MINIMAL_ACCESS
 ## Non-automatic antagonist recruitment, such as being converted to cultism is not affected. Has the same database requirements and notes as USE_AGE_RESTRICTION_FOR_JOBS.
 #USE_AGE_RESTRICTION_FOR_ANTAGS
 
+## Unhash this entry to have certain branches require your account to be at least a certain number of days old for selection during character creation
+## Has the same database requirements and notes as USE_AGE_RESTRICTION_FOR_JOBS.
+#USE_AGE_RESTRICTION_FOR_BRANCHES
+
 ## Unhash this to use recursive explosions, keep it hashed to use circle explosions. Recursive explosions react to walls, airlocks and blast doors, making them look a lot cooler than the boring old circular explosions. They require more CPU and are (as of january 2013) experimental
 #USE_RECURSIVE_EXPLOSIONS
 
 ## log OOC channel
 LOG_OOC
 
-## log client Say 
+## log client Say
 LOG_SAY
 
 ## log admin actions
@@ -94,7 +98,7 @@ MOD_JOB_TEMPBAN_MAX 1440
 
 
 ## probablities for game modes chosen in "secret" and "random" modes
-## 
+##
 ## default probablity is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
 PROBABILITY EXTENDED 1
@@ -217,7 +221,7 @@ GUEST_BAN
 ##Remove the # mark infront of this to forbid admins from posssessing the singularity.
 #FORBID_SINGULO_POSSESSION
 
-## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM. 
+## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM.
 ## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
 #POPUP_ADMIN_PM
 
@@ -358,6 +362,9 @@ STARLIGHT 0
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
 # LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010
 
+## Defines which branches require whitelisting to use
+## Uses the full name, lowercase, delimeted by semicolon
+# WHITELIST_BRANCHES marine corps;fleet
 
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
@@ -373,7 +380,7 @@ STARLIGHT 0
 ## Uncomment to override default brain health.
 #DEFAULT_BRAIN_HEALTH 400
 
-## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
+## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and -
 # DEFAULT_LANGUAGE_PREFIXES , # -
 
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
