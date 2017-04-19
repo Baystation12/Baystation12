@@ -86,15 +86,21 @@
 
 /obj/machinery/uniform_vendor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
+	if(istype(W, /obj/item/weapon/clothingbag))
+		to_chat(user, "<span class='notice'>You put [W] into \the [src] recycling slot.</span>")
+		qdel(W)
+		return
+
+	if(!istype(W, /obj/item/weapon/card/id))
+		to_chat(user, "<span class='notice'>You must use your ID card!</span>")
+		return
 	var/obj/item/weapon/card/id/I = W.GetIdCard()
 	if(I && !ID)
 		to_chat(user, "<span class='notice'>You slide [I.registered_name]'s ID into \the [src]!</span>")
 		ID = I
 		user.drop_from_inventory(I,src)
 
-	if(istype(I, /obj/item/weapon/clothingbag))
-		to_chat(user, "<span class='notice'>You put [I] into \the [src] recycling slot.</span>")
-		qdel(I)
+
 
 
 /*	Outfit structures

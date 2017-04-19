@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - bugfix: "Uniform Vendors should no longer break horribly when you hit them with a PDA (or anything that isn't an ID)."
