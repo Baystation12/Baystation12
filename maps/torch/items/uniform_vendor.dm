@@ -94,14 +94,10 @@
 	if(!istype(W, /obj/item/weapon/card/id))
 		to_chat(user, "<span class='notice'>You must use your ID card!</span>")
 		return
-	var/obj/item/weapon/card/id/I = W.GetIdCard()
-	if(I && !ID)
-		to_chat(user, "<span class='notice'>You slide [I.registered_name]'s ID into \the [src]!</span>")
-		ID = I
-		user.drop_from_inventory(I,src)
-
-
-
+	if(!ID)
+		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
+		ID = W
+		user.drop_from_inventory(W,src)
 
 /*	Outfit structures
 	branch
