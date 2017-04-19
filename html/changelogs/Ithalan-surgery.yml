@@ -1,0 +1,8 @@
+author: Ithalan
+
+delete-after: True
+
+changes: 
+  - tweak: "Collected robotics and infirmary surgical tools into surgical kits"
+  - tweak: "Updated surgical kit sprite and description and upped capacity to 14 slots to allow nanopaste and laser scalpels/IMS to be stored in it too."
+  
