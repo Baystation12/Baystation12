@@ -32,3 +32,6 @@
 
 /turf/simulated/floor/shuttle/alien
 	icon_state = "floor_b"
+	oxygen = 0
+	nitrogen = 0
+	chlorine = MOLES_CELLSTANDARD

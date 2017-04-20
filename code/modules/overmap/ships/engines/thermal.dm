@@ -51,6 +51,7 @@
 	var/datum/ship_engine/thermal/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/moles_per_burn = 10
+	var/obj/effect/exhaust_type = /obj/effect/engine_exhaust
 
 /obj/machinery/atmospherics/unary/engine/initialize()
 	..()
@@ -104,6 +105,12 @@
 /obj/machinery/atmospherics/unary/engine/proc/calculate_thrust(datum/gas_mixture/propellant, used_part = 1)
 	return round(sqrt(propellant.get_mass() * used_part * air_contents.return_pressure()/100),0.1)
 
+/obj/machinery/atmospherics/unary/engine/ion
+	name = "ion engine"
+	icon_state = "ion"
+	moles_per_burn = 2.5
+	exhaust_type = /obj/effect/engine_exhaust/ion
+
 //Exhaust effect
 /obj/effect/engine_exhaust
 	name = "engine exhaust"
@@ -111,14 +118,19 @@
 	icon_state = "smoke"
 	light_color = "#ED9200"
 	anchored = 1
+	var/active_icon = "exhaust"
 
 /obj/effect/engine_exhaust/New(var/turf/nloc, var/ndir, var/temp)
 	..(nloc)
 	if(temp > PHORON_MINIMUM_BURN_TEMPERATURE)
-		icon_state = "exhaust"
+		icon_state = active_icon
 		set_light(5, 2)
 	set_dir(ndir)
 	nloc.hotspot_expose(temp,125)
 	playsound(loc, 'sound/effects/spray.ogg', 50, 1, -1)
 	spawn(20)
 		qdel(src)
+
+/obj/effect/engine_exhaust/ion
+	light_color = "#0066ff"
+	active_icon = "exhaust_ion"

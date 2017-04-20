@@ -44,6 +44,7 @@
 	use_overmap = 1
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
+	use_overmap = 1
 
 /datum/map/torch/setup_map()
 	..()

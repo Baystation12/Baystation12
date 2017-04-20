@@ -51,3 +51,19 @@
 	shuttle_area = /area/guppy_hangar/start
 	shuttle_tag = "Guppy"
 	req_access = list(access_guppy_helm)
+
+/obj/effect/overmap/ship/bogani
+	name = "Unidentified vessel"
+	fore_dir = WEST
+	vessel_mass = 250
+	default_delay = 6 SECONDS
+	landing_areas = list(/area/bogshuttle_hangar/start)
+
+/obj/machinery/computer/shuttle_control/explore/bogani
+	name = "alien control console"
+	shuttle_area = /area/bogshuttle_hangar/start
+	shuttle_tag = "Bogani"
+	req_access = list(202)
+	icon_keyboard = "bogconsole"
+	icon_screen = "bogshuttle"
+	icon_state = "bogconsole"

@@ -328,3 +328,10 @@
 		initial_loc.air_scrub_names -= id_tag
 	..()
 	return
+
+/obj/machinery/atmospherics/unary/vent_scrubber/bogani
+	scrubbing_gas = list("carbon_dioxide", "phoron", "sleeping_agent", "oxygen", "nitrogen")
+
+/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on
+	use_power = 1
+	icon_state = "map_scrubber_on"
