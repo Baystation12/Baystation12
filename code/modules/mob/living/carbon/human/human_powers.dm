@@ -222,6 +222,16 @@
 	set category = "Abilities"
 	diona_split_into_nymphs(5)	// Separate proc to void argments being supplied when used as a verb
 
+/mob/living/carbon/human/proc/diona_heal_toggle()
+	set name = "Toggle Heal"
+	set desc = "Turn your inate healing on or off."
+	set category = "Abilities"
+	innate_heal = !innate_heal
+	if (innate_heal)
+		to_chat(src, "<span class='alium'>You are now using nutrients to regenerate.</span>")
+	else
+		to_chat(src, "<span class='alium'>You are no longer using nutrients to regenerate.</span>")
+
 /mob/living/carbon/human/proc/diona_split_into_nymphs(var/number_of_resulting_nymphs)
 	var/turf/T = get_turf(src)
 
