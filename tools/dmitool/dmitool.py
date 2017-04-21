@@ -1,4 +1,4 @@
-""" Python 2.7 wrapper for dmitool.
+""" Python 3.x wrapper for dmitool.
 """
 
 import os
@@ -16,7 +16,7 @@ def _safe_parse(dict, key, deferred_value):
     try:
         dict[key] = deferred_value()
     except Exception as e: 
-        print "Could not parse property '%s': %s" % (key, e)
+        print("Could not parse property '%s': %s" % (key, e))
         return e
     return False
 
