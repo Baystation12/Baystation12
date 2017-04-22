@@ -9,12 +9,7 @@ _DMITOOL_CMD = ["-jar", "dmitool.jar"]
 
 
 def _dmitool_call(*dmitool_args, **popen_args):
-    return Popen(_JAVA_PATH + _DMITOOL_CMD + [str(arg) for arg in dmitool_args], **popen_args)
-
-
-def decode_octets(bytes):
-    decoded_string = bytes.decode(encoding = os.sys.getdefaultencoding())
-    return decoded_string
+    return Popen(_JAVA_PATH + _DMITOOL_CMD + [str(arg) for arg in dmitool_args], **popen_args, encoding=os.sys.getdefaultencoding())
 
 
 def _safe_parse(dict, key, deferred_value):
@@ -29,13 +24,13 @@ def _safe_parse(dict, key, deferred_value):
 def version():
     """ Returns the version as a string. """
     stdout, stderr = _dmitool_call("version", stdout=PIPE).communicate()
-    return decode_octets(stdout).strip()
+    return str(stdout).strip()
 
 
 def help():
     """ Returns the help text as a string. """
     stdout, stderr = _dmitool_call("help", stdout=PIPE).communicate()
-    return decode_octets(stdout).strip()
+    return str(stdout).strip()
 
 
 def info(filepath):
@@ -44,7 +39,6 @@ def info(filepath):
     """
     subproc = _dmitool_call("info", filepath, stdout=PIPE)
     stdout, stderr = subproc.communicate()
-    stdout = decode_octets(stdout)
 
     result = {}
     data = stdout.split(os.linesep)[1:]
