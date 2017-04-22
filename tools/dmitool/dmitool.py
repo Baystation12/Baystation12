@@ -11,10 +11,12 @@ _DMITOOL_CMD = ["-jar", "dmitool.jar"]
 def _dmitool_call(*dmitool_args, **popen_args):
     return Popen(_JAVA_PATH + _DMITOOL_CMD + [str(arg) for arg in dmitool_args], **popen_args)
 
-def decode_bytes(bytes):
+
+def decode_octets(bytes):
     decoded_string = bytes.decode(encoding = os.sys.getdefaultencoding())
     return decoded_string
-	
+
+
 def _safe_parse(dict, key, deferred_value):
     try:
         dict[key] = deferred_value()
@@ -27,13 +29,14 @@ def _safe_parse(dict, key, deferred_value):
 def version():
     """ Returns the version as a string. """
     stdout, stderr = _dmitool_call("version", stdout=PIPE).communicate()
-    return decode_bytes(stdout).strip()
+    return decode_octets(stdout).strip()
 
 
 def help():
     """ Returns the help text as a string. """
     stdout, stderr = _dmitool_call("help", stdout=PIPE).communicate()
-    return decode_bytes(stdout).strip()
+    return decode_octets(stdout).strip()
+
 
 def info(filepath):
     """ Totally not a hack that parses the output from dmitool into a dictionary. 
@@ -41,8 +44,7 @@ def info(filepath):
     """
     subproc = _dmitool_call("info", filepath, stdout=PIPE)
     stdout, stderr = subproc.communicate()
-    stdout = decode_bytes(stdout)
-    stderr = decode_bytes(stdout)
+    stdout = decode_octets(stdout)
 
     result = {}
     data = stdout.split(os.linesep)[1:]
