@@ -29,6 +29,8 @@
 	var/cooldown_per_use = 1 SECOND
 	var/category = /obj/item/integrated_circuit // Used by the toolsets to filter out category types
 
+	var/dist_check = /decl/dist_check/adjacent // Means to check if this unit is within range of referenced atoms
+
 /obj/item/integrated_circuit/examine(mob/user)
 	. = ..()
 	external_examine(user)
@@ -301,7 +303,7 @@
 /datum/integrated_io
 	var/name = "input/output"
 	var/obj/item/integrated_circuit/holder = null
-	var/weakref/data = null
+	var/data = null
 	var/list/linked = list()
 	var/io_type = DATA_CHANNEL
 
@@ -350,16 +352,14 @@
 	io.linked |= src // We still link them to each other just ensure we're in a consistent state
 
 /datum/integrated_io/proc/data_as_type(var/as_type)
-	if(!isweakref(data))
-		return
-	var/output = data.resolve()
+	var/output = resolve_weakref()
 	return istype(output, as_type) ? output : null
 
 /datum/integrated_io/proc/get_data()
 	if(isnull(data))
 		return
 	if(isweakref(data))
-		return data.resolve()
+		return resolve_weakref()
 	return data
 
 /datum/integrated_io/proc/display_data()
@@ -368,12 +368,23 @@
 	if(istext(data))
 		return "(\"[data]\")" // Wraps the 'string' in escaped quotes, so that people know it's a 'string'.
 	if(isweakref(data))
-		var/atom/A = data.resolve()
-		return A ? "([A.name] \[Ref\])" : "(null)" // For refs, we want just the name displayed.
+		var/atom/A = resolve_weakref()
+		return A ? "([A.name] \[Ref\])" : "(out of range)" // For refs, we want just the name displayed. Both actually out of range and deleted refs are displayed as OoR
 	return "([data])" // Nothing special needed for numbers or other stuff.
 
 /datum/integrated_io/activate/display_data()
 	return "(\[pulse\])"
+
+/datum/integrated_io/proc/resolve_weakref()
+	var/weakref/wref = data
+	if(!istype(wref))
+		return
+	var/atom/resolved = wref.resolve()
+	if(!resolved)
+		return
+
+	var/decl/dist_check/dc = decls_repository.get_decl(holder.dist_check)
+	return dc.within_dist(get_turf(holder.loc), resolved) && resolved
 
 /datum/integrated_io/proc/scramble()
 	if(isnull(data))

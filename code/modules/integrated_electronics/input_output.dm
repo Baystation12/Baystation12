@@ -101,12 +101,12 @@
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/human)
 	if(!istype(H)) //Invalid input
 		return
-	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
-		var/total_health = round(H.health/H.maxHealth, 0.1)*100
-		var/missing_health = H.maxHealth - H.health
 
-		set_pin_data(IC_OUTPUT, 1, total_health)
-		set_pin_data(IC_OUTPUT, 2, missing_health)
+	var/total_health = round(H.health/H.maxHealth, 0.1)*100
+	var/missing_health = H.maxHealth - H.health
+
+	set_pin_data(IC_OUTPUT, 1, total_health)
+	set_pin_data(IC_OUTPUT, 2, missing_health)
 	push_data()
 
 /obj/item/integrated_circuit/input/adv_med_scanner
@@ -132,17 +132,17 @@
 	var/mob/living/carbon/human/H = I.data_as_type(/mob/living/carbon/human)
 	if(!istype(H)) //Invalid input
 		return
-	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
-		var/total_health = round(H.health/H.maxHealth, 0.1)*100
-		var/missing_health = H.maxHealth - H.health
 
-		set_pin_data(IC_OUTPUT, 1, total_health)
-		set_pin_data(IC_OUTPUT, 2, missing_health)
-		set_pin_data(IC_OUTPUT, 3, H.getBruteLoss())
-		set_pin_data(IC_OUTPUT, 4, H.getFireLoss())
-		set_pin_data(IC_OUTPUT, 5, H.getToxLoss())
-		set_pin_data(IC_OUTPUT, 6, H.getOxyLoss())
-		set_pin_data(IC_OUTPUT, 7, H.getCloneLoss())
+	var/total_health = round(H.health/H.maxHealth, 0.1)*100
+	var/missing_health = H.maxHealth - H.health
+
+	set_pin_data(IC_OUTPUT, 1, total_health)
+	set_pin_data(IC_OUTPUT, 2, missing_health)
+	set_pin_data(IC_OUTPUT, 3, H.getBruteLoss())
+	set_pin_data(IC_OUTPUT, 4, H.getFireLoss())
+	set_pin_data(IC_OUTPUT, 5, H.getToxLoss())
+	set_pin_data(IC_OUTPUT, 6, H.getOxyLoss())
+	set_pin_data(IC_OUTPUT, 7, H.getCloneLoss())
 
 /obj/item/integrated_circuit/input/local_locator
 	name = "local locator"
@@ -319,6 +319,8 @@
 	inputs = list()
 	outputs = list("teleporter")
 	activators = list("on selected")
+
+	dist_check = /decl/dist_check/omni
 
 /obj/item/integrated_circuit/input/teleporter_locator/get_topic_data(mob/user)
 	var/datum/integrated_io/O = outputs[1]

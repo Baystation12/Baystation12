@@ -179,6 +179,7 @@
 #include "code\datums\extensions\multitool\items\items.dm"
 #include "code\datums\extensions\multitool\machinery\cloning.dm"
 #include "code\datums\helper_datums\construction_datum.dm"
+#include "code\datums\helper_datums\dist_check.dm"
 #include "code\datums\helper_datums\events.dm"
 #include "code\datums\helper_datums\getrev.dm"
 #include "code\datums\helper_datums\global_iterator.dm"
