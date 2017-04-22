@@ -1,4 +1,4 @@
-""" Python 3.x wrapper for dmitool.
+""" Python 3.6+ wrapper for dmitool.
 """
 
 import os
