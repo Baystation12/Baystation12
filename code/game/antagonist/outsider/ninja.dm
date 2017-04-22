@@ -73,10 +73,6 @@ var/datum/antagonist/ninja/ninjas
 					i++
 					objective_list -= 5
 
-	var/datum/objective/ninja_highlander/ninja_obj = new
-	ninja_obj.owner = ninja
-	ninja.objectives += ninja_obj
-
 	var/datum/objective/survive/ninja_objective = new
 	ninja_objective.owner = ninja
 	ninja.objectives += ninja_objective

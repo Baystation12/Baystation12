@@ -342,7 +342,6 @@
 #include "code\game\antagonist\outsider\wizard.dm"
 #include "code\game\antagonist\station\changeling.dm"
 #include "code\game\antagonist\station\cultist.dm"
-#include "code\game\antagonist\station\highlander.dm"
 #include "code\game\antagonist\station\loyalist.dm"
 #include "code\game\antagonist\station\renegade.dm"
 #include "code\game\antagonist\station\revolutionary.dm"

@@ -781,17 +781,6 @@ datum/objective/heist/salvage
 		if(istype(B) && B.has_reproduced) return 1
 	return 0
 
-/datum/objective/ninja_highlander
-	explanation_text = "You aspire to be a Grand Master of the Spider Clan. Kill all of your fellow acolytes."
-
-/datum/objective/ninja_highlander/check_completion()
-	if(owner)
-		for(var/datum/mind/ninja in get_antags("ninja"))
-			if(ninja != owner)
-				if(ninja.current.stat < 2) return 0
-		return 1
-	return 0
-
 /datum/objective/cult/survive
 	explanation_text = "Our knowledge must live on."
 	target_amount = 5
