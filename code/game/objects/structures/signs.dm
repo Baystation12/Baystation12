@@ -330,6 +330,11 @@
 	desc = "A sign labelling an area as a place where plant growing supplies are kept."
 	icon_state = "hydro3"
 
+/obj/structure/sign/solgov
+	name = "\improper SolGov Seal"
+	desc = "A sign which signifies who this vessel belongs to."
+	icon_state = "solgovseal"
+
 /obj/structure/sign/directions
 	name = "direction sign"
 	desc = "A direction sign, claiming to know the way."
