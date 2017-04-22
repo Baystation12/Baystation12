@@ -1,4 +1,4 @@
-#define DEFIB_TIME_LIMIT (8 MINUTES) //past this many secons, defib is useless. Currently 8 Minutes
+#define DEFIB_TIME_LIMIT (8 MINUTES) //past this many seconds, defib is useless. Currently 8 Minutes
 #define DEFIB_TIME_LOSS  (2 MINUTES) //past this many seconds, brain damage occurs. Currently 2 minutes
 
 //backpack item
@@ -34,9 +34,8 @@
 	qdel_null(paddles)
 	qdel_null(bcell)
 
-/obj/item/weapon/defibrillator/loaded //starts with highcap cell
-	bcell = /obj/item/weapon/cell/high
-
+/obj/item/weapon/defibrillator/loaded //starts with regular power cell for R&D to replace later in the round.
+	bcell = /obj/item/weapon/cell/apc
 
 /obj/item/weapon/defibrillator/update_icon()
 	var/list/new_overlays = list()
@@ -277,7 +276,7 @@
 
 	H.updatehealth()
 	if(H.health + H.getOxyLoss() <= config.health_threshold_dead || (HUSK in H.mutations))
-		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile.\""
+		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile unless damage is repaired\""
 
 	var/bad_vital_organ = check_vital_organs(H)
 	if(bad_vital_organ)
@@ -304,9 +303,9 @@
 		if(vital)
 			O = H.internal_organs_by_name[organ_tag]
 			if(!O)
-				return "buzzes, \"Resuscitation failed - Patient is missing vital organ ([name]). Further attempts futile.\""
+				return "buzzes, \"Resuscitation failed - Patient is missing vital organ ([name]). Further attempts futile unless damage is repaired.\""
 			if(O.damage > O.max_damage)
-				return "buzzes, \"Resuscitation failed - Excessive damage to vital organ ([name]). Further attempts futile.\""
+				return "buzzes, \"Resuscitation failed - Excessive damage to vital organ ([name]). Further attempts futile unless organ is replaced.\""
 	return null
 
 /obj/item/weapon/shockpaddles/proc/check_blood_level(mob/living/carbon/human/H)
@@ -359,7 +358,7 @@
 // This proc is used so that we can return out of the revive process while ensuring that busy and update_icon() are handled
 /obj/item/weapon/shockpaddles/proc/do_revive(mob/living/carbon/human/H, mob/user)
 	if(H.ssd_check())
-		to_chat(find_dead_player(H.ckey, 1), "Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!")
+		to_chat(find_dead_player(H.ckey, 1), "<span class='notice'>Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!</span>")
 
 	//beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
 	user.visible_message("<span class='warning'>\The [user] begins to place [src] on [H]'s chest.</span>", "<span class='warning'>You begin to place [src] on [H]'s chest...</span>")
@@ -375,7 +374,7 @@
 		return
 
 	if(check_blood_level(H))
-		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock.\"", "warning") //also includes heart damage
+		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
 	if(!do_after(user, chargetime, H))
