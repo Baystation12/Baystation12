@@ -78,9 +78,9 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	qdel(src) // NOT qdel.
 
 obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
-	if(dir==NORTH|SOUTH)
+	if(dir == (NORTH|SOUTH))
 		set_dir(NORTH)
-	else if(dir==EAST|WEST)
+	else if(dir == (EAST|WEST))
 		set_dir(EAST)
 
 obj/machinery/atmospherics/pipe/zpipe/Destroy()
