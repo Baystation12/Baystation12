@@ -19,7 +19,6 @@
 		/area/engineering/fuelbay = NO_SCRUBBER,
 		/area/guppy_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/guppy_hangar/start = 0,
-		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,
 		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarbridge = NO_SCRUBBER,
