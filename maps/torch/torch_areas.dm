@@ -183,9 +183,11 @@
 	name = "\improper Second Deck Teleporter"
 	icon_state = "teleporter"
 
+/* Removed; single stairwell area now.
 /area/hallway/primary/seconddeck/center
 	name = "\improper Second Deck Central Stairwell"
 	icon_state = "hallC2"
+*/
 
 /area/tcommsat/relay/seconddeck
 	name = "\improper Second Deck Relay"

@@ -77,13 +77,15 @@
 		/area/mine/explored,
 		/area/mine/unexplored,
 		/area/centcom/control,
-		/area/maintenance/exterior
+		/area/maintenance/exterior,
+		/area/hallway/stairwell
 	)
 
 	area_coherency_test_subarea_count = list(
 			/area/constructionsite = 7,
 			/area/constructionsite/maintenance = 14,
 			/area/solar/constructionsite = 3,
+			/area/hallway/stairwell = 5
 	)
 
 	area_usage_test_exempted_areas = list(
