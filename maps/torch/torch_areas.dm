@@ -1400,3 +1400,7 @@
 /area/engineering/fuelbay
 	name = "\improper Fuel Bay"
 	icon_state = "engineering"
+
+/area/hallway/stairwell
+	name = "\improper Stairwell"
+	icon_state = "green"
