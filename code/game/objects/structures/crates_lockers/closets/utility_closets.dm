@@ -213,6 +213,8 @@
 
 /obj/structure/closet/hydrant/New()
 	..()
+	new /obj/item/inflatable/door(src)
+	new /obj/item/inflatable/door(src)
 	new /obj/item/clothing/suit/fire/firefighter(src)
 	new /obj/item/clothing/mask/gas/half(src)
 	new /obj/item/device/flashlight(src)
