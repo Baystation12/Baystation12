@@ -153,7 +153,3 @@ var/list/datum/ai_icon/ai_icons
 	name = "Triumvirate Static"
 	alive_icon = "ai-static"
 	alive_light = "#020B2B"
-
-/datum/ai_icon/ship_alert
-	name = "Ship Alert"
-	alive_icon = "ai_shipscan"

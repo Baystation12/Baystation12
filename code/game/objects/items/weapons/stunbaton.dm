@@ -133,7 +133,7 @@
 		var/mob/living/carbon/human/H = target
 		affecting = H.get_organ(hit_zone)
 
-	if(user.a_intent == I_HURT || user.a_intent == I_DISARM)
+	if(user.a_intent == I_HURT)
 		. = ..()
 		if (!.)	//item/attack() does it's own messaging and logs
 			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
