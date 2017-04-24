@@ -16,14 +16,24 @@
 /mob/living/carbon/alien/diona/proc/remove_from_list()
 	// Closes over the gap that's going to be made and removes references to
 	// the nymph this is called for.
-	last_nymph.set_next_nymph(next_nymph)
-	next_nymph.set_last_nymph(last_nymph)
+	var/need_links_null = 0
+
+	if (last_nymph)
+		last_nymph.set_next_nymph(next_nymph)
+		if (last_nymph.next_nymph == last_nymph)
+			need_links_null = 1
+	if (next_nymph)
+		next_nymph.set_last_nymph(last_nymph)
+		if (next_nymph.last_nymph == next_nymph)
+			need_links_null = 1
 	// This bit checks if a nymphs is the only nymph in the list
 	// by seeing if it points to itself. If it is, it nulls it
 	// to stop list behaviour.
-	if ((last_nymph.next_nymph == last_nymph) || (next_nymph.last_nymph == next_nymph))
-		last_nymph.null_nymphs()
-		next_nymph.null_nymphs()
+	if (need_links_null)
+		if (last_nymph)
+			last_nymph.null_nymphs()
+		if (next_nymph)
+			next_nymph.null_nymphs()
 	// Finally, remove the current nymph's references to other nymphs.
 	null_nymphs()
 

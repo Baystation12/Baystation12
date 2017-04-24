@@ -242,8 +242,8 @@
 	if(mind)
 		mind.transfer_to(S)
 
-	message_admins("\The [src] has split into nymphs; player now controls [key_name_admin(S)]")
-	log_admin("\The [src] has split into nymphs; player now controls [key_name(S)]")
+		message_admins("\The [src] has split into nymphs; player now controls [key_name_admin(S)]")
+		log_admin("\The [src] has split into nymphs; player now controls [key_name(S)]")
 
 	var/nymphs = 1
 	var/mob/living/carbon/alien/diona/L = S
