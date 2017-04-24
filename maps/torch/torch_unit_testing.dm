@@ -19,7 +19,6 @@
 		/area/engineering/fuelbay = NO_SCRUBBER,
 		/area/guppy_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/guppy_hangar/start = 0,
-		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,
 		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarbridge = NO_SCRUBBER,
@@ -77,13 +76,15 @@
 		/area/mine/explored,
 		/area/mine/unexplored,
 		/area/centcom/control,
-		/area/maintenance/exterior
+		/area/maintenance/exterior,
+		/area/hallway/stairwell
 	)
 
 	area_coherency_test_subarea_count = list(
 			/area/constructionsite = 7,
 			/area/constructionsite/maintenance = 14,
 			/area/solar/constructionsite = 3,
+			/area/hallway/stairwell = 5
 	)
 
 	area_usage_test_exempted_areas = list(
