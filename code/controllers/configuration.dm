@@ -222,6 +222,8 @@ var/list/gamemode_cache = list()
 	var/radiation_resistance_multiplier = 6.5
 	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
 
+	var/autostealth = 0 // Staff get automatic stealth after this many minutes
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -718,6 +720,9 @@ var/list/gamemode_cache = list()
 
 				if("wait_for_sigusr1")
 					config.wait_for_sigusr1_reboot = 1
+
+				if("autostealth")
+					config.autostealth = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
