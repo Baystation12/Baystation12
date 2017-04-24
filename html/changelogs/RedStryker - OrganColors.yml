@@ -1,7 +1,0 @@
-author: RedStryker
-
-delete-after: True
-
-changes: 
-  - tweak: "Recolored the kidneys and liver to look more realistic."
-  - imageadd: "Added a stomach sprite for later use when stomachs are coded."
