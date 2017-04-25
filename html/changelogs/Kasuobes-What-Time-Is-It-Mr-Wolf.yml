@@ -1,0 +1,4 @@
+author: Haswell
+delete-after: True
+changes:
+  - tweak: "Station time and round duration now display seconds."

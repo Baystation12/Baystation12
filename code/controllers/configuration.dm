@@ -222,6 +222,8 @@ var/list/gamemode_cache = list()
 	var/radiation_resistance_multiplier = 6.5
 	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
 
+	var/year_offset = 544 //Bay default year offset
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -780,6 +782,9 @@ var/list/gamemode_cache = list()
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
+
+				if("year_offset")
+					config.year_offset = value
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
