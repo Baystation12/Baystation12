@@ -508,8 +508,8 @@
 	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype( W, /obj/item/weapon/pen/crayon ))
-		var/obj/item/weapon/pen/crayon/C = W
+	if(istype( W, /obj/item/weapon/pen/marker ))
+		var/obj/item/weapon/pen/marker/C = W
 		var/clr = C.colourName
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))

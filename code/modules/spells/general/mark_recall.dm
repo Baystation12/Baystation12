@@ -49,7 +49,7 @@
 
 /obj/effect/cleanable/wizard_mark
 	name = "\improper Mark of the Wizard"
-	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with crayons again."
+	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with markers again."
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"
 

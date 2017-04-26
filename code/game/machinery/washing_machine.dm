@@ -20,11 +20,11 @@
 	//0 = not hacked
 	//1 = hacked
 	var/gibs_ready = 0
-	var/obj/crayon
+	var/obj/marker
 
 /obj/machinery/washing_machine/Destroy()
-	qdel(crayon)
-	crayon = null
+	qdel(marker)
+	marker = null
 	. = ..()
 
 /obj/machinery/washing_machine/verb/start()
@@ -50,9 +50,9 @@
 		if(isitem(A))
 			var/obj/item/I = A
 			I.decontaminate()
-			if(crayon && iscolorablegloves(I))
+			if(marker && iscolorablegloves(I))
 				var/obj/item/clothing/gloves/C = I
-				C.color = crayon.color
+				C.color = marker.color
 
 	//Tanning!
 	for(var/obj/item/stack/material/hairlesshide/HH in contents)
@@ -81,12 +81,12 @@
 	icon_state = "wm_[state][panel]"
 
 /obj/machinery/washing_machine/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/pen/crayon) || istype(W,/obj/item/weapon/stamp))
+	if(istype(W,/obj/item/weapon/pen/marker) || istype(W,/obj/item/weapon/stamp))
 		if( state in list(	1, 3, 6 ) )
-			if(!crayon)
+			if(!marker)
 				user.drop_item()
-				crayon = W
-				crayon.forceMove(src)
+				marker = W
+				marker.forceMove(src)
 			else
 				..()
 		else
@@ -174,7 +174,7 @@
 			state = 3
 			for(var/atom/movable/O in contents)
 				O.forceMove(src)
-			crayon = null
+			marker = null
 			state = 1
 		if(5)
 			to_chat(user, "<span class='warning'>The [src] is busy.</span>")
@@ -188,7 +188,7 @@
 					M.gib()
 			for(var/atom/movable/O in contents)
 				O.forceMove(src.loc)
-			crayon = null
+			marker = null
 			state = 1
 
 

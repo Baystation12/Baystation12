@@ -1,4 +1,4 @@
-/obj/effect/decal/cleanable/crayon
+/obj/effect/decal/cleanable/marker
 	name = "rune"
 	desc = "A rune drawn in permanent marker."
 	icon = 'icons/obj/rune.dmi'

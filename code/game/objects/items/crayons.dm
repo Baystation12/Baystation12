@@ -1,53 +1,53 @@
-/obj/item/weapon/pen/crayon/red
-	icon_state = "crayonred"
+/obj/item/weapon/pen/marker/red
+	icon_state = "markerred"
 	colour = "#da0000"
 	shadeColour = "#810c0c"
 	colourName = "red"
 
-/obj/item/weapon/pen/crayon/orange
-	icon_state = "crayonorange"
+/obj/item/weapon/pen/marker/orange
+	icon_state = "markerorange"
 	colour = "#ff9300"
 	shadeColour = "#a55403"
 	colourName = "orange"
 
-/obj/item/weapon/pen/crayon/yellow
-	icon_state = "crayonyellow"
+/obj/item/weapon/pen/marker/yellow
+	icon_state = "markeryellow"
 	colour = "#fff200"
 	shadeColour = "#886422"
 	colourName = "yellow"
 
-/obj/item/weapon/pen/crayon/green
-	icon_state = "crayongreen"
+/obj/item/weapon/pen/marker/green
+	icon_state = "markergreen"
 	colour = "#a8e61d"
 	shadeColour = "#61840f"
 	colourName = "green"
 
-/obj/item/weapon/pen/crayon/blue
-	icon_state = "crayonblue"
+/obj/item/weapon/pen/marker/blue
+	icon_state = "markerblue"
 	colour = "#00b7ef"
 	shadeColour = "#0082a8"
 	colourName = "blue"
 
-/obj/item/weapon/pen/crayon/purple
-	icon_state = "crayonpurple"
+/obj/item/weapon/pen/marker/purple
+	icon_state = "markerpurple"
 	colour = "#da00ff"
 	shadeColour = "#810cff"
 	colourName = "purple"
 
-/obj/item/weapon/pen/crayon/random/initialize()
-	var/crayon_type = pick(subtypesof(/obj/item/weapon/pen/crayon) - /obj/item/weapon/pen/crayon/random)
-	new crayon_type(loc)
+/obj/item/weapon/pen/marker/random/initialize()
+	var/marker_type = pick(subtypesof(/obj/item/weapon/pen/marker) - /obj/item/weapon/pen/marker/random)
+	new marker_type(loc)
 	qdel(src)
 
-/obj/item/weapon/pen/crayon/mime
-	icon_state = "crayonmime"
+/obj/item/weapon/pen/marker/mime
+	icon_state = "markermime"
 	desc = "A very sad-looking marker."
 	colour = "#ffffff"
 	shadeColour = "#000000"
 	colourName = "mime"
 	uses = 0
 
-/obj/item/weapon/pen/crayon/mime/attack_self(mob/living/user as mob) //inversion
+/obj/item/weapon/pen/marker/mime/attack_self(mob/living/user as mob) //inversion
 	if(colour != "#ffffff" && shadeColour != "#000000")
 		colour = "#ffffff"
 		shadeColour = "#000000"
@@ -58,19 +58,19 @@
 		to_chat(user, "You will now draw in black and white with this marker.")
 	return
 
-/obj/item/weapon/pen/crayon/rainbow
-	icon_state = "crayonrainbow"
+/obj/item/weapon/pen/marker/rainbow
+	icon_state = "markerrainbow"
 	colour = "#fff000"
 	shadeColour = "#000fff"
 	colourName = "rainbow"
 	uses = 0
 
-/obj/item/weapon/pen/crayon/rainbow/attack_self(mob/living/user as mob)
+/obj/item/weapon/pen/marker/rainbow/attack_self(mob/living/user as mob)
 	colour = input(user, "Please select the main colour.", "marker colour") as color
 	shadeColour = input(user, "Please select the shade colour.", "marker colour") as color
 	return
 
-/obj/item/weapon/pen/crayon/proc/write_message()
+/obj/item/weapon/pen/marker/proc/write_message()
 	var/inputphrases = list(
 		"**** ahead.",
 		"Look out for ****.",
@@ -92,7 +92,7 @@
 	var/catbodyparts = list("head","neck","stomach","back","arm","leg","heel","rear","tail","wings","anywhere")
 	var/catattributes = list("magic","burn","bleeding","toxin","brain damage","suffocation","brute force","SSD")
 	var/catconcepts = list("chance","hint","secret","happiness","sorrow","life","death","elation","grief","hope","despair","light","dark","bravery","resignation","comfort","tears","apathy","lust","robust")
-	var/catphrases = list("Robust Softdrinks: more robust than a toolbox to the head","Report suspicious behavior","Help me","Stay safe","I need coffee","Another day, another thaler","Have you seen Ian","Do you know how much faxes cost","why me","help","they're coming","I <3 Beepsky")
+	var/catphrases = list("Robust Softdrinks: more robust than a toolbox to the head","Report suspicious behavior","Help me","Stay safe","I need coffee","Another day, another thaler","Have you seen Ian","Do you know how much faxes cost","why me","help","they're coming","I <3 Beepsky","Don't eat markers, kids","the end is nigh")
 	var/fillcategory
 	var/basephrase = input("Choose your base phrase.", "Write a message") in inputphrases
 	var/fillphrase
@@ -146,7 +146,7 @@
 			message = basephrase
 	return message
 
-/obj/item/weapon/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
+/obj/item/weapon/pen/marker/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
 	if(istype(target,/turf/simulated/floor))
 		var/drawtype = input("Choose what you'd like to draw.", "marker scribbles") in list("graffiti","rune","letter","arrow","message")
@@ -170,9 +170,9 @@
 				drawtype = "message"
 				desc = "A helpful (or not) message from a fellow crewmember, written in permanent marker. It reads, '[message]'"
 		if(instant || do_after(user, 50))
-			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype,desc)
+			new /obj/effect/decal/cleanable/marker(target,colour,shadeColour,drawtype,desc)
 			to_chat(user, "You finish drawing.")
-			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
+			target.add_fingerprint(user)		// Adds their fingerprints to the floor the marker is drawn on.
 			if(uses)
 				uses--
 				if(!uses)
@@ -180,15 +180,15 @@
 					qdel(src)
 	return
 
-/*/obj/item/weapon/pen/crayon/attack(mob/living/carbon/M as mob, mob/user as mob)
+/*/obj/item/weapon/pen/marker/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(istype(M) && M == user)
-		to_chat(M, "You take a bite of the crayon and swallow it.")
+		to_chat(M, "You take a bite of the marker and swallow it.")
 		M.nutrition += 1
-		M.reagents.add_reagent("crayon_dust",min(5,uses)/3)
+		M.reagents.add_reagent("marker_ink",min(5,uses)/3)
 		if(uses)
 			uses -= 5
 			if(uses <= 0)
-				to_chat(M, "<span class='warning'>You ate your crayon!</span>")
+				to_chat(M, "<span class='warning'>You ate your marker!</span>")
 				qdel(src)
 	else
 		..()*/
