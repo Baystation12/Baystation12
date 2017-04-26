@@ -1,7 +1,7 @@
 /*
  *
  *  Map Unit Tests.
- *  Zone checks / APC / Scrubber / Vent.
+ *  Zone checks / APC / Scrubber / Vent / Cryopod Computers.
  *
  *
  */
@@ -283,6 +283,31 @@ datum/unit_test/landmark_check/start_test()
 	else
 		pass("Exactly one safe landmark, and exactly one space landmark found.")
 
+	return 1
+
+//=======================================================================================
+
+datum/unit_test/cryopod_comp_check
+	name = "MAP: Cryopod Validity Check"
+
+datum/unit_test/cryopod_comp_check/start_test()
+	var/pass = TRUE
+	
+	for(var/obj/machinery/cryopod/C in machines)
+		if(!C.control_computer)
+			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
+			pass = FALSE
+			
+	for(var/obj/machinery/computer/cryopod/C in machines)
+		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
+			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
+			pass = FALSE
+			
+	if(pass)
+		pass("All cryopods have their respective control computers.")
+	else
+		fail("Cryopods were not set up correctly.")
+		
 	return 1
 
 //=======================================================================================
