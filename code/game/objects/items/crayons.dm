@@ -90,15 +90,15 @@
 		"****.",
 		"****?")
 	var/catcharacters = list("enemy","soldier","security guard","robot","wizard","captain","skeleton","ghost","spider","lizard","engineer","roboticist","research director","statue","scientist","strange creature","doctor","chemist","head of personnel","chaplain","wretch","charmer","miscreant","liar","fatty","beanpole","cargo technician","head of security","master","prisoner")
-	var/catobjects = list("fire","lever","switch","door","loot","weapon","shield","projectile","armor","item","trap","crate","locker","gun","laser","tool","clothes","hat","device")
+	var/catobjects = list("fire","lever","switch","door","loot","weapon","shield","message","projectile","armor","item","trap","crate","locker","gun","laser","tool","clothes","hat","device")
 	var/cattechniques = list("close-quarters combat","gunfight","taking hostages","luring it out","beating to a pulp","lying in ambush","stealth","leaving messages","leaving hints","bombing","fleeing","serpentine","charging in","diversion","EMP","grenade","headshots","lying down","dashing through")
 	var/catactions = list("sleeping","stepping back","jumping","attacking","holding with both hands","kicking","stabbing","shooting","dodging","building","healing","hiding","talking","whispering","drinking","eating")
-	var/catgeography = list("hallway","hidden door","shortcut","detour","dead end","maintenance tunnel","labyrinth","space","safe zone","danger zone","bright spot","dark spot","open area","tight spot","hidden room","secure room","research","cargo","security","bridge","engineering","medical","bar","kitchen","arrivals","vault")
+	var/catgeography = list("hallway","hidden door","airlock","shortcut","detour","dead end","maintenance tunnel","labyrinth","space","safe zone","danger zone","bright spot","dark spot","open area","tight spot","hidden room","secure room","research","cargo","security","bridge","engineering","medical","bar","kitchen","arrivals","vault")
 	var/catorientation = list("front","back","left","right","up","down","feet","head","back")
-	var/catbodyparts = list("head","neck","stomach","back","arm","leg","heel","rear","tail","wings","anywhere")
-	var/catattributes = list("magic","burn","bleeding","toxin","brain damage","suffocation","brute force","SSD")
+	var/catbodyparts = list("head","neck","stomach","back","arm","leg","heel","rear","tail","wings","anywhere","mouth","eyes","foot","hand")
+	var/catattributes = list("magic","burn","bleeding","toxin","brain damage","suffocation","brute force","SSD","fracture")
 	var/catconcepts = list("chance","hint","secret","happiness","sorrow","life","death","elation","grief","hope","despair","light","dark","bravery","resignation","comfort","tears","apathy","lust","robust")
-	var/catphrases = list("Robust Softdrinks: more robust than a toolbox to the head","Report suspicious behavior","Help me","Stay safe","I need coffee","Another day, another thaler","Have you seen Ian","Do you know how much faxes cost","why me","help","they're coming","I <3 Beepsky","Don't eat markers, kids","the end is nigh")
+	var/catphrases = list("Robust Softdrinks: more robust than a toolbox to the head","Report suspicious behavior","Help me","Stay safe","I need coffee","Another day, another thaler","Have you seen Ian","Do you know how much faxes cost","why me","help","they're coming","I <3 Beepsky","Don't eat markers, kids","the end is nigh","I don't get paid enough for this")
 	var/fillcategory
 	var/basephrase = input("Choose your base phrase.", "Write a message") in inputphrases
 	var/fillphrase
