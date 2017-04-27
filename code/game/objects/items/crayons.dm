@@ -88,7 +88,7 @@
 		"Imminent ****...",
 		"Weakness: ****",
 		"****.",
-		"****?"
+		"****?",
 		"Where is the ****?")
 	var/catcharacters = list("enemy","soldier","security guard","marine","robot","cyborg","captain","skeleton","ghost","spider","lizard","engineer","roboticist","research director","statue","scientist","strange creature","doctor","chemist","head of personnel","chaplain","wretch","charmer","miscreant","liar","fatty","beanpole","cargo technician","head of security","master","prisoner")
 	var/catobjects = list("fire","lever","switch","door","loot","weapon","shield","message","projectile","armor","item","trap","crate","locker","gun","laser","tool","clothes","hat","device")
