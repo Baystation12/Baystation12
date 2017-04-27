@@ -22,184 +22,185 @@
 "av" = (/turf/simulated/shuttle/wall/alien{dir = 8; icon_state = "bog12"},/area/bog_vessel)
 "aw" = (/obj/machinery/light{dir = 4},/obj/structure/bed/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
 "ax" = (/obj/structure/lattice,/turf/space,/area/space)
-"ay" = (/turf/simulated/shuttle/wall/corner/alien/nw,/area/bogshuttle_hangar/start)
-"az" = (/turf/simulated/shuttle/wall/alien{dir = 8; icon_state = "bog12"},/area/bogshuttle_hangar/start)
-"aA" = (/turf/simulated/shuttle/wall/corner/alien/ne,/area/bogshuttle_hangar/start)
-"aB" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aC" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/shuttle/wall/alien{dir = 10; icon_state = "bog10"},/area/bogshuttle_hangar/start)
-"aD" = (/obj/machinery/atmospherics/unary/engine/ion{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aE" = (/turf/simulated/shuttle/wall/alien{dir = 9; icon_state = "bog9"},/area/bog_vessel)
-"aF" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"aG" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/se,/area/bogshuttle_hangar/start)
-"aH" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aI" = (/obj/structure/bed/chair/bogani,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aJ" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/sw,/area/bogshuttle_hangar/start)
-"aK" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog14"},/area/bogshuttle_hangar/start)
-"aL" = (/obj/structure/table/steel_reinforced,/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aM" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aN" = (/turf/simulated/shuttle/wall/alien{dir = 10; icon_state = "bog10"},/area/bogshuttle_hangar/start)
-"aO" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (EAST)"; icon_state = "map_connector"; dir = 4},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"aP" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"aQ" = (/obj/machinery/atmospherics/valve{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"aR" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"aS" = (/obj/structure/lattice,/obj/machinery/atmospherics/unary/engine/ion{dir = 4},/turf/simulated/shuttle/wall/alien{dir = 3; icon_state = "bog3"},/area/bog_vessel)
-"aT" = (/turf/simulated/shuttle/wall/alien{dir = 1; icon_state = "bog1"},/area/bogshuttle_hangar/start)
-"aU" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aV" = (/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aW" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (EAST)"; icon_state = "map_connector"; dir = 4},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aX" = (/obj/machinery/atmospherics/valve{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aY" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"aZ" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ba" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bb" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bc" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bd" = (/obj/machinery/computer/shuttle_control/explore/bogani,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"be" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bf" = (/obj/machinery/atmospherics/binary/pump/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bg" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bh" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bi" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bridge_eva_pump"},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bj" = (/obj/machinery/door/airlock/alien,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bk" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bl" = (/obj/structure/table/rack/bograck,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bm" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog2"},/area/bogshuttle_hangar/start)
-"bn" = (/obj/machinery/atmospherics/pipe/simple/visible/black,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bo" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bp" = (/turf/simulated/shuttle/wall/alien{dir = 1; icon_state = "bog1"},/area/bog_vessel)
-"bq" = (/turf/simulated/shuttle/wall/corner/alien/sw,/area/bogshuttle_hangar/start)
-"br" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/ne,/area/bogshuttle_hangar/start)
-"bs" = (/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bt" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bu" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/nw,/area/bogshuttle_hangar/start)
-"bv" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog13"},/area/bogshuttle_hangar/start)
-"bw" = (/obj/structure/table/steel_reinforced,/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bx" = (/turf/simulated/shuttle/wall/alien{dir = 9; icon_state = "bog9"},/area/bogshuttle_hangar/start)
-"by" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bz" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bA" = (/obj/structure/window/phoronbasic,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bB" = (/obj/machinery/light{dir = 4},/obj/structure/bed/bogani,/obj/structure/window/phoronbasic,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bC" = (/obj/machinery/recharger/wallcharger,/turf/simulated/shuttle/wall/alien{dir = 8; icon_state = "bog12"},/area/bogshuttle_hangar/start)
-"bD" = (/turf/simulated/shuttle/wall/corner/alien/se,/area/bogshuttle_hangar/start)
-"bE" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/pipe/simple/visible/yellow{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
-"bF" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/shuttle/wall/alien{dir = 9; icon_state = "bog9"},/area/bogshuttle_hangar/start)
-"bG" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/ne,/area/bog_vessel)
-"bH" = (/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bI" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/nw,/area/bog_vessel)
-"bJ" = (/obj/machinery/recharger/wallcharger,/turf/simulated/shuttle/wall/alien{dir = 3; icon_state = "bog3"},/area/bog_vessel)
-"bK" = (/turf/space,/turf/simulated/shuttle/wall/corner/alien/sw,/area/bog_vessel)
-"bL" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog15"},/area/bog_vessel)
-"bM" = (/obj/machinery/door/airlock/alien,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bN" = (/turf/space,/turf/simulated/shuttle/wall/corner/alien/se,/area/bog_vessel)
-"bO" = (/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bP" = (/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bQ" = (/obj/machinery/light,/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bR" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog13"},/area/bog_vessel)
-"bS" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bT" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bU" = (/obj/machinery/access_button/airlock_exterior{frequency = 1379; master_tag = "bog_fore"; pixel_x = 40; pixel_y = 0; req_one_access = list(202)},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bV" = (/obj/machinery/access_button/airlock_exterior{frequency = 1379; master_tag = "bog_aft"; pixel_x = 25; pixel_y = 0; req_one_access = list(202)},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bW" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bX" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bY" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_outer"; locked = 1},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"bZ" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_outer"; locked = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ca" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_aft_outer"; locked = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cb" = (/obj/structure/lattice,/turf/space,/area/bog_vessel)
-"cc" = (/obj/structure/lattice,/obj/structure/grille,/turf/space,/area/bog_vessel)
-"cd" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ce" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cf" = (/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "bog_fore_sensor"; pixel_x = -30; pixel_y = -8},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cg" = (/obj/machinery/light{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bog_fore_pump"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ch" = (/obj/machinery/light{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 2; frequency = 1379; id_tag = "bog_aft_pump"},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "bog_aft"; name = "Shuttle Airlock Console"; pixel_x = -24; pixel_y = 0; req_access = list(202); tag_airpump = "bog_aft_pump"; tag_chamber_sensor = "bog_aft_sensor"; tag_exterior_door = "bog_aft_outer"; tag_interior_door = "bog_aft_inner"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "bog_aft_sensor"; pixel_x = 30; pixel_y = -8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ci" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog2"},/area/bog_vessel)
-"cj" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ck" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "bog_fore"; name = "Shuttle Airlock Console"; pixel_x = -24; pixel_y = 0; req_access = list(202); tag_airpump = "bog_fore_pump"; tag_chamber_sensor = "bog_fore_sensor"; tag_exterior_door = "bog_fore_outer"; tag_interior_door = "bog_fore_inner"},/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cl" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bog_fore_pump"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cm" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_aft_inner"; locked = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cn" = (/turf/space,/area/bog_vessel)
-"co" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_inner"; locked = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cp" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_inner"; locked = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cq" = (/obj/machinery/access_button/airlock_interior{master_tag = "bog_aft"; pixel_x = -25; pixel_y = 0; req_access = list(202)},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cr" = (/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cs" = (/obj/machinery/access_button/airlock_interior{master_tag = "bog_fore"; pixel_x = 40; pixel_y = 0; req_access = list(202)},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ct" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cu" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cv" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/chlorine,/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cw" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cx" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cy" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cz" = (/obj/machinery/atmospherics/pipe/manifold/visible/black,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cA" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/black,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cB" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cC" = (/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cD" = (/obj/structure/table/steel_reinforced,/obj/machinery/recharger,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cE" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cF" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cG" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cH" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cI" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cJ" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cK" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cL" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cM" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cN" = (/obj/machinery/atmospherics/pipe/simple/visible/black,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cO" = (/obj/structure/bed/chair/bogani{tag = "icon-bogchair_preview (NORTH)"; icon_state = "bogchair_preview"; dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cP" = (/obj/structure/grille/cult,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cQ" = (/obj/machinery/door/window/northleft,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cR" = (/obj/structure/grille/cult,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cS" = (/obj/machinery/atmospherics/pipe/manifold/visible/black{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cT" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cU" = (/obj/machinery/atmospherics/trinary/filter{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cV" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/table/steel_reinforced,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cW" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on{dir = 1},/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cX" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cY" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"cZ" = (/turf/simulated/shuttle/wall/alien{dir = 5; icon_state = "bog5"},/area/bog_vessel)
-"da" = (/obj/structure/bed/chair/bogani{tag = "icon-bogchair_preview (WEST)"; icon_state = "bogchair_preview"; dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"db" = (/obj/effect/overmap/ship/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dc" = (/obj/machinery/computer/helm{icon_keyboard = "bogconsole"; icon_screen = "bogOM"; icon_state = "bogconsole"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dd" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"de" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/recharger/wallcharger,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"df" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/table/steel_reinforced,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dg" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dh" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"di" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dj" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dk" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dl" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bridge_eva_pump"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dm" = (/obj/machinery/computer/engines{icon_keyboard = "bogconsole"; icon_screen = "bogOM"; icon_state = "bogconsole"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dn" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"do" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dp" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dq" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dr" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"ds" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dt" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"du" = (/obj/machinery/atmospherics/binary/pump/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dv" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dw" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dx" = (/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dy" = (/obj/structure/bed/chair/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dz" = (/obj/machinery/door/window/southright,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dA" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dB" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dC" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dD" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dE" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dF" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dG" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dH" = (/obj/machinery/atmospherics/pipe/manifold/visible/supply{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dI" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dJ" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dK" = (/obj/machinery/atmospherics/binary/pump/on{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dL" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dM" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/chlorine,/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dN" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dO" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dP" = (/obj/machinery/light{dir = 1},/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dQ" = (/obj/machinery/door/window/brigdoor/eastleft,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dR" = (/obj/machinery/door/window/brigdoor/westleft,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dS" = (/obj/structure/window/phoronbasic{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
-"dT" = (/obj/structure/bed/bogani,/obj/structure/window/phoronbasic,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"ay" = (/turf/simulated/floor/shuttle/alien,/area/space)
+"az" = (/turf/simulated/shuttle/wall/corner/alien/nw,/area/bogshuttle_hangar/start)
+"aA" = (/turf/simulated/shuttle/wall/alien{dir = 8; icon_state = "bog12"},/area/bogshuttle_hangar/start)
+"aB" = (/turf/simulated/shuttle/wall/corner/alien/ne,/area/bogshuttle_hangar/start)
+"aC" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aD" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/shuttle/wall/alien{dir = 10; icon_state = "bog10"},/area/bogshuttle_hangar/start)
+"aE" = (/obj/machinery/atmospherics/unary/engine/ion{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aF" = (/turf/simulated/shuttle/wall/alien{dir = 9; icon_state = "bog9"},/area/bog_vessel)
+"aG" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"aH" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/se,/area/bogshuttle_hangar/start)
+"aI" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aJ" = (/obj/structure/bed/chair/bogani,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aK" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/sw,/area/bogshuttle_hangar/start)
+"aL" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog14"},/area/bogshuttle_hangar/start)
+"aM" = (/obj/structure/table/steel_reinforced,/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aN" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aO" = (/turf/simulated/shuttle/wall/alien{dir = 10; icon_state = "bog10"},/area/bogshuttle_hangar/start)
+"aP" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (EAST)"; icon_state = "map_connector"; dir = 4},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"aQ" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"aR" = (/obj/machinery/atmospherics/valve{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"aS" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"aT" = (/obj/structure/lattice,/obj/machinery/atmospherics/unary/engine/ion{dir = 4},/turf/simulated/shuttle/wall/alien{dir = 3; icon_state = "bog3"},/area/bog_vessel)
+"aU" = (/turf/simulated/shuttle/wall/alien{dir = 1; icon_state = "bog1"},/area/bogshuttle_hangar/start)
+"aV" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aW" = (/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aX" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (EAST)"; icon_state = "map_connector"; dir = 4},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aY" = (/obj/machinery/atmospherics/valve{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"aZ" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"ba" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bb" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bc" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bd" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"be" = (/obj/machinery/computer/shuttle_control/explore/bogani,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bf" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bg" = (/obj/machinery/atmospherics/binary/pump/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bh" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bi" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bj" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bridge_eva_pump"},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bk" = (/obj/machinery/door/airlock/alien,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bl" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bm" = (/obj/structure/table/rack/bograck,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bn" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog2"},/area/bogshuttle_hangar/start)
+"bo" = (/obj/machinery/atmospherics/pipe/simple/visible/black,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bp" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bq" = (/turf/simulated/shuttle/wall/alien{dir = 1; icon_state = "bog1"},/area/bog_vessel)
+"br" = (/turf/simulated/shuttle/wall/corner/alien/sw,/area/bogshuttle_hangar/start)
+"bs" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/ne,/area/bogshuttle_hangar/start)
+"bt" = (/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bu" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bv" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/nw,/area/bogshuttle_hangar/start)
+"bw" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog13"},/area/bogshuttle_hangar/start)
+"bx" = (/obj/structure/table/steel_reinforced,/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"by" = (/turf/simulated/shuttle/wall/alien{dir = 9; icon_state = "bog9"},/area/bogshuttle_hangar/start)
+"bz" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bA" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bB" = (/obj/structure/window/phoronbasic,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bC" = (/obj/machinery/light{dir = 4},/obj/structure/bed/bogani,/obj/structure/window/phoronbasic,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bD" = (/obj/machinery/recharger/wallcharger,/turf/simulated/shuttle/wall/alien{dir = 8; icon_state = "bog12"},/area/bogshuttle_hangar/start)
+"bE" = (/turf/simulated/shuttle/wall/corner/alien/se,/area/bogshuttle_hangar/start)
+"bF" = (/obj/effect/wingrille_spawn/reinforced_phoron/full,/obj/machinery/atmospherics/pipe/simple/visible/yellow,/obj/machinery/atmospherics/pipe/simple/visible/yellow{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/shuttle/alien,/area/bogshuttle_hangar/start)
+"bG" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/shuttle/wall/alien{dir = 9; icon_state = "bog9"},/area/bogshuttle_hangar/start)
+"bH" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/ne,/area/bog_vessel)
+"bI" = (/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bJ" = (/turf/simulated/floor/shuttle/alien,/turf/simulated/shuttle/wall/corner/alien/nw,/area/bog_vessel)
+"bK" = (/obj/machinery/recharger/wallcharger,/turf/simulated/shuttle/wall/alien{dir = 3; icon_state = "bog3"},/area/bog_vessel)
+"bL" = (/turf/space,/turf/simulated/shuttle/wall/corner/alien/sw,/area/bog_vessel)
+"bM" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog15"},/area/bog_vessel)
+"bN" = (/obj/machinery/door/airlock/alien,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bO" = (/turf/space,/turf/simulated/shuttle/wall/corner/alien/se,/area/bog_vessel)
+"bP" = (/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bQ" = (/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bR" = (/obj/machinery/light,/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bS" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog13"},/area/bog_vessel)
+"bT" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bU" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bV" = (/obj/machinery/access_button/airlock_exterior{frequency = 1379; master_tag = "bog_fore"; pixel_x = 40; pixel_y = 0; req_one_access = list(202)},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bW" = (/obj/machinery/access_button/airlock_exterior{frequency = 1379; master_tag = "bog_aft"; pixel_x = 25; pixel_y = 0; req_one_access = list(202)},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bX" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bY" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"bZ" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_outer"; locked = 1},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"ca" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_outer"; locked = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cb" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_aft_outer"; locked = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cc" = (/obj/structure/lattice,/turf/space,/area/bog_vessel)
+"cd" = (/obj/structure/lattice,/obj/structure/grille,/turf/space,/area/bog_vessel)
+"ce" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cf" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cg" = (/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "bog_fore_sensor"; pixel_x = -30; pixel_y = -8},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"ch" = (/obj/machinery/light{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bog_fore_pump"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"ci" = (/obj/machinery/light{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 2; frequency = 1379; id_tag = "bog_aft_pump"},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "bog_aft"; name = "Shuttle Airlock Console"; pixel_x = -24; pixel_y = 0; req_access = list(202); tag_airpump = "bog_aft_pump"; tag_chamber_sensor = "bog_aft_sensor"; tag_exterior_door = "bog_aft_outer"; tag_interior_door = "bog_aft_inner"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "bog_aft_sensor"; pixel_x = 30; pixel_y = -8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cj" = (/turf/simulated/shuttle/wall/alien{icon_state = "bog2"},/area/bog_vessel)
+"ck" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cl" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "bog_fore"; name = "Shuttle Airlock Console"; pixel_x = -24; pixel_y = 0; req_access = list(202); tag_airpump = "bog_fore_pump"; tag_chamber_sensor = "bog_fore_sensor"; tag_exterior_door = "bog_fore_outer"; tag_interior_door = "bog_fore_inner"},/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cm" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bog_fore_pump"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cn" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_aft_inner"; locked = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"co" = (/turf/space,/area/bog_vessel)
+"cp" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_inner"; locked = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cq" = (/obj/machinery/door/airlock/alien{frequency = 1379; id_tag = "bog_fore_inner"; locked = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cr" = (/obj/machinery/access_button/airlock_interior{master_tag = "bog_aft"; pixel_x = -25; pixel_y = 0; req_access = list(202)},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cs" = (/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"ct" = (/obj/machinery/access_button/airlock_interior{master_tag = "bog_fore"; pixel_x = 40; pixel_y = 0; req_access = list(202)},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cu" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cv" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cw" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/chlorine,/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cx" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cy" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cz" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cA" = (/obj/machinery/atmospherics/pipe/manifold/visible/black,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cB" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/black,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cC" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cD" = (/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cE" = (/obj/structure/table/steel_reinforced,/obj/machinery/recharger,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cF" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cG" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cH" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cI" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cJ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/light{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cK" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cL" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cM" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cN" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cO" = (/obj/machinery/atmospherics/pipe/simple/visible/black,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cP" = (/obj/structure/bed/chair/bogani{tag = "icon-bogchair_preview (NORTH)"; icon_state = "bogchair_preview"; dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cQ" = (/obj/structure/grille/cult,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cR" = (/obj/machinery/door/window/northleft,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cS" = (/obj/structure/grille/cult,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cT" = (/obj/machinery/atmospherics/pipe/manifold/visible/black{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cU" = (/obj/machinery/atmospherics/pipe/simple/visible/black{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cV" = (/obj/machinery/atmospherics/trinary/filter{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cW" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/table/steel_reinforced,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cX" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on{dir = 1},/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cY" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"cZ" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"da" = (/turf/simulated/shuttle/wall/alien{dir = 5; icon_state = "bog5"},/area/bog_vessel)
+"db" = (/obj/structure/bed/chair/bogani{tag = "icon-bogchair_preview (WEST)"; icon_state = "bogchair_preview"; dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dc" = (/obj/effect/overmap/ship/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dd" = (/obj/machinery/computer/helm{icon_keyboard = "bogconsole"; icon_screen = "bogOM"; icon_state = "bogconsole"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"de" = (/obj/machinery/atmospherics/unary/vent_scrubber/bogani/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"df" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/recharger/wallcharger,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dg" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/table/steel_reinforced,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dh" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"di" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 9},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dj" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dk" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dl" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dm" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "bridge_eva_pump"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dn" = (/obj/machinery/computer/engines{icon_keyboard = "bogconsole"; icon_screen = "bogOM"; icon_state = "bogconsole"},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"do" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dp" = (/obj/machinery/door/airlock/alien,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dq" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dr" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"ds" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dt" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"du" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 10},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dv" = (/obj/machinery/atmospherics/binary/pump/on{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dw" = (/obj/machinery/atmospherics/pipe/manifold/visible/yellow,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dx" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dy" = (/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dz" = (/obj/structure/bed/chair/bogani,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dA" = (/obj/machinery/door/window/southright,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dB" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dC" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dD" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dE" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dF" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dG" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dH" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dI" = (/obj/machinery/atmospherics/pipe/manifold/visible/supply{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dJ" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dK" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dL" = (/obj/machinery/atmospherics/binary/pump/on{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dM" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dN" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/chlorine,/obj/machinery/light,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dO" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/chlorine,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dP" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dQ" = (/obj/machinery/light{dir = 1},/obj/structure/table/rack/bograck,/obj/item/weapon/gun/energy/pulse_rifle/bogani,/obj/item/weapon/melee/energy/sword/bogsword,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dR" = (/obj/machinery/door/window/brigdoor/eastleft,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dS" = (/obj/machinery/door/window/brigdoor/westleft,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dT" = (/obj/structure/window/phoronbasic{dir = 8},/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
+"dU" = (/obj/structure/bed/bogani,/obj/structure/window/phoronbasic,/turf/simulated/floor/shuttle/alien,/area/bog_vessel)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -224,49 +225,49 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacadaeafaaaaaaabagadadadadadadadadadadadahafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiajakalamaaaaaaanaiaoaoaoaoaoaoaoakakakakajalafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaoakapaqarasasasarakakakakakakakakakatatakakakaraaaaaaaaaaabauavavavauafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaoakakakawaraaaxaaarakaaayazazaAaaayazaBaCaDakakarasasasasasanaiakajakalaEasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaFakakakapaqaraaaxaaarakayaGaHaIaJaKaGaLaMaJaNakakaraaaaaxaaaaaraOaPaQaRaPaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaFakakakakakawaraaaxaaarakaTaUaIaVaIaTaWaXaYaVaTakakaraaaaaxaaaaaraOaZakakbaaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaibbakakakakakapaqaraxaxaxarakbcbdaIbebfbgbhbhbiaVbjakbkaraxaxaxaxaxaraOaZakakbaaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaibbakakblblakakakawaraaaxaaarakbmaUaIbnaIbmaWaXboaVbmakakaraaaaaxaaaaaraOaZakakbaaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabpbbakakakblblakakapaqaraaaxaaarakbqbrbsbtbubvbrbwaMbubxakakaraaaaaxaaaaaraObyakakbzaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakblblakakbAbBaraaaxaaarakaabqbCazbDaabqazbEbFaDakakaraxaxaxaxaxanbGakakbHbIagasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakakakakakakakbJaxaxaxarakakakakakakakakakatatakakakaraaaaaxaaaabKbLagbMaebLbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebGbObObPbQakakakakbIamaaaxaaarakakakakbHakakakakakbHakakbIbNaaaaaxaaaaaabKamakanbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbRavavavaubGbSbTbIbLbNaaaxaabKbGakbUbIauavacadadahaubGbVaraaaaaaaxaaaaaaaabpbMbpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaambWbXanbNaaaaaxaaaaarbYbZanbNaaaaaaaxaabKamcaaraaaaaaaxaaaaaaaacbcbccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaxaxaxarcdcearaxaxaxaxaxaxarcfcgaraxaxaxaxaxaxaxarcharaxaxcibMciaxaxaxcbcbccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarcdcjaraaaaaaaxaaaaarckclaraaaaaaaaaxaaaaarcmanafabambkaraaaaaacbcnccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarbWbXanafaaaaaxaaabamcocparaaaaaaaaaxaaaaarcqalbRbRaEbMbpadaeauauavavavavavafaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaabaicdcjalbRavavavavbRaicrcsalafaaaaaaaxaaabaictcuakajakakakakalbLaicvcwcwcwajalafaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacadadadadadadaeafaaaaaaaaasaaabaiakcdcjakajakakakakajakcxakakalavacadadahaiakakcxakakakakakakakarbTcyczcAcBcCcCaraaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiajaoaoaoaoaocDalamasasasasasaxarakakcdcEcFcFcFcFcFcFcFcFcGcFcFcHcIcJcFcFcJcFcFcKcLcFcFcFcFcFcFcMarcNakakcNakcCcCaraaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiakakakcOakakcOakbkanafaaaaaaaxabamakakcdcjcPcPcPcPcQcPcPcPcRakakcjbIagadadahbGakcjcdakakakakakakcjarcScTcUcBakcCcCanafaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabpaoakakakakakakakakakalbRavavavavbRaiakakcdcVcPakakakakakakakcRaoakcWanbNaaaxaabKbGcXcdakakakakakakcjbpcxakbzaRcYcCcCcZbRavacaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaodaakdbdcdaakakakakddcJcFcIdecFcJcFcFcFcLdfcPakakakakakakakcRaoakakaraxaxaxaxaxarakcdakakakakakakdgcJdhakakakdiakdjdkdlajbMaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaodaakakdmdaakakakakdndodpdqdpdpdodpdpdpdrcVcPakakakakakakakcRaoakakaraxaxaxaxaxarakcdakakakakakakdsdodtakakakbadudvdkdlbHbMaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaciaoakakakakakakakakakbIauavavavavaubGakakcdcVcPakakakakakakakcRaoakdwanafaaaxaaabaibScdakakakakakakcdcidxakakakdicCcCaeauavacaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGakakakdyakakdyakbkanbNaaaaaaaxbKamakakcdcjcPcPcPcPdzcPcPcPcRakakcdalaEadadahaiakcdcdakakakakakakcdardxakakakdicCcCanbNaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGbHaoaoaoaoaocDbIamasasasasasaxarakakdAdBdpdpdpdpdpdpdpdpdCdpdpdDdqdodpdpdodpdpdEdFdpdpdpdpdpdpdGardHdIdJdKaZcCcCaraaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKacadadadadadadcZbNaaaaaaaaasaabKbGakcdcjakbHakakakakbHakcjakakbIavacadadahbGakcdakakakakakakakakardLdjaPaPaZcCcCaraaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaabKbGcdcjbIauavavavavaubGcjakbIbNaaaaaaaxaabKbGcdakakbHakakakakbIbLbGdMdNdNdNbHbIbNaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarbWbXanbNaaaaaxaabKambXbMaraaaaaaaaaxaaaaarcdbIauauagbMciadcZbRbRavavavavavbNaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarcdcjaraaaaaaaxaaaaarcjakaraaaaaaaaaxaaaaarbWanbNbKambkaraaaaaacbcnccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaxaxaxarcdcearaxaxaxaxaxaxarcjbkaraxaxaxaxaxaxaxardOaraxaxbpbMbpaxaxaxcbcbccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaabambWbXanafaaaaaxaaaaarbXbManafaaaaaaaxaaabambWaraaaaaaaxaaaaaaaacbcbccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabauavavavbRaidLcXalbLafaaaxaaabaicXakalbRavacadadahbRaidLaraaaaaaaxaaaaaaaacibMciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacZaibPbPbPdPakakakakalamaaaxaaarakakakakajakakcDaoakajakakalafaaaaaxaaaaaaabamakanafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakakakakakakakbJaxaxaxarakakakakakakakakakakakakakakaraaaaaxaaaaabbLaEbMcZbLafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakblblakakapaqaraaaxaaarakakakakakakakakakakakakakakaraxaxaxaxaxanaiakakajalaEasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacibbakakakblblakakakawaraaaxaaarcPcPcPakakcPcPcPcPcPakcPcPcParaaaaaxaaaaaraOcYakakdjaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGbbakakblblakakapaqaraaaxaaarakakdQakakdRakcPakdQakdRakakaraaaaaxaaaaaraOaZakakbaaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGbbakakakakakbAbBaraxaxaxarakakcPakakcPcPcPcPcPakcPakbkaraxaxaxaxaxaraOaZakakbaaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGaFakakakakdSblaraaaxaaarcPcPcPakakdRakcPakdQakcPcPcParaaaaaxaaaaaraOaZakakbaaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGaFakakakbAdTaraaaxaaarakakdQakakcPcPcPcPcPakdRakakaraaaaaxaaaaaraOdvaQaRdvaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGaoakakdSblaraaaxaaarakakcPakakdRakcPakdQakcPakakarasasasasasanbGakbHakbIagasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGaoakbAdTarasasasarcPcPcPakakcPcPcPcPcPakcPcPcParaaaaaaaaaabKbRavavavbRbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKbGbHakbIamaaaaaaanbGakakakakakakakakakakakbHbIbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabKacadcZbNaaaaaabKaEadadadadadadadadadadadahbNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaoakakakawaraaaxaaarakayazaAaAaBayazaAaCaDaEakakarasasasasasanaiakajakalaFasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaGakakakapaqaraaaxaaarakazaHaIaJaKaLaHaMaNaKaOakakaraaaaaxaaaaaraPaQaRaSaQaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaGakakakakakawaraaaxaaarakaUaVaJaWaJaUaXaYaZaWaUakakaraaaaaxaaaaaraPbaakakbbaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaibcakakakakakapaqaraxaxaxarakbdbeaJbfbgbhbibibjaWbkakblaraxaxaxaxaxaraPbaakakbbaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaibcakakbmbmakakakawaraaaxaaarakbnaVaJboaJbnaXaYbpaWbnakakaraaaaaxaaaaaraPbaakakbbaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabqbcakakakbmbmakakapaqaraaaxaaarakbrbsbtbubvbwbsbxaNbvbyakakaraaaaaxaaaaaraPbzakakbAaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakbmbmakakbBbCaraaaxaaarakaybrbDaAbEaybraAbFbGaEakakaraxaxaxaxaxanbHakakbIbJagasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakakakakakakakbKaxaxaxarakakakakakakakakakatatakakakaraaaaaxaaaabLbMagbNaebMbOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaebHbPbPbQbRakakakakbJamaaaxaaarakakakakbIakakakakakbIakakbJbOaaaaaxaaaaaabLamakanbOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbSavavavaubHbTbUbJbMbOaaaxaabLbHakbVbJauavacadadahaubHbWaraaaaaaaxaaaaaaaabqbNbqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaambXbYanbOaaaaaxaaaaarbZcaanbOaaaaaaaxaabLamcbaraaaaaaaxaaaaaaaacccccdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaxaxaxarcecfaraxaxaxaxaxaxarcgcharaxaxaxaxaxaxaxarciaraxaxcjbNcjaxaxaxcccccdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarceckaraaaaaaaxaaaaarclcmaraaaaaaaaaxaaaaarcnanafabamblaraaaaaacccocdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarbXbYanafaaaaaxaaabamcpcqaraaaaaaaaaxaaaaarcralbSbSaFbNbqadaeauauavavavavavafaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaabaiceckalbSavavavavbSaicsctalafaaaaaaaxaaabaicucvakajakakakakalbMaicwcxcxcxajalafaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacadadadadadadaeafaaaaaaaaasaaabaiakceckakajakakakakajakcyakakalavacadadahaiakakcyakakakakakakakarbUczcAcBcCcDcDaraaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiajaoaoaoaoaocEalamasasasasasaxarakakcecFcGcGcGcGcGcGcGcGcHcGcGcIcJcKcGcGcKcGcGcLcMcGcGcGcGcGcGcNarcOakakcOakcDcDaraaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiakakakcPakakcPakblanafaaaaaaaxabamakakceckcQcQcQcQcRcQcQcQcSakakckbJagadadahbHakckceakakakakakakckarcTcUcVcCakcDcDanafaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabqaoakakakakakakakakakalbSavavavavbSaiakakcecWcQakakakakakakakcSaoakcXanbOaaaxaabLbHcYceakakakakakakckbqcyakbAaScZcDcDdabSavacaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaodbakdcdddbakakakakdecKcGcJdfcGcKcGcGcGcMdgcQakakakakakakakcSaoakakaraxaxaxaxaxarakceakakakakakakdhcKdiakakakdjakdkdldmajbNaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaodbakakdndbakakakakdodpdqdrdqdqdpdqdqdqdscWcQakakakakakakakcSaoakakaraxaxaxaxaxarakceakakakakakakdtdpduakakakbbdvdwdldmbIbNaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacjaoakakakakakakakakakbJauavavavavaubHakakcecWcQakakakakakakakcSaoakdxanafaaaxaaabaibTceakakakakakakcecjdyakakakdjcDcDaeauavacaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHakakakdzakakdzakblanbOaaaaaaaxbLamakakceckcQcQcQcQdAcQcQcQcSakakcealaFadadahaiakceceakakakakakakceardyakakakdjcDcDanbOaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHbIaoaoaoaoaocEbJamasasasasasaxarakakdBdCdqdqdqdqdqdqdqdqdDdqdqdEdrdpdqdqdpdqdqdFdGdqdqdqdqdqdqdHardIdJdKdLbacDcDaraaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLacadadadadadaddabOaaaaaaaaasaabLbHakceckakbIakakakakbIakckakakbJavacadadahbHakceakakakakakakakakardMdkaQaQbacDcDaraaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaabLbHceckbJauavavavavaubHckakbJbOaaaaaaaxaabLbHceakakbIakakakakbJbMbHdNdOdOdObIbJbOaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarbXbYanbOaaaaaxaabLambYbNaraaaaaaaaaxaaaaarcebJauauagbNcjaddabSbSavavavavavbOaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaarceckaraaaaaaaxaaaaarckakaraaaaaaaaaxaaaaarbXanbObLamblaraaaaaacccocdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaxaxaxarcecfaraxaxaxaxaxaxarckblaraxaxaxaxaxaxaxardParaxaxbqbNbqaxaxaxcccccdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaabambXbYanafaaaaaxaaaaarbYbNanafaaaaaaaxaaabambXaraaaaaaaxaaaaaaaacccccdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabauavavavbSaidMcYalbMafaaaxaaabaicYakalbSavacadadahbSaidMaraaaaaaaxaaaaaaaacjbNcjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaaibQbQbQdQakakakakalamaaaxaaarakakakakajakakcEaoakajakakalafaaaaaxaaaaaaabamakanafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakakakakakakakbKaxaxaxarakakakakakakakakakakakakakakaraaaaaxaaaaabbMaFbNdabMafaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadakakakakbmbmakakapaqaraaaxaaarakakakakakakakakakakakakakakaraxaxaxaxaxanaiakakajalaFasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacjbcakakakbmbmakakakawaraaaxaaarcQcQcQakakcQcQcQcQcQakcQcQcQaraaaaaxaaaaaraPcZakakdkaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHbcakakbmbmakakapaqaraaaxaaarakakdRakakdSakcQakdRakdSakakaraaaaaxaaaaaraPbaakakbbaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHbcakakakakakbBbCaraxaxaxarakakcQakakcQcQcQcQcQakcQakblaraxaxaxaxaxaraPbaakakbbaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHaGakakakakdTbmaraaaxaaarcQcQcQakakdSakcQakdRakcQcQcQaraaaaaxaaaaaraPbaakakbbaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHaGakakakbBdUaraaaxaaarakakdRakakcQcQcQcQcQakdSakakaraaaaaxaaaaaraPdwaRaSdwaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHaoakakdTbmaraaaxaaarakakcQakakdSakcQakdRakcQakakarasasasasasanbHakbIakbJagasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHaoakbBdUarasasasarcQcQcQakakcQcQcQcQcQakcQcQcQaraaaaaaaaaabLbSavavavbSbOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLbHbIakbJamaaaaaaanbHakakakakakakakakakakakbIbJbOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabLacaddabOaaaaaabLaFadadadadadadadadadadadahbOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
