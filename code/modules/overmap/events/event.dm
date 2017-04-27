@@ -32,6 +32,8 @@
 			event.name = overmap_event.name
 			event.icon_state = pick(overmap_event.event_icon_states)
 
+		points_of_interest += overmap_event.name
+
 /decl/overmap_event_handler/proc/get_event_turfs_by_z_level(var/z_level)
 	var/z_level_text = num2text(z_level)
 	. = event_turfs_by_z_level[z_level_text]

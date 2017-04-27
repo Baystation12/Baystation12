@@ -987,6 +987,8 @@
 			return global.player_list;
 		if("point_source_descriptions")
 			return global.point_source_descriptions;
+		if("points_of_interest")
+			return global.points_of_interest;
 		if("possible_cable_coil_colours")
 			return global.possible_cable_coil_colours;
 		if("possible_changeling_IDs")
@@ -1459,7 +1461,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2448,6 +2450,8 @@
 			global.player_list=newval;
 		if("point_source_descriptions")
 			global.point_source_descriptions=newval;
+		if("points_of_interest")
+			global.points_of_interest=newval;
 		if("possible_cable_coil_colours")
 			global.possible_cable_coil_colours=newval;
 		if("possible_changeling_IDs")
@@ -2920,7 +2924,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3250,7 +3254,6 @@
 	"hands_state",
 	"hazard_overlays",
 	"hidden_skill_types",
-	"highlanders",
 	"hiss_sound",
 	"hit_appends",
 	"hivemind_bank",
@@ -3416,6 +3419,7 @@
 	"playable_species",
 	"player_list",
 	"point_source_descriptions",
+	"points_of_interest",
 	"possible_cable_coil_colours",
 	"possible_changeling_IDs",
 	"poster_designs",
