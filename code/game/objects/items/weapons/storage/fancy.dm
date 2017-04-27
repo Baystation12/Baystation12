@@ -91,7 +91,7 @@
 	icon_state = "markerbox"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
+	max_storage_space = 7
 
 	key_type = /obj/item/weapon/pen/marker
 	startswith = list(
