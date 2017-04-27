@@ -56,3 +56,14 @@
 	..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/bogani
 	boots = new /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/suit/space/void/bogani/ultimate
+	name = "strange advanced armored hardsuit"
+	desc = "An unusual hardsuit. This one seems to have a considerable amount of advanced technology installed, as well as layers of armor."
+	icon_state = "highbogarmor"
+	armor = list(melee = 180, bullet = 180, laser = 180,energy = 100, bomb = 120, bio = 180, rad = 180)
+
+/obj/item/clothing/suit/space/void/bogani/ultimate/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/bogani/advanced
+	boots = new /obj/item/clothing/shoes/magboots
