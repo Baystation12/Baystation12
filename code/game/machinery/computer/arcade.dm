@@ -11,7 +11,7 @@
 							/obj/item/weapon/gun/projectile/revolver/capgun								= 2,
 							/obj/item/toy/crossbow														= 2,
 							/obj/item/clothing/suit/syndicatefake										= 2,
-							/obj/item/weapon/storage/fancy/crayons										= 2,
+							/obj/item/weapon/storage/fancy/markers										= 2,
 							/obj/item/toy/spinningtoy													= 2,
 							/obj/item/toy/prize/ripley													= 1,
 							/obj/item/toy/prize/fireripley												= 1,
