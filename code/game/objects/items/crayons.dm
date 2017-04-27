@@ -146,7 +146,7 @@
 			message = "Weakness: [fillphrase]."
 		if("****?")
 			message = "[fillphrase]?"
-		if("****")
+		if("****.")
 			message = "[fillphrase]."
 		else
 			message = basephrase
