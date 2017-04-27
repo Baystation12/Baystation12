@@ -128,8 +128,8 @@
 	switch(basephrase)
 		if("**** ahead.")
 			message = "[fillphrase] ahead."
-		if("Be wary of ****.")
-			message = "Be wary of [fillphrase]."
+		if("Look out for ****.")
+			message = "Look out for [fillphrase]."
 		if("Try ****.")
 			message = "Try [fillphrase]."
 		if("Need ****.")
