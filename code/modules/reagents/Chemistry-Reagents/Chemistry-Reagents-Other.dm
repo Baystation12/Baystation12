@@ -49,6 +49,11 @@
 	id = "marker_ink_brown"
 	color = "#846F35"
 
+/datum/reagent/marker_ink/black
+	name = "Black marker ink"
+	id = "marker_ink_black"
+	color = "#000000"
+
 /datum/reagent/paint
 	name = "Paint"
 	id = "paint"

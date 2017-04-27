@@ -843,6 +843,14 @@
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_brown" = 1)
 	result_amount = 5
 
+/datum/chemical_reaction/black_paint
+	name = "Black paint"
+	id = "black_paint"
+	result = "paint"
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_black" = 1)
+	result_amount = 5
+
+
 /datum/chemical_reaction/brown_paint/send_data()
 	return "#846F35"
 

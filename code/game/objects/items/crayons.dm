@@ -34,6 +34,12 @@
 	shadeColour = "#810cff"
 	colourName = "purple"
 
+/obj/item/weapon/pen/marker/black
+	icon_state = "markerblack"
+	colour = "#000000"
+	shadeColour = "#3d3d3d"
+	colourName = "black"
+
 /obj/item/weapon/pen/marker/random/initialize()
 	var/marker_type = pick(subtypesof(/obj/item/weapon/pen/marker) - /obj/item/weapon/pen/marker/random)
 	new marker_type(loc)

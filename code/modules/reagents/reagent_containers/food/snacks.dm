@@ -512,7 +512,7 @@
 		var/obj/item/weapon/pen/marker/C = W
 		var/clr = C.colourName
 
-		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
+		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow","black")))
 			to_chat(usr, "<span class='notice'>The egg refuses to take on this color!</span>")
 			return
 

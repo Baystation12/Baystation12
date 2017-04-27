@@ -101,6 +101,7 @@
 		/obj/item/weapon/pen/marker/green,
 		/obj/item/weapon/pen/marker/blue,
 		/obj/item/weapon/pen/marker/purple,
+		/obj/item/weapon/pen/marker/black
 		)
 
 /obj/item/weapon/storage/fancy/markers/update_icon()
