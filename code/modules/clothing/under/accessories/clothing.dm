@@ -97,7 +97,7 @@
 	icon_state = "checkered_jacket"
 
 /obj/item/clothing/accessory/toggleable/nanotrasen_jacket
-	name = "\improper NanoTrasen suit jakcet"
+	name = "\improper NanoTrasen suit jacket"
 	desc = "A jacket that NanoTrasen has its executives wear."
 	icon_state = "nt_jacket"
 
