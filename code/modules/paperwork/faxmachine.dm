@@ -1,5 +1,5 @@
 var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[using_map.boss_name]", "Colonial Marshal Service", "[using_map.boss_short] Supply")
+var/list/admin_departments = list("[using_map.boss_name]", "Colonial Marshal Service", "[using_map.boss_short] Supply") + using_map.map_admin_faxes
 var/list/alldepartments = list()
 
 var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
@@ -202,6 +202,8 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1F66A0")
 	else if (destination == "[using_map.boss_short] Supply")
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5F4519")
+	else if (destination in using_map.map_admin_faxes)
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#510B74")
 	else
 		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
 

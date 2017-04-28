@@ -158,6 +158,8 @@
 	if(!offer_worth)
 		return TRADER_NOT_ENOUGH
 	var/trading_worth = get_item_value(num)
+	if(!trading_worth)
+		return TRADER_NOT_ENOUGH
 	var/percent = offer_worth/trading_worth
 	if(percent > max(0.9,0.9-disposition/100))
 		return trade(offers, num, location)

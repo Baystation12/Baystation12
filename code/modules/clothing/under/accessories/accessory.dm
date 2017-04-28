@@ -129,7 +129,7 @@
 /obj/item/clothing/accessory/nt
 	name = "\improper NanoTrasen tie with a clip"
 	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears 'NT' on it."
-	desc = "ntcliptie"
+	icon_state = "ntcliptie"
 
 /obj/item/clothing/accessory/stethoscope
 	name = "stethoscope"

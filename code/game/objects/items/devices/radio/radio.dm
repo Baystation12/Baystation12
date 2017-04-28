@@ -750,6 +750,10 @@ var/global/list/default_medbay_channels = list(
 	canhear_range = 0
 	channels=list("Engineering","Security", "Medical", "Command")
 
+/obj/item/device/radio/announcer/Destroy()
+	crash_with("attempt to delete a [src.type] detected, and prevented.")
+	return 0
+
 /obj/item/device/radio/announcer/initialize()
 	..()
 	loc = locate(1,1,using_map.contact_levels.len ? using_map.contact_levels[1] : 1)

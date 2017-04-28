@@ -42,7 +42,6 @@
 #define MODE_WIZARD "wizard"
 #define MODE_CHANGELING "changeling"
 #define MODE_CULTIST "cultist"
-#define MODE_HIGHLANDER "highlander"
 #define MODE_MONKEY "monkey"
 #define MODE_RENEGADE "renegade"
 #define MODE_REVOLUTIONARY "revolutionary"
@@ -50,7 +49,7 @@
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
 
-#define DEFAULT_TELECRYSTAL_AMOUNT 100
+#define DEFAULT_TELECRYSTAL_AMOUNT 130
 
 /////////////////
 ////WIZARD //////

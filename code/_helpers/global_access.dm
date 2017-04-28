@@ -315,6 +315,8 @@
 			return global.captain_announcement;
 		if("cardinal")
 			return global.cardinal;
+		if("cardinalz")
+			return global.cardinalz;
 		if("cargo_positions")
 			return global.cargo_positions;
 		if("cargo_supply_pack_root")
@@ -383,6 +385,8 @@
 			return global.controller_iteration;
 		if("cornerdirs")
 			return global.cornerdirs;
+		if("cornerdirsz")
+			return global.cornerdirsz;
 		if("create_mob_html")
 			return global.create_mob_html;
 		if("create_object_html")
@@ -513,6 +517,8 @@
 			return global.eventchance;
 		if("exclude_jobs")
 			return global.exclude_jobs;
+		if("exited_event")
+			return global.exited_event;
 		if("explosion_in_progress")
 			return global.explosion_in_progress;
 		if("explosion_sound")
@@ -651,8 +657,6 @@
 			return global.hazard_overlays;
 		if("hidden_skill_types")
 			return global.hidden_skill_types;
-		if("highlanders")
-			return global.highlanders;
 		if("hiss_sound")
 			return global.hiss_sound;
 		if("hit_appends")
@@ -951,6 +955,8 @@
 			return global.outfits_decls_root_;
 		if("outside_state")
 			return global.outside_state;
+		if("overmap_event_handler")
+			return global.overmap_event_handler;
 		if("page_sound")
 			return global.page_sound;
 		if("paiController")
@@ -981,6 +987,8 @@
 			return global.player_list;
 		if("point_source_descriptions")
 			return global.point_source_descriptions;
+		if("points_of_interest")
+			return global.points_of_interest;
 		if("possible_cable_coil_colours")
 			return global.possible_cable_coil_colours;
 		if("possible_changeling_IDs")
@@ -1770,6 +1778,8 @@
 			global.captain_announcement=newval;
 		if("cardinal")
 			global.cardinal=newval;
+		if("cardinalz")
+			global.cardinalz=newval;
 		if("cargo_positions")
 			global.cargo_positions=newval;
 		if("cargo_supply_pack_root")
@@ -1838,6 +1848,8 @@
 			global.controller_iteration=newval;
 		if("cornerdirs")
 			global.cornerdirs=newval;
+		if("cornerdirsz")
+			global.cornerdirsz=newval;
 		if("create_mob_html")
 			global.create_mob_html=newval;
 		if("create_object_html")
@@ -1968,6 +1980,8 @@
 			global.eventchance=newval;
 		if("exclude_jobs")
 			global.exclude_jobs=newval;
+		if("exited_event")
+			global.exited_event=newval;
 		if("explosion_in_progress")
 			global.explosion_in_progress=newval;
 		if("explosion_sound")
@@ -2106,8 +2120,6 @@
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
 			global.hidden_skill_types=newval;
-		if("highlanders")
-			global.highlanders=newval;
 		if("hiss_sound")
 			global.hiss_sound=newval;
 		if("hit_appends")
@@ -2406,6 +2418,8 @@
 			global.outfits_decls_root_=newval;
 		if("outside_state")
 			global.outside_state=newval;
+		if("overmap_event_handler")
+			global.overmap_event_handler=newval;
 		if("page_sound")
 			global.page_sound=newval;
 		if("paiController")
@@ -2436,6 +2450,8 @@
 			global.player_list=newval;
 		if("point_source_descriptions")
 			global.point_source_descriptions=newval;
+		if("points_of_interest")
+			global.points_of_interest=newval;
 		if("possible_cable_coil_colours")
 			global.possible_cable_coil_colours=newval;
 		if("possible_changeling_IDs")
@@ -3067,6 +3083,7 @@
 	"can_call_ert",
 	"captain_announcement",
 	"cardinal",
+	"cardinalz",
 	"cargo_positions",
 	"cargo_supply_pack_root",
 	"cargo_supply_packs",
@@ -3101,6 +3118,7 @@
 	"contamination_overlay",
 	"controller_iteration",
 	"cornerdirs",
+	"cornerdirsz",
 	"create_mob_html",
 	"create_object_html",
 	"create_turf_html",
@@ -3166,6 +3184,7 @@
 	"event_sources_count",
 	"eventchance",
 	"exclude_jobs",
+	"exited_event",
 	"explosion_in_progress",
 	"explosion_sound",
 	"explosion_turfs",
@@ -3235,7 +3254,6 @@
 	"hands_state",
 	"hazard_overlays",
 	"hidden_skill_types",
-	"highlanders",
 	"hiss_sound",
 	"hit_appends",
 	"hivemind_bank",
@@ -3385,6 +3403,7 @@
 	"outfits_decls_by_type_",
 	"outfits_decls_root_",
 	"outside_state",
+	"overmap_event_handler",
 	"page_sound",
 	"paiController",
 	"pai_emotions",
@@ -3400,6 +3419,7 @@
 	"playable_species",
 	"player_list",
 	"point_source_descriptions",
+	"points_of_interest",
 	"possible_cable_coil_colours",
 	"possible_changeling_IDs",
 	"poster_designs",

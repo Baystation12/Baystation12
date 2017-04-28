@@ -388,6 +388,8 @@
 
 /obj/item/weapon/gun/energy/chameleon/disguise(var/newtype)
 	var/obj/item/weapon/gun/copy = ..()
+	if(!copy)
+		return
 
 	flags_inv = copy.flags_inv
 	fire_sound = copy.fire_sound

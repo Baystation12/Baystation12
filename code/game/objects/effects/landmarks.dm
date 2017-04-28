@@ -158,11 +158,6 @@
 		new /obj/item/clothing/head/cueball(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/highlander/New()
-	new /obj/item/clothing/under/kilt(src.loc)
-	new /obj/item/clothing/head/beret(src.loc)
-	delete_me = 1
-
 /obj/effect/landmark/costume/prig/New()
 	new /obj/item/clothing/accessory/wcoat(src.loc)
 	new /obj/item/clothing/glasses/monocle(src.loc)

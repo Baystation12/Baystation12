@@ -157,6 +157,11 @@
 			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
 	return
 
+/obj/item/organ/external/show_decay_status(mob/user)
+	..(user)
+	for(var/obj/item/organ/external/child in children)
+		child.show_decay_status(user)
+
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	switch(open)
 		if(0)

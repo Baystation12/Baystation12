@@ -83,6 +83,10 @@
 	name = "\improper WARNING"
 	icon_state = "securearea"
 
+/obj/structure/sign/warning/detailed
+	name = "\improper WARNING 2"
+	icon_state = "securearea2"
+
 /obj/structure/sign/warning/New()
 	..()
 	desc = "A warning sign which reads '[sanitize(name)]'."
@@ -149,6 +153,7 @@
 
 /obj/structure/sign/warning/moving_parts
 	name = "\improper MOVING PARTS"
+	icon_state = "movingparts"
 
 /obj/structure/sign/warning/nosmoking_1
 	name = "\improper NO SMOKING"
@@ -171,9 +176,11 @@
 
 /obj/structure/sign/warning/secure_area/armory
 	name = "\improper ARMORY"
+	icon_state = "armory"
 
 /obj/structure/sign/warning/server_room
 	name = "\improper SERVER ROOM"
+	icon_state = "server"
 
 /obj/structure/sign/warning/siphon_valve
 	name = "\improper SIPHON VALVE"
@@ -322,6 +329,11 @@
 	name = "\improper HYDROPONICS STORAGE"
 	desc = "A sign labelling an area as a place where plant growing supplies are kept."
 	icon_state = "hydro3"
+
+/obj/structure/sign/solgov
+	name = "\improper SolGov Seal"
+	desc = "A sign which signifies who this vessel belongs to."
+	icon_state = "solgovseal"
 
 /obj/structure/sign/directions
 	name = "direction sign"

@@ -214,6 +214,7 @@
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
+	hunger_factor = 3
 
 	min_age = 1
 	max_age = 300
@@ -250,7 +251,8 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_split_nymph
+		/mob/living/carbon/human/proc/diona_split_nymph,
+		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
 	warning_low_pressure = 50
@@ -293,24 +295,16 @@
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
-	H.diona_split_into_nymphs(0)
-
-	var/mob/living/carbon/alien/diona/S = new(get_turf(H))
-
-	if(H.mind)
-		H.mind.transfer_to(S)
 
 	if(H.isSynthetic())
+		var/mob/living/carbon/alien/diona/S = new(get_turf(H))
+
+		if(H.mind)
+			H.mind.transfer_to(S)
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
 		return
-
-	for(var/mob/living/carbon/alien/diona/D in H.contents)
-		if(D.client)
-			D.forceMove(get_turf(H))
-		else
-			qdel(D)
-
-	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+	else
+		H.diona_split_nymph()
 
 /datum/species/diona/get_blood_name()
 	return "sap"

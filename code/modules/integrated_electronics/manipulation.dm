@@ -97,18 +97,17 @@
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 2, /atom/movable)
 	if(!istype(source) || !istype(target)) //Invalid input
 		return
-	var/turf/T = get_turf(src)
-	if(source.Adjacent(T) && target.Adjacent(T))
-		if(!source.reagents || !target.reagents)
-			return
-		if(ismob(source) || ismob(target))
-			return
-		if(!source.is_open_container() || !target.is_open_container())
-			return
-		if(!source.reagents.get_free_space() || !target.reagents.get_free_space())
-			return
 
-		source.reagents.trans_to(target, transfer_amount)
+	if(!source.reagents || !target.reagents)
+		return
+	if(ismob(source) || ismob(target))
+		return
+	if(!source.is_open_container() || !target.is_open_container())
+		return
+	if(!source.reagents.get_free_space() || !target.reagents.get_free_space())
+		return
+
+	source.reagents.trans_to(target, transfer_amount)
 
 // May make a reagent subclass of circuits in future.
 /obj/item/integrated_circuit/manipulation/reagent_storage

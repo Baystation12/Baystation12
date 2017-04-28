@@ -24,7 +24,8 @@ var/list/ai_status_emotions = list(
 	"Facepalm" 					= new /datum/ai_emotion("ai_facepalm"),
 	"Friend Computer" 			= new /datum/ai_emotion("ai_friend"),
 	"Tribunal" 					= new /datum/ai_emotion("ai_tribunal", "serithi"),
-	"Tribunal Malfunctioning"	= new /datum/ai_emotion("ai_tribunal_malf", "serithi")
+	"Tribunal Malfunctioning"	= new /datum/ai_emotion("ai_tribunal_malf", "serithi"),
+	"Ship Scan" 				= new /datum/ai_emotion("ai_shipscan")
 	)
 
 /proc/get_ai_emotions(var/ckey)

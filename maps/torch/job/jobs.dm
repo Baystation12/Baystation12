@@ -511,8 +511,8 @@
 
 /datum/job/officer
 	title = "Master at Arms"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the Chief of Security"
 	alt_titles = list(
 		"Military Police")
@@ -872,6 +872,8 @@
 	economic_modifier = 12
 	minimal_player_age = 10
 	ideal_character_age = 50
+	alt_titles = list(
+		"Research Supervisor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
