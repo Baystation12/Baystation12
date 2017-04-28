@@ -1,5 +1,5 @@
 #define JAMMER_MAX_RANGE world.view*2
-#define JAMMER_POWER_CONSUMPTION ((max(0.75, range)**2 * jammer_method.energy_cost * process_schedule_interval("obj")) / 10)
+#define JAMMER_POWER_CONSUMPTION ((max(0.75, range)**2 * jammer_method.energy_cost * process_schedule_interval("obj")) / 20)
 
 /obj/item/device/suit_sensor_jammer
 	name = "small device"
