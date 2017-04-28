@@ -172,10 +172,12 @@
 
 
 /*
+ * Markers
  */
 
 /obj/item/weapon/pen/marker
 	name = "marker"
+	desc = "A colourful marker. Looks cheap, like it'll dry out if you use it too much."
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "markerred"
 	w_class = ITEM_SIZE_TINY
