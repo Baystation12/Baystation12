@@ -68,8 +68,9 @@
 				if(H.species.get_bodytype(H) in species_restricted)
 					wearable = 1
 
-			if(!disable_warning && !wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
-				to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
+			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
+				if(!disable_warning)
+					to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
 				return 0
 	return 1
 
