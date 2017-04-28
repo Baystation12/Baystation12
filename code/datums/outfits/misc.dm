@@ -43,3 +43,4 @@
 	name = "Merchant - Vox"
 	shoes = /obj/item/clothing/shoes/jackboots/unathi
 	uniform = /obj/item/clothing/under/vox/vox_robes
+	suit = /obj/item/clothing/suit/armor/vox_scrap
