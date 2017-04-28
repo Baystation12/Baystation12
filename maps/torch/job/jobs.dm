@@ -1026,7 +1026,6 @@
 		"Investor",
 		"Naturalist",
 		"Ecologist",
-		"Entertainer",
 		"Independent Observer",
 		"Sociologist",
 		"Off-Duty")
