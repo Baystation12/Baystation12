@@ -54,9 +54,22 @@
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
 	welcome_text += "Current system:<br /><b>[system_name()]</b><br />"
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br />"
-	welcome_text += "Planets in current system:<br />"
-	for(var/i = 0, i < rand(0, 3), i++)
-		welcome_text += "<b>[generate_planet_name()]</b>, \a [generate_planet_type()]<br />"
+	welcome_text += "Travel time to Sol:<br /><b>[rand(5,12)] days</b><br />"
+	welcome_text += "Scan results:<br />"
+	var/list/scan_results = list()
+	for(var/poi in points_of_interest)
+		if(poi == "SEV Torch")
+			continue
+		if(isnull(scan_results[poi]))
+			scan_results[poi] = 1
+		else
+			scan_results[poi] += 1
+	for(var/result in scan_results)
+		var/count = scan_results[result]
+		if(count == 1)
+			welcome_text += "\A <b>[result]</b><br />"
+		else
+			welcome_text += "[count] <b>[result]\s</b><br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "New [using_map.company_name] Update available at all communication consoles.")
