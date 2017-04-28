@@ -6,7 +6,7 @@
  * Contains:
  *		Egg Box
  *		Candle Box
- *		Crayon Box
+ *		marker Box
  *		Cigarette Box
  */
 
@@ -81,33 +81,34 @@
 	startswith = list(/obj/item/weapon/flame/candle = 5)
 
 /*
- * Crayon Box
+ * marker Box
  */
 
-/obj/item/weapon/storage/fancy/crayons
-	name = "box of crayons"
-	desc = "A box of crayons for all your rune drawing needs."
+/obj/item/weapon/storage/fancy/markers
+	name = "box of markers"
+	desc = "A box of markers for all your rune drawing needs."
 	icon = 'icons/obj/crayons.dmi'
-	icon_state = "crayonbox"
+	icon_state = "markerbox"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
+	max_storage_space = 7
 
-	key_type = /obj/item/weapon/pen/crayon
+	key_type = /obj/item/weapon/pen/marker
 	startswith = list(
-		/obj/item/weapon/pen/crayon/red,
-		/obj/item/weapon/pen/crayon/orange,
-		/obj/item/weapon/pen/crayon/yellow,
-		/obj/item/weapon/pen/crayon/green,
-		/obj/item/weapon/pen/crayon/blue,
-		/obj/item/weapon/pen/crayon/purple,
+		/obj/item/weapon/pen/marker/red,
+		/obj/item/weapon/pen/marker/orange,
+		/obj/item/weapon/pen/marker/yellow,
+		/obj/item/weapon/pen/marker/green,
+		/obj/item/weapon/pen/marker/blue,
+		/obj/item/weapon/pen/marker/purple,
+		/obj/item/weapon/pen/marker/black
 		)
 
-/obj/item/weapon/storage/fancy/crayons/update_icon()
+/obj/item/weapon/storage/fancy/markers/update_icon()
 	overlays = list() //resets list
-	overlays += image('icons/obj/crayons.dmi',"crayonbox")
-	for(var/obj/item/weapon/pen/crayon/crayon in contents)
-		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
+	overlays += image('icons/obj/crayons.dmi',"markerbox")
+	for(var/obj/item/weapon/pen/marker/marker in contents)
+		overlays += image('icons/obj/crayons.dmi',marker.colourName)
 
 ////////////
 //CIG PACK//

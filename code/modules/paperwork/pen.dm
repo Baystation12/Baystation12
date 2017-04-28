@@ -172,14 +172,12 @@
 
 
 /*
- * Crayons
  */
 
-/obj/item/weapon/pen/crayon
-	name = "crayon"
-	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
+/obj/item/weapon/pen/marker
+	name = "marker"
 	icon = 'icons/obj/crayons.dmi'
-	icon_state = "crayonred"
+	icon_state = "markerred"
 	w_class = ITEM_SIZE_TINY
 	attack_verb = list("attacked", "coloured")
 	colour = "#FF0000" //RGB
@@ -189,5 +187,5 @@
 	var/colourName = "red" //for updateIcon purposes
 
 	New()
-		name = "[colourName] crayon"
+		name = "[colourName] marker"
 		..()

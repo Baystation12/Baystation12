@@ -1129,7 +1129,7 @@ var/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
 		random_useful_ = list()
-		random_useful_ += /obj/item/weapon/pen/crayon/random
+		random_useful_ += /obj/item/weapon/pen/marker/random
 		random_useful_ += /obj/item/weapon/pen
 		random_useful_ += /obj/item/weapon/pen/blue
 		random_useful_ += /obj/item/weapon/pen/red

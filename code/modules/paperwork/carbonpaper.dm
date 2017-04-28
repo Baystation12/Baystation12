@@ -36,7 +36,7 @@
 		var/obj/item/weapon/paper/carbon/copy = new /obj/item/weapon/paper/carbon (usr.loc)
 		// <font>
 		copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
-		copycontents = replacetext(copycontents, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+		copycontents = replacetext(copycontents, "<font face=\"[c.markerfont]\" color=", "<font face=\"[c.markerfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 		copy.info += copycontents
 		copy.info += "</font>"
 		copy.name = "Copy - " + c.name

@@ -1,53 +1,58 @@
 /* Paint and crayons */
 
-/datum/reagent/crayon_dust
-	name = "Crayon dust"
-	id = "crayon_dust"
-	description = "Intensely coloured powder obtained by grinding crayons."
+/datum/reagent/marker_ink
+	name = "Marker Ink"
+	id = "marker_ink"
+	description = "Intensely coloured ink obtained by crushing markers."
 	taste_description = "the back of class"
 	reagent_state = LIQUID
 	color = "#888888"
 	overdose = 5
 
-/datum/reagent/crayon_dust/red
-	name = "Red crayon dust"
-	id = "crayon_dust_red"
+/datum/reagent/marker_ink/red
+	name = "Red marker ink"
+	id = "marker_ink_red"
 	color = "#FE191A"
 
-/datum/reagent/crayon_dust/orange
-	name = "Orange crayon dust"
-	id = "crayon_dust_orange"
+/datum/reagent/marker_ink/orange
+	name = "Orange marker ink"
+	id = "marker_ink_orange"
 	color = "#FFBE4F"
 
-/datum/reagent/crayon_dust/yellow
-	name = "Yellow crayon dust"
-	id = "crayon_dust_yellow"
+/datum/reagent/marker_ink/yellow
+	name = "Yellow marker ink"
+	id = "marker_ink_yellow"
 	color = "#FDFE7D"
 
-/datum/reagent/crayon_dust/green
-	name = "Green crayon dust"
-	id = "crayon_dust_green"
+/datum/reagent/marker_ink/green
+	name = "Green marker ink"
+	id = "marker_ink_green"
 	color = "#18A31A"
 
-/datum/reagent/crayon_dust/blue
-	name = "Blue crayon dust"
-	id = "crayon_dust_blue"
+/datum/reagent/marker_ink/blue
+	name = "Blue marker ink"
+	id = "marker_ink_blue"
 	color = "#247CFF"
 
-/datum/reagent/crayon_dust/purple
-	name = "Purple crayon dust"
-	id = "crayon_dust_purple"
+/datum/reagent/marker_ink/purple
+	name = "Purple marker ink"
+	id = "marker_ink_purple"
 	color = "#CC0099"
 
-/datum/reagent/crayon_dust/grey //Mime
-	name = "Grey crayon dust"
-	id = "crayon_dust_grey"
+/datum/reagent/marker_ink/grey //Mime
+	name = "Grey marker ink"
+	id = "marker_ink_grey"
 	color = "#808080"
 
-/datum/reagent/crayon_dust/brown //Rainbow
-	name = "Brown crayon dust"
-	id = "crayon_dust_brown"
+/datum/reagent/marker_ink/brown //Rainbow
+	name = "Brown marker ink"
+	id = "marker_ink_brown"
 	color = "#846F35"
+
+/datum/reagent/marker_ink/black
+	name = "Black marker ink"
+	id = "marker_ink_black"
+	color = "#000000"
 
 /datum/reagent/paint
 	name = "Paint"
