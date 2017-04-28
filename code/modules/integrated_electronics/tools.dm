@@ -96,13 +96,10 @@
 	icon_state = "debugger"
 	flags = CONDUCT
 	w_class = ITEM_SIZE_SMALL
+	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
 	var/weakref/data_to_write = null
 	var/accepting_refs = 0
-	var/available_types = list("string","number","null")
-
-/obj/item/device/integrated_electronics/debugger/admin
-	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
-	available_types = list("string","number","ref","null")
+	var/available_types = list("string","number","ref","null")
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in available_types
@@ -130,7 +127,8 @@
 		if("null")
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
-/obj/item/device/integrated_electronics/debugger/admin/MouseDrop(var/atom/over_object)
+
+/obj/item/device/integrated_electronics/debugger/MouseDrop(var/atom/over_object)
 	if(!accepting_refs)
 		return ..()
 
@@ -256,7 +254,7 @@
 
 	new /obj/item/device/electronic_assembly(src)
 	new /obj/item/device/integrated_electronics/wirer(src)
-	new /obj/item/device/integrated_electronics/debugger/admin(src)
+	new /obj/item/device/integrated_electronics/debugger(src)
 	new /obj/item/device/integrated_electronics/analyzer(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/screwdriver(src)
