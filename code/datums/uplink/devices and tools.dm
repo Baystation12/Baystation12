@@ -40,11 +40,6 @@
 	item_cost = 16
 	path = /obj/item/weapon/shield_diffuser
 
-/datum/uplink_item/item/tools/flashdark
-	name = "Flashdark"
-	item_cost = 16
-	path = /obj/item/device/flashlight/flashdark
-
 /datum/uplink_item/item/tools/suit_sensor_mobile
 	name = "Suit Sensor Jamming Device"
 	desc = "This device will affect suit sensor data using method and radius defined by the user."
@@ -78,6 +73,11 @@
 	name = "Thermal Imaging Glasses"
 	item_cost = 24
 	path = /obj/item/clothing/glasses/thermal/syndi
+
+/datum/uplink_item/item/tools/flashdark
+	name = "Flashdark"
+	item_cost = 32
+	path = /obj/item/device/flashlight/flashdark
 
 /datum/uplink_item/item/tools/powersink
 	name = "Powersink (DANGER!)"
