@@ -90,70 +90,23 @@
 		"****.",
 		"****?",
 		"Where is the ****?")
-	var/catcharacters = list("enemy","soldier","security guard","marine","robot","cyborg","captain","skeleton","ghost","spider","lizard","engineer","roboticist","research director","statue","scientist","strange creature","doctor","chemist","head of personnel","chaplain","wretch","charmer","miscreant","liar","fatty","beanpole","cargo technician","head of security","master","prisoner")
-	var/catobjects = list("fire","lever","switch","door","loot","weapon","shield","message","projectile","armor","item","trap","crate","locker","gun","laser","tool","clothes","hat","device")
-	var/cattechniques = list("close-quarters combat","gunfight","taking hostages","luring it out","beating to a pulp","lying in ambush","stealth","leaving messages","leaving hints","bombing","fleeing","serpentine","charging in","diversion","EMP","grenade","headshots","lying down","dashing through")
-	var/catactions = list("sleeping","stepping back","jumping","attacking","holding with both hands","kicking","stabbing","shooting","dodging","building","healing","injecting","building","hiding","talking","whispering","drinking","eating")
-	var/catgeography = list("hallway","hidden door","airlock","shortcut","detour","dead end","maintenance tunnel","labyrinth","space","safe zone","danger zone","bright spot","dark spot","open area","tight spot","hidden room","secure room","research","cargo","security","bridge","engineering","medical","bar","kitchen","arrivals","vault")
-	var/catorientation = list("front","back","left","right","up","down","feet","head","back")
-	var/catbodyparts = list("head","neck","stomach","back","arm","leg","heel","rear","tail","wings","anywhere","mouth","eyes","foot","hand")
-	var/catattributes = list("magic","burn","bleeding","toxin","brain damage","suffocation","brute force","SSD","fracture")
-	var/catconcepts = list("chance","hint","secret","happiness","sorrow","life","death","elation","grief","hope","despair","light","dark","bravery","resignation","comfort","tears","apathy","lust","robust")
-	var/catphrases = list("Robust Softdrinks: more robust than a toolbox to the head","Report suspicious behavior","Help me","Stay safe","I need coffee","Another day, another thaler","Have you seen Ian","Do you know how much faxes cost","why me","help","they're coming","I <3 Beepsky","Don't eat markers, kids","the end is nigh","I don't get paid enough for this","Stick a crayon up your nose")
-	var/fillcategory
+	var/list/categories = list()
+	categories["Characters"] = list("enemy","soldier","security guard","marine","robot","cyborg","captain","skeleton","ghost","spider","lizard","engineer","roboticist","research director","statue","scientist","strange creature","doctor","chemist","head of personnel","chaplain","wretch","charmer","miscreant","liar","fatty","beanpole","cargo technician","head of security","master","prisoner")
+	categories["Objects"] = list("fire","lever","switch","door","loot","weapon","shield","message","projectile","armor","item","trap","crate","locker","gun","laser","tool","clothes","hat","device")
+	categories["Techniques"] = list("close-quarters combat","gunfight","taking hostages","luring it out","beating to a pulp","lying in ambush","stealth","leaving messages","leaving hints","bombing","fleeing","serpentine","charging in","diversion","EMP","grenade","headshots","lying down","dashing through")
+	categories["Actions"] = list("sleeping","stepping back","jumping","attacking","holding with both hands","kicking","stabbing","shooting","dodging","building","healing","injecting","building","hiding","talking","whispering","drinking","eating")
+	categories["Geography"] = list("hallway","hidden door","airlock","shortcut","detour","dead end","maintenance tunnel","labyrinth","space","safe zone","danger zone","bright spot","dark spot","open area","tight spot","hidden room","secure room","research","cargo","security","bridge","engineering","medical","bar","kitchen","arrivals","vault")
+	categories["Orientation"] = list("front","back","left","right","up","down","feet","head","back")
+	categories["Body Parts"] = list("head","neck","stomach","back","arm","leg","heel","rear","tail","wings","anywhere","mouth","eyes","foot","hand")
+	categories["Attributes"] = list("magic","burn","bleeding","toxin","brain damage","suffocation","brute force","SSD","fracture")
+	categories["Concepts"] = list("chance","hint","secret","happiness","sorrow","life","death","elation","grief","hope","despair","light","dark","bravery","resignation","comfort","tears","apathy","lust","robust")
+	categories["Phrases"] = list("Robust Softdrinks: more robust than a toolbox to the head","Report suspicious behavior","Help me","Stay safe","I need coffee","Another day, another thaler","Have you seen Ian","Do you know how much faxes cost","why me","help","they're coming","I <3 Beepsky","Don't eat markers, kids","the end is nigh","I don't get paid enough for this","Stick a crayon up your nose")
 	var/basephrase = input("Choose your base phrase.", "Write a message") in inputphrases
-	var/fillphrase
-	fillcategory = input("Choose a phrase category to fill in the blank.", "Write a message") in list("Characters","Objects","Techniques","Actions","Geography","Orientation","Body Parts","Attributes","Concepts","Phrases")
-	switch(fillcategory)
-		if("Characters")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catcharacters
-		if("Objects")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catobjects
-		if("Techniques")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in cattechniques
-		if("Actions")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catactions
-		if("Geography")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catgeography
-		if("Orientation")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catorientation
-		if("Body Parts")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catbodyparts
-		if("Attributes")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catattributes
-		if("Phrases")
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catphrases
-		else
-			fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in catconcepts
-	var/message = "blank"
-	switch(basephrase)
-		if("**** ahead.")
-			message = "[fillphrase] ahead."
-		if("Look out for ****.")
-			message = "Look out for [fillphrase]."
-		if("Try ****.")
-			message = "Try [fillphrase]."
-		if("Need ****.")
-			message = "Need [fillphrase]."
-		if("Have ****.")
-			message = "Have [fillphrase]."
-		if("Want ****.")
-			message = "Want [fillphrase]."
-		if("Get ****.")
-			message = "Get [fillphrase]."
-		if("Imminent ****...")
-			message = "Imminent [fillphrase]..."
-		if("Weakness: ****")
-			message = "Weakness: [fillphrase]."
-		if("****?")
-			message = "[fillphrase]?"
-		if("****.")
-			message = "[fillphrase]."
-		if("Where is the ****?")
-			message = "Where is the [fillphrase]?"
-		else
-			message = basephrase
-	return message
+	var/fillcategory = input("Choose a phrase category to fill in the blank.", "Write a message") in categories
+	if(!(fillcategory in categories))
+		return
+	var/fillphrase = input("Choose a phrase to fill in the blank.", "Write a message") in categories[fillcategory]
+	return replacetext(basephrase, "****", fillphrase)
 
 /obj/item/weapon/pen/marker/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
