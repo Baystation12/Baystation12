@@ -752,7 +752,7 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/announcer/Destroy()
 	crash_with("attempt to delete a [src.type] detected, and prevented.")
-	return 0
+	return 1
 
 /obj/item/device/radio/announcer/initialize()
 	..()
