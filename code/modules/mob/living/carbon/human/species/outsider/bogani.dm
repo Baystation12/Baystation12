@@ -42,7 +42,7 @@
 	cold_discomfort_strings = list(
 		"You feel chilly.",
 		"You feel sluggish and cold.",
-		"Your scales bristle against the cold.")
+		"Your exoskeleton feels rigid.")
 
 
 	breath_pressure = 28
