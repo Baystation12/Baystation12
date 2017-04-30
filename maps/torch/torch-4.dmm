@@ -457,7 +457,7 @@
 "iO" = (/obj/structure/table/standard,/obj/item/device/radio/intercom/entertainment{pixel_y = 24},/obj/random/soap,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/firstdeck)
 "iP" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/machinery/light{dir = 1},/obj/machinery/alarm{pixel_y = 24},/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/firstdeck)
 "iQ" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/firstdeck)
-"iR" = (/obj/structure/closet/secure_closet/guncabinet/sidearm,/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/firstdeck)
+"iR" = (/obj/structure/closet/secure_closet/guncabinet/sidearm/small,/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/firstdeck)
 "iS" = (/obj/effect/floor_decal/corner/blue{dir = 8},/turf/simulated/floor/tiled,/area/hallway/primary/firstdeck/fore)
 "iT" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/obj/effect/floor_decal/corner/blue,/turf/simulated/floor/tiled,/area/hallway/primary/firstdeck/fore)
 "iU" = (/obj/machinery/shower{dir = 4; icon_state = "shower"; pixel_x = 0; pixel_y = 0},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/machinery/firealarm{dir = 1; pixel_y = 24},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head/aux)
