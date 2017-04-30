@@ -42,16 +42,11 @@
 	var/last_living_warning_time = 0
 
 /obj/machinery/cryopod/morgue/find_control_computer(urgent=0)
-	// Workaround for http://www.byond.com/forum/?post=2007448
-	for(var/obj/machinery/computer/cryopod/morgue/C in src.loc.loc)
-		control_computer = C
-		break
-	// control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
+	control_computer = locate(/obj/machinery/computer/cryopod/morgue) in get_area(src)
 
 	// Don't send messages unless we *need* the computer, and less than five minutes have passed since last time we messaged
 	if(!control_computer && urgent && last_no_computer_message + 5 MINUTES < world.time)
-		log_admin("Morgue in [src.loc.loc] could not find control computer!")
-		message_admins("Morgue in [src.loc.loc] could not find control computer!")
+		log_and_message_admins("Morgue in [get_area(src)] could not find control computer!")
 		last_no_computer_message = world.time
 
 	return control_computer != null
@@ -63,13 +58,13 @@
 			return
 
 		if(occupant.stat == DEAD) //Occupant is dead
-			if(!control_computer)
-				if(!find_control_computer(urgent=1))
-					return
+			if(!control_computer && !find_control_computer(urgent=1))
+				return
 
 			despawn_occupant()
 		else if(last_living_warning_time + 2.5 MINUTES < world.time) // warn the doctors!
-			announce.autosay("WARNING: [occupant.real_name] detected alive in a morgue slab!", "[on_store_name]")
+			for(var/channel in list("Security", "Medical", "Command"))
+				global_headset.autosay("WARNING: [occupant.real_name] detected alive in a morgue slab!", "[on_store_name]", channel)
 			last_living_warning_time = world.time
 
 // There doesn't seem to be a way to actually remove these verbs
