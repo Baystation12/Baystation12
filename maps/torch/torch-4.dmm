@@ -2017,7 +2017,7 @@
 "MO" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/lights/mixed,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftport)
 "MP" = (/obj/structure/lattice,/turf/simulated/wall/r_wall,/area/maintenance/firstdeck/aftport)
 "MQ" = (/obj/effect/floor_decal/corner/blue{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/simulated/floor/tiled/dark,/area/command/armoury)
-"MR" = (/obj/machinery/camera/network/command{c_tag = "Emergency Armory"; dir = 2},/obj/effect/floor_decal/corner/blue{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/obj/structure/sign/solgov{pixel_x = -1; pixel_y = 34},/turf/simulated/floor/tiled/dark,/area/command/armoury)
+"MR" = (/obj/machinery/camera/network/command{c_tag = "Bridge - Emergency Armory"; dir = 2},/obj/effect/floor_decal/corner/blue{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/obj/structure/sign/solgov{pixel_x = -1; pixel_y = 34},/turf/simulated/floor/tiled/dark,/area/command/armoury)
 "MS" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/dark,/area/command/armoury)
 "MT" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/tiled/dark,/area/command/armoury)
 "MU" = (/obj/machinery/mech_recharger,/turf/simulated/floor/tiled/dark,/area/command/armoury)
@@ -2460,7 +2460,7 @@
 "Vp" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/structure/table/rack{dir = 4},/obj/item/weapon/storage/box/syringegun,/obj/item/weapon/gun/launcher/syringe,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/simulated/floor/tiled/dark,/area/command/armoury)
 "Vq" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/effect/floor_decal/corner/blue{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/simulated/floor/tiled/dark,/area/command/armoury)
 "Vr" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/obj/effect/floor_decal/corner/blue{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/simulated/floor/tiled/dark,/area/command/armoury)
-"Vs" = (/obj/machinery/deployable/barrier,/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/camera/network/command{c_tag = "Emergency Armory"; dir = 1; icon_state = "camera"; tag = "icon-camera (NORTH)"},/turf/simulated/floor/tiled/dark,/area/command/armoury)
+"Vs" = (/obj/machinery/deployable/barrier,/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/camera/network/command{c_tag = "Bridge - Emergency Armory"; dir = 1; icon_state = "camera"; tag = "icon-camera (NORTH)"},/turf/simulated/floor/tiled/dark,/area/command/armoury)
 "Xq" = (/obj/machinery/recharge_station,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/computer/cryopod/robot{pixel_y = 30},/turf/simulated/floor/plating,/area/maintenance/firstdeck/centralstarboard)
 
 (1,1,1) = {"
