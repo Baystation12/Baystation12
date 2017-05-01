@@ -23,7 +23,7 @@
 /decl/global_vars/VV_locked()
 	return vars
 
-/decl/global_vars/VV_secluded()
+/decl/global_vars/VV_hidden()
 	return list("forumsqladdress",
 				"forumsqldb",
 				"forumsqllogin",
