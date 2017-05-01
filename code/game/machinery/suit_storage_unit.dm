@@ -1139,24 +1139,24 @@
 	switch(target_department)
 		if("Engineering")
 			if(helmet)
-				helmet.name = "engineering voidsuit helmet"
-				helmet.icon_state = "rig0-engineering"
-				helmet.item_state = "eng_helm"
+				helmet.name = "reinforced engineering voidsuit helmet"
+				helmet.icon_state = "rig0-engineeringalt"
+				helmet.item_state = "engalt_helm"
 			if(suit)
-				suit.name = "engineering voidsuit"
-				suit.icon_state = "rig-engineering"
+				suit.name = "reinforced engineering voidsuit"
+				suit.icon_state = "rig-engineeringalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "eng_voidsuit",
 					slot_r_hand_str = "eng_voidsuit",
 				)
 		if("Mining")
 			if(helmet)
-				helmet.name = "mining voidsuit helmet"
-				helmet.icon_state = "rig0-mining"
-				helmet.item_state = "mining_helm"
+				helmet.name = "frontier mining voidsuit helmet"
+				helmet.icon_state = "rig0-miningalt"
+				helmet.item_state = "miningalt_helm"
 			if(suit)
-				suit.name = "mining voidsuit"
-				suit.icon_state = "rig-mining"
+				suit.name = "frontier mining voidsuit"
+				suit.icon_state = "rig-miningalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "mining_voidsuit",
 					slot_r_hand_str = "mining_voidsuit",
@@ -1175,36 +1175,36 @@
 				)
 		if("Medical")
 			if(helmet)
-				helmet.name = "medical voidsuit helmet"
-				helmet.icon_state = "rig0-medical"
-				helmet.item_state = "medical_helm"
+				helmet.name = "streamlined medical voidsuit helmet"
+				helmet.icon_state = "rig0-medicalalt"
+				helmet.item_state = "medicalalt_helm"
 			if(suit)
-				suit.name = "medical voidsuit"
-				suit.icon_state = "rig-medical"
+				suit.name = "streamlined medical voidsuit"
+				suit.icon_state = "rig-medicalalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "medical_voidsuit",
 					slot_r_hand_str = "medical_voidsuit",
 				)
 		if("Security")
 			if(helmet)
-				helmet.name = "security voidsuit helmet"
-				helmet.icon_state = "rig0-sec"
-				helmet.item_state = "sec_helm"
+				helmet.name = "riot security voidsuit helmet"
+				helmet.icon_state = "rig0-secalt"
+				helmet.item_state = "secalt_helm"
 			if(suit)
-				suit.name = "security voidsuit"
-				suit.icon_state = "rig-sec"
+				suit.name = "riot security voidsuit"
+				suit.icon_state = "rig-secalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "sec_voidsuit",
 					slot_r_hand_str = "sec_voidsuit",
 				)
 		if("Atmos")
 			if(helmet)
-				helmet.name = "atmospherics voidsuit helmet"
-				helmet.icon_state = "rig0-atmos"
-				helmet.item_state = "atmos_helm"
+				helmet.name = "heavy duty atmospherics voidsuit helmet"
+				helmet.icon_state = "rig0-atmosalt"
+				helmet.item_state = "atmosalt_helm"
 			if(suit)
-				suit.name = "atmospherics voidsuit"
-				suit.icon_state = "rig-atmos"
+				suit.name = "heavy duty atmos voidsuit"
+				suit.icon_state = "rig-atmosalt"
 				suit.item_state_slots = list(
 					slot_l_hand_str = "atmos_voidsuit",
 					slot_r_hand_str = "atmos_voidsuit",
