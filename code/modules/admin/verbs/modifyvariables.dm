@@ -161,7 +161,7 @@
 
 	var/dir
 
-	if(!O.may_edit_var(usr, variable))
+	if(!O.may_edit_var(usr, objectvar))
 		return
 
 	if(isnull(variable))
