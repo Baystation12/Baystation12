@@ -22,7 +22,7 @@
 #################################
 
 # Your name.  
-author: Unknown
+author: Chaoko99
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -34,4 +34,4 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - rscadd: "Added the large RCD cartridge to the autolathe."
-  - tweak: "Quartered RCD cartridge prices."
+  - tweak: "Halved RCD cartridge prices."
