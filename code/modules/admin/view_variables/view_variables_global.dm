@@ -36,7 +36,8 @@
 				"sqlfdbkpass",
 				"sqllogin",
 				"sqlpass",
-				"sqlport"
+				"sqlport",
+				"comms_password"
 			)
 
 /client/proc/debug_global_variables()
