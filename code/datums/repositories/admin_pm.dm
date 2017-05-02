@@ -25,7 +25,7 @@ var/repository/admin_pm/admin_pm_repository = new()
 	var/datum/client_lite/cl = irc_clients_by_name[key]
 	if(!cl)
 		cl = new/datum/client_lite()
-		cl.name = "IRC"
+		cl.mob_name = "IRC"
 		cl.key = key
 		irc_clients_by_name[key] = cl
 	return cl
