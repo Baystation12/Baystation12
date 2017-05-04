@@ -105,7 +105,14 @@
 	organ_tag = BP_EYES
 	parent_organ = BP_HEAD
 	surface_accessible = TRUE
+	var/innate_flash_protection = FLASH_PROTECTION_NONE
 	var/list/eye_colour = list(0,0,0)
+
+/obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
+	return (flash_protection + innate_flash_protection)
+
+/obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
+	return -1
 
 /obj/item/organ/internal/eyes/optics
 	robotic = ORGAN_ROBOT
