@@ -302,6 +302,7 @@
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
+		'html/spacemag.css',
 		'html/images/loading.gif',
 		'html/images/ntlogo.png',
 		'html/images/bluentlogo.png',
