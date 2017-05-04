@@ -629,7 +629,7 @@
 
 	rowdualbraid
 		name = "Row Dual Braid"
-		icon_state = "hair_rowdualbraid"
+		icon_state = "hair_rowdualtail"
 		gender = FEMALE
 
 	rowbraid
