@@ -23,7 +23,6 @@
 	cast_sound = 'sound/effects/bamf.ogg'
 
 /spell/targeted/swap/cast(var/list/targets, mob/user)
-	playsound(get_turf(user), cast_sound, 50, 1)
 	for(var/mob/T in targets)
 		var/turf/aT = get_turf(T)
 		var/turf/bT = get_turf(user)

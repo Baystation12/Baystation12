@@ -8,6 +8,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	flags = 0
 	simulated = 0
 	icon_state = "spell"
+	var/visible_message
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
 
@@ -19,10 +20,13 @@ Basically: I can use it to target things where I click. I can then pass these ta
 /obj/item/magic_hand/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/magic_hand/attack() //can't be used to actually bludgeon things
+/obj/item/magic_hand/attack(var/mob/living/M, var/mob/living/user)
+	if(hand_spell && hand_spell.valid_target(M, user))
+		fire_spell(M, user)
+		return 0
 	return 1
 
-/obj/item/magic_hand/afterattack(atom/A, mob/living/user)
+/obj/item/magic_hand/proc/fire_spell(var/atom/A, mob/living/user)
 	if(!hand_spell) //no spell? Die.
 		user.drop_from_inventory(src)
 
@@ -35,6 +39,8 @@ Basically: I can use it to target things where I click. I can then pass these ta
 		to_chat(user, "<span class='notice'>You decide against casting this spell as your intent is set to help.</span>")
 		return
 
+	if(visible_message)
+		user.visible_message(visible_message)
 	if(hand_spell.cast_hand(A,user))
 		next_spell_time = world.time + hand_spell.spell_delay
 		if(hand_spell.move_delay)
@@ -43,6 +49,10 @@ Basically: I can use it to target things where I click. I can then pass these ta
 			user.setClickCooldown(hand_spell.move_delay)
 	else
 		user.drop_from_inventory(src)
+
+/obj/item/magic_hand/afterattack(var/atom/A, var/mob/user, var/proximity)
+	if(hand_spell)
+		fire_spell(A,user)
 
 /obj/item/magic_hand/throw_at() //no throwing pls
 	usr.drop_from_inventory(src)

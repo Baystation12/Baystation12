@@ -311,4 +311,19 @@
 	return 0
 
 
-
+//This is barely a transformation but probably best file for it.
+/mob/living/carbon/human/proc/zombieze()
+	ChangeToHusk()
+	mutations |= CLUMSY //cause zombie
+	src.visible_message("<span class='danger'>\The [src]'s flesh decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You... hunger.</span>")
+	if(src.mind)
+		src.mind.special_role = "Zombie"
+	Weaken(5)
+	for(var/o in organs)
+		var/obj/item/organ/organ = o
+		organ.vital = 0
+		organ.rejuvenate(1)
+		organ.max_damage *= 5
+		organ.min_broken_damage *= 5
+	verbs += /mob/living/proc/breathe_death
+	verbs += /mob/living/proc/consume

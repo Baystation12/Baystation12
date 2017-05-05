@@ -32,6 +32,7 @@
 	return list(teleportlocs[thearea])
 
 /spell/area_teleport/cast(area/thearea, mob/user)
+	playsound(get_turf(user),cast_sound,50,1)
 	if(!istype(thearea))
 		if(istype(thearea, /list))
 			thearea = thearea[1]

@@ -20,7 +20,6 @@
 	var/drop_items = 1 //do we want to drop all our items when we transform?
 
 /spell/targeted/shapeshift/cast(var/list/targets, mob/user)
-	playsound(get_turf(user),cast_sound,50,1)
 	for(var/mob/living/M in targets)
 		if(M.stat == DEAD)
 			to_chat(user, "[name] can only transform living targets.")
