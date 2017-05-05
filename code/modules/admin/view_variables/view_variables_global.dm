@@ -23,7 +23,7 @@
 /decl/global_vars/VV_locked()
 	return vars
 
-/decl/global_vars/VV_secluded()
+/decl/global_vars/VV_hidden()
 	return list("forumsqladdress",
 				"forumsqldb",
 				"forumsqllogin",
@@ -36,7 +36,8 @@
 				"sqlfdbkpass",
 				"sqllogin",
 				"sqlpass",
-				"sqlport"
+				"sqlport",
+				"comms_password"
 			)
 
 /client/proc/debug_global_variables()
