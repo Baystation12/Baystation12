@@ -239,8 +239,13 @@
 		return 0 //Make sure air doesn't drain
 	..()
 
-/obj/structure/grille/cult
+/obj/structure/grille/bogani
 	name = "alien grate"
-	desc = "a strange, prison like walling."
+	desc = "This matrice is fashioned out of some exotic, strange material. Its strength allows it to function as a prison-like walling."
 	icon_state = "alien_grate"
 	health = 150 //hella strong
+
+/obj/structure/grille/bogani/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
+	if(air_group)
+		return 0 //Make sure air doesn't drain
+	..()
