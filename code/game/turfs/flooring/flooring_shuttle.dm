@@ -31,6 +31,7 @@
 	initial_flooring = /decl/flooring/reinforced/shuttle/black
 
 /turf/simulated/floor/shuttle/alien
+	name = "alien shuttle floor"
 	icon_state = "floor_b"
 	oxygen = 0
 	nitrogen = 0

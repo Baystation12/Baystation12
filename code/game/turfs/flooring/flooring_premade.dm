@@ -218,3 +218,12 @@
 /turf/simulated/floor/beach/water/New()
 	..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
+
+/turf/simulated/floor/alien //Different than our shuttle type.
+	name = "alien floor"
+	icon = 'icons/turf/shuttle.dmi'
+	icon_state = "floor_b"
+	oxygen = 0
+	nitrogen = 0
+	chlorine = MOLES_CELLSTANDARD
+	plane = PLATING_PLANE //Inner corners
