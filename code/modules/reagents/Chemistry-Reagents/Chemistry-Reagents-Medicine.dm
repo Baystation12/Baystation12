@@ -127,7 +127,7 @@
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#8040FF"
-	overdose = REAGENTS_OVERDOSE * 2
+	overdose = REAGENTS_OVERDOSE * 3
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 

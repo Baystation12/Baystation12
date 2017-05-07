@@ -33,4 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "added overdose to Anti-toxin and Tricodazine. Overdose is now 60 units."
+  - tweak: "added overdose to Anti-toxin and Tricodazine. Overdose is now 60 units for dylovene and 90 on tricordazine."
