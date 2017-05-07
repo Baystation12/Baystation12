@@ -24,7 +24,7 @@
 	name = "Bloodied Stone"
 	desc = "Unlocks the blood stone building, which allows followers to increase your power through ritual and prayer."
 	item_cost = 50
-	category = /datum/uplink_category/deity_sarsie_sacrifice
+	category = /datum/uplink_category/deity_narsie_sacrifice
 	required_feats = list("Nar-Sie", "Sacrificing")
 
 /datum/uplink_item/item/deity/feat/blood_stone/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
