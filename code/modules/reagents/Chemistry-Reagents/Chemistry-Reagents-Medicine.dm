@@ -72,6 +72,7 @@
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00A000"
+	overdose = REAGENTS_OVERDOSE * 2
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
@@ -126,6 +127,7 @@
 	taste_description = "grossness"
 	reagent_state = LIQUID
 	color = "#8040FF"
+	overdose = REAGENTS_OVERDOSE * 2
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
