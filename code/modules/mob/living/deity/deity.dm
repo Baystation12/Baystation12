@@ -3,7 +3,7 @@
 	desc = "A shape of otherworldly matter, not yet ready to be unleashed into this world."
 	icon = 'icons/mob/deity.dmi'
 	icon_state = "egg"
-	var/power_min = 0 //Below this amount you regenerate uplink TCs
+	var/power_min = 10 //Below this amount you regenerate uplink TCs
 	var/power_tick = 10
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
@@ -88,14 +88,14 @@
 		var/datum/god_form/G = form
 		var/god_name = initial(G.name)
 		var/icon/god_icon = icon(icon, initial(G.god_icon_state))
-		src << browse_rsc(god_icon, "[god_name].png")
+		send_rsc(src,god_icon, "[god_name].png")
 		dat += {"<tr>
 					<td><a href="?src=\ref[src];form=[G]">[god_name]</a></td>
 					<td><img src="[god_name].png"></td>
 					<td>[initial(G.info)]</td>
 				</tr>"}
 	dat += "</table>"
-	show_browser(src, dat, "window=godform")
+	show_browser(src, dat, "window=godform;can_close=0")
 
 /mob/living/deity/proc/set_form(var/type)
 	form = new type(src)
@@ -106,6 +106,7 @@
 		if(newname)
 			fully_replace_character_name(newname)
 	src.verbs -= /mob/living/deity/verb/choose_form
+	show_browser(src, null, "window=godform")
 	for(var/m in minions)
 		var/datum/mind/mind = m
 		var/mob/living/L = mind.current

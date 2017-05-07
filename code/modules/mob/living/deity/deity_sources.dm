@@ -20,7 +20,8 @@
 		else if(abs(amount) > 50)
 			feel = " greatly"
 		if(abs(amount) >= 10)
-			to_chat(src, "<span class='[amount > 0 ? "notice" : "warning"]'>You feel your power [amount > 0 ? "increase" : "decrease"][feel][msg ? " [msg]" : ""]</span>")
+			var/class = amount > 0 ? "notice" : "warning"
+			to_chat(src, "<span class='[class]'>You feel your power [amount > 0 ? "increase" : "decrease"][feel][msg ? " [msg]" : ""]</span>")
 
 
 /mob/living/deity/proc/add_source(var/amount, var/atom/source, var/silent = 0, var/msg)

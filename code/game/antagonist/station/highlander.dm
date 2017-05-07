@@ -1,5 +1,3 @@
-var/datum/antagonist/highlander/highlanders
-
 /datum/antagonist/highlander
 	role_text = "Highlander"
 	role_text_plural = "Highlanders"

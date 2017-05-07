@@ -7,7 +7,6 @@
 		A.forceMove(src)
 
 /mob/living/deity/proc/grant_boon(var/mob/living/L)
-	to_chat(L, "<span class='cult'>\The [src] grants you a boon of [current_boon]!</span>")
 	if(istype(current_boon, /spell) && !grant_spell(L, current_boon))
 		return
 	else if(istype(current_boon, /obj/item))
@@ -24,6 +23,7 @@
 				origin_text = "in \the [O]"
 		to_chat(L,"<span class='notice'>It appears [origin_text].</span>")
 
+	to_chat(L, "<span class='cult'>\The [src] grants you a boon of [current_boon]!</span>")
 	log_admin("[key_name(src)] gave [key_name(L)] the boon [current_boon]")
 	current_boon = null
 	return
