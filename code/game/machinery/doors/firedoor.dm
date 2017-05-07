@@ -434,4 +434,5 @@
 
 /obj/machinery/door/firedoor/multi_tile
 	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
+	opacity = 0 //Too hard to make fully opaque multi-tile objects.
 	width = 2
