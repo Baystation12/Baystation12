@@ -105,6 +105,7 @@
 #include "code\controllers\verbs.dm"
 #include "code\controllers\voting.dm"
 #include "code\controllers\evacuation\evacuation.dm"
+#include "code\controllers\evacuation\evacuation_bluespace.dm"
 #include "code\controllers\evacuation\evacuation_eta.dm"
 #include "code\controllers\evacuation\evacuation_helpers.dm"
 #include "code\controllers\evacuation\evacuation_option.dm"
