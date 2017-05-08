@@ -48,4 +48,3 @@
 	name = "military police armband"
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is black with white letters MP."
 	icon_state = "mpband"
-	slot = "armband"
