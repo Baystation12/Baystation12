@@ -77,7 +77,7 @@ var/savefile/Banlistjob
 		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Cyborg")
 		return 1
 	if(rank == "Engineering")
-		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Station Engineer")
+		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Engineer")
 		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Atmospheric Technician")
 		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Chief Engineer")
 		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Cyborg")
@@ -96,7 +96,7 @@ var/savefile/Banlistjob
 		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Cyborg")
 		return 1
 	if(rank == "CE_Station_Engineer")
-		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Station Engineer")
+		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Engineer")
 		AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, "Chief Engineer")
 		return 1
 	if(rank == "CE_Atmospheric_Tech")
@@ -220,12 +220,12 @@ var/savefile/Banlistjob
 /*/datum/admins/proc/permjobban(ckey, computerid, reason, bannedby, temp, minutes, rank)
 	if(AddBanjob(ckey, computerid, reason, usr.ckey, 0, 0, job))
 		to_chat(M, "<span class='danger'>You have been banned from [job] by [usr.client.ckey].\nReason: [reason].</span>")
-		to_chat(M, "<span class='warning'>This is a permanent ban.</span>")
+		to_chat(M, "<span class='warning'>This is a ban until appeal.</span>")
 		if(config.banappeals)
 			to_chat(M, "<span class='warning'>To try to resolve this matter head to [config.banappeals]</span>")
 		else
 			to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
-		log_and_message_admins("has banned from [job] [ckey].\nReason: [reason]\nThis is a permanent ban.")
+		log_and_message_admins("has banned from [job] [ckey].\nReason: [reason]\nThis is a ban until appeal.")
 /datum/admins/proc/timejobban(ckey, computerid, reason, bannedby, temp, minutes, rank)
 	if(AddBanjob(ckey, computerid, reason, usr.ckey, 1, mins, job))
 		to_chat(M, "<span class='danger'>You have been jobbanned from [job] by [usr.client.ckey].\nReason: [reason].</span>")

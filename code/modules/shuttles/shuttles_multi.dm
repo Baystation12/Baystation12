@@ -209,7 +209,7 @@
 	if(href_list["toggle_cloak"])
 
 		MS.cloaked = !MS.cloaked
-		to_chat(usr, "<span class='warning'>Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival.</span>")
+		to_chat(usr, "<span class='warning'>Ship stealth systems have been [(MS.cloaked ? "activated. The [station_name()] will not" : "deactivated. The [station_name()] will")] be warned of our arrival.</span>")
 
 
 	if(href_list["move_multi"])

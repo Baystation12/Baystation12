@@ -27,8 +27,8 @@
 
 	usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
 
-	if(climbable)
-		structure_shaken()
+	if(flags & OBJ_CLIMBABLE)
+		object_shaken()
 
 	return
 
@@ -86,7 +86,7 @@
 	if(dir != NORTH)
 		plane = ABOVE_HUMAN_PLANE
 		layer = ABOVE_HUMAN_LAYER
-	climbable = 0 //flipping tables allows them to be used as makeshift barriers
+	flags &= ~OBJ_CLIMBABLE //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
 	flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
@@ -104,8 +104,8 @@
 	verbs +=/obj/structure/table/verb/do_flip
 
 	reset_plane_and_layer()
+	flags |= OBJ_CLIMBABLE
 	flipped = 0
-	climbable = initial(climbable)
 	flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
 		var/obj/structure/table/T = locate() in get_step(src.loc,D)

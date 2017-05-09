@@ -22,3 +22,7 @@
 	display_name = "fancy cigar case"
 	path = /obj/item/weapon/storage/fancy/cigar
 	cost = 2
+
+/datum/gear/ecigs
+	display_name = "electronic cigarette, deluxe version"
+	path = /obj/item/clothing/mask/smokable/ecig/deluxe

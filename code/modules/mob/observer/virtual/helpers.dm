@@ -22,11 +22,11 @@
 		if(C)
 			. |= C
 
-/proc/hearers_in_range(var/atom/movable/center_vmob)
+/proc/hearers_in_range(var/atom/movable/center_vmob, var/hearing_range = world.view)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
-	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
+	for(var/mob/observer/virtual/v_mob in range(hearing_range, center_vmob))
 		if(v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 
@@ -42,15 +42,15 @@
 * Hear Helpers *
 ***************/
 // A mob hears another mob if they have direct line of sight, ignoring turf luminosity.
-// If there is an opaque object beteween the mobs then they cannot hear each other no matter if the object can be seen through or not.
+// If there is an opaque object beteween the mobs then they cannot hear each other, even if their respective turfs can be seen.
 // Thus, unlike viewing hearing is communicative. I.e. if Mob A can hear Mob B then Mob B can also hear Mob A.
 
 // Gets the hosts of all the virtual mobs that can hear the given movable atom (or rather, it's virtual mob or turf in that existence order)
-/proc/all_hearers(var/atom/movable/heard_vmob)
+/proc/all_hearers(var/atom/movable/heard_vmob, var/range = world.view)
 	. = list()
 
 	ACQUIRE_VIRTUAL_OR_TURF(heard_vmob)
-	for(var/mob/observer/virtual/v_mob in hearers(world.view, heard_vmob))
+	for(var/mob/observer/virtual/v_mob in hearers(range, heard_vmob))
 		if(v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 

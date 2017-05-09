@@ -18,8 +18,10 @@
 		/obj/item/clothing/under/rank/research_director,
 		/obj/item/clothing/under/rank/research_director/rdalt,
 		/obj/item/clothing/under/rank/research_director/dress_rd,
+		/obj/item/clothing/under/suit_jacket/nt,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
+		/obj/item/clothing/suit/storage/toggle/labcoat/rd,
 		/obj/item/weapon/cartridge/rd,
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/gloves/latex,
@@ -170,6 +172,7 @@
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/device/megaphone,
+		/obj/item/weapon/gun/energy/stunrevolver,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)

@@ -11,7 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_ID | SLOT_BELT
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/id.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/id.dmi')
 
 	//Main variables
 	var/owner = null
@@ -38,7 +38,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/lock_code = "" // Lockcode to unlock uplink
 	var/honkamt = 0 //How many honks left when infected with honk.exe
 	var/mimeamt = 0 //How many silence left when infected with mime.exe
-	var/note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
+	var/note = "Thank you for choosing the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
 	var/notehtml = ""
 	var/cart = "" //A place to stick cartridge menu information
 	var/detonate = 1 // Can the PDA be blown up?
@@ -196,14 +196,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/librarian
 	icon_state = "pda-libb"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
-	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
+	note = "Thank you for choosing the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
 	message_silent = 1 //Quiet in the library!
 	news_silent = 0		// Librarian is above the law!  (That and alt job title is reporter)
 
 /obj/item/device/pda/clear
 	icon_state = "pda-transp"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a special edition with a transparent case."
-	note = "Congratulations, you have chosen the Thinktronic 5230 Personal Data Assistant Deluxe Special Max Turbo Limited Edition!"
+	note = "Thank you for choosing the Thinktronic 5230 Personal Data Assistant Deluxe Special Max Turbo Limited Edition!"
 
 /obj/item/device/pda/chef
 	icon_state = "pda-chef"
@@ -612,7 +612,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Authenticate")//Checks for ID
 			id_check(U, 1)
 		if("UpdateInfo")
-			set_rank_job(id.rank, ownjob)
+			if(id)
+				set_rank_job(id.rank, ownjob)
 		if("Eject")//Ejects the cart, only done from hub.
 			verb_remove_cartridge()
 
@@ -954,14 +955,21 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			id.loc = get_turf(src)
 		id = null
 
+/obj/item/device/pda/AltClick()
+	if(Adjacent(usr))
+		verb_remove_id()
+
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P, var/tap = 1)
+	if(!istype(P))
+		to_chat(U, "<span class='notice'>ERROR: This user does not accept messages.</span>")
+		return
 	if(tap)
 		U.visible_message("<span class='notice'>\The [U] taps on \his PDA's screen.</span>")
 	var/t = input(U, "Please enter message", P.name, null) as text
 	t = sanitize(t)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
-	if (!t || !istype(P))
+	if (!t)
 		return
 	if (!in_range(src, U) && loc != U)
 		return
@@ -1059,6 +1067,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	update_icon()
 
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
+	if(!istype(sending_unit))
+		to_chat(usr, "<span class='bad'>This destination does not accept messages.</span>")
+		return
 	var/track = ""
 	if(ismob(sending_unit.loc) && isAI(loc))
 		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"

@@ -9,7 +9,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_magnet-f"
 	name = "Electromagnetic Generator"
-	desc = "A device that uses station power to create points of magnetic energy."
+	desc = "A device that uses powernet to create points of magnetic energy."
 	level = 1		// underfloor
 	plane = ABOVE_PLATING_PLANE
 	layer = ABOVE_WIRE_LAYER

@@ -11,6 +11,8 @@
 
 	var/obj/machinery/computer/helm/nav_control
 	var/list/engines = list()
+	var/engines_state = 1 //global on/off toggle for all engines
+	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
 /obj/effect/overmap/ship/initialize()
 	..()
@@ -27,6 +29,10 @@
 			H.linked = src
 			H.get_known_sectors()
 			testing("Helm console at level [H.z] linked to overmap object '[name]'.")
+	for(var/obj/machinery/computer/navigation/N in machines)
+		if (N.z in map_z)
+			N.linked = src
+			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
 	processing_objects.Add(src)
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)

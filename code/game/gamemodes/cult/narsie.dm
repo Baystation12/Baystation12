@@ -35,8 +35,8 @@ var/global/list/narsie_list = list()
 	light_range = 1
 	light_color = "#3e0000"
 
-	current_size = 12
-	consume_range = 12 // How many tiles out do we eat.
+	current_size = 6
+	consume_range = 6 // How many tiles out do we eat.
 	var/announce=1
 	var/cause_hell = 1
 
@@ -175,11 +175,6 @@ var/global/list/narsie_list = list()
 
 		M.cultify()
 
-//ITEM PROCESSING
-	else if (istype(A, /obj/))
-		var/obj/O = A
-		O.cultify()
-
 //TURF PROCESSING
 	else if (isturf(A))
 		var/dist = get_dist(A, src)
@@ -291,6 +286,8 @@ var/global/list/narsie_list = list()
 		if(food.stat)
 			continue
 		var/turf/pos = get_turf(food)
+		if(!pos)	//Catches failure of get_turf.
+			continue
 		if(pos.z != src.z)
 			continue
 		cultists += food
@@ -342,9 +339,6 @@ var/global/list/narsie_list = list()
 	chained = 0
 	move_self = 1
 	icon_state ="narsie"
-
-/obj/singularity/narsie/cultify()
-	return
 
 /**
  * Wizard narsie.

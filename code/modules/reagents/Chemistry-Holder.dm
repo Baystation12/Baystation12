@@ -367,7 +367,7 @@
 	if(isliving(target)) //will we ever even need to tranfer reagents to non-living mobs?
 		var/mob/living/L = target
 		perm = L.reagent_permeability()
-	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
+	return trans_to_mob(target, amount * perm, CHEM_TOUCH, 1, copy)
 
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
 	if(!target || !istype(target) || !target.simulated)

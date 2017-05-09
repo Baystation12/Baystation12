@@ -1,8 +1,3 @@
-
-// Variables to not even show in the list.
-// step_* and bound_* are here because they literally break the game and do nothing else.
-// parent_type is here because it's pointless to show in VV.
-/var/list/view_variables_hide_vars = list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "parent_type", "step_x", "step_y", "step_size")
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
 /var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
 // Variables that runtime if you try to test associativity of the lists they contain by indexing
@@ -106,11 +101,7 @@
 
 /proc/make_view_variables_var_list(datum/D)
 	. = list()
-	var/list/variables = list()
-	for(var/x in D.get_variables())
-		if(x in view_variables_hide_vars)
-			continue
-		variables += x
+	var/list/variables = D.get_variables()
 	variables = sortList(variables)
 	for(var/x in variables)
 		. += make_view_variables_var_entry(D, x, D.get_variable_value(x))

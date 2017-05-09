@@ -134,7 +134,7 @@ REAGENT SCANNER
 					user.show_message("<span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>")
 //			user.show_message(text("<span class='warning'>Warning: Unknown pathogen detected in subject's blood.</span>"))
 	if (M.getCloneLoss())
-		user.show_message("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
+		user.show_message("<span class='warning'>Genetic damage detected.</span>")
 //	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
 //		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.</span>")
 	if (M.has_brain_worms())

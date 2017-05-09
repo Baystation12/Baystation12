@@ -153,7 +153,8 @@
 	if(ref)
 		param = "\ref[ref]"
 
-	winset(user, windowid, "on-close=\".windowclose [param]\"")
+	spawn(2)
+		winset(user, windowid, "on-close=\".windowclose [param]\"")
 
 //	log_debug("OnClose [user]: [windowid] : ["on-close=\".windowclose [param]\""]")
 

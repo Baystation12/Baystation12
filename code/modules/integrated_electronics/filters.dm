@@ -24,7 +24,8 @@
 /obj/item/integrated_circuit/filter/ref/may_pass(var/weakref/data)
 	if(!(filter_type && isweakref(data)))
 		return FALSE
-	return istype(data.resolve(), filter_type)
+	var/weakref/wref = data
+	return istype(wref.resolve(), filter_type)
 
 /obj/item/integrated_circuit/filter/ref/mob
 	name = "life filter"
@@ -79,7 +80,8 @@
 		return FALSE
 	if(!isweakref(data))
 		return FALSE
-	return istype(data.resolve(), filter_type)
+	var/weakref/wref = data
+	return istype(wref.resolve(), filter_type)
 
 /obj/item/integrated_circuit/filter/ref/custom/MouseDrop(var/atom/over_object)
 	if(!CanMouseDrop(over_object))

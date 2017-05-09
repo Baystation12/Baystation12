@@ -39,6 +39,9 @@
 		cameras += C
 	return cameras
 
+/area/proc/is_shuttle_locked()
+	return 0
+
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
 		atmosphere_alarm.clearAlarm(src, alarm_source)

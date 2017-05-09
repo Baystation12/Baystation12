@@ -1,5 +1,5 @@
 /datum/species/resomi
-	name = "Resomi"
+	name = SPECIES_RESOMI
 	name_plural = "Resomii"
 	blurb = "A race of feathered raptors who developed on a cold world, almost \
 	outside of the Goldilocks zone. Extremely fragile, they developed hunting skills \

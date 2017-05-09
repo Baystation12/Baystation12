@@ -1,3 +1,11 @@
+/obj/effect/landmark/test/safe_turf
+	name = "safe_turf" // At creation, landmark tags are set to: "landmark*[name]"
+	desc = "A safe turf should be an as large block as possible of livable, passable turfs, preferably at least 3x3 with the marked turf as the center"
+
+/obj/effect/landmark/test/space_turf
+	name = "space_turf"
+	desc = "A space turf should be an as large block as possible of space, preferably at least 3x3 with the marked turf as the center"
+
 #ifdef UNIT_TEST
 
 /datum/fake_client

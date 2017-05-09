@@ -199,10 +199,11 @@ var/list/gamemode_cache = list()
 	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
+	var/aooc_allowed = 1
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
-	var/list/ert_species = list("Human")
+	var/list/ert_species = list(SPECIES_HUMAN)
 
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
@@ -220,6 +221,8 @@ var/list/gamemode_cache = list()
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
 	var/radiation_resistance_multiplier = 6.5
 	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
+
+	var/autostealth = 0 // Staff get automatic stealth after this many minutes
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -440,6 +443,9 @@ var/list/gamemode_cache = list()
 				if ("disable_ooc")
 					config.ooc_allowed = 0
 					config.looc_allowed = 0
+
+				if ("disable_aooc")
+					config.aooc_allowed = 0
 
 				if ("disable_entry")
 					config.enter_allowed = 0
@@ -690,7 +696,7 @@ var/list/gamemode_cache = list()
 				if("ert_species")
 					config.ert_species = splittext(value, ";")
 					if(!config.ert_species.len)
-						config.ert_species += "Human"
+						config.ert_species += SPECIES_HUMAN
 
 				if("law_zero")
 					law_zero = value
@@ -714,6 +720,9 @@ var/list/gamemode_cache = list()
 
 				if("wait_for_sigusr1")
 					config.wait_for_sigusr1_reboot = 1
+
+				if("autostealth")
+					config.autostealth = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

@@ -9,6 +9,8 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
+	valid_accessory_slots = list("armband")
+	restricted_accessory_slots = list("armband")
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
@@ -56,11 +58,19 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
-	name = "Scientist labcoat"
-	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
-	icon_state = "labcoat_tox_open"
-	icon_open = "labcoat_tox_open"
-	icon_closed = "labcoat_tox"
+	name = "\improper NanoTrasen labcoat"
+	desc = "A suit that protects against minor chemical spills. Has a red stripe on the shoulder and red trim on the sleeves, denoting it as a NanoTrasen labcoat."
+	icon_state = "labcoat_nt_open"
+	icon_open = "labcoat_nt_open"
+	icon_closed = "labcoat_nt"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/rd
+	name = "research director's labcoat"
+	desc = "A full-body labcoat covered in red and black designs, denoting it as a NanoTrasen management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of NanoTrasen employees."
+	icon_state = "labcoat_rd_open"
+	icon_open = "labcoat_rd_open"
+	icon_closed = "labcoat_rd"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"

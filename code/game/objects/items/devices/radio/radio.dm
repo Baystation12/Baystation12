@@ -23,7 +23,7 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
-	name = "station bounced radio"
+	name = "shortwave radio"
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
@@ -748,11 +748,18 @@ var/global/list/default_medbay_channels = list(
 	invisibility = 101
 	listening = 0
 	canhear_range = 0
-	channels=list("Engineering")
+	channels=list("Engineering","Security", "Medical", "Command")
+
+/obj/item/device/radio/announcer/Destroy()
+	crash_with("attempt to delete a [src.type] detected, and prevented.")
+	return 1
 
 /obj/item/device/radio/announcer/initialize()
 	..()
 	loc = locate(1,1,using_map.contact_levels.len ? using_map.contact_levels[1] : 1)
+
+/obj/item/device/radio/announcer/subspace
+	subspace_transmission = 1
 
 /obj/item/device/radio/phone
 	broadcasting = 0

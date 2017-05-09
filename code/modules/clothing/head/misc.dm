@@ -53,7 +53,7 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/mailman
-	name = "station cap"
+	name = "mail cap"
 	icon_state = "mailman"
 	desc = "<i>Choo-choo</i>!"
 	body_parts_covered = 0

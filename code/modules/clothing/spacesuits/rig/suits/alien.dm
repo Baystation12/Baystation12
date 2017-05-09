@@ -24,15 +24,15 @@
 	vision_restriction = TINT_NONE //Still blind when offline. It is fully armoured after all
 
 /obj/item/clothing/head/helmet/space/rig/unathi
-	species_restricted = list("Unathi")
+	species_restricted = list(SPECIES_UNATHI)
 	force = 5
 	sharp = 1 //poking people with the horn
 
 /obj/item/clothing/suit/space/rig/unathi
-	species_restricted = list("Unathi")
+	species_restricted = list(SPECIES_UNATHI)
 
 /obj/item/clothing/shoes/magboots/rig/unathi
-	species_restricted = list("Unathi")
+	species_restricted = list(SPECIES_UNATHI)
 	
 /obj/item/clothing/gloves/rig/unathi
-	species_restricted = list("Unathi")
+	species_restricted = list(SPECIES_UNATHI)

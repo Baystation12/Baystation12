@@ -24,11 +24,26 @@
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/accessory/bowtie
+	display_name = "bowtie, horrible"
+	path = /obj/item/clothing/accessory/bowtie/ugly
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/bowtie/color
+	display_name = "bowtie, colored"
+	path = /obj/item/clothing/accessory/bowtie/color
+	flags = GEAR_HAS_COLOR_SELECTION
+
 //have to break up armbands to restrict access
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
 	allowed_roles = SECURITY_ROLES
+
+/datum/gear/accessory/armband_mp
+	display_name = "military police armband"
+	path = /obj/item/clothing/accessory/armband/mp
+	allowed_roles = list("Master at Arms", "Brig Officer", "Chief of Security", "Forensic Technician")
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
@@ -59,11 +74,6 @@
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
 	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Passenger")
-
-/datum/gear/accessory/armband_science
-	display_name = "science armband"
-	path = /obj/item/clothing/accessory/armband/science
-	allowed_roles = RESEARCH_ROLES
 
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"

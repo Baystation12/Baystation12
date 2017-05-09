@@ -93,7 +93,7 @@
 	T.Weaken(3)
 
 	// Pariahs are not good at leaping. This is snowflakey, pls fix.
-	if(species.name == "Vox Pariah" || src.handcuffed || stance_damage >= 2)
+	if(species.name == SPECIES_VOXPARIAH || src.handcuffed || stance_damage >= 2)
 		src.Weaken(5)
 		return
 
@@ -222,6 +222,16 @@
 	set category = "Abilities"
 	diona_split_into_nymphs(5)	// Separate proc to void argments being supplied when used as a verb
 
+/mob/living/carbon/human/proc/diona_heal_toggle()
+	set name = "Toggle Heal"
+	set desc = "Turn your inate healing on or off."
+	set category = "Abilities"
+	innate_heal = !innate_heal
+	if (innate_heal)
+		to_chat(src, "<span class='alium'>You are now using nutrients to regenerate.</span>")
+	else
+		to_chat(src, "<span class='alium'>You are no longer using nutrients to regenerate.</span>")
+
 /mob/living/carbon/human/proc/diona_split_into_nymphs(var/number_of_resulting_nymphs)
 	var/turf/T = get_turf(src)
 
@@ -232,22 +242,32 @@
 	if(mind)
 		mind.transfer_to(S)
 
-	message_admins("\The [src] has split into nymphs; player now controls [key_name_admin(S)]")
-	log_admin("\The [src] has split into nymphs; player now controls [key_name(S)]")
+		message_admins("\The [src] has split into nymphs; player now controls [key_name_admin(S)]")
+		log_admin("\The [src] has split into nymphs; player now controls [key_name(S)]")
 
 	var/nymphs = 1
+	var/mob/living/carbon/alien/diona/L = S
 
 	for(var/mob/living/carbon/alien/diona/D in src)
 		nymphs++
 		D.forceMove(T)
 		transfer_languages(src, D, WHITELISTED|RESTRICTED)
 		D.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+		L.set_next_nymph(D)
+		D.set_last_nymph(L)
+		L = D
 
 	if(nymphs < number_of_resulting_nymphs)
 		for(var/i in nymphs to (number_of_resulting_nymphs - 1))
-			var/mob/M = new /mob/living/carbon/alien/diona(T)
+			var/mob/living/carbon/alien/diona/M = new(T)
 			transfer_languages(src, M, WHITELISTED|RESTRICTED)
 			M.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+			L.set_next_nymph(M)
+			M.set_last_nymph(L)
+			L = M
+
+	L.set_next_nymph(S)
+	S.set_last_nymph(L)
 
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)

@@ -3,7 +3,7 @@
 	filedesc = "ID card modification program"
 	nanomodule_path = /datum/nano_module/program/card_mod
 	program_icon_state = "id"
-	extended_desc = "Program for programming employee ID cards to access parts of the station."
+	extended_desc = "Program for programming crew ID cards."
 	required_access = access_change_ids
 	requires_ntnet = 0
 	size = 8
@@ -110,7 +110,10 @@
 
 	var/mob/user = usr
 	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
-	var/obj/item/weapon/card/id/id_card = computer.card_slot.stored_card
+	var/obj/item/weapon/card/id/id_card
+	if (computer.card_slot)
+		id_card = computer.card_slot.stored_card
+
 	var/datum/nano_module/program/card_mod/module = NM
 	switch(href_list["action"])
 		if("switchm")

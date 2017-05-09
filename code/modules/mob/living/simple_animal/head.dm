@@ -27,7 +27,7 @@
 	"Gooogooooll, break ya bones",
 	"Crab say what?",
 	"Man they say we have space lizards now, man this shit is getting more wack every minute",
-	"The so called \"improved\" station AI is just bullshit, that thing aint fun for noone",
+	"The so called \"improved\" AI is just bullshit, that thing aint fun for noone",
 	"The Captain is a traitor, he took my power core.",
 	"Say \"what\" again. Say \"what\" again. I dare you. I double-dare you, motherfucker. Say \"what\" one more goddamn time.",
 	"Ezekiel 25:17 ,The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who in the name of charity and good will shepherds the weak through the valley of darkness, for he is truly his brother's keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who attempt to poison and destroy my brothers. And you will know my name is the Lord... when I lay my vengeance upon thee.",

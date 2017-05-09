@@ -8,7 +8,7 @@
 	var/list/Lines = list()
 
 	if(check_rights(R_INVESTIGATE, 0))
-		for(var/client/C in clients)
+		for(var/client/C)
 			var/entry = "\t[C.key]"
 			entry += " - Playing as [C.mob.real_name]"
 			switch(C.mob.stat)
@@ -44,14 +44,16 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C in clients)
-			Lines += C.key
+		for(var/client/C)
+			if(!C.is_stealthed())
+				Lines += C.key
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	to_chat(src, msg)
+
 /client/verb/staffwho()
 	set category = "Admin"
 	set name = "Staffwho"

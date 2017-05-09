@@ -365,7 +365,7 @@ var/global/datum/controller/occupations/job_master
 						else
 							permitted = 1
 
-						if(G.whitelisted && (G.whitelisted != H.species.name || !is_species_whitelisted(H, G.whitelisted)))
+						if(G.whitelisted && (!(H.species.name in G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
@@ -449,7 +449,7 @@ var/global/datum/controller/occupations/job_master
 			if(department_account)
 				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> þ[department_account.money]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> T[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
@@ -624,16 +624,19 @@ var/global/datum/controller/occupations/job_master
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
 
 	var/mob/H = C.mob
+	var/spawnpoint = C.prefs.spawnpoint
 	var/datum/spawnpoint/spawnpos
 
-	if(C.prefs.spawnpoint)
-		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
-			if(H)
-				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
+	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
+		spawnpoint = using_map.default_spawn
 
+	if(spawnpoint)
+		if(!(spawnpoint in using_map.allowed_spawns))
+			if(H)
+				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
 		else
-			spawnpos = spawntypes[C.prefs.spawnpoint]
+			spawnpos = spawntypes[spawnpoint]
 
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)

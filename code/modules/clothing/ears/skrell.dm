@@ -9,7 +9,7 @@
 	gender = PLURAL
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	species_restricted = list("Skrell")
+	species_restricted = list(SPECIES_SKRELL)
 
 /obj/item/clothing/ears/skrell/chain
 	name = "gold headtail chains"

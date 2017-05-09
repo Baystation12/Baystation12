@@ -16,7 +16,7 @@
 #define NON_MILITARY_ROLES list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant", "SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Contractor", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant", "Off-Duty")
 
 //For jobs that allow for decorative or ceremonial clothing
-#define FORMAL_ROLES list("NanoTrasen Liaison", "SolGov Representative", "Passenger", "Bartender", "Merchant", "Off-Duty")
+#define FORMAL_ROLES list("NanoTrasen Liaison", "Research Director", "Senior Researcher", "Scientist", "Research Assistant", "SolGov Representative", "Passenger", "Bartender", "Merchant", "Off-Duty")
 
 //For civilian jobs that may have a uniform, but not a strict one
 #define SEMIFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty")

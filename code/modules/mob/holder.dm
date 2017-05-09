@@ -8,8 +8,8 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/head.dmi',
-		"Resomi" = 'icons/mob/species/resomi/head.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/head.dmi'
 		)
 
 	origin_tech = null
@@ -160,11 +160,10 @@ var/list/holder_mob_icon_cache = list()
 	return H
 
 /mob/living/MouseDrop(var/mob/living/carbon/human/over_object)
-	if(istype(over_object) && Adjacent(over_object) && (usr == src || usr == over_object) && over_object.a_intent == I_HELP)
-		if(!scoop_check(over_object))
+	if(istype(over_object) && Adjacent(over_object) && (usr == src || usr == over_object) && over_object.a_intent == I_GRAB)
+		if(scoop_check(over_object))
+			get_scooped(over_object, (usr == src))
 			return
-		get_scooped(over_object, (usr == src))
-		return
 	return ..()
 
 /mob/living/proc/scoop_check(var/mob/living/scooper)

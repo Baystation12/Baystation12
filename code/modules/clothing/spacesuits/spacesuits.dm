@@ -12,7 +12,7 @@
 		slot_l_hand_str = "s_helmet",
 		slot_r_hand_str = "s_helmet",
 		)
-	permeability_coefficient = 0.01
+	permeability_coefficient = 0
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
@@ -21,7 +21,7 @@
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
-	species_restricted = list("exclude","Diona", "Xenomorph")
+	species_restricted = list("exclude",SPECIES_DIONA, "Xenomorph")
 	flash_protection = FLASH_PROTECTION_MAJOR
 
 	var/obj/machinery/camera/camera
@@ -70,8 +70,8 @@
 		slot_r_hand_str = "s_suit",
 	)
 	w_class = ITEM_SIZE_LARGE//large item
-	gas_transfer_coefficient = 0.01
-	permeability_coefficient = 0.02
+	gas_transfer_coefficient = 0
+	permeability_coefficient = 0
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/device/suit_cooling_unit)
@@ -82,7 +82,7 @@
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
-	species_restricted = list("exclude","Diona", "Xenomorph")
+	species_restricted = list("exclude",SPECIES_DIONA, "Xenomorph")
 
 /obj/item/clothing/suit/space/New()
 	..()

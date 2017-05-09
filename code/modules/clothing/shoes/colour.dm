@@ -56,6 +56,9 @@
 /obj/item/clothing/shoes/orange
 	name = "orange shoes"
 	icon_state = "orange"
+	force = 0 //nerf brig shoe throwing
+	throwforce = 0
+	desc = "A pair of flimsy, cheap shoes. The soles have been made of a soft rubber."
 	var/obj/item/weapon/handcuffs/chained = null
 
 /obj/item/clothing/shoes/orange/proc/attach_cuffs(var/obj/item/weapon/handcuffs/cuffs, mob/user as mob)

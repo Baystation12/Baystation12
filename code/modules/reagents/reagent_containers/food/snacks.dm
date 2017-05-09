@@ -49,7 +49,7 @@
 	if(istype(M, /mob/living/carbon))
 		//TODO: replace with standard_feed_mob() call.
 		var/mob/living/carbon/C = M
-		var/fullness = C.nutrition + (C.reagents.get_reagent_amount("nutriment") * 25)
+		var/fullness = C.nutrition + (C.reagents.get_reagent_amount("nutriment") * 10)
 		if(C == user)								//If you're eating it yourself
 			if(istype(C,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
@@ -1458,12 +1458,12 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/vegetablesoup
 	name = "Vegetable soup"
-	desc = "A true vegan meal." //TODO
+	desc = "A highly nutritious blend of vegetative goodness. Guaranteed to leave you with a, er, \"souped-up\" sense of wellbeing."
 	icon_state = "vegetablesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#AFC4B5"
 	center_of_mass = "x=16;y=8"
-	nutriment_desc = list("carot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2)
+	nutriment_desc = list("carrot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2)
 	nutriment_amt = 8
 	New()
 		..()
@@ -1472,7 +1472,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/nettlesoup
 	name = "Nettle soup"
-	desc = "To think, the botanist would've beat you to death with one of these."
+	desc = "A mean, green, calorically lean dish derived from a poisonous plant. It has a rather acidic bite to its taste."
 	icon_state = "nettlesoup"
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#AFC4B5"
@@ -3234,8 +3234,8 @@
 	nutriment_amt = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood
-	name = "\improper LiquidFood Ration"
-	desc = "A prepackaged grey slurry of all the essential nutrients for a spacefarer on the go. Should this be crunchy?"
+	name = "\improper LiquidFood MRE"
+	desc = "A prepackaged grey slurry for all of the essential nutrients a soldier requires to survive. No expiration date is visible..."
 	icon_state = "liquidfood"
 	trash = /obj/item/trash/liquidfood
 	filling_color = "#A8A8A8"

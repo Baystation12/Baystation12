@@ -4,6 +4,7 @@
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "setup_small"
+	matter = list(DEFAULT_WALL_MATERIAL = 200)
 	var/max_components = 10
 	var/max_complexity = 40
 	var/opened = 0
@@ -13,6 +14,7 @@
 	name = "electronic mechanism"
 	desc = "It's a medium sized case, for building electronics with."
 	icon_state = "setup_medium"
+	matter = list(DEFAULT_WALL_MATERIAL = 400)
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 20
 	max_complexity = 80
@@ -21,6 +23,7 @@
 	name = "electronic machine"
 	desc = "A large case, for building electronics with."
 	icon_state = "setup_large"
+	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	w_class = ITEM_SIZE_LARGE
 	max_components = 30
 	max_complexity = 120
@@ -29,6 +32,7 @@
 	name = "electronic drone"
 	desc = "A little drone fit to be controlled via electronics."
 	icon_state = "setup_drone"
+	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	w_class = ITEM_SIZE_NORMAL
 	max_components = 25
 	max_complexity = 100
@@ -91,7 +95,8 @@
 		HTML += "<td><a href=?src=\ref[circuit];examine=1>[circuit.name]</a></td>"
 		HTML += "<td><a href=?src=\ref[circuit];rename=1>\[Rename\]</a></td>"
 		HTML += "<td><a href=?src=\ref[src];bottom=\ref[circuit]>\[To Bottom\]</a></td>"
-		HTML += "<td><a href=?src=\ref[circuit];remove=1>\[Remove\]</a></td>"
+		if(circuit.removable)
+			HTML += "<td><a href=?src=\ref[circuit];remove=1>\[Remove\]</a></td>"
 		HTML += "</tr>"
 	HTML += "</table>"
 

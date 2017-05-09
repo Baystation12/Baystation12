@@ -6,7 +6,7 @@
 	name = "EXTENSIONS - Shall Initialize as Expected"
 
 /datum/unit_test/extensions/shall_initalize_as_expected/start_test()
-	var/turf/start = locate(20,20,1)
+	var/turf/start = get_safe_turf()
 	var/obj/test/extensions/expansion_obj = new(start, TRUE)
 
 	var/number_of_failures = 0

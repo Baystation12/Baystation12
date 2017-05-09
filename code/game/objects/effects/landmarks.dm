@@ -10,7 +10,7 @@
 
 /obj/effect/landmark/New()
 	..()
-	tag = text("landmark*[]", name)
+	tag = "landmark*[name]"
 
 	switch(name)			//some of these are probably obsolete
 		if("monkey")
@@ -102,10 +102,15 @@
 	delete_me = 1
 
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
-/obj/effect/landmark/costume/chicken/New()
-	new /obj/item/clothing/suit/chickensuit(src.loc)
-	new /obj/item/clothing/head/chicken(src.loc)
-	new /obj/item/weapon/reagent_containers/food/snacks/egg(src.loc)
+/obj/effect/landmark/costume/chameleon/New()
+	new /obj/item/clothing/mask/chameleon(src.loc)
+	new /obj/item/clothing/under/chameleon(src.loc)
+	new /obj/item/clothing/glasses/chameleon(src.loc)
+	new /obj/item/clothing/shoes/chameleon(src.loc)
+	new /obj/item/clothing/gloves/chameleon(src.loc)
+	new /obj/item/clothing/suit/chameleon(src.loc)
+	new /obj/item/clothing/head/chameleon(src.loc)
+	new /obj/item/weapon/storage/backpack/chameleon(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/gladiator/New()
@@ -151,11 +156,6 @@
 	new /obj/item/clothing/under/scratch(src.loc)
 	if (prob(30))
 		new /obj/item/clothing/head/cueball(src.loc)
-	delete_me = 1
-
-/obj/effect/landmark/costume/highlander/New()
-	new /obj/item/clothing/under/kilt(src.loc)
-	new /obj/item/clothing/head/beret(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/prig/New()

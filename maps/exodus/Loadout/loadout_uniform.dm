@@ -131,30 +131,6 @@
 		skirts[initial(skirt_type.name)] = skirt_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
 
-/datum/gear/uniform/pants
-	display_name = "pants selection"
-	path = /obj/item/clothing/under/pants/white
-
-/datum/gear/uniform/pants/New()
-	..()
-	var/list/pants = list()
-	for(var/pant in typesof(/obj/item/clothing/under/pants))
-		var/obj/item/clothing/under/pants/pant_type = pant
-		pants[initial(pant_type.name)] = pant_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pants))
-
-/datum/gear/uniform/shorts
-	display_name = "shorts selection"
-	path = /obj/item/clothing/under/shorts/jeans
-
-/datum/gear/uniform/shorts/New()
-	..()
-	var/list/shorts = list()
-	for(var/short in typesof(/obj/item/clothing/under/shorts))
-		var/obj/item/clothing/under/pants/short_type = short
-		shorts[initial(short_type.name)] = short_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
-
 /datum/gear/uniform/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool

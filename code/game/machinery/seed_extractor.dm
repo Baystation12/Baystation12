@@ -5,6 +5,9 @@
 	icon_state = "sextractor"
 	density = 1
 	anchored = 1
+	use_power = 2
+	idle_power_usage = 10
+	active_power_usage = 2000
 
 obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob)
 

@@ -68,10 +68,10 @@
 		var/mob/living/carbon/human/H = user
 		if(H.species)
 			switch(H.species.name)
-				if("Vox")
+				if(SPECIES_VOX)
 					disposition = 1000
 					hailed_vox = 1
-				if("Vox Pariah")
+				if(SPECIES_VOXPARIAH)
 					hailed_vox = -1
 					disposition = -1000
 			specific = H.species.name

@@ -18,7 +18,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 	<br>
 	<div class="item">
 		<div class="itemLabelNarrow">
-			<b>Station Time</b>:
+			<b>Local Time</b>:
 		</div>
 		<div class="itemContent">
 			<span class="average">{{:data.stationTime}}</span>
@@ -312,7 +312,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     {{for data.manifest["spt"]}}
                             <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                     {{/for}}
-                {{/if}}				
+                {{/if}}
                 {{if data.manifest.sec.length}}
                     <tr><th colspan="3" class="sec">Security</th></tr>
                     {{for data.manifest["sec"]}}
@@ -508,7 +508,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
 
     {{else data.mode == 42}}
-        <H2>Station Status Displays Interlink</H2>
+        <H2>Status Displays Interlink</H2>
         <div class="item">
             <div class="itemLabel">
                 <b>Code</b>:
@@ -763,7 +763,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 			<div class="itemContent">
 				<span class="average">
 					{{if data.records.supply.shuttle_moving}}
-					    Moving to station ({{:data.records.supply.shuttle_eta}})
+					    Moving to dock ({{:data.records.supply.shuttle_eta}})
 					{{else}}
 					    Shuttle at {{:data.records.supply.shuttle_loc}}
 					{{/if}}
@@ -879,10 +879,10 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         <span class="average">({{:value.x}} / {{:value.y}}) - {{:value.dir}} - Status: {{:value.status}}</span><br>
                     {{/if}}
                 {{/for}}
-                
+
     {{else data.mode == 6}}
         <H2><span class="white">InstaNews ED 2.0.9</span></H2>
-        
+
         <div class="item">
             <div class="itemLabelNarrow">
                 <b>Functions</b>:
@@ -892,11 +892,11 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 {{:helper.link('Set news tone', 'comment', {'choice' : "Newstone"}, null, 'fixedLeftWide')}}
             </div>
         </div>
-        
+
 		{{if data.reception != 1}}
 			<span class="bad">No reception with newscaster network.</span>
 		{{/if}}
-		
+
 		<div class="item">
             <div class="itemContent">
                 {{for data.feedChannels}}
@@ -911,23 +911,23 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             </div>
 		</div>
 
-    {{else data.mode == 61}}      
+    {{else data.mode == 61}}
         <H2><span class="white">{{:data.feed.channel}}</span></H2>
         <div style="overflow: hidden;">
             <div style="float: left;"><span class="white">Created by: </span><span class="average">{{:data.feed.author}}</span></div>
             <div style="float: right;"><span class="white">Views: </span><span class="average">{{:data.feed.views}} </span></div>
         </div>
-		
+
 		{{if data.reception != 1}}
 			<span class="bad">No reception with newscaster network.</span>
 		{{/if}}
-		
+
         <div class="statusDisplay" style="overflow: auto;">
             <div class="item">
                 <div class="itemContent" style="width: 100%;">
 					{{if data.feed.censored}}
 						<H3><span class="bad">Attention</span></H3>
-						This channel has been deemed as threatening to the welfare of the station, and marked with a Nanotrasen D-Notice.<br>
+						This channel has been deemed as threatening to the welfare of the crew, and marked with a D-Notice.<br>
 						No further feed story additions are allowed while the D-Notice is in effect.<br>
 					{{else}}
 						{{for data.feed.messages}}
@@ -947,7 +947,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 				</div>
             </div>
         </div>
-        
+
     {{/if}}
 {{else}}
     <div class="wholeScreen">

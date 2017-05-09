@@ -315,6 +315,8 @@
 			return global.captain_announcement;
 		if("cardinal")
 			return global.cardinal;
+		if("cardinalz")
+			return global.cardinalz;
 		if("cargo_positions")
 			return global.cargo_positions;
 		if("cargo_supply_pack_root")
@@ -383,6 +385,8 @@
 			return global.controller_iteration;
 		if("cornerdirs")
 			return global.cornerdirs;
+		if("cornerdirsz")
+			return global.cornerdirsz;
 		if("create_mob_html")
 			return global.create_mob_html;
 		if("create_object_html")
@@ -513,6 +517,8 @@
 			return global.eventchance;
 		if("exclude_jobs")
 			return global.exclude_jobs;
+		if("exited_event")
+			return global.exited_event;
 		if("explosion_in_progress")
 			return global.explosion_in_progress;
 		if("explosion_sound")
@@ -615,6 +621,8 @@
 			return global.ghost_traps;
 		if("global_announcer")
 			return global.global_announcer;
+		if("global_headset")
+			return global.global_headset;
 		if("global_hud")
 			return global.global_hud;
 		if("global_huds")
@@ -649,8 +657,6 @@
 			return global.hazard_overlays;
 		if("hidden_skill_types")
 			return global.hidden_skill_types;
-		if("highlanders")
-			return global.highlanders;
 		if("hiss_sound")
 			return global.hiss_sound;
 		if("hit_appends")
@@ -859,6 +865,8 @@
 			return global.mining_walls;
 		if("minor_air_alarms")
 			return global.minor_air_alarms;
+		if("minor_announcement")
+			return global.minor_announcement;
 		if("mob_equipped_event")
 			return global.mob_equipped_event;
 		if("mob_hat_cache")
@@ -947,6 +955,8 @@
 			return global.outfits_decls_root_;
 		if("outside_state")
 			return global.outside_state;
+		if("overmap_event_handler")
+			return global.overmap_event_handler;
 		if("page_sound")
 			return global.page_sound;
 		if("paiController")
@@ -977,6 +987,8 @@
 			return global.player_list;
 		if("point_source_descriptions")
 			return global.point_source_descriptions;
+		if("points_of_interest")
+			return global.points_of_interest;
 		if("possible_cable_coil_colours")
 			return global.possible_cable_coil_colours;
 		if("possible_changeling_IDs")
@@ -1053,6 +1065,8 @@
 			return global.recentmessages;
 		if("reg_dna")
 			return global.reg_dna;
+		if("registered_macros_by_ckey_")
+			return global.registered_macros_by_ckey_;
 		if("religion_choices")
 			return global.religion_choices;
 		if("religion_name")
@@ -1167,6 +1181,8 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
+		if("sound_player")
+			return global.sound_player;
 		if("sounds_cache")
 			return global.sounds_cache;
 		if("spacevines_spawned")
@@ -1391,8 +1407,6 @@
 			return global.verbs;
 		if("view_variables_dont_expand")
 			return global.view_variables_dont_expand;
-		if("view_variables_hide_vars")
-			return global.view_variables_hide_vars;
 		if("view_variables_no_assoc")
 			return global.view_variables_no_assoc;
 		if("virusDB")
@@ -1447,7 +1461,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1764,6 +1778,8 @@
 			global.captain_announcement=newval;
 		if("cardinal")
 			global.cardinal=newval;
+		if("cardinalz")
+			global.cardinalz=newval;
 		if("cargo_positions")
 			global.cargo_positions=newval;
 		if("cargo_supply_pack_root")
@@ -1832,6 +1848,8 @@
 			global.controller_iteration=newval;
 		if("cornerdirs")
 			global.cornerdirs=newval;
+		if("cornerdirsz")
+			global.cornerdirsz=newval;
 		if("create_mob_html")
 			global.create_mob_html=newval;
 		if("create_object_html")
@@ -1962,6 +1980,8 @@
 			global.eventchance=newval;
 		if("exclude_jobs")
 			global.exclude_jobs=newval;
+		if("exited_event")
+			global.exited_event=newval;
 		if("explosion_in_progress")
 			global.explosion_in_progress=newval;
 		if("explosion_sound")
@@ -2064,6 +2084,8 @@
 			global.ghost_traps=newval;
 		if("global_announcer")
 			global.global_announcer=newval;
+		if("global_headset")
+			global.global_headset=newval;
 		if("global_hud")
 			global.global_hud=newval;
 		if("global_huds")
@@ -2098,8 +2120,6 @@
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
 			global.hidden_skill_types=newval;
-		if("highlanders")
-			global.highlanders=newval;
 		if("hiss_sound")
 			global.hiss_sound=newval;
 		if("hit_appends")
@@ -2308,6 +2328,8 @@
 			global.mining_walls=newval;
 		if("minor_air_alarms")
 			global.minor_air_alarms=newval;
+		if("minor_announcement")
+			global.minor_announcement=newval;
 		if("mob_equipped_event")
 			global.mob_equipped_event=newval;
 		if("mob_hat_cache")
@@ -2396,6 +2418,8 @@
 			global.outfits_decls_root_=newval;
 		if("outside_state")
 			global.outside_state=newval;
+		if("overmap_event_handler")
+			global.overmap_event_handler=newval;
 		if("page_sound")
 			global.page_sound=newval;
 		if("paiController")
@@ -2426,6 +2450,8 @@
 			global.player_list=newval;
 		if("point_source_descriptions")
 			global.point_source_descriptions=newval;
+		if("points_of_interest")
+			global.points_of_interest=newval;
 		if("possible_cable_coil_colours")
 			global.possible_cable_coil_colours=newval;
 		if("possible_changeling_IDs")
@@ -2502,6 +2528,8 @@
 			global.recentmessages=newval;
 		if("reg_dna")
 			global.reg_dna=newval;
+		if("registered_macros_by_ckey_")
+			global.registered_macros_by_ckey_=newval;
 		if("religion_choices")
 			global.religion_choices=newval;
 		if("religion_name")
@@ -2616,6 +2644,8 @@
 			global.solar_gen_rate=newval;
 		if("solars_list")
 			global.solars_list=newval;
+		if("sound_player")
+			global.sound_player=newval;
 		if("sounds_cache")
 			global.sounds_cache=newval;
 		if("spacevines_spawned")
@@ -2840,8 +2870,6 @@
 			global.verbs=newval;
 		if("view_variables_dont_expand")
 			global.view_variables_dont_expand=newval;
-		if("view_variables_hide_vars")
-			global.view_variables_hide_vars=newval;
 		if("view_variables_no_assoc")
 			global.view_variables_no_assoc=newval;
 		if("virusDB")
@@ -2896,7 +2924,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2954,10 +2982,6 @@
 	"account_hack_attempted",
 	"acting_rank_prefixes",
 	"active_diseases",
-	"activeauth",
-	"activecharges",
-	"activename",
-	"activetype",
 	"actor",
 	"additional_antag_types",
 	"adjectives",
@@ -3059,6 +3083,7 @@
 	"can_call_ert",
 	"captain_announcement",
 	"cardinal",
+	"cardinalz",
 	"cargo_positions",
 	"cargo_supply_pack_root",
 	"cargo_supply_packs",
@@ -3093,6 +3118,7 @@
 	"contamination_overlay",
 	"controller_iteration",
 	"cornerdirs",
+	"cornerdirsz",
 	"create_mob_html",
 	"create_object_html",
 	"create_turf_html",
@@ -3158,6 +3184,7 @@
 	"event_sources_count",
 	"eventchance",
 	"exclude_jobs",
+	"exited_event",
 	"explosion_in_progress",
 	"explosion_sound",
 	"explosion_turfs",
@@ -3209,6 +3236,7 @@
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_announcer",
+	"global_headset",
 	"global_hud",
 	"global_huds",
 	"global_listen_count",
@@ -3226,7 +3254,6 @@
 	"hands_state",
 	"hazard_overlays",
 	"hidden_skill_types",
-	"highlanders",
 	"hiss_sound",
 	"hit_appends",
 	"hivemind_bank",
@@ -3331,6 +3358,7 @@
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",
+	"minor_announcement",
 	"mob_equipped_event",
 	"mob_hat_cache",
 	"mob_list",
@@ -3375,6 +3403,7 @@
 	"outfits_decls_by_type_",
 	"outfits_decls_root_",
 	"outside_state",
+	"overmap_event_handler",
 	"page_sound",
 	"paiController",
 	"pai_emotions",
@@ -3390,6 +3419,7 @@
 	"playable_species",
 	"player_list",
 	"point_source_descriptions",
+	"points_of_interest",
 	"possible_cable_coil_colours",
 	"possible_changeling_IDs",
 	"poster_designs",
@@ -3428,6 +3458,7 @@
 	"random_useful_",
 	"recentmessages",
 	"reg_dna",
+	"registered_macros_by_ckey_",
 	"religion_choices",
 	"religion_name",
 	"renegades",
@@ -3485,6 +3516,7 @@
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",
+	"sound_player",
 	"sounds_cache",
 	"spacevines_spawned",
 	"spark_sound",
@@ -3514,7 +3546,6 @@
 	"status_icons_to_colour",
 	"stool_cache",
 	"stored_shock_by_ref",
-	"storedwarrant",
 	"string_part_flags",
 	"string_slot_flags",
 	"sun",
@@ -3598,7 +3629,6 @@
 	"ventcrawl_machinery",
 	"verbs",
 	"view_variables_dont_expand",
-	"view_variables_hide_vars",
 	"view_variables_no_assoc",
 	"virusDB",
 	"visual_nets",

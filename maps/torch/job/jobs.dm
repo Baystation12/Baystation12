@@ -1,12 +1,12 @@
 /datum/map/torch
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
-						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer,
+						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
 						/datum/job/chemist, /datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
-						/datum/job/janitor, /datum/job/chef, /datum/job/solgov_pilot, /datum/job/bartender,
+						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
@@ -144,12 +144,12 @@
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
 			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar)
+			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
 			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar)
+			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 
 /datum/job/hos
 	title = "Chief of Security"
@@ -206,6 +206,7 @@
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
+	announced = 1
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -226,6 +227,7 @@
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 	minimal_access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
+	announced = 1
 
 
 /datum/job/sea
@@ -294,6 +296,35 @@
 			            access_heads, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
 			            access_solgov_crew)
 
+/datum/job/solgov_pilot
+	title = "SolGov Pilot"
+	department = "Support"
+	department_flag = SPT
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer and the Executive Officer"
+	selection_color = "#515151"
+	minimal_player_age = 5
+	economic_modifier = 7
+	ideal_character_age = 40
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet,
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o1,
+	)
+
+
+	access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
+						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads)
+	minimal_access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
+						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads)
+
+
 /datum/job/senior_engineer
 	title = "Senior Engineer"
 	department = "Engineering"
@@ -346,7 +377,7 @@
 		"EVA Technician",
 		"Electrician",
 		"Atmospheric Technician",
-		"Junior Engineer")
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -480,8 +511,8 @@
 
 /datum/job/officer
 	title = "Master at Arms"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the Chief of Security"
 	alt_titles = list(
 		"Military Police")
@@ -782,37 +813,6 @@
 	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
 	minimal_access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
 
-/datum/job/solgov_pilot
-	title = "SolGov Pilot"
-	department = "Service"
-	department_flag = SRV
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Executive Officer"
-	selection_color = "#515151"
-	minimal_player_age = 5
-	economic_modifier = 7
-	ideal_character_age = 40
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot
-	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/marine
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
-	)
-
-
-	access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
-						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
-						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew)
-
 /datum/job/bartender
 	department = "Service"
 	department_flag = SRV
@@ -832,12 +832,15 @@
 	department = "Service"
 	department_flag = SRV
 	faction = "Station"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
 	selection_color = "#515151"
 	ideal_character_age = 20
-	minimal_player_age = 3
+	alt_titles = list(
+		"Junior Engineer",
+		"Junior Corpsman",
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -869,6 +872,8 @@
 	economic_modifier = 12
 	minimal_player_age = 10
 	ideal_character_age = 50
+	alt_titles = list(
+		"Research Supervisor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)

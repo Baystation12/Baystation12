@@ -26,7 +26,7 @@ datum/unit_test/human_breath
 
 
 datum/unit_test/human_breath/start_test()
-	var/turf/T = locate(20,20,1) //TODO:  Find better way.
+	var/turf/T = get_space_turf()
 
 	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)

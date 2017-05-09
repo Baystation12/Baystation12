@@ -127,9 +127,6 @@
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = null
 
-/obj/item/clothing/shoes/cult/cultify()
-	return
-
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"
 	desc = "Shoes for a cyborg costume."

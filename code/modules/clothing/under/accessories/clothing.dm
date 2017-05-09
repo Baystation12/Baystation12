@@ -9,6 +9,15 @@
 	desc = "They suspend the illusion of the mime's play."
 	icon_state = "suspenders"
 
+/obj/item/clothing/accessory/nt_tunic
+	name = "\improper NanoTrasen tunic"
+	desc = "A fashionable tunic that NanoTrasen gives to its lab workers."
+	icon_state = "nttunic"
+
+/obj/item/clothing/accessory/nt_tunic/exec
+	name = "\improper NanoTrasen executive tunic"
+	icon_state = "nttunicblack"
+
 /obj/item/clothing/accessory/toggleable
 	var/icon_closed
 /obj/item/clothing/accessory/toggleable/New()
@@ -86,6 +95,11 @@
 	name = "checkered suit jacket"
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
+
+/obj/item/clothing/accessory/toggleable/nanotrasen_jacket
+	name = "\improper NanoTrasen suit jacket"
+	desc = "A jacket that NanoTrasen has its executives wear."
+	icon_state = "nt_jacket"
 
 /obj/item/clothing/accessory/toggleable/hawaii
 	name = "flower-pattern shirt"

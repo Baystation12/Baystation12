@@ -24,14 +24,14 @@ Small, little HP, poisonous.
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	holder_type = /obj/item/weapon/holder/voxslug
-	faction = "Vox"
+	faction = SPECIES_VOX
 
 /mob/living/simple_animal/hostile/voxslug/ListTargets(var/dist = 7)
 	var/list/L = list()
 	for(var/a in hearers(src, dist))
 		if(istype(a,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = a
-			if(H.species.get_bodytype() == "Vox")
+			if(H.species.get_bodytype() == SPECIES_VOX)
 				continue
 		if(isliving(a))
 			var/mob/living/M = a
@@ -46,7 +46,7 @@ Small, little HP, poisonous.
 	return L
 
 /mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)
-	if(grabber.species.get_bodytype() != "Vox")
+	if(grabber.species.get_bodytype() != SPECIES_VOX)
 		to_chat(grabber, "<span class='warning'>\The [src] wriggles out of your hands before you can pick it up!</span>")
 		return
 	else return ..()

@@ -5,7 +5,7 @@
 	school = "conjuration"
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES | SELECTABLE | IGNOREPREV
-	invocation = "BU EKEL 'INAS"
+	invocation = "Bu-Ekel'Inas!"
 	invocation_type = SpI_SHOUT
 	range = 3
 	max_casts = 1

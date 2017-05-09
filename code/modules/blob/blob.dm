@@ -7,7 +7,7 @@
 	light_color = "#b5ff5b"
 	desc = "Some blob creature thingy."
 	density = 1
-	opacity = 0
+	opacity = 1
 	anchored = 1
 	mouse_opacity = 2
 
@@ -19,7 +19,7 @@
 	var/regen_rate = 5
 	var/brute_resist = 4
 	var/fire_resist = 1
-	var/laser_resist = 5	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
+	var/laser_resist = 4	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 
@@ -102,6 +102,10 @@
 		M.visible_message("<span class='danger'>The blob attacks \the [M]!</span>")
 		M.take_damage(40)
 		return
+	var/obj/machinery/camera/CA = locate() in T
+	if(CA)
+		CA.take_damage(30)
+		return
 
 	// Above things, we destroy completely and thus can use locate. Mobs are different.
 	for(var/mob/living/L in T)
@@ -118,7 +122,7 @@
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
 	regen()
-	sleep(5)
+	sleep(4)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
 	var/obj/effect/blob/B = (locate() in T)
@@ -163,7 +167,7 @@
 	maxHealth = 200
 	brute_resist = 2
 	fire_resist = 2
-	laser_resist = 10
+	laser_resist = 8
 	regen_rate = 2
 
 	layer = BLOB_CORE_LAYER
@@ -228,8 +232,7 @@
 	maxHealth = 60
 	brute_resist = 1
 	fire_resist = 2
-	laser_resist = 7
-
+	laser_resist = 6
 /obj/effect/blob/shield/New()
 	..()
 	update_nearby_tiles()

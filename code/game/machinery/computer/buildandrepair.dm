@@ -8,6 +8,7 @@
 	icon_state = "0"
 	var/state = 0
 	var/obj/item/weapon/circuitboard/circuit = null
+	flags = OBJ_CLIMBABLE
 //	weight = 1.0E8
 
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)

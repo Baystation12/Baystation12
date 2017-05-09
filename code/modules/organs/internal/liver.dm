@@ -61,9 +61,10 @@
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
 	if(blood_volume_raw < species.blood_volume)
 		var/datum/reagent/blood/B = owner.get_blood(owner.vessel)
-		B.volume += 0.1 // regenerate blood VERY slowly
-		if(CE_BLOODRESTORE in owner.chem_effects)
-			B.volume += owner.chem_effects[CE_BLOODRESTORE]
+		if(istype(B))
+			B.volume += 0.1 // regenerate blood VERY slowly
+			if(CE_BLOODRESTORE in owner.chem_effects)
+				B.volume += owner.chem_effects[CE_BLOODRESTORE]
 
 	// Blood loss or liver damage make you lose nutriments
 	var/blood_volume = owner.get_effective_blood_volume()

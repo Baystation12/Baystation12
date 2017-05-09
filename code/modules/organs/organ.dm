@@ -54,7 +54,7 @@ var/list/organ_cache = list()
 			dna = holder.dna.Clone()
 			species = all_species[dna.species]
 		else
-			species = all_species["Human"]
+			species = all_species[SPECIES_HUMAN]
 			log_debug("[src] spawned in [holder] without a proper DNA.")
 
 	if(dna)
@@ -94,9 +94,7 @@ var/list/organ_cache = list()
 	if(status & ORGAN_DEAD)
 		return
 	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
-	if(istype(loc,/obj/item/device/mmi))
-		return
-	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
+	if(is_preserved())
 		return
 	//Process infections
 	if ((robotic >= ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
@@ -127,10 +125,20 @@ var/list/organ_cache = list()
 	if(damage >= max_damage)
 		die()
 
+/obj/item/organ/proc/is_preserved()
+	if(istype(loc,/obj/item/organ))
+		var/obj/item/organ/O = loc
+		return O.is_preserved()
+	else
+		return (istype(loc,/obj/item/device/mmi) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
+
 /obj/item/organ/examine(mob/user)
 	. = ..(user)
+	show_decay_status(user)
+
+/obj/item/organ/proc/show_decay_status(mob/user)
 	if(status & ORGAN_DEAD)
-		to_chat(user, "<span class='notice'>The decay has set in.</span>")
+		to_chat(user, "<span class='notice'>The decay has set into \the [src].</span>")
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections

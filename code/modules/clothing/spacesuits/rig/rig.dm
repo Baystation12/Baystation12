@@ -536,6 +536,16 @@
 		wearer.update_inv_back()
 	return
 
+/obj/item/weapon/rig/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if(slot != slot_back_str || offline)
+		return ret
+
+	for(var/obj/item/rig_module/module in installed_modules)
+		if(module.suit_overlay)
+			ret.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]")
+	return ret
+
 /obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
 
 	if(!security_check_enabled)

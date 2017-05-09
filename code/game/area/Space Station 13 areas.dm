@@ -224,6 +224,7 @@ area/space/atmosalert()
 			sound_to(M, mysound)
 
 /area/beach/Exited(atom/movable/Obj)
+	. = ..()
 	if(ismob(Obj))
 		var/mob/M = Obj
 		if(M.client)

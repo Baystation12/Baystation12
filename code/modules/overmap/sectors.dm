@@ -1,6 +1,8 @@
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
+var/list/points_of_interest = list()
+
 /obj/effect/overmap
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
@@ -29,10 +31,8 @@
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
 
-	if(!start_x)
-		start_x = rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
-	if(!start_y)
-		start_y = rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
+	start_x = start_x || rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
+	start_y = start_y || rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
 
 	forceMove(locate(start_x, start_y, using_map.overmap_z))
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
@@ -51,6 +51,8 @@
 			if(!landing_areas)
 				landing_areas = list()
 			landing_areas |= console.shuttle_area
+
+	points_of_interest += name
 
 /obj/effect/overmap/sector
 	name = "generic sector"
@@ -82,5 +84,6 @@
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
-	testing("Overmap created at Z[using_map.overmap_z].")
+
+	testing("Overmap build complete.")
 	return 1

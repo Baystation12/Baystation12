@@ -29,5 +29,11 @@
 	cult.add_cultiness(CULTINESS_PER_TURF)
 
 /turf/proc/cultify_wall()
-	ChangeTurf(/turf/simulated/wall/cult)
+	var/turf/simulated/wall/wall = src
+	if(!istype(wall))
+		return
+	if(wall.reinf_material)
+		ChangeTurf(/turf/simulated/wall/cult/reinf)
+	else
+		ChangeTurf(/turf/simulated/wall/cult)
 	cult.add_cultiness(CULTINESS_PER_TURF)

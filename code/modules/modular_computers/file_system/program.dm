@@ -60,7 +60,7 @@
 /datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag = 0, var/loud = 0, var/mob/user = null)
 	if(!(hardware_flag & usage_flags))
 		if(loud && computer && user)
-			to_chat(user, "<span class='danger'>\The [computer] flashes an \"Hardware Error - Incompatible software\" warning.</span>")
+			to_chat(user, "<span class='warning'>\The [computer] flashes: \"Hardware Error - Incompatible software\".</span>")
 		return 0
 	return 1
 

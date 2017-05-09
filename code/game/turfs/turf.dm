@@ -188,20 +188,22 @@ var/const/enterloopsanity = 100
 	for(var/obj/O in src)
 		O.hide(O.hides_under_flooring() && !is_plating())
 
-/turf/proc/AdjacentTurfs()
-	var/L[] = new()
-	for(var/turf/simulated/t in oview(src,1))
-		if(!t.density)
-			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
-				L.Add(t)
-	return L
+/turf/proc/AdjacentTurfs(var/check_blockage = TRUE)
+	. = list()
+	for(var/turf/t in oview(src,1))
+		if(check_blockage)
+			if(!t.density)
+				if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
+					. += t
+		else
+			. += t
 
-/turf/proc/CardinalTurfs()
-	var/L[] = new()
-	for(var/turf/simulated/T in AdjacentTurfs())
+/turf/proc/CardinalTurfs(var/check_blockage = TRUE)
+	. = list()
+	for(var/ad in AdjacentTurfs(check_blockage))
+		var/turf/T = ad
 		if(T.x == src.x || T.y == src.y)
-			L.Add(T)
-	return L
+			. += T
 
 /turf/proc/Distance(turf/t)
 	if(get_dist(src,t) == 1)
@@ -251,3 +253,12 @@ var/const/enterloopsanity = 100
 	if(decals && decals.len)
 		decals.Cut()
 		decals = null
+
+// Called when turf is hit by a thrown object
+/turf/hitby(atom/movable/AM as mob|obj, var/speed)
+	if(src.density)
+		spawn(2)
+			step(AM, turn(AM.last_move, 180))
+		if(isliving(AM))
+			var/mob/living/M = AM
+			M.turf_collision(src, speed)

@@ -362,7 +362,7 @@ var/global/datum/controller/gameticker/ticker
 					else
 						feedback_set_details("end_proper","universe destroyed")
 					if(!delay_end)
-						to_world("<span class='notice'><b>Rebooting due to destruction of station in [restart_timeout/10] seconds</b></span>")
+						to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
 
 				else
 					feedback_set_details("end_proper","proper completion")
@@ -417,7 +417,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(issilicon(Player))
 					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
 				else
-					to_chat(Player, "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>")
+					to_chat(Player, "<font color='blue'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></font>")
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player

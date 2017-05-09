@@ -44,7 +44,16 @@ var/religion_name = null
 	return capitalize(name)
 
 /proc/system_name()
-	return "Nyx"
+	return using_map.system_name ? using_map.system_name : generate_system_name()
+
+/proc/generate_system_name()
+	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
+
+/proc/generate_planet_name()
+	return "[capitalize(pick(last_names))]-[pick("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega")]"
+
+/proc/generate_planet_type()
+	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
 
 /proc/station_name()
 	if (using_map.station_name)

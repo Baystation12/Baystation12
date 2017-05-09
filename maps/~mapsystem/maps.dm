@@ -58,6 +58,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
 
+	var/map_admin_faxes = list()
+
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
 	var/shuttle_called_message
@@ -77,11 +79,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+	var/default_spawn = "Arrivals Shuttle"
 	var/flags = 0
 	var/evac_controller_type = /datum/evacuation_controller
 	var/use_overmap = 0		//If overmap should be used (including overmap space travel override)
 	var/overmap_size = 20		//Dimensions of overmap zlevel if overmap is used.
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
+	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 
 	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
@@ -107,6 +111,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(lobby_music_tracks.len)
 		lobby_music_type = pick(lobby_music_tracks)
 	lobby_music = new lobby_music_type()
+
+/datum/map/proc/send_welcome()
+	return
 
 /datum/map/proc/perform_map_generation()
 	return

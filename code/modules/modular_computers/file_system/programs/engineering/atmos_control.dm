@@ -3,7 +3,7 @@
 	filedesc = "Atmosphere Control"
 	nanomodule_path = /datum/nano_module/atmos_control
 	program_icon_state = "atmos_control"
-	extended_desc = "This program allows remote control of air alarms around the station. This program can not be run on tablet computers."
+	extended_desc = "This program allows remote control of air alarms. This program can not be run on tablet computers."
 	required_access = access_atmospherics
 	requires_ntnet = 1
 	network_destination = "atmospheric control system"

@@ -103,14 +103,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags |= NOREACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
-/obj/item/clothing/mask/smokable/process()
-	var/turf/location = get_turf(src)
-	smoketime--
-	if(smoketime < 1)
-		die()
-		return
-	if(location)
-		location.hotspot_expose(700, 5)
+/obj/item/clothing/mask/smokable/proc/smoke(amount)
+	smoketime -= amount
 	if(reagents && reagents.total_volume) // check if it has any reagents at all
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
@@ -118,6 +112,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
 		else // else just remove some of the reagents
 			reagents.remove_any(REM)
+
+/obj/item/clothing/mask/smokable/process()
+	var/turf/location = get_turf(src)
+	smoke(1)
+	if(smoketime < 1)
+		die()
+		return
+	if(location)
+		location.hotspot_expose(700, 5)
 
 /obj/item/clothing/mask/smokable/update_icon()
 	if(lit && icon_on)
@@ -157,29 +160,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		processing_objects.Add(src)
 
 /obj/item/clothing/mask/smokable/proc/die(var/nomessage = 0)
-	var/turf/T = get_turf(src)
 	set_light(0)
+	lit = 0
 	processing_objects.Remove(src)
-	if (type_butt)
-		var/obj/item/butt = new type_butt(T)
-		transfer_fingerprints_to(butt)
-		butt.color = color
-		if(brand)
-			butt.desc += " This one is \a [brand]."
-		if(ismob(loc))
-			var/mob/living/M = loc
-			if (!nomessage)
-				to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
-			M.remove_from_mob(src) //un-equip it so the overlays can update
-		qdel(src)
-	else
-		new /obj/effect/decal/cleanable/ash(T)
-		if(ismob(loc))
-			var/mob/living/M = loc
-			if (!nomessage)
-				to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
-			lit = 0
-		update_icon()
+	update_icon()
 
 /obj/item/clothing/mask/smokable/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -231,11 +215,26 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	..()
 	reagents.add_reagent("nicotine", 1)
 
-/obj/item/clothing/mask/smokable/update_icon()
+/obj/item/clothing/mask/smokable/cigarette/update_icon()
 	..()
 	overlays.Cut()
 	if(lit)
 		overlays += overlay_image(icon, "cigon", flags=RESET_COLOR)
+
+/obj/item/clothing/mask/smokable/cigarette/die(var/nomessage = 0)
+	..()
+	if (type_butt)
+		var/obj/item/butt = new type_butt(get_turf(src))
+		transfer_fingerprints_to(butt)
+		butt.color = color
+		if(brand)
+			butt.desc += " This one is \a [brand]."
+		if(ismob(loc))
+			var/mob/living/M = loc
+			if (!nomessage)
+				to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
+			M.remove_from_mob(src) //un-equip it so the overlays can update
+		qdel(src)
 
 /obj/item/clothing/mask/smokable/cigarette/menthol
 	name = "menthol cigarette"
@@ -295,6 +294,17 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			light("<span class='warning'>[user] swings their [W], barely missing their nose. They light their [name] in the process.</span>")
 
 	return
+
+/obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user, def_zone)
+	if(lit && H == user && istype(H))
+		var/obj/item/blocked = H.check_mouth_coverage()
+		if(blocked)
+			to_chat(H, "<span class='warning'>\The [blocked] is in the way!</span>")
+			return 1
+		to_chat(H, "<span class='notice'>You take a drag on your [name].</span>")
+		smoke(5)
+		return 1
+	return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/weapon/reagent_containers/glass/glass, mob/user as mob, proximity)
 	..()
@@ -429,6 +439,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			M.update_inv_wear_mask(0)
 			M.update_inv_l_hand(0)
 			M.update_inv_r_hand(1)
+
+/obj/item/clothing/mask/smokable/pipe/die(var/nomessage = 0)
+	..()
+	new /obj/effect/decal/cleanable/ash(get_turf(src))
+	if(ismob(loc))
+		var/mob/living/M = loc
+		if (!nomessage)
+			to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(mob/user as mob)
 	if(lit == 1)

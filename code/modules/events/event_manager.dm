@@ -272,6 +272,7 @@
 		var/datum/event_container/EC = locate(href_list["clear"])
 		if(EC.next_event)
 			log_and_message_admins("has dequeued the [severity_to_string[EC.severity]] event '[EC.next_event.name]'.")
+			EC.available_events += EC.next_event
 			EC.next_event = null
 
 	Interact(usr)

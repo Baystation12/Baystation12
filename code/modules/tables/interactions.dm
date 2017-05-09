@@ -89,7 +89,7 @@
 				return
 			if (G.state < GRAB_AGGRESSIVE)
 				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-			else
+			else if (G.state > GRAB_AGGRESSIVE || world.time >= (G.last_action + UPGRADE_COOLDOWN))
 				if(user.a_intent == I_HURT)
 					var/blocked = M.run_armor_check(BP_HEAD, "melee")
 					if (prob(30 * blocked_mult(blocked)))

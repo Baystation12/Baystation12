@@ -221,7 +221,7 @@
 	var/turf/T = locate(int_panel_x, int_panel_y, uz)
 	lift.control_panel_interior = new(T, lift)
 	lift.control_panel_interior.set_dir(udir)
-	lift.current_floor = lift.floors[uz]
+	lift.current_floor = lift.floors[1]
 
 	lift.open_doors()
 

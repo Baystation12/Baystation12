@@ -73,8 +73,8 @@
 	name = "OBSERVATION: Global listeners shall receive events"
 
 /datum/unit_test/observation/global_listeners_shall_receive_events/conduct_test()
-	var/turf/start = locate(20,20,1)
-	var/turf/target = locate(20,21,1)
+	var/turf/start = get_safe_turf()
+	var/turf/target = get_step(start, NORTH)
 	var/obj/O = get_named_instance(/obj, start)
 
 	moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
@@ -99,8 +99,8 @@
 	name = "OBSERVATION: Moved - Observer Shall Register on Follow"
 
 /datum/unit_test/observation/moved_observer_shall_register_on_follow/conduct_test()
-	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/turf/T = get_safe_turf()
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	O.ManualFollow(H)
@@ -117,8 +117,8 @@
 	name = "OBSERVATION: Moved - Observer Shall Unregister on NoFollow"
 
 /datum/unit_test/observation/moved_observer_shall_unregister_on_nofollow/conduct_test()
-	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/turf/T = get_safe_turf()
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	O.ManualFollow(H)
@@ -136,8 +136,8 @@
 	name = "OBSERVATION: Moved - Shall Not Register on Enter Without Listeners"
 
 /datum/unit_test/observation/moved_shall_not_register_on_enter_without_listeners/conduct_test()
-	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/turf/T = get_safe_turf()
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	qdel(H.virtual_mob)
 	H.virtual_mob = null
 
@@ -157,8 +157,8 @@
 	name = "OBSERVATION: Moved - Shall Register Recursively on New Listener"
 
 /datum/unit_test/observation/moved_shall_register_recursively_on_new_listener/conduct_test()
-	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/turf/T = get_safe_turf()
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
@@ -180,8 +180,8 @@
 	name = "OBSERVATION: Moved - Shall Register Recursively with Existing Listener"
 
 /datum/unit_test/observation/moved_shall_register_recursively_with_existing_listener/conduct_test()
-	var/turf/T = locate(20,20,1)
-	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, "Human")
+	var/turf/T = get_safe_turf()
+	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
@@ -204,7 +204,7 @@
 	name = "OBSERVATION: Moved - Shall Only Trigger Once For Recursive Drop"
 
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/conduct_test()
-	var/turf/T = locate(20,20,1)
+	var/turf/T = get_safe_turf()
 	var/obj/mecha/mech = get_named_instance(/obj/mecha, T, "Mech")
 	var/obj/item/weapon/wrench/held_item = get_named_instance(/obj/item/weapon/wrench, T, "Wrench")
 	var/mob/living/carbon/human/dummy/held_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Held Mob")
@@ -246,7 +246,7 @@
 	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - One"
 
 /datum/unit_test/observation/moved_shall_not_unregister_recursively_one/conduct_test()
-	var/turf/T = locate(20,20,1)
+	var/turf/T = get_safe_turf()
 	var/mob/observer/ghost/one = get_named_instance(/mob/observer/ghost, T, "Ghost One")
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
@@ -270,7 +270,7 @@
 	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - Two"
 
 /datum/unit_test/observation/moved_shall_not_unregister_recursively_two/conduct_test()
-	var/turf/T = locate(20,20,1)
+	var/turf/T = get_safe_turf()
 	var/mob/observer/ghost/one = get_named_instance(/mob/observer/ghost, T, "Ghost One")
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
@@ -294,7 +294,7 @@
 	name = "OBSERVATION: Sanity - Global listeners shall not leave null entries when destroyed"
 
 /datum/unit_test/observation/sanity_global_listeners_shall_not_leave_null_entries_when_destroyed/conduct_test()
-	var/turf/T = locate(20,20,1)
+	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
 
 	moved_event.register_global(O, /atom/movable/proc/move_to_turf)
@@ -311,7 +311,7 @@
 	name = "OBSERVATION: Sanity - Event sources shall not leave null entries when destroyed"
 
 /datum/unit_test/observation/sanity_event_sources_shall_not_leave_null_entries_when_destroyed/conduct_test()
-	var/turf/T = locate(20,20,1)
+	var/turf/T = get_safe_turf()
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
@@ -330,7 +330,7 @@
 	name = "OBSERVATION: Sanity - Event listeners shall not leave null entries when destroyed"
 
 /datum/unit_test/observation/sanity_event_listeners_shall_not_leave_null_entries_when_destroyed/conduct_test()
-	var/turf/T = locate(20,20,1)
+	var/turf/T = get_safe_turf()
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 

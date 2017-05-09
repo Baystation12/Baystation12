@@ -125,6 +125,16 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/captain
+	name = "captain chair"
+	desc = "It's a chair. Only for the highest ranked asses."
+	icon_state = "capchair_preview"
+	base_icon = "capchair"
+	buckle_movable = 1
+
+/obj/structure/bed/chair/comfy/captain/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1

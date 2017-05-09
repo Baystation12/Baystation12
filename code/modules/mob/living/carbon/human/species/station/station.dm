@@ -1,5 +1,5 @@
 /datum/species/human
-	name = "Human"
+	name = SPECIES_HUMAN
 	name_plural = "Humans"
 	primitive_form = "Monkey"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
@@ -19,11 +19,11 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
-	return "Human"
+	return SPECIES_HUMAN
 
 /datum/species/unathi
-	name = "Unathi"
-	name_plural = "Unathi"
+	name = SPECIES_UNATHI
+	name_plural = SPECIES_UNATHI
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	tail = "sogtail"
@@ -85,7 +85,7 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
 /datum/species/tajaran
-	name = "Tajara"
+	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
@@ -144,8 +144,8 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
 /datum/species/skrell
-	name = "Skrell"
-	name_plural = "Skrell"
+	name = SPECIES_SKRELL
+	name_plural = SPECIES_SKRELL
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	primitive_form = "Neaera"
@@ -197,7 +197,7 @@
 		)
 
 /datum/species/diona
-	name = "Diona"
+	name = SPECIES_DIONA
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
@@ -214,6 +214,7 @@
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
+	hunger_factor = 3
 
 	min_age = 1
 	max_age = 300
@@ -250,7 +251,8 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_split_nymph
+		/mob/living/carbon/human/proc/diona_split_nymph,
+		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
 	warning_low_pressure = 50
@@ -293,24 +295,16 @@
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
-	H.diona_split_into_nymphs(0)
-
-	var/mob/living/carbon/alien/diona/S = new(get_turf(H))
-
-	if(H.mind)
-		H.mind.transfer_to(S)
 
 	if(H.isSynthetic())
+		var/mob/living/carbon/alien/diona/S = new(get_turf(H))
+
+		if(H.mind)
+			H.mind.transfer_to(S)
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
 		return
-
-	for(var/mob/living/carbon/alien/diona/D in H.contents)
-		if(D.client)
-			D.forceMove(get_turf(H))
-		else
-			qdel(D)
-
-	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+	else
+		H.diona_split_nymph()
 
 /datum/species/diona/get_blood_name()
 	return "sap"

@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip_text,var/mob/living/user)
+/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip_text,var/mob/living/user,var/obj/item/clothing/holder)
 
 	if(!slot_to_strip_text || !istype(user))
 		return
@@ -44,10 +44,11 @@
 				toggle_internals(user)
 			return
 		if("tie")
-			var/obj/item/clothing/under/suit = w_uniform
-			if(!istype(suit) || !suit.accessories.len)
+			if(!istype(holder) || !holder.accessories.len)
 				return
-			var/obj/item/clothing/accessory/A = suit.accessories[1]
+			var/obj/item/clothing/accessory/A = holder.accessories[1]
+			if(holder.accessories.len > 1)
+				A = input("Select an accessory to remove from [holder]") as null|anything in holder.accessories
 			if(!istype(A))
 				return
 			visible_message("<span class='danger'>\The [usr] is trying to remove \the [src]'s [A.name]!</span>")
@@ -55,15 +56,11 @@
 			if(!do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				return
 
-			if(!A || suit.loc != src || !(A in suit.accessories))
+			if(!A || holder.loc != src || !(A in holder.accessories))
 				return
 
-			if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
-				user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
-			admin_attack_log(user, src, "Stripped \an [A] from \the [suit].", "Was stripped of \an [A] from \the [suit].", "stripped \an [A] from \the [suit] of")
-			A.on_removed(user)
-			suit.accessories -= A
-			update_inv_w_uniform()
+			admin_attack_log(user, src, "Stripped \an [A] from \the [holder].", "Was stripped of \an [A] from \the [holder].", "stripped \an [A] from \the [holder] of")
+			holder.remove_accessory(user,A)
 			return
 
 	if(stripping)
@@ -87,7 +84,10 @@
 		else
 			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
 	else if(user.unEquip(held))
-		if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
+		var/obj/item/clothing/C = get_equipped_item(text2num(slot_to_strip_text))
+		if(istype(C) && C.can_attach_accessory(held))
+			C.attach_accessory(user, held)
+		else if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
 			user.put_in_active_hand(held)
 
 // Empty out everything in the target's pockets.

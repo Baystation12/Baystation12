@@ -162,7 +162,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	name = OUTFIT_JOB_NAME("NanoTrasen Liaison")
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
-	uniform = /obj/item/clothing/under/rank/internalaffairs/plain/nt
+	uniform = /obj/item/clothing/under/suit_jacket/nt
 	suit = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
@@ -590,22 +590,22 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot //until they get a better uniform
 	name = OUTFIT_JOB_NAME("SolGov Pilot")
-	uniform = /obj/item/clothing/under/utility/expeditionary
+	uniform = /obj/item/clothing/under/utility/expeditionary/pilot
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
-	id_type = /obj/item/weapon/card/id/torch/crew/service/solgov_pilot
+	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
 	pda_type = /obj/item/device/pda
-	l_ear = /obj/item/device/radio/headset/headset_com
+	l_ear = /obj/item/device/radio/headset/pilot
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet
 	name = OUTFIT_JOB_NAME("Pilot - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet
+	uniform = /obj/item/clothing/under/utility/fleet/pilot
 	head = /obj/item/clothing/head/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/marine
 	name = OUTFIT_JOB_NAME("Pilot - Marine")
-	uniform = /obj/item/clothing/under/utility/marine
+	uniform = /obj/item/clothing/under/utility/marine/pilot
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
@@ -645,7 +645,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
 	name = OUTFIT_JOB_NAME("Senior Researcher")
-	uniform = /obj/item/clothing/under/rank/scientist
+	uniform = /obj/item/clothing/under/rank/scientist/executive
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/heads/rd
@@ -656,7 +656,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
 	name = OUTFIT_JOB_NAME("NanoTrasen Pilot")
-	uniform = /obj/item/clothing/under/rank/scientist
+	uniform = /obj/item/clothing/under/rank/ntpilot
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	shoes = /obj/item/clothing/shoes/workboots
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
@@ -677,7 +677,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	name = OUTFIT_JOB_NAME("Prospector")
-	uniform = /obj/item/clothing/under/rank/miner
+	uniform = /obj/item/clothing/under/rank/ntwork
 	shoes = /obj/item/clothing/shoes/workboots
 	backpack = /obj/item/weapon/storage/backpack/industrial
 	satchel_one  = /obj/item/weapon/storage/backpack/satchel_eng
@@ -699,7 +699,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research
@@ -710,7 +710,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject
 	name = OUTFIT_JOB_NAME("Testing Assistant")
-	uniform = /obj/item/clothing/under/color/orange
+	uniform = /obj/item/clothing/under/rank/ntwork
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger
 	name = OUTFIT_JOB_NAME("Passenger - Torch")

@@ -3,7 +3,7 @@
 	filedesc = "NTNet/ExoNet News Browser"
 	extended_desc = "This program may be used to view and download news articles from the network."
 	program_icon_state = "generic"
-	size = 8
+	size = 4
 	requires_ntnet = 1
 	available_on_ntnet = 1
 
@@ -100,6 +100,7 @@
 	data["message"] = PRG.message
 	if(PRG.loaded_article && !PRG.downloading) 	// Viewing an article.
 		data["title"] = PRG.loaded_article.filename
+		data["cover"] = PRG.loaded_article.cover
 		data["article"] = PRG.loaded_article.stored_data
 	else if(PRG.downloading)					// Downloading an article.
 		data["download_running"] = 1
@@ -122,7 +123,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "news_browser.tmpl", "NTNet/ExoNet News Browser", 575, 700, state = state)
+		ui = new(user, src, ui_key, "news_browser.tmpl", "NTNet/ExoNet News Browser", 575, 750, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

@@ -161,7 +161,7 @@ var/global/datum/ntnet/ntnet_global = new()
 			add_log("Configuration Updated. Wireless network firewall now [setting_communication ? "allows" : "disallows"] instant messaging and similar communication services.")
 		if(NTNET_SYSTEMCONTROL)
 			setting_systemcontrol = !setting_systemcontrol
-			add_log("Configuration Updated. Wireless network firewall now [setting_systemcontrol ? "allows" : "disallows"] remote control of station's systems.")
+			add_log("Configuration Updated. Wireless network firewall now [setting_systemcontrol ? "allows" : "disallows"] remote control of [station_name()]'s systems.")
 
 /datum/ntnet/proc/does_email_exist(var/login)
 	for(var/datum/computer_file/data/email_account/A in ntnet_global.email_accounts)

@@ -161,12 +161,8 @@
 
 	var/dir
 
-	if(variable in O.VVlocked())
-		if(!check_rights(R_DEBUG))	return
-	if(variable in O.VVckey_edit())
-		if(!check_rights(R_SPAWN|R_DEBUG)) return
-	if(variable in O.VVicon_edit_lock())
-		if(!check_rights(R_FUN|R_DEBUG)) return
+	if(!O.may_edit_var(usr, objectvar))
+		return
 
 	if(isnull(variable))
 		to_chat(usr, "Unable to determine variable type.")
@@ -354,12 +350,8 @@
 			to_chat(src, "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])")
 			return
 
-		if(param_var_name in O.VVlocked())
-			if(!check_rights(R_DEBUG))	return
-		if(param_var_name in O.VVckey_edit())
-			if(!check_rights(R_SPAWN|R_DEBUG)) return
-		if(param_var_name in O.VVicon_edit_lock())
-			if(!check_rights(R_FUN|R_DEBUG)) return
+		if(!O.may_edit_var(usr, param_var_name))
+			return
 
 		variable = param_var_name
 
@@ -416,12 +408,8 @@
 		if(!variable)	return
 		var_value = O.get_variable_value(variable)
 
-		if(variable in O.VVlocked())
-			if(!check_rights(R_DEBUG)) return
-		if(variable in O.VVckey_edit())
-			if(!check_rights(R_SPAWN|R_DEBUG)) return
-		if(variable in O.VVicon_edit_lock())
-			if(!check_rights(R_FUN|R_DEBUG)) return
+		if(!O.may_edit_var(usr, variable))
+			return
 
 	if(!autodetect_class)
 
@@ -647,9 +635,11 @@
 			var_value = text2num(var_value)
 		if(!is_num_predicate(var_value, client))
 			return
-		var/x = AM.x
-		var/y = AM.y
-		var/z = AM.z
+
+		// We set the default to 1,1,1 when at 0,0,0 (i.e. any non-turf location) to mimic the standard BYOND behaviour when adjusting x,y,z directly
+		var/x = AM.x || 1
+		var/y = AM.y || 1
+		var/z = AM.z || 1
 		switch(variable)
 			if("x")
 				x = var_value
@@ -673,6 +663,11 @@
 	handled_type = /atom
 	handled_vars = list("dir" = /atom/proc/set_dir)
 	predicates = list(/proc/is_dir_predicate)
+
+/decl/vv_set_handler/rad_handler
+	handled_type = /atom
+	handled_vars = list("rad_power" = /atom/proc/update_radiation)
+	predicates = list(/proc/is_num_predicate)
 
 /decl/vv_set_handler/ghost_appearance_handler
 	handled_type = /mob/observer/ghost

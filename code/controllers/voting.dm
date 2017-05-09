@@ -538,7 +538,7 @@ datum/controller/vote
 // Helper proc for determining whether addantag vote can be called.
 datum/controller/vote/proc/is_addantag_allowed(var/automatic)
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
-	if((ticker.current_state <= 2) || !ticker.mode)
+	if(!ticker || (ticker.current_state <= 2) || !ticker.mode)
 		return 0
 	if(automatic)
 		return (ticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_add_finished

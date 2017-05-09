@@ -21,7 +21,7 @@ var/datum/antagonist/xenos/xenomorphs
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 
-	spawn_announcement = "Unidentified lifesigns detected coming aboard the station. Secure any exterior access, including ducting and ventilation."
+	spawn_announcement = "Unidentified lifesigns detected coming aboard. Secure any exterior access, including ducting and ventilation."
 	spawn_announcement_title = "Lifesign Alert"
 	spawn_announcement_sound = 'sound/AI/aliens.ogg'
 	spawn_announcement_delay = 5000

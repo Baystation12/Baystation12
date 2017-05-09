@@ -48,7 +48,7 @@
 	description = "Phoron in its liquid form."
 	taste_mult = 1.5
 	reagent_state = LIQUID
-	color = "#9D14DB"
+	color = "#FF3300"
 	strength = 30
 	touch_met = 5
 	var/fire_mult = 5
@@ -73,8 +73,8 @@
 	name = "Oxyphoron"
 	id = "oxyphoron"
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
-	strength = 80
-	fire_mult = 30
+	strength = 15
+	fire_mult = 15
 
 /datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
 	if(!istype(T))

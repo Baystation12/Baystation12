@@ -18,7 +18,7 @@
 		slot_r_hand_str = "backpack",
 		)
 	sprite_sheets = list(
-		"Resomi" = 'icons/mob/species/resomi/back.dmi'
+		SPECIES_RESOMI = 'icons/mob/species/resomi/back.dmi'
 		)
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
@@ -110,14 +110,14 @@
 
 /obj/item/weapon/storage/backpack/industrial
 	name = "industrial backpack"
-	desc = "It's a tough backpack for the daily grind of station life."
+	desc = "It's a tough backpack for the daily grind of industrial life."
 	icon_state = "engiepack"
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/toxins
-	name = "laboratory backpack"
-	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions."
-	icon_state = "toxpack"
+	name = "\improper NanoTrasen backpack"
+	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions. The colors on it denote it as a NanoTrasen backpack."
+	icon_state = "ntpack"
 
 /obj/item/weapon/storage/backpack/hydroponics
 	name = "herbalist's backpack"
@@ -199,8 +199,8 @@
  */
 
 /obj/item/weapon/storage/backpack/satchel
-	name = "leather satchel"
-	desc = "It's a very fancy satchel made with fine leather."
+	name = "brown leather satchel"
+	desc = "It's a very fancy satchel made with fine brown leather."
 	icon_state = "satchel"
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
@@ -247,9 +247,9 @@
 	icon_state = "satchel-gen"
 
 /obj/item/weapon/storage/backpack/satchel_tox
-	name = "scientist satchel"
-	desc = "Useful for holding research materials."
-	icon_state = "satchel-tox"
+	name = "\improper NanoTrasen satchel"
+	desc = "Useful for holding research materials. The colors on it denote it as a NanoTrasen bag."
+	icon_state = "satchel-nt"
 
 /obj/item/weapon/storage/backpack/satchel_sec
 	name = "security satchel"
@@ -273,6 +273,11 @@
 		slot_l_hand_str = "satchel-cap",
 		slot_r_hand_str = "satchel-cap",
 		)
+
+/obj/item/weapon/storage/backpack/satchel_black
+	name = "black leather satchel"
+	desc = "It's a very fancy satchel made with fine black leather."
+	icon_state = "satchel_black"
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
@@ -332,9 +337,9 @@
 	icon_state = "courierbagviro"
 
 /obj/item/weapon/storage/backpack/messenger/tox
-	name = "research messenger bag"
-	desc = "A backpack worn over one shoulder.  Useful for holding science materials."
-	icon_state = "courierbagtox"
+	name = "\improper NanoTrasen messenger bag"
+	desc = "A backpack worn over one shoulder.  Useful for holding science materials. The colors on it denote it as a NanoTrasen bag."
+	icon_state = "courierbagnt"
 
 /obj/item/weapon/storage/backpack/messenger/com
 	name = "captain's messenger bag"

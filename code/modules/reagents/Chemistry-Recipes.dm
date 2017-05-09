@@ -549,6 +549,13 @@
 	required_reagents = list("radium" = 1, "potassium" = 1, "hclacid" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/noexcutite
+	name = "Noexcutite"
+	id = "noexcutite"
+	result = "noexcutite"
+	required_reagents = list("oxycodone" = 1, "anti_toxin" = 1)
+	result_amount = 2
+
 /* Solidification */
 
 /datum/chemical_reaction/phoronsolidification
@@ -1166,6 +1173,9 @@
 /datum/chemical_reaction/slime/fire/on_reaction(var/datum/reagents/holder)
 	..()
 	sleep(50)
+	if(!(holder.my_atom && holder.my_atom.loc))
+		return
+
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0, location))
 		target_tile.assume_gas("phoron", 25, 1400)
@@ -1909,7 +1919,7 @@
 	name = "Allies Cocktail"
 	id = "alliescocktail"
 	result = "alliescocktail"
-	required_reagents = list("martini" = 1, "vodka" = 1)
+	required_reagents = list("vodkamartini" = 1, "martini" = 1)
 	result_amount = 2
 
 /datum/chemical_reaction/demonsblood

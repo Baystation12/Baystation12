@@ -8,12 +8,12 @@
 	filedesc = "Command and communications program."
 	program_icon_state = "comm"
 	nanomodule_path = /datum/nano_module/program/comm
-	extended_desc = "Used to command and control the station. Can relay long-range communications. This program can not be run on tablet computers."
+	extended_desc = "Used to effect command and control. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_heads
 	requires_ntnet = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
-	network_destination = "station long-range communication array"
+	network_destination = "long-range communication array"
 	var/datum/comm_message_listener/message_core = new
 
 /datum/computer_file/program/comm/clone()
@@ -127,7 +127,7 @@
 				if(announcment_cooldown)
 					to_chat(usr, "Please allow at least one minute to pass between announcements")
 					return TRUE
-				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement") as null|text
+				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
 					return 1
 				crew_announcement.Announce(input)

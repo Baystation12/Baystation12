@@ -5,7 +5,7 @@
 	school = "cleric"
 	charge_max = 200
 	spell_flags = INCLUDEUSER | SELECTABLE
-	invocation = "Di'Nath"
+	invocation = "Di'Nath!"
 	invocation_type = SpI_SHOUT
 	range = 2
 	max_targets = 1
@@ -33,7 +33,7 @@
 	feedback = "CM"
 	charge_max = 300
 	spell_flags = SELECTABLE | NEEDSCLOTHES
-	invocation = "Borv Di'Nath"
+	invocation = "Borv Di'Nath!"
 	range = 1
 	level_max = list(Sp_TOTAL = 2, Sp_SPEED = 1, Sp_POWER = 1)
 	cooldown_reduc = 100
@@ -58,7 +58,7 @@
 	feedback = "HA"
 	charge_max = 600
 	spell_flags = INCLUDEUSER
-	invocation = "Nal Di'Nath"
+	invocation = "Nal Di'Nath!"
 	range = 2
 	max_targets = 0
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 1)
@@ -83,7 +83,7 @@
 	desc = "This spell heals immensily. For a price. Does not require wizard garb."
 	feedback = "SF"
 	spell_flags = SELECTABLE
-	invocation = "Ei'Nath Borv Di'Nath"
+	invocation = "Ei'Nath Borv Di'Nath!"
 	charge_type = Sp_HOLDVAR
 	holder_var_type = "bruteloss"
 	holder_var_amount = 75
