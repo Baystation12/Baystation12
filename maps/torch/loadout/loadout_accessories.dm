@@ -40,6 +40,11 @@
 	path = /obj/item/clothing/accessory/armband
 	allowed_roles = SECURITY_ROLES
 
+/datum/gear/accessory/armband_mp
+	display_name = "military police armband"
+	path = /obj/item/clothing/accessory/armband/mp
+	allowed_roles = list("Master at Arms", "Brig Officer", "Chief of Security", "Forensic Technician")
+
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo

@@ -4,12 +4,14 @@ var/list/spawntypes = list()
 	spawntypes = list()
 	for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
 		var/datum/spawnpoint/S = new type()
-		spawntypes[S.display_name] = S
+		if((S.display_name in using_map.allowed_spawns) || S.always_visible)
+			spawntypes[S.display_name] = S
 
 /datum/spawnpoint
 	var/msg          //Message to display on the arrivals computer.
 	var/list/turfs   //List of turfs to spawn on.
 	var/display_name //Name used in preference setup.
+	var/always_visible = FALSE	// Whether this spawn point is always visible in selection, ignoring map-specific settings.
 	var/list/restrict_job = null
 	var/list/disallow_job = null
 
@@ -55,3 +57,8 @@ var/list/spawntypes = list()
 /datum/spawnpoint/cyborg/New()
 	..()
 	turfs = latejoin_cyborg
+
+/datum/spawnpoint/default
+	display_name = DEFAULT_SPAWNPOINT_ID
+	msg = "has arrived on the station"
+	always_visible = TRUE
