@@ -635,9 +635,11 @@
 			var_value = text2num(var_value)
 		if(!is_num_predicate(var_value, client))
 			return
-		var/x = AM.x
-		var/y = AM.y
-		var/z = AM.z
+
+		// We set the default to 1,1,1 when at 0,0,0 (i.e. any non-turf location) to mimic the standard BYOND behaviour when adjusting x,y,z directly
+		var/x = AM.x || 1
+		var/y = AM.y || 1
+		var/z = AM.z || 1
 		switch(variable)
 			if("x")
 				x = var_value
