@@ -1392,6 +1392,7 @@
 #include "code\modules\item_worth\Value_procs\obj\items.dm"
 #include "code\modules\item_worth\Value_procs\obj\machinery.dm"
 #include "code\modules\item_worth\Value_procs\obj\structures.dm"
+#include "code\modules\laser50\donator.dm"
 #include "code\modules\library\lib_items.dm"
 #include "code\modules\library\lib_machines.dm"
 #include "code\modules\library\lib_readme.dm"
