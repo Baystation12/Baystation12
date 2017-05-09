@@ -8,13 +8,11 @@
 	available_on_ntnet = 1
 	var/stored_login = ""
 	var/stored_password = ""
-	var/newmail = FALSE
 
 	nanomodule_path = /datum/nano_module/email_client
 
 // Persistency. Unless you log out, or unless your password changes, this will pre-fill the login data when restarting the program
 /datum/computer_file/program/email_client/kill_program()
-	newmail = FALSE
 	if(NM)
 		var/datum/nano_module/email_client/NME = NM
 		if(NME.current_account)
@@ -33,11 +31,10 @@
 		NME.stored_password = stored_password
 		NME.log_in()
 		NME.error = ""
-		NME.update_message_count()
+		NME.check_for_new_messages(1)
 
 /datum/computer_file/program/email_client/proc/new_mail_notify()
-	for(var/mob/M in get_turf(computer))
-		to_chat(M, "\The [computer] beeps, indicating a new email has been received.")
+	computer.visible_message("\The [computer] beeps softly, indicating a new email has been received.", 1)
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
@@ -45,16 +42,14 @@
 	if(!istype(NME))
 		return
 	NME.relayed_process(ntnet_speed)
-	// New message received.
-	if(NME.check_message_count())
-		if(!newmail)
-			newmail = TRUE
+
+	var/check_count = NME.check_for_new_messages()
+	if(check_count)
+		if(check_count == 2)
 			new_mail_notify()
 		ui_header = "ntnrc_new.gif"
 	else
 		ui_header = "ntnrc_idle.gif"
-
-
 
 /datum/nano_module/email_client/
 	name = "Email Client"
@@ -69,7 +64,10 @@
 	var/folder = "Inbox"
 	var/addressbook = FALSE
 	var/new_message = FALSE
-	var/last_message_count = 0
+
+	var/last_message_count = 0	// How many messages were there during last check.
+	var/read_message_count = 0	// How many messages were there when user has last accessed the UI.
+
 	var/datum/computer_file/downloading = null
 	var/download_progress = 0
 	var/download_speed = 0
@@ -94,26 +92,24 @@
 	error = "Invalid Login"
 	return 0
 
-// Returns true if amount of messages in the inbox is larger than last tick. Used by Modular Computer program for displays.
-/datum/nano_module/email_client/proc/check_message_count()
+// Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
+// and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
+/datum/nano_module/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
 	if(!current_account)
-		return FALSE
+		return 0
 
 	var/list/allmails = current_account.all_emails()
+
 	if(allmails.len > last_message_count)
-		return TRUE
+		. = 2
+	else if(allmails.len > read_message_count)
+		. = 1
 	else
-		return FALSE
+		. = 0
 
-// Returns the same thing as check_message_count, but after checking it also updates the last tick's value.
-/datum/nano_module/email_client/proc/update_message_count()
-	if(!current_account)
-		return FALSE
-
-	. = check_message_count()
-	var/list/allmails = current_account.all_emails()
 	last_message_count = allmails.len
-	update_message_count()
+	if(messages_read)
+		read_message_count = allmails.len
 
 
 /datum/nano_module/email_client/proc/log_out()
@@ -121,6 +117,7 @@
 	downloading = null
 	download_progress = 0
 	last_message_count = 0
+	read_message_count = 0
 
 /datum/nano_module/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
@@ -258,9 +255,8 @@
 /datum/nano_module/email_client/Topic(href, href_list)
 	if(..())
 		return 1
-
 	var/mob/living/user = usr
-	update_message_count()		// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
+	check_for_new_messages(1)		// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
 	if(href_list["login"])
 		log_in()
 		return 1

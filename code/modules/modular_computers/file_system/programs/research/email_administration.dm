@@ -17,10 +17,6 @@
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 	var/error = ""
-	var/list/valid_domains = list( 	"freemail.nt",\
-									"torch.ec.scg",\
-									"torch.marine.mil",\
-									"torch.fleet.mil")
 
 /datum/nano_module/email_administration/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
@@ -127,7 +123,7 @@
 		return 1
 
 	if(href_list["newaccount"])
-		var/newdomain = sanitize(input(user,"Pick domain:", "Domain name") as null|anything in valid_domains)
+		var/newdomain = sanitize(input(user,"Pick domain:", "Domain name") as null|anything in using_map.usable_email_tlds)
 		if(!newdomain)
 			return 1
 		var/newlogin = sanitize(input(user,"Pick account name (@[newdomain]):", "Account name"), 100)

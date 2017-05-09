@@ -10,7 +10,7 @@
 
 /datum/computer_file/data/email_account/calculate_size()
 	size = 1
-	for(var/datum/computer_file/data/email_message/stored_message in (inbox | spam | deleted))
+	for(var/datum/computer_file/data/email_message/stored_message in all_emails())
 		stored_message.calculate_size()
 		size += stored_message.size
 
