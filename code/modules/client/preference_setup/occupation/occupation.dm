@@ -207,8 +207,19 @@
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
-		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in mil_branches.spawn_branches
+		var/list/branch_options = list()
+		for(var/B in mil_branches.spawn_branches)
+			var/datum/mil_branch/branch = mil_branches.branches[B]
+			var/name = branch.name
+			if(!branch.usable_by(user))
+				name += " (UNAVAILABLE)"
+			branch_options[name] = branch.name
+		var/choice = branch_options[input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in branch_options]
 		if(choice && CanUseTopic(user))
+			var/datum/mil_branch/branch = mil_branches.branches[choice]
+			if(!branch.usable_by(user))
+				alert("This branch is not available to you!")
+				return
 			pref.char_branch = choice
 			pref.char_rank = "None"
 			prune_job_prefs_for_rank()

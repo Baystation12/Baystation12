@@ -289,6 +289,8 @@
 			return global.bombers;
 		if("borers")
 			return global.borers;
+		if("branch_whitelist")
+			return global.branch_whitelist;
 		if("breach_brute_descriptors")
 			return global.breach_brute_descriptors;
 		if("breach_burn_descriptors")
@@ -1461,7 +1463,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1752,6 +1754,8 @@
 			global.bombers=newval;
 		if("borers")
 			global.borers=newval;
+		if("branch_whitelist")
+			global.branch_whitelist=newval;
 		if("breach_brute_descriptors")
 			global.breach_brute_descriptors=newval;
 		if("breach_burn_descriptors")
@@ -2924,7 +2928,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3070,6 +3074,7 @@
 	"bomb_set",
 	"bombers",
 	"borers",
+	"branch_whitelist",
 	"breach_brute_descriptors",
 	"breach_burn_descriptors",
 	"cable_list",

@@ -79,6 +79,7 @@
 /datum/mil_branch/fleet
 	name = "Fleet"
 	name_short = "SCGF"
+	age_restriction = 5
 
 	rank_types = list(
 		/datum/mil_rank/fleet/e1,
@@ -134,6 +135,7 @@
 /datum/mil_branch/marine_corps
 	name = "Marine Corps"
 	name_short = "SCGMC"
+	age_restriction = 15
 
 	rank_types = list(
 		/datum/mil_rank/marine/e1,

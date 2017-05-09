@@ -92,6 +92,7 @@ var/list/gamemode_cache = list()
 	var/allow_extra_antags = 0
 	var/guests_allowed = 1
 	var/debugparanoid = 0
+	var/list/whitelist_branches = list()
 
 	var/serverurl
 	var/server
@@ -157,6 +158,7 @@ var/list/gamemode_cache = list()
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0   //Do jobs use account age restrictions?   --requires database
 	var/use_age_restriction_for_antags = 0 //Do antags use account age restrictions? --requires database
+	var/use_age_restriction_for_branches = 0 //Do antags use account age restrictions? --requires database
 
 	var/simultaneous_pm_warning_timeout = 100
 
@@ -282,6 +284,9 @@ var/list/gamemode_cache = list()
 
 				if ("use_age_restriction_for_antags")
 					config.use_age_restriction_for_antags = 1
+
+				if ("use_age_restriction_for_branches")
+					config.use_age_restriction_for_branches = 1
 
 				if ("jobs_have_minimal_access")
 					config.jobs_have_minimal_access = 1
@@ -720,6 +725,11 @@ var/list/gamemode_cache = list()
 
 				if("wait_for_sigusr1")
 					config.wait_for_sigusr1_reboot = 1
+				if("whitelist_branches")
+					if(using_map.flags & MAP_HAS_BRANCH)
+						var/list/values = splittext(value, ";")
+						for (var/branch in values)
+							config.whitelist_branches += branch
 
 				if("autostealth")
 					config.autostealth = text2num(value)

@@ -26,6 +26,16 @@ var/list/whitelist = list()
 		else
 			load_alienwhitelist()
 	return 1
+
+/hook/startup/proc/loadBranchWhitelist()
+	if(config.whitelist_branches.len > 0)
+		if(config.usealienwhitelistSQL) // FIXME better name, pending whitelist rewrite
+			if(!load_branchwhitelistSQL())
+				warning("Failed to load branch whitelist via SQL")
+		else
+			warning("Not enforcing branch whitelist, SQL disabled!")
+	return 1
+
 /proc/load_alienwhitelist()
 	var/text = file2text("config/alienwhitelist.txt")
 	if (!text)
@@ -34,6 +44,22 @@ var/list/whitelist = list()
 	else
 		alien_whitelist = splittext(text, "\n")
 		return 1
+
+/proc/load_branchwhitelistSQL()
+	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM branch_whitelist")
+	if(!query.Execute())
+		world.log << dbcon_old.ErrorMsg()
+		return 0
+	else
+		while(query.NextRow())
+			var/list/row = query.GetRowData()
+			if(branch_whitelist[row["ckey"]])
+				var/list/A = branch_whitelist[row["ckey"]]
+				A.Add(row["branch"])
+			else
+				branch_whitelist[row["ckey"]] = list(row["branch"])
+	return 1
+
 /proc/load_alienwhitelistSQL()
 	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM whitelist")
 	if(!query.Execute())
