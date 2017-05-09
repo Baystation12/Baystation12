@@ -1,7 +1,0 @@
-author: Asanadas
-
-delete-after: True
-
-changes: 
-  - maptweak: "Robotics control consoles have been added to the Bridge, and the Engineering monitoring room."
-  - tweak: "The Chief Engineer has robotics access. It's part of his job, you know."
