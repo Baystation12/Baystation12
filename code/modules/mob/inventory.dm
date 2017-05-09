@@ -147,17 +147,23 @@ var/list/slot_equipment_priority = list( \
 	return 0
 
 //Drops the item in our left hand
-/mob/proc/drop_l_hand(var/atom/Target)
+/mob/proc/drop_l_hand(var/atom/Target, force = FALSE)
+	if(!force && l_hand && istype(l_hand, /obj/item))
+		if(!canDrop(l_hand))
+			return 0
 	return drop_from_inventory(l_hand, Target)
 
 //Drops the item in our right hand
-/mob/proc/drop_r_hand(var/atom/Target)
+/mob/proc/drop_r_hand(var/atom/Target, force = FALSE)
+	if(!force && r_hand && istype(r_hand, /obj/item))
+		if(!canDrop(r_hand))
+			return 0
 	return drop_from_inventory(r_hand, Target)
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
-/mob/proc/drop_item(var/atom/Target)
-	if(hand)	return drop_l_hand(Target)
-	else		return drop_r_hand(Target)
+/mob/proc/drop_item(var/atom/Target, var/force = FALSE)
+	if(hand)	return drop_l_hand(Target, force)
+	else		return drop_r_hand(Target, force)
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
@@ -199,6 +205,10 @@ var/list/slot_equipment_priority = list( \
 	if(!slot)
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
+
+/mob/proc/canDrop(obj/item/I)
+	return (I && I.candrop)
+
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0
