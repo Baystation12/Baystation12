@@ -4,7 +4,7 @@
 	name = "Baystation12"
 	desc = "This shouldn't be read."
 	screen_loc = "WEST,SOUTH"
-
+/*
 /obj/effect/lobby_image/initialize()
 	icon = using_map.lobby_icon
 	var/known_icon_states = icon_states(icon)
@@ -17,7 +17,7 @@
 		icon_state = pick(using_map.lobby_screens)
 	else
 		icon_state = known_icon_states[1]
-
+*/
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 	if(join_motd)

@@ -161,7 +161,7 @@
 			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
-	log_client_to_db()
+//	log_client_to_db() Feck off SQL
 
 	send_resources()
 
