@@ -35,7 +35,7 @@ JOBS_HAVE_MINIMAL_ACCESS
 ## log OOC channel
 LOG_OOC
 
-## log client Say 
+## log client Say
 LOG_SAY
 
 ## log admin actions
@@ -94,7 +94,7 @@ MOD_JOB_TEMPBAN_MAX 1440
 
 
 ## probablities for game modes chosen in "secret" and "random" modes
-## 
+##
 ## default probablity is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
 PROBABILITY EXTENDED 1
@@ -217,14 +217,14 @@ GUEST_BAN
 ##Remove the # mark infront of this to forbid admins from posssessing the singularity.
 #FORBID_SINGULO_POSSESSION
 
-## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM. 
+## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM.
 ## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
 #POPUP_ADMIN_PM
 
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.9
+TICKLAG 0.7
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
 TICKCOMP 0
@@ -336,6 +336,9 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Uncomment to disable the dead OOC channel by default.
 #DISABLE_DEAD_OOC
 
+## Uncomment to disable the AOOC channel by default.
+#DISABLE_AOOC
+
 ## Uncomment to disable ghost chat by default.
 #DISABLE_DSAY
 
@@ -370,7 +373,7 @@ STARLIGHT 0
 ## Uncomment to override default brain health.
 #DEFAULT_BRAIN_HEALTH 400
 
-## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
+## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and -
 # DEFAULT_LANGUAGE_PREFIXES , # -
 
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
@@ -385,3 +388,6 @@ STARLIGHT 0
 
 ## Uncomment to make Dream Daemon refuse to reboot for any reason other than SIGUSR1
 # WAIT_FOR_SIGUSR1
+
+## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
+# AUTOSTEALTH 30

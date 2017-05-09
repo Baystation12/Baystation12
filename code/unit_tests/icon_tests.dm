@@ -50,3 +50,62 @@
 
 	pass("All MedHUD icon states correctly ordered.")
 	return 1
+
+/datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states
+	name = "ICON STATE - Sprite accessories shall have existing icon states"
+
+/datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states/start_test()
+	var/sprite_accessory_subtypes = list(
+		/datum/sprite_accessory/hair,
+		/datum/sprite_accessory/facial_hair
+	)
+
+	var/list/failed_sprite_accessories = list()
+	var/icon_state_cache = list()
+	var/duplicates_found = FALSE
+
+	for(var/sprite_accessory_main_type in sprite_accessory_subtypes)
+		var/sprite_accessories_by_name = list()
+		for(var/sprite_accessory_type in subtypesof(sprite_accessory_main_type))
+			var/failed = FALSE
+			var/datum/sprite_accessory/sat = sprite_accessory_type
+
+			var/sat_name = initial(sat.name)
+			if(sat_name)
+				group_by(sprite_accessories_by_name, sat_name, sat)
+			else
+				failed = TRUE
+				log_bad("[sat] - Did not have a name set.")
+
+			var/sat_icon = initial(sat.icon)
+			if(sat_icon)
+				var/sat_icon_states = icon_state_cache[sat_icon]
+				if(!sat_icon_states)
+					sat_icon_states = icon_states(sat_icon)
+					icon_state_cache[sat_icon] = sat_icon_states
+
+				var/sat_icon_state = initial(sat.icon_state)
+				if(sat_icon_state)
+					sat_icon_state = "[sat_icon_state]_s"
+					if(!(sat_icon_state in sat_icon_states))
+						failed = TRUE
+						log_bad("[sat] - \"[sat_icon_state]\" did not exist in '[sat_icon]'.")
+				else
+					failed = TRUE
+					log_bad("[sat] - Did not have an icon state set.")
+			else
+				failed = TRUE
+				log_bad("[sat] - Did not have an icon set.")
+
+			if(failed)
+				failed_sprite_accessories += sat
+
+		if(number_of_issues(sprite_accessories_by_name, "Sprite Accessory Names"))
+			duplicates_found = TRUE
+
+	if(failed_sprite_accessories.len || duplicates_found)
+		fail("One or more sprite accessory issues detected.")
+	else
+		pass("All sprite accessories were valid.")
+
+	return 1

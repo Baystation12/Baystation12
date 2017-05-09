@@ -26,7 +26,7 @@
 		mode = WIRING
 		update_icon()
 	else if(mode == WIRING)
-		if(selected_io.link_io(io, user))
+		if(selected_io && selected_io.link_io(io, user))
 			to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
 			mode = WIRE
 			update_icon()
@@ -96,13 +96,10 @@
 	icon_state = "debugger"
 	flags = CONDUCT
 	w_class = ITEM_SIZE_SMALL
+	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
 	var/weakref/data_to_write = null
 	var/accepting_refs = 0
-	var/available_types = list("string","number","null")
-
-/obj/item/device/integrated_electronics/debugger/admin
-	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
-	available_types = list("string","number","ref","null")
+	var/available_types = list("string","number","ref","null")
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in available_types
@@ -113,7 +110,7 @@
 	switch(type_to_use)
 		if("string")
 			accepting_refs = 0
-			new_data = sanitize(input("Now type in a string.","[src] string writing") as null|text)
+			new_data = sanitize(input("Now type in a string.","[src] string writing") as null|text, trim = 0)
 			if(istext(new_data) && CanInteract(user, physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
@@ -130,7 +127,8 @@
 		if("null")
 			data_to_write = null
 			to_chat(user, "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>")
-/obj/item/device/integrated_electronics/debugger/admin/MouseDrop(var/atom/over_object)
+
+/obj/item/device/integrated_electronics/debugger/MouseDrop(var/atom/over_object)
 	if(!accepting_refs)
 		return ..()
 
@@ -150,7 +148,7 @@
 			data_to_show = A.name
 		to_chat(user, "<span class='notice'>You write '[data_to_show ? data_to_show : "NULL"]' to the '[io]' pin of \the [io.holder].</span>")
 	else if(io.io_type == PULSE_CHANNEL)
-		io.holder.check_then_do_work()
+		io.holder.check_then_do_work(io)
 		to_chat(user, "<span class='notice'>You pulse \the [io.holder]'s [io].</span>")
 	io.holder.interact(user) // This is to update the UI.
 
@@ -256,7 +254,7 @@
 
 	new /obj/item/device/electronic_assembly(src)
 	new /obj/item/device/integrated_electronics/wirer(src)
-	new /obj/item/device/integrated_electronics/debugger/admin(src)
+	new /obj/item/device/integrated_electronics/debugger(src)
 	new /obj/item/device/integrated_electronics/analyzer(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/screwdriver(src)

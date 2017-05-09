@@ -24,11 +24,26 @@
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/accessory/bowtie
+	display_name = "bowtie, horrible"
+	path = /obj/item/clothing/accessory/bowtie/ugly
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/bowtie/color
+	display_name = "bowtie, colored"
+	path = /obj/item/clothing/accessory/bowtie/color
+	flags = GEAR_HAS_COLOR_SELECTION
+
 //have to break up armbands to restrict access
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
 	allowed_roles = SECURITY_ROLES
+
+/datum/gear/accessory/armband_mp
+	display_name = "military police armband"
+	path = /obj/item/clothing/accessory/armband/mp
+	allowed_roles = list("Master at Arms", "Brig Officer", "Chief of Security", "Forensic Technician")
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
@@ -43,12 +58,12 @@
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
 	path = /obj/item/clothing/accessory/armband/medgreen
-	allowed_roles = list("Physician", "Medical Assistant")
+	allowed_roles = list("Corpsman", "Medical Contractor")
 
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical corps armband"
 	path = /obj/item/clothing/accessory/armband/medblue
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician")
+	allowed_roles = list("Chief Medical Officer", "Physician", "Corpsman")
 
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
@@ -60,15 +75,10 @@
 	path = /obj/item/clothing/accessory/armband/hydro
 	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Passenger")
 
-/datum/gear/accessory/armband_science
-	display_name = "science armband"
-	path = /obj/item/clothing/accessory/armband/science
-	allowed_roles = RESEARCH_ROLES
-
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = NANOTRASEN_ROLES
+	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Maintenance Assistant", "Roboticist", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Supply Assistant", "Sanitation Technician", "Cook", "Bartender")
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
@@ -118,8 +128,7 @@
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Virologist", "Chemist", "Counselor",
-						"Research Director", "Senior Researcher", "Scientist", "Research Assistant")
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, engineering"
@@ -138,7 +147,7 @@
 	display_name = "webbing, medical"
 	path = /obj/item/clothing/accessory/storage/white_vest
 	cost = 3
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Merchant")
+	allowed_roles = list("Chief Medical Officer", "Physician", "Corpsman", "Medical Contractor", "Merchant")
 
 /datum/gear/accessory/brown_drop_pouches
 	display_name = "drop pouches, engineering"
@@ -157,7 +166,7 @@
 	display_name = "drop pouches, medical"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/white
 	cost = 3
-	allowed_roles = list("Chief Medical Officer", "Senior Physician", "Physician", "Medical Assistant", "Merchant")
+	allowed_roles = list("Chief Medical Officer", "Physician", "Corpsman", "Medical Contractor", "Merchant")
 
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"

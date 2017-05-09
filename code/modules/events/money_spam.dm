@@ -58,8 +58,8 @@
 					sender = pick("Galactic Payments Association","Better Business Bureau","Nyx E-Payments","NAnoTransen Finance Deparmtent","Luxury Replicas")
 					message = pick("Luxury watches for Blowout sale prices!",\
 					"Watches, Jewelry & Accessories, Bags & Wallets !",\
-					"Deposit 100þ and get 300þ totally free!",\
-					" 100K NT.|WOWGOLD õnly þ89            <HOT>",\
+					"Deposit T100 and get T300 totally free!",\
+					" 100K NT.|WOWGOLD õnly T89            <HOT>",\
 					"We have been filed with a complaint from one of your customers in respect of their business relations with you.",\
 					"We kindly ask you to open the COMPLAINT REPORT (attached) to reply on this complaint..")
 				if(4)

@@ -12,7 +12,9 @@
 
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
-	var/brightness_on = 4 //luminosity when on
+	var/brightness_on = 4 //range of light when on
+	var/activation_sound = 'sound/effects/flashlight.ogg'
+	var/flashlight_power //luminosity of light when on, can be negative
 
 /obj/item/device/flashlight/initialize()
 	..()
@@ -21,7 +23,10 @@
 /obj/item/device/flashlight/update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		set_light(brightness_on)
+		if(flashlight_power)
+			set_light(l_range = brightness_on, l_power = flashlight_power)
+		else
+			set_light(brightness_on)
 	else
 		icon_state = "[initial(icon_state)]"
 		set_light(0)
@@ -32,6 +37,8 @@
 
 		return 0
 	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
 	update_icon()
 	user.update_action_buttons()
 	return 1
@@ -103,6 +110,15 @@
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
 
+/obj/item/device/flashlight/flashdark
+	name = "flashdark"
+	desc = "A strange device manufactured with mysterious elements that somehow emits darkness. Or maybe it just sucks in light? Nobody knows for sure."
+	icon_state = "flashdark"
+	item_state = "flashdark"
+	w_class = ITEM_SIZE_NORMAL
+	brightness_on = 8
+	flashlight_power = -6
+
 /obj/item/device/flashlight/pen
 	name = "penlight"
 	desc = "A pen-sized light, used by medical staff."
@@ -112,6 +128,15 @@
 	slot_flags = SLOT_EARS
 	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
+
+/obj/item/device/flashlight/maglight
+	name = "maglight"
+	desc = "A very, very heavy duty flashlight."
+	icon_state = "maglight"
+	force = 10
+	attack_verb = list ("smacked", "thwacked", "thunked")
+	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)
+	hitsound = "swing_hit"
 
 /obj/item/device/flashlight/drone
 	name = "low-power flashlight"
@@ -167,6 +192,7 @@
 	var/fuel = 0
 	var/on_damage = 7
 	var/produce_heat = 1500
+	activation_sound = 'sound/effects/flare.ogg'
 
 /obj/item/device/flashlight/flare/New()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
@@ -219,6 +245,7 @@
 	item_state = "glowstick"
 	randpixel = 12
 	var/fuel = 0
+	activation_sound = null
 
 /obj/item/device/flashlight/glowstick/New()
 	fuel = rand(1600, 2000)

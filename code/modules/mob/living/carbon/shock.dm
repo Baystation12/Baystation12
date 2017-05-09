@@ -39,11 +39,6 @@
 		traumatic_shock += (1.7 * E.get_genetic_damage())
 		traumatic_shock += (  2 * E.get_pain())
 
-		if(E.is_broken())
-			traumatic_shock += 20
-		else if(E.is_dislocated())
-			traumatic_shock += 10
-
 	traumatic_shock += (-1*src.chem_effects[CE_PAINKILLER])
 
 	if(slurring)

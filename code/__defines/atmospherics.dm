@@ -46,6 +46,16 @@
 #define PIPE_SCRUBBERS_CAP			42
 ///// Mirrored T-valve ~ because I couldn't be bothered re-sorting all of the defines
 #define PIPE_MTVALVEM				43
+///// I also couldn't be bothered sorting, so automatic shutoff valve.
+#define PIPE_SVALVE					44
+
+#define PIPE_FUEL_STRAIGHT       45
+#define PIPE_FUEL_BENT           46
+#define PIPE_FUEL_MANIFOLD       47
+#define PIPE_FUEL_MANIFOLD4W     48
+#define PIPE_FUEL_UP             49
+#define PIPE_FUEL_DOWN           50
+#define PIPE_FUEL_CAP            51
 
 #define CONNECT_TYPE_REGULAR	1
 #define CONNECT_TYPE_SUPPLY		2

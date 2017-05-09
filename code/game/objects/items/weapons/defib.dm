@@ -1,4 +1,4 @@
-#define DEFIB_TIME_LIMIT (8 MINUTES) //past this many secons, defib is useless. Currently 8 Minutes
+#define DEFIB_TIME_LIMIT (8 MINUTES) //past this many seconds, defib is useless. Currently 8 Minutes
 #define DEFIB_TIME_LOSS  (2 MINUTES) //past this many seconds, brain damage occurs. Currently 2 minutes
 
 //backpack item
@@ -34,9 +34,8 @@
 	qdel_null(paddles)
 	qdel_null(bcell)
 
-/obj/item/weapon/defibrillator/loaded //starts with highcap cell
-	bcell = /obj/item/weapon/cell/high
-
+/obj/item/weapon/defibrillator/loaded //starts with regular power cell for R&D to replace later in the round.
+	bcell = /obj/item/weapon/cell/apc
 
 /obj/item/weapon/defibrillator/update_icon()
 	var/list/new_overlays = list()
@@ -277,7 +276,7 @@
 
 	H.updatehealth()
 	if(H.health + H.getOxyLoss() <= config.health_threshold_dead || (HUSK in H.mutations))
-		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile.\""
+		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile unless damage is repaired\""
 
 	var/bad_vital_organ = check_vital_organs(H)
 	if(bad_vital_organ)
@@ -304,20 +303,17 @@
 		if(vital)
 			O = H.internal_organs_by_name[organ_tag]
 			if(!O)
-				return "buzzes, \"Resuscitation failed - Patient is missing vital organ ([name]). Further attempts futile.\""
+				return "buzzes, \"Resuscitation failed - Patient is missing vital organ ([name]). Further attempts futile unless damage is repaired.\""
 			if(O.damage > O.max_damage)
-				return "buzzes, \"Resuscitation failed - Excessive damage to vital organ ([name]). Further attempts futile.\""
+				return "buzzes, \"Resuscitation failed - Excessive damage to vital organ ([name]). Further attempts futile unless organ is replaced.\""
 	return null
 
 /obj/item/weapon/shockpaddles/proc/check_blood_level(mob/living/carbon/human/H)
 	if(!H.should_have_organ(BP_HEART))
 		return FALSE
 
-	var/obj/item/organ/internal/heart/heart = H.get_organ(BP_HEART)
-	if(!heart)
-		return TRUE
-
-	if(heart.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
+	var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
+	if(!heart || H.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE)
 		return TRUE
 
 	return FALSE
@@ -362,7 +358,7 @@
 // This proc is used so that we can return out of the revive process while ensuring that busy and update_icon() are handled
 /obj/item/weapon/shockpaddles/proc/do_revive(mob/living/carbon/human/H, mob/user)
 	if(H.ssd_check())
-		to_chat(find_dead_player(H.ckey, 1), "Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!")
+		to_chat(find_dead_player(H.ckey, 1), "<span class='notice'>Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!</span>")
 
 	//beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
 	user.visible_message("<span class='warning'>\The [user] begins to place [src] on [H]'s chest.</span>", "<span class='warning'>You begin to place [src] on [H]'s chest...</span>")
@@ -378,7 +374,7 @@
 		return
 
 	if(check_blood_level(H))
-		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock.\"", "warning") //also includes heart damage
+		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
 	if(!do_after(user, chargetime, H))
@@ -508,6 +504,25 @@
 		update_icon()
 	..()
 
+/obj/item/weapon/shockpaddles/robot
+	name = "defibrillator paddles"
+	desc = "A pair of advanced shockpaddles powered by a robot's internal power cell, able to penetrate thick clothing."
+	chargecost = 50
+	combat = 1
+	icon_state = "defibpaddles0"
+	item_state = "defibpaddles0"
+	cooldowntime = (3 SECONDS)
+
+/obj/item/weapon/shockpaddles/robot/check_charge(var/charge_amt)
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		return (R.cell && R.cell.check_charge(charge_amt))
+
+/obj/item/weapon/shockpaddles/robot/checked_use(var/charge_amt)
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		return (R.cell && R.cell.checked_use(charge_amt))
+
 /*
 	Shockpaddles that are linked to a base unit
 */
@@ -592,7 +607,6 @@
 	combat = 1
 	safety = 0
 	chargetime = (1 SECONDS)
-
 
 #undef DEFIB_TIME_LIMIT
 #undef DEFIB_TIME_LOSS

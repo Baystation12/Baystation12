@@ -13,6 +13,7 @@
 	var/open = 0
 	var/recent_fault = 0
 	var/power_output = 1
+	flags = OBJ_CLIMBABLE
 
 /obj/machinery/power/port_gen/proc/IsBroken()
 	return (stat & (BROKEN|EMPED))
@@ -36,13 +37,21 @@
 		src.updateDialog()
 	else
 		active = 0
-		icon_state = initial(icon_state)
 		handleInactive()
+	update_icon()
+
+/obj/machinery/power/port_gen/update_icon()
+	if(!active)
+		icon_state = initial(icon_state)
+		return 1
+	else
+		icon_state = "[initial(icon_state)]on"
 
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
 	if(..())
 		return
 	if(!anchored)
+		to_chat(usr, "<span class='warning'>The generator needs to be secured first.</span>")
 		return
 
 /obj/machinery/power/port_gen/examine(mob/user)
@@ -395,6 +404,20 @@
 	if (prob(2*power_output))
 		radiation_repository.radiate(src, 4)
 	..()
+
+/obj/machinery/power/port_gen/pacman/super/update_icon()
+	if(..())
+		set_light(0)
+		return
+	if(icon_state != "[initial(icon_state)]onrad")
+		if(power_output >= 3)
+			icon_state = "[initial(icon_state)]onrad"
+			set_light(2,1,"#3b97ca")
+	else
+		if(power_output < 3)
+			icon_state = "[initial(icon_state)]on"
+			set_light(0)
+
 
 /obj/machinery/power/port_gen/pacman/super/explode()
 	//a nice burst of radiation

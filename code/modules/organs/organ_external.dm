@@ -61,6 +61,7 @@
 	var/encased                        // Needs to be opened with a saw to access the organs.
 	var/has_tendon = FALSE             // Can this limb be hamstrung?
 	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
+	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
 
 	// Surgery vars.
@@ -155,6 +156,11 @@
 				continue
 			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
 	return
+
+/obj/item/organ/external/show_decay_status(mob/user)
+	..(user)
+	for(var/obj/item/organ/external/child in children)
+		child.show_decay_status(user)
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	switch(open)
@@ -760,6 +766,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 			parent_organ.update_damages()
 		else
 			var/obj/item/organ/external/stump/stump = new (victim, 0, src)
+			stump.name = "stump of \a [name]"
+			stump.artery_name = "mangled [artery_name]"
+			stump.arterial_bleed_severity = arterial_bleed_severity
 			if(robotic >= ORGAN_ROBOT)
 				stump.robotize()
 			stump.wounds |= W
@@ -1025,7 +1034,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(!supplied_wound)
 		supplied_wound = createwound(PIERCE, W.w_class * 5)
 
-	if(W in supplied_wound.embedded_objects) // Just in case.
+	if(!supplied_wound || (W in supplied_wound.embedded_objects)) // Just in case.
 		return
 
 	supplied_wound.embedded_objects += W

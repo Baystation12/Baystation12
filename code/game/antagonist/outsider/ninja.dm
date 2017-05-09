@@ -73,10 +73,6 @@ var/datum/antagonist/ninja/ninjas
 					i++
 					objective_list -= 5
 
-	var/datum/objective/ninja_highlander/ninja_obj = new
-	ninja_obj.owner = ninja
-	ninja.objectives += ninja_obj
-
 	var/datum/objective/survive/ninja_objective = new
 	ninja_objective.owner = ninja
 	ninja.objectives += ninja_objective
@@ -169,7 +165,7 @@ var/datum/antagonist/ninja/ninjas
 		if(13)
 			directive += "Some disgruntled [using_map.company_name] employees have been supportive of our operations. Be wary of any mistreatment by command staff."
 		if(14)
-			var/xenorace = pick("Unathi","Tajara", "Skrell")
+			var/xenorace = pick(SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_SKRELL)
 			directive += "A group of [xenorace] radicals have been loyal supporters of the Spider Clan. Favor [xenorace] crew whenever possible."
 		if(15)
 			directive += "The Spider Clan has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."

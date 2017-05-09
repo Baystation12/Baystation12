@@ -59,7 +59,7 @@
 		if(handle_casings != HOLD_CASINGS)
 			loaded -= chambered
 	else if(ammo_magazine && ammo_magazine.stored_ammo.len)
-		chambered = ammo_magazine.stored_ammo[1]
+		chambered = ammo_magazine.stored_ammo[ammo_magazine.stored_ammo.len]
 		if(handle_casings != HOLD_CASINGS)
 			ammo_magazine.stored_ammo -= chambered
 

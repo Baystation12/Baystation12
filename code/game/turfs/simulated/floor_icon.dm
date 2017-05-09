@@ -60,7 +60,7 @@ var/list/flooring_cache = list()
 						if(!(istype(T) && T.flooring && T.flooring.name == flooring.name))
 							overlays |= get_flooring_overlay("[flooring.icon_base]-corner-[SOUTHWEST]", "[flooring.icon_base]_corners", SOUTHWEST)
 
-		if(decals && decals.len)
+		if(flooring.can_paint && decals && decals.len)
 			overlays |= decals
 
 	else if(decals && decals.len)

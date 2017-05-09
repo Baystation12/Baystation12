@@ -11,6 +11,23 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
 
+/obj/item/weapon/gun/energy/taser/carbine
+	name = "taser carbine"
+	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
+	icon_state = "tasercarbine"
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BELT|SLOT_BACK
+	one_hand_penalty = 3
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
+	force = 8
+	max_shots = 10
+	projectile_type = /obj/item/projectile/beam/stun/heavy
+
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy),
+		)
+
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
 	self_recharge = 1
@@ -31,6 +48,18 @@
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 8
 
+/obj/item/weapon/gun/energy/stunrevolver/rifle
+	name = "stun rifle"
+	desc = "A LAEP38 Thor, a vastly oversized variant of the LAEP20 Zeus. Fires overcharged electrodes."
+	icon_state = "stunrifle"
+	item_state = "stunrifle"
+	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
+	one_hand_penalty = 6
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
+	force = 10
+	max_shots = 12
+	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 
 /obj/item/weapon/gun/energy/crossbow
 	name = "mini energy-crossbow"
@@ -58,7 +87,7 @@
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = ITEM_SIZE_LARGE
 	force = 10
-	requires_two_hands = 1
+	one_hand_penalty = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large
 

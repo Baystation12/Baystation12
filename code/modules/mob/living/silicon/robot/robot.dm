@@ -126,7 +126,7 @@
 		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
 			camera.status = 0
 
-	..()
+	..() // Laws, among other things, are initialized in parent New()
 	init()
 	initialize_components()
 	//if(!unfinished)
@@ -279,7 +279,8 @@
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
 	recalculate_synth_capacities()
-	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
+	if(module)
+		notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)

@@ -466,7 +466,7 @@ obj/random/closet/item_to_spawn()
 					/obj/item/toy/water_balloon,\
 					/obj/item/toy/crossbow,\
 					/obj/item/toy/blink,\
-					/obj/item/toy/waterflower,\
+					/obj/item/weapon/reagent_containers/spray/waterflower,\
 					/obj/item/toy/prize/ripley,\
 					/obj/item/toy/prize/fireripley,\
 					/obj/item/toy/prize/deathripley,\
@@ -477,7 +477,8 @@ obj/random/closet/item_to_spawn()
 					/obj/item/toy/prize/seraph,\
 					/obj/item/toy/prize/mauler,\
 					/obj/item/toy/prize/odysseus,\
-					/obj/item/toy/prize/phazon)
+					/obj/item/toy/prize/phazon,\
+					/obj/item/weapon/deck/cards)
 
 
 /obj/random/tank
@@ -555,6 +556,18 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					/obj/item/weapon/caution/cone,\
 					/obj/structure/inflatable/wall,\
 					/obj/structure/inflatable/door)
+
+/obj/random/assembly
+	name = "random assembly"
+	desc = "This is a random circuit assembly."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift1"
+	item_to_spawn()
+		return pick(/obj/item/device/electronic_assembly,\
+					/obj/item/device/electronic_assembly/medium,\
+					/obj/item/device/electronic_assembly/large,\
+					/obj/item/device/electronic_assembly/drone)
+
 
 
 /obj/random/advdevice
@@ -830,7 +843,7 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					prob(4);/obj/item/clothing/under/hazard,\
 					prob(4);/obj/item/clothing/under/sterile,\
 					prob(1);/obj/item/clothing/under/pt,\
-					prob(2);/obj/item/clothing/under/pants/camo,\
+					prob(2);/obj/item/clothing/under/casual_pants/camo,\
 					prob(2);/obj/item/clothing/under/frontier,\
 					prob(2);/obj/item/clothing/under/harness,\
 					prob(2);/obj/item/clothing/under/rank/medical/paramedic,\
@@ -1124,6 +1137,7 @@ var/list/random_useful_
 		random_useful_ += /obj/item/weapon/storage/box/matches
 		random_useful_ += /obj/item/stack/material/cardboard
 		random_useful_ += /obj/item/weapon/storage/fancy/cigarettes
+		random_useful_ += /obj/item/weapon/deck/cards
 	return pick(random_useful_)
 
 /proc/get_random_junk_type()
@@ -1142,6 +1156,7 @@ var/list/random_useful_
 			random_junk_ += /obj/item/inflatable/torn
 			random_junk_ += /obj/effect/decal/cleanable/molten_item
 			random_junk_ += /obj/item/weapon/material/shard
+			random_junk_ += /obj/item/weapon/hand/missing_card
 
 			random_junk_ -= /obj/item/trash/plate
 			random_junk_ -= /obj/item/trash/snack_bowl

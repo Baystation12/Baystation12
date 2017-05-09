@@ -90,10 +90,10 @@
 			if (shuttle.docking_controller)
 				switch(shuttle.docking_controller.get_docking_status())
 					if ("docked")
-						shuttlestatus = "Docked at station"
-					if ("undocked") shuttlestatus = "Undocked from station"
-					if ("docking") shuttlestatus = "Docking with station"
-					if ("undocking") shuttlestatus = "Undocking from station"
+						shuttlestatus = "Docked"
+					if ("undocked") shuttlestatus = "Undocked"
+					if ("docking") shuttlestatus = "Docking"
+					if ("undocking") shuttlestatus = "Undocking"
 		else
 			shuttlestatus = "Docked at remote location"
 
@@ -285,7 +285,7 @@
 				overview = new /obj/item/weapon/paper(src.loc)
 				overview.name = "Export overview"
 				var/info = list()
-				info += "<center><BR><b><large>NSS Exodus</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
+				info += "<center><BR><b><large>[using_map.station_name]</large></b><BR><i>[station_date]</i><BR><i>Export overview<field></i></center><hr>"
 				for(var/source in point_source_descriptions)
 					info += "[point_source_descriptions[source]]: [supply_controller.point_sources[source] || 0]<br/>"
 				overview.info = jointext(info, null)

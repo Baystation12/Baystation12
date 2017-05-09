@@ -8,7 +8,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/belt.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/belt.dmi')
 	var/show_above_suit = 0
 
 /obj/item/weapon/storage/belt/verb/toggle_layer()
@@ -182,3 +182,26 @@
 	icon_state = "swatbelt"
 	item_state = "swatbelt"
 	storage_slots = 9
+
+/obj/item/weapon/storage/belt/waistpack
+	name = "waist pack"
+	desc = "A small bag designed to be worn on the waist. May make your butt look big."
+	icon_state = "fannypack_white"
+	item_state = "fannypack_white"
+	storage_slots = null
+	max_w_class = ITEM_SIZE_SMALL
+	max_storage_space = ITEM_SIZE_SMALL * 4
+	slot_flags = SLOT_BELT | SLOT_BACK
+
+/obj/item/weapon/storage/belt/waistpack/big
+	name = "large waist pack"
+	desc = "An bag designed to be worn on the waist. Definitely makes your butt look big."
+	icon_state = "fannypack_big_white"
+	item_state = "fannypack_big_white"
+	w_class = ITEM_SIZE_LARGE
+	max_w_class = ITEM_SIZE_NORMAL
+	max_storage_space = ITEM_SIZE_NORMAL * 4
+
+/obj/item/weapon/storage/belt/waistpack/big/New()
+	..()
+	slowdown_per_slot[slot_belt] = 3

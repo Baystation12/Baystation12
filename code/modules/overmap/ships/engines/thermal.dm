@@ -62,6 +62,7 @@
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
 	. = list()
+	.+= "Location: [get_area(src)]."
 	if(!powered())
 		.+= "Insufficient power to operate."
 	if(!check_fuel())
@@ -76,7 +77,7 @@
 	return on && powered()
 
 /obj/machinery/atmospherics/unary/engine/proc/check_fuel()
-	return air_contents.total_moles > moles_per_burn
+	return air_contents.total_moles > moles_per_burn * thrust_limit
 
 /obj/machinery/atmospherics/unary/engine/proc/get_thrust()
 	if(!is_on() || !check_fuel())

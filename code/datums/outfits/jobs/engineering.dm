@@ -19,7 +19,7 @@
 	pda_type = /obj/item/device/pda/heads/ce
 
 /decl/hierarchy/outfit/job/engineering/engineer
-	name = OUTFIT_JOB_NAME("Station engineer")
+	name = OUTFIT_JOB_NAME("Engineer")
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/rank/engineer
 	r_pocket = /obj/item/device/t_scanner

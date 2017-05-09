@@ -30,6 +30,7 @@
 
 	return 1
 
+#define SHOULD_CHECK_TURF(turf_to_check) if(turf_to_check && turf_to_check.loc == T.loc && !(turf_to_check in .)) { turfs_to_check.Push(turf_to_check) }
 /datum/unit_test/areas_shall_be_coherent/proc/get_turfs_fill(var/turf/origin)
 	. = list()
 	var/datum/stack/turfs_to_check = new()
@@ -37,10 +38,18 @@
 	while(!turfs_to_check.is_empty())
 		var/turf/T = turfs_to_check.Pop()
 		. |= T
+		var/turf/neighbour
 		for(var/direction in cardinal)
-			var/turf/neighbour = get_step(T, direction)
-			if(neighbour && neighbour.loc == T.loc && !(neighbour in .))
-				turfs_to_check.Push(neighbour)
+			neighbour = get_step(T, direction)
+			SHOULD_CHECK_TURF(neighbour)
+#ifdef MULTIZAS
+		neighbour = GetAbove(T)
+		SHOULD_CHECK_TURF(neighbour)
+		neighbour = GetBelow(T)
+		SHOULD_CHECK_TURF(neighbour)
+#endif
+
+#undef SHOULD_CHECK_TURF
 
 /datum/unit_test/areas_shall_be_pure
 	name = "AREA: Areas shall be pure"

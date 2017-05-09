@@ -122,7 +122,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	var/radiation_level = rand(100, 200)
 
 	// Copied from the SM for proof of concept. //Not any more --Cirra
-	for(var/area/A in all_areas)
+	for(var/area/A)
 		if(A.z == holder.z)
 			for(var/turf/T in A)
 				radiation_repository.irradiated_turfs[T] = radiation_level

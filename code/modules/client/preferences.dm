@@ -18,6 +18,7 @@ datum/preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 	var/list/never_be_special_role = list()
+	var/list/sometimes_be_special_role = list()
 	var/list/be_special_role = list()		//Special role selection
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
@@ -27,7 +28,7 @@ datum/preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 	var/age = 30						//age of character
-	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
+	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
@@ -45,7 +46,7 @@ datum/preferences
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
-	var/species = "Human"               //Species datum to use.
+	var/species = SPECIES_HUMAN               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
 	var/list/language_prefixes = list() //Kanguage prefix keys
@@ -359,7 +360,7 @@ datum/preferences
 				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
 		else
 			all_underwear -= underwear_category_name
-	if(backbag > 5 || backbag < 1)
+	if(backbag > 6 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag
 
@@ -398,6 +399,9 @@ datum/preferences
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
+
+	if(!character.isSynthetic())
+		character.nutrition = rand(140,360)
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()

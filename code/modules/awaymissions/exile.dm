@@ -3,13 +3,7 @@
 
 /obj/item/weapon/implanter/exile
 	name = "implanter-exile"
-
-/obj/item/weapon/implanter/exile/New()
-	src.imp = new /obj/item/weapon/implant/exile( src )
-	..()
-	update()
-	return
-
+	imp = /obj/item/weapon/implant/exile
 
 /obj/item/weapon/implant/exile
 	name = "exile"
@@ -27,13 +21,7 @@
 	desc = "A case containing an exile implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-r"
-
-
-	New()
-		src.imp = new /obj/item/weapon/implant/exile( src )
-		..()
-		return
-
+	imp = /obj/item/weapon/implant/exile
 
 /obj/structure/closet/secure_closet/exile
 	name = "Exile Implants"

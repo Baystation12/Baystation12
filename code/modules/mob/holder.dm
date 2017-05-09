@@ -8,8 +8,8 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/head.dmi',
-		"Resomi" = 'icons/mob/species/resomi/head.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/head.dmi'
 		)
 
 	origin_tech = null
@@ -126,7 +126,7 @@ var/list/holder_mob_icon_cache = list()
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type
 
-/mob/living/proc/get_scooped(var/mob/living/carbon/grabber, var/self_grab)
+/mob/living/proc/get_scooped(var/mob/living/carbon/human/grabber, var/self_grab)
 
 	if(!holder_type || buckled || pinned.len)
 		return
@@ -158,6 +158,19 @@ var/list/holder_mob_icon_cache = list()
 	grabber.status_flags |= PASSEMOTES
 	H.sync(src)
 	return H
+
+/mob/living/MouseDrop(var/mob/living/carbon/human/over_object)
+	if(istype(over_object) && Adjacent(over_object) && (usr == src || usr == over_object) && over_object.a_intent == I_GRAB)
+		if(scoop_check(over_object))
+			get_scooped(over_object, (usr == src))
+			return
+	return ..()
+
+/mob/living/proc/scoop_check(var/mob/living/scooper)
+	return 1
+
+/mob/living/carbon/human/scoop_check(var/mob/living/scooper)
+	return (scooper.mob_size > src.mob_size && a_intent == I_HELP)
 
 /obj/item/weapon/holder/human
 	icon = 'icons/mob/holder_complex.dmi'

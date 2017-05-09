@@ -122,7 +122,7 @@
 			new/obj/item/weapon/bikehorn(src)
 			//new/obj/item/weapon/stamp/clown(src) I'd add it, but only clowns can use it
 			new/obj/item/weapon/pen/crayon/rainbow(src)
-			new/obj/item/toy/waterflower(src)
+			new/obj/item/weapon/reagent_containers/spray/waterflower(src)
 		if(95)
 			new/obj/item/clothing/under/mime(src)
 			new/obj/item/clothing/shoes/black(src)

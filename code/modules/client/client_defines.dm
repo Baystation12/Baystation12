@@ -8,8 +8,6 @@
 		////////////////
 	var/datum/admins/holder = null
 	var/datum/admins/deadmin_holder = null
-	var/buildmode		= 0
-
 
 		/////////
 		//OTHER//
@@ -20,6 +18,8 @@
 	var/adminobs		= null
 
 	var/adminhelped = 0
+
+	var/staffwarn = null
 
 		///////////////
 		//SOUND STUFF//

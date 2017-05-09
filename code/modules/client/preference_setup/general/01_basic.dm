@@ -22,8 +22,8 @@ datum/preferences
 	S["OOC_Notes"]				<< pref.metadata
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
-	var/datum/species/S = all_species[pref.species ? pref.species : "Human"]
-	if(!S) S = all_species["Human"]
+	var/datum/species/S = all_species[pref.species ? pref.species : SPECIES_HUMAN]
+	if(!S) S = all_species[SPECIES_HUMAN]
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
 	pref.real_name          = sanitize_name(pref.real_name, pref.species)
@@ -85,8 +85,6 @@ datum/preferences
 			spawnkeys += spawntype
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
 		if(!choice || !spawntypes[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
-		if(!(choice in using_map.allowed_spawns)) //Don't force their hand, just let them know
-			to_chat(user, "Your chosen spawnpoint ([choice]) is unavailable for the current map. Leaving this setting on the current selection will force you to spawn at one of the allowed spawns.")
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
 

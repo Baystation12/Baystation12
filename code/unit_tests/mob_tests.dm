@@ -26,7 +26,7 @@ datum/unit_test/human_breath
 
 
 datum/unit_test/human_breath/start_test()
-	var/turf/T = locate(20,20,1) //TODO:  Find better way.
+	var/turf/T = get_space_turf()
 
 	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
@@ -47,7 +47,7 @@ datum/unit_test/human_breath/check_result()
 	if(starting_oxyloss < ending_oxyloss)
 		pass("Oxyloss = [ending_oxyloss]")
 	else
-		fail("Mob is not taking oxygen damage.  Damange is [ending_oxyloss]")
+		fail("Mob is not taking oxygen damage.  Damage is [ending_oxyloss]")
 
 	return 1	// return 1 to show we're done and don't want to recheck the result.
 

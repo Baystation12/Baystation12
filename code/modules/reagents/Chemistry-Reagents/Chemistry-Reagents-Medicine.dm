@@ -3,7 +3,7 @@
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
 	id = "inaprovaline"
-	description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
+	description = "Inaprovaline is a multipurpose neurostimulant and cardioregulator. Commonly used to slow bleeding and stabilize patients."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#00BFFF"
@@ -16,7 +16,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
-	M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -596,3 +596,19 @@
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
+
+/datum/reagent/noexcutite
+	name = "Noexcutite"
+	id = "noexcutite"
+	description = "A thick, syrupy liquid that has a lethargic effect. Used to cure cases of jitteriness."
+	taste_description = "numbing coldness"
+	reagent_state = LIQUID
+	color = "#BC018A"
+	overdose = REAGENTS_OVERDOSE
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/noexcutite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+
+	if(alien != IS_DIONA)
+		M.make_jittery(-50)

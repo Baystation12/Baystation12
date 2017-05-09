@@ -4,10 +4,13 @@
 	departments = COM
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/command
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/command
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/command
 
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -16,6 +19,7 @@
 	departments = ENG
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/engineering
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/engineering, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/engineering
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/engineering
@@ -24,6 +28,9 @@
 	name = "EC engineering CO"
 	min_rank = 11
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -41,6 +48,7 @@
 	departments = SEC
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/security
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/security, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/security
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/security
@@ -49,6 +57,9 @@
 	name = "EC security CO"
 	min_rank = 11
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -66,6 +77,7 @@
 	departments = MED
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/medical
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/medical, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/medical
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/medical
@@ -74,6 +86,9 @@
 	name = "EC medical CO"
 	min_rank = 11
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -90,6 +105,7 @@
 	name = "EC supply"
 	departments = SUP
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/supply, /obj/item/clothing/head/ushanka/expedition)
 	utility_under = /obj/item/clothing/under/utility/expeditionary/supply
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/supply
@@ -99,6 +115,9 @@
 	name = "EC supply CO"
 	min_rank = 11
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -110,6 +129,9 @@
 	name = "EC service CO"
 	min_rank = 11
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command
 
@@ -118,6 +140,7 @@
 	departments = SPT
 
 	utility_under= /obj/item/clothing/under/utility/expeditionary/command
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under= /obj/item/clothing/under/utility/expeditionary/command
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/command
@@ -126,5 +149,7 @@
 	name = "EC command support CO"
 	min_rank = 11
 
+	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
+	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
 	dress_over = /obj/item/clothing/suit/dress/expedition/command
 	dress_hat = /obj/item/clothing/head/dress/expedition/command

@@ -115,6 +115,9 @@
 	icon_state = "sheet-phoron"
 	default_type = "phoron"
 
+/obj/item/stack/material/phoron/fifty
+	amount = 50
+
 /obj/item/stack/material/plastic
 	name = "plastic"
 	icon_state = "sheet-plastic"
@@ -167,6 +170,9 @@
 	item_state = "sheet-metal"
 	default_type = "osmium-carbide plasteel"
 	apply_colour = 1
+
+/obj/item/stack/material/ocp/fifty
+	amount = 50
 
 // Fusion fuel.
 /obj/item/stack/material/deuterium

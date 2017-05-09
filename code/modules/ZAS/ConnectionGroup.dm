@@ -184,7 +184,8 @@ Class Procs:
 	air_master.mark_zone_update(B)
 
 /connection_edge/zone/recheck()
-	if(!A.air.compare(B.air))
+	// Edges with only one side being vacuum need processing no matter how close.
+	if(!A.air.compare(B.air, vacuum_exception = 1))
 		air_master.mark_edge_active(src)
 
 //Helper proc to get connections for a zone.
@@ -240,7 +241,10 @@ Class Procs:
 	air_master.mark_zone_update(A)
 
 /connection_edge/unsimulated/recheck()
-	if(!A.air.compare(air))
+	// Edges with only one side being vacuum need processing no matter how close.
+	// Note: This handles the glaring flaw of a room holding pressure while exposed to space, but
+	// does not specially handle the less common case of a simulated room exposed to an unsimulated pressurized turf.
+	if(!A.air.compare(air, vacuum_exception = 1))
 		air_master.mark_edge_active(src)
 
 proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)

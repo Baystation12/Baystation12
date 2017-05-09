@@ -59,9 +59,6 @@
 /obj/item/weapon/card/id/torch/contractor/medical/chemist
 	job_access_type = /datum/job/chemist
 
-/obj/item/weapon/card/id/torch/contractor/medical/virologist
-	job_access_type = /datum/job/virologist
-
 /obj/item/weapon/card/id/torch/contractor/medical/counselor
 	job_access_type = /datum/job/psychiatrist
 
@@ -114,7 +111,7 @@
 /obj/item/weapon/card/id/torch/crew/service/chef
 	job_access_type = /datum/job/chef
 
-/obj/item/weapon/card/id/torch/crew/service/solgov_pilot
+/obj/item/weapon/card/id/torch/crew/solgov_pilot
 	job_access_type = /datum/job/solgov_pilot
 
 /obj/item/weapon/card/id/torch/contractor/service //unused
@@ -165,6 +162,7 @@
 
 /obj/item/weapon/card/id/torch/passenger/research/liaison
 	job_access_type = /datum/job/liaison
+
 
 //Merchant
 /obj/item/weapon/card/id/torch/merchant

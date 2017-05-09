@@ -186,14 +186,14 @@
 
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
-	desc = "A formal black suit and red tie, intended for the station's finest."
+	desc = "A formal black suit and red tie, intended for the galaxy's finest."
 	icon_state = "really_black_suit"
 	item_state = "jensensuit"
 	worn_state = "black_suit"
 
 /obj/item/clothing/under/suit_jacket/female
 	name = "executive suit"
-	desc = "A formal trouser suit for women, intended for the station's finest."
+	desc = "A formal trouser suit for women, intended for the galaxy's finest."
 	icon_state = "black_suit_fem"
 	item_state = "lawyer_black"
 	worn_state = "black_suit_fem"
@@ -489,7 +489,7 @@
 
 /obj/item/clothing/under/suit_jacket/navy
 	name = "navy suit"
-	desc = "A navy suit and red tie, intended for the station's finest."
+	desc = "A navy suit and red tie, intended for the galaxy's finest."
 	icon_state = "navy_suit"
 	item_state = "bl_suit"
 	worn_state = "navy_suit"
@@ -518,6 +518,14 @@
 	item_state = "lb_suit"
 	worn_state = "tan_suit"
 	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
+
+/obj/item/clothing/under/suit_jacket/nt
+	name = "\improper NanoTrasen executive suit"
+	desc = "A suit that NanoTrasen gives to its executives."
+	icon_state = "ntsuit"
+	item_state = "bl_suit"
+	worn_state = "ntsuit"
+	starting_accessories = list(/obj/item/clothing/accessory/toggleable/nanotrasen_jacket, /obj/item/clothing/accessory/nt)
 
 /obj/item/clothing/under/serviceoveralls
 	name = "workman outfit"
@@ -631,3 +639,14 @@
 	icon_state = "turtleneck"
 	worn_state = "turtleneck"
 
+/obj/item/clothing/under/utility/expeditionary/monkey
+	name = "adjusted expeditionary uniform"
+	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim. It was also mangled to fit a monkey. This better be worth the NJP you'll get for making it."
+	species_restricted = list("Monkey")
+	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/wo1_monkey)
+
+/obj/item/clothing/accessory/rank/fleet/officer/wo1_monkey
+	name = "makeshift ranks (WO-1 warrant officer 1)"
+	desc = "Insignia denoting the elusive rank of Warant Officer. Too bad it's obviously fake."
+	icon_state = "fleetrank_officer"

@@ -136,8 +136,9 @@
 		qdel(src)
 
 // Copypaste due to eye code, RIP.
-/obj/item/organ/external/head/no_eyes/dion
+/obj/item/organ/external/head/no_eyes/diona
 	can_intake_reagents = 0
+	cannot_break = 1
 	max_damage = 50
 	min_broken_damage = 25
 
@@ -203,6 +204,7 @@
 // species (absorbing radiation and light respectively)
 /obj/item/organ/internal/diona/nutrients
 	name = BP_NUTRIENT
+	parent_organ = BP_CHEST
 	organ_tag = BP_NUTRIENT
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
@@ -217,5 +219,5 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
-/obj/item/organ/internal/diona/node/removed()
-	return
+/obj/item/organ/internal/diona/node/removed(var/mob/user)
+	return ..(user, 1)

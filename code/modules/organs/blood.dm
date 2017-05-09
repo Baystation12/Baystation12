@@ -28,76 +28,10 @@
 			B.data = list("donor" = src, "species" = species.name, "blood_DNA" = dna.unique_enzymes, "blood_colour" = species.get_blood_colour(src), "blood_type" = dna.b_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
 			B.color = B.data["blood_colour"]
 
-// Takes care blood loss and regeneration
-/mob/living/carbon/human/var/next_blood_squirt = 0
-/mob/living/carbon/human/handle_blood()
-	if(in_stasis)
-		return
-
-	if(!should_have_organ(BP_HEART))
-		return
-
-	var/obj/item/organ/internal/heart/heart = internal_organs_by_name["heart"]
-	if(!heart)	//not having a heart is bad for health
-		setOxyLoss(max(getOxyLoss(), maxHealth))
-		adjustOxyLoss(10)
-
-	//Bleeding out
-	var/blood_max = 0
-	var/list/do_spray = list()
-	for(var/obj/item/organ/external/temp in organs)
-
-		if(temp.robotic >= ORGAN_ROBOT)
-			continue
-
-		var/open_wound
-		if(temp.status & ORGAN_BLEEDING)
-
-			if (temp.open)
-				blood_max += 2  //Yer stomach is cut open
-
-			for(var/datum/wound/W in temp.wounds)
-				if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
-					open_wound = TRUE
-
-				if(W.bleeding())
-					if(temp.applied_pressure)
-						if(ishuman(temp.applied_pressure))
-							var/mob/living/carbon/human/H = temp.applied_pressure
-							H.bloody_hands(src, 0)
-						//somehow you can apply pressure to every wound on the organ at the same time
-						//you're basically forced to do nothing at all, so let's make it pretty effective
-						var/min_eff_damage = max(0, W.damage - 10) / 6 //still want a little bit to drip out, for effect
-						blood_max += max(min_eff_damage, W.damage - 30) / 40
-					else
-						blood_max += W.damage / 40
-
-		if(temp.status & ORGAN_ARTERY_CUT)
-			var/bleed_amount = Floor(vessel.total_volume / (temp.applied_pressure ? 400 : 250))
-			if(bleed_amount)
-				if(open_wound)
-					blood_max += bleed_amount
-					do_spray += temp.artery_name
-				else
-					vessel.remove_reagent("blood", bleed_amount)
-
-	if(world.time >= next_blood_squirt && istype(loc, /turf) && do_spray.len)
-		visible_message("<span class='danger'>Blood squirts from \the [src]'s [pick(do_spray)]!</span>")
-		// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
-		next_blood_squirt = world.time + 100
-		var/turf/sprayloc = get_turf(src)
-		blood_max -= drip(ceil(blood_max/3), sprayloc)
-		if(blood_max > 0)
-			blood_max -= blood_squirt(blood_max, sprayloc)
-			if(blood_max > 0)
-				drip(blood_max, get_turf(src))
-	else
-		drip(blood_max)
-
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	if(remove_blood(amt))
-		blood_splatter(tar,src,ddir)
+		blood_splatter(tar, src, (ddir && ddir>0), spray_dir = ddir)
 		return amt
 	return 0
 
@@ -113,8 +47,38 @@
 			sprayloc = get_step(sprayloc, spraydir)
 			if(!istype(sprayloc) || sprayloc.density)
 				break
+			var/hit_mob
+			for(var/thing in sprayloc)
+				var/atom/A = thing
+				if(!A.simulated)
+					continue
+
+				if(ishuman(A))
+					var/mob/living/carbon/human/H = A
+					if(!H.lying)
+						H.bloody_body(src)
+						H.bloody_hands(src)
+						var/blinding = FALSE
+						if(ran_zone() == BP_HEAD)
+							blinding = TRUE
+							for(var/obj/item/I in list(H.head, H.glasses, H.wear_mask))
+								if(I && (I.body_parts_covered & EYES))
+									blinding = FALSE
+									break
+						if(blinding)
+							H.eye_blurry = max(H.eye_blurry, 10)
+							H.eye_blind = max(H.eye_blind, 5)
+							to_chat(H, "<span class='danger'>You are blinded by a spray of blood!</span>")
+						else
+							to_chat(H, "<span class='danger'>You are hit by a spray of blood!</span>")
+						hit_mob = TRUE
+
+				if(hit_mob || !A.CanPass(src, sprayloc))
+					break
+
 			drip(amt, sprayloc, spraydir)
 			bled += amt
+			if(hit_mob) break
 			sleep(1)
 	return bled
 #undef BLOOD_SPRAY_DISTANCE
@@ -283,3 +247,14 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	B.fluorescent  = 0
 	B.invisibility = 0
 	return B
+
+/mob/living/carbon/human/proc/get_effective_blood_volume()
+	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+	var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
+	if(!heart || heart.is_broken())
+		blood_volume *= 0.3
+	else if(heart.is_bruised())
+		blood_volume *= 0.6
+	else if(heart.damage > 1)
+		blood_volume *= 0.8
+	return blood_volume

@@ -87,6 +87,21 @@
 	path = /obj/item/weapon/crowbar
 	category = "Tools"
 
+/datum/autolathe/recipe/int_wirer
+	name = "integrated circuit wirer"
+	path = /obj/item/device/integrated_electronics/wirer
+	category = "Tools"
+
+/datum/autolathe/recipe/int_debugger
+	name = "integrated circuit debugger"
+	path = /obj/item/device/integrated_electronics/debugger
+	category = "Tools"
+
+/datum/autolathe/recipe/int_analyzer
+	name = "integrated circuit analyzer"
+	path = /obj/item/device/integrated_electronics/analyzer
+	category = "Tools"
+
 /datum/autolathe/recipe/multitool
 	name = "multitool"
 	path = /obj/item/device/multitool
@@ -133,7 +148,7 @@
 	category = "General"
 
 /datum/autolathe/recipe/radio_bounced
-	name = "station bounced radio"
+	name = "shortwave radio"
 	path = /obj/item/device/radio/off
 	category = "General"
 
@@ -209,6 +224,10 @@
 /datum/autolathe/recipe/rcd_ammo
 	name = "matter cartridge"
 	path = /obj/item/weapon/rcd_ammo
+	category = "Engineering"
+/datum/autolathe/recipe/rcd_ammo_large
+	name = "high-capacity matter cartridge"
+	path = /obj/item/weapon/rcd_ammo/large
 	category = "Engineering"
 
 /datum/autolathe/recipe/scalpel
@@ -325,6 +344,11 @@
 	name = "proximity sensor"
 	path = /obj/item/device/assembly/prox_sensor
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/tube/large
+	name = "spotlight tube"
+	path = /obj/item/weapon/light/tube/large
+	category = "General"
 
 /datum/autolathe/recipe/tube
 	name = "light tube"

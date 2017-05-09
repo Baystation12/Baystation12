@@ -17,7 +17,7 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ears.dmi')
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
 
 /obj/item/device/radio/headset/New()
 	..()
@@ -75,6 +75,15 @@
 	..()
 	set_frequency(SYND_FREQ)
 
+/obj/item/device/radio/headset/raider
+	origin_tech = list(TECH_ILLEGAL = 2)
+	syndie = 1
+	ks1type = /obj/item/device/encryptionkey/raider
+
+/obj/item/device/radio/headset/raider/initialize()
+	..()
+	set_frequency(RAID_FREQ)
+
 /obj/item/device/radio/headset/binary
 	origin_tech = list(TECH_ILLEGAL = 3)
 	ks1type = /obj/item/device/encryptionkey/binary
@@ -127,6 +136,13 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_com
+
+/obj/item/device/radio/headset/pilot
+	name = "pilot's headset"
+	desc = "A headset with access to the command and engineering channels."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/pilot
 
 /obj/item/device/radio/headset/heads/captain
 	name = "captain's headset"
@@ -194,7 +210,7 @@
 
 /obj/item/device/radio/headset/headset_service
 	name = "service radio headset"
-	desc = "Headset used by the service staff, tasked with keeping the station full, happy and clean."
+	desc = "Headset used by the service staff, tasked with keeping everyone full, happy and clean."
 	icon_state = "srv_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_service

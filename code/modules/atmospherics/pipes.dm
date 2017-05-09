@@ -3,9 +3,11 @@
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
 	var/volume = 0
+	var/leaking = 0
 	use_power = 0
 
-	var/alert_pressure = 80*ONE_ATMOSPHERE
+	var/alert_pressure = 170*ONE_ATMOSPHERE
+	var/in_stasis = 0
 		//minimum pressure before check_pressure(...) should be called
 
 	can_buckle = 1
@@ -154,9 +156,9 @@
 	var/minimum_temperature_difference = 300
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
-	var/maximum_pressure = 70*ONE_ATMOSPHERE
-	var/fatigue_pressure = 55*ONE_ATMOSPHERE
-	alert_pressure = 55*ONE_ATMOSPHERE
+	var/maximum_pressure = 210*ONE_ATMOSPHERE
+	var/fatigue_pressure = 170*ONE_ATMOSPHERE
+	alert_pressure = 170*ONE_ATMOSPHERE
 
 	level = 1
 
@@ -190,10 +192,16 @@
 /obj/machinery/atmospherics/pipe/simple/process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
+	else if(leaking)
+		parent.mingle_with_turf(loc, volume)
 	else
 		. = PROCESS_KILL
 
 /obj/machinery/atmospherics/pipe/simple/check_pressure(pressure)
+	// Don't ask me, it happened somehow.
+	if (!istype(loc, /turf))
+		return 1
+
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	var/pressure_difference = pressure - environment.return_pressure()
@@ -209,6 +217,8 @@
 	else return 1
 
 /obj/machinery/atmospherics/pipe/simple/proc/burst()
+	ASSERT(parent)
+	parent.temporarily_store_air()
 	src.visible_message("<span class='danger'>\The [src] bursts!</span>");
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/datum/effect/effect/system/smoke_spread/smoke = new
@@ -259,8 +269,13 @@
 		qdel(src)
 	else if(node1 && node2)
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
+		if(leaking)
+			leaking = 0
 	else
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
+		if(!leaking)
+			leaking = 1
+			processing_objects |= src
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
@@ -349,6 +364,12 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/visible/fuel
+	name = "Fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/pipe/simple/hidden
 	icon_state = "intact"
@@ -389,6 +410,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel
+	name = "Fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
@@ -598,6 +625,10 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel
+	name = "Fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 
 /obj/machinery/atmospherics/pipe/manifold/hidden
 	icon_state = "map"
@@ -637,6 +668,10 @@
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel
+	name = "Fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
 
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/atmos/manifold.dmi'
@@ -849,6 +884,10 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/blue
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel
+	name = "4-way fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/manifold4w/hidden
 	icon_state = "map_4way"
 	level = 1
@@ -887,6 +926,11 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/blue
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
+	name = "4-way fuel pipe manifold"
+	color = PIPE_COLOR_ORANGE
+
 
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
@@ -981,6 +1025,11 @@
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
+/obj/machinery/atmospherics/pipe/cap/visible/fuel
+	name = "fuel pipe endcap"
+	desc = "An endcap for fuel pipes."
+	color = PIPE_COLOR_ORANGE
+
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
 	icon_state = "cap"
@@ -1001,6 +1050,12 @@
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/cap/hidden/fuel
+	name = "fuel pipe endcap"
+	desc = "An endcap for fuel pipes."
+	color = PIPE_COLOR_ORANGE
+
 
 
 /obj/machinery/atmospherics/pipe/tank

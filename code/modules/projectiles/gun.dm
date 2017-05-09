@@ -62,7 +62,7 @@
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
-	var/requires_two_hands
+	var/one_hand_penalty
 	var/wielded_item_state
 
 	var/next_fire_time = 0
@@ -88,7 +88,7 @@
 		scoped_accuracy = accuracy
 
 /obj/item/weapon/gun/update_twohanding()
-	if(requires_two_hands)
+	if(one_hand_penalty)
 		var/mob/living/M = loc
 		if(istype(M))
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))
@@ -251,9 +251,9 @@
 				"You hear a [fire_sound_text]!"
 				)
 
-	if(requires_two_hands)
+	if(one_hand_penalty)
 		if(!src.is_held_twohanded(user))
-			switch(requires_two_hands)
+			switch(one_hand_penalty)
 				if(1)
 					if(prob(50)) //don't need to tell them every single time
 						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
@@ -264,7 +264,7 @@
 				if(4 to INFINITY)
 					to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
 		else if(!user.can_wield_item(src))
-			switch(requires_two_hands)
+			switch(one_hand_penalty)
 				if(1)
 					if(prob(50)) //don't need to tell them every single time
 						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
@@ -310,10 +310,10 @@
 	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
 
-	if(requires_two_hands)
+	if(one_hand_penalty)
 		if(!held_twohanded)
-			acc_mod += -ceil(requires_two_hands/2)
-			disp_mod += requires_two_hands*0.5 //dispersion per point of two-handedness
+			acc_mod += -ceil(one_hand_penalty/2)
+			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
 
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod

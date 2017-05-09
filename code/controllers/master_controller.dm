@@ -61,9 +61,6 @@ datum/controller/game_controller/proc/setup_objects()
 
 	// Do these first since character setup will rely on them
 
-	// Set up antagonists.
-	populate_antag_type_list()
-
 	//Set up spawn points.
 	populate_spawn_points()
 
@@ -77,14 +74,19 @@ datum/controller/game_controller/proc/setup_objects()
 			CHECK_SLEEP_MASTER
 
 	report_progress("Initializing objects")
-	for(var/atom/movable/object in world)
+	for(var/atom/movable/object)
 		if(!deleted(object))
 			object.initialize()
 			CHECK_SLEEP_MASTER
 
 	report_progress("Initializing areas")
-	for(var/area/area in all_areas)
+	for(var/area/area)
 		area.initialize()
+		CHECK_SLEEP_MASTER
+
+	if(using_map.use_overmap)
+		report_progress("Initializing overmap events")
+		overmap_event_handler.create_events(using_map.overmap_z, using_map.overmap_size, using_map.overmap_event_areas)
 		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing pipe networks")

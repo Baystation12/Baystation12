@@ -1,7 +1,7 @@
 /*
  *
  *  Map Unit Tests.
- *  Zone checks / APC / Scrubber / Vent.
+ *  Zone checks / APC / Scrubber / Vent / Cryopod Computers.
  *
  *
  */
@@ -253,6 +253,66 @@ datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, va
 		log_bad("The ladder in the direction [dir2text(check_direction)] is not allowed to connect to [log_info_line(L)]")
 		return FALSE
 	return TRUE
+
+//=======================================================================================
+
+datum/unit_test/landmark_check
+	name = "MAP: Landmark Check"
+
+datum/unit_test/landmark_check/start_test()
+	var/safe_landmarks = 0
+	var/space_landmarks = 0
+
+	for(var/lm in landmarks_list)
+		var/obj/effect/landmark/landmark = lm
+		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+			log_debug("Safe landmark found: [log_info_line(landmark)]")
+			safe_landmarks++
+		else if(istype(landmark, /obj/effect/landmark/test/space_turf))
+			log_debug("Space landmark found: [log_info_line(landmark)]")
+			space_landmarks++
+		else if(istype(landmark, /obj/effect/landmark/test))
+			log_debug("Test landmark with unknown tag found: [log_info_line(landmark)]")
+
+	if(safe_landmarks != 1 || space_landmarks != 1)
+		if(safe_landmarks != 1)
+			log_bad("Found [safe_landmarks] safe landmarks. Expected 1.")
+		if(space_landmarks != 1)
+			log_bad("Found [space_landmarks] space landmarks. Expected 1.")
+		fail("Expected exactly one safe landmark, and one space landmark.")
+	else
+		pass("Exactly one safe landmark, and exactly one space landmark found.")
+
+	return 1
+
+//=======================================================================================
+
+datum/unit_test/cryopod_comp_check
+	name = "MAP: Cryopod Validity Check"
+
+datum/unit_test/cryopod_comp_check/start_test()
+	var/pass = TRUE
+	
+	for(var/obj/machinery/cryopod/C in machines)
+		if(!C.control_computer)
+			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
+			pass = FALSE
+			
+	for(var/obj/machinery/computer/cryopod/C in machines)
+		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
+			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
+			pass = FALSE
+			
+	if(pass)
+		pass("All cryopods have their respective control computers.")
+	else
+		fail("Cryopods were not set up correctly.")
+		
+	return 1
+
+//=======================================================================================
+
+
 
 #undef SUCCESS
 #undef FAILURE

@@ -36,13 +36,14 @@ var/list/ghost_traps
 	..()
 
 // Check for bans, proper atom types, etc.
-/datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target)
+/datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
 	if(!candidate.MayRespawn(1, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
 			if(jobban_isbanned(candidate, "[bantype]"))
-				to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
+				if(feedback)
+					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
 				return 0
 	return 1
 
@@ -50,23 +51,21 @@ var/list/ghost_traps
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	if(request_timeout)
 		request_timeouts[target] = world.time + request_timeout
-		destroyed_event.register(target, src, /datum/ghosttrap/proc/target_destroyed)
+		destroyed_event.register(target, src, /datum/ghosttrap/proc/unregister_target)
 	else
-		request_timeouts -= target
+		unregister_target(target)
 
 	for(var/mob/observer/ghost/O in player_list)
-		if(!O.MayRespawn())
-			continue
-		if(islist(ban_checks))
-			for(var/bantype in ban_checks)
-				if(jobban_isbanned(O, "[bantype]"))
-					continue
-		if(pref_check && !(pref_check in O.client.prefs.be_special_role))
+		if(!assess_candidate(O, target, FALSE))
+			return
+		if(pref_check && !O.client.wishes_to_be_role(pref_check))
 			continue
 		if(O.client)
 			to_chat(O, "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
-/datum/ghosttrap/proc/target_destroyed(var/destroyed_target)
-	request_timeouts -= destroyed_target
+
+/datum/ghosttrap/proc/unregister_target(var/target)
+	request_timeouts -= target
+	destroyed_event.unregister(target, src, /datum/ghosttrap/proc/unregister_target)
 
 // Handles a response to request_player().
 /datum/ghosttrap/Topic(href, href_list)
@@ -91,7 +90,7 @@ var/list/ghost_traps
 
 // Shunts the ckey/mind into the target mob.
 /datum/ghosttrap/proc/transfer_personality(var/mob/candidate, var/mob/target)
-	if(!assess_candidate(candidate))
+	if(!assess_candidate(candidate, target))
 		return 0
 	target.ckey = candidate.ckey
 	if(target.mind)
@@ -105,7 +104,7 @@ var/list/ghost_traps
 /datum/ghosttrap/proc/welcome_candidate(var/mob/target)
 	to_chat(target, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
 	to_chat(target, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
-	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>")
+	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the [station_name()]. Above all else, do no harm.</b>")
 	to_chat(target, "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>")
 	var/turf/T = get_turf(target)
 	var/obj/item/device/mmi/digital/posibrain/P = target.loc

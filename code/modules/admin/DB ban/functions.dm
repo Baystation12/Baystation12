@@ -1,3 +1,42 @@
+datum/admins/proc/DB_staffwarn_record(var/ckey, var/reason)
+	if(!check_rights((R_ADMIN|R_MOD), 0)) return
+	if(!istext(reason)) return
+	var/dbreason = sql_sanitize_text(reason)
+	var/dbckey = sql_sanitize_text(ckey)
+
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		to_chat(usr,"<span class='error'>Failed adding StaffWarn: db error</span>")
+		return
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_player WHERE ckey = '[dbckey]'")
+	query.Execute()
+	var/playerid = -1
+	if(query.NextRow())
+		playerid = query.item[1]
+	if(playerid == -1)
+		to_chat(usr,"<font color='red'>You've attempted to set staffwarn on [ckey], but they haven't been seen yet. Staffwarn can only be set on existing players.</font>")
+		return
+	query = dbcon.NewQuery("UPDATE erro_player SET staffwarn='[dbreason]' WHERE id=[playerid]")
+	query.Execute()
+	to_chat(usr,"<span class='notice'>StaffWarn saved to DB</span>")
+
+datum/admins/proc/DB_staffwarn_remove(var/ckey)
+	if(!check_rights((R_ADMIN|R_MOD), 0)) return
+	var/dbckey = sql_sanitize_text(ckey)
+
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		to_chat(usr,"<span class='error'>Failed removing StaffWarn: db error</span>")
+		return 0
+
+	var/DBQuery/query = dbcon.NewQuery("UPDATE erro_player SET staffwarn=NULL WHERE ckey='[dbckey]'")
+	query.Execute()
+	if(query.RowsAffected() != 1)
+		to_chat(usr,"<span class='error'>StaffWarn unable to be removed from DB</span>")
+		return 0
+	to_chat(usr,"<span class='notice'>StaffWarn removed from DB</span>")
+	return 1
 
 //Either pass the mob you wish to ban in the 'banned_mob' attribute, or the banckey, banip and bancid variables. If both are passed, the mob takes priority! If a mob is not passed, banckey is the minimum that needs to be passed! banip and bancid are optional.
 datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = -1, var/reason, var/job = "", var/rounds = 0, var/banckey = null, var/banip = null, var/bancid = null)
@@ -303,6 +342,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	for(var/j in nonhuman_positions)
 		output += "<option value='[j]'>[j]</option>"
 	var/list/bantypes = list("traitor","changeling","operative","revolutionary","cultist","wizard") //For legacy bans.
+	var/list/all_antag_types = all_antag_types()
 	for(var/antag_type in all_antag_types) // Grab other bans.
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		bantypes |= antag.id

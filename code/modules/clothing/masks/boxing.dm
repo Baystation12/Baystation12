@@ -1,27 +1,24 @@
 /obj/item/clothing/mask/balaclava
 	name = "balaclava"
-	desc = "LOADSAMONEY!"
+	desc = "Designed to both hide identities and keep your face comfy and warm."
 	icon_state = "balaclava"
 	item_state = "balaclava"
 	flags_inv = HIDEFACE|BLOCKHAIR
 	body_parts_covered = FACE|HEAD
+	down_body_parts_covered = HEAD
+	down_item_flags = BLOCKHAIR
+	down_icon_state = "balaclava_r"
+	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
-		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/mask.dmi',
 		)
 
 /obj/item/clothing/mask/balaclava/tactical
 	name = "green balaclava"
-	desc = "Designed to both hide identities and keep your face comfy and warm."
 	icon_state = "swatclava"
-	item_state = "balaclava"
-	flags_inv = HIDEFACE|BLOCKHAIR
-	w_class = ITEM_SIZE_SMALL
-	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/mask.dmi',
-		"Unathi" = 'icons/mob/species/unathi/mask.dmi',
-		)
+	down_icon_state = "swatclava_r"
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"

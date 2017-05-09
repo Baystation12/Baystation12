@@ -5,7 +5,7 @@
 	school = "abjuration"
 	charge_max = 600 //1 minutes for how OP this shit is (apparently not as op as I thought)
 	spell_flags = Z2NOCAST
-	invocation = "RE ALKI R'NATHA"
+	invocation = "Re-Alki R'natha."
 	invocation_type = SpI_WHISPER
 	cooldown_min = 300
 

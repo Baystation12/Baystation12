@@ -10,7 +10,6 @@
 /area/New()
 	icon_state = ""
 	uid = ++global_uid
-	all_areas += src
 
 	if(!requires_power)
 		power_light = 0
@@ -39,6 +38,9 @@
 	for (var/obj/machinery/camera/C in src)
 		cameras += C
 	return cameras
+
+/area/proc/is_shuttle_locked()
+	return 0
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
@@ -316,7 +318,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()
-	if(theAPC.operating)
+	if(theAPC && theAPC.operating)
 		for(var/obj/machinery/power/apc/temp_apc in src)
 			temp_apc.overload_lighting(70)
 		for(var/obj/machinery/door/airlock/temp_airlock in src)

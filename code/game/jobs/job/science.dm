@@ -21,6 +21,7 @@
 	minimal_player_age = 14
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
+	announced = 1
 
 /datum/job/scientist
 	title = "Scientist"

@@ -30,9 +30,6 @@
 		A.reagents.del_reagent("holywater")
 		A.reagents.add_reagent("water", holy2water)
 
-/obj/item/weapon/book/tome/cultify()
-	return
-
 /mob/proc/make_rune(var/rune, var/cost = 5, var/tome_required = 0)
 	var/has_tome = 0
 	var/has_robes = 0

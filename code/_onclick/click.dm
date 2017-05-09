@@ -17,16 +17,16 @@
 */
 
 /atom/Click(var/location, var/control, var/params) // This is their reaction to being clicked on (standard proc)
-	if(src)
-		usr.ClickOn(src, params)
+	var/datum/click_handler/click_handler = usr.GetClickHandler()
+	click_handler.OnClick(src, params)
 
 /atom/DblClick(var/location, var/control, var/params)
-	if(src)
-		usr.DblClickOn(src, params)
+	var/datum/click_handler/click_handler = usr.GetClickHandler()
+	click_handler.OnDblClick(src, params)
 
 /*
 	Standard mob ClickOn()
-	Handles exceptions: Buildmode, middle click, modified clicks, mech actions
+	Handles exceptions: middle click, modified clicks, mech actions
 
 	After that, mostly just check your state, check whether you're holding an item,
 	check whether you're adjacent to the target, then pass off the click to whoever
@@ -43,10 +43,6 @@
 		return
 
 	next_click = world.time + 1
-
-	if(client.buildmode)
-		build_click(src, client.buildmode, params, A)
-		return
 
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
@@ -348,3 +344,99 @@
 		if(T)
 			T.Click(location, control, params)
 	. = 1
+
+/*
+	Custom click handling
+*/
+
+/mob
+	var/datum/stack/click_handlers
+
+/mob/Destroy()
+	if(click_handlers)
+		click_handlers.QdelClear()
+		qdel_null(click_handlers)
+	. = ..()
+
+var/const/CLICK_HANDLER_NONE                 = 0
+var/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = 1
+var/const/CLICK_HANDLER_ALL                  = (~0)
+
+/datum/click_handler
+	var/mob/user
+	var/flags = 0
+
+/datum/click_handler/New(var/mob/user)
+	..()
+	src.user = user
+	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
+		logged_out_event.register(user, src, /datum/click_handler/proc/OnMobLogout)
+
+/datum/click_handler/Destroy()
+	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
+		logged_out_event.unregister(user, src, /datum/click_handler/proc/OnMobLogout)
+	user = null
+	. = ..()
+
+/datum/click_handler/proc/Enter()
+	return
+
+/datum/click_handler/proc/Exit()
+	return
+
+/datum/click_handler/proc/OnMobLogout()
+	user.RemoveClickHandler(src)
+
+/datum/click_handler/proc/OnClick(var/atom/A, var/params)
+	return
+
+/datum/click_handler/proc/OnDblClick(var/atom/A, var/params)
+	return
+
+/datum/click_handler/default/OnClick(var/atom/A, var/params)
+	user.ClickOn(A, params)
+
+/datum/click_handler/default/OnDblClick(var/atom/A, var/params)
+	user.DblClickOn(A, params)
+
+/mob/proc/GetClickHandler(var/datum/click_handler/popped_handler)
+	if(!click_handlers)
+		click_handlers = new()
+	if(click_handlers.is_empty())
+		PushClickHandler(/datum/click_handler/default)
+	return click_handlers.Top()
+
+/mob/proc/RemoveClickHandler(var/datum/click_handler/click_handler)
+	if(!click_handlers)
+		return
+
+	var/was_top = click_handlers.Top() == click_handler
+
+	if(was_top)
+		click_handler.Exit()
+	click_handlers.Remove(click_handler)
+	qdel(click_handler)
+
+	if(!was_top)
+		return
+	click_handler = click_handlers.Top()
+	if(click_handler)
+		click_handler.Enter()
+
+/mob/proc/PopClickHandler()
+	if(!click_handlers)
+		return
+	RemoveClickHandler(click_handlers.Top())
+
+/mob/proc/PushClickHandler(var/datum/click_handler/new_click_handler_type)
+	if((initial(new_click_handler_type.flags) & CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT) && !client)
+		return FALSE
+	if(!click_handlers)
+		click_handlers = new()
+	var/datum/click_handler/click_handler = click_handlers.Top()
+	if(click_handler)
+		click_handler.Exit()
+
+	click_handler = new new_click_handler_type(src)
+	click_handler.Enter()
+	click_handlers.Push(click_handler)

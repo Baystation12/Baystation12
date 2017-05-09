@@ -117,16 +117,6 @@
 	icon = 'icons/mob/animal.dmi'
 	var/icon_rest //so that we can have resting little guys.
 
-/mob/living/simple_animal/familiar/pet/MouseDrop(atom/over_object)
-	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
-
-	if(H.a_intent == "help" && holder_type)
-		get_scooped(H)
-		return
-	else
-		return ..()
-
 /mob/living/simple_animal/familiar/pet/Life()
 	..()
 	if(!icon_rest)

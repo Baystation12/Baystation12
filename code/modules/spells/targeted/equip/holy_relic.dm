@@ -6,7 +6,7 @@
 	charge_type = Sp_RECHARGE
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES | INCLUDEUSER
-	invocation = "YEE' RO SU!"
+	invocation = "Yee'Ro Su!"
 	invocation_type = SpI_SHOUT
 	range = -1
 	max_targets = 1

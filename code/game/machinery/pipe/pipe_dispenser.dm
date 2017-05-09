@@ -17,6 +17,7 @@
 <A href='?src=\ref[src];make=1;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=5;dir=1'>Manifold</A><BR>
 <A href='?src=\ref[src];make=8;dir=1'>Manual Valve</A><BR>
+<A href='?src=\ref[src];make=44;dir=1'>Automatic Shutoff Valve</A><BR>
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=18;dir=1'>Manual T-Valve</A><BR>
@@ -39,6 +40,14 @@
 <A href='?src=\ref[src];make=36;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=38;dir=1'>Upward Pipe</A><BR>
 <A href='?src=\ref[src];make=40;dir=1'>Downward Pipe</A><BR>
+<b>Fuel pipes:</b><BR>
+<A href='?src=\ref[src];make=45;dir=1'>Pipe</A><BR>
+<A href='?src=\ref[src];make=46;dir=5'>Bent Pipe</A><BR>
+<A href='?src=\ref[src];make=47;dir=1'>Manifold</A><BR>
+<A href='?src=\ref[src];make=51;dir=1'>Pipe Cap</A><BR>
+<A href='?src=\ref[src];make=48;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=49;dir=1'>Upward Pipe</A><BR>
+<A href='?src=\ref[src];make=50;dir=1'>Downward Pipe</A><BR>
 <b>Devices:</b><BR>
 <A href='?src=\ref[src];make=28;dir=1'>Universal pipe adapter</A><BR>
 <A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>

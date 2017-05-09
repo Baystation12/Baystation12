@@ -23,7 +23,7 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
-	name = "station bounced radio"
+	name = "shortwave radio"
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
@@ -248,10 +248,7 @@ var/global/list/default_medbay_channels = list(
 
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
-	Broadcast_Message(connection, A,
-						0, "*garbled automated announcement*", src,
-						message, from, "Automated Announcement", from, "synthesized voice",
-						4, 0, list(0), connection.frequency, "states")
+	talk_into(A, message, channel,"states")
 	qdel(A)
 	return
 
@@ -276,7 +273,7 @@ var/global/list/default_medbay_channels = list(
 	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return 0
-	
+
 	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
 
 	if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
@@ -746,6 +743,23 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/off
 	listening = 0
+
+/obj/item/device/radio/announcer
+	invisibility = 101
+	listening = 0
+	canhear_range = 0
+	channels=list("Engineering","Security", "Medical", "Command")
+
+/obj/item/device/radio/announcer/Destroy()
+	crash_with("attempt to delete a [src.type] detected, and prevented.")
+	return 1
+
+/obj/item/device/radio/announcer/initialize()
+	..()
+	loc = locate(1,1,using_map.contact_levels.len ? using_map.contact_levels[1] : 1)
+
+/obj/item/device/radio/announcer/subspace
+	subspace_transmission = 1
 
 /obj/item/device/radio/phone
 	broadcasting = 0

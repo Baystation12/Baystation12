@@ -22,11 +22,11 @@
 	if(isliving(AM))
 		if(istype(AM,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = AM
-			if(H.species && H.species.get_bodytype() == "Vox")
+			if(H.species && H.species.get_bodytype() == SPECIES_VOX)
 				return
 		else
 			var/mob/living/L = AM
-			if(L.faction == "Vox")
+			if(L.faction == SPECIES_VOX)
 				return
 		squish()
 

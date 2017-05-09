@@ -21,7 +21,9 @@
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
 		/obj/item/clothing/suit/storage/toggle/internalaffairs/plain,
-		/obj/item/clothing/glasses/sunglasses/big
+		/obj/item/clothing/glasses/sunglasses/big,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
 	)
 
 /obj/structure/closet/secure_closet/representative
@@ -47,7 +49,9 @@
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
 		/obj/item/clothing/suit/storage/toggle/internalaffairs/plain,
-		/obj/item/clothing/glasses/sunglasses/big
+		/obj/item/clothing/glasses/sunglasses/big,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
 	)
 
 //equipment closets that everyone on the crew or in research can access, for storing things securely
@@ -85,5 +89,18 @@
 	req_one_access = list(access_armory,access_heads)
 
 	will_contain = list(
-		/obj/item/weapon/gun/energy/gun = 4
+		/obj/item/weapon/gun/energy/gun = 3
+	)
+
+/obj/structure/closet/secure_closet/guncabinet/sidearm/small
+	name = "personal sidearm cabinet"
+	will_contain = list(
+		/obj/item/weapon/gun/energy/gun/small = 4
+	)
+
+/obj/structure/closet/secure_closet/guncabinet/sidearm/combined
+	name = "combined sidearm cabinet"
+	will_contain = list(
+		/obj/item/weapon/gun/energy/gun/small = 2,
+		/obj/item/weapon/gun/energy/gun = 3
 	)

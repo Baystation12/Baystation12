@@ -77,6 +77,7 @@
 		new /obj/item/clothing/mask/gas(src)
 		new /obj/item/device/flash(src)
 		new /obj/item/weapon/clipboard(src)
+		new /obj/item/clothing/suit/storage/toggle/labcoat/rd(src)
 
 /obj/structure/closet/secure_closet/animal
 	name = "animal control closet"

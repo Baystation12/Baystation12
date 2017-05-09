@@ -27,7 +27,9 @@
 		"Cat" = "cat",
 		"Mouse" = "mouse",
 		"Monkey" = "monkey",
-		"Rabbit" = "rabbit"
+		"Rabbit" = "rabbit",
+		"Mushroom" = "mushroom",
+		"Corgi" = "corgi"
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -35,7 +37,8 @@
 		"Natural" = list("says","yells","asks"),
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
-		"Feline" = list("purrs","yowls","meows")
+		"Feline" = list("purrs","yowls","meows"),
+		"Canine" = list("yaps", "barks", "woofs")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -95,6 +98,7 @@
 
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
+	verbs -= /mob/living/verb/ghost
 
 	//PDA
 	pda = new(src)
@@ -255,8 +259,8 @@
 	last_special = world.time + 100
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module))
-		to_chat(src, "There is no room to unfold inside this rig module. You're good and stuck.")
+	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai/))
+		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
@@ -412,15 +416,6 @@
 	grabber.update_inv_l_hand()
 	grabber.update_inv_r_hand()
 	return H
-
-/mob/living/silicon/pai/MouseDrop(atom/over_object)
-	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
-	if(H.a_intent == I_HELP)
-		get_scooped(H)
-		return
-	else
-		return ..()
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Wipe Software"

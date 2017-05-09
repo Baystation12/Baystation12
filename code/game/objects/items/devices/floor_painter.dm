@@ -1,8 +1,8 @@
 /obj/item/device/floor_painter
 	name = "floor painter"
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "labeler1"
-	item_state = "flight"
+	icon = 'icons/obj/device.dmi'
+	icon_state = "flpainter"
+	item_state = "fl_painter"
 
 	var/decal =        "remove all decals"
 	var/paint_dir =    "precise"
@@ -47,7 +47,7 @@
 
 	var/turf/simulated/floor/F = A
 	if(!istype(F))
-		to_chat(user, "<span class='warning'>\The [src] can only be used on station flooring.</span>")
+		to_chat(user, "<span class='warning'>\The [src] can only be used on actual flooring.</span>")
 		return
 
 	if(!F.flooring.can_paint || F.broken || F.burnt)

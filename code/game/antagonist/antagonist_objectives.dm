@@ -41,6 +41,7 @@
 	if(!src.mind)
 		return
 
+	var/all_antag_types = all_antag_types()
 	for(var/tag in all_antag_types) //we do all of them in case an admin adds an antagonist via the PP. Those do not show up in gamemode.
 		var/datum/antagonist/antagonist = all_antag_types[tag]
 		if(antagonist && antagonist.is_antagonist(src.mind))

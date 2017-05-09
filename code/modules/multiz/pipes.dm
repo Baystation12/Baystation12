@@ -48,7 +48,7 @@ obj/machinery/atmospherics/pipe/zpipe/New()
 		invisibility = i ? 101 : 0
 	update_icon()
 
-obj/machinery/atmospherics/pipe/up/process()
+obj/machinery/atmospherics/pipe/zpipe/process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
 	else
@@ -78,10 +78,10 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	qdel(src) // NOT qdel.
 
 obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
-	if(dir==3)
-		set_dir(1)
-	else if(dir==12)
-		set_dir(4)
+	if(dir == (NORTH|SOUTH))
+		set_dir(NORTH)
+	else if(dir == (EAST|WEST))
+		set_dir(EAST)
 
 obj/machinery/atmospherics/pipe/zpipe/Destroy()
 	if(node1)
@@ -229,3 +229,17 @@ obj/machinery/atmospherics/pipe/zpipe/up/red
 	color = PIPE_COLOR_RED
 obj/machinery/atmospherics/pipe/zpipe/down/red
 	color = PIPE_COLOR_RED
+
+obj/machinery/atmospherics/pipe/zpipe/up/fuel
+	name = "upwards fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
+
+obj/machinery/atmospherics/pipe/zpipe/down/fuel
+	name = "downwards fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE

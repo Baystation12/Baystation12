@@ -30,7 +30,7 @@
 		eventNumbersToPickFrom += 3
 	switch(pick(eventNumbersToPickFrom))
 		if(1)
-			command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
+			command_alert("Meteors have been detected on collision course with the [station_name()].", "Meteor Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
 					sound_to(M, sound('sound/AI/meteors.ogg'))
@@ -42,7 +42,7 @@
 				spawn_meteors()
 
 		if(2)
-			command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
+			command_alert("Gravitational anomalies detected on the [station_name()]. There is no additional data.", "Anomaly Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
 					sound_to(M, sound('sound/AI/granomalies.ogg'))
@@ -52,9 +52,9 @@
 				qdel(bh)
 		/*
 		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
-			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
+			command_alert("Space-time anomalies detected on the [station_name()]. There is no additional data.", "Anomaly Alert")
 			sound_to(world, sound('sound/AI/spanomalies.ogg'))
-			
+
 			var/list/turfs = new
 			var/turf/picked
 			for(var/turf/simulated/floor/T in world)
@@ -109,7 +109,7 @@ var/hadevent    = 0
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in shuffle(living_mob_list_))
 		if(H.client && H.stat != DEAD)
-			var/obj/item/organ/internal/appendix/A = H.get_organ("appendix")
+			var/obj/item/organ/internal/appendix/A = H.internal_organs_by_name[BP_APPENDIX]
 			if(!istype(A) || (A && A.inflamed))
 				continue
 			A.inflamed = 1
@@ -143,7 +143,7 @@ var/hadevent    = 0
 		spawncount--
 
 	spawn(rand(5000, 6000)) //Delayed announcements to keep the crew on their toes.
-		command_announcement.Announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", new_sound = 'sound/AI/aliens.ogg')
+		command_announcement.Announce("Unidentified lifesigns detected coming aboard the [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", new_sound = 'sound/AI/aliens.ogg')
 
 /proc/high_radiation_event()
 
@@ -172,7 +172,7 @@ var/hadevent    = 0
 					randmutg(H)
 					domutcheck(H,null,MUTCHK_FORCED)
 	sleep(100)
-	command_announcement.Announce("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
+	command_announcement.Announce("High levels of radiation detected near the [station_name()]. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 
 
 
@@ -211,7 +211,7 @@ var/hadevent    = 0
 				temp_timer.releasetime = 1
 
 		sleep(150)
-		command_announcement.Announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend station AI involvement.", "Security Alert")
+		command_announcement.Announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend AI involvement.", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 
@@ -221,7 +221,7 @@ var/hadevent    = 0
 			new /mob/living/simple_animal/hostile/carp(C.loc)
 	//sleep(100)
 	spawn(rand(300, 600)) //Delayed announcements to keep the crew on their toes.
-		command_announcement.Announce("Unknown biological entities have been detected near [station_name()], please stand-by.", "Lifesign Alert", new_sound = 'sound/AI/commandreport.ogg')
+		command_announcement.Announce("Unknown biological entities have been detected near the [station_name()], please stand-by.", "Lifesign Alert", new_sound = 'sound/AI/commandreport.ogg')
 
 /proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
 	if(isEvent)
@@ -289,9 +289,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			switch(rand(1,14))
 				if(1)
 					to_chat(M, "<br>")
-					to_chat(M, "<span class='danger'>THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED</span>")
+					to_chat(M, "<span class='danger'>THERE ARE [amount] [who2] ON THE [uppertext(station_name())]...LAWS UPDATED</span>")
 					to_chat(M, "<br>")
-					M.add_ion_law("THERE ARE [amount] [who2] ON THE STATION")
+					M.add_ion_law("THERE ARE [amount] [who2] ON THE [uppertext(station_name())]")
 				if(2)
 					to_chat(M, "<br>")
 					to_chat(M, "<span class='danger'>[what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED</span>")
@@ -299,9 +299,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
 				if(3)
 					to_chat(M, "<br>")
-					to_chat(M, "<span class='danger'>THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED</span>")
+					to_chat(M, "<span class='danger'>THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE [uppertext(station_name())]...LAWS UPDATED</span>")
 					to_chat(M, "<br>")
-					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION")
+					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE [uppertext(station_name())]")
 				if(4)
 					to_chat(M, "<br>")
 					to_chat(M, "<span class='danger'>HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED</span>")
@@ -314,9 +314,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE CAPTAIN, HOP AND HOS ARE [who2]")
 				if(6)
 					to_chat(M, "<br>")
-					to_chat(M, "<span class='danger'>THE STATION IS BUILT FOR [who2]...LAWS UPDATED</span>")
+					to_chat(M, "<span class='danger'>THE [uppertext(station_name())] IS BUILT FOR [who2]...LAWS UPDATED</span>")
 					to_chat(M, "<br>")
-					M.add_ion_law("THE STATION IS BUILT FOR [who2]")
+					M.add_ion_law("THE [uppertext(station_name())] IS BUILT FOR [who2]")
 				if(7)
 					to_chat(M, "<br>")
 					to_chat(M, "<span class='danger'>YOU ARE [amount] [who2]...LAWS UPDATED</span>")
@@ -354,9 +354,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
 				if(14)
 					to_chat(M, "<br>")
-					to_chat(M, "<span class='danger'>THE STATION IS [who2pref] [who2]...LAWS UPDATED</span>")
+					to_chat(M, "<span class='danger'>THE [uppertext(station_name())] IS [who2pref] [who2]...LAWS UPDATED</span>")
 					to_chat(M, "<br>")
-					M.add_ion_law("THE STATION IS [who2pref] [who2]")
+					M.add_ion_law("THE [uppertext(station_name())] IS [who2pref] [who2]")
 
 	if(botEmagChance)
 		for(var/mob/living/bot/bot in machines)

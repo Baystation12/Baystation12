@@ -10,11 +10,11 @@
 
 /datum/gear/gloves/latex
 	cost = 3
-	allowed_roles = MEDICAL_ROLES
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/nitrile
 	cost = 3
-	allowed_roles = MEDICAL_ROLES
+	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/rainbow
 	allowed_roles = RESTRICTED_ROLES
@@ -23,7 +23,7 @@
 	display_name = "gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany
 	cost = 3
-	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Merchant")
+	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Cook", "Bartender", "Passenger", "Merchant")
 
 /datum/gear/gloves/evening
 	allowed_roles = FORMAL_ROLES

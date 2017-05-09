@@ -83,7 +83,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
 
 	// New stuff
-	var/species = "Human"
+	var/species = SPECIES_HUMAN
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!

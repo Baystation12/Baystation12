@@ -6,7 +6,7 @@ var/list/nuke_disks = list()
 
 /datum/game_mode/nuclear
 	name = "Mercenary"
-	round_description = "A mercenary strike force is approaching the station!"
+	round_description = "A mercenary strike force is approaching!"
 	extended_round_description = "The Company's majority control of phoron in Nyx has marked the \
 		station to be a highly valuable target for many competing organizations and individuals. Being a \
 		colony of sizable population and considerable wealth causes it to often be the target of various \
@@ -27,7 +27,7 @@ var/list/nuke_disks = list()
 	return 0
 
 /datum/game_mode/nuclear/declare_completion()
-	var/datum/antagonist/merc = all_antag_types[MODE_MERCENARY]
+	var/datum/antagonist/merc = all_antag_types()[MODE_MERCENARY]
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
 		..()
 		return

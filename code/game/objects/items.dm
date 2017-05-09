@@ -6,7 +6,6 @@
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
-	var/abstract = 0
 	var/r_speed = 1.0
 	var/health = null
 	var/burn_point = null
@@ -67,7 +66,7 @@
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
-		"Tajara" = 'icons/cat/are/bad'
+		SPECIES_TAJARA = 'icons/cat/are/bad'
 		)
 	If index term exists and icon_override is not set, this sprite sheet will be used.
 	*/
@@ -336,7 +335,7 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
-		if(slot_wear_id)
+		if(slot_wear_id, slot_belt)
 			if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
@@ -575,7 +574,7 @@ var/list/global/slot_flags_enumeration = list(
 	set category = "Object"
 
 	var/obj/item/I = get_active_hand()
-	if(I && !I.abstract)
+	if(I && I.simulated)
 		I.showoff(src)
 
 /*

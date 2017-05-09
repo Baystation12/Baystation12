@@ -28,12 +28,27 @@
 			spawn(1 SECOND)
 				to_chat(src, "<b>WARNING:</b> It would seem that you are sharing connection or computer with another player. If you haven't done so already, please contact the staff via the Adminhelp verb to resolve this situation. Failure to do so may result in administrative action. You have been warned.")
 
+/mob/proc/maybe_send_staffwarns(var/action)
+	if(client.staffwarn)
+		for(var/client/C in admins)
+			send_staffwarn(C, action)
+
+/mob/proc/send_staffwarn(var/client/C, var/action, var/noise = 1)
+	if(check_rights((R_ADMIN|R_MOD),0,C))
+		to_chat(C,"<span class='staffwarn'>StaffWarn: [client.ckey] [action]</span><br><span class='notice'>[client.staffwarn]</span>")
+		if(noise && C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
+			sound_to(C, 'sound/effects/adminhelp.ogg')
+
+/mob
+	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
 
 /mob/Login()
 
 	player_list |= src
 	update_Login_details()
 	world.update_status()
+
+	maybe_send_staffwarns("joined the round")
 
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = list()				//remove hud items just in case
@@ -43,6 +58,8 @@
 	next_move = 1
 	set_sight(sight|SEE_SELF)
 	..()
+
+	my_client = client
 
 	if(loc && !isturf(loc))
 		client.eye = loc

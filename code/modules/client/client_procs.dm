@@ -110,7 +110,7 @@
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
-		del(src)
+		qdel(src)
 		return
 
 	// Change the way they should download resources.
@@ -175,6 +175,8 @@
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
+	if(holder)
+		src.control_freak = 0 //Devs need 0 for profiler access
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -241,6 +243,11 @@
 		related_accounts_cid += "[query_cid.item[1]], "
 		break
 
+	var/DBQuery/query_staffwarn = dbcon.NewQuery("SELECT staffwarn FROM erro_player WHERE ckey = '[sql_ckey]' AND !ISNULL(staffwarn)")
+	query_staffwarn.Execute()
+	if(query_staffwarn.NextRow())
+		src.staffwarn = query_staffwarn.item[1]
+
 	//Just the standard check to see if it's actually a number
 	if(sql_id)
 		if(istext(sql_id))
@@ -251,6 +258,9 @@
 	var/admin_rank = "Player"
 	if(src.holder)
 		admin_rank = src.holder.rank
+		for(var/client/C in clients)
+			if(C.staffwarn)
+				C.mob.send_staffwarn(src, "is connected", 0)
 
 	var/sql_ip = sql_sanitize_text(src.address)
 	var/sql_computerid = sql_sanitize_text(src.computer_id)
@@ -292,6 +302,7 @@
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
+		'html/spacemag.css',
 		'html/images/loading.gif',
 		'html/images/ntlogo.png',
 		'html/images/bluentlogo.png',

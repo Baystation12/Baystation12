@@ -120,6 +120,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/show_aooc
+	description ="AOOC chat"
+	key = "CHAT_AOOC"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
 /datum/client_preference/show_looc
 	description ="LOOC chat"
 	key = "CHAT_LOOC"

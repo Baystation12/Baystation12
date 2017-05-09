@@ -40,7 +40,7 @@
 		if(confirmTarget(D))
 			target = D
 			return
- 
+
 /mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
 	if(!..())
 		return 0
@@ -48,7 +48,7 @@
 		if(istype(D, T))
 			return 1
 	return 0
- 
+
 /mob/living/bot/cleanbot/handleAdjacentTarget()
 	if(get_turf(target) == src.loc)
 		UnarmedAttack(target)
@@ -103,7 +103,7 @@
 
 /mob/living/bot/cleanbot/GetInteractTitle()
 	. = "<head><title>Cleanbot controls</title></head>"
-	. += "<b>Automatic Station Cleaner v1.0</b>"
+	. += "<b>Automatic Cleaner v1.0</b>"
 
 /mob/living/bot/cleanbot/GetInteractPanel()
 	. = "Cleans blood: <a href='?src=\ref[src];command=blood'>[blood ? "Yes" : "No"]</a>"

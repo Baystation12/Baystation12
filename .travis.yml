@@ -3,18 +3,18 @@ sudo: false
 
 env:
   global:
-    BYOND_MAJOR="510"
-    BYOND_MINOR="1346"
-    NODE_VERSION="4"
-    ANGLE_BRACKET_COUNT=760
+    BYOND_MAJOR="511"
+    BYOND_MINOR="1381"
 
 # ALL MAPS MUST BE PRESENT HERE
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
   matrix:
-    - MAP_PATH=example
-    - MAP_PATH=exodus
-    - MAP_PATH=torch
-    - MAP_PATH=overmap_example
+    - TEST=CODE
+    - TEST=WEB
+    - TEST=MAP MAP_PATH=example
+    - TEST=MAP MAP_PATH=exodus
+    - TEST=MAP MAP_PATH=torch
+    - TEST=MAP MAP_PATH=overmap_example
 
 cache:
   directories:
@@ -28,51 +28,5 @@ addons:
       - libgcc1:i386
       - libstdc++6:i386
 
-install:
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
-  - npm install --no-spin -g gulp-cli
-  - pip install --user PyYaml -q
-  - pip install --user beautifulsoup4 -q
-
-before_script:
-  - cd tgui && npm install --no-spin && cd ..
-  - chmod +x ./install-byond.sh
-  - ./install-byond.sh
-
 script:
-  - shopt -s globstar
-  - scripts/validateTravisContainsAllMaps.sh
-  - (! grep 'step_[xy]' maps/**/*.dmm)
-  - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
-  - (! grep -En "<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>" **/*.dm)
-  - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting 0)"; [ $num -eq 0 ])
-  - (num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting 5 or less)"; [ $num -le 5 ])
-  - (num=`grep -E '"/atom' **/*.dm | wc -l`; echo "$num /atom text paths (expecting 2 or less)"; [ $num -le 2 ])
-  - (num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting 2 or less)"; [ $num -le 2 ])
-  - (num=`grep -E '"/datum' **/*.dm | wc -l`; echo "$num /datum text paths (expecting 2 or less)"; [ $num -le 2 ])
-  - (num=`grep -E '"/mob' **/*.dm | wc -l`; echo "$num /mob text paths (expecting 2 or less)"; [ $num -le 2 ])
-  - (num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 12 or less)"; [ $num -le 12 ])
-  - (num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting 8 or less)"; [ $num -le 8 ])
-  - (num=`grep -E 'world<<|world[[:space:]]<<' **/*.dm | wc -l`; echo "$num world<< uses (expecting 5 or less)"; [ $num -le 5 ])
-  - (num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting 52 or less)"; [ $num -le 52 ])
-  - (num=`grep -P '(?<!<)<<(?!<)' **/*.dm | wc -l`; echo "$num << uses (expecting ${ANGLE_BRACKET_COUNT} or less)"; [ $num -le ${ANGLE_BRACKET_COUNT} ])
-  - (num=`find ./html/changelogs -not -name "*.yml" | wc -l`; echo "$num non-yml files (expecting exactly 2)"; [ $num -eq 2 ])
-  - awk -f tools/indentation.awk **/*.dm
-  - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
-  - python tools/TagMatcher/tag-matcher.py .
-  - python tools/PunctuationChecker/punctuation-checker.py .
-  - python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs
-  - cd tgui && gulp
-  - cd ..
-  - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - python tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm
-  - cp config/example/* config/
-  - scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme
-  - grep ", 0 warnings" build_log.txt
-  - DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt
-  - grep "All Unit Tests Passed" log.txt
-  - grep "Caught 0 Runtimes" log.txt
-  - (! grep "runtime error:" log.txt)
-  - (! grep 'Process scheduler caught exception processing' log.txt)
-  - (! grep "WARNING:" log.txt)
-  - (! grep "ERROR:" log.txt)
+  - test/run-test.sh

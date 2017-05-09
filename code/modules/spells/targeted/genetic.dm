@@ -37,7 +37,7 @@ code\game\dna\genes\goon_powers.dm
 	charge_max = 300
 
 	spell_flags = 0
-	invocation = "STI KALY"
+	invocation = "Sty Kaly."
 	invocation_type = SpI_WHISPER
 	message = "<span class='danger'>Your eyes cry out in pain!</span>"
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 1, Sp_POWER = 3)

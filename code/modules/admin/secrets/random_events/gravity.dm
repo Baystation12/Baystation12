@@ -2,7 +2,7 @@
 * Gravity *
 **********/
 /datum/admin_secret_item/random_event/gravity
-	name = "Toggle Station Artificial Gravity"
+	name = "Toggle Artificial Gravity"
 
 /datum/admin_secret_item/random_event/gravity/can_execute(var/mob/user)
 	if(!(ticker && ticker.mode))

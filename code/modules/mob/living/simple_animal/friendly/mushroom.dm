@@ -17,10 +17,12 @@
 	var/datum/seed/seed
 	var/harvest_time
 	var/min_explode_time = 1200
+	var/global/total_mushrooms = 0
 
 /mob/living/simple_animal/mushroom/New()
 	..()
 	harvest_time = world.time
+	total_mushrooms++
 
 /mob/living/simple_animal/mushroom/verb/spawn_spores()
 
@@ -44,10 +46,11 @@
 	spore_explode()
 
 /mob/living/simple_animal/mushroom/death()
-	if(prob(30))
-		spore_explode()
-		return
-	..()
+	. = ..()
+	if(.)
+		total_mushrooms--
+		if(total_mushrooms < config.maximum_mushrooms && prob(30))
+			spore_explode()
 
 /mob/living/simple_animal/mushroom/proc/spore_explode()
 	if(!seed)
@@ -57,6 +60,7 @@
 	for(var/turf/simulated/target_turf in orange(1,src))
 		if(prob(60) && !target_turf.density && src.Adjacent(target_turf))
 			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
+	death(0)
 	seed.thrown_at(src,get_turf(src),1)
 	if(src)
-		gib()
+		qdel(src)

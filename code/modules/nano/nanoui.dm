@@ -408,7 +408,7 @@ nanoui is used to open and update nano browser uis
 	// An attempted fix to UIs sometimes locking up spamming runtime errors due to src_object being null for whatever reason.
 	// This hard-deletes the UI, preventing the device that uses the UI from being locked up permanently.
 	if(!src_object)
-		del(src)
+		qdel(src)
 
 	var/window_size = ""
 	if (width && height)
@@ -461,7 +461,8 @@ nanoui is used to open and update nano browser uis
 		return
 	var/params = "\ref[src]"
 
-	winset(user, window_id, "on-close=\"nanoclose [params]\"")
+	spawn(2)
+		winset(user, window_id, "on-close=\"nanoclose [params]\"")
 
  /**
   * Push data to an already open UI window
