@@ -507,6 +507,32 @@ var/global/datum/controller/occupations/job_master
 		if(job.req_admin_notify)
 			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
+
+		// EMAIL GENERATION
+		var/domain
+		if(H.char_branch && H.char_branch.email_domain)
+			domain = H.char_branch.email_domain
+		else
+			domain = "freemail.nt"
+		var/complete_login = "[replacetext(lowertext(H.real_name), " ", ".")]@[domain]"
+
+		// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+		// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+		if(ntnet_global.does_email_exist(complete_login))
+			complete_login = "[replacetext(lowertext(H.real_name), " ", ".")][rand(100, 999)]@[domain]"
+
+		// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+		if(ntnet_global.does_email_exist(complete_login))
+			to_chat(H, "You were not assigned an email address.")
+			H.mind.store_memory("You were not assigned an email address.")
+		else
+			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+			EA.password = GenerateKey()
+			EA.login = 	complete_login
+			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
+			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+		// END EMAIL GENERATION
+
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
 			var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(H), slot_glasses)

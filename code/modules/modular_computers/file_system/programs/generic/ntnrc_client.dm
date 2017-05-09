@@ -28,7 +28,7 @@
 		if(!channel)
 			return 1
 		var/mob/living/user = usr
-		var/message = sanitize(input(user, "Enter message or leave blank to cancel: "))
+		var/message = sanitize(input(user, "Enter message or leave blank to cancel: "), 512)
 		if(!message || !channel)
 			return
 		channel.add_message(message, username)
@@ -65,7 +65,7 @@
 	if(href_list["PRG_newchannel"])
 		. = 1
 		var/mob/living/user = usr
-		var/channel_title = sanitize(input(user,"Enter channel name or leave blank to cancel:"))
+		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
 		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation()
@@ -95,7 +95,7 @@
 	if(href_list["PRG_changename"])
 		. = 1
 		var/mob/living/user = usr
-		var/newname = sanitize(input(user,"Enter new nickname or leave blank to cancel:"))
+		var/newname = sanitize(input(user,"Enter new nickname or leave blank to cancel:"), 20)
 		if(!newname)
 			return 1
 		if(channel)
@@ -132,7 +132,7 @@
 		if(!operator_mode || !channel)
 			return 1
 		var/mob/living/user = usr
-		var/newname = sanitize(input(user, "Enter new channel name or leave blank to cancel:"))
+		var/newname = sanitize(input(user, "Enter new channel name or leave blank to cancel:"), 64)
 		if(!newname || !channel)
 			return
 		channel.add_status_message("Channel renamed from [channel.title] to [newname] by operator.")
