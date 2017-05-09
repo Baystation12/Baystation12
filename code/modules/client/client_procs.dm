@@ -177,10 +177,12 @@
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
+	loadclientdb() // Load their files.
 	//////////////
 	//DISCONNECT//
 	//////////////
 /client/Del()
+	saveclientdb()
 	if(holder)
 		holder.owner = null
 		admins -= src

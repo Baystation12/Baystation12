@@ -149,6 +149,7 @@
 
 
 	spawn(3000)		//so we aren't adding to the round-start lag
+		Announce()
 		if(config.ToRban)
 			ToRban_autoupdate()
 
