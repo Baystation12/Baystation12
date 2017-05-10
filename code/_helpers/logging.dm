@@ -99,7 +99,7 @@
 	game_log("MISC", text)
 
 /proc/log_unit_test(text)
-	world.log << "## UNIT_TEST ##: [text]"
+	world.log << "\[[time2text(world.realtime, "hh:mm:ss")]\] ## UNIT_TEST ##: [text]"
 	log_debug(text)
 
 //pretty print a direction bitflag, can be useful for debugging.
