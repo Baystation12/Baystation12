@@ -143,6 +143,8 @@
 
 /obj/machinery/power/supermatter/proc/get_epr()
 	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
 	var/datum/gas_mixture/air = T.return_air()
 	if(!air)
 		return 0
