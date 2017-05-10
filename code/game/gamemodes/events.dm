@@ -33,7 +33,7 @@
 			command_alert("Meteors have been detected on collision course with the [station_name()].", "Meteor Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					sound_to(M, sound('sound/AI/meteors.ogg'))
+					sound_to(M, sound('sound/AI/torch/meteorstorch.ogg'))
 			spawn(100)
 				meteor_wave()
 				spawn_meteors()
@@ -45,7 +45,7 @@
 			command_alert("Gravitational anomalies detected on the [station_name()]. There is no additional data.", "Anomaly Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					sound_to(M, sound('sound/AI/granomalies.ogg'))
+					sound_to(M, sound('sound/AI/torch/gravanomaliestorch.ogg'))
 			var/turf/T = pick(blobstart)
 			var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 			spawn(rand(50, 300))
@@ -143,7 +143,7 @@ var/hadevent    = 0
 		spawncount--
 
 	spawn(rand(5000, 6000)) //Delayed announcements to keep the crew on their toes.
-		command_announcement.Announce("Unidentified lifesigns detected coming aboard the [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", new_sound = 'sound/AI/aliens.ogg')
+		using_map.unidentified_lifesigns_announcement()
 
 /proc/high_radiation_event()
 
@@ -172,7 +172,7 @@ var/hadevent    = 0
 					randmutg(H)
 					domutcheck(H,null,MUTCHK_FORCED)
 	sleep(100)
-	command_announcement.Announce("High levels of radiation detected near the [station_name()]. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
+	using_map.radiation_detected_announcement()
 
 
 
@@ -221,7 +221,7 @@ var/hadevent    = 0
 			new /mob/living/simple_animal/hostile/carp(C.loc)
 	//sleep(100)
 	spawn(rand(300, 600)) //Delayed announcements to keep the crew on their toes.
-		command_announcement.Announce("Unknown biological entities have been detected near the [station_name()], please stand-by.", "Lifesign Alert", new_sound = 'sound/AI/commandreport.ogg')
+		using_map.unknown_biological_entities_announcement()
 
 /proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
 	if(isEvent)

@@ -21,12 +21,12 @@ var/datum/antagonist/xenos/xenomorphs
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 
-	spawn_announcement = "Unidentified lifesigns detected coming aboard. Secure any exterior access, including ducting and ventilation."
 	spawn_announcement_title = "Lifesign Alert"
-	spawn_announcement_sound = 'sound/AI/aliens.ogg'
 	spawn_announcement_delay = 5000
 
 /datum/antagonist/xenos/New(var/no_reference)
+	spawn_announcement = replacetext(using_map.unidentified_lifesigns_message, "%STATION_NAME%", station_name())
+	spawn_announcement_sound = using_map.xenomorph_spawn_sound
 	..()
 	if(!no_reference)
 		xenomorphs = src

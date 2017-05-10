@@ -34,10 +34,6 @@
 	shuttle_leaving_dock = "Attention all hands: Jump initiated, exiting bluespace in %ETA%."
 	shuttle_called_message = "Attention all hands: Jump sequence initiated. Transit procedures are now in effect. Jump in %ETA%."
 	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
-	emergency_shuttle_docked_message = "Attention all hands: the escape pods are now unlocked. You have %ETD% to board the escape pods."
-	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, arriving at rendezvous point in %ETA%."
-	emergency_shuttle_called_message = "Attention all hands: emergency evacuation procedures are now in effect. Escape pods will unlock in %ETA%"
-	emergency_shuttle_recall_message = "Attention all hands: emergency evacuation sequence aborted. Return to normal operating conditions."
 
 	evac_controller_type = /datum/evacuation_controller/starship
 
@@ -49,6 +45,7 @@
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
+	minor_announcement = new(new_sound = 'sound/AI/torch/commandreport.ogg')
 
 /datum/map/torch/send_welcome()
 	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><hr />"
