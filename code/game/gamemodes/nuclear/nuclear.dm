@@ -5,8 +5,8 @@
 var/list/nuke_disks = list()
 
 /datum/game_mode/nuclear
-	name = "Mercenary"
-	round_description = "A mercenary strike force is approaching!"
+	name = "Intruders"
+	round_description = "A group of unidentified outsiders is approaching!"
 	extended_round_description = "The Company's majority control of phoron in Nyx has marked the \
 		station to be a highly valuable target for many competing organizations and individuals. Being a \
 		colony of sizable population and considerable wealth causes it to often be the target of various \
