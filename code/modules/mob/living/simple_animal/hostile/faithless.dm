@@ -13,9 +13,9 @@
 	maxHealth = 80
 	health = 80
 
-	harm_intent_damage = 10
-	melee_damage_lower = 15
-	melee_damage_upper = 15
+	harm_intent_damage = 15
+	melee_damage_lower = 20
+	melee_damage_upper = 25
 	attacktext = "gripped"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
@@ -53,3 +53,11 @@
 
 /mob/living/simple_animal/hostile/faithless/cult/cultify()
 	return
+
+/mob/living/simple_animal/hostile/faithless/wizard
+	speed = 3
+	maxHealth = 140
+	health = 140
+	harm_intent_damage = 20
+	melee_damage_lower = 20
+	melee_damage_upper = 35
