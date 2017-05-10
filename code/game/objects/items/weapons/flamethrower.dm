@@ -23,15 +23,10 @@
 
 
 /obj/item/weapon/flamethrower/Destroy()
-	if(weldtool)
-		qdel(weldtool)
-	if(igniter)
-		qdel(igniter)
-	if(ptank)
-		qdel(ptank)
-	..()
-	return
-
+	qdel_null(weldtool)
+	qdel_null(igniter)
+	qdel_null(ptank)
+	. = ..()
 
 /obj/item/weapon/flamethrower/process()
 	if(!lit)
