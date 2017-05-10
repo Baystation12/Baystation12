@@ -40,36 +40,6 @@
 /obj/structure/deity/proc/attack_deity(var/mob/living/deity/deity)
 	return
 
-/obj/structure/deity/altar
-	name = "altar"
-	desc = "A structure made for the express purpose of religion."
-	health = 50
-	power_adjustment = 10
-	must_be_converted_turf = 0
-	important_structure = 1
-	build_cost = 500
-
-/obj/structure/deity/altar/New()
-	..()
-	if(linked_god)
-		linked_god.power_min += 10
-
-/obj/structure/deity/altar/Destroy()
-	if(linked_god)
-		linked_god.power_min -= 10
-		to_chat(src, "<span class='danger'>You've lost an altar!</span>")
-	return ..()
-
-/obj/structure/deity/altar/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
-		if(G.state >= GRAB_AGGRESSIVE)
-			G.affecting.forceMove(get_turf(src))
-			G.affecting.Weaken(1)
-			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")
-			user.drop_from_inventory(G)
-	else ..()
-
 /obj/structure/deity/pylon
 	name = "pylon"
 	desc = "A crystal platform used to communicate with the deity."

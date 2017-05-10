@@ -51,10 +51,13 @@
 	if(!can_use_phenomena(20,L))
 		return
 
-	to_chat(L, "<span class='cult'><font size='2'>A weak power intrudes into your mind. You can choose to ignore it, or give in to servitude. <a href='?src=\ref[src];join_cult=1'>Give In</a></font></span>")
-	spawn(100)
-		if(!is_follower(L))
-			to_chat(src, "<span class='notice'>\The [L] is resisting your power...</span>")
+	to_chat(src,"<span class='notice'>You give \the [L] a chance to willingly convert. May they choose wisely.</span>")
+	var/choice = alert(L, "You feel a weak power enter your mind attempting to convert it.", "Conversion", "Allow Conversion", "Deny Conversion")
+	if(choice == "Allow Conversion")
+		godcult.add_antagonist_mind(L.mind,1,"a servant of [src]. You willingly give your mind to it, may it bring you fortune", "Servant of [src]", specific_god=src)
+	else
+		to_chat(L, "<span class='warning'>With little difficulty you force the intrusion out of your mind. May it stay that way.</span>")
+		to_chat(src, "<span class='warning'>\The [L] decides not to convert.</span>")
 
 /mob/living/deity/verb/conversion_forced(var/mob/living/L)
 	set name = "Conversion - Forced (50)"
@@ -72,29 +75,8 @@
 		var/list/V = form.struct_vars[/obj/structure/deity/altar]
 		to_chat(src,"<span class='warning'>They need to be on a [V["name"]] to be forced to convert!</span>")
 
-	var/count = 1
-	while(count < 5)
-		sleep(60)
-		if(get_turf(L) != T)
-			to_chat(L, "<span class='notice'>You break free!</span>")
-			to_chat(src, "<span class='warning'>\The [L] has moved off \the [A], rendering your conversion moot!</span>")
-			return
-
-		var/text = "You feel strange."
-		switch(count)
-			if(2)
-				text = "You can't think straight..."
-				L.dizziness += 10
-			if(3)
-				text = "You feel like your thought are being overriden..."
-				L.dizziness += 20
-			if(4)
-				text = "You can't.... concentrate.. must... resist!"
-		to_chat(L, "<span class='warning'>[text]</span>")
-		count++
-	L.dizziness = 0
-	take_charge(L, 300)
-	godcult.add_antagonist_mind(L.mind,1,"a servant of [src]. Your loyalty may be faulty, but you know that it now has control over you...", "Servant of [src]", specific_god=src)
+	A.set_target(L)
+	to_chat(src, "<span class='notice'>You embue \the [A] with your power, setting forth to force \the [L] to your will.</span>")
 
 /mob/living/deity/verb/punish(var/mob/living/L)
 	set name = "Punish Follower (0-20)"
