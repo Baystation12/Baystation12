@@ -15,6 +15,9 @@
 	space_time_anomaly_sound = 'sound/AI/spanomalies.ogg'
 	unidentified_lifesigns_sound = 'sound/AI/aliens.ogg'
 
+	electrical_storm_moderate_sound = null
+	electrical_storm_major_sound = null
+
 /datum/map/exodus/level_x_biohazard_sound(var/bio_level)
 	switch(bio_level)
 		if(7)

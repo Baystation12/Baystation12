@@ -29,6 +29,9 @@
 
 	xenomorph_spawn_sound = 'sound/AI/torch/aliens.ogg'
 
+	electrical_storm_moderate_sound = 'sound/AI/torch/electricalstormmoderate.ogg'
+	electrical_storm_major_sound = 'sound/AI/torch/electricalstormmajor.ogg'
+
 /datum/map/torch/level_x_biohazard_sound(var/bio_level)
 	switch(bio_level)
 		if(7)

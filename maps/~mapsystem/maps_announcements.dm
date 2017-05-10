@@ -4,6 +4,9 @@
 
 	var/command_report_sound
 
+	var/electrical_storm_moderate_sound
+	var/electrical_storm_major_sound
+
 	var/grid_check_message = "Abnormal activity detected in the %STATION_NAME%'s power system. As a precaution, the %STATION_NAME%'s power must be shut down for an indefinite duration."
 	var/grid_check_sound
 
