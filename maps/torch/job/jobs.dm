@@ -411,6 +411,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
+	minimal_player_age = 7
 	selection_color = "#5b4d20"
 	alt_titles = list(
 		"Mechanic",
