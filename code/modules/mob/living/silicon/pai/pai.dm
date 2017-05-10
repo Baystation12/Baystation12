@@ -277,8 +277,6 @@
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
 
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = src
 	src.forceMove(get_turf(card))
 
 	card.forceMove(src)
@@ -379,8 +377,6 @@
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
 	src.stop_pulling()
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = card
 
 	//stop resting
 	resting = 0

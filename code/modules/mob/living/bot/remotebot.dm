@@ -138,13 +138,6 @@
 
 	src.interact(usr)
 
-
-/obj/item/device/bot_controller/dropped(var/mob/living/user)
-	if(user.client.eye == bot)
-		user.client.eye = user
-	return ..()
-
-
 /obj/item/device/bot_controller/afterattack(atom/A, mob/living/user)
 	if(bot)
 		bot.command(A)

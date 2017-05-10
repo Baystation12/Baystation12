@@ -236,6 +236,7 @@
 #include "code\datums\repositories\attack_logs.dm"
 #include "code\datums\repositories\cameras.dm"
 #include "code\datums\repositories\client.dm"
+#include "code\datums\repositories\client_eye.dm"
 #include "code\datums\repositories\decls.dm"
 #include "code\datums\repositories\follow.dm"
 #include "code\datums\repositories\images.dm"

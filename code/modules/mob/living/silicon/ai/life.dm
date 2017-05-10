@@ -4,7 +4,6 @@
 
 	if (src.stat!=CONSCIOUS)
 		src.cameraFollow = null
-		src.reset_view(null)
 
 	src.updatehealth()
 

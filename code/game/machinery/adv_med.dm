@@ -45,8 +45,6 @@
 		to_chat(usr, "<span class='warning'>The subject cannot have abiotic items on.</span>")
 		return
 	usr.pulling = null
-	usr.client.perspective = EYE_PERSPECTIVE
-	usr.client.eye = src
 	usr.forceMove(src)
 	src.occupant = usr
 	update_use_power(2)
@@ -63,10 +61,6 @@
 		return
 	for(var/obj/O in src)
 		O.dropInto(loc)
-		//Foreach goto(30)
-	if (src.occupant.client)
-		src.occupant.client.eye = src.occupant.client.mob
-		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_use_power(1)

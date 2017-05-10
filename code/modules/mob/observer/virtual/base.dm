@@ -1,6 +1,5 @@
-var/list/all_virtual_listeners = list()
-
 /mob/observer/virtual
+	name = "virtual mob"
 	icon = 'icons/mob/virtual.dmi'
 	invisibility = INVISIBILITY_SYSTEM
 	see_in_dark = SEE_IN_DARK_DEFAULT
@@ -21,16 +20,15 @@ var/list/all_virtual_listeners = list()
 	if(!istype(host, host_type))
 		CRASH("Received an unexpected host type. Expected [host_type], was [log_info_line(host)].")
 	src.host = host
+	update_name()
 	moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
 
 	mob_list -= src
-	all_virtual_listeners += src
 
 	updateicon()
 
 /mob/observer/virtual/Destroy()
 	moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
-	all_virtual_listeners -= src
 	host = null
 	return ..()
 
@@ -45,6 +43,16 @@ var/list/all_virtual_listeners = list()
 		overlays += overlay_icons["hear"]
 	if(abilities & VIRTUAL_ABILITY_SEE)
 		overlays += overlay_icons["see"]
+	update_name()
+
+/mob/observer/virtual/proc/update_name()
+	name = list()
+	name += initial(name)
+	if(abilities & VIRTUAL_ABILITY_HEAR)
+		name += "hear"
+	if(abilities & VIRTUAL_ABILITY_SEE)
+		name += "see"
+	name = jointext(name, " - ")
 
 /***********************
 * Virtual Mob Creation *

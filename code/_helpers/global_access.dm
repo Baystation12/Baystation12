@@ -219,8 +219,6 @@
 			return global.all_ui_styles;
 		if("all_unit_tests_passed")
 			return global.all_unit_tests_passed;
-		if("all_virtual_listeners")
-			return global.all_virtual_listeners;
 		if("alldepartments")
 			return global.alldepartments;
 		if("alldirs")
@@ -1682,8 +1680,6 @@
 			global.all_ui_styles=newval;
 		if("all_unit_tests_passed")
 			global.all_unit_tests_passed=newval;
-		if("all_virtual_listeners")
-			global.all_virtual_listeners=newval;
 		if("alldepartments")
 			global.alldepartments=newval;
 		if("alldirs")
@@ -3035,7 +3031,6 @@
 	"all_species",
 	"all_ui_styles",
 	"all_unit_tests_passed",
-	"all_virtual_listeners",
 	"alldepartments",
 	"alldirs",
 	"allfaxes",

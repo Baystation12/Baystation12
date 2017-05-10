@@ -61,8 +61,6 @@
 	owner = user
 	owner.eyeobj = src
 	name = "[owner.name] ([name_sufix])" // Update its name
-	if(owner.client)
-		owner.client.eye = src
 	setLoc(owner)
 	visualnet.update_eye_chunks(src, TRUE)
 
@@ -88,8 +86,6 @@
 
 	forceMove(T)
 
-	if(owner.client)
-		owner.client.eye = src
 	if(owner_follows_eye)
 		owner.forceMove(loc)
 

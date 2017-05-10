@@ -135,9 +135,6 @@
 	src.add_fingerprint(user)
 	if(do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
 		user.visible_message("<span class='danger'>\The [user] stuffs \the [victim] into \the [src]!</span>")
-		if(victim.client)
-			victim.client.perspective = EYE_PERSPECTIVE
-			victim.client.eye = src
 		victim.forceMove(src)
 		src.occupant = victim
 		update_icon()
@@ -158,9 +155,6 @@
 		return
 	for(var/obj/O in src)
 		O.dropInto(loc)
-	if (src.occupant.client)
-		src.occupant.client.eye = src.occupant.client.mob
-		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_icon()

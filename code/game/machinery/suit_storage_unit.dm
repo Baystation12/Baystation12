@@ -531,9 +531,6 @@
 			to_chat(OCCUPANT, "<span class='notice'>The machine kicks you out!</span>")
 		if(user.loc != src.loc)
 			to_chat(OCCUPANT, "<span class='notice'>You leave the not-so-cozy confines of the SSU.</span>")
-
-		src.OCCUPANT.client.eye = src.OCCUPANT.client.mob
-		src.OCCUPANT.client.perspective = MOB_PERSPECTIVE
 	src.OCCUPANT.loc = src.loc
 	src.OCCUPANT = null
 	if(!src.isopen)
@@ -575,9 +572,7 @@
 	visible_message("\The [usr] starts squeezing into the suit storage unit!", 3)
 	if(do_after(usr, 10, src))
 		usr.stop_pulling()
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
-		usr.loc = src
+		usr.forceMove(src)
 //		usr.metabslow = 1
 		src.OCCUPANT = usr
 		src.isopen = 0 //Close the thing after the guy gets inside
@@ -620,10 +615,7 @@
 		if(do_after(user, 20, src))
 			if(!G || !G.affecting) return //derpcheck
 			var/mob/M = G.affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.loc = src
+			M.forceMove(src)
 			src.OCCUPANT = M
 			src.isopen = 0 //close ittt
 
@@ -843,10 +835,7 @@
 		if(do_after(user, 20, src))
 			if(!G || !G.affecting) return
 			var/mob/M = G.affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.loc = src
+			M.forceMove(src)
 			src.occupant = M
 
 			src.add_fingerprint(user)
@@ -1112,10 +1101,6 @@
 
 	if (!occupant)
 		return
-
-	if (occupant.client)
-		occupant.client.eye = occupant.client.mob
-		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.loc = get_turf(occupant)
 	occupant = null

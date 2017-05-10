@@ -114,9 +114,6 @@
 			for (var/mob/V in viewers(usr))
 				V.show_message("[usr] starts putting [GM.name] into the disposal.", 3)
 			if(do_after(usr, 20, src))
-				if (GM.client)
-					GM.client.perspective = EYE_PERSPECTIVE
-					GM.client.eye = src
 				GM.forceMove(src)
 				for (var/mob/C in viewers(src))
 					C.show_message("<span class='warning'>[GM.name] has been placed in the [src] by [user].</span>", 3)
@@ -176,9 +173,6 @@
 		admin_attack_log(user, target, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 	else
 		return
-	if (target.client)
-		target.client.perspective = EYE_PERSPECTIVE
-		target.client.eye = src
 
 	target.forceMove(src)
 
@@ -200,11 +194,7 @@
 
 // leave the disposal
 /obj/machinery/disposal/proc/go_out(mob/user)
-
-	if (user.client)
-		user.client.eye = user.client.mob
-		user.client.perspective = MOB_PERSPECTIVE
-	user.forceMove(src.loc)
+	user.dropInto(loc)
 	update_icon()
 	return
 
@@ -588,10 +578,6 @@
 	proc/merge(var/obj/structure/disposalholder/other)
 		for(var/atom/movable/AM in other)
 			AM.forceMove(src)		// move everything in other holder to this one
-			if(ismob(AM))
-				var/mob/M = AM
-				if(M.client)	// if a client mob, update eye to follow this holder
-					M.client.eye = src
 
 		qdel(other)
 
@@ -1662,10 +1648,6 @@
 
 // check if mob has client, if so restore client view on eject
 /mob/pipe_eject(var/direction)
-	if (src.client)
-		src.client.perspective = MOB_PERSPECTIVE
-		src.client.eye = src
-
 	return
 
 /obj/effect/decal/cleanable/blood/gibs/pipe_eject(var/direction)

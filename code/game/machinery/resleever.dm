@@ -213,16 +213,11 @@ obj/machinery/resleever/process()
 			occupant = M
 			occupant_name = occupant.name
 			update_icon()
-			if(M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
 
 /obj/machinery/resleever/proc/eject_occupant()
 	if(!(occupant))
 		return
-	occupant.forceMove(loc)
-	if(occupant.client)
-		occupant.reset_view(null)
+	occupant.dropInto(loc)
 	occupant = null
 	occupant_name = null
 	update_icon()

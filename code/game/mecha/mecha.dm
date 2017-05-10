@@ -1050,11 +1050,6 @@
 
 /obj/mecha/proc/moved_inside(var/mob/living/carbon/human/H as mob)
 	if(H && H.client && H in range(1))
-		H.reset_view(src)
-		/*
-		H.client.perspective = EYE_PERSPECTIVE
-		H.client.eye = src
-		*/
 		H.stop_pulling()
 		H.forceMove(src)
 		src.occupant = H
@@ -1139,12 +1134,6 @@
 			to_chat(occupant, "You were blown out of the mech!")
 	*/
 		src.log_message("[mob_container] moved out.")
-		occupant.reset_view()
-		/*
-		if(src.occupant.client)
-			src.occupant.client.eye = src.occupant.client.mob
-			src.occupant.client.perspective = MOB_PERSPECTIVE
-		*/
 		src.occupant << browse(null, "window=exosuit")
 		if(istype(mob_container, /obj/item/device/mmi))
 			var/obj/item/device/mmi/mmi = mob_container

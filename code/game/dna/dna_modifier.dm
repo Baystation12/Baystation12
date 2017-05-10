@@ -109,12 +109,10 @@
 		to_chat(usr, "<span class='warning'>The subject cannot have abiotic items on.</span>")
 		return
 	usr.stop_pulling()
-	usr.reset_view(src)
-	usr.loc = src
+	usr.forceMove(src)
 	src.occupant = usr
 	src.icon_state = "scanner_1"
 	src.add_fingerprint(usr)
-	return
 
 /obj/machinery/dna_scannernew/attackby(var/obj/item/weapon/item as obj, var/mob/user as mob)
 	if(istype(item, /obj/item/weapon/reagent_containers/glass))
@@ -165,10 +163,7 @@
 	src.add_fingerprint(user)
 
 /obj/machinery/dna_scannernew/proc/put_in(var/mob/M)
-	if(M.client)
-		M.client.perspective = EYE_PERSPECTIVE
-		M.client.eye = src
-	M.loc = src
+	M.forceMove(src)
 	src.occupant = M
 	src.icon_state = "scanner_1"
 
@@ -189,11 +184,9 @@
 /obj/machinery/dna_scannernew/proc/go_out()
 	if ((!( src.occupant ) || src.locked))
 		return
-	src.occupant.reset_view(null)
-	src.occupant.loc = src.loc
+	src.occupant.dropInto(loc)
 	src.occupant = null
 	src.icon_state = "scanner_0"
-	return
 
 /obj/machinery/dna_scannernew/ex_act(severity)
 	switch(severity)

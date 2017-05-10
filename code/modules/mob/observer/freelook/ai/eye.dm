@@ -53,10 +53,7 @@
 	if(!eyeobj) return
 	if(!new_eye)
 		new_eye = src
-	qdel(eyeobj) // No AI, no Eye
-	eyeobj = null
-	if(client)
-		client.eye = new_eye
+	qdel_null(eyeobj) // No AI, no Eye
 
 /mob/living/silicon/ai/proc/create_eyeobj(var/newloc)
 	if(eyeobj) destroy_eyeobj()
