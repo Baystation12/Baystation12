@@ -13,7 +13,8 @@
 	temp.source = source
 	temp.spam = spam
 	temp.timestamp = timestamp
-	temp.attachment = attachment.clone()
+	if(attachment)
+		temp.attachment = attachment.clone()
 	return temp
 
 
