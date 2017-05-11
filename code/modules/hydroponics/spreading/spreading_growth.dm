@@ -111,13 +111,13 @@
 	if(buckled_mob || neighbors.len)
 		plant_controller.add_plant(src)
 
-//spreading vines aren't created on their final turf. 
+//spreading vines aren't created on their final turf.
 //Instead, they are created at their parent and then move to their destination.
 /obj/effect/plant/proc/spread_to(turf/target_turf)
 	var/obj/effect/plant/child = new(get_turf(src),seed,parent)
 
 	spawn(1) // This should do a little bit of animation.
-		if(deleted(child))
+		if(QDELETED(child))
 			return
 
 		//move out to the destination

@@ -75,7 +75,7 @@
 					flash_strength *= H.species.flash_mod
 				if(flash_strength > 0)
 					M.Weaken(flash_strength)
-					M.flash_eyes()
+					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 			else
 				flashfail = 1
 

@@ -151,7 +151,7 @@
 	var/z_original
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 1
-	
+
 	var/move_count = 0
 
 /obj/effect/meteor/proc/get_shield_damage()
@@ -181,7 +181,7 @@
 
 /obj/effect/meteor/Bump(atom/A)
 	..()
-	if(A && !deleted(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
+	if(A && !QDELETED(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
 		get_hit() //should only get hit once per move attempt
 

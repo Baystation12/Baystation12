@@ -74,7 +74,7 @@
 		visible_message("A red light flashes on \the [src].")
 		return
 	cable.use(amount)
-	if(deleted(cable))
+	if(QDELETED(cable))
 		cable = null
 	return 1
 
