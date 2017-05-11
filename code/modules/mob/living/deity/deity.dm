@@ -113,16 +113,11 @@
 		var/mob/living/L = mind.current
 		L.faction = form.faction
 
-/mob/living/deity/verb/make_debug_structure()
-	set name = "Make structure"
-	set category = "CURRENTDEBUG"
-
-	if(!form)
-		return
-
-	var/turf/T = locate(x,y-1,z)
-
-	new /obj/structure/deity/altar(T,src)
-	var/spell/construction/C = new()
-	src.add_spell(C)
-	C.set_connected_god(src)
+//Gets the name based on form, or if there is no form name, type.
+/mob/living/deity/proc/get_type_name(var/type)
+	if(form && form.struct_vars[type])
+		var/list/vars = form.struct_vars[type]
+		if(vars["name"])
+			return vars["name"]
+	var/atom/movable/M = type
+	return initial(M.name)

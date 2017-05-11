@@ -43,6 +43,7 @@
 	next_cycle = world.time + 10 SECONDS
 	cycles_before_converted--
 	if(!cycles_before_converted)
+		src.visible_message("For one thundering moment, \the [target] cries out in pain before going limp and broken.")
 		godcult.add_antagonist_mind(target.mind,1,"a servant of [src]. Your loyalty may be faulty, but you know that it now has control over you...", "Servant of [src]", specific_god=linked_god)
 		remove_target()
 		return
@@ -68,11 +69,13 @@
 	target = L
 	destroyed_event.register(L,src,/obj/structure/deity/altar/proc/remove_target)
 	moved_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
+	death_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
 
 /obj/structure/deity/altar/proc/remove_target()
 	processing_objects -= src
 	destroyed_event.unregister(target, src)
 	moved_event.unregister(target, src)
+	death_event.unregister(target, src)
 	target = null
 
 /obj/structure/deity/altar/Topic(var/href, var/list/href_list)

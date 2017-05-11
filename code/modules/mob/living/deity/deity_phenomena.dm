@@ -48,7 +48,16 @@
 	set desc = "Spend a paltry amount of power to convert someone. This can fail."
 	set category = "Phenomena"
 
-	if(!can_use_phenomena(20,L))
+	if(!can_use_phenomena(20,L, check_location = 0))
+		return
+
+	var/is_good = 0
+	for(var/obj/structure/deity/altar in structures)
+		if(get_dist(L, altar) < 2)
+			is_good = 1
+			break
+	if(!is_good)
+		to_chat(src, "<span class='warning'>\The [L] needs to be near a [get_type_name(/obj/structure/deity/altar)] to be converted!</span>")
 		return
 
 	to_chat(src,"<span class='notice'>You give \the [L] a chance to willingly convert. May they choose wisely.</span>")
@@ -72,8 +81,8 @@
 
 	var/obj/structure/deity/altar/A = locate() in T
 	if(!A || !A.linked_god != src)
-		var/list/V = form.struct_vars[/obj/structure/deity/altar]
-		to_chat(src,"<span class='warning'>They need to be on a [V["name"]] to be forced to convert!</span>")
+		to_chat(src,"<span class='warning'>They need to be on a [get_type_name(/obj/structure/deity/altar)] to be forced to convert!</span>")
+		return
 
 	A.set_target(L)
 	to_chat(src, "<span class='notice'>You embue \the [A] with your power, setting forth to force \the [L] to your will.</span>")
