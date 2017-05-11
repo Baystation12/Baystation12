@@ -191,8 +191,6 @@
 			return global.air_processing_killed;
 		if("alarm_manager")
 			return global.alarm_manager;
-		if("alien_whitelist")
-			return global.alien_whitelist;
 		if("allCasters")
 			return global.allCasters;
 		if("allConsoles")
@@ -1425,8 +1423,6 @@
 			return global.weighted_mundaneevent_locations;
 		if("weighted_randomevent_locations")
 			return global.weighted_randomevent_locations;
-		if("whitelist")
-			return global.whitelist;
 		if("whitelisted_species")
 			return global.whitelisted_species;
 		if("wireColours")
@@ -1654,8 +1650,6 @@
 			global.air_processing_killed=newval;
 		if("alarm_manager")
 			global.alarm_manager=newval;
-		if("alien_whitelist")
-			global.alien_whitelist=newval;
 		if("allCasters")
 			global.allCasters=newval;
 		if("allConsoles")
@@ -2888,8 +2882,6 @@
 			global.weighted_mundaneevent_locations=newval;
 		if("weighted_randomevent_locations")
 			global.weighted_randomevent_locations=newval;
-		if("whitelist")
-			global.whitelist=newval;
 		if("whitelisted_species")
 			global.whitelisted_species=newval;
 		if("wireColours")

@@ -161,7 +161,7 @@
 			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
-	log_client_to_db()
+//	log_client_to_db() Feck off SQL
 
 	send_resources()
 
@@ -177,10 +177,12 @@
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
+	loadclientdb() // Load their files.
 	//////////////
 	//DISCONNECT//
 	//////////////
 /client/Del()
+	saveclientdb()
 	if(holder)
 		holder.owner = null
 		admins -= src

@@ -1,6 +1,6 @@
 #define WORLD_ICON_SIZE 32
 
-/var/server_name = "Baystation 12"
+/var/server_name = "Apollo Gaming"
 
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()
@@ -149,6 +149,7 @@
 
 
 	spawn(3000)		//so we aren't adding to the round-start lag
+		Announce()
 		if(config.ToRban)
 			ToRban_autoupdate()
 
@@ -513,8 +514,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
-	config.loadsql("config/dbconfig.txt")
-	config.loadforumsql("config/forumdbconfig.txt")
+//	config.loadsql("config/dbconfig.txt")
+//	config.loadforumsql("config/forumdbconfig.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
@@ -568,11 +569,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://www.apollo-gaming.net\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "Forums!"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"
 
