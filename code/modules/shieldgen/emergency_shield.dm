@@ -55,7 +55,7 @@
 
 	check_failure()
 	set_opacity(1)
-	spawn(20) if(!deleted(src)) set_opacity(0)
+	spawn(20) if(!QDELETED(src)) set_opacity(0)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	..()
@@ -65,7 +65,7 @@
 	..()
 	check_failure()
 	set_opacity(1)
-	spawn(20) if(!deleted(src)) set_opacity(0)
+	spawn(20) if(!QDELETED(src)) set_opacity(0)
 
 /obj/machinery/shield/ex_act(severity)
 	switch(severity)
@@ -109,7 +109,7 @@
 
 	//The shield becomes dense to absorb the blow.. purely asthetic.
 	set_opacity(1)
-	spawn(20) if(!deleted(src)) set_opacity(0)
+	spawn(20) if(!QDELETED(src)) set_opacity(0)
 
 	..()
 	return
