@@ -29,7 +29,8 @@
 				/obj/structure/closet/wizard/scrying = 			2,
 				/obj/item/weapon/teleportation_scroll = 		1,
 				/obj/item/weapon/magic_rock = 					1,
-				/obj/item/weapon/contract/apprentice = 			1
+				/obj/item/weapon/contract/apprentice = 			1,
+				/spell/noclothes = 								3
 				)
 
 	sacrifice_reagents = list("hyperzine")

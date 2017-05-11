@@ -11,7 +11,7 @@
 
 	compatible_mobs = list(/mob/living/carbon/human)
 
-	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 2, Sp_POWER = 1)
+	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 2, Sp_POWER = 3)
 	charge_type = Sp_RECHARGE
 	charge_max = 900
 	cooldown_min = 300
@@ -19,7 +19,7 @@
 	duration = 300
 	delete_old = 0
 	var/item_color = "#6666ff"
-	var/block_chance = 30
+	var/block_chance = 50
 
 	hud_state = "wiz_shield"
 
@@ -36,6 +36,6 @@
 		return 0
 
 	item_color = "#6600ff"
-	block_chance = 60
+	block_chance = block_chance + 15
 
 	return "Your summoned shields will now block more often."

@@ -80,13 +80,13 @@
 
 /spell/targeted/heal_target/sacrifice
 	name = "Sacrifice"
-	desc = "This spell heals immensily. For a price. Does not require wizard garb."
+	desc = "This spell heals immensily; this spell is extremely likely to kill the user. Does not require wizard garb."
 	feedback = "SF"
 	spell_flags = SELECTABLE
 	invocation = "Ei'Nath Borv Di'Nath!"
 	charge_type = Sp_HOLDVAR
 	holder_var_type = "bruteloss"
-	holder_var_amount = 75
+	holder_var_amount = 50
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 0, Sp_POWER = 1)
 
 	amt_dam_brute = -50
