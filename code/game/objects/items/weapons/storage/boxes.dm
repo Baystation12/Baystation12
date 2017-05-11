@@ -433,9 +433,9 @@
 //Spare Armbands
 
 /obj/item/weapon/storage/box/armband
-	name = "box of spare security armbands"
+	name = "box of spare military police armbands"
 	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
-	startswith = list(/obj/item/clothing/accessory/armband = 5)
+	startswith = list(/obj/item/clothing/accessory/armband/mp = 5)
 
 /obj/item/weapon/storage/box/armband/engine
 	name = "box of spare engineering armbands"
