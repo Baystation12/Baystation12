@@ -18,6 +18,36 @@
 	name = "\improper NanoTrasen executive tunic"
 	icon_state = "nttunicblack"
 
+/obj/item/clothing/accessory/dashiki
+	name = "black dashiki"
+	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is green and black."
+	icon_state = "dashiki"
+
+/obj/item/clothing/accessory/dashiki/red
+	name = "red dashiki"
+	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is red."
+	icon_state = "dashikired"
+
+/obj/item/clothing/accessory/dashiki/blue
+	name = "blue dashiki"
+	desc = "An ornately embroidered pullover garmant sporting a v-shaped collar. This one is blue."
+	icon_state = "dashikiblue"
+
+/obj/item/clothing/accessory/thawb
+	name = "thawb"
+	desc = "A white, ankle-length robe designed to be cool in hot climates."
+	icon_state = "thawb"
+
+/obj/item/clothing/accessory/sherwani
+	name = "sherwani"
+	desc = "A long, coat-like frock with fancy embroidery on the cuffs and collar."
+	icon_state = "sherwani"
+
+/obj/item/clothing/accessory/qipao
+	name = "qipao"
+	desc = "A tight-fitting blouse with intricate designs of flowers embroidered on it."
+	icon_state = "qipao"
+
 /obj/item/clothing/accessory/toggleable
 	var/icon_closed
 /obj/item/clothing/accessory/toggleable/New()
@@ -113,6 +143,11 @@
 /obj/item/clothing/accessory/toggleable/hawaii/random
 	name = "flower-pattern shirt"
 
+/obj/item/clothing/accessory/toggleable/zhongshan
+	name = "zhongshan suit jacket"
+	desc = "A stylish Chinese tunic suit jacket."
+	icon_state = "zhongshan"
+
 /obj/item/clothing/accessory/toggleable/hawaii/random/New()
 	..()
 	if(prob(50))
@@ -202,3 +237,52 @@
 	if(buttoned)
 		icon_state += "b"
 	update_clothing_icon()
+
+/obj/item/clothing/accessory/rollable
+	var/icon_sleeves_rolled
+/obj/item/clothing/accessory/rollable/New()
+	if(!icon_sleeves_rolled)
+		icon_sleeves_rolled = icon_state
+	..()
+
+/obj/item/clothing/accessory/rollable/on_attached(obj/item/clothing/under/S, mob/user as mob)
+	..()
+	has_suit.verbs += /obj/item/clothing/accessory/rollable/verb/roll
+
+/obj/item/clothing/accoessory/rollable/on_removed(mob/user as mob)
+	if(has_suit)
+		has_suit.verbs -= /obj/item/clothing/accessory/rollable/verb/roll
+	..()
+
+/obj/item/clothing/accessory/rollable/verb/roll()
+	set name = "Roll Accessory Sleeves"
+	set category = "Object"
+	set src in usr
+
+	if(usr.incapacitated())
+		return 0
+
+	var/obj/item/clothing/accessory/rollable/H = null
+	if (istype(src, /obj/item/clothing/accessory/rollable))
+		H = src
+	else
+		H = locate() in src
+
+	if(H)
+		H.do_roll(usr)
+	update_clothing_icon()
+
+/obj/item/clothing/accessory/rollable/proc/do_roll(user)
+	if(icon_state == icon_sleeves_rolled)
+		icon_state = "[icon_sleeves_rolled]_r)"
+		to_chat(usr, "You roll up the sleeves of the [src].")
+	else
+		icon_state = icon_sleeves_rolled
+		to_chat(usr, "You roll down the sleeves of the [src].")
+
+	update_clothing_icon()
+
+/obj/item/clothing/accessory/rollable/tangzhuang
+	name = "tangzhuang jacket"
+	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
+	icon_state = "tangzhuang"
