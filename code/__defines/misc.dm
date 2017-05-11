@@ -187,3 +187,8 @@
 
 #define WORLD_ICON_SIZE 32
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
+
+#define DEFAULT_SPAWNPOINT_ID "Default"
+
+#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
+

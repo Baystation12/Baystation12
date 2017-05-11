@@ -189,8 +189,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/Destroy()
 	if(contents)
 		for(var/atom/movable/something in contents)
-			something.loc = get_turf(src)
-	..()
+			something.dropInto(loc)
+	. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END

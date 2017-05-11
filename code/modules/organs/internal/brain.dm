@@ -55,10 +55,8 @@
 			brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/Destroy()
-	if(brainmob)
-		qdel(brainmob)
-		brainmob = null
-	..()
+	qdel_null(brainmob)
+	. = ..()
 
 /obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/carbon/H)
 

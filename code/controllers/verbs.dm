@@ -1,21 +1,5 @@
 //TODO: rewrite and standardise all controller datums to the datum/controller type
 //TODO: allow all controllers to be deleted for clean restarts (see WIP master controller stuff) - MC done - lighting done
-/client/proc/restart_controller(controller as null|anything in list("Supply"))
-	set category = "Debug"
-	set name = "Restart Controller"
-	set desc = "Restart one of the various periodic loop controllers for the game (be careful!)"
-
-	if(!holder || !controller)
-		return
-
-	usr = null
-	src = null
-	switch(controller)
-		if("Supply")
-			supply_controller.process()
-			feedback_add_details("admin_verb","RSupply")
-	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
-	return
 
 /client/proc/debug_antagonist_template(antag_type as null|anything in all_antag_types())
 	set category = "Debug"
@@ -45,9 +29,6 @@
 		if("Ticker")
 			debug_variables(ticker)
 			feedback_add_details("admin_verb","DTicker")
-		if("Ticker Process")
-			debug_variables(tickerProcess)
-			feedback_add_details("admin_verb","DTickerProcess")
 		if("Air")
 			debug_variables(air_master)
 			feedback_add_details("admin_verb","DAir")
@@ -90,18 +71,9 @@
 		if("Plants")
 			debug_variables(plant_controller)
 			feedback_add_details("admin_verb", "DPlants")
-		if("Alarm")
-			debug_variables(alarm_manager)
-			feedback_add_details("admin_verb", "DAlarm")
 		if("Nano")
 			debug_variables(nanomanager)
 			feedback_add_details("admin_verb", "DNano")
-		if("Chemistry")
-			debug_variables(chemistryProcess)
-			feedback_add_details("admin_verb", "DChem")
-		if("Wireless")
-			debug_variables(wirelessProcess)
-			feedback_add_details("admin_verb", "DWifi")
 		if("Observation")
 			debug_variables(all_observable_events)
 			feedback_add_details("admin_verb", "DObservation")

@@ -111,7 +111,7 @@
 
 /obj/effect/fusion_em_field/process()
 	//make sure the field generator is still intact
-	if(!owned_core || deleted(owned_core))
+	if(!owned_core || QDELETED(owned_core))
 		qdel(src)
 		return
 

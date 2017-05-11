@@ -1,6 +1,6 @@
 /var/datum/announcement/priority/priority_announcement = new(do_log = 0)
 /var/datum/announcement/priority/command/command_announcement = new(do_log = 0, do_newscast = 1)
-/var/datum/announcement/minor/minor_announcement = new(new_sound = sound('sound/AI/commandreport.ogg'))
+/var/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/AI/commandreport.ogg')
 
 /datum/announcement
 	var/title = "Attention"
@@ -98,7 +98,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 
 /proc/level_seven_announcement()
-	command_announcement.Announce("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
+	using_map.level_x_biohazard_announcement(7)
 
 /proc/ion_storm_announcement()
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")

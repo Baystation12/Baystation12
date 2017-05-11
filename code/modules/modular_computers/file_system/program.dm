@@ -21,6 +21,7 @@
 	var/available_on_syndinet = 0			// Whether the program can be downloaded from SyndiNet (accessible via emagging the computer). Set to 1 to enable.
 	var/computer_emagged = 0				// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null					// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
+	var/ntnet_speed = 0						// GQ/s - current network connectivity transfer rate
 
 /datum/computer_file/program/New(var/obj/item/modular_computer/comp = null)
 	..()
@@ -70,7 +71,18 @@
 
 // Called by Process() on device that runs us, once every tick.
 /datum/computer_file/program/proc/process_tick()
+	update_netspeed()
 	return 1
+
+/datum/computer_file/program/proc/update_netspeed()
+	ntnet_speed = 0
+	switch(ntnet_status)
+		if(1)
+			ntnet_speed = NTNETSPEED_LOWSIGNAL
+		if(2)
+			ntnet_speed = NTNETSPEED_HIGHSIGNAL
+		if(3)
+			ntnet_speed = NTNETSPEED_ETHERNET
 
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.
@@ -92,13 +104,13 @@
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
-			to_chat(user, "<span class='warning'>\The [computer] flashes: \"RFID Error - Unable to scan ID\".</span>")
+			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
 		return 0
 
 	if(access_to_check in I.access)
 		return 1
 	else if(loud)
-		to_chat(user, "<span class='danger'>\The [computer] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
 
 // This attempts to retrieve header data for NanoUIs. If implementing completely new device of different type than existing ones
 // always include the device here in this proc. This proc basically relays the request to whatever is running the program.
