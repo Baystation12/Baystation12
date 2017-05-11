@@ -42,19 +42,20 @@
 					var/spell/S = s
 					if(S.connected_god == src)
 						M.current.remove_spell(S)
+						qdel(S)
 			to_chat(M, "<font size='3'><span class='danger'>Your connection has been severed! \The [src] is no more!</span></font>")
 			sound_to(M, 'sound/hallucinations/far_noise.ogg')
 			M.current.Weaken(10)
 		for(var/s in structures)
 			var/obj/structure/deity/S = s
 			S.linked_god = null
-		qdel(eyeobj.visualnet)
-		qdel(eyeobj)
 
 /mob/living/deity/Destroy()
 	death(0)
 	minions.Cut()
 	structures.Cut()
+	qdel(eyeobj.visualnet)
+	qdel(eyeobj)
 	qdel(form)
 	return ..()
 

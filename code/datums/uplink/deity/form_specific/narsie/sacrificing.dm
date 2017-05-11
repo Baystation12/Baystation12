@@ -1,6 +1,6 @@
 /datum/uplink_item/item/deity/boon/narsie_sacrificing
 	category = /datum/uplink_category/deity_narsie_sacrifice
-	required_feats = list("Nar-Sie",  "Sacrificing")
+	required_feats = list(DEITY_TREE_SACRIFICE)
 
 /datum/uplink_item/item/deity/boon/narsie_sacrificing/sac_dagger
 	name = "Sacrificial Dagger"

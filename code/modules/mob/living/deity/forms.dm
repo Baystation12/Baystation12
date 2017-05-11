@@ -13,12 +13,16 @@ Each plays slightly different and has different challenges/benefits
 	var/floor_decl = /decl/flooring/reinforced/cult
 	var/list/struct_vars = list()
 	var/list/icon_states = list()
+	var/list/starting_feats //This is used to give different forms different starting trees
 
 /datum/god_form/New(var/mob/living/deity/D)
 	D.feats += name
 	D.icon_state = god_icon_state
 	D.desc = desc
 	linked_god = D
+	if(starting_feats)
+		for(var/feat in starting_feats)
+			D.feats |= feat
 
 /datum/god_form/proc/sync_structure(var/obj/O)
 	var/list/svars = struct_vars[O.type]
@@ -40,9 +44,10 @@ Each plays slightly different and has different challenges/benefits
 	name = "Nar-Sie"
 	info = {"The Geometer of Blood, you crave blood and destruction.<br>
 	<b>Benefits:</b><br>
-		<font color='blue'>+Can gain power from blood sacrifices.<br></font>
+		<font color='blue'>+Can gain power from blood sacrifices.<br>
+		+Ability to forge weapons and armor.</font>
 	<b>Drawbacks:</b><br>
-		<font color='red'>-Servant abilities require host's blood and flesh.</font>
+		<font color='red'>-Servant abilities require copious amounts of their blood.</font>
 	"}
 	desc = "A being made of a million nightmares, a billion deaths."
 	god_icon_state = "narsie"
@@ -54,6 +59,8 @@ Each plays slightly different and has different challenges/benefits
 														"icon_state" = "talismanaltar"),
 					/turf/simulated/floor/deity = list("name" = "disturbing smooth surface")
 					)
+
+	starting_feats = list(DEITY_FORM_DARK_ART, DEITY_FORM_BLOOD_SAC, DEITY_FORM_DARK_MINION, DEITY_FORM_BLOOD_FORGE)
 
 /datum/god_form/narsie/take_charge(var/mob/living/user, var/charge)
 	if(!..())

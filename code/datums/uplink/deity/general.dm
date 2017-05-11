@@ -3,7 +3,7 @@
 
 /datum/uplink_item/item/deity/boon/ability_general/construct
 	name = "Conjure Construct"
-	desc = "Grant the spells of building, letting your servants construct useful buildings."
+	desc = "Grant the spells of building, letting your servants construct useful buildings near an altar."
 	item_cost = 10
 	path = /spell/construction
 
@@ -18,3 +18,9 @@
 	desc = "Grants a channelable aura to a servant that slowly converts the nearby area to one more useful to you."
 	item_cost = 10
 	path = /spell/aoe_turf/god_aura
+
+/datum/uplink_item/item/deity/boon/ability_general/shrine
+	name = "Build Shrine"
+	desc = "An essential ability that allows a follower to build an altar where ever they want."
+	item_cost = 10
+	path = /spell/aoe_turf/conjure/build_shrine

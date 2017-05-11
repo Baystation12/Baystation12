@@ -1,6 +1,6 @@
 /datum/uplink_item/item/deity/boon/soul_arts
 	category = /datum/uplink_category/deity_narsie_minions
-	required_feats = list("Nar-Sie", "Soul Arts")
+	required_feats = list(DEITY_TREE_SOUL)
 
 /datum/uplink_item/item/deity/boon/soul_arts/soul_shard
 	name = "Soul Stone Shard"

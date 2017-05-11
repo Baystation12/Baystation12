@@ -5,13 +5,13 @@
 	name = "Potentials"
 
 /datum/uplink_category/deity_narsie_sacrifice //This includes gaining points via sacrifice.
-	name = "Sacrificing"
+	name = DEITY_TREE_SACRIFICE
 
 /datum/uplink_category/deity_ability_dark //This includes basic narnar spells
-	name = "Dark Boons"
+	name = DEITY_FORM_DARK_ART
 
 /datum/uplink_category/deity_narsie_crafting //This includes creating armor/weapons
-	name = "Blood Crafting"
+	name = DEITY_FORM_BLOOD_FORGE
 
 /datum/uplink_category/deity_narsie_minions //This includes blood zombies and constructs
-	name = "Soul-Arts"
+	name = DEITY_FORM_DARK_MINION

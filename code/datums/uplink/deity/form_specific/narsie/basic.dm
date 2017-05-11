@@ -1,6 +1,6 @@
 /datum/uplink_item/item/deity/boon/ability_dark
 	category = /datum/uplink_category/deity_ability_dark
-	required_feats = list("Nar-Sie")
+	required_feats = list(DEITY_FORM_DARK_ART)
 
 /datum/uplink_item/item/deity/boon/ability_dark/shatter_mind
 	name = "Eternal Darkness"
