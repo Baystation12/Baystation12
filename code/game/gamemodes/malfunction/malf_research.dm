@@ -65,14 +65,6 @@
 			finish_research()
 
 /datum/malf_research/proc/advance_all()
-	var/list/to_advance = list()
-	// First remember a copy of all research that's available now, then finish them one by one.
-	for(var/datum/malf_research_ability/MRA in available_abilities)
-		to_advance.Add(MRA)
-
-	for(var/datum/malf_research_ability/MRA in to_advance)
+	for(var/MRA in available_abilities.Copy())
 		focus = MRA
 		finish_research()
-
-
-
