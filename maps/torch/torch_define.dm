@@ -46,7 +46,7 @@
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
-	minor_announcement = new(new_sound = 'sound/AI/torch/commandreport.ogg')
+	minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
 
 /datum/map/torch/send_welcome()
 	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><hr />"
