@@ -89,7 +89,7 @@
 	if(istype(T))
 		T.lighting_overlay = null
 
-	..()
+	. = ..()
 
 /atom/movable/lighting_overlay/forceMove()
 	return 0 //should never move

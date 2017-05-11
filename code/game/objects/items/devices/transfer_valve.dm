@@ -177,7 +177,7 @@
 
 	valve_open = 0
 
-	if(deleted(tank_one) || deleted(tank_two))
+	if(QDELETED(tank_one) || QDELETED(tank_two))
 		return
 
 	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume

@@ -509,7 +509,7 @@
 				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
-					if(deleted(stack))
+					if(QDELETED(stack))
 						holdingitems -= stack
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue

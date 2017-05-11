@@ -222,7 +222,7 @@ proc/age2agedescription(age)
 			. = 0
 			break
 
-		if(target_loc && (!target || deleted(target) || target_loc != target.loc || target_type != target.type))
+		if(target_loc && (!target || QDELETED(target) || target_loc != target.loc || target_type != target.type))
 			. = 0
 			break
 
