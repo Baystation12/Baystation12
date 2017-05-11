@@ -9,7 +9,6 @@
 	range = 3
 	inner_radius = 0
 
-	cast_delay = 50
 	time_between_channels = 100
 	number_of_channels = 3
 	cast_sound = 'sound/effects/squelch2.ogg'
@@ -29,8 +28,10 @@
 			to_chat(L, "<span class='danger'>You feel your lifeforce being ripping out of your body!</span>")
 
 			//Do effect
-			var/obj/item/projectile/beam/blood_effect/effect = new(get_turf(L))
-			effect.launch(user, "chest")
+			var/obj/item/projectile/beam/blood_effect/effect = new(get_turf(user))
+			effect.pixel_x = 0
+			effect.pixel_y = 0
+			effect.launch(L, "chest")
 
 			//Heal self
 			if(istype(user, /mob/living/carbon/human))
@@ -45,8 +46,13 @@
 
 /obj/item/projectile/beam/blood_effect
 	name = "literally just blood"
+	icon_state = "blood"
 	damage = 0
+	randpixel = 0
 	no_attack_log = 1
+	muzzle_type = /obj/effect/projectile/blood
+	tracer_type = /obj/effect/projectile/blood
+	impact_type = /obj/effect/projectile/blood
 
 /obj/item/projectile/beam/blood_effect/Bump(var/atom/a)
 	if(a == original)
@@ -54,3 +60,7 @@
 		qdel(src)
 		return 1
 	return 0
+
+
+/obj/effect/projectile/blood
+	icon_state = "blood"

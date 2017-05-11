@@ -119,7 +119,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			after_cast(targets) //generates the sparks, smoke, target messages etc.
 		else
 			break
-	while(time != number_of_channels && do_after(usr, time_between_channels, same_direction=1))
+	while(time != number_of_channels && do_after(user, time_between_channels, same_direction=1))
 	after_spell(targets, user, time) //When we are done with the spell completely.
 
 
