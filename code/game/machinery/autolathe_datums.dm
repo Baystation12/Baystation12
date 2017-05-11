@@ -225,6 +225,10 @@
 	name = "matter cartridge"
 	path = /obj/item/weapon/rcd_ammo
 	category = "Engineering"
+/datum/autolathe/recipe/rcd_ammo_large
+	name = "high-capacity matter cartridge"
+	path = /obj/item/weapon/rcd_ammo/large
+	category = "Engineering"
 
 /datum/autolathe/recipe/scalpel
 	name = "scalpel"

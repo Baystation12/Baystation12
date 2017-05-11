@@ -598,16 +598,19 @@ var/global/datum/controller/occupations/job_master
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
 
 	var/mob/H = C.mob
+	var/spawnpoint = C.prefs.spawnpoint
 	var/datum/spawnpoint/spawnpos
 
-	if(C.prefs.spawnpoint)
-		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
-			if(H)
-				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
+	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
+		spawnpoint = using_map.default_spawn
 
+	if(spawnpoint)
+		if(!(spawnpoint in using_map.allowed_spawns))
+			if(H)
+				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
 		else
-			spawnpos = spawntypes[C.prefs.spawnpoint]
+			spawnpos = spawntypes[spawnpoint]
 
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
