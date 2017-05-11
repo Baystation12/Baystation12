@@ -57,7 +57,7 @@
 
 /datum/gear/accessory/tangzhuang
 	display_name = "tangzhuang jacket"
-	path = /obj/item/clothing/accessory/rollable/tangzhuang
+	path = /obj/item/clothing/accessory/tangzhuang
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
