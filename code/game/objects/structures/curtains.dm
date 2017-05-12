@@ -26,7 +26,7 @@
 	..()
 
 /obj/structure/curtain/proc/toggle()
-	opacity = !opacity
+	set_opacity(!opacity)
 	if(opacity)
 		icon_state = "closed"
 		plane = ABOVE_HUMAN_PLANE

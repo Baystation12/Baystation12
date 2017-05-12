@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscadd: "Tajarans now have access to cultural veils. Tajarans will spawn with the default, and job-specific veils with the proper HUD elements are available in the loadout tab under Xenowear."

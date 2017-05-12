@@ -1,0 +1,2 @@
+#define CLIENT_MIN_FPS 0
+#define CLIENT_MAX_FPS 1000
