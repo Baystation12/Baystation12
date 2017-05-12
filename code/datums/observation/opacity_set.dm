@@ -17,11 +17,14 @@ var/decl/observ/opacity_set/opacity_set_event = new()
 /*******************
 * Opacity Handling *
 *******************/
-/atom/set_opacity(new_opacity)
-	var/old_opacity = opacity
-	. = ..()
-	if(opacity != old_opacity)
-		opacity_set_event.raise_event(src, old_opacity, opacity)
+/atom/proc/set_opacity(new_opacity)
+	if(new_opacity != opacity)
+		var/old_opacity = opacity
+		opacity = new_opacity
+		opacity_set_event.raise_event(src, old_opacity, new_opacity)
+		return TRUE
+	else
+		return FALSE
 
 /turf/ChangeTurf()
 	var/old_opacity = opacity
