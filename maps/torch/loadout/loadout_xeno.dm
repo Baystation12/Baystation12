@@ -163,17 +163,17 @@
 	path = /obj/item/clothing/under/resomi/formal
 
 /datum/gear/eyes/tajblind/med
-	display_name = "medical blindfold"
+	display_name = "medical veil (Tajara)"
 	path = /obj/item/clothing/glasses/tajblind/med
-	whitelisted = "Tajara"
+	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
 	allowed_roles = list("Medical Assistant","Chemist","Virologist")
 
 /datum/gear/eyes/tajblind/meson
-	display_name = "industrial blindfold"
+	display_name = "industrial veil (Tajara)"
 	path = /obj/item/clothing/glasses/meson/prescription/tajblind
-	whitelisted = "Tajara"
+	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
 	allowed_roles = list("Maintenance Assistant", "Prospector", "Research Assistant")
