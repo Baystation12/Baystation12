@@ -34,6 +34,7 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 
 datum/controller/game_controller/proc/setup()
+	world.tick_lag = 0.33 //Hard set
 	spawn(20)
 		createRandomZlevel()
 
@@ -49,7 +50,7 @@ datum/controller/game_controller/proc/setup()
 #ifdef UNIT_TEST
 #define CHECK_SLEEP_MASTER // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
 #else
-#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
+#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 300) { initialized_objects=0;sleep(world.tick_lag); }
 #endif
 
 datum/controller/game_controller/proc/setup_objects()
