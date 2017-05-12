@@ -1,7 +1,7 @@
 /mob/living/deity
 	name = "shapeless creature"
 	desc = "A shape of otherworldly matter, not yet ready to be unleashed into this world."
-	icon = 'icons/mob/deity.dmi'
+	icon = 'icons/mob/deity_big.dmi'
 	icon_state = "egg"
 	var/power_min = 10 //Below this amount you regenerate uplink TCs
 	var/power_tick = 10
