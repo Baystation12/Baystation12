@@ -1723,7 +1723,7 @@
 "Hg" = (/obj/machinery/atmospherics/unary/freezer{dir = 2; icon_state = "freezer"},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
 "Hh" = (/obj/machinery/disposal,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/disposalpipe/trunk,/obj/machinery/camera/network/research{c_tag = "Research - Miscellaneous Laboratory"},/obj/machinery/firealarm{dir = 2; pixel_y = 24},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
 "Hi" = (/obj/machinery/atmospherics/portables_connector,/obj/effect/floor_decal/industrial/outline/blue,/obj/structure/extinguisher_cabinet{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
-"Hj" = (/obj/structure/table/steel_reinforced,/obj/machinery/computer/atmoscontrol/laptop{monitored_alarm_ids = list("misc_research")},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
+"Hj" = (/obj/structure/table/steel_reinforced,/obj/machinery/computer/atmoscontrol/laptop{monitored_alarm_ids = list("misc_research"); req_access = list(47)},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
 "Hk" = (/obj/machinery/chemical_dispenser/full,/obj/effect/floor_decal/industrial/warning{dir = 10},/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
 "Hl" = (/obj/machinery/chem_master,/obj/effect/floor_decal/industrial/warning,/obj/structure/sign/chemistry{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
 "Hm" = (/turf/simulated/wall/r_wall,/area/rnd/misc_lab)
