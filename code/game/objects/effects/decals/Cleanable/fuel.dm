@@ -33,7 +33,7 @@
 		if(amount < 15) return //lets suppose welder fuel is fairly thick and sticky. For something like water, 5 or less would be more appropriate.
 		var/turf/simulated/S = loc
 		if(!istype(S)) return
-		for(var/d in cardinal)
+		for(var/d in GLOB.cardinal)
 			var/turf/simulated/target = get_step(src,d)
 			var/turf/simulated/origin = get_turf(src)
 			if(origin.CanPass(null, target, 0, 0) && target.CanPass(null, origin, 0, 0))
@@ -46,7 +46,7 @@
 				else
 					new/obj/effect/decal/cleanable/liquid_fuel(target, amount*0.25,1)
 				amount *= 0.75
-						
+
 
 	flamethrower_fuel
 		icon_state = "mustard"

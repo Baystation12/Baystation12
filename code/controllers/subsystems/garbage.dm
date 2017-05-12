@@ -1,6 +1,4 @@
-var/datum/controller/subsystem/garbage_collector/SSgarbage
-
-/datum/controller/subsystem/garbage_collector
+SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
 	priority = 15
 	wait = 5
@@ -34,10 +32,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 	var/list/qdel_list = list()	// list of all types that have been qdel()eted
 #endif
 
-/datum/controller/subsystem/garbage_collector/New()
-	NEW_SS_GLOBAL(SSgarbage)
-
-/datum/controller/subsystem/garbage_collector/stat_entry(msg)
+/datum/controller/subsystem/garbage/stat_entry(msg)
 	msg += "Q:[queue.len]|TD:[totaldels]|TG:[totalgcs]|TGR:"
 	if (!(totaldels+totalgcs))
 		msg += "n/a"
@@ -51,14 +46,32 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 		msg += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%"
 	..(msg)
 
-/datum/controller/subsystem/garbage_collector/fire()
+/datum/controller/subsystem/garbage/Shutdown()
+	//Adds the del() log to world.log in a format condensable by the runtime condenser found in tools
+	if(didntgc.len || sleptDestroy.len)
+		var/list/dellog = list()
+		for(var/path in didntgc)
+			dellog += "Path : [path] \n"
+			dellog += "Failures : [didntgc[path]] \n"
+			if(path in sleptDestroy)
+				dellog += "Sleeps : [sleptDestroy[path]] \n"
+				sleptDestroy -= path
+		for(var/path in sleptDestroy)
+			dellog += "Path : [path] \n"
+			dellog += "Sleeps : [sleptDestroy[path]] \n"
+		log_world(dellog.Join())
+
+/datum/controller/subsystem/garbage/fire()
 	HandleToBeQueued()
 	if(state == SS_RUNNING)
 		HandleQueue()
 
+	if (state == SS_PAUSED) //make us wait again before the next run.
+		state = SS_RUNNING
+
 //If you see this proc high on the profile, what you are really seeing is the garbage collection/soft delete overhead in byond.
 //Don't attempt to optimize, not worth the effort.
-/datum/controller/subsystem/garbage_collector/proc/HandleToBeQueued()
+/datum/controller/subsystem/garbage/proc/HandleToBeQueued()
 	var/list/tobequeued = src.tobequeued
 	var/starttime = world.time
 	var/starttimeofday = world.timeofday
@@ -69,7 +82,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 		Queue(ref)
 		tobequeued.Cut(1, 2)
 
-/datum/controller/subsystem/garbage_collector/proc/HandleQueue()
+/datum/controller/subsystem/garbage/proc/HandleQueue()
 	delslasttick = 0
 	gcedlasttick = 0
 	var/time_to_kill = world.time - collection_timeout // Anything qdel() but not GC'd BEFORE this time needs to be manually del()
@@ -99,40 +112,25 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 			var/type = A.type
 			testing("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
 			didntgc["[type]"]++
-			var/time = world.timeofday
-			var/tick = world.tick_usage
-			var/ticktime = world.time
-			del(A)
-			tick = (world.tick_usage-tick+((world.time-ticktime)/world.tick_lag*100))
 
-			if (tick > highest_del_tickusage)
-				highest_del_tickusage = tick
-			time = world.timeofday - time
-			if (!time && TICK_DELTA_TO_MS(tick) > 1)
-				time = TICK_DELTA_TO_MS(tick)/100
-			if (time > highest_del_time)
-				highest_del_time = time
-			if (time > 10)
-				log_game("Error: [type]([refID]) took longer then 1 second to delete (took [time/10] seconds to delete)")
-				message_admins("Error: [type]([refID]) took longer then 1 second to delete (took [time/10] seconds to delete).")
-				postpone(time/5)
-				break
+			HardDelete(A)
+
 			++delslasttick
 			++totaldels
 		else
 			++gcedlasttick
 			++totalgcs
 
-/datum/controller/subsystem/garbage_collector/proc/QueueForQueuing(datum/A)
+/datum/controller/subsystem/garbage/proc/QueueForQueuing(datum/A)
 	if (istype(A) && A.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 		tobequeued += A
 		A.gc_destroyed = GC_QUEUED_FOR_QUEUING
 
-/datum/controller/subsystem/garbage_collector/proc/Queue(datum/A)
-	if (!istype(A) || (!isnull(A.gc_destroyed) && A.gc_destroyed >= 0))
+/datum/controller/subsystem/garbage/proc/Queue(datum/A)
+	if (isnull(A) || (!isnull(A.gc_destroyed) && A.gc_destroyed >= 0))
 		return
 	if (A.gc_destroyed == GC_QUEUED_FOR_HARD_DEL)
-		del(A)
+		HardDelete(A)
 		return
 	var/gctime = world.time
 	var/refid = "\ref[A]"
@@ -144,12 +142,36 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 
 	queue[refid] = gctime
 
-/datum/controller/subsystem/garbage_collector/proc/HardQueue(datum/A)
+//this is purely to seperate things profile wise.
+/datum/controller/subsystem/garbage/proc/HardDelete(datum/A)
+	var/time = world.timeofday
+	var/tick = world.tick_usage
+	var/ticktime = world.time
+
+	var/type = A.type
+	var/refID = "\ref[A]"
+
+	del(A)
+
+	tick = (world.tick_usage-tick+((world.time-ticktime)/world.tick_lag*100))
+	if (tick > highest_del_tickusage)
+		highest_del_tickusage = tick
+	time = world.timeofday - time
+	if (!time && TICK_DELTA_TO_MS(tick) > 1)
+		time = TICK_DELTA_TO_MS(tick)/100
+	if (time > highest_del_time)
+		highest_del_time = time
+	if (time > 10)
+		log_game("Error: [type]([refID]) took longer then 1 second to delete (took [time/10] seconds to delete)")
+		message_admins("Error: [type]([refID]) took longer then 1 second to delete (took [time/10] seconds to delete).")
+		postpone(time/5)
+
+/datum/controller/subsystem/garbage/proc/HardQueue(datum/A)
 	if (istype(A) && A.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 		tobequeued += A
 		A.gc_destroyed = GC_QUEUED_FOR_HARD_DEL
 
-/datum/controller/subsystem/garbage_collector/Recover()
+/datum/controller/subsystem/garbage/Recover()
 	if (istype(SSgarbage.queue))
 		queue |= SSgarbage.queue
 	if (istype(SSgarbage.tobequeued))
@@ -188,7 +210,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 				// indicates the objects Destroy() does not respect force
 				if(!SSgarbage.noforcerespect[D.type])
 					SSgarbage.noforcerespect[D.type] = D.type
-					crash_with("[D.type] has been force deleted, but is \
+					crash_with("WARNING: [D.type] has been force deleted, but is \
 						returning an immortal QDEL_HINT, indicating it does \
 						not respect the force flag for qdel(). It has been \
 						placed in the queue, further instances of this type \
@@ -197,7 +219,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 			if (QDEL_HINT_HARDDEL)		//qdel should assume this object won't gc, and queue a hard delete using a hard reference to save time from the locate()
 				SSgarbage.HardQueue(D)
 			if (QDEL_HINT_HARDDEL_NOW)	//qdel should assume this object won't gc, and hard del it post haste.
-				del(D)
+				SSgarbage.HardDelete(D)
 			if (QDEL_HINT_FINDREFERENCE)//qdel will, if TESTING is enabled, display all references to this object, then queue the object for deletion.
 				SSgarbage.QueueForQueuing(D)
 				#ifdef TESTING
@@ -206,7 +228,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 			else
 				if(!SSgarbage.noqdelhint[D.type])
 					SSgarbage.noqdelhint[D.type] = D.type
-					crash_with("[D.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
+					crash_with("WARNING: [D.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
 				SSgarbage.QueueForQueuing(D)
 	else if(D.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 		CRASH("[D.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
@@ -216,7 +238,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 // Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
 /datum/proc/Destroy(force=FALSE)
 	tag = null
-	nanomanager.close_uis(src)
+	GLOB.nanomanager.close_uis(src)
 	return QDEL_HINT_QUEUE
 
 /datum/var/gc_destroyed //Time when this object was destroyed.
@@ -258,7 +280,7 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 
 	testing("Beginning search for references to a [type].")
 	last_find_references = world.time
-	find_references_in_globals()
+	DoSearchVar(GLOB)
 	for(var/datum/thing in world)
 		DoSearchVar(thing, "WorldRef: [thing]")
 	testing("Completed search for references to a [type].")
@@ -308,8 +330,6 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 
 	show_browser(usr, dat, "window=qdeletedlog")
 
-#define SearchVar(X) DoSearchVar(X, "Global: " + #X)
-
 /datum/proc/DoSearchVar(X, Xname)
 	if(usr && usr.client && !usr.client.running_find_references) return
 	if(istype(X, /datum))
@@ -341,10 +361,4 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 	CHECK_TICK
 #endif
 
-//if find_references isn't working for some datum
-//update this list using tools/GenerateGlobalVarAccess
-/datum/proc/find_references_in_globals()
-	for(var/global_var in _all_globals)
-		SearchVar(readglobal(global_var))
-#undef SearchVar
 #endif

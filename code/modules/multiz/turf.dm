@@ -33,10 +33,10 @@
 
 /turf/simulated/open/proc/update()
 	below = GetBelow(src)
-	turf_changed_event.register(below, src, /turf/simulated/open/update_icon)
+	GLOB.turf_changed_event.register(below, src, /turf/simulated/open/update_icon)
 	var/turf/simulated/T = get_step(src,NORTH)
 	if(T)
-		turf_changed_event.register(T, src, /turf/simulated/open/update_icon)
+		GLOB.turf_changed_event.register(T, src, /turf/simulated/open/update_icon)
 	levelupdate()
 	for(var/atom/movable/A in src)
 		A.fall()

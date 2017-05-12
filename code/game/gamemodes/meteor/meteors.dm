@@ -70,7 +70,7 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/pick_meteor_start(var/startSide = pick(cardinal))
+/proc/pick_meteor_start(var/startSide = pick(GLOB.cardinal))
 	var/startLevel = pick(using_map.station_levels)
 	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 

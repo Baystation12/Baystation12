@@ -8,8 +8,8 @@
 	nozzle = _holder
 
 /datum/ship_engine/thermal/Destroy()
-	..()
 	nozzle = null
+	. = ..()
 
 /datum/ship_engine/thermal/get_status()
 	return nozzle.get_status()
@@ -57,8 +57,8 @@
 	controller = new(src)
 
 /obj/machinery/atmospherics/unary/engine/Destroy()
-	..()
-	qdel_null(controller)
+	QDEL_NULL(controller)
+	. = ..()
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
 	. = list()

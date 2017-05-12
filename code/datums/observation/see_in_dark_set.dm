@@ -7,7 +7,8 @@
 //			/mob/sightee:  The mob that had its see_in_dark set
 //			/old_see_in_dark: see_in_dark before the change
 //			/new_see_in_dark: see_in_dark after the change
-var/decl/observ/see_in_dark_set/see_in_dark_set_event = new()
+
+GLOBAL_DATUM_INIT(see_in_dark_set_event, /decl/observ/see_in_dark_set, new)
 
 /decl/observ/see_in_dark_set
 	name = "See In Dark Set"
@@ -21,4 +22,4 @@ var/decl/observ/see_in_dark_set/see_in_dark_set_event = new()
 	var/old_see_in_dark = sight
 	if(old_see_in_dark != new_see_in_dark)
 		see_in_dark  = new_see_in_dark
-		see_in_dark_set_event.raise_event(src, old_see_in_dark, new_see_in_dark)
+		GLOB.see_in_dark_set_event.raise_event(src, old_see_in_dark, new_see_in_dark)

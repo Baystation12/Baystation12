@@ -182,7 +182,7 @@
 	if(!message)
 		return
 
-	if(CanUseTopic(user, hands_state) != STATUS_INTERACTIVE)
+	if(CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
 		return FALSE
 	command_announcement.Announce(message, title, msg_sanitized = 1)
 	return TRUE

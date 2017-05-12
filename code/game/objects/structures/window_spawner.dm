@@ -50,7 +50,7 @@
 		var/obj/structure/window/new_win = new win_path(loc)
 		handle_window_spawn(new_win)
 	else
-		for (var/dir in cardinal)
+		for (var/dir in GLOB.cardinal)
 			var/turf/T = get_step(src, dir)
 			var/obj/effect/wingrille_spawn/other = locate(type) in T
 			if(!other)

@@ -112,7 +112,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
 	if(!enabled)
-		qdel_null(preference_mob.typing_indicator)
+		QDEL_NULL(preference_mob.typing_indicator)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"

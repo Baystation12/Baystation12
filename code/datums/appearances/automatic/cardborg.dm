@@ -17,13 +17,13 @@
 
 	var/image/I = get_image_from_backpack(H)
 	AddAltAppearance(H, I, silicon_mob_list+H) //you look like a robot to robots! (including yourself because you're totally a robot)
-	logged_in_event.register_global(src, /decl/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
+	GLOB.logged_in_event.register_global(src, /decl/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
 
 /decl/appearance_handler/cardborg/proc/item_removed(var/obj/item/item, var/mob/user)
 	if((istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg)) || istype(item, /obj/item/weapon/storage/backpack))
 		RemoveAltAppearance(user)
 		if(!appearance_sources.len)
-			logged_in_event.unregister_global(src)	// Only listen to the logged in event for as long as it's relevant
+			GLOB.logged_in_event.unregister_global(src)	// Only listen to the logged in event for as long as it's relevant
 
 /decl/appearance_handler/cardborg/proc/mob_joined(var/mob/user)
 	if(issilicon(user))

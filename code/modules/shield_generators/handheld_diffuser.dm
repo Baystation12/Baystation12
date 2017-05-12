@@ -28,7 +28,7 @@
 	if(!enabled)
 		return
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
 		for(var/obj/effect/shield/S in shielded_tile)
 			// 10kJ per pulse, but gap in the shield lasts for longer than regular diffusers.

@@ -117,7 +117,7 @@ var/global/list/default_medbay_channels = list(
 	if(syndie)
 		data["useSyndMode"] = 1
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
 		ui.set_initial_data(data)
@@ -228,7 +228,7 @@ var/global/list/default_medbay_channels = list(
 		return 1
 
 	if(.)
-		nanomanager.update_uis(src)
+		GLOB.nanomanager.update_uis(src)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
@@ -695,7 +695,7 @@ var/global/list/default_medbay_channels = list(
 		. = 1
 
 	if(.)
-		nanomanager.update_uis(src)
+		GLOB.nanomanager.update_uis(src)
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
 	if(!on)
@@ -724,7 +724,7 @@ var/global/list/default_medbay_channels = list(
 	data["has_subspace"] = 1
 	data["subspace"] = subspace_transmission
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
 		ui.set_initial_data(data)

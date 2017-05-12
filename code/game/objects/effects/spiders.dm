@@ -136,7 +136,7 @@
 		dormant = FALSE
 
 	if(dormant)
-		moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	else
 		processing_objects |= src
 
@@ -151,7 +151,7 @@
 
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
-		moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	processing_objects -= src
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
@@ -170,7 +170,7 @@
 		return
 	dormant = FALSE
 
-	moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	processing_objects |= src
 
 /obj/effect/spider/spiderling/Bump(atom/user)

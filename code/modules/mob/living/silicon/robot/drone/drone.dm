@@ -61,13 +61,13 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/New()
 	..()
-	moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
 	if(hat)
 		hat.dropInto(loc)
 		hat = null
-	moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	GLOB.moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 	. = ..()
 
 /mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
@@ -253,7 +253,7 @@ var/list/mob_hat_cache = list()
 	connected_ai = null
 	clear_supplied_laws()
 	clear_inherent_laws()
-	qdel_null(laws)
+	QDEL_NULL(laws)
 	laws = new /datum/ai_laws/syndicate_override
 	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
@@ -316,7 +316,7 @@ var/list/mob_hat_cache = list()
 	clear_supplied_laws(1)
 	clear_inherent_laws(1)
 	clear_ion_laws(1)
-	qdel_null(laws)
+	QDEL_NULL(laws)
 	var/law_type = initial(laws) || using_map.default_law_type
 	laws = new law_type
 

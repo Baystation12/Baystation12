@@ -28,8 +28,8 @@
 
 	to_chat(usr, "Checking for overlapping pipes...")
 	next_turf:
-		for(var/turf/T in world)
-			for(var/dir in cardinal)
+		for(var/turf/T)
+			for(var/dir in GLOB.cardinal)
 				var/list/connect_types = list(1 = 0, 2 = 0, 3 = 0)
 				for(var/obj/machinery/atmospherics/pipe in T)
 					if(dir & pipe.initialize_directions)

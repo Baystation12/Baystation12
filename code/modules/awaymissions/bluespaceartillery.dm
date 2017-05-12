@@ -32,14 +32,14 @@
 	onclose(user, "scroll")
 	return
 
-/obj/machinery/artillerycontrol/Topic(href, href_list, state = physical_state)
+/obj/machinery/artillerycontrol/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())
 		return 1
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		var/area/thearea = input("Area to jump bombard", "Open Fire") as null|anything in teleportlocs
 		thearea = thearea ? teleportlocs[thearea] : thearea
-		if (!thearea || CanUseTopic(usr, physical_state) != STATUS_INTERACTIVE)
+		if (!thearea || CanUseTopic(usr, GLOB.physical_state) != STATUS_INTERACTIVE)
 			return
 		if (src.reload < 180)
 			return

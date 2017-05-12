@@ -435,7 +435,7 @@
 	cell.use(cost * CELLRATE)
 	return 1
 
-/obj/item/weapon/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/nano_state = inventory_state)
+/obj/item/weapon/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/nano_state = GLOB.inventory_state)
 	if(!user)
 		return
 
@@ -503,7 +503,7 @@
 	if(module_list.len)
 		data["modules"] = module_list
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550, state = nano_state)
 		ui.set_initial_data(data)
@@ -896,7 +896,7 @@
 			wearer.inertia_dir = 0 //If not then we can reset inertia and move
 
 	if(malfunctioning)
-		direction = pick(cardinal)
+		direction = pick(GLOB.cardinal)
 
 	// Inside an object, tell it we moved.
 	if(isobj(wearer.loc) || ismob(wearer.loc))

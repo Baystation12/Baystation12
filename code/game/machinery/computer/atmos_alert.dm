@@ -37,7 +37,7 @@ var/global/list/minor_air_alarms = list()
 	data["priority_alarms"] = major_alarms
 	data["minor_alarms"] = minor_alarms
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmos_alert.tmpl", src.name, 500, 500)
 		ui.set_initial_data(data)

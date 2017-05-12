@@ -31,8 +31,8 @@
 
 /obj/item/weapon/defibrillator/Destroy()
 	. = ..()
-	qdel_null(paddles)
-	qdel_null(bcell)
+	QDEL_NULL(paddles)
+	QDEL_NULL(bcell)
 
 /obj/item/weapon/defibrillator/loaded //starts with regular power cell for R&D to replace later in the round.
 	bcell = /obj/item/weapon/cell/apc

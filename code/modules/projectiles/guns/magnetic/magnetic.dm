@@ -31,9 +31,9 @@
 	processing_objects |= src
 
 /obj/item/weapon/gun/magnetic/Destroy()
-	qdel_null(cell)
-	qdel_null(loaded)
-	qdel_null(capacitor)
+	QDEL_NULL(cell)
+	QDEL_NULL(loaded)
+	QDEL_NULL(capacitor)
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/process()

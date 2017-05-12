@@ -63,7 +63,7 @@
 /obj/item/integrated_circuit/input/numberpad/OnTopic(href_list, user)
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
-		if(isnum(new_input) && CanInteract(user, physical_state))
+		if(isnum(new_input) && CanInteract(user, GLOB.physical_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			activate_pin(1)
 		return IC_TOPIC_REFRESH
@@ -83,7 +83,7 @@
 /obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
-		if(istext(new_input) && CanInteract(user, physical_state))
+		if(istext(new_input) && CanInteract(user, GLOB.physical_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			activate_pin(1)
 			return IC_TOPIC_REFRESH
@@ -360,7 +360,7 @@
 	scanned_access = new()
 
 /obj/item/integrated_circuit/input/access_scanner/Destroy()
-	qdel_null(scanned_access)
+	QDEL_NULL(scanned_access)
 	if(contained_id)
 		contained_id.dropInto(loc)
 		contained_id = null

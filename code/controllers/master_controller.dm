@@ -104,8 +104,8 @@ datum/controller/game_controller/proc/setup_objects()
 
 #undef CHECK_SLEEP_MASTER
 
-datum/controller/game_controller/proc/report_progress(var/progress_message)
-	admin_notice("<span class='danger'>[progress_message]</span>", R_DEBUG)
+/proc/report_progress(var/progress_message)
+	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
 #ifdef UNIT_TEST
 	to_world_log("\[[time2text(world.realtime, "hh:mm:ss")]\] [progress_message]")
 #endif

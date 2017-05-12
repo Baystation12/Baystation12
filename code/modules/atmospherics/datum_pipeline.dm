@@ -14,7 +14,7 @@ datum/pipeline
 
 	Destroy()
 		processing_objects -= src
-		qdel_null(network)
+		QDEL_NULL(network)
 
 		if(air && air.volume)
 			temporarily_store_air()

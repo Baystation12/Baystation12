@@ -62,7 +62,7 @@
 /obj/item/device/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
 	if(!secured)
 		return
-	if(!CanInteract(user, physical_state))
+	if(!CanInteract(user, GLOB.physical_state))
 		return
 
 	user.set_machine(src)
@@ -73,7 +73,7 @@
 	user << browse(jointext(dat,null), "window=infra")
 	onclose(user, "infra")
 
-/obj/item/device/assembly/infra/Topic(href, href_list, state = physical_state)
+/obj/item/device/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())
 		usr << browse(null, "window=infra")
 		onclose(usr, "infra")

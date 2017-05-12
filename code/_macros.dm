@@ -95,9 +95,9 @@
 
 #define CanPhysicallyInteract(user) CanInteract(user, physical_state)
 
-#define qdel_null_list(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
+#define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 
-#define qdel_null(x) if(x) { qdel(x) ; x = null }
+#define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 

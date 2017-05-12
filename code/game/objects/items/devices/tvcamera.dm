@@ -43,7 +43,7 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/item/device/tvcamera/Topic(bred, href_list, state = physical_state)
+/obj/item/device/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
 	if(..())
 		return 1
 	if(href_list["channel"])

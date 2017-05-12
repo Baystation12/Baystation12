@@ -269,10 +269,10 @@
 /obj/structure/bed/roller/buckle_mob()
 	. = ..()
 	if(.)
-		moved_event.register(src, src, /obj/structure/bed/roller/proc/move_buckled)
+		GLOB.moved_event.register(src, src, /obj/structure/bed/roller/proc/move_buckled)
 
 /obj/structure/bed/roller/unbuckle_mob()
-	moved_event.unregister(src, src)
+	GLOB.moved_event.unregister(src, src)
 	return ..()
 
 /obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)

@@ -32,7 +32,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 		var/node1_dir
 		var/node2_dir
 
-		for(var/direction in cardinal)
+		for(var/direction in GLOB.cardinal)
 			if(direction&initialize_directions_he)
 				if (!node1_dir)
 					node1_dir = direction

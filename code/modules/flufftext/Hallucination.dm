@@ -275,13 +275,13 @@ proc/check_panel(mob/M)
 	my_target.client.images -= down
 	my_target.client.images -= right
 	my_target.client.images -= left
-	qdel_null(left)
-	qdel_null(right)
-	qdel_null(up)
-	qdel_null(down)
+	QDEL_NULL(left)
+	QDEL_NULL(right)
+	QDEL_NULL(up)
+	QDEL_NULL(down)
 	if(my_target)
 		my_target.hallucinations -= src
-	..()
+	. = ..()
 
 /obj/effect/fake_attacker/attackby(var/obj/item/weapon/P as obj, mob/user as mob)
 	step_away(src, my_target, 2)

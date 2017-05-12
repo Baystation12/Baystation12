@@ -21,7 +21,7 @@ var/list/all_virtual_listeners = list()
 	if(!istype(host, host_type))
 		CRASH("Received an unexpected host type. Expected [host_type], was [log_info_line(host)].")
 	src.host = host
-	moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
+	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
 
 	mob_list -= src
 	all_virtual_listeners += src
@@ -29,7 +29,7 @@ var/list/all_virtual_listeners = list()
 	updateicon()
 
 /mob/observer/virtual/Destroy()
-	moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
+	GLOB.moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
 	all_virtual_listeners -= src
 	host = null
 	return ..()

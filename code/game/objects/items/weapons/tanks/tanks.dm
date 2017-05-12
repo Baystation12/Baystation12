@@ -67,10 +67,10 @@ var/list/global/tank_gauge_cache = list()
 	return
 
 /obj/item/weapon/tank/Destroy()
-	qdel_null(air_contents)
+	QDEL_NULL(air_contents)
 
 	processing_objects.Remove(src)
-	qdel_null(src.proxyassembly)
+	QDEL_NULL(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
@@ -261,7 +261,7 @@ var/list/global/tank_gauge_cache = list()
 					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

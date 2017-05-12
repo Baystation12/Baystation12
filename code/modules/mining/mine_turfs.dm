@@ -132,7 +132,7 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/MineralSpread()
 	if(mineral && mineral.spread)
-		for(var/trydir in cardinal)
+		for(var/trydir in GLOB.cardinal)
 			if(prob(mineral.spread_chance))
 				var/turf/simulated/mineral/target_turf = get_step(src, trydir)
 				if(istype(target_turf) && !target_turf.mineral)

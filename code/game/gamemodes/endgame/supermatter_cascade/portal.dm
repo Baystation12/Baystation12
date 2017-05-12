@@ -91,4 +91,4 @@
 		src << riftimage
 
 	else
-		qdel_null(riftimage)
+		QDEL_NULL(riftimage)

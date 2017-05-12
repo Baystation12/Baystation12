@@ -63,7 +63,7 @@
 	return parent.return_network(reference)
 
 /obj/machinery/atmospherics/pipe/Destroy()
-	qdel_null(parent)
+	QDEL_NULL(parent)
 	if(air_temporary)
 		loc.assume_air(air_temporary)
 
@@ -287,7 +287,7 @@
 	var/node1_dir
 	var/node2_dir
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -549,7 +549,7 @@
 /obj/machinery/atmospherics/pipe/manifold/initialize()
 	var/connect_directions = (NORTH|SOUTH|EAST|WEST)&(~dir)
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
@@ -561,7 +561,7 @@
 				break
 
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
@@ -573,7 +573,7 @@
 				break
 
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))

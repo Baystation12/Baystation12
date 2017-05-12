@@ -14,7 +14,7 @@
 	for(var/n in 1 to severity)
 		waves += rand(5,15)
 
-	start_side = pick(cardinal)
+	start_side = pick(GLOB.cardinal)
 	endWhen = worst_case_end()
 
 /datum/event/meteor_wave/announce()

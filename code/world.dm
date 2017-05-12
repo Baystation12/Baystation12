@@ -75,6 +75,9 @@
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 	icon_size = WORLD_ICON_SIZE
 	fps = 20
+#ifdef GC_FAILURE_HARD_LOOKUP
+	loop_checks = FALSE
+#endif
 
 #define RECOMMENDED_VERSION 511
 /world/New()
@@ -112,7 +115,7 @@
 	. = ..()
 
 #ifdef UNIT_TEST
-	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
+	log_unit_test("Unit Tests Enabled. This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
 

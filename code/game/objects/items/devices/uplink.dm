@@ -70,7 +70,7 @@
 
 		discount_item = new_discount_item
 		update_nano_data()
-		nanomanager.update_uis(src)
+		GLOB.nanomanager.update_uis(src)
 
 /obj/item/device/uplink/proc/is_improper_item(var/datum/uplink_item/new_discount_item, discount_amount)
 	if(!new_discount_item)
@@ -128,7 +128,7 @@
 	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)	// No auto-refresh
 		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = uistate)
 		ui.set_initial_data(data)
@@ -155,7 +155,7 @@
 		UI.buy(src, usr)
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+		var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
 		ui.close()
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
