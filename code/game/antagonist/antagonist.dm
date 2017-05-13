@@ -119,7 +119,24 @@
 		else if(player_is_antag(player))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are already an antagonist!")
 		else
-			candidates += player
+			candidates |= player
+
+	return candidates
+
+// Builds a list of potential antags without actually setting them. Used to test mode viability.
+/datum/antagonist/proc/get_potential_candidates(var/datum/game_mode/mode, var/ghosts_only)
+	var/candidates = list()
+
+	// Keeping broken up for readability
+	for(var/datum/mind/player in mode.get_players_for_role(role_type, id))
+		if(ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
+		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
+		else if(player.special_role)
+		else if (player in pending_antagonists)
+		else if(!can_become_antag(player))
+		else if(player_is_antag(player))
+		else
+			candidates |= player
 
 	return candidates
 
