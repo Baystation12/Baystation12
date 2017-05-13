@@ -621,14 +621,26 @@
 			stat("Round Duration", roundduration2text())
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
-		if(client.holder)
+
+	if(client.holder)
+		if(statpanel("Processes") && processScheduler)
+			processScheduler.statProcesses()
+		if(statpanel("MC"))
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
-
-	if(client.holder && statpanel("Processes"))
-		if(processScheduler)
-			processScheduler.statProcesses()
-		sleep(1 SECOND)
+			stat(null)
+			if(Master)
+				Master.stat_entry()
+			else
+				stat("Master Controller:", "ERROR")
+			if(Failsafe)
+				Failsafe.stat_entry()
+			else
+				stat("Failsafe Controller:", "ERROR")
+			if(Master)
+				stat(null)
+				for(var/datum/controller/subsystem/SS in Master.subsystems)
+					SS.stat_entry()
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
