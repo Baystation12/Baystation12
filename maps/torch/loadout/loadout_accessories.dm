@@ -32,11 +32,7 @@
 
 /datum/gear/accessory/dashiki/New()
 	..()
-	var/dashikis = list()
-	dashikis["black dashiki"] = /obj/item/clothing/accessory/dashiki
-	dashikis["red dashiki"] = /obj/item/clothing/accessory/dashiki/red
-	dashikis["blue dashiki"] = /obj/item/clothing/accessory/dashiki/blue
-	gear_tweaks += new/datum/gear_tweak/path(dashikis)
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/dashiki)
 
 /datum/gear/accessory/thawb
 	display_name = "thawb"
