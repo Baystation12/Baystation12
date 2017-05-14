@@ -201,11 +201,13 @@
 		return
 
 	// Basic dismantling.
-	if(isnull(construction_stage) || !reinf_material)
+	if(isnull(construction_stage) || !reinf_material || istype(W,/obj/item/weapon/pickaxe/plasmacutter))
 
 		var/cut_delay = 60 - material.cut_delay
 		var/dismantle_verb
 		var/dismantle_sound
+		if(reinf_material)
+			cut_delay *= 3
 
 		if(istype(W,/obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = W
