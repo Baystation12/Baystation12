@@ -95,11 +95,11 @@ var/list/possible_cable_coil_colours
 	cable_list += src //add it to the global cable list
 
 
-/obj/structure/cable/Destroy()					// called when a cable is deleted
+/obj/structure/cable/Destroy()     // called when a cable is deleted
 	if(powernet)
-		cut_cable_from_powernet()				// update the powernets
-	cable_list -= src							//remove it from global cable list
-	..()										// then go ahead and delete the cable
+		cut_cable_from_powernet()  // update the powernets
+	cable_list -= src              // remove it from global cable list
+	. = ..()                       // then go ahead and delete the cable
 
 
 // Ghost examining the cable -> tells him the power
@@ -439,7 +439,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		return
 
 	// remove the cut cable from its turf and powernet, so that it doesn't get count in propagate_network worklist
-	loc = null
+	forceMove(null)
 	powernet.remove_cable(src) //remove the cut cable from its powernet
 
 	var/datum/powernet/newPN = new()// creates a new powernet...
@@ -450,6 +450,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		for(var/obj/machinery/power/P in T1)
 			if(!P.connect_to_network()) //can't find a node cable on a the turf to connect to
 				P.disconnect_from_network() //remove from current network
+                
+    powernet = null // And finally null the powernet var.
 
 ///////////////////////////////////////////////
 // The cable coil object, used for laying cable
