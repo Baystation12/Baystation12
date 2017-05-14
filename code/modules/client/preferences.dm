@@ -28,7 +28,7 @@ datum/preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 	var/age = 30						//age of character
-	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
+	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
@@ -399,7 +399,7 @@ datum/preferences
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
-	
+
 	if(!character.isSynthetic())
 		character.nutrition = rand(140,360)
 

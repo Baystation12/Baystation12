@@ -37,7 +37,6 @@ var/global/universe_has_ended = 0
 // Apply changes when entering state
 /datum/universal_state/supermatter_cascade/OnEnter()
 	set background = 1
-	garbage_collector.garbage_collect = 0
 	to_world("<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>")
 	sound_to(world, sound('sound/effects/cascade.ogg'))
 
@@ -91,7 +90,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
 	spawn(0)
-		for(var/atom/movable/lighting_overlay/L in world)
+		for(var/datum/lighting_corner/L in world)
 			if(L.z in using_map.admin_levels)
 				L.update_lumcount(1,1,1)
 			else

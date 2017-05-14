@@ -25,6 +25,8 @@
 			return global.CMinutes;
 		if("COUGHBLOCK")
 			return global.COUGHBLOCK;
+		if("CURRENT_TICKLIMIT")
+			return global.CURRENT_TICKLIMIT;
 		if("DEAFBLOCK")
 			return global.DEAFBLOCK;
 		if("DEPT_FREQS")
@@ -39,6 +41,8 @@
 			return global.FAKEBLOCK;
 		if("FIREBLOCK")
 			return global.FIREBLOCK;
+		if("Failsafe")
+			return global.Failsafe;
 		if("GLASSESBLOCK")
 			return global.GLASSESBLOCK;
 		if("HALLUCINATIONBLOCK")
@@ -53,10 +57,18 @@
 			return global.IClog;
 		if("INCREASERUNBLOCK")
 			return global.INCREASERUNBLOCK;
+		if("MC_restart_clear")
+			return global.MC_restart_clear;
+		if("MC_restart_count")
+			return global.MC_restart_count;
+		if("MC_restart_timeout")
+			return global.MC_restart_timeout;
 		if("MONKEYBLOCK")
 			return global.MONKEYBLOCK;
 		if("MORPHBLOCK")
 			return global.MORPHBLOCK;
+		if("Master")
+			return global.Master;
 		if("NERVOUSBLOCK")
 			return global.NERVOUSBLOCK;
 		if("NOBREATHBLOCK")
@@ -81,6 +93,8 @@
 			return global.SKILLS;
 		if("SMALLSIZEBLOCK")
 			return global.SMALLSIZEBLOCK;
+		if("SSgarbage")
+			return global.SSgarbage;
 		if("TELEBLOCK")
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
@@ -443,8 +457,6 @@
 			return global.default_state;
 		if("defer_powernet_rebuild")
 			return global.defer_powernet_rebuild;
-		if("delayed_garbage")
-			return global.delayed_garbage;
 		if("delta_index")
 			return global.delta_index;
 		if("density_set_event")
@@ -599,8 +611,6 @@
 			return global.game_year;
 		if("gamemode_cache")
 			return global.gamemode_cache;
-		if("garbage_collector")
-			return global.garbage_collector;
 		if("gas_data")
 			return global.gas_data;
 		if("gear_datums")
@@ -855,6 +865,8 @@
 			return global.meteors_normal;
 		if("meteors_threatening")
 			return global.meteors_threatening;
+		if("midnight_rollovers")
+			return global.midnight_rollovers;
 		if("mil_branches")
 			return global.mil_branches;
 		if("mining_floors")
@@ -1097,6 +1109,8 @@
 			return global.robot_module_types;
 		if("robot_modules")
 			return global.robot_modules;
+		if("rollovercheck_last_timeofday")
+			return global.rollovercheck_last_timeofday;
 		if("round_progressing")
 			return global.round_progressing;
 		if("round_start_time")
@@ -1105,6 +1119,8 @@
 			return global.roundstart_hour;
 		if("rune_list")
 			return global.rune_list;
+		if("runtime_diary")
+			return global.runtime_diary;
 		if("rustle_sound")
 			return global.rustle_sound;
 		if("same_wires")
@@ -1179,6 +1195,8 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
+		if("sortInstance")
+			return global.sortInstance;
 		if("sound_player")
 			return global.sound_player;
 		if("sounds_cache")
@@ -1484,6 +1502,8 @@
 			global.CMinutes=newval;
 		if("COUGHBLOCK")
 			global.COUGHBLOCK=newval;
+		if("CURRENT_TICKLIMIT")
+			global.CURRENT_TICKLIMIT=newval;
 		if("DEAFBLOCK")
 			global.DEAFBLOCK=newval;
 		if("DEPT_FREQS")
@@ -1498,6 +1518,8 @@
 			global.FAKEBLOCK=newval;
 		if("FIREBLOCK")
 			global.FIREBLOCK=newval;
+		if("Failsafe")
+			global.Failsafe=newval;
 		if("GLASSESBLOCK")
 			global.GLASSESBLOCK=newval;
 		if("HALLUCINATIONBLOCK")
@@ -1512,10 +1534,18 @@
 			global.IClog=newval;
 		if("INCREASERUNBLOCK")
 			global.INCREASERUNBLOCK=newval;
+		if("MC_restart_clear")
+			global.MC_restart_clear=newval;
+		if("MC_restart_count")
+			global.MC_restart_count=newval;
+		if("MC_restart_timeout")
+			global.MC_restart_timeout=newval;
 		if("MONKEYBLOCK")
 			global.MONKEYBLOCK=newval;
 		if("MORPHBLOCK")
 			global.MORPHBLOCK=newval;
+		if("Master")
+			global.Master=newval;
 		if("NERVOUSBLOCK")
 			global.NERVOUSBLOCK=newval;
 		if("NOBREATHBLOCK")
@@ -1540,6 +1570,8 @@
 			global.SKILLS=newval;
 		if("SMALLSIZEBLOCK")
 			global.SMALLSIZEBLOCK=newval;
+		if("SSgarbage")
+			global.SSgarbage=newval;
 		if("TELEBLOCK")
 			global.TELEBLOCK=newval;
 		if("TWITCHBLOCK")
@@ -1902,8 +1934,6 @@
 			global.default_state=newval;
 		if("defer_powernet_rebuild")
 			global.defer_powernet_rebuild=newval;
-		if("delayed_garbage")
-			global.delayed_garbage=newval;
 		if("delta_index")
 			global.delta_index=newval;
 		if("density_set_event")
@@ -2058,8 +2088,6 @@
 			global.game_year=newval;
 		if("gamemode_cache")
 			global.gamemode_cache=newval;
-		if("garbage_collector")
-			global.garbage_collector=newval;
 		if("gas_data")
 			global.gas_data=newval;
 		if("gear_datums")
@@ -2314,6 +2342,8 @@
 			global.meteors_normal=newval;
 		if("meteors_threatening")
 			global.meteors_threatening=newval;
+		if("midnight_rollovers")
+			global.midnight_rollovers=newval;
 		if("mil_branches")
 			global.mil_branches=newval;
 		if("mining_floors")
@@ -2556,6 +2586,8 @@
 			global.robot_module_types=newval;
 		if("robot_modules")
 			global.robot_modules=newval;
+		if("rollovercheck_last_timeofday")
+			global.rollovercheck_last_timeofday=newval;
 		if("round_progressing")
 			global.round_progressing=newval;
 		if("round_start_time")
@@ -2564,6 +2596,8 @@
 			global.roundstart_hour=newval;
 		if("rune_list")
 			global.rune_list=newval;
+		if("runtime_diary")
+			global.runtime_diary=newval;
 		if("rustle_sound")
 			global.rustle_sound=newval;
 		if("same_wires")
@@ -2638,6 +2672,8 @@
 			global.solar_gen_rate=newval;
 		if("solars_list")
 			global.solars_list=newval;
+		if("sortInstance")
+			global.sortInstance=newval;
 		if("sound_player")
 			global.sound_player=newval;
 		if("sounds_cache")
@@ -2930,6 +2966,7 @@
 	"CLUMSYBLOCK",
 	"CMinutes",
 	"COUGHBLOCK",
+	"CURRENT_TICKLIMIT",
 	"DEAFBLOCK",
 	"DEPT_FREQS",
 	"DIFFMUT",
@@ -2937,6 +2974,7 @@
 	"EPILEPSYBLOCK",
 	"FAKEBLOCK",
 	"FIREBLOCK",
+	"Failsafe",
 	"GLASSESBLOCK",
 	"HALLUCINATIONBLOCK",
 	"HEADACHEBLOCK",
@@ -2944,8 +2982,12 @@
 	"Holiday",
 	"IClog",
 	"INCREASERUNBLOCK",
+	"MC_restart_clear",
+	"MC_restart_count",
+	"MC_restart_timeout",
 	"MONKEYBLOCK",
 	"MORPHBLOCK",
+	"Master",
 	"NERVOUSBLOCK",
 	"NOBREATHBLOCK",
 	"NOPRINTSBLOCK",
@@ -2958,6 +3000,7 @@
 	"SHOCKIMMUNITYBLOCK",
 	"SKILLS",
 	"SMALLSIZEBLOCK",
+	"SSgarbage",
 	"TELEBLOCK",
 	"TWITCHBLOCK",
 	"Tier1Runes",
@@ -3140,7 +3183,6 @@
 	"default_pai_software",
 	"default_state",
 	"defer_powernet_rebuild",
-	"delayed_garbage",
 	"delta_index",
 	"density_set_event",
 	"department_accounts",
@@ -3218,7 +3260,6 @@
 	"game_version",
 	"game_year",
 	"gamemode_cache",
-	"garbage_collector",
 	"gas_data",
 	"gear_datums",
 	"gear_tweak_free_color_choice_",
@@ -3346,6 +3387,7 @@
 	"meteors_moderate",
 	"meteors_normal",
 	"meteors_threatening",
+	"midnight_rollovers",
 	"mil_branches",
 	"mining_floors",
 	"mining_walls",
@@ -3467,10 +3509,12 @@
 	"robot_inventory",
 	"robot_module_types",
 	"robot_modules",
+	"rollovercheck_last_timeofday",
 	"round_progressing",
 	"round_start_time",
 	"roundstart_hour",
 	"rune_list",
+	"runtime_diary",
 	"rustle_sound",
 	"same_wires",
 	"scarySounds",
@@ -3508,6 +3552,7 @@
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",
+	"sortInstance",
 	"sound_player",
 	"sounds_cache",
 	"spacevines_spawned",

@@ -25,7 +25,6 @@
 	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
 	var/blessed = 0             // Has the turf been blessed?
-	var/dynamic_lighting = 1    // Does the turf use dynamic lighting?
 
 	var/list/decals
 
@@ -52,6 +51,7 @@
 	turfs -= src
 	remove_cleanables()
 	..()
+	return QDEL_HINT_IWILLGC
 
 /turf/ex_act(severity)
 	return 0

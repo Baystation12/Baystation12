@@ -132,9 +132,9 @@
 	ssjm = new ssjm()
 
 /obj/item/device/uplink_service/jamming/Destroy()
-	. = ..()
 	qdel(ssjm)
 	ssjm = null
+	. = ..()
 
 /obj/item/device/uplink_service/jamming/enable(var/mob/user = usr)
 	ssjm.enable()

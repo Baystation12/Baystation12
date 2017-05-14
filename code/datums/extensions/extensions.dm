@@ -10,6 +10,7 @@
 
 /datum/extension/Destroy()
 	holder = null
+	. = ..()
 
 /datum
 	var/list/datum/extension/extensions

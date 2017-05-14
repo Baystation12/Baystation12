@@ -144,12 +144,12 @@
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
 			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar)
+			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
 			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar)
+			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 
 /datum/job/hos
 	title = "Chief of Security"
@@ -411,6 +411,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
+	minimal_player_age = 7
 	selection_color = "#5b4d20"
 	alt_titles = list(
 		"Mechanic",

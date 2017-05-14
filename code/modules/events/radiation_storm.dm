@@ -9,7 +9,7 @@
 	var/postStartTicks 		= 0
 
 /datum/event/radiation_storm/announce()
-	command_announcement.Announce("High levels of radiation detected near the [station_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[station_name()] Sensor Array", new_sound = 'sound/AI/radiation.ogg')
+	command_announcement.Announce("High levels of radiation detected in proximity of the [station_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[station_name()] Sensor Array", new_sound = using_map.radiation_detected_sound)
 
 /datum/event/radiation_storm/start()
 	make_maint_all_access()
@@ -27,7 +27,7 @@
 		radiate()
 
 	else if(activeFor == leaveBelt)
-		command_announcement.Announce("The [station_name()] has passed the radiation belt. Please allow for up to one minute while radiation levels dissipate, and report to medbay if you experience any unusual symptoms. Maintenance will lose all access again shortly.", "[station_name()] Sensor Array")
+		command_announcement.Announce("The [station_name()] has passed the radiation belt. Please allow for up to one minute while radiation levels dissipate, and report to the infirmary if you experience any unusual symptoms. Maintenance will lose all access again shortly.", "[station_name()] Sensor Array")
 
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)

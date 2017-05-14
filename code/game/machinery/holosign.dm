@@ -59,7 +59,7 @@
 	use_power(5)
 
 	active = !active
-	icon_state = "light[active]"
+	update_icon()
 
 	for(var/obj/machinery/holosign/M in machines)
 		if (M.id == src.id)
@@ -67,4 +67,8 @@
 				M.toggle()
 				return
 
+	return
+
+/obj/machinery/button/holosign/update_icon()
+	icon_state = "light[active]"
 	return

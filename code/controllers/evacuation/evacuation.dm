@@ -90,7 +90,7 @@ var/datum/evacuation_controller/evacuation_controller
 			if(istype(A, /area/hallway))
 				A.readyalert()
 		if(!skip_announce)
-			evac_called.Announce(replacetext(using_map.emergency_shuttle_called_message, "%ETA%", "[round(get_eta()/60)] minute\s."))
+			using_map.emergency_shuttle_called_announcement()
 	else
 		if(!skip_announce)
 			priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60)] minute\s"))

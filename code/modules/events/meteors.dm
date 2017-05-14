@@ -20,7 +20,7 @@
 /datum/event/meteor_wave/announce()
 	switch(severity)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Meteors have been detected on collision course with the [station_name()].", "[station_name()] Sensor Array", new_sound = 'sound/AI/meteors.ogg')
+			using_map.meteors_detected_announcement()
 		else
 			command_announcement.Announce("The [station_name()] is now in a meteor shower.", "[station_name()] Sensor Array")
 
