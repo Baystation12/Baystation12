@@ -20,7 +20,7 @@
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/flats
-	allowed_roles = SEMIFORMAL_ROLES
+	allowed_roles = SEMIANDFORMAL_ROLES
 
 /datum/gear/shoes/high
 	allowed_roles = FORMAL_ROLES

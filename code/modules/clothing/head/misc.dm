@@ -295,3 +295,10 @@
 	icon_state = "cowboyhat"
 	item_state = "cowboy_hat"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/taqiyah
+	name = "taqiyah"
+	desc = "A short, rounded skullcap usually worn for religious purposes."
+	icon_state = "taqiyah"
+	item_state = "taqiyah"
+	body_parts_covered = 0
