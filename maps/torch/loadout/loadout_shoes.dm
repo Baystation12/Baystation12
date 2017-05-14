@@ -20,7 +20,7 @@
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/shoes/flats
-	allowed_roles = list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty", "NanoTrasen Liaison", "Research Director", "Senior Researcher", "Scientist", "SolGov Representative")
+	allowed_roles = SEMIANDFORMAL_ROLES
 
 /datum/gear/shoes/high
 	allowed_roles = FORMAL_ROLES
