@@ -133,6 +133,10 @@
 						to_chat(user, "<span class='notice'>You cannot directly remove reagents from this object.</span>")
 						return
 
+					if(istype(target, /obj/item/weapon/reagent_containers/hypospray/autoinjector))
+						to_chat(user, "<span class='notice'>You cannot empty an autoinjector with a syringe.</span>")
+						return
+
 					var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 					to_chat(user, "<span class='notice'>You fill the syringe with [trans] units of the solution.</span>")
 					update_icon()
