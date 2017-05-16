@@ -47,10 +47,6 @@
 	if(light_power && light_range)
 		update_light()
 
-	if(opacity && isturf(loc))
-		var/turf/T = loc
-		T.Entered(src)
-
 /atom/Destroy()
 	if(light)
 		light.destroy()

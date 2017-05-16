@@ -71,12 +71,15 @@
 /turf/Entered(var/atom/movable/Obj, var/atom/OldLoc)
 	. = ..()
 	if(Obj && Obj.opacity)
-		handle_opacity_change(Obj)
+		if(!opaque_counter++)
+			reconsider_lights()
+		
 
 /turf/Exited(var/atom/movable/Obj, var/atom/newloc)
 	. = ..()
 	if(Obj && Obj.opacity)
-		handle_opacity_change(Obj)
+		if(!(--opaque_counter))
+			reconsider_lights()
 
 /turf/proc/get_corners()
 	if(opaque_counter)
@@ -96,21 +99,15 @@
 		corners[i] = new /datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i])
 
 /turf/proc/handle_opacity_change(var/atom/opacity_changer)
-	if((opacity_changer.loc != src) && opacity_changer.opacity)
-		opaque_counter--
-	var/old_counter = opaque_counter
-	if(opacity_changer.opacity && opaque_counter)
-		opaque_counter++
-		return
-	if(!opacity_changer.opacity)
-		opaque_counter--
-		if(old_counter && !opaque_counter)
-			reconsider_lights()
-	else
-		opaque_counter++
-		if(!old_counter && opaque_counter)
-			reconsider_lights()
-			
-	
+	if(opacity_changer)
+		if(opacity_changer.opacity)
+			if(!opaque_counter)
+				reconsider_lights()
+			opaque_counter++
+		else
+			var/old_counter = opaque_counter
+			opaque_counter--
+			if(old_counter && !opaque_counter)
+				reconsider_lights()
 	
 	
