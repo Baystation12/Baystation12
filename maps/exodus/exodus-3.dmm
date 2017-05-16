@@ -750,7 +750,7 @@
 "sg" = (/obj/machinery/body_scanconsole{dir = 4},/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
 "sh" = (/obj/machinery/door/window{dir = 1; name = "Secure Storage"; req_access = list(150)},/turf/simulated/floor/shuttle/darkred,/area/syndicate_station/start)
 "si" = (/obj/structure/table/rack,/obj/item/weapon/storage/belt/utility/full,/obj/item/device/multitool,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/shuttle/darkred,/area/syndicate_station/start)
-"sj" = (/obj/item/weapon/reagent_containers/food/condiment/saltshaker{pixel_x = -6},/obj/structure/table/standard,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
+"sj" = (/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{pixel_x = -6},/obj/structure/table/standard,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
 "sk" = (/turf/unsimulated/floor{dir = 2; icon_state = "white"},/area/centcom/living)
 "sl" = (/obj/machinery/button/remote/blast_door{id = "syndieshutters_telebay"; name = "remote shutter control"; pixel_x = 0; pixel_y = -25; req_access = list(150)},/turf/simulated/floor/shuttle/darkred,/area/syndicate_station/start)
 "sm" = (/obj/machinery/bodyscanner{dir = 4},/turf/simulated/floor/shuttle/white,/area/shuttle/administration/centcom)
@@ -1827,7 +1827,7 @@
 "Nk" = (/obj/machinery/computer/shuttle_control/emergency,/turf/simulated/floor/shuttle/white,/area/shuttle/escape/centcom)
 "Nl" = (/obj/structure/table/rack,/obj/item/weapon/storage/backpack/ert/commander,/obj/item/clothing/suit/armor/vest/ert,/obj/item/clothing/head/helmet/ert,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
 "Nm" = (/obj/machinery/computer/med_data,/turf/simulated/floor/shuttle/white,/area/shuttle/escape/centcom)
-"Nn" = (/obj/structure/table/reinforced,/obj/effect/floor_decal/corner/blue/diagonal,/obj/item/weapon/reagent_containers/food/condiment/saltshaker{pixel_x = -3; pixel_y = 0},/obj/item/weapon/reagent_containers/food/condiment/peppermill{pixel_x = 3},/turf/unsimulated/floor{icon_state = "dark"},/area/rescue_base/base)
+"Nn" = (/obj/structure/table/reinforced,/obj/effect/floor_decal/corner/blue/diagonal,/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{pixel_x = -3; pixel_y = 0},/obj/item/weapon/reagent_containers/food/condiment/small/peppermill{pixel_x = 3},/turf/unsimulated/floor{icon_state = "dark"},/area/rescue_base/base)
 "No" = (/obj/machinery/newscaster{pixel_y = -27},/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/acting/backstage)
 "Np" = (/turf/unsimulated/floor{icon_state = "asteroid"},/area/rescue_base/base)
 "Nq" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/floor{icon_state = "asteroidplating"},/area/rescue_base/base)
@@ -2630,4 +2630,3 @@ aMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaM
 aMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMfLaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbmumuaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMfLaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaM
 aMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMfLaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbVbmumuaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMfLaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaMaM
 "}
-
