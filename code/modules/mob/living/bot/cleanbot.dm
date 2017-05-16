@@ -145,7 +145,7 @@
 
 	target_types += /obj/effect/decal/cleanable/blood/oil
 	target_types += /obj/effect/decal/cleanable/vomit
-	target_types += /obj/effect/decal/cleanable/crayon
+	target_types += /obj/effect/decal/cleanable/marker
 	target_types += /obj/effect/decal/cleanable/liquid_fuel
 	target_types += /obj/effect/decal/cleanable/mucus
 	target_types += /obj/effect/decal/cleanable/dirt

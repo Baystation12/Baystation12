@@ -459,7 +459,7 @@
 /datum/reagent/rezadone
 	value = 5
 
-/datum/reagent/crayon_dust
+/datum/reagent/marker_ink
 	value = 0.001
 
 /datum/reagent/adminordrazine

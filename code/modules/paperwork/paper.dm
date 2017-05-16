@@ -33,7 +33,7 @@
 
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
-	var/const/crayonfont = "Comic Sans MS"
+	var/const/markerfont = "Comic Sans MS"
 
 /obj/item/weapon/paper/New(loc, text,title)
 	..(loc)
@@ -193,14 +193,14 @@
 		return P.get_signature(user)
 	return (user && user.real_name) ? user.real_name : "Anonymous"
 
-/obj/item/weapon/paper/proc/parsepencode(t, obj/item/weapon/pen/P, mob/user, iscrayon)
+/obj/item/weapon/paper/proc/parsepencode(t, obj/item/weapon/pen/P, mob/user, ismarker)
 	if(length(t) == 0)
 		return ""
 
 	if(findtext(t, "\[sign\]"))
 		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
 
-	if(iscrayon) // If it is a crayon, and he still tries to use these, make them empty!
+	if(ismarker) // If it is a marker, and he still tries to use these, make them empty!
 		t = replacetext(t, "\[*\]", "")
 		t = replacetext(t, "\[hr\]", "")
 		t = replacetext(t, "\[small\]", "")
@@ -213,8 +213,8 @@
 		t = replacetext(t, "\[cell\]", "")
 		t = replacetext(t, "\[logo\]", "")
 
-	if(iscrayon)
-		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
+	if(ismarker)
+		t = "<font face=\"[markerfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
 	else
 		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 
@@ -275,8 +275,8 @@
 		if(!t)
 			return
 
-		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a crayon or pen.
-		var/iscrayon = 0
+		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a marker or pen.
+		var/ismarker = 0
 		if(!istype(i, /obj/item/weapon/pen))
 			if(usr.back && istype(usr.back,/obj/item/weapon/rig))
 				var/obj/item/weapon/rig/r = usr.back
@@ -288,8 +288,8 @@
 			else
 				return
 
-		if(istype(i, /obj/item/weapon/pen/crayon))
-			iscrayon = 1
+		if(istype(i, /obj/item/weapon/pen/marker))
+			ismarker = 1
 
 
 		// if paper is not in usr, then it must be near them, or in a clipboard or folder, which must be in or near usr
@@ -298,7 +298,7 @@
 
 		var/last_fields_value = fields
 
-		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
+		t = parsepencode(t, i, usr, ismarker) // Encode everything from pencode to html
 
 
 		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
