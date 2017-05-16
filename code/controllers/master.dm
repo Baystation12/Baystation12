@@ -149,7 +149,11 @@ var/CURRENT_TICKLIMIT = TICK_LIMIT_RUNNING
 	// Sort subsystems by display setting for easy access.
 	sortTim(subsystems, /proc/cmp_subsystem_display)
 	// Set world options.
+#ifdef UNIT_TEST
+	world.sleep_offline = 0
+#else
 	world.sleep_offline = 1
+#endif
 	world.fps = config.fps
 	var/initialized_tod = REALTIMEOFDAY
 	sleep(1)
