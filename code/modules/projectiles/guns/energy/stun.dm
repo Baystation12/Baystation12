@@ -22,6 +22,7 @@
 	force = 8
 	max_shots = 10
 	projectile_type = /obj/item/projectile/beam/stun/heavy
+	wielded_item_state = "tasercarbine-wielded"
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
