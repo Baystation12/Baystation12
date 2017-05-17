@@ -32,6 +32,7 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
 	var/material/implicit_material
+	var/iterate = 0 // The time in ticks between closing two different blast doors.
 
 /obj/machinery/door/blast/initialize()
 	..()
@@ -82,7 +83,7 @@
 	update_nearby_tiles()
 	src.update_icon()
 	src.set_opacity(0)
-	sleep(15)
+	sleep(12)
 	src.layer = open_layer
 	src.operating = 0
 
@@ -97,7 +98,7 @@
 	update_nearby_tiles()
 	src.update_icon()
 	src.set_opacity(1)
-	sleep(15)
+	sleep(12)
 	src.operating = 0
 
 // Proc: force_toggle()
