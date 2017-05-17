@@ -48,6 +48,21 @@
 	desc = "A tight-fitting blouse with intricate designs of flowers embroidered on it."
 	icon_state = "qipao"
 
+/obj/item/clothing/accessory/ubac
+	name = "black ubac"
+	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is black."
+	icon_state = "ubacblack"
+
+/obj/item/clothing/accessory/ubac/tan
+	name = "tan ubac"
+	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is tan."
+	icon_state = "ubactan"
+
+/obj/item/clothing/accessory/ubac/green
+	name = "green ubac"
+	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is green."
+	icon_state = "ubacgreen"
+
 /obj/item/clothing/accessory/toggleable
 	var/icon_closed
 /obj/item/clothing/accessory/toggleable/New()

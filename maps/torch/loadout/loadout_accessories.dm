@@ -143,6 +143,15 @@
 	..()
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
 
+/datum/gear/accessory/ubac
+	display_name = "ubac selection"
+	path = /obj/item/clothing/accessory/ubac
+	allowed_roles = MILITARY_ROLES
+
+/datum/gear/accessory/ubac/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/ubac)
+
 /datum/gear/accessory/tie
 	display_name = "tie selection"
 	path = /obj/item/clothing/accessory
