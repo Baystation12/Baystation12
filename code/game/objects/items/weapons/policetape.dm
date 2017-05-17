@@ -11,8 +11,8 @@
 
 	var/apply_tape = FALSE
 
-/obj/item/taperoll/initialize()
-	..()
+/obj/item/taperoll/Initialize()
+	. = ..()
 	if(apply_tape)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -20,7 +20,7 @@
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in T
 		if(airlock)
 			afterattack(airlock, null, TRUE)
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 
 
 var/list/image/hazard_overlays

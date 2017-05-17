@@ -10,7 +10,7 @@
 
 /datum/universal_state/bluespace_jump/OnEnter()
 	var/space_zlevel = using_map.get_empty_zlevel() //get a place for stragglers
-	for(var/mob/living/M in mob_list)
+	for(var/mob/living/M in GLOB.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
 			if(istype(A,/area/space)) //straggler
@@ -19,7 +19,7 @@
 					M.forceMove(T)
 			else
 				apply_bluespaced(M)
-	for(var/mob/goast in ghost_mob_list_)
+	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = 0	//can't let you click that Dave
 		goast.invisibility = SEE_INVISIBLE_LIVING
 		goast.alpha = 255
@@ -60,7 +60,7 @@
 		to_chat(M,"<span class='notice'>You feel rooted in material world again.</span>")
 		M.clear_fullscreen("bluespace")
 	M.confused = 0
-	for(var/mob/goast in ghost_mob_list_)
+	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
 		goast.invisibility = initial(goast.invisibility)
 		goast.alpha = initial(goast.alpha)
@@ -75,7 +75,7 @@
 	anchored = 1
 	var/reality = 0
 	simulated = 0
-	
+
 /obj/effect/bluegoast/New(nloc, ndaddy)
 	..(nloc)
 	if(!ndaddy)
@@ -83,12 +83,12 @@
 		return
 	daddy = ndaddy
 	appearance = daddy.appearance
-	moved_event.register(daddy, src,/obj/effect/bluegoast/proc/mirror)
-	destroyed_event.register(daddy, src, /datum/proc/qdel_self)
+	GLOB.moved_event.register(daddy, src,/obj/effect/bluegoast/proc/mirror)
+	GLOB.destroyed_event.register(daddy, src, /datum/proc/qdel_self)
 
 /obj/effect/bluegoast/Destroy()
-	destroyed_event.unregister(daddy,src)
-	moved_event.unregister(daddy, src)
+	GLOB.destroyed_event.unregister(daddy,src)
+	GLOB.moved_event.unregister(daddy, src)
 	daddy = null
 	. = ..()
 

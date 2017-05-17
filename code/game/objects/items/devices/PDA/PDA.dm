@@ -460,7 +460,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 	if(mode==41)
-		data_core.get_manifest_list()
+		GLOB.data_core.get_manifest_list()
 
 
 	if(mode==3)
@@ -1008,7 +1008,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears)) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
 					continue
@@ -1024,7 +1024,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/who = src.owner
 			if(prob(50))
 				who = P.owner
-			for(var/mob/living/silicon/ai/ai in mob_list)
+			for(var/mob/living/silicon/ai/ai in GLOB.silicon_mob_list)
 				// Allows other AIs to intercept the message but the AI won't intercept their own message.
 				if(ai.aiPDA != P && ai.aiPDA != src)
 					ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
@@ -1355,9 +1355,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.forceMove(get_turf(src.loc))
 	else
-		qdel_null(src.id)
-	qdel_null(src.cartridge)
-	qdel_null(src.pai)
+		QDEL_NULL(src.id)
+	QDEL_NULL(src.cartridge)
+	QDEL_NULL(src.pai)
 	return ..()
 
 /obj/item/device/pda/clown/Crossed(AM as mob|obj) //Clown PDA is slippery.

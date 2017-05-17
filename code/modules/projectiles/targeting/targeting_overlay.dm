@@ -167,7 +167,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		playsound(get_turf(owner), 'sound/weapons/TargetOn.ogg', 50,1)
 
 	forceMove(get_turf(target))
-	processing_objects |= src
+	GLOB.processing_objects |= src
 
 	aiming_at.aimed |= src
 	toggle_active(1)
@@ -221,7 +221,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 	aiming_with = null
 	loc = null
-	processing_objects -= src
+	GLOB.processing_objects -= src
 
 /obj/aiming_overlay/proc/target_moved()
 	update_aiming()

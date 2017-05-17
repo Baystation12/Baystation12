@@ -34,10 +34,10 @@
 	shadeColour = "#810cff"
 	colourName = "purple"
 
-/obj/item/weapon/pen/crayon/random/initialize()
+/obj/item/weapon/pen/crayon/random/Initialize()
 	var/crayon_type = pick(subtypesof(/obj/item/weapon/pen/crayon) - /obj/item/weapon/pen/crayon/random)
 	new crayon_type(loc)
-	qdel(src)
+	return INITIALIZE_HINT_QDEL
 
 /obj/item/weapon/pen/crayon/mime
 	icon_state = "crayonmime"

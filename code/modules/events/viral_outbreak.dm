@@ -12,7 +12,7 @@ datum/event/viral_outbreak/announce()
 
 datum/event/viral_outbreak/start()
 	var/list/candidates = list()	//list of candidate keys
-	for(var/mob/living/carbon/human/G in player_list)
+	for(var/mob/living/carbon/human/G in GLOB.player_list)
 		if(G.client && G.stat != DEAD)
 			candidates += G
 	if(!candidates.len)	return

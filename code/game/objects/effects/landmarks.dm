@@ -15,47 +15,43 @@
 	//TODO clean up this mess
 	switch(name)			//some of these are probably obsolete
 		if("monkey")
-			monkeystart += loc
+			GLOB.monkeystart += loc
 			delete_me = 1
 			return
 		if("start")
-			newplayer_start += loc
+			GLOB.newplayer_start += loc
 			delete_me = 1
 			return
 		if("JoinLate")
-			latejoin += loc
+			GLOB.latejoin += loc
 			delete_me = 1
 			return
 		if("JoinLateGateway")
-			latejoin_gateway += loc
+			GLOB.latejoin_gateway += loc
 			delete_me = 1
 			return
 		if("JoinLateCryo")
-			latejoin_cryo += loc
+			GLOB.latejoin_cryo += loc
 			delete_me = 1
 			return
 		if("JoinLateCyborg")
-			latejoin_cyborg += loc
+			GLOB.latejoin_cyborg += loc
 			delete_me = 1
 			return
 		if("prisonwarp")
-			prisonwarp += loc
+			GLOB.prisonwarp += loc
 			delete_me = 1
 			return
 		if("tdome1")
-			tdome1 += loc
+			GLOB.tdome1 += loc
 		if("tdome2")
-			tdome2 += loc
+			GLOB.tdome2 += loc
 		if("tdomeadmin")
-			tdomeadmin += loc
+			GLOB.tdomeadmin += loc
 		if("tdomeobserve")
-			tdomeobserve += loc
+			GLOB.tdomeobserve += loc
 		if("prisonsecuritywarp")
-			prisonsecuritywarp += loc
-			delete_me = 1
-			return
-		if("xeno_spawn")
-			xeno_spawn += loc
+			GLOB.prisonsecuritywarp += loc
 			delete_me = 1
 			return
 		if("endgame_exit")
@@ -73,10 +69,10 @@
 /obj/effect/landmark/proc/delete()
 	delete_me = 1
 
-/obj/effect/landmark/initialize()
-	..()
+/obj/effect/landmark/Initialize()
+	. = ..()
 	if(delete_me)
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/Destroy()
 	landmarks_list -= src

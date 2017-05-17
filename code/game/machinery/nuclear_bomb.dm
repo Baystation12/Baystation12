@@ -366,8 +366,8 @@ var/bomb_set
 	..()
 	nuke_disks |= src
 
-/obj/item/weapon/disk/nuclear/initialize()
-	..()
+/obj/item/weapon/disk/nuclear/Initialize()
+	. = ..()
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
 	GLOB.moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 
@@ -402,8 +402,8 @@ var/bomb_set
 	var/list/flash_tiles = list()
 	var/last_turf_state
 
-/obj/machinery/nuclearbomb/station/initialize()
-	..()
+/obj/machinery/nuclearbomb/station/Initialize()
+	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
 	for(var/turf/simulated/floor/T in trange(1, src))
 		T.set_flooring(get_flooring_data(/decl/flooring/reinforced/circuit/red))

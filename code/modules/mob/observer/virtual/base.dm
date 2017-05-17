@@ -23,7 +23,7 @@ var/list/all_virtual_listeners = list()
 	src.host = host
 	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
 
-	mob_list -= src
+	GLOB.mob_list -= src
 	all_virtual_listeners += src
 
 	updateicon()
@@ -52,8 +52,8 @@ var/list/all_virtual_listeners = list()
 /atom/movable
 	var/mob/observer/virtual/virtual_mob
 
-/atom/movable/initialize()
-	..()
+/atom/movable/Initialize()
+	. = ..()
 	if(ispath(virtual_mob))
 		if(shall_have_virtual_mob())
 			virtual_mob = new virtual_mob(get_turf(src), src)
@@ -70,4 +70,4 @@ var/list/all_virtual_listeners = list()
 	return TRUE
 
 /mob/shall_have_virtual_mob()
-	return (src in mob_list)
+	return (src in GLOB.mob_list)

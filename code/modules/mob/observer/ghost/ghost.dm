@@ -49,20 +49,20 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 				name = body.real_name
 			else
 				if(gender == MALE)
-					name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+					name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 				else
-					name = capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+					name = capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 	else
 		spawn(10) // wait for the observer mob to receive the client's key
 			mind = new /datum/mind(key)
 			mind.current = src
-	if(!T)	T = pick(latejoin | latejoin_cryo | latejoin_gateway)			//Safety in case we cannot find the body's position
+	if(!T)	T = pick(GLOB.latejoin | GLOB.latejoin_cryo | GLOB.latejoin_gateway)			//Safety in case we cannot find the body's position
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
-		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+		name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	real_name = name
 
 	if(cult)
@@ -70,12 +70,12 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	ghost_multitool = new(src)
 
-	ghost_mob_list_ += src
+	GLOB.ghost_mob_list += src
 
 	..()
 
 /mob/observer/ghost/Destroy()
-	ghost_mob_list_ -= src
+	GLOB.ghost_mob_list -= src
 	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null
@@ -88,7 +88,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 /mob/observer/ghost/Topic(href, href_list)
 	if (href_list["track"])
 		if(istype(href_list["track"],/mob))
-			var/mob/target = locate(href_list["track"]) in mob_list
+			var/mob/target = locate(href_list["track"]) in GLOB.mob_list
 			if(target)
 				ManualFollow(target)
 		else
@@ -362,7 +362,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in machines)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in GLOB.machines)
 		if(!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if(found_vents.len)
@@ -383,7 +383,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/dat
 	dat += "<h4>Crew Manifest</h4>"
-	dat += data_core.get_manifest()
+	dat += GLOB.data_core.get_manifest()
 
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
 

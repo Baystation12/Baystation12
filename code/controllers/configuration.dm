@@ -853,48 +853,6 @@ var/list/gamemode_cache = list()
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 
-/datum/configuration/proc/loadforumsql(filename)  // -- TLE
-	var/list/Lines = file2list(filename)
-	for(var/t in Lines)
-		if(!t)	continue
-
-		t = trim(t)
-		if (length(t) == 0)
-			continue
-		else if (copytext(t, 1, 2) == "#")
-			continue
-
-		var/pos = findtext(t, " ")
-		var/name = null
-		var/value = null
-
-		if (pos)
-			name = lowertext(copytext(t, 1, pos))
-			value = copytext(t, pos + 1)
-		else
-			name = lowertext(t)
-
-		if (!name)
-			continue
-
-		switch (name)
-			if ("address")
-				forumsqladdress = value
-			if ("port")
-				forumsqlport = value
-			if ("database")
-				forumsqldb = value
-			if ("login")
-				forumsqllogin = value
-			if ("password")
-				forumsqlpass = value
-			if ("activatedgroup")
-				forum_activated_group = value
-			if ("authenticatedgroup")
-				forum_authenticated_group = value
-			else
-				log_misc("Unknown setting in configuration: '[name]'")
-
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).

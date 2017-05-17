@@ -55,7 +55,7 @@ var/list/ghost_traps
 	else
 		unregister_target(target)
 
-	for(var/mob/observer/ghost/O in player_list)
+	for(var/mob/observer/ghost/O in GLOB.player_list)
 		if(!assess_candidate(O, target, FALSE))
 			return
 		if(pref_check && !O.client.wishes_to_be_role(pref_check))

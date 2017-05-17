@@ -40,15 +40,15 @@
 			qdel(src)
 
 	..()
-	processing_objects += src
-	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
+	GLOB.processing_objects += src
+	for(var/obj/machinery/power/singularity_beacon/singubeacon in GLOB.machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 
 /obj/singularity/Destroy()
-	processing_objects -= src
-	..()
+	GLOB.processing_objects -= src
+	. = ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
 	consume(user)

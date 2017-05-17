@@ -23,7 +23,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 /proc/dust_swarm(var/strength = EVENT_LEVEL_MUNDANE)
 	var/numbers = rand(strength * 10, strength * 15)
 
-	var/start_dir = pick(cardinal)
+	var/start_dir = pick(GLOB.cardinal)
 	var/turf/startloc
 	var/turf/targloc
 	var/randomz = pick(using_map.station_levels)

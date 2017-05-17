@@ -116,7 +116,7 @@ var/global/datum/matchmaker/matchmaker = new()
 			R1.fields["connections"] |= info
 		if(R2)
 			R2.fields["connections"] |= info
-		var/list/candidates = filter_list(player_list, /mob/living/carbon/human)
+		var/list/candidates = filter_list(GLOB.player_list, /mob/living/carbon/human)
 		candidates -= holder.current
 		candidates -= other.holder.current
 		for(var/mob/living/carbon/human/M in candidates)

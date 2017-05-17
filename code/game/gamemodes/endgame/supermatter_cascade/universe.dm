@@ -40,7 +40,7 @@ var/global/universe_has_ended = 0
 	to_world("<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>")
 	sound_to(world, sound('sound/effects/cascade.ogg'))
 
-	for(var/mob/M in player_list)
+	for(var/mob/M in GLOB.player_list)
 		M.flash_eyes()
 
 	if(evacuation_controller.cancel_evacuation())
@@ -71,7 +71,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 "}
 		priority_announcement.Announce(txt,"SUPERMATTER CASCADE DETECTED")
 
-		for(var/obj/machinery/computer/shuttle_control/C in machines)
+		for(var/obj/machinery/computer/shuttle_control/C in GLOB.machines)
 			if(istype(C, /obj/machinery/computer/shuttle_control/research) || istype(C, /obj/machinery/computer/shuttle_control/mining))
 				C.req_access = list()
 				C.req_one_access = list()
@@ -100,12 +100,12 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 			OnTurfChange(T)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
-	for (var/obj/machinery/firealarm/alm in machines)
+	for (var/obj/machinery/firealarm/alm in GLOB.machines)
 		if (!(alm.stat & BROKEN))
 			alm.ex_act(2)
 
 /datum/universal_state/supermatter_cascade/proc/APCSet()
-	for (var/obj/machinery/power/apc/APC in machines)
+	for (var/obj/machinery/power/apc/APC in GLOB.machines)
 		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
 			if(APC.cell)
@@ -114,7 +114,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 			APC.queue_icon_update()
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()
-	for(var/datum/mind/M in player_list)
+	for(var/datum/mind/M in GLOB.player_list)
 		if(!istype(M.current,/mob/living))
 			continue
 		if(M.current.stat!=2)

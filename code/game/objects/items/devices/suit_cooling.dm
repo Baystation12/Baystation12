@@ -33,7 +33,7 @@
 	toggle(usr)
 
 /obj/item/device/suit_cooling_unit/New()
-	processing_objects |= src
+	GLOB.processing_objects |= src
 	cell = new/obj/item/weapon/cell/high()		// 10K rated cell.
 	cell.forceMove(src)
 

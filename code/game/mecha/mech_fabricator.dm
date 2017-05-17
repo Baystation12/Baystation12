@@ -40,9 +40,10 @@
 	files = new /datum/research(src) //Setup the research data holder.
 	return
 
-/obj/machinery/mecha_part_fabricator/initialize()
+/obj/machinery/mecha_part_fabricator/Initialize()
 	manufacturer = basic_robolimb.company
 	update_categories()
+	. = ..()
 
 /obj/machinery/mecha_part_fabricator/process()
 	..()

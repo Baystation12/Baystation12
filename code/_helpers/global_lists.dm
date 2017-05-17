@@ -1,17 +1,5 @@
-var/list/clients = list()							//list of all clients
-var/list/admins = list()							//list of all clients whom are admins
-var/list/directory = list()							//list of all ckeys with associated client
-
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
-
-var/global/list/player_list = list()				//List of all mobs **with clients attached**. Excludes /mob/new_player
-var/global/list/mob_list = list()					//List of all mobs, including clientless
-var/global/list/human_mob_list = list()				//List of all human mobs and sub-types, including clientless
-var/global/list/silicon_mob_list = list()			//List of all silicon mobs, including clientless
-var/global/list/living_mob_list_ = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
-var/global/list/dead_mob_list_ = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
-var/global/list/ghost_mob_list_ = list()			//List of all ghost mobs, including clientless. Excludes /mob/new_player
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions

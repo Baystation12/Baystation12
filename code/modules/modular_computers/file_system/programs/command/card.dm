@@ -19,7 +19,7 @@
 
 	data["src"] = "\ref[src]"
 	data["station_name"] = station_name()
-	data["manifest"] = data_core ? data_core.get_manifest(0) : null
+	data["manifest"] = GLOB.data_core ? GLOB.data_core.get_manifest(0) : null
 	data["assignments"] = show_assignments
 	if(program && program.computer)
 		data["have_id_slot"] = !!program.computer.card_slot
@@ -153,7 +153,7 @@
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
-									[data_core ? data_core.get_manifest(0) : ""]
+									[GLOB.data_core ? GLOB.data_core.get_manifest(0) : ""]
 									"}
 					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", stationtime2text())))
 						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
@@ -163,7 +163,7 @@
 		if("eject")
 			if(computer && computer.card_slot)
 				if(id_card)
-					data_core.manifest_modify(id_card.registered_name, id_card.assignment)
+					GLOB.data_core.manifest_modify(id_card.registered_name, id_card.assignment)
 				computer.proc_eject_id(user)
 		if("terminate")
 			if(computer && can_run(user, 1))

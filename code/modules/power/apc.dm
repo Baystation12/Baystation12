@@ -190,7 +190,8 @@
 
 	..()
 
-/obj/machinery/power/apc/initialize()
+/obj/machinery/power/apc/Initialize()
+	. = ..()
 	if(operating)
 		src.update()
 

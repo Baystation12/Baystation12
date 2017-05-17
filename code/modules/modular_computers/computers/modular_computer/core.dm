@@ -42,7 +42,7 @@
 	return 1
 
 /obj/item/modular_computer/New()
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
@@ -52,7 +52,7 @@
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)

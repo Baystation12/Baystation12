@@ -64,36 +64,18 @@ datum/controller/game_controller/proc/setup_objects()
 
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
-	report_progress("Initializing turbolifts")
-	for(var/thing in turbolifts)
-		var/obj/turbolift_map_holder/lift = thing
-		if(!QDELETED(lift))
-			lift.initialize()
-			CHECK_SLEEP_MASTER
-
-	report_progress("Initializing objects")
-	for(var/atom/movable/object)
-		if(!QDELETED(object))
-			object.initialize()
-			CHECK_SLEEP_MASTER
-
-	report_progress("Initializing areas")
-	for(var/area/area)
-		area.initialize()
-		CHECK_SLEEP_MASTER
-
 	if(using_map.use_overmap)
 		report_progress("Initializing overmap events")
 		overmap_event_handler.create_events(using_map.overmap_z, using_map.overmap_size, using_map.overmap_event_areas)
 		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing pipe networks")
-	for(var/obj/machinery/atmospherics/machine in machines)
+	for(var/obj/machinery/atmospherics/machine in GLOB.machines)
 		machine.build_network()
 		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing atmos machinery")
-	for(var/obj/machinery/atmospherics/unary/U in machines)
+	for(var/obj/machinery/atmospherics/unary/U in GLOB.machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
 			T.broadcast_status()
@@ -101,6 +83,9 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 		CHECK_SLEEP_MASTER
+
+	report_progress("Initializing lathe recipes")
+	populate_lathe_recipes()
 
 #undef CHECK_SLEEP_MASTER
 

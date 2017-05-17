@@ -238,8 +238,8 @@
 
 
 	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= player_list.len; i++)
-		var/mob/M = player_list[i]
+	for(var/i = 1; i <= GLOB.player_list.len; i++)
+		var/mob/M = GLOB.player_list[i]
 		if(M)
 			var/turf/ear = get_turf(M)
 			if(ear)
@@ -261,13 +261,13 @@
 			objs += AM
 			hearturfs += get_turf(AM)
 
-	for(var/mob/M in player_list)
+	for(var/mob/M in GLOB.player_list)
 		if(checkghosts && M.stat == DEAD && M.is_preference_enabled(checkghosts))
 			mobs |= M
 		else if(get_turf(M) in hearturfs)
 			mobs |= M
 
-	for(var/obj/O in listening_objects)
+	for(var/obj/O in GLOB.listening_objects)
 		if(get_turf(O) in hearturfs)
 			objs |= O
 
@@ -338,7 +338,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 			return get_step(start, EAST)
 
 /proc/get_mob_by_key(var/key)
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if(M.ckey == lowertext(key))
 			return M
 	return null
@@ -350,7 +350,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
 	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in player_list)
+		for(var/mob/observer/ghost/G in GLOB.player_list)
 			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
 					candidates += G.key
@@ -363,7 +363,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
 	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in player_list)
+		for(var/mob/observer/ghost/G in GLOB.player_list)
 			if(MODE_XENOMORPH in G.client.prefs.be_special_role)
 				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien
 					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
@@ -381,7 +381,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 
 /proc/Show2Group4Delay(obj/O, list/group, delay=0)
 	if(!isobj(O))	return
-	if(!group)	group = clients
+	if(!group)	group = GLOB.clients
 	for(var/client/C in group)
 		C.screen += O
 	if(delay)

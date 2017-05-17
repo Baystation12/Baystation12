@@ -7,30 +7,30 @@ var/global/floorIsLava = 0
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in admins)
+	for(var/client/C in GLOB.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 /proc/message_staff(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
-	for(var/client/C in admins)
+	for(var/client/C in GLOB.admins)
 		if(R_INVESTIGATE & C.holder.rights)
 			to_chat(C, msg)
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
-	for(var/client/C in admins)
+	for(var/client/C in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
 			if(C.is_preference_enabled(/datum/client_preference/admin/show_attack_logs))
 				var/msg = rendered
 				to_chat(C, msg)
 /proc/admin_notice(var/message, var/rights)
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if(check_rights(rights, 0, M))
 			to_chat(M, message)
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
-/datum/admins/proc/show_player_panel(var/mob/M in mob_list)
+/datum/admins/proc/show_player_panel(var/mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
@@ -282,7 +282,7 @@ var/global/floorIsLava = 0
 	var/list/dat = list()
 
 	var/p_age = "unknown"
-	for(var/client/C in clients)
+	for(var/client/C in GLOB.clients)
 		if(C.ckey == key)
 			p_age = C.player_age
 			break
@@ -953,12 +953,12 @@ var/global/floorIsLava = 0
 
 	world.Reboot()
 
-/datum/admins/proc/unprison(var/mob/M in mob_list)
+/datum/admins/proc/unprison(var/mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set name = "Unprison"
-	if (M.z == 2)
+	if (isAdminLevel(M.z))
 		if (config.allow_admin_jump)
-			M.loc = pick(latejoin)
+			M.forceMove(pick(GLOB.latejoin))
 			message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]", 1)
 			log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
 		else
@@ -1094,7 +1094,7 @@ var/global/floorIsLava = 0
 	feedback_add_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
-/datum/admins/proc/show_traitor_panel(var/mob/M in mob_list)
+/datum/admins/proc/show_traitor_panel(var/mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set desc = "Edit mobs's memory and role"
 	set name = "Show Traitor Panel"
@@ -1210,7 +1210,7 @@ var/global/floorIsLava = 0
 
 /datum/admins/proc/output_ai_laws()
 	var/ai_number = 0
-	for(var/mob/living/silicon/S in mob_list)
+	for(var/mob/living/silicon/S in GLOB.mob_list)
 		ai_number++
 		if(isAI(S))
 			to_chat(usr, "<b>AI [key_name(S, usr)]'s laws:</b>")
@@ -1240,7 +1240,7 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in human_mob_list
+	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in GLOB.human_mob_list
 	if(!M) return
 
 	show_skill_window(usr, M)
@@ -1321,11 +1321,11 @@ var/global/floorIsLava = 0
 		return 1
 	else
 		return 0
-	
+
 //Prevents SDQL2 commands from changing admin permissions
 /datum/admins/SDQL_update(var/const/var_name, var/new_value)
 	return 0
-	
+
 //
 //
 //ALL DONE
@@ -1404,7 +1404,7 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	ticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/H as mob in player_list)
+/datum/admins/proc/paralyze_mob(mob/H as mob in GLOB.player_list)
 	set category = "Admin"
 	set name = "Toggle Paralyze"
 	set desc = "Paralyzes a player. Or unparalyses them."
@@ -1497,12 +1497,12 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 		to_chat(src.owner, "<span class='notice'>Message reply to transmitted successfully.</span>")
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
-			for(var/client/C in admins)
+			for(var/client/C in GLOB.admins)
 				if((R_ADMIN | R_MOD) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
-			for(var/client/C in admins)
+			for(var/client/C in GLOB.admins)
 				if((R_ADMIN | R_MOD) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 

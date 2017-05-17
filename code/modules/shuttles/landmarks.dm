@@ -26,7 +26,8 @@
 	base_area = locate(base_area || world.area)
 	name = name + " ([x],[y])"
 
-/obj/effect/shuttle_landmark/initialize()
+/obj/effect/shuttle_landmark/Initialize()
+	. = ..()
 	if(docking_controller)
 		var/docking_tag = docking_controller
 		docking_controller = locate(docking_tag)
@@ -61,8 +62,8 @@
 	tag = landmark_tag+"-[x]-[y]"
 	..()
 
-/obj/effect/shuttle_landmark/automatic/initialize()
-	..()
+/obj/effect/shuttle_landmark/automatic/Initialize()
+	. = ..()
 	if(!using_map.use_overmap)
 		return
 	var/obj/effect/overmap/O = map_sectors["[z]"]

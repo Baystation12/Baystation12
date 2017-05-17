@@ -5,7 +5,7 @@
 	desc = "This shouldn't be read."
 	screen_loc = "WEST,SOUTH"
 
-/obj/effect/lobby_image/initialize()
+/obj/effect/lobby_image/Initialize()
 	icon = using_map.lobby_icon
 	var/known_icon_states = icon_states(icon)
 	for(var/lobby_screen in using_map.lobby_screens)
@@ -17,6 +17,8 @@
 		icon_state = pick(using_map.lobby_screens)
 	else
 		icon_state = known_icon_states[1]
+
+	. = ..()
 
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
@@ -33,7 +35,7 @@
 	client.screen += lobby_image
 	my_client = client
 	set_sight(sight|SEE_TURFS)
-	player_list |= src
+	GLOB.player_list |= src
 
 	new_player_panel()
 	spawn(40)

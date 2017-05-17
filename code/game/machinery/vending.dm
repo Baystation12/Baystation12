@@ -499,7 +499,7 @@
 
 	if(R.add_product(W))
 		to_chat(user, "<span class='notice'>You insert \the [W] in the product receptor.</span>")
-		nanomanager.update_uis(src)
+		GLOB.nanomanager.update_uis(src)
 		return 1
 
 	GLOB.nanomanager.update_uis(src)

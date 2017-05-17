@@ -376,7 +376,7 @@ var/list/non_fakeattack_weapons = list(/obj/item/weapon/gun/projectile, /obj/ite
 	var/mob/living/carbon/human/clone = null
 	var/list/PossibleClones = list()
 
-	for(var/mob/living/carbon/human/H in living_mob_list_)
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
 		PossibleClones += H
 
 	if(!PossibleClones.len)

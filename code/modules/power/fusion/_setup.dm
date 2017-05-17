@@ -31,11 +31,11 @@
 
 	log_and_message_admins("## FUSION CORE SETUP - Setup initiated by [usr].")
 
-	for(var/obj/machinery/fusion_fuel_injector/mapped/injector in machines)
+	for(var/obj/machinery/fusion_fuel_injector/mapped/injector in GLOB.machines)
 		injector.cur_assembly = new /obj/item/weapon/fuel_assembly/deuterium(injector)
 		injector.BeginInjecting()
 
-	var/obj/machinery/power/fusion_core/mapped/core = locate() in machines
+	var/obj/machinery/power/fusion_core/mapped/core = locate() in GLOB.machines
 	if(core.jumpstart(15000))
 		var/list/delayed_objects = list()
 

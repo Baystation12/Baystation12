@@ -110,11 +110,12 @@
 			pixel_x = -32
 			pixel_y = 0
 
-/obj/structure/sign/poster/initialize()
+/obj/structure/sign/poster/Initialize()
 	if (poster_type)
 		var/path = ispath(poster_type) ? poster_type : text2path(poster_type)
 		var/datum/poster/design = new path
 		set_poster(design)
+	. = ..()
 
 /obj/structure/sign/poster/proc/set_poster(var/datum/poster/design)
 	name = "[initial(name)] - [design.name]"

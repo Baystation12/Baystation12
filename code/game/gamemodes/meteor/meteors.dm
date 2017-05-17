@@ -223,7 +223,7 @@
 
 /obj/effect/meteor/proc/meteor_effect()
 	if(heavy)
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			var/turf/T = get_turf(M)
 			if(!T || T.z != src.z)
 				continue

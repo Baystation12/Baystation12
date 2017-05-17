@@ -26,7 +26,7 @@ var/eventchance = 10 // Percent chance per 5 minutes.
 var/hadevent    = 0
 
 /proc/appendicitis()
-	for(var/mob/living/carbon/human/H in shuffle(living_mob_list_))
+	for(var/mob/living/carbon/human/H in shuffle(GLOB.living_mob_list_))
 		if(H.client && H.stat != DEAD)
 			var/obj/item/organ/internal/appendix/A = H.internal_organs_by_name[BP_APPENDIX]
 			if(!istype(A) || (A && A.inflamed))
@@ -41,7 +41,7 @@ var/hadevent    = 0
 //	sound_to(world, sound('sound/AI/aliens.ogg'))
 
 	var/list/vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in GLOB.machines)
 		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in using_map.station_levels)
 			if(temp_vent.network.normal_members.len > 50) // Stops Aliens getting stuck in small networks. See: Security, Virology
 				vents += temp_vent
@@ -73,7 +73,7 @@ var/hadevent    = 0
 
 	sleep(100)
 */
-	for(var/mob/living/carbon/human/H in living_mob_list_)
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
@@ -167,7 +167,7 @@ var/hadevent    = 0
 				apc.overload_lighting()
 
 	else
-		for(var/obj/machinery/power/apc/apc in machines)
+		for(var/obj/machinery/power/apc/apc in GLOB.machines)
 			apc.overload_lighting()
 
 	return
@@ -180,7 +180,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 */
 
 	//AI laws
-	for(var/mob/living/silicon/ai/M in living_mob_list_)
+	for(var/mob/living/silicon/ai/M in GLOB.living_mob_list_)
 		if(M.stat != 2 && M.see_in_dark != 0)
 			var/who2 = pick("ALIENS", "BEARS", "CLOWNS", "XENOS", "PETES", "BOMBS", "FETISHES", "WIZARDS", "SYNDICATE AGENTS", "CENTCOM OFFICERS", "SPACE PIRATES", "TRAITORS", "MONKEYS",  "BEES", "CARP", "CRABS", "EELS", "BANDITS", "LIGHTS")
 			var/what2 = pick("BOLTERS", "STAVES", "DICE", "SINGULARITIES", "TOOLBOXES", "NETTLES", "AIRLOCKS", "CLOTHES", "WEAPONS", "MEDKITS", "BOMBS", "CANISTERS", "CHAIRS", "BBQ GRILLS", "ID CARDS", "CAPTAINS")
@@ -199,7 +199,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			var/allergysev = pick("deathly", "mildly", "severely", "contagiously")
 			var/crew
 			var/list/pos_crew = list()
-			for(var/mob/living/carbon/human/pos in player_list)
+			for(var/mob/living/carbon/human/pos in GLOB.player_list)
 				pos_crew += pos.real_name
 			if(pos_crew.len)
 				crew = pick(pos_crew)
@@ -278,7 +278,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE [uppertext(station_name())] IS [who2pref] [who2]")
 
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in machines)
+		for(var/mob/living/bot/bot in GLOB.machines)
 			if(prob(botEmagChance))
 				bot.emag_act(1)
 

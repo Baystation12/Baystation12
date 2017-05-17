@@ -10,8 +10,8 @@
 	layer = LATTICE_LAYER
 	//	flags = CONDUCT
 
-/obj/structure/lattice/initialize()
-	..()
+/obj/structure/lattice/Initialize()
+	. = ..()
 ///// Z-Level Stuff
 	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 ///// Z-Level Stuff

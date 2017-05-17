@@ -1,5 +1,5 @@
 //allows right clicking mobs to send an admin PM to their client, forwards the selected mob's client to cmd_admin_pm
-/client/proc/cmd_admin_pm_context(mob/M as mob in mob_list)
+/client/proc/cmd_admin_pm_context(mob/M as mob in GLOB.mob_list)
 	set category = null
 	set name = "Admin PM Mob"
 	if(!holder)
@@ -130,7 +130,7 @@
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 
 	//we don't use message_admins here because the sender/receiver might get it too
-	for(var/client/X in admins)
+	for(var/client/X in GLOB.admins)
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
@@ -158,7 +158,7 @@
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
 	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[sender]</span>: <span class='message'>[msg]</span></span></span>")
-	for(var/client/X in admins)
+	for(var/client/X in GLOB.admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)

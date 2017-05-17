@@ -24,8 +24,8 @@
 
 	var/list/will_contain
 
-/obj/structure/closet/initialize()
-	..()
+/obj/structure/closet/Initialize()
+	. = ..()
 	if(will_contain)
 		create_objects_in_loc(src, will_contain)
 		will_contain = null // Remove reference to allow for garbage collection

@@ -40,7 +40,7 @@
 	message_title = sanitizeSafe(message_title)
 
 	var/msg = FormMessage(message, message_title)
-	for(var/mob/M in player_list)
+	for(var/mob/M in GLOB.player_list)
 		if((M.z in using_map.contact_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
@@ -110,5 +110,4 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 		AnnounceArrivalSimple(character.real_name, rank, join_message)
 
 /proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]")
-	if(global_announcer)
-		global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")
+	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")

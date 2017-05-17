@@ -21,10 +21,10 @@
 	name = "Merchant's List"
 
 /datum/computer_file/program/merchant/proc/get_merchant(var/num)
-	if(num > traders.len)
-		num = traders.len
+	if(num > GLOB.traders.len)
+		num = GLOB.traders.len
 	if(num)
-		return traders[num]
+		return GLOB.traders[num]
 
 /datum/nano_module/program/merchant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -159,7 +159,7 @@
 		. = 1
 		current_merchant = 0
 	if(href_list["PRG_merchant_list"])
-		if(traders.len == 0)
+		if(GLOB.traders.len == 0)
 			. = 0
 			temp = "Cannot find any traders within broadcasting range."
 		else
@@ -181,7 +181,7 @@
 				scrolled = 1
 			if("left")
 				scrolled = -1
-		var/new_merchant  = Clamp(current_merchant + scrolled, 1, traders.len)
+		var/new_merchant  = Clamp(current_merchant + scrolled, 1, GLOB.traders.len)
 		if(new_merchant != current_merchant)
 			hailed_merchant = 0
 			last_comms = null

@@ -27,10 +27,10 @@
 /obj/item/device/assembly/timer/toggle_secure()
 	secured = !secured
 	if(secured)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 	else
 		timing = 0
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 	update_icon()
 	return secured
 

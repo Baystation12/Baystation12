@@ -8,7 +8,7 @@
 	endWhen = rand(500, 1500)
 
 /datum/event/ionstorm/announce()
-	for(var/mob/living/silicon/S in mob_list)
+	for(var/mob/living/silicon/S in GLOB.mob_list)
 		if(is_drone(S) || !(isAI(S) || isrobot(S)))
 			continue
 		if(isrobot(S))
@@ -107,7 +107,7 @@
 
 
 /datum/event/ionstorm/proc/get_random_humanoid_player_name(var/default_if_none)
-	for (var/mob/living/carbon/human/player in player_list)
+	for (var/mob/living/carbon/human/player in GLOB.player_list)
 		if(!player.mind || player_is_antag(player.mind, only_offstation_roles = 1) || !player.is_client_active(5))
 			continue
 		players += player.real_name

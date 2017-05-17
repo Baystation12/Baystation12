@@ -34,7 +34,7 @@
 		var/obj/effect/spider/spiderling/S = A
 		user.visible_message("<span class='notice'>[user] scoops [S] into \the [src].</span>", "<span class='notice'>You scoop [S] into \the [src].</span>")
 		S.forceMove(src)
-		processing_objects.Remove(S) // No growing inside jars
+		GLOB.processing_objects.Remove(S) // No growing inside jars
 		contains = 3
 		update_icon()
 		return
@@ -59,7 +59,7 @@
 			for(var/obj/effect/spider/spiderling/S in src)
 				S.loc = user.loc
 				user.visible_message("<span class='notice'>[user] releases [S] from \the [src].</span>", "<span class='notice'>You release [S] from \the [src].</span>")
-				processing_objects.Add(S) // They can grow after being let out though
+				GLOB.processing_objects.Add(S) // They can grow after being let out though
 			contains = 0
 			update_icon()
 			return

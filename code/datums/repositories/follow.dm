@@ -76,8 +76,8 @@
 
 	cache.data = .
 
-/atom/movable/initialize()
-	..()
+/atom/movable/Initialize()
+	. = ..()
 	if(!is_type_in_list(src, follow_repository.excluded_subtypes) && is_type_in_list(src, follow_repository.followed_subtypes))
 		follow_repository.add_subject(src)
 

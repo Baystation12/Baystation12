@@ -78,7 +78,7 @@
 	listening |= src
 
 	//ghosts
-	for (var/mob/M in player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (istype(M, /mob/new_player))
 			continue
 		if (!(M.client))

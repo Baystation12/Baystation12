@@ -36,7 +36,7 @@ var/warrant_uid = 0
 		var/list/arrestwarrants = list()
 		var/list/searchwarrants = list()
 		var/list/archivedwarrants = list()
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			var/charges = W.fields["charges"]
 			if(lentext(charges) > 50)
 				charges = copytext(charges, 1, 50) + "..."
@@ -73,7 +73,7 @@ var/warrant_uid = 0
 
 	if(href_list["editwarrant"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["editwarrant"]))
 				activewarrant = W
 				break
@@ -92,14 +92,14 @@ var/warrant_uid = 0
 
 	if(href_list["sendtoarchive"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
 	if(href_list["restore"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
@@ -122,24 +122,24 @@ var/warrant_uid = 0
 
 	if(href_list["savewarrant"])
 		. = 1
-		broadcast_holowarrant_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
-		data_core.warrants |= activewarrant
+		broadcast_holowarrant_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
+		GLOB.data_core.warrants |= activewarrant
 		activewarrant = null
 
 	if(href_list["deletewarrant"])
 		. = 1
 		if(!activewarrant)
-			for(var/datum/data/record/warrant/W in data_core.warrants)
+			for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 				if(W.warrant_id == text2num(href_list["deletewarrant"]))
 					activewarrant = W
 					break
-		data_core.warrants -= activewarrant
+		GLOB.data_core.warrants -= activewarrant
 		activewarrant = null
 
 	if(href_list["editwarrantname"])
 		. = 1
 		var/namelist = list()
-		for(var/datum/data/record/t in data_core.general)
+		for(var/datum/data/record/t in GLOB.data_core.general)
 			namelist += t.fields["name"]
 		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
 		if(CanInteract(user, GLOB.default_state))

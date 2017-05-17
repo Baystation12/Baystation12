@@ -319,7 +319,7 @@ var/last_message_id = 0
 
 
 /proc/is_relay_online()
-    for(var/obj/machinery/bluespacerelay/M in machines)
+    for(var/obj/machinery/bluespacerelay/M in GLOB.machines)
         if(M.stat == 0)
             return 1
     return 0
@@ -331,7 +331,7 @@ var/last_message_id = 0
 	if(isnull(emergency))
 		emergency = 1
 
-	if(!universe.OnShuttleCall(usr))
+	if(!GLOB.universe.OnShuttleCall(usr))
 		to_chat(user, "<span class='notice'>Cannot establish a bluespace connection.</span>")
 		return
 
@@ -361,5 +361,5 @@ var/last_message_id = 0
 	if(.)
 		//delay events in case of an autotransfer
 		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
-		event_manager.delay_events(EVENT_LEVEL_MODERATE, delay)
-		event_manager.delay_events(EVENT_LEVEL_MAJOR, delay)
+		GLOB.event_manager.delay_events(EVENT_LEVEL_MODERATE, delay)
+		GLOB.event_manager.delay_events(EVENT_LEVEL_MAJOR, delay)

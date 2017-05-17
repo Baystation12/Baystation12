@@ -106,9 +106,9 @@
 					body += "and their partner announced the birth of their [pick("first","second","third")] child on [affected_dest.name] early this morning. \
 					Doctors say the child is well, and the parents are considering "
 					if(prob(50))
-						body += capitalize(pick(first_names_female))
+						body += capitalize(pick(GLOB.first_names_female))
 					else
-						body += capitalize(pick(first_names_male))
+						body += capitalize(pick(GLOB.first_names_male))
 					body += " for the name."
 				else if(prob(50))
 					body += "announced their [pick("split","break up","marriage","engagement")] with [pick("TV host","webcast personality","superstar","model","actor","singer")] \

@@ -49,7 +49,7 @@
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
 		set_light(CANDLE_LUM)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 
 
 /obj/item/weapon/flame/candle/process()

@@ -293,12 +293,12 @@ datum/unit_test/ladder_check/start_test()
 /datum/unit_test/cryopod_comp_check/start_test()
 	var/pass = TRUE
 
-	for(var/obj/machinery/cryopod/C in machines)
+	for(var/obj/machinery/cryopod/C in GLOB.machines)
 		if(!C.control_computer)
 			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
 			pass = FALSE
 
-	for(var/obj/machinery/computer/cryopod/C in machines)
+	for(var/obj/machinery/computer/cryopod/C in GLOB.machines)
 		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
 			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
 			pass = FALSE
@@ -318,7 +318,7 @@ datum/unit_test/ladder_check/start_test()
 /datum/unit_test/camera_nil_c_tag_check/start_test()
 	var/pass = TRUE
 
-	for(var/obj/machinery/camera/C in machines)
+	for(var/obj/machinery/camera/C in GLOB.machines)
 		if(!C.c_tag)
 			log_bad("Following camera does not have a c_tag set: [log_info_line(C)]")
 			pass = FALSE
@@ -337,7 +337,7 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/camera_unique_c_tag_check/start_test()
 	var/cameras_by_ctag = list()
-	for(var/obj/machinery/camera/C in machines)
+	for(var/obj/machinery/camera/C in GLOB.machines)
 		if(!C.c_tag)
 			continue
 		group_by(cameras_by_ctag, C.c_tag, C)

@@ -80,14 +80,14 @@
 	New()
 		pixel_x = rand(3,-3)
 		pixel_y = rand(3,-3)
-		processing_objects |= src
+		GLOB.processing_objects |= src
 
 /obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
 	get_light_and_color(parent)
 	..()
 
 /obj/effect/spider/eggcluster/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
@@ -138,7 +138,7 @@
 	if(dormant)
 		GLOB.moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	else
-		processing_objects |= src
+		GLOB.processing_objects |= src
 
 	get_light_and_color(parent)
 	..()
@@ -152,7 +152,7 @@
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
 		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
@@ -171,7 +171,7 @@
 	dormant = FALSE
 
 	GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
-	processing_objects |= src
+	GLOB.processing_objects |= src
 
 /obj/effect/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))

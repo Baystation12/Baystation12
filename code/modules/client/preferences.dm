@@ -188,9 +188,9 @@ datum/preferences
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
-			real_name += " [pick(last_names)]"
+			real_name += " [pick(GLOB.last_names)]"
 		else if(firstspace == name_length)
-			real_name += "[pick(last_names)]"
+			real_name += "[pick(GLOB.last_names)]"
 
 	character.fully_replace_character_name(real_name)
 

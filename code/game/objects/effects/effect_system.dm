@@ -104,8 +104,8 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 
-/obj/effect/sparks/initialize()
-	..()
+/obj/effect/sparks/Initialize()
+	. = ..()
 	// Scheduled tasks caused serious performance issues when being qdel()ed.
 	// Replaced with spawn() until performance of scheduled tasks is improved.
 	//schedule_task_in(5 SECONDS, /proc/qdel, list(src))
@@ -474,7 +474,7 @@ steam.start() -- spawns the effect
 			var/light = -1
 			var/flash = -1
 
-			// Clamp all values to fractions of max_explosion_range, following the same pattern as for tank transfer bombs
+			// Clamp all values to fractions of GLOB.max_explosion_range, following the same pattern as for tank transfer bombs
 			if (round(amount/12) > 0)
 				devst = devst + amount/12
 

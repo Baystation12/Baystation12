@@ -10,11 +10,6 @@
 /turf/drain_power()
 	return -1
 
-/atom/New()
-	..()
-	if(opacity)
-		updateVisibility(src)
-
 /atom/Destroy()
 	if(opacity)
 		updateVisibility(src)

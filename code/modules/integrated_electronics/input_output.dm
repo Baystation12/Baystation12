@@ -204,8 +204,8 @@
 	var/datum/radio_frequency/radio_connection
 	var/frequency = 1357
 
-/obj/item/integrated_circuit/input/signaler/initialize()
-	..()
+/obj/item/integrated_circuit/input/signaler/Initialize()
+	. = ..()
 
 	var/datum/integrated_io/new_freq = inputs[1]
 	var/datum/integrated_io/new_code = inputs[2]
@@ -287,8 +287,8 @@
 	inputs = list("frequency", "code", "command", "id tag")
 	outputs = list("recieved command")
 
-/obj/item/integrated_circuit/input/signaler/advanced/initialize()
-	..()
+/obj/item/integrated_circuit/input/signaler/advanced/Initialize()
+	. = ..()
 	var/datum/integrated_io/new_com = inputs[3]
 	var/datum/integrated_io/new_id = inputs[4]
 	var/datum/integrated_io/new_rec = outputs[1]
@@ -329,7 +329,7 @@
 	. = list()
 	. += "Current selection: [(current_console && current_console.id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for(var/obj/machinery/teleport/hub/R in machines)
+	for(var/obj/machinery/teleport/hub/R in GLOB.machines)
 		var/obj/machinery/computer/teleporter/com = R.com
 		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"

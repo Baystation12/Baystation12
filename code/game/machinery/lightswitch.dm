@@ -15,7 +15,8 @@
 	var/other_area = null
 	var/image/overlay
 
-/obj/machinery/light_switch/initialize()
+/obj/machinery/light_switch/Initialize()
+	. = ..()
 	if(other_area)
 		src.connected_area = locate(other_area)
 	else

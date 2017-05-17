@@ -1207,7 +1207,7 @@ About the new airlock wires panel:
 	else
 		wires = new/datum/wires/airlock(src)
 
-/obj/machinery/door/airlock/initialize()
+/obj/machinery/door/airlock/Initialize()
 	if(src.closeOtherId != null)
 		for (var/obj/machinery/door/airlock/A in world)
 			if(A.closeOtherId == src.closeOtherId && A != src)
@@ -1220,7 +1220,7 @@ About the new airlock wires panel:
 		brace.airlock = src
 		brace.forceMove(src)
 		update_icon()
-	..()
+	. = ..()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)

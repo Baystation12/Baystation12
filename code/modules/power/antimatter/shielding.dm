@@ -151,7 +151,7 @@ proc/cardinalrange(var/center)
 
 /obj/machinery/am_shielding/proc/setup_core()
 	processing = 1
-	machines.Add(src)
+	GLOB.machines.Add(src)
 	if(!control_unit)	return
 	control_unit.linked_cores.Add(src)
 	control_unit.reported_core_efficiency += efficiency

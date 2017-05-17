@@ -355,6 +355,6 @@
 	anchored = 1
 	active = 1
 
-/obj/machinery/shieldwallgen/online/initialize()
+/obj/machinery/shieldwallgen/online/Initialize()
 	storedpower = max_stored_power
-	..()
+	. = ..()

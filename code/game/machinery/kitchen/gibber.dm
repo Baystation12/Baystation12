@@ -49,7 +49,7 @@
 			M.gib()
 
 
-/obj/machinery/gibber/initialize()
+/obj/machinery/gibber/Initialize()
 	. = ..()
 	update_icon()
 

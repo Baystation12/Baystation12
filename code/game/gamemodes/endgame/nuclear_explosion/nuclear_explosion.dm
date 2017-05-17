@@ -35,7 +35,7 @@
 
 	sleep(100)
 
-	for(var/mob/living/L in living_mob_list_)
+	for(var/mob/living/L in GLOB.living_mob_list_)
 		if(L.client)
 			L.client.screen -= cinematic
 
@@ -52,7 +52,7 @@
 		ticker.mode.explosion_in_progress = 0
 
 /datum/universal_state/nuclear_explosion/proc/dust_mobs(var/list/affected_z_levels)
-	for(var/mob/living/L in mob_list)
+	for(var/mob/living/L in GLOB.mob_list)
 		var/turf/T = get_turf(L)
 		if(T && (T.z in affected_z_levels))
 			//this is needed because dusting resets client screen 1.5 seconds after being called (delayed due to the dusting animation)
@@ -62,12 +62,12 @@
 			L.dust() //then dust the body
 
 /datum/universal_state/nuclear_explosion/proc/show_cinematic_to_players()
-	for(var/mob/M in player_list)
+	for(var/mob/M in GLOB.player_list)
 		if(M.client)
 			M.client.screen += cinematic
 
 /datum/universal_state/nuclear_explosion/proc/start_cinematic_intro()
-	for(var/mob/M in player_list) //I guess so that people in the lobby only hear the explosion
+	for(var/mob/M in GLOB.player_list) //I guess so that people in the lobby only hear the explosion
 		sound_to(M, sound('sound/machines/Alarm.ogg'))
 
 	sleep(100)
@@ -94,7 +94,7 @@
 
 //MALF
 /datum/universal_state/nuclear_explosion/malf/start_cinematic_intro()
-	for(var/mob/M in player_list) //I guess so that people in the lobby only hear the explosion
+	for(var/mob/M in GLOB.player_list) //I guess so that people in the lobby only hear the explosion
 		to_chat(M, sound('sound/machines/Alarm.ogg'))
 
 	sleep(28)

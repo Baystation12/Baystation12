@@ -19,10 +19,9 @@ var/list/points_of_interest = list()
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
-/obj/effect/overmap/initialize()
+/obj/effect/overmap/Initialize()
 	if(!using_map.use_overmap)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	if(!using_map.overmap_z)
 		build_overmap()
@@ -67,6 +66,8 @@ var/list/points_of_interest = list()
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
+	. = ..()
+
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()
 	if(shuttle_name in restricted_waypoints)
@@ -80,9 +81,9 @@ var/list/points_of_interest = list()
 	icon_state = "sector"
 	anchored = 1
 
-/obj/effect/overmap/sector/initialize()
-	..()
-	for(var/obj/machinery/computer/helm/H in machines)
+/obj/effect/overmap/sector/Initialize()
+	. = ..()
+	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
 
 /proc/build_overmap()

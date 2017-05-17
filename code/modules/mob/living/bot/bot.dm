@@ -48,8 +48,8 @@
 	access_scanner.req_access = req_access.Copy()
 	access_scanner.req_one_access = req_one_access.Copy()
 
-/mob/living/bot/initialize()
-	..()
+/mob/living/bot/Initialize()
+	. = ..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else

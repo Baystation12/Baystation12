@@ -21,7 +21,7 @@
 	qdel(cell)
 	cell = null
 	if(enabled)
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 	. = ..()
 
 /obj/item/weapon/shield_diffuser/process()
@@ -39,9 +39,9 @@
 	enabled = !enabled
 	update_icon()
 	if(enabled)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 	else
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
 /obj/item/weapon/shield_diffuser/examine()

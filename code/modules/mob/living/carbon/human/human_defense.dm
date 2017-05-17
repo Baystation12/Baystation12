@@ -186,7 +186,7 @@ meteor_act
 		return 0
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
-		forcesay(hit_appends)	//forcesay checks stat already
+		forcesay(GLOB.hit_appends)	//forcesay checks stat already
 	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))

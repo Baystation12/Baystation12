@@ -24,7 +24,7 @@
 		process()
 		checkReagents()
 	spawn(120)
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 		sleep(30)
 		if(metal)
 			var/obj/structure/foamedmetal/M = new(src.loc)

@@ -87,9 +87,9 @@ proc/random_name(gender, species = SPECIES_HUMAN)
 
 	if(!current_species)
 		if(gender==FEMALE)
-			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
-			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	else
 		return current_species.get_random_name(gender)
 
@@ -253,27 +253,27 @@ proc/age2agedescription(age)
 /mob/proc/add_to_living_mob_list()
 	return FALSE
 /mob/living/add_to_living_mob_list()
-	if((src in living_mob_list_) || (src in dead_mob_list_))
+	if((src in GLOB.living_mob_list_) || (src in GLOB.dead_mob_list_))
 		return FALSE
-	living_mob_list_ += src
+	GLOB.living_mob_list_ += src
 	return TRUE
 
 // Returns true if the mob was removed from the living list
 /mob/proc/remove_from_living_mob_list()
-	return living_mob_list_.Remove(src)
+	return GLOB.living_mob_list_.Remove(src)
 
 // Returns true if the mob was in neither the dead or living list
 /mob/proc/add_to_dead_mob_list()
 	return FALSE
 /mob/living/add_to_dead_mob_list()
-	if((src in living_mob_list_) || (src in dead_mob_list_))
+	if((src in GLOB.living_mob_list_) || (src in GLOB.dead_mob_list_))
 		return FALSE
-	dead_mob_list_ += src
+	GLOB.dead_mob_list_ += src
 	return TRUE
 
 // Returns true if the mob was removed form the dead list
 /mob/proc/remove_from_dead_mob_list()
-	return dead_mob_list_.Remove(src)
+	return GLOB.dead_mob_list_.Remove(src)
 
 //Find a dead mob with a brain and client.
 /proc/find_dead_player(var/find_key, var/include_observers = 0)
@@ -283,14 +283,14 @@ proc/age2agedescription(age)
 	var/mob/selected = null
 
 	if(include_observers)
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			if((M.stat != DEAD) || (!M.client))
 				continue
 			if(M.ckey == find_key)
 				selected = M
 				break
 	else
-		for(var/mob/living/M in player_list)
+		for(var/mob/living/M in GLOB.player_list)
 			//Dead people only thanks!
 			if((M.stat != DEAD) || (!M.client))
 				continue

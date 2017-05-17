@@ -13,7 +13,7 @@
 	var/armor_penetration = 0
 
 /obj/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = GLOB.default_state)
@@ -69,7 +69,7 @@
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/proc/process()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return 0
 
 /obj/assume_air(datum/gas_mixture/giver)

@@ -19,13 +19,6 @@
 	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 
-	var/auto_init = 1
-
-/atom/movable/New()
-	..()
-	if(auto_init && (initialization_stage & INITIALIZATION_HAS_BEGUN))
-		initialize()
-
 /atom/movable/Destroy()
 	. = ..()
 	for(var/atom/movable/AM in src)
@@ -36,10 +29,6 @@
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
-
-/atom/movable/proc/initialize()
-	if(QDELETED(src))
-		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
@@ -245,7 +234,7 @@
 	if(!z || (z in using_map.sealed_levels))
 		return
 
-	if(!universe.OnTouchMapEdge(src))
+	if(!GLOB.universe.OnTouchMapEdge(src))
 		return
 
 	if(using_map.use_overmap)

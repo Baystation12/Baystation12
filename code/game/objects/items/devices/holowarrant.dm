@@ -25,8 +25,8 @@
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
 	active = null
 	var/list/warrants = list()
-	if(!isnull(data_core.general))
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+	if(!isnull(GLOB.data_core.general))
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(!W.archived)
 				warrants += W.fields["namewarrant"]
 	if(warrants.len == 0)
@@ -34,7 +34,7 @@
 		return
 	var/temp
 	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
-	for(var/datum/data/record/warrant/W in data_core.warrants)
+	for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 		if(W.fields["namewarrant"] == temp)
 			active = W
 	update_icon()
@@ -65,11 +65,11 @@
 		icon_state = "holowarrant"
 
 /obj/item/device/holowarrant/equipped(var/mob/user, var/slot)
-	holowarrant_users += user
+	GLOB.holowarrant_users += user
 	return ..()
 
 /obj/item/device/holowarrant/dropped(mob/user)
-	holowarrant_users -= user
+	GLOB.holowarrant_users -= user
 	return ..()
 
 /obj/item/device/holowarrant/proc/show_content(mob/user, forceshow)

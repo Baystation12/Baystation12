@@ -198,15 +198,15 @@
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
 
-	while(null in data_core.general)
-		data_core.general -= null
+	while(null in GLOB.data_core.general)
+		GLOB.data_core.general -= null
 		log_error("Found a null entry in data_core.general")
 
-	if(data_core.general.len)
-		random_general_record	= pick(data_core.general)
+	if(GLOB.data_core.general.len)
+		random_general_record	= pick(GLOB.data_core.general)
 		random_medical_record	= find_medical_record("id", random_general_record.fields["id"])
 
-	var/datum/data/record/general = data_core.CreateGeneralRecord(user)
+	var/datum/data/record/general = GLOB.data_core.CreateGeneralRecord(user)
 	if(I)
 		general.fields["age"] = I.age
 		general.fields["rank"] = I.assignment
@@ -227,8 +227,8 @@
 		general.fields["sex"] = capitalize(user.gender)
 
 	general.fields["species"] = user.get_species()
-	var/datum/data/record/medical = data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
-	data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
+	var/datum/data/record/medical = GLOB.data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
+	GLOB.data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
 	if(random_general_record)
 		general.fields["citizenship"]	= random_general_record.fields["citizenship"]

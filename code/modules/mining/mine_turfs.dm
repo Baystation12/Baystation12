@@ -63,7 +63,7 @@ var/list/mining_floors = list()
 
 	overlays.Cut()
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if(update_neighbors && istype(turf_to_check,/turf/simulated/floor/asteroid))
 			var/turf/simulated/floor/asteroid/T = turf_to_check

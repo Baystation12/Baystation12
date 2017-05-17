@@ -4,8 +4,8 @@
 /area
 	var/turf_initializer = null
 
-/area/initialize()
-	..()
+/area/Initialize()
+	. = ..()
 	for(var/turf/T in src)
 		T.initialize()
 		if(turf_initializer)

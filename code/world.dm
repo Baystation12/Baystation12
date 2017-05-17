@@ -38,7 +38,7 @@
 
 	var/list/match = list()
 
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if(restrict_type && !istype(M, restrict_type))
 			continue
 		var/strings = list(M.name, M.ckey)
@@ -85,6 +85,7 @@
 	name = "[server_name] - [using_map.full_name]"
 
 	//logs
+	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
@@ -129,9 +130,6 @@
 		if(using_map.perform_map_generation())
 			using_map.refresh_mining_turfs()
 
-	// Create autolathe recipes, as above.
-	populate_lathe_recipes()
-
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 
@@ -170,7 +168,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(T == "players")
 		var/n = 0
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				n++
 		return n
@@ -196,7 +194,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			var/list/players = list()
 			var/list/admins = list()
 
-			for(var/client/C in clients)
+			for(var/client/C in GLOB.clients)
 				if(C.holder)
 					if(C.is_stealthed())
 						continue
@@ -211,7 +209,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			var/n = 0
 			var/admins = 0
 
-			for(var/client/C in clients)
+			for(var/client/C in GLOB.clients)
 				if(C.holder)
 					if(C.is_stealthed())
 						continue	//so stealthmins aren't revealed by the hub
@@ -225,7 +223,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(s)
 
 	else if(T == "manifest")
-		data_core.get_manifest_list()
+		GLOB.data_core.get_manifest_list()
 		var/list/positions = list()
 
 		// We rebuild the list in the format external tools expect
@@ -391,7 +389,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/client/C
 		var/req_ckey = ckey(input["adminmsg"])
 
-		for(var/client/K in clients)
+		for(var/client/K in GLOB.clients)
 			if(K.ckey == req_ckey)
 				C = K
 				break
@@ -413,7 +411,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 		to_chat(C, message)
 
-		for(var/client/A in admins)
+		for(var/client/A in GLOB.admins)
 			if(A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
@@ -477,7 +475,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/target = ckey(input["target"])
 
 		var/client/C
-		for(var/client/K in clients)
+		for(var/client/K in GLOB.clients)
 			if(K.ckey == target)
 				C = K
 				break
@@ -502,7 +500,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	processScheduler.stop()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			to_chat(C, link("byond://[config.server]"))
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
@@ -548,7 +546,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")
-	config.loadforumsql("config/forumdbconfig.txt")
 	config.load_event("config/custom_event.txt")
 
 /hook/startup/proc/loadMods()
@@ -575,7 +572,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(directory[ckey])
+				D.associate(GLOB.directory[ckey])
 
 /world/proc/load_mentors()
 	if(config.admin_legacy_system)
@@ -595,7 +592,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(directory[ckey])
+				D.associate(GLOB.directory[ckey])
 
 /world/proc/update_status()
 	var/s = ""
@@ -631,7 +628,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		features += "AI allowed"
 
 	var/n = 0
-	for (var/mob/M in player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (M.client)
 			n++
 
@@ -650,6 +647,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	/* does this help? I do not know */
 	if (src.status != s)
 		src.status = s
+
+/world/proc/SetupLogs()
+	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
+	if(game_id)
+		GLOB.log_directory += "[game_id]"
+	else
+		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0

@@ -64,8 +64,9 @@
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/air_sensor/initialize()
+/obj/machinery/air_sensor/Initialize()
 	set_frequency(frequency)
+	. = ..()
 
 obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
@@ -153,9 +154,9 @@ obj/machinery/computer/general_air_control/Destroy()
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/computer/general_air_control/initialize()
+/obj/machinery/computer/general_air_control/Initialize()
 	set_frequency(frequency)
-	..()
+	. = ..()
 
 /obj/machinery/computer/general_air_control/large_tank_control
 	icon = 'icons/obj/computer.dmi'

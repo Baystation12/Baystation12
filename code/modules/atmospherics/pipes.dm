@@ -277,7 +277,7 @@
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
 		if(!leaking)
 			leaking = 1
-			processing_objects |= src
+			GLOB.processing_objects |= src
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
