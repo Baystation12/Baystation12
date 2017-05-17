@@ -41,10 +41,9 @@
 	breather = null
 	return ..()
 
-/obj/machinery/oxygen_pump/MouseDrop(over_object, src_location, over_location)
+/obj/machinery/oxygen_pump/MouseDrop(var/mob/living/carbon/human/target, src_location, over_location)
 	..()
-	if(in_range(src, usr) && ishuman(over_object) && Adjacent(over_object))
-		var/mob/living/carbon/human/target = over_object
+	if(istype(target) && CanMouseDrop(target))
 		if(!can_apply_to_target(target, usr)) // There is no point in attempting to apply a mask if it's impossible.
 			return
 		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
@@ -94,7 +93,7 @@
 			if(breather.internals)
 				breather.internals.icon_state = "internal1"
 		use_power = 2
-		
+
 /obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/carbon/human/target, mob/user as mob)
 	if(!user)
 		user = target
@@ -157,7 +156,6 @@
 		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")
 	else
 		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
-	return
 
 
 /obj/machinery/oxygen_pump/process()
@@ -174,8 +172,6 @@
 			breather.internal = tank
 			if(breather.internals)
 				breather.internals.icon_state = "internal0"
-	return
-
 
 
 //Create rightclick to view tank settings
@@ -210,7 +206,7 @@
 	if(breather)
 		data["maskConnected"] = 1
 
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -223,11 +219,11 @@
 		ui.open()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
-		
+
 /obj/machinery/oxygen_pump/Topic(href, href_list)
-	..()
-	if (usr.stat|| usr.restrained())
-		return 0
+	if(..())
+		return 1
+
 	if (href_list["dist_p"])
 		if (href_list["dist_p"] == "reset")
 			tank.distribute_pressure = TANK_DEFAULT_RELEASE_PRESSURE
@@ -237,9 +233,8 @@
 			var/cp = text2num(href_list["dist_p"])
 			tank.distribute_pressure += cp
 		tank.distribute_pressure = min(max(round(tank.distribute_pressure), 0), TANK_MAX_RELEASE_PRESSURE)
-	src.add_fingerprint(usr)
-	return 1
-	
+		return 1
+
 /obj/machinery/oxygen_pump/anesthetic
 	name = "anesthetic pump"
 	spawn_type = /obj/item/weapon/tank/anesthetic
