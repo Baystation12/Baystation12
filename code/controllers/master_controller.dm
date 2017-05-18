@@ -83,6 +83,9 @@ datum/controller/game_controller/proc/setup_objects()
 		area.initialize()
 		CHECK_SLEEP_MASTER
 
+	report_progress("Caching space parallax simulation")
+	create_global_parallax_icons()
+
 	if(using_map.use_overmap)
 		report_progress("Initializing overmap events")
 		overmap_event_handler.create_events(using_map.overmap_z, using_map.overmap_size, using_map.overmap_event_areas)
@@ -95,12 +98,13 @@ datum/controller/game_controller/proc/setup_objects()
 
 	report_progress("Initializing atmos machinery")
 	for(var/obj/machinery/atmospherics/unary/U in machines)
-		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
-			var/obj/machinery/atmospherics/unary/vent_pump/T = U
-			T.broadcast_status()
-		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
-			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
-			T.broadcast_status()
+		switch(istype(U))
+			if(/obj/machinery/atmospherics/unary/vent_pump)
+				var/obj/machinery/atmospherics/unary/vent_pump/T = U
+				T.broadcast_status()
+			if(/obj/machinery/atmospherics/unary/vent_scrubber)
+				var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
+				T.broadcast_status()
 		CHECK_SLEEP_MASTER
 
 #undef CHECK_SLEEP_MASTER
