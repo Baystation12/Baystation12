@@ -144,7 +144,7 @@
 
 /datum/gear/eyes/tajblind/med
 	display_name = "medical veil (Tajara)"
-	path = /obj/item/clothing/glasses/tajblind/med
+	path = /obj/item/clothing/glasses/hud/health/tajblind
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
