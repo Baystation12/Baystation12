@@ -17,7 +17,7 @@
 
 	meteor_detected_sound = sound('sound/AI/torch/meteors.ogg', volume = 45)
 
-	radiation_detected_message = "High levels of radiation detected in proximity of the %STATION_NAME%. Please report to the infirmary if symptoms occur."
+	radiation_detected_message = "High levels of radiation detected in proximity of the %STATION_NAME%. Please evacuate into one of the shielded maintenance tunnels."
 	radiation_detected_sound = sound('sound/AI/torch/radiation.ogg', volume = 45)
 
 	space_time_anomaly_sound = sound('sound/AI/torch/spanomalies.ogg', volume = 45)

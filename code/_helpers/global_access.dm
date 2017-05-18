@@ -57,6 +57,8 @@
 			return global.IClog;
 		if("INCREASERUNBLOCK")
 			return global.INCREASERUNBLOCK;
+		if("LIGHTING_CORNER_DIAGONAL")
+			return global.LIGHTING_CORNER_DIAGONAL;
 		if("MC_restart_clear")
 			return global.MC_restart_clear;
 		if("MC_restart_count")
@@ -483,6 +485,8 @@
 			return global.doppler_arrays;
 		if("dreams")
 			return global.dreams;
+		if("dummy_lighting_corner")
+			return global.dummy_lighting_corner;
 		if("dview_mob")
 			return global.dview_mob;
 		if("economic_species_modifier")
@@ -765,10 +769,20 @@
 			return global.light_type_cache;
 		if("lighter_sound")
 			return global.lighter_sound;
+		if("lighting_overlays_initialised")
+			return global.lighting_overlays_initialised;
+		if("lighting_update_corners")
+			return global.lighting_update_corners;
+		if("lighting_update_corners_old")
+			return global.lighting_update_corners_old;
 		if("lighting_update_lights")
 			return global.lighting_update_lights;
+		if("lighting_update_lights_old")
+			return global.lighting_update_lights_old;
 		if("lighting_update_overlays")
 			return global.lighting_update_overlays;
+		if("lighting_update_overlays_old")
+			return global.lighting_update_overlays_old;
 		if("limb_icon_cache")
 			return global.limb_icon_cache;
 		if("list_of_ais")
@@ -1375,6 +1389,12 @@
 			return global.tickerProcess;
 		if("to_process")
 			return global.to_process;
+		if("total_lighting_corners")
+			return global.total_lighting_corners;
+		if("total_lighting_overlays")
+			return global.total_lighting_overlays;
+		if("total_lighting_sources")
+			return global.total_lighting_sources;
 		if("total_runtimes")
 			return global.total_runtimes;
 		if("total_runtimes_skipped")
@@ -1534,6 +1554,8 @@
 			global.IClog=newval;
 		if("INCREASERUNBLOCK")
 			global.INCREASERUNBLOCK=newval;
+		if("LIGHTING_CORNER_DIAGONAL")
+			global.LIGHTING_CORNER_DIAGONAL=newval;
 		if("MC_restart_clear")
 			global.MC_restart_clear=newval;
 		if("MC_restart_count")
@@ -1960,6 +1982,8 @@
 			global.doppler_arrays=newval;
 		if("dreams")
 			global.dreams=newval;
+		if("dummy_lighting_corner")
+			global.dummy_lighting_corner=newval;
 		if("dview_mob")
 			global.dview_mob=newval;
 		if("economic_species_modifier")
@@ -2242,10 +2266,20 @@
 			global.light_type_cache=newval;
 		if("lighter_sound")
 			global.lighter_sound=newval;
+		if("lighting_overlays_initialised")
+			global.lighting_overlays_initialised=newval;
+		if("lighting_update_corners")
+			global.lighting_update_corners=newval;
+		if("lighting_update_corners_old")
+			global.lighting_update_corners_old=newval;
 		if("lighting_update_lights")
 			global.lighting_update_lights=newval;
+		if("lighting_update_lights_old")
+			global.lighting_update_lights_old=newval;
 		if("lighting_update_overlays")
 			global.lighting_update_overlays=newval;
+		if("lighting_update_overlays_old")
+			global.lighting_update_overlays_old=newval;
 		if("limb_icon_cache")
 			global.limb_icon_cache=newval;
 		if("list_of_ais")
@@ -2852,6 +2886,12 @@
 			global.tickerProcess=newval;
 		if("to_process")
 			global.to_process=newval;
+		if("total_lighting_corners")
+			global.total_lighting_corners=newval;
+		if("total_lighting_overlays")
+			global.total_lighting_overlays=newval;
+		if("total_lighting_sources")
+			global.total_lighting_sources=newval;
 		if("total_runtimes")
 			global.total_runtimes=newval;
 		if("total_runtimes_skipped")
@@ -2982,6 +3022,7 @@
 	"Holiday",
 	"IClog",
 	"INCREASERUNBLOCK",
+	"LIGHTING_CORNER_DIAGONAL",
 	"MC_restart_clear",
 	"MC_restart_count",
 	"MC_restart_timeout",
@@ -3196,6 +3237,7 @@
 	"dna_genes",
 	"doppler_arrays",
 	"dreams",
+	"dummy_lighting_corner",
 	"dview_mob",
 	"economic_species_modifier",
 	"economy_init",
@@ -3337,8 +3379,13 @@
 	"light_overlay_cache",
 	"light_type_cache",
 	"lighter_sound",
+	"lighting_overlays_initialised",
+	"lighting_update_corners",
+	"lighting_update_corners_old",
 	"lighting_update_lights",
+	"lighting_update_lights_old",
 	"lighting_update_overlays",
+	"lighting_update_overlays_old",
 	"limb_icon_cache",
 	"list_of_ais",
 	"listening_objects",
@@ -3642,6 +3689,9 @@
 	"ticker",
 	"tickerProcess",
 	"to_process",
+	"total_lighting_corners",
+	"total_lighting_overlays",
+	"total_lighting_sources",
 	"total_runtimes",
 	"total_runtimes_skipped",
 	"total_unit_tests",

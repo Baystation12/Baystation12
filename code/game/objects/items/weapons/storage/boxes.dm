@@ -423,3 +423,20 @@
 	name = "box of spare headsets"
 	desc = "A box full of headsets."
 	startswith = list(/obj/item/device/radio/headset = 7)
+
+//Spare Armbands
+
+/obj/item/weapon/storage/box/armband
+	name = "box of spare military police armbands"
+	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband/mp = 5)
+
+/obj/item/weapon/storage/box/armband/engine
+	name = "box of spare engineering armbands"
+	desc = "A box full of engineering armbands. For use in emergencies when provisional engineering peronnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband/engine = 5)
+
+/obj/item/weapon/storage/box/armband/med
+	name = "box of spare medical armbands"
+	desc = "A box full of medical armbands. For use in emergencies when provisional medical personnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband/med = 5)

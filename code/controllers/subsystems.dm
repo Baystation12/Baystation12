@@ -178,7 +178,7 @@
 		if (SS_SLEEPING)
 			. = "S"
 		if (SS_IDLE)
-			. = "  "
+			. = " "
 
 //could be used to postpone a costly subsystem for (default one) var/cycles, cycles
 //for instance, during cpu intensive operations like explosions

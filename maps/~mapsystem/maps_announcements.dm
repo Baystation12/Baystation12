@@ -26,7 +26,7 @@
 
 	var/unknown_biological_entities_message = "Unknown biological entities have been detected near the %STATION_NAME%, please stand-by."
 
-	var/xenomorph_spawn_sound = sound('sound/AI/aliens.ogg', volume = 45)
+	var/xenomorph_spawn_sound = 'sound/AI/aliens.ogg'
 
 /datum/map/proc/emergency_shuttle_called_announcement()
 	evacuation_controller.evac_called.Announce(replacetext(emergency_shuttle_called_message, "%ETA%", "[round(evacuation_controller.get_eta()/60)] minute\s."), new_sound = emergency_shuttle_called_sound)
