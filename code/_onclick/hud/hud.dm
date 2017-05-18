@@ -178,6 +178,7 @@ datum/hud/New(mob/owner)
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
 	mymob.instantiate_hud(src, ui_style, ui_color, ui_alpha)
+	update_parallax_existence()
 
 /mob/proc/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
 	return

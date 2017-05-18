@@ -162,6 +162,8 @@
 			dir = olddir
 			set_dir(direct)
 
+		update_client_hook(loc)
+
 		src.move_speed = world.time - src.l_move_time
 		src.l_move_time = world.time
 		src.m_flag = 1

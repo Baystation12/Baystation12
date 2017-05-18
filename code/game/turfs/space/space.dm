@@ -8,12 +8,18 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/keep_sprite = 0
+	plane = SPACE_PLANE
 //	heat_capacity = 700000 No.
 
 /turf/space/New()
 	if((icon_state == "0") && (!keep_sprite))
 		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
+	var/image/I = image('icons/turf/space_parallax1.dmi',"[icon_state]")
+	I.plane = PLANE_SPACE_DUST
+	I.alpha = 75
+	I.blend_mode = BLEND_ADD
+	overlays += I
 	..()
 
 /turf/space/initialize()
