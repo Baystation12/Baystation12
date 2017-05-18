@@ -61,6 +61,7 @@
 	force = 10
 	max_shots = 12
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
+	wielded_item_state = "stunrifle-wielded"
 
 /obj/item/weapon/gun/energy/crossbow
 	name = "mini energy-crossbow"
