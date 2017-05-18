@@ -2,7 +2,7 @@
 	name = "Teleport"
 	desc = "This spell teleports you to a type of area of your selection."
 	feedback = "TP"
-	school = "abjuration"
+	school = "conjuration"
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES
 	invocation = "Scyar Nila!"

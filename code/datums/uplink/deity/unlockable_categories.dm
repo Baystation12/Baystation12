@@ -14,7 +14,7 @@
 /datum/uplink_item/item/deity/feat/unlocking/blood_crafting/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
 	. = ..()
 	if(.)
-		user.buildables += /obj/structure/deity/blood_forge //put structure here
+		user.form.buildables |= /obj/structure/deity/blood_forge //put structure here
 		var/list/L = user.feats[DEITY_BLOOD_CRAFT]
 		if(!L)
 			L = list()

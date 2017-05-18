@@ -14,3 +14,11 @@
 //Unlockable trees
 #define DEITY_TREE_SACRIFICE "Sacrificing"
 #define DEITY_TREE_SOUL "Soul Arts"
+#define DEITY_TREE_TRANSMUTATION "Transmutation"
+#define DEITY_TREE_CONJURATION "Conjuration"
+#define DEITY_TREE_EVOCATION "Evocation"
+
+
+//'Leveled' feats
+#define DEITY_LEVELED_CONJURATION "Level Conjuration"
+#define DEITY_LEVELED_TRANSMUTATION "Level Transmutation"

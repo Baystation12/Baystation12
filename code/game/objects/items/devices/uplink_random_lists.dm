@@ -108,7 +108,8 @@ var/list/uplink_random_selections_
 			/datum/uplink_item/item/telecrystal,
 			/datum/uplink_item/item/tools/teleporter,
 			/datum/uplink_item/item/tools/supply_beacon,
-			/datum/uplink_item/item/implants/imp_uplink
+			/datum/uplink_item/item/implants/imp_uplink,
+			/datum/uplink_item/item/deity
 		)
 
 /datum/uplink_random_selection/blacklist/New()

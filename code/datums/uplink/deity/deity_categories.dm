@@ -15,3 +15,9 @@
 
 /datum/uplink_category/deity_narsie_minions //This includes blood zombies and constructs
 	name = DEITY_FORM_DARK_MINION
+
+/datum/uplink_category/deity_wizard_conjuration
+	name = DEITY_TREE_CONJURATION
+
+/datum/uplink_category/deity_wizard_transmutation
+	name = DEITY_TREE_TRANSMUTATION

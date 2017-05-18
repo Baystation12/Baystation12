@@ -11,7 +11,7 @@ Each plays slightly different and has different challenges/benefits
 	var/pylon_icon_state //What image shows up when appearing in a pylon
 	var/mob/living/deity/linked_god = null
 	var/floor_decl = /decl/flooring/reinforced/cult
-	var/list/struct_vars = list()
+	var/list/buildables = list() //Both a list of var changes and a list of buildables.
 	var/list/icon_states = list()
 	var/list/starting_feats //This is used to give different forms different starting trees
 
@@ -25,7 +25,7 @@ Each plays slightly different and has different challenges/benefits
 			D.feats |= feat
 
 /datum/god_form/proc/sync_structure(var/obj/O)
-	var/list/svars = struct_vars[O.type]
+	var/list/svars = buildables[O.type]
 	if(!svars)
 		return
 	for(var/V in svars)
@@ -50,13 +50,14 @@ Each plays slightly different and has different challenges/benefits
 		<font color='red'>-Servant abilities require copious amounts of their blood.</font>
 	"}
 	desc = "A being made of a million nightmares, a billion deaths."
-	god_icon_state = "narsie"
+	god_icon_state = "nar-sie"
 	pylon_icon_state = "shade"
 	faction = "cult"
 
-	struct_vars = list(/obj/structure/deity/altar = list("name" = "altar",
+	buildables = list(/obj/structure/deity/altar = list("name" = "altar",
 														"desc" = "A small desk, covered in blood.",
 														"icon_state" = "talismanaltar"),
+					/obj/structure/deity/pylon,
 					/turf/simulated/floor/deity = list("name" = "disturbing smooth surface")
 					)
 
@@ -75,6 +76,64 @@ Each plays slightly different and has different challenges/benefits
 		user.adjustBruteLoss(charge)
 	return 1
 
+/* Obelisk:
+This form is an off shoot of nar-sie.
+Benefits:
+	+ Get power via sacrifice
+	+ Hardier structures
+*/
+
+/datum/god_form/narsie/obelisk
+	name = "Obelisk"
+	info = {"You are the accumulation of all things maddening and unnatural.<br>
+	<b>Benefits:</b><br>
+		<font color='blue'>+Can gain power from blood sacrifices<br>
+		+Hardier structures<br>
+		+Unique Mind-Bending Structures</font><br>
+	<b>Drawbacks:</b><br>
+		<font color='red'>-Servant abilities require both blood and sanity.</font>"}
+	desc = "Looking at it makes your brain itch."
+	pylon_icon_state = "glowing_behemoth"
+	faction = "obelisk"
+
+	buildables = list(/obj/structure/deity/altar = list("health" = 50),
+					/obj/structure/deity/pylon = list("health" = 45),
+					/turf/simulated/floor/deity
+					)
+	starting_feats = list(DEITY_FORM_BLOOD_SAC)
+
+/*Vampire:
+This form is another off-shoot of nar-sie.
+Benefits:
+	+Vampire Tree
+Drawbacks:
+	-No sac
+*/
+/datum/god_form/narsie/vampire
+	name = "Vampire"
+	info = {"You are the embodiment of greed: feeding on the destruction of others for your own gain.<br>
+	<b>Benefits:</b><br>
+		<font color='blue'>+Ability to forge weapons and armor.<br>
+		+Unique blood-syphoning tree</font><br>
+	<b>Drawbacks:</b><br>
+		<font color='red'>-Servant abilities require copious amounts of their blood.</font>
+	"}
+
+/datum/god_form/wizard
+	name = "The Tower"
+	info = {"Only from destruction does the Tower grow. Its bricks smelted from crumbled ignorance and the fires of ambition.<br>
+	<b>Benefits:</b><br>
+		<font color='blue'>+Learn spells from a miadra of different schools.<br></font><br>
+	<b>Drawbacks:</b><br>
+		<font color='red'>-Abilities hold a single charge and must be charged at their school's structure.</font>
+	"}
+	desc = "A single solitary tower"
+	pylon_icon_state = "nim"
+
+	buildables = list(/obj/structure/deity/altar = list("icon_state" = "tomealtar"),
+					/obj/structure/deity/pylon,
+					/turf/simulated/floor/deity
+					)
 /* Hive-Mind:
 This form is all about base-building and defense. Unlike other forms it does not blend in at all and as such must be defended at all costs.
 Benefits:
@@ -97,7 +156,7 @@ Drawbacks:
 	god_icon_state = "biomass"
 	pylon_icon_state = "horror"
 
-	struct_vars = list(/obj/structure/deity/altar = list("name" = "Biopit",
+	buildables = list(/obj/structure/deity/altar = list("name" = "Biopit",
 														"desc" = "A mass of flesh and gas"),
 					/turf/simulated/floor/deity = list("name" = "a fleshy surface")
 					)

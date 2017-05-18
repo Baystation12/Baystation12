@@ -92,6 +92,9 @@ var/datum/uplink/uplink = new()
 				. = min(antag_costs[antag_role], .)
 	return max(1, U ?  U.get_item_cost(src, .) : .)
 
+/datum/uplink_item/proc/name()
+	return name
+
 /datum/uplink_item/proc/description()
 	return desc
 

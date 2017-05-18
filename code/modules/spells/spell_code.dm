@@ -8,7 +8,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/panel = "Spells"//What panel the proc holder needs to go on.
 
 	var/school = "evocation" //not relevant at now, but may be important later if there are changes to how spells work. the ones I used for now will probably be changed... maybe spell presets? lacking flexibility but with some other benefit?
-
+	/*Spell schools as follows:
+	Racial - Only tagged to spells gained for being a certain race
+	Conjuration - Creating an object or transporting it.
+	Transmutation - Modifying an object or transforming it.
+	Illusion - Altering perception or thought.
+	*/
 	var/charge_type = Sp_RECHARGE //can be recharge or charges, see charge_max and charge_counter descriptions; can also be based on the holder's vars now, use "holder_var" for that
 
 	var/charge_max = 100 //recharge time in deciseconds if charge_type = Sp_RECHARGE or starting charges if charge_type = Sp_CHARGES

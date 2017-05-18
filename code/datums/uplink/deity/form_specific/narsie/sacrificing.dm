@@ -30,4 +30,4 @@
 /datum/uplink_item/item/deity/feat/blood_stone/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
 	. = ..()
 	if(.)
-		user.buildables |= /obj/structure/deity/blood_stone
+		user.form.buildables |= /obj/structure/deity/blood_stone

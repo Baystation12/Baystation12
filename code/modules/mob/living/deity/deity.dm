@@ -5,13 +5,14 @@
 	icon_state = "egg"
 	var/power_min = 10 //Below this amount you regenerate uplink TCs
 	var/power_tick = 10
+	pixel_x = -128
+	pixel_y = -128
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
 	var/list/feats = list() //These are the deities 'skills' that they unlocked. Which can unlock abilities, new categories, etc. What this list actually IS is the names of the feats and whatever data they need,
-	var/list/buildables = list(/obj/structure/deity/altar, /obj/structure/deity/pylon, /turf/simulated/floor/deity)
 	var/obj/item/device/uplink/mob_uplink
 	var/datum/god_form/form
 	var/datum/current_boon
@@ -115,8 +116,8 @@
 
 //Gets the name based on form, or if there is no form name, type.
 /mob/living/deity/proc/get_type_name(var/type)
-	if(form && form.struct_vars[type])
-		var/list/vars = form.struct_vars[type]
+	if(form && form.buildables[type])
+		var/list/vars = form.buildables[type]
 		if(vars["name"])
 			return vars["name"]
 	var/atom/movable/M = type

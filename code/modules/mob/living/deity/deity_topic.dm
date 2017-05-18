@@ -5,12 +5,15 @@
 		var/type = text2path(href_list["form"])
 		set_form(type)
 		return
-	if(href_list["join_cult"])
-		var/mob/living/user = usr
-		if(!user)
+	if(href_list["intent"] && href_list["modifier"])
+		var/choice = input(src, "Set [href_list["intent"]]:[href_list["modifier"]] to:", "Phenomenas", null) as null|anything in phenomenas
+		if(!choice)
 			return
-		take_charge(user, 300)
-		godcult.add_antagonist_mind(user.mind,1,"a follower of [src]. May it bless you with powers unknown in return for your loyalty.", "Servant of [src]", specific_god=src)
+		var/datum/phenomena/P = phenomenas[choice]
+		remove_phenomena_from_intent(P)
+		set_phenomena(P, href_list["intent"], href_list["modifier"])
+		configure_phenomenas()
+		return
 	if(href_list["pylon"])
 		var/atom/a = locate(href_list["pylon"])
 		if(a)

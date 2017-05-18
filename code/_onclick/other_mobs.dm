@@ -143,19 +143,3 @@
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
 	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
 		playsound(loc, attack_sound, 50, 1, 1)
-
-/mob/living/deity/ClickOn(var/atom/A, var/params)
-	if(A == src)
-		if(form)
-			open_menu()
-		else
-			choose_form()
-		return
-	if(current_boon && istype(A, /mob) && can_use_phenomena(0,A, 1, 1))
-		grant_boon(A)
-	else if(istype(A, /obj/structure/deity))
-		var/obj/structure/deity/D = A
-		if(D.linked_god == src)
-			D.attack_deity(src)
-			return
-	..()

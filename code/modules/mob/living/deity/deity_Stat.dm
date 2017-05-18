@@ -1,0 +1,8 @@
+/mob/living/deity/Stat()
+	. = ..()
+	if(. && statpanel("Status"))
+		stat("Health", "[health]/[maxHealth]")
+		stat("Power", "[mob_uplink.uses]")
+		stat("Power Minimum:", "[power_min]")
+		stat("Structure Num:", "[structures.len]")
+		stat("Minion Num:", "[minions.len]")

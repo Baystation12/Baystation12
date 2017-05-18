@@ -56,7 +56,7 @@
 /obj/structure/deity/blood_stone
 	name = "bloody stone"
 	desc = "A jagged stone covered in the various stages of blood, from dried to fresh."
-	icon_state = "pylon"
+	icon_state = "blood_stone"
 	health = 100 //Its a piece of rock.
 	build_cost = 700
 
