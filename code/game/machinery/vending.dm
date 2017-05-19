@@ -919,6 +919,7 @@
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
 	/obj/item/weapon/material/knife = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 8,
 	/obj/item/clothing/suit/chef/classic = 2,
 	/obj/item/weapon/storage/lunchbox = 3,
