@@ -45,6 +45,10 @@
 
 	health += maxhealth - old_maxhealth
 
+// Returns True when either both tables have the same material or if either is a frame
+/obj/structure/table/proc/is_same_material(var/obj/structure/table/T)
+	return (material && T.material && material.name == T.material.name || !material || !T.material)
+
 /obj/structure/table/proc/take_damage(amount)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	if(material && material.is_brittle())
@@ -333,7 +337,7 @@
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 			var/obj/structure/table/T = locate(/obj/structure/table ,get_step(src,direction))
-			if (T && T.flipped == 1 && T.dir == src.dir && material && T.material && T.material.name == material.name)
+			if (T && T.flipped == 1 && T.dir == src.dir && is_same_material(T))
 				type++
 				tabledirs |= direction
 
@@ -368,14 +372,6 @@
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/proc/update_connections(propagate=0)
-	if(!material)
-		connections = list("0", "0", "0", "0")
-
-		if(propagate)
-			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_connections()
-		return
-
 	var/list/blocked_dirs = list()
 	for(var/obj/structure/window/W in get_turf(src))
 		if(W.is_fulltile())
@@ -413,7 +409,7 @@
 		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
+		if(is_same_material(T) && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)
