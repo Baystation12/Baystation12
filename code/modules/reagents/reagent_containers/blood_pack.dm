@@ -19,13 +19,16 @@
 	icon_state = "empty"
 	volume = 200
 
+	var/species = "Human"
 	var/blood_type = null
 
 /obj/item/weapon/reagent_containers/blood/New()
 	..()
 	if(blood_type)
-		name = "BloodPack [blood_type]"
-		reagents.add_reagent("blood", 200, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list()))
+		name = "BloodPack ([species], [blood_type])"
+		var/datum/species/species_type = all_species[species]
+		var/blood_colour = species_type.blood_color
+		reagents.add_reagent("blood", 200, list("blood_type"=blood_type,"species"=species,"blood_colour"=blood_colour))
 		update_icon()
 
 /obj/item/weapon/reagent_containers/blood/on_reagent_change()
@@ -58,4 +61,33 @@
 /obj/item/weapon/reagent_containers/blood/OMinus
 	blood_type = "O-"
 
+/obj/item/weapon/reagent_containers/blood/OMinus/unathi
+	species = "Unathi"
+
+/obj/item/weapon/reagent_containers/blood/OMinus/tajara
+	species = "Tajaran"
+
+/obj/item/weapon/reagent_containers/blood/OMinus/skrell
+	species = "Skrell"
+
+/obj/item/weapon/reagent_containers/blood/OMinus/resomi
+	species = "Resomi"
+
+/obj/item/weapon/reagent_containers/blood/random/New()
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-")
+	..()
+
+/obj/item/weapon/reagent_containers/blood/random/unathi
+	species = "Unathi"
+
+/obj/item/weapon/reagent_containers/blood/random/tajara
+	species = "Tajaran"
+
+/obj/item/weapon/reagent_containers/blood/random/skrell
+	species = "Skrell"
+
+/obj/item/weapon/reagent_containers/blood/random/resomi
+	species = "Resomi"
+
 /obj/item/weapon/reagent_containers/blood/empty
+	species = null

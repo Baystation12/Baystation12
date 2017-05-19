@@ -229,6 +229,18 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/rum,\
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron)
 
+/obj/random/bloodpack
+	name = "random BloodPack"
+	desc = "This is a random BloodPack."
+	icon = 'icons/obj/bloodpack.dmi'
+	icon_state = "empty"
+	item_to_spawn()
+		return pick(prob(5);/obj/item/weapon/reagent_containers/blood/random,\
+					prob(1);/obj/item/weapon/reagent_containers/blood/random/unathi,\
+					prob(1);/obj/item/weapon/reagent_containers/blood/random/tajara,\
+					prob(1);/obj/item/weapon/reagent_containers/blood/random/skrell,\
+					prob(1);/obj/item/weapon/reagent_containers/blood/random/resomi,\
+					prob(1);/obj/item/weapon/reagent_containers/blood/empty)
 
 /obj/random/energy
 	name = "Random Energy Weapon"
