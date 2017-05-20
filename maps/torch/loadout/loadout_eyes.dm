@@ -68,16 +68,15 @@
 	path = /obj/item/clothing/glasses/material
 	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Prospector", "Research Assistant")
 
-/datum/gear/eyes/shades/sunglasses
+/datum/gear/eyes/shades/
 	display_name = "sunglasses"
 	path = /obj/item/clothing/glasses/sunglasses
 	cost = 3
 
-/datum/gear/eyes/shades
+/datum/gear/eyes/shades/sunglasses
 	display_name = "sunglasses, fat"
 	path = /obj/item/clothing/glasses/sunglasses/big
 	cost = 3
-	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/shades/prescriptionsun
 	display_name = "sunglasses, presciption"
