@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "All toys guns are now fitted with red bits on the barrel so you can visually tell them apart! Very safe! Fun for whole family!"
-  - rscadd: "Can use wirecutters on toy revolvers to snip those off. It also changes examine name to 'revolver' instead of 'toy gun'. In case you didn't know, those are proper guns and you can hold people hostage with those. Just saying. Do not try at home."
