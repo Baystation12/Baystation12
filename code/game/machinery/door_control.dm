@@ -131,6 +131,7 @@
 	desc = "It controls blast doors, remotely."
 
 /obj/machinery/button/remote/blast_door/trigger()
+	set waitfor = 0
 	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == src.id)
 			if(M.density)
@@ -141,6 +142,8 @@
 				spawn(0)
 					M.close()
 					return
+			if(M.iterate)
+				sleep(M.iterate)
 
 /*
 	Emitter remote control
