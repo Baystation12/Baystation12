@@ -188,18 +188,15 @@
 	desc = "A grey beret with a silver insignia, denoting service in the SCGDF Strategic Command. For intelligence personnel who are more inclined towards style than safety."
 	icon_state = "beret_graysilver"
 
-
 /obj/item/clothing/head/beret/sol/diplomatic
 	name = "diplomatic security beret"
 	desc = "A tan beret denoting service in the SCG Marine Corps Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
 	icon_state = "beret_tan"
 
-
 /obj/item/clothing/head/beret/sol/borderguard
 	name = "border security beret"
 	desc = "A green beret with a silver emblem, denoting service in the Bureau of Border Security. For border guards who are more inclined towards style than safety."
 	icon_state = "beret_greensilver"
-
 
 /obj/item/clothing/head/beret/sol/expedition
 	name = "expeditionary beret"
