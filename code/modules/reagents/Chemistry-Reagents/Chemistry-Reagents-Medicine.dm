@@ -414,9 +414,25 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#C1C1C1"
-	metabolism = REM * 0.05
-	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 0.1
+	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
+
+/datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.immunity = max(M.immunity - 0.1, 0)
+	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
+	if(volume > 10)
+		M.immunity = max(M.immunity - 0.3, 0)
+		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
+	if(dose > 15)
+		M.immunity = max(M.immunity - 0.25, 0)
+
+/datum/reagent/spaceacillin/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.immunity = max(M.immunity - 0.25, 0)
+	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
+	if(prob(2))
+		M.immunity_norm = max(M.immunity_norm - 1, 0)
 
 /datum/reagent/sterilizine
 	name = "Sterilizine"
@@ -612,3 +628,23 @@
 
 	if(alien != IS_DIONA)
 		M.make_jittery(-50)
+
+/datum/reagent/antidexafen
+	name = "Antidexafen"
+	id = "antidexafen"
+	description = "All-in-one cold medicine. Fever, cough, sneeze, safe for babies."
+	taste_description = "cough syrup"
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose = 60
+	scannable = 1
+	metabolism = 0.02
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/antidexafen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 15)
+	M.add_chemical_effect(CE_ANTIVIRAL, 1)
+
+/datum/reagent/antidexafen/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.hallucination = max(M.hallucination, 2)
