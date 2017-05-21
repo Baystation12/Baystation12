@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Lets AI controlled circuits to use the assembly's inputs via a verb."
-  - bugfix: "Fixed AI controlled circuits not being moved correctly."

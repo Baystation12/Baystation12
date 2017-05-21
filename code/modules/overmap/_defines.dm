@@ -8,7 +8,7 @@ var/global/list/map_sectors = list()
 	icon_state = "start"
 	requires_power = 0
 	luminosity = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 	base_turf = /turf/unsimulated/map
 
 /turf/unsimulated/map

@@ -26,7 +26,6 @@
 		/obj/structure/sink,
 		/obj/item/weapon/storage,
 		/obj/machinery/atmospherics/unary/cryo_cell,
-		/obj/machinery/dna_scannernew,
 		/obj/item/weapon/grenade/chem_grenade,
 		/mob/living/bot/medbot,
 		/obj/item/weapon/storage/secure/safe,

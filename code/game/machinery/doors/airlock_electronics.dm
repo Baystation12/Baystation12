@@ -109,7 +109,7 @@
 
 /obj/item/weapon/airlock_electronics/brace
 	name = "airlock brace access circuit"
-	req_access = null
+	req_access = list()
 	locked = 0
 	lockable = 0
 

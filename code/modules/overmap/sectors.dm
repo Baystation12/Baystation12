@@ -79,7 +79,7 @@ var/list/points_of_interest = list()
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map/)
-		T.lighting_clear_overlays()
+		T.lighting_clear_overlay()
 		turfs += T
 
 	var/area/overmap/A = new

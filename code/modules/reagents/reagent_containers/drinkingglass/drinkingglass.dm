@@ -2,6 +2,7 @@
 
 /var/const/DRINK_FIZZ = "fizz"
 /var/const/DRINK_ICE = "ice"
+/var/const/DRINK_VAPOR = "vapor"
 /var/const/DRINK_ICON_DEFAULT = ""
 /var/const/DRINK_ICON_NOISY = "_noise"
 
@@ -63,6 +64,18 @@
 				return 1
 	return 0
 
+/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_vapor()
+	if(reagents.reagent_list.len > 0)
+		var/datum/reagent/R = reagents.get_master_reagent()
+		if(!("vapor" in R.glass_special))
+			var/totalvape = 0
+			for(var/datum/reagent/re in reagents.reagent_list)
+				if("vapor" in re.glass_special)
+					totalvape += re.volume
+			if(totalvape >= volume * 0.6) // 60% vapor by container volume
+				return 1
+	return 0
+
 /obj/item/weapon/reagent_containers/food/drinks/glass2/New()
 	..()
 	icon_state = base_icon
@@ -101,6 +114,9 @@
 
 		if(has_fizz())
 			over_liquid |= "[base_icon][amnt]_fizz"
+
+		if(has_vapor())
+			over_liquid |= "[base_icon]_vapor"
 
 		for(var/S in R.glass_special)
 			if("[base_icon]_[S]" in icon_states(DRINK_ICON_FILE))

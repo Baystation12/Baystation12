@@ -6,8 +6,9 @@
 	sort_category = "Uniforms and Casual Dress"
 
 /datum/gear/uniform/cheongsam
-	display_name = "cheongsam, white"
+	display_name = "cheongsam"
 	path = /obj/item/clothing/under/cheongsam
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/kilt
 	display_name = "kilt"

@@ -74,9 +74,9 @@
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 	icon_size = WORLD_ICON_SIZE
+	fps = 20
 
-
-#define RECOMMENDED_VERSION 510
+#define RECOMMENDED_VERSION 511
 /world/New()
 	//set window title
 	name = "[server_name] - [using_map.full_name]"
@@ -111,11 +111,7 @@
 
 	. = ..()
 
-#ifndef UNIT_TEST
-
-	sleep_offline = 1
-
-#else
+#ifdef UNIT_TEST
 	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
@@ -138,6 +134,9 @@
 
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
+
+	Master.Initialize(10, FALSE)
+
 	spawn(1)
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)
 		processScheduler.setup()
@@ -153,8 +152,6 @@
 			ToRban_autoupdate()
 
 #undef RECOMMENDED_VERSION
-
-	return
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
