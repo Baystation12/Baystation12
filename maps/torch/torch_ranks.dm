@@ -34,6 +34,7 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/e8_alt1,
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/e9_alt2,
@@ -65,7 +66,7 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/fleet/e8_alt1,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
@@ -91,6 +92,7 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/e8_alt1,
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/e9_alt2,
@@ -122,7 +124,7 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/fleet/e8_alt1,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
@@ -178,7 +180,6 @@
 		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/marine/e8_alt,
-		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/marine/o2,
@@ -265,6 +266,12 @@
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e8, /obj/item/clothing/accessory/specialty/enlisted)
 	sort_order = 8
 
+/datum/mil_rank/fleet/e8_alt1
+	name = "Command Senior Chief Petty Officer"
+	name_short = "CMDCS"
+	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e8_alt1, /obj/item/clothing/accessory/specialty/enlisted)
+	sort_order = 8
+
 /datum/mil_rank/fleet/e9
 	name = "Master Chief Petty Officer"
 	name_short = "MCPO"
@@ -302,28 +309,33 @@
 	sort_order = 9
 
 /datum/mil_rank/fleet/w1
-	name = "Warrant Officer 1"
+	name = "Warrant Officer"
 	name_short = "WO1"
+	accessory = list(/obj/item/clothing/accessory/rank/fleet/officer/w1, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = -1
 
 /datum/mil_rank/fleet/w2
-	name = "Chief Warrant Officer 2"
+	name = "Chief Warrant Officer Two"
 	name_short = "CWO2"
+	accessory = list(/obj/item/clothing/accessory/rank/fleet/officer/w2, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = -2
 
 /datum/mil_rank/fleet/w3
-	name = "Chief Warrant Officer 3"
+	name = "Chief Warrant Officer Three"
 	name_short = "CWO3"
+	accessory = list(/obj/item/clothing/accessory/rank/fleet/officer/w3, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = -3
 
 /datum/mil_rank/fleet/w4
-	name = "Chief Warrant Officer 4"
+	name = "Chief Warrant Officer Four"
 	name_short = "CWO4"
+	accessory = list(/obj/item/clothing/accessory/rank/fleet/officer/w4, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = -4
 
 /datum/mil_rank/fleet/w5
-	name = "Chief Warrant Officer 5"
+	name = "Chief Warrant Officer Five"
 	name_short = "CWO5"
+	accessory = list(/obj/item/clothing/accessory/rank/fleet/officer/w5, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = -5
 
 /datum/mil_rank/fleet/o1
@@ -470,28 +482,33 @@
 	sort_order = 9
 
 /datum/mil_rank/marine/w1
-	name = "Warrant Officer 1"
+	name = "Warrant Officer"
 	name_short = "WO"
+	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/w1)
 	sort_order = -1
 
 /datum/mil_rank/marine/w2
-	name = "Chief Warrant Officer 2"
+	name = "Chief Warrant Officer Two"
 	name_short = "CWO2"
+	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/w2)
 	sort_order = -2
 
 /datum/mil_rank/marine/w3
-	name = "Chief Warrant Officer 3"
+	name = "Chief Warrant Officer Three"
 	name_short = "CWO3"
+	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/w3)
 	sort_order = -3
 
 /datum/mil_rank/marine/w4
-	name = "Chief Warrant Officer 4"
+	name = "Chief Warrant Officer Four"
 	name_short = "CWO4"
+	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/w4)
 	sort_order = -4
 
 /datum/mil_rank/marine/w5
-	name = "Chief Warrant Officer 5"
+	name = "Chief Warrant Officer Five"
 	name_short = "CWO5"
+	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/w5)
 	sort_order = -5
 
 /datum/mil_rank/marine/o1
