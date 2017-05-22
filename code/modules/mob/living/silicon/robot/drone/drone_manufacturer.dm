@@ -106,6 +106,11 @@
 		to_chat(user, "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>")
 		return
 
+	if(config.use_age_restriction_for_jobs && isnum(user.client.player_age))
+		if(user.client.player_age <= 3)
+			to_chat(user, "<span class='danger'> Your account is not old enough to play as a maintenance drone.</span>")
+			return
+
 	if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
 		return
 
@@ -127,6 +132,7 @@
 		fabricator = all_fabricators[choice]
 
 	if(user && fabricator && !((fabricator.stat & NOPOWER) || !fabricator.produce_drones || fabricator.drone_progress < 100))
+		log_and_message_admins("has joined the round as a maintenance drone.")
 		var/mob/drone = fabricator.create_drone(user.client)
 		if(drone)
 			drone.status_flags |= NO_ANTAG
