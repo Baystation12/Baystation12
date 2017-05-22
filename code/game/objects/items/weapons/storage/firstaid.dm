@@ -231,3 +231,9 @@
 	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 7)
+
+/obj/item/weapon/storage/pill_bottle/antidexafen
+	name = "bottle of cold medicine pills"
+	desc = "All-in-one cold medicine. 10u dose per pill. Safe for babies like you!"
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/antidexafen = 7)

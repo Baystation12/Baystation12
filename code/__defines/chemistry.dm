@@ -35,6 +35,7 @@
 #define CE_SPEEDBOOST "gofast" // Hyperzine
 #define CE_PULSE      "xcardic" // increases or decreases heart rate
 #define CE_NOPULSE    "heartstop" // stops heartbeat
+#define CE_ANTIVIRAL    "antiviral" // suppresses effects of virus effects
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

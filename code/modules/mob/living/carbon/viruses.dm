@@ -1,3 +1,5 @@
+/mob/living/carbon/var/immunity 		= 100		//current immune system strength
+/mob/living/carbon/var/immunity_norm 	= 100		//it will regenerate to this value
 /mob/living/carbon/proc/handle_viruses()
 
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -42,4 +44,4 @@
 			if(common_antibodies.len)
 				V.dead = 1
 
-	return
+	immunity = min(immunity + 0.25, immunity_norm)

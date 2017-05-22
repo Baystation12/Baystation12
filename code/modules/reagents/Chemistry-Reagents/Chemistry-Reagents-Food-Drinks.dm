@@ -441,7 +441,7 @@
 // Juices
 /datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-
+	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 	var/effective_dose = dose/2
 	if(alien == IS_UNATHI)
 		if(effective_dose < 2)
