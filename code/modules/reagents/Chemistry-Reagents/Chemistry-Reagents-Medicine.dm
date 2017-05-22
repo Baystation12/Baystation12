@@ -7,7 +7,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#00BFFF"
-	overdose = REAGENTS_OVERDOSE * 2
+	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -32,7 +32,11 @@
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(6 * removed, 0)
+		M.heal_organ_damage(6 * removed, 0) // haha holy shit this is OP
+		
+/datum/reagent/bicaridine/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_DIONA)
+		M.adjustBruteLoss(8)
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -49,6 +53,10 @@
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 6 * removed)
 
+/datum/reagent/kelotane/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_DIONA)
+		M.adjustBurnLoss(8)
+
 /datum/reagent/dermaline
 	name = "Dermaline"
 	id = "dermaline"
@@ -63,7 +71,11 @@
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 12 * removed)
+		M.heal_organ_damage(0, 12 * removed) // jesus h. christ
+
+/datum/reagent/dermaline/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_DIONA)
+		M.adjustBurnLoss(17) // watch your dosages 'tardlords
 
 /datum/reagent/dylovene
 	name = "Dylovene"
@@ -74,12 +86,17 @@
 	color = "#00A000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	overdose = REAGENTS_OVERDOSE * 0.5 // "m-muh easy access OD bypass ;_;" - Baystation Players
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.drowsyness = max(0, M.drowsyness - 6 * removed)
 		M.hallucination = max(0, M.hallucination - 9 * removed)
 		M.adjustToxLoss(-4 * removed)
+
+/datum/reagent/dylovene/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_DIONA)
+		M.adjustToxLoss(8)
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -98,26 +115,9 @@
 	else if(alien != IS_DIONA)
 		M.adjustOxyLoss(-15 * removed)
 
-	holder.remove_reagent("lexorin", 2 * removed)
-
-/datum/reagent/dexalinp
-	name = "Dexalin Plus"
-	id = "dexalinp"
-	description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#0040FF"
-	overdose = REAGENTS_OVERDOSE * 0.5
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-
-/datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustToxLoss(removed * 9)
-	else if(alien != IS_DIONA)
-		M.adjustOxyLoss(-300 * removed)
-
-	holder.remove_reagent("lexorin", 3 * removed)
+/datum/reagent/dexalin/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_DIONA)
+		M.adjustOxyLoss(30) // this seems like a lot but it turns into 15 because it's overpowering the effects from up there ^
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
@@ -128,12 +128,20 @@
 	color = "#8040FF"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.adjustOxyLoss(-6 * removed)
 		M.heal_organ_damage(3 * removed, 3 * removed)
 		M.adjustToxLoss(-3 * removed)
+
+/datum/reagent/tricordrazine/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_DIONA)
+		M.adjustToxLoss(6)
+		M.adjustBruteLoss(6)
+		M.adjustFireLoss(6)
+		M.adjustOxyLoss(12)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
