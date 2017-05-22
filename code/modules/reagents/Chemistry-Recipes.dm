@@ -1,3 +1,5 @@
+// this file gave Rich Evans AIDS - Iamgoofball
+
 
 //Chemical Reactions - Initialises all /datum/chemical_reaction into a list
 // It is filtered into multiple lists within a list.
@@ -325,13 +327,6 @@
 	id = "dermaline"
 	result = "dermaline"
 	required_reagents = list("acetone" = 1, "phosphorus" = 1, "kelotane" = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/dexalinp
-	name = "Dexalin Plus"
-	id = "dexalinp"
-	result = "dexalinp"
-	required_reagents = list("dexalin" = 1, "carbon" = 1, "iron" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/bicaridine
