@@ -23,10 +23,10 @@
 		if(pref.alternate_languages.len)
 			for(var/i = 1 to pref.alternate_languages.len)
 				var/lang = pref.alternate_languages[i]
-				if(!pref.char_lock)
-					. += "- [lang] - <a href='?src=\ref[src];remove_language=[i]'>remove</a><br>"
-				else
+				if(pref.char_lock)
 					. +="- [lang]<br>"
+				else
+					. += "- [lang] - <a href='?src=\ref[src];remove_language=[i]'>remove</a><br>"
 
 		if(pref.alternate_languages.len < S.num_alternate_languages)
 			if(!pref.char_lock)
