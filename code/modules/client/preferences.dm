@@ -200,20 +200,21 @@ datum/preferences
 	var/dat = "<html><body><center>"
 
 	if(path)
-		if(!char_lock)
-			dat += "Slot - "
-			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
-			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
-		else
+		if(char_lock)
 			dat += "Slot - "
 			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 			dat += "Save slot - "
 			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
 			dat += "Reload slot - "
 			dat += "Lock slot"
+		else
+			dat += "Slot - "
+			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
+			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
+
 
 	else
 		dat += "Please create an account to save your preferences."
