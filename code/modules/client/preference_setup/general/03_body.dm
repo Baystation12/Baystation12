@@ -93,7 +93,24 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	var/mob_species = all_species[pref.species]
 
-	if(!pref.char_lock)
+	if(pref.char_lock)
+		. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
+		. += "<br>"
+
+		if(config.use_cortical_stacks)
+			. += "Neural lace: "
+			. += pref.has_cortical_stack ? "present." : "<b>not present.</b>"
+			. += "<br>"
+
+		. += "Species: [pref.species]<br>"
+		. += "Blood Type: [pref.b_type]<br>"
+		
+		if(has_flag(mob_species, HAS_SKIN_TONE))
+			. += "Skin Tone: [-pref.s_tone + 35]<br>"
+		. += "Needs Glasses: <b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b><br>"
+		. += "Limbs and Internal Organs:<br>"
+
+	else
 		. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
 		. += "(<a href='?src=\ref[src];random=1'>&reg;</A>)"
 		. += "<br>"
@@ -105,31 +122,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		. += "Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</a><br>"
 		. += "Blood Type: Lock character to generate.<br>"
-
-	else
-		. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
-		. += "<br>"
-
-		if(config.use_cortical_stacks)
-			. += "Neural lace: "
-			. += pref.has_cortical_stack ? "present." : "<b>not present.</b>"
-			. += "<br>"
-
-		. += "Species: [pref.species]<br>"
-		. += "Blood Type: [pref.b_type]<br>"
-
-	if(!pref.char_lock)
+		
 		if(has_flag(mob_species, HAS_SKIN_TONE))
 			. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/220</a><br>"
 		. += "Needs Glasses: <a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
 		. += "Limbs: <a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
 		. += "Internal Organs: <a href='?src=\ref[src];organs=1'>Adjust</a><br>"
-	else
-		if(has_flag(mob_species, HAS_SKIN_TONE))
-			. += "Skin Tone: [-pref.s_tone + 35]<br>"
-		. += "Needs Glasses: <b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b><br>"
-		. += "Limbs and Internal Organs:<br>"
-
+		
 	//display limbs below
 	var/ind = 0
 	for(var/name in pref.organ_data)
@@ -226,17 +225,19 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<br><b>Eyes</b><br>"
-		if(!pref.char_lock)
-			. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes)]'><tr><td>__</td></tr></table></font><br>"
-		else
+		if(pref.char_lock)
 			. += "<font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes)]'><tr><td>__</td></tr></table></font><br>"
+		else
+			. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes)]'><tr><td>__</td></tr></table></font><br>"
+
 
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<br><b>Body Color</b><br>"
-		if(!pref.char_lock)
-			. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin)]'><tr><td>__</td></tr></table></font><br>"
-		else
+		if(pref.char_lock)
 			. += "<font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin)]'><tr><td>__</td></tr></table></font><br>"
+		else
+			. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin)]'><tr><td>__</td></tr></table></font><br>"
+
 
 	. = jointext(.,null)
 
