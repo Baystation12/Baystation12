@@ -48,7 +48,6 @@
 		. += "<span class='danger'>You are banned from using character records.</span><br>"
 	else
 		if(pref.char_lock)
-
 			. += "Medical Records:<br>"
 			. += "[TextPreview(pref.med_record,40)]<br><br>"
 			. += "Employment Records:<br>"
