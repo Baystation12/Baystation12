@@ -33,12 +33,13 @@
 /datum/category_item/player_setup_item/general/background/content(var/mob/user)
 	. += "<b>Background Information</b><br>"
 	. += "[using_map.company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[pref.nanotrasen_relation]</a><br/>"
-	if(!pref.char_lock)
-		. += "Home System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
-		. += "Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
-	else
+	if(pref.char_lock)
 		. += "Home System: [pref.home_system]<br/>"
 		. += "Citizenship: [pref.citizenship]<br/>"
+	else
+		. += "Home System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
+		. += "Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
+
 	. += "Faction: <a href='?src=\ref[src];faction=1'>[pref.faction]</a><br/>"
 	. += "Religion: <a href='?src=\ref[src];religion=1'>[pref.religion]</a><br/>"
 
@@ -46,20 +47,22 @@
 	if(jobban_isbanned(user, "Records"))
 		. += "<span class='danger'>You are banned from using character records.</span><br>"
 	else
-		if(!pref.char_lock)
-			. += "Medical Records:<br>"
-			. += "<a href='?src=\ref[src];set_medical_records=1'>[TextPreview(pref.med_record,40)]</a><br><br>"
-			. += "Employment Records:<br>"
-			. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
-			. += "Security Records:<br>"
-			. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
-		else
+		if(pref.char_lock)
+
 			. += "Medical Records:<br>"
 			. += "[TextPreview(pref.med_record,40)]<br><br>"
 			. += "Employment Records:<br>"
 			. += "[TextPreview(pref.gen_record,40)]<br><br>"
 			. += "Security Records:<br>"
 			. += "[TextPreview(pref.sec_record,40)]<br>"
+		else
+			. += "Medical Records:<br>"
+			. += "<a href='?src=\ref[src];set_medical_records=1'>[TextPreview(pref.med_record,40)]</a><br><br>"
+			. += "Employment Records:<br>"
+			. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
+			. += "Security Records:<br>"
+			. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
+
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["nt_relation"])
