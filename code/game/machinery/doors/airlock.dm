@@ -330,7 +330,7 @@
 	icon = 'icons/obj/doors/Dooruranium.dmi'
 	mineral = "uranium"
 	var/last_event = 0
-	rad_power = 7.5
+	var/rad_power = 7.5
 
 /obj/machinery/door/airlock/process()
 	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
@@ -342,6 +342,13 @@
 	else if(electrified_until > 0 && world.time >= electrified_until)
 		electrify(0)
 
+	..()
+
+/obj/machinery/door/airlock/uranium/process()
+	if(world.time > last_event+20)
+		if(prob(50))
+			radiation_repository.radiate(src, rad_power)
+		last_event = world.time
 	..()
 
 /obj/machinery/door/airlock/phoron
