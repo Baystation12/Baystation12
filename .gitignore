@@ -20,3 +20,4 @@ __pycache__
 config/*
 !config/*/
 maps/nsv_apollo/
+.atom-build.json

@@ -37,6 +37,7 @@
 		/obj/item/weapon/folder/white,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/storage/firstaid/regular,
+		/obj/item/weapon/storage/box/armband/med,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
 		new /datum/atom_creator/weighted(list(

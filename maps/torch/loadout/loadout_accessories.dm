@@ -19,6 +19,44 @@
 	path = /obj/item/clothing/accessory/wcoat
 	allowed_roles = FORMAL_ROLES
 
+/datum/gear/accessory/zhongshan
+	display_name = "zhongshan jacket"
+	path = /obj/item/clothing/accessory/toggleable/zhongshan
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/dashiki
+	display_name = "dashiki selection"
+	path = /obj/item/clothing/accessory/dashiki
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/dashiki/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/dashiki)
+
+/datum/gear/accessory/thawb
+	display_name = "thawb"
+	path = /obj/item/clothing/accessory/thawb
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/sherwani
+	display_name = "sherwani"
+	path = /obj/item/clothing/accessory/sherwani
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/qipao
+	display_name = "qipao blouse"
+	path = /obj/item/clothing/accessory/qipao
+	allowed_roles = NON_MILITARY_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/tangzhuang
+	display_name = "tangzhuang jacket"
+	path = /obj/item/clothing/accessory/tangzhuang
+	allowed_roles = NON_MILITARY_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/accessory/necklace
 	display_name = "necklace"
 	path = /obj/item/clothing/accessory/necklace
@@ -104,6 +142,15 @@
 /datum/gear/accessory/holster/New()
 	..()
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
+
+/datum/gear/accessory/ubac
+	display_name = "ubac selection"
+	path = /obj/item/clothing/accessory/ubac
+	allowed_roles = MILITARY_ROLES
+
+/datum/gear/accessory/ubac/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/ubac)
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
