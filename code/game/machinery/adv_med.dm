@@ -297,7 +297,8 @@
 		"lung_ruptured" = H.is_lung_ruptured(),
 		"external_organs" = H.organs.Copy(),
 		"internal_organs" = H.internal_organs.Copy(),
-		"species_organs" = H.species.has_organ //Just pass a reference for this, it shouldn't ever be modified outside of the datum.
+		"species_organs" = H.species.has_organ, //Just pass a reference for this, it shouldn't ever be modified outside of the datum.
+		"immunity" = round(H.virus_immunity()*100)
 		)
 	return occupant_data
 
@@ -326,6 +327,7 @@
 	dat += text("[]\tApprox. Brain Damage %: []</font><br>", ("<font color='[occ["brainloss"] < 1  ? "blue" : "red"]'>"), occ["brainloss"])
 	dat += text("Paralysis Summary %: [] ([] seconds left!)<br>", occ["paralysis"], round(occ["paralysis"] / 4))
 	dat += text("Body Temperature: [occ["bodytemp"]-T0C]&deg;C ([occ["bodytemp"]*1.8-459.67]&deg;F)<br><HR>")
+	dat += "<font color='[occ["immunity"] > 25  ? "black" : "red"]'>Antibody levels and immune system perfomance are at [occ["immunity"] ]% of baseline.</font>"
 
 	if(occ["borer_present"])
 		dat += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<br>"
