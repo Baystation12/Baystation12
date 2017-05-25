@@ -18,6 +18,6 @@
 /obj/item/projectile/bullet/magnetic/flechette
 	name = "flechette"
 	icon_state = "flechette"
-	damage = 15
+	damage = 20
 	armor_penetration = 100
 	fire_sound = 'sound/weapons/rapidslice.ogg'
