@@ -14,3 +14,10 @@
 	icon_state = "gauss_silenced"
 	damage = 75
 	armor_penetration = 90
+
+/obj/item/projectile/bullet/magnetic/flechette
+	name = "flechette"
+	icon_state = "flechette"
+	damage = 15
+	armor_penetration = 100
+	fire_sound = 'sound/weapons/rapidslice.ogg'

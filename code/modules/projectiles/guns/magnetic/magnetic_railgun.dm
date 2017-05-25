@@ -15,6 +15,7 @@
 	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
 	var/slowdown_held = 2
 	var/slowdown_worn = 1
+	var/use_standard_ammo = 1
 
 /obj/item/weapon/gun/magnetic/railgun/initialize()
 
@@ -22,7 +23,8 @@
 	capacitor.charge = capacitor.max_charge
 
 	cell = new initial_cell_type(src)
-	loaded = new /obj/item/weapon/rcd_ammo/large(src)
+	if (use_standard_ammo)
+		loaded = new /obj/item/weapon/rcd_ammo/large(src)
 
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
 	slowdown_per_slot[slot_r_hand] =  slowdown_held
@@ -46,11 +48,16 @@
 	var/obj/item/weapon/rcd_ammo/ammo = loaded
 	ammo.remaining--
 	if(ammo.remaining <= 0)
-		qdel(loaded)
-		loaded = null
-		spawn(3)
-			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
-			loc.visible_message("<span class='warning'>\The [src] beeps and ejects its empty cartridge.</span>")
+		if (use_standard_ammo)
+			qdel(loaded)
+			loaded = null
+			spawn(3)
+				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+				loc.visible_message("<span class='warning'>\The [src] beeps and ejects its empty cartridge.</span>")
+		if (!use_standard_ammo)
+			spawn(3)
+				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+				loc.visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/automatic // Adminspawn only, this shit is absurd.
 	name = "\improper RHR accelerator"
@@ -77,3 +84,26 @@
 	if(.)
 		to_chat(user, "<span class='notice'>Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.</span>")
 
+/obj/item/weapon/gun/magnetic/railgun/flechette
+	name = "flechette gun"
+	desc = "The MI-12 Skadi is a burst fire capable railgun that fires flechette rounds at high velocity. Deadly against armour, but much less effective against soft targets."
+	icon_state = "flechette_gun"
+	item_state = "z8carbine"
+	initial_cell_type = /obj/item/weapon/cell/hyper
+	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
+	slot_flags = SLOT_BACK
+	slowdown_held = 0
+	slowdown_worn = 0
+	use_standard_ammo = 0
+	power_cost = 100
+	load_type = /obj/item/weapon/magnetic_ammo
+	projectile_type = /obj/item/projectile/bullet/magnetic/flechette
+
+	firemodes = list(
+		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, requires_two_hands=1, burst_accuracy=null, dispersion=null),
+		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    requires_two_hands=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+		)
+
+/obj/item/weapon/gun/magnetic/railgun/flechette/initialize()
+	loaded = new /obj/item/weapon/magnetic_ammo(src)
+	..()
