@@ -305,12 +305,11 @@
 // So we slow this down a little.
 // See: http://www.byond.com/docs/ref/info.html#/client/proc/Stat
 /client/Stat()
+	// Add always-visible stat panel calls here, to define a consistent display order.
+	statpanel("Status")
+
 	. = ..()
-	if (holder)
-		sleep(1)
-	else
-		sleep(5)
-		stoplag()
+	sleep(1)
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
