@@ -1301,7 +1301,7 @@
 "za" = (/obj/machinery/sleeper{dir = 4},/obj/machinery/vending/wallmed1{name = "Emergency NanoMed"; pixel_x = -32; req_access = newlist()},/turf/simulated/floor/tiled/white,/area/shuttle/escape_pod9/station)
 "zb" = (/turf/simulated/floor/tiled/white,/area/shuttle/escape_pod9/station)
 "zc" = (/obj/structure/closet/crate/freezer/rations,/turf/simulated/floor/tiled/white,/area/shuttle/escape_pod9/station)
-"zd" = (/obj/machinery/conveyor{dir = 1; id = "packageSort1"},/obj/structure/window/reinforced{dir = 4},/obj/structure/plasticflaps,/turf/simulated/floor/plating,/area/quartermaster/office)
+"zd" = (/obj/machinery/conveyor{dir = 1; id = "packageSort1"},/obj/structure/window/reinforced{dir = 4},/obj/structure/plasticflaps/mining,/turf/simulated/floor/plating,/area/quartermaster/office)
 "ze" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/quartermaster/office)
 "zf" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/disposaloutlet{dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/disposalpipe/trunk{dir = 4},/turf/simulated/floor/tiled,/area/quartermaster/office)
 "zg" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/folder/yellow,/obj/item/weapon/stamp/denied{pixel_x = 4; pixel_y = -2},/obj/structure/window/reinforced{dir = 8},/obj/structure/disposalpipe/segment{dir = 4},/obj/item/weapon/stamp/supply,/turf/simulated/floor/tiled,/area/quartermaster/office)
@@ -1798,4 +1798,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
