@@ -79,8 +79,8 @@ var/list/possible_cable_coil_colours
 /obj/structure/cable/white
 	color = COLOR_WHITE
 
-/obj/structure/cable/New()
-	..()
+/obj/structure/cable/initialize()
+	. = ..()
 
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
@@ -437,13 +437,19 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if(!P.connect_to_network()) //can't find a node cable on a the turf to connect to
 				P.disconnect_from_network() //remove from current network (and delete powernet)
 		return
-
+	var/obj/O = P_list[1]
 	// remove the cut cable from its turf and powernet, so that it doesn't get count in propagate_network worklist
 	loc = null
 	powernet.remove_cable(src) //remove the cut cable from its powernet
 
-	var/datum/powernet/newPN = new()// creates a new powernet...
-	propagate_network(P_list[1], newPN)//... and propagates it to the other side of the cable
+	spawn(0) //so we don't rebuild the network X times when singulo/explosion destroys a line of X cables
+		if(O && !QDELETED(O))
+			var/datum/powernet/newPN = new()// creates a new powernet...
+			propagate_network(O, newPN)//... and propagates it to the other side of the cable
+
+
+//	var/datum/powernet/newPN = new()// creates a new powernet...
+//	propagate_network(O, newPN)//... and propagates it to the other side of the cable
 
 	// Disconnect machines connected to nodes
 	if(d1 == 0) // if we cut a node (O-X) cable

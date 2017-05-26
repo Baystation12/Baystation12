@@ -1,6 +1,7 @@
 //TODO: Flash range does nothing currently
-
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
+//We used to use linear regression to approximate the answer, but Mloc realized this was actually faster.
+//And lo and behold, it is, and it's more accurate to boot.
+proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, flame_range = 2, adminlog = 1, z_transfer = UP|DOWN, shaped)
 	var/multi_z_scalar = 0.35
 	src = null	//so we don't abort once src is deleted
 	spawn(0)
@@ -14,15 +15,17 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			var/adj_heavy = max(0, (multi_z_scalar * heavy_impact_range) - (shaped ? 2 : 0) )
 			var/adj_light = max(0, (multi_z_scalar * light_impact_range) - (shaped ? 2 : 0) )
 			var/adj_flash = max(0, (multi_z_scalar * flash_range) - (shaped ? 2 : 0) )
-
+			var/adj_flame = max(0, (multi_z_scalar * flame_range) - (shaped ? 2 : 0) )
 
 			if(adj_dev > 0 || adj_heavy > 0)
 				if(HasAbove(epicenter.z) && z_transfer & UP)
-					explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), 0, UP, shaped)
+					explosion(GetAbove(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), round(adj_flame), 0, UP, shaped)
 				if(HasBelow(epicenter.z) && z_transfer & DOWN)
-					explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), 0, DOWN, shaped)
+					explosion(GetBelow(epicenter), round(adj_dev), round(adj_heavy), round(adj_light), round(adj_flash), round(adj_flame), 0, DOWN, shaped)
 
-		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
+		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range, flame_range)
+
+		sleep(1)
 
 		// Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
 		// Stereo users will also hear the direction of the explosion!
@@ -43,6 +46,10 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 					var/far_volume = Clamp(far_dist, 30, 50) // Volume is based on explosion size and dist
 					far_volume += (dist <= far_dist * 0.5 ? 50 : 0) // add 50 volume if the mob is pretty close to the explosion
 					M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', far_volume, 1, frequency, falloff = 5)
+
+//		var/postponeCycles = max(round(max_range/2),8)
+//		lightingProcess.postpone(postponeCycles)
+//		machineryProcess.postpone(postponeCycles)
 
 		if(adminlog)
 			message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
@@ -65,7 +72,16 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
 			explosion_rec(epicenter, power, shaped)
 		else
-			for(var/turf/T in trange(max_range, epicenter))
+			//flash mobs
+			if(flash_range)
+				for(var/mob/living/L in viewers(flash_range, epicenter))
+					L.flash_eyes()
+			var/list/affected_turfs = spiral_range_turfs(max_range, epicenter)
+			for(var/TU in affected_turfs)
+				var/turf/T = TU
+				if (!T)
+					continue
+
 				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
 				if(dist < devastation_range)		dist = 1
@@ -73,13 +89,21 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				else if(dist < light_impact_range)	dist = 3
 				else								continue
 
+				if(flame_range && prob(40) && !isspace(T) && !T.density)
+					var/obj/fire/F = new(T)
+					sleep(0)
+					qdel(F)
+				if(dist > 0)
+					T.ex_act(dist)
+
 				if(!T)
 					T = locate(x0,y0,z0)
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated)	AM.ex_act(dist)
+					sleep(0)
+				CHECK_TICK
 
-				T.ex_act(dist)
 
 		var/took = (world.timeofday-start)/10
 		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
@@ -92,5 +116,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 
 proc/secondaryexplosion(turf/epicenter, range)
-	for(var/turf/tile in range(range, epicenter))
+	for(var/turf/tile in spiral_range_turfs(range, epicenter))
 		tile.ex_act(2)
+		sleep(0)
