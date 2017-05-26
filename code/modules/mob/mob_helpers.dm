@@ -599,3 +599,10 @@ proc/is_blind(A)
 
 /mob/proc/ssd_check()
 	return !client && !teleop
+
+/proc/isAdminGhost(A)
+	if(isobserver(A))
+		var/mob/observer/O = A
+		if(check_rights(R_ADMIN|R_FUN, 0, O))
+			return 1
+	return 0
