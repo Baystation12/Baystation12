@@ -18,12 +18,12 @@
 	clientdb["donator"] >> donator
 	clientdb["alien_whitelist"] >> alien_whitelist
 	clientdb["command_whitelist"] >> command_whitelist
+	clientdb["datejoined"] >> datejoined
 	if(!datejoined) // No join time set, so we assume he's new.
 		datejoined = world.realtime
 		clientdb["datejoined"] << datejoined
-	clientdb["datejoined"] >> datejoined
 	return 1
 
 /client/verb/get_days()
 	set name = "Check Days"
-	world << "[src] days old is [(world.realtime - datejoined) / 864000]"
+	usr << "Your account is [round((world.realtime - datejoined) / 864000)] days old."
