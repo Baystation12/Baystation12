@@ -9,16 +9,16 @@
 		to_chat(usr, "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]")
 		to_chat(usr, "Affected species: [english_list(affected_species)]")
 		to_chat(usr, "Effects:")
-		for(var/datum/disease2/effectholder/E in effects)
-			to_chat(usr, "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]")
+		for(var/datum/disease2/effect/E in effects)
+			to_chat(usr, "[E.stage]: [E.name]; chance=[E.chance]; multiplier=[E.multiplier]")
 		to_chat(usr, "Antigens: [antigens2string(antigen)]")
 
 		return 1
 
 /datum/disease2/disease/get_view_variables_header()
 	. = list()
-	for(var/datum/disease2/effectholder/E in effects)
-		. += "[E.stage]: [E.effect.name]"
+	for(var/datum/disease2/effect/E in effects)
+		. += "[E.stage]: [E.name]"
 	return {"
 		<b>[name()]</b><br><font size=1>
 		[jointext(., "<br>")]</font>
@@ -124,17 +124,17 @@
 					if(!E) return
 					s[stage] = E
 					// set a default chance and multiplier of half the maximum (roughly average)
-					s_chance[stage] = max(1, round(initial(E.chance_maxm)/2))
-					s_multiplier[stage] = max(1, round(initial(E.maxm)/2))
+					s_chance[stage] = max(1, round(initial(E.chance_max)/2))
+					s_multiplier[stage] = max(1, round(initial(E.multiplier_max)/2))
 				else if(href_list["chance"])
 					var/datum/disease2/effect/Eff = s[stage]
-					var/I = input("Chance, per tick, of this effect happening (min 0, max [initial(Eff.chance_maxm)])", "Effect Chance", s_chance[stage]) as null|num
-					if(I == null || I < 0 || I > initial(Eff.chance_maxm)) return
+					var/I = input("Chance, per tick, of this effect happening (min 0, max [initial(Eff.chance_max)])", "Effect Chance", s_chance[stage]) as null|num
+					if(I == null || I < 0 || I > initial(Eff.chance_max)) return
 					s_chance[stage] = I
 				else if(href_list["multiplier"])
 					var/datum/disease2/effect/Eff = s[stage]
-					var/I = input("Multiplier for this effect (min 1, max [initial(Eff.maxm)])", "Effect Multiplier", s_multiplier[stage]) as null|num
-					if(I == null || I < 1 || I > initial(Eff.maxm)) return
+					var/I = input("Multiplier for this effect (min 1, max [initial(Eff.multiplier_max)])", "Effect Multiplier", s_multiplier[stage]) as null|num
+					if(I == null || I < 1 || I > initial(Eff.multiplier_max)) return
 					s_multiplier[stage] = I
 			if("species")
 				if(href_list["toggle"])
@@ -196,10 +196,10 @@
 				D.affected_species = species
 				D.speed = speed
 				for(var/i in 1 to 4)
-					var/datum/disease2/effectholder/E = new
+					var/datum/disease2/effect/E = new
 					var/Etype = s[i]
-					E.effect = new Etype()
-					E.effect.generate()
+					E = new Etype()
+					E.generate()
 					E.chance = s_chance[i]
 					E.multiplier = s_multiplier[i]
 					E.stage = i

@@ -1311,6 +1311,7 @@
 #include "code\modules\events\sensor_suit_jamming.dm"
 #include "code\modules\events\shipping_error.dm"
 #include "code\modules\events\solar_storm.dm"
+#include "code\modules\events\space_cold.dm"
 #include "code\modules\events\spacevine.dm"
 #include "code\modules\events\spider_infestation.dm"
 #include "code\modules\events\spontaneous_appendicitis.dm"

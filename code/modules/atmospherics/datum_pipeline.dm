@@ -19,7 +19,6 @@ datum/pipeline
 		if(air && air.volume)
 			temporarily_store_air()
 			qdel(air)
-		air = null
 
 		. = ..()
 

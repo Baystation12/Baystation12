@@ -2202,3 +2202,10 @@
 	var/turf/T = get_turf(holder.my_atom)
 	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
 	return
+
+/datum/chemical_reaction/antidexafen
+	name = "Antidexafen"
+	id = "antidexafen"
+	result = "antidexafen"
+	required_reagents = list("paracetamol" = 1, "sugar" = 1)
+	result_amount = 2

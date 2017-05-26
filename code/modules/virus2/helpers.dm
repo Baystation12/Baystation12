@@ -1,5 +1,5 @@
 //Returns 1 if mob can be infected, 0 otherwise.
-proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
+proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if (!istype(M))
 		return 0
 
@@ -27,19 +27,21 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 				if (istype(H.gloves, /obj/item/clothing/gloves))
 					score += 2
 
-	if(score >= 6)
-		return 0
-	else if(score >= 5 && prob(99))
-		return 0
-	else if(score >= 4 && prob(95))
-		return 0
-	else if(score >= 3 && prob(75))
-		return 0
-	else if(score >= 2 && prob(55))
-		return 0
-	else if(score >= 1 && prob(35))
-		return 0
-	return 1
+	switch(score)
+		if (6 to INFINITY)
+			return 0
+		if (5)
+			return 1
+		if (4)
+			return 5
+		if (3)
+			return 25
+		if (2)
+			return 45
+		if (1)
+			return 65
+		else
+			return 100
 
 //Similar to infection check, but used for when M is spreading the virus.
 /proc/infection_spreading_check(var/mob/living/carbon/M, var/vector = "Airborne")
@@ -48,24 +50,22 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 
 	var/protection = M.getarmor(null, "bio")	//gets the full body bio armour value, weighted by body part coverage.
 
-	if (vector == "Airborne")
-		var/obj/item/I = M.wear_mask
-		if (istype(I))
-			protection = max(protection, I.armor["bio"])
+	if (vector == "Airborne")	//for airborne infections face-covering items give non-weighted protection value.
+		if(M.internal)
+			return 1
+		protection = max(protection, M.getarmor(FACE, "bio"))
 
 	return prob(protection)
 
-//Checks if table-passing table can reach target (5 tile radius)
-proc/airborne_can_reach(turf/source, turf/target)
-	var/obj/dummy = new(source)
-	dummy.pass_flags = PASSTABLE
-
-	for(var/i=0, i<5, i++) if(!step_towards(dummy, target)) break
-
-	var/rval = dummy.Adjacent(target)
-	dummy.loc = null
-	dummy = null
-	return rval
+/proc/airborne_can_reach(turf/simulated/source, turf/simulated/target)
+	//Can't ariborne without air
+	if(is_below_sound_pressure(source) || is_below_sound_pressure(target))
+		return FALSE
+	//no infecting from other side of the hallway
+	if(get_dist(source,target) > 5)
+		return FALSE
+	if(istype(source) && istype(target))
+		return source.zone == target.zone
 
 //Attemptes to infect mob M with virus. Set forced to 1 to ignore protective clothnig
 /proc/infect_virus2(var/mob/living/carbon/M,var/datum/disease2/disease/disease,var/forced = 0)
@@ -81,7 +81,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 	var/list/antibodies_in_common = M.antibodies & disease.antigen
 	if(antibodies_in_common.len)
 		return
-	if(M.reagents.has_reagent("spaceacillin"))
+	if(prob(100 * M.reagents.get_reagent_amount("spaceacillin") / (REAGENTS_OVERDOSE/2)))
 		return
 
 	if(!disease.affected_species.len)
@@ -94,33 +94,27 @@ proc/airborne_can_reach(turf/source, turf/target)
 			return //not compatible with this species
 
 //	log_debug("Infecting [M]")
-
-	if(forced || (infection_check(M, disease.spreadtype) && prob(disease.infectionchance)))
+	var/mob_infection_prob = infection_chance(M, disease.spreadtype) * M.immunity_weakness()
+	if(forced || (prob(disease.infectionchance) && prob(mob_infection_prob)))
 		var/datum/disease2/disease/D = disease.getcopy()
 		D.minormutate()
 //		log_debug("Adding virus")
 		M.virus2["[D.uniqueID]"] = D
 		BITSET(M.hud_updateflag, STATUS_HUD)
 
-
-//Infects mob M with disease D
-/proc/infect_mob(var/mob/living/carbon/M, var/datum/disease2/disease/D)
-	infect_virus2(M,D,1)
-	to_chat(M.hud_updateflag |= 1, STATUS_HUD)
-
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 
-	D.makerandom(1)
-	infect_mob(M, D)
+	D.makerandom(VIRUS_MILD)
+	infect_virus2(M, D, 1)
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 
-	D.makerandom(2)
-	infect_mob(M, D)
+	D.makerandom(VIRUS_COMMON)
+	infect_virus2(M, D, 1)
 
 //Fancy prob() function.
 /proc/dprob(var/p)
@@ -160,7 +154,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 		if (ishuman(victim))
 			var/mob/living/carbon/human/H = victim
 
-			//Allow for small chance of touching other zones. 
+			//Allow for small chance of touching other zones.
 			//This is proc is also used for passive spreading so just because they are targeting
 			//that zone doesn't mean that's necessarily where they will touch.
 			var/touch_zone = ran_zone(src.zone_sel.selecting, 80)
