@@ -224,7 +224,7 @@
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)
 	// Workaround for http://www.byond.com/forum/?post=2007448
-	for(var/obj/machinery/computer/cryopod/C in src.loc.loc)
+	for(var/obj/machinery/computer/cryopod/C in MyArea)
 		control_computer = C
 		break
 	// control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc

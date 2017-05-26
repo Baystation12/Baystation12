@@ -107,7 +107,7 @@ var/hadevent    = 0
 	if(areas && areas.len > 0)
 
 		for(var/area/A in areas)
-			for(var/obj/machinery/light/L in A)
+			for(var/obj/machinery/light/L in A.machinecache)
 				L.flicker(10)
 
 		sleep(100)

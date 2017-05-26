@@ -94,8 +94,7 @@
 	if(MS.moving_status != SHUTTLE_IDLE)
 		dat += "Location: <font color='red'>Moving</font> <br>"
 	else
-		var/area/areacheck = get_area(src)
-		dat += "Location: [areacheck.name]<br>"
+		dat += "Location: [MyArea.name]<br>"
 
 	if((MS.last_move + MS.cooldown*10) > world.time)
 		dat += "<font color='red'>Engines charging.</font><br>"

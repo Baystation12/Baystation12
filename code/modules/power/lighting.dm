@@ -209,11 +209,10 @@ var/global/list/light_type_cache = list()
 	update(0)
 
 /obj/machinery/light/Destroy()
-	var/area/A = get_area(src)
 	if(s)
 		qdel(s)
 		s = null
-	if(A)
+	if(MyArea)
 		on = 0
 //		A.update_lights()
 	..()
@@ -418,8 +417,7 @@ var/global/list/light_type_cache = list()
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/powered()
-	var/area/A = get_area(src)
-	return A && A.lightswitch && ..(power_channel)
+	return MyArea.lightswitch && ..(power_channel)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return

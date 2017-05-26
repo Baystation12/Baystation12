@@ -820,7 +820,7 @@
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
 		temp_closet.locked = 0
 		temp_closet.icon_state = temp_closet.icon_closed
-	for(var/obj/machinery/door_timer/temp_timer in src)
+	for(var/obj/machinery/door_timer/temp_timer in src.machinecache)
 		temp_timer.releasetime = 1
 	..()
 
@@ -836,7 +836,7 @@
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
 		temp_closet.locked = 0
 		temp_closet.icon_state = temp_closet.icon_closed
-	for(var/obj/machinery/door_timer/temp_timer in src)
+	for(var/obj/machinery/door_timer/temp_timer in src.machinecache)
 		temp_timer.releasetime = 1
 	..()
 
