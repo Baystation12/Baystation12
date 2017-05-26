@@ -606,8 +606,8 @@ proc/is_blind(A)
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if(L && istype(L))
 			if(prob(1))
-				L.take_damage(100, 0)
-				to_chat(src, "<span class='danger'>Your heart explodes.</span>")
+				L.take_damage(L.max_damage / 2, 0)
+				to_chat(src, "<span class='danger'>Something explodes in your heart.</span>")
 			else
 				L.take_damage(1, 0)
 				to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
