@@ -535,12 +535,20 @@
 	worn_state = "mechanic"
 
 /obj/item/clothing/under/cheongsam
-	name = "white cheongsam"
-	desc = "It is a white cheongsam dress."
+	name = "cheongsam"
+	desc = "It is a cheongsam dress."
 	icon_state = "mai_yang"
 	item_state = "mai_yang"
 	worn_state = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/abaya
+	name = "abaya"
+	desc = "A loose-fitting, robe-like dress."
+	icon_state = "abaya"
+	item_state = "abaya"
+	worn_state = "abaya"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"

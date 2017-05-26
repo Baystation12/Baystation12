@@ -1,6 +1,6 @@
 /var/datum/announcement/priority/priority_announcement = new(do_log = 0)
 /var/datum/announcement/priority/command/command_announcement = new(do_log = 0, do_newscast = 1)
-/var/datum/announcement/minor/minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
+/var/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/AI/commandreport.ogg',)
 
 /datum/announcement
 	var/title = "Attention"

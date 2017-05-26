@@ -12,6 +12,7 @@
 	charge_cost = 30
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
+	wielded_item_state = "ionrifle-wielded"
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess

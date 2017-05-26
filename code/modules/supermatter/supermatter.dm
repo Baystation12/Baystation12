@@ -95,9 +95,60 @@
 
 	var/debug = 0
 
+	var/disable_adminwarn = FALSE
+
+	var/aw_normal = FALSE
+	var/aw_notify = FALSE
+	var/aw_warning = FALSE
+	var/aw_danger = FALSE
+	var/aw_emerg = FALSE
+	var/aw_delam = FALSE
+	var/aw_EPR = FALSE
+
 /obj/machinery/power/supermatter/New()
 	..()
 	uid = gl_uid++
+
+/obj/machinery/power/supermatter/proc/handle_admin_warnings()
+	if(disable_adminwarn)
+		return
+
+	// Generic checks, similar to checks done by supermatter monitor program.
+	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised.", FALSE)
+	aw_notify = status_adminwarn_check(SUPERMATTER_NOTIFY, aw_notify, "INFO: Supermatter crystal is approaching unsafe operating temperature.", FALSE)
+	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage!", FALSE)
+	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%!", TRUE)
+	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%!", FALSE)
+	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "CRIT: Supermatter is delaminating!", TRUE)
+
+	// EPR check. Only runs when supermatter is energised. Triggers when there is very low amount of coolant in the core (less than one standard canister).
+	// This usually means a core breach or deliberate venting.
+	if(get_status() && (get_epr() < 0.5))
+		if(!aw_EPR)
+			log_and_message_admins("WARN: Supermatter EPR value low. Possible core breach detected.")
+		aw_EPR = TRUE
+	else
+		aw_EPR = FALSE
+
+/obj/machinery/power/supermatter/proc/status_adminwarn_check(var/min_status, var/current_state, var/message, var/send_to_irc = FALSE)
+	var/status = get_status()
+	if(status >= min_status)
+		if(!current_state)
+			log_and_message_admins(message)
+			if(send_to_irc)
+				adminmsg2adminirc(src, null, message)
+		return TRUE
+	else
+		return FALSE
+
+/obj/machinery/power/supermatter/proc/get_epr()
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+	var/datum/gas_mixture/air = T.return_air()
+	if(!air)
+		return 0
+	return round((air.total_moles / air.group_multiplier) / 23.1, 0.01)
 
 /obj/machinery/power/supermatter/proc/get_status()
 	var/turf/T = get_turf(src)
@@ -330,16 +381,10 @@
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
-/*
-	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
-	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.
-	for(var/mob/living/l in range(src, round(sqrt(power / 2))))
-		var/radius = max(get_dist(l, src), 1)
-		var/rads = (power / 10) * ( 1 / (radius**2) )
-		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
-*/
+
 	rad_power = power * 1.5 //Better close those shutters!
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
+	handle_admin_warnings()
 
 	return 1
 

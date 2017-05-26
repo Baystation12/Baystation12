@@ -6,9 +6,9 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 	wait = 5
 	flags = SS_FIRE_IN_LOBBY|SS_POST_FIRE_TIMING|SS_BACKGROUND|SS_NO_INIT
 
-	var/collection_timeout = 3000// deciseconds to wait to let running procs finish before we just say fuck it and force del() the object
-	var/delslasttick = 0		// number of del()'s we've done this tick
-	var/gcedlasttick = 0		// number of things that gc'ed last tick
+	var/collection_timeout = 3000 // deciseconds to wait to let running procs finish before we just say fuck it and force del() the object
+	var/delslasttick = 0          // number of del()'s we've done this tick
+	var/gcedlasttick = 0          // number of things that gc'ed last tick
 	var/totaldels = 0
 	var/totalgcs = 0
 
@@ -38,18 +38,17 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 	NEW_SS_GLOBAL(SSgarbage)
 
 /datum/controller/subsystem/garbage_collector/stat_entry(msg)
-	msg += "Q:[queue.len]|D:[delslasttick]|G:[gcedlasttick]|"
-	msg += "GR:"
-	if (!(delslasttick+gcedlasttick))
-		msg += "n/a|"
-	else
-		msg += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%|"
-
-	msg += "TD:[totaldels]|TG:[totalgcs]|"
+	msg += "Q:[queue.len]|TD:[totaldels]|TG:[totalgcs]|TGR:"
 	if (!(totaldels+totalgcs))
-		msg += "n/a|"
+		msg += "n/a"
 	else
-		msg += "TGR:[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
+		msg += "[round((totalgcs/(totaldels+totalgcs))*100, 0.01)]%"
+
+	msg += "|D:[delslasttick]|G:[gcedlasttick]|GR:"
+	if (!(delslasttick+gcedlasttick))
+		msg += "n/a"
+	else
+		msg += "[round((gcedlasttick/(delslasttick+gcedlasttick))*100, 0.01)]%"
 	..(msg)
 
 /datum/controller/subsystem/garbage_collector/fire()
@@ -349,8 +348,3 @@ var/datum/controller/subsystem/garbage_collector/SSgarbage
 		SearchVar(readglobal(global_var))
 #undef SearchVar
 #endif
-
-
-/image/Destroy()
-	..()
-	return QDEL_HINT_HARDDEL_NOW

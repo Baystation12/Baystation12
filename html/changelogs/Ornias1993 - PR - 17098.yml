@@ -33,4 +33,13 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - bugfix: "EAL, Sign language, and emotes will no longer use autohiss"
+  - bugfix: "Oxygen_pump and Anestethic_pump, now correctly checks if the mask slot is blocked"
+  - rscdel: "removed on click application to user of Oxygen_pump and Anestethic_pump"
+  - tweak: "Oxygen_pump now gives out Breathmasks instead of gasmasks"
+  - tweak: "anestethics_pump now gives out Medicalmasks instead of gasmasks"
+  - bugfix: "Maintenance hatch and replacing tanks works now on Oxygen_pump and Anestethics_pump"
+  - tweak: "removed organic requirement for removing the oxygentank of Oxygen_pump and Anestethic_pump"
+  - bugfix: "UI of oxygen_pump and Anestethics_pump works now"
+  - rscadd: "AI can now click to open UI of oxygen_pump and Anestethics_pump"
+  - rscadd: "Added the Anestethics Mask for the Anestethics_pump"
+  - rscadd: "Added the Emergency Mask for the Oxygen_pump"

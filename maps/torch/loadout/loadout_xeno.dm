@@ -168,7 +168,7 @@
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
-	allowed_roles = list("Medical Assistant","Chemist","Virologist")
+	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/eyes/tajblind/meson
 	display_name = "industrial veil (Tajara)"
