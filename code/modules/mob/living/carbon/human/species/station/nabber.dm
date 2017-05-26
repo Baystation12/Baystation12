@@ -33,6 +33,8 @@
 	icobase = 'icons/mob/human_races/r_nabber.dmi'
 	deform = 'icons/mob/human_races/r_nabber.dmi'
 
+	has_floating_eyes = 1
+
 	darksight = 8
 	slowdown = -0.5
 	rarity_value = 4
@@ -47,10 +49,12 @@
 	spawns_with_stack = 0
 
 	flags = NO_SLIP | CAN_NAB | NO_BLOCK
-	appearance_flags = 0
+	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
 	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	breathing_organ = BP_TRACH
+
+	var/list/eye_overlays = list()
 
 	has_organ = list(    // which required-organ checks are conducted.
 		BP_BRAIN =    /obj/item/organ/internal/brain/nabber,
@@ -84,6 +88,23 @@
 		/mob/living/carbon/human/proc/switch_stance
 		)
 
+/datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
+	var/obj/item/organ/internal/eyes/nabber/O = H.internal_organs_by_name[BP_EYES]
+	if(!O || !istype(O))
+		return
+
+	var/image/eye_overlay = eye_overlays["[O.eyes_shielded] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"]
+	if(!eye_overlay)
+		if(O.eyes_shielded)
+			eye_overlay = image('icons/mob/nabber_face.dmi', "eyes_nabber_shielded")
+		else
+			var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
+			I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
+			eye_overlay = image(I)
+		eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		eye_overlay.layer = EYE_GLOW_LAYER
+		eye_overlays["[O.eyes_shielded] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"] = eye_overlay
+	return(eye_overlay)
 
 /datum/species/nabber/get_blood_name()
 	return "haemolymph"

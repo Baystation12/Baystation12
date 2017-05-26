@@ -649,6 +649,7 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
