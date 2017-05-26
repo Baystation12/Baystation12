@@ -92,12 +92,9 @@
 
 // increment the power usage stats for an area
 /obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
-	var/area/A = get_area(src)		// make sure it's in an area
-	if(!A || !isarea(A))
-		return
 	if(chan == -1)
 		chan = power_channel
-	A.use_power(amount, chan)
+	MyArea.use_power(amount, chan)
 
 // called whenever the power settings of the containing area change
 // by default, check equipment channel & set flag can override if needed
@@ -254,6 +251,8 @@
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/O, var/datum/powernet/PN)
+//	while(defer_powernet_rebuild)
+//		sleep(20)
 	//world.log << "propagating new network"
 	var/list/worklist = list()
 	var/list/found_machines = list()

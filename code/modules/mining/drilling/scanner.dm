@@ -20,7 +20,7 @@
 		"exotic matter" = 0
 		)
 
-	for(var/turf/simulated/T in range(2, get_turf(user)))
+	for(var/turf/simulated/T in trange(2, get_turf(user)))
 
 		if(!T.has_resources)
 			continue

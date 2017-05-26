@@ -79,7 +79,7 @@ var/list/flooring_cache = list()
 			overlays |= get_flooring_overlay("[flooring.icon_base]-burned-[burnt]","[flooring.icon_base]_burned[burnt]")
 
 	if(update_neighbors)
-		for(var/turf/simulated/floor/F in range(src, 1))
+		for(var/turf/simulated/floor/F in trange(1, src))
 			if(F == src)
 				continue
 			F.update_icon()

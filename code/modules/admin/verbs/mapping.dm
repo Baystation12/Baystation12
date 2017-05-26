@@ -236,7 +236,7 @@ var/list/debug_verbs = list (
 				continue
 			recurse_zone(connected,1)
 
-	for(var/turf/T in range(25,location))
+	for(var/turf/T in trange(25,location))
 		if(!istype(T))
 			continue
 		if(T in testZAScolors_turfs)

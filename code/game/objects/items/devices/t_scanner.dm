@@ -106,7 +106,7 @@
 	var/turf/center = get_turf(src.loc)
 	if(!center) return
 
-	for(var/turf/T in range(scan_range, center))
+	for(var/turf/T in trange(scan_range, center))
 		if(!!T.is_plating())
 			continue
 

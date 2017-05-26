@@ -359,10 +359,10 @@
 		PhoronBurn(exposed_temperature)
 
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
-	for(var/turf/simulated/floor/target_tile in range(2,loc))
+	for(var/turf/simulated/floor/target_tile in trange(2,loc))
 		target_tile.assume_gas("phoron", 35, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(temperature, 400)
-	for(var/turf/simulated/wall/W in range(3,src))
+	for(var/turf/simulated/wall/W in trange(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 		D.ignite(temperature/4)
