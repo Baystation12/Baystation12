@@ -1,6 +1,6 @@
-/obj/item/clothing/under/New()
+/obj/item/clothing/under/initialize()
 	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/clothing)
-	..()
+	. = ..()
 
 /datum/extension/interactive/multitool/items/clothing/interact(var/obj/item/device/multitool/M, var/mob/user)
 	if(extension_status(user) != STATUS_INTERACTIVE)

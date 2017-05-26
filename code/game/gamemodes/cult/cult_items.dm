@@ -102,6 +102,6 @@
 	siemens_coefficient = 0
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 
-/obj/item/clothing/suit/space/cult/New()
-	..()
+/obj/item/clothing/suit/space/cult/initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
