@@ -8,6 +8,7 @@ datum/preferences
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
 	var/savefile_version = 0
 
+
 	//non-preference stuff
 	var/warns = 0
 	var/muted = 0
@@ -26,10 +27,11 @@ datum/preferences
 
 	//character preferences
 	var/real_name						//our character's name
+	var/char_lock = 0
 	var/be_random_name = 0				//whether we are a random name every round
 	var/age = 30						//age of character
 	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
-	var/b_type = "A+"					//blood type (not-chooseable)
+	var/b_type = "A+"	//blood type (not-chooseable)
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -58,8 +60,8 @@ datum/preferences
 	var/faction = "None"                //Antag faction/general associated faction.
 	var/religion = "None"               //Religious association.
 
-	var/char_branch	= "None"            // military branch
-	var/char_rank = "None"              // military rank
+	var/char_branch	= "Civilian"		// military branch
+	var/list/char_rank = list()				// military rank
 		//Mob preview
 	var/icon/preview_icon = null
 
@@ -115,6 +117,9 @@ datum/preferences
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
+	for(var/datum/job/job in job_master.occupations)
+		if((job.department != "Service") && (job.department != "Civilian") && (job.department != "Support")) 	continue
+		char_rank += job
 
 	gear = list()
 
@@ -195,11 +200,21 @@ datum/preferences
 	var/dat = "<html><body><center>"
 
 	if(path)
-		dat += "Slot - "
-		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
+		if(char_lock)
+			dat += "Slot - "
+			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+			dat += "Save slot - "
+			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+			dat += "Reload slot - "
+			dat += "Lock slot"
+		else
+			dat += "Slot - "
+			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
+			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
+
 
 	else
 		dat += "Please create an account to save your preferences."
@@ -250,8 +265,17 @@ datum/preferences
 	else if(href_list["resetslot"])
 		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
 			return 0
+		char_lock = 0
 		load_character(SAVE_RESET)
+		save_character()
 		sanitize_preferences()
+	else if(href_list["lock"])
+		if("No" == alert("This will lock the current slot. You will no longer be able to edit it. Continue?", "Lock current slot?", "No", "Yes"))
+			return 0
+		char_lock = 1
+		b_type = RANDOM_BLOOD_TYPE
+		save_character()
+		load_character()
 	else
 		return 0
 
@@ -274,6 +298,7 @@ datum/preferences
 			real_name += "[pick(last_names)]"
 
 	character.fully_replace_character_name(real_name)
+
 
 	character.gender = gender
 	character.age = age

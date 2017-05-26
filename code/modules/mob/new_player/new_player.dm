@@ -32,14 +32,21 @@
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-		if(ready)
-			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+		if(client.prefs.char_lock)
+			if(ready)
+				output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+			else
+				output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
 		else
-			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
+			output +="<p> <span class='link'>Lock Char to Ready</span> </p>"
+
 
 	else
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
-		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
+		output += "<p><a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A></p>"
+		if(client.prefs.char_lock)
+			output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
+		else
+			output += "<p> <span class='link'>Lock Char to Join</span> </p>"
 
 	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
 
@@ -60,6 +67,8 @@
 				output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
 			else
 				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
+
+	output += "<p><a href='byond://?src=\ref[src];refresh=1'>Refresh</a></p>"
 
 	output += "</div>"
 
@@ -101,10 +110,14 @@
 		return 1
 
 	if(href_list["ready"])
-		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
-			ready = text2num(href_list["ready"])
+		if(client.prefs.char_lock)
+			if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
+				ready = text2num(href_list["ready"])
+			else
+				ready = 0
 		else
-			ready = 0
+			panel.close()
+			new_player_panel_proc()
 
 	if(href_list["refresh"])
 		panel.close()
@@ -152,11 +165,15 @@
 			return 1
 
 	if(href_list["late_join"])
+		if(client.prefs.char_lock)
+			if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
+				to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+				return
+			LateChoices() //show the latejoin job selection menu
+		else
+			panel.close()
+			new_player_panel_proc()
 
-		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
-			return
-		LateChoices() //show the latejoin job selection menu
 
 	if(href_list["manifest"])
 		ViewManifest()
