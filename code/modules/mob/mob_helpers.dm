@@ -601,13 +601,18 @@ proc/is_blind(A)
 	return !client && !teleop
 
 /mob/proc/jittery_damage()
-	if(src.jitteriness >= 400 && ishuman(src) && prob(5)) //Kills people if they have high jitters.
-		var/mob/living/carbon/human/H = src
-		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
-		if(L && istype(L))
-			if(prob(1))
-				L.take_damage(L.max_damage / 2, 0)
-				to_chat(src, "<span class='danger'>Something explodes in your heart.</span>")
-			else
-				L.take_damage(1, 0)
-				to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
+	if(!ishuman(src))
+		return
+	var/mob/living/carbon/human/H = src
+	var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
+	if(L && istype(L))
+		if(L.robotic >= ORGAN_ROBOT)
+			return 0//Robotic hearts don't get jittery.
+	if(src.jitteriness >= 400 && prob(5)) //Kills people if they have high jitters.
+		if(prob(1))
+			L.take_damage(L.max_damage / 2, 0)
+			to_chat(src, "<span class='danger'>Something explodes in your heart.</span>")
+		else
+			L.take_damage(1, 0)
+			to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
+	return 1
