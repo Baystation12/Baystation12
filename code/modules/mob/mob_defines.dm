@@ -162,3 +162,4 @@
 
 	var/memory = ""
 	var/flavor_text = ""
+	glide_size = 4
