@@ -54,7 +54,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(jitteriness > 100 && !is_jittery)
 		spawn(0)
 			jittery_process()
-
+	jittery_damage()
 
 // Typo from the oriignal coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
 /mob/proc/jittery_process()

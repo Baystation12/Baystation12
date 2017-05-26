@@ -599,3 +599,15 @@ proc/is_blind(A)
 
 /mob/proc/ssd_check()
 	return !client && !teleop
+
+/mob/proc/jittery_damage()
+	if(src.jitteriness >= 400 && ishuman(src) && prob(5)) //Kills people if they have high jitters.
+		var/mob/living/carbon/human/H = src
+		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
+		if(L && istype(L))
+			if(prob(1))
+				L.take_damage(100, 0)
+				to_chat(src, "<span class='danger'>Your heart explodes.</span>")
+			else
+				L.take_damage(1, 0)
+				to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
