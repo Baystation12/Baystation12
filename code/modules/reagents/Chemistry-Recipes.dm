@@ -1500,6 +1500,13 @@
 	required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
 	result_amount = 4
 
+/datum/chemical_reaction/barbecue
+	name = "Barbecue Sauce"
+	id = "barbecue"
+	result = "barbecue"
+	required_reagents = list("ketchup" = 2, "pepper" = 1, "salt" = 1)
+	result_amount = 4
+
 /datum/chemical_reaction/cheesewheel
 	name = "Cheesewheel"
 	id = "cheesewheel"

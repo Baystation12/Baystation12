@@ -160,6 +160,15 @@
 	nutriment_factor = 5
 	color = "#731008"
 
+/datum/reagent/nutriment/barbecue
+	name = "Barbecue Sauce"
+	id = "barbecue"
+	description = "Barbecue sauce for barbecues and long shifts."
+	taste_description = "barbecue"
+	reagent_state = LIQUID
+	nutriment_factor = 5
+	color = "#4F330F"
+
 /datum/reagent/nutriment/rice
 	name = "Rice"
 	id = "rice"
