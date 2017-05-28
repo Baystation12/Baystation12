@@ -292,6 +292,9 @@
 /area/crew_quarters/safe_room/bridge
 	name = "\improper Bridge Safe Room"
 
+/area/bridge/storage
+	name = "\improper Bridge Storage Room"
+
 // Shuttles
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
