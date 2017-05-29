@@ -437,7 +437,8 @@
 	economic_modifier = 6
 	alt_titles = list(
 		"Biomechanical Engineer",
-		"Mechsuit Technician")
+		"Mechsuit Technician",
+		"Mech Pilot")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
