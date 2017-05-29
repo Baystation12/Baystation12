@@ -1,0 +1,38 @@
+{{if data.screen=="main"}}
+	<center>
+	<h3>Main system initialized</h3>
+	<div class="greeting">
+		Welcome (pilot name)
+	</div>
+	<h2>Current status:</h2>
+	<table style='width: 100%'>
+		<tr><th>Component<th>Damage<th>Status
+		{{for data.components}}
+			<tr><td>Component Name</td>
+			<td>no damage</td>
+			<td>OK</td>
+		{{/for}}		
+	</table>
+	
+	{{:helper.link("Navigation computer", null, {'navigation' : 0})}}
+	{{:helper.link("Release cockpit locks", null, {'leave' : 0})}}
+	</center>
+{{/if}}
+{{if data.screen=="nav"}}
+	<center>
+	<h2>Navigational computer<h3>
+	</center>
+	<h3>Available destinations</h3>
+	<table style='width: 100%'>
+		<tr><th>Destination<th>Distance<th>Description
+		{{for data.missionlist}}
+			<tr><td>Mission destination</td>
+			<td>3.4 ly</td>
+			<td>A pretty bad hive of scum and villany, but not the worst I've ever seen</td>
+		{{/for}}
+		<tr><td>{{:helper.link("Mission space", null, {'bluespacejump' : 0})}}</td>
+		<td>only a wish away</td>
+		<td>Home is where the beer awaits</td>
+		</table>
+	{{:helper.link("back", null, {'back' : 0})}}
+{{/if}}
