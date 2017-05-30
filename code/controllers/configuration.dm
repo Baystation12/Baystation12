@@ -733,6 +733,9 @@ var/list/gamemode_cache = list()
 				if("autostealth")
 					config.autostealth = text2num(value)
 
+				if("radiation_lower_limit")
+					radiation_lower_limit = text2num(value)
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

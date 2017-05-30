@@ -19,6 +19,7 @@ var/global/repository/radiation/radiation_repository = new()
 	radiation_repository.sources -= src
 	if(radiation_repository.sources_assoc[src.source_turf] == src)
 		radiation_repository.sources -= src.source_turf
+	src.source_turf = null
 	. = ..()
 
 /datum/radiation_source/proc/update_rad_power(var/new_power = null)
@@ -26,7 +27,7 @@ var/global/repository/radiation/radiation_repository = new()
 		rad_power = new_power
 		. = 1
 	if(. && !flat)
-		range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)
+		range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
 
 // Ray trace from all active radiation sources to T and return the strongest effect.
 /repository/radiation/proc/get_rads_at_turf(var/turf/T)
@@ -76,7 +77,6 @@ var/global/repository/radiation/radiation_repository = new()
 	S.source_turf = get_turf(source)
 	S.update_rad_power(power)
 	add_source(S)
-	return S
 
 // Sets the radiation in a range to a constant value.
 /repository/radiation/proc/flat_radiate(source, power, range, var/respect_maint = FALSE)
@@ -89,7 +89,6 @@ var/global/repository/radiation/radiation_repository = new()
 	S.source_turf = get_turf(source)
 	S.update_rad_power(power)
 	add_source(S)
-	return S
 
 // Irradiates a full Z-level. Hacky way of doing it, but not too expensive.
 /repository/radiation/proc/z_radiate(var/atom/source, power, var/respect_maint = FALSE)
