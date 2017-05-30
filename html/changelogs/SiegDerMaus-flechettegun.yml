@@ -22,7 +22,7 @@
 #################################
 
 # Your name.  
-author: Orelbon
+author: SiegDerMaus
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -33,5 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - maptweak: "Tech storage has been moved to deck two, where the abandoned officers mess was located. The officers mess has been moved into the previous location of tech storage."
-  
+  - rscadd: "Adds a new magnetic flechette weapon, available via uplink."

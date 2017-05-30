@@ -1586,7 +1586,7 @@
 "Ez" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/effect/floor_decal/corner/blue{dir = 4},/turf/simulated/floor/tiled,/area/hallway/primary/firstdeck/fore)
 "EA" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/hallway/primary/firstdeck/fore)
 "EB" = (/obj/machinery/light{dir = 4},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/floor_decal/corner/blue{dir = 4},/obj/item/device/radio/intercom{dir = 8; pixel_x = 22},/turf/simulated/floor/tiled,/area/hallway/primary/firstdeck/fore)
-"EC" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/structure/closet/secure_closet/crew,/obj/random/maintenance/solgov/clean,/obj/random/maintenance/solgov/clean,/obj/random/maintenance/solgov/clean,/turf/simulated/floor/tiled/dark,/area/command/pilot)
+"EC" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/structure/closet/secure_closet/solgovpilot,/turf/simulated/floor/tiled/dark,/area/command/pilot)
 "ED" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/command/pilot)
 "EE" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/command/pilot)
 "EF" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/firstdeck/foreport)
