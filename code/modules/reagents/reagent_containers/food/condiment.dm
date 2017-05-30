@@ -62,6 +62,11 @@
 					desc = "You feel more American already."
 					icon_state = "ketchup"
 					center_of_mass = "x=16;y=6"
+				if("barbecue")
+					name = "Barbecue Sauce"
+					desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
+					icon_state = "barbecue"
+					center_of_mass = "x=16;y=6"
 				if("capsaicin")
 					name = "Hotsauce"
 					desc = "You can almost TASTE the stomach ulcers now!"
@@ -123,6 +128,14 @@
 	New()
 		..()
 		reagents.add_reagent("enzyme", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/barbecue
+	name = "Barbecue Sauce"
+	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
+	icon_state = "barbecue"
+	New()
+		..()
+		reagents.add_reagent("barbecue", 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/sugar
 	New()
