@@ -36,6 +36,7 @@
 	desc = "Can hold various excavation gear."
 	icon_state = "gearbelt"
 	item_state = "utility"
+	max_w_class = ITEM_SIZE_HUGE
 	can_hold = list(
 		/obj/item/weapon/storage/box/samplebags,
 		/obj/item/device/core_sampler,
@@ -56,6 +57,7 @@
 		/obj/item/weapon/anodevice,
 		/obj/item/clothing/glasses,
 		/obj/item/weapon/wrench,
+		/obj/item/weapon/crowbar,
 		/obj/item/weapon/storage/excavation,
 		/obj/item/weapon/anobattery,
 		/obj/item/device/ano_scanner,
