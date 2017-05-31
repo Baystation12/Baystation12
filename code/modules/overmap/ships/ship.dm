@@ -2,6 +2,7 @@
 	name = "generic ship"
 	desc = "Space faring vessel."
 	icon_state = "ship"
+	color = "#ff69b4"
 	var/vessel_mass = 100 				//tonnes, arbitrary number, affects acceleration provided by engines
 	var/default_delay = 6 SECONDS 		//time it takes to move to next tile on overmap
 	var/list/speed = list(0,0)			//speed in x,y direction
