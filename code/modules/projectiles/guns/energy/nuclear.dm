@@ -17,7 +17,7 @@
 		)
 
 /obj/item/weapon/gun/energy/gun/small
-	name = "small energy gun"
+	name = "energy pistol"
 	desc = "A smaller model of the versatile LAEP90 Perun, packing considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon_state = "smallgunstun"
 	max_shots = 5
