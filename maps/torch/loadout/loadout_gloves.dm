@@ -43,3 +43,17 @@
 	display_name = "gloves, work"
 	path = /obj/item/clothing/gloves/thick
 	cost = 3
+
+/datum/gear/gloves/ring
+	display_name = "ring, gold"
+	path = /obj/item/clothing/gloves/ring/gold
+	cost = 2
+
+/datum/gear/gloves/ring/New()
+	..()
+	var/ringtype = list()
+	ringtype["ring, gold"] = /obj/item/clothing/gloves/ring/gold
+	ringtype["ring, silver"] = /obj/item/clothing/gloves/ring/silver
+	ringtype["ring, platinum"] = /obj/item/clothing/gloves/ring/platinum
+	ringtype["ring, diamond"] = /obj/item/clothing/gloves/ring/diamond
+	gear_tweaks += new/datum/gear_tweak/path(ringtype)
