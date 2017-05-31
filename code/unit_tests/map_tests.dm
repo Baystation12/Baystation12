@@ -352,5 +352,74 @@ datum/unit_test/ladder_check/start_test()
 
 //=======================================================================================
 
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes
+	name = "MAP: Disposal segments shall connect with other disposal pipes"
+
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes/start_test()
+	var/list/faulty_pipes = list()
+
+	// Desired directions for straight pipes, when encountering curved pipes in the main and reversed dir respectively
+	var/list/straight_desired_directions = list(
+		num2text(SOUTH) = list(list(NORTH, WEST), list(SOUTH, EAST)),
+		num2text(EAST) = list(list(SOUTH, WEST), list(NORTH, EAST)))
+
+	// Desired directions for curved pipes:
+	// list(desired_straight, list(desired_curved_one, desired_curved_two) in the main and curved direction
+	var/list/curved_desired_directions = list(
+		num2text(NORTH) = list(list(SOUTH, list(SOUTH, EAST)), list(EAST,  list(SOUTH, WEST))),
+		num2text(EAST)  = list(list(EAST,  list(SOUTH, WEST)), list(SOUTH, list(NORTH, WEST))),
+		num2text(SOUTH) = list(list(SOUTH, list(NORTH, WEST)), list(EAST,  list(NORTH, EAST))),
+		num2text(WEST)  = list(list(EAST,  list(NORTH, EAST)), list(SOUTH, list(SOUTH, EAST))))
+
+	for(var/obj/structure/disposalpipe/segment/D in world)
+		if(D.icon_state == "pipe-s")
+			if(!(D.dir == SOUTH || D.dir == EAST))
+				log_bad("Following disposal pipe has an invalid direction set: [log_info_line(D)]")
+				continue
+			var/turf/turf_one = get_step(D.loc, D.dir)
+			var/turf/turf_two = get_step(D.loc, turn(D.dir, 180))
+
+			var/list/desired_dirs = straight_desired_directions[num2text(D.dir)]
+			if(!turf_contains_matching_disposal_pipe(turf_one, D.dir, desired_dirs[1]) || !turf_contains_matching_disposal_pipe(turf_two, D.dir, desired_dirs[2]))
+				log_bad("Following disposal pipe does not connect correctly: [log_info_line(D)]")
+				faulty_pipes += D
+		else
+			var/turf/turf_one = get_step(D.loc, D.dir)
+			var/turf/turf_two = get_step(D.loc, turn(D.dir, -90))
+
+			var/list/desired_dirs = curved_desired_directions[num2text(D.dir)]
+			var/main_dirs = desired_dirs[1]
+			var/rev_dirs = desired_dirs[2]
+
+			if(!turf_contains_matching_disposal_pipe(turf_one, main_dirs[1], main_dirs[2]) || !turf_contains_matching_disposal_pipe(turf_two, rev_dirs[1], rev_dirs[2]))
+				log_bad("Following disposal pipe does not connect correctly: [log_info_line(D)]")
+				faulty_pipes += D
+
+	if(faulty_pipes.len)
+		fail("[faulty_pipes.len] straight disposal segment\s did not connect with other disposal pipes.")
+	else
+		pass("All straight disposal segments connect with other disposal pipes.")
+
+	return 1
+
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes/proc/turf_contains_matching_disposal_pipe(var/turf/T, var/straight_dir, var/list/curved_dirs)
+	if(!T)
+		return FALSE
+
+	// We need to loop over all potential pipes in a turf as long as there isn't a dir match, as they may be overlapping (i.e. 2 straight pipes in a cross)
+	for(var/obj/structure/disposalpipe/D in T)
+		if(D.type == /obj/structure/disposalpipe/segment)
+			if(D.icon_state == "pipe-s")
+				if(D.dir == straight_dir)
+					return TRUE
+			else
+				if(D.dir in curved_dirs)
+					return TRUE
+		else
+			return TRUE
+	return FALSE
+
+//=======================================================================================
+
 #undef SUCCESS
 #undef FAILURE
