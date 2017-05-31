@@ -63,6 +63,8 @@
 		O.show_message("[H.name] appears from thin air!",1)
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
+/obj/item/rig_module/stealth_field/disrupted()
+	deactivate()
 
 /obj/item/rig_module/teleporter
 

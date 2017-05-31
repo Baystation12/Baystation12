@@ -428,8 +428,8 @@
 	// This is largely for cancelling stealth and whatever.
 	if(mod && mod.disruptive)
 		for(var/obj/item/rig_module/module in (installed_modules - mod))
-			if(module.active && module.disruptable)
-				module.deactivate()
+			if(module.active)
+				module.disrupted()
 
 	cell.use(cost * CELLRATE)
 	return 1
@@ -754,7 +754,7 @@
 	if(cell) cell.emp_act(severity_class + 15)
 
 	//possibly damage some modules
-	take_hit((100/severity_class), "electrical pulse", 1)
+	take_hit((50/severity_class), "electrical pulse", 1)
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.
@@ -779,38 +779,25 @@
 		//that way people designing hardsuits don't have to worry (as much) about how adding that extra module will affect emp resiliance by 'soaking' hits for other modules
 		chance = 2*max(0, damage - emp_protection)*min(installed_modules.len/15, 1)
 
-	if(!prob(chance))
-		return
 
-	//deal addition damage to already damaged module first.
-	//This way the chances of a module being disabled aren't so remote.
-	var/list/valid_modules = list()
-	var/list/damaged_modules = list()
-	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.damage < 2)
-			valid_modules |= module
-			if(module.damage > 0)
-				damaged_modules |= module
-
-	var/obj/item/rig_module/dam_module = null
-	if(damaged_modules.len)
-		dam_module = pick(damaged_modules)
-	else if(valid_modules.len)
-		dam_module = pick(valid_modules)
-
-	if(!dam_module) return
-
-	dam_module.damage++
-
-	if(!source)
-		source = "hit"
-
-	if(wearer)
-		if(dam_module.damage >= 2)
-			to_chat(wearer, "<span class='danger'>The [source] has disabled your [dam_module.interface_name]!</span>")
+	for(var/obj/item/rig_module/module in installed_modules) //currently used to proc take_hit() on every module
+		var/probability = chance
+		if(chance <= 0)
+			break
+		if(module.damage >= module.destroyed_threshold)
+			continue
+		if(module.damage >= module.damaged_threshold)
+			probability *= 1.5
+		if(prob(probability))
+			if(is_emp)
+				chance -= 10
+			else
+				chance -= 50
+			damage *= 0.5
+			module.take_hit(damage, source, is_emp)
 		else
-			to_chat(wearer, "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!</span>")
-	dam_module.deactivate()
+			module.take_hit(0, source, is_emp)
+
 
 /obj/item/weapon/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
 	if(malfunction_delay)
