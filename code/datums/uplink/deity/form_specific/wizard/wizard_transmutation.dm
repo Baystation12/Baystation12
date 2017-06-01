@@ -68,6 +68,7 @@
 	desc = "Of transmutation, healing is perhaps the most immediately effective and useful. This unlocks the healing spells for your followers."
 	item_cost = 50
 	required_feats = list(DEITY_LEVELED_TRANSMUTATION = 3)
+	category = /datum/uplink_category/deity_wizard_transmutation
 
 /datum/uplink_item/item/deity/boon/single_charge/heal
 	name = "Minor Heal"
