@@ -91,9 +91,12 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	var/day_loc = findtext(full_date, time2text(world.timeofday, "DD"))
 
 	var/datum/player_info/P = new
-	if (user)
+	if (istype(user,/client))
 		P.author = user.key
 		P.rank = user.client.holder.rank
+	else if (istext(user))
+		P.author = user
+		P.rank = "Bot"
 	else
 		P.author = "Adminbot"
 		P.rank = "Friendly Robot"
@@ -103,8 +106,8 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	infos += P
 	info << infos
 
-	message_admins("<span class='notice'>[key_name_admin(user)] has edited [key]'s notes.</span>")
-	log_admin("[key_name(user)] has edited [key]'s notes.")
+	message_admins("<span class='notice'>[P.author] has edited [key]'s notes.</span>")
+	log_admin("[P.author] has edited [key]'s notes.")
 
 	del(info) // savefile, so NOT qdel
 
