@@ -1,6 +1,6 @@
 /obj/structure/deity/blood_forge
 	name = "unholy forge"
-	desc = "This forge gives off no heat, no light, its flames look almost unnaturual."
+	desc = "This forge gives off no heat, no light, its flames look almost unnatural."
 	icon_state = "forge"
 	build_cost = 1000
 	health = 50
@@ -67,7 +67,7 @@
 	var/mob/living/carbon/human/H = user
 	user.visible_message("<span class='warning'>\The [user] calmly slices their finger on \the [src], smeering it over the black stone.</span>","<span class='warning'>You slowly slide your finger down one of \the [src]'s sharp edges, smeering it over its smooth surface.</span>")
 	do
-		user.audible_message("\The [user] utters something under their breathe.", "<span class='cult'>You mutter a dark prayer to your master as you feel the stone eat away at your lifeforce.</span>")
+		user.audible_message("\The [user] utters something under their breath.", "<span class='cult'>You mutter a dark prayer to your master as you feel the stone eat away at your lifeforce.</span>")
 		if(H.should_have_organ(BP_HEART))
 			H.drip(5,get_turf(src))
 		else

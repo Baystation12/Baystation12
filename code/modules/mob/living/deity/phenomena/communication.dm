@@ -9,6 +9,29 @@
 	if(text_to_send)
 		to_chat(L, "<span class='cult'><font size='4'>[text_to_send]</font></span>") //Note to self: make this go to ghosties
 
+/datum/phenomena/point
+	name = "Point"
+	cost = 0
+	flags = PHENOMENA_MUNDANE
+	expected_type = /atom
+	var/image/arrow
+
+/datum/phenomena/point/activate(var/atom/a)
+	if(!arrow)
+		arrow = image('icons/mob/screen1.dmi', icon_state = "arrow", layer = POINTER_LAYER)
+	var/turf/T = get_turf(a)
+	arrow.loc = T
+	var/list/view = view(7,T)
+	for(var/m in linked.minions)
+		var/datum/mind/mind = m
+		if(mind.current)
+			var/mob/M = mind.current
+			if(M in view)
+				to_chat(M, "<span class='cult'>Your attention is eerily drawn to \the [a].</span>")
+				M.client.images += arrow
+				spawn(20)
+					M.client.images -= arrow
+
 /datum/phenomena/punish
 	name = "Punish"
 	cost = 0

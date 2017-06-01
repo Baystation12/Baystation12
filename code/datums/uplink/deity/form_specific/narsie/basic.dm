@@ -10,7 +10,7 @@
 
 /datum/uplink_item/item/deity/boon/ability_dark/torment
 	name = "Torment"
-	desc = "Gives a follower the ability to cause mass hystery and pain."
+	desc = "Gives a follower the ability to cause mass hysteria and pain."
 	item_cost = 30
 	path = /spell/targeted/torment
 

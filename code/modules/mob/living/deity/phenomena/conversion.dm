@@ -45,4 +45,4 @@
 /datum/phenomena/forced_conversion/activate(var/mob/living/L)
 	var/obj/structure/deity/altar/A = locate() in get_turf(L)
 	A.set_target(L)
-	to_chat(src, "<span class='notice'>You embue \the [A] with your power, setting forth to force \the [L] to your will.</span>")
+	to_chat(src, "<span class='notice'>You imbue \the [A] with your power, setting forth to force \the [L] to your will.</span>")

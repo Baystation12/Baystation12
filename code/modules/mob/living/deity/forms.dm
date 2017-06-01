@@ -7,7 +7,7 @@ Each plays slightly different and has different challenges/benefits
 	var/info = "This is a form your being can take."
 	var/desc = "This is the mob's description given."
 	var/faction = "neutral" //For stuff like mobs and shit
-	var/god_icon_state //What you look like
+	var/god_icon_state = "nar-sie" //What you look like
 	var/pylon_icon_state //What image shows up when appearing in a pylon
 	var/mob/living/deity/linked_god = null
 	var/floor_decl = /decl/flooring/reinforced/cult
@@ -76,87 +76,27 @@ Each plays slightly different and has different challenges/benefits
 		user.adjustBruteLoss(charge)
 	return 1
 
-/* Obelisk:
-This form is an off shoot of nar-sie.
-Benefits:
-	+ Get power via sacrifice
-	+ Hardier structures
-*/
-
-/datum/god_form/narsie/obelisk
-	name = "Obelisk"
-	info = {"You are the accumulation of all things maddening and unnatural.<br>
-	<b>Benefits:</b><br>
-		<font color='blue'>+Can gain power from blood sacrifices<br>
-		+Hardier structures<br>
-		+Unique Mind-Bending Structures</font><br>
-	<b>Drawbacks:</b><br>
-		<font color='red'>-Servant abilities require both blood and sanity.</font>"}
-	desc = "Looking at it makes your brain itch."
-	pylon_icon_state = "glowing_behemoth"
-	faction = "obelisk"
-
-	buildables = list(/obj/structure/deity/altar = list("health" = 50),
-					/obj/structure/deity/pylon = list("health" = 45),
-					/turf/simulated/floor/deity
-					)
-	starting_feats = list(DEITY_FORM_BLOOD_SAC)
-
-/*Vampire:
-This form is another off-shoot of nar-sie.
-Benefits:
-	+Vampire Tree
-Drawbacks:
-	-No sac
-*/
-/datum/god_form/narsie/vampire
-	name = "Vampire"
-	info = {"You are the embodiment of greed: feeding on the destruction of others for your own gain.<br>
-	<b>Benefits:</b><br>
-		<font color='blue'>+Ability to forge weapons and armor.<br>
-		+Unique blood-syphoning tree</font><br>
-	<b>Drawbacks:</b><br>
-		<font color='red'>-Servant abilities require copious amounts of their blood.</font>
-	"}
-
 /datum/god_form/wizard
 	name = "The Tower"
 	info = {"Only from destruction does the Tower grow. Its bricks smelted from crumbled ignorance and the fires of ambition.<br>
 	<b>Benefits:</b><br>
-		<font color='blue'>+Learn spells from a miadra of different schools.<br></font><br>
+		<font color='blue'>+Learn spells from two different schools.<br>
+		+Deity gains power through each spell use.</font><br>
 	<b>Drawbacks:</b><br>
-		<font color='red'>-Abilities hold a single charge and must be charged at their school's structure.</font>
+		<font color='red'>-Abilities hold a single charge and must be charged at a fountain of power.</font>
 	"}
 	desc = "A single solitary tower"
+	god_icon_state = "tower"
 	pylon_icon_state = "nim"
 
 	buildables = list(/obj/structure/deity/altar = list("icon_state" = "tomealtar"),
 					/obj/structure/deity/pylon,
-					/turf/simulated/floor/deity
+					/turf/simulated/floor/deity,
+					/obj/structure/deity/wizard_recharger
 					)
-/* Hive-Mind:
-This form is all about base-building and defense. Unlike other forms it does not blend in at all and as such must be defended at all costs.
-Benefits:
-	+ Unique defense structures
-	+ Spell's unique cost regenerates over time.
-Drawbacks:
-	- Out of place structures
-	- Most spells must be used near a unique structure.
-*/
-/datum/god_form/hive
-	name = "Hive-Mind"
-	info = {"A biological mother-brain that uses a maidra of chemicals and parasites to control and augment its hosts.<br>
-	<b>Benefits:</b><br>
-		<font color='blue'>+ Unique defensive and utility structures</font><br>
-	<b>Drawbacks:</b><br>
-		<font color='red'>- Overt and out of place structures<br>
-		- Most servant abilities require chemicals syphoned from a buildable structure.</font>
-	"}
-	desc = "Ew, looks like shit."
-	god_icon_state = "biomass"
-	pylon_icon_state = "horror"
+	starting_feats = list(DEITY_TREE_TRANSMUTATION, DEITY_TREE_CONJURATION)
 
-	buildables = list(/obj/structure/deity/altar = list("name" = "Biopit",
-														"desc" = "A mass of flesh and gas"),
-					/turf/simulated/floor/deity = list("name" = "a fleshy surface")
-					)
+/datum/god_form/wizard/take_charge(var/mob/living/user, var/charge)
+	if(!..())
+		return 0
+	linked_god.adjust_power(max(round(charge/100), 1),silent = 1)

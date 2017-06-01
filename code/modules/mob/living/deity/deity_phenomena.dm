@@ -9,6 +9,7 @@
 		populate_intent(intent)
 	set_phenomena(add_phenomena(/datum/phenomena/communicate), I_HELP, "shift")
 	set_phenomena(add_phenomena(/datum/phenomena/punish), I_HELP, "control")
+	set_phenomena(add_phenomena(/datum/phenomena/point), I_HELP, "controlshift")
 	set_phenomena(add_phenomena(/datum/phenomena/conversion), I_GRAB, "shift")
 	set_phenomena(add_phenomena(/datum/phenomena/forced_conversion), I_GRAB, "control")
 

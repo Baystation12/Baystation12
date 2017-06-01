@@ -36,8 +36,9 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		if(!L.mind || !L.client)
-			to_chat(linked, "<span class='warning'>\The [L]'s mind is too mundane for you to influence.</span>")
-			return 0
+			if(!(flags & PHENOMENA_MUNDANE))
+				to_chat(linked, "<span class='warning'>\The [L]'s mind is too mundane for you to influence.</span>")
+				return 0
 		else if(linked.is_follower(target) == !(flags & PHENOMENA_FOLLOWER))
 			to_chat(linked, "<span class='warning'>You can only use [name] on [flags & PHENOMENA_FOLLOWER ? "" : "non"]followers!</span>")
 			return 0

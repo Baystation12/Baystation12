@@ -23,8 +23,7 @@
 		eyeobj = new eye_type(src)
 		eyeobj.possess(src)
 		eyeobj.visualnet.add_source(src)
-	var/obj/item/uplink_holder = new(src) //because uplink devices need to be inside an item to work.
-	mob_uplink = new(uplink_holder, telecrystals = 0)
+	mob_uplink = new(src, telecrystals = 0, ui_state = contained_state)
 
 /mob/living/deity/Life()
 	. = ..()
@@ -54,11 +53,27 @@
 /mob/living/deity/Destroy()
 	death(0)
 	minions.Cut()
+	eyeobj.release()
 	structures.Cut()
 	qdel(eyeobj.visualnet)
 	qdel(eyeobj)
 	qdel(form)
 	return ..()
+
+/mob/living/deity/verb/jump_to_follower()
+	set category = "Godhood"
+
+	if(!minions)
+		return
+
+	var/list/could_follow = list()
+	for(var/m in minions)
+		var/datum/mind/mind = m
+		could_follow += mind.current
+
+	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow
+	if(choice)
+		eyeobj.forceMove(get_turf(choice))
 
 /mob/living/deity/verb/open_menu()
 	set name = "Open Menu"
@@ -81,7 +96,7 @@
 	<table border="1" style="width:100%;border-collapse:collapse;">
 	<tr>
 		<th>Name</th>
-		<th>Look</th>
+		<th>Theme</th>
 		<th>Description</th>
 	</tr>"}
 	var/list/forms = subtypesof(/datum/god_form)
@@ -89,7 +104,7 @@
 	for(var/form in forms)
 		var/datum/god_form/G = form
 		var/god_name = initial(G.name)
-		var/icon/god_icon = icon(icon, initial(G.god_icon_state))
+		var/icon/god_icon = icon('icons/mob/mob.dmi', initial(G.pylon_icon_state))
 		send_rsc(src,god_icon, "[god_name].png")
 		dat += {"<tr>
 					<td><a href="?src=\ref[src];form=[G]">[god_name]</a></td>

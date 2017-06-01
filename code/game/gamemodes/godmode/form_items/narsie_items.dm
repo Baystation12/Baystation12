@@ -68,7 +68,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/zombiedrink
 	name = "well-used urn"
-	desc = "Said to bring those back to life, no matter the price."
+	desc = "Said to bring those who drink it back to life, no matter the price."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "urn"
 	volume = 120

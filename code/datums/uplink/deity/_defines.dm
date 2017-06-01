@@ -10,13 +10,14 @@
 #define DEITY_BLOOD_CRAFT "Blood Crafting"
 #define DEITY_ARMOR_CRAFT "Armor Crafting"
 #define DEITY_VOID_CRAFT "Void Crafting"
+#define DEITY_UNLOCK_HEAL "Unlock Healing Spells"
+#define DEITY_UNLOCK_ARMS "Unlock Wizard Armaments"
 
 //Unlockable trees
 #define DEITY_TREE_SACRIFICE "Sacrificing"
 #define DEITY_TREE_SOUL "Soul Arts"
 #define DEITY_TREE_TRANSMUTATION "Transmutation"
 #define DEITY_TREE_CONJURATION "Conjuration"
-#define DEITY_TREE_EVOCATION "Evocation"
 
 
 //'Leveled' feats

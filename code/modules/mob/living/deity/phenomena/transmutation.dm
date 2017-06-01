@@ -17,13 +17,13 @@
 /datum/phenomena/warp
 	name = "Warp Body"
 	cost = 25
-	flags = PHENOMENA_NEAR_STRUCTURE
+	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE
 	expected_type = /mob/living
 
 /datum/phenomena/activate(var/mob/living/L)
 	L.adjustCloneLoss(20)
 	L.Weaken(2)
-	to_chat(L, "<span class='danger'>You feel your body warp and change underneath you!")
+	to_chat(L, "<span class='danger'>You feel your body warp and change underneath you!</span>")
 
 /datum/phenomena/rock_form
 	name = "Rock Form"

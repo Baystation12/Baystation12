@@ -16,8 +16,8 @@
 		to_chat(src, "<span class='notice'>You have stopped hiding.</span>")
 	reset_layer()
 
-/mob/living/proc/breathe_death()
-	set name = "Breathe Death"
+/mob/living/proc/breath_death()
+	set name = "Breath Death"
 	set desc = "Infect others with your very breathe."
 	set category = "Abilities"
 
