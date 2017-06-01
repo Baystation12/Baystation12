@@ -10,6 +10,11 @@
 	if(check_rights(R_INVESTIGATE, 0))
 		for(var/client/C in clients)
 			var/entry = "\t[C.key]"
+			if(!C.mob) //If mob is null, print error and skip rest of info for client.
+				entry += " - <font color='red'><i>HAS NO MOB</i></font>"
+				Lines += entry
+				continue
+
 			entry += " - Playing as [C.mob.real_name]"
 			switch(C.mob.stat)
 				if(UNCONSCIOUS)
@@ -45,13 +50,15 @@
 			Lines += entry
 	else
 		for(var/client/C in clients)
-			Lines += C.key
+			if(!C.is_stealthed())
+				Lines += C.key
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	to_chat(src, msg)
+
 /client/verb/staffwho()
 	set category = "Admin"
 	set name = "Staffwho"

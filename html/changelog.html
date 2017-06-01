@@ -56,6 +56,163 @@
 		
 		-->
 		<div class="commit sansserif">
+			<h2 class="date">23 May 2017</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Maintenance Drones now require an account of age 3 days or greater.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Bunch of virus changes. Buckle up, kiddo. Praise Nurgle</li>
+				<li class="rscadd">Adds Space Cold event. Spawns a harmless virus that can be treated with cold medicine. Unless you're irradiated and it mutates to kill everyone I guess.</li>
+				<li class="rscadd">Adds space cold medicine (dextra-something) to white first aid boxes. Can also be made by mixing paracetamol+sugar. Eating it will stop weak viruses symptoms from manifesting.</li>
+				<li class="rscadd">Humans now have crude immune system simulation. Keeping your immunity high makes it easier to shrug off viruses, extremely low (15% and less) immunity can get you random space cold-level infections. Get lemons for boosting it, spaceacilin ruins it. It recovers to norm over time.</li>
+				<li class="tweak">Spaceacillin now ODs at 15u instead of 30u.</li>
+				<li class="tweak">Spaceacillin now metabolizes faster. It was 60+ minutes for 15u, 30 minutes now.</li>
+				<li class="tweak">Spaceacillin boosts immune system effective rating. It acts as a multiplier to natural one, from 1x at none in blood to 2x at OD threshold (15u), and you can go higher if you don't mind ODing. Also if natural immunity is lower than the boost, boost would just replace it.</li>
+				<li class="tweak">Spaceacillin has three stages now. Below 10 units it acts kinda like now, blocking badness 2 virus effects. Virus would still progress though, but effects won't fire. It's enough for any random event virus effects.</li>
+				<li class="tweak">Above 10 units it would completely stop progression of badness 2 viruses and stop effects of badness 3 - which is usual stuff ou get from viro labs. Again, clock will still be ticking. Also at this stage it starts lowering your natural immunity value.</li>
+				<li class="tweak">And then, there's OD. OD stops badness 4 (e.g. Gibbingtons) from manifesting, and stops ticking of lower viruses. It screws your immune system even stronger too.</li>
+				<li class="tweak">It's also not 100% protecting you from infection now. 15u and above give old 100% protection, scaling with lower value in blood.</li>
+				<li class="tweak">Some tweaks to virus annoyningness. Hard delay between firings (25-40 seconds between message-only syndromes), emote syndromes (groaning, moaning, screaming) are now single syndrome to make it rarer. Internals actually stopping you from spreading viruses. No airborne viruses in vacuum.</li>
+				<li class="tweak">As an unrealated bonus, first aid (white and fire) boxes now have paracetamol bottles because damn it's easier to score opiates than that.</li>
+				<li class="tweak">Oh also remember how when you graft yourself Tajaran arms it kills you? Not when your immunity is floored. Just saying.</li>
+			</ul>
+			<h3 class="author">Orelbon updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Tech storage has been moved to deck two, where the abandoned officers mess was located. The officers mess has been moved into the previous location of tech storage.</li>
+			</ul>
+
+			<h2 class="date">20 May 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">All toys guns are now fitted with red bits on the barrel so you can visually tell them apart! Very safe! Fun for whole family!</li>
+				<li class="rscadd">Can use wirecutters on toy revolvers to snip those off. It also changes examine name to 'revolver' instead of 'toy gun'. In case you didn't know, those are proper guns and you can hold people hostage with those. Just saying. Do not try at home.</li>
+			</ul>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Attempting to place an airlock brace without setting an access requirement now informs you, and asks for confirmation.</li>
+			</ul>
+			<h3 class="author">Orelbon updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added inhand sprite for stun rifle.</li>
+			</ul>
+			<h3 class="author">Ornias1993 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Everyone including military can now take sunglasses from loadout.</li>
+			</ul>
+
+			<h2 class="date">18 May 2017</h2>
+			<h3 class="author">Chaoko99 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Made the engine input pumps more cryo-clamp-able.</li>
+				<li class="bugfix">Moved the maintainance deck saferoom APC.</li>
+			</ul>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Lubed floors can be cleaned with water.</li>
+				<li class="bugfix">Wet floors make a comeback after three months of stealthy disappearance.</li>
+			</ul>
+			<h3 class="author">Orelbon updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">New sprites for the ion rifle.</li>
+				<li class="rscadd">New sprites for the stun carbine.</li>
+				<li class="bugfix">small eguns should now have the right sprites for east and west.</li>
+			</ul>
+			<h3 class="author">Ornias1993 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Oxygen_pump and Anestethic_pump, now correctly checks if the mask slot is blocked</li>
+				<li class="rscdel">removed on click application to user of Oxygen_pump and Anestethic_pump</li>
+				<li class="tweak">Oxygen_pump now gives out Breathmasks instead of gasmasks</li>
+				<li class="tweak">anestethics_pump now gives out Medicalmasks instead of gasmasks</li>
+				<li class="bugfix">Maintenance hatch and replacing tanks works now on Oxygen_pump and Anestethics_pump</li>
+				<li class="tweak">removed organic requirement for removing the oxygentank of Oxygen_pump and Anestethic_pump</li>
+				<li class="bugfix">UI of oxygen_pump and Anestethics_pump works now</li>
+				<li class="rscadd">AI can now click to open UI of oxygen_pump and Anestethics_pump</li>
+				<li class="rscadd">Added the Anestethics Mask for the Anestethics_pump</li>
+				<li class="rscadd">Added the Emergency Mask for the Oxygen_pump</li>
+				<li class="spellcheck">Fixed brusies typo on Torch Holodeck disclaimer</li>
+			</ul>
+			<h3 class="author">RedStryker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added boxes of armbands for emergencies to the heads of the Security, Medical, and Engineering departments.</li>
+				<li class="tweak">Allowed a few more roles to use flats.</li>
+				<li class="rscadd">Added many new clothing items as accessories.</li>
+				<li class="tweak">Changed the color of the cheongsam to allow it to use the color gear tweak.</li>
+			</ul>
+
+			<h2 class="date">13 May 2017</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Tajarans now have access to cultural veils. Tajarans will spawn with the default, and job-specific veils with the proper HUD elements are available in the loadout tab under Xenowear.</li>
+				<li class="rscadd">Added 5 new hairstyles to Tajarans. Ported from Polaris (ported from Aurora).</li>
+			</ul>
+			<h3 class="author">Chaoko99 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added the large RCD cartridge to the autolathe.</li>
+				<li class="tweak">Halved RCD cartridge prices.</li>
+				<li class="rscdel">Removed a forced usage of passive wording in examine poses. ([Pronoun] [Pose], instead of [Pronoun] is [Pose].)</li>
+			</ul>
+			<h3 class="author">Datraen updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Ports soft lights featured in other servers.</li>
+			</ul>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">The hull wrap mode of the shield generator will now actually cover the entire ship.</li>
+			</ul>
+			<h3 class="author">Orelbon updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="soundadd">Added new AI voice sounds.</li>
+				<li class="tweak">Lowered the volume on the AI voices.</li>
+			</ul>
+			<h3 class="author">Ornias1993 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Medical veil now selectable by medical contractor.</li>
+				<li class="bugfix">EAL, Sign language, and emotes will no longer use autohiss</li>
+				<li class="bugfix">Chapel Maintenance airlock, now needs maintenance access to open.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can now set your desired FPS level under Character Setup > Global</li>
+			</ul>
+			<h3 class="author">RedStryker updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Added the Science radio frequency to mining borgs.</li>
+			</ul>
+			<h3 class="author">TheWelp updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Lets AI controlled circuits to use the assembly's inputs via a verb.</li>
+				<li class="bugfix">Fixed AI controlled circuits not being moved correctly.</li>
+			</ul>
+
+			<h2 class="date">09 May 2017</h2>
+			<h3 class="author">Asanadas updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Robotics control consoles have been added to the Bridge, and the Engineering monitoring room.</li>
+				<li class="tweak">The Chief Engineer has robotics access. It's part of his job, you know.</li>
+			</ul>
+			<h3 class="author">Sbotkin updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added a Military Police armband.</li>
+			</ul>
+
+			<h2 class="date">07 May 2017</h2>
+			<h3 class="author">Ornias1993 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Changed genetic damage scanner output to state genetic damage instead of improper cloning</li>
+			</ul>
+
+			<h2 class="date">06 May 2017</h2>
+			<h3 class="author">Ornias1993 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added anesthetics pump above main surgery operating table</li>
+				<li class="rscadd">Added Nanomed above health monitoring console</li>
+				<li class="rscadd">Added Medical intercom at the south-west corner beside general intercom</li>
+				<li class="rscdel">Removed Nanomed above Main surgery operating table</li>
+				<li class="rscdel">Removed medical intercom above ealth monitoring console</li>
+			</ul>
+
 			<h2 class="date">02 May 2017</h2>
 			<h3 class="author">Chaoko99 updated:</h3>
 			<ul class="changes bgimages16">

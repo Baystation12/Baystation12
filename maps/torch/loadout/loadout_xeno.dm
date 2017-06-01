@@ -161,3 +161,20 @@
 /datum/gear/uniform/resomi/formal
 	display_name = "small formal uniform (Resomi)"
 	path = /obj/item/clothing/under/resomi/formal
+
+/datum/gear/eyes/tajblind/med
+	display_name = "medical veil (Tajara)"
+	path = /obj/item/clothing/glasses/hud/health/tajblind
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = MEDICAL_ROLES
+
+/datum/gear/eyes/tajblind/meson
+	display_name = "industrial veil (Tajara)"
+	path = /obj/item/clothing/glasses/meson/prescription/tajblind
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = list("Maintenance Assistant", "Prospector", "Research Assistant")
+

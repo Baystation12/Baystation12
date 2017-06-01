@@ -633,13 +633,22 @@
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
+	var/total_protection = flash_protection
 	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
-		var/obj/item/organ/I = internal_organs_by_name[BP_EYES]
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[BP_EYES]
 		if(!I.is_usable())
 			return FLASH_PROTECTION_MAJOR
+		else
+			total_protection = I.get_total_protection(flash_protection)
 	else // They can't be flashed if they don't have eyes.
 		return FLASH_PROTECTION_MAJOR
-	return flash_protection
+	return total_protection
+
+/mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[BP_EYES]
+		I.additional_flash_effects(intensity)
+	return ..()
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
@@ -1070,7 +1079,6 @@
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
-
 	if(!dna)
 		if(!new_species)
 			new_species = SPECIES_HUMAN

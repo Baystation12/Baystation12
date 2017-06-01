@@ -24,11 +24,15 @@ Class Procs:
 	erase_all()
 		Called when the turf is changed with ChangeTurf(). Erases all existing connections.
 
+Macros:
 	check(connection/c)
 		Checks for connection validity. It's possible to have a reference to a connection that has been erased.
 
 
 */
+
+// macro-ized to cut down on proc calls
+#define check(c) (c && c.valid())
 
 /turf/var/tmp/connection_manager/connections
 
@@ -98,5 +102,4 @@ Class Procs:
 	if(check(D)) D.erase()
 	#endif
 
-/connection_manager/proc/check(connection/c)
-	return c && c.valid()
+#undef check

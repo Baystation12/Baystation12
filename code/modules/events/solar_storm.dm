@@ -9,7 +9,7 @@
 	endWhen = startWhen + rand(30,90) + rand(30,90) //2-6 minute duration
 
 /datum/event/solar_storm/announce()
-	command_announcement.Announce("A solar storm has been detected approaching the [station_name()]. Please halt all EVA activites immediately and return inside.", "[station_name()] Sensor Array", new_sound = 'sound/AI/radiation.ogg')
+	command_announcement.Announce("A solar storm has been detected approaching the [station_name()]. Please halt all EVA activites immediately and return inside.", "[station_name()] Sensor Array", new_sound = using_map.radiation_detected_sound)
 	adjust_solar_output(1.5)
 
 /datum/event/solar_storm/proc/adjust_solar_output(var/mult = 1)

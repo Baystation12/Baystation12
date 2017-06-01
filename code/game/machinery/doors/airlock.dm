@@ -104,7 +104,7 @@
 /obj/machinery/door/airlock/external
 	name = "External Airlock"
 	icon = 'icons/obj/doors/Doorext.dmi'
-	opacity = 0
+	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 
 /obj/machinery/door/airlock/external/bolted
@@ -189,6 +189,29 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
 	glass = 1
+
+/obj/machinery/door/airlock/glass_external
+	name = "External Airlock"
+	icon = 'icons/obj/doors/Doorextglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
+	explosion_resistance = 5
+	opacity = 0
+	assembly_type = /obj/structure/door_assembly/door_assembly_ext
+	glass = 1
+
+/obj/machinery/door/airlock/glass_external/bolted
+	icon_state = "door_locked"
+	locked = 1
+
+/obj/machinery/door/airlock/glass_external/bolted/cycling
+	frequency = 1379
+
+/obj/machinery/door/airlock/glass_external/bolted_open
+	icon_state = "door_open"
+	density = 0
+	locked = 1
+	opacity = 0
 
 /obj/machinery/door/airlock/glass_engineering
 	name = "Maintenance Hatch"
@@ -369,6 +392,11 @@
 	explosion_resistance = 20
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
+
+/obj/machinery/door/airlock/highsecurity/bolted
+
+	icon_state = "door_locked"
+	locked = 1
 
 /*
 About the new airlock wires panel:
@@ -869,13 +897,17 @@ About the new airlock wires panel:
 		return brace.attackby(C, user)
 
 	if(!brace && istype(C, /obj/item/weapon/airlock_brace))
+		var/obj/item/weapon/airlock_brace/A = C
 		if(!density)
-			to_chat(user, "You must close \the [src] before installing \the [C]!")
+			to_chat(user, "You must close \the [src] before installing \the [A]!")
+			return
+
+		if((!A.req_access.len && !A.req_one_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
 			return
 
 		if(do_after(user, 50, src) && density)
-			to_chat(user, "You successfully install \the [C]. \The [src] has been locked.")
-			brace = C
+			to_chat(user, "You successfully install \the [A]. \The [src] has been locked.")
+			brace = A
 			brace.airlock = src
 			user.drop_from_inventory(brace)
 			brace.forceMove(src)

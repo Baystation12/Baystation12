@@ -9,74 +9,88 @@
 	flags = OPENCONTAINER
 	amount_per_transfer_from_this = 5
 	volume = 50
+	var/filling_states // List of percentages full that have icons
 
-	on_reagent_change()
+/obj/item/weapon/reagent_containers/food/drinks/on_reagent_change()
+	if(filling_states)
+		update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/food/drinks/attack_self(mob/user as mob)
+	if(!is_open_container())
+		open(user)
+
+/obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
+	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
+	flags |= OPENCONTAINER
+
+/obj/item/weapon/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+	if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
+		return ..()
+
+	if(standard_feed_mob(user, M))
 		return
 
-	attack_self(mob/user as mob)
-		if(!is_open_container())
-			open(user)
+	return 0
 
-	proc/open(mob/user)
-		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
-		to_chat(user, "<span class='notice'>You open [src] with an audible pop!</span>")
-		flags |= OPENCONTAINER
+/obj/item/weapon/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
+	if(!proximity) return
 
-	attack(mob/M as mob, mob/user as mob, def_zone)
-		if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
-			return ..()
+	if(standard_dispenser_refill(user, target))
+		return
+	if(standard_pour_into(user, target))
+		return
+	return ..()
 
-		if(standard_feed_mob(user, M))
-			return
+/obj/item/weapon/reagent_containers/food/drinks/standard_feed_mob(var/mob/user, var/mob/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
 
-		return 0
+/obj/item/weapon/reagent_containers/food/drinks/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
 
-	afterattack(obj/target, mob/user, proximity)
-		if(!proximity) return
+/obj/item/weapon/reagent_containers/food/drinks/standard_pour_into(var/mob/user, var/atom/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
 
-		if(standard_dispenser_refill(user, target))
-			return
-		if(standard_pour_into(user, target))
-			return
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/self_feed_message(var/mob/user)
+	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
 
-	standard_feed_mob(var/mob/user, var/mob/target)
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-			return 1
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/feed_sound(var/mob/user)
+	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
-	standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-			return 1
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/examine(mob/user)
+	if(!..(user, 1))
+		return
+	if(!reagents || reagents.total_volume == 0)
+		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
+	else if (reagents.total_volume <= volume * 0.25)
+		to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
+	else if (reagents.total_volume <= volume * 0.66)
+		to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
+	else if (reagents.total_volume <= volume * 0.90)
+		to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
+	else
+		to_chat(user, "<span class='notice'>\The [src] is full!</span>")
 
-	standard_pour_into(var/mob/user, var/atom/target)
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-			return 1
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/proc/get_filling_state()
+	var/percent = round((reagents.total_volume / volume) * 100)
+	for(var/k in cached_number_list_decode(filling_states))
+		if(percent <= k)
+			return k
 
-	self_feed_message(var/mob/user)
-		to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
-
-	feed_sound(var/mob/user)
-		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
-
-	examine(mob/user)
-		if(!..(user, 1))
-			return
-		if(!reagents || reagents.total_volume == 0)
-			to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
-		else if (reagents.total_volume <= volume * 0.25)
-			to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
-		else if (reagents.total_volume <= volume * 0.66)
-			to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
-		else if (reagents.total_volume <= volume * 0.90)
-			to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
-		else
-			to_chat(user, "<span class='notice'>\The [src] is full!</span>")
+/obj/item/weapon/reagent_containers/food/drinks/update_icon()
+	var/image/filling = image(icon, src, "[icon_state][get_filling_state()]")
+	filling.color = reagents.get_color()
+	overlays += filling
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -224,6 +238,15 @@
 	amount_per_transfer_from_this = 10
 	volume = 120
 	center_of_mass = "x=17;y=7"
+
+/obj/item/weapon/reagent_containers/food/drinks/pitcher
+	name = "pitcher"
+	desc = "Everyone's best friend in the morning."
+	icon_state = "pitcher"
+	volume = 120
+	amount_per_transfer_from_this = 10
+	center_of_mass = "x=16;y=9"
+	filling_states = "20;40;60;100"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "\improper Captain's flask"

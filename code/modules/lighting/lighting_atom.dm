@@ -1,12 +1,14 @@
 /atom
 	var/light_power = 1 // intensity of the light
 	var/light_range = 0 // range in tiles of the light
-	var/light_color		// RGB string representing the colour of the light
+	var/light_color		// Hexadecimal RGB string representing the colour of the light
 
 	var/datum/light_source/light
 	var/list/light_sources
 
-/atom/proc/set_light(l_range, l_power, l_color)
+// Nonsensical value for l_color default, so we can detect if it gets set to null.
+#define NONSENSICAL_VALUE -99999
+/atom/proc/set_light(l_range, l_power, l_color = NONSENSICAL_VALUE)
 	. = 0 //make it less costly if nothing's changed
 
 	if(l_power != null && l_power != light_power)
@@ -15,16 +17,17 @@
 	if(l_range != null && l_range != light_range)
 		light_range = l_range
 		. = 1
-	if(l_color != null && l_color != light_color)
+	if(l_color != NONSENSICAL_VALUE && l_color != light_color)
 		light_color = l_color
 		. = 1
 
 	if(.) update_light()
 
-/atom/proc/copy_light(atom/A)
-	set_light(A.light_range, A.light_power, A.light_color)
+#undef NONSENSICAL_VALUE
 
 /atom/proc/update_light()
+	set waitfor = FALSE
+
 	if(!light_power || !light_range)
 		if(light)
 			light.destroy()
@@ -41,7 +44,6 @@
 			light = new /datum/light_source(src, .)
 
 /atom/New()
-	. = ..()
 	if(light_power && light_range)
 		update_light()
 
@@ -50,26 +52,21 @@
 		light.destroy()
 		light = null
 	return ..()
-
-/atom/movable/Destroy()
-	var/turf/T = loc
-	if(opacity && istype(T))
-		T.reconsider_lights()
-	return ..()
-
-/atom/Entered(atom/movable/obj, atom/prev_loc)
+	
+/atom/set_opacity()
 	. = ..()
-
-	if(obj && prev_loc != src)
-		for(var/datum/light_source/L in obj.light_sources)
-			L.source_atom.update_light()
-
-/atom/proc/set_opacity(new_opacity)
-	if(opacity != new_opacity)
-		opacity = !!new_opacity
+	if(.)
 		var/turf/T = loc
 		if(istype(T))
-			T.reconsider_lights()
+			T.handle_opacity_change(src)
+
+/atom/movable/Move()
+	var/turf/old_loc = loc
+	. = ..()
+
+	if(loc != old_loc)
+		for(var/datum/light_source/L in light_sources)
+			L.source_atom.update_light()
 
 /obj/item/equipped()
 	. = ..()

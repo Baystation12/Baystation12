@@ -9,16 +9,16 @@
 
 
 /proc/error(msg)
-	world.log << "## ERROR: [msg][log_end]"
+	to_world_log("## ERROR: [msg][log_end]")
 
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [src] usr: [usr].")
 //print a warning message to world.log
 /proc/warning(msg)
-	world.log << "## WARNING: [msg][log_end]"
+	to_world_log("## WARNING: [msg][log_end]")
 
 //print a testing-mode debug message to world.log
 /proc/testing(msg)
-	world.log << "## TESTING: [msg][log_end]"
+	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
 	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
@@ -91,7 +91,7 @@
 		game_log("PDA", text)
 
 /proc/log_to_dd(text)
-	world.log << text //this comes before the config check because it can't possibly runtime
+	to_world_log(text) //this comes before the config check because it can't possibly runtime
 	if(config.log_world_output)
 		game_log("DD_OUTPUT", text)
 
@@ -99,8 +99,16 @@
 	game_log("MISC", text)
 
 /proc/log_unit_test(text)
-	world.log << "## UNIT_TEST ##: [text]"
+	to_world_log("## UNIT_TEST ##: [text]")
 	log_debug(text)
+
+//This replaces world.log so it displays both in DD and the file
+/proc/log_world(text)
+	if(config && config.log_runtime)
+		to_world_log(runtime_diary)
+		to_world_log(text)
+	to_world_log(null)
+	to_world_log(text)
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)

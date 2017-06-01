@@ -85,8 +85,6 @@ datum/preferences
 			spawnkeys += spawntype
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
 		if(!choice || !spawntypes[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
-		if(!(choice in using_map.allowed_spawns)) //Don't force their hand, just let them know
-			to_chat(user, "Your chosen spawnpoint ([choice]) is unavailable for the current map. Leaving this setting on the current selection will force you to spawn at one of the allowed spawns.")
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
 

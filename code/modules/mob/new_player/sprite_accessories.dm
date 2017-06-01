@@ -629,7 +629,7 @@
 
 	rowdualbraid
 		name = "Row Dual Braid"
-		icon_state = "hair_rowdualbraid"
+		icon_state = "hair_rowdualtail"
 		gender = FEMALE
 
 	rowbraid
@@ -918,6 +918,31 @@
 	taj_ears_messy
 		name = "Tajara Messy"
 		icon_state = "hair_messy"
+		species_allowed = list(SPECIES_TAJARA)
+
+	taj_ears_curls
+		name = "Tajara Curly"
+		icon_state = "hair_curly"
+		species_allowed = list(SPECIES_TAJARA)
+
+	taj_ears_wife
+		name = "Tajara Housewife"
+		icon_state = "hair_wife"
+		species_allowed = list(SPECIES_TAJARA)
+
+	taj_ears_victory
+		name = "Tajara Victory Curls"
+		icon_state = "hair_victory"
+		species_allowed = list(SPECIES_TAJARA)
+
+	taj_ears_bob
+		name = "Tajara Bob"
+		icon_state = "hair_tbob"
+		species_allowed = list(SPECIES_TAJARA)
+
+	taj_ears_fingercurl
+		name = "Tajara Finger Curls"
+		icon_state = "hair_fingerwave"
 		species_allowed = list(SPECIES_TAJARA)
 
 	vox_quills_short

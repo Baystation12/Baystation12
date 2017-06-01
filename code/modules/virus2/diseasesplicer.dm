@@ -4,7 +4,7 @@
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
 
-	var/datum/disease2/effectholder/memorybank = null
+	var/datum/disease2/effect/memorybank = null
 	var/list/species_buffer = null
 	var/analysed = 0
 	var/obj/item/weapon/virusdish/dish = null
@@ -28,9 +28,10 @@
 
 	if(istype(I,/obj/item/weapon/diseasedisk))
 		to_chat(user, "You upload the contents of the disk onto the buffer.")
-		memorybank = I:effect
-		species_buffer = I:species
-		analysed = I:analysed
+		var/obj/item/weapon/diseasedisk/disk = I
+		memorybank = disk.effect
+		species_buffer = disk.species
+		analysed = disk.analysed
 
 	src.attack_hand(user)
 
@@ -50,7 +51,7 @@
 	data["affected_species"] = null
 
 	if (memorybank)
-		data["buffer"] = list("name" = (analysed ? memorybank.effect.name : "Unknown Symptom"), "stage" = memorybank.effect.stage)
+		data["buffer"] = list("name" = (analysed ? memorybank.name : "Unknown Symptom"), "stage" = memorybank.stage)
 	if (species_buffer)
 		data["species_buffer"] = analysed ? jointext(species_buffer, ", ") : "Unknown Species"
 
@@ -69,8 +70,8 @@
 
 			if (dish.growth >= 50)
 				var/list/effects[0]
-				for (var/datum/disease2/effectholder/e in dish.virus2.effects)
-					effects.Add(list(list("name" = (dish.analysed ? e.effect.name : "Unknown"), "stage" = (e.stage), "reference" = "\ref[e]")))
+				for (var/datum/disease2/effect/e in dish.virus2.effects)
+					effects.Add(list(list("name" = (dish.analysed ? e.name : "Unknown"), "stage" = (e.stage), "reference" = "\ref[e]")))
 				data["effects"] = effects
 			else
 				data["info"] = "Insufficient cell growth for gene splicing."
@@ -106,14 +107,14 @@
 			d.analysed = analysed
 			if(analysed)
 				if (memorybank)
-					d.name = "[memorybank.effect.name] GNA disk (Stage: [memorybank.effect.stage])"
+					d.name = "[memorybank.name] GNA disk (Stage: [memorybank.stage])"
 					d.effect = memorybank
 				else if (species_buffer)
 					d.name = "[jointext(species_buffer, ", ")] GNA disk"
 					d.species = species_buffer
 			else
 				if (memorybank)
-					d.name = "Unknown GNA disk (Stage: [memorybank.effect.stage])"
+					d.name = "Unknown GNA disk (Stage: [memorybank.stage])"
 					d.effect = memorybank
 				else if (species_buffer)
 					d.name = "Unknown Species GNA disk"
@@ -163,17 +164,19 @@
 		if(dish)
 			var/target = text2num(href_list["splice"]) // target = 1 to 4 for effects, 5 for species
 			if(memorybank && 0 < target && target <= 4)
-				if(target < memorybank.effect.stage) return // too powerful, catching this for href exploit prevention
+				if(target < memorybank.stage) return // too powerful, catching this for href exploit prevention
 
-				var/datum/disease2/effectholder/target_holder
+				var/datum/disease2/effect/target_effect
 				var/list/illegal_types = list()
-				for(var/datum/disease2/effectholder/e in dish.virus2.effects)
+				for(var/datum/disease2/effect/e in dish.virus2.effects)
 					if(e.stage == target)
-						target_holder = e
+						target_effect = e
 					else
-						illegal_types += e.effect.type
-				if(memorybank.effect.type in illegal_types) return
-				target_holder.effect = memorybank.effect
+						illegal_types += e.type
+				if(memorybank.type in illegal_types) return
+				dish.virus2.effects -= target_effect
+				dish.virus2.effects += memorybank
+				qdel(target_effect)
 
 			else if(species_buffer && target == 5)
 				dish.virus2.affected_species = species_buffer

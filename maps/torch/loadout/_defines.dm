@@ -21,6 +21,9 @@
 //For civilian jobs that may have a uniform, but not a strict one
 #define SEMIFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty")
 
+//For civilian jobs that may have a strict uniform.
+#define SEMIANDFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty", "NanoTrasen Liaison", "Research Director", "Senior Researcher", "Scientist", "SolGov Representative")
+
 //For NanoTrasen employees
 #define NANOTRASEN_ROLES list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant")
 

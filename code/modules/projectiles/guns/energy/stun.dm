@@ -22,6 +22,7 @@
 	force = 8
 	max_shots = 10
 	projectile_type = /obj/item/projectile/beam/stun/heavy
+	wielded_item_state = "tasercarbine-wielded"
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
@@ -60,6 +61,7 @@
 	force = 10
 	max_shots = 12
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
+	wielded_item_state = "stunrifle-wielded"
 
 /obj/item/weapon/gun/energy/crossbow
 	name = "mini energy-crossbow"

@@ -99,3 +99,9 @@
 	item_cost = 68
 	antag_costs = list(MODE_MERCENARY = 9)
 	path = /obj/item/weapon/gun/energy/pulse_rifle
+
+/datum/uplink_item/item/visible_weapons/flechetterifle
+	name = "Flechette Rifle"
+	item_cost = 60
+	antag_costs = list(MODE_MERCENARY = 9)
+	path = /obj/item/weapon/gun/magnetic/railgun/flechette

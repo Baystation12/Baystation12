@@ -321,7 +321,7 @@
 /mob/living/carbon/human/handle_post_breath(datum/gas_mixture/breath)
 	..()
 	//spread some viruses while we are at it
-	if(breath && virus2.len > 0 && prob(10))
+	if(breath && !internal && virus2.len > 0 && prob(10))
 		for(var/mob/living/carbon/M in view(1,src))
 			src.spread_disease_to(M)
 
@@ -595,6 +595,7 @@
 					light_amount = max(0, min(14,(L.lum_r + L.lum_g + L.lum_b)) * 1.5) //hardcapped so it's not abused by having a ton of flashlights
 				else
 					light_amount =  5
+				light_amount = T.get_lumcount() * 10
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 			nutrition = Clamp(nutrition, 0, 550)
@@ -603,11 +604,7 @@
 		var/light_amount = 0
 		if(isturf(loc))
 			var/turf/T = loc
-			var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
-			if(L)
-				light_amount = L.lum_r + L.lum_g + L.lum_b //hardcapped so it's not abused by having a ton of flashlights
-			else
-				light_amount =  10
+			light_amount = T.get_lumcount() * 10
 		if(light_amount > species.light_dam) //if there's enough light, start dying
 			take_overall_damage(1,1)
 		else //heal in the dark
@@ -956,8 +953,7 @@
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
 		var/turf/T = loc
-		var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
-		if(L && L.lum_r + L.lum_g + L.lum_b == 0)
+		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
 
 /mob/living/carbon/human/handle_stomach()

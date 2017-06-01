@@ -34,8 +34,6 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 
 datum/controller/game_controller/proc/setup()
-	world.tick_lag = config.Ticklag
-
 	spawn(20)
 		createRandomZlevel()
 
@@ -68,14 +66,14 @@ datum/controller/game_controller/proc/setup_objects()
 
 	report_progress("Initializing turbolifts")
 	for(var/thing in turbolifts)
-		if(!deleted(thing))
-			var/obj/turbolift_map_holder/lift = thing
+		var/obj/turbolift_map_holder/lift = thing
+		if(!QDELETED(lift))
 			lift.initialize()
 			CHECK_SLEEP_MASTER
 
 	report_progress("Initializing objects")
 	for(var/atom/movable/object)
-		if(!deleted(object))
+		if(!QDELETED(object))
 			object.initialize()
 			CHECK_SLEEP_MASTER
 

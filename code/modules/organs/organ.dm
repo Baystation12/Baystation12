@@ -144,12 +144,12 @@ var/list/organ_cache = list()
 	//** Handle the effects of infections
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
-	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
+	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(owner.virus_immunity()*0.3))
 		germ_level--
 
 	if (germ_level >= INFECTION_LEVEL_ONE/2)
 		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
-		if(antibiotics < 5 && prob(round(germ_level/6)))
+		if(antibiotics < 5 && prob(round(germ_level/6 * owner.immunity_weakness() * 0.01)))
 			germ_level++
 
 	if(germ_level >= INFECTION_LEVEL_ONE)
@@ -159,7 +159,7 @@ var/list/organ_cache = list()
 	if (germ_level >= INFECTION_LEVEL_TWO)
 		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 		//spread germs
-		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(owner.immunity_weakness() * 0.3) ))
 			parent.germ_level++
 
 		if (prob(3))	//about once every 30 seconds
@@ -168,6 +168,8 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
+	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
+		return
 	if(dna)
 		if(!rejecting)
 			if(blood_incompatible(dna.b_type, owner.dna.b_type, species, owner.species))

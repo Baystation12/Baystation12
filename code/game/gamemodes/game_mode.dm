@@ -522,7 +522,7 @@ proc/get_nt_opposed()
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
 
-	if(master_mode != "secret")
+	if(!ticker.hide_mode)
 		to_chat(usr, "<b>The roundtype is [capitalize(ticker.mode.name)]</b>")
 		if(ticker.mode.round_description)
 			to_chat(usr, "<i>[ticker.mode.round_description]</i>")
