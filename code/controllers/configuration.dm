@@ -167,6 +167,9 @@ var/list/gamemode_cache = list()
 	var/ghost_interaction = 0
 
 	var/comms_password = ""
+	var/ban_comms_password = null
+
+	var/login_export_addr = null
 
 	var/enter_allowed = 1
 
@@ -627,6 +630,12 @@ var/list/gamemode_cache = list()
 
 				if("comms_password")
 					config.comms_password = value
+
+				if("ban_comms_password")
+					config.ban_comms_password = value
+
+				if("login_export_addr")
+					config.login_export_addr = value
 
 				if("irc_bot_host")
 					config.irc_bot_host = value

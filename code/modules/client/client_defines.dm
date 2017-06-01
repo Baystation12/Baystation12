@@ -38,6 +38,10 @@
 	var/mute_irc = 0
 	var/warned_about_multikeying = 0	// Prevents people from being spammed about multikeying every time their mob changes.
 
+	var/shadowbanned = 0
+	var/shadowban_reason = null
+	var/shadowban_setter = null
+
 		////////////////////////////////////
 		//things that require the database//
 		////////////////////////////////////

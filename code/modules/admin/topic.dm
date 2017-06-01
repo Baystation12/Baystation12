@@ -1870,6 +1870,45 @@
 			if("No")
 				return
 
+	if(href_list["sbemplace"])
+		var/mob/M = locate(href_list["sbemplace"])
+		if(!ismob(M)) return
+
+		var/client/C = M.client
+
+		if(!C)
+			to_chat(usr, "<span class='danger'>Client has gone away.</span>")
+			return
+
+		switch(alert("Really emplace shadowban? This will create a one-time PERMANENT BAN for the current connection details. The shadowban message will be used as the ban message, you CAN NOT change it here", "Emplace Ban", "Yes", "No"))
+			if("Yes")
+				if(!_DB_ban_record(C.shadowban_setter, "0", "127.0.0.1", 1, M, -1, C.shadowban_reason))
+					return
+				log_and_message_admins("SHADOWBAN: <font color='#ff0000'>EMPLACED</font> the shadowban on [key_name(C)]")
+				ban_unban_log_save("[C.shadowban_setter] has permabanned [C.ckey]. - Reason: [C.shadowban_reason] - This is a ban until appeal.")
+				notes_add(C.ckey,"[C.shadowban_setter] has permabanned [C.ckey]. - Reason: [C.shadowban_reason] - This is a ban until appeal.",C.shadowban_setter)
+				qdel(C)
+			if("No")
+				return
+	if(href_list["sbremove"])
+		var/mob/M = locate(href_list["sbremove"])
+		if(!ismob(M)) return
+
+		var/client/C = M.client
+
+		if(!C)
+			to_chat(usr, "<span class='danger'>Client has gone away.</span>")
+			return
+
+		switch(alert("Really REMOVE shadowban? It can not be put back in-game! This will only TEMPORARILY allow bypassing of the shadowban. The shadowban will be automatically reapplied next time they connect, unless allowed externally.", "Remove Shadowban", "Yes", "No"))
+			if("Yes")
+				C.shadowbanned = 0
+				C.shadowban_reason = null
+				C.shadowban_setter = null
+				log_and_message_admins("SHADOWBAN: removed the shadowban on [key_name(C)] for this connection")
+			if("No")
+				return
+
 
 mob/living/proc/can_centcom_reply()
 	return 0

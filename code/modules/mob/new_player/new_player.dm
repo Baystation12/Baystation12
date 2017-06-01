@@ -101,7 +101,10 @@
 		return 1
 
 	if(href_list["ready"])
-		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
+		if(client && client.is_shadowbanned())
+			log_and_message_admins("SHADOWBAN: Tried to ready up; silently denying it")
+			ready = 0
+		else if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
 			ready = text2num(href_list["ready"])
 		else
 			ready = 0
@@ -117,6 +120,10 @@
 
 		if(!config.respawn_delay || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
+			if(client.is_shadowbanned())
+				log_and_message_admins("SHADOWBAN: Tried to observe; faking error")
+				to_chat(src, "<span class='danger'>Ghost spawn failed: mob not found!</span>")
+				return 1
 			var/mob/observer/ghost/observer = new()
 
 			spawning = 1
@@ -317,6 +324,10 @@
 		return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
 		alert("Wrong rank for [rank]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
+		return 0
+	if(client && client.is_shadowbanned())
+		log_and_message_admins("SHADOWBAN: Tried to join round as [rank]; faking error")
+		to_chat(usr, "<span class='danger'>Encountered unknown error joining round: 0xED80C194</span>")
 		return 0
 
 
