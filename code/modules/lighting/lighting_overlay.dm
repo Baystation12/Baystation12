@@ -20,16 +20,19 @@
 	var/needs_update = FALSE
 
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
-	. = ..()
-	verbs.Cut()
-	total_lighting_overlays++
-
 	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
-	T.lighting_overlay = src
-	T.luminosity = 0
-	if(no_update)
-		return
-	update_overlay()
+	if(T.dynamic_lighting)
+		. = ..()
+		verbs.Cut()
+		total_lighting_overlays++
+
+		T.lighting_overlay = src
+		T.luminosity = 0
+		if(no_update)
+			return
+		update_overlay()
+	else
+		qdel(src)
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	set waitfor = FALSE
@@ -40,6 +43,10 @@
 			log_debug("A lighting overlay realised its loc was NOT a turf (actual loc: [loc][loc ? ", " + loc.type : "null"]) in update_overlay() and got qdel'ed!")
 		else
 			log_debug("A lighting overlay realised it was in nullspace in update_overlay() and got pooled!")
+		qdel(src)
+		return
+	if(!T.dynamic_lighting)
+		log_debug("A lighting overlay found it's way onto a statically lit turf! loc: [loc] , [loc.type]")
 		qdel(src)
 		return
 

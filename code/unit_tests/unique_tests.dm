@@ -77,6 +77,44 @@
 		pass("All outfit datums have unique names.")
 	return 1
 
+/datum/unit_test/languages_shall_have_unique_names
+	name = "UNIQUENESS: Languages Shall Have Unique Names"
+
+/datum/unit_test/languages_shall_have_unique_names/start_test()
+	var/list/languages_by_name = list()
+
+	for(var/lt in subtypesof(/datum/language))
+		var/datum/language/l = lt
+		group_by(languages_by_name, initial(l.name), lt)
+
+	var/number_of_issues = number_of_issues(languages_by_name, "Language Names")
+	if(number_of_issues)
+		fail("[number_of_issues] issue\s with language datums found.")
+	else
+		pass("All languages datums have unique names.")
+	return 1
+
+/datum/unit_test/languages_shall_have_no_or_unique_keys
+	name = "UNIQUENESS: Languages Shall Have No or Unique Keys"
+
+/datum/unit_test/languages_shall_have_no_or_unique_keys/start_test()
+	var/list/languages_by_key = list()
+
+	for(var/lt in subtypesof(/datum/language))
+		var/datum/language/l = lt
+		var/language_key = initial(l.key)
+		if(!language_key)
+			continue
+
+		group_by(languages_by_key, language_key, lt)
+
+	var/number_of_issues = number_of_issues(languages_by_key, "Language Keys")
+	if(number_of_issues)
+		fail("[number_of_issues] issue\s with language datums found.")
+	else
+		pass("All languages datums have unique keys.")
+	return 1
+
 /datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)

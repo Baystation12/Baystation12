@@ -153,7 +153,7 @@
 	io.holder.interact(user) // This is to update the UI.
 
 /obj/item/device/integrated_electronics/analyzer
-	name = "circuit analuzer"
+	name = "circuit analyzer"
 	desc = "This tool allows one to analyze custom assemblies and their components from a distance."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "analyzer"
