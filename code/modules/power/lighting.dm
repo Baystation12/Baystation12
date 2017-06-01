@@ -624,8 +624,8 @@ obj/machinery/light/proc/burn_out()
 	broken_chance = 5
 	matter = list("glass" = 100)
 
-	brightness_range = 3
-	brightness_power = 2
+	brightness_range = 6
+	brightness_power = 3
 	brightness_color = "#a0a080"
 	lighting_modes = list(
 		"emergency_lighting" = list(l_range = 3, l_power = 1, l_color = "#da0205"),
