@@ -227,7 +227,10 @@
 		playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
 
 	// Just in case somehow the organ we're extracting from an organic is an MMI
-	if(istype(O, /obj/item/organ/internal/mmi_holder))
+	if(istype(O, /obj/item/organ/internal/mmi_holder/posibrain))
+		var/obj/item/organ/internal/mmi_holder/posibrain/brain = O
+		brain.transfer_and_delete()
+	else if(istype(O, /obj/item/organ/internal/mmi_holder))
 		var/obj/item/organ/internal/mmi_holder/brain = O
 		brain.transfer_and_delete()
 
