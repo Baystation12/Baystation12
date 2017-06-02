@@ -121,8 +121,11 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	qdel(holder)
 	var/radiation_level = rand(100, 200)
 
-	// Copied from the SM for proof of concept. //Not any more --Cirra //Use the whole z proc --Leshana
-	radiation_repository.z_radiate(locate(1, 1, holder.z), radiation_level, 1)
+	// Copied from the SM for proof of concept. //Not any more --Cirra
+	for(var/area/A)
+		if(A.z == holder.z)
+			for(var/turf/T in A)
+				radiation_repository.irradiated_turfs[T] = radiation_level
 
 	for(var/mob/living/mob in living_mob_list_)
 		var/turf/T = get_turf(mob)

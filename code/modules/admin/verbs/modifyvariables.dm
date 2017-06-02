@@ -664,6 +664,11 @@
 	handled_vars = list("dir" = /atom/proc/set_dir)
 	predicates = list(/proc/is_dir_predicate)
 
+/decl/vv_set_handler/rad_handler
+	handled_type = /atom
+	handled_vars = list("rad_power" = /atom/proc/update_radiation)
+	predicates = list(/proc/is_num_predicate)
+
 /decl/vv_set_handler/ghost_appearance_handler
 	handled_type = /mob/observer/ghost
 	handled_vars = list("appearance" = /mob/observer/ghost/proc/set_appearance)

@@ -345,7 +345,8 @@
 		icon_state = "door1"
 	else
 		icon_state = "door0"
-	radiation_repository.resistance_cache.Remove(get_turf(src))
+	var/turf/T = get_turf(src)
+	T.calc_rad_resistance()
 	return
 
 

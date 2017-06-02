@@ -30,10 +30,9 @@ var/global/list/rad_collectors = list()
 	last_power = last_power_new
 	last_power_new = 0
 
-	if(P && active)
-		var/rads = radiation_repository.get_rads_at_turf(get_turf(src))
-		if(rads)
-			receive_pulse(rads * 5) //Maths is hard
+	var/turf/T = get_turf(src)
+	if(T in radiation_repository.irradiated_turfs)
+		receive_pulse((radiation_repository.irradiated_turfs[T] * 5)) //Maths is hard
 
 	if(P)
 		if(P.air_contents.gas["phoron"] == 0)

@@ -6,6 +6,7 @@
 
 	var/material_name
 
+	rad_power = 1
 	var/percent_depleted = 1
 	var/list/rod_quantities = list()
 	var/fuel_type = "composite"
@@ -44,10 +45,10 @@
 
 /obj/item/weapon/fuel_assembly/process()
 	if(!radioactivity)
-		return PROCESS_KILL
+		radiation_repository.sources.Remove(src)
 
 	if(istype(loc, /turf))
-		radiation_repository.radiate(src, max(1,ceil(radioactivity/30)))
+		rad_power = max(1,ceil(radioactivity/30))
 
 /obj/item/weapon/fuel_assembly/Destroy()
 	processing_objects -= src

@@ -6,7 +6,7 @@
 	if(can_open == WALL_OPENING)
 		return
 
-	radiation_repository.resistance_cache.Remove(src)
+	calc_rad_resistance()
 
 	if(density)
 		can_open = WALL_OPENING
