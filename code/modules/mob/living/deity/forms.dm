@@ -16,6 +16,7 @@ Each plays slightly different and has different challenges/benefits
 	var/list/starting_feats //This is used to give different forms different starting trees
 
 /datum/god_form/New(var/mob/living/deity/D)
+	..()
 	D.feats += name
 	D.icon_state = god_icon_state
 	D.desc = desc

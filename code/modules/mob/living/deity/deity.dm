@@ -55,9 +55,8 @@
 	minions.Cut()
 	eyeobj.release()
 	structures.Cut()
-	qdel(eyeobj.visualnet)
-	qdel(eyeobj)
-	qdel(form)
+	qdel_null(eyeobj)
+	qdel_null(form)
 	return ..()
 
 /mob/living/deity/verb/jump_to_follower()
@@ -69,7 +68,8 @@
 	var/list/could_follow = list()
 	for(var/m in minions)
 		var/datum/mind/mind = m
-		could_follow += mind.current
+		if(mind.current.stat != DEAD)
+			could_follow += mind.current
 
 	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow
 	if(choice)
