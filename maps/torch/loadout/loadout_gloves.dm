@@ -45,15 +45,24 @@
 	cost = 3
 
 /datum/gear/gloves/ring
-	display_name = "ring, gold"
-	path = /obj/item/clothing/gloves/ring/gold
+	display_name = "ring"
+	path = /obj/item/clothing/gloves/ring/cti
 	cost = 2
 
 /datum/gear/gloves/ring/New()
 	..()
 	var/ringtype = list()
-	ringtype["ring, gold"] = /obj/item/clothing/gloves/ring/gold
-	ringtype["ring, silver"] = /obj/item/clothing/gloves/ring/silver
-	ringtype["ring, platinum"] = /obj/item/clothing/gloves/ring/platinum
-	ringtype["ring, diamond"] = /obj/item/clothing/gloves/ring/diamond
+	ringtype["CTI ring"] = /obj/item/clothing/gloves/ring/cti
+	ringtype["Mariner University ring"] = /obj/item/clothing/gloves/ring/mariner
+	ringtype["engagement ring"] = /obj/item/clothing/gloves/ring/engagement
+	ringtype["signet ring"] = /obj/item/clothing/gloves/ring/seal/signet
+	ringtype["masonic ring"] = /obj/item/clothing/gloves/ring/seal/mason
+	ringtype["ring, steel"] = /obj/item/clothing/gloves/ring/material/steel
+	ringtype["ring, bronze"] = /obj/item/clothing/gloves/ring/material/bronze
+	ringtype["ring, silver"] = /obj/item/clothing/gloves/ring/material/silver
+	ringtype["ring, gold"] = /obj/item/clothing/gloves/ring/material/gold
+	ringtype["ring, platinum"] = /obj/item/clothing/gloves/ring/material/platinum
+	ringtype["ring, glass"] = /obj/item/clothing/gloves/ring/material/glass
+	ringtype["ring, wood"] = /obj/item/clothing/gloves/ring/material/wood
+	ringtype["ring, plastic"] = /obj/item/clothing/gloves/ring/material/plastic
 	gear_tweaks += new/datum/gear_tweak/path(ringtype)
