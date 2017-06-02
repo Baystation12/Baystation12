@@ -38,6 +38,8 @@ var/global/repository/radiation/radiation_repository = new()
 		var/datum/radiation_source/source = value
 		if(source.rad_power < .)
 			continue // Already being affected by a stronger source
+		if(source.source_turf.z != T.z)
+			continue // Radiation is not multi-z
 		var/dist = get_dist(source.source_turf, T)
 		if(dist > source.range)
 			continue // Too far to possibly affect
