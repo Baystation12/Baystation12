@@ -37,7 +37,10 @@
 // load_type and get runtime errors, don't come crying to me.
 /obj/item/weapon/gun/magnetic/railgun/show_ammo(var/mob/user)
 	var/obj/item/weapon/rcd_ammo/ammo = loaded
-	to_chat(user, "<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>")
+	if (ammo)
+		to_chat(user, "<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>")
+	else
+		to_chat(user, "<span class='notice'>There is nothing loaded.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/check_ammo()
 	var/obj/item/weapon/rcd_ammo/ammo = loaded
@@ -97,8 +100,8 @@
 	loaded = /obj/item/weapon/magnetic_ammo
 
 	firemodes = list(
-		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, requires_two_hands=1, burst_accuracy=null, dispersion=null),
-		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    requires_two_hands=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=1, burst_accuracy=null, dispersion=null),
+		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/out_of_ammo()
