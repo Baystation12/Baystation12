@@ -49,6 +49,7 @@
 
 	layer = ABOVE_OBJ_LAYER
 
+	rad_power = 1 //So it gets added to the repository
 	var/gasefficency = 0.25
 
 	var/base_icon_state = "darkmatter"
@@ -381,7 +382,7 @@
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 
-	radiation_repository.radiate(src, power * 1.5) //Better close those shutters!
+	rad_power = power * 1.5 //Better close those shutters!
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 	handle_admin_warnings()
 

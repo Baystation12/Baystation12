@@ -1389,6 +1389,8 @@
 			return global.ticker;
 		if("tickerProcess")
 			return global.tickerProcess;
+		if("to_process")
+			return global.to_process;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
 		if("total_lighting_overlays")
@@ -2888,6 +2890,8 @@
 			global.ticker=newval;
 		if("tickerProcess")
 			global.tickerProcess=newval;
+		if("to_process")
+			global.to_process=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -3692,6 +3696,7 @@
 	"tick_multiplier",
 	"ticker",
 	"tickerProcess",
+	"to_process",
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",
