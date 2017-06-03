@@ -2,7 +2,7 @@
 	return base * Uses
 
 /obj/item/ammo_casing/Value()
-	if(!BB)
+	if(!projectile)
 		return 1
 	return ..()
 
