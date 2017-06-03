@@ -423,6 +423,7 @@
 #include "code\game\gamemodes\mixed\bughunt.dm"
 #include "code\game\gamemodes\mixed\conflux.dm"
 #include "code\game\gamemodes\mixed\crossfire.dm"
+#include "code\game\gamemodes\mixed\cultling.dm"
 #include "code\game\gamemodes\mixed\infestation.dm"
 #include "code\game\gamemodes\mixed\intrigue.dm"
 #include "code\game\gamemodes\mixed\lizard.dm"
