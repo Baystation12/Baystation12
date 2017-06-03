@@ -68,6 +68,10 @@
 	key = "blink"
 	emote_message_3p = "USER blinks."
 
+/decl/emote/visible/blink/do_extra(mob/living/carbon/human/user)
+	if(istype(user))
+		user.next_blink = world.time + 8 MINUTES
+
 /decl/emote/visible/airguitar
 	key = "airguitar"
 	check_restraints = TRUE

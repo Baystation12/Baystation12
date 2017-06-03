@@ -446,3 +446,11 @@
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
+/mob/var/gun_warned
+/obj/item/weapon/gun/projectile/attack_hand(mob/user)
+	. = ..()
+	if(user == loc && !user.gun_warned)
+		user.gun_warned = 1
+		to_chat(user, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you got a <span class ='danger'>GUN</span>!</b></font>")
+		to_chat(user, "It's a <span class ='danger'>DANGEROUS</span> thing that can <span class ='danger'>HURT</span> someone or even <span class ='danger'>KILL THEM</span> (they won't be able to RP if they're dead!).")
+		to_chat(user, "Now, you don't have to do this! Just put it down and walk away. Get a cup of hot chocolate. Guns are <span class ='danger'>NOT TOYS</span>!")

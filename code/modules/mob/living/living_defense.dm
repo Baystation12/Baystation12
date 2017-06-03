@@ -245,10 +245,17 @@
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()
 	return 1
-
+/mob/living/var/fire_warned
 /mob/living/proc/IgniteMob()
 	if(fire_stacks > 0 && !on_fire)
 		on_fire = 1
+
+		if(!fire_warned)
+			fire_warned = 1
+			to_chat(src, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you're <span class ='danger'>ON FIRE</span>!</b></font>")
+			to_chat(src, "That is <span class ='danger'>NOT GOOD</span>! Most people aren't supposed to be in fire, you might get <span class ='danger'>HURT</span> or even <span class ='danger'>DIE</span>!")
+			to_chat(src, "Stop Drop and Roll! Easy to learn, easy to master! Don't lose your cool!")
+
 		set_light(light_range + 3)
 		update_fire()
 
