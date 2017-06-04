@@ -115,6 +115,7 @@
 /obj/screen/movable/action_button
 	var/datum/action/owner
 	screen_loc = "WEST,NORTH"
+	var/overlay_icon_state
 
 /obj/screen/movable/action_button/Click(location,control,params)
 	var/list/modifiers = params2list(params)
@@ -132,16 +133,14 @@
 	icon = owner.button_icon
 	icon_state = owner.background_icon_state
 
-	overlays.Cut()
 	var/image/img
 	if(owner.action_type == AB_ITEM && owner.target)
 		var/obj/item/I = owner.target
 		img = image(I.icon, src , I.icon_state)
-	else if(owner.button_icon && owner.button_icon_state)
+	else if(owner.button_icon && owner.button_icon_state && (overlay_icon_state != owner.button_icon_state))
 		img = image(owner.button_icon,src,owner.button_icon_state)
-	img.pixel_x = 0
-	img.pixel_y = 0
-	overlays += img
+	overlays = list(img)
+	overlay_icon_state = owner.button_icon_state
 
 	if(!owner.IsAvailable())
 		color = rgb(128,0,0,128)
