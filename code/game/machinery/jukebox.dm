@@ -150,7 +150,7 @@ datum/track/New(var/title_name, var/audio)
 			M.Stun(10)
 			M.Paralyse(4)
 		else
-			M.make_jittery(500)
+			M.make_jittery(400)
 	spawn(15)
 		explode()
 

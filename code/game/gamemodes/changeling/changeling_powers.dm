@@ -803,7 +803,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
-	T.make_jittery(1000)
+	T.make_jittery(400)
 	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
 	feedback_add_details("changeling_powers","DTHS")
 	return 1

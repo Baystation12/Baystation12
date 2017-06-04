@@ -599,3 +599,23 @@ proc/is_blind(A)
 
 /mob/proc/ssd_check()
 	return !client && !teleop
+
+/mob/proc/jittery_damage()
+	return //Only for living/carbon/human/
+
+/mob/living/carbon/human/jittery_damage()
+	var/mob/living/carbon/human/H = src
+	var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
+	if(L && istype(L))
+		if(L.robotic >= ORGAN_ROBOT)
+			return 0//Robotic hearts don't get jittery.
+	if(src.jitteriness >= 400 && prob(5)) //Kills people if they have high jitters.
+		if(prob(1))
+			L.take_damage(L.max_damage / 2, 0)
+			to_chat(src, "<span class='danger'>Something explodes in your heart.</span>")
+			admin_victim_log(src, "has taken <b>lethal heart damage</b> at jitteriness level [src.jitteriness].")
+		else
+			L.take_damage(1, 0)
+			to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
+			admin_victim_log(src, "has taken <i>minor heart damage</i> at jitteriness level [src.jitteriness].")
+	return 1

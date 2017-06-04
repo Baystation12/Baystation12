@@ -45,18 +45,22 @@ note dizziness decrements automatically in the mob's Life() proc.
 // jitteriness - copy+paste of dizziness
 /mob/var/is_jittery = 0
 /mob/var/jitteriness = 0//Carbon
-/mob/proc/make_jittery(var/amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
-		return
 
+/mob/proc/make_jittery(var/amount)
+	return //Only for living/carbon/human/
+
+/mob/living/carbon/human/make_jittery(var/amount)
+	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery
+		return
+	if(!jittery_damage())
+		return //Robotic hearts don't get jittery.
 	jitteriness = min(1000, jitteriness + amount)	// store what will be new value
 													// clamped to max 1000
 	if(jitteriness > 100 && !is_jittery)
 		spawn(0)
 			jittery_process()
 
-
-// Typo from the oriignal coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
+// Typo from the original coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
 /mob/proc/jittery_process()
 	is_jittery = 1
 	while(jitteriness > 100)
