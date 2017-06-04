@@ -31,12 +31,11 @@
 	var/next_offer_time					//The time a discount will next be offered
 	var/datum/uplink_item/discount_item	//The item to be discounted
 	var/discount_amount					//The amount as a percent the item will be discounted by
-	var/nano_state						//If set, use this instead of inventory state for nano_manager
 
 /obj/item/device/uplink/nano_host()
 	return loc
 
-/obj/item/device/uplink/New(var/atom/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT, var/ui_state)
+/obj/item/device/uplink/New(var/atom/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
 	if(!istype(location, /atom))
 		CRASH("Invalid spawn location. Expected /atom, was [location ? location.type : "NULL"]")
 
@@ -48,7 +47,6 @@
 	world_uplinks += src
 	uses = telecrystals
 	processing_objects += src
-	nano_state = ui_state
 
 /obj/item/device/uplink/Destroy()
 	uplink_owner = null
@@ -115,7 +113,7 @@
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = inventory_state)
 	var/title = "Remote Uplink"
 	var/data[0]
 
@@ -132,10 +130,7 @@
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)	// No auto-refresh
-		var/ustate = inventory_state
-		if(nano_state)
-			ustate = nano_state
-		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = ustate)
+		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = uistate)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -259,3 +254,6 @@
 /obj/item/device/radio/headset/uplink/New()
 	..()
 	hidden_uplink = new(src)
+
+/obj/item/device/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = inventory_state)
+	return ..(user,ui_key,ui,force_open, contained_state)

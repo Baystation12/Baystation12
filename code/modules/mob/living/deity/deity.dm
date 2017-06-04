@@ -13,7 +13,7 @@
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
 	var/list/feats = list() //These are the deities 'skills' that they unlocked. Which can unlock abilities, new categories, etc. What this list actually IS is the names of the feats and whatever data they need,
-	var/obj/item/device/uplink/mob_uplink
+	var/obj/item/device/uplink/contained/mob_uplink
 	var/datum/god_form/form
 	var/datum/current_boon
 
@@ -23,7 +23,7 @@
 		eyeobj = new eye_type(src)
 		eyeobj.possess(src)
 		eyeobj.visualnet.add_source(src)
-	mob_uplink = new(src, telecrystals = 0, ui_state = contained_state)
+	mob_uplink = new(src, telecrystals = 0)
 
 /mob/living/deity/Life()
 	. = ..()
