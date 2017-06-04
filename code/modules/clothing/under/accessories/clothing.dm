@@ -48,6 +48,11 @@
 	desc = "A tight-fitting blouse with intricate designs of flowers embroidered on it."
 	icon_state = "qipao"
 
+/obj/item/clothing/accessory/sweater
+	name = "turtleneck sweater"
+	desc = "A stylish sweater to keep you warm on those cold days."
+	icon_state = "sweater"
+
 /obj/item/clothing/accessory/ubac
 	name = "black ubac"
 	desc = "A flexible, close-fitting shirt with camouflage sleeves designed to be worn under combat equipment. This one is black."
