@@ -1,0 +1,6 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscdel: "Xenomorphs have been removed from the add-antagonist rotation."
