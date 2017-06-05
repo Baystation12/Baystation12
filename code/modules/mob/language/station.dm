@@ -209,3 +209,13 @@
 	colour = "tajaran"
 	key = "l"
 	flags = WHITELISTED | SIGNLANG | NO_STUTTER | NONVERBAL
+
+/datum/language/confederate
+	name = LANGUAGE_INDEPENDENT
+	desc = "The official language of the Terran Confederacy, evolved from the languages of Eastern Europe and Northern Asia."
+	speech_verb = "speaks"
+	colour = "terran"
+	key = "r"
+	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
+	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
+	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
