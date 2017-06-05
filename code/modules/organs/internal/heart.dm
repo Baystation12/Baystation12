@@ -70,7 +70,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	if(!owner || owner.in_stasis || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
-	if(pulse != PULSE_NONE || robotic >= ORGAN_ROBOT)
+	if(pulse != PULSE_NONE)
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
@@ -116,7 +116,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 				blood_max *= 0.8
 			if(PULSE_FAST)
 				blood_max *= 1.25
-			if(PULSE_2FAST, PULSE_THREADY)
+			if(PULSE_2FAST)
 				blood_max *= 1.5
 
 		if(CE_STABLE in owner.chem_effects) // inaprovaline
