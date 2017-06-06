@@ -57,3 +57,8 @@
 	display_name = "sunglasses, presciption"
 	path = /obj/item/clothing/glasses/sunglasses/prescription
 	cost = 2
+
+/datum/gear/eyes/mesonocle
+	display_name = "Meson Scanner, monocle"
+	path = /obj/item/clothing/glasses/meson/monocle
+	allowed_roles = list("Chief Engineer","Atmospheric Technician", "Station Engineer")

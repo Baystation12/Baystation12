@@ -753,6 +753,7 @@ obj/random/obstruction //Large objects to block things off in maintenance
 					prob(7);/obj/item/clothing/glasses/regular,\
 					prob(5);/obj/item/clothing/glasses/meson,\
 					prob(4);/obj/item/clothing/glasses/meson/prescription,\
+					prob(3);/obj/item/clothing/glasses/meson/monocle,\
 					prob(6);/obj/item/clothing/glasses/science,\
 					prob(5);/obj/item/clothing/glasses/material,\
 					prob(3);/obj/item/clothing/glasses/welding,\
