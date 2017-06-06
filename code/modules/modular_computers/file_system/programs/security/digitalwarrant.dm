@@ -96,6 +96,7 @@ var/warrant_uid = 0
 
 	if(href_list["savewarrant"])
 		. = 1
+		broadcast_security_hud_message("\A [activewarrant.fields["arrestsearch"]] for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
 		data_core.warrants |= activewarrant
 		activewarrant = null
 
