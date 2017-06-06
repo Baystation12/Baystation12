@@ -8,6 +8,7 @@
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT
+	slot_flags = SLOT_BELT
 	var/datum/data/record/warrant/active
 
 //look at it
