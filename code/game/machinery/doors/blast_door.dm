@@ -68,8 +68,7 @@
 		icon_state = icon_state_closed
 	else
 		icon_state = icon_state_open
-	var/turf/T = get_turf(src)
-	T.calc_rad_resistance()
+	radiation_repository.resistance_cache.Remove(get_turf(src))
 	return
 
 // Proc: force_open()
