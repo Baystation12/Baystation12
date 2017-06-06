@@ -3,8 +3,8 @@
 /obj/effect/accelerated_particle
 	name = "Accelerated Particles"
 	desc = "Small things moving very fast."
-	icon = 'icons/obj/machines/particle_accelerator2.dmi'
-	icon_state = "particle"//Need a new icon for this
+	icon = 'icons/obj/machines/particle_accelerator.dmi'
+	icon_state = "particle"
 	anchored = 1
 	density = 1
 	var/movement_range = 10
@@ -72,7 +72,7 @@
 	var/radiation = (energy*2)
 	M.apply_effect((radiation*3),IRRADIATE,blocked = M.getarmor(null, "rad"))
 	M.updatehealth()
-//	to_chat(M, "<span class='warning'>You feel odd.</span>")
+	to_chat(M, "<span class='warning'>You feel odd.</span>")
 	return
 
 
