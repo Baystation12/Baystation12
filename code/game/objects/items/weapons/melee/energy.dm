@@ -8,7 +8,7 @@
 	flags = NOBLOODY
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
-	anchored = 1
+	anchored = 1 //Why?
 	if(active)
 		return
 	active = 1
@@ -152,6 +152,16 @@
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		return 1
 	return 0
+
+/obj/item/weapon/melee/energy/sword/attackby(var/obj/item/weapon/melee/energy/sword/S as obj, mob/user as mob)
+	if(!istype(S))
+		return
+	else
+		user.put_in_hands(new /obj/item/weapon/twohanded/toggled/energy/dualsaber/(user.loc))
+		user.visible_message("<span class='notice'>[user] links the pommels of their [src]s with a satisfying click.</span>")
+		to_chat(user, "<span class='notice'> A hidden speaker chirps out, \"Energy blade power supply safeties disabled -- Have a safe and productive day.\"</span>")
+		qdel(S) // We delete both Energy swords, as we no longer need them.
+		qdel(src)
 
 /obj/item/weapon/melee/energy/sword/pirate
 	name = "energy cutlass"
