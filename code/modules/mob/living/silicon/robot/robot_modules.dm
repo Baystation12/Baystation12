@@ -410,7 +410,8 @@ var/global/list/robot_modules = list(
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
 					"Drone" = "drone-sec",
-					"Eyebot" = "eyebot-security"
+					"Eyebot" = "eyebot-security",
+					"Tentacutron" = "orb_thing"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
