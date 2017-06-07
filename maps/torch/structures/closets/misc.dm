@@ -101,6 +101,7 @@
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined
 	name = "combined sidearm cabinet"
+	req_access = list(access_heads,access_keycard_auth)
 	will_contain = list(
 		/obj/item/weapon/gun/energy/gun/small = 2,
 		/obj/item/weapon/gun/energy/gun = 3

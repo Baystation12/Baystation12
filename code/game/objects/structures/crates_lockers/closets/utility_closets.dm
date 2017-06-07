@@ -246,6 +246,8 @@
 	desc = "It's wall-mounted storage unit for first aid supplies."
 
 	will_contain = list(
-		/obj/random/firstaid,
-		/obj/random/medical/lite = 12
+		/obj/random/medical/lite,
+		/obj/random/medical/lite,
+		/obj/random/medical/lite,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/firstaid/regular, /obj/item/weapon/storage/firstaid/fire, /obj/item/weapon/storage/firstaid/o2, /obj/item/weapon/storage/firstaid/toxin))
 	)

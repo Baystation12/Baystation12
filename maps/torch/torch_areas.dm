@@ -1013,8 +1013,8 @@
 /area/crew_quarters/heads/office/cos
 	name = "\improper Command - CoS' Office"
 
-/area/crew_quarters/heads/office/cl
-	name = "\improper Command - CL's Office"
+/area/crew_quarters/heads/office/ntl
+	name = "\improper Command - NTL's Office"
 
 /area/crew_quarters/heads/office/sgr
 	name = "\improper Command - SCGR's Office"
