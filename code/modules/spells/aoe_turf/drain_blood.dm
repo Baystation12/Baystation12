@@ -45,7 +45,7 @@
 			L.adjustToxLoss(-2.5)
 
 /obj/item/projectile/beam/blood_effect
-	name = "literally just blood"
+	name = "blood jet"
 	icon_state = "blood"
 	damage = 0
 	randpixel = 0

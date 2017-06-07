@@ -1,6 +1,6 @@
 /spell/create_air
 	name = "Create Air"
-	desc = "Use your mental strength to literally tear a hole from this dimension to the next, letting things through..."
+	desc = "A much used spell used in the vasteness of space to make it not so killey."
 
 	charge_max = 200
 	spell_flags = Z2NOCAST

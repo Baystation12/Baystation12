@@ -36,7 +36,7 @@
 /obj/structure/deity/altar/process()
 	if(!target || world.time < next_cycle)
 		return
-	if(!linked_god)
+	if(!linked_god || target.stat)
 		remove_target()
 		return
 

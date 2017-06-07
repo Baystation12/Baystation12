@@ -53,11 +53,6 @@
 	important_structure = 1
 	build_cost = 400
 	icon_state = "pylon"
-	var/datum/radio_frequency/radio_connection
-
-/obj/structure/deity/pylon/New()
-	..()
-	radio_connection = radio_controller.add_object(src, 666, "deity")
 
 /obj/structure/deity/pylon/attack_deity(var/mob/living/deity/D)
 	if(D.pylon == src)
@@ -68,28 +63,13 @@
 /obj/structure/deity/pylon/Destroy()
 	if(linked_god && linked_god.pylon == src)
 		linked_god.leave_pylon()
-	radio_connection = null
-	radio_controller.remove_object(src, 666)
 	return ..()
 
 /obj/structure/deity/pylon/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	var/datum/signal/S = new()
-	S.data = list("text" = text, "deity" = linked_god, "language" = speaking, "mob" = M, "verb" = verb)
-	S.frequency = 666
-	radio_connection.post_signal(src,S,"deity")
-	if(linked_god)
-		to_chat(linked_god, "\icon[src] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[linked_god];pylon=\ref[src];'>P</A>) [verb], [linked_god.pylon == src ? "<b>" : ""]<span class='message'><span class='body'>\"[text]\"</span></span>[linked_god.pylon == src ? "</b>" : ""]</span>")
-
-/obj/structure/deity/pylon/receive_signal(var/datum/signal/s)
-	if(s.data["deity"] && s.data["deity"] == linked_god)
-		var/list/mobs = list()
-		var/list/objs = list()
-		get_mobs_and_objs_in_view_fast(get_turf(src), mobs, objs, 0) //Ghosts will get the message already.
-		for(var/o in objs)
-			if(istype(o, /obj/structure/deity/pylon)) //Pls no feedback loop.
-				continue
-			var/obj/O = o
-			O.hear_talk(s.data["mob"], s.data["text"], s.data["verb"], s.data["language"])
-		for(var/m in mobs)
-			var/mob/M = m
-			M.hear_say(s.data["text"], s.data["verb"], s.data["language"], italics = 1, speaker = s.data["mob"])
+	if(!linked_god)
+		return
+	for(var/obj/structure/deity/pylon/P in linked_god.structures)
+		if(P == src)
+			continue
+		P.audible_message("<b>\The [P]</b> resonates, \"[text]\"")
+	to_chat(linked_god, "\icon[src] <span class='game say'><span class='name'>[M]</span> (<A href='?src=\ref[linked_god];pylon=\ref[src];'>P</A>) [verb], [linked_god.pylon == src ? "<b>" : ""]<span class='message'><span class='body'>\"[text]\"</span></span>[linked_god.pylon == src ? "</b>" : ""]</span>")

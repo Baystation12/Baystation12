@@ -315,9 +315,10 @@
 /mob/living/carbon/human/proc/zombieze()
 	ChangeToHusk()
 	mutations |= CLUMSY //cause zombie
-	src.visible_message("<span class='danger'>\The [src]'s flesh decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You... hunger.</span>")
+	src.visible_message("<span class='danger'>\The [src]'s flesh decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You... hunger. Not only for flesh, but to spread your disease.</span>")
 	if(src.mind)
 		src.mind.special_role = "Zombie"
+	log_admin("[key_name(src)] has transformed into a zombie!")
 	Weaken(5)
 	for(var/o in organs)
 		var/obj/item/organ/organ = o
