@@ -38,10 +38,17 @@ var/list/gear_datums = list()
 	var/current_tab = "General"
 
 /datum/category_item/player_setup_item/loadout/load_character(var/savefile/S)
-	S["gear"] >> pref.gear
+	from_file(S["gear_list"], pref.gear_list)
+	from_file(S["gear_slot"], pref.gear_slot)
+	if(pref.gear_list!=null && pref.gear_slot!=null)
+		pref.gear = pref.gear_list["[pref.gear_slot]"]
+	else
+		from_file(S["gear"], pref.gear)
 
 /datum/category_item/player_setup_item/loadout/save_character(var/savefile/S)
-	S["gear"] << pref.gear
+	pref.gear_list["[pref.gear_slot]"] = pref.gear
+	to_file(S["gear_list"], pref.gear_list)
+	to_file(S["gear_slot"], pref.gear_slot)
 
 /datum/category_item/player_setup_item/loadout/proc/valid_gear_choices(var/max_cost)
 	. = list()
@@ -64,6 +71,8 @@ var/list/gear_datums = list()
 /datum/category_item/player_setup_item/loadout/sanitize_character()
 	if(!islist(pref.gear))
 		pref.gear = list()
+	if(!islist(pref.gear_list))
+		pref.gear_list = list()
 
 	for(var/gear_name in pref.gear)
 		if(!(gear_name in gear_datums))
@@ -95,7 +104,7 @@ var/list/gear_datums = list()
 	if(total_cost < MAX_GEAR_COST)
 		fcolor = "#E67300"
 	. += "<table align = 'center' width = 100%>"
-	. += "<tr><td colspan=3><center><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
+	. += "<tr><td colspan=3><center><a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
 
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
@@ -204,6 +213,31 @@ var/list/gear_datums = list()
 		if(!metadata || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		set_tweak_metadata(gear, tweak, metadata)
+		return TOPIC_REFRESH_UPDATE_PREVIEW
+	if(href_list["next_slot"] || href_list["prev_slot"])
+		//Set the current slot in the gear list to the currently selected gear
+		pref.gear_list["[pref.gear_slot]"] = pref.gear
+		//If we're moving up a slot..
+		if(href_list["next_slot"])
+			//change the current slot number
+			pref.gear_slot = pref.gear_slot+1
+			//The three is completely arbitrary
+			if(pref.gear_slot>3)
+				pref.gear_slot = 1
+		//If we're moving down a slot..
+		else if(href_list["prev_slot"])
+			//change current slot one down
+			pref.gear_slot = pref.gear_slot-1
+			//once again, completely arbitrary limit
+			if(pref.gear_slot<1)
+				pref.gear_slot = 3
+		// Set the currently selected gear to whatever's in the new slot
+		if(pref.gear_list["[pref.gear_slot]"])
+			pref.gear = pref.gear_list["[pref.gear_slot]"]
+		else
+			pref.gear = list()
+			pref.gear_list["[pref.gear_slot]"] = list()
+		// Refresh?
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["select_category"])
 		current_tab = href_list["select_category"]
