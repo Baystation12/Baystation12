@@ -531,7 +531,6 @@
 "ko" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/turf/simulated/floor,/area/ship/scrap/maintenance/engine/aft)
 "kp" = (/obj/structure/bed/chair{icon_state = "chair"; dir = 1},/obj/structure/bed/chair{icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/tiled,/area/ship/scrap/shuttle/outgoing)
 "HZ" = (/obj/machinery/computer/cryopod,/turf/simulated/wall,/area/ship/scrap/crew/cryo)
-
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

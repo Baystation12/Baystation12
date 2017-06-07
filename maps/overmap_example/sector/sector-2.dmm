@@ -9,7 +9,6 @@
 "i" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s5"; icon_state = "swall_s"; dir = 1},/area/sector/shuttle/outgoing2)
 "j" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/floor/shuttle/darkred,/area/sector/shuttle/outgoing2)
 "k" = (/turf/simulated/shuttle/wall{tag = "icon-swall_s9"; icon_state = "swall_s"; dir = 8},/area/sector/shuttle/outgoing2)
-
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -42,3 +41,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

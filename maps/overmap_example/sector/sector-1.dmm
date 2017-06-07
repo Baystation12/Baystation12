@@ -6,7 +6,6 @@
 "f" = (/turf/space,/area/sector/shuttle/ingoing4)
 "g" = (/turf/simulated/mineral,/area/sector/shuttle/ingoing4)
 "h" = (/turf/space,/area/sector/shuttle/ingoing3)
-
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -39,3 +38,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

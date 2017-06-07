@@ -24,7 +24,6 @@
 "x" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
 "y" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
 "z" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/constructionsite)
-
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

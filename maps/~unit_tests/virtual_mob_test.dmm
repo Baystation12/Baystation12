@@ -10,7 +10,6 @@
 "j" = (/obj/effect/landmark/virtual_spawn/one,/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_non_dynamic_lighting)
 "k" = (/obj/effect/landmark/virtual_spawn/three,/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_non_dynamic_lighting)
 "l" = (/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/requires_power_non_dynamic_lighting)
-
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -33,3 +32,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
