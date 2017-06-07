@@ -758,6 +758,9 @@
 	lighting_use_dynamic = 1
 	flags = AREA_RAD_SHIELDED
 
+/area/bogshuttle_hangar/is_shuttle_locked()
+	return "Bogani"
+
 /area/bogshuttle_hangar/start
 	name = "\improper Bogani Shuttle"
 	icon_state = "yellow"

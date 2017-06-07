@@ -8,10 +8,11 @@ var/list/sector_shuttles = list()
 	var/obj/effect/overmap/destination //current destination sector
 	var/range = 0	//how many overmap tiles can shuttle go, for picking destinations and returning.
 
-/datum/shuttle/ferry/overmap/New(_name, shuttle_area)
+/datum/shuttle/ferry/overmap/New(_name, shuttle_area, s_range)
 	..(_name)
 	area_station = shuttle_area
 	set_destination_area(shuttle_area)
+	range = s_range
 	update_location()
 	shuttle_size = area_station.get_dimensions()
 	sector_shuttles += src
