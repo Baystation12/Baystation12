@@ -8,7 +8,7 @@
 	icon_opened = "crateopen"
 	icon_closed = "crate"
 	flags = OBJ_CLIMBABLE
-//	mouse_drag_pointer = MOUSE_ACTIVE_POINTER	//???
+	var/points_per_crate = 5
 	var/rigged = 0
 
 /obj/structure/closet/crate/can_open()
@@ -234,6 +234,7 @@
 	icon_state = "plasticcrate"
 	icon_opened = "plasticcrateopen"
 	icon_closed = "plasticcrate"
+	points_per_crate = 1
 
 /obj/structure/closet/crate/internals
 	name = "internals crate"
