@@ -1,7 +1,0 @@
-author: Asanadas
-
-delete-after: True
-
-changes: 
-  - rscadd: "High jittery levels will now cause heart damage."
-  - rscadd: "Individuals with robotic hearts will no longer suffer from jitters."
