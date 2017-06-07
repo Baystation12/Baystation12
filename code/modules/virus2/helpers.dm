@@ -157,7 +157,8 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 			//Allow for small chance of touching other zones.
 			//This is proc is also used for passive spreading so just because they are targeting
 			//that zone doesn't mean that's necessarily where they will touch.
-			var/touch_zone = ran_zone(src.zone_sel.selecting, 80)
+			var/touch_zone = zone_sel ? zone_sel.selecting : "chest"
+			touch_zone = ran_zone(touch_zone, 80)
 			var/obj/item/organ/external/select_area = H.get_organ(touch_zone)
 			if(!select_area)
 				//give it one more chance, since this is also called for passive spreading
