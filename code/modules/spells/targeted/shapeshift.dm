@@ -145,7 +145,7 @@
 	name = "Corrupt Form"
 	desc = "This spell shapes the wizard into a terrible, terrible beast."
 	feedback = "CF"
-	possible_transformations = list(/mob/living/simple_animal/hostile/faithless)
+	possible_transformations = list(/mob/living/simple_animal/hostile/faithless/wizard)
 
 	invocation = "mutters something dark and twisted as their form begins to twist..."
 	invocation_type = SpI_EMOTE
