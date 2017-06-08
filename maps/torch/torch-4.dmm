@@ -271,10 +271,10 @@
 "fk" = (/obj/machinery/atmospherics/unary/cryo_cell,/obj/effect/floor_decal/corner/pink{dir = 6},/obj/effect/floor_decal/corner/pink{dir = 9},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
 "fl" = (/obj/structure/table/standard,/obj/item/weapon/wrench,/obj/effect/floor_decal/corner/pink{dir = 6},/obj/effect/floor_decal/corner/pink{dir = 9},/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{pixel_x = 7; pixel_y = 1},/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{pixel_x = 7; pixel_y = 1},/obj/item/device/radio/intercom{pixel_y = 22},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
 "fm" = (/obj/machinery/iv_drip,/obj/machinery/vending/wallmed1{pixel_y = 32},/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
-"fn" = (/obj/structure/morgue,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
+"fn" = (/obj/machinery/cryopod/morgue,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "fo" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/dark,/area/medical/morgue)
-"fp" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
-"fq" = (/obj/structure/morgue{tag = "icon-morgue1 (WEST)"; icon_state = "morgue1"; dir = 8},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
+"fp" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/computer/cryopod/morgue{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
+"fq" = (/obj/machinery/light/small{dir = 1},/obj/machinery/cryopod/morgue{dir = 8},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "fr" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 5},/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftstarboard)
 "fs" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftstarboard)
 "ft" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftstarboard)
@@ -323,10 +323,10 @@
 "gk" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/effect/floor_decal/corner/pink{dir = 5},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
 "gl" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/effect/floor_decal/corner/pink{dir = 5},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
 "gm" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/machinery/firealarm{dir = 4; pixel_x = 24},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
-"gn" = (/obj/structure/morgue,/turf/simulated/floor/tiled/dark,/area/medical/morgue)
+"gn" = (/obj/machinery/cryopod/morgue,/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "go" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "gp" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
-"gq" = (/obj/structure/morgue{tag = "icon-morgue1 (WEST)"; icon_state = "morgue1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
+"gq" = (/obj/machinery/cryopod/morgue{dir = 8},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "gr" = (/obj/structure/ladder,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftstarboard)
 "gs" = (/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftstarboard)
 "gt" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 5},/turf/simulated/floor/plating,/area/maintenance/firstdeck/aftstarboard)
@@ -380,7 +380,7 @@
 "hp" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
 "hq" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled/white,/area/medical/sleeper)
 "hr" = (/obj/item/device/radio/intercom/department/medbay{dir = 8; pixel_x = 22},/turf/simulated/floor/tiled/white,/area/medical/sleeper)
-"hs" = (/obj/machinery/optable,/turf/simulated/floor/tiled/dark,/area/medical/morgue)
+"hs" = (/obj/machinery/optable,/obj/machinery/alarm{dir = 4; pixel_x = -25},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "ht" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "hu" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/dark,/area/medical/morgue)
 "hv" = (/turf/simulated/wall,/area/chapel/crematorium)
@@ -2664,4 +2664,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

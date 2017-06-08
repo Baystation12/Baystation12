@@ -1,5 +1,7 @@
 /* Morgue stuff
  * Contains:
+ *		Morgue control console
+ *		Morgue control console circuit
  *		Morgue
  *		Morgue trays
  *		Creamatorium
@@ -10,7 +12,20 @@
  * Morgue
  */
 
-/obj/structure/morgue
+
+/obj/machinery/computer/cryopod/morgue
+	name = "corpse storage oversight console"
+	desc = "An interface between crew and the corpse storage oversight systems."
+	circuit = /obj/item/weapon/circuitboard/cryopodcontrol/morgue
+	storage_type = "corpses"
+	storage_name = "Corpse Storage Oversight Control"
+
+/obj/item/weapon/circuitboard/cryopodcontrol/morgue
+	name = "Circuit board (Corpse Storage Oversight Console)"
+	build_path = /obj/machinery/computer/cryopod/morgue
+	origin_tech = list(TECH_DATA = 3)
+
+/obj/machinery/cryopod/morgue
 	name = "morgue"
 	desc = "Used to keep bodies in until someone fetches them."
 	icon = 'icons/obj/stationobjs.dmi'
@@ -19,24 +34,65 @@
 	density = 1
 	var/obj/structure/m_tray/connected = null
 	anchored = 1.0
+	on_store_message = "has entered long-term corpse storage."
+	on_store_name = "Corpse Storage Oversight"
+	obj/machinery/computer/cryopod/morgue/control_computer
+	base_icon_state = "morgue1"
+	occupied_icon_state = "morgue2"
+	var/last_living_warning_time = 0
 
-/obj/structure/morgue/Destroy()
+/obj/machinery/cryopod/morgue/find_control_computer(urgent=0)
+	control_computer = locate(/obj/machinery/computer/cryopod/morgue) in get_area(src)
+
+	// Don't send messages unless we *need* the computer, and less than five minutes have passed since last time we messaged
+	if(!control_computer && urgent && last_no_computer_message + 5 MINUTES < world.time)
+		log_and_message_admins("Morgue in [get_area(src)] could not find control computer!")
+		last_no_computer_message = world.time
+
+	return control_computer != null
+
+/obj/machinery/cryopod/morgue/process()
+	if(occupant)
+		//Allow a gap between entering the pod and actually despawning.
+		if(world.time - time_entered < time_till_despawn)
+			return
+
+		if(occupant.stat == DEAD) //Occupant is dead
+			if(!control_computer && !find_control_computer(urgent=1))
+				return
+
+			despawn_occupant()
+		else if(last_living_warning_time + 2.5 MINUTES < world.time) // warn the doctors!
+			for(var/channel in list("Security", "Medical", "Command"))
+				global_headset.autosay("WARNING: [occupant.real_name] detected alive in a morgue slab!", "[on_store_name]", channel)
+			last_living_warning_time = world.time
+
+// There doesn't seem to be a way to actually remove these verbs
+/obj/machinery/cryopod/morgue/move_inside()
+	set hidden = 1
+	return
+
+/obj/machinery/cryopod/morgue/eject()
+	set hidden = 1
+	return
+
+/obj/machinery/cryopod/morgue/Destroy()
 	if(connected)
 		qdel(connected)
 		connected = null
 	return ..()
 
-/obj/structure/morgue/proc/update()
+/obj/machinery/cryopod/morgue/proc/update()
 	if (src.connected)
 		src.icon_state = "morgue0"
 	else
-		if (src.contents.len)
+		if (occupant)
 			src.icon_state = "morgue2"
 		else
 			src.icon_state = "morgue1"
 	return
 
-/obj/structure/morgue/ex_act(severity)
+/obj/machinery/cryopod/morgue/ex_act(severity)
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
@@ -60,55 +116,60 @@
 				return
 	return
 
-/obj/structure/morgue/attack_hand(mob/user as mob)
+/obj/machinery/cryopod/morgue/attack_hand(mob/user as mob)
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
+				if(istype(A, /mob/living/carbon/human))
+					if(!occupant)
+						set_occupant(A)
+					else
+						continue
+				else if(istype(A, /obj/structure/closet/body_bag))
+					var/locate_mob = locate(/mob/living/carbon/human) in A
+					if(locate_mob)
+						if(!occupant)
+							set_occupant(locate_mob)
+						else
+							continue
 				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		time_entered = world.time
 		qdel(src.connected)
 		src.connected = null
 	else
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
 		src.connected.layer = OBJ_LAYER
 		var/turf/T = get_step(src, src.dir)
 		if (T.contents.Find(src.connected))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			src.connected.connected = src
 			src.icon_state = "morgue0"
 			for(var/atom/movable/A as mob|obj in src)
-				A.forceMove(src.connected.loc)
+				if (!( A.anchored )) // keeps the announcer intercom inside
+					A.forceMove(src.connected.loc)
 			src.connected.icon_state = "morguet"
 			src.connected.set_dir(src.dir)
+			set_occupant(null)
 		else
 			qdel(src.connected)
 			src.connected = null
+			to_chat(user, "There is something blocking the morgue tray!")
 	src.add_fingerprint(user)
 	update()
 	return
 
-/obj/structure/morgue/attack_robot(var/mob/user)
+/obj/machinery/cryopod/morgue/attack_robot(var/mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	else return ..()
 
-/obj/structure/morgue/attackby(P as obj, mob/user as mob)
-	if (istype(P, /obj/item/weapon/pen))
-		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
-		if (user.get_active_hand() != P)
-			return
-		if ((!in_range(src, usr) && src.loc != user))
-			return
-		t = sanitizeSafe(t, MAX_NAME_LEN)
-		if (t)
-			src.name = text("Morgue- '[]'", t)
-		else
-			src.name = "Morgue"
+/obj/machinery/cryopod/morgue/attackby(P as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	return
 
-/obj/structure/morgue/relaymove(mob/user as mob)
+/obj/machinery/cryopod/morgue/relaymove(mob/user as mob)
 	if (user.stat)
 		return
 	src.connected = new /obj/structure/m_tray( src.loc )
@@ -137,7 +198,7 @@
 	icon_state = "morguet"
 	density = 1
 	layer = BELOW_OBJ_LAYER
-	var/obj/structure/morgue/connected = null
+	var/obj/machinery/cryopod/morgue/connected = null
 	anchored = 1
 	throwpass = 1
 
@@ -149,16 +210,7 @@
 
 /obj/structure/m_tray/attack_hand(mob/user as mob)
 	if (src.connected)
-		for(var/atom/movable/A as mob|obj in src.loc)
-			if (!( A.anchored ))
-				A.forceMove(src.connected)
-			//Foreach goto(26)
-		src.connected.connected = null
-		src.connected.update()
-		add_fingerprint(user)
-		//SN src = null
-		qdel(src)
-		return
+		src.connected.attack_hand(user)
 	return
 
 /obj/structure/m_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
