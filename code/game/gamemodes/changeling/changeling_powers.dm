@@ -210,6 +210,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
 	absorbDNA(newDNA)
+	if(mind && T.mind)
+		mind.store_memory("[T.real_name]'s memories:")
+		mind.store_memory(T.mind.memory)
+		mind.store_memory("<hr>")
 
 	if(T.mind && T.mind.changeling)
 		if(T.mind.changeling.absorbed_dna)
