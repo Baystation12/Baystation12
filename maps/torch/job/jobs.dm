@@ -1045,8 +1045,8 @@
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
-	total_positions = 0 //to be opened by admins when desired AT ROUNDSTART ONLY
-	spawn_positions = 0
+	total_positions = 0
+	spawn_positions = 2
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"
 	ideal_character_age = 30
@@ -1060,3 +1060,7 @@
 	access = list(access_merchant)
 	minimal_access = list(access_merchant)
 
+/datum/job/merchant/New()
+	..()
+	if(prob(50))
+		spawn_positions = 0
