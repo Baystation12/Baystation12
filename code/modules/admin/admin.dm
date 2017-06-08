@@ -77,6 +77,8 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
 			(<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)
 		"}
+		if(M.client.is_shadowbanned())
+			body += "<br><br><font color='#ff0000'>SHADOWBANNED: [M.client.shadowban_reason]</font> <a href='?src=\ref[src];sbemplace=\ref[M]'>Emplace</a> | <a href='?src=\ref[src];sbremove=\ref[M]'>Remove</a><br>"
 		body += "<br><br><b>Staff Warning:</b> [M.client.staffwarn ? M.client.staffwarn : "No"]<br>"
 		if (!M.client.staffwarn)
 			body += "<A href='?src=\ref[src];setstaffwarn=\ref[M]'>Set StaffWarn</A>"

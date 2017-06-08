@@ -38,8 +38,14 @@
 	var/can_badmin = !is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor))
 	var/ooc_color = C.prefs.ooccolor
 
+
+	if(C.is_shadowbanned())
+		var/msg = "SHADOWBAN: [log_info_line(C)] tried to communicate: [name] - [message]"
+		log_admin(msg)
+		message_admins(msg)
+
 	for(var/client/target in clients)
-		if(target.is_key_ignored(C.key)) // If we're ignored by this person, then do nothing.
+		if(target.is_key_ignored(C.key) || (C.is_shadowbanned() && target != C)) // If we're ignored by this person, then do nothing. If shadowbanned, only they see it.
 			continue
 		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> <span class='message'>[message]</span>"
 		if(can_badmin)

@@ -697,3 +697,15 @@
 	handled_type = /mob
 	handled_vars = list("set_stat" = /mob/proc/set_stat)
 	predicates = list(/proc/is_num_predicate)
+
+/decl/vv_set_handler/client_shadowban_handler
+	handled_type = /client
+	handled_vars = list("shadowbanned")
+
+/decl/vv_set_handler/client_shadowban_handler/handle_set_var(var/client/C, variable, var_value, client)
+	if(!check_rights(R_HOST, 1, client))
+		log_and_message_admins("tried to set shadowbanned on [C] without access")
+		return
+	if(variable != "shadowbanned")
+		crash_with("client_shadowban_handler called with wrong var")
+	C.shadowbanned = var_value

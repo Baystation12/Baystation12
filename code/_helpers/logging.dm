@@ -160,6 +160,9 @@
 		if(include_link)
 			if(C)	. += "</a>"
 			else	. += " (DC)"
+
+		if(C && C.is_shadowbanned())
+			. += " <font color='#FF0000'>(SHADOWBANNED)</font>"
 	else
 		. += "*no key*"
 

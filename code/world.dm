@@ -455,6 +455,71 @@ var/world_topic_spam_protect_time = world.timeofday
 		else
 			return "Database connection failed or not set up"
 
+	else if(copytext(T,1,10) == "shadowban")
+		var/input[] = params2list(T)
+		if(input["bankey"] != config.ban_comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		var/target = ckey(input["target"])
+
+		var/client/C
+		for(var/client/K in clients)
+			if(K.ckey == target)
+				C = K
+				break
+		if(!C)
+			return "No client with that name found on server"
+
+		C.shadowbanned = text2num(input["shadowban"])
+		if(C.shadowbanned)
+			C.shadowban_reason = sanitize(input["reason"])
+			C.shadowban_setter = input["id"]
+		else
+			C.shadowban_reason = null
+			C.shadowban_setter = null
+
+		var/source = input["id"]
+		var/msg = "[source] has [C.shadowbanned ? "enabled" : "disabled"] shadowban on [target][C.shadowbanned ? ": [C.shadowban_reason]" : ""]"
+		log_admin(msg)
+		message_admins(msg)
+
+	else if(copytext(T,1,14) == "placepermaban")
+		var/input[] = params2list(T)
+		if(input["bankey"] != config.ban_comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		var/target = ckey(input["target"])
+
+		var/client/C
+		for(var/client/K in clients)
+			if(K.ckey == target)
+				C = K
+				break
+		if(!C)
+			return "No client with that name found on server"
+		if(!C.mob)
+			return "Client missing mob"
+
+		if(!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
+			return "Save failed"
+		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
+		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
+		qdel(C)
+
 
 /world/Reboot(var/reason)
 	/*spawn(0)

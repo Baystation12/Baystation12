@@ -26,8 +26,13 @@
 
 	speech_method.adjust_channel(src)
 
+	if(communicator.is_shadowbanned())
+		var/msg = "SHADOWBAN: [log_info_line(communicator)] tried to communicate: [name] - [message]"
+		log_admin(msg)
+		message_admins(msg)
+
 	for(var/mob/M in player_list)
-		if(!speech_method.can_receive(communicator, M))
+		if(!speech_method.can_receive(communicator, M) || (communicator.is_shadowbanned() && communicator.mob && communicator.mob != M))
 			continue
 		var/sent_message = speech_method.get_message(communicator, M, message)
 		receive_communication(communicator, M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [sent_message]</span>")
