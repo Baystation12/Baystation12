@@ -15,7 +15,7 @@
 	overmap_size = 40
 	overmap_event_areas = 12
 	base_turf_by_z = list("9" = /turf/simulated/floor/asteroid)
-	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "torch.marine.mil", "freemail.nt")
+	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.nt")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
