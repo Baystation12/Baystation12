@@ -2,7 +2,7 @@
 	name = "Entangle"
 	desc = "This spell creates vines that immediately entangle a nearby victim."
 	feedback = "ET"
-	school = "conjuration"
+	school = "transmutation"
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES | SELECTABLE | IGNOREPREV
 	invocation = "Bu-Ekel'Inas!"
@@ -16,6 +16,7 @@
 	compatible_targets = list(/mob)
 
 	hud_state = "wiz_entangle"
+	show_message = " points towards the ground, causing plants to erupt"
 	var/datum/seed/seed
 
 /spell/hand/charges/entangle/New()

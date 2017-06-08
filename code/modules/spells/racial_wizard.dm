@@ -111,7 +111,6 @@
 		return
 
 	var/obj/O = new /obj(T)
-	playsound(T,cast_sound,50,1)
 	O.set_light(range, -10, "#FFFFFF")
 
 	spawn(duration)
@@ -256,11 +255,12 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/observer/eye/wizard_eye/vision
+	var/mob/observer/eye/vision
+	var/eye_type = /mob/observer/eye/wizard_eye
 
 /spell/camera_connection/New()
 	..()
-	vision = new(src)
+	vision = new eye_type(src)
 
 /spell/camera_connection/Destroy()
 	qdel(vision)
@@ -296,3 +296,10 @@
 	if(!eyeobj)
 		return
 	eyeobj.release(src)
+
+/mob/observer/eye/wizard_eye/Destroy()
+	if(istype(eyeobj.owner, /mob/living))
+		var/mob/living/L = eyeobj.owner
+		L.release_eye()
+	qdel(eyeobj)
+	return ..()

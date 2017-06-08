@@ -2,7 +2,7 @@
 	name = "Magic Missile"
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
 	feedback = "MM"
-	school = "evocation"
+	school = "conjuration"
 	charge_max = 150
 	spell_flags = NEEDSCLOTHES
 	invocation = "Forti Gy-Ama!"

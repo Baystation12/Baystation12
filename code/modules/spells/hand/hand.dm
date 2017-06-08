@@ -5,9 +5,21 @@
 	var/move_delay
 	var/click_delay
 	var/hand_state = "spell"
+	var/show_message
 
 /spell/hand/choose_targets(mob/user = usr)
 	return list(user)
+
+/spell/hand/cast_check(skipcharge = 0,mob/user = usr, var/list/targets)
+	if(!..())
+		return 0
+	if(targets)
+		for(var/target in targets)
+			var/mob/M = target
+			if(M.get_active_hand())
+				to_chat(user, "<span class='warning'>You need an empty hand to cast this spell.</span>")
+				return 0
+	return 1
 
 /spell/hand/cast(list/targets, mob/user)
 	for(var/mob/M in targets)

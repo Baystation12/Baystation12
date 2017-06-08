@@ -2,7 +2,7 @@
 	name = "Summon Holy Relic"
 	desc = "This spell summons a relic of purity into your hand for a short while."
 	feedback = "SR"
-	school = "transmutation"
+	school = "conjuration"
 	charge_type = Sp_RECHARGE
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES | INCLUDEUSER
