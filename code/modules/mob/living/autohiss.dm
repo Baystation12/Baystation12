@@ -47,13 +47,13 @@
 	autohiss_extra_map = list(
 			"x" = list("ks", "kss", "ksss")
 		)
-	autohiss_exempt = list(LANGUAGE_UNATHI)
+	autohiss_exempt = list(LANGUAGE_UNATHI, LANGUAGE_SIGN)
 
 /datum/species/tajaran
 	autohiss_basic_map = list(
 			"r" = list("rr", "rrr", "rrrr")
 		)
-	autohiss_exempt = list(LANGUAGE_SIIK_MAAS)
+	autohiss_exempt = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR, LANGUAGE_SIGN)
 	
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
