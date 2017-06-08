@@ -1203,7 +1203,7 @@
 "xg" = (/turf/simulated/floor/tiled/white,/area/shuttle/escape_pod10/station)
 "xh" = (/obj/machinery/portable_atmospherics/powered/scrubber,/turf/simulated/floor/plating,/area/maintenance/seconddeck/foreport)
 "xi" = (/obj/random/tool,/turf/simulated/floor/plating,/area/maintenance/seconddeck/foreport)
-"xj" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/highsecurity{icon_state = "door_locked"; locked = 1; name = "Defense Armory"; req_access = list(3)},/turf/simulated/floor/plating,/area/vacant/armory)
+"xj" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/highsecurity{icon_state = "door_locked"; locked = 1; name = "Marine Armory"; req_access = list(3)},/turf/simulated/floor/plating,/area/vacant/armory)
 "xk" = (/turf/simulated/floor/plating,/area/vacant/armory)
 "xl" = (/obj/item/ammo_magazine/mc9mm/empty,/turf/simulated/floor/plating,/area/vacant/armory)
 "xm" = (/obj/item/frame/fire_alarm,/turf/simulated/floor/plating,/area/vacant/armory)
