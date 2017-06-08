@@ -29,6 +29,8 @@ var/global/list/rad_collectors = list()
 	//so that we don't zero out the meter if the SM is processed first.
 	last_power = last_power_new
 	last_power_new = 0
+	if(P && active)
+		rad_resistance = (P.air_contents.gas["phoron"] / 10)
 
 	if(P && active)
 		var/rads = radiation_repository.get_rads_at_turf(get_turf(src))
