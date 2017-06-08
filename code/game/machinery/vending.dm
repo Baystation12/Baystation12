@@ -204,7 +204,7 @@
 	return
 
 /obj/machinery/vending/MouseDrop_T(var/obj/item/I as obj, var/mob/user as mob)
-	if(!user.canmove || !istype(I) || user.stat || user.restrained() || !Adjacent(user) || (I.loc != user))
+	if(!CanMouseDrop(I, user) || (I.loc != user))
 		return
 	return attempt_to_stock(I, user)
 
