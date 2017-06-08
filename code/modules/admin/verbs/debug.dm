@@ -503,3 +503,25 @@
 		return
 
 	error_cache.showTo(usr)
+
+/obj/effect/debugmarker
+	icon = 'icons/effects/lighting_overlay.dmi'
+	icon_state = "light1"
+	plane = ABOVE_TURF_PLANE
+	layer = HOLOMAP_LAYER
+	alpha = 127
+
+/client/verb/visualpower()
+	set category = "Debug"
+	set name = "Visualize Powernets"
+	set desc = "Do not use on live server, visible to all players."
+
+	for(var/datum/powernet/PN in powernets)
+		var/netcolor = rgb(rand(100,255),rand(100,255),rand(100,255))
+		for(var/obj/structure/cable/C in PN.cables)
+			var/turf/T = get_turf(C)
+			var/obj/effect/debugmarker/D = locate(/obj/effect/debugmarker) in T
+			if(!D)
+				D = new(T)
+			D.color = netcolor
+			D.name = "\ref[PN]"
