@@ -78,32 +78,6 @@
 	dress_hat = /obj/item/clothing/head/dress/fleet
 	dress_gloves = /obj/item/clothing/gloves/white
 
-decl/hierarchy/mil_uniform/marine
-	name = "Master marine outfit"
-	hierarchy_type = /decl/hierarchy/mil_uniform/marine
-	branch = /datum/mil_branch/marine_corps
-
-	pt_under = /obj/item/clothing/under/pt/marine
-	pt_shoes = /obj/item/clothing/shoes/black
-
-	utility_under = /obj/item/clothing/under/utility/marine
-	utility_shoes = /obj/item/clothing/shoes/jungleboots
-	utility_hat = /obj/item/clothing/head/utility/marine
-	utility_extra = list(/obj/item/clothing/head/ushanka/marine)
-
-	service_under = /obj/item/clothing/under/service/marine
-	service_over = /obj/item/clothing/suit/storage/service/marine
-	service_shoes = /obj/item/clothing/shoes/dress
-	service_hat = /obj/item/clothing/head/service/marine
-	service_extra = list(/obj/item/clothing/head/service/marine/garrison)
-
-	dress_under = /obj/item/clothing/under/mildress/marine
-	dress_skirt = /obj/item/clothing/under/mildress/marine/skirt
-	dress_over = /obj/item/clothing/suit/dress/marine
-	dress_shoes = /obj/item/clothing/shoes/dress
-	dress_hat = /obj/item/clothing/head/dress/marine
-	dress_gloves = /obj/item/clothing/gloves/white
-
 decl/hierarchy/mil_uniform/civilian
 	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
 	hierarchy_type = /decl/hierarchy/mil_uniform/civilian
