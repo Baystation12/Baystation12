@@ -199,13 +199,20 @@
 		nanomanager.update_uis(src)
 		return
 	else
-
-		for(var/datum/stored_items/vending_products/R in product_records)
-			if(istype(W, R.item_path))
-				stock(W, R, user)
-				return 1
+		return attempt_to_stock(W, user)
 	..()
 	return
+
+/obj/machinery/vending/MouseDrop_T(var/obj/item/I as obj, var/mob/user as mob)
+	if(!user.canmove || !istype(I) || user.stat || user.restrained() || !Adjacent(user) || (I.loc != user))
+		return
+	return attempt_to_stock(I, user)
+
+/obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I as obj, var/mob/user as mob)
+	for(var/datum/stored_items/vending_products/R in product_records)
+		if(istype(I, R.item_path))
+			stock(I, R, user)
+			return 1
 
 /**
  *  Receive payment with cashmoney.
