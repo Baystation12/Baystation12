@@ -1602,7 +1602,7 @@
 "EP" = (/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftport)
 "EQ" = (/obj/random_multi/single_item/punitelly,/turf/simulated/floor/plating,/area/vacant/chapel)
 "ER" = (/obj/random_multi/single_item/punitelly,/turf/simulated/floor/plating,/area/maintenance/seconddeck/forestarboard)
-"ES" = (/obj/machinery/atmospherics/valve/digital{tag = "icon-map_valve0 (WEST)"; icon_state = "map_valve0"; dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
+"ES" = (/obj/machinery/atmospherics/valve/digital{dir = 4; icon_state = "map_valve0"; tag = "icon-map_valve0 (WEST)"},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "ET" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{dir = 8},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "EU" = (/turf/simulated/wall/ocp_wall,/area/maintenance/incinerator)
 "EV" = (/obj/structure/sign/warning/fire,/turf/simulated/wall/ocp_wall,/area/maintenance/incinerator)

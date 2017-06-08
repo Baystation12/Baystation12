@@ -40,9 +40,9 @@
 
 /obj/machinery/atmospherics/valve/New()
 	switch(dir)
-		if(NORTH || SOUTH)
+		if(NORTH, SOUTH)
 			initialize_directions = NORTH|SOUTH
-		if(EAST || WEST)
+		if(EAST , WEST)
 			initialize_directions = EAST|WEST
 	..()
 
