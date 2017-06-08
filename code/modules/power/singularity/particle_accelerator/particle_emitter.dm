@@ -2,8 +2,7 @@
 
 /obj/structure/particle_accelerator/particle_emitter
 	name = "EM Containment Grid"
-	desc_holder = "This launchs the Alpha particles, might not want to stand near this end."
-	icon = 'icons/obj/machines/particle_accelerator2.dmi'
+	desc = "This launchs the Alpha particles, might not want to stand near this end."
 	icon_state = "none"
 	var/fire_delay = 50
 	var/last_shot = 0
@@ -12,13 +11,25 @@
 	icon_state = "emitter_center"
 	reference = "emitter_center"
 
+/obj/structure/particle_accelerator/particle_emitter/center/New()
+	..()
+	desc = "[initial(desc_holder)]. Install this section in line with the spine of the device."
+
 /obj/structure/particle_accelerator/particle_emitter/left
 	icon_state = "emitter_left"
 	reference = "emitter_left"
 
+/obj/structure/particle_accelerator/particle_emitter/left/New()
+	..()
+	desc = "[initial(desc_holder)]. Install this section to the left of the spine of the device."
+
 /obj/structure/particle_accelerator/particle_emitter/right
 	icon_state = "emitter_right"
 	reference = "emitter_right"
+
+/obj/structure/particle_accelerator/particle_emitter/right/New()
+	..()
+	desc = "[initial(desc_holder)]. Install this section to the right of the spine of the device."
 
 /obj/structure/particle_accelerator/particle_emitter/update_icon()
 	..()
