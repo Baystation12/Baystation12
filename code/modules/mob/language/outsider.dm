@@ -113,3 +113,15 @@
 	colour = "cult"
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
+
+/datum/language/kharmaani
+	name = "Kharmaani"
+	desc = "A curt, sharp language used by the vicious aliens of the Ascent."
+	speech_verb = "clicks"
+	ask_verb = "chirps"
+	exclaim_verb = "rasps"
+	colour = "alien"
+	syllables = list("-","=","+","±","¯","_","¦","|","/")
+	space_chance = 10
+	key = "|"
+	flags = RESTRICTED
