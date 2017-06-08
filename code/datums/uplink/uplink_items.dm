@@ -81,7 +81,7 @@ var/datum/uplink/uplink = new()
 		var/datum/antagonist/antag = all_antag_types()[antag_role]
 		if(antag.is_antagonist(U.uplink_owner))
 			return !("Exclude" in antag_roles)
-	return 0
+	return !!("Exclude" in antag_roles)
 
 /datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
 	. = item_cost
