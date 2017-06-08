@@ -23,11 +23,14 @@ var/global/repository/radiation/radiation_repository = new()
 	. = ..()
 
 /datum/radiation_source/proc/update_rad_power(var/new_power = null)
-	if(new_power != null && new_power != rad_power)
+	if(new_power == null || new_power == rad_power)
+		return // No change
+	else if(new_power <= 0)
+		qdel(src) // Decayed to nothing
+	else
 		rad_power = new_power
-		. = 1
-	if(. && !flat)
-		range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
+		if(!flat)
+			range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
 
 // Ray trace from all active radiation sources to T and return the strongest effect.
 /repository/radiation/proc/get_rads_at_turf(var/turf/T)
@@ -65,6 +68,8 @@ var/global/repository/radiation/radiation_repository = new()
 
 // Add a radiation source instance to the repository.  It will override any existing source on the same turf.
 /repository/radiation/proc/add_source(var/datum/radiation_source/S)
+	if(!isturf(S.source_turf))
+		return
 	var/datum/radiation_source/existing = sources_assoc[S.source_turf]
 	if(existing)
 		qdel(existing)
