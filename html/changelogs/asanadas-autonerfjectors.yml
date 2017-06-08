@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscdel: "Autoinjectors can no longer be emptied / modified by syringes."
