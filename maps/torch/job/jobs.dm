@@ -447,7 +447,7 @@
 
 
 /datum/job/warden
-	title = "Brig Officer"
+	title = "Brig NCO"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
