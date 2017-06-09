@@ -96,3 +96,6 @@
 #define ATMOSTANK_CO2           25000 // CO2 and PH are not critically important for station, only for toxins and alternative coolants, no need to store a lot of those.
 #define ATMOSTANK_PHORON        25000
 #define ATMOSTANK_NITROUSOXIDE  10000 // N2O doesn't have a real useful use, i guess it's on station just to allow refilling of sec's riot control canisters?
+
+#define MAX_PUMP_PRESSURE		15000	// Maximal pressure setting for pumps and vents
+#define MAX_OMNI_PRESSURE		7500	// Maximal output(s) pressure for omni devices (filters/mixers)
