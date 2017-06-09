@@ -25,22 +25,6 @@ var/datum/antagonist/godcultist/godcult
 	..()
 	godcult = src
 
-/datum/antagonist/godcultist/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
-	if(!..())
-		return 0
-	if(!deity || !deity.current_antagonists.len)
-		return 0
-
-	var/count = current_antagonists.len //We should be added to said antagonists, so we could say that we are this number in line.
-	if(count > deity.current_antagonists.len) //Prolly a better way of doing this
-		count %= deity.current_antagonists.len
-		if(count == 0)
-			count = deity.current_antagonists.len
-	var/datum/mind/mind = deity.current_antagonists[count]
-	var/mob/living/deity/d = mind.current
-	d.change_follower(player.current, adding = 1) //add a follower
-	return 1
-
 /datum/antagonist/godcultist/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg, var/mob/living/deity/specific_god)
 	if(!..())
 		return 0
@@ -50,6 +34,24 @@ var/datum/antagonist/godcultist/godcult
 		player.current.add_language(LANGUAGE_CULT)
 
 	return 1
+
+/datum/antagonist/godcultist/post_spawn()
+	if(!deity || !deity.current_antagonists.len)
+		return
+
+	var/count = 1
+	var/deity_count = 1
+	while(count <= current_antagonists.len)
+		var/datum/mind/mind = current_antagonists[count]
+		if(deity_count > deity.current_antagonists.len)
+			deity_count = 1
+		var/datum/mind/deity_mind = deity.current_antagonists[deity_count]
+		var/mob/living/deity/D = deity_mind.current
+		D.change_follower(mind.current, adding = 1)
+		mind.current.add_language(LANGUAGE_CULT)
+		count++
+		deity_count++
+
 
 /datum/antagonist/godcultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())

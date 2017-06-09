@@ -219,6 +219,10 @@
 
 	reset_antag_selection()
 
+//Procced after /ALL/ antagonists have finished setting up and spawning.
+/datum/antagonist/proc/post_spawn()
+	return
+
 //Resets the antag selection, clearing all pending_antagonists and their special_role
 //(and assigned_role if ANTAG_OVERRIDE_JOB is set) as well as clearing the candidate list.
 //Existing antagonists are left untouched.
