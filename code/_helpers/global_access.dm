@@ -1389,8 +1389,6 @@
 			return global.ticker;
 		if("tickerProcess")
 			return global.tickerProcess;
-		if("to_process")
-			return global.to_process;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
 		if("total_lighting_overlays")
@@ -1499,7 +1497,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2890,8 +2888,6 @@
 			global.ticker=newval;
 		if("tickerProcess")
 			global.tickerProcess=newval;
-		if("to_process")
-			global.to_process=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -3000,7 +2996,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3696,7 +3692,6 @@
 	"tick_multiplier",
 	"ticker",
 	"tickerProcess",
-	"to_process",
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",

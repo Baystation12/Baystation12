@@ -28,6 +28,19 @@
 			spawn(1 SECOND)
 				to_chat(src, "<b>WARNING:</b> It would seem that you are sharing connection or computer with another player. If you haven't done so already, please contact the staff via the Adminhelp verb to resolve this situation. Failure to do so may result in administrative action. You have been warned.")
 
+	if(config.login_export_addr)
+		spawn(-1)
+			var/list/params = new
+			params["login"] = 1
+			params["key"] = client.key
+			if(isnum(client.player_age))
+				params["server_age"] = client.player_age
+			params["ip"] = client.address
+			params["clientid"] = client.computer_id
+			params["roundid"] = game_id
+			params["name"] = real_name || name
+			world.Export("[config.login_export_addr]?[list2params(params)]", null, 1)
+
 /mob/proc/maybe_send_staffwarns(var/action)
 	if(client.staffwarn)
 		for(var/client/C in admins)

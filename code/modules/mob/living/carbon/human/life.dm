@@ -177,7 +177,8 @@
 					continue
 				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
 			Paralyse(10)
-			make_jittery(1000)
+			if(jitteriness < 200)
+				make_jittery(200)
 	if (disabilities & COUGHING)
 		if ((prob(5) && paralysis <= 1))
 			drop_item()
@@ -193,7 +194,8 @@
 						emote("twitch")
 					if(2 to 3)
 						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				make_jittery(100)
+				if(jitteriness < 100)
+					make_jittery(100)
 				return
 	if (disabilities & NERVOUS)
 		if (prob(10))

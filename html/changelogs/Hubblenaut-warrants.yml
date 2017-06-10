@@ -33,5 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added coffee pots and carafes, available in the dinnerware vending machine."
-  - tweak: "Hot drinks now have vapor on them."
+  - rscadd: "Digital warrants can now be archived, so they don't have to be deleted."
+  - rscadd: "Security gets automatically notified on new warrants through their HUDs."
+  - tweak: "Improved the digital warrant interface."

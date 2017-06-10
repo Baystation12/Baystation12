@@ -46,7 +46,6 @@
 		qdel(src)
 		return
 	if(!T.dynamic_lighting)
-		log_debug("A lighting overlay found it's way onto a statically lit turf! loc: [loc] , [loc.type]")
 		qdel(src)
 		return
 

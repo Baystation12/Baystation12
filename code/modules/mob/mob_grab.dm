@@ -468,4 +468,4 @@
 		assailant = null
 	qdel(hud)
 	hud = null
-	..()
+	return ..()

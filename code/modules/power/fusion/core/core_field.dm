@@ -8,7 +8,6 @@
 	alpha = 50
 	layer = 4
 	light_color = COLOR_BLUE
-	rad_power = 1
 
 	var/size = 1
 	var/energy = 0
@@ -171,7 +170,8 @@
 
 	check_instability()
 	Radiate()
-	rad_power = radiation
+	if(radiation)
+		radiation_repository.radiate(src, radiation)
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()

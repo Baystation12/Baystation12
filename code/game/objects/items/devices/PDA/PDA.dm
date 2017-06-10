@@ -613,7 +613,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			id_check(U, 1)
 		if("UpdateInfo")
 			if(id)
-				set_rank_job(id.rank, ownjob)
+				set_rank_job(id.rank, id.assignment)
 		if("Eject")//Ejects the cart, only done from hub.
 			verb_remove_cartridge()
 
@@ -1370,8 +1370,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/Destroy()
 	PDAs -= src
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
-		src.id.loc = get_turf(src.loc)
-	..()
+		src.id.forceMove(get_turf(src.loc))
+	else
+		qdel_null(src.id)
+	qdel_null(src.cartridge)
+	qdel_null(src.pai)
+	return ..()
 
 /obj/item/device/pda/clown/Crossed(AM as mob|obj) //Clown PDA is slippery.
 	if (istype(AM, /mob/living))

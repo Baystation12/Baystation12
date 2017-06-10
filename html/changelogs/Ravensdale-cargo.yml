@@ -1,0 +1,7 @@
+author: Ravensdale - original work by anewbe
+
+delete-after: True
+
+changes: 
+  - bugfix: "Removed the exploit by which you could gain cargo points by ordering plastic crates."
+  - rscadd: "Upped cargo point gain by 50%."

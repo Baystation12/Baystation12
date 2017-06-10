@@ -3,24 +3,26 @@
 	sort_order = 5
 
 /datum/category_item/player_setup_item/general/background/load_character(var/savefile/S)
-	S["med_record"]				>> pref.med_record
-	S["sec_record"]				>> pref.sec_record
-	S["gen_record"]				>> pref.gen_record
-	S["home_system"]			>> pref.home_system
-	S["citizenship"]			>> pref.citizenship
-	S["faction"]				>> pref.faction
-	S["religion"]				>> pref.religion
-	S["nanotrasen_relation"]	>> pref.nanotrasen_relation
+	from_file(S["med_record"],pref.med_record)
+	from_file(S["sec_record"],pref.sec_record)
+	from_file(S["gen_record"],pref.gen_record)
+	from_file(S["home_system"],pref.home_system)
+	from_file(S["citizenship"],pref.citizenship)
+	from_file(S["faction"],pref.faction)
+	from_file(S["religion"],pref.religion)
+	from_file(S["nanotrasen_relation"],pref.nanotrasen_relation)
+	from_file(S["memory"],pref.memory)
 
 /datum/category_item/player_setup_item/general/background/save_character(var/savefile/S)
-	S["med_record"]				<< pref.med_record
-	S["sec_record"]				<< pref.sec_record
-	S["gen_record"]				<< pref.gen_record
-	S["home_system"]			<< pref.home_system
-	S["citizenship"]			<< pref.citizenship
-	S["faction"]				<< pref.faction
-	S["religion"]				<< pref.religion
-	S["nanotrasen_relation"]	<< pref.nanotrasen_relation
+	to_file(S["med_record"],pref.med_record)
+	to_file(S["sec_record"],pref.sec_record)
+	to_file(S["gen_record"],pref.gen_record)
+	to_file(S["home_system"],pref.home_system)
+	to_file(S["citizenship"],pref.citizenship)
+	to_file(S["faction"],pref.faction)
+	to_file(S["religion"],pref.religion)
+	to_file(S["nanotrasen_relation"],pref.nanotrasen_relation)
+	to_file(S["memory"],pref.memory)
 
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
@@ -48,6 +50,8 @@
 		. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
 		. += "Security Records:<br>"
 		. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
+		. += "Memory:<br>"
+		. += "<a href='?src=\ref[src];set_memory=1'>[TextPreview(pref.memory,40)]</a><br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["nt_relation"])
@@ -120,6 +124,12 @@
 		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(sec_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.sec_record = sec_medical
+		return TOPIC_REFRESH
+
+	else if(href_list["set_memory"])
+		var/memes = sanitize(input(user,"Enter memorized information here.","Character Preference", html_decode(pref.memory)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		if(!isnull(memes) && CanUseTopic(user))
+			pref.memory = memes
 		return TOPIC_REFRESH
 
 	return ..()

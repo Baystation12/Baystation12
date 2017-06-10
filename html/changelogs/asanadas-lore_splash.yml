@@ -1,0 +1,6 @@
+author: Asanadas
+
+delete-after: True
+
+changes: 
+  - rscadd: "There's now a neat lore splash window which will spam all new accounts under 7 days old. Read it!"
