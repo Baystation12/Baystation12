@@ -6,6 +6,14 @@
 {{else}}
 	{{if data.filename}}
 		<h2>Viewing file {{:data.filename}}</h2>
+		<div class="item">
+			<div class="itemLabel">
+				Newlines:
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.linebreaks , null, { "PRG_toggle_linebreaks" : 1 })}}
+			</div>
+		</div> 
 		<div class='item'>
 		{{:helper.link('CLOSE', null, { "PRG_closefile" : 1 })}}
 		{{:helper.link('EDIT', null, { "PRG_edit" : 1 })}}

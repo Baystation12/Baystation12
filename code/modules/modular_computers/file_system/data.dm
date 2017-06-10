@@ -5,10 +5,14 @@
 	filetype = "DAT"
 	var/block_size = 250
 	var/do_not_edit = 0				// Whether the user will be reminded that the file probably shouldn't be edited.
+	var/automatic_newlines = FALSE	// For text editor. Treat \n as [br] and vice versa in the text editing pop-up.
 
 /datum/computer_file/data/clone()
 	var/datum/computer_file/data/temp = ..()
 	temp.stored_data = stored_data
+	temp.block_size = block_size
+	temp.do_not_edit = do_not_edit
+	temp.automatic_newlines = automatic_newlines
 	return temp
 
 // Calculates file size from amount of characters in saved string
