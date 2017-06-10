@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "AI cores got new step in construction. You need to swipe an ID with Upload access (or emag) to hook them into the systems."
