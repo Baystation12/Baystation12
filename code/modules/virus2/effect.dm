@@ -255,15 +255,6 @@
 	allow_multiple = 1
 
 ////////////////////////STAGE 2/////////////////////////////////
-
-/datum/disease2/effect/emote
-	name = "Noise Syndrome"
-	stage = 2
-	chance_max = 25
-	delay = 35 SECONDS
-	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.emote(pick("scream","giggle","groan","gnarl","moan"))
-
 /datum/disease2/effect/drowsness
 	name = "Automated Sleeping Syndrome"
 	stage = 2
@@ -291,6 +282,8 @@
 	delay = 25 SECONDS
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
 		mob.emote("cough")
+		if (mob.wear_mask)
+			return
 		for(var/mob/living/carbon/human/M in oview(2,mob))
 			mob.spread_disease_to(M)
 
@@ -376,7 +369,7 @@
 	stage = 1
 	delay = 25 SECONDS
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		to_chat(mob, "<span class='warning'>Your head hurts a bit.</span>")
+		mob.custom_pain("Your head hurts a bit.", 20)
 
 /datum/disease2/effect/itch
 	name = "Itches"

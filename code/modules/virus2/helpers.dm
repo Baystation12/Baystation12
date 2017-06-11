@@ -55,7 +55,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 			return 1
 		protection = max(protection, M.getarmor(FACE, "bio"))
 
-	return prob(protection)
+	return prob(protection + 15*M.chem_effects[CE_ANTIVIRAL])
 
 /proc/airborne_can_reach(turf/simulated/source, turf/simulated/target)
 	//Can't ariborne without air
