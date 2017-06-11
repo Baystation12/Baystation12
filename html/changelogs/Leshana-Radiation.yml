@@ -1,5 +1,0 @@
-author: Leshana
-delete-after: True
-changes: 
-  - tweak: "Optimized the unified radiation system.  Made the radiation cutoff level configurable."
-  - bugfix: "Standing still won't save you from radiation storms."
