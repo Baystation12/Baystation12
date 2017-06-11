@@ -349,7 +349,8 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 							var/sqlauthor = sanitizeSQL(scanner.cache.author)
 							var/sqlcontent = sanitizeSQL(scanner.cache.dat)
 							var/sqlcategory = sanitizeSQL(upload_category)
-							var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]')")
+							var/sqlauthorkey = sanitizeSQL(usr.key)
+							var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category, author_ckey) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]', '[sqlauthorkey]')")
 							if(!query.Execute())
 								to_chat(usr, query.ErrorMsg())
 							else
@@ -376,10 +377,12 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				var/author = query.item[2]
 				var/title = query.item[3]
 				var/content = query.item[4]
+				var/author_ckey = query.item[6]
 				var/obj/item/weapon/book/B = new(src.loc)
 				B.name = "Book: [title]"
 				B.title = title
 				B.author = author
+				B.author_ckey = author_ckey
 				B.dat = content
 				B.icon_state = "book[rand(1,7)]"
 				src.visible_message("[src]'s printer hums as it produces a completely bound book. How did it do that?")
@@ -469,6 +472,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		b.dat = O:info
 		b.name = "Print Job #" + "[rand(100, 999)]"
 		b.icon_state = "book[rand(1,7)]"
+		b.author_ckey = user.client.ckey
 		qdel(O)
 	else
 		..()
