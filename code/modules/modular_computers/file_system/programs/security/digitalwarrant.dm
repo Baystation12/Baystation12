@@ -140,7 +140,7 @@ var/warrant_uid = 0
 			namelist += t.fields["name"]
 		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
 		if(CanInteract(user, default_state))
-			if (!new_name)
+			if (!new_name || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
 
@@ -148,7 +148,7 @@ var/warrant_uid = 0
 		. = 1
 		var/new_name = sanitize(input("Please input name") as null|text)
 		if(CanInteract(user, default_state))
-			if (!new_name)
+			if (!new_name || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
 
@@ -156,13 +156,14 @@ var/warrant_uid = 0
 		. = 1
 		var/new_charges = sanitize(input("Please input charges", "Charges", activewarrant.fields["charges"]) as null|text)
 		if(CanInteract(user, default_state))
-			if (!new_charges)
+			if (!new_charges || !activewarrant)
 				return
 			activewarrant.fields["charges"] = new_charges
 
 	if(href_list["editwarrantauth"])
 		. = 1
-
+		if(!activewarrant)
+			return
 		activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 
 	if(href_list["back"])
