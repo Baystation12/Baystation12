@@ -224,7 +224,7 @@
 		affected.implants -= O
 		O.dropInto(target.loc)
 		target.op_stage.current_organ = null
-		playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+		playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 
 	// Just in case somehow the organ we're extracting from an organic is an MMI
 	if(istype(O, /obj/item/organ/internal/mmi_holder))
@@ -316,7 +316,7 @@
 			log_debug("[user] ([user.ckey]) replaced organ [O], which didn't have ORGAN_CUT_AWAY set, in [target] ([target.ckey])")
 			O.status |= ORGAN_CUT_AWAY
 
-		playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+		playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 
 /datum/surgery_step/internal/replace_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging \the [tool]!</span>", \
