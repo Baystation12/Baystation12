@@ -18,11 +18,7 @@
 	unwrap()
 
 /obj/structure/bigDelivery/proc/unwrap()
-	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.forceMove(get_turf(src.loc))
-		if(istype(wrapped, /obj/structure/closet))
-			var/obj/structure/closet/O = wrapped
-			O.welded = 0
+	// Destroy will drop our wrapped object on the turf, so let it.
 	qdel(src)
 
 /obj/structure/bigDelivery/attackby(obj/item/W as obj, mob/user as mob)
@@ -318,14 +314,15 @@
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.loc = (get_turf(loc))
+		wrapped.forceMove(get_turf(src))
 		if(istype(wrapped, /obj/structure/closet))
 			var/obj/structure/closet/O = wrapped
 			O.welded = 0
+		wrapped = null
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/AM in contents)
-		AM.loc = T
-	..()
+		AM.forceMove(T)
+	return ..()
 
 /obj/item/device/destTagger
 	name = "destination tagger"

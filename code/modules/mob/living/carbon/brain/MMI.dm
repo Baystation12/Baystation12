@@ -137,10 +137,8 @@
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
 		borg.mmi = null
-	if(brainmob)
-		qdel(brainmob)
-		brainmob = null
-	..()
+	qdel_null(brainmob)
+	return ..()
 
 /obj/item/device/mmi/radio_enabled
 	name = "radio-enabled man-machine interface"
