@@ -179,17 +179,15 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(species.has_floating_eyes)
 				overlays |= species.get_eyes(src)
 
+	var/matrix/M = matrix()
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
-		var/matrix/M = matrix()
 		M.Turn(90)
 		M.Scale(size_multiplier)
 		M.Translate(1,-6)
-		src.transform = M
 	else
-		var/matrix/M = matrix()
 		M.Scale(size_multiplier)
 		M.Translate(0, 16*(size_multiplier-1))
-		src.transform = M
+	transform = M
 
 var/global/list/damage_icon_parts = list()
 
@@ -198,6 +196,9 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/UpdateDamageIcon(var/update_icons=1)
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
+
+	if(!species.damage_overlays || !species.damage_mask)
+		return
 
 	for(var/obj/item/organ/external/O in organs)
 		if(O.is_stump())
@@ -476,7 +477,7 @@ var/global/list/damage_icon_parts = list()
 	if(gloves && !(wear_suit && wear_suit.flags_inv & HIDEGLOVES))
 		overlays_standing[GLOVES_LAYER]	= gloves.get_mob_overlay(src,slot_gloves_str)
 	else
-		if(blood_DNA)
+		if(blood_DNA && species.blood_mask)
 			var/image/bloodsies	= overlay_image(species.blood_mask, "bloodyhands", hand_blood_color, RESET_COLOR)
 			overlays_standing[GLOVES_LAYER]	= bloodsies
 		else
@@ -514,7 +515,7 @@ var/global/list/damage_icon_parts = list()
 	if(shoes && !(wear_suit && wear_suit.flags_inv & HIDESHOES))
 		overlays_standing[SHOES_LAYER] = shoes.get_mob_overlay(src,slot_shoes_str)
 	else
-		if(feet_blood_DNA)
+		if(feet_blood_DNA && species.blood_mask)
 			var/image/bloodsies = overlay_image(species.blood_mask, "shoeblood", hand_blood_color, RESET_COLOR)
 			overlays_standing[SHOES_LAYER] = bloodsies
 		else

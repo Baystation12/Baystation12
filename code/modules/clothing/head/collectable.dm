@@ -21,7 +21,7 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/xenom
-	name = "collectable xenomorph helmet!"
+	name = "collectable alien monster helmet!"
 	desc = "Hiss hiss hiss!"
 	icon_state = "xenom"
 	item_state_slots = list(
