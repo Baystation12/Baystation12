@@ -13,6 +13,20 @@
 	if(typing_indicator)
 		qdel(typing_indicator)
 	usr.say(message)
+	
+/mob/verb/lewdsay(message as text)
+	set name = "Lewd Say"
+	set category = "Degeneracy"
+	for(var/mob/M in orange(src,1))
+		if(M:species != usr:species)
+			usr:gib()
+			usr:ban("Interspecies EXTENDED roleplay is against the rules.", PERMA) // as per the design document at https://puu.sh/wgcPF/dd504e9a31.pdf
+			return
+		if(usr:age < 18 || M:age < 18)
+			usr:gib()
+			usr:ban("Chris Hansen has been alerted.", PERMA)
+			return
+	usr:visible_message("<b>[usr]</b> lewdly says, [message]")
 
 /mob/verb/me_verb(message as text)
 	set name = "Me"
