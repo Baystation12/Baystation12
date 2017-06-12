@@ -91,7 +91,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	var/day_loc = findtext(full_date, time2text(world.timeofday, "DD"))
 
 	var/datum/player_info/P = new
-	if (istype(user,/client))
+	if (ismob(user))
 		P.author = user.key
 		P.rank = user.client.holder.rank
 	else if (istext(user))
