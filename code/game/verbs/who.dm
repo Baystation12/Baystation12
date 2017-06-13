@@ -80,7 +80,8 @@
 		if(!C.is_afk())
 			active_staff++
 		if(can_investigate)
-			line += " (AFK - [C.inactivity2text()])"
+			if(C.is_afk())
+				line += " (AFK - [C.inactivity2text()])"
 			if(isghost(C.mob))
 				line += " - Observing"
 			else if(istype(C.mob,/mob/new_player))
