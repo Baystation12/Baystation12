@@ -287,7 +287,7 @@
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
 			S.dirt = 0
-			S.wet = min(S.wet, 1)
+			S.wet = 0
 		T.clean_blood()
 
 
