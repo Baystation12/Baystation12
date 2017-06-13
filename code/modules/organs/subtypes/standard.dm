@@ -56,7 +56,7 @@
 	arterial_bleed_severity = 0.75
 
 /obj/item/organ/external/arm/stun_act(var/stun_amount, var/agony_amount)
-	if(!owner || (!stun_amount && agony_amount < 5))
+	if(!owner || (agony_amount < 5))
 		return
 	if(prob(25))
 		owner.grasp_damage_disarm(src)
@@ -87,6 +87,13 @@
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
 
+/obj/item/organ/external/leg/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || agony_amount < 5)
+		return
+	if(prob(agony_amount*2))
+		to_chat(owner, "<span class='warning'>Your [src] buckles from the shock!</span>")
+		owner.Weaken(5)
+
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
 	name = "right leg"
@@ -112,6 +119,13 @@
 	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
+
+/obj/item/organ/external/foot/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || agony_amount < 5)
+		return
+	if(prob(agony_amount*4))
+		to_chat(owner, "<span class='warning'>You lose your footing as your [src] spasms!</span>")
+		owner.Weaken(5)
 
 /obj/item/organ/external/foot/removed()
 	if(owner) owner.drop_from_inventory(owner.shoes)
@@ -144,7 +158,7 @@
 	arterial_bleed_severity = 0.5
 
 /obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
-	if(!owner || (!stun_amount && agony_amount < 5))
+	if(!owner || (agony_amount < 5))
 		return
 	owner.grasp_damage_disarm(src)
 
