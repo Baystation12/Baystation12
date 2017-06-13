@@ -338,12 +338,8 @@
 
 // Shuttles
 /area/shuttle/administration/centcom
-	name = "\improper Administration Shuttle Centcom"
-	icon_state = "shuttlered"
-
-/area/shuttle/administration/station
 	name = "\improper Administration Shuttle"
-	icon_state = "shuttlered2"
+	icon_state = "shuttlered"
 
 /area/shuttle/escape_pod1/centcom
 	icon_state = "shuttle"
