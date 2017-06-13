@@ -377,6 +377,32 @@ var/global/datum/controller/gameticker/ticker
 				if(!delay_end)
 					sleep(restart_timeout)
 					if(!delay_end)
+						// delay if there are tickets that staff are handling
+						var/wait_for_tickets
+						for(var/datum/ticket/ticket in tickets)
+							if(ticket.status == TICKET_ASSIGNED)
+								var/client/assigned_admin_client = client_by_ckey(ticket.assigned_admin.ckey)
+								if(assigned_admin_client && !assigned_admin_client.is_afk())
+									wait_for_tickets = 1
+									for(var/client/X in admins)
+										if(R_INVESTIGATE & X.holder.rights)
+											to_chat(X, "<span class='notice'><b>Restart delayed due to open tickets.</b></span>")
+									to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+									sleep(15 SECONDS)
+									break
+						while(wait_for_tickets)
+							wait_for_tickets = 0
+							for(var/datum/ticket/ticket in tickets)
+								if(ticket.status == TICKET_ASSIGNED)
+									var/client/assigned_admin_client = client_by_ckey(ticket.assigned_admin.ckey)
+									if(assigned_admin_client && !assigned_admin_client.is_afk())
+										wait_for_tickets = 1
+										break
+							if(wait_for_tickets)
+								sleep(15 SECONDS)
+							else
+								to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>") // give the admin enough time to finish up before automatic restart resumes
+								sleep(restart_timeout)
 						world.Reboot()
 					else
 						to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")

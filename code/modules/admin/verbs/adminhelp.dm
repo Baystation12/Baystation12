@@ -11,6 +11,11 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		to_chat(src, "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>")
 		return
 
+	var/datum/ticket/existing_ticket = get_open_ticket_by_client(src)
+	if(!isnull(existing_ticket))
+		to_chat(src, "<font color='notice'>You already have an open ticket! Either click a responding admin's name to reply, or <a href='?src=\ref[usr];close_ticket=\ref[existing_ticket]'>close your ticket</a> to start a new one.</font>")
+		return
+
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
 
@@ -85,8 +90,12 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0)][ai_cl]:</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1)][ai_cl]:</b> [msg]</span>"
+	// create ticket
+	var/datum/ticket/ticket = new /datum/ticket(src)
+	ticket.msgs += new /datum/ticket_msg(src, null, original_msg)
+
+	var/mentor_msg = "<span class='notice'><b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
@@ -101,14 +110,14 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			else
 				to_chat(X, msg)
 	//show it to the person adminhelping too
-	to_chat(src, "<font color='blue'>PM to-<b>Staff </b>: [original_msg]</font>")
+	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
 	var/admin_number_present = admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
-	admin_pm_repository.store_pm(src, null, original_msg)
+
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
