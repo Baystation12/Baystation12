@@ -101,6 +101,10 @@
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
 			return global.TWITCHBLOCK;
+		if("ticket_panels")
+			return global.ticket_panels
+		if("tickets")
+			return global.tickets
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -1501,7 +1505,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2896,6 +2900,10 @@
 			global.ticker=newval;
 		if("tickerProcess")
 			global.tickerProcess=newval;
+		if("ticket_panels")
+			global.ticket_panels=newval;
+		if("tickets")
+			global.tickets=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -3004,7 +3012,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3702,6 +3710,8 @@
 	"tick_multiplier",
 	"ticker",
 	"tickerProcess",
+	"ticket_panels",
+	"tickets",
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",
