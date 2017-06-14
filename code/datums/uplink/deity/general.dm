@@ -23,4 +23,4 @@
 	name = "Build Shrine"
 	desc = "An essential ability that allows a follower to build an altar where ever they want."
 	item_cost = 10
-	path = /spell/aoe_turf/conjure/build_shrine
+	path = /spell/aoe_turf/build_shrine
