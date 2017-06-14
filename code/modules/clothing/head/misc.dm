@@ -302,3 +302,12 @@
 	icon_state = "taqiyah"
 	item_state = "taqiyah"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/helmet/facecover
+	name = "face cover"
+	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
+	icon_state = "facecover"
+	tint = TINT_BLIND
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	body_parts_covered = HEAD|FACE|EYES
+	flash_protection = FLASH_PROTECTION_MAJOR
