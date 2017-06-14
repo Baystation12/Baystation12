@@ -49,7 +49,7 @@
 
 /obj/structure/inflatable/Destroy()
 	update_nearby_tiles()
-	..()
+	return ..()
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0

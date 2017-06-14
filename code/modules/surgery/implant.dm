@@ -146,7 +146,7 @@
 	user.visible_message("[user] starts putting \the [tool] inside [target]'s [get_cavity(affected)] cavity.", \
 	"You start putting \the [tool] inside [target]'s [get_cavity(affected)] cavity." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
-	playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+	playsound(target.loc, 'sound/effects/squelch1.ogg', 25, 1)
 	..()
 
 /datum/surgery_step/cavity/place_item/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -237,7 +237,7 @@
 				if(istype(obj,/obj/item/weapon/implant))
 					var/obj/item/weapon/implant/imp = obj
 					imp.removed()
-			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \
 			"<span class='notice'>There's something inside [target]'s [affected.name], but you just missed it this time.</span>" )

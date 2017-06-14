@@ -16,6 +16,7 @@
 	var/obj/structure/ladder/target_down
 
 	var/const/climb_time = 2 SECONDS
+	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
 
 /obj/structure/ladder/initialize()
 	// the upper will connect to the lower
@@ -106,6 +107,8 @@
 		if(!A.CanPass(M, M.loc, 1.5, 0))
 			to_chat(M, "<span class='notice'>\The [A] is blocking \the [src].</span>")
 			return FALSE
+	playsound(src, pick(climbsounds), 50)
+	playsound(target_ladder, pick(climbsounds), 50)
 	return M.Move(T)
 
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
