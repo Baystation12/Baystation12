@@ -333,8 +333,8 @@
 	sort_order = 11
 
 /datum/mil_rank/fleet/o2
-	name = "Lieutenant (junior grade)"
-	name_short = "LTJG"
+	name = "Second Lieutenant"
+	name_short = "2Lt"
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/officer/o2, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = 12
 
@@ -363,8 +363,8 @@
 	sort_order = 16
 
 /datum/mil_rank/fleet/o7
-	name = "Rear Admiral (lower half)"
-	name_short = "RDML"
+	name = "Commodore"
+	name_short = "CDRE"
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/flag, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = 17
 
@@ -399,26 +399,26 @@
  */
 
 /datum/mil_rank/marine/e1
-	name = "Private"
-	name_short = "Pvt"
+	name = "Mariner Apprentice"
+	name_short = "MA"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted)
 	sort_order = 1
 
 /datum/mil_rank/marine/e2
-	name = "Private First Class"
-	name_short = "PFC"
+	name = "Mariner Second Class"
+	name_short = "MSC"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e2)
 	sort_order = 2
 
 /datum/mil_rank/marine/e3
-	name = "Lance Corporal"
-	name_short = "LCpl"
+	name = "Mariner First Class"
+	name_short = "MFC"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e3)
 	sort_order = 3
 
 /datum/mil_rank/marine/e4
-	name = "Corporal"
-	name_short = "Cpl"
+	name = "Master Mariner"
+	name_short = "MMR"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e4)
 	sort_order = 4
 
@@ -435,8 +435,8 @@
 	sort_order = 6
 
 /datum/mil_rank/marine/e7
-	name = "Gunnery Sergeant"
-	name_short = "GySgt"
+	name = "Colour Sergeant"
+	name_short = "CSgt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
 	sort_order = 7
 
@@ -452,8 +452,8 @@
 	sort_order = 8
 
 /datum/mil_rank/marine/e9
-	name = "Master Gunnery Sergeant"
-	name_short = "MGySgt"
+	name = "Master Colour Sergeant"
+	name_short = "MCSgt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/enlisted/e9)
 	sort_order = 8
 
@@ -495,20 +495,20 @@
 	sort_order = -5
 
 /datum/mil_rank/marine/o1
-	name = "Second Lieutenant"
-	name_short = "2ndLt"
+	name = "Ensign"
+	name_short = "ENS"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/officer)
 	sort_order = 11
 
 /datum/mil_rank/marine/o2
-	name = "First Lieutenant"
-	name_short = "1stLt"
+	name = "Second Lieutenant"
+	name_short = "2Lt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/o2)
 	sort_order = 12
 
 /datum/mil_rank/marine/o3
-	name = "Captain"
-	name_short = "Capt"
+	name = "Lieutenant"
+	name_short = "Lt"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/officer/o3)
 	sort_order = 13
 
@@ -531,8 +531,8 @@
 	sort_order = 16
 
 /datum/mil_rank/marine/o7
-	name = "Brigadier General"
-	name_short = "BGen"
+	name = "Brigadier"
+	name_short = "BRG"
 	accessory = list(/obj/item/clothing/accessory/rank/marine/flag)
 	sort_order = 17
 

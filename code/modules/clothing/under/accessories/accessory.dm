@@ -445,8 +445,8 @@
 	icon_state = "fleetrank_officer"
 
 /obj/item/clothing/accessory/rank/fleet/officer/o2
-	name = "ranks (O-2 lieutenant junior grade)"
-	desc = "Insignia denoting the rank of Lieutenant Junior Grade."
+	name = "ranks (O-2 second lieutenant)"
+	desc = "Insignia denoting the rank of Second Lieutenant."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o3
 	name = "ranks (O-3 lieutenant)"
@@ -466,13 +466,13 @@
 	icon_state = "fleetrank_command"
 
 /obj/item/clothing/accessory/rank/fleet/flag
-	name = "ranks (O-7 rear admiral lower half)"
-	desc = "Insignia denoting the rank of Rear Admiral Lower Half."
+	name = "ranks (O-7 commodore"
+	desc = "Insignia denoting the rank of Commodore."
 	icon_state = "fleetrank_command"
 
 /obj/item/clothing/accessory/rank/fleet/flag/o8
-	name = "ranks (O-8 rear admiral upper half)"
-	desc = "Insignia denoting the rank of Rear Admiral Upper Half."
+	name = "ranks (O-8 rear admiral)"
+	desc = "Insignia denoting the rank of Rear Admiral."
 
 /obj/item/clothing/accessory/rank/fleet/flag/o9
 	name = "ranks (O-9 vice admiral)"
@@ -492,21 +492,21 @@
 	icon_state = "marinerank_enlisted"
 
 /obj/item/clothing/accessory/rank/marine/enlisted
-	name = "ranks (E-1 private)"
-	desc = "Insignia denoting the rank of Private."
+	name = "ranks (E-1 mariner apprentice)"
+	desc = "Insignia denoting the rank of Mariner Apprentice."
 	icon_state = "marinerank_enlisted"
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e2
-	name = "ranks (E-2 private first class)"
-	desc = "Insignia denoting the rank of Private First Class."
+	name = "ranks (E-2 mariner second class)"
+	desc = "Insignia denoting the rank of Mariner Second Class."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e3
-	name = "ranks (E-3 lance corporal)"
-	desc = "Insignia denoting the rank of Lance Corporal."
+	name = "ranks (E-3 mariner first class)"
+	desc = "Insignia denoting the rank of Mariner First Class."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e4
-	name = "ranks (E-4 corporal)"
-	desc = "Insignia denoting the rank of Corporal."
+	name = "ranks (E-4 master mariner)"
+	desc = "Insignia denoting the rank of Master Mariner."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e5
 	name = "ranks (E-5 sergeant)"
@@ -517,8 +517,8 @@
 	desc = "Insignia denoting the rank of Staff Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e7
-	name = "ranks (E-7 gunnery sergeant)"
-	desc = "Insignia denoting the rank of Gunnery Sergeant."
+	name = "ranks (E-7 colour sergeant)"
+	desc = "Insignia denoting the rank of Colour Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e8
 	name = "ranks (E-8 master sergeant)"
@@ -529,8 +529,8 @@
 	desc = "Insignia denoting the rank of First Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e9
-	name = "ranks (E-9 master gunnery sergeant)"
-	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
+	name = "ranks (E-9 master colour sergeant)"
+	desc = "Insignia denoting the rank of Master Colour Sergeant."
 
 /obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
 	name = "ranks (E-9 sergeant major)"
@@ -541,17 +541,17 @@
 	desc = "Insignia denoting the rank of Sergeant Major of the Marine Corps."
 
 /obj/item/clothing/accessory/rank/marine/officer
-	name = "ranks (O-1 second lieutenant)"
-	desc = "Insignia denoting the rank of Second Lieutenant."
+	name = "ranks (O-1 ensign)"
+	desc = "Insignia denoting the rank of Ensign."
 	icon_state = "marinerank_officer"
 
 /obj/item/clothing/accessory/rank/marine/officer/o2
-	name = "ranks (O-2 first lieutenant)"
-	desc = "Insignia denoting the rank of First Lieutenant."
+	name = "ranks (O-2 second lieutenant)"
+	desc = "Insignia denoting the rank of Second Lieutenant."
 
 /obj/item/clothing/accessory/rank/marine/officer/o3
-	name = "ranks (O-3 captain)"
-	desc = "Insignia denoting the rank of Captain."
+	name = "ranks (O-3 lieutenant)"
+	desc = "Insignia denoting the rank of Lieutenant."
 
 /obj/item/clothing/accessory/rank/marine/officer/o4
 	name = "ranks (O-4 major)"
@@ -566,8 +566,8 @@
 	desc = "Insignia denoting the rank of Colonel."
 
 /obj/item/clothing/accessory/rank/marine/flag
-	name = "ranks (O-7 brigadier general)"
-	desc = "Insignia denoting the rank of Brigadier General."
+	name = "ranks (O-7 brigadier)"
+	desc = "Insignia denoting the rank of Brigadier."
 	icon_state = "marinerank_command"
 
 /obj/item/clothing/accessory/rank/marine/flag/o8
