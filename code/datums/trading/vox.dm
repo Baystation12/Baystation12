@@ -71,9 +71,6 @@
 				if(SPECIES_VOX)
 					disposition = 1000
 					hailed_vox = 1
-				if(SPECIES_VOXPARIAH)
-					hailed_vox = -1
-					disposition = -1000
 			specific = H.species.name
 	else if(istype(user, /mob/living/silicon))
 		specific = "silicon"
