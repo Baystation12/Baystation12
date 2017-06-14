@@ -96,7 +96,7 @@ var/list/limb_icon_cache = list()
 
 	if(owner)
 		if(eye_icon)
-			var/icon/eyes_icon = new/icon('icons/mob/human_face.dmi', eye_icon)
+			var/icon/eyes_icon = new/icon(species.use_eye_icon ? species.use_eye_icon : 'icons/mob/human_face.dmi', eye_icon)
 			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 			if(eyes)
 				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
@@ -160,6 +160,9 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 		if(!icon_cache_key || !limb_icon_cache[cache_key])
 			limb_icon_cache[cache_key] = icon(get_icon(), null, SOUTH)
 		var/image/temp = image(limb_icon_cache[cache_key])
+		temp.pixel_x = owner.default_pixel_x
+		temp.pixel_y = owner.default_pixel_y
+
 		if(species)
 			// Calculate the required colour matrix.
 			var/r = 0.30 * species.health_hud_intensity

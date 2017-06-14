@@ -1137,6 +1137,11 @@
 
 	maxHealth = species.total_health
 
+	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
+	pixel_x = default_pixel_x
+	pixel_y = default_pixel_y
+
 	spawn(0)
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
