@@ -39,9 +39,17 @@ Thus, the two variables affect pump operation are set in New():
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
+/obj/machinery/atmospherics/binary/pump/max/initialize()
+	..()
+	target_pressure = max_pressure_setting
+
 /obj/machinery/atmospherics/binary/pump/on
 	icon_state = "map_on"
 	use_power = 1
+
+/obj/machinery/atmospherics/binary/pump/on/max/initialize()
+	..()
+	target_pressure = max_pressure_setting
 
 
 /obj/machinery/atmospherics/binary/pump/update_icon()
@@ -188,6 +196,10 @@ Thus, the two variables affect pump operation are set in New():
 	usr.set_machine(src)
 	ui_interact(user)
 	return
+
+/obj/machinery/atmospherics/binary/pump/AltClick(var/mob/user)
+	if(CanPhysicallyInteract(user))
+		Topic(src, list("power" = "1"))
 
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
 	if(..()) return 1

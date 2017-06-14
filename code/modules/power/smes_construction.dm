@@ -83,6 +83,12 @@
 	input_level = input_level_max
 	output_level = output_level_max
 
+/obj/machinery/power/smes/buildable/max_cap_in_out/offline/initialize()
+	..()
+	charge = 0
+	input_attempt = FALSE
+	output_attempt = FALSE
+
 /obj/machinery/power/smes/buildable/Destroy()
 	qdel(wires)
 	wires = null
