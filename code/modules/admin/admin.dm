@@ -10,6 +10,12 @@ var/global/floorIsLava = 0
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
+/proc/message_staff(var/msg)
+	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
+	log_adminwarn(msg)
+	for(var/client/C in admins)
+		if(R_INVESTIGATE & C.holder.rights)
+			to_chat(C, msg)
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
