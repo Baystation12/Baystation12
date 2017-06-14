@@ -35,9 +35,11 @@
 		walk_to(src, destination)
 
 /obj/effect/effect/smoke/chem/Destroy()
+	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	set_opacity(0)
+	// TODO - fadeOut() sleeps.  Sleeping in /Destroy is Bad, this needs to be fixed.
 	fadeOut()
-	..()
+	return ..()
 
 /obj/effect/effect/smoke/chem/Move()
 	var/list/oldlocs = view(1, src)
