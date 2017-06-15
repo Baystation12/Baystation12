@@ -18,54 +18,26 @@
 	return 1
 
 /obj/structure/closet/crate/open()
-	if(src.opened)
-		return 0
-	if(!src.can_open())
-		return 0
-
-	if(rigged && locate(/obj/item/device/radio/electropack) in src)
-		if(isliving(usr))
-			var/mob/living/L = usr
-			if(L.electrocute_act(17, src))
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(5, 1, src)
-				s.start()
-				if(usr.stunned)
-					return 2
-
-	playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
-	for(var/obj/O in src)
-		O.forceMove(get_turf(src))
-	icon_state = icon_opened
-	src.opened = 1
-
-	if(flags & OBJ_CLIMBABLE)
+	if(flags & OBJ_CLIMBABLE && !opened && can_open())
 		object_shaken()
-	return 1
+	. = ..()
+	if(.)
+		if(rigged)
+			visible_message("<span class='danger'>There are wires attached to the lid of [src]...</span>")
+			for(var/obj/item/device/assembly_holder/H in src)
+				H.process_activation(usr)
+			for(var/obj/item/device/assembly/A in src)
+				A.activate()
 
-/obj/structure/closet/crate/close()
-	if(!src.opened)
-		return 0
-	if(!src.can_close())
-		return 0
-
-	playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
-	var/itemcount = 0
-	for(var/obj/O in get_turf(src))
-		if(itemcount >= storage_capacity)
-			break
-		if(O.density || O.anchored || istype(O,/obj/structure/closet))
-			continue
-		if(istype(O, /obj/structure/bed)) //This is only necessary because of rollerbeds and swivel chairs.
-			var/obj/structure/bed/B = O
-			if(B.buckled_mob)
-				continue
-		O.forceMove(src)
-		itemcount++
-
-	icon_state = icon_closed
-	src.opened = 0
-	return 1
+/obj/structure/closet/crate/examine(mob/user)
+	..()
+	if(rigged && opened)
+		var/list/devices = list()
+		for(var/obj/item/device/assembly_holder/H in src)
+			devices += H
+		for(var/obj/item/device/assembly/A in src)
+			devices += A
+		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
 
 /obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(opened)
@@ -81,7 +53,7 @@
 			to_chat(user, "<span class='notice'>You rig [src].</span>")
 			rigged = 1
 			return
-	else if(istype(W, /obj/item/device/radio/electropack))
+	else if(istype(W, /obj/item/device/assembly_holder) || istype(W, /obj/item/device/assembly))
 		if(rigged)
 			to_chat(user, "<span class='notice'>You attach [W] to [src].</span>")
 			user.drop_item()
@@ -101,19 +73,14 @@
 			for(var/obj/O in src.contents)
 				qdel(O)
 			qdel(src)
-			return
 		if(2.0)
 			for(var/obj/O in src.contents)
 				if(prob(50))
 					qdel(O)
 			qdel(src)
-			return
 		if(3.0)
 			if (prob(50))
 				qdel(src)
-			return
-		else
-	return
 
 /obj/structure/closet/crate/secure
 	desc = "A secure crate."
