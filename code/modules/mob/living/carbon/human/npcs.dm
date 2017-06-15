@@ -45,8 +45,8 @@
 /decl/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
 	var/obj/item/clothing/under/color/white/C = locate() in H
 	if(C)
-		C.has_sensor = 2 //For the crew computer 2 = unable to change mode
-		C.sensor_mode = 0
+		C.has_sensor  = SUIT_LOCKED_SENSORS
+		C.sensor_mode = SUIT_SENSOR_OFF
 
 /mob/living/carbon/human/blank/New(var/new_loc)
 	..(new_loc, "Vat-Grown Human")
