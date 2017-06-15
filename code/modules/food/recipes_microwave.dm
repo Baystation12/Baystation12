@@ -166,6 +166,14 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/waffles
 
+/datum/recipe/pancakes
+	fruit = list("blueberries" = 2)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/pancakes
+
 /datum/recipe/donkpocket
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
@@ -787,6 +795,13 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/slice/bread,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/twobread
+
+/datum/recipe/threebread
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/twobread,
+		/obj/item/weapon/reagent_containers/food/snacks/slice/bread,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/threebread
 
 /datum/recipe/slimesandwich
 	reagents = list("slimejelly" = 5)

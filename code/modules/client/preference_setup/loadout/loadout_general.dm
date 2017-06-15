@@ -46,6 +46,19 @@
 	..()
 	gear_tweaks += new/datum/gear_tweak/reagents(lunchables_drink_reagents())
 
+/datum/gear/coffeecup
+	display_name = "coffee cup"
+	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
+
+/datum/gear/coffeecup/New()
+	..()
+	var/list/coffeecups = list()
+	coffeecups["coffee cup"] = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
+	for(var/coffeecup_type in typesof(/obj/item/weapon/reagent_containers/food/drinks/coffeecup))
+		var/obj/item/weapon/reagent_containers/food/drinks/coffeecup/coffeecup = coffeecup_type
+		coffeecups[initial(coffeecup.name)] = coffeecup_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(coffeecups))
+
 /datum/gear/boot_knife
 	display_name = "boot knife"
 	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
