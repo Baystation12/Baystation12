@@ -1,0 +1,4 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Research module robots now have access to a welding tool."
