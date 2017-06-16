@@ -304,10 +304,6 @@
 			logout()
 			. = TRUE
 
-	//played at the end so only genuine presses that don't get stopped beep.
-	playsound(src, 'sound/machines/buttonbeep.ogg', 10, 1, rand(40000, 50000)) // restricting pitch so we don't sound like a bike horn.
-
-
 	return TRUE
 
 /obj/machinery/computer/supply/emag_act(var/remaining_charges, var/mob/user)
