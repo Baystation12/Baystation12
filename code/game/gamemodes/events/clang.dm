@@ -41,6 +41,10 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 		if(clong && prob(25))
 			src.forceMove(clong.loc)
 
+	Destroy()
+		walk(src, 0) // Because we might have called walk_towards, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+		return ..()
+
 /proc/immovablerod()
 	var/startx = 0
 	var/starty = 0
