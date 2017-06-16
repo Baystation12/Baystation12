@@ -218,7 +218,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(silenced > 0)
 		return 0
 
-	if(!(src in user.mind.learned_spells) && holder == user)
+	if(!(src in user.mind.learned_spells) && holder == user && !(isanimal(user)))
 		error("[user] utilized the spell '[src]' without having it.")
 		to_chat(user, "<span class='warning'>You shouldn't have this spell! Something's wrong.</span>")
 		return 0
