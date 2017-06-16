@@ -1367,6 +1367,12 @@
 	name = "\improper Fifth Deck Shield Generator"
 */
 // Misc
+/area/deity_spawn
+	name = "\improper Deity Spawn"
+	icon_state = "yellow"
+	requires_power = 0
+	dynamic_lighting = 0
+
 /area/teleporter
 	name = "\improper Teleporter"
 	icon_state = "teleporter"
