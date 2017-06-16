@@ -24,7 +24,8 @@
 		to_chat(L,"<span class='notice'>It appears [origin_text].</span>")
 
 	to_chat(L, "<span class='cult'>\The [src] grants you a boon of [current_boon]!</span>")
-	log_admin("[key_name(src)] gave [key_name(L)] the boon [current_boon]")
+	to_chat(src, "<span class='notice'>You give \the [L] a boon of [current_boon].</span>")
+	log_and_message_admins("[key_name(src)] gave [key_name(L)] the boon [current_boon]")
 	current_boon = null
 	return
 
