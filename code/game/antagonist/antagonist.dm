@@ -53,7 +53,7 @@
 	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum
 
 	// Used for setting appearance.
-	var/list/valid_species =       list(SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_HUMAN)
+	var/list/valid_species =       list(SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_HUMAN,SPECIES_VOX)
 	var/min_player_age = 14
 
 	// Runtime vars.
