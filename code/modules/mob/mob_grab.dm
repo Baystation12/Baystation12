@@ -413,7 +413,7 @@
 	switch(state)
 		if(GRAB_PASSIVE)
 			//Being knocked down makes it harder to break a grab, so it is easier to cuff someone who is down without forcing them into unconsciousness.
-			//use same chance_table as aggressive but give +2 for not-weakened so that resomi grabs don't become auto-success for weakened either, that's lame
+			//use same chance_table as aggressive but give +2 for not-weakened so that small mob grabs don't become auto-success for weakened either, that's lame
 			if(!affecting.incapacitated(INCAPACITATION_KNOCKDOWN))
 				break_strength += 2
 			break_chance_table = list(15, 60, 100)
