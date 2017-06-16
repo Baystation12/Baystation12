@@ -47,7 +47,6 @@
 
 /datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
-		if(IS_RESOMI) removed *= 0.8 // Resomi get a bit more nutrition from meat, a bit less from other stuff to compensate
 		if(IS_UNATHI) removed *= 0.1 // Unathi get most of their nutrition from meat.
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
 
@@ -73,7 +72,6 @@
 
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
-		if(IS_RESOMI) removed *= 1.25
 		if(IS_UNATHI) removed *= 2.25
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
 

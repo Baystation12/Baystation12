@@ -2332,7 +2332,7 @@
 "WZ" = (/obj/machinery/door/airlock{id_tag = "rdorm2"; name = "Dorm 2"},/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/merchant_station)
 "Xa" = (/obj/item/tape,/turf/simulated/floor,/area/merchant_station)
 "Xb" = (/obj/item/remains,/turf/simulated/floor,/area/merchant_station)
-"Xc" = (/obj/item/clothing/under/resomi,/turf/simulated/floor/shuttle/red,/area/syndicate_mothership/ninja)
+"Xc" = (/turf/simulated/floor/shuttle/red,/area/syndicate_mothership/ninja)
 "Xd" = (/obj/structure/sign/warning/lethal_turrets,/turf/unsimulated/wall,/area/centcom/holding)
 "Xg" = (/turf/simulated/floor,/area/merchant_station)
 "Xh" = (/obj/structure/cable/blue{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable/blue{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/airless,/area/merchant_station)

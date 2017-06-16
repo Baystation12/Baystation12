@@ -115,7 +115,6 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -180,7 +179,6 @@ BLIND     // can't see anything
 	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/eyes.dmi',
 		)
 
 /obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
@@ -213,7 +211,6 @@ BLIND     // can't see anything
 	species_restricted = list("exclude",SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/gloves.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
 
@@ -281,7 +278,6 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/head.dmi'
 		)
 	blood_overlay_type = "helmetblood"
 
@@ -391,7 +387,6 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/masks.dmi',
 		)
 
 	var/voicechange = 0
@@ -481,7 +476,6 @@ BLIND     // can't see anything
 	species_restricted = list("exclude",SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/shoes.dmi',
 		)
 	blood_overlay_type = "shoeblood"
 
@@ -563,7 +557,6 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi'
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -612,7 +605,6 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
