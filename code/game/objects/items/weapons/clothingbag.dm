@@ -13,7 +13,7 @@
 		opened = 1
 		icon_state = icon_used
 		for(var/obj/item in contents)
-			item.forceMove(get_turf(src))
+			item.dropInto(loc)
 	else
 		to_chat(user, "<span class='warning'>\The [src.name] is already ripped open and is now completely useless!</span>")
 
@@ -23,7 +23,7 @@
 
 /obj/item/weapon/clothingbag/rubbersuit/New()
 	..()
-	switch(rand(1,3))
+	switch(rand(1,4))
 		if(1)
 			new/obj/item/clothing/suit/rubber(src)
 			new/obj/item/clothing/mask/rubber/species(src)
