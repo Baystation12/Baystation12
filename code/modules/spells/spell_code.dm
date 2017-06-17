@@ -107,13 +107,13 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
-	if(!targets)
+	if(!check_valid_targets(targets))
 		return
 	var/time = 0
 	admin_attacker_log(user, "attempted to cast the spell [name]")
 	do
 		time++
-		if(!targets || (islist(targets) && !targets.len)) //make sure we HAVE something
+		if(!check_valid_targets(targets)) //make sure we HAVE something
 			break
 		if(cast_check(1,user, targets)) //we check again, otherwise you can choose a target and then wait for when you are no longer able to cast (I.E. Incapacitated) to use it.
 			invocation(user, targets)
@@ -167,14 +167,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 ///////////////////////////
 
 /spell/proc/before_cast(list/targets)
-	var/valid_targets[0]
 	for(var/atom/target in targets)
-		// Check range again (fixes long-range EI NATH)
-		if(!(target in view_or_range(range,usr,selection_type)))
-			continue
-
-		valid_targets += target
-
 		if(overlay)
 			var/location
 			if(istype(target,/mob/living))
@@ -188,7 +181,6 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			spell.set_density(0)
 			spawn(overlay_lifespan)
 				qdel(spell)
-	return valid_targets
 
 /spell/proc/after_cast(list/targets)
 	if(cast_sound)
@@ -294,6 +286,9 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 				return 1
 		return 0
 	return 1
+
+/spell/proc/check_valid_targets(var/list/targets)
+	return targets && (!islist(targets) || targets.len)
 
 /spell/proc/invocation(mob/user = usr, var/list/targets) //spelling the spell out and setting it on recharge/reducing charges amount
 
