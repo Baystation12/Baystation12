@@ -79,7 +79,7 @@
 
 		handle_medical_side_effects()
 
-		if(!client)
+		if(!client && !mind)
 			species.handle_npc(src)
 
 
