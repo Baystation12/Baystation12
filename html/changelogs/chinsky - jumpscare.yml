@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Can now rig assemblies/devices(e.g. radio signalers) to trigger when crate is opened. Click wires on open crate, then click with assemblies. It would trigger when opened next time. Use wirecutter to unrig."
