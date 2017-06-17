@@ -52,12 +52,7 @@
 
 /datum/gear/coffeecup/New()
 	..()
-	var/list/coffeecups = list()
-	coffeecups["coffee cup"] = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
-	for(var/coffeecup_type in typesof(/obj/item/weapon/reagent_containers/food/drinks/coffeecup))
-		var/obj/item/weapon/reagent_containers/food/drinks/coffeecup/coffeecup = coffeecup_type
-		coffeecups[initial(coffeecup.name)] = coffeecup_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(coffeecups))
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/weapon/reagent_containers/food/drinks/coffeecup)
 
 /datum/gear/boot_knife
 	display_name = "boot knife"
