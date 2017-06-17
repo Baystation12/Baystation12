@@ -1174,7 +1174,7 @@
 	description = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
 	color = "#0064C6"
-	strength = 50
+	strength = 15
 
 	glass_name = "gin"
 	glass_desc = "A crystal clear glass of Griffeater gin."
