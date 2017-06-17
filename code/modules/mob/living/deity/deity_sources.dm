@@ -26,6 +26,8 @@
 
 /mob/living/deity/proc/add_source(var/amount, var/atom/source, var/silent = 0, var/msg)
 	adjust_power(amount, silent, msg)
+	if(!ismovable(source))
+		return
 	if(amount > 0)
 		eyeobj.visualnet.add_source(source)
 		if(isobj(source))
@@ -35,11 +37,12 @@
 			structures -= source
 
 /mob/living/deity/proc/is_follower(var/mob/living/L, var/silent = 0)
-	if(L.mind)
-		if(L.mind in minions)
-			return 1
-	if(!silent)
-		to_chat(src, "<span class='warning'>You do not feel a malleable mind behind that frame.</span>")
+	if(istype(L))
+		if(L.mind)
+			if(L.mind in minions)
+				return 1
+		if(!silent)
+			to_chat(src, "<span class='warning'>You do not feel a malleable mind behind that frame.</span>")
 	return 0
 
 /mob/living/deity/fully_replace_character_name(var/new_name, var/in_depth = TRUE)
