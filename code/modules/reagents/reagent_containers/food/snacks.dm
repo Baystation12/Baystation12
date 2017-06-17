@@ -993,6 +993,18 @@
 		..()
 		bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/pancakes
+	name = "pancakes"
+	desc = "Pancakes with blueberries, delicious."
+	icon_state = "pancakes"
+	trash = /obj/item/trash/plate
+	center_of_mass = "x=15;y=11"
+	nutriment_desc = list("pancake" = 8)
+	nutriment_amt = 8
+	New()
+		..()
+		bitesize = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/eggplantparm
 	name = "Eggplant Parmigiana"
 	desc = "The only good recipe for eggplant."
@@ -2043,6 +2055,18 @@
 	New()
 		..()
 		bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/threebread
+	name = "Three Bread"
+	desc = "Is such a thing even possible?"
+	icon_state = "threebread"
+	filling_color = "#DBCC9A"
+	center_of_mass = "x=15;y=12"
+	nutriment_desc = list("sourness" = 2, "bread" = 3)
+	nutriment_amt = 3
+	New()
+		..()
+		bitesize = 4
 
 /obj/item/weapon/reagent_containers/food/snacks/jellysandwich
 	name = "Jelly Sandwich"
