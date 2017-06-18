@@ -39,10 +39,13 @@
 
 /datum/event/meteor_wave/proc/send_wave()
 	var/pick_side = prob(80) ? start_side : (prob(50) ? turn(start_side, 90) : turn(start_side, -90))
-	spawn() spawn_meteors(severity * rand(2,4), get_meteors(), pick_side)
+	spawn() spawn_meteors(get_wave_size(), get_meteors(), pick_side)
 	next_meteor += rand(next_meteor_lower, next_meteor_upper) / severity
 	waves--
 	endWhen = worst_case_end()
+
+/datum/event/meteor_wave/proc/get_wave_size()
+	return severity * rand(2,4)
 
 /datum/event/meteor_wave/end()
 	switch(severity)
@@ -97,3 +100,26 @@
 	next_meteor_lower = 5
 	next_meteor_upper = 10
 	next_meteor = 0
+	var/obj/effect/overmap/ship/victim
+
+/datum/event/meteor_wave/overmap/Destroy()
+	victim = null
+	. = ..()
+
+/datum/event/meteor_wave/overmap/tick()
+	if(victim && !victim.is_still()) //Meteors mostly fly in your face
+		start_side = prob(90) ? victim.fore_dir : pick(cardinal)
+	else //Unless you're standing
+		start_side = pick(cardinal)
+	..()
+
+/datum/event/meteor_wave/overmap/get_wave_size()
+	. = ..()
+	if(!victim)
+		return
+	if(victim.is_still()) //Standing still means less shit flies your way
+		. = round(. * 0.25)
+	if(victim.get_speed() < 0.3) //Slow and steady
+		. = round(. * 0.6)
+	if(victim.get_speed() > 3) //Sanic stahp
+		. *= 2
