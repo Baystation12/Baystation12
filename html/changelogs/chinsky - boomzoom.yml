@@ -1,0 +1,7 @@
+
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - tweak: "Speed now matters when flying into meteor field. Still - 25% the meteors, below 0.3 - 60% of usual, normal otherwise until above 3 speed, where you start getting double the fun. Also if ship is moving most meteors will fly in from front and sides."
