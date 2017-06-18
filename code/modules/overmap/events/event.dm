@@ -162,6 +162,6 @@
 
 /datum/overmap_event/dust
 	name = "dust cloud"
-	event = /datum/event/dust/overmap //Probability is annoying.
+	event = /datum/event/dust
 	count = 11
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")
