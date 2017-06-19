@@ -1,8 +1,0 @@
-
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - tweak: "Speed now matters when flying into meteor field. Still - 25% the meteors, below 0.3 - 60% of usual, normal otherwise until above 3 speed, where you start getting double the fun. Also if ship is moving most meteors will fly in from front and sides."
-  - tweak: "Changes spess dust event. It used to be a single wave of quasi-meteors that exploded for a bit before dying. There were no further waves until you left and came back. Now waves keep coming ~twice a minute. Dust itself is now a pile of micrometeors - basically space bullets. It wouldn't do a lot of damage to the hull, but can break windows and makes EVA pretty damn dangerous."
