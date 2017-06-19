@@ -21,3 +21,25 @@
 /turf/simulated/floor/fixed/set_flooring()
 	return
 
+/turf/simulated/floor/fixed/alium
+	name = "alien plating"
+	desc = "This obviously wasn't made for your feet."
+	icon = 'icons/turf/flooring/alium.dmi'
+	icon_state = "jaggy"
+	var/global/acolor
+
+/turf/simulated/floor/fixed/alium/attackby(var/obj/item/C, var/mob/user)
+	if(istype(C, /obj/item/weapon/crowbar))
+		to_chat(user, "<span class='notice'>There isn't any openings big enough to pry it away...</span>")
+		return
+	return ..()
+	
+/turf/simulated/floor/fixed/alium/New()
+	..()
+	if(!acolor)
+		acolor = rgb(rand(40,200),rand(40,200),rand(40,200))
+	color = acolor
+	icon_state = "[icon_state][((x + y) ^ ~(x * y)) % 7]"
+
+/turf/simulated/floor/fixed/alium/curves
+	icon_state = "curvy"
