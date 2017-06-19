@@ -1,0 +1,6 @@
+
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "SCG had mastered the secret art of 'background check'. CO and XO are no longer be eligible for roundstart antag roles on Torch. Can still be converted in round"
+  - bugfix: "As a side effect, they aren't going to get rev'd anymore, that was a bug."
