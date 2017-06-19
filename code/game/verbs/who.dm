@@ -8,8 +8,13 @@
 	var/list/Lines = list()
 
 	if(check_rights(R_INVESTIGATE, 0))
-		for(var/client/C)
+		for(var/client/C in clients)
 			var/entry = "\t[C.key]"
+			if(!C.mob) //If mob is null, print error and skip rest of info for client.
+				entry += " - <font color='red'><i>HAS NO MOB</i></font>"
+				Lines += entry
+				continue
+
 			entry += " - Playing as [C.mob.real_name]"
 			switch(C.mob.stat)
 				if(UNCONSCIOUS)
@@ -44,7 +49,7 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C)
+		for(var/client/C in clients)
 			if(!C.is_stealthed())
 				Lines += C.key
 
@@ -72,11 +77,11 @@
 			line += "\t[C] is \an <b>["\improper[C.holder.rank]"]</b>"
 		else
 			line += "\t[C] is \an ["\improper[C.holder.rank]"]"
-		if(C.is_afk())
-			line += can_investigate ? " (AFK - [C.inactivity2text()])" : "(AFK)"
-		else
+		if(!C.is_afk())
 			active_staff++
 		if(can_investigate)
+			if(C.is_afk())
+				line += " (AFK - [C.inactivity2text()])"
 			if(isghost(C.mob))
 				line += " - Observing"
 			else if(istype(C.mob,/mob/new_player))

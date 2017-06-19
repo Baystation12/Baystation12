@@ -178,6 +178,21 @@
 	organ_tag = BP_APPENDIX
 	var/inflamed = 0
 
+/obj/item/organ/internal/appendix/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
+	if(owner)
+		owner.immunity_norm -= 10
+	..()
+
+/obj/item/organ/internal/appendix/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
+	..()
+	if(owner)
+		owner.immunity_norm += 10
+
+/obj/item/organ/internal/appendix/New(var/mob/living/carbon/holder)
+	..()
+	if(owner)
+		owner.immunity_norm += 10
+
 /obj/item/organ/internal/appendix/update_icon()
 	..()
 	if(inflamed)
@@ -186,7 +201,10 @@
 
 /obj/item/organ/internal/appendix/process()
 	..()
-	if(inflamed && owner)
+	if(!owner)
+		return
+	owner.immunity = min(owner.immunity + 0.025, owner.immunity_norm)
+	if(inflamed)
 		inflamed++
 		if(prob(5))
 			if(owner.can_feel_pain())

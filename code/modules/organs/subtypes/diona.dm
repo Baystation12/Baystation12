@@ -59,6 +59,12 @@
 	parent_organ = BP_CHEST
 	can_grasp = 1
 
+/obj/item/organ/external/diona/arm/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || (agony_amount < 5))
+		return
+	if(prob(25))
+		owner.grasp_damage_disarm(src)
+
 /obj/item/organ/external/diona/arm/right
 	name = "right upper tendril"
 	organ_tag = BP_R_ARM
@@ -76,6 +82,13 @@
 	icon_position = LEFT
 	parent_organ = BP_GROIN
 	can_stand = 1
+
+/obj/item/organ/external/diona/leg/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || agony_amount < 5)
+		return
+	if(prob(agony_amount*2))
+		to_chat(owner, "<span class='warning'>Your [src] buckles from the shock!</span>")
+		owner.Weaken(5)
 
 /obj/item/organ/external/diona/leg/right
 	name = "right lower tendril"
@@ -95,6 +108,13 @@
 	icon_position = LEFT
 	parent_organ = BP_L_LEG
 	can_stand = 1
+
+/obj/item/organ/external/diona/foot/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || agony_amount < 5)
+		return
+	if(prob(agony_amount*4))
+		to_chat(owner, "<span class='warning'>You lose your footing as your [src] spasms!</span>")
+		owner.Weaken(5)
 
 /obj/item/organ/external/diona/foot/right
 	name = "right foot"
@@ -116,6 +136,11 @@
 	body_part = HAND_LEFT
 	parent_organ = BP_L_ARM
 	can_grasp = 1
+
+/obj/item/organ/external/diona/hand/stun_act(var/stun_amount, var/agony_amount)
+	if(!owner || (agony_amount < 5))
+		return
+	owner.grasp_damage_disarm(src)
 
 /obj/item/organ/external/diona/hand/right
 	name = "right grasper"

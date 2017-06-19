@@ -29,7 +29,9 @@
 		"purple" =   "ipc_purple",
 		"shower" =   "ipc_shower",
 		"static" =   "ipc_static",
-		"yellow" =   "ipc_yellow"
+		"yellow" =   "ipc_yellow",
+		"smiley" =   "ipc_smiley",
+		"list" =     "ipc_database"
 		)
 
 /obj/item/clothing/mask/monitor/set_dir()

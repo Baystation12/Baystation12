@@ -369,6 +369,13 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
+
+/obj/item/weapon/weldingtool/mini
+	name = "miniature welding tool"
+	max_fuel = 5
+	origin_tech = list(TECH_ENGINEERING = 2)
+	matter = list(DEFAULT_WALL_MATERIAL = 15, "glass" = 5)
+
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40

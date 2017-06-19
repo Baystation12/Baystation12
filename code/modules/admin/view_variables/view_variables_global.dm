@@ -37,7 +37,9 @@
 				"sqllogin",
 				"sqlpass",
 				"sqlport",
-				"comms_password"
+				"comms_password",
+				"ban_comms_password",
+				"login_export_addr"
 			)
 
 /client/proc/debug_global_variables()

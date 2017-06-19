@@ -461,6 +461,8 @@
 			return global.default_state;
 		if("defer_powernet_rebuild")
 			return global.defer_powernet_rebuild;
+		if("deity")
+			return global.deity;
 		if("delta_index")
 			return global.delta_index;
 		if("density_set_event")
@@ -653,6 +655,8 @@
 			return global.global_underwear;
 		if("global_vars_")
 			return global.global_vars_;
+		if("godcult")
+			return global.godcult;
 		if("gravity_is_on")
 			return global.gravity_is_on;
 		if("gyrotrons")
@@ -1389,8 +1393,6 @@
 			return global.ticker;
 		if("tickerProcess")
 			return global.tickerProcess;
-		if("to_process")
-			return global.to_process;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
 		if("total_lighting_overlays")
@@ -1962,6 +1964,8 @@
 			global.default_state=newval;
 		if("defer_powernet_rebuild")
 			global.defer_powernet_rebuild=newval;
+		if("deity")
+			global.deity=newval;
 		if("delta_index")
 			global.delta_index=newval;
 		if("density_set_event")
@@ -2154,6 +2158,8 @@
 			global.global_underwear=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
+		if("godcult")
+			global.godcult=newval;
 		if("gravity_is_on")
 			global.gravity_is_on=newval;
 		if("gyrotrons")
@@ -2890,8 +2896,6 @@
 			global.ticker=newval;
 		if("tickerProcess")
 			global.tickerProcess=newval;
-		if("to_process")
-			global.to_process=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -3232,6 +3236,7 @@
 	"default_pai_software",
 	"default_state",
 	"defer_powernet_rebuild",
+	"deity",
 	"delta_index",
 	"density_set_event",
 	"department_accounts",
@@ -3328,6 +3333,7 @@
 	"global_mutations",
 	"global_underwear",
 	"global_vars_",
+	"godcult",
 	"gravity_is_on",
 	"gyrotrons",
 	"hadevent",
@@ -3696,7 +3702,6 @@
 	"tick_multiplier",
 	"ticker",
 	"tickerProcess",
-	"to_process",
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",

@@ -8,6 +8,7 @@
 	max_damage = 0
 	dir = SOUTH
 	organ_tag = "limb"
+	appearance_flags = PIXEL_SCALE
 
 	// Strings
 	var/broken_description             // fracture string if any.
@@ -1164,6 +1165,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/list/wound_descriptors = list()
 	if(open > 1)
 		wound_descriptors["an open incision"] = 1
+		if(open > (encased ? 2 : 1))
+			var/list/bits = list()
+			for(var/obj/item/organ/organ in internal_organs)
+				if(organ.damage)
+					bits += "[organ.damage ? "damaged " : ""][organ.name]"
+			wound_descriptors["with [english_list(bits)] visible"] = 1
 	else if (open)
 		wound_descriptors["an incision"] = 1
 	for(var/datum/wound/W in wounds)

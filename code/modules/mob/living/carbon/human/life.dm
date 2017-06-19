@@ -79,7 +79,7 @@
 
 		handle_medical_side_effects()
 
-		if(!client)
+		if(!client && !mind)
 			species.handle_npc(src)
 
 
@@ -177,7 +177,8 @@
 					continue
 				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
 			Paralyse(10)
-			make_jittery(1000)
+			if(jitteriness < 200)
+				make_jittery(200)
 	if (disabilities & COUGHING)
 		if ((prob(5) && paralysis <= 1))
 			drop_item()
@@ -193,7 +194,8 @@
 						emote("twitch")
 					if(2 to 3)
 						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				make_jittery(100)
+				if(jitteriness < 100)
+					make_jittery(100)
 				return
 	if (disabilities & NERVOUS)
 		if (prob(10))
@@ -321,7 +323,7 @@
 /mob/living/carbon/human/handle_post_breath(datum/gas_mixture/breath)
 	..()
 	//spread some viruses while we are at it
-	if(breath && virus2.len > 0 && prob(10))
+	if(breath && !internal && virus2.len > 0 && prob(10))
 		for(var/mob/living/carbon/M in view(1,src))
 			src.spread_disease_to(M)
 

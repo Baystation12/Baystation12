@@ -60,6 +60,18 @@
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 
+	if(H.traumatic_shock && H.shock_stage < 40 && prob(3))
+		H.custom_emote("chimpers pitifully")
+
+	if(H.shock_stage > 10 && prob(3))
+		H.emote(pick("cry","whimper"))
+
+	if(H.shock_stage >= 40 && prob(3))
+		H.emote("scream")
+
+	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
+		H.custom_emote("thrashes in agony")
+
 /datum/species/monkey/get_random_name()
 	return "[lowertext(name)] ([rand(100,999)])"
 

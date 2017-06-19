@@ -23,7 +23,6 @@
 #define IS_UNATHI  4
 #define IS_TAJARA  5
 #define IS_XENOS   6
-#define IS_RESOMI  7
 #define IS_SLIME   8
 
 #define CE_STABLE "stable" // Inaprovaline
@@ -35,6 +34,7 @@
 #define CE_SPEEDBOOST "gofast" // Hyperzine
 #define CE_PULSE      "xcardic" // increases or decreases heart rate
 #define CE_NOPULSE    "heartstop" // stops heartbeat
+#define CE_ANTIVIRAL    "antiviral" // suppresses effects of virus effects
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

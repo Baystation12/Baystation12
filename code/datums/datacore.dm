@@ -5,6 +5,7 @@
 /datum/data/record
 	var/name = "record"
 	var/size = 5
+	var/archived = FALSE // Only used by digital warrants so far. Hopefully does also find use for other records in future.
 	var/list/fields = list()
 
 /datum/datacore

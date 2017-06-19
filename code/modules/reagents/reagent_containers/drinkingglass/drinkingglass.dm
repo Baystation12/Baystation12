@@ -14,8 +14,6 @@
 	var/base_icon = "square" // Base icon name
 	volume = 30
 
-	var/filling_states // List of percentages full that have icons
-
 	var/list/extras = list() // List of extras. Two extras maximum
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
@@ -102,12 +100,7 @@
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
-		var/amnt = 100
-		var/percent = round((reagents.total_volume / volume) * 100)
-		for(var/k in cached_number_list_decode(filling_states))
-			if(percent <= k)
-				amnt = k
-				break
+		var/amnt = get_filling_state()
 
 		if(has_ice())
 			over_liquid |= "[base_icon][amnt]_ice"

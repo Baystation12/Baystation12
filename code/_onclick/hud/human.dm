@@ -56,65 +56,11 @@
 	// Draw the attack intent dialogue.
 	if(hud_data.has_a_intent)
 
-		using = new /obj/screen()
-		using.name = "act_intent"
-		using.icon = ui_style
-		using.icon_state = "intent_"+mymob.a_intent
-		using.screen_loc = ui_acti
-		using.color = ui_color
-		using.alpha = ui_alpha
+		using = new /obj/screen/intent()
 		src.adding += using
 		action_intent = using
 
 		hud_elements |= using
-
-		//intent small hud objects
-		var/icon/ico
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),1,ico.Height()/2,ico.Width()/2,ico.Height())
-		using = new /obj/screen( src )
-		using.name = I_HELP
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		help_intent = using
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,ico.Height()/2,ico.Width(),ico.Height())
-		using = new /obj/screen( src )
-		using.name = I_DISARM
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		disarm_intent = using
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,1,ico.Width(),ico.Height()/2)
-		using = new /obj/screen( src )
-		using.name = I_GRAB
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		grab_intent = using
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),1,1,ico.Width()/2,ico.Height()/2)
-		using = new /obj/screen( src )
-		using.name = I_HURT
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		hurt_intent = using
-		//end intent small hud objects
 
 	if(hud_data.has_m_intent)
 		using = new /obj/screen()

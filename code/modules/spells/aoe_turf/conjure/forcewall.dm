@@ -1,6 +1,7 @@
 /spell/aoe_turf/conjure/forcewall
 	name = "Forcewall"
 	desc = "Create a wall of pure energy at your location."
+	school = "conjuration"
 	feedback = "FW"
 	summon_type = list(/obj/effect/forcefield)
 	duration = 300

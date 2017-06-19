@@ -127,6 +127,9 @@ REAGENT SCANNER
 					++unknown
 			if(unknown)
 				to_chat(user, "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>")
+		var/immunity = round(C.virus_immunity()*100)
+		if(immunity < 25)
+			user.show_message("<span class='warning'>Extremely low antibody levels - [immunity]% of baseline.</span>")
 		if(C.virus2.len)
 			for (var/ID in C.virus2)
 				if (ID in virusDB)

@@ -92,11 +92,6 @@
 
 	T.Weaken(3)
 
-	// Pariahs are not good at leaping. This is snowflakey, pls fix.
-	if(species.name == SPECIES_VOXPARIAH || src.handcuffed || stance_damage >= 2)
-		src.Weaken(5)
-		return
-
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
