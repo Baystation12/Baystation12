@@ -1,6 +1,0 @@
-author: ZeroBits
-delete-after: True
-changes: 
-  - rscadd: "Added magic invisibility ring and reagent rings."
-  - tweak: "Rings are now a child of clothing rather than gloves in order to appease code gods."
-  - tweak: "Gloves can now be worn over rings (much like magboots with shoes)."
