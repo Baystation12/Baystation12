@@ -206,6 +206,8 @@ BLIND     // can't see anything
 	var/wired = 0
 	var/obj/item/weapon/cell/cell = 0
 	var/clipped = 0
+	var/obj/item/clothing/ring/ring = null		//Covered ring
+	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
@@ -258,6 +260,41 @@ BLIND     // can't see anything
 		species_restricted -= SPECIES_UNATHI
 		species_restricted -= SPECIES_TAJARA
 	return
+
+/obj/item/clothing/gloves/mob_can_equip(mob/user)
+	var/mob/living/carbon/human/H = user
+
+	if(istype(H.gloves, /obj/item/clothing/ring))
+		ring = H.gloves
+		if(!ring.undergloves)
+			to_chat(user, "You are unable to wear \the [src] as \the [H.gloves] are in the way.")
+			ring = null
+			return 0
+		H.drop_from_inventory(ring)	//Remove the ring (or other under-glove item in the hand slot?) so you can put on the gloves.
+		ring.forceMove(src)
+
+	if(!..())
+		if(ring) //Put the ring back on if the check fails.
+			if(H.equip_to_slot_if_possible(ring, slot_gloves))
+				src.ring = null
+		return 0
+
+	if (ring)
+		to_chat(user, "You slip \the [src] on over \the [ring].")
+	wearer = H //TODO clean this when magboots are cleaned
+	return 1
+
+/obj/item/clothing/gloves/dropped()
+	..()
+	if(!wearer)
+		return
+
+	var/mob/living/carbon/human/H = wearer
+	if(ring && istype(H))
+		if(!H.equip_to_slot_if_possible(ring, slot_gloves))
+			ring.forceMove(get_turf(src))
+		src.ring = null
+	wearer = null
 
 ///////////////////////////////////////////////////////////////////////
 //Head
@@ -828,3 +865,15 @@ BLIND     // can't see anything
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
 	..()
+
+///////////////////////////////////////////////////////////////////////
+//Rings
+
+/obj/item/clothing/ring
+	name = "ring"
+	w_class = ITEM_SIZE_TINY
+	icon = 'icons/obj/clothing/rings.dmi'
+	slot_flags = SLOT_GLOVES
+	gender = NEUTER
+	species_restricted = list("exclude",SPECIES_DIONA)
+	var/undergloves = 1
