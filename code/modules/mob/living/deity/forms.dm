@@ -67,6 +67,7 @@ Each plays slightly different and has different challenges/benefits
 /datum/god_form/narsie/take_charge(var/mob/living/user, var/charge)
 	if(!..())
 		return 0
+	charge *= 0.5
 	if(prob(charge))
 		to_chat(user, "<span class='warning'>You feel drained...</span>")
 	if(istype(user, /mob/living/carbon/human))
