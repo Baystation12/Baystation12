@@ -64,7 +64,7 @@
 			ammo_magazine.stored_ammo -= chambered
 
 	if (chambered)
-		return chambered.BB
+		return chambered.projectile
 	return null
 
 /obj/item/weapon/gun/projectile/handle_post_fire()

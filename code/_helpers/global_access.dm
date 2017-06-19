@@ -823,10 +823,12 @@
 			return global.machinery_sort_required;
 		if("machines")
 			return global.machines;
+		/*
 		if("magazine_icondata_keys")
 			return global.magazine_icondata_keys;
 		if("magazine_icondata_states")
 			return global.magazine_icondata_states;
+		*/
 		if("maint_all_access")
 			return global.maint_all_access;
 		if("malf")
@@ -1501,7 +1503,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2326,10 +2328,12 @@
 			global.machinery_sort_required=newval;
 		if("machines")
 			global.machines=newval;
+		/*
 		if("magazine_icondata_keys")
 			global.magazine_icondata_keys=newval;
 		if("magazine_icondata_states")
 			global.magazine_icondata_states=newval;
+		*/
 		if("maint_all_access")
 			global.maint_all_access=newval;
 		if("malf")
@@ -3004,7 +3008,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
