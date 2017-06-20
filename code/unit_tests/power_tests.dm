@@ -59,8 +59,7 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 			if(!found_apc)
 				found_apc = APC
 				continue
-			fail("Duplicated APCs in area: [A.name]. Details: ")
-			log_info_line(found_apc)
-			log_info_line(APC)
+			fail("Duplicated APCs in area: [A.name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]")
+
 	pass("No areas with duplicated APCs have been found.")
 	return 1
