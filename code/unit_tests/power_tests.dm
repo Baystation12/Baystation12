@@ -38,7 +38,7 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 					fail("Cable at ([next.x], [next.y], [next.z]) did not share powernet with connected neighbour at ([other.x], [other.y], [other.z])")
 					failed++
 				to_search += other
-		
+
 		found_cables += searched
 
 	if(failed)
@@ -59,4 +59,6 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 			if(!found_apc)
 				found_apc = APC
 				continue
-			fail("Found duplicated APCs in area: [A.name], first: x[found_apc.x] y[found_apc.y] z[found_apc.z]  second: y[APC.x] y[APC.y] z[APC.z]")
+			fail("Found duplicated APCs in area: [A.name], first: \[[found_apc.x],[found_apc.y],[found_apc.z]\] second: \[[APC.x],[APC.y],[APC.z]\]")
+	pass("No areas with duplicated APCs have been found.")
+	return 1
