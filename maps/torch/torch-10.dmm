@@ -2623,9 +2623,9 @@
 "aYw" = (/turf/simulated/floor/holofloor/beach/sand{icon_state = "beach"; dir = 10},/area/holodeck/source_beach)
 "aYx" = (/turf/simulated/floor/holofloor/beach/sand{icon_state = "beach"},/area/holodeck/source_beach)
 "aYy" = (/turf/simulated/floor/holofloor/beach/sand{icon_state = "beach"; dir = 6},/area/holodeck/source_beach)
+"aYz" = (/turf/space{icon_state = "black"},/area/space)
 "aYA" = (/turf/unsimulated/floor{name = "plating"; icon_state = "lava"},/area/deity_spawn)
 "aYB" = (/turf/unsimulated/floor{dir = 2; icon = 'icons/misc/beach.dmi'; icon_state = "seashallow"; name = "water"},/area/deity_spawn)
-"aYz" = (/turf/space{icon_state = "black"},/area/space)
 "aZa" = (/turf/space/bluespace,/area/deity_spawn)
 
 (1,1,1) = {"
