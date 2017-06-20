@@ -47,3 +47,16 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 		pass("All connected roundstart cables have matching powernets.")
 
 	return 1
+
+
+/datum/unit_test/areas_apc_uniqueness
+	name = "POWER: Each area should have at most one APC."
+
+/datum/unit_test/areas_apc_uniqueness/start_test()
+	for(var/area/A in world)
+		var/obj/machinery/power/apc/found_apc = null
+		for(var/obj/machinery/power/apc/APC in A)
+			if(!found_apc)
+				found_apc = APC
+				continue
+			fail("Found duplicated APCs in area: [A.name], first: x[found_apc.x] y[found_apc.y] z[found_apc.z]  second: y[APC.x] y[APC.y] z[APC.z]")
