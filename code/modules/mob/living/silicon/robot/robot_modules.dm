@@ -24,7 +24,6 @@ var/global/list/robot_modules = list(
 	var/networks = list()
 	var/languages = list(
 		LANGUAGE_SOL_COMMON = 1,
-		LANGUAGE_TRADEBAND = 1,
 		LANGUAGE_UNATHI = 0,
 		LANGUAGE_SIIK_MAAS = 0,
 		LANGUAGE_SKRELLIAN = 0,

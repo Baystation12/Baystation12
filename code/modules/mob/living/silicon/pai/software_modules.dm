@@ -469,7 +469,7 @@
 	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
 
 	toggle(mob/living/silicon/pai/user)
-		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
+		// 	Sol Common and Gutter added with New() and are therefore the current default, always active languages
 		user.translator_on = !user.translator_on
 		if(user.translator_on)
 			for(var/language in languages)
