@@ -77,8 +77,7 @@ var/datum/antagonist/godcultist/godcult
 				var/datum/mind/player = locate(href_list["selectgod"])
 				remove_cultist(player) //Remove him from any current deity.
 				add_cultist(player, D)
-				log_admin("[key_name(usr)] has set [key_name(player.current)] to be a minion of [key_name(D)]")
-				
+				log_and_message_admins("has set [key_name(player.current)] to be a minion of [key_name(D)]")
 		else
 			to_chat(usr, "<span class='warning'>There are no deities to be linked to.</span>")
 		return 1

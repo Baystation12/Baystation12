@@ -17,7 +17,7 @@
 /datum/phenomena/warp
 	name = "Warp Body"
 	cost = 25
-	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE
+	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 
 /datum/phenomena/activate(var/mob/living/L)

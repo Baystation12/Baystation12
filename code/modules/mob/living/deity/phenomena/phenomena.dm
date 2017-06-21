@@ -39,9 +39,14 @@
 			if(!(flags & PHENOMENA_MUNDANE))
 				to_chat(linked, "<span class='warning'>\The [L]'s mind is too mundane for you to influence.</span>")
 				return 0
-		else if(linked.is_follower(target) == !!(flags & PHENOMENA_FOLLOWER))
-			to_chat(linked, "<span class='warning'>You can only use [name] on [flags & PHENOMENA_FOLLOWER ? "" : "non"]followers!</span>")
-			return 0
+		else
+			if(linked.is_follower(target))
+				if(!(flags & PHENOMENA_FOLLOWER))
+					to_chat(linked, "<span class='warning'>You can't use [name] on the flock!</span>")
+					return 0
+			else if(!(flags & PHENOMENA_NONFOLLOWER))
+				to_chat(linked, "<span class='warning'>You can't use [name] on non-believers.</span>")
+				return 0
 
 	if(cost > linked.mob_uplink.uses)
 		to_chat(linked, "<span class='warning'>You need more power to use [name]!</span>")
