@@ -283,12 +283,6 @@
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
-	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
-		var/obj/item/clothing/C = wear_mask
-		return get_id_name(C.visible_name)
-	if( head && (head.flags_inv&HIDEFACE) )
-		var/obj/item/clothing/C = head
-		return get_id_name(C.visible_name)
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
 	if(id_name && (id_name != face_name))
@@ -296,9 +290,10 @@
 	return face_name
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
+//Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
 /mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/head = get_organ(BP_HEAD)
-	if(!head || head.disfigured || head.is_stump() || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	var/obj/item/organ/external/H = get_organ(BP_HEAD)
+	if(!H || H.disfigured || H.is_stump() || !real_name || (HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		return "Unknown"
 	return real_name
 
