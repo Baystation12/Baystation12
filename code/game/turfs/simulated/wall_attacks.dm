@@ -62,11 +62,11 @@
 
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
-	to_chat(user, "<span class='danger'>You smash against the wall!</span>")
+	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
 	take_damage(rand(25,75))
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
-	to_chat(user, "<span class='danger'>You smash through the wall!</span>")
+	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1)
 		dismantle_wall(1)
@@ -84,7 +84,7 @@
 	if(..()) return 1
 
 	if(!can_open)
-		to_chat(user, "<span class='notice'>You push the wall, but nothing happens.</span>")
+		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
@@ -241,7 +241,7 @@
 
 			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
 			dismantle_wall()
-			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
+			user.visible_message("<span class='warning'>\The [src] was torn open by [user]!</span>")
 			return
 
 	//Reinforced dismantling.

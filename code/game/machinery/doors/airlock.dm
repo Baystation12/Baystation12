@@ -1287,3 +1287,13 @@ About the new airlock wires panel:
 	if(brace)
 		to_chat(usr, "\The [brace] is installed on \the [src], preventing it from opening.")
 		to_chat(usr, brace.examine_health())
+
+/obj/machinery/door/airlock/autoname
+	name = "hatch"
+	icon = 'icons/obj/doors/Doorhatchmaint2.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_mhatch
+
+/obj/machinery/door/airlock/autoname/New()
+	var/area/A = get_area(src)
+	name = A.name
+	..()

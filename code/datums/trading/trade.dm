@@ -33,6 +33,7 @@
 
 	*/
 	var/want_multiplier = 2                                     //How much wanted items are multiplied by when traded for
+	var/margin = 1.2											//Multiplier to price when selling to player
 	var/insult_drop = 5                                         //How far disposition drops on insult
 	var/compliment_increase = 5                                 //How far compliments increase disposition
 	var/refuse_comms = 0                                        //Whether they refuse further communication
@@ -120,7 +121,7 @@
 		var/type = trading_items[trading_num]
 		var/value = get_value(type)
 		value = round(rand(90,110)/100 * value) //For some reason rand doesn't like decimals.
-		trading_items[type] = value
+		trading_items[type] = margin*value
 	return trading_items[trading_items[trading_num]]
 
 /datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount)
@@ -140,7 +141,9 @@
 	for(var/item in offers)
 		var/atom/movable/offer = item
 		var/is_wanted = 0
-		if(is_type_in_list(offer,wanted_items))
+		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer,wanted_items))
+			is_wanted = 2
+		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
 			is_wanted = 1
 		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
 			return 0
@@ -151,10 +154,10 @@
 		else
 			if(!(trade_flags & TRADER_GOODS))
 				return TRADER_NO_GOODS
-			else if((trade_flags & TRADER_WANTED_ONLY) && !is_wanted)
+			else if((trade_flags & TRADER_WANTED_ONLY|TRADER_WANTED_ALL) && !is_wanted)
 				return TRADER_FOUND_UNWANTED
 
-		offer_worth += get_value(offer) * (is_wanted ? want_multiplier : 1)
+		offer_worth += get_value(offer) * (is_wanted > 1 ? want_multiplier : 1)
 	if(!offer_worth)
 		return TRADER_NOT_ENOUGH
 	var/trading_worth = get_item_value(num)
@@ -242,14 +245,19 @@
 	if(!offers || !offers.len)
 		return TRADER_NOT_ENOUGH
 
-	for(var/offer in offers)
-		if(!is_type_in_list(offer,wanted_items))
-			return TRADER_FOUND_UNWANTED
-
-	playsound(get_turf(offers[1]), 'sound/effects/teleport.ogg', 50, 1)
+	var/mult = 1
 	. = 0
 	for(var/offer in offers)
-		. += get_value(offer) * want_multiplier
+		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer,wanted_items))
+			mult = want_multiplier
+		else if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
+			mult = 1
+		else
+			return TRADER_FOUND_UNWANTED
+		. += get_value(offer) * mult
+
+	playsound(get_turf(offers[1]), 'sound/effects/teleport.ogg', 50, 1)
+	for(var/offer in offers)
 		qdel(offer)
 
 /datum/trader/proc/bribe_to_stay_longer(var/amt)
