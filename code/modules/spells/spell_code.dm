@@ -117,6 +117,8 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			break
 		if(cast_check(1,user, targets)) //we check again, otherwise you can choose a target and then wait for when you are no longer able to cast (I.E. Incapacitated) to use it.
 			invocation(user, targets)
+			if(connected_god && !connected_god.take_charge(user, max(1, charge_max/10)))
+				break
 			take_charge(user, skipcharge)
 			before_cast(targets) //applies any overlays and effects
 			if(prob(critfailchance))
@@ -126,7 +128,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			after_cast(targets) //generates the sparks, smoke, target messages etc.
 		else
 			break
-	while(time != number_of_channels && do_after(user, time_between_channels, same_direction=1))
+	while(time != number_of_channels && do_after(user, time_between_channels, incapacitation_flags = INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING|INCAPACITATION_STUNNED, same_direction=1))
 	after_spell(targets, user, time) //When we are done with the spell completely.
 
 
@@ -270,9 +272,6 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/take_charge(mob/user = user, var/skipcharge)
 	if(!skipcharge)
-		if(connected_god)
-			if(!connected_god.take_charge(user, max(1,charge_max/10))) //100 is 10 seconds
-				return 0
 		switch(charge_type)
 			if(Sp_RECHARGE)
 				charge_counter = 0 //doesn't start recharging until the targets selecting ends
@@ -288,7 +287,18 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	return 1
 
 /spell/proc/check_valid_targets(var/list/targets)
-	return targets && (!islist(targets) || targets.len)
+	if(!targets)
+		return 0
+	if(!islist(targets))
+		targets = list(targets)
+	else if(!targets.len)
+		return 0
+
+	var/list/valid_targets = view_or_range(range, holder, selection_type)
+	for(var/target in targets)
+		if(!target in valid_targets)
+			return 0
+	return 1
 
 /spell/proc/invocation(mob/user = usr, var/list/targets) //spelling the spell out and setting it on recharge/reducing charges amount
 

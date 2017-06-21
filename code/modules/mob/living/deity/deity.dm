@@ -59,6 +59,11 @@
 	qdel_null(form)
 	return ..()
 
+/mob/living/deity/verb/return_to_plane()
+	set category = "Godhood"
+
+	eyeobj.forceMove(get_turf(src))
+
 /mob/living/deity/verb/jump_to_follower()
 	set category = "Godhood"
 
@@ -68,7 +73,7 @@
 	var/list/could_follow = list()
 	for(var/m in minions)
 		var/datum/mind/mind = m
-		if(mind.current.stat != DEAD)
+		if(mind.current && mind.current.stat != DEAD)
 			could_follow += mind.current
 
 	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow

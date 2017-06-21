@@ -177,6 +177,7 @@
 #include "code\datums\communication\dsay.dm"
 #include "code\datums\communication\looc.dm"
 #include "code\datums\communication\ooc.dm"
+#include "code\datums\communication\pray.dm"
 #include "code\datums\communication\~defines.dm"
 #include "code\datums\extensions\_defines.dm"
 #include "code\datums\extensions\extensions.dm"
