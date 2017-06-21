@@ -15,6 +15,7 @@
 	var/sharp = (damage_flags & DAM_SHARP)
 	var/edge  = (damage_flags & DAM_EDGE)
 	var/laser = (damage_flags & DAM_LASER)
+	var/blunt = brute && !sharp && !edge
 
 	// High brute damage or sharp objects may damage internal organs
 	var/damage_amt = brute
@@ -35,6 +36,10 @@
 		jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
 			owner.emote("scream")	//getting hit on broken hand hurts
+
+	if(brute_dam > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) //blunt damage is gud at fracturing
+		fracture()
+
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
 	var/can_cut = (prob(brute*2) || sharp) && (robotic < ORGAN_ROBOT)
@@ -184,7 +189,6 @@
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)
 		return 0
 	var/lasting_pain = 0
-	lasting_pain += open * 5
 	if(is_broken())
 		lasting_pain += 10
 	else if(is_dislocated())

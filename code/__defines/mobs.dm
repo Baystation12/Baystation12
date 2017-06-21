@@ -235,3 +235,8 @@
 #define SPECIES_UNATHI "Unathi"
 #define SPECIES_SKRELL "Skrell"
 #define SPECIES_NABBER "Nabber"
+
+#define SURGERY_CLOSED 0
+#define SURGERY_OPEN 1
+#define SURGERY_RETRACTED 2
+#define SURGERY_ENCASED 3

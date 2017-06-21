@@ -52,6 +52,17 @@
 	bleed_threshold = 5
 	damage_type = CUT
 
+/datum/wound/cut/bandage()
+	..()
+	if(!autoheal_cutoff)
+		autoheal_cutoff = initial(autoheal_cutoff)
+
+/datum/wound/cut/proc/close()
+	current_stage = max_bleeding_stage + 1
+	desc = desc_list[current_stage]
+	min_damage = damage_list[current_stage]
+	damage = min(min_damage, damage)
+
 /datum/wound/cut/small
 	// link wound descriptions to amounts of damage
 	// Minor cuts have max_bleeding_stage set to the stage that bears the wound type's name.

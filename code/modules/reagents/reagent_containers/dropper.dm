@@ -12,12 +12,6 @@
 	slot_flags = SLOT_EARS
 	volume = 5
 
-	do_surgery(mob/living/carbon/M, mob/living/user)
-		if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-			return ..()
-		afterattack(M, user, 1)
-		return 1
-
 	afterattack(var/obj/target, var/mob/user, var/proximity)
 		if(!target.reagents || !proximity) return
 
