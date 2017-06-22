@@ -28,6 +28,7 @@
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
+	darksight = 6
 
 /datum/species/human/vatgrown
 	name = "Vat-Grown Human"
