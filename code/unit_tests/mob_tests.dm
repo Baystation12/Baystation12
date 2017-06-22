@@ -304,40 +304,6 @@ datum/unit_test/mob_damage/tajaran/halloss
 	damagetype = PAIN
 
 // =================================================================
-// Resomi
-// =================================================================
-
-datum/unit_test/mob_damage/resomi
-	name = "MOB: Resomi damage check template"
-	mob_type = /mob/living/carbon/human/resomi
-
-datum/unit_test/mob_damage/resomi/brute
-	name = "MOB: Resomi Brute Damage Check"
-	damagetype = BRUTE
-	expected_vulnerability = EXTRA_VULNERABLE
-
-datum/unit_test/mob_damage/resomi/fire
-	name = "MOB: Resomi Fire Damage Check"
-	damagetype = BURN
-	expected_vulnerability = EXTRA_VULNERABLE
-
-datum/unit_test/mob_damage/resomi/tox
-	name = "MOB: Resomi Toxins Damage Check"
-	damagetype = TOX
-
-datum/unit_test/mob_damage/resomi/oxy
-	name = "MOB: Resomi Oxygen Damage Check"
-	damagetype = OXY
-
-datum/unit_test/mob_damage/resomi/clone
-	name = "MOB: Resomi Clone Damage Check"
-	damagetype = CLONE
-
-datum/unit_test/mob_damage/resomi/halloss
-	name = "MOB: Resomi Halloss Damage Check"
-	damagetype = PAIN
-
-// =================================================================
 // Skrell
 // =================================================================
 

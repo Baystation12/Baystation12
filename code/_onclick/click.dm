@@ -250,7 +250,6 @@
 */
 /mob/proc/AltClickOn(var/atom/A)
 	A.AltClick(src)
-	return
 
 /atom/proc/AltClick(var/mob/user)
 	var/turf/T = get_turf(src)
@@ -264,6 +263,11 @@
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
+    
+/mob/observer/ghost/TurfAdjacent(var/turf/T)
+	if(!isturf(loc) || !client)
+		return FALSE
+	return z == T.z && (get_dist(loc, T) <= client.view)
 
 /*
 	Control+Shift click

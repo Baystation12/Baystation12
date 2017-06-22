@@ -25,7 +25,7 @@
 	if(!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && (affected.status & ORGAN_TENDON_CUT) && affected.open >= 2
+	return affected && (affected.status & ORGAN_TENDON_CUT) && affected.open() >= SURGERY_RETRACTED
 
 /datum/surgery_step/fix_tendon/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -70,7 +70,7 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && (affected.status & ORGAN_ARTERY_CUT) && affected.open >= 2
+	return affected && (affected.status & ORGAN_ARTERY_CUT) && affected.open() >= SURGERY_RETRACTED
 
 /datum/surgery_step/fix_vein/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -120,7 +120,7 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.open >= 2 && (affected.status & ORGAN_DEAD)
+	return affected && affected.open() >= SURGERY_RETRACTED && (affected.status & ORGAN_DEAD)
 
 /datum/surgery_step/treat_necrosis/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -210,3 +210,86 @@
 /datum/surgery_step/hardsuit/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='danger'>[user]'s [tool] can't quite seem to get through the metal...</span>", \
 	"<span class='danger'>Your [tool] can't quite seem to get through the metal. It's weakening, though - try again.</span>")
+
+
+//////////////////////////////////////////////////////////////////
+//	 Disinfection step
+//////////////////////////////////////////////////////////////////
+/datum/surgery_step/sterilize
+	priority = 2
+	allowed_tools = list(
+		/obj/item/weapon/reagent_containers/spray = 100,
+		/obj/item/weapon/reagent_containers/dropper = 100,
+		/obj/item/weapon/reagent_containers/glass/bottle = 90,
+		/obj/item/weapon/reagent_containers/food/drinks/flask = 90,
+		/obj/item/weapon/reagent_containers/glass/beaker = 75,
+		/obj/item/weapon/reagent_containers/food/drinks/bottle = 75,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2 = 75,
+		/obj/item/weapon/reagent_containers/glass/bucket = 50
+	)
+
+	can_infect = 0
+	blood_level = 0
+
+	min_duration = 50
+	max_duration = 60
+
+/datum/surgery_step/sterilize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	if(!hasorgans(target))
+		return 0
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(!istype(affected))
+		return 0
+	if(affected.is_disinfected())
+		return 0
+	var/obj/item/weapon/reagent_containers/container = tool
+	if(!istype(container))
+		return 0
+	if(!container.is_open_container())
+		return 0
+	var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
+	if(istype(booze) && booze.strength >= 40)
+		to_chat(user, "<span class='warning'>[booze] is too weak, you need something of higher proof for this...</span>")
+		return 0
+	if(!istype(booze) && !container.reagents.has_reagent("sterilizine"))
+		return 0
+	return 1
+
+/datum/surgery_step/sterilize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message("[user] starts pouring [tool]'s contents on \the [target]'s [affected.name]." , \
+	"You start pouring [tool]'s contents on \the [target]'s [affected.name].")
+	target.custom_pain("Your [affected.name] is on fire!",50,affecting = affected)
+	..()
+
+/datum/surgery_step/sterilize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+
+	if (!istype(tool, /obj/item/weapon/reagent_containers))
+		return
+
+	var/obj/item/weapon/reagent_containers/container = tool
+
+	var/amount = container.amount_per_transfer_from_this
+	var/datum/reagents/temp = new(amount)
+	container.reagents.trans_to_holder(temp, amount)
+
+	var/trans = temp.trans_to_mob(target, temp.total_volume, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
+	if (trans > 0)
+		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
+			"<span class='notice'>You rub [target]'s [affected.name] down with \the [tool]'s contents.</span>")
+
+/datum/surgery_step/sterilize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+
+	if (!istype(tool, /obj/item/weapon/reagent_containers))
+		return
+
+	var/obj/item/weapon/reagent_containers/container = tool
+
+	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
+
+	user.visible_message("<span class='warning'>[user]'s hand slips, splilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
+	"<span class='warning'>Your hand slips, splilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
+	affected.disinfect()
+

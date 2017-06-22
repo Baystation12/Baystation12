@@ -276,7 +276,7 @@
 		else
 			if(E.is_stump())
 				wound_flavor_text[E.name] += "<b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b>\n"
-				if((E.wounds.len || E.open) && E.parent)
+				if(E.wounds.len && E.parent)
 					wound_flavor_text[E.name] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
 			else
 				if(!is_synth && E.robotic >= ORGAN_ROBOT && (E.parent && E.parent.robotic < ORGAN_ROBOT))
@@ -300,10 +300,10 @@
 		msg += wound_flavor_text[limb]
 	msg += "</span>"
 
-	for(var/implant in get_visible_implants(0))
+	for(var/obj/implant in get_visible_implants(0))
 		if(implant in shown_objects)
 			continue
-		msg += "<span class='danger'>[src] [T.has] \a [implant] sticking out of [T.his] flesh!</span>\n"
+		msg += "<span class='danger'>[src] [T.has] \a [implant.name] sticking out of [T.his] flesh!</span>\n"
 	if(digitalcamo)
 		msg += "[T.He] [T.is] repulsively uncanny!\n"
 

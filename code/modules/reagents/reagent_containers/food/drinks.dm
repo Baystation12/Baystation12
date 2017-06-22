@@ -9,74 +9,88 @@
 	flags = OPENCONTAINER
 	amount_per_transfer_from_this = 5
 	volume = 50
+	var/filling_states // List of percentages full that have icons
 
-	on_reagent_change()
+/obj/item/weapon/reagent_containers/food/drinks/on_reagent_change()
+	if(filling_states)
+		update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/food/drinks/attack_self(mob/user as mob)
+	if(!is_open_container())
+		open(user)
+
+/obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
+	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
+	flags |= OPENCONTAINER
+
+/obj/item/weapon/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+	if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
+		return ..()
+
+	if(standard_feed_mob(user, M))
 		return
 
-	attack_self(mob/user as mob)
-		if(!is_open_container())
-			open(user)
+	return 0
 
-	proc/open(mob/user)
-		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
-		to_chat(user, "<span class='notice'>You open [src] with an audible pop!</span>")
-		flags |= OPENCONTAINER
+/obj/item/weapon/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
+	if(!proximity) return
 
-	attack(mob/M as mob, mob/user as mob, def_zone)
-		if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
-			return ..()
+	if(standard_dispenser_refill(user, target))
+		return
+	if(standard_pour_into(user, target))
+		return
+	return ..()
 
-		if(standard_feed_mob(user, M))
-			return
+/obj/item/weapon/reagent_containers/food/drinks/standard_feed_mob(var/mob/user, var/mob/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
 
-		return 0
+/obj/item/weapon/reagent_containers/food/drinks/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
 
-	afterattack(obj/target, mob/user, proximity)
-		if(!proximity) return
+/obj/item/weapon/reagent_containers/food/drinks/standard_pour_into(var/mob/user, var/atom/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
 
-		if(standard_dispenser_refill(user, target))
-			return
-		if(standard_pour_into(user, target))
-			return
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/self_feed_message(var/mob/user)
+	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
 
-	standard_feed_mob(var/mob/user, var/mob/target)
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-			return 1
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/feed_sound(var/mob/user)
+	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
-	standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-			return 1
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/examine(mob/user)
+	if(!..(user, 1))
+		return
+	if(!reagents || reagents.total_volume == 0)
+		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
+	else if (reagents.total_volume <= volume * 0.25)
+		to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
+	else if (reagents.total_volume <= volume * 0.66)
+		to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
+	else if (reagents.total_volume <= volume * 0.90)
+		to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
+	else
+		to_chat(user, "<span class='notice'>\The [src] is full!</span>")
 
-	standard_pour_into(var/mob/user, var/atom/target)
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>You need to open [src]!</span>")
-			return 1
-		return ..()
+/obj/item/weapon/reagent_containers/food/drinks/proc/get_filling_state()
+	var/percent = round((reagents.total_volume / volume) * 100)
+	for(var/k in cached_number_list_decode(filling_states))
+		if(percent <= k)
+			return k
 
-	self_feed_message(var/mob/user)
-		to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
-
-	feed_sound(var/mob/user)
-		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
-
-	examine(mob/user)
-		if(!..(user, 1))
-			return
-		if(!reagents || reagents.total_volume == 0)
-			to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
-		else if (reagents.total_volume <= volume * 0.25)
-			to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
-		else if (reagents.total_volume <= volume * 0.66)
-			to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
-		else if (reagents.total_volume <= volume * 0.90)
-			to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
-		else
-			to_chat(user, "<span class='notice'>\The [src] is full!</span>")
+/obj/item/weapon/reagent_containers/food/drinks/update_icon()
+	var/image/filling = image(icon, src, "[icon_state][get_filling_state()]")
+	filling.color = reagents.get_color()
+	overlays += filling
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -225,6 +239,15 @@
 	volume = 120
 	center_of_mass = "x=17;y=7"
 
+/obj/item/weapon/reagent_containers/food/drinks/pitcher
+	name = "pitcher"
+	desc = "Everyone's best friend in the morning."
+	icon_state = "pitcher"
+	volume = 120
+	amount_per_transfer_from_this = 10
+	center_of_mass = "x=16;y=9"
+	filling_states = "20;40;60;100"
+
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "\improper Captain's flask"
 	desc = "A metal flask belonging to the captain."
@@ -263,9 +286,76 @@
 	volume = 60
 	center_of_mass = "x=15;y=4"
 
-/obj/item/weapon/reagent_containers/food/drinks/britcup
-	name = "cup"
-	desc = "A cup with the British flag emblazoned on it."
-	icon_state = "britcup"
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup
+	name = "coffee cup"
+	desc = "A plain white coffee cup."
+	icon_state = "coffeecup"
 	volume = 30
 	center_of_mass = "x=15;y=13"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/black
+	name = "black coffee cup"
+	desc = "A sleek black coffee cup."
+	icon_state = "coffeecup_black"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/green
+	name = "green coffee cup"
+	desc = "A pale green and pink coffee cup."
+	icon_state = "coffeecup_green"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/heart
+	name = "heart coffee cup"
+	desc = "A white coffee cup, it prominently features a red heart."
+	icon_state = "coffeecup_heart"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG
+	name = "SCG coffee cup"
+	desc = "A blue coffee cup emblazoned with the crest of the Sol Central Government."
+	icon_state = "coffeecup_SCG"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT
+	name = "NT coffee cup"
+	desc = "A red NanoTrasen coffee cup. 90% Guaranteed to not be laced with mind-control drugs."
+	icon_state = "coffeecup_NT"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
+	name = "#1 coffee cup"
+	desc = "A white coffee cup, prominently featuring a #1."
+	icon_state = "coffeecup_one"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/rainbow
+	name = "rainbow coffee cup"
+	desc = "A rainbow coffee cup. The colors are almost as blinding as a welder."
+	icon_state = "coffeecup_rainbow"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal
+	name = "metal coffee cup"
+	desc = "A metal coffee cup. You're not sure which metal."
+	icon_state = "coffeecup_metal"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/STC
+	name = "STC coffee cup"
+	desc = "A coffee cup adorned with the flag of the Sovereign Terran Confederacy, for when you need some espionage charges to go with your morning coffee."
+	icon_state = "coffeecup_STC"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/pawn
+	name = "pawn coffee cup"
+	desc = "A black coffee cup adorned with the image of a red chess pawn."
+	icon_state = "coffeecup_pawn"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/diona
+	name = "diona nymph coffee cup"
+	desc = "A green coffee cup featuring the image of a diona nymph."
+	icon_state = "coffeecup_diona"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/britcup
+	name = "british coffee cup"
+	desc = "A coffee cup with the British flag emblazoned on it."
+	icon_state = "coffeecup_brit"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/tall
+	name = "tall coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
+	icon_state = "coffeecup_tall"
+	volume = 120
+	center_of_mass = "x=15;y=19"

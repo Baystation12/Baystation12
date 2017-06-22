@@ -9,11 +9,6 @@ var/list/global_huds = list(
 		global_hud.meson,
 		global_hud.science)
 
-/datum/hud/var/obj/screen/grab_intent
-/datum/hud/var/obj/screen/hurt_intent
-/datum/hud/var/obj/screen/disarm_intent
-/datum/hud/var/obj/screen/help_intent
-
 /datum/global_hud
 	var/obj/screen/nvg
 	var/obj/screen/thermal
@@ -69,10 +64,6 @@ datum/hud/New(mob/owner)
 
 /datum/hud/Destroy()
 	. = ..()
-	grab_intent = null
-	hurt_intent = null
-	disarm_intent = null
-	help_intent = null
 	lingchemdisplay = null
 	r_hand_hud_object = null
 	l_hand_hud_object = null

@@ -77,11 +77,11 @@
 			line += "\t[C] is \an <b>["\improper[C.holder.rank]"]</b>"
 		else
 			line += "\t[C] is \an ["\improper[C.holder.rank]"]"
-		if(C.is_afk())
-			line += can_investigate ? " (AFK - [C.inactivity2text()])" : "(AFK)"
-		else
+		if(!C.is_afk())
 			active_staff++
 		if(can_investigate)
+			if(C.is_afk())
+				line += " (AFK - [C.inactivity2text()])"
 			if(isghost(C.mob))
 				line += " - Observing"
 			else if(istype(C.mob,/mob/new_player))

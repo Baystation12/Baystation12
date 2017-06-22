@@ -2,8 +2,10 @@
 #define ICECREAM_CHOCOLATE 2
 #define ICECREAM_STRAWBERRY 3
 #define ICECREAM_BLUE 4
-#define CONE_WAFFLE 5
-#define CONE_CHOC 6
+#define ICECREAM_CHERRY 5
+#define ICECREAM_BANANA 6
+#define CONE_WAFFLE 7
+#define CONE_CHOC 8
 
 // Ported wholesale from Apollo Station.
 
@@ -29,6 +31,10 @@
 			return list("milk", "ice", "berryjuice")
 		if(ICECREAM_BLUE)
 			return list("milk", "ice", "singulo")
+		if(ICECREAM_CHERRY)
+			return list("milk", "ice", "cherryjelly")
+		if(ICECREAM_BANANA)
+			return list("milk", "ice", "banana")
 		if(CONE_WAFFLE)
 			return list("flour", "sugar")
 		if(CONE_CHOC)
@@ -44,6 +50,10 @@
 			return "strawberry"
 		if(ICECREAM_BLUE)
 			return "blue"
+		if(ICECREAM_CHERRY)
+			return "cherry"
+		if(ICECREAM_BANANA)
+			return "banana"
 		if(CONE_WAFFLE)
 			return "waffle"
 		if(CONE_CHOC)
@@ -73,6 +83,8 @@
 	dat += "<b>Strawberry icecream:</b> <a href='?src=\ref[src];select=[ICECREAM_STRAWBERRY]'><b>Select</b></a> <a href='?src=\ref[src];make=[ICECREAM_STRAWBERRY];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[ICECREAM_STRAWBERRY];amount=5'><b>x5</b></a> [product_types[ICECREAM_STRAWBERRY]] dollops left. (Ingredients: milk, ice, berry juice)<br>"
 	dat += "<b>Chocolate icecream:</b> <a href='?src=\ref[src];select=[ICECREAM_CHOCOLATE]'><b>Select</b></a> <a href='?src=\ref[src];make=[ICECREAM_CHOCOLATE];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[ICECREAM_CHOCOLATE];amount=5'><b>x5</b></a> [product_types[ICECREAM_CHOCOLATE]] dollops left. (Ingredients: milk, ice, coco powder)<br>"
 	dat += "<b>Blue icecream:</b> <a href='?src=\ref[src];select=[ICECREAM_BLUE]'><b>Select</b></a> <a href='?src=\ref[src];make=[ICECREAM_BLUE];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[ICECREAM_BLUE];amount=5'><b>x5</b></a> [product_types[ICECREAM_BLUE]] dollops left. (Ingredients: milk, ice, singulo)<br></div>"
+	dat += "<b>Cherry icecream:</b> <a href='?src=\ref[src];select=[ICECREAM_CHERRY]'><b>Select</b></a> <a href='?src=\ref[src];make=[ICECREAM_CHERRY];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[ICECREAM_CHERRY];amount=5'><b>x5</b></a> [product_types[ICECREAM_CHERRY]] dollops left. (Ingredients: milk, ice, cherry jelly)<br></div>"
+	dat += "<b>Banana icecream:</b> <a href='?src=\ref[src];select=[ICECREAM_BANANA]'><b>Select</b></a> <a href='?src=\ref[src];make=[ICECREAM_BANANA];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[ICECREAM_BANANA];amount=5'><b>x5</b></a> [product_types[ICECREAM_BANANA]] dollops left. (Ingredients: milk, ice, banana)<br></div>"
 	dat += "<br><b>CONES</b><br><div class='statusDisplay'>"
 	dat += "<b>Waffle cones:</b> <a href='?src=\ref[src];cone=[CONE_WAFFLE]'><b>Dispense</b></a> <a href='?src=\ref[src];make=[CONE_WAFFLE];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[CONE_WAFFLE];amount=5'><b>x5</b></a> [product_types[CONE_WAFFLE]] cones left. (Ingredients: flour, sugar)<br>"
 	dat += "<b>Chocolate cones:</b> <a href='?src=\ref[src];cone=[CONE_CHOC]'><b>Dispense</b></a> <a href='?src=\ref[src];make=[CONE_CHOC];amount=1'><b>Make</b></a> <a href='?src=\ref[src];make=[CONE_CHOC];amount=5'><b>x5</b></a> [product_types[CONE_CHOC]] cones left. (Ingredients: flour, sugar, coco powder)<br></div>"
@@ -120,7 +132,7 @@
 			reagents.remove_reagent(R, amount)
 		product_types[make_type] += amount
 		var/flavour = get_flavour_name(make_type)
-		if(make_type > 4)
+		if(make_type > 6)
 			src.visible_message("<span class='info'>[user] cooks up some [flavour] cones.</span>")
 		else
 			src.visible_message("<span class='info'>[user] whips up some [flavour] icecream.</span>")
@@ -189,8 +201,10 @@
 	ice_creamed = 1
 
 #undef ICECREAM_VANILLA
-#undef FLAVOUR_CHOCOLATE
-#undef FLAVOUR_STRAWBERRY
-#undef FLAVOUR_BLUE
+#undef ICECREAM_CHOCOLATE
+#undef ICECREAM_STRAWBERRY
+#undef ICECREAM_BLUE
+#undef ICECREAM_CHERRY
+#undef ICECREAM_BANANA
 #undef CONE_WAFFLE
 #undef CONE_CHOC

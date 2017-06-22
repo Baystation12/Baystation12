@@ -185,11 +185,11 @@
 /obj/item/projectile/beam/stun/shock
 	name = "shock beam"
 	damage_type = ELECTROCUTE
-	damage = 15
-	agony = 25
+	damage = 10
+	agony  = 5
 	fire_sound='sound/weapons/pulse.ogg'
 
 /obj/item/projectile/beam/stun/shock/heavy
 	name = "heavy shock beam"
 	damage = 20
-	agony = 40
+	agony  = 10

@@ -12,7 +12,6 @@ They sell generic supplies and ask for generic supplies.
 	name_language = LANGUAGE_EAL
 	trade_flags = TRADER_MONEY|TRADER_GOODS
 	speech = list("hail_generic"    = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN, tasked with trading goods in return for thalers and supplies.",
-				"hail_resomi"       = "Greetings, I am MERCHANT, Artifical Intelligence onboard ORIGIN. We wish to trade with you, no more.",
 				"hail_deny"         = "We are sorry, your connection has been blacklisted. Have a nice day.",
 
 				"trade_complete"    = "Thank you for your patronage.",

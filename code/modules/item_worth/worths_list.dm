@@ -499,7 +499,6 @@ var/list/worths = list(
 //ORGANS,
 					/obj/item/organ/internal/heart = 1200,
 					/obj/item/organ/internal/brain = 1200,
-					/obj/item/organ/internal/pariah_brain = 5,
 					/obj/item/organ = 400,
 //ITEMS,
 					/obj/item/slime_extract = 200,

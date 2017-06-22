@@ -131,13 +131,6 @@
 					if(75 to 100)
 						to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
 						target.take_overall_damage(0, 10)
-			/* NOT HAPPENING
-			if(target.stat == UNCONSCIOUS || target.getFireLoss() > 100) // Kick them out and replace them by a ghost if any is willing
-				to_chat(target, "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>")
-				target.ghostize(0)
-				var/datum/ghosttrap/cult/G = get_ghost_trap("cultist")
-				G.request_player(target, "The Geomoter of Blood claimed the soul of \the [target]. ")
-			*/
 
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"])
@@ -352,7 +345,7 @@
 	cultname = "defile"
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
-	user.say("Ia! Ia! Zasan therium viortia.")
+	user.say("Ia! Ia! Zasan therium viortia!")
 	for(var/turf/T in trange(1, src))
 		if(T.holy)
 			T.holy = 0
@@ -362,6 +355,7 @@
 	qdel(src)
 
 /* Tier 2 runes */
+
 
 /obj/effect/rune/armor
 	cultname = "summon robes"
@@ -471,40 +465,6 @@
 		victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
 		victim = null
 
-/obj/effect/rune/manifest
-	cultname = "manifest"
-	var/mob/living/carbon/human/puppet = null
-	strokes = 3
-
-/obj/effect/rune/manifest/Destroy()
-	if(puppet)
-		puppet.death()
-		puppet = null
-	return ..()
-
-/obj/effect/rune/manifest/cast(var/mob/living/user)
-	if(puppet)
-		to_chat(user, "<span class='warning'>This rune already has a servant bound to it.</span>")
-		return fizzle(user)
-	var/mob/observer/ghost/ghost
-	for(var/mob/observer/ghost/O in get_turf(src))
-		if(!O.client)
-			continue
-		if(!O.MayRespawn()) // Antaghud or actually a journeying cultist/wizard, has nothing to do with timer
-			continue
-		if(jobban_isbanned(O, "cultist"))
-			continue
-		ghost = O
-		break
-	if(!ghost)
-		return fizzle(user)
-	user.say("Gal'h'rfikk harfrandid mud[pick("'","`")]gib!")
-	visible_message("<span class='warning'>A shape forms in the center of the rune. A shape of... a man.</span>", "You hear liquid flow.")
-	puppet = new(get_turf(src), "Cult")
-	puppet.key = ghost.key
-	cult.add_antagonist(puppet.mind, do_not_equip = 1)
-
-	log_and_message_admins("used a manifest rune.")
 
 /obj/effect/rune/drain
 	cultname = "blood drain"
@@ -621,6 +581,25 @@
 /obj/effect/rune/emp/cast(var/mob/living/user)
 	empulse(get_turf(src), 4, 2, 1)
 	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
+	qdel(src)
+
+/obj/effect/rune/massdefile //Defile but with a huge range. Bring a buddy for this, you're hitting the floor.
+	cultname = "mass defile"
+
+/obj/effect/rune/massdefile/cast(var/mob/living/user)
+	var/list/mob/living/cultists = get_cultists()
+	if(cultists.len < 3)
+		to_chat(user, "<span class='warning'>You need three cultists around this rune to make it work.</span>")
+		return fizzle(user)
+	else
+		for(var/mob/living/M in cultists)
+			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
+		for(var/turf/T in range(5, src))
+			if(T.holy)
+				T.holy = 0
+			else
+				T.cultify()
+	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
 /* Tier 3 runes */

@@ -25,7 +25,6 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 	cast_sound = 'sound/items/welder.ogg'
 
 /spell/aoe_turf/conjure/cast(list/targets, mob/user)
-	playsound(get_turf(user), cast_sound, 50, 1)
 
 	for(var/i=1,i <= summon_amt,i++)
 		if(!targets.len)

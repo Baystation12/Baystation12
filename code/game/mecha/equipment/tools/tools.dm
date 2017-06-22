@@ -30,6 +30,9 @@
 			if(cargo_holder.cargo.len >= cargo_holder.cargo_capacity)
 				occupant_message("<span class='warning'>Not enough room in cargo compartment.</span>")
 				return
+			if(istype(O, /obj/machinery/power/supermatter))
+				occupant_message("<span class='warning'>Warning: Safety systems prevent the loading of [target] into the cargo compartment.</span>")
+				return
 
 			occupant_message("You lift [target] and start to load it into cargo compartment.")
 			chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
@@ -363,7 +366,7 @@
 	var/turf/T = get_turf(target)
 	if(T)
 		if(isAdminLevel(T.z))
-			return		
+			return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
 		do_teleport(chassis, T, 4)

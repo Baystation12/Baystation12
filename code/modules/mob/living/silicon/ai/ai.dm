@@ -149,10 +149,10 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_UNATHI, 1)
 	add_language(LANGUAGE_SIIK_MAAS, 1)
 	add_language(LANGUAGE_SKRELLIAN, 1)
-	add_language(LANGUAGE_RESOMI, 1)
 	add_language(LANGUAGE_TRADEBAND, 1)
 	add_language(LANGUAGE_GUTTER, 1)
 	add_language(LANGUAGE_SIGN, 0)
+	add_language(LANGUAGE_INDEPENDENT, 1)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -205,29 +205,16 @@ var/list/ai_verbs_default = list(
 	eyeobj.possess(src)
 
 /mob/living/silicon/ai/Destroy()
-	qdel(aiPDA)
-	qdel(aiMulti)
-	qdel(aiRadio)
-	aiPDA = null
-	aiMulti = null
-	aiRadio = null
-
 	ai_list -= src
 
-	qdel(eyeobj)
-	eyeobj = null
-
-	qdel(psupply)
-	psupply = null
-
-	qdel(aiMulti)
-	aiMulti = null
-
-	qdel(aiRadio)
-	aiRadio = null
-
-	qdel(aiCamera)
-	aiCamera = null
+	qdel_null(announcement)
+	qdel_null(eyeobj)
+	qdel_null(psupply)
+	qdel_null(aiPDA)
+	qdel_null(aiMulti)
+	qdel_null(aiRadio)
+	qdel_null(aiCamera)
+	hack = null
 
 	return ..()
 

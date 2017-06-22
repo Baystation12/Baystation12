@@ -59,6 +59,7 @@
 		return 1
 
 /obj/machinery/light_switch/attack_hand(mob/user)
+	playsound(src, 'sound/machines/click.ogg', 50)
 	set_state(!on)
 
 /obj/machinery/light_switch/powered()

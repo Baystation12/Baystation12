@@ -351,7 +351,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/Destroy()
 	for (var/mob/living/master in masters)
 		clear_holo(master)
-	..()
+	return ..()
 
 /*
 Holographic project of everything else.

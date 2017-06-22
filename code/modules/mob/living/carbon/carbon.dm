@@ -255,8 +255,8 @@
 				H.update_inv_gloves(0)
 			H.gloves.germ_level = 0
 		else
-			if(H.bloody_hands)
-				H.bloody_hands = 0
+			if(!isnull(H.bloody_hands))
+				H.bloody_hands = null
 				H.update_inv_gloves(0)
 			H.germ_level = 0
 	update_icons()	//apply the now updated overlays to the mob

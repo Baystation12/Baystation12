@@ -2,7 +2,7 @@
 	name = "Cure Light Wounds"
 	desc = "a rudimentary spell used mainly by wizards to heal papercuts. Does not require wizard garb."
 	feedback = "CL"
-	school = "cleric"
+	school = "transmutation"
 	charge_max = 200
 	spell_flags = INCLUDEUSER | SELECTABLE
 	invocation = "Di'Nath!"

@@ -8,6 +8,7 @@
 	throw_speed = 4
 	throw_range = 10
 	flags = CONDUCT
+	slot_flags = SLOT_BELT
 	var/datum/data/record/warrant/active
 
 //look at it
@@ -26,7 +27,8 @@
 	var/list/warrants = list()
 	if(!isnull(data_core.general))
 		for(var/datum/data/record/warrant/W in data_core.warrants)
-			warrants += W.fields["namewarrant"]
+			if(!W.archived)
+				warrants += W.fields["namewarrant"]
 	if(warrants.len == 0)
 		to_chat(user,"<span class='notice'>There are no warrants available</span>")
 		return

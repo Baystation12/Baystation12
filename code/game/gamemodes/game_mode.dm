@@ -222,6 +222,10 @@ var/global/list/additional_antag_types = list()
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
 
+	//Finally do post spawn antagonist stuff.
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.post_spawn()
+
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
 
@@ -522,7 +526,7 @@ proc/get_nt_opposed()
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
 
-	if(master_mode != "secret")
+	if(!ticker.hide_mode)
 		to_chat(usr, "<b>The roundtype is [capitalize(ticker.mode.name)]</b>")
 		if(ticker.mode.round_description)
 			to_chat(usr, "<i>[ticker.mode.round_description]</i>")

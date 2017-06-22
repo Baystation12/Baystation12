@@ -8,7 +8,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/belt.dmi')
 	var/show_above_suit = 0
 
 /obj/item/weapon/storage/belt/verb/toggle_layer()
@@ -142,7 +141,8 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/melee,
 		/obj/item/weapon/gun/projectile/sec,
-		/obj/item/taperoll
+		/obj/item/taperoll,
+		/obj/item/device/holowarrant
 		)
 
 /obj/item/weapon/storage/belt/soulstone

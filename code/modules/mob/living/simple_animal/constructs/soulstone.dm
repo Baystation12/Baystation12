@@ -3,7 +3,7 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "soulstone"
 	item_state = "electronic"
-	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'. The shard still flickers with a fraction of the full artefacts power."
+	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'."
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
@@ -12,6 +12,7 @@
 	var/is_evil = 1
 	var/mob/living/simple_animal/shade = null
 	var/smashing = 0
+	var/soulstatus = null
 
 /obj/item/device/soulstone/full
 	full = 1
@@ -25,20 +26,29 @@
 	qdel_null(shade)
 	return ..()
 
+/obj/item/device/soulstone/examine(mob/user)
+	. = ..()
+	if(full == 0)
+		icon_state = "soulstone"
+		to_chat(user, "The shard still flickers with a fraction of the full artifacts power.")
+	if(full == 1)
+		to_chat(user,"The shard has gone transparent, a seeming window into a dimension of unspeakable horror.")
+	if(full == -1)
+		to_chat(user, "This one is cracked and useless.")
+
 /obj/item/device/soulstone/update_icon()
 	if(full == 0)
 		icon_state = "soulstone"
 	if(full == 1)
-		icon_state = "soulstone2"
+		icon_state = "soulstone2" //TODO: A spookier sprite. Also unique sprites.
 	if(full == -1)
 		icon_state = "soulstone"//TODO: cracked sprite
 		name = "cracked soulstone"
-		desc = "[initial(desc)] This one is cracked and useless."
 
 /obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()
 	if(is_evil && istype(I, /obj/item/weapon/nullrod))
-		to_chat(user, "<span class='notice'>You cleanse \the [src] of the taint.</span>")
+		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
 		is_evil = 0
 		return
 	if(I.force > 10)
@@ -51,7 +61,7 @@
 		user.visible_message("<span class='warning'>\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]</span>", "<span class='warning'>You hit \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]</span>", shade.client ? "You hear a scream." : null)
 		set_full(-1)
 
-/obj/item/device/soulstone/attack(var/mob/living/M, var/mob/user)
+/obj/item/device/soulstone/attack(var/mob/living/simple_animal/M, var/mob/user)
 	if(M == shade)
 		to_chat(user, "<span class='notice'>You recapture \the [M].</span>")
 		M.forceMove(src)
@@ -60,7 +70,7 @@
 		to_chat(user, "<span class='notice'>\The [src] is already full.</span>")
 		return
 	if(M.stat == CONSCIOUS || M.health > config.health_threshold_crit)
-		to_chat(user, "<span class='notice'>Kill or main the victim first.</span>")
+		to_chat(user, "<span class='notice'>Kill or maim the victim first.</span>")
 		return
 	for(var/obj/item/W in M)
 		M.drop_from_inventory(W)
@@ -70,20 +80,29 @@
 	M.dust()
 
 /obj/item/device/soulstone/attack_self(var/mob/user)
-	if(full != 1)
-		to_chat(user, "<span class='notice'>This [src] has no life essence.</span>")
-		return
 	if(!shade.key)
 		to_chat(user, "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>")
 		user.pay_for_rune(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
+		if(shade)
+			if(shade.key || shade.client)
+				set_full(1)
+				return
 	else if(!shade.client)
-		to_chat(user, "<span class='notice'>\The [shade] in \the [src] is dormant.</span>")
+		to_chat(user, "<span class='notice'>\The [shade] in \the [src] is dormant; it slips free from the grasp of the shard.</span>")
+		set_full(0) //To prevent grief.
 		return
 	else if(shade.loc == src)
-		shade.forceMove(get_turf(src))
-		to_chat(user, "<span class='notice'>You summon \the [shade].</span>")
+		to_chat(user, "<span class='notice'>A spirit has taken residence in the [src].</span>")
+		var/choice = alert("Would you like to invoke the spirit within?",,"Yes","No",)
+		if(choice == "Yes")
+			shade.forceMove(get_turf(src))
+			to_chat(user, "<span class='notice'>You summon \the [shade].</span>")
+		if(choice == "No")
+			return
+	if(full != 1) //Moved to the end because calling this first would just end the proc each time.
+		to_chat(user, "<span class='notice'>This [src] has no life essence.</span>")
 		return
 
 /obj/item/device/soulstone/proc/set_full(var/f)
