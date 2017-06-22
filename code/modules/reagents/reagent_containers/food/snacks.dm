@@ -820,7 +820,7 @@
 		..()
 		reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeyburger
+/obj/item/weapon/reagent_containers/food/snacks/plainburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon_state = "hburger"
@@ -1129,20 +1129,7 @@
 		bitesize = 2
 
 
-/obj/item/weapon/reagent_containers/food/snacks/human/kabob
-	name = "-kabob"
-	icon_state = "kabob"
-	desc = "A human meat, on a stick."
-	trash = /obj/item/stack/rods
-	filling_color = "#A85340"
-	center_of_mass = "x=17;y=15"
-
-	New()
-		..()
-		reagents.add_reagent("protein", 8)
-		bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/monkeykabob
+/obj/item/weapon/reagent_containers/food/snacks/meatkabob
 	name = "Meat-kabob"
 	icon_state = "kabob"
 	desc = "Delicious meat, on a stick."
@@ -3119,14 +3106,14 @@
 /obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	// Bun + meatball = burger
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/meatball))
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/plainburger(src)
 		to_chat(user, "You make a burger.")
 		qdel(W)
 		qdel(src)
 
 	// Bun + cutlet = hamburger
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/cutlet))
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/plainburger(src)
 		to_chat(user, "You make a burger.")
 		qdel(W)
 		qdel(src)
@@ -3139,7 +3126,7 @@
 		qdel(src)
 
 // Burger + cheese wedge = cheeseburger
-/obj/item/weapon/reagent_containers/food/snacks/monkeyburger/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/plainburger/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
 	if(istype(W))// && !istype(src,/obj/item/weapon/reagent_containers/food/snacks/cheesewedge))
 		new /obj/item/weapon/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
