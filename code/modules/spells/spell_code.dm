@@ -270,9 +270,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/take_charge(mob/user = user, var/skipcharge)
 	if(!skipcharge)
-		if(connected_god)
-			if(!connected_god.take_charge(user, max(1,charge_max/10))) //100 is 10 seconds
-				return 0
+		connected_god.take_charge(user, max(1,charge_max/10))
 		switch(charge_type)
 			if(Sp_RECHARGE)
 				charge_counter = 0 //doesn't start recharging until the targets selecting ends
