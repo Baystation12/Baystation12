@@ -67,26 +67,12 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 
-/datum/recipe/humanburger
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
-		/obj/item/weapon/reagent_containers/food/snacks/bun
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/human/burger
-
 /datum/recipe/plainburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/weapon/reagent_containers/food/snacks/meat //do not place this recipe before /datum/recipe/humanburger
+		/obj/item/weapon/reagent_containers/food/snacks/meat
 	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/monkeyburger
-
-/datum/recipe/syntiburger
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/bun,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/monkeyburger
+	result = /obj/item/weapon/reagent_containers/food/snacks/plainburger
 
 /datum/recipe/brainburger
 	items = list(
@@ -344,29 +330,13 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/chaos
 
-/datum/recipe/humankabob
+/datum/recipe/meatkabob
 	items = list(
 		/obj/item/stack/rods,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
+		/obj/item/weapon/reagent_containers/food/snacks/meat,
+		/obj/item/weapon/reagent_containers/food/snacks/meat,
 	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/human/kabob
-
-/datum/recipe/monkeykabob
-	items = list(
-		/obj/item/stack/rods,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/monkeykabob
-
-/datum/recipe/syntikabob
-	items = list(
-		/obj/item/stack/rods,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
-		/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/monkeykabob
+	result = /obj/item/weapon/reagent_containers/food/snacks/meatkabob
 
 /datum/recipe/tofukabob
 	items = list(
@@ -560,21 +530,21 @@ I said no!
 
 /datum/recipe/spellburger
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/monkeyburger,
+		/obj/item/weapon/reagent_containers/food/snacks/plainburger,
 		/obj/item/clothing/head/wizard/fake,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
 
 /datum/recipe/spellburger
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/monkeyburger,
+		/obj/item/weapon/reagent_containers/food/snacks/plainburger,
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
 
 /datum/recipe/bigbiteburger
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/monkeyburger,
+		/obj/item/weapon/reagent_containers/food/snacks/plainburger,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
