@@ -33,13 +33,13 @@
 #define LANGUAGE_SIIK_MAAS "Siik'maas"
 #define LANGUAGE_SIIK_TAJR "Siik'tajr"
 #define LANGUAGE_SKRELLIAN "Skrellian"
-#define LANGUAGE_RESOMI "Schechi"
 #define LANGUAGE_ROOTLOCAL "Local Rootspeak"
 #define LANGUAGE_ROOTGLOBAL "Global Rootspeak"
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
 #define LANGUAGE_CULT "Cult"
 #define LANGUAGE_SIGN "Sign Language"
+#define LANGUAGE_INDEPENDENT "Independent"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

@@ -292,6 +292,9 @@
 /area/crew_quarters/safe_room/bridge
 	name = "\improper Bridge Safe Room"
 
+/area/bridge/storage
+	name = "\improper Bridge Storage Room"
+
 // Shuttles
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
@@ -1364,6 +1367,12 @@
 	name = "\improper Fifth Deck Shield Generator"
 */
 // Misc
+/area/deity_spawn
+	name = "\improper Deity Spawn"
+	icon_state = "yellow"
+	requires_power = 0
+	dynamic_lighting = 0
+
 /area/teleporter
 	name = "\improper Teleporter"
 	icon_state = "teleporter"

@@ -253,3 +253,16 @@
 /obj/item/projectile/bullet/pistol/cap/process()
 	loc = null
 	qdel(src)
+
+/obj/item/projectile/bullet/rock //spess dust
+	name = "micrometeor"
+	icon_state = "rock"
+	damage = 40
+	armor_penetration = 25
+	kill_count = 255
+
+/obj/item/projectile/bullet/rock/New()
+	icon_state = "rock[rand(1,3)]"
+	pixel_x = rand(-10,10)
+	pixel_y = rand(-10,10)
+	..()

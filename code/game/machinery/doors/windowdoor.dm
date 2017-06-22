@@ -63,7 +63,7 @@
 /obj/machinery/door/window/Destroy()
 	set_density(0)
 	update_nearby_tiles()
-	..()
+	return ..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
 	if (!( ismob(AM) ))

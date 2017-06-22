@@ -603,3 +603,31 @@
 	M.species.set_default_hair(M)
 	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
 	remove_self(volume)
+
+/datum/reagent/toxin/corrupting
+	name = "Corruption"
+	id = "corruption"
+	description = "a loyalty changing liquid."
+	taste_description = "blood"
+	color = "#FFFFFF"
+	taste_mult = 5
+	strength = 10
+	metabolism = REM * 2
+	overdose = 30
+
+/datum/reagent/toxin/corrupting/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M,alien,removed*0.5)
+
+/datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(prob(5))
+		if(dose < 15)
+			to_chat(M, "<span class='warning'>You feel funny...</span>")
+		else
+			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+
+/datum/reagent/toxin/corrupting/overdose(var/mob/living/carbon/M, var/alien)
+	if(istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		H.zombieze()
+	remove_self(volume)

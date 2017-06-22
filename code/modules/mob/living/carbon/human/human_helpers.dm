@@ -197,3 +197,6 @@
 		layer = LYING_HUMAN_LAYER
 	else
 		..()
+
+/mob/living/carbon/human/proc/has_headset_in_ears()
+	return istype(get_equipped_item(slot_l_ear), /obj/item/device/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/device/radio/headset)

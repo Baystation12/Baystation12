@@ -15,7 +15,7 @@
 	if(!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.open >= (affected.encased ? 3 : 2) && !(affected.status & ORGAN_BLEEDING)
+	return affected && affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
 
 /datum/surgery_step/cavity/proc/get_max_wclass(var/obj/item/organ/external/affected)
 	switch (affected.organ_tag)
@@ -146,7 +146,7 @@
 	user.visible_message("[user] starts putting \the [tool] inside [target]'s [get_cavity(affected)] cavity.", \
 	"You start putting \the [tool] inside [target]'s [get_cavity(affected)] cavity." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
-	playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+	playsound(target.loc, 'sound/effects/squelch1.ogg', 25, 1)
 	..()
 
 /datum/surgery_step/cavity/place_item/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -177,15 +177,7 @@
 
 /datum/surgery_step/cavity/implant_removal/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/obj/item/organ/internal/brain/sponge = target.internal_organs_by_name[BP_BRAIN]
-
-	// targetted a missing limb/organ
-	if(!affected)
-		return 0
-
-	if(sponge && sponge.parent_organ == affected.organ_tag && sponge.damage)
-		return 0
-	return ..()
+	return affected && affected.open() >= SURGERY_RETRACTED
 
 /datum/surgery_step/cavity/implant_removal/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -196,12 +188,18 @@
 
 /datum/surgery_step/cavity/implant_removal/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-
+	var/list/loot = list()
 	var/find_prob = 0
+	if(affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
+		loot = affected.implants
+	else
+		for(var/datum/wound/wound in affected.wounds)
+			loot |= wound.embedded_objects
+			find_prob += 50
 
-	if (affected.implants.len)
+	if (loot.len)
 
-		var/obj/item/obj = pick(affected.implants)
+		var/obj/item/obj = pick(loot)
 
 		if(istype(obj,/obj/item/weapon/implant))
 			var/obj/item/weapon/implant/imp = obj
@@ -237,7 +235,7 @@
 				if(istype(obj,/obj/item/weapon/implant))
 					var/obj/item/weapon/implant/imp = obj
 					imp.removed()
-			playsound(target.loc, 'sound/effects/squelch1.ogg', 50, 1)
+			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \
 			"<span class='notice'>There's something inside [target]'s [affected.name], but you just missed it this time.</span>" )

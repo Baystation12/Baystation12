@@ -8,6 +8,7 @@
 	max_damage = 0
 	dir = SOUTH
 	organ_tag = "limb"
+	appearance_flags = PIXEL_SCALE
 
 	// Strings
 	var/broken_description             // fracture string if any.
@@ -65,7 +66,7 @@
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
 
 	// Surgery vars.
-	var/open = 0
+	var/hatch = 0
 	var/stage = 0
 	var/cavity = 0
 	var/atom/movable/applied_pressure
@@ -163,19 +164,19 @@
 		child.show_decay_status(user)
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	switch(open)
+	switch(stage)
 		if(0)
-			if(istype(W,/obj/item/weapon/scalpel))
+			if(W.sharp)
 				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!</span>")
-				open++
+				stage++
 				return
 		if(1)
-			if(istype(W,/obj/item/weapon/retractor))
+			if(istype(W))
 				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!</span>")
-				open++
+				stage++
 				return
 		if(2)
-			if(istype(W,/obj/item/weapon/hemostat))
+			if(W.sharp || istype(W,/obj/item/weapon/hemostat) || istype(W,/obj/item/weapon/wirecutters))
 				var/list/organs = get_contents_recursive()
 				if(organs.len)
 					var/obj/item/removing = pick(organs)
@@ -302,7 +303,7 @@
 		else return 0
 
 	if(!damage_amount)
-		if(src.open != 2)
+		if(src.hatch != 2)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 		return 0
 
@@ -673,14 +674,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		clamped |= W.clamped
 		number_wounds += W.amount
 
-	//things tend to bleed if they are CUT OPEN
-	if (H && H.should_have_organ(BP_HEART) && (open && !clamped))
-		status |= ORGAN_BLEEDING
-
-	//Bone fractures
-	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(robotic >= ORGAN_ROBOT))
-		src.fracture()
-
 //Returns 1 if damage_state changed
 /obj/item/organ/external/proc/update_damstate()
 	var/n_is = damage_state_text()
@@ -870,6 +863,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	for(var/datum/wound/W in wounds)
 		rval |= !W.bandaged
 		W.bandaged = 1
+	if(rval)
+		owner.update_surgery()
 	return rval
 
 /obj/item/organ/external/proc/salve()
@@ -896,6 +891,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return rval
 
 /obj/item/organ/external/proc/fracture()
+	if(!config.bones_can_break)
+		return
 	if(robotic >= ORGAN_ROBOT)
 		return	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if((status & ORGAN_BROKEN) || cannot_break)
@@ -1127,6 +1124,36 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='danger'>You hear a sickening sizzle.</span>")
 	disfigured = 1
 
+/obj/item/organ/external/proc/get_incision(var/strict)
+	var/datum/wound/cut/incision
+	for(var/datum/wound/cut/W in wounds)
+		if(W.bandaged) // Shit's unusable
+			continue
+		if(W.autoheal_cutoff == 0) //Get nice and clean one
+			incision = W
+			break
+		if(!strict) //any hole will do
+			if(!incision || W.damage > incision.damage) //Failing that get biggest baddest cut
+				incision = W
+	return incision
+
+/obj/item/organ/external/proc/open()
+	var/datum/wound/cut/incision = get_incision()
+	. = 0
+	if(!incision)
+		return 0
+	var/smol_threshold = min_broken_damage/5
+	var/beeg_threshold = min_broken_damage/2
+	if(!incision.autoheal_cutoff == 0) //not clean incision
+		smol_threshold *= 2
+		beeg_threshold = max(beeg_threshold, min(beeg_threshold * 2, incision.damage_list[1])) //wounds can't achieve bigger
+	if(incision.damage >= smol_threshold) //smol incision
+		. = SURGERY_OPEN
+	if(incision.damage >= beeg_threshold) //beeg incision
+		. = SURGERY_RETRACTED
+	if(. == SURGERY_RETRACTED && encased && (status & ORGAN_BROKEN))
+		. = SURGERY_ENCASED
+
 /obj/item/organ/external/proc/jostle_bone(force)
 	if(!(status & ORGAN_BROKEN)) //intact bones stay still
 		return
@@ -1152,7 +1179,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 					descriptors += "some burns"
 				if(21 to INFINITY)
 					descriptors += pick("a lot of burns","severe melting")
-		if(open)
+		if(hatch)
 			descriptors += "an open panel"
 
 		return english_list(descriptors)
@@ -1162,10 +1189,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
-	if(open > 1)
-		wound_descriptors["an open incision"] = 1
-	else if (open)
-		wound_descriptors["an incision"] = 1
+	if(open() >= (encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
+		var/list/bits = list()
+		for(var/obj/item/organ/organ in internal_organs)
+			if(organ.damage)
+				bits += "[organ.damage ? "damaged " : ""][organ.name]"
+		wound_descriptors["an open incision with [english_list(bits)] visible in it"] = 1
 	for(var/datum/wound/W in wounds)
 		var/this_wound_desc = W.desc
 		if(W.damage_type == BURN && W.salved)

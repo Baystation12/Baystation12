@@ -153,6 +153,7 @@
 	if(dormant)
 		moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	processing_objects -= src
+	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
 /obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)

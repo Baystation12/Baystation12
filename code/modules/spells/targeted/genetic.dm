@@ -32,6 +32,7 @@ code\game\dna\genes\goon_powers.dm
 	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
 	feedback = "BD"
 	disabilities = 1
+	school = "illusion"
 	duration = 300
 
 	charge_max = 300

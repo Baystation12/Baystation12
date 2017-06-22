@@ -12,3 +12,7 @@
 /obj/item/weapon/towel/attack_self(mob/living/user as mob)
 	user.visible_message(text("<span class='notice'>[] uses [] to towel themselves off.</span>", user, src))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
+
+/obj/item/weapon/towel/random/New()
+	..()
+	color = get_random_colour()

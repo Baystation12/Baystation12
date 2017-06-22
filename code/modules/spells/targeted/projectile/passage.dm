@@ -5,7 +5,7 @@
 	proj_type = /obj/item/projectile/spell_projectile/passage
 
 
-	school = "abjuration"
+	school = "conjuration"
 	charge_max = 250
 	spell_flags = 0
 	invocation = "A'YASAMA"
