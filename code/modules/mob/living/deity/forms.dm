@@ -33,7 +33,7 @@ Each plays slightly different and has different challenges/benefits
 		O.vars[V] = svars[V]
 
 /datum/god_form/proc/take_charge(var/mob/living/user, var/charge)
-	return 1
+	return
 
 /datum/god_form/Destroy()
 	if(linked_god)
@@ -65,8 +65,6 @@ Each plays slightly different and has different challenges/benefits
 	starting_feats = list(DEITY_FORM_DARK_ART, DEITY_FORM_BLOOD_SAC, DEITY_FORM_DARK_MINION, DEITY_FORM_BLOOD_FORGE)
 
 /datum/god_form/narsie/take_charge(var/mob/living/user, var/charge)
-	if(!..())
-		return 0
 	charge *= 0.5
 	if(prob(charge))
 		to_chat(user, "<span class='warning'>You feel drained...</span>")
@@ -76,7 +74,6 @@ Each plays slightly different and has different challenges/benefits
 			H.vessel.remove_reagent("blood", charge)
 	else
 		user.adjustBruteLoss(charge)
-	return 1
 
 /datum/god_form/wizard
 	name = "The Tower"
@@ -99,6 +96,4 @@ Each plays slightly different and has different challenges/benefits
 	starting_feats = list(DEITY_TREE_TRANSMUTATION, DEITY_TREE_CONJURATION)
 
 /datum/god_form/wizard/take_charge(var/mob/living/user, var/charge)
-	if(!..())
-		return 0
 	linked_god.adjust_power(max(round(charge/100), 1),silent = 1)
