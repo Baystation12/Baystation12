@@ -34,20 +34,25 @@ var/repository/client/client_repository = new()
 	ckey = M.ckey ? M.ckey : ckey
 	ref = M.client ? any2ref(M.client) : ref
 
-/datum/client_lite/proc/key_name(var/pm_link = TRUE, var/check_if_offline = TRUE)
+/datum/client_lite/proc/key_name(var/pm_link = TRUE, var/name = TRUE, var/rank = TRUE, var/check_if_offline = TRUE)
 	if(!ref && ckey != NO_CLIENT_CKEY)
 		var/client/C = client_by_ckey(ckey)
 		if(C)
 			ref = any2ref(C)
-
+	var/maybe_name = ""
+	var/maybe_rank = ""
+	if(name)
+		maybe_name = "/([src.name])"
+	if(rank)
+		maybe_rank = " [rank2text()]"
 	if(!ref)
 		if(ckey == NO_CLIENT_CKEY)
-			return "[key]/([name])"
+			return "[key][maybe_name]"
 		else
-			return "[key]/([name]) (DC)"
+			return "[key][maybe_name] (DC)"
 	if(check_if_offline && !client_by_ckey(ckey))
-		return "[key]/([name]) (DC)"
-	return pm_link ? "<a href='?priv_msg=[ref]'>[key]</a>/([name])[rank2text()]" : "[key]/([name])"
+		return "[key][maybe_name] (DC)"
+	return pm_link ? "<a href='?priv_msg=[ref]'>[key]</a>[maybe_name][maybe_rank]" : "[key][maybe_name][maybe_rank]"
 
 /datum/client_lite/proc/rank2text()
 	var/client/C = client_by_ckey(ckey)

@@ -36,6 +36,7 @@
 #define R_MENTOR        0x4000
 #define R_HOST          0x8000 //higher than this will overflow
 #define R_INVESTIGATE   (R_ADMIN|R_MOD)
+#define R_ADMINHELP		(R_ADMIN|R_MOD|R_MENTOR)
 
 #define R_MAXPERMISSION 0x8000 // This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
