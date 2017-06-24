@@ -53,13 +53,19 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 	name = "POWER: Each area should have at most one APC."
 
 /datum/unit_test/areas_apc_uniqueness/start_test()
+	var/failure = ""
 	for(var/area/A in world)
 		var/obj/machinery/power/apc/found_apc = null
 		for(var/obj/machinery/power/apc/APC in A)
 			if(!found_apc)
 				found_apc = APC
 				continue
-			fail("Duplicated APCs in area: [A.name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]")
+			if(failure)
+				failure = "[failure]\n"
+			failure = "[failure]Duplicated APCs in area: [A.name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]"
 
-	pass("No areas with duplicated APCs have been found.")
+	if(failure)
+		fail(failure)
+	else
+		pass("No areas with duplicated APCs have been found.")
 	return 1
