@@ -204,7 +204,7 @@
 
 	for(var/wallDir in cardinal)
 		var/turf/newTurf = get_step(T,wallDir)
-		if(newTurf.density)
+		if(newTurf && newTurf.density)
 			direction |= wallDir
 
 	for(var/obj/effect/plant/shroom in T.contents)

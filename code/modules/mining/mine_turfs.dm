@@ -144,6 +144,7 @@ var/list/mining_floors = list()
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
 	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.icon_tag]")
+	ore_overlay.appearance_flags = RESET_COLOR
 	ore_overlay.turf_decal_layerise()
 	update_icon()
 
@@ -287,7 +288,7 @@ var/list/mining_floors = list()
 
 	clear_ore_effects()
 	var/obj/item/weapon/ore/O = new mineral.ore (src)
-	if(istype(O))
+	if(geologic_data && istype(O))
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		O.geologic_data = geologic_data
 	return O

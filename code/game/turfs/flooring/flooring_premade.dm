@@ -49,6 +49,15 @@
 	icon_state = "grass0"
 	initial_flooring = /decl/flooring/grass
 
+/turf/simulated/floor/wildgrass
+	name = "grass"
+	icon = 'icons/misc/beach.dmi'
+	icon_state = "dgrass0"
+
+/turf/simulated/floor/wildgrass/New()
+	icon_state = "dgrass[rand(0,4)]"
+	..()
+
 /turf/simulated/floor/diona
 	name = "biomass"
 	icon = 'icons/turf/floors.dmi'
@@ -191,17 +200,21 @@
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "lava"
 
+/turf/simulated/floor/ice
+	name = "ice"
+	icon = 'icons/turf/snow.dmi'
+	icon_state = "ice"
+
 /turf/simulated/floor/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 
 /turf/simulated/floor/snow/New()
-	icon_state = "snow[rand(0,12)]"
+	icon_state = pick("snow[rand(1,12)]","snow0")
 	..()
 
 /turf/simulated/floor/light
-/turf/simulated/floor/beach/coastline
 /turf/simulated/floor/airless/ceiling
 
 /turf/simulated/floor/beach
@@ -214,6 +227,11 @@
 
 /turf/simulated/floor/beach/sand/desert
 	icon_state = "desert"
+	has_resources = 1
+
+/turf/simulated/floor/beach/sand/desert/New()
+	icon_state = "desert[rand(0,5)]"
+	..()
 
 /turf/simulated/floor/beach/coastline
 	name = "coastline"
@@ -226,6 +244,9 @@
 
 /turf/simulated/floor/beach/water/update_dirt()
 	return	// Water doesn't become dirty
+
+/turf/simulated/floor/beach/water/shallow
+	icon_state = "seashallow"
 
 /turf/simulated/floor/beach/water/ocean
 	icon_state = "seadeep"

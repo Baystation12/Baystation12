@@ -19,9 +19,8 @@
 	attacktext = "drained the life from"
 	minbodytemp = 0
 	maxbodytemp = 4000
-	min_oxy = 0
-	max_co2 = 0
-	max_tox = 0
+	min_gas = null
+	max_gas = null
 	speed = -1
 	stop_automated_movement = 1
 	status_flags = 0

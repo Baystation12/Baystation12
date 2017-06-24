@@ -44,3 +44,28 @@
 	tile_overlay = "sleeping_agent"
 	overlay_limit = 1
 	flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
+
+/decl/xgm_gas/methane
+	id = "methane"
+	name = "Methane"
+
+	specific_heat = 30	// J/(mol*K)
+	molar_mass = 0.016	// kg/mol
+
+	flags = XGM_GAS_FUEL
+
+/decl/xgm_gas/alium
+	id = "aliether"
+	name = "Aliether"
+
+/decl/xgm_gas/alium/New()
+	specific_heat = rand(20, 400)	// J/(mol*K)
+	molar_mass = rand(20,500)/100	// kg/mol
+	if(prob(40))
+		flags |= XGM_GAS_FUEL
+	else if(prob(40)) //it's prooobably a bad idea for gas being oxidizer to itself.
+		flags |= XGM_GAS_OXIDIZER
+	if(prob(40))
+		flags |= XGM_GAS_CONTAMINANT
+	if(prob(40))
+		flags |= XGM_GAS_FUSION_FUEL
