@@ -21,7 +21,7 @@
 			else //Otherwise just pass
 				continue
 		else if(communicator == M) //Give it to ourselves
-			receive_communication(communicator, M, "<span class='notice'>\icon[cross] <b>You send the prayer, \"[message]\" out into the heavens.</b></notice>")
+			receive_communication(communicator, M, "<span class='notice'>\icon[cross] <b>You send the prayer, \"[message]\" out into the heavens.</b></span>")
 			return
 		else
 			continue
