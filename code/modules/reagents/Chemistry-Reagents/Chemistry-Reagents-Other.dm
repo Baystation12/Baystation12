@@ -287,7 +287,8 @@
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
 			S.dirt = 0
-			S.wet = 0
+			if(S.wet > 1)
+				S.unwet_floor(FALSE)
 		T.clean_blood()
 
 

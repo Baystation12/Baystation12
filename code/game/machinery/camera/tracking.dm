@@ -159,7 +159,7 @@
 	if(U.cameraFollow)
 		U.ai_cancel_tracking()
 	U.cameraFollow = target
-	to_chat(U, "Now tracking [target.name] on camera.")
+	to_chat(U, "Tracking target...")
 	target.tracking_initiated()
 
 	spawn (0)

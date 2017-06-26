@@ -214,7 +214,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(silenced > 0)
 		return 0
 
-	if(!(src in user.mind.learned_spells) && holder == user)
+	if(!(src in user.mind.learned_spells) && holder == user && !(isanimal(user)))
 		error("[user] utilized the spell '[src]' without having it.")
 		to_chat(user, "<span class='warning'>You shouldn't have this spell! Something's wrong.</span>")
 		return 0
@@ -272,6 +272,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/take_charge(mob/user = user, var/skipcharge)
 	if(!skipcharge)
+		connected_god.take_charge(user, max(1,charge_max/10))
 		switch(charge_type)
 			if(Sp_RECHARGE)
 				charge_counter = 0 //doesn't start recharging until the targets selecting ends

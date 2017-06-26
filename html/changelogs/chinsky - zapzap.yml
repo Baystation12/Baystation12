@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Made SHOCK mode on tasers literally useless, ruining security gameplay. Does bit less burn damage, and much less straight up stun damage. Not 'better tase mode' anymore."
-  - bugfix: "Fixed their primary function actually never working. If you hit arm or hand with the beam you can disarm someone (even diona, even robbit, pain reception doesn't matter). If you hit leg, they might drop, higher chance for foot."

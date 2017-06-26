@@ -1,16 +1,16 @@
-#define CULTINESS_PER_CULTIST 20
-#define CULTINESS_PER_SACRIFICE 20
+#define CULTINESS_PER_CULTIST 30
+#define CULTINESS_PER_SACRIFICE 30
 #define CULTINESS_PER_TURF 1
 
 #define CULT_RUNES_1 100
 #define CULT_RUNES_2 200
-#define CULT_RUNES_3 500
+#define CULT_RUNES_3 300
 
-#define CULT_GHOSTS_1 200
-#define CULT_GHOSTS_2 400
-#define CULT_GHOSTS_3 600
+#define CULT_GHOSTS_1 150
+#define CULT_GHOSTS_2 250
+#define CULT_GHOSTS_3 350
 
-#define CULT_MAX_CULTINESS 600 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
+#define CULT_MAX_CULTINESS 350 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
 
 var/datum/antagonist/cultist/cult
 
@@ -24,9 +24,9 @@ var/datum/antagonist/cultist/cult
 	id = MODE_CULTIST
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
-	restricted_jobs = list("Internal Affairs Agent", "Head of Security", "Captain")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
-	blacklisted_jobs = list("AI", "Cyborg", "Chaplain")
+	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos)
+	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain, /datum/job/psychiatrist)
 	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."

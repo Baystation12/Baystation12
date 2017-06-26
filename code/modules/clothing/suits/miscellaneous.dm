@@ -491,3 +491,28 @@
 	icon_state = "trackjacketwhite"
 	icon_open = "trackjacketwhite_open"
 	icon_closed = "trackjacketwhite"
+
+/obj/item/clothing/suit/rubber
+	name = "human suit"
+	desc = "Rubber suit, perfect for infiltrating Earthling nudist beaches."
+	icon_state = "mansuit"
+	permeability_coefficient = 0
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 90, rad = 0)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+	siemens_coefficient = 0.8
+
+/obj/item/clothing/suit/rubber/tajaran
+	name = "tajara suit"
+	desc = "Rubber suit covered in artificial fur. No tajaran interns harmed excessively in making."
+	icon_state = "catsuit"
+
+/obj/item/clothing/suit/rubber/skrell
+	name = "skrell suit"
+	desc = "Rubber suit of slimy texture. Not guaranteed to fool real Skrell."
+	icon_state = "skrellsuit"
+
+/obj/item/clothing/suit/rubber/unathi
+	name = "unathi suit"
+	desc = "Rubber suit with muscle painted on. Would probably fool average Unathi."
+	icon_state = "lizsuit"

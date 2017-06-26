@@ -82,9 +82,6 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 			var/open_wound
 			if(temp.status & ORGAN_BLEEDING)
 
-				if (temp.open)
-					blood_max += 2  //Yer stomach is cut open
-
 				for(var/datum/wound/W in temp.wounds)
 
 					if(!open_wound && (W.damage_type == CUT || W.damage_type == PIERCE) && W.damage && !W.is_treated())
