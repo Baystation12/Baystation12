@@ -71,7 +71,7 @@
 			return cardinal_turf
 
 /decl/overmap_event_handler/proc/on_turf_exited(var/turf/old_loc, var/obj/effect/overmap/ship/entering_ship, var/new_loc)
-	if(!istype(entering_ship))
+	if(!istype(entering_ship) || !entering_ship.triggers_events) //Placeholder method of preventing antagonist vessels from triggering events
 		return
 	if(new_loc == old_loc)
 		return
@@ -88,7 +88,7 @@
 		old_event.leave()
 
 /decl/overmap_event_handler/proc/on_turf_entered(var/turf/new_loc, var/obj/effect/overmap/ship/entering_ship, var/old_loc)
-	if(!istype(entering_ship))
+	if(!istype(entering_ship) || !entering_ship.triggers_events) //Placeholder method of preventing antagonist vessels from triggering events
 		return
 	if(new_loc == old_loc)
 		return

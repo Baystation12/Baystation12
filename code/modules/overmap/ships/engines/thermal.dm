@@ -105,11 +105,7 @@
 /obj/machinery/atmospherics/unary/engine/proc/calculate_thrust(datum/gas_mixture/propellant, used_part = 1)
 	return round(sqrt(propellant.get_mass() * used_part * air_contents.return_pressure()/100),0.1)
 
-/obj/machinery/atmospherics/unary/engine/ion
-	name = "ion engine"
-	icon_state = "ion"
-	moles_per_burn = 2.5
-	exhaust_type = /obj/effect/engine_exhaust/ion
+
 
 //Exhaust effect
 /obj/effect/engine_exhaust
@@ -130,6 +126,18 @@
 	playsound(loc, 'sound/effects/spray.ogg', 50, 1, -1)
 	spawn(20)
 		qdel(src)
+
+//Ion engine
+
+/datum/ship_engine/thermal/ion
+	name = "ion engine"
+	obj/machinery/atmospherics/unary/engine/ion/nozzle
+
+/obj/machinery/atmospherics/unary/engine/ion
+	name = "ion engine"
+	icon_state = "ion"
+	moles_per_burn = 2.5
+	exhaust_type = /obj/effect/engine_exhaust/ion
 
 /obj/effect/engine_exhaust/ion
 	light_color = "#0066ff"

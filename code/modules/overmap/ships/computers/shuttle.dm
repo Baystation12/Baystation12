@@ -2,13 +2,14 @@
 /obj/machinery/computer/shuttle_control/explore
 	name = "general shuttle control console"
 	var/area/shuttle_area	//area for shuttle ship-side
+	var/range
 
 /obj/machinery/computer/shuttle_control/explore/initialize()
 	..()
 	if(!shuttle_tag)
 		shuttle_tag = "Explorer-[z]"
 	if(!shuttle_controller.shuttles[shuttle_tag])
-		new/datum/shuttle/ferry/overmap(shuttle_tag, locate(shuttle_area))
+		new/datum/shuttle/ferry/overmap(shuttle_tag, locate(shuttle_area), range)
 		testing("Exploration shuttle '[shuttle_tag]' at zlevel [z] successfully added.")
 	else
 		var/datum/shuttle/ferry/overmap/S = shuttle_controller.shuttles[shuttle_tag]
