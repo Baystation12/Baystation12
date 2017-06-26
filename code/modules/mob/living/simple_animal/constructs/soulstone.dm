@@ -80,6 +80,14 @@
 	M.dust()
 
 /obj/item/device/soulstone/attack_self(var/mob/user)
+	if(full == 0)
+		to_chat(user, "<span class='notice'>\the [src] has no life essence.</span>")
+	if(full)
+		to_chat(user, "<span class='notice'>\the [src] emits an energetic, unholy glow!</span>")
+	if(full == -1)
+		to_chat(user, "<span class='warn'>\the [src] cracks even further, and finally gives way, dissipating into errant flecks of red light!.</span>")
+		qdel(src)
+		return
 	if(!shade.key)
 		to_chat(user, "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>")
 		user.pay_for_rune(1)
@@ -88,22 +96,15 @@
 		if(shade)
 			if(shade.key || shade.client)
 				set_full(1)
+				to_chat(user, "<span class='notice'>\The [src] flares up with an unholy glow!.</span>")
 				return
 	else if(!shade.client)
 		to_chat(user, "<span class='notice'>\The [shade] in \the [src] is dormant; it slips free from the grasp of the shard.</span>")
 		set_full(0) //To prevent grief.
-		return
-	else if(shade.loc == src)
-		to_chat(user, "<span class='notice'>A spirit has taken residence in the [src].</span>")
-		var/choice = alert("Would you like to invoke the spirit within?",,"Yes","No",)
-		if(choice == "Yes")
-			shade.forceMove(get_turf(src))
-			to_chat(user, "<span class='notice'>You summon \the [shade].</span>")
-		if(choice == "No")
-			return
-	if(full != 1) //Moved to the end because calling this first would just end the proc each time.
-		to_chat(user, "<span class='notice'>This [src] has no life essence.</span>")
-		return
+		qdel(src)
+		user.put_in_hands(new /obj/item/device/soulstone)
+
+
 
 /obj/item/device/soulstone/proc/set_full(var/f)
 	full = f
