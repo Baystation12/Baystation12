@@ -22,7 +22,7 @@
 				continue
 		else if(communicator == M) //Give it to ourselves
 			receive_communication(communicator, M, "<span class='notice'>\icon[cross] <b>You send the prayer, \"[message]\" out into the heavens.</b></span>")
-			return
+			continue
 		else
 			continue
 		receive_communication(communicator, M, "<span class='notice'>\icon[cross] <b><font color=purple>PRAY: </font>[extra ? "[extra]" : ""]: </b>[message]</span>")
