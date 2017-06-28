@@ -112,8 +112,7 @@
 	else
 		..()
 
-
-/obj/machinery/computer/Topic(href, href_list)
-	. = ..()
-	if(. && istype(usr, /mob/living/carbon))
-		playsound(src, 'sound/machines/keypress.ogg', 50)
+/obj/machinery/computer/CouldUseTopic(var/mob/user)
+	..()
+	if(istype(user, /mob/living/carbon))
+		playsound(src, "keyboard", 40)
