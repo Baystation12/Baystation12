@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
+	clicksound = "switch"
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
