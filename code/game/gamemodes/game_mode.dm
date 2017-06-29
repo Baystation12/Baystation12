@@ -159,9 +159,6 @@ var/global/list/additional_antag_types = list()
 	if(playerC < required_players)
 		return "Not enough players, [src.required_players] players needed."
 
-	if(!(antag_templates && antag_templates.len))
-		return 0
-
 	var/enemy_count = 0
 	var/list/all_antag_types = all_antag_types()
 	if(antag_tags && antag_tags.len)
@@ -170,17 +167,22 @@ var/global/list/additional_antag_types = list()
 			if(!antag)
 				continue
 			var/list/potential = list()
-			if(antag.flags & ANTAG_OVERRIDE_JOB)
-				potential = antag.pending_antagonists
+			if(antag_templates && antag_templates.len)
+				if(antag.flags & ANTAG_OVERRIDE_JOB)
+					potential = antag.pending_antagonists
+				else
+					potential = antag.candidates
 			else
-				potential = antag.candidates
+				potential = antag.get_potential_candidates(src)
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
 					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
 					return 0
-	return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
+		return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
+	else
+		return 0
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
@@ -221,6 +223,10 @@ var/global/list/additional_antag_types = list()
 		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
+
+	//Finally do post spawn antagonist stuff.
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.post_spawn()
 
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1

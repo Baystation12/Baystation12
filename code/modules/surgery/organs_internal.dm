@@ -15,7 +15,7 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.open == (affected.encased ? 3 : 2)
+	return affected && affected.open() == (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
 
 //////////////////////////////////////////////////////////////////
 //	Organ mending surgery step
@@ -35,13 +35,13 @@
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || affected.open < 2)
+	if(!affected || affected.open() < 2)
 		return
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(I.damage > 0)
 			if(I.surface_accessible)
 				return TRUE
-			if(affected.open >= (affected.encased ? 3 : 2))
+			if(affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
 				return TRUE
 	return FALSE
 
@@ -55,10 +55,10 @@
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || affected.open < 2)
+	if(!affected || affected.open() < 2)
 		return
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && I.robotic < ORGAN_ROBOT && (I.surface_accessible || affected.open >= (affected.encased ? 3 : 2)))
+		if(I && I.damage > 0 && I.robotic < ORGAN_ROBOT && (I.surface_accessible || affected.open() >= (affected.encased ? 3 : 2)))
 			user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
 
@@ -75,10 +75,10 @@
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected || affected.open < 2)
+	if(!affected || affected.open() < 2)
 		return
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && I.robotic < ORGAN_ROBOT && (I.surface_accessible || affected.open >= (affected.encased ? 3 : 2)))
+		if(I && I.damage > 0 && I.robotic < ORGAN_ROBOT && (I.surface_accessible || affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			user.visible_message("<span class='notice'>[user] treats damage to [target]'s [I.name] with [tool_name].</span>", \
 			"<span class='notice'>You treat damage to [target]'s [I.name] with [tool_name].</span>" )
 			I.damage = 0
@@ -102,7 +102,7 @@
 		affected.take_damage(dam_amt, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && I.robotic < ORGAN_ROBOT && (I.surface_accessible || affected.open >= (affected.encased ? 3 : 2)))
+		if(I && I.damage > 0 && I.robotic < ORGAN_ROBOT && (I.surface_accessible || affected.open() >= (affected.encased ? 3 : 2)))
 			I.take_damage(dam_amt,0)
 
 //////////////////////////////////////////////////////////////////

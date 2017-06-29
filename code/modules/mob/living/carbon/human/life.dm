@@ -79,7 +79,7 @@
 
 		handle_medical_side_effects()
 
-		if(!client)
+		if(!client && !mind)
 			species.handle_npc(src)
 
 
@@ -957,6 +957,10 @@
 		var/turf/T = loc
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
+	
+	var/area/A = get_area(src)
+	if(client && world.time >= client.played + 600)
+		A.play_ambience(src)
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)

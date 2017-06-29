@@ -1,10 +1,13 @@
-/mob/living/carbon/human/say(var/message)
+/mob/living/carbon/human/say(var/message, var/datum/language/language = null)
 	var/alt_name = ""
 	if(name != GetVoice())
-		alt_name = "(as [get_id_name("Unknown")])"
-
+		if(get_id_name("Unknown") != GetVoice())
+			alt_name = "(as [get_id_name("Unknown")])"
+		else
+			name = get_id_name("Unknown")
+		
 	message = sanitize(message)
-	..(message, alt_name = alt_name)
+	..(message, alt_name = alt_name, speaking = language)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)

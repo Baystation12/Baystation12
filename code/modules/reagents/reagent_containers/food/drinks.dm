@@ -286,9 +286,76 @@
 	volume = 60
 	center_of_mass = "x=15;y=4"
 
-/obj/item/weapon/reagent_containers/food/drinks/britcup
-	name = "cup"
-	desc = "A cup with the British flag emblazoned on it."
-	icon_state = "britcup"
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup
+	name = "coffee cup"
+	desc = "A plain white coffee cup."
+	icon_state = "coffeecup"
 	volume = 30
 	center_of_mass = "x=15;y=13"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/black
+	name = "black coffee cup"
+	desc = "A sleek black coffee cup."
+	icon_state = "coffeecup_black"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/green
+	name = "green coffee cup"
+	desc = "A pale green and pink coffee cup."
+	icon_state = "coffeecup_green"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/heart
+	name = "heart coffee cup"
+	desc = "A white coffee cup, it prominently features a red heart."
+	icon_state = "coffeecup_heart"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG
+	name = "SCG coffee cup"
+	desc = "A blue coffee cup emblazoned with the crest of the Sol Central Government."
+	icon_state = "coffeecup_SCG"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT
+	name = "NT coffee cup"
+	desc = "A red NanoTrasen coffee cup. 90% Guaranteed to not be laced with mind-control drugs."
+	icon_state = "coffeecup_NT"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
+	name = "#1 coffee cup"
+	desc = "A white coffee cup, prominently featuring a #1."
+	icon_state = "coffeecup_one"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/rainbow
+	name = "rainbow coffee cup"
+	desc = "A rainbow coffee cup. The colors are almost as blinding as a welder."
+	icon_state = "coffeecup_rainbow"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal
+	name = "metal coffee cup"
+	desc = "A metal coffee cup. You're not sure which metal."
+	icon_state = "coffeecup_metal"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/STC
+	name = "STC coffee cup"
+	desc = "A coffee cup adorned with the flag of the Sovereign Terran Confederacy, for when you need some espionage charges to go with your morning coffee."
+	icon_state = "coffeecup_STC"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/pawn
+	name = "pawn coffee cup"
+	desc = "A black coffee cup adorned with the image of a red chess pawn."
+	icon_state = "coffeecup_pawn"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/diona
+	name = "diona nymph coffee cup"
+	desc = "A green coffee cup featuring the image of a diona nymph."
+	icon_state = "coffeecup_diona"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/britcup
+	name = "british coffee cup"
+	desc = "A coffee cup with the British flag emblazoned on it."
+	icon_state = "coffeecup_brit"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/tall
+	name = "tall coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
+	icon_state = "coffeecup_tall"
+	volume = 120
+	center_of_mass = "x=15;y=19"

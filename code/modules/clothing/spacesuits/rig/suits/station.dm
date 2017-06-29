@@ -137,8 +137,6 @@
 	offline_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
 
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/back.dmi')
-
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/rig/ce
 
@@ -276,7 +274,7 @@
 /obj/item/clothing/head/helmet/space/rig/hazard
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/security
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI) //still needs Resomi sprites
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)
 
 /obj/item/clothing/suit/space/rig/hazard
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJARA,SPECIES_UNATHI)

@@ -104,7 +104,7 @@
 
 /datum/surgery_step/face/fix_face/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("<span class='notice'>[user] pulls the skin on [target]'s face back in place with \the [tool].</span>",	\
-	"<span class='warning'>You pull the skin on [target]'s face back in place with \the [tool].</span>")
+	"<span class='notice'>You pull the skin on [target]'s face back in place with \the [tool].</span>")
 	target.op_stage.face = 3
 
 /datum/surgery_step/face/fix_face/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -139,8 +139,6 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] cauterizes the incision on [target]'s face and neck with \the [tool].</span>", \
 	"<span class='notice'>You cauterize the incision on [target]'s face and neck with \the [tool].</span>")
-	affected.open = 0
-	affected.status &= ~ORGAN_BLEEDING
 	if (target.op_stage.face == 3)
 		var/obj/item/organ/external/head/h = affected
 		h.disfigured = 0

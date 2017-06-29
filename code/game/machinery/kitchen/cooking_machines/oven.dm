@@ -18,6 +18,7 @@
 		"Hot Pocket" = /obj/item/weapon/reagent_containers/food/snacks/variable/pocket,
 		"Kebab" = /obj/item/weapon/reagent_containers/food/snacks/variable/kebab,
 		"Waffles" = /obj/item/weapon/reagent_containers/food/snacks/variable/waffles,
+		"Pancakes" = /obj/item/weapon/reagent_containers/food/snacks/variable/pancakes,
 		"Cookie" = /obj/item/weapon/reagent_containers/food/snacks/variable/cookie,
 		"Donut" = /obj/item/weapon/reagent_containers/food/snacks/variable/donut,
 		)

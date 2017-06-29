@@ -5,14 +5,14 @@
 	expected_type = /mob/living
 
 /datum/phenomena/communicate/activate(var/mob/living/L)
-	var/text_to_send = sanitize(input(src, "Subjugate a member to your will", "Message a Believer") as text)
+	var/text_to_send = sanitize(input(linked, "Subjugate a member to your will", "Message a Believer") as text)
 	if(text_to_send)
 		to_chat(L, "<span class='cult'><font size='4'>[text_to_send]</font></span>") //Note to self: make this go to ghosties
 
 /datum/phenomena/point
 	name = "Point"
 	cost = 0
-	flags = PHENOMENA_MUNDANE
+	flags = PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /atom
 	var/image/arrow
 
@@ -26,11 +26,17 @@
 		var/datum/mind/mind = m
 		if(mind.current)
 			var/mob/M = mind.current
-			if(M in view)
+			if((M in view) && M.client)
 				to_chat(M, "<span class='cult'>Your attention is eerily drawn to \the [a].</span>")
 				M.client.images += arrow
+				logged_out_event.register(M, src, /datum/phenomena/point/proc/remove_image)
 				spawn(20)
-					M.client.images -= arrow
+					if(M.client)
+						remove_image(M)
+
+/datum/phenomena/point/proc/remove_image(var/mob/living/L)
+	L.client.images -= arrow
+	logged_out_event.unregister(L, src)
 
 /datum/phenomena/punish
 	name = "Punish"

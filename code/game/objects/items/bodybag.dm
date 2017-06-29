@@ -140,11 +140,7 @@
 /obj/structure/closet/body_bag/cryobag/open()
 	. = ..()
 	if(used)
-		var/obj/item/O = new/obj/item(src.loc)
-		O.name = "used stasis bag"
-		O.icon = src.icon
-		O.icon_state = "bodybag_used"
-		O.desc = "Pretty useless now.."
+		new/obj/item/usedcryobag(src.loc)
 		qdel(src)
 
 /obj/structure/closet/body_bag/cryobag/Entered(atom/movable/AM)
@@ -171,3 +167,9 @@
 		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		for(var/mob/living/L in contents)
 			L.examine(user)
+
+/obj/item/usedcryobag
+	name = "used stasis bag"
+	desc = "Pretty useless now.."
+	icon_state = "bodybag_used"
+	icon = 'icons/obj/cryobag.dmi'

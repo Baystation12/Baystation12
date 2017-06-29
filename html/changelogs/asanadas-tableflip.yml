@@ -1,6 +1,0 @@
-author: Asanadas
-
-delete-after: True
-
-changes: 
-  - bugfix: "No longer will you be able to freely pass onto upright tables by moving onto them from a tile which has a flipped table."

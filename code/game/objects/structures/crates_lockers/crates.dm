@@ -487,3 +487,16 @@
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
+
+/obj/structure/closet/crate/secure/biohazard
+	name = "biohazarad cart"
+	desc = "A heavy cart with extensive sealing. You shouldn't eat things you find in it."
+	icon_state = "biohazard"
+	icon_opened = "biohazardopen"
+	icon_closed = "biohazard"
+	open_sound = 'sound/items/Deconstruct.ogg'
+	close_sound = 'sound/items/Deconstruct.ogg'
+	req_access = list(access_xenobiology)
+
+/obj/structure/closet/crate/secure/biohazard/blanks
+	will_contain = list(/mob/living/carbon/human/blank/, /obj/item/usedcryobag)

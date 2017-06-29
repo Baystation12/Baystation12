@@ -111,3 +111,8 @@
 			qdel(src)
 	else
 		..()
+
+/obj/machinery/computer/CouldUseTopic(var/mob/user)
+	..()
+	if(istype(user, /mob/living/carbon))
+		playsound(src, "keyboard", 40)

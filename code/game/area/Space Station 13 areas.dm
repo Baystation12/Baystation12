@@ -188,7 +188,6 @@ area/space/atmosalert()
 /*
 * Special Areas
 */
-
 /area/wizard_station
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
