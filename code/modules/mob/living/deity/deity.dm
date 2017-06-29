@@ -9,6 +9,7 @@
 	pixel_y = -128
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
+	universal_understand = 1
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
@@ -28,7 +29,7 @@
 /mob/living/deity/Life()
 	. = ..()
 	if(. && mob_uplink.uses < power_min && --power_tick == 0)
-		mob_uplink.uses += 1
+		mob_uplink.uses = min(power_min, mob_uplink.uses + round(power_min/10))
 		nanomanager.update_uis(mob_uplink)
 		power_tick = initial(power_tick)
 

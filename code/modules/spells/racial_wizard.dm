@@ -246,7 +246,15 @@
 	var/mob/living/L = targets[1]
 
 	vision.possess(L)
+	destroyed_event.register(L, src, /spell/camera_connection/proc/release)
+	logged_out_event.register(L, src, /spell/camera_connection/proc/release)
 	L.verbs += /mob/living/proc/release_eye
+
+/spell/camera_connection/proc/release(var/mob/living/L)
+	vision.release(L)
+	L.verbs -= /mob/living/proc/release_eye
+	destroyed_event.unregister(L, src)
+	logged_out_event.unregister(L, src)
 
 /mob/observer/eye/wizard_eye
 	name_sufix = "Wizard Eye"

@@ -378,20 +378,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 /spell/proc/spell_do_after(var/mob/user as mob, delay as num, var/numticks = 5)
 	if(!user || isnull(user))
 		return 0
-	if(numticks == 0)
-		return 1
 
-	var/delayfraction = round(delay/numticks)
-	var/Location = user.loc
-	var/originalstat = user.stat
+	var/incap_flags = INCAPACITATION_STUNNED
+	if(!(spell_flags & (STATALLOWED|GHOSTCAST)))
+		incap_flags |= INCAPACITATION_KNOCKOUT
 
-	for(var/i = 0, i<numticks, i++)
-		sleep(delayfraction)
-
-
-		if(!user || (!(spell_flags & (STATALLOWED|GHOSTCAST)) && user.stat != originalstat)  || !(user.loc == Location))
-			return 0
-	return 1
+	return do_after(user,delay, incapacitation_flags = incap_flags)
 
 /spell/proc/set_connected_god(var/mob/living/deity/god)
 	connected_god = god
