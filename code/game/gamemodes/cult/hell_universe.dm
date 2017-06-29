@@ -26,6 +26,7 @@ In short:
 /datum/universal_state/hell/OnEnter()
 	set background = 1
 
+	convert_all_parallax()
 	//Separated into separate procs for profiling
 	MiscSet()
 	KillMobs()
@@ -39,3 +40,19 @@ In short:
 	for(var/mob/living/simple_animal/M in mob_list)
 		if(M && !M.client)
 			M.set_stat(DEAD)
+
+// Parallax.
+
+/datum/universal_state/hell/convert_parallax(obj/screen/plane_master/parallax_spacemaster/PS)
+	PS.color = list(
+	0,0,0,0,
+	0,0,0,0,
+	0,0,0,0,
+	1,0,0,1)
+
+/datum/universal_state/hell/proc/convert_all_parallax()
+	for(var/client/C in clients)
+		var/obj/screen/plane_master/parallax_spacemaster/PS = locate() in C.screen
+		if(PS)
+			convert_parallax(PS)
+	CHECK_TICK

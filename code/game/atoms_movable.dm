@@ -75,6 +75,7 @@
 			if(is_new_area && is_origin_turf)
 				origin.loc.Exited(src, destination)
 
+
 	if(destination)
 		destination.Entered(src, origin)
 		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
@@ -83,6 +84,7 @@
 					AM.Crossed(src)
 			if(is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
+
 	return 1
 
 //called when src is thrown into hit_atom

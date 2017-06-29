@@ -198,3 +198,6 @@
 #define VIRUS_ENGINEERED	3
 #define VIRUS_EXOTIC		4	//Usually adminbus only
 
+//Parallax defines.
+#define PARALLAX_SPACE 0x1
+#define PARALLAX_DUST 0x2

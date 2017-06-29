@@ -45,6 +45,8 @@ var/list/_client_preferences_by_type
 	return TRUE
 
 /datum/client_preference/proc/toggled(var/mob/preference_mob, var/enabled)
+
+
 	return
 
 /*********************
