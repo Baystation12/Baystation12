@@ -1,6 +1,7 @@
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
+	known = 1
 
 /obj/item/weapon/implant/loyalty/get_data()
 	return {"

@@ -4,6 +4,9 @@
 	gender = PLURAL
 	organ_tag = "lungs"
 	parent_organ = BP_CHEST
+	min_bruised_damage = 25
+	min_broken_damage = 45
+	relative_size = 60
 
 	var/breath_type
 	var/poison_type
@@ -11,11 +14,35 @@
 
 	var/min_breath_pressure
 
+	var/oxygen_deprivation = 0
 	var/safe_exhaled_max = 10
 	var/safe_toxins_max = 0.2
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 	var/breathing = 0
+	var/last_failed_breath
+
+/obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
+	var/last_suffocation = oxygen_deprivation
+	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation - amount))
+	return -(oxygen_deprivation - last_suffocation)
+
+/obj/item/organ/internal/lungs/proc/add_oxygen_deprivation(var/amount)
+	var/last_suffocation = oxygen_deprivation
+	if(world.time < (last_failed_breath + 2 MINUTES)) //todo config
+		oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
+	return (oxygen_deprivation - last_suffocation)
+
+// Returns a percentage value for use by GetOxyloss().
+/obj/item/organ/internal/lungs/proc/get_oxygen_deprivation()
+	var/result = oxygen_deprivation
+	if(status & ORGAN_DEAD)
+		return 100
+	else if(is_broken())
+		result = max(oxygen_deprivation, round(species.total_health * 0.5))
+	else if(is_damaged())
+		result = max(oxygen_deprivation, round(species.total_health * 0.25))
+	return round((result/species.total_health)*100)
 
 /obj/item/organ/internal/lungs/robotize()
 	. = ..()
@@ -48,7 +75,7 @@
 		if(prob(5))
 			owner.emote("cough")		//respitory tract infection
 
-	if(is_bruised())
+	if(is_bruised() && !owner.is_asystole())
 		if(prob(2))
 			owner.visible_message(
 				"<B>\The [owner]</B> coughs up blood!",
@@ -176,7 +203,11 @@
 
 	// Were we able to breathe?
 	var/failed_breath = failed_inhale || failed_exhale
-	if (!failed_breath)
+	if(failed_breath)
+		if(isnull(last_failed_breath))
+			last_failed_breath = world.time
+	else
+		last_failed_breath = null
 		owner.adjustOxyLoss(-5)
 		if(robotic < ORGAN_ROBOT && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)

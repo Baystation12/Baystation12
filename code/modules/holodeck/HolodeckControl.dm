@@ -183,7 +183,7 @@
 		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 			if (get_area(C.loc) != linkedholodeck)
 				holographic_mobs -= C
-				C.derez()
+				C.death()
 
 	if(!..())
 		return
@@ -270,7 +270,7 @@
 
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		holographic_mobs -= C
-		C.derez()
+		C.death()
 
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		qdel(B)

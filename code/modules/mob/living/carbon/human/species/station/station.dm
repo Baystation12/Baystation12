@@ -25,7 +25,7 @@
 	if(H.stat != CONSCIOUS)
 		return
 
-	if(H.traumatic_shock && H.shock_stage < 40 && prob(3))
+	if(H.get_shock() && H.shock_stage < 40 && prob(3))
 		H.emote(pick("moan","groan"))
 
 	if(H.shock_stage > 10 && prob(3))
@@ -327,6 +327,18 @@
 
 	reagent_tag = IS_DIONA
 	genders = list(PLURAL)
+
+#define DIONA_LIMB_DEATH_COUNT 9
+/datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)
+	var/lost_limb_count = has_limbs.len - H.organs.len
+	if(lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
+		return TRUE
+	for(var/thing in H.bad_external_organs)
+		var/obj/item/organ/external/E = thing
+		if(E && E.is_stump())
+			lost_limb_count++
+	return (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
+#undef DIONA_LIMB_DEATH_COUNT
 
 /datum/species/diona/can_understand(var/mob/other)
 	var/mob/living/carbon/alien/diona/D = other
