@@ -372,27 +372,23 @@ var/global/datum/controller/gameticker/ticker
 				if(blackbox)
 					blackbox.save_all_data_to_sql()
 
-				var/wait_for_tickets = 1
+				var/wait_for_tickets
 				var/delay_notified = 0
-				while(wait_for_tickets)
+				do
 					wait_for_tickets = 0
-					ticket_loop:
-						for(var/datum/ticket/ticket in tickets)
-							if(ticket.status == TICKET_ASSIGNED)
-								for(var/datum/client_lite/assigned_admin in ticket.assigned_admins)
-									var/client/assigned_admin_client = client_by_ckey(assigned_admin.ckey)
-									if(assigned_admin_client && !assigned_admin_client.is_afk())
-										wait_for_tickets = 1
-										break ticket_loop
-
+					for(var/datum/ticket/ticket in tickets)
+						if(ticket.is_active())
+							wait_for_tickets = 1
+							break
 					if(wait_for_tickets)
 						if(!delay_notified)
 							delay_notified = 1
-							message_staff("Automatically delaying restart due to active tickets.")
+							message_staff("<span class='warning'><b>Automatically delaying restart due to active tickets.</b></span>")
 							to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
 						sleep(15 SECONDS)
 					else if(delay_notified)
-						message_staff("No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.")
+						message_staff("<span class='warning'><b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b></span>")
+				while(wait_for_tickets)
 
 				if(!delay_end)
 					sleep(restart_timeout)

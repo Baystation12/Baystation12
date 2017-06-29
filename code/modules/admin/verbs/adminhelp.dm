@@ -95,8 +95,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/datum/ticket/ticket = new /datum/ticket(client_lite)
 	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 

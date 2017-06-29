@@ -58,6 +58,17 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 		if(ticket.owner.ckey == owner.ckey && (ticket.status == TICKET_OPEN || ticket.status == TICKET_ASSIGNED))
 			return ticket // there should only be one open ticket by a client at a time, so no need to keep looking
 
+/datum/ticket/proc/is_active()
+	if(status != TICKET_ASSIGNED)
+		return 0
+
+	for(var/datum/client_lite/admin in assigned_admins)
+		var/client/admin_client = client_by_ckey(admin.ckey)
+		if(admin_client && !admin_client.is_afk())
+			return 1
+
+	return 0
+
 /datum/ticket_msg
 	var/msg_from
 	var/msg_to
