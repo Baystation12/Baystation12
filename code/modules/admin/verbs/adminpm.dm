@@ -127,9 +127,9 @@
 	adminmsg2adminirc(src, sender, html_decode(msg))
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
-	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "", src) + " to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>")
+	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[sender]</span>: <span class='message'>[msg]</span></span></span>")
 	for(var/client/X in admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)
-			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>IRC-[sender]</span>: <span class='message'>[msg]</span></span></span>")
+			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>[sender]</span>: <span class='message'>[msg]</span></span></span>")
