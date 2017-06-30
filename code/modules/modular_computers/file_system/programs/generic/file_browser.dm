@@ -89,11 +89,20 @@
 			return 1
 
 		var/oldtext = html_decode(F.stored_data)
-		oldtext = replacetext(oldtext, "\[br\]", "\n")
+		oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
+		if(F.automatic_newlines)
+			oldtext = replacetext(oldtext, "\[br\]", "\n")
 
-		var/newtext = sanitize(replacetext(input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[br\]"), MAX_TEXTFILE_LENGTH)
+		var/newtext = input(usr, "Editing file [open_file]. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null
 		if(!newtext)
 			return
+
+		if(F.automatic_newlines)
+			newtext = replacetext(newtext, "\n", "\[br\]")
+		else
+			newtext = replacetext(newtext, "\n", "\[editorbr\]")
+
+		newtext = sanitize(newtext, MAX_TEXTFILE_LENGTH)
 
 		if(F)
 			var/datum/computer_file/data/backup = F.clone()
@@ -122,6 +131,17 @@
 		if(!computer.nano_printer.print_text(pencode2html(F.stored_data)))
 			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
+	if(href_list["PRG_toggle_linebreaks"])
+		. = 1
+		if(!open_file)
+			return 1
+		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+		if(!HDD)
+			return 1
+		var/datum/computer_file/data/F = HDD.find_file_by_name(open_file)
+		if(!F || !istype(F))
+			return 1
+		F.automatic_newlines = !F.automatic_newlines
 	if(href_list["PRG_copytousb"])
 		. = 1
 		var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
@@ -172,6 +192,7 @@
 			else
 				data["filedata"] = pencode2html(file.stored_data)
 				data["filename"] = "[file.filename].[file.filetype]"
+				data["linebreaks"] = file.automatic_newlines ? "Auto" : "Manual"
 	else
 		if(!PRG.computer || !PRG.computer.hard_drive)
 			data["error"] = "I/O ERROR: Unable to access hard drive."
