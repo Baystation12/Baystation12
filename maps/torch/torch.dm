@@ -72,6 +72,7 @@
 	#include "../../code/modules/lobby_music/dilbert.dm"
 	#include "../../code/modules/lobby_music/space_oddity.dm"
 	#include "../../code/modules/lobby_music/Torch.dm"
+	#include "../../code/modules/lobby_music/title1.dm"
 
 	#define USING_MAP_DATUM /datum/map/torch
 
