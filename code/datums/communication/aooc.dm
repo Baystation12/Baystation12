@@ -3,7 +3,7 @@
 	config_setting = "aooc_allowed"
 	expected_communicator_type = /client
 	flags = COMMUNICATION_LOG_CHANNEL_NAME|COMMUNICATION_ADMIN_FOLLOW
-	log_proc = /proc/log_ooc
+	log_proc = /proc/log_say
 	mute_setting = MUTE_AOOC
 	show_preference_setting = /datum/client_preference/show_aooc
 

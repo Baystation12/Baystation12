@@ -1,5 +1,5 @@
 /mob/living/deity/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="")
-	if(!..())
+	if(!..("<span class='cult'><font size='2'>[message]</font></span>")) //More for the deity itself, but maybe someday will have deity bring people to plane?
 		return 0
 	if(pylon)
 		pylon.audible_message("<b>\The [pylon]</b> reverberates, \"[message]\"")
