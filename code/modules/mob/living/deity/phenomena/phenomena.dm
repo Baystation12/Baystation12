@@ -40,7 +40,7 @@
 				to_chat(linked, "<span class='warning'>\The [L]'s mind is too mundane for you to influence.</span>")
 				return 0
 		else
-			if(linked.is_follower(target, silent = 1))
+			if(linked.is_follower(target))
 				if(!(flags & PHENOMENA_FOLLOWER))
 					to_chat(linked, "<span class='warning'>You can't use [name] on the flock!</span>")
 					return 0
@@ -49,12 +49,11 @@
 				return 0
 
 	if(cost > linked.mob_uplink.uses)
-		to_chat(linked, "<span class='warning'>You need more power to use [name] (Need [cost] power, have [linked.mob_uplink.uses])!</span>")
+		to_chat(linked, "<span class='warning'>You need more power to use [name]!</span>")
 		return 0
 
 	linked.take_cost(cost)
 	return 1
 
 /datum/phenomena/proc/activate(var/target)
-	to_chat(linked, "<span class='notice'>You use the phenomena [name] on \the [target]</span>")
 	return

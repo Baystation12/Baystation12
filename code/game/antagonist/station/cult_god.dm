@@ -87,14 +87,10 @@ var/datum/antagonist/godcultist/godcult
 	player.current.add_language(LANGUAGE_CULT)
 
 /datum/antagonist/godcultist/proc/remove_cultist(var/datum/mind/player)
-	var/mob/living/deity/god = get_deity(player)
-	if(god)
-		god.change_follower(player.current, adding = 0)
-	player.current.remove_language(LANGUAGE_CULT)
-
-/datum/antagonist/godcultist/proc/get_deity(var/datum/mind/player)
 	for(var/m in deity.current_antagonists)
 		var/datum/mind/mind = m
 		var/mob/living/deity/god = mind.current
 		if(god.is_follower(player.current,1))
-			return god
+			god.change_follower(player.current, adding = 0)
+			break
+	player.current.remove_language(LANGUAGE_CULT)
