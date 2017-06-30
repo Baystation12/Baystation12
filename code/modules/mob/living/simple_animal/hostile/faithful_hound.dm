@@ -18,16 +18,6 @@
 	var/password
 	var/list/allowed_mobs = list() //Who we allow past us
 	var/last_check = 0
-	faction = "cute ghost dogs"
-
-/mob/living/simple_animal/faithful_hound/death()
-	new /obj/item/weapon/ectoplasm (get_turf(src))
-	..(null, "disappears!")
-	qdel(src)
-
-/mob/living/simple_animal/faithful_hound/Destroy()
-	allowed_mobs.Cut()
-	return ..()
 
 /mob/living/simple_animal/faithful_hound/Life()
 	. = ..()
@@ -38,13 +28,13 @@
 		var/list/objs = list()
 		get_mobs_and_objs_in_view_fast(get_turf(src),5, mobs, objs, 0)
 		for(var/mob/living/m in mobs)
-			if((m == src) || (m in allowed_mobs) || m.faction == faction)
+			if((m == src) || (m in allowed_mobs))
 				continue
 			var/new_aggress = 1
 			var/mob/living/M = m
 			var/dist = get_dist(M, src)
 			if(dist < 2) //Attack! Attack!
-				M.attack_generic(src,10,"bitten")
+				M.attack_generic(src,10,"bites")
 				return .
 			else if(dist == 2)
 				new_aggress = 3
