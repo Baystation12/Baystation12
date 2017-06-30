@@ -164,6 +164,9 @@
 /obj/machinery/teleport/station/AIAltClick()
 	testfire()
 
+/obj/machinery/atmospherics/binary/pump/AIAltClick()
+	Topic(src, list("power" = "1"))
+
 /atom/proc/AIMiddleClick(var/mob/living/silicon/user)
 	return 0
 

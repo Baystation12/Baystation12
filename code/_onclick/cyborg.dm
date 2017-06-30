@@ -150,6 +150,9 @@
 /obj/machinery/teleport/station/BorgAltClick()
 	testfire()
 
+/obj/machinery/atmospherics/binary/pump/BorgAltClick()
+	Topic(src, list("power" = "1"))
+
 /*
 	As with AI, these are not used in click code,
 	because the code for robots is specific, not generic.
