@@ -187,10 +187,21 @@
 
 // Placeholders
 /turf/simulated/floor/airless/lava
-/turf/simulated/floor/light
+	name = "lava"
+	icon = 'icons/turf/flooring/lava.dmi'
+	icon_state = "lava"
+
 /turf/simulated/floor/snow
+	name = "snow"
+	icon = 'icons/turf/snow.dmi'
+	icon_state = "snow"
+
+/turf/simulated/floor/snow/New()
+	icon_state = "snow[rand(0,12)]"
+	..()
+
+/turf/simulated/floor/light
 /turf/simulated/floor/beach/coastline
-/turf/simulated/floor/plating/snow
 /turf/simulated/floor/airless/ceiling
 
 /turf/simulated/floor/beach

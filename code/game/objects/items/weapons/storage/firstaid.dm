@@ -42,17 +42,13 @@
 	icon_state = "firstaid"
 
 	startswith = list(
-		/obj/item/stack/medical/bruise_pack = 3,
-		/obj/item/stack/medical/ointment = 2,
+		/obj/item/stack/medical/bruise_pack = 2,
+		/obj/item/stack/medical/ointment = 1,
 		/obj/item/device/healthanalyzer,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/weapon/storage/pill_bottle/antidexafen,
 		/obj/item/weapon/storage/pill_bottle/paracetamol
 		)
-
-/obj/item/weapon/storage/firstaid/regular/New()
-	..()
-	make_exact_fit()
 
 /obj/item/weapon/storage/firstaid/toxin
 	name = "toxin first aid"
@@ -91,15 +87,11 @@
 
 	startswith = list(
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/advanced/bruise_pack = 3,
+		/obj/item/stack/medical/advanced/bruise_pack = 2,
 		/obj/item/stack/medical/advanced/ointment = 2,
 		/obj/item/stack/medical/splint,
 		/obj/item/weapon/storage/pill_bottle/paracetamol
 		)
-
-/obj/item/weapon/storage/firstaid/adv/New()
-	..()
-	make_exact_fit()
 
 /obj/item/weapon/storage/firstaid/combat
 	name = "combat medical kit"

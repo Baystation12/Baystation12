@@ -4,9 +4,9 @@ var/datum/antagonist/godcultist/godcult
 	id = MODE_GODCULTIST
 	role_text = "God Cultist"
 	role_text_plural = "Cultists"
-	restricted_jobs = list("Internal Affairs Agent", "Head of Security", "Captain")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
-	blacklisted_jobs = list("AI", "Cyborg", "Chaplain")
+	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos)
+	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain)
 	feedback_tag = "godcult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You are under the guidance of a powerful otherwordly being. Spread its will and keep your faith."
@@ -77,8 +77,7 @@ var/datum/antagonist/godcultist/godcult
 				var/datum/mind/player = locate(href_list["selectgod"])
 				remove_cultist(player) //Remove him from any current deity.
 				add_cultist(player, D)
-				log_admin("[key_name(usr)] has set [key_name(player.current)] to be a minion of [key_name(D)]")
-				
+				log_and_message_admins("has set [key_name(player.current)] to be a minion of [key_name(D)]")
 		else
 			to_chat(usr, "<span class='warning'>There are no deities to be linked to.</span>")
 		return 1

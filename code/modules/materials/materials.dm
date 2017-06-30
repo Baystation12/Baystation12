@@ -340,7 +340,7 @@ var/list/name_to_material
 	name = "marble"
 	icon_colour = "#AAAAAA"
 	weight = 26
-	hardness = 100
+	hardness = 60
 	brute_armor = 3
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble

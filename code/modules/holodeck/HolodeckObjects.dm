@@ -422,12 +422,8 @@
 		destroy_surroundings = initial(destroy_surroundings)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
-	derez() //holograms can't gib
+	death()
 
 /mob/living/simple_animal/hostile/carp/holodeck/death()
-	..()
-	derez()
-
-/mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
-	visible_message("<span class='notice'>\The [src] fades away!</span>")
+	..(null, "fades away!", "You have been destroyed.")
 	qdel(src)

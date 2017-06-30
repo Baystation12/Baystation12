@@ -30,6 +30,12 @@
 	contains = list(/obj/item/stack/material/plastic/fifty)
 	cost = 10
 	containername = "\improper Plastic sheets crate"
+	
+/decl/hierarchy/supply_pack/engineering/marble10
+	name = "10 slabs of marble"
+	contains = list(/obj/item/stack/material/marble/ten)
+	cost = 10
+	containername = "\improper Marble slabs crate"	
 
 /decl/hierarchy/supply_pack/engineering/smes_circuit
 	name = "Superconducting Magnetic Energy Storage Unit Circuitry"

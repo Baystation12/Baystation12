@@ -187,6 +187,7 @@
 		chest.slowdown_per_slot[slot_wear_suit] = (active? online_slowdown : offline_slowdown)
 	if(helmet)
 		helmet.tint = (active? vision_restriction : offline_vision_restriction)
+		helmet.update_vision()
 
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)

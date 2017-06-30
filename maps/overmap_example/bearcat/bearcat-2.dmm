@@ -327,7 +327,6 @@
 "go" = (/obj/structure/table/reinforced,/obj/item/device/flashlight/lamp,/obj/item/weapon/spacecash/bundle/c1000,/obj/random_multi/single_item/captains_spare_id,/obj/item/weapon/spacecash/bundle/c1000,/obj/item/weapon/spacecash/bundle/c1000,/turf/simulated/floor/plating,/area/ship/scrap/hidden)
 "gp" = (/obj/machinery/portable_atmospherics/powered/scrubber,/obj/effect/floor_decal/corner/blue{dir = 1},/obj/effect/floor_decal/corner/yellow{dir = 8},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled,/area/ship/scrap/fire)
 "gq" = (/turf/simulated/floor/tiled,/area/ship/scrap/fire)
-"gr" = (/obj/machinery/power/apc{name = "Fire Closet APC"},/obj/structure/cable,/obj/structure/dispenser,/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/turf/simulated/floor/tiled,/area/ship/scrap/fire)
 "gs" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/cyan{icon_state = "intact"; dir = 5},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "gt" = (/obj/machinery/light/small,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable{icon_state = "4-9"},/obj/machinery/atmospherics/pipe/simple/hidden/cyan{icon_state = "intact"; dir = 4},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "gu" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/cyan{icon_state = "intact"; dir = 4},/obj/structure/disposalpipe/segment{icon_state = "conpipe-c"; dir = 2},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
@@ -530,6 +529,7 @@
 "kn" = (/obj/machinery/light{icon_state = "tube1"; dir = 1},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc{dir = 1; name = "Docking Area APC"},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/ship/scrap/dock)
 "ko" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/turf/simulated/floor,/area/ship/scrap/maintenance/engine/aft)
 "kp" = (/obj/structure/bed/chair{icon_state = "chair"; dir = 1},/obj/structure/bed/chair{icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/tiled,/area/ship/scrap/shuttle/outgoing)
+"lb" = (/obj/structure/cable,/obj/structure/dispenser,/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/turf/simulated/floor/tiled,/area/ship/scrap/fire)
 "HZ" = (/obj/machinery/computer/cryopod,/turf/simulated/wall,/area/ship/scrap/crew/cryo)
 
 (1,1,1) = {"
@@ -575,7 +575,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQbQeDeTftfueDeLdfeSeSeSeSfAdfeReIfCfDfc
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafEfFfFfEfEeUdfeSeSeSeSfMfNfafPfQfQfQfPbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafEfRfSfTfEfUdfeSeSflfXfYdffZfPgagbfjfPbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagcgdgegfggbKgidfdfdfdgdfdfdfgkglgmgngofPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafEgpgqgrfFgsgtgugvgwgxgxgygzfPgAgBfkfPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafEgpgqlbfFgsgtgugvgwgxgxgygzfPgAgBfkfPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagCgCgCgDgEgEgEgGgFgGgHgGgGgGgIgIgIgJgKfPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQgCgLgMgNgOgPgEgQgRgSgTgUgVgWgIgXgYgZgKbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQgCgChahbhchdhehfhghhhihjhkhkhmhnhohphqhraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

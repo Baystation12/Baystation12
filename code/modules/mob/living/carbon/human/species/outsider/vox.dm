@@ -17,6 +17,8 @@
 
 	taste_sensitivity = TASTE_DULL
 
+	use_eye_icon = 'icons/mob/human_races/r_vox.dmi'
+
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 

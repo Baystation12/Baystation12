@@ -1,7 +1,7 @@
 /datum/phenomena/dimensional_locker
 	name = "Dimensional Locker"
 	cost = 10
-	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE
+	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	var/obj/structure/closet/cabinet
 	var/cabinet_type = /obj/structure/closet/cabinet
 	expected_type = /atom
@@ -38,7 +38,7 @@
 /datum/phenomena/portals
 	name = "Portals"
 	cost = 15
-	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE
+	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /atom
 	var/list/portals = list()
 
@@ -68,7 +68,7 @@
 /datum/phenomena/banishing_smite
 	name = "Banishing Smite"
 	cost = 25
-	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE
+	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 
 /datum/phenomena/banishing_smite/activate(var/mob/living/L, var/mob/living/deity/user)

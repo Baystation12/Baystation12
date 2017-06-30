@@ -68,18 +68,32 @@
 /datum/reagent/dylovene
 	name = "Dylovene"
 	id = "anti_toxin"
-	description = "Dylovene is a broad-spectrum antitoxin."
+	description = "Dylovene is a broad-spectrum antitoxin used to neutralize poisons before they can do significant harm."
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00A000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
+	var/global/list/remove_toxins = list(
+		"zombiepowder"
+		)
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.drowsyness = max(0, M.drowsyness - 6 * removed)
 		M.hallucination = max(0, M.hallucination - 9 * removed)
-		M.adjustToxLoss(-4 * removed)
+	M.add_chemical_effect(CE_ANTITOX, 1)
+
+	// TODO: stomach pump
+	var/removing = (4 * removed)
+	for(var/datum/reagent/R in M.ingested.reagent_list)
+		if(istype(R, /datum/reagent/toxin) || (R.id in remove_toxins))
+			M.ingested.remove_reagent(R.id, removing)
+			return
+	for(var/datum/reagent/R in M.reagents.reagent_list)
+		if(istype(R, /datum/reagent/toxin) || (R.id in remove_toxins))
+			M.reagents.remove_reagent(R.id, removing)
+			return
 
 /datum/reagent/dexalin
 	name = "Dexalin"
@@ -96,8 +110,7 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
 	else if(alien != IS_DIONA)
-		M.adjustOxyLoss(-15 * removed)
-
+		M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent("lexorin", 2 * removed)
 
 /datum/reagent/dexalinp
@@ -115,8 +128,7 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 9)
 	else if(alien != IS_DIONA)
-		M.adjustOxyLoss(-300 * removed)
-
+		M.add_chemical_effect(CE_OXYGENATED, 2)
 	holder.remove_reagent("lexorin", 3 * removed)
 
 /datum/reagent/tricordrazine
@@ -131,9 +143,7 @@
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustOxyLoss(-6 * removed)
 		M.heal_organ_damage(3 * removed, 3 * removed)
-		M.adjustToxLoss(-3 * removed)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
@@ -149,9 +159,8 @@
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-10 * removed)
-		M.adjustOxyLoss(-10 * removed)
+		M.add_chemical_effect(CE_OXYGENATED, 1)
 		M.heal_organ_damage(10 * removed, 10 * removed)
-		M.adjustToxLoss(-10 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 
 /datum/reagent/clonexadone
@@ -168,9 +177,8 @@
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-30 * removed)
-		M.adjustOxyLoss(-30 * removed)
+		M.add_chemical_effect(CE_OXYGENATED, 2)
 		M.heal_organ_damage(30 * removed, 30 * removed)
-		M.adjustToxLoss(-30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 
 /* Painkillers */
@@ -260,7 +268,7 @@
 /datum/reagent/alkysine
 	name = "Alkysine"
 	id = "alkysine"
-	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a catastrophic injury. Can heal brain tissue."
+	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a injury. Can aid in healing brain tissue."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#FFFF66"
@@ -272,8 +280,12 @@
 /datum/reagent/alkysine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.adjustBrainLoss(-30 * removed)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
+	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.confused++
+		H.drowsyness++
 
 /datum/reagent/imidazoline
 	name = "Imidazoline"
@@ -311,10 +323,15 @@
 /datum/reagent/peridaxon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-
 		for(var/obj/item/organ/I in H.internal_organs)
-			if((I.damage > 0) && !(I.robotic >= ORGAN_ROBOT)) //Peridaxon heals only non-robotic organs
-				I.damage = max(I.damage - removed, 0)
+			if(I.robotic >= ORGAN_ROBOT)
+				continue
+			if(I.organ_tag == BP_BRAIN)
+				H.confused++
+				H.drowsyness++
+				if(I.damage >= I.min_bruised_damage)
+					continue
+			I.damage = max(I.damage - removed, 0)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
@@ -648,3 +665,26 @@
 /datum/reagent/antidexafen/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.hallucination = max(M.hallucination, 2)
+
+/datum/reagent/adrenaline
+	name = "Adrenaline"
+	id = "adrenaline"
+	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
+	taste_description = "rush"
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	scannable = 1
+	overdose = 10
+
+/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(dose > 1)	//not that effective after initial rush
+		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
+		M.add_chemical_effect(CE_PULSE, 1)
+	else
+		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
+		M.add_chemical_effect(CE_PULSE, 2)
+	if(dose > 5)
+		M.make_jittery(5)
+	if(volume >= 5 && M.is_asystole())
+		remove_self(5)
+		M.resuscitate()

@@ -713,7 +713,8 @@
 		M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
-	M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 15)
+		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -721,6 +722,7 @@
 		M.adjustToxLoss(2 * removed)
 		M.make_jittery(4)
 		return
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)
@@ -1174,7 +1176,7 @@
 	description = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
 	color = "#0064C6"
-	strength = 50
+	strength = 15
 
 	glass_name = "gin"
 	glass_desc = "A crystal clear glass of Griffeater gin."
