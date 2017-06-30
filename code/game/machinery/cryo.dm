@@ -14,6 +14,8 @@
 	use_power = 1
 	idle_power_usage = 20
 	active_power_usage = 200
+	clicksound = 'sound/machines/buttonbeep.ogg'
+	clickvol = 30
 
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null

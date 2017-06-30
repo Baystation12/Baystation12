@@ -12,6 +12,7 @@
 	var/active = 0
 	var/heating_power = 40 KILOWATTS
 	flags = OBJ_CLIMBABLE
+	clicksound = "switch"
 
 
 /obj/machinery/space_heater/New()
@@ -119,7 +120,7 @@
 
 
 /obj/machinery/space_heater/Topic(href, href_list)
-	if (usr.stat)
+	if (..())
 		return
 	if ((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
