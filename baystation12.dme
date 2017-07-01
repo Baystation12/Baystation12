@@ -1791,6 +1791,7 @@
 #include "code\modules\modular_computers\file_system\programs\generic\ntdownloader.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\ntnrc_client.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\nttransfer.dm"
+#include "code\modules\modular_computers\file_system\programs\generic\supply.dm"
 #include "code\modules\modular_computers\file_system\programs\medical\suit_sensors.dm"
 #include "code\modules\modular_computers\file_system\programs\research\ai_restorer.dm"
 #include "code\modules\modular_computers\file_system\programs\research\email_administration.dm"
