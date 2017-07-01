@@ -120,6 +120,8 @@ datum/preferences
 	b_type = RANDOM_BLOOD_TYPE
 
 	gear = list()
+	gear_list = list()
+	gear_slot = 1
 
 	if(istype(C))
 		client = C
