@@ -1199,6 +1199,10 @@
 	name = "\improper Research Security Checkpoint"
 	icon_state = "checkpoint1"
 
+/area/rnd/blanks
+	name = "\improper Aux Custodial Supplies"
+	icon_state = "decontamination"
+
 // Crew areas
 /area/crew_quarters/bar
 	name = "\improper Bar"

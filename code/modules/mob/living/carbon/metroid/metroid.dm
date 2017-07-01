@@ -19,6 +19,7 @@
 	// for the sake of cleanliness, though, here they are.
 	status_flags = CANPARALYSE|CANPUSH
 
+	var/toxloss = 0
 	var/is_adult = 0
 	var/number = 0 // Used to understand when someone is talking to it
 	var/cores = 1 // the number of /obj/item/slime_extract's the slime has left inside
@@ -50,6 +51,16 @@
 	var/colour = "grey"
 
 	var/core_removal_stage = 0 //For removing cores.
+
+
+/mob/living/carbon/slime/getToxLoss()
+	return toxloss
+
+/mob/living/carbon/slime/adjustToxLoss(var/amount)
+	toxloss = Clamp(toxloss + amount, 0, maxHealth)
+
+/mob/living/carbon/slime/setToxLoss(var/amount)
+	adjustToxLoss(amount-getToxLoss())
 
 /mob/living/carbon/slime/New(var/location, var/colour="grey")
 

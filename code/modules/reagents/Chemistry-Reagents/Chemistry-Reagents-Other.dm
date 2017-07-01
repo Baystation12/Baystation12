@@ -182,21 +182,6 @@
 				new /obj/effect/decal/cleanable/greenglow(T)
 			return
 
-/datum/reagent/adrenaline
-	name = "Adrenaline"
-	id = "adrenaline"
-	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-
-/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-	M.SetParalysis(0)
-	M.SetWeakened(0)
-	M.adjustToxLoss(rand(3))
-
 /datum/reagent/water/holywater
 	name = "Holy Water"
 	id = "holywater"

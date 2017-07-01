@@ -112,6 +112,8 @@ Class Procs:
 	var/panel_open = 0
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	var/clicksound			// sound played on succesful interface use by a carbon lifeform
+	var/clickvol = 40		// sound played on succesful interface use
 
 /obj/machinery/New(l, d=0)
 	..(l)
@@ -353,3 +355,8 @@ Class Procs:
 
 /datum/proc/remove_visual(mob/M)
 	return
+
+/obj/machinery/CouldUseTopic(var/mob/user)
+	..()
+	if(clicksound && istype(user, /mob/living/carbon))
+		playsound(src, clicksound, clickvol)

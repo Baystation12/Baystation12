@@ -1,5 +1,5 @@
 @echo off
-cd ../../maps/
+cd ../../../maps/
 
 for /R %%f in (*.dmm) do copy "%%f" "%%f.backup"
 

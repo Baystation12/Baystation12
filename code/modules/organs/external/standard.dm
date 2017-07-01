@@ -22,6 +22,19 @@
 	encased = "ribcage"
 	artery_name = "aorta"
 
+/obj/item/organ/external/chest/robotize()
+	if(..())
+		// Give them a new cell.
+		var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]
+		if(!istype(C))
+			owner.internal_organs_by_name[BP_CELL] = new /obj/item/organ/internal/cell(owner,1)
+
+/obj/item/organ/external/get_scan_results()
+	. = ..()
+	var/obj/item/organ/internal/lungs/L = locate() in src
+	if( L && L.is_bruised())
+		. += "Lung ruptured"
+
 /obj/item/organ/external/groin
 	name = "lower body"
 	organ_tag = BP_GROIN
@@ -174,60 +187,3 @@
 	parent_organ = BP_R_ARM
 	joint = "right wrist"
 	amputation_point = "right wrist"
-
-/obj/item/organ/external/head
-	organ_tag = BP_HEAD
-	icon_name = "head"
-	name = "head"
-	slot_flags = SLOT_BELT
-	max_damage = 75
-	min_broken_damage = 35
-	w_class = ITEM_SIZE_NORMAL
-	body_part = HEAD
-	vital = 1
-	parent_organ = BP_CHEST
-	joint = "jaw"
-	amputation_point = "neck"
-	gendered_icon = 1
-	encased = "skull"
-	artery_name = "cartoid artery"
-
-	var/can_intake_reagents = 1
-	var/eye_icon = "eyes_s"
-	var/has_lips
-
-/obj/item/organ/external/head/get_agony_multiplier()
-	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
-
-/obj/item/organ/external/head/robotize(var/company, var/skip_prosthetics, var/keep_organs)
-	if(company)
-		var/datum/robolimb/R = all_robolimbs[company]
-		if(R)
-			can_intake_reagents = R.can_eat
-			eye_icon = R.use_eye_icon
-	. = ..(company, skip_prosthetics, 1)
-	has_lips = null
-
-/obj/item/organ/external/head/removed()
-	if(owner)
-		name = "[owner.real_name]'s head"
-		owner.drop_from_inventory(owner.glasses)
-		owner.drop_from_inventory(owner.head)
-		owner.drop_from_inventory(owner.l_ear)
-		owner.drop_from_inventory(owner.r_ear)
-		owner.drop_from_inventory(owner.wear_mask)
-		spawn(1)
-			owner.update_hair()
-	..()
-
-/obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon = null)
-	. = ..()
-	if (!disfigured)
-		if (brute_dam > 40)
-			if (prob(50))
-				disfigure("brute")
-		if (burn_dam > 40)
-			disfigure("burn")
-
-/obj/item/organ/external/head/no_eyes
-	eye_icon = "blank_eyes"
