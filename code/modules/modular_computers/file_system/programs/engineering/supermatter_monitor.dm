@@ -75,7 +75,7 @@
 		data["SM_power"] = active.power
 		data["SM_ambienttemp"] = air.temperature
 		data["SM_ambientpressure"] = air.return_pressure()
-		data["SM_EPR"] = round((air.total_moles / air.group_multiplier) / 23.1, 0.01)
+		data["SM_EPR"] = active.get_epr()
 		if(air.total_moles)
 			data["SM_gas_O2"] = round(100*air.gas["oxygen"]/air.total_moles,0.01)
 			data["SM_gas_CO2"] = round(100*air.gas["carbon_dioxide"]/air.total_moles,0.01)

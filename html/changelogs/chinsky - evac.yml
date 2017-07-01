@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "GUPpy, Calypso and Aquila now can share destinations, as long as they can fit."
+  - rscadd: "Excavation prep closets now have BLUESPACE FLARES. You can activate those in a nice open spot to create a new navpoints for shuttles (ones mentioned) to go to."

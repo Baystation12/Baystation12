@@ -84,7 +84,7 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/turf/map = locate(M.x,M.y,using_map.overmap_z)
 	var/obj/effect/overmap/TM
 	for(var/obj/effect/overmap/O in map)
-		if(O != M && O.in_space && prob(5))
+		if(O != M && O.in_space && prob(50))
 			TM = O
 			break
 	if(!TM)

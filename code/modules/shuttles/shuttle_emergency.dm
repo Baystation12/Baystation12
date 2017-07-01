@@ -1,9 +1,9 @@
-/datum/shuttle/ferry/emergency
-	category = /datum/shuttle/ferry/emergency
+/datum/shuttle/autodock/ferry/emergency
+	category = /datum/shuttle/autodock/ferry/emergency
 	move_time = 10 MINUTES
 	var/datum/evacuation_controller/shuttle/emergency_controller
 
-/datum/shuttle/ferry/emergency/New()
+/datum/shuttle/autodock/ferry/emergency/New()
 	. = ..()
 	emergency_controller = evacuation_controller
 	if(!istype(emergency_controller))
@@ -14,7 +14,7 @@
 		return
 	emergency_controller.shuttle = src
 
-/datum/shuttle/ferry/emergency/arrived()
+/datum/shuttle/autodock/ferry/emergency/arrived()
 	. = ..()
 
 	if(!emergency_controller.has_evacuated())
@@ -24,25 +24,25 @@
 		var/obj/machinery/computer/shuttle_control/emergency/C = in_use
 		C.reset_authorization()
 
-/datum/shuttle/ferry/emergency/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
-	..(departing, destination, interim, emergency_controller.get_long_jump_time(), direction)
+/datum/shuttle/autodock/ferry/emergency/long_jump(var/destination, var/interim, var/travel_time, var/direction)
+	..(destination, interim, emergency_controller.get_long_jump_time(), direction)
 
-/datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
-	if(origin == area_station)
+/datum/shuttle/autodock/ferry/emergency/shuttle_moved()
+	if(next_location != waypoint_station)
 		emergency_controller.shuttle_leaving() // This is a hell of a line. v
 		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? using_map.emergency_shuttle_leaving_dock : using_map.shuttle_leaving_dock), "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
-	else if(destination == area_offsite && emergency_controller.has_evacuated())
+	else if(next_location == waypoint_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
-	..(origin, destination)
+	..()
 
-/datum/shuttle/ferry/emergency/can_launch(var/user)
+/datum/shuttle/autodock/ferry/emergency/can_launch(var/user)
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
 		if (!C.has_authorization())
 			return 0
 	return ..()
 
-/datum/shuttle/ferry/emergency/can_force(var/user)
+/datum/shuttle/autodock/ferry/emergency/can_force(var/user)
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
 
@@ -52,7 +52,7 @@
 			return 0
 	return ..()
 
-/datum/shuttle/ferry/emergency/can_cancel(var/user)
+/datum/shuttle/autodock/ferry/emergency/can_cancel(var/user)
 	if(emergency_controller.has_evacuated())
 		return 0
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
@@ -61,7 +61,7 @@
 			return 0
 	return ..()
 
-/datum/shuttle/ferry/emergency/launch(var/user)
+/datum/shuttle/autodock/ferry/emergency/launch(var/user)
 	if (!can_launch(user)) return
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
@@ -75,7 +75,7 @@
 
 	..(user)
 
-/datum/shuttle/ferry/emergency/force_launch(var/user)
+/datum/shuttle/autodock/ferry/emergency/force_launch(var/user)
 	if (!can_force(user)) return
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
@@ -89,7 +89,7 @@
 
 	..(user)
 
-/datum/shuttle/ferry/emergency/cancel_launch(var/user)
+/datum/shuttle/autodock/ferry/emergency/cancel_launch(var/user)
 
 	if (!can_cancel(user)) return
 
@@ -177,7 +177,7 @@
 
 /obj/machinery/computer/shuttle_control/emergency/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
-	var/datum/shuttle/ferry/emergency/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/ferry/emergency/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
 
@@ -222,9 +222,9 @@
 	data = list(
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
-		"has_docking" = shuttle.docking_controller? 1 : 0,
-		"docking_status" = shuttle.docking_controller? shuttle.docking_controller.get_docking_status() : null,
-		"docking_override" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
+		"has_docking" = shuttle.active_docking_controller? 1 : 0,
+		"docking_status" = shuttle.active_docking_controller? shuttle.active_docking_controller.get_docking_status() : null,
+		"docking_override" = shuttle.active_docking_controller? shuttle.active_docking_controller.override_enabled : null,
 		"can_launch" = shuttle.can_launch(src),
 		"can_cancel" = shuttle.can_cancel(src),
 		"can_force" = shuttle.can_force(src),

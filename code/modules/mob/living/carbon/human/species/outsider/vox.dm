@@ -17,6 +17,8 @@
 
 	taste_sensitivity = TASTE_DULL
 
+	use_eye_icon = 'icons/mob/human_races/r_vox.dmi'
+
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
 
@@ -89,68 +91,3 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
 		H.internal = H.r_hand
 	H.internals.icon_state = "internal1"
-
-
-/datum/species/vox/pariah
-	name = SPECIES_VOXPARIAH
-	blurb = "Sickly biproducts of Vox society, these creatures are vilified by their own kind \
-	and taken advantage of by enterprising companies for cheap, disposable labor. \
-	They aren't very smart, smell worse than a vox, and vomit constantly, \
-	earning them the true title of 'shitbird'."
-	rarity_value = 0.1
-	speech_chance = 60        // No volume control.
-	siemens_coefficient = 0.5 // Ragged scaleless patches.
-
-	oxy_mod = 1.4
-	brute_mod = 1.3
-	burn_mod = 1.4
-	toxins_mod = 1.3
-
-	cold_level_1 = 130
-	cold_level_2 = 100
-	cold_level_3 = 60
-
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws, /datum/unarmed_attack/bite)
-
-	// Pariahs have no stack.
-	has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
-		BP_BRAIN =    /obj/item/organ/internal/pariah_brain,
-		BP_EYES =     /obj/item/organ/internal/eyes
-		)
-	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
-	flags = NO_SCAN
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
-
-/datum/species/vox/pariah/get_bodytype(var/mob/living/carbon/human/H)
-	return SPECIES_VOX
-
-// No combat skills for you.
-/datum/species/vox/pariah/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
-	return 0
-
-// Pariahs are really gross.
-/datum/species/vox/pariah/handle_environment_special(var/mob/living/carbon/human/H)
-	if(prob(5))
-		var/datum/gas_mixture/vox = H.loc.return_air()
-		var/stink_range = rand(3,5)
-		for(var/mob/living/M in range(H,stink_range))
-			if(M.stat || M == H || issilicon(M) || isbrain(M))
-				continue
-			var/datum/gas_mixture/mob_air = M.loc.return_air()
-			if(!vox || !mob_air || vox != mob_air) //basically: is our gasses their gasses? If so, smell. If not, how can smell?
-				continue
-			var/mob/living/carbon/human/target = M
-			if(istype(target))
-				if(target.internal)
-					continue
-				if(target.head && (target.head.body_parts_covered & FACE) && (target.head.flags & AIRTIGHT))
-					continue
-				if(target.wear_mask && (target.wear_mask.body_parts_covered & FACE) && (target.wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT))
-					continue
-				if(!target.should_have_organ(BP_LUNGS)) //dont breathe so why do they smell it.
-					continue
-			to_chat(M, "<span class='danger'>A terrible stench emanates from \the [H].</span>")

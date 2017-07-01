@@ -23,18 +23,21 @@
 #define IS_UNATHI  4
 #define IS_TAJARA  5
 #define IS_XENOS   6
-#define IS_RESOMI  7
 #define IS_SLIME   8
 
-#define CE_STABLE "stable" // Inaprovaline
-#define CE_ANTIBIOTIC "antibiotic" // Spaceacilin
-#define CE_BLOODRESTORE "bloodrestore" // Iron/nutriment
-#define CE_PAINKILLER "painkiller"
-#define CE_ALCOHOL "alcohol" // Liver filtering
-#define CE_ALCOHOL_TOXIC "alcotoxic" // Liver damage
-#define CE_SPEEDBOOST "gofast" // Hyperzine
-#define CE_PULSE      "xcardic" // increases or decreases heart rate
-#define CE_NOPULSE    "heartstop" // stops heartbeat
+#define CE_STABLE        "stable"       // Inaprovaline
+#define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
+#define CE_BLOODRESTORE  "bloodrestore" // Iron/nutriment
+#define CE_PAINKILLER    "painkiller"
+#define CE_ALCOHOL       "alcohol"      // Liver filtering
+#define CE_ALCOHOL_TOXIC "alcotoxic"    // Liver damage
+#define CE_SPEEDBOOST    "gofast"       // Hyperzine
+#define CE_PULSE         "xcardic"      // increases or decreases heart rate
+#define CE_NOPULSE       "heartstop"    // stops heartbeat
+#define CE_ANTITOX       "antitox"      // Dylovene
+#define CE_OXYGENATED    "oxygen"       // Dexalin.
+#define CE_BRAIN_REGEN   "brainfix"     // Alkysine.
+#define CE_ANTIVIRAL     "antiviral"    // Anti-virus effect.
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

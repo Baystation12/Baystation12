@@ -270,3 +270,14 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 /obj/item/weapon/reagent_containers/pill/paroxetine/New()
 		..()
 		reagents.add_reagent("paroxetine", 10)
+
+/obj/item/weapon/reagent_containers/pill/antidexafen
+	name = "cold medicine pill"
+	desc = "Safe for babies!"
+	icon_state = "pill20"
+
+/obj/item/weapon/reagent_containers/pill/antidexafen/New()
+		..()
+		reagents.add_reagent("antidexafen", 10)
+		reagents.add_reagent("lemonjuice", 5)
+		reagents.add_reagent("menthol", REM*0.2)

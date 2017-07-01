@@ -426,14 +426,16 @@
 
 
 	for(var/turf/gen_turf in base_turfs)
+		var/area/TA = null // Variable for area checking. Defining it here so memory does not have to be allocated repeatedly.
 		for(var/turf/T in trange(field_radius, gen_turf))
 			// Don't expand to space or on shuttle areas.
-			if(istype(T, /turf/space) || istype(get_area(T), /area/space) || istype(get_area(T), /area/shuttle/))
+			if(istype(T, /turf/space) || istype(T, /turf/simulated/open))
 				continue
 
 			// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
 			for(var/turf/TN in orange(1, T))
-				if(istype(TN, /turf/space) || (istype(get_area(TN), /area/shuttle/) && !istype(get_area(TN), /area/turbolift/)))
+				TA = get_area(TN)
+				if ((istype(TN, /turf/space) || (istype(TN, /turf/simulated/open) && (istype(TA, /area/space) || TA.flags & AREA_EXTERNAL))))
 					. |= TN
 					continue
 

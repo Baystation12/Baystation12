@@ -1,4 +1,4 @@
-/mob/living/carbon/slime/death(gibbed)
+/mob/living/carbon/slime/death(gibbed, deathmessage, show_dead_message)
 
 	if(stat == DEAD) return
 
@@ -15,7 +15,7 @@
 		name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
 		return
 
-	. = ..(gibbed, "seizes up and falls limp...")
+	. = ..(gibbed, deathmessage, show_dead_message)
 	mood = null
 	regenerate_icons()
 

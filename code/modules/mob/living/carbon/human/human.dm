@@ -75,6 +75,10 @@
 		var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name[BP_PLASMA]
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
+		
+		var/obj/item/organ/internal/cell/potato = internal_organs_by_name[BP_CELL]
+		if(potato && potato.cell)
+			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
 
 		if(back && istype(back,/obj/item/weapon/rig))
 			var/obj/item/weapon/rig/suit = back
@@ -283,10 +287,6 @@
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
-	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
-		return get_id_name("Unknown")
-	if( head && (head.flags_inv&HIDEFACE) )
-		return get_id_name("Unknown")		//Likewise for hats
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
 	if(id_name && (id_name != face_name))
@@ -294,9 +294,10 @@
 	return face_name
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
+//Also used in AI tracking people by face, so added in checks for head coverings like masks and helmets
 /mob/living/carbon/human/proc/get_face_name()
-	var/obj/item/organ/external/head = get_organ(BP_HEAD)
-	if(!head || head.disfigured || head.is_stump() || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	var/obj/item/organ/external/H = get_organ(BP_HEAD)
+	if(!H || H.disfigured || H.is_stump() || !real_name || (HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		return "Unknown"
 	return real_name
 
@@ -633,13 +634,22 @@
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
+	var/total_protection = flash_protection
 	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
-		var/obj/item/organ/I = internal_organs_by_name[BP_EYES]
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[BP_EYES]
 		if(!I.is_usable())
 			return FLASH_PROTECTION_MAJOR
+		else
+			total_protection = I.get_total_protection(flash_protection)
 	else // They can't be flashed if they don't have eyes.
 		return FLASH_PROTECTION_MAJOR
-	return flash_protection
+	return total_protection
+
+/mob/living/carbon/human/flash_eyes(var/intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(internal_organs_by_name[BP_EYES]) // Eyes are fucked, not a 'weak point'.
+		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[BP_EYES]
+		I.additional_flash_effects(intensity)
+	return ..()
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
@@ -1070,7 +1080,6 @@
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
-
 	if(!dna)
 		if(!new_species)
 			new_species = SPECIES_HUMAN
@@ -1128,6 +1137,11 @@
 	species.handle_post_spawn(src)
 
 	maxHealth = species.total_health
+
+	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
+	pixel_x = default_pixel_x
+	pixel_y = default_pixel_y
 
 	spawn(0)
 		regenerate_icons()
@@ -1529,3 +1543,33 @@
 
 		if((SKELETON in mutations) && (!w_uniform) && (!wear_suit))
 			play_xylophone()
+
+/mob/living/carbon/human/proc/resuscitate()
+	if(!is_asystole() || !should_have_organ(BP_HEART))
+		return
+	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+	if(istype(heart) && heart.robotic <= ORGAN_ROBOT && !(heart.status & ORGAN_DEAD))
+		if(!nervous_system_failure())
+			visible_message("\The [src] jerks and gasps for breath!")
+		else
+			visible_message("\The [src] twitches a bit as his heart restarts!")
+		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
+		if(getOxyLoss() >= 75)
+			setOxyLoss(75)
+		heart.pulse = PULSE_NORM
+		heart.handle_pulse()
+
+/mob/living/carbon/human/proc/make_adrenaline(amount)
+	if(stat == CONSCIOUS)
+		reagents.add_reagent("adrenaline", amount)
+
+//Get fluffy numbers
+/mob/living/carbon/human/proc/get_blood_pressure()
+	if(status_flags & FAKEDEATH)
+		return "[Floor(120+rand(-5,5))*0.25]/[Floor(80+rand(-5,5)*0.25)]"
+	var/blood_result = get_effective_blood_volume()
+	return "[Floor((120+rand(-5,5))*(blood_result/100))]/[Floor(80+rand(-5,5)*(blood_result/100))]"
+
+//Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
+/mob/living/carbon/human/proc/nervous_system_failure()
+	return getBrainLoss() >= maxHealth * 0.75

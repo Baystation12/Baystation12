@@ -17,6 +17,15 @@
 	var/download_netspeed = 0
 	var/downloaderror = ""
 
+/datum/computer_file/program/ntnetdownload/kill_program()
+	..()
+	downloaded_file = null
+	download_completion = 0
+	download_netspeed = 0
+	downloaderror = ""
+	ui_header = "downloader_finished.gif"
+
+
 /datum/computer_file/program/ntnetdownload/proc/begin_file_download(var/filename)
 	if(downloaded_file)
 		return 0

@@ -73,8 +73,7 @@
 	var/obj/parrot_perch = null
 	var/obj/desired_perches = list(/obj/structure/computerframe, 		/obj/structure/displaycase, \
 									/obj/structure/filingcabinet,		/obj/machinery/teleport, \
-									/obj/machinery/computer,			/obj/machinery/clonepod, \
-									/obj/machinery/dna_scannernew,		/obj/machinery/telecomms, \
+									/obj/machinery/computer,			/obj/machinery/telecomms, \
 									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
 									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
 									/obj/machinery/suit_storage_unit)
@@ -101,12 +100,12 @@
 			  /mob/living/simple_animal/parrot/proc/perch_player)
 
 
-/mob/living/simple_animal/parrot/death()
+/mob/living/simple_animal/parrot/death(gibbed, deathmessage, show_dead_message)
 	if(held_item)
 		held_item.loc = src.loc
 		held_item = null
 	walk(src,0)
-	..()
+	..(gibbed, deathmessage, show_dead_message)
 
 /mob/living/simple_animal/parrot/Stat()
 	. = ..()

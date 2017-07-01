@@ -107,6 +107,11 @@
 	path = /obj/item/clothing/head/turban
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/head/taqiyah
+	display_name = "taqiyah"
+	path = /obj/item/clothing/head/taqiyah
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/head/welding
 	display_name = "welding mask selection"
 	path = /obj/item/clothing/head/welding

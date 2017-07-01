@@ -17,8 +17,6 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
-
 /obj/item/device/radio/headset/New()
 	..()
 	internal_channels.Cut()
@@ -136,13 +134,6 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_com
-
-/obj/item/device/radio/headset/pilot
-	name = "pilot's headset"
-	desc = "A headset with access to the command and engineering channels."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/pilot
 
 /obj/item/device/radio/headset/heads/captain
 	name = "captain's headset"

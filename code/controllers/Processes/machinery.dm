@@ -20,7 +20,7 @@
 /datum/controller/process/machinery/proc/internal_process_machinery()
 	for(last_object in machines)
 		var/obj/machinery/M = last_object
-		if(M && !M.gcDestroyed)
+		if(M && !QDELETED(M))
 			if(M.process() == PROCESS_KILL)
 				//M.inMachineList = 0 We don't use this debugging function
 				machines.Remove(M)
@@ -34,7 +34,7 @@
 /datum/controller/process/machinery/proc/internal_process_power()
 	for(last_object in powernets)
 		var/datum/powernet/powerNetwork = last_object
-		if(istype(powerNetwork) && isnull(powerNetwork.gcDestroyed))
+		if(istype(powerNetwork) && !QDELETED(powerNetwork))
 			powerNetwork.reset()
 			SCHECK
 			continue
@@ -52,7 +52,7 @@
 /datum/controller/process/machinery/proc/internal_process_pipenets()
 	for(last_object in pipe_networks)
 		var/datum/pipe_network/pipeNetwork = last_object
-		if(istype(pipeNetwork) && isnull(pipeNetwork.gcDestroyed))
+		if(istype(pipeNetwork) && !QDELETED(pipeNetwork))
 			pipeNetwork.process()
 			SCHECK
 			continue

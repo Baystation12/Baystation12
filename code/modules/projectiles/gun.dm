@@ -338,8 +338,8 @@
 	//shooting while in shock
 	var/x_offset = 0
 	var/y_offset = 0
-	if(istype(user, /mob/living/carbon))
-		var/mob/living/carbon/mob = user
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/mob = user
 		if(mob.shock_stage > 120)
 			y_offset = rand(-2,2)
 			x_offset = rand(-2,2)

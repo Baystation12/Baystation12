@@ -164,7 +164,7 @@
 		swap_hand()
 
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
-	if (src.health >= config.health_threshold_crit)
+	if(!is_asystole())
 		if (on_fire)
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if (M.on_fire)
@@ -222,9 +222,11 @@
 					M.fire_stacks -= 1
 				if(M.on_fire)
 					src.IgniteMob()
-			AdjustParalysis(-3)
-			AdjustStunned(-3)
-			AdjustWeakened(-3)
+
+			if(stat != DEAD)
+				AdjustParalysis(-3)
+				AdjustStunned(-3)
+				AdjustWeakened(-3)
 
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
@@ -255,8 +257,8 @@
 				H.update_inv_gloves(0)
 			H.gloves.germ_level = 0
 		else
-			if(H.bloody_hands)
-				H.bloody_hands = 0
+			if(!isnull(H.bloody_hands))
+				H.bloody_hands = null
 				H.update_inv_gloves(0)
 			H.germ_level = 0
 	update_icons()	//apply the now updated overlays to the mob

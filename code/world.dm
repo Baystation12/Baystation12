@@ -74,9 +74,9 @@
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 	icon_size = WORLD_ICON_SIZE
+	fps = 20
 
-
-#define RECOMMENDED_VERSION 510
+#define RECOMMENDED_VERSION 511
 /world/New()
 	//set window title
 	name = "[server_name] - [using_map.full_name]"
@@ -111,11 +111,7 @@
 
 	. = ..()
 
-#ifndef UNIT_TEST
-
-	sleep_offline = 1
-
-#else
+#ifdef UNIT_TEST
 	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
@@ -138,6 +134,9 @@
 
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
+
+	Master.Initialize(10, FALSE)
+
 	spawn(1)
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)
 		processScheduler.setup()
@@ -153,8 +152,6 @@
 			ToRban_autoupdate()
 
 #undef RECOMMENDED_VERSION
-
-	return
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
@@ -401,9 +398,11 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/rank = input["rank"]
 		if(!rank)
 			rank = "Admin"
+		if(rank == "Unknown")
+			rank = "Staff"
 
-		var/message =	"<font color='red'>IRC-[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>IRC-[rank] PM from <a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</font>"
+		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
 
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]
@@ -457,6 +456,38 @@ var/world_topic_spam_protect_time = world.timeofday
 				return "Ckey not found"
 		else
 			return "Database connection failed or not set up"
+
+	else if(copytext(T,1,14) == "placepermaban")
+		var/input[] = params2list(T)
+		if(!config.ban_comms_password)
+			return "Not enabled"
+		if(input["bankey"] != config.ban_comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		var/target = ckey(input["target"])
+
+		var/client/C
+		for(var/client/K in clients)
+			if(K.ckey == target)
+				C = K
+				break
+		if(!C)
+			return "No client with that name found on server"
+		if(!C.mob)
+			return "Client missing mob"
+
+		if(!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
+			return "Save failed"
+		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
+		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
+		qdel(C)
 
 
 /world/Reboot(var/reason)

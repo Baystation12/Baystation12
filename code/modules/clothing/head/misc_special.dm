@@ -60,6 +60,7 @@
 			icon_state = "[base_state]up"
 			to_chat(usr, "You push the [src] up out of your face.")
 		update_clothing_icon()	//so our mob-overlays
+		update_vision()
 		usr.update_action_buttons()
 
 /obj/item/clothing/head/welding/demon

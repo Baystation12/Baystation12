@@ -25,7 +25,6 @@
 	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
 	var/blessed = 0             // Has the turf been blessed?
-	var/dynamic_lighting = 1    // Does the turf use dynamic lighting?
 
 	var/list/decals
 
@@ -52,6 +51,7 @@
 	turfs -= src
 	remove_cleanables()
 	..()
+	return QDEL_HINT_IWILLGC
 
 /turf/ex_act(severity)
 	return 0
@@ -138,11 +138,6 @@ var/const/enterloopsanity = 100
 
 	if(ismob(A))
 		var/mob/M = A
-		var/mob/living/L = A
-		if(istype(L))
-			if(!(L in radiation_repository.irradiated_mobs))
-				if(src in radiation_repository.irradiated_turfs)
-					radiation_repository.irradiated_mobs.Add(L)
 		if(!M.check_solid_ground())
 			inertial_drift(M)
 			//we'll end up checking solid ground again but we still need to check the other things.

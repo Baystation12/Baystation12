@@ -44,8 +44,12 @@ var/list/organ_cache = list()
 /obj/item/organ/New(var/mob/living/carbon/holder)
 	..(holder)
 
-	if(!max_damage)
+	if(max_damage)
+		min_broken_damage = Floor(max_damage / 2)
+		min_bruised_damage = Floor(max_damage / 4)
+	else
 		max_damage = min_broken_damage * 2
+
 	if(istype(holder))
 		src.owner = holder
 		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
@@ -77,8 +81,6 @@ var/list/organ_cache = list()
 		species = all_species[new_dna.species]
 
 /obj/item/organ/proc/die()
-	if(robotic >= ORGAN_ROBOT)
-		return
 	damage = max_damage
 	status |= ORGAN_DEAD
 	processing_objects -= src
@@ -144,12 +146,12 @@ var/list/organ_cache = list()
 	//** Handle the effects of infections
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
-	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
+	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(owner.virus_immunity()*0.3))
 		germ_level--
 
 	if (germ_level >= INFECTION_LEVEL_ONE/2)
 		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
-		if(antibiotics < 5 && prob(round(germ_level/6)))
+		if(antibiotics < 5 && prob(round(germ_level/6 * owner.immunity_weakness() * 0.01)))
 			germ_level++
 
 	if(germ_level >= INFECTION_LEVEL_ONE)
@@ -159,7 +161,7 @@ var/list/organ_cache = list()
 	if (germ_level >= INFECTION_LEVEL_TWO)
 		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 		//spread germs
-		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(owner.immunity_weakness() * 0.3) ))
 			parent.germ_level++
 
 		if (prob(3))	//about once every 30 seconds
@@ -168,6 +170,8 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
+	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
+		return
 	if(dna)
 		if(!rejecting)
 			if(blood_incompatible(dna.b_type, owner.dna.b_type, species, owner.species))
@@ -365,3 +369,33 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
+
+/obj/item/organ/proc/get_scan_results()
+	. = list()
+	if(robotic == ORGAN_ASSISTED)
+		. += "Assisted"
+	else if(robotic == ORGAN_ROBOT)
+		. += "Mechanical"
+	if(status & ORGAN_CUT_AWAY)
+		. += "Severed"
+	if(status & ORGAN_MUTATED)
+		. += "Genetic Deformation"
+	if(status & ORGAN_DEAD)
+		. += "Necrotic"
+	switch (germ_level)
+		if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
+			. +=  "Mild Infection"
+		if (INFECTION_LEVEL_ONE + 200 to INFECTION_LEVEL_ONE + 300)
+			. +=  "Mild Infection+"
+		if (INFECTION_LEVEL_ONE + 300 to INFECTION_LEVEL_ONE + 400)
+			. +=  "Mild Infection++"
+		if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + 200)
+			. +=  "Acute Infection"
+		if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
+			. +=  "Acute Infection+"
+		if (INFECTION_LEVEL_TWO + 300 to INFECTION_LEVEL_TWO + 400)
+			. +=  "Acute Infection++"
+		if (INFECTION_LEVEL_THREE to INFINITY)
+			. +=  "Septic"
+	if(rejecting)
+		. += "Genetic Rejection"

@@ -78,6 +78,7 @@
 	anchored = 1
 	use_power = 0
 	req_access = list(access_engine_equip)
+	clicksound = "switch"
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell

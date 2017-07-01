@@ -59,7 +59,7 @@
 		if (usr.client)
 			if(usr.client.holder)
 				to_chat(M, "<b>You hear a voice in your head... <i>[msg]</i></b>")
-	log_and_message_admins(" - SubtleMessage -> [key_name_admin(M)] : [msg]")
+	log_and_message_staff(" - SubtleMessage -> [key_name_admin(M)] : [msg]")
 	feedback_add_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_mentor_check_new_players()	//Allows mentors / admins to determine who the newer players are.
@@ -511,7 +511,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")
-			command_announcement.Announce(input, customname, new_sound = 'sound/AI/commandreport.ogg', msg_sanitized = 1);
+			command_announcement.Announce(input, customname, new_sound = using_map.command_report_sound, msg_sanitized = 1);
 		if("No")
 			minor_announcement.Announce(message = "New [using_map.company_name] Update available at all communication consoles.")
 

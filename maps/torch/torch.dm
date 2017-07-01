@@ -1,5 +1,6 @@
 #if !defined(USING_MAP_DATUM)
 
+	#include "torch_announcements.dm"
 	#include "torch_areas.dm"
 	#include "torch_elevator.dm"
 	#include "torch_holodecks.dm"
@@ -8,6 +9,7 @@
 	#include "torch_ranks.dm"
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
+	#include "torch_gamemodes.dm"
 
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"

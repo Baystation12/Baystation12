@@ -4,7 +4,7 @@
 	feedback = "FB"
 	proj_type = /obj/item/projectile/spell_projectile/fireball
 
-	school = "evocation"
+	school = "conjuration"
 	charge_max = 100
 	spell_flags = 0
 	invocation = "Oni-Soma!"

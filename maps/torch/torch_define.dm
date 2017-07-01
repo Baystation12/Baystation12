@@ -15,6 +15,7 @@
 	overmap_size = 40
 	overmap_event_areas = 12
 	base_turf_by_z = list("9" = /turf/simulated/floor/asteroid)
+	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "torch.marine.mil", "freemail.nt")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
@@ -34,10 +35,6 @@
 	shuttle_leaving_dock = "Attention all hands: Jump initiated, exiting bluespace in %ETA%."
 	shuttle_called_message = "Attention all hands: Jump sequence initiated. Transit procedures are now in effect. Jump in %ETA%."
 	shuttle_recall_message = "Attention all hands: Jump sequence aborted, return to normal operating conditions."
-	emergency_shuttle_docked_message = "Attention all hands: the escape pods are now unlocked. You have %ETD% to board the escape pods."
-	emergency_shuttle_leaving_dock = "Attention all hands: the escape pods have been launched, arriving at rendezvous point in %ETA%."
-	emergency_shuttle_called_message = "Attention all hands: emergency evacuation procedures are now in effect. Escape pods will unlock in %ETA%"
-	emergency_shuttle_recall_message = "Attention all hands: emergency evacuation sequence aborted. Return to normal operating conditions."
 
 	evac_controller_type = /datum/evacuation_controller/starship
 
@@ -49,13 +46,15 @@
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
+	minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
 
 /datum/map/torch/send_welcome()
 	var/welcome_text = "<center><img src = sollogo.png /><br /><font size = 3><b>SEV Torch</b> Sensor Readings:</font><hr />"
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
 	welcome_text += "Current system:<br /><b>[system_name()]</b><br />"
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br />"
-	welcome_text += "Travel time to Sol:<br /><b>[rand(5,12)] days</b><br />"
+	welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br />"
+	welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br />"
 	welcome_text += "Scan results:<br />"
 	var/list/scan_results = list()
 	for(var/poi in points_of_interest)

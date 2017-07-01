@@ -96,10 +96,6 @@ var/const/NO_EMAG_ACT = -50
 	icon_state = "id"
 	item_state = "card-id"
 
-	sprite_sheets = list(
-		SPECIES_RESOMI = 'icons/mob/species/resomi/id.dmi'
-		)
-
 	var/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	slot_flags = SLOT_ID
@@ -174,17 +170,15 @@ var/const/NO_EMAG_ACT = -50
 		id_card.fingerprint_hash= md5(dna.uni_identity)
 	id_card.update_name()
 
-	if(ishuman(src))
-		var/mob/living/carbon/human/h = src
-		if(using_map.flags & MAP_HAS_BRANCH)
-			id_card.military_branch = h.char_branch
-
-		if(using_map.flags & MAP_HAS_RANK)
-			id_card.military_rank = h.char_rank
-
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()
 	id_card.age = age
+
+	if(using_map.flags & MAP_HAS_BRANCH)
+		id_card.military_branch = char_branch
+
+	if(using_map.flags & MAP_HAS_RANK)
+		id_card.military_rank = char_rank
 
 /obj/item/weapon/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")

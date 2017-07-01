@@ -44,25 +44,14 @@ var/global/datum/controller/gameticker/ticker
 			if(!isnull(secondary_mode))
 				master_mode = secondary_mode
 				secondary_mode = null
-				to_world("Trying to start the second top game mode...")
-
-				if(!hide_mode)
-					to_world("<b>The game mode is now: [master_mode]</b>")
-
 			else if(!isnull(tertiary_mode))
 				master_mode = tertiary_mode
 				tertiary_mode = null
-				to_world("Trying to start the third top game mode...")
-
-				if(!hide_mode)
-					to_world("<b>The game mode is now: [master_mode]</b>")
-
 			else
 				master_mode = "extended"
-				to_world("<b>Forcing the game mode to extended...</b>")
 
+		to_world("<b>Trying to start [master_mode]...</b>")
 		to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
-
 		to_world("Please, setup your character and select ready. Game will start in [pregame_timeleft] seconds")
 
 		while(current_state == GAME_STATE_PREGAME)
@@ -88,6 +77,8 @@ var/global/datum/controller/gameticker/ticker
 	//Create and announce mode
 	if(master_mode=="secret")
 		src.hide_mode = 1
+	else
+		src.hide_mode = 0
 
 	var/list/runnable_modes = config.get_runnable_modes()
 	if((master_mode=="random") || (master_mode=="secret"))
@@ -150,7 +141,7 @@ var/global/datum/controller/gameticker/ticker
 
 	callHook("roundstart")
 
-	shuttle_controller.setup_shuttle_docks()
+	shuttle_controller.initialize_shuttles()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()

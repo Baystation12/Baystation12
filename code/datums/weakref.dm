@@ -9,7 +9,7 @@
 /proc/weakref(datum/D)
 	if(!istype(D))
 		return
-	if(D.gcDestroyed)
+	if(QDELETED(D))
 		return
 	if(!D.weakref)
 		D.weakref = new/weakref(D)
@@ -24,7 +24,7 @@
 /weakref/Destroy()
 	// A weakref datum should not be manually destroyed as it is a shared resource,
 	//  rather it should be automatically collected by the BYOND GC when all references are gone.
-	return 1
+	return QDEL_HINT_LETMELIVE
 
 /weakref/proc/resolve()
 	var/datum/D = locate(ref)

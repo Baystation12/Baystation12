@@ -74,8 +74,8 @@
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getFireLoss() - getBruteLoss()
-	oxyloss = 0
-	toxloss = 0
+	setOxyLoss(0)
+	setToxLoss(0)
 
 /mob/living/bot/death()
 	explode()

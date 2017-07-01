@@ -20,7 +20,7 @@
 	see_in_dark = 5
 	mob_size = 8
 	possession_candidate = 1
-
+	holder_type = /obj/item/weapon/holder/corgi
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 
@@ -140,7 +140,6 @@
 		to_chat(usr, "<span class='warning'>You can't fit this on [src]</span>")
 		return
 	..()
-
 
 //LISA! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Lisa

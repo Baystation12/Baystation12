@@ -56,10 +56,10 @@
 
 	// Check for bans properly.
 	if(jobban_isbanned(user, MODE_XENOMORPH))
-		to_chat(user, "<span class='danger'>You are banned from playing a Xenomorph.</span>")
+		to_chat(user, "<span class='danger'>You are banned from playing a Xenophage.</span>")
 		return
 
-	var/confirm = alert(user, "Are you sure you want to join as a Xenomorph larva?", "Become Larva", "No", "Yes")
+	var/confirm = alert(user, "Are you sure you want to join as a Xenophage larva?", "Become Larva", "No", "Yes")
 
 	if(!src || confirm != "Yes")
 		return

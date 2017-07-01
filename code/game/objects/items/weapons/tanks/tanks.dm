@@ -21,11 +21,6 @@ var/list/global/tank_gauge_cache = list()
 	throw_speed = 1
 	throw_range = 4
 
-
-	sprite_sheets = list(
-		SPECIES_RESOMI = 'icons/mob/species/resomi/back.dmi'
-		)
-
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
 	var/integrity = 20
@@ -72,19 +67,17 @@ var/list/global/tank_gauge_cache = list()
 	return
 
 /obj/item/weapon/tank/Destroy()
-	if(air_contents)
-		qdel(air_contents)
+	qdel_null(air_contents)
 
 	processing_objects.Remove(src)
-	qdel(src.proxyassembly)
-	src.proxyassembly = null
+	qdel_null(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
 		qdel(TTV)
 
-	..()
+	. = ..()
 
 /obj/item/weapon/tank/examine(mob/user)
 	. = ..(user, 0)

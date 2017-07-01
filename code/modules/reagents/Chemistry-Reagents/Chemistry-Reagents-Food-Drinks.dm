@@ -47,7 +47,6 @@
 
 /datum/reagent/nutriment/proc/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
-		if(IS_RESOMI) removed *= 0.8 // Resomi get a bit more nutrition from meat, a bit less from other stuff to compensate
 		if(IS_UNATHI) removed *= 0.1 // Unathi get most of their nutrition from meat.
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
 
@@ -73,7 +72,6 @@
 
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
-		if(IS_RESOMI) removed *= 1.25
 		if(IS_UNATHI) removed *= 2.25
 	M.nutrition += nutriment_factor * removed // For hunger and fatness
 
@@ -159,6 +157,15 @@
 	reagent_state = LIQUID
 	nutriment_factor = 5
 	color = "#731008"
+
+/datum/reagent/nutriment/barbecue
+	name = "Barbecue Sauce"
+	id = "barbecue"
+	description = "Barbecue sauce for barbecues and long shifts."
+	taste_description = "barbecue"
+	reagent_state = LIQUID
+	nutriment_factor = 5
+	color = "#4F330F"
 
 /datum/reagent/nutriment/rice
 	name = "Rice"
@@ -441,7 +448,7 @@
 // Juices
 /datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-
+	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
 	var/effective_dose = dose/2
 	if(alien == IS_UNATHI)
 		if(effective_dose < 2)
@@ -658,8 +665,9 @@
 	adj_sleepy = -3
 	adj_temp = 20
 
-	glass_name = "cup of tea"
+	glass_name = "tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
+	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -692,8 +700,9 @@
 	adj_temp = 25
 	overdose = 45
 
-	glass_name = "cup of coffee"
+	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
+	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -704,7 +713,8 @@
 		M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
-	M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 15)
+		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -712,6 +722,7 @@
 		M.adjustToxLoss(2 * removed)
 		M.make_jittery(4)
 		return
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)
@@ -776,6 +787,7 @@
 
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
+	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/sodawater
 	name = "Soda Water"
@@ -1164,7 +1176,7 @@
 	description = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
 	color = "#0064C6"
-	strength = 50
+	strength = 15
 
 	glass_name = "gin"
 	glass_desc = "A crystal clear glass of Griffeater gin."

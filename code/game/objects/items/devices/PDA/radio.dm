@@ -106,7 +106,7 @@
 /obj/item/radio/integrated/beepsky/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src, control_freq)
-	..()
+	return ..()
 
 /*
  *	Radio Cartridge, essentially a signaler.

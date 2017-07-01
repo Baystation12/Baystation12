@@ -92,41 +92,6 @@
 	var/list/valid_colors = list("#c20c00", "#0227f7", "#6262ff", "#454545", "#009900", "#e17291")
 	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
-/datum/gear/uniform/resomi
-	display_name = "smock, grey (Resomi)"
-	path = /obj/item/clothing/under/resomi
-	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_RESOMI)
-
-/datum/gear/uniform/resomi/rainbow
-	display_name = "smock, rainbow (Resomi)"
-	path = /obj/item/clothing/under/resomi/rainbow
-	allowed_roles = RESTRICTED_ROLES
-
-/datum/gear/uniform/resomi/white
-	display_name = "smock, colored (Resomi)"
-	path = /obj/item/clothing/under/resomi/white
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/uniform/resomi/eng
-	display_name = "uniform, Engineering (Resomi)"
-	path = /obj/item/clothing/under/resomi/yellow
-	allowed_roles = list("Maintenance Assistant", "Roboticist", "Passenger", "Research Assistant", "Merchant")
-
-/datum/gear/uniform/resomi/sec
-	display_name = "uniform, Security (Resomi)"
-	path = /obj/item/clothing/under/resomi/red
-	allowed_roles = list("Security Guard", "Passenger", "Research Assistant", "Merchant")
-
-/datum/gear/uniform/resomi/med
-	display_name = "uniform, Medical (Resomi)"
-	path = /obj/item/clothing/under/resomi/medical
-	allowed_roles = list("Medical Contractor", "Chemist", "Counselor", "Passenger", "Research Assistant", "Merchant")
-
-/datum/gear/uniform/resomi/science
-	display_name = "uniform, Science (Resomi)"
-	path = /obj/item/clothing/under/resomi/science
-
 /datum/gear/uniform/harness
 	display_name = "gear harness (Full Body Prosthetic, IPC, Diona)"
 	path = /obj/item/clothing/under/harness
@@ -150,14 +115,19 @@
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
 
-/datum/gear/uniform/resomi/dress
-	display_name = "small dress (Resomi)"
-	path = /obj/item/clothing/under/resomi/dress
+/datum/gear/eyes/tajblind/med
+	display_name = "medical veil (Tajara)"
+	path = /obj/item/clothing/glasses/hud/health/tajblind
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = MEDICAL_ROLES
 
-/datum/gear/uniform/resomi/uniform
-	display_name = "small uniform (Resomi)"
-	path = /obj/item/clothing/under/resomi/uniform
+/datum/gear/eyes/tajblind/meson
+	display_name = "industrial veil (Tajara)"
+	path = /obj/item/clothing/glasses/meson/prescription/tajblind
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+	cost = 1
+	allowed_roles = list("Maintenance Assistant", "Prospector", "Research Assistant")
 
-/datum/gear/uniform/resomi/formal
-	display_name = "small formal uniform (Resomi)"
-	path = /obj/item/clothing/under/resomi/formal

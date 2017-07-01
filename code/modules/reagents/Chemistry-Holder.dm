@@ -23,7 +23,7 @@
 			chemical_reagents_list[D.id] = D
 
 /datum/reagents/Destroy()
-	..()
+	. = ..()
 	if(chemistryProcess)
 		chemistryProcess.active_holders -= src
 
@@ -78,12 +78,6 @@
 		else
 			total_volume += R.volume
 	return
-
-/datum/reagents/proc/delete()
-	for(var/datum/reagent/R in reagent_list)
-		R.holder = null
-	if(my_atom)
-		my_atom.reagents = null
 
 /datum/reagents/proc/handle_reactions()
 	if(chemistryProcess)

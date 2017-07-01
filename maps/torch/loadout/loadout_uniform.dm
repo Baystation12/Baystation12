@@ -92,8 +92,19 @@
 	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
 	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
 	dresses["sundress"] = /obj/item/clothing/under/sundress
-	dresses["white cheongsam"] = /obj/item/clothing/under/cheongsam
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
+
+/datum/gear/uniform/cheongsam
+	display_name = "cheongsam"
+	path = /obj/item/clothing/under/cheongsam
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = FORMAL_ROLES
+
+/datum/gear/uniform/abaya
+	display_name = "abaya"
+	path = /obj/item/clothing/under/abaya
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/skirt
 	display_name = "skirt selection"

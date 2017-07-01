@@ -19,6 +19,7 @@ datum/track/New(var/title_name, var/audio)
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 100
+	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0
 	var/volume = 20
@@ -150,7 +151,7 @@ datum/track/New(var/title_name, var/audio)
 			M.Stun(10)
 			M.Paralyse(4)
 		else
-			M.make_jittery(500)
+			M.make_jittery(400)
 	spawn(15)
 		explode()
 

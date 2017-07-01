@@ -11,6 +11,8 @@
 	anchored = 1
 	density = 1
 	flags = OBJ_ANCHORABLE
+	clicksound = "button"
+	clickvol = 40
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
@@ -199,13 +201,20 @@
 		nanomanager.update_uis(src)
 		return
 	else
-
-		for(var/datum/stored_items/vending_products/R in product_records)
-			if(istype(W, R.item_path))
-				stock(W, R, user)
-				return 1
+		return attempt_to_stock(W, user)
 	..()
 	return
+
+/obj/machinery/vending/MouseDrop_T(var/obj/item/I as obj, var/mob/user as mob)
+	if(!CanMouseDrop(I, user) || (I.loc != user))
+		return
+	return attempt_to_stock(I, user)
+
+/obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I as obj, var/mob/user as mob)
+	for(var/datum/stored_items/vending_products/R in product_records)
+		if(istype(I, R.item_path))
+			stock(I, R, user)
+			return 1
 
 /**
  *  Receive payment with cashmoney.
@@ -374,7 +383,7 @@
 /obj/machinery/vending/Topic(href, href_list)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	if(usr.stat || usr.restrained())
+	if(..())
 		return
 
 	if(href_list["remove_coin"] && !istype(usr,/mob/living/silicon))
@@ -604,6 +613,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/rocks = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/shake = 10,
@@ -703,7 +713,8 @@
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 8,
-					/obj/item/weapon/reagent_containers/pill/diet = 8)
+					/obj/item/weapon/reagent_containers/pill/diet = 8,
+					/obj/item/weapon/towel/random = 8)
 
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 3,
 					/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate = 3,
@@ -711,7 +722,8 @@
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 5,
-					/obj/item/weapon/reagent_containers/pill/diet = 25)
+					/obj/item/weapon/reagent_containers/pill/diet = 25,
+					/obj/item/weapon/towel/random = 40)
 
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
 
@@ -919,6 +931,9 @@
 	/obj/item/weapon/material/kitchen/utensil/spoon = 6,
 	/obj/item/weapon/material/knife = 3,
 	/obj/item/weapon/material/kitchen/rollingpin = 2,
+	/obj/item/weapon/reagent_containers/food/drinks/pitcher = 2,
+	/obj/item/weapon/reagent_containers/food/drinks/coffeecup = 8,
+	/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe = 2,
 	/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 8,
 	/obj/item/clothing/suit/chef/classic = 2,
 	/obj/item/weapon/storage/lunchbox = 3,

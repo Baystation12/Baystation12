@@ -50,9 +50,9 @@
 		src.add_spell(new spell, "const_spell_ready")
 	updateicon()
 
-/mob/living/simple_animal/construct/death()
+/mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
 	new /obj/item/weapon/ectoplasm (src.loc)
-	..(null,"collapses in a shattered heap.")
+	..(null,"collapses in a shattered heap.","The bonds tying you to this mortal plane have been severed.")
 	ghostize()
 	qdel(src)
 
@@ -257,7 +257,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light(2, -2, l_color = "#FFFFFF")
+	set_light(3, -10, l_color = "#FFFFFF")
 
 ////////////////HUD//////////////////////
 

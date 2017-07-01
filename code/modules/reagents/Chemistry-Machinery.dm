@@ -17,6 +17,8 @@
 	icon_state = "mixer0"
 	use_power = 1
 	idle_power_usage = 20
+	clicksound = "button"
+	clickvol = 20
 	var/beaker = null
 	var/obj/item/weapon/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
@@ -509,7 +511,7 @@
 				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
-					if(deleted(stack))
+					if(QDELETED(stack))
 						holdingitems -= stack
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue

@@ -18,56 +18,60 @@
 	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
 	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
 
-	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
-	var/has_floating_eyes                                // Eyes will overlay over darkness (glow)
-	var/blood_color = "#A10808"                          // Red.
-	var/flesh_color = "#FFC896"                          // Pink.
-	var/base_color                                       // Used by changelings. Should also be used for icon previes..
-	var/tail                                             // Name of tail state in species effects icon file.
-	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
+	var/prone_icon                            // If set, draws this from icobase when mob is prone.
+	var/use_eye_icon                          // Override using the standard human_face.dmi icon.
+	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
+	var/blood_color = "#A10808"               // Red.
+	var/flesh_color = "#FFC896"               // Pink.
+	var/base_color                            // Used by changelings. Should also be used for icon previes..
+	var/tail                                  // Name of tail state in species effects icon file.
+	var/tail_animation                        // If set, the icon to obtain tail animation states from.
 	var/tail_hair
 
 	var/default_h_style = "Bald"
 	var/default_f_style = "Shaved"
 
-	var/race_key = 0       	                             // Used for mob icon cache string.
-	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
+	var/race_key = 0                          // Used for mob icon cache string.
+	var/icon/icon_template                    // Used for mob icon generation for non-32x32 species.
+	var/pixel_offset_x = 0                    // Used for offsetting large icons.
+	var/pixel_offset_y = 0                    // Used for offsetting large icons.
+
 	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
-	var/short_sighted                                    // Permanent weldervision.
-	var/light_sensitive									// Ditto, but requires sunglasses to fix
-	var/blood_volume = 560                               // Initial blood volume.
-	var/hunger_factor = DEFAULT_HUNGER_FACTOR            // Multiplier for hunger.
-	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
+	var/short_sighted                         // Permanent weldervision.
+	var/light_sensitive                       // Ditto, but requires sunglasses to fix
+	var/blood_volume = 560                    // Initial blood volume.
+	var/hunger_factor = DEFAULT_HUNGER_FACTOR // Multiplier for hunger.
+	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 
 	var/min_age = 17
 	var/max_age = 70
 
 	// Language/culture vars.
-	var/default_language = LANGUAGE_GALCOM // Default language is used when 'say' is used without modifiers.
-	var/language = LANGUAGE_GALCOM         // Default racial language, if any.
-	var/list/secondary_langs = list()        // The names of secondary languages that are available to this species.
-	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
-	var/list/speech_chance                   // The likelihood of a speech sound playing.
-	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
-	var/name_language = LANGUAGE_GALCOM    // The language to use when determining names for this species, or null to use the first name/last name generator
+	var/default_language = LANGUAGE_GALCOM    // Default language is used when 'say' is used without modifiers.
+	var/language = LANGUAGE_GALCOM            // Default racial language, if any.
+	var/list/secondary_langs = list()         // The names of secondary languages that are available to this species.
+	var/list/speech_sounds                    // A list of sounds to potentially play when speaking.
+	var/list/speech_chance                    // The likelihood of a speech sound playing.
+	var/num_alternate_languages = 0           // How many secondary languages are available to select at character creation
+	var/name_language = LANGUAGE_GALCOM       // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
-	var/total_health = 100                   // Point at which the mob will enter crit.
+	var/total_health = 200                   // Point at which the mob will enter crit.
 	var/list/unarmed_types = list(           // Possible unarmed attacks that the mob will use in combat,
 		/datum/unarmed_attack,
 		/datum/unarmed_attack/bite
 		)
-	var/list/unarmed_attacks = null          // For empty hand harm-intent attack
-	var/brute_mod =     1                    // Physical damage multiplier.
-	var/burn_mod =      1                    // Burn damage multiplier.
-	var/oxy_mod =       1                    // Oxyloss modifier
-	var/toxins_mod =    1                    // Toxloss modifier
-	var/radiation_mod = 1                    // Radiation modifier
-	var/flash_mod =     1                    // Stun from blindness modifier.
-	var/metabolism_mod = 1					 // Reagent metabolism modifier
-	var/vision_flags = SEE_SELF              // Same flags as glasses.
+	var/list/unarmed_attacks = null           // For empty hand harm-intent attack
+	var/brute_mod =      1                    // Physical damage multiplier.
+	var/burn_mod =       1                    // Burn damage multiplier.
+	var/oxy_mod =        1                    // Oxyloss modifier
+	var/toxins_mod =     1                    // Toxloss modifier
+	var/radiation_mod =  1                    // Radiation modifier
+	var/flash_mod =      1                    // Stun from blindness modifier.
+	var/metabolism_mod = 1                    // Reagent metabolism modifier
+	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
 	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
@@ -368,7 +372,7 @@
 			var/turf_brightness = 1
 			var/turf/T = get_turf(H)
 			if(T && T.lighting_overlay)
-				turf_brightness = min(1, (T.lighting_overlay.lum_b + T.lighting_overlay.lum_g + T.lighting_overlay.lum_r) / 3)
+				turf_brightness = min(1, T.get_lumcount())
 			if(turf_brightness < 0.33)
 				light = 0
 			else
@@ -384,3 +388,10 @@
 
 /datum/species/proc/get_blood_name()
 	return "blood"
+
+/datum/species/proc/handle_death_check(var/mob/living/carbon/human/H)
+	return FALSE
+
+//Mostly for toasters
+/datum/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
+	return FALSE

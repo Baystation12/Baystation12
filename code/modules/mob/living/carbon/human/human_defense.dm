@@ -92,6 +92,10 @@ meteor_act
 //this proc returns the armour value for a particular external organ.
 /mob/living/carbon/human/proc/getarmor_organ(var/obj/item/organ/external/def_zone, var/type)
 	if(!type || !def_zone) return 0
+	if(!istype(def_zone))
+		def_zone = get_organ(check_zone(def_zone))
+	if(!def_zone)
+		return 0
 	var/protection = 0
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
 	for(var/gear in protective_gear)

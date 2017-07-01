@@ -127,6 +127,7 @@
 #define TINT_HEAVY 2
 #define TINT_BLIND 3
 
+#define FLASH_PROTECTION_VULNERABLE -2
 #define FLASH_PROTECTION_REDUCED -1
 #define FLASH_PROTECTION_NONE 0
 #define FLASH_PROTECTION_MODERATE 1
@@ -227,11 +228,15 @@
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
 #define SPECIES_HUMAN "Human"
-#define SPECIES_RESOMI "Resomi"
 #define SPECIES_TAJARA "Tajara"
 #define SPECIES_DIONA "Diona"
 #define SPECIES_VOX "Vox"
-#define SPECIES_VOXPARIAH "Vox Pariah"
 #define SPECIES_IPC "Machine"
 #define SPECIES_UNATHI "Unathi"
 #define SPECIES_SKRELL "Skrell"
+#define SPECIES_NABBER "Nabber"
+
+#define SURGERY_CLOSED 0
+#define SURGERY_OPEN 1
+#define SURGERY_RETRACTED 2
+#define SURGERY_ENCASED 3

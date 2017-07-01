@@ -192,11 +192,13 @@ proc/age2agedescription(age)
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT)
+/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
 	var/target_type = null
+
+	var/original_dir = user.dir
 
 	if(target)
 		target_loc = target.loc
@@ -218,11 +220,11 @@ proc/age2agedescription(age)
 		if (progress)
 			progbar.update(world.time - starttime)
 
-		if(!user || user.incapacitated(incapacitation_flags) || user.loc != original_loc)
+		if(!user || user.incapacitated(incapacitation_flags) || user.loc != original_loc || (same_direction && user.dir != original_dir))
 			. = 0
 			break
 
-		if(target_loc && (!target || deleted(target) || target_loc != target.loc || target_type != target.type))
+		if(target_loc && (!target || QDELETED(target) || target_loc != target.loc || target_type != target.type))
 			. = 0
 			break
 
@@ -276,3 +278,32 @@ proc/age2agedescription(age)
 // Returns true if the mob was removed form the dead list
 /mob/proc/remove_from_dead_mob_list()
 	return dead_mob_list_.Remove(src)
+
+//Find a dead mob with a brain and client.
+/proc/find_dead_player(var/find_key, var/include_observers = 0)
+	if(isnull(find_key))
+		return
+
+	var/mob/selected = null
+
+	if(include_observers)
+		for(var/mob/M in player_list)
+			if((M.stat != DEAD) || (!M.client))
+				continue
+			if(M.ckey == find_key)
+				selected = M
+				break
+	else
+		for(var/mob/living/M in player_list)
+			//Dead people only thanks!
+			if((M.stat != DEAD) || (!M.client))
+				continue
+			//They need a brain!
+			if(istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.should_have_organ(BP_BRAIN) && !H.has_brain())
+					continue
+			if(M.ckey == find_key)
+				selected = M
+				break
+	return selected

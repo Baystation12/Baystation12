@@ -86,7 +86,7 @@
 
 //This makes sure that the grab screen object is displayed in the correct hand.
 /obj/item/weapon/grab/proc/synch() //why is this needed?
-	if(deleted(src))
+	if(QDELETED(src))
 		return
 	if(affecting)
 		if(assailant.r_hand == src)
@@ -95,7 +95,7 @@
 			hud.screen_loc = ui_lhand
 
 /obj/item/weapon/grab/process()
-	if(deleted(src)) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
+	if(QDELETED(src)) // GC is trying to delete us, we'll kill our processing so we can cleanly GC
 		return PROCESS_KILL
 
 	if(!confirm())
@@ -238,7 +238,7 @@
 			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
 
 /obj/item/weapon/grab/proc/s_click(obj/screen/S)
-	if(deleted(src))
+	if(QDELETED(src))
 		return
 	if(!affecting)
 		return
@@ -342,7 +342,7 @@
 	return 1
 
 /obj/item/weapon/grab/attack(mob/M, mob/living/user)
-	if(deleted(src))
+	if(QDELETED(src))
 		return
 	if(!affecting)
 		return
@@ -394,7 +394,7 @@
 /obj/item/weapon/grab/dropped()
 	..()
 	loc = null
-	if(!deleted(src))
+	if(!QDELETED(src))
 		qdel(src)
 
 /obj/item/weapon/grab/proc/reset_kill_state()
@@ -413,7 +413,7 @@
 	switch(state)
 		if(GRAB_PASSIVE)
 			//Being knocked down makes it harder to break a grab, so it is easier to cuff someone who is down without forcing them into unconsciousness.
-			//use same chance_table as aggressive but give +2 for not-weakened so that resomi grabs don't become auto-success for weakened either, that's lame
+			//use same chance_table as aggressive but give +2 for not-weakened so that small mob grabs don't become auto-success for weakened either, that's lame
 			if(!affecting.incapacitated(INCAPACITATION_KNOCKDOWN))
 				break_strength += 2
 			break_chance_table = list(15, 60, 100)
@@ -468,4 +468,4 @@
 		assailant = null
 	qdel(hud)
 	hud = null
-	..()
+	return ..()

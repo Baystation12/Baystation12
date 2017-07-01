@@ -1,0 +1,6 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - rscadd: "Exploration shuttles (Calypso/Guppy/Aquila) now can share destinations (with some other shuttles too)."

@@ -67,7 +67,8 @@
 		plant_controller.remove_plant(src)
 	for(var/obj/effect/plant/neighbor in range(1,src))
 		plant_controller.add_plant(neighbor)
-	..()
+	return ..()
+
 /obj/effect/plant/single
 	spread_chance = 0
 
@@ -187,7 +188,7 @@
 
 	if(growth>2 && growth == max_growth)
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
-		opacity = 1
+		set_opacity(1)
 		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
 			set_density(1)
 	else

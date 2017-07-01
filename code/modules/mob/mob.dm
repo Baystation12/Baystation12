@@ -15,7 +15,8 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	. = ..()
+	..()
+	return QDEL_HINT_HARDDEL_NOW
 
 /mob/proc/remove_screen_obj_references()
 	hands = null
@@ -483,18 +484,21 @@
 //	..()
 	return
 
-
 /mob/proc/pull_damage()
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		if(H.health - H.getHalLoss() <= config.health_threshold_softcrit)
-			for(var/name in H.organs_by_name)
-				var/obj/item/organ/external/e = H.organs_by_name[name]
-				if(e && H.lying)
-					if((((e.status & ORGAN_BROKEN) && !e.splinted) || e.status & ORGAN_BLEEDING ) && (H.getBruteLoss() + H.getFireLoss() >= 100))
-						return 1
-						break
+	return 0
+
+/mob/living/carbon/human/pull_damage()
+	if(!lying || getBruteLoss() + getFireLoss() < 100)
 		return 0
+	for(var/thing in organs)
+		var/obj/item/organ/external/e = thing
+		if(!e || e.is_stump())
+			continue
+		if((e.status & ORGAN_BROKEN) && !e.splinted)
+			return 1
+		if(e.status & ORGAN_BLEEDING)
+			return 1
+	return 0
 
 /mob/MouseDrop(mob/M as mob)
 	..()
@@ -620,14 +624,26 @@
 			stat("Round Duration", roundduration2text())
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
-		if(client.holder)
+
+	if(client.holder)
+		if(statpanel("Processes") && processScheduler)
+			processScheduler.statProcesses()
+		if(statpanel("MC"))
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
-
-	if(client.holder && statpanel("Processes"))
-		if(processScheduler)
-			processScheduler.statProcesses()
-		sleep(1 SECOND)
+			stat(null)
+			if(Master)
+				Master.stat_entry()
+			else
+				stat("Master Controller:", "ERROR")
+			if(Failsafe)
+				Failsafe.stat_entry()
+			else
+				stat("Failsafe Controller:", "ERROR")
+			if(Master)
+				stat(null)
+				for(var/datum/controller/subsystem/SS in Master.subsystems)
+					SS.stat_entry()
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))

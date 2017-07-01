@@ -2,7 +2,7 @@
 	name = "Torment"
 	desc = "this spell causes pain to all those in its radius."
 	feedback = "TM"
-	school = "evocation"
+	school = "illusion"
 	charge_max = 150
 	spell_flags = 0
 	invocation = "Rai Di-Kaal!"

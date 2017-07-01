@@ -28,9 +28,9 @@ var/global/list/robot_modules = list(
 		LANGUAGE_UNATHI = 0,
 		LANGUAGE_SIIK_MAAS = 0,
 		LANGUAGE_SKRELLIAN = 0,
-		LANGUAGE_RESOMI = 0,
 		LANGUAGE_GUTTER = 0,
-		LANGUAGE_SIGN = 0)
+		LANGUAGE_SIGN = 0,
+		LANGUAGE_INDEPDENDENT = 0)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
@@ -476,9 +476,9 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIIK_MAAS	= 1,
 					LANGUAGE_SIIK_TAJR	= 0,
 					LANGUAGE_SKRELLIAN	= 1,
-					LANGUAGE_RESOMI		= 1,
 					LANGUAGE_TRADEBAND	= 1,
-					LANGUAGE_GUTTER		= 1
+					LANGUAGE_GUTTER		= 1,
+					LANGUAGE_INDEPENDENT= 1
 					)
 
 /obj/item/weapon/robot_module/clerical/butler
@@ -556,7 +556,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
-	channels = list("Supply" = 1)
+	channels = list("Supply" = 1, "Science" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
 					"Basic" = "Miner_old",
@@ -600,6 +600,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/card/robot(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
+	src.modules += new /obj/item/weapon/weldingtool/mini(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/scalpel/laser3(src)
@@ -629,7 +630,8 @@ var/global/list/robot_modules = list(
 					LANGUAGE_UNATHI = 0,
 					LANGUAGE_SIIK_TAJR = 0,
 					LANGUAGE_SKRELLIAN = 0,
-					LANGUAGE_GUTTER = 1
+					LANGUAGE_GUTTER = 1,
+					LANGUAGE_INDEPENDENT = 1
 					)
 	sprites = list(
 					"Dread" = "securityrobot",

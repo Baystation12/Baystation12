@@ -2,6 +2,7 @@
 	density = 1
 	plane = MOB_PLANE
 
+	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
 	flags = PROXMOVE
 

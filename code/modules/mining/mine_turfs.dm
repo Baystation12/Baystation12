@@ -63,16 +63,24 @@ var/list/mining_floors = list()
 
 	overlays.Cut()
 
-	var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
-	for(var/direction in step_overlays)
-		var/turf/turf_to_check = get_step(src,step_overlays[direction])
+	for(var/direction in cardinal)
+		var/turf/turf_to_check = get_step(src,direction)
 		if(update_neighbors && istype(turf_to_check,/turf/simulated/floor/asteroid))
 			var/turf/simulated/floor/asteroid/T = turf_to_check
 			T.updateMineralOverlays()
 		else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
-			var/image/rock_side = image('icons/turf/walls.dmi', "rock_side", dir = turn(step_overlays[direction], 180))
+			var/image/rock_side = image('icons/turf/walls.dmi', "rock_side", dir = turn(direction, 180))
 			rock_side.turf_decal_layerise()
-			turf_to_check.overlays += rock_side
+			switch(direction)
+				if(NORTH)
+					rock_side.pixel_y += world.icon_size
+				if(SOUTH)
+					rock_side.pixel_y -= world.icon_size
+				if(EAST)
+					rock_side.pixel_x += world.icon_size
+				if(WEST)
+					rock_side.pixel_x -= world.icon_size
+			overlays += rock_side
 
 	if(ore_overlay)
 		overlays += ore_overlay
@@ -309,25 +317,9 @@ var/list/mining_floors = list()
 				if(prob(50))
 					M.Stun(5)
 		radiation_repository.flat_radiate(src, 25, 200)
-
-
-
-	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
-
 	//Add some rubble,  you did just clear out a big chunk of rock.
 
 	var/turf/simulated/floor/asteroid/N = ChangeTurf(mined_turf)
-
-	// Kill and update the space overlays around us.
-	for(var/direction in step_overlays)
-		var/turf/space/T = get_step(src, step_overlays[direction])
-		if(istype(T))
-			T.overlays.Cut()
-			for(var/next_direction in step_overlays)
-				if(istype(get_step(T, step_overlays[next_direction]),/turf/simulated/mineral))
-					var/image/rock_side = image('icons/turf/walls.dmi', "rock_side", dir = step_overlays[next_direction])
-					rock_side.turf_decal_layerise()
-					T.overlays += rock_side
 
 	if(istype(N))
 		N.overlay_detail = "asteroid[rand(0,9)]"

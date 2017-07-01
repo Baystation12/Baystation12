@@ -100,3 +100,29 @@
 #define qdel_null(x) if(x) { qdel(x) ; x = null }
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
+
+// Helper macros to aid in optimizing lazy instantiation of lists.
+// All of these are null-safe, you can use them without knowing if the list var is initialized yet
+
+//Picks from the list, with some safeties, and returns the "default" arg if it fails
+#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
+// Ensures L is initailized after this point
+#define LAZYINITLIST(L) if (!L) L = list()
+// Sets a L back to null iff it is empty
+#define UNSETEMPTY(L) if (L && !L.len) L = null
+// Removes I from list L, and sets I to null if it is now empty
+#define LAZYREMOVE(L, I) if(L) { L -= I; if(!L.len) { L = null; } }
+// Adds I to L, initalizing I if necessary
+#define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+// Reads I from L safely - Works with both associative and traditional lists.
+#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= L.len ? L[I] : null) : L[I]) : null)
+// Reads the length of L, returning 0 if null
+#define LAZYLEN(L) length(L)
+// Null-safe L.Cut()
+#define LAZYCLEARLIST(L) if(L) L.Cut()
+// Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
+#define SANITIZE_LIST(L) ( islist(L) ? L : list() )
+
+//Currently used in SDQL2 stuff
+#define send_output(target, msg, control) target << output(msg, control)
+#define send_link(target, url) target << link(url)

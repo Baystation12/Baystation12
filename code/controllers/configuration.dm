@@ -46,8 +46,8 @@ var/list/gamemode_cache = list()
 	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/Ticklag = 0.9
-	var/Tickcomp = 0
+	var/fps = 20
+	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
@@ -112,14 +112,11 @@ var/list/gamemode_cache = list()
 
 	//game_options.txt configs
 
-	var/health_threshold_softcrit = 0
-	var/health_threshold_crit = -50
 	var/health_threshold_dead = -100
 
 	var/organ_health_multiplier = 0.9
 	var/organ_regeneration_multiplier = 0.25
 	var/organs_decay
-	var/default_brain_health = 400
 
 	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
 	//so that it's similar to PAIN. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
@@ -167,6 +164,9 @@ var/list/gamemode_cache = list()
 	var/ghost_interaction = 0
 
 	var/comms_password = ""
+	var/ban_comms_password = null
+
+	var/login_export_addr = null
 
 	var/enter_allowed = 1
 
@@ -342,6 +342,10 @@ var/list/gamemode_cache = list()
 
 				if ("log_runtime")
 					config.log_runtime = 1
+					var/newlog = file("data/logs/runtimes/runtime-[time2text(world.realtime, "YYYY-MM-DD")].log")
+					if(runtime_diary != newlog)
+						to_world_log("Now logging runtimes to data/logs/runtimes/runtime-[time2text(world.realtime, "YYYY-MM-DD")].log")
+						runtime_diary = newlog
 
 				if ("generate_asteroid")
 					config.generate_map = 1
@@ -571,7 +575,15 @@ var/list/gamemode_cache = list()
 					irc_bot_export = 1
 
 				if("ticklag")
-					Ticklag = text2num(value)
+					var/ticklag = text2num(value)
+					if(ticklag > 0)
+						fps = 10 / ticklag
+
+				if("fps")
+					fps = text2num(value)
+
+				if("tick_limit_mc_init")
+					tick_limit_mc_init = text2num(value)
 
 				if("allow_antag_hud")
 					config.antag_hud_allowed = 1
@@ -580,9 +592,6 @@ var/list/gamemode_cache = list()
 
 				if("socket_talk")
 					socket_talk = text2num(value)
-
-				if("tickcomp")
-					Tickcomp = 1
 
 				if("humans_need_surnames")
 					humans_need_surnames = 1
@@ -618,6 +627,12 @@ var/list/gamemode_cache = list()
 
 				if("comms_password")
 					config.comms_password = value
+
+				if("ban_comms_password")
+					config.ban_comms_password = value
+
+				if("login_export_addr")
+					config.login_export_addr = value
 
 				if("irc_bot_host")
 					config.irc_bot_host = value
@@ -724,6 +739,9 @@ var/list/gamemode_cache = list()
 				if("autostealth")
 					config.autostealth = text2num(value)
 
+				if("radiation_lower_limit")
+					radiation_lower_limit = text2num(value)
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -733,10 +751,6 @@ var/list/gamemode_cache = list()
 			value = text2num(value)
 
 			switch(name)
-				if("health_threshold_crit")
-					config.health_threshold_crit = value
-				if("health_threshold_softcrit")
-					config.health_threshold_softcrit = value
 				if("health_threshold_dead")
 					config.health_threshold_dead = value
 				if("revival_pod_plants")
@@ -753,10 +767,6 @@ var/list/gamemode_cache = list()
 					config.organ_damage_spillover_multiplier = value / 100
 				if("organs_can_decay")
 					config.organs_decay = 1
-				if("default_brain_health")
-					config.default_brain_health = text2num(value)
-					if(!config.default_brain_health || config.default_brain_health < 1)
-						config.default_brain_health = initial(config.default_brain_health)
 				if("bones_can_break")
 					config.bones_can_break = value
 				if("limbs_can_break")
@@ -788,6 +798,10 @@ var/list/gamemode_cache = list()
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
+
+	fps = round(fps)
+	if(fps <= 0)
+		fps = initial(fps)
 
 /datum/configuration/proc/loadsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)

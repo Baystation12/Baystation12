@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-ANGLE_BRACKET_COUNT=751
+WORLD_LOG_COUNT=47
+ANGLE_BRACKET_COUNT=744
 
 FAILED=0
 
@@ -15,7 +16,7 @@ num=`grep -E '"/mob' **/*.dm | wc -l`; echo "$num /mob text paths (expecting 2 o
 num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting 12 or less)"; [ $num -le 12 ] || FAILED=1
 num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting 8 or less)"; [ $num -le 8 ] || FAILED=1
 num=`grep -E 'world<<|world[[:space:]]<<' **/*.dm | wc -l`; echo "$num world<< uses (expecting 1 or less)"; [ $num -eq 1 ] || FAILED=1
-num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting 52 or less)"; [ $num -le 52 ] || FAILED=1
+num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting ${WORLD_LOG_COUNT} or less)"; [ $num -le ${WORLD_LOG_COUNT} ] || FAILED=1
 num=`grep -P '(?<!<)<<(?!<)' **/*.dm | wc -l`; echo "$num << uses (expecting ${ANGLE_BRACKET_COUNT} or less)"; [ $num -le ${ANGLE_BRACKET_COUNT} ] || FAILED=1
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`; echo "$num non-yml files (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
 

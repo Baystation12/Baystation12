@@ -11,10 +11,17 @@
 	var/list/restricted_accessory_slots
 	var/list/starting_accessories
 	var/blood_overlay_type = "uniformblood"
+	var/visible_name = "Unknown"
 
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
+
+//Updates the vision of the mob wearing the clothing item, if any
+/obj/item/clothing/proc/update_vision()
+	if(isliving(src.loc))
+		var/mob/living/L = src.loc
+		L.handle_vision()
 
 /obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -24,7 +31,7 @@
 
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		if(blood_DNA)
+		if(blood_DNA && user_human.species.blood_mask)
 			var/image/bloodsies	= overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
 			ret.overlays	+= bloodsies
 
@@ -115,7 +122,6 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -180,7 +186,6 @@ BLIND     // can't see anything
 	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/eyes.dmi',
 		)
 
 /obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
@@ -207,13 +212,14 @@ BLIND     // can't see anything
 	var/wired = 0
 	var/obj/item/weapon/cell/cell = 0
 	var/clipped = 0
+	var/obj/item/clothing/ring/ring = null		//Covered ring
+	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
 	species_restricted = list("exclude",SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/gloves.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
 
@@ -261,6 +267,41 @@ BLIND     // can't see anything
 		species_restricted -= SPECIES_TAJARA
 	return
 
+/obj/item/clothing/gloves/mob_can_equip(mob/user)
+	var/mob/living/carbon/human/H = user
+
+	if(istype(H.gloves, /obj/item/clothing/ring))
+		ring = H.gloves
+		if(!ring.undergloves)
+			to_chat(user, "You are unable to wear \the [src] as \the [H.gloves] are in the way.")
+			ring = null
+			return 0
+		H.drop_from_inventory(ring)	//Remove the ring (or other under-glove item in the hand slot?) so you can put on the gloves.
+		ring.forceMove(src)
+
+	if(!..())
+		if(ring) //Put the ring back on if the check fails.
+			if(H.equip_to_slot_if_possible(ring, slot_gloves))
+				src.ring = null
+		return 0
+
+	if (ring)
+		to_chat(user, "You slip \the [src] on over \the [ring].")
+	wearer = H //TODO clean this when magboots are cleaned
+	return 1
+
+/obj/item/clothing/gloves/dropped()
+	..()
+	if(!wearer)
+		return
+
+	var/mob/living/carbon/human/H = wearer
+	if(ring && istype(H))
+		if(!H.equip_to_slot_if_possible(ring, slot_gloves))
+			ring.forceMove(get_turf(src))
+		src.ring = null
+	wearer = null
+
 ///////////////////////////////////////////////////////////////////////
 //Head
 /obj/item/clothing/head
@@ -281,7 +322,6 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/head.dmi'
 		)
 	blood_overlay_type = "helmetblood"
 
@@ -391,7 +431,6 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/masks.dmi',
 		)
 
 	var/voicechange = 0
@@ -481,7 +520,6 @@ BLIND     // can't see anything
 	species_restricted = list("exclude",SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/shoes.dmi',
 		)
 	blood_overlay_type = "shoeblood"
 
@@ -563,7 +601,6 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi'
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -612,7 +649,6 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
@@ -835,3 +871,15 @@ BLIND     // can't see anything
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
 	..()
+
+///////////////////////////////////////////////////////////////////////
+//Rings
+
+/obj/item/clothing/ring
+	name = "ring"
+	w_class = ITEM_SIZE_TINY
+	icon = 'icons/obj/clothing/rings.dmi'
+	slot_flags = SLOT_GLOVES
+	gender = NEUTER
+	species_restricted = list("exclude",SPECIES_DIONA)
+	var/undergloves = 1
