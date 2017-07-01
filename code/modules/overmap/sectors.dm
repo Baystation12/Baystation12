@@ -9,7 +9,8 @@ var/list/points_of_interest = list()
 	icon_state = "object"
 	var/map_z = list()
 
-	var/list/landing_areas	//areas where inbound exploration shuttles can land
+	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
+	var/list/restricted_waypoints = list() //waypoints for specific shuttles
 
 	var/start_x			//coordinates on the
 	var/start_y			//overmap zlevel
@@ -46,11 +47,30 @@ var/list/points_of_interest = list()
 		using_map.station_levels |= map_z
 		using_map.contact_levels |= map_z
 
-	for(var/obj/machinery/computer/shuttle_control/explore/console in machines)
-		if(console.z in map_z)
-			if(!landing_areas)
-				landing_areas = list()
-			landing_areas |= console.shuttle_area
+	//find shuttle waypoints
+	var/list/found_waypoints = list()
+	for(var/waypoint_tag in generic_waypoints)
+		var/obj/effect/shuttle_landmark/WP = locate(waypoint_tag)
+		if(WP)
+			found_waypoints += WP
+		else
+			log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
+	generic_waypoints = found_waypoints
+
+	for(var/shuttle_name in restricted_waypoints)
+		found_waypoints = list()
+		for(var/waypoint_tag in restricted_waypoints[shuttle_name])
+			var/obj/effect/shuttle_landmark/WP = locate(waypoint_tag)
+			if(WP)
+				found_waypoints += WP
+			else
+				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
+		restricted_waypoints[shuttle_name] = found_waypoints
+
+/obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
+	. = generic_waypoints.Copy()
+	if(shuttle_name in restricted_waypoints)
+		. += restricted_waypoints[shuttle_name]
 
 	points_of_interest += name
 

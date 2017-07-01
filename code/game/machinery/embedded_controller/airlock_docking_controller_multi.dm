@@ -9,7 +9,7 @@
 
 	var/datum/computer/file/embedded_program/docking/multi/docking_program
 
-/obj/machinery/embedded_controller/radio/docking_port_multi/initialize()
+/obj/machinery/embedded_controller/radio/docking_port_multi/New()
 	..()
 	docking_program = new/datum/computer/file/embedded_program/docking/multi(src)
 	program = docking_program

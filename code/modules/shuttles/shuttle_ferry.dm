@@ -1,178 +1,47 @@
-#define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
-/datum/shuttle/ferry
+
+/datum/shuttle/autodock/ferry
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
-	var/process_state = IDLE_STATE
 
-	var/in_use = null	//tells the controller whether this shuttle needs processing
+	var/obj/effect/shuttle_landmark/waypoint_station
+	var/obj/effect/shuttle_landmark/waypoint_offsite
 
-	var/area/area_transition
-	var/move_time = 0		//the time spent in the transition area
-	var/transit_direction = null	//needed for area/move_contents_to() to properly handle shuttle corners - not exactly sure how it works.
+	category = /datum/shuttle/autodock/ferry
 
-	var/area/area_station
-	var/area/area_offsite
-	//TODO: change location to a string and use a mapping for area and dock targets.
-	var/dock_target_station
-	var/dock_target_offsite
+/datum/shuttle/autodock/ferry/New(_name)
+	if(waypoint_station)
+		waypoint_station = locate(waypoint_station)
+	if(waypoint_offsite)
+		waypoint_offsite = locate(waypoint_offsite)
 
-	var/last_dock_attempt_time = 0
-	category = /datum/shuttle/ferry
+	..(_name, get_location_waypoint(location))
 
-/datum/shuttle/ferry/New()
-	area_offsite = locate(area_offsite)
-	area_station = locate(area_station)
-	if(area_transition)
-		area_transition = locate(area_transition)
-	..()
+	next_location = get_location_waypoint(!location)
 
-/datum/shuttle/ferry/short_jump(var/area/origin,var/area/destination)
-	if(isnull(location))
-		return
-
-	if(!destination)
-		destination = get_location_area(!location)
-	if(!origin)
-		origin = get_location_area(location)
-
-	direction = !location
-	..(origin, destination)
-
-/datum/shuttle/ferry/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
-//	log_debug("shuttle/ferry/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]")
-
-	if(isnull(location))
-		return
-
-	if(!destination)
-		destination = get_location_area(!location)
-	if(!departing)
-		departing = get_location_area(location)
-
-	direction = !location
-	..(departing, destination, interim, travel_time, direction)
-
-/datum/shuttle/ferry/move(var/area/origin,var/area/destination)
-	..(origin, destination)
-
-	if (destination == area_station) location = 0
-	if (destination == area_offsite) location = 1
-	//if this is a long_jump retain the location we were last at until we get to the new one
-
-/datum/shuttle/ferry/dock()
-	..()
-	last_dock_attempt_time = world.time
-
-/datum/shuttle/ferry/proc/get_location_area(location_id = null)
+//Gets the shuttle landmark associated with the given location (defaults to current location)
+/datum/shuttle/autodock/ferry/proc/get_location_waypoint(location_id = null)
 	if (isnull(location_id))
 		location_id = location
 
 	if (!location_id)
-		return area_station
-	return area_offsite
+		return waypoint_station
+	return waypoint_offsite
 
-/*
-	Please ensure that long_jump() and short_jump() are only called from here. This applies to subtypes as well.
-	Doing so will ensure that multiple jumps cannot be initiated in parallel.
-*/
-/datum/shuttle/ferry/proc/process()
-	switch(process_state)
-		if (WAIT_LAUNCH)
-			if (skip_docking_checks() || docking_controller.can_launch())
+/datum/shuttle/autodock/ferry/short_jump(var/destination)
+	direction = !location
+	..()
 
-//				log_debug("shuttle/ferry/process: area_transition=[area_transition], travel_time=[travel_time]")
+/datum/shuttle/autodock/ferry/long_jump(var/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
+	direction = !location
+	..()
 
-				if (move_time && area_transition)
-					long_jump(interim=area_transition, travel_time=move_time, direction=transit_direction)
-				else
-					short_jump()
+/datum/shuttle/autodock/ferry/shuttle_moved()
+	..()
 
-				process_state = WAIT_ARRIVE
+	if (next_location == waypoint_station) location = 0
+	if (next_location == waypoint_offsite) location = 1
 
-		if (FORCE_LAUNCH)
-			if (move_time && area_transition)
-				long_jump(interim=area_transition, travel_time=move_time, direction=transit_direction)
-			else
-				short_jump()
-
-			process_state = WAIT_ARRIVE
-
-		if (WAIT_ARRIVE)
-			if (moving_status == SHUTTLE_IDLE)
-				dock()
-				in_use = null	//release lock
-				process_state = WAIT_FINISH
-
-		if (WAIT_FINISH)
-			if (skip_docking_checks() || docking_controller.docked() || world.time > last_dock_attempt_time + DOCK_ATTEMPT_TIMEOUT)
-				process_state = IDLE_STATE
-				arrived()
-
-/datum/shuttle/ferry/current_dock_target()
-	var/dock_target
-	if (!location)	//station
-		dock_target = dock_target_station
-	else
-		dock_target = dock_target_offsite
-	return dock_target
-
-
-/datum/shuttle/ferry/proc/launch(var/user)
-	if (!can_launch()) return
-
-	in_use = user	//obtain an exclusive lock on the shuttle
-
-	process_state = WAIT_LAUNCH
-	undock()
-
-/datum/shuttle/ferry/proc/force_launch(var/user)
-	if (!can_force()) return
-
-	in_use = user	//obtain an exclusive lock on the shuttle
-
-	process_state = FORCE_LAUNCH
-
-/datum/shuttle/ferry/proc/cancel_launch(var/user)
-	if (!can_cancel()) return
-
-	moving_status = SHUTTLE_IDLE
-	process_state = WAIT_FINISH
-	in_use = null
-
-	if (docking_controller && !docking_controller.undocked())
-		docking_controller.force_undock()
-
-	spawn(10)
-		dock()
-
-	return
-
-/datum/shuttle/ferry/proc/can_launch()
-	if (moving_status != SHUTTLE_IDLE)
-		return 0
-
-	if (in_use)
-		return 0
-
-	return 1
-
-/datum/shuttle/ferry/proc/can_force()
-	if (moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
-		return 1
-	return 0
-
-/datum/shuttle/ferry/proc/can_cancel()
-	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
-		return 1
-	return 0
-
-//returns 1 if the shuttle is getting ready to move, but is not in transit yet
-/datum/shuttle/ferry/proc/is_launching()
-	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
-
-//This gets called when the shuttle finishes arriving at it's destination
-//This can be used by subtypes to do things when the shuttle arrives.
-/datum/shuttle/ferry/proc/arrived()
-	return	//do nothing for now
-
+/datum/shuttle/autodock/ferry/process_arrived()
+	..()
+	next_location = get_location_waypoint(!location)
