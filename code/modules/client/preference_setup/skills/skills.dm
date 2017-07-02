@@ -1,3 +1,7 @@
+/datum/preferences
+	var/used_skillpoints = 0
+	var/list/skills          // skills can range from 0 to 3
+
 /datum/category_item/player_setup_item/skills
 	name = "Skills"
 	sort_order = 1
@@ -12,7 +16,7 @@
 
 /datum/category_item/player_setup_item/skills/sanitize_character()
 	if(SKILLS == null)				setup_skills()
-	if(!pref.skills)				pref.skills = list()
+	if(!istype(pref.skills))		pref.skills = list()
 	if(!pref.skills.len)			pref.ZeroSkills()
 	if(pref.used_skillpoints < 0)	pref.used_skillpoints = 0
 
