@@ -86,9 +86,10 @@
 
 /obj/item/organ/external/Destroy()
 
-	for(var/datum/wound/wound in wounds)
-		wound.embedded_objects.Cut()
-	wounds.Cut()
+	if(wounds)
+		for(var/datum/wound/wound in wounds)
+			wound.embedded_objects.Cut()
+		wounds.Cut()
 
 	if(parent && parent.children)
 		parent.children -= src
@@ -419,7 +420,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
-	if(!surgical && wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
+	if(!surgical && wounds && wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
 		if((type == CUT || type == BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
