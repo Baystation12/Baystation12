@@ -37,6 +37,7 @@
 	if(!target || world.time < next_cycle)
 		return
 	if(!linked_god || target.stat)
+		to_chat(linked_god, "<span class='warning'>\The [target] has lost consciousness, breaking \the [src]'s hold on their mind!</span>")
 		remove_target()
 		return
 
@@ -44,7 +45,7 @@
 	cycles_before_converted--
 	if(!cycles_before_converted)
 		src.visible_message("For one thundering moment, \the [target] cries out in pain before going limp and broken.")
-		godcult.add_antagonist_mind(target.mind,1,"a servant of [src]. Your loyalty may be faulty, but you know that it now has control over you...", "Servant of [src]", specific_god=linked_god)
+		godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
 		remove_target()
 		return
 
@@ -57,6 +58,7 @@
 			text = "You can't.... concentrate.. must... resist!"
 		if(1)
 			text = "Can't... resist. ... anymore."
+			to_chat(linked_god, "<span class='warning'>\The [target] is getting close to conversion!</span>")
 	to_chat(target, "<span class='cult'>[text]. <a href='?src=\ref[src];resist=\ref[target]'>Resist Conversion</a></span>")
 
 
@@ -70,6 +72,7 @@
 	destroyed_event.register(L,src,/obj/structure/deity/altar/proc/remove_target)
 	moved_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
 	death_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
+	update_icon()
 
 /obj/structure/deity/altar/proc/remove_target()
 	processing_objects -= src
@@ -77,6 +80,7 @@
 	moved_event.unregister(target, src)
 	death_event.unregister(target, src)
 	target = null
+	update_icon()
 
 /obj/structure/deity/altar/Topic(var/href, var/list/href_list)
 	if(..())
@@ -89,8 +93,14 @@
 
 		M.last_special = world.time + 10 SECONDS
 		M.visible_message("<span class='warning'>\The [M] writhes on top of \the [src]!</span>", "<span class='notice'>You struggle against the intruding thoughts, keeping them at bay!</span>")
+		to_chat(linked_god, "<span class='warning'>\The [M] slows its conversion through willpower!</span>")
 		cycles_before_converted++
 		if(prob(50))
 			to_chat(M, "<span class='danger'>The mental strain is too much for you! You feel your body weakening!</span>")
 			M.adjustToxLoss(15)
 			M.adjustHalLoss(30)
+
+/obj/structure/deity/altar/update_icon()
+	overlays.Cut()
+	if(target)
+		overlays += image('icons/effects/effects.dmi', icon_state =  "summoning")

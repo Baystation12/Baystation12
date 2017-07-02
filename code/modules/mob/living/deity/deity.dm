@@ -9,6 +9,7 @@
 	pixel_y = -128
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
+	universal_understand = 1
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
@@ -28,7 +29,7 @@
 /mob/living/deity/Life()
 	. = ..()
 	if(. && mob_uplink.uses < power_min && --power_tick == 0)
-		mob_uplink.uses += 1
+		mob_uplink.uses = min(power_min, mob_uplink.uses + round(power_min/10))
 		nanomanager.update_uis(mob_uplink)
 		power_tick = initial(power_tick)
 
@@ -59,6 +60,11 @@
 	qdel_null(form)
 	return ..()
 
+/mob/living/deity/verb/return_to_plane()
+	set category = "Godhood"
+
+	eyeobj.forceMove(get_turf(src))
+
 /mob/living/deity/verb/jump_to_follower()
 	set category = "Godhood"
 
@@ -68,7 +74,7 @@
 	var/list/could_follow = list()
 	for(var/m in minions)
 		var/datum/mind/mind = m
-		if(mind.current.stat != DEAD)
+		if(mind.current && mind.current.stat != DEAD)
 			could_follow += mind.current
 
 	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow

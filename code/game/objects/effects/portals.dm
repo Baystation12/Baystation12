@@ -43,6 +43,8 @@
 /obj/effect/portal/proc/teleport(atom/movable/M as mob|obj)
 	if(istype(M, /obj/effect)) //sparks don't teleport
 		return
+	if(istype(M, /mob) && !istype(M, /mob/living)) //Stop ghost spam yo.
+		return
 	if (M.anchored&&istype(M, /obj/mecha))
 		return
 	if (icon_state == "portal1")
@@ -57,4 +59,3 @@
 			do_teleport(M, locate(rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy -TRANSITIONEDGE), destination_z), 0)
 		else
 			do_teleport(M, target, 1) ///You will appear adjacent to the beacon
-
