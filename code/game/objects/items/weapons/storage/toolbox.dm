@@ -14,6 +14,12 @@
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE //enough to hold all starting contents
 	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("robusted")
+/obj/item/weapon/storage/toolbox/New()
+	..()
+	if(prob(2))
+		qdel(src)
+		new /obj/item/weapon/storage/toolbox/gold(get_turf(src))
+	src.overlays += image('icons/obj/storage.dmi', "[pick("single", "double", "triple")]_latch")
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
@@ -76,3 +82,12 @@
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
 	new /obj/item/device/multitool(src)
+
+/obj/item/weapon/storage/toolbox/gold
+	name = "golden toolbox"
+	icon_state = "gold" //Golden toolbox was really pretty and I wanted an excuse.
+	item_state = "toolbox_gold"
+	force = 13 //Objects with a high amont of mass have the property of transferring energy more effectively.
+	throwforce = 19 //Make throwing it *worth* it.
+	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 4) //Identical material tech level as gold.
+	desc = "Now who would carry their tools around like <i>this</i>? This toolbox appears to be made from gold, and is polished to a mirror-sheen; it notably lacks the prominant robustness warning."
