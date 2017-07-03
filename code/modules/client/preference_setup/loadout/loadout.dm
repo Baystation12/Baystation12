@@ -252,6 +252,20 @@ var/list/gear_datums = list()
 			pref.gear_list[1] = old_gear
 		return 1
 
+	if(preferences["version"] < 15)
+		if(istype(pref.gear_list))
+			// Checks if the key of the pref.gear_list is a list.
+			// If not the key is replaced with the corresponding value.
+			// This will convert the loadout slot data to a reasonable and (more importantly) compatible format.
+			// I.e. list("1" = loadout_data1, "2" = loadout_data2, "3" = loadout_data3) becomes list(loadout_data1, loadout_data2, loadaout_data3)
+			for(var/index = 1 to pref.gear_list.len)
+				var/key = pref.gear_list[index]
+				if(islist(key))
+					continue
+				var/value = pref.gear_list[key]
+				pref.gear_list[index] = value
+		return 1
+
 /datum/gear
 	var/display_name       //Name/index. Must be unique.
 	var/description        //Description of this gear. If left blank will default to the description of the pathed item.
