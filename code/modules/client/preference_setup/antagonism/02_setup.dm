@@ -1,5 +1,9 @@
 var/global/list/uplink_locations = list("PDA", "Headset", "None")
 
+/datum/preferences
+	var/uplinklocation = "PDA"
+	var/exploit_record = ""
+
 /datum/category_item/player_setup_item/antagonism/basic
 	name = "Setup"
 	sort_order = 2
