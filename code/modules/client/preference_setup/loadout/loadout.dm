@@ -80,7 +80,7 @@ var/list/gear_datums = list()
 	for(var/index = 1 to config.loadout_slots)
 		var/list/gears = pref.gear_list[index]
 
-		if(gears)
+		if(istype(gears))
 			for(var/gear_name in gears)
 				if(!(gear_name in gear_datums))
 					gears -= gear_name
@@ -239,7 +239,7 @@ var/list/gear_datums = list()
 		return TOPIC_REFRESH
 	if(href_list["clear_loadout"])
 		var/list/gear = pref.gear_list[pref.gear_slot]
-		LAZYCLEARLIST(gear)
+		gear.Cut()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	return ..()
 
