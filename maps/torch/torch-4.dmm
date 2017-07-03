@@ -711,8 +711,8 @@
 "nT" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/item/device/taperecorder,/turf/simulated/floor/carpet/blue,/area/medical/mentalhealth)
 "nU" = (/obj/structure/noticeboard{pixel_x = -32},/obj/machinery/camera/network/command{c_tag = "Conference Room - Fore"; dir = 4},/turf/simulated/floor/tiled/dark,/area/command/conference)
 "nV" = (/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor/carpet,/area/command/conference)
-"nW" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/blue,/turf/simulated/floor/carpet,/area/command/conference)
-"nX" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/blue,/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/carpet,/area/command/conference)
+"nW" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/blue{pixel_x = -1; pixel_y = 1},/turf/simulated/floor/carpet,/area/command/conference)
+"nX" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/item/weapon/folder/blue{pixel_x = -1; pixel_y = 1},/turf/simulated/floor/carpet,/area/command/conference)
 "nY" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/carpet,/area/command/conference)
 "nZ" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/wingrille_spawn/reinforced/polarized{id = "conference_windows"},/turf/simulated/floor/plating,/area/command/conference)
 "oa" = (/obj/machinery/light/small,/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/machinery/power/apc{dir = 2; name = "south bump"; operating = 1; pixel_y = -24},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head/aux)
@@ -769,7 +769,7 @@
 "oZ" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/machinery/light/small{dir = 4},/obj/item/device/radio/intercom/locked/confessional{dir = 8; pixel_x = 22},/turf/simulated/floor/tiled/dark,/area/medical/mentalhealth)
 "pa" = (/obj/machinery/photocopier,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/command/conference)
 "pb" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/command/conference)
-"pc" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/blue,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/carpet,/area/command/conference)
+"pc" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/item/weapon/folder/blue{pixel_x = -1; pixel_y = 1},/turf/simulated/floor/carpet,/area/command/conference)
 "pd" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled/dark,/area/command/conference)
 "pe" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/light{dir = 4},/obj/structure/disposalpipe/segment,/obj/effect/floor_decal/corner/blue,/turf/simulated/floor/tiled,/area/hallway/primary/firstdeck/fore)
 "pf" = (/obj/machinery/door/airlock{name = "Auxiliary Head"},/obj/machinery/door/firedoor/border_only,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head/aux)
@@ -811,7 +811,7 @@
 "pP" = (/obj/effect/wingrille_spawn/reinforced/polarized{id = "counsel_windows"},/turf/simulated/floor/plating,/area/medical/mentalhealth)
 "pQ" = (/obj/machinery/door/morgue{dir = 2; name = "Confession Booth"},/turf/simulated/floor/tiled/dark,/area/medical/mentalhealth)
 "pR" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/command/conference)
-"pS" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/blue,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/carpet,/area/command/conference)
+"pS" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/unary/vent_pump/on,/obj/item/weapon/folder/blue{pixel_x = -1; pixel_y = 1},/turf/simulated/floor/carpet,/area/command/conference)
 "pT" = (/obj/structure/bed/chair/office/dark{dir = 8},/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/carpet,/area/command/conference)
 "pU" = (/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/command/conference)
 "pV" = (/obj/machinery/door/firedoor,/obj/structure/disposalpipe/segment{dir = 4},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/door/airlock/sol{name = "Conference Room"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/command/conference)
@@ -1154,7 +1154,7 @@
 "wx" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/turf/simulated/floor/plating,/area/hallway/primary/firstdeck/aft)
 "wy" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 9},/turf/simulated/floor/reinforced/airless,/area/space)
 "wz" = (/obj/machinery/door/firedoor/border_only,/obj/structure/cable/green,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/blast/regular/open{dir = 4; id = "cmess"; name = "Captain's Mess Blast Doors"},/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/command/captainmess)
-"wA" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/donut,/turf/simulated/floor/carpet,/area/command/captainmess)
+"wA" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/donut{pixel_x = -1; pixel_y = 1},/turf/simulated/floor/carpet,/area/command/captainmess)
 "wB" = (/obj/structure/bed/chair/wood/wings{dir = 8; icon_state = "wooden_chair_wings"},/turf/simulated/floor/carpet,/area/command/captainmess)
 "wC" = (/obj/structure/table/marble,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/dark,/area/command/captainmess)
 "wD" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/dark,/area/command/captainmess)
@@ -2662,4 +2662,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
