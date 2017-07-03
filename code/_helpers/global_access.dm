@@ -137,8 +137,6 @@
 			return global.adjectives;
 		if("admin_datums")
 			return global.admin_datums;
-		if("admin_departments")
-			return global.admin_departments;
 		if("admin_log")
 			return global.admin_log;
 		if("admin_pm_repository")
@@ -179,8 +177,6 @@
 			return global.admin_verbs_sounds;
 		if("admin_verbs_spawn")
 			return global.admin_verbs_spawn;
-		if("adminfaxes")
-			return global.adminfaxes;
 		if("adminhelp_ignored_words")
 			return global.adminhelp_ignored_words;
 		if("adminlog")
@@ -1479,7 +1475,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1618,8 +1614,6 @@
 			global.adjectives=newval;
 		if("admin_datums")
 			global.admin_datums=newval;
-		if("admin_departments")
-			global.admin_departments=newval;
 		if("admin_log")
 			global.admin_log=newval;
 		if("admin_pm_repository")
@@ -1660,8 +1654,6 @@
 			global.admin_verbs_sounds=newval;
 		if("admin_verbs_spawn")
 			global.admin_verbs_spawn=newval;
-		if("adminfaxes")
-			global.adminfaxes=newval;
 		if("adminhelp_ignored_words")
 			global.adminhelp_ignored_words=newval;
 		if("adminlog")
@@ -2960,7 +2952,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
