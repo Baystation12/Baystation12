@@ -249,20 +249,6 @@
 			else
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
-		if (I_GRAB)
-			if (M == src || anchored)
-				return
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
-
-			M.put_in_active_hand(G)
-
-			G.synch()
-
-			LAssailant = M
-
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
-
 		else
 
 			var/damage = rand(1, 9)

@@ -69,6 +69,8 @@
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
+	var/assisted_languages = list()		// For species who can't physically speak a language, but need something to help them do so.
+
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	var/list/bad_external_organs = list()// organs we check until they are good.
 
@@ -82,6 +84,7 @@
 	var/pulling_punches    // Are you trying not to hurt your opponent?
 	var/full_prosthetic    // We are a robutt.
 	var/robolimb_count = 0 // Number of robot limbs.
+	var/last_attack = 0    // The world_time where an unarmed attack was done
 
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
@@ -111,3 +114,5 @@
 
 	var/innate_heal = 1
 	var/shock_stage
+
+	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.

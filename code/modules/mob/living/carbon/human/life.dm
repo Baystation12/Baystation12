@@ -4,7 +4,7 @@
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
 
 #define HUMAN_CRIT_TIME_CUSHION (10 MINUTES) //approximate time limit to stabilize someone in crit
-#define HUMAN_CRIT_HEALTH_CUSHION (config.health_threshold_crit - config.health_threshold_dead)
+#define HUMAN_CRIT_HEALTH_CUSHION (-50 - config.health_threshold_dead)
 
 //The amount of damage you'll get when in critical condition. We want this to be a HUMAN_CRIT_TIME_CUSHION long deal.
 //There are HUMAN_CRIT_HEALTH_CUSHION hp to get through, so (HUMAN_CRIT_HEALTH_CUSHION/HUMAN_CRIT_TIME_CUSHION) per tick.
@@ -95,8 +95,11 @@
 	return 1
 
 /mob/living/carbon/human/breathe()
-	if(!in_stasis)
-		..()
+	var/species_organ = species.breathing_organ
+
+	if(!in_stasis && species_organ)
+		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+		..(L.active_breathing)
 
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
@@ -298,12 +301,18 @@
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
-	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
-	if(nervous_system_failure() || (!L && should_have_organ(BP_LUNGS)))
+	var/species_organ = species.breathing_organ
+	if(!species_organ)
+		return
+
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+	if(!L || nervous_system_failure())
 		failed_last_breath = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
+	return !failed_last_breath
 
+/*
 	if(failed_last_breath && !isSynthetic() )
 		if(prob(15) && !nervous_system_failure())
 			if(!is_asystole())
@@ -315,6 +324,7 @@
 		oxygen_alert = max(oxygen_alert, 1)
 		return 0
 	return 1
+*/
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
@@ -565,9 +575,9 @@
 		nutrition = max (0, nutrition - species.hunger_factor)
 
 	if(!isSynthetic() && (species.flags & IS_PLANT))
+
 		if(nutrition < 10)
 			take_overall_damage(2,0)
-
 			//traumatic_shock is updated every tick, incrementing that is pointless - shock_stage is the counter.
 			//Not that it matters much for diona, who have NO_PAIN.
 			shock_stage++
@@ -923,7 +933,7 @@
 		var/turf/T = loc
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
-	
+
 	var/area/A = get_area(src)
 	if(client && world.time >= client.played + 600)
 		A.play_ambience(src)

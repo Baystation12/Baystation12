@@ -258,13 +258,13 @@
 
 //Gets the mob grab conga line.
 /mob/proc/ret_grab(list/L)
-	if (!istype(l_hand, /obj/item/weapon/grab) && !istype(r_hand, /obj/item/weapon/grab))
+	if (!istype(l_hand, /obj/item/grab) && !istype(r_hand, /obj/item/grab))
 		return L
 	if (!L)
 		L = list(src)
 	for(var/A in list(l_hand,r_hand))
-		if (istype(A, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = A
+		if (istype(A, /obj/item/grab))
+			var/obj/item/grab/G = A
 			if (!(G.affecting in L))
 				L += G.affecting
 				if (G.affecting)
@@ -701,10 +701,12 @@
 		set_density(initial(density))
 	reset_layer()
 
-	for(var/obj/item/weapon/grab/G in grabbed_by)
-		if(G.state >= GRAB_AGGRESSIVE)
+	for(var/obj/item/grab/G in grabbed_by)
+		if(G.stop_move())
 			canmove = 0
-			break
+
+		if(G.force_stand())
+			lying = 0
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.

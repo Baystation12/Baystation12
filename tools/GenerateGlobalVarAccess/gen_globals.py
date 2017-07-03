@@ -57,11 +57,11 @@ def main():
 
 
 	variables = ParseTree(tree)
-	# print(variables)
+	print(variables)
 	# Can't be bothered to fix the parser 100% so if something hates you just add it to this list to exclude it.
 	ignores = []
 	variables = [x for x in variables if re.match("^[a-z_$][a-z_$0-9]*$", x, re.IGNORECASE) != None and x not in ignores]
-	# print(variables)
+	print(variables)
 
 	variables.sort()
 	code = GenCode(variables)
@@ -99,7 +99,7 @@ def FindCompiler():
 	if compiler_path == None and sys.platform == 'win32':
 		# Attempt to look in %ProgramFiles% and %ProgramFiles(x86)% for BYOND.
 		for path in (os.environ['ProgramFiles'], os.environ['ProgramFiles(x86)']):
-			path = os.path.join(path, "BYOND", "bin", "dm.ex")
+			path = os.path.join(path, "BYOND", "bin", "dm.exe")
 
 			if os.access(path, os.F_OK):
 				compiler_path = path

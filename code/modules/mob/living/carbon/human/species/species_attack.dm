@@ -87,3 +87,14 @@
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	user.visible_message("<span class='warning'>[user] jumped up and down on \the [target]'s [affecting.name]!</span>")
 	playsound(user.loc, attack_sound, 25, 1, -1)
+
+/datum/unarmed_attack/nabber
+	attack_verb = list("mauled", "slashed", "struck", "pierced")
+	attack_noun = list("forelimb")
+	damage = 8
+	shredding = 1
+	sharp = 1
+	edge = 1
+	delay = 20
+	eye_attack_text = "a forelimb"
+	eye_attack_text_victim = "a forelimb"

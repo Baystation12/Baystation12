@@ -39,6 +39,10 @@ var/list/mannequins_
 // Posters
 var/global/list/poster_designs = list()
 
+// Grabs
+var/global/list/all_grabstates[0]
+var/global/list/all_grabobjects[0]
+
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
 
@@ -200,8 +204,24 @@ var/global/list/string_slot_flags = list(
 		var/datum/poster/P = new T
 		poster_designs += P
 
-	return 1
+	//Grabs
+	paths = typesof(/datum/grab) - /datum/grab
+	for(var/T in paths)
+		var/datum/grab/G = new T
+		if(G.state_name)
+			all_grabstates[G.state_name] = G
 
+	paths = typesof(/obj/item/grab) - /obj/item/grab
+	for(var/T in paths)
+		var/obj/item/grab/G = new T
+		if(G.type_name)
+			all_grabobjects[G.type_name] = T
+
+	for(var/grabstate_name in all_grabstates)
+		var/datum/grab/G = all_grabstates[grabstate_name]
+		G.refresh_updown()
+
+	return 1
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

@@ -193,6 +193,8 @@
 			return global.ai_list;
 		if("ai_names")
 			return global.ai_names;
+		if("all_grabobjects")
+			return global.all_grabobjects
 		if("ai_status_emotions")
 			return global.ai_status_emotions;
 		if("ai_verbs_default")
@@ -219,6 +221,8 @@
 			return global.all_antag_types_;
 		if("all_languages")
 			return global.all_languages;
+		if("all_grabstates")
+			return global.all_grabstates;
 		if("all_maps")
 			return global.all_maps;
 		if("all_money_accounts")
@@ -1481,7 +1485,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1702,6 +1706,8 @@
 			global.all_antag_types_=newval;
 		if("all_languages")
 			global.all_languages=newval;
+		if("all_grabstates")
+			global.all_grabstates=newval;
 		if("all_maps")
 			global.all_maps=newval;
 		if("all_money_accounts")
@@ -2530,6 +2536,8 @@
 			global.prisonsecuritywarp=newval;
 		if("prisonwarp")
 			global.prisonwarp=newval;
+		if("all_grabobjects")
+			global.all_grabobjects=newval;
 		if("prisonwarped")
 			global.prisonwarped=newval;
 		if("priv_all_access")
@@ -2964,7 +2972,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3075,6 +3083,7 @@
 	"all_antag_spawnpoints_",
 	"all_antag_types_",
 	"all_languages",
+	"all_grabstates",
 	"all_maps",
 	"all_money_accounts",
 	"all_objectives",
@@ -3412,6 +3421,7 @@
 	"meteors_threatening",
 	"midnight_rollovers",
 	"mil_branches",
+	"all_grabobjects",
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",

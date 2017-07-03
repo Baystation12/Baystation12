@@ -52,6 +52,9 @@
 		to_chat(M, "<span class='notice'>You fail to reach \the [src].</span>")
 		return
 
+	for (var/obj/item/grab/G in M)
+		G.adjust_position()
+
 	var/direction = target_ladder == target_up ? "up" : "down"
 
 	M.visible_message("<span class='notice'>\The [M] begins climbing [direction] \the [src]!</span>",
@@ -62,6 +65,9 @@
 
 	if(do_after(M, climb_time, src))
 		climbLadder(M, target_ladder)
+		for (var/obj/item/grab/G in M)
+			G.adjust_position()
+
 
 /obj/structure/ladder/attack_ghost(var/mob/M)
 	var/target_ladder = getTargetLadder(M)
@@ -96,6 +102,18 @@
 	if(incapacitated())
 		to_chat(src, "<span class='warning'>You are physically unable to climb \the [ladder].</span>")
 		return FALSE
+
+	var/carry_count = 0
+	for(var/obj/item/grab/G in src)
+		if(!G.ladder_carry())
+			to_chat(src, "<span class='warning'>You can't carry [G.affecting] up \the [ladder].</span>")
+			return FALSE
+		else
+			carry_count++
+	if(carry_count > 1)
+		to_chat(src, "<span class='warning'>You can't carry more than one person up \the [ladder].</span>")
+		return FALSE
+
 	return TRUE
 
 /mob/observer/ghost/may_climb_ladders(var/ladder)

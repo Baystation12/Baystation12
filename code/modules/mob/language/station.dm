@@ -200,3 +200,10 @@
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
+
+/datum/language/nabber
+	name = LANGUAGE_NABBER
+	desc = "A strange language that can be understood both by the sounds made and by the movement needed to create those sounds."
+	key = "n"
+	flags = RESTRICTED
+	colour = "soghun"
