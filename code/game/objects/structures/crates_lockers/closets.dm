@@ -9,6 +9,7 @@
 	var/icon_opened = "open"
 	var/opened = 0
 	var/welded = 0
+	var/large = 1
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
 	var/breakout = 0 //if someone is currently breaking out. mutex
@@ -273,6 +274,8 @@
 	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete
 		return
 	if(O.loc == user)
+		return
+	if(ismob(O) && src.large)
 		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return

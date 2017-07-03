@@ -7,7 +7,6 @@
 	opened = 0
 	var/locked = 1
 	var/broken = 0
-	var/large = 1
 	icon_closed = "secure"
 	var/icon_locked = "secure1"
 	icon_opened = "secureopen"
@@ -64,22 +63,8 @@
 		to_chat(user, "<span class='notice'>Access Denied</span>")
 
 /obj/structure/closet/secure_closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(src.opened)
-		if(istype(W, /obj/item/weapon/storage/laundry_basket))
-			return ..(W,user)
-		if(istype(W, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = W
-			if(src.large)
-				src.MouseDrop_T(G.affecting, user)	//act like they were dragged onto the closet
-			else
-				to_chat(user, "<span class='notice'>The locker is too small to stuff [G.affecting] into!</span>")
-		if(isrobot(user))
-			return
-		if(W.loc != user) // This should stop mounted modules ending up outside the module.
-			return
-		user.drop_item()
-		if(W)
-			W.forceMove(src.loc)
+	if(src.opened || istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
+		..()
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -87,8 +72,6 @@
 			spark_system.start()
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
-	else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
-		return ..(W,user)
 	else
 		togglelock(user)
 
