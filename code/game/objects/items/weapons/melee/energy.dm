@@ -8,7 +8,7 @@
 	flags = NOBLOODY
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
-	anchored = 1
+	anchored = 1 //Why?
 	if(active)
 		return
 	active = 1
@@ -91,7 +91,6 @@
  * Energy Sword
  */
 /obj/item/weapon/melee/energy/sword
-	color
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
@@ -107,7 +106,6 @@
 	sharp = 1
 	edge = 1
 	var/blade_color
-
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
 	if(!istype(loc,/mob))
@@ -153,6 +151,18 @@
 		return 1
 	return 0
 
+/obj/item/weapon/melee/energy/sword/attackby(var/obj/item/weapon/melee/energy/sword/S, var/mob/user) //TODO: Move this proc up one and figure out a way to add combo results for the E-Axe
+	if(!istype(S))
+		return
+	else
+		var/obj/item/product = new /obj/item/weapon/twohanded/toggled/energy/dualsaber
+		qdel(S) // We delete the offhand Energy sword to open a hand for the dualsaber.
+		user.visible_message("<span class='notice'>[user] links the pommels of their \the [src]s with a satisfying click.</span>")
+		to_chat(user, "<span class='notice'> A hidden speaker chirps out, \"Energy blade power supply safeties disabled -- Have a safe and productive day.\"</span>")
+		user.put_in_hands(product)
+		qdel(src)
+
+
 /obj/item/weapon/melee/energy/sword/pirate
 	name = "energy cutlass"
 	desc = "Arrrr matey."
@@ -162,6 +172,8 @@
 	..()
 	icon_state = "cutlass1"
 
+/obj/item/weapon/melee/energy/sword/pirate/attackby(var/obj/item/weapon/melee/energy/sword/S as obj, mob/user as mob)
+	return
 /*
  *Energy Blade
  */
@@ -222,3 +234,6 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		spawn(1) if(src) qdel(src)
+
+/obj/item/weapon/melee/energy/blade/attackby(var/obj/item/weapon/melee/energy/sword/S as obj, mob/user as mob)
+	return
