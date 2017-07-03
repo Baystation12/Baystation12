@@ -15,11 +15,11 @@
 	if(god)
 		linked_god = god
 		linked_god.form.sync_structure(src)
-		linked_god.add_source(power_adjustment, src)
+		linked_god.adjust_source(power_adjustment, src)
 
 /obj/structure/deity/Destroy()
 	if(linked_god)
-		linked_god.add_source(-power_adjustment, src)
+		linked_god.adjust_source(-power_adjustment, src)
 		linked_god = null
 	return ..()
 

@@ -3,13 +3,14 @@ var/datum/antagonist/godcultist/godcult
 /datum/antagonist/godcultist
 	id = MODE_GODCULTIST
 	role_text = "God Cultist"
-	role_text_plural = "Cultists"
+	role_text_plural = "God Cultists"
 	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos)
 	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain)
 	feedback_tag = "godcult_objective"
 	antag_indicator = "hudcultist"
-	welcome_text = "You are under the guidance of a powerful otherwordly being. Spread its will and keep your faith."
+	faction_verb = /mob/living/proc/dpray
+	welcome_text = "You are under the guidance of a powerful otherwordly being. Spread its will and keep your faith.<br>Use dpray to communicate directly with your master!<br>Ask your master for spells to start building!"
 	victory_text = "The cult wins! It has succeeded in serving its dark masters!"
 	loss_text = "The staff managed to stop the cult!"
 	victory_feedback_tag = "win - cult win"
@@ -98,3 +99,17 @@ var/datum/antagonist/godcultist/godcult
 		var/mob/living/deity/god = mind.current
 		if(god.is_follower(player.current,1))
 			return god
+
+/mob/living/proc/dpray(var/msg)
+	set category = "Abilities"
+
+	if(!src.mind || !godcult || !godcult.is_antagonist(mind))
+		return
+	msg = sanitize(msg)
+	var/mob/living/deity/D = godcult.get_deity(mind)
+	if(!D || !msg)
+		return
+
+	//Make em wait a few seconds.
+	src.visible_message("\The [src] bows their head, muttering something underneath their breathe", "<span class='notice'>You send the message \"[msg]\" to your master.</span>")
+	to_chat(D, "<span class='notice'>\The [src] (<A href='?src=\ref[D];jump=\ref[src];'>J</A>) prays, \"[msg]\"</span>")
