@@ -1,8 +1,5 @@
 var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[using_map.boss_name]", "Colonial Marshal Service", "[using_map.boss_short] Supply") + using_map.map_admin_faxes
 var/list/alldepartments = list()
-
-var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -24,8 +21,8 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/New()
 	..()
 	allfaxes += src
-	if(!destination) destination = "[using_map.boss_name]"
-	if( !(("[department]" in alldepartments) || ("[department]" in admin_departments)) )
+	if(!destination) destination = "----"
+	if(!("[department]" in alldepartments))
 		alldepartments |= department
 
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
@@ -83,10 +80,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/Topic(href, href_list)
 	if(href_list["send"])
 		if(copyitem)
-			if (destination in admin_departments)
-				send_admin_fax(usr, destination)
-			else
-				sendfax(destination)
+			sendfax(destination)
 
 			if (sendcooldown)
 				spawn(sendcooldown) // cooldown time
@@ -119,7 +113,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 	if(href_list["dept"])
 		var/lastdestination = destination
-		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in (alldepartments + admin_departments)
+		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in alldepartments
 		if(!destination) destination = lastdestination
 
 	if(href_list["auth"])
@@ -174,50 +168,3 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	use_power(active_power_usage)
 	return 1
 
-/obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
-	if(stat & (BROKEN|NOPOWER))
-		return
-
-	use_power(200)
-
-	//recieved copies should not use toner since it's being used by admins only.
-	var/obj/item/rcvdcopy
-	if (istype(copyitem, /obj/item/weapon/paper))
-		rcvdcopy = copy(copyitem, 0)
-	else if (istype(copyitem, /obj/item/weapon/photo))
-		rcvdcopy = photocopy(copyitem, 0)
-	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
-		rcvdcopy = bundlecopy(copyitem, 0)
-	else
-		visible_message("[src] beeps, \"Error transmitting message.\"")
-		return
-
-	rcvdcopy.loc = null //hopefully this shouldn't cause trouble
-	adminfaxes += rcvdcopy
-
-	//message badmins that a fax has arrived
-	if (destination == using_map.boss_name)
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#006100")
-	else if (destination == "Colonial Marshal Service")
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#1F66A0")
-	else if (destination == "[using_map.boss_short] Supply")
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#5F4519")
-	else if (destination in using_map.map_admin_faxes)
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, destination, "#510B74")
-	else
-		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
-
-	sendcooldown = 1800
-	sleep(50)
-	visible_message("[src] beeps, \"Message transmitted successfully.\"")
-
-
-/obj/machinery/photocopier/faxmachine/proc/message_admins(var/mob/sender, var/faxname, var/obj/item/sent, var/reply_type, font_colour="#006100")
-	var/msg = "<span class='notice'><b><font color='[font_colour]'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
-	msg += "(<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
-	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
-
-	for(var/client/C in admins)
-		if(check_rights((R_ADMIN|R_MOD),0,C))
-			to_chat(C, msg)
-			sound_to(C, 'sound/machines/dotprinter.ogg')

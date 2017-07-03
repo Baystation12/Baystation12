@@ -1,0 +1,4 @@
+author: Ravensdale
+delete-after: True
+changes: 
+  - rscdel: "Removed the ability for players to fax admins."
