@@ -30,12 +30,14 @@
 
 /obj/effect/shuttle_landmark/escape_pod/transit/New()
 	landmark_tag = "escape_pod_[number]_internim"
+	..()
 
 /obj/effect/shuttle_landmark/escape_pod/out
 	name = "Escaped"
 
 /obj/effect/shuttle_landmark/escape_pod/out/New()
 	landmark_tag = "escape_pod_[number]_out"
+	..()
 
 //Pods
 
