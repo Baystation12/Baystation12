@@ -24,6 +24,11 @@ var/list/holder_mob_icon_cache = list()
 	..()
 	processing_objects.Add(src)
 
+/obj/item/weapon/holder/proc/destroy_all()
+	for(var/atom/movable/AM in src)
+		qdel(AM)
+	qdel(src)
+
 /obj/item/weapon/holder/Destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
@@ -117,6 +122,10 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/weapon/holder/borer
 	origin_tech = list(TECH_BIO = 6)
+
+//need own subtype to work with recipies
+/obj/item/weapon/holder/corgi
+	origin_tech = list(TECH_BIO = 4)
 
 /obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	for(var/mob/M in src.contents)

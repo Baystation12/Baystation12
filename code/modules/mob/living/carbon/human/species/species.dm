@@ -58,8 +58,8 @@
 	var/name_language = LANGUAGE_GALCOM       // The language to use when determining names for this species, or null to use the first name/last name generator
 
 	// Combat vars.
-	var/total_health = 100                    // Point at which the mob will enter crit.
-	var/list/unarmed_types = list(            // Possible unarmed attacks that the mob will use in combat,
+	var/total_health = 200                   // Point at which the mob will enter crit.
+	var/list/unarmed_types = list(           // Possible unarmed attacks that the mob will use in combat,
 		/datum/unarmed_attack,
 		/datum/unarmed_attack/bite
 		)
@@ -388,3 +388,10 @@
 
 /datum/species/proc/get_blood_name()
 	return "blood"
+
+/datum/species/proc/handle_death_check(var/mob/living/carbon/human/H)
+	return FALSE
+
+//Mostly for toasters
+/datum/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
+	return FALSE

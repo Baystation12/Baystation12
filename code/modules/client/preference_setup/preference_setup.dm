@@ -79,7 +79,7 @@
 
 /datum/category_collection/player_setup_collection/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		. = . && PS.update_setup(preferences, character)
+		. = PS.update_setup(preferences, character) || .
 
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
@@ -126,8 +126,6 @@
 		PI.sanitize_character()
 
 /datum/category_group/player_setup_category/proc/load_character(var/savefile/S)
-	// Load all data, then sanitize it.
-	// Need due to, for example, the 01_basic module relying on species having been loaded to sanitize correctly but that isn't loaded until module 03_body.
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_character(S)
 
@@ -150,7 +148,7 @@
 
 /datum/category_group/player_setup_category/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	for(var/datum/category_item/player_setup_item/PI in items)
-		. = . && PI.update_setup(preferences, character)
+		. = PI.update_setup(preferences, character) || .
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"

@@ -221,6 +221,7 @@
 			tint = TINT_NONE
 			to_chat(usr, "You push \the [src] up out of your face.")
 		update_clothing_icon()
+		update_vision()
 		usr.update_action_buttons()
 
 /obj/item/clothing/glasses/welding/superior

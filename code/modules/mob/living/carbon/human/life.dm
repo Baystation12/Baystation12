@@ -168,62 +168,11 @@
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
-
-	if (disabilities & EPILEPSY)
-		if ((prob(1) && paralysis < 1))
-			to_chat(src, "<span class='warning'>You have a seizure!</span>")
-			for(var/mob/O in viewers(src, null))
-				if(O == src)
-					continue
-				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
-			Paralyse(10)
-			if(jitteriness < 200)
-				make_jittery(200)
-	if (disabilities & COUGHING)
-		if ((prob(5) && paralysis <= 1))
-			drop_item()
-			spawn( 0 )
-				emote("cough")
-				return
-	if (disabilities & TOURETTES)
-		if ((prob(10) && paralysis <= 1))
-			Stun(10)
-			spawn( 0 )
-				switch(rand(1, 3))
-					if(1)
-						emote("twitch")
-					if(2 to 3)
-						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				if(jitteriness < 100)
-					make_jittery(100)
-				return
-	if (disabilities & NERVOUS)
-		if (prob(10))
-			stuttering = max(10, stuttering)
-
 	if(stat != DEAD)
-		var/rn = rand(0, 200)
-		if(getBrainLoss() >= 5)
-			if(0 <= rn && rn <= 3)
-				custom_pain("Your head feels numb and painful.",10)
-		if(getBrainLoss() >= 15)
-			if(4 <= rn && rn <= 6) if(eye_blurry <= 0)
-				to_chat(src, "<span class='warning'>It becomes hard to see for some reason.</span>")
-				eye_blurry = 10
-		if(getBrainLoss() >= 35)
-			if(7 <= rn && rn <= 9) if(get_active_hand())
-				to_chat(src, "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>")
-				drop_item()
-		if(getBrainLoss() >= 45)
-			if(10 <= rn && rn <= 12)
-				if(prob(50))
-					to_chat(src, "<span class='danger'>You suddenly black out!</span>")
-					Paralyse(10)
-				else if(!lying)
-					to_chat(src, "<span class='danger'>Your legs won't respond properly, you fall down!</span>")
-					Weaken(10)
-
-
+		if ((disabilities & COUGHING) && prob(5) && paralysis <= 1)
+			drop_item()
+			spawn(0)
+				emote("cough")
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(in_stasis)
@@ -349,20 +298,19 @@
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
-
 	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
-	if(!L && should_have_organ(BP_LUNGS))
+	if(nervous_system_failure() || (!L && should_have_organ(BP_LUNGS)))
 		failed_last_breath = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
 
-	if(failed_last_breath)
-		if(prob(20))
-			emote("gasp")
-		if(health > config.health_threshold_crit)
-			adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-		else
-			adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
+	if(failed_last_breath && !isSynthetic() )
+		if(prob(15) && !nervous_system_failure())
+			if(!is_asystole())
+				emote("gasp")
+			else
+				emote(pick("shiver","twitch"))
+		adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 
 		oxygen_alert = max(oxygen_alert, 1)
 		return 0
@@ -599,7 +547,7 @@
 					light_amount =  5
 				light_amount = T.get_lumcount() * 10
 			nutrition += light_amount
-			traumatic_shock -= light_amount
+			shock_stage -= light_amount
 			nutrition = Clamp(nutrition, 0, 550)
 
 	if(species.light_dam)
@@ -678,6 +626,14 @@
 
 	return //TODO: DEFERRED
 
+// Check if we should die.
+/mob/living/carbon/human/proc/handle_death_check()
+	if(should_have_organ(BP_BRAIN))
+		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+		if(!brain || (brain.status & ORGAN_DEAD))
+			return TRUE
+	return species.handle_death_check(src)
+
 //DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
@@ -694,15 +650,11 @@
 	else				//ALIVE. LIGHTS ARE ON
 		updatehealth()	//TODO
 
-		if(health <= config.health_threshold_dead || (should_have_organ(BP_BRAIN) && !has_brain()))
+		if(handle_death_check())
 			death()
 			blinded = 1
 			silent = 0
 			return 1
-
-		//UNCONSCIOUS. NO-ONE IS HOME
-		if((getOxyLoss() > (species.total_health/2)) || (health <= config.health_threshold_crit))
-			Paralyse(3)
 
 		if(hallucination)
 			if(hallucination >= 20 && !(species.flags & (NO_POISON|IS_PLANT)) )
@@ -721,7 +673,7 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(getHalLoss() >= species.total_health)
+		if(getHalLoss() >= (species.total_health - 100))
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
@@ -739,9 +691,13 @@
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
-				if( prob(2) && health && !hal_crit )
-					spawn(0)
+				if(prob(2) && health && !hal_crit && !failed_last_breath && !isSynthetic())
+					if(!paralysis)
 						emote("snore")
+					else
+						emote("groan")
+			if(prob(2) && is_asystole() && isSynthetic())
+				visible_message(src, "<b>[src]</b> [pick("emits low pitched whirr","beeps urgently")]")
 		//CONSCIOUS
 		else
 			set_stat(CONSCIOUS)
@@ -788,10 +744,10 @@
 		return
 
 	if(stat != DEAD)
-		if(stat == UNCONSCIOUS && health <= 0)
+		if(stat == UNCONSCIOUS && health < maxHealth/2)
 			//Critical damage passage overlay
 			var/severity = 0
-			switch(health)
+			switch(health - maxHealth/2)
 				if(-20 to -10)			severity = 1
 				if(-30 to -20)			severity = 2
 				if(-40 to -30)			severity = 3
@@ -806,9 +762,9 @@
 		else
 			clear_fullscreen("crit")
 			//Oxygen damage overlay
-			if(oxyloss)
+			if(getOxyLoss())
 				var/severity = 0
-				switch(oxyloss)
+				switch(getOxyLoss())
 					if(10 to 20)		severity = 1
 					if(20 to 25)		severity = 2
 					if(25 to 30)		severity = 3
@@ -850,8 +806,8 @@
 
 						var/no_damage = 1
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
-						if(!can_feel_pain())
-							trauma_val = max(traumatic_shock,getHalLoss())/species.total_health
+						if(can_feel_pain())
+							trauma_val = max(shock_stage,getHalLoss())/(species.total_health-100)
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()
 						for(var/obj/item/organ/external/E in organs)
@@ -864,7 +820,9 @@
 							health_images += image('icons/mob/screen1_health.dmi',"burning")
 
 						// Show a general pain/crit indicator if needed.
-						if(trauma_val)
+						if(is_asystole())
+							health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
+						else if(trauma_val)
 							if(can_feel_pain())
 								if(trauma_val > 0.7)
 									health_images += image('icons/mob/screen1_health.dmi',"softcrit")
@@ -882,6 +840,14 @@
 				if(250 to 350)					nutrition_icon.icon_state = "nutrition2"
 				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
 				else							nutrition_icon.icon_state = "nutrition4"
+
+		if(isSynthetic())
+			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
+			if (istype(C))
+				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
+				cells.icon_state = "charge[chargeNum]"
+			else
+				cells.icon_state = "charge-empty"
 
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
@@ -957,6 +923,10 @@
 		var/turf/T = loc
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
+	
+	var/area/A = get_area(src)
+	if(client && world.time >= client.played + 600)
+		A.play_ambience(src)
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
@@ -980,20 +950,17 @@
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
 
-/mob/living/carbon/human/handle_shock()
+/mob/living/carbon/human/proc/handle_shock()
 	..()
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(!can_feel_pain())
 		shock_stage = 0
 		return
 
-	if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
+	if(is_asystole())
 		shock_stage = max(shock_stage, 61)
-
-	if(traumatic_shock >= 80)
+	if(get_shock() >= max(50, shock_stage))
 		shock_stage += 1
-	else if(health < config.health_threshold_softcrit)
-		shock_stage = max(shock_stage, 61)
 	else
 		shock_stage = min(shock_stage, 160)
 		shock_stage = max(shock_stage-1, 0)
@@ -1005,33 +972,30 @@
 		// Please be very careful when calling custom_pain() from within code that relies on pain/trauma values. There's the
 		// possibility of a feedback loop from custom_pain() being called with a positive power, incrementing pain on a limb,
 		// which triggers this proc, which calls custom_pain(), etc. Make sure you call it with 0 power in these cases!
-		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 0)
+		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 10,nohalloss = 0)
 
 	if(shock_stage >= 30)
 		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping \his eyes open.")
-		eye_blurry = max(2, eye_blurry)
-		stuttering = max(stuttering, 5)
+		if(prob(30))
+			eye_blurry = max(2, eye_blurry)
+			stuttering = max(stuttering, 5)
 
 	if(shock_stage == 40)
-		var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
-		to_chat(src, message)
+		custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", 0)
 	if (shock_stage >= 60)
 		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
-			var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
-			to_chat(src, message)
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = 0)
 			Weaken(20)
 
 	if(shock_stage >= 80)
 		if (prob(5))
-			var/message = "<span class='danger'>[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!</span>"
-			to_chat(src, message)
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = 0)
 			Weaken(20)
 
 	if(shock_stage >= 120)
 		if (prob(2))
-			var/message = "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!</span>"
-			to_chat(src, message)
+			custom_pain("[pick("You black out", "You feel like you could die any moment now", "You're about to lose consciousness")]!", shock_stage, nohalloss = 0)
 			Paralyse(5)
 
 	if(shock_stage == 150)
@@ -1052,9 +1016,11 @@
 	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
 		if(stat == DEAD)
-			holder.icon_state = "-100" 	// X_X
+			holder.icon_state = "0" 	// X_X
+		else if(is_asystole())
+			holder.icon_state = "flatline"
 		else
-			holder.icon_state = RoundHealth((health-config.health_threshold_crit)/(maxHealth-config.health_threshold_crit)*100)
+			holder.icon_state = "[pulse()]"
 		hud_list[HEALTH_HUD] = holder
 
 	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
@@ -1198,6 +1164,7 @@
 /mob/living/carbon/human/rejuvenate()
 	restore_blood()
 	full_prosthetic = null
+	shock_stage = 0
 	..()
 
 /mob/living/carbon/human/reset_view(atom/A)
