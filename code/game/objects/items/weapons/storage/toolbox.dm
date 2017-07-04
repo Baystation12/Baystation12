@@ -16,9 +16,6 @@
 	attack_verb = list("robusted")
 /obj/item/weapon/storage/toolbox/New()
 	..()
-	if(prob(2))
-		qdel(src)
-		new /obj/item/weapon/storage/toolbox/gold(get_turf(src))
 	src.overlays += image('icons/obj/storage.dmi', "[pick("single", "double", "triple")]_latch")
 
 /obj/item/weapon/storage/toolbox/emergency

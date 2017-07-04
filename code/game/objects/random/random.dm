@@ -102,7 +102,8 @@
 		return pick(prob(30);/obj/item/weapon/storage/toolbox/mechanical,\
 					prob(20);/obj/item/weapon/storage/toolbox/electrical,\
 					prob(20);/obj/item/weapon/storage/toolbox/emergency,\
-					prob(1);/obj/item/weapon/storage/toolbox/syndicate)
+					prob(1);/obj/item/weapon/storage/toolbox/syndicate,\
+					prob(2);/obj/item/weapon/storage/toolbox/gold)
 
 
 /obj/random/tech_supply
