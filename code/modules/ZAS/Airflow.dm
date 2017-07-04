@@ -70,6 +70,7 @@ obj/check_airflow_movable(n)
 /atom/movable/var/tmp/airflow_speed = 0
 /atom/movable/var/tmp/airflow_time = 0
 /atom/movable/var/tmp/last_airflow = 0
+/atom/movable/var/tmp/airborne_acceleration = 0
 
 /atom/movable/proc/AirflowCanMove(n)
 	return 1
@@ -136,9 +137,11 @@ obj/check_airflow_movable(n)
 		var/mob/M = src
 		if(istype(M) && M.client)
 			M.setMoveCooldown(vsc.airflow_mob_slowdown)
+		airborne_acceleration++
 	airflow_dest = null
 	airflow_speed = 0
 	airflow_time = 0
+	airborne_acceleration = 0
 	if(od)
 		set_density(0)
 
@@ -188,23 +191,31 @@ obj/check_airflow_movable(n)
 		step_towards(src, src.airflow_dest)
 		if(ismob(src) && src:client)
 			src:client:move_delay = world.time + vsc.airflow_mob_slowdown
+		airborne_acceleration++
 	airflow_dest = null
 	airflow_speed = 0
 	airflow_time = 0
+	airborne_acceleration = 0
 	if(od)
 		set_density(0)
 
 /atom/movable/Bump(atom/A)
 	if(airflow_speed > 0 && airflow_dest)
-		airflow_hit(A)
+		if(airborne_acceleration > 1)
+			airflow_hit(A)
+		else if(istype(src, /mob/living/carbon/human))
+			to_chat(src, "<span class='notice'>You are pinned against [A] by airflow!</span>")
+			airborne_acceleration = 0
 	else
 		airflow_speed = 0
 		airflow_time = 0
+		airborne_acceleration = 0
 		. = ..()
 
 atom/movable/proc/airflow_hit(atom/A)
 	airflow_speed = 0
 	airflow_dest = null
+	airborne_acceleration = 0
 
 mob/airflow_hit(atom/A)
 	for(var/mob/M in hearers(src))
@@ -231,7 +242,7 @@ mob/living/carbon/human/airflow_hit(atom/A)
 	if (prob(33))
 		loc:add_blood(src)
 		bloody_body(src)
-	var/b_loss = airflow_speed * vsc.airflow_damage
+	var/b_loss = min(airflow_speed, (airborne_acceleration*2)) * vsc.airflow_damage
 
 	var/blocked = run_armor_check(BP_HEAD,"melee")
 	apply_damage(b_loss/3, BRUTE, BP_HEAD, blocked, 0, "Airflow")
