@@ -4,6 +4,9 @@
 	icon_state = "liver"
 	organ_tag = BP_LIVER
 	parent_organ = BP_GROIN
+	min_bruised_damage = 25
+	min_broken_damage = 45
+	relative_size = 60
 
 /obj/item/organ/internal/liver/robotize()
 	. = ..()
@@ -56,6 +59,10 @@
 				owner.adjustToxLoss(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY)
 			else
 				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY, prob(1)) // Chance to warn them
+
+	// Heal a bit if needed. This allows recovery from low amounts of toxloss.
+	if(damage < min_broken_damage)
+		damage = max(0, damage - 0.1 * PROCESS_ACCURACY)
 
 	//Blood regeneration if there is some space
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")

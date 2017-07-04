@@ -57,6 +57,9 @@
 	if(!autoheal_cutoff)
 		autoheal_cutoff = initial(autoheal_cutoff)
 
+/datum/wound/cut/is_surgical()
+	return autoheal_cutoff == 0
+
 /datum/wound/cut/proc/close()
 	current_stage = max_bleeding_stage + 1
 	desc = desc_list[current_stage]

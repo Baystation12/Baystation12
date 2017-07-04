@@ -433,6 +433,10 @@
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		if(ishuman(victim))
+			var/mob/living/carbon/human/H = victim
+			if(H.is_asystole())
+				H.adjustBrainLoss(2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		cult.add_cultiness(CULTINESS_PER_SACRIFICE)

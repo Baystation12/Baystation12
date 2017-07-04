@@ -90,53 +90,6 @@ var/list/limb_icon_cache = list()
 	dir = EAST
 	icon = mob_icon
 
-/obj/item/organ/external/head/update_icon()
-
-	..()
-
-	if(owner)
-		if(eye_icon)
-			var/icon/eyes_icon = new/icon(species.use_eye_icon ? species.use_eye_icon : 'icons/mob/human_face.dmi', eye_icon)
-			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
-			if(eyes)
-				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
-			else
-				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
-			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-			overlays |= eyes_icon
-
-		if(owner.lip_style && robotic < ORGAN_ROBOT && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
-			overlays |= lip_icon
-			mob_icon.Blend(lip_icon, ICON_OVERLAY)
-
-		overlays |= get_hair_icon()
-
-	return mob_icon
-
-/obj/item/organ/external/head/proc/get_hair_icon()
-	var/image/res = image('icons/mob/human_face.dmi',"bald_s")
-	if(owner.f_style)
-		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype(owner) in facial_hair_style.species_allowed))
-			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-			if(facial_hair_style.do_colouration)
-				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
-			res.overlays |= facial_s
-
-	if(owner.h_style)
-		var/style = owner.h_style
-		var/datum/sprite_accessory/hair/hair_style = hair_styles_list[style]
-		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
-			if(!hair_style.veryshort)
-				hair_style = hair_styles_list["Short Hair"]
-		if(hair_style && (species.get_bodytype(owner) in hair_style.species_allowed))
-			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-			if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
-				hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
-			res.overlays |= hair_s
-	return res
-
 
 /obj/item/organ/external/proc/get_icon()
 	update_icon()
@@ -160,9 +113,6 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 		if(!icon_cache_key || !limb_icon_cache[cache_key])
 			limb_icon_cache[cache_key] = icon(get_icon(), null, SOUTH)
 		var/image/temp = image(limb_icon_cache[cache_key])
-		temp.pixel_x = owner.default_pixel_x
-		temp.pixel_y = owner.default_pixel_y
-
 		if(species)
 			// Calculate the required colour matrix.
 			var/r = 0.30 * species.health_hud_intensity

@@ -32,7 +32,7 @@
 			var/damage = rand(0, 9)
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("<span class='danger'>[H] has attempted to punch \the [src]!</span>")
+				visible_message("<span class='danger'>\The [H] has attempted to punch \the [src]!</span>")
 				return 0
 			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
@@ -56,18 +56,18 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
-			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
+			if(istype(H) && (is_asystole() || (status_flags & FAKEDEATH)))
 				if(!H.check_has_mouth())
-					to_chat(H, "<span class='danger'>You don't have a mouth, you cannot perform CPR!</span>")
+					to_chat(H, "<span class='warning'>You don't have a mouth, you cannot perform CPR!</span>")
 					return
 				if(!check_has_mouth())
-					to_chat(H, "<span class='danger'>They don't have a mouth, you cannot perform CPR!</span>")
+					to_chat(H, "<span class='warning'>They don't have a mouth, you cannot perform CPR!</span>")
 					return
 				if((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
-					to_chat(H, "<span class='notice'>Remove your mask!</span>")
+					to_chat(H, "<span class='warning'>You need to remove your mouth covering!</span>")
 					return 0
 				if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
-					to_chat(H, "<span class='notice'>Remove [src]'s mask!</span>")
+					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering!</span>")
 					return 0
 
 				if (!cpr_time)
@@ -77,16 +77,23 @@
 				spawn(30)
 					cpr_time = 1
 
-				H.visible_message("<span class='danger'>\The [H] is trying perform CPR on \the [src]!</span>")
+				H.visible_message("<span class='notice'>\The [H] is trying to perform CPR on \the [src].</span>")
 
 				if(!do_after(H, 30, src))
 					return
 
-				adjustOxyLoss(-(min(getOxyLoss(), 5)))
-				updatehealth()
-				H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
-				to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
-				to_chat(H, "<span class='warning'>Repeat at least every 7 seconds.</span>")
+				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
+				if(prob(3))
+					var/obj/item/organ/external/chest = get_organ(BP_CHEST)
+					if(chest)
+						chest.fracture()
+				if(stat != DEAD)
+					adjustOxyLoss(-(min(getOxyLoss(), 5)))
+					updatehealth()
+					to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
+					if(prob(15))
+						resuscitate()
+
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
 			return 1

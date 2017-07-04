@@ -220,7 +220,7 @@
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
 	slowdown = -2
-	total_health = 150
+	total_health = 300
 	base_color = "#001a33"
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
@@ -250,8 +250,8 @@
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
 	slowdown = 0
-	total_health = 125
 	base_color = "#00284d"
+	total_health = 250
 	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
@@ -277,7 +277,7 @@
 /datum/species/xenos/queen
 
 	name = "Xenophage Queen"
-	total_health = 250
+	total_health = 500
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"

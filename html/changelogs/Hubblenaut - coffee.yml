@@ -1,0 +1,8 @@
+author: Hubblenaut
+
+delete-after: True
+
+changes: 
+  - rscadd: "Coffee cups are now available across the ship."
+  - tweak: "Coffee cups now have reagent fill states."
+  - bugfix: "Fixes glass of cup of tea."

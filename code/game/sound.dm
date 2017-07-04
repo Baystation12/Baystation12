@@ -47,6 +47,9 @@ var/list/hiss_sound = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','soun
 var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
 var/list/fracture_sound = list('sound/effects/bonebreak1.ogg','sound/effects/bonebreak2.ogg','sound/effects/bonebreak3.ogg','sound/effects/bonebreak4.ogg')
 var/list/lighter_sound = list('sound/items/lighter1.ogg','sound/items/lighter2.ogg','sound/items/lighter3.ogg')
+var/list/keyboard_sound = list('sound/machines/keypress1.ogg','sound/machines/keypress2.ogg','sound/machines/keypress3.ogg','sound/machines/keypress4.ogg')
+var/list/switch_sound = list('sound/machines/switch1.ogg','sound/machines/switch2.ogg','sound/machines/switch3.ogg','sound/machines/switch4.ogg')
+var/list/button_sound = list('sound/machines/button1.ogg','sound/machines/button2.ogg','sound/machines/button3.ogg','sound/machines/button4.ogg')
 
 /proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency)
 
@@ -175,5 +178,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 			if ("pageturn") soundin = pick(page_sound)
 			if ("fracture") soundin = pick(fracture_sound)
 			if ("light_bic") soundin = pick(lighter_sound)
+			if ("keyboard") soundin = pick(keyboard_sound)
+			if ("switch") soundin = pick(switch_sound)
+			if ("button") soundin = pick(button_sound)
 			//if ("gunshot") soundin = pick(gun_sound)
 	return soundin

@@ -3215,6 +3215,17 @@
 		..()
 		reagents.add_reagent("protein", 6)
 
+/obj/item/weapon/reagent_containers/food/snacks/classichotdog
+	name = "classic hotdog"
+	desc = "Going literal."
+	icon_state = "hotcorgi"
+	bitesize = 6
+	center_of_mass = "x=16;y=17"
+
+	New()
+		..()
+		reagents.add_reagent("protein", 16)
+
 /obj/item/weapon/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
 	desc = "Bland but filling."

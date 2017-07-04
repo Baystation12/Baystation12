@@ -1,3 +1,16 @@
+/datum/preferences
+	var/med_record = ""
+	var/sec_record = ""
+	var/gen_record = ""
+	var/nanotrasen_relation = "Neutral"
+	var/memory = ""
+
+	//Some faction information.
+	var/home_system = "Unset"           //System of birth.
+	var/citizenship = "None"            //Current home system.
+	var/faction = "None"                //Antag faction/general associated faction.
+	var/religion = "None"               //Religious association.
+
 /datum/category_item/player_setup_item/general/background
 	name = "Background"
 	sort_order = 5

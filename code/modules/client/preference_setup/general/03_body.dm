@@ -1,6 +1,30 @@
 var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 
 /datum/preferences
+	var/species = SPECIES_HUMAN         //Species datum to use.
+	var/b_type = "A+"					//blood type (not-chooseable)
+	var/h_style = "Bald"				//Hair type
+	var/r_hair = 0						//Hair color
+	var/g_hair = 0						//Hair color
+	var/b_hair = 0						//Hair color
+	var/f_style = "Shaved"				//Face hair type
+	var/r_facial = 0					//Face hair color
+	var/g_facial = 0					//Face hair color
+	var/b_facial = 0					//Face hair color
+	var/s_tone = 0						//Skin tone
+	var/r_skin = 0						//Skin color
+	var/g_skin = 0						//Skin color
+	var/b_skin = 0						//Skin color
+	var/r_eyes = 0						//Eye color
+	var/g_eyes = 0						//Eye color
+	var/b_eyes = 0						//Eye color
+
+	// maps each organ to either null(intact), "cyborg" or "amputated"
+	// will probably not be able to do this for head and torso ;)
+	var/list/organ_data
+	var/list/rlimb_data
+	var/disabilities = 0
+
 	var/has_cortical_stack = TRUE
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 
@@ -77,8 +101,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.has_cortical_stack = sanitize_bool(pref.has_cortical_stack, initial(pref.has_cortical_stack))
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
-	if(!pref.organ_data) pref.organ_data = list()
-	if(!pref.rlimb_data) pref.rlimb_data = list()
+	if(!istype(pref.organ_data)) pref.organ_data = list()
+	if(!istype(pref.rlimb_data)) pref.rlimb_data = list()
 
 	if(pref.organ_data[BP_CHEST] != "cyborg")
 		pref.organ_data[BP_HEAD] = null

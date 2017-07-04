@@ -98,15 +98,12 @@
 	if(wire_rate && occupant.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
 		occupant.adjustFireLoss(-wire_rate)
 
+	var/obj/item/weapon/cell/target
 	if(isrobot(occupant))
 		var/mob/living/silicon/robot/R = occupant
-
+		target = R.cell
 		if(R.module)
 			R.module.respawn_consumable(R, charging_power * CELLRATE / 250) //consumables are magical, apparently
-		if(R.cell && !R.cell.fully_charged())
-			var/diff = min(R.cell.maxcharge - R.cell.charge, charging_power * CELLRATE) // Capped by charging_power / tick
-			var/charge_used = cell.use(diff)
-			R.cell.give(charge_used)
 		// If we are capable of repairing damage, reboot destroyed components and allow them to be repaired for very large power spike.
 		var/list/damaged = R.get_damaged_components(1,1,1)
 		if(damaged.len && wire_rate && weld_rate)
@@ -116,11 +113,14 @@
 
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
+		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
+		if(potato)
+			target = potato.cell
 
-		// Recharge mechanical human mobs. Assuming 1 nutrition = 1 KJ of energy.
-		if(H.nutrition < 450)
-			H.nutrition += (cell.use(10 KILOWATTS * CELLRATE) / CELLRATE) / (1 KILOWATTS)
-
+	if(target && !target.fully_charged())
+		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
+		var/charge_used = cell.use(diff)
+		target.give(charge_used)
 
 
 /obj/machinery/recharge_station/examine(mob/user)
