@@ -69,9 +69,13 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		cult.add_ghost_magic(src)
 
 	ghost_multitool = new(src)
+
+	ghost_mob_list_ += src
+
 	..()
 
 /mob/observer/ghost/Destroy()
+	ghost_mob_list_ -= src
 	stop_following()
 	qdel(ghost_multitool)
 	ghost_multitool = null
