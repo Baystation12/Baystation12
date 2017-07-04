@@ -19,7 +19,6 @@
 	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
 
 	var/prone_icon                            // If set, draws this from icobase when mob is prone.
-	var/use_eye_icon                          // Override using the standard human_face.dmi icon.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
 	var/blood_color = "#A10808"               // Red.
 	var/flesh_color = "#FFC896"               // Pink.
