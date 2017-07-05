@@ -631,6 +631,8 @@
 			return global.ghost_darkness_images;
 		if("ghost_master")
 			return global.ghost_master;
+		if("ghost_mob_list_")
+			return global.ghost_mob_list_;
 		if("ghost_sightless_images")
 			return global.ghost_sightless_images;
 		if("ghost_traps")
@@ -2112,6 +2114,8 @@
 			global.ghost_darkness_images=newval;
 		if("ghost_master")
 			global.ghost_master=newval;
+		if("ghost_mob_list_")
+			global.ghost_mob_list_=newval;
 		if("ghost_sightless_images")
 			global.ghost_sightless_images=newval;
 		if("ghost_traps")
@@ -3277,6 +3281,7 @@
 	"gender_datums",
 	"ghost_darkness_images",
 	"ghost_master",
+	"ghost_mob_list_",
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_announcer",

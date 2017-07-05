@@ -464,7 +464,7 @@
 	set name = "Debug Mob Lists"
 	set desc = "For when you just gotta know"
 
-	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients"))
+	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Ghost Mobs", "Clients"))
 		if("Players")
 			to_chat(usr, jointext(player_list,","))
 		if("Admins")
@@ -475,6 +475,8 @@
 			to_chat(usr, jointext(living_mob_list_,","))
 		if("Dead Mobs")
 			to_chat(usr, jointext(dead_mob_list_,","))
+		if("Ghost Mobs")
+			to_chat(usr, jointext(ghost_mob_list_,","))
 		if("Clients")
 			to_chat(usr, jointext(clients,","))
 

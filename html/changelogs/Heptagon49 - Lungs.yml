@@ -1,0 +1,5 @@
+author: Heptagon49
+delete-after: True
+changes:
+  - tweak: "Replaced the synthetic lung sprites with something more realistic/futuristic."
+  - rscadd: "Added artificial and assisted lungs to the loadout menu."

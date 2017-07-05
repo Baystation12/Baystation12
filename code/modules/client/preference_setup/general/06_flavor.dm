@@ -1,3 +1,7 @@
+/datum/preferences
+	var/list/flavor_texts        = list()
+	var/list/flavour_texts_robot = list()
+
 /datum/category_item/player_setup_item/general/flavor
 	name = "Flavor"
 	sort_order = 6
@@ -34,7 +38,8 @@
 		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
 
 /datum/category_item/player_setup_item/general/flavor/sanitize_character()
-	return
+	if(!istype(pref.flavor_texts))        pref.flavor_texts = list()
+	if(!istype(pref.flavour_texts_robot)) pref.flavour_texts_robot = list()
 
 /datum/category_item/player_setup_item/general/flavor/content(var/mob/user)
 	. += "<b>Flavor:</b><br>"
