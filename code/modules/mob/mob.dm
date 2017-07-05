@@ -12,6 +12,7 @@
 			if(!istype(screenobj) || !screenobj.globalscreen)
 				qdel(screenobj)
 		client.screen = list()
+		client.cleanup_parallax_references()
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()

@@ -5,7 +5,6 @@ var/datum/controller/subsystem/parallax/SSparallax
 /datum/controller/subsystem/parallax
 	name = "Space Parallax"
 	priority = 16
-	wait = 10
 	flags = SS_NO_FIRE
 
 	var/list/parallax_icon[(GRID_WIDTH**2)*3]
