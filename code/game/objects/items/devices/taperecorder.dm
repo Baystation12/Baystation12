@@ -18,14 +18,12 @@
 	throwforce = 2
 	throw_speed = 4
 	throw_range = 20
-	var/base_state
-	var/prev_state
+	var/base_state = "taperecorder"
 
 /obj/item/device/taperecorder/New()
 	..()
 	base_state = icon_state
 	icon_state = "[base_state]_empty"
-	prev_state = icon_state
 	if(ispath(mytape))
 		mytape = new mytape(src)
 		update_icon()
@@ -347,8 +345,6 @@
 
 
 /obj/item/device/taperecorder/update_icon()
-	if(prev_state != icon_state)
-		base_state = icon_state
 	if(!mytape)
 		icon_state = "[base_state]_empty"
 	else if(recording)
@@ -357,7 +353,7 @@
 		icon_state = "[base_state]_playing"
 	else
 		icon_state = "[base_state]_idle"
-	prev_state = icon_state
+
 
 
 /obj/item/device/tape
