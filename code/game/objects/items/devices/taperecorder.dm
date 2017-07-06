@@ -1,7 +1,7 @@
 /obj/item/device/taperecorder
 	name = "universal recorder"
 	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
-	icon_state = "taperecorder"
+	icon_state = "taperecorder_empty"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
 
@@ -22,8 +22,7 @@
 
 /obj/item/device/taperecorder/New()
 	..()
-	base_state = icon_state
-	icon_state = "[base_state]_empty"
+	base_state = copytext(icon_state, 1, findtext(icon_state, "_",1,0))
 	if(ispath(mytape))
 		mytape = new mytape(src)
 		update_icon()
