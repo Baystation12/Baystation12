@@ -1,7 +1,7 @@
 /obj/item/device/taperecorder
 	name = "universal recorder"
 	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
-	icon_state = "taperecorder_empty"
+	icon_state = "taperecorder"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
 
@@ -18,13 +18,17 @@
 	throwforce = 2
 	throw_speed = 4
 	throw_range = 20
+	var/base_state
 
 /obj/item/device/taperecorder/New()
 	..()
+	base_state = icon_state
+	icon_state = "[base_state]_empty"
 	if(ispath(mytape))
 		mytape = new mytape(src)
 		update_icon()
 	listening_objects += src
+
 
 /obj/item/device/taperecorder/empty
 	mytape = null
@@ -342,13 +346,13 @@
 
 /obj/item/device/taperecorder/update_icon()
 	if(!mytape)
-		icon_state = "taperecorder_empty"
+		icon_state = "[base_state]_empty"
 	else if(recording)
-		icon_state = "taperecorder_recording"
+		icon_state = "[base_state]_recording"
 	else if(playing)
-		icon_state = "taperecorder_playing"
+		icon_state = "[base_state]_playing"
 	else
-		icon_state = "taperecorder_idle"
+		icon_state = "[base_state]_idle"
 
 
 
