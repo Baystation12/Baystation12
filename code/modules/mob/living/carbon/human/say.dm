@@ -5,7 +5,7 @@
 			alt_name = "(as [get_id_name("Unknown")])"
 		else
 			name = get_id_name("Unknown")
-		
+
 	message = sanitize(message)
 	..(message, alt_name = alt_name, speaking = language)
 
@@ -199,7 +199,7 @@
 	var/needs_assist = 0
 	var/can_speak_assist = 0
 
-	if(speaking in src.assisted_languages)
+	if(species && speaking.name in species.assisted_langs)
 		needs_assist = 1
 		for(var/obj/item/organ/internal/I in src.internal_organs)
 			if((speaking in I.assists_languages) && (I.is_usable()))

@@ -69,8 +69,6 @@
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
-	var/assisted_languages = list()		// For species who can't physically speak a language, but need something to help them do so.
-
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
 	var/list/bad_external_organs = list()// organs we check until they are good.
 

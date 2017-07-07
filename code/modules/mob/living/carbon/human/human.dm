@@ -1114,9 +1114,9 @@
 		add_language(species.language)
 		species_language = all_languages[species.language]
 
-	for(var/L in species.assisted_langs)
-		assisted_languages += all_languages[L]
+	for(var/L in species.additional_langs)
 		add_language(L)
+
 	if(species.default_language)
 		add_language(species.default_language)
 
@@ -1416,7 +1416,7 @@
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
-	var/obj/item/organ/internal/heart/H = internal_organs_by_name["heart"]
+	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
 	if(H.open && !method)
 		return "muddled and unclear; you can't seem to find a vein"
 

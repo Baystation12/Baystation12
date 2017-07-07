@@ -213,10 +213,8 @@
 		G = new given_grab_type(attacker, victim)
 
 	if(G.can_grab())
-		message_admins("[G.assailant] is grabbing and passed the can grab [G.affecting]")
 		G.init()
 		return 1
 	else
-		message_admins("[G.assailant] is grabbing and failed the can grab [G.affecting]")
 		qdel(G)
 		return 0

@@ -246,13 +246,14 @@
 	return failed_breath
 
 /obj/item/organ/internal/lungs/proc/handle_failed_breath()
-	if(prob(20) && active_breathing)
-		owner.emote("gasp")
+	if(prob(15) && !owner.nervous_system_failure())
+		if(!owner.is_asystole())
+			if(active_breathing)
+				owner.emote("gasp")
+		else
+			owner.emote(pick("shiver","twitch"))
 
-	if(owner.health > -50)
-		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-	else
-		owner.adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
+	owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 1)
 

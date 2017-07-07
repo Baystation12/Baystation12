@@ -6,7 +6,8 @@
 	icon_state = "voicebox"
 	parent_organ = BP_CHEST
 	organ_tag = BP_VOICE
-	will_assist_languages = list(LANGUAGE_GALCOM)
+	will_assist_languages = list(LANGUAGE_GALCOM, LANGUAGE_TRADEBAND, LANGUAGE_GUTTER, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
+
 
 /obj/item/organ/internal/voicebox/nabber/New()
 	for(var/L in will_assist_languages)
@@ -97,10 +98,7 @@
 /obj/item/organ/internal/lungs/nabber/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	if(H.health > -50)
-		H.adjustOxyLoss(2 * H.breath_fail_ratio)
-	else
-		H.adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS * H.breath_fail_ratio)
+	H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * H.breath_fail_ratio)
 
 	if(H.breath_fail_ratio > 0.175)
 		H.oxygen_alert = max(H.oxygen_alert, 1)

@@ -1,4 +1,3 @@
-// #define UNIT_TEST 1
 #define WORLD_ICON_SIZE 32
 
 /var/server_name = "Baystation 12"

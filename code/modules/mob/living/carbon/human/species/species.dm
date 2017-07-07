@@ -57,6 +57,7 @@
 	var/list/speech_chance                    // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0           // How many secondary languages are available to select at character creation
 	var/name_language = LANGUAGE_GALCOM       // The language to use when determining names for this species, or null to use the first name/last name generator
+	var/additional_langs                      // Any other languages the species always gets.
 
 	// Combat vars.
 	var/total_health = 200                   // Point at which the mob will enter crit.

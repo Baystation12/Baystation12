@@ -204,6 +204,13 @@
 /datum/language/nabber
 	name = LANGUAGE_NABBER
 	desc = "A strange language that can be understood both by the sounds made and by the movement needed to create those sounds."
+	signlang_verb = list("chitters", "grinds its mouthparts", "chitters and grinds its mouthparts")
 	key = "n"
-	flags = RESTRICTED
-	colour = "soghun"
+	flags = RESTRICTED | SIGNLANG | NO_STUTTER | NONVERBAL
+	colour = ".nabber_lang"
+
+/datum/language/nabber/get_random_name(var/gender)
+	if(gender == FEMALE)
+		return capitalize(pick(first_names_female))
+	else
+		return capitalize(pick(first_names_male))

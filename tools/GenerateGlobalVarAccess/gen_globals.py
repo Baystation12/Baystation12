@@ -57,11 +57,11 @@ def main():
 
 
 	variables = ParseTree(tree)
-	print(variables)
+	# print(variables)
 	# Can't be bothered to fix the parser 100% so if something hates you just add it to this list to exclude it.
 	ignores = []
 	variables = [x for x in variables if re.match("^[a-z_$][a-z_$0-9]*$", x, re.IGNORECASE) != None and x not in ignores]
-	print(variables)
+	# print(variables)
 
 	variables.sort()
 	code = GenCode(variables)
