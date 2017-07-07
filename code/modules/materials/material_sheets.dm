@@ -99,9 +99,12 @@
 	name = "marble brick"
 	icon_state = "sheet-marble"
 	default_type = "marble"
-	
+
 /obj/item/stack/material/marble/ten
 	amount = 10
+
+/obj/item/stack/material/marble/fifty
+	amount = 50
 
 /obj/item/stack/material/diamond
 	name = "diamond"
@@ -174,6 +177,9 @@
 	default_type = "osmium-carbide plasteel"
 	apply_colour = 1
 
+/obj/item/stack/material/ocp/ten
+	amount = 10
+
 /obj/item/stack/material/ocp/fifty
 	amount = 50
 
@@ -203,6 +209,9 @@
 
 /obj/item/stack/material/plasteel/fifty
 	amount = 50
+
+/obj/item/stack/material/plasteel/ten
+	amount = 10
 
 /obj/item/stack/material/wood
 	name = "wooden plank"

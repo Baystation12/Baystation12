@@ -7,6 +7,8 @@
 	cost = 10
 	containername = "\improper Replacement lights"
 
+
+// Material sheets (50 - full stack)
 /decl/hierarchy/supply_pack/engineering/metal50
 	name = "50 metal sheets"
 	contains = list(/obj/item/stack/material/steel/fifty)
@@ -30,13 +32,46 @@
 	contains = list(/obj/item/stack/material/plastic/fifty)
 	cost = 10
 	containername = "\improper Plastic sheets crate"
-	
+
+/decl/hierarchy/supply_pack/engineering/marble50
+	name = "50 slabs of marble"
+	contains = list(/obj/item/stack/material/marble/fifty)
+	cost = 60
+	containername = "\improper Marble slabs crate"
+
+/decl/hierarchy/supply_pack/engineering/plasteel50
+	name = "50 plasteel sheets"
+	contains = list(/obj/item/stack/material/plasteel/fifty)
+	cost = 80
+	containername = "\improper Plasteel sheets crate"
+
+/decl/hierarchy/supply_pack/engineering/ocp50
+	name = "50 osmium carbide plasteel sheets"
+	contains = list(/obj/item/stack/material/ocp/fifty)
+	cost = 100
+	containername = "\improper Osmium carbide plasteel sheets crate"
+
+// Material sheets (10 - Smaller amounts, less cost efficient)
 /decl/hierarchy/supply_pack/engineering/marble10
 	name = "10 slabs of marble"
 	contains = list(/obj/item/stack/material/marble/ten)
-	cost = 10
-	containername = "\improper Marble slabs crate"	
+	cost = 15
+	containername = "\improper Marble slabs crate"
 
+/decl/hierarchy/supply_pack/engineering/plasteel10
+	name = "10 plasteel sheets"
+	contains = list(/obj/item/stack/material/plasteel/ten)
+	cost = 20
+	containername = "\improper Plasteel sheets crate"
+
+/decl/hierarchy/supply_pack/engineering/ocp10
+	name = "10 osmium carbide plasteel sheets"
+	contains = list(/obj/item/stack/material/ocp/ten)
+	cost = 25
+	containername = "\improper Osmium carbide plasteel sheets crate"
+
+
+// Other engineering items
 /decl/hierarchy/supply_pack/engineering/smes_circuit
 	name = "Superconducting Magnetic Energy Storage Unit Circuitry"
 	contains = list(/obj/item/weapon/circuitboard/smes)
