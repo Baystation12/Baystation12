@@ -1,0 +1,8 @@
+author: Heptagon49
+delete-after: True
+changes:
+  - tweak: "Lowered the max damage of internal organs, except for the brain and cortical stack."
+  - tweak: "Prosthetic internal organs are now stronger then regular organs."
+  - tweak: "Kidneys are actually important now. You will slowly take toxin damage if they are missing or busted, same as the liver."
+  - imageadd: "Changed the sprites for the prosthetic liver and kidneys."
+  - rscadd: "Prosthetic lungs half the toxin damage taken from breathing bad air, but take additional damage themselves as a trade-off."
