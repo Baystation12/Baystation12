@@ -63,7 +63,7 @@
 		to_chat(user, "<span class='notice'>Access Denied</span>")
 
 /obj/structure/closet/secure_closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(src.opened || istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
+	if(src.opened || istype(W,/obj/item/weapon/packageWrap))
 		..()
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
@@ -74,6 +74,10 @@
 			playsound(src.loc, "sparks", 50, 1)
 	else
 		togglelock(user)
+
+/obj/structure/closet/secure_closet/slice_into_parts(obj/item/weapon/weldingtool/WT, mob/user)
+	to_chat(user, "<span class='notice'>\The [src] is too strong to be taken apart.</span>")
+	return
 
 /obj/structure/closet/secure_closet/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
 	if(!broken)
