@@ -111,15 +111,24 @@
 	icon_state = "sheet-diamond"
 	default_type = "diamond"
 
+/obj/item/stack/material/diamond/ten
+	amount = 10
+
 /obj/item/stack/material/uranium
 	name = "uranium"
 	icon_state = "sheet-uranium"
 	default_type = "uranium"
 
+/obj/item/stack/material/uranium/ten
+	amount = 10
+
 /obj/item/stack/material/phoron
 	name = "solid phoron"
 	icon_state = "sheet-phoron"
 	default_type = "phoron"
+
+/obj/item/stack/material/phoron/ten
+	amount = 10
 
 /obj/item/stack/material/phoron/fifty
 	amount = 50
@@ -137,10 +146,16 @@
 	icon_state = "sheet-gold"
 	default_type = "gold"
 
+/obj/item/stack/material/gold/ten
+	amount = 10
+
 /obj/item/stack/material/silver
 	name = "silver"
 	icon_state = "sheet-silver"
 	default_type = "silver"
+
+/obj/item/stack/material/silver/ten
+	amount = 10
 
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
@@ -207,11 +222,11 @@
 	item_state = "sheet-metal"
 	default_type = "plasteel"
 
-/obj/item/stack/material/plasteel/fifty
-	amount = 50
-
 /obj/item/stack/material/plasteel/ten
 	amount = 10
+
+/obj/item/stack/material/plasteel/fifty
+	amount = 50
 
 /obj/item/stack/material/wood
 	name = "wooden plank"
