@@ -687,6 +687,8 @@
 			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
 			return global.holder_mob_icon_cache;
+		if("holowarrant_users")
+			return global.holowarrant_users;
 		if("home_system_choices")
 			return global.home_system_choices;
 		if("host")
@@ -1485,7 +1487,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2174,6 +2176,8 @@
 			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
 			global.holder_mob_icon_cache=newval;
+		if("holowarrant_users")
+			global.holowarrant_users=newval;
 		if("home_system_choices")
 			global.home_system_choices=newval;
 		if("host")
@@ -2972,7 +2976,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3317,6 +3321,7 @@
 	"hit_appends",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
+	"holowarrant_users",
 	"home_system_choices",
 	"host",
 	"href_logfile",
