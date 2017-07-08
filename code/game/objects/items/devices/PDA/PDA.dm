@@ -46,6 +46,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/list/conversations = list()    // For keeping up with who we have PDA messsages from.
 	var/new_message = 0			//To remove hackish overlay check
 	var/new_news = 0
+	var/list/tempmessage = list() // Used to store message in memory if sending failed
 
 	var/active_feed				// The selected feed
 	var/list/warrant			// The warrant as we last knew it
@@ -964,7 +965,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 	if(tap)
 		U.visible_message("<span class='notice'>\The [U] taps on \his PDA's screen.</span>")
-	var/t = input(U, "Please enter message", P.name, null) as text
+	var/t = input(U, "Please enter message", P.name, tempmessage[P]) as text
 	t = sanitize(t)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
@@ -983,21 +984,26 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 
 	last_text = world.time
+	tempmessage.Remove(P)
 	var/datum/reception/reception = get_reception(src, P, t)
 	t = reception.message
 	if(!get_message_server(z))
 		to_chat(U, "<span class='notice'>ERROR: Messaging server is not responding.</span>")
+		tempmessage[P] = t
 		return
 	if(!get_message_server(P.z))
 		to_chat(U, "<span class='notice'>ERROR: Receiving messaging server is not responding.</span>")
+		tempmessage[P] = t
 		return
 	if(reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER) // only send the message if it's stable
 		if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recipient have a broadcaster on their level?
 			to_chat(U, "ERROR: Cannot reach recipient.")
+			tempmessage[P] = t
 			return
 		var/send_result = reception.message_server.send_pda_message("[P.owner]","[owner]","[t]")
 		if (send_result)
 			to_chat(U, "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'.")
+			tempmessage[P] = t
 			return
 
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))

@@ -192,6 +192,11 @@
 		if(src.panel_open)
 			attack_hand(user)
 		return
+	else if((flags & OBJ_ANCHORABLE) && istype(W, /obj/item/weapon/wrench))
+		wrench_floor_bolts(user)
+		power_change()
+		update_icon()
+		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
 		user.drop_item()
 		W.forceMove(src)
@@ -200,8 +205,8 @@
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 		nanomanager.update_uis(src)
 		return
-	else
-		return attempt_to_stock(W, user)
+	else if(attempt_to_stock(W, user))
+		return
 	..()
 	return
 
@@ -212,7 +217,7 @@
 
 /obj/machinery/vending/proc/attempt_to_stock(var/obj/item/I as obj, var/mob/user as mob)
 	for(var/datum/stored_items/vending_products/R in product_records)
-		if(istype(I, R.item_path))
+		if(I.type == R.item_path)
 			stock(I, R, user)
 			return 1
 
@@ -493,10 +498,10 @@
 	if(!user.unEquip(W))
 		return
 
-	to_chat(user, "<span class='notice'>You insert \the [W] in the product receptor.</span>")
-	R.add_product(W)
-
-	nanomanager.update_uis(src)
+	if(R.add_product(W))
+		to_chat(user, "<span class='notice'>You insert \the [W] in the product receptor.</span>")
+		nanomanager.update_uis(src)
+		return 1
 
 /obj/machinery/vending/process()
 	if(stat & (BROKEN|NOPOWER))
@@ -529,6 +534,13 @@
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
 	return
+
+/obj/machinery/vending/power_change()
+	. = ..()
+	if(!anchored)
+		stat |= NOPOWER
+	else
+		stat &= ~NOPOWER
 
 /obj/machinery/vending/update_icon()
 	if(stat & BROKEN)
