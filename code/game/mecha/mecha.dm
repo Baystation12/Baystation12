@@ -302,13 +302,18 @@
 	return
 
 /obj/mecha/proc/interface_action(obj/machinery/target)
-	if(istype(target, /obj/machinery/access_button))
+	if(istype(target, /obj/machinery/access_button) && target.Adjacent(src))
 		src.occupant_message("<span class='notice'>Interfacing with [target].</span>")
 		src.log_message("Interfaced with [target].")
 		target.attack_hand(src.occupant)
 		return 1
 	if(istype(target, /obj/machinery/embedded_controller))
-		target.ui_interact(src.occupant)
+		if(target in view(2,src))
+			src.occupant_message("<span class='notice'>Interfacing with [target]...</span>")
+			src.log_message("Interfaced with [target].")
+			target.ui_interact(src.occupant)
+		else
+			src.occupant_message("<span class='notice'>Unable to interface with [target], target out of range.</span>")
 		return 1
 	return 0
 
@@ -319,8 +324,6 @@
 		if(src_object == src || (src_object in src))
 			return STATUS_INTERACTIVE
 		if(src.Adjacent(src_object))
-			src.occupant_message("<span class='notice'>Interfacing with [src_object]...</span>")
-			src.log_message("Interfaced with [src_object].")
 			return STATUS_INTERACTIVE
 		if(src_object in view(2, src))
 			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever.
@@ -717,7 +720,7 @@
 			else
 				to_chat(user, "You were unable to attach [W] to [src]")
 		return
-	
+
 	var/obj/item/weapon/card/id/id_card = W.GetIdCard()
 	if(id_card)
 		if(add_req_access || maint_access)
