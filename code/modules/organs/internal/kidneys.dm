@@ -6,10 +6,13 @@
 	parent_organ = BP_GROIN
 	min_bruised_damage = 25
 	min_broken_damage = 45
+	max_damage = 70
 
 /obj/item/organ/internal/kidneys/robotize()
 	. = ..()
 	icon_state = "kidneys-prosthetic"
+	min_bruised_damage += 5
+	min_broken_damage += 10
 
 /obj/item/organ/internal/kidneys/process()
 
@@ -27,4 +30,13 @@
 			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
 		else if(is_broken())
 			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
+
+	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
+	if(!owner.reagents.has_reagent("anti_toxin"))
+		if(prob(33))
+			if(is_broken())
+				owner.adjustToxLoss(0.5)
+			if(status & ORGAN_DEAD)
+				owner.adjustToxLoss(1)
+
 
