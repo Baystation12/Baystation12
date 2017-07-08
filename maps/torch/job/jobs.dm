@@ -10,7 +10,7 @@
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
-						/datum/job/merchant
+						/datum/job/merchant, /datum/job/stowaway
 						)
 
 
@@ -1055,8 +1055,25 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/merchant
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
-
+	latejoin_at_spawnpoints = 1
 
 	access = list(access_merchant)
 	minimal_access = list(access_merchant)
 
+/datum/job/stowaway
+	title = "Stowaway"
+	department = "Civilian"
+	department_flag = CIV
+	faction = "Station"
+	total_positions = 0 //to be opened by admins on REQUEST (because seriously that's what happens)
+	spawn_positions = 0
+	supervisors = "yourself"
+	selection_color = "#515151"
+	ideal_character_age = 30
+	minimal_player_age = 7
+	create_record = 0
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/job/torch/stowaway
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	latejoin_at_spawnpoints = 1
