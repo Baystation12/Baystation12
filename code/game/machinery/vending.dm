@@ -195,7 +195,6 @@
 	else if((flags & OBJ_ANCHORABLE) && istype(W, /obj/item/weapon/wrench))
 		wrench_floor_bolts(user)
 		power_change()
-		update_icon()
 		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
 		user.drop_item()
@@ -535,12 +534,8 @@
 		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
 	return
 
-/obj/machinery/vending/power_change()
-	. = ..()
-	if(!anchored)
-		stat |= NOPOWER
-	else
-		stat &= ~NOPOWER
+/obj/machinery/vending/powered()
+	return anchored && ..()
 
 /obj/machinery/vending/update_icon()
 	if(stat & BROKEN)
