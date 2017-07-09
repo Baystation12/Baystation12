@@ -354,7 +354,7 @@
 // Only opens when all areas connecting with our turf have an air alarm and are cleared
 /obj/machinery/door/firedoor/proc/can_safely_open()
 	var/turf/neighbour
-	for(var/dir in cardinal)
+	for(var/dir in GLOB.cardinal)
 		neighbour = get_step(src.loc, dir)
 		if(neighbour.c_airblock(src.loc) & AIR_BLOCKED)
 			continue

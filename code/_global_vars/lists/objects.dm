@@ -1,6 +1,6 @@
 GLOBAL_DATUM(data_core, /datum/datacore)
 // Items that ask to be called every cycle.
-GLOBAL_LIST_EMPTY(machines )
+GLOBAL_LIST_EMPTY(machines)
 GLOBAL_LIST_EMPTY(processing_objects)
 GLOBAL_LIST_EMPTY(processing_power_items)
 GLOBAL_LIST_EMPTY(active_diseases)

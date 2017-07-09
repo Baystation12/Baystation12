@@ -239,7 +239,7 @@
 	if(node2)
 		node2.disconnect(src)
 		node1 = null
-	crash_with(log_info_line(src))
+
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/simple/pipeline_expansion()

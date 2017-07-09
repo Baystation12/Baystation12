@@ -93,6 +93,8 @@
 			return global.SSatoms;
 		if("SSgarbage")
 			return global.SSgarbage;
+		if("SSlegacy")
+			return global.SSlegacy;
 		if("TELEBLOCK")
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
@@ -129,8 +131,6 @@
 			return global.additional_antag_types;
 		if("admin_datums")
 			return global.admin_datums;
-		if("admin_departments")
-			return global.admin_departments;
 		if("admin_pm_repository")
 			return global.admin_pm_repository;
 		if("admin_ranks")
@@ -167,8 +167,6 @@
 			return global.admin_verbs_sounds;
 		if("admin_verbs_spawn")
 			return global.admin_verbs_spawn;
-		if("adminfaxes")
-			return global.adminfaxes;
 		if("adminhelp_ignored_words")
 			return global.adminhelp_ignored_words;
 		if("adminlog")
@@ -207,8 +205,6 @@
 			return global.all_grabstates;
 		if("all_languages")
 			return global.all_languages;
-		if("all_maps")
-			return global.all_maps;
 		if("all_money_accounts")
 			return global.all_money_accounts;
 		if("all_objectives")
@@ -223,10 +219,6 @@
 			return global.all_unit_tests_passed;
 		if("all_virtual_listeners")
 			return global.all_virtual_listeners;
-		if("alldepartments")
-			return global.alldepartments;
-		if("allfaxes")
-			return global.allfaxes;
 		if("announced_news_types")
 			return global.announced_news_types;
 		if("antag_add_finished")
@@ -1322,6 +1314,8 @@
 			global.SSatoms=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
+		if("SSlegacy")
+			global.SSlegacy=newval;
 		if("TELEBLOCK")
 			global.TELEBLOCK=newval;
 		if("TWITCHBLOCK")
@@ -1358,8 +1352,6 @@
 			global.additional_antag_types=newval;
 		if("admin_datums")
 			global.admin_datums=newval;
-		if("admin_departments")
-			global.admin_departments=newval;
 		if("admin_pm_repository")
 			global.admin_pm_repository=newval;
 		if("admin_ranks")
@@ -1396,8 +1388,6 @@
 			global.admin_verbs_sounds=newval;
 		if("admin_verbs_spawn")
 			global.admin_verbs_spawn=newval;
-		if("adminfaxes")
-			global.adminfaxes=newval;
 		if("adminhelp_ignored_words")
 			global.adminhelp_ignored_words=newval;
 		if("adminlog")
@@ -1436,8 +1426,6 @@
 			global.all_grabstates=newval;
 		if("all_languages")
 			global.all_languages=newval;
-		if("all_maps")
-			global.all_maps=newval;
 		if("all_money_accounts")
 			global.all_money_accounts=newval;
 		if("all_objectives")
@@ -1452,10 +1440,6 @@
 			global.all_unit_tests_passed=newval;
 		if("all_virtual_listeners")
 			global.all_virtual_listeners=newval;
-		if("alldepartments")
-			global.alldepartments=newval;
-		if("allfaxes")
-			global.allfaxes=newval;
 		if("announced_news_types")
 			global.announced_news_types=newval;
 		if("antag_add_finished")
@@ -2504,6 +2488,7 @@
 	"SMALLSIZEBLOCK",
 	"SSatoms",
 	"SSgarbage",
+	"SSlegacy",
 	"TELEBLOCK",
 	"TWITCHBLOCK",
 	"Tier1Runes",
@@ -2522,7 +2507,6 @@
 	"actor",
 	"additional_antag_types",
 	"admin_datums",
-	"admin_departments",
 	"admin_pm_repository",
 	"admin_ranks",
 	"admin_secrets",
@@ -2541,7 +2525,6 @@
 	"admin_verbs_server",
 	"admin_verbs_sounds",
 	"admin_verbs_spawn",
-	"adminfaxes",
 	"adminhelp_ignored_words",
 	"adminlog",
 	"ai_icons",
@@ -2561,7 +2544,6 @@
 	"all_grabobjects",
 	"all_grabstates",
 	"all_languages",
-	"all_maps",
 	"all_money_accounts",
 	"all_objectives",
 	"all_robolimbs",
@@ -2569,8 +2551,6 @@
 	"all_ui_styles",
 	"all_unit_tests_passed",
 	"all_virtual_listeners",
-	"alldepartments",
-	"allfaxes",
 	"announced_news_types",
 	"antag_add_finished",
 	"antag_names_to_ids_",

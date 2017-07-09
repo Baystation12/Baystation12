@@ -133,7 +133,7 @@
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
 	GLOB.clients += src
-	GLOB.directory[ckey] = src
+	GLOB.ckey_directory[ckey] = src
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
@@ -198,7 +198,7 @@
 	if(holder)
 		holder.owner = null
 		GLOB.admins -= src
-	GLOB.directory -= ckey
+	GLOB.ckey_directory -= ckey
 	GLOB.clients -= src
 	return ..()
 

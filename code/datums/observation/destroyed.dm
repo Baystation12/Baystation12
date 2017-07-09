@@ -12,6 +12,6 @@ GLOBAL_DATUM_INIT(destroyed_event, /decl/observ/destroyed, new)
 	name = "Destroyed"
 
 /datum/Destroy()
-	GLOB.destroyed_event.raise_event(src)
+	GLOB.destroyed_event && GLOB.destroyed_event.raise_event(src)
 	. = ..()
 	cleanup_events(src)

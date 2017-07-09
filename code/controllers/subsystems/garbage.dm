@@ -241,7 +241,7 @@ SUBSYSTEM_DEF(garbage)
 // Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
 /datum/proc/Destroy(force=FALSE)
 	tag = null
-	GLOB.nanomanager.close_uis(src)
+	GLOB.nanomanager && GLOB.nanomanager.close_uis(src)
 	return QDEL_HINT_QUEUE
 
 /datum/var/gc_destroyed //Time when this object was destroyed.

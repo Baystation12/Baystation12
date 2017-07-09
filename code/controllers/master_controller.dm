@@ -53,6 +53,7 @@ datum/controller/game_controller/proc/setup()
 #endif
 
 datum/controller/game_controller/proc/setup_objects()
+	set background=1
 #ifndef UNIT_TEST
 	var/initialized_objects = 0
 #endif
@@ -64,20 +65,16 @@ datum/controller/game_controller/proc/setup_objects()
 
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
-	while(!SSatoms || SSatoms.initialized != INITIALIZATION_INNEW_REGULAR)
-		CHECK_SLEEP_MASTER
-
 	if(GLOB.using_map.use_overmap)
 		report_progress("Initializing overmap events")
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
 		CHECK_SLEEP_MASTER
 
-	report_progress("Initializing pipe networks")
-	for(var/obj/machinery/atmospherics/machine in GLOB.machines)
-		machine.build_network()
+	report_progress("Initializing atmos machinery")
+	for(var/obj/machinery/atmospherics/A in GLOB.machines)
+		A.atmos_init()
 		CHECK_SLEEP_MASTER
 
-	report_progress("Initializing atmos machinery")
 	for(var/obj/machinery/atmospherics/unary/U in GLOB.machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
@@ -85,6 +82,11 @@ datum/controller/game_controller/proc/setup_objects()
 		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
+		CHECK_SLEEP_MASTER
+
+	report_progress("Initializing pipe networks")
+	for(var/obj/machinery/atmospherics/machine in GLOB.machines)
+		machine.build_network()
 		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing lathe recipes")

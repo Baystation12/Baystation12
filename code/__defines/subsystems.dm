@@ -66,6 +66,7 @@
 #define INIT_ORDER_LIGHTING -20
 #define INIT_ORDER_SQUEAK -40
 #define INIT_ORDER_PERSISTENCE -100
+#define INIT_BAY_LEGACY -200
 
 // SS runlevels
 

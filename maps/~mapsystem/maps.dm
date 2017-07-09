@@ -1,5 +1,5 @@
 GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
-var/list/all_maps = list()
+GLOBAL_LIST_EMPTY(all_maps)
 
 var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
@@ -15,7 +15,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if(!M.path)
 			log_error("Map '[M]' does not have a defined path, not adding to map list!")
 		else
-			all_maps[M.path] = M
+			GLOB.all_maps[M.path] = M
 	return 1
 
 

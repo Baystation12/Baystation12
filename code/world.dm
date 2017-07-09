@@ -134,17 +134,14 @@
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
 
+	processScheduler.deferSetupFor(/datum/controller/process/ticker)
+	processScheduler.setup()
 	Master.Initialize(10, FALSE)
 
-	spawn(1)
-		processScheduler.deferSetupFor(/datum/controller/process/ticker)
-		processScheduler.setup()
-		master_controller.setup()
 #ifdef UNIT_TEST
+	spawn(1)
 		initialize_unit_tests()
 #endif
-
-
 
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
@@ -570,7 +567,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.directory[ckey])
+				D.associate(GLOB.ckey_directory[ckey])
 
 /world/proc/load_mentors()
 	if(config.admin_legacy_system)
@@ -590,7 +587,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.directory[ckey])
+				D.associate(GLOB.ckey_directory[ckey])
 
 /world/proc/update_status()
 	var/s = ""

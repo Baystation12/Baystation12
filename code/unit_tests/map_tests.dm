@@ -200,7 +200,10 @@ datum/unit_test/correct_allowed_spawn_test/start_test()
 
 	for(var/spawn_name in GLOB.using_map.allowed_spawns)
 		var/datum/spawnpoint/spawnpoint = spawntypes[spawn_name]
-		if(!spawnpoint.turfs.len)
+		if(!spawnpoint)
+			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
+			failed = TRUE
+		else if(!spawnpoint.turfs.len)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
 
@@ -318,7 +321,7 @@ datum/unit_test/ladder_check/start_test()
 /datum/unit_test/camera_nil_c_tag_check/start_test()
 	var/pass = TRUE
 
-	for(var/obj/machinery/camera/C in GLOB.machines)
+	for(var/obj/machinery/camera/C in world)
 		if(!C.c_tag)
 			log_bad("Following camera does not have a c_tag set: [log_info_line(C)]")
 			pass = FALSE
@@ -337,16 +340,19 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/camera_unique_c_tag_check/start_test()
 	var/cameras_by_ctag = list()
-	for(var/obj/machinery/camera/C in GLOB.machines)
+	var/checked_cameras = 0
+
+	for(var/obj/machinery/camera/C in world)
 		if(!C.c_tag)
 			continue
+		checked_cameras++
 		group_by(cameras_by_ctag, C.c_tag, C)
 
 	var/number_of_issues = number_of_issues(cameras_by_ctag, "Camera c_tags", /decl/noi_feedback/detailed)
 	if(number_of_issues)
 		fail("[number_of_issues] issue\s with camera c_tags found.")
 	else
-		pass("All cameras have a unique c_tag.")
+		pass("[checked_cameras] camera\s have a unique c_tag.")
 
 	return 1
 
@@ -396,9 +402,9 @@ datum/unit_test/ladder_check/start_test()
 				faulty_pipes += D
 
 	if(faulty_pipes.len)
-		fail("[faulty_pipes.len] straight disposal segment\s did not connect with other disposal pipes.")
+		fail("[faulty_pipes.len] disposal segment\s did not connect with other disposal pipes.")
 	else
-		pass("All straight disposal segments connect with other disposal pipes.")
+		pass("All disposal segments connect with other disposal pipes.")
 
 	return 1
 
@@ -419,7 +425,29 @@ datum/unit_test/ladder_check/start_test()
 			return TRUE
 	return FALSE
 
+
+/obj/machinery/atmospherics/pipe/simple
+
 //=======================================================================================
+
+/datum/unit_test/simple_pipes_shall_not_face_north_or_west // The init code is worthless and cannot handle it
+	name = "MAP: Simple pipes shall not face north or west"
+
+/datum/unit_test/simple_pipes_shall_not_face_north_or_west/start_test()
+	var/failures = 0
+	for(var/obj/machinery/atmospherics/pipe/simple/pipe in GLOB.machines)
+		if(!istype(pipe, /obj/machinery/atmospherics/pipe/simple/hidden) && !istype(pipe, /obj/machinery/atmospherics/pipe/simple/visible))
+			continue
+		if(pipe.dir == NORTH || pipe.dir == WEST)
+			log_bad("Following pipe had an invalid direction: [log_info_line(pipe)]")
+			failures++
+
+	if(failures)
+		fail("[failures] simple pipe\s faced the wrong direction.")
+	else
+		pass("All simple pipes faced an appropriate direction.")
+	return 1
+
 
 #undef SUCCESS
 #undef FAILURE

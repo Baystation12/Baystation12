@@ -13,11 +13,17 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 	GLOB = src
 
 	var/datum/controller/exclude_these = new
-	gvars_datum_in_built_vars = exclude_these.vars + list("gvars_datum_protected_varlist", "gvars_datum_in_built_vars", "gvars_datum_init_order")
+	gvars_datum_in_built_vars = exclude_these.vars + list("gvars_datum_protected_varlist", "gvars_datum_in_built_vars", "gvars_datum_init_order") + "vars"
+	qdel(exclude_these)
 
 	log_world("[vars.len - gvars_datum_in_built_vars.len] global variables")
 
-	Initialize(exclude_these)
+	try
+		Initialize()
+	catch(var/exception/e)
+		to_world_log("Built-in vars which should not be initialized:\n[jointext(gvars_datum_in_built_vars, "\n")]")
+		throw e
+
 
 /datum/controller/global_vars/Destroy(force)
 	crash_with("There was an attempt to qdel the global vars holder!")
@@ -41,7 +47,7 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 /datum/controller/global_vars/VV_hidden()
 	return ..() + gvars_datum_protected_varlist
 
-/datum/controller/global_vars/Initialize(var/exclude_these)
+/datum/controller/global_vars/Initialize()
 	gvars_datum_init_order = list()
 	gvars_datum_protected_varlist = list("gvars_datum_protected_varlist")
 
@@ -56,4 +62,3 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 		var/end_tick = world.time
 		if(end_tick - start_tick)
 			warning("Global [I] slept during initialization!")
-	QDEL_NULL(exclude_these)
