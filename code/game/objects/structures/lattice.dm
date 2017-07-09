@@ -15,9 +15,10 @@
 ///// Z-Level Stuff
 	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 ///// Z-Level Stuff
-		qdel(src)
-	for(var/obj/structure/lattice/LAT in src.loc)
+		return INITIALIZE_HINT_QDEL
+	for(var/obj/structure/lattice/LAT in loc)
 		if(LAT != src)
+			crash_with("Found multiple lattices at '[log_info_line(loc)]'")
 			qdel(LAT)
 	icon = 'icons/obj/smoothlattice.dmi'
 	icon_state = "latticeblank"

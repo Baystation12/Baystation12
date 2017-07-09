@@ -7,7 +7,7 @@
 /obj/item/weapon/implant/death_alarm/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
-	<b>Name:</b> [using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
+	<b>Name:</b> [GLOB.using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
 	<b>Life:</b> Activates upon death.<BR>
 	<b>Important Notes:</b> Alerts crew to crewmember death.<BR>
 	<HR>

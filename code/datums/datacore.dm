@@ -52,7 +52,7 @@
 		var/real_rank = make_list_rank(t.fields["real_rank"])
 		mil_ranks[name] = ""
 
-		if(using_map.flags & MAP_HAS_RANK)
+		if(GLOB.using_map.flags & MAP_HAS_RANK)
 			var/datum/mil_branch/branch_obj = mil_branches.get_branch(t.fields["mil_branch"])
 			var/datum/mil_rank/rank_obj = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 

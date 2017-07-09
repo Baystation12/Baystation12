@@ -51,11 +51,11 @@
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if(!pref.player_alt_titles) pref.player_alt_titles = new()
 
-	if((using_map.flags & MAP_HAS_BRANCH)\
+	if((GLOB.using_map.flags & MAP_HAS_BRANCH)\
 	   && (!pref.char_branch || !mil_branches.is_spawn_branch(pref.char_branch)))
 		pref.char_branch = "None"
 
-	if((using_map.flags & MAP_HAS_RANK)\
+	if((GLOB.using_map.flags & MAP_HAS_RANK)\
 	   && (!pref.char_rank || !mil_branches.is_spawn_rank(pref.char_branch, pref.char_rank)))
 		pref.char_rank = "None"
 
@@ -81,12 +81,12 @@
 	. = list()
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
-	if(using_map.flags & MAP_HAS_BRANCH)
+	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
 		player_branch = mil_branches.get_branch(pref.char_branch)
 
 		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
-	if(using_map.flags & MAP_HAS_RANK)
+	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		player_rank = mil_branches.get_rank(pref.char_branch, pref.char_rank)
 
 		. += "Rank: <a href='?src=\ref[src];char_rank=1'>[pref.char_rank]</a>	"

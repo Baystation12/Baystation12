@@ -10,15 +10,15 @@
 		if(EVENT_LEVEL_MUNDANE)
 			command_announcement.Announce("A minor electrical storm has been detected near the [station_name()]. Please watch out for possible electrical discharges.", "[station_name()] Sensor Array")
 		if(EVENT_LEVEL_MODERATE)
-			command_announcement.Announce("The [station_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = using_map.electrical_storm_moderate_sound)
+			command_announcement.Announce("The [station_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [station_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = using_map.electrical_storm_major_sound)
+			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [station_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound)
 
 /datum/event/electrical_storm/start()
 	..()
 	valid_apcs = list()
 	for(var/obj/machinery/power/apc/A in GLOB.machines)
-		if(A.z in using_map.station_levels)
+		if(A.z in GLOB.using_map.station_levels)
 			valid_apcs.Add(A)
 	endWhen = (severity * 60) + startWhen
 

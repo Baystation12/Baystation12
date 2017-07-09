@@ -31,9 +31,9 @@ var/datum/antagonist/loyalists/loyalists
 /datum/antagonist/loyalists/New()
 	..()
 	loyalists = src
-	welcome_text = "You belong to the [using_map.company_name], body and soul. Preserve its interests against the conspirators amongst the crew."
-	faction_welcome = "Preserve [using_map.company_short]'s interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
-	faction_descriptor = "[using_map.company_name]"
+	welcome_text = "You belong to the [GLOB.using_map.company_name], body and soul. Preserve its interests against the conspirators amongst the crew."
+	faction_welcome = "Preserve [GLOB.using_map.company_short]'s interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
+	faction_descriptor = "[GLOB.using_map.company_name]"
 
 /datum/antagonist/loyalists/create_global_objectives()
 	if(!..())

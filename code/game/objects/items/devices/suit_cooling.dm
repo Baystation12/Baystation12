@@ -32,7 +32,8 @@
 /obj/item/device/suit_cooling_unit/ui_action_click()
 	toggle(usr)
 
-/obj/item/device/suit_cooling_unit/New()
+/obj/item/device/suit_cooling_unit/Initialize()
+	. = ..()
 	GLOB.processing_objects |= src
 	cell = new/obj/item/weapon/cell/high()		// 10K rated cell.
 	cell.forceMove(src)

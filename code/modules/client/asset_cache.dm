@@ -239,7 +239,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 					register_asset(filename, fcopy_rsc(path + filename))
 
 	var/list/mapnames = list()
-	for(var/z in using_map.map_levels)
+	for(var/z in GLOB.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)

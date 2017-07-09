@@ -18,7 +18,7 @@ var/global/datum/controller/occupations/job_master
 	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
-		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
+		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
@@ -327,7 +327,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == BE_ASSISTANT)
 				Debug("AC2 Assistant located, Player: [player]")
-				if(using_map.flags & MAP_HAS_BRANCH)
+				if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 					var/datum/mil_branch/branch = mil_branches.get_branch(player.get_branch_pref())
 					AssignRole(player, branch.assistant_job)
 				else
@@ -621,10 +621,10 @@ var/global/datum/controller/occupations/job_master
 	var/datum/spawnpoint/spawnpos
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
-		spawnpoint = using_map.default_spawn
+		spawnpoint = GLOB.using_map.default_spawn
 
 	if(spawnpoint)
-		if(!(spawnpoint in using_map.allowed_spawns))
+		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
 			if(H)
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
@@ -638,7 +638,7 @@ var/global/datum/controller/occupations/job_master
 
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/spawntype in using_map.allowed_spawns)
+		for(var/spawntype in GLOB.using_map.allowed_spawns)
 			var/datum/spawnpoint/candidate = spawntypes[spawntype]
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
@@ -647,7 +647,7 @@ var/global/datum/controller/occupations/job_master
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [rank].")
-		spawnpos = spawntypes[pick(using_map.allowed_spawns)]
+		spawnpos = spawntypes[pick(GLOB.using_map.allowed_spawns)]
 
 	return spawnpos
 

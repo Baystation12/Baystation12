@@ -8,7 +8,7 @@ datum/event/viral_outbreak/setup()
 	severity = rand(2, 4)
 
 datum/event/viral_outbreak/announce()
-	using_map.level_x_biohazard_announcement(7)
+	GLOB.using_map.level_x_biohazard_announcement(7)
 
 datum/event/viral_outbreak/start()
 	var/list/candidates = list()	//list of candidate keys

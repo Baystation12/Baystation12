@@ -106,7 +106,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in using_map.player_levels))
+		if(!(T.z in GLOB.using_map.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -208,7 +208,7 @@
 	if (istype(M, /atom/movable))
 		if(prob(5) && !accurate) //oh dear a problem, put em in deep space
 			var/turf/T = get_turf(M)
-			var/destination_z = T ? using_map.get_transit_zlevel(T.z) : pick(using_map.player_levels)
+			var/destination_z = T ? GLOB.using_map.get_transit_zlevel(T.z) : pick(GLOB.using_map.player_levels)
 			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), destination_z), 2)
 		else
 			do_teleport(M, com.locked) //dead-on precision

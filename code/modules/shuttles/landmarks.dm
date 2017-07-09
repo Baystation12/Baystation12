@@ -64,7 +64,7 @@
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
 	. = ..()
-	if(!using_map.use_overmap)
+	if(!GLOB.using_map.use_overmap)
 		return
 	var/obj/effect/overmap/O = map_sectors["[z]"]
 	if(!istype(O))

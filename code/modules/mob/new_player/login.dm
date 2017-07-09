@@ -6,15 +6,15 @@
 	screen_loc = "WEST,SOUTH"
 
 /obj/effect/lobby_image/Initialize()
-	icon = using_map.lobby_icon
+	icon = GLOB.using_map.lobby_icon
 	var/known_icon_states = icon_states(icon)
-	for(var/lobby_screen in using_map.lobby_screens)
+	for(var/lobby_screen in GLOB.using_map.lobby_screens)
 		if(!(lobby_screen in known_icon_states))
 			error("Lobby screen '[lobby_screen]' did not exist in the icon set [icon].")
-			using_map.lobby_screens -= lobby_screen
+			GLOB.using_map.lobby_screens -= lobby_screen
 
-	if(using_map.lobby_screens.len)
-		icon_state = pick(using_map.lobby_screens)
+	if(GLOB.using_map.lobby_screens.len)
+		icon_state = pick(GLOB.using_map.lobby_screens)
 	else
 		icon_state = known_icon_states[1]
 

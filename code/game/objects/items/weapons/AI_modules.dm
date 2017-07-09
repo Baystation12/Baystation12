@@ -35,7 +35,7 @@ AI MODULES
 			return
 
 		if(ticker && ticker.mode && ticker.mode.name == "blob")
-			to_chat(usr, "Law uploads have been disabled by [using_map.company_name]!")
+			to_chat(usr, "Law uploads have been disabled by [GLOB.using_map.company_name]!")
 			return
 
 		if (comp.current.stat == 2 || comp.current.control_disabled == 1)

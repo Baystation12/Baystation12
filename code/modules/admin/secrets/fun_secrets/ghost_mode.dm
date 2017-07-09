@@ -30,7 +30,7 @@
 					step_rand(W)
 
 			var/area/A = get_area(M)
-			if(A.requires_power && !A.always_unpowered && A.power_light && (A.z in using_map.player_levels))
+			if(A.requires_power && !A.always_unpowered && A.power_light && (A.z in GLOB.using_map.player_levels))
 				affected_areas |= get_area(M)
 
 	affected_mobs |= user

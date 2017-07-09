@@ -144,7 +144,7 @@ var/list/mob_hat_cache = list()
 	additional_law_channels["Drone"] = ":d"
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -317,7 +317,7 @@ var/list/mob_hat_cache = list()
 	clear_inherent_laws(1)
 	clear_ion_laws(1)
 	QDEL_NULL(laws)
-	var/law_type = initial(laws) || using_map.default_law_type
+	var/law_type = initial(laws) || GLOB.using_map.default_law_type
 	laws = new law_type
 
 //Reboot procs.

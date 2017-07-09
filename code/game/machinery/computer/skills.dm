@@ -46,7 +46,7 @@
 	ui_interact(user)
 
 /obj/machinery/computer/skills/ui_interact(mob/user as mob)
-	if (!(src.z in using_map.contact_levels))
+	if (!(src.z in GLOB.using_map.contact_levels))
 		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the [station_name()]!")
 		return
 	var/dat
@@ -100,9 +100,9 @@
 
 						user << browse_rsc(front, "front.png")
 						user << browse_rsc(side, "side.png")
-						if(using_map.flags & MAP_HAS_BRANCH)
+						if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 							mil_rank_text += "Branch: <a href='?src=\ref[src];choice=Edit Field;field=mil_branch'>[active1.fields["mil_branch"] || "None"]</a><br>\n"
-						if(using_map.flags & MAP_HAS_RANK)
+						if(GLOB.using_map.flags & MAP_HAS_RANK)
 							mil_rank_text += "Rank: <a href='?src=\ref[src];choice=Edit Field;field=mil_rank'>[active1.fields["mil_rank"] || "None"]</a><br>\n"
 						dat += "<table><tr><td>	\
 						Name: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \

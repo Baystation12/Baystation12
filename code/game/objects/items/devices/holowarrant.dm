@@ -80,13 +80,13 @@
 		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#FFFFFF'><center><large><b>Sol Central Government Colonial Marshal Bureau</b></large></br>
 		in the jurisdiction of the</br>
-		[using_map.boss_name] in [using_map.system_name]</br>
+		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
 		</br>
 		<b>ARREST WARRANT</b></center></br>
 		</br>
 		This document serves as authorization and notice for the arrest of _<u>[active.fields["namewarrant"]]</u>____ for the crime(s) of:</br>[active.fields["charges"]]</br>
 		</br>
-		Vessel or habitat: _<u>[using_map.station_name]</u>____</br>
+		Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
 		</br>_<u>[active.fields["auth"]]</u>____</br>
 		<small>Person authorizing arrest</small></br>
 		</BODY></HTML>
@@ -97,7 +97,7 @@
 		var/output= {"
 		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#FFFFFF'><center>in the jurisdiction of the</br>
-		[using_map.boss_name] in [using_map.system_name]</br>
+		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
 		</br>
 		<b>SEARCH WARRANT</b></center></br>
 		</br>
@@ -116,7 +116,7 @@
 		</br>
 		<b>Warrant issued by: </b> [active.fields ["auth"]]</br>
 		</br>
-		Vessel or habitat: _<u>[using_map.station_name]</u>____</br>
+		Vessel or habitat: _<u>[GLOB.using_map.station_name]</u>____</br>
 		</BODY></HTML>
 		"}
 		show_browser(user, output, "window=Search warrant for [active.fields["namewarrant"]]")

@@ -159,7 +159,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 /client/proc/playtitlemusic()
 	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
-		using_map.lobby_music.play_to(src)
+		GLOB.using_map.lobby_music.play_to(src)
 
 /proc/get_rand_frequency()
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.

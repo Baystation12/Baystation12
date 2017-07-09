@@ -162,7 +162,7 @@ proc/load_unit_test_changes()
 
 	var/list/test_datums = get_test_datums()
 	run_unit_tests(test_datums)
-	log_unit_test("Caught [total_runtimes] Runtime\s.")
+	log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
 	del(world)
 
 /proc/run_unit_tests(var/list/test_datums, var/skip_disabled_tests = TRUE)

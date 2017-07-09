@@ -64,7 +64,7 @@ mob/observer/check_airflow_movable()
 		O.updateghostimages()
 
 /mob/observer/touch_map_edge()
-	if(z in using_map.sealed_levels)
+	if(z in GLOB.using_map.sealed_levels)
 		return
 
 	var/new_x = x

@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(garbage)
 
 			// Something's still referring to the qdel'd object.  Kill it.
 			var/type = A.type
-			testing("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
+			report_progress("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
 			didntgc["[type]"]++
 
 			HardDelete(A)
@@ -262,7 +262,7 @@ SUBSYSTEM_DEF(garbage)
 	running_find_references = type
 	if(usr && usr.client)
 		if(usr.client.running_find_references)
-			testing("CANCELLED search for references to a [usr.client.running_find_references].")
+			report_progress("CANCELLED search for references to a [usr.client.running_find_references].")
 			usr.client.running_find_references = null
 			running_find_references = null
 			//restart the garbage collector
@@ -281,12 +281,12 @@ SUBSYSTEM_DEF(garbage)
 	if(usr && usr.client)
 		usr.client.running_find_references = type
 
-	testing("Beginning search for references to a [type].")
+	report_progress("Beginning search for references to a [type].")
 	last_find_references = world.time
 	DoSearchVar(GLOB)
 	for(var/datum/thing in world)
 		DoSearchVar(thing, "WorldRef: [thing]")
-	testing("Completed search for references to a [type].")
+	report_progress("Completed search for references to a [type].")
 	if(usr && usr.client)
 		usr.client.running_find_references = null
 	running_find_references = null
@@ -344,10 +344,10 @@ SUBSYSTEM_DEF(garbage)
 			for(var/varname in D.vars)
 				var/variable = D.vars[varname]
 				if(variable == src)
-					testing("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
+					report_progress("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
 				else if(islist(variable))
 					if(src in variable)
-						testing("Found [src.type] \ref[src] in [D.type]'s [varname] list var. Global: [Xname]")
+						report_progress("Found [src.type] \ref[src] in [D.type]'s [varname] list var. Global: [Xname]")
 #ifdef GC_FAILURE_HARD_LOOKUP
 					for(var/I in variable)
 						DoSearchVar(I, TRUE)
@@ -356,7 +356,7 @@ SUBSYSTEM_DEF(garbage)
 #endif
 	else if(islist(X))
 		if(src in X)
-			testing("Found [src.type] \ref[src] in list [Xname].")
+			report_progress("Found [src.type] \ref[src] in list [Xname].")
 #ifdef GC_FAILURE_HARD_LOOKUP
 		for(var/I in X)
 			DoSearchVar(I, Xname + ": list")

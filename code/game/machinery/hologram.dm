@@ -90,7 +90,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				var/list/holopadlist = list()
 				for(var/obj/machinery/hologram/holopad/H in GLOB.machines)
-					if((H.z in using_map.station_levels) && H.operable())
+					if((H.z in GLOB.using_map.station_levels) && H.operable())
 						holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world
 				holopadlist = sortAssoc(holopadlist)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist

@@ -214,7 +214,7 @@ var/global/list/additional_antag_types = list()
 		display_roundstart_logout_report()
 
 	spawn (rand(waittime_l, waittime_h))
-		using_map.send_welcome()
+		GLOB.using_map.send_welcome()
 		sleep(rand(100,150))
 		announce_ert_disabled()
 
@@ -332,7 +332,7 @@ var/global/list/additional_antag_types = list()
 				if(ishuman(M))
 					surviving_humans++
 				var/area/A = get_area(M)
-				if(A && is_type_in_list(A, using_map.post_round_safe_areas))
+				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
 					escaped_total++
 					if(ishuman(M))
 						escaped_humans++

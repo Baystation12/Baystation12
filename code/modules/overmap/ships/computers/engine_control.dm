@@ -8,7 +8,7 @@
 	var/obj/effect/overmap/ship/linked
 
 /obj/machinery/computer/engines/Initialize()
-	..()
+	. = ..()
 	linked = map_sectors["[z]"]
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)

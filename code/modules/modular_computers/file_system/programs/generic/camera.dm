@@ -2,7 +2,7 @@
 /proc/get_camera_access(var/network)
 	if(!network)
 		return 0
-	. = using_map.get_network_access(network)
+	. = GLOB.using_map.get_network_access(network)
 	if(.)
 		return
 
@@ -44,7 +44,7 @@
 	data["current_network"] = current_network
 
 	var/list/all_networks[0]
-	for(var/network in using_map.station_networks)
+	for(var/network in GLOB.using_map.station_networks)
 		all_networks.Add(list(list(
 							"tag" = network,
 							"has_access" = can_access_network(user, get_camera_access(network))

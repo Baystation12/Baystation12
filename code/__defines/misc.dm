@@ -198,3 +198,5 @@
 #define VIRUS_ENGINEERED	3
 #define VIRUS_EXOTIC		4	//Usually adminbus only
 
+//Error handler defines
+#define ERROR_USEFUL_LEN 2

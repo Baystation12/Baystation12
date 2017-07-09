@@ -443,12 +443,6 @@
 			return global.endgame_safespawns;
 		if("engineering_positions")
 			return global.engineering_positions;
-		if("error_cache")
-			return global.error_cache;
-		if("error_cooldown")
-			return global.error_cooldown;
-		if("error_last_seen")
-			return global.error_last_seen;
 		if("ert")
 			return global.ert;
 		if("ert_base_chance")
@@ -1157,10 +1151,6 @@
 			return global.total_lighting_overlays;
 		if("total_lighting_sources")
 			return global.total_lighting_sources;
-		if("total_runtimes")
-			return global.total_runtimes;
-		if("total_runtimes_skipped")
-			return global.total_runtimes_skipped;
 		if("total_unit_tests")
 			return global.total_unit_tests;
 		if("traitors")
@@ -1185,8 +1175,6 @@
 			return global.uplink_purchase_repository;
 		if("uplink_random_selections_")
 			return global.uplink_random_selections_;
-		if("using_map")
-			return global.using_map;
 		if("valid_bloodtypes")
 			return global.valid_bloodtypes;
 		if("vendor_account")
@@ -1684,12 +1672,6 @@
 			global.endgame_safespawns=newval;
 		if("engineering_positions")
 			global.engineering_positions=newval;
-		if("error_cache")
-			global.error_cache=newval;
-		if("error_cooldown")
-			global.error_cooldown=newval;
-		if("error_last_seen")
-			global.error_last_seen=newval;
 		if("ert")
 			global.ert=newval;
 		if("ert_base_chance")
@@ -2398,10 +2380,6 @@
 			global.total_lighting_overlays=newval;
 		if("total_lighting_sources")
 			global.total_lighting_sources=newval;
-		if("total_runtimes")
-			global.total_runtimes=newval;
-		if("total_runtimes_skipped")
-			global.total_runtimes_skipped=newval;
 		if("total_unit_tests")
 			global.total_unit_tests=newval;
 		if("traitors")
@@ -2426,8 +2404,6 @@
 			global.uplink_purchase_repository=newval;
 		if("uplink_random_selections_")
 			global.uplink_random_selections_=newval;
-		if("using_map")
-			global.using_map=newval;
 		if("valid_bloodtypes")
 			global.valid_bloodtypes=newval;
 		if("vendor_account")
@@ -2703,9 +2679,6 @@
 	"endgame_exits",
 	"endgame_safespawns",
 	"engineering_positions",
-	"error_cache",
-	"error_cooldown",
-	"error_last_seen",
 	"ert",
 	"ert_base_chance",
 	"escape_pods",
@@ -3060,8 +3033,6 @@
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",
-	"total_runtimes",
-	"total_runtimes_skipped",
 	"total_unit_tests",
 	"traitors",
 	"transfer_controller",
@@ -3074,7 +3045,6 @@
 	"uplink",
 	"uplink_purchase_repository",
 	"uplink_random_selections_",
-	"using_map",
 	"valid_bloodtypes",
 	"vendor_account",
 	"ventcrawl_machinery",

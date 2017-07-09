@@ -99,7 +99,7 @@ SUBSYSTEM_DEF(atoms)
 	return qdeleted || QDELING(A)
 
 /datum/controller/subsystem/atoms/stat_entry(msg)
-	..("CA:[created_atoms ? created_atoms.len : 0]|LL:[late_loaders ? late_loaders.len : 0]|BIC:[BadInitializeCalls.len]")
+	..("Bad Initialize Calls:[BadInitializeCalls.len]")
 
 /datum/controller/subsystem/atoms/proc/map_loader_begin()
 	old_initialized = initialized
@@ -128,6 +128,9 @@ SUBSYSTEM_DEF(atoms)
 			. += "- Qdel'd in New()\n"
 		if(fails & BAD_INIT_SLEPT)
 			. += "- Slept during Initialize()\n"
+
+/proc/p_print()
+	world << jointext(SSatoms.InitLog(), null)
 
 /datum/controller/subsystem/atoms/Shutdown()
 	var/initlog = InitLog()

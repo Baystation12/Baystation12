@@ -35,6 +35,7 @@
 	colourName = "purple"
 
 /obj/item/weapon/pen/crayon/random/Initialize()
+	..()
 	var/crayon_type = pick(subtypesof(/obj/item/weapon/pen/crayon) - /obj/item/weapon/pen/crayon/random)
 	new crayon_type(loc)
 	return INITIALIZE_HINT_QDEL

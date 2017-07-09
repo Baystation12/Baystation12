@@ -231,19 +231,19 @@
 	if(!simulated)
 		return
 
-	if(!z || (z in using_map.sealed_levels))
+	if(!z || (z in GLOB.using_map.sealed_levels))
 		return
 
 	if(!GLOB.universe.OnTouchMapEdge(src))
 		return
 
-	if(using_map.use_overmap)
+	if(GLOB.using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
 
 	var/new_x
 	var/new_y
-	var/new_z = using_map.get_transit_zlevel(z)
+	var/new_z = GLOB.using_map.get_transit_zlevel(z)
 	if(new_z)
 		if(x <= TRANSITIONEDGE)
 			new_x = world.maxx - TRANSITIONEDGE - 2

@@ -12,17 +12,17 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in using_map.station_levels) &&	(z2 in using_map.station_levels))
+	if((z1 in GLOB.using_map.station_levels) &&	(z2 in GLOB.using_map.station_levels))
 		return 1
 	return 0
 
 /proc/max_default_z_level()
 	var/max_z = 0
-	for(var/z in using_map.station_levels)
+	for(var/z in GLOB.using_map.station_levels)
 		max_z = max(z, max_z)
-	for(var/z in using_map.admin_levels)
+	for(var/z in GLOB.using_map.admin_levels)
 		max_z = max(z, max_z)
-	for(var/z in using_map.player_levels)
+	for(var/z in GLOB.using_map.player_levels)
 		max_z = max(z, max_z)
 	return max_z
 
@@ -62,22 +62,22 @@
 	return heard
 
 /proc/isStationLevel(var/level)
-	return level in using_map.station_levels
+	return level in GLOB.using_map.station_levels
 
 /proc/isNotStationLevel(var/level)
 	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
-	return level in using_map.player_levels
+	return level in GLOB.using_map.player_levels
 
 /proc/isAdminLevel(var/level)
-	return level in using_map.admin_levels
+	return level in GLOB.using_map.admin_levels
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
 
 /proc/isContactLevel(var/level)
-	return level in using_map.contact_levels
+	return level in GLOB.using_map.contact_levels
 
 /proc/circlerange(center=usr,radius=3)
 

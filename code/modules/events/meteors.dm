@@ -20,7 +20,7 @@
 /datum/event/meteor_wave/announce()
 	switch(severity)
 		if(EVENT_LEVEL_MAJOR)
-			using_map.meteors_detected_announcement()
+			GLOB.using_map.meteors_detected_announcement()
 		else
 			command_announcement.Announce("The [station_name()] is now in a meteor shower.", "[station_name()] Sensor Array")
 

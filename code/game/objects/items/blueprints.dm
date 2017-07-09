@@ -56,7 +56,7 @@
 	var/area/A = get_area()
 	var/text = {"<HTML><head><title>[src]</title></head><BODY>
 <h2>[station_name()] blueprints</h2>
-<small>Property of [using_map.company_name]. For heads of staff only. Store in high-secure storage.</small><hr>
+<small>Property of [GLOB.using_map.company_name]. For heads of staff only. Store in high-secure storage.</small><hr>
 "}
 	switch (get_area_type())
 		if (AREA_SPACE)
@@ -105,7 +105,7 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	if(is_type_in_list(A, SPECIALS))
 		return AREA_SPECIAL
 
-	if(A.z in using_map.station_levels)
+	if(A.z in GLOB.using_map.station_levels)
 		return AREA_STATION
 
 	return AREA_SPECIAL

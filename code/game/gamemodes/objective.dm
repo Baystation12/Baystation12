@@ -127,7 +127,7 @@ datum/objective/anti_revolution/demote
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -135,7 +135,7 @@ datum/objective/anti_revolution/demote
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -228,7 +228,7 @@ datum/objective/hijack/check_completion()
 		return 0
 
 	var/area/shuttle/shuttle_area = get_area(owner.current)
-	if(!istype(shuttle_area) || !(shuttle_area.z in using_map.admin_levels))
+	if(!istype(shuttle_area) || !(shuttle_area.z in GLOB.using_map.admin_levels))
 		return 0
 
 	for(var/mob/living/player in GLOB.player_list)
@@ -275,7 +275,7 @@ datum/objective/silence
 			if(player.mind)
 				if(player.stat != DEAD)
 					var/turf/T = get_turf(player)
-					if(T && is_type_in_list(T.loc, using_map.post_round_safe_areas))
+					if(T && is_type_in_list(T.loc, GLOB.using_map.post_round_safe_areas))
 						return 0
 		return 1
 
@@ -302,7 +302,7 @@ datum/objective/escape
 			return 0
 
 		var/area/check_area = location.loc
-		return check_area && is_type_in_list(check_area, using_map.post_round_safe_areas)
+		return check_area && is_type_in_list(check_area, GLOB.using_map.post_round_safe_areas)
 
 
 
@@ -496,7 +496,7 @@ datum/objective/steal
 					if(ai.stat == DEAD)
 						continue
 					var/turf/T = get_turf(ai)
-					if(owner.current.contains(ai) || (T && is_type_in_list(T.loc, using_map.post_round_safe_areas)))
+					if(owner.current.contains(ai) || (T && is_type_in_list(T.loc, GLOB.using_map.post_round_safe_areas)))
 						return 1
 			else
 
@@ -807,7 +807,7 @@ datum/objective/heist/salvage
 	for(var/datum/mind/cult_mind in cult.current_antagonists)
 		if (cult_mind.current && cult_mind.current.stat!=2)
 			var/area/A = get_area(cult_mind.current )
-			if ( is_type_in_list(A, using_map.post_round_safe_areas))
+			if ( is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
 				acolytes_survived++
 	if(acolytes_survived >= target_amount)
 		return 0

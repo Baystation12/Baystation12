@@ -6,7 +6,7 @@
 /obj/item/weapon/implant/loyalty/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
-	<b>Name:</b> [using_map.company_name] Employee Management Implant<BR>
+	<b>Name:</b> [GLOB.using_map.company_name] Employee Management Implant<BR>
 	<b>Life:</b> Ten years.<BR>
 	<b>Important Notes:</b> Personnel injected with this device tend to be much more loyal to the company.<BR>
 	<HR>
@@ -20,11 +20,11 @@
 	var/mob/living/carbon/human/H = M
 	var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
-		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [using_map.company_name] try to invade your mind!")
+		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [GLOB.using_map.company_name] try to invade your mind!")
 		return FALSE
 	else
 		clear_antag_roles(H.mind, 1)
-		to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [using_map.company_name].</span>")
+		to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [GLOB.using_map.company_name].</span>")
 	return TRUE
 
 /obj/item/weapon/implanter/loyalty

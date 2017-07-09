@@ -41,7 +41,7 @@
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in GLOB.player_list)
-		if((M.z in using_map.contact_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+		if((M.z in GLOB.using_map.contact_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
 				sound_to(M, message_sound)
@@ -98,7 +98,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 
 /proc/level_seven_announcement()
-	using_map.level_x_biohazard_announcement(7)
+	GLOB.using_map.level_x_biohazard_announcement(7)
 
 /proc/ion_storm_announcement()
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")

@@ -39,13 +39,13 @@ var/global/list/image/splatter_cache=list()
 	GLOB.processing_objects -= src
 	return ..()
 
-/obj/effect/decal/cleanable/blood/New()
-	..()
+/obj/effect/decal/cleanable/blood/Initialize()
+	. = ..()
 	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
 	if(src.type == /obj/effect/decal/cleanable/blood)
-		if(src.loc && isturf(src.loc))
+		if(isturf(src.loc))
 			for(var/obj/effect/decal/cleanable/blood/B in src.loc)
 				if(B != src)
 					if (B.blood_DNA)
@@ -242,5 +242,6 @@ var/global/list/image/splatter_cache=list()
 	var/dry=0 // Keeps the lag down
 
 /obj/effect/decal/cleanable/mucus/New()
+	..()
 	spawn(DRYING_TIME * 2)
 		dry=1
