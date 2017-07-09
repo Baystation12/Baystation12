@@ -145,6 +145,7 @@
 		var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
 		if(!breathe_organ)
 			return maxHealth/2
+		return breathe_organ.get_oxygen_deprivation()
 
 /mob/living/carbon/human/setOxyLoss(var/amount)
 	if(!need_breathe())
