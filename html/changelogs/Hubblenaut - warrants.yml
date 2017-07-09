@@ -1,8 +1,0 @@
-author: Hubblenaut
-
-delete-after: True
-
-changes: 
-  - rscadd: "Gives holowarrants their own handheld item."
-  - tweak: "Holowarrants will now broadcast updates on warrants instead of security HUDs."
-  - tweak: "Authorizing a warrant using the holowarrant will now broadcast a message."
