@@ -11,6 +11,7 @@ var/global/list/processing_power_items   = list()
 var/global/list/active_diseases          = list()
 var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
 var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
+var/global/list/holowarrant_users        = list() // List of all entities using a holowarrant
 var/global/list/hud_icon_reference       = list()
 var/global/list/traders                  = list() //List of all nearby traders
 

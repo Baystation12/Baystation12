@@ -55,8 +55,10 @@
 /datum/shuttle/autodock/ferry/supply/proc/forbidden_atoms_check()
 	if (!at_station())
 		return 0	//if badmins want to send forbidden atoms on the supply shuttle from centcom we don't care
-
-	return supply_controller.forbidden_atoms_check(shuttle_area)
+	
+	for(var/area/A in shuttle_area)
+		if(supply_controller.forbidden_atoms_check(A))
+			return 1
 
 /datum/shuttle/autodock/ferry/supply/proc/at_station()
 	return (!location)

@@ -208,23 +208,6 @@
 			M.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
-		if(I_GRAB)
-			if (M == src)
-				return
-			if (!(status_flags & CANPUSH))
-				return
-
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
-
-			M.put_in_active_hand(G)
-
-			G.synch()
-			G.affecting = src
-			LAssailant = M
-
-			M.visible_message("<span class='warning'>[M] has grabbed \the [src] passively!</span>")
-			M.do_attack_animation(src)
-
 		if(I_HURT)
 			adjustBruteLoss(harm_intent_damage)
 			M.visible_message("<span class='warning'>[M] [response_harm] \the [src]</span>")

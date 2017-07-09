@@ -36,7 +36,7 @@
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
 //Fetching a message if needed. src is the sender and C is the target client
 
-/client/proc/cmd_admin_pm(var/client/C, var/msg = null)
+/client/proc/cmd_admin_pm(var/client/C, var/msg = null, var/datum/ticket/ticket = null)
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
 		return
@@ -44,6 +44,45 @@
 	if(!istype(C,/client))
 		if(holder)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
 		else		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</span>")
+		return
+
+	var/recieve_pm_type = "Player"
+	if(holder)
+		//mod PMs are maroon
+		//PMs sent from admins and mods display their rank
+		if(holder)
+			recieve_pm_type = holder.rank
+
+	else if(!C.holder)
+		to_chat(src, "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")
+		return
+
+	var/datum/client_lite/receiver_lite = client_repository.get_lite_client(C)
+	var/datum/client_lite/sender_lite = client_repository.get_lite_client(src)
+
+	// searches for an open ticket, in case an outdated link was clicked
+	// I'm paranoid about the problems that could be caused by accidentally finding the wrong ticket, which is why this is strict
+	if(isnull(ticket))
+		if(holder)
+			ticket = get_open_ticket_by_client(receiver_lite) // it's more likely an admin clicked a different PM link, so check admin -> player with ticket first
+			if(isnull(ticket) && C.holder)
+				ticket = get_open_ticket_by_client(sender_lite) // if still no dice, try an admin with ticket -> admin
+		else
+			ticket = get_open_ticket_by_client(sender_lite) // lastly, check player with ticket -> admin
+
+
+	if(isnull(ticket)) // finally, accept that no ticket exists
+		if(holder)
+			ticket = new /datum/ticket(receiver_lite)
+			ticket.take(sender_lite)
+		else
+			to_chat(src, "<span class='notice'>You do not have an open ticket. Please use the adminhelp verb to open a ticket.</span>")
+			return
+	else if(ticket.status != TICKET_ASSIGNED && !holder)
+		to_chat(src, "<span class='notice'>Your ticket is not open for conversation. Please wait for an administrator to receive your adminhelp.</span>")
+		return
+
+	if(holder && !(sender_lite.ckey in ticket.assigned_admin_ckeys() || sender_lite.ckey == ticket.owner.ckey) && !ticket.take(sender_lite))
 		return
 
 	//get message text, limit it's length.and clean/escape html
@@ -57,17 +96,6 @@
 			return
 
 	msg = sanitize(msg)
-
-	var/recieve_pm_type = "Player"
-	if(holder)
-		//mod PMs are maroon
-		//PMs sent from admins and mods display their rank
-		if(holder)
-			recieve_pm_type = holder.rank
-
-	else if(!C.holder)
-		to_chat(src, "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")
-		return
 
 	var/recieve_message
 
@@ -89,8 +117,8 @@
 					else
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
-	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>: <span class='message'>[msg]</span></span></span>")
-	to_chat(C, "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>: <span class='message'>[msg]</span></span></span>")
+	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>[holder ? " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) " : " "](<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message'>[msg]</span></span></span>")
+	to_chat(C, "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>[C.holder ? " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) " : " "](<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message'>[msg]</span></span></span>")
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
@@ -98,7 +126,8 @@
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 	adminmsg2adminirc(src, C, html_decode(msg))
-	admin_pm_repository.store_pm(src, C, msg)
+
+	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
@@ -106,7 +135,8 @@
 		if(X == C || X == src)
 			continue
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
-			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>[key_name(C, X, 0)]</span>: <span class='message'>[msg]</span></span></span>")
+			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0, ticket)]</span> to <span class='name'>[key_name(C, X, 0, ticket)]</span> (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message'>[msg]</span></span></span>")
+
 /client/proc/cmd_admin_irc_pm(sender)
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")

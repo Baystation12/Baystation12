@@ -37,9 +37,12 @@ var/warrant_uid = 0
 		var/list/searchwarrants = list()
 		var/list/archivedwarrants = list()
 		for(var/datum/data/record/warrant/W in data_core.warrants)
+			var/charges = W.fields["charges"]
+			if(lentext(charges) > 50)
+				charges = copytext(charges, 1, 50) + "..."
 			var/warrant = list(
 			"warrantname" = W.fields["namewarrant"],
-			"charges" = "[copytext(W.fields["charges"],1,min(length(W.fields["charges"]) + 1, 50))]...",
+			"charges" = charges,
 			"auth" = W.fields["auth"],
 			"id" = W.warrant_id,
 			"arrestsearch" = W.fields["arrestsearch"],
@@ -119,7 +122,7 @@ var/warrant_uid = 0
 
 	if(href_list["savewarrant"])
 		. = 1
-		broadcast_security_hud_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
+		broadcast_holowarrant_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
 		data_core.warrants |= activewarrant
 		activewarrant = null
 

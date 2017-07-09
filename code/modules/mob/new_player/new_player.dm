@@ -323,6 +323,9 @@
 
 	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
+	if(job.latejoin_at_spawnpoints)
+		var/obj/S = job_master.get_roundstart_spawnpoint(rank)
+		spawn_turf = get_turf(S)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus)
 		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \

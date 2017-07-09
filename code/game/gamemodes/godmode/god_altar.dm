@@ -24,9 +24,9 @@
 	return ..()
 
 /obj/structure/deity/altar/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
-		if(G.state >= GRAB_AGGRESSIVE)
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
+		if(G.force_danger())
 			G.affecting.forceMove(get_turf(src))
 			G.affecting.Weaken(1)
 			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")

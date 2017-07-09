@@ -1,3 +1,7 @@
+/datum/preferences
+	var/list/alternate_languages //Secondary language(s)
+	var/list/language_prefixes   //Language prefix keys
+
 /datum/category_item/player_setup_item/general/language
 	name = "Language"
 	sort_order = 2
@@ -73,6 +77,8 @@
 	return FALSE
 
 /datum/category_item/player_setup_item/general/language/proc/sanitize_alt_languages()
+	if(!istype(pref.alternate_languages)) pref.alternate_languages = list()
+
 	var/preference_mob = preference_mob()
 	for(var/L in pref.alternate_languages)
 		var/datum/language/lang = all_languages[L]

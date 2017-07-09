@@ -104,8 +104,14 @@
 /datum/follow_holder/proc/get_name(var/recalc = FALSE)
 	if(!name || recalc)
 		var/suffix = get_suffix(followed_instance)
-		name = "[followed_instance.name][suffix ? " [suffix]" : ""]"
+		name = "[followed_instance.follow_name()][suffix ? " [suffix]" : ""]"
 	return name
+
+/atom/movable/proc/follow_name()
+	return name
+
+/mob/follow_name()
+	return real_name
 
 /datum/follow_holder/proc/show_entry()
 	return !!followed_instance

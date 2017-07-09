@@ -41,6 +41,7 @@
 
 /obj/structure/filingcabinet/attackby(obj/item/P as obj, mob/user as mob)
 	if(is_type_in_list(P, can_hold))
+		add_fingerprint(user)
 		to_chat(user, "<span class='notice'>You put [P] in [src].</span>")
 		user.drop_item()
 		P.loc = src
@@ -49,8 +50,7 @@
 		icon_state = initial(icon_state)
 		updateUsrDialog()
 	else
-		to_chat(user, "<span class='notice'>You can't put [P] in [src]!</span>")
-	..()
+		..()
 	return
 
 

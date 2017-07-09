@@ -75,7 +75,7 @@
 		var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name[BP_PLASMA]
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
-		
+
 		var/obj/item/organ/internal/cell/potato = internal_organs_by_name[BP_CELL]
 		if(potato && potato.cell)
 			stat("Battery charge:", "[potato.get_charge()]/[potato.cell.maxcharge]")
@@ -672,7 +672,7 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation)
+	if(species.has_fine_manipulation && !nabbing)
 		return 1
 	if(!silent)
 		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
@@ -709,7 +709,7 @@
 /mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
-	if(!istype(H) || !H.can_intake_reagents)
+	if(!H || !istype(H) || !H.can_intake_reagents)
 		return 0
 	return 1
 
@@ -1101,6 +1101,8 @@
 			remove_language(species.language)
 		if(species.default_language)
 			remove_language(species.default_language)
+		for(var/datum/language/L in species.assisted_langs)
+			remove_language(L)
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
 		holder_type = null
@@ -1110,9 +1112,16 @@
 
 	if(species.language)
 		add_language(species.language)
+		species_language = all_languages[species.language]
+
+	for(var/L in species.additional_langs)
+		add_language(L)
 
 	if(species.default_language)
 		add_language(species.default_language)
+
+	if(species.grab_type)
+		current_grab_type = all_grabobjects[species.grab_type]
 
 	if(species.base_color && default_colour)
 		//Apply colour.
@@ -1400,13 +1409,17 @@
 	set desc = "Try not to hurt them."
 	set category = "IC"
 
-	if(stat) return
+	if(stat || species.flags & CAN_NAB) return
 	pulling_punches = !pulling_punches
 	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
 	return
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
+	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
+	if(H.open && !method)
+		return "muddled and unclear; you can't seem to find a vein"
+
 	var/temp = 0
 	switch(pulse())
 		if(PULSE_NONE)
@@ -1425,7 +1438,7 @@
 //			output for machines^	^^^^^^^output for people^^^^^^^^^
 
 /mob/living/carbon/human/proc/pulse()
-	var/obj/item/organ/internal/heart/H = internal_organs_by_name["heart"]
+	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
 	if(!H)
 		return PULSE_NONE
 	else
@@ -1485,6 +1498,12 @@
 			return 0
 		return check_organ.can_feel_pain()
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/human/need_breathe()
+	if(species.breathing_organ)
+		return 1
+	else
+		return 0
 
 /mob/living/carbon/human/get_adjusted_metabolism(metabolism)
 	return ..() * (species ? species.metabolism_mod : 1)
