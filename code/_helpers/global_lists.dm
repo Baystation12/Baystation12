@@ -11,6 +11,7 @@ var/global/list/human_mob_list = list()				//List of all human mobs and sub-type
 var/global/list/silicon_mob_list = list()			//List of all silicon mobs, including clientless
 var/global/list/living_mob_list_ = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list_ = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
+var/global/list/ghost_mob_list_ = list()			//List of all ghost mobs, including clientless. Excludes /mob/new_player
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions
@@ -37,6 +38,10 @@ var/list/mannequins_
 
 // Posters
 var/global/list/poster_designs = list()
+
+// Grabs
+var/global/list/all_grabstates[0]
+var/global/list/all_grabobjects[0]
 
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
@@ -199,8 +204,24 @@ var/global/list/string_slot_flags = list(
 		var/datum/poster/P = new T
 		poster_designs += P
 
-	return 1
+	//Grabs
+	paths = typesof(/datum/grab) - /datum/grab
+	for(var/T in paths)
+		var/datum/grab/G = new T
+		if(G.state_name)
+			all_grabstates[G.state_name] = G
 
+	paths = typesof(/obj/item/grab) - /obj/item/grab
+	for(var/T in paths)
+		var/obj/item/grab/G = new T
+		if(G.type_name)
+			all_grabobjects[G.type_name] = T
+
+	for(var/grabstate_name in all_grabstates)
+		var/datum/grab/G = all_grabstates[grabstate_name]
+		G.refresh_updown()
+
+	return 1
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

@@ -164,8 +164,8 @@ var/list/global/organ_rel_size = list(
 		if(target.buckled || target.lying)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
-		for(var/obj/item/weapon/grab/G in target.grabbed_by)
-			if(G.state >= GRAB_AGGRESSIVE)
+		for(var/obj/item/grab/G in target.grabbed_by)
+			if(G.stop_move())
 				return zone
 
 	var/miss_chance = 10
@@ -398,6 +398,9 @@ proc/is_blind(A)
 
 /proc/broadcast_medical_hud_message(var/message, var/broadcast_source)
 	broadcast_hud_message(message, broadcast_source, med_hud_users, /obj/item/clothing/glasses/hud/health)
+
+/proc/broadcast_holowarrant_message(var/message, var/broadcast_source)
+	broadcast_hud_message(message, broadcast_source, holowarrant_users, /obj/item/device/holowarrant)
 
 /proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
 	var/turf/sourceturf = get_turf(broadcast_source)

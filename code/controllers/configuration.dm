@@ -77,6 +77,7 @@ var/list/gamemode_cache = list()
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
 	var/character_slots = 10				// The number of available character slots
+	var/loadout_slots = 3					// The number of loadout slots per character
 
 	var/max_maint_drones = 5				//This many drones can spawn,
 	var/allow_drone_spawn = 1				//assuming the admin allow them to.
@@ -662,6 +663,9 @@ var/list/gamemode_cache = list()
 				if("character_slots")
 					config.character_slots = text2num(value)
 
+				if("loadout_slots")
+					config.loadout_slots = text2num(value)
+
 				if("allow_drone_spawn")
 					config.allow_drone_spawn = text2num(value)
 
@@ -915,3 +919,9 @@ var/list/gamemode_cache = list()
 			config.python_path = "/usr/bin/env python2"
 		else //probably windows, if not this should work anyway
 			config.python_path = "python"
+
+/datum/configuration/proc/load_event(filename)
+	var/event_info = file2text(filename)
+
+	if (event_info)
+		custom_event_msg = event_info

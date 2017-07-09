@@ -23,7 +23,7 @@
 	if(laser)
 		damage_amt += burn
 		cur_damage += burn_dam
-	if(internal_organs && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
+	if(internal_organs && internal_organs.len && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
 		// Damage an internal organ
 		var/list/victims = list()
 		for(var/obj/item/organ/internal/I in internal_organs)

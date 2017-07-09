@@ -353,8 +353,8 @@ var/global/datum/controller/occupations/job_master
 			//Equip custom gear loadout.
 			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
 			var/list/custom_equip_leftovers = list()
-			if(H.client.prefs.gear && H.client.prefs.gear.len && job.title != "Cyborg" && job.title != "AI")
-				for(var/thing in H.client.prefs.gear)
+			if(H.client.prefs.Gear() && job.title != "Cyborg" && job.title != "AI")
+				for(var/thing in H.client.prefs.Gear())
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
 						var/permitted
@@ -375,7 +375,7 @@ var/global/datum/controller/occupations/job_master
 						if(G.slot && !(G.slot in custom_equip_slots))
 							// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
 							// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
-							var/metadata = H.client.prefs.gear[G.display_name]
+							var/metadata = H.client.prefs.Gear()[G.display_name]
 							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
 								custom_equip_leftovers += thing
 							else if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
@@ -408,7 +408,7 @@ var/global/datum/controller/occupations/job_master
 				if(G.slot in custom_equip_slots)
 					spawn_in_storage += thing
 				else
-					var/metadata = H.client.prefs.gear[G.display_name]
+					var/metadata = H.client.prefs.Gear()[G.display_name]
 					if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
 						to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
 						custom_equip_slots.Add(G.slot)
@@ -419,17 +419,9 @@ var/global/datum/controller/occupations/job_master
 
 		H.job = rank
 
-		if(!joined_late)
-			var/obj/S = null
-			var/list/loc_list = new()
-			for(var/obj/effect/landmark/start/sloc in landmarks_list)
-				if(sloc.name != rank)	continue
-				if(locate(/mob/living) in sloc.loc)	continue
-				loc_list += sloc
-			if(loc_list.len)
-				S = pick(loc_list)
-			else
-				S = locate("start*[rank]") // use old stype
+		if(!joined_late || job.latejoin_at_spawnpoints)
+			var/obj/S = get_roundstart_spawnpoint(rank)
+			
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else
@@ -470,7 +462,7 @@ var/global/datum/controller/occupations/job_master
 			//Deferred item spawning.
 			for(var/thing in spawn_in_storage)
 				var/datum/gear/G = gear_datums[thing]
-				var/metadata = H.client.prefs.gear[G.display_name]
+				var/metadata = H.client.prefs.Gear()[G.display_name]
 				var/item = G.spawn_item(null, metadata)
 
 				var/atom/placed_in = H.equip_to_storage(item)
@@ -661,3 +653,14 @@ var/global/datum/controller/occupations/job_master
 
 /datum/controller/occupations/proc/GetJobByType(var/job_type)
 	return occupations_by_type[job_type]
+
+/datum/controller/occupations/proc/get_roundstart_spawnpoint(var/rank)
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	if(loc_list.len)
+		return pick(loc_list)
+	else
+		return locate("start*[rank]") // use old stype

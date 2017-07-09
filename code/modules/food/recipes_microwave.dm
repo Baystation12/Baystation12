@@ -39,6 +39,13 @@ I said no!
 	items = list(/obj/item/weapon/holder/diona)
 	result = /obj/item/weapon/reagent_containers/food/snacks/dionaroast
 
+/datum/recipe/classichotdog
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/bun,
+		/obj/item/weapon/holder/corgi
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/classichotdog
+
 /datum/recipe/jellydonut
 	reagents = list("berryjuice" = 5, "sugar" = 5)
 	items = list(

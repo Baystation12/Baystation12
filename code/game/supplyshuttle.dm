@@ -179,34 +179,35 @@ var/list/point_source_descriptions = list(
 	proc/sell()
 		var/phoron_count = 0
 		var/plat_count = 0
-		for(var/atom/movable/MA in shuttle.shuttle_area)
-			if(MA.anchored)	continue
+		for(var/area/subarea in shuttle.shuttle_area)
+			for(var/atom/movable/MA in subarea)
+				if(MA.anchored)	continue
 
-			// Must be in a crate!
-			if(istype(MA,/obj/structure/closet/crate))
-				var/obj/structure/closet/crate/CR = MA
-				callHook("sell_crate", list(CR, shuttle.shuttle_area))
+				// Must be in a crate!
+				if(istype(MA,/obj/structure/closet/crate))
+					var/obj/structure/closet/crate/CR = MA
+					callHook("sell_crate", list(CR, subarea))
 
-				add_points_from_source(CR.points_per_crate, "crate")
-				var/find_slip = 1
+					add_points_from_source(CR.points_per_crate, "crate")
+					var/find_slip = 1
 
-				for(var/atom in CR)
-					// Sell manifests
-					var/atom/A = atom
-					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/manifest/slip = A
-						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
-							add_points_from_source(points_per_slip, "manifest")
-							find_slip = 0
-						continue
+					for(var/atom in CR)
+						// Sell manifests
+						var/atom/A = atom
+						if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
+							var/obj/item/weapon/paper/manifest/slip = A
+							if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
+								add_points_from_source(points_per_slip, "manifest")
+								find_slip = 0
+							continue
 
-					// Sell phoron and platinum
-					if(istype(A, /obj/item/stack))
-						var/obj/item/stack/P = A
-						switch(P.get_material_name())
-							if("phoron") phoron_count += P.get_amount()
-							if("platinum") plat_count += P.get_amount()
-			qdel(MA)
+						// Sell phoron and platinum
+						if(istype(A, /obj/item/stack))
+							var/obj/item/stack/P = A
+							switch(P.get_material_name())
+								if("phoron") phoron_count += P.get_amount()
+								if("platinum") plat_count += P.get_amount()
+				qdel(MA)
 
 		if(phoron_count)
 			var/temp = phoron_count * points_per_phoron
@@ -220,17 +221,17 @@ var/list/point_source_descriptions = list(
 	proc/buy()
 		if(!shoppinglist.len) return
 		var/list/clear_turfs = list()
-
-		for(var/turf/T in shuttle.shuttle_area)
-			if(T.density)	continue
-			var/contcount
-			for(var/atom/A in T.contents)
-				if(!A.simulated)
+		for(var/area/subarea in shuttle.shuttle_area)
+			for(var/turf/T in subarea)
+				if(T.density)	continue
+				var/contcount
+				for(var/atom/A in T.contents)
+					if(!A.simulated)
+						continue
+					contcount++
+				if(contcount)
 					continue
-				contcount++
-			if(contcount)
-				continue
-			clear_turfs += T
+				clear_turfs += T
 		for(var/S in shoppinglist)
 			if(!clear_turfs.len)	break
 			var/i = rand(1,clear_turfs.len)

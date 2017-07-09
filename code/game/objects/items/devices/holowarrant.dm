@@ -2,7 +2,7 @@
 	name = "warrant projector"
 	desc = "The practical paperwork replacement for the officer on the go."
 	icon_state = "holowarrant"
-	item_state = "flashtool"
+	item_state = "holowarrant"
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
@@ -19,7 +19,7 @@
 	if(in_range(user, src) || isghost(user))
 		show_content(user)
 	else
-		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
+		to_chat(user, "<span class='notice'>You have to be closer if you want to read it.</span>")
 
 //hit yourself with it
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
@@ -48,6 +48,7 @@
 				active.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
 					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
+			broadcast_holowarrant_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
 			return 1
 	..()
 
@@ -62,6 +63,14 @@
 		icon_state = "holowarrant_filled"
 	else
 		icon_state = "holowarrant"
+
+/obj/item/device/holowarrant/equipped(var/mob/user, var/slot)
+	holowarrant_users += user
+	return ..()
+
+/obj/item/device/holowarrant/dropped(mob/user)
+	holowarrant_users -= user
+	return ..()
 
 /obj/item/device/holowarrant/proc/show_content(mob/user, forceshow)
 	if(!active)

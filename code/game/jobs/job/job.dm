@@ -30,6 +30,7 @@
 	var/list/allowed_ranks				  // Ditto
 
 	var/announced						  //If their arrival is announced on radio
+	var/latejoin_at_spawnpoints			  //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
