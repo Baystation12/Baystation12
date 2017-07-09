@@ -1500,7 +1500,7 @@
 	return !(species.flags & NO_PAIN)
 
 /mob/living/carbon/human/need_breathe()
-	if(species.breathing_organ)
+	if(species.breathing_organ && should_have_organ(species.breathing_organ))
 		return 1
 	else
 		return 0
