@@ -15,7 +15,7 @@
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if(H.hand)
 			temp = H.organs_by_name[BP_L_HAND]
-		if(!temp || !temp.is_usable())
+		if(!temp || (!temp.is_usable() && !M.nabbing))
 			to_chat(H, "<span class='warning'>You can't use your hand.</span>")
 			return
 
@@ -69,7 +69,9 @@
 				if((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
 					to_chat(H, "<span class='warning'>You need to remove \the [src]'s mouth covering!</span>")
 					return 0
-
+				if (!H.internal_organs_by_name[BP_LUNGS])
+					to_chat(H, "<span class='danger'>You don't have lungs, you cannot perform CPR!</span>")
+					return
 				if (!cpr_time)
 					return 0
 
@@ -99,28 +101,9 @@
 			return 1
 
 		if(I_GRAB)
-			if(M == src || anchored)
-				return 0
-			for(var/obj/item/weapon/grab/G in src.grabbed_by)
-				if(G.assailant == M)
-					to_chat(M, "<span class='notice'>You already grabbed [src].</span>")
-					return
-			if(w_uniform)
-				w_uniform.add_fingerprint(M)
-
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
-			if(buckled)
-				to_chat(M, "<span class='notice'>You cannot grab [src], \he is buckled in!</span>")
-			if(!G)	//the grab will delete itself in New if affecting is anchored
-				return
-			M.put_in_active_hand(G)
-			G.synch()
-			LAssailant = M
-
-			H.do_attack_animation(src)
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
-			return 1
+			message_admins("[H.name] is grabbing [src]")
+			visible_message("<span class='danger'>[M] attempted to grab \the [src]!</span>")
+			return H.make_grab(H, src)
 
 		if(I_HURT)
 
@@ -133,6 +116,16 @@
 			var/accurate = 0
 			var/hit_zone = H.zone_sel.selecting
 			var/obj/item/organ/external/affecting = get_organ(hit_zone)
+
+			// See what attack they use
+			var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
+			if(!attack)
+				return 0
+			if(world.time < H.last_attack + attack.delay)
+				to_chat(H, "<span class='notice'>You can't attack again so soon.</span>")
+				return 0
+			else
+				H.last_attack = world.time
 
 			if(!affecting || affecting.is_stump())
 				to_chat(M, "<span class='danger'>They are missing that limb!</span>")
@@ -152,7 +145,7 @@
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
-			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
+			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H || H.species.flags & NO_BLOCK)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
 				rand_damage = 5
 
@@ -197,11 +190,6 @@
 			if(!miss_type && block)
 				attack_message = "[H] went for [src]'s [affecting.name] but was blocked!"
 				miss_type = 2
-
-			// See what attack they use
-			var/datum/unarmed_attack/attack = H.get_unarmed_attack(src, hit_zone)
-			if(!attack)
-				return 0
 
 			H.do_attack_animation(src)
 			if(!attack_message)
@@ -299,32 +287,6 @@
 	updatehealth()
 	return 1
 
-//Used to attack a joint through grabbing
-/mob/living/carbon/human/proc/grab_joint(var/mob/living/user, var/def_zone)
-	var/has_grab = 0
-	for(var/obj/item/weapon/grab/G in list(user.l_hand, user.r_hand))
-		if(G.affecting == src && G.state == GRAB_NECK)
-			has_grab = 1
-			break
-
-	if(!has_grab)
-		return 0
-
-	if(!def_zone) def_zone = user.zone_sel.selecting
-	var/target_zone = check_zone(def_zone)
-	if(!target_zone)
-		return 0
-	var/obj/item/organ/external/organ = get_organ(check_zone(target_zone))
-	if(!organ || organ.dislocated > 0 || organ.dislocated == -1) //don't use is_dislocated() here, that checks parent
-		return 0
-
-	user.visible_message("<span class='warning'>[user] begins to dislocate [src]'s [organ.joint]!</span>")
-	if(do_after(user, 100, progress = 0))
-		organ.dislocate(1)
-		src.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
-		return 1
-	return 0
-
 //Breaks all grips and pulls that the mob currently has.
 /mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
 	var/success = 0
@@ -333,22 +295,21 @@
 		success = 1
 		stop_pulling()
 
-	if(istype(l_hand, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/lgrab = l_hand
+	if(istype(l_hand, /obj/item/grab))
+		var/obj/item/grab/lgrab = l_hand
 		if(lgrab.affecting)
 			visible_message("<span class='danger'>[user] has broken [src]'s grip on [lgrab.affecting]!</span>")
 			success = 1
 		spawn(1)
 			qdel(lgrab)
-	if(istype(r_hand, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/rgrab = r_hand
+	if(istype(r_hand, /obj/item/grab))
+		var/obj/item/grab/rgrab = r_hand
 		if(rgrab.affecting)
 			visible_message("<span class='danger'>[user] has broken [src]'s grip on [rgrab.affecting]!</span>")
 			success = 1
 		spawn(1)
 			qdel(rgrab)
 	return success
-
 /*
 	We want to ensure that a mob may only apply pressure to one organ of one mob at any given time. Currently this is done mostly implicitly through
 	the behaviour of do_after() and the fact that applying pressure to someone else requires a grab:

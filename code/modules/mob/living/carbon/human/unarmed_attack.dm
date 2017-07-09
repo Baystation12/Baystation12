@@ -10,6 +10,7 @@ var/global/list/sparring_attack_cache = list()
 	var/shredding = 0 // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
 	var/sharp = 0
 	var/edge = 0
+	var/delay = 0
 
 	var/deal_halloss
 	var/sparring_variant_type = /datum/unarmed_attack/light_strike

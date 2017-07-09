@@ -18,6 +18,8 @@
 
 	var/can_intake_reagents = 1
 	var/eye_icon = "eyes_s"
+	var/eye_icon_location = 'icons/mob/human_face.dmi'
+
 	var/has_lips
 
 /obj/item/organ/external/head/get_agony_multiplier()
@@ -62,7 +64,7 @@
 
 	if(owner)
 		if(eye_icon)
-			var/icon/eyes_icon = new/icon('icons/mob/human_face.dmi', eye_icon)
+			var/icon/eyes_icon = new/icon(eye_icon_location, eye_icon)
 			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
 			if(eyes)
 				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)

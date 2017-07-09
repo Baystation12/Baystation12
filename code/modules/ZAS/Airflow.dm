@@ -26,7 +26,7 @@ mob/living/carbon/slime/airflow_stun()
 	return
 
 mob/living/carbon/human/airflow_stun()
-	if(shoes && (shoes.item_flags & NOSLIP))
+	if(!slip_chance())
 		to_chat(src, "<span class='notice'>Air suddenly rushes past you!</span>")
 		return 0
 	..()
