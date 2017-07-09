@@ -76,18 +76,36 @@
 
 /datum/grab/normal/on_hit_harm(var/obj/item/grab/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
-	var/mob/living/carbon/human/attacker = G.assailant
-	var/mob/living/carbon/human/target = G.affecting
+	var/mob/living/carbon/human/assailant = G.assailant
+	var/mob/living/carbon/human/affecting = G.affecting
+
+	if(!O)
+		to_chat(assailant, "<span class='warning'>[affecting] is missing that body part!</span>")
+		return 0
 
 	if(!O.dislocated)
-		attacker.visible_message("<span class='warning'>[attacker] begins to dislocate [target]'s [O.joint]!</span>")
-		if(do_after(attacker, 100, progress = 0))
+
+		assailant.visible_message("<span class='warning'>[assailant] begins to dislocate [affecting]'s [O.joint]!</span>")
+		attacking = 1
+
+		if(do_mob(assailant, affecting, action_cooldown - 1))
+
+			attacking = 0
+			G.action_used()
 			O.dislocate(1)
-			attacker.visible_message("<span class='danger'>[target]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
-			playsound(attacker.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			assailant.visible_message("<span class='danger'>[affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
+			playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			return 1
+
+		else
+
+			affecting.visible_message("<span class='notice'>[assailant] fails to dislocate [affecting]'s [O.joint].</span>")
+			attacking = 0
+			return 0
+
 	else
-		to_chat(attacker, "<span class='warning'>[target]'s [O.joint] is already dislocated!</span>")
+		to_chat(assailant, "<span class='warning'>[affecting]'s [O.joint] is already dislocated!</span>")
+		return 0
 
 /datum/grab/normal/on_hit_special(var/obj/item/grab/G)
 	if(G.assailant.a_intent == I_HURT)
