@@ -1,0 +1,4 @@
+author: Heptagon49
+delete-after: True
+changes:
+  - bugfix: "Changes the recipes for Methylphenidate and Antidexafen so they no longer overlap. Methyl now requires lithium instead of hydrazine, and antidexafen now requires carbon instead of sugar."
