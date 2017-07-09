@@ -206,9 +206,10 @@
 	return t
 
 //Returns a string with reserved characters and spaces before the first letter removed
-/proc/trim_left(text)
+/proc/trim_left(text, filter_chars)
 	for (var/i = 1 to length(text))
-		if (text2ascii(text, i) > 32)
+		var/char = text2ascii(text, i)
+		if (char > 32 && (!filter_chars || !(ascii2text(char) in filter_chars)))
 			return copytext(text, i)
 	return ""
 

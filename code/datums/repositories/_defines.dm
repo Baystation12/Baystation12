@@ -1,1 +1,2 @@
-#define mob2unique(mob) "[mob ? mob.ckey : NO_CLIENT_CKEY][ascii2text(7)][mob ? (mob.real_name ? mob.real_name : mob.name) : ""][ascii2text(7)][any2ref(mob)]"
+#define mob2unique(mob) "[mob && mob.ckey ? trim_left(mob.ckey, list("@")) : NO_CLIENT_CKEY][ascii2text(11)][mob ? (mob.real_name || mob.name || "*no name*") : "*no mob*"][ascii2text(11)][mob ? any2ref(mob) : "*no mob*"][ascii2text(11)][mob ? (mob.ckey ? (mob.client ? (mob.client.holder ? mob.client.holder.rank : "*no rank*") : "*disconnected*") : "*no client*") : "*no mob*"]"
+#define client2unique(client) "[client ? client.ckey : NO_CLIENT_CKEY][ascii2text(11)][client ? any2ref(client) : "*no client*"][ascii2text(11)][client ? (client.holder ? client.holder.rank : "*no rank*") : "*no client*"]"
