@@ -389,8 +389,8 @@
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 
-	if(istype(G, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/grab = G
+	if(istype(G, /obj/item/grab))
+		var/obj/item/grab/grab = G
 		if(occupant)
 			to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
 			return

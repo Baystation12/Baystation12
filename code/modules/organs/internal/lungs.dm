@@ -2,12 +2,14 @@
 	name = "lungs"
 	icon_state = "lungs"
 	gender = PLURAL
-	organ_tag = "lungs"
+	organ_tag = BP_LUNGS
 	parent_organ = BP_CHEST
 	min_bruised_damage = 25
 	min_broken_damage = 45
 	max_damage = 70
 	relative_size = 60
+
+	var/active_breathing = 1
 
 	var/breath_type
 	var/poison_type
@@ -68,28 +70,38 @@
 
 /obj/item/organ/internal/lungs/process()
 	..()
-
 	if(!owner)
 		return
 
-	if (germ_level > INFECTION_LEVEL_ONE)
+	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
 		if(prob(5))
 			owner.emote("cough")		//respitory tract infection
 
 	if(is_bruised() && !owner.is_asystole())
 		if(prob(2))
-			owner.visible_message(
-				"<B>\The [owner]</B> coughs up blood!",
-				"<span class='warning'>You cough up blood!</span>",
-				"You hear someone coughing!",
-			)
+			if(active_breathing)
+				owner.visible_message(
+					"<B>\The [owner]</B> coughs up blood!",
+					"<span class='warning'>You cough up blood!</span>",
+					"You hear someone coughing!",
+				)
+			else
+				var/obj/item/organ/parent = owner.get_organ(parent_organ)
+				owner.visible_message(
+					"blood drips from <B>\the [owner]'s</B> [parent.name]!",
+				)
+
 			owner.drip(10)
 		if(prob(4))
-			owner.visible_message(
-				"<B>\The [owner]</B> gasps for air!",
-				"<span class='danger'>You can't breathe!</span>",
-				"You hear someone gasp for air!",
-			)
+			if(active_breathing)
+				owner.visible_message(
+					"<B>\The [owner]</B> gasps for air!",
+					"<span class='danger'>You can't breathe!</span>",
+					"You hear someone gasp for air!",
+				)
+			else
+				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
+
 			owner.losebreath += 15
 
 /obj/item/organ/internal/lungs/proc/rupture()
@@ -102,6 +114,8 @@
 	if(!owner)
 		return 1
 	if(!breath)
+		owner.breath_fail_ratio = 1
+		handle_failed_breath()
 		return 1
 
 	var/breath_pressure = breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature/BREATH_VOLUME
@@ -114,6 +128,8 @@
 			if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 				rupture()
 	if(breath.total_moles == 0)
+		owner.breath_fail_ratio = 1
+		handle_failed_breath()
 		return 1
 
 	var/safe_pressure_min = min_breath_pressure // Minimum safe partial pressure of breathable gas in kPa
@@ -134,14 +150,16 @@
 	var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
 	var/toxins_pp = (poison/breath.total_moles)*breath_pressure
 	var/exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
+
 	// Not enough to breathe
 	if(inhale_pp < safe_pressure_min)
-		if(prob(20))
+		if(prob(20) && active_breathing)
 			owner.emote("gasp")
 
-		var/ratio = inhale_pp/safe_pressure_min
-		owner.adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(1-ratio), 0))	// Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
+		owner.breath_fail_ratio = 1 - inhale_pp/safe_pressure_min
 		failed_inhale = 1
+	else
+		owner.breath_fail_ratio = 0
 
 	owner.oxygen_alert = failed_inhale
 
@@ -221,9 +239,27 @@
 				breathing = 1
 
 	handle_temperature_effects(breath)
+	owner.adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(owner.breath_fail_ratio), 0))
 
 	breath.update_values()
+
+	if(failed_breath)
+		handle_failed_breath()
+	else
+		owner.oxygen_alert = 0
 	return failed_breath
+
+/obj/item/organ/internal/lungs/proc/handle_failed_breath()
+	if(prob(15) && !owner.nervous_system_failure())
+		if(!owner.is_asystole())
+			if(active_breathing)
+				owner.emote("gasp")
+		else
+			owner.emote(pick("shiver","twitch"))
+
+	owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS)
+
+	owner.oxygen_alert = max(owner.oxygen_alert, 1)
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(

@@ -3,7 +3,7 @@
 	siemens_coefficient = 0.9
 	var/flash_protection = FLASH_PROTECTION_NONE	// Sets the item's level of flash protection.
 	var/tint = TINT_NONE							// Sets the item's level of visual impairment tint.
-	var/list/species_restricted = null 				//Only these species can wear this kit.
+	var/list/species_restricted = list("exclude", SPECIES_NABBER) //Only these species can wear this kit.
 	var/gunshot_residue //Used by forensics.
 
 	var/list/accessories = list()
@@ -217,7 +217,7 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude",SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_VOX)
+	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
 		)
@@ -517,7 +517,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	force = 2
 	var/overshoes = 0
-	species_restricted = list("exclude",SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_VOX)
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
 		)
@@ -881,5 +881,5 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/rings.dmi'
 	slot_flags = SLOT_GLOVES
 	gender = NEUTER
-	species_restricted = list("exclude",SPECIES_DIONA)
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	var/undergloves = 1

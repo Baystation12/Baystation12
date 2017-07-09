@@ -145,19 +145,11 @@ var/global/datum/controller/gameticker/ticker
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
-		//Cleanup some stuff
-		for(var/obj/effect/landmark/start/S in landmarks_list)
-			//Deleting Startpoints but we need the ai point to AI-ize people later
-			if (S.name != "AI")
-				qdel(S)
 		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
 		sound_to(world, sound('sound/AI/welcome.ogg'))// Skie
 
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
-
-	//start_events() //handles random events and space dust.
-	//new random event system is handled from the MC.
 
 	var/admins_number = 0
 	for(var/client/C)
@@ -166,10 +158,6 @@ var/global/datum/controller/gameticker/ticker
 	if(admins_number == 0)
 		send2adminirc("Round has started with no admins online.")
 
-/*	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE // handled in scheduler
-	master_controller.process()		//Start master_controller.process()
-	lighting_controller.process()	//Start processing DynamicAreaLighting updates
-	*/
 
 	processScheduler.start()
 
@@ -360,19 +348,34 @@ var/global/datum/controller/gameticker/ticker
 					if(!delay_end)
 						to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 
-
-
 				if(blackbox)
 					blackbox.save_all_data_to_sql()
+
+				var/wait_for_tickets
+				var/delay_notified = 0
+				do
+					wait_for_tickets = 0
+					for(var/datum/ticket/ticket in tickets)
+						if(ticket.is_active())
+							wait_for_tickets = 1
+							break
+					if(wait_for_tickets)
+						if(!delay_notified)
+							delay_notified = 1
+							message_staff("<span class='warning'><b>Automatically delaying restart due to active tickets.</b></span>")
+							to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+						sleep(15 SECONDS)
+					else if(delay_notified)
+						message_staff("<span class='warning'><b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b></span>")
+				while(wait_for_tickets)
 
 				if(!delay_end)
 					sleep(restart_timeout)
 					if(!delay_end)
 						world.Reboot()
-					else
+					else if(!delay_notified)
 						to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
-
-				else
+				else if(!delay_notified)
 					to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
 
 

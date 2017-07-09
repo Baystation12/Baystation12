@@ -919,3 +919,9 @@ var/list/gamemode_cache = list()
 			config.python_path = "/usr/bin/env python2"
 		else //probably windows, if not this should work anyway
 			config.python_path = "python"
+
+/datum/configuration/proc/load_event(filename)
+	var/event_info = file2text(filename)
+
+	if (event_info)
+		custom_event_msg = event_info

@@ -101,6 +101,10 @@
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
 			return global.TWITCHBLOCK;
+		if("ticket_panels")
+			return global.ticket_panels
+		if("tickets")
+			return global.tickets
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -193,6 +197,8 @@
 			return global.ai_list;
 		if("ai_names")
 			return global.ai_names;
+		if("all_grabobjects")
+			return global.all_grabobjects
 		if("ai_status_emotions")
 			return global.ai_status_emotions;
 		if("ai_verbs_default")
@@ -219,6 +225,8 @@
 			return global.all_antag_types_;
 		if("all_languages")
 			return global.all_languages;
+		if("all_grabstates")
+			return global.all_grabstates;
 		if("all_maps")
 			return global.all_maps;
 		if("all_money_accounts")
@@ -309,6 +317,8 @@
 			return global.breach_brute_descriptors;
 		if("breach_burn_descriptors")
 			return global.breach_burn_descriptors;
+		if("button_sound")
+			return global.button_sound;
 		if("cable_list")
 			return global.cable_list;
 		if("cached_icons")
@@ -685,6 +695,8 @@
 			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
 			return global.holder_mob_icon_cache;
+		if("holowarrant_users")
+			return global.holowarrant_users;
 		if("home_system_choices")
 			return global.home_system_choices;
 		if("host")
@@ -1305,6 +1317,8 @@
 			return global.swapmaps_mode;
 		if("swing_hit_sound")
 			return global.swing_hit_sound;
+		if("switch_sound")
+			return global.switch_sound;
 		if("syndicate_access")
 			return global.syndicate_access;
 		if("syndicate_code_phrase")
@@ -1481,7 +1495,7 @@
 			return global.z_state;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1702,6 +1716,8 @@
 			global.all_antag_types_=newval;
 		if("all_languages")
 			global.all_languages=newval;
+		if("all_grabstates")
+			global.all_grabstates=newval;
 		if("all_maps")
 			global.all_maps=newval;
 		if("all_money_accounts")
@@ -1792,6 +1808,8 @@
 			global.breach_brute_descriptors=newval;
 		if("breach_burn_descriptors")
 			global.breach_burn_descriptors=newval;
+		if("button_sound")
+			global.button_sound=newval;
 		if("cable_list")
 			global.cable_list=newval;
 		if("cached_icons")
@@ -2168,6 +2186,8 @@
 			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
 			global.holder_mob_icon_cache=newval;
+		if("holowarrant_users")
+			global.holowarrant_users=newval;
 		if("home_system_choices")
 			global.home_system_choices=newval;
 		if("host")
@@ -2530,6 +2550,8 @@
 			global.prisonsecuritywarp=newval;
 		if("prisonwarp")
 			global.prisonwarp=newval;
+		if("all_grabobjects")
+			global.all_grabobjects=newval;
 		if("prisonwarped")
 			global.prisonwarped=newval;
 		if("priv_all_access")
@@ -2788,6 +2810,8 @@
 			global.swapmaps_mode=newval;
 		if("swing_hit_sound")
 			global.swing_hit_sound=newval;
+		if("switch_sound")
+			global.switch_sound=newval;
 		if("syndicate_access")
 			global.syndicate_access=newval;
 		if("syndicate_code_phrase")
@@ -2856,6 +2880,10 @@
 			global.ticker=newval;
 		if("tickerProcess")
 			global.tickerProcess=newval;
+		if("ticket_panels")
+			global.ticket_panels=newval;
+		if("tickets")
+			global.tickets=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -2964,7 +2992,7 @@
 			global.z_state=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -3075,6 +3103,7 @@
 	"all_antag_spawnpoints_",
 	"all_antag_types_",
 	"all_languages",
+	"all_grabstates",
 	"all_maps",
 	"all_money_accounts",
 	"all_objectives",
@@ -3120,6 +3149,7 @@
 	"borers",
 	"breach_brute_descriptors",
 	"breach_burn_descriptors",
+	"button_sound",
 	"cable_list",
 	"cached_icons",
 	"cached_space",
@@ -3308,6 +3338,7 @@
 	"hit_appends",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
+	"holowarrant_users",
 	"home_system_choices",
 	"host",
 	"href_logfile",
@@ -3412,6 +3443,7 @@
 	"meteors_threatening",
 	"midnight_rollovers",
 	"mil_branches",
+	"all_grabobjects",
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",
@@ -3582,12 +3614,6 @@
 	"spark_sound",
 	"sparring_attack_cache",
 	"spawntypes",
-	"specops_shuttle_at_station",
-	"specops_shuttle_can_send",
-	"specops_shuttle_moving_to_centcom",
-	"specops_shuttle_moving_to_station",
-	"specops_shuttle_time",
-	"specops_shuttle_timeleft",
 	"spells",
 	"splatter_cache",
 	"sqladdress",
@@ -3624,15 +3650,10 @@
 	"swapmaps_loaded",
 	"swapmaps_mode",
 	"swing_hit_sound",
+	"switch_sound",
 	"syndicate_access",
 	"syndicate_code_phrase",
 	"syndicate_code_response",
-	"syndicate_elite_shuttle_at_station",
-	"syndicate_elite_shuttle_can_send",
-	"syndicate_elite_shuttle_moving_to_mothership",
-	"syndicate_elite_shuttle_moving_to_station",
-	"syndicate_elite_shuttle_time",
-	"syndicate_elite_shuttle_timeleft",
 	"syndicate_name",
 	"tagger_locations",
 	"tail_icon_cache",
@@ -3664,6 +3685,8 @@
 	"tick_multiplier",
 	"ticker",
 	"tickerProcess",
+	"ticket_panels",
+	"tickets",
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",

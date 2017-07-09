@@ -49,13 +49,11 @@ datum/track/New(var/title_name, var/audio)
 	StopPlaying()
 	. = ..()
 
+/obj/machinery/media/jukebox/powered()
+	return anchored && ..()
+
 /obj/machinery/media/jukebox/power_change()
 	. = ..()
-	if(!anchored)
-		stat |= NOPOWER
-	else
-		stat &= ~NOPOWER
-
 	if(stat & (NOPOWER|BROKEN) && playing)
 		StopPlaying()
 
@@ -178,13 +176,8 @@ datum/track/New(var/title_name, var/audio)
 	src.add_fingerprint(user)
 
 	if(istype(W, /obj/item/weapon/wrench))
-		if(playing)
-			StopPlaying()
-		user.visible_message("<span class='warning'>[user] has [anchored ? "un" : ""]secured \the [src].</span>", "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
-		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		wrench_floor_bolts(user, 0)
 		power_change()
-		update_icon()
 		return
 	return ..()
 

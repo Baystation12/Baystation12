@@ -144,7 +144,7 @@
 		return 1
 	if(get_dir(O.loc, target) == dir)
 		return 0
-	return 1 
+	return 1
 
 
 /obj/structure/window/hitby(AM as mob|obj)
@@ -210,11 +210,6 @@
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
-	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
-		if(istype(G.affecting,/mob/living))
-			grab_smash_attack(G, BRUTE)
-			return
 
 	if(W.flags & NOBLUDGEON) return
 
@@ -260,32 +255,6 @@
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
 	return
-
-/obj/structure/window/proc/grab_smash_attack(obj/item/weapon/grab/G, var/damtype = BRUTE)
-	var/mob/living/M = G.affecting
-	var/mob/living/user = G.assailant
-
-	var/state = G.state
-	qdel(G)	//gotta delete it here because if window breaks, it won't get deleted
-
-	var/def_zone = ran_zone(BP_HEAD, 20)
-	var/blocked = M.run_armor_check(def_zone, "melee")
-	switch (state)
-		if(1)
-			M.visible_message("<span class='warning'>[user] slams [M] against \the [src]!</span>")
-			M.apply_damage(7, damtype, def_zone, blocked, src)
-			hit(10)
-		if(2)
-			M.visible_message("<span class='danger'>[user] bashes [M] against \the [src]!</span>")
-			if (prob(50))
-				M.Weaken(1)
-			M.apply_damage(10, damtype, def_zone, blocked, src)
-			hit(25)
-		if(3)
-			M.visible_message("<span class='danger'><big>[user] crushes [M] against \the [src]!</big></span>")
-			M.Weaken(5)
-			M.apply_damage(20, damtype, def_zone, blocked, src)
-			hit(50)
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
 	if(reinf) damage *= 0.5
