@@ -98,8 +98,11 @@
 	var/species_organ = species.breathing_organ
 
 	if(!in_stasis && species_organ)
+		var/active_breaths = 0
 		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
-		..(L.active_breathing)
+		if(L)
+			active_breaths = L.active_breathing
+		..(active_breaths)
 
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
