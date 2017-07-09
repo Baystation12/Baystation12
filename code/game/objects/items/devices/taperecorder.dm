@@ -18,6 +18,7 @@
 	throwforce = 2
 	throw_speed = 4
 	throw_range = 20
+	var/base_state = "taperecorder"
 
 /obj/item/device/taperecorder/New()
 	..()
@@ -25,6 +26,7 @@
 		mytape = new mytape(src)
 		update_icon()
 	listening_objects += src
+
 
 /obj/item/device/taperecorder/empty
 	mytape = null
@@ -341,14 +343,15 @@
 
 
 /obj/item/device/taperecorder/update_icon()
+	base_state = copytext(icon_state, 1, findtext(icon_state, "_",1,0))
 	if(!mytape)
-		icon_state = "taperecorder_empty"
+		icon_state = "[base_state]_empty"
 	else if(recording)
-		icon_state = "taperecorder_recording"
+		icon_state = "[base_state]_recording"
 	else if(playing)
-		icon_state = "taperecorder_playing"
+		icon_state = "[base_state]_playing"
 	else
-		icon_state = "taperecorder_idle"
+		icon_state = "[base_state]_idle"
 
 
 
