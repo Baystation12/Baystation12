@@ -1161,18 +1161,26 @@
 	else if(href_list["check_antagonist"])
 		check_antagonists()
 
-	else if(href_list["take_question"])
+	// call dibs on IC messages (prays, emergency comms, faxes)
+	else if(href_list["take_ic"])
 
 		var/mob/M = locate(href_list["take_question"])
 		if(ismob(M))
-			var/take_msg = "<span class='notice'><b>ADMINHELP</b>: <b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message, please don't dogpile them.</span>"
-			send2adminirc("[key_name(usr.client)] is attending to [key_name(M)]'s message, please don't dogpile them.")
+			var/take_msg = "<span class='notice'><b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message.</span>"
 			for(var/client/X in admins)
 				if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
 					to_chat(X, take_msg)
 			to_chat(M, "<span class='notice'><b>Your message is being attended to by [usr.client]. Thanks for your patience!</b></span>")
 		else
 			to_chat(usr, "<span class='warning'>Unable to locate mob.</span>")
+
+	else if(href_list["take_ticket"])
+		var/datum/ticket/ticket = locate(href_list["take_ticket"])
+
+		if(isnull(ticket))
+			return
+
+		ticket.take(client_repository.get_lite_client(usr.client))
 
 	else if(href_list["adminplayerobservecoodjump"])
 		if(!check_rights(R_ADMIN))	return

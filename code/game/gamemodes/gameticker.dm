@@ -348,19 +348,34 @@ var/global/datum/controller/gameticker/ticker
 					if(!delay_end)
 						to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
 
-
-
 				if(blackbox)
 					blackbox.save_all_data_to_sql()
+
+				var/wait_for_tickets
+				var/delay_notified = 0
+				do
+					wait_for_tickets = 0
+					for(var/datum/ticket/ticket in tickets)
+						if(ticket.is_active())
+							wait_for_tickets = 1
+							break
+					if(wait_for_tickets)
+						if(!delay_notified)
+							delay_notified = 1
+							message_staff("<span class='warning'><b>Automatically delaying restart due to active tickets.</b></span>")
+							to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+						sleep(15 SECONDS)
+					else if(delay_notified)
+						message_staff("<span class='warning'><b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b></span>")
+				while(wait_for_tickets)
 
 				if(!delay_end)
 					sleep(restart_timeout)
 					if(!delay_end)
 						world.Reboot()
-					else
+					else if(!delay_notified)
 						to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
-
-				else
+				else if(!delay_notified)
 					to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
 
 
