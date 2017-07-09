@@ -22,7 +22,6 @@
 
 /obj/item/device/taperecorder/New()
 	..()
-	base_state = copytext(icon_state, 1, findtext(icon_state, "_",1,0))
 	if(ispath(mytape))
 		mytape = new mytape(src)
 		update_icon()
@@ -344,6 +343,7 @@
 
 
 /obj/item/device/taperecorder/update_icon()
+	base_state = copytext(icon_state, 1, findtext(icon_state, "_",1,0))
 	if(!mytape)
 		icon_state = "[base_state]_empty"
 	else if(recording)
