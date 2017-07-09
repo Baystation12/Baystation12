@@ -143,7 +143,8 @@
 
 	return
 
-/obj/machinery/atmospherics/valve/initialize()
+/obj/machinery/atmospherics/valve/atmos_init()
+	..()
 	normalize_dir()
 
 	var/node1_dir
@@ -258,8 +259,8 @@
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/valve/digital/initialize()
-	..()
+/obj/machinery/atmospherics/valve/digital/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 

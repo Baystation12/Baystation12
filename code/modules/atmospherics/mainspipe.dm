@@ -100,7 +100,8 @@ obj/machinery/atmospherics/mains_pipe
 		disconnect()
 		..()
 
-	initialize()
+	atmos_init()
+		..()
 		for(var/i = 1 to nodes.len)
 			var/obj/machinery/atmospherics/mains_pipe/node = nodes[i]
 			if(node)
@@ -154,7 +155,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 			var/have_node2 = nodes[2]?1:0
 			icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"
 
-	initialize()
+	atmos_init()
 		normalize_dir()
 		var/node1_dir
 		var/node2_dir
@@ -202,7 +203,7 @@ obj/machinery/atmospherics/mains_pipe/manifold
 		..()
 		initialize_mains_directions = (NORTH|SOUTH|EAST|WEST) & ~dir
 
-	initialize()
+	atmos_init()
 		var/connect_directions = initialize_mains_directions
 
 		for(var/direction in GLOB.cardinal)
@@ -266,7 +267,7 @@ obj/machinery/atmospherics/mains_pipe/manifold4w
 		nodes.len = 4
 		..()
 
-	initialize()
+	atmos_init()
 		for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,NORTH))
 			if(target.initialize_mains_directions & get_dir(target,src))
 				nodes[1] = target
@@ -318,7 +319,7 @@ obj/machinery/atmospherics/mains_pipe/split
 		initialize_mains_directions = turn(dir, 90) | turn(dir, -90)
 		initialize_directions = dir // actually have a normal connection too
 
-	initialize()
+	atmos_init()
 		var/node1_dir
 		var/node2_dir
 		var/node3_dir
@@ -419,7 +420,7 @@ obj/machinery/atmospherics/mains_pipe/split3
 		initialize_mains_directions = dir
 		initialize_directions = GLOB.cardinal & ~dir // actually have a normal connection too
 
-	initialize()
+	atmos_init()
 		var/node1_dir
 		var/supply_node_dir
 		var/scrubbers_node_dir
@@ -513,7 +514,7 @@ obj/machinery/atmospherics/mains_pipe/cap
 	update_icon()
 		icon_state = "cap[invisibility ? "-f" : ""]"
 
-	initialize()
+	atmos_init()
 		for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,dir))
 			if(target.initialize_mains_directions & get_dir(target,src))
 				nodes[1] = target
@@ -566,7 +567,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 		else
 			icon_state = "[hide?"h":""]mvalve[open]"
 
-	initialize()
+	atmos_init()
 		normalize_dir()
 		var/node1_dir
 		var/node2_dir
@@ -604,7 +605,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 		open = 1
 		update_icon()
 
-		initialize()
+		atmos_init()
 
 		return 1
 
@@ -663,8 +664,8 @@ obj/machinery/atmospherics/mains_pipe/valve
 		var/id = null
 		var/datum/radio_frequency/radio_connection
 
-		initialize()
-			..()
+		Initialize()
+			. = ..()
 			if(frequency)
 				set_frequency(frequency)
 

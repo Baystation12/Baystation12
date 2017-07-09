@@ -143,8 +143,8 @@ Thus, the two variables affect pump operation are set in New():
 		ui.open()					// open the new ui window
 		ui.set_auto_update(1)		// auto update every Master Controller tick
 
-/obj/machinery/atmospherics/binary/pump/initialize()
-	..()
+/obj/machinery/atmospherics/binary/pump/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 

@@ -30,6 +30,8 @@ Pipelines + Other Objects -> Pipe network
 	var/obj/machinery/atmospherics/node1
 	var/obj/machinery/atmospherics/node2
 
+	var/atmos_initalized = FALSE
+
 /obj/machinery/atmospherics/New()
 	if(!icon_manager)
 		icon_manager = new()
@@ -42,8 +44,8 @@ Pipelines + Other Objects -> Pipe network
 		pipe_color = null
 	..()
 
-/obj/machinery/atmospherics/proc/initialize()
-	return
+/obj/machinery/atmospherics/proc/atmos_init()
+	atmos_initalized = TRUE
 
 /obj/machinery/atmospherics/hide(var/do_hide)
 	if(do_hide && level == 1)

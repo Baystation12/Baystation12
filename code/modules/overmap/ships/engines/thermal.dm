@@ -52,8 +52,8 @@
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/moles_per_burn = 10
 
-/obj/machinery/atmospherics/unary/engine/initialize()
-	..()
+/obj/machinery/atmospherics/unary/engine/Initialize()
+	. = ..()
 	controller = new(src)
 
 /obj/machinery/atmospherics/unary/engine/Destroy()

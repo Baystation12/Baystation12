@@ -64,7 +64,7 @@ datum/controller/game_controller/proc/setup_objects()
 
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
-	while(SSatoms.initialized <= INITIALIZATION_INSSATOMS)
+	while(!SSatoms || SSatoms.initialized != INITIALIZATION_INNEW_REGULAR)
 		CHECK_SLEEP_MASTER
 
 	if(GLOB.using_map.use_overmap)
