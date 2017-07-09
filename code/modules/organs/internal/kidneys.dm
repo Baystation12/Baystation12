@@ -11,8 +11,6 @@
 /obj/item/organ/internal/kidneys/robotize()
 	. = ..()
 	icon_state = "kidneys-prosthetic"
-	min_bruised_damage += 5
-	min_broken_damage += 10
 
 /obj/item/organ/internal/kidneys/process()
 

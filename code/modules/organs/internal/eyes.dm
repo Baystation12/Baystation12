@@ -26,8 +26,6 @@
 	icon_state = "camera"
 	dead_icon = "camera_broken"
 	update_colour()
-	min_bruised_damage += 5
-	min_broken_damage += 10
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"

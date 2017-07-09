@@ -48,8 +48,6 @@
 /obj/item/organ/internal/lungs/robotize()
 	. = ..()
 	icon_state = "lungs-prosthetic"
-	min_bruised_damage += 5
-	min_broken_damage += 10
 
 /obj/item/organ/internal/lungs/set_dna(var/datum/dna/new_dna)
 	..()
@@ -188,7 +186,6 @@
 		var/ratio = (poison/safe_toxins_max) * 10
 		if(robotic >= ORGAN_ROBOT)
 			ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
-			src.damage += 0.1 * PROCESS_ACCURACY //Those toxins have to go somewhere.
 		owner.reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
 		breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
 		owner.phoron_alert = 1

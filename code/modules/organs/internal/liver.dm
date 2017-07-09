@@ -12,8 +12,6 @@
 /obj/item/organ/internal/liver/robotize()
 	. = ..()
 	icon_state = "liver-prosthetic"
-	min_bruised_damage += 5
-	min_broken_damage += 10
 
 /obj/item/organ/internal/liver/process()
 

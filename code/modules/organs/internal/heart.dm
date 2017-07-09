@@ -25,8 +25,6 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 /obj/item/organ/internal/heart/robotize()
 	. = ..()
 	icon_state = "heart-prosthetic"
-	min_bruised_damage += 5
-	min_broken_damage += 10
 
 /obj/item/organ/internal/heart/process()
 	if(owner)
