@@ -521,7 +521,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
-	var/base_state
+
+/obj/item/weapon/flame/lighter/New()
+    ..()
+    set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+    update_icon()
 
 /obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
@@ -529,20 +533,16 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "zippo"
 	item_state = "zippo"
 
-/obj/item/weapon/flame/lighter/random
-	New()
-		icon_state = "lighter-[pick("r","c","y","g")]"
-		item_state = icon_state
-		base_state = icon_state
+/obj/item/weapon/flame/lighter/random/New()
+    icon_state = "lighter-[pick("r","c","y","g")]"
+    item_state = icon_state
+    ..()
 
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
-	if(!base_state)
-		base_state = icon_state
 	if(user.r_hand == src || user.l_hand == src)
 		if(!lit)
 			lit = 1
-			icon_state = "[base_state]on"
-			item_state = "[base_state]on"
+			update_icon()
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 				playsound(src.loc, 'sound/items/zippo_open.ogg', 100, 1, -4)
@@ -562,8 +562,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			processing_objects.Add(src)
 		else
 			lit = 0
-			icon_state = "[base_state]"
-			item_state = "[base_state]"
+			update_icon()
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
 				playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
@@ -576,6 +575,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return ..()
 	return
 
+/obj/item/weapon/flame/lighter/update_icon()
+    var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+
+    if(lit)
+        icon_state = "[bis.base_icon_state]on"
+        item_state = "[bis.base_icon_state]on"
+    else
+        icon_state = "[bis.base_icon_state]"
+        item_state = "[bis.base_icon_state]"
 
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
