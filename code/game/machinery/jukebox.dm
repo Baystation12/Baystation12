@@ -49,13 +49,11 @@ datum/track/New(var/title_name, var/audio)
 	StopPlaying()
 	. = ..()
 
+/obj/machinery/media/jukebox/powered()
+	return anchored && ..()
+
 /obj/machinery/media/jukebox/power_change()
 	. = ..()
-	if(!anchored)
-		stat |= NOPOWER
-	else
-		stat &= ~NOPOWER
-
 	if(stat & (NOPOWER|BROKEN) && playing)
 		StopPlaying()
 
@@ -178,11 +176,8 @@ datum/track/New(var/title_name, var/audio)
 	src.add_fingerprint(user)
 
 	if(istype(W, /obj/item/weapon/wrench))
-		if(playing)
-			StopPlaying()
 		wrench_floor_bolts(user, 0)
 		power_change()
-		update_icon()
 		return
 	return ..()
 
