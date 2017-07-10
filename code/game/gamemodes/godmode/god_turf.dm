@@ -1,8 +1,7 @@
 /turf/simulated/floor/deity
 	var/mob/living/deity/linked_god
 
-/turf/simulated/floor/deity/New(var/newloc, var/god)
-	..(newloc)
+/turf/simulated/floor/deity/proc/sync_god(var/god)
 	if(god)
 		linked_god = god
 		linked_god.adjust_source(1,src)
