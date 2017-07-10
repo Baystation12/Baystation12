@@ -125,10 +125,10 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			ticket_dat += "</li>"
 
 	if(ticket_dat)
-		dat += "<p>Available tickets:</p><ul>[ticket_dat]</ul>"
+		dat += "<br /><div style='width:50%;float:left;'><p>Available tickets:</p><ul>[ticket_dat]</ul></div>"
 
 		if(open_ticket)
-			dat += "<p>Messages for ticket #[open_ticket.id]:</p>"
+			dat += "<div style='width:50%;float:left;'><p>\[<a href='byond://?src=\ref[src];action=unview;'>X</a>\] Messages for ticket #[open_ticket.id]:</p>"
 
 			var/msg_dat = ""
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
@@ -136,9 +136,9 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [msg.msg]</li>"
 
 			if(msg_dat)
-				dat += "<ul>[msg_dat]</ul>"
+				dat += "<ul>[msg_dat]</ul></div>"
 			else
-				dat += "<p>No messages to display.</p>"
+				dat += "<p>No messages to display.</p></div>"
 	else
 		dat += "<p>No tickets to display.</p>"
 	dat += "</body></html>"
@@ -148,9 +148,13 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 /datum/ticket_panel/Topic(href, href_list)
 	..()
 
-	if(href_list["action"] == "exit")
-		show_browser(usr, null, "window=ticketpanel")
-		ticket_panels -= usr.client
+	switch(href_list["action"])
+		if("exit")
+			show_browser(usr, null, "window=ticketpanel")
+			ticket_panels -= usr.client
+		if("unview")
+			open_ticket = null
+			show_browser(usr, src.get_dat(usr.client), "window=ticketpanel;size=800x600;can_close=0")
 
 	var/datum/ticket/ticket = locate(href_list["ticket"])
 	if(!ticket)
@@ -159,7 +163,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	switch(href_list["action"])
 		if("view")
 			open_ticket = ticket
-			show_browser(usr, src.get_dat(usr.client), "window=ticketpanel;size=600x800;can_close=0")
+			show_browser(usr, src.get_dat(usr.client), "window=ticketpanel;size=800x600;can_close=0")
 		if("take")
 			ticket.take(client_repository.get_lite_client(usr.client))
 		if("close")
@@ -185,13 +189,15 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	set name = "View Tickets"
 	set category = "Admin"
 
-	var/datum/ticket_panel/ticket_panel = new /datum/ticket_panel()
-	ticket_panels[src] = ticket_panel
+	var/datum/ticket_panel/ticket_panel = ticket_panels[src]
+	if(!ticket_panel)
+		ticket_panel = new /datum/ticket_panel()
+		ticket_panels[src] = ticket_panel
 
 	var/dat = ticket_panel.get_dat(src)
-	show_browser(src, dat, "window=ticketpanel;size=600x800;can_close=0")
+	show_browser(src, dat, "window=ticketpanel;size=800x600;can_close=0")
 
 proc/update_ticket_panels()
 	for(var/client/C in ticket_panels)
 		var/datum/ticket_panel/ticket_panel = ticket_panels[C]
-		show_browser(C, ticket_panel.get_dat(C), "window=ticketpanel;size=600x800;can_close=0")
+		show_browser(C, ticket_panel.get_dat(C), "window=ticketpanel;size=800x600;can_close=0")
