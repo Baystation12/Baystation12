@@ -16,6 +16,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	var/tmp/next_blood_squirt = 0
 	relative_size = 15
 	max_damage = 45
+	var/open
 
 /obj/item/organ/internal/heart/die()
 	if(dead_icon)
