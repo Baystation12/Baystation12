@@ -268,8 +268,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = 0
 	robotic = ORGAN_ASSISTED
-	min_bruised_damage = 15
-	min_broken_damage = 35
+	min_broken_damage += 5
 
 /obj/item/organ/emp_act(severity)
 	if(!(robotic >= ORGAN_ROBOT))
