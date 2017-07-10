@@ -301,7 +301,7 @@
 	var/datum/integrated_io/new_com = inputs[3]
 	var/datum/integrated_io/new_id = inputs[4]
 	signal.data["command"] = new_com.data
-	signal.data["id_tag"] = new_id.data
+	signal.data["tag"] = new_id.data
 	return signal
 
 /obj/item/integrated_circuit/input/signaler/advanced/receive_signal(var/datum/signal/signal)

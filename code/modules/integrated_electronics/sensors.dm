@@ -54,8 +54,8 @@
 	if(activated_pin != activators[1])
 		return
 
-	var/active = set_pin_data(IC_INPUT, 1)
-	var/range = set_pin_data(IC_INPUT, 2)
+	var/active = get_pin_data(IC_INPUT, 1)
+	var/range = get_pin_data(IC_INPUT, 2)
 
 	var/do_activate = isnum(active) && active
 	var/turn_on = !proximity_trigger.is_active() && do_activate
