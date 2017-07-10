@@ -179,7 +179,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 				if(!admin_found)
 					to_chat(usr, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so please be patient!</span>")
 			else
-				usr.client.adminhelp()
+				usr.client.adminhelp(input(usr,"", "adminhelp \"text\"") as text)
 
 /client/verb/view_tickets()
 	set name = "View Tickets"
