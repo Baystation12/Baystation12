@@ -144,9 +144,6 @@ var/list/point_source_descriptions = list(
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
 
-	var/obj/machinery/computer/supply/primaryterminal //terminal hardcopy forms will be printed to.
-
-
 	New()
 		ordernum = rand(1,9000)
 
