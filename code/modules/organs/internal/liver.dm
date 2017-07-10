@@ -60,11 +60,9 @@
 		if(owner.chem_effects[CE_ALCOHOL_TOXIC])
 			if(filter_effect < 3)
 				owner.adjustToxLoss(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY)
-			if(filter_effect > 3)
-				owner.chem_effects -= CE_ALCOHOL_TOXIC
 			else
 				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY, prob(1)) // Chance to warn them
-
+	
 	// Heal a bit if needed. This allows recovery from low amounts of toxloss.
 	if(damage < min_broken_damage)
 		damage = max(0, damage - 0.1 * PROCESS_ACCURACY)
