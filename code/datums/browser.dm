@@ -112,6 +112,12 @@
 	if (use_onclose)
 		onclose(user, window_id, ref)
 
+/datum/browser/proc/update(var/force_open = 0, var/use_onclose = 1)
+	if(force_open)
+		open(use_onclose)
+	else
+		send_output(user, get_content(), "[window_id].browser")
+
 /datum/browser/proc/close()
 	user << browse(null, "window=[window_id]")
 

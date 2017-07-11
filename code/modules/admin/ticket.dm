@@ -91,10 +91,10 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 
 /datum/ticket_panel
 	var/datum/ticket/open_ticket = null
+	var/datum/browser/ticket_panel_window
 
 /datum/ticket_panel/proc/get_dat(var/client/C)
-	var/dat = "<html><body><center><b>Ticket Manager</b><br />"
-	dat += "<a href='byond://?src=\ref[src];action=exit'>Exit</a></center>"
+	var/dat = ""
 
 	var/ticket_dat = ""
 	for(var/id = tickets.len, id >= 1, id--)
@@ -125,10 +125,10 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			ticket_dat += "</li>"
 
 	if(ticket_dat)
-		dat += "<br /><div style='width:50%;float:left;'><p>Available tickets:</p><ul>[ticket_dat]</ul></div>"
+		dat += "<br /><div style='width:50%;float:left;'><p><b>Available tickets:</b></p><ul>[ticket_dat]</ul></div>"
 
 		if(open_ticket)
-			dat += "<div style='width:50%;float:left;'><p>\[<a href='byond://?src=\ref[src];action=unview;'>X</a>\] Messages for ticket #[open_ticket.id]:</p>"
+			dat += "<div style='width:50%;float:left;'><p><b>\[<a href='byond://?src=\ref[src];action=unview;'>X</a>\] Messages for ticket #[open_ticket.id]:</b></p>"
 
 			var/msg_dat = ""
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
@@ -148,13 +148,14 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 /datum/ticket_panel/Topic(href, href_list)
 	..()
 
+	if(href_list["close"])
+		ticket_panels -= usr.client
+
 	switch(href_list["action"])
-		if("exit")
-			show_browser(usr, null, "window=ticketpanel")
-			ticket_panels -= usr.client
 		if("unview")
 			open_ticket = null
-			show_browser(usr, src.get_dat(usr.client), "window=ticketpanel;size=800x600;can_close=0")
+			ticket_panel_window.set_content(get_dat(usr.client))
+			ticket_panel_window.update()
 
 	var/datum/ticket/ticket = locate(href_list["ticket"])
 	if(!ticket)
@@ -163,7 +164,8 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	switch(href_list["action"])
 		if("view")
 			open_ticket = ticket
-			show_browser(usr, src.get_dat(usr.client), "window=ticketpanel;size=800x600;can_close=0")
+			ticket_panel_window.set_content(get_dat(usr.client))
+			ticket_panel_window.update()
 		if("take")
 			ticket.take(client_repository.get_lite_client(usr.client))
 		if("close")
@@ -189,15 +191,15 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	set name = "View Tickets"
 	set category = "Admin"
 
-	var/datum/ticket_panel/ticket_panel = ticket_panels[src]
-	if(!ticket_panel)
-		ticket_panel = new /datum/ticket_panel()
-		ticket_panels[src] = ticket_panel
+	var/datum/ticket_panel/ticket_panel = new()
+	ticket_panels[src] = ticket_panel
+	ticket_panel.ticket_panel_window = new(src.mob, "ticketpanel", "Ticket Manager", 800, 600, ticket_panel)
 
-	var/dat = ticket_panel.get_dat(src)
-	show_browser(src, dat, "window=ticketpanel;size=800x600;can_close=0")
+	ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat(src))
+	ticket_panel.ticket_panel_window.open()
 
 proc/update_ticket_panels()
 	for(var/client/C in ticket_panels)
 		var/datum/ticket_panel/ticket_panel = ticket_panels[C]
-		show_browser(C, ticket_panel.get_dat(C), "window=ticketpanel;size=800x600;can_close=0")
+		ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat(C))
+		ticket_panel.ticket_panel_window.update()
