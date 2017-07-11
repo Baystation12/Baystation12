@@ -91,7 +91,8 @@
 					E.nextstate = FIREDOOR_OPEN
 				else if(E.density)
 					spawn(0)
-						E.open()
+						if(E.can_safely_open())
+							E.open()
 
 
 /area/proc/fire_alert()
