@@ -28,7 +28,7 @@
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
 	smoothing_iterations = 4
-	land_type = /turf/simulated/floor/beach/sand/desert
+	land_type = /turf/simulated/floor/exoplanet/desert
 	planetary_area = /area/exoplanet/desert
 	plantcolors = list("#EFDD6F","#7B4A12","#E49135","#BA6222","#5C755E","#120309")
 
@@ -49,4 +49,12 @@
 
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
-	base_turf = /turf/simulated/floor/beach/sand/desert
+	base_turf = /turf/simulated/floor/exoplanet/desert
+
+/turf/simulated/floor/exoplanet/desert
+	name = "sand"
+	has_resources = 1
+
+/turf/simulated/floor/exoplanet/New()
+	icon_state = "desert[rand(0,5)]"
+	..()

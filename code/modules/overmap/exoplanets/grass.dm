@@ -28,14 +28,13 @@
 			S.set_trait(TRAIT_SPREAD,1)
 
 /area/exoplanet/grass
-	base_turf = /turf/simulated/floor/wildgrass
+	base_turf = /turf/simulated/floor/exoplanet/grass
 
 /datum/random_map/noise/exoplanet/grass
 	descriptor = "grass exoplanet"
 	smoothing_iterations = 2
-	water_level = 5
-	land_type = /turf/simulated/floor/wildgrass
-	water_type = /turf/simulated/floor/beach/water/shallow
+	land_type = /turf/simulated/floor/exoplanet/grass
+	water_type = /turf/simulated/floor/exoplanet/water/shallow
 	planetary_area = /area/exoplanet/grass
 	plantcolors = list("#0E1E14","#1A3E38","#5A7467","#9EAB88","#6E7248", "RANDOM")
 
@@ -43,3 +42,12 @@
 	large_flora_prob = 50
 	fauna_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos)
+
+/turf/simulated/floor/exoplanet/grass
+	name = "grass"
+	icon = 'icons/misc/beach.dmi'
+	icon_state = "dgrass0"
+
+/turf/simulated/floor/wildgrass/New()
+	icon_state = "dgrass[rand(0,4)]"
+	..()

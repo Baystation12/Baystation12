@@ -18,13 +18,27 @@
 	smoothing_iterations = 1
 	flora_prob = 30
 	large_flora_prob = 20
-	water_level = 3
-	land_type = /turf/simulated/floor/snow
-	water_type = /turf/simulated/floor/ice
+	water_level_max = 3
+	land_type = /turf/simulated/exoplanet/floor/snow
+	water_type = /turf/simulated/exoplanet/floor/ice
 	planetary_area = /area/exoplanet/snow
 	fauna_types = list(/mob/living/simple_animal/hostile/samak, /mob/living/simple_animal/hostile/diyaab, /mob/living/simple_animal/hostile/shantak)
 	plantcolors = list("#D0FEF5","#93E1D8","#93E1D8", "#B2ABBF", "#3590F3", "#4B4E6D")
 
 /area/exoplanet/snow
 	ambience = list('sound/effects/wind/tundra0.ogg','sound/effects/wind/tundra1.ogg','sound/effects/wind/tundra2.ogg','sound/effects/wind/spooky0.ogg','sound/effects/wind/spooky1.ogg')
-	base_turf = /turf/simulated/floor/snow
+	base_turf = /turf/simulated/exoplanet/floor/snow
+
+/turf/simulated/exoplanet/floor/ice
+	name = "ice"
+	icon = 'icons/turf/snow.dmi'
+	icon_state = "ice"
+
+/turf/simulated/exoplanet/floor/snow
+	name = "snow"
+	icon = 'icons/turf/snow.dmi'
+	icon_state = "snow"
+
+/turf/simulated/exoplanet/floor/snow/New()
+	icon_state = pick("snow[rand(1,12)]","snow0")
+	..()

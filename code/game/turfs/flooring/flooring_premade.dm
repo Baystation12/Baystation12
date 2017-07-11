@@ -47,15 +47,6 @@
 	icon_state = "grass0"
 	initial_flooring = /decl/flooring/grass
 
-/turf/simulated/floor/wildgrass
-	name = "grass"
-	icon = 'icons/misc/beach.dmi'
-	icon_state = "dgrass0"
-
-/turf/simulated/floor/wildgrass/New()
-	icon_state = "dgrass[rand(0,4)]"
-	..()
-
 /turf/simulated/floor/diona
 	name = "biomass"
 	icon = 'icons/turf/floors.dmi'
@@ -97,7 +88,7 @@
 /turf/simulated/floor/reinforced/nitrogen/engine
 	name = "engine floor"
 	initial_gas = list("nitrogen" = MOLES_N2STANDARD)
-	
+
 /turf/simulated/floor/reinforced/phoron/fuel
 	initial_gas = list("phoron" = 15000)
 
@@ -229,9 +220,6 @@
 
 /turf/simulated/floor/beach/water/update_dirt()
 	return	// Water doesn't become dirty
-
-/turf/simulated/floor/beach/water/shallow
-	icon_state = "seashallow"
 
 /turf/simulated/floor/beach/water/ocean
 	icon_state = "seadeep"

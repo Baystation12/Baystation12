@@ -15,11 +15,11 @@
 
 /obj/effect/overmap/sector/exoplanet/initialize()
 	..()
+	generate_atmosphere()
 	air_processing_killed = TRUE
 	generate_map()
 	air_processing_killed = FALSE
 	generate_landing()
-	generate_atmosphere()
 	update_biome()
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
@@ -100,7 +100,9 @@
 	smoothing_iterations = 1
 	var/area/planetary_area = /area/exoplanet
 
-	var/water_level = 3
+	var/water_level
+	var/water_level_min = 0
+	var/water_level_max = 5
 	var/land_type = /turf/simulated/floor
 	var/water_type
 
@@ -117,7 +119,7 @@
 /datum/random_map/noise/exoplanet/New()
 	target_turf_type = world.turf
 	planetary_area = new planetary_area()
-	water_level = rand(0,5)
+	water_level = rand(water_level_min,water_level_max)
 	generate_flora()
 	..()
 
@@ -125,6 +127,8 @@
     return min(9,max(0,round((value/cell_range)*10)))
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
+	if(water_type && noise2value(value) < water_level)
+		return "~"
 	return "[noise2value(value)]"
 
 /datum/random_map/noise/exoplanet/get_appropriate_path(var/value)
@@ -184,3 +188,23 @@
 		new /obj/effect/plant(T, pick(big_flora_types), start_matured = 1)
 	else
 		new /obj/effect/plant(T, pick(small_flora_types), start_matured = 1)
+
+/turf/simulated/floor/exoplanet
+	name = "space land"
+	icon = 'icons/misc/beach.dmi'
+	icon_state = "desert"
+
+/turf/simulated/floor/exoplanet/New()
+	if(using_map.use_overmap)
+		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		if(istype(E) && E.atmosphere)
+			initial_gas = E.atmosphere.gas.Copy()
+			temperature = E.atmosphere.temperature
+	..()
+
+/turf/simulated/floor/exoplanet/water/shallow
+	name = "shallow water"
+	icon_state = "seashallow"
+
+/turf/simulated/floor/exoplanet/water/update_dirt()
+	return	// Water doesn't become dirty
