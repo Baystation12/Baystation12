@@ -141,7 +141,7 @@
 	melee_damage_upper = 12
 	attacktext = "gouged"
 	cold_damage_per_tick = 0
-	speak_chance = 5
+	speak_chance = 2
 	speak = list("Shuhn","Shrunnph?","Shunpf")
 	emote_see = list("scratches the ground","shakes out it's mane","tinkles gently")
 
@@ -158,3 +158,33 @@
 	icon_state = "tindalos"
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
+
+/mob/living/simple_animal/thinbug
+	name = "taki"
+	desc = "It looks like a bunch of legs."
+	icon_state = "thinbug"
+	icon_living = "thinbug"
+	icon_dead = "thinbug_dead"
+	speak_chance = 1
+	emote_hear = list("scratches the ground","chitters")
+
+/mob/living/simple_animal/hostile/jelly
+	name = "zeq"
+	desc = "It looks like a jellyfish floating up. How does it do that?"
+	faction = "zeq"
+	icon_state = "jelly"
+	icon_living = "jelly"
+	icon_dead = "jelly_dead"
+	move_to_delay = 1
+	maxHealth = 75
+	health = 75
+	speed = 1
+	melee_damage_lower = 3
+	melee_damage_upper = 12
+	attacktext = "stung"
+	damtype = BURN
+	speak_chance = 1
+	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
+
+/mob/living/simple_animal/hostile/jelly/New()
+	color = color_rotation(round(rand(0,360),20))

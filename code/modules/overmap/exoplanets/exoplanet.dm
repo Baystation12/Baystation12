@@ -39,7 +39,6 @@
 	var/list/badgases = gas_data.gases.Copy()
 	badgases -= atmosphere.gas
 	var/badgas = pick(badgases)
-
 	for(var/datum/seed/S in seeds)
 		S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
 		S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
@@ -181,6 +180,7 @@
 		S.set_trait(TRAIT_PRODUCT_ICON,pick("alien","alien-product","alien[rand(2,5)]","alien[rand(2,5)]-product"))
 		S.set_trait(TRAIT_PLANT_ICON,"tree5")
 		S.set_trait(TRAIT_SPREAD,0)
+		S.set_trait(TRAIT_HARVEST_REPEAT,1)
 		big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)

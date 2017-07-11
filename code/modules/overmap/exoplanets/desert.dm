@@ -35,13 +35,19 @@
 	flora_prob = 10
 	large_flora_prob = 0
 	fauna_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos)
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos)
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
 	var/v = noise2value(value)
 	if(v > 6)
 		T.icon_state = "desert[v-1]"
+
+/datum/random_map/noise/exoplanet/desert/spawn_fauna(var/turf/T, value)
+	if(prob(2))
+		new/mob/living/simple_animal/space_worm/head(T)
+	else
+		..()
 
 /datum/random_map/noise/ore/rich
 	deep_val = 0.7
@@ -55,6 +61,6 @@
 	name = "sand"
 	has_resources = 1
 
-/turf/simulated/floor/exoplanet/New()
+/turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"
 	..()
