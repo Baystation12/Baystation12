@@ -223,7 +223,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
-		pressure_setting = between(0, pressure_setting + change, 50*ONE_ATMOSPHERE)
+		pressure_setting = between(0, pressure_setting + change, MAX_PUMP_PRESSURE)
 		spawn(1)
 			src.updateUsrDialog()
 		return 1
@@ -342,7 +342,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
-		pressure_setting = between(0, pressure_setting + change, 10*ONE_ATMOSPHERE)
+		pressure_setting = between(0, pressure_setting + change, MAX_PUMP_PRESSURE)
 		spawn(1)
 			src.updateUsrDialog()
 		return 1
