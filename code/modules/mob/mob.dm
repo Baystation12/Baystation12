@@ -4,6 +4,8 @@
 	living_mob_list_ -= src
 	unset_machine()
 	qdel(hud_used)
+	for(var/obj/item/grab/G in grabbed_by)
+		qdel(G)
 	clear_fullscreen()
 	if(client)
 		remove_screen_obj_references()

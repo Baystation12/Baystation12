@@ -205,7 +205,16 @@
 	if(!attacker || !victim)
 		return 0
 
+	if(attacker == victim)
+		to_chat(attacker, "<span class='notice'>You can't grab yourself.</span>")
+		return 0
+
+	if(attacker.grabbed_by.len)
+		to_chat(attacker, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
+		return 0
+
 	var/obj/item/grab/G
+
 	if(!grab_tag)
 		G = new attacker.current_grab_type(attacker, victim)
 	else

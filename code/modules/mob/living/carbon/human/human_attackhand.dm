@@ -101,7 +101,6 @@
 			return 1
 
 		if(I_GRAB)
-			message_admins("[H.name] is grabbing [src]")
 			visible_message("<span class='danger'>[M] attempted to grab \the [src]!</span>")
 			return H.make_grab(H, src)
 
