@@ -1973,7 +1973,7 @@
 "Mq" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/landmark{name = "JoinLateCryo"},/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo/aux)
 "Mr" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo/aux)
 "Ms" = (/obj/structure/disposalpipe/segment,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/alarm{dir = 4; pixel_x = -23; pixel_y = 0},/turf/simulated/floor/plating,/area/maintenance/firstdeck/centralport)
-"Mt" = (/obj/machinery/telecomms/relay/preset/firstdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"; nitrogen = 82.1472; oxygen = 21.8366; temperature = 293.15},/area/tcommsat/relay/firstdeck)
+"Mt" = (/obj/machinery/telecomms/relay/preset/firstdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"},/area/tcommsat/relay/firstdeck)
 "Mu" = (/obj/machinery/light/small,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/obj/item/device/radio/intercom{dir = 1; pixel_y = -22},/turf/simulated/floor/tiled/dark,/area/tcommsat/relay/firstdeck)
 "Mv" = (/obj/machinery/photocopier,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/turf/simulated/floor/tiled/white,/area/rnd/equipment)
 "Mw" = (/turf/simulated/floor/tiled/white,/area/rnd/equipment)
