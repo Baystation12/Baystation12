@@ -272,6 +272,7 @@
 #include "code\datums\supplypacks\engineering.dm"
 #include "code\datums\supplypacks\hospitality.dm"
 #include "code\datums\supplypacks\hydroponics.dm"
+#include "code\datums\supplypacks\materials.dm"
 #include "code\datums\supplypacks\medical.dm"
 #include "code\datums\supplypacks\miscellaneous.dm"
 #include "code\datums\supplypacks\operations.dm"
