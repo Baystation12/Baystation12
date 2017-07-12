@@ -69,7 +69,7 @@
 	atmosphere = new
 	atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
 	atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
-	if(prob(90)) //let the fuckery commence
+	if(prob(80)) //let the fuckery commence
 		var/list/oldgas = atmosphere.gas.Copy()
 		var/list/newgases = gas_data.gases.Copy()
 		if(prob(90)) //all phoron planet should be rare
@@ -205,6 +205,7 @@
 /turf/simulated/floor/exoplanet/water/shallow
 	name = "shallow water"
 	icon_state = "seashallow"
+	movement_delay = 2
 
 /turf/simulated/floor/exoplanet/water/update_dirt()
 	return	// Water doesn't become dirty

@@ -136,6 +136,9 @@
 
 /mob/proc/movement_delay()
 	. = 0
+	if(istype(loc, /turf))
+		var/turf/T = loc
+		. += T.movement_delay
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling

@@ -25,6 +25,8 @@
 
 	var/list/decals
 
+	var/movement_delay
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
