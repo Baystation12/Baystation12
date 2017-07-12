@@ -111,3 +111,9 @@
 			qdel(src)
 	else
 		..()
+
+
+/obj/machinery/computer/Topic(href, href_list)
+	. = ..()
+	if(. && istype(usr, /mob/living/carbon))
+		playsound(src, 'sound/machines/keypress.ogg', 50)

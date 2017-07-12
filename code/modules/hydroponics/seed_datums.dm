@@ -39,7 +39,7 @@
 	name = "berries"
 	seed_name = "berry"
 	display_name = "berry bush"
-	mutants = list("glowberries","poisonberries")
+	mutants = list("glowberries","poisonberries","blueberries")
 	chems = list("nutriment" = list(1,10), "berryjuice" = list(10,10))
 	kitchen_tag = "berries"
 
@@ -56,6 +56,23 @@
 	set_trait(TRAIT_PLANT_ICON,"bush")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/berry/blue
+	name = "blueberries"
+	seed_name = "blueberry"
+	display_name = "blueberry bush"
+	mutants = list("berries","poisonberries","glowberries")
+	chems = list("nutriment" = list(1,10), "berryjuice" = list(10,10))
+
+/datum/seed/berry/blue/New()
+	..()
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#1C225C")
+	set_trait(TRAIT_WATER_CONSUMPTION, 5)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.2)
 
 /datum/seed/berry/glow
 	name = "glowberries"

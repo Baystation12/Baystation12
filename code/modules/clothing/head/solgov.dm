@@ -6,6 +6,11 @@
 	desc = "It's a blue ballcap in SCG colors."
 	icon_state = "solsoft"
 
+/obj/item/clothing/head/soft/veteranhat
+	name = "veteran hat"
+	desc = "It's a tacky black ballcap bearing the yellow service ribbon of the Gaia Conflict."
+	icon_state = "cap_veteran"
+
 /obj/item/clothing/head/soft/sol/expedition
 	name = "\improper Expeditionary Corps cap"
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest."
@@ -172,6 +177,26 @@
 	name = "health service beret"
 	desc = "A white beret denoting service in the Interstellar Health Service. For medics that are more inclined towards style than safety."
 	icon_state = "beret_white"
+
+/obj/item/clothing/head/beret/sol/marcom
+	name = "\improper MARSCOM beret"
+	desc = "A red beret with a gold insignia, denoting service in the SCGDF Mars Central Command. For brass who are more inclined towards style than safety."
+	icon_state = "beret_redgold"
+
+/obj/item/clothing/head/beret/sol/stratcom
+	name = "\improper STRATCOM beret"
+	desc = "A grey beret with a silver insignia, denoting service in the SCGDF Strategic Command. For intelligence personnel who are more inclined towards style than safety."
+	icon_state = "beret_graysilver"
+
+/obj/item/clothing/head/beret/sol/diplomatic
+	name = "diplomatic security beret"
+	desc = "A tan beret denoting service in the SCG Marine Corps Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
+	icon_state = "beret_tan"
+
+/obj/item/clothing/head/beret/sol/borderguard
+	name = "border security beret"
+	desc = "A green beret with a silver emblem, denoting service in the Bureau of Border Security. For border guards who are more inclined towards style than safety."
+	icon_state = "beret_greensilver"
 
 /obj/item/clothing/head/beret/sol/expedition
 	name = "expeditionary beret"

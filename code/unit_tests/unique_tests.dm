@@ -77,12 +77,64 @@
 		pass("All outfit datums have unique names.")
 	return 1
 
-/datum/unit_test/proc/number_of_issues(var/list/entries, var/type)
+/datum/unit_test/languages_shall_have_unique_names
+	name = "UNIQUENESS: Languages Shall Have Unique Names"
+
+/datum/unit_test/languages_shall_have_unique_names/start_test()
+	var/list/languages_by_name = list()
+
+	for(var/lt in subtypesof(/datum/language))
+		var/datum/language/l = lt
+		group_by(languages_by_name, initial(l.name), lt)
+
+	var/number_of_issues = number_of_issues(languages_by_name, "Language Names")
+	if(number_of_issues)
+		fail("[number_of_issues] issue\s with language datums found.")
+	else
+		pass("All languages datums have unique names.")
+	return 1
+
+/datum/unit_test/languages_shall_have_no_or_unique_keys
+	name = "UNIQUENESS: Languages Shall Have No or Unique Keys"
+
+/datum/unit_test/languages_shall_have_no_or_unique_keys/start_test()
+	var/list/languages_by_key = list()
+
+	for(var/lt in subtypesof(/datum/language))
+		var/datum/language/l = lt
+		var/language_key = initial(l.key)
+		if(!language_key)
+			continue
+
+		group_by(languages_by_key, language_key, lt)
+
+	var/number_of_issues = number_of_issues(languages_by_key, "Language Keys")
+	if(number_of_issues)
+		fail("[number_of_issues] issue\s with language datums found.")
+	else
+		pass("All languages datums have unique keys.")
+	return 1
+
+/datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)
 		var/list/values = entries[key]
 		if(values.len > 1)
-			log_bad("[type] - [key] - The following entries have the same value: " + english_list(values))
+			var/decl/noi_feedback/noif = decls_repository.get_decl(feedback)
+			noif.print(src, type, key, values)
 			issues++
 
 	return issues
+
+/decl/noi_feedback/proc/priv_print(var/datum/unit_test/ut, var/type, var/key, var/output_text)
+	ut.log_bad("[type] - [key] - The following entries have the same value: [output_text]")
+
+/decl/noi_feedback/proc/print(var/datum/unit_test/ut, var/type, var/key, var/list/entries)
+	priv_print(ut, type, key, english_list(entries))
+
+/decl/noi_feedback/detailed/print(var/datum/unit_test/ut, var/type, var/key, var/list/entries)
+	var/list/pretty_print = list()
+	pretty_print += ""
+	for(var/entry in entries)
+		pretty_print += log_info_line(entry)
+	priv_print(ut, type, key, jointext(pretty_print, "\n"))

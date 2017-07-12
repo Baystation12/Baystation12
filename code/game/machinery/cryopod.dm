@@ -215,7 +215,7 @@
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant.resting = 1
-	..()
+	return ..()
 
 /obj/machinery/cryopod/initialize()
 	..()

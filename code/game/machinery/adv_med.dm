@@ -380,8 +380,6 @@
 		switch(e.robotic)
 			if(ORGAN_ROBOT) robot = "Prosthetic:"
 			if(ORGAN_ASSISTED) robot = "Augmented:"
-		if(e.open)
-			open = "Open:"
 
 		switch (e.germ_level)
 			if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)

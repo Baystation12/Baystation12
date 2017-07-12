@@ -162,23 +162,26 @@
 
 	if(href_list["splice"])
 		if(dish)
-			var/target = text2num(href_list["splice"]) // target = 1 to 4 for effects, 5 for species
-			if(memorybank && 0 < target && target <= 4)
-				if(target < memorybank.stage) return // too powerful, catching this for href exploit prevention
+			var/target = text2num(href_list["splice"]) // target = 1+ for effects, -1 for species
+			if(memorybank && target > 0)
+				if(target < memorybank.stage)
+					return // too powerful, catching this for href exploit prevention
 
 				var/datum/disease2/effect/target_effect
 				var/list/illegal_types = list()
 				for(var/datum/disease2/effect/e in dish.virus2.effects)
 					if(e.stage == target)
 						target_effect = e
-					else
+					if(!e.allow_multiple)
 						illegal_types += e.type
-				if(memorybank.type in illegal_types) return
+				if(memorybank.type in illegal_types)
+					to_chat(user, "<span class='warning'>Virus DNA can't hold more than one [memorybank]</span>")
+					return 1
 				dish.virus2.effects -= target_effect
 				dish.virus2.effects += memorybank
 				qdel(target_effect)
 
-			else if(species_buffer && target == 5)
+			else if(species_buffer && target == -1)
 				dish.virus2.affected_species = species_buffer
 
 			else

@@ -28,12 +28,13 @@
 		return
 	return
 
-/obj/effect/portal/New(var/start, var/end)
+/obj/effect/portal/New(var/start, var/end, var/delete_after = 300)
 	..()
 	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
 	target = end
-	spawn(300)
-		qdel(src)
+	if(delete_after)
+		spawn(delete_after)
+			qdel(src)
 
 /obj/effect/portal/Destroy()
 	target = null

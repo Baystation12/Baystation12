@@ -20,10 +20,6 @@
 /mob/living/carbon/human/dummy/mannequin/instantiate_hud()
 	return	// Mannequins don't get HUDs
 
-/mob/living/carbon/human/resomi/New(var/new_loc)
-	h_style = "Resomi Plumage"
-	..(new_loc, SPECIES_RESOMI)
-
 /mob/living/carbon/human/skrell/New(var/new_loc)
 	h_style = "Skrell Male Tentacles"
 	..(new_loc, SPECIES_SKRELL)

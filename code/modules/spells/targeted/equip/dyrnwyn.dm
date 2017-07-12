@@ -5,7 +5,7 @@
 	charge_type = Sp_HOLDVAR
 	holder_var_type = "fireloss"
 	holder_var_amount = 10
-	school = "evocation"
+	school = "conjuration"
 	invocation = "Anrhydeddu Fi!"
 	invocation_type = SpI_SHOUT
 	spell_flags = INCLUDEUSER

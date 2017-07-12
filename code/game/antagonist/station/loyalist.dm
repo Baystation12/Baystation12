@@ -6,7 +6,6 @@ var/datum/antagonist/loyalists/loyalists
 	role_text_plural = "Loyalists"
 	feedback_tag = "loyalist_objective"
 	antag_indicator = "hudheadloyalist"
-	welcome_text = "You belong to the Company, body and soul. Preserve its interests against the conspirators amongst the crew."
 	victory_text = "The heads of staff remained at their posts! The loyalists win!"
 	loss_text = "The heads of staff did not stop the revolution!"
 	victory_feedback_tag = "win - rev heads killed"
@@ -21,18 +20,20 @@ var/datum/antagonist/loyalists/loyalists
 
 	// Inround loyalists.
 	faction_role_text = "Loyalist"
-	faction_descriptor = "Company"
+	faction_descriptor = "COMPANY"
 	faction_verb = /mob/living/proc/convert_to_loyalist
-	faction_welcome = "Preserve NanoTrasen's interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
 	faction_indicator = "hudloyalist"
 	faction_invisible = 1
-	blacklisted_jobs = list("AI", "Cyborg")
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
 
 	faction = "loyalist"
 
 /datum/antagonist/loyalists/New()
 	..()
 	loyalists = src
+	welcome_text = "You belong to the [using_map.company_name], body and soul. Preserve its interests against the conspirators amongst the crew."
+	faction_welcome = "Preserve [using_map.company_short]'s interests against the traitorous recidivists amongst the crew. Protect the heads of staff with your life."
+	faction_descriptor = "[using_map.company_name]"
 
 /datum/antagonist/loyalists/create_global_objectives()
 	if(!..())

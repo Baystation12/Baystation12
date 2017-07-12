@@ -10,9 +10,10 @@
 			return 1
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
-	if(locate(/obj/structure/table) in get_turf(mover))
-		return 1
-	return 0
+	var/obj/structure/table/T = (locate() in get_turf(mover))
+	return (T && !T.flipped) 	//If we are moving from a table, check if it is flipped.
+								//If the table we are standing on is not flipped, then we can move freely to another table.
+
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)

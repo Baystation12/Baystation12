@@ -10,6 +10,13 @@
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
 	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 
+/proc/log_and_message_staff(var/message as text, var/mob/user = usr, var/turf/location)
+	var/turf/T = location ? location : (user ? get_turf(user) : null)
+	message = append_admin_tools(message, user, T)
+
+	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
+	message_staff(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
+
 /proc/log_and_message_admins_many(var/list/mob/users, var/message)
 	if(!users || !users.len)
 		return

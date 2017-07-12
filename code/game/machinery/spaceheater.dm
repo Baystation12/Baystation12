@@ -1,4 +1,5 @@
 /obj/machinery/space_heater
+	use_power = 0
 	anchored = 0
 	density = 1
 	icon = 'icons/obj/atmos.dmi'
@@ -9,7 +10,7 @@
 	var/on = 0
 	var/set_temperature = T0C + 20	//K
 	var/active = 0
-	var/heating_power = 40000
+	var/heating_power = 40 KILOWATTS
 	flags = OBJ_CLIMBABLE
 
 
@@ -42,11 +43,6 @@
 	else
 		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
 	return
-
-/obj/machinery/space_heater/powered()
-	if(cell && cell.charge)
-		return 1
-	return 0
 
 /obj/machinery/space_heater/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -167,7 +163,7 @@
 
 /obj/machinery/space_heater/process()
 	if(on)
-		if(cell && cell.charge)
+		if(powered() || (cell && cell.charge))
 			var/datum/gas_mixture/env = loc.return_air()
 			if(env && abs(env.temperature - set_temperature) <= 0.1)
 				active = 0
@@ -177,11 +173,12 @@
 
 				if(removed)
 					var/heat_transfer = removed.get_thermal_energy_change(set_temperature)
+					var/power_draw
 					if(heat_transfer > 0)	//heating air
 						heat_transfer = min( heat_transfer , heating_power ) //limit by the power rating of the heater
 
 						removed.add_thermal_energy(heat_transfer)
-						cell.use(heat_transfer*CELLRATE)
+						power_draw = heat_transfer
 					else	//cooling air
 						heat_transfer = abs(heat_transfer)
 
@@ -191,8 +188,11 @@
 
 						heat_transfer = removed.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
 
-						var/power_used = abs(heat_transfer)/cop
-						cell.use(power_used*CELLRATE)
+						power_draw = abs(heat_transfer)/cop
+					if(!powered())
+						cell.use(power_draw*CELLRATE)
+					else
+						use_power(power_draw)
 					active = heat_transfer
 
 				env.merge(removed)

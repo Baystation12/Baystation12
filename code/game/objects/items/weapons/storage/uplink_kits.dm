@@ -134,10 +134,7 @@
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("potassium" = 1, "nitrogen" = 1, "silicon" = 1))
-	// Mindbreaker
-	fill_cigarre_package(pack, list("silicon" = 1.5, "hydrogen" = 1.5))
-
+	fill_cigarre_package(pack, list("anti_toxin" = 1, "silicon" = 1, "hydrazine" = 1))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
@@ -148,7 +145,7 @@
 
 /proc/fill_cigarre_package(var/obj/item/weapon/storage/fancy/cigarettes/C, var/list/reagents)
 	for(var/reagent in reagents)
-		C.reagents.add_reagent(reagent, reagents[reagent] * C.storage_slots)
+		C.reagents.add_reagent(reagent, reagents[reagent] * C.max_storage_space)
 
 //Rig Electrowarfare and Voice Synthesiser kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/ewar_voice
