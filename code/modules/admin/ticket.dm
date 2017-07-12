@@ -93,10 +93,14 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	var/datum/ticket/open_ticket = null
 	var/datum/browser/ticket_panel_window
 
-/datum/ticket_panel/proc/get_dat(var/client/C)
-	var/dat = ""
+/datum/ticket_panel/proc/get_dat()
+	var/client/C = ticket_panel_window.user.client
+	if(!C)
+		return
 
-	var/ticket_dat = ""
+	var/list/dat = list()
+
+	var/list/ticket_dat = list()
 	for(var/id = tickets.len, id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
 		if(C.holder || ticket.owner.ckey == C.ckey)
@@ -124,28 +128,38 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
 
-	if(ticket_dat)
-		dat += "<br /><div style='width:50%;float:left;'><p><b>Available tickets:</b></p><ul>[ticket_dat]</ul></div>"
+	if(ticket_dat.len)
+		dat += "<br /><div style='width:50%;float:left;'><p><b>Available tickets:</b></p><ul>[jointext(ticket_dat, null)]</ul></div>"
 
 		if(open_ticket)
 			dat += "<div style='width:50%;float:left;'><p><b>\[<a href='byond://?src=\ref[src];action=unview;'>X</a>\] Messages for ticket #[open_ticket.id]:</b></p>"
 
-			var/msg_dat = ""
+			var/list/msg_dat = list()
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
 				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [msg.msg]</li>"
 
-			if(msg_dat)
-				dat += "<ul>[msg_dat]</ul></div>"
+			if(msg_dat.len)
+				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
 			else
 				dat += "<p>No messages to display.</p></div>"
 	else
 		dat += "<p>No tickets to display.</p>"
 	dat += "</body></html>"
 
-	return dat
+	return jointext(dat, null)
 
 /datum/ticket_panel/Topic(href, href_list)
+	if(usr && usr != ticket_panel_window.user)
+		if(href_list["close"]) // catch the case where a user switches mobs, then closes the window that was linked to the old mob
+			ticket_panels -= usr.client
+		else
+			usr.client.view_tickets()
+			var/datum/ticket_panel/new_panel = ticket_panels[usr.client]
+			new_panel.open_ticket = open_ticket
+			new_panel.Topic(href, href_list)
+			return
+
 	..()
 
 	if(href_list["close"])
@@ -154,7 +168,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	switch(href_list["action"])
 		if("unview")
 			open_ticket = null
-			ticket_panel_window.set_content(get_dat(usr.client))
+			ticket_panel_window.set_content(get_dat())
 			ticket_panel_window.update()
 
 	var/datum/ticket/ticket = locate(href_list["ticket"])
@@ -164,7 +178,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	switch(href_list["action"])
 		if("view")
 			open_ticket = ticket
-			ticket_panel_window.set_content(get_dat(usr.client))
+			ticket_panel_window.set_content(get_dat())
 			ticket_panel_window.update()
 		if("take")
 			ticket.take(client_repository.get_lite_client(usr.client))
@@ -195,11 +209,14 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	ticket_panels[src] = ticket_panel
 	ticket_panel.ticket_panel_window = new(src.mob, "ticketpanel", "Ticket Manager", 800, 600, ticket_panel)
 
-	ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat(src))
+	ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat())
 	ticket_panel.ticket_panel_window.open()
 
-proc/update_ticket_panels()
+/proc/update_ticket_panels()
 	for(var/client/C in ticket_panels)
 		var/datum/ticket_panel/ticket_panel = ticket_panels[C]
-		ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat(C))
-		ticket_panel.ticket_panel_window.update()
+		if(C.mob != ticket_panel.ticket_panel_window.user)
+			C.view_tickets()
+		else
+			ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat())
+			ticket_panel.ticket_panel_window.update()
