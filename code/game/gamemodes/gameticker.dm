@@ -387,8 +387,8 @@ var/global/datum/controller/gameticker/ticker
 			//call a transfer shuttle vote
 			spawn(50)
 				if(!round_end_announced) // Spam Prevention. Now it should announce only once.
-					to_world("<span class='danger'>The round has ended!</span>")
-
+					/datum/announcement/FormMessage("Foreign vessel has left combat range; its return is not probable.", "[using_map.full_name] Vessel Proximity Notice")
+					log_and_message_staff("The antagonists have returned to their base.")
 					round_end_announced = 1
 				vote.autotransfer()
 
