@@ -40,7 +40,7 @@
 "aU" = (/obj/effect/floor_decal/industrial/warning{dir = 5},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 2; frequency = 1380; id_tag = "admin_shuttle_dock_pump"},/obj/item/device/radio/intercom{dir = 8; pixel_x = 22},/turf/simulated/floor/plating,/area/hallway/primary/fourthdeck/center)
 "aV" = (/turf/simulated/shuttle/wall/corner/dark{dir = 9},/area/shuttle/escape_pod7/station)
 "aX" = (/turf/simulated/shuttle/wall/corner/dark{dir = 5},/area/shuttle/escape_pod7/station)
-"aY" = (/obj/machinery/telecomms/relay/preset/fourthdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"; nitrogen = 82.1472; oxygen = 21.8366; temperature = 293.15},/area/tcommsat/relay/fourthdeck)
+"aY" = (/obj/machinery/telecomms/relay/preset/fourthdeck,/turf/simulated/floor/bluegrid{name = "Mainframe Base"},/area/tcommsat/relay/fourthdeck)
 "aZ" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "ba" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/turf/simulated/floor/plating,/area/quartermaster/hangar)
 "bb" = (/turf/simulated/wall/titanium,/area/calypso_hangar/start)

@@ -18,7 +18,7 @@ Small, little HP, poisonous.
 	speed = 0
 	move_to_delay = 0
 	density = 1
-	min_oxy = 0
+	min_gas = null
 	mob_size = MOB_MINISCULE
 	pass_flags = PASSTABLE
 	melee_damage_lower = 5

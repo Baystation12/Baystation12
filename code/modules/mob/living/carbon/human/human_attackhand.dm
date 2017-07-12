@@ -271,7 +271,7 @@
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
 	return
 
-/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message, var/damtype = BRUTE, var/armorcheck = "melee")
 
 	if(!damage || !istype(user))
 		return
@@ -281,8 +281,8 @@
 
 	var/dam_zone = pick(organs_by_name)
 	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	var/armor_block = run_armor_check(affecting, "melee")
-	apply_damage(damage, BRUTE, affecting, armor_block)
+	var/armor_block = run_armor_check(affecting, armorcheck)
+	apply_damage(damage, damtype, affecting, armor_block)
 	updatehealth()
 	return 1
 

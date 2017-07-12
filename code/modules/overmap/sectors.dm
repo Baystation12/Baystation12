@@ -7,7 +7,7 @@ var/list/points_of_interest = list()
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
-	var/map_z = list()
+	var/list/map_z = list()
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
@@ -26,7 +26,6 @@ var/list/points_of_interest = list()
 
 	if(!using_map.overmap_z)
 		build_overmap()
-	using_map.sealed_levels |= using_map.overmap_z
 
 	map_z = GetConnectedZlevels(z)
 	for(var/zlevel in map_z)
@@ -104,6 +103,8 @@ var/list/points_of_interest = list()
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
+
+	using_map.sealed_levels |= using_map.overmap_z
 
 	testing("Overmap build complete.")
 	return 1

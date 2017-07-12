@@ -26,9 +26,8 @@
 
 	minbodytemp = 0
 	maxbodytemp = 350
-	min_oxy = 0
-	max_co2 = 0
-	max_tox = 0
+	min_gas = null
+	max_gas = null
 
 	a_intent = I_HURT //so they don't get pushed around
 
