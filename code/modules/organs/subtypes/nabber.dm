@@ -37,14 +37,21 @@
 	if(eyes_shielded)
 		to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
 		innate_flash_protection = FLASH_PROTECTION_MAJOR
-		owner.eye_blind += 20
+		owner.eye_blind = 20
 	else
 		to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 		innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-		owner.eye_blind = max(0, owner.eye_blind - 20)
+		owner.eye_blind = min(2, owner.eye_blind)
+		process()
+
+/obj/item/organ/internal/eyes/nabber/process()
+	if(eyes_shielded)
+		owner.eye_blind = 20
+	..()
 
 /obj/item/organ/internal/phoron
 	name = "phoron storage"
+	icon_state = "stomach"
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
 	var/dexalin_level = 5
