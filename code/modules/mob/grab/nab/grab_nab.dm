@@ -50,51 +50,42 @@
 	ladder_carry = 1
 	force_danger = 1
 
-	var attacking = 0
-
 /datum/grab/nab/on_hit_grab(var/obj/item/grab/G)
-	if(!attacking)
-		var/mob/living/carbon/human/affecting = G.affecting
-		var/mob/living/carbon/human/assailant = G.assailant
+	var/mob/living/carbon/human/affecting = G.affecting
+	var/mob/living/carbon/human/assailant = G.assailant
 
-		var/crush_damage = rand(8,14)
+	var/crush_damage = rand(8,14)
 
-		affecting.visible_message("<span class='danger'>[assailant] begins crushing [affecting]!</span>")
-		attacking = 1
-		if(do_mob(assailant, affecting, action_cooldown - 1))
-			attacking = 0
-			G.action_used()
-			crush(G, crush_damage)
-			return 1
-		else
-			attacking = 0
-			affecting.visible_message("<span class='notice'>[assailant] stops crushing [affecting]!</span>")
-			return 0
+	affecting.visible_message("<span class='danger'>[assailant] begins crushing [affecting]!</span>")
+	G.attacking = 1
+	if(do_mob(assailant, affecting, action_cooldown - 1))
+		G.attacking = 0
+		G.action_used()
+		crush(G, crush_damage)
+		return 1
 	else
+		G.attacking = 0
+		affecting.visible_message("<span class='notice'>[assailant] stops crushing [affecting]!</span>")
 		return 0
 
 /datum/grab/nab/on_hit_harm(var/obj/item/grab/G)
-	if(!attacking)
-		var/mob/living/carbon/human/affecting = G.affecting
-		var/mob/living/carbon/human/assailant = G.assailant
+	var/mob/living/carbon/human/affecting = G.affecting
+	var/mob/living/carbon/human/assailant = G.assailant
 
-		var/masticate_damage = rand(15,20)
+	var/masticate_damage = rand(15,20)
 
-		affecting.visible_message("<span class='danger'>[assailant] begins chewing on [affecting]!</span>")
-		attacking = 1
+	affecting.visible_message("<span class='danger'>[assailant] begins chewing on [affecting]!</span>")
+	G.attacking = 1
 
-		if(do_mob(assailant, affecting, action_cooldown - 1))
-			attacking = 0
-			G.action_used()
-			masticate(G, masticate_damage)
-			return 1
-		else
-			attacking = 0
-			affecting.visible_message("<span class='notice'>[assailant] stops chewing on [affecting].</span>")
-			return 0
+	if(do_mob(assailant, affecting, action_cooldown - 1))
+		G.attacking = 0
+		G.action_used()
+		masticate(G, masticate_damage)
+		return 1
 	else
+		G.attacking = 0
+		affecting.visible_message("<span class='notice'>[assailant] stops chewing on [affecting].</span>")
 		return 0
-
 
 // This causes the assailant to crush the affecting mob. There is a chance that the crush will cause the
 // forelimb spikes to dig into the affecting mob, doing extra damage and likely causing them to bleed.

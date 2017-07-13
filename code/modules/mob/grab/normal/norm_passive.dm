@@ -21,12 +21,15 @@
 
 /datum/grab/normal/passive/on_hit_disarm(var/obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to pin.</span>")
+	return 0
 
 /datum/grab/normal/passive/on_hit_grab(var/obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to jointlock.</span>")
+	return 0
 
 /datum/grab/normal/passive/on_hit_harm(var/obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to dislocate.</span>")
+	return 0
 
-/datum/grab/normal/on_hit_special(var/obj/item/grab/G)
+/datum/grab/normal/passive/resolve_openhand_attack(var/obj/item/grab/G)
 	return 0
