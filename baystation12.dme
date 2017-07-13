@@ -1765,7 +1765,6 @@
 #include "code\modules\organs\subtypes\vox.dm"
 #include "code\modules\organs\subtypes\xenos.dm"
 #include "code\modules\overmap\_defines.dm"
-#include "code\modules\overmap\sectors.dm"
 #include "code\modules\overmap\spacetravel.dm"
 #include "code\modules\overmap\ships\ship.dm"
 #include "code\modules\overmap\ships\computers\engine_control.dm"
