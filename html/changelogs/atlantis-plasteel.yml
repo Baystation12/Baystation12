@@ -1,6 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - rscadd: "Can now order OCP and plasteel from cargo. Furthermore, 10 and 50 sheet crates are available for some more expensive sheet types, with 50 sheet crates being more cost efficient."

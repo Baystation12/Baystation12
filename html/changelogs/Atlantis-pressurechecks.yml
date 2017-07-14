@@ -1,6 +1,0 @@
-author: Atlantiscze
-delete-after: True
-
-changes: 
-  - tweak: "Max pressure on omni filter/mixer output is now capped at approx. 7500kPa"
-  - tweak: "Atmospherics pressure tanks can now be set to output up to 15000kPa"
