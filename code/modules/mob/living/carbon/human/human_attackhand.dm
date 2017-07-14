@@ -54,6 +54,13 @@
 	if(istype(M,/mob/living/carbon))
 		M.spread_disease_to(src, "Contact")
 
+	if(istype(H))
+		for (var/obj/item/grab/G in H)
+			if (G.assailant == H && G.affecting == src)
+				if(G.resolve_openhand_attack())
+					return 1
+
+
 	switch(M.a_intent)
 		if(I_HELP)
 			if(istype(H) && (is_asystole() || (status_flags & FAKEDEATH)))

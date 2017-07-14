@@ -36,9 +36,13 @@
 	type_name = GRAB_NORMAL
 
 	var/drop_headbutt = 1
-	var/attacking = 0
 
 	icon = 'icons/mob/screen1.dmi'
+
+	help_action = "inspect"
+	disarm_action = "pin"
+	grab_action = "jointlock"
+	harm_action = "dislocate"
 
 /datum/grab/normal/on_hit_help(var/obj/item/grab/normal/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
@@ -49,13 +53,13 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(!attacking && !affecting.lying)
+	if(!G.attacking && !affecting.lying)
 
 		affecting.visible_message("<span class='notice'>[assailant] is trying to pin [affecting] to the ground!</span>")
-		attacking = 1
+		G.attacking = 1
 
 		if(do_mob(assailant, affecting, action_cooldown - 1))
-			attacking = 0
+			G.attacking = 0
 			G.action_used()
 			affecting.Weaken(2)
 			affecting.visible_message("<span class='notice'>[assailant] pins [affecting] to the ground!</span>")
@@ -63,7 +67,7 @@
 			return 1
 		else
 			affecting.visible_message("<span class='notice'>[assailant] fails to pin [affecting] to the ground.</span>")
-			attacking = 0
+			G.attacking = 0
 			return 0
 	else
 		return 0
@@ -71,8 +75,31 @@
 
 /datum/grab/normal/on_hit_grab(var/obj/item/grab/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
-	if(O)
-		return O.jointlock(G.affecting, G.assailant)
+	var/mob/living/carbon/human/assailant = G.assailant
+	var/mob/living/carbon/human/affecting = G.affecting
+
+	if(!O)
+		to_chat(assailant, "<span class='warning'>[affecting] is missing that body part!</span>")
+		return 0
+
+	assailant.visible_message("<span class='danger'>[assailant] begins to [pick("bend", "twist")] [affecting]'s [O.name] into a jointlock!</span>")
+	G.attacking = 1
+
+	if(do_mob(assailant, affecting, action_cooldown - 1))
+
+		G.attacking = 0
+		G.action_used()
+		O.jointlock(affecting, assailant)
+		assailant.visible_message("<span class='danger'>[affecting]'s [O.name] is twisted!</span>")
+		playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		return 1
+
+	else
+
+		affecting.visible_message("<span class='notice'>[assailant] fails to jointlock [affecting]'s [O.name].</span>")
+		G.attacking = 0
+		return 0
+
 
 /datum/grab/normal/on_hit_harm(var/obj/item/grab/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
@@ -86,11 +113,11 @@
 	if(!O.dislocated)
 
 		assailant.visible_message("<span class='warning'>[assailant] begins to dislocate [affecting]'s [O.joint]!</span>")
-		attacking = 1
+		G.attacking = 1
 
 		if(do_mob(assailant, affecting, action_cooldown - 1))
 
-			attacking = 0
+			G.attacking = 0
 			G.action_used()
 			O.dislocate(1)
 			assailant.visible_message("<span class='danger'>[affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
@@ -100,15 +127,15 @@
 		else
 
 			affecting.visible_message("<span class='notice'>[assailant] fails to dislocate [affecting]'s [O.joint].</span>")
-			attacking = 0
+			G.attacking = 0
 			return 0
 
 	else
 		to_chat(assailant, "<span class='warning'>[affecting]'s [O.joint] is already dislocated!</span>")
 		return 0
 
-/datum/grab/normal/on_hit_special(var/obj/item/grab/G)
-	if(G.assailant.a_intent == I_HURT)
+/datum/grab/normal/resolve_openhand_attack(var/obj/item/grab/G)
+	if(G.assailant.a_intent != I_HELP)
 		var/hit_zone = G.assailant.zone_sel.selecting
 		switch(hit_zone)
 			if(BP_EYES)

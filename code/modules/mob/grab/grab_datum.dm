@@ -22,7 +22,6 @@
 	var/downgrade_on_move = 0					// If the grab needs to be downgraded when the grabber moves.
 	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
 
-
 	var/grab_slowdown = 7
 
 	var/shift = 0
@@ -45,6 +44,12 @@
 	var/can_downgrade_on_resist = 1
 	var/list/break_chance_table = list(100)
 	var/breakability = 2
+
+	// The names of different intents for use in attack logs
+	var/help_action = "help intent"
+	var/disarm_action = "disarm intent"
+	var/grab_action = "grab intent"
+	var/harm_action = "harm intent"
 
 /*
 	These procs shouldn't be overriden in the children unless you know what you're doing with them; they handle important core functions.
@@ -74,7 +79,7 @@
 
 	if (can_upgrade())
 		upgrade_effect(G)
-		admin_attack_log(G.assailant, G.affecting, "upgraded to [upgrab.state_name]", "was upgraded to [upgrab.state_name]", "upgraded to [upgrab.state_name]")
+		admin_attack_log(G.assailant, G.affecting, "tightens their grip on their victim to [upgrab.state_name]", "was grabbed more tightly to [upgrab.state_name]", "tightens grip to [upgrab.state_name] on")
 		return upgrab
 	else
 		to_chat(G.assailant, "<span class='warning'>[string_process(G, fail_up)]</span>")
@@ -114,23 +119,37 @@
 /datum/grab/proc/hit_with_grab(var/obj/item/grab/G)
 	if(downgrade_on_action)
 		G.downgrade()
-		return
 
-	if(!on_hit_special(G) && G.check_action_cooldown())
-		var/reset_action_cooldown = 0
-		switch(G.assailant.a_intent)
+	if(G.check_action_cooldown() && !G.attacking)
+		var/intent = G.assailant.a_intent
+		switch(intent)
+
 			if(I_HELP)
-				reset_action_cooldown = on_hit_help(G)
+				if(on_hit_help(G))
+					G.action_used()
+					make_log(G, help_action)
+
 			if(I_DISARM)
-				reset_action_cooldown = on_hit_disarm(G)
+				if(on_hit_disarm(G))
+					G.action_used()
+					make_log(G, disarm_action)
+
 			if(I_GRAB)
-				reset_action_cooldown = on_hit_grab(G)
+				if(on_hit_grab(G))
+					G.action_used()
+					make_log(G, grab_action)
+
 			if(I_HURT)
-				reset_action_cooldown = on_hit_harm(G)
-		if(reset_action_cooldown)
-			G.action_used()
+				if(on_hit_harm(G))
+					G.action_used()
+					make_log(G, harm_action)
+
 	else
 		to_chat(G.assailant, "<span class='warning'>You must wait before you can do that.</span>")
+
+/datum/grab/proc/make_log(var/obj/item/grab/G, var/action)
+	admin_attack_log(G.assailant, G.affecting, "[action]s their victim", "was [action]ed", "used [action] on")
+
 
 /datum/grab/proc/adjust_position(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -224,10 +243,11 @@
 /datum/grab/proc/on_hit_harm(var/obj/item/grab/G)
 	return 1
 
-// What happens when you hit the grabbed person with the grab and you want it
+// What happens when you hit the grabbed person with an open hand and you want it
 // to do some special snowflake action based on some other factor such as
 // intent.
-/datum/grab/proc/on_hit_special(var/obj/item/grab/G)
+/datum/grab/proc/resolve_openhand_attack(var/obj/item/grab/G)
+	return 0
 
 /datum/grab/proc/item_attack(var/obj/item/grab/G, var/obj/item)
 
