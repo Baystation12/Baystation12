@@ -11,12 +11,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		to_chat(src, "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>")
 		return
 
-	var/datum/client_lite/client_lite = client_repository.get_lite_client(src)
-	var/datum/ticket/existing_ticket = get_open_ticket_by_client(client_lite)
-	if(!isnull(existing_ticket))
-		to_chat(src, "<span class='notice'>You already have an open ticket! Either click a responding admin's name to reply, or <a href='?src=\ref[usr];close_ticket=\ref[existing_ticket]'>close your ticket</a> to start a new one.</span>")
-		return
-
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
 
@@ -91,12 +85,29 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	// create ticket
-	var/datum/ticket/ticket = new /datum/ticket(client_lite)
-	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
+	// handle ticket
+	var/datum/client_lite/client_lite = client_repository.get_lite_client(src)
+	var/datum/ticket/ticket = get_open_ticket_by_client(client_lite)
+	if(!ticket)
+		ticket = new /datum/ticket(client_lite)
+	else if(ticket.status == TICKET_ASSIGNED)
+		// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket
+		var/admin_found = 0
+		for(var/datum/client_lite/admin in ticket.assigned_admins)
+			var/client/admin_client = client_by_ckey(admin.ckey)
+			if(admin_client)
+				admin_found = 1
+				src.cmd_admin_pm(admin_client, original_msg, ticket)
+				break
+		if(!admin_found)
+			to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so please be patient!</span>")
+		return
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
+	update_ticket_panels()
+
+	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
