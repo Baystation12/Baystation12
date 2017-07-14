@@ -1,4 +1,5 @@
-var/list/teleport_blacklist = list(/obj/item/weapon/disk/nuclear, /obj/item/weapon/storage/backpack/holding) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
+/decl/teleport
+	var/static/list/teleport_blacklist = list(/obj/item/weapon/disk/nuclear, /obj/item/weapon/storage/backpack/holding) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
 
 /decl/teleport/proc/teleport(var/atom/target, var/atom/destination, var/precision = 0)
 	if(!can_teleport(target,destination))

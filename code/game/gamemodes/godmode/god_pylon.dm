@@ -32,14 +32,14 @@
 		return
 	to_chat(L, "<span class='notice'>You place your hands on \the [src], feeling yourself intune to its vibrations.</span>")
 	intuned += L
-	destroyed_event.register(L,src,/obj/structure/deity/pylon/proc/remove_intuned)
+	GLOB.destroyed_event.register(L,src,/obj/structure/deity/pylon/proc/remove_intuned)
 
 /obj/structure/deity/pylon/proc/remove_intuned(var/mob/living/L)
 	if(!(L in intuned))
 		return
 	to_chat(L, "<span class='warning'>You no longer feel intuned to \the [src].</span>")
 	intuned -= L
-	destroyed_event.unregister(L, src)
+	GLOB.destroyed_event.unregister(L, src)
 
 
 /obj/structure/deity/pylon/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
