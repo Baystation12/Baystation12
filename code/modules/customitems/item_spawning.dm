@@ -57,7 +57,7 @@
 	if(item_icon)
 		if(!istype(item))
 			item.icon = CUSTOM_ITEM_OBJ
-			item.icon_state = item_icon
+			item.set_icon_state(item_icon)
 			return
 		else
 			if(inherit_inhands)
@@ -67,7 +67,7 @@
 				item.item_icons = null
 
 			item.icon = CUSTOM_ITEM_OBJ
-			item.icon_state = item_icon
+			item.set_icon_state(item_icon)
 			item.item_state = null
 			item.icon_override = CUSTOM_ITEM_MOB
 

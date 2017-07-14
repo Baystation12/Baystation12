@@ -47,7 +47,7 @@
 
 	..()
 
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
@@ -71,3 +71,8 @@
 
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
+
+/obj/item/organ/internal/robotize()
+	..()
+	min_bruised_damage += 5
+	min_broken_damage += 10

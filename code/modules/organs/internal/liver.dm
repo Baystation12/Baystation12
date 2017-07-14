@@ -6,6 +6,7 @@
 	parent_organ = BP_GROIN
 	min_bruised_damage = 25
 	min_broken_damage = 45
+	max_damage = 70
 	relative_size = 60
 
 /obj/item/organ/internal/liver/robotize()
@@ -52,6 +53,8 @@
 			filter_effect -= 1
 		if(is_broken())
 			filter_effect -= 2
+		if(robotic >= ORGAN_ROBOT)
+			filter_effect += 1
 
 		// Do some reagent processing.
 		if(owner.chem_effects[CE_ALCOHOL_TOXIC])
@@ -59,7 +62,7 @@
 				owner.adjustToxLoss(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY)
 			else
 				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY, prob(1)) // Chance to warn them
-
+	
 	// Heal a bit if needed. This allows recovery from low amounts of toxloss.
 	if(damage < min_broken_damage)
 		damage = max(0, damage - 0.1 * PROCESS_ACCURACY)

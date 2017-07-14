@@ -24,13 +24,13 @@
 /obj/machinery/mineral/mint/New()
 	..()
 	spawn( 5 )
-		for (var/dir in cardinal)
+		for (var/dir in GLOB.cardinal)
 			src.input = locate(/obj/machinery/mineral/input, get_step(src, dir))
 			if(src.input) break
-		for (var/dir in cardinal)
+		for (var/dir in GLOB.cardinal)
 			src.output = locate(/obj/machinery/mineral/output, get_step(src, dir))
 			if(src.output) break
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 		return
 	return
 

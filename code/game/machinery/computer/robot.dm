@@ -24,7 +24,7 @@
 	data["is_ai"] = issilicon(user)
 
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "robot_control.tmpl", "Robotic Control Console", 400, 500)
 		ui.set_initial_data(data)
@@ -149,7 +149,7 @@
 		message_admins("<span class='notice'>[key_name_admin(usr)] detonated all cyborgs!</span>")
 		log_game("[key_name(usr)] detonated all cyborgs!")
 
-		for(var/mob/living/silicon/robot/R in mob_list)
+		for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
 			if(istype(R, /mob/living/silicon/robot/drone))
 				continue
 			// Ignore antagonistic cyborgs
@@ -166,7 +166,7 @@
 /obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/operator)
 	var/list/robots = list()
 
-	for(var/mob/living/silicon/robot/R in mob_list)
+	for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
 		// Ignore drones
 		if(istype(R, /mob/living/silicon/robot/drone))
 			continue
@@ -207,6 +207,6 @@
 /obj/machinery/computer/robotics/proc/get_cyborg_by_name(var/name)
 	if (!name)
 		return
-	for(var/mob/living/silicon/robot/R in mob_list)
+	for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
 		if(R.name == name)
 			return R

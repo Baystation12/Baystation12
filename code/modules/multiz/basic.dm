@@ -8,7 +8,10 @@ var/z_levels = 0 // Each bit represents a connection between adjacent levels.  S
 	// Due to the offsets of how connections are stored v.s. how z-levels are indexed, some magic number silliness happened.
 	for(var/i = (z - height) to (z - 2))
 		z_levels |= (1 << i)
-	qdel(src)
+
+/obj/effect/landmark/map_data/Initialize()
+    ..()
+    return INITIALIZE_HINT_QDEL
 
 // The storage of connections between adjacent levels means some bitwise magic is needed.
 /proc/HasAbove(var/z)

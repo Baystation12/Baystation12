@@ -101,7 +101,6 @@
 			return 1
 
 		if(I_GRAB)
-			message_admins("[H.name] is grabbing [src]")
 			visible_message("<span class='danger'>[M] attempted to grab \the [src]!</span>")
 			return H.make_grab(H, src)
 
@@ -184,7 +183,7 @@
 						attack_message = "[H] attempted to strike [src], but missed!"
 					else
 						attack_message = "[H] attempted to strike [src], but \he rolled out of the way!"
-						src.set_dir(pick(cardinal))
+						src.set_dir(pick(GLOB.cardinal))
 					miss_type = 1
 
 			if(!miss_type && block)

@@ -23,7 +23,8 @@
 
 	..()
 
-/area/proc/initialize()
+/area/Initialize()
+	. = ..()
 	if(!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
@@ -91,7 +92,8 @@
 					E.nextstate = FIREDOOR_OPEN
 				else if(E.density)
 					spawn(0)
-						E.open()
+						if(E.can_safely_open())
+							E.open()
 
 
 /area/proc/fire_alert()

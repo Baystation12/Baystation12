@@ -10,7 +10,7 @@ datum/unit_test/roundstart_cable_connectivity/proc/find_connected_neighbours(var
 
 datum/unit_test/roundstart_cable_connectivity/proc/get_connected_neighbours(var/obj/structure/cable/self, var/dir)
 	var/turf/T = get_step(get_turf(self), dir)
-	var/reverse = reverse_dir[dir]
+	var/reverse = GLOB.reverse_dir[dir]
 
 	. = list() //can have multiple connected neighbours for a dir, e.g. Y-junctions
 	for(var/obj/structure/cable/other in T)

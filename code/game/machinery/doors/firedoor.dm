@@ -49,20 +49,18 @@
 		"cold"
 	)
 
-/obj/machinery/door/firedoor/New()
+/obj/machinery/door/firedoor/Initialize()
 	. = ..()
 	for(var/obj/machinery/door/firedoor/F in loc)
 		if(F != src)
-			spawn(1)
-				qdel(src)
-			return .
+			return INITIALIZE_HINT_QDEL
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
 
 	LAZYADD(A.all_doors, src)
 	areas_added = list(A)
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		A = get_area(get_step(src,direction))
 		if(istype(A) && !(A in areas_added))
 			LAZYADD(A.all_doors, src)
@@ -353,6 +351,26 @@
 	latetoggle()
 	return ..()
 
+// Only opens when all areas connecting with our turf have an air alarm and are cleared
+/obj/machinery/door/firedoor/proc/can_safely_open()
+	var/turf/neighbour
+	for(var/dir in GLOB.cardinal)
+		neighbour = get_step(src.loc, dir)
+		if(neighbour.c_airblock(src.loc) & AIR_BLOCKED)
+			continue
+		for(var/obj/O in src.loc)
+			if(istype(O, /obj/machinery/door))
+				continue
+			. |= O.c_airblock(neighbour)
+		if(. & AIR_BLOCKED)
+			continue
+		var/area/A = get_area(neighbour)
+		if(!A.master_air_alarm)
+			return
+		if(A.atmosalm)
+			return
+	return TRUE
+
 /obj/machinery/door/firedoor/do_animate(animation)
 	switch(animation)
 		if("opening")
@@ -378,7 +396,7 @@
 			do_set_light = TRUE
 		if(dir_alerts)
 			for(var/d=1;d<=4;d++)
-				var/cdir = cardinal[d]
+				var/cdir = GLOB.cardinal[d]
 				for(var/i=1;i<=ALERT_STATES.len;i++)
 					if(dir_alerts[d] & (1<<(i-1)))
 						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)

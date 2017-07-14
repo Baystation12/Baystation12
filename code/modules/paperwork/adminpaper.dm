@@ -57,7 +57,7 @@
 
 	text = "<hr><font size= \"1\">"
 	text += "This transmission is intended only for the addressee and may contain confidential information. Any unauthorized disclosure is strictly prohibited. <br><br>"
-	text += "If this transmission is recieved in error, please notify both the sender and the office of [using_map.boss_name] Internal Affairs immediately so that corrective action may be taken."
+	text += "If this transmission is recieved in error, please notify both the sender and the office of [GLOB.using_map.boss_name] Internal Affairs immediately so that corrective action may be taken."
 	text += "Failure to comply is a breach of regulation and may be prosecuted to the fullest extent of the law, where applicable."
 	text += "</font>"
 

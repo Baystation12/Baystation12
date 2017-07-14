@@ -1,5 +1,5 @@
 proc/createRandomZlevel()
-	if(awaydestinations.len)	//crude, but it saves another var!
+	if(GLOB.awaydestinations.len)	//crude, but it saves another var!
 		return
 
 	if(!fexists("maps/RandomZLevels/fileList.txt"))
@@ -49,7 +49,7 @@ proc/createRandomZlevel()
 		for(var/obj/effect/landmark/L in landmarks_list)
 			if (L.name != "awaystart")
 				continue
-			awaydestinations.Add(L)
+			GLOB.awaydestinations.Add(L)
 
 		admin_notice("<span class='danger'>Away mission loaded.</span>", R_DEBUG)
 

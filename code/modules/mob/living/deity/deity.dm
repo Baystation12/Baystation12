@@ -29,8 +29,8 @@
 /mob/living/deity/Life()
 	. = ..()
 	if(. && mob_uplink.uses < power_min && --power_tick == 0)
-		mob_uplink.uses = min(power_min, mob_uplink.uses + round(power_min/10))
-		nanomanager.update_uis(mob_uplink)
+		mob_uplink.uses += 1
+		GLOB.nanomanager.update_uis(mob_uplink)
 		power_tick = initial(power_tick)
 
 /mob/living/deity/death()
@@ -56,8 +56,8 @@
 	minions.Cut()
 	eyeobj.release()
 	structures.Cut()
-	qdel_null(eyeobj)
-	qdel_null(form)
+	QDEL_NULL(eyeobj)
+	QDEL_NULL(form)
 	return ..()
 
 /mob/living/deity/verb/return_to_plane()

@@ -142,7 +142,11 @@
 	current_grab.handle_resist(src)
 
 /obj/item/grab/proc/adjust_position()
-	current_grab.adjust_position(src)
+	if(!assailant.Adjacent(affecting))
+		qdel(src)
+		return 0
+	else
+		current_grab.adjust_position(src)
 
 /obj/item/grab/proc/reset_position()
 	current_grab.reset_position(src)

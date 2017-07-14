@@ -28,8 +28,8 @@
 	var/canRwall = 0
 	var/disabled = 0
 
-/obj/item/weapon/rcd/initialize()
-	..()
+/obj/item/weapon/rcd/Initialize()
+	. = ..()
 
 	if(!work_modes)
 		var/decl/hierarchy/h = decls_repository.get_decl(/decl/hierarchy/rcd_mode)

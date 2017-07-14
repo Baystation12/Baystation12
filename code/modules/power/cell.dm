@@ -24,8 +24,8 @@
 	c_uid = sequential_id(/obj/item/weapon/cell)
 	..()
 
-/obj/item/weapon/cell/initialize()
-	..()
+/obj/item/weapon/cell/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)

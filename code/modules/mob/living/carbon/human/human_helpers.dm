@@ -91,7 +91,7 @@
 		return
 
 	//update the datacore records! This is goig to be a bit costly.
-	for(var/list/L in list(data_core.general,data_core.medical,data_core.security,data_core.locked))
+	for(var/list/L in list(GLOB.data_core.general,GLOB.data_core.medical,GLOB.data_core.security,GLOB.data_core.locked))
 		for(var/datum/data/record/R in L)
 			if(R.fields["name"] == old_name)
 				R.fields["name"] = new_name
@@ -205,7 +205,16 @@
 	if(!attacker || !victim)
 		return 0
 
+	if(attacker == victim)
+		to_chat(attacker, "<span class='notice'>You can't grab yourself.</span>")
+		return 0
+
+	if(attacker.grabbed_by.len)
+		to_chat(attacker, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
+		return 0
+
 	var/obj/item/grab/G
+
 	if(!grab_tag)
 		G = new attacker.current_grab_type(attacker, victim)
 	else

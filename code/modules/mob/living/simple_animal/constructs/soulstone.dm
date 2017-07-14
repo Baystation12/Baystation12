@@ -23,7 +23,7 @@
 	shade = new /mob/living/simple_animal/shade(src)
 
 /obj/item/device/soulstone/Destroy()
-	qdel_null(shade)
+	QDEL_NULL(shade)
 	return ..()
 
 /obj/item/device/soulstone/examine(mob/user)

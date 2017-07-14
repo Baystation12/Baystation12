@@ -174,10 +174,10 @@ var/const/NO_EMAG_ACT = -50
 	..()
 	id_card.age = age
 
-	if(using_map.flags & MAP_HAS_BRANCH)
+	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 		id_card.military_branch = char_branch
 
-	if(using_map.flags & MAP_HAS_RANK)
+	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		id_card.military_rank = char_rank
 
 /obj/item/weapon/card/id/proc/dat()
@@ -186,9 +186,9 @@ var/const/NO_EMAG_ACT = -50
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
 
-	if(using_map.flags & MAP_HAS_BRANCH)
+	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
-	if(using_map.flags & MAP_HAS_RANK)
+	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
 
 	dat += text("Assignment: []</A><BR>\n", assignment)

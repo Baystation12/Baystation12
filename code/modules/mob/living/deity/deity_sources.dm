@@ -84,6 +84,6 @@
 
 /mob/living/deity/proc/take_cost(var/amount)
 	if(amount)
-		nanomanager.update_uis(mob_uplink)
+		GLOB.nanomanager.update_uis(mob_uplink)
 		mob_uplink.uses -= amount
 		mob_uplink.used_TC += amount

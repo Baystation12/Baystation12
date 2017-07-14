@@ -31,8 +31,13 @@
 	brightness_on = 4
 	on = 0
 
-/obj/item/clothing/head/helmet/space/initialize()
-	..()
+/obj/item/clothing/head/helmet/space/Destroy()
+	if(camera && !ispath(camera))
+		QDEL_NULL(camera)
+	. = ..()
+
+/obj/item/clothing/head/helmet/space/Initialize()
+	. = ..()
 	if(camera)
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_camera
 

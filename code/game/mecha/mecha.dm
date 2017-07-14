@@ -147,11 +147,11 @@
 	cell = null
 	internal_tank = null
 
-	qdel_null(pr_int_temp_processor)
-	qdel_null(pr_inertial_movement)
-	qdel_null(pr_give_air)
-	qdel_null(pr_internal_damage)
-	qdel_null(spark_system)
+	QDEL_NULL(pr_int_temp_processor)
+	QDEL_NULL(pr_inertial_movement)
+	QDEL_NULL(pr_give_air)
+	QDEL_NULL(pr_internal_damage)
+	QDEL_NULL(spark_system)
 
 	mechas_list -= src //global mech list
 	. = ..()

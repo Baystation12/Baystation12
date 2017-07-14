@@ -307,9 +307,15 @@
 
 	if(stat) return
 
-	to_chat(src, "<span class='notice'>You begin to adjust the fluids in your arms, getting ready to swap which set you're using.</span>")
+	to_chat(src, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
 
-	if(do_after(src, 20, progress = 0))
+	if(l_hand) unEquip(l_hand)
+	if(r_hand) unEquip(r_hand)
+
+	// So there's a progress bar if you're not cloaked and there isn't one if you are cloaked.
+	var/hidden = cloaked
+
+	if(do_after(src, 30, hidden))
 		pulling_punches = !pulling_punches
 
 		if(pulling_punches)
