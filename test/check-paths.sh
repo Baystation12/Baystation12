@@ -8,7 +8,7 @@ FAILED=0
 
 shopt -s globstar
 num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting 0)"; [ $num -eq 0 ] || FAILED=1
-num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting exactly 5)"; [ $num -eq 5 ] || FAILED=1
+num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting exactly 6)"; [ $num -eq 6 ] || FAILED=1
 num=`grep -E '"/atom' **/*.dm | wc -l`; echo "$num /atom text paths (expecting 2 or less)"; [ $num -le 2 ] || FAILED=1
 num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting 2 or less)"; [ $num -le 2 ] || FAILED=1
 num=`grep -E '"/datum' **/*.dm | wc -l`; echo "$num /datum text paths (expecting 2 or less)"; [ $num -le 2 ] || FAILED=1

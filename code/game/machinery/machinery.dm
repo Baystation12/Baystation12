@@ -2,7 +2,7 @@
 Overview:
    Used to create objects that need a per step proc call.  Default definition of 'New()'
    stores a reference to src machine in global 'machines list'.  Default definition
-   of 'Del' removes reference to src machine in global 'machines list'.
+   of 'Destroy' removes reference to src machine in global 'machines list'.
 
 Class Variables:
    use_power (num)

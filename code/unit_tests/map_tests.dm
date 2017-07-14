@@ -208,6 +208,12 @@ datum/unit_test/correct_allowed_spawn_test/start_test()
 			failed = TRUE
 
 	if(failed)
+		log_unit_test("Following spawn points exist:")
+		for(var/spawnpoint in spawntypes)
+			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")	
+		log_unit_test("Following spawn points are allowed:")
+		for(var/spawnpoint in GLOB.using_map.allowed_spawns)
+			log_unit_test("\t[spawnpoint] ([any2ref(spawnpoint)])")	
 		fail("Some of the entries in allowed_spawns have no spawnpoint turfs.")
 	else
 		pass("All entries in allowed_spawns have spawnpoints.")
