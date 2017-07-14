@@ -69,7 +69,7 @@ var/datum/antagonist/godcultist/godcult
 				var/datum/mind/mind = m
 				god_list += mind.current
 		else
-			for(var/mob/living/deity/deity in player_list)
+			for(var/mob/living/deity/deity in GLOB.player_list)
 				god_list += deity
 		if(god_list.len)
 			var/mob/living/deity/D = input(usr, "Select a deity for this cultist.") in null|god_list

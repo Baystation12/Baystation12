@@ -131,7 +131,7 @@
  *  branch_name - String key for the branch to check
  */
 /datum/job/proc/is_branch_allowed(var/branch_name)
-	if(!allowed_branches || !using_map || !(using_map.flags & MAP_HAS_BRANCH))
+	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return 1
 	if(branch_name == "None")
 		return 0
@@ -156,7 +156,7 @@
  *  rank_name - String key for the rank itself
  */
 /datum/job/proc/is_rank_allowed(var/branch_name, var/rank_name)
-	if(!allowed_ranks || !using_map || !(using_map.flags & MAP_HAS_RANK))
+	if(!allowed_ranks || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_RANK))
 		return 1
 	if(branch_name == "None" || rank_name == "None")
 		return 0

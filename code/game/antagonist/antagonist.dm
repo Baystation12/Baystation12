@@ -91,10 +91,10 @@
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs |= protected_jobs
 	if(antaghud_indicator)
-		if(!hud_icon_reference)
-			hud_icon_reference = list()
-		if(role_text) hud_icon_reference[role_text] = antaghud_indicator
-		if(faction_role_text) hud_icon_reference[faction_role_text] = antaghud_indicator
+		if(!GLOB.hud_icon_reference)
+			GLOB.hud_icon_reference = list()
+		if(role_text) GLOB.hud_icon_reference[role_text] = antaghud_indicator
+		if(faction_role_text) GLOB.hud_icon_reference[faction_role_text] = antaghud_indicator
 
 /datum/antagonist/proc/tick()
 	return 1

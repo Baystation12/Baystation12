@@ -137,7 +137,7 @@
 
 	data = build_uidata()
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "omni_mixer.tmpl", "Omni Mixer Control", 360, 330)
@@ -206,7 +206,7 @@
 				con_lock(dir_flag(href_list["dir"]))
 
 	update_icon()
-	nanomanager.update_uis(src)
+	GLOB.nanomanager.update_uis(src)
 	return
 
 /obj/machinery/atmospherics/omni/mixer/proc/switch_mode(var/port = NORTH, var/mode = ATM_NONE)

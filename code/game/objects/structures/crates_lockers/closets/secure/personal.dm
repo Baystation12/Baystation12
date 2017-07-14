@@ -3,32 +3,15 @@
 	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	req_access = list(access_all_personal_lockers)
 	var/registered_name = null
-
-/obj/structure/closet/secure_closet/personal/New()
-	..()
-	spawn(2)
-		if(prob(50))
-			new /obj/item/weapon/storage/backpack(src)
-		else
-			new /obj/item/weapon/storage/backpack/satchel_norm(src)
-		new /obj/item/device/radio/headset( src )
-	return
-
+    
+	will_contain = list(
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel_norm)),
+		/obj/item/device/radio/headset
+	)
 
 /obj/structure/closet/secure_closet/personal/patient
 	name = "patient's closet"
-
-/obj/structure/closet/secure_closet/personal/patient/New()
-	..()
-	spawn(4)
-		// Not really the best way to do this, but it's better than "contents = list()"!
-		for(var/atom/movable/AM in contents)
-			qdel(AM)
-		new /obj/item/clothing/under/color/white( src )
-		new /obj/item/clothing/shoes/white( src )
-	return
-
-
+	will_contain = list()
 
 /obj/structure/closet/secure_closet/personal/cabinet
 	icon_state = "cabinetdetective_locked"

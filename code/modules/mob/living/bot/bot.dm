@@ -48,8 +48,8 @@
 	access_scanner.req_access = req_access.Copy()
 	access_scanner.req_one_access = req_one_access.Copy()
 
-/mob/living/bot/initialize()
-	..()
+/mob/living/bot/Initialize()
+	. = ..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else
@@ -374,7 +374,7 @@
 
 	//	for(var/turf/simulated/t in oview(src,1))
 
-	for(var/d in cardinal)
+	for(var/d in GLOB.cardinal)
 		var/turf/simulated/T = get_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))

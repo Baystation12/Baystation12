@@ -193,7 +193,7 @@ datum/track/New(var/title_name, var/audio)
 	playing = 0
 	update_use_power(1)
 	update_icon()
-	qdel_null(sound_token)
+	QDEL_NULL(sound_token)
 
 
 /obj/machinery/media/jukebox/proc/StartPlaying()

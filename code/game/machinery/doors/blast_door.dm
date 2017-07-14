@@ -36,8 +36,8 @@
 	var/datum/wifi/receiver/button/door/wifi_receiver
 	var/material/implicit_material
 
-/obj/machinery/door/blast/initialize()
-	..()
+/obj/machinery/door/blast/Initialize()
+	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 

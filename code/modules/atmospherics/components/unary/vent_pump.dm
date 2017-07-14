@@ -251,8 +251,8 @@
 	return 1
 
 
-/obj/machinery/atmospherics/unary/vent_pump/initialize()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/Initialize()
+	. = ..()
 
 	//some vents work his own special way
 	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null

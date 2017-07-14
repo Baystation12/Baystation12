@@ -44,7 +44,7 @@
 		"can_force" = shuttle.can_force(),
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "shuttle_control_console_exploration.tmpl", "[shuttle_tag] Shuttle Control", 470, 310)
@@ -72,5 +72,5 @@
 		else
 			to_chat(usr,"<span class='warning'>No valid landing sites in range.</span>")
 		possible_d = shuttle.get_possible_destinations()
-		if(CanInteract(usr, default_state) && (D in possible_d))
+		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])

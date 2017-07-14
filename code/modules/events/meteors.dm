@@ -14,21 +14,21 @@
 	for(var/n in 1 to severity)
 		waves += rand(5,15)
 
-	start_side = pick(cardinal)
+	start_side = pick(GLOB.cardinal)
 	endWhen = worst_case_end()
 
 /datum/event/meteor_wave/announce()
 	switch(severity)
 		if(EVENT_LEVEL_MAJOR)
-			using_map.meteors_detected_announcement()
+			GLOB.using_map.meteors_detected_announcement()
 		else
 			command_announcement.Announce("The [station_name()] is now in a meteor shower.", "[station_name()] Sensor Array")
 
 /datum/event/meteor_wave/tick()
 	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
 	if(alarmWhen < activeFor)
-		for(var/obj/machinery/shield_diffuser/SD in machines)
-			if(SD.z in using_map.station_levels)
+		for(var/obj/machinery/shield_diffuser/SD in GLOB.machines)
+			if(isStationLevel(SD.z))
 				SD.meteor_alarm(10)
 
 	if(waves && activeFor >= next_meteor)
@@ -108,9 +108,9 @@
 
 /datum/event/meteor_wave/overmap/tick()
 	if(victim && !victim.is_still()) //Meteors mostly fly in your face
-		start_side = prob(90) ? victim.fore_dir : pick(cardinal)
+		start_side = prob(90) ? victim.fore_dir : pick(GLOB.cardinal)
 	else //Unless you're standing
-		start_side = pick(cardinal)
+		start_side = pick(GLOB.cardinal)
 	..()
 
 /datum/event/meteor_wave/overmap/get_wave_size()

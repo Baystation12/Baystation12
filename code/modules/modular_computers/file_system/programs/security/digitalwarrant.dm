@@ -24,7 +24,7 @@ var/warrant_uid = 0
 	name = "Warrant Assistant"
 	var/datum/data/record/warrant/activewarrant
 
-/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(activewarrant)
@@ -36,7 +36,7 @@ var/warrant_uid = 0
 		var/list/arrestwarrants = list()
 		var/list/searchwarrants = list()
 		var/list/archivedwarrants = list()
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			var/charges = W.fields["charges"]
 			if(lentext(charges) > 50)
 				charges = copytext(charges, 1, 50) + "..."
@@ -57,7 +57,7 @@ var/warrant_uid = 0
 		data["searchwarrants"] = searchwarrants.len ? searchwarrants : null
 		data["archivedwarrants"] = archivedwarrants.len? archivedwarrants :null
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "digitalwarrant.tmpl", name, 700, 450, state = state)
 		ui.auto_update_layout = 1
@@ -73,7 +73,7 @@ var/warrant_uid = 0
 
 	if(href_list["editwarrant"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["editwarrant"]))
 				activewarrant = W
 				break
@@ -92,14 +92,14 @@ var/warrant_uid = 0
 
 	if(href_list["sendtoarchive"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
 	if(href_list["restore"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
@@ -107,7 +107,7 @@ var/warrant_uid = 0
 	if(href_list["addwarrant"])
 		. = 1
 		var/datum/data/record/warrant/W = new()
-		if(CanInteract(user, default_state))
+		if(CanInteract(user, GLOB.default_state))
 			if(href_list["addwarrant"] == "arrest")
 				W.fields["namewarrant"] = "Unknown"
 				W.fields["charges"] = "No charges present"
@@ -122,27 +122,27 @@ var/warrant_uid = 0
 
 	if(href_list["savewarrant"])
 		. = 1
-		broadcast_holowarrant_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
-		data_core.warrants |= activewarrant
+		broadcast_holowarrant_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
+		GLOB.data_core.warrants |= activewarrant
 		activewarrant = null
 
 	if(href_list["deletewarrant"])
 		. = 1
 		if(!activewarrant)
-			for(var/datum/data/record/warrant/W in data_core.warrants)
+			for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 				if(W.warrant_id == text2num(href_list["deletewarrant"]))
 					activewarrant = W
 					break
-		data_core.warrants -= activewarrant
+		GLOB.data_core.warrants -= activewarrant
 		activewarrant = null
 
 	if(href_list["editwarrantname"])
 		. = 1
 		var/namelist = list()
-		for(var/datum/data/record/t in data_core.general)
+		for(var/datum/data/record/t in GLOB.data_core.general)
 			namelist += t.fields["name"]
 		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
-		if(CanInteract(user, default_state))
+		if(CanInteract(user, GLOB.default_state))
 			if (!new_name || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
@@ -150,7 +150,7 @@ var/warrant_uid = 0
 	if(href_list["editwarrantnamecustom"])
 		. = 1
 		var/new_name = sanitize(input("Please input name") as null|text)
-		if(CanInteract(user, default_state))
+		if(CanInteract(user, GLOB.default_state))
 			if (!new_name || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
@@ -158,7 +158,7 @@ var/warrant_uid = 0
 	if(href_list["editwarrantcharges"])
 		. = 1
 		var/new_charges = sanitize(input("Please input charges", "Charges", activewarrant.fields["charges"]) as null|text)
-		if(CanInteract(user, default_state))
+		if(CanInteract(user, GLOB.default_state))
 			if (!new_charges || !activewarrant)
 				return
 			activewarrant.fields["charges"] = new_charges

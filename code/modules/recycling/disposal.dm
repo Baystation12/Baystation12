@@ -800,7 +800,7 @@
 	// remains : set to leave broken pipe pieces in place
 	proc/broken(var/remains = 0)
 		if(remains)
-			for(var/D in cardinal)
+			for(var/D in GLOB.cardinal)
 				if(D & dpdir)
 					var/obj/structure/disposalpipe/broken/P = new(src.loc)
 					P.set_dir(D)
@@ -1140,7 +1140,7 @@
 	New()
 		. = ..()
 		dpdir = dir | turn(dir, 180)
-		if(sort_tag) tagger_locations |= sort_tag
+		if(sort_tag) GLOB.tagger_locations |= sort_tag
 		updatename()
 		updatedesc()
 		update()
@@ -1187,13 +1187,13 @@
 	if(!id_tag)
 		id_tag = newid
 
-/obj/machinery/disposal_switch/initialize()
+/obj/machinery/disposal_switch/Initialize()
 	for(var/obj/structure/disposalpipe/diversion_junction/D in world)
 		if(D.id_tag && !D.linked && D.id_tag == src.id_tag)
 			junctions += D
 			D.linked = src
 
-	..()
+	. = ..()
 
 /obj/machinery/disposal_switch/Destroy()
 	junctions.Cut()
@@ -1367,7 +1367,7 @@
 
 	New()
 		. = ..()
-		if(sortType) tagger_locations |= sortType
+		if(sortType) GLOB.tagger_locations |= sortType
 
 		updatedir()
 		updatename()
@@ -1673,7 +1673,7 @@
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
-		dirs = alldirs.Copy()
+		dirs = GLOB.alldirs.Copy()
 
 	src.streak(dirs)
 
@@ -1682,6 +1682,6 @@
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
-		dirs = alldirs.Copy()
+		dirs = GLOB.alldirs.Copy()
 
 	src.streak(dirs)

@@ -21,7 +21,8 @@
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
-/obj/vehicle/train/initialize()
+/obj/vehicle/train/Initialize()
+	. = ..()
 	for(var/obj/vehicle/train/T in orange(1, src))
 		latch(T)
 

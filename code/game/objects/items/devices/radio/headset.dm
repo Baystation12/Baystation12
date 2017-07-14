@@ -17,8 +17,8 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
-/obj/item/device/radio/headset/New()
-	..()
+/obj/item/device/radio/headset/Initialize()
+	. = ..()
 	internal_channels.Cut()
 	if(ks1type)
 		keyslot1 = new ks1type(src)
@@ -69,8 +69,8 @@
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
 
-/obj/item/device/radio/headset/syndicate/initialize()
-	..()
+/obj/item/device/radio/headset/syndicate/Initialize()
+	. = ..()
 	set_frequency(SYND_FREQ)
 
 /obj/item/device/radio/headset/raider
@@ -78,8 +78,8 @@
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/raider
 
-/obj/item/device/radio/headset/raider/initialize()
-	..()
+/obj/item/device/radio/headset/raider/Initialize()
+	. = ..()
 	set_frequency(RAID_FREQ)
 
 /obj/item/device/radio/headset/binary

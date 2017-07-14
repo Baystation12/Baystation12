@@ -96,9 +96,9 @@
 /datum/language/human/get_random_name(var/gender)
 	if (prob(80))
 		if(gender==FEMALE)
-			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
-			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	else
 		return ..()
 
@@ -120,7 +120,7 @@
 /datum/language/machine/get_random_name()
 	if(prob(70))
 		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
-	return pick(ai_names)
+	return pick(GLOB.ai_names)
 
 //Syllable Lists
 /*
@@ -211,6 +211,6 @@
 
 /datum/language/nabber/get_random_name(var/gender)
 	if(gender == FEMALE)
-		return capitalize(pick(first_names_female))
+		return capitalize(pick(GLOB.first_names_female))
 	else
-		return capitalize(pick(first_names_male))
+		return capitalize(pick(GLOB.first_names_male))

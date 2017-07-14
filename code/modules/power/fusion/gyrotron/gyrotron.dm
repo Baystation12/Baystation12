@@ -18,7 +18,7 @@ var/list/gyrotrons = list()
 	anchored = 1
 	state = 2
 
-/obj/machinery/power/emitter/gyrotron/initialize()
+/obj/machinery/power/emitter/gyrotron/Initialize()
 	gyrotrons += src
 	active_power_usage = mega_energy * 50000
 	. = ..()
