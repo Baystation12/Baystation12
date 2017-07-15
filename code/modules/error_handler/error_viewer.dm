@@ -24,6 +24,18 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 /datum/error_viewer
 	var/name = ""
 
+/datum/error_viewer/Topic(href, href_list)
+	if(href_list["viewruntime"])
+		var/datum/error_viewer/error_viewer = locate(href_list["viewruntime"])
+		if(!istype(error_viewer))
+			to_chat(usr, "<span class='warning'>That runtime viewer no longer exists.</span>")
+			return
+
+		if(href_list["viewruntime_backto"])
+			error_viewer.show_to(usr.client, locate(href_list["viewruntime_backto"]), href_list["viewruntime_linear"])
+		else
+			error_viewer.show_to(usr.client, null, href_list["viewruntime_linear"])
+
 /datum/error_viewer/proc/browse_to(client/user, html)
 	var/datum/browser/browser = new(user.mob, "error_viewer", null, 600, 400)
 	browser.set_content(html)
@@ -71,7 +83,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	if (linear)
 		back_to_param += ";viewruntime_linear=1"
 
-	return "<a href='?_src_=holder;viewruntime=\ref[src][back_to_param]'>[linktext]</a>"
+	return "<a href='?src=\ref[src];viewruntime=\ref[src][back_to_param]'>[linktext]</a>"
 
 /datum/error_viewer/error_cache
 	var/list/errors = list()
@@ -153,6 +165,9 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	var/turf/usr_loc
 	var/is_skip_count
 
+	var/info_name
+	var/info
+
 /datum/error_viewer/error_entry/New(exception/e, list/desclines, skip_count)
 	if (!istype(e))
 		name = "<b>\[[time_stamp()]]</b> Uncaught exception: <b>[html_encode(e.name)]</b>"
@@ -164,11 +179,15 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 		return
 
 	name = "<b>\[[time_stamp()]]</b> Runtime in <b>[e.file]</b>, line <b>[e.line]</b>: <b>[html_encode(e.name)]</b>"
+	info_name = "Runtime in [e.file],[e.line]: [e]"
+	info = info_name
+
 	exc = e
 	if (istype(desclines))
 		for (var/line in desclines)
 			// There's probably a better way to do this than non-breaking spaces...
 			desc += "<span class='runtime_line'>[html_encode(line)]</span><br>"
+			info += "\n  " + line
 
 	if (usr)
 		usr_ref = "\ref[usr]"

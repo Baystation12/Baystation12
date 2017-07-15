@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(garbage)
 
 			// Something's still referring to the qdel'd object.  Kill it.
 			var/type = A.type
-			report_progress("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
+			log_debug("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
 			didntgc["[type]"]++
 
 			HardDelete(A)
@@ -185,7 +185,7 @@ SUBSYSTEM_DEF(garbage)
 	if(!D)
 		return
 	if(!istype(D))
-		log_error("qdel() was passed '[log_info_line(D)]'. qdel() can only handle instances of (sub)type /datum.")
+		crash_with("qdel() was passed '[log_info_line(D)]'. qdel() can only handle instances of (sub)type /datum.")
 		del(D)
 		return
 #ifdef TESTING
