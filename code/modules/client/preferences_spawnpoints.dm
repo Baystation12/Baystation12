@@ -3,12 +3,13 @@ var/list/spawntypes = list()
 /proc/populate_spawn_points()
 	spawntypes = list()
 	for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
-		var/datum/spawnpoint/S = new type()
-		if((S.display_name in GLOB.using_map.allowed_spawns) || S.always_visible)
-			spawntypes[S.display_name] = S
+		var/datum/spawnpoint/S = type
+		var/display_name = initial(S.display_name)
+		if((display_name in GLOB.using_map.allowed_spawns) || initial(S.always_visible))
+			spawntypes[display_name] = new S
 
 /datum/spawnpoint
-	var/msg          //Message to display on the arrivals computer.
+	var/msg		  //Message to display on the arrivals computer.
 	var/list/turfs   //List of turfs to spawn on.
 	var/display_name //Name used in preference setup.
 	var/always_visible = FALSE	// Whether this spawn point is always visible in selection, ignoring map-specific settings.
@@ -25,8 +26,12 @@ var/list/spawntypes = list()
 	return 1
 
 #ifdef UNIT_TEST
+/datum/spawnpoint/Del()
+	crash_with("Spawn deleted: [log_info_line(src)]")
+	..()
+
 /datum/spawnpoint/Destroy()
-	crash_with("Spawn destroyed: [log_info_line()]")
+	crash_with("Spawn destroyed: [log_info_line(src)]")
 	. = ..()
 #endif
 
