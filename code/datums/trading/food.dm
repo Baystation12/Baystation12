@@ -39,7 +39,7 @@
 	origin = "Captain Panda Bistro"
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list()
-	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/monkeykabob          = TRADER_THIS_TYPE,
+	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/meatkabob    	       = TRADER_THIS_TYPE,
 							/obj/item/weapon/reagent_containers/food/snacks/monkeysdelight             = TRADER_THIS_TYPE,
 							/obj/item/weapon/reagent_containers/food/snacks/ricepudding                = TRADER_THIS_TYPE,
 							/obj/item/weapon/reagent_containers/food/snacks/slice/xenomeatbread/filled = TRADER_THIS_TYPE,

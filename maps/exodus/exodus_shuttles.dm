@@ -1,5 +1,6 @@
+/*
 // Escape shuttle and pods
-/datum/shuttle/ferry/emergency/centcom
+/datum/shuttle/autodock/ferry/emergency/centcom
 	name = "Escape"
 	location = 1
 	warmup_time = 10
@@ -11,7 +12,7 @@
 	dock_target_offsite = "centcom_dock"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_one
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_one
 	name = "Escape Pod 1"
 	location = 0
 	warmup_time = 0
@@ -23,7 +24,7 @@
 	dock_target_offsite = "escape_pod_1_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_two
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_two
 	name = "Escape Pod 2"
 	location = 0
 	warmup_time = 0
@@ -35,7 +36,7 @@
 	dock_target_offsite = "escape_pod_2_recovery"
 	transit_direction = NORTH
 
-/datum/shuttle/ferry/escape_pod/escape_pod_three
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_three
 	name = "Escape Pod 3"
 	location = 0
 	warmup_time = 0
@@ -47,7 +48,7 @@
 	dock_target_offsite = "escape_pod_3_recovery"
 	transit_direction = EAST
 
-/datum/shuttle/ferry/escape_pod/escape_pod_four
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod_four
 	name = "Escape Pod 4"
 	location = 0
 	warmup_time = 0
@@ -59,7 +60,7 @@
 	dock_target_offsite = "escape_pod_5_recovery"
 	transit_direction = EAST //should this be WEST? I have no idea.
 
-/datum/shuttle/ferry/supply/cargo
+/datum/shuttle/autodock/ferry/supply/cargo
 	name = "Supply"
 	location = 1
 	warmup_time = 10
@@ -68,7 +69,7 @@
 	docking_controller_tag = "supply_shuttle"
 	dock_target_station = "cargo_bay"
 
-/datum/shuttle/ferry/engineering
+/datum/shuttle/autodock/ferry/engineering
 	name = "Engineering"
 	warmup_time = 10
 	area_offsite = /area/shuttle/constructionsite/site
@@ -77,7 +78,7 @@
 	dock_target_station = "engineering_dock_airlock"
 	dock_target_offsite = "edock_airlock"
 
-/datum/shuttle/ferry/mining
+/datum/shuttle/autodock/ferry/mining
 	name = "Mining"
 	warmup_time = 10
 	area_offsite = /area/shuttle/mining/outpost
@@ -86,7 +87,7 @@
 	dock_target_station = "mining_dock_airlock"
 	dock_target_offsite = "mining_outpost_airlock"
 
-/datum/shuttle/ferry/research
+/datum/shuttle/autodock/ferry/research
 	name = "Research"
 	warmup_time = 10
 	area_offsite = /area/shuttle/research/outpost
@@ -95,7 +96,7 @@
 	dock_target_station = "research_dock_airlock"
 	dock_target_offsite = "research_outpost_dock"
 
-/datum/shuttle/ferry/centcom
+/datum/shuttle/autodock/ferry/centcom
 	name = "Centcom"
 	location = 1
 	warmup_time = 10
@@ -105,7 +106,7 @@
 	dock_target_station = "centcom_shuttle_dock_airlock"
 	dock_target_offsite = "centcom_shuttle_bay"
 
-/datum/shuttle/ferry/administration
+/datum/shuttle/autodock/ferry/administration
 	name = "Administration"
 	location = 1
 	warmup_time = 10	//want some warmup time so people can cancel.
@@ -115,13 +116,13 @@
 	dock_target_station = "admin_shuttle_dock_airlock"
 	dock_target_offsite = "admin_shuttle_bay"
 
-/datum/shuttle/ferry/alien
+/datum/shuttle/autodock/ferry/alien
 	name = "Alien"
 	area_offsite = /area/shuttle/alien/base
 	area_station = /area/shuttle/alien/mine
 	flags = SHUTTLE_FLAGS_NONE
 
-/datum/shuttle/ferry/merchant
+/datum/shuttle/autodock/ferry/merchant
 	name = "Merchant"
 	warmup_time = 10
 	docking_controller_tag = "merchant_ship_dock"
@@ -155,8 +156,8 @@
 	announcer = "NDV Icarus"
 
 /datum/shuttle/multi_shuttle/mercenary/New()
-	arrival_message = "Attention, [using_map.station_short], you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
-	departure_message = "Your visitors are on their way out of the system, [using_map.station_short], burning delta-v like it's nothing. Good riddance."
+	arrival_message = "Attention, [GLOB.using_map.station_short], you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
+	departure_message = "Your visitors are on their way out of the system, [GLOB.using_map.station_short], burning delta-v like it's nothing. Good riddance."
 	..()
 
 /datum/shuttle/multi_shuttle/skipjack
@@ -174,8 +175,8 @@
 	announcer = "NDV Icarus"
 
 /datum/shuttle/multi_shuttle/skipjack/New()
-	arrival_message = "Attention, [using_map.station_short], we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
-	departure_message = "Your guests are pulling away, [using_map.station_short] - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
+	arrival_message = "Attention, [GLOB.using_map.station_short], we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
+	departure_message = "Your guests are pulling away, [GLOB.using_map.station_short] - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
 	..()
 
 /datum/shuttle/multi_shuttle/rescue
@@ -203,11 +204,11 @@
 	announcer = "NDV Icarus"
 
 /datum/shuttle/multi_shuttle/rescue/New()
-	arrival_message = "Attention, [using_map.station_short], there's a small patrol craft headed your way, it flashed us Asset Protection codes and we let it pass. You've got guests on the way."
-	departure_message = "[using_map.station_short], That Asset Protection vessel is headed back the way it came. Hope they were helpful."
+	arrival_message = "Attention, [GLOB.using_map.station_short], there's a small patrol craft headed your way, it flashed us Asset Protection codes and we let it pass. You've got guests on the way."
+	departure_message = "[GLOB.using_map.station_short], That Asset Protection vessel is headed back the way it came. Hope they were helpful."
 	..()
 
-/datum/shuttle/ferry/multidock/specops/ert
+/datum/shuttle/autodock/ferry/multidock/specops/ert
 	name = "Special Operations"
 	location = 0
 	warmup_time = 10
@@ -218,3 +219,4 @@
 	docking_controller_tag_offsite = "specops_shuttle_fore"
 	dock_target_station = "specops_centcom_dock"
 	dock_target_offsite = "specops_dock_airlock"
+*/

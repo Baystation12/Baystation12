@@ -27,10 +27,10 @@
 /obj/item/device/assembly/timer/toggle_secure()
 	secured = !secured
 	if(secured)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 	else
 		timing = 0
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 	update_icon()
 	return secured
 
@@ -81,7 +81,7 @@
 	return
 
 
-/obj/item/device/assembly/timer/Topic(href, href_list, state = physical_state)
+/obj/item/device/assembly/timer/Topic(href, href_list, state = GLOB.physical_state)
 	if(..()) return 1
 	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 		usr << browse(null, "window=timer")

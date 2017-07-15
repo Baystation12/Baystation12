@@ -79,4 +79,4 @@
 	volume = 120
 	possible_transfer_amounts = "5;10;15;30;60;120"
 	rim_pos = "y=26;x_left=12;x_right=21"
-	center_of_mass = "x=17;y=7"
+	center_of_mass = "x=16;y=7"

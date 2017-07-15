@@ -67,7 +67,7 @@
 		if(!UWC)
 			return
 		var/datum/category_item/underwear/selected_underwear = input(H, "Choose underwear:", "Choose underwear", H.all_underwear[UWC.name]) as null|anything in UWC.items
-		if(selected_underwear && CanUseTopic(H, default_state))
+		if(selected_underwear && CanUseTopic(H, GLOB.default_state))
 			H.all_underwear[UWC.name] = selected_underwear
 			. = TRUE
 	else if(href_list["underwear"] && href_list["tweak"])

@@ -8,7 +8,6 @@
 	alpha = 50
 	layer = 4
 	light_color = COLOR_BLUE
-	rad_power = 1
 
 	var/size = 1
 	var/energy = 0
@@ -107,7 +106,7 @@
 	catcher.SetSize(7)
 	particle_catchers.Add(catcher)
 
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 
 /obj/effect/fusion_em_field/process()
 	//make sure the field generator is still intact
@@ -171,7 +170,8 @@
 
 	check_instability()
 	Radiate()
-	rad_power = radiation
+	if(radiation)
+		radiation_repository.radiate(src, radiation)
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()
@@ -480,7 +480,7 @@
 	if(owned_core)
 		owned_core.owned_field = null
 		owned_core = null
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	. = ..()
 
 /obj/effect/fusion_em_field/bullet_act(var/obj/item/projectile/Proj)

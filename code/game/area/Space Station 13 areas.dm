@@ -47,7 +47,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
-	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
+	var/list/all_doors = null		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/list/forced_ambience = null
@@ -152,9 +152,6 @@ area/space/atmosalert()
 /area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 
-/area/shuttle/specops/station
-	icon_state = "shuttlered2"
-
 /area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
 
@@ -165,7 +162,7 @@ area/space/atmosalert()
 	name = "\improper Skipjack"
 	icon_state = "yellow"
 
-/area/supply/station
+/area/supply
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 
@@ -176,8 +173,7 @@ area/space/atmosalert()
 ////////////
 //SHUTTLES//
 ////////////
-//shuttle areas must contain at least two areas in a subgroup if you want to move a shuttle from one
-//place to another. Look at escape shuttle for example.
+//shuttles only need starting area, movement is handled by landmarks
 //All shuttles should now be under shuttle since we have smooth-wall code.
 
 /area/shuttle
@@ -188,7 +184,6 @@ area/space/atmosalert()
 /*
 * Special Areas
 */
-
 /area/wizard_station
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"

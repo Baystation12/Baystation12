@@ -56,9 +56,7 @@
 												/datum/species/tajaran           = 7,
 												/datum/species/unathi            = 7,
 												/datum/species/machine           = 7,
-												/datum/species/diona             = 5,
-												/datum/species/resomi            = 5,
-												/datum/species/vox/pariah        = 1
+												/datum/species/diona             = 5
 											)
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:
@@ -102,7 +100,7 @@ var/global/economy_init = 0
 
 	create_station_account()
 
-	for(var/department in station_departments)
+	for(var/department in GLOB.station_departments)
 		create_department_account(department)
 	create_department_account("Vendor")
 	vendor_account = department_accounts["Vendor"]

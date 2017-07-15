@@ -14,7 +14,7 @@
 	. = ..()
 	var/mob/living/silicon/ai/master
 
-	for(var/mob/living/silicon/ai/ai in player_list)
+	for(var/mob/living/silicon/ai/ai in GLOB.player_list)
 		if(ai.check_special_role("Rampant AI"))
 			master = ai
 			break
@@ -22,7 +22,7 @@
 	if(!master)
 		return
 
-	for(var/mob/living/silicon/robot/R in player_list)
+	for(var/mob/living/silicon/robot/R in GLOB.player_list)
 		if(R.connected_ai)
 			continue
 		R.connect_to_ai(master)

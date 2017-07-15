@@ -10,7 +10,6 @@
 	invisibility = INVISIBILITY_LIGHTING
 	color = LIGHTING_BASE_MATRIX
 	icon_state = "light1"
-	auto_init = 0 // doesn't need special init
 	blend_mode = BLEND_MULTIPLY
 
 	var/lum_r = 0
@@ -19,17 +18,25 @@
 
 	var/needs_update = FALSE
 
-/atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
-	. = ..()
-	verbs.Cut()
-	total_lighting_overlays++
+/atom/movable/lighting_overlay/Initialize()
+	// doesn't need special init
+	initialized = TRUE
+	return INITIALIZE_HINT_NORMAL
 
+/atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
 	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
-	T.lighting_overlay = src
-	T.luminosity = 0
-	if(no_update)
-		return
-	update_overlay()
+	if(T.dynamic_lighting)
+		. = ..()
+		verbs.Cut()
+		total_lighting_overlays++
+
+		T.lighting_overlay = src
+		T.luminosity = 0
+		if(no_update)
+			return
+		update_overlay()
+	else
+		qdel(src)
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	set waitfor = FALSE
@@ -40,6 +47,9 @@
 			log_debug("A lighting overlay realised its loc was NOT a turf (actual loc: [loc][loc ? ", " + loc.type : "null"]) in update_overlay() and got qdel'ed!")
 		else
 			log_debug("A lighting overlay realised it was in nullspace in update_overlay() and got pooled!")
+		qdel(src)
+		return
+	if(!T.dynamic_lighting)
 		qdel(src)
 		return
 

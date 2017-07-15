@@ -275,13 +275,13 @@ proc/check_panel(mob/M)
 	my_target.client.images -= down
 	my_target.client.images -= right
 	my_target.client.images -= left
-	qdel_null(left)
-	qdel_null(right)
-	qdel_null(up)
-	qdel_null(down)
+	QDEL_NULL(left)
+	QDEL_NULL(right)
+	QDEL_NULL(up)
+	QDEL_NULL(down)
 	if(my_target)
 		my_target.hallucinations -= src
-	..()
+	. = ..()
 
 /obj/effect/fake_attacker/attackby(var/obj/item/weapon/P as obj, mob/user as mob)
 	step_away(src, my_target, 2)
@@ -376,7 +376,7 @@ var/list/non_fakeattack_weapons = list(/obj/item/weapon/gun/projectile, /obj/ite
 	var/mob/living/carbon/human/clone = null
 	var/list/PossibleClones = list()
 
-	for(var/mob/living/carbon/human/H in living_mob_list_)
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_)
 		PossibleClones += H
 
 	if(!PossibleClones.len)

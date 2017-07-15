@@ -29,7 +29,7 @@
 	else
 		ndir = get_dir(on_wall,usr)
 
-	if (!(ndir in cardinal))
+	if (!(ndir in GLOB.cardinal))
 		return
 
 	var/turf/loc = get_turf(usr)

@@ -77,7 +77,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 				last_request = world.time
 				to_chat(user, "<span class='notice'>You request an AI's presence.</span>")
 				var/area/area = get_area(src)
-				for(var/mob/living/silicon/ai/AI in living_mob_list_)
+				for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list_)
 					if(!AI.client)	continue
 					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>")
 			else
@@ -89,8 +89,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 			if(last_request + 200 < world.time) //don't spam other people with requests either, you jerk!
 				last_request = world.time
 				var/list/holopadlist = list()
-				for(var/obj/machinery/hologram/holopad/H in machines)
-					if((H.z in using_map.station_levels) && H.operable())
+				for(var/obj/machinery/hologram/holopad/H in GLOB.machines)
+					if((H.z in GLOB.using_map.station_levels) && H.operable())
 						holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world
 				holopadlist = sortAssoc(holopadlist)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist
@@ -229,7 +229,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
 		var/tempicon = 0
-		for(var/datum/data/record/t in data_core.locked)
+		for(var/datum/data/record/t in GLOB.data_core.locked)
 			if(t.fields["name"]==caller_id.name)
 				tempicon = t.fields["image"]
 		hologram.overlays += getHologramIcon(icon(tempicon)) // Add the callers image as an overlay to keep coloration!
@@ -353,7 +353,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/Destroy()
 	for (var/mob/living/master in masters)
 		clear_holo(master)
-	..()
+	return ..()
 
 /*
 Holographic project of everything else.

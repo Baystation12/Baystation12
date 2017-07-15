@@ -2,17 +2,8 @@
 	The global hud:
 	Uses the same visual objects for all players.
 */
-var/datum/global_hud/global_hud = new()
-var/list/global_huds = list(
-		global_hud.nvg,
-		global_hud.thermal,
-		global_hud.meson,
-		global_hud.science)
 
-/datum/hud/var/obj/screen/grab_intent
-/datum/hud/var/obj/screen/hurt_intent
-/datum/hud/var/obj/screen/disarm_intent
-/datum/hud/var/obj/screen/help_intent
+GLOBAL_DATUM_INIT(global_hud, /datum/global_hud, new())
 
 /datum/global_hud
 	var/obj/screen/nvg
@@ -69,10 +60,6 @@ datum/hud/New(mob/owner)
 
 /datum/hud/Destroy()
 	. = ..()
-	grab_intent = null
-	hurt_intent = null
-	disarm_intent = null
-	help_intent = null
 	lingchemdisplay = null
 	r_hand_hud_object = null
 	l_hand_hud_object = null

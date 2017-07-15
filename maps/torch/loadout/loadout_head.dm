@@ -23,6 +23,8 @@
 	berets["orbital assault beret"] = /obj/item/clothing/head/beret/sol/orbital
 	berets["government research beret"] = /obj/item/clothing/head/beret/sol/research
 	berets["health service beret"] = /obj/item/clothing/head/beret/sol/health
+	berets["diplomatic security beret"] = /obj/item/clothing/head/beret/sol/diplomatic
+	berets["border security beret"] = /obj/item/clothing/head/beret/sol/borderguard
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
 /datum/gear/head/whitentberet
@@ -56,3 +58,9 @@
 	display_name = "Sol Central Government Cap"
 	path = /obj/item/clothing/head/soft/sol
 	allowed_roles = SOLGOV_ROLES
+	
+/datum/gear/head/veteranhat
+	display_name = "veteran hat"
+	path = /obj/item/clothing/head/soft/veteranhat
+	allowed_roles = NON_MILITARY_ROLES
+

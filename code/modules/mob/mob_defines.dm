@@ -2,6 +2,7 @@
 	density = 1
 	plane = MOB_PLANE
 
+	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
 	flags = PROXMOVE
 
@@ -162,3 +163,5 @@
 
 	var/memory = ""
 	var/flavor_text = ""
+
+	var/nabbing = 0  // Whether a creature with a CAN_NAB tag is grabbing normally or in nab mode.

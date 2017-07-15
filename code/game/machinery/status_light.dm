@@ -9,8 +9,8 @@
 	var/alert = 1
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/status_light/initialize()
-	..()
+/obj/machinery/status_light/Initialize()
+	. = ..()
 	update_icon()
 	radio_connection = register_radio(src, frequency, frequency, RADIO_ATMOSIA)
 

@@ -1,12 +1,13 @@
 /obj/item/weapon/implant/death_alarm
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
+	known = 1
 	var/mobname = "Will Robinson"
 
 /obj/item/weapon/implant/death_alarm/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
-	<b>Name:</b> [using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
+	<b>Name:</b> [GLOB.using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
 	<b>Life:</b> Activates upon death.<BR>
 	<b>Important Notes:</b> Alerts crew to crewmember death.<BR>
 	<HR>
@@ -39,10 +40,10 @@
 	var/death_message = "[mobname] has died in [location]!"
 	if(!cause)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 
 	for(var/channel in list("Security", "Medical", "Command"))
-		global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
+		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
 
 /obj/item/weapon/implant/death_alarm/emp_act(severity)			//for some reason alarms stop going off in case they are emp'd, even without this
 	if (malfunction)		//so I'm just going to add a meltdown chance here
@@ -56,19 +57,19 @@
 			meltdown()
 		else if (prob(60))	//but more likely it will just quietly die
 			malfunction = MALFUNCTION_PERMANENT
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 
 	spawn(20)
 		malfunction = 0
 
 /obj/item/weapon/implant/death_alarm/implanted(mob/source as mob)
 	mobname = source.real_name
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	return TRUE
 
 /obj/item/weapon/implant/death_alarm/removed()
 	..()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 
 /obj/item/weapon/implantcase/death_alarm
 	name = "glass case - 'death alarm'"

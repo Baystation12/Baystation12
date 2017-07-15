@@ -9,7 +9,7 @@
 //			/atom/new_loc: The atom the exitee is now residing in
 //
 
-var/decl/observ/exited/exited_event = new()
+GLOBAL_DATUM_INIT(exited_event, /decl/observ/exited, new)
 
 /decl/observ/exited
 	name = "Exited"
@@ -21,4 +21,4 @@ var/decl/observ/exited/exited_event = new()
 
 /atom/Exited(atom/movable/exitee, atom/new_loc)
 	. = ..()
-	exited_event.raise_event(src, exitee, new_loc)
+	GLOB.exited_event.raise_event(src, exitee, new_loc)

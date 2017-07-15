@@ -61,13 +61,13 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/New()
 	..()
-	moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
 	if(hat)
 		hat.dropInto(loc)
 		hat = null
-	moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	GLOB.moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 	. = ..()
 
 /mob/living/silicon/robot/drone/proc/on_moved(var/atom/movable/am, var/turf/old_loc, var/turf/new_loc)
@@ -144,7 +144,7 @@ var/list/mob_hat_cache = list()
 	additional_law_channels["Drone"] = ":d"
 	if(!module) module = new module_type(src)
 
-	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
+	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 //Redefining some robot procs...
@@ -246,14 +246,14 @@ var/list/mob_hat_cache = list()
 	message_admins("[key_name_admin(user)] emagged drone [key_name_admin(src)].  Laws overridden.")
 	log_game("[key_name(user)] emagged drone [key_name(src)].  Laws overridden.")
 	var/time = time2text(world.realtime,"hh:mm:ss")
-	lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+	GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 
 	emagged = 1
 	lawupdate = 0
 	connected_ai = null
 	clear_supplied_laws()
 	clear_inherent_laws()
-	qdel_null(laws)
+	QDEL_NULL(laws)
 	laws = new /datum/ai_laws/syndicate_override
 	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
 
@@ -316,8 +316,8 @@ var/list/mob_hat_cache = list()
 	clear_supplied_laws(1)
 	clear_inherent_laws(1)
 	clear_ion_laws(1)
-	qdel_null(laws)
-	var/law_type = initial(laws) || using_map.default_law_type
+	QDEL_NULL(laws)
+	var/law_type = initial(laws) || GLOB.using_map.default_law_type
 	laws = new law_type
 
 //Reboot procs.
@@ -368,7 +368,7 @@ var/list/mob_hat_cache = list()
 
 /proc/too_many_active_drones()
 	var/drones = 0
-	for(var/mob/living/silicon/robot/drone/D in mob_list)
+	for(var/mob/living/silicon/robot/drone/D in GLOB.silicon_mob_list)
 		if(D.key && D.client)
 			drones++
 	return drones >= config.max_maint_drones

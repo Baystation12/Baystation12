@@ -32,17 +32,17 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		add_underlay(T, node1, get_dir(src, node1))
-		add_underlay(T, node2, get_dir(src, node2))
+		add_underlay(T, node1, get_dir(src, node1), node1 ? node1.icon_connect_type : "")
+		add_underlay(T, node2, get_dir(src, node2), node2 ? node2.icon_connect_type : "")
 
 /obj/machinery/atmospherics/valve/hide(var/i)
 	update_underlays()
 
 /obj/machinery/atmospherics/valve/New()
 	switch(dir)
-		if(NORTH || SOUTH)
+		if(NORTH, SOUTH)
 			initialize_directions = NORTH|SOUTH
-		if(EAST || WEST)
+		if(EAST, WEST)
 			initialize_directions = EAST|WEST
 	..()
 
@@ -143,13 +143,14 @@
 
 	return
 
-/obj/machinery/atmospherics/valve/initialize()
+/obj/machinery/atmospherics/valve/atmos_init()
+	..()
 	normalize_dir()
 
 	var/node1_dir
 	var/node2_dir
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -258,8 +259,8 @@
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/valve/digital/initialize()
-	..()
+/obj/machinery/atmospherics/valve/digital/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 
@@ -286,9 +287,6 @@
 /obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
-	if (istype(src, /obj/machinery/atmospherics/valve/digital))
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it's too complicated.</span>")
-		return 1
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)

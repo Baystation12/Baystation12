@@ -79,6 +79,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
+	hard_drive.store_file(new/datum/computer_file/program/supply())
 
 // ERT
 /obj/item/modular_computer/console/preset/ert/install_default_hardware()

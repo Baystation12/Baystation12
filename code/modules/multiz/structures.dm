@@ -16,8 +16,10 @@
 	var/obj/structure/ladder/target_down
 
 	var/const/climb_time = 2 SECONDS
+	var/static/list/climbsounds = list('sound/effects/ladder.ogg','sound/effects/ladder2.ogg','sound/effects/ladder3.ogg','sound/effects/ladder4.ogg')
 
-/obj/structure/ladder/initialize()
+/obj/structure/ladder/Initialize()
+	. = ..()
 	// the upper will connect to the lower
 	if(allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
 		for(var/obj/structure/ladder/L in GetBelow(src))
@@ -51,6 +53,9 @@
 		to_chat(M, "<span class='notice'>You fail to reach \the [src].</span>")
 		return
 
+	for (var/obj/item/grab/G in M)
+		G.adjust_position()
+
 	var/direction = target_ladder == target_up ? "up" : "down"
 
 	M.visible_message("<span class='notice'>\The [M] begins climbing [direction] \the [src]!</span>",
@@ -61,6 +66,9 @@
 
 	if(do_after(M, climb_time, src))
 		climbLadder(M, target_ladder)
+		for (var/obj/item/grab/G in M)
+			G.adjust_position()
+
 
 /obj/structure/ladder/attack_ghost(var/mob/M)
 	var/target_ladder = getTargetLadder(M)
@@ -95,6 +103,18 @@
 	if(incapacitated())
 		to_chat(src, "<span class='warning'>You are physically unable to climb \the [ladder].</span>")
 		return FALSE
+
+	var/carry_count = 0
+	for(var/obj/item/grab/G in src)
+		if(!G.ladder_carry())
+			to_chat(src, "<span class='warning'>You can't carry [G.affecting] up \the [ladder].</span>")
+			return FALSE
+		else
+			carry_count++
+	if(carry_count > 1)
+		to_chat(src, "<span class='warning'>You can't carry more than one person up \the [ladder].</span>")
+		return FALSE
+
 	return TRUE
 
 /mob/observer/ghost/may_climb_ladders(var/ladder)
@@ -106,6 +126,8 @@
 		if(!A.CanPass(M, M.loc, 1.5, 0))
 			to_chat(M, "<span class='notice'>\The [A] is blocking \the [src].</span>")
 			return FALSE
+	playsound(src, pick(climbsounds), 50)
+	playsound(target_ladder, pick(climbsounds), 50)
 	return M.Move(T)
 
 /obj/structure/ladder/CanPass(obj/mover, turf/source, height, airflow)
@@ -130,14 +152,15 @@
 	opacity = 0
 	anchored = 1
 
-	initialize()
+	Initialize()
 		for(var/turf/turf in locs)
 			var/turf/simulated/open/above = GetAbove(turf)
 			if(!above)
 				warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
-				return qdel(src)
+				return INITIALIZE_HINT_QDEL
 			if(!istype(above))
 				above.ChangeTurf(/turf/simulated/open)
+		. = ..()
 
 	Uncross(atom/movable/A)
 		if(A.dir == dir)

@@ -17,10 +17,8 @@
 	var/ks1type = /obj/item/device/encryptionkey
 	var/ks2type = null
 
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
-
-/obj/item/device/radio/headset/New()
-	..()
+/obj/item/device/radio/headset/Initialize()
+	. = ..()
 	internal_channels.Cut()
 	if(ks1type)
 		keyslot1 = new ks1type(src)
@@ -71,8 +69,8 @@
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/syndicate
 
-/obj/item/device/radio/headset/syndicate/initialize()
-	..()
+/obj/item/device/radio/headset/syndicate/Initialize()
+	. = ..()
 	set_frequency(SYND_FREQ)
 
 /obj/item/device/radio/headset/raider
@@ -80,8 +78,8 @@
 	syndie = 1
 	ks1type = /obj/item/device/encryptionkey/raider
 
-/obj/item/device/radio/headset/raider/initialize()
-	..()
+/obj/item/device/radio/headset/raider/Initialize()
+	. = ..()
 	set_frequency(RAID_FREQ)
 
 /obj/item/device/radio/headset/binary
@@ -136,13 +134,6 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_com
-
-/obj/item/device/radio/headset/pilot
-	name = "pilot's headset"
-	desc = "A headset with access to the command and engineering channels."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/pilot
 
 /obj/item/device/radio/headset/heads/captain
 	name = "captain's headset"

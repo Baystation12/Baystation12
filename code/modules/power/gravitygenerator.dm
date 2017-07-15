@@ -24,12 +24,12 @@
 	var/effectiverange = 25
 
 	// Borrows code from cloning computer
-/obj/machinery/computer/gravity_control_computer/initialize()
-	..()
+/obj/machinery/computer/gravity_control_computer/Initialize()
+	. = ..()
 	updatemodules()
 
-/obj/machinery/gravity_generator/initialize()
-	..()
+/obj/machinery/gravity_generator/Initialize()
+	. = ..()
 	locatelocalareas()
 
 /obj/machinery/computer/gravity_control_computer/proc/updatemodules()
@@ -105,7 +105,7 @@
 
 			for(var/area/A in gravity_generator.localareas)
 				var/obj/machinery/gravity_generator/G
-				for(G in machines)
+				for(G in GLOB.machines)
 					if((A in G.localareas) && (G.on))
 						break
 				if(!G)

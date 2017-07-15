@@ -24,10 +24,12 @@
 	..()
 	radio = new(src)
 	camera = new(src)
-	listening_objects += src
+	GLOB.listening_objects += src
 
 /obj/item/device/spy_bug/Destroy()
-	listening_objects -= src
+	QDEL_NULL(radio)
+	QDEL_NULL(camera)
+	GLOB.listening_objects -= src
 	return ..()
 
 /obj/item/device/spy_bug/examine(mob/user)
@@ -67,11 +69,12 @@
 	var/list/obj/machinery/camera/spy/cameras = new()
 
 /obj/item/device/spy_monitor/New()
+	..()
 	radio = new(src)
-	listening_objects += src
+	GLOB.listening_objects += src
 
 /obj/item/device/spy_monitor/Destroy()
-	listening_objects -= src
+	GLOB.listening_objects -= src
 	return ..()
 
 /obj/item/device/spy_monitor/examine(mob/user)
@@ -150,7 +153,7 @@
 
 /obj/machinery/camera/spy/New()
 	..()
-	name = "DV-136ZB #[rand(1000,9999)]"
+	name = "DV-136ZB #[random_id(/obj/machinery/camera/spy, 1000,9999)]"
 	c_tag = name
 
 /obj/machinery/camera/spy/check_eye(var/mob/user as mob)

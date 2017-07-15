@@ -46,7 +46,7 @@
 
 	immunity = min(immunity + 0.25, immunity_norm)
 
-	if(life_tick % 5 && immunity < 15 && !chem_effects[CE_ANTIVIRAL] && !virus2.len)
+	if(life_tick % 5 && immunity < 15 && chem_effects[CE_ANTIVIRAL] < VIRUS_COMMON && !virus2.len)
 		var/infection_prob = 15 - immunity
 		var/turf/simulated/T = loc
 		if(istype(T))

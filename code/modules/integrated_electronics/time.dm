@@ -81,17 +81,17 @@
 
 /obj/item/integrated_circuit/time/ticker/Destroy()
 	if(is_running)
-		processing_objects -= src
+		GLOB.processing_objects -= src
 	. = ..()
 
 /obj/item/integrated_circuit/time/ticker/on_data_written()
 	var/datum/integrated_io/do_tick = inputs[1]
 	if(do_tick.data && !is_running)
 		is_running = TRUE
-		processing_objects |= src
+		GLOB.processing_objects |= src
 	else if(is_running)
 		is_running = FALSE
-		processing_objects -= src
+		GLOB.processing_objects -= src
 		ticks_completed = 0
 
 /obj/item/integrated_circuit/time/ticker/process()

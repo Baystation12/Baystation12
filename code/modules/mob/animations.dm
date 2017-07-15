@@ -45,18 +45,22 @@ note dizziness decrements automatically in the mob's Life() proc.
 // jitteriness - copy+paste of dizziness
 /mob/var/is_jittery = 0
 /mob/var/jitteriness = 0//Carbon
-/mob/proc/make_jittery(var/amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
-		return
 
+/mob/proc/make_jittery(var/amount)
+	return //Only for living/carbon/human/
+
+/mob/living/carbon/human/make_jittery(var/amount)
+	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery
+		return
+	if(!jittery_damage())
+		return //Robotic hearts don't get jittery.
 	jitteriness = min(1000, jitteriness + amount)	// store what will be new value
 													// clamped to max 1000
 	if(jitteriness > 100 && !is_jittery)
 		spawn(0)
 			jittery_process()
 
-
-// Typo from the oriignal coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
+// Typo from the original coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
 /mob/proc/jittery_process()
 	is_jittery = 1
 	while(jitteriness > 100)
@@ -143,8 +147,16 @@ note dizziness decrements automatically in the mob's Life() proc.
 		if(SOUTHWEST)
 			pixel_x_diff = -8
 			pixel_y_diff = -8
+
+	var/default_pixel_x = initial(pixel_x)
+	var/default_pixel_y = initial(pixel_y)
+	var/mob/mob = src
+	if(istype(mob))
+		default_pixel_x = mob.default_pixel_x
+		default_pixel_y = mob.default_pixel_y
+
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = 2)
-	animate(pixel_x = initial(pixel_x), pixel_y = initial(pixel_y), time = 2)
+	animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2)
 
 /mob/do_attack_animation(atom/A)
 	..()

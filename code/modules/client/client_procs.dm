@@ -52,10 +52,12 @@
 	//Admin PM
 	if(href_list["priv_msg"])
 		var/client/C = locate(href_list["priv_msg"])
+		var/datum/ticket/ticket = locate(href_list["ticket"])
+
 		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
 			var/mob/M = C
 			C = M.client
-		cmd_admin_pm(C,null)
+		cmd_admin_pm(C, null, ticket)
 		return
 
 	if(href_list["irc_msg"])
@@ -67,6 +69,14 @@
 			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
+
+	if(href_list["close_ticket"])
+		var/datum/ticket/ticket = locate(href_list["close_ticket"])
+
+		if(isnull(ticket))
+			return
+
+		ticket.close(client_repository.get_lite_client(usr.client))
 
 
 
@@ -122,13 +132,13 @@
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-	clients += src
-	directory[ckey] = src
+	GLOB.clients += src
+	GLOB.ckey_directory[ckey] = src
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
 	if(holder)
-		admins += src
+		GLOB.admins += src
 		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
@@ -172,6 +182,9 @@
 		if(config.aggressive_changelog)
 			src.changes()
 
+	if(isnum(player_age) && player_age < 7)
+		src.lore_splash()
+		to_chat(src, "<span class = 'notice'>Greetings, and welcome to the server! A link to the beginner's lore page has been opened, please read through it! This window will stop automatically opening once your account here is greater than 7 days old.</span>")
 
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
@@ -182,11 +195,12 @@
 	//DISCONNECT//
 	//////////////
 /client/Del()
+	ticket_panels -= src
 	if(holder)
 		holder.owner = null
-		admins -= src
-	directory -= ckey
-	clients -= src
+		GLOB.admins -= src
+	GLOB.ckey_directory -= ckey
+	GLOB.clients -= src
 	return ..()
 
 /client/Destroy()
@@ -262,7 +276,7 @@
 	var/admin_rank = "Player"
 	if(src.holder)
 		admin_rank = src.holder.rank
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			if(C.staffwarn)
 				C.mob.send_staffwarn(src, "is connected", 0)
 
@@ -305,12 +319,11 @@
 // So we slow this down a little.
 // See: http://www.byond.com/docs/ref/info.html#/client/proc/Stat
 /client/Stat()
+	// Add always-visible stat panel calls here, to define a consistent display order.
+	statpanel("Status")
+
 	. = ..()
-	if (holder)
-		sleep(1)
-	else
-		sleep(5)
-		stoplag()
+	sleep(1)
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()

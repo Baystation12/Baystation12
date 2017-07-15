@@ -25,8 +25,8 @@
 
 		for(var/event_turf in event_turfs)
 			events_by_turf[event_turf] = overmap_event
-			entered_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_entered)
-			exited_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_exited)
+			GLOB.entered_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_entered)
+			GLOB.exited_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_exited)
 
 			var/obj/effect/overmap_event/event = new(event_turf)
 			event.name = overmap_event.name
@@ -83,9 +83,9 @@
 	if(old_event == new_event)
 		return
 	if(old_event)
-		if(new_event && old_event.difficulty == new_event.difficulty && initial(old_event.event) == initial(new_event.event))
+		if(new_event && old_event.difficulty == new_event.difficulty && old_event.event == new_event.event)
 			return
-		old_event.leave()
+		old_event.leave(entering_ship)
 
 /decl/overmap_event_handler/proc/on_turf_entered(var/turf/new_loc, var/obj/effect/overmap/ship/entering_ship, var/old_loc)
 	if(!istype(entering_ship))
@@ -102,7 +102,7 @@
 	if(new_event)
 		if(old_event && old_event.difficulty == new_event.difficulty && initial(old_event.event) == initial(new_event.event))
 			return
-		new_event.enter()
+		new_event.enter(entering_ship)
 
 // We don't subtype /obj/effect/overmap because that'll create sections one can travel to
 //  And with them "existing" on the overmap Z-level things quickly get odd.
@@ -115,26 +115,30 @@
 	var/name = "map event"
 	var/radius = 2
 	var/count = 6
-	var/datum/event/event = null
+	var/event = null
 	var/list/event_icon_states = list("event")
 	var/difficulty = EVENT_LEVEL_MODERATE
+	var/list/victims
 
-/datum/overmap_event/proc/enter()
-	if(!event_manager)
+/datum/overmap_event/proc/enter(var/obj/effect/overmap/ship/victim)
+	if(!GLOB.event_manager)
 		log_error("Event manager not setup.")
 		return
-	if(!ispath(event)) // At this time we assume there is only ever one overmap ship
-		log_error("Multiple attempts to trigger the same event detected.")
+	if(victim in victims)
+		log_error("Multiple attempts to trigger the same event by [victim] detected.")
 		return
+	LAZYADD(victims, victim)
 	var/datum/event_meta/EM = new(difficulty, "Overmap event - [name]", event, add_to_queue = FALSE, is_one_shot = TRUE)
-	event = new event(EM)
-	event.startWhen = 0
-	event.endWhen = INFINITY
+	var/datum/event/E = new event(EM)
+	E.startWhen = 0
+	E.endWhen = INFINITY
+	victims[victim] = E
 
-/datum/overmap_event/proc/leave()
-	if(!ispath(event))
-		event.kill()
-		event = initial(event)
+/datum/overmap_event/proc/leave(victim)
+	if(victims && victims[victim])
+		var/datum/event/E = victims[victim]
+		E.kill()
+		LAZYREMOVE(victims, victim)
 
 /datum/overmap_event/meteor
 	name = "asteroid field"
@@ -142,6 +146,12 @@
 	count = 7
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
 	difficulty = EVENT_LEVEL_MAJOR
+
+/datum/overmap_event/meteor/enter(var/obj/effect/overmap/ship/victim)
+	..()
+	if(victims[victim])
+		var/datum/event/meteor_wave/overmap/E = victims[victim]
+		E.victim = victim
 
 /datum/overmap_event/electric
 	name = "electrical storm"
@@ -152,6 +162,6 @@
 
 /datum/overmap_event/dust
 	name = "dust cloud"
-	event = /datum/event/dust/overmap //Probability is annoying.
+	event = /datum/event/dust
 	count = 11
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")

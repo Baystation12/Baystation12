@@ -8,13 +8,11 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
-	var/base_name = "glass" // Name to put in front of drinks, i.e. "[base_name] of [contents]"
+	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
 	icon = DRINK_ICON_FILE
-	var/base_icon = "square" // Base icon name
+	base_icon = "square" // Base icon name
 	volume = 30
-
-	var/filling_states // List of percentages full that have icons
 
 	var/list/extras = list() // List of extras. Two extras maximum
 
@@ -102,12 +100,7 @@
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
-		var/amnt = 100
-		var/percent = round((reagents.total_volume / volume) * 100)
-		for(var/k in cached_number_list_decode(filling_states))
-			if(percent <= k)
-				amnt = k
-				break
+		var/amnt = get_filling_state()
 
 		if(has_ice())
 			over_liquid |= "[base_icon][amnt]_ice"

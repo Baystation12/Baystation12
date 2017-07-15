@@ -22,41 +22,50 @@
 "v" = (/obj/machinery/light_switch{pixel_x = 25},/turf/simulated/floor/tiled,/area/constructionsite)
 "w" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/constructionsite)
 "x" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/constructionsite)
-"y" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
-"z" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/constructionsite)
+"y" = (/turf/simulated/wall/iron,/area/shuttle/escape)
+"z" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/shuttle/escape)
+"A" = (/obj/machinery/computer/shuttle_control{shuttle_tag = "Example"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"B" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_starboard"; pixel_x = 28},/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "example_shuttle_port"; pixel_x = -28},/obj/effect/shuttle_landmark/lower_level,/turf/simulated/floor/plating,/area/shuttle/escape)
+"C" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/shuttle/escape)
+"D" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_port_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"E" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "example_shuttle_starboard_hatch"},/turf/simulated/floor/plating,/area/shuttle/escape)
+"F" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "lower_level_dock"; pixel_x = -8; pixel_y = -25},/turf/simulated/floor,/area/constructionsite)
+"G" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379; id_tag = "lower_level_dock_hatch"},/turf/simulated/floor,/area/constructionsite)
+"H" = (/turf/simulated/floor,/area/constructionsite)
+"I" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/constructionsite)
+"J" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaabbbbbbbbbbbbbbbaaaaaaaa
-aaaaaaaaabcccdcccccdcccbaaaaaaaa
-aaaaaaaaabclllcwbwcccccbaaaaaaaa
-aaaaaaaaabclllcwwwccccvbaaaaaaaa
-aaaaaaaaabelllxwwwccccfbaaaaaaaa
-aaaaaaaaabccccccccccsccbaaaaaaaa
-aaaaaaaaabccccccccccmonbaaaaaaaa
-aaaaaaaaabccccccgccccccbaaaaaaaa
-aaaaaaaaabccccccccccpoqbaaaaaaaa
-aaaaaaaaabucccccccccrccbaaaaaaaa
-aaaaaaaaabectttcccccccfbaaaaaaaa
-aaaaaaaaabhctttccczccccbaaaaaaaa
-aaaaaaaaabictttccccccccbaaaaaaaa
-aaaaaaaaabjcckccccckcccbaaaaaaaa
-aaaaaaaaabbbbbbbbbbbbbbbaaaaaaaa
-aaaaaaaayaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabcccdcccccdcccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabclllcwbwcccccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabclllcwwwccccvbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabelllxwwwccccfbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabccccccccccsccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaayyyaabccccccccccmonbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaazAzaabucccccgccccccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaazBzbbbccccIcccccpoqbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaDCEGFHccccccccccrccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaayyybbbectttcccccccfbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabhctttccccccccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabictttccccccccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabjcckccccckcccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaJaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

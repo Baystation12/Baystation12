@@ -3,14 +3,14 @@
 /hook/roundend/proc/send_runtimes_to_ircbot()
 	if(!revdata.revision) return // we can't do much useful if we don't know what we are
 	var/list/errors = list()
-	for(var/erruid in error_cache.error_sources)
-		var/datum/ErrorViewer/ErrorSource/e = error_cache.error_sources[erruid]
-		var/datum/ErrorViewer/ErrorEntry/err = e.errors[1]
+	for(var/erruid in GLOB.error_cache.error_sources)
+		var/datum/error_viewer/error_source/e = GLOB.error_cache.error_sources[erruid]
+		var/datum/error_viewer/error_entry/err = e.errors[1]
 
 		var/data = list(
 			id = erruid,
-			name = err.info_name,
-			info = err.info
+			name = err.name,
+			info = err.desc
 		)
 
 		errors[++errors.len] = list2params(data)
@@ -19,5 +19,3 @@
 
 	return 1
 #endif
-
-

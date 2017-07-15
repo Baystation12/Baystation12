@@ -9,11 +9,27 @@
 	reagent_state = LIQUID
 	color = "#CF3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
+
+	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(strength && alien != IS_DIONA)
-		M.adjustToxLoss(strength * removed)
+		var/dam = (strength * removed)
+		if(target_organ && ishuman(M))
+			var/mob/living/carbon/human/H = M
+			var/obj/item/organ/internal/I = H.internal_organs_by_name[target_organ]
+			if(I)
+				var/can_damage = I.max_damage - I.damage
+				if(can_damage > 0)
+					if(dam > can_damage)
+						I.take_damage(can_damage, silent=TRUE)
+						dam -= can_damage
+					else
+						I.take_damage(dam, silent=TRUE)
+						dam = 0
+		if(dam)
+			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
 
 /datum/reagent/toxin/plasticide
 	name = "Plasticide"
@@ -40,6 +56,7 @@
 	taste_description = "fish"
 	reagent_state = LIQUID
 	color = "#003333"
+	target_organ = BP_BRAIN
 	strength = 10
 
 /datum/reagent/toxin/phoron
@@ -56,6 +73,11 @@
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
+
+/datum/reagent/toxin/phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_NABBER)
+		return
+	..()
 
 /datum/reagent/toxin/phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
@@ -92,10 +114,10 @@
 	color = "#CF3600"
 	strength = 20
 	metabolism = REM * 2
+	target_organ = BP_HEART
 
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.adjustOxyLoss(20 * removed)
 	M.sleeping += 1
 
 /datum/reagent/toxin/potassium_chloride
@@ -150,6 +172,7 @@
 	color = "#669900"
 	metabolism = REM
 	strength = 3
+	target_organ = BP_BRAIN
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -403,7 +426,7 @@
 
 	M.druggy = max(M.druggy, drug_strength)
 	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-		step(M, pick(cardinal))
+		step(M, pick(GLOB.cardinal))
 	if(prob(7))
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
@@ -602,4 +625,32 @@
 		return
 	M.species.set_default_hair(M)
 	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
+	remove_self(volume)
+
+/datum/reagent/toxin/corrupting
+	name = "Corruption"
+	id = "corruption"
+	description = "a loyalty changing liquid."
+	taste_description = "blood"
+	color = "#FFFFFF"
+	taste_mult = 5
+	strength = 10
+	metabolism = REM * 2
+	overdose = 30
+
+/datum/reagent/toxin/corrupting/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M,alien,removed*0.5)
+
+/datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(prob(5))
+		if(dose < 15)
+			to_chat(M, "<span class='warning'>You feel funny...</span>")
+		else
+			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+
+/datum/reagent/toxin/corrupting/overdose(var/mob/living/carbon/M, var/alien)
+	if(istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		H.zombieze()
 	remove_self(volume)

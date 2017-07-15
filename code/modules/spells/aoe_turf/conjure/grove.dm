@@ -4,7 +4,7 @@
 
 	spell_flags = IGNOREDENSE | IGNORESPACE | NEEDSCLOTHES | Z2NOCAST | IGNOREPREV
 	charge_max = 1200
-	school = "conjuration"
+	school = "transmutation"
 
 	range = 1
 	cooldown_min = 600

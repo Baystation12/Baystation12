@@ -26,3 +26,26 @@
 	display_name = "gloves, evening"
 	path = /obj/item/clothing/gloves/color/evening
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/ring
+	display_name = "ring"
+	path = /obj/item/clothing/ring/cti
+	cost = 2
+
+/datum/gear/ring/New()
+	..()
+	var/ringtype = list()
+	ringtype["CTI ring"] = /obj/item/clothing/ring/cti
+	ringtype["Mariner University ring"] = /obj/item/clothing/ring/mariner
+	ringtype["engagement ring"] = /obj/item/clothing/ring/engagement
+	ringtype["signet ring"] = /obj/item/clothing/ring/seal/signet
+	ringtype["masonic ring"] = /obj/item/clothing/ring/seal/mason
+	ringtype["ring, steel"] = /obj/item/clothing/ring/material/steel
+	ringtype["ring, bronze"] = /obj/item/clothing/ring/material/bronze
+	ringtype["ring, silver"] = /obj/item/clothing/ring/material/silver
+	ringtype["ring, gold"] = /obj/item/clothing/ring/material/gold
+	ringtype["ring, platinum"] = /obj/item/clothing/ring/material/platinum
+	ringtype["ring, glass"] = /obj/item/clothing/ring/material/glass
+	ringtype["ring, wood"] = /obj/item/clothing/ring/material/wood
+	ringtype["ring, plastic"] = /obj/item/clothing/ring/material/plastic
+	gear_tweaks += new/datum/gear_tweak/path(ringtype)

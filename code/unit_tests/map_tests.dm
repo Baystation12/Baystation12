@@ -10,11 +10,11 @@
 #define SUCCESS 1
 
 
-datum/unit_test/apc_area_test
+/datum/unit_test/apc_area_test
 	name = "MAP: Area Test APC / Scrubbers / Vents"
 
 
-datum/unit_test/apc_area_test/start_test()
+/datum/unit_test/apc_area_test/start_test()
 	var/list/bad_areas = list()
 	var/area_test_count = 0
 
@@ -28,24 +28,24 @@ datum/unit_test/apc_area_test/start_test()
 		var/bad_msg = "--------------- [A.name]([A.type])"
 
 		var/exemptions = get_exemptions(A)
-		if(!A.apc && !(exemptions & using_map.NO_APC))
+		if(!A.apc && !(exemptions & GLOB.using_map.NO_APC))
 			log_bad("[bad_msg] lacks an APC.")
 			area_good = 0
-		else if(A.apc && (exemptions & using_map.NO_APC))
+		else if(A.apc && (exemptions & GLOB.using_map.NO_APC))
 			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
-		if(!A.air_scrub_info.len && !(exemptions & using_map.NO_SCRUBBER))
+		if(!A.air_scrub_info.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
-		else if(A.air_scrub_info.len && (exemptions & using_map.NO_SCRUBBER))
+		else if(A.air_scrub_info.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
-		if(!A.air_vent_info.len && !(exemptions & using_map.NO_VENT))
+		if(!A.air_vent_info.len && !(exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
-		else if(A.air_vent_info.len && (exemptions & using_map.NO_VENT))
+		else if(A.air_vent_info.len && (exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
@@ -59,19 +59,19 @@ datum/unit_test/apc_area_test/start_test()
 
 	return 1
 
-datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
+/datum/unit_test/apc_area_test/proc/get_exemptions(var/area)
 	// We assume deeper types come last
-	for(var/i = using_map.apc_test_exempt_areas.len; i>0; i--)
-		var/exempt_type = using_map.apc_test_exempt_areas[i]
+	for(var/i = GLOB.using_map.apc_test_exempt_areas.len; i>0; i--)
+		var/exempt_type = GLOB.using_map.apc_test_exempt_areas[i]
 		if(istype(area, exempt_type))
-			return using_map.apc_test_exempt_areas[exempt_type]
+			return GLOB.using_map.apc_test_exempt_areas[exempt_type]
 
 //=======================================================================================
 
-datum/unit_test/wire_test
+/datum/unit_test/wire_test
 	name = "MAP: Cable Overlap Test"
 
-datum/unit_test/wire_test/start_test()
+/datum/unit_test/wire_test/start_test()
 	var/wire_test_count = 0
 	var/bad_tests = 0
 	var/turf/T = null
@@ -103,10 +103,10 @@ datum/unit_test/wire_test/start_test()
 
 //=======================================================================================
 
-datum/unit_test/wire_dir_and_icon_stat
+/datum/unit_test/wire_dir_and_icon_stat
 	name = "MAP: Cable Dir And Icon State Test"
 
-datum/unit_test/wire_dir_and_icon_stat/start_test()
+/datum/unit_test/wire_dir_and_icon_stat/start_test()
 	var/list/bad_cables = list()
 
 	for(var/obj/structure/cable/C in world)
@@ -127,10 +127,10 @@ datum/unit_test/wire_dir_and_icon_stat/start_test()
 
 //=======================================================================================
 
-datum/unit_test/closet_test
+/datum/unit_test/closet_test
 	name = "MAP: Closet Capacity Test Player Z levels"
 
-datum/unit_test/closet_test/start_test()
+/datum/unit_test/closet_test/start_test()
 	var/bad_tests = 0
 
 	for(var/obj/structure/closet/C in world)
@@ -152,10 +152,10 @@ datum/unit_test/closet_test/start_test()
 
 //=======================================================================================
 
-datum/unit_test/storage_map_test
+/datum/unit_test/storage_map_test
 	name = "MAP: On Map Storage Item Capacity Test Player Z levels"
 
-datum/unit_test/storage_map_test/start_test()
+/datum/unit_test/storage_map_test/start_test()
 	var/bad_tests = 0
 
 	for(var/obj/item/weapon/storage/S in world)
@@ -170,18 +170,18 @@ datum/unit_test/storage_map_test/start_test()
 
 	return 1
 
-datum/unit_test/map_image_map_test
+/datum/unit_test/map_image_map_test
 	name = "MAP: All map levels shall have a corresponding map image."
 
-datum/unit_test/map_image_map_test/start_test()
+/datum/unit_test/map_image_map_test/start_test()
 	var/failed = FALSE
 
-	for(var/z in using_map.map_levels)
+	for(var/z in GLOB.using_map.map_levels)
 		var/file_name = map_image_file_name(z)
 		var/file_path = MAP_IMAGE_PATH + file_name
 		if(!fexists(file_path))
 			failed = TRUE
-			log_unit_test("[using_map.path]-[z] is missing its map image [file_name].")
+			log_unit_test("[GLOB.using_map.path]-[z] is missing its map image [file_name].")
 
 	if(failed)
 		fail("One or more map levels were missing a corresponding map image.")
@@ -198,9 +198,12 @@ datum/unit_test/correct_allowed_spawn_test
 datum/unit_test/correct_allowed_spawn_test/start_test()
 	var/failed = FALSE
 
-	for(var/spawn_name in using_map.allowed_spawns)
+	for(var/spawn_name in GLOB.using_map.allowed_spawns)
 		var/datum/spawnpoint/spawnpoint = spawntypes[spawn_name]
-		if(!spawnpoint.turfs.len)
+		if(!spawnpoint)
+			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] is null!")
+			failed = TRUE
+		else if(!spawnpoint.turfs.len)
 			log_unit_test("Map allows spawning in [spawn_name], but [spawn_name] has no associated spawn turfs.")
 			failed = TRUE
 
@@ -241,7 +244,7 @@ datum/unit_test/ladder_check/start_test()
 
 	return 1
 
-datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, var/turf/destination_turf, var/check_direction, var/other_ladder_direction)
+/datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, var/turf/destination_turf, var/check_direction, var/other_ladder_direction)
 	if(!destination_turf)
 		log_bad("Unable to acquire turf in the [dir2text(check_direction)] for [log_info_line(L)]")
 		return FALSE
@@ -256,10 +259,10 @@ datum/unit_test/ladder_check/proc/check_direction(var/obj/structure/ladder/L, va
 
 //=======================================================================================
 
-datum/unit_test/landmark_check
+/datum/unit_test/landmark_check
 	name = "MAP: Landmark Check"
 
-datum/unit_test/landmark_check/start_test()
+/datum/unit_test/landmark_check/start_test()
 	var/safe_landmarks = 0
 	var/space_landmarks = 0
 
@@ -287,31 +290,163 @@ datum/unit_test/landmark_check/start_test()
 
 //=======================================================================================
 
-datum/unit_test/cryopod_comp_check
+/datum/unit_test/cryopod_comp_check
 	name = "MAP: Cryopod Validity Check"
 
-datum/unit_test/cryopod_comp_check/start_test()
+/datum/unit_test/cryopod_comp_check/start_test()
 	var/pass = TRUE
-	
-	for(var/obj/machinery/cryopod/C in machines)
+
+	for(var/obj/machinery/cryopod/C in GLOB.machines)
 		if(!C.control_computer)
 			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
 			pass = FALSE
-			
-	for(var/obj/machinery/computer/cryopod/C in machines)
+
+	for(var/obj/machinery/computer/cryopod/C in GLOB.machines)
 		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
 			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
 			pass = FALSE
-			
+
 	if(pass)
 		pass("All cryopods have their respective control computers.")
 	else
 		fail("Cryopods were not set up correctly.")
-		
+
 	return 1
 
 //=======================================================================================
 
+/datum/unit_test/camera_nil_c_tag_check
+	name = "MAP: Camera nil c_tag check"
+
+/datum/unit_test/camera_nil_c_tag_check/start_test()
+	var/pass = TRUE
+
+	for(var/obj/machinery/camera/C in world)
+		if(!C.c_tag)
+			log_bad("Following camera does not have a c_tag set: [log_info_line(C)]")
+			pass = FALSE
+
+	if(pass)
+		pass("Have cameras have the c_tag set.")
+	else
+		fail("One or more cameras do not have the c_tag set.")
+
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/camera_unique_c_tag_check
+	name = "MAP: Camera unique c_tag check"
+
+/datum/unit_test/camera_unique_c_tag_check/start_test()
+	var/cameras_by_ctag = list()
+	var/checked_cameras = 0
+
+	for(var/obj/machinery/camera/C in world)
+		if(!C.c_tag)
+			continue
+		checked_cameras++
+		group_by(cameras_by_ctag, C.c_tag, C)
+
+	var/number_of_issues = number_of_issues(cameras_by_ctag, "Camera c_tags", /decl/noi_feedback/detailed)
+	if(number_of_issues)
+		fail("[number_of_issues] issue\s with camera c_tags found.")
+	else
+		pass("[checked_cameras] camera\s have a unique c_tag.")
+
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes
+	name = "MAP: Disposal segments shall connect with other disposal pipes"
+
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes/start_test()
+	var/list/faulty_pipes = list()
+
+	// Desired directions for straight pipes, when encountering curved pipes in the main and reversed dir respectively
+	var/list/straight_desired_directions = list(
+		num2text(SOUTH) = list(list(NORTH, WEST), list(SOUTH, EAST)),
+		num2text(EAST) = list(list(SOUTH, WEST), list(NORTH, EAST)))
+
+	// Desired directions for curved pipes:
+	// list(desired_straight, list(desired_curved_one, desired_curved_two) in the main and curved direction
+	var/list/curved_desired_directions = list(
+		num2text(NORTH) = list(list(SOUTH, list(SOUTH, EAST)), list(EAST,  list(SOUTH, WEST))),
+		num2text(EAST)  = list(list(EAST,  list(SOUTH, WEST)), list(SOUTH, list(NORTH, WEST))),
+		num2text(SOUTH) = list(list(SOUTH, list(NORTH, WEST)), list(EAST,  list(NORTH, EAST))),
+		num2text(WEST)  = list(list(EAST,  list(NORTH, EAST)), list(SOUTH, list(SOUTH, EAST))))
+
+	for(var/obj/structure/disposalpipe/segment/D in world)
+		if(D.icon_state == "pipe-s")
+			if(!(D.dir == SOUTH || D.dir == EAST))
+				log_bad("Following disposal pipe has an invalid direction set: [log_info_line(D)]")
+				continue
+			var/turf/turf_one = get_step(D.loc, D.dir)
+			var/turf/turf_two = get_step(D.loc, turn(D.dir, 180))
+
+			var/list/desired_dirs = straight_desired_directions[num2text(D.dir)]
+			if(!turf_contains_matching_disposal_pipe(turf_one, D.dir, desired_dirs[1]) || !turf_contains_matching_disposal_pipe(turf_two, D.dir, desired_dirs[2]))
+				log_bad("Following disposal pipe does not connect correctly: [log_info_line(D)]")
+				faulty_pipes += D
+		else
+			var/turf/turf_one = get_step(D.loc, D.dir)
+			var/turf/turf_two = get_step(D.loc, turn(D.dir, -90))
+
+			var/list/desired_dirs = curved_desired_directions[num2text(D.dir)]
+			var/main_dirs = desired_dirs[1]
+			var/rev_dirs = desired_dirs[2]
+
+			if(!turf_contains_matching_disposal_pipe(turf_one, main_dirs[1], main_dirs[2]) || !turf_contains_matching_disposal_pipe(turf_two, rev_dirs[1], rev_dirs[2]))
+				log_bad("Following disposal pipe does not connect correctly: [log_info_line(D)]")
+				faulty_pipes += D
+
+	if(faulty_pipes.len)
+		fail("[faulty_pipes.len] disposal segment\s did not connect with other disposal pipes.")
+	else
+		pass("All disposal segments connect with other disposal pipes.")
+
+	return 1
+
+/datum/unit_test/disposal_segments_shall_connect_with_other_disposal_pipes/proc/turf_contains_matching_disposal_pipe(var/turf/T, var/straight_dir, var/list/curved_dirs)
+	if(!T)
+		return FALSE
+
+	// We need to loop over all potential pipes in a turf as long as there isn't a dir match, as they may be overlapping (i.e. 2 straight pipes in a cross)
+	for(var/obj/structure/disposalpipe/D in T)
+		if(D.type == /obj/structure/disposalpipe/segment)
+			if(D.icon_state == "pipe-s")
+				if(D.dir == straight_dir)
+					return TRUE
+			else
+				if(D.dir in curved_dirs)
+					return TRUE
+		else
+			return TRUE
+	return FALSE
+
+
+/obj/machinery/atmospherics/pipe/simple
+
+//=======================================================================================
+
+/datum/unit_test/simple_pipes_shall_not_face_north_or_west // The init code is worthless and cannot handle it
+	name = "MAP: Simple pipes shall not face north or west"
+
+/datum/unit_test/simple_pipes_shall_not_face_north_or_west/start_test()
+	var/failures = 0
+	for(var/obj/machinery/atmospherics/pipe/simple/pipe in GLOB.machines)
+		if(!istype(pipe, /obj/machinery/atmospherics/pipe/simple/hidden) && !istype(pipe, /obj/machinery/atmospherics/pipe/simple/visible))
+			continue
+		if(pipe.dir == NORTH || pipe.dir == WEST)
+			log_bad("Following pipe had an invalid direction: [log_info_line(pipe)]")
+			failures++
+
+	if(failures)
+		fail("[failures] simple pipe\s faced the wrong direction.")
+	else
+		pass("All simple pipes faced an appropriate direction.")
+	return 1
 
 
 #undef SUCCESS

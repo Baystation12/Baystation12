@@ -1,26 +1,41 @@
+/datum/preferences
+	var/med_record = ""
+	var/sec_record = ""
+	var/gen_record = ""
+	var/nanotrasen_relation = "Neutral"
+	var/memory = ""
+
+	//Some faction information.
+	var/home_system = "Unset"           //System of birth.
+	var/citizenship = "None"            //Current home system.
+	var/faction = "None"                //Antag faction/general associated faction.
+	var/religion = "None"               //Religious association.
+
 /datum/category_item/player_setup_item/general/background
 	name = "Background"
 	sort_order = 5
 
 /datum/category_item/player_setup_item/general/background/load_character(var/savefile/S)
-	S["med_record"]				>> pref.med_record
-	S["sec_record"]				>> pref.sec_record
-	S["gen_record"]				>> pref.gen_record
-	S["home_system"]			>> pref.home_system
-	S["citizenship"]			>> pref.citizenship
-	S["faction"]				>> pref.faction
-	S["religion"]				>> pref.religion
-	S["nanotrasen_relation"]	>> pref.nanotrasen_relation
+	from_file(S["med_record"],pref.med_record)
+	from_file(S["sec_record"],pref.sec_record)
+	from_file(S["gen_record"],pref.gen_record)
+	from_file(S["home_system"],pref.home_system)
+	from_file(S["citizenship"],pref.citizenship)
+	from_file(S["faction"],pref.faction)
+	from_file(S["religion"],pref.religion)
+	from_file(S["nanotrasen_relation"],pref.nanotrasen_relation)
+	from_file(S["memory"],pref.memory)
 
 /datum/category_item/player_setup_item/general/background/save_character(var/savefile/S)
-	S["med_record"]				<< pref.med_record
-	S["sec_record"]				<< pref.sec_record
-	S["gen_record"]				<< pref.gen_record
-	S["home_system"]			<< pref.home_system
-	S["citizenship"]			<< pref.citizenship
-	S["faction"]				<< pref.faction
-	S["religion"]				<< pref.religion
-	S["nanotrasen_relation"]	<< pref.nanotrasen_relation
+	to_file(S["med_record"],pref.med_record)
+	to_file(S["sec_record"],pref.sec_record)
+	to_file(S["gen_record"],pref.gen_record)
+	to_file(S["home_system"],pref.home_system)
+	to_file(S["citizenship"],pref.citizenship)
+	to_file(S["faction"],pref.faction)
+	to_file(S["religion"],pref.religion)
+	to_file(S["nanotrasen_relation"],pref.nanotrasen_relation)
+	to_file(S["memory"],pref.memory)
 
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
@@ -32,7 +47,7 @@
 
 /datum/category_item/player_setup_item/general/background/content(var/mob/user)
 	. += "<b>Background Information</b><br>"
-	. += "[using_map.company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[pref.nanotrasen_relation]</a><br/>"
+	. += "[GLOB.using_map.company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[pref.nanotrasen_relation]</a><br/>"
 	. += "Home System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
 	. += "Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
 	. += "Faction: <a href='?src=\ref[src];faction=1'>[pref.faction]</a><br/>"
@@ -48,10 +63,12 @@
 		. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
 		. += "Security Records:<br>"
 		. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
+		. += "Memory:<br>"
+		. += "<a href='?src=\ref[src];set_memory=1'>[TextPreview(pref.memory,40)]</a><br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["nt_relation"])
-		var/new_relation = input(user, "Choose your relation to [using_map.company_name]. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference", pref.nanotrasen_relation)  as null|anything in COMPANY_ALIGNMENTS
+		var/new_relation = input(user, "Choose your relation to [GLOB.using_map.company_name]. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference", pref.nanotrasen_relation)  as null|anything in COMPANY_ALIGNMENTS
 		if(new_relation && CanUseTopic(user))
 			pref.nanotrasen_relation = new_relation
 			return TOPIC_REFRESH
@@ -120,6 +137,12 @@
 		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(sec_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.sec_record = sec_medical
+		return TOPIC_REFRESH
+
+	else if(href_list["set_memory"])
+		var/memes = sanitize(input(user,"Enter memorized information here.","Character Preference", html_decode(pref.memory)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		if(!isnull(memes) && CanUseTopic(user))
+			pref.memory = memes
 		return TOPIC_REFRESH
 
 	return ..()

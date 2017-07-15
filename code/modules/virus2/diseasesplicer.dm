@@ -80,7 +80,7 @@
 	else
 		data["info"] = "No dish loaded."
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "disease_splicer.tmpl", src.name, 400, 600)
 		ui.set_initial_data(data)
@@ -94,12 +94,12 @@
 		scanning -= 1
 		if(!scanning)
 			ping("\The [src] pings, \"Analysis complete.\"")
-			nanomanager.update_uis(src)
+			GLOB.nanomanager.update_uis(src)
 	if(splicing)
 		splicing -= 1
 		if(!splicing)
 			ping("\The [src] pings, \"Splicing operation complete.\"")
-			nanomanager.update_uis(src)
+			GLOB.nanomanager.update_uis(src)
 	if(burning)
 		burning -= 1
 		if(!burning)
@@ -121,13 +121,13 @@
 					d.species = species_buffer
 
 			ping("\The [src] pings, \"Backup disk saved.\"")
-			nanomanager.update_uis(src)
+			GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/computer/diseasesplicer/Topic(href, href_list)
 	if(..()) return 1
 
 	var/mob/user = usr
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
 
 	src.add_fingerprint(user)
 
@@ -162,23 +162,26 @@
 
 	if(href_list["splice"])
 		if(dish)
-			var/target = text2num(href_list["splice"]) // target = 1 to 4 for effects, 5 for species
-			if(memorybank && 0 < target && target <= 4)
-				if(target < memorybank.stage) return // too powerful, catching this for href exploit prevention
+			var/target = text2num(href_list["splice"]) // target = 1+ for effects, -1 for species
+			if(memorybank && target > 0)
+				if(target < memorybank.stage)
+					return // too powerful, catching this for href exploit prevention
 
 				var/datum/disease2/effect/target_effect
 				var/list/illegal_types = list()
 				for(var/datum/disease2/effect/e in dish.virus2.effects)
 					if(e.stage == target)
 						target_effect = e
-					else
+					if(!e.allow_multiple)
 						illegal_types += e.type
-				if(memorybank.type in illegal_types) return
+				if(memorybank.type in illegal_types)
+					to_chat(user, "<span class='warning'>Virus DNA can't hold more than one [memorybank]</span>")
+					return 1
 				dish.virus2.effects -= target_effect
 				dish.virus2.effects += memorybank
 				qdel(target_effect)
 
-			else if(species_buffer && target == 5)
+			else if(species_buffer && target == -1)
 				dish.virus2.affected_species = species_buffer
 
 			else

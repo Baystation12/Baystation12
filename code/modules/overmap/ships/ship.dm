@@ -14,26 +14,26 @@
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
-/obj/effect/overmap/ship/initialize()
-	..()
+/obj/effect/overmap/ship/Initialize()
+	. = ..()
 	for(var/datum/ship_engine/E in ship_engines)
 		if (E.holder.z in map_z)
 			engines |= E
-	for(var/obj/machinery/computer/engines/E in machines)
+	for(var/obj/machinery/computer/engines/E in GLOB.machines)
 		if (E.z in map_z)
 			E.linked = src
 			testing("Engines console at level [E.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/helm/H in machines)
+	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		if (H.z in map_z)
 			nav_control = H
 			H.linked = src
 			H.get_known_sectors()
 			testing("Helm console at level [H.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/navigation/N in machines)
+	for(var/obj/machinery/computer/navigation/N in GLOB.machines)
 		if (N.z in map_z)
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
@@ -67,8 +67,8 @@
 	return res
 
 /obj/effect/overmap/ship/proc/adjust_speed(n_x, n_y)
-	speed[1] = Clamp(speed[1] + n_x, -default_delay, default_delay)
-	speed[2] = Clamp(speed[2] + n_y, -default_delay, default_delay)
+	speed[1] = round(Clamp(speed[1] + n_x, -default_delay, default_delay),0.1)
+	speed[2] = round(Clamp(speed[2] + n_y, -default_delay, default_delay),0.1)
 	for(var/zz in map_z)
 		if(is_still())
 			toggle_move_stars(zz)

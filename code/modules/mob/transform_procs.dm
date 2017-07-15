@@ -68,7 +68,7 @@
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// stop the jams for AIs
 
 
-	var/mob/living/silicon/ai/O = new (loc, using_map.default_law_type,,1)//No MMI but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
 	if(mind)
@@ -311,4 +311,20 @@
 	return 0
 
 
-
+//This is barely a transformation but probably best file for it.
+/mob/living/carbon/human/proc/zombieze()
+	ChangeToHusk()
+	mutations |= CLUMSY //cause zombie
+	src.visible_message("<span class='danger'>\The [src]'s flesh decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You... hunger. Not only for flesh, but to spread your disease.</span>")
+	if(src.mind)
+		src.mind.special_role = "Zombie"
+	log_admin("[key_name(src)] has transformed into a zombie!")
+	Weaken(5)
+	for(var/o in organs)
+		var/obj/item/organ/organ = o
+		organ.vital = 0
+		organ.rejuvenate(1)
+		organ.max_damage *= 5
+		organ.min_broken_damage *= 5
+	verbs += /mob/living/proc/breath_death
+	verbs += /mob/living/proc/consume

@@ -17,7 +17,6 @@
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
-	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/handcuffs.dmi')
 
 /obj/item/weapon/handcuffs/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -49,11 +48,11 @@
 			to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
 
 /obj/item/weapon/handcuffs/proc/can_place(var/mob/target, var/mob/user)
-	if(istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
+	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
 		return 1
 	else
-		for (var/obj/item/weapon/grab/G in target.grabbed_by)
-			if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+		for (var/obj/item/grab/G in target.grabbed_by)
+			if (G.force_danger())
 				return 1
 	return 0
 

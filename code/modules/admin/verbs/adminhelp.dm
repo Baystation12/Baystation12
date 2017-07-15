@@ -29,7 +29,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/list/surnames = list()
 	var/list/forenames = list()
 	var/list/ckeys = list()
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		var/list/indexing = list(M.real_name, M.name)
 		if(M.mind)	indexing += M.mind.name
 
@@ -85,12 +85,33 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>Request for Help: </font>[get_options_bar(mob, 4, 1, 1, 0)][ai_cl]:</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>Request for Help:: </font>[get_options_bar(mob, 2, 1, 1)][ai_cl]:</b> [msg]</span>"
+	// handle ticket
+	var/datum/client_lite/client_lite = client_repository.get_lite_client(src)
+	var/datum/ticket/ticket = get_open_ticket_by_client(client_lite)
+	if(!ticket)
+		ticket = new /datum/ticket(client_lite)
+	else if(ticket.status == TICKET_ASSIGNED)
+		// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket
+		var/admin_found = 0
+		for(var/datum/client_lite/admin in ticket.assigned_admins)
+			var/client/admin_client = client_by_ckey(admin.ckey)
+			if(admin_client)
+				admin_found = 1
+				src.cmd_admin_pm(admin_client, original_msg, ticket)
+				break
+		if(!admin_found)
+			to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so please be patient!</span>")
+		return
+
+	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
+	update_ticket_panels()
+
+	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
-	for(var/client/X in admins)
+	for(var/client/X in GLOB.admins)
 		if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
@@ -101,14 +122,14 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			else
 				to_chat(X, msg)
 	//show it to the person adminhelping too
-	to_chat(src, "<font color='blue'>PM to-<b>Staff </b>: [original_msg]</font>")
-	var/admin_number_present = admins.len - admin_number_afk
+	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
+	var/admin_number_present = GLOB.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)] - !![admin_number_afk ? "All admins AFK ([admin_number_afk])" : "No admins online"]!!")
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
-	admin_pm_repository.store_pm(src, null, original_msg)
+
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 

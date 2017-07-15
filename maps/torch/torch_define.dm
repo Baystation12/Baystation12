@@ -53,7 +53,8 @@
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
 	welcome_text += "Current system:<br /><b>[system_name()]</b><br />"
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br />"
-	welcome_text += "Travel time to Sol:<br /><b>[rand(5,12)] days</b><br />"
+	welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br />"
+	welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br />"
 	welcome_text += "Scan results:<br />"
 	var/list/scan_results = list()
 	for(var/poi in points_of_interest)
@@ -71,7 +72,7 @@
 			welcome_text += "[count] <b>[result]\s</b><br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
-	minor_announcement.Announce(message = "New [using_map.company_name] Update available at all communication consoles.")
+	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
 
 
 

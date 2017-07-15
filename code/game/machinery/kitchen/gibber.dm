@@ -25,7 +25,7 @@
 /obj/machinery/gibber/autogibber/New()
 	..()
 	spawn(5)
-		for(var/i in cardinal)
+		for(var/i in GLOB.cardinal)
 			var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )
 			if(input_obj)
 				if(isturf(input_obj.loc))
@@ -49,7 +49,7 @@
 			M.gib()
 
 
-/obj/machinery/gibber/initialize()
+/obj/machinery/gibber/Initialize()
 	. = ..()
 	update_icon()
 
@@ -89,9 +89,9 @@
 	return 1
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = W
-		if(G.state < GRAB_AGGRESSIVE)
+	if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
+		if(!G.force_danger())
 			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 			return
 		move_into_gibber(user,G.affecting)

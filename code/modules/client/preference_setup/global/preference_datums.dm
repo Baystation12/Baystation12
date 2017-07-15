@@ -61,7 +61,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_lobby_music/toggled(var/mob/preference_mob, var/enabled)
 	if(enabled)
-		using_map.lobby_music.play_to(preference_mob)
+		GLOB.using_map.lobby_music.play_to(preference_mob)
 	else
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))
 
@@ -112,7 +112,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
 	if(!enabled)
-		qdel_null(preference_mob.typing_indicator)
+		QDEL_NULL(preference_mob.typing_indicator)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"

@@ -8,10 +8,20 @@
 	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/obj/item/device/mmi/brain = null
+	var/authorized
 
+/obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
+	if(!authorized)
+		to_chat(user, "<span class='warning'>You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!</span>")
+		authorized = 1
+		return 1
+	. = ..()
 
 /obj/structure/AIcore/attackby(obj/item/P as obj, mob/user as mob)
-
+	if(!authorized)
+		if(access_ai_upload in P.GetAccess())
+			to_chat(user, "<span class='notice'>You swipe [P] at [src] and authorize it to connect into the systems of [GLOB.using_map.full_name].</span>")
+			authorized = 1
 	switch(state)
 		if(0)
 			if(istype(P, /obj/item/weapon/wrench))
@@ -166,6 +176,10 @@
 				return
 
 			if(istype(P, /obj/item/weapon/screwdriver))
+				if(!authorized)
+					to_chat(user, "<span class='warning'>Core fails to connect to the systems of [GLOB.using_map.full_name]!</span>")
+					return
+
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 				if(!brain)

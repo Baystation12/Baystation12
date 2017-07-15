@@ -175,7 +175,7 @@
 			teleatom.visible_message("<span class='danger'>\The [teleatom] bounces off of the portal!</span>")
 		return 0
 
-	if(destination.z in using_map.admin_levels) //centcomm z-level
+	if(destination.z in GLOB.using_map.admin_levels) //centcomm z-level
 		if(istype(teleatom, /obj/mecha))
 			var/obj/mecha/MM = teleatom
 			to_chat(MM.occupant, "<span class='danger'>\The [MM] would not survive the jump to a location so far away!</span>")

@@ -172,10 +172,10 @@
 	var/list/station_apcs = list()
 	var/list/offstation_apcs = list()
 
-	for(var/obj/machinery/power/apc/A in machines)
+	for(var/obj/machinery/power/apc/A in GLOB.machines)
 		if(A.hacker && A.hacker == user)
 			continue
-		if(A.z in using_map.station_levels)
+		if(A.z in GLOB.using_map.station_levels)
 			station_apcs.Add(A)
 		else
 			offstation_apcs.Add(A)
@@ -191,7 +191,7 @@
 		return
 
 	var/list/L = list()
-	for(var/mob/living/silicon/robot/RB in mob_list)
+	for(var/mob/living/silicon/robot/RB in GLOB.mob_list)
 		if(istype(RB, /mob/living/silicon/robot/drone))
 			continue
 		if(RB.connected_ai == A)
@@ -209,7 +209,7 @@
 		return
 
 	var/list/L = list()
-	for(var/mob/living/silicon/ai/AT in mob_list)
+	for(var/mob/living/silicon/ai/AT in GLOB.mob_list)
 		if(L == A)
 			continue
 		L.Add(AT)

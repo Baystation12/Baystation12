@@ -24,7 +24,7 @@ var/warrant_uid = 0
 	name = "Warrant Assistant"
 	var/datum/data/record/warrant/activewarrant
 
-/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(activewarrant)
@@ -33,20 +33,33 @@ var/warrant_uid = 0
 		data["warrantauth"] = activewarrant.fields["auth"]
 		data["type"] = activewarrant.fields["arrestsearch"]
 	else
-		var/list/allwarrants = list()
-		for(var/datum/data/record/warrant/W in data_core.warrants)
-			allwarrants.Add(list(list(
+		var/list/arrestwarrants = list()
+		var/list/searchwarrants = list()
+		var/list/archivedwarrants = list()
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
+			var/charges = W.fields["charges"]
+			if(lentext(charges) > 50)
+				charges = copytext(charges, 1, 50) + "..."
+			var/warrant = list(
 			"warrantname" = W.fields["namewarrant"],
-			"charges" = "[copytext(W.fields["charges"],1,min(length(W.fields["charges"]) + 1, 50))]...",
+			"charges" = charges,
 			"auth" = W.fields["auth"],
 			"id" = W.warrant_id,
-			"arrestsearch" = W.fields["arrestsearch"]
-		)))
-		data["allwarrants"] = allwarrants
+			"arrestsearch" = W.fields["arrestsearch"],
+			"archived" = W.archived)
+			if (warrant["archived"])
+				archivedwarrants.Add(list(warrant))
+			else if(warrant["arrestsearch"] == "arrest")
+				arrestwarrants.Add(list(warrant))
+			else
+				searchwarrants.Add(list(warrant))
+		data["arrestwarrants"] = arrestwarrants.len ? arrestwarrants : null
+		data["searchwarrants"] = searchwarrants.len ? searchwarrants : null
+		data["archivedwarrants"] = archivedwarrants.len? archivedwarrants :null
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "digitalwarrant.tmpl", name, 500, 350, state = state)
+		ui = new(user, src, ui_key, "digitalwarrant.tmpl", name, 700, 450, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
@@ -60,7 +73,7 @@ var/warrant_uid = 0
 
 	if(href_list["editwarrant"])
 		. = 1
-		for(var/datum/data/record/warrant/W in data_core.warrants)
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			if(W.warrant_id == text2num(href_list["editwarrant"]))
 				activewarrant = W
 				break
@@ -77,18 +90,31 @@ var/warrant_uid = 0
 		to_chat(user, "Authentication error: Unable to locate ID with apropriate access to allow this operation.")
 		return
 
+	if(href_list["sendtoarchive"])
+		. = 1
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
+			if(W.warrant_id == text2num(href_list["sendtoarchive"]))
+				W.archived = TRUE
+				break
+
+	if(href_list["restore"])
+		. = 1
+		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
+			if(W.warrant_id == text2num(href_list["restore"]))
+				W.archived = FALSE
+				break
+
 	if(href_list["addwarrant"])
 		. = 1
 		var/datum/data/record/warrant/W = new()
-		var/temp = sanitize(input(usr, "Do you want to create a search-, or an arrest warrant?") as null|anything in list("search","arrest"))
-		if(CanInteract(user, default_state))
-			if(temp == "arrest")
+		if(CanInteract(user, GLOB.default_state))
+			if(href_list["addwarrant"] == "arrest")
 				W.fields["namewarrant"] = "Unknown"
 				W.fields["charges"] = "No charges present"
 				W.fields["auth"] = "Unauthorized"
 				W.fields["arrestsearch"] = "arrest"
-			if(temp == "search")
-				W.fields["namewarrant"] = "No location given"
+			if(href_list["addwarrant"] == "search")
+				W.fields["namewarrant"] = "Unknown"
 				W.fields["charges"] = "No reason given"
 				W.fields["auth"] = "Unauthorized"
 				W.fields["arrestsearch"] = "search"
@@ -96,44 +122,51 @@ var/warrant_uid = 0
 
 	if(href_list["savewarrant"])
 		. = 1
-		data_core.warrants |= activewarrant
+		broadcast_holowarrant_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
+		GLOB.data_core.warrants |= activewarrant
 		activewarrant = null
 
 	if(href_list["deletewarrant"])
 		. = 1
-		data_core.warrants -= activewarrant
+		if(!activewarrant)
+			for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
+				if(W.warrant_id == text2num(href_list["deletewarrant"]))
+					activewarrant = W
+					break
+		GLOB.data_core.warrants -= activewarrant
 		activewarrant = null
 
 	if(href_list["editwarrantname"])
 		. = 1
 		var/namelist = list()
-		for(var/datum/data/record/t in data_core.general)
+		for(var/datum/data/record/t in GLOB.data_core.general)
 			namelist += t.fields["name"]
 		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
-		if(CanInteract(user, default_state))
-			if (!new_name)
+		if(CanInteract(user, GLOB.default_state))
+			if (!new_name || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
 
 	if(href_list["editwarrantnamecustom"])
 		. = 1
 		var/new_name = sanitize(input("Please input name") as null|text)
-		if(CanInteract(user, default_state))
-			if (!new_name)
+		if(CanInteract(user, GLOB.default_state))
+			if (!new_name || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
 
 	if(href_list["editwarrantcharges"])
 		. = 1
 		var/new_charges = sanitize(input("Please input charges", "Charges", activewarrant.fields["charges"]) as null|text)
-		if(CanInteract(user, default_state))
-			if (!new_charges)
+		if(CanInteract(user, GLOB.default_state))
+			if (!new_charges || !activewarrant)
 				return
 			activewarrant.fields["charges"] = new_charges
 
 	if(href_list["editwarrantauth"])
 		. = 1
-
+		if(!activewarrant)
+			return
 		activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 
 	if(href_list["back"])

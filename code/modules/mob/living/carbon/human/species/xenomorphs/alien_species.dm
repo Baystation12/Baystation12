@@ -1,15 +1,25 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
-	name = "Xenomorph"
-	name_plural = "Xenomorphs"
+	name = "Xenophage"
+	name_plural = "Xenophages"
 
-	default_language = "Xenomorph"
+	default_language = "Xenophage"
 	language = "Hivemind"
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
-	health_hud_intensity = 5
+	health_hud_intensity = 1
 
+	icon_template = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
+	has_floating_eyes = TRUE
+
+	// temp until someone who isn't me makes some for this icon set
+	damage_overlays = null
+	damage_mask =     null
+	blood_mask =      null
+	// end temp
+
+	pixel_offset_x = -16
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
 	gluttonous = GLUT_ANYTHING
@@ -26,12 +36,16 @@
 	cold_level_3 = -1
 
 	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_EMBED
+	appearance_flags = HAS_EYE_COLOR | HAS_SKIN_COLOR
+
 	spawn_flags = SPECIES_IS_RESTRICTED
 
 	reagent_tag = IS_XENOS
 
 	blood_color = "#05EE05"
 	flesh_color = "#282846"
+	base_color =  "#00060c"
+
 	gibbed_anim = "gibbed-a"
 	dusted_anim = "dust-a"
 	death_message = "lets out a waning guttural screech, green blood bubbling from its maw."
@@ -46,6 +60,7 @@
 	vision_flags = SEE_SELF|SEE_MOBS
 
 	has_organ = list(
+		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel,
@@ -56,7 +71,7 @@
 	has_limbs = list(
 		"chest" =  list("path" = /obj/item/organ/external/chest/unbreakable),
 		"groin" =  list("path" = /obj/item/organ/external/groin/unbreakable),
-		"head" =   list("path" = /obj/item/organ/external/head/unbreakable),
+		"head" =   list("path" = /obj/item/organ/external/head/unbreakable/xeno),
 		"l_arm" =  list("path" = /obj/item/organ/external/arm/unbreakable),
 		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/unbreakable),
 		"l_leg" =  list("path" = /obj/item/organ/external/leg/unbreakable),
@@ -78,8 +93,12 @@
 
 	genders = list(NEUTER)
 
+/datum/species/xenos/handle_post_spawn(var/mob/living/carbon/human/H)
+	..(H)
+
+
 /datum/species/xenos/get_bodytype(var/mob/living/carbon/H)
-	return "Xenomorph"
+	return "Xenophage"
 
 /datum/species/xenos/get_random_name()
 	return "alien [caste_name] ([alien_number])"
@@ -92,8 +111,8 @@
 	return 0
 
 /datum/species/xenos/hug(var/mob/living/carbon/human/H,var/mob/living/target)
-	H.visible_message("<span class='notice'>[H] caresses [target] with its scythe-like arm.</span>", \
-					"<span class='notice'>You caress [target] with your scythe-like arm.</span>")
+	H.visible_message("<span class='notice'>[H] caresses [target] with countless prickling, needle-like legs.</span>", \
+					"<span class='notice'>You caress [target] with countless prickling, needle-like legs.</span>")
 
 /datum/species/xenos/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -157,23 +176,23 @@
 	return 0
 
 /datum/species/xenos/drone
-	name = "Xenomorph Drone"
+	name = "Xenophage Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
 	slowdown = 1
-	tail = "xenos_drone_tail"
 	rarity_value = 5
-
+	base_color = "#000d1a"
 	icobase = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 
 	has_organ = list(
-		BP_HEART =           /obj/item/organ/internal/heart,
-		BP_BRAIN =           /obj/item/organ/internal/brain/xeno,
+		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/queen,
-		BP_ACID =      /obj/item/organ/internal/xenos/acidgland,
-		BP_HIVE =       /obj/item/organ/internal/xenos/hivenode,
-		BP_RESIN =   /obj/item/organ/internal/xenos/resinspinner,
+		BP_ACID =     /obj/item/organ/internal/xenos/acidgland,
+		BP_HIVE =     /obj/item/organ/internal/xenos/hivenode,
+		BP_RESIN =    /obj/item/organ/internal/xenos/resinspinner,
 		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients
 		)
 
@@ -196,17 +215,18 @@
 
 /datum/species/xenos/hunter
 
-	name = "Xenomorph Hunter"
+	name = "Xenophage Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
 	slowdown = -2
-	total_health = 150
-	tail = "xenos_hunter_tail"
+	total_health = 300
+	base_color = "#001a33"
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 
 	has_organ = list(
+		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/hunter,
@@ -218,24 +238,23 @@
 		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/pry_open,
 		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/leap,
 		/mob/living/carbon/human/proc/psychic_whisper,
 		/mob/living/carbon/human/proc/regurgitate
 		)
 
 /datum/species/xenos/sentinel
-	name = "Xenomorph Sentinel"
+	name = "Xenophage Sentinel"
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
 	slowdown = 0
-	total_health = 125
-	tail = "xenos_sentinel_tail"
-
+	base_color = "#00284d"
+	total_health = 250
 	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
 	has_organ = list(
+		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/sentinel,
@@ -255,19 +274,19 @@
 
 /datum/species/xenos/queen
 
-	name = "Xenomorph Queen"
-	total_health = 250
+	name = "Xenophage Queen"
+	total_health = 500
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
 	slowdown = 4
-	tail = "xenos_queen_tail"
 	rarity_value = 10
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 
 	has_organ = list(
+		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
 		BP_HEART =    /obj/item/organ/internal/heart,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		BP_EGG =      /obj/item/organ/internal/xenos/eggsac,

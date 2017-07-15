@@ -1,5 +1,5 @@
 /datum/game_mode/bughunt
-	name = "Deathsquad & Xenomorph"
+	name = "Deathsquad & Xenophage"
 	round_description = "A mercenary strike force is approaching to eradicate a xenomorph infestation!"
 	extended_round_description = "Mercenaries and xenomorphs spawn in this game mode."
 	config_tag = "bughunt"
