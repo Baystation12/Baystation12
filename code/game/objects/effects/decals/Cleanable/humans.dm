@@ -35,6 +35,9 @@ var/global/list/image/splatter_cache=list()
 		GLOB.processing_objects -= src
 	..(ignore=1)
 
+/obj/effect/decal/cleanable/blood/hide()
+	return
+
 /obj/effect/decal/cleanable/blood/Destroy()
 	GLOB.processing_objects -= src
 	return ..()
