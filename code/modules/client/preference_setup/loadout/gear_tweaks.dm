@@ -113,7 +113,10 @@
 			continue
 		else
 			path = 	contents[metadata[i]]
-		new path(I)
+		if(path)
+			new path(I)
+		else
+			log_debug("Failed to tweak item: Index [i] in [json_encode(metadata)] did not result in a valid path. Valid contents: [json_encode(valid_contents)]")
 
 /*
 * Ragent adjustment
