@@ -9,6 +9,7 @@
 	pixel_y = -128
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
+	universal_understand = 1
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
@@ -59,6 +60,11 @@
 	QDEL_NULL(form)
 	return ..()
 
+/mob/living/deity/verb/return_to_plane()
+	set category = "Godhood"
+
+	eyeobj.forceMove(get_turf(src))
+
 /mob/living/deity/verb/jump_to_follower()
 	set category = "Godhood"
 
@@ -67,9 +73,12 @@
 
 	var/list/could_follow = list()
 	for(var/m in minions)
-		var/datum/mind/mind = m
-		if(mind.current.stat != DEAD)
-			could_follow += mind.current
+		var/datum/mind/M = m
+		if(M.current && M.current.stat != DEAD)
+			could_follow += M.current
+
+	if(!could_follow.len)
+		return
 
 	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow
 	if(choice)

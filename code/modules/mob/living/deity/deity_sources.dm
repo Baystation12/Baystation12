@@ -1,8 +1,23 @@
+/mob/living/deity/proc/add_follower(var/mob/living/L)
+	if(is_follower(L, silent=1))
+		return
+
+	adjust_source(30, L)
+	minions += L.mind
+	if(form)
+		L.faction = form.faction
+
+/mob/living/deity/proc/remove_follower(var/mob/living/L)
+	if(!is_follower(L, silent=1))
+		return
+
+	adjust_source(-30, L)
+
 /mob/living/deity/proc/change_follower(var/mob/living/L, var/adding = 1)
 	if(is_follower(L, silent=1) && adding)
 		return
 
-	add_source(30 * (adding ? 1 : -1), L, 0)
+	adjust_source(30 * (adding ? 1 : -1), L, 0)
 	if(adding)
 		minions += L.mind
 		if(form)
@@ -24,7 +39,7 @@
 			to_chat(src, "<span class='[class]'>You feel your power [amount > 0 ? "increase" : "decrease"][feel][msg ? " [msg]" : ""]</span>")
 
 
-/mob/living/deity/proc/add_source(var/amount, var/atom/source, var/silent = 0, var/msg)
+/mob/living/deity/proc/adjust_source(var/amount, var/atom/source, var/silent = 0, var/msg)
 	adjust_power(amount, silent, msg)
 	if(!ismovable(source))
 		return

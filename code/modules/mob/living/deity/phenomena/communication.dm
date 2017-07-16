@@ -8,6 +8,8 @@
 	var/text_to_send = sanitize(input(linked, "Subjugate a member to your will", "Message a Believer") as text)
 	if(text_to_send)
 		to_chat(L, "<span class='cult'><font size='4'>[text_to_send]</font></span>") //Note to self: make this go to ghosties
+		to_chat(linked, "<span class='notice'>You send the message [text_to_send] to \the [L]</span>")
+		log_and_message_admins("communicated the message \"[text_to_send]\" to [key_name(L)]", linked)
 
 /datum/phenomena/point
 	name = "Point"
@@ -17,6 +19,7 @@
 	var/image/arrow
 
 /datum/phenomena/point/activate(var/atom/a)
+	..()
 	if(!arrow)
 		arrow = image('icons/mob/screen1.dmi', icon_state = "arrow", layer = POINTER_LAYER)
 	var/turf/T = get_turf(a)
@@ -52,6 +55,7 @@
 	if(linked.mob_uplink.uses > punishment_list[pain])
 		to_chat(linked, "<span class='warning'>[pain] costs too much power for you to use on \the [L]</span>")
 		return
+	..()
 	linked.take_cost(punishment_list[pain])
 	switch(pain)
 		if("Pain (0)")
