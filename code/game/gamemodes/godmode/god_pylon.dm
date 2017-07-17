@@ -43,9 +43,11 @@
 
 
 /obj/structure/deity/pylon/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	if(!linked_god || !(M in intuned))
+	if(!linked_god)
 		return
 	if(linked_god.pylon != src)
+		if(!(M in intuned))
+			return
 		for(var/obj/structure/deity/pylon/P in linked_god.structures)
 			if(P == src || linked_god.pylon == P)
 				continue

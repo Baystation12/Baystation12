@@ -21,7 +21,7 @@
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 
-/datum/phenomena/activate(var/mob/living/L)
+/datum/phenomena/warp/activate(var/mob/living/L)
 	..()
 	L.adjustCloneLoss(20)
 	L.Weaken(2)
