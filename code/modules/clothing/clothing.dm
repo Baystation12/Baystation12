@@ -13,15 +13,19 @@
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 
-//Updates the icons of the mob wearing the clothing item, if any.
+// Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
 
-//Updates the vision of the mob wearing the clothing item, if any
+// Updates the vision of the mob wearing the clothing item, if any
 /obj/item/clothing/proc/update_vision()
 	if(isliving(src.loc))
 		var/mob/living/L = src.loc
 		L.handle_vision()
+
+// Checked when equipped, returns true when the wearing mob's vision should be updated
+/obj/item/clothing/proc/needs_vision_update()
+	return flash_protection || tint
 
 /obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -80,6 +84,11 @@
 					to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
 				return 0
 	return 1
+
+/obj/item/clothing/equipped(var/mob/user)
+	if(needs_vision_update())
+		update_vision()
+	return ..()
 
 /obj/item/clothing/proc/refit_for_species(var/target_species)
 	if(!species_restricted)
