@@ -13,15 +13,23 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 	GLOB = src
 
 	var/datum/controller/exclude_these = new
-	gvars_datum_in_built_vars = exclude_these.vars + list("gvars_datum_protected_varlist", "gvars_datum_in_built_vars", "gvars_datum_init_order") + "vars"
+	gvars_datum_in_built_vars = exclude_these.vars + list("gvars_datum_protected_varlist", "gvars_datum_in_built_vars", "gvars_datum_init_order")
 	qdel(exclude_these)
 
-	log_world("[vars.len - gvars_datum_in_built_vars.len] global variables")
+	var/global_vars = vars.len - gvars_datum_in_built_vars.len
+	var/global_procs = length(typesof(/datum/controller/global_vars/proc))
+
+	report_progress("[global_vars] global variables")
+	report_progress("[global_procs] global init procs")
 
 	try
-		Initialize()
+		if(global_vars == global_procs)
+			Initialize()
+		else
+			crash_with("Expected [global_vars] global init procs, were [global_procs].")
 	catch(var/exception/e)
-		to_world_log("Built-in vars which should not be initialized:\n[jointext(gvars_datum_in_built_vars, "\n")]")
+		to_world_log("Vars to be initialized: [json_encode((vars - gvars_datum_in_built_vars))]")
+		to_world_log("Procs used to initialize: [json_encode(typesof(/datum/controller/global_vars/proc))]")
 		throw e
 
 
@@ -53,12 +61,7 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 
 	//See https://github.com/tgstation/tgstation/issues/26954
 	for(var/I in typesof(/datum/controller/global_vars/proc))
-		var/CLEANBOT_RETURNS = "[I]"
-		pass(CLEANBOT_RETURNS)
-
-	for(var/I in (vars - gvars_datum_in_built_vars))
 		var/start_tick = world.time
-		call(src, "InitGlobal[I]")()
-		var/end_tick = world.time
-		if(end_tick - start_tick)
-			warning("Global [I] slept during initialization!")
+		call(src, I)()
+		if(world.time - start_tick)
+			warning("[I] slept during initialization!")
