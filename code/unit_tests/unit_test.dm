@@ -144,7 +144,12 @@ proc/load_unit_test_changes()
 		if(ticker.pregame_timeleft < 175 && !said_msg)
 			said_msg = 1
 			log_unit_test("Pregame Count down has started, giving it 20 seconds to finish.")
-		sleep(1)
+		sleep(world.tick_lag)
+
+	log_unit_test("Awaiting the master process...")
+	while(Master.current_runlevel < RUNLEVEL_LOBBY)
+		sleep(world.tick_lag)
+	log_unit_test("Master process setup.")
 
 	world.save_mode("extended")
 
