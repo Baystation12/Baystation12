@@ -66,7 +66,7 @@
 	if(islist(target))
 		target = target[1]
 	var/turf/T = get_turf(user)
-	if(!istype(target, /turf))
+	if(!ispath(target, /turf))
 		new target(T, connected_god)
 	else
 		var/turf/simulated/floor/deity/F = T.ChangeTurf(/turf/simulated/floor/deity)
