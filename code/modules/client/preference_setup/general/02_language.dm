@@ -69,7 +69,7 @@
 /datum/category_item/player_setup_item/general/language/proc/is_allowed_language(var/mob/user, var/datum/language/lang)
 	if(!user)
 		return TRUE
-	var/datum/species/S = all_species[pref.species]
+	var/datum/species/S = all_species[pref.species] || all_species[SPECIES_HUMAN]
 	if(lang.name in S.secondary_langs)
 		return TRUE
 	if(!(lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang))
