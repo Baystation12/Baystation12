@@ -37,14 +37,23 @@
 	if(eyes_shielded)
 		to_chat(owner, "<span class='notice'>Nearly opaque lenses slide down to shield your eyes.</span>")
 		innate_flash_protection = FLASH_PROTECTION_MAJOR
-		owner.eye_blind += 20
+		owner.eye_blind = 20
+		owner.update_icons()
 	else
 		to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 		innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-		owner.eye_blind = max(0, owner.eye_blind - 20)
+		owner.eye_blind = min(2, owner.eye_blind)
+		process()
+		owner.update_icons()
+
+/obj/item/organ/internal/eyes/nabber/process()
+	if(eyes_shielded)
+		owner.eye_blind = 20
+	..()
 
 /obj/item/organ/internal/phoron
 	name = "phoron storage"
+	icon_state = "stomach"
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
 	var/dexalin_level = 5
@@ -151,44 +160,55 @@
 
 /obj/item/organ/external/chest/nabber
 	name = "thorax"
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/groin/nabber
 	name = "abdomen"
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/arm/nabber
 	name = "left arm"
 	amputation_point = "coxa"
 	icon_position = LEFT
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/arm/right/nabber
 	name = "right arm"
 	amputation_point = "coxa"
 	icon_position = RIGHT
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/leg/nabber
 	name = "left tail side"
 	icon_position = 0
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/leg/right/nabber
 	name = "right tail side"
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/foot/nabber
 	name = "left tail tip"
 	icon_position = 0
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/foot/right/nabber
 	name = "right tail tip"
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/hand/nabber
 	name = "left grasper"
 	icon_position = LEFT
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/hand/right/nabber
 	name = "right grasper"
 	icon_position = RIGHT
+	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/head/nabber
 	name = "head"
 	eye_icon = "eyes_nabber"
 	eye_icon_location = 'icons/mob/nabber_face.dmi'
 	has_lips = 0
+	s_col_blend = ICON_MULTIPLY

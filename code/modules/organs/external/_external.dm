@@ -34,6 +34,7 @@
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
 	var/s_tone                         // Skin tone.
 	var/list/s_col                     // skin colour
+	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
 
