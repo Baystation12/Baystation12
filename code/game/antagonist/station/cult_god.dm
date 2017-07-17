@@ -100,7 +100,7 @@ var/datum/antagonist/godcultist/godcult
 		if(god.is_follower(player.current,1))
 			return god
 
-/mob/living/proc/dpray(var/msg)
+/mob/living/proc/dpray(var/msg as text)
 	set category = "Abilities"
 
 	if(!src.mind || !godcult || !godcult.is_antagonist(mind))
