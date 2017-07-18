@@ -58,7 +58,8 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] has made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>",)
-	affected.createwound(CUT, affected.min_broken_damage/2, 1)
+	var/datum/wound/W = affected.createwound(CUT, affected.min_broken_damage/5)
+	W.autoheal_cutoff = 0  //can' let you heal that Dave
 	affected.clamp()
 	spread_germs_to_organ(affected, user)
 
@@ -97,7 +98,8 @@
 	user.visible_message("<span class='notice'>[user] has constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>",)
 
-	affected.createwound(CUT, affected.min_broken_damage/2, 1)
+	var/datum/wound/W = affected.createwound(CUT, affected.min_broken_damage/2)
+	W.autoheal_cutoff = 0  //can' let you heal that Dave
 	affected.clamp()
 
 /datum/surgery_step/generic/incision_manager/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -124,13 +126,7 @@
 /datum/surgery_step/generic/cut_open/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(!istype(affected))
-			return
-		if(affected.open())
-			var/datum/wound/cut/incision = affected.get_incision()
-			to_chat(user, "<span class='notice'>The [incision.desc] provides enough access, another incision isn't needed.</span>")
-			return SURGERY_FAILURE
-		return target_zone != BP_MOUTH
+		return affected && affected.open() == SURGERY_CLOSED && target_zone != BP_MOUTH
 
 /datum/surgery_step/generic/cut_open/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -143,7 +139,8 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] has made an incision on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made an incision on [target]'s [affected.name] with \the [tool].</span>",)
-	affected.createwound(CUT, affected.min_broken_damage/2, 1)
+	var/datum/wound/W = affected.createwound(CUT, affected.min_broken_damage/5)
+	W.autoheal_cutoff = 0  //can' let you heal that Dave
 	playsound(target.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
 
 /datum/surgery_step/generic/cut_open/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -168,7 +165,7 @@
 /datum/surgery_step/generic/clamp_bleeders/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		return affected && affected.open() && !affected.clamped()
+		return affected && affected.open() && (affected.status & ORGAN_BLEEDING)
 
 /datum/surgery_step/generic/clamp_bleeders/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -197,12 +194,10 @@
 /datum/surgery_step/generic/retract_skin
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
-	/obj/item/weapon/crowbar = 75,
-	/obj/item/weapon/material/knife = 50,	\
+	/obj/item/weapon/crowbar = 75,	\
 	/obj/item/weapon/material/kitchen/utensil/fork = 50
 	)
 
-	priority = 1
 	min_duration = 30
 	max_duration = 40
 
@@ -223,7 +218,7 @@
 	user.visible_message("<span class='notice'>[user] keeps the incision open on [target]'s [affected.name] with \the [tool].</span>",	\
 	"<span class='notice'>You keep the incision open on [target]'s [affected.name] with \the [tool].</span>")
 	var/datum/wound/W = affected.get_incision()
-	W.open_wound(min(W.damage * 2, W.damage_list[1] - W.damage)) //damage up to the max of the wound.
+	W.open_wound(min(W.damage * 1.5, W.damage_list[1] - W.damage)) //damage up to the max of the wound.
 	if(!affected.encased)
 		for(var/obj/item/weapon/implant/I in affected.implants)
 			I.exposed()
@@ -250,37 +245,32 @@
 
 /datum/surgery_step/generic/cauterize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-	if(target_zone == BP_MOUTH || target_zone == BP_EYES)
+	if(target_zone == BP_MOUTH)
 		return FALSE
-	if(!hasorgans(target))
-		return FALSE
+
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!affected)
 		return FALSE
-	if(affected.robotic >= ORGAN_ROBOT)
-		return FALSE
-	if(!affected.get_incision(1))
-		to_chat(user, "<span class='warning'>There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!</span>")
-		return SURGERY_FAILURE
+
 	if(affected.is_stump()) // Copypasting some stuff here to avoid having to modify ..() for a single surgery
-		return affected.status & ORGAN_ARTERY_CUT
+		return (!isslime(target) && target_zone != BP_EYES && affected.robotic < ORGAN_ROBOT && (affected.status & ORGAN_ARTERY_CUT))
 	else
-		return affected.open()
+		return (..() && affected.get_incision(1))
 
 
 /datum/surgery_step/generic/cauterize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/datum/wound/cut/W = affected.get_incision()
-	user.visible_message("[user] is beginning to cauterize[W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool]." , \
-	"You are beginning to cauterize[W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].")
+	user.visible_message("[user] is beginning to cauterize[W ? " \a [W.desc] on" : ""]\the [target]'s [affected.name] with \the [tool]." , \
+	"You are beginning to cauterize[W ? " \a [W.desc] on" : ""]\the [target]'s [affected.name] with \the [tool].")
 	target.custom_pain("Your [affected.name] is being burned!",40,affecting = affected)
 	..()
 
 /datum/surgery_step/generic/cauterize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/datum/wound/cut/W = affected.get_incision()
-	user.visible_message("<span class='notice'>[user] cauterizes[W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].</span>", \
-	"<span class='notice'>You cauterize[W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool].</span>")
+	user.visible_message("<span class='notice'>[user] cauterizes[W ? " \a [W.desc] on" : ""]\the [target]'s [affected.name] with \the [tool].</span>", \
+	"<span class='notice'>You cauterize[W ? " \a [W.desc] on" : ""]\the [target]'s [affected.name] with \the [tool].</span>")
 	if(W)
 		W.close()
 	if(affected.is_stump())

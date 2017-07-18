@@ -40,8 +40,8 @@
 	if(istype(target, /mob/living))
 		charged_item = mob_charge(target)
 
-	if(istype(target, /obj/item/grab))
-		var/obj/item/grab/G = target
+	if(istype(target, /obj/item/weapon/grab))
+		var/obj/item/weapon/grab/G = target
 		if(G.affecting)
 			var/mob/M = G.affecting
 			charged_item = mob_charge(M)

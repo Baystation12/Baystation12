@@ -7,10 +7,10 @@
 
 /obj/item/weapon/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
 	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.
-	U.atmos_init()
+	U.initialize()
 	U.build_network()
 	if (U.node)
-		U.node.atmos_init()
+		U.node.initialize()
 		U.node.build_network()
 
 /obj/item/weapon/circuitboard/unary_atmos/heater

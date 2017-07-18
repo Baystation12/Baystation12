@@ -51,7 +51,7 @@
 		return
 
 	// We are trying to cook a grabbed mob.
-	var/obj/item/grab/G = I
+	var/obj/item/weapon/grab/G = I
 	if(istype(G))
 
 		if(!can_cook_mobs)

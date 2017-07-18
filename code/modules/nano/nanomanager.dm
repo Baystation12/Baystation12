@@ -1,5 +1,3 @@
-GLOBAL_DATUM_INIT(nanomanager, /datum/nanomanager, new) // NanoManager, the manager for Nano UIs.
-
 // This is the window/UI manager for Nano UI
 // There should only ever be one (global) instance of nanomanger
 /datum/nanomanager

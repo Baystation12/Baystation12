@@ -14,7 +14,7 @@
 	var/datum/fake_client/fake_client
 
 /mob/fake_mob/Destroy()
-	QDEL_NULL(fake_client)
+	qdel_null(fake_client)
 	. = ..()
 
 /mob/fake_mob/get_client()

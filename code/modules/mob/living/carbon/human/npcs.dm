@@ -50,9 +50,6 @@
 
 /mob/living/carbon/human/blank/New(var/new_loc)
 	..(new_loc, "Vat-Grown Human")
-
-/mob/living/carbon/human/blank/Initialize(var/new_loc)
-	. = ..()
 	var/number = "[pick(possible_changeling_IDs)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
 	var/decl/hierarchy/outfit/outfit = outfit_by_type(/decl/hierarchy/outfit/blank_subject)

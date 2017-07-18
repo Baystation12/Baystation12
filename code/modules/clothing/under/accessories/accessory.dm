@@ -12,9 +12,7 @@
 	var/list/mob_overlay = list()
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi', slot_wear_suit_str = 'icons/mob/ties.dmi')
-	sprite_sheets = list(
-		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi'
-		)
+	sprite_sheets = list() // for species where human variants do not fit
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
 /obj/item/clothing/accessory/Destroy()
@@ -168,8 +166,8 @@
 								else
 									sound = "healthy heartbeat"
 
-							var/obj/item/organ/internal/lungs/L = M.species.breathing_organ
-							if(!L || M.losebreath || !L.active_breathing)
+							var/obj/item/organ/internal/lungs/L = M.internal_organs_by_name[BP_LUNGS]
+							if(!L || M.losebreath)
 								sound += " and no respiration"
 							else if(M.is_lung_ruptured() || M.getOxyLoss() > 50)
 								sound += " and [pick("wheezing","gurgling")] sounds"

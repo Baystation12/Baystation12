@@ -1,7 +1,7 @@
 /mob/Logout()
-	GLOB.nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
+	nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
 	tgui_process && tgui_process.on_logout(src)
-	GLOB.player_list -= src
+	player_list -= src
 	log_access("Logout: [key_name(src)]")
 	handle_admin_logout()
 	hide_client_images()
@@ -14,7 +14,7 @@
 	if(admin_datums[ckey] && ticker && ticker.current_state == GAME_STATE_PLAYING) //Only report this stuff if we are currently playing.
 		var/datum/admins/holder = admin_datums[ckey]
 		message_staff("[holder.rank] logout: [key_name(src)]")
-		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
+		if(!admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			send2adminirc("[key_name(src)] logged out - no more admins online.")
 			if(config.delist_when_no_admins && world.visibility)
 				world.visibility = FALSE

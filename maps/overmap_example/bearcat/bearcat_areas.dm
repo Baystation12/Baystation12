@@ -132,6 +132,18 @@
 	name = "\improper Communications Relay"
 	icon_state = "tcomsatcham"
 
+/area/ship/scrap/shuttle/
+	requires_power = 0
+	luminosity = 1
+	dynamic_lighting = 0
+
+/area/ship/scrap/shuttle/ingoing
+	name = "\improper Docking Bay #1"
+	icon_state = "tcomsatcham"
+
 /area/ship/scrap/shuttle/outgoing
-  name = "\improper Exploration Shuttle"
-  icon_state = "tcomsatcham"
+	name = "\improper Docking Bay #2"
+	icon_state = "tcomsatcham"
+
+/area/ship/scrap/shuttle/pod
+	name = "pod approach"

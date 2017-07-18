@@ -1,3 +1,26 @@
+// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
+var/global/list/default_internal_channels = list(
+	num2text(PUB_FREQ) = list(),
+	num2text(AI_FREQ)  = list(access_synth),
+	num2text(ENT_FREQ) = list(),
+	num2text(ERT_FREQ) = list(access_cent_specops),
+	num2text(COMM_FREQ)= list(access_heads),
+	num2text(ENG_FREQ) = list(access_engine_equip, access_atmospherics),
+	num2text(MED_FREQ) = list(access_medical_equip),
+	num2text(MED_I_FREQ)=list(access_medical_equip),
+	num2text(SEC_FREQ) = list(access_security),
+	num2text(SEC_I_FREQ)=list(access_security),
+	num2text(SCI_FREQ) = list(access_tox,access_robotics,access_xenobiology),
+	num2text(SUP_FREQ) = list(access_cargo),
+	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics)
+)
+
+var/global/list/default_medbay_channels = list(
+	num2text(PUB_FREQ) = list(),
+	num2text(MED_FREQ) = list(access_medical_equip),
+	num2text(MED_I_FREQ) = list(access_medical_equip)
+)
+
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "shortwave radio"
@@ -36,11 +59,24 @@
 		frequency = new_frequency
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
-/obj/item/device/radio/Initialize()
-	. = ..()
+/obj/item/device/radio/New()
+	..()
 	wires = new(src)
-	internal_channels = GLOB.default_internal_channels.Copy()
-	GLOB.listening_objects += src
+	internal_channels = default_internal_channels.Copy()
+	listening_objects += src
+
+/obj/item/device/radio/Destroy()
+	qdel(wires)
+	listening_objects -= src
+	wires = null
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+		for (var/ch_name in channels)
+			radio_controller.remove_object(src, radiochannels[ch_name])
+	return ..()
+
+
+/obj/item/device/radio/initialize()
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
 		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
@@ -48,15 +84,6 @@
 
 	for (var/ch_name in channels)
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
-
-/obj/item/device/radio/Destroy()
-	QDEL_NULL(wires)
-	GLOB.listening_objects -= src
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
-		for (var/ch_name in channels)
-			radio_controller.remove_object(src, radiochannels[ch_name])
-	return ..()
 
 /obj/item/device/radio/attack_self(mob/user as mob)
 	user.set_machine(src)
@@ -90,7 +117,7 @@
 	if(syndie)
 		data["useSyndMode"] = 1
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
 		ui.set_initial_data(data)
@@ -201,7 +228,7 @@
 		return 1
 
 	if(.)
-		GLOB.nanomanager.update_uis(src)
+		nanomanager.update_uis(src)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
@@ -668,7 +695,7 @@
 		. = 1
 
 	if(.)
-		GLOB.nanomanager.update_uis(src)
+		nanomanager.update_uis(src)
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
 	if(!on)
@@ -697,7 +724,7 @@
 	data["has_subspace"] = 1
 	data["subspace"] = subspace_transmission
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
 		ui.set_initial_data(data)
@@ -727,9 +754,9 @@
 	crash_with("attempt to delete a [src.type] detected, and prevented.")
 	return 1
 
-/obj/item/device/radio/announcer/Initialize()
-	. = ..()
-	forceMove(locate(1,1,GLOB.using_map.contact_levels.len ? GLOB.using_map.contact_levels[1] : 1))
+/obj/item/device/radio/announcer/initialize()
+	..()
+	loc = locate(1,1,using_map.contact_levels.len ? using_map.contact_levels[1] : 1)
 
 /obj/item/device/radio/announcer/subspace
 	subspace_transmission = 1
@@ -747,9 +774,4 @@
 
 /obj/item/device/radio/phone/medbay/New()
 	..()
-	internal_channels = GLOB.default_medbay_channels.Copy()
-
-/obj/item/device/radio/CouldUseTopic(var/mob/user)
-	..()
-	if(istype(user, /mob/living/carbon))
-		playsound(src, "button", 10)
+	internal_channels = default_medbay_channels.Copy()

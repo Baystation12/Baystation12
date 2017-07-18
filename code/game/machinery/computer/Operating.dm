@@ -47,7 +47,17 @@
 		dat += {"
 <B>Patient Information:</B><BR>
 <BR>
-[medical_scan_results(victim, 1)]
+<B>Name:</B> [src.victim.real_name]<BR>
+<B>Age:</B> [src.victim.age]<BR>
+<B>Blood Type:</B> [src.victim.b_type]<BR>
+<BR>
+<B>Health:</B> [src.victim.health]<BR>
+<B>Brute Damage:</B> [src.victim.getBruteLoss()]<BR>
+<B>Toxins Damage:</B> [src.victim.getToxLoss()]<BR>
+<B>Fire Damage:</B> [src.victim.getFireLoss()]<BR>
+<B>Suffocation Damage:</B> [src.victim.getOxyLoss()]<BR>
+<B>Patient Status:</B> [src.victim.stat ? "Non-Responsive" : "Stable"]<BR>
+<B>Heartbeat rate:</B> [victim.get_pulse(GETPULSE_TOOL)]<BR>
 "}
 	else
 		src.victim = null

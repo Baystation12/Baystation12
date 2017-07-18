@@ -31,12 +31,12 @@
 
 /datum/controller/process/scheduler/proc/schedule(var/datum/scheduled_task/st)
 	scheduled_tasks += st
-	GLOB.destroyed_event.register(st, src, /datum/controller/process/scheduler/proc/unschedule)
+	destroyed_event.register(st, src, /datum/controller/process/scheduler/proc/unschedule)
 
 /datum/controller/process/scheduler/proc/unschedule(var/datum/scheduled_task/st)
 	if(st in scheduled_tasks)
 		scheduled_tasks -= st
-		GLOB.destroyed_event.unregister(st, src)
+		destroyed_event.unregister(st, src)
 
 /**********
 * Helpers *
@@ -112,11 +112,11 @@
 
 /datum/scheduled_task/source/New(var/trigger_time, var/datum/source, var/procedure, var/list/arguments, var/proc/task_after_process, var/list/task_after_process_args)
 	src.source = source
-	GLOB.destroyed_event.register(src.source, src, /datum/scheduled_task/source/proc/source_destroyed)
+	destroyed_event.register(src.source, src, /datum/scheduled_task/source/proc/source_destroyed)
 	..(trigger_time, procedure, arguments, task_after_process, task_after_process_args)
 
 /datum/scheduled_task/source/Destroy()
-	GLOB.destroyed_event.unregister(src.source, src, /datum/scheduled_task/source/proc/source_destroyed)
+	destroyed_event.unregister(src.source, src, /datum/scheduled_task/source/proc/source_destroyed)
 	source = null
 	return ..()
 

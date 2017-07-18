@@ -328,7 +328,6 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-engineer",
 					"Eyebot" = "eyebot-engineering"
 					)
-	no_slip = 1
 
 /obj/item/weapon/robot_module/engineering/general/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -466,7 +465,7 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
-		S.reagents.add_reagent("lube", 20 * amount)
+		S.reagents.add_reagent("lube", 2 * amount)
 
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"

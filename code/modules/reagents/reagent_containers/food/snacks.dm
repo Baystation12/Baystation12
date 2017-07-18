@@ -2224,8 +2224,8 @@
  *  whole item, transferring the reagents and deleting the whole item, which may
  *  have performance implications.
  */
-/obj/item/weapon/reagent_containers/food/snacks/slice/Initialize()
-	. = ..()
+/obj/item/weapon/reagent_containers/food/snacks/slice/New()
+	..()
 	if(filled)
 		var/obj/item/weapon/reagent_containers/food/snacks/whole = new whole_path()
 		if(whole && whole.slices_num)
@@ -3214,17 +3214,6 @@
 	New()
 		..()
 		reagents.add_reagent("protein", 6)
-
-/obj/item/weapon/reagent_containers/food/snacks/classichotdog
-	name = "classic hotdog"
-	desc = "Going literal."
-	icon_state = "hotcorgi"
-	bitesize = 6
-	center_of_mass = "x=16;y=17"
-
-	New()
-		..()
-		reagents.add_reagent("protein", 16)
 
 /obj/item/weapon/reagent_containers/food/snacks/flatbread
 	name = "flatbread"

@@ -5,13 +5,10 @@
 	icon_state = "sleeper_0"
 	density = 1
 	anchored = 1
-	clicksound = 'sound/machines/buttonbeep.ogg'
-	clickvol = 30
 	var/mob/living/carbon/human/occupant = null
 	var/list/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
-	var/pump
 
 	use_power = 1
 	idle_power_usage = 15
@@ -21,8 +18,7 @@
 	..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 
-/obj/machinery/sleeper/Initialize()
-	. = ..()
+/obj/machinery/sleeper/initialize()
 	update_icon()
 
 /obj/machinery/sleeper/process()
@@ -40,13 +36,6 @@
 					occupant.vessel.trans_to_obj(beaker, pumped + 1)
 		else
 			toggle_filter()
-	if(pump > 0)
-		if(beaker && istype(occupant))
-			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-				for(var/datum/reagent/x in occupant.ingested.reagent_list)
-					occupant.ingested.trans_to_obj(beaker, 3)
-		else
-			toggle_pump()
 
 /obj/machinery/sleeper/update_icon()
 	icon_state = "sleeper_[occupant ? "1" : "0"]"
@@ -57,7 +46,7 @@
 
 	ui_interact(user)
 
-/obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.outside_state)
+/obj/machinery/sleeper/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = outside_state)
 	var/data[0]
 
 	data["power"] = stat & (NOPOWER|BROKEN) ? 0 : 1
@@ -73,11 +62,22 @@
 	data["reagents"] = reagents.Copy()
 
 	if(occupant)
-		var/scan = medical_scan_results(occupant)
-		scan = replacetext(scan,"'notice'","'white'")
-		scan = replacetext(scan,"'warning'","'average'")
-		scan = replacetext(scan,"'danger'","'bad'")
-		data["occupant"] =scan
+		data["occupant"] = 1
+		switch(occupant.stat)
+			if(CONSCIOUS)
+				data["stat"] = "Conscious"
+			if(UNCONSCIOUS)
+				data["stat"] = "Unconscious"
+			if(DEAD)
+				data["stat"] = "<font color='red'>Dead</font>"
+		data["health"] = occupant.health
+		if(ishuman(occupant))
+			var/mob/living/carbon/human/H = occupant
+			data["pulse"] = H.get_pulse(GETPULSE_TOOL)
+		data["brute"] = occupant.getBruteLoss()
+		data["burn"] = occupant.getFireLoss()
+		data["oxy"] = occupant.getOxyLoss()
+		data["tox"] = occupant.getToxLoss()
 	else
 		data["occupant"] = 0
 	if(beaker)
@@ -85,9 +85,8 @@
 	else
 		data["beaker"] = -1
 	data["filtering"] = filtering
-	data["pump"] = pump
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "sleeper.tmpl", "Sleeper UI", 600, 600, state = state)
 		ui.set_initial_data(data)
@@ -111,9 +110,6 @@
 	if(href_list["filter"])
 		if(filtering != text2num(href_list["filter"]))
 			toggle_filter()
-	if(href_list["pump"])
-		if(filtering != text2num(href_list["pump"]))
-			toggle_pump()
 	if(href_list["chemical"] && href_list["amount"])
 		if(occupant && occupant.stat != DEAD)
 			if(href_list["chemical"] in available_chemicals) // Your hacks are bad and you should feel bad
@@ -138,8 +134,6 @@
 
 /obj/machinery/sleeper/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!CanMouseDrop(target, user))
-		return
-	if(!istype(target))
 		return
 	if(target.buckled)
 		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
@@ -166,15 +160,7 @@
 	if(!occupant || !beaker)
 		filtering = 0
 		return
-	to_chat(occupant, "<span class='warning'>You feel like your blood is being sucked away.</span>")
 	filtering = !filtering
-
-/obj/machinery/sleeper/proc/toggle_pump()
-	if(!occupant || !beaker)
-		pump = 0
-		return
-	to_chat(occupant, "<span class='warning'>You feel a tube jammed down your throat.</span>")
-	pump = !pump
 
 /obj/machinery/sleeper/proc/go_in(var/mob/M, var/mob/user)
 	if(!M)
@@ -224,7 +210,6 @@
 		beaker.dropInto(loc)
 		beaker = null
 		toggle_filter()
-		toggle_pump()
 
 /obj/machinery/sleeper/proc/inject_chemical(var/mob/living/user, var/chemical, var/amount)
 	if(stat & (BROKEN|NOPOWER))

@@ -157,8 +157,9 @@
 	if(co != null) carbon_amt = co
 	..()
 
-/obj/effect/spawner/newbomb/Initialize()
-	..()
+/obj/effect/spawner/newbomb/New(newloc)
+	..(newloc)
+
 	var/obj/item/device/transfer_valve/V = new(src.loc)
 	var/obj/item/weapon/tank/phoron/PT = new(V)
 	var/obj/item/weapon/tank/oxygen/OT = new(V)
@@ -192,7 +193,10 @@
 	S.toggle_secure()
 
 	V.update_icon()
-	return INITIALIZE_HINT_QDEL
+
+	qdel(src)
+
+
 
 ///////////////////////
 //One Tank Bombs, WOOOOOOO! -Luke

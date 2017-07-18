@@ -76,9 +76,9 @@
 	settlers = list("[usr]")
 	for(var/i=0; i<3; i++)
 		if(prob(50))
-			settlers += pick(GLOB.first_names_male)
+			settlers += pick(first_names_male)
 		else
-			settlers += pick(GLOB.first_names_female)
+			settlers += pick(first_names_female)
 	num_traitors = 0
 	event = ORION_TRAIL_START
 	port = 0

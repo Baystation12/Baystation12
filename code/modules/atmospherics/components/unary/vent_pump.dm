@@ -64,8 +64,8 @@
 	icon_state = "map_vent_in"
 	external_pressure_bound = 0
 	external_pressure_bound_default = 0
-	internal_pressure_bound = MAX_PUMP_PRESSURE
-	internal_pressure_bound_default = MAX_PUMP_PRESSURE
+	internal_pressure_bound = 2000
+	internal_pressure_bound_default = 2000
 	pressure_checks = 2
 	pressure_checks_default = 2
 
@@ -251,8 +251,8 @@
 	return 1
 
 
-/obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	. = ..()
+/obj/machinery/atmospherics/unary/vent_pump/initialize()
+	..()
 
 	//some vents work his own special way
 	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null

@@ -22,11 +22,11 @@
 	return 1
 
 /obj/machinery/portable_atmospherics/Destroy()
-	QDEL_NULL(air_contents)
-	QDEL_NULL(holding)
+	qdel_null(air_contents)
+	qdel_null(holding)
 	. = ..()
 
-/obj/machinery/portable_atmospherics/Initialize()
+/obj/machinery/portable_atmospherics/initialize()
 	. = ..()
 	spawn()
 		var/obj/machinery/atmospherics/portables_connector/port = locate() in loc

@@ -5,14 +5,11 @@
 	var/find_type = 0
 
 /obj/item/weapon/archaeological_find/New(loc, var/new_item_type)
-	..()
 	if(new_item_type)
 		find_type = new_item_type
 	else
 		find_type = rand(1, MAX_ARCHAEO)
 
-/obj/item/weapon/archaeological_find/Initialize()
-	. = ..()
 	var/item_type = "object"
 	icon_state = "unknown[rand(1,4)]"
 	var/additional_desc = ""
@@ -459,7 +456,7 @@
 		if(talkative)
 			new_item.talking_atom = new(new_item)
 
-		return INITIALIZE_HINT_QDEL
+		qdel(src)
 
 	else if(talkative)
 		src.talking_atom = new(src)

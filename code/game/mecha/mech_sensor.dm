@@ -63,8 +63,7 @@
 	else
 		icon_state = "airlock_sensor_off"
 
-/obj/machinery/mech_sensor/Initialize()
-	. = ..()
+/obj/machinery/mech_sensor/initialize()
 	set_frequency(frequency)
 
 /obj/machinery/mech_sensor/proc/set_frequency(new_frequency)

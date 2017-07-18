@@ -58,7 +58,7 @@
 	if (href_list["setarea"])
 
 		//Probably should consider using another list, but this one will do.
-		var/t_area = input("Select the area to ping.", "Set Target Area", null) as null|anything in GLOB.tagger_locations
+		var/t_area = input("Select the area to ping.", "Set Target Area", null) as null|anything in tagger_locations
 
 		if(!t_area)
 			return

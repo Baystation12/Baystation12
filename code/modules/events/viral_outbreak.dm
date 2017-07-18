@@ -8,11 +8,11 @@ datum/event/viral_outbreak/setup()
 	severity = rand(2, 4)
 
 datum/event/viral_outbreak/announce()
-	GLOB.using_map.level_x_biohazard_announcement(7)
+	using_map.level_x_biohazard_announcement(7)
 
 datum/event/viral_outbreak/start()
 	var/list/candidates = list()	//list of candidate keys
-	for(var/mob/living/carbon/human/G in GLOB.player_list)
+	for(var/mob/living/carbon/human/G in player_list)
 		if(G.client && G.stat != DEAD)
 			candidates += G
 	if(!candidates.len)	return

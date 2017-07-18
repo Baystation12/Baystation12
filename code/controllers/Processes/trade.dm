@@ -5,12 +5,12 @@
 		generateTrader(1)
 
 /datum/controller/process/trade/doWork()
-	for(var/a in GLOB.traders)
+	for(var/a in traders)
 		var/datum/trader/T = a
 		if(!T.tick())
-			GLOB.traders -= T
+			traders -= T
 			qdel(T)
-	if(prob(100-GLOB.traders.len*10))
+	if(prob(100-traders.len*10))
 		generateTrader()
 
 /datum/controller/process/trade/proc/generateTrader(var/stations = 0)
@@ -26,11 +26,11 @@
 	for(var/i in 1 to 10)
 		var/type = pick(possible)
 		var/bad = 0
-		for(var/trader in GLOB.traders)
+		for(var/trader in traders)
 			if(istype(trader,type))
 				bad = 1
 				break
 		if(bad)
 			continue
-		GLOB.traders += new type
+		traders += new type
 		return

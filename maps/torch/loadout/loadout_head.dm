@@ -61,6 +61,6 @@
 	
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
-	path = /obj/item/clothing/head/soft/veteranhat
+	path = /obj/item/clothing/head/soft/sol
 	allowed_roles = NON_MILITARY_ROLES
 

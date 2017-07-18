@@ -127,7 +127,7 @@ datum/objective/anti_revolution/demote
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [using_map.company_name]'s goals. Demote \him[target.current] to assistant."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -135,7 +135,7 @@ datum/objective/anti_revolution/demote
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [using_map.company_name]'s goals. Demote \him[target.current] to assistant."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -228,10 +228,10 @@ datum/objective/hijack/check_completion()
 		return 0
 
 	var/area/shuttle/shuttle_area = get_area(owner.current)
-	if(!istype(shuttle_area) || !(shuttle_area.z in GLOB.using_map.admin_levels))
+	if(!istype(shuttle_area) || !(shuttle_area.z in using_map.admin_levels))
 		return 0
 
-	for(var/mob/living/player in GLOB.player_list)
+	for(var/mob/living/player in player_list)
 		if(is_type_in_list(player.type, list(/mob/living/silicon/ai, /mob/living/silicon/pai)))
 			continue
 		if (!player.mind || player.mind == owner)
@@ -254,7 +254,7 @@ datum/objective/block
 			return 0
 		var/area/shuttle = locate(/area/shuttle/escape/centcom)
 		var/protected_mobs[] = list(/mob/living/silicon/ai, /mob/living/silicon/pai, /mob/living/silicon/robot)
-		for(var/mob/living/player in GLOB.player_list)
+		for(var/mob/living/player in player_list)
 			if(player.type in protected_mobs)	continue
 			if (player.mind)
 				if (player.stat != 2)
@@ -269,13 +269,13 @@ datum/objective/silence
 		if(!evacuation_controller.has_evacuated())
 			return 0
 
-		for(var/mob/living/player in GLOB.player_list)
+		for(var/mob/living/player in player_list)
 			if(player == owner.current)
 				continue
 			if(player.mind)
 				if(player.stat != DEAD)
 					var/turf/T = get_turf(player)
-					if(T && is_type_in_list(T.loc, GLOB.using_map.post_round_safe_areas))
+					if(T && is_type_in_list(T.loc, using_map.post_round_safe_areas))
 						return 0
 		return 1
 
@@ -302,7 +302,7 @@ datum/objective/escape
 			return 0
 
 		var/area/check_area = location.loc
-		return check_area && is_type_in_list(check_area, GLOB.using_map.post_round_safe_areas)
+		return check_area && is_type_in_list(check_area, using_map.post_round_safe_areas)
 
 
 
@@ -492,11 +492,11 @@ datum/objective/steal
 				return found_amount>=target_amount
 
 			if("a functional AI")
-				for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
+				for(var/mob/living/silicon/ai/ai in mob_list)
 					if(ai.stat == DEAD)
 						continue
 					var/turf/T = get_turf(ai)
-					if(owner.current.contains(ai) || (T && is_type_in_list(T.loc, GLOB.using_map.post_round_safe_areas)))
+					if(owner.current.contains(ai) || (T && is_type_in_list(T.loc, using_map.post_round_safe_areas)))
 						return 1
 			else
 
@@ -575,11 +575,11 @@ datum/objective/capture
 		if (ticker)
 			var/n_p = 1 //autowin
 			if (ticker.current_state == GAME_STATE_SETTING_UP)
-				for(var/mob/new_player/P in GLOB.player_list)
+				for(var/mob/new_player/P in player_list)
 					if(P.client && P.ready && P.mind!=owner)
 						n_p ++
 			else if (ticker.current_state == GAME_STATE_PLAYING)
-				for(var/mob/living/carbon/human/P in GLOB.player_list)
+				for(var/mob/living/carbon/human/P in player_list)
 					if(P.client && !(P.mind.changeling) && P.mind!=owner)
 						n_p ++
 			target_amount = min(target_amount, n_p)
@@ -807,7 +807,7 @@ datum/objective/heist/salvage
 	for(var/datum/mind/cult_mind in cult.current_antagonists)
 		if (cult_mind.current && cult_mind.current.stat!=2)
 			var/area/A = get_area(cult_mind.current )
-			if ( is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
+			if ( is_type_in_list(A, using_map.post_round_safe_areas))
 				acolytes_survived++
 	if(acolytes_survived >= target_amount)
 		return 0
@@ -818,7 +818,7 @@ datum/objective/heist/salvage
 	explanation_text = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it. The convert rune is join blood self."
 
 /datum/objective/cult/eldergod/check_completion()
-	return (locate(/obj/singularity/narsie/large) in GLOB.machines)
+	return (locate(/obj/singularity/narsie/large) in machines)
 
 /datum/objective/cult/sacrifice
 	explanation_text = "Conduct a ritual sacrifice for the glory of Nar-Sie."
@@ -826,7 +826,7 @@ datum/objective/heist/salvage
 /datum/objective/cult/sacrifice/find_target()
 	var/list/possible_targets = list()
 	if(!possible_targets.len)
-		for(var/mob/living/carbon/human/player in GLOB.player_list)
+		for(var/mob/living/carbon/human/player in player_list)
 			if(player.mind && !(player.mind in cult))
 				possible_targets += player.mind
 	if(possible_targets.len > 0)

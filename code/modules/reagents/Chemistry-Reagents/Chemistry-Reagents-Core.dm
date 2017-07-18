@@ -152,7 +152,8 @@
 
 	else if(volume >= 10)
 		var/turf/simulated/S = T
-		S.wet_floor(1, TRUE)
+		S.wet = 0
+		S.wet_floor(1)
 
 
 /datum/reagent/water/touch_obj(var/obj/O)

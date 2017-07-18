@@ -91,9 +91,9 @@
 				..()
 		else
 			..()
-	else if(istype(W,/obj/item/grab))
+	else if(istype(W,/obj/item/weapon/grab))
 		if( (state == 1) && hacked)
-			var/obj/item/grab/G = W
+			var/obj/item/weapon/grab/G = W
 			if(ishuman(G.assailant) && iscorgi(G.affecting))
 				G.affecting.loc = src
 				qdel(G)

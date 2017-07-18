@@ -43,7 +43,7 @@
 		qdel(src)
 		return
 
-	GLOB.processing_objects.Add(src)
+	processing_objects.Add(src)
 	..()
 
 /obj/structure/closet/statue/process()
@@ -55,7 +55,7 @@
 		M.setOxyLoss(intialOxy)
 	if (timer <= 0)
 		dump_contents()
-		GLOB.processing_objects.Remove(src)
+		processing_objects.Remove(src)
 		qdel(src)
 
 /obj/structure/closet/statue/dump_contents()

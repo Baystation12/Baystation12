@@ -32,8 +32,8 @@
 		var/turf/T = get_turf(src)
 		if(!istype(T))
 			return
-		add_underlay(T, node1, get_dir(src, node1), node1 ? node1.icon_connect_type : "")
-		add_underlay(T, node2, get_dir(src, node2), node2 ? node2.icon_connect_type : "")
+		add_underlay(T, node1, get_dir(src, node1))
+		add_underlay(T, node2, get_dir(src, node2))
 
 /obj/machinery/atmospherics/valve/hide(var/i)
 	update_underlays()
@@ -143,14 +143,13 @@
 
 	return
 
-/obj/machinery/atmospherics/valve/atmos_init()
-	..()
+/obj/machinery/atmospherics/valve/initialize()
 	normalize_dir()
 
 	var/node1_dir
 	var/node2_dir
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -259,8 +258,8 @@
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/valve/digital/Initialize()
-	. = ..()
+/obj/machinery/atmospherics/valve/digital/initialize()
+	..()
 	if(frequency)
 		set_frequency(frequency)
 

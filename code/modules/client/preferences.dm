@@ -17,12 +17,91 @@ datum/preferences
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
+	var/list/never_be_special_role = list()
+	var/list/sometimes_be_special_role = list()
+	var/list/be_special_role = list()		//Special role selection
+	var/UI_style = "Midnight"
+	var/UI_style_color = "#ffffff"
+	var/UI_style_alpha = 255
 
 	//character preferences
+	var/real_name						//our character's name
+	var/char_lock = 0
+	var/be_random_name = 0				//whether we are a random name every round
+	var/age = 30						//age of character
+	var/spawnpoint = "Default" 			//where this character will spawn (0-2).
+	var/b_type = "A+"	//blood type (not-chooseable)
+	var/backbag = 2						//backpack type
+	var/h_style = "Bald"				//Hair type
+	var/r_hair = 0						//Hair color
+	var/g_hair = 0						//Hair color
+	var/b_hair = 0						//Hair color
+	var/f_style = "Shaved"				//Face hair type
+	var/r_facial = 0					//Face hair color
+	var/g_facial = 0					//Face hair color
+	var/b_facial = 0					//Face hair color
+	var/s_tone = 0						//Skin tone
+	var/r_skin = 0						//Skin color
+	var/g_skin = 0						//Skin color
+	var/b_skin = 0						//Skin color
+	var/r_eyes = 0						//Eye color
+	var/g_eyes = 0						//Eye color
+	var/b_eyes = 0						//Eye color
+	var/species = SPECIES_HUMAN               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
+	var/list/alternate_languages = list() //Secondary language(s)
+	var/list/language_prefixes = list() //Kanguage prefix keys
+	var/list/gear						//Left in for Legacy reasons, will no longer save.
+	var/list/gear_list = list()			//Custom/fluff item loadouts.
+	var/gear_slot = 1					//The current gear save slot
 
+		//Some faction information.
+	var/home_system = "Unset"           //System of birth.
+	var/citizenship = "None"            //Current home system.
+	var/faction = "None"                //Antag faction/general associated faction.
+	var/religion = "None"               //Religious association.
+
+	var/char_branch	= "Civilian"		// military branch
+	var/list/char_rank = list()				// military rank
 		//Mob preview
 	var/icon/preview_icon = null
+
+
+	//Since there can only be 1 high job.
+	var/job_high = null
+	var/list/job_medium = list() //List of all things selected for medium weight
+	var/list/job_low    = list() //List of all the things selected for low weight
+
+	//Keeps track of preferrence for not getting any wanted jobs
+	var/alternate_option = 2
+
+	var/used_skillpoints = 0
+	var/list/skills = list() // skills can range from 0 to 3
+
+	// maps each organ to either null(intact), "cyborg" or "amputated"
+	// will probably not be able to do this for head and torso ;)
+	var/list/organ_data = list()
+	var/list/rlimb_data = list()
+	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
+
+	var/list/flavor_texts = list()
+	var/list/flavour_texts_robot = list()
+
+	var/med_record = ""
+	var/sec_record = ""
+	var/gen_record = ""
+	var/exploit_record = ""
+	var/memory = ""
+	var/disabilities = 0
+
+	var/nanotrasen_relation = "Neutral"
+
+	var/uplinklocation = "PDA"
+
+	// OOC Metadata:
+	var/metadata = ""
+	var/list/ignored_players = list()
 
 	var/client/client = null
 	var/client_ckey = null
@@ -32,6 +111,10 @@ datum/preferences
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
 
+	var/list/relations
+	var/list/relations_info
+
+
 /datum/preferences/New(client/C)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
@@ -40,6 +123,8 @@ datum/preferences
 	for(var/datum/job/job in job_master.occupations)
 		if((job.department != "Service") && (job.department != "Civilian") && (job.department != "Support")) 	continue
 		char_rank += job
+
+	gear = list()
 
 	if(istype(C))
 		client = C
@@ -133,6 +218,7 @@ datum/preferences
 			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
 			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
 
+
 	else
 		dat += "Please create an account to save your preferences."
 
@@ -210,11 +296,12 @@ datum/preferences
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
-			real_name += " [pick(GLOB.last_names)]"
+			real_name += " [pick(last_names)]"
 		else if(firstspace == name_length)
-			real_name += "[pick(GLOB.last_names)]"
+			real_name += "[pick(last_names)]"
 
 	character.fully_replace_character_name(real_name)
+
 
 	character.gender = gender
 	character.age = age
@@ -277,8 +364,7 @@ datum/preferences
 			O.force_icon = null
 			O.name = initial(O.name)
 			O.desc = initial(O.desc)
-	//For species that don't care about your silly prefs
-	character.species.handle_limbs_setup(character)
+
 	if(!is_preview_copy)
 		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN))
 			var/status = organ_data[name]
@@ -355,7 +441,7 @@ datum/preferences
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
 		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = GLOB.using_map.character_load_path(S, i)
+			S.cd = using_map.character_load_path(S, i)
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)

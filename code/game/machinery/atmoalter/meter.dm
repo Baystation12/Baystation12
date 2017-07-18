@@ -11,8 +11,12 @@
 	use_power = 1
 	idle_power_usage = 15
 
-/obj/machinery/meter/Initialize()
-	. = ..()
+/obj/machinery/meter/New()
+	..()
+	src.target = locate(/obj/machinery/atmospherics/pipe) in loc
+	return 1
+
+/obj/machinery/meter/initialize()
 	if (!target)
 		src.target = locate(/obj/machinery/atmospherics/pipe) in loc
 
@@ -109,8 +113,7 @@
 	return 1
 
 
-/obj/machinery/meter/turf/Initialize()
-	. = ..()
+/obj/machinery/meter/turf/initialize()
 	if (!target)
 		src.target = loc
 

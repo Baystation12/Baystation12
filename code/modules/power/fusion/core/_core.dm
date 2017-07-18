@@ -25,13 +25,13 @@ var/list/fusion_cores = list()
 /obj/machinery/power/fusion_core/mapped
 	anchored = 1
 
-/obj/machinery/power/fusion_core/Initialize()
+/obj/machinery/power/fusion_core/initialize()
 	. = ..()
 	connect_to_network()
 	fusion_cores += src
 
 /obj/machinery/power/fusion_core/Destroy()
-	for(var/obj/machinery/computer/fusion_core_control/FCC in GLOB.machines)
+	for(var/obj/machinery/computer/fusion_core_control/FCC in machines)
 		FCC.connected_devices -= src
 		if(FCC.cur_viewed_device == src)
 			FCC.cur_viewed_device = null

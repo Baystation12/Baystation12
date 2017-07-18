@@ -12,17 +12,17 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in GLOB.using_map.station_levels) &&	(z2 in GLOB.using_map.station_levels))
+	if((z1 in using_map.station_levels) &&	(z2 in using_map.station_levels))
 		return 1
 	return 0
 
 /proc/max_default_z_level()
 	var/max_z = 0
-	for(var/z in GLOB.using_map.station_levels)
+	for(var/z in using_map.station_levels)
 		max_z = max(z, max_z)
-	for(var/z in GLOB.using_map.admin_levels)
+	for(var/z in using_map.admin_levels)
 		max_z = max(z, max_z)
-	for(var/z in GLOB.using_map.player_levels)
+	for(var/z in using_map.player_levels)
 		max_z = max(z, max_z)
 	return max_z
 
@@ -62,22 +62,22 @@
 	return heard
 
 /proc/isStationLevel(var/level)
-	return level in GLOB.using_map.station_levels
+	return level in using_map.station_levels
 
 /proc/isNotStationLevel(var/level)
 	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
-	return level in GLOB.using_map.player_levels
+	return level in using_map.player_levels
 
 /proc/isAdminLevel(var/level)
-	return level in GLOB.using_map.admin_levels
+	return level in using_map.admin_levels
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
 
 /proc/isContactLevel(var/level)
-	return level in GLOB.using_map.contact_levels
+	return level in using_map.contact_levels
 
 /proc/circlerange(center=usr,radius=3)
 
@@ -238,8 +238,8 @@
 
 
 	// Try to find all the players who can hear the message
-	for(var/i = 1; i <= GLOB.player_list.len; i++)
-		var/mob/M = GLOB.player_list[i]
+	for(var/i = 1; i <= player_list.len; i++)
+		var/mob/M = player_list[i]
 		if(M)
 			var/turf/ear = get_turf(M)
 			if(ear)
@@ -261,13 +261,13 @@
 			objs += AM
 			hearturfs += get_turf(AM)
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in player_list)
 		if(checkghosts && M.stat == DEAD && M.is_preference_enabled(checkghosts))
 			mobs |= M
 		else if(get_turf(M) in hearturfs)
 			mobs |= M
 
-	for(var/obj/O in GLOB.listening_objects)
+	for(var/obj/O in listening_objects)
 		if(get_turf(O) in hearturfs)
 			objs |= O
 
@@ -338,7 +338,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 			return get_step(start, EAST)
 
 /proc/get_mob_by_key(var/key)
-	for(var/mob/M in GLOB.mob_list)
+	for(var/mob/M in mob_list)
 		if(M.ckey == lowertext(key))
 			return M
 	return null
@@ -350,7 +350,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
 	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in GLOB.player_list)
+		for(var/mob/observer/ghost/G in player_list)
 			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
 					candidates += G.key
@@ -363,7 +363,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
 	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/ghost/G in GLOB.player_list)
+		for(var/mob/observer/ghost/G in player_list)
 			if(MODE_XENOMORPH in G.client.prefs.be_special_role)
 				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien
 					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
@@ -381,7 +381,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 
 /proc/Show2Group4Delay(obj/O, list/group, delay=0)
 	if(!isobj(O))	return
-	if(!group)	group = GLOB.clients
+	if(!group)	group = clients
 	for(var/client/C in group)
 		C.screen += O
 	if(delay)
@@ -502,7 +502,7 @@ datum/projectile_data
 /proc/getOPressureDifferential(var/turf/loc)
 	var/minp=16777216;
 	var/maxp=0;
-	for(var/dir in GLOB.cardinal)
+	for(var/dir in cardinal)
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
 		var/cp=0
 		if(T && istype(T) && T.zone)
@@ -523,7 +523,7 @@ datum/projectile_data
 
 /proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
 	var/list/temps = new/list(4)
-	for(var/dir in GLOB.cardinal)
+	for(var/dir in cardinal)
 		var/direction
 		switch(dir)
 			if(NORTH)

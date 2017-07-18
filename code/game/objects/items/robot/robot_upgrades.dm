@@ -84,7 +84,7 @@
 		return 0
 
 	if(!R.key)
-		for(var/mob/observer/ghost/ghost in GLOB.player_list)
+		for(var/mob/observer/ghost/ghost in player_list)
 			if(ghost.mind && ghost.mind.current == R)
 				R.key = ghost.key
 

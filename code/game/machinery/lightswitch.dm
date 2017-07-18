@@ -15,8 +15,7 @@
 	var/other_area = null
 	var/image/overlay
 
-/obj/machinery/light_switch/Initialize()
-	. = ..()
+/obj/machinery/light_switch/initialize()
 	if(other_area)
 		src.connected_area = locate(other_area)
 	else
@@ -60,7 +59,7 @@
 		return 1
 
 /obj/machinery/light_switch/attack_hand(mob/user)
-	playsound(src, "switch", 30)
+	playsound(src, 'sound/machines/click.ogg', 50)
 	set_state(!on)
 
 /obj/machinery/light_switch/powered()

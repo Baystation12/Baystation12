@@ -13,8 +13,8 @@
 	var/_wifi_id
 	var/datum/wifi/sender/wifi_sender
 
-/obj/machinery/button/Initialize()
-	. = ..()
+/obj/machinery/button/initialize()
+	..()
 	update_icon()
 	if(_wifi_id && !wifi_sender)
 		wifi_sender = new/datum/wifi/sender/button(_wifi_id, src)
@@ -33,7 +33,7 @@
 /obj/machinery/button/attack_hand(mob/living/user)
 	if(..()) return 1
 	if(istype(user, /mob/living/carbon))
-		playsound(src, "button", 60)
+		playsound(src, 'sound/machines/click.ogg', 50)
 	activate(user)
 
 /obj/machinery/button/proc/activate(mob/living/user)
@@ -118,10 +118,10 @@
 /obj/machinery/button/mass_driver
 	name = "mass driver button"
 
-/obj/machinery/button/mass_driver/Initialize()
+/obj/machinery/button/mass_driver/initialize()
 	if(_wifi_id)
 		wifi_sender = new/datum/wifi/sender/mass_driver(_wifi_id, src)
-	. = ..()
+	..()
 
 /obj/machinery/button/mass_driver/activate(mob/living/user)
 	if(active || !istype(wifi_sender))
@@ -163,10 +163,10 @@
 	else
 		icon_state = "doorctrl2"
 
-/obj/machinery/button/toggle/door/Initialize()
+/obj/machinery/button/toggle/door/initialize()
 	if(_wifi_id)
 		wifi_sender = new/datum/wifi/sender/door(_wifi_id, src)
-	. = ..()
+	..()
 
 /obj/machinery/button/toggle/door/activate(mob/living/user)
 	if(operating || !istype(wifi_sender))
@@ -211,8 +211,8 @@
 	var/frequency = 0
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/button/toggle/valve/Initialize()
-	. = ..()
+/obj/machinery/button/toggle/valve/initialize()
+	..()
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/button/toggle/valve/update_icon()

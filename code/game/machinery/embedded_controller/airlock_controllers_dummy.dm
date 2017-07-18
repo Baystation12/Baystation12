@@ -14,10 +14,10 @@
 		appearance = master_controller
 	. = ..()
 
-/obj/machinery/dummy_airlock_controller/Initialize()
+/obj/machinery/dummy_airlock_controller/initialize()
 	. = ..()
 	if(id_tag)
-		for(var/obj/machinery/embedded_controller/radio/airlock/_master in GLOB.machines)
+		for(var/obj/machinery/embedded_controller/radio/airlock/_master in machines)
 			if(_master.id_tag == id_tag)
 				master_controller = _master
 				master_controller.dummy_terminals += src

@@ -58,5 +58,5 @@
 
 	else
 		if(narsimage)
-			QDEL_NULL(narsimage)
-			QDEL_NULL(narglow)
+			qdel_null(narsimage)
+			qdel_null(narglow)

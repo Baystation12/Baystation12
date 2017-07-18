@@ -17,11 +17,11 @@
 
 /obj/item/weapon/gun/energy/temperature/New()
 	..()
-	GLOB.processing_objects.Add(src)
+	processing_objects.Add(src)
 
 
 /obj/item/weapon/gun/energy/temperature/Destroy()
-	GLOB.processing_objects.Remove(src)
+	processing_objects.Remove(src)
 	..()
 
 

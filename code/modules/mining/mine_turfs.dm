@@ -63,7 +63,7 @@ var/list/mining_floors = list()
 
 	overlays.Cut()
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if(update_neighbors && istype(turf_to_check,/turf/simulated/floor/asteroid))
 			var/turf/simulated/floor/asteroid/T = turf_to_check
@@ -132,7 +132,7 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/proc/MineralSpread()
 	if(mineral && mineral.spread)
-		for(var/trydir in GLOB.cardinal)
+		for(var/trydir in cardinal)
 			if(prob(mineral.spread_chance))
 				var/turf/simulated/mineral/target_turf = get_step(src, trydir)
 				if(istype(target_turf) && !target_turf.mineral)

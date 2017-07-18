@@ -68,7 +68,7 @@ var/datum/antagonist/wizard/wizards
 /datum/antagonist/wizard/update_antag_mob(var/datum/mind/wizard)
 	..()
 	wizard.store_memory("<B>Remember:</B> do not forget to prepare your spells.")
-	wizard.current.real_name = "[pick(GLOB.wizard_first)] [pick(GLOB.wizard_second)]"
+	wizard.current.real_name = "[pick(wizard_first)] [pick(wizard_second)]"
 	wizard.current.name = wizard.current.real_name
 
 /datum/antagonist/wizard/equip(var/mob/living/carbon/human/wizard_mob)

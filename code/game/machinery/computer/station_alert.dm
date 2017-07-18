@@ -18,10 +18,10 @@
 /obj/machinery/computer/station_alert/all
 	monitor_type = /datum/nano_module/alarm_monitor/all
 
-/obj/machinery/computer/station_alert/Initialize()
+/obj/machinery/computer/station_alert/initialize()
 	alarm_monitor = new monitor_type(src)
 	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
-	. = ..()
+	..()
 	if(monitor_type)
 		register_monitor(new monitor_type(src))
 

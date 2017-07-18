@@ -6,8 +6,8 @@
 	density = 1
 	flags = OBJ_CLIMBABLE
 
-/obj/structure/largecrate/Initialize()
-	. = ..()
+/obj/structure/largecrate/initialize()
+	..()
 	for(var/obj/I in src.loc)
 		if(I.density || I.anchored || I == src || !I.simulated)
 			continue

@@ -34,7 +34,7 @@
 	var/list/stored_data = list()
 
 /obj/item/weapon/cartridge/Destroy()
-	QDEL_NULL(radio)
+	qdel_null(radio)
 	return ..()
 
 /obj/item/weapon/cartridge/engineering
@@ -62,9 +62,9 @@
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/security/Initialize()
+/obj/item/weapon/cartridge/security/initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
-	. = ..()
+	..()
 
 /obj/item/weapon/cartridge/detective
 	name = "\improper D.E.T.E.C.T. cartridge"
@@ -114,9 +114,9 @@
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/signal/Initialize()
+/obj/item/weapon/cartridge/signal/initialize()
     radio = new /obj/item/radio/integrated/signal(src)
-    . = ..()
+    ..()
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"
@@ -143,9 +143,9 @@
 	access_status_display = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos/Initialize()
+/obj/item/weapon/cartridge/hos/initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
-	. = ..()
+	..()
 
 /obj/item/weapon/cartridge/ce
 	name = "\improper Power-On DELUXE"
@@ -168,9 +168,9 @@
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/rd/Initialize()
+/obj/item/weapon/cartridge/rd/initialize()
 	radio = new /obj/item/radio/integrated/signal(src)
-	. = ..()
+	..()
 
 /obj/item/weapon/cartridge/captain
 	name = "\improper Value-PAK cartridge"
@@ -256,7 +256,7 @@
 		var/list/sensors = list()
 		var/obj/machinery/power/sensor/MS = null
 
-		for(var/obj/machinery/power/sensor/S in GLOB.machines)
+		for(var/obj/machinery/power/sensor/S in machines)
 			sensors.Add(list(list("name_tag" = S.name_tag)))
 			if(S.name_tag == selected_sensor)
 				MS = S
@@ -267,7 +267,7 @@
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
 	if(mode == 44 || mode == 441 || mode == 45 || mode ==451)
-		if(istype(active1, /datum/data/record) && (active1 in GLOB.data_core.general))
+		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
 
@@ -280,11 +280,11 @@
 
 	if(mode == 44 || mode == 441)
 		var/medData[0]
-		for(var/datum/data/record/R in sortRecord(GLOB.data_core.general))
+		for(var/datum/data/record/R in sortRecord(data_core.general))
 			medData[++medData.len] = list(Name = R.fields["name"],"ref" = "\ref[R]")
 		values["medical_records"] = medData
 
-		if(istype(active2, /datum/data/record) && (active2 in GLOB.data_core.medical))
+		if(istype(active2, /datum/data/record) && (active2 in data_core.medical))
 			values["medical"] = active2.fields
 			values["medical_exists"] = 1
 		else
@@ -294,11 +294,11 @@
 
 	if(mode == 45 || mode == 451)
 		var/secData[0]
-		for (var/datum/data/record/R in sortRecord(GLOB.data_core.general))
+		for (var/datum/data/record/R in sortRecord(data_core.general))
 			secData[++secData.len] = list(Name = R.fields["name"], "ref" = "\ref[R]")
 		values["security_records"] = secData
 
-		if(istype(active3, /datum/data/record) && (active3 in GLOB.data_core.security))
+		if(istype(active3, /datum/data/record) && (active3 in data_core.security))
 			values["security"] = active3.fields
 			values["security_exists"] = 1
 		else
@@ -347,7 +347,7 @@
 		var/mulebotsData[0]
 		var/count = 0
 
-		for(var/mob/living/bot/mulebot/M in GLOB.living_mob_list_)
+		for(var/mob/living/bot/mulebot/M in living_mob_list_)
 			if(!M.on)
 				continue
 			++count
@@ -371,7 +371,7 @@
 
 	if(mode==47)
 		var/supplyData[0]
-		var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			supplyData["shuttle_moving"] = shuttle.has_arrive_time()
 			supplyData["shuttle_eta"] = shuttle.eta_minutes()
@@ -494,8 +494,8 @@
 			var/datum/data/record/M = locate(href_list["target"])
 			loc:mode = 441
 			mode = 441
-			if (R in GLOB.data_core.general)
-				for (var/datum/data/record/E in GLOB.data_core.medical)
+			if (R in data_core.general)
+				for (var/datum/data/record/E in data_core.medical)
 					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 						M = E
 						break
@@ -507,8 +507,8 @@
 			var/datum/data/record/S = locate(href_list["target"])
 			loc:mode = 451
 			mode = 451
-			if (R in GLOB.data_core.general)
-				for (var/datum/data/record/E in GLOB.data_core.security)
+			if (R in data_core.general)
+				for (var/datum/data/record/E in data_core.security)
 					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 						S = E
 						break

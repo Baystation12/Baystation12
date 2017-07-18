@@ -17,7 +17,7 @@
 	var/radiation_count = 0
 
 /obj/item/device/geiger/New()
-	GLOB.processing_objects |= src
+	processing_objects |= src
 
 /obj/item/device/geiger/process()
 	if(!scanning)

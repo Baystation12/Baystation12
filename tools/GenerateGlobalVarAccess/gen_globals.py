@@ -99,7 +99,7 @@ def FindCompiler():
 	if compiler_path == None and sys.platform == 'win32':
 		# Attempt to look in %ProgramFiles% and %ProgramFiles(x86)% for BYOND.
 		for path in (os.environ['ProgramFiles'], os.environ['ProgramFiles(x86)']):
-			path = os.path.join(path, "BYOND", "bin", "dm.exe")
+			path = os.path.join(path, "BYOND", "bin", "dm.ex")
 
 			if os.access(path, os.F_OK):
 				compiler_path = path

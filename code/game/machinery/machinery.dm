@@ -2,7 +2,7 @@
 Overview:
    Used to create objects that need a per step proc call.  Default definition of 'New()'
    stores a reference to src machine in global 'machines list'.  Default definition
-   of 'Destroy' removes reference to src machine in global 'machines list'.
+   of 'Del' removes reference to src machine in global 'machines list'.
 
 Class Variables:
    use_power (num)
@@ -124,22 +124,19 @@ Class Procs:
 		MyArea = get_area(byond)  \
 	}
 
-	var/clicksound			// sound played on succesful interface use by a carbon lifeform
-	var/clickvol = 40		// sound played on succesful interface use
-
 /obj/machinery/New(l, d=0)
 	SETAREA(src) // Must be done ASAP.
 	..(l)
 	if(d)
 		set_dir(d)
 	if(!machinery_sort_required && ticker)
-		dd_insertObjectList(GLOB.machines, src)
+		dd_insertObjectList(machines, src)
 	else
-		GLOB.machines += src
+		machines += src
 		machinery_sort_required = 1
 
 /obj/machinery/Destroy()
-	GLOB.machines -= src
+	machines -= src
 	if(MyArea && MyArea.machinecache)
 		MyArea.machinecache -= src
 	MyArea = null
@@ -169,7 +166,7 @@ Class Procs:
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.set_dir(pick(GLOB.cardinal))
+		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
 			qdel(pulse2)
@@ -372,8 +369,3 @@ Class Procs:
 
 /datum/proc/remove_visual(mob/M)
 	return
-
-/obj/machinery/CouldUseTopic(var/mob/user)
-	..()
-	if(clicksound && istype(user, /mob/living/carbon))
-		playsound(src, clicksound, clickvol)

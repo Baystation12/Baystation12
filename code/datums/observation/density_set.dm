@@ -8,7 +8,7 @@
 //			/old_density: The density before the change.
 //			/new_density: The density after the change.
 
-GLOBAL_DATUM_INIT(density_set_event, /decl/observ/density_set, new)
+var/decl/observ/density_set/density_set_event = new()
 
 /decl/observ/density_set
 	name = "Density Set"
@@ -21,10 +21,10 @@ GLOBAL_DATUM_INIT(density_set_event, /decl/observ/density_set, new)
 	var/old_density = density
 	. = ..()
 	if(density != old_density)
-		GLOB.density_set_event.raise_event(src, old_density, density)
+		density_set_event.raise_event(src, old_density, density)
 
 /turf/ChangeTurf()
 	var/old_density = opacity
 	. = ..()
 	if(density != old_density)
-		GLOB.density_set_event.raise_event(src, old_density, density)
+		density_set_event.raise_event(src, old_density, density)

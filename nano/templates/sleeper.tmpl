@@ -12,14 +12,44 @@
 {{else}}
 	{{if data.occupant}}
 		<div class="item">
-			<div class="statusDisplay">
-				{{:data.occupant}}
+			<div class="itemLabel">
+			Occupant status:
+			</div>
+			<div class="itemContent">
+				Health: {{:data.health}}% ({{:data.stat}}).
+			</div>
+			<div class="itemLabel">
+				Pulse:
+			</div>
+			<div class="itemContent">
+				{{:data.pulse}}
+			</div>
+			<div class="itemLabel">
+				Brute damage:
+			</div>
+			<div class="itemContent">
+				{{:helper.displayBar(data.brute, 0, 100, (data.brute <= 25) ? 'good' : (data.brute <= 50) ? 'average' : 'bad')}}{{:helper.round(data.brute)}}
+			</div>
+			<div class="itemLabel">
+				Burn severity:
+			</div>
+			<div class="itemContent">
+			{{:helper.displayBar(data.burn, 0, 100, (data.burn <= 25) ? 'good' : (data.burn <= 50) ? 'average' : 'bad')}}{{:helper.round(data.burn)}}
+			</div>
+			<div class="itemLabel">
+				Respiratory damage:
+			</div>
+			<div class="itemContent">
+			{{:helper.displayBar(data.oxy, 0, 100, (data.oxy <= 25) ? 'good' : (data.oxy <= 50) ? 'average' : 'bad')}}{{:helper.round(data.oxy)}}
+			</div>
+			<div class="itemLabel">
+				Toxin content:
+			</div>
+			<div class="itemContent">
+			{{:helper.displayBar(data.tox, 0, 100, (data.tox <= 25) ? 'good' : (data.tox <= 50) ? 'average' : 'bad')}}{{:helper.round(data.tox)}}
 			</div>
 			<div class="itemContent">
 			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : !data.filtering})}}
-			</div>
-			<div class="itemContent">
-			{{:helper.link(data.pump ? "Stomach pump active" : "Stomach pump inactive", null, {'pump' : !data.pump})}}
 			</div>
 			<div class="itemContent">
 				{{:helper.link("Eject occupant", null, {'eject' : 0})}}

@@ -17,7 +17,7 @@
 	var/slowdown_held = 2
 	var/slowdown_worn = 1
 
-/obj/item/weapon/gun/magnetic/railgun/Initialize()
+/obj/item/weapon/gun/magnetic/railgun/initialize()
 
 	capacitor = new initial_capacitor_type(src)
 	capacitor.charge = capacitor.max_charge
@@ -31,7 +31,7 @@
 	slowdown_per_slot[slot_belt] =    slowdown_worn
 	slowdown_per_slot[slot_s_store] = slowdown_worn
 
-	. = ..()
+	..()
 
 // Not going to check type repeatedly, if you code or varedit
 // load_type and get runtime errors, don't come crying to me.

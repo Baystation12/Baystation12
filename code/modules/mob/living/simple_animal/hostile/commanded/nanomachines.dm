@@ -34,8 +34,8 @@
 			if(COMMANDED_HEALING)
 				heal()
 
-/mob/living/simple_animal/hostile/commanded/nanomachine/death(gibbed, deathmessage, show_dead_message)
-	..(null, "dissipates into thin air", "You have been destroyed.")
+/mob/living/simple_animal/hostile/commanded/nanomachine/death()
+	..(null,"Dissipates into thin air")
 	qdel(src)
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/proc/move_to_heal()

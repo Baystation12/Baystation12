@@ -27,13 +27,12 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	// BubbleWrap END
 		color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
 
-	atmos_init()
-		..()
+	initialize()
 		normalize_dir()
 		var/node1_dir
 		var/node2_dir
 
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in cardinal)
 			if(direction&initialize_directions_he)
 				if (!node1_dir)
 					node1_dir = direction
@@ -53,6 +52,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 			return
 
 		update_icon()
+		return
 
 
 	process()
@@ -134,8 +134,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 				initialize_directions_he = WEST
 	// BubbleWrap END
 
-	atmos_init()
-		..()
+	initialize()
 		for(var/obj/machinery/atmospherics/target in get_step(src,initialize_directions))
 			if(target.initialize_directions & get_dir(target,src))
 				node1 = target
@@ -150,3 +149,4 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 			return
 
 		update_icon()
+		return

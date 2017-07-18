@@ -40,8 +40,8 @@
 	message_title = sanitizeSafe(message_title)
 
 	var/msg = FormMessage(message, message_title)
-	for(var/mob/M in GLOB.player_list)
-		if((M.z in GLOB.using_map.contact_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+	for(var/mob/M in player_list)
+		if((M.z in using_map.contact_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
 			if(message_sound)
 				sound_to(M, message_sound)
@@ -98,7 +98,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 
 /proc/level_seven_announcement()
-	GLOB.using_map.level_x_biohazard_announcement(7)
+	using_map.level_x_biohazard_announcement(7)
 
 /proc/ion_storm_announcement()
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
@@ -110,4 +110,5 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 		AnnounceArrivalSimple(character.real_name, rank, join_message)
 
 /proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]")
-	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")
+	if(global_announcer)
+		global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")

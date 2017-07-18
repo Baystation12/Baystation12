@@ -35,8 +35,8 @@
 	faction = "syndicate"
 	status_flags = CANPUSH
 
-/mob/living/simple_animal/hostile/syndicate/death(gibbed, deathmessage, show_dead_message)
-	..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/syndicate/death()
+	..()
 	if(corpse)
 		new corpse (src.loc)
 	if(weapon1)
@@ -150,6 +150,6 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-/mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
-	..(null,"is smashed into pieces!", show_dead_message)
+/mob/living/simple_animal/hostile/viscerator/death()
+	..(null,"is smashed into pieces!")
 	qdel(src)

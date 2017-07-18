@@ -159,10 +159,10 @@
 		return
 
 	var/obj/item/thing = get_equipped_item(disarm_slot)
-
+	
 	if(!thing)
 		return
-
+	
 	drop_from_inventory(thing)
 
 	if(affected.robotic >= ORGAN_ROBOT)
@@ -175,7 +175,7 @@
 		spawn(10)
 			qdel(spark_system)
 
-	else
+	else 
 		var/grasp_name = affected.name
 		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && affected.children.len)
 			var/obj/item/organ/external/hand = pick(affected.children)
@@ -205,18 +205,3 @@
 	var/list/all_bits = internal_organs|organs
 	for(var/obj/item/organ/O in all_bits)
 		O.set_dna(dna)
-
-/mob/living/proc/is_asystole()
-	return FALSE
-
-/mob/living/carbon/human/is_asystole()
-	if(isSynthetic())
-		var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
-		if(istype(C))
-			if(!C.is_usable())
-				return TRUE
-	else if(should_have_organ(BP_HEART))
-		var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
-		if(!istype(heart) || !heart.is_working())
-			return TRUE
-	return FALSE

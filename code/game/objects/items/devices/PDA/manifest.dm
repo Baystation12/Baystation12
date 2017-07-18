@@ -30,7 +30,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 	var/civ[0]
 	var/bot[0]
 	var/misc[0]
-	for(var/datum/data/record/t in GLOB.data_core.general)
+	for(var/datum/data/record/t in data_core.general)
 		var/name = sanitize(t.fields["name"])
 		var/rank = sanitize(t.fields["rank"])
 		var/real_rank = make_list_rank(t.fields["real_rank"])
@@ -42,12 +42,12 @@ name updates also zero the list; although they are not in data_core, synths are 
 		var/mil_branch = null
 		var/mil_rank = null
 
-		if(GLOB.using_map.flags & MAP_HAS_BRANCH && t.fields["mil_branch"] && t.fields["mil_branch"] != "None")
+		if(using_map.flags & MAP_HAS_BRANCH && t.fields["mil_branch"] && t.fields["mil_branch"] != "None")
 			var/datum/mil_branch/branch_datum = mil_branches.get_branch(t.fields["mil_branch"])
 			if(branch_datum)
 				mil_branch = list("full" = branch_datum.name, "short" = branch_datum.name_short)
 
-		if(GLOB.using_map.flags & MAP_HAS_RANK && t.fields["mil_rank"] && t.fields["mil_rank"] != "None")
+		if(using_map.flags & MAP_HAS_RANK && t.fields["mil_rank"] && t.fields["mil_rank"] != "None")
 			var/datum/mil_rank/mil_rank_datum = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 			if(mil_rank_datum)
 				mil_rank = list("full" = mil_rank_datum.name, "short" = mil_rank_datum.name_short)
@@ -163,10 +163,10 @@ name updates also zero the list; although they are not in data_core, synths are 
 
 
 	// Silicons do not have records. See also /datum/datacore/proc/get_manifest
-	for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/ai in mob_list)
 		bot[++bot.len] = list("name" = ai.name, "rank" = "Artificial Intelligence", "active" = null)
 
-	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
+	for(var/mob/living/silicon/robot/robot in mob_list)
 		// No combat/syndicate cyborgs, no drones.
 		if(robot.module && robot.module.hide_on_manifest)
 			continue

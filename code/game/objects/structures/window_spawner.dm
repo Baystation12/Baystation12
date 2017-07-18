@@ -26,13 +26,12 @@
 /obj/effect/wingrille_spawn/attack_generic()
 	activate()
 
-/obj/effect/wingrille_spawn/Initialize()
-	. = ..()
+/obj/effect/wingrille_spawn/initialize()
+	..()
 	if(!win_path)
 		return
 	if(ticker && ticker.current_state < GAME_STATE_PLAYING)
 		activate()
-		return INITIALIZE_HINT_QDEL
 
 /obj/effect/wingrille_spawn/proc/activate()
 	if(activated) return
@@ -51,7 +50,7 @@
 		var/obj/structure/window/new_win = new win_path(loc)
 		handle_window_spawn(new_win)
 	else
-		for (var/dir in GLOB.cardinal)
+		for (var/dir in cardinal)
 			var/turf/T = get_step(src, dir)
 			var/obj/effect/wingrille_spawn/other = locate(type) in T
 			if(!other)
@@ -70,6 +69,7 @@
 	activated = 1
 	for(var/obj/effect/wingrille_spawn/other in neighbours)
 		if(!other.activated) other.activate()
+	qdel(src)
 
 /obj/effect/wingrille_spawn/proc/handle_window_spawn(var/obj/structure/window/W)
 	return

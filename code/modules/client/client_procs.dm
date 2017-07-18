@@ -46,18 +46,16 @@
 	if( findtext(href,"<script",1,0) )
 		world.log << "Attempted use of scripts within a topic call, by [src]"
 		message_admins("Attempted use of scripts within a topic call, by [src]")
-		//qdel(usr)
+		//del(usr)
 		return
 
 	//Admin PM
 	if(href_list["priv_msg"])
 		var/client/C = locate(href_list["priv_msg"])
-		var/datum/ticket/ticket = locate(href_list["ticket"])
-
 		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
 			var/mob/M = C
 			C = M.client
-		cmd_admin_pm(C, null, ticket)
+		cmd_admin_pm(C,null)
 		return
 
 	if(href_list["irc_msg"])
@@ -69,14 +67,6 @@
 			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
-
-	if(href_list["close_ticket"])
-		var/datum/ticket/ticket = locate(href_list["close_ticket"])
-
-		if(isnull(ticket))
-			return
-
-		ticket.close(client_repository.get_lite_client(usr.client))
 
 
 
@@ -132,13 +122,13 @@
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-	GLOB.clients += src
-	GLOB.ckey_directory[ckey] = src
+	clients += src
+	directory[ckey] = src
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
 	if(holder)
-		GLOB.admins += src
+		admins += src
 		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
@@ -196,13 +186,12 @@
 	//DISCONNECT//
 	//////////////
 /client/Del()
-	ticket_panels -= src
-
+	saveclientdb()
 	if(holder)
 		holder.owner = null
-		GLOB.admins -= src
-	GLOB.ckey_directory -= ckey
-	GLOB.clients -= src
+		admins -= src
+	directory -= ckey
+	clients -= src
 	return ..()
 
 /client/Destroy()
@@ -278,7 +267,7 @@
 	var/admin_rank = "Player"
 	if(src.holder)
 		admin_rank = src.holder.rank
-		for(var/client/C in GLOB.clients)
+		for(var/client/C in clients)
 			if(C.staffwarn)
 				C.mob.send_staffwarn(src, "is connected", 0)
 

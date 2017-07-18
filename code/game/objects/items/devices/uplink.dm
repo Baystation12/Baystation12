@@ -46,12 +46,12 @@
 	src.uplink_owner = owner
 	world_uplinks += src
 	uses = telecrystals
-	GLOB.processing_objects += src
+	processing_objects += src
 
 /obj/item/device/uplink/Destroy()
 	uplink_owner = null
 	world_uplinks -= src
-	GLOB.processing_objects -= src
+	processing_objects -= src
 	return ..()
 
 /obj/item/device/uplink/process()
@@ -70,7 +70,7 @@
 
 		discount_item = new_discount_item
 		update_nano_data()
-		GLOB.nanomanager.update_uis(src)
+		nanomanager.update_uis(src)
 
 /obj/item/device/uplink/proc/is_improper_item(var/datum/uplink_item/new_discount_item, discount_amount)
 	if(!new_discount_item)
@@ -113,7 +113,7 @@
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.inventory_state)
+/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = inventory_state)
 	var/title = "Remote Uplink"
 	var/data[0]
 
@@ -128,7 +128,7 @@
 	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)	// No auto-refresh
 		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = uistate)
 		ui.set_initial_data(data)
@@ -155,7 +155,7 @@
 		UI.buy(src, usr)
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
+		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 		ui.close()
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
@@ -186,13 +186,13 @@
 		nanoui_data["items"] = items
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
-		for(var/datum/data/record/L in sortRecord(GLOB.data_core.locked))
+		for(var/datum/data/record/L in sortRecord(data_core.locked))
 			permanentData[++permanentData.len] = list(Name = L.fields["name"],"id" = L.fields["id"])
 		nanoui_data["exploit_records"] = permanentData
 	else if(nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0
 
-		for(var/datum/data/record/L in GLOB.data_core.locked)
+		for(var/datum/data/record/L in data_core.locked)
 			if(L.fields["id"] == exploit_id)
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
@@ -255,5 +255,5 @@
 	..()
 	hidden_uplink = new(src)
 
-/obj/item/device/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.contained_state)
-	return ..()
+/obj/item/device/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = inventory_state)
+	return ..(user,ui_key,ui,force_open, contained_state)

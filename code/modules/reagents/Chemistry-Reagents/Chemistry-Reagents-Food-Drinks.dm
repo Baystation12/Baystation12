@@ -665,7 +665,7 @@
 	adj_sleepy = -3
 	adj_temp = 20
 
-	glass_name = "tea"
+	glass_name = "cup of tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
 	glass_special = list(DRINK_VAPOR)
 
@@ -713,8 +713,7 @@
 		M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
-	if(volume > 15)
-		M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -722,7 +721,6 @@
 		M.adjustToxLoss(2 * removed)
 		M.make_jittery(4)
 		return
-	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)

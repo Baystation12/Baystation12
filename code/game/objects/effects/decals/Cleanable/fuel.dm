@@ -8,17 +8,32 @@
 	var/amount = 1
 
 	New(turf/newLoc,amt=1,nologs=0)
-		..()
 		if(!nologs)
-			log_and_message_admins(" - Liquid fuel has been spilled")
+			message_admins("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[newLoc.x];Y=[newLoc.y];Z=[newLoc.z]'>JMP</a>)")
+			log_game("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z])")
 		src.amount = amt
+
+		var/has_spread = 0
+		//Be absorbed by any other liquid fuel in the tile.
+		for(var/obj/effect/decal/cleanable/liquid_fuel/other in newLoc)
+			if(other != src)
+				other.amount += src.amount
+				other.Spread()
+				has_spread = 1
+				break
+
+		. = ..()
+		if(!has_spread)
+			Spread()
+		else
+			qdel(src)
 
 	proc/Spread(exclude=list())
 		//Allows liquid fuels to sometimes flow into other tiles.
 		if(amount < 15) return //lets suppose welder fuel is fairly thick and sticky. For something like water, 5 or less would be more appropriate.
 		var/turf/simulated/S = loc
 		if(!istype(S)) return
-		for(var/d in GLOB.cardinal)
+		for(var/d in cardinal)
 			var/turf/simulated/target = get_step(src,d)
 			var/turf/simulated/origin = get_turf(src)
 			if(origin.CanPass(null, target, 0, 0) && target.CanPass(null, origin, 0, 0))
@@ -31,14 +46,14 @@
 				else
 					new/obj/effect/decal/cleanable/liquid_fuel(target, amount*0.25,1)
 				amount *= 0.75
-
+						
 
 	flamethrower_fuel
 		icon_state = "mustard"
 		anchored = 0
 		New(newLoc, amt = 1, d = 0)
 			set_dir(d) //Setting this direction means you won't get torched by your own flamethrower.
-			..()
+			. = ..()
 
 		Spread()
 			//The spread for flamethrower fuel is much more precise, to create a wide fire pattern.
@@ -55,20 +70,3 @@
 					O.hotspot_expose((T20C*2) + 380,500) //Light flamethrower fuel on fire immediately.
 
 			amount *= 0.25
-
-
-/obj/effect/decal/cleanable/liquid_fuel/Initialize()
-	var/has_spread = 0
-	//Be absorbed by any other liquid fuel in the tile.
-	for(var/obj/effect/decal/cleanable/liquid_fuel/other in loc)
-		if(other != src)
-			other.amount += src.amount
-			other.Spread()
-			has_spread = 1
-			break
-
-	. = ..()
-	if(!has_spread)
-		Spread()
-	else
-		return INITIALIZE_HINT_QDEL

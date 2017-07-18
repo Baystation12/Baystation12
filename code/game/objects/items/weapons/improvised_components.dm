@@ -30,14 +30,12 @@
 	thrown_force_divisor = 0.1
 
 /obj/item/weapon/material/butterflyhandle/attackby(obj/item/W as obj, mob/user as mob)
-
 	if(istype(W,/obj/item/weapon/material/butterflyblade))
 		var/obj/item/weapon/material/butterflyblade/B = W
 		to_chat(user, "You attach the two concealed blade parts.")
-		var/finished = new /obj/item/weapon/material/butterflyconstruction(user.loc, B.material.name)
+		new /obj/item/weapon/material/butterflyconstruction(user.loc, B.material.name)
 		qdel(W)
 		qdel(src)
-		user.put_in_hands(finished)
 		return
 
 /obj/item/weapon/material/wirerod

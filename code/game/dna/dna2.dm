@@ -366,4 +366,4 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ResetSE()
 
 	unique_enzymes = md5(character.real_name)
-	GLOB.reg_dna[unique_enzymes] = character.real_name
+	reg_dna[unique_enzymes] = character.real_name

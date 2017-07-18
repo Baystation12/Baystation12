@@ -221,22 +221,13 @@
 		mymob.bodytemp.screen_loc = ui_temp
 		hud_elements |= mymob.bodytemp
 
-	if(target.isSynthetic())
-		target.cells = new /obj/screen()
-		target.cells.icon = 'icons/mob/screen1_robot.dmi'
-		target.cells.icon_state = "charge-empty"
-		target.cells.name = "cell"
-		target.cells.screen_loc = ui_nutrition
-		hud_elements |= target.cells
-
-	else if(hud_data.has_nutrition)
+	if(hud_data.has_nutrition)
 		mymob.nutrition_icon = new /obj/screen()
 		mymob.nutrition_icon.icon = ui_style
 		mymob.nutrition_icon.icon_state = "nutrition0"
 		mymob.nutrition_icon.name = "nutrition"
 		mymob.nutrition_icon.screen_loc = ui_nutrition
 		hud_elements |= mymob.nutrition_icon
-
 
 	mymob.pain = new /obj/screen( null )
 

@@ -66,10 +66,11 @@
 
 	var/mob/living/carbon/human/H = user
 	user.visible_message("<span class='warning'>\The [user] calmly slices their finger on \the [src], smeering it over the black stone.</span>","<span class='warning'>You slowly slide your finger down one of \the [src]'s sharp edges, smeering it over its smooth surface.</span>")
-	while(do_after(H,50,src))
+	do
 		user.audible_message("\The [user] utters something under their breath.", "<span class='cult'>You mutter a dark prayer to your master as you feel the stone eat away at your lifeforce.</span>")
 		if(H.should_have_organ(BP_HEART))
 			H.drip(5,get_turf(src))
 		else
 			H.adjustBruteLoss(5)
 		linked_god.adjust_power(1,1)
+	while(do_after(H,100,src))

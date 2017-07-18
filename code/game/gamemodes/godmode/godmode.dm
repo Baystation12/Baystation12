@@ -1,5 +1,5 @@
 /datum/game_mode/godmode
-	name = "Deity"
+	name = "God"
 	round_description = "An otherworldly beast has turned its attention to you and your fellow cremembers."
 	extended_round_description = "The station has been infiltrated by a fanatical group of death-cultists! They will use powers from beyond your comprehension to subvert you to their cause and ultimately please their gods through sacrificial summons and physical immolation! Try to survive!"
 	config_tag = "god"

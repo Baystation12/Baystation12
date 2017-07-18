@@ -3,15 +3,32 @@
 	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	req_access = list(access_all_personal_lockers)
 	var/registered_name = null
-    
-	will_contain = list(
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel_norm)),
-		/obj/item/device/radio/headset
-	)
+
+/obj/structure/closet/secure_closet/personal/New()
+	..()
+	spawn(2)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_norm(src)
+		new /obj/item/device/radio/headset( src )
+	return
+
 
 /obj/structure/closet/secure_closet/personal/patient
 	name = "patient's closet"
-	will_contain = list()
+
+/obj/structure/closet/secure_closet/personal/patient/New()
+	..()
+	spawn(4)
+		// Not really the best way to do this, but it's better than "contents = list()"!
+		for(var/atom/movable/AM in contents)
+			qdel(AM)
+		new /obj/item/clothing/under/color/white( src )
+		new /obj/item/clothing/shoes/white( src )
+	return
+
+
 
 /obj/structure/closet/secure_closet/personal/cabinet
 	icon_state = "cabinetdetective_locked"
@@ -45,7 +62,7 @@
 
 /obj/structure/closet/secure_closet/personal/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.opened)
-		if (istype(W, /obj/item/grab))
+		if (istype(W, /obj/item/weapon/grab))
 			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
 		user.drop_item()
 		if (W) W.forceMove(src.loc)
@@ -77,7 +94,7 @@
 	else
 		to_chat(user, "<span class='warning'>Access Denied</span>")
 	return
-
+	
 /obj/structure/closet/secure_closet/personal/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback, var/audible_feedback)
 	if(!broken)
 		broken = 1
@@ -85,7 +102,7 @@
 		desc = "It appears to be broken."
 		icon_state = src.icon_broken
 		if(visual_feedback)
-			visible_message("<span class='warning'>[visual_feedback]</span>", "<span class='warning'>[audible_feedback]</span>")
+			visible_message("<span class='warning'>[visual_feedback]</span>", "<span class='warning'>[audible_feedback]</span>")	
 		return 1
 
 /obj/structure/closet/secure_closet/personal/verb/reset()

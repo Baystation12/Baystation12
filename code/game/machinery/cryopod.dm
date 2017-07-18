@@ -217,8 +217,9 @@
 		occupant.resting = 1
 	return ..()
 
-/obj/machinery/cryopod/Initialize()
-	. = ..()
+/obj/machinery/cryopod/initialize()
+	..()
+
 	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)
@@ -350,13 +351,13 @@
 
 	if(PDA_Manifest.len)
 		PDA_Manifest.Cut()
-	for(var/datum/data/record/R in GLOB.data_core.medical)
+	for(var/datum/data/record/R in data_core.medical)
 		if ((R.fields["name"] == occupant.real_name))
 			qdel(R)
-	for(var/datum/data/record/T in GLOB.data_core.security)
+	for(var/datum/data/record/T in data_core.security)
 		if ((T.fields["name"] == occupant.real_name))
 			qdel(T)
-	for(var/datum/data/record/G in GLOB.data_core.general)
+	for(var/datum/data/record/G in data_core.general)
 		if ((G.fields["name"] == occupant.real_name))
 			qdel(G)
 
@@ -388,8 +389,8 @@
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 
-	if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
+	if(istype(G, /obj/item/weapon/grab))
+		var/obj/item/weapon/grab/grab = G
 		if(occupant)
 			to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
 			return

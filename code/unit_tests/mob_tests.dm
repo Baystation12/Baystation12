@@ -95,11 +95,6 @@ proc/damage_check(var/mob/living/M, var/damage_type)
 			loss = M.getToxLoss()
 		if(OXY)
 			loss = M.getOxyLoss()
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				var/obj/item/organ/internal/lungs/L = H.internal_organs_by_name["lungs"]
-				if(L)
-					loss = L.oxygen_deprivation
 		if(CLONE)
 			loss = M.getCloneLoss()
 		if(PAIN)

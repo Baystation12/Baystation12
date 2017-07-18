@@ -1,4 +1,4 @@
-/mob/living/silicon/ai/death(gibbed, deathmessage, show_dead_message)
+/mob/living/silicon/ai/death(gibbed)
 
 	if(stat == DEAD)
 		return
@@ -17,5 +17,5 @@
 		var/obj/item/weapon/aicard/card = loc
 		card.update_icon()
 
-	. = ..(gibbed,"gives one shrill beep before falling lifeless.", "You have suffered a critical system failure, and are dead.")
+	. = ..(gibbed,"gives one shrill beep before falling lifeless.")
 	set_density(1)

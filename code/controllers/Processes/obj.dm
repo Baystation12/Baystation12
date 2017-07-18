@@ -5,11 +5,11 @@
 
 /datum/controller/process/obj/started()
 	..()
-	if(!GLOB.processing_objects)
-		GLOB.processing_objects = list()
+	if(!processing_objects)
+		processing_objects = list()
 
 /datum/controller/process/obj/doWork()
-	for(last_object in GLOB.processing_objects)
+	for(last_object in processing_objects)
 		var/datum/O = last_object
 		if(!QDELETED(O))
 			try
@@ -19,8 +19,8 @@
 			SCHECK
 		else
 			catchBadType(O)
-			GLOB.processing_objects -= O
+			processing_objects -= O
 
 /datum/controller/process/obj/statProcess()
 	..()
-	stat(null, "[GLOB.processing_objects.len] object\s")
+	stat(null, "[processing_objects.len] objects")

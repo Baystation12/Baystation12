@@ -1,7 +1,7 @@
 /obj/item/device/taperecorder
 	name = "universal recorder"
 	desc = "A device that can record to cassette tapes, and play them. It automatically translates the content in playback."
-	icon_state = "taperecorder"
+	icon_state = "taperecorder_empty"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
 
@@ -21,17 +21,16 @@
 
 /obj/item/device/taperecorder/New()
 	..()
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
-	GLOB.listening_objects += src
-	update_icon()
+		update_icon()
+	listening_objects += src
 
 /obj/item/device/taperecorder/empty
 	mytape = null
 
 /obj/item/device/taperecorder/Destroy()
-	GLOB.listening_objects -= src
+	listening_objects -= src
 	if(mytape)
 		qdel(mytape)
 		mytape = null
@@ -342,16 +341,16 @@
 
 
 /obj/item/device/taperecorder/update_icon()
-	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-
 	if(!mytape)
-		icon_state = "[bis.base_icon_state]_empty"
+		icon_state = "taperecorder_empty"
 	else if(recording)
-		icon_state = "[bis.base_icon_state]_recording"
+		icon_state = "taperecorder_recording"
 	else if(playing)
-		icon_state = "[bis.base_icon_state]_playing"
+		icon_state = "taperecorder_playing"
 	else
-		icon_state = "[bis.base_icon_state]_idle"
+		icon_state = "taperecorder_idle"
+
+
 
 /obj/item/device/tape
 	name = "tape"

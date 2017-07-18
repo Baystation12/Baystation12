@@ -7,8 +7,7 @@
 //			/mob/sightee:  The mob that had its sight set
 //			/old_see_invisible: see_invisible before the change
 //			/new_see_invisible: see_invisible after the change
-
-GLOBAL_DATUM_INIT(see_invisible_set_event, /decl/observ/see_invisible_set, new)
+var/decl/observ/see_invisible_set/see_invisible_set_event = new()
 
 /decl/observ/see_invisible_set
 	name = "See Invisible Set"
@@ -22,4 +21,4 @@ GLOBAL_DATUM_INIT(see_invisible_set_event, /decl/observ/see_invisible_set, new)
 	var/old_see_invisible = see_invisible
 	if(old_see_invisible != new_see_invisible)
 		see_invisible = new_see_invisible
-		GLOB.see_invisible_set_event.raise_event(src, old_see_invisible, new_see_invisible)
+		see_invisible_set_event.raise_event(src, old_see_invisible, new_see_invisible)

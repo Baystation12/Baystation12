@@ -7,7 +7,7 @@
 //			/mob/equipped:  The mob that unequipped/dropped the item.
 //			/obj/item/item: The unequipped item.
 
-GLOBAL_DATUM_INIT(mob_unequipped_event, /decl/observ/mob_unequipped, new)
+var/decl/observ/mob_unequipped/mob_unequipped_event = new()
 
 /decl/observ/mob_unequipped
 	name = "Mob Unequipped"
@@ -22,7 +22,7 @@ GLOBAL_DATUM_INIT(mob_unequipped_event, /decl/observ/mob_unequipped, new)
 //			/obj/item/item: The unequipped item.
 //			/mob/equipped:  The mob that unequipped/dropped the item.
 
-GLOBAL_DATUM_INIT(item_unequipped_event, /decl/observ/item_unequipped, new)
+var/decl/observ/item_unequipped/item_unequipped_event = new()
 
 /decl/observ/item_unequipped
 	name = "Item Unequipped"
@@ -34,5 +34,5 @@ GLOBAL_DATUM_INIT(item_unequipped_event, /decl/observ/item_unequipped, new)
 
 /obj/item/dropped(var/mob/user)
 	..()
-	GLOB.mob_unequipped_event.raise_event(user, src)
-	GLOB.item_unequipped_event.raise_event(src, user)
+	mob_unequipped_event.raise_event(user, src)
+	item_unequipped_event.raise_event(src, user)

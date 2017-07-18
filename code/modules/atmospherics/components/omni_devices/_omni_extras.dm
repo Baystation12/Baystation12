@@ -40,10 +40,10 @@
 /datum/omni_port/proc/connect()
 	if(node)
 		return
-	master.atmos_init()
+	master.initialize()
 	master.build_network()
 	if(node)
-		node.atmos_init()
+		node.initialize()
 		node.build_network()
 
 /datum/omni_port/proc/disconnect()

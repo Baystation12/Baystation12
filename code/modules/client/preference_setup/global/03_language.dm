@@ -52,3 +52,4 @@
 		if(istype(prefixes) && prefixes.len)
 			preferences["language_prefixes"] = prefixes.Copy()
 		return 1
+

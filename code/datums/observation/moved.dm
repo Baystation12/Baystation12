@@ -8,7 +8,7 @@
 //			/atom/old_loc: The loc before the move.
 //			/atom/new_loc: The loc after the move.
 
-GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
+var/decl/observ/moved/moved_event = new()
 
 /decl/observ/moved
 	name = "Moved"
@@ -27,26 +27,26 @@ GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
 
 /atom/Entered(var/atom/movable/am, var/atom/old_loc)
 	. = ..()
-	GLOB.moved_event.raise_event(am, old_loc, am.loc)
+	moved_event.raise_event(am, old_loc, am.loc)
 
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	if(GLOB.moved_event.has_listeners(am))
-		GLOB.moved_event.register(src, am, /atom/movable/proc/recursive_move)
+	if(moved_event.has_listeners(am))
+		moved_event.register(src, am, /atom/movable/proc/recursive_move)
 
 /atom/movable/Exited(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	GLOB.moved_event.unregister(src, am, /atom/movable/proc/recursive_move)
+	moved_event.unregister(src, am, /atom/movable/proc/recursive_move)
 
 // Entered() typically lifts the moved event, but in the case of null-space we'll have to handle it.
 /atom/movable/Move()
 	var/old_loc = loc
 	. = ..()
 	if(. && !loc)
-		GLOB.moved_event.raise_event(src, old_loc, null)
+		moved_event.raise_event(src, old_loc, null)
 
 /atom/movable/forceMove(atom/destination)
 	var/old_loc = loc
 	. = ..()
 	if(. && !loc)
-		GLOB.moved_event.raise_event(src, old_loc, null)
+		moved_event.raise_event(src, old_loc, null)

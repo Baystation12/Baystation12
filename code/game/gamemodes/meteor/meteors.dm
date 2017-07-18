@@ -70,8 +70,8 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/pick_meteor_start(var/startSide = pick(GLOB.cardinal))
-	var/startLevel = pick(GLOB.using_map.station_levels)
+/proc/pick_meteor_start(var/startSide = pick(cardinal))
+	var/startLevel = pick(using_map.station_levels)
 	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 
 	return list(startLevel, pickedstart)
@@ -223,7 +223,7 @@
 
 /obj/effect/meteor/proc/meteor_effect()
 	if(heavy)
-		for(var/mob/M in GLOB.player_list)
+		for(var/mob/M in player_list)
 			var/turf/T = get_turf(M)
 			if(!T || T.z != src.z)
 				continue

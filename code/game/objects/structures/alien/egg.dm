@@ -10,11 +10,11 @@
 
 /obj/structure/alien/egg/New()
 	..()
-	GLOB.processing_objects += src
+	processing_objects += src
 
 /obj/structure/alien/egg/Destroy()
-	GLOB.processing_objects -= src
-	. = ..()
+	processing_objects -= src
+	..()
 
 /obj/structure/alien/egg/CanUseTopic(var/mob/user)
 	return isghost(user) ? STATUS_INTERACTIVE : STATUS_CLOSE
@@ -29,10 +29,10 @@
 /obj/structure/alien/egg/process()
 	progress++
 	if(progress >= MAX_PROGRESS)
-		for(var/mob/observer/ghost/O in GLOB.ghost_mob_list)
-			if(O.client && O.client.prefs && (MODE_XENOMORPH in O.client.prefs.be_special_role))
-				to_chat(O, "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, O)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>")
-		GLOB.processing_objects -= src
+		for(var/mob/M in dead_mob_list_)
+			if(isghost(M) && M.client && M.client.prefs && (MODE_XENOMORPH in M.client.prefs.be_special_role))
+				to_chat(M, "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, M)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>")
+		processing_objects -= src
 		update_icon()
 
 /obj/structure/alien/egg/update_icon()

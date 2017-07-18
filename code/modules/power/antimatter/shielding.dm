@@ -1,7 +1,7 @@
 //like orange but only checks north/south/east/west for one step
 proc/cardinalrange(var/center)
 	var/list/things = list()
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		var/turf/T = get_step(center, direction)
 		if(!T) continue
 		things += T.contents
@@ -50,7 +50,7 @@ proc/cardinalrange(var/center)
 			break
 
 	if(!control_unit)//No other guys nearby look for a control unit
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in cardinal)
 		for(var/obj/machinery/power/am_control_unit/AMC in cardinalrange(src))
 			if(AMC.add_shielding(src))
 				break
@@ -110,7 +110,7 @@ proc/cardinalrange(var/center)
 
 /obj/machinery/am_shielding/update_icon()
 	overlays.Cut()
-	for(var/direction in GLOB.alldirs)
+	for(var/direction in alldirs)
 		var/machine = locate(/obj/machinery, get_step(loc, direction))
 		if((istype(machine, /obj/machinery/am_shielding) && machine:control_unit == control_unit)||(istype(machine, /obj/machinery/power/am_control_unit) && machine == control_unit))
 			overlays += "shield_[direction]"
@@ -142,7 +142,7 @@ proc/cardinalrange(var/center)
 
 //Scans cards for shields or the control unit and if all there it
 /obj/machinery/am_shielding/proc/core_check()
-	for(var/direction in GLOB.alldirs)
+	for(var/direction in alldirs)
 		var/machine = locate(/obj/machinery, get_step(loc, direction))
 		if(!machine) return 0//Need all for a core
 		if(!istype(machine, /obj/machinery/am_shielding) && !istype(machine, /obj/machinery/power/am_control_unit))	return 0
@@ -151,7 +151,7 @@ proc/cardinalrange(var/center)
 
 /obj/machinery/am_shielding/proc/setup_core()
 	processing = 1
-	GLOB.machines.Add(src)
+	machines.Add(src)
 	if(!control_unit)	return
 	control_unit.linked_cores.Add(src)
 	control_unit.reported_core_efficiency += efficiency

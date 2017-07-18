@@ -35,7 +35,7 @@
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a numeral.</span>")
 
 /proc/is_dir_predicate(var/value, var/feedback_receiver)
-	. = (value in GLOB.alldirs)
+	. = (value in alldirs)
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a direction.</span>")
 

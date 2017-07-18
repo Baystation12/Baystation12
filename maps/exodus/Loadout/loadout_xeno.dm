@@ -80,7 +80,7 @@
 	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
 /datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona, Giant Armoured Serpentid)"
+	display_name = "gear harness (Full Body Prosthetic, Diona)"
 	path = /obj/item/clothing/under/harness
 	sort_category = "Xenowear"
 

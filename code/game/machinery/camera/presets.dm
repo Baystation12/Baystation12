@@ -103,11 +103,11 @@
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
-	if(!(src in GLOB.machines))
+	if(!(src in machines))
 		if(!machinery_sort_required && ticker)
-			dd_insertObjectList(GLOB.machines, src)
+			dd_insertObjectList(machines, src)
 		else
-			GLOB.machines += src
+			machines += src
 			machinery_sort_required = 1
 	update_coverage()
 

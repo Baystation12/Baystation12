@@ -9,10 +9,10 @@
 
 /obj/item/device/assembly/voice/New()
 	..()
-	GLOB.listening_objects += src
+	listening_objects += src
 
 /obj/item/device/assembly/voice/Destroy()
-	GLOB.listening_objects -= src
+	listening_objects -= src
 	return ..()
 
 /obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)

@@ -22,7 +22,7 @@
 
 	if(!enabled)
 		return
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
 		for(var/obj/effect/shield/S in shielded_tile)
 			S.diffuse(5)

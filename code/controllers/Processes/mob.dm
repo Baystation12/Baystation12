@@ -8,11 +8,11 @@
 
 /datum/controller/process/mob/started()
 	..()
-	if(!GLOB.mob_list)
-		GLOB.mob_list = list()
+	if(!mob_list)
+		mob_list = list()
 
 /datum/controller/process/mob/doWork()
-	for(last_object in GLOB.mob_list)
+	for(last_object in mob_list)
 		var/mob/M = last_object
 		if(istype(M) && !QDELETED(M))
 			try
@@ -22,8 +22,8 @@
 			SCHECK
 		else
 			catchBadType(M)
-			GLOB.mob_list -= M
+			mob_list -= M
 
 /datum/controller/process/mob/statProcess()
 	..()
-	stat(null, "[GLOB.mob_list.len] mob\s")
+	stat(null, "[mob_list.len] mobs")

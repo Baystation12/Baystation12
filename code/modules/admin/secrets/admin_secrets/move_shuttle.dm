@@ -13,17 +13,16 @@
 	if (confirm == "Cancel")
 		return
 
-	var/shuttle_tag = input(user, "Which shuttle do you want to move?") as null|anything in shuttle_controller.shuttles
+	var/shuttle_tag = input(user, "Which shuttle do you want to jump?") as null|anything in shuttle_controller.shuttles
 	if (!shuttle_tag) return
 
 	var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
 
-	var/list/destinations = list()
-	for(var/obj/effect/shuttle_landmark/WP in world)
-		destinations += WP
+	var/origin_area = input(user, "Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+	if (!origin_area) return
 
-	var/obj/effect/shuttle_landmark/destination = input(user, "Select the destination.") as null|anything in destinations
-	if (!destination) return
+	var/destination_area = input(user, "Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+	if (!destination_area) return
 
-	S.attempt_move(destination)
-	log_and_message_admins("moved the [shuttle_tag] shuttle to [destination] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[destination.x];Y=[destination.y];Z=[destination.z]'>JMP</a>)", user)
+	S.move(origin_area, destination_area)
+	log_and_message_admins("moved the [shuttle_tag] shuttle", user)

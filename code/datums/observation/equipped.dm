@@ -7,8 +7,7 @@
 //			/mob/equipper:  The mob that equipped the item.
 //			/obj/item/item: The equipped item.
 //			slot:           The slot equipped to.
-
-GLOBAL_DATUM_INIT(mob_equipped_event, /decl/observ/mob_equipped, new)
+var/decl/observ/mob_equipped/mob_equipped_event = new()
 
 /decl/observ/mob_equipped
 	name = "Mob Equipped"
@@ -23,8 +22,7 @@ GLOBAL_DATUM_INIT(mob_equipped_event, /decl/observ/mob_equipped, new)
 //			/obj/item/item: The equipped item.
 //			/mob/equipper:  The mob that equipped the item.
 //			slot:           The slot equipped to.
-
-GLOBAL_DATUM_INIT(item_equipped_event, /decl/observ/item_equipped, new)
+var/decl/observ/item_equipped/item_equipped_event = new()
 
 /decl/observ/item_equipped
 	name = "Item Equipped"
@@ -36,5 +34,5 @@ GLOBAL_DATUM_INIT(item_equipped_event, /decl/observ/item_equipped, new)
 
 /obj/item/equipped(var/mob/user, var/slot)
 	. = ..()
-	GLOB.mob_equipped_event.raise_event(user, src, slot)
-	GLOB.item_equipped_event.raise_event(src, user, slot)
+	mob_equipped_event.raise_event(user, src, slot)
+	item_equipped_event.raise_event(src, user, slot)

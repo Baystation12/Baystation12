@@ -2,12 +2,12 @@
 	spawn()
 		var/list/pick_turfs = list()
 		for(var/turf/simulated/floor/T in world)
-			if(T.z in GLOB.using_map.station_levels)
+			if(T.z in using_map.station_levels)
 				pick_turfs += T
 
 		if(pick_turfs.len)
 			//All ready. Announce that bad juju is afoot.
-			GLOB.using_map.space_time_anomaly_detected_annoncement()
+			using_map.space_time_anomaly_detected_annoncement()
 
 			//prob(20) can be approximated to 1 wormhole every 5 turfs!
 			//admittedly less random but totally worth it >_<

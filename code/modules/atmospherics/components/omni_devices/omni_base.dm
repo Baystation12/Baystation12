@@ -29,7 +29,7 @@
 	icon_state = "base"
 
 	ports = new()
-	for(var/d in GLOB.cardinal)
+	for(var/d in cardinal)
 		var/datum/omni_port/new_port = new(src, d)
 		switch(d)
 			if(NORTH)
@@ -236,8 +236,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/omni/atmos_init()
-	..()
+/obj/machinery/atmospherics/omni/initialize()
 	for(var/datum/omni_port/P in ports)
 		if(P.node || P.mode == 0)
 			continue

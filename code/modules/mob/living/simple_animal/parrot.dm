@@ -100,12 +100,12 @@
 			  /mob/living/simple_animal/parrot/proc/perch_player)
 
 
-/mob/living/simple_animal/parrot/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/parrot/death()
 	if(held_item)
 		held_item.loc = src.loc
 		held_item = null
 	walk(src,0)
-	..(gibbed, deathmessage, show_dead_message)
+	..()
 
 /mob/living/simple_animal/parrot/Stat()
 	. = ..()
@@ -352,7 +352,7 @@
 		//Wander around aimlessly. This will help keep the loops from searches down
 		//and possibly move the mob into a new are in view of something they can use
 		if(prob(90))
-			step(src, pick(GLOB.cardinal))
+			step(src, pick(cardinal))
 			return
 
 		if(!held_item && !parrot_perch) //If we've got nothing to do.. look for something to do.

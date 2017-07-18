@@ -3,11 +3,6 @@
 		return 0
 	..(prob_slip)
 
-/mob/living/silicon/robot/Check_Shoegrip()
-	if(module && module.no_slip)
-		return 1
-	return 0
-
 /mob/living/silicon/robot/Allow_Spacemove()
 	if(module)
 		for(var/obj/item/weapon/tank/jetpack/J in module.modules)

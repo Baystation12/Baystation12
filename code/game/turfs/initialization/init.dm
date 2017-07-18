@@ -1,12 +1,13 @@
-/decl/turf_initializer/proc/Initialize(var/turf/T)
+/decl/turf_initializer/proc/initialize(var/turf/T)
 	return
 
 /area
 	var/turf_initializer = null
 
-/area/Initialize()
-	. = ..()
+/area/initialize()
+	..()
 	for(var/turf/T in src)
+		T.initialize()
 		if(turf_initializer)
 			var/decl/turf_initializer/ti = decls_repository.get_decl(turf_initializer)
-			ti.Initialize(T)
+			ti.initialize(T)

@@ -473,7 +473,7 @@
 			to_chat(usr, "This can only be done on mobs with clients")
 			return
 
-		GLOB.nanomanager.close_uis(H)
+		nanomanager.close_uis(H)
 		H.client.cache.Cut()
 		var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
 		assets.send(H)

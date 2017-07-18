@@ -11,7 +11,6 @@
 
 	var/list/inputs = new()
 	var/datum/omni_port/output
-	var/max_output_pressure = MAX_OMNI_PRESSURE
 
 	//setup tags for initial concentration values (must be decimal)
 	var/tag_north_con
@@ -76,7 +75,7 @@
 	if(output)
 		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
 		output.concentration = 1
-
+	
 	rebuild_mixing_inputs()
 
 /obj/machinery/atmospherics/omni/mixer/proc/mapper_set()
@@ -104,14 +103,8 @@
 
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = 0
-	var/datum/gas_mixture/output_gas = output.air
-	var/delta = between(0, (output_gas ? (max_output_pressure - output_gas.return_pressure()) : 0), max_output_pressure)
-	var/transfer_moles_max = INFINITY
-
 	for (var/datum/omni_port/P in inputs)
 		transfer_moles += (set_flow_rate*P.concentration/P.air.volume)*P.air.total_moles
-		transfer_moles_max = min(transfer_moles_max, calculate_transfer_moles(P.air, output.air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0))
-	transfer_moles = between(0, transfer_moles, transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
@@ -137,7 +130,7 @@
 
 	data = build_uidata()
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "omni_mixer.tmpl", "Omni Mixer Control", 360, 330)
@@ -206,7 +199,7 @@
 				con_lock(dir_flag(href_list["dir"]))
 
 	update_icon()
-	GLOB.nanomanager.update_uis(src)
+	nanomanager.update_uis(src)
 	return
 
 /obj/machinery/atmospherics/omni/mixer/proc/switch_mode(var/port = NORTH, var/mode = ATM_NONE)

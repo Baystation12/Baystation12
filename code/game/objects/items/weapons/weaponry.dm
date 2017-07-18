@@ -102,7 +102,7 @@
 
 /obj/effect/energy_net/New()
 	..()
-	GLOB.processing_objects.Add(src)
+	processing_objects.Add(src)
 
 /obj/effect/energy_net/Destroy()
 	if(istype(captured, /mob/living/carbon))
@@ -110,7 +110,7 @@
 			captured.handcuffed = null
 	if(captured)
 		unbuckle_mob()
-	GLOB.processing_objects.Remove(src)
+	processing_objects.Remove(src)
 	captured = null
 	return ..()
 

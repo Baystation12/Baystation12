@@ -1,7 +1,6 @@
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
 	desc = "Track with this."
-	known = 1
 	var/id = 1
 
 /obj/item/weapon/implant/tracking/get_data()

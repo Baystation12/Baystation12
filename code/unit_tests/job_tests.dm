@@ -24,7 +24,7 @@
 	var/failed_jobs = 0
 	var/failed_sanity_checks = 0
 
-	var/job_huds = icon_states(GLOB.using_map.id_hud_icons)
+	var/job_huds = icon_states(using_map.id_hud_icons)
 
 	if(!("" in job_huds))
 		log_bad("Sanity Check - Missing default/unnamed HUD icon")
@@ -45,7 +45,7 @@
 			failed_jobs++
 
 	if(failed_sanity_checks || failed_jobs)
-		fail("[GLOB.using_map.id_hud_icons] - [failed_sanity_checks] failed sanity check\s, [failed_jobs] job\s with missing HUD icon.")
+		fail("[using_map.id_hud_icons] - [failed_sanity_checks] failed sanity check\s, [failed_jobs] job\s with missing HUD icon.")
 	else
 		pass("All jobs have a HUD icon.")
 	return 1

@@ -21,14 +21,14 @@
 	qdel(cell)
 	cell = null
 	if(enabled)
-		GLOB.processing_objects.Remove(src)
+		processing_objects.Remove(src)
 	. = ..()
 
 /obj/item/weapon/shield_diffuser/process()
 	if(!enabled)
 		return
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
 		for(var/obj/effect/shield/S in shielded_tile)
 			// 10kJ per pulse, but gap in the shield lasts for longer than regular diffusers.
@@ -39,9 +39,9 @@
 	enabled = !enabled
 	update_icon()
 	if(enabled)
-		GLOB.processing_objects.Add(src)
+		processing_objects.Add(src)
 	else
-		GLOB.processing_objects.Remove(src)
+		processing_objects.Remove(src)
 	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
 /obj/item/weapon/shield_diffuser/examine()

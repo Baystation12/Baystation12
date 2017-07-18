@@ -130,12 +130,12 @@
 		end()
 
 	endedAt = world.time
-	GLOB.event_manager.active_events -= src
-	GLOB.event_manager.event_complete(src)
+	event_manager.active_events -= src
+	event_manager.event_complete(src)
 
 /datum/event/New(var/datum/event_meta/EM)
 	// event needs to be responsible for this, as stuff like APLUs currently make their own events for curious reasons
-	GLOB.event_manager.active_events += src
+	event_manager.active_events += src
 
 	event_meta = EM
 	severity = event_meta.severity

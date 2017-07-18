@@ -118,12 +118,11 @@ obj/machinery/atmospherics/pipe/zpipe/up
 		name = "upwards pipe"
 		desc = "A pipe segment to connect upwards."
 
-obj/machinery/atmospherics/pipe/zpipe/up/atmos_init()
-	..()
+obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 	normalize_dir()
 	var/node1_dir
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -157,12 +156,11 @@ obj/machinery/atmospherics/pipe/zpipe/down
 		name = "downwards pipe"
 		desc = "A pipe segment to connect downwards."
 
-obj/machinery/atmospherics/pipe/zpipe/down/atmos_init()
-	..()
+obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 	normalize_dir()
 	var/node1_dir
 
-	for(var/direction in GLOB.cardinal)
+	for(var/direction in cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction

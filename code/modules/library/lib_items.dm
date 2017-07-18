@@ -20,12 +20,11 @@
 	opacity = 1
 	flags = OBJ_ANCHORABLE
 
-/obj/structure/bookcase/Initialize()
+/obj/structure/bookcase/initialize()
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/weapon/book))
-			I.forceMove(src)
+			I.loc = src
 	update_icon()
-	. = ..()
 
 /obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/weapon/book))

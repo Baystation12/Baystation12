@@ -14,12 +14,12 @@
 	var/is_centcom = 0
 	var/show_assignments = 0
 
-/datum/nano_module/program/card_mod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/card_mod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
 
 	data["src"] = "\ref[src]"
 	data["station_name"] = station_name()
-	data["manifest"] = GLOB.data_core ? GLOB.data_core.get_manifest(0) : null
+	data["manifest"] = data_core ? data_core.get_manifest(0) : null
 	data["assignments"] = show_assignments
 	if(program && program.computer)
 		data["have_id_slot"] = !!program.computer.card_slot
@@ -82,7 +82,7 @@
 					"accesses" = accesses)))
 			data["regions"] = regions
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "identification_computer.tmpl", name, 600, 700, state = state)
 		ui.auto_update_layout = 1
@@ -153,7 +153,7 @@
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
-									[GLOB.data_core ? GLOB.data_core.get_manifest(0) : ""]
+									[data_core ? data_core.get_manifest(0) : ""]
 									"}
 					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", stationtime2text())))
 						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
@@ -163,7 +163,7 @@
 		if("eject")
 			if(computer && computer.card_slot)
 				if(id_card)
-					GLOB.data_core.manifest_modify(id_card.registered_name, id_card.assignment)
+					data_core.manifest_modify(id_card.registered_name, id_card.assignment)
 				computer.proc_eject_id(user)
 		if("terminate")
 			if(computer && can_run(user, 1))
@@ -223,7 +223,7 @@
 	if(id_card)
 		id_card.name = text("[id_card.registered_name]'s ID Card ([id_card.assignment])")
 
-	GLOB.nanomanager.update_uis(NM)
+	nanomanager.update_uis(NM)
 	return 1
 
 /datum/computer_file/program/card_mod/proc/remove_nt_access(var/obj/item/weapon/card/id/id_card)

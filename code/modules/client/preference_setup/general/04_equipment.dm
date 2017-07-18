@@ -1,7 +1,6 @@
 /datum/preferences
 	var/list/all_underwear
 	var/list/all_underwear_metadata
-	var/backbag = 2						//backpack type
 
 /datum/category_item/player_setup_item/general/equipment
 	name = "Clothing"

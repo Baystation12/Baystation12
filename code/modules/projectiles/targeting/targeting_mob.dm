@@ -22,8 +22,8 @@
 		return
 	aiming.cancel_aiming(no_message)
 
-/mob/living/death(gibbed, deathmessage="seizes up and falls limp...", show_dead_message)
-	. = ..(gibbed, deathmessage, show_dead_message)
+/mob/living/death(gibbed,deathmessage="seizes up and falls limp...")
+	. = ..()
 	if(.)
 		stop_aiming(no_message=1)
 

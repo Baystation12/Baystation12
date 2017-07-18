@@ -126,8 +126,14 @@
 	..()
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W)) return//I really wish I did not need this
+	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
+		var/obj/item/weapon/grab/G = W
+		if(istype(G.affecting,/mob/living))
+			grab_smash_attack(G, PAIN)
+			return
 
-	if(!istype(W) || W.flags & NOBLUDGEON) return
+	if(W.flags & NOBLUDGEON) return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't unfasten it!</span>"))
@@ -281,6 +287,22 @@
 	density = 1
 	throwpass = 1
 
+/obj/structure/holohoop/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
+		var/obj/item/weapon/grab/G = W
+		if(G.state<2)
+			to_chat(user, "<span class='warning'>You need a better grip to do that!</span>")
+			return
+		G.affecting.loc = src.loc
+		G.affecting.Weaken(5)
+		visible_message("<span class='warning'>[G.assailant] dunks [G.affecting] into the [src]!</span>", 3)
+		qdel(W)
+		return
+	else if (istype(W, /obj/item) && get_dist(src,user)<2)
+		user.drop_item(src.loc)
+		visible_message("<span class='notice'>[user] dunks [W] into the [src]!</span>", 3)
+		return
+
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)
 		var/obj/item/I = mover
@@ -400,8 +422,12 @@
 		destroy_surroundings = initial(destroy_surroundings)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
-	death()
+	derez() //holograms can't gib
 
 /mob/living/simple_animal/hostile/carp/holodeck/death()
-	..(null, "fades away!", "You have been destroyed.")
+	..()
+	derez()
+
+/mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
+	visible_message("<span class='notice'>\The [src] fades away!</span>")
 	qdel(src)

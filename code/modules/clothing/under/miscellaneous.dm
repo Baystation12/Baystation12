@@ -562,7 +562,6 @@
 	desc = "How... minimalist."
 	icon_state = "gear_harness"
 	worn_state = "gear_harness"
-	species_restricted = null
 	body_parts_covered = 0
 
 /obj/item/clothing/under/pcrc

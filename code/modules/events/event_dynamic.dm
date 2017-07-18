@@ -49,9 +49,9 @@ var/list/event_last_fired = list()
 	possibleEvents[/datum/event/trivial_news] = 400
 	possibleEvents[/datum/event/mundane_news] = 300
 
-	possibleEvents[/datum/event/money_lotto] = max(min(5, GLOB.player_list.len), 50)
+	possibleEvents[/datum/event/money_lotto] = max(min(5, player_list.len), 50)
 	if(account_hack_attempted)
-		possibleEvents[/datum/event/money_hacker] = max(min(25, GLOB.player_list.len) * 4, 200)
+		possibleEvents[/datum/event/money_hacker] = max(min(25, player_list.len) * 4, 200)
 
 
 	possibleEvents[/datum/event/carp_migration] = 20 + 10 * active_with_role["Engineer"]
@@ -112,7 +112,7 @@ var/list/event_last_fired = list()
 	//moved this to proc/check_event()
 	/*var/chance = possibleEvents[picked_event]
 	var/base_chance = 0.4
-	switch(GLOB.player_list.len)
+	switch(player_list.len)
 		if(5 to 10)
 			base_chance = 0.6
 		if(11 to 15)
@@ -133,7 +133,7 @@ var/list/event_last_fired = list()
 	/*switch(picked_event)
 		if("Meteor")
 			command_alert("Meteors have been detected on collision course with the [station_name()].", "Meteor Alert")
-			for(var/mob/M in GLOB.player_list)
+			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
 					sound_to(M, sound('sound/AI/torch/meteorstorch.ogg'))
 			spawn(100)
@@ -186,7 +186,7 @@ var/list/event_last_fired = list()
 	active_with_role["Janitor"] = 0
 	active_with_role["Gardener"] = 0
 
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in player_list)
 		if(!M.mind || !M.client || M.client.is_afk(10 MINUTES)) // longer than 10 minutes AFK counts them as inactive
 			continue
 

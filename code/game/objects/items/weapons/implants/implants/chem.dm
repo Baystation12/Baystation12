@@ -1,7 +1,6 @@
 /obj/item/weapon/implant/chem
 	name = "chemical implant"
 	desc = "Injects things."
-	known = 1
 
 /obj/item/weapon/implant/chem/get_data()
 	return {"

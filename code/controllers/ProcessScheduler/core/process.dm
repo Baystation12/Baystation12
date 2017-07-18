@@ -326,7 +326,8 @@
 
 /datum/controller/process/proc/catchException(var/exception/e, var/thrower)
 	if(istype(e)) // Real runtimes go to the real error handler
-		throw e
+		log_runtime(e, thrower, "Caught by process: [name]")
+		return
 	var/etext = "[e]"
 	var/eid = "[e]" // Exception ID, for tracking repeated exceptions
 	var/ptext = "" // "processing..." text, for what was being processed (if known)

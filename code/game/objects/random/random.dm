@@ -5,11 +5,13 @@
 	icon_state = "rup"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 
-// creates a new object and deletes itself
-/obj/random/Initialize()
+/obj/random/New()
 	..()
 	spawn_item()
-	return INITIALIZE_HINT_QDEL
+
+// creates a new object and deletes itself
+/obj/random/initialize()
+	qdel(src)
 
 // this function should return a specific item to spawn
 /obj/random/proc/item_to_spawn()
@@ -1083,8 +1085,8 @@ var/list/multi_point_spawns
 	var/id     // Group id
 	var/weight // Probability weight for this spawn point
 
-/obj/random_multi/Initialize()
-	. = ..()
+/obj/random_multi/initialize()
+	..()
 	weight = max(1, round(weight))
 
 	if(!multi_point_spawns)

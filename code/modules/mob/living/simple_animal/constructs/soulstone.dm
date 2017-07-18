@@ -23,7 +23,7 @@
 	shade = new /mob/living/simple_animal/shade(src)
 
 /obj/item/device/soulstone/Destroy()
-	QDEL_NULL(shade)
+	qdel_null(shade)
 	return ..()
 
 /obj/item/device/soulstone/examine(mob/user)
@@ -69,7 +69,7 @@
 	if(shade.key || full == 1)
 		to_chat(user, "<span class='notice'>\The [src] is already full.</span>")
 		return
-	if(M.stat != DEAD && !M.is_asystole())
+	if(M.stat == CONSCIOUS || M.health > config.health_threshold_crit)
 		to_chat(user, "<span class='notice'>Kill or maim the victim first.</span>")
 		return
 	for(var/obj/item/W in M)

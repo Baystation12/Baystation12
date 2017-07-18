@@ -30,14 +30,14 @@ FLOOR SAFES
 	tumbler_2_open = rand(0, 72)
 
 
-/obj/structure/safe/Initialize()
+/obj/structure/safe/initialize()
 	for(var/obj/item/I in loc)
 		if(space >= maxspace)
 			return
 		if(I.w_class + space <= maxspace) //todo replace with internal storage or something
 			space += I.w_class
-			I.forceMove(src)
-	. = ..()
+			I.loc = src
+
 
 /obj/structure/safe/proc/check_unlocked(mob/user as mob, canhear)
 	if(user && canhear)
@@ -171,8 +171,8 @@ obj/structure/safe/ex_act(severity)
 	level = 1	//underfloor
 	layer = BELOW_OBJ_LAYER
 
-/obj/structure/safe/floor/Initialize()
-	. = ..()
+/obj/structure/safe/floor/initialize()
+	..()
 	var/turf/T = loc
 	if(istype(T) && !T.is_plating())
 		hide(1)

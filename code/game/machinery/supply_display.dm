@@ -6,7 +6,7 @@
 		message1 = "CARGO"
 		message2 = ""
 
-		var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (!shuttle)
 			message2 = "Error"
 		else if(shuttle.has_arrive_time())

@@ -7,14 +7,13 @@
 	anchored = 1
 	var/notices = 0
 
-/obj/structure/noticeboard/Initialize()
+/obj/structure/noticeboard/initialize()
 	for(var/obj/item/I in loc)
 		if(notices > 4) break
 		if(istype(I, /obj/item/weapon/paper))
-			I.forceMove(src)
+			I.loc = src
 			notices++
 	icon_state = "nboard0[notices]"
-	. = ..()
 
 //attaching papers!!
 /obj/structure/noticeboard/attackby(var/obj/item/weapon/O as obj, var/mob/user as mob)

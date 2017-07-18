@@ -177,12 +177,7 @@
 
 /datum/surgery_step/cavity/implant_removal/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(!affected)
-		return FALSE
-	if(affected.robotic < ORGAN_ROBOT)
-		return affected.open() >= SURGERY_RETRACTED
-	else
-		return affected.hatch == 3
+	return affected && affected.open() >= SURGERY_RETRACTED
 
 /datum/surgery_step/cavity/implant_removal/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -193,15 +188,9 @@
 
 /datum/surgery_step/cavity/implant_removal/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-	var/exposed = 0
-	if(affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
-		exposed = 1
-	if(affected.robotic >= ORGAN_ROBOT && affected.hatch == 3)
-		exposed = 1
-	
-	var/find_prob = 0
 	var/list/loot = list()
-	if(exposed)
+	var/find_prob = 0
+	if(affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
 		loot = affected.implants
 	else
 		for(var/datum/wound/wound in affected.wounds)

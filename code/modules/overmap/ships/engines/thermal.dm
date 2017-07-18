@@ -8,8 +8,8 @@
 	nozzle = _holder
 
 /datum/ship_engine/thermal/Destroy()
+	..()
 	nozzle = null
-	. = ..()
 
 /datum/ship_engine/thermal/get_status()
 	return nozzle.get_status()
@@ -52,13 +52,13 @@
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/moles_per_burn = 10
 
-/obj/machinery/atmospherics/unary/engine/Initialize()
-	. = ..()
+/obj/machinery/atmospherics/unary/engine/initialize()
+	..()
 	controller = new(src)
 
 /obj/machinery/atmospherics/unary/engine/Destroy()
-	QDEL_NULL(controller)
-	. = ..()
+	..()
+	qdel_null(controller)
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
 	. = list()

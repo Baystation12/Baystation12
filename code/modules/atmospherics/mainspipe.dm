@@ -100,8 +100,7 @@ obj/machinery/atmospherics/mains_pipe
 		disconnect()
 		..()
 
-	atmos_init()
-		..()
+	initialize()
 		for(var/i = 1 to nodes.len)
 			var/obj/machinery/atmospherics/mains_pipe/node = nodes[i]
 			if(node)
@@ -155,12 +154,12 @@ obj/machinery/atmospherics/mains_pipe/simple
 			var/have_node2 = nodes[2]?1:0
 			icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"
 
-	atmos_init()
+	initialize()
 		normalize_dir()
 		var/node1_dir
 		var/node2_dir
 
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in cardinal)
 			if(direction&initialize_mains_directions)
 				if (!node1_dir)
 					node1_dir = direction
@@ -203,10 +202,10 @@ obj/machinery/atmospherics/mains_pipe/manifold
 		..()
 		initialize_mains_directions = (NORTH|SOUTH|EAST|WEST) & ~dir
 
-	atmos_init()
+	initialize()
 		var/connect_directions = initialize_mains_directions
 
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in cardinal)
 			if(direction&connect_directions)
 				for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,direction))
 					if(target.initialize_mains_directions & get_dir(target,src))
@@ -217,7 +216,7 @@ obj/machinery/atmospherics/mains_pipe/manifold
 					break
 
 
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in cardinal)
 			if(direction&connect_directions)
 				for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,direction))
 					if(target.initialize_mains_directions & get_dir(target,src))
@@ -228,7 +227,7 @@ obj/machinery/atmospherics/mains_pipe/manifold
 					break
 
 
-		for(var/direction in GLOB.cardinal)
+		for(var/direction in cardinal)
 			if(direction&connect_directions)
 				for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,direction))
 					if(target.initialize_mains_directions & get_dir(target,src))
@@ -267,7 +266,7 @@ obj/machinery/atmospherics/mains_pipe/manifold4w
 		nodes.len = 4
 		..()
 
-	atmos_init()
+	initialize()
 		for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,NORTH))
 			if(target.initialize_mains_directions & get_dir(target,src))
 				nodes[1] = target
@@ -319,7 +318,7 @@ obj/machinery/atmospherics/mains_pipe/split
 		initialize_mains_directions = turn(dir, 90) | turn(dir, -90)
 		initialize_directions = dir // actually have a normal connection too
 
-	atmos_init()
+	initialize()
 		var/node1_dir
 		var/node2_dir
 		var/node3_dir
@@ -418,9 +417,9 @@ obj/machinery/atmospherics/mains_pipe/split3
 		nodes.len = 1
 		..()
 		initialize_mains_directions = dir
-		initialize_directions = GLOB.cardinal & ~dir // actually have a normal connection too
+		initialize_directions = cardinal & ~dir // actually have a normal connection too
 
-	atmos_init()
+	initialize()
 		var/node1_dir
 		var/supply_node_dir
 		var/scrubbers_node_dir
@@ -514,7 +513,7 @@ obj/machinery/atmospherics/mains_pipe/cap
 	update_icon()
 		icon_state = "cap[invisibility ? "-f" : ""]"
 
-	atmos_init()
+	initialize()
 		for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,dir))
 			if(target.initialize_mains_directions & get_dir(target,src))
 				nodes[1] = target
@@ -567,7 +566,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 		else
 			icon_state = "[hide?"h":""]mvalve[open]"
 
-	atmos_init()
+	initialize()
 		normalize_dir()
 		var/node1_dir
 		var/node2_dir
@@ -605,7 +604,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 		open = 1
 		update_icon()
 
-		atmos_init()
+		initialize()
 
 		return 1
 
@@ -664,8 +663,8 @@ obj/machinery/atmospherics/mains_pipe/valve
 		var/id = null
 		var/datum/radio_frequency/radio_connection
 
-		Initialize()
-			. = ..()
+		initialize()
+			..()
 			if(frequency)
 				set_frequency(frequency)
 

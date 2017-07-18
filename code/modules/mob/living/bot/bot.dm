@@ -48,8 +48,8 @@
 	access_scanner.req_access = req_access.Copy()
 	access_scanner.req_one_access = req_one_access.Copy()
 
-/mob/living/bot/Initialize()
-	. = ..()
+/mob/living/bot/initialize()
+	..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else
@@ -74,8 +74,8 @@
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getFireLoss() - getBruteLoss()
-	setOxyLoss(0)
-	setToxLoss(0)
+	oxyloss = 0
+	toxloss = 0
 
 /mob/living/bot/death()
 	explode()
@@ -374,7 +374,7 @@
 
 	//	for(var/turf/simulated/t in oview(src,1))
 
-	for(var/d in GLOB.cardinal)
+	for(var/d in cardinal)
 		var/turf/simulated/T = get_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))

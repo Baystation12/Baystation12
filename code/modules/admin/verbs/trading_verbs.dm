@@ -3,7 +3,7 @@
 	set name = "List Traders"
 	set desc = "Lists all the current traders"
 
-	for(var/a in GLOB.traders)
+	for(var/a in traders)
 		var/datum/trader/T = a
 		to_chat(src, "[T.name] <a href='?_src_=vars;Vars=\ref[T]'>\ref[T]</a>")
 
@@ -17,15 +17,15 @@
 	if(!type)
 		return
 
-	GLOB.traders += new type
+	traders += new type
 
 /client/proc/remove_trader()
 	set category = "Debug"
 	set name = "Remove Trader"
 	set desc = "Removes a trader from the trader list."
 
-	var/choice = input(src, "Choose something to remove.") as null|anything in GLOB.traders
+	var/choice = input(src, "Choose something to remove.") as null|anything in traders
 	if(!choice)
 		return
 
-	GLOB.traders -= choice
+	traders -= choice

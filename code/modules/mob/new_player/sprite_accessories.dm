@@ -884,11 +884,20 @@
 		icon_state = "hair_fingerwave"
 		species_allowed = list(SPECIES_TAJARA)
 
-	vox_quills_long
-		name = "Long Vox Quills"
-		icon_state = "vox_longquills"
+	vox_quills_short
+		name = "Short Vox Quills"
+		icon_state = "vox_shortquills"
 		species_allowed = list(SPECIES_VOX)
 
+	vox_quills_kingly
+		name = "Kingly Vox Quills"
+		icon_state = "vox_kingly"
+		species_allowed = list(SPECIES_VOX)
+
+	vox_quills_mohawk
+		name = "Quill Mohawk"
+		icon_state = "vox_mohawk"
+		species_allowed = list(SPECIES_VOX)
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns

@@ -524,7 +524,7 @@
 	name = "Methylphenidate"
 	id = "methylphenidate"
 	result = "methylphenidate"
-	required_reagents = list("mindbreaker" = 1, "lithium" = 1)
+	required_reagents = list("mindbreaker" = 1, "hydrazine" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/citalopram
@@ -2214,5 +2214,5 @@
 	name = "Antidexafen"
 	id = "antidexafen"
 	result = "antidexafen"
-	required_reagents = list("paracetamol" = 1, "carbon" = 1)
+	required_reagents = list("paracetamol" = 1, "sugar" = 1)
 	result_amount = 2

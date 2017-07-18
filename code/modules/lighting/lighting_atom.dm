@@ -43,6 +43,10 @@
 		else
 			light = new /datum/light_source(src, .)
 
+/atom/New()
+	if(light_power && light_range)
+		update_light()
+
 /atom/Destroy()
 	if(light)
 		light.destroy()

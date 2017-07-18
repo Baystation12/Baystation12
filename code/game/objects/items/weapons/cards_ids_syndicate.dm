@@ -58,7 +58,7 @@
 	data["electronic_warfare"] = electronic_warfare
 	data["entries"] = entries
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "agent_id_card.tmpl", "Agent id", 600, 400)
 		ui.set_initial_data(data)
@@ -70,13 +70,13 @@
 	unset_registered_user()
 	registered_user = user
 	user.set_id_info(src)
-	GLOB.destroyed_event.register(user, src, /obj/item/weapon/card/id/syndicate/proc/unset_registered_user)
+	destroyed_event.register(user, src, /obj/item/weapon/card/id/syndicate/proc/unset_registered_user)
 	return TRUE
 
 /obj/item/weapon/card/id/syndicate/proc/unset_registered_user(var/mob/user)
 	if(!registered_user || (user && user != registered_user))
 		return
-	GLOB.destroyed_event.unregister(registered_user, src)
+	destroyed_event.unregister(registered_user, src)
 	registered_user = null
 
 /obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
@@ -185,7 +185,7 @@
 					. = 1
 
 	// Always update the UI, or buttons will spin indefinitely
-	GLOB.nanomanager.update_uis(src)
+	nanomanager.update_uis(src)
 
 /var/global/list/id_card_states
 /proc/id_card_states()

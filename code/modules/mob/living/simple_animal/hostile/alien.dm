@@ -87,8 +87,9 @@
 	damage = 30
 	icon_state = "toxin"
 
-/mob/living/simple_animal/hostile/alien/death(gibbed, deathmessage, show_dead_message)
-	..(gibbed, deathmessage = "lets out a waning guttural screech, green blood bubbling from its maw...", show_dead_message)
+/mob/living/simple_animal/hostile/alien/death()
+	..()
+	visible_message("[src] lets out a waning guttural screech, green blood bubbling from its maw...")
 	playsound(src, 'sound/voice/hiss6.ogg', 100, 1)
 
 // Xenoarch aliens.

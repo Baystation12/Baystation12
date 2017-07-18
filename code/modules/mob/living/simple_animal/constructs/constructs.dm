@@ -50,9 +50,9 @@
 		src.add_spell(new spell, "const_spell_ready")
 	updateicon()
 
-/mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/construct/death()
 	new /obj/item/weapon/ectoplasm (src.loc)
-	..(null,"collapses in a shattered heap.","The bonds tying you to this mortal plane have been severed.")
+	..(null,"collapses in a shattered heap.")
 	ghostize()
 	qdel(src)
 

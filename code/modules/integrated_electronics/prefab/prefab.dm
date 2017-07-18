@@ -162,8 +162,8 @@
 	color = COLOR_PURPLE
 	var/prefab_type
 
-/obj/prefab/Initialize()
-	. = ..()
+/obj/prefab/initialize()
+	..()
 	var/decl/prefab/prefab = decls_repository.get_decl(prefab_type)
 	prefab.create(loc)
 	qdel(src)

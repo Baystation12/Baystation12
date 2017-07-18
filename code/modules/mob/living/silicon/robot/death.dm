@@ -4,7 +4,7 @@
 		qdel(mmi)
 	..()
 
-/mob/living/silicon/robot/death(gibbed,deathmessage, show_dead_message)
+/mob/living/silicon/robot/death(gibbed)
 	if(camera)
 		camera.status = 0
 	if(module)
@@ -13,4 +13,4 @@
 	locked = 0
 	remove_robot_verbs()
 	sql_report_cyborg_death(src)
-	..(gibbed,"shudders violently for a moment, then becomes motionless, its eyes slowly darkening.", "You have suffered a critical system failure, and are dead.")
+	..(gibbed,"shudders violently for a moment, then becomes motionless, its eyes slowly darkening.")

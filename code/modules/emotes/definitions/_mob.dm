@@ -11,7 +11,7 @@
 	if(!skip_sort)
 		usable_emotes = sortAssoc(usable_emotes)
 
-/mob/Initialize()
+/mob/initialize()
 	. = ..()
 	update_emotes()
 

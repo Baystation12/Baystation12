@@ -33,6 +33,5 @@
 			var/turf/simulated/floor/deity/D = T
 			if(D.linked_god == connected_god)
 				continue
-		var/turf/simulated/floor/deity/D = T.ChangeTurf(/turf/simulated/floor/deity)
-		D.sync_god(connected_god)
+		new /turf/simulated/floor/deity(T,connected_god)
 		return

@@ -12,11 +12,7 @@
 /obj/effect/force_portal/New(var/loc)
 	..()
 	boom_time = world.time + 30 SECONDS
-	GLOB.processing_objects += src
-
-/obj/effect/force_portal/Destroy()
-	GLOB.processing_objects -= src
-	. = ..()
+	processing_objects += src
 
 /obj/effect/force_portal/process()
 	if(boom_time && boom_time < world.time)

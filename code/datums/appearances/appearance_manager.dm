@@ -19,8 +19,8 @@ var/decl/appearance_manager/appearance_manager = new()
 	if(!pq)
 		pq = new/PriorityQueue(/proc/cmp_appearance_data)
 		appearances_[viewer] = pq
-		GLOB.logged_in_event.register(viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
-		GLOB.destroyed_event.register(viewer, src, /decl/appearance_manager/proc/remove_appearances)
+		logged_in_event.register(viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
+		destroyed_event.register(viewer, src, /decl/appearance_manager/proc/remove_appearances)
 	pq.Enqueue(ad)
 	reset_appearance_images(viewer)
 
@@ -30,8 +30,8 @@ var/decl/appearance_manager/appearance_manager = new()
 	if(viewer.client)
 		viewer.client.images -= ad.images
 	if(!pq.Length())
-		GLOB.logged_in_event.unregister(viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
-		GLOB.destroyed_event.register(viewer, src, /decl/appearance_manager/proc/remove_appearances)
+		logged_in_event.unregister(viewer, src, /decl/appearance_manager/proc/apply_appearance_images)
+		destroyed_event.register(viewer, src, /decl/appearance_manager/proc/remove_appearances)
 		appearances_ -= viewer
 
 /decl/appearance_manager/proc/remove_appearances(var/mob/viewer)

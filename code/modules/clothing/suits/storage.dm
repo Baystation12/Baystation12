@@ -6,7 +6,7 @@
 	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 2, slot_size = 2) //two slots, fit only pocket sized items
 
 /obj/item/clothing/suit/storage/Destroy()
-	QDEL_NULL(pockets)
+	qdel_null(pockets)
 	. = ..()
 
 /obj/item/clothing/suit/storage/attack_hand(mob/user as mob)

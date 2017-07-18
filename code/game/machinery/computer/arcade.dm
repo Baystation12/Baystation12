@@ -30,15 +30,15 @@
 							/obj/item/toy/cultsword														= 1
 							)
 
-/obj/machinery/computer/arcade/Initialize()
-	. = ..()
+/obj/machinery/computer/arcade/New()
+	..()
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
 	if(!circuit)
 		var/choice = pick(typesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade)
 		var/obj/item/weapon/circuitboard/CB = new choice()
 		new CB.build_path(loc, CB)
-		return INITIALIZE_HINT_QDEL
+		qdel(src)
 
 /obj/machinery/computer/arcade/proc/prizevend()
 	if(!contents.len)

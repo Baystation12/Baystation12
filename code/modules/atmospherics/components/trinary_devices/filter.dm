@@ -118,9 +118,9 @@
 
 	return 1
 
-/obj/machinery/atmospherics/trinary/filter/Initialize()
+/obj/machinery/atmospherics/trinary/filter/initialize()
 	set_frequency(frequency)
-	. = ..()
+	..()
 
 /obj/machinery/atmospherics/trinary/filter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
@@ -243,12 +243,8 @@ obj/machinery/atmospherics/trinary/filter/m_filter/New()
 		if(WEST)
 			initialize_directions = WEST|SOUTH|EAST
 
-/obj/machinery/atmospherics/trinary/filter/m_filter/Initialize()
-	. = ..()
+/obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
 	set_frequency(frequency)
-            
-/obj/machinery/atmospherics/trinary/filter/m_filter/atmos_init()
-	..()
 
 	if(node1 && node2 && node3) return
 

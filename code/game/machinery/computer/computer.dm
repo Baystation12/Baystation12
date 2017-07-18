@@ -16,14 +16,12 @@
 	var/light_power_on = 1
 	var/overlay_layer
 	flags = OBJ_CLIMBABLE
-	clicksound = "keyboard"
 
 /obj/machinery/computer/New()
 	overlay_layer = layer
 	..()
 
-/obj/machinery/computer/Initialize()
-	. = ..()
+/obj/machinery/computer/initialize()
 	power_change()
 	update_icon()
 
@@ -113,3 +111,9 @@
 			qdel(src)
 	else
 		..()
+
+
+/obj/machinery/computer/Topic(href, href_list)
+	. = ..()
+	if(. && istype(usr, /mob/living/carbon))
+		playsound(src, 'sound/machines/keypress.ogg', 50)

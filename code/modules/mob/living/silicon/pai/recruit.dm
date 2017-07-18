@@ -34,7 +34,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		if(istype(card,/obj/item/device/paicard) && istype(candidate,/datum/paiCandidate))
 			var/mob/living/silicon/pai/pai = new(card)
 			if(!candidate.name)
-				pai.name = pick(GLOB.ninja_names)
+				pai.name = pick(ninja_names)
 			else
 				pai.name = candidate.name
 			pai.real_name = pai.name
@@ -233,7 +233,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	for(var/datum/paiCandidate/c in paiController.pai_candidates)
 		if(c.ready)
 			var/found = 0
-			for(var/mob/observer/ghost/o in GLOB.player_list)
+			for(var/mob/observer/ghost/o in player_list)
 				if(o.key == c.key && o.MayRespawn())
 					found = 1
 			if(found)
@@ -346,7 +346,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 /datum/paiController/proc/requestRecruits(var/mob/user)
 	inquirer = user
-	for(var/mob/observer/ghost/O in GLOB.player_list)
+	for(var/mob/observer/ghost/O in player_list)
 		if(!O.MayRespawn())
 			continue
 		if(jobban_isbanned(O, "pAI"))

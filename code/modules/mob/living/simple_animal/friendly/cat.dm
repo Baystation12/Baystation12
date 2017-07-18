@@ -136,7 +136,7 @@
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
 	if (friend)
 		var/follow_dist = 4
-		if (friend.stat >= DEAD || friend.is_asystole()) //danger
+		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit) //danger
 			follow_dist = 1
 		else if (friend.stat || friend.health <= 50) //danger or just sleeping
 			follow_dist = 2
@@ -170,7 +170,7 @@
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)
-		if (friend.stat >= DEAD || friend.is_asystole())
+		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit)
 			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")
 				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))

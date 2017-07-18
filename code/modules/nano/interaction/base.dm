@@ -4,7 +4,7 @@
 /datum/proc/nano_container()
 	return src
 
-/datum/proc/CanUseTopic(var/mob/user, var/datum/topic_state/state = GLOB.default_state)
+/datum/proc/CanUseTopic(var/mob/user, var/datum/topic_state/state = default_state)
 	var/datum/src_object = nano_host()
 	return state.can_use_topic(src_object, user)
 

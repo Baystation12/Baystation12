@@ -2,7 +2,7 @@
 	announceWhen		= 5
 
 /datum/event/grid_check/start()
-	power_failure(0, severity, GLOB.using_map.contact_levels)
+	power_failure(0, severity, using_map.contact_levels)
 
 /datum/event/grid_check/announce()
-	GLOB.using_map.grid_check_announcement()
+	using_map.grid_check_announcement()

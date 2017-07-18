@@ -194,8 +194,8 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/crematorium/wifi_receiver
 
-/obj/structure/crematorium/Initialize()
-	. = ..()
+/obj/structure/crematorium/initialize()
+	..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 

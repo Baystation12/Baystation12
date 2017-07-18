@@ -38,6 +38,19 @@
 		pass("All related eye icon states exists.")
 	return 1
 
+/datum/unit_test/icon_test/medhud_states_shall_be_ordered
+	name = "ICON STATE - MedHUD states shall be ordered"
+
+/datum/unit_test/icon_test/medhud_states_shall_be_ordered/start_test()
+	for(var/icon_state in icon_states('icons/mob/hud_med.dmi'))
+		var/rounded_value = RoundHealth(text2num(icon_state))
+		if(icon_state != rounded_value)
+			fail("RoundHealth returned [rounded_value], expected [icon_state].")
+			return 1
+
+	pass("All MedHUD icon states correctly ordered.")
+	return 1
+
 /datum/unit_test/icon_test/sprite_accessories_shall_have_existing_icon_states
 	name = "ICON STATE - Sprite accessories shall have existing icon states"
 

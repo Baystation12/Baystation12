@@ -35,7 +35,7 @@ AI MODULES
 			return
 
 		if(ticker && ticker.mode && ticker.mode.name == "blob")
-			to_chat(usr, "Law uploads have been disabled by [GLOB.using_map.company_name]!")
+			to_chat(usr, "Law uploads have been disabled by [using_map.company_name]!")
 			return
 
 		if (comp.current.stat == 2 || comp.current.control_disabled == 1)
@@ -44,7 +44,7 @@ AI MODULES
 			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")
 		else
 			src.transmitInstructions(comp.current, usr)
-			for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
+			for(var/mob/living/silicon/robot/R in mob_list)
 				if(R.lawupdate && (R.connected_ai == comp.current))
 					to_chat(R, "These are your laws now:")
 					R.show_laws()
@@ -86,7 +86,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/proc/log_law_changes(var/mob/living/silicon/ai/target, var/mob/sender)
 	var/time = time2text(world.realtime,"hh:mm:ss")
-	GLOB.lawchanges.Add("[time] <B>:</B> [sender.name]([sender.key]) used [src.name] on [target.name]([target.key])")
+	lawchanges.Add("[time] <B>:</B> [sender.name]([sender.key]) used [src.name] on [target.name]([target.key])")
 	log_and_message_admins("used [src.name] on [target.name]([target.key])")
 
 /obj/item/weapon/aiModule/proc/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
@@ -117,7 +117,7 @@ AI MODULES
 /obj/item/weapon/aiModule/safeguard/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
 	var/law = text("Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered a crew member, and is a threat which must be neutralized.", targetName, targetName)
 	target.add_supplied_law(9, law)
-	GLOB.lawchanges.Add("The law specified [targetName]")
+	lawchanges.Add("The law specified [targetName]")
 
 
 /******************** OneMember ********************/
@@ -145,9 +145,9 @@ AI MODULES
 	if (!target.is_malf_or_traitor()) // Makes sure the AI isn't a traitor before changing their law 0. --NeoFite
 		to_chat(target, law)
 		target.set_zeroth_law(law)
-		GLOB.lawchanges.Add("The law specified [targetName]")
+		lawchanges.Add("The law specified [targetName]")
 	else
-		GLOB.lawchanges.Add("The law specified [targetName], but the AI's existing law 0 cannot be overriden.")
+		lawchanges.Add("The law specified [targetName], but the AI's existing law 0 cannot be overriden.")
 
 /******************** ProtectStation ********************/
 
@@ -228,7 +228,7 @@ AI MODULES
 	if(!lawpos || lawpos < MIN_SUPPLIED_LAW_NUMBER)
 		lawpos = MIN_SUPPLIED_LAW_NUMBER
 	target.add_supplied_law(lawpos, law)
-	GLOB.lawchanges.Add("The law was '[newFreeFormLaw]'")
+	lawchanges.Add("The law was '[newFreeFormLaw]'")
 
 /obj/item/weapon/aiModule/freeform/install(var/obj/machinery/computer/C)
 	if(!newFreeFormLaw)
@@ -290,22 +290,6 @@ AI MODULES
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/nanotrasen
 
-/******************** SCG ********************/
-
-/obj/item/weapon/aiModule/solgov // aka Torch default
-	name = "'SCG Expeditionary' Core AI Module"
-	desc = "An 'SCG Expeditionary' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
-	laws = new/datum/ai_laws/solgov
-
-/******************** SCG Aggressive ********************/
-
-obj/item/weapon/aiModule/solgov_aggressive
-	name = "\improper 'Military' Core AI Module"
-	desc = "A 'Military' Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
-	laws = new/datum/ai_laws/solgov_aggressive
-
 /******************** Corporate ********************/
 
 /obj/item/weapon/aiModule/corp
@@ -355,7 +339,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 /obj/item/weapon/aiModule/freeformcore/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
 	var/law = "[newFreeFormLaw]"
 	target.add_inherent_law(law)
-	GLOB.lawchanges.Add("The law is '[newFreeFormLaw]'")
+	lawchanges.Add("The law is '[newFreeFormLaw]'")
 
 /obj/item/weapon/aiModule/freeformcore/install(var/obj/machinery/computer/C)
 	if(!newFreeFormLaw)
@@ -380,7 +364,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 	//	..()    //We don't want this module reporting to the AI who dun it. --NEO
 	log_law_changes(target, sender)
 
-	GLOB.lawchanges.Add("The law is '[newFreeFormLaw]'")
+	lawchanges.Add("The law is '[newFreeFormLaw]'")
 	to_chat(target, "<span class='danger'>BZZZZT</span>")
 	var/law = "[newFreeFormLaw]"
 	target.add_ion_law(law)

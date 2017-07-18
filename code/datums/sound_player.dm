@@ -98,7 +98,7 @@ var/decl/sound_player/sound_player = new()
 	src.source = source
 	src.volume = volume
 
-	GLOB.destroyed_event.register(source, src, /datum/sound_token/proc/Stop)
+	destroyed_event.register(source, src, /datum/sound_token/proc/Stop)
 
 	if(ismovable(source))
 		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
@@ -138,8 +138,8 @@ datum/sound_token/proc/Mute()
 		PrivRemoveListener(listener, null_sound)
 	listeners = null
 
-	GLOB.destroyed_event.unregister(source, src, /datum/sound_token/proc/Stop)
-	QDEL_NULL(proxy_listener)
+	destroyed_event.unregister(source, src, /datum/sound_token/proc/Stop)
+	qdel_null(proxy_listener)
 	source = null
 
 	sound_player.PrivStopSound(src)
@@ -185,8 +185,8 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	S.falloff = falloff
 	listeners[listener] = S
 
-	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
+	destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 
 	PrivUpdateListenerLoc(listener)
 
@@ -194,8 +194,8 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	if(!null_sound)
 		null_sound = new(channel = channel)
 	sound_to(listener, null_sound)
-	GLOB.moved_event.unregister(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
-	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
+	moved_event.unregister(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
+	destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
 /datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener)

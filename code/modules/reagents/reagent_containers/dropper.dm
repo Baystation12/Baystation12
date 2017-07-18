@@ -46,7 +46,7 @@
 						if (victim.head.body_parts_covered & EYES)
 							safe_thing = victim.head
 					if(victim.glasses)
-						if (victim.glasses.body_parts_covered & EYES)
+						if (!safe_thing)
 							safe_thing = victim.glasses
 
 					if(safe_thing)

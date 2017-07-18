@@ -124,7 +124,7 @@
 	else if(aiRestorePowerRoutine)
 		return AI_POWERUSAGE_RESTORATION
 
-	if(getOxyLoss())
+	if(oxyloss)
 		return AI_POWERUSAGE_RECHARGING
 	return AI_POWERUSAGE_NORMAL
 

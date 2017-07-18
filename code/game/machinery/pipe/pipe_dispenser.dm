@@ -17,7 +17,6 @@
 <A href='?src=\ref[src];make=1;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=5;dir=1'>Manifold</A><BR>
 <A href='?src=\ref[src];make=8;dir=1'>Manual Valve</A><BR>
-<A href='?src=\ref[src];make=9;dir=1'>Digital Valve</A><BR>
 <A href='?src=\ref[src];make=44;dir=1'>Automatic Shutoff Valve</A><BR>
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
@@ -53,10 +52,10 @@
 <A href='?src=\ref[src];make=28;dir=1'>Universal pipe adapter</A><BR>
 <A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>
 <A href='?src=\ref[src];make=7;dir=1'>Unary Vent</A><BR>
-<A href='?src=\ref[src];make=10;dir=1'>Gas Pump</A><BR>
+<A href='?src=\ref[src];make=9;dir=1'>Gas Pump</A><BR>
 <A href='?src=\ref[src];make=15;dir=1'>Pressure Regulator</A><BR>
 <A href='?src=\ref[src];make=16;dir=1'>High Power Gas Pump</A><BR>
-<A href='?src=\ref[src];make=11;dir=1'>Scrubber</A><BR>
+<A href='?src=\ref[src];make=10;dir=1'>Scrubber</A><BR>
 <A href='?src=\ref[src];makemeter=1'>Meter</A><BR>
 <A href='?src=\ref[src];make=13;dir=1'>Gas Filter</A><BR>
 <A href='?src=\ref[src];make=23;dir=1'>Gas Filter - Mirrored</A><BR>

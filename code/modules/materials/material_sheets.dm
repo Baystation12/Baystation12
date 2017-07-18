@@ -14,13 +14,15 @@
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
 
-/obj/item/stack/material/Initialize()
-	. = ..()
+/obj/item/stack/material/New(atom/newloc, var/amount=null)
+	..(newloc, amount)
+
 	if(!default_type)
 		default_type = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name("[default_type]")
 	if(!material)
-		return INITIALIZE_HINT_QDEL
+		qdel(src)
+		return 0
 
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
@@ -37,6 +39,7 @@
 
 	matter = material.get_matter()
 	update_strings()
+	return 1
 
 /obj/item/stack/material/get_material()
 	return material
@@ -97,35 +100,20 @@
 	icon_state = "sheet-marble"
 	default_type = "marble"
 
-/obj/item/stack/material/marble/ten
-	amount = 10
-
-/obj/item/stack/material/marble/fifty
-	amount = 50
-
 /obj/item/stack/material/diamond
 	name = "diamond"
 	icon_state = "sheet-diamond"
 	default_type = "diamond"
-
-/obj/item/stack/material/diamond/ten
-	amount = 10
 
 /obj/item/stack/material/uranium
 	name = "uranium"
 	icon_state = "sheet-uranium"
 	default_type = "uranium"
 
-/obj/item/stack/material/uranium/ten
-	amount = 10
-
 /obj/item/stack/material/phoron
 	name = "solid phoron"
 	icon_state = "sheet-phoron"
 	default_type = "phoron"
-
-/obj/item/stack/material/phoron/ten
-	amount = 10
 
 /obj/item/stack/material/phoron/fifty
 	amount = 50
@@ -143,16 +131,10 @@
 	icon_state = "sheet-gold"
 	default_type = "gold"
 
-/obj/item/stack/material/gold/ten
-	amount = 10
-
 /obj/item/stack/material/silver
 	name = "silver"
 	icon_state = "sheet-silver"
 	default_type = "silver"
-
-/obj/item/stack/material/silver/ten
-	amount = 10
 
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
@@ -189,9 +171,6 @@
 	default_type = "osmium-carbide plasteel"
 	apply_colour = 1
 
-/obj/item/stack/material/ocp/ten
-	amount = 10
-
 /obj/item/stack/material/ocp/fifty
 	amount = 50
 
@@ -218,9 +197,6 @@
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	default_type = "plasteel"
-
-/obj/item/stack/material/plasteel/ten
-	amount = 10
 
 /obj/item/stack/material/plasteel/fifty
 	amount = 50

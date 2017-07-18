@@ -40,10 +40,9 @@
 	files = new /datum/research(src) //Setup the research data holder.
 	return
 
-/obj/machinery/mecha_part_fabricator/Initialize()
+/obj/machinery/mecha_part_fabricator/initialize()
 	manufacturer = basic_robolimb.company
 	update_categories()
-	. = ..()
 
 /obj/machinery/mecha_part_fabricator/process()
 	..()
@@ -115,7 +114,7 @@
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Exosuit Fabricator UI", 800, 600)
 		ui.set_initial_data(data)
@@ -201,7 +200,7 @@
 			sleep(15)
 			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
 			sleep(30)
-			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [GLOB.using_map.company_name] system operator for future assistance.\"")
+			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [using_map.company_name] system operator for future assistance.\"")
 			req_access = null
 			emagged = 1
 			return 1

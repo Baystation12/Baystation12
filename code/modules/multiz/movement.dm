@@ -37,7 +37,7 @@
 		return 0
 
 	var/area/area = get_area(src)
-	if(direction == UP && area.has_gravity())
+	if(direction == UP && area.has_gravity)
 		to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
 		return 0
 

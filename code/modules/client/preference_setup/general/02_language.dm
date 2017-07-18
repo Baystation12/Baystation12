@@ -1,7 +1,3 @@
-/datum/preferences
-	var/list/alternate_languages //Secondary language(s)
-	var/list/language_prefixes   //Language prefix keys
-
 /datum/category_item/player_setup_item/general/language
 	name = "Language"
 	sort_order = 2
@@ -73,7 +69,7 @@
 /datum/category_item/player_setup_item/general/language/proc/is_allowed_language(var/mob/user, var/datum/language/lang)
 	if(!user)
 		return TRUE
-	var/datum/species/S = all_species[pref.species] || all_species[SPECIES_HUMAN]
+	var/datum/species/S = all_species[pref.species]
 	if(lang.name in S.secondary_langs)
 		return TRUE
 	if(!(lang.flags & RESTRICTED) && is_alien_whitelisted(user, lang))
@@ -81,8 +77,6 @@
 	return FALSE
 
 /datum/category_item/player_setup_item/general/language/proc/sanitize_alt_languages()
-	if(!istype(pref.alternate_languages)) pref.alternate_languages = list()
-
 	var/preference_mob = preference_mob()
 	for(var/L in pref.alternate_languages)
 		var/datum/language/lang = all_languages[L]

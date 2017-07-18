@@ -17,8 +17,6 @@
 	icon_state = "mixer0"
 	use_power = 1
 	idle_power_usage = 20
-	clicksound = "button"
-	clickvol = 20
 	var/beaker = null
 	var/obj/item/weapon/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0

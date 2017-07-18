@@ -25,8 +25,7 @@
 		/obj/item/weapon/pickaxe/hand,
 		/obj/item/weapon/storage/bag/fossils,
 		/obj/item/weapon/hand_labeler,
-		/obj/item/taperoll/research,
-		/obj/item/device/spaceflare)
+		/obj/item/taperoll/research)
 
 /obj/structure/closet/wardrobe/ptgear
 	name = "pt gear wardrobe"

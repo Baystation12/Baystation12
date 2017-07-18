@@ -39,7 +39,7 @@
 /mob/living/carbon/human/proc/blood_squirt(var/amt, var/turf/sprayloc)
 	if(amt <= 0 || !istype(sprayloc))
 		return
-	var/spraydir = pick(GLOB.alldirs)
+	var/spraydir = pick(alldirs)
 	amt = ceil(amt/BLOOD_SPRAY_DISTANCE)
 	var/bled = 0
 	spawn(0)
@@ -251,8 +251,10 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 /mob/living/carbon/human/proc/get_effective_blood_volume()
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
 	var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
-	if(!heart || (heart.pulse == PULSE_NONE && !(status_flags & FAKEDEATH) && heart.robotic < ORGAN_ROBOT))
-		blood_volume *= 0.25
-	else
-		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage)))
+	if(!heart || heart.is_broken())
+		blood_volume *= 0.3
+	else if(heart.is_bruised())
+		blood_volume *= 0.6
+	else if(heart.damage > 1)
+		blood_volume *= 0.8
 	return blood_volume

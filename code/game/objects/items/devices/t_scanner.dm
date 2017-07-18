@@ -28,10 +28,10 @@
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
 	if(on)
-		GLOB.processing_objects.Add(src)
+		processing_objects.Add(src)
 		flicker = 0
 	else
-		GLOB.processing_objects.Remove(src)
+		processing_objects.Remove(src)
 		set_user_client(null)
 	update_icon()
 

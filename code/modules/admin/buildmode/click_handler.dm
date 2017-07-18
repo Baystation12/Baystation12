@@ -23,10 +23,10 @@
 		build_buttons += build_button
 
 /datum/click_handler/build_mode/Destroy()
-	QDEL_NULL(current_build_mode)
+	qdel_null(current_build_mode)
 
-	QDEL_NULL_LIST(build_modes)
-	QDEL_NULL_LIST(build_buttons)
+	qdel_null_list(build_modes)
+	qdel_null_list(build_buttons)
 
 	. = ..()
 

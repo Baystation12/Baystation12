@@ -1,4 +1,4 @@
-/mob/living/silicon/pai/death(gibbed, deathmessage, show_dead_message)
+/mob/living/silicon/pai/death(gibbed)
 	if(card)
 		card.removePersonality()
 		if(gibbed)
@@ -8,6 +8,6 @@
 			close_up()
 	if(mind)
 		qdel(mind)
-	..(gibbed, deathmessage, "You have suffered a critical system failure, and are dead.")
+	..(gibbed)
 	ghostize()
 	qdel(src)

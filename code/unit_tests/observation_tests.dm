@@ -1,5 +1,5 @@
 /proc/is_listening_to_movement(var/atom/movable/listening_to, var/listener)
-	return GLOB.moved_event.is_listening(listening_to, listener)
+	return moved_event.is_listening(listening_to, listener)
 
 /datum/unit_test/observation
 	name = "OBSERVATION template"
@@ -15,19 +15,19 @@
 		received_moves = list()
 	received_moves.Cut()
 
-	for(var/global_listener in GLOB.moved_event.global_listeners)
-		GLOB.moved_event.unregister_global(global_listener)
+	for(var/global_listener in moved_event.global_listeners)
+		moved_event.unregister_global(global_listener)
 
-	stored_global_listen_count = GLOB.global_listen_count.Copy()
-	stored_event_sources_count = GLOB.event_sources_count.Copy()
-	stored_event_listen_count = GLOB.event_listen_count.Copy()
+	stored_global_listen_count = global_listen_count.Copy()
+	stored_event_sources_count = event_sources_count.Copy()
+	stored_event_listen_count = event_listen_count.Copy()
 
 	sanity_check_events("Pre-Test")
 	. = conduct_test()
 	sanity_check_events("Post-Test")
 
 /datum/unit_test/observation/proc/sanity_check_events(var/phase)
-	for(var/entry in GLOB.all_observable_events)
+	for(var/entry in all_observable_events.events)
 		var/decl/observ/event = entry
 		if(null in event.global_listeners)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
@@ -51,11 +51,11 @@
 									if(isnull(proc_call))
 										fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
 
-	for(var/entry in (GLOB.global_listen_count - stored_global_listen_count))
+	for(var/entry in (global_listen_count - stored_global_listen_count))
 		fail("[phase]: global_listen_count - Contained [log_info_line(entry)].")
-	for(var/entry in (GLOB.event_sources_count - stored_event_sources_count))
+	for(var/entry in (event_sources_count - stored_event_sources_count))
 		fail("[phase]: event_sources_count - Contained [log_info_line(entry)].")
-	for(var/entry in (GLOB.event_listen_count - stored_event_listen_count))
+	for(var/entry in (event_listen_count - stored_event_listen_count))
 		fail("[phase]: event_listen_count - Contained [log_info_line(entry)].")
 
 /datum/unit_test/observation/proc/conduct_test()
@@ -77,7 +77,7 @@
 	var/turf/target = get_step(start, NORTH)
 	var/obj/O = get_named_instance(/obj, start)
 
-	GLOB.moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
+	moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
 	O.forceMove(target)
 
 	if(received_moves.len != 1)
@@ -91,7 +91,7 @@
 	else
 		pass("Received the expected move event.")
 
-	GLOB.moved_event.unregister_global(src)
+	moved_event.unregister_global(src)
 	qdel(O)
 	return 1
 
@@ -218,7 +218,7 @@
 
 	mech.occupant = holding_mob
 
-	GLOB.moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
+	moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
 	holding_mob.drop_from_inventory(held_item)
 
 	if(received_moves.len != 1)
@@ -234,7 +234,7 @@
 	else
 		pass("One one moved event with expected arguments raised.")
 
-	GLOB.moved_event.unregister(held_item, src)
+	moved_event.unregister(held_item, src)
 	qdel(mech)
 	qdel(held_item)
 	qdel(held_mob)
@@ -297,10 +297,10 @@
 	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
 
-	GLOB.moved_event.register_global(O, /atom/movable/proc/move_to_turf)
+	moved_event.register_global(O, /atom/movable/proc/move_to_turf)
 	qdel(O)
 
-	if(null in GLOB.moved_event.global_listeners)
+	if(null in moved_event.global_listeners)
 		fail("The global listener list contains a null entry.")
 	else
 		pass("The global listener list does not contain a null entry.")
@@ -315,10 +315,10 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
+	moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
 	qdel(event_source)
 
-	if(null in GLOB.moved_event.event_sources)
+	if(null in moved_event.event_sources)
 		fail("The event source list contains a null entry.")
 	else
 		pass("The event source list does not contain a null entry.")
@@ -334,10 +334,10 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
+	moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
 	qdel(listener)
 
-	var/listeners = GLOB.moved_event.event_sources[event_source]
+	var/listeners = moved_event.event_sources[event_source]
 	if(listeners && (null in listeners))
 		fail("The event source listener list contains a null entry.")
 	else

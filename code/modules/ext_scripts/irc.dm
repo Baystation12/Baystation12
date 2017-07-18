@@ -62,9 +62,9 @@
 				send2adminirc("Reply: [key_name(source)]->[key_name(target)]: [msg]")
 			else if(istext(target))
 				var/rank = source.holder ? source.holder.rank : "Player"
-				send2adminirc("[rank] PM to [target] from [key_name(source)]: [msg]")
+				send2adminirc("[rank]PM to [target] from [key_name(source)]: [msg]")
 			else
-				send2adminirc("HELP from [key_name(source)]: [msg]")
+				send2adminirc("Request for Help from [key_name(source)]: [msg]")
 
 /hook/startup/proc/ircNotify()
 	send2mainirc("Server starting up on byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")

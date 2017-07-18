@@ -1,7 +1,3 @@
-/datum/preferences
-	var/list/relations
-	var/list/relations_info
-
 /datum/category_item/player_setup_item/relations
 	name = "Matchmaking"
 	sort_order = 1

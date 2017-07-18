@@ -42,7 +42,3 @@
 #define ADDANTAG_PLAYER 1	// Any player may call the add antagonist vote.
 #define ADDANTAG_ADMIN 2	// Any player with admin privilegies may call the add antagonist vote.
 #define ADDANTAG_AUTO 4		// The add antagonist vote is available as an alternative for transfer vote.
-
-#define TICKET_CLOSED 0   // Ticket has been resolved or declined
-#define TICKET_OPEN     1 // Ticket has been created, but not responded to
-#define TICKET_ASSIGNED 2 // An admin has assigned themself to the ticket and will respond

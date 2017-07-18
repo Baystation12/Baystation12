@@ -119,7 +119,7 @@
 	var/last_transmission
 	var/datum/radio_frequency/radio_connection
 
-	Initialize()
+	initialize()
 		if(!radio_controller)
 			return
 
@@ -127,7 +127,6 @@
 			src.frequency = sanitize_frequency(src.frequency)
 
 		set_frequency(frequency)
-		. = ..()
 
 	proc/set_frequency(new_frequency)
 		radio_controller.remove_object(src, frequency)
@@ -142,7 +141,7 @@
 
 		var/time = time2text(world.realtime,"hh:mm:ss")
 		var/turf/T = get_turf(src)
-		GLOB.lastsignalers.Add("[time] <B>:</B> [usr.key] used [src] @ location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]")
+		lastsignalers.Add("[time] <B>:</B> [usr.key] used [src] @ location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]")
 
 		var/datum/signal/signal = new
 		signal.source = src

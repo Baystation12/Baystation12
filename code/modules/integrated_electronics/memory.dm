@@ -67,7 +67,7 @@
 
 /obj/item/integrated_circuit/memory/constant/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
-	if(!CanInteract(user, GLOB.physical_state))
+	if(!CanInteract(user, physical_state))
 		return
 
 	var/datum/integrated_io/O = outputs[1]
@@ -76,13 +76,13 @@
 		if("string")
 			accepting_refs = 0
 			new_data = input("Now type in a string.","[src] string writing") as null|text
-			if(istext(new_data) && CanInteract(user, GLOB.physical_state))
+			if(istext(new_data) && CanInteract(user, physical_state))
 				O.write_data_to_pin(new_data)
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [O.display_data()].</span>")
 		if("number")
 			accepting_refs = 0
 			new_data = input("Now type in a number.","[src] number writing") as null|num
-			if(isnum(new_data) && CanInteract(user, GLOB.physical_state))
+			if(isnum(new_data) && CanInteract(user, physical_state))
 				O.write_data_to_pin(new_data)
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [O.display_data()].</span>")
 		if("ref")

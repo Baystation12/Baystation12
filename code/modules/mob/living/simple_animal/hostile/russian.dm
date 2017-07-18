@@ -45,8 +45,8 @@
 	casingtype = /obj/item/ammo_casing/a357
 
 
-/mob/living/simple_animal/hostile/russian/death(gibbed, deathmessage, show_dead_message)
-	..(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/hostile/russian/death()
+	..()
 	if(corpse)
 		new corpse (src.loc)
 	if(weapon1)

@@ -39,7 +39,7 @@
 
 // Step 3 - Registered irradiatable things are checked for radiation
 /datum/controller/process/radiation/proc/irradiate_targets()
-	var/list/registered_listeners = GLOB.living_mob_list_ // For now just use this. Nothing else is interested anyway.
+	var/list/registered_listeners = living_mob_list_ // For now just use this. Nothing else is interested anyway.
 	if(length(linked.sources) > 0)
 		for(var/thing in registered_listeners)
 			var/atom/A = thing

@@ -38,7 +38,7 @@
 
 /proc/get_message_server(z)
 	if(message_servers)
-		var/list/zlevels = GLOB.using_map.contact_levels
+		var/list/zlevels = using_map.contact_levels
 		if(z)
 			zlevels = GetConnectedZlevels(z)
 		for (var/obj/machinery/message_server/MS in message_servers)

@@ -11,16 +11,14 @@
 
 /obj/item/device/tvcamera/New()
 	..()
-	GLOB.listening_objects += src
+	listening_objects += src
 
-/obj/item/device/tvcamera/Destroy()
-	GLOB.listening_objects -= src
-	QDEL_NULL(camera)
-	QDEL_NULL(radio)
+/obj/item/device/tvcamera/examine()
 	. = ..()
-
-/obj/item/device/tvcamera/Initialize()
-	. = ..()
+	to_chat(usr, "Video feed is [camera.status ? "on" : "off"]")
+	to_chat(usr, "Audio feed is [radio.broadcasting ? "on" : "off"]")
+/obj/item/device/tvcamera/initialize()
+	..()
 	camera = new(src)
 	camera.c_tag = channel
 	camera.status = FALSE
@@ -28,11 +26,6 @@
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
 	update_icon()
-
-/obj/item/device/tvcamera/examine()
-	. = ..()
-	to_chat(usr, "Video feed is [camera.status ? "on" : "off"]")
-	to_chat(usr, "Audio feed is [radio.broadcasting ? "on" : "off"]")
 
 /obj/item/device/tvcamera/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
 	radio.hear_talk(M,msg,verb,speaking)
@@ -50,7 +43,7 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/item/device/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
+/obj/item/device/tvcamera/Topic(bred, href_list, state = physical_state)
 	if(..())
 		return 1
 	if(href_list["channel"])
@@ -87,6 +80,14 @@
 	if(istype(H))
 		H.update_inv_r_hand(0)
 		H.update_inv_l_hand()
+
+/obj/item/device/tvcamera/Destroy()
+	listening_objects -= src
+	qdel(camera)
+	qdel(radio)
+	camera = null
+	radio = null
+	..()
 
 //Assembly by roboticist
 

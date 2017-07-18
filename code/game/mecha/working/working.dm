@@ -3,11 +3,12 @@
 	var/list/cargo = new
 	var/cargo_capacity = 5
 
-/obj/mecha/working/Initialize()
-	. = ..()
+/obj/mecha/working/initialize()
+	..()
 	var/turf/T = get_turf(src)
 	if(isPlayerLevel(T.z))
 		new /obj/item/mecha_parts/mecha_tracking(src)
+	return
 
 /obj/mecha/working/Destroy()
 	for(var/mob/M in src)

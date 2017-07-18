@@ -4,7 +4,7 @@
 
 /datum/controller/process/inactivity/doWork()
 	if(config.kick_inactive)
-		for(last_object in GLOB.clients)
+		for(last_object in clients)
 			var/client/C = last_object
 			if(!C.holder && C.is_afk(config.kick_inactive MINUTES))
 				if(!isobserver(C.mob))

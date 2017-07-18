@@ -551,7 +551,7 @@
 	name = "poppies"
 	seed_name = "poppy"
 	display_name = "poppies"
-	chems = list("nutriment" = list(1,20), "tramadol" = list(1,10))
+	chems = list("nutriment" = list(1,20), "bicaridine" = list(1,10))
 	kitchen_tag = "poppy"
 
 /datum/seed/flower/poppy/New()

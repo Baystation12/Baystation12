@@ -12,7 +12,6 @@
 	var/obj/item/organ/external/part = null
 	var/implant_color = "b"
 	var/malfunction = 0
-	var/known //if advanced scanners would name these in results
 
 /obj/item/weapon/implant/proc/trigger(emote, source)
 	return

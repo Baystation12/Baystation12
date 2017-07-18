@@ -10,12 +10,12 @@
 	if(source in appearance_sources)
 		return FALSE
 	appearance_sources[source] = new/datum/appearance_data(images, viewers, priority)
-	GLOB.destroyed_event.register(source, src, /decl/appearance_handler/proc/RemoveAltAppearance)
+	destroyed_event.register(source, src, /decl/appearance_handler/proc/RemoveAltAppearance)
 
 /decl/appearance_handler/proc/RemoveAltAppearance(var/source)
 	var/datum/appearance_data/ad = appearance_sources[source]
 	if(ad)
-		GLOB.destroyed_event.unregister(source, src)
+		destroyed_event.unregister(source, src)
 		appearance_sources -= source
 		qdel(ad)
 

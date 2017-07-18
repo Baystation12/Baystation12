@@ -23,7 +23,7 @@
 /decl/communication_channel/aooc/do_communicate(var/client/C, var/message)
 	var/datum/admins/holder = C.holder
 
-	for(var/client/target in GLOB.clients)
+	for(var/client/target in clients)
 		if(target.holder)
 			receive_communication(C, target, "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] <EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message'>[message]</span></span></span>")
 		else if(target.mob && target.mob.mind && target.mob.mind.special_role)

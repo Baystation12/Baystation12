@@ -42,7 +42,7 @@
 	return 1
 
 /obj/item/modular_computer/New()
-	GLOB.processing_objects.Add(src)
+	processing_objects.Add(src)
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
@@ -52,7 +52,7 @@
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
-	GLOB.processing_objects.Remove(src)
+	processing_objects.Remove(src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)
@@ -160,7 +160,7 @@
 
 	idle_threads.Add(active_program)
 	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
-	GLOB.nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
+	nanomanager.close_uis(active_program.NM ? active_program.NM : active_program)
 	active_program = null
 	update_icon()
 	if(istype(user))
@@ -206,11 +206,11 @@
 
 /obj/item/modular_computer/proc/update_uis()
 	if(active_program) //Should we update program ui or computer ui?
-		GLOB.nanomanager.update_uis(active_program)
+		nanomanager.update_uis(active_program)
 		if(active_program.NM)
-			GLOB.nanomanager.update_uis(active_program.NM)
+			nanomanager.update_uis(active_program.NM)
 	else
-		GLOB.nanomanager.update_uis(src)
+		nanomanager.update_uis(src)
 
 /obj/item/modular_computer/proc/check_update_ui_need()
 	var/ui_update_needed = 0

@@ -43,4 +43,4 @@ var/global/datum/getrev/revdata = new()
 	else
 		to_chat(src, "<b>Server Revision:</b> Revision Unknown")
 	to_chat(src, "Game ID: <b>[game_id]</b>")
-	to_chat(src, "Current map: [GLOB.using_map.full_name]")
+	to_chat(src, "Current map: [using_map.full_name]")

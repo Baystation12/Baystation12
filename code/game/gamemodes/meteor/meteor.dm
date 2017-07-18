@@ -31,8 +31,8 @@
 /datum/game_mode/meteor/post_setup()
 	..()
 	alert_title = "Automated Beacon AB-[rand(10, 99)]"
-	alert_text = "This is an automatic warning. Your facility: [GLOB.using_map.full_name] is on a collision course with a nearby asteroid belt. Estimated time until impact is: [METEOR_DELAY / 1200] MINUTES. Please perform necessary actions to secure your ship or station from the threat. Have a nice day."
-	start_text = "This is an automatic warning. Your facility: [GLOB.using_map.full_name] has entered an asteroid belt. Estimated time until you leave the belt is: [rand(20,30)] HOURS and [rand(1, 59)] MINUTES. For your safety, please consider changing course or using protective equipment. Have a nice day."
+	alert_text = "This is an automatic warning. Your facility: [using_map.full_name] is on a collision course with a nearby asteroid belt. Estimated time until impact is: [METEOR_DELAY / 1200] MINUTES. Please perform necessary actions to secure your ship or station from the threat. Have a nice day."
+	start_text = "This is an automatic warning. Your facility: [using_map.full_name] has entered an asteroid belt. Estimated time until you leave the belt is: [rand(20,30)] HOURS and [rand(1, 59)] MINUTES. For your safety, please consider changing course or using protective equipment. Have a nice day."
 	next_wave = round_duration_in_ticks + METEOR_DELAY
 
 /datum/game_mode/meteor/process()
@@ -44,7 +44,7 @@
 	if((round_duration_in_ticks >= next_wave) && (alert_sent == 1))
 		alert_sent = 2
 		command_announcement.Announce(start_text, alert_title)
-		for(var/obj/machinery/shield_diffuser/SD in GLOB.machines)
+		for(var/obj/machinery/shield_diffuser/SD in machines)
 			SD.meteor_alarm(INFINITY)
 		next_wave = round_duration_in_ticks + (meteor_wave_delay * time_between_waves_minutes)
 	if((round_duration_in_ticks >= METEOR_FAILSAFE_THRESHOLD) && (meteor_severity < 15) && !failsafe_triggered)
@@ -56,7 +56,7 @@
 		next_wave = round_duration_in_ticks + (meteor_wave_delay * time_between_waves_minutes)
 		// Starts as barely noticeable dust impact, ends as barrage of most severe meteor types the code has to offer. Have fun.
 		spawn()
-			spawn_meteors(meteor_severity, get_meteor_types(), pick(GLOB.cardinal))
+			spawn_meteors(meteor_severity, get_meteor_types(), pick(cardinal))
 		var/escalated = FALSE
 		if(prob(escalation_probability) && (meteor_severity < maximal_severity))
 			meteor_severity++

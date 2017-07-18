@@ -21,12 +21,12 @@
 	on = !on
 	if(on)
 		set_light(range, 2, "#007fff")
-		GLOB.processing_objects |= src
+		processing_objects |= src
 		icon_state = "uv_on"
 	else
 		set_light(0)
 		clear_last_scan()
-		GLOB.processing_objects -= src
+		processing_objects -= src
 		icon_state = "uv_off"
 
 /obj/item/device/uv_light/proc/clear_last_scan()

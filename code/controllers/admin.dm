@@ -3,10 +3,8 @@
 	name = "Initializing..."
 	var/target
 
-INITIALIZE_IMMEDIATE(/obj/effect/statclick)
-
-/obj/effect/statclick/Initialize(mapload, text, target) //Don't port this to Initialize it's too critical
-	. = ..()
+/obj/effect/statclick/New(loc, text, target) //Don't port this to Initialize it's too critical
+	..()
 	name = text
 	src.target = target
 
@@ -45,7 +43,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/statclick)
 	switch(controller)
 		if("Master")
 			Recreate_MC()
+			feedback_add_details("admin_verb","RMC")
 		if("Failsafe")
 			new /datum/controller/failsafe()
+			feedback_add_details("admin_verb","RFailsafe")
 
 	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")

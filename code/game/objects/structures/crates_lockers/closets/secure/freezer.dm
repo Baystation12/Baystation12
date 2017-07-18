@@ -80,15 +80,17 @@
 	icon_off = "fridgebroken"
 	req_access = list(access_heads_vault)
 
-/obj/structure/closet/secure_closet/freezer/money/Initialize()
-	. = ..()
+/obj/structure/closet/secure_closet/freezer/money/New()
+	..()
 	//let's make hold a substantial amount.
 	var/created_size = 0
 	for(var/i = 1 to 200) //sanity loop limit
-		var/obj/item/cash_type = pick(3; /obj/item/weapon/spacecash/bundle/c1000, 4; /obj/item/weapon/spacecash/bundle/c500, 5; /obj/item/weapon/spacecash/bundle/c200)
-		var/bundle_size = initial(cash_type.w_class) / 2
+		var/bundletype = pick(3; /obj/item/weapon/spacecash/bundle/c1000, 4; /obj/item/weapon/spacecash/bundle/c500, 5; /obj/item/weapon/spacecash/bundle/c200)
+		var/obj/item/cash = new bundletype(null)
+		var/bundle_size = content_size(cash)
 		if(created_size + bundle_size <= storage_capacity)
+			cash.forceMove(src)
 			created_size += bundle_size
-			new cash_type(src)
 		else
+			qdel(cash)
 			break

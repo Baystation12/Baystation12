@@ -35,12 +35,12 @@
 	else
 		power_supply = new /obj/item/weapon/cell/device/variable(src, max_shots*charge_cost)
 	if(self_recharge)
-		GLOB.processing_objects.Add(src)
+		processing_objects.Add(src)
 	update_icon()
 
 /obj/item/weapon/gun/energy/Destroy()
 	if(self_recharge)
-		GLOB.processing_objects.Remove(src)
+		processing_objects.Remove(src)
 	return ..()
 
 /obj/item/weapon/gun/energy/process()

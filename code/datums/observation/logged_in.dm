@@ -6,7 +6,7 @@
 //		Arguments that the called proc should expect:
 //			/mob/joiner: The mob that has logged in
 
-GLOBAL_DATUM_INIT(logged_in_event, /decl/observ/logged_in, new)
+var/decl/observ/logged_in/logged_in_event = new()
 
 /decl/observ/logged_in
 	name = "Logged In"
@@ -18,4 +18,4 @@ GLOBAL_DATUM_INIT(logged_in_event, /decl/observ/logged_in, new)
 
 /mob/Login()
 	..()
-	GLOB.logged_in_event.raise_event(src)
+	logged_in_event.raise_event(src)

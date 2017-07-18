@@ -79,12 +79,6 @@
 	hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
-	hard_drive.store_file(new/datum/computer_file/program/supply())
-
-// Professional Cargo/Offices
-/obj/item/modular_computer/console/preset/civilian/professional/install_default_hardware()
-	..()
-	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 
 // ERT
 /obj/item/modular_computer/console/preset/ert/install_default_hardware()

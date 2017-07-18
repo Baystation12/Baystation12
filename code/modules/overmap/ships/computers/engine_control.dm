@@ -7,8 +7,8 @@
 	var/state = "status"
 	var/obj/effect/overmap/ship/linked
 
-/obj/machinery/computer/engines/Initialize()
-	. = ..()
+/obj/machinery/computer/engines/initialize()
+	..()
 	linked = map_sectors["[z]"]
 
 /obj/machinery/computer/engines/attack_hand(var/mob/user as mob)
@@ -47,7 +47,7 @@
 	data["engines_info"] = enginfo
 	data["total_thrust"] = total_thrust
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "engines_control.tmpl", "[linked.name] Engines Control", 380, 530)
 		ui.set_initial_data(data)

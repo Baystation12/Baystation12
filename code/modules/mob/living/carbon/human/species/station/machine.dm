@@ -47,6 +47,7 @@
 
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/mmi_holder/posibrain,
+		BP_CELL = /obj/item/organ/internal/cell,
 		BP_OPTICS = /obj/item/organ/internal/eyes/optics
 		)
 
@@ -83,15 +84,14 @@
 	return sanitizeName(new_name, allow_numbers = 1)
 
 /datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
-	if(!H)
+	spawn(10) // This is annoying, but for whatever stupid reason this proc isn't called
+	          // before prefs are transferred over and robolimbs are applied on spawn.
+		if(!H)
+			return
+		for(var/obj/item/organ/external/E in H.organs)
+			if(E.robotic < ORGAN_ROBOT)
+				E.robotize("Morpheus")
 		return
-	handle_limbs_setup(H)
-
-/datum/species/machine/handle_limbs_setup(var/mob/living/carbon/human/H)
-	for(var/obj/item/organ/external/E in H.organs)
-		if(E.robotic < ORGAN_ROBOT)
-			E.robotize("Morpheus")
-	return
 
 /datum/species/machine/get_blood_name()
 	return "oil"

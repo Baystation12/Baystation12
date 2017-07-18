@@ -71,21 +71,23 @@
 			to_chat(user, "Key: <font color='#FFA500'>Electronics</font>/<font color='red'>Brute</font>")
 			to_chat(user, "<span class='notice'>External prosthetics:</span>")
 			var/organ_found
-			for(var/obj/item/organ/external/E in H.organs)
-				if(E.robotic < ORGAN_ROBOT)
-					continue
-				organ_found = 1
-				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#FFA500'>[E.burn_dam]</font>")
+			if(H.internal_organs.len)
+				for(var/obj/item/organ/external/E in H.organs)
+					if(!(E.robotic >= ORGAN_ROBOT))
+						continue
+					organ_found = 1
+					to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#FFA500'>[E.burn_dam]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 			to_chat(user, "<hr>")
 			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
 			organ_found = null
-			for(var/obj/item/organ/O in H.internal_organs)
-				if(O.robotic < ORGAN_ROBOT)
-					continue
-				organ_found = 1
-				to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")
+			if(H.internal_organs.len)
+				for(var/obj/item/organ/O in H.internal_organs)
+					if(!(O.robotic >= ORGAN_ROBOT))
+						continue
+					organ_found = 1
+					to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
 

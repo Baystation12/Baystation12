@@ -121,8 +121,8 @@
 
 	return 1
 
-/obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
-	. = ..()
+/obj/machinery/atmospherics/unary/vent_scrubber/initialize()
+	..()
 	radio_filter_in = frequency==initial(frequency)?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
 	if (frequency)

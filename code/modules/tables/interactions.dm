@@ -80,21 +80,39 @@
 	if (!W) return
 
 	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
-		var/obj/item/grab/G = W
-		if (istype(G.affecting, /mob/living/carbon/human))
+	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
+		var/obj/item/weapon/grab/G = W
+		if (istype(G.affecting, /mob/living))
+			var/mob/living/M = G.affecting
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
 				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
 				return
-
-			if(G.force_danger())
-				G.affecting.forceMove(src.loc)
-				G.affecting.Weaken(rand(2,5))
-				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-				qdel(W)
-			else
+			if (G.state < GRAB_AGGRESSIVE)
 				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
+			else if (G.state > GRAB_AGGRESSIVE || world.time >= (G.last_action + UPGRADE_COOLDOWN))
+				if(user.a_intent == I_HURT)
+					var/blocked = M.run_armor_check(BP_HEAD, "melee")
+					if (prob(30 * blocked_mult(blocked)))
+						M.Weaken(5)
+					M.apply_damage(8, BRUTE, BP_HEAD, blocked)
+					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
+					if(material)
+						playsound(loc, material.tableslam_noise, 50, 1)
+					else
+						playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+					var/list/L = take_damage(rand(1,5))
+					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
+					for(var/obj/item/weapon/material/shard/S in L)
+						if(S.sharp && prob(50))
+							M.visible_message("<span class='danger'>\The [S] slices into [M]'s face!</span>",
+							                  "<span class='danger'>\The [S] slices into your face!</span>")
+							M.standard_weapon_hit_effects(S, G.assailant, S.force*2, blocked, BP_HEAD) //standard weapon hit effects include damage and embedding
+				else
+					G.affecting.forceMove(src.loc)
+					G.affecting.Weaken(rand(2,5))
+					visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+				qdel(W)
 			return
 
 	// Handle dismantling or placing things on the table from here on.

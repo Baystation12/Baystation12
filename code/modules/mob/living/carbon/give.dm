@@ -14,11 +14,6 @@
 		to_chat(usr, "<span class='warning'>You don't have anything in your hands to give to \the [target].</span>")
 		return
 
-	if(istype(I, /obj/item/grab))
-		to_chat(usr, "<span class='warning'>You can't give someone a grab.</span>")
-		return
-
-
 	if(alert(target,"[usr] wants to give you \a [I]. Will you accept it?",,"Yes","No") == "No")
 		target.visible_message("<span class='notice'>\The [usr] tried to hand \the [I] to \the [target], \
 		but \the [target] didn't want it.</span>")

@@ -75,8 +75,8 @@
 
 
 	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
-		if(istype(G, /obj/item/grab))
-			var/obj/item/grab/grab = G
+		if(istype(G, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/grab = G
 			if(!ismob(grab.affecting))
 				return
 			for(var/mob/living/carbon/slime/M in range(1,G:affecting))

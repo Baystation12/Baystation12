@@ -9,14 +9,13 @@
 	var/icon_opened = "open"
 	var/opened = 0
 	var/welded = 0
-	var/large = 1
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
 	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 2 * MOB_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
-	var/open_sound = 'sound/effects/locker_open.ogg'
-	var/close_sound = 'sound/effects/locker_close.ogg'
+	var/open_sound = 'sound/machines/click.ogg'
+	var/close_sound = 'sound/machines/click.ogg'
 
 	var/store_misc = 1
 	var/store_items = 1
@@ -24,8 +23,8 @@
 
 	var/list/will_contain
 
-/obj/structure/closet/Initialize()
-	. = ..()
+/obj/structure/closet/initialize()
+	..()
 	if(will_contain)
 		create_objects_in_loc(src, will_contain)
 		will_contain = null // Remove reference to allow for garbage collection
@@ -115,7 +114,7 @@
 	src.icon_state = src.icon_closed
 	src.opened = 0
 
-	playsound(src.loc, close_sound, 25, 0, -3)
+	playsound(src.loc, close_sound, 15, 1, -3)
 	density = 1
 	return 1
 
@@ -214,17 +213,25 @@
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
-		if(istype(W, /obj/item/grab))
-			var/obj/item/grab/G = W
+		if(istype(W, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/G = W
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(istype(W, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = W
-			if(WT.isOn())
-				slice_into_parts(WT, user)
-				return
+			if(!WT.remove_fuel(0,user))
+				if(!WT.isOn())
+					return
+				else
+					to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+					return
+			new /obj/item/stack/material/steel(src.loc)
+			for(var/mob/M in viewers(src))
+				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
+			qdel(src)
+			return
 		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
 			var/obj/item/weapon/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
@@ -262,22 +269,10 @@
 		src.attack_hand(user)
 	return
 
-/obj/structure/closet/proc/slice_into_parts(obj/item/weapon/weldingtool/WT, mob/user)
-	if(!WT.remove_fuel(0,user))
-		to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-		return
-	new /obj/item/stack/material/steel(src.loc)
-	user.visible_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", \
-						 "<span class='notice'>You have cut \the [src] apart with \the [WT].</span>", \
-						 "You hear welding.")
-	qdel(src)
-
 /obj/structure/closet/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
 	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete
 		return
 	if(O.loc == user)
-		return
-	if(ismob(O) && src.large)
 		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return

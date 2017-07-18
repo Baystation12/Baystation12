@@ -96,9 +96,9 @@
 /datum/language/human/get_random_name(var/gender)
 	if (prob(80))
 		if(gender==FEMALE)
-			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 		else
-			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	else
 		return ..()
 
@@ -120,7 +120,7 @@
 /datum/language/machine/get_random_name()
 	if(prob(70))
 		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
-	return pick(GLOB.ai_names)
+	return pick(ai_names)
 
 //Syllable Lists
 /*
@@ -200,17 +200,3 @@
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
-
-/datum/language/nabber
-	name = LANGUAGE_NABBER
-	desc = "A strange language that can be understood both by the sounds made and by the movement needed to create those sounds."
-	signlang_verb = list("chitters", "grinds its mouthparts", "chitters and grinds its mouthparts")
-	key = "n"
-	flags = RESTRICTED | SIGNLANG | NO_STUTTER | NONVERBAL
-	colour = ".nabber_lang"
-
-/datum/language/nabber/get_random_name(var/gender)
-	if(gender == FEMALE)
-		return capitalize(pick(GLOB.first_names_female))
-	else
-		return capitalize(pick(GLOB.first_names_male))

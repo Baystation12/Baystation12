@@ -16,13 +16,13 @@
 
 /obj/singularity/narsie/large/exit/New()
 	..()
-	GLOB.processing_objects.Add(src)
+	processing_objects.Add(src)
 
 /obj/singularity/narsie/large/exit/update_icon()
 	overlays = 0
 
 /obj/singularity/narsie/large/exit/process()
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in player_list)
 		if(M.client)
 			M.see_rift(src)
 	eat()
@@ -91,4 +91,4 @@
 		src << riftimage
 
 	else
-		QDEL_NULL(riftimage)
+		qdel_null(riftimage)

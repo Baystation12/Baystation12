@@ -22,7 +22,7 @@
 				if("Area or Turf")
 					target = input("Select target:", "Target", get_turf(usr)) as null|area|turf in world
 				if("Client")
-					target = input("Select target:", "Target", usr.client) as null|anything in GLOB.clients
+					target = input("Select target:", "Target", usr.client) as null|anything in clients
 				else
 					return
 			if(!target)
@@ -159,7 +159,7 @@
 				if(isnull(current)) return CANCEL
 
 			if("client")
-				current = input("Select client for [arguments.len+1]\th argument") as null|anything in GLOB.clients
+				current = input("Select client for [arguments.len+1]\th argument") as null|anything in clients
 				if(isnull(current)) return CANCEL
 
 			if("mob's area")

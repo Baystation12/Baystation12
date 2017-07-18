@@ -1,9 +1,9 @@
 proc/sql_poll_population()
 	if(!sqllogging)
 		return
-	var/admincount = GLOB.admins.len
+	var/admincount = admins.len
 	var/playercount = 0
-	for(var/mob/M in GLOB.player_list)
+	for(var/mob/M in player_list)
 		if(M.client)
 			playercount += 1
 	establish_db_connection()

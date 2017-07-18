@@ -21,7 +21,7 @@
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA, "Xenophage")
+	species_restricted = list("exclude",SPECIES_DIONA, "Xenophage")
 	flash_protection = FLASH_PROTECTION_MAJOR
 
 	var/obj/machinery/camera/camera
@@ -31,13 +31,8 @@
 	brightness_on = 4
 	on = 0
 
-/obj/item/clothing/head/helmet/space/Destroy()
-	if(camera && !ispath(camera))
-		QDEL_NULL(camera)
-	. = ..()
-
-/obj/item/clothing/head/helmet/space/Initialize()
-	. = ..()
+/obj/item/clothing/head/helmet/space/initialize()
+	..()
 	if(camera)
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_camera
 
@@ -87,7 +82,7 @@
 	siemens_coefficient = 0.9
 	center_of_mass = null
 	randpixel = 0
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA, "Xenophage")
+	species_restricted = list("exclude",SPECIES_DIONA, "Xenophage")
 
 /obj/item/clothing/suit/space/New()
 	..()

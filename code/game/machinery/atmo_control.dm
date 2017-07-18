@@ -64,9 +64,8 @@
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/air_sensor/Initialize()
+/obj/machinery/air_sensor/initialize()
 	set_frequency(frequency)
-	. = ..()
 
 obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
@@ -154,9 +153,9 @@ obj/machinery/computer/general_air_control/Destroy()
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/computer/general_air_control/Initialize()
+/obj/machinery/computer/general_air_control/initialize()
 	set_frequency(frequency)
-	. = ..()
+	..()
 
 /obj/machinery/computer/general_air_control/large_tank_control
 	icon = 'icons/obj/computer.dmi'
@@ -224,7 +223,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
-		pressure_setting = between(0, pressure_setting + change, MAX_PUMP_PRESSURE)
+		pressure_setting = between(0, pressure_setting + change, 50*ONE_ATMOSPHERE)
 		spawn(1)
 			src.updateUsrDialog()
 		return 1
@@ -343,7 +342,7 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
-		pressure_setting = between(0, pressure_setting + change, MAX_PUMP_PRESSURE)
+		pressure_setting = between(0, pressure_setting + change, 10*ONE_ATMOSPHERE)
 		spawn(1)
 			src.updateUsrDialog()
 		return 1

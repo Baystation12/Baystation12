@@ -100,7 +100,7 @@ var/global/economy_init = 0
 
 	create_station_account()
 
-	for(var/department in GLOB.station_departments)
+	for(var/department in station_departments)
 		create_department_account(department)
 	create_department_account("Vendor")
 	vendor_account = department_accounts["Vendor"]

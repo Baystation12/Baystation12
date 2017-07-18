@@ -6,7 +6,6 @@
 //
 //		Arguments that the called proc should expect:
 //			/datum/scheduled_task/task: The task that reached its trigger time.
-
 var/decl/observ/task_triggered/task_triggered_event = new()
 
 /decl/observ/task_triggered

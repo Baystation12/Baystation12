@@ -303,9 +303,6 @@ REQ_CULT_GHOSTWRITER 6
 ## Sets the number of available character slots
 CHARACTER_SLOTS 10
 
-## Sets the number of loadout slots per character
-LOADOUT_SLOTS 3
-
 ## Expected round length in minutes
 EXPECTED_ROUND_LENGTH 180
 

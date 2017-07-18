@@ -4,23 +4,23 @@
 
 //Start of a breath chain, calls breathe()
 /mob/living/carbon/handle_breathing()
-	if((life_tick % MOB_BREATH_DELAY) == 0 || failed_last_breath || is_asystole()) //First, resolve location and get a breath
+	if((life_tick % MOB_BREATH_DELAY) == 0 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
 		breathe()
 
-/mob/living/carbon/proc/breathe(var/active_breathe = 1)
+/mob/living/carbon/proc/breathe()
 	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-	if(!need_breathe()) return
+	if(!should_have_organ(BP_LUNGS)) return
 
 	var/datum/gas_mixture/breath = null
 
 	//First, check if we can breathe at all
-	if(is_asystole() && !(CE_STABLE in chem_effects)) //crit aka circulatory shock
+	if(health < config.health_threshold_crit && !(CE_STABLE in chem_effects)) //crit aka circulatory shock
 		losebreath = max(2, losebreath + 1)
 
 	if(losebreath>0) //Suffocating so do not take a breath
 		losebreath--
-		if (prob(10) && !is_asystole() && active_breathe) //Gasp per 10 ticks? Sounds about right.
-			emote("gasp")
+		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
+			spawn emote("gasp")
 	else
 		//Okay, we can breathe, now check if we can get air
 		breath = get_breath_from_internal() //First, check for air from internals

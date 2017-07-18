@@ -1,6 +1,6 @@
-#if !defined(using_map_DATUM)
+#if !defined(USING_MAP_DATUM)
 	#include "example_areas.dm"
-	#include "example_shuttles.dm"
+
 	#include "example_unit_testing.dm"
 
 	#include "example-1.dmm"
@@ -8,7 +8,7 @@
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 
-	#define using_map_DATUM /datum/map/example
+	#define USING_MAP_DATUM /datum/map/example
 
 #elif !defined(MAP_OVERRIDE)
 

@@ -213,10 +213,10 @@
 
 /obj/item/device/assembly_holder/New()
 	..()
-	GLOB.listening_objects += src
+	listening_objects += src
 
 /obj/item/device/assembly_holder/Destroy()
-	GLOB.listening_objects -= src
+	listening_objects -= src
 	return ..()
 
 
@@ -242,7 +242,7 @@
 		tmr.time=5
 		tmr.secured = 1
 		tmr.holder = src
-		GLOB.processing_objects.Add(tmr)
+		processing_objects.Add(tmr)
 		a_left = tmr
 		a_right = ign
 		secured = 1

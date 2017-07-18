@@ -93,10 +93,10 @@
 	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
 /datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona, Giant Armoured Serpentid)"
+	display_name = "gear harness (Full Body Prosthetic, IPC, Diona)"
 	path = /obj/item/clothing/under/harness
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_IPC,SPECIES_DIONA, SPECIES_NABBER)
+	whitelisted = list(SPECIES_IPC,SPECIES_DIONA)
 
 /datum/gear/mask/ipc_monitor
 	display_name = "display monitor (IPC)"

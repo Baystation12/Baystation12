@@ -165,10 +165,6 @@ Please contact me on #coderbus IRC. ~Carn x
 				else if(istype(entry, /list))
 					for(var/inner_entry in entry)
 						overlays += inner_entry
-
-			if(species.has_floating_eyes)
-				overlays |= species.get_eyes(src)
-
 		else
 
 			icon = stand_icon
@@ -286,7 +282,6 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "[part.s_tone]"
 			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
-				icon_key += "[part.s_col_blend]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
 				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
 			else

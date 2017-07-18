@@ -9,7 +9,7 @@ Unless stated otherwise, you just need to place any of things below somewhere on
 *************************************************************
 0. Map whatever.
 1. Make /obj/effect/overmap/sector/[whatever]
-	If you want explorations shuttles be able to dock here, remember to set waypoints lists
+	If you want explorations shuttles be able to dock here, remember to set *landing_area*
 2. Put /obj/effect/overmap/sector/[whatever] on the map. Even if it's multiz, only one is needed, on any z.
 3. Done.
 
@@ -18,7 +18,7 @@ Unless stated otherwise, you just need to place any of things below somewhere on
 *************************************************************
 0. Map whatever.
 1. Make /obj/effect/overmap/ship/[whatever]
-	If you want explorations shuttles be able to dock here, remember to set waypoints lists
+	If you want explorations shuttles be able to dock here, remember to set *landing_areas*
 2. Put /obj/effect/overmap/ship/[whatever] on the map. If it's multiz, only one is needed, on any z.
 3. Put Helm Console anywhere on the map.
 4. Put Engines Control Console anywhere on the map.
@@ -39,9 +39,8 @@ If your thing is multiz, only one is needed per multiz sector/ship.
 
 If it's player's main base (e.g Exodus), set 'base' var to 1, so it adds itself to station_levels list.
 If this place cannot be reached or left with EVA, set 'in_space' var to 0
-If you want exploration shuttles (look below) to be able to dock here, set up waypoints lists.
-generic_waypoints is list of landmark_tags of waypoints any shttle should be able to visit.
-restricted_waypoints is list of 'shuttle name = list(landmark_tags)' pairs for waypoints only those shuttles can visit
+If you want exploration shuttles (look below) to be able to dock here, set *landing_areas* var to the list of of area they should use
+e.g. *landing_areas* = list(/area/sector/shuttle/butts_inbound,/area/sector/shuttle/syndicat_approach)
 
 *************************************************************
 # Helm console
@@ -80,8 +79,8 @@ Put them on map, hook up to pipes with any gas. Heavier gas (CO2/plasma) + More 
 ### WHAT IT DOES
 Lets you control shuttles that can change destinations and visit other sectors/ships.
 ### HOW TO USE
-1. Define starting shuttle landmark.
-2. Define a /datum/shuttle/autodock/overmap for your shuttle. Same as normal shuttle, aside from 'range' var - how many squares on overmap it can travel on its own.
-3. Place console anywhere on the ship/sector. Set shuttle_tag to shuttle's name.
-4. Use. You can select destinations if you're in range (on same tile by defualt) on the map and sector has waypoints lists defined
+1. Map a shuttle area.
+2. Set landing_type var to the type of that area.
+3. Place console anywhere on the ship/sector.
+4. Use. You can select destinations if you're in range (on same tile by defualt) on the map and sector has *landing_area* defined
 */

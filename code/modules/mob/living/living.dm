@@ -65,7 +65,7 @@ default behaviour is:
 			var/mob/living/tmob = AM
 
 			for(var/mob/living/M in range(tmob, 1))
-				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, tmob.grabbed_by.len)) )
+				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
 					now_pushing = 0
@@ -138,7 +138,7 @@ default behaviour is:
 						return
 				step(AM, t)
 				if(ishuman(AM) && AM:grabbed_by)
-					for(var/obj/item/grab/G in AM:grabbed_by)
+					for(var/obj/item/weapon/grab/G in AM:grabbed_by)
 						step(G:assailant, get_dir(G:assailant, AM))
 						G.adjust_position()
 				now_pushing = 0
@@ -224,38 +224,58 @@ default behaviour is:
 // I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
 
 /mob/living/proc/getBruteLoss()
-	return maxHealth - health
+	return bruteloss
 
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
-	health = max(health-amount, 0)
+	bruteloss = Clamp(bruteloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getOxyLoss()
-	return 0
+	return oxyloss
 
 /mob/living/proc/adjustOxyLoss(var/amount)
-	return
+	if(status_flags & GODMODE)	return 0	//godmode
+	oxyloss = Clamp(oxyloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setOxyLoss(var/amount)
-	return
+	if(status_flags & GODMODE)	return 0	//godmode
+	oxyloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getToxLoss()
-	return 0
+	return toxloss
 
 /mob/living/proc/adjustToxLoss(var/amount)
-	adjustBruteLoss(amount * 0.5)
+	if(status_flags & GODMODE)	return 0	//godmode
+	toxloss = Clamp(toxloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/setToxLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
+	if(status_flags & GODMODE)	return 0	//godmode
+	toxloss = Clamp(amount, 0, (maxHealth - config.health_threshold_dead))
 
 /mob/living/proc/getFireLoss()
-	return
+	return fireloss
 
 /mob/living/proc/adjustFireLoss(var/amount)
-	adjustBruteLoss(amount * 0.5)
+	if(status_flags & GODMODE)	return 0	//godmode
+	fireloss = Clamp(fireloss + amount, 0, (maxHealth - config.health_threshold_dead))
 
-/mob/living/proc/setFireLoss(var/amount)
-	adjustBruteLoss((amount * 0.5)-getBruteLoss())
+/mob/living/proc/getBrainLoss()
+	return 0
+
+/mob/living/proc/adjustBrainLoss(var/amount)
+	return 0
+
+/mob/living/proc/setBrainLoss(var/amount)
+	return 0
+
+/mob/living/proc/getCloneLoss()
+	return
+
+/mob/living/proc/setCloneLoss(var/amount)
+	return
+
+/mob/living/proc/adjustCloneLoss(var/amount)
+	return
 
 /mob/living/proc/getHalLoss()
 	return 0
@@ -266,24 +286,6 @@ default behaviour is:
 /mob/living/proc/setHalLoss(var/amount)
 	adjustBruteLoss((amount * 0.5)-getBruteLoss())
 
-/mob/living/proc/getBrainLoss()
-	return 0
-
-/mob/living/proc/adjustBrainLoss(var/amount)
-	return
-
-/mob/living/proc/setBrainLoss(var/amount)
-	return
-
-/mob/living/proc/getCloneLoss()
-	return 0
-
-/mob/living/proc/setCloneLoss(var/amount)
-	return
-
-/mob/living/proc/adjustCloneLoss(var/amount)
-	return
-
 /mob/living/proc/getMaxHealth()
 	return maxHealth
 
@@ -293,7 +295,7 @@ default behaviour is:
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
 /mob/proc/get_contents()
-	return
+
 
 //Recursive function to find everything a mob is holding.
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
@@ -503,17 +505,17 @@ default behaviour is:
 				if (isliving(pulling))
 					var/mob/living/M = pulling
 					var/ok = 1
-					if (locate(/obj/item/grab, M.grabbed_by))
+					if (locate(/obj/item/weapon/grab, M.grabbed_by))
 						if (prob(75))
-							var/obj/item/grab/G = pick(M.grabbed_by)
-							if (istype(G, /obj/item/grab))
+							var/obj/item/weapon/grab/G = pick(M.grabbed_by)
+							if (istype(G, /obj/item/weapon/grab))
 								for(var/mob/O in viewers(M, null))
 									O.show_message(text("<span class='warning'>[] has been pulled from []'s grip by []</span>", G.affecting, G.assailant, src), 1)
 								//G = null
 								qdel(G)
 						else
 							ok = 0
-						if (locate(/obj/item/grab, M.grabbed_by.len))
+						if (locate(/obj/item/weapon/grab, M.grabbed_by.len))
 							ok = 0
 					if (ok)
 						var/atom/movable/t = M.pulling
@@ -637,7 +639,7 @@ default behaviour is:
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/item/grab/G in grabbed_by)
+	for(var/obj/item/weapon/grab/G in grabbed_by)
 		resisting++
 		G.handle_resist()
 	if(resisting)

@@ -35,11 +35,13 @@
 		/area/shuttle/escape/centcom,
 		/area/shuttle/specops,
 		/area/shuttle/specops/centcom,
+		/area/shuttle/specops/station,
 		/area/shuttle/syndicate_elite,
 		/area/shuttle/syndicate_elite/mothership,
 		/area/shuttle/syndicate_elite/station,
 		/area/turbolift,
 		/area/supply,
+		/area/supply/station,
 		/area/syndicate_mothership,
 		/area/syndicate_mothership/elite_squad,
 		/area/wizard_station

@@ -10,7 +10,7 @@ datum/unit_test/roundstart_cable_connectivity/proc/find_connected_neighbours(var
 
 datum/unit_test/roundstart_cable_connectivity/proc/get_connected_neighbours(var/obj/structure/cable/self, var/dir)
 	var/turf/T = get_step(get_turf(self), dir)
-	var/reverse = GLOB.reverse_dir[dir]
+	var/reverse = reverse_dir[dir]
 
 	. = list() //can have multiple connected neighbours for a dir, e.g. Y-junctions
 	for(var/obj/structure/cable/other in T)
@@ -38,7 +38,7 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 					fail("Cable at ([next.x], [next.y], [next.z]) did not share powernet with connected neighbour at ([other.x], [other.y], [other.z])")
 					failed++
 				to_search += other
-
+		
 		found_cables += searched
 
 	if(failed)
@@ -46,26 +46,4 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 	else
 		pass("All connected roundstart cables have matching powernets.")
 
-	return 1
-
-
-/datum/unit_test/areas_apc_uniqueness
-	name = "POWER: Each area should have at most one APC."
-
-/datum/unit_test/areas_apc_uniqueness/start_test()
-	var/failure = ""
-	for(var/area/A in world)
-		var/obj/machinery/power/apc/found_apc = null
-		for(var/obj/machinery/power/apc/APC in A)
-			if(!found_apc)
-				found_apc = APC
-				continue
-			if(failure)
-				failure = "[failure]\n"
-			failure = "[failure]Duplicated APCs in area: [A.name]. #1: [log_info_line(found_apc)]  #2: [log_info_line(APC)]"
-
-	if(failure)
-		fail(failure)
-	else
-		pass("No areas with duplicated APCs have been found.")
 	return 1

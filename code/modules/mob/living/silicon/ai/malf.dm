@@ -73,7 +73,7 @@
 
 	// Off-Station APCs should not count towards CPU generation.
 	for(var/obj/machinery/power/apc/A in hacked_apcs)
-		if(A.z in GLOB.using_map.station_levels)
+		if(A.z in using_map.station_levels)
 			cpu_gain += 0.004
 			cpu_storage += 10
 
