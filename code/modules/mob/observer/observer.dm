@@ -63,11 +63,11 @@ mob/observer/check_airflow_movable()
 	stat = DEAD // They are also always dead
 
 /proc/updateallghostimages()
-	for (var/mob/observer/ghost/O in player_list)
+	for (var/mob/observer/ghost/O in GLOB.player_list)
 		O.updateghostimages()
 
 /mob/observer/touch_map_edge()
-	if(z in using_map.sealed_levels)
+	if(z in GLOB.using_map.sealed_levels)
 		return
 
 	var/new_x = x

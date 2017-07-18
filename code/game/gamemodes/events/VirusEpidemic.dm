@@ -73,7 +73,7 @@
 					H.viruses += D
 					break
 			spawn(rand(3000, 6000)) //Delayed announcements to keep the crew on their toes.
-				using_map.level_x_biohazard_announcement(7)
+				GLOB.using_map.level_x_biohazard_announcement(7)
 	Tick()
 		ActiveFor = Lifetime //killme
 

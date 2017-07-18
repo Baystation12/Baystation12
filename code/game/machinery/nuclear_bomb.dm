@@ -42,7 +42,7 @@ var/bomb_set
 		if (timeleft <= 0)
 			spawn
 				explode()
-		nanomanager.update_uis(src)
+		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
 	if (istype(O, /obj/item/weapon/screwdriver))
@@ -196,7 +196,7 @@ var/bomb_set
 		if (yes_code)
 			data["message"] = "*****"
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "nuclear_bomb.tmpl", "Nuke Control Panel", 300, 510)
 		ui.set_initial_data(data)
@@ -366,21 +366,21 @@ var/bomb_set
 	..()
 	nuke_disks |= src
 
-/obj/item/weapon/disk/nuclear/initialize()
-	..()
+/obj/item/weapon/disk/nuclear/Initialize()
+	. = ..()
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
-	moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
+	GLOB.moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 
 /obj/item/weapon/disk/nuclear/proc/check_z_level()
 	if(!(ticker && istype(ticker.mode, /datum/game_mode/nuclear)))
-		moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
+		GLOB.moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level) // However, when we are certain unregister if necessary
 		return
 	var/turf/T = get_turf(src)
 	if(!T || isNotStationLevel(T.z))
 		qdel(src)
 
 /obj/item/weapon/disk/nuclear/Destroy()
-	moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
+	GLOB.moved_event.unregister(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 	nuke_disks -= src
 	if(!nuke_disks.len)
 		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
@@ -402,8 +402,8 @@ var/bomb_set
 	var/list/flash_tiles = list()
 	var/last_turf_state
 
-/obj/machinery/nuclearbomb/station/initialize()
-	..()
+/obj/machinery/nuclearbomb/station/Initialize()
+	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
 	for(var/turf/simulated/floor/T in trange(1, src))
 		T.set_flooring(get_flooring_data(/decl/flooring/reinforced/circuit/red))

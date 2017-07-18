@@ -177,7 +177,7 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 	if(active)
 		return FALSE
 	active = TRUE
-	processing_objects += src
+	GLOB.processing_objects += src
 	jammer_method.enable()
 	update_icon()
 	return TRUE
@@ -187,7 +187,7 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 		return FALSE
 	active = FALSE
 	jammer_method.disable()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	update_icon()
 	return TRUE
 

@@ -18,7 +18,7 @@
 	broken_damage = 150
 	flags = OBJ_CLIMBABLE
 
-/obj/item/modular_computer/console/Topic(href, href_list)
-	. = ..()
-	if(. && istype(usr, /mob/living/carbon))
-		playsound(src, 'sound/machines/keypress.ogg', 50)
+/obj/item/modular_computer/console/CouldUseTopic(var/mob/user)
+	..()
+	if(istype(user, /mob/living/carbon))
+		playsound(src, "keyboard", 40)

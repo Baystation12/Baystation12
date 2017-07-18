@@ -30,7 +30,7 @@
 
 /obj/item/device/mmi
 	name = "man-machine interface"
-	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity."
+	desc = "A complex life support shell that interfaces between a brain and electronic devices."
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_empty"
 	w_class = ITEM_SIZE_NORMAL
@@ -52,8 +52,8 @@
 		if(B.health <= 0)
 			to_chat(user, "<span class='warning'>That brain is well and truly dead.</span>")
 			return
-		else if(!B.brainmob)
-			to_chat(user, "<span class='notice'>You aren't sure where this brain came from, but you're pretty sure it's a useless brain.</span>")
+		else if(!B.brainmob || !B.can_use_mmi)
+			to_chat(user, "<span class='notice'>This brain is completely useless to you.</span>")
 			return
 
 		user.visible_message("<span class='notice'>\The [user] sticks \a [O] into \the [src].</span>")
@@ -137,7 +137,7 @@
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
 		borg.mmi = null
-	qdel_null(brainmob)
+	QDEL_NULL(brainmob)
 	return ..()
 
 /obj/item/device/mmi/radio_enabled

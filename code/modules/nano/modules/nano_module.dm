@@ -12,7 +12,7 @@
 /datum/nano_module/nano_host()
 	return host ? host : src
 
-/datum/nano_module/proc/can_still_topic(var/datum/topic_state/state = default_state)
+/datum/nano_module/proc/can_still_topic(var/datum/topic_state/state = GLOB.default_state)
 	return CanUseTopic(usr, state) == STATUS_INTERACTIVE
 
 /datum/nano_module/proc/check_eye(var/mob/user)

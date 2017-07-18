@@ -45,8 +45,8 @@
 
 	spore_explode()
 
-/mob/living/simple_animal/mushroom/death()
-	. = ..()
+/mob/living/simple_animal/mushroom/death(gibbed, deathmessage, show_dead_message)
+	. = ..(gibbed, deathmessage, show_dead_message)
 	if(.)
 		total_mushrooms--
 		if(total_mushrooms < config.maximum_mushrooms && prob(30))

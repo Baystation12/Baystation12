@@ -3,33 +3,44 @@
 #define BE_ASSISTANT 1
 #define RETURN_TO_LOBBY 2
 
+/datum/preferences
+	//Since there can only be 1 high job.
+	var/job_high = null
+	var/list/job_medium        //List of all things selected for medium weight
+	var/list/job_low           //List of all the things selected for low weight
+	var/list/player_alt_titles // the default name of a job like "Medical Doctor"
+	var/char_branch	= "None"   // military branch
+	var/char_rank = "None"     // military rank
+
+	//Keeps track of preferrence for not getting any wanted jobs
+	var/alternate_option = 2
+
 /datum/category_item/player_setup_item/occupation
 	name = "Occupation"
 	sort_order = 1
 
 /datum/category_item/player_setup_item/occupation/load_character(var/savefile/S)
-	S["alternate_option"]	>> pref.alternate_option
-	S["job_high"]	>> pref.job_high
-	S["job_medium"]	>> pref.job_medium
-	S["job_low"]	>> pref.job_low
-	if(!pref.job_medium)
-		pref.job_medium = list()
-	if(!pref.job_low)
-		pref.job_low = list()
-	S["player_alt_titles"]	>> pref.player_alt_titles
-	S["char_branch"] 			>> pref.char_branch
-	S["char_rank"] 				>> pref.char_rank
+	S["alternate_option"]  >> pref.alternate_option
+	S["job_high"]          >> pref.job_high
+	S["job_medium"]        >> pref.job_medium
+	S["job_low"]           >> pref.job_low
+	S["player_alt_titles"] >> pref.player_alt_titles
+	S["char_branch"]       >> pref.char_branch
+	S["char_rank"]         >> pref.char_rank
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
-	S["alternate_option"]	<< pref.alternate_option
-	S["job_high"]	<< pref.job_high
-	S["job_medium"]	<< pref.job_medium
-	S["job_low"]	<< pref.job_low
-	S["player_alt_titles"]	<< pref.player_alt_titles
-	S["char_branch"] 			<< pref.char_branch
-	S["char_rank"] 				<< pref.char_rank
+	S["alternate_option"]  << pref.alternate_option
+	S["job_high"]          << pref.job_high
+	S["job_medium"]        << pref.job_medium
+	S["job_low"]           << pref.job_low
+	S["player_alt_titles"] << pref.player_alt_titles
+	S["char_branch"]       << pref.char_branch
+	S["char_rank"]         << pref.char_rank
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
+	if(!istype(pref.job_medium)) pref.job_medium = list()
+	if(!istype(pref.job_low))    pref.job_low = list()
+
 	pref.alternate_option	= sanitize_integer(pref.alternate_option, 0, 2, initial(pref.alternate_option))
 	pref.job_high	        = sanitize(pref.job_high, null)
 	if(pref.job_medium && pref.job_medium.len)
@@ -40,11 +51,11 @@
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if(!pref.player_alt_titles) pref.player_alt_titles = new()
 
-	if((using_map.flags & MAP_HAS_BRANCH)\
+	if((GLOB.using_map.flags & MAP_HAS_BRANCH)\
 	   && (!pref.char_branch || !mil_branches.is_spawn_branch(pref.char_branch)))
 		pref.char_branch = "None"
 
-	if((using_map.flags & MAP_HAS_RANK)\
+	if((GLOB.using_map.flags & MAP_HAS_RANK)\
 	   && (!pref.char_rank || !mil_branches.is_spawn_rank(pref.char_branch, pref.char_rank)))
 		pref.char_rank = "None"
 
@@ -70,12 +81,12 @@
 	. = list()
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
-	if(using_map.flags & MAP_HAS_BRANCH)
+	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
 		player_branch = mil_branches.get_branch(pref.char_branch)
 
 		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
-	if(using_map.flags & MAP_HAS_RANK)
+	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		player_rank = mil_branches.get_rank(pref.char_branch, pref.char_rank)
 
 		. += "Rank: <a href='?src=\ref[src];char_rank=1'>[pref.char_rank]</a>	"

@@ -68,6 +68,7 @@
 		new /obj/item/clothing/under/rank/research_director(src)
 		new /obj/item/clothing/under/rank/research_director/rdalt(src)
 		new /obj/item/clothing/under/rank/research_director/dress_rd(src)
+		new /obj/item/clothing/under/rank/scientist/executive(src)
 		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 		new /obj/item/weapon/cartridge/rd(src)
 		new /obj/item/clothing/shoes/white(src)

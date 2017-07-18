@@ -7,7 +7,7 @@
 	if(!check_rights(R_FUN)) return
 
 	var/list/AIs = list()
-	for(var/mob/living/silicon/ai/AI in mob_list)
+	for(var/mob/living/silicon/ai/AI in GLOB.mob_list)
 		AIs += AI
 
 	var/mob/living/silicon/ai/AI = input("Which AI do you want to apply [appear] to as a hologram?") as null|anything in AIs
