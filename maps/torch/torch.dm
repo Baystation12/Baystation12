@@ -51,8 +51,6 @@
 	#include "loadout/loadout_xeno.dm"
 	#include "loadout/~defines.dm"
 
-	#include "../shared/exodus_torch/_include.dm"
-
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"
 	#include "torch-3.dmm"
