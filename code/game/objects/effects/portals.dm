@@ -53,8 +53,7 @@
 	if (istype(M, /atom/movable))
 		if(prob(failchance)) //oh dear a problem, put em in deep space
 			src.icon_state = "portal1"
-			var/destination_z = using_map.get_transit_zlevel(z)
+			var/destination_z = GLOB.using_map.get_transit_zlevel(z)
 			do_teleport(M, locate(rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy -TRANSITIONEDGE), destination_z), 0)
 		else
 			do_teleport(M, target, 1) ///You will appear adjacent to the beacon
-

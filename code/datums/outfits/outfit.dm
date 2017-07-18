@@ -177,7 +177,7 @@ var/list/outfits_decls_by_type_
 	check_and_try_equip_xeno(H)
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
-	if(!id_slot)
+	if(!id_slot || !id_type)
 		return
 	var/obj/item/weapon/card/id/W = new id_type(H)
 	if(id_desc)
@@ -191,7 +191,7 @@ var/list/outfits_decls_by_type_
 		return W
 
 /decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
-	if(!pda_slot)
+	if(!pda_slot || !pda_type)
 		return
 	var/obj/item/device/pda/heads/pda = new pda_type(H)
 	pda.set_owner_rank_job(H.real_name, rank, assignment)

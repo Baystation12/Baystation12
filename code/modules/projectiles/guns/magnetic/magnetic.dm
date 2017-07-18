@@ -20,7 +20,7 @@
 	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
 	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.
 
-/obj/item/weapon/gun/magnetic/initialize()
+/obj/item/weapon/gun/magnetic/Initialize()
 	if(capacitor)
 		power_per_tick = (power_cost*0.15) * capacitor.rating
 	update_icon()
@@ -28,12 +28,12 @@
 
 /obj/item/weapon/gun/magnetic/New()
 	..()
-	processing_objects |= src
+	GLOB.processing_objects |= src
 
 /obj/item/weapon/gun/magnetic/Destroy()
-	qdel_null(cell)
-	qdel_null(loaded)
-	qdel_null(capacitor)
+	QDEL_NULL(cell)
+	QDEL_NULL(loaded)
+	QDEL_NULL(capacitor)
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/process()

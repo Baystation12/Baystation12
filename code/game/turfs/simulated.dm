@@ -24,8 +24,8 @@
 		T.ChangeTurf(new_turf_type)
 
 // This is not great.
-/turf/simulated/proc/wet_floor(var/wet_val = 1)
-	if(wet_val < wet)
+/turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
+	if(wet_val < wet && !overwrite)
 		return
 
 	if(!wet)

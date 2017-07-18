@@ -23,7 +23,7 @@ var/list/flooring_cache = list()
 		overlays.Cut()
 		var/has_border = 0
 		if(flooring.flags & TURF_HAS_EDGES)
-			for(var/step_dir in cardinal)
+			for(var/step_dir in GLOB.cardinal)
 				var/turf/simulated/floor/T = get_step(src, step_dir)
 				if(!istype(T) || !T.flooring || T.flooring.name != flooring.name)
 					has_border |= step_dir

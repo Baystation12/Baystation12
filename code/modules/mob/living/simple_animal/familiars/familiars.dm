@@ -86,8 +86,8 @@
 
 	wizardy_spells = list(/spell/targeted/torment)
 
-/mob/living/simple_animal/familiar/horror/death()
-	..(null,"rapidly deteriorates")
+/mob/living/simple_animal/familiar/horror/death(gibbed, deathmessage, show_dead_message)
+	..(null,"rapidly deteriorates","The bonds tying you to this mortal plane have been severed.")
 
 	ghostize()
 	gibs(src.loc)

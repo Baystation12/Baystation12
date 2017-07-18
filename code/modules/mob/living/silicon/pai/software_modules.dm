@@ -36,7 +36,7 @@
 		data["prime"] = user.pai_law0
 		data["supplemental"] = user.pai_laws
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_directives.tmpl", "pAI Directives", 450, 600)
@@ -101,7 +101,7 @@
 
 		data["channels"] = channels
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			ui = new(user, user, id, "pai_radio.tmpl", "Radio Configuration", 300, 150)
 			ui.set_initial_data(data)
@@ -121,13 +121,13 @@
 	toggle = 0
 
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		data_core.get_manifest_list()
+		GLOB.data_core.get_manifest_list()
 
 		var/data[0]
 		// This is dumb, but NanoUI breaks if it has no data to send
 		data["manifest"] = PDA_Manifest
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_manifest.tmpl", "Crew Manifest", 450, 600)
@@ -177,7 +177,7 @@
 
 		data["messages"] = messages
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_messenger.tmpl", "Digital Messenger", 450, 600)
@@ -224,7 +224,7 @@
 		var/data[0]
 
 		var/records[0]
-		for(var/datum/data/record/general in sortRecord(data_core.general))
+		for(var/datum/data/record/general in sortRecord(GLOB.data_core.general))
 			var/record[0]
 			record["name"] = general.fields["name"]
 			record["ref"] = "\ref[general]"
@@ -238,7 +238,7 @@
 		data["medical"] = M ? M.fields : null
 		data["could_not_find"] = user.medical_cannotfind
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_medrecords.tmpl", "Medical Records", 450, 600)
@@ -255,11 +255,11 @@
 			if(record)
 				var/datum/data/record/R = record
 				var/datum/data/record/M = null
-				if (!( data_core.general.Find(R) ))
+				if (!( GLOB.data_core.general.Find(R) ))
 					P.medical_cannotfind = 1
 				else
 					P.medical_cannotfind = 0
-					for(var/datum/data/record/E in data_core.medical)
+					for(var/datum/data/record/E in GLOB.data_core.medical)
 						if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 							M = E
 					P.medicalActive1 = R
@@ -278,7 +278,7 @@
 		var/data[0]
 
 		var/records[0]
-		for(var/datum/data/record/general in sortRecord(data_core.general))
+		for(var/datum/data/record/general in sortRecord(GLOB.data_core.general))
 			var/record[0]
 			record["name"] = general.fields["name"]
 			record["ref"] = "\ref[general]"
@@ -292,7 +292,7 @@
 		data["security"] = S ? S.fields : null
 		data["could_not_find"] = user.security_cannotfind
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_secrecords.tmpl", "Security Records", 450, 600)
@@ -309,13 +309,13 @@
 			if(record)
 				var/datum/data/record/R = record
 				var/datum/data/record/S = null
-				if (!( data_core.general.Find(R) ))
+				if (!( GLOB.data_core.general.Find(R) ))
 					P.securityActive1 = null
 					P.securityActive2 = null
 					P.security_cannotfind = 1
 				else
 					P.security_cannotfind = 0
-					for(var/datum/data/record/E in data_core.security)
+					for(var/datum/data/record/E in GLOB.data_core.security)
 						if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 							S = E
 					P.securityActive1 = R
@@ -342,7 +342,7 @@
 		data["progress_b"] = user.hackprogress % 10
 		data["aborted"] = user.hack_aborted
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_doorjack.tmpl", "Door Jack", 300, 150)
@@ -373,7 +373,7 @@
 
 /mob/living/silicon/pai/proc/hackloop()
 	var/turf/T = get_turf_or_move(src.loc)
-	for(var/mob/living/silicon/ai/AI in player_list)
+	for(var/mob/living/silicon/ai/AI in GLOB.player_list)
 		if(T.loc)
 			to_chat(AI, "<font color = red><b>Network Alert: Brute-force encryption crack in progress in [T.loc].</b></font>")
 		else
@@ -433,7 +433,7 @@
 				gases[++gases.len] = gas
 			data["gas"] = gases
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_atmosphere.tmpl", "Atmosphere Sensor", 350, 300)
@@ -493,7 +493,7 @@
 		data["frequency"] = format_frequency(user.sradio.frequency)
 		data["code"] = user.sradio.code
 
-		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_signaller.tmpl", "Signaller", 320, 150)

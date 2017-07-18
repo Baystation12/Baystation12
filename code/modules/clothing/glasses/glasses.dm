@@ -58,7 +58,7 @@
 
 /obj/item/clothing/glasses/meson/New()
 	..()
-	overlay = global_hud.meson
+	overlay = GLOB.global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
 	name = "prescription mesons"
@@ -81,7 +81,7 @@
 
 /obj/item/clothing/glasses/science/New()
 	..()
-	overlay = global_hud.science
+	overlay = GLOB.global_hud.science
 
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
@@ -97,7 +97,7 @@
 
 /obj/item/clothing/glasses/night/New()
 	..()
-	overlay = global_hud.nvg
+	overlay = GLOB.global_hud.nvg
 
 /obj/item/clothing/glasses/tacgoggles //made their own thing, with more extreme flash protection and medium NV, but no more sechud
 	name = "tactical goggles"
@@ -227,6 +227,7 @@
 			tint = TINT_NONE
 			to_chat(usr, "You push \the [src] up out of your face.")
 		update_clothing_icon()
+		update_vision()
 		usr.update_action_buttons()
 
 /obj/item/clothing/glasses/welding/superior
@@ -343,7 +344,7 @@
 
 /obj/item/clothing/glasses/thermal/New()
 	..()
-	overlay = global_hud.thermal
+	overlay = GLOB.global_hud.thermal
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
 	name = "Optical Meson Scanner"

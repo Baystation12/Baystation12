@@ -31,7 +31,7 @@
 	followed_objects_assoc[AM] = follow_holder
 	followed_objects.Enqueue(follow_holder)
 
-	destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
 
 /repository/follow/proc/remove_subject(var/atom/movable/AM)
 	cache = null
@@ -41,7 +41,7 @@
 	followed_objects_assoc -= AM
 	followed_objects.Remove(follow_holder)
 
-	destroyed_event.unregister(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.unregister(AM, src, /repository/follow/proc/remove_subject)
 
 	qdel(follow_holder)
 
@@ -76,8 +76,8 @@
 
 	cache.data = .
 
-/atom/movable/initialize()
-	..()
+/atom/movable/Initialize()
+	. = ..()
 	if(!is_type_in_list(src, follow_repository.excluded_subtypes) && is_type_in_list(src, follow_repository.followed_subtypes))
 		follow_repository.add_subject(src)
 
@@ -104,8 +104,14 @@
 /datum/follow_holder/proc/get_name(var/recalc = FALSE)
 	if(!name || recalc)
 		var/suffix = get_suffix(followed_instance)
-		name = "[followed_instance.name][suffix ? " [suffix]" : ""]"
+		name = "[followed_instance.follow_name()][suffix ? " [suffix]" : ""]"
 	return name
+
+/atom/movable/proc/follow_name()
+	return name
+
+/mob/follow_name()
+	return real_name
 
 /datum/follow_holder/proc/show_entry()
 	return !!followed_instance

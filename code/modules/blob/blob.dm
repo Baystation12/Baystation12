@@ -188,11 +188,11 @@
 			icon_state = "blob_factory"
 
 /obj/effect/blob/core/New(loc)
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
 /obj/effect/blob/core/process()

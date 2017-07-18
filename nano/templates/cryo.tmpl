@@ -8,52 +8,7 @@ Used In File(s): \code\game\machinery\cryo.dm
 	{{if !data.hasOccupant}}
 		<div class="line">Cell Unoccupied</div>
 	{{else}}
-		<div class="line">
-			{{:data.occupant.name}}&nbsp;=>&nbsp;
-			{{if data.occupant.stat == 0}}
-				<span class="good">Conscious</span>
-			{{else data.occupant.stat == 1}}
-				<span class="average">Unconscious</span>
-			{{else}}
-				<span class="bad">DEAD</span>
-			{{/if}}
-		</div>
-	
-		{{if data.occupant.stat < 2}}
-			<div class="line">
-				<div class="statusLabel">Health:</div>
-				{{if data.occupant.health >= 0}}
-					{{:helper.displayBar(data.occupant.health, 0, data.occupant.maxHealth, 'good')}}
-				{{else}}
-					{{:helper.displayBar(data.occupant.health, 0, data.occupant.minHealth, 'average alignRight')}}
-				{{/if}}
-				<div class="statusValue">{{:helper.round(data.occupant.health)}}</div>
-			</div>
-		
-			<div class="line">
-				<div class="statusLabel">=&gt; Brute Damage:</div>
-				{{:helper.displayBar(data.occupant.bruteLoss, 0, data.occupant.maxHealth, 'bad')}}
-				<div class="statusValue">{{:helper.round(data.occupant.bruteLoss)}}</div>
-			</div>
-		
-			<div class="line">
-				<div class="statusLabel">=&gt; Resp. Damage:</div>
-				{{:helper.displayBar(data.occupant.oxyLoss, 0, data.occupant.maxHealth, 'bad')}}
-				<div class="statusValue">{{:helper.round(data.occupant.oxyLoss)}}</div>
-			</div>
-		
-			<div class="line">
-				<div class="statusLabel">=&gt; Toxin Damage:</div>
-				{{:helper.displayBar(data.occupant.toxLoss, 0, data.occupant.maxHealth, 'bad')}}
-				<div class="statusValue">{{:helper.round(data.occupant.toxLoss)}}</div>
-			</div>
-		
-			<div class="line">
-				<div class="statusLabel">=&gt; Burn Severity:</div>
-				{{:helper.displayBar(data.occupant.fireLoss, 0, data.occupant.maxHealth, 'bad')}}
-				<div class="statusValue">{{:helper.round(data.occupant.fireLoss)}}</div>
-			</div>
-		{{/if}}
+		{{:data.occupant}}
 	{{/if}}
 	<hr>
 	<div class="line">

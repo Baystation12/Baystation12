@@ -24,7 +24,8 @@
 
 	..()
 
-/area/proc/initialize()
+/area/Initialize()
+	. = ..()
 	if(!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
@@ -98,7 +99,8 @@
 					E.nextstate = FIREDOOR_OPEN
 				else if(E.density)
 					spawn(0)
-						E.open()
+						if(E.can_safely_open())
+							E.open()
 
 
 /area/proc/fire_alert()
@@ -355,13 +357,6 @@ var/list/mob/living/forced_ambiance_list = new
 	if(A && A.has_gravity())
 		return 1
 	return 0
-
-//Can shuttle go here without doing weird stuff?
-/area/proc/free()
-	for(var/atom/A in src)
-		if(A.density)
-			return 0
-	return 1
 
 /area/proc/get_dimensions()
 	var/list/res = list("x"=1,"y"=1)

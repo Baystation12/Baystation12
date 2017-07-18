@@ -11,8 +11,8 @@
 
 	var/apply_tape = FALSE
 
-/obj/item/taperoll/initialize()
-	..()
+/obj/item/taperoll/Initialize()
+	. = ..()
 	if(apply_tape)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -20,7 +20,7 @@
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in T
 		if(airlock)
 			afterattack(airlock, null, TRUE)
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 
 
 var/list/image/hazard_overlays
@@ -162,13 +162,13 @@ var/list/tape_roll_applications = list()
 			// spread tape in all directions, provided there is a wall/window
 			var/turf/T
 			var/possible_dirs = 0
-			for(var/dir in cardinal)
+			for(var/dir in GLOB.cardinal)
 				T = get_step(start, dir)
 				if(T && T.density)
 					possible_dirs += dir
 				else
 					for(var/obj/structure/window/W in T)
-						if(W.is_fulltile() || W.dir == reverse_dir[dir])
+						if(W.is_fulltile() || W.dir == GLOB.reverse_dir[dir])
 							possible_dirs += dir
 			if(!possible_dirs)
 				start = null
@@ -226,7 +226,7 @@ var/list/tape_roll_applications = list()
 			tapetest = 0
 			tape_dir = dir
 			if(cur == start)
-				var/turf/T = get_step(start, reverse_dir[orientation])
+				var/turf/T = get_step(start, GLOB.reverse_dir[orientation])
 				if(T && !T.density)
 					tape_dir = orientation
 					for(var/obj/structure/window/W in T)
@@ -235,9 +235,9 @@ var/list/tape_roll_applications = list()
 			else if(cur == end)
 				var/turf/T = get_step(end, orientation)
 				if(T && !T.density)
-					tape_dir = reverse_dir[orientation]
+					tape_dir = GLOB.reverse_dir[orientation]
 					for(var/obj/structure/window/W in T)
-						if(W.is_fulltile() || W.dir == reverse_dir[orientation])
+						if(W.is_fulltile() || W.dir == GLOB.reverse_dir[orientation])
 							tape_dir = dir
 			for(var/obj/item/tape/T in cur)
 				if((T.tape_dir == tape_dir) && (T.icon_base == icon_base))

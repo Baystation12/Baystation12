@@ -10,7 +10,6 @@
 	invisibility = INVISIBILITY_LIGHTING
 	color = LIGHTING_BASE_MATRIX
 	icon_state = "light1"
-	auto_init = 0 // doesn't need special init
 	blend_mode = BLEND_MULTIPLY
 
 	var/lum_r = 0
@@ -18,6 +17,11 @@
 	var/lum_b = 0
 
 	var/needs_update = FALSE
+
+/atom/movable/lighting_overlay/Initialize()
+	// doesn't need special init
+	initialized = TRUE
+	return INITIALIZE_HINT_NORMAL
 
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
 	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.

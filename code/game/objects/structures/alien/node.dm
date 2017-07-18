@@ -7,11 +7,11 @@
 
 /obj/structure/alien/node/New()
 	..()
-	processing_objects += src
+	GLOB.processing_objects += src
 
 /obj/structure/alien/node/Destroy()
-	processing_objects -= src
-	..()
+	GLOB.processing_objects -= src
+	. = ..()
 
 /obj/structure/alien/node/process()
 	if(locate(/obj/effect/plant) in loc)

@@ -7,7 +7,7 @@
 	var/datum/remote_target
 	var/datum/topic_state/remoter_state
 
-/datum/topic_state/remote/New(var/remoter, var/remote_target, var/datum/topic_state/remoter_state = default_state)
+/datum/topic_state/remote/New(var/remoter, var/remote_target, var/datum/topic_state/remoter_state = GLOB.default_state)
 	src.remoter = remoter
 	src.remote_target = remote_target
 	src.remoter_state = remoter_state
@@ -18,7 +18,7 @@
 	src.remoter_state = null
 
 	// Force an UI update before we go, ensuring that any windows we may have opened for the remote target closes.
-	nanomanager.update_uis(remote_target.nano_container())
+	GLOB.nanomanager.update_uis(remote_target.nano_container())
 	remote_target = null
 	return ..()
 
@@ -34,7 +34,7 @@
 
 	// This checks if src_object is powered, etc.
 	// The interactive state is otherwise simplistic and only returns STATUS_INTERACTIVE and never checks distances, etc.
-	. = src_object.CanUseTopic(user, interactive_state)
+	. = src_object.CanUseTopic(user, GLOB.interactive_state)
 	if(. == STATUS_CLOSE)
 		return
 

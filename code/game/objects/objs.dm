@@ -13,10 +13,10 @@
 	var/armor_penetration = 0
 
 /obj/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	return ..()
 
-/obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
+/obj/Topic(href, href_list, var/datum/topic_state/state = GLOB.default_state)
 	if(..())
 		return 1
 
@@ -69,7 +69,7 @@
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/proc/process()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return 0
 
 /obj/assume_air(datum/gas_mixture/giver)
@@ -136,9 +136,6 @@
 /obj/proc/interact(mob/user)
 	return
 
-/obj/proc/update_icon()
-	return
-
 /mob/proc/unset_machine()
 	src.machine = null
 
@@ -189,15 +186,19 @@
 /obj/attackby(obj/item/O as obj, mob/user as mob)
 	if(flags & OBJ_ANCHORABLE)
 		if(istype(O, /obj/item/weapon/wrench))
-			playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-			if(anchored)
-				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
-			else
-				user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-			if(do_after(user, 20, src))
-				if(!src) return
-				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
-				anchored = !anchored
-				update_icon()
+			wrench_floor_bolts(user)
+			update_icon()
 			return
 	return ..()
+
+/obj/proc/wrench_floor_bolts(mob/user, delay=20)
+	playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+	if(anchored)
+		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+	else
+		user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+	if(do_after(user, delay, src))
+		if(!src) return
+		to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
+		anchored = !anchored
+	return 1

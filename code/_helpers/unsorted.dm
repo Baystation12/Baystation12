@@ -297,7 +297,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				return	//took too long
 			newname = sanitizeName(newname, ,allow_numbers)	//returns null if the name doesn't meet some basic requirements. Tidies up a few other things like bad-characters.
 
-			for(var/mob/living/M in player_list)
+			for(var/mob/living/M in GLOB.player_list)
 				if(M == src)
 					continue
 				if(!newname || M.real_name == newname)
@@ -322,7 +322,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/freeborg()
 	var/select = null
 	var/list/borgs = list()
-	for (var/mob/living/silicon/robot/A in player_list)
+	for (var/mob/living/silicon/robot/A in GLOB.player_list)
 		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
@@ -335,7 +335,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //When a borg is activated, it can choose which AI it wants to be slaved to
 /proc/active_ais()
 	. = list()
-	for(var/mob/living/silicon/ai/A in living_mob_list_)
+	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
 		if(A.stat == DEAD)
 			continue
 		if(A.control_disabled == 1)
@@ -420,7 +420,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
-	var/list/sortmob = sortAtom(mob_list)
+	var/list/sortmob = sortAtom(GLOB.mob_list)
 	for(var/mob/observer/eye/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/silicon/ai/M in sortmob)
@@ -631,68 +631,26 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				atoms += A
 	return atoms
 
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null, var/check_solid = 0)
-	//Takes: Area. Optional: turf type to leave behind.
+/area/proc/move_contents_to(var/area/A)
+	//Takes: Area.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
-	//       Movement based on lower left corner. Tiles that do not fit
-	//       into the new area will not be moved.
+	//       Movement based on lower left corner.
 
-	if(!A || !src) return 0
+	if(!A || !src) return
 
 	var/list/turfs_src = get_area_turfs("\ref[src]")
-	var/list/turfs_trg = get_area_turfs("\ref[A]")
 
-	if(!turfs_src.len || !turfs_trg.len) return 0
+	if(!turfs_src.len) return
 
 	//figure out a suitable origin - this assumes the shuttle areas are the exact same size and shape
 	//might be worth doing this with a shuttle core object instead of areas, in the future
-	var/src_min_x = src.x
-	var/src_min_y = src.y
+	var/src_origin = locate(src.x, src.y, src.z)
+	var/trg_origin = locate(A.x, A.y, A.z)
 
-	var/trg_z = A.z //multilevel shuttles are not supported, unfortunately
-	var/trg_min_x = A.x
-	var/trg_min_y = A.y
-
-	//obtain all the source turfs and their relative coords,
-	//then use that to find corresponding targets
-	for(var/turf/source in turfs_src)
-		if(check_solid && !source.is_solid_structure())
-			continue
-
-		var/x_pos = (source.x - src_min_x)
-		var/y_pos = (source.y - src_min_y)
-
-		var/turf/target = locate(trg_min_x + x_pos, trg_min_y + y_pos, trg_z)
-		if(!target || target.loc != A)
-			continue
-
-		transport_turf_contents(source, target, direction)
-
-	//change the old turfs
-	for(var/turf/source in turfs_src)
-		if(turftoleave)
-			source.ChangeTurf(turftoleave, 1, 1)
-		else
-			source.ChangeTurf(get_base_turf_by_area(source), 1, 1)
-
-	//fixes lighting issue caused by turf
-
-//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
-/proc/transport_turf_contents(turf/source, turf/target, var/direction)
-
-	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
-	new_turf.transport_properties_from(source)
-
-	for(var/obj/O in source)
-		if(O.simulated)
-			O.forceMove(new_turf)
-
-	for(var/mob/M in source)
-		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
-		M.forceMove(new_turf)
-
-	return new_turf
+	if(src_origin && trg_origin)
+		var/translation = get_turf_translation(src_origin, trg_origin, turfs_src)
+		translate_turfs(translation, null)
 
 proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(!original)
@@ -875,7 +833,7 @@ proc/oview_or_orange(distance = world.view , center = usr , type)
 
 proc/get_mob_with_client_list()
 	var/list/mobs = list()
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if (M.client)
 			mobs += M
 	return mobs
@@ -1043,6 +1001,8 @@ proc/is_hot(obj/item/W as obj)
 		. = TRUE
 	if(locate(/obj/structure/table, T))
 		. = TRUE
+	if(locate(/obj/effect/rune/, T))
+		. = TRUE
 
 	if(M == user)
 		var/hitzone = check_zone(user.zone_sel.selecting)
@@ -1138,19 +1098,17 @@ var/list/WALLITEMS = list(
 			colour += temp_col
 	return "#[colour]"
 
-var/mob/dview/dview_mob = new
+GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 //Version of view() which ignores darkness, because BYOND doesn't have it.
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
 
-	dview_mob.loc = center
-
-	dview_mob.see_invisible = invis_flags
-
-	. = view(range, dview_mob)
-	dview_mob.loc = null
+	GLOB.dview_mob.loc = center
+	GLOB.dview_mob.see_invisible = invis_flags
+	. = view(range, GLOB.dview_mob)
+	GLOB.dview_mob.loc = null
 
 /mob/dview
 	invisibility = 101
@@ -1169,7 +1127,7 @@ var/mob/dview/dview_mob = new
 /mob/dview/New()
 	..()
 	// We don't want to be in any mob lists; we're a dummy not a mob.
-	mob_list -= src
+	GLOB.mob_list -= src
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)
@@ -1227,3 +1185,6 @@ var/mob/dview/dview_mob = new
 		c_dist++
 
 	return L
+
+/proc/pass()
+	return

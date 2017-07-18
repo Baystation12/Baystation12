@@ -120,7 +120,6 @@ proc/load_unit_test_changes()
 
 
 /proc/initialize_unit_tests()
-	set waitfor = 0
 	#ifndef UNIT_TEST_COLOURED
 	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
 		ascii_esc = ""
@@ -145,16 +144,23 @@ proc/load_unit_test_changes()
 		if(ticker.pregame_timeleft < 175 && !said_msg)
 			said_msg = 1
 			log_unit_test("Pregame Count down has started, giving it 20 seconds to finish.")
-		sleep(1)
+		sleep(world.tick_lag)
+
+	log_unit_test("Awaiting the master process...")
+	while(Master.current_runlevel < RUNLEVEL_LOBBY)
+		sleep(world.tick_lag)
+	log_unit_test("Master process setup.")
 
 	world.save_mode("extended")
 
 	sleep(1)
 
 	ticker.current_state = GAME_STATE_SETTING_UP
+	Master.SetRunLevel(RUNLEVEL_SETUP)
 
 	log_unit_test("Round has been started.  Waiting 10 seconds to start tests.")
 	sleep(100)
+	log_unit_test("Initiating tests.")
 
 	//
 	// Run Tests
@@ -162,7 +168,7 @@ proc/load_unit_test_changes()
 
 	var/list/test_datums = get_test_datums()
 	run_unit_tests(test_datums)
-	log_unit_test("Caught [total_runtimes] Runtime\s.")
+	log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
 	del(world)
 
 /proc/run_unit_tests(var/list/test_datums, var/skip_disabled_tests = TRUE)

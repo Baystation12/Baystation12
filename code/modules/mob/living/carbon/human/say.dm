@@ -1,13 +1,13 @@
-/mob/living/carbon/human/say(var/message)
+/mob/living/carbon/human/say(var/message, var/datum/language/language = null)
 	var/alt_name = ""
 	if(name != GetVoice())
 		if(get_id_name("Unknown") != GetVoice())
 			alt_name = "(as [get_id_name("Unknown")])"
 		else
 			name = get_id_name("Unknown")
-		
+
 	message = sanitize(message)
-	..(message, alt_name = alt_name)
+	..(message, alt_name = alt_name, speaking = language)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -194,3 +194,33 @@
 		returns[2] = 50
 		return returns
 	return ..()
+
+/mob/living/carbon/human/can_speak(datum/language/speaking)
+	var/needs_assist = 0
+	var/can_speak_assist = 0
+
+	if(species && speaking.name in species.assisted_langs)
+		needs_assist = 1
+		for(var/obj/item/organ/internal/I in src.internal_organs)
+			if((speaking in I.assists_languages) && (I.is_usable()))
+				can_speak_assist = 1
+
+	if(needs_assist && !can_speak_assist)
+		return 0
+	else if(needs_assist && can_speak_assist)
+		return 1
+
+	return ..()
+
+/mob/living/carbon/human/parse_language(var/message)
+	var/prefix = copytext(message,1,2)
+	if(length(message) >= 1 && prefix == "!")
+		return all_languages["Noise"]
+
+	if(length(message) >= 2 && is_language_prefix(prefix))
+		var/language_prefix = lowertext(copytext(message, 2 ,3))
+		var/datum/language/L = language_keys[language_prefix]
+		if (can_speak(L))
+			return L
+
+	return null

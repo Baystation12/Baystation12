@@ -8,7 +8,7 @@
 //			/old_opacity: The opacity before the change.
 //			/new_opacity: The opacity after the change.
 
-var/decl/observ/opacity_set/opacity_set_event = new()
+GLOBAL_DATUM_INIT(opacity_set_event, /decl/observ/opacity_set, new)
 
 /decl/observ/opacity_set
 	name = "Opacity Set"
@@ -21,7 +21,7 @@ var/decl/observ/opacity_set/opacity_set_event = new()
 	if(new_opacity != opacity)
 		var/old_opacity = opacity
 		opacity = new_opacity
-		opacity_set_event.raise_event(src, old_opacity, new_opacity)
+		GLOB.opacity_set_event.raise_event(src, old_opacity, new_opacity)
 		return TRUE
 	else
 		return FALSE
@@ -30,4 +30,4 @@ var/decl/observ/opacity_set/opacity_set_event = new()
 	var/old_opacity = opacity
 	. = ..()
 	if(opacity != old_opacity)
-		opacity_set_event.raise_event(src, old_opacity, opacity)
+		GLOB.opacity_set_event.raise_event(src, old_opacity, opacity)

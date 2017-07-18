@@ -6,14 +6,14 @@
 	for(var/area/A)
 		if(!A.contents.len)
 			continue
-		if(A.type in using_map.area_coherency_test_exempt_areas)
+		if(A.type in GLOB.using_map.area_coherency_test_exempt_areas)
 			continue
 		var/list/area_turfs = list()
 		for(var/turf/T in A)
 			area_turfs += T
 
 		var/actual_number_of_sub_areas = 0
-		var/expected_number_of_sub_areas = (A.type in using_map.area_coherency_test_subarea_count) ? using_map.area_coherency_test_subarea_count[A.type] : 1
+		var/expected_number_of_sub_areas = (A.type in GLOB.using_map.area_coherency_test_subarea_count) ? GLOB.using_map.area_coherency_test_subarea_count[A.type] : 1
 		do
 			actual_number_of_sub_areas++
 			area_turfs -= get_turfs_fill(area_turfs[1])
@@ -39,7 +39,7 @@
 		var/turf/T = turfs_to_check.Pop()
 		. |= T
 		var/turf/neighbour
-		for(var/direction in cardinal)
+		for(var/direction in GLOB.cardinal)
 			neighbour = get_step(T, direction)
 			SHOULD_CHECK_TURF(neighbour)
 #ifdef MULTIZAS
@@ -76,7 +76,7 @@
 /datum/unit_test/areas_shall_be_used/start_test()
 	var/unused_areas = 0
 	for(var/area_type in subtypesof(/area))
-		if(area_type in using_map.area_usage_test_exempted_areas)
+		if(area_type in GLOB.using_map.area_usage_test_exempted_areas)
 			continue
 		var/area/located_area = locate(area_type)
 		if(located_area && !located_area.z)
