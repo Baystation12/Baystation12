@@ -328,6 +328,7 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-engineer",
 					"Eyebot" = "eyebot-engineering"
 					)
+	no_slip = 1
 
 /obj/item/weapon/robot_module/engineering/general/New()
 	src.modules += new /obj/item/device/flash(src)
