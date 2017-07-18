@@ -34,7 +34,7 @@ datum/preferences
 	pref.real_name          = sanitize_name(pref.real_name, pref.species)
 	if(!pref.real_name)
 		pref.real_name      = random_name(pref.gender, pref.species)
-	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes, initial(pref.spawnpoint))
+	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
 	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 
 /datum/category_item/player_setup_item/general/basic/content()
@@ -86,10 +86,10 @@ datum/preferences
 
 	else if(href_list["spawnpoint"])
 		var/list/spawnkeys = list()
-		for(var/spawntype in spawntypes)
+		for(var/spawntype in spawntypes())
 			spawnkeys += spawntype
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
-		if(!choice || !spawntypes[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
+		if(!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
 
