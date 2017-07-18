@@ -35,7 +35,7 @@
 		return
 
 	var/placement_dir = get_dir(user, W)
-	if (!(placement_dir in cardinal))
+	if (!(placement_dir in GLOB.cardinal))
 		to_chat(user, "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>")
 		return
 
@@ -45,7 +45,7 @@
 		stuff_on_wall = 1
 
 	//crude, but will cover most cases. We could do stuff like check pixel_x/y but it's not really worth it.
-	for (var/dir in cardinal)
+	for (var/dir in GLOB.cardinal)
 		var/turf/T = get_step(W, dir)
 		if (locate(/obj/structure/sign/poster) in T)
 			stuff_on_wall = 1
@@ -110,11 +110,12 @@
 			pixel_x = -32
 			pixel_y = 0
 
-/obj/structure/sign/poster/initialize()
+/obj/structure/sign/poster/Initialize()
 	if (poster_type)
 		var/path = ispath(poster_type) ? poster_type : text2path(poster_type)
 		var/datum/poster/design = new path
 		set_poster(design)
+	. = ..()
 
 /obj/structure/sign/poster/proc/set_poster(var/datum/poster/design)
 	name = "[initial(name)] - [design.name]"

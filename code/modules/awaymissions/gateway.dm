@@ -8,11 +8,11 @@
 	var/active = 0
 
 
-/obj/machinery/gateway/initialize()
+/obj/machinery/gateway/Initialize()
 	update_icon()
 	if(dir == SOUTH)
 		set_density(0)
-
+	. = ..()
 
 /obj/machinery/gateway/update_icon()
 	if(active)
@@ -34,11 +34,11 @@
 	var/wait = 0				//this just grabs world.time at world start
 	var/obj/machinery/gateway/centeraway/awaygate = null
 
-/obj/machinery/gateway/centerstation/initialize()
+/obj/machinery/gateway/centerstation/Initialize()
 	update_icon()
 	wait = world.time + config.gateway_delay	//+ thirty minutes default
 	awaygate = locate(/obj/machinery/gateway/centeraway)
-
+	. = ..()
 
 /obj/machinery/gateway/centerstation/update_icon()
 	if(active)
@@ -61,7 +61,7 @@ obj/machinery/gateway/centerstation/process()
 	linked = list()	//clear the list
 	var/turf/T = loc
 
-	for(var/i in alldirs)
+	for(var/i in GLOB.alldirs)
 		T = get_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)
@@ -123,7 +123,7 @@ obj/machinery/gateway/centerstation/process()
 		M.set_dir(SOUTH)
 		return
 	else
-		var/obj/effect/landmark/dest = pick(awaydestinations)
+		var/obj/effect/landmark/dest = pick(GLOB.awaydestinations)
 		if(dest)
 			M.loc = dest.loc
 			M.set_dir(SOUTH)
@@ -149,10 +149,10 @@ obj/machinery/gateway/centerstation/process()
 	var/obj/machinery/gateway/centeraway/stationgate = null
 
 
-/obj/machinery/gateway/centeraway/initialize()
+/obj/machinery/gateway/centeraway/Initialize()
 	update_icon()
 	stationgate = locate(/obj/machinery/gateway/centerstation)
-
+	. = ..()
 
 /obj/machinery/gateway/centeraway/update_icon()
 	if(active)
@@ -165,7 +165,7 @@ obj/machinery/gateway/centerstation/process()
 	linked = list()	//clear the list
 	var/turf/T = loc
 
-	for(var/i in alldirs)
+	for(var/i in GLOB.alldirs)
 		T = get_step(loc, i)
 		var/obj/machinery/gateway/G = locate(/obj/machinery/gateway) in T
 		if(G)

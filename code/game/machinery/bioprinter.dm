@@ -129,8 +129,8 @@
 	var/matter_amount_per_sheet = 10
 	var/matter_type = DEFAULT_WALL_MATERIAL
 
-/obj/machinery/organ_printer/robot/mapped/initialize()
-	..()
+/obj/machinery/organ_printer/robot/mapped/Initialize()
+	. = ..()
 	stored_matter = max_stored_matter
 
 /obj/machinery/organ_printer/robot/dismantle()
@@ -176,8 +176,8 @@
 	var/amount_per_slab = 50
 	var/loaded_dna //Blood sample for DNA hashing.
 
-/obj/machinery/organ_printer/flesh/mapped/initialize()
-	..()
+/obj/machinery/organ_printer/flesh/mapped/Initialize()
+	. = ..()
 	stored_matter = max_stored_matter
 
 /obj/machinery/organ_printer/flesh/dismantle()

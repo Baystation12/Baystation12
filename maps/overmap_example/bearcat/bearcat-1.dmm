@@ -6,8 +6,7 @@
 "af" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{frequency = 1379; id_tag = "cargo_pump"},/obj/machinery/embedded_controller/radio/airlock/docking_port{id_tag = "cargo"; pixel_x = 24; tag_airpump = "cargo_pump"; tag_chamber_sensor = "cargo_sensor"; tag_exterior_door = "cargo_out"; tag_interior_door = "cargo_in"},/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/ship/scrap/cargo/lower)
 "ag" = (/turf/simulated/wall/r_wall,/area/ship/scrap/cargo/lower)
 "ah" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/ship/scrap/cargo/lower)
-"ai" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/plating,/area/ship/scrap/cargo/lower)
-"aj" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
+"aj" = (/obj/effect/shuttle_landmark/below_deck,/turf/space,/area/space)
 "ak" = (/obj/machinery/airlock_sensor{id_tag = "cargo_sensor"; pixel_x = 25},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/turf/simulated/floor/plating,/area/ship/scrap/cargo/lower)
 "al" = (/obj/structure/ladder/up,/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/obj/effect/floor_decal/corner/beige/three_quarters{icon_state = "corner_white_three_quarters"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/ship/scrap/cargo/lower)
 "am" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp,/obj/item/weapon/paper_bin,/obj/item/weapon/stamp/cargo,/obj/item/weapon/stamp/denied,/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 5},/obj/item/weapon/clipboard,/obj/item/device/radio,/turf/simulated/floor/tiled,/area/ship/scrap/cargo/lower)
@@ -209,7 +208,7 @@
 "ea" = (/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/eva)
 "eb" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/eva)
 "ec" = (/obj/effect/floor_decal/corner/yellow{icon_state = "corner_white"; dir = 6},/obj/structure/sign/warning/vacuum{pixel_x = 35},/obj/machinery/atmospherics/unary/vent_pump{icon_state = "off"; dir = 8; layer = 2.4; level = 2},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/eva)
-"ed" = (/turf/space,/area/ship/scrap/shuttle/pod)
+"ed" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
 "ee" = (/obj/structure/window/reinforced{dir = 1},/turf/space,/area/space)
 "ef" = (/obj/structure/table/standard,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/weapon/storage/box/lights/bulbs,/obj/item/weapon/storage/box/lights/mixed,/obj/structure/cable,/obj/machinery/power/apc{name = "Tools Storage APC"},/obj/effect/floor_decal/corner/yellow{icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/storage)
 "eg" = (/obj/structure/table/standard,/obj/item/weapon/inflatable_dispenser,/obj/item/device/radio,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/storage)
@@ -219,6 +218,7 @@
 "ek" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/eva)
 "el" = (/obj/machinery/suit_storage_unit/engineering/salvage,/obj/machinery/light/small,/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/eva)
 "em" = (/obj/machinery/suit_storage_unit/engineering/salvage,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance/eva)
+"en" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/ship/scrap/cargo/lower)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -255,10 +255,10 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagaoapagaqarasagaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatatauatauavawaxayazaAaBaCawaDaEaEaEaFaFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaataGaHaIataJawaKaLaMaNaOaPawaQaEaRaSaTaFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaUaVaWaXaYaZbabbbcbdbebfbgbabhbibjbkblbmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaubnbobpatbqawbrbsaAbtbubvawbwaEbxbybzaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaubnbobpatbqawbrbsenbtbubvawbwaEbxbybzaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauatatatatbqawbAbBbCbDbEbFawbGaEaEaEaEaFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabHbIbJbKbLbMawbNbObObObObPawbQbRbSbTbUbVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabWbXbYbZcacbbaccbObOaibObPbacdcecfcgchciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabWbXbYbZcacbbaccbObObObObPbacdcecfcgchciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacjbXckclbLbqawcmbObObObObPawbwbRcncocpbRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacqcrcsbLbLbqawctbObObObOcuawbwbRbRbRbRbRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacvcwcxcyczcAawcBcCcDawcEcFawcGcHcIcJcKcHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -269,10 +269,10 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDdtdtdududvdwdwdwdxdxaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadtdydzdAdBdCdxdDdEdFdxdxdGdGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadHdIdJdKdLdMdNdOdPdQdRdSdTdUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadudVdWdXdYdZdxeaebecdxdxeeeeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaduefegeheiejdxekelemdxaaaaaaedededaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadududududududxdxdwdwdwaaaaaaedededaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaedededaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaduefegeheiejdxekelemdxaaaaaaaaaaaaajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadududududududxdxdwdwdwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaedaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

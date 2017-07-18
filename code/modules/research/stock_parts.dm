@@ -187,7 +187,7 @@
 	var/charge = 0
 	var/max_charge = 1000
 
-/obj/item/weapon/stock_parts/capacitor/initialize()
+/obj/item/weapon/stock_parts/capacitor/Initialize()
 	. = ..()
 	max_charge *= rating
 

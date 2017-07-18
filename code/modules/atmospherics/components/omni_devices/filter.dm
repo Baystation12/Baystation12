@@ -8,6 +8,7 @@
 	var/list/filters = new()
 	var/datum/omni_port/input
 	var/datum/omni_port/output
+	var/max_output_pressure = MAX_OMNI_PRESSURE
 
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -64,8 +65,14 @@
 	var/datum/gas_mixture/output_air = output.air	//BYOND doesn't like referencing "output.air.return_pressure()" so we need to make a direct reference
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
 
+	var/delta = between(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
+	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
+	for(var/datum/omni_port/filter_output in filters)
+		delta = between(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
+		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
+
 	//Figure out the amount of moles to transfer
-	var/transfer_moles = (set_flow_rate/input_air.volume)*input_air.total_moles
+	var/transfer_moles = between(0, ((set_flow_rate/input_air.volume)*input_air.total_moles), transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
@@ -92,7 +99,7 @@
 
 	data = build_uidata()
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "omni_filter.tmpl", "Omni Filter Control", 330, 330)
@@ -180,7 +187,7 @@
 				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
 
 	update_icon()
-	nanomanager.update_uis(src)
+	GLOB.nanomanager.update_uis(src)
 	return
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)

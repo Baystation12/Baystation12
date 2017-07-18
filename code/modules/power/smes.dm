@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
+	clicksound = "switch"
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -68,7 +69,7 @@
 			connect_to_network()
 
 		dir_loop:
-			for(var/d in cardinal)
+			for(var/d in GLOB.cardinal)
 				var/turf/T = get_step(src, d)
 				for(var/obj/machinery/power/terminal/term in T)
 					if(term && term.dir == turn(d, 180))
@@ -353,7 +354,7 @@
 
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

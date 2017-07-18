@@ -27,9 +27,3 @@
 	if(H.hallucination > 50)
 		H.adjustBrainLoss(5)
 		to_chat(H, "<span class='danger'>You feel your mind tearing apart!</span>")
-
-/spell/targeted/shatter/cast_check(skipcharge = 0,mob/user = usr, var/list/targets)
-	if(!..())
-		return 0
-
-	return !(targets[1] in view_or_range(range, holder, selection_type))

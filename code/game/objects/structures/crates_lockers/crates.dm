@@ -499,4 +499,4 @@
 	req_access = list(access_xenobiology)
 
 /obj/structure/closet/crate/secure/biohazard/blanks
-	will_contain = list(/mob/living/carbon/human/blank/, /obj/item/usedcryobag)
+	will_contain = list(/mob/living/carbon/human/blank, /obj/item/usedcryobag)

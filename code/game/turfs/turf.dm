@@ -44,9 +44,6 @@
 /turf/proc/initialize()
 	return
 
-/turf/proc/update_icon()
-	return
-
 /turf/Destroy()
 	turfs -= src
 	remove_cleanables()

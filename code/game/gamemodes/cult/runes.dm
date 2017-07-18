@@ -85,6 +85,12 @@
 /obj/effect/rune/proc/fizzle(var/mob/living/user)
 	visible_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", "You hear a fizzle.")
 
+//Makes the speech a proc so all verbal components can be easily manipulated as a whole, or individually easily
+/obj/effect/rune/proc/speak_incantation(var/mob/living/user, var/incantation)
+	var/datum/language/L = all_languages[LANGUAGE_CULT]
+	if(incantation && (L in user.languages))
+		user.say(incantation, L)
+
 /* Tier 1 runes below */
 
 /obj/effect/rune/convert
@@ -104,7 +110,7 @@
 	if(!target)
 		return fizzle(user)
 
-	user.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
+	speak_incantation(user, "Mah[pick("'","`")]weyh pleggh at e'ntrath!")
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
 
 	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
@@ -163,7 +169,7 @@
 	if(user.loc == src)
 		showOptions(user)
 	else if(user.loc == get_turf(src))
-		user.say("Sas[pick("'","`")]so c'arta forbici!")
+		speak_incantation(user, "Sas[pick("'","`")]so c'arta forbici!")
 		if(do_after(user, 30))
 			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 			user.forceMove(src)
@@ -221,7 +227,7 @@
 
 /obj/effect/rune/tome/cast(var/mob/living/user)
 	new /obj/item/weapon/book/tome(get_turf(src))
-	user.say("N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
+	speak_incantation(user, "N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
 	visible_message("<span class='notice'>\The [src] disappears with a flash of red light, and in its place now a book lies.</span>", "You hear a pop.")
 	qdel(src)
 
@@ -231,7 +237,7 @@
 	var/obj/effect/cultwall/wall = null
 
 /obj/effect/rune/wall/Destroy()
-	qdel_null(wall)
+	QDEL_NULL(wall)
 	return ..()
 
 /obj/effect/rune/wall/cast(var/mob/living/user)
@@ -247,7 +253,7 @@
 		wall.rune = src
 		t = wall.health
 	user.pay_for_rune(t / 50)
-	user.say("Khari[pick("'","`")]d! Eske'te tannin!")
+	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
 
 /obj/effect/cultwall
@@ -321,11 +327,11 @@
 	var/tmpkey = user.key
 	if(user.loc != get_turf(src))
 		return
-	user.say("Fwe[pick("'","`")]sh mah erl nyag r'ya!")
+	speak_incantation(user, "Fwe[pick("'","`")]sh mah erl nyag r'ya!")
 	user.visible_message("<span class='warning'>\The [user]'s eyes glow blue as \he freezes in place, absolutely motionless.</span>", "<span class='warning'>The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...</span>", "You hear only complete silence for a moment.")
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
 	var/mob/observer/ghost/soul
-	for(var/mob/observer/ghost/O in dead_mob_list_)
+	for(var/mob/observer/ghost/O in GLOB.ghost_mob_list)
 		if(O.key == tmpkey)
 			soul = O
 			break
@@ -362,7 +368,7 @@
 	strokes = 3
 
 /obj/effect/rune/armor/cast(var/mob/living/user)
-	user.say("N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
+	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
 	visible_message("<span class='warning'>\The [src] disappears with a flash of red light, and a set of armor appears on \the [user].</span>", "<span class='warning'>You are blinded by the flash of red light. After you're able to see again, you see that you are now wearing a set of armor.</span>")
 
 	var/obj/O = user.get_equipped_item(slot_head) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
@@ -427,6 +433,10 @@
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		if(ishuman(victim))
+			var/mob/living/carbon/human/H = victim
+			if(H.is_asystole())
+				H.adjustBrainLoss(2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
@@ -483,7 +493,7 @@
 		return fizzle(user)
 	victim.vessel.remove_reagent("blood", 20)
 	admin_attack_log(user, victim, "Used a blood drain rune.", "Was victim of a blood drain rune.", "used a blood drain rune on")
-	user.say("Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
+	speak_incantation(user, "Yu[pick("'","`")]gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!")
 	user.visible_message("<span class='warning'>Blood flows from \the [src] into \the [user]!</span>", "<span class='cult'>The blood starts flowing from \the [src] into your frail mortal body. [capitalize(english_list(heal_user(user), nothing_text = "you feel no different"))].</span>", "You hear liquid flow.")
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
@@ -580,7 +590,7 @@
 
 /obj/effect/rune/emp/cast(var/mob/living/user)
 	empulse(get_turf(src), 4, 2, 1)
-	user.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
+	speak_incantation(user, "Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 	qdel(src)
 
 /obj/effect/rune/massdefile //Defile but with a huge range. Bring a buddy for this, you're hitting the floor.
@@ -616,7 +626,7 @@
 	if(T.icon_state != "cult" && T.icon_state != "cult-narsie")
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
-	user.say("N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
+	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
 	user.put_in_hands(new /obj/item/weapon/melee/cultblade(user))
 	qdel(src)
 
@@ -640,7 +650,7 @@
 		to_chat(user, "<span class='warning'>You need ten sheets of metal to fold them into a construct shell.</span>")
 		return fizzle(user)
 
-	user.say("Da A[pick("'","`")]ig Osk!")
+	speak_incantation(user, "Da A[pick("'","`")]ig Osk!")
 	target.use(10)
 	var/obj/O = new /obj/structure/constructshell/cult(get_turf(src))
 	visible_message("<span class='warning'>The metal bends into \the [O], and \the [src] imbues into it.</span>", "You hear a metallic sound.")
@@ -651,7 +661,7 @@
 	strokes = 4
 
 /obj/effect/rune/confuse/cast(var/mob/living/user)
-	user.say("Fuu ma[pick("'","`")]jin!")
+	speak_incantation(user, "Fuu ma[pick("'","`")]jin!")
 	visible_message("<span class='danger'>\The [src] explodes in a bright flash.</span>")
 	var/list/mob/affected = list()
 	for(var/mob/living/M in viewers(src))
@@ -695,7 +705,7 @@
 		return fizzle(user)
 	target.rejuvenate()
 	source.set_full(0)
-	user.say("Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!")
+	speak_incantation(user, "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!")
 	target.visible_message("<span class='warning'>\The [target]'s eyes glow with a faint red as \he stands up, slowly starting to breathe again.</span>", "<span class='warning'>Life... I'm alive again...</span>", "You hear liquid flow.")
 
 /obj/effect/rune/blood_boil
@@ -787,9 +797,9 @@
 		var/input = input(user, "Are you SURE you want to sacrifice yourself?", "DO NOT DO THIS") in list("Yes", "No")
 		if(input != "Yes")
 			return
-		user.say("Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
+		speak_incantation(user, "Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 		to_chat(user, "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>")
-		for(var/mob/M in living_mob_list_)
+		for(var/mob/M in GLOB.living_mob_list_)
 			if(iscultist(M))
 				to_chat(M, "You see a vision of \the [user] keeling over dead, his blood glowing blue as it escapes \his body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted.")
 			else
@@ -825,7 +835,7 @@
 		if(tainted)
 			to_chat(user, "<span class='warning'>The blank is tainted. It is unsuitable.</span>")
 		return fizzle(user)
-	user.say("H'drak v[pick("'","`")]loso, mir'kanas verbot!")
+	speak_incantation(user, "H'drak v[pick("'","`")]loso, mir'kanas verbot!")
 	visible_message("<span class='warning'>The rune forms into an arcane image on the paper.</span>")
 	new papertype(get_turf(src))
 	qdel(target)

@@ -19,8 +19,8 @@
 	var/blood_mask = 'icons/mob/human_races/masks/blood_human.dmi'
 
 	var/prone_icon                            // If set, draws this from icobase when mob is prone.
-	var/use_eye_icon                          // Override using the standard human_face.dmi icon.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
+
 	var/blood_color = "#A10808"               // Red.
 	var/flesh_color = "#FFC896"               // Pink.
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
@@ -52,14 +52,16 @@
 	var/default_language = LANGUAGE_GALCOM    // Default language is used when 'say' is used without modifiers.
 	var/language = LANGUAGE_GALCOM            // Default racial language, if any.
 	var/list/secondary_langs = list()         // The names of secondary languages that are available to this species.
+	var/assisted_langs = list()               // The languages the species can't speak without an assisted organ.
 	var/list/speech_sounds                    // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                    // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0           // How many secondary languages are available to select at character creation
 	var/name_language = LANGUAGE_GALCOM       // The language to use when determining names for this species, or null to use the first name/last name generator
+	var/additional_langs                      // Any other languages the species always gets.
 
 	// Combat vars.
-	var/total_health = 100                    // Point at which the mob will enter crit.
-	var/list/unarmed_types = list(            // Possible unarmed attacks that the mob will use in combat,
+	var/total_health = 200                   // Point at which the mob will enter crit.
+	var/list/unarmed_types = list(           // Possible unarmed attacks that the mob will use in combat,
 		/datum/unarmed_attack,
 		/datum/unarmed_attack/bite
 		)
@@ -124,6 +126,8 @@
 	var/hud_type
 	var/health_hud_intensity = 1
 
+	var/grab_type = GRAB_NORMAL		// The species' default grab type.
+
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
 	var/has_fine_manipulation = 1 // Can use small items.
@@ -150,6 +154,7 @@
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 	var/vision_organ              // If set, this organ is required for vision. Defaults to "eyes" if the species has them.
+	var/breathing_organ           // If set, this organ is required for breathing. Defaults to "lungs" if the species has them.
 
 	var/list/has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -187,6 +192,9 @@
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[BP_EYES])
 		vision_organ = BP_EYES
+	//If the species has lungs, they are the default breathing organ
+	if(!breathing_organ && has_organ[BP_LUNGS])
+		breathing_organ = BP_LUNGS
 
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
@@ -287,9 +295,15 @@
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
 
+/datum/species/proc/handle_new_grab(var/mob/living/carbon/human/H, var/obj/item/grab/G)
+	return
+
 // Only used for alien plasma weeds atm, but could be used for Dionaea later.
 /datum/species/proc/handle_environment_special(var/mob/living/carbon/human/H)
 	return
+
+/datum/species/proc/handle_movement_delay_special(var/mob/living/carbon/human/H)
+	return 0
 
 // Used to update alien icons for aliens.
 /datum/species/proc/handle_login_special(var/mob/living/carbon/human/H)
@@ -310,7 +324,7 @@
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
-	if(!ignore_intent && H.a_intent != I_HURT)
+	if((!ignore_intent && H.a_intent != I_HURT) || H.pulling_punches)
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)
@@ -388,3 +402,10 @@
 
 /datum/species/proc/get_blood_name()
 	return "blood"
+
+/datum/species/proc/handle_death_check(var/mob/living/carbon/human/H)
+	return FALSE
+
+//Mostly for toasters
+/datum/species/proc/handle_limbs_setup(var/mob/living/carbon/human/H)
+	return FALSE

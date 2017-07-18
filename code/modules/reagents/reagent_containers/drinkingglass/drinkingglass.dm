@@ -8,10 +8,10 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
-	var/base_name = "glass" // Name to put in front of drinks, i.e. "[base_name] of [contents]"
+	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
 	icon = DRINK_ICON_FILE
-	var/base_icon = "square" // Base icon name
+	base_icon = "square" // Base icon name
 	volume = 30
 
 	var/list/extras = list() // List of extras. Two extras maximum

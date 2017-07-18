@@ -152,15 +152,12 @@ var/global/list/additional_antag_types = list()
 // Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
 /datum/game_mode/proc/startRequirements()
 	var/playerC = 0
-	for(var/mob/new_player/player in player_list)
+	for(var/mob/new_player/player in GLOB.player_list)
 		if((player.client)&&(player.ready))
 			playerC++
 
 	if(playerC < required_players)
 		return "Not enough players, [src.required_players] players needed."
-
-	if(!(antag_templates && antag_templates.len))
-		return 0
 
 	var/enemy_count = 0
 	var/list/all_antag_types = all_antag_types()
@@ -170,26 +167,31 @@ var/global/list/additional_antag_types = list()
 			if(!antag)
 				continue
 			var/list/potential = list()
-			if(antag.flags & ANTAG_OVERRIDE_JOB)
-				potential = antag.pending_antagonists
+			if(antag_templates && antag_templates.len)
+				if(antag.flags & ANTAG_OVERRIDE_JOB)
+					potential = antag.pending_antagonists
+				else
+					potential = antag.candidates
 			else
-				potential = antag.candidates
+				potential = antag.get_potential_candidates(src)
 			if(islist(potential))
 				if(require_all_templates && potential.len < antag.initial_spawn_req)
 					return "Not enough antagonists ([antag.role_text]), [antag.initial_spawn_req] required and [potential.len] available."
 				enemy_count += potential.len
 				if(enemy_count >= required_enemies)
 					return 0
-	return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
+		return "Not enough antagonists, [required_enemies] required and [enemy_count] available."
+	else
+		return 0
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
-		event_manager.report_at_round_end = 1
+		GLOB.event_manager.report_at_round_end = 1
 		if(event_delay_mod_moderate)
-			var/datum/event_container/EModerate = event_manager.event_containers[EVENT_LEVEL_MODERATE]
+			var/datum/event_container/EModerate = GLOB.event_manager.event_containers[EVENT_LEVEL_MODERATE]
 			EModerate.delay_modifier = event_delay_mod_moderate
 		if(event_delay_mod_moderate)
-			var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]
+			var/datum/event_container/EMajor = GLOB.event_manager.event_containers[EVENT_LEVEL_MAJOR]
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
@@ -212,7 +214,7 @@ var/global/list/additional_antag_types = list()
 		display_roundstart_logout_report()
 
 	spawn (rand(waittime_l, waittime_h))
-		using_map.send_welcome()
+		GLOB.using_map.send_welcome()
 		sleep(rand(100,150))
 		announce_ert_disabled()
 
@@ -322,7 +324,7 @@ var/global/list/additional_antag_types = list()
 	var/escaped_humans = 0
 	var/escaped_total = 0
 
-	for(var/mob/M in player_list)
+	for(var/mob/M in GLOB.player_list)
 		if(M.client)
 			clients++
 			if(M.stat != DEAD)
@@ -330,7 +332,7 @@ var/global/list/additional_antag_types = list()
 				if(ishuman(M))
 					surviving_humans++
 				var/area/A = get_area(M)
-				if(A && is_type_in_list(A, using_map.post_round_safe_areas))
+				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
 					escaped_total++
 					if(ishuman(M))
 						escaped_humans++
@@ -376,7 +378,7 @@ var/global/list/additional_antag_types = list()
 
 	// If this is being called post-roundstart then it doesn't care about ready status.
 	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
-		for(var/mob/player in player_list)
+		for(var/mob/player in GLOB.player_list)
 			if(!player.client)
 				continue
 			if(istype(player, /mob/new_player))
@@ -386,7 +388,7 @@ var/global/list/additional_antag_types = list()
 				candidates += player.mind
 	else
 		// Assemble a list of active players without jobbans.
-		for(var/mob/new_player/player in player_list)
+		for(var/mob/new_player/player in GLOB.player_list)
 			if( player.client && player.ready )
 				players += player
 
@@ -413,7 +415,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/num_players()
 	. = 0
-	for(var/mob/new_player/P in player_list)
+	for(var/mob/new_player/P in GLOB.player_list)
 		if(P.client && P.ready)
 			. ++
 
@@ -452,11 +454,11 @@ var/global/list/additional_antag_types = list()
 //////////////////////////
 proc/display_roundstart_logout_report()
 	var/msg = "<span class='notice'><b>Roundstart logout report</b>\n\n"
-	for(var/mob/living/L in mob_list)
+	for(var/mob/living/L in GLOB.mob_list)
 
 		if(L.ckey)
 			var/found = 0
-			for(var/client/C in clients)
+			for(var/client/C in GLOB.clients)
 				if(C.ckey == L.ckey)
 					found = 1
 					break
@@ -476,7 +478,7 @@ proc/display_roundstart_logout_report()
 					continue //Dead
 
 			continue //Happy connected client
-		for(var/mob/observer/ghost/D in mob_list)
+		for(var/mob/observer/ghost/D in GLOB.mob_list)
 			if(D.mind && (D.mind.original == L || D.mind.current == L))
 				if(L.stat == DEAD)
 					msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (Dead)\n"
@@ -491,12 +493,12 @@ proc/display_roundstart_logout_report()
 
 	msg += "</span>" // close the span from right at the top
 
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if(M.client && M.client.holder)
 			to_chat(M, msg)
 proc/get_nt_opposed()
 	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in player_list)
+	for(var/mob/living/carbon/human/man in GLOB.player_list)
 		if(man.client)
 			if(man.client.prefs.nanotrasen_relation == COMPANY_OPPOSED)
 				dudes += man

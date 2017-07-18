@@ -74,7 +74,7 @@
 		. += part.size
 
 /obj/item/device/electronic_assembly/proc/open_interact(mob/user)
-	if(!CanInteract(user, physical_state))
+	if(!CanInteract(user, GLOB.physical_state))
 		return
 
 	var/total_part_size = get_part_size()
@@ -104,7 +104,7 @@
 	user << browse(jointext(HTML,null), "window=open-assembly-\ref[src];size=600x350;border=1;can_resize=1;can_close=1;can_minimize=1")
 
 /obj/item/device/electronic_assembly/proc/closed_interact(mob/user)
-	if(!CanInteract(user, physical_state))
+	if(!CanInteract(user, GLOB.physical_state))
 		return
 
 	var/HTML = list()
@@ -165,11 +165,11 @@
 	set desc = "Rename your circuit, useful to stay organized."
 
 	var/mob/M = usr
-	if(!CanInteract(M, physical_state))
+	if(!CanInteract(M, GLOB.physical_state))
 		return
 
 	var/input = sanitizeSafe(input("What do you want to name this?", "Rename", src.name) as null|text, MAX_NAME_LEN)
-	if(src && input && input != name && CanInteract(M, physical_state))
+	if(src && input && input != name && CanInteract(M, GLOB.physical_state))
 		to_chat(M, "<span class='notice'>The machine now has a label reading '[input]'.</span>")
 		name = input
 
@@ -239,7 +239,7 @@
 	interact(user)
 
 /obj/item/device/electronic_assembly/interact(mob/user)
-	if(!CanInteract(user, physical_state))
+	if(!CanInteract(user, GLOB.physical_state))
 		return
 	if(opened)
 		open_interact(user)

@@ -77,7 +77,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	item_state = "cigoff"
 	name = "burnt match"
 	desc = "A match. This one has seen better days."
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 
 //////////////////
 //FINE SMOKABLES//
@@ -161,12 +161,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
 		set_light(2, 0.25, "#E38F46")
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 
 /obj/item/clothing/mask/smokable/proc/die(var/nomessage = 0)
 	set_light(0)
 	lit = 0
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	update_icon()
 
 /obj/item/clothing/mask/smokable/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -437,7 +437,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		item_state = icon_on
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 		if(ismob(loc))
 			var/mob/living/M = loc
 			M.update_inv_wear_mask(0)
@@ -457,7 +457,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		user.visible_message("<span class='notice'>[user] puts out [src].</span>", "<span class='notice'>You put out [src].</span>")
 		lit = 0
 		update_icon()
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 	else if (smoketime)
 		var/turf/location = get_turf(user)
 		user.visible_message("<span class='notice'>[user] empties out [src].</span>", "<span class='notice'>You empty out [src].</span>")
@@ -525,7 +525,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
-	var/base_state
+
+/obj/item/weapon/flame/lighter/New()
+    ..()
+    set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+    update_icon()
 
 /obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
@@ -533,20 +537,16 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "zippo"
 	item_state = "zippo"
 
-/obj/item/weapon/flame/lighter/random
-	New()
-		icon_state = "lighter-[pick("r","c","y","g")]"
-		item_state = icon_state
-		base_state = icon_state
+/obj/item/weapon/flame/lighter/random/New()
+    icon_state = "lighter-[pick("r","c","y","g")]"
+    item_state = icon_state
+    ..()
 
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
-	if(!base_state)
-		base_state = icon_state
 	if(user.r_hand == src || user.l_hand == src)
 		if(!lit)
 			lit = 1
-			icon_state = "[base_state]on"
-			item_state = "[base_state]on"
+			update_icon()
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 				playsound(src.loc, 'sound/items/zippo_open.ogg', 100, 1, -4)
@@ -563,11 +563,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				playsound(src.loc, "light_bic", 100, 1, -4)
 
 			set_light(2)
-			processing_objects.Add(src)
+			GLOB.processing_objects.Add(src)
 		else
 			lit = 0
-			icon_state = "[base_state]"
-			item_state = "[base_state]"
+			update_icon()
 			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
 				playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
@@ -575,11 +574,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
 
 			set_light(0)
-			processing_objects.Remove(src)
+			GLOB.processing_objects.Remove(src)
 	else
 		return ..()
 	return
 
+/obj/item/weapon/flame/lighter/update_icon()
+    var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+
+    if(lit)
+        icon_state = "[bis.base_icon_state]on"
+        item_state = "[bis.base_icon_state]on"
+    else
+        icon_state = "[bis.base_icon_state]"
+        item_state = "[bis.base_icon_state]"
 
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))

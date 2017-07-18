@@ -287,20 +287,15 @@
 		return //default behaviour only applies to true projectiles
 
 	//default point blank multiplier
-	var/damage_mult = 1.3
+	var/max_mult = 1.3
 
 	//determine multiplier due to the target being grabbed
-	if(ismob(target))
-		var/mob/M = target
-		if(M.grabbed_by.len)
-			var/grabstate = 0
-			for(var/obj/item/weapon/grab/G in M.grabbed_by)
-				grabstate = max(grabstate, G.state)
-			if(grabstate >= GRAB_NECK)
-				damage_mult = 2.5
-			else if(grabstate >= GRAB_AGGRESSIVE)
-				damage_mult = 1.5
-	P.damage *= damage_mult
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		for(var/obj/item/grab/G in H.grabbed_by)
+			if(G.point_blank_mult() > max_mult)
+				max_mult = G.point_blank_mult()
+	P.damage *= max_mult
 
 /obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
@@ -338,8 +333,8 @@
 	//shooting while in shock
 	var/x_offset = 0
 	var/y_offset = 0
-	if(istype(user, /mob/living/carbon))
-		var/mob/living/carbon/mob = user
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/mob = user
 		if(mob.shock_stage > 120)
 			y_offset = rand(-2,2)
 			x_offset = rand(-2,2)

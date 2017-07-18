@@ -117,8 +117,8 @@
 	take_victim(usr,usr)
 
 /obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
-	if (istype(W, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = W
+	if (istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
 		if(iscarbon(G.affecting) && check_table(G.affecting))
 			take_victim(G.affecting,usr)
 			qdel(W)

@@ -63,7 +63,7 @@
 	return parent.return_network(reference)
 
 /obj/machinery/atmospherics/pipe/Destroy()
-	qdel_null(parent)
+	QDEL_NULL(parent)
 	if(air_temporary)
 		loc.assume_air(air_temporary)
 
@@ -254,6 +254,8 @@
 		node2.update_underlays()
 
 /obj/machinery/atmospherics/pipe/simple/update_icon(var/safety = 0)
+	if(!atmos_initalized)
+		return
 	if(!check_icon_cache())
 		return
 
@@ -277,17 +279,18 @@
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
 		if(!leaking)
 			leaking = 1
-			processing_objects |= src
+			GLOB.processing_objects |= src
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
 
-/obj/machinery/atmospherics/pipe/simple/initialize()
+/obj/machinery/atmospherics/pipe/simple/atmos_init()
+	..()
 	normalize_dir()
 	var/node1_dir
 	var/node2_dir
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -507,6 +510,8 @@
 		node3.update_underlays()
 
 /obj/machinery/atmospherics/pipe/manifold/update_icon(var/safety = 0)
+	if(!atmos_initalized)
+		return
 	if(!check_icon_cache())
 		return
 
@@ -546,10 +551,11 @@
 	..()
 	update_icon()
 
-/obj/machinery/atmospherics/pipe/manifold/initialize()
+/obj/machinery/atmospherics/pipe/manifold/atmos_init()
+	..()
 	var/connect_directions = (NORTH|SOUTH|EAST|WEST)&(~dir)
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
@@ -561,7 +567,7 @@
 				break
 
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
@@ -573,7 +579,7 @@
 				break
 
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
@@ -758,6 +764,8 @@
 		node4.update_underlays()
 
 /obj/machinery/atmospherics/pipe/manifold4w/update_icon(var/safety = 0)
+	if(!atmos_initalized)
+		return
 	if(!check_icon_cache())
 		return
 
@@ -817,8 +825,8 @@
 		invisibility = i ? 101 : 0
 	update_icon()
 
-/obj/machinery/atmospherics/pipe/manifold4w/initialize()
-
+/obj/machinery/atmospherics/pipe/manifold4w/atmos_init()
+	..()
 	for(var/obj/machinery/atmospherics/target in get_step(src,1))
 		if(target.initialize_directions & 2)
 			if (check_connect_types(target,src))
@@ -999,7 +1007,8 @@
 	overlays.Cut()
 	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "cap")
 
-/obj/machinery/atmospherics/pipe/cap/initialize()
+/obj/machinery/atmospherics/pipe/cap/atmos_init()
+	..()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
@@ -1109,7 +1118,8 @@
 /obj/machinery/atmospherics/pipe/tank/hide()
 	update_underlays()
 
-/obj/machinery/atmospherics/pipe/tank/initialize()
+/obj/machinery/atmospherics/pipe/tank/atmos_init()
+	..()
 	var/connect_direction = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
@@ -1277,7 +1287,8 @@
 	else
 		icon_state = "exposed"
 
-/obj/machinery/atmospherics/pipe/vent/initialize()
+/obj/machinery/atmospherics/pipe/vent/atmos_init()
+	..()
 	var/connect_direction = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))

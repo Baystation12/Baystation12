@@ -25,7 +25,7 @@
 	if(H.stat != CONSCIOUS)
 		return
 
-	if(H.traumatic_shock && H.shock_stage < 40 && prob(3))
+	if(H.get_shock() && H.shock_stage < 40 && prob(3))
 		H.emote(pick("moan","groan"))
 
 	if(H.shock_stage > 10 && prob(3))
@@ -77,7 +77,7 @@
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	tail = "sogtail"
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = GLUT_TINY
@@ -89,7 +89,7 @@
 	health_hud_intensity = 2
 
 	min_age = 18
-	max_age = 60
+	max_age = 260
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -327,6 +327,18 @@
 
 	reagent_tag = IS_DIONA
 	genders = list(PLURAL)
+
+#define DIONA_LIMB_DEATH_COUNT 9
+/datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)
+	var/lost_limb_count = has_limbs.len - H.organs.len
+	if(lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
+		return TRUE
+	for(var/thing in H.bad_external_organs)
+		var/obj/item/organ/external/E = thing
+		if(E && E.is_stump())
+			lost_limb_count++
+	return (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
+#undef DIONA_LIMB_DEATH_COUNT
 
 /datum/species/diona/can_understand(var/mob/other)
 	var/mob/living/carbon/alien/diona/D = other

@@ -67,15 +67,15 @@
 
 				if(M.gender == MALE)
 					H.gender = MALE
-					H.name = pick(first_names_male)
+					H.name = pick(GLOB.first_names_male)
 				else if(M.gender == FEMALE)
 					H.gender = FEMALE
-					H.name = pick(first_names_female)
+					H.name = pick(GLOB.first_names_female)
 				else
 					H.gender = NEUTER
-					H.name = pick(first_names_female|first_names_male)
+					H.name = pick(GLOB.first_names_female|GLOB.first_names_male)
 
-				H.name += " [pick(last_names)]"
+				H.name += " [pick(GLOB.last_names)]"
 				H.real_name = H.name
 
 				H.set_species(randomize)

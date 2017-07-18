@@ -40,7 +40,7 @@
 	var/can_badmin = !is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor))
 	var/ooc_color = C.prefs.ooccolor
 
-	for(var/client/target in clients)
+	for(var/client/target in GLOB.clients)
 		if(target.is_key_ignored(C.key)) // If we're ignored by this person, then do nothing.
 			continue
 		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> <span class='message'>[message]</span>"

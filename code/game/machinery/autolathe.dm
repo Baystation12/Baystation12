@@ -7,6 +7,8 @@
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
+	clicksound = "keyboard"
+	clickvol = 30
 
 	var/list/machine_recipes
 	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
