@@ -168,7 +168,7 @@
 								else
 									sound = "healthy heartbeat"
 
-							var/obj/item/organ/internal/lungs/L = M.species.breathing_organ
+							var/obj/item/organ/internal/lungs/L = M.internal_organs_by_name[M.species.breathing_organ]
 							if(!L || M.losebreath || !L.active_breathing)
 								sound += " and no respiration"
 							else if(M.is_lung_ruptured() || M.getOxyLoss() > 50)
