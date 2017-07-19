@@ -75,6 +75,7 @@
 	if(!job_master)
 		return
 
+	var/datum/species/S = preference_species()
 	var/datum/mil_branch/player_branch = null
 	var/datum/mil_rank/player_rank = null
 
@@ -128,6 +129,11 @@
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
+
+		if(!job.is_species_allowed(S))
+			. += "<del>[rank]</del></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
+			continue
+
 		if(job.allowed_branches)
 			if(!player_branch)
 				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
@@ -305,24 +311,23 @@
 	return 0
 
 /**
- *  Prune a player's job preferences based on current branch and rank
+ *  Prune a player's job preferences based on current branch, rank and species
  *
  *  This proc goes through all the preferred jobs, and removes the ones incompatible with current rank or branch.
  */
 /datum/category_item/player_setup_item/occupation/proc/prune_job_prefs_for_rank()
 	for(var/datum/job/job in job_master.occupations)
 		if(job.title == pref.job_high)
-			if(!job.is_branch_allowed(pref.char_branch) || !job.is_rank_allowed(pref.char_branch, pref.char_rank))
+			if(job.is_restricted(pref))
 				pref.job_high = null
 
 		else if(job.title in pref.job_medium)
-			if(!job.is_branch_allowed(pref.char_branch) || !job.is_rank_allowed(pref.char_branch, pref.char_rank))
+			if(job.is_restricted(pref))
 				pref.job_medium.Remove(job.title)
 
 		else if(job.title in pref.job_low)
-			if(!job.is_branch_allowed(pref.char_branch) || !job.is_rank_allowed(pref.char_branch, pref.char_rank))
+			if(job.is_restricted(pref))
 				pref.job_low.Remove(job.title)
-
 
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
 	pref.job_high = null

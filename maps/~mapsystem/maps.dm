@@ -97,7 +97,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 /datum/map/New()
-	..()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
