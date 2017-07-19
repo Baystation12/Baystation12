@@ -629,7 +629,7 @@ var/global/datum/controller/occupations/job_master
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
 		else
-			spawnpos = spawntypes[spawnpoint]
+			spawnpos = spawntypes()[spawnpoint]
 
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
@@ -639,7 +639,7 @@ var/global/datum/controller/occupations/job_master
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in GLOB.using_map.allowed_spawns)
-			var/datum/spawnpoint/candidate = spawntypes[spawntype]
+			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break
@@ -647,7 +647,7 @@ var/global/datum/controller/occupations/job_master
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [rank].")
-		spawnpos = spawntypes[pick(GLOB.using_map.allowed_spawns)]
+		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
 
 	return spawnpos
 
