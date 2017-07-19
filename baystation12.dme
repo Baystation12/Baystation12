@@ -2418,6 +2418,7 @@
 #include "maps\torch\torch.dm"
 #include "maps\torch\torch_define.dm"
 #include "maps\~mapsystem\map_preferences.dm"
+#include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"
 #include "maps\~mapsystem\maps_announcements.dm"
 #include "maps\~mapsystem\maps_areas.dm"

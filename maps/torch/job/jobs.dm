@@ -1,5 +1,8 @@
 /datum/map/torch
-	species_to_job_whitelist = list(/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway))
+	species_to_job_whitelist = list(
+		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant),
+		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
+	)
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,

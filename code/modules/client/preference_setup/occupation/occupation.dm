@@ -51,17 +51,9 @@
 			pref.job_low[i]  = sanitize(pref.job_low[i])
 	if(!pref.player_alt_titles) pref.player_alt_titles = new()
 
-	if((GLOB.using_map.flags & MAP_HAS_BRANCH)\
-	   && (!pref.char_branch || !mil_branches.is_spawn_branch(pref.char_branch)))
-		pref.char_branch = "None"
-
-	if((GLOB.using_map.flags & MAP_HAS_RANK)\
-	   && (!pref.char_rank || !mil_branches.is_spawn_rank(pref.char_branch, pref.char_rank)))
-		pref.char_rank = "None"
-
 	// We could have something like Captain set to high while on a non-rank map,
 	// so we prune here to make sure we don't spawn as a PFC captain
-	prune_job_prefs_for_rank()
+	prune_occupation_prefs()
 
 	if(!job_master)
 		return
@@ -224,11 +216,11 @@
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
-		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in mil_branches.spawn_branches
-		if(choice && CanUseTopic(user))
+		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
+		if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, preference_species()))
 			pref.char_branch = choice
 			pref.char_rank = "None"
-			prune_job_prefs_for_rank()
+			prune_job_prefs()
 			return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
@@ -236,11 +228,11 @@
 		var/datum/mil_branch/current_branch = mil_branches.get_branch(pref.char_branch)
 
 		if(current_branch)
-			choice = input(user, "Choose your rank.", "Character Preference", pref.char_rank) as null|anything in current_branch.spawn_ranks
+			choice = input(user, "Choose your rank.", "Character Preference", pref.char_rank) as null|anything in mil_branches.spawn_ranks(pref.char_branch, preference_species())
 
-		if(choice && CanUseTopic(user))
+		if(choice && CanUseTopic(user) && mil_branches.is_spawn_rank(pref.char_branch, choice, preference_species()))
 			pref.char_rank = choice
-			prune_job_prefs_for_rank()
+			prune_job_prefs()
 			return TOPIC_REFRESH
 	else if(href_list["show_branches"])
 		var/rank = href_list["show_branches"]
@@ -315,7 +307,7 @@
  *
  *  This proc goes through all the preferred jobs, and removes the ones incompatible with current rank or branch.
  */
-/datum/category_item/player_setup_item/occupation/proc/prune_job_prefs_for_rank()
+/datum/category_item/player_setup_item/proc/prune_job_prefs()
 	for(var/datum/job/job in job_master.occupations)
 		if(job.title == pref.job_high)
 			if(job.is_restricted(pref))
@@ -328,6 +320,18 @@
 		else if(job.title in pref.job_low)
 			if(job.is_restricted(pref))
 				pref.job_low.Remove(job.title)
+
+datum/category_item/player_setup_item/proc/prune_occupation_prefs()
+	var/datum/species/S = preference_species()
+	if((GLOB.using_map.flags & MAP_HAS_BRANCH)\
+	   && (!pref.char_branch || !mil_branches.is_spawn_branch(pref.char_branch, S)))
+		pref.char_branch = "None"
+
+	if((GLOB.using_map.flags & MAP_HAS_RANK)\
+	   && (!pref.char_rank || !mil_branches.is_spawn_rank(pref.char_branch, pref.char_rank, S)))
+		pref.char_rank = "None"
+
+	prune_job_prefs()
 
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
 	pref.job_high = null

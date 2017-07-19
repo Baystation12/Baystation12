@@ -89,9 +89,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
 
-	var/list/branch_types  // list of branch datum paths for military branches available on this map
-	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
-
 	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
