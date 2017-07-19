@@ -62,6 +62,7 @@
 		overlays_to_add += image(icon, "[icon_state]_loaded")
 
 	overlays = overlays_to_add
+	..()
 
 /obj/item/weapon/gun/magnetic/proc/show_ammo(var/mob/user)
 	if(loaded)
