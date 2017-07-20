@@ -159,6 +159,7 @@
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
+	var/list/skin_overlays = list()
 
 	var/list/has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -431,3 +432,6 @@
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
+
+/datum/species/proc/update_skin(var/mob/living/carbon/human/H)
+	return
