@@ -138,6 +138,9 @@
 	processScheduler.setup()
 	Master.Initialize(10, FALSE)
 
+	spawn(1)
+		CPUUpdater()
+
 #ifdef UNIT_TEST
 	spawn(1)
 		initialize_unit_tests()
@@ -536,6 +539,24 @@ var/world_topic_spam_protect_time = world.timeofday
 /world/proc/load_motd()
 	join_motd = file2text("config/motd.txt")
 
+var/global/cpustate = "Unknown"
+
+world/proc/CPUUpdater()
+	while(1)
+		switch(world.cpu)
+			if(0 to 20)
+				cpustate = "Optimal performance"
+			if(21 to 40)
+				cpustate = "Good Performance"
+			if(41 to 60)
+				cpustate = "Ok Performance"
+			if(61 to 79)
+				cpustate = "Bad Performance"
+			if(80 to 99)
+				cpustate = "Terrible Performance"
+			if(100 to 1000)
+				cpustate = "Server Overloaded"
+		sleep(50)
 
 /proc/load_configuration()
 	config = new /datum/configuration()
