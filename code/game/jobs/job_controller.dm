@@ -23,7 +23,7 @@ var/global/datum/controller/occupations/job_master
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
-			var/datum/job/job = new J()
+			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
@@ -89,9 +89,7 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-			if(!job.is_branch_allowed(player.get_branch_pref()))
-				return 0
-			if(!job.is_rank_allowed(player.get_branch_pref(), player.get_rank_pref()))
+			if(job.is_restricted(player.client.prefs))
 				return 0
 
 			var/position_limit = job.total_positions
@@ -145,6 +143,9 @@ var/global/datum/controller/occupations/job_master
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
+				continue
+
+			if(job.is_restricted(player.client.prefs))
 				continue
 
 			if(job.title in command_positions) //If you want a command position, select it!
@@ -421,7 +422,7 @@ var/global/datum/controller/occupations/job_master
 
 		if(!joined_late || job.latejoin_at_spawnpoints)
 			var/obj/S = get_roundstart_spawnpoint(rank)
-			
+
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else

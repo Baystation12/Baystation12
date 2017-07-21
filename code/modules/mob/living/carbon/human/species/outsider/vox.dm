@@ -88,4 +88,5 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
 		H.internal = H.r_hand
-	H.internals.icon_state = "internal1"
+	if(H.internals)
+		H.internals.icon_state = "internal1"

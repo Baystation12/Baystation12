@@ -123,6 +123,25 @@
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
+/datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	if(!is_branch_allowed(prefs.char_branch))
+		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
+		return TRUE
+
+	if(!is_rank_allowed(prefs.char_branch, prefs.char_rank))
+		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.char_branch] are: [get_ranks(prefs.char_branch)].</span>")
+		return TRUE
+
+	var/datum/species/S = all_species[prefs.species]
+	if(!is_species_allowed(S))
+		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		return TRUE
+
+	return FALSE
+    
+/datum/job/proc/is_species_allowed(var/datum/species/S)
+	return !GLOB.using_map.is_species_job_restricted(S, src)
+    
 /**
  *  Check if members of the given branch are allowed in the job
  *
