@@ -12,11 +12,6 @@
 	var/running = FALSE
 	var/progress = 0
 	var/target_progress = 300
-	var/list/access_list = null
-
-/datum/computer_file/program/access_decrypter/New()
-	..()
-	access_list = get_all_access_datums()
 
 /datum/computer_file/program/access_decrypter/kill_program(var/forced)
 	reset()
@@ -43,7 +38,7 @@
 	progress += CPU.max_idle_programs
 	if(progress >= target_progress)
 		reset()
-		var/datum/access/A = pick(access_list)
+		var/datum/access/A = get_access_by_id(pick(get_all_station_access()))
 		RFID.stored_card.access |= A.id
 		if(ntnet_global.intrusion_detection_enabled)
 			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.network_card.get_network_tag()]  - downloaded access codes for: [A.desc].")
@@ -71,8 +66,7 @@
 		if(ntnet_global.intrusion_detection_enabled)
 			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.network_card.get_network_tag()]")
 			ntnet_global.intrusion_detection_alarm = 1
-
-
+		return 1
 
 /datum/nano_module/program/access_decrypter
 	name = "NTNet Access Decrypter"
