@@ -23,7 +23,7 @@ var/global/datum/controller/occupations/job_master
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
-			var/datum/job/job = new J()
+			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job

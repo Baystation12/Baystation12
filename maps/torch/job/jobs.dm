@@ -19,6 +19,20 @@
 						)
 
 
+/datum/map/torch/setup_map()
+	..()
+	for(var/job_type in GLOB.using_map.allowed_jobs)
+		var/datum/job/job = decls_repository.get_decl(job_type)
+		// Most species are restricted from SCG security and command roles
+		if((job.department_flag & (SEC|COM)) && job.allowed_branches.len && !(/datum/mil_branch/civilian in job.allowed_branches))
+			for(var/species_name in list(SPECIES_IPC, SPECIES_TAJARA, SPECIES_SKRELL, SPECIES_UNATHI))
+				var/datum/species/S = all_species[species_name]
+				var/species_blacklist = species_to_job_blacklist[S.type]
+				if(!species_blacklist)
+					species_blacklist = list()
+					species_to_job_blacklist[S.type] = species_blacklist
+				species_blacklist |= job.type
+
 /datum/job/captain
 	title = "Commanding Officer"
 	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
