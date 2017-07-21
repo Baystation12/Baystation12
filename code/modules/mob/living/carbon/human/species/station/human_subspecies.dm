@@ -55,7 +55,7 @@
 	// #defines so it's easier to read what's actually being generated
 	#define LTR ascii2text(rand(65,90)) // A-Z
 	#define NUM ascii2text(rand(48,57)) // 0-9
-	#define NAME capitalize(pick(gender == FEMALE ? first_names_female : first_names_male))
+	#define NAME capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male))
 	switch(rand(1,4))
 		if(1) return NAME
 		if(2) return "[LTR][LTR]-[NAME]"

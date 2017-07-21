@@ -7,7 +7,7 @@
 
 /obj/item/weapon/reagent_containers/glass/replenishing/New()
 	..()
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	spawning_id = pick("blood","holywater","lube","stoxin","ethanol","ice","glycerol","fuel","cleaner")
 
 /obj/item/weapon/reagent_containers/glass/replenishing/process()
@@ -22,13 +22,13 @@
 	var/max_stored_messages = 100
 
 /obj/item/clothing/mask/gas/poltergeist/New()
-	processing_objects.Add(src)
-	listening_objects += src
+	GLOB.processing_objects.Add(src)
+	GLOB.listening_objects += src
 	..()
 
 /obj/item/clothing/mask/gas/poltergeist/Destroy()
-	processing_objects.Remove(src)
-	listening_objects -= src
+	GLOB.processing_objects.Remove(src)
+	GLOB.listening_objects -= src
 	return ..()
 
 /obj/item/clothing/mask/gas/poltergeist/process()
@@ -63,12 +63,12 @@
 
 /obj/item/weapon/vampiric/New()
 	..()
-	processing_objects.Add(src)
-	listening_objects += src
+	GLOB.processing_objects.Add(src)
+	GLOB.listening_objects += src
 
 /obj/item/weapon/vampiric/Destroy()
-	processing_objects.Remove(src)
-	listening_objects -= src
+	GLOB.processing_objects.Remove(src)
+	GLOB.listening_objects -= src
 	return ..()
 
 /obj/item/weapon/vampiric/process()
@@ -156,11 +156,11 @@
 
 /obj/effect/decal/cleanable/blood/splatter/animated/New()
 	..()
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	loc_last_process = src.loc
 
 /obj/effect/decal/cleanable/blood/splatter/animated/Destroy()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
 /obj/effect/decal/cleanable/blood/splatter/animated/process()
@@ -190,10 +190,10 @@
 	density = 1
 
 /obj/effect/shadow_wight/New()
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 
 /obj/effect/shadow_wight/Destroy()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
 /obj/effect/shadow_wight/process()
@@ -218,7 +218,7 @@
 			M.sleeping = max(M.sleeping,rand(5,10))
 			src.loc = null
 	else
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 
 /obj/effect/shadow_wight/Bump(var/atom/obstacle)
 	to_chat(obstacle, "<span class='warning'>You feel a chill run down your spine!</span>")

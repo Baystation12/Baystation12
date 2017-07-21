@@ -81,8 +81,11 @@
 	return ..()
 
 /client/proc/is_preference_enabled(var/preference)
-	var/datum/client_preference/cp = get_client_preference(preference)
-	return cp && (cp.key in prefs.preferences_enabled)
+	if(prefs)
+		var/datum/client_preference/cp = get_client_preference(preference)
+		return cp && (cp.key in prefs.preferences_enabled)
+	else
+		log_error("Client is lacking preferences: [log_info_line(src)]")	
 
 /client/proc/is_preference_disabled(var/preference)
 	return !is_preference_enabled(preference)

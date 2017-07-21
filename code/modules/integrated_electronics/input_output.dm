@@ -63,7 +63,7 @@
 /obj/item/integrated_circuit/input/numberpad/OnTopic(href_list, user)
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
-		if(isnum(new_input) && CanInteract(user, physical_state))
+		if(isnum(new_input) && CanInteract(user, GLOB.physical_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			activate_pin(1)
 		return IC_TOPIC_REFRESH
@@ -83,7 +83,7 @@
 /obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
-		if(istext(new_input) && CanInteract(user, physical_state))
+		if(istext(new_input) && CanInteract(user, GLOB.physical_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			activate_pin(1)
 			return IC_TOPIC_REFRESH
@@ -204,8 +204,8 @@
 	var/datum/radio_frequency/radio_connection
 	var/frequency = 1357
 
-/obj/item/integrated_circuit/input/signaler/initialize()
-	..()
+/obj/item/integrated_circuit/input/signaler/Initialize()
+	. = ..()
 
 	var/datum/integrated_io/new_freq = inputs[1]
 	var/datum/integrated_io/new_code = inputs[2]
@@ -287,8 +287,8 @@
 	inputs = list("frequency", "code", "command", "id tag")
 	outputs = list("recieved command")
 
-/obj/item/integrated_circuit/input/signaler/advanced/initialize()
-	..()
+/obj/item/integrated_circuit/input/signaler/advanced/Initialize()
+	. = ..()
 	var/datum/integrated_io/new_com = inputs[3]
 	var/datum/integrated_io/new_id = inputs[4]
 	var/datum/integrated_io/new_rec = outputs[1]
@@ -301,7 +301,7 @@
 	var/datum/integrated_io/new_com = inputs[3]
 	var/datum/integrated_io/new_id = inputs[4]
 	signal.data["command"] = new_com.data
-	signal.data["id_tag"] = new_id.data
+	signal.data["tag"] = new_id.data
 	return signal
 
 /obj/item/integrated_circuit/input/signaler/advanced/receive_signal(var/datum/signal/signal)
@@ -329,7 +329,7 @@
 	. = list()
 	. += "Current selection: [(current_console && current_console.id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for(var/obj/machinery/teleport/hub/R in machines)
+	for(var/obj/machinery/teleport/hub/R in GLOB.machines)
 		var/obj/machinery/computer/teleporter/com = R.com
 		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
@@ -360,7 +360,7 @@
 	scanned_access = new()
 
 /obj/item/integrated_circuit/input/access_scanner/Destroy()
-	qdel_null(scanned_access)
+	QDEL_NULL(scanned_access)
 	if(contained_id)
 		contained_id.dropInto(loc)
 		contained_id = null

@@ -2,7 +2,7 @@
 Overview:
    Used to create objects that need a per step proc call.  Default definition of 'New()'
    stores a reference to src machine in global 'machines list'.  Default definition
-   of 'Del' removes reference to src machine in global 'machines list'.
+   of 'Destroy' removes reference to src machine in global 'machines list'.
 
 Class Variables:
    use_power (num)
@@ -121,13 +121,13 @@ Class Procs:
 	if(d)
 		set_dir(d)
 	if(!machinery_sort_required && ticker)
-		dd_insertObjectList(machines, src)
+		dd_insertObjectList(GLOB.machines, src)
 	else
-		machines += src
+		GLOB.machines += src
 		machinery_sort_required = 1
 
 /obj/machinery/Destroy()
-	machines -= src
+	GLOB.machines -= src
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
@@ -154,7 +154,7 @@ Class Procs:
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.set_dir(pick(cardinal))
+		pulse2.set_dir(pick(GLOB.cardinal))
 
 		spawn(10)
 			qdel(pulse2)

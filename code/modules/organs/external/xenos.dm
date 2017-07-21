@@ -82,3 +82,4 @@
 
 /obj/item/organ/external/head/unbreakable/xeno
 	eye_icon = "eyes"
+	eye_icon_location = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'

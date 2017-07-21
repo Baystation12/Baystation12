@@ -73,8 +73,8 @@
 	src.icon_state = "body_scanner_0"
 	return
 
-/obj/machinery/bodyscanner/attackby(obj/item/weapon/grab/G as obj, user as mob)
-	if ((!( istype(G, /obj/item/weapon/grab) ) || !( ismob(G.affecting) )))
+/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
+	if (!ismob(G.affecting))
 		return
 	if (src.occupant)
 		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")

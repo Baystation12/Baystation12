@@ -73,9 +73,9 @@ steam.start() -- spawns the effect
 				var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(location)
 				var/direction
 				if(src.cardinals)
-					direction = pick(cardinal)
+					direction = pick(GLOB.cardinal)
 				else
-					direction = pick(alldirs)
+					direction = pick(GLOB.alldirs)
 				for(i=0, i<pick(1,2,3), i++)
 					sleep(5)
 					step(steam,direction)
@@ -104,8 +104,8 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 
-/obj/effect/sparks/initialize()
-	..()
+/obj/effect/sparks/Initialize()
+	. = ..()
 	// Scheduled tasks caused serious performance issues when being qdel()ed.
 	// Replaced with spawn() until performance of scheduled tasks is improved.
 	//schedule_task_in(5 SECONDS, /proc/qdel, list(src))
@@ -145,9 +145,9 @@ steam.start() -- spawns the effect
 				var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
 				var/direction
 				if(src.cardinals)
-					direction = pick(cardinal)
+					direction = pick(GLOB.cardinal)
 				else
-					direction = pick(alldirs)
+					direction = pick(GLOB.alldirs)
 				for(i=0, i<pick(1,2,3), i++)
 					sleep(5)
 					step(sparks,direction)
@@ -327,9 +327,9 @@ steam.start() -- spawns the effect
 			var/direction = src.direction
 			if(!direction)
 				if(src.cardinals)
-					direction = pick(cardinal)
+					direction = pick(GLOB.cardinal)
 				else
-					direction = pick(alldirs)
+					direction = pick(GLOB.alldirs)
 			for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 				sleep(10)
 				step(smoke,direction)
@@ -474,7 +474,7 @@ steam.start() -- spawns the effect
 			var/light = -1
 			var/flash = -1
 
-			// Clamp all values to fractions of max_explosion_range, following the same pattern as for tank transfer bombs
+			// Clamp all values to fractions of GLOB.max_explosion_range, following the same pattern as for tank transfer bombs
 			if (round(amount/12) > 0)
 				devst = devst + amount/12
 

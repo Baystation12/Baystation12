@@ -1,9 +1,11 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
-	mob_list -= src
-	dead_mob_list_ -= src
-	living_mob_list_ -= src
+	GLOB.mob_list -= src
+	GLOB.dead_mob_list_ -= src
+	GLOB.living_mob_list_ -= src
 	unset_machine()
 	qdel(hud_used)
+	for(var/obj/item/grab/G in grabbed_by)
+		qdel(G)
 	clear_fullscreen()
 	if(client)
 		remove_screen_obj_references()
@@ -41,7 +43,7 @@
 	zone_sel = null
 
 /mob/New()
-	mob_list += src
+	GLOB.mob_list += src
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -129,7 +131,7 @@
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 
 /mob/proc/findname(msg)
-	for(var/mob/M in mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if (M.real_name == text("[]", msg))
 			return M
 	return 0
@@ -258,13 +260,13 @@
 
 //Gets the mob grab conga line.
 /mob/proc/ret_grab(list/L)
-	if (!istype(l_hand, /obj/item/weapon/grab) && !istype(r_hand, /obj/item/weapon/grab))
+	if (!istype(l_hand, /obj/item/grab) && !istype(r_hand, /obj/item/grab))
 		return L
 	if (!L)
 		L = list(src)
 	for(var/A in list(l_hand,r_hand))
-		if (istype(A, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = A
+		if (istype(A, /obj/item/grab))
+			var/obj/item/grab/G = A
 			if (!(G.affecting in L))
 				L += G.affecting
 				if (G.affecting)
@@ -433,7 +435,7 @@
 				namecounts[name] = 1
 			creatures[name] = O
 
-	for(var/mob/M in sortAtom(mob_list))
+	for(var/mob/M in sortAtom(GLOB.mob_list))
 		var/name = M.name
 		if (names.Find(name))
 			namecounts[name]++
@@ -701,10 +703,12 @@
 		set_density(initial(density))
 	reset_layer()
 
-	for(var/obj/item/weapon/grab/G in grabbed_by)
-		if(G.state >= GRAB_AGGRESSIVE)
+	for(var/obj/item/grab/G in grabbed_by)
+		if(G.stop_move())
 			canmove = 0
-			break
+
+		if(G.force_stand())
+			lying = 0
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.

@@ -339,8 +339,8 @@
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
-	for(var/i = 1, i <= tagger_locations.len, i++)
-		dat += "<td><a href='?src=\ref[src];nextTag=[tagger_locations[i]]'>[tagger_locations[i]]</a></td>"
+	for(var/i = 1, i <= GLOB.tagger_locations.len, i++)
+		dat += "<td><a href='?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
 
 		if (i%4==0)
 			dat += "</tr><tr>"
@@ -356,7 +356,7 @@
 
 /obj/item/device/destTagger/Topic(href, href_list)
 	src.add_fingerprint(usr)
-	if(href_list["nextTag"] && href_list["nextTag"] in tagger_locations)
+	if(href_list["nextTag"] && href_list["nextTag"] in GLOB.tagger_locations)
 		src.currTag = href_list["nextTag"]
 	if(href_list["nextTag"] == "CUSTOM")
 		var/dest = input("Please enter custom location.", "Location", src.currTag ? src.currTag : "None")

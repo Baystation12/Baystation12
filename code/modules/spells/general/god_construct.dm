@@ -65,8 +65,12 @@
 /spell/construction/cast(var/target, mob/user)
 	if(islist(target))
 		target = target[1]
-
-	new target(get_turf(user), connected_god)
+	var/turf/T = get_turf(user)
+	if(!ispath(target, /turf))
+		new target(T, connected_god)
+	else
+		var/turf/simulated/floor/deity/F = T.ChangeTurf(/turf/simulated/floor/deity)
+		F.sync_god(connected_god)
 #undef CONSTRUCT_SPELL_COST
 #undef CONSTRUCT_SPELL_REQ
 #undef CONSTRUCT_SPELL_TYPE

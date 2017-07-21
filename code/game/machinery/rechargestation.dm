@@ -114,7 +114,8 @@
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
 		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
-		target = potato.cell
+		if(potato)
+			target = potato.cell
 
 	if(target && !target.fully_charged())
 		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick

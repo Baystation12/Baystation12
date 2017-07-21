@@ -52,29 +52,6 @@
 			update_icon()
 			return
 
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
-
-		if(isliving(G.affecting))
-			var/mob/living/GM = G.affecting
-
-			if(G.state>1)
-				if(!GM.loc == get_turf(src))
-					to_chat(user, "<span class='notice'>[GM.name] needs to be on the toilet.</span>")
-					return
-				if(open && !swirlie)
-					user.visible_message("<span class='danger'>[user] starts to give [GM.name] a swirlie!</span>", "<span class='notice'>You start to give [GM.name] a swirlie!</span>")
-					swirlie = GM
-					if(do_after(user, 30, src))
-						user.visible_message("<span class='danger'>[user] gives [GM.name] a swirlie!</span>", "<span class='notice'>You give [GM.name] a swirlie!</span>", "You hear a toilet flushing.")
-						GM.adjustOxyLoss(5)
-					swirlie = null
-				else
-					user.visible_message("<span class='danger'>[user] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
-					GM.adjustBruteLoss(8)
-			else
-				to_chat(user, "<span class='notice'>You need a tighter grip.</span>")
-
 	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
 		if(I.w_class > ITEM_SIZE_NORMAL)
 			to_chat(user, "<span class='notice'>\The [I] does not fit.</span>")
@@ -97,22 +74,6 @@
 	icon_state = "urinal"
 	density = 0
 	anchored = 1
-
-/obj/structure/urinal/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
-		if(isliving(G.affecting))
-			var/mob/living/GM = G.affecting
-			if(G.state>1)
-				if(!GM.loc == get_turf(src))
-					to_chat(user, "<span class='notice'>[GM.name] needs to be on the urinal.</span>")
-					return
-				user.visible_message("<span class='danger'>[user] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
-				GM.adjustBruteLoss(8)
-			else
-				to_chat(user, "<span class='notice'>You need a tighter grip.</span>")
-
-
 
 /obj/machinery/shower
 	name = "shower"

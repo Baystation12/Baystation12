@@ -63,7 +63,7 @@ var/list/button_sound = list('sound/machines/button1.ogg','sound/machines/button
 	var/turf/turf_source = get_turf(source)
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	for (var/P in player_list)
+	for (var/P in GLOB.player_list)
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
@@ -159,7 +159,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 /client/proc/playtitlemusic()
 	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
-		using_map.lobby_music.play_to(src)
+		GLOB.using_map.lobby_music.play_to(src)
 
 /proc/get_rand_frequency()
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.

@@ -12,7 +12,7 @@
 
 /obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	if(!authorized)
-		to_chat(user, "<span class='warning'>You swipe [emag_source] at [src] and jury rig it into the systems of [using_map.full_name]!</span>")
+		to_chat(user, "<span class='warning'>You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!</span>")
 		authorized = 1
 		return 1
 	. = ..()
@@ -20,7 +20,7 @@
 /obj/structure/AIcore/attackby(obj/item/P as obj, mob/user as mob)
 	if(!authorized)
 		if(access_ai_upload in P.GetAccess())
-			to_chat(user, "<span class='notice'>You swipe [P] at [src] and authorize it to connect into the systems of [using_map.full_name].</span>")
+			to_chat(user, "<span class='notice'>You swipe [P] at [src] and authorize it to connect into the systems of [GLOB.using_map.full_name].</span>")
 			authorized = 1
 	switch(state)
 		if(0)
@@ -177,7 +177,7 @@
 
 			if(istype(P, /obj/item/weapon/screwdriver))
 				if(!authorized)
-					to_chat(user, "<span class='warning'>Core fails to connect to the systems of [using_map.full_name]!</span>")
+					to_chat(user, "<span class='warning'>Core fails to connect to the systems of [GLOB.using_map.full_name]!</span>")
 					return
 
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)

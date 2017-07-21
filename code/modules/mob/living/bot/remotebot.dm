@@ -33,7 +33,7 @@
 	for(var/i in 1 to rand(3,5))
 		var/obj/item/stack/material/cardboard/C = new(src.loc)
 		if(prob(50))
-			C.loc = get_step(src, pick(alldirs))
+			C.loc = get_step(src, pick(GLOB.alldirs))
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)

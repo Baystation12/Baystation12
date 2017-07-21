@@ -83,9 +83,9 @@
 #define show_image(target, image)                           target << image
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 
-#define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
+#define MAP_IMAGE_PATH "nano/images/[GLOB.using_map.path]/"
 
-#define map_image_file_name(z_level) "[using_map.path]-[z_level].png"
+#define map_image_file_name(z_level) "[GLOB.using_map.path]-[z_level].png"
 
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 
@@ -95,9 +95,9 @@
 
 #define CanPhysicallyInteract(user) CanInteract(user, physical_state)
 
-#define qdel_null_list(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
+#define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 
-#define qdel_null(x) if(x) { qdel(x) ; x = null }
+#define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 

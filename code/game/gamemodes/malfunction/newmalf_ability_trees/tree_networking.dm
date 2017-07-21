@@ -155,8 +155,8 @@
 		return
 	log_ability_use(user, "system override (STARTED)")
 	var/list/remaining_apcs = list()
-	for(var/obj/machinery/power/apc/A in machines)
-		if(!(A.z in using_map.station_levels)) 		// Only station APCs
+	for(var/obj/machinery/power/apc/A in GLOB.machines)
+		if(!(A.z in GLOB.using_map.station_levels)) 		// Only station APCs
 			continue
 		if(A.hacker == user || A.aidisabled) 		// This one is already hacked, or AI control is disabled on it.
 			continue
@@ -168,7 +168,7 @@
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
-			command_announcement.Announce("Caution, [using_map.station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
+			command_announcement.Announce("Caution, [GLOB.using_map.station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
 				return
@@ -200,14 +200,15 @@
 	to_chat(user, "## REACHABLE APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
 	sleep(1 MINUTE)
 	// Hack all APCs, including those built during hack sequence.
-	for(var/obj/machinery/power/apc/A in machines)
-		if((!A.hacker || A.hacker != src) && !A.aidisabled && A.z in using_map.station_levels)
+	for(var/obj/machinery/power/apc/A in GLOB.machines)
+		if((!A.hacker || A.hacker != src) && !A.aidisabled && A.z in GLOB.using_map.station_levels)
 			A.ai_hack(src)
 
 	log_ability_use(user, "system override (FINISHED)")
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
+
 	if(user.hack_can_fail)
-		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [using_map.station_name]'s systems.", "Network Administration Center")
+		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [GLOB.using_map.station_name]'s systems.", "Network Administration Center")
 	user.hack_can_fail = 0
 	user.hacking = 0
 	user.system_override = 2

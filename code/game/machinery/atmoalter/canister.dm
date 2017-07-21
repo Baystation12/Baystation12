@@ -264,7 +264,7 @@ update_flag
 
 	..()
 
-	nanomanager.update_uis(src) // Update all NanoUIs attached to src
+	GLOB.nanomanager.update_uis(src) // Update all NanoUIs attached to src
 
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)

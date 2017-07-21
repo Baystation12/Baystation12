@@ -90,7 +90,6 @@ var/list/limb_icon_cache = list()
 	dir = EAST
 	icon = mob_icon
 
-
 /obj/item/organ/external/proc/get_icon()
 	update_icon()
 	return mob_icon
@@ -156,8 +155,8 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 		icon_cache_key += "_tone_[s_tone]"
 	else
 		if(s_col && s_col.len >= 3)
-			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
-			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]"
+			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), s_col_blend)
+			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[s_col_blend]"
 
 	return applying
 

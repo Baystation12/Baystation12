@@ -226,8 +226,8 @@
 		var/mob/M = A
 		if(istype(A, /mob/living))
 			//if they have a neck grab on someone, that person gets hit instead
-			var/obj/item/weapon/grab/G = locate() in M
-			if(G && G.state >= GRAB_NECK)
+			var/obj/item/grab/G = locate() in M
+			if(G && G.shield_assailant())
 				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
 				if(Bump(G.affecting, forced=1))
 					return //If Bump() returns 0 (keep going) then we continue on to attack M.

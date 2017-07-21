@@ -30,12 +30,14 @@
 
 /obj/effect/shuttle_landmark/escape_pod/transit/New()
 	landmark_tag = "escape_pod_[number]_internim"
+	..()
 
 /obj/effect/shuttle_landmark/escape_pod/out
 	name = "Escaped"
 
 /obj/effect/shuttle_landmark/escape_pod/out/New()
 	landmark_tag = "escape_pod_[number]_out"
+	..()
 
 //Pods
 
@@ -603,10 +605,12 @@
 	shuttle_area = /area/aquila_hangar/start
 	current_location = "nav_hangar_aquila"
 	landmark_transition = "nav_transit_aquila"
+	dock_target = "aquila_shuttle"
 
 /obj/effect/shuttle_landmark/torch/hangar/aquila
 	name = "Aquila Hangar"
 	landmark_tag = "nav_hangar_aquila"
+	docking_controller = "aquila_shuttle_dock_airlock"
 	base_turf = /turf/simulated/floor/reinforced/airless
 
 /obj/effect/shuttle_landmark/torch/deck1/aquila

@@ -4,8 +4,8 @@
 
 /mob/living/carbon/human/dummy/mannequin/New()
 	..()
-	mob_list -= src
-	human_mob_list -= src
+	GLOB.mob_list -= src
+	GLOB.human_mob_list -= src
 	delete_inventory()
 
 /mob/living/carbon/human/dummy/mannequin/add_to_living_mob_list()
@@ -41,6 +41,10 @@
 
 /mob/living/carbon/human/machine/New(var/new_loc)
 	..(new_loc, SPECIES_IPC)
+
+/mob/living/carbon/human/nabber/New(var/new_loc)
+	pulling_punches = 1
+	..(new_loc, SPECIES_NABBER)
 
 /mob/living/carbon/human/monkey/New(var/new_loc)
 	..(new_loc, "Monkey")

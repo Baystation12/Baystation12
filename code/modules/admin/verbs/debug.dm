@@ -38,7 +38,7 @@
 	usr.show_message(t, 1)
 	feedback_add_details("admin_verb","ASL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_robotize(var/mob/M in mob_list)
+/client/proc/cmd_admin_robotize(var/mob/M in GLOB.mob_list)
 	set category = "Fun"
 	set name = "Make Robot"
 
@@ -53,7 +53,7 @@
 	else
 		alert("Invalid mob")
 
-/client/proc/cmd_admin_animalize(var/mob/M in mob_list)
+/client/proc/cmd_admin_animalize(var/mob/M in GLOB.mob_list)
 	set category = "Fun"
 	set name = "Make Simple Animal"
 
@@ -74,13 +74,13 @@
 		M.Animalize()
 
 
-/client/proc/makepAI(var/turf/T in mob_list)
+/client/proc/makepAI(var/turf/T in GLOB.mob_list)
 	set category = "Fun"
 	set name = "Make pAI"
 	set desc = "Specify a location to spawn a pAI device, then specify a key to play that pAI"
 
 	var/list/available = list()
-	for(var/mob/C in mob_list)
+	for(var/mob/C in GLOB.mob_list)
 		if(C.key)
 			available.Add(C)
 	var/mob/choice = input("Choose a player to play the pAI", "Spawn pAI") in available
@@ -101,7 +101,7 @@
 			paiController.pai_candidates.Remove(candidate)
 	feedback_add_details("admin_verb","MPAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_slimeize(var/mob/M in mob_list)
+/client/proc/cmd_admin_slimeize(var/mob/M in GLOB.mob_list)
 	set category = "Fun"
 	set name = "Make slime"
 
@@ -241,7 +241,7 @@
 	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
 	feedback_add_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)
+/client/proc/cmd_admin_grantfullaccess(var/mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set name = "Grant Full Access"
 
@@ -271,7 +271,7 @@
 	feedback_add_details("admin_verb","GFA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("has granted [M.key] full access.")
 
-/client/proc/cmd_assume_direct_control(var/mob/M in mob_list)
+/client/proc/cmd_assume_direct_control(var/mob/M in GLOB.mob_list)
 	set category = "Admin"
 	set name = "Assume direct control"
 	set desc = "Direct intervention"
@@ -390,7 +390,7 @@
 	if(!check_rights(R_FUN))
 		return
 
-	var/mob/living/carbon/human/H = input("Select mob.", "Select equipment.") as null|anything in human_mob_list
+	var/mob/living/carbon/human/H = input("Select mob.", "Select equipment.") as null|anything in GLOB.human_mob_list
 	if(!H)
 		return
 
@@ -464,19 +464,21 @@
 	set name = "Debug Mob Lists"
 	set desc = "For when you just gotta know"
 
-	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients"))
+	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Ghost Mobs", "Clients"))
 		if("Players")
-			to_chat(usr, jointext(player_list,","))
+			to_chat(usr, jointext(GLOB.player_list,","))
 		if("Admins")
-			to_chat(usr, jointext(admins,","))
+			to_chat(usr, jointext(GLOB.admins,","))
 		if("Mobs")
-			to_chat(usr, jointext(mob_list,","))
+			to_chat(usr, jointext(GLOB.mob_list,","))
 		if("Living Mobs")
-			to_chat(usr, jointext(living_mob_list_,","))
+			to_chat(usr, jointext(GLOB.living_mob_list_,","))
 		if("Dead Mobs")
-			to_chat(usr, jointext(dead_mob_list_,","))
+			to_chat(usr, jointext(GLOB.dead_mob_list_,","))
+		if("Ghost Mobs")
+			to_chat(usr, jointext(GLOB.ghost_mob_list,","))
 		if("Clients")
-			to_chat(usr, jointext(clients,","))
+			to_chat(usr, jointext(GLOB.clients,","))
 
 // DNA2 - Admin Hax
 /client/proc/cmd_admin_toggle_block(var/mob/M,var/block)
@@ -502,4 +504,4 @@
 	if(!check_rights(R_DEBUG))
 		return
 
-	error_cache.showTo(usr)
+	GLOB.error_cache.show_to(usr.client)

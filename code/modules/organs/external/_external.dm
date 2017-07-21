@@ -34,6 +34,7 @@
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
 	var/s_tone                         // Skin tone.
 	var/list/s_col                     // skin colour
+	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
 
@@ -86,9 +87,10 @@
 
 /obj/item/organ/external/Destroy()
 
-	for(var/datum/wound/wound in wounds)
-		wound.embedded_objects.Cut()
-	wounds.Cut()
+	if(wounds)
+		for(var/datum/wound/wound in wounds)
+			wound.embedded_objects.Cut()
+		wounds.Cut()
 
 	if(parent && parent.children)
 		parent.children -= src
@@ -419,7 +421,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
-	if(!surgical && wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
+	if(!surgical && wounds && wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
 		if((type == CUT || type == BRUISE) && damage >= 5)
 			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
 			var/list/compatible_wounds = list()
@@ -788,7 +790,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 				dir = 2
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
@@ -807,16 +809,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 					gore.basecolor =  use_blood_colour
 					gore.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.removed()
 				if(istype(loc,/turf))
-					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/I in src)
 				I.loc = get_turf(src)
-				I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			qdel(src)
 
@@ -1267,3 +1269,59 @@ Note that amputating the affected organ does in fact remove the infection from t
 				unknown_body++
 		if(unknown_body)
 			. += "Unknown body present"
+
+/obj/item/organ/external/proc/inspect(mob/living/carbon/human/H, mob/user)
+
+	var/obj/item/organ/external/E = src
+
+	if(!E || E.is_stump())
+		to_chat(user, "<span class='notice'>[H] is missing that bodypart.</span>")
+		return
+
+	user.visible_message("<span class='notice'>[user] starts inspecting [H]'s [E.name] carefully.</span>")
+	if(!do_mob(user,H, 10))
+		to_chat(user, "<span class='notice'>You must stand still to inspect [E] for wounds.</span>")
+	else if(E.wounds.len)
+		to_chat(user, "<span class='warning'>You find [E.get_wounds_desc()]</span>")
+	else
+		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
+
+	to_chat(user, "<span class='notice'>Checking bones now...</span>")
+	if(!do_mob(user, H, 20))
+		to_chat(user, "<span class='notice'>You must stand still to feel [E] for fractures.</span>")
+	else if(E.status & ORGAN_BROKEN)
+		to_chat(user, "<span class='warning'>The [E.encased ? E.encased : "bone in the [E.name]"] moves slightly when you poke it!</span>")
+		H.custom_pain("Your [E.name] hurts where it's poked.",40, affecting = E)
+	else
+		to_chat(user, "<span class='notice'>The [E.encased ? E.encased : "bones in the [E.name]"] seem to be fine.</span>")
+
+	to_chat(user, "<span class='notice'>Checking skin now...</span>")
+	if(!do_mob(user, H, 10))
+		to_chat(user, "<span class='notice'>You must stand still to check [H]'s skin for abnormalities.</span>")
+	else
+		var/bad = 0
+		if(H.getToxLoss() >= 40)
+			to_chat(user, "<span class='warning'>[H] has an unhealthy skin discoloration.</span>")
+			bad = 1
+		if(H.getOxyLoss() >= 20)
+			to_chat(user, "<span class='warning'>[H]'s skin is unusaly pale.</span>")
+			bad = 1
+		if(E.status & ORGAN_DEAD)
+			to_chat(user, "<span class='warning'>[E] is decaying!</span>")
+			bad = 1
+		if(!bad)
+			to_chat(user, "<span class='notice'>[H]'s skin is normal.</span>")
+	return 1
+
+/obj/item/organ/external/proc/jointlock(mob/living/carbon/human/target, mob/attacker)
+	var/obj/item/organ/external/E = src
+
+	if(!E.can_feel_pain())
+		return
+
+	var/armor = target.run_armor_check(target, "melee")
+	if(armor < 100)
+		to_chat(target, "<span class='danger'>You feel extreme pain!</span>")
+
+		var/max_halloss = round(target.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
+		target.adjustHalLoss(Clamp(0, max_halloss - target.getHalLoss(), 30))

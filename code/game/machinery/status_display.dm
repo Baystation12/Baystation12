@@ -59,8 +59,8 @@ var/list/status_icons_to_colour = list(
 	return ..()
 
 // register for radio system
-/obj/machinery/status_display/initialize()
-	..()
+/obj/machinery/status_display/Initialize()
+	. = ..()
 	if(radio_controller)
 		radio_controller.add_object(src, frequency)
 

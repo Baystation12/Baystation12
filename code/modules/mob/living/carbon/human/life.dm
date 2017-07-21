@@ -95,8 +95,14 @@
 	return 1
 
 /mob/living/carbon/human/breathe()
-	if(!in_stasis)
-		..()
+	var/species_organ = species.breathing_organ
+
+	if(!in_stasis && species_organ)
+		var/active_breaths = 0
+		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+		if(L)
+			active_breaths = L.active_breathing
+		..(active_breaths)
 
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
@@ -298,23 +304,16 @@
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
-	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[BP_LUNGS]
-	if(nervous_system_failure() || (!L && should_have_organ(BP_LUNGS)))
+	var/species_organ = species.breathing_organ
+	if(!species_organ)
+		return
+
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+	if(!L || nervous_system_failure())
 		failed_last_breath = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
-
-	if(failed_last_breath && !isSynthetic() )
-		if(prob(15) && !nervous_system_failure())
-			if(!is_asystole())
-				emote("gasp")
-			else
-				emote(pick("shiver","twitch"))
-		adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-
-		oxygen_alert = max(oxygen_alert, 1)
-		return 0
-	return 1
+	return !failed_last_breath
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
@@ -565,9 +564,9 @@
 		nutrition = max (0, nutrition - species.hunger_factor)
 
 	if(!isSynthetic() && (species.flags & IS_PLANT))
+
 		if(nutrition < 10)
 			take_overall_damage(2,0)
-
 			//traumatic_shock is updated every tick, incrementing that is pointless - shock_stage is the counter.
 			//Not that it matters much for diona, who have NO_PAIN.
 			shock_stage++
@@ -922,8 +921,8 @@
 	if(isturf(loc) && rand(1,1000) == 1)
 		var/turf/T = loc
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
-			playsound_local(src,pick(scarySounds),50, 1, -1)
-	
+			playsound_local(src,pick(GLOB.scarySounds),50, 1, -1)
+
 	var/area/A = get_area(src)
 	if(client && world.time >= client.played + 600)
 		A.play_ambience(src)
@@ -1092,9 +1091,9 @@
 			if(I)
 				perpname = I.registered_name
 
-		for(var/datum/data/record/E in data_core.general)
+		for(var/datum/data/record/E in GLOB.data_core.general)
 			if(E.fields["name"] == perpname)
-				for (var/datum/data/record/R in data_core.security)
+				for (var/datum/data/record/R in GLOB.data_core.security)
 					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
 						holder.icon_state = "hudwanted"
 						break
@@ -1138,8 +1137,8 @@
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
 		if(mind && mind.special_role)
-			if(hud_icon_reference[mind.special_role])
-				holder.icon_state = hud_icon_reference[mind.special_role]
+			if(GLOB.hud_icon_reference[mind.special_role])
+				holder.icon_state = GLOB.hud_icon_reference[mind.special_role]
 			else
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
@@ -1174,7 +1173,7 @@
 
 /mob/living/carbon/human/handle_vision()
 	if(client)
-		client.screen.Remove(global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
+		client.screen.Remove(GLOB.global_hud.nvg, GLOB.global_hud.thermal, GLOB.global_hud.meson, GLOB.global_hud.science)
 	if(machine)
 		var/viewflags = machine.check_eye(src)
 		machine.apply_visual(src)

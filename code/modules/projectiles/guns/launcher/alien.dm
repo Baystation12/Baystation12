@@ -8,11 +8,11 @@
 
 /obj/item/weapon/gun/launcher/alien/New()
 	..()
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	last_regen = world.time
 
 /obj/item/weapon/gun/launcher/alien/Destroy()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
 /obj/item/weapon/gun/launcher/alien/process()

@@ -228,3 +228,7 @@
 		var/atom/A = sub_atom_type
 		.[initial(A.name)] = sub_atom_type
 	. = sortAssoc(.)
+
+//Splits the text of a file at seperator and returns them in a list.
+/world/proc/file2list(filename, seperator="\n")
+	return splittext(file2text(filename), seperator)

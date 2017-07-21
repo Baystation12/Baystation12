@@ -58,7 +58,7 @@
 	field_segments = null
 	damaged_segments = null
 	mode_list = null
-	qdel_null(wires)
+	QDEL_NULL(wires)
 	. = ..()
 
 
@@ -227,7 +227,7 @@
 	data["hacked"] = hacked
 	data["offline_for"] = offline_for * 2
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "shieldgen.tmpl", src.name, 500, 800)
 		ui.set_initial_data(data)

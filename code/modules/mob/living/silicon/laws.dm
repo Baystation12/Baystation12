@@ -5,14 +5,14 @@
 /mob/living/silicon/New()
 	..()
 	if(!laws)
-		laws = using_map.default_law_type
+		laws = GLOB.using_map.default_law_type
 	if(ispath(laws))
 		laws = new laws()
 	laws_sanity_check()
 
 /mob/living/silicon/proc/laws_sanity_check()
 	if (!src.laws)
-		laws = new using_map.default_law_type
+		laws = new GLOB.using_map.default_law_type
 
 /mob/living/silicon/proc/has_zeroth_law()
 	return laws.zeroth_law != null
@@ -117,4 +117,4 @@
 
 /mob/living/silicon/proc/log_law(var/law_message)
 	log_and_message_admins(law_message)
-	lawchanges += "[stationtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"
+	GLOB.lawchanges += "[stationtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"

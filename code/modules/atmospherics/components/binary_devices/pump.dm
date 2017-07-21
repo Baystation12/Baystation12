@@ -28,7 +28,7 @@ Thus, the two variables affect pump operation are set in New():
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
 
-	var/max_pressure_setting = 15000	//kPa
+	var/max_pressure_setting = MAX_PUMP_PRESSURE
 
 	var/frequency = 0
 	var/id = null
@@ -134,7 +134,7 @@ Thus, the two variables affect pump operation are set in New():
 	)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -143,8 +143,8 @@ Thus, the two variables affect pump operation are set in New():
 		ui.open()					// open the new ui window
 		ui.set_auto_update(1)		// auto update every Master Controller tick
 
-/obj/machinery/atmospherics/binary/pump/initialize()
-	..()
+/obj/machinery/atmospherics/binary/pump/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 

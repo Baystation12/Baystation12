@@ -21,7 +21,7 @@
 	to_chat(src,"<span class='notice'>You give \the [L] a chance to willingly convert. May they choose wisely.</span>")
 	var/choice = alert(L, "You feel a weak power enter your mind attempting to convert it.", "Conversion", "Allow Conversion", "Deny Conversion")
 	if(choice == "Allow Conversion")
-		godcult.add_antagonist_mind(L.mind,1,"a servant of [linked]. You willingly give your mind to it, may it bring you fortune", "Servant of [linked]", specific_god=linked)
+		godcult.add_antagonist_mind(L.mind,1, "Servant of [linked]", "You willingly give your mind to it, may it bring you fortune", specific_god=linked)
 	else
 		to_chat(L, "<span class='warning'>With little difficulty you force the intrusion out of your mind. May it stay that way.</span>")
 		to_chat(src, "<span class='warning'>\The [L] decides not to convert.</span>")

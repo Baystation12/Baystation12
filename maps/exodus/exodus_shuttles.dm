@@ -156,8 +156,8 @@
 	announcer = "NDV Icarus"
 
 /datum/shuttle/multi_shuttle/mercenary/New()
-	arrival_message = "Attention, [using_map.station_short], you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
-	departure_message = "Your visitors are on their way out of the system, [using_map.station_short], burning delta-v like it's nothing. Good riddance."
+	arrival_message = "Attention, [GLOB.using_map.station_short], you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
+	departure_message = "Your visitors are on their way out of the system, [GLOB.using_map.station_short], burning delta-v like it's nothing. Good riddance."
 	..()
 
 /datum/shuttle/multi_shuttle/skipjack
@@ -175,8 +175,8 @@
 	announcer = "NDV Icarus"
 
 /datum/shuttle/multi_shuttle/skipjack/New()
-	arrival_message = "Attention, [using_map.station_short], we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
-	departure_message = "Your guests are pulling away, [using_map.station_short] - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
+	arrival_message = "Attention, [GLOB.using_map.station_short], we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
+	departure_message = "Your guests are pulling away, [GLOB.using_map.station_short] - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
 	..()
 
 /datum/shuttle/multi_shuttle/rescue
@@ -204,8 +204,8 @@
 	announcer = "NDV Icarus"
 
 /datum/shuttle/multi_shuttle/rescue/New()
-	arrival_message = "Attention, [using_map.station_short], there's a small patrol craft headed your way, it flashed us Asset Protection codes and we let it pass. You've got guests on the way."
-	departure_message = "[using_map.station_short], That Asset Protection vessel is headed back the way it came. Hope they were helpful."
+	arrival_message = "Attention, [GLOB.using_map.station_short], there's a small patrol craft headed your way, it flashed us Asset Protection codes and we let it pass. You've got guests on the way."
+	departure_message = "[GLOB.using_map.station_short], That Asset Protection vessel is headed back the way it came. Hope they were helpful."
 	..()
 
 /datum/shuttle/autodock/ferry/multidock/specops/ert

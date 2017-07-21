@@ -62,15 +62,15 @@ var/list/global/tank_gauge_cache = list()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	update_gauge()
 	return
 
 /obj/item/weapon/tank/Destroy()
-	qdel_null(air_contents)
+	QDEL_NULL(air_contents)
 
-	processing_objects.Remove(src)
-	qdel_null(src.proxyassembly)
+	GLOB.processing_objects.Remove(src)
+	QDEL_NULL(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
@@ -173,7 +173,7 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
 			if(do_after(user, 50, src))
 				to_chat(user, "<span class='notice'>You finish attaching the assembly to \the [src].</span>")
-				bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]"
+				GLOB.bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]"
 				message_admins("[key_name_admin(user)] attached an assembly to a wired [src]. Temp: [src.air_contents.temperature-T0C]")
 				assemble_bomb(W,user)
 			else
@@ -192,7 +192,7 @@ var/list/global/tank_gauge_cache = list()
 					src.valve_welded = 1
 					src.leaking = 0
 				else
-					bombers += "[key_name(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]"
+					GLOB.bombers += "[key_name(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]"
 					message_admins("[key_name_admin(user)] attempted to weld a [src]. [src.air_contents.temperature-T0C]")
 					if(WT.welding)
 						to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
@@ -261,7 +261,7 @@ var/list/global/tank_gauge_cache = list()
 					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
