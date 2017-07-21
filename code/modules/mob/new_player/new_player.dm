@@ -154,8 +154,6 @@
 			observer.set_appearance(mannequin)
 			qdel(mannequin)
 
-			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
 			observer.real_name = client.prefs.real_name
 			observer.name = observer.real_name
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -412,7 +410,6 @@
 		log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 /mob/new_player/proc/LateChoices()
-	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
 
 	var/list/dat = list("<html><body><center>")
 	dat += "<b>Welcome, [name].<br></b>"

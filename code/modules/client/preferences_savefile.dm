@@ -1,5 +1,5 @@
 #define SAVEFILE_VERSION_MIN	8
-#define SAVEFILE_VERSION_MAX	15
+#define SAVEFILE_VERSION_MAX	13
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)	return
@@ -14,7 +14,7 @@
 	S.cd = "/"
 
 	S["version"] >> savefile_version
-	player_setup.load_preferences(S)
+	load_prefs(S)
 	loaded_preferences = S
 	return 1
 
@@ -25,7 +25,7 @@
 	S.cd = "/"
 
 	S["version"] << SAVEFILE_VERSION_MAX
-	player_setup.save_preferences(S)
+	save_prefs(S)
 	loaded_preferences = S
 	return 1
 
@@ -46,35 +46,35 @@
 		S["default_slot"] << default_slot
 
 	if(slot != SAVE_RESET)
-		S.cd = GLOB.using_map.character_load_path(S, slot)
-		player_setup.load_character(S)
+		S.cd = using_map.character_load_path(S, slot)
+		load_char(S)
 	else
-		player_setup.load_character(S)
-		S.cd = GLOB.using_map.character_load_path(S, default_slot)
+		load_char(S)
+		S.cd = using_map.character_load_path(S, default_slot)
 
 	loaded_character = S
-
+	sanitize_char()
 	return 1
 
 /datum/preferences/proc/save_character()
 	if(!path)				return 0
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
-	S.cd = GLOB.using_map.character_save_path(default_slot)
+	S.cd = using_map.character_save_path(default_slot)
 
 	S["version"] << SAVEFILE_VERSION_MAX
-	player_setup.save_character(S)
+	save_char(S)
 	loaded_character = S
 	return S
 
 /datum/preferences/proc/sanitize_preferences()
-	player_setup.sanitize_setup()
+	sanitize_prefs()
 	return 1
 
 /datum/preferences/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	if(!preferences || !character)
 		return 0
-	return player_setup.update_setup(preferences, character)
+	return update_setup(preferences, character)
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN
