@@ -31,10 +31,9 @@
 		will_contain = null // Remove reference to allow for garbage collection
 
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
-		var/obj/item/I
-		for(I in src.loc)
-			if(I.density || I.anchored || !I.simulated || I == src) continue
-			I.forceMove(src)
+		for(var/atom/movable/AM in src.loc)
+			if(AM.density || AM.anchored || !AM.simulated || AM == src) continue
+			AM.forceMove(src)
 
 /obj/structure/closet/examine(mob/user)
 	if(..(user, 1) && !opened)
