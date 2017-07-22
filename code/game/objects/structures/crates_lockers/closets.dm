@@ -136,6 +136,9 @@
 			continue
 		if(!I.anchored)
 			I.forceMove(src)
+			I.pixel_x = 0
+			I.pixel_y = 0
+			I.pixel_z = 0
 			added_units += item_size
 	return added_units
 

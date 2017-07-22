@@ -3,7 +3,7 @@
 	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	req_access = list(access_all_personal_lockers)
 	var/registered_name = null
-    
+
 	will_contain = list(
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel_norm)),
 		/obj/item/device/radio/headset
@@ -64,6 +64,7 @@
 
 			if(!src.registered_name)
 				src.registered_name = I.registered_name
+				src.name += " ([I.registered_name])"
 				src.desc = "Owned by [I.registered_name]."
 		else
 			to_chat(user, "<span class='warning'>Access Denied</span>")
@@ -107,5 +108,6 @@
 			src.locked = 1
 			src.icon_state = src.icon_locked
 			src.registered_name = null
-			src.desc = "It's a secure locker for personnel. The first card swiped gains control."
+			src.name = initial(name)
+			src.desc = initial(desc)
 	return

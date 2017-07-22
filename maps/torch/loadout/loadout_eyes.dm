@@ -38,6 +38,11 @@
 	path = /obj/item/clothing/glasses/hud/security/prescription
 	allowed_roles = SECURITY_ROLES
 
+/datum/gear/eyes/security/sunglasses
+	display_name = "Security HUD Sunglasses"
+	path = /obj/item/clothing/glasses/sunglasses/sechud
+	allowed_roles = SECURITY_ROLES
+
 /datum/gear/eyes/secaviators
 	display_name = "Security HUD Aviators"
 	path = /obj/item/clothing/glasses/sunglasses/sechud/toggle
