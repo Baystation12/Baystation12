@@ -321,6 +321,17 @@
 /datum/species/proc/can_understand(var/mob/other)
 	return
 
+/datum/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
+	return FALSE
+
+// Used for any extra behaviour when falling and to see if a species will fall at all.
+/datum/species/proc/can_fall(var/mob/living/carbon/human/H)
+	return TRUE
+
+// Used to override normal fall behaviour. Use only when the species does fall down a level.
+/datum/species/proc/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+	return FALSE
+
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
