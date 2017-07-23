@@ -429,6 +429,17 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_vir
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 
+/decl/hierarchy/outfit/job/torch/crew/medical/first_responder
+	name = OUTFIT_JOB_NAME("First Responder")
+	uniform = /obj/item/clothing/under/rank/medical/paramedic
+	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
+	shoes = /obj/item/clothing/shoes/jackboots
+	head = null
+	l_hand = /obj/item/weapon/storage/firstaid/adv
+	belt = /obj/item/weapon/storage/belt/medical/emt
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/first_responder
+	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
 /decl/hierarchy/outfit/job/torch/crew/medical/chemist
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
 	uniform = /obj/item/clothing/under/rank/chemist
