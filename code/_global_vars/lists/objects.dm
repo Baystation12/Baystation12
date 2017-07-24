@@ -6,7 +6,6 @@ GLOBAL_LIST_EMPTY(processing_power_items)
 GLOBAL_LIST_EMPTY(active_diseases)
 GLOBAL_LIST_EMPTY(med_hud_users)          // List of all entities using a medical HUD.
 GLOBAL_LIST_EMPTY(sec_hud_users)          // List of all entities using a security HUD.
-GLOBAL_LIST_EMPTY(holowarrant_users)
 GLOBAL_LIST_EMPTY(hud_icon_reference)
 GLOBAL_LIST_EMPTY(traders)                //List of all nearby traders
 
