@@ -22,7 +22,6 @@
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/grenade/chem_grenade/teargas,
 		/obj/item/weapon/melee/baton/loaded,
-		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,
@@ -32,6 +31,7 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/device/holowarrant,
+		/obj/item/device/flashlight/maglight,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
@@ -71,7 +71,6 @@
 		/obj/item/weapon/folder/red,
 		/obj/item/device/holowarrant,
 		/obj/item/clothing/gloves/thick,
-		/obj/item/weapon/storage/box/armband,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
@@ -102,7 +101,6 @@
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/hailer,
-		/obj/item/weapon/storage/box/holobadge_solgov,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,
