@@ -31,6 +31,7 @@
 	data["ntnetlogs"] = ntnet_global.logs
 	data["ntnetmaxlogs"] = ntnet_global.setting_maxlogcount
 
+	data["banned_nids"] = list(ntnet_global.banned_nids)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -42,6 +43,7 @@
 		ui.set_auto_update(1)
 
 /datum/nano_module/computer_ntnetmonitor/Topic(href, href_list)
+	var/mob/user = usr
 	if(..())
 		return 1
 	if(href_list["resetIDS"])
@@ -65,7 +67,6 @@
 			return 1
 
 		// NTNet is enabled and user is about to shut it down. Let's ask them if they really want to do it, as wirelessly connected computers won't connect without NTNet being enabled (which may prevent people from turning it back on)
-		var/mob/user = usr
 		if(!user)
 			return 1
 		var/response = alert(user, "Really disable NTNet wireless? If your computer is connected wirelessly you won't be able to turn it back on! This will affect all connected wireless devices.", "NTNet shutdown", "Yes", "No")
@@ -78,7 +79,6 @@
 			ntnet_global.purge_logs()
 	if(href_list["updatemaxlogs"])
 		. = 1
-		var/mob/user = usr
 		var/logcount = text2num(input(user,"Enter amount of logs to keep in memory ([MIN_NTNET_LOGS]-[MAX_NTNET_LOGS]):"))
 		if(ntnet_global)
 			ntnet_global.update_max_log_count(logcount)
@@ -87,3 +87,15 @@
 		if(!ntnet_global)
 			return 1
 		ntnet_global.toggle_function(href_list["toggle_function"])
+	if(href_list["ban_nid"])
+		. = 1
+		if(!ntnet_global)
+			return 1
+		var/nid = text2num(input(user,"Enter NID of device which you want to block from the network:"))
+		ntnet_global.banned_nids |= nid
+	if(href_list["unban_nid"])
+		. = 1
+		if(!ntnet_global)
+			return 1
+		var/nid = text2num(input(user,"Enter NID of device which you want to unblock from the network:"))
+		ntnet_global.banned_nids -= nid
