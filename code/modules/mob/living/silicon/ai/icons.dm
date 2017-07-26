@@ -156,5 +156,5 @@ var/list/datum/ai_icon/ai_icons
 
 /datum/ai_icon/hotdogger
 	name = "Dancing Hotdog"
-	alive_icon = "ai-hotdog
+	alive_icon = "ai-hotdog"
 	alive_light = "#81DDFF"
