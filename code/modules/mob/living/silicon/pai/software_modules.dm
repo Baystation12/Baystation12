@@ -144,12 +144,6 @@
 	id = "messenger"
 	toggle = 0
 	
-	on_purchase(mob/living/silicon/pai/user)
-		if(user && !user.pda)
-			user.pda = new(user)
-			spawn(5)
-				user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
-		
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
 		var/data[0]
 
@@ -223,6 +217,11 @@
 					return alert("Failed to send message: the recipient could not be reached.")
 				return 1
 
+/datum/pai_software/messenger/on_purchase(mob/living/silicon/pai/user)
+	if(user && !user.pda)
+		user.pda = new(user)
+		user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
+				
 /datum/pai_software/med_records
 	name = "Medical Records"
 	ram_cost = 15

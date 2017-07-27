@@ -91,11 +91,9 @@
 		radio = card.radio
 		common_radio = radio
 
-	//Default languages without universal translator software
-	add_language("Sol Common", 1)
-	add_language("Tradeband", 1)
-	add_language("Gutter", 1)
-
+	//As a human made device, we'll understand sol common without the need of the translator
+	add_language(LANGUAGE_SOL_COMMON, 1)
+	
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 	verbs -= /mob/living/verb/ghost
