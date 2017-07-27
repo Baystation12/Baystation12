@@ -308,7 +308,12 @@
  *  This proc goes through all the preferred jobs, and removes the ones incompatible with current rank or branch.
  */
 /datum/category_item/player_setup_item/proc/prune_job_prefs()
-	for(var/datum/job/job in job_master.occupations)
+	var/allowed_titles = list()
+
+	for(var/job_type in GLOB.using_map.allowed_jobs)
+		var/datum/job/job = decls_repository.get_decl(job_type)
+		allowed_titles += job.title
+
 		if(job.title == pref.job_high)
 			if(job.is_restricted(pref))
 				pref.job_high = null
@@ -320,6 +325,17 @@
 		else if(job.title in pref.job_low)
 			if(job.is_restricted(pref))
 				pref.job_low.Remove(job.title)
+
+	if(pref.job_high && !(pref.job_high in allowed_titles))
+		pref.job_high = null
+
+	for(var/job_title in pref.job_medium)
+		if(!(job_title in allowed_titles))
+			pref.job_medium -= job_title
+
+	for(var/job_title in pref.job_low)
+		if(!(job_title in allowed_titles))
+			pref.job_low -= job_title
 
 datum/category_item/player_setup_item/proc/prune_occupation_prefs()
 	var/datum/species/S = preference_species()
