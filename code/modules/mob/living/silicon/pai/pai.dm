@@ -100,11 +100,6 @@
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 	verbs -= /mob/living/verb/ghost
 
-	//PDA
-	pda = new(src)
-	spawn(5)
-		pda.set_owner_rank_job(text("[]", src), "Personal Assistant")
-		pda.toff = 1
 	..()
 
 /mob/living/silicon/pai/Login()

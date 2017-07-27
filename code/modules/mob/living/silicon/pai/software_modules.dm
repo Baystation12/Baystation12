@@ -20,6 +20,9 @@
 
 	proc/is_active(mob/living/silicon/pai/user)
 		return 0
+	
+	proc/on_purchase(mob/living/silicon/pai/user)
+		return
 
 /datum/pai_software/directives
 	name = "Directives"
@@ -140,7 +143,13 @@
 	ram_cost = 5
 	id = "messenger"
 	toggle = 0
-
+	
+	on_purchase(mob/living/silicon/pai/user)
+		if(user && !user.pda)
+			user.pda = new(user)
+			spawn(5)
+				user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
+		
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
 		var/data[0]
 
