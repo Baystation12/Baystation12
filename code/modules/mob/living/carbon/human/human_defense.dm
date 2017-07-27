@@ -131,55 +131,11 @@ meteor_act
 		if(.) return
 	return 0
 
-
-/mob/living/carbon/human/attack_throat(var/obj/item/W, var/obj/item/weapon/grab/G, var/mob/user)
-	. = ..()
-	if(.)
-		var/obj/item/organ/external/head = get_organ(BP_HEAD)
-		if(head) head.sever_artery()
-
-/mob/living/carbon/human/proc/check_attack_tendons(var/obj/item/W, var/mob/living/user, var/target_zone)
-
-	if(!W.edge || !W.force || W.damtype != BRUTE)
-		return FALSE
-	var/obj/item/organ/external/affecting = get_organ(target_zone)
-	if(!affecting || affecting.is_stump() || !affecting.has_tendon || (affecting.status & ORGAN_TENDON_CUT))
-		return FALSE
-
-	var/obj/item/weapon/grab/grab
-	if(user.a_intent == I_HURT)
-		for(var/obj/item/weapon/grab/G in src.grabbed_by)
-			if(G.assailant == user && G.state >= GRAB_NECK)
-				grab = G
-				break
-	if(!grab)
-		return FALSE
-
-	user.visible_message("<span class='danger'>\The [user] begins to cut \the [src]'s [affecting.tendon_name] with \the [W]!</span>")
-	user.next_move = world.time + 20
-
-	if(!do_after(user, 20, progress=0))
-		return FALSE
-	if(!grab || grab.assailant != user || grab.affecting != src)
-		return FALSE
-	if(!affecting || affecting.is_stump() || !affecting.sever_tendon())
-		return FALSE
-
-	user.visible_message("<span class='danger'>\The [user] cut \the [src]'s [affecting.tendon_name] with \the [W]!</span>")
-	if(W.hitsound) playsound(loc, W.hitsound, 50, 1, -1)
-	grab.last_action = world.time
-	flick(grab.hud.icon_state, grab.hud)
-	admin_attack_log(user, src, "hamstrung their victim", "was hamstrung", "hamstrung")
-
-	return TRUE
-
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 
-	if(check_attack_throat(I, user))
-		return null
-
-	if(check_attack_tendons(I, user, target_zone))
-		return null
+	for (var/obj/item/grab/G in grabbed_by)
+		if(G.resolve_item_attack(user, I, target_zone))
+			return null
 
 	if(user == src) // Attacking yourself can't miss
 		return target_zone
@@ -230,7 +186,7 @@ meteor_act
 		return 0
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
-		forcesay(hit_appends)	//forcesay checks stat already
+		forcesay(GLOB.hit_appends)	//forcesay checks stat already
 	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))

@@ -134,12 +134,12 @@
 		broadcast_security_hud_message("[src] is arresting a level [threat] suspect <b>[suspect_name]</b> in <b>[get_area(src)]</b>.", src)
 	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
 	playsound(src.loc, pick(preparing_arrest_sounds), 50)
-	moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
+	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
 	if(get_dist(get_turf(src), get_turf(target)) >= 1)
 		awaiting_surrender = INFINITY
-		moved_event.unregister(moving_instance, src)
+		GLOB.moved_event.unregister(moving_instance, src)
 
 /mob/living/bot/secbot/proc/react_to_attack(mob/attacker)
 	if(!target)
@@ -150,7 +150,7 @@
 
 /mob/living/bot/secbot/resetTarget()
 	..()
-	moved_event.unregister(target, src)
+	GLOB.moved_event.unregister(target, src)
 	awaiting_surrender = -1
 	walk_to(src, 0)
 

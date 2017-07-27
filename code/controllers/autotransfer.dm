@@ -5,10 +5,10 @@ datum/controller/transfer_controller
 
 datum/controller/transfer_controller/New()
 	timerbuffer = config.vote_autotransfer_initial
-	processing_objects += src
+	GLOB.processing_objects += src
 
 datum/controller/transfer_controller/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 
 datum/controller/transfer_controller/proc/process()
 	if (time_till_transfer_vote() <= 0)

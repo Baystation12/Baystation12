@@ -25,8 +25,9 @@
 	var/corpseidicon = null //For setting it to be a gold, silver, centcomm etc ID
 	var/species = SPECIES_HUMAN
 
-/obj/effect/landmark/corpse/initialize()
+/obj/effect/landmark/corpse/Initialize()
 	createCorpse()
+	. = ..()
 
 /obj/effect/landmark/corpse/proc/createCorpse() //Creates a mob and checks for gear in each slot before attempting to equip it.
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)

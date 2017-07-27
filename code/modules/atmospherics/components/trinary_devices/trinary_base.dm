@@ -69,7 +69,8 @@ obj/machinery/atmospherics/trinary
 
 		..()
 
-	initialize()
+	atmos_init()
+		..()
 		if(node1 && node2 && node3) return
 
 		var/node1_connect = turn(dir, -180)

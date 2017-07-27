@@ -53,7 +53,7 @@
 	desc = "Gain the ability to warp the very structure of a target's body, wracking pain and weakness."
 	item_cost = 75
 	required_feats = list(DEITY_LEVELED_TRANSMUTATION = 2)
-	path = /datum/phenomena/rock_form
+	path = /datum/phenomena/warp
 
 //Level 3
 /datum/uplink_item/deity/boon/single_charge/transmutation/jaunt

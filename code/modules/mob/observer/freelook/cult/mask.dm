@@ -7,5 +7,5 @@
 	visualnet = new /datum/visualnet/cultnet()
 
 /mob/observer/eye/cult/Destroy()
-	qdel_null(visualnet)
+	QDEL_NULL(visualnet)
 	return ..()

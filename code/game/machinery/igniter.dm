@@ -16,8 +16,8 @@
 	..()
 	update_icon()
 
-/obj/machinery/igniter/initialize()
-	..()
+/obj/machinery/igniter/Initialize()
+	. = ..()
 	update_icon()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
@@ -72,8 +72,8 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/sparker/wifi_receiver
 
-/obj/machinery/sparker/initialize()
-	..()
+/obj/machinery/sparker/Initialize()
+	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
@@ -149,12 +149,12 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/sparker/M in machines)
+	for(var/obj/machinery/sparker/M in GLOB.machines)
 		if (M.id == id)
 			spawn( 0 )
 				M.ignite()
 
-	for(var/obj/machinery/igniter/M in machines)
+	for(var/obj/machinery/igniter/M in GLOB.machines)
 		if(M.id == id)
 			M.ignite()
 

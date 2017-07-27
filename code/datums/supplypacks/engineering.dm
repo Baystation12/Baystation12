@@ -7,36 +7,6 @@
 	cost = 10
 	containername = "\improper Replacement lights"
 
-/decl/hierarchy/supply_pack/engineering/metal50
-	name = "50 metal sheets"
-	contains = list(/obj/item/stack/material/steel/fifty)
-	cost = 10
-	containername = "\improper Metal sheets crate"
-
-/decl/hierarchy/supply_pack/engineering/glass50
-	name = "50 glass sheets"
-	contains = list(/obj/item/stack/material/glass/fifty)
-	cost = 10
-	containername = "\improper Glass sheets crate"
-
-/decl/hierarchy/supply_pack/engineering/wood50
-	name = "50 wooden planks"
-	contains = list(/obj/item/stack/material/wood/fifty)
-	cost = 10
-	containername = "\improper Wooden planks crate"
-
-/decl/hierarchy/supply_pack/engineering/plastic50
-	name = "50 plastic sheets"
-	contains = list(/obj/item/stack/material/plastic/fifty)
-	cost = 10
-	containername = "\improper Plastic sheets crate"
-	
-/decl/hierarchy/supply_pack/engineering/marble10
-	name = "10 slabs of marble"
-	contains = list(/obj/item/stack/material/marble/ten)
-	cost = 10
-	containername = "\improper Marble slabs crate"	
-
 /decl/hierarchy/supply_pack/engineering/smes_circuit
 	name = "Superconducting Magnetic Energy Storage Unit Circuitry"
 	contains = list(/obj/item/weapon/circuitboard/smes)

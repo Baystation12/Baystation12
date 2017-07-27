@@ -139,7 +139,7 @@
 	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")
 
 /client/VV_static()
-	return ..() + list("holder")
+	return ..() + list("holder", "prefs")
 
 /datum/admins/VV_static()
 	return vars

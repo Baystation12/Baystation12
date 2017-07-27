@@ -18,12 +18,12 @@ var/global/datum/controller/occupations/job_master
 	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
-		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
+		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
-			var/datum/job/job = new J()
+			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
@@ -89,9 +89,7 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-			if(!job.is_branch_allowed(player.get_branch_pref()))
-				return 0
-			if(!job.is_rank_allowed(player.get_branch_pref(), player.get_rank_pref()))
+			if(job.is_restricted(player.client.prefs))
 				return 0
 
 			var/position_limit = job.total_positions
@@ -147,6 +145,9 @@ var/global/datum/controller/occupations/job_master
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
 				continue
 
+			if(job.is_restricted(player.client.prefs))
+				continue
+
 			if(job.title in command_positions) //If you want a command position, select it!
 				continue
 
@@ -165,7 +166,7 @@ var/global/datum/controller/occupations/job_master
 				break
 
 	proc/ResetOccupations()
-		for(var/mob/new_player/player in player_list)
+		for(var/mob/new_player/player in GLOB.player_list)
 			if((player) && (player.mind))
 				player.mind.assigned_role = null
 				player.mind.special_role = null
@@ -244,7 +245,7 @@ var/global/datum/controller/occupations/job_master
 					break
 
 		//Get the players who are ready
-		for(var/mob/new_player/player in player_list)
+		for(var/mob/new_player/player in GLOB.player_list)
 			if(player.ready && player.mind && !player.mind.assigned_role)
 				unassigned += player
 
@@ -327,7 +328,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == BE_ASSISTANT)
 				Debug("AC2 Assistant located, Player: [player]")
-				if(using_map.flags & MAP_HAS_BRANCH)
+				if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 					var/datum/mil_branch/branch = mil_branches.get_branch(player.get_branch_pref())
 					AssignRole(player, branch.assistant_job)
 				else
@@ -419,17 +420,9 @@ var/global/datum/controller/occupations/job_master
 
 		H.job = rank
 
-		if(!joined_late)
-			var/obj/S = null
-			var/list/loc_list = new()
-			for(var/obj/effect/landmark/start/sloc in landmarks_list)
-				if(sloc.name != rank)	continue
-				if(locate(/mob/living) in sloc.loc)	continue
-				loc_list += sloc
-			if(loc_list.len)
-				S = pick(loc_list)
-			else
-				S = locate("start*[rank]") // use old stype
+		if(!joined_late || job.latejoin_at_spawnpoints)
+			var/obj/S = get_roundstart_spawnpoint(rank)
+
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else
@@ -591,7 +584,7 @@ var/global/datum/controller/occupations/job_master
 			var/level4 = 0 //never
 			var/level5 = 0 //banned
 			var/level6 = 0 //account too young
-			for(var/mob/new_player/player in player_list)
+			for(var/mob/new_player/player in GLOB.player_list)
 				if(!(player.ready && player.mind && !player.mind.assigned_role))
 					continue //This player is not ready
 				if(jobban_isbanned(player, job.title))
@@ -629,15 +622,15 @@ var/global/datum/controller/occupations/job_master
 	var/datum/spawnpoint/spawnpos
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
-		spawnpoint = using_map.default_spawn
+		spawnpoint = GLOB.using_map.default_spawn
 
 	if(spawnpoint)
-		if(!(spawnpoint in using_map.allowed_spawns))
+		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
 			if(H)
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
 		else
-			spawnpos = spawntypes[spawnpoint]
+			spawnpos = spawntypes()[spawnpoint]
 
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
@@ -646,8 +639,8 @@ var/global/datum/controller/occupations/job_master
 
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
-		for(var/spawntype in using_map.allowed_spawns)
-			var/datum/spawnpoint/candidate = spawntypes[spawntype]
+		for(var/spawntype in GLOB.using_map.allowed_spawns)
+			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break
@@ -655,9 +648,20 @@ var/global/datum/controller/occupations/job_master
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [rank].")
-		spawnpos = spawntypes[pick(using_map.allowed_spawns)]
+		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
 
 	return spawnpos
 
 /datum/controller/occupations/proc/GetJobByType(var/job_type)
 	return occupations_by_type[job_type]
+
+/datum/controller/occupations/proc/get_roundstart_spawnpoint(var/rank)
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	if(loc_list.len)
+		return pick(loc_list)
+	else
+		return locate("start*[rank]") // use old stype

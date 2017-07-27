@@ -24,13 +24,13 @@
 
 /mob/living/blocks_airlock()
 	return 1
-	
+
 /obj/structure/closet/body_bag/blocks_airlock()
 	if (locate(/mob) in src)
 		return 1
 	else
 		return 0				//Prevents Airlocks from closing on Bodybags and Cryobags with people inside
-	
+
 
 //*** Airlock Crushing
 
@@ -73,10 +73,10 @@
 
 	var/turf/T = loc
 	if(!istype(T))
-		return	
+		return
 
 	var/list/valid_turfs = list()
-	for(var/dir_to_test in cardinal)
+	for(var/dir_to_test in GLOB.cardinal)
 		var/turf/new_turf = get_step(T, dir_to_test)
 		if(!new_turf.contains_dense_objects())
 			valid_turfs |= new_turf

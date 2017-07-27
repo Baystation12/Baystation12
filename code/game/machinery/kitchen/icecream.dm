@@ -61,8 +61,8 @@
 		else
 			return "vanilla"
 
-/obj/machinery/icecream_vat/initialize()
-	..()
+/obj/machinery/icecream_vat/Initialize()
+	. = ..()
 	create_reagents(100)
 	while(product_types.len < 8)
 		product_types.Add(5)

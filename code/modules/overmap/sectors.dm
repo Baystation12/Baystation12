@@ -19,33 +19,32 @@ var/list/points_of_interest = list()
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
-/obj/effect/overmap/initialize()
-	if(!using_map.use_overmap)
-		qdel(src)
-		return
+/obj/effect/overmap/Initialize()
+	if(!GLOB.using_map.use_overmap)
+		return INITIALIZE_HINT_QDEL
 
-	if(!using_map.overmap_z)
+	if(!GLOB.using_map.overmap_z)
 		build_overmap()
-	using_map.sealed_levels |= using_map.overmap_z
+	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
 	map_z = GetConnectedZlevels(z)
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
 
-	start_x = start_x || rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
-	start_y = start_y || rand(OVERMAP_EDGE, using_map.overmap_size - OVERMAP_EDGE)
+	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
+	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 
-	forceMove(locate(start_x, start_y, using_map.overmap_z))
+	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
 
-	using_map.player_levels |= map_z
+	GLOB.using_map.player_levels |= map_z
 
 	if(!in_space)
-		using_map.sealed_levels |= map_z
+		GLOB.using_map.sealed_levels |= map_z
 
 	if(base)
-		using_map.station_levels |= map_z
-		using_map.contact_levels |= map_z
+		GLOB.using_map.station_levels |= map_z
+		GLOB.using_map.contact_levels |= map_z
 
 	//find shuttle waypoints
 	var/list/found_waypoints = list()
@@ -67,6 +66,8 @@ var/list/points_of_interest = list()
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
+	. = ..()
+
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()
 	if(shuttle_name in restricted_waypoints)
@@ -80,22 +81,22 @@ var/list/points_of_interest = list()
 	icon_state = "sector"
 	anchored = 1
 
-/obj/effect/overmap/sector/initialize()
-	..()
-	for(var/obj/machinery/computer/helm/H in machines)
+/obj/effect/overmap/sector/Initialize()
+	. = ..()
+	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
 
 /proc/build_overmap()
-	if(!using_map.use_overmap)
+	if(!GLOB.using_map.use_overmap)
 		return 1
 
 	testing("Building overmap...")
 	world.maxz++
-	using_map.overmap_z = world.maxz
+	GLOB.using_map.overmap_z = world.maxz
 	var/list/turfs = list()
-	for (var/square in block(locate(1,1,using_map.overmap_z), locate(using_map.overmap_size,using_map.overmap_size,using_map.overmap_z)))
+	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
 		var/turf/T = square
-		if(T.x == using_map.overmap_size || T.y == using_map.overmap_size)
+		if(T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map/)

@@ -10,8 +10,8 @@
 	var/dx		//desitnation
 	var/dy		//coordinates
 
-/obj/machinery/computer/helm/initialize()
-	..()
+/obj/machinery/computer/helm/Initialize()
+	. = ..()
 	linked = map_sectors["[z]"]
 	get_known_sectors()
 
@@ -29,7 +29,7 @@
 /obj/machinery/computer/helm/process()
 	..()
 	if (autopilot && dx && dy)
-		var/turf/T = locate(dx,dy,using_map.overmap_z)
+		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
 				autopilot = 0
@@ -104,7 +104,7 @@
 
 	data["locations"] = locations
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "helm.tmpl", "[linked.name] Helm Control", 380, 530)
 		ui.set_initial_data(data)
@@ -195,7 +195,7 @@
 
 	data["viewing"] = viewing
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Helm Control", 380, 530)
 		ui.set_initial_data(data)

@@ -7,6 +7,8 @@
 	var/dead_icon // Icon to use when the organ has died.
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
+	var/list/will_assist_languages = list()
+	var/list/datum/language/assists_languages = list()
 
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	..()
@@ -45,7 +47,7 @@
 
 	..()
 
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
@@ -69,3 +71,8 @@
 
 /obj/item/organ/internal/is_usable()
 	return ..() && !is_broken()
+
+/obj/item/organ/internal/robotize()
+	..()
+	min_bruised_damage += 5
+	min_broken_damage += 10

@@ -15,7 +15,7 @@
 			deposit_success = 1
 
 /datum/event/money_lotto/announce()
-	var/author = "[using_map.company_name] Editor"
+	var/author = "[GLOB.using_map.company_name] Editor"
 	var/channel = "Nyx Daily"
 
 	var/body = "Nyx Daily wishes to congratulate <b>[winner_name]</b> for recieving the Nyx Stellar Slam Lottery, and receiving the out of this world sum of [winner_sum] credits!"

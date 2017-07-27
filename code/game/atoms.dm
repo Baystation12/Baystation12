@@ -20,10 +20,51 @@
 
 	var/list/climbers = list()
 
+	var/initialized = FALSE
+
+/atom/New(loc, ...)
+	//. = ..() //uncomment if you are dumb enough to add a /datum/New() proc
+
+	var/do_initialize = SSatoms.initialized
+	if(do_initialize > INITIALIZATION_INSSATOMS)
+		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
+		if(SSatoms.InitAtom(src, args))
+			//we were deleted
+			return
+
+	var/list/created = SSatoms.created_atoms
+	if(created)
+		created += src
+
+	if(flags & OBJ_CLIMBABLE)
+		verbs += /atom/proc/climb_on
+
+	if(opacity)
+		updateVisibility(src)
+
+//Called after New if the map is being loaded. mapload = TRUE
+//Called from base of New if the map is not being loaded. mapload = FALSE
+//This base must be called or derivatives must set initialized to TRUE
+//must not sleep
+//Other parameters are passed from New (excluding loc), this does not happen if mapload is TRUE
+//Must return an Initialize hint. Defined in __DEFINES/subsystems.dm
+
+/atom/proc/Initialize(mapload, ...)
+	if(initialized)
+		crash_with("Warning: [src]([type]) initialized multiple times!")
+	initialized = TRUE
+
+	if(light_power && light_range)
+		update_light()
+
+	return INITIALIZE_HINT_NORMAL
+
+//called if Initialize returns INITIALIZE_HINT_LATELOAD
+/atom/proc/LateInitialize()
+	return
+
 /atom/Destroy()
-	if(reagents)
-		qdel(reagents)
-		reagents = null
+	QDEL_NULL(reagents)
 	. = ..()
 
 /atom/proc/reveal_blood()
@@ -225,6 +266,17 @@ its easier to just keep the beam vertical.
 	dir = new_dir
 	return TRUE
 
+/atom/proc/set_icon_state(var/new_icon_state)
+	if(has_extension(src, /datum/extension/base_icon_state))
+		var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+		bis.base_icon_state = new_icon_state
+		update_icon()
+	else
+		icon_state = new_icon_state
+
+/atom/proc/update_icon()
+	return
+
 /atom/proc/ex_act()
 	return
 
@@ -281,12 +333,12 @@ its easier to just keep the beam vertical.
 		return 1
 
 /atom/proc/get_global_map_pos()
-	if(!islist(global_map) || isemptylist(global_map)) return
+	if(!islist(GLOB.global_map) || isemptylist(GLOB.global_map)) return
 	var/cur_x = null
 	var/cur_y = null
 	var/list/y_arr = null
-	for(cur_x=1,cur_x<=global_map.len,cur_x++)
-		y_arr = global_map[cur_x]
+	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
+		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
 		if(cur_y)
 			break
@@ -371,11 +423,6 @@ its easier to just keep the beam vertical.
 		user.visible_message("<span class='warning'>[user.name] shakes \the [src].</span>", \
 					"<span class='notice'>You shake \the [src].</span>")
 		object_shaken()
-
-/atom/New()
-	..()
-	if(flags & OBJ_CLIMBABLE)
-		verbs += /atom/proc/climb_on
 
 /atom/proc/climb_on()
 

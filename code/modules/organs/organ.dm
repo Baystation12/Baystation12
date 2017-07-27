@@ -83,7 +83,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/die()
 	damage = max_damage
 	status |= ORGAN_DEAD
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	if(owner && vital)
 		owner.death()
 
@@ -268,8 +268,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = 0
 	robotic = ORGAN_ASSISTED
-	min_bruised_damage = 15
-	min_broken_damage = 35
+	min_broken_damage += 5
 
 /obj/item/organ/emp_act(severity)
 	if(!(robotic >= ORGAN_ROBOT))
@@ -320,7 +319,7 @@ var/list/organ_cache = list()
 	if(drop_organ)
 		dropInto(owner.loc)
 
-	processing_objects |= src
+	GLOB.processing_objects |= src
 	rejecting = null
 	if(robotic < ORGAN_ROBOT)
 		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror

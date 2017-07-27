@@ -1,4 +1,4 @@
-#if !defined(USING_MAP_DATUM)
+#if !defined(using_map_DATUM)
 	#include "overmap_unit_testing.dm"
 
 	#include "bearcat/bearcat.dm"
@@ -12,7 +12,7 @@
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 
-	#define USING_MAP_DATUM /datum/map/overmap_example
+	#define using_map_DATUM /datum/map/overmap_example
 
 #elif !defined(MAP_OVERRIDE)
 

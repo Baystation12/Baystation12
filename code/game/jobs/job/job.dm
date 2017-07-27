@@ -30,6 +30,7 @@
 	var/list/allowed_ranks				  // Ditto
 
 	var/announced						  //If their arrival is announced on radio
+	var/latejoin_at_spawnpoints			  //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
@@ -81,7 +82,7 @@
 
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
-// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
+// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
@@ -122,6 +123,25 @@
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
+/datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	if(!is_branch_allowed(prefs.char_branch))
+		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
+		return TRUE
+
+	if(!is_rank_allowed(prefs.char_branch, prefs.char_rank))
+		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.char_branch] are: [get_ranks(prefs.char_branch)].</span>")
+		return TRUE
+
+	var/datum/species/S = all_species[prefs.species]
+	if(!is_species_allowed(S))
+		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		return TRUE
+
+	return FALSE
+    
+/datum/job/proc/is_species_allowed(var/datum/species/S)
+	return !GLOB.using_map.is_species_job_restricted(S, src)
+    
 /**
  *  Check if members of the given branch are allowed in the job
  *
@@ -130,7 +150,7 @@
  *  branch_name - String key for the branch to check
  */
 /datum/job/proc/is_branch_allowed(var/branch_name)
-	if(!allowed_branches || !using_map || !(using_map.flags & MAP_HAS_BRANCH))
+	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return 1
 	if(branch_name == "None")
 		return 0
@@ -155,7 +175,7 @@
  *  rank_name - String key for the rank itself
  */
 /datum/job/proc/is_rank_allowed(var/branch_name, var/rank_name)
-	if(!allowed_ranks || !using_map || !(using_map.flags & MAP_HAS_RANK))
+	if(!allowed_ranks || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_RANK))
 		return 1
 	if(branch_name == "None" || rank_name == "None")
 		return 0

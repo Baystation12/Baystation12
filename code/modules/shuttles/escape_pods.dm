@@ -63,7 +63,7 @@ var/list/escape_pods_by_name = list()
 		"is_armed" = pod.arming_controller.armed,
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "escape_pod_console.tmpl", name, 470, 290)
@@ -106,7 +106,7 @@ var/list/escape_pods_by_name = list()
 		"armed" = armed,
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "escape_pod_berth_console.tmpl", name, 470, 290)

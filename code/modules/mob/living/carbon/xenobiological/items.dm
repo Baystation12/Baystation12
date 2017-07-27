@@ -243,7 +243,7 @@
 
 /obj/effect/golemrune/New()
 	..()
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 
 /obj/effect/golemrune/process()
 	var/mob/observer/ghost/ghost
@@ -275,7 +275,7 @@
 
 
 /obj/effect/golemrune/proc/announce_to_ghosts()
-	for(var/mob/observer/ghost/G in player_list)
+	for(var/mob/observer/ghost/G in GLOB.player_list)
 		if(G.client)
 			var/area/A = get_area(src)
 			if(A)

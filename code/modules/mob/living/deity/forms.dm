@@ -33,7 +33,7 @@ Each plays slightly different and has different challenges/benefits
 		O.vars[V] = svars[V]
 
 /datum/god_form/proc/take_charge(var/mob/living/user, var/charge)
-	return
+	return 1
 
 /datum/god_form/Destroy()
 	if(linked_god)
@@ -74,6 +74,7 @@ Each plays slightly different and has different challenges/benefits
 			H.vessel.remove_reagent("blood", charge)
 	else
 		user.adjustBruteLoss(charge)
+	return 1
 
 /datum/god_form/wizard
 	name = "The Tower"
@@ -97,3 +98,4 @@ Each plays slightly different and has different challenges/benefits
 
 /datum/god_form/wizard/take_charge(var/mob/living/user, var/charge)
 	linked_god.adjust_power(max(round(charge/100), 1),silent = 1)
+	return 1

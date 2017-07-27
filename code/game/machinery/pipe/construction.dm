@@ -331,7 +331,7 @@ Buildable meters
 /obj/item/pipe/Move()
 	..()
 	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_HE_BENT, PIPE_FUEL_BENT)) \
-		&& (src.dir in cardinal))
+		&& (src.dir in GLOB.cardinal))
 		src.set_dir(src.dir|turn(src.dir, 90))
 	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_MVALVE, PIPE_DVALVE, PIPE_SVALVE, PIPE_FUEL_STRAIGHT))
 		if(dir==2)
@@ -455,16 +455,16 @@ Buildable meters
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_SUPPLY_STRAIGHT, PIPE_SUPPLY_BENT)
@@ -474,16 +474,16 @@ Buildable meters
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_SCRUBBERS_STRAIGHT, PIPE_SCRUBBERS_BENT)
@@ -493,16 +493,16 @@ Buildable meters
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_FUEL_STRAIGHT, PIPE_FUEL_BENT)
@@ -512,16 +512,16 @@ Buildable meters
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_UNIVERSAL)
@@ -531,16 +531,16 @@ Buildable meters
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_HE_STRAIGHT, PIPE_HE_BENT)
@@ -548,16 +548,16 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = pipe_dir //this var it's used to know if the pipe is bent or not
 			P.initialize_directions_he = pipe_dir
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_CONNECTOR)		// connector
@@ -568,10 +568,10 @@ Buildable meters
 				C.name = pipename
 			var/turf/T = C.loc
 			C.level = !T.is_plating() ? 2 : 1
-			C.initialize()
+			C.atmos_init()
 			C.build_network()
 			if (C.node)
-				C.node.initialize()
+				C.node.atmos_init()
 				C.node.build_network()
 
 
@@ -583,19 +583,19 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (QDELETED(M))
 				to_chat(usr, pipefailtext)
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 
 		if(PIPE_SUPPLY_MANIFOLD)		//manifold
@@ -606,19 +606,19 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 
 		if(PIPE_SCRUBBERS_MANIFOLD)		//manifold
@@ -629,19 +629,19 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 
 		if(PIPE_FUEL_MANIFOLD)		//manifold
@@ -652,19 +652,19 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 
 		if(PIPE_MANIFOLD4W)		//4-way manifold
@@ -675,22 +675,22 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (QDELETED(M))
 				to_chat(usr, pipefailtext)
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 			if (M.node4)
-				M.node4.initialize()
+				M.node4.atmos_init()
 				M.node4.build_network()
 
 		if(PIPE_SUPPLY_MANIFOLD4W)		//4-way manifold
@@ -702,22 +702,22 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 			if (M.node4)
-				M.node4.initialize()
+				M.node4.atmos_init()
 				M.node4.build_network()
 
 		if(PIPE_SCRUBBERS_MANIFOLD4W)		//4-way manifold
@@ -729,22 +729,22 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 			if (M.node4)
-				M.node4.initialize()
+				M.node4.atmos_init()
 				M.node4.build_network()
 
 		if(PIPE_FUEL_MANIFOLD4W)		//4-way manifold
@@ -756,22 +756,22 @@ Buildable meters
 			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
-			M.initialize()
+			M.atmos_init()
 			if (!M)
 				to_chat(usr, "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)")
 				return 1
 			M.build_network()
 			if (M.node1)
-				M.node1.initialize()
+				M.node1.atmos_init()
 				M.node1.build_network()
 			if (M.node2)
-				M.node2.initialize()
+				M.node2.atmos_init()
 				M.node2.build_network()
 			if (M.node3)
-				M.node3.initialize()
+				M.node3.atmos_init()
 				M.node3.build_network()
 			if (M.node4)
-				M.node4.initialize()
+				M.node4.atmos_init()
 				M.node4.build_network()
 
 		if(PIPE_JUNCTION)
@@ -779,17 +779,17 @@ Buildable meters
 			P.set_dir(src.dir)
 			P.initialize_directions = src.get_pdir()
 			P.initialize_directions_he = src.get_hdir()
-			P.initialize()
+			P.atmos_init()
 			if (QDELETED(P))
 				to_chat(usr, pipefailtext)//"There's nothing to connect this pipe to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 
 				return 1
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_UVENT)		//unary vent
@@ -800,10 +800,10 @@ Buildable meters
 				V.name = pipename
 			var/turf/T = V.loc
 			V.level = !T.is_plating() ? 2 : 1
-			V.initialize()
+			V.atmos_init()
 			V.build_network()
 			if (V.node)
-				V.node.initialize()
+				V.node.atmos_init()
 				V.node.build_network()
 
 
@@ -815,15 +815,15 @@ Buildable meters
 				V.name = pipename
 			var/turf/T = V.loc
 			V.level = !T.is_plating() ? 2 : 1
-			V.initialize()
+			V.atmos_init()
 			V.build_network()
 			if (V.node1)
 //				log_error("[V.node1.name] is connected to valve, forcing it to update its nodes.")
-				V.node1.initialize()
+				V.node1.atmos_init()
 				V.node1.build_network()
 			if (V.node2)
 //				log_error("[V.node2.name] is connected to valve, forcing it to update its nodes.")
-				V.node2.initialize()
+				V.node2.atmos_init()
 				V.node2.build_network()
 
 		if(PIPE_DVALVE)		//digital valve
@@ -834,13 +834,13 @@ Buildable meters
 				D.name = pipename
 			var/turf/T = D.loc
 			D.level = !T.is_plating() ? 2 : 1
-			D.initialize()
+			D.atmos_init()
 			D.build_network()
 			if (D.node1)
-				D.node1.initialize()
+				D.node1.atmos_init()
 				D.node1.build_network()
 			if (D.node2)
-				D.node2.initialize()
+				D.node2.atmos_init()
 				D.node2.build_network()
 
 		if(PIPE_SVALVE)		//shutoff valve
@@ -851,13 +851,13 @@ Buildable meters
 				S.name = pipename
 			var/turf/T = S.loc
 			S.level = !T.is_plating() ? 2 : 1
-			S.initialize()
+			S.atmos_init()
 			S.build_network()
 			if (S.node1)
-				S.node1.initialize()
+				S.node1.atmos_init()
 				S.node1.build_network()
 			if (S.node2)
-				S.node2.initialize()
+				S.node2.atmos_init()
 				S.node2.build_network()
 
 
@@ -869,13 +869,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_GAS_FILTER)		//gas filter
@@ -886,16 +886,16 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 			if (P.node3)
-				P.node3.initialize()
+				P.node3.atmos_init()
 				P.node3.build_network()
 
 		if(PIPE_GAS_MIXER)		//gas mixer
@@ -906,16 +906,16 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 			if (P.node3)
-				P.node3.initialize()
+				P.node3.atmos_init()
 				P.node3.build_network()
 
 		if(PIPE_GAS_FILTER_M)		//gas filter mirrored
@@ -926,16 +926,16 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 			if (P.node3)
-				P.node3.initialize()
+				P.node3.atmos_init()
 				P.node3.build_network()
 
 		if(PIPE_GAS_MIXER_T)		//gas mixer-t
@@ -946,16 +946,16 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 			if (P.node3)
-				P.node3.initialize()
+				P.node3.atmos_init()
 				P.node3.build_network()
 
 		if(PIPE_GAS_MIXER_M)		//gas mixer mirrored
@@ -966,16 +966,16 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 			if (P.node3)
-				P.node3.initialize()
+				P.node3.atmos_init()
 				P.node3.build_network()
 
 		if(PIPE_SCRUBBER)		//scrubber
@@ -986,10 +986,10 @@ Buildable meters
 				S.name = pipename
 			var/turf/T = S.loc
 			S.level = !T.is_plating() ? 2 : 1
-			S.initialize()
+			S.atmos_init()
 			S.build_network()
 			if (S.node)
-				S.node.initialize()
+				S.node.atmos_init()
 				S.node.build_network()
 
 		if(PIPE_MTVALVE)		//manual t-valve
@@ -1000,16 +1000,16 @@ Buildable meters
 				V.name = pipename
 			var/turf/T = V.loc
 			V.level = !T.is_plating() ? 2 : 1
-			V.initialize()
+			V.atmos_init()
 			V.build_network()
 			if (V.node1)
-				V.node1.initialize()
+				V.node1.atmos_init()
 				V.node1.build_network()
 			if (V.node2)
-				V.node2.initialize()
+				V.node2.atmos_init()
 				V.node2.build_network()
 			if (V.node3)
-				V.node3.initialize()
+				V.node3.atmos_init()
 				V.node3.build_network()
 
 		if(PIPE_MTVALVEM)		//manual t-valve
@@ -1020,56 +1020,56 @@ Buildable meters
 				V.name = pipename
 			var/turf/T = V.loc
 			V.level = !T.is_plating() ? 2 : 1
-			V.initialize()
+			V.atmos_init()
 			V.build_network()
 			if (V.node1)
-				V.node1.initialize()
+				V.node1.atmos_init()
 				V.node1.build_network()
 			if (V.node2)
-				V.node2.initialize()
+				V.node2.atmos_init()
 				V.node2.build_network()
 			if (V.node3)
-				V.node3.initialize()
+				V.node3.atmos_init()
 				V.node3.build_network()
 
 		if(PIPE_CAP)
 			var/obj/machinery/atmospherics/pipe/cap/C = new(src.loc)
 			C.set_dir(dir)
 			C.initialize_directions = pipe_dir
-			C.initialize()
+			C.atmos_init()
 			C.build_network()
 			if(C.node)
-				C.node.initialize()
+				C.node.atmos_init()
 				C.node.build_network()
 
 		if(PIPE_SUPPLY_CAP)
 			var/obj/machinery/atmospherics/pipe/cap/hidden/supply/C = new(src.loc)
 			C.set_dir(dir)
 			C.initialize_directions = pipe_dir
-			C.initialize()
+			C.atmos_init()
 			C.build_network()
 			if(C.node)
-				C.node.initialize()
+				C.node.atmos_init()
 				C.node.build_network()
 
 		if(PIPE_SCRUBBERS_CAP)
 			var/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers/C = new(src.loc)
 			C.set_dir(dir)
 			C.initialize_directions = pipe_dir
-			C.initialize()
+			C.atmos_init()
 			C.build_network()
 			if(C.node)
-				C.node.initialize()
+				C.node.atmos_init()
 				C.node.build_network()
 
 		if(PIPE_FUEL_CAP)
 			var/obj/machinery/atmospherics/pipe/cap/hidden/fuel/C = new(src.loc)
 			C.set_dir(dir)
 			C.initialize_directions = pipe_dir
-			C.initialize()
+			C.atmos_init()
 			C.build_network()
 			if(C.node)
-				C.node.initialize()
+				C.node.atmos_init()
 				C.node.build_network()
 
 		if(PIPE_PASSIVE_GATE)		//passive gate
@@ -1080,13 +1080,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_VOLUME_PUMP)		//volume pump
@@ -1097,13 +1097,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_HEAT_EXCHANGE)		// heat exchanger
@@ -1114,10 +1114,10 @@ Buildable meters
 				C.name = pipename
 			var/turf/T = C.loc
 			C.level = !T.is_plating() ? 2 : 1
-			C.initialize()
+			C.atmos_init()
 			C.build_network()
 			if (C.node)
-				C.node.initialize()
+				C.node.atmos_init()
 				C.node.build_network()
 ///// Z-Level stuff
 		if(PIPE_UP)
@@ -1128,13 +1128,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 		if(PIPE_DOWN)
 			var/obj/machinery/atmospherics/pipe/zpipe/down/P = new(src.loc)
@@ -1144,13 +1144,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 		if(PIPE_SUPPLY_UP)
 			var/obj/machinery/atmospherics/pipe/zpipe/up/supply/P = new(src.loc)
@@ -1160,13 +1160,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 		if(PIPE_SUPPLY_DOWN)
 			var/obj/machinery/atmospherics/pipe/zpipe/down/supply/P = new(src.loc)
@@ -1176,13 +1176,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 		if(PIPE_SCRUBBERS_UP)
 			var/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers/P = new(src.loc)
@@ -1192,13 +1192,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 		if(PIPE_SCRUBBERS_DOWN)
 			var/obj/machinery/atmospherics/pipe/zpipe/down/scrubbers/P = new(src.loc)
@@ -1208,13 +1208,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 
 		if(PIPE_FUEL_UP)
@@ -1225,13 +1225,13 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 		if(PIPE_FUEL_DOWN)
 			var/obj/machinery/atmospherics/pipe/zpipe/down/fuel/P = new(src.loc)
@@ -1241,26 +1241,26 @@ Buildable meters
 				P.name = pipename
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 			if (P.node1)
-				P.node1.initialize()
+				P.node1.atmos_init()
 				P.node1.build_network()
 			if (P.node2)
-				P.node2.initialize()
+				P.node2.atmos_init()
 				P.node2.build_network()
 ///// Z-Level stuff
 		if(PIPE_OMNI_MIXER)
 			var/obj/machinery/atmospherics/omni/mixer/P = new(loc)
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 		if(PIPE_OMNI_FILTER)
 			var/obj/machinery/atmospherics/omni/filter/P = new(loc)
 			var/turf/T = P.loc
 			P.level = !T.is_plating() ? 2 : 1
-			P.initialize()
+			P.atmos_init()
 			P.build_network()
 
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

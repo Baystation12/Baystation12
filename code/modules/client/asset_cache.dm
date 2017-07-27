@@ -239,7 +239,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 					register_asset(filename, fcopy_rsc(path + filename))
 
 	var/list/mapnames = list()
-	for(var/z in using_map.map_levels)
+	for(var/z in GLOB.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
@@ -274,7 +274,7 @@ var/decl/asset_cache/asset_cache = new()
 		var/datum/asset/A = new type()
 		A.register()
 
-	for(var/client/C in clients)
+	for(var/client/C in GLOB.clients)
 		// Doing this to a client too soon after they've connected can cause issues, also the proc we call sleeps.
 		spawn(10)
 			getFilesSlow(C, asset_cache.cache, FALSE)
