@@ -1,4 +1,7 @@
-var/global/list/random_spawner_probabilities = list()
+GLOBAL_LIST_EMPTY(random_spawner_probabilities)
+#ifdef UNIT_TEST
+GLOBAL_LIST_EMPTY(random_cache)
+#endif
 
 /obj/random
 	name = "random object"
@@ -23,9 +26,9 @@ var/global/list/random_spawner_probabilities = list()
 	if(isnull(loc))
 		return
 
-	if(isnull(random_spawner_probabilities[type]))
-		random_spawner_probabilities[type] = spawn_choices()
-	var/build_path = controlled_pick(random_spawner_probabilities[type])
+	if(isnull(GLOB.random_spawner_probabilities[type]))
+		GLOB.random_spawner_probabilities[type] = spawn_choices()
+	var/build_path = controlled_pick(GLOB.random_spawner_probabilities[type])
 
 	var/atom/A = new build_path(src.loc)
 	if(pixel_x || pixel_y)
@@ -38,15 +41,12 @@ var/global/list/random_spawner_probabilities = list()
 
 /obj/random/proc/controlled_pick(var/list/paths)
 #ifdef UNIT_TEST
-	var/global/list/random_cache
 	// Pick the largest possible object during unit tests. Needed for container overflow tests.
 	// Recursive lookups are very expensive, so we are caching them.
-	if(isnull(random_cache))
-		random_cache = list()
-	if(isnull(random_cache[type]))
+	if(isnull(GLOB.random_cache[type]))
 		var/largest = get_largest(paths)
-		random_cache[type] = largest
-	return random_cache[type]
+		GLOB.random_cache[type] = largest
+	return GLOB.random_cache[type]
 #else
 	return pickweight(paths)
 #endif
