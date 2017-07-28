@@ -1,45 +1,169 @@
 #define SAVE_RESET -1
+#define EQUIP_PREVIEW_LOADOUT 1
+#define EQUIP_PREVIEW_JOB 2
+#define EQUIP_PREVIEW_ALL (EQUIP_PREVIEW_LOADOUT|EQUIP_PREVIEW_JOB)
+
+var/global/list/uplink_locations = list("PDA", "Headset", "None")
+var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 
 var/list/preferences_datums = list()
 
 datum/preferences
-	//doohickeys for savefiles
+
+	// Savefile Variables
+
 	var/path
-	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
+	var/default_slot = 1							// Holder so it doesn't default to slot 1, rather the last one used
 	var/savefile_version = 0
+	var/char_lock = 0
+	var/savefile/loaded_preferences
+	var/savefile/loaded_character
 
 
-	//non-preference stuff
+	// ------------------
+
+	// Non-Preference Data
+	var/user
+	var/clientfps = 0
+	var/preferences_enabled = null
+	var/preferences_disabled = null
+
+	var/client/client = null
+	var/client_ckey = null
+
 	var/warns = 0
 	var/muted = 0
 	var/last_ip
 	var/last_id
 
-	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	var/datum/paiCandidate/candidate
 
-	//character preferences
-	var/species_preview                 //Used for the species selection window.
-
-		//Mob preview
-	var/icon/preview_icon = null
-
-	var/client/client = null
-	var/client_ckey = null
-
-	var/savefile/loaded_preferences
-	var/savefile/loaded_character
-	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
 
+	var/selected_menu = 1
+	var/has_cortical_stack = TRUE
+	var/equip_preview_mob = EQUIP_PREVIEW_ALL
+
+	// -------------------
+
+	// Game-Preferences
+
+	var/lastchangelog = ""							// Saved changlog filesize to detect if there was a change
+
+	var/ooccolor = "#010000"						// Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
+	var/UI_style = "Midnight"
+	var/UI_style_color = "#ffffff"
+	var/UI_style_alpha = 255
+
+	var/list/never_be_special_role = list()
+	var/list/sometimes_be_special_role = list()
+	var/list/be_special_role = list()				// Special role selection
+
+	var/list/language_prefixes = list() 			// Language prefix keys
+	var/list/ignored_players = list()
+
+	// ----------------
+
+	// Character Preferences
+
+	var/real_name									// Character's name
+	var/species = SPECIES_HUMAN              		// Character's species
+	var/gender = MALE								// Character's gender
+	var/age = 30									// Character's age
+
+	var/b_type = "A+"								// Character's blood type (Randomly generated on lock)
+
+	var/h_style = "Bald"							// Character's hair type
+	var/r_hair = 0									// Character's hair color (Red)
+	var/g_hair = 0									// Character's hair color (Green)
+	var/b_hair = 0									// Character's hair color (Blue)
+
+	var/f_style = "Shaved"							// Character's face hair type
+	var/r_facial = 0								// Character's face hair color (Red)
+	var/g_facial = 0								// Character's face hair color (Green)
+	var/b_facial = 0								// Character's face hair color (Blue)
+
+	var/s_tone = 0									// Character's skin tone (Used when not using RGB, 0-255)
+	var/r_skin = 0									// Character's skin color (Red)
+	var/g_skin = 0									// Character's skin color (Green)
+	var/b_skin = 0									// Character's skin color (Blue)
+
+	var/r_eyes = 0									// Character's eye color (Red)
+	var/g_eyes = 0									// Character's eye color (Green)
+	var/b_eyes = 0									// Character's eye color (Blue)
+
+	var/list/dna = list()							// Character's DNA (List of UI, generated on Lock and used to create real DNA)
+
+	var/list/all_underwear
+	var/list/all_underwear_metadata
+	var/backbag = 2									// Character's backpack type
+	var/list/gear
+	var/list/gear_list									// Character's custom/fluff item loadout.
+	var/gear_slot = 1
+	var/spawnpoint = "Default" 						// Character's spawn point (0-2)
+	var/list/alternate_languages = list() 			// Character's secondary language(s)
+
+	var/home_system = "Unset"          				// Character's system of birth.
+	var/citizenship = "None"            			// Character's current home system.
+	var/faction = "None"                			// Character's associated faction.
+	var/religion = "None"              				// Character's religious association.
+	var/memory = ""
+
+	var/char_branch	= "Civilian"					// W.I.P.
+	var/list/char_rank = list()						// W.I.P.
+
+	var/job_high = null								// Most preferable job (Not a list since there can only be one 'most')
+	var/list/job_medium = list() 					// Preferable jobs (List of all things selected for medium weight)
+	var/list/job_low    = list() 					// Acceptable jobs (List of all the things selected for low weight)
+
+	var/alternate_option = 2 						// Desired action for not getting any wanted jobs (0 - Random, 1 - Assitant, 2 - Lobby)
+	var/list/player_alt_titles = new()				// Desired alternate titles for jobs
+
+	var/used_skillpoints = 0						// Depreciated
+	var/list/skills = list() 						// Deperciated
+
+	var/list/organ_data = list()					// Character's cybernetic or assisted organ data
+	var/list/rlimb_data = list()					// Character's cybernetic or amputated limb data
+	var/disabilities = 0							// Character's disabilities (Ex. blindness, deafness)
+
+
+	var/list/flavor_texts = list()					// Character's flavor text
+	var/list/flavour_texts_robot = list()			// Character's flavor text when they are a robot
+
+	var/list/med_record = ""
+	var/sec_record = ""
+	var/gen_record = ""
+	var/exploit_record = ""
+
+	var/nanotrasen_relation = "Neutral"
+
+	var/uplinklocation = "PDA"
+
+	var/list/relations
+	var/list/relations_info
+
+	var/metadata = ""
+
+	//--------------------
+
+	// Mob Preview Data
+
+	var/icon/preview_icon = null
+	var/species_preview
+
+	// ----------------
+
+
+
 /datum/preferences/New(client/C)
-	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
 	for(var/datum/job/job in job_master.occupations)
 		if((job.department != "Service") && (job.department != "Civilian") && (job.department != "Support")) 	continue
 		char_rank += job
+
+	gear = list()
 
 	if(istype(C))
 		client = C
@@ -55,96 +179,33 @@ datum/preferences
 		save_preferences()
 		save_character()
 
-/datum/preferences/proc/ZeroSkills(var/forced = 0)
-	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
-		if(!skills.Find(S.ID) || forced)
-			skills[S.ID] = SKILL_NONE
-
-/datum/preferences/proc/CalculateSkillPoints()
-	used_skillpoints = 0
-	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
-		var/multiplier = 1
-		switch(skills[S.ID])
-			if(SKILL_NONE)
-				used_skillpoints += 0 * multiplier
-			if(SKILL_BASIC)
-				used_skillpoints += 1 * multiplier
-			if(SKILL_ADEPT)
-				// secondary skills cost less
-				if(S.secondary)
-					used_skillpoints += 1 * multiplier
-				else
-					used_skillpoints += 3 * multiplier
-			if(SKILL_EXPERT)
-				// secondary skills cost less
-				if(S.secondary)
-					used_skillpoints += 3 * multiplier
-				else
-					used_skillpoints += 6 * multiplier
-
-/datum/preferences/proc/GetSkillClass(points)
-	return CalculateSkillClass(points, age)
-
-/proc/CalculateSkillClass(points, age)
-	if(points <= 0) return "Unconfigured"
-	// skill classes describe how your character compares in total points
-	points -= min(round((age - 20) / 2.5), 4) // every 2.5 years after 20, one extra skillpoint
-	if(age > 30)
-		points -= round((age - 30) / 5) // every 5 years after 30, one extra skillpoint
-	switch(points)
-		if(-1000 to 3)
-			return "Terrifying"
-		if(4 to 6)
-			return "Below Average"
-		if(7 to 10)
-			return "Average"
-		if(11 to 14)
-			return "Above Average"
-		if(15 to 18)
-			return "Exceptional"
-		if(19 to 24)
-			return "Genius"
-		if(24 to 1000)
-			return "God"
-
-/datum/preferences/proc/ShowChoices(mob/user)
-	if(!user || !user.client)	return
+/datum/preferences/proc/ShowChoices(mob/userT)
+	if(!userT || !userT.client)	return
 
 	if(!get_mob_by_key(client_ckey))
 		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
 		close_load_dialog(user)
 		return
 
-	var/dat = "<html><body><center>"
+	user = userT
+	var/dat = ""
 
-	if(path)
-		if(char_lock)
-			dat += "Slot - "
-			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-			dat += "Save slot - "
-			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-			dat += "Reload slot - "
-			dat += "Lock slot"
-		else
-			dat += "Slot - "
-			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
-			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
+	switch(selected_menu)
+		if(1) dat += contentGeneral()
+		if(2) dat += contentOccupation()
+		if(3) dat += contentLoadout()
+		if(4) dat += contentLocalPreference()
+		if(5) dat += contentMedical()
+		if(6) dat += contentEmployment()
+		if(7) dat += contentSecurity()
+		if(8) dat += contentGlobalPreference()
+		if(9) dat += contentGenericRecord()
 
+	usr << browse_rsc('html/images/uiBackground.png', "uiBackground.png")
 
-	else
-		dat += "Please create an account to save your preferences."
-
-	dat += "<br>"
-	dat += player_setup.header()
-	dat += "<br><HR></center>"
-	dat += player_setup.content(user)
-
-	dat += "</html></body>"
-	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 800, 800, src)
+	var/datum/browser/popup = new(user, "Character Setup", 0, 800, 800, src)
 	popup.set_content(dat)
+	popup.add_stylesheet("common", 'html/browser/menu.css')
 	popup.open()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
@@ -161,59 +222,17 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
-/datum/preferences/Topic(href, list/href_list)
-	if(..())
-		return 1
-
-	if(href_list["save"])
-		save_preferences()
-		save_character()
-	else if(href_list["reload"])
-		load_preferences()
-		load_character()
-		sanitize_preferences()
-	else if(href_list["load"])
-		if(!IsGuestKey(usr.key))
-			open_load_dialog(usr)
-			return 1
-	else if(href_list["changeslot"])
-		load_character(text2num(href_list["changeslot"]))
-		sanitize_preferences()
-		close_load_dialog(usr)
-	else if(href_list["resetslot"])
-		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
-			return 0
-		char_lock = 0
-		load_character(SAVE_RESET)
-		save_character()
-		sanitize_preferences()
-	else if(href_list["lock"])
-		if("No" == alert("This will lock the current slot. You will no longer be able to edit it. Continue?", "Lock current slot?", "No", "Yes"))
-			return 0
-		char_lock = 1
-		b_type = RANDOM_BLOOD_TYPE
-		save_character()
-		load_character()
-	else
-		return 0
-
-	ShowChoices(usr)
-	return 1
-
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
-	player_setup.sanitize_setup()
 	character.set_species(species)
-	if(be_random_name)
-		real_name = random_name(gender,species)
 
 	if(config.humans_need_surnames)
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
-			real_name += " [pick(GLOB.last_names)]"
+			real_name += " [pick(last_names)]"
 		else if(firstspace == name_length)
-			real_name += "[pick(GLOB.last_names)]"
+			real_name += "[pick(last_names)]"
 
 	character.fully_replace_character_name(real_name)
 
@@ -279,8 +298,7 @@ datum/preferences
 			O.force_icon = null
 			O.name = initial(O.name)
 			O.desc = initial(O.desc)
-	//For species that don't care about your silly prefs
-	character.species.handle_limbs_setup(character)
+
 	if(!is_preview_copy)
 		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN))
 			var/status = organ_data[name]
@@ -357,7 +375,7 @@ datum/preferences
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
 		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = GLOB.using_map.character_load_path(S, i)
+			S.cd = using_map.character_load_path(S, i)
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)

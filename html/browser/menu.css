@@ -1,0 +1,130 @@
+body {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	height: 900px;
+	font-size: 14px;
+	overflow: hidden;
+	scroll: hidden;
+}
+
+hr {
+    background-color: #40628a;
+    height: 1px;
+	margin: 0;
+}
+a{
+	color: #ffffff; 
+	text-decoration: none;
+	background: #40628a;
+	border: 1px solid #161616;
+	font-size: 95%;
+	padding: 0px 4px 0px 4px;
+}
+
+nav {
+	background-color: #525252;
+}
+nav ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+nav li a {
+	padding: 20px 5px 20px 10px;
+	text-decoration: none;
+	color: #FFFFFF;
+	border: none;
+	background-color: rgba(0,0,0,0);
+}
+
+a.active, a.linkOn  {
+    background-color: #8A803F;
+}
+
+nav li a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+nav li:hover {
+	background-color: #507aac;
+}
+
+nav.vNav {
+	height: 100%;
+	position: fixed;
+	top: 32px;
+	width: 100px;
+	height: 100%;
+}
+
+nav.vNav li a {
+	display: block;
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	border-left: 1px solid gray;
+}
+
+nav.hNav {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+nav.hNav li {
+	float: right;
+	border-left: 1px solid gray;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	
+}
+
+nav.hNav li a {
+	display: block;
+	padding: 10px 20px 10px 20px;
+}
+
+div.main {
+	margin-left: 125px;
+	margin-top: 50px;
+	color: #ffffff;
+	position: fixed;
+	height: 700px;
+	width: 350px;
+}
+
+div.main a, div.main a:visited, div.secondary a, div.secondary a:visited{
+	text-decoration: none;
+	color: #DEDEDE;
+}
+
+div.main a:hover, div.secondary a:hover, div.main a:active, div.secondary a:active{
+	color: #B3B3B3;
+}
+
+div.main a:active, div.secondary a:active {
+	background-color: #8A803F;
+}
+
+div.secondary {
+	position: fixed;
+	top: 50px;
+	right: 25px;
+	color: #FFFFFF;
+	text-align: right;
+	width: 225px;
+}
+
+div.background {
+	position: fixed;
+	top: 0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	background-image: url("uiBackground.png");
+	background-repeat: no-repeat;
+	background-color: #272727;
+	background-origin: content-box;
+	background-size: 900px 430px;
+}

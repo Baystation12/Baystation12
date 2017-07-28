@@ -1,25 +1,4 @@
-/datum/preferences
-	var/list/relations
-	var/list/relations_info
-
-/datum/category_item/player_setup_item/relations
-	name = "Matchmaking"
-	sort_order = 1
-
-/datum/category_item/player_setup_item/relations/load_character(var/savefile/S)
-	S["relations"]	>> pref.relations
-	S["relations_info"]	>> pref.relations_info
-
-/datum/category_item/player_setup_item/relations/save_character(var/savefile/S)
-	S["relations"]	<< pref.relations
-	S["relations_info"]	<< pref.relations_info
-
-/datum/category_item/player_setup_item/relations/sanitize_character()
-	if(!pref.relations)
-		pref.relations = list()
-	if(!pref.relations_info)
-		pref.relations_info = list()
-
+/*
 /datum/category_item/player_setup_item/relations/content(mob/user)
 	.=list()
 	. += "Characters with enabled relations are paired up randomly after spawn. You can terminate relations when you first open relations info window, but after that it's final."
@@ -54,3 +33,4 @@
 			pref.relations_info[R] = info
 		return TOPIC_REFRESH
 	return ..()
+*/
