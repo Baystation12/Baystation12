@@ -766,7 +766,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","PS")
 	return 1
 
-/mob/proc/changeling_transformation_sting()
+/* /mob/proc/changeling_transformation_sting()
 	set category = "Changeling"
 	set name = "Transformation sting (40)"
 	set desc="Sting target"
@@ -797,6 +797,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 	feedback_add_details("changeling_powers","TS")
 	return 1
+*/
 
 /mob/proc/changeling_DEATHsting()
 	set category = "Changeling"
