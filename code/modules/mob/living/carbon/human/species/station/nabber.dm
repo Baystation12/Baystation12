@@ -33,6 +33,8 @@
 	icobase = 'icons/mob/human_races/r_nabber.dmi'
 	deform = 'icons/mob/human_races/r_nabber.dmi'
 
+	blood_mask = 'icons/mob/human_races/masks/blood_nabber.dmi'
+
 	has_floating_eyes = 1
 
 	darksight = 8
@@ -53,6 +55,8 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	breathing_organ = BP_TRACH
+
+	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
 	var/list/eye_overlays = list()
 
