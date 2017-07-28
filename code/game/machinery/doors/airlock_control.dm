@@ -132,10 +132,9 @@ obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 		frequency = new_frequency
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
-
 obj/machinery/door/airlock/Initialize()
 	. = ..()
-	if(frequency)
+	if(frequency || radio_controller)
 		set_frequency(frequency)
 
 	//wireless connection
@@ -143,12 +142,6 @@ obj/machinery/door/airlock/Initialize()
 		wifi_receiver = new(_wifi_id, src)
 
 	update_icon()
-
-obj/machinery/door/airlock/New()
-	..()
-
-	if(radio_controller)
-		set_frequency(frequency)
 
 obj/machinery/door/airlock/Destroy()
 	if(frequency && radio_controller)

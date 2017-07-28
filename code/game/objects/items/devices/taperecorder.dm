@@ -19,14 +19,12 @@
 	throw_speed = 4
 	throw_range = 20
 
-/obj/item/device/taperecorder/New()
-	..()
+/obj/item/device/taperecorder/Initialize()
+	. = ..()
 	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
 	GLOB.listening_objects += src
-	update_icon()
-
 /obj/item/device/taperecorder/empty
 	mytape = null
 
@@ -428,5 +426,6 @@
 
 
 //Random colour tapes
-/obj/item/device/tape/random/New()
+/obj/item/device/tape/random/Initialize()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
+	. = ..()

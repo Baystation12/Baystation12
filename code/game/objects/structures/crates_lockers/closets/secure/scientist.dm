@@ -8,8 +8,8 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/toxins(src)
 		else
@@ -33,8 +33,8 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/toxins(src)
 		else
@@ -61,8 +61,8 @@
 	icon_broken = "rdsecurebroken"
 	icon_off = "rdsecureoff"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/clothing/suit/bio_suit/scientist(src)
 		new /obj/item/clothing/head/bio_hood/scientist(src)
 		new /obj/item/clothing/under/rank/research_director(src)
@@ -85,8 +85,8 @@
 	req_access = list(access_research)
 
 
-/obj/structure/closet/secure_closet/animal/New()
-	..()
+/obj/structure/closet/secure_closet/animal/Initialize()
+	. = ..()
 	new /obj/item/device/assembly/signaler(src)
 	new /obj/item/device/radio/electropack(src)
 	new /obj/item/device/radio/electropack(src)

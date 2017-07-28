@@ -33,8 +33,8 @@
 		else
 			icon_state = icon_opened
 
-/obj/structure/closet/secure_closet/personal/cabinet/New()
-	..()
+/obj/structure/closet/secure_closet/personal/cabinet/Initialize()
+	. = ..()
 	spawn(4)
 		// Not really the best way to do this, but it's better than "contents = list()"!
 		for(var/atom/movable/AM in contents)

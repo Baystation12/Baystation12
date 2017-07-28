@@ -18,12 +18,9 @@
 	flags = OBJ_CLIMBABLE
 	clicksound = "keyboard"
 
-/obj/machinery/computer/New()
-	overlay_layer = layer
-	..()
-
 /obj/machinery/computer/Initialize()
 	. = ..()
+	overlay_layer = layer
 	power_change()
 	update_icon()
 
@@ -112,4 +109,3 @@
 			M.deconstruct(src)
 			qdel(src)
 	else
-		..()

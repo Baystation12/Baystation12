@@ -19,7 +19,7 @@
 		if(MobDNA)     src.MobDNA = MobDNA
 
 	Initialize()
-		..()
+		. = ..()
 		Gib(loc)
 		return INITIALIZE_HINT_QDEL
 

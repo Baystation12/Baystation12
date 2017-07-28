@@ -11,12 +11,11 @@
 	w_class = ITEM_SIZE_TINY
 	var/obj/item/weapon/implant/imp = null
 
-/obj/item/weapon/implantcase/New()
+/obj/item/weapon/implantcase/Initialize()
 	if(ispath(imp))
 		imp = new imp(src)
 		desc = "A case containing \a [imp]."
-	..()
-	update_icon()
+	. = ..()
 
 /obj/item/weapon/implantcase/update_icon()
 	if (imp)

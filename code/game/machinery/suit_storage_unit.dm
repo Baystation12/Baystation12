@@ -142,8 +142,8 @@
 
 
 
-/obj/machinery/suit_storage_unit/New()
-	src.update_icon()
+/obj/machinery/suit_storage_unit/Initialize()
+	ADD_ICON_QUEUE(src)
 	if(SUIT_TYPE)
 		SUIT = new SUIT_TYPE(src)
 	if(HELMET_TYPE)
@@ -154,6 +154,7 @@
 		TANK = new TANK_TYPE(src)
 	if(MASK_TYPE)
 		MASK = new MASK_TYPE(src)
+	. = ..()
 
 /obj/machinery/suit_storage_unit/update_icon()
 	var/hashelmet = 0

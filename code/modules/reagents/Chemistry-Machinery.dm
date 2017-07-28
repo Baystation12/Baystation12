@@ -317,8 +317,8 @@
 		/obj/item/stack/material/mhydrogen = "hydrogen"
 		)
 
-/obj/machinery/reagentgrinder/New()
-	..()
+/obj/machinery/reagentgrinder/Initialize()
+	. = ..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	return
 

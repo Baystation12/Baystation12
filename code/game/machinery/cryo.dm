@@ -23,12 +23,6 @@
 
 	var/current_heat_capacity = 50
 
-/obj/machinery/atmospherics/unary/cryo_cell/New()
-	..()
-	icon = 'icons/obj/cryogenics_split.dmi'
-	update_icon()
-	initialize_directions = dir
-
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
 	var/turf/T = loc
 	T.contents += contents
@@ -40,6 +34,9 @@
 /obj/machinery/atmospherics/unary/cryo_cell/atmos_init()
 	..()
 	if(node) return
+	icon = 'icons/obj/cryogenics_split.dmi'
+	initialize_directions = dir
+
 	var/node_connect = dir
 	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
 		if(target.initialize_directions & get_dir(target,src))

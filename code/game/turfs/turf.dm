@@ -41,9 +41,6 @@
 	else
 		luminosity = 1
 
-/turf/proc/initialize()
-	return
-
 /turf/Destroy()
 	turfs -= src
 	remove_cleanables()

@@ -216,8 +216,8 @@
 
 
 
-/obj/machinery/computer/turbine_computer/New()
-	..()
+/obj/machinery/computer/turbine_computer/Initialize()
+	. = ..()
 	spawn(5)
 		for(var/obj/machinery/compressor/C in GLOB.machines)
 			if(id == C.comp_id)

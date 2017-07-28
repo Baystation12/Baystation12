@@ -26,10 +26,10 @@
 /obj/item/weapon/lipstick/random
 	name = "lipstick"
 
-/obj/item/weapon/lipstick/random/New()
+/obj/item/weapon/lipstick/random/Initialize()
 	colour = pick("red","purple","jade","black")
 	name = "[colour] lipstick"
-
+	. = ..()
 
 /obj/item/weapon/lipstick/attack_self(mob/user as mob)
 	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")

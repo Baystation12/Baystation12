@@ -31,8 +31,11 @@
 	maptext_height = 26
 	maptext_width = 32
 
-/obj/machinery/door_timer/New()
-	..()
+/obj/machinery/door_timer/Initialize()
+	. = ..()
+	for(var/obj/machinery/door/window/brigdoor/M in GLOB.machines)
+		if (M.id == src.id)
+			targets += M
 
 	spawn(20)
 		for(var/obj/machinery/door/window/brigdoor/M in GLOB.machines)

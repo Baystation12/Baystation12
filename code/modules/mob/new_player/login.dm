@@ -5,7 +5,7 @@
 	desc = "This shouldn't be read."
 	screen_loc = "WEST,SOUTH"
 /*
-/obj/effect/lobby_image/initialize()
+/obj/effect/lobby_image/Initialize()
 	icon = using_map.lobby_icon
 =======
 

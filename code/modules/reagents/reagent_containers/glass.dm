@@ -42,8 +42,8 @@
 		/obj/machinery/radiocarbon_spectrometer
 		)
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		base_name = name
 
 	examine(var/mob/user)
@@ -102,8 +102,8 @@
 	center_of_mass = "x=15;y=10"
 	matter = list("glass" = 500)
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		desc += " Can hold up to [volume] units."
 
 	on_reagent_change()

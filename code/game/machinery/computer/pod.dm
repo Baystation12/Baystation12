@@ -13,15 +13,13 @@
 	var/title = "Mass Driver Controls"
 
 
-/obj/machinery/computer/pod/New()
-	..()
-	spawn( 5 )
-		for(var/obj/machinery/mass_driver/M in world)
-			if(M.id == id)
-				connected = M
-			else
-		return
-	return
+/obj/machinery/computer/pod/Initialize()
+	. = ..()
+	for(var/obj/machinery/mass_driver/M in button_machines)
+		if(M.id == id)
+			connected = M
+		else
+			return
 
 
 /obj/machinery/computer/pod/proc/alarm()

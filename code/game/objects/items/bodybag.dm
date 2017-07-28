@@ -128,9 +128,9 @@
 	var/used = 0
 	var/obj/item/weapon/tank/tank = null
 
-/obj/structure/closet/body_bag/cryobag/New()
+/obj/structure/closet/body_bag/cryobag/Initialize()
 	tank = new /obj/item/weapon/tank/emergency/oxygen(null) //It's in nullspace to prevent ejection when the bag is opened.
-	..()
+	. = ..()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()
 	qdel(tank)

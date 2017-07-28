@@ -10,8 +10,8 @@
 	req_access = list(access_medical_equip)
 
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/weapon/storage/box/autoinjectors(src)
 		new /obj/item/weapon/storage/box/syringes(src)
 		new /obj/item/weapon/reagent_containers/dropper(src)
@@ -41,8 +41,8 @@
 	req_access = list(access_surgery)
 
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
@@ -63,8 +63,8 @@
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/medic(src)
 		else
@@ -113,8 +113,8 @@
 	icon_off = "medicaloff"
 	req_access = list(access_medical_equip)
 
-/obj/structure/closet/secure_closet/paramedic/New()
-    ..()
+/obj/structure/closet/secure_closet/paramedic/Initialize()
+    . = ..()
     new /obj/item/weapon/storage/box/autoinjectors(src)
     new /obj/item/weapon/storage/box/syringes(src)
     new /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline(src)
@@ -146,8 +146,8 @@
 	icon_broken = "cmosecurebroken"
 	icon_off = "cmosecureoff"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/medic(src)
 		else
@@ -195,8 +195,8 @@
 	req_access = list(access_chemistry)
 
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/weapon/storage/box/pillbottles(src)
 		new /obj/item/weapon/storage/box/pillbottles(src)
 		new /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone(src)
@@ -239,8 +239,8 @@
 	icon_broken = "chaplainsecurebroken"
 	icon_off = "chaplainsecureoff"
 
-/obj/structure/closet/secure_closet/counselor/New()
-	..()
+/obj/structure/closet/secure_closet/counselor/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/psych(src)
 	new /obj/item/clothing/under/rank/psych/turtleneck(src)
 	new /obj/item/clothing/under/rank/chaplain(src)
@@ -277,8 +277,8 @@
 	req_access = list(access_virology)
 
 
-/obj/structure/closet/secure_closet/virology/New()
-	..()
+/obj/structure/closet/secure_closet/virology/Initialize()
+	. = ..()
 	new /obj/item/weapon/storage/box/autoinjectors(src)
 	new /obj/item/weapon/storage/box/syringes(src)
 	new /obj/item/weapon/reagent_containers/dropper(src)
@@ -310,8 +310,8 @@
 	icon_off = "securemedoff"
 	req_access = list(64)
 
-/obj/structure/closet/secure_closet/psychiatry/New()
-	..()
+/obj/structure/closet/secure_closet/psychiatry/Initialize()
+	. = ..()
 	new /obj/item/clothing/suit/straight_jacket(src)
 	new /obj/item/weapon/reagent_containers/glass/bottle/stoxin(src)
 	new /obj/item/weapon/reagent_containers/syringe(src)

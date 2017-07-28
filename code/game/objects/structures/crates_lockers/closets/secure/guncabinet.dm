@@ -9,9 +9,8 @@
 	icon_closed ="base"
 	icon_opened = "base"
 
-/obj/structure/closet/secure_closet/guncabinet/New()
-	..()
-	update_icon()
+/obj/structure/closet/secure_closet/guncabinet/Initialize()
+	. = ..()
 
 /obj/structure/closet/secure_closet/guncabinet/toggle()
 	..()

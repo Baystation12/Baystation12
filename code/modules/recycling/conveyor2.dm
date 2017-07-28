@@ -303,8 +303,8 @@
 	w_class = ITEM_SIZE_HUGE
 	var/id = "" //inherited by the switch
 
-/obj/item/conveyor_switch_construct/New()
-	..()
+/obj/item/conveyor_switch_construct/Initialize()
+	. = ..()
 	id = rand() //this couldn't possibly go wrong
 
 /obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)

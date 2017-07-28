@@ -14,8 +14,8 @@
 	active_power_usage = 2000
 	idle_power_usage = 1000
 
-/obj/machinery/auto_cloner/New()
-	..()
+/obj/machinery/auto_cloner/Initialize()
+	. = ..()
 
 	time_per_spawn = rand(1200,3600)
 

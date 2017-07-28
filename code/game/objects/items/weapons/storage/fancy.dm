@@ -287,9 +287,8 @@
 	storage_slots = 12
 	req_access = list(access_virology)
 
-/obj/item/weapon/storage/lockbox/vials/New()
-	..()
-	update_icon()
+/obj/item/weapon/storage/lockbox/vials/Initialize()
+	. = ..()
 
 /obj/item/weapon/storage/lockbox/vials/update_icon()
 	var/total_contents = count_by_type(contents, /obj/item/weapon/reagent_containers/glass/beaker/vial)

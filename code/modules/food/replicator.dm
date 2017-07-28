@@ -22,8 +22,8 @@
 					 "liquid nutrition" = /obj/item/weapon/reagent_containers/food/snacks/soydope,
 					 "pudding substitute" = /obj/item/weapon/reagent_containers/food/snacks/ricepudding)
 
-/obj/machinery/food_replicator/New()
-	..()
+/obj/machinery/food_replicator/Initialize()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/replicator(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src) //used to hold the biomass

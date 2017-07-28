@@ -11,7 +11,8 @@
 	plane = SPACE_PLANE
 //	heat_capacity = 700000 No.
 
-/turf/space/New()
+/turf/space/Initialize()
+	. = ..()
 	if((icon_state == "0") && (!keep_sprite))
 		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
@@ -20,10 +21,7 @@
 	I.alpha = 75
 	I.blend_mode = BLEND_ADD
 	overlays += I
-	..()
 
-/turf/space/Initialize()
-	. = ..()
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)

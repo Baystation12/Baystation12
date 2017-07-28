@@ -104,8 +104,8 @@
 	var/aw_delam = FALSE
 	var/aw_EPR = FALSE
 
-/obj/machinery/power/supermatter/New()
-	..()
+/obj/machinery/power/supermatter/Initialize()
+	. = ..()
 	uid = gl_uid++
 
 /obj/machinery/power/supermatter/proc/handle_admin_warnings()

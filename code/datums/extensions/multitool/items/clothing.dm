@@ -1,4 +1,4 @@
-/obj/item/clothing/under/initialize()
+/obj/item/clothing/under/Initialize()
 	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/clothing)
 	. = ..()
 

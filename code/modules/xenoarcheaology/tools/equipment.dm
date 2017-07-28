@@ -27,8 +27,8 @@
 	armor = list(melee = 30, bullet = 0, laser = 5,energy = 40, bomb = 35, bio = 100, rad = 100)
 	light_overlay = "hardhat_light"
 
-/obj/item/clothing/suit/space/void/excavation/prepared/New()
-	..()
+/obj/item/clothing/suit/space/void/excavation/prepared/Initialize()
+	. = ..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/excavation
 
 /obj/item/weapon/storage/belt/archaeology

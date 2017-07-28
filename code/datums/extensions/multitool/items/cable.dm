@@ -1,4 +1,4 @@
-/obj/item/stack/cable_coil/initialize()
+/obj/item/stack/cable_coil/Initialize()
 	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/cable)
 	. = ..()
 

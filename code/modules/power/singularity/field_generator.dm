@@ -55,8 +55,8 @@ field_generator power level display
 	return
 
 
-/obj/machinery/field_generator/New()
-	..()
+/obj/machinery/field_generator/Initialize()
+	. = ..()
 	fields = list()
 	connected_gens = list()
 	return

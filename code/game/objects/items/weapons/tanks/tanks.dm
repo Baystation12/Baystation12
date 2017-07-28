@@ -553,13 +553,13 @@ var/list/global/tank_gauge_cache = list()
 	src.overlays += "bomb_assembly"
 
 
-/obj/item/weapon/tank/phoron/onetankbomb/New()
-	..()
+/obj/item/weapon/tank/phoron/onetankbomb/Initialize()
+	. = ..()
 	src.onetankbomb()
 
 
-/obj/item/weapon/tank/oxygen/onetankbomb/New()
-	..()
+/obj/item/weapon/tank/oxygen/onetankbomb/Initialize()
+	. = ..()
 	src.onetankbomb()
 
 

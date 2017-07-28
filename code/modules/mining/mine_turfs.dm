@@ -37,12 +37,13 @@ var/list/mining_floors = list()
 
 	has_resources = 1
 
-/turf/simulated/mineral/New()
+/turf/simulated/mineral/Initialize()
 	mining_walls += src
 	spawn(0)
 		MineralSpread()
 	spawn(2)
 		update_icon(1)
+	. = ..()
 
 /turf/simulated/mineral/Destroy()
 	mining_walls -= src

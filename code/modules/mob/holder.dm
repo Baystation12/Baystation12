@@ -20,8 +20,8 @@ var/list/holder_mob_icon_cache = list()
 
 	var/last_holder
 
-/obj/item/weapon/holder/New()
-	..()
+/obj/item/weapon/holder/Initialize()
+	. = ..()
 	GLOB.processing_objects.Add(src)
 
 /obj/item/weapon/holder/proc/destroy_all()

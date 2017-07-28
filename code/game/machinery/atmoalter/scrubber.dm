@@ -19,8 +19,8 @@
 
 	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "sleeping_agent")
 
-/obj/machinery/portable_atmospherics/powered/scrubber/New()
-	..()
+/obj/machinery/portable_atmospherics/powered/scrubber/Initialize()
+	. = ..()
 	cell = new/obj/item/weapon/cell/apc(src)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)

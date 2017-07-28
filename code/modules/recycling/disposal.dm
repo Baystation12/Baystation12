@@ -30,8 +30,7 @@
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
-/obj/machinery/disposal/New()
-	..()
+/obj/machinery/disposal/Initialize()
 	spawn(5)
 		trunk = locate() in src.loc
 		if(!trunk)
@@ -42,6 +41,7 @@
 
 		air_contents = new/datum/gas_mixture(PRESSURE_TANK_VOLUME)
 		update_icon()
+	. = ..()
 
 /obj/machinery/disposal/Destroy()
 	eject()
