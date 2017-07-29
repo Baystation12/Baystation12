@@ -18,7 +18,9 @@
 	var/brute_mod = 1                  // Multiplier for incoming brute damage.
 	var/burn_mod = 1                   // As above for burn.
 	var/brute_dam = 0                  // Actual current brute damage.
+	var/brute_ratio = 0                // Ratio of current brute damage to max damage.
 	var/burn_dam = 0                   // Actual current burn damage.
+	var/burn_ratio = 0                 // Ratio of current burn damage to max damage.
 	var/last_dam = -1                  // used in healing/processing calculations.
 	var/pain = 0                       // How much the limb hurts.
 	var/pain_disability_threshold      // Point at which a limb becomes unusable due to pain.
@@ -675,6 +677,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		clamped |= W.clamped
 		number_wounds += W.amount
+
+	damage = brute_dam + burn_dam
+	update_damage_ratios()
+
+/obj/item/organ/external/proc/update_damage_ratios()
+	brute_ratio = brute_dam / max_damage
+	burn_ratio = burn_dam / max_damage
 
 //Returns 1 if damage_state changed
 /obj/item/organ/external/proc/update_damstate()
