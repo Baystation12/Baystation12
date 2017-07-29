@@ -601,9 +601,6 @@
 			if (prob(10) && nutrition > 70)
 				for(var/limb_type in species.has_limbs)
 					var/obj/item/organ/external/E = organs_by_name[limb_type]
-					for(var/datum/wound/W in E.wounds)
-						if (W.wound_damage() == 0 && prob(50))
-							E.wounds -= W
 					if(E && !E.is_usable())
 						E.removed()
 						qdel(E)
@@ -616,6 +613,10 @@
 						to_chat(src, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
 						nutrition -= 60
 						update_body()
+					else
+						for(var/datum/wound/W in E.wounds)
+							if (W.wound_damage() == 0 && prob(50))
+								E.wounds -= W
 
 	// TODO: stomach and bloodstream organ.
 	if(!isSynthetic())
