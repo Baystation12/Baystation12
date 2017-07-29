@@ -13,7 +13,7 @@ atom/var/var/list/fingerprints
 atom/var/var/list/fingerprintshidden
 atom/var/var/fingerprintslast = null
 
-/atom/proc/add_hiddenprint(mob/living/M)
+/atom/proc/add_hiddenprint(mob/M)
 	if(!M || !M.key)
 		return
 	if(fingerprintslast == M.key)
@@ -30,7 +30,7 @@ atom/var/var/fingerprintslast = null
 	src.fingerprintshidden += "\[[time_stamp()]\] Real name: [M.real_name], Key: [M.key]"
 	return 1
 
-/atom/proc/add_fingerprint(mob/living/M, ignoregloves)
+/atom/proc/add_fingerprint(mob/M, ignoregloves)
 	if(isnull(M)) return
 	if(isAI(M)) return
 	if(!M || !M.key)
@@ -143,17 +143,17 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		if(prob(20*item_multiplier) && !(fibertext in suit_fibers))
 			suit_fibers += fibertext
 
-/mob/living/proc/get_full_print()
-	return
+/mob/proc/get_full_print()
+	return FALSE
 
 /mob/living/carbon/get_full_print()
 	if (mFingerprints in mutations)
-		return
+		return FALSE
 	return md5(dna.uni_identity)
 
 /mob/living/carbon/human/get_full_print(ignoregloves)
 	if(!..())
-		return
+		return FALSE
 
 	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
 	if(E)
