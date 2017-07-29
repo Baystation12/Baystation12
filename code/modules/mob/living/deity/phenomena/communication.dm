@@ -52,7 +52,7 @@
 	var/pain = input(linked, "Choose their punishment.", "Punishment") as anything in punishment_list
 	if(!pain)
 		return
-	if(linked.mob_uplink.uses > punishment_list[pain])
+	if(linked.mob_uplink.uses < punishment_list[pain])
 		to_chat(linked, "<span class='warning'>[pain] costs too much power for you to use on \the [L]</span>")
 		return
 	..()
