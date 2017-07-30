@@ -135,3 +135,7 @@
 /decl/emote/audible/scream
 	key = "scream"
 	emote_message_3p = "USER screams!"
+
+/decl/emote/audible/grunt
+	key = "scream"
+	emote_message_3p = "USER grunts!"
