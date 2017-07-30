@@ -62,7 +62,11 @@
 		/area/vacant/missile = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/office = 0,
-		/area/rnd/blanks = NO_SCRUBBER|NO_VENT
+		/area/rnd/blanks = NO_SCRUBBER|NO_VENT,
+		/area/thruster/d1port = NO_SCRUBBER|NO_VENT,
+		/area/thruster/d1starboard = NO_SCRUBBER|NO_VENT,
+		/area/thruster/d3port = NO_SCRUBBER|NO_VENT,
+		/area/thruster/d3starboard = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(

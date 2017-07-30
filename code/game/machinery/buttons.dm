@@ -232,3 +232,29 @@
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
 	active = !active
 	update_icon()
+
+/obj/machinery/button/toggle/fuel_cutoff
+	name = "remote fuel cutoff"
+	var/frequency = 0
+	var/datum/radio_frequency/radio_connection
+
+/obj/machinery/button/toggle/fuel_cutoff/Initialize()
+	. = ..()
+	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+
+/obj/machinery/button/toggle/fuel_cutoff/update_icon()
+	if(!active)
+		icon_state = "launcherbtt"
+	else
+		icon_state = "launcheract"
+
+/obj/machinery/button/toggle/fuel_cutoff/activate(mob/living/user)
+	var/datum/signal/signal = new
+	signal.transmission_method = 1 // radio transmission
+	signal.source = src
+	signal.frequency = frequency
+	signal.data["tag"] = id
+	signal.data["command"] = "power_toggle"
+	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	active = !active
+	update_icon()

@@ -1,7 +1,7 @@
 /obj/effect/overmap/ship/torch
 	name = "SEV Torch"
 	fore_dir = WEST
-	vessel_mass = 800
+	vessel_mass = 350
 	default_delay = 12 SECONDS
 
 	restricted_waypoints = list(
