@@ -54,7 +54,6 @@
 		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
 		/area/turret_protected/ai_outer_chamber = NO_SCRUBBER|NO_VENT,
 		/area/vacant = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/vacant/briefing = 0,
 		/area/vacant/brig = NO_SCRUBBER|NO_VENT,
 		/area/vacant/cannon = NO_SCRUBBER|NO_VENT,
 		/area/vacant/cargo = NO_SCRUBBER|NO_VENT,
