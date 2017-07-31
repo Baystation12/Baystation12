@@ -68,10 +68,9 @@ Each plays slightly different and has different challenges/benefits
 	charge *= 0.5
 	if(prob(charge))
 		to_chat(user, "<span class='warning'>You feel drained...</span>")
-	if(istype(user, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		if(H.should_have_organ(BP_HEART))
-			H.vessel.remove_reagent("blood", charge)
+	var/mob/living/carbon/human/H = user
+	if(istype(H) && H.should_have_organ(BP_HEART))
+		H.vessel.remove_reagent("blood", charge)
 	else
 		user.adjustBruteLoss(charge)
 	return 1
