@@ -1,0 +1,5 @@
+author: Datraen
+delete-after: True
+changes: 
+  - rscadd: "Adds directional states for softlight overlays."
+  - bugfix: "Fixes lights on rotated views."
