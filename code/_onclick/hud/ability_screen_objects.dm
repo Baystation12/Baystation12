@@ -186,7 +186,7 @@
 		ability_master.update_icon()
 //		qdel(ability_master)
 	ability_master = null
-	..()
+	return ..()
 
 /obj/screen/ability/update_icon()
 	overlays.Cut()
