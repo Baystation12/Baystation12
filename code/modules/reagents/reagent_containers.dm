@@ -177,6 +177,6 @@
 	if(user.zone_sel.selecting != BP_MOUTH) //in case it is ever used as a surgery tool
 		return ..()
 
-/obj/item/weapon/reagent_containers/AltClick()
-	if(Adjacent(usr))
+/obj/item/weapon/reagent_containers/AltClick(var/mob/user)
+	if(CanPhysicallyInteract(user))
 		set_APTFT()
