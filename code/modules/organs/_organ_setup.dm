@@ -2,3 +2,6 @@
 #define DROPLIMB_THRESHOLD_EDGE 5
 #define DROPLIMB_THRESHOLD_TEAROFF 2
 #define DROPLIMB_THRESHOLD_DESTROY 1
+
+// This controls how soon a limb becomes irreprable
+#define DAMLIMB_RATIO_MODIFIER 2
