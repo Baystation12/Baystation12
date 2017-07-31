@@ -1,5 +1,6 @@
 #define WORLD_ICON_SIZE 32
 
+// An example comment
 /var/server_name = "Baystation 12"
 
 /var/game_id = null
