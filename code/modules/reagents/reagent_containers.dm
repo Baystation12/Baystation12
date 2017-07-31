@@ -176,3 +176,7 @@
 /obj/item/weapon/reagent_containers/do_surgery(mob/living/carbon/M, mob/living/user)
 	if(user.zone_sel.selecting != BP_MOUTH) //in case it is ever used as a surgery tool
 		return ..()
+
+/obj/item/weapon/reagent_containers/AltClick()
+	if(Adjacent(usr))
+		set_APTFT()

@@ -71,3 +71,9 @@
 			icon_state = "extinguisher_full"
 	else
 		icon_state = "extinguisher_empty"
+
+/obj/structure/extinguisher_cabinet/AltClick()
+	if(Adjacent(usr))
+		opened = !opened
+		update_icon()
+
