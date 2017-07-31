@@ -590,7 +590,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot //until they get a better uniform
 	name = OUTFIT_JOB_NAME("SolGov Pilot")
-	uniform = /obj/item/clothing/under/utility/expeditionary/pilot
+	uniform = /obj/item/clothing/under/utility/expeditionary/command/pilot
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
@@ -599,13 +599,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet
 	name = OUTFIT_JOB_NAME("Pilot - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/pilot
+	uniform = /obj/item/clothing/under/utility/fleet/command/pilot
 	head = /obj/item/clothing/head/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/marine
 	name = OUTFIT_JOB_NAME("Pilot - Marine")
-	uniform = /obj/item/clothing/under/utility/marine/pilot
+	uniform = /obj/item/clothing/under/utility/marine/command/pilot
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
