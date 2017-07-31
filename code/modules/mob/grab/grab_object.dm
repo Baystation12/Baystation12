@@ -78,6 +78,28 @@
 
 /obj/item/grab/proc/can_grab()
 
+// This is for all the sorts of things that need to be checked for pretty much every
+// grab made. Feel free to override it but it stops a lot of situations that could
+// cause runtimes so be careful with it.
+/obj/item/grab/proc/pre_check()
+
+	if(!assailant || !affecting)
+		return 0
+
+	if(assailant == affecting)
+		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
+		return 0
+
+	if(assailant.get_active_hand())
+		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
+		return 0
+
+	if(assailant.grabbed_by.len)
+		to_chat(assailant, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
+		return 0
+
+	return 1
+
 /obj/item/grab/proc/init()
 	last_target = assailant.zone_sel.selecting
 	affecting.update_canmove()
