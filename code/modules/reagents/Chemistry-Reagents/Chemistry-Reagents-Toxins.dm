@@ -174,9 +174,14 @@
 	strength = 3
 	target_organ = BP_BRAIN
 
-/datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
+		return
+	if(volume < 2*metabolism) //half-assed attempt to make it trigger on last tick
+		var/obj/item/organ/internal/heart/H = M.internal_organs_by_name[BP_HEART]
+		if(H && H.robotic < ORGAN_ROBOT && H.is_working())
+			H.pulse = PULSE_2FAST
 		return
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(3 * removed)
