@@ -1062,3 +1062,15 @@
 					/obj/item/weapon/lipstick/jade = 100,
 					/obj/item/weapon/storage/wallet/poly = 600
 					)
+// eliza's attempt at a new vending machine
+/obj/machinery/vending/games
+	name = "Good Clean Fun"
+	desc = "Vends things that the CO and SEA are probably not going to appreciate you fiddling with instead of your job..."
+	vend_delay = 15
+	product_slogans = "Escape to a fantasy world!;Fuel your gambling addiction!;Ruin your friendships!"
+	product_ads = "Elves and dwarves!;Totally not satanic!;Fun times forever!"
+	icon_state = "games"
+	products = list(/obj/item/toy/blink = 5, /obj/item/toy/spinningtoy = 2, /obj/item/weapon/deck = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2)
+	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/spinningtoy = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/ = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
+	premium = list(/obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
+	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
