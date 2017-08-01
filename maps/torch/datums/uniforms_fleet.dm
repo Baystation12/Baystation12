@@ -114,6 +114,13 @@
 	name = "Fleet command support"
 	departments = SPT
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/command, /obj/item/clothing/head/ushanka/fleet)
+	utility_under = /obj/item/clothing/under/utility/fleet/command
+
+	service_hat = /obj/item/clothing/head/dress/fleet/command
+
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer)
+
 /decl/hierarchy/mil_uniform/fleet/spt/officer
 	name = "Fleet command support CO"
 	min_rank = 11
