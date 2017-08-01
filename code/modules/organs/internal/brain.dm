@@ -129,7 +129,7 @@
 	return round(damage / damage_threshold_value)
 
 /obj/item/organ/internal/brain/proc/past_damage_threshold(var/threshold)
-	return (get_current_damage_threshold() < threshold)
+	return (get_current_damage_threshold() > threshold)
 
 /obj/item/organ/internal/brain/process()
 
@@ -177,12 +177,14 @@
 				blood_volume = min(blood_volume, BLOOD_VOLUME_SURVIVE)
 				owner.Paralyse(3)
 
-			else if(owner.should_have_organ(BP_LUNGS))
+			else if(owner.need_breathe())
 				var/blood_volume_mod = max(0, 1 - owner.getOxyLoss()/(owner.maxHealth/2))
+				var/oxygenated_mult = 0
 				if(owner.chem_effects[CE_OXYGENATED] == 1) // Dexalin.
-					blood_volume_mod = max(blood_volume_mod, 0.5)
+					oxygenated_mult = 0.5
 				else if(owner.chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
-					blood_volume_mod = max(blood_volume_mod, 0.8)
+					oxygenated_mult = 0.8
+				blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 				blood_volume = blood_volume * blood_volume_mod
 			//Effects of bloodloss
 			switch(blood_volume)
