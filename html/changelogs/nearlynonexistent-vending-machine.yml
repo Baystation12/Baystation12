@@ -1,0 +1,7 @@
+author: nearlyNonexistent
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added vending machine to the code that contains dice, cards and related toy type items. One is in the mess hall."
+  - maptweak: "Adds paper for civilians in the mess hall and lounge. Removed a stool in the mess hall to add the vending machine."
