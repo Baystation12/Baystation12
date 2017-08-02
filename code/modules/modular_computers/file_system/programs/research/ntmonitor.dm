@@ -42,7 +42,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/computer_ntnetmonitor/Topic(href, href_list)
+/datum/nano_module/computer_ntnetmonitor/Topic(href, href_list, state)
 	var/mob/user = usr
 	if(..())
 		return 1
@@ -87,14 +87,14 @@
 	if(href_list["ban_nid"])
 		if(!ntnet_global)
 			return 1
-		var/nid = text2num(input(user,"Enter NID of device which you want to block from the network:"))
-		if(CanUseTopic(user) && nid)
+		var/nid = input(user,"Enter NID of device which you want to block from the network:", "Enter NID") as null|num
+		if(nid && CanUseTopic(user, state))
 			ntnet_global.banned_nids |= nid
 		return 1
 	if(href_list["unban_nid"])
 		if(!ntnet_global)
 			return 1
-		var/nid = text2num(input(user,"Enter NID of device which you want to unblock from the network:"))
-		if(CanUseTopic(user) && nid)
+		var/nid = input(user,"Enter NID of device which you want to unblock from the network:", "Enter NID") as null|num
+		if(nid && CanUseTopic(user, state))
 			ntnet_global.banned_nids -= nid
 		return 1
