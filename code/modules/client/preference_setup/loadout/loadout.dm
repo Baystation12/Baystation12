@@ -267,15 +267,16 @@ var/list/gear_datums = list()
 		return 1
 
 /datum/gear
-	var/display_name       //Name/index. Must be unique.
-	var/description        //Description of this gear. If left blank will default to the description of the pathed item.
-	var/path               //Path to item.
-	var/cost = 1           //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
-	var/slot               //Slot to equip to.
-	var/list/allowed_roles //Roles that can spawn with this item.
-	var/whitelisted        //Term to check the whitelist for..
+	var/display_name          //Name/index. Must be unique.
+	var/description           //Description of this gear. If left blank will default to the description of the pathed item.
+	var/path                  //Path to item.
+	var/cost = 1              //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
+	var/slot                  //Slot to equip to.
+	var/list/allowed_roles    //Roles that can spawn with this item.
+	var/list/allowed_branches //Branches that can spawn with this item. If defined, this overrides allowed_roles
+	var/whitelisted           //Term to check the whitelist for..
 	var/sort_category = "General"
-	var/flags              //Special tweaks in new
+	var/flags                 //Special tweaks in new
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
