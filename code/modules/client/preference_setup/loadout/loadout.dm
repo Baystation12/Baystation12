@@ -145,12 +145,7 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><hr></td></tr>"
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
-	var/jobs = list()
-	if(pref.job_high || pref.job_medium || pref.job_low)
-		if(pref.job_high) //Is not a list like the others so a check just in case
-			jobs += pref.job_high
-		jobs += pref.job_medium
-		jobs += pref.job_low
+	
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
@@ -159,27 +154,66 @@ var/list/gear_datums = list()
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2>[G.description]</font>"
-		if(G.allowed_roles)
+
+		/* Fetch gear by branch restrictions (NEW) */
+		if (G.allowed_branches)
+			var/branch = ""
+			if (pref.char_branch)
+				branch = pref.char_branch
+			var/rank = ""
+			if (pref.char_rank)
+				rank = pref.char_rank
+
 			. += "<br><i>"
-			var/ind = 0
-			for(var/J in jobs)
-				if(J in G.allowed_roles)
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=55cc55>[J]</font>"
-				else
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=cc5555>[J]</font>"
+			//var/allowed = TRUE // Assumed allowed until something says otherwise
+			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
+			if (branch in G.allowed_branches["branch"] || "ALL" in G.allowed_branches["branch"]) // Branch is allowed
+				. += "<font color=55cc55>[branch]</font>"
+			else // Branch is not allowed
+				. += "<font color=cc5555>[branch]</font>"
+				//allowed = FALSE
+
+			// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
+			if (G.allowed_branches["ranks"] && (rank in G.allowed_branches["ranks"] || "ALL" in G.allowed_branches["ranks"])) // Rank is allowed
+				. += ", <font color=55cc55>[rank]</font>"
+			else // Rank is not allowed
+				. += ", <font color=cc5555>[rank]</font>"
+				//allowed = FALSE
+
 			. += "</i>"
+
+		/* Fetch gear by job restrictions (OLD) */
+		else
+			var/jobs = list()
+			if(pref.job_high || pref.job_medium || pref.job_low)
+				if(pref.job_high) //Is not a list like the others so a check just in case
+					jobs += pref.job_high
+				jobs += pref.job_medium
+				jobs += pref.job_low
+
+			if(G.allowed_roles)
+				. += "<br><i>"
+				var/ind = 0
+				for(var/J in jobs)
+					if(J in G.allowed_roles)
+						++ind
+						if(ind > 1)
+							. += ", "
+						. += "<font color=55cc55>[J]</font>"
+					else
+						++ind
+						if(ind > 1)
+							. += ", "
+						. += "<font color=cc5555>[J]</font>"
+				. += "</i>"
+
 		.+= "</tr>"
 		if(ticked)
 			. += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
 				. += " <a href='?src=\ref[src];gear=[G.display_name];tweak=\ref[tweak]'>[tweak.get_contents(get_tweak_metadata(G, tweak))]</a>"
 			. += "</td></tr>"
+
 	. += "</table>"
 	. = jointext(.,null)
 
