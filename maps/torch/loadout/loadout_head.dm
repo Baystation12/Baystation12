@@ -7,6 +7,9 @@
 /datum/gear/head/bandana
 	allowed_roles = NON_MILITARY_ROLES
 
+/datum/gear/head/beret
+	allowed_roles = NON_MILITARY_ROLES
+
 /datum/gear/head/solberet
 	display_name = "SolGov beret selection"
 	description = "A beret denoting service in an organization within SolGov."
@@ -58,7 +61,7 @@
 	display_name = "Sol Central Government Cap"
 	path = /obj/item/clothing/head/soft/sol
 	allowed_roles = SOLGOV_ROLES
-	
+
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
 	path = /obj/item/clothing/head/soft/veteranhat
