@@ -109,9 +109,6 @@ datum/preferences
 	var/religion = "None"              				// Character's religious association.
 	var/memory = ""
 
-	var/char_branch	= "Civilian"					// W.I.P.
-	var/list/char_rank = list()						// W.I.P.
-
 	var/job_high = null								// Most preferable job (Not a list since there can only be one 'most')
 	var/list/job_medium = list() 					// Preferable jobs (List of all things selected for medium weight)
 	var/list/job_low    = list() 					// Acceptable jobs (List of all the things selected for low weight)
@@ -148,20 +145,31 @@ datum/preferences
 
 	// Mob Preview Data
 
+	//character preferences
+	var/char_rank = ""					// Bay Compatibility.
+	var/char_branch = ""				// Bay Compatibility.
+	var/char_department = "Civilian"		// Character Department.
+	var/department_playtime = 0
+	var/department_rank = 0
+	var/dept_experience = 0
+
+	var/bank_balance = 0
+	var/pension_balance = 0
+
 	var/icon/preview_icon = null
 	var/species_preview
 
 	// ----------------
-
+	var/permadeath = 0
+	var/neurallaces = 0
+	var/promoted = 0 // 1 for Regular > Senior, 2 for department job > head
+	var/list/recommendations = list()
 
 
 /datum/preferences/New(client/C)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
-	for(var/datum/job/job in job_master.occupations)
-		if((job.department != "Service") && (job.department != "Civilian") && (job.department != "Support")) 	continue
-		char_rank += job
 
 	gear = list()
 
@@ -178,17 +186,100 @@ datum/preferences
 	if(update_setup(loaded_preferences, loaded_character))
 		save_preferences()
 		save_character()
+/*	set_department()
 
+<<<<<<< Updated upstream
 /datum/preferences/proc/ShowChoices(mob/userT)
 	if(!userT || !userT.client)	return
+=======
+/datum/preferences/proc/set_department()
+	for(var/datum/job/job in job_master.occupations)
+		if(char_branch == job.department)
+			char_jobs += job
+		else
+			if(!char_branch || (job.department == "Service") || (job.department == "Civilian") || (job.department == "Support"))
+				char_jobs += job
+*/
+/*
+/datum/preferences/proc/ZeroSkills(var/forced = 0)
+	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
+		if(!skills.Find(S.ID) || forced)
+			skills[S.ID] = SKILL_NONE
+
+/datum/preferences/proc/CalculateSkillPoints()
+	used_skillpoints = 0
+	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
+		var/multiplier = 1
+		switch(skills[S.ID])
+			if(SKILL_NONE)
+				used_skillpoints += 0 * multiplier
+			if(SKILL_BASIC)
+				used_skillpoints += 1 * multiplier
+			if(SKILL_ADEPT)
+				// secondary skills cost less
+				if(S.secondary)
+					used_skillpoints += 1 * multiplier
+				else
+					used_skillpoints += 3 * multiplier
+			if(SKILL_EXPERT)
+				// secondary skills cost less
+				if(S.secondary)
+					used_skillpoints += 3 * multiplier
+				else
+					used_skillpoints += 6 * multiplier
+
+/datum/preferences/proc/GetSkillClass(points)
+	return CalculateSkillClass(points, age)
+
+/proc/CalculateSkillClass(points, age)
+	if(points <= 0) return "Unconfigured"
+	// skill classes describe how your character compares in total points
+	points -= min(round((age - 20) / 2.5), 4) // every 2.5 years after 20, one extra skillpoint
+	if(age > 30)
+		points -= round((age - 30) / 5) // every 5 years after 30, one extra skillpoint
+	switch(points)
+		if(-1000 to 3)
+			return "Terrifying"
+		if(4 to 6)
+			return "Below Average"
+		if(7 to 10)
+			return "Average"
+		if(11 to 14)
+			return "Above Average"
+		if(15 to 18)
+			return "Exceptional"
+		if(19 to 24)
+			return "Genius"
+		if(24 to 1000)
+			return "God"
+
+*/
+/datum/preferences/proc/ShowChoices(mob/user)
+	if(!user || !user.client)	return
 
 	if(!get_mob_by_key(client_ckey))
 		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
 		close_load_dialog(user)
 		return
 
-	user = userT
-	var/dat = ""
+	var/dat = "<html><body><center>"
+
+	if(path)
+		if(char_lock)
+			dat += "Slot - "
+			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+			dat += "Reload slot - "
+			dat += "Lock slot"
+		else
+			dat += "Slot - "
+			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
+			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
+			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
+			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
+
 
 	switch(selected_menu)
 		if(1) dat += contentGeneral()
@@ -222,6 +313,48 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
+/datum/preferences/Topic(href, list/href_list)
+	if(..())
+		return 1
+
+	if(href_list["save"])
+		save_preferences()
+		save_character()
+	else if(href_list["reload"])
+		load_preferences()
+		load_character()
+		sanitize_preferences()
+	else if(href_list["load"])
+		if(!IsGuestKey(usr.key))
+			open_load_dialog(usr)
+			return 1
+	else if(href_list["changeslot"])
+		load_character(text2num(href_list["changeslot"]))
+		sanitize_preferences()
+		close_load_dialog(usr)
+	else if(href_list["resetslot"])
+		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
+			return 0
+		char_lock = 0
+		load_character(SAVE_RESET)
+		save_character()
+		sanitize_preferences()
+	else if(href_list["lock"])
+		if("No" == alert("This will lock the current slot. You will no longer be able to edit it. Continue?", "Lock current slot?", "No", "Yes"))
+			return 0
+		char_lock = 1
+		b_type = RANDOM_BLOOD_TYPE
+		save_character()
+		load_character()
+		if(isnewplayer(usr))
+			usr:panel.close()
+			usr:new_player_panel_proc()
+	else
+		return 0
+
+	ShowChoices(usr)
+	return 1
+
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	character.set_species(species)
@@ -230,9 +363,9 @@ datum/preferences
 		var/firstspace = findtext(real_name, " ")
 		var/name_length = length(real_name)
 		if(!firstspace)	//we need a surname
-			real_name += " [pick(last_names)]"
+			real_name += " [pick(GLOB.last_names)]"
 		else if(firstspace == name_length)
-			real_name += "[pick(last_names)]"
+			real_name += "[pick(GLOB.last_names)]"
 
 	character.fully_replace_character_name(real_name)
 
@@ -375,7 +508,7 @@ datum/preferences
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
 		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = using_map.character_load_path(S, i)
+			S.cd = GLOB.using_map.character_load_path(S, i)
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)

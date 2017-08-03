@@ -46,11 +46,11 @@
 		S["default_slot"] << default_slot
 
 	if(slot != SAVE_RESET)
-		S.cd = using_map.character_load_path(S, slot)
+		S.cd = GLOB.using_map.character_load_path(S, slot)
 		load_char(S)
 	else
 		load_char(S)
-		S.cd = using_map.character_load_path(S, default_slot)
+		S.cd = GLOB.using_map.character_load_path(S, default_slot)
 
 	loaded_character = S
 	sanitize_char()
@@ -60,7 +60,7 @@
 	if(!path)				return 0
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
-	S.cd = using_map.character_save_path(default_slot)
+	S.cd = GLOB.using_map.character_save_path(default_slot)
 
 	S["version"] << SAVEFILE_VERSION_MAX
 	save_char(S)

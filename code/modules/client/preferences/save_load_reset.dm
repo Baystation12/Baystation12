@@ -50,7 +50,7 @@
 
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
-	for(var/module in robot_module_types)
+	for(var/module in GLOB.robot_module_types)
 		S["flavour_texts_robot_[module]"] >> flavour_texts_robot[module]
 
 	preview_icon = null
@@ -133,7 +133,7 @@
 	S["flavor_texts_feet"]		<< flavor_texts["feet"]
 
 	S["flavour_texts_robot_Default"] << flavour_texts_robot["Default"]
-	for(var/module in robot_module_types)
+	for(var/module in GLOB.robot_module_types)
 		S["flavour_texts_robot_[module]"] << flavour_texts_robot[module]
 
 	to_file(S["be_special"],             be_special_role)
@@ -285,11 +285,11 @@
 			job_low[i]  = sanitize(job_low[i])
 	if(!player_alt_titles) player_alt_titles = new()
 
-	if((using_map.flags & MAP_HAS_BRANCH)\
+	if((GLOB.using_map.flags & MAP_HAS_BRANCH)\
 	   && (!char_branch || !mil_branches.is_spawn_branch(char_branch)))
 		char_branch = "None"
 
-	if((using_map.flags & MAP_HAS_RANK)\
+	if((GLOB.using_map.flags & MAP_HAS_RANK)\
 	   && (!char_rank || !mil_branches.is_spawn_rank(char_branch, char_rank)))
 		char_rank = "None"
 

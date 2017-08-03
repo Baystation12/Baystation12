@@ -39,12 +39,12 @@ datum/preferences/proc/contentOccupation()
 
 	data += "<tt><center>"
 	data += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
-	if(using_map.flags & MAP_HAS_BRANCH)
+	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
 		player_branch = mil_branches.get_branch(char_branch)
 
 		data += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[char_branch]</a>	"
-	if(using_map.flags & MAP_HAS_RANK)
+	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		player_rank = mil_branches.get_rank(char_branch, char_rank)
 
 		data += "Rank: <a href='?src=\ref[src];char_rank=1'>[char_rank]</a>	"

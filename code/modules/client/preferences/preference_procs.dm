@@ -61,7 +61,7 @@
 	HTML += "<a href='?src=\ref[src];flavour_text_robot=Default'>Default:</a> "
 	HTML += TextPreview(flavour_texts_robot["Default"])
 	HTML += "<hr />"
-	for(var/module in robot_module_types)
+	for(var/module in GLOB.robot_module_types)
 		HTML += "<a href='?src=\ref[src];flavour_text_robot=[module]'>[module]:</a> "
 		HTML += TextPreview(flavour_texts_robot[module])
 		HTML += "<br>"

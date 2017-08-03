@@ -27,7 +27,7 @@ datum/preferences/proc/contentGenericRecord()
 
 		<div class='main'> "}
 	data += "<b>Background Information</b><br>"
-	data += "[using_map.company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[nanotrasen_relation]</a><br/>"
+	data += "[GLOB.using_map.company_name] Relation: <a href='?src=\ref[src];nt_relation=1'>[nanotrasen_relation]</a><br/>"
 	if(char_lock)
 		data += "Home System: [home_system]<br/>"
 		data += "Citizenship: [citizenship]<br/>"
@@ -80,7 +80,7 @@ datum/preferences/proc/contentGenericRecord()
 		selected_menu = text2num(href_list["page"])
 
 	else if(href_list["nt_relation"])
-		var/new_relation = input(user, "Choose your relation to [using_map.company_name]. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference", nanotrasen_relation)  as null|anything in COMPANY_ALIGNMENTS
+		var/new_relation = input(user, "Choose your relation to [GLOB.using_map.company_name]. Note that this represents what others can find out about your character by researching your background, not what your character actually thinks.", "Character Preference", nanotrasen_relation)  as null|anything in COMPANY_ALIGNMENTS
 		if(new_relation && CanUseTopic(user))
 			nanotrasen_relation = new_relation
 
