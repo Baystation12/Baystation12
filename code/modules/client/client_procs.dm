@@ -319,6 +319,8 @@
 // So we slow this down a little.
 // See: http://www.byond.com/docs/ref/info.html#/client/proc/Stat
 /client/Stat()
+	if(!usr)
+		return
 	// Add always-visible stat panel calls here, to define a consistent display order.
 	statpanel("Status")
 
