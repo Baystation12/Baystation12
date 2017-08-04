@@ -162,14 +162,14 @@ var/list/gear_datums = list()
 	if (pref.char_rank)
 		rank = pref.char_rank
 	
-	var/list/display_role_list = list() // List of entries to be displayed
-	
 	// Loop through each loadout item
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
+		var/list/display_role_list = list() // List of entries to be displayed
+		
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2>[G.description]</font>"
