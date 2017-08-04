@@ -611,7 +611,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/areas = new/list()
-	for(var/area/N in world)
+	for(var/area/N in all_areas)
 		if(istype(N, areatype)) areas += N
 	return areas
 
@@ -625,7 +625,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/atoms = new/list()
-	for(var/area/N in world)
+	for(var/area/N in all_areas)
 		if(istype(N, areatype))
 			for(var/atom/A in N)
 				atoms += A
@@ -1133,26 +1133,35 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /proc/crash_with(msg)
 	CRASH(msg)
 
+/proc/spiral_range_turfs2(dist=0, center=usr, tick_checked)
+	. = list()
+	var/dist2 = 1
+	if(!center)	return .
+	for(var/T in trange(dist, center))
+		var/turf/TU = T
+		if(get_dist(TU, center) == dist2)
+			. += TU
+
+		dist++
+
 //similar function to RANGE_TURFS(), but will search spiralling outwards from the center (like the above, but only turfs)
-/proc/spiral_range_turfs(dist=0, center=usr, orange=0)
+/proc/spiral_range_turfs(dist=0, center=usr, orange=0, tick_checked)
+	. = list()
 	if(!dist)
-		if(!orange)
-			return list(center)
-		else
-			return list()
+		. += center
+		return .
 
 	var/turf/t_center = get_turf(center)
 	if(!t_center)
-		return list()
+		return .
 
-	var/list/L = list()
 	var/turf/T
 	var/y
 	var/x
 	var/c_dist = 1
 
 	if(!orange)
-		L += t_center
+		. += t_center
 
 	while( c_dist <= dist )
 		y = t_center.y + c_dist
@@ -1160,32 +1169,33 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		for(x in x to t_center.x+c_dist)
 			T = locate(x,y,t_center.z)
 			if(T)
-				L += T
+				. += T
 
 		y = t_center.y + c_dist - 1
 		x = t_center.x + c_dist
 		for(y in t_center.y-c_dist to y)
 			T = locate(x,y,t_center.z)
 			if(T)
-				L += T
+				. += T
 
 		y = t_center.y - c_dist
 		x = t_center.x + c_dist - 1
 		for(x in t_center.x-c_dist to x)
 			T = locate(x,y,t_center.z)
 			if(T)
-				L += T
+				. += T
 
 		y = t_center.y - c_dist + 1
 		x = t_center.x - c_dist
 		for(y in y to t_center.y+c_dist)
 			T = locate(x,y,t_center.z)
 			if(T)
-				L += T
+				. += T
 		c_dist++
+		if(tick_checked)
+			CHECK_TICK
 
-	return L
+	return .
 
 /proc/pass()
 	return
->>>>>>> 5c72d4a156fc67e05df1445de89a232fb6b28a28
