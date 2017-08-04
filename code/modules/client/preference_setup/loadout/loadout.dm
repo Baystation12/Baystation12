@@ -162,6 +162,7 @@ var/list/gear_datums = list()
 	if (pref.char_rank)
 		rank = pref.char_rank
 	
+	// Loop through each loadout item
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
