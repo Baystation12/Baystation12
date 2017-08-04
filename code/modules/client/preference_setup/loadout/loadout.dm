@@ -192,22 +192,21 @@ var/list/gear_datums = list()
 			. += "</i>"
 
 		/* Fetch gear by job restrictions (OLD) */
-		else
-			if(G.allowed_roles)
-				. += "<br><i>"
-				var/ind = 0
-				for(var/J in jobs)
-					if(J in G.allowed_roles)
-						++ind
-						if(ind > 1)
-							. += ", "
-						. += "<font color=55cc55>[J]</font>"
-					else
-						++ind
-						if(ind > 1)
-							. += ", "
-						. += "<font color=cc5555>[J]</font>"
-				. += "</i>"
+		else if (G.allowed_roles)
+			. += "<br><i>"
+			var/ind = 0
+			for(var/J in jobs)
+				if(J in G.allowed_roles)
+					++ind
+					if(ind > 1)
+						. += ", "
+					. += "<font color=55cc55>[J]</font>"
+				else
+					++ind
+					if(ind > 1)
+						. += ", "
+					. += "<font color=cc5555>[J]</font>"
+			. += "</i>"
 
 		.+= "</tr>"
 		if(ticked)
