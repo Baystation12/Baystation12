@@ -49,7 +49,9 @@
 			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
 					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
 			broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
-			return 1
+		else
+			to_chat(user, "<span class='notice'>A red \"Access Denied\" light blinks on \the [src]</span>")
+		return 1
 	..()
 
 //hit other people with it
