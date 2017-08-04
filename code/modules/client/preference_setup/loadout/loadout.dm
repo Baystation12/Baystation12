@@ -200,12 +200,7 @@ var/list/gear_datums = list()
 
 		// Convert display list to HTML formatted list
 		. += "<br><i>"
-		var/count = 0
-		for (var/display_role in display_role_list)
-			if (count)
-				. += ", "
-			count += 1
-			. += display_role
+		. += english_list(display_role_list, "", ", ")
 		. += "</i>"
 		
 		.+= "</tr>"
