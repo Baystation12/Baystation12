@@ -15,6 +15,43 @@
 	return target.stat == 2
 
 //////////////////////////////////////////////////////////////////
+//	step to remove the cores directly using the advanced incision management tool
+//////////////////////////////////////////////////////////////////
+/datum/surgery_step/slime/manager_saw_core
+	allowed_tools = list(
+	/obj/item/weapon/scalpel/manager = 100
+	)
+
+	min_duration = 50
+	max_duration = 70
+
+/datum/surgery_step/slime/manager_saw_core/can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	return ..() && (istype(target) && target.cores > 0) //This is being passed a human as target, unsure why.
+
+/datum/surgery_step/slime/manager_saw_core/begin_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	user.visible_message("[user] starts cutting out one of [target]'s cores with \the [tool].", \
+	"You start cutting out one of [target]'s cores with \the [tool].")
+
+/datum/surgery_step/slime/manager_saw_core/end_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	target.cores--
+	user.visible_message("<span class='notice'>[user] cuts out one of [target]'s cores with \the [tool].</span>",,	\
+	"<span class='notice'>You cut out one of [target]'s cores with \the [tool]. [target.cores] cores left.</span>")
+
+	if(target.cores >= 0)
+		var/coreType = target.GetCoreType()
+		new coreType(target.loc)
+	if(target.cores <= 0)
+		target.icon_state = "[target.colour] baby slime dead-nocore"
+
+
+/datum/surgery_step/slime/manager_saw_core/fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
+	user.visible_message("<span class='warning'>[user]'s hand slips, causing \him to miss the core!</span>", \
+	"<span class='warning'>Your hand slips, causing you to miss the core!</span>")
+
+
+
+
+//////////////////////////////////////////////////////////////////
 //	slime flesh cutting surgery step
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/slime/cut_flesh
