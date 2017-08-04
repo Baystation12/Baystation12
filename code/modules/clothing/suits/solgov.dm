@@ -11,7 +11,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/analyzer,/obj/item/device/radio,/obj/item/taperoll)
-	valid_accessory_slots = list("armband","medal","decor","rank")
+	valid_accessory_slots = list("armband","medal","insignia","rank")
 	restricted_accessory_slots = list("armband")
 
 /obj/item/clothing/suit/storage/service/expeditionary
@@ -193,4 +193,4 @@
 	icon_open = "marshal_jacket_open"
 	icon_closed = "marshal_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
-	valid_accessory_slots = list("decor")
+	valid_accessory_slots = list("insignia")
