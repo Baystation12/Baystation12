@@ -146,6 +146,22 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
 	
+	// Fetch job list and branch/rank here, so we're not doing this for every single custom item
+	var/jobs = list()
+	if(pref.job_high || pref.job_medium || pref.job_low)
+		if(pref.job_high) //Is not a list like the others so a check just in case
+			jobs += pref.job_high
+		jobs += pref.job_medium
+		jobs += pref.job_low
+
+	var/branch = ""
+	if (pref.char_branch)
+		branch = pref.char_branch
+
+	var/rank = ""
+	if (pref.char_rank)
+		rank = pref.char_rank
+	
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
@@ -157,13 +173,6 @@ var/list/gear_datums = list()
 
 		/* Fetch gear by branch restrictions (NEW) */
 		if (G.allowed_branches)
-			var/branch = ""
-			if (pref.char_branch)
-				branch = pref.char_branch
-			var/rank = ""
-			if (pref.char_rank)
-				rank = pref.char_rank
-
 			. += "<br><i>"
 			//var/allowed = TRUE // Assumed allowed until something says otherwise
 			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
@@ -184,13 +193,6 @@ var/list/gear_datums = list()
 
 		/* Fetch gear by job restrictions (OLD) */
 		else
-			var/jobs = list()
-			if(pref.job_high || pref.job_medium || pref.job_low)
-				if(pref.job_high) //Is not a list like the others so a check just in case
-					jobs += pref.job_high
-				jobs += pref.job_medium
-				jobs += pref.job_low
-
 			if(G.allowed_roles)
 				. += "<br><i>"
 				var/ind = 0
