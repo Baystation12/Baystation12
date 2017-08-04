@@ -62,3 +62,11 @@
 
 //For members of the research department and jobs that are scientific
 #define RESEARCH_ROLES list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Passenger", "NanoTrasen Pilot", "Senior Researcher", "Chemist", "Roboticist", "Virologist")
+
+
+/* BRANCH RESTRICTIONS */
+// All ranks in the civilian branch
+#define CIVILIAN_BRANCH list("branches" = list("Civilian"), "ranks" = list("ALL"))
+
+// Nanotrasen rank only in the civilian branch
+#define NANOTRASEN_BRANCH list("branches" = list("Civilian"), "ranks" = list("NanoTrasen"))

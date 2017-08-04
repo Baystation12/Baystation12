@@ -9,6 +9,7 @@
 
 /datum/gear/head/beret
 	allowed_roles = NON_MILITARY_ROLES
+	allowed_branches = CIVILIAN_BRANCH
 
 /datum/gear/head/solberet
 	display_name = "SolGov beret selection"
