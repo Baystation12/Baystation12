@@ -27,9 +27,9 @@ var/global/list/navbeacons = list()
 
 /obj/machinery/navbeacon/hide(var/intact)
 	invisibility = intact ? 101 : 0
-	updateicon()
+	update_icon()
 
-/obj/machinery/navbeacon/proc/updateicon()
+/obj/machinery/navbeacon/update_icon()
 	var/state="navbeacon[open]"
 
 	if(invisibility)
@@ -48,7 +48,7 @@ var/global/list/navbeacons = list()
 
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")
 
-		updateicon()
+		update_icon()
 
 	else if(I.GetIdCard())
 		if(open)
