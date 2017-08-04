@@ -162,6 +162,8 @@ var/list/gear_datums = list()
 	if (pref.char_rank)
 		rank = pref.char_rank
 	
+	var/list/display_role_list = list() // List of entries to be displayed
+	
 	// Loop through each loadout item
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
@@ -174,39 +176,36 @@ var/list/gear_datums = list()
 
 		/* Fetch gear by branch restrictions (NEW) */
 		if (G.allowed_branches)
-			. += "<br><i>"
-			
 			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
 			if (branch in G.allowed_branches["branch"] || "ALL" in G.allowed_branches["branch"]) // Branch is allowed
-				. += "<font color=55cc55>[branch]</font>"
+				display_role_list += "<font color=55cc55>[branch]</font>"
 			else // Branch is not allowed
-				. += "<font color=cc5555>[branch]</font>"
+				display_role_list += "<font color=cc5555>[branch]</font>"
 
 			// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
 			if (G.allowed_branches["ranks"] && (rank in G.allowed_branches["ranks"] || "ALL" in G.allowed_branches["ranks"])) // Rank is allowed
-				. += ", <font color=55cc55>[rank]</font>"
+				display_role_list += "<font color=55cc55>[rank]</font>"
 			else // Rank is not allowed
-				. += ", <font color=cc5555>[rank]</font>"
-
-			. += "</i>"
+				display_role_list += "<font color=cc5555>[rank]</font>"
 
 		/* Fetch gear by job restrictions (OLD) */
 		if (G.allowed_roles)
-			. += "<br><i>"
-			var/ind = 0
 			for (var/J in jobs)
 				if (J in G.allowed_roles) // Job is allowed
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=55cc55>[J]</font>"
+					display_role_list += "<font color=55cc55>[J]</font>"
 				else // Job is not allowed
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=cc5555>[J]</font>"
-			. += "</i>"
+					display_role_list += "<font color=cc5555>[J]</font>"
 
+		// Convert display list to HTML formatted list
+		. += "<br><i>"
+		var/count = 0
+		for (var/display_role in display_role_list)
+			if (count)
+				. += ", "
+			count += 1
+			. += display_role
+		. += "</i>"
+		
 		.+= "</tr>"
 		if(ticked)
 			. += "<tr><td colspan=3>"
