@@ -150,7 +150,7 @@
 	desc = "It controls emitters, remotely."
 
 /obj/machinery/button/remote/emitter/trigger(mob/user as mob)
-	for(var/obj/machinery/power/emitter/E in world)
+	for(var/obj/machinery/power/emitter/E in GLOB.machines)
 		if(E.id == src.id)
 			spawn(0)
 				E.activate(user)

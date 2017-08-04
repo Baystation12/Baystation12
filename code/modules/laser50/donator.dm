@@ -29,6 +29,6 @@
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 
 	log_admin("DON: [key_name(src)] : [msg]")
-	for(var/client/C in clients)
+	for(var/client/C in GLOB.clients)
 		if((C.holder && (C.holder.rights & R_ADMIN || C.holder.rights & R_MOD)) || C.donator)
 			C << "<span class='donator'>" + create_text_tag("don", "DON:", C) + " <b>[src]: </b><span class='message'>[msg]</span></span>"
