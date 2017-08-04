@@ -42,6 +42,12 @@
 		AH.unregister_alarm(src)
 	return ..()
 
+/mob/living/silicon/fully_replace_character_name(new_name)
+	..()
+	if(istype(idcard))
+		idcard.registered_name = new_name
+		idcard.update_name()
+
 /mob/living/silicon/proc/init_id()
 	if(ispath(idcard))
 		idcard = new idcard(src)
