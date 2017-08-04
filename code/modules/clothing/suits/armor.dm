@@ -59,7 +59,6 @@
 	desc = "An armored vest with heavy padding to protect against melee attacks."
 	icon_state = "riotvest"
 	//item_state = "armor"
-	valid_accessory_slots = list("decor")
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -88,7 +87,6 @@
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
 	icon_state = "bulletproofvest"
 	//item_state = "armor"
-	valid_accessory_slots = list("decor")
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -117,7 +115,6 @@
 	desc = "A vest that excels in protecting the wearer against energy projectiles."
 	icon_state = "reflectvest"
 	//item_state = "armor_reflec"
-	valid_accessory_slots = list("decor")
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -311,13 +308,11 @@
 	name = "\improper Sol Central Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
 	icon_state = "solvest"
-	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/armor/vest/detective
 	name = "brown armored vest"
 	desc = "An synthetic armor vest colored in a vintage brown."
 	icon_state = "detvest"
-	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/armor/vest/pcrc
 	name = "contractor armored vest"
@@ -362,13 +357,11 @@
 	name = "\improper Sol Central Government heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
-	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/storage/vest/solgov/security
 	name = "master at arms heavy armored vest"
 	desc = "A synthetic armor vest with MASTER AT ARMS printed in silver lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "secwebvest"
-	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/storage/vest/solgov/command
 	name = "command heavy armored vest"
@@ -386,7 +379,6 @@
 	icon_state = "tacwebvest"
 	item_state = "tacwebvest"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
-	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/storage/vest/merc
 	name = "heavy combat armor"
