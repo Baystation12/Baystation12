@@ -43,6 +43,7 @@
 	name = "riot suit"
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
+	valid_accessory_slots = list("decor")
 	//item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -58,6 +59,7 @@
 	desc = "An armored vest with heavy padding to protect against melee attacks."
 	icon_state = "riotvest"
 	//item_state = "armor"
+	valid_accessory_slots = list("decor")
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -71,6 +73,7 @@
 	desc = "A suit of armor with heavy plates to protect against ballistic projectiles. Looks like it might impair movement."
 	icon_state = "bulletproof"
 	//item_state = "swat_suit"
+	valid_accessory_slots = list("decor")
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
@@ -85,6 +88,7 @@
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
 	icon_state = "bulletproofvest"
 	//item_state = "armor"
+	valid_accessory_slots = list("decor")
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -98,6 +102,7 @@
 	desc = "A suit of armor with advanced shielding to protect against energy weapons. Looks like it might impair movement."
 	icon_state = "reflect"
 	//item_state = "swat_suit"
+	valid_accessory_slots = list("decor")
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
@@ -112,6 +117,7 @@
 	desc = "A vest that excels in protecting the wearer against energy projectiles."
 	icon_state = "reflectvest"
 	//item_state = "armor_reflec"
+	valid_accessory_slots = list("decor")
 	blood_overlay_type = "armor"
 	w_class = ITEM_SIZE_NORMAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -149,6 +155,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	valid_accessory_slots = list("decor")
 
 
 /obj/item/clothing/suit/armor/det_suit
@@ -292,21 +299,25 @@
 	icon_state = "kvest"
 	item_state = "armor"
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
+	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/armor/vest/nt
 	name = "\improper NanoTrasen armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
 	icon_state = "ntvest"
 
+
 /obj/item/clothing/suit/armor/vest/solgov
 	name = "\improper Sol Central Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
 	icon_state = "solvest"
+	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/armor/vest/detective
 	name = "brown armored vest"
 	desc = "An synthetic armor vest colored in a vintage brown."
 	icon_state = "detvest"
+	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/armor/vest/pcrc
 	name = "contractor armored vest"
@@ -351,11 +362,13 @@
 	name = "\improper Sol Central Government heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
+	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/storage/vest/solgov/security
 	name = "master at arms heavy armored vest"
 	desc = "A synthetic armor vest with MASTER AT ARMS printed in silver lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "secwebvest"
+	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/storage/vest/solgov/command
 	name = "command heavy armored vest"
@@ -373,6 +386,7 @@
 	icon_state = "tacwebvest"
 	item_state = "tacwebvest"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	valid_accessory_slots = list("decor")
 
 /obj/item/clothing/suit/storage/vest/merc
 	name = "heavy combat armor"
