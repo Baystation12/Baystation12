@@ -175,34 +175,32 @@ var/list/gear_datums = list()
 		/* Fetch gear by branch restrictions (NEW) */
 		if (G.allowed_branches)
 			. += "<br><i>"
-			//var/allowed = TRUE // Assumed allowed until something says otherwise
+			
 			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
 			if (branch in G.allowed_branches["branch"] || "ALL" in G.allowed_branches["branch"]) // Branch is allowed
 				. += "<font color=55cc55>[branch]</font>"
 			else // Branch is not allowed
 				. += "<font color=cc5555>[branch]</font>"
-				//allowed = FALSE
 
 			// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
 			if (G.allowed_branches["ranks"] && (rank in G.allowed_branches["ranks"] || "ALL" in G.allowed_branches["ranks"])) // Rank is allowed
 				. += ", <font color=55cc55>[rank]</font>"
 			else // Rank is not allowed
 				. += ", <font color=cc5555>[rank]</font>"
-				//allowed = FALSE
 
 			. += "</i>"
 
 		/* Fetch gear by job restrictions (OLD) */
-		else if (G.allowed_roles)
+		if (G.allowed_roles)
 			. += "<br><i>"
 			var/ind = 0
-			for(var/J in jobs)
-				if(J in G.allowed_roles)
+			for (var/J in jobs)
+				if (J in G.allowed_roles) // Job is allowed
 					++ind
 					if(ind > 1)
 						. += ", "
 					. += "<font color=55cc55>[J]</font>"
-				else
+				else // Job is not allowed
 					++ind
 					if(ind > 1)
 						. += ", "
