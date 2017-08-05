@@ -9,7 +9,7 @@
 	desc = "A simple badge, made from gold."
 	icon_state = "goldbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
-	slot = "insignia"
+	slot = ACCESSORY_SLOT_INSIGNIA
 	var/stored_name
 	var/badge_string = "Private Investigator"
 

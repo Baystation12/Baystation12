@@ -6,7 +6,7 @@
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
-	var/slot = "decor"
+	var/slot = ACCESSORY_SLOT_DECOR
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
@@ -190,10 +190,10 @@
 
 //Medals
 /obj/item/clothing/accessory/medal
-	name = "medal"
+	name = ACCESSORY_SLOT_MEDAL
 	desc = "A simple medal."
 	icon_state = "bronze"
-	slot = "medal"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"
@@ -299,7 +299,7 @@
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
-	slot = "medal"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/ribbon/marksman
 	name = "marksmanship ribbon"
@@ -326,7 +326,7 @@
 	name = "speciality blaze"
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
 	icon_state = "marinerank_command"
-	slot = "insignia"
+	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/specialty/janitor
 	name = "custodial blazes"
@@ -379,7 +379,7 @@
 	name = "ranks"
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon_state = "fleetrank"
-	slot = "rank"
+	slot = ACCESSORY_SLOT_RANK
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"
