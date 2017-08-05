@@ -198,10 +198,11 @@ var/list/gear_datums = list()
 		/* Fetch gear by job restrictions (OLD) */
 		if (G.allowed_roles)
 			for (var/J in jobs)
-				if (J in G.allowed_roles) // Job is allowed
-					display_role_list += "<font color=55cc55>[J]</font>"
-				else // Job is not allowed
-					display_role_list += "<font color=cc5555>[J]</font>"
+				if (J)
+					if (J in G.allowed_roles) // Job is allowed
+						display_role_list += "<font color=55cc55>[J]</font>"
+					else // Job is not allowed
+						display_role_list += "<font color=cc5555>[J]</font>"
 
 		// Convert display list to HTML formatted list
 		. += "<br><i>"
