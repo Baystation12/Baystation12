@@ -132,9 +132,18 @@
 	if(ismob(loc))
 		var/mob/M = loc
 		to_chat(M, "<span class='danger'>\The [src] explodes!</span>")
+
+	//Check if someone is holding it for instant limb damage
+	var/slot = usr.get_inventory_slot(src)
+	if(slot != 0)
+		//Pick random organ
+		var/mob/living/carbon/human/real = usr
+		var/obj/item/organ/external/target = pick(real.organs)
+		target.take_damage(100, 0, used_weapon = "Explosive blast")
+
 	if(T)
 		T.hotspot_expose(700,125)
-		explosion(T, -1, -1, 0, 4)
+		explosion(T, -1, 0, 2, 3)
 	qdel(src)
 	return
 
@@ -283,19 +292,7 @@
 
 	if(emagged)
 		var/turf/T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
+		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This message will self destruct now.</font>")
 		sleep(10)
 		explode()
 
@@ -311,6 +308,11 @@
 		return
 	if(mytape.ruined || emagged)
 		audible_message("<span class='warning'>The tape recorder makes a scratchy noise.</span>")
+		if(emagged)
+			var/turf/T = get_turf(src)
+			T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This message will self destruct now.</font>")
+			sleep(10)
+			explode()
 		return
 	if(!canprint)
 		to_chat(usr, "<span class='notice'>The recorder can't print that fast!</span>")
