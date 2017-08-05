@@ -722,13 +722,13 @@
 	// change visibility status and force update of icon
 	hide(var/intact)
 		invisibility = intact ? 101: 0	// hide if floor is intact
-		updateicon()
+		update_icon()
 
 	// update actual icon_state depending on visibility
 	// if invisible, append "f" to icon_state to show faded version
 	// this will be revealed if a T-scanner is used
 	// if visible, use regular icon_state
-	proc/updateicon()
+	update_icon()
 /*		if(invisibility)	//we hide things with alpha now, no need for transparent icons
 			icon_state = "[base_icon_state]f"
 		else

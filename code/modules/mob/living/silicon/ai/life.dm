@@ -60,7 +60,7 @@
 
 /mob/living/silicon/ai/update_living_sight()
 	if(!has_power() || self_shutdown)
-		updateicon()
+		update_icon()
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
 		set_see_in_dark(0)
