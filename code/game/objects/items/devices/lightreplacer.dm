@@ -135,6 +135,7 @@
 			target.remove_bulb()
 
 		var/obj/item/weapon/light/L = new target.light_type()
+		L.rigged = emagged
 		target.insert_bulb(L)
 
 
