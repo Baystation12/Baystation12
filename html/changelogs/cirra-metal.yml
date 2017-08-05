@@ -1,0 +1,6 @@
+author: Cirra
+
+delete-after: True
+
+changes: 
+  - bugfix: "Fixed an exploit which allowed for the creation of infinite metal, using the circuit printer."
