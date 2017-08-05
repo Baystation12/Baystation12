@@ -54,6 +54,10 @@
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
+	bump_flag = HEAVY
+	push_flags = ALLMOBS
+	swap_flags = ALLMOBS
+
 	breathing_organ = BP_TRACH
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake

@@ -18,13 +18,13 @@ var/warrant_uid = 0
 	available_on_ntnet = 1
 	required_access = access_security
 	usage_flags = PROGRAM_ALL
-	nanomodule_path = /datum/nano_module/program/digitalwarrant/
+	nanomodule_path = /datum/nano_module/digitalwarrant/
 
-/datum/nano_module/program/digitalwarrant/
+/datum/nano_module/digitalwarrant/
 	name = "Warrant Assistant"
 	var/datum/data/record/warrant/activewarrant
 
-/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(activewarrant)
@@ -64,7 +64,7 @@ var/warrant_uid = 0
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/program/digitalwarrant/Topic(href, href_list)
+/datum/nano_module/digitalwarrant/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -122,7 +122,7 @@ var/warrant_uid = 0
 
 	if(href_list["savewarrant"])
 		. = 1
-		broadcast_security_hud_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.data_core.warrants) ? "edited" : "uploaded"].", src.program.computer)
+		broadcast_security_hud_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.data_core.warrants) ? "edited" : "uploaded"].", nano_host())
 		GLOB.data_core.warrants |= activewarrant
 		activewarrant = null
 

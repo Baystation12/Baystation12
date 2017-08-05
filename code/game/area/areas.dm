@@ -99,7 +99,7 @@
 /area/proc/fire_alert()
 	if(!fire)
 		fire = 1	//used for firedoor checks
-		updateicon()
+		update_icon()
 		mouse_opacity = 0
 		if(!all_doors)
 			return
@@ -114,7 +114,7 @@
 /area/proc/fire_reset()
 	if (fire)
 		fire = 0	//used for firedoor checks
-		updateicon()
+		update_icon()
 		mouse_opacity = 0
 		if(!all_doors)
 			return
@@ -129,19 +129,19 @@
 /area/proc/readyalert()
 	if(!eject)
 		eject = 1
-		updateicon()
+		update_icon()
 	return
 
 /area/proc/readyreset()
 	if(eject)
 		eject = 0
-		updateicon()
+		update_icon()
 	return
 
 /area/proc/partyalert()
 	if (!( party ))
 		party = 1
-		updateicon()
+		update_icon()
 		mouse_opacity = 0
 	return
 
@@ -149,7 +149,7 @@
 	if (party)
 		party = 0
 		mouse_opacity = 0
-		updateicon()
+		update_icon()
 		for(var/obj/machinery/door/firedoor/D in src)
 			if(!D.blocked)
 				if(D.operating)
@@ -159,7 +159,7 @@
 					D.open()
 	return
 
-/area/proc/updateicon()
+/area/update_icon()
 	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
 			icon_state = "blue"
@@ -202,7 +202,7 @@
 	for(var/obj/machinery/M in src)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
 	if (fire || eject || party)
-		updateicon()
+		update_icon()
 
 /area/proc/usage(var/chan)
 	var/used = 0
@@ -234,7 +234,7 @@
 /area/proc/set_lightswitch(var/new_switch)
 	if(lightswitch != new_switch)
 		lightswitch = new_switch
-		updateicon()
+		update_icon()
 		power_change()
 
 /area/proc/set_emergency_lighting(var/enable)

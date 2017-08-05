@@ -48,7 +48,7 @@
 	add_language("Occult")
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
-	updateicon()
+	update_icon()
 
 /mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
 	new /obj/item/weapon/ectoplasm (src.loc)
@@ -56,7 +56,7 @@
 	ghostize()
 	qdel(src)
 
-/mob/living/simple_animal/construct/updateicon()
+/mob/living/simple_animal/construct/update_icon()
 	overlays.Cut()
 	..()
 	add_glow()

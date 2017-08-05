@@ -326,6 +326,7 @@
 	name = "speciality blaze"
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
 	icon_state = "marinerank_command"
+	slot = "insignia"
 
 /obj/item/clothing/accessory/specialty/janitor
 	name = "custodial blazes"
@@ -366,6 +367,7 @@
 	name = "officer's qualification pin"
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
+
 
 /obj/item/clothing/accessory/speciality/pilot
 	name = "pilot's qualification pin"
