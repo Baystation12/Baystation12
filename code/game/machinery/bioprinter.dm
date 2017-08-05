@@ -136,10 +136,7 @@
 
 	var/matter_amount_per_sheet = 10
 	var/matter_type = DEFAULT_WALL_MATERIAL
-
-/obj/machinery/organ_printer/robot/Initialize()
-	. = ..()
-	total_products -= limb_products
+	limb_products = list() //Wipes the limb list so the roboprinter can't make them. Robo printer limbs are broken, so this stays here until they get fixed.
 
 /obj/machinery/organ_printer/robot/mapped/Initialize()
 	. = ..()
