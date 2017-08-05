@@ -70,3 +70,6 @@
 
 // Nanotrasen rank only in the civilian branch
 #define NANOTRASEN_BRANCH list("branches" = list("Civilian"), "ranks" = list("NanoTrasen"))
+
+// All military branches
+#define MILITARY_BRANCH list("branches" = list("Expeditionary Corps", "Fleet", "Marine Corps"), "ranks" = list("ALL"))
