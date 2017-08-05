@@ -1,7 +1,8 @@
 author: CrimsonShrike
 delete-after: True
 changes: 
+  - rscadd: "Added new accesory slot: insignia"
   - rscadd: "Allowed more accesories on dress and service jackets."
-  - rscadd: "Security vests now come with stripes to hang badges and other similar decor accesories."
+  - rscadd: "Security vests now come with stripes to hang badges and other similar insignia accesories."
   - rscadd: "Detective coat has now a slot for the badge too. Gone are the days of flashing suspects to show your identification"
   - rscadd: "Colonial Marshals have now learned to keep their badges visible aswell."
