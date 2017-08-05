@@ -19,12 +19,15 @@
 	var/printing
 
 	// These should be subtypes of /obj/item/organ
-	var/list/products = list(
+	var/list/organ_products = list(
 		BP_HEART   = list(/obj/item/organ/internal/heart,  25),
 		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  25),
 		BP_KIDNEYS = list(/obj/item/organ/internal/kidneys,20),
 		BP_EYES    = list(/obj/item/organ/internal/eyes,   20),
 		BP_LIVER   = list(/obj/item/organ/internal/liver,  25),
+		)
+
+	var/list/limb_products = list(
 		BP_L_ARM   = list(/obj/item/organ/external/arm,  65),
 		BP_R_ARM   = list(/obj/item/organ/external/arm/right,  65),
 		BP_L_LEG   = list(/obj/item/organ/external/leg,  65),
@@ -34,6 +37,7 @@
 		BP_L_HAND   = list(/obj/item/organ/external/hand,  40),
 		BP_R_HAND   = list(/obj/item/organ/external/hand/right,  40)
 		)
+	var/list/total_products
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
 	if(default_deconstruction_screwdriver(user, O))
@@ -51,6 +55,10 @@
 		overlays += "bioprinter_panel_open"
 	if(printing)
 		overlays += "bioprinter_working"
+
+/obj/machinery/organ_printer/Initialize()
+	. = ..()
+	total_products = limb_products + organ_products
 
 /obj/machinery/organ_printer/New()
 	..()
@@ -80,7 +88,7 @@
 	if(printing || (stat & (BROKEN|NOPOWER)))
 		return
 
-	var/choice = input("What would you like to print?") as null|anything in products
+	var/choice = input("What would you like to print?") as null|anything in total_products
 
 	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
 		return
@@ -88,7 +96,7 @@
 	if(!can_print(choice))
 		return
 
-	stored_matter -= products[choice][2]
+	stored_matter -= total_products[choice][2]
 
 	use_power = 2
 	printing = 1
@@ -106,14 +114,14 @@
 	print_organ(choice)
 
 /obj/machinery/organ_printer/proc/can_print(var/choice)
-	if(stored_matter < products[choice][2])
-		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [products[choice][2]] needed.'</span>")
+	if(stored_matter < total_products[choice][2])
+		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [total_products[choice][2]] needed.'</span>")
 		return 0
 
 	return 1
 
 /obj/machinery/organ_printer/proc/print_organ(var/choice)
-	var/new_organ = products[choice][1]
+	var/new_organ = total_products[choice][1]
 	var/obj/item/organ/result = new new_organ(get_turf(src))
 	result.status |= ORGAN_CUT_AWAY
 
@@ -128,6 +136,10 @@
 
 	var/matter_amount_per_sheet = 10
 	var/matter_type = DEFAULT_WALL_MATERIAL
+
+/obj/machinery/organ_printer/robot/Initialize()
+	. = ..()
+	total_products -= limb_products
 
 /obj/machinery/organ_printer/robot/mapped/Initialize()
 	. = ..()
