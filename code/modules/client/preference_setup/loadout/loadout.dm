@@ -176,19 +176,24 @@ var/list/gear_datums = list()
 
 		/* Fetch gear by branch restrictions (NEW) */
 		if (G.allowed_branches)
+			var/allowed_branch = TRUE
+			
 			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
 			if (G.allowed_branches["branches"])
 				if ((branch in G.allowed_branches["branches"]) || ("ALL" in G.allowed_branches["branches"])) // Branch is allowed
 					display_role_list += "<font color=55cc55>[branch]</font>"
 				else // Branch is not allowed
 					display_role_list += "<font color=cc5555>[branch]</font>"
+					allowed_branch = FALSE
 
-			// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
-			if (G.allowed_branches["ranks"])
-				if ((rank in G.allowed_branches["ranks"]) || ("ALL" in G.allowed_branches["ranks"])) // Rank is allowed
-					display_role_list += "<font color=55cc55>[rank]</font>"
-				else // Rank is not allowed
-					display_role_list += "<font color=cc5555>[rank]</font>"
+			// Only check rank if branch is allowed
+			if (allowed_branch)
+				// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
+				if (G.allowed_branches["ranks"])
+					if ((rank in G.allowed_branches["ranks"]) || ("ALL" in G.allowed_branches["ranks"])) // Rank is allowed
+						display_role_list += "<font color=55cc55>[rank]</font>"
+					else // Rank is not allowed
+						display_role_list += "<font color=cc5555>[rank]</font>"
 
 		/* Fetch gear by job restrictions (OLD) */
 		if (G.allowed_roles)
