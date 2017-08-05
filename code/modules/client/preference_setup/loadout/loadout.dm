@@ -177,8 +177,8 @@ var/list/gear_datums = list()
 		/* Fetch gear by branch restrictions (NEW) */
 		if (G.allowed_branches)
 			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
-			if (G.allowed_branches["branch"])
-				if ((branch in G.allowed_branches["branch"]) || ("ALL" in G.allowed_branches["branch"])) // Branch is allowed
+			if (G.allowed_branches["branches"])
+				if ((branch in G.allowed_branches["branches"]) || ("ALL" in G.allowed_branches["branches"])) // Branch is allowed
 					display_role_list += "<font color=55cc55>[branch]</font>"
 				else // Branch is not allowed
 					display_role_list += "<font color=cc5555>[branch]</font>"
