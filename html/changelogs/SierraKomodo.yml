@@ -33,4 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: Loadout items can now be restricted by branch and rank
+  - rscadd: "Added berets that allow a custom color to be set to the loadout menu."
+  - bugfix: "fixed transparent pixels in white beret sprite."
