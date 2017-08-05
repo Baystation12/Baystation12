@@ -43,6 +43,7 @@
 	name = "riot suit"
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
+	valid_accessory_slots = list("insignia")
 	//item_state = "swat_suit"
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -71,6 +72,7 @@
 	desc = "A suit of armor with heavy plates to protect against ballistic projectiles. Looks like it might impair movement."
 	icon_state = "bulletproof"
 	//item_state = "swat_suit"
+	valid_accessory_slots = list("insignia")
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
@@ -98,6 +100,7 @@
 	desc = "A suit of armor with advanced shielding to protect against energy weapons. Looks like it might impair movement."
 	icon_state = "reflect"
 	//item_state = "swat_suit"
+	valid_accessory_slots = list("insignia")
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
@@ -149,6 +152,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	valid_accessory_slots = list("insignia")
 
 
 /obj/item/clothing/suit/armor/det_suit
@@ -292,11 +296,13 @@
 	icon_state = "kvest"
 	item_state = "armor"
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
+	valid_accessory_slots = list("insignia")
 
 /obj/item/clothing/suit/armor/vest/nt
 	name = "\improper NanoTrasen armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
 	icon_state = "ntvest"
+
 
 /obj/item/clothing/suit/armor/vest/solgov
 	name = "\improper Sol Central Government armored vest"
