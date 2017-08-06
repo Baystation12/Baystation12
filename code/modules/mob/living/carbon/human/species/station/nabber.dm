@@ -22,7 +22,7 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
-	body_temperature = T0C + 5
+	body_temperature = null
 
 	blood_color = "#525252"
 	flesh_color = "#525252"
