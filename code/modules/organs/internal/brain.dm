@@ -18,6 +18,7 @@
 	var/mob/living/carbon/brain/brainmob = null
 	var/const/damage_threshold_count = 10
 	var/damage_threshold_value
+	var/healed_threshold = 1
 
 /obj/item/organ/internal/brain/robotize()
 	replace_self_with(/obj/item/organ/internal/mmi_holder/posibrain)
@@ -134,6 +135,12 @@
 /obj/item/organ/internal/brain/process()
 
 	if(owner)
+		if(damage > max_damage / 2 && healed_threshold)
+			alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+			healed_threshold = 0
+
+		if(damage < (max_damage / 4))
+			healed_threshold = 1
 
 		if(owner.paralysis < 1) // Skip it if we're already down.
 

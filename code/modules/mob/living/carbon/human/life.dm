@@ -223,11 +223,11 @@
 		var/damage = 0
 		radiation -= 1 * RADIATION_SPEED_COEFFICIENT
 		if(prob(25))
-			damage = 1
+			damage = 2
 
 		if (radiation > 50)
-			damage = 1
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			damage = 2
+			radiation -= 2 * RADIATION_SPEED_COEFFICIENT
 			if(!isSynthetic())
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
@@ -244,7 +244,7 @@
 
 		if (radiation > 75)
 			damage = 3
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			radiation -= 3 * RADIATION_SPEED_COEFFICIENT
 			if(!isSynthetic())
 				if(prob(5))
 					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
@@ -254,7 +254,7 @@
 					emote("gasp")
 		if(radiation > 150)
 			damage = 8
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
 		if(damage)
 			damage *= isSynthetic() ? 0.5 : species.radiation_mod
