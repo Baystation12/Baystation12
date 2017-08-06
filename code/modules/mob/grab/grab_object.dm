@@ -165,8 +165,10 @@
 /obj/item/grab/proc/handle_resist()
 	current_grab.handle_resist(src)
 
-/obj/item/grab/proc/adjust_position()
-	if(!assailant.Adjacent(affecting))
+/obj/item/grab/proc/adjust_position(var/force = 0)
+	if(force)	affecting.forceMove(assailant.loc)
+
+	if(!assailant || !affecting || !assailant.Adjacent(affecting))
 		qdel(src)
 		return 0
 	else
@@ -174,7 +176,6 @@
 
 /obj/item/grab/proc/reset_position()
 	current_grab.reset_position(src)
-
 
 /*
 	This section is for the simple procs used to return things from current_grab.
