@@ -1,0 +1,4 @@
+author: Heptagon49
+delete-after: True
+changes:
+  - rscdel: "Removes ability for the prosthetic printer to print limbs."
