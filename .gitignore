@@ -19,3 +19,5 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
+
+*.npss
