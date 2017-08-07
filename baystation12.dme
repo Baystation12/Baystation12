@@ -29,6 +29,7 @@
 #include "code\__defines\colors.dm"
 #include "code\__defines\damage_organs.dm"
 #include "code\__defines\dna.dm"
+#include "code\__defines\feedback.dm"
 #include "code\__defines\flags.dm"
 #include "code\__defines\gamemode.dm"
 #include "code\__defines\inventory_sizes.dm"
