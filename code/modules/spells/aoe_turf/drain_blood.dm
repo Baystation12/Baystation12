@@ -37,7 +37,7 @@
 			if(istype(user, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = user
 				var/amount = min(10, H.species.blood_volume - H.vessel.total_volume)
-				if(amount)
+				if(amount > 0)
 					H.vessel.add_reagent("blood", amount)
 					continue
 			L.adjustBruteLoss(-5)

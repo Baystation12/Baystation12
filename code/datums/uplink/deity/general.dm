@@ -24,3 +24,27 @@
 	desc = "An essential ability that allows a follower to build an altar where ever they want."
 	item_cost = 10
 	path = /spell/aoe_turf/build_shrine
+
+/datum/uplink_item/deity/feat/innate_minimum
+	name = "Increase Potential"
+	desc = "Increase the amount of natural power you regenerate."
+	item_cost = 30
+	can_buy_multiples = 1
+
+/datum/uplink_item/deity/feat/innate_minimum/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
+	. = ..()
+	if(.)
+		user.power_min += 5
+
+/datum/uplink_item/deity/feat/power_regeneration
+	name = DEITY_POWER_BONUS
+	desc = "Increase the amount of power you get from newly built structures and cultists."
+	item_cost = 50
+	can_buy_multiples = 1
+
+/datum/uplink_item/deity/feat/power_regeneration/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
+	. = ..()
+	if(.)
+		if(!user.feats[DEITY_POWER_BONUS])
+			user.feats[DEITY_POWER_BONUS] = 0
+		user.feats[DEITY_POWER_BONUS] += 0.5
