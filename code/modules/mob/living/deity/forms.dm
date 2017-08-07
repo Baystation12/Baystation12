@@ -10,7 +10,6 @@ Each plays slightly different and has different challenges/benefits
 	var/god_icon_state = "nar-sie" //What you look like
 	var/pylon_icon_state //What image shows up when appearing in a pylon
 	var/mob/living/deity/linked_god = null
-	var/floor_decl = /decl/flooring/reinforced/cult
 	var/list/buildables = list() //Both a list of var changes and a list of buildables.
 	var/list/icon_states = list()
 	var/list/starting_feats //This is used to give different forms different starting trees
@@ -58,8 +57,7 @@ Each plays slightly different and has different challenges/benefits
 	buildables = list(/obj/structure/deity/altar = list("name" = "altar",
 														"desc" = "A small desk, covered in blood.",
 														"icon_state" = "talismanaltar"),
-					/obj/structure/deity/pylon,
-					/turf/simulated/floor/deity = list("name" = "disturbing smooth surface")
+					/obj/structure/deity/pylon
 					)
 
 	starting_feats = list(DEITY_FORM_DARK_ART, DEITY_FORM_BLOOD_SAC, DEITY_FORM_DARK_MINION, DEITY_FORM_BLOOD_FORGE)
@@ -90,7 +88,6 @@ Each plays slightly different and has different challenges/benefits
 
 	buildables = list(/obj/structure/deity/altar = list("icon_state" = "tomealtar"),
 					/obj/structure/deity/pylon,
-					/turf/simulated/floor/deity,
 					/obj/structure/deity/wizard_recharger
 					)
 	starting_feats = list(DEITY_TREE_TRANSMUTATION, DEITY_TREE_CONJURATION)
