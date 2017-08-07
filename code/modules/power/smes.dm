@@ -68,6 +68,7 @@
 		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
 
 /obj/machinery/power/smes/Initialize()
+	. = ..()
 	for(var/d in GLOB.cardinal)
 		var/turf/T = get_step(src, d)
 		for(var/obj/machinery/power/terminal/term in T)
@@ -89,6 +90,7 @@
 
 /obj/machinery/power/smes/disconnect_terminal(var/obj/machinery/power/terminal/term)
 	terminals -= term
+	term.master = null
 
 /obj/machinery/power/smes/update_icon()
 	overlays.Cut()
