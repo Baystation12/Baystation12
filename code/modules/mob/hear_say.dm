@@ -219,6 +219,9 @@
 	if(!client)
 		return
 
+	if(sleeping || stat==1)
+		return 0
+
 	if(say_understands(speaker, language))
 		message = "<B>[speaker]</B> [verb], \"[message]\""
 	else
