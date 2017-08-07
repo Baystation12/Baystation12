@@ -1,5 +1,0 @@
-author: Atlantiscze
-delete-after: True
-
-changes: 
-  - rscadd: "Added new program to the modular computer framework: NTNet Access Decrypter. This program is available for download on all emagged devices, but relies on ID card slot hardware. When executed it slowly (takes about 3-6 minutes, depending on the device's CPU) hacks the network and when finished adds a random access to the ID. ID must be kept inside the device while running. Can be repeatedly used to get multiple accesses. Has chance of yielding access that's already present on the ID, and therefore will do nothing wasting some time."
