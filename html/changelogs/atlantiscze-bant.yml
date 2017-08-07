@@ -1,0 +1,6 @@
+author: Atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added ability to ban devices from the NTNet network, through the administrative utility program."

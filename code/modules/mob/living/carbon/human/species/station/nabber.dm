@@ -22,7 +22,7 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
-	body_temperature = T0C + 5
+	body_temperature = null
 
 	blood_color = "#525252"
 	flesh_color = "#525252"
@@ -49,6 +49,10 @@
 	breath_pressure = 25
 	blood_volume = 840
 	spawns_with_stack = 0
+
+	heat_level_1 = 410 //Default 360 - Higher is better
+	heat_level_2 = 440 //Default 400
+	heat_level_3 = 600 //Default 1000
 
 	flags = NO_SLIP | CAN_NAB | NO_BLOCK
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
@@ -109,8 +113,6 @@
 			var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
 			I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
 			eye_overlay = image(I)
-		eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		eye_overlay.layer = EYE_GLOW_LAYER
 		eye_overlays["[O.eyes_shielded] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"] = eye_overlay
 	return(eye_overlay)
 

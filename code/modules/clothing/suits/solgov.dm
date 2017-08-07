@@ -11,8 +11,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/analyzer,/obj/item/device/radio,/obj/item/taperoll)
-	valid_accessory_slots = list("armband","medal","insignia","rank")
-	restricted_accessory_slots = list("armband")
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/service/expeditionary
 	name = "expeditionary jacket"
@@ -134,7 +134,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/device/radio,/obj/item/weapon/pen)
-	valid_accessory_slots = list("medal","rank")
+	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/dress/expedition
 	name = "expeditionary dress jacket"
@@ -156,7 +156,7 @@
 	icon_open = "whitedress_open"
 	icon_closed = "whitedress"
 	blood_overlay_type = "coat"
-	valid_accessory_slots = list("medal","rank")
+	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet
 	name = "fleet dress jacket"
@@ -193,4 +193,4 @@
 	icon_open = "marshal_jacket_open"
 	icon_closed = "marshal_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
-	valid_accessory_slots = list("insignia")
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)

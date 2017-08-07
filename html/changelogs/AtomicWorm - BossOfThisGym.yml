@@ -1,0 +1,7 @@
+author: Broseph Stylin
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added weight lifting machines and punching bags. They provide no mechanical benefits, and will deplete your nutrition as they're used. The weight machine has 3 setting which can be changed with a wrench. You must be on harm intent to use the punching bags."
+  - maptweak: "Remapped the Deck 3 abandoned office, near EVA Storage, into a gym."
