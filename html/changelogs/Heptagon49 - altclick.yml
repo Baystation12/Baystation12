@@ -1,7 +1,0 @@
-author: Heptagon49
-delete-after: True
-changes:
-  - rscadd: "Adds the ability to toggle locks on secure lockers and crates with alt-click."
-  - rscadd: "Adds the ability to open and close fire extinguisher cabinets with alt-click."
-  - rscadd: "Adds the ability to rotate chairs with alt-click."
-  - rscadd: "Adds the ability to change reagent amount tranfer with alt-click."
