@@ -18,6 +18,8 @@
 		follow_follower(choice)
 
 /mob/living/deity/proc/follow_follower(var/mob/living/L)
+	if(!L || L.stat == DEAD || !is_follower(L, silent=1))
+		return
 	if(following)
 		stop_follow()
 	eyeobj.setLoc(get_turf(L))
@@ -25,15 +27,14 @@
 	following = L
 	GLOB.moved_event.register(L, src, /mob/living/deity/proc/keep_following)
 	GLOB.destroyed_event.register(L, src, /mob/living/deity/proc/stop_follow)
+	GLOB.death_event.register(L, src, /mob/living/deity/proc/stop_follow)
 
 /mob/living/deity/proc/stop_follow()
 	GLOB.moved_event.unregister(following, src)
 	GLOB.destroyed_event.unregister(following, src)
+	GLOB.death_event.unregister(following,src)
 	to_chat(src, "<span class='notice'>You stop following \the [following].</span>")
 	following = null
 
 /mob/living/deity/proc/keep_following(var/atom/movable/moving_instance, var/atom/old_loc, var/atom/new_loc)
-	if(following.stat == DEAD)
-		stop_follow()
-		return
 	eyeobj.setLoc(new_loc)
