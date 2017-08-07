@@ -14,8 +14,14 @@
 
 	break_chance_table = list(3, 10, 20, 100)
 
-/datum/grab/nab/kill/process(var/obj/item/grab/G)
+/datum/grab/nab/kill/upgrade_effect(var/obj/item/grab/G)
+	process_effect(G)
+
+/datum/grab/nab/kill/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/assailant = G.assailant
+	var/mob/living/carbon/human/affecting = G.affecting
+
+	affecting.Stun(3)
 
 	switch(assailant.a_intent)
 		if(I_GRAB)

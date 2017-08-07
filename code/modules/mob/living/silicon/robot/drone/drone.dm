@@ -38,7 +38,7 @@ var/list/mob_hat_cache = list()
 	local_transmit = 1
 	possession_candidate = 1
 
-	can_pull_size = ITEM_SIZE_NORMAL
+	can_pull_size = ITEM_SIZE_NO_CONTAINER
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	mob_bump_flag = SIMPLE_ANIMAL
@@ -137,7 +137,7 @@ var/list/mob_hat_cache = list()
 		C.max_damage = 10
 
 	verbs -= /mob/living/silicon/robot/verb/Namepick
-	updateicon()
+	update_icon()
 
 /mob/living/silicon/robot/drone/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
@@ -157,7 +157,7 @@ var/list/mob_hat_cache = list()
 	real_name = "maintenance drone ([random_id(type,100,999)])"
 	name = real_name
 
-/mob/living/silicon/robot/drone/updateicon()
+/mob/living/silicon/robot/drone/update_icon()
 
 	overlays.Cut()
 	if(stat == 0)
@@ -178,7 +178,7 @@ var/list/mob_hat_cache = list()
 		return
 	hat = new_hat
 	new_hat.forceMove(src)
-	updateicon()
+	update_icon()
 
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
 /mob/living/silicon/robot/drone/attackby(var/obj/item/weapon/W, var/mob/user)

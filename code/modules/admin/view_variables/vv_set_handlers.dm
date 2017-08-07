@@ -80,7 +80,7 @@
 
 /decl/vv_set_handler/virtual_ability_handler/handle_set_var(var/mob/observer/virtual/virtual, variable, var_value, client)
 	..()
-	virtual.updateicon()
+	virtual.update_icon()
 
 /decl/vv_set_handler/mob_see_invisible_handler
 	handled_type = /mob

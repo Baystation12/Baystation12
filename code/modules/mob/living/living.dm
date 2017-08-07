@@ -49,7 +49,8 @@ default behaviour is:
 			return 1
 		if(mob_bump_flag & context_flags)
 			return 1
-		return 0
+		else
+			return ((a_intent == I_HELP && swapped.a_intent == I_HELP) && swapped.can_move_mob(src, swapping, 1))
 
 /mob/living/canface()
 	if(stat)
@@ -117,6 +118,12 @@ default behaviour is:
 				return
 
 			tmob.LAssailant = src
+		if(isobj(AM))
+			var/obj/I = AM
+			if(!can_pull_size || can_pull_size < I.w_class)
+				to_chat(src, "<span class='warning'>It won't budge!</span>")
+				now_pushing = 0
+				return
 
 		now_pushing = 0
 		spawn(0)

@@ -8,14 +8,9 @@
 	icon_opened = "crateopen"
 	icon_closed = "crate"
 	flags = OBJ_CLIMBABLE
+	setup = 0
 	var/points_per_crate = 5
 	var/rigged = 0
-
-/obj/structure/closet/crate/can_open()
-	return 1
-
-/obj/structure/closet/crate/can_close()
-	return 1
 
 /obj/structure/closet/crate/open()
 	if(flags & OBJ_CLIMBABLE && !opened && can_open())
@@ -65,22 +60,8 @@
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			rigged = 0
 			return
-	else return attack_hand(user)
-
-/obj/structure/closet/crate/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			for(var/obj/O in src.contents)
-				qdel(O)
-			qdel(src)
-		if(2.0)
-			for(var/obj/O in src.contents)
-				if(prob(50))
-					qdel(O)
-			qdel(src)
-		if(3.0)
-			if (prob(50))
-				qdel(src)
+	else
+		return attack_hand(user)
 
 /obj/structure/closet/crate/secure
 	desc = "A secure crate."
@@ -92,113 +73,21 @@
 	var/greenlight = "securecrateg"
 	var/sparks = "securecratesparks"
 	var/emag = "securecrateemag"
-	var/broken = 0
-	var/locked = 1
 
-/obj/structure/closet/crate/secure/New()
+	setup = CLOSET_HAS_LOCK
+
+/obj/structure/closet/crate/secure/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/structure/closet/crate/secure/update_icon()
 	..()
-	if(locked)
-		overlays.Cut()
+	if(broken)
 		overlays += redlight
-	else
-		overlays.Cut()
-		overlays += greenlight
-
-/obj/structure/closet/crate/secure/can_open()
-	return !locked
-
-/obj/structure/closet/crate/secure/proc/togglelock(mob/user as mob)
-	if(!Adjacent(user))
-		return
-	if(src.opened)
-		to_chat(user, "<span class='notice'>Close the crate first.</span>")
-		return
-	if(src.broken)
-		to_chat(user, "<span class='warning'>The crate appears to be broken.</span>")
-		return
-	if(src.allowed(user))
-		set_locked(!locked, user)
-	else
-		to_chat(user, "<span class='notice'>Access Denied</span>")
-
-/obj/structure/closet/crate/secure/AltClick(mob/user as mob)
-	togglelock(user)
-
-/obj/structure/closet/crate/secure/proc/set_locked(var/newlocked, mob/user = null)
-	if(locked == newlocked) return
-
-	locked = newlocked
-	if(user)
-		for(var/mob/O in viewers(user, 3))
-			O.show_message( "<span class='notice'>The crate has been [locked ? null : "un"]locked by [user].</span>", 1)
-	overlays.Cut()
-	overlays += locked ? redlight : greenlight
-
-/obj/structure/closet/crate/secure/verb/verb_togglelock()
-	set src in oview(1) // One square distance
-	set category = "Object"
-	set name = "Toggle Lock"
-
-	if(!usr.canmove || usr.stat || usr.restrained()) // Don't use it if you're not able to! Checks for stuns, ghost and restrain
-		return
-
-	if(ishuman(usr))
-		src.add_fingerprint(usr)
-		src.togglelock(usr)
-	else
-		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
-
-/obj/structure/closet/crate/secure/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
-	if(locked)
-		src.togglelock(user)
-	else
-		src.toggle(user)
-
-/obj/structure/closet/crate/secure/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(is_type_in_list(W, list(/obj/item/weapon/packageWrap, /obj/item/stack/cable_coil, /obj/item/device/radio/electropack, /obj/item/weapon/wirecutters)))
-		return ..()
-	if(istype(W, /obj/item/weapon/melee/energy/blade))
-		emag_act(INFINITY, user)
-	if(!opened)
-		src.togglelock(user)
-		return
-	return ..()
-
-/obj/structure/closet/crate/secure/emag_act(var/remaining_charges, var/mob/user)
-	if(!broken)
-		overlays.Cut()
+	else if(locked)
 		overlays += emag
-		overlays += sparks
-		spawn(6) overlays -= sparks //Tried lots of stuff but nothing works right. so i have to use this *sadface*
-		playsound(src.loc, "sparks", 60, 1)
-		src.locked = 0
-		src.broken = 1
-		to_chat(user, "<span class='notice'>You unlock \the [src].</span>")
-		return 1
-
-/obj/structure/closet/crate/secure/emp_act(severity)
-	for(var/obj/O in src)
-		O.emp_act(severity)
-	if(!broken && !opened  && prob(50/severity))
-		if(!locked)
-			src.locked = 1
-			overlays.Cut()
-			overlays += redlight
-		else
-			overlays.Cut()
-			overlays += emag
-			overlays += sparks
-			spawn(6) overlays -= sparks //Tried lots of stuff but nothing works right. so i have to use this *sadface*
-			playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-			src.locked = 0
-	if(!opened && prob(20/severity))
-		if(!locked)
-			open()
-		else
-			src.req_access = list()
-			src.req_access += pick(get_all_station_access())
-	..()
+	else
+		overlays += greenlight
 
 /obj/structure/closet/crate/plastic
 	name = "plastic crate"

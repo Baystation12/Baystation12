@@ -112,8 +112,9 @@ SUBSYSTEM_DEF(garbage)
 
 			// Something's still referring to the qdel'd object.  Kill it.
 			var/type = A.type
-			log_debug("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
-			didntgc["[type]"]++
+			if(!didntgc[type])
+				log_debug("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
+			didntgc[type]++
 
 			HardDelete(A)
 

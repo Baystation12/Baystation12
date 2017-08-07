@@ -1,0 +1,8 @@
+author: Atlantiscze
+delete-after: True
+
+changes: 
+  - rscadd: "Security cyborgs now get access to warrant program"
+  - rscadd: "Engineering cyborgs now get access to supermatter monitor program"
+  - rscadd: "Mining cyborgs now get access to supply management program"
+  - tweak: "Holowarrant now checks for access when authorising, similar to how the program does it."

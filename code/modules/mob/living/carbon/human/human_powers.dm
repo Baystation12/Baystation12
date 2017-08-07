@@ -305,6 +305,7 @@
 
 	if(do_after(src, 30))
 		pulling_punches = !pulling_punches
+		nabbing = !pulling_punches
 
 		if(pulling_punches)
 			current_grab_type = all_grabobjects[GRAB_NORMAL]

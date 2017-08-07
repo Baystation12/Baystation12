@@ -653,10 +653,6 @@
 	name = "\improper Requisitions Office"
 	icon_state = "quart"
 
-/area/vacant/briefing
-	name = "\improper Briefing Room"
-	icon_state = "conference"
-
 /area/vacant/mess
 	name = "\improper Officer's Mess"
 	icon_state = "bar"
@@ -789,6 +785,10 @@
 
 /area/crew_quarters/head/aux
 	name = "\improper Auxiliary Head"
+
+/area/crew_quarters/gym
+	name = "\improper Gym"
+	icon_state = "fitness"
 
 /area/crew_quarters/mess
 	name = "\improper Mess Hall"

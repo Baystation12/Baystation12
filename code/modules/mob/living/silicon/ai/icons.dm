@@ -1,28 +1,34 @@
-var/datum/ai_icon/default_ai_icon = new/datum/ai_icon/blue()
-var/list/datum/ai_icon/ai_icons
-
 /datum/ai_icon
 	var/name
+	var/icon = 'icons/mob/AI.dmi'
 	var/alive_icon
-	var/alive_light = "#FFFFFF"
+	var/alive_light = COLOR_WHITE
 	var/nopower_icon = "4"
-	var/nopower_light = "#FFFFFF"
+	var/nopower_light = COLOR_WHITE
 	var/dead_icon = "ai-crash"
 	var/dead_light = "#000099"
 
-/datum/ai_icon/New(var/name, var/alive_icon, var/nopower_icon, var/dead_icon, var/alive_light, var/nopower_light, var/dead_light)
-	if(name)
-		src.name = name
-		src.alive_icon = alive_icon
-		src.nopower_icon = nopower_icon
-		src.dead_icon = dead_icon
-		src.alive_light = alive_light
-		src.nopower_light = nopower_light
-		src.dead_light = dead_light
-	if(!ai_icons)
-		ai_icons = list()
-		init_subtypes(/datum/ai_icon, ai_icons)
+/datum/ai_icon/New(var/name, var/alive_icon, var/dead_icon, var/dead_light, var/icon)
+	src.name          = name       || src.name
+	src.icon          = icon       || src.icon
+	src.alive_icon    = alive_icon || src.alive_icon
+	src.dead_icon     = dead_icon  || src.dead_icon
+	src.dead_light    = dead_light || src.dead_light
+
+/datum/ai_icon/proc/may_used_by_ai(var/mob/user)
+	return TRUE
+
+/datum/ai_icon/malf
+	name = "Unlawed"
+	alive_icon = "ai-malf"
+	alive_light = "#45644b"
+
+/datum/ai_icon/malf/New()
 	..()
+	name = "[name] (Malf)"
+
+/datum/ai_icon/malf/may_used_by_ai(var/mob/living/silicon/ai/AI)
+	return istype(AI) && AI.is_malf_or_traitor()
 
 /datum/ai_icon/red
 	name = "Red"
@@ -158,3 +164,8 @@ var/list/datum/ai_icon/ai_icons
 	name = "Dancing Hotdog"
 	alive_icon = "ai-hotdog"
 	alive_light = "#81DDFF"
+
+/datum/ai_icon/malf/clown
+	name = "Clown"
+	alive_icon = "ai-clown2"
+	alive_light = "#E50213"

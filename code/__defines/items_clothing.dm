@@ -22,6 +22,13 @@
 #define SLOT_TIE        0x4000
 #define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
 
+#define ACCESSORY_SLOT_UTILITY  "Utility"
+#define ACCESSORY_SLOT_ARMBAND  "Armband"
+#define ACCESSORY_SLOT_RANK     "Rank"
+#define ACCESSORY_SLOT_DECOR    "Decor"
+#define ACCESSORY_SLOT_MEDAL    "Medal"
+#define ACCESSORY_SLOT_INSIGNIA "Insignia"
+
 // Flags bitmasks.
 #define NOBLUDGEON         0x1   // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
 #define CONDUCT            0x2   // Conducts electricity. (metal etc.)
