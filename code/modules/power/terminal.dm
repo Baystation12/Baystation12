@@ -22,7 +22,7 @@
 
 /obj/machinery/power/terminal/Destroy()
 	if(master)
-		master.disconnect_terminal()
+		master.disconnect_terminal(src)
 		master = null
 	return ..()
 

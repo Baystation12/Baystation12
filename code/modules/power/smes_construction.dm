@@ -86,6 +86,9 @@
 /obj/machinery/power/smes/buildable/Destroy()
 	qdel(wires)
 	wires = null
+	for(var/obj/machinery/power/terminal/T in terminals)
+		T.master = null
+	terminals = null
 	for(var/datum/nano_module/rcon/R in world)
 		R.FindDevices()
 	return ..()
@@ -345,7 +348,7 @@
 
 		// Crowbar - Disassemble the SMES.
 		if(istype(W, /obj/item/weapon/crowbar))
-			if (terminal)
+			if (terminals.len)
 				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
 				return
 

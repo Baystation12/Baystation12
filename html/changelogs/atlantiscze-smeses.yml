@@ -1,0 +1,6 @@
+author: Atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "SMES and PSU units can now have more than one input terminal at once."
