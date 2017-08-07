@@ -12,7 +12,8 @@
 	icon_broken = "secbroken"
 	icon_off = "secoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/security_torch/WillContain()
+	return list(
 		/obj/item/clothing/suit/storage/vest/solgov/security,
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/weapon/cartridge/security,
@@ -47,7 +48,8 @@
 	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/cos/WillContain()
+	return list(
 		/obj/item/clothing/suit/storage/vest/solgov/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/clothing/head/HoS/dermal,
@@ -85,7 +87,8 @@
 	icon_broken = "wardensecurebroken"
 	icon_off = "wardensecureoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/brigofficer/WillContain()
+	return list(
 		/obj/item/clothing/suit/storage/vest/solgov/security,
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/weapon/cartridge/hos,
@@ -122,7 +125,8 @@
 	icon_broken = "secbroken"
 	icon_off = "secoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/forensics/WillContain()
+	return list(
 		/obj/item/clothing/gloves/forensic,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/vest/detective,

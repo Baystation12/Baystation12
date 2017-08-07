@@ -31,18 +31,20 @@
 	var/opened = FALSE
 	var/locked = FALSE
 
-	var/list/will_contain
-
 /obj/structure/closet/Initialize()
 	. = ..()
+
+	var/list/will_contain = WillContain()
 	if(will_contain)
 		create_objects_in_loc(src, will_contain)
-		will_contain = null // Remove reference to allow for garbage collection
 
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		for(var/atom/movable/AM in src.loc)
 			if(AM.density || AM.anchored || !AM.simulated || AM == src) continue
 			AM.forceMove(src)
+
+/obj/structure/closet/proc/WillContain()
+	return null
 
 	if((setup & CLOSET_HAS_LOCK))
 		verbs += /obj/structure/closet/proc/togglelock
@@ -441,40 +443,42 @@
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
 	return
 
-/obj/structure/closet/proc/togglelock(var/mob/user)
+/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
 	set src in oview(1) // One square distance
 	set category = "Object"
 	set name = "Toggle Lock"
 
 	if(!(setup & CLOSET_HAS_LOCK))
-		return
+		return FALSE
 	if(src.opened)
 		to_chat(user, "<span class='notice'>Close \the [src] first.</span>")
-		return
+		return FALSE
 	if(src.broken)
 		to_chat(user, "<span class='warning'>\The [src] appears to be broken.</span>")
-		return
+		return FALSE
 	if(user.loc == src)
 		to_chat(user, "<span class='notice'>You can't reach the lock from inside.</span>")
-		return
+		return FALSE
 	if(!CanPhysicallyInteract(user))
-		return
+		return FALSE
 
 	add_fingerprint(user)
 
 	if(!user.IsAdvancedToolUser())
-		to_chat(usr, FEEDBACK_YOU_LACK_DEXTERITY)
-		return
+		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
+		return FALSE
 
-	if(CanToggleLock(user))
+	if(CanToggleLock(user, id_card))
 		locked = !locked
 		visible_message("<span class='notice'>\The [src] has been [locked ? null : "un"]locked by \the [user].</span>", range = 3)
 		update_icon()
+		return TRUE
 	else
 		to_chat(user, "<span class='warning'>Access Denied</span>")
+		return FALSE
 
-/obj/structure/closet/proc/CanToggleLock(var/mob/user)
-	return allowed(user)
+/obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(var/mob/user)
 	togglelock(user)

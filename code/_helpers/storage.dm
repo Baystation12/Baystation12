@@ -41,7 +41,6 @@
 	var/probability // prob is a reserved keyword and won't compile
 
 /datum/atom_creator/simple/New(var/path, var/probability)
-	..()
 	if(!isnum(probability) || probability < 1 || probability > 99)
 		CRASH("The given probability must be between 1 and 99") // A probability of 0 or 100 is pretty meaningless.
 #ifdef UNIT_TEST // Force 100% probability during unit testing - needed for container overflow tests
@@ -59,7 +58,6 @@
 	var/list/paths
 
 /datum/atom_creator/weighted/New(var/paths)
-	..()
 	src.paths = paths
 
 /datum/atom_creator/weighted/create(var/loc)

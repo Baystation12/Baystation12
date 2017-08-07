@@ -12,7 +12,8 @@
 	icon_broken = "cmosecurebroken"
 	icon_off = "cmosecureoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/CMO_torch/WillContain()
+	return list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/white,
@@ -60,7 +61,8 @@
 	icon_broken = "securesenmedbroken"
 	icon_off = "securesenmedoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
+	return list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/surgicalapron,
@@ -98,7 +100,8 @@
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/medical_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -128,7 +131,8 @@
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/medical_contractor/WillContain()
+	return list(
 		/obj/item/clothing/under/rank/orderly,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -148,7 +152,8 @@
 	icon_state = "white"
 	icon_closed = "white"
 
-	will_contain = list(
+/obj/structure/closet/wardrobe/medic_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/sterile = 2,
 		/obj/item/clothing/under/rank/medical/blue,
 		/obj/item/clothing/under/rank/medical/green,
