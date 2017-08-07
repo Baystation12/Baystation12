@@ -400,12 +400,9 @@
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-		if(!do_after(escapee, 50, src)) //5 seconds
+		if(!do_after(escapee, 50, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
 			return
-		if(!escapee || escapee.incapacitated() || escapee.loc != src)
-			breakout = 0
-			return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
 		if(!req_breakout())
 			breakout = 0
