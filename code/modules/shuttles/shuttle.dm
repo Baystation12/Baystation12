@@ -134,6 +134,7 @@
 					bug.gib()
 				else
 					qdel(AM) //it just gets atomized I guess? TODO throw it into space somewhere, prevents people from using shuttles as an atom-smasher
+	var/list/powernets = list()
 	for(var/area/A in shuttle_area)
 		// if there was a zlevel above our origin, erase our ceiling now we're leaving
 		if(HasAbove(current_location.z))
@@ -155,6 +156,9 @@
 				if(!M.buckled)
 					M.Weaken(3)
 
+		for(var/obj/structure/cable/C in A)
+			powernets |= C.powernet
+
 	translate_turfs(turf_translation, current_location.base_area, current_location.base_turf)
 	current_location = destination
 
@@ -166,20 +170,16 @@
 				if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
 					TA.ChangeTurf(ceiling_type, 1, 1)
 
-	//TODO replace these with locate() in destination
-	// Power-related checks. If shuttle contains power related machinery, update powernets.
-	var/update_power = 0
-	for(var/obj/machinery/power/P in destination)
-		update_power = 1
-		break
-
-	for(var/obj/structure/cable/C in destination)
-		update_power = 1
-		break
-
-	if(update_power)
-		makepowernets()
-	return
+	// Remove all powernets that were affected, and rebuild them.
+	var/list/cables = list()
+	for(var/datum/powernet/P in powernets)
+		cables |= P.cables
+		qdel(P)
+	for(var/obj/structure/cable/C in cables)
+		if(!C.powernet)
+			var/datum/powernet/NewPN = new()
+			NewPN.add_cable(C)
+			propagate_network(C,C.powernet)
 
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
