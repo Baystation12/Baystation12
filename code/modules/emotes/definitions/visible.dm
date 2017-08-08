@@ -246,3 +246,7 @@
 		if(isnum(t1) && t1 <= 5)
 			return "USER raises [t1] finger\s."
 	return .. ()
+
+/decl/emote/visible/dab
+	key = "dab"
+	emote_message_3p = "USER ducks USER_THEIR head and dabs."
