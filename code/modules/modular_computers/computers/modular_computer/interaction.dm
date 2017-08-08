@@ -166,7 +166,7 @@
 		update_uis()
 		to_chat(user, "You insert \the [I] into \the [src].")
 		return
-	if(istype(W, /obj/item/weapon/paper))
+	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
 		if(!nano_printer)
 			return
 		nano_printer.attackby(W, user)
