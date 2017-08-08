@@ -37,8 +37,7 @@
 	IOCapacity = 1.25 MEGAWATTS
 
 
-// SMES SUBTYPES - THESE ARE MAPPED IN AND CONTAIN DIFFERENT TYPES OF COILS
-
+// DEPRECATED
 // These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
 // 1M Charge, 150K I/O
 /obj/machinery/power/smes/buildable/outpost_substation/New()
@@ -124,14 +123,14 @@
 // Proc: New()
 // Parameters: None
 // Description: Adds standard components for this SMES, and forces recalculation of properties.
-/obj/machinery/power/smes/buildable/New(var/install_coils = 1)
+/obj/machinery/power/smes/buildable/New()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,30)
 	component_parts += new /obj/item/weapon/circuitboard/smes(src)
 	src.wires = new /datum/wires/smes(src)
 
 	// Allows for mapped-in SMESs with larger capacity/IO
-	if(install_coils)
+	if(cur_coils)
 		for(var/i = 1, i <= cur_coils, i++)
 			component_parts += new /obj/item/weapon/smes_coil(src)
 		recalc_coils()
@@ -149,18 +148,16 @@
 // Parameters: None
 // Description: Updates properties (IO, capacity, etc.) of this SMES by checking internal components.
 /obj/machinery/power/smes/buildable/proc/recalc_coils()
-	if ((cur_coils <= max_coils) && (cur_coils >= 1))
-		capacity = 0
-		input_level_max = 0
-		output_level_max = 0
-		for(var/obj/item/weapon/smes_coil/C in component_parts)
-			capacity += C.ChargeCapacity
-			input_level_max += C.IOCapacity
-			output_level_max += C.IOCapacity
-		charge = between(0, charge, capacity)
-		return 1
-	else
-		return 0
+	cur_coils = 0
+	capacity = 0
+	input_level_max = 0
+	output_level_max = 0
+	for(var/obj/item/weapon/smes_coil/C in component_parts)
+		cur_coils++
+		capacity += C.ChargeCapacity
+		input_level_max += C.IOCapacity
+		output_level_max += C.IOCapacity
+	charge = between(0, charge, capacity)
 
 // Proc: total_system_failure()
 // Parameters: 2 (intensity - how strong the failure is, user - person which caused the failure)
@@ -354,7 +351,7 @@
 
 			playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 			to_chat(user, "<span class='warning'>You begin to disassemble the [src]!</span>")
-			if (do_after(usr, 100 * cur_coils, src)) // More coils = takes longer to disassemble. It's complex so largest one with 5 coils will take 50s
+			if (do_after(usr, 50 * cur_coils, src)) // More coils = takes longer to disassemble. It's complex so largest one with 6 coils will take 30s
 
 				if (failure_probability && prob(failure_probability))
 					total_system_failure(failure_probability, user)
@@ -380,9 +377,8 @@
 
 				to_chat(usr, "You install the coil into the SMES unit!")
 				user.drop_item()
-				cur_coils ++
 				component_parts += W
-				W.loc = src
+				W.forceMove(src)
 				recalc_coils()
 			else
 				to_chat(usr, "<span class='warning'>You can't insert more coils to this SMES unit!</span>")

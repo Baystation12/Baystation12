@@ -1945,6 +1945,7 @@
 #include "code\modules\power\powernet.dm"
 #include "code\modules\power\smes.dm"
 #include "code\modules\power\smes_construction.dm"
+#include "code\modules\power\smes_presets.dm"
 #include "code\modules\power\solar.dm"
 #include "code\modules\power\terminal.dm"
 #include "code\modules\power\tracker.dm"
