@@ -249,4 +249,4 @@
 
 /decl/emote/visible/dab
 	key = "dab"
-	emote_message_3p = "USER ducks their head and dabs."
+	emote_message_3p = "USER ducks USER_THEIR head and dabs."
