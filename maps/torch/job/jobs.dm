@@ -10,7 +10,7 @@
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
-						/datum/job/chemist, /datum/job/psychiatrist,
+						/datum/job/first_responder, /datum/job/chemist, /datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
@@ -650,6 +650,22 @@
 	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew)
 	minimal_access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew)
 
+/datum/job/first_responder
+	title = "First Responder"
+	department = "Medical"
+	department_flag = MED
+	faction = "Station"
+	total_positions = 2
+	spawn_positions = 1
+	supervisors = "the Chief Medical Officer and Medical Personnel"
+	selection_color = "#013d3b"
+	ideal_character_age = 25
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/first_responder
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+
+	access = list(access_medical, access_medical_equip, access_eva, access_maint_tunnels, access_emergency_storage, access_solgov_crew, access_external_airlocks)
+	minimal_access = list(access_medical, access_medical_equip, access_eva, access_maint_tunnels, access_emergency_storage, access_solgov_crew, access_external_airlocks)
 
 /datum/job/chemist
 	title = "Chemist"
