@@ -4,6 +4,7 @@
 	icon_state = "m_utility"
 	item_state = "bl_suit"
 	worn_state = "m_utility"
+	icon_override = 'icons/mob/mirania.dmi'
 
 /obj/item/clothing/under/utility/mirania/intelligence
 	name = "intelligence service utility uniform"
@@ -17,6 +18,7 @@
 	icon_state = "m_service"
 	worn_state = "m_service"
 	starting_accessories = list(/obj/item/clothing/accessory/navy)
+	icon_override = 'icons/mob/mirania.dmi'
 
 /obj/item/clothing/under/service/mirania/intelligence
 	name = "intelligence service uniform"
@@ -31,6 +33,7 @@
 	icon_state = "m_dress"
 	worn_state = "m_dress"
 	starting_accessories = list(/obj/item/clothing/accessory/black)
+	icon_override = 'icons/mob/mirania.dmi'
 
 /obj/item/clothing/under/mildress/mirania/intelligence
 	name = "intelligence service dress uniform"
