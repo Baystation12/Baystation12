@@ -41,14 +41,7 @@
 		/obj/item/weapon/storage/box/armband/med,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
-		new /datum/atom_creator/weighted(list(
-				list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
-				list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
-				list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
-				list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
-				list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
-			)
-		)
+		RANDOM_SCRUBS
 	)
 
 /obj/structure/closet/secure_closet/medical_torchsenior

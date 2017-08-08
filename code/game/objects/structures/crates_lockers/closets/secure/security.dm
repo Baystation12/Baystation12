@@ -11,7 +11,7 @@
 /obj/structure/closet/secure_closet/captains/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel_cap)),
-		new/datum/atom_creator/simple(new /obj/item/weapon/storage/backpack/dufflebag/captain, 50),
+		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/captain, 50),
 		/obj/item/clothing/suit/captunic,
 		/obj/item/clothing/suit/captunic/capjacket,
 		/obj/item/clothing/head/caphat/cap,
@@ -130,7 +130,7 @@
 /obj/structure/closet/secure_closet/warden/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
-		new/datum/atom_creator/simple(new /obj/item/weapon/storage/backpack/dufflebag/sec, 50),
+		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/head/helmet/nt,
 		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/suit/storage/vest/nt/warden,
@@ -166,7 +166,7 @@
 /obj/structure/closet/secure_closet/security/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
-		new/datum/atom_creator/simple(new /obj/item/weapon/storage/backpack/dufflebag/sec, 50),
+		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/sec, 50),
 		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/head/helmet,
 		/obj/item/device/radio/headset/headset_sec,
@@ -186,25 +186,25 @@
 	)
 
 /obj/structure/closet/secure_closet/security/cargo/WillContain()
-	return ..() | list(
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 		/obj/item/clothing/accessory/armband/cargo,
 		/obj/item/device/encryptionkey/headset_cargo
-	)
+	))
 
 /obj/structure/closet/secure_closet/security/engine/WillContain()
-	return ..() | list(
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 			/obj/item/clothing/accessory/armband/engine,
 			/obj/item/device/encryptionkey/headset_eng
-		)
+		))
 
 /obj/structure/closet/secure_closet/security/science/WillContain()
-	return ..() | list(/obj/item/device/encryptionkey/headset_sci)
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/device/encryptionkey/headset_sci))
 
 /obj/structure/closet/secure_closet/security/med/WillContain()
-	return ..() | list(
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 			/obj/item/clothing/accessory/armband/medgreen,
 			/obj/item/device/encryptionkey/headset_med
-		)
+		))
 
 /obj/structure/closet/secure_closet/detective
 	name = "detective's cabinet"

@@ -32,16 +32,16 @@
 	var/locked = FALSE
 
 /obj/structure/closet/Initialize()
-	. = ..()
+	..()
+	return INITIALIZE_HINT_LATELOAD
 
+/obj/structure/closet/LateInitialize()
 	var/list/will_contain = WillContain()
 	if(will_contain)
 		create_objects_in_loc(src, will_contain)
 
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
-		for(var/atom/movable/AM in src.loc)
-			if(AM.density || AM.anchored || !AM.simulated || AM == src) continue
-			AM.forceMove(src)
+		store_contents()
 
 /obj/structure/closet/proc/WillContain()
 	return null
@@ -93,6 +93,16 @@
 	for(var/atom/movable/AM in src)
 		AM.dropInto(loc)
 
+/obj/structure/closet/proc/store_contents()
+	var/stored_units = 0
+
+	if(storage_types & CLOSET_STORAGE_MISC)
+		stored_units += store_misc(stored_units)
+	if(storage_types & CLOSET_STORAGE_ITEMS)
+		stored_units += store_items(stored_units)
+	if(storage_types & CLOSET_STORAGE_MOBS)
+		stored_units += store_mobs(stored_units)
+
 /obj/structure/closet/proc/open()
 	if(src.opened)
 		return 0
@@ -114,15 +124,7 @@
 	if(!src.can_close())
 		return 0
 
-	var/stored_units = 0
-
-	if(storage_types & CLOSET_STORAGE_MISC)
-		stored_units += store_misc(stored_units)
-	if(storage_types & CLOSET_STORAGE_ITEMS)
-		stored_units += store_items(stored_units)
-	if(storage_types & CLOSET_STORAGE_MOBS)
-		stored_units += store_mobs(stored_units)
-
+	store_contents()
 	src.opened = 0
 
 	playsound(src.loc, close_sound, 25, 0, -3)

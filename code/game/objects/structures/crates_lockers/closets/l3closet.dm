@@ -19,12 +19,12 @@
 	)
 
 /obj/structure/closet/l3closet/general/multi/WillContain()
-	return ..() | list(
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 		/obj/item/clothing/head/bio_hood/general = 5,
 		/obj/item/clothing/mask/gas/half = 5,
 		/obj/item/clothing/suit/bio_suit/general = 5,
 		/obj/item/weapon/tank/emergency/oxygen/engi = 5
-	)
+	))
 
 
 /obj/structure/closet/l3closet/virology
@@ -81,12 +81,12 @@
 	)
 
 /obj/structure/closet/l3closet/scientist/multi/WillContain()
-	return ..() | list(
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 		/obj/item/clothing/head/bio_hood/scientist = 5,
 		/obj/item/clothing/suit/bio_suit/scientist = 5,
 		/obj/item/clothing/mask/gas = 5,
 		/obj/item/weapon/tank/emergency/oxygen/double = 5,
-	)
+	))
 
 /obj/structure/closet/l3closet/command
 	icon_state = "bio_command"

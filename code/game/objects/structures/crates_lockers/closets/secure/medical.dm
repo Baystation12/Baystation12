@@ -1,3 +1,12 @@
+#define RANDOM_SCRUBS new/datum/atom_creator/weighted(list( \
+				list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue), \
+				list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green), \
+				list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple), \
+				list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black), \
+				list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)\
+			) \
+		)
+
 /obj/structure/closet/secure_closet/medical1
 	name = "medical equipment closet"
 	desc = "Filled with medical junk."
@@ -64,14 +73,8 @@
 		/obj/item/device/radio/headset/headset_med,
 		/obj/item/taperoll/medical,
 		/obj/item/weapon/storage/belt/medical/emt,
-		new/datum/atom_creator/weighted(list(
-				list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
-				list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
-				list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
-				list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
-				list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
-			)
-		)
+		RANDOM_SCRUBS,
+		RANDOM_SCRUBS
 	)
 
 /obj/structure/closet/secure_closet/paramedic
@@ -135,14 +138,7 @@
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/flash,
 		/obj/item/weapon/reagent_containers/hypospray,
-		new/datum/atom_creator/weighted(list(
-				list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
-				list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
-				list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
-				list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
-				list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
-			)
-		)
+		RANDOM_SCRUBS
 	)
 
 /obj/structure/closet/secure_closet/chemical
