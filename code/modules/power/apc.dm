@@ -1199,7 +1199,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 					cell.ex_act(3.0)
 	return
 
-/obj/machinery/power/apc/disconnect_terminal()
+/obj/machinery/power/apc/disconnect_terminal(var/obj/machinery/power/terminal/term)
 	if(terminal)
 		terminal.master = null
 		terminal = null

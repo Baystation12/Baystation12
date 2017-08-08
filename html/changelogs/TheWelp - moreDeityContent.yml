@@ -1,9 +1,0 @@
-author: TheWelp
-delete-after: True
-
-changes: 
-  - rscadd: "Adds deity follower tracking and better deity eye in general."
-  - rscdel: "Removes need for deity floors and respective spell."
-  - rscadd: "Nar-Sie zombies will automatically get all of their blood filled when zombized."
-  - rscadd: "Nar-Sie zombie's breathe will convert faster."
-  - bugfix: "Fixes nar-sie blood forge being automatically unlocked."
