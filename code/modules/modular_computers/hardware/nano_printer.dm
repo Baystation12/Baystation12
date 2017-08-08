@@ -32,7 +32,7 @@
 /obj/item/weapon/computer_hardware/nano_printer/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/paper))
 		if(stored_paper >= max_paper)
-			to_chat(user, "You try to add \the [W] into [src], but its paper bin is full.")
+			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
 			return
 
 		to_chat(user, "You insert \the [W] into [src].")
@@ -42,7 +42,7 @@
 		var/obj/item/weapon/paper_bundle/B = W
 		var/num_of_pages_added = 0
 		if(stored_paper >= max_paper)
-			to_chat(user, "You try to add \the paper bundle into [src], but its paper bin is full.")
+			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
 			return
 		for(var/obj/item/weapon/bundleitem in B) //loop through items in bundle
 			if(istype(bundleitem, /obj/item/weapon/paper)) //if item is paper (and not photo), add into the bin
@@ -61,7 +61,7 @@
 			qdel(B)
 		else //if at least two items remain, just update the bundle icon
 			B.update_icon()
-		to_chat(user, "You add [num_of_pages_added] papers from the bundle into [src].")
+		to_chat(user, "You add [num_of_pages_added] papers from \the [W] into \the [src].")
 	return
 
 /obj/item/weapon/computer_hardware/nano_printer/Destroy()

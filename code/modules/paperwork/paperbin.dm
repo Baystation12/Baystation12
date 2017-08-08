@@ -79,13 +79,13 @@
 /obj/item/weapon/paper_bin/attackby(obj/item/weapon/i as obj, mob/user as mob)
 	if(istype(i, /obj/item/weapon/paper))
 		user.drop_item()
-		i.loc = src
+		i.forceMove(src)
 		to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
 		papers.Add(i)
 		update_icon()
 		amount++
 	else if(istype(i, /obj/item/weapon/paper_bundle))
-		to_chat(user, "<span class='notice'>You loosen the bundle and add its papers into the bin.</span>")
+		to_chat(user, "<span class='notice'>You loosen \the [i] and add its papers into \the [src].</span>")
 		var/was_there_a_photo = 0
 		for(var/obj/item/weapon/bundleitem in i) //loop through items in bundle
 			if(istype(bundleitem, /obj/item/weapon/paper)) //if item is paper, add into the bin
@@ -99,7 +99,7 @@
 		user.drop_from_inventory(i)
 		qdel(i)
 		if(was_there_a_photo)
-			to_chat(user, "<span class='notice'>The photo cannot go into the paper bin.</span>")
+			to_chat(user, "<span class='notice'>The photo cannot go into \the [src].</span>")
 	return
 
 
