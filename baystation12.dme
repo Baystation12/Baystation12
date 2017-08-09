@@ -43,6 +43,7 @@
 #include "code\__defines\MC.dm"
 #include "code\__defines\misc.dm"
 #include "code\__defines\mobs.dm"
+#include "code\__defines\proc_presets.dm"
 #include "code\__defines\process_scheduler.dm"
 #include "code\__defines\qdel.dm"
 #include "code\__defines\research.dm"

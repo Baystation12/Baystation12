@@ -139,14 +139,42 @@
 			for(var/atom/movable/AM in C.contents)
 				total_content_size += C.content_size(AM)
 			if(total_content_size > C.storage_capacity)
-				var/bad_msg = "[ascii_red]--------------- [C.name] \[[C.x] / [C.y] / [C.z]\]"
-				log_unit_test("[bad_msg] Contains more objects than able to hold ([total_content_size] / [C.storage_capacity]). [ascii_reset]")
+				log_bad("[log_info_line(C)] contains more objects than able to hold ([total_content_size] / [C.storage_capacity]).")
 				bad_tests++
 
 	if(bad_tests)
 		fail("\[[bad_tests]\] Some closets contained more objects than they were able to hold.")
 	else
 		pass("No overflowing closets found.")
+
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/closet_containment_test
+	name = "MAP: Closet Containment Test Player Z levels"
+
+/datum/unit_test/closet_containment_test/start_test()
+	var/bad_tests = 0
+
+	for(var/obj/structure/closet/C in world)
+		if(!C.opened && isPlayerLevel(C.z))
+			var/contents_pre_open = C.contents.Copy()
+			C.dump_contents()
+			C.store_contents()
+			var/list/no_longer_contained_atoms = contents_pre_open - C.contents
+			var/list/previously_not_contained_atoms = C.contents - contents_pre_open
+
+			if(no_longer_contained_atoms.len)
+				bad_tests++
+				log_bad("[log_info_line(C)] no longer contains the following atoms: [json_encode(no_longer_contained_atoms)]")
+			if(previously_not_contained_atoms.len)
+				log_debug("[log_info_line(C)] now contains the following atoms: [json_encode(previously_not_contained_atoms)]")
+
+	if(bad_tests)
+		fail("[bad_tests] closet\s with inconsistent pre/post-open contents found.")
+	else
+		pass("No closets with inconsistent pre/post-open contents found.")
 
 	return 1
 
