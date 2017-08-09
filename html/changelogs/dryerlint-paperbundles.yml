@@ -33,7 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added ability to put paper bundles directly into paper bins."
-  - rscadd: "Added ability to put paper bundles directly into nano-printers."
+  - rscadd: "Added ability to put paper bundles directly into paper bins and nano-printers."
   - rscadd: "Clicking on paper while holding a paper bundle now adds the paper onto the bundle."
   - maptweak: "Added crate of 30 refill papers on Deck 1 maintenance, near the Conference Room."
