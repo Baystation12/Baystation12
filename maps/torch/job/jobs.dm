@@ -793,9 +793,7 @@
 	spawn_positions = 1
 	supervisors = "the Executive Officer"
 	alt_titles = list(
-		"Chef",
-		"Culinary Specialist",
-		)
+		"Chef")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
