@@ -100,7 +100,7 @@
 
 
 /obj/item/device/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
-	if(emote_type != AUDIBLE_MESSAGE) //only hearable emotes
+	if((emote_type != AUDIBLE_MESSAGE) && !emagged) //only hearable emotes barring emag
 		return
 	if(mytape && recording)
 		mytape.record_speech("[strip_html_properly(text)]")
@@ -108,9 +108,9 @@
 
 /obj/item/device/taperecorder/show_message(msg, type, alt, alt_type)
 	var/recordedtext
-	if (msg && type == AUDIBLE_MESSAGE) //must be hearable
+	if (msg && type == AUDIBLE_MESSAGE || emagged) //must be hearable
 		recordedtext = msg
-	else if (alt && alt_type == AUDIBLE_MESSAGE)
+	else if (alt && (alt_type == AUDIBLE_MESSAGE || emagged))
 		recordedtext = alt
 	else
 		return
@@ -121,7 +121,7 @@
 	if(emagged == 0)
 		emagged = 1
 		recording = 0
-		to_chat(user, "<span class='warning'>PZZTTPFFFT</span>")
+		audible_message("<span class='warning'>Warning: Privacy and safety overrides disabled.</span>")
 		update_icon()
 		return 1
 	else
@@ -134,7 +134,7 @@
 		to_chat(M, "<span class='danger'>\The [src] explodes!</span>")
 	if(T)
 		T.hotspot_expose(700,125)
-		explosion(T, -1, -1, 0, 4)
+		explosion(T, -1, -1, 1, 4)
 	qdel(src)
 	return
 
@@ -147,7 +147,7 @@
 	if(!mytape)
 		to_chat(usr, "<span class='notice'>There's no tape!</span>")
 		return
-	if(mytape.ruined || emagged)
+	if(mytape.ruined)
 		audible_message("<span class='warning'>The tape recorder makes a scratchy noise.</span>")
 		return
 	if(recording)
@@ -228,6 +228,25 @@
 		return
 
 
+/obj/item/device/taperecorder/proc/countdown()
+	var/turf/T = get_turf(src)
+	T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
+	sleep(10)
+	T = get_turf(src)
+	T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
+	sleep(10)
+	T = get_turf(src)
+	T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
+	sleep(10)
+	T = get_turf(src)
+	T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
+	sleep(10)
+	T = get_turf(src)
+	T.audible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
+	sleep(10)
+	explode()
+
+
 /obj/item/device/taperecorder/verb/playback_memory()
 	set name = "Playback Tape"
 	set category = "Object"
@@ -244,6 +263,10 @@
 		to_chat(usr, "<span class='notice'>You can't playback when recording!</span>")
 		return
 	if(playing)
+		if(emagged) //Attempting to play twice is the method to set off the detonation
+			stop()
+			countdown()
+			return
 		to_chat(usr, "<span class='notice'>You're already playing!</span>")
 		return
 	playing = 1
@@ -281,23 +304,6 @@
 	playing = 0
 	update_icon()
 
-	if(emagged)
-		var/turf/T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: This tape recorder will self-destruct in... Five.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Four.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Three.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: Two.</font>")
-		sleep(10)
-		T = get_turf(src)
-		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: One.</font>")
-		sleep(10)
-		explode()
 
 
 /obj/item/device/taperecorder/verb/print_transcript()
