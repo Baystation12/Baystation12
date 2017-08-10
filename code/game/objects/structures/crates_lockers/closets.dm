@@ -33,6 +33,10 @@
 
 /obj/structure/closet/Initialize()
 	..()
+
+	if((setup & CLOSET_HAS_LOCK))
+		verbs += /obj/structure/closet/proc/togglelock
+
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/structure/closet/LateInitialize()
@@ -45,9 +49,6 @@
 
 /obj/structure/closet/proc/WillContain()
 	return null
-
-	if((setup & CLOSET_HAS_LOCK))
-		verbs += /obj/structure/closet/proc/togglelock
 
 /obj/structure/closet/examine(mob/user)
 	if(..(user, 1) && !opened)
