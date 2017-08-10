@@ -223,8 +223,9 @@
 		T.affecting_lights += src
 		affecting_turfs    += T
 
-		if (istype(T, /turf/simulated/open) && T:below)
-			T = T:below	// Consider the turf below us as well. (Z-lights)
+		var/turf/simulated/open/O = T
+		if(istype(O) && O.below)
+			T = O.below	// Consider the turf below us as well. (Z-lights)
 			goto check_t
 
 	update_gen++
@@ -262,8 +263,10 @@
 			T.generate_missing_corners()
 		corners |= T.get_corners()
 		turfs   += T
-		if (istype(T, /turf/simulated/open) && T:below)
-			T = T:below	// Consider the turf below us as well. (Z-lights)
+
+		var/turf/simulated/open/O = T
+		if(istype(O) && O.below)
+			T = O.below	// Consider the turf below us as well. (Z-lights)
 			goto update_t
 
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.
