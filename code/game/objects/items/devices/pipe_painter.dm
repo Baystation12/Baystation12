@@ -6,7 +6,6 @@
 	desc = "A long, slender device consisting of a pigment synthesizer, dual applicators, and a small battery, all hooked up to a long extendable rod."
 	description_info = "Use the pipe painter to specify which color you'd like to apply to pipes. Click on exposed piping to alter its hue."
 	description_fluff = "Though by no means a modern miracle, synthesized pigments have revolutionized the electrical engineering industry, making time-consuming painting and color coding jobs an effortless non-issue."
-	description_antag = "You're better off smacking someone over the head with this thing than trying to use it as part of your schemes."
 	var/list/modes
 	var/mode
 
