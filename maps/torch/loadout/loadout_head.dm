@@ -4,11 +4,12 @@
 	sort_category = "Hats and Headwear"
 	category = /datum/gear/head
 
-/datum/gear/head/bandana
-	allowed_roles = NON_MILITARY_ROLES
-
 /datum/gear/head/beret
 	allowed_roles = NON_MILITARY_ROLES
+	display_name = "beret, colored"
+	path = /obj/item/clothing/head/beret/plaincolor
+	flags = GEAR_HAS_COLOR_SELECTION
+	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
 /datum/gear/head/solberet
 	display_name = "SolGov beret selection"
@@ -39,7 +40,7 @@
 	display_name = "Sol Central Government Cap"
 	path = /obj/item/clothing/head/soft/sol
 	allowed_roles = SOLGOV_ROLES
-	
+
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
 	path = /obj/item/clothing/head/soft/veteranhat
