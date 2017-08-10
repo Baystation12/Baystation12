@@ -261,7 +261,7 @@
 	var/turf/simulated/open/O = T
 	if(istype(O) && O.below)
 		return O.below
-	else return
+	return null
 
 /datum/light_source/proc/remove_lum()
 	applied = FALSE
@@ -337,7 +337,7 @@
 	var/turf/simulated/open/O = T
 	if(istype(O) && O.below)
 		return O.below
-	else return
+	return null
 
 #undef effect_update
 #undef LUM_FALLOFF
