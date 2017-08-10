@@ -1,6 +1,9 @@
 obj/item/device/cable_painter
 	name = "cable painter"
 	desc = "A device for repainting cables."
+	description_info = "Use this device to select a preferred cable color. Apply it to a bundle of cables on your person, or use it on installed cabling on the floor to paint it in your chosen color."
+	description_fluff = "A device often used by spacefaring engineers to color-code their electrical systems. An experienced technician can identify traditional installations by color alone."
+	description_antag = "As far as mischief and mayhem goes, this device is pretty passive aggressive."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "labeler0"
 	item_state = "flight"

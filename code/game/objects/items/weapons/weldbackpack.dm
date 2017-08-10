@@ -1,6 +1,9 @@
 /obj/item/weapon/weldpack
-	name = "Welding kit"
-	desc = "A heavy-duty, portable welding fluid carrier."
+	name = "welding kit"
+	desc = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
+	description_info = "This pack acts as a portable source of welding fuel. Use a welder on it to refill its tank - but make sure it's not lit! You can use this kit on a fuel tank or appropriate reagent dispenser to replenish its reserves."
+	description_fluff = "The Shenzhen Chain of 2380 was an industrial accident of noteworthy infamy that occurred in the Earthen L3 Lagrange Point. An apprentice welder, working for the Shenzhen Space Fabrication Gropu, failed to properly seal her fuel port, triggering a chain reaction that spread from laborer to laborer, instantly vaporizing a crew of fourteen. Don't let this happen to you!"
+	description_antag = "In theory, you could hold an open flame to this pack and produce some pretty catastrophic results. The trick is getting out of the blast radius."
 	slot_flags = SLOT_BACK
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "welderpack"
@@ -31,7 +34,7 @@
 			to_chat(user, "<span class='notice'>Welder refilled!</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
-	to_chat(user, "<span class='warning'>The tank scoffs at your insolence. It only provides services to welders.</span>")
+	to_chat(user, "<span class='warning'>The tank will accept only a welding tool.</span>")
 	return
 
 /obj/item/weapon/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
