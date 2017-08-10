@@ -401,3 +401,97 @@
 	user.visible_message("<span class='warning'>[user]'s hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>", \
 	"<span class='warning'>Your hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!</span>")
 	affected.take_damage(20, used_weapon = tool)
+
+//////////////////////////////////////////////////////////////////
+//	 Peridaxon necrosis treatment surgery step
+//////////////////////////////////////////////////////////////////
+/datum/surgery_step/internal/treat_necrosis
+	priority = 2
+	allowed_tools = list(
+		/obj/item/weapon/reagent_containers/dropper = 100,
+		/obj/item/weapon/reagent_containers/glass/bottle = 75,
+		/obj/item/weapon/reagent_containers/glass/beaker = 75,
+		/obj/item/weapon/reagent_containers/spray = 50,
+		/obj/item/weapon/reagent_containers/glass/bucket = 50,
+	)
+
+	can_infect = 0
+	blood_level = 0
+
+	min_duration = 50
+	max_duration = 60
+
+/datum/surgery_step/internal/treat_necrosis/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/weapon/reagent_containers/container = tool
+	if(!istype(container) || !container.reagents.has_reagent("peridaxon"))
+		return 0
+	if (!..())
+		return 0
+
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+
+	if(!affected)
+		return 0
+
+	if(affected.robotic >= ORGAN_ROBOT)
+		return 0
+
+	target.op_stage.current_organ = null
+
+	var/obj/item/organ/internal/list/dead_organs = list()
+	for(var/obj/item/organ/internal/I in target.internal_organs)
+		if(I && !(I.status & ORGAN_CUT_AWAY) && I.status & ORGAN_DEAD && I.parent_organ == affected.organ_tag && !(I.robotic >= ORGAN_ROBOT))
+			dead_organs |= I
+
+	var/obj/item/organ/internal/organ_to_fix = input(user, "Which organ do you want to regenerate?") as null|anything in dead_organs
+	if(!organ_to_fix)
+		return 0
+	if(organ_to_fix.damage >= organ_to_fix.max_damage)
+		to_chat(user, "<span class='notice'>The [organ_to_fix.name] needs to be repaired before it is regenerated.</span>")
+		return 0
+
+	target.op_stage.current_organ = organ_to_fix
+
+	return 1
+
+/datum/surgery_step/internal/treat_necrosis/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	user.visible_message("[user] starts applying medication to the affected tissue in [target]'s [target.op_stage.current_organ] with \the [tool]." , \
+	"You start applying medication to the affected tissue in [target]'s [target.op_stage.current_organ] with \the [tool].")
+
+	target.custom_pain("Something in your [target.op_stage.current_organ] is causing you a lot of pain!",50,affecting = target.op_stage.current_organ)
+	..()
+
+/datum/surgery_step/internal/treat_necrosis/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/internal/affected = target.op_stage.current_organ
+	var/obj/item/weapon/reagent_containers/container = tool
+
+	var/amount = container.amount_per_transfer_from_this
+	var/datum/reagents/temp = new(amount)
+	container.reagents.trans_to_holder(temp, amount)
+
+	var/rejuvenate = temp.has_reagent("peridaxon")
+
+	var/trans = temp.trans_to_mob(target, temp.total_volume, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
+	if (trans > 0)
+
+		if(rejuvenate)
+			affected.status &= ~ORGAN_DEAD
+			affected.owner.update_body(1)
+
+		user.visible_message("<span class='notice'>[user] applies [trans] units of the solution to affected tissue in [target]'s [affected.name]</span>.", \
+			"<span class='notice'>You apply [trans] units of the solution to affected tissue in [target]'s [affected.name] with \the [tool].</span>")
+
+/datum/surgery_step/internal/treat_necrosis/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+
+	if (!istype(tool, /obj/item/weapon/reagent_containers))
+		return
+
+	var/obj/item/weapon/reagent_containers/container = tool
+
+	var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
+
+	user.visible_message("<span class='warning'>[user]'s hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!</span>" , \
+	"<span class='warning'>Your hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!</span>")
+
+	//no damage or anything, just wastes medicine

@@ -53,6 +53,8 @@
 			filter_effect -= 1
 		if(is_broken())
 			filter_effect -= 2
+		if(owner.reagents.has_reagent("anti_toxin"))
+			filter_effect += 1
 		if(robotic >= ORGAN_ROBOT)
 			filter_effect += 1
 
