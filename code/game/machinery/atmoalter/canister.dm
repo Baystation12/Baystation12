@@ -273,9 +273,6 @@ update_flag
 	ui_interact(user)
 
 /obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if (src.destroyed)
-		return
-
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["name"] = name
@@ -357,7 +354,11 @@ update_flag
 			name = "\improper Canister: [label]"
 		update_icon()
 		. = 1
-	add_fingerprint(usr)
+
+/obj/machinery/portable_atmospherics/canister/CanUseTopic()
+	if(destroyed)
+		return STATUS_CLOSE
+	return ..()
 
 /obj/machinery/portable_atmospherics/canister/phoron/New()
 	..()
