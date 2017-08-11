@@ -544,10 +544,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				log.parameters["language"] = signal.data["language"]
 
 				var/race = "Unknown"
-				if(ishuman(M))
-					race = "Sapient Race"
-					log.parameters["intelligible"] = 1
-				else if(isbrain(M))
+				if(ishuman(M) || isbrain(M))
 					race = "Sapient Race"
 					log.parameters["intelligible"] = 1
 				else if(M.isMonkey())
