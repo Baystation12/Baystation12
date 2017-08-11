@@ -62,6 +62,14 @@
 
 ////////////////////////STAGE 4/////////////////////////////////
 
+/datum/disease2/effect/dab
+	name = "Saint Daniel's Syndrome"
+	stage = 2
+	badness = VIRUS_COMMON
+	delay = 25 SECONDS
+	activate(var/mob/living/carbon/human/mob,var/multiplier)
+		mob.emote("dab")
+
 /datum/disease2/effect/gibbingtons
 	name = "Gibbingtons Syndrome"
 	stage = 4
