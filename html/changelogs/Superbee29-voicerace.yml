@@ -1,0 +1,4 @@
+author: Superbee29
+delete-after: True
+changes: 
+  - tweak: "Telecommunications servers no longer know the exact race of a speaker."
