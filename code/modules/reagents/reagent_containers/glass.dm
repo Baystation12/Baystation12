@@ -74,7 +74,7 @@
 
 	afterattack(var/obj/target, var/mob/user, var/proximity)
 
-		if(!is_open_container() || !proximity)
+		if(!is_open_container() || !proximity || user.a_intent == I_HELP)
 			return
 
 		for(var/type in can_be_placed_into)
