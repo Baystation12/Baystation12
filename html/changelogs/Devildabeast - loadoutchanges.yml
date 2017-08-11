@@ -36,4 +36,4 @@ changes:
   - rscadd: "Defines an armed role for the Loadout, which includes all jobs that are allowed to carry weapons from round start."
   - rscadd: "Adds Scientist and Researcher to semi-formal roles."
   - tweak: "Frontier clothes are now its own separate item instead of a formal outfit and can be worn by non-military roles."
-  - tweak: "Holsters can now be selected by armed roles.
+  - tweak: "Holsters can now be selected by armed roles."
