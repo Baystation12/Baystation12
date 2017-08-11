@@ -143,7 +143,7 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/holster
 	cost = 3
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = ARMED_ROLES
 
 /datum/gear/accessory/holster/New()
 	..()
@@ -296,7 +296,7 @@
 	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal/bronze/nanotrasen
 	cost = 8
-	allowed_roles = list("Research Director", "NanoTrasen Liaison")
+	allowed_roles = NANOTRASEN_ROLES
 
 /datum/gear/accessory/ntaward/New()
 	..()

@@ -19,7 +19,7 @@
 #define FORMAL_ROLES list("NanoTrasen Liaison", "Research Director", "Senior Researcher", "Scientist", "Research Assistant", "SolGov Representative", "Passenger", "Bartender", "Merchant", "Off-Duty","Stowaway")
 
 //For civilian jobs that may have a uniform, but not a strict one
-#define SEMIFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty","Stowaway")
+#define SEMIFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty","Stowaway", "Scientist", "Senior Researcher")
 
 //For civilian jobs that may have a strict uniform.
 #define SEMIANDFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty", "NanoTrasen Liaison", "Research Director", "Senior Researcher", "Scientist", "SolGov Representative","Stowaway")
@@ -62,3 +62,6 @@
 
 //For members of the research department and jobs that are scientific
 #define RESEARCH_ROLES list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Passenger", "NanoTrasen Pilot", "Senior Researcher", "Chemist", "Roboticist", "Virologist")
+
+//For jobs that spawn with weapons in their lockers
+#define ARMED_ROLES list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Senior Enlisted Advisor", "Master at Arms", "Brig Officer", "Forensic Technician", "Security Guard", "Merchant")

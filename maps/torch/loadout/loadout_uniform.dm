@@ -56,7 +56,6 @@
 	suits["black jumpskirt"] = /obj/item/clothing/under/blackjumpskirt
 	suits["kilt"] = /obj/item/clothing/under/kilt
 	suits["human resources dress"] = /obj/item/clothing/under/dress/dress_hr
-	suits["frontier overalls"] = /obj/item/clothing/under/frontier
 	suits["detective's suit"] = /obj/item/clothing/under/det
 	suits["black detective's suit"] = /obj/item/clothing/under/det/black
 	suits["grey detective's suit"] = /obj/item/clothing/under/det/grey
@@ -173,3 +172,8 @@
 	display_name = "Contractor Utility Uniform"
 	path = /obj/item/clothing/under/utility
 	allowed_roles = CONTRACTOR_ROLES
+
+/datum/gear/uniform/frontier
+	display_name = "frontier clothes"
+	path = /obj/item/clothing/under/frontier
+	allowed_roles = NON_MILITARY_ROLES
