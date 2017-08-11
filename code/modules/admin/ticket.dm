@@ -23,6 +23,10 @@ var/list/ticket_panels = list()
 	if(status == TICKET_ASSIGNED && !((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey) && alert(client_by_ckey(closed_by.ckey), "You are not assigned to this ticket. Are you sure you want to close it?",  "Close ticket?" , "Yes" , "No") != "Yes")
 		return
 
+	var/client/real_client = client_by_ckey(closed_by.ckey)
+	if(status == TICKET_ASSIGNED && !real_client.holder) // non-admins can only close a ticket if no admin has taken it
+		return
+
 	src.status = TICKET_CLOSED
 	src.closed_by = closed_by
 
@@ -123,7 +127,8 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 				ticket_dat += " - <a href='byond://?src=\ref[src];action=pm;ticket=\ref[ticket]'>PM</a>"
 				if(C.holder)
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=take;ticket=\ref[ticket]'>[(open == 1) ? "TAKE" : "JOIN"]</a>"
-				ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
+				if(ticket.status != TICKET_CLOSED && (C.holder || ticket.status == TICKET_OPEN))
+					ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
