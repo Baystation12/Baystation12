@@ -96,6 +96,10 @@
 	name = "\improper Tools Storage"
 	icon_state = "engineering_storage"
 
+/area/ship/scrap/maintenance/techstorage
+	name = "\improper Parts Storage"
+	icon_state = "engineering_supply"
+
 /area/ship/scrap/maintenance/eva
 	name = "\improper EVA Storage"
 	icon_state = "eva"

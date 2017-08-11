@@ -117,7 +117,6 @@
 "cs" = (/obj/structure/table/standard,/obj/random/smokes,/obj/item/weapon/material/ashtray/glass,/obj/effect/landmark{name = "Observer-Start"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/tiled,/area/ship/scrap/crew/saloon)
 "ct" = (/obj/effect/floor_decal/industrial/warning,/obj/machinery/atmospherics/pipe/simple/hidden/cyan{icon_state = "intact"; dir = 10},/turf/simulated/floor/airless,/area/ship/scrap/maintenance/engine/starboard)
 "cv" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/obj/item/device/radio/intercom{pixel_x = -32},/obj/structure/closet/wardrobe/pjs,/obj/structure/sign/poster{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
-"cw" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; layer = 2.4; level = 2},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "cx" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/cryopod,/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "cz" = (/obj/machinery/door/window/westleft{base_state = "right"; dir = 4; icon_state = "right"; name = "Reception Window"; opacity = 1},/turf/simulated/floor/tiled/freezer,/area/ship/scrap/crew/toilets)
 "cA" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/tiled/freezer,/area/ship/scrap/crew/toilets)
@@ -131,7 +130,6 @@
 "cI" = (/obj/structure/disposalpipe/junction,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/tiled,/area/ship/scrap/crew/hallway/port)
 "cJ" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/obj/machinery/door/airlock/maintenance_hatch{name = "Cryo Storage"; normalspeed = 0},/obj/machinery/door/firedoor,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/ship/scrap/crew/cryo)
 "cK" = (/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
-"cL" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "cM" = (/obj/machinery/cryopod,/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "cN" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/firedoor,/obj/structure/window/reinforced{dir = 5; health = 1e+007},/turf/simulated/floor,/area/ship/scrap/crew/cryo)
 "cO" = (/obj/machinery/shower{icon_state = "shower"; dir = 4},/obj/structure/window/reinforced/tinted{icon_state = "twindow"; dir = 4},/obj/structure/window/reinforced/tinted,/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/ship/scrap/crew/toilets)
@@ -146,7 +144,6 @@
 "cX" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 8},/obj/machinery/light_switch{pixel_x = 28},/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled,/area/ship/scrap/crew/saloon)
 "cY" = (/obj/item/weapon/storage/pill_bottle/happy,/obj/machinery/power/apc{dir = 1},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/airless,/area/ship/scrap/maintenance/engine/port)
 "cZ" = (/obj/structure/cable,/obj/machinery/power/apc{name = "Dorms APC"},/obj/machinery/light_switch{pixel_x = -25},/obj/structure/closet/wardrobe/mixed,/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
-"da" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "db" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/sign/warning/hot_exhaust,/turf/simulated/wall/r_wall,/area/ship/scrap/maintenance/engine/port)
 "dc" = (/turf/simulated/wall/r_wall,/area/ship/scrap/crew/kitchen)
 "dd" = (/turf/simulated/wall,/area/ship/scrap/crew/kitchen)
@@ -511,9 +508,12 @@
 "vf" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light_switch{pixel_y = 25},/obj/effect/floor_decal/corner/yellow{icon_state = "corner_white"; dir = 5},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
 "wb" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/turf/simulated/floor/reinforced/airless,/area/ship/scrap/maintenance/engine/aft)
 "wj" = (/obj/structure/table/standard,/obj/structure/cable,/obj/machinery/power/apc{name = "Medical Bay APC"},/obj/machinery/light_switch{pixel_x = -25},/obj/random/medical,/obj/structure/closet/medical_wall/filled{pixel_y = -32},/obj/item/weapon/tape_roll,/obj/item/weapon/circular_saw,/obj/item/bodybag/cryobag,/obj/random/medical,/obj/item/weapon/storage/firstaid/regular,/obj/item/stack/medical/advanced/bruise_pack,/obj/item/weapon/retractor,/obj/structure/sink/kitchen{dir = 4; name = "large sink"; pixel_x = -20},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/medbay)
+"xb" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; layer = 2.4; level = 2},/obj/effect/landmark{name = "JoinLateCryo"},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "xy" = (/obj/item/weapon/stool/padded,/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/medbay)
 "xS" = (/obj/structure/closet/crate,/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/cable{icon_state = "6-8"},/obj/random/storage,/obj/random/bomb_supply,/obj/random/bomb_supply,/obj/random/bomb_supply,/obj/item/weapon/storage/box/syringes,/turf/simulated/floor/tiled,/area/ship/scrap/cargo)
+"yb" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/effect/landmark{name = "JoinLateCryo"},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "yZ" = (/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/power/apc{dir = 1},/obj/structure/sign/warning/compressed_gas{pixel_x = -32},/obj/structure/bed/padded,/obj/effect/landmark/start{name = "Chief Engineer"},/turf/simulated/floor/tiled,/area/ship/scrap/maintenance)
+"zb" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/effect/landmark{name = "JoinLateCryo"},/turf/simulated/floor/tiled/white,/area/ship/scrap/crew/cryo)
 "Bx" = (/obj/structure/cable,/obj/machinery/power/smes/buildable/max_cap_in_out,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/power)
 "CJ" = (/obj/structure/closet/crate,/obj/random/loot,/obj/random/loot,/obj/random/loot,/obj/random/projectile,/obj/random/projectile,/turf/simulated/floor/plating,/area/ship/scrap/hidden)
 "CW" = (/obj/structure/sign/warning/docking_area,/turf/simulated/wall/r_wall,/area/ship/scrap/dock)
@@ -571,9 +571,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaYaYbdaaaabQbXjvbZaabXbD
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQbXjvcececejucececebtbZbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQbXjvcpbvbwbxbybzcpjwbZbQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabQcacbcccbcbjzcpbAbBcfbCbFcpjAchcicjHZchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaclcmcncajBcpcqcrcscrEncpjCcicvcwcxchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabIoAczcAcBjDcDcEcFcGbJcHcDjEcJcKcLcMcNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacbcOcPcQcajFcScTcUcVcWcXcpjGcicZdacMchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaclcmcncajBcpcqcrcscrEncpjCcicvxbcxchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabIoAczcAcBjDcDcEcFcGbJcHcDjEcJcKybcMcNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacbcOcPcQcajFcScTcUcVcWcXcpjGcicZzbcMchaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadcddddddddjHdfdfdfdgdfdfdfjIdwdwdjdwdxaaaaaadlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadldlaaaaaadcFUdndoddbTdfdqdrdsdtdudfbYdKbLbMbNdxaaaadlbOdlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadlbOcdcdbQbQdzdAdBdCddqbdfdEdFdGdHdIdfcodwxydMQQdxbQbQcCcCdlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
