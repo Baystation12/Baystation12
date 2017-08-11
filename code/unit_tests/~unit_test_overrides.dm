@@ -46,6 +46,8 @@ GLOBAL_DATUM(unit_test_last_obj_random_creation, /atom/movable)
 	return heaviest_choice
 
 GLOBAL_LIST_EMPTY(unit_test_obj_random_weights_by_type)
+
+// If you adjust any of the values below, please also update /obj/structure/closet/proc/content_size(atom/movable/AM)
 /proc/unit_test_weight_of_path(var/path)
 	if(ispath(path, /obj/random))
 		var/weight = GLOB.unit_test_obj_random_weights_by_type[path]
@@ -62,6 +64,8 @@ GLOBAL_LIST_EMPTY(unit_test_obj_random_weights_by_type)
 	if(ispath(path, /mob))
 		var/mob/M = path
 		return initial(M.mob_size)
+	if(ispath(path, /obj/structure) || ispath(path, /obj/machinery))
+		return MOB_LARGE
 	if(istype(path, /datum))
 		var/datum/D = path
 		return D.unit_test_get_weight()

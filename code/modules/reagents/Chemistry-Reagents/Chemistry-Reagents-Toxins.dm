@@ -191,7 +191,7 @@
 	if(holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
-	..()
+	. = ..()
 
 /datum/reagent/toxin/fertilizer //Reagents used for plant fertilizers.
 	name = "fertilizer"
