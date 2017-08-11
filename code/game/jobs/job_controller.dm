@@ -359,18 +359,45 @@ var/global/datum/controller/occupations/job_master
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
 						var/permitted
+						var/allowed_branch = null
+						var/allowed_role = null
+						
+						// Branch restrictions
+						if (G.allowed_branches)
+							// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
+							if (G.allowed_branches["branches"])
+								if ((H.char_branch in G.allowed_branches["branches"]) || ("ALL" in G.allowed_branches["branches"])) // Branch is allowed
+									allowed_branch = TRUE
+								else // Branch is not allowed
+									allowed_branch = FALSE
+							
+							// Only check rank if branch is allowed
+							if (allowed_branch)
+								// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
+								if (G.allowed_branches["ranks"])
+									if ((H.char_rank in G.allowed_branches["ranks"]) || ("ALL" in G.allowed_branches["ranks"])) // Rank is allowed
+										allowed_branch = TRUE
+									else // Rank is not allowed
+										allowed_branch = FALSE
+						
+						// Role restrictions
 						if(G.allowed_roles)
 							for(var/job_name in G.allowed_roles)
 								if(job.title == job_name)
-									permitted = 1
-						else
+									allowed_role = TRUE
+						
+						// Check branch and role restrictions. If both are empty, no restrictions exist and the item is allowed
+						if ((allowed_branch == null) && (allowed_role == null))
 							permitted = 1
+						else
+							permitted = allowed_branch || allowed_role
 
+						// Species restrictions
 						if(G.whitelisted && (!(H.species.name in G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
-							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+							to_chat(H, "<span class='warning'>Your current species, job, branch, rank, or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
