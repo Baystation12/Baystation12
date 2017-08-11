@@ -64,8 +64,8 @@
 
 /datum/disease2/effect/dab
 	name = "Saint Daniel's Syndrome"
-	stage = 2
-	badness = VIRUS_COMMON
+	stage = 4
+	badness = VIRUS_ENGINEERED
 	delay = 25 SECONDS
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
 		mob.emote("dab")
