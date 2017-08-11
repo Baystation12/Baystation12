@@ -1,0 +1,6 @@
+author: ZeroBits
+
+delete-after: True
+
+changes: 
+  - rscadd: "Adds new alt-titles for Merchant, Passenger, and Sanitation Technician."
