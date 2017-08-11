@@ -297,6 +297,9 @@
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
+	
+/obj/item/weapon/storage/box/mousetraps/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/pillbottles
 	name = "box of pill bottles"
@@ -346,18 +349,24 @@
 	item_state = "syringe_kit"
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
-/obj/item/weapon/storage/box/lights/New()
-	..()
+/obj/item/weapon/storage/box/lights/Initialize()
+	. = ..()
 	make_exact_fit()
 
 /obj/item/weapon/storage/box/lights/bulbs
 	startswith = list(/obj/item/weapon/light/bulb = 21)
+	
+/obj/item/weapon/storage/box/lights/bulbs/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
 	startswith = list(/obj/item/weapon/light/tube = 17,
 					/obj/item/weapon/light/tube/large = 4)
+					
+/obj/item/weapon/storage/box/lights/tubes/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
@@ -365,6 +374,9 @@
 	startswith = list(/obj/item/weapon/light/tube = 12,
 					/obj/item/weapon/light/tube/large = 4,
 					/obj/item/weapon/light/bulb = 5)
+					
+/obj/item/weapon/storage/box/lights/mixed/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"

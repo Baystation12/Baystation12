@@ -505,3 +505,35 @@
 		return
 
 	GLOB.error_cache.show_to(usr.client)
+
+/client/proc/cmd_analyse_health_panel()
+	set category = "Debug"
+	set name = "Analyse Health"
+	set desc = "Get an advanced health reading on a human mob."
+
+	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mob_list
+	if(!H)	return
+
+	cmd_analyse_health(H)
+
+/client/proc/cmd_analyse_health(var/mob/living/carbon/human/H)
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	if(!H)	return
+
+	var/dat = H.get_medical_data()
+
+	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
+	show_browser(usr, dat, "window=scanconsole;size=430x600")
+
+/client/proc/cmd_analyse_health_context(mob/living/carbon/human/H as mob in GLOB.human_mob_list)
+	set category = null
+	set name = "Analyse Human Health"
+
+	if(!check_rights(R_DEBUG))
+		return
+	if(!ishuman(H))	return
+	cmd_analyse_health(H)
+	feedback_add_details("admin_verb","ANLS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

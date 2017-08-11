@@ -12,7 +12,8 @@
 	icon_broken = "rdsecurebroken"
 	icon_off = "rdsecureoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/RD_torch/WillContain()
+	return list(
 		/obj/item/clothing/suit/bio_suit/scientist,
 		/obj/item/clothing/head/bio_hood/scientist,
 		/obj/item/clothing/under/rank/research_director,
@@ -54,7 +55,8 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -87,7 +89,8 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/scientist_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat/science,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -118,7 +121,8 @@
 	icon_broken = "miningsecbroken"
 	icon_off = "miningsecoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/prospector/WillContain()
+	return list(
 		/obj/item/device/radio/headset/torchnanotrasen,
 		/obj/item/clothing/under/rank/miner,
 		/obj/item/clothing/accessory/storage/webbing,
@@ -146,7 +150,8 @@
 	icon_broken = "guardbroken"
 	icon_off = "guardoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/guard/WillContain()
+	return list(
 		/obj/item/clothing/under/rank/guard,
 		/obj/item/clothing/suit/armor/vest/nt,
 		/obj/item/clothing/suit/storage/vest/nt,
