@@ -11,3 +11,4 @@
 
 	allowed_spawns = list("Arrivals Shuttle")
 	use_overmap = 1
+	welcome_sound = 'sound/effects/cowboysting.ogg'

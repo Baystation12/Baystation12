@@ -152,7 +152,7 @@ var/global/datum/controller/gameticker/ticker
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
 		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
-		sound_to(world, sound('sound/AI/welcome.ogg'))// Skie
+		sound_to(world, sound(GLOB.using_map.welcome_sound))
 
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
