@@ -817,7 +817,7 @@
 	supervisors = "the Executive Officer"
 	alt_titles = list(
 		"Chef",
-		"Culinary Specialist",
+		"Culinary Specialist"
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
