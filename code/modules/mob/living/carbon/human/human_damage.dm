@@ -190,7 +190,7 @@
 	amount = abs(amount)
 
 	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 0.75
+		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 

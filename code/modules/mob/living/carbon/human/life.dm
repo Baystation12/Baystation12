@@ -918,9 +918,9 @@
 	var/obj/item/organ/internal/kidneys/K = internal_organs_by_name[BP_KIDNEYS]
 	var/tox_loss = getToxLoss()
 
-	if(!stat && !lastpuke && tox_loss > 5 && ((L && !(L.status & ORGAN_DEAD)) || (K && !(K.status & ORGAN_DEAD))))
-		if (prob(10))
-			var/vom_stats = 70 / max(7, 70 - getToxLoss())
+	if(!stat && !lastpuke && tox_loss > 35 && ((L && !(L.status & ORGAN_DEAD)) || (K && !(K.status & ORGAN_DEAD))))
+		if (prob(2))
+			var/vom_stats = 70 / max(7, 70 - (getToxLoss() + 35))
 			spawn vomit(1, vom_stats, vom_stats)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness

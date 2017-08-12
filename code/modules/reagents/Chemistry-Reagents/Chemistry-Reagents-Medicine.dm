@@ -79,10 +79,11 @@
 		)
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_DIONA)
-		M.drowsyness = max(0, M.drowsyness - 6 * removed)
-		M.hallucination = max(0, M.hallucination - 9 * removed)
-	M.add_chemical_effect(CE_ANTITOX, 1)
+	if(alien == IS_DIONA)
+		return
+	M.drowsyness = max(0, M.drowsyness - 6 * removed)
+	M.hallucination = max(0, M.hallucination - 9 * removed)
+	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
 	// TODO: stomach pump
 	var/removing = (4 * removed)
