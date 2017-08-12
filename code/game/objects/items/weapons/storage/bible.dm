@@ -24,11 +24,11 @@
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
 	if(user.mind && (user.mind.assigned_role == "Chaplain"))
-		if(A.reagents && A.reagents.has_reagent("water")) //blesses all the water in the holder
+		if(A.reagents && A.reagents.has_reagent(/datum/reagent/water)) //blesses all the water in the holder
 			to_chat(user, "<span class='notice'>You bless \the [A].</span>") // I wish it was this easy in nethack
-			var/water2holy = A.reagents.get_reagent_amount("water")
-			A.reagents.del_reagent("water")
-			A.reagents.add_reagent("holywater",water2holy)
+			var/water2holy = A.reagents.get_reagent_amount(/datum/reagent/water)
+			A.reagents.del_reagent(/datum/reagent/water)
+			A.reagents.add_reagent(/datum/reagent/water/holywater,water2holy)
 
 /obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)

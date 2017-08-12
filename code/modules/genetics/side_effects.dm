@@ -40,7 +40,7 @@
 		H.visible_message("<B>\The [H]</B>'s limbs start shivering uncontrollably.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("bicaridine"))
+		if(!H.reagents.has_reagent(/datum/reagent/bicaridine))
 			var/organ_name = pick(BP_ALL_LIMBS)
 			var/obj/item/organ/external/E = H.get_organ(organ_name)
 			E.take_damage(20, 0, 0)
@@ -57,7 +57,7 @@
 		H.visible_message("<B>\The [H]</B> drools.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("anti_toxin"))
+		if(!H.reagents.has_reagent(/datum/reagent/dylovene))
 			H.confused += 100
 
 proc/trigger_side_effect(mob/living/carbon/human/H)

@@ -85,7 +85,7 @@
 	icon_state = "pill17"
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 25)
+		reagents.add_reagent(/datum/reagent/dylovene, 25)
 
 /obj/item/weapon/reagent_containers/pill/tox
 	name = "Toxins pill"
@@ -93,7 +93,7 @@
 	icon_state = "pill5"
 	New()
 		..()
-		reagents.add_reagent("toxin", 50)
+		reagents.add_reagent(/datum/reagent/toxin, 50)
 
 /obj/item/weapon/reagent_containers/pill/cyanide
 	name = "Cyanide pill"
@@ -101,7 +101,7 @@
 	icon_state = "pill5"
 	New()
 		..()
-		reagents.add_reagent("cyanide", 50)
+		reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
 
 /obj/item/weapon/reagent_containers/pill/adminordrazine
 	name = "Adminordrazine pill"
@@ -109,7 +109,7 @@
 	icon_state = "pill16"
 	New()
 		..()
-		reagents.add_reagent("adminordrazine", 50)
+		reagents.add_reagent(/datum/reagent/adminordrazine, 50)
 
 /obj/item/weapon/reagent_containers/pill/stox
 	name = "Sleeping pill"
@@ -117,7 +117,7 @@
 	icon_state = "pill8"
 	New()
 		..()
-		reagents.add_reagent("stoxin", 15)
+		reagents.add_reagent(/datum/reagent/soporific, 15)
 
 /obj/item/weapon/reagent_containers/pill/kelotane
 	name = "Kelotane pill"
@@ -125,7 +125,7 @@
 	icon_state = "pill11"
 	New()
 		..()
-		reagents.add_reagent("kelotane", 15)
+		reagents.add_reagent(/datum/reagent/kelotane, 15)
 
 /obj/item/weapon/reagent_containers/pill/paracetamol
 	name = "Paracetamol pill"
@@ -133,7 +133,7 @@
 	icon_state = "pill8"
 	New()
 		..()
-		reagents.add_reagent("paracetamol", 15)
+		reagents.add_reagent(/datum/reagent/paracetamol, 15)
 
 /obj/item/weapon/reagent_containers/pill/tramadol
 	name = "Tramadol pill"
@@ -141,7 +141,7 @@
 	icon_state = "pill8"
 	New()
 		..()
-		reagents.add_reagent("tramadol", 15)
+		reagents.add_reagent(/datum/reagent/tramadol, 15)
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline
 	name = "Inaprovaline pill"
@@ -149,7 +149,7 @@
 	icon_state = "pill20"
 	New()
 		..()
-		reagents.add_reagent("inaprovaline", 30)
+		reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 
 /obj/item/weapon/reagent_containers/pill/dexalin
 	name = "Dexalin pill"
@@ -165,7 +165,7 @@
 	icon_state = "pill8"
 	New()
 		..()
-		reagents.add_reagent("dexalinp", 15)
+		reagents.add_reagent(/datum/reagent/dexalinp, 15)
 
 /obj/item/weapon/reagent_containers/pill/dermaline
 	name = "Dermaline pill"
@@ -173,7 +173,7 @@
 	icon_state = "pill12"
 	New()
 		..()
-		reagents.add_reagent("dermaline", 15)
+		reagents.add_reagent(/datum/reagent/dermaline, 15)
 
 /obj/item/weapon/reagent_containers/pill/dylovene
 	name = "Dylovene pill"
@@ -181,7 +181,7 @@
 	icon_state = "pill13"
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 15)
+		reagents.add_reagent(/datum/reagent/dylovene, 15)
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline
 	name = "Inaprovaline pill"
@@ -189,7 +189,7 @@
 	icon_state = "pill20"
 	New()
 		..()
-		reagents.add_reagent("inaprovaline", 30)
+		reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 
 /obj/item/weapon/reagent_containers/pill/bicaridine
 	name = "Bicaridine pill"
@@ -197,7 +197,7 @@
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("bicaridine", 20)
+		reagents.add_reagent(/datum/reagent/bicaridine, 20)
 
 /obj/item/weapon/reagent_containers/pill/happy
 	name = "Happy pill"
@@ -205,8 +205,8 @@
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("space_drugs", 15)
-		reagents.add_reagent("sugar", 15)
+		reagents.add_reagent(/datum/reagent/space_drugs, 15)
+		reagents.add_reagent(/datum/reagent/sugar, 15)
 
 /obj/item/weapon/reagent_containers/pill/zoom
 	name = "Zoom pill"
@@ -214,9 +214,9 @@
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("impedrezene", 10)
-		reagents.add_reagent("synaptizine", 5)
-		reagents.add_reagent("hyperzine", 5)
+		reagents.add_reagent(/datum/reagent/impedrezene, 10)
+		reagents.add_reagent(/datum/reagent/synaptizine, 5)
+		reagents.add_reagent(/datum/reagent/hyperzine, 5)
 
 /obj/item/weapon/reagent_containers/pill/spaceacillin
 	name = "Spaceacillin pill"
@@ -224,7 +224,7 @@
 	icon_state = "pill19"
 	New()
 		..()
-		reagents.add_reagent("spaceacillin", 15)
+		reagents.add_reagent(/datum/reagent/spaceacillin, 15)
 
 /obj/item/weapon/reagent_containers/pill/diet
 	name = "diet pill"
@@ -232,7 +232,7 @@
 	icon_state = "pill9"
 	New()
 		..()
-		reagents.add_reagent("lipozine", 2)
+		reagents.add_reagent(/datum/reagent/lipozine, 2)
 
 /obj/item/weapon/reagent_containers/pill/noexcutite
 	name = "Noexcutite pill"
@@ -241,7 +241,7 @@
 
 obj/item/weapon/reagent_containers/pill/noexcutite/New()
 		..()
-		reagents.add_reagent("noexcutite", 15)
+		reagents.add_reagent(/datum/reagent/noexcutite, 15)
 
 //Baycode specific Psychiatry pills.
 /obj/item/weapon/reagent_containers/pill/methylphenidate
@@ -251,7 +251,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/methylphenidate/New()
 		..()
-		reagents.add_reagent("methylphenidate", 15)
+		reagents.add_reagent(/datum/reagent/methylphenidate, 15)
 
 /obj/item/weapon/reagent_containers/pill/citalopram
 	name = "Citalopram pill"
@@ -260,7 +260,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/citalopram/New()
 		..()
-		reagents.add_reagent("citalopram", 15)
+		reagents.add_reagent(/datum/reagent/citalopram, 15)
 
 /obj/item/weapon/reagent_containers/pill/paroxetine
 	name = "Paroxetine pill"
@@ -269,7 +269,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/paroxetine/New()
 		..()
-		reagents.add_reagent("paroxetine", 10)
+		reagents.add_reagent(/datum/reagent/paroxetine, 10)
 
 /obj/item/weapon/reagent_containers/pill/antidexafen
 	name = "cold medicine pill"
@@ -278,6 +278,6 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/antidexafen/New()
 		..()
-		reagents.add_reagent("antidexafen", 10)
-		reagents.add_reagent("lemonjuice", 5)
-		reagents.add_reagent("menthol", REM*0.2)
+		reagents.add_reagent(/datum/reagent/antidexafen, 10)
+		reagents.add_reagent(/datum/reagent/drink/juice/lemon, 5)
+		reagents.add_reagent(/datum/reagent/menthol, REM*0.2)

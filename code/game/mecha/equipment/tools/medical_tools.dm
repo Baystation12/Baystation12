@@ -176,10 +176,10 @@
 	if(!R || !occupant || !SG || !(SG in chassis.equipment))
 		return 0
 	var/to_inject = min(R.volume, inject_amount)
-	if(to_inject && occupant.reagents.get_reagent_amount(R.id) + to_inject <= inject_amount*2)
+	if(to_inject && occupant.reagents.get_reagent_amount(R.type) + to_inject <= inject_amount*2)
 		occupant_message("Injecting [occupant] with [to_inject] units of [R.name].")
 		log_message("Injecting [occupant] with [to_inject] units of [R.name].")
-		SG.reagents.trans_id_to(occupant,R.id,to_inject)
+		SG.reagents.trans_type_to(occupant,R.type,to_inject)
 		update_equip_info()
 	return
 
@@ -211,8 +211,8 @@
 	M.AdjustStunned(-4)
 	M.AdjustWeakened(-4)
 	M.AdjustStunned(-4)
-	if(M.reagents.get_reagent_amount("inaprovaline") < 5)
-		M.reagents.add_reagent("inaprovaline", 5)
+	if(M.reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 5)
+		M.reagents.add_reagent(/datum/reagent/inaprovaline, 5)
 	S.chassis.use_power(S.energy_drain)
 	S.update_equip_info()
 	return
@@ -240,7 +240,7 @@
 	..()
 	flags |= NOREACT
 	syringes = new
-	known_reagents = list("inaprovaline"="Inaprovaline","anti_toxin"="Dylovene")
+	known_reagents = list(/datum/reagent/inaprovaline="Inaprovaline",/datum/reagent/dylovene="Dylovene")
 	processed_reagents = new
 	create_reagents(max_volume)
 	synth = new (list(src),0)
@@ -448,7 +448,7 @@
 		return 0
 	occupant_message("Analyzing reagents...")
 	for(var/datum/reagent/R in A.reagents.reagent_list)
-		if(R.reagent_state == 2 && add_known_reagent(R.id,R.name))
+		if(R.reagent_state == 2 && add_known_reagent(R.type,R.name))
 			occupant_message("Reagent analyzed, identified as [R.name] and added to database.")
 			send_byjax(chassis.occupant,"msyringegun.browser","reagents_form",get_reagents_form())
 	occupant_message("Analyzis complete.")

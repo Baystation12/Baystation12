@@ -84,10 +84,10 @@
 	else if(is_bruised())
 		amount *= 0.1
 
-	var/acetone_volume_raw = owner.reagents.get_reagent_amount("acetone")
+	var/acetone_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/acetone)
 
 	if((acetone_volume_raw < acetone_level || !acetone_volume_raw) && owner.breath_fail_ratio < 0.25)
-		owner.reagents.add_reagent("acetone", amount)
+		owner.reagents.add_reagent(/datum/reagent/acetone, amount)
 	..()
 
 // These are not actually lungs and shouldn't be thought of as such despite the claims of the parent.

@@ -26,21 +26,21 @@
 /obj/machinery/icecream_vat/proc/get_ingredient_list(var/type)
 	switch(type)
 		if(ICECREAM_CHOCOLATE)
-			return list("milk", "ice", "coco")
+			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/nutriment/coco)
 		if(ICECREAM_STRAWBERRY)
-			return list("milk", "ice", "berryjuice")
+			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/drink/juice/berry)
 		if(ICECREAM_BLUE)
-			return list("milk", "ice", "singulo")
+			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/ethanol/singulo)
 		if(ICECREAM_CHERRY)
-			return list("milk", "ice", "cherryjelly")
+			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/nutriment/cherryjelly)
 		if(ICECREAM_BANANA)
-			return list("milk", "ice", "banana")
+			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/drink/juice/banana)
 		if(CONE_WAFFLE)
-			return list("flour", "sugar")
+			return list(/datum/reagent/nutriment/flour, /datum/reagent/sugar)
 		if(CONE_CHOC)
-			return list("flour", "sugar", "coco")
+			return list(/datum/reagent/nutriment/flour, /datum/reagent/sugar, /datum/reagent/nutriment/coco)
 		else
-			return list("milk", "ice")
+			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice)
 
 /obj/machinery/icecream_vat/proc/get_flavour_name(var/flavour_type)
 	switch(flavour_type)
@@ -53,7 +53,7 @@
 		if(ICECREAM_CHERRY)
 			return "cherry"
 		if(ICECREAM_BANANA)
-			return "banana"
+			return /datum/reagent/drink/juice/banana
 		if(CONE_WAFFLE)
 			return "waffle"
 		if(CONE_CHOC)
@@ -66,10 +66,10 @@
 	create_reagents(100)
 	while(product_types.len < 8)
 		product_types.Add(5)
-	reagents.add_reagent("milk", 5)
-	reagents.add_reagent("flour", 5)
-	reagents.add_reagent("sugar", 5)
-	reagents.add_reagent("ice", 5)
+	reagents.add_reagent(/datum/reagent/drink/milk, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/flour, 5)
+	reagents.add_reagent(/datum/reagent/sugar, 5)
+	reagents.add_reagent(/datum/reagent/drink/ice, 5)
 
 /obj/machinery/icecream_vat/attack_hand(mob/user as mob)
 	user.set_machine(src)
@@ -110,7 +110,7 @@
 			//	if(beaker)
 			//		beaker.reagents.trans_to(I, 10)
 				if(I.reagents.total_volume < 10)
-					I.reagents.add_reagent("sugar", 10 - I.reagents.total_volume)
+					I.reagents.add_reagent(/datum/reagent/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
 		else
@@ -192,7 +192,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream/New()
 	create_reagents(20)
-	reagents.add_reagent("nutriment", 5)
+	reagents.add_reagent(/datum/reagent/nutriment, 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream/proc/add_ice_cream(var/flavour_name)
 	name = "[flavour_name] icecream"

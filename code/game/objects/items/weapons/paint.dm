@@ -29,7 +29,7 @@ var/global/list/cached_icons = list()
 /obj/item/weapon/reagent_containers/glass/paint/New()
 	..()
 	if(paint_hex && lentext(paint_hex) > 0)
-		reagents.add_reagent("paint", volume, paint_hex)
+		reagents.add_reagent(/datum/reagent/paint, volume, paint_hex)
 
 /obj/item/weapon/reagent_containers/glass/paint/red
 	name = "red paint bucket"

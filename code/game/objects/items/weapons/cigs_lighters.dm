@@ -139,15 +139,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!src.lit)
 		src.lit = 1
 		damtype = "fire"
-		if(reagents.get_reagent_amount("phoron")) // the phoron explodes when exposed to fire
+		if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(reagents.get_reagent_amount("phoron") / 2.5, 1), get_turf(src), 0, 0)
+			e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
 			return
-		if(reagents.get_reagent_amount("fuel")) // the fuel explodes, too, but much less violently
+		if(reagents.get_reagent_amount(/datum/reagent/fuel)) // the fuel explodes, too, but much less violently
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(reagents.get_reagent_amount("fuel") / 5, 1), get_turf(src), 0, 0)
+			e.set_up(round(reagents.get_reagent_amount(/datum/reagent/fuel) / 5, 1), get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
 			return
@@ -213,7 +213,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette/New()
 	..()
-	reagents.add_reagent("nicotine", 1)
+	reagents.add_reagent(/datum/reagent/nicotine, 1)
 
 /obj/item/clothing/mask/smokable/cigarette/update_icon()
 	..()
@@ -249,8 +249,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette/menthol/New()
 	..()
-	reagents.add_reagent("nicotine", 1)
-	reagents.add_reagent("menthol", 1)
+	reagents.add_reagent(/datum/reagent/nicotine, 1)
+	reagents.add_reagent(/datum/reagent/menthol, 1)
 
 /obj/item/clothing/mask/smokable/cigarette/luckystars
 	brand = "\improper Lucky Star"
@@ -357,7 +357,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	New()
 		..()
-		reagents.add_reagent("nicotine", 5)
+		reagents.add_reagent(/datum/reagent/nicotine, 5)
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
@@ -375,7 +375,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	New()
 		..()
-		reagents.add_reagent("nicotine", 10)
+		reagents.add_reagent(/datum/reagent/nicotine, 10)
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"

@@ -355,8 +355,8 @@
 									"calvatia", "gigantea", "clitopilis", "prumulus", "entoloma", "abortivum",
 									"suillus", "tuber", "aestivum", "volvacea", "delica", "russula", "rozites")
 
-		possible_prefixes |= list("butter", "shad", "sugar", "june", "wild", "rigus", "curry", "hard", "soft", "dark", "brick", "stone", "red", "brown",
-								"black", "white", "paper", "slippery", "honey", "bitter")
+		possible_prefixes |= list("butter", "shad", /datum/reagent/sugar, "june", "wild", "rigus", "curry", "hard", "soft", "dark", "brick", "stone", "red", "brown",
+								"black", "white", "paper", "slippery", /datum/reagent/nutriment/honey, "bitter")
 		prefix = pick(possible_prefixes)
 
 	var/num = rand(2,5)
@@ -420,15 +420,15 @@
 
 	chems = list()
 	if(prob(80))
-		chems["nutriment"] = list(rand(1,10),rand(10,20))
+		chems[/datum/reagent/nutriment] = list(rand(1,10),rand(10,20))
 
 	var/additional_chems = rand(0,5)
 
 	if(additional_chems)
 		var/list/banned_chems = list(
-			"adminordrazine",
-			"nutriment",
-			"nanites"
+			/datum/reagent/adminordrazine,
+			/datum/reagent/nutriment,
+			/datum/reagent/nanites
 			)
 
 		for(var/x=1;x<=additional_chems;x++)

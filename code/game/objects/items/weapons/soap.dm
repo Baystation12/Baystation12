@@ -17,7 +17,7 @@
 	wet()
 
 /obj/item/weapon/soap/proc/wet()
-	reagents.add_reagent("cleaner", 5)
+	reagents.add_reagent(/datum/reagent/space_cleaner, 5)
 
 /obj/item/weapon/soap/Crossed(AM as mob|obj)
 	if (istype(AM, /mob/living))

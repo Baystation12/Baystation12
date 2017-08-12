@@ -66,18 +66,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			return_name = "Diamond"
 	return return_name
 
-/obj/machinery/computer/rdconsole/proc/CallReagentName(var/ID)
-	var/return_name = ID
-	var/datum/reagent/temp_reagent
-	for(var/R in (typesof(/datum/reagent) - /datum/reagent))
-		temp_reagent = null
-		temp_reagent = new R()
-		if(temp_reagent.id == ID)
-			return_name = temp_reagent.name
-			qdel(temp_reagent)
-			temp_reagent = null
-			break
-	return return_name
+/obj/machinery/computer/rdconsole/proc/CallReagentName(var/reagent_type)
+	var/datum/reagent/R = chemical_reagents_list[reagent_type]
+	return R ? R.name : "Unknown"
 
 /obj/machinery/computer/rdconsole/proc/SyncRDevices() //Makes sure it is properly sync'ed up with the devices attached to it (if any).
 	for(var/obj/machinery/r_n_d/D in range(3, src))

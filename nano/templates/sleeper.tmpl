@@ -37,7 +37,7 @@
 		</div>
 		<div class="itemContent">
 			{{if data.occupant}}Occupant: {{:value.amount}} units{{/if}}
-			{{:helper.link('Inject 5', null, {'chemical' : value.id, 'amount' : 5}, data.occupant ? null : 'disabled')}}{{:helper.link('Inject 10', null, {'chemical' : value.id, 'amount' : 10}, data.occupant ? null : 'disabled')}}
+			{{:helper.link('Inject 5', null, {'chemical' : value.name, 'amount' : 5}, data.occupant ? null : 'disabled')}}{{:helper.link('Inject 10', null, {'chemical' : value.name, 'amount' : 10}, data.occupant ? null : 'disabled')}}
 		</div>
 	{{/for}}
 	</div>

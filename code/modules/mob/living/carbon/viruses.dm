@@ -55,7 +55,7 @@
 			infect_mob_random_lesser(src)
 
 /mob/living/carbon/proc/virus_immunity()
-	var/antibiotic_boost = reagents.get_reagent_amount("spaceacillin") / (REAGENTS_OVERDOSE/2)
+	var/antibiotic_boost = reagents.get_reagent_amount(/datum/reagent/spaceacillin) / (REAGENTS_OVERDOSE/2)
 	return max(immunity/100 * (1+antibiotic_boost), antibiotic_boost)
 
 /mob/living/carbon/proc/immunity_weakness()

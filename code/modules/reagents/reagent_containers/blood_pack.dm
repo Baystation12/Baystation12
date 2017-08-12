@@ -25,7 +25,7 @@
 	..()
 	if(blood_type)
 		name = "BloodPack [blood_type]"
-		reagents.add_reagent("blood", 200, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list()))
+		reagents.add_reagent(/datum/reagent/blood, 200, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list()))
 		update_icon()
 
 /obj/item/weapon/reagent_containers/blood/on_reagent_change()

@@ -46,9 +46,9 @@
 			source_mineral = container.mineral.xarch_source_mineral
 
 	if(prob(75))
-		find_presence["phosphorus"] = rand(1, 500) / 100
+		find_presence[/datum/reagent/phosphorus] = rand(1, 500) / 100
 	if(prob(25))
-		find_presence["mercury"] = rand(1, 500) / 100
+		find_presence[/datum/reagent/mercury] = rand(1, 500) / 100
 	find_presence["chlorine"] = rand(500, 2500) / 100
 
 	for(var/datum/find/F in container.finds)

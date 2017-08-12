@@ -76,4 +76,4 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/zombiedrink/New()
 	..()
-	reagents.add_reagent("corruption",120)
+	reagents.add_reagent(/datum/reagent/toxin/corrupting,120)

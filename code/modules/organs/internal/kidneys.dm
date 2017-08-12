@@ -30,7 +30,7 @@
 			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
-	if(!owner.reagents.has_reagent("anti_toxin"))
+	if(!owner.reagents.has_reagent(/datum/reagent/dylovene))
 		if(prob(33))
 			if(is_broken())
 				owner.adjustToxLoss(0.5)

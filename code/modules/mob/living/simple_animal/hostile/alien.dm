@@ -79,7 +79,7 @@
 
 /obj/item/projectile/neurotox
 	damage = 30
-	icon_state = "toxin"
+	icon_state = /datum/reagent/toxin
 
 /mob/living/simple_animal/hostile/alien/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage = "lets out a waning guttural screech, green blood bubbling from its maw...", show_dead_message)
