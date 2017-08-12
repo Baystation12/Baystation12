@@ -49,19 +49,19 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/roles/poncho/security
-	allowed_roles = list("Security Guard", "Merchant")
+	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/medical
-	allowed_roles = list("Medical Contractor", "Chemist", "Counselor", "Merchant")
+	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/engineering
-	allowed_roles = list("Maintenance Assistant", "Roboticist", "Merchant")
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/science
-	allowed_roles = list("Scientist", "Research Assistant", "Merchant")
+	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/cargo
-	allowed_roles = list("Supply Assistant", "Merchant")
+	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
 
 /datum/gear/suit/suit_jacket
 	allowed_roles = FORMAL_ROLES

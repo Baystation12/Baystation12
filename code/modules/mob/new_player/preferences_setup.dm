@@ -215,8 +215,8 @@ datum/preferences
 				var/permitted = 0
 				if(G.allowed_roles && G.allowed_roles.len)
 					if(previewJob)
-						for(var/job_name in G.allowed_roles)
-							if(previewJob.title == job_name)
+						for(var/job_type in G.allowed_roles)
+							if(previewJob.type == job_type)
 								permitted = 1
 				else
 					permitted = 1

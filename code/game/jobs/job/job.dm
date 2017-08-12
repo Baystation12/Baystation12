@@ -6,7 +6,7 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/department_flag = 0
-	var/faction = "None"	              // Players will be allowed to spawn in as jobs that are set to "Station"
+	var/faction = "None"                  // Players will be allowed to spawn in as jobs that are set to "Station"
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
@@ -21,16 +21,20 @@
 	var/ideal_character_age = 30
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
-	var/account_allowed = 1				  // Does this job type come with a station account?
-	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
+	var/account_allowed = 1               // Does this job type come with a station account?
+	var/economic_modifier = 2             // With how much does this job modify the initial account amount?
 
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
-	var/list/allowed_branches			  // For Torch, also expandable for other purposes
-	var/list/allowed_ranks				  // Ditto
+	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
+	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
+	var/list/allowed_ranks                // Ditto
 
-	var/announced						  //If their arrival is announced on radio
-	var/latejoin_at_spawnpoints			  //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+	var/announced                         //If their arrival is announced on radio
+	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+    
+/datum/job/dd_SortValue()
+    return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
