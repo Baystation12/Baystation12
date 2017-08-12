@@ -1,4 +1,6 @@
 /obj/structure/sign/double/barsign
+	desc = "A jumbo-sized LED sign. This one seems to be showing its age."
+	description_info = "If your ID has bar access, you may swipe it on this sign to alter its display."
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
 	appearance_flags = 0

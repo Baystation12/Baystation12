@@ -69,7 +69,7 @@
 	return 1
 
 /obj/item/weapon/reagent_containers/proc/standard_splash_mob(var/mob/user, var/mob/target) // This goes into afterattack
-	if(!istype(target))
+	if(!istype(target) || user.a_intent == I_HELP)
 		return
 
 	if(!reagents || !reagents.total_volume)

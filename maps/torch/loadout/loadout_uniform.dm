@@ -56,7 +56,6 @@
 	suits["black jumpskirt"] = /obj/item/clothing/under/blackjumpskirt
 	suits["kilt"] = /obj/item/clothing/under/kilt
 	suits["human resources dress"] = /obj/item/clothing/under/dress/dress_hr
-	suits["frontier overalls"] = /obj/item/clothing/under/frontier
 	suits["detective's suit"] = /obj/item/clothing/under/det
 	suits["black detective's suit"] = /obj/item/clothing/under/det/black
 	suits["grey detective's suit"] = /obj/item/clothing/under/det/grey
@@ -120,13 +119,31 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
 
 /datum/gear/uniform/casual_pants
+    display_name = "casual pants selection"
+    path = /obj/item/clothing/under/casual_pants
     allowed_roles = SEMIFORMAL_ROLES
 
+/datum/gear/uniform/casual_pants/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/casual_pants)
+
 /datum/gear/uniform/formal_pants
+    display_name = "formal pants selection"
+    path = /obj/item/clothing/under/formal_pants
     allowed_roles = FORMAL_ROLES
 
+/datum/gear/uniform/formal_pants/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/formal_pants)
+
 /datum/gear/uniform/shorts
+	display_name = "shorts selection"
+	path = /obj/item/clothing/under/shorts/jeans
 	allowed_roles = RESTRICTED_ROLES
+
+/datum/gear/uniform/shorts/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/shorts/jeans)
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater"
@@ -173,3 +190,8 @@
 	display_name = "Contractor Utility Uniform"
 	path = /obj/item/clothing/under/utility
 	allowed_roles = CONTRACTOR_ROLES
+
+/datum/gear/uniform/frontier
+	display_name = "frontier clothes"
+	path = /obj/item/clothing/under/frontier
+	allowed_roles = NON_MILITARY_ROLES
