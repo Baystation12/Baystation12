@@ -1,0 +1,7 @@
+author: Heptagon49
+
+delete-after: True
+
+changes:
+  - rscadd: "NanoTrasen personnel are proud to announce their latest line of medical products for the doctor on the go: MediGel. MediGel is made by taking select NT approved chemicals and mixing them with silicon and hydrochloric acid in a 4:1:1 ratio. Medigel chems work just like their counterparts, except their effects are dealt on touch, not on ingestion or when injected."
+  - rscadd: "Do not attempt to inject MediGel directly into your system. Do not eat MediGel. Potential side effects of intaking MediGel orally or intravenously may include, but are not limited to: nausia, bloating, excessive gas, intestinal distress, liver failure, kidney failure, brain failure, organ ruptures, system shock, total organ failure, death, and halitosis."
