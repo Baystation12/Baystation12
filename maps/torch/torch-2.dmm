@@ -1556,7 +1556,7 @@
 "Fa" = (/obj/structure/bookcase/manuals/engineering{pixel_x = 0},/obj/item/weapon/book/manual/medical_diagnostics_manual,/obj/item/weapon/book/manual/medical_cloning,/turf/simulated/floor/tiled/dark,/area/crew_quarters/lounge)
 "Fb" = (/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/carpet,/area/crew_quarters/lounge)
 "Fc" = (/turf/simulated/floor/carpet,/area/crew_quarters/lounge)
-"Fd" = (/obj/structure/bookcase/manuals/research_and_development{pixel_x = 0},/obj/item/weapon/book/manual/security_space_law,/obj/item/weapon/book/manual/detective,/turf/simulated/floor/tiled/dark,/area/crew_quarters/lounge)
+"Fd" = (/obj/structure/bookcase/manuals/research_and_development{pixel_x = 0},/obj/item/weapon/book/manual/detective,/turf/simulated/floor/tiled/dark,/area/crew_quarters/lounge)
 "Fe" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/ladder/updown,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/maintenance/thirddeck/port)
 "Ff" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/maintenance{name = "Cargo Storage Maintenance"; req_access = list(31)},/turf/simulated/floor/plating,/area/maintenance/thirddeck/port)
 "Fg" = (/obj/item/frame/apc,/turf/simulated/floor/plating,/area/vacant/cabin)
