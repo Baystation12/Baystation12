@@ -17,6 +17,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/doc
 	alt_titles = list(
 		"Ship's Surgeon")
+	total_positions = 1
+	spawn_positions = 1
 
 /datum/job/qm
 	title = "First Mate"
@@ -34,10 +36,14 @@
 /datum/job/engineer
 	title = "Junior Engineer"
 	supervisors = "Chief Engineer"
+	total_positions = 2
+	spawn_positions = 2
 
 /datum/job/cyborg
 	supervisors = "your laws and the Captain"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/hand/engine
+	total_positions = 1
+	spawn_positions = 1
 
 /decl/hierarchy/outfit/job/bearcat/
 	hierarchy_type = /decl/hierarchy/outfit/job/bearcat
@@ -104,7 +110,7 @@
 	name = OUTFIT_JOB_NAME("Bearcat - Junior Engineer")
 	head = /obj/item/clothing/head/hardhat
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
-	
+
 /decl/hierarchy/outfit/job/bearcat/hand/engine/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(prob(50))
