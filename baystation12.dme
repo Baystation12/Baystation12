@@ -1653,6 +1653,7 @@
 #include "code\modules\mob\living\deity\phenomena\communication.dm"
 #include "code\modules\mob\living\deity\phenomena\conjuration.dm"
 #include "code\modules\mob\living\deity\phenomena\conversion.dm"
+#include "code\modules\mob\living\deity\phenomena\narsie.dm"
 #include "code\modules\mob\living\deity\phenomena\phenomena.dm"
 #include "code\modules\mob\living\deity\phenomena\transmutation.dm"
 #include "code\modules\mob\living\silicon\death.dm"

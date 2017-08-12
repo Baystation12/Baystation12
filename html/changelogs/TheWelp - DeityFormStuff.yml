@@ -1,0 +1,9 @@
+author: TheWelp
+delete-after: True
+
+changes: 
+  - rscadd: "Adds two new Nar-Sie phenomena."
+  - rscadd: "Adds two generic feats involving power generation."
+  - tweak: "Communication phenomena can now be used on non-cultists. We will see if this is a good change."
+  - tweak: "Tweaks a few of the phenomena names to be more apparently phenomena."
+  - tweak: "Buffed Nar-Sie's power costs (reducing them)."
