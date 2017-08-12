@@ -1,3 +1,10 @@
+#include "bearcat.dm"
+#include "bearcat_areas.dm"
+#include "bearcat_jobs.dm"
+#include "bearcat_loadouts.dm"
+#include "bearcat-1.dmm"
+#include "bearcat-2.dmm"
+
 /obj/effect/overmap/ship/bearcat
 	name = "CSV Bearcat"
 	color = "#00FFFF"
@@ -18,7 +25,7 @@
 /datum/shuttle/autodock/overmap/exploration
 	name = "Exploration Shuttle"
 	shuttle_area = /area/ship/scrap/shuttle/outgoing
-	dock_target = "shuttle_starboard"
+	dock_target = "bearcat_shuttle"
 	current_location = "nav_bearcat_port_dock_shuttle"
 
 /obj/structure/closet/crate/uranium
@@ -57,3 +64,12 @@
 	..()
 	new /obj/item/stack/material/uranium{amount=50}(src)
 	new /obj/item/stack/material/uranium{amount=50}(src)
+
+/turf/simulated/wall //landlubbers go home
+	name = "bulkhead"
+
+/turf/simulated/floor
+	name = "bare deck"
+
+/turf/simulated/floor/tiled
+	name = "deck"
