@@ -415,3 +415,8 @@ This function restores all organs.
 		traumatic_shock *= 0.5
 
 	return max(0,traumatic_shock)
+
+/mob/living/carbon/human/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+	if(effecttype == IRRADIATE && (effect * blocked_mult(blocked) <= RAD_LEVEL_LOW))
+		return 0
+	return ..()
