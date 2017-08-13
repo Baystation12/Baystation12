@@ -64,16 +64,28 @@ mob/living/carbon/human/proc/handle_pain()
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/I in internal_organs)
-		if((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) continue
-		if(I.damage > 2) if(prob(2))
+		if(prob(1) && !((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) && I.damage > 5)
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
-			src.custom_pain("You feel a sharp pain in your [parent.name]", 50, affecting = parent)
+			var/pain = 10
+			var/message = "You feel a dull pain in your [parent.name]"
+			if(I.is_bruised())
+				pain = 25
+				message = "You feel a pain in your [parent.name]"
+			if(I.is_broken())
+				pain = 50
+				message = "You feel a sharp pain in your [parent.name]"
+			src.custom_pain(message, pain, affecting = parent)
 
-	if(prob(2))
+
+	if(prob(1))
 		switch(getToxLoss())
-			if(10 to 25)
+			if(5 to 17)
 				custom_pain("Your body stings slightly.", getToxLoss())
-			if(25 to 45)
+			if(17 to 35)
+				custom_pain("Your body stings.", getToxLoss())
+			if(35 to 60)
+				custom_pain("Your body stings strongly.", getToxLoss())
+			if(60 to 100)
 				custom_pain("Your whole body hurts badly.", getToxLoss())
-			if(61 to INFINITY)
+			if(100 to INFINITY)
 				custom_pain("Your body aches all over, it's driving you mad.", getToxLoss())

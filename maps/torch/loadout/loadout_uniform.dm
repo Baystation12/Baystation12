@@ -23,7 +23,7 @@
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
 	path = /obj/item/clothing/under/rank/roboticist/skirt
-	allowed_roles = list("Roboticist")
+	allowed_roles = list(/datum/job/roboticist)
 
 /datum/gear/uniform/suit
 	display_name = "clothes selection"
@@ -159,9 +159,9 @@
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under/mbill
-	allowed_roles = list("Scientist", "Prospector", "Security Guard", "Research Assistant",
-						"Passenger", "Maintenance Assistant", "Roboticist", "Medical Contractor",
-						"Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant")
+	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
+						/datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant)
 
 /datum/gear/uniform/corporate/New()
 	..()

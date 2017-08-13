@@ -253,7 +253,7 @@ var/list/organ_cache = list()
 		src.damage = between(0, src.damage + amount, max_damage)
 
 		//only show this if the organ is not robotic
-		if(owner && parent_organ && amount > 0)
+		if(owner && parent_organ && (amount > 5 || prob(10)))
 			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 			if(parent && !silent)
 				owner.custom_pain("Something inside your [parent.name] hurts a lot.", amount, affecting = parent)

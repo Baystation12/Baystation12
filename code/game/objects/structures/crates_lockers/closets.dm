@@ -35,7 +35,7 @@
 	..()
 
 	if((setup & CLOSET_HAS_LOCK))
-		verbs += /obj/structure/closet/proc/togglelock
+		verbs += /obj/structure/closet/proc/togglelock_verb
 
 	return INITIALIZE_HINT_LATELOAD
 
@@ -97,12 +97,12 @@
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
 
-	if(storage_types & CLOSET_STORAGE_MISC)
-		stored_units += store_misc(stored_units)
 	if(storage_types & CLOSET_STORAGE_ITEMS)
 		stored_units += store_items(stored_units)
 	if(storage_types & CLOSET_STORAGE_MOBS)
 		stored_units += store_mobs(stored_units)
+	if(storage_types & CLOSET_STORAGE_STRUCTURES)
+		stored_units += store_structures(stored_units)
 
 /obj/structure/closet/proc/open()
 	if(src.opened)
@@ -135,45 +135,68 @@
 
 	return 1
 
-//Cham Projector Exception
-/obj/structure/closet/proc/store_misc(var/stored_units)
-	var/added_units = 0
-	for(var/obj/effect/dummy/chameleon/AD in src.loc)
-		if((stored_units + added_units) > storage_capacity)
-			break
-		AD.forceMove(src)
-		added_units++
-	return added_units
-
+#define CLOSET_CHECK_TOO_BIG(x) (stored_units + . + x > storage_capacity)
 /obj/structure/closet/proc/store_items(var/stored_units)
-	var/added_units = 0
-	for(var/obj/item/I in src.loc)
-		var/item_size = content_size(I)
-		if(stored_units + added_units + item_size > storage_capacity)
+	. = 0
+
+	for(var/obj/effect/dummy/chameleon/AD in loc)
+		if(CLOSET_CHECK_TOO_BIG(1))
+			break
+		.++
+		AD.forceMove(src)
+
+	for(var/obj/item/I in loc)
+		if(I.anchored)
 			continue
-		if(!I.anchored)
-			I.forceMove(src)
-			I.pixel_x = 0
-			I.pixel_y = 0
-			I.pixel_z = 0
-			added_units += item_size
-	return added_units
+		var/item_size = content_size(I)
+		if(CLOSET_CHECK_TOO_BIG(item_size))
+			break
+		. += item_size
+		I.forceMove(src)
+		I.pixel_x = 0
+		I.pixel_y = 0
+		I.pixel_z = 0
 
 /obj/structure/closet/proc/store_mobs(var/stored_units)
-	var/added_units = 0
-	for(var/mob/living/M in src.loc)
-		if(M.buckled || M.pinned.len)
+	. = 0
+	for(var/mob/living/M in loc)
+		if(M.buckled || M.pinned.len || M.anchored)
 			continue
 		var/mob_size = content_size(M)
-		if(stored_units + added_units + mob_size > storage_capacity)
+		if(CLOSET_CHECK_TOO_BIG(mob_size))
 			break
+		. += mob_size
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
-		added_units += mob_size
-	return added_units
 
+/obj/structure/closet/proc/store_structures(var/stored_units)
+	. = 0
+
+	for(var/obj/structure/S in loc)
+		if(S == src)
+			continue
+		if(S.anchored)
+			continue
+		var/structure_size = content_size(S)
+		if(CLOSET_CHECK_TOO_BIG(structure_size))
+			break
+		. += structure_size
+		S.forceMove(src)
+
+	for(var/obj/machinery/M in loc)
+		if(M.anchored)
+			continue
+		var/structure_size = content_size(M)
+		if(CLOSET_CHECK_TOO_BIG(structure_size))
+			break
+		. += structure_size
+		M.forceMove(src)
+
+#undef CLOSET_CHECK_TOO_BIG
+
+// If you adjust any of the values below, please also update /proc/unit_test_weight_of_path(var/path)
 /obj/structure/closet/proc/content_size(atom/movable/AM)
 	if(ismob(AM))
 		var/mob/M = AM
@@ -181,6 +204,8 @@
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		return (I.w_class / 2)
+	if(istype(AM, /obj/structure) || istype(AM, /obj/machinery))
+		return MOB_LARGE
 	return 0
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
@@ -254,17 +279,14 @@
 								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
 								 "<span class='notice'>You hear rustling of clothes.</span>")
 			return
-		if(isrobot(user))
-			return
-		if(W.loc != user) // This should stop mounted modules ending up outside the module.
-			return
-		usr.drop_item()
-		if(W)
-			W.forceMove(src.loc)
+
+		if(usr.drop_item())
+			W.forceMove(loc)
 			W.pixel_x = 0
 			W.pixel_y = 0
 			W.pixel_z = 0
 			W.pixel_w = 0
+		return
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -287,7 +309,7 @@
 		src.update_icon()
 		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
 	if(setup & CLOSET_HAS_LOCK)
-		src.togglelock(user)
+		src.togglelock(user, W)
 	else
 		src.attack_hand(user)
 
@@ -446,12 +468,18 @@
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
 	return
 
-/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+// If we use the /obj/structure/closet/proc/togglelock variant BYOND asks the user to select an input for id_card, which is then mostly irrelevant.
+/obj/structure/closet/proc/togglelock_verb(var/mob/user)
 	set src in oview(1) // One square distance
 	set category = "Object"
 	set name = "Toggle Lock"
 
+	return togglelock(user)
+
+/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
 	if(!(setup & CLOSET_HAS_LOCK))
+		return FALSE
+	if(!CanPhysicallyInteract(user))
 		return FALSE
 	if(src.opened)
 		to_chat(user, "<span class='notice'>Close \the [src] first.</span>")
@@ -461,8 +489,6 @@
 		return FALSE
 	if(user.loc == src)
 		to_chat(user, "<span class='notice'>You can't reach the lock from inside.</span>")
-		return FALSE
-	if(!CanPhysicallyInteract(user))
 		return FALSE
 
 	add_fingerprint(user)
@@ -484,7 +510,10 @@
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(var/mob/user)
-	togglelock(user)
+	if(!src.opened)
+		togglelock(user)
+	else
+		return ..()
 
 /obj/structure/closet/emp_act(severity)
 	for(var/obj/O in src)

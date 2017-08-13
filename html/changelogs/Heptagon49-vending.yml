@@ -1,6 +1,0 @@
-author: Heptagon49
-delete-after: True
-changes:
-  - rscadd: "Adds a 1% chance for a diona nymph to pop out when you activate a vending machine."
-  - imageadd: "Adds a few vending animations."
-  - tweak: "Changes the NutriMax icon from the nutrimat to the pre-existing, but unused, nutri."
