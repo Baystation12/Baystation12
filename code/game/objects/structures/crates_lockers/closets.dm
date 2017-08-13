@@ -286,6 +286,7 @@
 			W.pixel_y = 0
 			W.pixel_z = 0
 			W.pixel_w = 0
+		return
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -509,7 +510,10 @@
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(var/mob/user)
-	togglelock(user)
+	if(!src.opened)
+		togglelock(user)
+	else
+		return ..()
 
 /obj/structure/closet/emp_act(severity)
 	for(var/obj/O in src)

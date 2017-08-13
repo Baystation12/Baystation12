@@ -6,10 +6,10 @@
 	almost anything into a trash can.
 */
 
-/atom/proc/CanMouseDrop(atom/over, var/mob/user = usr)
+/atom/proc/CanMouseDrop(atom/over, var/mob/user = usr, var/incapacitation_flags)
 	if(!user || !over)
 		return FALSE
-	if(user.incapacitated())
+	if(user.incapacitated(incapacitation_flags))
 		return FALSE
 	if(!src.Adjacent(user) || !over.Adjacent(user))
 		return FALSE // should stop you from dragging through windows
@@ -23,6 +23,6 @@
 		over.MouseDrop_T(src,usr)
 	return
 
-// recieve a mousedrop
+// Receive a mouse drop
 /atom/proc/MouseDrop_T(atom/dropping, mob/user)
 	return
