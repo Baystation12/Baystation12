@@ -15,6 +15,7 @@
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(strength && alien != IS_DIONA)
+		M.add_chemical_effect(CE_TOXIN, strength)
 		var/dam = (strength * removed)
 		if(target_organ && ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -190,7 +191,7 @@
 	if(holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
-	..()
+	. = ..()
 
 /datum/reagent/toxin/fertilizer //Reagents used for plant fertilizers.
 	name = "fertilizer"

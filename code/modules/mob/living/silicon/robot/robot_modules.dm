@@ -318,7 +318,7 @@ var/global/list/robot_modules = list(
 	name = "engineering robot module"
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
-	subsystems = list(/datum/nano_module/power_monitor)
+	subsystems = list(/datum/nano_module/power_monitor, /datum/nano_module/supermatter_monitor)
 	supported_upgrades = list(/obj/item/borg/upgrade/rcd)
 	sprites = list(
 					"Basic" = "Engineering",
@@ -399,7 +399,7 @@ var/global/list/robot_modules = list(
 	name = "security robot module"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
-	subsystems = list(/datum/nano_module/crew_monitor)
+	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
 	can_be_pushed = 0
 	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
 
@@ -558,6 +558,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
+	subsystems = list(/datum/nano_module/supply)
 	channels = list("Supply" = 1, "Science" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(

@@ -46,10 +46,10 @@
 	// update the invisibility and icon
 	hide(var/intact)
 		invisibility = intact ? 101 : 0
-		updateicon()
+		update_icon()
 
 	// update the icon_state
-	proc/updateicon()
+	update_icon()
 		var/state="floor_magnet"
 		var/onstate=""
 		if(!on)
@@ -168,7 +168,7 @@
 						qdel(src)
 		*/
 
-		updateicon()
+		update_icon()
 
 
 	proc/magnetic_process() // proc that actually does the pulling

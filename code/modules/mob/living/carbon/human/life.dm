@@ -223,11 +223,11 @@
 		var/damage = 0
 		radiation -= 1 * RADIATION_SPEED_COEFFICIENT
 		if(prob(25))
-			damage = 1
+			damage = 2
 
 		if (radiation > 50)
-			damage = 1
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			damage = 2
+			radiation -= 2 * RADIATION_SPEED_COEFFICIENT
 			if(!isSynthetic())
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
@@ -244,7 +244,7 @@
 
 		if (radiation > 75)
 			damage = 3
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			radiation -= 3 * RADIATION_SPEED_COEFFICIENT
 			if(!isSynthetic())
 				if(prob(5))
 					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
@@ -254,7 +254,7 @@
 					emote("gasp")
 		if(radiation > 150)
 			damage = 8
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
 		if(damage)
 			damage *= isSynthetic() ? 0.5 : species.radiation_mod
@@ -346,7 +346,7 @@
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
 		var/loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1)
+		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 && species.body_temperature)
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
@@ -914,9 +914,14 @@
 		return
 
 	// Puke if toxloss is too high
-	if(!stat)
-		if (getToxLoss() >= 45 && nutrition > 20)
-			spawn vomit()
+	var/obj/item/organ/internal/liver/L = internal_organs_by_name[BP_LIVER]
+	var/obj/item/organ/internal/kidneys/K = internal_organs_by_name[BP_KIDNEYS]
+	var/tox_loss = getToxLoss()
+
+	if(!stat && !lastpuke && tox_loss > 5 && ((L && !(L.status & ORGAN_DEAD)) || (K && !(K.status & ORGAN_DEAD))))
+		if (prob(10))
+			var/vom_stats = 70 / max(7, 70 - getToxLoss())
+			spawn vomit(1, vom_stats, vom_stats)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)

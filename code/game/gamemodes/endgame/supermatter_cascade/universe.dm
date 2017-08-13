@@ -86,7 +86,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
 			continue
 
-		A.updateicon()
+		A.update_icon()
 
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
 	spawn(0)

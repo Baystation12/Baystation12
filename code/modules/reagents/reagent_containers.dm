@@ -72,6 +72,10 @@
 	if(!istype(target))
 		return
 
+	if(user.a_intent == I_HELP)
+		to_chat(user, "<span class='notice'>You can't splash people on help intent.</span>")
+		return 1
+
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 		return 1

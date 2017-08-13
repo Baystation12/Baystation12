@@ -17,6 +17,7 @@
 	var/obj/item/device/uplink/contained/mob_uplink
 	var/datum/god_form/form
 	var/datum/current_boon
+	var/mob/living/following
 
 /mob/living/deity/New()
 	..()
@@ -64,25 +65,6 @@
 	set category = "Godhood"
 
 	eyeobj.forceMove(get_turf(src))
-
-/mob/living/deity/verb/jump_to_follower()
-	set category = "Godhood"
-
-	if(!minions)
-		return
-
-	var/list/could_follow = list()
-	for(var/m in minions)
-		var/datum/mind/M = m
-		if(M.current && M.current.stat != DEAD)
-			could_follow += M.current
-
-	if(!could_follow.len)
-		return
-
-	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow
-	if(choice)
-		eyeobj.forceMove(get_turf(choice))
 
 /mob/living/deity/verb/open_menu()
 	set name = "Open Menu"

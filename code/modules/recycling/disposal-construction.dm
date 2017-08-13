@@ -287,7 +287,7 @@
 							P.base_icon_state = base_state
 							P.set_dir(dir)
 							P.dpdir = dpdir
-							P.updateicon()
+							P.update_icon()
 
 							//Needs some special treatment ;)
 							if(ptype==9 || ptype==10)

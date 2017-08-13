@@ -85,7 +85,7 @@
 	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
 	switch_from_living_to_dead_mob_list()
 
-	updateicon()
+	update_icon()
 
 	if(ticker && ticker.mode)
 		ticker.mode.check_win()

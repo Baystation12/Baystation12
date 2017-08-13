@@ -41,7 +41,10 @@
 /obj/item/device/lightreplacer
 
 	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with working lightbulbs or sheets of glass."
+	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
+	description_info = "Examine or use this item to see how many lights are remaining. You can feed it lightbulbs or sheets of glass to refill it."
+	description_fluff = "Can you believe they used to have to screw lightbulbs in by hand?"
+	description_antag = "Using a cryptographic sequencer on this device will cause it to overload each light it replaces; when turned on, the new lights will explode!"
 
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
@@ -135,6 +138,7 @@
 			target.remove_bulb()
 
 		var/obj/item/weapon/light/L = new target.light_type()
+		L.rigged = emagged
 		target.insert_bulb(L)
 
 

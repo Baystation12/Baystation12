@@ -24,6 +24,7 @@
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
+	var/list/allowed_objects = list(/obj/structure/closet)
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 	flags = OBJ_CLIMBABLE
@@ -141,52 +142,66 @@
 
 	update_icon()
 
-// mouse drop another mob or self
-//
-/obj/machinery/disposal/MouseDrop_T(mob/target, mob/user)
-	if(user.stat || !user.canmove || !istype(target))
-		return
-	if(target.buckled || get_dist(user, src) > 1 || get_dist(user, target) > 1)
+/obj/machinery/disposal/MouseDrop_T(atom/movable/AM, mob/user)
+	var/incapacitation_flags = INCAPACITATION_DEFAULT
+	if(AM == user)
+		incapacitation_flags &= ~INCAPACITATION_RESTRAINED
+
+	if(stat & BROKEN || !CanMouseDrop(AM, user, incapacitation_flags) || AM.anchored)
 		return
 
-	//animals cannot put mobs other than themselves into disposal
-	if(isanimal(user) && target != user)
+	// Animals can only put themself in
+	if(isanimal(user) && AM != user)
 		return
 
+	// Determine object type and run necessary checks
+	var/mob/M = AM
+	var/is_dangerous // To determine css style in messages
+	if(istype(M))
+		is_dangerous = TRUE
+		if(M.buckled)
+			return
+	else if(istype(AM, /obj/item))
+		attackby(AM, user)
+		return
+	else if(!is_type_in_list(AM, allowed_objects))
+		return
+
+	// Checks completed, start inserting
 	src.add_fingerprint(user)
-	var/target_loc = target.loc
-	var/msg
-	for (var/mob/V in viewers(usr))
-		if(target == user && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
-			V.show_message("[usr] starts climbing into the disposal.", 3)
-		if(target != user && !user.restrained() && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
-			if(target.anchored) return
-			V.show_message("[usr] starts stuffing [target.name] into the disposal.", 3)
-	if(!do_after(usr, 20, src))
-		return
-	if(target_loc != target.loc)
-		return
-	if(target == user && !user.incapacitated(INCAPACITATION_ALL))	// if drop self, then climbed in
-											// must be awake, not stunned or whatever
-		msg = "\The [user] climbs into \the [src]."
-		to_chat(user, "You climb into \the [src].")
-	else if(target != user && !user.incapacitated())
-		msg = "\The [user] stuffs \the [target] into \the [src]!"
-		to_chat(user, "You stuff \the [target] into \the [src]!")
-		admin_attack_log(user, target, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
+	var/old_loc = AM.loc
+	if(AM == user)
+		user.visible_message("<span class='warning'>[user] starts climbing into [src].</span>", \
+							 "<span class='notice'>You start climbing into [src].</span>")
 	else
+		user.visible_message("<span class='[is_dangerous ? "warning" : "notice"]'>[user] starts stuffing [AM] into [src].</span>", \
+							 "<span class='notice'>You start stuffing [AM] into [src].</span>")
+
+	if(!do_after(user, 2 SECONDS, src))
 		return
-	if (target.client)
-		target.client.perspective = EYE_PERSPECTIVE
-		target.client.eye = src
 
-	target.forceMove(src)
+	// Repeat checks
+	if(stat & BROKEN || user.incapacitated(incapacitation_flags))
+		return
+	if(!AM || old_loc != AM.loc || AM.anchored)
+		return
+	if(istype(M) && M.buckled)
+		return
 
-	for (var/mob/C in viewers(src))
-		if(C == user)
-			continue
-		C.show_message(msg, 3)
+	// Messages and logging
+	if(AM == user)
+		user.visible_message("<span class='danger'>[user] climbs into [src].</span>", \
+							 "<span class='notice'>You climb into [src].</span>")
+	else
+		user.visible_message("<span class='[is_dangerous ? "danger" : "notice"]'>[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]</span>", \
+							 "<span class='notice'>You stuff [AM] into [src].</span>")
+		if(ismob(M))
+			admin_attack_log(user, M, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
+			if (M.client)
+				M.client.perspective = EYE_PERSPECTIVE
+				M.client.eye = src
 
+	AM.forceMove(src)
 	update_icon()
 	return
 
@@ -722,13 +737,13 @@
 	// change visibility status and force update of icon
 	hide(var/intact)
 		invisibility = intact ? 101: 0	// hide if floor is intact
-		updateicon()
+		update_icon()
 
 	// update actual icon_state depending on visibility
 	// if invisible, append "f" to icon_state to show faded version
 	// this will be revealed if a T-scanner is used
 	// if visible, use regular icon_state
-	proc/updateicon()
+	update_icon()
 /*		if(invisibility)	//we hide things with alpha now, no need for transparent icons
 			icon_state = "[base_icon_state]f"
 		else

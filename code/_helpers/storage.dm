@@ -19,25 +19,26 @@
 
 /datum/atom_creator/simple
 	var/path
-	var/probability // prob is a reserved keyword and won't compile
+	var/probability
+	var/prob_method = /proc/prob_call
 
 /datum/atom_creator/simple/New(var/path, var/probability)
-	..()
 	if(!isnum(probability) || probability < 1 || probability > 99)
 		CRASH("The given probability must be between 1 and 99") // A probability of 0 or 100 is pretty meaningless.
-	src.path = path
 	src.probability = probability
+	src.path = path
 
 /datum/atom_creator/simple/create(var/loc)
-	if(prob(probability))
+	if(call(prob_method)(probability))
 		create_objects_in_loc(loc, path)
 
 /datum/atom_creator/weighted
 	var/list/paths
+	var/selection_method = /proc/pickweight
 
 /datum/atom_creator/weighted/New(var/paths)
-	..()
 	src.paths = paths
 
 /datum/atom_creator/weighted/create(var/loc)
-	create_objects_in_loc(loc, pickweight(paths))
+	var/path = call(selection_method)(paths)
+	create_objects_in_loc(loc, path)

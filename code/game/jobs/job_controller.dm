@@ -9,6 +9,8 @@ var/global/datum/controller/occupations/job_master
 	var/list/occupations = list()
 		//Associative list of all jobs, by type
 	var/list/occupations_by_type
+	//Associative list of all jobs, by title
+	var/list/occupations_by_title
 		//Players who need jobs
 	var/list/unassigned = list()
 		//Debug info
@@ -18,6 +20,7 @@ var/global/datum/controller/occupations/job_master
 	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
+		occupations_by_title = list()
 		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
@@ -28,6 +31,7 @@ var/global/datum/controller/occupations/job_master
 			if(job.faction != faction)	continue
 			occupations += job
 			occupations_by_type[job.type] = job
+			occupations_by_title[job.title] = job
 			if(!setup_titles) continue
 			if(job.department_flag & COM)
 				command_positions |= job.title
@@ -354,7 +358,7 @@ var/global/datum/controller/occupations/job_master
 			//Equip custom gear loadout.
 			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
 			var/list/custom_equip_leftovers = list()
-			if(H.client.prefs.Gear() && job.title != "Cyborg" && job.title != "AI")
+			if(H.client.prefs.Gear() && job.loadout_allowed)
 				for(var/thing in H.client.prefs.Gear())
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
@@ -382,8 +386,8 @@ var/global/datum/controller/occupations/job_master
 						
 						// Role restrictions
 						if(G.allowed_roles)
-							for(var/job_name in G.allowed_roles)
-								if(job.title == job_name)
+							for(var/job_type in G.allowed_roles)
+								if(job.type == job_type)
 									allowed_role = TRUE
 						
 						// Check branch and role restrictions. If both are empty, no restrictions exist and the item is allowed

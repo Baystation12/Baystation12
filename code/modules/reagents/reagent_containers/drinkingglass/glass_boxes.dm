@@ -2,28 +2,33 @@
 	name = "glassware box"
 	desc = "A box of assorted glassware"
 	can_hold = list(/obj/item/weapon/reagent_containers/food/drinks/glass2)
-	New()
-		..()
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/square(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/shake(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/shot(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/pint(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/mug(src)
-		new /obj/item/weapon/reagent_containers/food/drinks/glass2/wine(src)
-		make_exact_fit()
+
+	startswith = list(
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/square,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/rocks,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/shake,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/shot,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/pint,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/mug,
+		/obj/item/weapon/reagent_containers/food/drinks/glass2/wine
+	)
+
+/obj/item/weapon/storage/box/mixedglasses/Initialize()
+	. = ..()
+	make_exact_fit()
 
 /obj/item/weapon/storage/box/glasses
 	name = "box of glasses"
 	var/glass_type = /obj/item/weapon/reagent_containers/food/drinks/glass2
 	can_hold = list(/obj/item/weapon/reagent_containers/food/drinks/glass2)
-	New()
-		..()
 
-		for(var/i = 1 to 7)
-			new glass_type(src)
-		make_exact_fit()
+/obj/item/weapon/storage/box/glasses/Initialize()
+	. = ..()
+
+	for(var/i = 1 to 7)
+		new glass_type(src)
+	make_exact_fit()
 
 /obj/item/weapon/storage/box/glasses/square
 	name = "box of half-pint glasses"
@@ -62,11 +67,11 @@
 	var/extra_type = /obj/item/weapon/glass_extra
 	can_hold = list(/obj/item/weapon/glass_extra)
 	storage_slots = 14
-	New()
-		..()
 
-		for(var/i = 1 to 14)
-			new extra_type(src)
+/obj/item/weapon/storage/box/glass_extras/Initialize()
+	for(var/i = 1 to 14)
+		new extra_type(src)
+	. = ..()
 
 /obj/item/weapon/storage/box/glass_extras/straws
 	name = "box of straws"

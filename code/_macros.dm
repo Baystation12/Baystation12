@@ -112,8 +112,10 @@
 #define UNSETEMPTY(L) if (L && !L.len) L = null
 // Removes I from list L, and sets I to null if it is now empty
 #define LAZYREMOVE(L, I) if(L) { L -= I; if(!L.len) { L = null; } }
-// Adds I to L, initalizing I if necessary
+// Adds I to L, initalizing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+// Sets L[A] to I, initalizing L if necessary
+#define LAZYADDASSOC(L, A, I) if(!L) { L = list(); } L[A] = I;
 // Reads I from L safely - Works with both associative and traditional lists.
 #define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= L.len ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null

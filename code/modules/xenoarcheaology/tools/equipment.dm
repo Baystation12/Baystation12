@@ -35,7 +35,7 @@
 	name = "excavation gear-belt"
 	desc = "Can hold various excavation gear."
 	icon_state = "gearbelt"
-	item_state = "utility"
+	item_state = ACCESSORY_SLOT_UTILITY
 	can_hold = list(
 		/obj/item/weapon/storage/box/samplebags,
 		/obj/item/device/core_sampler,

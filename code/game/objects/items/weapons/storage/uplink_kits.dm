@@ -162,8 +162,8 @@
 		/obj/item/weapon/storage/box/sniperammo
 	)
 
-/obj/item/weapon/storage/secure/briefcase/heavysniper/New()
-	..()
+/obj/item/weapon/storage/secure/briefcase/heavysniper/Initialize()
+	. = ..()
 	make_exact_fit()
 
 /obj/item/weapon/storage/secure/briefcase/money

@@ -20,4 +20,6 @@ __pycache__
 config/*
 !config/*/
 
+# ignore notepad ++ stuff
 *.npss
+*.npws

@@ -148,16 +148,16 @@ var/list/gear_datums = list()
 	
 	// Fetch job list and branch/rank here, so we're not doing this for every single custom item
 	var/jobs = list()
-	if(pref.job_high || pref.job_medium || pref.job_low)
-		if(pref.job_high) //Is not a list like the others so a check just in case
-			jobs += pref.job_high
-		jobs += pref.job_medium
-		jobs += pref.job_low
-
+	if(job_master)
+		for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
+			var/datum/job/J = job_master.occupations_by_title[job_title]
+			if(J)
+				dd_insertObjectList(jobs, J)
+	
 	var/branch = ""
 	if (pref.char_branch)
 		branch = pref.char_branch
-
+	
 	var/rank = ""
 	if (pref.char_rank)
 		rank = pref.char_rank
@@ -173,7 +173,7 @@ var/list/gear_datums = list()
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2>[G.description]</font>"
-
+		
 		/* Fetch gear by branch restrictions (NEW) */
 		if (G.allowed_branches)
 			var/allowed_branch = TRUE
@@ -185,7 +185,7 @@ var/list/gear_datums = list()
 				else // Branch is not allowed
 					display_role_list += "<font color=cc5555>[branch]</font>"
 					allowed_branch = FALSE
-
+			
 			// Only check rank if branch is allowed
 			if (allowed_branch)
 				// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
@@ -194,21 +194,20 @@ var/list/gear_datums = list()
 						display_role_list += "<font color=55cc55>[rank]</font>"
 					else // Rank is not allowed
 						display_role_list += "<font color=cc5555>[rank]</font>"
-
+		
 		/* Fetch gear by job restrictions (OLD) */
 		if (G.allowed_roles)
-			for (var/J in jobs)
-				if (J)
-					if (J in G.allowed_roles) // Job is allowed
-						display_role_list += "<font color=55cc55>[J]</font>"
-					else // Job is not allowed
-						display_role_list += "<font color=cc5555>[J]</font>"
-
+		
+			for (var/datum/job/J in jobs)
+				if (J.type in G.allowed_roles)
+					display_role_list += "<font color=55cc55>[J.title]</font>"
+				else
+					display_role_list += "<font color=cc5555>[J.title]</font>"
+		
 		// Convert display list to HTML formatted list
 		. += "<br><i>"
 		. += english_list(display_role_list, "", ", ")
 		. += "</i>"
-		
 		.+= "</tr>"
 		if(ticked)
 			. += "<tr><td colspan=3>"

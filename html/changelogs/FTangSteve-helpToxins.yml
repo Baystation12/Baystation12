@@ -33,10 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - bugfix: "Fixes bug that stopped wounds from healing."
-  - bugfix: "Fixes bug that made brains not take damage from low blood unless they already had damage."
-  - bugfix: "Fixes bug that made moderate blood loss damage your brain until death."
-  - tweak: "Makes the irreparable point twice the limb cutoff threshold instead of equal to it."
-  - tweak: "Prevents vital external organs from being irreparable, instead they go to critical."
-  - tweak: "Updates advanced scanners with new wound severity levels."
-  - tweak: "Smooths the dexalin and dexalin plus effectiveness curves."
+  - tweak: "Adds more signals letting someone know they have toxin damage and giving them a chance to get help."
+  - tweak: "Adjusts how often internal organ damage messages are displayed."
