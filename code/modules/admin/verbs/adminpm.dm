@@ -121,8 +121,19 @@
 					else
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
-	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>[holder ? " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) " : " "][holder ? "(<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)" : ""]: <span class='message'>[msg]</span></span></span>")
-	to_chat(C, "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>[C.holder ? " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) " : " "][C.holder ? "(<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)" : ""]: <span class='message'>[msg]</span></span></span>")
+
+	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>"
+	if(holder)
+		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
+	sender_message += ": <span class='message'>[msg]</span></span></span>"
+	to_chat(src, sender_message)
+
+	var/receiver_message = "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>"
+	if(C.holder)
+		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
+	receiver_message += ": <span class='message'>[msg]</span></span></span>"
+	to_chat(C, receiver_message)
+
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
