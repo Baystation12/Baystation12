@@ -715,18 +715,24 @@
 		return 0
 	return 1
 
-/mob/living/carbon/human/proc/vomit()
-	if(!check_has_mouth() || isSynthetic())
+/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/cooldown_mod = 1, var/level = 3)
+	set waitfor = 0
+	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
 		return
+	level = Clamp(level, 1, 3)
+	timevomit = Clamp(timevomit, 1, 10)
+	cooldown_mod = Clamp(cooldown_mod, 0, 10)
 	if(stat == DEAD)
 		return
 	if(!lastpuke)
 		lastpuke = 1
 		to_chat(src, "<span class='warning'>You feel nauseous...</span>")
-		spawn(150)	//15 seconds until second warning
+		if(level > 1)
+			sleep(150 / timevomit)	//15 seconds until second warning
 			to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
-			spawn(100)	//and you have 10 more for mad dash to the bucket
-				Stun(5)
+			if(level > 2)
+				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
+				Stun(3)
 				if(nutrition < 40)
 					custom_emote(1,"dry heaves.")
 				else
@@ -742,12 +748,12 @@
 
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, 1)
+						location.add_vomit_floor(src, toxvomit)
 
-					nutrition -= 40
-					adjustToxLoss(-3)
-				spawn(350)	//wait 35 seconds before next volley
-					lastpuke = 0
+					nutrition -= 30
+					adjustToxLoss(-1)
+		sleep(350 / (cooldown_mod * (4 - level)))	//wait 35 seconds before next volley
+		lastpuke = 0
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
