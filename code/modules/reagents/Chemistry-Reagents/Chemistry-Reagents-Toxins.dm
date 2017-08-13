@@ -554,15 +554,50 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#13BC5E"
+	metabolism = REM * 0.2
 
-/datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.species.name != "Promethean")
-			to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
+/datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
+	if(!istype(H))
+		return
+	if(H.species.name == "Promethean")
+		return
+	H.adjustToxLoss(40 * removed)
+	if(dose < 1 || prob(30))
+		return
+	dose = 0
+	var/list/meatchunks = list()
+	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
+		var/obj/item/organ/external/E = H.get_organ(limb_tag)
+		if(!E.is_stump() && E.robotic < ORGAN_ROBOT && E.species.name != "Promethean")
+			meatchunks += E
+	if(!meatchunks.len)
+		if(prob(10))
+			to_chat(H, "<span class='danger'>Your flesh rapidly mutates!</span>")
 			H.set_species("Promethean")
 			H.shapeshifter_set_colour("#05FF9B")
 			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
+		return
+	var/obj/item/organ/external/O = pick(meatchunks)
+	to_chat(H, "<span class='danger'>Your [O.name]'s flesh mutates rapidly!</span>")
+	if(!wrapped_species_by_ref["\ref[H]"])
+		wrapped_species_by_ref["\ref[H]"] = H.species.name
+	meatchunks = list(O) | O.children
+	for(var/obj/item/organ/external/E in meatchunks)
+		E.species = all_species["Promethean"]
+		E.s_tone = null
+		E.s_col = ReadRGB("#05FF9B")
+		E.status &= ~ORGAN_BROKEN
+		E.status |= ORGAN_MUTATED
+		E.cannot_break = 1
+		E.dislocated = -1
+		E.nonsolid = 1
+		E.max_damage = 5
+		E.update_icon(1)
+	O.max_damage = 15
+	if(prob(10))
+		to_chat(H, "<span class='danger'>Your slimy [O.name]'s plops off!</span>")
+		O.droplimb()
+	H.update_body()
 
 /datum/reagent/aslimetoxin
 	name = "Advanced Mutation Toxin"
