@@ -171,7 +171,7 @@
 		return 0
 	var/amount = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.organ_tag == BP_BRAIN)
+		if(I.organ_tag in list(BP_BRAIN, BP_STACK))
 			continue
 		amount += I.damage
 	return amount
