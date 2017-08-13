@@ -522,10 +522,10 @@
 		/datum/mil_rank/marine/e5
 	)
 
-	access = list(access_security, access_forensics_lockers,
+	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
 			            access_sec_doors, access_solgov_crew)
-	minimal_access = list(access_security, access_forensics_lockers,
+	minimal_access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
 			            access_sec_doors, access_solgov_crew)
 
