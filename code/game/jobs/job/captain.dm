@@ -18,7 +18,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	ideal_character_age = 70 // Old geezer captains ftw
 	outfit_type = /decl/hierarchy/outfit/job/captain
-	announced = 1
 
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -56,4 +55,3 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 
 	outfit_type = /decl/hierarchy/outfit/job/hop
-	announced = 1

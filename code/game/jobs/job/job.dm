@@ -30,9 +30,9 @@
 	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
 	var/list/allowed_ranks                // Ditto
 
-	var/announced                         //If their arrival is announced on radio
+	var/announced = TRUE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
-    
+
 /datum/job/dd_SortValue()
     return title
 
@@ -142,10 +142,10 @@
 		return TRUE
 
 	return FALSE
-    
+
 /datum/job/proc/is_species_allowed(var/datum/species/S)
 	return !GLOB.using_map.is_species_job_restricted(S, src)
-    
+
 /**
  *  Check if members of the given branch are allowed in the job
  *

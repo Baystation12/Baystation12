@@ -11,7 +11,6 @@
 	account_allowed = 0
 	economic_modifier = 0
 	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
-	announced = 1
 	loadout_allowed = FALSE
 
 /datum/job/ai/equip(var/mob/living/carbon/human/H)

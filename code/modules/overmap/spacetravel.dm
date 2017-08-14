@@ -56,7 +56,8 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 		return
 
 	if(A.lost_in_space())
-		qdel(A)
+		if(!QDELETED(A))
+			qdel(A)
 		return
 
 	var/nx = 1
