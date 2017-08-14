@@ -363,8 +363,8 @@ var/global/datum/controller/occupations/job_master
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
 						var/permitted
-						var/allowed_branch = null
-						var/allowed_role = null
+						var/allowed_branch
+						var/allowed_role
 						
 						// Branch restrictions
 						if (G.allowed_branches)
@@ -394,7 +394,7 @@ var/global/datum/controller/occupations/job_master
 						if ((allowed_branch == null) && (allowed_role == null))
 							permitted = 1
 						else
-							permitted = allowed_branch || allowed_role
+							permitted = allowed_branch && allowed_role
 
 						// Species restrictions
 						if(G.whitelisted && (!(H.species.name in G.whitelisted)))
