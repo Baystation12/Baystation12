@@ -90,6 +90,7 @@
 	shuttle_area = /area/shuttle/escape_pod10/station
 	number = 10
 /obj/effect/shuttle_landmark/escape_pod/start/pod10
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 10
 /obj/effect/shuttle_landmark/escape_pod/out/pod10
 	number = 10
@@ -101,6 +102,7 @@
 	shuttle_area = /area/shuttle/escape_pod11/station
 	number = 11
 /obj/effect/shuttle_landmark/escape_pod/start/pod11
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 11
 /obj/effect/shuttle_landmark/escape_pod/out/pod11
 	number = 11
@@ -113,6 +115,7 @@
 	shuttle_area = /area/shuttle/escape_pod12/station
 	number = 12
 /obj/effect/shuttle_landmark/escape_pod/start/pod12
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 12
 /obj/effect/shuttle_landmark/escape_pod/out/pod12
 	number = 12
@@ -123,6 +126,7 @@
 	shuttle_area = /area/shuttle/escape_pod13/station
 	number = 13
 /obj/effect/shuttle_landmark/escape_pod/start/pod13
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 13
 /obj/effect/shuttle_landmark/escape_pod/out/pod13
 	number = 13
@@ -133,6 +137,7 @@
 	shuttle_area = /area/shuttle/escape_pod14/station
 	number = 14
 /obj/effect/shuttle_landmark/escape_pod/start/pod14
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 14
 /obj/effect/shuttle_landmark/escape_pod/out/pod14
 	number = 14
@@ -143,6 +148,7 @@
 	shuttle_area = /area/shuttle/escape_pod15/station
 	number = 15
 /obj/effect/shuttle_landmark/escape_pod/start/pod15
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 15
 /obj/effect/shuttle_landmark/escape_pod/out/pod15
 	number = 15
@@ -153,6 +159,7 @@
 	shuttle_area = /area/shuttle/escape_pod16/station
 	number = 16
 /obj/effect/shuttle_landmark/escape_pod/start/pod16
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 16
 /obj/effect/shuttle_landmark/escape_pod/out/pod16
 	number = 16
@@ -163,6 +170,7 @@
 	shuttle_area = /area/shuttle/escape_pod17/station
 	number = 17
 /obj/effect/shuttle_landmark/escape_pod/start/pod17
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 17
 /obj/effect/shuttle_landmark/escape_pod/out/pod17
 	number = 17
