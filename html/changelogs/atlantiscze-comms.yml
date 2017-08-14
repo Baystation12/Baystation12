@@ -1,0 +1,6 @@
+author: Atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Calypso and Aquila now have a radio relay that can be turned on with a multitool to provide communications link back to the torch. Beware of quite high power usage."

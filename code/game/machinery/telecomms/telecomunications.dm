@@ -132,6 +132,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
+	update_power()
 	. = ..()
 
 /obj/machinery/telecomms/Destroy()
@@ -158,7 +159,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		icon_state = "[initial(icon_state)]_off"
 
 /obj/machinery/telecomms/proc/update_power()
-
 	if(toggled)
 		if(stat & (BROKEN|NOPOWER|EMPED) || integrity <= 0) // if powered, on. if not powered, off. if too damaged, off
 			on = 0
@@ -166,6 +166,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			on = 1
 	else
 		on = 0
+	use_power = on
 
 /obj/machinery/telecomms/process()
 	update_power()
@@ -345,7 +346,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 600
 	machinetype = 8
 	produces_heat = 0
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/relay
@@ -353,6 +353,19 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	long_range_link = 1
 	var/broadcasting = 1
 	var/receiving = 1
+
+/obj/machinery/telecomms/relay/forceMove(var/newloc)
+	. = ..(newloc)
+	listening_level = z
+	update_power()
+
+// Relays on ship's Z levels use less power as they don't have to transmit over such large distances.
+/obj/machinery/telecomms/relay/update_power()
+	..()
+	if(z in GLOB.using_map.station_levels)
+		idle_power_usage = 2.5 KILOWATTS
+	else
+		idle_power_usage = 15 KILOWATTS
 
 /obj/machinery/telecomms/relay/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 

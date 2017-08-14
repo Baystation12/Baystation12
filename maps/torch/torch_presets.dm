@@ -115,16 +115,14 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 // T-Coms
 //
 
-/obj/machinery/telecomms/relay/preset/shuttle
-	id = "Calypso Relay"
-	autolinkers = list("s_relay")
-
 /obj/machinery/telecomms/relay/preset/calypso
 	id = "Calypso Relay"
+	toggled = 0
 	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/aquila
 	id = "Aquila Relay"
+	toggled = 0
 	autolinkers = list("s_relay")
 
 //
