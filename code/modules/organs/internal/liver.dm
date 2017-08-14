@@ -49,18 +49,16 @@
 
 		// Get the effectiveness of the liver.
 		var/filter_effect = 3
-		if(is_bruised())
-			filter_effect -= 1
 		if(is_broken())
-			filter_effect -= 2
+			filter_effect = 0
 		if(owner.reagents.has_reagent("anti_toxin"))
 			filter_effect += 1
 		if(robotic >= ORGAN_ROBOT)
 			filter_effect += 1
 
 		// If you're not filtering well, you're going to take damage. Even more if you have alcohol in you.
-		if(filter_effect < 3)
-			owner.adjustToxLoss(PROCESS_ACCURACY * 0.5 * (3 - filter_effect) * (1 + owner.chem_effects[CE_ALCOHOL_TOXIC] + (owner.chem_effects[CE_ALCOHOL] / 2)))
+		if(is_broken())
+			owner.adjustToxLoss(PROCESS_ACCURACY * 0.5 * (2 - filter_effect) * (1 + owner.chem_effects[CE_ALCOHOL_TOXIC] + (owner.chem_effects[CE_ALCOHOL] / 2)))
 
 		// If you drink alcohol, your liver won't heal.
 		if(owner.chem_effects[CE_ALCOHOL])
