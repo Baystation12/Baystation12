@@ -371,9 +371,9 @@
 		if(character.mind.assigned_role != "Cyborg")
 			GLOB.data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-
-			if(job.announced)
-				AnnounceArrival(character, job.title, spawnpoint.msg)
+			AnnounceArrival(character, job, spawnpoint.msg)
+		else
+			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 	qdel(src)
