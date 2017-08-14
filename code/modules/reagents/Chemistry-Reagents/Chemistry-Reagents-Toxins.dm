@@ -559,7 +559,7 @@
 /datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
 	if(!istype(H))
 		return
-	if(H.species.name == "Promethean")
+	if(H.species.name == SPECIES_PROMETHEAN)
 		return
 	H.adjustToxLoss(40 * removed)
 	if(dose < 1 || prob(30))
@@ -568,12 +568,12 @@
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
-		if(!E.is_stump() && E.robotic < ORGAN_ROBOT && E.species.name != "Promethean")
+		if(!E.is_stump() && E.robotic < ORGAN_ROBOT && E.species.name != SPECIES_PROMETHEAN)
 			meatchunks += E
 	if(!meatchunks.len)
 		if(prob(10))
 			to_chat(H, "<span class='danger'>Your flesh rapidly mutates!</span>")
-			H.set_species("Promethean")
+			H.set_species(SPECIES_PROMETHEAN)
 			H.shapeshifter_set_colour("#05FF9B")
 			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
 		return
@@ -583,7 +583,7 @@
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
 	for(var/obj/item/organ/external/E in meatchunks)
-		E.species = all_species["Promethean"]
+		E.species = all_species[SPECIES_PROMETHEAN]
 		E.s_tone = null
 		E.s_col = ReadRGB("#05FF9B")
 		E.status &= ~ORGAN_BROKEN
