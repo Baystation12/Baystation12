@@ -227,16 +227,17 @@ var/list/possible_cable_coil_colours
 
 //explosion handling
 /obj/structure/cable/ex_act(severity)
+	var/turf/T = loc
 	switch(severity)
 		if(1.0)
 			qdel(src)
 		if(2.0)
-			if (prob(50))
+			if (prob(50) && T.is_plating())
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 
 		if(3.0)
-			if (prob(25))
+			if (prob(25) && T.is_plating())
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 	return
