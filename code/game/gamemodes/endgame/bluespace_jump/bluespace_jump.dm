@@ -81,8 +81,8 @@
 	if(!ndaddy)
 		qdel(src)
 		return
-	set_dir(daddy.dir)
 	daddy = ndaddy
+	set_dir(daddy.dir)
 	appearance = daddy.appearance
 	GLOB.moved_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror)
 	GLOB.dir_set_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
