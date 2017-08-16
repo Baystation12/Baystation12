@@ -68,7 +68,7 @@
 		plant.dir = src.dir
 		plant.transform = src.transform
 		plant.age = seed.get_trait(TRAIT_MATURATION)-1
-		plant.update_icon()
+		ADD_ICON_QUEUE(plant)
 		if(growth_type==0) //Vines do not become invisible.
 			invisibility = INVISIBILITY_MAXIMUM
 		else
@@ -124,7 +124,7 @@
 		child.anchored = 0
 		step_to(child, target_turf)
 		child.anchored = 1
-		child.update_icon()
+		ADD_ICON_QUEUE(child)
 
 		//see if anything is there
 		for(var/thing in child.loc)

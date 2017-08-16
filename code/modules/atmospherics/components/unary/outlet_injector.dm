@@ -140,7 +140,7 @@
 
 	spawn(2)
 		broadcast_status()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()

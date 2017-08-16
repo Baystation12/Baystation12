@@ -204,5 +204,5 @@
 	igniter = new /obj/item/device/assembly/igniter(src)
 	igniter.secured = 0
 	status = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return

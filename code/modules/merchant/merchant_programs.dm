@@ -137,7 +137,7 @@
 	var/obj/item/weapon/spacecash/bundle/B = new(T)
 	B.worth = bank
 	bank = 0
-	B.update_icon()
+	ADD_ICON_QUEUE(B)
 
 /datum/computer_file/program/merchant/Topic(href, href_list)
 	if(..())

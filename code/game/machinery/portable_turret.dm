@@ -268,11 +268,11 @@ var/list/turret_icons
 /obj/machinery/porta_turret/power_change()
 	if(powered())
 		stat &= ~NOPOWER
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
 		spawn(rand(0, 15))
 			stat |= NOPOWER
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)

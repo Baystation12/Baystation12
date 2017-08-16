@@ -74,7 +74,7 @@
 	var/choice = input("Select a screen icon.") as null|anything in monitor_states
 	if(choice)
 		monitor_state_index = choice
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/clothing/mask/monitor/update_icon()
 	if(!(monitor_state_index in monitor_states))

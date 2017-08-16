@@ -44,6 +44,7 @@
 /turf/Destroy()
 	turfs -= src
 	remove_cleanables()
+	lighting_clear_overlay()
 	..()
 	return QDEL_HINT_IWILLGC
 

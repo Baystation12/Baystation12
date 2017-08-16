@@ -76,7 +76,7 @@
 			src.timer_end() // open doors, reset timer, clear status screen
 			src.timing = 0
 
-		src.update_icon()
+		ADD_ICON_QUEUE(src)
 
 	else
 		timer_end()

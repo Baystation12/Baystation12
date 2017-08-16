@@ -25,7 +25,7 @@
 
 	radiation_repository.resistance_cache.Remove(src)
 	update_connections(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /turf/simulated/wall/proc/set_material(var/material/newmaterial, var/material/newrmaterial)
@@ -97,12 +97,12 @@
 	if(!material)
 		return
 	var/list/dirs = list()
-	for(var/turf/simulated/wall/W in orange(src, 1))
+	for(var/turf/simulated/wall/W in otrange(1, src))
 		if(!W.material)
 			continue
 		if(propagate)
 			W.update_connections()
-			W.update_icon()
+			ADD_ICON_QUEUE(W)
 		if(can_join_with(W))
 			dirs += get_dir(src, W)
 

@@ -69,7 +69,7 @@
 		get_resource_field()
 
 	if(world.time % 10 == 0)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if(!active)
 		return
@@ -104,7 +104,7 @@
 				system_error("insufficient storage space")
 				active = 0
 				need_player_check = 1
-				update_icon()
+				ADD_ICON_QUEUE(src)
 				return
 
 			if(contents.len + total_harvest >= capacity)
@@ -136,7 +136,7 @@
 	else
 		active = 0
 		need_player_check = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/mining/drill/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -246,7 +246,7 @@
 		src.visible_message("<span class='notice'>\The [src] flashes a '[error]' warning.</span>")
 	need_player_check = 1
 	active = 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/mining/drill/proc/get_resource_field()
 

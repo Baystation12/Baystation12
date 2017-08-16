@@ -139,11 +139,11 @@
 /obj/machinery/beehive/process()
 	if(closed && !smoked && bee_count)
 		pollinate_flowers()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	smoked = max(0, smoked - 1)
 	if(!smoked && bee_count)
 		bee_count = min(bee_count * 1.005, 100)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/beehive/proc/pollinate_flowers()
 	var/coef = bee_count / 100

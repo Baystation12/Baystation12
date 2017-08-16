@@ -20,11 +20,11 @@
 
 	pickup(mob/user)
 		..()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	dropped(mob/user)
 		..()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	attack_hand()
 		..()

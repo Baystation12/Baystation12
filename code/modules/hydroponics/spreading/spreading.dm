@@ -128,7 +128,7 @@
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
 	set_dir(calc_dir())
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	plant_controller.add_plant(src)
 	// Some plants eat through plating.
 	if(islist(seed.chems) && !isnull(seed.chems["pacid"]))

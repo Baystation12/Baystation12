@@ -23,7 +23,7 @@
 	if(!scanning)
 		return
 	radiation_count = radiation_repository.get_rads_at_turf(get_turf(src))
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/device/geiger/examine(mob/user)
 	. = ..(user)

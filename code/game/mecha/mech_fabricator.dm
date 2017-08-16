@@ -55,7 +55,7 @@
 		check_build()
 	else
 		use_power = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/mecha_part_fabricator/update_icon()
 	overlays.Cut()

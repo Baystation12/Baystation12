@@ -20,8 +20,8 @@
 	var/set_temperature = T20C	//thermostat
 	var/heating = 0		//mainly for icon updates
 
-/obj/machinery/atmospherics/unary/heater/New()
-	..()
+/obj/machinery/atmospherics/unary/heater/Initialize()
+	. = ..()
 	initialize_directions = dir
 
 	component_parts = list()
@@ -53,7 +53,7 @@
 			node = null
 			break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/atmospherics/unary/heater/update_icon()
@@ -69,22 +69,22 @@
 
 /obj/machinery/atmospherics/unary/heater/process()
 	..()
+	if(anchored)
+		if(stat & (NOPOWER|BROKEN) || !use_power)
+			heating = 0
+			ADD_ICON_QUEUE(src)
+			return
 
-	if(stat & (NOPOWER|BROKEN) || !use_power)
-		heating = 0
-		update_icon()
-		return
+		if(network && air_contents.total_moles && air_contents.temperature < set_temperature)
+			air_contents.add_thermal_energy(power_rating * HEATER_PERF_MULT)
+			use_power(power_rating)
 
-	if(network && air_contents.total_moles && air_contents.temperature < set_temperature)
-		air_contents.add_thermal_energy(power_rating * HEATER_PERF_MULT)
-		use_power(power_rating)
+			heating = 1
+			network.update = 1
+		else
+			heating = 0
 
-		heating = 1
-		network.update = 1
-	else
-		heating = 0
-
-	update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/unary/heater/attack_ai(mob/user as mob)
 	ui_interact(user)

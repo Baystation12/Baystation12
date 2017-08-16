@@ -191,7 +191,7 @@
 	S.holder = V
 	S.toggle_secure()
 
-	V.update_icon()
+	ADD_ICON_QUEUE(V)
 	return INITIALIZE_HINT_QDEL
 
 ///////////////////////

@@ -51,7 +51,7 @@
 			if (!active || !ec_cartridge || !ec_cartridge.reagents.total_volume)//no cartridge
 				active=0//autodisable the cigarette
 				GLOB.processing_objects.Remove(src)
-				update_icon()
+				ADD_ICON_QUEUE(src)
 				return
 			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.
 

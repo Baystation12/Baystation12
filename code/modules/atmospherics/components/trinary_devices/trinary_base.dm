@@ -94,7 +94,7 @@ obj/machinery/atmospherics/trinary
 					node3 = target
 					break
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		update_underlays()
 
 	build_network()

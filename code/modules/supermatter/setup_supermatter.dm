@@ -125,7 +125,7 @@
 		return SETUP_WARNING
 	P.target_pressure = P.max_pressure_setting
 	P.use_power = 1
-	P.update_icon()
+	ADD_ICON_QUEUE(P)
 	return SETUP_OK
 
 
@@ -201,7 +201,7 @@
 	S.output_attempt = 1
 	S.input_level = S.input_level_max
 	S.output_level = S.output_level_max
-	S.update_icon()
+	ADD_ICON_QUEUE(S)
 	return SETUP_OK
 
 
@@ -238,7 +238,7 @@
 		F.rebuild_filtering_list()
 
 	F.use_power = 1
-	F.update_icon()
+	ADD_ICON_QUEUE(F)
 	return SETUP_OK
 
 

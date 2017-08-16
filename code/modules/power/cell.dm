@@ -26,7 +26,7 @@
 
 /obj/item/weapon/cell/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 
@@ -68,7 +68,7 @@
 /obj/item/weapon/cell/proc/use(var/amount)
 	var/used = min(charge, amount)
 	charge -= used
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return used
 
 // Checks if the specified amount can be provided. If it can, it removes the amount
@@ -83,7 +83,7 @@
 	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
 	charge += amount_used
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return amount_used
 
 /obj/item/weapon/cell/examine(mob/user)

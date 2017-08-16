@@ -144,7 +144,7 @@
 		return
 	if(contents.len)
 		dry()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/smartfridge/drying_rack/update_icon()
 	overlays.Cut()

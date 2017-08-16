@@ -34,7 +34,7 @@
 	if(hacked_apcs)
 		for(var/obj/machinery/power/apc/A in hacked_apcs)
 			A.hacker = null
-			A.update_icon()
+			ADD_ICON_QUEUE(A)
 	hacked_apcs = null
 	// Stop the delta alert, and, if applicable, self-destruct timer.
 	bombing_station = 0

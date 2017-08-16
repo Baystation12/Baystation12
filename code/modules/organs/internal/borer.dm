@@ -28,7 +28,7 @@
 			goo.name = "husk ichor"
 			goo.desc = "It's thick and stinks of decay."
 			goo.basecolor = "#412464"
-			goo.update_icon()
+			ADD_ICON_QUEUE(goo)
 
 /obj/item/organ/internal/borer/removed(var/mob/living/user)
 

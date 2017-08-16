@@ -44,7 +44,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
 	if(src.type == /obj/effect/decal/cleanable/blood)
@@ -225,7 +225,7 @@ var/global/list/image/splatter_cache=list()
                         if (i > 0)
                                 var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
                                 b.basecolor = src.basecolor
-                                b.update_icon()
+                                ADD_ICON_QUEUE(b)
 
                         if (step_to(src, get_step(src, direction), 0))
                                 break

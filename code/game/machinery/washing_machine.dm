@@ -43,7 +43,7 @@
 		state = 8
 	else
 		state = 5
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	sleep(200)
 	for(var/atom/A in contents)
 		A.clean_blood()
@@ -65,7 +65,7 @@
 		gibs_ready = 1
 	else
 		state = 4
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/washing_machine/verb/climb_out()
 	set name = "Climb out"

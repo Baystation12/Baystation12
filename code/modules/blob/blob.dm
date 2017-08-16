@@ -53,11 +53,11 @@
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		qdel(src)
 	else
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/effect/blob/proc/regen()
 	health = min(health + regen_rate, maxHealth)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/effect/blob/proc/expand(var/turf/T)
 	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))

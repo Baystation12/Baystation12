@@ -142,7 +142,7 @@
 	if(active) return 0 //If it's already turned on, how did this get called?
 
 	src.active = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	create_shields()
 
@@ -155,7 +155,7 @@
 	if(!active) return 0 //If it's already off, how did this get called?
 
 	src.active = 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	collapse_shields()
 
@@ -211,7 +211,7 @@
 		spawn(0)
 			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
 		qdel(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return
 
 /obj/machinery/shieldgen/ex_act(severity)
@@ -267,7 +267,7 @@
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
 	if(!malfunction)
 		malfunction = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return 1
 
 /obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)

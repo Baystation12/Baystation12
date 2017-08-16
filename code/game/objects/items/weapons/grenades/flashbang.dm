@@ -19,7 +19,7 @@
 		for(var/obj/effect/blob/B in hear(8,get_turf(src)))       		//Blob damage here
 			var/damage = round(30/(get_dist(B,get_turf(src))+1))
 			B.health -= damage
-			B.update_icon()
+			ADD_ICON_QUEUE(B)
 
 		new/obj/effect/sparks(src.loc)
 		new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=30, color="#FFFFFF")

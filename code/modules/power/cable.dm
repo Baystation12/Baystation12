@@ -121,7 +121,7 @@ var/list/possible_cable_coil_colours
 /obj/structure/cable/hide(var/i)
 	if(istype(loc, /turf))
 		invisibility = i ? 101 : 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/cable/hides_under_flooring()
 	return 1

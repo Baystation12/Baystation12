@@ -16,7 +16,7 @@
 	for(var/obj/machinery/power/apc/apc in range(severity_range,A))
 		if(is_valid_apc(apc))
 			apc.emagged = 1
-			apc.update_icon()
+			ADD_ICON_QUEUE(apc)
 
 /datum/event/apc_damage/proc/acquire_random_apc()
 	var/list/possibleEpicentres = list()

@@ -40,7 +40,7 @@
 			trunk.linked = src	// link the pipe trunk to self
 
 		air_contents = new/datum/gas_mixture(PRESSURE_TANK_VOLUME)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	. = ..()
 
 /obj/machinery/disposal/Destroy()
@@ -368,7 +368,7 @@
 		update_use_power(1)
 	else if(air_contents.return_pressure() >= SEND_PRESSURE)
 		mode = 2 //if full enough, switch to ready mode
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
 		src.pressurize() //otherwise charge
 
@@ -431,7 +431,7 @@
 // called when area power changes
 /obj/machinery/disposal/power_change()
 	..()	// do default setting/reset of stat NOPOWER bit
-	update_icon()	// update icon
+	ADD_ICON_QUEUE(src)	// update icon
 	return
 
 

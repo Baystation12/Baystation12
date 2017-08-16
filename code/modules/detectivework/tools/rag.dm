@@ -74,7 +74,7 @@
 
 	var/obj/item/weapon/reagent_containers/food/drinks/bottle/B = loc
 	if(istype(B))
-		B.update_icon()
+		ADD_ICON_QUEUE(B)
 
 /obj/item/weapon/reagent_containers/glass/rag/proc/remove_contents(mob/user, atom/trans_dest = null)
 	if(!trans_dest && !user.loc)

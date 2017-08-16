@@ -13,7 +13,7 @@
 	package.wrapped = src
 	package.examtext = "Imported straight from the Wizard Acadamy. Do not lose the contents or suffer a demerit."
 	src.forceMove(package)
-	package.update_icon()
+	ADD_ICON_QUEUE(package)
 
 /obj/structure/closet/wizard/armor
 	name = "Mastercrafted Armor Set"

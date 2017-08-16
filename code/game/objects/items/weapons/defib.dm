@@ -27,7 +27,7 @@
 
 	if(ispath(bcell))
 		bcell = new bcell(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/defibrillator/Destroy()
 	. = ..()
@@ -219,7 +219,7 @@
 	spawn(delay)
 		if(cooldown)
 			cooldown = 0
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 			make_announcement("beeps, \"Unit is re-energized.\"", "notice")
 			playsound(src, 'sound/machines/defib_ready.ogg', 50, 0)

@@ -67,7 +67,7 @@
 				air_in.merge(air_all.remove(volume_ratio))
 				air_out.merge(air_all)
 
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 		if (network1)
 			network1.update = 1

@@ -22,7 +22,7 @@
 	. = ..()
 	overlay_layer = layer
 	power_change()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/computer/process()
 	if(stat & (NOPOWER|BROKEN))
@@ -80,7 +80,7 @@
 
 /obj/machinery/computer/proc/set_broken()
 	stat |= BROKEN
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks
@@ -109,3 +109,11 @@
 			M.deconstruct(src)
 			qdel(src)
 	else
+		..()
+
+/*
+/obj/machinery/computer/Topic(href, href_list)
+	. = ..()
+	if(. && istype(usr, /mob/living/carbon))
+		playsound(src, 'sound/machines/keypress.ogg', 50)
+*/

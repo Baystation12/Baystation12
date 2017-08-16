@@ -24,4 +24,4 @@
 	else
 		burnt = 0
 	remove_decals()
-	update_icon()
+	ADD_ICON_QUEUE(src)

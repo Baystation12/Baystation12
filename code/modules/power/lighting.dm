@@ -235,7 +235,6 @@ var/global/list/light_type_cache = list()
 
 // update lighting
 /obj/machinery/light/proc/update(var/trigger = 1)
-	update_icon()
 	if(on)
 		use_power = 2
 
@@ -247,9 +246,11 @@ var/global/list/light_type_cache = list()
 
 		if(trigger && changed)
 			switch_check()
+			ADD_ICON_QUEUE(src)
 	else
 		use_power = 0
 		set_light(0)
+		ADD_ICON_QUEUE(src)
 
 	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
 
@@ -674,7 +675,8 @@ obj/machinery/light/proc/burn_out()
 		brightness_power = fixture.brightness_power
 		brightness_color = fixture.brightness_color
 		lighting_modes = fixture.lighting_modes.Copy()
-	update_icon()
+	spawn(5)
+		ADD_ICON_QUEUE(src)
 
 
 // attack bulb/tube with object

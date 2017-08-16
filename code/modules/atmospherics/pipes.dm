@@ -110,7 +110,7 @@
 		return
 
 	pipe_color = new_color
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /*
 /obj/machinery/atmospherics/pipe/add_underlay(var/obj/machinery/atmospherics/node, var/direction)
@@ -187,7 +187,7 @@
 /obj/machinery/atmospherics/pipe/simple/hide(var/i)
 	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/simple/process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
@@ -314,7 +314,7 @@
 
 	var/turf/T = loc
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/simple/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
@@ -455,7 +455,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
 	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold/pipeline_expansion()
 	return list(node1, node2, node3)
@@ -549,7 +549,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold/update_underlays()
 	..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold/atmos_init()
 	..()
@@ -596,7 +596,7 @@
 
 	var/turf/T = get_turf(src)
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold/visible
 	icon_state = "map"
@@ -818,12 +818,12 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/update_underlays()
 	..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
 	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold4w/atmos_init()
 	..()
@@ -857,7 +857,7 @@
 
 	var/turf/T = get_turf(src)
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible
 	icon_state = "map_4way"
@@ -966,7 +966,7 @@
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
 	if(istype(loc, /turf/simulated))
 		invisibility = i ? 101 : 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/cap/pipeline_expansion()
 	return list(node)
@@ -1017,7 +1017,7 @@
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/cap/visible
 	level = 2
@@ -1297,7 +1297,7 @@
 				node1 = target
 				break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/vent/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
@@ -1348,7 +1348,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/update_underlays()
 	..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 
@@ -1385,7 +1385,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/update_underlays()
 	..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/proc/universal_underlays(var/obj/machinery/atmospherics/node, var/direction)
 	var/turf/T = loc

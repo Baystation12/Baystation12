@@ -74,7 +74,7 @@
 			var/obj/B = new container_type(src)
 			B.reagents.add_reagent(chem, 60)
 			beakers += B
-	update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/projectile/dartgun/update_icon()
 	if(!ammo_magazine)

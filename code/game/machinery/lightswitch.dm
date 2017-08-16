@@ -56,7 +56,7 @@
 /obj/machinery/light_switch/proc/sync_state()
 	if(on != connected_area.lightswitch)
 		on = connected_area.lightswitch
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return 1
 
 /obj/machinery/light_switch/attack_hand(mob/user)

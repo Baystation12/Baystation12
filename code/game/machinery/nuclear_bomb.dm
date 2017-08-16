@@ -408,7 +408,7 @@ var/bomb_set
 	for(var/turf/simulated/floor/T in trange(1, src))
 		T.set_flooring(get_flooring_data(/decl/flooring/reinforced/circuit/red))
 		flash_tiles += T
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/nuclearbomb/station/Destroy()
 	flash_tiles.Cut()

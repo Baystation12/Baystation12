@@ -111,7 +111,7 @@
 		S.gen = src
 		S.flags_updated()
 		field_segments |= S
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 // Recalculates and updates the upkeep multiplier

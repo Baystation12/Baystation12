@@ -122,7 +122,7 @@
 		to_chat(user, "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 
 	ai.canmove = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return 1
 
 /obj/item/weapon/aicard/proc/clear()
@@ -132,7 +132,7 @@
 	name = initial(name)
 	carded_ai.calculate_power_usage()
 	carded_ai = null
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/aicard/see_emote(mob/living/M, text)
 	if(carded_ai && carded_ai.client)

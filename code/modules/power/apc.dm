@@ -186,7 +186,6 @@
 		operating = 0
 		name = "\improper [area.name] APC"
 		stat |= MAINT
-		src.update_icon()
 
 	..()
 
@@ -194,6 +193,7 @@
 	. = ..()
 	if(operating)
 		src.update()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/power/apc/Destroy()
 	src.update()
@@ -242,7 +242,7 @@
 		src.area = get_area_name(areastring)
 		name = "\improper [area.name] APC"
 	area.apc = src
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	make_terminal()
 
@@ -444,8 +444,8 @@
 	if(!updating_icon)
 		updating_icon = 1
 		// Start the update
-		spawn(APC_UPDATE_ICON_COOLDOWN)
-			update_icon()
+		spawn(APC_UPDATE_ICON_COOLDOWN+rand(-15, 30))
+			ADD_ICON_QUEUE(src)
 			updating_icon = 0
 
 //attack with an item - open/close cover, insert cell, or (un)lock interface
@@ -1177,7 +1177,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 		if(cell)
 			cell.emp_act(severity+1)
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)
@@ -1232,7 +1232,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	equipment = POWERCHAN_ON_AUTO
 	environ = POWERCHAN_ON_AUTO
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update()
 
 // overload the lights in this APC area

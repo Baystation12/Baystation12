@@ -50,7 +50,7 @@
 	new /obj/item/weapon/book/manual/anomaly_testing(src)
 	new /obj/item/weapon/book/manual/anomaly_spectroscopy(src)
 	new /obj/item/weapon/book/manual/stasis(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"

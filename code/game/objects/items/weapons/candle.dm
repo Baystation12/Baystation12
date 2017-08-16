@@ -59,7 +59,7 @@
 	if(!wax)
 		new/obj/item/trash/candle(src.loc)
 		qdel(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	if(istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)

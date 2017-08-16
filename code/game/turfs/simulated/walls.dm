@@ -149,7 +149,7 @@
 	if(damage >= cap)
 		dismantle_wall()
 	else
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	return
 

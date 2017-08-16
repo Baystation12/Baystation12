@@ -79,7 +79,7 @@
 		//ran out of charge
 		if (!cell.charge)
 			power_change()
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 	//src.update_icon()
 	src.updateDialog()
@@ -177,7 +177,7 @@
 	var/old_stat = stat
 	..()
 	if (old_stat != stat)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/process()
 	if(!on || (stat & (NOPOWER|BROKEN)))

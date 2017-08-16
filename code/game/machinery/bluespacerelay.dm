@@ -16,7 +16,7 @@
 
 	update_power()
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/bluespacerelay/update_icon()

@@ -146,7 +146,7 @@ var/list/mining_floors = list()
 	clear_ore_effects()
 	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.icon_tag]")
 	ore_overlay.turf_decal_layerise()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -265,7 +265,7 @@ var/list/mining_floors = list()
 				updateIcon = 1
 
 			if(updateIcon)
-				update_icon()
+				ADD_ICON_QUEUE(src)
 
 			//drop some rocks
 			next_rock += P.excavation_amount

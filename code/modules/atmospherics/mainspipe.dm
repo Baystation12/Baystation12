@@ -69,7 +69,7 @@ obj/machinery/atmospherics/mains_pipe
 	hide(var/i)
 		if(level == 1 && istype(loc, /turf/simulated))
 			invisibility = i ? 101 : 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	proc/burst()
 		..()
@@ -98,7 +98,7 @@ obj/machinery/atmospherics/mains_pipe
 
 	Destroy()
 		disconnect()
-		..()
+		. = ..()
 
 	atmos_init()
 		..()
@@ -180,7 +180,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 
 		var/turf/T = src.loc			// hide if turf is not intact
 		if(level == 1 && !T.is_plating()) hide(1)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	hidden
 		level = 1
@@ -242,7 +242,7 @@ obj/machinery/atmospherics/mains_pipe/manifold
 
 		var/turf/T = src.loc			// hide if turf is not intact
 		if(level == 1 && !T.is_plating()) hide(1)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	update_icon()
 		icon_state = "manifold[invisibility ? "-f" : "" ]"
@@ -292,7 +292,7 @@ obj/machinery/atmospherics/mains_pipe/manifold4w
 
 		var/turf/T = src.loc			// hide if turf is not intact
 		if(level == 1 && !T.is_plating()) hide(1)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	update_icon()
 		icon_state = "manifold4w[invisibility ? "-f" : "" ]"
@@ -353,7 +353,7 @@ obj/machinery/atmospherics/mains_pipe/split
 
 		var/turf/T = src.loc			// hide if turf is not intact
 		if(level == 1 && !T.is_plating()) hide(1)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	update_icon()
 		icon_state = "split-[icon_type][invisibility ? "-f" : "" ]"
@@ -474,7 +474,7 @@ obj/machinery/atmospherics/mains_pipe/split3
 
 		var/turf/T = src.loc			// hide if turf is not intact
 		if(level == 1 && !T.is_plating()) hide(1)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	update_icon()
 		icon_state = "split-t[invisibility ? "-f" : "" ]"
@@ -524,7 +524,7 @@ obj/machinery/atmospherics/mains_pipe/cap
 
 		var/turf/T = src.loc	// hide if turf is not intact
 		if(level == 1 && !T.is_plating()) hide(1)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	hidden
 		level = 1

@@ -26,7 +26,7 @@
 
 /obj/item/weapon/gun/energy/emp_act(severity)
 	..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/energy/Initialize()
 	. = ..()
@@ -36,7 +36,7 @@
 		power_supply = new /obj/item/weapon/cell/device/variable(src, max_shots*charge_cost)
 	if(self_recharge)
 		GLOB.processing_objects.Add(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/energy/Destroy()
 	if(self_recharge)
@@ -58,7 +58,7 @@
 				return 0
 
 		power_supply.give(charge_cost) //... to recharge the shot
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	return 1
 
 /obj/item/weapon/gun/energy/consume_next_projectile()

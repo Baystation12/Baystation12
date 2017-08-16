@@ -107,6 +107,6 @@
 		charging.give(active_power_usage*CELLRATE)
 		update_use_power(2)
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
 		update_use_power(1)

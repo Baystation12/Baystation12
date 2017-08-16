@@ -212,7 +212,7 @@ obj/machinery/atmospherics/trinary/mixer/t_mixer/atmos_init()
 			node3 = target
 			break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 obj/machinery/atmospherics/trinary/mixer/m_mixer
@@ -258,5 +258,5 @@ obj/machinery/atmospherics/trinary/mixer/m_mixer/atmos_init()
 			node3 = target
 			break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()

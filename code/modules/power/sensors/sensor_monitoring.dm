@@ -26,7 +26,7 @@
 	var/alert = check_warnings()
 	if(alert != alerting)
 		alerting = !alerting
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 // Updates icon of this computer according to current status.
 /obj/machinery/computer/power_monitor/update_icon()

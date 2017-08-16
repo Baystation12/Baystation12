@@ -73,7 +73,7 @@
 		A.updateicon()
 		var/obj/item/weapon/aicard/AC = A.loc
 		if(AC)
-			AC.update_icon()
+			ADD_ICON_QUEUE(AC)
 	// Finished restoring
 	if((A.hardware_integrity() == 100) && (A.backup_capacitor() == 100))
 		restoring = 0

@@ -175,7 +175,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	spawn(2)
 		broadcast_status()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return
 
 /obj/machinery/atmospherics/binary/pump/attack_hand(user as mob)

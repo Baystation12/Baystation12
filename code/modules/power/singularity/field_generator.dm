@@ -70,12 +70,12 @@ field_generator power level display
 			anchored = 1
 			warming_up = 3
 			start_fields()
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		Varedit_start = 0
 
 	if(src.active == 2)
 		calc_power()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	return
 
 

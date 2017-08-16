@@ -19,7 +19,7 @@
 	if(ammo < max_ammo && world.time > last_regen + ammo_gen_time)
 		ammo++
 		last_regen = world.time
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/launcher/alien/examine(mob/user)
 	..(user)

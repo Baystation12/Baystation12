@@ -169,7 +169,7 @@
 	create_reagents(200)
 	if(mechanical)
 		connect()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
 
@@ -204,7 +204,7 @@
 	if(seed && !dead && health <= 0)
 		die()
 	check_level_sanity()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/die()
 	dead = 1
@@ -330,7 +330,7 @@
 	weedlevel = 0
 	pestlevel = 0
 	sampled = 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	visible_message("<span class='notice'>[src] has been overtaken by [seed.display_name].</span>")
 
 	return
@@ -367,7 +367,7 @@
 		if(labelled)
 			to_chat(usr, "You remove the label.")
 			labelled = null
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		else
 			to_chat(usr, "There is no label to remove.")
 	return
@@ -418,7 +418,7 @@
 	harvest = 0
 	weedlevel = 0
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into </span><span class='notice'>[seed.display_name]!</span>")
 
 	return

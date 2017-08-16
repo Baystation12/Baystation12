@@ -1692,7 +1692,7 @@
 					news_network.wanted_issue = WANTED
 					for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
 						NEWSCASTER.newsAlert()
-						NEWSCASTER.update_icon()
+						ADD_ICON_QUEUE(NEWSCASTER)
 					src.admincaster_screen = 15
 				else
 					news_network.wanted_issue.author = src.admincaster_feed_message.author
@@ -1707,7 +1707,7 @@
 		if(choice=="Confirm")
 			news_network.wanted_issue = null
 			for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-				NEWSCASTER.update_icon()
+				ADD_ICON_QUEUE(NEWSCASTER)
 			src.admincaster_screen=17
 		src.access_news_network()
 

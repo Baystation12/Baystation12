@@ -108,7 +108,8 @@
 
 	. = (stat != oldstat)
 	if(.)
-		update_icon()
+		ADD_ICON_QUEUE(src) //New way to process shii
+//		update_icon()
 
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()

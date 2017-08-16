@@ -83,7 +83,7 @@
 			visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
 			src.attached.apply_damage(3, BRUTE, pick(BP_R_ARM, BP_L_ARM))
 			src.attached = null
-			src.update_icon()
+			ADD_ICON_QUEUE(src)
 			return
 
 	if(src.attached && src.beaker)

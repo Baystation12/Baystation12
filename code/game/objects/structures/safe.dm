@@ -176,7 +176,7 @@ obj/structure/safe/ex_act(severity)
 	var/turf/T = loc
 	if(istype(T) && !T.is_plating())
 		hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/safe/floor/hide(var/intact)
 	invisibility = intact ? 101 : 0

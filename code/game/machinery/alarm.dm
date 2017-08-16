@@ -1072,7 +1072,7 @@ FIRE ALARM
 		return
 	for(var/obj/machinery/firealarm/FA in MyArea.machinecache)
 		fire_alarm.clearAlarm(loc, FA)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return
 
 /obj/machinery/firealarm/proc/alarm(var/duration = 0)
@@ -1080,7 +1080,7 @@ FIRE ALARM
 		return
 	for(var/obj/machinery/firealarm/FA in MyArea.machinecache)
 		fire_alarm.triggerAlarm(loc, FA, duration)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
 
@@ -1102,7 +1102,7 @@ FIRE ALARM
 /obj/machinery/firealarm/proc/set_security_level(var/newlevel)
 	if(seclevel != newlevel)
 		seclevel = newlevel
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/firealarm/Initialize()
 	. = ..()

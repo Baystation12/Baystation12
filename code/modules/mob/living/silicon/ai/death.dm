@@ -15,7 +15,7 @@
 
 	if (istype(loc, /obj/item/weapon/aicard))
 		var/obj/item/weapon/aicard/card = loc
-		card.update_icon()
+		ADD_ICON_QUEUE(card)
 
 	. = ..(gibbed,"gives one shrill beep before falling lifeless.", "You have suffered a critical system failure, and are dead.")
 	set_density(1)

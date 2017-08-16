@@ -19,7 +19,7 @@
 
 /obj/machinery/sleeper/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 
 /obj/machinery/sleeper/process()

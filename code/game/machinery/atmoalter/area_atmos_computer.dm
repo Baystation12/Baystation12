@@ -113,7 +113,7 @@
 				return
 
 			scrubber.on = text2num(href_list["toggle"])
-			scrubber.update_icon()
+			ADD_ICON_QUEUE(scrubber)
 
 	proc/validscrubber( var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber as obj )
 		if(!isobj(scrubber) || get_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)

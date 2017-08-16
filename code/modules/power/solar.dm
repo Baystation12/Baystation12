@@ -55,7 +55,7 @@ var/list/solars_list = list()
 	S.loc = src
 	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 
@@ -139,7 +139,7 @@ var/list/solars_list = list()
 	var/obj/item/solar_assembly/S = locate() in src
 	S.glass_type = null
 	unset_control()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/power/solar/ex_act(severity)
@@ -499,9 +499,9 @@ var/list/solars_list = list()
 	for(var/obj/machinery/power/solar/S in connected_panels)
 		S.adir = cdir //instantly rotates the panel
 		S.occlusion()//and
-		S.update_icon() //update it
+		ADD_ICON_QUEUE(S) //update it
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/power/solar_control/proc/broken()

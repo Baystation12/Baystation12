@@ -33,7 +33,7 @@
 			if(O.client && O.client.prefs && (MODE_XENOMORPH in O.client.prefs.be_special_role))
 				to_chat(O, "<span class='notice'>An alien is ready to hatch! ([ghost_follow_link(src, O)]) (<a href='byond://?src=\ref[src];spawn=1'>spawn</a>)</span>")
 		GLOB.processing_objects -= src
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/structure/alien/egg/update_icon()
 	if(progress == -1)
@@ -92,6 +92,6 @@
 	// Turn us into a hatched egg.
 	name = "hatched alien egg"
 	desc += " This one has hatched."
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 #undef MAX_PROGRESS

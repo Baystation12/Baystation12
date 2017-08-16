@@ -41,7 +41,12 @@
 		set_opacity(0)
 	else
 		set_opacity(1)
-	update_icon()
+
+
+/obj/machinery/door/unpowered/simple/Initialize()
+	. = ..()
+	ADD_ICON_QUEUE(src)
+
 
 /obj/machinery/door/unpowered/simple/requiresID()
 	return 0

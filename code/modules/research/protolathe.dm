@@ -31,11 +31,11 @@
 /obj/machinery/r_n_d/protolathe/process()
 	..()
 	if(stat)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	if(queue.len == 0)
 		busy = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	var/datum/design/D = queue[1]
 	if(canBuild(D))
@@ -47,12 +47,12 @@
 			removeFromQueue(1)
 			if(linked_console)
 				linked_console.updateUsrDialog()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
 		if(busy)
 			visible_message("<span class='notice'>\icon [src] flashes: insufficient materials: [getLackingMaterials(D)].</span>")
 			busy = 0
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0

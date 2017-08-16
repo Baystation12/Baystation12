@@ -31,7 +31,7 @@
 		load_engine(new engine_type(src.loc))
 		if(prefilled)
 			engine.prefill()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"

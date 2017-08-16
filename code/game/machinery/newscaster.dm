@@ -100,7 +100,7 @@
 /datum/feed_network/proc/alert_readers(var/annoncement)
 	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
 		NEWSCASTER.newsAlert(annoncement)
-		NEWSCASTER.update_icon()
+		ADD_ICON_QUEUE(NEWSCASTER)
 
 	var/list/receiving_pdas = new
 	for (var/obj/item/device/pda/P in PDAs)
@@ -179,7 +179,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	src.paper_remaining = 15            // Will probably change this to something better
 	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters) // Let's give it an appropriate unit number
 		src.unit_no++
-	src.update_icon() //for any custom ones on the map...
 
 /obj/machinery/newscaster/Destroy()
 	allCasters -= src
@@ -611,7 +610,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			if(choice=="Confirm")
 				news_network.wanted_issue = null
 				for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-					NEWSCASTER.update_icon()
+					ADD_ICON_QUEUE(NEWSCASTER)
 				src.screen=17
 			src.updateUsrDialog()
 
@@ -966,10 +965,10 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		for(var/mob/O in hearers(world.view-1, T))
 			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
 		src.alert = 1
-		src.update_icon()
+		ADD_ICON_QUEUE(src)
 		spawn(300)
 			src.alert = 0
-			src.update_icon()
+			ADD_ICON_QUEUE(src)
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 75, 1)
 	else
 		for(var/mob/O in hearers(world.view-1, T))

@@ -87,7 +87,7 @@
 	if((stat & EMPED) && world.time >= affected_by_emp_until)
 		stat &= ~EMPED
 		cancelCameraAlarm()
-		update_icon()
+//		ADD_ICON_QUEUE(src) ~L: Why are we updating their icons..?
 		update_coverage()
 	return internal_process()
 

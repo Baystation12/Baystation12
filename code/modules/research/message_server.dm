@@ -84,14 +84,14 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	else if(stat & (BROKEN|NOPOWER))
 		return
 	else if(power_failure > 0)
 		if(!(--power_failure))
 			active = 1
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
 	var/result

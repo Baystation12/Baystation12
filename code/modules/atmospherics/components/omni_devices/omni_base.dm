@@ -155,7 +155,7 @@
 				overlays_off[ref_layer] = null
 				overlays_on[ref_layer] = null
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/omni/proc/select_port_icons(var/datum/omni_port/P)
 	if(!istype(P))

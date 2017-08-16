@@ -35,7 +35,7 @@
 
 	RefreshParts()
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/recharge_station/proc/has_cell_power()
 	return cell && cell.percent() > 0
@@ -49,7 +49,7 @@
 	if((stat & NOPOWER) && !has_cell_power()) // No power and cell is dead.
 		if(icon_update_tick)
 			icon_update_tick = 0 //just rebuild the overlay once more only
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		return
 
 	//First, draw from the internal power cell to recharge/repair/etc the occupant
@@ -71,7 +71,7 @@
 		icon_update_tick++
 
 	if(occupant || recharge_amount)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 //since the recharge station can still be on even with NOPOWER. Instead it draws from the internal cell.
 /obj/machinery/recharge_station/auto_use_power()

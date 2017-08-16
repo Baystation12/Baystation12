@@ -15,7 +15,7 @@
 
 /obj/machinery/button/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	if(_wifi_id && !wifi_sender)
 		wifi_sender = new/datum/wifi/sender/button(_wifi_id, src)
 

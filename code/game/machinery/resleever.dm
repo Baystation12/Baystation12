@@ -35,7 +35,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 
 	RefreshParts()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/resleever/Destroy()
 	eject_occupant()

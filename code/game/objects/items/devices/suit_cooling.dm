@@ -57,7 +57,7 @@
 	H.bodytemperature -= temp_adj
 
 	cell.use(charge_usage * CELLRATE)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	if(cell.charge <= 0)
 		turn_off(1)

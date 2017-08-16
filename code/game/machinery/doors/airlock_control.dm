@@ -141,7 +141,7 @@ obj/machinery/door/airlock/Initialize()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 obj/machinery/door/airlock/Destroy()
 	if(frequency && radio_controller)
@@ -203,7 +203,7 @@ obj/machinery/airlock_sensor/process()
 
 			alert = (pressure < ONE_ATMOSPHERE*0.8)
 
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)

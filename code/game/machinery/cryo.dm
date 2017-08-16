@@ -35,6 +35,7 @@
 	..()
 	if(node) return
 	icon = 'icons/obj/cryogenics_split.dmi'
+	ADD_ICON_QUEUE(src)
 	initialize_directions = dir
 
 	var/node_connect = dir

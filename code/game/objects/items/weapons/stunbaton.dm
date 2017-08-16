@@ -38,7 +38,7 @@
 			return 1
 		else
 			status = 0
-			update_icon()
+			ADD_ICON_QUEUE(src)
 			return 0
 	return null
 

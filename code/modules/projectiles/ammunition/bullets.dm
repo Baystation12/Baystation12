@@ -123,7 +123,7 @@
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
 	if(prob(100/severity)) BB = null
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 //Does not stun, only blinds, but has area of effect.
 /obj/item/ammo_casing/shotgun/flash

@@ -39,7 +39,7 @@
 				capacitor.charge(power_per_tick)
 		else
 			capacitor.use(capacitor.charge * 0.05)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/magnetic/update_icon()
 	var/list/overlays_to_add = list()

@@ -103,7 +103,7 @@
 	else
 		var/obj/item/weapon/spacecash/bundle/bundle = new (usr.loc)
 		bundle.worth = amount
-		bundle.update_icon()
+		ADD_ICON_QUEUE(bundle)
 		usr.put_in_hands(bundle)
 	if(!worth)
 		qdel(src)
@@ -165,7 +165,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	else
 		var/obj/item/weapon/spacecash/bundle/bundle = new (spawnloc)
 		bundle.worth = sum
-		bundle.update_icon()
+		ADD_ICON_QUEUE(bundle)
 		if (ishuman(human_user) && !human_user.get_active_hand())
 			human_user.put_in_hands(bundle)
 	return

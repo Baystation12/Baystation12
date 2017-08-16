@@ -75,7 +75,7 @@ obj/machinery/atmospherics/binary
 					node2 = target
 					break
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		update_underlays()
 
 	build_network()

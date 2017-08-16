@@ -169,6 +169,7 @@
 #include "code\controllers\ProcessScheduler\core\processScheduler.dm"
 #include "code\controllers\subsystems\atoms.dm"
 #include "code\controllers\subsystems\garbage.dm"
+#include "code\controllers\subsystems\iconUpdates.dm"
 #include "code\controllers\subsystems\legacy.dm"
 #include "code\datums\ai_law_sets.dm"
 #include "code\datums\ai_laws.dm"

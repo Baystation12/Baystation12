@@ -100,7 +100,7 @@
 			new item2_type(src)
 		if(item3_type)
 			new item3_type(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/storage/wallet/poly
 	name = "polychromic wallet"
@@ -132,4 +132,4 @@
 	spawn(200)
 		if(src)
 			icon_state = initial(icon_state)
-			update_icon()
+			ADD_ICON_QUEUE(src)
