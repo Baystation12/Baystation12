@@ -24,7 +24,7 @@
 
 /obj/machinery/atmospherics/valve/shutoff/Destroy()
 	GLOB.processing_objects -= src
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/valve/shutoff/attack_hand(mob/user as mob)
 	..()

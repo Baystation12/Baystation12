@@ -53,9 +53,11 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		T.ex_act(severity)
 		if(!T)
 			T = locate(x,y,z)
+
 		for(var/atom_movable in T.contents)
 			var/atom/movable/AM = atom_movable
-			if(AM && AM.simulated)	AM.ex_act(severity)
+			if(AM && AM.simulated && !T.protects_atom(AM))
+				AM.ex_act(severity)
 
 	explosion_turfs.Cut()
 	explosion_in_progress = 0
