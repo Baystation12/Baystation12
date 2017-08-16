@@ -586,6 +586,7 @@
 		E.species = all_species[SPECIES_PROMETHEAN]
 		E.s_tone = null
 		E.s_col = ReadRGB("#05FF9B")
+		E.s_col_blend = ICON_ADD
 		E.status &= ~ORGAN_BROKEN
 		E.status |= ORGAN_MUTATED
 		E.cannot_break = 1
