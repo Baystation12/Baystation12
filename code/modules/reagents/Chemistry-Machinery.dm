@@ -1,6 +1,7 @@
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
+#define GEL 4
 
 #define BOTTLE_SPRITES list("bottle-1", "bottle-2", "bottle-3", "bottle-4") //list of available bottle sprites
 #define REAGENTS_PER_SHEET 20
@@ -27,6 +28,7 @@
 	var/pillamount = 10
 	var/bottlesprite = "bottle-1" //yes, strings
 	var/pillsprite = "1"
+	var/jarsprite = "gel_jar"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
 	flags = OPENCONTAINER
@@ -196,6 +198,17 @@
 			else
 				var/obj/item/weapon/reagent_containers/food/condiment/P = new/obj/item/weapon/reagent_containers/food/condiment(src.loc)
 				reagents.trans_to_obj(P,50)
+
+		else if (href_list["createjar"])
+			var/name = sanitizeSafe(input(usr, "Name:", "Name your jar!", reagents.get_master_reagent_name()), MAX_NAME_LEN)
+			var/obj/item/weapon/reagent_containers/gel/P = new/obj/item/weapon/reagent_containers/gel(src.loc)
+			if(!name)
+				name = reagents.get_master_reagent_name()
+			P.name = "[name] tube"
+			P.icon_state = jarsprite
+			reagents.trans_to_obj(P, 120)
+			P.update_icon()
+
 		else if(href_list["change_pill"])
 			#define MAX_PILL_SPRITE 20 //max icon state of the pill sprites
 			var/dat = "<table>"
@@ -276,7 +289,8 @@
 		if(!condi)
 			dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (60 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
 			dat += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
-			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"[bottlesprite].png\" /></A>"
+			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"[bottlesprite].png\" /></A><BR>"
+			dat += "<A href='?src=\ref[src];createjar=1'>Create gel jar (120 units max)</A>"
 		else
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
 	if(!condi)
