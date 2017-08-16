@@ -46,7 +46,12 @@
 	var/client/C
 	switch(alert("Is player online?","Set whitelist","Yes","No"))
 		if("Yes")
-			C = input("Please, select a player!", "Add User to Whitelist") in clients
+			C = input("Please, select a player!", "Add User to Whitelist") in GLOB.clients
+			if(!C || C == src)
+				usr << "<span class='warning'>Either he/she does not exsist or you've tried promoting yourself.</span>"
+				return 0
+		if("No")
+			C = input("Please enter ckey of player (be sure about this!)", "Add User to Whitelist") as text
 			if(!C || C == src)
 				usr << "<span class='warning'>Either he/she does not exsist or you've tried promoting yourself.</span>"
 				return 0
@@ -85,3 +90,5 @@
 			to_chat(C, "Donator status added.")
 	if(C.saveclientdb())
 		usr << "Whitelist written to file."
+	else
+		usr << "Whitelist could not be written, please try again or contact laser."
