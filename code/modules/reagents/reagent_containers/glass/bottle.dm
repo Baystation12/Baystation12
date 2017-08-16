@@ -30,8 +30,8 @@
 		..()
 		update_icon()
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if(!icon_state)
 			icon_state = "bottle-[rand(1,4)]"
 

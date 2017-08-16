@@ -23,7 +23,7 @@ datum/pipe_network
 		for(var/obj/machinery/atmospherics/normal_member in normal_members)
 			normal_member.reassign_network(src, null)
 		gases.Cut()  // Do not qdel the gases, we don't own them
-		return ..()
+		return . = ..()
 
 	proc/process()
 		//Equalize gases amongst pipe if called for

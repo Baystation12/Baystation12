@@ -862,11 +862,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if (mode == 2||mode == 21)//To clear message overlays.
 		new_message = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if (mode == 6||mode == 61)//To clear news overlays.
 		new_news = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
@@ -1055,7 +1055,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if(!news_silent)
 		new_news = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/device/pda/ai/new_news(var/message)
 	// Do nothing
@@ -1069,7 +1069,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
 	new_message = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
 	if(!istype(sending_unit))

@@ -1180,6 +1180,7 @@
 		return 1
 	if(!access_list.len) //no requirements
 		return 1
+	if(!I)	return 0 // No ID no access
 	I = I.GetIdCard()
 	if(!istype(I) || !I.access) //not ID or no access
 		return 0

@@ -47,7 +47,7 @@
 	eject()
 	if(trunk)
 		trunk.linked = null
-	return ..()
+	. = ..()
 
 // attack by item places it in to disposal
 /obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
@@ -1278,8 +1278,8 @@
 
 	dpdir = sortdir | inactive_dir | active_dir
 
-/obj/structure/disposalpipe/diversion_junction/New()
-	..()
+/obj/structure/disposalpipe/diversion_junction/Initialize()
+	. = ..()
 
 	updatedir()
 	updatedesc()
@@ -1455,8 +1455,8 @@
 	icon_state = "pipe-t"
 	var/obj/linked 	// the linked obj/machinery/disposal or obj/disposaloutlet
 
-/obj/structure/disposalpipe/trunk/New()
-	..()
+/obj/structure/disposalpipe/trunk/Initialize()
+	. = ..()
 	dpdir = dir
 	spawn(1)
 		getlinked()
