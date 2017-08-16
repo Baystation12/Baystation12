@@ -134,3 +134,9 @@
 		return 0
 	for(var/datum/ship_engine/E in engines)
 		. |= E.can_burn()
+		
+//deciseconds to next step
+/obj/effect/overmap/ship/proc/ETA()
+	. = INFINITY
+	for(var/i=1, i<=2, i++)
+		. = min(last_movement[i] + default_delay - speed_mod*abs(speed[i]) - world.time, .)

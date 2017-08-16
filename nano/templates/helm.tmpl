@@ -15,6 +15,14 @@
 	<div class='block'>
 		<div class='item'>
 			<div class="itemLabel">
+				<span class='average'>ETA to next grid:</span>
+			</div>
+			<div style="float:right">
+				{{:data.ETAnext}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
 				<span class='average'>Speed:</span>
 			</div>
 			<div style="float:right">
@@ -46,19 +54,19 @@
 	<div class='item'>
 		<div class="itemLabel">
 			<div class='item'>
-				{{:helper.link('', 'triangle-1-nw', { 'move' : 9 }, null, null)}}
-				{{:helper.link('', 'triangle-1-n', { 'move' : 1 }, null, null)}}
-				{{:helper.link('', 'triangle-1-ne', { 'move' : 5 }, null, null)}}
+				{{:helper.link('', 'triangle-1-nw', { 'move' : 9 }, data.canburn ? null : 'disabled', null)}}
+				{{:helper.link('', 'triangle-1-n', { 'move' : 1 }, data.canburn ? null : 'disabled', null)}}
+				{{:helper.link('', 'triangle-1-ne', { 'move' : 5 }, data.canburn ? null : 'disabled', null)}}
 			</div>
 			<div class='item'>
-				{{:helper.link('', 'triangle-1-w', { 'move' : 8 }, null, null)}}
-				{{:helper.link('', 'circle-close', { 'brake' : 1 }, null, null)}}
-				{{:helper.link('', 'triangle-1-e', { 'move' : 4 }, null, null)}}
+				{{:helper.link('', 'triangle-1-w', { 'move' : 8 }, data.canburn ? null : 'disabled', null)}}
+				{{:helper.link('', 'circle-close', { 'brake' : 1 }, data.canburn ? null : 'disabled', null)}}
+				{{:helper.link('', 'triangle-1-e', { 'move' : 4 }, data.canburn ? null : 'disabled', null)}}
 			</div>
 			<div class='item'>
-				{{:helper.link('', 'triangle-1-sw', { 'move' : 10 }, null, null)}}
-				{{:helper.link('', 'triangle-1-s', { 'move' : 2 }, null, null)}}
-				{{:helper.link('', 'triangle-1-se', { 'move' : 6 }, null, null)}}
+				{{:helper.link('', 'triangle-1-sw', { 'move' : 10 }, data.canburn ? null : 'disabled', null)}}
+				{{:helper.link('', 'triangle-1-s', { 'move' : 2 }, data.canburn ? null : 'disabled', null)}}
+				{{:helper.link('', 'triangle-1-se', { 'move' : 6 }, data.canburn ? null : 'disabled', null)}}
 			</div>
 		</div>
 

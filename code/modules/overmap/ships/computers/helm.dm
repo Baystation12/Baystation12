@@ -91,6 +91,12 @@
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["autopilot"] = autopilot
 	data["manual_control"] = manual_control
+	data["canburn"] = linked.can_burn()
+
+	if(linked.get_speed())
+		data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
+	else	
+		data["ETAnext"] = "N/A"
 
 	var/list/locations[0]
 	for (var/key in known_sectors)
