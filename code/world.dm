@@ -436,7 +436,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Bad Key"
 
 		return show_player_info_irc(ckey(input["notes"]))
-
+/*
 	else if(copytext(T,1,4) == "age")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
@@ -457,7 +457,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				return "Ckey not found"
 		else
 			return "Database connection failed or not set up"
-
+*/
 	else if(copytext(T,1,14) == "placepermaban")
 		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
@@ -676,14 +676,14 @@ world/proc/CPUUpdater()
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
 var/failed_old_db_connections = 0
-
+/*
 /hook/startup/proc/connectDB()
 	if(!setup_database_connection())
 		world.log << "Your server failed to establish a connection with the feedback database."
 	else
 		world.log << "Feedback database connection established."
 	return 1
-
+*/
 proc/setup_database_connection()
 
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
@@ -718,14 +718,14 @@ proc/establish_db_connection()
 	else
 		return 1
 
-
+/*
 /hook/startup/proc/connectOldDB()
 	if(!setup_old_database_connection())
 		world.log << "Your server failed to establish a connection with the SQL database."
 	else
 		world.log << "SQL database connection established."
 	return 1
-
+*/
 //These two procs are for the old database, while it's being phased out. See the tgstation.sql file in the SQL folder for more information.
 proc/setup_old_database_connection()
 
