@@ -138,6 +138,7 @@ var/list/debug_verbs = list (
         ,/client/proc/jump_to_dead_group
         ,/client/proc/startSinglo
         ,/client/proc/ticklag
+        ,/client/proc/set_server_fps
         ,/client/proc/cmd_admin_grantfullaccess
         ,/client/proc/cmd_admin_areatest
         ,/client/proc/cmd_admin_rejuvenate
