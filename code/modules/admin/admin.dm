@@ -746,6 +746,23 @@ var/global/floorIsLava = 0
 	log_and_message_admins("toggled LOOC.")
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggledonsay()
+	set category = "Server"
+	set desc="Globally Toggles Dontor chat"
+	set name="Toggle DONSAY"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	config.donsay_allowed = !(config.donsay_allowed)
+	if (config.donsay_allowed)
+		to_world("<B>The Donator channel has been globally enabled!</B>")
+	else
+		to_world("<B>The Donator channel has been globally disabled!</B>")
+	log_and_message_admins("toggled Donator Chat.")
+	feedback_add_details("admin_verb","TDONSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 
 /datum/admins/proc/toggledsay()
 	set category = "Server"
