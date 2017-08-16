@@ -21,10 +21,12 @@
 	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
+	button_machines.Add(src)
 
 /obj/machinery/mass_driver/Destroy()
 	qdel(wifi_receiver)
 	wifi_receiver = null
+	button_machines.Remove(src)
 	return ..()
 
 /obj/machinery/mass_driver/proc/drive(amount)

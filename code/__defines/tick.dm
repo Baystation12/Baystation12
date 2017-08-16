@@ -5,3 +5,4 @@
 
 #define TICK_CHECK ( world.tick_usage > Master.current_ticklimit )
 #define CHECK_TICK if TICK_CHECK stoplag()
+#define CHECK_TICK2(cpu) if(world.tick_usage > cpu) stoplag()

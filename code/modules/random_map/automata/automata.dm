@@ -8,6 +8,7 @@
 
 // Automata-specific procs and processing.
 /datum/random_map/automata/generate_map()
+	sleep(120) //Sleep so the game can actually load first
 	for(var/i=1;i<=iterations;i++)
 		iterate(i)
 
@@ -15,6 +16,9 @@
 	return
 
 /datum/random_map/automata/proc/iterate(var/iteration)
+	set background = 1
+	set waitfor = 0
+
 	var/list/next_map[limit_x*limit_y]
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)

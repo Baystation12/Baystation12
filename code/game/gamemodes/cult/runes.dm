@@ -604,7 +604,7 @@
 	else
 		for(var/mob/living/M in cultists)
 			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
-		for(var/turf/T in range(5, src))
+		for(var/turf/T in trange(5, src))
 			if(T.holy)
 				T.holy = 0
 			else

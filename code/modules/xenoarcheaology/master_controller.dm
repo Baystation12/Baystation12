@@ -38,7 +38,7 @@
 
 		var/list/viable_adjacent_turfs = list()
 		if(target_digsite_size > 1)
-			for(var/turf/simulated/mineral/T in orange(2, M))
+			for(var/turf/simulated/mineral/T in otrange(2, M))
 				if(!T.density)
 					continue
 				if(T.finds)
@@ -72,7 +72,7 @@
 				var/datum/find/F = archeo_turf.finds[1]
 				if(F.excavation_required <= F.view_range)
 					archeo_turf.archaeo_overlay = "overlay_archaeo[rand(1,3)]"
-					archeo_turf.update_icon()
+					ADD_ICON_QUEUE(archeo_turf)
 
 			//have a chance for an artifact to spawn here, but not in animal or plant digsites
 			if(isnull(M.artifact_find) && digsite != DIGSITE_GARDEN && digsite != DIGSITE_ANIMAL)

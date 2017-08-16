@@ -75,54 +75,50 @@
 
 
 /obj/machinery/iv_drip/process()
-	set background = 1
-
 	if(src.attached)
-
 		if(!(get_dist(src, src.attached) <= 1 && isturf(src.attached.loc)))
 			visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
 			src.attached.apply_damage(3, BRUTE, pick(BP_R_ARM, BP_L_ARM))
 			src.attached = null
 			ADD_ICON_QUEUE(src)
 			return
+		if(src.beaker)
+			if(mode)
+				if(src.beaker.volume > 0)
+					var/transfer_amount = REM
+					if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
+						// speed up transfer on blood packs
+						transfer_amount = 4
+					src.beaker.reagents.trans_to_mob(src.attached, transfer_amount, CHEM_BLOOD)
+					ADD_ICON_QUEUE(src)
 
-	if(src.attached && src.beaker)
-		// Give blood
-		if(mode)
-			if(src.beaker.volume > 0)
-				var/transfer_amount = REM
-				if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
-					// speed up transfer on blood packs
-					transfer_amount = 4
-				src.beaker.reagents.trans_to_mob(src.attached, transfer_amount, CHEM_BLOOD)
-				update_icon()
+			// Take blood
+			else
+				var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+				amount = min(amount, 4)
+				// If the beaker is full, ping
+				if(amount == 0)
+					if(prob(5)) visible_message("\The [src] pings.")
+					return
 
-		// Take blood
-		else
-			var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
-			amount = min(amount, 4)
-			// If the beaker is full, ping
-			if(amount == 0)
-				if(prob(5)) visible_message("\The [src] pings.")
-				return
+				var/mob/living/carbon/human/T = attached
 
-			var/mob/living/carbon/human/T = attached
+				if(!istype(T)) return
+				if(!T.dna)
+					return
+				if(NOCLONE in T.mutations)
+					return
 
-			if(!istype(T)) return
-			if(!T.dna)
-				return
-			if(NOCLONE in T.mutations)
-				return
+				if(!T.should_have_organ(BP_HEART))
+					return
 
-			if(!T.should_have_organ(BP_HEART))
-				return
+				// If the human is losing too much blood, beep.
+				if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
+					visible_message("\The [src] beeps loudly.")
 
-			// If the human is losing too much blood, beep.
-			if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
-				visible_message("\The [src] beeps loudly.")
+				if(T.take_blood(beaker,amount))
+					ADD_ICON_QUEUE(src)
 
-			if(T.take_blood(beaker,amount))
-				update_icon()
 
 /obj/machinery/iv_drip/attack_hand(mob/user as mob)
 	if(src.beaker)

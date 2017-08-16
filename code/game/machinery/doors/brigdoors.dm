@@ -27,6 +27,7 @@
 	var/picture_state		// icon_state of alert picture, if not displaying text/numbers
 	var/list/obj/machinery/targets = list()
 	var/timetoset = 0		// Used to set releasetime upon starting the timer
+	var/next_cycle = 0
 
 	maptext_height = 26
 	maptext_width = 32
@@ -50,10 +51,8 @@
 			if(C.id == src.id)
 				targets += C
 
-		if(targets.len==0)
-			stat |= BROKEN
-		update_icon()
-		return
+	if(targets.len==0)
+		stat |= BROKEN
 	return
 
 
@@ -79,8 +78,12 @@
 		ADD_ICON_QUEUE(src)
 
 	else
-		timer_end()
-
+		if(world.time < next_cycle)
+			return
+		else
+			if(!timing) //Low-processing state.
+				next_cycle = world.time + 10 SECONDS
+				timer_end()
 	return
 
 

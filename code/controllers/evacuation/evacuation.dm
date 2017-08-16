@@ -86,7 +86,7 @@ var/datum/evacuation_controller/evacuation_controller
 	state = EVAC_PREPPING
 
 	if(emergency_evacuation)
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(istype(A, /area/hallway))
 				A.readyalert()
 		if(!skip_announce)
@@ -114,7 +114,7 @@ var/datum/evacuation_controller/evacuation_controller
 
 	if(emergency_evacuation)
 		evac_recalled.Announce(GLOB.using_map.emergency_shuttle_recall_message)
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		emergency_evacuation = 0
@@ -156,19 +156,19 @@ var/datum/evacuation_controller/evacuation_controller
 	if(state == EVAC_PREPPING && recall && world.time >= auto_recall_time)
 		cancel_evacuation()
 		return
-
-	if(state == EVAC_PREPPING)
-		if(world.time >= evac_ready_time)
-			finish_preparing_evac()
-	else if(state == EVAC_LAUNCHING)
-		if(world.time >= evac_launch_time)
-			launch_evacuation()
-	else if(state == EVAC_IN_TRANSIT)
-		if(world.time >= evac_arrival_time)
-			finish_evacuation()
-	else if(state == EVAC_COOLDOWN)
-		if(world.time >= evac_cooldown_time)
-			state = EVAC_IDLE
+	switch(state)
+		if(EVAC_PREPPING)
+			if(world.time >= evac_ready_time)
+				finish_preparing_evac()
+		if(EVAC_LAUNCHING)
+			if(world.time >= evac_launch_time)
+				launch_evacuation()
+		if(EVAC_IN_TRANSIT)
+			if(world.time >= evac_arrival_time)
+				finish_evacuation()
+		if(EVAC_COOLDOWN)
+			if(world.time >= evac_cooldown_time)
+				state = EVAC_IDLE
 
 /datum/evacuation_controller/proc/available_evac_options()
 	return list()

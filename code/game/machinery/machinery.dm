@@ -115,7 +115,7 @@ Class Procs:
 	var/area/MyArea
 
 #define SETAREA(byond)            \
-	if(isarea(byond.loc.loc))     \
+	if(byond.loc && isarea(byond.loc.loc) && byond.anchored)     \
 	{                             \
 		MyArea = byond.loc.loc    \
 	}                             \
@@ -197,10 +197,11 @@ Class Procs:
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0
-	if(src.use_power == 1)
-		use_power(idle_power_usage,power_channel, 1)
-	else if(src.use_power >= 2)
-		use_power(active_power_usage,power_channel, 1)
+	switch(use_power)
+		if(1)
+			MyArea.use_power(idle_power_usage,power_channel, 1)
+		if(2)
+			MyArea.use_power(active_power_usage,power_channel, 1)
 	return 1
 
 /proc/is_operable(var/obj/machinery/M, var/mob/user)

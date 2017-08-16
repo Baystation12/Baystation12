@@ -435,7 +435,7 @@
 
 	if(!lastarea)
 		lastarea = get_area(loc)
-	if(!lastarea.has_gravity)
+	if(!lastarea || !lastarea.has_gravity)
 		return 0
 
 	return 1
@@ -484,21 +484,25 @@
 /client/verb/moveup()
 	set name = ".moveup"
 	set instant = 1
+	set waitfor = 0
 	DO_MOVE(NORTH)
 
 /client/verb/movedown()
 	set name = ".movedown"
 	set instant = 1
+	set waitfor = 0
 	DO_MOVE(SOUTH)
 
 /client/verb/moveright()
 	set name = ".moveright"
 	set instant = 1
+	set waitfor = 0
 	DO_MOVE(EAST)
 
 /client/verb/moveleft()
 	set name = ".moveleft"
 	set instant = 1
+	set waitfor = 0
 	DO_MOVE(WEST)
 
 #undef DO_MOVE

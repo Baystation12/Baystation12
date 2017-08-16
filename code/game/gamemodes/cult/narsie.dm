@@ -70,7 +70,7 @@ var/global/list/narsie_list = list()
 		mezzer()
 
 /obj/singularity/narsie/large/eat()
-	for (var/turf/A in orange(consume_range, src))
+	for (var/turf/A in otrange(consume_range, src))
 		consume(A)
 
 /obj/singularity/narsie/mezzer()

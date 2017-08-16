@@ -1,6 +1,6 @@
 /obj/structure/window/Initialize()
 	. = ..()
-	for(var/obj/structure/table/T in view(src, 1))
+	for(var/obj/structure/table/T in oview(src, 1))
 		T.update_connections()
 		ADD_ICON_QUEUE(T)
 

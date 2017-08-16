@@ -122,6 +122,7 @@
 		"radium" =  8,
 		"mutagen" = 15
 		)
+	var/global/list/status_overlays
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))

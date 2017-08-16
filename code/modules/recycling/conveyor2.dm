@@ -173,12 +173,18 @@
 	if(!id)
 		id = newid
 	update_icon()
+	button_machines.Add(src)
 
 	spawn(5)		// allow map load
 		conveyors = list()
 		for(var/obj/machinery/conveyor/C in world)
 			if(C.id == id)
 				conveyors += C
+
+
+/obj/machinery/conveyor_switch/Destroy()
+	button_machines.Remove(src)
+	. = ..()
 
 // update the icon depending on the position
 
@@ -224,7 +230,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in button_machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update_icon()
@@ -253,7 +259,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in button_machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update_icon()

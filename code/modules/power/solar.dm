@@ -21,6 +21,7 @@ var/list/solars_list = list()
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
+	var/global/list/status_overlays
 
 /obj/machinery/power/solar/drain_power()
 	return -1
@@ -89,11 +90,17 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/update_icon()
 	..()
+	if (!status_overlays)
+		status_overlays = new/list()
+		status_overlays.len = 2
+		status_overlays[1] = image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
+		status_overlays[2] = image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
+
 	overlays.Cut()
 	if(stat & BROKEN)
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
+		overlays += status_overlays[1]
 	else
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
+		overlays += status_overlays[2]
 		src.set_dir(angle2dir(adir))
 	return
 

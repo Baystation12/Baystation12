@@ -22,6 +22,7 @@
 	else
 		luminosity = 1
 
+	all_areas |= src
 	..()
 
 /area/Initialize()

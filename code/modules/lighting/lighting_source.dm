@@ -112,7 +112,7 @@
 
 // Will check if we actually need to update, and update any variables that may need to be updated.
 /datum/light_source/proc/check()
-	if(!source_atom || !light_range || !light_power)
+	if(!source_atom || !light_range || !light_power || QDELETED(source_atom))
 		destroy()
 		return 1
 

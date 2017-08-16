@@ -76,19 +76,17 @@
 
 	if(!src.loc)
 		return 0
-
+	if(chan == -1)
+		chan = power_channel
 	//Don't do this. It allows machines that set use_power to 0 when off (many machines) to
 	//be turned on again and used after a power failure because they never gain the NOPOWER flag.
 	//if(!use_power)
 	//	return 1
-
-	if(!check_area)
-		check_area = src.loc.loc		// make sure it's in an area
-	if(!check_area || !isarea(check_area))
-		return 0					// if not, then not powered
-	if(chan == -1)
-		chan = power_channel
-	return check_area.powered(chan)			// return power status of the area
+	if(check_area)
+		return check_area.powered(chan)			// return power status of the area
+	else
+		if(MyArea)
+			return MyArea.powered(chan)			// return power status of the area
 
 // increment the power usage stats for an area
 /obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
@@ -278,6 +276,7 @@
 
 		else
 			continue
+		CHECK_TICK
 
 	//now that the powernet is set, connect found machines to it
 	for(var/obj/machinery/power/PM in found_machines)

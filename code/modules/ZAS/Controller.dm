@@ -177,6 +177,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			updated++
 			#endif
 			//sleep(1)
+			CHECK_TICK
 
 		for(var/turf/T in deferred)
 			T.update_air_properties()
@@ -200,6 +201,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	for(var/connection_edge/edge in active_edges)
 		edge.tick()
+		CHECK_TICK
 
 	//Process fire zones.
 	if(.)
@@ -207,6 +209,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	for(var/zone/Z in active_fire_zones)
 		Z.process_fire()
+		CHECK_TICK
 
 	//Process hotspots.
 	if(.)
@@ -214,6 +217,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	for(var/obj/fire/fire in active_hotspots)
 		fire.process()
+		CHECK_TICK
 
 	//Process zones.
 	if(.)
@@ -226,6 +230,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		for(var/zone/zone in updating)
 			zone.tick()
 			zone.needs_update = 0
+			CHECK_TICK
 
 	if(.)
 		tick_progress = "success"

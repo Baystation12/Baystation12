@@ -9,6 +9,7 @@
 	anchored = 1.0
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
+	var/unloads_per_tick = 20
 
 
 /obj/machinery/mineral/unloading_machine/New()
@@ -32,15 +33,17 @@
 				BOX.contents -= O
 				O.loc = output.loc
 				i++
-				if (i>=10)
+				if (i>=unloads_per_tick)
 					return
+				CHECK_TICK
 		if (locate(/obj/item, input.loc))
 			var/obj/item/O
 			var/i
-			for (i = 0; i<10; i++)
+			for (i = 0; i<unloads_per_tick; i++)
 				O = locate(/obj/item, input.loc)
 				if (O)
 					O.loc = src.output.loc
 				else
 					return
+				CHECK_TICK
 	return

@@ -34,7 +34,6 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 
 datum/controller/game_controller/proc/setup()
-	world.tick_lag = 0.33 //Hard set
 	spawn(20)
 		createRandomZlevel()
 
@@ -50,7 +49,7 @@ datum/controller/game_controller/proc/setup()
 #ifdef UNIT_TEST
 #define CHECK_SLEEP_MASTER // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
 #else
-#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 300) { initialized_objects=0;sleep(world.tick_lag); }
+#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
 #endif
 
 datum/controller/game_controller/proc/setup_objects()
@@ -65,27 +64,6 @@ datum/controller/game_controller/proc/setup_objects()
 	populate_spawn_points()
 
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
-
-	report_progress("Initializing turbolifts")
-	for(var/thing in turbolifts)
-		var/obj/turbolift_map_holder/lift = thing
-		if(!QDELETED(lift))
-			lift.initialize()
-			CHECK_SLEEP_MASTER
-
-	report_progress("Initializing objects")
-	for(var/atom/movable/object)
-		if(!QDELETED(object))
-			object.initialize()
-			CHECK_SLEEP_MASTER
-
-	report_progress("Initializing areas")
-	for(var/area/area)
-		area.initialize()
-		CHECK_SLEEP_MASTER
-
-	report_progress("Caching space parallax simulation")
-	create_global_parallax_icons()
 
 	if(GLOB.using_map.use_overmap)
 		report_progress("Initializing overmap events")

@@ -418,7 +418,8 @@ var/global/list/light_type_cache = list()
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/powered()
-	return MyArea.lightswitch && ..(power_channel)
+	if(MyArea)
+		return MyArea.lightswitch && ..(power_channel)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return

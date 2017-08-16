@@ -854,7 +854,7 @@ FIRE ALARM
 	icon_state = "fire0"
 	var/detecting = 1.0
 	var/working = 1.0
-	var/time = 10.0
+	var/time = 20.0
 	var/timing = 0.0
 	var/lockdownbyai = 0
 	anchored = 1.0
@@ -866,6 +866,7 @@ FIRE ALARM
 	var/wiresexposed = 0
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
+	var/next_cycle
 
 /obj/machinery/firealarm/update_icon()
 	overlays.Cut()
@@ -991,6 +992,10 @@ FIRE ALARM
 		src.updateDialog()
 	last_process = world.timeofday
 
+	if(world.time < next_cycle)
+		return
+
+	next_cycle = world.time + 4 SECONDS
 	if(locate(/obj/fire) in loc)
 		alarm()
 

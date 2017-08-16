@@ -18,7 +18,7 @@
 /obj/machinery/light_switch/Initialize()
 	. = ..()
 	if(other_area)
-		src.connected_area = locate(other_area)
+		src.connected_area = locate(other_area) in all_areas
 	else
 		src.connected_area = get_area(src)
 

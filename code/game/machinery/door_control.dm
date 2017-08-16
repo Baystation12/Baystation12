@@ -87,7 +87,7 @@
 	*/
 
 /obj/machinery/button/remote/airlock/trigger()
-	for(var/obj/machinery/door/airlock/D in world)
+	for(var/obj/machinery/door/airlock/D in button_machines)
 		if(D.id_tag == src.id)
 			if(specialfunctions & OPEN)
 				if (D.density)
@@ -131,7 +131,7 @@
 	desc = "It controls blast doors, remotely."
 
 /obj/machinery/button/remote/blast_door/trigger()
-	for(var/obj/machinery/door/blast/M in world)
+	for(var/obj/machinery/door/blast/M in button_machines)
 		if(M.id == src.id)
 			if(M.density)
 				spawn(0)

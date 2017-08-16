@@ -39,7 +39,7 @@
 
 	if(flags & ANTAG_HAS_NUKE)
 		dat += "<br><table><tr><td><B>Nuclear disk(s)</B></td></tr>"
-		for(var/obj/item/weapon/disk/nuclear/N in world)
+		for(var/obj/item/weapon/disk/nuclear/N in nuke_disks)
 			dat += "<tr><td>[N.name], "
 			var/atom/disk_loc = N.loc
 			while(!istype(disk_loc, /turf))

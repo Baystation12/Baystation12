@@ -48,10 +48,16 @@
 		layer = open_layer
 
 	implicit_material = get_material_by_name("plasteel")
+	button_machines.Add(src)
+
+/obj/machinery/door/blast/Destroy()
+	button_machines.Remove(src)
+	return ..()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wifi_receiver)
 	wifi_receiver = null
+	button_machines.Remove(src)
 	return ..()
 
 // Proc: Bumped()
