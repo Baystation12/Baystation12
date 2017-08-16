@@ -69,6 +69,7 @@
 		var/datum/category_item/underwear/selected_underwear = input(H, "Choose underwear:", "Choose underwear", H.all_underwear[UWC.name]) as null|anything in UWC.items
 		if(selected_underwear && CanUseTopic(H, GLOB.default_state))
 			H.all_underwear[UWC.name] = selected_underwear
+			H.hide_underwear[UWC.name] = FALSE
 			. = TRUE
 	else if(href_list["underwear"] && href_list["tweak"])
 		var/underwear = href_list["underwear"]
@@ -80,6 +81,7 @@
 		var/new_metadata = gt.get_metadata(usr, get_metadata(H, underwear, gt), "Wardrobe Underwear Selection")
 		if(new_metadata)
 			set_metadata(H, underwear, gt, new_metadata)
+			H.hide_underwear[underwear] = FALSE
 			. = TRUE
 
 	if(.)
