@@ -251,3 +251,6 @@
 
 	if(pref.client)
 		return pref.client.mob
+
+/datum/category_item/player_setup_item/proc/preference_species()
+	return all_species[pref.species] || all_species[SPECIES_HUMAN]

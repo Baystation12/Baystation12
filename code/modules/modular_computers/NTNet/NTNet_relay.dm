@@ -81,10 +81,16 @@
 		dos_failure = 0
 		update_icon()
 		ntnet_global.add_log("Quantum relay manually restarted from overload recovery mode to normal operation mode.")
+		return 1
 	else if(href_list["toggle"])
 		enabled = !enabled
 		ntnet_global.add_log("Quantum relay manually [enabled ? "enabled" : "disabled"].")
 		update_icon()
+		return 1
+	else if(href_list["purge"])
+		ntnet_global.banned_nids.Cut()
+		ntnet_global.add_log("Manual override: Network blacklist cleared.")
+		return 1
 
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid

@@ -3,7 +3,7 @@
 /repository/follow
 	var/datum/cache_entry/valid_until/cache
 
-	var/PriorityQueue/followed_objects
+	var/list/followed_objects
 	var/list/followed_objects_assoc
 	var/list/followed_subtypes
 
@@ -14,7 +14,7 @@
 
 /repository/follow/New()
 	..()
-	followed_objects = new/PriorityQueue(/proc/cmp_follow_holder)
+	followed_objects = list()
 	followed_objects_assoc = list()
 	followed_subtypes = list()
 
@@ -29,7 +29,7 @@
 	var/follow_holder = new follow_holder_type(AM)
 
 	followed_objects_assoc[AM] = follow_holder
-	followed_objects.Enqueue(follow_holder)
+	followed_objects.Add(follow_holder)
 
 	GLOB.destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
 
@@ -58,23 +58,26 @@
 	cache = new(5 SECONDS)
 
 	var/list/followed_by_name = list()
-	for(var/followed_object in followed_objects.L)
+	for(var/followed_object in followed_objects)
 		var/datum/follow_holder/fh = followed_object
 		if(fh.show_entry())
 			group_by(followed_by_name, fh.get_name(TRUE), fh)
 
-	. = list()
+	var/list/L = list()
+
 	for(var/followed_name in followed_by_name)
 		var/list/followed_things = followed_by_name[followed_name]
 		if(followed_things.len == 1)
-			var/datum/follow_holder/followed_thing = followed_things[1]
-			.[followed_thing.get_name()] = followed_thing.followed_instance
+			ADD_SORTED(L, followed_things[1], /proc/cmp_follow_holder)
 		else
 			for(var/i = 1 to followed_things.len)
 				var/datum/follow_holder/followed_thing = followed_things[i]
-				.["[followed_thing.get_name()] ([i])"] = followed_thing.followed_instance
+				followed_thing.instance = i
+				followed_thing.get_name(TRUE)
+				ADD_SORTED(L, followed_thing, /proc/cmp_follow_holder)
 
-	cache.data = .
+	cache.data = L
+	return L
 
 /atom/movable/Initialize()
 	. = ..()
@@ -88,6 +91,7 @@
 /datum/follow_holder
 	var/name
 	var/suffix = ""
+	var/instance
 	var/followed_type
 	var/sort_order
 	var/atom/movable/followed_instance
@@ -104,14 +108,14 @@
 /datum/follow_holder/proc/get_name(var/recalc = FALSE)
 	if(!name || recalc)
 		var/suffix = get_suffix(followed_instance)
-		name = "[followed_instance.follow_name()][suffix ? " [suffix]" : ""]"
+		name = "[followed_instance.follow_name()][instance ? " ([instance])" : ""][suffix ? " [suffix]" : ""]"
 	return name
 
 /atom/movable/proc/follow_name()
 	return name
 
 /mob/follow_name()
-	return real_name
+	return real_name || name
 
 /datum/follow_holder/proc/show_entry()
 	return !!followed_instance

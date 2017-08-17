@@ -6,7 +6,7 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/department_flag = 0
-	var/faction = "None"	              // Players will be allowed to spawn in as jobs that are set to "Station"
+	var/faction = "None"                  // Players will be allowed to spawn in as jobs that are set to "Station"
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
@@ -21,16 +21,20 @@
 	var/ideal_character_age = 30
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
-	var/account_allowed = 1				  // Does this job type come with a station account?
-	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
+	var/account_allowed = 1               // Does this job type come with a station account?
+	var/economic_modifier = 2             // With how much does this job modify the initial account amount?
 
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
-	var/list/allowed_branches			  // For Torch, also expandable for other purposes
-	var/list/allowed_ranks				  // Ditto
+	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
+	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
+	var/list/allowed_ranks                // Ditto
 
-	var/announced						  //If their arrival is announced on radio
-	var/latejoin_at_spawnpoints			  //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+	var/announced = TRUE                  //If their arrival is announced on radio
+	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+
+/datum/job/dd_SortValue()
+    return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
@@ -122,6 +126,25 @@
 
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
+
+/datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	if(!is_branch_allowed(prefs.char_branch))
+		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
+		return TRUE
+
+	if(!is_rank_allowed(prefs.char_branch, prefs.char_rank))
+		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.char_branch] are: [get_ranks(prefs.char_branch)].</span>")
+		return TRUE
+
+	var/datum/species/S = all_species[prefs.species]
+	if(!is_species_allowed(S))
+		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		return TRUE
+
+	return FALSE
+
+/datum/job/proc/is_species_allowed(var/datum/species/S)
+	return !GLOB.using_map.is_species_job_restricted(S, src)
 
 /**
  *  Check if members of the given branch are allowed in the job

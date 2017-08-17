@@ -38,6 +38,11 @@
 	path = /obj/item/clothing/glasses/hud/security/prescription
 	allowed_roles = SECURITY_ROLES
 
+/datum/gear/eyes/security/sunglasses
+	display_name = "Security HUD Sunglasses"
+	path = /obj/item/clothing/glasses/sunglasses/sechud
+	allowed_roles = SECURITY_ROLES
+
 /datum/gear/eyes/secaviators
 	display_name = "Security HUD Aviators"
 	path = /obj/item/clothing/glasses/sunglasses/sechud/toggle
@@ -56,17 +61,17 @@
 /datum/gear/eyes/meson
 	display_name = "Meson Goggles"
 	path = /obj/item/clothing/glasses/meson
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Prospector", "Research Assistant")
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant)
 
 /datum/gear/eyes/meson/prescription
 	display_name = "Meson Goggles, prescription"
 	path = /obj/item/clothing/glasses/meson/prescription
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Prospector", "Research Assistant")
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant)
 
 /datum/gear/eyes/material
 	display_name = "Material Goggles"
 	path = /obj/item/clothing/glasses/material
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Prospector", "Research Assistant")
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant)
 
 /datum/gear/eyes/shades/
 	display_name = "sunglasses"

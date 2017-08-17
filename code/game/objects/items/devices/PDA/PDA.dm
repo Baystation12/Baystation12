@@ -1265,7 +1265,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 				user.show_message("<span class='notice'>Analyzing Results for [C]:</span>")
 				if(C.radiation)
-					user.show_message("<span class='notice'>Radiation Level: [C.radiation]</span>")
+					user.show_message("<span class='notice'>Radiation Level: [C.radiation] mSv</span>")
 				else
 					user.show_message("<span class='notice'>No radiation detected.</span>")
 

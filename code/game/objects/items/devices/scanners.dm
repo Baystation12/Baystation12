@@ -186,23 +186,9 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			for(var/obj/item/organ/external/org in damaged)
 				var/limb_result = "[capitalize(org.name)][(org.robotic >= ORGAN_ROBOT) ? " (Cybernetic)" : ""]:"
 				if(org.brute_dam > 0)
-					var/degree = "minor"
-					if(org.brute_dam > 50)
-						degree = "severe"
-					else if(org.brute_dam > 25)
-						degree = "significant"
-					else if(org.brute_dam > 10)
-						degree = "moderate"
-					limb_result = "[limb_result] \[<font color = 'red'><b>[degree] physical trauma</b></font>\]"
+					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.vital)] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					var/degree = "minor"
-					if(org.burn_dam > 50)
-						degree = "severe"
-					else if(org.burn_dam > 25)
-						degree = "significant"
-					else if(org.burn_dam > 10)
-						degree = "moderate"
-					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[degree] burns</b></font>\]"
+					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='danger'>bleeding</span>\]"
 				. += limb_result
@@ -254,6 +240,29 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(print_reagent_default_message)
 		. += "No results."
 	. = jointext(.,"<br>")
+
+// Calculates severity based on the ratios defined external limbs.
+proc/get_wound_severity(var/damage_ratio, var/vital = 0)
+	var/degree
+
+	switch(damage_ratio)
+		if(0 to 0.1)
+			degree = "minor"
+		if(0.1 to 0.25)
+			degree = "moderate"
+		if(0.25 to 0.5)
+			degree = "significant"
+		if(0.5 to 0.75)
+			degree = "severe"
+		if(0.75 to 1)
+			degree = "extreme"
+		else
+			if(vital)
+				degree = "critical"
+			else
+				degree = "irreparable"
+
+	return degree
 
 /obj/item/device/healthanalyzer/verb/toggle_mode()
 	set name = "Switch Verbosity"

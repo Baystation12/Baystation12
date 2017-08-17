@@ -171,8 +171,6 @@
 			return global.adminhelp_ignored_words;
 		if("adminlog")
 			return global.adminlog;
-		if("ai_icons")
-			return global.ai_icons;
 		if("ai_list")
 			return global.ai_list;
 		if("ai_status_emotions")
@@ -389,8 +387,6 @@
 			return global.debug_verbs;
 		if("decls_repository")
 			return global.decls_repository;
-		if("default_ai_icon")
-			return global.default_ai_icon;
 		if("default_material_composition")
 			return global.default_material_composition;
 		if("default_mobloc")
@@ -1390,8 +1386,6 @@
 			global.adminhelp_ignored_words=newval;
 		if("adminlog")
 			global.adminlog=newval;
-		if("ai_icons")
-			global.ai_icons=newval;
 		if("ai_list")
 			global.ai_list=newval;
 		if("ai_status_emotions")
@@ -1608,8 +1602,6 @@
 			global.debug_verbs=newval;
 		if("decls_repository")
 			global.decls_repository=newval;
-		if("default_ai_icon")
-			global.default_ai_icon=newval;
 		if("default_material_composition")
 			global.default_material_composition=newval;
 		if("default_mobloc")
@@ -2523,7 +2515,6 @@
 	"admin_verbs_spawn",
 	"adminhelp_ignored_words",
 	"adminlog",
-	"ai_icons",
 	"ai_list",
 	"ai_status_emotions",
 	"ai_verbs_default",
@@ -2632,7 +2623,6 @@
 	"deathsquad",
 	"debug_verbs",
 	"decls_repository",
-	"default_ai_icon",
 	"default_material_composition",
 	"default_mobloc",
 	"default_onmob_icons",

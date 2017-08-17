@@ -204,7 +204,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /obj/fire/Destroy()
 	RemoveFire()
 
-	..()
+	. = ..()
 
 /obj/fire/proc/RemoveFire()
 	var/turf/T = loc
@@ -355,7 +355,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.005)
+		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
 			. = 1
 			break
 

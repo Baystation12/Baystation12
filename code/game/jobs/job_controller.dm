@@ -9,6 +9,8 @@ var/global/datum/controller/occupations/job_master
 	var/list/occupations = list()
 		//Associative list of all jobs, by type
 	var/list/occupations_by_type
+	//Associative list of all jobs, by title
+	var/list/occupations_by_title
 		//Players who need jobs
 	var/list/unassigned = list()
 		//Debug info
@@ -18,16 +20,18 @@ var/global/datum/controller/occupations/job_master
 	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
+		occupations_by_title = list()
 		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
-			var/datum/job/job = new J()
+			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
 			occupations_by_type[job.type] = job
+			occupations_by_title[job.title] = job
 			if(!setup_titles) continue
 			if(job.department_flag & COM)
 				command_positions |= job.title
@@ -89,9 +93,7 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-			if(!job.is_branch_allowed(player.get_branch_pref()))
-				return 0
-			if(!job.is_rank_allowed(player.get_branch_pref(), player.get_rank_pref()))
+			if(job.is_restricted(player.client.prefs))
 				return 0
 
 			var/position_limit = job.total_positions
@@ -145,6 +147,9 @@ var/global/datum/controller/occupations/job_master
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
+				continue
+
+			if(job.is_restricted(player.client.prefs))
 				continue
 
 			if(job.title in command_positions) //If you want a command position, select it!
@@ -353,14 +358,14 @@ var/global/datum/controller/occupations/job_master
 			//Equip custom gear loadout.
 			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
 			var/list/custom_equip_leftovers = list()
-			if(H.client.prefs.Gear() && job.title != "Cyborg" && job.title != "AI")
+			if(H.client.prefs.Gear() && job.loadout_allowed)
 				for(var/thing in H.client.prefs.Gear())
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
 						var/permitted
 						if(G.allowed_roles)
-							for(var/job_name in G.allowed_roles)
-								if(job.title == job_name)
+							for(var/job_type in G.allowed_roles)
+								if(job.type == job_type)
 									permitted = 1
 						else
 							permitted = 1
@@ -421,7 +426,7 @@ var/global/datum/controller/occupations/job_master
 
 		if(!joined_late || job.latejoin_at_spawnpoints)
 			var/obj/S = get_roundstart_spawnpoint(rank)
-			
+
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else

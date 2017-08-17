@@ -41,7 +41,7 @@
 					O.take_damage(0.2)
 
 		//Detox can heal small amounts of damage
-		if (src.damage && src.damage < src.min_bruised_damage && owner.reagents.has_reagent("anti_toxin"))
+		if (src.damage && src.damage < src.min_bruised_damage && owner.reagents.has_reagent("anti_toxin") && !owner.chem_effects[CE_TOXIN])
 			src.damage -= 0.2 * PROCESS_ACCURACY
 
 		if(src.damage < 0)
@@ -49,23 +49,24 @@
 
 		// Get the effectiveness of the liver.
 		var/filter_effect = 3
-		if(is_bruised())
-			filter_effect -= 1
 		if(is_broken())
-			filter_effect -= 2
+			filter_effect = 0
+		if(owner.reagents.has_reagent("anti_toxin"))
+			filter_effect += 1
 		if(robotic >= ORGAN_ROBOT)
 			filter_effect += 1
 
-		// Do some reagent processing.
-		if(owner.chem_effects[CE_ALCOHOL_TOXIC])
-			if(filter_effect < 3)
-				owner.adjustToxLoss(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY)
-			else
-				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * 0.1 * PROCESS_ACCURACY, prob(1)) // Chance to warn them
-	
-	// Heal a bit if needed. This allows recovery from low amounts of toxloss.
-	if(damage < min_broken_damage)
-		damage = max(0, damage - 0.1 * PROCESS_ACCURACY)
+		// If you're not filtering well, you're going to take damage. Even more if you have alcohol in you.
+		if(is_broken())
+			owner.adjustToxLoss(PROCESS_ACCURACY * 0.5 * (2 - filter_effect) * (1 + owner.chem_effects[CE_ALCOHOL_TOXIC] + (owner.chem_effects[CE_ALCOHOL] / 2)))
+
+		// If you drink alcohol, your liver won't heal.
+		if(owner.chem_effects[CE_ALCOHOL])
+			take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * PROCESS_ACCURACY, prob(1)) // Chance to warn them
+
+		// Heal a bit if needed. This allows recovery from low amounts of toxloss.
+		else if(damage < min_broken_damage && !owner.chem_effects[CE_TOXIN] && !owner.radiation)
+			damage = max(0, damage - 0.5 * PROCESS_ACCURACY)
 
 	//Blood regeneration if there is some space
 	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")

@@ -146,11 +146,12 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
 	var/jobs = list()
-	if(pref.job_high || pref.job_medium || pref.job_low)
-		if(pref.job_high) //Is not a list like the others so a check just in case
-			jobs += pref.job_high
-		jobs += pref.job_medium
-		jobs += pref.job_low
+	if(job_master)
+		for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
+			var/datum/job/J = job_master.occupations_by_title[job_title]
+			if(J)
+				dd_insertObjectList(jobs, J)
+
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
@@ -162,17 +163,14 @@ var/list/gear_datums = list()
 		if(G.allowed_roles)
 			. += "<br><i>"
 			var/ind = 0
-			for(var/J in jobs)
-				if(J in G.allowed_roles)
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=55cc55>[J]</font>"
+			for(var/datum/job/J in jobs)
+				++ind
+				if(ind > 1)
+					. += ", "
+				if(J.type in G.allowed_roles)
+					. += "<font color=55cc55>[J.title]</font>"
 				else
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=cc5555>[J]</font>"
+					. += "<font color=cc5555>[J.title]</font>"
 			. += "</i>"
 		.+= "</tr>"
 		if(ticked)

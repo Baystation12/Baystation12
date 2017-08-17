@@ -16,6 +16,8 @@
 	if(href_list["jump"])
 		var/atom/a = locate(href_list["jump"])
 		if(a)
-			eyeobj.forceMove(get_turf(a))
+			if(following)
+				stop_follow()
+			eyeobj.setLoc(get_turf(a))
 			to_chat(src, "<span class='notice'>Jumping to \the [a]</span>")
 		return 1

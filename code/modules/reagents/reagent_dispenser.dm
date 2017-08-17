@@ -15,57 +15,64 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
 
-	New()
-		var/datum/reagents/R = new/datum/reagents(initial_capacity)
-		reagents = R
-		R.my_atom = src
+/obj/structure/reagent_dispensers/New()
+	var/datum/reagents/R = new/datum/reagents(initial_capacity)
+	reagents = R
+	R.my_atom = src
 
-		if (!possible_transfer_amounts)
-			src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
+	if (!possible_transfer_amounts)
+		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
 
-		if(istext(initial_reagents))
-			var/list/initial_reagent_list = json_decode(initial_reagents)
-			for(var/reagent in initial_reagent_list)
-				var/reagent_ratio = initial_reagent_list[reagent]
-				reagents.add_reagent(reagent, reagent_ratio * initial_capacity)
+	if(istext(initial_reagents))
+		var/list/initial_reagent_list = json_decode(initial_reagents)
+		for(var/reagent in initial_reagent_list)
+			var/reagent_ratio = initial_reagent_list[reagent]
+			reagents.add_reagent(reagent, reagent_ratio * initial_capacity)
 
-		..()
+	..()
 
-	examine(mob/user)
-		if(!..(user, 2))
+/obj/structure/reagent_dispensers/examine(mob/user)
+	if(!..(user, 2))
+		return
+	to_chat(user, "<span class='notice'>It contains:</span>")
+	if(reagents && reagents.reagent_list.len)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
+	else
+		to_chat(user, "<span class='notice'>Nothing.</span>")
+
+/obj/structure/reagent_dispensers/verb/set_APTFT() //set amount_per_transfer_from_this
+	set name = "Set transfer amount"
+	set category = "Object"
+	set src in view(1)
+	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
+	if (N)
+		amount_per_transfer_from_this = N
+
+/obj/structure/reagent_dispensers/ex_act(severity)
+	switch(severity)
+		if(1.0)
+			qdel(src)
 			return
-		to_chat(user, "<span class='notice'>It contains:</span>")
-		if(reagents && reagents.reagent_list.len)
-			for(var/datum/reagent/R in reagents.reagent_list)
-				to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
-		else
-			to_chat(user, "<span class='notice'>Nothing.</span>")
-	verb/set_APTFT() //set amount_per_transfer_from_this
-		set name = "Set transfer amount"
-		set category = "Object"
-		set src in view(1)
-		var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
-		if (N)
-			amount_per_transfer_from_this = N
-
-	ex_act(severity)
-		switch(severity)
-			if(1.0)
+		if(2.0)
+			if (prob(50))
+				new /obj/effect/effect/water(src.loc)
 				qdel(src)
 				return
-			if(2.0)
-				if (prob(50))
-					new /obj/effect/effect/water(src.loc)
-					qdel(src)
-					return
-			if(3.0)
-				if (prob(5))
-					new /obj/effect/effect/water(src.loc)
-					qdel(src)
-					return
-			else
-		return
+		if(3.0)
+			if (prob(5))
+				new /obj/effect/effect/water(src.loc)
+				qdel(src)
+				return
+		else
+	return
 
+/obj/structure/reagent_dispensers/AltClick(var/mob/user)
+	if(possible_transfer_amounts)
+		if(CanPhysicallyInteract(user))
+			set_APTFT()
+	else
+		return ..()
 
 
 //Dispensers

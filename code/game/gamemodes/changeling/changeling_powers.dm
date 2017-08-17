@@ -766,38 +766,6 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	feedback_add_details("changeling_powers","PS")
 	return 1
 
-/mob/proc/changeling_transformation_sting()
-	set category = "Changeling"
-	set name = "Transformation sting (40)"
-	set desc="Sting target"
-
-	var/datum/changeling/changeling = changeling_power(40)
-	if(!changeling)	return 0
-
-
-
-	var/list/names = list()
-	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
-		names += "[DNA.name]"
-
-	var/S = input("Select the target DNA: ", "Target DNA", null) as null|anything in names
-	if(!S)	return
-
-	var/datum/absorbed_dna/chosen_dna = changeling.GetDNA(S)
-	if(!chosen_dna)
-		return
-
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
-	if(!T)	return 0
-	if((HUSK in T.mutations) || (T.species.flags & NO_SCAN))
-		to_chat(src, "<span class='warning'>Our sting appears ineffective against this creature.</span>")
-		return 0
-
-	T.handle_changeling_transform(chosen_dna)
-
-	feedback_add_details("changeling_powers","TS")
-	return 1
-
 /mob/proc/changeling_DEATHsting()
 	set category = "Changeling"
 	set name = "Death Sting (40)"

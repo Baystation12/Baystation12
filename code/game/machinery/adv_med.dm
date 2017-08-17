@@ -2,7 +2,7 @@
 
 
 /obj/machinery/bodyscanner
-	var/mob/living/carbon/occupant
+	var/mob/living/carbon/human/occupant
 	var/locked
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
@@ -237,7 +237,7 @@
 		dat = text("[]<BR><BR><A href='?src=\ref[];clear=1'>Main Menu</A>", src.temphtml, src)
 	else
 		if (src.connected) //Is something connected?
-			dat = connected.get_occupant_data()
+			dat = connected.occupant.get_medical_data()
 			dat += "<br><HR><A href='?src=\ref[src];print=1'>Print</A><BR>"
 		else
 			dat = "<span class='warning'>Error: No Body Scanner connected.</span>"
@@ -262,10 +262,10 @@
 		if (!istype(occupant,/mob/living/carbon/human))
 			to_chat(usr, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return
-		new/obj/item/weapon/paper/(loc, "<tt>[connected.get_occupant_data()]</tt>", "Body scan report - [occupant]")
+		new/obj/item/weapon/paper/(loc, "<tt>[connected.occupant.get_medical_data()]</tt>", "Body scan report - [occupant]")
 
 
-/obj/machinery/bodyscanner/proc/get_severity(amount)
+/proc/get_severity(amount)
 	if(!amount)
 		return "none"
 	. = "minor"
@@ -276,10 +276,8 @@
 	else if(amount > 10)
 		. = "moderate"
 
-/obj/machinery/bodyscanner/proc/get_occupant_data()
-	if (!occupant || !istype(occupant, /mob/living/carbon/human))
-		return
-	var/mob/living/carbon/human/H = occupant
+/mob/living/carbon/human/proc/get_medical_data()
+	var/mob/living/carbon/human/H = src
 	var/dat = list()
 	dat +="<b>SCAN RESULTS FOR: [H]</b>"
 	dat +="Scan performed at [stationtime2text()]<br>"
@@ -352,9 +350,9 @@
 		else
 			table += "<td>"
 			if(E.brute_dam)
-				table += "[capitalize(get_severity(E.brute_dam))] physical trauma"
+				table += "[capitalize(get_wound_severity(E.brute_ratio, E.vital))] physical trauma"
 			if(E.burn_dam)
-				table += " [capitalize(get_severity(E.burn_dam))] burns"
+				table += " [capitalize(get_wound_severity(E.burn_ratio, E.vital))] burns"
 			if(E.brute_dam + E.burn_dam == 0)
 				table += "None"
 			table += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"

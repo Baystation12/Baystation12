@@ -141,6 +141,6 @@
 	name = "Empty hydroponics tray"
 	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
 	cost = 30
-	containertype = /obj/structure/closet/crate/hydroponics
+	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "\improper Hydroponics tray crate"
 	access = access_hydroponics

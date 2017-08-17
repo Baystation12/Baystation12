@@ -75,12 +75,13 @@
 		to_chat(src, "<span class='warning'>You cannot leap in your current state.</span>")
 		return
 
+	playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
+
 	last_special = world.time + (17.5 SECONDS)
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='danger'>\The [src] leaps at [T]!</span>")
 	src.throw_at(get_step(get_turf(T),get_turf(src)), 4, 1, src)
-	playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
 
 	sleep(5)
 
@@ -92,21 +93,8 @@
 
 	T.Weaken(3)
 
-	var/use_hand = "left"
-	if(l_hand)
-		if(r_hand)
-			to_chat(src, "<span class='danger'>You need to have one hand free to grab someone.</span>")
-			return
-		else
-			use_hand = "right"
-
-	src.visible_message("<span class='warning'><b>\The [src]</b> seizes [T] aggressively!</span>")
-
-	var/obj/item/grab/G = new(src,T)
-	if(use_hand == "left")
-		l_hand = G
-	else
-		r_hand = G
+	if(src.make_grab(src, T))
+		src.visible_message("<span class='warning'><b>\The [src]</b> seizes [T]!</span>")
 
 /mob/living/carbon/human/proc/commune()
 	set category = "Abilities"
@@ -293,7 +281,7 @@
 	set desc = "Camouflage yourself"
 	cloaked = !cloaked
 	if(cloaked)
-		apply_effect(5, STUN, 0)
+		apply_effect(2, STUN, 0)
 		to_chat(src, "<span class='notice'>You hold perfectly still, shifting your exterior to match the things around you.</span>")
 	else
 		visible_message("<span class='danger'>[src] suddenly appears!</span>")
@@ -315,20 +303,21 @@
 	// So there's a progress bar if you're not cloaked and there isn't one if you are cloaked.
 	var/hidden = cloaked
 
-	if(do_after(src, 30, hidden))
+	if(do_after(src, 30))
 		pulling_punches = !pulling_punches
+		nabbing = !pulling_punches
 
 		if(pulling_punches)
 			current_grab_type = all_grabobjects[GRAB_NORMAL]
 			to_chat(src, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax.\
 			You reach out with your manipulation arms, ready to use complex items.</span>")
-			if(!cloaked)
+			if(!hidden)
 				visible_message("<span class='notice'>[src] seems to relax as \he folds \his massive curved arms to \his thorax and reaches out \
 				with \his small handlike limbs.</span>")
 		else
 			current_grab_type = all_grabobjects[GRAB_NAB]
 			to_chat(src, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
-			if(!cloaked)
+			if(!hidden)
 				visible_message("<span class='warning'>[src] tenses as \he brings his smaller arms in close to \his body. \his two massive apiked arms reach \
 				out. \he looks dangerous and ready to attack.</span>")
 	else

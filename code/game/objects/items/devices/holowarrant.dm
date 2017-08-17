@@ -42,14 +42,16 @@
 /obj/item/device/holowarrant/attackby(obj/item/weapon/W, mob/user)
 	if(active)
 		var/obj/item/weapon/card/id/I = W.GetIdCard()
-		if(I)
+		if(I && (access_security in I.access))
 			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
 			if(choice == "Yes")
 				active.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
 					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
-			broadcast_holowarrant_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
-			return 1
+			broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
+		else
+			to_chat(user, "<span class='notice'>A red \"Access Denied\" light blinks on \the [src]</span>")
+		return 1
 	..()
 
 //hit other people with it
@@ -63,14 +65,6 @@
 		icon_state = "holowarrant_filled"
 	else
 		icon_state = "holowarrant"
-
-/obj/item/device/holowarrant/equipped(var/mob/user, var/slot)
-	GLOB.holowarrant_users += user
-	return ..()
-
-/obj/item/device/holowarrant/dropped(mob/user)
-	GLOB.holowarrant_users -= user
-	return ..()
 
 /obj/item/device/holowarrant/proc/show_content(mob/user, forceshow)
 	if(!active)

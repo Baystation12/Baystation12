@@ -12,7 +12,8 @@
 	icon_broken = "securecargobroken"
 	icon_off = "securecargooff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/decktech/WillContain()
+	return list(
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/weapon/cartridge/quartermaster,
@@ -37,7 +38,8 @@
 	icon_broken = "secureqmbroken"
 	icon_off = "secureqmoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/deckofficer/WillContain()
+	return list(
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/weapon/cartridge/quartermaster,

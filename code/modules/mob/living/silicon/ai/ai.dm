@@ -91,10 +91,12 @@ var/list/ai_verbs_default = list(
 	var/intercepts_communication = 0			// Whether the AI intercepts fax and emergency transmission communications.
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
-	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 	var/carded
 
 	var/multitool_mode = 0
+
+	var/default_ai_icon = /datum/ai_icon/blue
+	var/static/list/custom_ai_icons_by_ckey_and_name
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -208,7 +210,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src
-	
+
 	. = ..()
 
 	QDEL_NULL(announcement)
@@ -221,8 +223,16 @@ var/list/ai_verbs_default = list(
 	hack = null
 
 /mob/living/silicon/ai/proc/setup_icon()
+	if(LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]"))
+		return
+	var/list/custom_icons = list()
+	LAZYADDASSOC(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
+
 	var/file = file2text("config/custom_sprites.txt")
 	var/lines = splittext(file, "\n")
+
+	var/custom_index = 1
+	var/custom_icon_states = icon_states(CUSTOM_ITEM_SYNTH)
 
 	for(var/line in lines)
 	// split & clean up
@@ -231,15 +241,24 @@ var/list/ai_verbs_default = list(
 			Entry[i] = trim(Entry[i])
 
 		if(Entry.len < 2)
-			continue;
+			continue
+		if(Entry.len == 2) // This is to handle legacy entries
+			Entry[++Entry.len] = Entry[1]
 
 		if(Entry[1] == src.ckey && Entry[2] == src.real_name)
-			icon = CUSTOM_ITEM_SYNTH
-			custom_sprite = 1
-			selected_sprite = new/datum/ai_icon("Custom", "[src.ckey]-ai", "4", "[ckey]-ai-crash", "#FFFFFF", "#FFFFFF", "#FFFFFF")
-		else
-			selected_sprite = default_ai_icon
-	updateicon()
+			var/alive_icon_state = "[Entry[3]]-ai"
+			var/dead_icon_state = "[Entry[3]]-ai-crash"
+
+			if(!(alive_icon_state in custom_icon_states))
+				to_chat(src, "<span class='warning'>Custom display entry found but the icon state '[alive_icon_state]' is missing!</span>")
+				continue
+
+			if(!(dead_icon_state in custom_icon_states))
+				dead_icon_state = ""
+
+			selected_sprite = new/datum/ai_icon("Custom Icon [custom_index++]", alive_icon_state, dead_icon_state, COLOR_WHITE, CUSTOM_ITEM_SYNTH)
+			custom_icons += selected_sprite
+	update_icon()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
@@ -257,6 +276,7 @@ var/list/ai_verbs_default = list(
 		aiPDA.set_owner_rank_job(pickedName, "AI")
 
 	GLOB.data_core.ResetPDAManifest()
+	setup_icon()
 
 /mob/living/silicon/ai/proc/pick_icon()
 	set category = "Silicon Commands"
@@ -264,10 +284,22 @@ var/list/ai_verbs_default = list(
 	if(stat || !has_power())
 		return
 
-	if (!custom_sprite)
-		var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in ai_icons
-		if(new_sprite) selected_sprite = new_sprite
-	updateicon()
+	var/new_sprite = input("Select an icon!", "AI", selected_sprite) as null|anything in available_icons()
+	if(new_sprite)
+		selected_sprite = new_sprite
+
+	update_icon()
+
+/mob/living/silicon/ai/proc/available_icons()
+	. = list()
+	var/all_ai_icons = decls_repository.get_decls_of_subtype(/datum/ai_icon)
+	for(var/ai_icon_type in all_ai_icons)
+		var/datum/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
+		if(ai_icon.may_used_by_ai(src))
+			dd_insertObjectList(., ai_icon)
+
+	// Placing custom icons first to have them be at the top
+	. = LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]") | .
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -392,8 +424,9 @@ var/list/ai_verbs_default = list(
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in GLOB.mob_list
+		var/mob/living/carbon/human/H = target
 
-		if(target && (!istype(target, /mob/living/carbon/human) || html_decode(href_list["trackname"]) == target:get_face_name()))
+		if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
 			ai_actual_track(target)
 		else
 			to_chat(src, "<span class='warning'>System error. Cannot locate [html_decode(href_list["trackname"])].</span>")
@@ -511,7 +544,7 @@ var/list/ai_verbs_default = list(
 
 	else
 		var/list/hologramsAICanUse = list()
-		var/holograms_by_type = decls_repository.decls_of_subtype(/decl/ai_holo)
+		var/holograms_by_type = decls_repository.get_decls_of_subtype(/decl/ai_holo)
 		for (var/holo_type in holograms_by_type)
 			var/decl/ai_holo/holo = holograms_by_type[holo_type]
 			if (holo.may_be_used_by_ai(src))
@@ -651,9 +684,11 @@ var/list/ai_verbs_default = list(
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
 
-/mob/living/silicon/ai/updateicon()
-	if(!selected_sprite) selected_sprite = default_ai_icon
+/mob/living/silicon/ai/update_icon()
+	if(!selected_sprite || !(selected_sprite in available_icons()))
+		selected_sprite = decls_repository.get_decl(default_ai_icon)
 
+	icon = selected_sprite.icon
 	if(stat == DEAD)
 		icon_state = selected_sprite.dead_icon
 		set_light(3, 1, selected_sprite.dead_light)

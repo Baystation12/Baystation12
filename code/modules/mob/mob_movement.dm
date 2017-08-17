@@ -353,7 +353,7 @@
 								M.other_mobs = null
 								M.animate_movement = 2
 								return
-
+					G.adjust_position()
 		else
 			if(mob.confused)
 				switch(mob.m_intent)

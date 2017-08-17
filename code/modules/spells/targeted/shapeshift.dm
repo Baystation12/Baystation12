@@ -60,7 +60,7 @@
 		GLOB.destroyed_event.register(M, src, /spell/targeted/shapeshift/proc/destroyed_transformer)
 		if(duration)
 			spawn(duration)
-				stop_transformation(M)
+				stop_transformation(trans)
 
 /spell/targeted/shapeshift/proc/destroyed_transformer(var/mob/target) //Juuuuust in case
 	var/mob/current = transformed_dudes[target]

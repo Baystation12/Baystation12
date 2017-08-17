@@ -535,12 +535,14 @@
 					for (var/datum/data/record/R in GLOB.data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]")
+								to_chat(usr, "<b>Name:</b> [R.fields["name"]]")
+								to_chat(usr, "<b>Gender:</b> [R.fields["id_gender"]]")
+								to_chat(usr, "<b>Species:</b> [R.fields["species"]]")
 								to_chat(usr, "<b>DNA:</b> [R.fields["b_dna"]]")
-								to_chat(usr, "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]")
-								to_chat(usr, "<b>Details:</b> [R.fields["mi_dis_d"]]")
-								to_chat(usr, "<b>Major Disabilities:</b> [R.fields["ma_dis"]]")
-								to_chat(usr, "<b>Details:</b> [R.fields["ma_dis_d"]]")
+								to_chat(usr, "<b>Blood Type:</b> [R.fields["b_type"]]")
+								to_chat(usr, "<b>Prosthetics:</b>")
+								for(var/p_name in R.fields["prosthetics"])
+									to_chat(usr, "\t [R.fields["prosthetics"][p_name]]")
 								to_chat(usr, "<b>Notes:</b> [R.fields["notes"]]")
 								to_chat(usr, "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>")
 								read = 1
@@ -713,18 +715,24 @@
 		return 0
 	return 1
 
-/mob/living/carbon/human/proc/vomit()
-	if(!check_has_mouth() || isSynthetic())
+/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/cooldown_mod = 1, var/level = 3)
+	set waitfor = 0
+	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
 		return
+	level = Clamp(level, 1, 3)
+	timevomit = Clamp(timevomit, 1, 10)
+	cooldown_mod = Clamp(cooldown_mod, 0, 10)
 	if(stat == DEAD)
 		return
 	if(!lastpuke)
 		lastpuke = 1
 		to_chat(src, "<span class='warning'>You feel nauseous...</span>")
-		spawn(150)	//15 seconds until second warning
+		if(level > 1)
+			sleep(150 / timevomit)	//15 seconds until second warning
 			to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
-			spawn(100)	//and you have 10 more for mad dash to the bucket
-				Stun(5)
+			if(level > 2)
+				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
+				Stun(3)
 				if(nutrition < 40)
 					custom_emote(1,"dry heaves.")
 				else
@@ -740,12 +748,12 @@
 
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, 1)
+						location.add_vomit_floor(src, toxvomit)
 
-					nutrition -= 40
-					adjustToxLoss(-3)
-				spawn(350)	//wait 35 seconds before next volley
-					lastpuke = 0
+					nutrition -= 30
+					adjustToxLoss(-1)
+		sleep(350 / (cooldown_mod * (4 - level)))	//wait 35 seconds before next volley
+		lastpuke = 0
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
@@ -1417,6 +1425,8 @@
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
+	if(!H)
+		return
 	if(H.open && !method)
 		return "muddled and unclear; you can't seem to find a vein"
 

@@ -15,6 +15,7 @@
 
 /datum/phenomena/proc/Click(var/atom/target)
 	if(can_activate(target))
+		linked.take_cost(cost)
 		activate(target)
 
 /datum/phenomena/proc/can_activate(var/atom/target)
@@ -52,7 +53,6 @@
 		to_chat(linked, "<span class='warning'>You need more power to use [name] (Need [cost] power, have [linked.mob_uplink.uses])!</span>")
 		return 0
 
-	linked.take_cost(cost)
 	return 1
 
 /datum/phenomena/proc/activate(var/target)

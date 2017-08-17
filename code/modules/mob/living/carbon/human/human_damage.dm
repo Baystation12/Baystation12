@@ -171,7 +171,7 @@
 		return 0
 	var/amount = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.organ_tag == BP_BRAIN)
+		if(I.organ_tag in list(BP_BRAIN, BP_STACK))
 			continue
 		amount += I.damage
 	return amount
@@ -415,3 +415,8 @@ This function restores all organs.
 		traumatic_shock *= 0.5
 
 	return max(0,traumatic_shock)
+
+/mob/living/carbon/human/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+	if(effecttype == IRRADIATE && (effect * blocked_mult(blocked) <= RAD_LEVEL_LOW))
+		return 0
+	return ..()

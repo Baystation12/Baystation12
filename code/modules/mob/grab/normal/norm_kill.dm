@@ -7,7 +7,7 @@
 
 	stop_move = 1
 	reverse_facing = 1
-	can_absorb = 0
+	can_absorb = 1
 	shield_assailant = 0
 	point_blank_mult = 1
 	same_tile = 1

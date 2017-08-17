@@ -51,6 +51,8 @@
 
 #define isorgan(A) istype(A, /obj/item/organ/external)
 
+#define isstack(A) istype(A, /obj/item/stack)
+
 #define isspace(A) istype(A, /area/space)
 
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
@@ -93,7 +95,7 @@
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 
-#define CanPhysicallyInteract(user) CanInteract(user, physical_state)
+#define CanPhysicallyInteract(user) CanInteract(user, GLOB.physical_state)
 
 #define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 
@@ -112,8 +114,10 @@
 #define UNSETEMPTY(L) if (L && !L.len) L = null
 // Removes I from list L, and sets I to null if it is now empty
 #define LAZYREMOVE(L, I) if(L) { L -= I; if(!L.len) { L = null; } }
-// Adds I to L, initalizing I if necessary
+// Adds I to L, initalizing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+// Sets L[A] to I, initalizing L if necessary
+#define LAZYADDASSOC(L, A, I) if(!L) { L = list(); } L[A] = I;
 // Reads I from L safely - Works with both associative and traditional lists.
 #define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= L.len ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null
@@ -122,6 +126,9 @@
 #define LAZYCLEARLIST(L) if(L) L.Cut()
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
+
+// Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
+#define ADD_SORTED(list, A, cmp_proc) if(!list.len) {list.Add(A)} else {list.Insert(FindElementIndex(A, list, cmp_proc), A)}
 
 //Currently used in SDQL2 stuff
 #define send_output(target, msg, control) target << output(msg, control)

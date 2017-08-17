@@ -571,14 +571,15 @@
 	reagent_state = LIQUID
 	color = "#181818"
 	metabolism = REM * 0.002
-	overdose = REAGENTS_OVERDOSE * 0.5
+	overdose = 5
 	scannable = 1
 	data = 0
 
 /datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.add_chemical_effect(CE_PULSE, 1)
+	if(prob(volume*20))
+		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume <= 0.02 && dose >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 		data = world.time
 		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
@@ -586,6 +587,10 @@
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 			data = world.time
 			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
+
+/datum/reagent/nicotine/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/menthol
 	name = "Menthol"
@@ -659,6 +664,9 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/antidexafen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
 	M.add_chemical_effect(CE_PAINKILLER, 15)
 	M.add_chemical_effect(CE_ANTIVIRAL, 1)
 
@@ -677,6 +685,9 @@
 	overdose = 10
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
 	if(dose > 1)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 		M.add_chemical_effect(CE_PULSE, 1)

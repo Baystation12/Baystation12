@@ -22,7 +22,7 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
-	body_temperature = T0C + 5
+	body_temperature = null
 
 	blood_color = "#525252"
 	flesh_color = "#525252"
@@ -32,6 +32,8 @@
 	icon_template = 'icons/mob/human_races/r_nabber_template.dmi'
 	icobase = 'icons/mob/human_races/r_nabber.dmi'
 	deform = 'icons/mob/human_races/r_nabber.dmi'
+
+	blood_mask = 'icons/mob/human_races/masks/blood_nabber.dmi'
 
 	has_floating_eyes = 1
 
@@ -48,11 +50,21 @@
 	blood_volume = 840
 	spawns_with_stack = 0
 
+	heat_level_1 = 410 //Default 360 - Higher is better
+	heat_level_2 = 440 //Default 400
+	heat_level_3 = 600 //Default 1000
+
 	flags = NO_SLIP | CAN_NAB | NO_BLOCK
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+
+	bump_flag = HEAVY
+	push_flags = ALLMOBS
+	swap_flags = ALLMOBS
 
 	breathing_organ = BP_TRACH
+
+	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
 
 	var/list/eye_overlays = list()
 
@@ -101,13 +113,54 @@
 			var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
 			I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
 			eye_overlay = image(I)
-		eye_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		eye_overlay.layer = EYE_GLOW_LAYER
 		eye_overlays["[O.eyes_shielded] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"] = eye_overlay
 	return(eye_overlay)
 
 /datum/species/nabber/get_blood_name()
 	return "haemolymph"
+
+/datum/species/nabber/can_overcome_gravity(var/mob/living/carbon/human/H)
+	var/datum/gas_mixture/mixture = H.loc.return_air()
+
+	if(mixture)
+		var/pressure = mixture.return_pressure()
+		if(pressure > 50)
+			var/turf/below = GetBelow(H)
+			var/turf/T = H.loc
+			if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
+				return TRUE
+
+	return FALSE
+
+
+// Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
+/datum/species/nabber/can_fall(var/mob/living/carbon/human/H)
+	var/datum/gas_mixture/mixture = H.loc.return_air()
+
+	if(mixture)
+		var/pressure = mixture.return_pressure()
+		if(pressure > 80)
+			return FALSE
+
+	return TRUE
+
+// Even when nabbers do fall, if there's enough air pressure they won't hurt themselves.
+/datum/species/nabber/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
+
+	var/datum/gas_mixture/mixture = H.loc.return_air()
+
+	if(mixture)
+		var/pressure = mixture.return_pressure()
+		if(pressure > 50)
+			if(istype(landing, /turf/simulated/open))
+				H.visible_message("\The [src] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
+			else
+				H.visible_message("\The [src] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")
+
+			return TRUE
+
+	return FALSE
+
 
 /datum/species/nabber/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 	if(!H.handcuffed || H.buckled)
