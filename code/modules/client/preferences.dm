@@ -148,7 +148,7 @@ datum/preferences
 	//character preferences
 	var/char_rank = ""					// Bay Compatibility.
 	var/char_branch = ""				// Bay Compatibility.
-	var/char_department = "Civilian"		// Character Department.
+	var/char_department = "Service"		// Character Department.
 	var/department_playtime = 0
 	var/department_rank = 0
 	var/dept_experience = 0

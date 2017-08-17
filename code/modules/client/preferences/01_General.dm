@@ -35,6 +35,7 @@ datum/preferences/proc/contentGeneral()
 			<b>Gender: [gender2text(gender)]</b><br>
 			<b>Age:</b> [age]<br>
 			<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint]</a><br>
+			<b>Department:</b> [char_department]<br>
 
 			"}
 	else
@@ -45,7 +46,8 @@ datum/preferences/proc/contentGeneral()
 			<br>
 			<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(gender)]</b></a><br>
 			<b>Age:</b> <a href='?src=\ref[src];age=1'>[age]</a><br>
-			<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint]</a><br>
+			<b>Spawn Point:</b> <a href='?src=\ref[src];spawnpoint=1'>[spawnpoint]</a><br>
+			<b>Department:</b> <a href='?src=\ref[src];char_department=1'>[char_department]</a><br>
 
 			"}
 
@@ -297,6 +299,10 @@ datum/preferences/proc/contentGeneral()
 			if(7) Topic7(href, href_list)
 			if(8) Topic8(href, href_list)
 			if(9) Topic9(href, href_list)
+	else if(href_list["char_department"])
+		var/new_department = input(user, "Select the department your character wishes to enlist in","Department enlistment", char_department) in list("Security","Medical","Engineering","Service","Science","Supply")
+		if(new_department && CanUseTopic(user))
+			char_department = new_department
 
 	else if(href_list["rename"])
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null

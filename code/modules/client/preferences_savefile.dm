@@ -29,7 +29,7 @@
 	loaded_preferences = S
 	return 1
 
-/datum/preferences/proc/load_character(slot)
+/datum/preferences/proc/load_character(slot, var/persistent)
 	if(!path)				return 0
 	if(!fexists(path))		return 0
 	var/savefile/S = new /savefile(path)
@@ -51,18 +51,23 @@
 	else
 		load_char(S)
 		S.cd = GLOB.using_map.character_load_path(S, default_slot)
+	if(persistent) //Only saves persistent if toggled.
+		load_persistent(S)
 
 	loaded_character = S
 	sanitize_char()
 	return 1
 
-/datum/preferences/proc/save_character()
+/datum/preferences/proc/save_character(var/persistent)
 	if(!path)				return 0
 	var/savefile/S = new /savefile(path)
 	if(!S)					return 0
 	S.cd = GLOB.using_map.character_save_path(default_slot)
 
 	S["version"] << SAVEFILE_VERSION_MAX
+	if(persistent) //Only saves persistent if toggled.
+		save_persistent(S)
+		return S
 	save_char(S)
 	loaded_character = S
 	return S

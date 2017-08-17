@@ -156,6 +156,7 @@
 	S["char_rank"] 				<< char_rank
 	S["relations"]	<< relations
 	S["relations_info"]	<< relations_info
+	save_persistent(S)
 
 /datum/preferences/proc/sanitize_char()
 	var/datum/species/S = all_species[species ? species : SPECIES_HUMAN]

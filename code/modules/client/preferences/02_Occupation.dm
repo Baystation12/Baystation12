@@ -43,7 +43,7 @@ datum/preferences/proc/contentOccupation()
 
 		player_branch = mil_branches.get_branch(char_branch)
 
-		data += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[char_branch]</a>	"
+		data += "Department of Service: <a href='?src=\ref[src];char_department=1'>[char_department]</a>	"
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		player_rank = mil_branches.get_rank(char_branch, char_rank)
 
@@ -190,6 +190,11 @@ datum/preferences/proc/contentOccupation()
 
 	else if(href_list["set_job"])
 		SetJob(usr, href_list["set_job"])
+
+	else if(href_list["char_department"])
+		var/new_department = input(user, "Select the department your character wishes to enlist in","Department enlistment", char_department) in list("Security","Medical","Engineering","Service","Science","Supply")
+		if(new_department && CanUseTopic(user))
+			char_department = new_department
 
 	else if(href_list["char_branch"])
 		var/choice = input(usr, "Choose your branch of service.", "Character Preference", char_branch) as null|anything in mil_branches.spawn_branches

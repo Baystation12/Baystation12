@@ -297,7 +297,10 @@ var/global/datum/controller/gameticker/ticker
 	proc/equip_characters()
 		var/captainless=1
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
-			if(player && player.mind && player.mind.assigned_role)
+			if(player)
+				player.client.prefs.load_character(persistent = 1)
+
+			if(player.mind && player.mind.assigned_role)
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
 				if(!player_is_antag(player.mind, only_offstation_roles = 1))
