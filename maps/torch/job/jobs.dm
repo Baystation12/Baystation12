@@ -785,7 +785,8 @@
 	minimal_player_age = 3
 	ideal_character_age = 20
 	alt_titles = list(
-		"Janitor")
+		"Janitor",
+		"Custodian")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/janitor
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
@@ -1052,6 +1053,7 @@
 		"Ecologist",
 		"Entertainer",
 		"Independent Observer",
+		"Lawyer",
 		"Sociologist",
 		"Off-Duty")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
@@ -1072,6 +1074,7 @@
 	spawn_positions = 1
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"
+	alt_titles = list("Trader")
 	ideal_character_age = 30
 	minimal_player_age = 7
 	create_record = 0
