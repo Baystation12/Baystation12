@@ -1,13 +1,14 @@
 /obj/item/clothing/under/utility/mirania
 	name = "bundeforz utility uniform"
-	desc = "A light double breasted fatigues set in a light grey urban camoflage with a red stand collar. The utility uniform of Mirania's defence forces."
+	desc = "A set of light double breasted fatigues in a light grey urban camoflage with a red stand collar. The utility uniform of Mirania's defence forces."
 	icon_state = "m_utility"
 	item_state = "bl_suit"
 	worn_state = "m_utility"
+	icon_override = 'icons/mob/mirania.dmi'
 
 /obj/item/clothing/under/utility/mirania/intelligence
 	name = "intelligence service utility uniform"
-	desc = "A light double breasted fatigues set in a light grey urban camoflage with a black stand collar. The utility uniform of Mirania's Truth Ministry."
+	desc = "A set of light double breasted fatigues in a light grey urban camoflage with a black stand collar. The utility uniform of Mirania's Truth Ministry."
 	icon_state = "m_utility"
 	worn_state = "m_utility_int"
 
@@ -17,6 +18,7 @@
 	icon_state = "m_service"
 	worn_state = "m_service"
 	starting_accessories = list(/obj/item/clothing/accessory/navy)
+	icon_override = 'icons/mob/mirania.dmi'
 
 /obj/item/clothing/under/service/mirania/intelligence
 	name = "intelligence service uniform"
@@ -31,6 +33,7 @@
 	icon_state = "m_dress"
 	worn_state = "m_dress"
 	starting_accessories = list(/obj/item/clothing/accessory/black)
+	icon_override = 'icons/mob/mirania.dmi'
 
 /obj/item/clothing/under/mildress/mirania/intelligence
 	name = "intelligence service dress uniform"
