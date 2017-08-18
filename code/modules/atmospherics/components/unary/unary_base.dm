@@ -38,7 +38,7 @@
 
 		node = null
 
-		..()
+		. = ..()
 
 	atmos_init()
 		..()
