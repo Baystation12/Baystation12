@@ -363,6 +363,8 @@ var/global/list/damage_icon_parts = list()
 	if(species.appearance_flags & HAS_UNDERWEAR)
 		overlays_standing[UNDERWEAR_LAYER] = list()
 		for(var/category in all_underwear)
+			if(hide_underwear[category])
+				continue
 			var/datum/category_item/underwear/UWI = all_underwear[category]
 			var/image/standing = UWI.generate_image(all_underwear_metadata[category])
 			if(standing)
