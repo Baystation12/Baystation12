@@ -1299,6 +1299,7 @@
 #include "code\modules\clothing\under\jobs\engineering.dm"
 #include "code\modules\clothing\under\jobs\medsci.dm"
 #include "code\modules\clothing\under\jobs\security.dm"
+#include "code\modules\clothing\underwear\base.dm"
 #include "code\modules\customitems\item_spawning.dm"
 #include "code\modules\detectivework\footprints.dm"
 #include "code\modules\detectivework\forensics.dm"
