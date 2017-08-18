@@ -28,7 +28,7 @@ datum/preferences/proc/contentLoadout()
 		</ul>
 		</nav>
 
-		<div class='main' style='width:650px; overflow-y:scroll;'>
+		<div class='main' style='width:650px; overflow-y:auto;'>
 
 		 "}
 	var/total_cost = 0
@@ -42,7 +42,7 @@ datum/preferences/proc/contentLoadout()
 	if(total_cost < MAX_GEAR_COST)
 		fcolor = "#E67300"
 	data += "<table align = 'center' width = 100%>"
-	data += "<tr><td colspan=3><center>Loadout Slot: <a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a> Loadout points spent: <b><font color = '[fcolor]'> [total_cost]/[MAX_GEAR_COST]</font></b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
+	data += "<tr><td colspan=3><center>Loadout Slot: [gear_slot] (<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'></font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>) | Loadout points spent: <b><font color = '[fcolor]'> [total_cost] / [MAX_GEAR_COST]</font></b> (<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>)</center></td></tr>"
 
 	data += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
@@ -61,7 +61,7 @@ datum/preferences/proc/contentLoadout()
 				category_cost += G.cost
 
 		if(category == current_tab)
-			data += " <span class='linkOn'>[category] - [category_cost]</span> "
+			data += "<a class='active' href='?src=\ref[src];select_category=[category]'>[category] - [category_cost]</a> "
 		else
 			if(category_cost)
 				data += " <a href='?src=\ref[src];select_category=[category]'><font color = '#E67300'>[category] - [category_cost]</font></a> "

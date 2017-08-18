@@ -10,16 +10,16 @@ body {
 
 hr {
     background-color: #40628a;
-    height: 1px;
 	margin: 0;
 }
-a{
+a {
 	color: #ffffff; 
 	text-decoration: none;
 	background: #40628a;
 	border: 1px solid #161616;
 	font-size: 95%;
 	padding: 0px 4px 0px 4px;
+	border-radius: 6px;
 }
 
 nav {
@@ -37,10 +37,12 @@ nav li a {
 	color: #FFFFFF;
 	border: none;
 	background-color: rgba(0,0,0,0);
+	border-radius: 0px;
 }
 
 a.active, a.linkOn  {
     background-color: #8A803F;
+	color: #ffffff;
 }
 
 nav li a {
@@ -97,6 +99,7 @@ div.main {
 div.main a, div.main a:visited, div.secondary a, div.secondary a:visited{
 	text-decoration: none;
 	color: #DEDEDE;
+	white-space: nowrap;
 }
 
 div.main a:hover, div.secondary a:hover, div.main a:active, div.secondary a:active{

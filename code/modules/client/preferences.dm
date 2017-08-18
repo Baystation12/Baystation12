@@ -98,7 +98,7 @@ datum/preferences
 	var/list/all_underwear_metadata
 	var/backbag = 2									// Character's backpack type
 	var/list/gear
-	var/list/gear_list									// Character's custom/fluff item loadout.
+	var/list/gear_list								// Character's custom/fluff item loadout.
 	var/gear_slot = 1
 	var/spawnpoint = "Default" 						// Character's spawn point (0-2)
 	var/list/alternate_languages = list() 			// Character's secondary language(s)
@@ -262,24 +262,7 @@ datum/preferences
 		close_load_dialog(user)
 		return
 
-	var/dat = "<html><body><center>"
-
-	if(path)
-		if(char_lock)
-			dat += "Slot - "
-			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-			dat += "Reload slot - "
-			dat += "Lock slot"
-		else
-			dat += "Slot - "
-			dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
-			dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-			dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-			dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
-			dat += "<a href='?src=\ref[src];lock=1'>Lock slot</a>"
-
+	var/dat = ""
 
 	switch(selected_menu)
 		if(1) dat += contentGeneral()
@@ -310,48 +293,6 @@ datum/preferences
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
-	ShowChoices(usr)
-	return 1
-
-/datum/preferences/Topic(href, list/href_list)
-	if(..())
-		return 1
-
-	if(href_list["save"])
-		save_preferences()
-		save_character()
-	else if(href_list["reload"])
-		load_preferences()
-		load_character()
-		sanitize_preferences()
-	else if(href_list["load"])
-		if(!IsGuestKey(usr.key))
-			open_load_dialog(usr)
-			return 1
-	else if(href_list["changeslot"])
-		load_character(text2num(href_list["changeslot"]))
-		sanitize_preferences()
-		close_load_dialog(usr)
-	else if(href_list["resetslot"])
-		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
-			return 0
-		char_lock = 0
-		load_character(SAVE_RESET)
-		save_character()
-		sanitize_preferences()
-	else if(href_list["lock"])
-		if("No" == alert("This will lock the current slot. You will no longer be able to edit it. Continue?", "Lock current slot?", "No", "Yes"))
-			return 0
-		char_lock = 1
-		b_type = RANDOM_BLOOD_TYPE
-		save_character()
-		load_character()
-		if(isnewplayer(usr))
-			usr:panel.close()
-			usr:new_player_panel_proc()
-	else
-		return 0
-
 	ShowChoices(usr)
 	return 1
 
