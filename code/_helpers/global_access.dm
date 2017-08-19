@@ -527,6 +527,8 @@
 			return global.ghost_traps;
 		if("global_message_listener")
 			return global.global_message_listener;
+		if("global_underwear")
+			return global.global_underwear;
 		if("global_vars_")
 			return global.global_vars_;
 		if("godcult")
@@ -1740,6 +1742,8 @@
 			global.ghost_traps=newval;
 		if("global_message_listener")
 			global.global_message_listener=newval;
+		if("global_underwear")
+			global.global_underwear=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
 		if("godcult")
@@ -2689,6 +2693,7 @@
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_message_listener",
+	"global_underwear",
 	"global_vars_",
 	"godcult",
 	"gravity_is_on",

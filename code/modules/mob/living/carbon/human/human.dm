@@ -49,7 +49,6 @@
 
 /mob/living/carbon/human/Destroy()
 	GLOB.human_mob_list -= src
-	worn_underwear = null
 	for(var/organ in organs)
 		qdel(organ)
 	return ..()
@@ -220,11 +219,6 @@
 			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
-
-	for(var/entry in worn_underwear)
-		var/obj/item/underwear/UW = entry
-		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
-
 	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
@@ -362,8 +356,7 @@
 		src << browse(null, t1)
 
 	if(href_list["item"])
-		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
-			show_inv(usr)
+		handle_strip(href_list["item"],usr,locate(href_list["holder"]))
 
 	if (href_list["criminal"])
 		if(hasHUD(usr,"security"))

@@ -1,12 +1,7 @@
-/datum/category_item/underwear/undershirt
-	underwear_name = "undershirt"
-	underwear_type = /obj/item/underwear/undershirt
-
 /datum/category_item/underwear/undershirt/none
 	is_default = TRUE
 	name = "None"
 	always_last = TRUE
-	underwear_type = null
 
 /datum/category_item/underwear/undershirt/shirt
 	name = "Shirt"
@@ -20,39 +15,32 @@
 
 /datum/category_item/underwear/undershirt/tank_top
 	name = "Tank top"
-	underwear_name = "tank top"
 	icon_state = "tanktop"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/tank_top_alt
 	name = "Tank top, alt"
-	underwear_name = "tank top"
 	icon_state = "tanktop_alt"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/tank_top_fleet
 	name = "Tank top, Fleet"
-	underwear_name = "tank top"
 	icon_state = "tank_fleet_s"
 
 /datum/category_item/underwear/undershirt/tank_top_fire
 	name = "Tank top, fire"
-	underwear_name = "tank top"
 	icon_state = "tank_fire_s"
 
 /datum/category_item/underwear/undershirt/tank_top_rainbow
 	name = "Tank top, rainbow"
-	underwear_name = "tank top"
 	icon_state = "tank_rainbow_s"
 
 /datum/category_item/underwear/undershirt/tank_top_stripes
 	name = "Tank top, striped"
-	underwear_name = "tank top"
 	icon_state = "tank_stripes_s"
 
 /datum/category_item/underwear/undershirt/tank_top_sun
 	name = "Tank top, sun"
-	underwear_name = "tank top"
 	icon_state = "tank_sun_s"
 
 /datum/category_item/underwear/undershirt/shirt_button
@@ -112,13 +100,11 @@
 
 /datum/category_item/underwear/undershirt/longjon
 	name = "Long John Shirt"
-	underwear_name = "long johns"
 	icon_state = "ljont"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/longstripe_black
 	name = "Longsleeve Striped Shirt, Black"
-	underwear_name = "long johns"
 	icon_state = "longstripe"
 
 /datum/category_item/underwear/undershirt/longstripe_blue
@@ -161,7 +147,6 @@
 
 /datum/category_item/underwear/undershirt/tanktop_alt_female
 	name = "Tanktop alt, Female"
-	underwear_name = "tanktop"
 	icon_state = "tanktop_alt_female"
 	has_color = TRUE
 
@@ -172,7 +157,6 @@
 
 /datum/category_item/underwear/undershirt/tank_fleet_female
 	name = "Tank top, Fleet, Female"
-	underwear_name = "tanktop"
 	icon_state = "tank_fleet_female_s"
 
 /datum/category_item/underwear/undershirt/marine_female

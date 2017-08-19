@@ -395,19 +395,19 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
 	. = ..()
-	if(belt)      . += belt
-	if(l_ear)     . += l_ear
-	if(r_ear)     . += r_ear
-	if(glasses)   . += glasses
-	if(gloves)    . += gloves
-	if(head)      . += head
-	if(shoes)     . += shoes
-	if(wear_id)   . += wear_id
+	if(belt) . += belt
+	if(l_ear) . += l_ear
+	if(r_ear) . += r_ear
+	if(glasses) . += glasses
+	if(gloves) . += gloves
+	if(head) . += head
+	if(shoes) . += shoes
+	if(wear_id) . += wear_id
 	if(wear_suit) . += wear_suit
 	if(w_uniform) . += w_uniform
 
 	if(include_carried)
-		if(l_store)    . += l_store
-		if(r_store)    . += r_store
-		if(handcuffed) . += handcuffed
-		if(s_store)    . += s_store
+		if(slot_l_store)    . += l_store
+		if(slot_r_store)    . += r_store
+		if(slot_handcuffed) . += handcuffed
+		if(slot_s_store)    . += s_store
