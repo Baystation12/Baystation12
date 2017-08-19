@@ -1213,12 +1213,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
-	if(open() >= (encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
-		var/list/bits = list()
-		for(var/obj/item/organ/organ in internal_organs)
-			if(organ.damage)
-				bits += "[organ.damage ? "damaged " : ""][organ.name]"
-		wound_descriptors["an open incision with [english_list(bits)] visible in it"] = 1
 	for(var/datum/wound/W in wounds)
 		var/this_wound_desc = W.desc
 		if(W.damage_type == BURN && W.salved)
@@ -1241,6 +1235,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 			wound_descriptors[this_wound_desc] += W.amount
 		else
 			wound_descriptors[this_wound_desc] = W.amount
+
+	if(open() >= (encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
+		var/list/bits = list()
+		if(status & ORGAN_BROKEN)
+			bits += "broken bones"
+		for(var/obj/item/organ/organ in internal_organs)
+			bits += "[organ.damage ? "damaged " : ""][organ.name]"
+		if(bits.len)
+			wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
 	for(var/wound in wound_descriptors)
 		switch(wound_descriptors[wound])
