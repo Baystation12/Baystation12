@@ -2267,7 +2267,6 @@
 #include "code\modules\synthesized_instruments\code\instrument_data\obsolete.dm"
 #include "code\modules\synthesized_instruments\code\instrument_data\organ.dm"
 #include "code\modules\synthesized_instruments\code\instrument_data\piano.dm"
-#include "code\modules\synthesized_instruments\code\UI\debug.dm"
 #include "code\modules\synthesized_instruments\code\UI\song_editor.dm"
 #include "code\modules\synthesized_instruments\code\UI\usage_info.dm"
 #include "code\modules\synthesized_instruments\real_instruments\Synthesizer\code\synthesizer.dm"
