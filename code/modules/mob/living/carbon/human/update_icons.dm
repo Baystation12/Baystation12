@@ -277,6 +277,8 @@ var/global/list/damage_icon_parts = list()
 
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
+		for(var/M in part.markings)
+			icon_key += "[M][part.markings[M]["color"]]"
 		if(isnull(part) || part.is_stump())
 			icon_key += "0"
 			continue
