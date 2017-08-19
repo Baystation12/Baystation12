@@ -53,12 +53,12 @@
 					else
 						src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
 					if(src.player.song.lines.len > maximum_lines)
-						usr << "Too many lines!"
+						to_chat(usr, "Too many lines!")
 						src.player.song.lines.Cut(maximum_lines+1)
 					var/linenum = 1
 					for(var/l in src.player.song.lines)
 						if(length(l) > maximum_line_length)
-							usr << "Line [linenum] too long!"
+							to_chat(usr, "Line [linenum] too long!")
 							src.player.song.lines.Remove(l)
 						else
 							linenum++
@@ -75,14 +75,15 @@
 
 			if ("debug")
 				if (!GLOB.musical_config.debug_active)
-					usr << "Debug flag is set to 0."
-				if (src.player.song.debug_panel)
+					to_chat("Debug flag is set to 0.")
+
+				else if (src.player.song.debug_panel)
 					var/password = input(usr, "Enter password to access debug") as text
 					var/hash = md5(password)
 					if (GLOB.musical_config.debug_password_hash == hash)
 						src.player.song.debug_panel.access_panel(usr)
 					else
-						usr << "Wrong password"
+						to_chat(usr, "Wrong password")
 			else
 				return 0
 
@@ -167,12 +168,12 @@
 					else
 						src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
 					if(src.player.song.lines.len > maximum_lines)
-						usr << "Too many lines!"
+						to_chat(usr, "Too many lines!")
 						src.player.song.lines.Cut(maximum_lines+1)
 					var/linenum = 1
 					for(var/l in src.player.song.lines)
 						if(length(l) > maximum_line_length)
-							usr << "Line [linenum] too long!"
+							to_chat(usr, "Line [linenum] too long!")
 							src.player.song.lines.Remove(l)
 						else
 							linenum++
@@ -189,14 +190,15 @@
 
 			if ("debug")
 				if (!GLOB.musical_config.debug_active)
-					usr << "Debug flag is set to 0."
-				if (src.player.song.debug_panel)
+					to_chat(usr, "Debug flag is set to 0.")
+
+				else if (src.player.song.debug_panel)
 					var/password = input(usr, "Enter password to access debug") as text
 					var/hash = md5(password)
 					if (GLOB.musical_config.debug_password_hash == hash)
 						src.player.song.debug_panel.access_panel(usr)
 					else
-						usr << "Wrong password"
+						to_chat(usr, "Wrong password")
 			else
 				return 0
 

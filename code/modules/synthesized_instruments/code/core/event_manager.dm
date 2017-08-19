@@ -15,16 +15,19 @@ datum/musical_event
 
 
 /datum/musical_event/proc/tick()
-	if (!(istype(object) && istype(subject) && istype(source))) return
+	if (!(istype(object) && istype(subject) && istype(source)))
+		qdel(src)
+		return
 	if (src.new_volume > 0) src.update_sound()
 	else src.destroy_sound()
+
 
 
 /datum/musical_event/proc/update_sound()
 	src.object.volume = src.new_volume
 	src.object.status |= SOUND_UPDATE
 	if (src.subject)
-		src.subject << src.object
+		sound_to(src.subject, src.object)
 
 
 /datum/musical_event/proc/destroy_sound()
@@ -32,7 +35,7 @@ datum/musical_event
 		var/sound/null_sound = sound(channel=src.object.channel, wait=0)
 		if (GLOB.musical_config.env_settings_available)
 			null_sound.environment = -1
-		src.subject << null_sound
+		sound_to(src.subject, null_sound)
 	if (src.source || src.source.song)
 		src.source.song.free_channel(src.object.channel)
 

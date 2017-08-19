@@ -104,7 +104,7 @@
 	if (istype(O, /obj/item/weapon/wrench))
 		if (!anchored && !isinspace())
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "<span class='notice'> You begin to tighten \the [src] to the floor...</span>"
+			to_chat(usr, "<span class='notice'> You begin to tighten \the [src] to the floor...</span>")
 			if (do_after(user, 20))
 				user.visible_message( \
 					"[user] tightens \the [src]'s casters.", \
@@ -113,7 +113,7 @@
 				src.anchored = 1
 		else if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "<span class='notice'> You begin to loosen \the [src]'s casters...</span>"
+			to_chat(usr, "<span class='notice'> You begin to loosen \the [src]'s casters...</span>")
 			if (do_after(user, 40))
 				user.visible_message( \
 					"[user] loosens \the [src]'s casters.", \
@@ -161,7 +161,7 @@
 
 /obj/structure/synthesized_instrument/synthesizer/proc/decompose_code(code, mob/blame)
 	if (length(code) > 10000)
-		blame << "This code is WAAAAY too long."
+		to_chat(blame, "This code is WAAAAY too long.")
 		return
 	code = replacetext(code, " ", "")
 	code = replacetext(code, "(", "")
@@ -179,17 +179,17 @@
 	for (var/super_statement in splittext(code, "\n"))
 		var/list/delta = splittext(super_statement, "->")
 		if (delta.len==0)
-			blame << "Line [line]: Empty super statement"
+			to_chat(blame, "Line [line]: Empty super statement")
 			return
 		if (delta.len==1)
-			blame << "Line [line]: Not enough parameters in super statement"
+			to_chat(blame, "Line [line]: Not enough parameters in super statement")
 			return
 		if (delta.len>2)
-			blame << "Line [line]: Too many parameters in super statement"
+			to_chat(blame, "Line [line]: Too many parameters in super statement")
 			return
 		var/id = delta[2]
 		if (!(id in instruments_ids))
-			blame << "Line [line]: Unknown ID. [id]"
+			to_chat(blame, "Line [line]: Unknown ID. [id]")
 			return
 
 		for (var/statements in splittext(delta[1], "|"))
@@ -197,21 +197,21 @@
 
 			for (var/property in splittext(statements, "&"))
 				if (length(property) < 3)
-					blame << "Line [line]: Invalid property [property]"
+					to_chat(blame, "Line [line]: Invalid property [property]")
 					return
 				var/variable = copytext(property, 1, 2)
 				if (variable != "O" && variable != "N" && variable != "L")
-					blame << "Line [line]: Unknown variable [variable] in [property]"
+					to_chat(blame, "Line [line]: Unknown variable [variable] in [property]")
 					return
 				var/operator = copytext(property, 2, 3)
 				if (operator != "<" && operator != ">" && operator != "=")
-					blame << "Line [line]: Unknown operator [operator] in [property]"
+					to_chat(blame, "Line [line]: Unknown operator [operator] in [property]")
 					return
 				var/list/que = splittext(property, operator)
 				var/value = que[2]
 				operator = operator=="<" ? 1 : operator=="=" ? 2 : 3
 				if (num2text(text2num(value)) != value)
-					blame << "Line [line]: Invalid value [value] in [property]"
+					to_chat(blame, "Line [line]: Invalid value [value] in [property]")
 					return
 				value = text2num(value)
 				switch(variable)
@@ -344,7 +344,7 @@
 					src.env_editor = new (src.player)
 				src.env_editor.ui_interact(usr)
 			else
-				usr << "Virtual environment is disabled"
+				to_chat(usr, "Virtual environment is disabled")
 
 		if ("show_echo_editor")
 			if (!src.echo_editor)

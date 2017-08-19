@@ -126,18 +126,18 @@
 		var/key = href_list["output_event"]
 		if (key in src.evidence)
 			var/datum/musical_evidence/E = src.evidence[key]
-			usr << key
-			usr << E.flags
-			usr << E.non_null_status
+			to_chat(usr, key)
+			to_chat(usr, E.flags)
+			to_chat(usr, E.non_null_status)
 			for (var/i = 1 to 5)
-				usr << E.five_lengths[i]
+				to_chat(usr, E.five_lengths[i])
 			for (var/i = 1 to 3)
-				usr << E.three_values[i]
+				to_chat(usr, E.three_values[i])
 			if (E.report) usr << E.report
 		else
-			usr << "No longer accessible"
+			to_chat(usr, "No longer accessible")
 	if (href_list["toggle_recording"])
 		src.recording = !src.recording
-		usr << "[!src.recording ? "not" : ""] recording"
+		to_chat(usr, "[!src.recording ? "not" : ""] recording")
 	if (href_list["refresh"])
 		src.show_panel(usr)

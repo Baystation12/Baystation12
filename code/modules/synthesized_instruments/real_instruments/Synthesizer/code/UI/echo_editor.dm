@@ -58,6 +58,6 @@
 		if ("reset_all")
 			src.player.echo = GLOB.musical_config.echo_default.Copy()
 		if ("desc")
-			usr << "[name]: from [bound_min] to [bound_max] (default: [default])<br>[desc]"
+			to_chat(usr, "[name]: from [bound_min] to [bound_max] (default: [default])<br>[desc]")
 
 	return 1
