@@ -75,7 +75,7 @@
 
 			if ("debug")
 				if (!GLOB.musical_config.debug_active)
-					to_chat("Debug flag is set to 0.")
+					to_chat(usr, "Debug flag is set to 0.")
 
 				else if (src.player.song.debug_panel)
 					var/password = input(usr, "Enter password to access debug") as text
