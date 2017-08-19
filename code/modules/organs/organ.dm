@@ -28,6 +28,8 @@ var/list/organ_cache = list()
 	var/max_damage                    // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
 
+	var/death_time
+
 /obj/item/organ/Destroy()
 
 	if(owner)           owner = null
@@ -84,6 +86,7 @@ var/list/organ_cache = list()
 	damage = max_damage
 	status |= ORGAN_DEAD
 	GLOB.processing_objects -= src
+	death_time = world.time
 	if(owner && vital)
 		owner.death()
 
@@ -369,6 +372,9 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
 
+/obj/item/organ/proc/can_recover()
+	return (!(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD)
+
 /obj/item/organ/proc/get_scan_results()
 	. = list()
 	if(robotic == ORGAN_ASSISTED)
@@ -380,7 +386,10 @@ var/list/organ_cache = list()
 	if(status & ORGAN_MUTATED)
 		. += "Genetic Deformation"
 	if(status & ORGAN_DEAD)
-		. += "Necrotic"
+		if(can_recover())
+			. += "Decaying"
+		else
+			. += "Necrotic"
 	switch (germ_level)
 		if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
 			. +=  "Mild Infection"

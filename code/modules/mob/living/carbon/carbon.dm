@@ -379,6 +379,12 @@
 	else
 		chem_effects[effect] = magnitude
 
+/mob/living/carbon/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
+	if(effect in chem_effects)
+		chem_effects[effect] = max(magnitude, chem_effects[effect])
+	else
+		chem_effects[effect] = magnitude
+
 /mob/living/carbon/get_default_language()
 	if(default_language && can_speak(default_language))
 		return default_language
