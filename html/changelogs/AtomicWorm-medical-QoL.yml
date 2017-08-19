@@ -1,0 +1,6 @@
+author: Broseph Stylin
+
+delete-after: True
+
+changes: 
+  - tweak: The Body Scanner console and IV drips are no longer dense and can now be walked through.
