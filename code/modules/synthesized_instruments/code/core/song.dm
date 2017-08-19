@@ -19,15 +19,12 @@
 	var/octave_range_min
 	var/octave_range_max
 
-	var/datum/musical_debug/debug_panel
-
 
 /datum/synthesized_song/New(datum/sound_player/playing_object, datum/instrument/instrument)
 	src.player = playing_object
 	src.instrument_data = instrument
 	src.octave_range_min = GLOB.musical_config.lowest_octave
 	src.octave_range_max = GLOB.musical_config.highest_octave
-	src.debug_panel = new (src)
 
 	instrument.create_full_sample_deviation_map()
 	src.occupy_channels()
@@ -72,7 +69,7 @@
 
 	var/note_num = delta1+delta2+GLOB.musical_config.nn2no[note]
 	if (note_num < 0 || note_num > 127)
-		src.debug_panel.append_message(text("Play synthesized note failed because of 0..127 condition, [] [] []", note, acc, oct))
+		CRASH("play_synthesized note failed because of 0..127 condition")
 		return
 
 	var/datum/sample_pair/pair = src.instrument_data.sample_map[GLOB.musical_config.n2t(note_num)]
@@ -83,7 +80,6 @@
 		if (!src.player.channel_overload())
 			src.playing = 0
 			src.autorepeat = 0
-			src.debug_panel.append_message("All channels were exhausted")
 			return
 	#undef Q
 	var/list/mob/to_play_for = src.player.who_to_play_for()
@@ -137,12 +133,9 @@
 		var/new_volume = current_volume
 		tick += world.tick_lag
 		if (delta_volume <= 0)
-			src.debug_panel.append_message("Delta Volume somehow was non-positive: [delta_volume]")
-			break
+			CRASH("Delta Volume somehow was non-positive: [delta_volume]")
 		if (src.soft_coeff <= 1)
-			src.debug_panel.append_message("Soft Coeff somehow was <=1: [src.soft_coeff]")
-			break
-
+			CRASH("Soft Coeff somehow was <=1: [src.soft_coeff]")
 		if (src.linear_decay)
 			new_volume = new_volume - delta_volume
 		else

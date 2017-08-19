@@ -13,7 +13,7 @@
 		var/target = href_list["target"]
 		var/value = text2num(href_list["value"])
 		if (href_list["value"] && !isnum(value))
-			src.player.song.debug_panel.append_message("Non-numeric value was supplied")
+			to_chat(usr, "Non-numeric value was given")
 			return 0
 
 		src.add_fingerprint(usr)
@@ -73,7 +73,7 @@
 					src.usage_info = new (src, src.player)
 				src.usage_info.ui_interact(usr)
 
-			if ("debug")
+			/*if ("debug")
 				if (!GLOB.musical_config.debug_active)
 					to_chat(usr, "Debug flag is set to 0.")
 
@@ -83,7 +83,7 @@
 					if (GLOB.musical_config.debug_password_hash == hash)
 						src.player.song.debug_panel.access_panel(usr)
 					else
-						to_chat(usr, "Wrong password")
+						to_chat(usr, "Wrong password")*/
 			else
 				return 0
 
@@ -128,7 +128,7 @@
 		var/target = href_list["target"]
 		var/value = text2num(href_list["value"])
 		if (href_list["value"] && !isnum(value))
-			src.player.song.debug_panel.append_message("Non-numeric value was supplied")
+			to_chat(usr, "Non-numeric value was given")
 			return 0
 
 		src.add_fingerprint(usr)
@@ -188,7 +188,7 @@
 					src.usage_info = new (src, src.player)
 				src.usage_info.ui_interact(usr)
 
-			if ("debug")
+			/*if ("debug")
 				if (!GLOB.musical_config.debug_active)
 					to_chat(usr, "Debug flag is set to 0.")
 
@@ -198,7 +198,7 @@
 					if (GLOB.musical_config.debug_password_hash == hash)
 						src.player.song.debug_panel.access_panel(usr)
 					else
-						to_chat(usr, "Wrong password")
+						to_chat(usr, "Wrong password")*/
 			else
 				return 0
 

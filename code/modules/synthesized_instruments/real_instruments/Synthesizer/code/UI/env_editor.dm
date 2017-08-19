@@ -37,7 +37,7 @@
 	var/target = href_list["target"]
 	var/index = text2num(href_list["index"])
 	if (href_list["index"] && !(index in 1 to 23))
-		src.player.song.debug_panel.append_message("Wrong index was provided: [index]")
+		to_chat(usr, "Wrong index was provided: [index]")
 		return 0
 
 	var/name = GLOB.musical_config.env_param_names[index]

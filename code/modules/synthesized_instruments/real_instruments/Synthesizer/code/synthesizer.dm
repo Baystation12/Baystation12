@@ -265,7 +265,6 @@
 		"show" = list(
 			"playback" = src.player.song.lines.len > 0,
 			"custom_env_options" = GLOB.musical_config.is_custom_env(src.player.virtual_environment_selected) && src.player.three_dimensional_sound,
-			"debug_button" = GLOB.musical_config.debug_active,
 			"env_settings" = GLOB.musical_config.env_settings_available
 		),
 		"status" = list(
@@ -298,7 +297,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		src.player.song.debug_panel.append_message("Non-numeric value was supplied")
+		to_chat(usr, "Non-numeric value was supplied")
 		return 0
 
 	switch (target)

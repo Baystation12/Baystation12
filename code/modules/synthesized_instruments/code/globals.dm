@@ -193,7 +193,8 @@ Bit flags that modify the behavior of above properties
 			"like DS3D flRolloffFactor but for room effect",
 			"multiplies AirAbsorptionHF member of environment reverb properties.",
 			{"
-			Bit flags that modify the behavior of properties•1 - Automatic setting of 'Direct' due to distance from listener
+			Bit flags that modify the behavior of properties
+			•1 - Automatic setting of 'Direct' due to distance from listener
 			•2 - Automatic setting of 'Room' due to distance from listener
 			•4 - Automatic setting of 'RoomHF' due to distance from listener"})
 
@@ -201,10 +202,6 @@ Bit flags that modify the behavior of above properties
 	var/list/free_channels = list() // Used to take up some channels and avoid istruments cancelling each other
 	var/free_channels_populated = 0
 	var/list/nn2no = list(0,2,4,5,7,9,11) // Maps note num onto note offset
-
-	var/debug_password_hash = "8b8f3ec1d8feb4a093848fec88ecdf96" // Change to whatever MD5 hash you like.
-	var/debug_active = 0 // Disabled for now
-	var/debug_max_reports = 10000
 
 
 /datum/musical_config/proc/n2t(key) // Used instead of num2text for faster access in sample_map

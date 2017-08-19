@@ -54,7 +54,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		src.song.debug_panel.append_message("Non-numeric value was supplied")
+		to_chat(usr, "Non-numeric value was supplied")
 		return 0
 
 	switch (target)
