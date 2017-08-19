@@ -1,0 +1,16 @@
+<h3>Virtual environment editor:</h3>
+{{for data.env_params}}
+	<div class="item">
+		<div class="itemLabel">
+			{{:value.name}}
+		</div>
+		<div class="itemContent">
+			<div style="float: left; text-align: center; width: 100px">
+				{{:value.value}}
+			</div>
+			{{:helper.link('?', null, {'target': 'desc', 'index': value.index})}}
+			{{:helper.link('R', null, {'target': 'reset', 'index': value.index})}}
+			{{:helper.link('E', null, {'target': 'set', 'index': value.index})}}
+		</div>
+	</div>
+{{/for}}

@@ -104,6 +104,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/hear_instruments
+	description = "Instruments"
+	key = "SOUND_INSTRUMENTS"
+	enabled_description = "Hear"
+	disabled_description = "Mute"
+
 /datum/client_preference/show_typing_indicator
 	description ="Typing indicator"
 	key = "SHOW_TYPING"

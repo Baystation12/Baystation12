@@ -1,0 +1,17 @@
+This module uses 4 components:
+Real instruments -- the physical manifestation of the instrument, the one that is placed in the world
+Virtual instruments -- the definition of an instrument, that is, what samples it uses, name and category
+Sound player -- used to apply modification to all sounds emitted. Represents the actual source of sound
+Synthesized Song - just like /datum/song it's what parses and plays a melody
+---
+Real instruments inherit from either /obj/structure/synthesized_instrument (static musical instrument) or /obj/item/device/synthesized_instrument (handheld musical instrument)
+---
+Virtual instruments all inherit from /datum/instrument. 
+Virtual instruments should follow this structure: /datum/instrument/category_name/instrument_name.
+
+Refer to any file in ./instrument_data to see how it's done.
+---
+Sound player inherits from /obj/sound_player
+---
+For synthesized song only use /datum/synthesized_song
+---
