@@ -104,28 +104,6 @@
 	#if DM_VERSION < 511
 	sound_copy.frequency = 1
 	#endif
-	/*
-	spawn(duration)
-		var/delta_volume = player.volume / sustain_timer
-		var/stored_soft_coeff = soft_coeff
-		var/stored_linear_decay = linear_decay
-		while (playing)
-			sleep(1)
-			if (stored_linear_decay)
-				sound_copy.volume = max(sound_copy.volume - delta_volume, 0)
-			else
-				sound_copy.volume = max(round(sound_copy.volume / stored_soft_coeff), 0)
-			if (sound_copy.volume > 0)
-				sound_copy.status |= SOUND_UPDATE
-				who << sound_copy
-			else
-				break
-		free_channel(sound_copy.channel)
-		who << sound(channel=sound_copy.channel, wait=0)
-
-		// Made obsolete by new manual event scheduler
-		// Also lagged as shit
-	*/
 	var/delta_volume = player.volume / src.sustain_timer
 	var/current_volume = max(round(sound_copy.volume), 0)
 	var/tick = duration

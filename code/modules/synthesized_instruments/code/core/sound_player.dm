@@ -25,7 +25,7 @@
 	This is beyond dumb, this is fucking retarded.
 	Basically when you send a sound with a non-minus-one environment to a client, it sets their _global_ environment value to whatever you sent to them
 	So ALL sounds will have this environment setting assigned afterwards.
-	As such, you need to store
+	You could sort of hear it if you were standing in a hallway and got a PM or something.
 	*/
 	var/last_updated_listeners = 0
 
