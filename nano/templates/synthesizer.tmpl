@@ -1,0 +1,167 @@
+<div class="item">
+	{{:helper.link('Start new song', null, {'target': 'newsong'})}}
+	{{:helper.link('Import song', null, {'target': 'import'})}}
+</div>
+
+{{if data.show.playback}}
+<h3>Player</h3>
+<div class="item">
+	<div class="itemLabel">
+		Playback:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Play', null, {'target': 'play', 'value': 1}, data.playback.playing ? 'selected' : null)}}
+		{{:helper.link('Stop', null, {'target': 'play', 'value': 0}, !data.playback.playing ? 'selected' : null)}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Autorepeat:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('On', null, {'target': 'autorepeat', 'value': 1}, data.playback.autorepeat ? 'selected' : null)}}
+		{{:helper.link('Off', null, {'target': 'autorepeat', 'value': 0}, !data.playback.autorepeat ? 'selected' : null)}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		3D sound:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('On', null, {'target': '3d_sound', 'value': 1}, data.playback.three_dimensional_sound ? 'selected' : null)}}
+		{{:helper.link('Off', null, {'target': '3d_sound', 'value': 0}, !data.playback.three_dimensional_sound ? 'selected' : null)}}
+	</div>
+</div>
+{{/if}}
+
+<h3>Basic options</h3>
+<div class="item">
+	<div class="itemLabel">
+		Volume:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('--', null, {'target': 'volume', 'value': -10})}}
+		{{:helper.link('-', null, {'target': 'volume', 'value': -1})}}
+		{{:helper.displayBar(data.basic_options.volume, 0, 100)}}
+		{{:helper.link('+', null, {'target': 'volume', 'value': 1})}}
+		{{:helper.link('++', null, {'target': 'volume', 'value': 10})}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Instrument:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.basic_options.cur_instrument, null, {'target' : 'instrument'})}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		BPM:
+	</div>
+	<div class="itemContent" style="text-align: left">
+		{{:helper.link('-', null, {'target' : 'tempo', 'value': 1})}}
+		<div style="float: left; width: 50px; text-align: center">{{:data.basic_options.BPM}}</div>
+		{{:helper.link('+', null, {'target' : 'tempo', 'value': -1})}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Transposition:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('-', null, {'target' : 'transposition', 'value': -1})}}
+		<div style="float: left; width: 20px; text-align: center">{{:data.basic_options.transposition}}</div>
+		{{:helper.link('+', null, {'target' : 'transposition', 'value': 1})}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Octave range:
+	</div>
+	<div class="itemContent">
+		<div class="itemLabel">
+			MIN: {{:data.basic_options.octave_range.min}}
+			{{:helper.link('-', null, {'target' : 'min_octave', 'value': -1})}}
+			{{:helper.link('+', null, {'target' : 'min_octave', 'value': 1})}}
+		</div>
+		<div class="itemLabel">
+			MAX: {{:data.basic_options.octave_range.max}}
+			{{:helper.link('-', null, {'target' : 'max_octave', 'value': -1})}}
+			{{:helper.link('+', null, {'target' : 'max_octave', 'value': 1})}}
+		</div>
+	</div>
+</div>
+
+<h3>Sustain</h3>
+<div class="item">
+	<div class="itemLabel">
+		Exponential decay: 
+	</div>
+	<div class="itemContent">
+		{{:helper.link('On', null, {'target': 'decay', 'value': 0}, data.sustain.linear_decay_active ? null : 'selected')}}
+		{{:helper.link('Off', null, {'target': 'decay', 'value': 1}, !data.sustain.linear_decay_active ? null : 'selected')}}
+	</div>
+</div>
+{{if data.sustain.linear_decay_active}}
+<div class="item">
+	<div class="itemLabel">
+		Sustain timer:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('--', null, {'target': 'sustain_timer', 'value': -10})}}
+		{{:helper.link('-', null, {'target': 'sustain_timer', 'value': -1})}}
+		<div style="float: left; text-align: center; width: 20px">{{:data.sustain.sustain_timer}}</div>
+		{{:helper.link('+', null, {'target': 'sustain_timer', 'value': 1})}}
+		{{:helper.link('++', null, {'target': 'sustain_timer', 'value': 10})}}
+	</div>
+</div>
+{{else}}
+<div class="item">
+	<div class="itemLabel">
+		Exponential value:
+	</div>
+	<div class="itemContent">
+		{{:data.sustain.soft_coeff}}
+		{{:helper.link('Change', null, {'target': 'soft_coeff'})}}
+	</div>
+</div>
+{{/if}}
+
+<h3>Advanced options</h3>
+<div class="item">
+	{{if data.show.debug_button}}
+		{{:helper.link('Debug panel', null, {'target': 'debug'})}}
+	{{/if}}
+	{{if data.show.custom_env_options && data.show.env_settings}}
+		{{:helper.link('Open virtual environment editor', null, {'target': 'show_env_editor'})}}
+	{{/if}}
+	{{:helper.link('Open echo editor', null, {'target': 'show_echo_editor'})}}
+	{{:helper.link('Open song editor', null, {'target': 'show_song_editor'})}}
+	{{:helper.link(data.advanced_options.apply_echo ? 'Do not apply echo' : 'Apply echo', null, {'target': 'echo', 'value': data.advanced_options.apply_echo ? 0 : 1})}}
+</div>
+{{if data.show.env_settings}}
+<div class="item">
+	<div class="itemLabel">
+		Virtual environment:
+	</div>
+	<div class="itemContent">
+		{{for data.advanced_options.all_environments}}
+			{{if value == "Custom"}}
+				{{:helper.link(value, null, {'target': 'select_env', 'value': index-1}, data.advanced_options.selected_environment == value ? 'selected': data.playback.three_dimensional_sound ? null : 'disabled')}}
+			{{else}}
+				{{:helper.link(value, null, {'target': 'select_env', 'value': index-1}, data.advanced_options.selected_environment == value ? 'selected': null)}}
+			{{/if}}
+		{{/for}}
+	</div>
+</div>
+{{/if}}
+
+<h3>Status</h3>
+{{:helper.link('Open usage info', null, {'target': 'show_usage'})}}

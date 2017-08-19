@@ -1,0 +1,43 @@
+<h3>Song editor (current tick-lag {{:data.tick_lag}})</h3>
+{{if data.show_help}}
+	Lines are a series of chords, separated by commas (,), each with notes seperated by hyphens (-).<br>
+	Every note in a chord will play together, with chord timed by the tempo.<br>
+	<br>
+	Notes are played by the names of the note, and optionally, the accidental, and/or the octave number.<br>
+	By default, every note is natural and in octave 3. Defining otherwise is remembered for each note.<br>
+	Example: <i>C,D,E,F,G,A,B</i> will play a C major scale.<br>
+	After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is C3,C4,C4,C3</i><br>
+	Chords can be played simply by seperating each note with a hyphon: <i>A-C#,Cn-E,E-G#,Gn-B</i><br>
+	A pause may be denoted by an empty chord: <i>C,E,,C,G</i><br>
+	To make a chord be a different time, end it with /x, where the chord length will be length<br>
+	defined by tempo / x: <i>C,G/2,E/4</i><br>
+	Combined, an example is: <i>E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>
+	<br>
+	Lines may be up to 50 characters.<br>
+	A song may only contain up to 200 lines.<br>
+{{/if}}
+<div class="item">
+	{{:helper.link(data.show_help ? 'Hide help' : 'Show help', null, {'target': 'help', 'value': data.show_help ? 0 : 1})}}
+	{{:helper.link('New line', null, {'target': 'newline'})}}
+</div>
+<div class="item">
+	Current page: {{:data.page_num}}
+	{{:helper.link('<', null, {'target': 'prev_page'})}}
+	{{:helper.link('>', null, {'target': 'next_page'})}}
+</div>
+<div class="item">
+{{for data.lines}}
+	{{if data.active_line == data.page_offset+index+1}}
+		<div class="notice">
+	{{/if}}
+	<div style="float: left; text-align: left; width: 60px">
+		{{:helper.link(data.page_offset+index+1, null, {'target': 'deleteline', 'value':data.page_offset+index+1})}}
+	</div>
+	<div style="float: center; text-align: left; width: 400px;">
+		{{:helper.link(value, null, {'target': 'modifyline', 'value':data.page_offset+index+1})}}
+	</div>
+	{{if data.active_line == data.page_offset+index+1}}
+		</div>
+	{{/if}}
+{{/for}}
+</div>
