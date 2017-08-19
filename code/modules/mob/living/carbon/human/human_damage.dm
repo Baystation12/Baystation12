@@ -5,18 +5,11 @@
 		health = maxHealth
 		set_stat(CONSCIOUS)
 		return
-	var/total_burn  = 0
-	var/total_brute = 0
-	for(var/obj/item/organ/external/O in organs)	//hardcoded to streamline things a bit
-		if((O.robotic >= ORGAN_ROBOT) && !O.vital)
-			continue //*non-vital* robot limbs don't count towards shock and crit
-		total_brute += O.brute_dam
-		total_burn  += O.burn_dam
 
-	health = maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute
+	health = maxHealth - getBrainLoss()
 
 	//TODO: fix husking
-	if(((maxHealth - total_burn) < config.health_threshold_dead) && stat == DEAD)
+	if(((maxHealth - getFireLoss()) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
 	return
 
@@ -32,16 +25,20 @@
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
-			sponge.damage = min(max(amount, 0),(maxHealth*2))
+			sponge.damage = min(max(amount, 0),sponge.species.total_health)
+			updatehealth()
 
 /mob/living/carbon/human/getBrainLoss()
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(should_have_organ(BP_BRAIN))
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name[BP_BRAIN]
 		if(sponge)
-			return min(sponge.damage,maxHealth*2)
+			if(sponge.status & ORGAN_DEAD)
+				return sponge.species.total_health
+			else
+				return sponge.damage
 		else
-			return maxHealth*2
+			return species.total_health
 	return 0
 
 /mob/living/carbon/human/getHalLoss()
@@ -142,40 +139,96 @@
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
 /mob/living/carbon/human/getOxyLoss()
-	if(!should_have_organ(BP_LUNGS))
-		oxyloss = 0
-	return ..()
-
-/mob/living/carbon/human/adjustOxyLoss(var/amount)
-	if(!should_have_organ(BP_LUNGS))
-		oxyloss = 0
+	if(!need_breathe())
+		return 0
 	else
-		amount = amount*species.oxy_mod
-		..(amount)
+		var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
+		if(!breathe_organ)
+			return maxHealth/2
+		return breathe_organ.get_oxygen_deprivation()
 
 /mob/living/carbon/human/setOxyLoss(var/amount)
-	if(!should_have_organ(BP_LUNGS))
-		oxyloss = 0
+	if(!need_breathe())
+		return 0
 	else
-		..()
+		adjustOxyLoss(getOxyLoss()-amount)
+
+/mob/living/carbon/human/adjustOxyLoss(var/amount)
+	if(!need_breathe())
+		return
+	var/heal = amount < 0
+	amount = abs(amount*species.oxy_mod)
+	var/obj/item/organ/internal/lungs/breathe_organ = internal_organs_by_name[species.breathing_organ]
+	if(breathe_organ)
+		if(heal)
+			breathe_organ.remove_oxygen_deprivation(amount)
+		else
+			breathe_organ.add_oxygen_deprivation(amount)
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/getToxLoss()
 	if((species.flags & NO_POISON) || isSynthetic())
-		toxloss = 0
-	return ..()
-
-/mob/living/carbon/human/adjustToxLoss(var/amount)
-	if((species.flags & NO_POISON) || isSynthetic())
-		toxloss = 0
-	else
-		amount = amount*species.toxins_mod
-		..(amount)
+		return 0
+	var/amount = 0
+	for(var/obj/item/organ/internal/I in internal_organs)
+		if(I.organ_tag in list(BP_BRAIN, BP_STACK))
+			continue
+		amount += I.damage
+	return amount
 
 /mob/living/carbon/human/setToxLoss(var/amount)
+	if(!(species.flags & NO_POISON) && !isSynthetic())
+		adjustToxLoss(getToxLoss()-amount)
+
+// TODO: better internal organ damage procs.
+/mob/living/carbon/human/adjustToxLoss(var/amount)
+
 	if((species.flags & NO_POISON) || isSynthetic())
-		toxloss = 0
-	else
-		..()
+		return
+
+	var/heal = amount < 0
+	amount = abs(amount)
+
+	if(!heal && (CE_ANTITOX in chem_effects))
+		amount *= 0.75
+
+	var/list/pick_organs = shuffle(internal_organs.Copy())
+
+	// Prioritize damaging our filtration organs first.
+	var/obj/item/organ/internal/kidneys/kidneys = internal_organs_by_name[BP_KIDNEYS]
+	if(kidneys)
+		pick_organs -= kidneys
+		pick_organs.Insert(1, kidneys)
+	var/obj/item/organ/internal/liver/liver = internal_organs_by_name[BP_LIVER]
+	if(liver)
+		pick_organs -= liver
+		pick_organs.Insert(1, liver)
+
+	// Move the brain to the very end since damage to it is vastly more dangerous
+	// (and isn't technically counted as toxloss) than general organ damage.
+	var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+	if(brain)
+		pick_organs -= brain
+		pick_organs += brain
+
+	for(var/obj/item/organ/internal/I in pick_organs)
+		if(amount <= 0)
+			break
+		if(heal)
+			if(I.damage < amount)
+				amount -= I.damage
+				I.damage = 0
+			else
+				I.damage -= amount
+				amount = 0
+		else
+			var/cap_dam = I.max_damage - I.damage
+			if(amount >= cap_dam)
+				I.take_damage(cap_dam, silent=TRUE)
+				amount -= cap_dam
+			else
+				I.take_damage(amount, silent=TRUE)
+				amount = 0
 
 ////////////////////////////////////////////
 
@@ -324,6 +377,8 @@ This function restores all organs.
 	if(blocked)
 		damage *= blocked_mult(blocked)
 
+	if(damage > 15)
+		make_adrenaline(round(damage/10))
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
@@ -333,7 +388,6 @@ This function restores all organs.
 		if(BURN)
 			damage = damage*species.burn_mod
 			created_wound = organ.take_damage(0, damage, damage_flags, used_weapon)
-
 		if(PAIN)
 			organ.add_pain(damage)
 		if(CLONE)
@@ -343,3 +397,26 @@ This function restores all organs.
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
 	return created_wound
+
+// Find out in how much pain the mob is at the moment.
+/mob/living/carbon/human/proc/get_shock()
+
+	if (!can_feel_pain())
+		return 0
+
+	var/traumatic_shock = getHalLoss()                 // Pain.
+	traumatic_shock += (0.5 * src.getToxLoss())        // Organ failure.
+	traumatic_shock += (0.5 * src.getCloneLoss())      // Genetic decay.
+	traumatic_shock -= src.chem_effects[CE_PAINKILLER] // TODO: check what is actually stored here.
+
+	if(slurring)                                       // Drunk.
+		traumatic_shock *= 0.75
+	if(stat == UNCONSCIOUS)
+		traumatic_shock *= 0.5
+
+	return max(0,traumatic_shock)
+
+/mob/living/carbon/human/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+	if(effecttype == IRRADIATE && (effect * blocked_mult(blocked) <= RAD_LEVEL_LOW))
+		return 0
+	return ..()

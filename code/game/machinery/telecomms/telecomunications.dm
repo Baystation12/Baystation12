@@ -123,7 +123,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		var/turf/position = get_turf(src)
 		listening_level = position.z
 
-/obj/machinery/telecomms/initialize()
+/obj/machinery/telecomms/Initialize()
 	if(autolinkers.len)
 		// Links nearby machines
 		if(!long_range_link)
@@ -132,6 +132,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
+	. = ..()
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src
@@ -542,14 +543,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				log.parameters["realname"] = signal.data["realname"]
 				log.parameters["language"] = signal.data["language"]
 
-				var/race = "unknown"
-				if(ishuman(M))
-					var/mob/living/carbon/human/H = M
-					race = "[H.species.name]"
-					log.parameters["intelligible"] = 1
-				else if(isbrain(M))
-					var/mob/living/carbon/brain/B = M
-					race = "[B.species.name]"
+				var/race = "Unknown"
+				if(ishuman(M) || isbrain(M))
+					race = "Sapient Race"
 					log.parameters["intelligible"] = 1
 				else if(M.isMonkey())
 					race = "Monkey"

@@ -15,12 +15,20 @@
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
 #define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
 
+// Grab Types
+#define GRAB_NORMAL			"normal"
+#define GRAB_NAB			"nab"
+#define GRAB_NAB_SPECIAL	"special nab"
+
 // Grab levels.
-#define GRAB_PASSIVE    1
-#define GRAB_AGGRESSIVE 2
-#define GRAB_NECK       3
-#define GRAB_UPGRADING  4
-#define GRAB_KILL       5
+#define NORM_PASSIVE    "normal passive"
+#define NORM_AGGRESSIVE "normal aggressive"
+#define NORM_NECK       "normal neck"
+#define NORM_KILL       "normal kill"
+
+#define NAB_PASSIVE		"nab passive"
+#define NAB_AGGRESSIVE	"nab aggressive"
+#define NAB_KILL		"nab kill"
 
 #define BORGMESON 0x1
 #define BORGTHERM 0x2
@@ -155,6 +163,7 @@
 #define BP_EYES     "eyes"
 #define BP_HEART    "heart"
 #define BP_LUNGS    "lungs"
+#define BP_TRACH	"tracheae"
 #define BP_BRAIN    "brain"
 #define BP_LIVER    "liver"
 #define BP_KIDNEYS  "kidneys"
@@ -173,6 +182,8 @@
 #define BP_GBLADDER "gas bladder"
 #define BP_POLYP    "polyp segment"
 #define BP_ANCHOR   "anchoring ligament"
+#define BP_VOICE    "vocal synthesiser"
+#define BP_PHORON   "phoron filter"
 
 // Limbs.
 #define BP_L_FOOT "l_foot"
@@ -234,9 +245,11 @@
 #define SPECIES_IPC "Machine"
 #define SPECIES_UNATHI "Unathi"
 #define SPECIES_SKRELL "Skrell"
-#define SPECIES_NABBER "Nabber"
+#define SPECIES_NABBER "Giant Armoured Serpentid"
+#define SPECIES_PROMETHEAN "Promethean"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
+

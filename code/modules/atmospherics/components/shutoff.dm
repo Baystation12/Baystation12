@@ -17,14 +17,14 @@
 	icon_state = "vclamp[open]"
 
 /obj/machinery/atmospherics/valve/shutoff/New()
-	processing_objects |= src
+	GLOB.processing_objects |= src
 	open()
 	hide(1)
 	..()
 
 /obj/machinery/atmospherics/valve/shutoff/Destroy()
-	processing_objects -= src
-	..()
+	GLOB.processing_objects -= src
+	. = ..()
 
 /obj/machinery/atmospherics/valve/shutoff/attack_hand(mob/user as mob)
 	..()

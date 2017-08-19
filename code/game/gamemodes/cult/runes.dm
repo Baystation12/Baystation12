@@ -237,7 +237,7 @@
 	var/obj/effect/cultwall/wall = null
 
 /obj/effect/rune/wall/Destroy()
-	qdel_null(wall)
+	QDEL_NULL(wall)
 	return ..()
 
 /obj/effect/rune/wall/cast(var/mob/living/user)
@@ -331,7 +331,7 @@
 	user.visible_message("<span class='warning'>\The [user]'s eyes glow blue as \he freezes in place, absolutely motionless.</span>", "<span class='warning'>The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...</span>", "You hear only complete silence for a moment.")
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
 	var/mob/observer/ghost/soul
-	for(var/mob/observer/ghost/O in dead_mob_list_)
+	for(var/mob/observer/ghost/O in GLOB.ghost_mob_list)
 		if(O.key == tmpkey)
 			soul = O
 			break
@@ -433,6 +433,10 @@
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
+		if(ishuman(victim))
+			var/mob/living/carbon/human/H = victim
+			if(H.is_asystole())
+				H.adjustBrainLoss(2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
 		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
@@ -795,7 +799,7 @@
 			return
 		speak_incantation(user, "Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 		to_chat(user, "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>")
-		for(var/mob/M in living_mob_list_)
+		for(var/mob/M in GLOB.living_mob_list_)
 			if(iscultist(M))
 				to_chat(M, "You see a vision of \the [user] keeling over dead, his blood glowing blue as it escapes \his body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted.")
 			else

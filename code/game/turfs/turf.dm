@@ -41,12 +41,6 @@
 	else
 		luminosity = 1
 
-/turf/proc/initialize()
-	return
-
-/turf/proc/update_icon()
-	return
-
 /turf/Destroy()
 	turfs -= src
 	remove_cleanables()
@@ -164,6 +158,9 @@ var/const/enterloopsanity = 100
 
 /turf/proc/is_plating()
 	return 0
+
+/turf/proc/protects_atom(var/atom/A)
+	return FALSE
 
 /turf/proc/inertial_drift(atom/movable/A)
 	if(!(A.last_move))	return

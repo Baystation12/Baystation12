@@ -209,14 +209,14 @@ datum/preferences
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		var/list/equipped_slots = list() //If more than one item takes the same slot only spawn the first
-		for(var/thing in gear)
+		for(var/thing in Gear())
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
 				if(G.allowed_roles && G.allowed_roles.len)
 					if(previewJob)
-						for(var/job_name in G.allowed_roles)
-							if(previewJob.title == job_name)
+						for(var/job_type in G.allowed_roles)
+							if(previewJob.type == job_type)
 								permitted = 1
 				else
 					permitted = 1
@@ -228,7 +228,7 @@ datum/preferences
 					continue
 
 				if(G.slot && !(G.slot in equipped_slots))
-					var/metadata = gear[G.display_name]
+					var/metadata = gear_list[gear_slot][G.display_name]
 					if(mannequin.equip_to_slot_or_del(G.spawn_item(mannequin, metadata), G.slot))
 						equipped_slots += G.slot
 						update_icon = TRUE

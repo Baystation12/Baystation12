@@ -113,7 +113,7 @@
 
 
 /obj/item/device/assembly/process()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return
 
 

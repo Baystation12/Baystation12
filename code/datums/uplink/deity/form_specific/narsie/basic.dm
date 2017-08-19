@@ -25,3 +25,11 @@
 	desc = "Lets a follower drain blood from all those around them."
 	item_cost = 60
 	path = /spell/aoe_turf/drain_blood
+
+/datum/uplink_item/deity/feat/phenomena/exhude_blood
+	name = "Phenomena: Exhude Blood"
+	desc = "You extract the raw blood used in your faith and give it to one of your flock"
+	item_cost = 30
+	path = /datum/phenomena/exhude_blood
+	category = /datum/uplink_category/deity_ability_dark
+	required_feats = list(DEITY_FORM_DARK_ART)

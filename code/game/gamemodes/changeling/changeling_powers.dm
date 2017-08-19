@@ -145,7 +145,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/datum/changeling/changeling = changeling_power(0,0,100)
 	if(!changeling)	return
 
-	var/obj/item/weapon/grab/G = src.get_active_hand()
+	var/obj/item/grab/G = src.get_active_hand()
 	if(!istype(G))
 		to_chat(src, "<span class='warning'>We must be grabbing a creature in our active hand to absorb them.</span>")
 		return
@@ -163,7 +163,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>This creature's DNA is ruined beyond useability!</span>")
 		return
 
-	if(G.state != GRAB_KILL)
+	if(!G.can_absorb())
 		to_chat(src, "<span class='warning'>We must have a tighter grip to absorb this creature.</span>")
 		return
 
@@ -764,38 +764,6 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	to_chat(T, "<span class='danger'>Your muscles begin to painfully tighten.</span>")
 	T.Weaken(20)
 	feedback_add_details("changeling_powers","PS")
-	return 1
-
-/mob/proc/changeling_transformation_sting()
-	set category = "Changeling"
-	set name = "Transformation sting (40)"
-	set desc="Sting target"
-
-	var/datum/changeling/changeling = changeling_power(40)
-	if(!changeling)	return 0
-
-
-
-	var/list/names = list()
-	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
-		names += "[DNA.name]"
-
-	var/S = input("Select the target DNA: ", "Target DNA", null) as null|anything in names
-	if(!S)	return
-
-	var/datum/absorbed_dna/chosen_dna = changeling.GetDNA(S)
-	if(!chosen_dna)
-		return
-
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
-	if(!T)	return 0
-	if((HUSK in T.mutations) || (T.species.flags & NO_SCAN))
-		to_chat(src, "<span class='warning'>Our sting appears ineffective against this creature.</span>")
-		return 0
-
-	T.handle_changeling_transform(chosen_dna)
-
-	feedback_add_details("changeling_powers","TS")
 	return 1
 
 /mob/proc/changeling_DEATHsting()

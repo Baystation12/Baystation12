@@ -1,6 +1,9 @@
 /obj/item/weapon/storage/toolbox
 	name = "toolbox"
-	desc = "Danger. Very robust."
+	desc = "Bright red toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
+	description_info = "The toolbox is a general-purpose storage item with lots of space. With an item in your hand, click on it to store it inside."
+	description_fluff = "No one remembers which company designed this particular toolbox. It's been mass-produced, retired, brought out of retirement, and counterfeited for decades."
+	description_antag = "Carrying one of these and being bald tends to instill a certain primal fear in most people."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"
 	item_state = "toolbox_red"
@@ -30,6 +33,7 @@
 
 /obj/item/weapon/storage/toolbox/mechanical
 	name = "mechanical toolbox"
+	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
 
@@ -44,6 +48,7 @@
 
 /obj/item/weapon/storage/toolbox/electrical
 	name = "electrical toolbox"
+	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
 
@@ -62,6 +67,7 @@
 
 /obj/item/weapon/storage/toolbox/syndicate
 	name = "black and red toolbox"
+	desc = "A toolbox in black, with stylish red trim. This one feels particularly heavy."
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
@@ -76,4 +82,3 @@
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
 	new /obj/item/device/multitool(src)
-

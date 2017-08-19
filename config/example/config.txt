@@ -2,12 +2,12 @@
 # SERVERNAME spacestation13
 
 ## Alert levels
-ALERT_GREEN All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
-ALERT_BLUE_UPTO The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted.
+ALERT_GREEN All threats to the ship have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
+ALERT_BLUE_UPTO Command has received reliable information about possible hostile activity onboard. Security staff may have weapons visible, random searches are permitted.
 ALERT_BLUE_DOWNTO The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed.
-ALERT_RED_UPTO There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised.
-ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised.
-ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
+ALERT_RED_UPTO There is an immediate serious threat to the ship. Security may have weapons unholstered at all times. Random searches are allowed and advised.
+ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated; however there still is an immediate serious threat to the ship. Security may have weapons unholstered at all times, random searches are allowed and advised.
+ALERT_DELTA The ship's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
@@ -302,6 +302,9 @@ REQ_CULT_GHOSTWRITER 6
 
 ## Sets the number of available character slots
 CHARACTER_SLOTS 10
+
+## Sets the number of loadout slots per character
+LOADOUT_SLOTS 3
 
 ## Expected round length in minutes
 EXPECTED_ROUND_LENGTH 180

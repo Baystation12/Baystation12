@@ -1,0 +1,7 @@
+author: Atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Re-adds on-join announcements to all ranks."
+  - tweak: "Most jobs are announced on relevant departmental frequency (if they have one). During red alert all jobs are announced on main frequency."

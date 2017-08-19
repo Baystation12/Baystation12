@@ -49,7 +49,7 @@ datum/unit_test/virtual/helper/check_hearers_in_range_with_mob_inside_storage/st
 	mob_one.forceMove(storage)
 	expected_mobs = list(mob_one, mob_two, mob_three)
 datum/unit_test/virtual/helper/check_hearers_in_range_with_mob_inside_storage/Destroy()
-	qdel_null(storage)
+	QDEL_NULL(storage)
 	. = ..()
 
 datum/unit_test/virtual/helper/check_viewers_in_range
@@ -90,7 +90,7 @@ datum/unit_test/virtual/helper/check_hosts_in_view_range_with_mob_inside_object/
 	mob_one.forceMove(storage)
 	expected_mobs = list(mob_one, mob_two)
 datum/unit_test/virtual/helper/check_hosts_in_view_range_with_mob_inside_object/Destroy()
-	qdel_null(storage)
+	QDEL_NULL(storage)
 	. = ..()
 
 datum/unit_test/virtual/helper/proc/standard_setup()
@@ -99,9 +99,9 @@ datum/unit_test/virtual/helper/proc/standard_setup()
 	mob_three = get_named_instance(/mob/fake_mob, get_turf(locate(/obj/effect/landmark/virtual_spawn/three)), "Test Mob 3")
 
 datum/unit_test/virtual/helper/proc/standard_cleanup()
-	qdel_null(mob_one)
-	qdel_null(mob_two)
-	qdel_null(mob_three)
+	QDEL_NULL(mob_one)
+	QDEL_NULL(mob_two)
+	QDEL_NULL(mob_three)
 
 /obj/effect/landmark/virtual_spawn/one
 /obj/effect/landmark/virtual_spawn/two

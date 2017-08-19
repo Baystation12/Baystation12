@@ -11,6 +11,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/chat_channels = list()
 	var/list/fileservers = list()
 	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
+	var/list/banned_nids = list()
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100
@@ -30,7 +31,7 @@ var/global/datum/ntnet/ntnet_global = new()
 /datum/ntnet/New()
 	if(ntnet_global && (ntnet_global != src))
 		ntnet_global = src // There can be only one.
-	for(var/obj/machinery/ntnet_relay/R in machines)
+	for(var/obj/machinery/ntnet_relay/R in GLOB.machines)
 		relays.Add(R)
 		R.NTNet = src
 	build_software_lists()
@@ -59,6 +60,16 @@ var/global/datum/ntnet/ntnet_global = new()
 				logs.Remove(L)
 			else
 				break
+
+/datum/ntnet/proc/check_banned(var/NID)
+	if(!relays || !relays.len)
+		return FALSE
+
+	for(var/obj/machinery/ntnet_relay/R in relays)
+		if(R.operable())
+			return (NID in banned_nids)
+
+	return FALSE
 
 // Checks whether NTNet operates. If parameter is passed checks whether specific function is enabled.
 /datum/ntnet/proc/check_function(var/specific_action = 0)

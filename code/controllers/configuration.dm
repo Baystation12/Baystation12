@@ -77,6 +77,7 @@ var/list/gamemode_cache = list()
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
 	var/character_slots = 10				// The number of available character slots
+	var/loadout_slots = 3					// The number of loadout slots per character
 
 	var/max_maint_drones = 5				//This many drones can spawn,
 	var/allow_drone_spawn = 1				//assuming the admin allow them to.
@@ -112,14 +113,11 @@ var/list/gamemode_cache = list()
 
 	//game_options.txt configs
 
-	var/health_threshold_softcrit = 0
-	var/health_threshold_crit = -50
 	var/health_threshold_dead = -100
 
 	var/organ_health_multiplier = 0.9
 	var/organ_regeneration_multiplier = 0.25
 	var/organs_decay
-	var/default_brain_health = 400
 
 	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
 	//so that it's similar to PAIN. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
@@ -226,6 +224,11 @@ var/list/gamemode_cache = list()
 	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
 
 	var/autostealth = 0 // Staff get automatic stealth after this many minutes
+
+	var/error_cooldown = 600 // The "cooldown" time for each occurrence of a unique error
+	var/error_limit = 50 // How many occurrences before the next will silence them
+	var/error_silence_time = 6000 // How long a unique error will be silenced for
+	var/error_msg_delay = 50 // How long to wait between messaging admins about occurrences of a unique error
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -665,6 +668,9 @@ var/list/gamemode_cache = list()
 				if("character_slots")
 					config.character_slots = text2num(value)
 
+				if("loadout_slots")
+					config.loadout_slots = text2num(value)
+
 				if("allow_drone_spawn")
 					config.allow_drone_spawn = text2num(value)
 
@@ -745,6 +751,16 @@ var/list/gamemode_cache = list()
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
 
+
+				if("error_cooldown")
+					error_cooldown = text2num(value)
+				if("error_limit")
+					error_limit = text2num(value)
+				if("error_silence_time")
+					error_silence_time = text2num(value)
+				if("error_msg_delay")
+					error_msg_delay = text2num(value)
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -754,10 +770,6 @@ var/list/gamemode_cache = list()
 			value = text2num(value)
 
 			switch(name)
-				if("health_threshold_crit")
-					config.health_threshold_crit = value
-				if("health_threshold_softcrit")
-					config.health_threshold_softcrit = value
 				if("health_threshold_dead")
 					config.health_threshold_dead = value
 				if("revival_pod_plants")
@@ -774,10 +786,6 @@ var/list/gamemode_cache = list()
 					config.organ_damage_spillover_multiplier = value / 100
 				if("organs_can_decay")
 					config.organs_decay = 1
-				if("default_brain_health")
-					config.default_brain_health = text2num(value)
-					if(!config.default_brain_health || config.default_brain_health < 1)
-						config.default_brain_health = initial(config.default_brain_health)
 				if("bones_can_break")
 					config.bones_can_break = value
 				if("limbs_can_break")
@@ -860,48 +868,6 @@ var/list/gamemode_cache = list()
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 
-/datum/configuration/proc/loadforumsql(filename)  // -- TLE
-	var/list/Lines = file2list(filename)
-	for(var/t in Lines)
-		if(!t)	continue
-
-		t = trim(t)
-		if (length(t) == 0)
-			continue
-		else if (copytext(t, 1, 2) == "#")
-			continue
-
-		var/pos = findtext(t, " ")
-		var/name = null
-		var/value = null
-
-		if (pos)
-			name = lowertext(copytext(t, 1, pos))
-			value = copytext(t, pos + 1)
-		else
-			name = lowertext(t)
-
-		if (!name)
-			continue
-
-		switch (name)
-			if ("address")
-				forumsqladdress = value
-			if ("port")
-				forumsqlport = value
-			if ("database")
-				forumsqldb = value
-			if ("login")
-				forumsqllogin = value
-			if ("password")
-				forumsqlpass = value
-			if ("activatedgroup")
-				forum_activated_group = value
-			if ("authenticatedgroup")
-				forum_authenticated_group = value
-			else
-				log_misc("Unknown setting in configuration: '[name]'")
-
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
@@ -926,3 +892,9 @@ var/list/gamemode_cache = list()
 			config.python_path = "/usr/bin/env python2"
 		else //probably windows, if not this should work anyway
 			config.python_path = "python"
+
+/datum/configuration/proc/load_event(filename)
+	var/event_info = file2text(filename)
+
+	if (event_info)
+		custom_event_msg = event_info

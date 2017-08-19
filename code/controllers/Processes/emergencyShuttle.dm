@@ -3,7 +3,7 @@
 	schedule_interval = 20 // every 2 seconds
 
 	if(!evacuation_controller)
-		evacuation_controller = new using_map.evac_controller_type ()
+		evacuation_controller = new GLOB.using_map.evac_controller_type ()
 		evacuation_controller.set_up()
 
 /datum/controller/process/evac/doWork()

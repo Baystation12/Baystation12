@@ -22,14 +22,21 @@
 #define SLOT_TIE        0x4000
 #define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
 
+#define ACCESSORY_SLOT_UTILITY  "Utility"
+#define ACCESSORY_SLOT_ARMBAND  "Armband"
+#define ACCESSORY_SLOT_RANK     "Rank"
+#define ACCESSORY_SLOT_DECOR    "Decor"
+#define ACCESSORY_SLOT_MEDAL    "Medal"
+#define ACCESSORY_SLOT_INSIGNIA "Insignia"
+
 // Flags bitmasks.
-#define NOBLUDGEON         0x1    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
+#define NOBLUDGEON         0x1   // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
 #define CONDUCT            0x2   // Conducts electricity. (metal etc.)
 #define ON_BORDER          0x4   // Item has priority to check when entering or leaving.
 #define NOBLOODY           0x8   // Used for items if they don't want to get a blood overlay.
-#define OPENCONTAINER      0x10 // Is an open container for chemistry purposes.
-#define PHORONGUARD        0x20 // Does not get contaminated by phoron.
-#define	NOREACT            0x40 // Reagents don't react inside this container.
+#define OPENCONTAINER      0x10  // Is an open container for chemistry purposes.
+#define PHORONGUARD        0x20  // Does not get contaminated by phoron.
+#define	NOREACT            0x40  // Reagents don't react inside this container.
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
 
 //Flags for items (equipment)

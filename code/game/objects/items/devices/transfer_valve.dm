@@ -1,6 +1,8 @@
 /obj/item/device/transfer_valve
 	name = "tank transfer valve"
-	desc = "Regulates the transfer of air between two tanks."
+	desc = "A small, versatile valve with dual-headed heat-resistant pipes. This mechanism is the standard size for coupling with portable gas tanks."
+	description_info = "This machine is used to merge the contents of two different gas tanks. Plug the tanks into the transfer, then open the valve to mix them together. You can also attach various assembly devices to trigger this process."
+	description_antag = "With a tank of hot phoron and cold oxygen, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "valve_1"
 	var/obj/item/weapon/tank/tank_one
@@ -44,7 +46,7 @@
 
 		update_icon()
 
-		nanomanager.update_uis(src) // update all UIs attached to src
+		GLOB.nanomanager.update_uis(src) // update all UIs attached to src
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/device/assembly/A = item
@@ -61,11 +63,11 @@
 		A.holder = src
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
 
-		bombers += "[key_name(user)] attached a [item] to a transfer valve."
+		GLOB.bombers += "[key_name(user)] attached a [item] to a transfer valve."
 		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		attacher = user
-		nanomanager.update_uis(src) // update all UIs attached to src
+		GLOB.nanomanager.update_uis(src) // update all UIs attached to src
 	return
 
 
@@ -88,7 +90,7 @@
 	data["valveOpen"] = valve_open ? 1 : 0
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -215,7 +217,7 @@
 			last_touch_info = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[mob]'>?</A>)"
 
 		log_str += " Last touched by: [src.fingerprintslast][last_touch_info]"
-		bombers += log_str
+		GLOB.bombers += log_str
 		message_admins(log_str, 0, 1)
 		log_game(log_str)
 		merge_gases()

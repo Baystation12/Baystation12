@@ -36,7 +36,7 @@
 	path = /spell/aoe_turf/conjure/forcewall
 
 /datum/uplink_item/deity/feat/phenomena/conjuration/dimensional_locker
-	name = "Dimensional Locker"
+	name = "Phenomena: Dimensional Locker"
 	desc = "Gain the ability to move a magical locker around. While it cannot move living things, you can move it around as you please, even disappearing it into the nether."
 	item_cost = 50
 	path = /datum/phenomena/dimensional_locker
@@ -73,7 +73,7 @@
 	path = /spell/targeted/equip_item/shield
 
 /datum/uplink_item/deity/feat/phenomena/conjuration/portals
-	name = "Portals"
+	name = "Phenomena: Portals"
 	desc = "Gain the ability to create portals for your followers to enter through. You will need to create two for it work. Any created past that will delete the oldest portal."
 	item_cost = 75
 	required_feats = list(DEITY_LEVELED_CONJURATION = 2)
@@ -95,7 +95,7 @@
 	required_feats = list(DEITY_LEVELED_CONJURATION = 3)
 
 /datum/uplink_item/deity/feat/phenomena/conjuration/banishing_smite
-	name = "Banishing Smite"
+	name = "Phenomena: Banishing Smite"
 	desc = "Gain the ability to smite an individual, dealing damage to them. If they are weakened enough, this can cause them to temporarily be transported."
 	item_cost = 75
 	required_feats = list(DEITY_LEVELED_CONJURATION = 3)

@@ -14,8 +14,8 @@
 	var/obj/scanned_object
 	var/report_num = 0
 
-/obj/machinery/artifact_analyser/initialize()
-	..()
+/obj/machinery/artifact_analyser/Initialize()
+	. = ..()
 	reconnect_scanner()
 
 /obj/machinery/artifact_analyser/proc/reconnect_scanner()

@@ -19,12 +19,38 @@ Used In File(s): \code\game\machinery\computer\crew.dm
 {{:helper.link('Show Tracker Map', 'pin-s', {'showMap' : 1})}}
 <table class='wideTable'><tbody>
 	{{for data.crewmembers}}
-		{{if value.sensor_type == 1}}
-			<tr><td>{{:value.name}} ({{:value.assignment}})</td><td class='living'>{{:value.dead ? "<span class='bad'>Deceased</span>" : "<span class='good'>Living</span>"}}</td><td><span class="neutral">Not Available</span></td>{{if data.isAI}}<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>{{/if}}</tr>
-		{{else value.sensor_type == 2}}
-			<tr><td>{{:value.name}} ({{:value.assignment}})</td><td class='living'>{{:value.dead ? "<span class='bad'>Deceased</span>" : "<span class='good'>Living</span>"}} (<b><span class="oxyloss">{{:value.oxy}}</span>/<span class="toxin">{{:value.tox}}</span>/<span class="burn">{{:value.fire}}</span>/<span class="brute">{{:value.brute}}</span></b>)</td><td><span class="neutral">Not Available</td></td>{{if data.isAI}}<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>{{/if}}</tr>
-		{{else value.sensor_type == 3}}
-			<tr><td>{{:value.name}} ({{:value.assignment}})</td><td class='living'>{{:value.dead ? "<span class='bad'>Deceased</span>" : "<span class='good'>Living</span>"}} (<b><span class="oxyloss">{{:value.oxy}}</span>/<span class="toxin">{{:value.tox}}</span>/<span class="burn">{{:value.fire}}</span>/<span class="brute">{{:value.brute}}</span></b>)</td><td>{{:value.area}}({{:value.x}}, {{:value.y}}, {{:value.z}})</td>{{if data.isAI}}<td class='tracking'>{{:helper.link('Track', null, {'track' : value.ref})}}</td>{{/if}}</tr>
-		{{/if}}
+		<tr>
+			<td>{{:value.name}} ({{:value.assignment}}): </td>
+
+			{{if value.sensor_type == 1}}
+				
+				{{if value.pulse}}
+					<td><span class="neutral">Pulse detected</td>
+				{{else}}
+					<td><span class="bad">No pulse detected</td>
+				{{/if}}
+
+				{{if data.isAI}}
+					<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>
+				{{/if}}
+
+			{{else value.sensor_type == 2}}
+
+				<td><span class="white">Pulse</span> <span class='{{:value.span}}'>{{:value.pulse}}</span> bpm | <span class="white">BP</span> {{:value.pressure}} | <span class="white">Temp</span> {{:value.bodytemp}} C | <span class="white">Location</span> <span class="neutral">Not Available</td>
+	
+				{{if data.isAI}}
+					<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>
+				{{/if}}
+			
+			{{else value.sensor_type == 3}}
+
+				<td><span class="white">Pulse</span> <span class='{{:value.span}}'>{{:value.pulse}}</span> bpm | <span class="white">BP</span> {{:value.pressure}} | <span class="white">Temp</span> {{:value.bodytemp}} C | <span class="white">Location</span> {{:value.area}} ({{:value.x}}, {{:value.y}}, {{:value.z}})</td>
+
+				{{if data.isAI}}
+					<td class='tracking'>{{:helper.link('Track', null, {'track' : value.ref})}}</td>
+				{{/if}}
+				
+			{{/if}}
+		</tr>
 	{{/for}}
 </tbody></table>

@@ -26,7 +26,7 @@
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
 
 	rarity_value = 0.1
-	total_health = 75
+	total_health = 150
 	brute_mod = 1.5
 	burn_mod = 1.5
 
@@ -56,11 +56,11 @@
 	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && H.canmove && isturf(H.loc) && !H.pulledby) //won't move if being pulled
-		step(H, pick(cardinal))
+		step(H, pick(GLOB.cardinal))
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 
-	if(H.traumatic_shock && H.shock_stage < 40 && prob(3))
+	if(H.get_shock() && H.shock_stage < 40 && prob(3))
 		H.custom_emote("chimpers pitifully")
 
 	if(H.shock_stage > 10 && prob(3))

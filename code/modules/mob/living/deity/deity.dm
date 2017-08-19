@@ -9,6 +9,7 @@
 	pixel_y = -128
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
+	universal_understand = 1
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
@@ -16,6 +17,7 @@
 	var/obj/item/device/uplink/contained/mob_uplink
 	var/datum/god_form/form
 	var/datum/current_boon
+	var/mob/living/following
 
 /mob/living/deity/New()
 	..()
@@ -29,7 +31,7 @@
 	. = ..()
 	if(. && mob_uplink.uses < power_min && --power_tick == 0)
 		mob_uplink.uses += 1
-		nanomanager.update_uis(mob_uplink)
+		GLOB.nanomanager.update_uis(mob_uplink)
 		power_tick = initial(power_tick)
 
 /mob/living/deity/death()
@@ -55,25 +57,14 @@
 	minions.Cut()
 	eyeobj.release()
 	structures.Cut()
-	qdel_null(eyeobj)
-	qdel_null(form)
+	QDEL_NULL(eyeobj)
+	QDEL_NULL(form)
 	return ..()
 
-/mob/living/deity/verb/jump_to_follower()
+/mob/living/deity/verb/return_to_plane()
 	set category = "Godhood"
 
-	if(!minions)
-		return
-
-	var/list/could_follow = list()
-	for(var/m in minions)
-		var/datum/mind/mind = m
-		if(mind.current.stat != DEAD)
-			could_follow += mind.current
-
-	var/choice = input(src, "Jump to follower", "Teleport") as null|anything in could_follow
-	if(choice)
-		eyeobj.forceMove(get_turf(choice))
+	eyeobj.forceMove(get_turf(src))
 
 /mob/living/deity/verb/open_menu()
 	set name = "Open Menu"

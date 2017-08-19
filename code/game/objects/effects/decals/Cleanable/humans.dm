@@ -32,27 +32,30 @@ var/global/list/image/splatter_cache=list()
 	if(invisibility != 100)
 		invisibility = 100
 		amount = 0
-		processing_objects -= src
+		GLOB.processing_objects -= src
 	..(ignore=1)
 
+/obj/effect/decal/cleanable/blood/hide()
+	return
+
 /obj/effect/decal/cleanable/blood/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	return ..()
 
-/obj/effect/decal/cleanable/blood/New()
-	..()
+/obj/effect/decal/cleanable/blood/Initialize()
+	. = ..()
 	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
 	if(src.type == /obj/effect/decal/cleanable/blood)
-		if(src.loc && isturf(src.loc))
+		if(isturf(src.loc))
 			for(var/obj/effect/decal/cleanable/blood/B in src.loc)
 				if(B != src)
 					if (B.blood_DNA)
 						blood_DNA |= B.blood_DNA.Copy()
 					qdel(B)
 	drytime = world.time + DRYING_TIME * (amount+1)
-	processing_objects += src
+	GLOB.processing_objects += src
 
 /obj/effect/decal/cleanable/blood/process()
 	if(world.time > drytime)
@@ -114,7 +117,7 @@ var/global/list/image/splatter_cache=list()
 	desc = drydesc
 	color = adjust_brightness(color, -50)
 	amount = 0
-	processing_objects -= src
+	GLOB.processing_objects -= src
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
@@ -242,5 +245,6 @@ var/global/list/image/splatter_cache=list()
 	var/dry=0 // Keeps the lag down
 
 /obj/effect/decal/cleanable/mucus/New()
+	..()
 	spawn(DRYING_TIME * 2)
 		dry=1

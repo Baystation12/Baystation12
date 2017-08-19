@@ -25,8 +25,8 @@
 
 		for(var/event_turf in event_turfs)
 			events_by_turf[event_turf] = overmap_event
-			entered_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_entered)
-			exited_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_exited)
+			GLOB.entered_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_entered)
+			GLOB.exited_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_exited)
 
 			var/obj/effect/overmap_event/event = new(event_turf)
 			event.name = overmap_event.name
@@ -121,7 +121,7 @@
 	var/list/victims
 
 /datum/overmap_event/proc/enter(var/obj/effect/overmap/ship/victim)
-	if(!event_manager)
+	if(!GLOB.event_manager)
 		log_error("Event manager not setup.")
 		return
 	if(victim in victims)

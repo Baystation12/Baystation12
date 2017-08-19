@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
+	clicksound = "switch"
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -48,7 +49,7 @@
 	var/target_load = 0
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
-	var/obj/machinery/power/terminal/terminal = null
+	var/list/terminals = list()
 	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
 
 /obj/machinery/power/smes/drain_power(var/drain_check, var/surge, var/amount = 0)
@@ -63,32 +64,22 @@
 
 /obj/machinery/power/smes/New()
 	..()
-	spawn(5)
-		if(!powernet)
-			connect_to_network()
+	if(!should_be_mapped)
+		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
 
-		dir_loop:
-			for(var/d in cardinal)
-				var/turf/T = get_step(src, d)
-				for(var/obj/machinery/power/terminal/term in T)
-					if(term && term.dir == turn(d, 180))
-						terminal = term
-						break dir_loop
-		if(!terminal)
-			stat |= BROKEN
-			return
-		terminal.master = src
-		if(!terminal.powernet)
-			terminal.connect_to_network()
-		update_icon()
-
-
-
-
-		if(!should_be_mapped)
-			warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
-
-	return
+/obj/machinery/power/smes/Initialize()
+	. = ..()
+	for(var/d in GLOB.cardinal)
+		var/turf/T = get_step(src, d)
+		for(var/obj/machinery/power/terminal/term in T)
+			if(term && term.dir == turn(d, 180) && !term.master)
+				terminals |= term
+				term.master = src
+				term.connect_to_network()
+	if(!terminals.len)
+		stat |= BROKEN
+		return
+	update_icon()
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))
@@ -97,12 +88,9 @@
 	return 0
 
 
-/obj/machinery/power/smes/disconnect_terminal()
-	if(terminal)
-		terminal.master = null
-		terminal = null
-		return 1
-	return 0
+/obj/machinery/power/smes/disconnect_terminal(var/obj/machinery/power/terminal/term)
+	terminals -= term
+	term.master = null
 
 /obj/machinery/power/smes/update_icon()
 	overlays.Cut()
@@ -132,18 +120,19 @@
 	return round(5.5*charge/(capacity ? capacity : 5e6))
 
 /obj/machinery/power/smes/proc/input_power(var/percentage)
-	var/inputted_power = target_load * (percentage/100)
-	inputted_power = between(0, inputted_power, target_load)
-	if(terminal && terminal.powernet)
-		inputted_power = terminal.powernet.draw_power(inputted_power)
-		add_charge(inputted_power)
-		input_available = inputted_power //for reporting to the UI
-		if(percentage == 100)
-			inputting = 2
-		else if(percentage)
-			inputting = 1
-		// else inputting = 0, as set in process()
+	var/to_input = target_load * (percentage/100)
+	to_input = between(0, to_input, target_load)
+	input_available = 0
+	if(percentage == 100)
+		inputting = 2
+	else if(percentage)
+		inputting = 1
+	// else inputting = 0, as set in process()
 
+	for(var/obj/machinery/power/terminal/term in terminals)
+		var/inputted = term.powernet.draw_power(to_input)
+		add_charge(inputted)
+		input_available += inputted
 
 // Mostly in place due to child types that may store power in other way (PSUs)
 /obj/machinery/power/smes/proc/add_charge(var/amount)
@@ -171,10 +160,14 @@
 	//inputting
 	if(input_attempt && (!input_pulsed && !input_cut))
 		target_load = min((capacity-charge)/CELLRATE, input_level)	// Amount we will request from the powernet.
-		if(terminal && terminal.powernet)
-			terminal.powernet.smes_demand += target_load
-			terminal.powernet.inputting.Add(src)
-		else
+		var/input_available = FALSE
+		for(var/obj/machinery/power/terminal/term in terminals)
+			if(!term.powernet)
+				continue
+			input_available = TRUE
+			term.powernet.smes_demand += target_load
+			term.powernet.inputting.Add(src)
+		if(!input_available)
 			target_load = 0 // We won't input any power without powernet connection.
 		inputting = 0
 
@@ -238,19 +231,37 @@
 		if(!tempLoc.is_plating())
 			to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
 			return 1
+	if(check_terminal_exists(tempLoc, user, tempDir))
+		return 1
 	to_chat(user, "<span class='notice'>You start adding cable to the [src].</span>")
 	if(do_after(user, 50, src))
-		terminal = new /obj/machinery/power/terminal(tempLoc)
-		terminal.set_dir(tempDir)
-		terminal.master = src
+		if(check_terminal_exists(tempLoc, user, tempDir))
+			return 1
+		var/obj/machinery/power/terminal/term = new/obj/machinery/power/terminal(tempLoc)
+		term.set_dir(tempDir)
+		term.master = src
+		term.connect_to_network()
+		terminals |= term
 		return 0
 	return 1
 
 
-/obj/machinery/power/smes/draw_power(var/amount)
-	if(terminal && terminal.powernet)
-		return terminal.powernet.draw_power(amount)
+/obj/machinery/power/smes/proc/check_terminal_exists(var/turf/location, var/mob/user, var/direction)
+	for(var/obj/machinery/power/terminal/term in location)
+		if(term.dir == direction)
+			to_chat(user, "<span class='notice'>There is already a terminal here.</span>")
+			return 1
 	return 0
+
+/obj/machinery/power/smes/draw_power(var/amount)
+	var/drained = 0
+	for(var/obj/machinery/power/terminal/term in terminals)
+		if(!term.powernet)
+			continue
+		if((amount - drained) <= 0)
+			return 0
+		drained += term.powernet.draw_power(amount - drained)
+	return drained
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)
@@ -271,7 +282,7 @@
 		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
 		return 0
 
-	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
+	if(istype(W, /obj/item/stack/cable_coil) && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
 		if (CC.get_amount() < 10)
@@ -286,7 +297,6 @@
 		user.visible_message(\
 				"<span class='notice'>[user.name] has added cables to the [src].</span>",\
 				"<span class='notice'>You added cables to the [src].</span>")
-		terminal.connect_to_network()
 		stat = 0
 		return 0
 
@@ -302,9 +312,17 @@
 			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
 		return 0
-	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+	else if(istype(W, /obj/item/weapon/wirecutters) && !building_terminal)
 		building_terminal = 1
-		var/turf/tempTDir = terminal.loc
+		var/obj/machinery/power/terminal/term
+		for(var/obj/machinery/power/terminal/T in get_turf(user))
+			if(T.master == src)
+				term = T
+				break
+		if(!term)
+			to_chat(user, "<span class='warning'>There is no terminal on this tile.</span>")
+			return 0
+		var/turf/tempTDir = get_turf(term)
 		if (istype(tempTDir))
 			if(!tempTDir.is_plating())
 				to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
@@ -312,18 +330,18 @@
 				to_chat(user, "<span class='notice'>You begin to cut the cables...</span>")
 				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 				if(do_after(user, 50, src))
-					if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
+					if (prob(50) && electrocute_mob(usr, term.powernet, term))
 						var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 						s.set_up(5, 1, src)
 						s.start()
-						building_terminal = 0
 						if(usr.stunned)
 							return 0
 					new /obj/item/stack/cable_coil(loc,10)
 					user.visible_message(\
 						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
-					qdel(terminal)
+					terminals -= term
+					qdel(term)
 		building_terminal = 0
 		return 0
 	return 1
@@ -353,7 +371,7 @@
 
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

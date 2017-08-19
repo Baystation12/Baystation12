@@ -2,10 +2,6 @@
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
 		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/aquila_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/aquila_hangar/start = 0,
-		/area/calypso_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/calypso_hangar/start = 0,
 		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
 		/area/constructionsite/atmospherics = NO_SCRUBBER,
@@ -17,8 +13,6 @@
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
 		/area/engineering/engine_smes = NO_SCRUBBER|NO_VENT,
 		/area/engineering/fuelbay = NO_SCRUBBER,
-		/area/guppy_hangar = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/guppy_hangar/start = 0,
 		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,
 		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER|NO_VENT,
@@ -41,9 +35,7 @@
 		/area/shield = NO_SCRUBBER|NO_VENT,
 		/area/shuttle = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/merchant = NO_SCRUBBER|NO_APC,
-		/area/shuttle/merchant/away = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/petrov = 0,
-		/area/shuttle/petrov/away = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/skipjack_station = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/solar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -62,14 +54,14 @@
 		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
 		/area/turret_protected/ai_outer_chamber = NO_SCRUBBER|NO_VENT,
 		/area/vacant = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/vacant/briefing = 0,
 		/area/vacant/brig = NO_SCRUBBER|NO_VENT,
 		/area/vacant/cannon = NO_SCRUBBER|NO_VENT,
 		/area/vacant/cargo = NO_SCRUBBER|NO_VENT,
 		/area/vacant/infirmary = NO_SCRUBBER|NO_VENT,
 		/area/vacant/missile = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
-		/area/vacant/office = 0
+		/area/vacant/office = 0,
+		/area/rnd/blanks = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -103,3 +95,23 @@
 		/area/turbolift/thirddeck,
 		/area/turbolift/fourthdeck
 	)
+
+/datum/unit_test/zas_area_test/ai_chamber
+	name = "ZAS: AI Chamber"
+	area_path = /area/turret_protected/ai
+
+/datum/unit_test/zas_area_test/cargo_bay
+	name = "ZAS: Cargo Bay"
+	area_path = /area/quartermaster/storage
+
+datum/unit_test/zas_area_test/supply_centcomm
+	name = "ZAS: Supply Shuttle (CentComm)"
+	area_path = /area/supply/dock
+
+datum/unit_test/zas_area_test/virology
+	name = "ZAS: Virology"
+	area_path = /area/medical/virology
+
+datum/unit_test/zas_area_test/xenobio
+	name = "ZAS: Xenobiology"
+	area_path = /area/rnd/xenobiology

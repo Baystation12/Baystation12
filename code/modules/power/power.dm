@@ -15,15 +15,13 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
-/obj/machinery/power/initialize()
-	..()
+/obj/machinery/power/Initialize()
+	. = ..()
 	connect_to_network()
 
 /obj/machinery/power/Destroy()
 	disconnect_from_network()
-	disconnect_terminal()
-
-	..()
+	. = ..()
 
 ///////////////////////////////
 // General procedures
@@ -67,7 +65,7 @@
 	else
 		return 0
 
-/obj/machinery/power/proc/disconnect_terminal() // machines without a terminal will just return, no harm no fowl.
+/obj/machinery/power/proc/disconnect_terminal(var/obj/machinery/power/terminal/term) // machines without a terminal will just return, no harm no fowl.
 	return
 
 // returns true if the area has power on given channel (or doesn't require power), defaults to power_channel.
@@ -168,7 +166,7 @@
 	var/cdir
 	var/turf/T
 
-	for(var/card in cardinal)
+	for(var/card in GLOB.cardinal)
 		T = get_step(loc,card)
 		cdir = get_dir(T,loc)
 
@@ -187,7 +185,7 @@
 	var/cdir
 	var/turf/T
 
-	for(var/card in cardinal)
+	for(var/card in GLOB.cardinal)
 		T = get_step(loc,card)
 		cdir = get_dir(T,loc)
 
@@ -216,7 +214,7 @@
 /proc/power_list(var/turf/T, var/source, var/d, var/unmarked=0, var/cable_only = 0)
 	. = list()
 
-	var/reverse = d ? reverse_dir[d] : 0
+	var/reverse = d ? GLOB.reverse_dir[d] : 0
 	for(var/AM in T)
 		if(AM == source)	continue			//we don't want to return source
 
@@ -241,9 +239,9 @@
 
 // rebuild all power networks from scratch - only called at world creation or by the admin verb
 /proc/makepowernets()
-	for(var/datum/powernet/PN in powernets)
+	for(var/datum/powernet/PN in GLOB.powernets)
 		qdel(PN)
-	powernets.Cut()
+	GLOB.powernets.Cut()
 
 	for(var/obj/structure/cable/PC in cable_list)
 		if(!PC.powernet)

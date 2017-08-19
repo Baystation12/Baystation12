@@ -158,7 +158,7 @@
 	walk(src,0)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
-	..(null,"suddenly breaks apart.")
+	..(null,"suddenly breaks apart.", "You have been destroyed.")
 	qdel(src)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()

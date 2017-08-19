@@ -210,13 +210,11 @@ var/global/list/light_type_cache = list()
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
-	if(s)
-		qdel(s)
-		s = null
+	QDEL_NULL(s)
 	if(A)
 		on = 0
 //		A.update_lights()
-	..()
+	. = ..()
 
 /obj/machinery/light/update_icon()
 
@@ -564,7 +562,7 @@ var/global/list/light_type_cache = list()
 	spawn(0)
 		broken()	// break it first to give a warning
 		sleep(2)
-		explosion(T, 0, 0, 2, 2)
+		explosion(T, 0, 0, 3, 5)
 		sleep(1)
 		qdel(src)
 

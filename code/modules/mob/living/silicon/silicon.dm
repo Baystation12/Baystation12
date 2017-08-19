@@ -30,17 +30,23 @@
 	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/New()
-	silicon_mob_list |= src
+	GLOB.silicon_mob_list |= src
 	..()
 	add_language(LANGUAGE_GALCOM)
 	init_id()
 	init_subsystems()
 
 /mob/living/silicon/Destroy()
-	silicon_mob_list -= src
+	GLOB.silicon_mob_list -= src
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister_alarm(src)
 	return ..()
+
+/mob/living/silicon/fully_replace_character_name(new_name)
+	..()
+	if(istype(idcard))
+		idcard.registered_name = new_name
+		idcard.update_name()
 
 /mob/living/silicon/proc/init_id()
 	if(ispath(idcard))
@@ -147,8 +153,8 @@
 /mob/living/silicon/proc/show_station_manifest()
 	var/dat
 	dat += "<h4>Crew Manifest</h4>"
-	if(data_core)
-		dat += data_core.get_manifest(1) // make it monochrome
+	if(GLOB.data_core)
+		dat += GLOB.data_core.get_manifest(1) // make it monochrome
 	dat += "<br>"
 	src << browse(dat, "window=airoster")
 	onclose(src, "airoster")
@@ -347,7 +353,7 @@
 	var/job = mind.assigned_role
 
 	job_master.FreeRole(job)
-	data_core.ResetPDAManifest()
+	GLOB.data_core.ResetPDAManifest()
 
 	if(mind.objectives.len)
 		qdel(mind.objectives)

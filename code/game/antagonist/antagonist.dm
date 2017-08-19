@@ -91,10 +91,10 @@
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs |= protected_jobs
 	if(antaghud_indicator)
-		if(!hud_icon_reference)
-			hud_icon_reference = list()
-		if(role_text) hud_icon_reference[role_text] = antaghud_indicator
-		if(faction_role_text) hud_icon_reference[faction_role_text] = antaghud_indicator
+		if(!GLOB.hud_icon_reference)
+			GLOB.hud_icon_reference = list()
+		if(role_text) GLOB.hud_icon_reference[role_text] = antaghud_indicator
+		if(faction_role_text) GLOB.hud_icon_reference[faction_role_text] = antaghud_indicator
 
 /datum/antagonist/proc/tick()
 	return 1
@@ -119,7 +119,24 @@
 		else if(player_is_antag(player))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are already an antagonist!")
 		else
-			candidates += player
+			candidates |= player
+
+	return candidates
+
+// Builds a list of potential antags without actually setting them. Used to test mode viability.
+/datum/antagonist/proc/get_potential_candidates(var/datum/game_mode/mode, var/ghosts_only)
+	var/candidates = list()
+
+	// Keeping broken up for readability
+	for(var/datum/mind/player in mode.get_players_for_role(role_type, id))
+		if(ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
+		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
+		else if(player.special_role)
+		else if (player in pending_antagonists)
+		else if(!can_become_antag(player))
+		else if(player_is_antag(player))
+		else
+			candidates |= player
 
 	return candidates
 

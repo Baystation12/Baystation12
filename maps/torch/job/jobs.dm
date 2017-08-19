@@ -1,4 +1,10 @@
 /datum/map/torch
+	species_to_job_whitelist = list(
+		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
+		/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef),
+		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
+	)
+
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
@@ -10,9 +16,23 @@
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
-						/datum/job/merchant
+						/datum/job/merchant, /datum/job/stowaway
 						)
 
+
+/datum/map/torch/setup_map()
+	..()
+	for(var/job_type in GLOB.using_map.allowed_jobs)
+		var/datum/job/job = decls_repository.get_decl(job_type)
+		// Most species are restricted from SCG security and command roles
+		if((job.department_flag & (SEC|COM)) && job.allowed_branches.len && !(/datum/mil_branch/civilian in job.allowed_branches))
+			for(var/species_name in list(SPECIES_IPC, SPECIES_TAJARA, SPECIES_SKRELL, SPECIES_UNATHI))
+				var/datum/species/S = all_species[species_name]
+				var/species_blacklist = species_to_job_blacklist[S.type]
+				if(!species_blacklist)
+					species_blacklist = list()
+					species_to_job_blacklist[S.type] = species_blacklist
+				species_blacklist |= job.type
 
 /datum/job/captain
 	title = "Commanding Officer"
@@ -206,7 +226,6 @@
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
-	announced = 1
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -227,7 +246,6 @@
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 	minimal_access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
-	announced = 1
 
 
 /datum/job/sea
@@ -457,7 +475,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet,
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/marine
 	)
 	allowed_ranks = list(
@@ -502,10 +520,10 @@
 		/datum/mil_rank/marine/e5
 	)
 
-	access = list(access_security, access_forensics_lockers,
+	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
 			            access_sec_doors, access_solgov_crew)
-	minimal_access = list(access_security, access_forensics_lockers,
+	minimal_access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
 			            access_sec_doors, access_solgov_crew)
 
@@ -622,13 +640,16 @@
 		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
 		"Mortician" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus,
 		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
-		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon)
+		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
+		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew)
-	minimal_access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew)
+	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
+		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
+	minimal_access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
+		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
 
 
 /datum/job/chemist
@@ -793,7 +814,9 @@
 	spawn_positions = 1
 	supervisors = "the Executive Officer"
 	alt_titles = list(
-		"Chef")
+		"Chef",
+		"Culinary Specialist"
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/cook
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
@@ -1045,8 +1068,8 @@
 	department = "Civilian"
 	department_flag = CIV
 	faction = "Station"
-	total_positions = 0 //to be opened by admins when desired AT ROUNDSTART ONLY
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"
 	ideal_character_age = 30
@@ -1055,8 +1078,26 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/merchant
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
-
-
+	latejoin_at_spawnpoints = 1
 	access = list(access_merchant)
 	minimal_access = list(access_merchant)
+	announced = FALSE
 
+/datum/job/stowaway
+	title = "Stowaway"
+	department = "Civilian"
+	department_flag = CIV
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "yourself"
+	selection_color = "#515151"
+	ideal_character_age = 30
+	minimal_player_age = 7
+	create_record = 0
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/job/torch/stowaway
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	latejoin_at_spawnpoints = 1
+	announced = FALSE

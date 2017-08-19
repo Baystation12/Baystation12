@@ -38,7 +38,7 @@ var/list/weighted_mundaneevent_locations = list()
 /datum/trade_destination/anansi/get_custom_eventstring(var/event_type)
 	if(event_type == RESEARCH_BREAKTHROUGH)
 		return "Thanks to research conducted on the NSS Anansi, Second Red Cross Society wishes to announce a major breakthough in the field of \
-		[pick("mind-machine interfacing","neuroscience","nano-augmentation","genetics")]. [using_map.company_name] is expected to announce a co-exploitation deal within the fortnight."
+		[pick("mind-machine interfacing","neuroscience","nano-augmentation","genetics")]. [GLOB.using_map.company_name] is expected to announce a co-exploitation deal within the fortnight."
 	return null
 
 /datum/trade_destination/icarus
@@ -61,7 +61,7 @@ var/list/weighted_mundaneevent_locations = list()
 /datum/trade_destination/redolant/get_custom_eventstring(var/event_type)
 	if(event_type == RESEARCH_BREAKTHROUGH)
 		return "Thanks to research conducted on the OAV Redolant, Osiris Atmospherics wishes to announce a major breakthough in the field of \
-		[pick("phoron research","high energy flux capacitance","super-compressed materials","theoretical particle physics")]. [using_map.company_name] is expected to announce a co-exploitation deal within the fortnight."
+		[pick("phoron research","high energy flux capacitance","super-compressed materials","theoretical particle physics")]. [GLOB.using_map.company_name] is expected to announce a co-exploitation deal within the fortnight."
 	return null
 
 /datum/trade_destination/beltway

@@ -33,8 +33,8 @@
 	if(sensitivity)
 		extended_desc += "<br>This ensor will only trigger if movement is confirmed twice within [sensitivity] second\s (but not necessarily from the same source)"
 
-/obj/item/integrated_circuit/sensor/proximity/initialize()
-	..()
+/obj/item/integrated_circuit/sensor/proximity/Initialize()
+	. = ..()
 
 	var/datum/integrated_io/range = inputs[2]
 	if(islist(proximity_trigger))
@@ -54,8 +54,8 @@
 	if(activated_pin != activators[1])
 		return
 
-	var/active = set_pin_data(IC_INPUT, 1)
-	var/range = set_pin_data(IC_INPUT, 2)
+	var/active = get_pin_data(IC_INPUT, 1)
+	var/range = get_pin_data(IC_INPUT, 2)
 
 	var/do_activate = isnum(active) && active
 	var/turn_on = !proximity_trigger.is_active() && do_activate
@@ -109,8 +109,8 @@
 	var/list/seen_turfs
 	var/list/beams
 
-/obj/item/integrated_circuit/sensor/proximity/ir/initialize()
-	..()
+/obj/item/integrated_circuit/sensor/proximity/ir/Initialize()
+	. = ..()
 	seen_turfs = list()
 	beams = list()
 
@@ -163,12 +163,12 @@
 		return
 	on = !on
 	if(on)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 		var/turf/T = get_turf(src)
 		if(T)
 			last_location = list(T.x, T.y, T.z)
 	else
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 
 /obj/item/integrated_circuit/accelerometer/process()
 	var/turf/T = get_turf(src)

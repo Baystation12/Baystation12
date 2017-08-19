@@ -1,5 +1,5 @@
 /hook/startup/proc/createDatacore()
-	data_core = new /datum/datacore()
+	GLOB.data_core = new /datum/datacore()
 	return 1
 
 /datum/data/record
@@ -46,13 +46,13 @@
 	"}
 	var/even = 0
 	// sort mobs
-	for(var/datum/data/record/t in data_core.general)
+	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
 		var/real_rank = make_list_rank(t.fields["real_rank"])
 		mil_ranks[name] = ""
 
-		if(using_map.flags & MAP_HAS_RANK)
+		if(GLOB.using_map.flags & MAP_HAS_RANK)
 			var/datum/mil_branch/branch_obj = mil_branches.get_branch(t.fields["mil_branch"])
 			var/datum/mil_rank/rank_obj = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 
@@ -61,7 +61,7 @@
 
 		if(OOC)
 			var/active = 0
-			for(var/mob/M in player_list)
+			for(var/mob/M in GLOB.player_list)
 				if(M.real_name == name && M.client && M.client.inactivity <= 10 * 60 * 10)
 					active = 1
 					break
@@ -105,10 +105,10 @@
 			misc[name] = rank
 
 	// Synthetics don't have actual records, so we will pull them from here.
-	for(var/mob/living/silicon/ai/ai in mob_list)
+	for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
 		bot[ai.name] = "Artificial Intelligence"
 
-	for(var/mob/living/silicon/robot/robot in mob_list)
+	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
 		// No combat/syndicate cyborgs, no drones.
 		if(robot.module && robot.module.hide_on_manifest)
 			continue
@@ -187,7 +187,7 @@
 
 /datum/datacore/proc/manifest()
 	spawn()
-		for(var/mob/living/carbon/human/H in player_list)
+		for(var/mob/living/carbon/human/H in GLOB.player_list)
 			manifest_inject(H)
 		return
 
@@ -196,7 +196,7 @@
 	var/datum/data/record/foundrecord
 	var/real_title = assignment
 
-	for(var/datum/data/record/t in data_core.general)
+	for(var/datum/data/record/t in GLOB.data_core.general)
 		if (t)
 			if(t.fields["name"] == name)
 				foundrecord = t
@@ -223,11 +223,7 @@
 		var/datum/data/record/G = CreateGeneralRecord(H, id)
 
 		//Medical Record
-		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
-		M.fields["b_type"]		= H.b_type
-		M.fields["b_dna"]		= H.dna.unique_enzymes
-		if(H.med_record && !jobban_isbanned(H, "Records"))
-			M.fields["notes"] = H.med_record
+		CreateMedicalRecord(H, id)
 
 		//Security Record
 		var/datum/data/record/S = CreateSecurityRecord(H.real_name, id)
@@ -308,29 +304,35 @@
 	R.fields["ma_crim_d"]	= "No major crime convictions."
 	R.fields["notes"]		= "No notes."
 	R.fields["notes"] = "No notes."
-	data_core.security += R
+	GLOB.data_core.security += R
 
 	return R
 
-/datum/datacore/proc/CreateMedicalRecord(var/name, var/id)
+/datum/datacore/proc/CreateMedicalRecord(var/mob/living/carbon/human/H, var/id)
 	ResetPDAManifest()
 	var/datum/data/record/M = new()
 	M.name = "Medical Record #[id]"
 	M.fields["id"]			= id
-	M.fields["name"]		= name
-	M.fields["b_type"]		= "AB+"
-	M.fields["b_dna"]		= md5(name)
-	M.fields["id_gender"]	= "Unknown"
-	M.fields["mi_dis"]		= "None"
-	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
-	M.fields["ma_dis"]		= "None"
-	M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
-	M.fields["alg"]			= "None"
-	M.fields["alg_d"]		= "No allergies have been detected in this patient."
-	M.fields["cdi"]			= "None"
-	M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
+	M.fields["name"]		= H.real_name
+	M.fields["species"]		= H.species.name
+	M.fields["b_type"]		= H.b_type
+	M.fields["b_dna"]		= H.dna.unique_enzymes
+	M.fields["id_gender"]	= H.gender
+
+	var/obj/item/organ/list/robo_organs = list()
+	for(var/obj/item/organ/external/O in H.organs)
+		if(O.robotic >= ORGAN_ROBOT)
+			robo_organs[O.organ_tag] = O.name
+	for(var/obj/item/organ/internal/O in H.internal_organs)
+		if(O.robotic >= ORGAN_ROBOT)
+			robo_organs[O.organ_tag] = O.name
+
+	M.fields["prosthetics"]	= robo_organs
 	M.fields["notes"] = "No notes found."
-	data_core.medical += M
+	if(H.med_record && !jobban_isbanned(H, "Records"))
+		M.fields["notes"] = H.med_record
+
+	GLOB.data_core.medical += M
 
 	return M
 
@@ -339,13 +341,13 @@
 		PDA_Manifest.Cut()
 
 /proc/find_general_record(field, value)
-	return find_record(field, value, data_core.general)
+	return find_record(field, value, GLOB.data_core.general)
 
 /proc/find_medical_record(field, value)
-	return find_record(field, value, data_core.medical)
+	return find_record(field, value, GLOB.data_core.medical)
 
 /proc/find_security_record(field, value)
-	return find_record(field, value, data_core.security)
+	return find_record(field, value, GLOB.data_core.security)
 
 /proc/find_record(field, value, list/L)
 	for(var/datum/data/record/R in L)

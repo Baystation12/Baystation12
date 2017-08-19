@@ -37,7 +37,7 @@
 		return 0
 
 	var/area/area = get_area(src)
-	if(direction == UP && area.has_gravity)
+	if(direction == UP && area.has_gravity() && !can_overcome_gravity())
 		to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
 		return 0
 
@@ -47,6 +47,12 @@
 			return 0
 	Move(destination)
 	return 1
+
+/mob/proc/can_overcome_gravity()
+	return FALSE
+
+/mob/living/carbon/human/can_overcome_gravity()
+	return species && species.can_overcome_gravity(src)
 
 /mob/observer/zMove(direction)
 	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
@@ -151,19 +157,28 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
 		return FALSE
 
+/mob/living/carbon/human/can_fall()
+	if(..())
+		return species.can_fall(src)
+
 /atom/movable/proc/handle_fall(var/turf/landing)
 	Move(landing)
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
+	else
+		handle_fall_effect(landing)
 
+/atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing, /turf/simulated/open))
 		visible_message("\The [src] falls from the deck above through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] falls from the deck above and slams into \the [landing]!", "You hear something slam into the deck.")
 
-/mob/living/carbon/human/handle_fall(var/turf/landing)
-	if(..())
+/mob/living/carbon/human/handle_fall_effect(var/turf/landing)
+	if(species && species.handle_fall_special(src, landing))
 		return
+
+	..()
 	var/damage = 10
 	apply_damage(rand(0, damage), BRUTE, BP_HEAD)
 	apply_damage(rand(0, damage), BRUTE, BP_CHEST)

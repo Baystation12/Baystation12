@@ -15,7 +15,7 @@ var/list/floor_decals = list()
 	if(newcolour) color = newcolour
 	..(newloc)
 
-/obj/effect/floor_decal/initialize()
+/obj/effect/floor_decal/Initialize()
 	if(supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
@@ -33,18 +33,18 @@ var/list/floor_decals = list()
 		if(!T.decals) T.decals = list()
 		T.decals |= floor_decals[cache_key]
 		T.overlays |= floor_decals[cache_key]
-	qdel(src)
-	return
+	initialized = TRUE
+	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/reset
 	name = "reset marker"
 
-/obj/effect/floor_decal/reset/initialize()
+/obj/effect/floor_decal/reset/Initialize()
 	var/turf/T = get_turf(src)
 	T.remove_decals()
 	T.update_icon()
-	qdel(src)
-	return
+	initialized = TRUE
+	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"

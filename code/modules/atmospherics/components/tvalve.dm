@@ -186,7 +186,8 @@
 
 	return
 
-/obj/machinery/atmospherics/tvalve/initialize()
+/obj/machinery/atmospherics/tvalve/atmos_init()
+	..()
 	var/node1_dir
 	var/node2_dir
 	var/node3_dir
@@ -314,8 +315,8 @@
 
 
 
-/obj/machinery/atmospherics/tvalve/digital/initialize()
-	..()
+/obj/machinery/atmospherics/tvalve/digital/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 
@@ -378,7 +379,8 @@
 		if(WEST)
 			initialize_directions = EAST|WEST|SOUTH
 
-/obj/machinery/atmospherics/tvalve/mirrored/initialize()
+/obj/machinery/atmospherics/tvalve/mirrored/atmos_init()
+	..()
 	var/node1_dir
 	var/node2_dir
 	var/node3_dir
@@ -446,8 +448,8 @@
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/tvalve/mirrored/digital/initialize()
-	..()
+/obj/machinery/atmospherics/tvalve/mirrored/digital/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 

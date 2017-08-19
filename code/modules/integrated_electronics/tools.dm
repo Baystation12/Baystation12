@@ -103,7 +103,7 @@
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in available_types
-	if(!type_to_use || !CanInteract(user, physical_state))
+	if(!type_to_use || !CanInteract(user, GLOB.physical_state))
 		return
 
 	var/new_data = null
@@ -111,13 +111,13 @@
 		if("string")
 			accepting_refs = 0
 			new_data = sanitize(input("Now type in a string.","[src] string writing") as null|text, trim = 0)
-			if(istext(new_data) && CanInteract(user, physical_state))
+			if(istext(new_data) && CanInteract(user, GLOB.physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
 		if("number")
 			accepting_refs = 0
 			new_data = input("Now type in a number.","[src] number writing") as null|num
-			if(isnum(new_data) && CanInteract(user, physical_state))
+			if(isnum(new_data) && CanInteract(user, GLOB.physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to [new_data].</span>")
 		if("ref")
@@ -168,6 +168,7 @@
 			to_chat(user, last_scan)
 		else
 			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
+
 /obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
 	if(!istype(assembly))
 		return ..()
@@ -188,6 +189,7 @@
 		last_scan += "*No Components Found*"
 	last_scan = jointext(last_scan,"\n")
 	to_chat(user, last_scan)
+
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
@@ -198,8 +200,8 @@
 	storage_ui = /datum/storage_ui/tgui
 	allow_quick_empty = FALSE
 
-/obj/item/weapon/storage/bag/circuits/basic/New()
-	..()
+/obj/item/weapon/storage/bag/circuits/basic/Initialize()
+	. = ..()
 	var/list/types_to_spawn = typesof(/obj/item/integrated_circuit/arithmetic,
 		/obj/item/integrated_circuit/logic,
 		/obj/item/integrated_circuit/memory,
@@ -241,8 +243,8 @@
 	new /obj/item/weapon/screwdriver(src)
 	make_exact_fit()
 
-/obj/item/weapon/storage/bag/circuits/debug/New()
-	..()
+/obj/item/weapon/storage/bag/circuits/debug/Initialize()
+	. = ..()
 	name = "[name] - not intended for general use"
 	desc = "[desc] - not intended for general use"
 	for(var/subtype in subtypesof(/obj/item/integrated_circuit))

@@ -24,7 +24,7 @@
 	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
 
 /proc/log_admin(text)
-	admin_log.Add(text)
+	GLOB.admin_log.Add(text)
 	if (config.log_admin)
 		game_log("ADMIN", text)
 
@@ -42,7 +42,7 @@
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in admins)
+	for(var/client/C in GLOB.admins)
 		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
 			to_chat(C, "[prefix]: [text]")
 
@@ -123,7 +123,7 @@
 	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
 //more or less a logging utility
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1, var/datum/ticket/ticket = null)
 	var/mob/M
 	var/client/C
 	var/key
@@ -153,7 +153,7 @@
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C]'>"
+			. += "<a href='?priv_msg=\ref[C];ticket=\ref[ticket]'>"
 
 		. += key
 
@@ -202,6 +202,11 @@
 /proc/log_info_line(var/datum/d)
 	if(!d)
 		return "*null*"
+	if(islist(d))
+		var/list/L = list()
+		for(var/e in d)
+			L += log_info_line(e)
+		return "\[[jointext(L, ", ")]\]" // We format the string ourselves, rather than use json_encode(), because it becomes difficult to read recursively escaped "
 	if(!istype(d))
 		return json_encode(d)
 	return d.get_log_info_line()

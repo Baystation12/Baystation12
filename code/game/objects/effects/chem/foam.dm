@@ -24,12 +24,12 @@
 		process()
 		checkReagents()
 	spawn(120)
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 		sleep(30)
 		if(metal)
 			var/obj/structure/foamedmetal/M = new(src.loc)
 			M.metal = metal
-			M.updateicon()
+			M.update_icon()
 		flick("[icon_state]-disolve", src)
 		sleep(5)
 		qdel(src)
@@ -46,7 +46,7 @@
 	if(--amount < 0)
 		return
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		if(!T)
 			continue
@@ -141,7 +141,7 @@
 	update_nearby_tiles(1)
 	..()
 
-/obj/structure/foamedmetal/proc/updateicon()
+/obj/structure/foamedmetal/update_icon()
 	if(metal == 1)
 		icon_state = "metalfoam"
 	else
@@ -163,8 +163,8 @@
 	return
 
 /obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 		G.affecting.loc = src.loc
 		visible_message("<span class='warning'>[G.assailant] smashes [G.affecting] through the foamed metal wall.</span>")
 		qdel(I)

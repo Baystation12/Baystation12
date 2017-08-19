@@ -3,7 +3,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 // Species definition follows.
 /datum/species/shapeshifter/promethean
 
-	name =             "Promethean"
+	name =             SPECIES_PROMETHEAN
 	name_plural =      "Prometheans"
 	blurb =            "What has Science done?"
 	show_ssd =         "totally quiescent"
@@ -34,7 +34,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	brute_mod =           0.5
 	burn_mod =            2
 	oxy_mod =             0
-	total_health =        120
+	total_health =        240
 	siemens_coefficient = -1
 	rarity_value =        5
 

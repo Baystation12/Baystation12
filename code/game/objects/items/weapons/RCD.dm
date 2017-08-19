@@ -2,7 +2,10 @@
 
 /obj/item/weapon/rcd
 	name = "rapid construction device"
-	desc = "A device used to rapidly build walls and floors."
+	desc = "Small, portable, and far, far heavier than it looks, this gun-shaped device has a port into which one may insert compressed matter cartridges."
+	description_info = "On use, this device will toggle between various types of structures (or their removal). You can examine it to see its current mode. It must be loaded with compressed matter cartridges, which can be obtained from an autolathe. Click an adjacent tile to use the device."
+	description_fluff = "Advents in material printing and synthesis technology have produced everyday miracles, such as the RCD, which in certain industries has single-handedly put entire construction crews out of a job."
+	description_antag = "RCDs can be incredibly dangerous in the wrong hands. Use them to swiftly block off corridors, or instantly breach the ship wherever you want."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"
 	opacity = 0
@@ -28,8 +31,8 @@
 	var/canRwall = 0
 	var/disabled = 0
 
-/obj/item/weapon/rcd/initialize()
-	..()
+/obj/item/weapon/rcd/Initialize()
+	. = ..()
 
 	if(!work_modes)
 		var/decl/hierarchy/h = decls_repository.get_decl(/decl/hierarchy/rcd_mode)

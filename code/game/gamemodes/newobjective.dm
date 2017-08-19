@@ -593,7 +593,7 @@ datum
 				weight = 20
 
 				get_points(var/job)
-					if(job in science_positions || job in command_positions)
+					if((job in science_positions) || (job in command_positions))
 						return 20
 					return 40
 

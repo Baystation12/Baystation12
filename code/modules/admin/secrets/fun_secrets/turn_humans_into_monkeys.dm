@@ -6,6 +6,6 @@
 	if(!.)
 		return
 
-	for(var/mob/living/carbon/human/H in mob_list)
+	for(var/mob/living/carbon/human/H in GLOB.mob_list)
 		spawn(0)
 			H.monkeyize()

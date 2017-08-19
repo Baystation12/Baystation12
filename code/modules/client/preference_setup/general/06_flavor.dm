@@ -1,3 +1,7 @@
+/datum/preferences
+	var/list/flavor_texts        = list()
+	var/list/flavour_texts_robot = list()
+
 /datum/category_item/player_setup_item/general/flavor
 	name = "Flavor"
 	sort_order = 6
@@ -15,7 +19,7 @@
 
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> pref.flavour_texts_robot["Default"]
-	for(var/module in robot_module_types)
+	for(var/module in GLOB.robot_module_types)
 		S["flavour_texts_robot_[module]"] >> pref.flavour_texts_robot[module]
 
 /datum/category_item/player_setup_item/general/flavor/save_character(var/savefile/S)
@@ -30,11 +34,12 @@
 	S["flavor_texts_feet"]		<< pref.flavor_texts["feet"]
 
 	S["flavour_texts_robot_Default"] << pref.flavour_texts_robot["Default"]
-	for(var/module in robot_module_types)
+	for(var/module in GLOB.robot_module_types)
 		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
 
 /datum/category_item/player_setup_item/general/flavor/sanitize_character()
-	return
+	if(!istype(pref.flavor_texts))        pref.flavor_texts = list()
+	if(!istype(pref.flavour_texts_robot)) pref.flavour_texts_robot = list()
 
 /datum/category_item/player_setup_item/general/flavor/content(var/mob/user)
 	. += "<b>Flavor:</b><br>"
@@ -117,7 +122,7 @@
 	HTML += "<a href='?src=\ref[src];flavour_text_robot=Default'>Default:</a> "
 	HTML += TextPreview(pref.flavour_texts_robot["Default"])
 	HTML += "<hr />"
-	for(var/module in robot_module_types)
+	for(var/module in GLOB.robot_module_types)
 		HTML += "<a href='?src=\ref[src];flavour_text_robot=[module]'>[module]:</a> "
 		HTML += TextPreview(pref.flavour_texts_robot[module])
 		HTML += "<br>"

@@ -38,9 +38,10 @@
 
 		node = null
 
-		..()
+		. = ..()
 
-	initialize()
+	atmos_init()
+		..()
 		if(node) return
 
 		var/node_connect = dir

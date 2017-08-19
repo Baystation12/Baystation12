@@ -109,13 +109,18 @@
 	var/shutdown_pump = 0
 	switch(command)
 		if("cycle_ext")
+			//If airlock is already cycled in this direction, just toggle the doors.
+			if(!memory["purge"] && IsInRange(memory["external_sensor_pressure"], memory["chamber_sensor_pressure"] * 0.95, memory["chamber_sensor_pressure"] * 1.05))
+				toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "toggle")
 			//only respond to these commands if the airlock isn't already doing something
 			//prevents the controller from getting confused and doing strange things
-			if(state == target_state)
+			else if(state == target_state)
 				begin_cycle_out()
 
 		if("cycle_int")
-			if(state == target_state)
+			if(!memory["purge"] && IsInRange(memory["internal_sensor_pressure"], memory["chamber_sensor_pressure"] * 0.95, memory["chamber_sensor_pressure"] * 1.05))
+				toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "toggle")
+			else if(state == target_state)
 				begin_cycle_in()
 
 		if("cycle_ext_door")
@@ -216,7 +221,7 @@
 					memory["target_pressure"] = memory["internal_sensor_pressure"]
 					state = STATE_PREPARE
 					target_state = TARGET_NONE
-				
+
 				else if(memory["pump_status"] != "off")
 					signalPump(tag_airpump, 0)
 				else

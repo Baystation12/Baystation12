@@ -429,6 +429,16 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	satchel_one = /obj/item/weapon/storage/backpack/satchel_vir
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic
+	name = OUTFIT_JOB_NAME("Paramedic - Torch")
+	uniform = /obj/item/clothing/under/rank/medical/paramedic
+	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
+	shoes = /obj/item/clothing/shoes/jackboots
+	head = null
+	l_hand = /obj/item/weapon/storage/firstaid/adv
+	belt = /obj/item/weapon/storage/belt/medical/emt
+	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
 /decl/hierarchy/outfit/job/torch/crew/medical/chemist
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
 	uniform = /obj/item/clothing/under/rank/chemist
@@ -590,7 +600,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot //until they get a better uniform
 	name = OUTFIT_JOB_NAME("SolGov Pilot")
-	uniform = /obj/item/clothing/under/utility/expeditionary/pilot
+	uniform = /obj/item/clothing/under/utility/expeditionary/command/pilot
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
@@ -599,13 +609,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet
 	name = OUTFIT_JOB_NAME("Pilot - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/pilot
+	uniform = /obj/item/clothing/under/utility/fleet/command/pilot
 	head = /obj/item/clothing/head/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/marine
 	name = OUTFIT_JOB_NAME("Pilot - Marine")
-	uniform = /obj/item/clothing/under/utility/marine/pilot
+	uniform = /obj/item/clothing/under/utility/marine/command/pilot
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
@@ -736,3 +746,15 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda
 	id_type = /obj/item/weapon/card/id/torch/merchant
 
+/decl/hierarchy/outfit/job/torch/stowaway
+	name = OUTFIT_JOB_NAME("Stowaway - Torch")
+	id_type = null
+	pda_type = null
+	l_ear = null
+	l_pocket = /obj/item/weapon/wrench
+	r_pocket = /obj/item/weapon/crowbar
+
+/decl/hierarchy/outfit/job/torch/stowaway/post_equip(var/mob/living/carbon/human/H)
+	..()
+	var/obj/item/weapon/card/id/torch/stowaway/ID = new(H.loc)
+	H.put_in_hands(ID)

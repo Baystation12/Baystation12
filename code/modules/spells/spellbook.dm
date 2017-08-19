@@ -238,7 +238,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	if(investing_time)
 		return "You can only invest one spell slot at a time."
 	uses--
-	processing_objects += src
+	GLOB.processing_objects += src
 	investing_time = world.time + (15 MINUTES)
 	return "You invest a spellslot and will recieve two in return in 15 minutes."
 
@@ -249,11 +249,11 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(uses > spellbook.max_uses)
 			spellbook.max_uses = uses
 		investing_time = 0
-		processing_objects -= src
+		GLOB.processing_objects -= src
 	return 1
 
 /obj/item/weapon/spellbook/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	..()
 
 /obj/item/weapon/spellbook/proc/send_feedback(var/path)

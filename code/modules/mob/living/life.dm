@@ -46,7 +46,7 @@
 
 	update_pulling()
 
-	for(var/obj/item/weapon/grab/G in src)
+	for(var/obj/item/grab/G in src)
 		G.process()
 
 	blinded = 0 // Placing this here just show how out of place it is.

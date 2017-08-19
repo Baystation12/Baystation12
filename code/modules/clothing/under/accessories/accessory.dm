@@ -6,13 +6,15 @@
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
-	var/slot = "decor"
+	var/slot = ACCESSORY_SLOT_DECOR
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi', slot_wear_suit_str = 'icons/mob/ties.dmi')
-	sprite_sheets = list() // for species where human variants do not fit
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi'
+		)
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
 /obj/item/clothing/accessory/Destroy()
@@ -166,8 +168,8 @@
 								else
 									sound = "healthy heartbeat"
 
-							var/obj/item/organ/internal/lungs/L = M.internal_organs_by_name[BP_LUNGS]
-							if(!L || M.losebreath)
+							var/obj/item/organ/internal/lungs/L = M.internal_organs_by_name[M.species.breathing_organ]
+							if(!L || M.losebreath || !L.active_breathing)
 								sound += " and no respiration"
 							else if(M.is_lung_ruptured() || M.getOxyLoss() > 50)
 								sound += " and [pick("wheezing","gurgling")] sounds"
@@ -188,10 +190,10 @@
 
 //Medals
 /obj/item/clothing/accessory/medal
-	name = "medal"
+	name = ACCESSORY_SLOT_MEDAL
 	desc = "A simple medal."
 	icon_state = "bronze"
-	slot = "medal"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"
@@ -297,7 +299,7 @@
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
-	slot = "medal"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/ribbon/marksman
 	name = "marksmanship ribbon"
@@ -324,6 +326,7 @@
 	name = "speciality blaze"
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
 	icon_state = "marinerank_command"
+	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/specialty/janitor
 	name = "custodial blazes"
@@ -365,6 +368,7 @@
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
 
+
 /obj/item/clothing/accessory/speciality/pilot
 	name = "pilot's qualification pin"
 	desc = "An iron pin denoting the qualification to fly in the SGDF."
@@ -375,7 +379,7 @@
 	name = "ranks"
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon_state = "fleetrank"
-	slot = "rank"
+	slot = ACCESSORY_SLOT_RANK
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"

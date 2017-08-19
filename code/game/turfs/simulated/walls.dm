@@ -21,11 +21,6 @@
 	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/list/wall_connections = list("0", "0", "0", "0")
 
-// Walls always hide the stuff below them.
-/turf/simulated/wall/levelupdate()
-	for(var/obj/O in src)
-		O.hide(1)
-
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
 	icon_state = "blank"
@@ -41,7 +36,16 @@
 /turf/simulated/wall/Destroy()
 	processing_turfs -= src
 	dismantle_wall(null,null,1)
-	..()
+	. = ..()
+
+// Walls always hide the stuff below them.
+/turf/simulated/wall/levelupdate()
+	for(var/obj/O in src)
+		O.hide(1)
+
+/turf/simulated/wall/protects_atom(var/atom/A)
+	var/obj/O = A
+	return (istype(O) && O.hides_under_flooring()) || ..()
 
 /turf/simulated/wall/process()
 	// Calling parent will kill processing

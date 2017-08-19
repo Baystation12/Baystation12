@@ -1,6 +1,5 @@
-
-var/datum/map/using_map = new USING_MAP_DATUM
-var/list/all_maps = list()
+GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
+GLOBAL_LIST_EMPTY(all_maps)
 
 var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
@@ -8,15 +7,15 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)
 		var/datum/map/M
-		if(type == using_map.type)
-			M = using_map
+		if(type == GLOB.using_map.type)
+			M = GLOB.using_map
 			M.setup_map()
 		else
 			M = new type
 		if(!M.path)
 			log_error("Map '[M]' does not have a defined path, not adding to map list!")
 		else
-			all_maps[M.path] = M
+			GLOB.all_maps[M.path] = M
 	return 1
 
 
@@ -86,19 +85,15 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 
-	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
+	var/lobby_icon									// The icon which contains the lobby image(s)
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
-
-	var/list/branch_types  // list of branch datum paths for military branches available on this map
-	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
 
 	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 /datum/map/New()
-	..()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
@@ -110,6 +105,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(lobby_music_tracks.len)
 		lobby_music_type = pick(lobby_music_tracks)
 	lobby_music = new lobby_music_type()
+	world.update_status()
 
 /datum/map/proc/send_welcome()
 	return
@@ -135,7 +131,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 // By default transition randomly to another zlevel
 /datum/map/proc/get_transit_zlevel(var/current_z_level)
-	var/list/candidates = using_map.accessible_z_levels.Copy()
+	var/list/candidates = GLOB.using_map.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
 	if(!candidates.len)

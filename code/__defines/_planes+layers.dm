@@ -227,4 +227,7 @@ What is the naming convention for planes or layers?
 	appearance_flags = 0
 	plane = OBSERVER_PLANE
 
-var/ghost_master = list(new /obj/screen/plane_master/ghost_master(),new /obj/screen/plane_master/ghost_dummy())
+GLOBAL_LIST_INIT(ghost_master, list(
+	new /obj/screen/plane_master/ghost_master(),
+	new /obj/screen/plane_master/ghost_dummy()
+))

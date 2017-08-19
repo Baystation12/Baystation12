@@ -56,14 +56,14 @@
 		ntnet_global.add_log("Quantum relay switched from overload recovery mode to normal operation mode.")
 	..()
 
-/obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
 	data["enabled"] = enabled
 	data["dos_capacity"] = dos_capacity
 	data["dos_overload"] = dos_overload
 	data["dos_crashed"] = dos_failure
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_relay.tmpl", "NTNet Quantum Relay", 500, 300, state = state)
 		ui.set_initial_data(data)
@@ -81,10 +81,16 @@
 		dos_failure = 0
 		update_icon()
 		ntnet_global.add_log("Quantum relay manually restarted from overload recovery mode to normal operation mode.")
+		return 1
 	else if(href_list["toggle"])
 		enabled = !enabled
 		ntnet_global.add_log("Quantum relay manually [enabled ? "enabled" : "disabled"].")
 		update_icon()
+		return 1
+	else if(href_list["purge"])
+		ntnet_global.banned_nids.Cut()
+		ntnet_global.add_log("Manual override: Network blacklist cleared.")
+		return 1
 
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid

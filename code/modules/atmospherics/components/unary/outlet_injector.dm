@@ -111,9 +111,8 @@
 
 	return 1
 
-/obj/machinery/atmospherics/unary/outlet_injector/initialize()
-	..()
-
+/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
+	. = ..()
 	set_frequency(frequency)
 
 /obj/machinery/atmospherics/unary/outlet_injector/receive_signal(datum/signal/signal)

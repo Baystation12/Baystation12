@@ -7,5 +7,12 @@
 	visualnet = new /datum/visualnet/cultnet()
 
 /mob/observer/eye/cult/Destroy()
-	qdel_null(visualnet)
+	QDEL_NULL(visualnet)
+	return ..()
+
+mob/observer/eye/cult/EyeMove()
+	if(owner && istype(owner, /mob/living/deity))
+		var/mob/living/deity/D = owner
+		if(D.following)
+			D.stop_follow()
 	return ..()

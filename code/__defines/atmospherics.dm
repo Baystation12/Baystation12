@@ -7,9 +7,9 @@
 #define PIPE_JUNCTION			6
 #define PIPE_UVENT				7
 #define PIPE_MVALVE				8
-#define PIPE_PUMP				9
-#define PIPE_SCRUBBER			10
-//#define unsed	11
+#define PIPE_DVALVE				9
+#define PIPE_PUMP				10
+#define PIPE_SCRUBBER			11
 //#define unsed	12
 #define PIPE_GAS_FILTER			13
 #define PIPE_GAS_MIXER			14

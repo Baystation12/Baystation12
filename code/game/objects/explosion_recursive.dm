@@ -24,7 +24,7 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 	explosion_turfs[epicenter] = power
 
 	//This steap handles the gathering of turfs which will be ex_act() -ed in the next step. It also ensures each turf gets the maximum possible amount of power dealt to it.
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(epicenter, direction)
 		var/adj_power = power - epicenter.explosion_resistance
 		if(shaped)
@@ -53,9 +53,11 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		T.ex_act(severity)
 		if(!T)
 			T = locate(x,y,z)
+
 		for(var/atom_movable in T.contents)
 			var/atom/movable/AM = atom_movable
-			if(AM && AM.simulated)	AM.ex_act(severity)
+			if(AM && AM.simulated && !T.protects_atom(AM))
+				AM.ex_act(severity)
 
 	explosion_turfs.Cut()
 	explosion_in_progress = 0

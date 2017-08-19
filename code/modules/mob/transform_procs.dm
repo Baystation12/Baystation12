@@ -68,7 +68,7 @@
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// stop the jams for AIs
 
 
-	var/mob/living/silicon/ai/O = new (loc, using_map.default_law_type,,1)//No MMI but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
 	if(mind)
@@ -320,6 +320,8 @@
 		src.mind.special_role = "Zombie"
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	Weaken(5)
+	if(should_have_organ(BP_HEART))
+		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
 	for(var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0

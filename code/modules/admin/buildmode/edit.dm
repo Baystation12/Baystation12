@@ -30,7 +30,7 @@
 		if("number")
 			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as num|null
 		if("mob-reference")
-			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as null|mob in mob_list
+			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as null|mob in GLOB.mob_list
 		if("obj-reference")
 			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as null|obj in world
 		if("turf-reference")
@@ -62,13 +62,13 @@
 		return
 	ClearValue()
 	value_to_set = new_value
-	destroyed_event.register(value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
+	GLOB.destroyed_event.register(value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
 
 /datum/build_mode/edit/proc/ClearValue(var/feedback)
 	if(!istype(value_to_set, /datum))
 		return
 
-	destroyed_event.unregister(value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
+	GLOB.destroyed_event.unregister(value_to_set, src, /datum/build_mode/edit/proc/ClearValue)
 	value_to_set = initial(value_to_set)
 	if(feedback)
 		Warn("The selected reference value was deleted. Default value restored.")

@@ -176,7 +176,7 @@ var/global/list/robot_modules = list(
 					"Android" = "droid",
 					"Default" = "robot",
 					"Drone" = "drone-standard",
-					"Eyebot" = "eyebot-standard"
+					"Doot" = "eyebot-standard"
 				  )
 
 /obj/item/weapon/robot_module/standard/New()
@@ -204,7 +204,7 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone" = "drone-surgery",
-					"Eyebot" = "eyebot-medical"
+					"Doot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
@@ -257,7 +257,7 @@ var/global/list/robot_modules = list(
 					"Needles" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
 					"Drone - Chemistry" = "drone-chemistry",
-					"Eyebot" = "eyebot-medical"
+					"Doot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
@@ -318,7 +318,7 @@ var/global/list/robot_modules = list(
 	name = "engineering robot module"
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
-	subsystems = list(/datum/nano_module/power_monitor)
+	subsystems = list(/datum/nano_module/power_monitor, /datum/nano_module/supermatter_monitor)
 	supported_upgrades = list(/obj/item/borg/upgrade/rcd)
 	sprites = list(
 					"Basic" = "Engineering",
@@ -326,8 +326,9 @@ var/global/list/robot_modules = list(
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
 					"Drone" = "drone-engineer",
-					"Eyebot" = "eyebot-engineering"
+					"Doot" = "eyebot-engineering"
 					)
+	no_slip = 1
 
 /obj/item/weapon/robot_module/engineering/general/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -398,7 +399,7 @@ var/global/list/robot_modules = list(
 	name = "security robot module"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
-	subsystems = list(/datum/nano_module/crew_monitor)
+	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
 	can_be_pushed = 0
 	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
 
@@ -410,7 +411,8 @@ var/global/list/robot_modules = list(
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
 					"Drone" = "drone-sec",
-					"Eyebot" = "eyebot-security"
+					"Doot" = "eyebot-security",
+					"Tridroid" = "orb-security"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
@@ -445,7 +447,7 @@ var/global/list/robot_modules = list(
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor",
-					"Eyebot" = "eyebot-janitor"
+					"Doot" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/janitor/New()
@@ -465,7 +467,7 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
-		S.reagents.add_reagent("lube", 2 * amount)
+		S.reagents.add_reagent("lube", 20 * amount)
 
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"
@@ -489,7 +491,7 @@ var/global/list/robot_modules = list(
 					"Default" = "Service2",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
-					"Eyebot" = "eyebot-standard"
+					"Doot" = "eyebot-standard"
 				  	)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
@@ -534,7 +536,7 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Default" = "Service2",
 					"Drone" = "drone-service",
-					"Eyebot" = "eyebot-standard"
+					"Doot" = "eyebot-standard"
 					)
 
 /obj/item/weapon/robot_module/clerical/general/New()
@@ -556,6 +558,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
+	subsystems = list(/datum/nano_module/supply)
 	channels = list("Supply" = 1, "Science" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
@@ -563,7 +566,7 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
 					"Drone" = "drone-miner",
-					"Eyebot" = "eyebot-miner"
+					"Doot" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -588,7 +591,7 @@ var/global/list/robot_modules = list(
 	sprites = list(
 					"Droid" = "droid-science",
 					"Drone" = "drone-science",
-					"Eyebot" = "eyebot-science"
+					"Doot" = "eyebot-science"
 					)
 
 /obj/item/weapon/robot_module/research/New()
