@@ -30,11 +30,13 @@
 	{{if data.active_line == data.page_offset+index+1}}
 		<div class="notice">
 	{{/if}}
-	<div style="float: left; text-align: left; width: 60px">
-		{{:helper.link(data.page_offset+index+1, null, {'target': 'deleteline', 'value':data.page_offset+index+1})}}
-	</div>
-	<div style="float: center; text-align: left; width: 400px;">
-		{{:helper.link(value, null, {'target': 'modifyline', 'value':data.page_offset+index+1})}}
+	<div class="item">
+		<div class="itemLabel" style="width: 50px">
+			{{:helper.link(data.page_offset+index+1, null, {'target': 'deleteline', 'value':data.page_offset+index+1})}}
+		</div>
+		<div class="itemContent">
+			{{:helper.link(value, null, {'target': 'modifyline', 'value':data.page_offset+index+1})}}
+		</div>
 	</div>
 	{{if data.active_line == data.page_offset+index+1}}
 		</div>
