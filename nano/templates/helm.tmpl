@@ -87,18 +87,28 @@
 		{{:helper.link(data.autopilot ? 'Engaged' : 'Disengaged', 'gear', { 'apilot' : 1 }, data.dest ? null : 'disabled', data.autopilot ? 'selected' : null)}}
 	</div>
 </div> 
-<div class='item'>
-	<div style="float:left;width:45%">
-		<span class='white'>Target coordinates</span>
-	</div>
-	<div style="float:left;width:20%">
-		{{if data.dest}}
-			{{:helper.link(data.d_x, null, { 'setx' : 1 }, null, null)}} {{:helper.link(data.d_y, null, { 'sety' : 1 }, null, null)}}
-		{{else}}
-			{{:helper.link('None', null, { 'sety' : 1, 'setx' : 1 }, null, null)}}
-		{{/if}}
-	</div>
-</div> 
+<div class='block'>
+	<div class='item'>
+		<div style="float:left;width:45%">
+			<span class='white'>Target coordinates:</span>
+		</div>
+		<div style="float:left;width:20%">
+			{{if data.dest}}
+				{{:helper.link(data.d_x, null, { 'setx' : 1 }, null, null)}} {{:helper.link(data.d_y, null, { 'sety' : 1 }, null, null)}}
+			{{else}}
+				{{:helper.link('None', null, { 'sety' : 1, 'setx' : 1 }, null, null)}}
+			{{/if}}
+		</div>
+	</div> 
+	<div class='item'>
+		<div style="float:left;width:45%">
+			<span class='white'>Maximum speed:</span>
+		</div>
+		<div style="float:left;width:20%">
+			{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}}
+		</div>
+	</div> 
+</div>
 
 <h3>Navigation data</h3>
 <div class='item'>

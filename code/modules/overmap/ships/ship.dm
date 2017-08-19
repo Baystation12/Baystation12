@@ -79,7 +79,9 @@
 /obj/effect/overmap/ship/proc/get_brake_path()
 	if(!get_acceleration())
 		return INFINITY
-	return get_speed()/get_acceleration()
+	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
+	var/burns_per_grid = (default_delay - speed_mod*get_speed())/burn_delay
+	return round(num_burns/burns_per_grid)
 
 /obj/effect/overmap/ship/proc/decelerate()
 	if(!is_still() && can_burn())

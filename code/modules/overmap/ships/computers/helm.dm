@@ -9,6 +9,7 @@
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
+	var/speedlimit //top speed for autopilot
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
@@ -38,7 +39,7 @@
 
 		var/brake_path = linked.get_brake_path()
 
-		if(get_dist(linked.loc, T) > brake_path)
+		if((!speedlimit || linked.get_speed() < speedlimit) && get_dist(linked.loc, T) > brake_path)
 			linked.accelerate(get_dir(linked.loc, T))
 		else
 			linked.decelerate()
@@ -86,6 +87,7 @@
 	data["dest"] = dy && dx
 	data["d_x"] = dx
 	data["d_y"] = dy
+	data["speedlimit"] = speedlimit ? speedlimit : "None"
 	data["speed"] = linked.get_speed()
 	data["accel"] = linked.get_acceleration()
 	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
@@ -167,6 +169,11 @@
 	if (href_list["reset"])
 		dx = 0
 		dy = 0
+
+	if (href_list["speedlimit"])
+		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit) as num|null
+		if(newlimit)
+			speedlimit = Clamp(newlimit, 0, 100)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])

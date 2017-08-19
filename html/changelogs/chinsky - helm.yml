@@ -1,0 +1,6 @@
+
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Helm console now displays ETA to next grid tile."
+  - rscadd: "Can now set maximum speed for autopilot."
