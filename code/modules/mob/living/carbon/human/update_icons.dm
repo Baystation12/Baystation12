@@ -358,16 +358,15 @@ var/global/list/damage_icon_parts = list()
 //UNDERWEAR OVERLAY
 
 /mob/living/carbon/human/proc/update_underwear(var/update_icons=1)
-	overlays_standing[UNDERWEAR_LAYER] = null
+	overlays_standing[UNDERWEAR_LAYER] = list()
+	for(var/entry in worn_underwear)
+		var/obj/item/underwear/UW = entry
 
-	if(species.appearance_flags & HAS_UNDERWEAR)
-		overlays_standing[UNDERWEAR_LAYER] = list()
-		for(var/category in all_underwear)
-			var/datum/category_item/underwear/UWI = all_underwear[category]
-			var/image/standing = UWI.generate_image(all_underwear_metadata[category])
-			if(standing)
-				standing.appearance_flags = RESET_COLOR
-				overlays_standing[UNDERWEAR_LAYER] += standing
+		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
+		I.appearance_flags = RESET_COLOR
+		I.color = UW.color
+
+		overlays_standing[UNDERWEAR_LAYER] += I
 
 	if(update_icons)   update_icons()
 

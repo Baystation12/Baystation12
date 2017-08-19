@@ -63,6 +63,8 @@
 
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
+#define isunderwear(A) istype(A, /obj/item/underwear)
+
 #define isvirtualmob(A) istype(A, /mob/observer/virtual)
 
 #define isweakref(A) istype(A, /weakref)
@@ -95,7 +97,11 @@
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 
+#define CanInteractWith(user, target, state) (target.CanUseTopic(user, state) == STATUS_INTERACTIVE)
+
 #define CanPhysicallyInteract(user) CanInteract(user, GLOB.physical_state)
+
+#define CanPhysicallyInteractWith(user, target) CanInteractWith(user, target, GLOB.physical_state)
 
 #define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 
@@ -117,7 +123,7 @@
 // Adds I to L, initalizing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
 // Sets L[A] to I, initalizing L if necessary
-#define LAZYADDASSOC(L, A, I) if(!L) { L = list(); } L[A] = I;
+#define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
 // Reads I from L safely - Works with both associative and traditional lists.
 #define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= L.len ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null
