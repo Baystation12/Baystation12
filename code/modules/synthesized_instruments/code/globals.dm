@@ -1,4 +1,4 @@
-var/global/datum/musical_config/musical_config = new
+GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 
 /datum/musical_config
 	var/highest_octave = 9

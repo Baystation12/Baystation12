@@ -27,7 +27,7 @@
 
 /datum/musical_debug/New(datum/musical_debug/source)
 	src.source = source
-	if (global.musical_config.debug_active) src.record_state()
+	if (GLOB.musical_config.debug_active) src.record_state()
 
 
 /datum/musical_debug/proc/obtain_state()
@@ -74,8 +74,8 @@
 			src.additional_messages = ""
 			if (src.last_state && data && data.compare(src.last_state))
 				continue
-			if (src.evidence.len > global.musical_config.debug_max_reports - 1)
-				src.evidence.Cut(1, evidence.len - global.musical_config.debug_max_reports + 2)
+			if (src.evidence.len > GLOB.musical_config.debug_max_reports - 1)
+				src.evidence.Cut(1, evidence.len - GLOB.musical_config.debug_max_reports + 2)
 			src.evidence[num2text(world.time)] += data
 			src.last_state = data
 
@@ -92,9 +92,9 @@
 	for (var/trace in src.evidence)
 		var/datum/musical_evidence/evidence = src.evidence[trace]
 		var/flags_ok = !evidence.flags == 0
-		var/sustain_sane = evidence.three_values[2] >= 1 && evidence.three_values[2] <= global.musical_config.longest_sustain_timer
-		sustain_sane &= evidence.three_values[3] >= global.musical_config.gentlest_drop && evidence.three_values[3] <= global.musical_config.steepest_drop
-		var/capacity_ok = evidence.five_lengths[2] > 0 && evidence.five_lengths[3] <= global.musical_config.max_events
+		var/sustain_sane = evidence.three_values[2] >= 1 && evidence.three_values[2] <= GLOB.musical_config.longest_sustain_timer
+		sustain_sane &= evidence.three_values[3] >= GLOB.musical_config.gentlest_drop && evidence.three_values[3] <= GLOB.musical_config.steepest_drop
+		var/capacity_ok = evidence.five_lengths[2] > 0 && evidence.five_lengths[3] <= GLOB.musical_config.max_events
 		var/null_ok = !evidence.non_null_status
 		var/report_non_empty = evidence.report
 

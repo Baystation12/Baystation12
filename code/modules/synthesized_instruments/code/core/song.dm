@@ -6,7 +6,7 @@
 	var/autorepeat = 0
 	var/current_line = 0
 
-	var/obj/sound_player/player // Not a physical thing
+	var/datum/sound_player/player // Not a physical thing
 	var/datum/instrument/instrument_data
 
 	var/list/free_channels = list()
@@ -22,11 +22,11 @@
 	var/datum/musical_debug/debug_panel
 
 
-/datum/synthesized_song/New(obj/sound_player/playing_object, datum/instrument/instrument)
+/datum/synthesized_song/New(datum/sound_player/playing_object, datum/instrument/instrument)
 	src.player = playing_object
 	src.instrument_data = instrument
-	src.octave_range_min = global.musical_config.lowest_octave
-	src.octave_range_max = global.musical_config.highest_octave
+	src.octave_range_min = GLOB.musical_config.lowest_octave
+	src.octave_range_max = GLOB.musical_config.highest_octave
 	src.debug_panel = new (src)
 
 	instrument.create_full_sample_deviation_map()
@@ -39,14 +39,14 @@
 
 
 /datum/synthesized_song/proc/occupy_channels()
-	if (!global.musical_config.free_channels_populated)
+	if (!GLOB.musical_config.free_channels_populated)
 		for (var/i=1 to 1024) // Currently only 1024 channels are allowed
-			global.musical_config.free_channels += i
-		global.musical_config.free_channels_populated = 1 // Only once
+			GLOB.musical_config.free_channels += i
+		GLOB.musical_config.free_channels_populated = 1 // Only once
 
-	for (var/i=1 to global.musical_config.channels_per_instrument)
-		if (global.musical_config.free_channels.len)
-			src.free_channel(pick_n_take(global.musical_config.free_channels))
+	for (var/i=1 to GLOB.musical_config.channels_per_instrument)
+		if (GLOB.musical_config.free_channels.len)
+			src.free_channel(pick_n_take(GLOB.musical_config.free_channels))
 
 
 /datum/synthesized_song/proc/take_any_channel()
@@ -59,23 +59,23 @@
 
 
 /datum/synthesized_song/proc/return_all_channels()
-	global.musical_config.free_channels |= src.free_channels
+	GLOB.musical_config.free_channels |= src.free_channels
 	src.free_channels.Cut()
 
 
 /datum/synthesized_song/proc/play_synthesized_note(note, acc, oct, duration, where, which_one)
-	if (oct < global.musical_config.lowest_octave || oct > global.musical_config.highest_octave)	return
+	if (oct < GLOB.musical_config.lowest_octave || oct > GLOB.musical_config.highest_octave)	return
 	if (oct < src.octave_range_min || oct > src.octave_range_max)	return
 
 	var/delta1 = acc == "b" ? -1 : acc == "#" ? 1 : acc == "s" ? 1 : acc == "n" ? 0 : 0
 	var/delta2 = 12 * oct
 
-	var/note_num = delta1+delta2+global.musical_config.nn2no[note]
+	var/note_num = delta1+delta2+GLOB.musical_config.nn2no[note]
 	if (note_num < 0 || note_num > 127)
 		src.debug_panel.append_message(text("Play synthesized note failed because of 0..127 condition, [] [] []", note, acc, oct))
 		return
 
-	var/datum/sample_pair/pair = src.instrument_data.sample_map[global.musical_config.n2t(note_num)]
+	var/datum/sample_pair/pair = src.instrument_data.sample_map[GLOB.musical_config.n2t(note_num)]
 	#define Q 0.083 // 1/12
 	var/freq = 2**(Q*pair.deviation)
 	var/chan = src.take_any_channel()
@@ -180,7 +180,7 @@
 			if (src.player && src.player.actual_instrument)
 				var/obj/structure/synthesized_instrument/S = src.player.actual_instrument // Fuck, this is horrible.
 				if (S.song_editor)
-					nanomanager.update_uis(S.song_editor)
+					GLOB.nanomanager.update_uis(S.song_editor)
 			for (var/notes in splittext(lowertext(line), ","))
 				var/list/components = splittext(notes, "/")
 				var/delta = components.len==2 && text2num(components[2]) ? text2num(components[2]) : 1

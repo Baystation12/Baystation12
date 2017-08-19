@@ -1,18 +1,18 @@
-/obj/sound_player/synthesizer
+/datum/sound_player/synthesizer
 	forced_sound_in = 0
 	var/list/datum/music_code/code = list()
 
 
-/obj/sound_player/synthesizer/apply_modifications_for(mob/who, sound/what, which, where, which_one)
+/datum/sound_player/synthesizer/apply_modifications_for(mob/who, sound/what, which, where, which_one)
 	..(who, what, which)
 	for (var/datum/music_code/cond in code)
 		if (cond.test(which, where, which_one))
-			var/datum/sample_pair/pair = cond.instrument.sample_map[global.musical_config.n2t(which)]
+			var/datum/sample_pair/pair = cond.instrument.sample_map[GLOB.musical_config.n2t(which)]
 			what.file = pair.sample
 
 
 
-/obj/sound_player/synthesizer/torture
+/datum/sound_player/synthesizer/torture
 	forced_sound_in = 2
 
 
@@ -82,7 +82,7 @@
 /obj/structure/synthesized_instrument/synthesizer
 	name = "The Synthesizer 3.0"
 	desc = "This thing emits shockwaves as it plays. This is not good for your hearing."
-	icon = 'synthesizer.dmi'
+	icon = 'code/modules/synthesized_instruments/real_instruments/Synthesizer/icons/synthesizer.dmi'
 	icon_state = "synthesizer"
 	anchored = 1
 	density = 1
@@ -97,7 +97,7 @@
 		if (!new_instrument.id) continue
 		new_instrument.create_full_sample_deviation_map()
 		src.instruments[new_instrument.name] = new_instrument
-	src.player = new /obj/sound_player/synthesizer(src, instruments[pick(instruments)])
+	src.player = new /datum/sound_player/synthesizer(src, instruments[pick(instruments)])
 
 
 /obj/structure/synthesized_instrument/synthesizer/attackby(obj/item/O, mob/user, params)
@@ -249,8 +249,8 @@
 			)
 		),
 		"advanced_options" = list(
-			"all_environments" = global.musical_config.all_environments,
-			"selected_environment" = global.musical_config.id_to_environment(src.player.virtual_environment_selected),
+			"all_environments" = GLOB.musical_config.all_environments,
+			"selected_environment" = GLOB.musical_config.id_to_environment(src.player.virtual_environment_selected),
 			"apply_echo" = src.player.apply_echo
 		),
 		"sustain" = list(
@@ -264,15 +264,15 @@
 		),*/
 		"show" = list(
 			"playback" = src.player.song.lines.len > 0,
-			"custom_env_options" = global.musical_config.is_custom_env(src.player.virtual_environment_selected) && src.player.three_dimensional_sound,
-			"debug_button" = global.musical_config.debug_active,
-			"env_settings" = global.musical_config.env_settings_available
+			"custom_env_options" = GLOB.musical_config.is_custom_env(src.player.virtual_environment_selected) && src.player.three_dimensional_sound,
+			"debug_button" = GLOB.musical_config.debug_active,
+			"env_settings" = GLOB.musical_config.env_settings_available
 		),
 		"status" = list(
 			"channels" = src.player.song.free_channels.len,
 			"events" = src.player.event_manager.events.len,
-			"max_channels" = global.musical_config.channels_per_instrument,
-			"max_events" = global.musical_config.max_events,
+			"max_channels" = GLOB.musical_config.channels_per_instrument,
+			"max_events" = GLOB.musical_config.max_events,
 		)
 	)
 	/*
@@ -283,7 +283,7 @@
 	data["code"]["ids"] = ids
 	*/
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new (user, src, ui_key, "synthesizer.tmpl", src.name, 600, 800)
 		ui.set_initial_data(data)
@@ -305,18 +305,18 @@
 		if ("volume")
 			src.player.volume = max(min(player.volume+text2num(value), 100), 0)
 		if ("transposition")
-			src.player.song.transposition = max(min(player.song.transposition+value, global.musical_config.highest_transposition), global.musical_config.lowest_transposition)
+			src.player.song.transposition = max(min(player.song.transposition+value, GLOB.musical_config.highest_transposition), GLOB.musical_config.lowest_transposition)
 		if ("min_octave")
-			src.player.song.octave_range_min = max(min(player.song.octave_range_min+value, global.musical_config.highest_octave), global.musical_config.lowest_octave)
+			src.player.song.octave_range_min = max(min(player.song.octave_range_min+value, GLOB.musical_config.highest_octave), GLOB.musical_config.lowest_octave)
 			src.player.song.octave_range_max = max(player.song.octave_range_max, player.song.octave_range_min)
 		if ("max_octave")
-			src.player.song.octave_range_max = max(min(player.song.octave_range_max+value, global.musical_config.highest_octave), global.musical_config.lowest_octave)
+			src.player.song.octave_range_max = max(min(player.song.octave_range_max+value, GLOB.musical_config.highest_octave), GLOB.musical_config.lowest_octave)
 			src.player.song.octave_range_min = min(player.song.octave_range_max, player.song.octave_range_min)
 		if ("sustain_timer")
-			src.player.song.sustain_timer = max(min(player.song.sustain_timer+value, global.musical_config.longest_sustain_timer), 1)
+			src.player.song.sustain_timer = max(min(player.song.sustain_timer+value, GLOB.musical_config.longest_sustain_timer), 1)
 		if ("soft_coeff")
-			var/new_coeff = input(usr, "from [global.musical_config.gentlest_drop] to [global.musical_config.steepest_drop]") as num
-			new_coeff = round(min(max(new_coeff, global.musical_config.gentlest_drop), global.musical_config.steepest_drop), 0.001)
+			var/new_coeff = input(usr, "from [GLOB.musical_config.gentlest_drop] to [GLOB.musical_config.steepest_drop]") as num
+			new_coeff = round(min(max(new_coeff, GLOB.musical_config.gentlest_drop), GLOB.musical_config.steepest_drop), 0.001)
 			src.player.song.soft_coeff = new_coeff
 		if ("instrument")
 			var/list/categories = list()
@@ -339,7 +339,7 @@
 		if ("decay") src.player.song.linear_decay = value
 		if ("echo") src.player.apply_echo = value
 		if ("show_env_editor")
-			if (global.musical_config.env_settings_available)
+			if (GLOB.musical_config.env_settings_available)
 				if (!src.env_editor)
 					src.env_editor = new (src.player)
 				src.env_editor.ui_interact(usr)
@@ -375,4 +375,4 @@
 	New()
 		..()
 		qdel(src.player)
-		src.player = new /obj/sound_player/synthesizer/torture(src, instruments[pick(instruments)])
+		src.player = new /datum/sound_player/synthesizer/torture(src, instruments[pick(instruments)])
