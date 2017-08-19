@@ -289,6 +289,16 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	var/advanced_mode = 0
+
+/obj/item/device/analyzer/verb/verbosity(mob/user as mob)
+	set name = "Toggle Advanced Gas Analysis"
+	set category = "Object"
+	set src in usr
+
+	if (!user.incapacitated())
+		advanced_mode = !advanced_mode
+		to_chat(usr, "You toggle advanced gas analysis [advanced_mode ? "on" : "off"].")
 
 /obj/item/device/analyzer/attack_self(mob/user as mob)
 
@@ -297,8 +307,8 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	if (!user.IsAdvancedToolUser())
 		return
 
-	analyze_gases(user.loc, user)
-	return
+	analyze_gases(user.loc, user,advanced_mode)
+	return 1
 
 /obj/item/device/mass_spectrometer
 	name = "mass spectrometer"

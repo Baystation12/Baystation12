@@ -1,0 +1,5 @@
+
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Air analysers now have verb to be toggled into advanced mode. It displays gas properties like specific heat and molar mass."
