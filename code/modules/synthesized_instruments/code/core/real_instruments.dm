@@ -73,17 +73,6 @@
 					src.usage_info = new (src, src.player)
 				src.usage_info.ui_interact(usr)
 
-			/*if ("debug")
-				if (!GLOB.musical_config.debug_active)
-					to_chat(usr, "Debug flag is set to 0.")
-
-				else if (src.player.song.debug_panel)
-					var/password = input(usr, "Enter password to access debug") as text
-					var/hash = md5(password)
-					if (GLOB.musical_config.debug_password_hash == hash)
-						src.player.song.debug_panel.access_panel(usr)
-					else
-						to_chat(usr, "Wrong password")*/
 			else
 				return 0
 
@@ -188,17 +177,6 @@
 					src.usage_info = new (src, src.player)
 				src.usage_info.ui_interact(usr)
 
-			/*if ("debug")
-				if (!GLOB.musical_config.debug_active)
-					to_chat(usr, "Debug flag is set to 0.")
-
-				else if (src.player.song.debug_panel)
-					var/password = input(usr, "Enter password to access debug") as text
-					var/hash = md5(password)
-					if (GLOB.musical_config.debug_password_hash == hash)
-						src.player.song.debug_panel.access_panel(usr)
-					else
-						to_chat(usr, "Wrong password")*/
 			else
 				return 0
 
