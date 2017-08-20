@@ -6,7 +6,6 @@
 	icon_state = null
 	var/bitesize = 1
 	var/bitecount = 0
-	var/trash = null
 	var/slice_path
 	var/slices_num
 	var/dried_type = null
