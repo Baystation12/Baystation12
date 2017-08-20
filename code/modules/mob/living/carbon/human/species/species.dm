@@ -183,6 +183,8 @@
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
+	var/list/equip_list = list()
+
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
 
@@ -208,6 +210,8 @@
 		var/list/organ_data = has_limbs[limb_type]
 		var/obj/item/organ/limb_path = organ_data["path"]
 		organ_data["descriptor"] = initial(limb_path.name)
+
+	build_equipment_list()
 
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)
@@ -430,3 +434,14 @@
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
+
+/datum/species/proc/build_equipment_list()
+	to_world_log("in build equipment for [name]")
+	for(var/V in has_limbs)
+		to_world_log("v in has_limbs [V]")
+		to_world_log("v in has_limbs thingy [has_limbs[V]["path"]]")
+		var/obj/item/organ/external/E = has_limbs[V]["path"]
+		var/part = initial(E.body_part)
+		to_world_log("part [part]")
+		if(part)
+			equip_list += part

@@ -324,6 +324,8 @@ BLIND     // can't see anything
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
 
+	equip_slots = EQP_BOTH_ARMOUR
+
 	var/light_overlay = "helmet_light"
 	var/light_applied
 	var/brightness_on

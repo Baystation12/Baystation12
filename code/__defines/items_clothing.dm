@@ -205,6 +205,10 @@
 #define SUIT_HAS_SENSORS 1
 #define SUIT_LOCKED_SENSORS 2
 
+// Equipment Flags
+#define CLTH_CAN_CLOSE			0x1
+#define CLTH_COVER_UNDER		0x2
+
 // Storage
 
 /*

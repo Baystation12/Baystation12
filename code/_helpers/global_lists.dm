@@ -31,6 +31,8 @@ var/global/list/poster_designs = list()
 var/global/list/all_grabstates[0]
 var/global/list/all_grabobjects[0]
 
+var/global/list/all_equip_slots[0]
+
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
 
@@ -208,6 +210,12 @@ var/global/list/string_slot_flags = list(
 	for(var/grabstate_name in all_grabstates)
 		var/datum/grab/G = all_grabstates[grabstate_name]
 		G.refresh_updown()
+
+	paths = typesof(/datum/equip_slot) - /datum/equip_slot
+	for(var/T in paths)
+		var/datum/equip_slot/S = new T
+		if(S.equip_tag)
+			all_equip_slots[S.equip_tag] = T
 
 	return 1
 

@@ -77,6 +77,13 @@
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
 
+	// What equipment bitflag it matches up with.
+	var/equip_flags                   // Any equipment flag that applies to this organ.
+//	var/obj/item/clothing/list/main_equipped = list() 		// All clothes that are equipped to this organ.
+//	var/obj/item/clothing/list/covered_by = list()			// All clothes equipped to other organs that cover this organ.
+	var/datum/equip_list/equipped_nodes
+
+
 /obj/item/organ/external/New(var/mob/living/carbon/holder)
 	..()
 	if(isnull(pain_disability_threshold))

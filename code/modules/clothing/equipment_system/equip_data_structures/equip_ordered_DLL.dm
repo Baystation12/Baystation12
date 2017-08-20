@@ -1,0 +1,1 @@
+/datum/equip_list
