@@ -32,6 +32,9 @@ var/global/datum/controller/processScheduler/processScheduler
 	// Process highest run time
 	var/tmp/datum/controller/process/list/highest_run_time = new
 
+	// Process total run time
+	var/tmp/datum/controller/process/list/total_run_time = new
+
 	// How long to sleep between runs (set to tick_lag in New)
 	var/tmp/scheduler_sleep_interval
 
@@ -157,6 +160,8 @@ var/global/datum/controller/processScheduler/processScheduler
 	last_twenty_run_times[process] = list()
 	highest_run_time.Add(process)
 	highest_run_time[process] = 0
+	total_run_time.Add(process)
+	total_run_time[process] = 0
 
 	// init starts and stops record starts
 	recordStart(process, 0)
@@ -193,6 +198,10 @@ var/global/datum/controller/processScheduler/processScheduler
 	highest_run_time.Add(newProcess)
 	highest_run_time[newProcess] = highest_run_time[oldProcess]
 	highest_run_time.Remove(oldProcess)
+
+	total_run_time.Add(newProcess)
+	total_run_time[newProcess] = total_run_time[oldProcess]
+	total_run_time.Remove(oldProcess)
 
 	recordStart(newProcess, 0)
 	recordEnd(newProcess, 0)
@@ -278,6 +287,8 @@ var/global/datum/controller/processScheduler/processScheduler
 	lastTwenty.len++
 	lastTwenty[lastTwenty.len] = time
 
+	total_run_time[process] += time
+
 /**
  * averageRunTime
  * returns the average run time (over the last 20) of the process
@@ -300,6 +311,9 @@ var/global/datum/controller/processScheduler/processScheduler
 
 /datum/controller/processScheduler/proc/getProcessHighestRunTime(var/datum/controller/process/process)
 	return highest_run_time[process]
+
+/datum/controller/processScheduler/proc/getProcessTotalRunTime(var/datum/controller/process/process)
+	return total_run_time[process]
 
 /datum/controller/processScheduler/proc/getStatusData()
 	var/list/data = new
