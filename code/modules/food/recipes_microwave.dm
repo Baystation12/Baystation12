@@ -388,6 +388,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/cubancarp
 
 /datum/recipe/popcorn
+	reagents = list("sodiumchloride" = 5)
 	fruit = list("corn" = 1)
 	result = /obj/item/weapon/reagent_containers/food/snacks/popcorn
 
