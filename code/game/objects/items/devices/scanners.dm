@@ -310,6 +310,16 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	analyze_gases(user.loc, user,advanced_mode)
 	return 1
 
+/obj/item/device/analyzer/afterattack(obj/O, mob/user, proximity)
+	if(!proximity)
+		return
+	if (user.incapacitated())
+		return
+	if (!user.IsAdvancedToolUser())
+		return
+	if(istype(O) && O.simulated)
+		analyze_gases(O, user, advanced_mode)
+
 /obj/item/device/mass_spectrometer
 	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample."

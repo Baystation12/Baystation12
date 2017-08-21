@@ -130,9 +130,7 @@
 				to_chat(user, "<span class='notice'>Nothing happens.</span>")
 				return
 
-	else if ((istype(W, /obj/item/device/analyzer)) && Adjacent(user))
-		var/obj/item/device/analyzer/A = W
-		A.analyze_gases(src, user)
+	else if (istype(W, /obj/item/device/analyzer))
 		return
 
 	return
