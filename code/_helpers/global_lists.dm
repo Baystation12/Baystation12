@@ -44,7 +44,7 @@ var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 
-var/datum/category_collection/underwear/global_underwear = new()
+GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Brown Satchel", "Messenger Bag", "Black Satchel")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)

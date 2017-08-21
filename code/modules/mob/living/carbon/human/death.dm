@@ -1,5 +1,4 @@
 /mob/living/carbon/human/gib()
-
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if(istype(loc,/turf))
