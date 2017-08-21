@@ -914,14 +914,21 @@
 		return
 
 	// Puke if toxloss is too high
-	var/obj/item/organ/internal/liver/L = internal_organs_by_name[BP_LIVER]
-	var/obj/item/organ/internal/kidneys/K = internal_organs_by_name[BP_KIDNEYS]
-	var/tox_loss = getToxLoss()
-
-	if(!stat && !lastpuke && tox_loss > 35 && ((L && !(L.status & ORGAN_DEAD)) || (K && !(K.status & ORGAN_DEAD))))
-		if (prob(2))
-			var/vom_stats = 70 / max(7, 70 - (getToxLoss() + 35))
-			spawn vomit(1, vom_stats, vom_stats)
+	var/vomit_score = 0
+	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
+		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
+		if(I)
+			vomit_score += I.damage
+		else if (should_have_organ(tag))
+			vomit_score += 45
+	if(chem_effects[CE_TOXIN] || radiation)
+		vomit_score += 0.5 * getToxLoss()
+	if(chem_effects[CE_ALCOHOL_TOXIC])
+		vomit_score += 10 * chem_effects[CE_ALCOHOL_TOXIC]
+	if(chem_effects[CE_ALCOHOL])
+		vomit_score += 10
+	if(stat != DEAD && vomit_score > 25 && prob(10))
+		spawn vomit(1, vomit_score, vomit_score/25)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)

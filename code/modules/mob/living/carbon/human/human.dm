@@ -725,13 +725,12 @@
 		return 0
 	return 1
 
-/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/cooldown_mod = 1, var/level = 3)
+/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3)
 	set waitfor = 0
 	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
 		return
 	level = Clamp(level, 1, 3)
 	timevomit = Clamp(timevomit, 1, 10)
-	cooldown_mod = Clamp(cooldown_mod, 0, 10)
 	if(stat == DEAD)
 		return
 	if(!lastpuke)
@@ -759,10 +758,9 @@
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
 						location.add_vomit_floor(src, toxvomit)
-
+					ingested.remove_any(5)
 					nutrition -= 30
-					adjustToxLoss(-1)
-		sleep(350 / (cooldown_mod * (4 - level)))	//wait 35 seconds before next volley
+		sleep(350)	//wait 35 seconds before next volley
 		lastpuke = 0
 
 /mob/living/carbon/human/proc/morph()
