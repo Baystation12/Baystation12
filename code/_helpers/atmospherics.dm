@@ -31,7 +31,8 @@
 			else
 				. += "<span class='warning'>Pressure: [round(pressure,0.1)] kPa</span>"
 			for(var/mix in mixture.gas)
-				. += "<span class='notice'>[gas_data.name[mix]]: [round((mixture.gas[mix] / total_moles) * 100)]%</span>"
+				var/percentage = round(mixture.gas[mix]/total_moles * 100, advanced ? 0.01 : 1)
+				. += "<span class='notice'>[gas_data.name[mix]]: [percentage]%</span>"
 				if(advanced)
 					var/list/traits = list()
 					if(gas_data.flags[mix] & XGM_GAS_FUEL)
