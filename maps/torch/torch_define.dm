@@ -42,6 +42,7 @@
 	use_overmap = 1
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
+	lobby_screens = list("title","title2")
 
 /datum/map/torch/setup_map()
 	..()
