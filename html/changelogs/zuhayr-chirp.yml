@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Diona nymphs can now pick up and carry a small item. Use the drop_item command or the Home key to drop it. This can also be used to remove your hat."
+  - rscadd: "Losing your head is no longer necessarily lethal, unless you're the kind of fat nasty trash who has a brain or other vital head organ."
