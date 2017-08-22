@@ -42,14 +42,8 @@
 	var/fire_alert = 0
 
 	//Atmos effect - Yes, you can make creatures that require phoron or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
-	var/min_oxy = 5
-	var/max_oxy = 0					//Leaving something at 0 means it's off - has no maximum
-	var/min_tox = 0
-	var/max_tox = 1
-	var/min_co2 = 0
-	var/max_co2 = 5
-	var/min_n2 = 0
-	var/max_n2 = 0
+	var/min_gas = list("oxygen" = 5)
+	var/max_gas = list("phoron" = 1, "carbon_dioxide" = 5)
 	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
@@ -134,31 +128,14 @@
 
 			if( abs(Environment.temperature - bodytemperature) > 40 )
 				bodytemperature += ((Environment.temperature - bodytemperature) / 5)
-
-			if(min_oxy)
-				if(Environment.gas["oxygen"] < min_oxy)
-					atmos_suitable = 0
-			if(max_oxy)
-				if(Environment.gas["oxygen"] > max_oxy)
-					atmos_suitable = 0
-			if(min_tox)
-				if(Environment.gas["phoron"] < min_tox)
-					atmos_suitable = 0
-			if(max_tox)
-				if(Environment.gas["phoron"] > max_tox)
-					atmos_suitable = 0
-			if(min_n2)
-				if(Environment.gas["nitrogen"] < min_n2)
-					atmos_suitable = 0
-			if(max_n2)
-				if(Environment.gas["nitrogen"] > max_n2)
-					atmos_suitable = 0
-			if(min_co2)
-				if(Environment.gas["carbon_dioxide"] < min_co2)
-					atmos_suitable = 0
-			if(max_co2)
-				if(Environment.gas["carbon_dioxide"] > max_co2)
-					atmos_suitable = 0
+			if(min_gas)
+				for(var/gas in min_gas)
+					if(Environment.gas[gas] < min_gas[gas])
+						atmos_suitable = 0
+			if(max_gas)
+				for(var/gas in max_gas)
+					if(Environment.gas[gas] > max_gas[gas])
+						atmos_suitable = 0
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)

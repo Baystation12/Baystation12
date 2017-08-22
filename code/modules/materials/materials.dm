@@ -755,6 +755,30 @@ var/list/name_to_material
 		return 1
 	return 0
 
+/material/aliumium
+	name = "alien alloy"
+	stack_type = null
+	icon_base = "jaggy"
+	door_icon_base = "metal"
+	icon_reinf = "reinf_metal"
+	hitsound = 'sound/weapons/smash.ogg'
+	sheet_singular_name = "chunk"
+	sheet_plural_name = "chunks"
+
+/material/aliumium/New()
+	icon_base = pick("jaggy","curvy")
+	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
+	explosion_resistance = rand(25,40)
+	brute_armor = rand(10,20)
+	burn_armor = rand(10,20)
+	hardness = rand(15,100)
+	integrity = rand(200,400)
+	melting_point = rand(400,10000)
+	..()
+
+/material/aliumium/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+	return
+
 //TODO PLACEHOLDERS:
 /material/leather
 	name = "leather"

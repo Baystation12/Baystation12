@@ -229,7 +229,7 @@
 /obj/item/stack/flag/attack_self(var/mob/user)
 	var/turf/T = get_turf(src)
 
-	if(!istype(T, /turf/simulated/floor/asteroid))
+	if(!istype(T, /turf/simulated/floor/asteroid) && !istype(T, /turf/simulated/floor/exoplanet))
 		to_chat(user, "The flag won't stand up in this terrain.")
 		return
 

@@ -50,6 +50,8 @@
 			return TRUE //collides with edge of map
 		if(target.loc != base_area)
 			return TRUE //collides with another area
+		if(target.density)
+			return TRUE //dense turf
 	return FALSE
 
 //Self-naming/numbering ones.

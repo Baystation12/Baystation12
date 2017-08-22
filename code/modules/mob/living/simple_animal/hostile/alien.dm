@@ -19,14 +19,8 @@
 	attacktext = "slashed"
 	a_intent = I_HURT
 	attack_sound = 'sound/weapons/bladeslice.ogg'
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	unsuitable_atoms_damage = 15
 	faction = "alien"
 	environment_smash = 2
@@ -99,7 +93,6 @@
 	icon_state = "samak"
 	icon_living = "samak"
 	icon_dead = "samak_dead"
-	icon = 'icons/jungle.dmi'
 	move_to_delay = 2
 	maxHealth = 125
 	health = 125
@@ -120,7 +113,6 @@
 	icon_state = "diyaab"
 	icon_living = "diyaab"
 	icon_dead = "diyaab_dead"
-	icon = 'icons/jungle.dmi'
 	move_to_delay = 1
 	maxHealth = 25
 	health = 25
@@ -141,7 +133,6 @@
 	icon_state = "shantak"
 	icon_living = "shantak"
 	icon_dead = "shantak_dead"
-	icon = 'icons/jungle.dmi'
 	move_to_delay = 1
 	maxHealth = 75
 	health = 75
@@ -150,7 +141,7 @@
 	melee_damage_upper = 12
 	attacktext = "gouged"
 	cold_damage_per_tick = 0
-	speak_chance = 5
+	speak_chance = 2
 	speak = list("Shuhn","Shrunnph?","Shunpf")
 	emote_see = list("scratches the ground","shakes out it's mane","tinkles gently")
 
@@ -160,7 +151,6 @@
 	icon_state = "yithian"
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
-	icon = 'icons/jungle.dmi'
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -168,4 +158,33 @@
 	icon_state = "tindalos"
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
-	icon = 'icons/jungle.dmi'
+
+/mob/living/simple_animal/thinbug
+	name = "taki"
+	desc = "It looks like a bunch of legs."
+	icon_state = "thinbug"
+	icon_living = "thinbug"
+	icon_dead = "thinbug_dead"
+	speak_chance = 1
+	emote_hear = list("scratches the ground","chitters")
+
+/mob/living/simple_animal/hostile/jelly
+	name = "zeq"
+	desc = "It looks like a jellyfish floating up. How does it do that?"
+	faction = "zeq"
+	icon_state = "jelly"
+	icon_living = "jelly"
+	icon_dead = "jelly_dead"
+	move_to_delay = 1
+	maxHealth = 75
+	health = 75
+	speed = 1
+	melee_damage_lower = 3
+	melee_damage_upper = 12
+	attacktext = "stung"
+	damtype = BURN
+	speak_chance = 1
+	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
+
+/mob/living/simple_animal/hostile/jelly/New()
+	color = color_rotation(round(rand(0,360),20))
