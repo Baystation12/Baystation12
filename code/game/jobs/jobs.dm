@@ -1,6 +1,6 @@
 var/const/ENG               =(1<<0)
-var/const/SEC               =(1<<1)
-var/const/MED               =(1<<2)
+/*var/const/SEC               =(1<<1)
+var/const/MED               =(1<<2)*/
 var/const/SCI               =(1<<3)
 var/const/CIV               =(1<<4)
 var/const/COM               =(1<<5)

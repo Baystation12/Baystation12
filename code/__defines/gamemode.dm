@@ -50,6 +50,8 @@
 #define MODE_TRAITOR "traitor"
 #define MODE_DEITY "deity"
 #define MODE_GODCULTIST "god cultist"
+#define MODE_INNIE "insurrection"
+#define MODE_INNIE_TRAITOR "innie sympathiser"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130
 

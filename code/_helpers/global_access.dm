@@ -107,6 +107,8 @@
 			return global.Tier3Runes;
 		if("Tier4Runes")
 			return global.Tier4Runes;
+		if("UNSC_ranks")
+			return global.UNSC_ranks;
 		if("WALLITEMS")
 			return global.WALLITEMS;
 		if("XRAYBLOCK")
@@ -573,6 +575,8 @@
 			return global.init;
 		if("initialization_stage")
 			return global.initialization_stage;
+		if("insurrection_objectives")
+			return global.insurrection_objectives;
 		if("integrated_circuit_blacklist")
 			return global.integrated_circuit_blacklist;
 		if("intents")
@@ -1322,6 +1326,8 @@
 			global.Tier3Runes=newval;
 		if("Tier4Runes")
 			global.Tier4Runes=newval;
+		if("UNSC_ranks")
+			global.UNSC_ranks=newval;
 		if("WALLITEMS")
 			global.WALLITEMS=newval;
 		if("XRAYBLOCK")
@@ -1788,6 +1794,8 @@
 			global.init=newval;
 		if("initialization_stage")
 			global.initialization_stage=newval;
+		if("insurrection_objectives")
+			global.insurrection_objectives=newval;
 		if("integrated_circuit_blacklist")
 			global.integrated_circuit_blacklist=newval;
 		if("intents")
@@ -2483,6 +2491,7 @@
 	"Tier2Runes",
 	"Tier3Runes",
 	"Tier4Runes",
+	"UNSC_ranks",
 	"WALLITEMS",
 	"XRAYBLOCK",
 	"_all_globals",
@@ -2716,6 +2725,7 @@
 	"inactive_keys",
 	"init",
 	"initialization_stage",
+	"insurrection_objectives",
 	"integrated_circuit_blacklist",
 	"intents",
 	"intercom_range_display_status",
