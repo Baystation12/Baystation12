@@ -3,6 +3,8 @@
 	fore_dir = WEST
 	vessel_mass = 800
 	default_delay = 12 SECONDS
+	start_x = 4
+	start_y = 5
 
 	restricted_waypoints = list(
 		"Calypso" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
@@ -52,6 +54,8 @@
 		"nav_cluster_6",
 		"nav_cluster_7"
 	)
+	start_x = 4
+	start_y = 5
 
 /obj/effect/shuttle_landmark/cluster/guppy
 	name = "Asteroid Navpoint #1"
