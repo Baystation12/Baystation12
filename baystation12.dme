@@ -1411,6 +1411,7 @@
 #include "code\modules\halo\jobs\UNSC_ship\_access.dm"
 #include "code\modules\halo\jobs\UNSC_ship\_defines.dm"
 #include "code\modules\halo\jobs\UNSC_ship\_UNSC_ship.dm"
+#include "code\modules\halo\lobby_music\halo_lobby_music.dm"
 #include "code\modules\halo\misc\ai-squads.dm"
 #include "code\modules\halo\misc\armourspecials.dm"
 #include "code\modules\halo\misc\atmos_machinery.dm"
