@@ -1,0 +1,6 @@
+author: TheGreyWolf
+
+delete-after: True
+
+changes: 
+  - rscadd: "Tattoos are now available in character setup."

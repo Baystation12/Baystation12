@@ -18,6 +18,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
+	var/list/body_markings = list()
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
@@ -54,6 +55,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["organ_data"]			>> pref.organ_data
 	S["rlimb_data"]			>> pref.rlimb_data
 	S["has_cortical_stack"] >> pref.has_cortical_stack
+	S["body_markings"]		>> pref.body_markings
 	pref.preview_icon = null
 
 /datum/category_item/player_setup_item/general/body/save_character(var/savefile/S)
@@ -78,6 +80,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["organ_data"]			<< pref.organ_data
 	S["rlimb_data"]			<< pref.rlimb_data
 	S["has_cortical_stack"] << pref.has_cortical_stack
+	S["body_markings"]		<< pref.body_markings
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
 	if(!pref.species || !(pref.species in playable_species))
@@ -103,11 +106,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!istype(pref.organ_data)) pref.organ_data = list()
 	if(!istype(pref.rlimb_data)) pref.rlimb_data = list()
-
-	if(pref.organ_data[BP_CHEST] != "cyborg")
-		pref.organ_data[BP_HEAD] = null
-		pref.organ_data[BP_GROIN] = null
-		pref.organ_data[BP_BRAIN] = null
+	if(!istype(pref.body_markings))
+		pref.body_markings = list()
+	else
+		pref.body_markings &= GLOB.body_marking_styles_list
 
 /datum/category_item/player_setup_item/general/body/content(var/mob/user)
 	. = list()
@@ -241,6 +243,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
 		. += "<br><b>Body Color</b><br>"
 		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin)]'><tr><td>__</td></tr></table></font><br>"
+
+	. += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
+	for(var/M in pref.body_markings)
+		. += "[M] <a href='?src=\ref[src];marking_remove=[M]'>-</a> <a href='?src=\ref[src];marking_color=[M]'>Color</a>"
+		. += "<font face='fixedsys' size='3' color='[pref.body_markings[M]]'><table style='display:inline;' bgcolor='[pref.body_markings[M]]'><tr><td>__</td></tr></table></font>"
+		. += "<br>"
+
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/general/body/proc/has_flag(var/datum/species/mob_species, var/flag)
@@ -329,6 +338,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			pref.age = max(min(pref.age, mob_species.max_age), mob_species.min_age)
 
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
+			pref.body_markings.Cut() // Basically same as above.
 
 			prune_occupation_prefs()
 			return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -411,6 +421,32 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/new_f_style = input(user, "Choose your character's facial-hair style:", "Character Preference", pref.f_style)  as null|anything in valid_facialhairstyles
 		if(new_f_style && has_flag(mob_species, HAS_HAIR_COLOR) && CanUseTopic(user))
 			pref.f_style = new_f_style
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["marking_style"])
+		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
+		for(var/M in usable_markings)
+			var/datum/sprite_accessory/S = usable_markings[M]
+			if(!S.species_allowed.len)
+				continue
+			else if(!(pref.species in S.species_allowed))
+				usable_markings -= M
+
+		var/new_marking = input(user, "Choose a body marking:", "Character Preference")  as null|anything in usable_markings
+		if(new_marking && CanUseTopic(user))
+			pref.body_markings[new_marking] = "#000000" //New markings start black
+			return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["marking_remove"])
+		var/M = href_list["marking_remove"]
+		pref.body_markings -= M
+		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["marking_color"])
+		var/M = href_list["marking_color"]
+		var/mark_color = input(user, "Choose the [M] color: ", "Character Preference", pref.body_markings[M]) as color|null
+		if(mark_color && CanUseTopic(user))
+			pref.body_markings[M] = "[mark_color]"
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["reset_limbs"])
