@@ -20,6 +20,7 @@
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/list/wall_connections = list("0", "0", "0", "0")
+	var/floor_type = /turf/simulated/floor/plating //turf it leaves after destruction
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
@@ -182,14 +183,14 @@
 			var/obj/structure/sign/poster/P = O
 			P.roll_and_drop(src)
 		else
-			O.loc = src
+			O.forceMove(src)
 
 	clear_plants()
 	material = get_material_by_name("placeholder")
 	reinf_material = null
 	update_connections(1)
 
-	ChangeTurf(/turf/simulated/floor/plating)
+	ChangeTurf(floor_type)
 
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)

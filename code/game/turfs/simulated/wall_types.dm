@@ -63,3 +63,15 @@
 	return
 /turf/simulated/wall/titanium/New(var/newloc)
 	..(newloc,"titanium")
+
+/turf/simulated/wall/alium
+	icon_state = "jaggy"
+	floor_type = /turf/simulated/floor/fixed/alium
+
+/turf/simulated/wall/alium/New(var/newloc)
+	..(newloc,"alien alloy")
+
+/turf/simulated/wall/alium/ex_act(severity)
+	if(prob(explosion_resistance))
+		return
+	..()

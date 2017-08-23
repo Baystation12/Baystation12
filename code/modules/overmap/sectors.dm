@@ -7,7 +7,7 @@ var/list/points_of_interest = list()
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
-	var/map_z = list()
+	var/list/map_z = list()
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
@@ -25,7 +25,6 @@ var/list/points_of_interest = list()
 
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
-	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
 	map_z = GetConnectedZlevels(z)
 	for(var/zlevel in map_z)
@@ -36,6 +35,7 @@ var/list/points_of_interest = list()
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+	points_of_interest += name
 
 	GLOB.using_map.player_levels |= map_z
 
@@ -73,8 +73,6 @@ var/list/points_of_interest = list()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
 
-	points_of_interest += name
-
 /obj/effect/overmap/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
@@ -105,6 +103,8 @@ var/list/points_of_interest = list()
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
+
+	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
 	testing("Overmap build complete.")
 	return 1

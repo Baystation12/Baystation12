@@ -74,23 +74,24 @@
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
 	..()
-
 	if(!newparent)
 		parent = src
 	else
 		parent = newparent
+	seed = newseed
+	if(start_matured)
+		mature_time = 0
+		health = max_health
 
-	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
+/obj/effect/plant/Initialize()
+	. = ..()
+	
 	if(!plant_controller)
 		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-
 		qdel(src)
 		return
-
-	if(!istype(newseed))
-		newseed = plant_controller.seeds[DEFAULT_SEED]
-	seed = newseed
+	if(!istype(seed))
+		seed = plant_controller.seeds[DEFAULT_SEED]
 	if(!seed)
 		qdel(src)
 		return
@@ -120,10 +121,6 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
-	if(start_matured)
-		mature_time = 0
-		health = max_health
-		process()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
@@ -204,7 +201,7 @@
 
 	for(var/wallDir in GLOB.cardinal)
 		var/turf/newTurf = get_step(T,wallDir)
-		if(newTurf.density)
+		if(newTurf && newTurf.density)
 			direction |= wallDir
 
 	for(var/obj/effect/plant/shroom in T.contents)

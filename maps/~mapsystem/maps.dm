@@ -93,6 +93,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
+	var/num_exoplanets = 0
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
@@ -112,6 +114,15 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/perform_map_generation()
 	return
+
+/datum/map/proc/build_exoplanets()
+	if(!use_overmap)
+		return
+
+	for(var/i = 0, i < num_exoplanets, i++)
+		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
+		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type
+		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()
