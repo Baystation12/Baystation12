@@ -18,9 +18,11 @@ var/repository/mob/mob_repository = new()
 	var/name
 	var/ref
 	var/datum/client_lite/client
+	var/assigned_role
 
 /datum/mob_lite/New(var/mob/M)
 	name = M ? (M.real_name ? M.real_name : M.name) : name
+	assigned_role = M.mind.assigned_role
 	ref = any2ref(M)
 	client = client_repository.get_lite_client(M)
 

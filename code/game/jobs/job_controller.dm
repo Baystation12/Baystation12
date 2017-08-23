@@ -15,17 +15,18 @@ var/global/datum/controller/occupations/job_master
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
+	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0, var/list/factions = list("Station"))
 		occupations = list()
 		occupations_by_type = list()
-		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
+		var/list/all_jobs = /*list(/datum/job/assistant) | */GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
 			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
-			if(job.faction != faction)	continue
+			//if(job.faction != faction)		continue
+			//if(!(job.faction in factions))	continue
 			occupations += job
 			occupations_by_type[job.type] = job
 			if(!setup_titles) continue
@@ -101,6 +102,8 @@ var/global/datum/controller/occupations/job_master
 				player.mind.role_alt_title = GetPlayerAltTitle(player, rank)
 				unassigned -= player
 				job.current_positions++
+				if(job.track_players)
+					job.assigned_players.Add(player)
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
@@ -313,6 +316,8 @@ var/global/datum/controller/occupations/job_master
 							AssignRole(player, job.title)
 							unassigned -= player
 							break
+					else
+						Debug("DO player CorrectLevel([job],[level]) failed for [player.client]")
 
 		// Hand out random jobs to the people who didn't get any in the last check
 		// Also makes sure that they got their preference correct
@@ -502,29 +507,30 @@ var/global/datum/controller/occupations/job_master
 
 
 		// EMAIL GENERATION
-		var/domain
-		if(H.char_branch && H.char_branch.email_domain)
-			domain = H.char_branch.email_domain
-		else
-			domain = "freemail.nt"
-		var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
-		var/complete_login = "[sanitized_name]@[domain]"
+		if(job.generate_email)
+			var/domain
+			if(H.char_branch && H.char_branch.email_domain)
+				domain = H.char_branch.email_domain
+			else
+				domain = "freemail.nt"
+			var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
+			var/complete_login = "[sanitized_name]@[domain]"
 
-		// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
-		// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
-		if(ntnet_global.does_email_exist(complete_login))
-			complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
+			// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+			// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+			if(ntnet_global.does_email_exist(complete_login))
+				complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
 
-		// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
-		if(ntnet_global.does_email_exist(complete_login))
-			to_chat(H, "You were not assigned an email address.")
-			H.mind.store_memory("You were not assigned an email address.")
-		else
-			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
-			EA.password = GenerateKey()
-			EA.login = 	complete_login
-			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
-			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+			// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+			if(ntnet_global.does_email_exist(complete_login))
+				to_chat(H, "You were not assigned an email address.")
+				H.mind.store_memory("You were not assigned an email address.")
+			else
+				var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+				EA.password = GenerateKey()
+				EA.login = 	complete_login
+				to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
+				H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
 		// END EMAIL GENERATION
 
 		//Gives glasses to the vision impaired

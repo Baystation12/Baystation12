@@ -32,6 +32,10 @@
 	var/announced						  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints			  //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
+	var/generate_email = 1
+	var/track_players = 0
+	var/list/assigned_players = list()
+
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
@@ -138,10 +142,10 @@
 		return TRUE
 
 	return FALSE
-    
+
 /datum/job/proc/is_species_allowed(var/datum/species/S)
 	return !GLOB.using_map.is_species_job_restricted(S, src)
-    
+
 /**
  *  Check if members of the given branch are allowed in the job
  *

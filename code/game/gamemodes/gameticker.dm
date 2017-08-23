@@ -404,6 +404,7 @@ var/global/datum/controller/gameticker/ticker
 /datum/controller/gameticker/proc/declare_completion()
 	to_world("<br><br><br><H1>A round of [mode.name] has ended!</H1>")
 
+	/*
 	for(var/mob/Player in GLOB.player_list)
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
@@ -427,8 +428,10 @@ var/global/datum/controller/gameticker/ticker
 				else
 					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
 	to_world("<br>")
+	*/
 
 
+	/*
 	for (var/mob/living/silicon/ai/aiPlayer in GLOB.mob_list)
 		if (aiPlayer.stat != 2)
 			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
@@ -443,8 +446,10 @@ var/global/datum/controller/gameticker/ticker
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
 			to_world("[robolist]")
+			*/
 
 
+	/*
 	var/dronecount = 0
 
 	for (var/mob/living/silicon/robot/robo in GLOB.mob_list)
@@ -466,7 +471,9 @@ var/global/datum/controller/gameticker/ticker
 
 	if(dronecount)
 		to_world("<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round.</b>")
+	*/
 
+	/*
 	if(all_money_accounts.len)
 		var/datum/money_account/max_profit = all_money_accounts[1]
 		var/datum/money_account/max_loss = all_money_accounts[1]
@@ -480,6 +487,7 @@ var/global/datum/controller/gameticker/ticker
 				max_loss = D
 		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>T[max_profit.get_balance()]</b>.")
 		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>T[max_loss.get_balance()]</b>.")
+	*/
 
 	mode.declare_completion()//To declare normal completion.
 
