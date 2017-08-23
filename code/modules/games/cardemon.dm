@@ -35,5 +35,5 @@
 	P.name = "Cardemon Instructions"
 	P.card_icon = "card_cardemon_instructional"
 	P.back_icon = "card_back_cardemon"
-	P.desc = "How To Play Cardemon: every card has 3 stats and an Element. The first stat is Health, second is Damage, third is Speed. Each player plays two cards, and they attack in order of card speed on whichever target the owner selects. Discard cards with no health left over. Once every card has moved or died, a round has finished; you can replace fallen cards with new ones from your hand between rounds. Finally, elements: they do half damage to the one before it, and do double damage to the one after it: ire > spaghetti > metal > money > meat > brain > ire."
+	P.desc = "How To Play Cardemon: every card has 3 stats (health, damage, speed) and an Element.Each player plays two cards; then the cards attack in order of their speed, whichever target the owner selects. Discard cards with no health left over. Once every card has moved or died, a round has finished; you can replace fallen cards with new ones from your hand between rounds. Finally, elements do double damage to the one after it in the list: ire > spaghetti > metal > money > meat > brain > ire."
 	cards += P
