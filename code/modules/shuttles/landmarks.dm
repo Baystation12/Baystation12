@@ -76,6 +76,20 @@
 	else
 		O.generic_waypoints  += src
 
+//Subtype that calls explosion on init to clear space for shuttles
+/obj/effect/shuttle_landmark/automatic/clearing
+	var/radius = 10
+
+/obj/effect/shuttle_landmark/automatic/clearing/Initialize()
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
+	var/list/victims = circlerangeturfs(get_turf(src),radius)
+	for(var/turf/T in victims)
+		if(T.density)
+			T.ChangeTurf(get_base_turf_by_area(T))
+
 /obj/item/device/spaceflare
 	name = "bluespace flare"
 	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a flare attached for marking the spot where you probably shouldn't be standing."
