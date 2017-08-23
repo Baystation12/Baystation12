@@ -1,0 +1,6 @@
+
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Air analysers now have verb to be toggled into advanced mode. It displays gas properties like specific heat and molar mass."
+  - rscadd: "Air analysers can also now be used on pipes and various atmos machinery to inspect the contents."
