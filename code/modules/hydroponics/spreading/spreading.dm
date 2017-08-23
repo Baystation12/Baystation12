@@ -62,18 +62,12 @@
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/plant/Destroy()
-	if(plant_controller)
-		plant_controller.remove_plant(src)
-	for(var/obj/effect/plant/neighbor in range(1,src))
-		plant_controller.add_plant(neighbor)
-	return ..()
-
 /obj/effect/plant/single
 	spread_chance = 0
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
 	..()
+	
 	if(!newparent)
 		parent = src
 	else
@@ -88,13 +82,11 @@
 	
 	if(!plant_controller)
 		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	if(!istype(seed))
 		seed = plant_controller.seeds[DEFAULT_SEED]
 	if(!seed)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
@@ -121,6 +113,13 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
+	
+/obj/effect/plant/Destroy()
+	if(plant_controller)
+		plant_controller.remove_plant(src)
+	for(var/obj/effect/plant/neighbor in range(1,src))
+		plant_controller.add_plant(neighbor)
+	return ..()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
