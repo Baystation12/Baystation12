@@ -1399,6 +1399,7 @@
 #include "code\modules\halo\clothing\marine.dm"
 #include "code\modules\halo\clothing\misc.dm"
 #include "code\modules\halo\clothing\pilot.dm"
+#include "code\modules\halo\clothing\spartan.dm"
 #include "code\modules\halo\clothing\special_armour.dm"
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\floorsigns\floorsigns.dm"
