@@ -208,6 +208,8 @@
 	name = "space land"
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "desert"
+	var/diggable = 1
+	var/mudpit = 0	//if pits should not take turf's color
 
 /turf/simulated/floor/exoplanet/New()
 	if(GLOB.using_map.use_overmap)
@@ -221,6 +223,18 @@
 				light_range = 2
 	..()
 
+/turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
+	if(diggable && istype(C,/obj/item/weapon/shovel))
+		visible_message("<span class='notice'>\The [user] starts digging \the [src]</span>")
+		if(do_after(user, 50))
+			to_chat(user,"<span class='notice'>You dig a deep pit.</span>")
+			new /obj/structure/pit(src)
+			diggable = 0
+		else
+			to_chat(user,"<span class='notice'>You stop shoveling.</span>")
+	else
+		..()
+
 /turf/simulated/floor/exoplanet/ex_act(severity)
 	switch(severity)
 		if(1)
@@ -233,6 +247,7 @@
 	name = "shallow water"
 	icon_state = "seashallow"
 	movement_delay = 2
+	mudpit = 1
 
 /turf/simulated/floor/exoplanet/water/update_dirt()
 	return	// Water doesn't become dirty
