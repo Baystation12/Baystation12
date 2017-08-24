@@ -1,6 +1,7 @@
 /obj/effect/overmap/sector/exoplanet/rocks
 	name = "rocky exoplanet"
 	desc = "A planet with rocky formations on the surface, exposing minerals. Rest of terrain varies."
+	landmark_type = /obj/effect/shuttle_landmark/automatic/clearing
 
 /obj/effect/overmap/sector/exoplanet/rocks/generate_map()
 	if(prob(50))
@@ -18,11 +19,6 @@
 				if(istype(T,/turf/simulated/mineral))
 					var/turf/simulated/mineral/MT = T
 					MT.mined_turf = A.base_turf
-
-/obj/effect/overmap/sector/exoplanet/rocks/generate_landing()
-	. = ..()
-	if(.)
-		explosion(., 10, adminlog = 0)
 
 /datum/random_map/automata/cave_system/mountains
 	iterations = 2

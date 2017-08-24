@@ -7,6 +7,8 @@
 	in_space = 0
 	var/maxx
 	var/maxy
+	var/landmark_type = /obj/effect/shuttle_landmark/automatic
+
 
 /obj/effect/overmap/sector/exoplanet/New()
 	if(!GLOB.using_map.use_overmap)
@@ -74,7 +76,7 @@
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing()
 	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
 	if(T)
-		var/obj/effect/shuttle_landmark/automatic/A = new(T)
+		var/obj/effect/shuttle_landmark/automatic/A = new landmark_type(T)
 		A.base_area = T.loc
 	return T
 
