@@ -459,6 +459,12 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	flags = CONDUCT
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
+/obj/item/device/slime_scanner/proc/list_gases(var/gases)
+	. = list()
+	for(var/g in gases)
+		. += "[gas_data.name[g]] ([gases[g]]%)"
+	return english_list(.)
+
 /obj/item/device/slime_scanner/afterattack(mob/target, mob/user, proximity)
 	if(!proximity)
 		return
@@ -471,17 +477,17 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 		var/mob/living/carbon/human/H = target
 		user.show_message("<span class='notice'>Data for [H]:</span>")
 		user.show_message("Species:\t[H.species]")
-		user.show_message("Breathes:\t[H.species.breath_type]")
-		user.show_message("Exhales:\t[H.species.exhale_type]")
-		user.show_message("Known toxins:\t[H.species.poison_type]")
+		user.show_message("Breathes:\t[gas_data.name[H.species.breath_type]]")
+		user.show_message("Exhales:\t[gas_data.name[H.species.exhale_type]]")
+		user.show_message("Known toxins:\t[gas_data.name[H.species.poison_type]]")
 		user.show_message("Temperature comfort zone:\t[H.species.cold_discomfort_level] K to [H.species.heat_discomfort_level] K")
 		user.show_message("Pressure comfort zone:\t[H.species.warning_low_pressure] kPa to [H.species.warning_high_pressure] kPa")
 	else if(istype(target, /mob/living/simple_animal))
 		var/mob/living/simple_animal/A = target
 		user.show_message("<span class='notice'>Data for [A]:</span>")
 		user.show_message("Species:\t[initial(A.name)]")
-		user.show_message("Breathes:\t[english_list(A.min_gas)]")
-		user.show_message("Known toxins:\t[english_list(A.max_gas)]")
+		user.show_message("Breathes:\t[list_gases(A.min_gas)]")
+		user.show_message("Known toxins:\t[list_gases(A.max_gas)]")
 		user.show_message("Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K")
 	else if(istype(target, /mob/living/carbon/slime/))
 		var/mob/living/carbon/slime/T = target
