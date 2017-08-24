@@ -24,7 +24,7 @@
 	return 0
 
 /datum/game_mode/slayer/declare_completion()
-	var/out_message = "<b>The round is over! The scores were:<b></br>"
+	var/out_message = "<h1>The round is over! The scores were:</h1>"
 	out_message += get_formatted_scores()
 	to_world(out_message)
 
