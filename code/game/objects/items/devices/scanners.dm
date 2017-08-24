@@ -291,16 +291,16 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	var/advanced_mode = 0
 
-/obj/item/device/analyzer/verb/verbosity(mob/user as mob)
+/obj/item/device/analyzer/verb/verbosity(mob/user)
 	set name = "Toggle Advanced Gas Analysis"
 	set category = "Object"
 	set src in usr
 
 	if (!user.incapacitated())
 		advanced_mode = !advanced_mode
-		to_chat(usr, "You toggle advanced gas analysis [advanced_mode ? "on" : "off"].")
+		to_chat(user, "You toggle advanced gas analysis [advanced_mode ? "on" : "off"].")
 
-/obj/item/device/analyzer/attack_self(mob/user as mob)
+/obj/item/device/analyzer/attack_self(mob/user)
 
 	if (user.incapacitated())
 		return
