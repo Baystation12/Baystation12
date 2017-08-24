@@ -1,0 +1,16 @@
+author: Cael_Aislinn and XO-11
+
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+# Any changes you've made.  See valid prefix list above.
+# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
+# SCREW THIS UP AND IT WON'T WORK.
+# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
+# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
+changes: 
+  - wip: "Brings over XO-11's Slayer and Team Slayer gamemodes, with some rewrites."
+  - imageadd: "Adds Halo lobby screens."
+  - soundadd: "Adds Halo lobby music."
+  - imageadd: "Fixes some (but not all) nonworking Halo gear."
+  - maptweak: "Brings over the Insurrection slayer map as 'Death Asteroid'."
