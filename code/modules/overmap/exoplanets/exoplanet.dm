@@ -65,6 +65,7 @@
 	for(var/mob/living/simple_animal/A in animals)
 		A.minbodytemp = atmosphere.temperature - 20
 		A.maxbodytemp = atmosphere.temperature + 30
+		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
 		if(A.min_gas)
 			A.min_gas = mingas.Copy()
 		if(A.max_gas)

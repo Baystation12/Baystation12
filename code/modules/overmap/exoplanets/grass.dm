@@ -9,6 +9,12 @@
 		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/grass(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)
 		get_biostuff(M)
 
+/obj/effect/overmap/sector/exoplanet/grass/generate_atmosphere()
+	..()
+	if(atmosphere)
+		atmosphere.temperature = T20C + rand(10, 30)
+		atmosphere.update_values()
+
 /obj/effect/overmap/sector/exoplanet/grass/update_biome()
 	..()
 	for(var/datum/seed/S in seeds)
