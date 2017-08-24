@@ -136,7 +136,8 @@
 
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
-			alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+			spawn()
+				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 			healed_threshold = 0
 
 		if(damage < (max_damage / 4))
