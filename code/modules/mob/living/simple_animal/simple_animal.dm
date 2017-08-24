@@ -117,25 +117,20 @@
 	//Atmos
 	var/atmos_suitable = 1
 
-	var/atom/A = src.loc
+	var/atom/A = loc
+	var/datum/gas_mixture/environment = A.return_air()
 
-	if(istype(A,/turf))
-		var/turf/T = A
-
-		var/datum/gas_mixture/Environment = T.return_air()
-
-		if(Environment)
-
-			if( abs(Environment.temperature - bodytemperature) > 40 )
-				bodytemperature += ((Environment.temperature - bodytemperature) / 5)
-			if(min_gas)
-				for(var/gas in min_gas)
-					if(Environment.gas[gas] < min_gas[gas])
-						atmos_suitable = 0
-			if(max_gas)
-				for(var/gas in max_gas)
-					if(Environment.gas[gas] > max_gas[gas])
-						atmos_suitable = 0
+	if(environment)
+		if( abs(environment.temperature - bodytemperature) > 40 )
+			bodytemperature += (environment.temperature - bodytemperature) / 5
+		if(min_gas)
+			for(var/gas in min_gas)
+				if(environment.gas[gas] < min_gas[gas])
+					atmos_suitable = 0
+		if(max_gas)
+			for(var/gas in max_gas)
+				if(environment.gas[gas] > max_gas[gas])
+					atmos_suitable = 0
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)
