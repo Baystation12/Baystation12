@@ -46,6 +46,7 @@
 	var/role_alt_title
 
 	var/datum/job/assigned_job
+	var/datum/species/assigned_species
 
 	var/list/datum/objective/objectives = list()
 	var/list/datum/objective/special_verbs = list()

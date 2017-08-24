@@ -92,6 +92,8 @@
 		/mob/living/carbon/human/proc/switch_stance
 		)
 
+	total_slots = 1
+
 /datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
 	var/obj/item/organ/internal/eyes/nabber/O = H.internal_organs_by_name[BP_EYES]
 	if(!O || !istype(O))

@@ -421,7 +421,7 @@
 	dat += "</center>"
 	src << browse(jointext(dat, null), "window=latechoices;size=300x640;can_close=1")
 
-/mob/new_player/proc/create_character(var/turf/spawn_turf)
+/mob/new_player/proc/create_character(var/turf/spawn_turf, var/bypass = 1)
 	spawning = 1
 	close_spawn_windows()
 
@@ -436,9 +436,10 @@
 		spawn_turf = pick(spawnpoint.turfs)
 
 	if(chosen_species)
-		if(!check_species_allowed(chosen_species))
+		if(!check_species_allowed(chosen_species, admin_auto_bypass = bypass))
 			spawning = 0 //abort
 			return null
+		chosen_species.current_slots++
 		new_character = new(spawn_turf, chosen_species.name)
 
 	if(!new_character)
@@ -465,6 +466,7 @@
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually
 		mind.original = new_character
+		mind.assigned_species = new_character.species
 		if(client.prefs.memory)
 			mind.store_memory(client.prefs.memory)
 		if(client.prefs.relations.len)
@@ -515,7 +517,7 @@
 /mob/new_player/proc/has_admin_rights()
 	return check_rights(R_ADMIN, 0, src)
 
-/mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
+/mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert = 1, var/admin_auto_bypass = 0)
 	if(!(S.spawn_flags & SPECIES_CAN_JOIN) && !has_admin_rights())
 		if(show_alert)
 			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
@@ -524,6 +526,11 @@
 		if(show_alert)
 			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
 		return 0
+	if(!S.has_open_slots())
+		if(!has_admin_rights() || (!admin_auto_bypass && alert("Your current species, [client.prefs.species], does not have any open spots. Do you want to bypass the [client.prefs.species] number restriction?",,"Yes","No") != "Yes"))
+			if(show_alert)
+				to_chat(src, alert("Your current species, [client.prefs.species], does not have any open spots."))
+			return 0
 	return 1
 
 /mob/new_player/get_species()

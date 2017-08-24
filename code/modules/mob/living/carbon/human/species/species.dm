@@ -183,6 +183,9 @@
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
+	var/current_slots = 0
+	var/total_slots = -1
+
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
 
@@ -430,3 +433,6 @@
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
+
+/datum/species/proc/has_open_slots()
+	return (total_slots == -1 || current_slots < total_slots)
