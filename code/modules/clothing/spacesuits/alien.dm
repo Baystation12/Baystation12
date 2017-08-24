@@ -161,3 +161,12 @@
 	if (magpulse)
 		to_chat(user, "It would be hard to take these off without relaxing your grip first.")//theoretically this message should only be seen by the wearer when the claws are equipped.
 
+
+/obj/item/clothing/gloves/nabber
+	desc = "These insulated gloves have only three fingers."
+	name = "three-fingered insulated gloves"
+	icon_state = "white-glove-nabber"
+	color = COLOR_YELLOW
+	siemens_coefficient = 0
+	permeability_coefficient = 0.05
+	species_restricted = list(SPECIES_NABBER)
