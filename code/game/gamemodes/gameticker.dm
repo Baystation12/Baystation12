@@ -403,7 +403,7 @@ var/global/datum/controller/gameticker/ticker
 
 /datum/controller/gameticker/proc/declare_completion()
 	to_world("<br><br><br><H1>A round of [mode.name] has ended!</H1>")
-
+	roll_titles()
 	for(var/mob/Player in GLOB.player_list)
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
