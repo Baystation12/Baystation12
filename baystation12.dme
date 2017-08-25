@@ -461,6 +461,7 @@
 #include "code\game\gamemodes\malfunction\newmalf_ability_trees\tree_interdiction.dm"
 #include "code\game\gamemodes\malfunction\newmalf_ability_trees\tree_manipulation.dm"
 #include "code\game\gamemodes\malfunction\newmalf_ability_trees\tree_networking.dm"
+#include "code\game\gamemodes\malfunction\newmalf_ability_trees\tree_passive.dm"
 #include "code\game\gamemodes\meteor\meteor.dm"
 #include "code\game\gamemodes\meteor\meteors.dm"
 #include "code\game\gamemodes\mixed\bughunt.dm"

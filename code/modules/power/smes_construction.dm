@@ -71,8 +71,19 @@
 	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
 	var/RCon = 1				// Cut to disable AI and remote control.
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
+	var/emp_proof = 0			// Whether the SMES is EMP proof
+
 	charge = 0
 	should_be_mapped = 1
+
+/obj/machinery/power/smes/buildable/malf_upgrade(var/mob/living/silicon/ai/user)
+	..()
+	malf_upgraded = 1
+	emp_proof = 1
+	recalc_coils()
+	to_chat(user, "\The [src] has been upgraded. It's transfer rate and capacity has increased, and it is now resistant against EM pulses.")
+	return 1
+
 
 /obj/machinery/power/smes/buildable/max_cap_in_out/Initialize()
 	. = ..()
@@ -157,6 +168,10 @@
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
 		output_level_max += C.IOCapacity
+	if(malf_upgraded)
+		capacity *= 1.2
+		input_level_max *= 2
+		output_level_max *= 2
 	charge = between(0, charge, capacity)
 
 // Proc: total_system_failure()
@@ -410,3 +425,8 @@
 /obj/machinery/power/smes/buildable/proc/set_output(var/new_output = 0)
 	output_level = between(0, new_output, output_level_max)
 	update_icon()
+
+/obj/machinery/power/smes/buildable/emp_act(var/severity)
+	if(emp_proof)
+		return
+	..(severity)
