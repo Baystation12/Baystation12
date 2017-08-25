@@ -10,6 +10,7 @@
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
 	#include "torch_gamemodes.dm"
+	#include "torch_antagonism.dm"
 
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
