@@ -50,6 +50,7 @@
 		return
 	for(var/t in organs)
 		qdel(t)
+	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
 /mob/living/carbon/AIize()
@@ -110,6 +111,7 @@
 /mob/living/carbon/human/proc/Robotize()
 	if (transforming)
 		return
+	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
