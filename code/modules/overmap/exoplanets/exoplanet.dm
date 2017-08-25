@@ -77,29 +77,31 @@
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing()
 	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
 	if(T)
-		var/obj/effect/shuttle_landmark/automatic/A = new landmark_type(T)
-		A.base_area = T.loc
+		new landmark_type(T)
 	return T
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
-	atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-	atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
-	if(prob(80)) //let the fuckery commence
-		var/list/oldgas = atmosphere.gas.Copy()
+	if(prob(10))	//small chance of getting a perfectly habitable planet
+		atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
+		atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
+	else //let the fuckery commence
 		var/list/newgases = gas_data.gases.Copy()
 		if(prob(90)) //all phoron planet should be rare
 			newgases -= "phoron"
-		if(prob(20)) //alium gas should be slightly less common than mundane shit
+		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
-		for(var/g in oldgas) //swapping gases wholesale. don't try at home
-			var/ng = pick_n_take(newgases)
-			if(ng in oldgas)
-				atmosphere.gas[ng] += oldgas[g]
-			else
-				atmosphere.gas[ng] = oldgas[g]
-			if(g != ng)
-				atmosphere.gas -= g
+		
+		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
+		var/gasnum = rand(1,4)
+		for(var/i = 1 to gasnum) //swapping gases wholesale. don't try at home
+			var/ng = pick_n_take(newgases)	//pick a gas
+			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
+			if(i == gasnum) //if it's last gas, let it have all remaining moles
+				part = total_moles
+			atmosphere.gas[ng] += part
+			total_moles = max(total_moles - part, 0)
+		
 	atmosphere.temperature = T20C + rand(-10, 10)
 	var/factor = max(rand(60,140)/100, 0.6)
 	atmosphere.multiply(factor)
@@ -124,7 +126,7 @@
 	var/large_flora_prob = 60
 	var/flora_prob = 60
 	var/fauna_prob = 5
-	var/fauna_diversity = 4
+	var/flora_diversity = 4
 
 	var/list/fauna_types = list()
 	var/list/small_flora_types = list()
@@ -174,11 +176,11 @@
     new beastie(T)
 
 /datum/random_map/noise/exoplanet/proc/generate_flora()
-	for(var/i = 1 to fauna_diversity)
+	for(var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
 		S.randomize()
-		S.set_trait(TRAIT_PRODUCT_ICON,pick("alien","alien-product","alien[rand(2,5)]","alien[rand(2,5)]-product"))
-		S.set_trait(TRAIT_PLANT_ICON,pick("alien","alien[rand(2,4)]"))
+		S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
+		S.set_trait(TRAIT_PLANT_ICON,"alien[rand(1,4)]")
 		var/color = pick(plantcolors)
 		if(color == "RANDOM")
 			color = get_random_colour(0,75,190)
@@ -190,13 +192,14 @@
 		else if(carnivore_prob < 20)
 			S.set_trait(TRAIT_CARNIVOROUS,1)
 		small_flora_types += S
-	for(var/i = 1 to fauna_diversity)
+	for(var/i = 1 to flora_diversity)
 		var/datum/seed/S = new()
 		S.randomize()
-		S.set_trait(TRAIT_PRODUCT_ICON,pick("alien","alien-product","alien[rand(2,5)]","alien[rand(2,5)]-product"))
+		S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
 		S.set_trait(TRAIT_PLANT_ICON,"tree5")
 		S.set_trait(TRAIT_SPREAD,0)
 		S.set_trait(TRAIT_HARVEST_REPEAT,1)
+		S.chems["woodpulp"] = 1
 		big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
@@ -207,7 +210,7 @@
 
 /turf/simulated/floor/exoplanet
 	name = "space land"
-	icon = 'icons/misc/beach.dmi'
+	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
