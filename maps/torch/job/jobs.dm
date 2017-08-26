@@ -1070,6 +1070,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
+	availablity_chance = 30
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"
 	ideal_character_age = 30
@@ -1090,6 +1091,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
+	availablity_chance = 20
 	supervisors = "yourself"
 	selection_color = "#515151"
 	ideal_character_age = 30
