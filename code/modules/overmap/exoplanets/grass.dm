@@ -68,3 +68,4 @@
 	name = "grass"
 	icon = 'icons/jungle.dmi'
 	icon_state = "grass2"
+	mudpit = 1

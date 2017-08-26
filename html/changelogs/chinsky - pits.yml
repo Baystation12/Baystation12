@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Can now dig graves planetside. Use shovel on ground to dig a pit. Can place grave markers with wooden planks."
