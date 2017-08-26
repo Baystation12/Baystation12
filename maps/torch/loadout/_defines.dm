@@ -16,7 +16,7 @@
 #define NON_MILITARY_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant,/datum/job/stowaway)
 
 //For jobs that allow for decorative or ceremonial clothing
-#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant,/datum/job/stowaway)
+#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway, /datum/job/guard)
 
 //For civilian jobs that may have a uniform, but not a strict one
 #define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/stowaway, /datum/job/scientist, /datum/job/senior_scientist)
