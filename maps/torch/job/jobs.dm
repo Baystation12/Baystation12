@@ -344,8 +344,8 @@
 
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Support"
-	department_flag = SPT
+	department = "Service"
+	department_flag = SRV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -369,8 +369,8 @@
 
 /datum/job/explorer
 	title = "Explorer"
-	department = "Support"
-	department_flag = SPT
+	department = "Service"
+	department_flag = SRV
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
