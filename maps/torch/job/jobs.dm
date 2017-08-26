@@ -342,6 +342,55 @@
 	minimal_access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
 						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads)
 
+/datum/job/pathfinder
+	title = "Pathfinder"
+	department = "Support"
+	department_flag = SPT
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Commanding Officer and the Executive Officer"
+	selection_color = "#515151"
+	minimal_player_age = 7
+	economic_modifier = 7
+	ideal_character_age = 35
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/pathfinder
+	allowed_branches = /datum/mil_branch/expeditionary_corps
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o1,
+	)
+
+
+	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
+						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+	minimal_access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
+						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+
+/datum/job/explorer
+	title = "Explorer"
+	department = "Support"
+	department_flag = SPT
+	total_positions = 3
+	spawn_positions = 3
+	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
+	selection_color = "#515151"
+	minimal_player_age = 4
+	ideal_character_age = 20
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/explorer
+	allowed_branches = /datum/mil_branch/expeditionary_corps
+
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+	)
+
+	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
+						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
+						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
 
 /datum/job/senior_engineer
 	title = "Senior Engineer"
