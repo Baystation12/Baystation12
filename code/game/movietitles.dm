@@ -6,7 +6,7 @@
 		M.overlay_fullscreen("scanlines",/obj/screen/fullscreen/scanline)
 		M.overlay_fullscreen("whitenoise",/obj/screen/fullscreen/noise)
 		if(M.is_preference_enabled(/datum/client_preference/play_admin_midis))
-			sound_to(M, sound('sound/music/THUNDERDOME.ogg', repeat = 1, wait = 0, volume = 65, channel = 4))
+			sound_to(M, sound('sound/music/THUNDERDOME.ogg', repeat = 1, wait = 0, volume = 40, channel = 4))
 
 	var/list/titles = list()
 	var/list/cast = list()
@@ -26,6 +26,8 @@
 	for(var/mob/living/carbon/human/H in world)
 		if(findtext(H.real_name,"(mannequin)"))
 			continue
+		if(H.isMonkey() && findtext(H.real_name,"[lowertext(H.species.name)]")) //no monki
+			continue
 		if(!cast.len && !chunksize)
 			chunk += "CAST:"
 		var/job = ""
@@ -41,9 +43,15 @@
 		cast += "<center>[jointext(chunk,"<br>")]</center>"
 	titles += cast
 	var/list/corpses = list()
+	var/list/monkies = list()
 	for(var/mob/living/carbon/human/H in GLOB.dead_mob_list_)
 		if(H.real_name)
 			corpses += H.real_name
+		if(H.isMonkey() && findtext(H.real_name,"[lowertext(H.species.name)]"))
+			monkies[H.species.name] += 1
+	for(var/spec in monkies)
+		var/datum/species/S = all_species[spec]
+		corpses += "[monkies[spec]] [monkies[spec] > 1 ? S.name : S.name_plural]"
 	if(corpses.len)
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"
 
