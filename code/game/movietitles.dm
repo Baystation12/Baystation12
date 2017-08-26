@@ -52,12 +52,12 @@
 	for(var/client/C)
 		if(!C.holder)
 			continue
-		if((C.holder.rights & R_MOD) && !(C.holder.rights & R_DEBUG|R_ADMIN))
-			goodboys += "[C.ckey]"
-		else
+		if(C.holder.rights & (R_DEBUG|R_ADMIN))
 			var/datum/species/S = all_species[pick(all_species)]
 			var/g = prob(50) ? MALE : FEMALE
 			staff += "[S.get_random_name(g)] a.k.a. '[C.key]'"
+		else if(C.holder.rights & R_MOD)
+			goodboys += "[C.key]"
 	titles += "<center>[jointext(staff,"<br>")]</center>"
 	if(goodboys.len)
 		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center>"
