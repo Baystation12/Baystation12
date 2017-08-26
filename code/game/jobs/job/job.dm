@@ -10,6 +10,8 @@
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
+	var/availablity_chance = 100          // Percentage chance job is available each round
+
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#ffffff"       // Selection screen color
 	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.
@@ -32,6 +34,12 @@
 
 	var/announced = TRUE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+
+/datum/job/New()
+	..()
+	if(prob(100-availablity_chance))	//Close positions, blah blah.
+		total_positions = 0
+		spawn_positions = 0
 
 /datum/job/dd_SortValue()
     return title
