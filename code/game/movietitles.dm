@@ -22,15 +22,15 @@
 	possible_titles += "[pick("GUNS, GUNS EVERYWHERE", "THE LITTLEST ARMALIS", "WHAT HAPPENS WHEN YOU MIX MAINTENANCE DRONES AND COMMERCIAL-GRADE PACKING FOAM", "ATTACK! ATTACK! ATTACK!", "SEX BOMB")]"
 	possible_titles += "[pick("SPACE", "SEXY", "DRAGON", "WARLOCK", "LAUNDRY", "GUN", "ADVERTISING", "DOG", "CARBON MONOXIDE", "NINJA", "WIZARD", "SOCRATIC", "JUVENILE DELIQUENCY", "POLITICALLY MOTIVATED", "RADTACULAR SICKNASTY")] [pick("QUEST", "FORCE", "ADVENTURE")]"
 
-	titles += "<center><h1>EPISODE [rand(1,1000)]<br>[pick(possible_titles)]</h1></center>"
+	titles += "<center><h1>EPISODE [rand(1,1000)]<br>[pick(possible_titles)]<h1></h1></h1></center>"
 	for(var/mob/living/carbon/human/H in world)
-		for(findtext(H.real_name,"(mannequin)"))
+		if(findtext(H.real_name,"(mannequin)"))
 			continue
 		if(!cast.len && !chunksize)
 			chunk += "CAST:"
 		var/job = ""
 		if(GetAssignment(H) != "Unassigned")
-			job = ", [GetAssignment(H)]"
+			job = ", [uppertext(GetAssignment(H))]"
 		chunk += "[H.species.get_random_name(H.gender)]\t\t\tas\t\t\t[uppertext(H.real_name)][job]"
 		chunksize++
 		if(chunksize > 9)
