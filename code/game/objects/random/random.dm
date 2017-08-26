@@ -894,12 +894,12 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "spacecash1"
 
 /obj/random/cash/spawn_choices()
-	return list(/obj/item/weapon/spacecash/bundle/c1 = 4,
-				/obj/item/weapon/spacecash/bundle/c10 = 3,
-				/obj/item/weapon/spacecash/bundle/c20 = 3,
-				/obj/item/weapon/spacecash/bundle/c50 = 2,
-				/obj/item/weapon/spacecash/bundle/c100 = 2,
-				/obj/item/weapon/spacecash/bundle/c1000 = 1)
+	return list(/obj/item/weapon/spacecash/c1 = 4,
+				/obj/item/weapon/spacecash/c10 = 3,
+				/obj/item/weapon/spacecash/c20 = 3,
+				/obj/item/weapon/spacecash/c50 = 2,
+				/obj/item/weapon/spacecash/c100 = 2,
+				/obj/item/weapon/spacecash/c1000 = 1)
 
 /obj/random/maintenance/solgov //can be used for loot on non-torch maps, so not a torch item
 	name = "random maintenance item"

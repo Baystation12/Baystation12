@@ -88,7 +88,7 @@
 
 	return FALSE
 
-/obj/item/device/uplink/proc/get_item_cost(var/item_type, var/item_cost)
+/obj/item/device/uplink/get_item_cost(var/item_type, var/item_cost)
 	return item_type == discount_item ? max(1, round(item_cost*discount_amount)) : item_cost
 
 // Toggles the uplink on and off. Normally this will bypass the item's normal functions and go to the uplink menu, if activated.

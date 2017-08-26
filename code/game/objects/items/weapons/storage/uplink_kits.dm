@@ -168,7 +168,7 @@
 
 /obj/item/weapon/storage/secure/briefcase/money
 
-	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 10)
+	startswith = list(/obj/item/weapon/spacecash/c1000 = 10)
 
 
 

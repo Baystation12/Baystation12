@@ -165,8 +165,8 @@
 			var/obj/item/weapon/spacecash/ewallet/C = W
 			paid = pay_with_ewallet(C)
 			handled = 1
-		else if (istype(W, /obj/item/weapon/spacecash/bundle))
-			var/obj/item/weapon/spacecash/bundle/C = W
+		else if (istype(W, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = W
 			paid = pay_with_cash(C)
 			handled = 1
 
@@ -224,7 +224,7 @@
 /**
  *  Receive payment with cashmoney.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/bundle/cashmoney)
+/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney)
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in

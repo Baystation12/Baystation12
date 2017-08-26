@@ -27,12 +27,12 @@
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
 			h_user.drop_from_inventory(src)
-			h_user.drop_from_inventory(bundle)
-			h_user.put_in_hands(bundle)
+			h_user.drop_from_inventory(SC)
+			h_user.put_in_hands(SC)
 		to_chat(user, "<span class='notice'>You combine the Thalers to a bundle of [SC.worth] Thalers.</span>")
 		qdel(src)
 
-/obj/item/weapon/spacecash/bundle/getMoneyImages()
+/obj/item/weapon/spacecash/proc/getMoneyImages()
 	if(icon_state)
 		return list(icon_state)
 	. = list()
@@ -51,7 +51,7 @@
 	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
 		. += "spacecash1"
 
-/obj/item/weapon/spacecash/bundle/update_icon()
+/obj/item/weapon/spacecash/update_icon()
 	overlays.Cut()
 	var/list/images = src.getMoneyImages()
 
@@ -74,7 +74,7 @@
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/spacecash/bundle/attack_self()
+/obj/item/weapon/spacecash/attack_self()
 	var/amount = input(usr, "How many Thalers do you want to take? (0 to [src.worth])", "Take Money", 20) as num
 	amount = round(Clamp(amount, 0, src.worth))
 	if(amount==0) return 0
