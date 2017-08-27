@@ -619,19 +619,15 @@
 
 /datum/mil_rank/civ/civ
 	name = "Civilian"
-	name_short = null
 
 /datum/mil_rank/civ/nt
 	name = "NanoTrasen Employee"
-	name_short = null
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
-	name_short = null
 
 /datum/mil_rank/civ/offduty
 	name = "Off-Duty Personnel"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
-	name_short = null
