@@ -47,7 +47,7 @@
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
-		speaker_name = H.GetVoice()
+		speaker_name = H.rank_prefix_name(H.GetVoice())
 
 	if(italics)
 		message = "<i>[message]</i>"
