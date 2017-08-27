@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Added a ton of usless gasses. Overall fireball planets should be slightly more rare now"
-  - tweak: "Lighters now have fuel storage inside, and will shut down if it's empty. Can refill at any welder fuel tank."
