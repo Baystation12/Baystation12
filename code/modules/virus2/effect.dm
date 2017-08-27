@@ -238,9 +238,9 @@
 			data = c_data
 		else
 			data = pick(/datum/reagent/bicaridine, /datum/reagent/kelotane, /datum/reagent/dylovene, /datum/reagent/inaprovaline, /datum/reagent/space_drugs, /datum/reagent/sugar,
-						/datum/reagent/tramadol, "dexalin", /datum/reagent/cryptobiolin, /datum/reagent/impedrezene, /datum/reagent/hyperzine, /datum/reagent/ethylredoxrazine,
+						/datum/reagent/tramadol, /datum/reagent/dexalin, /datum/reagent/cryptobiolin, /datum/reagent/impedrezene, /datum/reagent/hyperzine, /datum/reagent/ethylredoxrazine,
 						/datum/reagent/mindbreaker, /datum/reagent/nutriment/glucose)
-		var/datum/reagent/R = chemical_reagents_list[data]
+		var/datum/reagent/R = GLOB.chemical_reagents_list[data]
 		name = "[initial(name)] ([R.name])"
 
 	activate(var/mob/living/carbon/human/mob,var/multiplier)

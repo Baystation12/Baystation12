@@ -24,7 +24,7 @@
 		H.visible_message("<B>\The [H]</B> starts turning very red...")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("dexalin"))
+		if(!H.reagents.has_reagent(/datum/reagent/dexalin))
 			for(var/organ_name in BP_ALL_LIMBS)
 				var/obj/item/organ/external/E = H.get_organ(organ_name)
 				E.take_damage(0, 5, 0)

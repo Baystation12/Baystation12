@@ -564,8 +564,8 @@
 	icon_state = "egg"
 	filling_color = "#FFFFFF"
 
-/obj/item/weapon/reagent_containers/food/snacks/Initialize()
-	. = ..()
+/obj/item/weapon/reagent_containers/food/snacks/New()
+	..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/organ
@@ -1478,7 +1478,7 @@
 	nutriment_desc = list("salad" = 4, "egg" = 2, "potato" = 2)
 	nutriment_amt = 8
 
-/obj/item/weapon/reagent_containers/food/snacks/nettlesoup/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/nettlesoup/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/water, 5)
 	reagents.add_reagent(/datum/reagent/tricordrazine, 5)
@@ -2094,7 +2094,7 @@
 	filling_color = "#F2F2F2"
 	center_of_mass = "x=16;y=14"
 
-/obj/item/weapon/reagent_containers/food/snacks/mint/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/mint/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/nutriment/mint, 1)
     bitesize = 1
@@ -2194,7 +2194,7 @@
 	nutriment_amt = 8
 	New()
 		..()
-		reagents.add_reagent("gold", 5)
+		reagents.add_reagent(/datum/reagent/gold, 5)
 		bitesize = 3
 
 /////////////////////////////////////////////////Sliceable////////////////////////////////////////

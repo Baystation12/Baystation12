@@ -335,7 +335,7 @@
 		for(var/A in H.reagents.reagent_list)
 			var/datum/reagent/R = A
 			if(R.scannable)
-				reagentdata["[R.id]"] = "[round(H.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+				reagentdata[R.type] = "[round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]"
 		if(reagentdata.len)
 			dat += "Beneficial reagents detected in subject's blood:"
 			for(var/d in reagentdata)

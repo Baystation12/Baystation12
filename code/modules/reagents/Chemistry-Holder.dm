@@ -12,15 +12,8 @@
 	my_atom = A
 
 	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
-	if(!chemical_reagents_list)
-		//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent type
-		var/paths = typesof(/datum/reagent) - /datum/reagent
-		chemical_reagents_list = list()
-		for(var/path in paths)
-			var/datum/reagent/D = new path()
-			if(!D.name)
-				continue
-			chemical_reagents_list[D.type] = D
+	if(!GLOB.chemical_reagents_list)
+		do_initialize_chemical_reagents()
 
 /datum/reagents/Destroy()
 	. = ..()
@@ -138,7 +131,7 @@
 			if(my_atom)
 				my_atom.on_reagent_change()
 			return 1
-	var/datum/reagent/D = chemical_reagents_list[reagent_type]
+	var/datum/reagent/D = GLOB.chemical_reagents_list[reagent_type]
 	if(D)
 		var/datum/reagent/R = new D.type()
 		reagent_list += R
@@ -152,7 +145,7 @@
 			my_atom.on_reagent_change()
 		return 1
 	else
-		warning("[my_atom] attempted to add a reagent of type '[reagent_type]' which doesn't exist. ([usr])")
+		warning("[log_info_line(my_atom)] attempted to add a reagent of type '[reagent_type]' which doesn't exist. ([usr])")
 	return 0
 
 /datum/reagents/proc/remove_reagent(var/reagent_type, var/amount, var/safety = 0)

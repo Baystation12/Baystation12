@@ -428,7 +428,7 @@
 	desc = "Contains only water, malt and hops."
 	icon_state = "beer"
 	center_of_mass = "x=16;y=12"
-/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
 
@@ -438,6 +438,6 @@
 	icon_state = "alebottle"
 	item_state = "beer"
 	center_of_mass = "x=16;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/ethanol/ale, 30)

@@ -92,7 +92,7 @@
 	dat += "<b>VAT CONTENT</b><br>"
 	for(var/datum/reagent/R in reagents.reagent_list)
 		dat += "[R.name]: [R.volume]"
-		dat += "<A href='?src=\ref[src];disposeI=[R.id]'>Purge</A><BR>"
+		dat += "<A href='?src=\ref[src];disposeI=\ref[R]'>Purge</A><BR>"
 	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
 
 	var/datum/browser/popup = new(user, "icecreamvat","Icecream Vat", 700, 500, src)
@@ -140,8 +140,7 @@
 		to_chat(user, "<span class='warning'>You don't have the ingredients to make this.</span>")
 
 /obj/machinery/icecream_vat/Topic(href, href_list)
-
-	if(..())
+	if((. = ..()))
 		return
 
 	if(href_list["select"])
@@ -168,7 +167,9 @@
 		make(usr, C, amount)
 
 	if(href_list["disposeI"])
-		reagents.del_reagent(href_list["disposeI"])
+		var/datum/reagent/R = locate(href_list["disposeI"]) in reagents.reagent_list
+		if(R)
+			reagents.del_reagent(R.type)
 
 	updateDialog()
 

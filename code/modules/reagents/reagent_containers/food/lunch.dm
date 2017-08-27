@@ -111,5 +111,5 @@ var/list/lunchables_ethanol_reagents_ = list(/datum/reagent/ethanol/acid_spit,
 		if(reagent_type in banned_reagents)
 			continue
 		var/datum/reagent/reagent = reagent_type
-		.[initial(reagent.name)] = initial(reagent.id)
+		.[initial(reagent.name)] = reagent_type
 	return sortAssoc(.)

@@ -1,14 +1,12 @@
 
 //Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent type
-/proc/initialize_chemical_reagents()
-	var/paths = typesof(/datum/reagent) - /datum/reagent
-	chemical_reagents_list = list()
-	for(var/path in paths)
+/proc/do_initialize_chemical_reagents()
+	. = list()
+	for(var/path in subtypesof(/datum/reagent))
 		var/datum/reagent/D = new path()
 		if(!D.name)
 			continue
-		chemical_reagents_list[D.type] = D
-
+		.[D.type] = D
 
 /datum/reagent
 	var/name = "Reagent"

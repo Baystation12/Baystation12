@@ -77,7 +77,7 @@
 	leporazine	spawn_reagent = /datum/reagent/leporazine
 	kelotane	spawn_reagent = /datum/reagent/kelotane
 	dermaline	spawn_reagent = /datum/reagent/dermaline
-	dexalin		spawn_reagent = "dexalin"
+	dexalin		spawn_reagent = /datum/reagent/dexalin
 	dexalin/small	volume = CARTRIDGE_VOLUME_SMALL // For the medicine cartridge crate, so it's not too easy to get large amounts of dexalin
 	dexalin_p	spawn_reagent = /datum/reagent/dexalinp
 	tricord		spawn_reagent = /datum/reagent/tricordrazine

@@ -10,7 +10,7 @@
 	desc = "Cola. in space."
 	icon_state = "cola"
 	center_of_mass = "x=16;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/cans/cola/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/cans/cola/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/drink/space_cola, 30)
 
@@ -46,7 +46,7 @@
 	desc = "A delicious mixture of 42 different flavors."
 	icon_state = "dr_gibb"
 	center_of_mass = "x=16;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
 
@@ -100,7 +100,7 @@
 	desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
 	icon_state = "tonic"
 	center_of_mass = "x=16;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/cans/tonic/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/cans/tonic/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/drink/tonic, 50)
 
@@ -109,6 +109,6 @@
 	desc = "A can of soda water. Still water's more refreshing cousin."
 	icon_state = "sodawater"
 	center_of_mass = "x=16;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/drink/sodawater, 50)

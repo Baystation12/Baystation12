@@ -18,17 +18,17 @@
 	var/list/reagent_names = list()
 
 /obj/item/weapon/reagent_containers/borghypo/surgeon
-	reagent_ids = list(/datum/reagent/bicaridine, "dexalin", /datum/reagent/tramadol)
+	reagent_ids = list(/datum/reagent/bicaridine, /datum/reagent/dexalin, /datum/reagent/tramadol)
 
 /obj/item/weapon/reagent_containers/borghypo/crisis
 	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/tramadol)
 
 /obj/item/weapon/reagent_containers/borghypo/New()
-	..()
+	. = ..()
 
 	for(var/T in reagent_ids)
 		reagent_volumes[T] = volume
-		var/datum/reagent/R = chemical_reagents_list[T]
+		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
 		reagent_names += R.name
 
 	GLOB.processing_objects.Add(src)
@@ -96,19 +96,22 @@
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/Topic(var/href, var/list/href_list)
+	if((. = ..()))
+		return
 	if(href_list["reagent"])
 		var/t = reagent_ids.Find(href_list["reagent"])
 		if(t)
 			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
 			mode = t
-			var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
+			var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_ids[mode]]
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>")
+		return 1
 
 /obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
 	if(!..(user, 2))
 		return
 
-	var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
+	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_ids[mode]]
 
 	to_chat(user, "<span class='notice'>It is currently producing [R.name] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>")
 

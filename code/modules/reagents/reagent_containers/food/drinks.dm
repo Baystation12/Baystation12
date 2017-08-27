@@ -129,7 +129,7 @@
 	icon_state = "milk"
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
-/obj/item/weapon/reagent_containers/food/drinks/milk/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/milk/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/drink/milk, 50)
 
@@ -165,7 +165,7 @@
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	center_of_mass = "x=15;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/coffee/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/coffee/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/coffee, 30)
 
@@ -187,7 +187,7 @@
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
 	center_of_mass = "x=15;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/ice/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/ice/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/ice, 30)
 
@@ -197,7 +197,7 @@
 	icon_state = "hot_coco"
 	item_state = "coffee"
 	center_of_mass = "x=15;y=13"
-/obj/item/weapon/reagent_containers/food/drinks/h_chocolate/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/h_chocolate/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
 

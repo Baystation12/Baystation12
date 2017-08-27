@@ -290,7 +290,7 @@
 
 /datum/chemical_reaction/dexalin
 	name = "Dexalin"
-	result = "dexalin"
+	result = /datum/reagent/dexalin
 	required_reagents = list(/datum/reagent/acetone = 2, /datum/reagent/toxin/phoron = 0.1)
 	inhibitors = list(/datum/reagent/water = 1) // Messes with cryox
 	result_amount = 1
@@ -304,7 +304,7 @@
 /datum/chemical_reaction/dexalinp
 	name = "Dexalin Plus"
 	result = /datum/reagent/dexalinp
-	required_reagents = list("dexalin" = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
+	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/carbon = 1, /datum/reagent/iron = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/bicaridine
@@ -329,7 +329,7 @@
 /datum/chemical_reaction/cryoxadone
 	name = "Cryoxadone"
 	result = /datum/reagent/cryoxadone
-	required_reagents = list("dexalin" = 1, /datum/reagent/water = 1, /datum/reagent/acetone = 1)
+	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/water = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/clonexadone
@@ -1207,7 +1207,7 @@
 
 /datum/chemical_reaction/slime/potion2/on_reaction(var/datum/reagents/holder)
 	..()
-	/obj/item/weapon/slimepotion2(get_turf(holder.my_atom))
+	new /obj/item/weapon/slimepotion2(get_turf(holder.my_atom))
 
 //Adamantine
 /datum/chemical_reaction/slime/golem

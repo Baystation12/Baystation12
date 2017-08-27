@@ -26,8 +26,7 @@
 	data["species"] = C.species.name
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
-		temp_chem += R.id
-		temp_chem[R.id] = R.volume
+		temp_chem[R.type] = R.volume
 	data["trace_chem"] = list2params(temp_chem)
 	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]

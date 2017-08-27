@@ -125,7 +125,7 @@
 	name = "Universal Enzyme"
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
-/obj/item/weapon/reagent_containers/food/condiment/enzyme/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/enzyme, 50)
 
@@ -133,11 +133,11 @@
 	name = "Barbecue Sauce"
 	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
 	icon_state = "barbecue"
-/obj/item/weapon/reagent_containers/food/condiment/barbecue/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/barbecue/New()
     . = ..()
     reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/sugar/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/sugar/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/sugar, 50)
 
@@ -172,7 +172,7 @@
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
 	center_of_mass = "x=17;y=9"
-/obj/item/weapon/reagent_containers/food/condiment/small/sugar/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/small/sugar/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/sugar, 20)
 

@@ -69,7 +69,7 @@
 		for(var/datum/reagent/R in M.ingested.reagent_list)
 			if(R == src)
 				continue
-			M.ingested.remove_reagent(R.id, removed * effect)
+			M.ingested.remove_reagent(R.type, removed * effect)
 
 /datum/reagent/carbon/touch_turf(var/turf/T)
 	if(!istype(T, /turf/space))

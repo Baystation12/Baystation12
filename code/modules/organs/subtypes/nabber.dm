@@ -66,8 +66,8 @@
 	else if(is_bruised())
 		amount *= 0.1
 
-	var/dexalin_volume_raw = owner.reagents.get_reagent_amount("dexalin")
-	var/phoron_volume_raw = owner.reagents.get_reagent_amount("phoron")
+	var/dexalin_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/dexalin)
+	var/phoron_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/toxin/phoron)
 
 	if((dexalin_volume_raw < dexalin_level || !dexalin_volume_raw) && (phoron_volume_raw < phoron_level || !phoron_volume_raw))
 		owner.reagents.add_reagent("phoron", amount)

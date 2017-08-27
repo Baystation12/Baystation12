@@ -364,9 +364,9 @@
 	for (var/obj/O in (InsertedContents()-ffuu))
 		amount++
 		if (O.reagents)
-			var/id = O.reagents.get_master_reagent_id()
-			if (id)
-				amount+=O.reagents.get_reagent_amount(id)
+			var/reagent_type = O.reagents.get_master_reagent_type()
+			if (reagent_type)
+				amount+=O.reagents.get_reagent_amount(reagent_type)
 		qdel(O)
 	src.reagents.clear_reagents()
 	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
