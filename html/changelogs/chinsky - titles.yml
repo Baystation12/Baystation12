@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Movie titles music now uses lobby music preference toggle to see if it should play to you."
