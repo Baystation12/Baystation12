@@ -1,6 +1,5 @@
 //Grown foods.
 /obj/item/weapon/reagent_containers/food/snacks/grown
-
 	name = "fruit"
 	icon = 'icons/obj/hydroponics_products.dmi'
 	icon_state = "blank"
@@ -18,24 +17,19 @@
 	if(!dried_type)
 		dried_type = type
 
-	// Fill the object up with the appropriate reagents.
 	if(planttype)
 		plantname = planttype
 
-	if(!plantname)
-		return
-
-	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine.
+/obj/item/weapon/reagent_containers/food/snacks/grown/Initialize()
+	. = ..()
 	if(!plant_controller)
 		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	seed = plant_controller.seeds[plantname]
 
 	if(!seed)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	name = "[seed.seed_name]"
 	trash = seed.get_trash_type()
@@ -47,6 +41,7 @@
 
 	potency = seed.get_trait(TRAIT_POTENCY)
 
+	// Fill the object up with the appropriate reagents.
 	for(var/rid in seed.chems)
 		var/list/reagent_data = seed.chems[rid]
 		if(reagent_data && reagent_data.len)
@@ -129,24 +124,15 @@
 	desc += ". Delicious! Probably."
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/update_icon()
-	if(!seed || !plant_controller || !plant_controller.plant_icon_cache)
+	if(!seed)
 		return
 	overlays.Cut()
-	var/image/plant_icon
-	var/icon_key = "fruit-[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"
-	if(plant_controller.plant_icon_cache[icon_key])
-		plant_icon = plant_controller.plant_icon_cache[icon_key]
-	else
-		plant_icon = image('icons/obj/hydroponics_products.dmi',"blank")
-		var/image/fruit_base = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-product")
-		fruit_base.color = "[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
-		plant_icon.overlays |= fruit_base
-		if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/hydroponics_products.dmi'))
-			var/image/fruit_leaves = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
-			fruit_leaves.color = "[seed.get_trait(TRAIT_PLANT_COLOUR)]"
-			plant_icon.overlays |= fruit_leaves
-		plant_controller.plant_icon_cache[icon_key] = plant_icon
-	overlays |= plant_icon
+	icon_state = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-product"
+	color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+	if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/hydroponics_products.dmi'))
+		var/image/fruit_leaves = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
+		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
+		overlays |= fruit_leaves
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
@@ -292,23 +278,6 @@
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
 		qdel(src)
 		return
-
-	/*
-	if(seed.kitchen_tag)
-		switch(seed.kitchen_tag)
-			if("shand")
-				var/obj/item/stack/medical/bruise_pack/tajaran/poultice = new /obj/item/stack/medical/bruise_pack/tajaran(user.loc)
-				poultice.heal_brute = potency
-				to_chat(user, "<span class='notice'>You mash the leaves into a poultice.</span>")
-				qdel(src)
-				return
-			if("mtear")
-				var/obj/item/stack/medical/ointment/tajaran/poultice = new /obj/item/stack/medical/ointment/tajaran(user.loc)
-				poultice.heal_burn = potency
-				to_chat(user, "<span class='notice'>You mash the petals into a poultice.</span>")
-				qdel(src)
-				return
-	*/
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pickup(mob/user)
 	..()

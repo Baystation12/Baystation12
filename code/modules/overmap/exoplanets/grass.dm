@@ -55,7 +55,7 @@
 
 	flora_prob = 30
 	large_flora_prob = 50
-	fauna_diversity = 6
+	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/jelly)
 
 /datum/random_map/noise/exoplanet/grass/spawn_fauna(var/turf/T, value)
@@ -66,6 +66,11 @@
 
 /turf/simulated/floor/exoplanet/grass
 	name = "grass"
-	icon = 'icons/jungle.dmi'
+	icon = 'icons/turf/jungle.dmi'
 	icon_state = "grass2"
 	mudpit = 1
+	
+/turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, temperature, volume)
+	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000) 
+		name = "scorched ground"
+		icon_state = "scorched"
