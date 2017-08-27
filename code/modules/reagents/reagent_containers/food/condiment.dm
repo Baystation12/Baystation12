@@ -126,16 +126,16 @@
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
 /obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/enzyme, 50)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/enzyme, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/barbecue
 	name = "Barbecue Sauce"
 	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
 	icon_state = "barbecue"
 /obj/item/weapon/reagent_containers/food/condiment/barbecue/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/sugar/New()
 	. = ..()

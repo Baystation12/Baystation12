@@ -108,7 +108,7 @@
 			M.drowsyness = max(M.drowsyness, 60)
 
 /datum/reagent/nutriment/flour
-	name = /datum/reagent/nutriment/flour
+	name = "flour"
 	description = "This is what you rub all over yourself to pretend to be a ghost."
 	taste_description = "chalky wheat"
 	reagent_state = SOLID
@@ -144,7 +144,7 @@
 /datum/reagent/nutriment/ketchup
 	name = "Ketchup"
 	description = "Ketchup, catsup, whatever. It's tomato paste."
-	taste_description = /datum/reagent/nutriment/ketchup
+	taste_description = "ketchup"
 	reagent_state = LIQUID
 	nutriment_factor = 5
 	color = "#731008"

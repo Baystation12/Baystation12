@@ -11,8 +11,8 @@
 	icon_state = "cola"
 	center_of_mass = "x=16;y=10"
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/drink/space_cola, 30)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/space_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle
 	name = "bottled water"
@@ -47,8 +47,8 @@
 	icon_state = "dr_gibb"
 	center_of_mass = "x=16;y=10"
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/starkist
 	name = "\improper Star-kist"
@@ -101,8 +101,8 @@
 	icon_state = "tonic"
 	center_of_mass = "x=16;y=10"
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/drink/tonic, 50)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/tonic, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater
 	name = "soda water"
@@ -110,5 +110,5 @@
 	icon_state = "sodawater"
 	center_of_mass = "x=16;y=10"
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/drink/sodawater, 50)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 50)

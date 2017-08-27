@@ -130,8 +130,8 @@
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
 /obj/item/weapon/reagent_containers/food/drinks/milk/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/drink/milk, 50)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/milk, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/soymilk
 	name = "soymilk carton"
