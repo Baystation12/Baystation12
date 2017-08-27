@@ -406,6 +406,11 @@
 	else if(istype(P, /obj/item/weapon/flame))
 		burnpaper(P, user)
 
+	else if(istype(P, /obj/item/weapon/paper_bundle))
+		var/obj/item/weapon/paper_bundle/attacking_bundle = P
+		attacking_bundle.insert_sheet_at(user, (attacking_bundle.pages.len)+1, src)
+		attacking_bundle.update_icon()
+
 	add_fingerprint(user)
 	return
 
