@@ -47,8 +47,9 @@
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
-		speaker_name = H.rank_prefix_name(H.GetVoice())
-
+		speaker_name = H.GetVoice()
+		if(is_preference_enabled(/datum/client_preference/show_speech_rank))
+			H.rank_prefix_name(speaker_name)
 	if(italics)
 		message = "<i>[message]</i>"
 
