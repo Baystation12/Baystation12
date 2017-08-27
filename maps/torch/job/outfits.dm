@@ -651,7 +651,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/pathfinder
 	name = OUTFIT_JOB_NAME("Pathfinder")
-	uniform = /obj/item/clothing/under/utility/expeditionary/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/service 
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/pathfinder
@@ -660,7 +660,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/explorer
 	name = OUTFIT_JOB_NAME("Explorer")
-	uniform = /obj/item/clothing/under/utility/expeditionary
+	uniform = /obj/item/clothing/under/utility/expeditionary/service
 	head = /obj/item/clothing/head/soft/sol/expedition
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/explorer
