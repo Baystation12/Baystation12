@@ -34,6 +34,29 @@
 		generate_map()
 		generate_landing()
 		update_biome()
+		GLOB.processing_objects += src
+
+//Not that it should ever get deleted but just in case
+/obj/effect/overmap/sector/exoplanet/Destroy()
+		. = ..()
+		GLOB.processing_objects -= src
+
+/obj/effect/overmap/sector/exoplanet/process()
+	if(!atmosphere)
+		return
+	for(var/zlevel in map_z)
+		var/zone/Z
+		for(var/i = 1 to world.maxx)
+			var/turf/simulated/T = locate(i, 1, zlevel)
+			if(istype(T) && T.zone && T.zone.contents.len > (world.maxx*world.maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
+				Z = T.zone
+				break
+		if(!Z.fire_tiles.len && !atmosphere.compare(Z.air)) //let fire die out first if there is one
+			var/datum/gas_mixture/daddy = new() //make a fake 'planet' zone gas
+			daddy.copy_from(atmosphere)
+			daddy.group_multiplier = Z.air.group_multiplier
+			Z.air.equalize(daddy)
+				
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
 
