@@ -74,6 +74,10 @@ var/list/_client_preferences_by_type
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = 1))
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = 2))
 
+/datum/client_preference/show_speech_rank
+	description ="Show rank on speech"
+	key = "CHAT_SHOWRANK"
+
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"

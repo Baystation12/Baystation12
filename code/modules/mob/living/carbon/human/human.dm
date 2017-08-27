@@ -291,13 +291,13 @@
 		else
 			return if_no_id
 
-/mob/living/carbon/human/proc/rank_prefix_name(name)
+/mob/living/carbon/human/proc/rank_prefix_name(var/speak_name)
 	var/obj/item/weapon/card/id/id = get_idcard()
 	if(id && id.military_rank && id.military_rank.name_short) //only milnerds for now
-		if(findtext(name, " "))
-			name = copytext(name, findtext(name, " ")+1)
-		name = "[id.military_rank.name_short] [name]"
-	return name
+		if(findtext(speak_name, " "))
+			speak_name = copytext(speak_name, findtext(speak_name, " ")+1)
+		speak_name = "[id.military_rank.name_short] [speak_name]"
+	return speak_name
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
