@@ -1,10 +1,10 @@
 /var/security_level = 0
 //0 = code green
-//1 = code blue
+//1 = code orange
 //2 = code red
 //3 = code delta
 
-//config.alert_desc_blue_downto
+//config.alert_desc_orange_downto
 /var/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 /var/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1)
 
@@ -12,8 +12,8 @@
 	switch(level)
 		if("green")
 			level = SEC_LEVEL_GREEN
-		if("blue")
-			level = SEC_LEVEL_BLUE
+		if("orange")
+			level = SEC_LEVEL_ORANGE
 		if("red")
 			level = SEC_LEVEL_RED
 		if("delta")
@@ -26,13 +26,13 @@
 				security_announcement_down.Announce("[config.alert_desc_green]", "Attention! Security level lowered to green")
 				security_level = SEC_LEVEL_GREEN
 				post_status("alert", "greenalert")
-			if(SEC_LEVEL_BLUE)
-				if(security_level < SEC_LEVEL_BLUE)
-					security_announcement_up.Announce("[config.alert_desc_blue_upto]", "Attention! Security level elevated to blue")
+			if(SEC_LEVEL_ORANGE)
+				if(security_level < SEC_LEVEL_ORANGE)
+					security_announcement_up.Announce("[config.alert_desc_orange_upto]", "Attention! Security level elevated to orange")
 				else
-					security_announcement_down.Announce("[config.alert_desc_blue_downto]", "Attention! Security level lowered to blue")
-				security_level = SEC_LEVEL_BLUE
-				post_status("alert", "bluealert")
+					security_announcement_down.Announce("[config.alert_desc_orange_downto]", "Attention! Security level lowered to orange")
+				security_level = SEC_LEVEL_ORANGE
+				post_status("alert", "orangealert")
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
 					security_announcement_up.Announce("[config.alert_desc_red_upto]", "Attention! Code red!")
@@ -55,8 +55,8 @@
 	switch(security_level)
 		if(SEC_LEVEL_GREEN)
 			return "green"
-		if(SEC_LEVEL_BLUE)
-			return "blue"
+		if(SEC_LEVEL_ORANGE)
+			return "orange"
 		if(SEC_LEVEL_RED)
 			return "red"
 		if(SEC_LEVEL_DELTA)
@@ -66,8 +66,8 @@
 	switch(num)
 		if(SEC_LEVEL_GREEN)
 			return "green"
-		if(SEC_LEVEL_BLUE)
-			return "blue"
+		if(SEC_LEVEL_ORANGE)
+			return "orange"
 		if(SEC_LEVEL_RED)
 			return "red"
 		if(SEC_LEVEL_DELTA)
@@ -77,8 +77,8 @@
 	switch( lowertext(seclevel) )
 		if("green")
 			return SEC_LEVEL_GREEN
-		if("blue")
-			return SEC_LEVEL_BLUE
+		if("orange")
+			return SEC_LEVEL_ORANGE
 		if("red")
 			return SEC_LEVEL_RED
 		if("delta")
