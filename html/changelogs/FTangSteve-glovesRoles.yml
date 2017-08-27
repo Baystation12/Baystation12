@@ -1,7 +1,0 @@
-author: FTangSteve
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds insulated gloves for nabbers."
-  - rscadd: "GAS can now be chemists and engineers.."
