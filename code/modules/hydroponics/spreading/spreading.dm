@@ -43,7 +43,7 @@
 	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	pass_flags = PASSTABLE
-	mouse_opacity = 2
+	mouse_opacity = 1
 
 	var/health = 10
 	var/max_health = 100
@@ -91,6 +91,7 @@
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD)==2)
+		mouse_opacity = 2
 		max_growth = VINE_GROWTH_STAGES
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
@@ -132,7 +133,6 @@
 		T.ex_act(prob(80) ? 3 : 2)
 
 /obj/effect/plant/update_icon()
-	//TODO: should really be caching this.
 	refresh_icon()
 	if(growth_type == 0 && !floor)
 		src.transform = null
@@ -184,9 +184,11 @@
 
 	if(growth>2 && growth == max_growth)
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
-		set_opacity(1)
+		if(growth_type in list(2,3))
+			set_opacity(1)
 		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
 			set_density(1)
+			set_opacity(1)
 	else
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		set_density(0)

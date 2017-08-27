@@ -916,6 +916,7 @@
 #include "code\game\objects\structures\morgue.dm"
 #include "code\game\objects\structures\musician.dm"
 #include "code\game\objects\structures\noticeboard.dm"
+#include "code\game\objects\structures\pit.dm"
 #include "code\game\objects\structures\safe.dm"
 #include "code\game\objects\structures\showcase.dm"
 #include "code\game\objects\structures\signs.dm"
