@@ -3,7 +3,7 @@
 	min_rank = 11
 	departments = COM
 
-	utility_under = /obj/item/clothing/under/utility/expeditionary/command
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/command
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/command
@@ -38,9 +38,9 @@
 	name = "EC engineering command"
 	departments = ENG|COM
 
-	utility_under = /obj/item/clothing/under/utility/expeditionary/engineering/command
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/engineering
 
-	service_under = /obj/item/clothing/under/utility/expeditionary/engineering/command
+	service_under = /obj/item/clothing/under/utility/expeditionary/officer/engineering
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/engineering/command
 
 /decl/hierarchy/mil_uniform/ec/sec
@@ -57,6 +57,7 @@
 	name = "EC security CO"
 	min_rank = 11
 
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/security
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
@@ -67,9 +68,9 @@
 	name = "EC security command"
 	departments = SEC|COM
 
-	utility_under = /obj/item/clothing/under/utility/expeditionary/security/command
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/security
 
-	service_under = /obj/item/clothing/under/utility/expeditionary/security/command
+	service_under = /obj/item/clothing/under/utility/expeditionary/officer/security
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/security/command
 
 /decl/hierarchy/mil_uniform/ec/med
@@ -86,6 +87,7 @@
 	name = "EC medical CO"
 	min_rank = 11
 
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/medical
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
@@ -96,9 +98,9 @@
 	name = "EC medical command"
 	departments = MED|COM
 
-	utility_under = /obj/item/clothing/under/utility/expeditionary/medical/command
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/medical
 
-	service_under = /obj/item/clothing/under/utility/expeditionary/medical/command
+	service_under = /obj/item/clothing/under/utility/expeditionary/officer/medical
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/medical/command
 
 /decl/hierarchy/mil_uniform/ec/sup
@@ -115,6 +117,7 @@
 	name = "EC supply CO"
 	min_rank = 11
 
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/supply
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
@@ -125,10 +128,15 @@
 	name = "EC service"
 	departments = SRV
 
+	utility_under = /obj/item/clothing/under/utility/expeditionary/service
+
+	service_under = /obj/item/clothing/under/utility/expeditionary/service
+
 /decl/hierarchy/mil_uniform/ec/srv/officer
 	name = "EC service CO"
 	min_rank = 11
 
+	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/service
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
@@ -148,6 +156,10 @@
 /decl/hierarchy/mil_uniform/ec/spt/officer
 	name = "EC command support CO"
 	min_rank = 11
+
+	utility_under= /obj/item/clothing/under/utility/expeditionary/officer/command
+
+	service_under= /obj/item/clothing/under/utility/expeditionary/officer/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
