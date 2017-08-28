@@ -12,13 +12,9 @@
 	var/potency = -1
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
-
-	..()
-	if(!dried_type)
-		dried_type = type
-
 	if(planttype)
 		plantname = planttype
+	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/Initialize()
 	. = ..()
@@ -33,6 +29,8 @@
 
 	name = "[seed.seed_name]"
 	trash = seed.get_trash_type()
+	if(!dried_type)
+		dried_type = type
 
 	update_icon()
 
@@ -41,6 +39,8 @@
 
 	potency = seed.get_trait(TRAIT_POTENCY)
 
+	if(!reagents)
+		create_reagents(volume)
 	// Fill the object up with the appropriate reagents.
 	for(var/rid in seed.chems)
 		var/list/reagent_data = seed.chems[rid]
