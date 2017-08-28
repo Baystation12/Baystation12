@@ -1,0 +1,5 @@
+author: ThatOneGuy
+delete-after: True
+changes:
+  - rscadd: "Can now play as the Explorer Department if you are a EC member. If a complete failure, up for removal."
+  - rscadd: "Calypso remapped for more cargo space and crew area. Bathroom and Cryo deleted."
