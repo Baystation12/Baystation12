@@ -383,8 +383,6 @@
 			return global.deathsquad;
 		if("debug_verbs")
 			return global.debug_verbs;
-		if("decls_repository")
-			return global.decls_repository;
 		if("default_material_composition")
 			return global.default_material_composition;
 		if("default_mobloc")
@@ -1209,7 +1207,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1594,8 +1592,6 @@
 			global.deathsquad=newval;
 		if("debug_verbs")
 			global.debug_verbs=newval;
-		if("decls_repository")
-			global.decls_repository=newval;
 		if("default_material_composition")
 			global.default_material_composition=newval;
 		if("default_mobloc")
@@ -2420,7 +2416,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2613,7 +2609,7 @@
 	"dbcon_old",
 	"deathsquad",
 	"debug_verbs",
-	"decls_repository",
+	"GLOB.decl_repository",
 	"default_material_composition",
 	"default_mobloc",
 	"default_onmob_icons",

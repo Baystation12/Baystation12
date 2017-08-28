@@ -43,7 +43,7 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 
 	if(!ispath(turf_selection, /decl/turf_selection))
 		CRASH("Invalid turf selection type set: [turf_selection]")
-	turf_selection = decls_repository.get_decl(turf_selection)
+	turf_selection = GLOB.decl_repository.get_decl(turf_selection)
 
 	src.holder = holder
 	src.on_turf_entered = on_turf_entered

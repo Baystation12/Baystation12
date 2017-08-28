@@ -85,7 +85,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		S.update_seed()
 
 	//Might as well mask the gene types while we're at it.
-	var/list/gene_datums = decls_repository.get_decls_of_subtype(/decl/plantgene)
+	var/list/gene_datums = GLOB.decl_repository.get_decls_of_subtype(/decl/plantgene)
 	var/list/used_masks = list()
 	var/list/plant_traits = ALL_GENES
 	while(plant_traits && plant_traits.len)

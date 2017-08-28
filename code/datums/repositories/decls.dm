@@ -1,4 +1,4 @@
-/var/repository/decls/decls_repository = new()
+GLOBAL_DATUM_INIT(decl_repository, /repository/decls, new)
 
 /repository/decls
 	var/list/fetched_decls

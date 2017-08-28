@@ -311,7 +311,7 @@
 	var/allowed_titles = list()
 
 	for(var/job_type in GLOB.using_map.allowed_jobs)
-		var/datum/job/job = decls_repository.get_decl(job_type)
+		var/datum/job/job = GLOB.decl_repository.get_decl(job_type)
 		allowed_titles += job.title
 
 		if(job.title == pref.job_high)
