@@ -68,7 +68,7 @@ Each plays slightly different and has different challenges/benefits
 		to_chat(user, "<span class='warning'>You feel drained...</span>")
 	var/mob/living/carbon/human/H = user
 	if(istype(H) && H.should_have_organ(BP_HEART))
-		H.vessel.remove_reagent("blood", charge)
+		H.vessel.remove_reagent(/datum/reagent/blood, charge)
 	else
 		user.adjustBruteLoss(charge)
 	return 1

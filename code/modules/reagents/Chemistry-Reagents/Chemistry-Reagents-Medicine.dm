@@ -2,7 +2,6 @@
 
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
-	id = "inaprovaline"
 	description = "Inaprovaline is a multipurpose neurostimulant and cardioregulator. Commonly used to slow bleeding and stabilize patients."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -20,7 +19,6 @@
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
-	id = "bicaridine"
 	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
 	taste_description = "bitterness"
 	taste_mult = 3
@@ -36,7 +34,6 @@
 
 /datum/reagent/kelotane
 	name = "Kelotane"
-	id = "kelotane"
 	description = "Kelotane is a drug used to treat burns."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -51,7 +48,6 @@
 
 /datum/reagent/dermaline
 	name = "Dermaline"
-	id = "dermaline"
 	description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
 	taste_description = "bitterness"
 	taste_mult = 1.5
@@ -67,16 +63,15 @@
 
 /datum/reagent/dylovene
 	name = "Dylovene"
-	id = "anti_toxin"
 	description = "Dylovene is a broad-spectrum antitoxin used to neutralize poisons before they can do significant harm."
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00A000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
-	var/global/list/remove_toxins = list(
-		"zombiepowder"
-		)
+	var/static/list/remove_toxins = list(
+		/datum/reagent/toxin/zombiepowder
+	)
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -88,17 +83,16 @@
 	// TODO: stomach pump
 	var/removing = (4 * removed)
 	for(var/datum/reagent/R in M.ingested.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.id in remove_toxins))
-			M.ingested.remove_reagent(R.id, removing)
+		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+			M.ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.id in remove_toxins))
-			M.reagents.remove_reagent(R.id, removing)
+		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+			M.reagents.remove_reagent(R.type, removing)
 			return
 
 /datum/reagent/dexalin
 	name = "Dexalin"
-	id = "dexalin"
 	description = "Dexalin is used in the treatment of oxygen deprivation."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -112,11 +106,10 @@
 		M.adjustToxLoss(removed * 6)
 	else if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-	holder.remove_reagent("lexorin", 2 * removed)
+	holder.remove_reagent(/datum/reagent/lexorin, 2 * removed)
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
-	id = "dexalinp"
 	description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -130,11 +123,10 @@
 		M.adjustToxLoss(removed * 9)
 	else if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-	holder.remove_reagent("lexorin", 3 * removed)
+	holder.remove_reagent(/datum/reagent/lexorin, 3 * removed)
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
-	id = "tricordrazine"
 	description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
 	taste_description = "grossness"
 	reagent_state = LIQUID
@@ -148,7 +140,6 @@
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
-	id = "cryoxadone"
 	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 	taste_description = "sludge"
 	reagent_state = LIQUID
@@ -166,7 +157,6 @@
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
-	id = "clonexadone"
 	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
 	taste_description = "slime"
 	reagent_state = LIQUID
@@ -186,7 +176,6 @@
 
 /datum/reagent/paracetamol
 	name = "Paracetamol"
-	id = "paracetamol"
 	description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
 	taste_description = "sickness"
 	reagent_state = LIQUID
@@ -205,7 +194,6 @@
 
 /datum/reagent/tramadol
 	name = "Tramadol"
-	id = "tramadol"
 	description = "A simple, yet effective painkiller."
 	taste_description = "sourness"
 	reagent_state = LIQUID
@@ -224,7 +212,6 @@
 
 /datum/reagent/oxycodone
 	name = "Oxycodone"
-	id = "oxycodone"
 	description = "An effective and very addictive painkiller."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -245,7 +232,6 @@
 
 /datum/reagent/synaptizine
 	name = "Synaptizine"
-	id = "synaptizine"
 	description = "Synaptizine is used to treat various diseases."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -261,14 +247,13 @@
 	M.AdjustParalysis(-1)
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
-	holder.remove_reagent("mindbreaker", 5)
+	holder.remove_reagent(/datum/reagent/mindbreaker, 5)
 	M.hallucination = max(0, M.hallucination - 10)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 
 /datum/reagent/alkysine
 	name = "Alkysine"
-	id = "alkysine"
 	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a injury. Can aid in healing brain tissue."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -290,7 +275,6 @@
 
 /datum/reagent/imidazoline
 	name = "Imidazoline"
-	id = "imidazoline"
 	description = "Heals eye damage"
 	taste_description = "dull toxin"
 	reagent_state = LIQUID
@@ -312,7 +296,6 @@
 
 /datum/reagent/peridaxon
 	name = "Peridaxon"
-	id = "peridaxon"
 	description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -336,7 +319,6 @@
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
-	id = "ryetalyn"
 	description = "Ryetalyn can cure all genetic abnomalities via a catalytic process."
 	taste_description = "acid"
 	reagent_state = SOLID
@@ -357,7 +339,6 @@
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
-	id = "hyperzine"
 	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 	taste_description = "acid"
 	reagent_state = LIQUID
@@ -375,7 +356,6 @@
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
-	id = "ethylredoxrazine"
 	description = "A powerful oxidizer that reacts with ethanol."
 	reagent_state = SOLID
 	color = "#605048"
@@ -395,7 +375,6 @@
 
 /datum/reagent/hyronalin
 	name = "Hyronalin"
-	id = "hyronalin"
 	description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -410,7 +389,6 @@
 
 /datum/reagent/arithrazine
 	name = "Arithrazine"
-	id = "arithrazine"
 	description = "Arithrazine is an unstable medication used for the most extreme cases of radiation poisoning."
 	reagent_state = LIQUID
 	color = "#008000"
@@ -427,7 +405,6 @@
 
 /datum/reagent/spaceacillin
 	name = "Spaceacillin"
-	id = "spaceacillin"
 	description = "An all-purpose antiviral agent."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -454,7 +431,6 @@
 
 /datum/reagent/sterilizine
 	name = "Sterilizine"
-	id = "sterilizine"
 	description = "Sterilizes wounds in preparation for surgery and thoroughly removes blood."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -480,7 +456,6 @@
 
 /datum/reagent/leporazine
 	name = "Leporazine"
-	id = "leporazine"
 	description = "Leporazine can be use to stabilize an individuals body temperature."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -500,7 +475,6 @@
 
 /datum/reagent/methylphenidate
 	name = "Methylphenidate"
-	id = "methylphenidate"
 	description = "Improves the ability to concentrate."
 	taste_description = "sourness"
 	reagent_state = LIQUID
@@ -521,7 +495,6 @@
 
 /datum/reagent/citalopram
 	name = "Citalopram"
-	id = "citalopram"
 	description = "Stabilizes the mind a little."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -542,7 +515,6 @@
 
 /datum/reagent/paroxetine
 	name = "Paroxetine"
-	id = "paroxetine"
 	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
 	reagent_state = LIQUID
 	color = "#FF80BF"
@@ -566,7 +538,6 @@
 
 /datum/reagent/nicotine
 	name = "Nicotine"
-	id = "nicotine"
 	description = "Stimulates and relaxes the mind and body."
 	taste_description = "smoke"
 	reagent_state = LIQUID
@@ -595,9 +566,8 @@
 
 /datum/reagent/menthol
 	name = "Menthol"
-	id = "menthol"
 	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
-	taste_description = "mint"
+	taste_description = /datum/reagent/nutriment/mint
 	reagent_state = LIQUID
 	color = "#80AF9C"
 	metabolism = REM * 0.002
@@ -614,7 +584,6 @@
 
 /datum/reagent/rezadone
 	name = "Rezadone"
-	id = "rezadone"
 	description = "A powder with almost magical properties, this substance can effectively treat genetic damage in humanoids, though excessive consumption has side effects."
 	taste_description = "sickness"
 	reagent_state = SOLID
@@ -638,7 +607,6 @@
 
 /datum/reagent/noexcutite
 	name = "Noexcutite"
-	id = "noexcutite"
 	description = "A thick, syrupy liquid that has a lethargic effect. Used to cure cases of jitteriness."
 	taste_description = "numbing coldness"
 	reagent_state = LIQUID
@@ -654,7 +622,6 @@
 
 /datum/reagent/antidexafen
 	name = "Antidexafen"
-	id = "antidexafen"
 	description = "All-in-one cold medicine. Fever, cough, sneeze, safe for babies."
 	taste_description = "cough syrup"
 	reagent_state = LIQUID
@@ -677,7 +644,6 @@
 
 /datum/reagent/adrenaline
 	name = "Adrenaline"
-	id = "adrenaline"
 	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
 	taste_description = "rush"
 	reagent_state = LIQUID

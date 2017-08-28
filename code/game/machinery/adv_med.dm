@@ -308,7 +308,7 @@
 	if(blood_result <= 70)
 		. += "<span class='danger'>Severe blood loss detected.</span>"
 	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([blood_result]% blood circulation)"
-	. += "<b>Blood volume:</b> [H.vessel.get_reagent_amount("blood")]/[H.species.blood_volume]u"
+	. += "<b>Blood volume:</b> [H.vessel.get_reagent_amount(/datum/reagent/blood)]/[H.species.blood_volume]u"
 
 	// Body temperature.
 	. += "<b>Body temperature:</b> [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
@@ -335,7 +335,7 @@
 		for(var/A in H.reagents.reagent_list)
 			var/datum/reagent/R = A
 			if(R.scannable)
-				reagentdata["[R.id]"] = "[round(H.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+				reagentdata[R.type] = "[round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]"
 		if(reagentdata.len)
 			dat += "Beneficial reagents detected in subject's blood:"
 			for(var/d in reagentdata)

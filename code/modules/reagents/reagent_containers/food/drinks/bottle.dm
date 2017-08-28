@@ -179,7 +179,7 @@
 	center_of_mass = "x=16;y=4"
 	New()
 		..()
-		reagents.add_reagent("gin", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/gin, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey
 	name = "Uncle Git's Special Reserve"
@@ -188,7 +188,7 @@
 	center_of_mass = "x=16;y=3"
 	New()
 		..()
-		reagents.add_reagent("whiskey", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/whiskey, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey
 	name = "Special Blend Whiskey"
@@ -197,7 +197,7 @@
 	center_of_mass = "x=16;y=3"
 	New()
 		..()
-		reagents.add_reagent("specialwhiskey", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/specialwhiskey, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
@@ -206,7 +206,7 @@
 	center_of_mass = "x=17;y=3"
 	New()
 		..()
-		reagents.add_reagent("vodka", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/vodka, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla
 	name = "Caccavo Guaranteed Quality Tequilla"
@@ -215,7 +215,7 @@
 	center_of_mass = "x=16;y=3"
 	New()
 		..()
-		reagents.add_reagent("tequilla", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/tequilla, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing
 	name = "Bottle of Nothing"
@@ -224,7 +224,7 @@
 	center_of_mass = "x=17;y=5"
 	New()
 		..()
-		reagents.add_reagent("nothing", 100)
+		reagents.add_reagent(/datum/reagent/drink/nothing, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
@@ -233,7 +233,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("patron", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/patron, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/rum
 	name = "Captain Pete's Cuban Spiced Rum"
@@ -242,7 +242,7 @@
 	center_of_mass = "x=16;y=8"
 	New()
 		..()
-		reagents.add_reagent("rum", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/rum, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater
 	name = "Flask of Holy Water"
@@ -251,7 +251,7 @@
 	center_of_mass = "x=17;y=10"
 	New()
 		..()
-		reagents.add_reagent("holywater", 100)
+		reagents.add_reagent(/datum/reagent/water/holywater, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"
@@ -260,7 +260,7 @@
 	center_of_mass = "x=17;y=3"
 	New()
 		..()
-		reagents.add_reagent("vermouth", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/vermouth, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua
 	name = "Robert Robust's Coffee Liqueur"
@@ -269,7 +269,7 @@
 	center_of_mass = "x=17;y=3"
 	New()
 		..()
-		reagents.add_reagent("kahlua", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/coffee/kahlua, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager
 	name = "College Girl Goldschlager"
@@ -278,7 +278,7 @@
 	center_of_mass = "x=15;y=3"
 	New()
 		..()
-		reagents.add_reagent("goldschlager", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/goldschlager, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cognac
 	name = "Chateau De Baton Premium Cognac"
@@ -287,7 +287,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("cognac", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/cognac, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine
 	name = "Doublebeard Bearded Special Wine"
@@ -296,7 +296,7 @@
 	center_of_mass = "x=16;y=4"
 	New()
 		..()
-		reagents.add_reagent("wine", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/wine, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
@@ -305,7 +305,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("absinthe", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/absinthe, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor
 	name = "Emeraldine Melon Liquor"
@@ -314,7 +314,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("melonliquor", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/melonliquor, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao
 	name = "Miss Blue Curacao"
@@ -323,7 +323,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("bluecuracao", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/bluecuracao, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
 	name = "Briar Rose Grenadine Syrup"
@@ -332,7 +332,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("grenadine", 100)
+		reagents.add_reagent(/datum/reagent/drink/grenadine, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola
 	name = "\improper Space Cola"
@@ -341,7 +341,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("cola", 100)
+		reagents.add_reagent(/datum/reagent/drink/space_cola, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up
 	name = "\improper Space-Up"
@@ -350,7 +350,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("space_up", 100)
+		reagents.add_reagent(/datum/reagent/drink/space_up, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
@@ -359,7 +359,7 @@
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
-		reagents.add_reagent("spacemountainwind", 100)
+		reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
 	name = "Warlock's Velvet"
@@ -368,7 +368,7 @@
 	center_of_mass = "x=16;y=4"
 	New()
 		..()
-		reagents.add_reagent("pwine", 100)
+		reagents.add_reagent(/datum/reagent/ethanol/pwine, 100)
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
@@ -381,7 +381,7 @@
 	isGlass = 0
 	New()
 		..()
-		reagents.add_reagent("orangejuice", 100)
+		reagents.add_reagent(/datum/reagent/drink/juice/orange, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cream
 	name = "Milk Cream"
@@ -392,7 +392,7 @@
 	isGlass = 0
 	New()
 		..()
-		reagents.add_reagent("cream", 100)
+		reagents.add_reagent(/datum/reagent/drink/milk/cream, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice
 	name = "Tomato Juice"
@@ -403,7 +403,7 @@
 	isGlass = 0
 	New()
 		..()
-		reagents.add_reagent("tomatojuice", 100)
+		reagents.add_reagent(/datum/reagent/drink/juice/tomato, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice
 	name = "Lime Juice"
@@ -414,7 +414,7 @@
 	isGlass = 0
 	New()
 		..()
-		reagents.add_reagent("limejuice", 100)
+		reagents.add_reagent(/datum/reagent/drink/juice/lime, 100)
 
 //Small bottles
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
@@ -428,9 +428,9 @@
 	desc = "Contains only water, malt and hops."
 	icon_state = "beer"
 	center_of_mass = "x=16;y=12"
-	New()
-		..()
-		reagents.add_reagent("beer", 30)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/New()
+    . = ..()
+    reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
@@ -438,6 +438,6 @@
 	icon_state = "alebottle"
 	item_state = "beer"
 	center_of_mass = "x=16;y=10"
-	New()
-		..()
-		reagents.add_reagent("ale", 30)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/New()
+    . = ..()
+    reagents.add_reagent(/datum/reagent/ethanol/ale, 30)

@@ -10,9 +10,9 @@
 	desc = "Cola. in space."
 	icon_state = "cola"
 	center_of_mass = "x=16;y=10"
-	New()
-		..()
-		reagents.add_reagent("cola", 30)
+/obj/item/weapon/reagent_containers/food/drinks/cans/cola/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/space_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle
 	name = "bottled water"
@@ -21,7 +21,7 @@
 	center_of_mass = "x=15;y=8"
 	New()
 		..()
-		reagents.add_reagent("water", 30)
+		reagents.add_reagent(/datum/reagent/water, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind
 	name = "\improper Space Mountain Wind"
@@ -30,7 +30,7 @@
 	center_of_mass = "x=16;y=10"
 	New()
 		..()
-		reagents.add_reagent("spacemountainwind", 30)
+		reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
@@ -39,16 +39,16 @@
 	center_of_mass = "x=16;y=8"
 	New()
 		..()
-		reagents.add_reagent("thirteenloko", 30)
+		reagents.add_reagent(/datum/reagent/ethanol/thirteenloko, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb
 	name = "\improper Dr. Gibb"
 	desc = "A delicious mixture of 42 different flavors."
 	icon_state = "dr_gibb"
 	center_of_mass = "x=16;y=10"
-	New()
-		..()
-		reagents.add_reagent("dr_gibb", 30)
+/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/starkist
 	name = "\improper Star-kist"
@@ -57,7 +57,7 @@
 	center_of_mass = "x=16;y=10"
 	New()
 		..()
-		reagents.add_reagent("brownstar", 30)
+		reagents.add_reagent(/datum/reagent/drink/brownstar, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
 	name = "\improper Space-Up"
@@ -66,7 +66,7 @@
 	center_of_mass = "x=16;y=10"
 	New()
 		..()
-		reagents.add_reagent("space_up", 30)
+		reagents.add_reagent(/datum/reagent/drink/space_up, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime
 	name = "\improper Lemon-Lime"
@@ -75,7 +75,7 @@
 	center_of_mass = "x=16;y=10"
 	New()
 		..()
-		reagents.add_reagent("lemon_lime", 30)
+		reagents.add_reagent(/datum/reagent/drink/lemon_lime, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea
 	name = "\improper Vrisk Serket Iced Tea"
@@ -84,7 +84,7 @@
 	center_of_mass = "x=16;y=10"
 	New()
 		..()
-		reagents.add_reagent("icetea", 30)
+		reagents.add_reagent(/datum/reagent/drink/tea/icetea, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
 	name = "\improper Grapel Juice"
@@ -93,22 +93,22 @@
 	center_of_mass = "x=16;y=10"
 	New()
 		..()
-		reagents.add_reagent("grapejuice", 30)
+		reagents.add_reagent(/datum/reagent/drink/juice/grape, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic
 	name = "\improper T-Borg's Tonic Water"
 	desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
 	icon_state = "tonic"
 	center_of_mass = "x=16;y=10"
-	New()
-		..()
-		reagents.add_reagent("tonic", 50)
+/obj/item/weapon/reagent_containers/food/drinks/cans/tonic/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/tonic, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater
 	name = "soda water"
 	desc = "A can of soda water. Still water's more refreshing cousin."
 	icon_state = "sodawater"
 	center_of_mass = "x=16;y=10"
-	New()
-		..()
-		reagents.add_reagent("sodawater", 50)
+/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 50)

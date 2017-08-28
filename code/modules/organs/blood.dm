@@ -17,14 +17,14 @@
 	if(!should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 
-	vessel.add_reagent("blood",species.blood_volume)
+	vessel.add_reagent(/datum/reagent/blood,species.blood_volume)
 	spawn(1)
 		fixblood()
 
 //Resets blood data
 /mob/living/carbon/human/proc/fixblood()
 	for(var/datum/reagent/blood/B in vessel.reagent_list)
-		if(B.id == "blood")
+		if(B.type == /datum/reagent/blood)
 			B.data = list("donor" = src, "species" = species.name, "blood_DNA" = dna.unique_enzymes, "blood_colour" = species.get_blood_colour(src), "blood_type" = dna.b_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
 			B.color = B.data["blood_colour"]
 
@@ -88,7 +88,7 @@
 		return 0
 	if(!amt)
 		return 0
-	return vessel.remove_reagent("blood", amt * (src.mob_size/MOB_MEDIUM))
+	return vessel.remove_reagent(/datum/reagent/blood, amt * (src.mob_size/MOB_MEDIUM))
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -100,7 +100,7 @@
 	if(!B)
 		B = new /datum/reagent/blood
 		B.sync_to(src)
-		container.reagents.add_reagent("blood", amount, B.data)
+		container.reagents.add_reagent(/datum/reagent/blood, amount, B.data)
 	else
 		B.sync_to(src)
 		B.volume += amount
@@ -113,7 +113,7 @@
 		reagents.trans_to_obj(container, amount)
 		return 1
 
-	if(vessel.get_reagent_amount("blood") < amount)
+	if(vessel.get_reagent_amount(/datum/reagent/blood) < amount)
 		return null
 
 	//make sure virus/etc data is up to date
@@ -142,7 +142,7 @@
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
 
 	if(!should_have_organ(BP_HEART))
-		reagents.add_reagent("blood", amount, injected.data)
+		reagents.add_reagent(/datum/reagent/blood, amount, injected.data)
 		reagents.update_total()
 		return
 
@@ -151,10 +151,10 @@
 	if (!injected || !our)
 		return
 	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"],injected.data["species"],our.data["species"]) )
-		reagents.add_reagent("toxin",amount * 0.5)
+		reagents.add_reagent(/datum/reagent/toxin,amount * 0.5)
 		reagents.update_total()
 	else
-		vessel.add_reagent("blood", amount, injected.data)
+		vessel.add_reagent(/datum/reagent/blood, amount, injected.data)
 		vessel.update_total()
 	..()
 
@@ -250,7 +250,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 
 /mob/living/carbon/human/proc/get_effective_blood_volume()
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
-	var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
+	var/blood_volume = round((vessel.get_reagent_amount(/datum/reagent/blood)/species.blood_volume)*100)
 	if(!heart || (heart.pulse == PULSE_NONE && !(status_flags & FAKEDEATH) && heart.robotic < ORGAN_ROBOT))
 		blood_volume *= 0.25
 	else

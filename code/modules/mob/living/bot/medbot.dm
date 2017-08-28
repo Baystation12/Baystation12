@@ -16,12 +16,12 @@
 	var/injection_amount = 15 //How much reagent do we inject at a time?
 	var/heal_threshold = 10 //Start healing when they have this much damage in a category
 	var/use_beaker = 0 //Use reagents in beaker instead of default treatment agents.
-	var/treatment_brute = "tricordrazine"
-	var/treatment_oxy = "tricordrazine"
-	var/treatment_fire = "tricordrazine"
-	var/treatment_tox = "tricordrazine"
-	var/treatment_virus = "spaceacillin"
-	var/treatment_emag = "toxin"
+	var/treatment_brute = /datum/reagent/tricordrazine
+	var/treatment_oxy = /datum/reagent/tricordrazine
+	var/treatment_fire = /datum/reagent/tricordrazine
+	var/treatment_tox = /datum/reagent/tricordrazine
+	var/treatment_virus = /datum/reagent/spaceacillin
+	var/treatment_emag = /datum/reagent/toxin
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 
 /mob/living/bot/medbot/handleIdle()

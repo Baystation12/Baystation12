@@ -8,7 +8,7 @@
 
 	invocation = "Tagopar lethodar!"
 	invocation_type = SpI_SHOUT
-	var/reagent_type = "hclacid"
+	var/reagent_type = /datum/reagent/acid/hydrochloric
 	hud_state = "wiz_acid"
 
 /spell/acid_spray/choose_targets()

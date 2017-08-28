@@ -576,9 +576,11 @@
 
 	if(href_list["toggle_piece"])
 		toggle_piece(href_list["toggle_piece"], usr)
-	else if(href_list["toggle_seals"])
+		return 1
+	if(href_list["toggle_seals"])
 		toggle_seals(usr)
-	else if(href_list["interact_module"])
+		return 1
+	if(href_list["interact_module"])
 
 		var/module_index = text2num(href_list["interact_module"])
 
@@ -595,15 +597,14 @@
 					selected_module = module
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
-	else if(href_list["toggle_ai_control"])
+		return 1
+	if(href_list["toggle_ai_control"])
 		ai_override_enabled = !ai_override_enabled
 		notify_ai("Synthetic suit control has been [ai_override_enabled ? "enabled" : "disabled"].")
-	else if(href_list["toggle_suit_lock"])
+		return 1
+	if(href_list["toggle_suit_lock"])
 		locked = !locked
-
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-	return 0
+		return 1
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	for(var/obj/item/rig_module/ai_container/module in installed_modules)

@@ -8,7 +8,7 @@
 	anchored = 0
 
 	var/initial_capacity = 1000
-	var/initial_reagents = "{}" // A list of reagents and their ratio relative the initial capacity in json format. "{'water':0,5}" would fill the dispenser halfway to capacity.
+	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/datum/reagent/water = 0.5) would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100;500"
 
@@ -23,11 +23,9 @@
 	if (!possible_transfer_amounts)
 		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
 
-	if(istext(initial_reagents))
-		var/list/initial_reagent_list = json_decode(initial_reagents)
-		for(var/reagent in initial_reagent_list)
-			var/reagent_ratio = initial_reagent_list[reagent]
-			reagents.add_reagent(reagent, reagent_ratio * initial_capacity)
+	for(var/reagent_type in initial_reagent_types)
+		var/reagent_ratio = initial_reagent_types[reagent_type]
+		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
 
 	..()
 
@@ -84,7 +82,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "10;25;50;100"
 	initial_capacity = 50000
-	initial_reagents = "{'water':1}"
+	initial_reagent_types = list(/datum/reagent/water = 1)
 	flags = OBJ_CLIMBABLE
 
 /obj/structure/reagent_dispensers/fueltank
@@ -95,7 +93,7 @@
 	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/obj/item/device/assembly_holder/rig = null
-	initial_reagents = "{'fuel':1}"
+	initial_reagent_types = list(/datum/reagent/fuel = 1)
 	flags = OBJ_CLIMBABLE
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
@@ -199,7 +197,7 @@
 		return
 
 	amount = min(amount, reagents.total_volume)
-	reagents.remove_reagent("fuel",amount)
+	reagents.remove_reagent(/datum/reagent/fuel,amount)
 	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank
@@ -210,7 +208,7 @@
 	anchored = 1
 	density = 0
 	amount_per_transfer_from_this = 45
-	initial_reagents = "{'condensedcapsaicin':1}"
+	initial_reagent_types = list(/datum/reagent/capsaicin/condensed = 1)
 
 
 /obj/structure/reagent_dispensers/water_cooler
@@ -222,7 +220,7 @@
 	possible_transfer_amounts = null
 	anchored = 1
 	initial_capacity = 500
-	initial_reagents = "{'water':1}"
+	initial_reagent_types = list(/datum/reagent/water = 1)
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W,/obj/item/weapon/wrench))
@@ -246,7 +244,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "beertankTEMP"
 	amount_per_transfer_from_this = 10
-	initial_reagents = "{'beer':1}"
+	initial_reagent_types = list(/datum/reagent/ethanol/beer = 1)
 	flags = OBJ_CLIMBABLE
 
 /obj/structure/reagent_dispensers/virusfood
@@ -256,7 +254,7 @@
 	icon_state = "virusfoodtank"
 	amount_per_transfer_from_this = 10
 	anchored = 1
-	initial_reagents = "{'virusfood':1}"
+	initial_reagent_types = list(/datum/reagent/nutriment/virus_food = 1)
 
 /obj/structure/reagent_dispensers/acid
 	name = "Sulphuric Acid Dispenser"
@@ -265,4 +263,4 @@
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
 	anchored = 1
-	initial_reagents = "{'sacid':1}"
+	initial_reagent_types = list(/datum/reagent/acid = 1)

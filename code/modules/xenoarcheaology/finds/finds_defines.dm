@@ -1,13 +1,13 @@
 var/global/list/responsive_carriers = list(
-	"carbon",
-	"potassium",
-	"hydrogen",
+	/datum/reagent/carbon,
+	/datum/reagent/potassium,
+	/datum/reagent/hydrazine,
 	"nitrogen",
-	"mercury",
-	"iron",
+	/datum/reagent/mercury,
+	/datum/reagent/iron,
 	"chlorine",
-	"phosphorus",
-	"phoron")
+	/datum/reagent/phosphorus,
+	/datum/reagent/toxin/phoron)
 
 var/global/list/finds_as_strings = list(
 	"Trace organic cells",
@@ -23,16 +23,16 @@ var/global/list/finds_as_strings = list(
 /proc/get_responsive_reagent(var/find_type)
 	switch(find_type)
 		if(ARCHAEO_BOWL, ARCHAEO_URN, ARCHAEO_CUTLERY, ARCHAEO_STATUETTE, ARCHAEO_INSTRUMENT, ARCHAEO_HANDCUFFS, ARCHAEO_BEARTRAP, ARCHAEO_LIGHTER, ARCHAEO_BOX, ARCHAEO_GASTANK, ARCHAEO_PEN, ARCHAEO_UNKNOWN)
-			return "mercury"
+			return /datum/reagent/mercury
 		if(ARCHAEO_COIN, ARCHAEO_KNIFE, ARCHAEO_TOOL, ARCHAEO_METAL, ARCHAEO_CLAYMORE, ARCHAEO_RODS, ARCHAEO_KATANA, ARCHAEO_LASER, ARCHAEO_GUN)
-			return "iron"
+			return /datum/reagent/iron
 		if(ARCHAEO_CRYSTAL, ARCHAEO_SHARD, ARCHAEO_SOULSTONE)
 			return "nitrogen"
 		if(ARCHAEO_CULTBLADE, ARCHAEO_TELEBEACON, ARCHAEO_CULTROBES, ARCHAEO_STOCKPARTS)
-			return "potassium"
+			return /datum/reagent/potassium
 		if(ARCHAEO_FOSSIL, ARCHAEO_SHELL, ARCHAEO_PLANT, ARCHAEO_REMAINS_HUMANOID, ARCHAEO_REMAINS_ROBOT, ARCHAEO_REMAINS_XENO, ARCHAEO_GASMASK)
-			return "carbon"
-	return "phoron"
+			return /datum/reagent/carbon
+	return /datum/reagent/toxin/phoron
 
 /proc/get_random_digsite_type()
 	return pick(100;DIGSITE_GARDEN, 95;DIGSITE_ANIMAL, 90;DIGSITE_HOUSE, 85;DIGSITE_TECHNICAL, 80;DIGSITE_TEMPLE, 75;DIGSITE_WAR)

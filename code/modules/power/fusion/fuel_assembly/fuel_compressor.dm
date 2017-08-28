@@ -21,8 +21,8 @@
 			return 1
 		var/datum/reagent/R = thing.reagents.reagent_list[1]
 		visible_message("<span class='notice'>\The [src] compresses the contents of \the [thing] into a new fuel assembly.</span>")
-		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), R.id, R.color)
-		thing.reagents.remove_reagent(R.id, R.volume)
+		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), R.type, R.color)
+		thing.reagents.remove_reagent(R.type, R.volume)
 		user.put_in_hands(F)
 
 	else if(istype(thing, /obj/machinery/power/supermatter/shard))

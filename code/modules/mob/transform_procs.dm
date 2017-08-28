@@ -323,7 +323,7 @@
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	Weaken(5)
 	if(should_have_organ(BP_HEART))
-		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
+		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
 	for(var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0

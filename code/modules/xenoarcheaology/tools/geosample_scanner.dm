@@ -47,18 +47,18 @@
 /obj/machinery/radiocarbon_spectrometer/New()
 	..()
 	create_reagents(500)
-	coolant_reagents_purity["water"] = 0.5
-	coolant_reagents_purity["icecoffee"] = 0.6
-	coolant_reagents_purity["icetea"] = 0.6
-	coolant_reagents_purity["milkshake"] = 0.6
-	coolant_reagents_purity["leporazine"] = 0.7
-	coolant_reagents_purity["kelotane"] = 0.7
-	coolant_reagents_purity["sterilizine"] = 0.7
-	coolant_reagents_purity["dermaline"] = 0.7
-	coolant_reagents_purity["hyperzine"] = 0.8
-	coolant_reagents_purity["cryoxadone"] = 0.9
-	coolant_reagents_purity["coolant"] = 1
-	coolant_reagents_purity["adminordrazine"] = 2
+	coolant_reagents_purity[/datum/reagent/water] = 0.5
+	coolant_reagents_purity[/datum/reagent/drink/coffee/icecoffee] = 0.6
+	coolant_reagents_purity[/datum/reagent/drink/tea/icetea] = 0.6
+	coolant_reagents_purity[/datum/reagent/drink/milkshake] = 0.6
+	coolant_reagents_purity[/datum/reagent/leporazine] = 0.7
+	coolant_reagents_purity[/datum/reagent/kelotane] = 0.7
+	coolant_reagents_purity[/datum/reagent/sterilizine] = 0.7
+	coolant_reagents_purity[/datum/reagent/dermaline] = 0.7
+	coolant_reagents_purity[/datum/reagent/hyperzine] = 0.8
+	coolant_reagents_purity[/datum/reagent/cryoxadone] = 0.9
+	coolant_reagents_purity[/datum/reagent/coolant] = 1
+	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
 /obj/machinery/radiocarbon_spectrometer/attack_hand(var/mob/user as mob)
 	ui_interact(user)
@@ -107,7 +107,7 @@
 	for (var/datum/reagent/current_reagent in src.reagents.reagent_list)
 		if (!current_reagent)
 			continue
-		var/cur_purity = coolant_reagents_purity[current_reagent.id]
+		var/cur_purity = coolant_reagents_purity[current_reagent.type]
 		if(!cur_purity)
 			cur_purity = 0.1
 		else if(cur_purity > 1)

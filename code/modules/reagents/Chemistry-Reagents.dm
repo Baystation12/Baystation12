@@ -1,18 +1,15 @@
 
-//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-/proc/initialize_chemical_reagents()
-	var/paths = typesof(/datum/reagent) - /datum/reagent
-	chemical_reagents_list = list()
-	for(var/path in paths)
+//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent type
+/proc/do_initialize_chemical_reagents()
+	. = list()
+	for(var/path in subtypesof(/datum/reagent))
 		var/datum/reagent/D = new path()
 		if(!D.name)
 			continue
-		chemical_reagents_list[D.id] = D
-
+		.[D.type] = D
 
 /datum/reagent
 	var/name = "Reagent"
-	var/id = "reagent"
 	var/description = "A non-descript chemical."
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
@@ -37,7 +34,7 @@
 	var/list/glass_special = null // null equivalent to list()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
-	holder.remove_reagent(id, amount)
+	holder.remove_reagent(type, amount)
 
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /datum/reagent/proc/touch_mob(var/mob/M, var/amount)

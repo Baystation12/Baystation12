@@ -237,8 +237,8 @@
 				var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
 				var/heal_fire = occupant.getFireLoss() ? min(1, 20/occupant.getFireLoss()) : 0
 				occupant.heal_organ_damage(heal_brute,heal_fire)
-		var/has_cryo = occupant.reagents.get_reagent_amount("cryoxadone") >= 1
-		var/has_clonexa = occupant.reagents.get_reagent_amount("clonexadone") >= 1
+		var/has_cryo = occupant.reagents.get_reagent_amount(/datum/reagent/cryoxadone) >= 1
+		var/has_clonexa = occupant.reagents.get_reagent_amount(/datum/reagent/clonexadone) >= 1
 		var/has_cryo_medicine = has_cryo || has_clonexa
 		if(beaker && !has_cryo_medicine)
 			beaker.reagents.trans_to_mob(occupant, 1, CHEM_BLOOD, 10)

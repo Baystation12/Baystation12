@@ -29,7 +29,7 @@
 	var/turf/T = get_turf(src)
 	var/obj/effect/effect/water/chempuff/chem = new(T)
 	chem.create_reagents(10)
-	chem.reagents.add_reagent("corruption",30)
+	chem.reagents.add_reagent(/datum/reagent/toxin/corrupting,30)
 	chem.set_up(get_step(T, dir), 2, 10)
 	playsound(T, 'sound/hallucinations/wail.ogg',20,1)
 

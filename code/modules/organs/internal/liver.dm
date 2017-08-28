@@ -73,7 +73,7 @@
 			damage = max(0, damage - 0.4 * PROCESS_ACCURACY)
 
 	//Blood regeneration if there is some space
-	var/blood_volume_raw = owner.vessel.get_reagent_amount("blood")
+	var/blood_volume_raw = owner.vessel.get_reagent_amount(/datum/reagent/blood)
 	if(blood_volume_raw < species.blood_volume)
 		var/datum/reagent/blood/B = owner.get_blood(owner.vessel)
 		if(istype(B))
