@@ -1618,7 +1618,7 @@
 "Re" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 8},/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/vacant/cannon)
 "Rf" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 8},/turf/simulated/floor/reinforced/airless,/area/vacant/cannon)
 "Rg" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 1},/turf/simulated/floor/reinforced/airless,/area/vacant/cannon)
-"Rh" = (/obj/machinery/power/smes/buildable/preset/torch/substation_full{RCon_tag = "Substation - Engine"},/obj/structure/cable/green,/turf/simulated/floor/plating,/area/vacant/cannon)
+"Rh" = (/obj/machinery/power/smes/buildable/preset/torch/substation_full{RCon_tag = "Substation - Prototype"},/obj/structure/cable/green,/turf/simulated/floor/plating,/area/vacant/cannon)
 "Sb" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "Sc" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "Sd" = (/obj/structure/cable/cyan{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled,/area/engineering/engine_smes)
