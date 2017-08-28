@@ -7,3 +7,5 @@ changes:
   - bugfix: "GAS eyes are no longer vulnerable to phoron in the air."
   - bugfix: "Fixed bug with humans not taking oxyloss after two minutes of not breathing."
   - tweak: "GAS now store more dexalin."
+  - tweak: "Updates unit tests to include GAS."
+  - tweak: "Updates unit tests to work with adjusted oxyloss system."
