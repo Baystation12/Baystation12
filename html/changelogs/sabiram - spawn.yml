@@ -1,0 +1,5 @@
+author: sabiram
+delete-after: True
+
+changes: 
+  - rscadd: "Staff will now spawn in their work areas at round start, instead of the cryo chambers."
