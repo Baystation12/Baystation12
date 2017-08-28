@@ -119,6 +119,10 @@
 	name = "Marine service"
 	departments = SRV
 
+	utility_under = /obj/item/clothing/under/utility/marine/service
+
+	service_over = /obj/item/clothing/suit/storage/service/marine/service
+
 /decl/hierarchy/mil_uniform/marine/srv/officer
 	name = "Marine service"
 	min_rank = 11
