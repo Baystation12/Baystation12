@@ -647,6 +647,26 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
+//Explorer Outfits
+
+/decl/hierarchy/outfit/job/torch/crew/service/pathfinder
+	name = OUTFIT_JOB_NAME("Pathfinder")
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/service 
+	shoes = /obj/item/clothing/shoes/dutyboots
+	head = /obj/item/clothing/head/soft/sol/expedition
+	id_type = /obj/item/weapon/card/id/torch/crew/pathfinder
+	pda_type = /obj/item/device/pda
+	l_ear = /obj/item/device/radio/headset/pilot
+
+/decl/hierarchy/outfit/job/torch/crew/service/explorer
+	name = OUTFIT_JOB_NAME("Explorer")
+	uniform = /obj/item/clothing/under/utility/expeditionary/service
+	head = /obj/item/clothing/head/soft/sol/expedition
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorer
+	pda_type = /obj/item/device/pda
+	l_ear = /obj/item/device/radio/headset
+
 //Passenger Outfits
 
 /decl/hierarchy/outfit/job/torch/passenger/research
