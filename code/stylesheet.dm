@@ -98,6 +98,8 @@ h1.alert, h2.alert		{color: #000000;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 .terran					{color: #9C250B;}
+.moon 					{color: #FF6600;}
+.spacer					{color: #422863;}
 
 .interface				{color: #330033;}
 

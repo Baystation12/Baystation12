@@ -38,11 +38,11 @@
 	return speech_verb
 
 // Galactic common languages (systemwide accepted standards).
-/datum/language/trader
-	name = "Tradeband"
-	desc = "Maintained by the various trading cartels in major systems, this elegant, structured language is used for bartering and bargaining."
+/datum/language/lunar
+	name = "Selenian"
+	desc = "An older language originating from Earth's only natural satellite, this language is commonly heard from the mouths of aristocracy."
 	speech_verb = "enunciates"
-	colour = "say_quote"
+	colour = "moon"
 	key = "2"
 	space_chance = 100
 	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
