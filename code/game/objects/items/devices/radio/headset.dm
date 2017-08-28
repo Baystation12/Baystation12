@@ -206,6 +206,13 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_service
 
+/obj/item/device/radio/headset/utility
+	name = "utility headset"
+	desc = "A headset for real tools, with access to the utility channel."
+	icon_state = "srv_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/utility
+
 /obj/item/device/radio/headset/ert
 	name = "emergency response team radio headset"
 	desc = "The headset of the boss's boss."

@@ -1,12 +1,23 @@
 /datum/map/torch
 	species_to_job_whitelist = list(
 		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
-		/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/chemist),
+			/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/chemist),
 		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
+#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/officer, /datum/job/warden, /datum/job/detective
+	species_to_job_blacklist = list(
+		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison), //Other jobs unavailable via branch restrictions,
+		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
+		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
+		/datum/species/machine = list(HUMAN_ONLY_JOBS),
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard),	//Other jobs unavailable via branch restrictions,
+	)
+#undef HUMAN_ONLY_JOBS
+
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
+						/datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
@@ -207,7 +218,7 @@
 	title = "NanoTrasen Liaison"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "NanoTrasen and Corporate Regulations"
@@ -231,7 +242,7 @@
 	title = "SolGov Representative"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
@@ -252,7 +263,7 @@
 	title = "Senior Enlisted Advisor"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -287,7 +298,7 @@
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Commanding Officer and heads of staff"
@@ -316,13 +327,13 @@
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
-	department = "Support"
-	department_flag = SPT
-	faction = "Station"
+	department = "Utility"
+	department_flag = UTL
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#515151"
+	selection_color = "#4c3d47"
 	minimal_player_age = 5
 	economic_modifier = 7
 	ideal_character_age = 40
@@ -344,18 +355,18 @@
 
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Service"
-	department_flag = SRV
-	faction = "Station"
+	department = "Utility"
+	department_flag = UTL
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#515151"
+	selection_color = "#68099E"
 	minimal_player_age = 7
 	economic_modifier = 7
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/pathfinder
-	allowed_branches = /datum/mil_branch/expeditionary_corps
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
@@ -369,16 +380,16 @@
 
 /datum/job/explorer
 	title = "Explorer"
-	department = "Service"
-	department_flag = SRV
+	department = "Utility"
+	department_flag = UTL
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
-	selection_color = "#515151"
+	selection_color = "#68099E"
 	minimal_player_age = 4
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/explorer
-	allowed_branches = /datum/mil_branch/expeditionary_corps
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e2,
@@ -396,7 +407,7 @@
 	title = "Senior Engineer"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -474,7 +485,7 @@
 	title = "Maintenance Assistant"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
@@ -496,7 +507,7 @@
 	title = "Roboticist"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -615,7 +626,7 @@
 	title = "Physician"
 	department = "Medical"
 	department_flag = MED
-	faction = "Station"
+
 	minimal_player_age = 14
 	ideal_character_age = 45
 	total_positions = 2
@@ -678,7 +689,7 @@
 	title = "Medical Contractor"
 	department = "Medical"
 	department_flag = MED
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
@@ -809,7 +820,7 @@
 	title = "Supply Assistant"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Deck Officer and Supply Personnel"
@@ -827,7 +838,7 @@
 	title = "Sanitation Technician"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Executive Officer"
@@ -904,7 +915,7 @@
 	title = "Crewman"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
+
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
@@ -937,7 +948,7 @@
 	title = "Senior Researcher"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director"
@@ -963,7 +974,7 @@
 	supervisors = "the Research Director"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1039,7 +1050,7 @@
 	title = "Security Guard"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1061,7 +1072,7 @@
 	title = "Research Assistant"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1116,7 +1127,7 @@
 	title = "Merchant"
 	department = "Civilian"
 	department_flag = CIV
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 30
@@ -1137,7 +1148,7 @@
 	title = "Stowaway"
 	department = "Civilian"
 	department_flag = CIV
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 20
