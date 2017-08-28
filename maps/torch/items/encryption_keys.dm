@@ -28,3 +28,8 @@
 	name = "pilot's encryption key"
 	icon_state = "com_cypherkey"
 	channels = list( "Command" = 1, "Engineering" = 1)
+
+/obj/item/device/encryptionkey/pathfinder
+	name = "pathfinder's encryption key"
+	icon_state = "com_cypherkey"
+	channels = list("Service" = 1, "Command" = 1)

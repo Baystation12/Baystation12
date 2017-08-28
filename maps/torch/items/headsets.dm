@@ -54,3 +54,10 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/pilot
+
+/obj/item/device/radio/headset/pathfinder
+	name = "pathfinder's headset"
+	desc = "A headset with access to the command and service channels."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/pathfinder
