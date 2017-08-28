@@ -56,6 +56,8 @@ var/datum/mil_branches/mil_branches = new()
  *  Return all spawn branches for the given input
  */
 /datum/mil_branches/proc/spawn_branches(var/datum/species/S)
+	if(!S)
+		return spawn_branches_.Copy()
 	. = spawn_branches_by_species_[S]
 	if(!.)
 		. = list()
@@ -63,7 +65,6 @@ var/datum/mil_branches/mil_branches = new()
 		for(var/spawn_branch in spawn_branches_)
 			if(!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
 				. += spawn_branch
-			.
 
 /**
  *  Return all spawn ranks for the given input
@@ -129,6 +130,8 @@ var/datum/mil_branches/mil_branches = new()
 			spawn_ranks_[rank.name] = rank
 
 /datum/mil_branch/proc/spawn_ranks(var/datum/species/S)
+	if(!S)
+		return spawn_ranks_.Copy()
 	. = spawn_ranks_by_species_[S]
 	if(!.)
 		. = list()
