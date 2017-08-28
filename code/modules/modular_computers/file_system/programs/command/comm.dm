@@ -62,12 +62,19 @@
 	data["isAI"] = issilicon(usr)
 	data["authenticated"] = is_autenthicated(user)
 	data["boss_short"] = GLOB.using_map.boss_short
-	data["current_security_level"] = security_level
-	data["current_security_level_title"] = num2seclevel(security_level)
 
-	data["def_SEC_LEVEL_DELTA"] = SEC_LEVEL_DELTA
-	data["def_SEC_LEVEL_ORANGE"] = SEC_LEVEL_ORANGE
-	data["def_SEC_LEVEL_GREEN"] = SEC_LEVEL_GREEN
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	data["current_security_level_ref"] = any2ref(security_state.current_security_level)
+	data["current_security_level_title"] = security_state.current_security_level.name
+
+	data["cannot_change_security_level"] = !security_state.can_change_security_level()
+	var/list/security_levels = list()
+	for(var/decl/security_level/security_level in security_state.standard_security_levels)
+		var/list/security_setup = list()
+		security_setup["title"] = security_level.name
+		security_setup["ref"] = any2ref(security_level)
+		security_levels[++security_levels.len] = security_setup
+	data["security_levels"] = security_levels
 
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	data["messages"] = l.messages
@@ -197,29 +204,20 @@
 							msg_line2 = linput
 					if("message")
 						post_status("message", msg_line1, msg_line2)
-					if("alert")
-						post_status("alert", href_list["alert"])
+					if("image")
+						post_status("image", href_list["image"])
 					else
 						post_status(href_list["target"])
 		if("setalert")
 			. = 1
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
-				var/current_level = text2num(href_list["target"])
-				var/confirm = alert("Are you sure you want to change alert level to [num2seclevel(current_level)]?", name, "No", "Yes")
-				if(confirm == "Yes" && can_still_topic())
-					var/old_level = security_level
-					if(!current_level) current_level = SEC_LEVEL_GREEN
-					if(current_level < SEC_LEVEL_GREEN) current_level = SEC_LEVEL_GREEN
-					if(current_level > SEC_LEVEL_ORANGE) current_level = SEC_LEVEL_ORANGE //Cannot engage delta with this
-					set_security_level(current_level)
-					if(security_level != old_level)
-						log_game("[key_name(usr)] has changed the security level to [get_security_level()].")
-						message_admins("[key_name_admin(usr)] has changed the security level to [get_security_level()].")
-						switch(security_level)
-							if(SEC_LEVEL_GREEN)
-								feedback_inc("alert_comms_green",1)
-							if(SEC_LEVEL_ORANGE)
-								feedback_inc("alert_comms_orange",1)
+				var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.standard_security_levels
+				if(target_level && security_state.can_switch_to(target_level))
+					var/confirm = alert("Are you sure you want to change alert level to [target_level.name]?", name, "No", "Yes")
+					if(confirm == "Yes" && can_still_topic())
+						if(security_state.set_security_level(target_level))
+							feedback_inc(target_level.type,1)
 			else
 				to_chat(usr, "You press button, but red light flashes and nothing happens.")//This should never happen
 
@@ -302,7 +300,7 @@ var/last_message_id = 0
 			status_signal.data["msg1"] = data1
 			status_signal.data["msg2"] = data2
 			log_admin("STATUS: [key_name(usr)] set status screen message with [src]: [data1] [data2]")
-		if("alert")
+		if("image")
 			status_signal.data["picture_state"] = data1
 
 	frequency.post_signal(src, status_signal)
