@@ -3,12 +3,6 @@
 #define FONT_STYLE "Arial Black"
 #define SCROLL_SPEED 2
 
-var/list/status_icons_to_colour = list(
-	"redalert" = COLOR_RED,
-	"greenalert" = COLOR_GREEN,
-	"bluealert" = COLOR_BLUE
-	)
-
 // Status display
 // (formerly Countdown timer display)
 
@@ -51,6 +45,7 @@ var/list/status_icons_to_colour = list(
 	var/const/STATUS_DISPLAY_MESSAGE = 2
 	var/const/STATUS_DISPLAY_ALERT = 3
 	var/const/STATUS_DISPLAY_TIME = 4
+	var/const/STATUS_DISPLAY_IMAGE = 5
 	var/const/STATUS_DISPLAY_CUSTOM = 99
 
 /obj/machinery/status_display/Destroy()
@@ -129,12 +124,15 @@ var/list/status_icons_to_colour = list(
 			update_display(line1, line2)
 			return 1
 		if(STATUS_DISPLAY_ALERT)
-			set_picture(picture_state)
+			display_alert()
 			return 1
 		if(STATUS_DISPLAY_TIME)
 			message1 = "TIME"
 			message2 = stationtime2text()
 			update_display(message1, message2)
+			return 1
+		if(STATUS_DISPLAY_IMAGE)
+			set_picture(picture_state)
 			return 1
 	return 0
 
@@ -158,13 +156,21 @@ var/list/status_icons_to_colour = list(
 		message2 = ""
 		index2 = 0
 
+/obj/machinery/status_display/proc/display_alert()
+	remove_display()
+
+	var/decl/security_state/security_state = GLOB.decl_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_level/sl = security_state.current_security_level
+
+	var/image/alert = image(sl.icon, sl.overlay_status_display)
+	set_light(l_range = sl.light_range, l_power = sl.light_power, l_color = sl.light_color)
+	overlays |= alert
+
 /obj/machinery/status_display/proc/set_picture(state)
 	remove_display()
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
-	if(picture_state && status_icons_to_colour[picture_state])
-		set_light(l_range = 2, l_power = 2, l_color = status_icons_to_colour[picture_state])
 	overlays |= picture
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
@@ -211,10 +217,13 @@ var/list/status_icons_to_colour = list(
 
 		if("alert")
 			mode = STATUS_DISPLAY_ALERT
-			set_picture(signal.data["picture_state"])
 
 		if("time")
 			mode = STATUS_DISPLAY_TIME
+
+		if("image")
+			mode = STATUS_DISPLAY_IMAGE
+			set_picture(signal.data["picture_state"])
 	update()
 
 #undef CHARS_PER_LINE
