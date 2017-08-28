@@ -591,7 +591,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
 	if(!lit)
-		if(reagents.has_reagent("fuel"))
+		if(reagents.has_reagent(/datum/reagent/fuel))
 			light(user)
 		else
 			to_chat(user, "<span class='warning'>[src] won't ignite - out of fuel.</span>")
@@ -629,13 +629,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	..()
 
 /obj/item/weapon/flame/lighter/process()
-	if(reagents.has_reagent("fuel"))
-		if(ismob(loc) && prob(10) && reagents.get_reagent_amount("fuel") < 1)
+	if(reagents.has_reagent(/datum/reagent/fuel))
+		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
 			to_chat(loc, "<span class='warning'>[src]'s flame flickers.</span>")
 			set_light(0)
 			spawn(4)
 				set_light(2)
-		reagents.remove_reagent("fuel", 0.05)
+		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
 	else
 		shutoff()
 		return
