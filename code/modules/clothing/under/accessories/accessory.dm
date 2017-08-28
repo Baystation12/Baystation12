@@ -603,6 +603,7 @@
 /obj/item/clothing/accessory/department/command
 	name = "command insignia"
 	desc = "Insignia denoting assignment to the command department. These fit Expeditionary Corps uniforms."
+	overlay_state = "dept_exped_over"
 	color = "#E5EA4F"
 
 /obj/item/clothing/accessory/department/command/fleet
@@ -618,6 +619,7 @@
 /obj/item/clothing/accessory/department/engineering
 	name = "engineering insignia"
 	desc = "Insignia denoting assignment to the engineering department. These fit Expeditionary Corps uniforms."
+	overlay_state = "dept_exped_over"
 	color = "#FF7F00"
 
 /obj/item/clothing/accessory/department/engineering/fleet
@@ -633,6 +635,7 @@
 /obj/item/clothing/accessory/department/security
 	name = "security insignia"
 	desc = "Insignia denoting assignment to the security department. These fit Expeditionary Corps uniforms."
+	overlay_state = "dept_exped_over"
 	color = "#BF0000"
 
 /obj/item/clothing/accessory/department/security/fleet
@@ -648,6 +651,7 @@
 /obj/item/clothing/accessory/department/medical
 	name = "medical insignia"
 	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
+	overlay_state = "dept_exped_over"
 	color = "#4C9CE4"
 
 /obj/item/clothing/accessory/department/medical/fleet
@@ -663,6 +667,7 @@
 /obj/item/clothing/accessory/department/supply
 	name = "supply insignia"
 	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
+	overlay_state = "dept_exped_over"
 	color = "#BB9042"
 
 /obj/item/clothing/accessory/department/supply/fleet
@@ -678,6 +683,7 @@
 /obj/item/clothing/accessory/department/service
 	name = "service insignia"
 	desc = "Insignia denoting assignment to the service department. These fit Expeditionary Corps uniforms."
+	overlay_state = "dept_exped_over"
 	color = "#6EAA2C"
 
 /obj/item/clothing/accessory/department/service/fleet
