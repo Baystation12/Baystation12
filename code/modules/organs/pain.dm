@@ -23,8 +23,10 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 		last_pain_message = message
 		if(power >= 50)
 			to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
-		else
+		else if(power >= 10)
 			to_chat(src, "<span class='danger'>[message]</span>")
+		else
+			to_chat(src, "<span class='warning'>[message]</span>")
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()
