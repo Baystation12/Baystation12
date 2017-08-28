@@ -84,8 +84,9 @@
 			S.exude_gasses -= badgas
 		if(S.consume_gasses)
 			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
-		if(atmosphere.get_gas("phoron"))
-			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(7,15))
+		for(var/g in atmosphere.gas)
+			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
+				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 
 	for(var/mob/living/simple_animal/A in animals)
 		A.minbodytemp = atmosphere.temperature - 20
@@ -128,6 +129,29 @@
 	atmosphere.temperature = T20C + rand(-10, 10)
 	var/factor = max(rand(60,140)/100, 0.6)
 	atmosphere.multiply(factor)
+
+/obj/effect/overmap/sector/exoplanet/proc/process_map_edge(atom/movable/A)
+	var/new_x
+	var/new_y
+	if(A.x <= TRANSITIONEDGE)
+		new_x = world.maxx - TRANSITIONEDGE - 2
+		new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+
+	else if (A.x >= (world.maxx - TRANSITIONEDGE + 1))
+		new_x = TRANSITIONEDGE + 1
+		new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+
+	else if (A.y <= TRANSITIONEDGE)
+		new_y = world.maxy - TRANSITIONEDGE -2
+		new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+	else if (A.y >= (world.maxy - TRANSITIONEDGE + 1))
+		new_y = TRANSITIONEDGE + 1
+		new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+
+	var/turf/T = locate(new_x, new_y, A.z)
+	if(T)
+		A.forceMove(T)
 
 /area/exoplanet
 	name = "\improper Planetary surface"
@@ -238,6 +262,14 @@
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
 
+/turf/simulated/floor/exoplanet/Entered(atom/movable/A)
+	..()
+	if(A.simulated && GLOB.using_map.use_overmap)
+		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
+			var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+			if(istype(E))
+				E.process_map_edge(A)
+
 /turf/simulated/floor/exoplanet/New()
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
@@ -272,6 +304,7 @@
 
 /turf/simulated/floor/exoplanet/water/shallow
 	name = "shallow water"
+	icon = 'icons/misc/beach.dmi'
 	icon_state = "seashallow"
 	movement_delay = 2
 	mudpit = 1
