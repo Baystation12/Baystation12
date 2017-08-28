@@ -40,7 +40,7 @@
 // Galactic common languages (systemwide accepted standards).
 /datum/language/lunar
 	name = "Selenian"
-	desc = "An older language originating from Earth's only natural satellite, this language is commonly heard from the mouths of aristocracy."
+	desc = "An older language primarily spoken on Earth's only natural satellite, this language is commonly heard from the mouths of aristocracy."
 	speech_verb = "enunciates"
 	colour = "moon"
 	key = "2"
@@ -57,7 +57,7 @@
 // Criminal language.
 /datum/language/gutter
 	name = "Gutter"
-	desc = "Much like Standard, this crude pidgin tongue descended from numerous languages and serves as Tradeband for criminal elements."
+	desc = "Much like Standard, this crude pidgin tongue descended from numerous languages and serves as a trade language for criminal elements."
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
