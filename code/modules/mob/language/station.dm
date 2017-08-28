@@ -214,3 +214,12 @@
 		return capitalize(pick(GLOB.first_names_female))
 	else
 		return capitalize(pick(GLOB.first_names_male))
+
+/datum/language/spacer
+	name = "LANGUAGE_SPACER"
+	desc = "A pidgin language spoken by spacers, smugglers, and cocky fly-boys across the galaxy."
+	colour = "spacer"
+	key = "v"
+	syllables = list ("die", "en", "skei", "van", "son", "der", "aar", "gro", "op", "gron", "daa", "be", "ne", "het",
+	"gere", "ras", "ver", "zan", "das", "waa", "geb", "vol", "lu", "min", "breh", "rus", "stv")
+
