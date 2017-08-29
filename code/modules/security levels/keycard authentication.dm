@@ -64,7 +64,9 @@
 
 	if(screen == 1)
 		dat += "Select an event to trigger:<ul>"
-		dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Red alert</A></li>"
+
+		var/decl/security_state/security_state = GLOB.decl_repository.get_decl(GLOB.using_map.security_state)
+		dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Engage [security_state.defcon_2_security_level.name]</A></li>"
 		if(!config.ert_admin_call_only)
 			dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
 
@@ -141,7 +143,8 @@
 /obj/machinery/keycard_auth/proc/trigger_event()
 	switch(event)
 		if("Red alert")
-			set_security_level(SEC_LEVEL_RED)
+			var/decl/security_state/security_state = GLOB.decl_repository.get_decl(GLOB.using_map.security_state)
+			security_state.set_security_level(security_state.defcon_2_security_level)
 			feedback_inc("alert_keycard_auth_red",1)
 		if("Grant Emergency Maintenance Access")
 			make_maint_all_access()

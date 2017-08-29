@@ -205,7 +205,7 @@ function run_code_tests {
     run_test_fail "no invalid spans" "grep -En \"<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>\" **/*.dm"
     run_test "code quality checks" "test/check-paths.sh"
     run_test "indentation check" "awk -f tools/indentation.awk **/*.dm"
-    run_test "check changelog example unchanged" "md5sum -c - <<< '79e058ac02ed52aad99a489ab4c8f75b *html/changelogs/example.yml'"
+    run_test "check changelog example unchanged" "md5sum -c - <<< '8daf4e0132cc049ad839fa6948c4a569 *html/changelogs/example.yml'"
     run_test "check tags" "python tools/TagMatcher/tag-matcher.py ."
     run_test "check punctuation" "python tools/PunctuationChecker/punctuation-checker.py ."
     run_test "check icon state limit" "python tools/dmitool/check_icon_state_limit.py ."
@@ -240,7 +240,7 @@ function run_byond_tests {
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test_ci "check globals build" "python tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< '0cfbd7aaaa01d107383ed1fdc3457077 *code/_helpers/global_access.dm'"
+    run_test "check globals unchanged" "md5sum -c - <<< '833bd6f9b9b1b454499ad646e8b5f23d *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"

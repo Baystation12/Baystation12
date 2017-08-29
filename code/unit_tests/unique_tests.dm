@@ -120,7 +120,7 @@
 	for(var/key in entries)
 		var/list/values = entries[key]
 		if(values.len > 1)
-			var/decl/noi_feedback/noif = decls_repository.get_decl(feedback)
+			var/decl/noi_feedback/noif = GLOB.decl_repository.get_decl(feedback)
 			noif.print(src, type, key, values)
 			issues++
 

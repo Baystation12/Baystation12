@@ -383,7 +383,7 @@
 	if(!resolved)
 		return
 
-	var/decl/dist_check/dc = decls_repository.get_decl(holder.dist_check)
+	var/decl/dist_check/dc = GLOB.decl_repository.get_decl(holder.dist_check)
 	return dc.within_dist(get_turf(holder.loc), resolved) && resolved
 
 /datum/integrated_io/proc/scramble()

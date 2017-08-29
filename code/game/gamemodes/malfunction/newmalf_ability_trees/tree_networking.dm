@@ -123,22 +123,23 @@
 	if(!ability_prechecks(user, price))
 		return
 
-	var/alert_target = input("Select new alert level:") in list("green", "blue", "red", "delta", "CANCEL")
-	if(!alert_target || !ability_pay(user, price) || alert_target == "CANCEL")
+	var/decl/security_state/security_state = GLOB.decl_repository.get_decl(GLOB.using_map.security_state)
+	var/alert_target = input("Select new alert level:") as null|anything in (security_state.available_security_levels - security_state.current_security_level)
+	if(!alert_target || !ability_pay(user, price))
 		to_chat(user, "Hack Aborted")
 		return
 
 	if(prob(75) && user.hack_can_fail)
 		to_chat(user, "Hack Failed.")
 		if(prob(20))
-			user.hack_fails ++
+			user.hack_fails++
 			announce_hack_failure(user, "alert control system")
 			log_ability_use(user, "elite encryption hack (CRITFAIL - [alert_target])")
 			return
 		log_ability_use(user, "elite encryption hack (FAIL - [alert_target])")
 		return
 	log_ability_use(user, "elite encryption hack (SUCCESS - [alert_target])")
-	set_security_level(alert_target)
+	security_state.set_security_level(alert_target)
 
 
 /datum/game_mode/malfunction/verb/system_override()

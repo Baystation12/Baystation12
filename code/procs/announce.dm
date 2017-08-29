@@ -119,7 +119,8 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	// During red alert all jobs are announced on main frequency.
-	if(security_level >= SEC_LEVEL_RED)
+	var/decl/security_state/security_state = GLOB.decl_repository.get_decl(GLOB.using_map.security_state)
+	if (security_state.current_security_level_is_higher_than(security_state.defcon_3_security_level))
 		return "Common"
 
 	if(job.department_flag & (COM | CIV | MSC))

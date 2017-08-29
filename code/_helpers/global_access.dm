@@ -383,8 +383,6 @@
 			return global.deathsquad;
 		if("debug_verbs")
 			return global.debug_verbs;
-		if("decls_repository")
-			return global.decls_repository;
 		if("default_material_composition")
 			return global.default_material_composition;
 		if("default_mobloc")
@@ -939,12 +937,6 @@
 			return global.secret_force_mode;
 		if("sector_shuttles")
 			return global.sector_shuttles;
-		if("security_announcement_down")
-			return global.security_announcement_down;
-		if("security_announcement_up")
-			return global.security_announcement_up;
-		if("security_level")
-			return global.security_level;
 		if("security_positions")
 			return global.security_positions;
 		if("seen_citizenships")
@@ -1023,8 +1015,6 @@
 			return global.station_account;
 		if("station_date")
 			return global.station_date;
-		if("status_icons_to_colour")
-			return global.status_icons_to_colour;
 		if("stool_cache")
 			return global.stool_cache;
 		if("stored_shock_by_ref")
@@ -1594,8 +1584,6 @@
 			global.deathsquad=newval;
 		if("debug_verbs")
 			global.debug_verbs=newval;
-		if("decls_repository")
-			global.decls_repository=newval;
 		if("default_material_composition")
 			global.default_material_composition=newval;
 		if("default_mobloc")
@@ -2150,12 +2138,6 @@
 			global.secret_force_mode=newval;
 		if("sector_shuttles")
 			global.sector_shuttles=newval;
-		if("security_announcement_down")
-			global.security_announcement_down=newval;
-		if("security_announcement_up")
-			global.security_announcement_up=newval;
-		if("security_level")
-			global.security_level=newval;
 		if("security_positions")
 			global.security_positions=newval;
 		if("seen_citizenships")
@@ -2234,8 +2216,6 @@
 			global.station_account=newval;
 		if("station_date")
 			global.station_date=newval;
-		if("status_icons_to_colour")
-			global.status_icons_to_colour=newval;
 		if("stool_cache")
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
@@ -2613,7 +2593,6 @@
 	"dbcon_old",
 	"deathsquad",
 	"debug_verbs",
-	"decls_repository",
 	"default_material_composition",
 	"default_mobloc",
 	"default_onmob_icons",
@@ -2891,9 +2870,6 @@
 	"secondary_mode",
 	"secret_force_mode",
 	"sector_shuttles",
-	"security_announcement_down",
-	"security_announcement_up",
-	"security_level",
 	"security_positions",
 	"seen_citizenships",
 	"seen_factions",
@@ -2933,7 +2909,6 @@
 	"sqlport",
 	"station_account",
 	"station_date",
-	"status_icons_to_colour",
 	"stool_cache",
 	"stored_shock_by_ref",
 	"string_part_flags",

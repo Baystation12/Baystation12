@@ -90,7 +90,7 @@
 	return communicate(arglist(args))
 
 /proc/communicate(var/channel_type, var/communicator, var/message)
-	var/list/channels = decls_repository.get_decls_of_subtype(/decl/communication_channel)
+	var/list/channels = GLOB.decl_repository.get_decls_of_subtype(/decl/communication_channel)
 	var/decl/communication_channel/channel = channels[channel_type]
 
 	var/list/new_args = list(communicator, message)

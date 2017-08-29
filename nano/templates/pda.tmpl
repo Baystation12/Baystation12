@@ -540,15 +540,13 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
         <br>
         <div class="item">
             <div class="itemLabel">
-                <b> ALERT!</b>:
+                <b>Alert:</b>
             </div>
             <div class="itemContent">
-                {{:helper.link('None', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "default"}, null, null)}}
-                {{:helper.link('Green Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "greenalert"}, null, null)}}
-                {{:helper.link('Blue Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "bluealert"}, null, null)}}
-                {{:helper.link('Red Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "redalert"}, null, null)}}
-                {{:helper.link('Lockdown', 'caution', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "lockdown"}, null, null)}}
-                {{:helper.link('Biohazard', 'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "biohazard"}, null, null)}}
+                {{:helper.link('None',                   'alert',     {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "image", 'image' : "default"}, null, null)}}
+                {{:helper.link('Current Security Level', 'alert',     {'cartmenu' : "1", 'choice' : "Status",'statdisp' : 'alert'}, null, null)}}
+                {{:helper.link('Lockdown',               'caution',   {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "image", 'image' : "lockdown"}, null, null)}}
+                {{:helper.link('Biohazard',              'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "image", 'image' : "biohazard"}, null, null)}}
             </div>
         </div>
 

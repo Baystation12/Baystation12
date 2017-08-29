@@ -164,6 +164,6 @@
 
 /obj/prefab/Initialize()
 	. = ..()
-	var/decl/prefab/prefab = decls_repository.get_decl(prefab_type)
+	var/decl/prefab/prefab = GLOB.decl_repository.get_decl(prefab_type)
 	prefab.create(loc)
 	qdel(src)

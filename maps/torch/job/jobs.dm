@@ -23,7 +23,7 @@
 /datum/map/torch/setup_map()
 	..()
 	for(var/job_type in GLOB.using_map.allowed_jobs)
-		var/datum/job/job = decls_repository.get_decl(job_type)
+		var/datum/job/job = GLOB.decl_repository.get_decl(job_type)
 		// Most species are restricted from SCG security and command roles
 		if((job.department_flag & (SEC|COM)) && job.allowed_branches.len && !(/datum/mil_branch/civilian in job.allowed_branches))
 			for(var/species_name in list(SPECIES_IPC, SPECIES_TAJARA, SPECIES_SKRELL, SPECIES_UNATHI))

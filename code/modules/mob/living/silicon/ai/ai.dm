@@ -292,7 +292,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/available_icons()
 	. = list()
-	var/all_ai_icons = decls_repository.get_decls_of_subtype(/datum/ai_icon)
+	var/all_ai_icons = GLOB.decl_repository.get_decls_of_subtype(/datum/ai_icon)
 	for(var/ai_icon_type in all_ai_icons)
 		var/datum/ai_icon/ai_icon = all_ai_icons[ai_icon_type]
 		if(ai_icon.may_used_by_ai(src))
@@ -544,7 +544,7 @@ var/list/ai_verbs_default = list(
 
 	else
 		var/list/hologramsAICanUse = list()
-		var/holograms_by_type = decls_repository.get_decls_of_subtype(/decl/ai_holo)
+		var/holograms_by_type = GLOB.decl_repository.get_decls_of_subtype(/decl/ai_holo)
 		for (var/holo_type in holograms_by_type)
 			var/decl/ai_holo/holo = holograms_by_type[holo_type]
 			if (holo.may_be_used_by_ai(src))
@@ -686,7 +686,7 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
-		selected_sprite = decls_repository.get_decl(default_ai_icon)
+		selected_sprite = GLOB.decl_repository.get_decl(default_ai_icon)
 
 	icon = selected_sprite.icon
 	if(stat == DEAD)
