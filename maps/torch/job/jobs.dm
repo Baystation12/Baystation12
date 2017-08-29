@@ -362,10 +362,10 @@
 	)
 
 
-	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_solgov_crew,
+				  access_aquila, access_calypso, access_guppy, access_guppy_helm, access_hangar, access_xenoarch)
+	minimal_access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_solgov_crew,
+				  access_aquila, access_calypso, access_guppy, access_guppy_helm, access_hangar, access_xenoarch)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -387,10 +387,10 @@
 		/datum/mil_rank/fleet/e5,
 	)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew,
+						access_aquila, access_guppy, access_guppy_helm, access_calypso, access_hangar, access_xenoarch)
+	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew,
+						access_aquila, access_guppy, access_guppy_helm, access_calypso, access_hangar, access_xenoarch)
 
 /datum/job/senior_engineer
 	title = "Senior Engineer"
