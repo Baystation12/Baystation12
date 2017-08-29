@@ -645,11 +645,11 @@
 	name = "\improper Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
 
-/area/vacant/protoype/control
+/area/vacant/prototype/control
 	name = "\improper Prototype Fusion Reactor Control Room"
 	icon_state = "engine_monitoring"
 
-/area/vacant/protoype/engine
+/area/vacant/prototype/engine
 	name = "\improper Prototype Fusion Reactor Chamber"
 	icon_state = "firingrange"
 
