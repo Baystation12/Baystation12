@@ -188,13 +188,20 @@ obj/structure/closet/crate
 	icon_closed = "largebin"
 
 /obj/structure/closet/crate/radiation
+	name = "radioactive crate"
+	desc = "A leadlined crate with a radiation sign on it."
+	icon_state = "radiation"
+	icon_opened = "radiationopen"
+	icon_closed = "radiation"
+
+/obj/structure/closet/crate/radiation_gear
 	name = "radioactive gear crate"
 	desc = "A crate with a radiation sign on it."
 	icon_state = "radiation"
 	icon_opened = "radiationopen"
 	icon_closed = "radiation"
 
-/obj/structure/closet/crate/radiation/WillContain()
+/obj/structure/closet/crate/radiation_gear/WillContain()
 	return list(/obj/item/clothing/suit/radiation = 8)
 
 /obj/structure/closet/crate/secure/weapon
@@ -246,7 +253,7 @@ obj/structure/closet/crate
 
 	storage_capacity = 2 * MOB_LARGE
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_STRUCTURES
-	
+
 /obj/structure/closet/crate/large/hydroponics
 	icon_state = "hydro_crate_large"
 	icon_opened = "hydro_crate_large_open"
@@ -303,7 +310,7 @@ obj/structure/closet/crate
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-	
+
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
