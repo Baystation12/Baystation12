@@ -645,8 +645,8 @@
 	name = "\improper Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
 
-/area/vacant/cannon
-	name = "\improper Main Gun"
+/area/vacant/protoype
+	name = "\improper Prototype Fusion Reactor Chamber"
 	icon_state = "firingrange"
 
 /area/vacant/cargo
