@@ -216,7 +216,7 @@
 		return capitalize(pick(GLOB.first_names_male))
 
 /datum/language/spacer
-	name = "Spacer"
+	name = "LANGUAGE_SPACER"
 	desc = "A pidgin language spoken by spacers, smugglers, and cocky fly-boys across the galaxy."
 	colour = "spacer"
 	key = "v"

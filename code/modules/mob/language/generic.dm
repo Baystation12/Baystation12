@@ -39,7 +39,7 @@
 
 // Galactic common languages (systemwide accepted standards).
 /datum/language/lunar
-	name = "Selenian"
+	name = "LANGUAGE_LUNAR"
 	desc = "An older language primarily spoken on Earth's only natural satellite, this language is commonly heard from the mouths of aristocracy."
 	speech_verb = "enunciates"
 	colour = "moon"
