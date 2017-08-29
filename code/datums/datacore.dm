@@ -30,6 +30,7 @@
 	var/list/misc = new()
 	var/list/srv = new()
 	var/list/sup = new()
+	var/list/utl = new()
 	var/list/isactive = new()
 	var/list/mil_ranks = list() // HTML to prepend to name
 	var/dat = {"
@@ -88,6 +89,9 @@
 			department = 1
 		if(real_rank in science_positions)
 			sci[name] = rank
+			department = 1
+		if(real_rank in utility_positions)
+			utl[name] = rank
 			department = 1
 		if(real_rank in cargo_positions)
 			car[name] = rank
@@ -149,6 +153,11 @@
 	if(sup.len > 0)
 		dat += "<tr><th colspan=3>Supply</th></tr>"
 		for(name in sup)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(utl.len > 0)
+		dat += "<tr><th colspan=3>Utility</th></tr>"
+		for(name in utl)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(srv.len > 0)

@@ -9,6 +9,7 @@ var/const/MSC               =(1<<7)
 var/const/SRV               =(1<<8)
 var/const/SUP               =(1<<9)
 var/const/SPT               =(1<<10)
+var/const/UTL				=(1<<11)
 
 var/list/assistant_occupations = list(
 )
@@ -46,6 +47,9 @@ var/list/supply_positions = list(
 )
 
 var/list/support_positions = list(
+)
+
+var/list/utility_positions = list(
 )
 
 

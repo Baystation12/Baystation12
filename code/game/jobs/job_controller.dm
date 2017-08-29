@@ -45,6 +45,8 @@ var/global/datum/controller/occupations/job_master
 				medical_positions |= job.title
 			if(job.department_flag & SCI)
 				science_positions |= job.title
+			if(job.department_flag & UTL)
+				utility_positions |= job.title
 			if(job.department_flag & SUP)
 				supply_positions |= job.title
 			if(job.department_flag & SRV)

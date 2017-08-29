@@ -1,0 +1,4 @@
+author: ThatOneGuy
+delete-after: True
+changes:
+  - rscadd: "Service department split. The Sol Pilot, Pathfinder and Explorer are now in the Utility department, with their own department radio. The hotkey for the utility department is 'y'."
