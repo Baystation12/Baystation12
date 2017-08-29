@@ -17,7 +17,7 @@ var/global/datum/controller/occupations/job_master
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
+	proc/SetupOccupations(var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
 		occupations_by_title = list()
@@ -28,7 +28,6 @@ var/global/datum/controller/occupations/job_master
 		for(var/J in all_jobs)
 			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
-			if(job.faction != faction)	continue
 			occupations += job
 			occupations_by_type[job.type] = job
 			occupations_by_title[job.title] = job

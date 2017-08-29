@@ -2,7 +2,7 @@
 	title = "Assistant"
 	department = "Civilian"
 	department_flag = CIV
-	faction = "Station"
+
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "absolutely everyone"

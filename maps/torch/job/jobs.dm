@@ -207,7 +207,7 @@
 	title = "NanoTrasen Liaison"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "NanoTrasen and Corporate Regulations"
@@ -231,7 +231,7 @@
 	title = "SolGov Representative"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
@@ -252,7 +252,7 @@
 	title = "Senior Enlisted Advisor"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -287,7 +287,7 @@
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Commanding Officer and heads of staff"
@@ -318,7 +318,7 @@
 	title = "SolGov Pilot"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -346,7 +346,7 @@
 	title = "Pathfinder"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -396,7 +396,7 @@
 	title = "Senior Engineer"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -474,7 +474,7 @@
 	title = "Maintenance Assistant"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
@@ -496,7 +496,7 @@
 	title = "Roboticist"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -615,7 +615,7 @@
 	title = "Physician"
 	department = "Medical"
 	department_flag = MED
-	faction = "Station"
+
 	minimal_player_age = 14
 	ideal_character_age = 45
 	total_positions = 2
@@ -678,7 +678,7 @@
 	title = "Medical Contractor"
 	department = "Medical"
 	department_flag = MED
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
@@ -809,7 +809,7 @@
 	title = "Supply Assistant"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Deck Officer and Supply Personnel"
@@ -827,7 +827,7 @@
 	title = "Sanitation Technician"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Executive Officer"
@@ -904,7 +904,7 @@
 	title = "Crewman"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
+
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
@@ -937,7 +937,7 @@
 	title = "Senior Researcher"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director"
@@ -963,7 +963,7 @@
 	supervisors = "the Research Director"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1039,7 +1039,7 @@
 	title = "Security Guard"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1061,7 +1061,7 @@
 	title = "Research Assistant"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1116,7 +1116,7 @@
 	title = "Merchant"
 	department = "Civilian"
 	department_flag = CIV
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 30
@@ -1137,7 +1137,7 @@
 	title = "Stowaway"
 	department = "Civilian"
 	department_flag = CIV
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 20

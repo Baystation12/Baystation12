@@ -3,7 +3,7 @@
 	head_position = 1
 	department = "Engineering"
 	department_flag = ENG|COM
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
@@ -29,7 +29,7 @@
 	title = "Engineer"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 8
 	spawn_positions = 7
 	supervisors = "the chief engineer"
@@ -46,7 +46,7 @@
 	title = "Atmospheric Technician"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the chief engineer"
