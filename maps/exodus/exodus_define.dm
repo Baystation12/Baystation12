@@ -7,6 +7,7 @@
 	lobby_icon = null
 
 	load_legacy_saves = TRUE
+	flags = MAP_HAS_BRANCH
 
 	station_levels = list(1, 2)
 	admin_levels = list(3)
