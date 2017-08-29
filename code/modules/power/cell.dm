@@ -175,7 +175,7 @@
 	name = "APC power cell"
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = list(TECH_POWER = 1)
-	maxcharge = 500
+	maxcharge = 600
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 
