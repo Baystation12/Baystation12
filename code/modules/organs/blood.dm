@@ -248,11 +248,36 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	B.invisibility = 0
 	return B
 
-/mob/living/carbon/human/proc/get_effective_blood_volume()
+//Percentage of maximum blood volume.
+/mob/living/carbon/human/proc/get_blood_volume()
+	return round((vessel.get_reagent_amount(/datum/reagent/blood)/species.blood_volume)*100)
+
+//Percentage of maximum blood volume, affected by the condition of circulation organs
+/mob/living/carbon/human/proc/get_blood_circulation()
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
-	var/blood_volume = round((vessel.get_reagent_amount(/datum/reagent/blood)/species.blood_volume)*100)
+	var/blood_volume = get_blood_volume()
 	if(!heart || (heart.pulse == PULSE_NONE && !(status_flags & FAKEDEATH) && heart.robotic < ORGAN_ROBOT))
 		blood_volume *= 0.25
 	else
 		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage)))
+	return blood_volume
+
+//Percentage of maximum blood volume, affected by the condition of circulation organs, affected by the oxygen loss. What ultimately matters for brain
+/mob/living/carbon/human/proc/get_blood_oxygenation()
+	var/blood_volume = get_blood_circulation()
+
+	if(is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
+		return min(blood_volume, BLOOD_VOLUME_SURVIVE)
+
+	if(!need_breathe())
+		return blood_volume
+
+	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(maxHealth/2))
+	var/oxygenated_mult = 0
+	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
+		oxygenated_mult = 0.5
+	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
+		oxygenated_mult = 0.8
+	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
+	blood_volume = blood_volume * blood_volume_mod
 	return blood_volume

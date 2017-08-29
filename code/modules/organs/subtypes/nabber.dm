@@ -129,7 +129,7 @@
 		return
 
 	// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
-	var/blood_volume = owner.get_effective_blood_volume()
+	var/blood_volume = owner.get_blood_circulation()
 	if(!owner.internal_organs_by_name[BP_HEART])
 		if(blood_volume > BLOOD_VOLUME_SURVIVE)
 			blood_volume = BLOOD_VOLUME_SURVIVE

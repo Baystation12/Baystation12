@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Health analyzers, advanced scanners and suit sensors will now report blood oxygenation instead of just how well it flows in general."
