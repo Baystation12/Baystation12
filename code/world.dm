@@ -614,7 +614,7 @@ world/proc/CPUUpdater()
 	var/s = ""
 
 	if (config && config.server_name)
-		s += "<b>[config.server_name]</b> &#8212; "
+		s += "<big><b><a href=\"http://www.apollo-gaming.net\">[config.server_name]</a></b></big> &#8212; "
 
 	s += " ("
 	s += "<a href=\"http://www.apollo-gaming.net\">" //Change this to wherever you want the hub to link to.
