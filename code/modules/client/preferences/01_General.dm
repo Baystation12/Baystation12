@@ -226,7 +226,7 @@ datum/preferences/proc/contentGeneral()
 		<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>
 		<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>
 
-		<br><br><b>Equipment:</b><br>
+		<br><br><b>Equipment:</b><br><br>
 
 		"}
 	for(var/datum/category_group/underwear/UWC in global_underwear.categories)
@@ -236,14 +236,14 @@ datum/preferences/proc/contentGeneral()
 		var/datum/category_item/underwear/UWI = UWC.items_by_name[item_name]
 		if(UWI)
 			for(var/datum/gear_tweak/gt in UWI.tweaks)
-				data += " <a href='?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_metadata(UWC.name, gt))]</a>"
+				data += " <a href='?src=\ref[src];underwear=[UWC.name];tweak=\ref[gt]'>[gt.get_contents(get_metadata(UWC.name, gt))]</a><br>"
 
 		data += "<br>"
 	data += {"
 
 		Backpack Type: <a href='?src=\ref[src];change_backpack=1'><b>[backbaglist[backbag]]</b></a><br>
 
-		<b>Flavor:</b><br>
+		<br><b>Flavor:</b><br><br>
 		<a href='?src=\ref[src];flavor_text=open'>Set Flavor Text</a><br>
 		<a href='?src=\ref[src];flavour_text_robot=open'>Set Robot Flavor Text</a>
 		</div>
@@ -257,6 +257,7 @@ datum/preferences/proc/contentGeneral()
 	return data
 
 /datum/preferences/Topic(href, list/href_list)
+	user = usr
 	var/datum/species/spec = all_species[species]
 	if(..())
 		return 1
