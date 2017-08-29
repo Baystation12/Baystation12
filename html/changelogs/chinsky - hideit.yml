@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Can now hide custom loadout items that are not allowed for your job. The button's in top of loadout menu. Makes browsing less of pain for those with lots of restrictions."
