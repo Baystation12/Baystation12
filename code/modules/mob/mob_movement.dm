@@ -284,6 +284,13 @@
 			if("walk")
 				move_delay += 7+config.walk_speed
 		move_delay += mob.movement_delay()
+		for(var/obj/M in mob.loc)
+			if(istype(M, /obj/structure/bed) || istype(M, /obj/item/weapon/stool))
+				move_delay += 2
+				if(prob(3))
+					to_chat(mob, "<span class='warning'>You trip and fall over the [M.name]!</span>")
+					mob.weakened = 5
+					mob:apply_damage(rand(3, 6), BRUTE)
 
 		if(istype(mob.buckled, /obj/vehicle))
 			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
