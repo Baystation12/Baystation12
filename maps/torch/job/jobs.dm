@@ -316,8 +316,8 @@
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
-	department = "Support"
-	department_flag = SPT
+	department = "Utility"
+	department_flag = UTL
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -344,8 +344,8 @@
 
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Service"
-	department_flag = SRV
+	department = "Utility"
+	department_flag = UTL
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -369,8 +369,8 @@
 
 /datum/job/explorer
 	title = "Explorer"
-	department = "Service"
-	department_flag = SRV
+	department = "Utility"
+	department_flag = UTL
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"

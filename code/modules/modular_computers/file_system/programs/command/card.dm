@@ -48,6 +48,7 @@
 	data["medical_jobs"] = format_jobs(medical_positions)
 	data["science_jobs"] = format_jobs(science_positions)
 	data["security_jobs"] = format_jobs(security_positions)
+	data["utility_jobs"] = format_jobs(utility_positions)
 	data["service_jobs"] = format_jobs(service_positions)
 	data["supply_jobs"] = format_jobs(supply_positions)
 	data["civilian_jobs"] = format_jobs(civilian_positions)
