@@ -80,15 +80,6 @@
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_calypso, access_guppy,
 			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_calypso_helm)
-	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
-			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
-			            access_all_personal_lockers, access_chapel_office, access_tech_storage, access_atmospherics, access_bar, access_janitor, access_crematorium,
-			            access_kitchen, access_cargo, access_construction, access_chemistry, access_cargo_bot, access_hydroponics, access_library, access_virology,
-			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
-			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_calypso, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila)
 
 
 /datum/job/rd
@@ -102,10 +93,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 
 	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
-						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard,
-						access_calypso, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
-	minimal_access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_calypso, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
@@ -129,11 +116,6 @@
 	)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_heads,
-			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
-			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_senmed)
-	minimal_access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
 			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
@@ -165,11 +147,6 @@
 			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
 			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
-	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_ai_upload, access_teleporter, access_eva, access_heads,
-			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
 
 /datum/job/hos
 	title = "Chief of Security"
@@ -197,11 +174,6 @@
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
 			            access_solgov_crew, access_gun)
-	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
-			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_heads,
-			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun)
 
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
@@ -222,10 +194,6 @@
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
-	minimal_access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
-						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard,
-						access_hangar, access_petrov, access_petrov_helm)
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -243,8 +211,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 	access = list(access_representative, access_security,access_medical, access_engine,
-			            access_heads, access_cargo, access_solgov_crew, access_hangar)
-	minimal_access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 
 
@@ -278,10 +244,6 @@
 			            access_teleporter, access_eva, access_heads, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
 			            access_solgov_crew, access_gun, access_calypso, access_guppy, access_senadv, access_hangar)
-	minimal_access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_heads, access_all_personal_lockers, access_janitor,
-			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_calypso, access_guppy, access_senadv, access_hangar)
 
 /datum/job/bridgeofficer
 	title = "Bridge Officer"
@@ -310,9 +272,6 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
 			            access_heads, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
 			            access_solgov_crew)
-	minimal_access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
-			            access_heads, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
-			            access_solgov_crew)
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
@@ -339,8 +298,6 @@
 
 	access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
 						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads)
-	minimal_access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
-						access_calypso, access_calypso_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads)
 
 /datum/job/pathfinder
 	title = "Pathfinder"
@@ -362,10 +319,8 @@
 	)
 
 
-	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_solgov_crew,
+				  access_aquila, access_calypso, access_guppy, access_guppy_helm, access_hangar, access_xenoarch)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -387,10 +342,8 @@
 		/datum/mil_rank/fleet/e5,
 	)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_calypso, access_guppy, access_hangar)
+	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew,
+						access_aquila, access_guppy, access_guppy_helm, access_calypso, access_hangar, access_xenoarch)
 
 /datum/job/senior_engineer
 	title = "Senior Engineer"
@@ -424,9 +377,6 @@
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			             access_tcomsat, access_solgov_crew, access_seneng)
-	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_tcomsat, access_solgov_crew, access_seneng)
 
 
 /datum/job/engineer
@@ -465,9 +415,6 @@
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			            access_solgov_crew)
-	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew)
 
 
 /datum/job/engineer_contractor
@@ -489,7 +436,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_maint_tunnels, access_engine, access_engine_equip, access_emergency_storage, access_janitor, access_construction, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_engine, access_engine_equip, access_emergency_storage, access_janitor, access_construction, access_solgov_crew)
 
 
 /datum/job/roboticist
@@ -510,7 +456,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
-	minimal_access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 
 
 /datum/job/warden
@@ -541,9 +486,6 @@
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors, access_solgov_crew, access_gun)
-	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
-			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew, access_gun)
 
 /datum/job/detective
 	title = "Forensic Technician"
@@ -570,9 +512,6 @@
 	)
 
 	access = list(access_security, access_brig, access_forensics_lockers,
-			            access_maint_tunnels, access_emergency_storage,
-			            access_sec_doors, access_solgov_crew)
-	minimal_access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
 			            access_sec_doors, access_solgov_crew)
 
@@ -606,9 +545,6 @@
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors, access_solgov_crew)
-	minimal_access = list(access_security, access_brig, access_maint_tunnels,
-						access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew)
 
 
 /datum/job/senior_doctor
@@ -639,9 +575,6 @@
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
 			            access_medical_equip, access_solgov_crew, access_senmed)
-	minimal_access = list(access_medical, access_morgue, access_maint_tunnels, access_emergency_storage,
-			            access_crematorium, access_chemistry, access_surgery,
-			            access_medical_equip, access_solgov_crew, access_senmed)
 
 
 /datum/job/doctor
@@ -670,8 +603,6 @@
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_surgery, access_medical_equip, access_solgov_crew)
-	minimal_access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_surgery, access_medical_equip, access_solgov_crew)
 
 
 /datum/job/doctor_contractor
@@ -697,9 +628,6 @@
 
 	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
 		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
-	minimal_access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
-		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
-
 
 /datum/job/chemist
 	title = "Chemist"
@@ -714,7 +642,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_medical, access_medical_equip, access_chemistry)
-	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 
 /datum/job/psychiatrist
 	title = "Counselor"
@@ -739,8 +666,6 @@
 
 
 	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew)
-	minimal_access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew)
-
 
 /datum/job/qm
 	title = "Deck Officer"
@@ -771,9 +696,6 @@
 
 	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
 						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
@@ -801,9 +723,6 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
 						access_cargo_bot, access_mailsorting, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_mailsorting, access_solgov_crew, access_calypso, access_guppy, access_hangar)
-
 
 /datum/job/cargo_contractor
 	title = "Supply Assistant"
@@ -820,8 +739,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_solgov_crew)
-
 
 /datum/job/janitor
 	title = "Sanitation Technician"
@@ -853,7 +770,6 @@
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 
 /datum/job/chef
 	title = "Cook"
@@ -884,7 +800,6 @@
 	)
 
 	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
 
 /datum/job/bartender
 	department = "Service"
@@ -897,7 +812,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_hydroponics, access_bar, access_solgov_crew)
-	minimal_access = list(access_hydroponics, access_bar, access_solgov_crew)
 
 
 /datum/job/crew
@@ -931,7 +845,6 @@
 
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
 
 /datum/job/senior_scientist
 	title = "Senior Researcher"
@@ -954,9 +867,6 @@
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
 						access_calypso, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
-	minimal_access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
-						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
-						access_calypso, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 
 /datum/job/nt_pilot
 	title = "NanoTrasen Pilot"
@@ -976,9 +886,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 
 	access = list(access_research, access_mining_office,
-						access_mining_station, access_nanotrasen, access_calypso, access_calypso_helm, access_guppy,
-						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
-	minimal_access = list(access_research, access_mining_office,
 						access_mining_station, access_nanotrasen, access_calypso, access_calypso_helm, access_guppy,
 						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 
@@ -1005,10 +912,6 @@
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
 						access_xenoarch, access_nanotrasen, access_calypso, access_guppy, access_hangar)
-	minimal_access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
-						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
-						access_xenoarch, access_nanotrasen, access_calypso, access_guppy, access_hangar)
-
 
 /datum/job/mining
 	title = "Prospector"
@@ -1031,9 +934,6 @@
 
 	access = list(access_research, access_mining, access_mining_office, access_mining_station, access_nanotrasen,
 						access_calypso, access_guppy, access_hangar, access_petrov, access_guppy_helm)
-	minimal_access = list(access_research, access_mining, access_mining_office, access_mining_station, access_nanotrasen,
-						access_calypso, access_guppy, access_hangar, access_petrov, access_guppy_helm)
-
 
 /datum/job/guard
 	title = "Security Guard"
@@ -1053,9 +953,6 @@
 
 	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_calypso, access_guppy)
-	minimal_access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_calypso, access_guppy)
-
 
 /datum/job/scientist_assistant
 	title = "Research Assistant"
@@ -1081,8 +978,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_calypso, access_guppy)
-	minimal_access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_calypso, access_guppy)
-
 
 /datum/job/assistant
 	title = "Passenger"
@@ -1130,7 +1025,6 @@
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
 	access = list(access_merchant)
-	minimal_access = list(access_merchant)
 	announced = FALSE
 
 /datum/job/stowaway
