@@ -437,7 +437,7 @@ datum/controller/vote
 					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
 				else
 					. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
-				. += "</td><td align = 'center'>[votepercent]%</td>"
+//				. += "</td><td align = 'center'>[votepercent]%</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
 				. += "</tr>"

@@ -4,7 +4,7 @@ var/global/datum/controller/gameticker/ticker
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_PREGAME
 
-	var/hide_mode = 0
+	var/hide_mode = 1
 	var/datum/game_mode/mode = null
 	var/post_game = 0
 	var/event_time = null
@@ -79,8 +79,8 @@ var/global/datum/controller/gameticker/ticker
 	//Create and announce mode
 	if(master_mode=="secret")
 		src.hide_mode = 1
-	else
-		src.hide_mode = 0
+//	else
+//		src.hide_mode = 0
 
 	var/list/runnable_modes = config.get_runnable_modes()
 	if((master_mode=="random") || (master_mode=="secret"))
