@@ -49,6 +49,8 @@
 			return global.SSgarbage;
 		if("SSlegacy")
 			return global.SSlegacy;
+		if("SSopen_space")
+			return global.SSopen_space;
 		if("SSmachines")
 			return global.SSmachines;
 		if("SSmobs")
@@ -1136,6 +1138,8 @@
 			global.SSgarbage=newval;
 		if("SSlegacy")
 			global.SSlegacy=newval;
+		if("SSopen_space")
+			global.SSopen_space=newval;
 		if("SSmachines")
 			global.SSmachines=newval;
 		if("SSmobs")
@@ -2198,6 +2202,7 @@
 	"SSfastprocess",
 	"SSgarbage",
 	"SSlegacy",
+	"SSopen_space",
 	"SSmachines",
 	"SSmobs",
 	"SSobj",

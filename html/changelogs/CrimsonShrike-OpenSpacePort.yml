@@ -1,0 +1,6 @@
+author: CrimsonShrike
+
+delete-after: True
+
+changes: 
+  - rscadd: "Ports openspaces. Now open turfs will show whatever is down below."
