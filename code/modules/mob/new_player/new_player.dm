@@ -49,7 +49,7 @@
 			output += "<p> <span class='link'>Lock Char to Join</span> </p>"
 
 	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
-
+/*
 	if(!IsGuestKey(src.key))
 		establish_db_connection()
 		if(dbcon.IsConnected())
@@ -67,7 +67,7 @@
 				output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
 			else
 				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
-
+*/
 	output += "<p><a href='byond://?src=\ref[src];refresh=1'>Refresh</a></p>"
 
 	output += "</div>"
@@ -115,9 +115,9 @@
 				ready = text2num(href_list["ready"])
 			else
 				ready = 0
-		else
-			panel.close()
-			new_player_panel_proc()
+
+		panel.close()
+		new_player_panel_proc()
 
 	if(href_list["refresh"])
 		panel.close()
@@ -193,7 +193,7 @@
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 		return
 
-	if(href_list["privacy_poll"])
+/*	if(href_list["privacy_poll"])
 		establish_db_connection()
 		if(!dbcon.IsConnected())
 			return
@@ -291,7 +291,7 @@
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
 					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
 						vote_on_poll(pollid, optionid, 1)
-
+*/
 /mob/new_player/proc/IsJobAvailable(var/datum/job/job)
 	if(!job)	return 0
 	if(!job.is_position_available()) return 0
@@ -300,16 +300,15 @@
 
 	return 1
 
-/mob/new_player/proc/IsJobRestricted(var/datum/job/job, var/branch_pref, var/rank_pref)
-	if(!job.is_branch_allowed(branch_pref))
+/mob/new_player/proc/IsJobRestricted(var/datum/job/job, var/branch_pref)
+	if(job.department == branch_pref)
+		return 0
+	else
 		return 1
-	if(!job.is_rank_allowed(branch_pref, rank_pref))
-		return 1
-	return 0
 
 /mob/new_player/proc/get_branch_pref()
 	if(client)
-		return client.prefs.char_branch
+		return client.prefs.char_department
 
 /mob/new_player/proc/get_rank_pref()
 	if(client)
@@ -328,8 +327,8 @@
 	if(!IsJobAvailable(job))
 		alert("[rank] is not available. Please try another.")
 		return 0
-	if(!job.is_branch_allowed(client.prefs.char_branch))
-		alert("Wrong branch of service for [rank]. Valid branches are: [job.get_branches()].")
+	if(!job.is_branch_allowed(client.prefs.char_department))
+		alert("Wrong branch of service for [rank]. Valid branches is: [job.department].")
 		return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
 		alert("Wrong rank for [rank]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
@@ -433,12 +432,10 @@
 			// Only players with the job assigned and AFK for less than 10 minutes count as active
 			for(var/mob/M in GLOB.player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
 				active++
-
-			if(IsJobRestricted(job, client.prefs.char_branch, client.prefs.char_rank))
-				dat += "<a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
-			else
+			if(IsJobRestricted(job, client.prefs.char_branch))
 				dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
-
+			else
+				dat += "<a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
 	dat += "</center>"
 	src << browse(jointext(dat, null), "window=latechoices;size=300x640;can_close=1")
 

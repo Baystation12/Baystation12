@@ -48,6 +48,6 @@
 	new_player_panel()
 	spawn(40)
 		if(client)
-			handle_privacy_poll()
+//			handle_privacy_poll()
 			client.playtitlemusic()
 			maybe_send_staffwarns("connected as new player")
