@@ -124,9 +124,9 @@
 		return
 
 	// Change the way they should download resources.
-	if(config.resource_urls && config.resource_urls.len)
-		src.preload_rsc = pick(config.resource_urls)
-	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
+//	if(config.resource_urls && config.resource_urls.len)
+//		src.preload_rsc = pick(config.resource_urls)
+//	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
 	if(byond_version < DM_VERSION)
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
@@ -169,13 +169,15 @@
 	spawn(5) // And wait a half-second, since it sounds like you can do this too fast.
 		if(src)
 			winset(src, null, "command=\".configure graphics-hwmode off\"")
-			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
+			sleep(1) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 //	log_client_to_db() Feck off SQL
 
 	send_resources()
 
+	loadclientdb() // Load their files.
+	player_age = get_player_age()
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
@@ -191,7 +193,6 @@
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
-	loadclientdb() // Load their files.
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -212,20 +213,9 @@
 
 // Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
 
-/proc/get_player_age(key)
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		return null
+/client/proc/get_player_age()
+	return round((world.realtime - datejoined) / 864000, 0.1)
 
-	var/sql_ckey = sql_sanitize_text(ckey(key))
-
-	var/DBQuery/query = dbcon.NewQuery("SELECT datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
-	query.Execute()
-
-	if(query.NextRow())
-		return text2num(query.item[1])
-	else
-		return -1
 
 
 /client/proc/log_client_to_db()
