@@ -107,8 +107,6 @@
 		/obj/item/device/hailer,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/clipboard,
-		/obj/item/weapon/folder/red,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/device/holowarrant,
 		/obj/item/clothing/gloves/thick,
