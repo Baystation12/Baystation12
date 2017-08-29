@@ -26,6 +26,7 @@
 
 	blood_color = "#525252"
 	flesh_color = "#525252"
+	blood_oxy = 0
 
 	reagent_tag = IS_NABBER
 

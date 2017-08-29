@@ -23,6 +23,7 @@
 
 	var/blood_color = "#A10808"               // Red.
 	var/flesh_color = "#FFC896"               // Pink.
+	var/blood_oxy = 1
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
 	var/tail                                  // Name of tail state in species effects icon file.
 	var/tail_animation                        // If set, the icon to obtain tail animation states from.

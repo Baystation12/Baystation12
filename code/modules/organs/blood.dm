@@ -262,6 +262,10 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage)))
 	return blood_volume
 
+//Whether the species needs blood to carry oxygen. Used in get_blood_oxygenation and may be expanded based on blood rather than species in the future.
+/mob/living/carbon/human/proc/blood_carries_oxygen()
+	return species.blood_oxy
+
 //Percentage of maximum blood volume, affected by the condition of circulation organs, affected by the oxygen loss. What ultimately matters for brain
 /mob/living/carbon/human/proc/get_blood_oxygenation()
 	var/blood_volume = get_blood_circulation()
@@ -271,6 +275,9 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 
 	if(!need_breathe())
 		return blood_volume
+
+	if(!blood_carries_oxygen())
+		blood_volume = 100
 
 	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(maxHealth/2))
 	var/oxygenated_mult = 0

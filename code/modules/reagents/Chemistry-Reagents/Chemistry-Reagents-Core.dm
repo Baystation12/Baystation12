@@ -1,5 +1,15 @@
 /datum/reagent/blood
-	data = new/list("donor" = null, "species" = SPECIES_HUMAN, "blood_DNA" = null, "blood_type" = null, "blood_colour" = "#A10808", "trace_chem" = null, "virus2" = list(), "antibodies" = list())
+	data = new/list(
+		"donor" = null,
+		"species" = SPECIES_HUMAN,
+		"blood_DNA" = null,
+		"blood_type" = null,
+		"blood_colour" = "#A10808",
+		"trace_chem" = null,
+		"virus2" = list(),
+		"antibodies" = list(),
+		"has_oxy" = 1
+	)
 	name = "Blood"
 	reagent_state = LIQUID
 	metabolism = REM * 5
@@ -24,6 +34,7 @@
 	data["blood_DNA"] = C.dna.unique_enzymes
 	data["blood_type"] = C.dna.b_type
 	data["species"] = C.species.name
+	data["has_oxy"] = C.species.blood_oxy
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem[R.type] = R.volume
