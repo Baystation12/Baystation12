@@ -80,6 +80,8 @@
 
 	flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
 
+	burn_product = "watervapor"
+
 /decl/xgm_gas/helium
 	id = "helium"
 	name = "Helium"
@@ -140,3 +142,10 @@
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
 	flags = XGM_GAS_CONTAMINANT
+
+/decl/xgm_gas/vapor
+	id = "watervapor"
+	name = "Water Vapor"
+
+	specific_heat = 30	// J/(mol*K)
+	molar_mass = 0.020	// kg/mol

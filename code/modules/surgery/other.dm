@@ -176,7 +176,7 @@
 	if(istype(booze) && booze.strength >= 40)
 		to_chat(user, "<span class='warning'>[booze] is too weak, you need something of higher proof for this...</span>")
 		return 0
-	if(!istype(booze) && !container.reagents.has_reagent("sterilizine"))
+	if(!istype(booze) && !container.reagents.has_reagent(/datum/reagent/sterilizine))
 		return 0
 	return 1
 

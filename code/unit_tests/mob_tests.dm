@@ -32,6 +32,13 @@ datum/unit_test/human_breath/start_test()
 		T = locate(/turf/space)
 
 	H = new(T)
+	if(H.need_breathe())
+		var/species_organ = H.species.breathing_organ
+		var/obj/item/organ/internal/lungs/L
+		if(species_organ)
+			L = H.internal_organs_by_name[species_organ]
+		if(L)
+			L.last_failed_breath = -INFINITY
 
 	starting_oxyloss = damage_check(H, OXY)
 
@@ -164,6 +171,14 @@ datum/unit_test/mob_damage/start_test()
 	// Damage the mob
 
 	var/initial_health = H.health
+
+	if(damagetype == OXY && H.need_breathe())
+		var/species_organ = H.species.breathing_organ
+		var/obj/item/organ/internal/lungs/L
+		if(species_organ)
+			L = H.internal_organs_by_name[species_organ]
+		if(L)
+			L.last_failed_breath = -INFINITY
 
 	H.apply_damage(damage_amount, damagetype, damage_location)
 
@@ -408,6 +423,41 @@ datum/unit_test/mob_damage/diona/halloss
 	name = "MOB: Diona Halloss Damage Check"
 	damagetype = PAIN
 	expected_vulnerability = IMMUNE
+
+// =================================================================
+// Nabbers
+// =================================================================
+
+datum/unit_test/mob_damage/nabber
+	name = "MOB: GAS damage check template"
+	mob_type = /mob/living/carbon/human/nabber
+
+datum/unit_test/mob_damage/nabber/brute
+	name = "MOB: GAS Brute Damage Check"
+	damagetype = BRUTE
+	expected_vulnerability = ARMORED
+
+datum/unit_test/mob_damage/nabber/fire
+	name = "MOB: GAS Fire Damage Check"
+	damagetype = BURN
+	expected_vulnerability = EXTRA_VULNERABLE
+
+datum/unit_test/mob_damage/nabber/tox
+	name = "MOB: GAS Toxins Damage Check"
+	damagetype = TOX
+
+datum/unit_test/mob_damage/nabber/oxy
+	name = "MOB: GAS Oxygen Damage Check"
+	damagetype = OXY
+	expected_vulnerability = ARMORED
+
+datum/unit_test/mob_damage/nabber/clone
+	name = "MOB: GAS Clone Damage Check"
+	damagetype = CLONE
+
+datum/unit_test/mob_damage/nabber/halloss
+	name = "MOB: GAS Halloss Damage Check"
+	damagetype = PAIN
 
 // =================================================================
 // SPECIAL WHITTLE SNOWFLAKES aka IPC

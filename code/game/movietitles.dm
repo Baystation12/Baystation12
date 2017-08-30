@@ -5,8 +5,9 @@
 		M.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
 		M.overlay_fullscreen("scanlines",/obj/screen/fullscreen/scanline)
 		M.overlay_fullscreen("whitenoise",/obj/screen/fullscreen/noise)
-		if(M.is_preference_enabled(/datum/client_preference/play_admin_midis))
-			sound_to(M, sound('sound/music/THUNDERDOME.ogg', repeat = 1, wait = 0, volume = 40, channel = 4))
+		if(M.is_preference_enabled(/datum/client_preference/play_lobby_music))
+			sound_to(M, sound(null, channel = 1))
+			sound_to(M, sound('sound/music/THUNDERDOME.ogg', wait = 0, volume = 40, channel = 1))
 
 	var/list/titles = list()
 	var/list/cast = list()

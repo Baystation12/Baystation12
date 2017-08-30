@@ -128,7 +128,7 @@
 	update_icon()
 	plant_controller.add_plant(src)
 	// Some plants eat through plating.
-	if(islist(seed.chems) && !isnull(seed.chems["pacid"]))
+	if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
 		var/turf/T = get_turf(src)
 		T.ex_act(prob(80) ? 3 : 2)
 
@@ -186,7 +186,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		if(growth_type in list(2,3))
 			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
+		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
 			set_density(1)
 			set_opacity(1)
 	else

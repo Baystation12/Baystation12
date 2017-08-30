@@ -32,5 +32,5 @@
 				/obj/item/weapon/contract/apprentice = 			1
 				)
 
-	sacrifice_reagents = list("hyperzine")
+	sacrifice_reagents = list(/datum/reagent/hyperzine)
 	sacrifice_objects = list(/obj/item/stack/telecrystal)

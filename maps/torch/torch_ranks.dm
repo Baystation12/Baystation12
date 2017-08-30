@@ -628,6 +628,7 @@
 
 /datum/mil_rank/civ/offduty
 	name = "Off-Duty Personnel"
+	name_short = "Off-Duty"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
