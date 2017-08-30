@@ -1,9 +1,0 @@
-#ZeroBits told me to clean my changelogs, I'm cleaning it.
-
-author: Crushtoe
-
-delete-after: True
-
-changes: 
-  - maptweak: The derelict is no longer complete trash. There's actual rooms and plenty of loot to loot, too!
-  - rscadd: Added random spawns for hostile mobs on the Derelict. Now the good loot has a guardian pike/carp/viscerator.
