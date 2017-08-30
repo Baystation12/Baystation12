@@ -743,7 +743,7 @@
 	glass_desc = "Made with love! And cocoa beans."
 	glass_special = list(DRINK_VAPOR)
 
-/datum/reagent/drink/sodawater
+/datum/reagent/drink/soda/sodawater
 	name = "Soda Water"
 	description = "A can of club soda. Why not make a scotch and soda?"
 	taste_description = "carbonated water"
@@ -756,7 +756,7 @@
 	glass_desc = "Soda water. Why not make a scotch and soda?"
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/grapesoda
+/datum/reagent/drink/soda/grapesoda
 	name = "Grape Soda"
 	description = "Grapes made into a fine drank."
 	taste_description = "grape soda"
@@ -767,7 +767,7 @@
 	glass_desc = "Looks like a delicious drink!"
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/tonic
+/datum/reagent/drink/soda/tonic
 	name = "Tonic Water"
 	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
 	taste_description = "tart and fresh"
@@ -780,7 +780,7 @@
 	glass_name = "tonic water"
 	glass_desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
 
-/datum/reagent/drink/lemonade
+/datum/reagent/drink/soda/lemonade
 	name = "Lemonade"
 	description = "Oh the nostalgia..."
 	taste_description = "tartness"
@@ -791,7 +791,7 @@
 	glass_desc = "Oh the nostalgia..."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/kiraspecial
+/datum/reagent/drink/soda/kiraspecial
 	name = "Kira Special"
 	description = "Long live the guy who everyone had mistaken for a girl. Baka!"
 	taste_description = "fruity sweetness"
@@ -802,7 +802,7 @@
 	glass_desc = "Long live the guy who everyone had mistaken for a girl. Baka!"
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/brownstar
+/datum/reagent/drink/soda/brownstar
 	name = "Brown Star"
 	description = "It's not what it sounds like..."
 	taste_description = "orange and cola soda"
@@ -854,7 +854,7 @@
 	..()
 	M.make_jittery(5)
 
-/datum/reagent/drink/nuka_cola
+/datum/reagent/drink/soda/nuka_cola
 	name = "Nuka Cola"
 	description = "Cola, cola never changes."
 	taste_description = "the future"
@@ -883,7 +883,7 @@
 	glass_name = "grenadine syrup"
 	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 
-/datum/reagent/drink/space_cola
+/datum/reagent/drink/soda/space_cola
 	name = "Space Cola"
 	description = "A refreshing beverage."
 	taste_description = "cola"
@@ -896,7 +896,7 @@
 	glass_desc = "A glass of refreshing Space Cola"
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/spacemountainwind
+/datum/reagent/drink/soda/spacemountainwind
 	name = "Mountain Wind"
 	description = "Blows right through you like a space wind."
 	taste_description = "sweet citrus soda"
@@ -909,7 +909,7 @@
 	glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/dr_gibb
+/datum/reagent/drink/soda/dr_gibb
 	name = "Dr. Gibb"
 	description = "A delicious blend of 42 different flavours"
 	taste_description = "cherry soda"
@@ -920,7 +920,7 @@
 	glass_name = "Dr. Gibb"
 	glass_desc = "Dr. Gibb. Not as dangerous as the name might imply."
 
-/datum/reagent/drink/space_up
+/datum/reagent/drink/soda/space_up
 	name = "Space-Up"
 	description = "Tastes like a hull breach in your mouth."
 	taste_description = "a hull breach"
@@ -931,7 +931,7 @@
 	glass_desc = "Space-up. It helps keep your cool."
 	glass_special = list(DRINK_FIZZ)
 
-/datum/reagent/drink/lemon_lime
+/datum/reagent/drink/soda/lemon_lime
 	name = "Lemon Lime"
 	description = "A tangy substance made of 0.5% natural citrus!"
 	taste_description = "tangy lime and lemon soda"
@@ -1181,7 +1181,7 @@
 	glass_name = "sake"
 	glass_desc = "A glass of sake."
 
-/datum/reagent/ethanol/tequilla
+/datum/reagent/ethanol/tequila
 	name = "Tequila"
 	description = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty hombre?"
 	taste_description = "paint stripper"

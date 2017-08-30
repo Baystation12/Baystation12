@@ -165,8 +165,8 @@
 			var/obj/item/weapon/spacecash/ewallet/C = W
 			paid = pay_with_ewallet(C)
 			handled = 1
-		else if (istype(W, /obj/item/weapon/spacecash/bundle))
-			var/obj/item/weapon/spacecash/bundle/C = W
+		else if (istype(W, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = W
 			paid = pay_with_cash(C)
 			handled = 1
 
@@ -224,21 +224,23 @@
 /**
  *  Receive payment with cashmoney.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/bundle/cashmoney)
+/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney)
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
 		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
 		return 0
 
-	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-	cashmoney.worth -= currently_vending.price
+	if(istype(cashmoney, /obj/item/weapon/spacecash))
 
-	if(cashmoney.worth <= 0)
-		usr.drop_from_inventory(cashmoney)
-		qdel(cashmoney)
-	else
-		cashmoney.update_icon()
+		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+		cashmoney.worth -= currently_vending.price
+
+		if(cashmoney.worth <= 0)
+			usr.drop_from_inventory(cashmoney)
+			qdel(cashmoney)
+		else
+			cashmoney.update_icon()
 
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
