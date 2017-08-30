@@ -228,7 +228,7 @@
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
+		to_chat(usr, "[icon2html(cashmoney, usr)] <span class='warning'>That is not enough money.</span>")
 		return 0
 
 	visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")

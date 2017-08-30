@@ -253,14 +253,14 @@
 
 	if (href_list["print"])
 		if (!src.connected)
-			to_chat(usr, "\icon[src]<span class='warning'>Error: No body scanner connected.</span>")
+			to_chat(usr, "[icon2html(src, usr)]<span class='warning'>Error: No body scanner connected.</span>")
 			return
 		var/mob/living/carbon/human/occupant = src.connected.occupant
 		if (!src.connected.occupant)
-			to_chat(usr, "\icon[src]<span class='warning'>The body scanner is empty.</span>")
+			to_chat(usr, "[icon2html(src, usr)]<span class='warning'>The body scanner is empty.</span>")
 			return
 		if (!istype(occupant,/mob/living/carbon/human))
-			to_chat(usr, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
+			to_chat(usr, "[icon2html(src, usr)]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return
 		new/obj/item/weapon/paper/(loc, "<tt>[connected.occupant.get_medical_data()]</tt>", "Body scan report - [occupant]")
 
