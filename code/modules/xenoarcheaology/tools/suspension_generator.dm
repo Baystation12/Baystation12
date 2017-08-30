@@ -183,10 +183,10 @@
 
 	for(var/mob/living/M in T)
 		M.weakened += 5
-		M.visible_message("<span class='notice'>[icon2html(M, viewers(M))] [M] begins to float in the air!</span>","You feel tingly and light, but it is difficult to move.")
+		M.visible_message("<span class='notice'>[icon2html(M, world)] [M] begins to float in the air!</span>","You feel tingly and light, but it is difficult to move.")
 
 	suspension_field = new(T)
-	src.visible_message("<span class='notice'>[icon2html(src, viewers(src))] [src] activates with a low hum.</span>")
+	src.visible_message("<span class='notice'>[icon2html(src, world)] [src] activates with a low hum.</span>")
 	icon_state = "suspension3"
 
 	for(var/obj/item/I in T)
@@ -196,7 +196,7 @@
 	if(collected)
 		suspension_field.icon_state = "energynet"
 		suspension_field.overlays += "shield2"
-		src.visible_message("<span class='notice'>[icon2html(suspension_field, viewers(suspension_field))] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"].</span>")
+		src.visible_message("<span class='notice'>[icon2html(suspension_field, world)] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"].</span>")
 	else
 		if(istype(T,/turf/simulated/mineral) || istype(T,/turf/simulated/wall))
 			suspension_field.icon_state = "shieldsparkles"
@@ -211,7 +211,7 @@
 		to_chat(M, "<span class='info'>You no longer feel like floating.</span>")
 		M.weakened = min(M.weakened, 3)
 
-	src.visible_message("<span class='notice'>[icon2html(src, viewers(src))] [src] deactivates with a gentle shudder.</span>")
+	src.visible_message("<span class='notice'>[icon2html(src, world)] [src] deactivates with a gentle shudder.</span>")
 	qdel(suspension_field)
 	suspension_field = null
 	icon_state = "suspension2"

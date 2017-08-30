@@ -202,7 +202,7 @@ var/const/NO_EMAG_ACT = -50
 	return jointext(dat,null)
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("\The [user] shows you: [icon2html(src, viewers(src))] [src.name]. The assignment on the card: [src.assignment]",\
+	user.visible_message("\The [user] shows you: [icon2html(src, world)] [src.name]. The assignment on the card: [src.assignment]",\
 		"You flash your ID card: [icon2html(src, viewers(src))] [src.name]. The assignment on the card: [src.assignment]")
 
 	src.add_fingerprint(user)

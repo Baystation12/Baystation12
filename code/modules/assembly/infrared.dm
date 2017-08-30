@@ -112,7 +112,7 @@
 
 	pulse(0)
 	if(!holder)
-		visible_message("[icon2html(src, viewers(src))] *beep* *beep*")
+		visible_message("[icon2html(src, world)] *beep* *beep*")
 	cooldown = 2
 	spawn(10)
 		process_cooldown()

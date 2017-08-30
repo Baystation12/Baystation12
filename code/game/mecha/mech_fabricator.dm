@@ -195,20 +195,20 @@
 	switch(emagged)
 		if(0)
 			emagged = 0.5
-			visible_message("[icon2html(src, viewers(src))] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
+			visible_message("[icon2html(src, world)] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
 			sleep(10)
-			visible_message("[icon2html(src, viewers(src))] <b>[src]</b> beeps: \"Attempting auto-repair\"")
+			visible_message("[icon2html(src, world)] <b>[src]</b> beeps: \"Attempting auto-repair\"")
 			sleep(15)
-			visible_message("[icon2html(src, viewers(src))] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
+			visible_message("[icon2html(src, world)] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
 			sleep(30)
-			visible_message("[icon2html(src, viewers(src))] <b>[src]</b> beeps: \"User DB truncated. Please contact your [GLOB.using_map.company_name] system operator for future assistance.\"")
+			visible_message("[icon2html(src, world)] <b>[src]</b> beeps: \"User DB truncated. Please contact your [GLOB.using_map.company_name] system operator for future assistance.\"")
 			req_access = null
 			emagged = 1
 			return 1
 		if(0.5)
-			visible_message("[icon2html(src, viewers(src))] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
+			visible_message("[icon2html(src, world)] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
 		if(1)
-			visible_message("[icon2html(src, viewers(src))] <b>[src]</b> beeps: \"No records in User DB\"")
+			visible_message("[icon2html(src, world)] <b>[src]</b> beeps: \"No records in User DB\"")
 
 /obj/machinery/mecha_part_fabricator/proc/update_busy()
 	if(queue.len)

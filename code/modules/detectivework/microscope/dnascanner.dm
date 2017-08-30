@@ -99,7 +99,7 @@
 	last_process_worldtime = world.time
 
 /obj/machinery/dnaforensics/proc/complete_scan()
-	src.visible_message("<span class='notice'>[icon2html(src, viewers(src))] makes an insistent chime.</span>", 2)
+	src.visible_message("<span class='notice'>[icon2html(src, world)] makes an insistent chime.</span>", 2)
 	update_icon()
 	if(bloodsamp)
 		var/obj/item/weapon/paper/P = new(src)
