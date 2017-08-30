@@ -659,3 +659,24 @@
 	name = "makeshift ranks (WO-1 warrant officer 1)"
 	desc = "Insignia denoting the elusive rank of Warant Officer. Too bad it's obviously fake."
 	icon_state = "fleetrank_officer"
+
+/obj/item/clothing/under/savage_hunter
+	name = "savage hunter's hides"
+	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature."
+	icon_state = "hunterhide"
+	item_state = "hunter"
+	worn_state = "hunter"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
+/obj/item/clothing/under/savage_hunter/female
+	name = "savage huntress's hides"
+	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature. Includes a chestwrap so as not to leave one topless."
+	worn_state = "huntress"
+
+/obj/item/clothing/under/wetsuit
+	name = "tactical wetsuit"
+	desc = "For when you want to scuba dive your way into an enemy base but still want to show off a little skin."
+	icon_state = "wetsuit"
+	item_state = "wetsuit"
+	worn_state = "wetsuit"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS

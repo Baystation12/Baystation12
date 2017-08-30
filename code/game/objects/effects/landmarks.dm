@@ -232,3 +232,13 @@
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	delete_me = 1
+
+/obj/effect/landmark/costume/savagehunter/New()
+	new /obj/item/clothing/mask/spirit(src.loc)
+	new /obj/item/clothing/under/savage_hunter(src.loc)
+	delete_me = 1
+
+/obj/effect/landmark/costume/savagehuntress/New()
+	new /obj/item/clothing/mask/spirit(src.loc)
+	new /obj/item/clothing/under/savage_hunter/female(src.loc)
+	delete_me = 1
