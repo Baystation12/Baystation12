@@ -35,13 +35,60 @@
 	recipes += new/datum/stack_recipe_list("comfy chairs", list( \
 		new/datum/stack_recipe("beige comfy chair", /obj/structure/bed/chair/comfy/beige, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("black comfy chair", /obj/structure/bed/chair/comfy/black, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("brown comfy chair", /obj/structure/bed/chair/comfy/brown, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("lime comfy chair", /obj/structure/bed/chair/comfy/lime, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("teal comfy chair", /obj/structure/bed/chair/comfy/teal, 2, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("red comfy chair", /obj/structure/bed/chair/comfy/red, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("blue comfy chair", /obj/structure/bed/chair/comfy/blue, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("purple comfy chair", /obj/structure/bed/chair/comfy/purp, 2, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("green comfy chair", /obj/structure/bed/chair/comfy/green, 2, one_per_turf = 1, on_floor = 1), \
+		))
+	recipes += new/datum/stack_recipe_list("couches", list( \
+		new/datum/stack_recipe("[display_name] left couch", /obj/structure/bed/chair/comfy/couch/left, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("[display_name] right couch", /obj/structure/bed/chair/comfy/couch/right, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("[display_name] mid couch", /obj/structure/bed/chair/comfy/couch/mid, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("[display_name] inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("[display_name] outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("beige left couch", /obj/structure/bed/chair/comfy/couch/left/beige, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("beige right couch", /obj/structure/bed/chair/comfy/couch/right/beige, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("beige mid couch", /obj/structure/bed/chair/comfy/couch/mid/beige, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("beige inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/beige, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("beige outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/beige, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("green left couch", /obj/structure/bed/chair/comfy/couch/left/green, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green right couch", /obj/structure/bed/chair/comfy/couch/right/green, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green mid couch", /obj/structure/bed/chair/comfy/couch/mid/green, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/green, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("green outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/green, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("teal left couch", /obj/structure/bed/chair/comfy/couch/left/teal, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal right couch", /obj/structure/bed/chair/comfy/couch/right/teal, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal mid couch", /obj/structure/bed/chair/comfy/couch/mid/teal, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/teal, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("teal outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/teal, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("black left couch", /obj/structure/bed/chair/comfy/couch/left/black, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black right couch", /obj/structure/bed/chair/comfy/couch/right/black, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black mid couch", /obj/structure/bed/chair/comfy/couch/mid/black, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/black, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("black outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/black, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("purple left couch", /obj/structure/bed/chair/comfy/couch/left/purple, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple right couch", /obj/structure/bed/chair/comfy/couch/right/purple, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple mid couch", /obj/structure/bed/chair/comfy/couch/mid/purple, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/purple, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("purple outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/purple, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("blue left couch", /obj/structure/bed/chair/comfy/couch/left/blue, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue right couch", /obj/structure/bed/chair/comfy/couch/right/blue, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue mid couch", /obj/structure/bed/chair/comfy/couch/mid/blue, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/blue, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("blue outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/blue, 2, one_per_turf = 1, on_floor = 1), \
+
+		new/datum/stack_recipe("lime left couch", /obj/structure/bed/chair/comfy/couch/left/lime, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime right couch", /obj/structure/bed/chair/comfy/couch/right/lime, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime mid couch", /obj/structure/bed/chair/comfy/couch/mid/lime, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime inward couch", /obj/structure/bed/chair/comfy/couch/turn/inward/lime, 2, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("lime outward couch", /obj/structure/bed/chair/comfy/couch/turn/outward/lime, 2, one_per_turf = 1, on_floor = 1), \
 		))
 	recipes += new/datum/stack_recipe("key", /obj/item/weapon/key, 1, time = 10, one_per_turf = 0, on_floor = 1)
 	recipes += new/datum/stack_recipe("table frame", /obj/structure/table, 1, time = 10, one_per_turf = 1, on_floor = 1)

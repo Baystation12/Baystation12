@@ -257,6 +257,12 @@
 		gear = list()
 	if(!islist(gear_list))
 		gear_list = list()
+	for(var/i = 1, i <= 3, i++)
+		if(!gear_list["[i]"])
+			gear_list["[i]"] = list()
+		if(!islist(gear_list["[i]"]))
+			gear_list["[i]"] = list()
+
 
 	for(var/gear_name in gear)
 		if(!(gear_name in gear_datums))

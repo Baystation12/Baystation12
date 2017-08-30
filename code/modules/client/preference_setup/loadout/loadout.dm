@@ -2,7 +2,8 @@ var/list/loadout_categories = list()
 var/list/gear_datums = list()
 
 /datum/preferences/proc/Gear()
-	return gear_list[gear_slot]
+	sanitize_char()
+	return gear_list["[gear_slot]"]
 
 /datum/loadout_category
 	var/category = ""

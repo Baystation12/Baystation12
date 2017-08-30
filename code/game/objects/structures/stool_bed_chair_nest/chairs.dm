@@ -135,6 +135,11 @@
 /obj/structure/bed/chair/comfy/captain/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","black")
 
+/obj/structure/bed/chair/comfy/captain/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+		return
+	..()
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -211,3 +216,134 @@
 /obj/structure/bed/chair/wood/wings
 	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings_preview"
+
+// Couches, offshoot of /comfy/ so that the armrest code can be used easily
+
+/obj/structure/bed/chair/comfy/couch
+	name = "couch"
+	desc = "It's a couch."
+
+
+// Grey base couch
+
+
+/obj/structure/bed/chair/comfy/couch/left
+	icon_state = "couch_left"
+	base_icon = "couch_left"
+
+/obj/structure/bed/chair/comfy/couch/right/
+	icon_state = "couch_right"
+	base_icon = "couch_right"
+
+/obj/structure/bed/chair/comfy/couch/mid/ // mid refers to a straight couch part
+	icon_state = "couch_mid"
+	base_icon = "couch_mid"
+
+/obj/structure/bed/chair/comfy/couch/turn/inward// and turn is a corner couch part
+	icon_state = "couch_turn_in"
+	base_icon = "couch_turn_in"
+
+/obj/structure/bed/chair/comfy/couch/turn/outward/
+	icon_state = "couch_turn_out"
+	base_icon = "couch_turn_out"
+
+
+
+/obj/structure/bed/chair/comfy/couch/left/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+/obj/structure/bed/chair/comfy/couch/right/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+/obj/structure/bed/chair/comfy/couch/mid/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+/obj/structure/bed/chair/comfy/couch/turn/inward/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+/obj/structure/bed/chair/comfy/couch/turn/outward/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/comfy/couch/left/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+/obj/structure/bed/chair/comfy/couch/right/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+/obj/structure/bed/chair/comfy/couch/mid/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+/obj/structure/bed/chair/comfy/couch/turn/inward/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+/obj/structure/bed/chair/comfy/couch/turn/outward/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+
+/obj/structure/bed/chair/comfy/couch/left/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+/obj/structure/bed/chair/comfy/couch/right/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+/obj/structure/bed/chair/comfy/couch/mid/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+/obj/structure/bed/chair/comfy/couch/turn/inward/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+/obj/structure/bed/chair/comfy/couch/turn/outward/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+
+/obj/structure/bed/chair/comfy/couch/left/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+/obj/structure/bed/chair/comfy/couch/right/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+/obj/structure/bed/chair/comfy/couch/mid/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+/obj/structure/bed/chair/comfy/couch/turn/inward/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+/obj/structure/bed/chair/comfy/couch/turn/outward/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/comfy/couch/left/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+/obj/structure/bed/chair/comfy/couch/right/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+/obj/structure/bed/chair/comfy/couch/mid/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+/obj/structure/bed/chair/comfy/couch/turn/inward/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+/obj/structure/bed/chair/comfy/couch/turn/outward/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/comfy/couch/left/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+/obj/structure/bed/chair/comfy/couch/right/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+/obj/structure/bed/chair/comfy/couch/mid/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+/obj/structure/bed/chair/comfy/couch/turn/inward/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+/obj/structure/bed/chair/comfy/couch/turn/outward/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+
+/obj/structure/bed/chair/comfy/couch/left/purple/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+/obj/structure/bed/chair/comfy/couch/right/purple/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+/obj/structure/bed/chair/comfy/couch/mid/purple/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+/obj/structure/bed/chair/comfy/couch/turn/inward/purple/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+/obj/structure/bed/chair/comfy/couch/turn/outward/purple/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/comfy/couch/left/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+/obj/structure/bed/chair/comfy/couch/right/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+/obj/structure/bed/chair/comfy/couch/mid/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+/obj/structure/bed/chair/comfy/couch/turn/inward/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+/obj/structure/bed/chair/comfy/couch/turn/outward/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/comfy/couch/left/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+/obj/structure/bed/chair/comfy/couch/right/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+/obj/structure/bed/chair/comfy/couch/mid/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+/obj/structure/bed/chair/comfy/couch/turn/inward/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+/obj/structure/bed/chair/comfy/couch/turn/outward/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")

@@ -226,7 +226,7 @@ datum/preferences
 					continue
 
 				if(G.slot && !(G.slot in equipped_slots))
-					var/metadata = gear_list[gear_slot][G.display_name]
+					var/metadata = gear_list["[gear_slot]"][G.display_name]
 					if(mannequin.equip_to_slot_or_del(G.spawn_item(mannequin, metadata), G.slot))
 						equipped_slots += G.slot
 						update_icon = TRUE

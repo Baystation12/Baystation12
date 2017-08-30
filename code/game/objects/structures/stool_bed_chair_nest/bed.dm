@@ -89,8 +89,8 @@
 				return
 
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		dismantle()
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
@@ -135,6 +135,13 @@
 		if(do_after(user, 20, src))
 			if(user_buckle_mob(affecting, user))
 				qdel(W)
+	else if(istype(W, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(anchored)
+			to_chat(user, "You unanchor \the [src].")
+		else
+			to_chat(user, "You anchor \the [src].")
+		anchored = !anchored
 	else
 		..()
 

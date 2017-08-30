@@ -707,6 +707,7 @@ var/list/name_to_material
 
 /material/cloth //todo
 	name = "cloth"
+	stack_type = /obj/item/stack/material/steel
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	door_icon_base = "wood"
 	ignition_point = T0C+232
@@ -758,6 +759,7 @@ var/list/name_to_material
 //TODO PLACEHOLDERS:
 /material/leather
 	name = "leather"
+	stack_type = /obj/item/stack/material/leather
 	icon_colour = "#5C4831"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	flags = MATERIAL_PADDING
@@ -767,6 +769,7 @@ var/list/name_to_material
 
 /material/carpet
 	name = "carpet"
+	stack_type = /obj/item/stack/tile/carpet
 	display_name = "comfy"
 	use_name = "red upholstery"
 	icon_colour = "#DA020A"
@@ -779,6 +782,7 @@ var/list/name_to_material
 
 /material/cotton
 	name = "cotton"
+	stack_type = /obj/item/stack/material/steel
 	display_name ="cotton"
 	icon_colour = "#FFFFFF"
 	flags = MATERIAL_PADDING
@@ -788,6 +792,7 @@ var/list/name_to_material
 
 /material/cloth_teal
 	name = "teal"
+	stack_type = /obj/item/stack/material/steel
 	display_name ="teal"
 	use_name = "teal cloth"
 	icon_colour = "#00EAFA"
@@ -798,6 +803,7 @@ var/list/name_to_material
 
 /material/cloth_black
 	name = "black"
+	stack_type = /obj/item/stack/material/steel
 	display_name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
@@ -808,6 +814,7 @@ var/list/name_to_material
 
 /material/cloth_green
 	name = "green"
+	stack_type = /obj/item/stack/material/steel
 	display_name = "green"
 	use_name = "green cloth"
 	icon_colour = "#01C608"
@@ -818,6 +825,7 @@ var/list/name_to_material
 
 /material/cloth_puple
 	name = "purple"
+	stack_type = /obj/item/stack/material/steel
 	display_name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9C56C4"
@@ -828,6 +836,7 @@ var/list/name_to_material
 
 /material/cloth_blue
 	name = "blue"
+	stack_type = /obj/item/stack/material/steel
 	display_name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#6B6FE3"
@@ -838,6 +847,7 @@ var/list/name_to_material
 
 /material/cloth_beige
 	name = "beige"
+	stack_type = /obj/item/stack/material/steel
 	display_name = "beige"
 	use_name = "beige cloth"
 	icon_colour = "#E8E7C8"
@@ -848,6 +858,7 @@ var/list/name_to_material
 
 /material/cloth_lime
 	name = "lime"
+	stack_type = /obj/item/stack/material/steel
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
