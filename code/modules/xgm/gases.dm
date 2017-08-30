@@ -160,6 +160,19 @@
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
 	breathed_product = /datum/reagent/water
+	processing = /proc/handle_watervapor
+
+/proc/handle_watervapor(var/zone/Z)
+	if(!Z) return
+	var/tdiff = T0C + 70 - Z.air.temperature
+	if(tdiff < 0) return
+	var/vape = Z.air.get_gas("watervapor")
+	if(!vape) return
+	if(prob(tdiff+30))
+		Z.air.adjust_gas("watervapor", -2*Z.air.group_multiplier)
+		for(var/i = 1 to vape/3)
+			var/turf/simulated/T = pick(Z.contents)
+			T.wet_floor(5)
 
 /decl/xgm_gas/sulfurdioxide
 	id = "sulfurdioxide"
