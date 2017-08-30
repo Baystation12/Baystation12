@@ -220,7 +220,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "electrified_arm"
 
-	hitcost = 0
+	hitcost = 100
 
 /obj/item/weapon/melee/baton/robot/electrified_arm/update_icon()
 	if(status)

@@ -10,6 +10,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - bugfix: "The electrified arm (e-magged/traitored Engineering borg module) now behaves like a stun baton. It can be toggled on/off. Like the old arm, it has no energy cost."
+  - bugfix: "The electrified arm (e-magged/traitored Engineering borg module) now behaves like a stun baton. It can be toggled on/off."
   - tweak: "Activating the electrified arm will now cause the borg to glow a faint blue, giving away that they are using it."
   - imageadd: "Added a unique sprite for the electrified arm."
