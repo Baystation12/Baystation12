@@ -18,6 +18,7 @@
 /obj/item/organ/internal/eyes/nabber
 	name = "compound eyes"
 	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
+	phoron_guard = 1
 	var/eyes_shielded
 
 /obj/item/organ/internal/eyes/nabber/additional_flash_effects(var/intensity)
@@ -56,8 +57,8 @@
 	icon_state = "stomach"
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
-	var/dexalin_level = 5
-	var/phoron_level = 0.2
+	var/dexalin_level = 10
+	var/phoron_level = 0.5
 
 /obj/item/organ/internal/phoron/process()
 	var amount = 0.1
@@ -70,12 +71,12 @@
 	var/phoron_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/toxin/phoron)
 
 	if((dexalin_volume_raw < dexalin_level || !dexalin_volume_raw) && (phoron_volume_raw < phoron_level || !phoron_volume_raw))
-		owner.reagents.add_reagent("phoron", amount)
+		owner.reagents.add_reagent(/datum/reagent/toxin/phoron, amount)
 	..()
 
 /obj/item/organ/internal/liver/nabber
 	name = "acetone reactor"
-	var/acetone_level = 10
+	var/acetone_level = 20
 
 /obj/item/organ/internal/liver/nabber/process()
 	var amount = 0.8
@@ -107,12 +108,17 @@
 /obj/item/organ/internal/lungs/nabber/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * H.breath_fail_ratio)
+	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * owner.chem_effects[CE_OXYGENATED]))
 
-	if(H.breath_fail_ratio > 0.175)
-		H.oxygen_alert = max(H.oxygen_alert, 1)
-	else
+	if(H.breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
 		H.oxygen_alert = 0
+	if(H.breath_fail_ratio >= 0.25)
+		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * H.breath_fail_ratio)
+		if(owner.chem_effects[CE_OXYGENATED])
+			H.oxygen_alert = 1
+		else
+			H.oxygen_alert = 2
+
 
 /obj/item/organ/internal/heart/nabber
 	open = 1
@@ -157,6 +163,7 @@
 			for(var/obj/item/organ/internal/I in owner.internal_organs)
 				if(prob(5))
 					I.take_damage(5)
+	..()
 
 /obj/item/organ/external/chest/nabber
 	name = "thorax"

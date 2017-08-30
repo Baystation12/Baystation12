@@ -311,6 +311,7 @@
 	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
+		breath_fail_ratio = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
 	return !failed_last_breath
@@ -855,7 +856,9 @@
 			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
 		if(oxygen)
-			if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"
+			if(hal_screwyhud == 3 || oxygen_alert)
+				if(oxygen_alert == 1)				oxygen.icon_state = "oxy1"
+				else								oxygen.icon_state = "oxy2"
 			else									oxygen.icon_state = "oxy0"
 		if(fire)
 			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
