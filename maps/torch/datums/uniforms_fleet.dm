@@ -99,6 +99,9 @@
 	name = "Fleet service"
 	departments = SRV
 
+	utility_under = /obj/item/clothing/under/utility/fleet/service
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/service, /obj/item/clothing/head/ushanka/fleet)
+
 /decl/hierarchy/mil_uniform/fleet/srv/officer
 	name = "Fleet service CO"
 	min_rank = 11
