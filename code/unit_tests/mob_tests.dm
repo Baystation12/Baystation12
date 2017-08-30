@@ -15,46 +15,47 @@
 // Tests Life() and mob breathing in space.
 //
 
-
-
 datum/unit_test/human_breath
-	name = "MOB: Human Suffocates in Space"
-	var/starting_oxyloss = null
-	var/ending_oxyloss = null
-	var/mob/living/carbon/human/H
+	name = "MOB: Breathing Species Suffocate in Space"
+	var/list/test_subjects = list()
 	async = 1
-
 
 datum/unit_test/human_breath/start_test()
 	var/turf/T = get_space_turf()
 
 	if(!istype(T, /turf/space))	//If the above isn't a space turf then we force it to find one will most likely pick 1,1,1
 		T = locate(/turf/space)
-
-	H = new(T)
-	if(H.need_breathe())
-		var/species_organ = H.species.breathing_organ
-		var/obj/item/organ/internal/lungs/L
-		if(species_organ)
+	for(var/species_name in all_species)
+		var/datum/species/S = all_species[species_name]
+		var/mob/living/carbon/human/H = new(T, S.name)
+		if(H.need_breathe())
+			var/species_organ = H.species.breathing_organ
+			var/obj/item/organ/internal/lungs/L
+			H.apply_effect(20, STUN, 0)
 			L = H.internal_organs_by_name[species_organ]
-		if(L)
 			L.last_failed_breath = -INFINITY
-
-	starting_oxyloss = damage_check(H, OXY)
-
+			test_subjects[S.name] = list(H, damage_check(H, OXY))
 	return 1
 
 datum/unit_test/human_breath/check_result()
+	for(var/i in test_subjects)
+		var/mob/living/carbon/human/H = test_subjects[i][1]
+		if(H.life_tick < 10) 	// Finish Condition
+			return 0	// Return 0 to try again later.
 
-	if(H.life_tick < 10) 	// Finish Condition
-		return 0	// Return 0 to try again later.
+	var/failcount = 0
+	for(var/i in test_subjects)
+		var/mob/living/carbon/human/H = test_subjects[i][1]
+		var/ending_oxyloss = damage_check(H, OXY)
+		var/starting_oxyloss = test_subjects[i][2]
+		if(starting_oxyloss >= ending_oxyloss)
+			failcount++
+			log_debug("[H.species.name] is not taking oxygen damage, started with [starting_oxyloss] and ended with [ending_oxyloss] at place [log_info_line(H.loc)].")
 
-	ending_oxyloss = damage_check(H, OXY)
-
-	if(starting_oxyloss < ending_oxyloss)
-		pass("Oxyloss = [ending_oxyloss]")
+	if(failcount)
+		fail("[failcount] breathing species mobs didn't suffocate in space.")
 	else
-		fail("Mob is not taking oxygen damage.  Damage is [ending_oxyloss]")
+		pass("All breathing species mobs suffocated in space.")
 
 	return 1	// return 1 to show we're done and don't want to recheck the result.
 
