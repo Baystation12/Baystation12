@@ -1071,6 +1071,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/is_robotic = robotic >= ORGAN_ROBOT
 	var/mob/living/carbon/human/victim = owner
 
+	if(!istype(owner))
+		return
+
+	owner.organs_by_name[organ_tag] = null
+	owner.organs_by_name -= organ_tag
+	owner.organs_by_name -= null
+	owner.organs -= src
+
 	..()
 
 	victim.bad_external_organs -= src

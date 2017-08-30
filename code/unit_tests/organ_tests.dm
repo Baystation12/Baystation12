@@ -90,7 +90,8 @@ datum/unit_test/species_organ_creation/proc/check_organ_parents(var/mob/living/c
 
 datum/unit_test/species_organ_creation/start_test()
 	var/failcount = 0
-	for(var/datum/species/species in all_species)
+	for(var/species_name in all_species)
+		var/datum/species/species = all_species[species_name]
 		var/mob/living/carbon/human/test_subject = new(null, species.name)
 
 		var/fail = 0
@@ -187,6 +188,7 @@ datum/unit_test/species_organ_lists_update/proc/test_internal_organ(var/mob/livi
 		fail("[H.species.name] internal organ [I] was not removed correctly.")
 		return 0
 
+	I.status &= ~ORGAN_CUT_AWAY
 	I.replaced(H, parent)
 	if(!check_internal_organ_present(H, I))
 		fail("[H.species.name] internal organ [I] was not replaced correctly.")
@@ -195,17 +197,18 @@ datum/unit_test/species_organ_lists_update/proc/test_internal_organ(var/mob/livi
 	return 1
 
 datum/unit_test/species_organ_lists_update/proc/test_external_organ(var/mob/living/carbon/human/H, var/obj/item/organ/external/E)
-	if(!check_external_organ_removed(H, E))
+	if(!check_external_organ_present(H, E))
 		fail("[H.species.name] internal organ [E] failed initial presence check.")
 		return 0
 
 	var/obj/item/organ/external/parent = E.parent
 
-	E.removed()
+	E.removed(ignore_children = 0)
 	if(!check_internal_organ_removed(H, E, parent))
 		fail("[H.species.name] internal organ [E] was not removed correctly.")
 		return 0
 
+	E.status &= ~ORGAN_CUT_AWAY
 	E.replaced(H)
 	if(!check_internal_organ_present(H, E))
 		fail("[H.species.name] internal organ [E] was not replaced correctly.")
@@ -215,16 +218,21 @@ datum/unit_test/species_organ_lists_update/proc/test_external_organ(var/mob/livi
 
 datum/unit_test/species_organ_lists_update/start_test()
 	var/failcount = 0
-	for(var/datum/species/species in all_species)
-		var/mob/living/carbon/human/test_subject = new(null, species.name)
+	for(var/species_name in all_species)
+		if(species_name == SPECIES_HUMAN)
+			var/datum/species/S = all_species[species_name]
 
-		for(var/O in test_subject.internal_organs)
-			if(!test_internal_organ(test_subject, O))
-				failcount++
-		
-		for(var/O in test_subject.organs)
-			if(!test_external_organ(test_subject, O))
-				failcount++
+			for(var/O in S.has_organ)
+				log_debug("ORGAN: .")
+
+				var/mob/living/carbon/human/test_subject = new(null, species_name)
+				if(!test_internal_organ(test_subject, O))
+					failcount++
+
+			for(var/O in S.has_limbs)
+				var/mob/living/carbon/human/test_subject = new(null, species_name)
+				if(!test_external_organ(test_subject, O))
+					failcount++
 
 	if(failcount)
 		fail("[failcount] organs failed to be removed and replaced correctly.")
