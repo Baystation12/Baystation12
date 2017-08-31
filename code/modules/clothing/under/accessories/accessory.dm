@@ -48,8 +48,8 @@
 			var/obj/item/clothing/under/C = loc
 			if(on_rolled["down"] && C.rolled_down > 0)
 				tmp_icon_state = on_rolled["down"]
-			else if(on_rolled["sleeves"] && C.rolled_sleeves > 0)
-				tmp_icon_state = on_rolled["sleeves"]
+			else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled["rolled"]
 
 		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
