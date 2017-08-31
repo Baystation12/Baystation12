@@ -1,0 +1,6 @@
+author: Atlantiscze
+
+delete-after: True
+
+changes: 
+  - tweak: "Pulling a knife out of your boot or putting it in produces a message once again, but only if you are adjacent to the person."
