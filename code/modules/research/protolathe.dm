@@ -91,7 +91,7 @@
 	if(default_part_replacement(user, O))
 		return
 	if(O.is_open_container())
-		return 1
+		return 0
 	if(panel_open)
 		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
 		return 1
