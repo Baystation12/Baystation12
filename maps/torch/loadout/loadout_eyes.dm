@@ -61,12 +61,12 @@
 /datum/gear/eyes/meson
 	display_name = "Meson Goggles"
 	path = /obj/item/clothing/glasses/meson
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant)
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/pathfinder, /datum/job/explorer)
 
 /datum/gear/eyes/meson/prescription
 	display_name = "Meson Goggles, prescription"
 	path = /obj/item/clothing/glasses/meson/prescription
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant)
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/pathfinder, /datum/job/explorer)
 
 /datum/gear/eyes/material
 	display_name = "Material Goggles"

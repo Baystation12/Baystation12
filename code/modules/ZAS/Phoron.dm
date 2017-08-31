@@ -117,7 +117,7 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/burn_eyes()
 	var/obj/item/organ/internal/eyes/E = internal_organs_by_name[BP_EYES]
-	if(E)
+	if(E && !E.phoron_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
 		E.damage += 2.5
 		eye_blurry = min(eye_blurry+1.5,50)

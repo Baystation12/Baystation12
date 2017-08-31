@@ -311,6 +311,7 @@
 	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
+		breath_fail_ratio = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
 	return !failed_last_breath
@@ -855,7 +856,9 @@
 			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
 		if(oxygen)
-			if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"
+			if(hal_screwyhud == 3 || oxygen_alert)
+				if(oxygen_alert == 1)				oxygen.icon_state = "oxy1"
+				else								oxygen.icon_state = "oxy2"
 			else									oxygen.icon_state = "oxy0"
 		if(fire)
 			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
@@ -914,14 +917,21 @@
 		return
 
 	// Puke if toxloss is too high
-	var/obj/item/organ/internal/liver/L = internal_organs_by_name[BP_LIVER]
-	var/obj/item/organ/internal/kidneys/K = internal_organs_by_name[BP_KIDNEYS]
-	var/tox_loss = getToxLoss()
-
-	if(!stat && !lastpuke && tox_loss > 5 && ((L && !(L.status & ORGAN_DEAD)) || (K && !(K.status & ORGAN_DEAD))))
-		if (prob(10))
-			var/vom_stats = 70 / max(7, 70 - getToxLoss())
-			spawn vomit(1, vom_stats, vom_stats)
+	var/vomit_score = 0
+	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
+		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
+		if(I)
+			vomit_score += I.damage
+		else if (should_have_organ(tag))
+			vomit_score += 45
+	if(chem_effects[CE_TOXIN] || radiation)
+		vomit_score += 0.5 * getToxLoss()
+	if(chem_effects[CE_ALCOHOL_TOXIC])
+		vomit_score += 10 * chem_effects[CE_ALCOHOL_TOXIC]
+	if(chem_effects[CE_ALCOHOL])
+		vomit_score += 10
+	if(stat != DEAD && vomit_score > 25 && prob(10))
+		spawn vomit(1, vomit_score, vomit_score/25)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)

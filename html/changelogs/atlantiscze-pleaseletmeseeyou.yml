@@ -1,6 +1,0 @@
-author: Atlantiscze
-
-delete-after: True
-
-changes: 
-  - tweak: "AI can once again track people by clicking their name from radio messages, even when their face is obstructed, assuming they are at least wearing a matching ID."

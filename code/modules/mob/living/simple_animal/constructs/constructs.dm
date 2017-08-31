@@ -16,14 +16,8 @@
 	universal_speak = 0
 	universal_understand = 1
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 	show_stat_health = 1
 	faction = "cult"

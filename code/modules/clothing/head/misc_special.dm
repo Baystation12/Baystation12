@@ -154,6 +154,8 @@
 	icon_state = "ushankadown"
 	var/icon_state_up = "ushankaup"
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
+	cold_protection = HEAD
+	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/head/ushanka/attack_self(mob/user as mob)
 	if(icon_state == initial(icon_state))

@@ -239,7 +239,6 @@ var/list/possible_cable_coil_colours
 			if (prob(25))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
-	return
 
 obj/structure/cable/proc/cableColor(var/colorC)
 	var/color_n = "#DD0000"

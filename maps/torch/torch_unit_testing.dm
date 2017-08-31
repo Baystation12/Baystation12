@@ -55,13 +55,18 @@
 		/area/turret_protected/ai_outer_chamber = NO_SCRUBBER|NO_VENT,
 		/area/vacant = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/vacant/brig = NO_SCRUBBER|NO_VENT,
-		/area/vacant/cannon = NO_SCRUBBER|NO_VENT,
+		/area/vacant/prototype/control = 0,
+		/area/vacant/prototype/engine = 0,
 		/area/vacant/cargo = NO_SCRUBBER|NO_VENT,
 		/area/vacant/infirmary = NO_SCRUBBER|NO_VENT,
 		/area/vacant/missile = NO_SCRUBBER|NO_VENT,
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/office = 0,
-		/area/rnd/blanks = NO_SCRUBBER|NO_VENT
+		/area/rnd/blanks = NO_SCRUBBER|NO_VENT,
+        /area/exoplanet          = NO_SCRUBBER|NO_VENT|NO_APC,
+        /area/exoplanet/desert   = NO_SCRUBBER|NO_VENT|NO_APC,
+        /area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
+        /area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -69,7 +74,11 @@
 		/area/mine/explored,
 		/area/mine/unexplored,
 		/area/centcom/control,
-		/area/maintenance/exterior
+		/area/maintenance/exterior,
+		/area/exoplanet,
+		/area/exoplanet/desert,
+		/area/exoplanet/grass,
+		/area/exoplanet/snow
 	)
 
 	area_coherency_test_subarea_count = list(
@@ -93,7 +102,11 @@
 		/area/turbolift/firstdeck,
 		/area/turbolift/seconddeck,
 		/area/turbolift/thirddeck,
-		/area/turbolift/fourthdeck
+		/area/turbolift/fourthdeck,
+		/area/exoplanet,
+		/area/exoplanet/desert,
+		/area/exoplanet/grass,
+		/area/exoplanet/snow
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

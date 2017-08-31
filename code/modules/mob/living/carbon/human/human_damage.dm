@@ -190,7 +190,7 @@
 	amount = abs(amount)
 
 	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 0.75
+		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -330,7 +330,7 @@ This function restores the subjects blood to max.
 	if(!should_have_organ(BP_HEART))
 		return
 	if(vessel.total_volume < species.blood_volume)
-		vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
+		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
 
 /*
 This function restores all organs.

@@ -174,7 +174,7 @@
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("fuel", max_fuel)
+	R.add_reagent(/datum/reagent/fuel, max_fuel)
 	..()
 
 /obj/item/weapon/weldingtool/Destroy()
@@ -254,7 +254,7 @@
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
-	return reagents.get_reagent_amount("fuel")
+	return reagents.get_reagent_amount(/datum/reagent/fuel)
 
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
@@ -282,11 +282,11 @@
 
 	if(in_mob)
 		amount = max(amount, 2)
-		reagents.trans_id_to(in_mob, "fuel", amount)
+		reagents.trans_type_to(in_mob, /datum/reagent/fuel, amount)
 		in_mob.IgniteMob()
 
 	else
-		reagents.remove_reagent("fuel", amount)
+		reagents.remove_reagent(/datum/reagent/fuel, amount)
 		var/turf/location = get_turf(src.loc)
 		if(location)
 			location.hotspot_expose(700, 5)
