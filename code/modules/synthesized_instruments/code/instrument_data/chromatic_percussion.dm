@@ -1,9 +1,9 @@
-/datum/instrument/chromatic
+/namespace/synthesized_instruments/instrument/chromatic
 	name = "Generic chromatic percussion instrument"
 	category = "Chromatic percussion"
 
 
-/datum/instrument/chromatic/vibraphone1
+/namespace/synthesized_instruments/instrument/chromatic/vibraphone1
 	name = "Crisis Vibraphone"
 	id = "crvibr"
 	samples = list("36"='code/modules/synthesized_instruments/sound/chromatic/vibraphone1/c2.ogg',
@@ -12,7 +12,7 @@
 				   "72"='code/modules/synthesized_instruments/sound/chromatic/vibraphone1/c5.ogg')
 
 
-/datum/instrument/chromatic/musicbox1
+/namespace/synthesized_instruments/instrument/chromatic/musicbox1
 	name = "SGM Music Box"
 	id = "sgmmbox"
 	samples = list("36"='code/modules/synthesized_instruments/sound/chromatic/sgmbox/c2.ogg',
@@ -21,7 +21,7 @@
 				   "72"='code/modules/synthesized_instruments/sound/chromatic/sgmbox/c5.ogg')
 
 
-/datum/instrument/chromatic/fluid_celeste
+/namespace/synthesized_instruments/instrument/chromatic/fluid_celeste
 	name = "FluidR3 Celeste"
 	id = "r3celeste"
 	samples = list("36"='code/modules/synthesized_instruments/sound/chromatic/fluid_celeste/c2.ogg',

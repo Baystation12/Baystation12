@@ -1,11 +1,11 @@
 /datum/nano_module/echo_editor
 	name = "Echo Editor"
 	available_to_ai = 0
-	var/datum/sound_player/player
+	var/namespace/synthesized_instruments/player/player
 	var/atom/source
 
 
-/datum/nano_module/echo_editor/New(datum/sound_player/player)
+/datum/nano_module/echo_editor/New(/namespace/synthesized_instruments/player/player)
 	src.host = player.actual_instrument
 	src.player = player
 

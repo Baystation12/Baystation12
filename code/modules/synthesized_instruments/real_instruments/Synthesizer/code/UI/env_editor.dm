@@ -1,10 +1,10 @@
 /datum/nano_module/env_editor
 	name = "Environment Editor"
 	available_to_ai = 0
-	var/datum/sound_player/player
+	var/namespace/synthesized_instruments/player/player
 
 
-/datum/nano_module/env_editor/New(datum/sound_player/player)
+/datum/nano_module/env_editor/New(/namespace/synthesized_instruments/player/player)
 	src.host = player.actual_instrument
 	src.player = player
 

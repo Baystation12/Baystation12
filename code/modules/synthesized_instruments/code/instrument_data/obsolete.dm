@@ -1,9 +1,9 @@
-/datum/instrument/obsolete
+/namespace/synthesized_instruments/instrument/obsolete
 	name="Non-synthesized sounds"
 	category="Prerecorded"
 
 
-/datum/instrument/obsolete/piano
+/namespace/synthesized_instruments/instrument/obsolete/piano
 	name="Piano"
 	id="ss13piano"
 	samples=list(\
@@ -105,7 +105,7 @@
 "107"='code/modules/synthesized_instruments/sound/obsolete/piano/Bn8.ogg')
 
 
-/datum/instrument/obsolete/violin
+/namespace/synthesized_instruments/instrument/obsolete/violin
 	name = "Violin"
 	id = "ss13violin"
 	samples=list(\

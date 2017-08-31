@@ -1,9 +1,9 @@
-/datum/instrument/piano
+/namespace/synthesized_instruments/instrument/piano
 	name = "Generic piano"
 	category = "Piano"
 
 
-/datum/instrument/piano/fluid_piano
+/namespace/synthesized_instruments/instrument/piano/fluid_piano
 	name = "FluidR3 Grand Piano"
 	id = "r3grand"
 	samples = list("36"='code/modules/synthesized_instruments/sound/piano/fluid_piano/c2.ogg',
@@ -15,7 +15,7 @@
 				   "108"='code/modules/synthesized_instruments/sound/piano/fluid_piano/c8.ogg')
 
 
-/datum/instrument/piano/fluid_harpsichord
+/namespace/synthesized_instruments/instrument/piano/fluid_harpsichord
 	name = "FluidR3 Harpsichord"
 	id = "r3harpsi"
 	samples = list("36"='code/modules/synthesized_instruments/sound/piano/fluid_harpsi/c2.ogg',
@@ -27,7 +27,7 @@
 				   "108"='code/modules/synthesized_instruments/sound/piano/fluid_harpsi/c8.ogg')
 
 
-/datum/instrument/piano/crisis_harpsichord
+/namespace/synthesized_instruments/instrument/piano/crisis_harpsichord
 	name = "Crisis Harpsichord"
 	id = "crharpsi"
 	samples = list("36"='code/modules/synthesized_instruments/sound/piano/crisis_harpsichord/c2.ogg',
@@ -36,7 +36,7 @@
 				   "72"='code/modules/synthesized_instruments/sound/piano/crisis_harpsichord/c5.ogg')
 
 
-/datum/instrument/piano/crisis_grandpiano_uni
+/namespace/synthesized_instruments/instrument/piano/crisis_grandpiano_uni
 	name = "Crisis Grand Piano One"
 	id = "crgrand1"
 	samples = list("36"='code/modules/synthesized_instruments/sound/piano/crisis_grand_piano/c2.ogg',
@@ -48,7 +48,7 @@
 				   "108"='code/modules/synthesized_instruments/sound/piano/crisis_grand_piano/c8.ogg')
 
 
-/datum/instrument/piano/crisis_brightpiano_uni
+/namespace/synthesized_instruments/instrument/piano/crisis_brightpiano_uni
 	name = "Crisis Bright Piano One"
 	id = "crbright1"
 	samples = list("36"='code/modules/synthesized_instruments/sound/piano/crisis_bright_piano/c2.ogg',

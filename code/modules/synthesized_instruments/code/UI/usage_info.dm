@@ -5,7 +5,7 @@
 	var/list/datum/musical_event/event_manager_events
 
 
-/datum/nano_module/usage_info/New(atom/source, datum/sound_player/player)
+/datum/nano_module/usage_info/New(atom/source, /namespace/synthesized_instruments/player/player)
 	src.host = source
 	src.song_channels = player.song.free_channels
 	src.event_manager_events = player.event_manager.events

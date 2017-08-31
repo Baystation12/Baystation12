@@ -1,14 +1,14 @@
 /datum/nano_module/song_editor
 	name = "Song Editor"
 	available_to_ai = 0
-	var/datum/synthesized_song/song
+	var/namespace/synthesized_instruments/player/player
 	var/show_help = 0
 	var/page = 1
 
 
-/datum/nano_module/song_editor/New(atom/source, datum/synthesized_song/song)
+/datum/nano_module/song_editor/New(atom/source, /namespace/synthesized_instruments/player/player)
 	src.host = source
-	src.song = song
+	src.player = player
 
 
 /datum/nano_module/song_editor/proc/pages()
@@ -54,7 +54,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		to_chat(usr, "Non-numeric value was supplied")
+		to_chat(usr, "Invalid input")
 		return 0
 
 	switch (target)
