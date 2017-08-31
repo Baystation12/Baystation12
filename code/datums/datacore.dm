@@ -250,6 +250,7 @@
 	return add_zero(num2hex(rand(1, 65535)), 4)	//no point generating higher numbers because of the limitations of num2hex
 
 /datum/datacore/proc/CreateGeneralRecord(var/mob/living/carbon/human/H, var/id)
+	CreateModularRecord(H)
 	ResetPDAManifest()
 	var/icon/front
 	var/icon/side

@@ -80,6 +80,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/supply())
+	hard_drive.store_file(new/datum/computer_file/program/records())
 
 // Professional Cargo/Offices
 /obj/item/modular_computer/console/preset/civilian/professional/install_default_hardware()
