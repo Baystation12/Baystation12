@@ -227,7 +227,7 @@
 		general.fields["sex"] = capitalize(user.gender)
 
 	general.fields["species"] = user.get_species()
-	var/datum/data/record/medical = GLOB.data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
+	var/datum/data/record/medical = GLOB.data_core.CreateMedicalRecord(user, general.fields["id"])
 	GLOB.data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
 	if(random_general_record)
@@ -247,5 +247,6 @@
 
 	var/datum/job/job = job_master.GetJob(general.fields["rank"])
 	if(istype(job) && job.announced)
-		AnnounceArrivalSimple(general.fields["name"], general.fields["rank"], get_announcement_frequency(job))
-	. = ..()
+		var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(user.client, job.title)
+		AnnounceArrivalSimple(general.fields["name"], general.fields["rank"], spawnpoint.msg, get_announcement_frequency(job))
+	return ..()
