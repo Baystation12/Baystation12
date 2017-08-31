@@ -171,7 +171,7 @@
 	check_instability()
 	Radiate()
 	if(radiation)
-		radiation_repository.radiate(src, radiation)
+		radiation_repository.radiate(src, round(radiation*0.001))
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()
@@ -291,7 +291,7 @@
 	radiation += plasma_temperature/2
 	plasma_temperature = 0
 
-	radiation_repository.radiate(src, radiation)
+	radiation_repository.radiate(src, round(radiation*0.001))
 	Radiate()
 
 /obj/effect/fusion_em_field/proc/Radiate()
