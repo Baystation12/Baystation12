@@ -17,7 +17,6 @@ var/global/datum/global_init/init = new ()
 	callHook("global_init")
 
 	// kept out of a hook to preserve call order
-	initialize_chemical_reagents()
 	initialize_chemical_reactions()
 
 	qdel(src) //we're done

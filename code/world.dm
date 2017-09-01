@@ -486,6 +486,23 @@ var/world_topic_spam_protect_time = world.timeofday
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
 		qdel(C)
 
+	else if(copytext(T,1,19) == "prometheus_metrics")
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		if(!GLOB || !GLOB.prometheus_metrics)
+			return "Metrics not ready"
+
+		return GLOB.prometheus_metrics.collect()
+		
 
 /world/Reboot(var/reason)
 	/*spawn(0)

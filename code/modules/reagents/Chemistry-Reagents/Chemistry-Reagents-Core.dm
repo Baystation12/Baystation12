@@ -1,7 +1,16 @@
 /datum/reagent/blood
-	data = new/list("donor" = null, "species" = SPECIES_HUMAN, "blood_DNA" = null, "blood_type" = null, "blood_colour" = "#A10808", "trace_chem" = null, "virus2" = list(), "antibodies" = list())
+	data = new/list(
+		"donor" = null,
+		"species" = SPECIES_HUMAN,
+		"blood_DNA" = null,
+		"blood_type" = null,
+		"blood_colour" = "#A10808",
+		"trace_chem" = null,
+		"virus2" = list(),
+		"antibodies" = list(),
+		"has_oxy" = 1
+	)
 	name = "Blood"
-	id = "blood"
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#C80000"
@@ -25,10 +34,10 @@
 	data["blood_DNA"] = C.dna.unique_enzymes
 	data["blood_type"] = C.dna.b_type
 	data["species"] = C.species.name
+	data["has_oxy"] = C.species.blood_oxy
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
-		temp_chem += R.id
-		temp_chem[R.id] = R.volume
+		temp_chem[R.type] = R.volume
 	data["trace_chem"] = list2params(temp_chem)
 	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]
@@ -98,7 +107,6 @@
 	data = list("antibodies"=list())
 	name = "Antibodies"
 	taste_description = "slime"
-	id = "antibodies"
 	reagent_state = LIQUID
 	color = "#0050F0"
 
@@ -110,7 +118,6 @@
 #define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 /datum/reagent/water
 	name = "Water"
-	id = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064C877"
@@ -188,7 +195,6 @@
 
 /datum/reagent/fuel
 	name = "Welding fuel"
-	id = "fuel"
 	description = "Required for welders. Flamable."
 	taste_description = "gross metal"
 	reagent_state = LIQUID

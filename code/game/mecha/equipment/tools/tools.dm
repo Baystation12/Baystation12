@@ -192,7 +192,7 @@
 	New()
 		reagents = new/datum/reagents(max_water)
 		reagents.my_atom = src
-		reagents.add_reagent("water", max_water)
+		reagents.add_reagent(/datum/reagent/water, max_water)
 		..()
 		return
 

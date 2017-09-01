@@ -3,7 +3,7 @@
 	head_position = 1
 	department = "Science"
 	department_flag = COM|SCI
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
@@ -26,7 +26,7 @@
 	title = "Scientist"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
@@ -42,7 +42,7 @@
 	title = "Xenobiologist"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the research director"
@@ -58,7 +58,7 @@
 	title = "Roboticist"
 	department = "Science"
 	department_flag = SCI
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "research director"

@@ -179,21 +179,11 @@
 		if(owner.should_have_organ(BP_HEART))
 
 			// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
-			var/blood_volume = owner.get_effective_blood_volume()
+			var/blood_volume = owner.get_blood_oxygenation()
 
 			if(owner.is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
-				blood_volume = min(blood_volume, BLOOD_VOLUME_SURVIVE)
 				owner.Paralyse(3)
 
-			else if(owner.need_breathe())
-				var/blood_volume_mod = max(0, 1 - owner.getOxyLoss()/(owner.maxHealth/2))
-				var/oxygenated_mult = 0
-				if(owner.chem_effects[CE_OXYGENATED] == 1) // Dexalin.
-					oxygenated_mult = 0.5
-				else if(owner.chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
-					oxygenated_mult = 0.8
-				blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
-				blood_volume = blood_volume * blood_volume_mod
 			//Effects of bloodloss
 			switch(blood_volume)
 

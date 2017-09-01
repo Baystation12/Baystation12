@@ -36,7 +36,7 @@
 
 	flora_prob = 10
 	large_flora_prob = 0
-	fauna_diversity = 4
+	flora_diversity = 4
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos)
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
@@ -62,6 +62,12 @@
 /turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"
 	..()
+
+/turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, temperature, volume)
+	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
+		name = "molten silica"
+		icon_state = "sandglass"
+		diggable = 0
 
 /obj/structure/quicksand
 	name = "sand"

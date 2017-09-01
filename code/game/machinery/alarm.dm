@@ -895,7 +895,7 @@ FIRE ALARM
 			icon_state = "fire0"
 			switch(seclevel)
 				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = COLOR_LIME)
-				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
+				if("orange")	set_light(l_range = 2, l_power = 0.5, l_color = "#ef8e0e")
 				if("red")	set_light(l_range = 4, l_power = 2, l_color = COLOR_RED)
 				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
 
