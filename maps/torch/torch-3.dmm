@@ -1506,7 +1506,7 @@
 "FJ" = (/turf/simulated/floor/reinforced/phoron/fuel,/area/engineering/fuelbay)
 "FP" = (/obj/effect/shuttle_landmark/merc/deck2,/turf/space,/area/space)
 "FS" = (/obj/effect/shuttle_landmark/skipjack/deck2,/turf/space,/area/space)
-"FT" = (/obj/effect/shuttle_landmark/torch/deck3/calypso,/turf/space,/area/space)
+"FT" = (/obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle,/turf/space,/area/space)
 "FU" = (/obj/effect/shuttle_landmark/torch/deck3/aquila,/turf/space,/area/space)
 "Gb" = (/obj/effect/shuttle_landmark/torch/deck3/guppy,/turf/space,/area/space)
 "Gc" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/floor/tiled,/area/engineering/atmos)

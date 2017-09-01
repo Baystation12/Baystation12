@@ -13,7 +13,7 @@
 "m" = (/obj/effect/shuttle_landmark/escape_pod/transit/pod12,/turf/space/transit/north,/area/space)
 "n" = (/obj/effect/shuttle_landmark/escape_pod/transit/pod13,/turf/space/transit/north,/area/space)
 "o" = (/obj/effect/shuttle_landmark/escape_pod/transit/pod14,/turf/space/transit/north,/area/space)
-"p" = (/obj/effect/shuttle_landmark/torch/transit/calypso,/turf/space/transit/north,/area/space)
+"p" = (/obj/effect/shuttle_landmark/torch/transit/exploration_shuttle,/turf/space/transit/north,/area/space)
 "q" = (/obj/effect/shuttle_landmark/ert/internim,/turf/space/bluespace,/area/space)
 "r" = (/obj/effect/shuttle_landmark/merc/internim,/turf/space/bluespace,/area/space)
 "s" = (/obj/effect/step_trigger/thrower{direction = 1; name = "thrower_throwup"; nostop = 0; tiles = 0},/turf/space/transit/north,/area/space)

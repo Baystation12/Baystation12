@@ -295,7 +295,7 @@
 "hg" = (/obj/random/junk,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
 "hh" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"; name = "Wardrobe"},/turf/simulated/floor/airless,/area/constructionsite)
 "hi" = (/obj/structure/table/standard,/obj/random/toolbox,/obj/random/maintenance,/turf/simulated/floor/airless,/area/constructionsite/engineering)
-"ib" = (/obj/effect/shuttle_landmark/derelict/calypso,/turf/space,/area/space)
+"ib" = (/obj/effect/shuttle_landmark/derelict/exploration_shuttle,/turf/space,/area/space)
 "ic" = (/obj/structure/bookcase,/obj/item/weapon/book/manual/excavation,/turf/simulated/floor/airless,/area/constructionsite/hallway/fore)
 "id" = (/obj/machinery/mecha_part_fabricator,/turf/simulated/floor/airless,/area/constructionsite/storage)
 "ie" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/airless,/area/constructionsite/hallway/aft)
