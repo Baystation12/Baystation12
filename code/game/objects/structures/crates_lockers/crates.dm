@@ -310,8 +310,17 @@ obj/structure/closet/crate
 	open_sound = 'sound/items/Deconstruct.ogg'
 	close_sound = 'sound/items/Deconstruct.ogg'
 	req_access = list(access_xenobiology)
-
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
 	return list(/mob/living/carbon/human/blank, /obj/item/usedcryobag)
+
+/obj/structure/closet/crate/paper_refill
+	name = "paper refill crate"
+	desc = "A rectangular plastic crate, filled up with blank papers for refilling bins and printers. A bureaucrat's favorite."
+	icon_state = "plasticcrate"
+	icon_opened = "plasticcrateopen"
+	icon_closed = "plasticcrate"
+
+/obj/structure/closet/crate/paper_refill/WillContain()
+	return list(/obj/item/weapon/paper = 30)
