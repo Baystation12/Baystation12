@@ -549,7 +549,7 @@ BLIND     // can't see anything
 	holding.forceMove(get_turf(usr))
 
 	if(usr.put_in_hands(holding))
-		usr.visible_message("<span class='warning'>\The [usr] pulls \an [holding] out of their boot!</span>", range = 1)
+		usr.visible_message("<span class='warning'>\The [usr] pulls \the [holding] out of \the [src]!</span>", range = 1)
 		holding = null
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
