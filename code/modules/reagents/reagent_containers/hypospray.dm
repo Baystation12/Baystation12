@@ -17,7 +17,7 @@
 
 ///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 //	..()
-//	reagents.add_reagent("tricordrazine", 30)
+//	reagents.add_reagent(/datum/reagent/tricordrazine, 30)
 //	return
 
 /obj/item/weapon/reagent_containers/hypospray/do_surgery(mob/living/carbon/M, mob/living/user)
@@ -67,7 +67,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.add_reagent("inaprovaline", 5)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 5)
 	update_icon()
 	return
 

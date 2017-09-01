@@ -101,10 +101,9 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	. += "<span class='notice'>Pulse rate: [pulse_result]bpm.</span>"
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
-	var/blood_result = H.get_effective_blood_volume()
-	if(blood_result <= 70)
+	if(H.get_blood_volume() <= 70)
 		. += "<span class='danger'>Severe blood loss detected.</span>"
-	. += "<span class='notice'>Blood pressure:</span> [H.get_blood_pressure()] ([blood_result]% blood circulation)"
+	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
 
 	// Body temperature.
 	. += "<span class='notice'>Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)</span>"
@@ -206,7 +205,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			var/datum/reagent/R = A
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				reagentdata["[R.id]"] = "<span class='notice'>    [round(H.reagents.get_reagent_amount(R.id), 1)]u [R.name]</span>"
+				reagentdata[R.type] = "<span class='notice'>    [round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]</span>"
 			else
 				unknown++
 		if(reagentdata.len)
@@ -358,7 +357,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
-			if(R.id != "blood")
+			if(R.type != /datum/reagent/blood)
 				reagents.clear_reagents()
 				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
 				return
