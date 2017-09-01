@@ -1,4 +1,7 @@
-#define FUSION_ENERGY_PER_K 20
+#define FUSION_ENERGY_PER_K        20
+#define FUSION_INSTABILITY_DIVISOR 50000
+#define FUSION_RUPTURE_THRESHOLD   10000
+#define FUSION_REACTANT_CAP        10000
 
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
@@ -145,7 +148,7 @@
 		var/amount = reactants[reactant]
 		if(amount < 1)
 			reactants.Remove(reactant)
-		else if(amount >= 1000000)
+		else if(amount >= FUSION_REACTANT_CAP)
 			var/radiate = rand(3 * amount / 4, amount / 4)
 			reactants[reactant] -= radiate
 			radiation += radiate
@@ -176,14 +179,14 @@
 
 /obj/effect/fusion_em_field/proc/check_instability()
 	if(tick_instability > 0)
-		percent_unstable += (tick_instability*size)/10000
+		percent_unstable += (tick_instability*size)/FUSION_INSTABILITY_DIVISOR
 		tick_instability = 0
 	else
 		if(percent_unstable < 0)
 			percent_unstable = 0
 		else
-			if(percent_unstable > 100)
-				percent_unstable = 100
+			if(percent_unstable > 1)
+				percent_unstable = 1
 			if(percent_unstable > 0)
 				percent_unstable = max(0, percent_unstable-rand(0.01,0.03))
 
@@ -191,7 +194,7 @@
 		owned_core.Shutdown(force_rupture=1)
 	else
 		if(percent_unstable > 0.5 && prob(percent_unstable*100))
-			if(plasma_temperature < 2000)
+			if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
 				visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
 			else
 				var/flare
@@ -236,7 +239,7 @@
 	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
 	sleep(5)
 	RadiateAll()
-	explosion(get_turf(owned_core),-1,-1,8,10) // Blow out all the windows.
+	explosion(get_turf(owned_core),-1,-1,-1,10) // Blow out all the windows.
 	return
 
 /obj/effect/fusion_em_field/proc/ChangeFieldStrength(var/new_strength)
@@ -314,9 +317,8 @@
 			if(skip_obstacle)
 				continue
 
-			log_debug("R-UST DEBUG: [AM] is [AM.type]")
 			AM.visible_message("<span class='danger'>The field buckles visibly around \the [AM]!</span>")
-			tick_instability += rand(15,30)
+			tick_instability += rand(30,50)
 			AM.emp_act(empsev)
 
 	if(owned_core && owned_core.loc)
@@ -493,3 +495,6 @@
 	return 0
 
 #undef FUSION_HEAT_CAP
+#undef FUSION_INSTABILITY_DIVISOR
+#undef FUSION_RUPTURE_THRESHOLD
+#undef FUSION_REACTANT_CAP
