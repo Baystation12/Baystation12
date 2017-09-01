@@ -1,5 +1,5 @@
 
-/decl/hierarchy/outfit/slayer
+/decl/hierarchy/outfit/job/slayer
 	name = "Neutral Team Slayer outfit"
 
 	uniform = /obj/item/clothing/under/utility//	/obj/item/clothing/under/unsc/odst
@@ -14,12 +14,12 @@
 	suit_store = /obj/item/weapon/gun/projectile/m6d_magnum
 	head = /obj/item/clothing/head/helmet/spartan
 
-/decl/hierarchy/outfit/slayer/red
+/decl/hierarchy/outfit/job/slayer/red
 	name = "Red Team Slayer outfit"
 	suit = /obj/item/clothing/suit/armor/spartan/red
 	head = /obj/item/clothing/head/helmet/spartan/red
 
-/decl/hierarchy/outfit/slayer/blue
+/decl/hierarchy/outfit/job/slayer/blue
 	name = "Blue Team Slayer outfit"
 	suit = /obj/item/clothing/suit/armor/spartan/blue
 	head = /obj/item/clothing/head/helmet/spartan/blue
