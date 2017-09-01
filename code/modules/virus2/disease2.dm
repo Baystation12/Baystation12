@@ -95,8 +95,8 @@
 
 	clicks += speed
 	//Virus food speeds up disease progress
-	if(mob.reagents.has_reagent("virusfood"))
-		mob.reagents.remove_reagent("virusfood", REM)
+	if(mob.reagents.has_reagent(/datum/reagent/nutriment/virus_food))
+		mob.reagents.remove_reagent(/datum/reagent/nutriment/virus_food, REM)
 		clicks += 10
 
 	//Moving to the next stage

@@ -81,7 +81,7 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	var/list/antibodies_in_common = M.antibodies & disease.antigen
 	if(antibodies_in_common.len)
 		return
-	if(prob(100 * M.reagents.get_reagent_amount("spaceacillin") / (REAGENTS_OVERDOSE/2)))
+	if(prob(100 * M.reagents.get_reagent_amount(/datum/reagent/spaceacillin) / (REAGENTS_OVERDOSE/2)))
 		return
 
 	if(!disease.affected_species.len)

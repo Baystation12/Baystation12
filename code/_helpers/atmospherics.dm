@@ -32,6 +32,8 @@
 				. += "<span class='warning'>Pressure: [round(pressure,0.1)] kPa</span>"
 			for(var/mix in mixture.gas)
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, advanced ? 0.01 : 1)
+				if(!percentage)
+					continue
 				. += "<span class='notice'>[gas_data.name[mix]]: [percentage]%</span>"
 				if(advanced)
 					var/list/traits = list()

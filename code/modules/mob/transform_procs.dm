@@ -50,6 +50,7 @@
 		return
 	for(var/t in organs)
 		qdel(t)
+	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
 /mob/living/carbon/AIize()
@@ -110,6 +111,7 @@
 /mob/living/carbon/human/proc/Robotize()
 	if (transforming)
 		return
+	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
@@ -321,7 +323,7 @@
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	Weaken(5)
 	if(should_have_organ(BP_HEART))
-		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
+		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
 	for(var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0

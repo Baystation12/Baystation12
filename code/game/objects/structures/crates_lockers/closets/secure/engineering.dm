@@ -42,6 +42,7 @@
 
 /obj/structure/closet/secure_closet/engineering_electrical/WillContain()
 	return list(
+		/obj/item/clothing/gloves/nabber = 2,
 		/obj/item/clothing/gloves/insulated = 3,
 		/obj/item/weapon/storage/toolbox/electrical = 3,
 		/obj/item/weapon/module/power_control = 3,

@@ -32,7 +32,7 @@
 
 /obj/item/organ/internal/lungs/proc/add_oxygen_deprivation(var/amount)
 	var/last_suffocation = oxygen_deprivation
-	if(world.time < (last_failed_breath + 2 MINUTES)) //todo config
+	if(world.time > (last_failed_breath + 2 MINUTES)) //todo config
 		oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
 	return (oxygen_deprivation - last_suffocation)
 
@@ -158,12 +158,12 @@
 		if(prob(20) && active_breathing)
 			owner.emote("gasp")
 
-		owner.breath_fail_ratio = 1 - inhale_pp/safe_pressure_min
+		owner.breath_fail_ratio = round(1 - inhale_pp/safe_pressure_min, 0.001)
 		failed_inhale = 1
 	else
 		owner.breath_fail_ratio = 0
 
-	owner.oxygen_alert = failed_inhale
+	owner.oxygen_alert = failed_inhale * 2
 
 	var/inhaled_gas_used = inhaling/6
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
@@ -206,7 +206,7 @@
 		var/ratio = (poison/safe_toxins_max) * 10
 		if(robotic >= ORGAN_ROBOT)
 			ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
-		owner.reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+		owner.reagents.add_reagent(/datum/reagent/toxin, Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
 		breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
 		owner.phoron_alert = 1
 	else
@@ -261,7 +261,7 @@
 
 	owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 
-	owner.oxygen_alert = max(owner.oxygen_alert, 1)
+	owner.oxygen_alert = max(owner.oxygen_alert, 2)
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(

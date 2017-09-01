@@ -66,6 +66,7 @@
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
 	. = ..()
+	base_area = get_area(src)
 	if(!GLOB.using_map.use_overmap)
 		return
 	var/obj/effect/overmap/O = map_sectors["[z]"]
