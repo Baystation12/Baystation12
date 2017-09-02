@@ -5,7 +5,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	department = "Command"
 	head_position = 1
 	department_flag = COM
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "company officials and Corporate Regulations"
@@ -18,7 +18,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	ideal_character_age = 70 // Old geezer captains ftw
 	outfit_type = /decl/hierarchy/outfit/job/captain
-	announced = 1
 
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -32,7 +31,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	title = "Head of Personnel"
 	head_position = 1
 	department_flag = COM|CIV
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
@@ -56,4 +55,3 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 
 	outfit_type = /decl/hierarchy/outfit/job/hop
-	announced = 1

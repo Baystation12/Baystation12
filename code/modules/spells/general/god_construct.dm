@@ -19,12 +19,10 @@
 	if(connected_god)
 		for(var/type in connected_god.form.buildables)
 			var/cost = 10
-			var/needs_turf = 0
 			if(ispath(type, /obj/structure/deity))
 				var/obj/structure/deity/D = type
 				cost = initial(D.build_cost)
-				needs_turf = initial(D.must_be_converted_turf)
-			possible_targets["[connected_god.get_type_name(type)] - [cost]"] = list(cost, needs_turf, type)
+			possible_targets["[connected_god.get_type_name(type)] - [cost]"] = list(cost, type)
 		var/choice = input("Construct to build.", "Construction") as null|anything in possible_targets
 		if(!choice)
 			return

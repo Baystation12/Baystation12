@@ -49,6 +49,7 @@
 
 /mob/living/carbon/human/Destroy()
 	GLOB.human_mob_list -= src
+	worn_underwear = null
 	for(var/organ in organs)
 		qdel(organ)
 	return ..()
@@ -219,6 +220,11 @@
 			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
+
+	for(var/entry in worn_underwear)
+		var/obj/item/underwear/UW = entry
+		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
+
 	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
@@ -298,7 +304,10 @@
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
 	if(!H || H.disfigured || H.is_stump() || !real_name || (HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		return "Unknown"
+		if(istype(wear_mask))
+			return wear_mask.visible_name
+		else
+			return "Unknown"
 	return real_name
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
@@ -353,7 +362,8 @@
 		src << browse(null, t1)
 
 	if(href_list["item"])
-		handle_strip(href_list["item"],usr,locate(href_list["holder"]))
+		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
+			show_inv(usr)
 
 	if (href_list["criminal"])
 		if(hasHUD(usr,"security"))
@@ -715,18 +725,23 @@
 		return 0
 	return 1
 
-/mob/living/carbon/human/proc/vomit()
-	if(!check_has_mouth() || isSynthetic())
+/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3)
+	set waitfor = 0
+	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
 		return
+	level = Clamp(level, 1, 3)
+	timevomit = Clamp(timevomit, 1, 10)
 	if(stat == DEAD)
 		return
 	if(!lastpuke)
 		lastpuke = 1
 		to_chat(src, "<span class='warning'>You feel nauseous...</span>")
-		spawn(150)	//15 seconds until second warning
+		if(level > 1)
+			sleep(150 / timevomit)	//15 seconds until second warning
 			to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
-			spawn(100)	//and you have 10 more for mad dash to the bucket
-				Stun(5)
+			if(level > 2)
+				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
+				Stun(3)
 				if(nutrition < 40)
 					custom_emote(1,"dry heaves.")
 				else
@@ -742,12 +757,11 @@
 
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, 1)
-
-					nutrition -= 40
-					adjustToxLoss(-3)
-				spawn(350)	//wait 35 seconds before next volley
-					lastpuke = 0
+						location.add_vomit_floor(src, toxvomit)
+					ingested.remove_any(5)
+					nutrition -= 30
+		sleep(350)	//wait 35 seconds before next volley
+		lastpuke = 0
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
@@ -914,7 +928,7 @@
 /mob/living/carbon/human/revive()
 
 	if(should_have_organ(BP_HEART))
-		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
+		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
 		fixblood()
 
 	species.create_organs(src) // Reset our organs/limbs.
@@ -1158,9 +1172,9 @@
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
-			vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
+			vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
 		else if(vessel.total_volume > species.blood_volume)
-			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
+			vessel.remove_reagent(/datum/reagent/blood, vessel.total_volume - species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
 		fixblood()
 
@@ -1584,13 +1598,13 @@
 
 /mob/living/carbon/human/proc/make_adrenaline(amount)
 	if(stat == CONSCIOUS)
-		reagents.add_reagent("adrenaline", amount)
+		reagents.add_reagent(/datum/reagent/adrenaline, amount)
 
 //Get fluffy numbers
 /mob/living/carbon/human/proc/get_blood_pressure()
 	if(status_flags & FAKEDEATH)
 		return "[Floor(120+rand(-5,5))*0.25]/[Floor(80+rand(-5,5)*0.25)]"
-	var/blood_result = get_effective_blood_volume()
+	var/blood_result = get_blood_circulation()
 	return "[Floor((120+rand(-5,5))*(blood_result/100))]/[Floor(80+rand(-5,5)*(blood_result/100))]"
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.

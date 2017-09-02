@@ -1,4 +1,4 @@
-#define PROCESS_ACCURACY 10
+#define PROCESS_ACCURACY 3
 
 /****************************************************
 				INTERNAL ORGANS DEFINES

@@ -192,9 +192,9 @@
 
 /decl/hierarchy/supply_pack/security/securitybarriers
 	name = "Wall shield Generators"
-	contains = list(/obj/machinery/shieldwallgen = 4)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
+	contains = list(/obj/machinery/shieldwallgen = 2)
+	cost = 10
+	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper wall shield generators crate"
 	access = access_teleporter
 

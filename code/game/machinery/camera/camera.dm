@@ -36,6 +36,16 @@
 
 	var/affected_by_emp_until = 0
 
+/obj/machinery/camera/malf_upgrade(var/mob/living/silicon/ai/user)
+	..()
+	malf_upgraded = 1
+
+	upgradeEmpProof()
+	upgradeXRay()
+
+	to_chat(user, "\The [src] has been upgraded. It now has X-Ray capability and EMP resistance.")
+	return 1
+
 /obj/machinery/camera/apply_visual(mob/living/carbon/human/M)
 	if(!M.client)
 		return

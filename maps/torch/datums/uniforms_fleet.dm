@@ -59,7 +59,7 @@
 	name = "Fleet medical"
 	departments = MED
 
-	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/medical, /obj/item/clothing/head/ushanka/fleet)
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/medical, /obj/item/clothing/head/ushanka/fleet, /obj/item/clothing/head/utility/marine, /obj/item/clothing/under/utility/marine/medical, /obj/item/clothing/shoes/jungleboots)
 	utility_under = /obj/item/clothing/under/utility/fleet/medical
 
 /decl/hierarchy/mil_uniform/fleet/med/officer
@@ -98,6 +98,9 @@
 /decl/hierarchy/mil_uniform/fleet/srv
 	name = "Fleet service"
 	departments = SRV
+
+	utility_under = /obj/item/clothing/under/utility/fleet/service
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/service, /obj/item/clothing/head/ushanka/fleet)
 
 /decl/hierarchy/mil_uniform/fleet/srv/officer
 	name = "Fleet service CO"

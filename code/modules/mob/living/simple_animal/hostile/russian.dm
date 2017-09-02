@@ -21,14 +21,6 @@
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/mobcorpse/russian
 	var/weapon1 = /obj/item/weapon/material/knife
-	min_oxy = 5
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 1
-	min_co2 = 0
-	max_co2 = 5
-	min_n2 = 0
-	max_n2 = 0
 	unsuitable_atoms_damage = 15
 	faction = "russian"
 	status_flags = CANPUSH

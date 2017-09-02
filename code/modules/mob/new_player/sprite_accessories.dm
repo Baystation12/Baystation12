@@ -954,3 +954,179 @@
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_skrell.dmi'
 		species_allowed = list(SPECIES_SKRELL)
+
+/*
+////////////////////////////
+/  =--------------------=  /
+/  ==  Body Markings   ==  /
+/  =--------------------=  /
+////////////////////////////
+*/
+/datum/sprite_accessory/marking
+	icon = 'icons/mob/human_races/markings.dmi'
+	do_colouration = 1 //Almost all of them have it, COLOR_ADD
+
+	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
+	//like Tajara inner-ear coloring overlay stuff.
+	species_allowed = list()
+
+	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
+	//Reminder: BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN,BP_HEAD
+
+/datum/sprite_accessory/marking/tat_heart
+	name = "Tattoo (Heart, Torso)"
+	icon_state = "tat_heart"
+	body_parts = list(BP_CHEST)
+
+/datum/sprite_accessory/marking/tat_hive
+	name = "Tattoo (Hive, Back)"
+	icon_state = "tat_hive"
+	body_parts = list(BP_CHEST)
+
+/datum/sprite_accessory/marking/tat_nightling
+	name = "Tattoo (Nightling, Back)"
+	icon_state = "tat_nightling"
+	body_parts = list(BP_CHEST)
+
+/datum/sprite_accessory/marking/tat_campbell
+	name = "Tattoo (Campbell, R.Arm)"
+	icon_state = "tat_campbell"
+	body_parts = list(BP_R_ARM)
+
+/datum/sprite_accessory/marking/tat_campbell/left
+		name = "Tattoo (Campbell, L.Arm)"
+		body_parts = list(BP_L_ARM)
+
+/datum/sprite_accessory/marking/tat_tiger
+	name = "Tattoo (Tiger Stripes, Body)"
+	icon_state = "tat_tiger"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN)
+
+/datum/sprite_accessory/marking/taj_paw_socks
+	name = "Socks Coloration (Taj)"
+	icon_state = "taj_pawsocks"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/paw_socks
+	name = "Socks Coloration (Generic)"
+	icon_state = "pawsocks"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/belly_hands_feet
+	name = "Hands/Feet/Belly Color (Minor)"
+	icon_state = "bellyhandsfeetsmall"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_CHEST)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/hands_feet_belly_full
+	name = "Hands/Feet/Belly Color (Major)"
+	icon_state = "bellyhandsfeet"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_CHEST)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/hands_feet_belly_full_female
+	name = "Hands,Feet,Belly Color (Major, Female)"
+	icon_state = "bellyhandsfeet_female"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_CHEST)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/patches
+	name = "Color Patches"
+	icon_state = "patches"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/patchesface
+	name = "Color Patches (Face)"
+	icon_state = "patchesface"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/bands
+	name = "Color Bands"
+	icon_state = "bands"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN)
+
+/datum/sprite_accessory/marking/bandsface
+	name = "Color Bands (Face)"
+	icon_state = "bandsface"
+	body_parts = list(BP_HEAD)
+
+/datum/sprite_accessory/marking/tiger_stripes
+	name = "Tiger Stripes"
+	icon_state = "tiger"
+	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_GROIN)
+	species_allowed = list("Tajara") //There's a tattoo for non-cats
+
+/datum/sprite_accessory/marking/tigerhead
+	name = "Tiger Stripes (Head, Minor)"
+	icon_state = "tigerhead"
+	body_parts = list(BP_HEAD)
+
+/datum/sprite_accessory/marking/tigerface
+	name = "Tiger Stripes (Head, Major)"
+	icon_state = "tigerface"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara") //There's a tattoo for non-cats
+
+/datum/sprite_accessory/marking/backstripe
+	name = "Back Stripe"
+	icon_state = "backstripe"
+	body_parts = list(BP_CHEST)
+
+//Taj specific stuff
+/datum/sprite_accessory/marking/taj_belly
+	name = "Belly Fur (Taj)"
+	icon_state = "taj_belly"
+	body_parts = list(BP_CHEST)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_bellyfull
+	name = "Belly Fur Wide (Taj)"
+	icon_state = "taj_bellyfull"
+	body_parts = list(BP_CHEST)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_earsout
+	name = "Outer Ear (Taj)"
+	icon_state = "taj_earsout"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_earsin
+	name = "Inner Ear (Taj)"
+	icon_state = "taj_earsin"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_nose
+	name = "Nose Color (Taj)"
+	icon_state = "taj_nose"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_crest
+	name = "Chest Fur Crest (Taj)"
+	icon_state = "taj_crest"
+	body_parts = list(BP_CHEST)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_muzzle
+	name = "Muzzle Color (Taj)"
+	icon_state = "taj_muzzle"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_face
+	name = "Cheeks Color (Taj)"
+	icon_state = "taj_face"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
+
+/datum/sprite_accessory/marking/taj_all
+	name = "All Taj Head (Taj)"
+	icon_state = "taj_all"
+	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")

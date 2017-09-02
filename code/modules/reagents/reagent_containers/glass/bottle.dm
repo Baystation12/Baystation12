@@ -67,7 +67,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline/New()
 	..()
-	reagents.add_reagent("inaprovaline", 60)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 	update_icon()
 
 
@@ -79,7 +79,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/toxin/New()
 	..()
-	reagents.add_reagent("toxin", 60)
+	reagents.add_reagent(/datum/reagent/toxin, 60)
 	update_icon()
 
 
@@ -91,7 +91,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/cyanide/New()
 	..()
-	reagents.add_reagent("cyanide", 30) //volume changed to match chloral
+	reagents.add_reagent(/datum/reagent/toxin/cyanide, 30) //volume changed to match chloral
 	update_icon()
 
 
@@ -103,7 +103,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin/New()
 	..()
-	reagents.add_reagent("stoxin", 60)
+	reagents.add_reagent(/datum/reagent/soporific, 60)
 	update_icon()
 
 
@@ -115,7 +115,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate/New()
 	..()
-	reagents.add_reagent("chloralhydrate", 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
+	reagents.add_reagent(/datum/reagent/chloralhydrate, 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
 	update_icon()
 
 
@@ -127,7 +127,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin/New()
 	..()
-	reagents.add_reagent("anti_toxin", 60)
+	reagents.add_reagent(/datum/reagent/dylovene, 60)
 	update_icon()
 
 
@@ -139,7 +139,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/mutagen/New()
 	..()
-	reagents.add_reagent("mutagen", 60)
+	reagents.add_reagent(/datum/reagent/mutagen, 60)
 	update_icon()
 
 
@@ -151,7 +151,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/ammonia/New()
 	..()
-	reagents.add_reagent("ammonia", 60)
+	reagents.add_reagent(/datum/reagent/ammonia, 60)
 	update_icon()
 
 
@@ -163,7 +163,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/eznutrient/New()
 	..()
-	reagents.add_reagent("eznutrient", 60)
+	reagents.add_reagent(/datum/reagent/toxin/fertilizer/eznutrient, 60)
 	update_icon()
 
 
@@ -175,7 +175,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/left4zed/New()
 	..()
-	reagents.add_reagent("left4zed", 60)
+	reagents.add_reagent(/datum/reagent/toxin/fertilizer/left4zed, 60)
 	update_icon()
 
 
@@ -187,7 +187,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/robustharvest/New()
 	..()
-	reagents.add_reagent("robustharvest", 60)
+	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
 	update_icon()
 
 
@@ -199,7 +199,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/diethylamine/New()
 	..()
-	reagents.add_reagent("diethylamine", 60)
+	reagents.add_reagent(/datum/reagent/diethylamine, 60)
 	update_icon()
 
 
@@ -211,7 +211,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/pacid/New()
 	..()
-	reagents.add_reagent("pacid", 60)
+	reagents.add_reagent(/datum/reagent/acid/polyacid, 60)
 	update_icon()
 
 
@@ -224,7 +224,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/adminordrazine/New()
 	..()
-	reagents.add_reagent("adminordrazine", 60)
+	reagents.add_reagent(/datum/reagent/adminordrazine, 60)
 	update_icon()
 
 
@@ -236,7 +236,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/capsaicin/New()
 	..()
-	reagents.add_reagent("capsaicin", 60)
+	reagents.add_reagent(/datum/reagent/capsaicin, 60)
 	update_icon()
 
 
@@ -248,5 +248,5 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/frostoil/New()
 	..()
-	reagents.add_reagent("frostoil", 60)
+	reagents.add_reagent(/datum/reagent/frostoil, 60)
 	update_icon()

@@ -2,8 +2,9 @@
 	name = "portable cooling unit"
 	desc = "A large portable heat sink with liquid cooled radiator packaged into a modified backpack."
 	description_info = "You may wear this instead of your packpack to cool yourself down. It is commonly used by IPCs, \
-	as it allows them to go into low pressure environments for more than few seconds without overhating. It runs off energy provided by internal power cell. \
+	as it allows them to go into low pressure environments for more than few seconds without overheating. It runs off energy provided by an internal power cell. \
 	Remember to turn it on by clicking it when it's your in your hand before you put it on."
+	description_fluff = "Before the advent of ultra-heat-resistant fibers and flexible alloyed shielding, portable coolers were most commonly used to keep technicians from roasting alive in their suits. Nowadays they have been repurposed to keep IPCs from overheating in vacuum environments."
 
 	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/suitcooler.dmi'
