@@ -666,12 +666,13 @@
 	icon_state = "hunterhide"
 	item_state = "hunter"
 	worn_state = "hunter"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/under/savage_hunter/female
 	name = "savage huntress's hides"
 	desc = "Makeshift hides bound together with the sinew, packwax, and leather of some alien creature. Includes a chestwrap so as not to leave one topless."
 	worn_state = "huntress"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/under/wetsuit
 	name = "tactical wetsuit"
@@ -679,4 +680,4 @@
 	icon_state = "wetsuit"
 	item_state = "wetsuit"
 	worn_state = "wetsuit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
