@@ -499,8 +499,12 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_maint_tunnels, access_engine, access_engine_equip, access_emergency_storage, access_janitor, access_construction, access_solgov_crew)
-	minimal_access = list(access_maint_tunnels, access_engine, access_engine_equip, access_emergency_storage, access_janitor, access_construction, access_solgov_crew)
+	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
+			            access_solgov_crew)
+	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
+			            access_solgov_crew)
 
 
 /datum/job/roboticist
