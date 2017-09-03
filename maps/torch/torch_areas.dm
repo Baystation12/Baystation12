@@ -347,15 +347,26 @@
 	name = "\improper Escape Pod Twelve"
 	flags = AREA_RAD_SHIELDED
 
-//Calypso
+//Charon
 
-/area/calypso_hangar/start
-	name = "\improper Calypso"
+/area/exploration_shuttle/
+	name = "\improper Charon"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
-	requires_power = 1
-	dynamic_lighting = 1
 	flags = AREA_RAD_SHIELDED
+
+/area/exploration_shuttle/cockpit
+	name = "\improper Charon - Cockpit"
+/area/exploration_shuttle/atmos
+	name = "\improper Charon - Atmos Compartment"
+/area/exploration_shuttle/power
+	name = "\improper Charon - Power Compartment"
+/area/exploration_shuttle/crew
+	name = "\improper Charon - Crew Compartment"
+/area/exploration_shuttle/cargo
+	name = "\improper Charon - Cargo Bay"
+/area/exploration_shuttle/airlock
+	name = "\improper Charon - Airlock Compartment"
 
 //Aquila
 
