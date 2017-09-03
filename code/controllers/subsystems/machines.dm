@@ -3,9 +3,6 @@
 #define SSMACHINES_POWERNETS     3
 #define SSMACHINES_POWER_OBJECTS 4
 
-#define START_MACHINE_PROCESSING(machine) if(!machine.is_processing) {machine.is_processing = TRUE;ADD_SORTED(SSmachines.machinery, machine, /proc/cmp_name_asc)}
-#define STOP_MACHINE_PROCESSING(machine) machine.is_processing = FALSE;SSmachines.machinery -= machine
-
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = INIT_ORDER_MACHINES
@@ -24,7 +21,11 @@ SUBSYSTEM_DEF(machines)
 	var/list/powernets     = list()
 	var/list/power_objects = list()
 
+	var/list/processing
 	var/list/current_run = list()
+
+/datum/controller/subsystem/machines/PreInit()
+	 processing = machinery
 
 /datum/controller/subsystem/machines/Initialize(timeofday)
 	makepowernets()
