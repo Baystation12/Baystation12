@@ -78,6 +78,8 @@
 /turf/simulated/floor/reinforced/nitrogen
 	initial_gas = list("nitrogen" = ATMOSTANK_NITROGEN)
 
+/turf/simulated/floor/reinforced/hydrogen
+	initial_gas = list("hydrogen" = ATMOSTANK_HYDROGEN)
 
 /turf/simulated/floor/reinforced/oxygen
 	initial_gas = list("oxygen" = ATMOSTANK_OXYGEN)

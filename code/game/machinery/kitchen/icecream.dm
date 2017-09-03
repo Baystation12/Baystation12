@@ -53,7 +53,7 @@
 		if(ICECREAM_CHERRY)
 			return "cherry"
 		if(ICECREAM_BANANA)
-			return /datum/reagent/drink/juice/banana
+			return "banana"
 		if(CONE_WAFFLE)
 			return "waffle"
 		if(CONE_CHOC)
