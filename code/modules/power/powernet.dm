@@ -21,7 +21,7 @@
 	var/problem = 0				// If this is not 0 there is some sort of issue in the powernet. Monitors will display warnings.
 
 /datum/powernet/New()
-	GLOB.powernets += src
+	SSmachines.powernets += src
 	..()
 
 /datum/powernet/Destroy()
@@ -31,7 +31,7 @@
 	for(var/obj/machinery/power/M in nodes)
 		nodes -= M
 		M.powernet = null
-	GLOB.powernets -= src
+	SSmachines.powernets -= src
 	return ..()
 
 //Returns the amount of excess power (before refunding to SMESs) from last tick.

@@ -1,6 +1,12 @@
 /proc/cmp_numeric_asc(a,b)
 	return a - b
 
+/proc/cmp_name_asc(atom/a, atom/b)
+	return sorttext(b.name, a.name)
+
+/proc/cmp_name_dsc(atom/a, atom/b)
+	return sorttext(a.name, b.name)
+
 /proc/cmp_crew_sensor_modifier(var/crew_sensor_modifier/a, var/crew_sensor_modifier/b)
 	return b.priority - a.priority
 

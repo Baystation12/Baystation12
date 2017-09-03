@@ -81,7 +81,7 @@ var/list/points_of_interest = list()
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
-	for(var/obj/machinery/computer/helm/H in GLOB.machines)
+	for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
 		H.get_known_sectors()
 
 /proc/build_overmap()

@@ -120,14 +120,13 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-	if(!machinery_sort_required && ticker)
-		dd_insertObjectList(GLOB.machines, src)
-	else
-		GLOB.machines += src
-		machinery_sort_required = 1
+
+/obj/machinery/Initialize()
+	. = ..()
+	START_MACHINE_PROCESSING(src)
 
 /obj/machinery/Destroy()
-	GLOB.machines -= src
+	STOP_MACHINE_PROCESSING(src)
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
