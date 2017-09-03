@@ -12,6 +12,7 @@
 	var/list/network = list(NETWORK_EXODUS)
 	var/c_tag = null
 	var/c_tag_order = 999
+	var/number = 0 //camera number in area
 	var/status = 1
 	anchored = 1.0
 	var/invuln = null
@@ -83,6 +84,20 @@
 		ASSERT(src.network)
 		ASSERT(src.network.len > 0)
 	..()
+
+/obj/machinery/camera/Initialize()
+	. = ..()
+	if(!c_tag)
+		number = 1
+		var/area/A = get_area(src)
+		if(A)
+			for(var/obj/machinery/camera/C in A)
+				if(C == src) continue
+				if(C.number)
+					number = max(number, C.number+1)
+			c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
+		invalidateCameraCache()
+
 
 /obj/machinery/camera/Destroy()
 	deactivate(null, 0) //kick anyone viewing out
