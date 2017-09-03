@@ -163,10 +163,10 @@ name updates also zero the list; although they are not in data_core, synths are 
 
 
 	// Silicons do not have records. See also /datum/datacore/proc/get_manifest
-	for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
 		bot[++bot.len] = list("name" = ai.name, "rank" = "Artificial Intelligence", "active" = null)
 
-	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
+	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
 		// No combat/syndicate cyborgs, no drones.
 		if(robot.module && robot.module.hide_on_manifest)
 			continue

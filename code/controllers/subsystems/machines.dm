@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = INIT_ORDER_MACHINES
 	flags = SS_KEEP_TIMING
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
 
 	var/current_step = SSMACHINES_PIPENETS
 

@@ -492,7 +492,7 @@ datum/objective/steal
 				return found_amount>=target_amount
 
 			if("a functional AI")
-				for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
+				for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
 					if(ai.stat == DEAD)
 						continue
 					var/turf/T = get_turf(ai)
