@@ -191,7 +191,7 @@
 		return
 
 	var/list/L = list()
-	for(var/mob/living/silicon/robot/RB in GLOB.mob_list)
+	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
 		if(istype(RB, /mob/living/silicon/robot/drone))
 			continue
 		if(RB.connected_ai == A)
@@ -209,7 +209,7 @@
 		return
 
 	var/list/L = list()
-	for(var/mob/living/silicon/ai/AT in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/AT in SSmobs.mob_list)
 		if(L == A)
 			continue
 		L.Add(AT)
@@ -224,6 +224,6 @@
 	admin_attack_log(A, null, message, null, message)
 
 proc/check_for_interception()
-	for(var/mob/living/silicon/ai/A in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/A in SSmobs.mob_list)
 		if(A.intercepts_communication)
 			return A

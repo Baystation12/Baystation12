@@ -99,6 +99,8 @@
 			return global.SSlegacy;
 		if("SSmachines")
 			return global.SSmachines;
+		if("SSmobs")
+			return global.SSmobs;
 		if("SSobj")
 			return global.SSobj;
 		if("SSprocessing")
@@ -1274,6 +1276,8 @@
 			global.SSlegacy=newval;
 		if("SSmachines")
 			global.SSmachines=newval;
+		if("SSmobs")
+			global.SSmobs=newval;
 		if("SSobj")
 			global.SSobj=newval;
 		if("SSprocessing")
@@ -2399,6 +2403,7 @@
 	"SSgarbage",
 	"SSlegacy",
 	"SSmachines",
+	"SSmobs",
 	"SSobj",
 	"SSprocessing",
 	"TELEBLOCK",

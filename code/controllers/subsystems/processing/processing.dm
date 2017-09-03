@@ -6,23 +6,25 @@ SUBSYSTEM_DEF(processing)
 	flags = SS_BACKGROUND|SS_POST_FIRE_TIMING|SS_NO_INIT
 	wait = 10
 
-	var/stat_tag = "P" //Used for logging
 	var/list/processing = list()
-	var/list/currentrun = list()
+	var/list/current_run = list()
+	var/process_proc = /datum/proc/Process
 
 /datum/controller/subsystem/processing/stat_entry()
-	..("[stat_tag]:[processing.len]")
+	..(processing.len)
 
 /datum/controller/subsystem/processing/fire(resumed = 0)
 	if (!resumed)
-		currentrun = processing.Copy()
+		src.current_run = processing.Copy()
 	//cache for sanic speed (lists are references anyways)
-	var/list/current_run = currentrun
+	var/list/current_run = src.current_run
+	var/wait = src.wait
+	var/times_fired = src.times_fired
 
 	while(current_run.len)
 		var/datum/thing = current_run[current_run.len]
 		current_run.len--
-		if(QDELETED(thing) || thing.Process(wait) == PROCESS_KILL)
+		if(QDELETED(thing) || (call(thing, process_proc)(wait, times_fired) == PROCESS_KILL))
 			processing -= thing
 		if (MC_TICK_CHECK)
 			return

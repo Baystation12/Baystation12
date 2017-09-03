@@ -75,4 +75,9 @@
 	NEW_SS_GLOBAL(SS##X);\
 	PreInit();\
 }\
+/datum/controller/subsystem/processing/##X/Recover() {\
+    if(istype(SS##X.processing)) {\
+        processing = SS##X.processing; \
+    }\
+}\
 /datum/controller/subsystem/processing/##X
