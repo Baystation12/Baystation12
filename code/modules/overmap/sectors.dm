@@ -88,7 +88,7 @@ var/list/points_of_interest = list()
 	. = ..()
 	if(known)
 		set_light(2, 5)
-		for(var/obj/machinery/computer/helm/H in GLOB.machines)
+		for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
 			H.get_known_sectors()
 
 /proc/build_overmap()

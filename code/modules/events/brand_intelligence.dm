@@ -12,7 +12,7 @@
 
 
 /datum/event/brand_intelligence/start()
-	for(var/obj/machinery/vending/V in GLOB.machines)
+	for(var/obj/machinery/vending/V in SSmachines.machinery)
 		if(isNotStationLevel(V.z))	continue
 		vendingMachines.Add(V)
 

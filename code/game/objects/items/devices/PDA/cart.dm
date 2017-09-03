@@ -256,7 +256,7 @@
 		var/list/sensors = list()
 		var/obj/machinery/power/sensor/MS = null
 
-		for(var/obj/machinery/power/sensor/S in GLOB.machines)
+		for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
 			sensors.Add(list(list("name_tag" = S.name_tag)))
 			if(S.name_tag == selected_sensor)
 				MS = S

@@ -818,7 +818,7 @@ datum/objective/heist/salvage
 	explanation_text = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it. The convert rune is join blood self."
 
 /datum/objective/cult/eldergod/check_completion()
-	return (locate(/obj/singularity/narsie/large) in GLOB.machines)
+	return (locate(/obj/singularity/narsie/large) in SSmachines.machinery)
 
 /datum/objective/cult/sacrifice
 	explanation_text = "Conduct a ritual sacrifice for the glory of Nar-Sie."

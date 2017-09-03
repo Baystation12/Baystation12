@@ -41,7 +41,7 @@
 
 	..()
 	GLOB.processing_objects += src
-	for(var/obj/machinery/power/singularity_beacon/singubeacon in GLOB.machines)
+	for(var/obj/machinery/power/singularity_beacon/singubeacon in SSmachines.machinery)
 		if(singubeacon.active)
 			target = singubeacon
 			break

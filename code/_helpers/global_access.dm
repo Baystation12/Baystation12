@@ -95,6 +95,8 @@
 			return global.SSgarbage;
 		if("SSlegacy")
 			return global.SSlegacy;
+		if("SSmachines")
+			return global.SSmachines;
 		if("TELEBLOCK")
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
@@ -639,8 +641,6 @@
 			return global.lunchables_lunches_;
 		if("lunchables_snacks_")
 			return global.lunchables_snacks_;
-		if("machinery_sort_required")
-			return global.machinery_sort_required;
 		if("magazine_icondata_keys")
 			return global.magazine_icondata_keys;
 		if("magazine_icondata_states")
@@ -1264,6 +1264,8 @@
 			global.SSgarbage=newval;
 		if("SSlegacy")
 			global.SSlegacy=newval;
+		if("SSmachines")
+			global.SSmachines=newval;
 		if("TELEBLOCK")
 			global.TELEBLOCK=newval;
 		if("TWITCHBLOCK")
@@ -1808,8 +1810,6 @@
 			global.lunchables_lunches_=newval;
 		if("lunchables_snacks_")
 			global.lunchables_snacks_=newval;
-		if("machinery_sort_required")
-			global.machinery_sort_required=newval;
 		if("magazine_icondata_keys")
 			global.magazine_icondata_keys=newval;
 		if("magazine_icondata_states")
@@ -2385,6 +2385,7 @@
 	"SSatoms",
 	"SSgarbage",
 	"SSlegacy",
+	"SSmachines",
 	"TELEBLOCK",
 	"TWITCHBLOCK",
 	"Tier1Runes",
@@ -2657,7 +2658,6 @@
 	"lunchables_ethanol_reagents_",
 	"lunchables_lunches_",
 	"lunchables_snacks_",
-	"machinery_sort_required",
 	"magazine_icondata_keys",
 	"magazine_icondata_states",
 	"maint_all_access",

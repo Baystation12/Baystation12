@@ -170,7 +170,7 @@
 		if(href_list["alarm"])
 			alarm()
 		if(href_list["drive"])
-			for(var/obj/machinery/mass_driver/M in GLOB.machines)
+			for(var/obj/machinery/mass_driver/M in SSmachines.machinery)
 				if(M.id == id)
 					M.power = connected.power
 					M.drive()

@@ -101,7 +101,8 @@
 			singulo.target = src
 	icon_state = "[icontype]1"
 	active = 1
-	GLOB.machines |= src
+	if(!(src in SSmachines.machinery))
+		START_MACHINE_PROCESSING(src)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
