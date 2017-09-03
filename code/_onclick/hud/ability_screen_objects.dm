@@ -97,9 +97,9 @@
 
 /obj/screen/movable/ability_master/update_icon()
 	if(ability_objects.len)
-		invisibility = 0
+		set_invisibility(0)
 	else
-		invisibility = 101
+		set_invisibility(101)
 
 /obj/screen/movable/ability_master/proc/add_ability(var/name_given)
 	if(!name) return
@@ -162,8 +162,8 @@
 		ability_master.update_abilities(1, src)
 		ability_master.toggle_open(1)
 
-/mob/New()
-	..()
+/mob/Initialize()
+	. = ..()
 	ability_master = new /obj/screen/movable/ability_master(null,src)
 
 ///////////ACTUAL ABILITIES////////////

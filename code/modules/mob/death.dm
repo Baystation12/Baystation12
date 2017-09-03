@@ -5,7 +5,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	invisibility = 101
+	set_invisibility(101)
 	update_canmove()
 	remove_from_dead_mob_list()
 
@@ -31,7 +31,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	invisibility = 101
+	set_invisibility(101)
 
 	animation = new(loc)
 	animation.icon_state = "blank"
