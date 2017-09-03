@@ -85,7 +85,7 @@
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
-	START_MACHINE_PROCESSING(src)
+	START_PROCESSING(SSmachines, src)
 	update_coverage()
 
 /obj/machinery/camera/proc/setPowerUsage()

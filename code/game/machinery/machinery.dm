@@ -123,10 +123,10 @@ Class Procs:
 
 /obj/machinery/Initialize()
 	. = ..()
-	START_MACHINE_PROCESSING(src)
+	START_PROCESSING(SSmachines, src)
 
 /obj/machinery/Destroy()
-	STOP_MACHINE_PROCESSING(src)
+	STOP_PROCESSING(SSmachines, src)
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
