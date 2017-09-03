@@ -697,8 +697,6 @@
 			return global.meteors_normal;
 		if("meteors_threatening")
 			return global.meteors_threatening;
-		if("midnight_rollovers")
-			return global.midnight_rollovers;
 		if("mil_branches")
 			return global.mil_branches;
 		if("mining_floors")
@@ -895,8 +893,6 @@
 			return global.robot_inventory;
 		if("robot_modules")
 			return global.robot_modules;
-		if("rollovercheck_last_timeofday")
-			return global.rollovercheck_last_timeofday;
 		if("round_progressing")
 			return global.round_progressing;
 		if("round_start_time")
@@ -1870,8 +1866,6 @@
 			global.meteors_normal=newval;
 		if("meteors_threatening")
 			global.meteors_threatening=newval;
-		if("midnight_rollovers")
-			global.midnight_rollovers=newval;
 		if("mil_branches")
 			global.mil_branches=newval;
 		if("mining_floors")
@@ -2068,8 +2062,6 @@
 			global.robot_inventory=newval;
 		if("robot_modules")
 			global.robot_modules=newval;
-		if("rollovercheck_last_timeofday")
-			global.rollovercheck_last_timeofday=newval;
 		if("round_progressing")
 			global.round_progressing=newval;
 		if("round_start_time")
@@ -2694,7 +2686,6 @@
 	"meteors_moderate",
 	"meteors_normal",
 	"meteors_threatening",
-	"midnight_rollovers",
 	"mil_branches",
 	"mining_floors",
 	"mining_walls",
@@ -2793,7 +2784,6 @@
 	"robot_hud_colours",
 	"robot_inventory",
 	"robot_modules",
-	"rollovercheck_last_timeofday",
 	"round_progressing",
 	"round_start_time",
 	"roundstart_hour",

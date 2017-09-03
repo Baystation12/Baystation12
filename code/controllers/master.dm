@@ -18,7 +18,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	name = "Master"
 
 	// Are we processing (higher values increase the processing delay by n ticks)
-	var/processing = 1
+	var/processing = TRUE
 	// How many times have we ran
 	var/iteration = 0
 
@@ -32,8 +32,6 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/init_timeofday
 	var/init_time
 	var/tickdrift = 0
-
-	var/list/total_run_times
 
 	var/sleep_delta
 
@@ -50,6 +48,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/queue_priority_count_bg = 0 //Same, but for background subsystems
 	var/map_loading = FALSE	//Are we loading in a new map?
 
+	var/list/total_run_times
 	var/current_runlevel	//for scheduling different subsystems for different stages of the round
 
 	var/static/restart_clear = 0
@@ -61,15 +60,19 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/static/current_ticklimit = TICK_LIMIT_RUNNING
 
 /datum/controller/master/New()
-	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
-	subsystems = list()
 	total_run_times = list()
+	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
+	var/list/_subsystems = list()
+	subsystems = _subsystems
 	if (Master != src)
 		if (istype(Master))
 			Recover()
 			qdel(Master)
 		else
-			init_subtypes(/datum/controller/subsystem, subsystems)
+			var/list/subsytem_types = subtypesof(/datum/controller/subsystem)
+			sortTim(subsytem_types, /proc/cmp_subsystem_init)
+			for(var/I in subsytem_types)
+				_subsystems += new I
 		Master = src
 
 	if(!GLOB)
@@ -100,7 +103,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/delay = 50 * ++Master.restart_count
 	Master.restart_timeout = world.time + delay
 	Master.restart_clear = world.time + (delay * 2)
-	Master.processing = 0 //stop ticking this one
+	Master.processing = FALSE //stop ticking this one
 	try
 		new/datum/controller/master()
 	catch
@@ -127,7 +130,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/FireHim = FALSE
 	if(istype(BadBoy))
 		msg = null
-		switch(++BadBoy.failure_strikes)
+		LAZYINITLIST(BadBoy.failure_strikes)
+		switch(++BadBoy.failure_strikes[BadBoy.type])
 			if(2)
 				msg = "The [BadBoy.name] subsystem was the last to fire for 2 controller restarts. It will be recovered now and disabled if it happens again."
 				FireHim = TRUE
@@ -146,7 +150,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		total_run_times = Master.total_run_times
 		StartProcessing(10)
 	else
-		report_progress("The Master Controller is having some issues, we will need to re-initialize EVERYTHING")
+		to_chat(world, "<span class='boldannounce'>The Master Controller is having some issues, we will need to re-initialize EVERYTHING</span>")
 		Initialize(20, TRUE)
 
 
@@ -177,7 +181,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	current_ticklimit = TICK_LIMIT_RUNNING
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
 
-	var/msg = "Initializations complete within [time] second[time == 1 ? "" : "s"]!"
+	var/msg = "Initializations complete within [time] second\s!"
 	report_progress(msg)
 	log_world(msg)
 
@@ -291,7 +295,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 		//if there are mutiple sleeping procs running before us hogging the cpu, we have to run later
 		//	because sleeps are processed in the order received, so longer sleeps are more likely to run first
-		if (world.tick_usage > TICK_LIMIT_MC)
+		if (TICK_USAGE > TICK_LIMIT_MC)
 			sleep_delta += 2
 			current_ticklimit = TICK_LIMIT_RUNNING * 0.5
 			sleep(world.tick_lag * (processing + sleep_delta))
@@ -300,7 +304,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		sleep_delta = MC_AVERAGE_FAST(sleep_delta, 0)
 		if (last_run + (world.tick_lag * processing) > world.time)
 			sleep_delta += 1
-		if (world.tick_usage > (TICK_LIMIT_MC*0.5))
+		if (TICK_USAGE > (TICK_LIMIT_MC*0.5))
 			sleep_delta += 1
 
 		if (make_runtime)
@@ -406,13 +410,13 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 	//keep running while we have stuff to run and we haven't gone over a tick
 	//	this is so subsystems paused eariler can use tick time that later subsystems never used
-	while (ran && queue_head && world.tick_usage < TICK_LIMIT_MC)
+	while (ran && queue_head && TICK_USAGE < TICK_LIMIT_MC)
 		ran = FALSE
 		bg_calc = FALSE
 		current_tick_budget = queue_priority_count
 		queue_node = queue_head
 		while (queue_node)
-			if (ran && world.tick_usage > TICK_LIMIT_RUNNING)
+			if (ran && TICK_USAGE > TICK_LIMIT_RUNNING)
 				break
 
 			queue_node_flags = queue_node.flags
@@ -424,7 +428,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 			//(unless we haven't even ran anything this tick, since its unlikely they will ever be able run
 			//	in those cases, so we just let them run)
 			if (queue_node_flags & SS_NO_TICK_CHECK)
-				if (queue_node.tick_usage > TICK_LIMIT_RUNNING - world.tick_usage && ran_non_ticker)
+				if (queue_node.tick_usage > TICK_LIMIT_RUNNING - TICK_USAGE && ran_non_ticker)
 					queue_node.queued_priority += queue_priority_count * 0.10
 					queue_priority_count -= queue_node_priority
 					queue_priority_count += queue_node.queued_priority
@@ -436,7 +440,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 				current_tick_budget = queue_priority_count_bg
 				bg_calc = TRUE
 
-			tick_remaining = TICK_LIMIT_RUNNING - world.tick_usage
+			tick_remaining = TICK_LIMIT_RUNNING - TICK_USAGE
 
 			if (current_tick_budget > 0 && queue_node_priority > 0)
 				tick_precentage = tick_remaining / (current_tick_budget / queue_node_priority)
@@ -445,7 +449,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 			tick_precentage = max(tick_precentage*0.5, tick_precentage-queue_node.tick_overrun)
 
-			current_ticklimit = round(world.tick_usage + tick_precentage)
+			current_ticklimit = round(TICK_USAGE + tick_precentage)
 
 			if (!(queue_node_flags & SS_TICKER))
 				ran_non_ticker = TRUE
@@ -456,9 +460,9 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 			queue_node.state = SS_RUNNING
 
-			tick_usage = world.tick_usage
+			tick_usage = TICK_USAGE
 			var/state = queue_node.ignite(queue_node_paused)
-			tick_usage = world.tick_usage - tick_usage
+			tick_usage = TICK_USAGE - tick_usage
 
 			if (state == SS_RUNNING)
 				state = SS_IDLE
