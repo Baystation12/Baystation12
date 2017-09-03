@@ -241,11 +241,11 @@
 	plane = ABOVE_TURF_PLANE
 	layer = RUNE_LAYER
 
-/obj/effect/golemrune/New()
+/obj/effect/golemrune/Initialize()
 	..()
-	GLOB.processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
-/obj/effect/golemrune/process()
+/obj/effect/golemrune/Process()
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)	continue

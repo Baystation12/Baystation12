@@ -57,7 +57,7 @@
 //Main door timer loop, if it's timing and time is >0 reduce time by 1.
 // if it's less than 0, open door, reset timer
 // update the door_timer window and the icon
-/obj/machinery/door_timer/process()
+/obj/machinery/door_timer/Process()
 
 	if(stat & (NOPOWER|BROKEN))	return
 	if(src.timing)

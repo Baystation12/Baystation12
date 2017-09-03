@@ -9,7 +9,7 @@
 	var/obj/machinery/embedded_controller/radio/airlock/master_controller
 	var/id_tag
 
-/obj/machinery/dummy_airlock_controller/process()
+/obj/machinery/dummy_airlock_controller/Process()
 	if(master_controller)
 		appearance = master_controller
 	. = ..()

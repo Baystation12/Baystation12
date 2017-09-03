@@ -3,8 +3,8 @@
 #define SSMACHINES_POWERNETS     3
 #define SSMACHINES_POWER_OBJECTS 4
 
-#define START_MACHINE_PROCESSING(machine) ADD_SORTED(SSmachines.machinery, machine, /proc/cmp_name_asc)
-#define STOP_MACHINE_PROCESSING(machine) SSmachines.machinery -= machine
+#define START_MACHINE_PROCESSING(machine) if(!machine.is_processing) {machine.is_processing = TRUE;ADD_SORTED(SSmachines.machinery, machine, /proc/cmp_name_asc)}
+#define STOP_MACHINE_PROCESSING(machine) machine.is_processing = FALSE;SSmachines.machinery -= machine
 
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
@@ -66,8 +66,8 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
 
-/datum/controller/subsystem/machines/stat_entry(msg)
-	msg = list(msg)
+/datum/controller/subsystem/machines/stat_entry()
+	var/msg = list()
 	msg += "C:{"
 	msg += "PI:[round(cost_pipenets,1)]|"
 	msg += "MC:[round(cost_machinery,1)]|"
@@ -82,7 +82,6 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	..(jointext(msg, null))
 
 /datum/controller/subsystem/machines/proc/process_pipenets(resumed = 0)
-	var/seconds = wait * 0.1
 	if (!resumed)
 		src.current_run = pipenets.Copy()
 	//cache for sanic speed (lists are references anyways)
@@ -91,14 +90,13 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 		var/datum/pipe_network/PN = current_run[current_run.len]
 		current_run.len--
 		if(istype(PN) && !QDELETED(PN))
-			PN.process(seconds)
+			PN.Process(wait)
 		else
 			pipenets.Remove(PN)
 		if(MC_TICK_CHECK)
 			return
 
 /datum/controller/subsystem/machines/proc/process_machinery(resumed = 0)
-	var/seconds = wait * 0.1
 	if (!resumed)
 		src.current_run = machinery.Copy()
 
@@ -106,7 +104,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(istype(M) && !QDELETED(M) && !(M.process(seconds) == PROCESS_KILL))
+		if(istype(M) && !QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
 			if(M.use_power)
 				M.auto_use_power()
 		else
@@ -115,7 +113,6 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			return
 
 /datum/controller/subsystem/machines/proc/process_powernets(resumed = 0)
-	var/seconds = wait * 0.1
 	if (!resumed)
 		src.current_run = powernets.Copy()
 
@@ -124,14 +121,13 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 		var/datum/powernet/PN = current_run[current_run.len]
 		current_run.len--
 		if(istype(PN) && !QDELETED(PN))
-			PN.reset(seconds)
+			PN.reset(wait)
 		else
 			powernets.Remove(PN)
 		if(MC_TICK_CHECK)
 			return
 
 /datum/controller/subsystem/machines/proc/process_power_objects(resumed = 0)
-	var/seconds = wait * 0.1
 	if (!resumed)
 		src.current_run = power_objects.Copy()
 
@@ -139,7 +135,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	while(current_run.len)
 		var/obj/item/I = current_run[current_run.len]
 		current_run.len--
-		if(!I.pwr_drain(seconds)) // 0 = Process Kill, remove from processing list.
+		if(!I.pwr_drain(wait)) // 0 = Process Kill, remove from processing list.
 			power_objects.Remove(I)
 		if(MC_TICK_CHECK)
 			return

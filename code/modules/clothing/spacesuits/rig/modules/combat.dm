@@ -184,7 +184,7 @@
 
 	gun = /obj/item/weapon/gun/energy/crossbow/ninja
 
-/obj/item/rig_module/mounted/energy_blade/process()
+/obj/item/rig_module/mounted/energy_blade/Process()
 
 	if(holder && holder.wearer)
 		if(!(locate(/obj/item/weapon/melee/energy/blade) in holder.wearer))

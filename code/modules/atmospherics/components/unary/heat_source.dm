@@ -67,7 +67,7 @@
 	return
 
 
-/obj/machinery/atmospherics/unary/heater/process()
+/obj/machinery/atmospherics/unary/heater/Process()
 	..()
 
 	if(stat & (NOPOWER|BROKEN) || !use_power)

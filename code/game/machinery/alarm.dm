@@ -141,7 +141,7 @@
 	if (!master_is_operating())
 		elect_master()
 
-/obj/machinery/alarm/process()
+/obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
 
@@ -974,7 +974,7 @@ FIRE ALARM
 	src.alarm()
 	return
 
-/obj/machinery/firealarm/process()//Note: this processing was mostly phased out due to other code, and only runs when needed
+/obj/machinery/firealarm/Process()//Note: this processing was mostly phased out due to other code, and only runs when needed
 	if(stat & (NOPOWER|BROKEN))
 		return
 
@@ -985,14 +985,12 @@ FIRE ALARM
 			src.alarm()
 			src.time = 0
 			src.timing = 0
-			GLOB.processing_objects.Remove(src)
+			STOP_MACHINE_PROCESSING(src)
 		src.updateDialog()
 	last_process = world.timeofday
 
 	if(locate(/obj/fire) in loc)
 		alarm()
-
-	return
 
 /obj/machinery/firealarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))
@@ -1057,7 +1055,7 @@ FIRE ALARM
 		else if (href_list["time"])
 			src.timing = text2num(href_list["time"])
 			last_process = world.timeofday
-			GLOB.processing_objects.Add(src)
+			START_MACHINE_PROCESSING(src)
 		else if (href_list["tp"])
 			var/tp = text2num(href_list["tp"])
 			src.time += tp

@@ -38,7 +38,7 @@
 	if (stat & NOPOWER)
 		icon_state = "drone_fab_nopower"
 
-/obj/machinery/drone_fabricator/process()
+/obj/machinery/drone_fabricator/Process()
 
 	if(ticker.current_state < GAME_STATE_PLAYING)
 		return

@@ -129,7 +129,7 @@
 
 
 
-	process()
+	Process()
 		if(stat & NOPOWER)
 			on = 0
 
@@ -239,7 +239,7 @@
 			filter_path() // renders rpath
 
 
-	process()
+	Process()
 		if(magnets.len == 0 && autolink)
 			for(var/obj/machinery/magnetic_module/M in world)
 				if(M.freq == frequency && M.code == code)

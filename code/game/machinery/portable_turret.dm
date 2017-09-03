@@ -439,7 +439,7 @@ var/list/turret_icons
 	spark_system.start()	//creates some sparks because they look cool
 	update_icon()
 
-/obj/machinery/porta_turret/process()
+/obj/machinery/porta_turret/Process()
 	//the main machinery process
 
 	if(stat & (NOPOWER|BROKEN))

@@ -35,7 +35,7 @@
 		if (N.z in map_z)
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
-	GLOB.processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
@@ -106,7 +106,7 @@
 		if(direction & SOUTH)
 			adjust_speed(0, -get_burn_acceleration())
 
-/obj/effect/overmap/ship/process()
+/obj/effect/overmap/ship/Process()
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)

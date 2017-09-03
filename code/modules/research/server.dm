@@ -49,7 +49,7 @@
 		for(var/N in temp_list)
 			id_with_download += text2num(N)
 
-/obj/machinery/r_n_d/server/process()
+/obj/machinery/r_n_d/server/Process()
 	var/datum/gas_mixture/environment = loc.return_air()
 	switch(environment.temperature)
 		if(0 to T0C)
@@ -145,7 +145,7 @@
 				server_ids += num
 		no_id_servers -= S
 
-/obj/machinery/r_n_d/server/centcom/process()
+/obj/machinery/r_n_d/server/centcom/Process()
 	return PROCESS_KILL //don't need process()
 
 /obj/machinery/computer/rdservercontrol

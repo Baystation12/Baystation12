@@ -5,6 +5,7 @@
 	flags = PROXMOVE
 
 /obj/machinery/camera/internal_process()
+	..()
 	// motion camera event loop
 	if (stat & (EMPED|NOPOWER))
 		return

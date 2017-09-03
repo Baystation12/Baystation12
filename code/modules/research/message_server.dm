@@ -74,14 +74,12 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
 	..()
-	return
 
 /obj/machinery/message_server/Destroy()
 	message_servers -= src
-	..()
-	return
+	return ..()
 
-/obj/machinery/message_server/process()
+/obj/machinery/message_server/Process()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10

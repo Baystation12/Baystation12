@@ -63,7 +63,7 @@
 	poison_type = species.poison_type ? species.poison_type : "phoron"
 	exhale_type = species.exhale_type ? species.exhale_type : "carbon_dioxide"
 
-/obj/item/organ/internal/lungs/process()
+/obj/item/organ/internal/lungs/Process()
 	..()
 	if(!owner)
 		return

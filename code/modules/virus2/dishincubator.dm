@@ -88,7 +88,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/disease2/incubator/process()
+/obj/machinery/disease2/incubator/Process()
 	if(dish && on && dish.virus2)
 		use_power(50,EQUIP)
 		if(!powered(EQUIP))

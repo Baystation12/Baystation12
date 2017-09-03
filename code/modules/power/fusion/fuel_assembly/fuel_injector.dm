@@ -31,7 +31,7 @@ var/list/fuel_injectors = list()
 /obj/machinery/fusion_fuel_injector/mapped
 	anchored = 1
 
-/obj/machinery/fusion_fuel_injector/process()
+/obj/machinery/fusion_fuel_injector/Process()
 	if(injecting)
 		if(stat & (BROKEN|NOPOWER))
 			StopInjecting()

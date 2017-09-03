@@ -155,7 +155,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/unary/vent_pump/process()
+/obj/machinery/atmospherics/unary/vent_pump/Process()
 	..()
 
 	if (hibernate > world.time)
