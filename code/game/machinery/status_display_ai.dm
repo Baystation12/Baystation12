@@ -74,7 +74,7 @@ var/list/ai_status_emotions = list(
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
 	src.emotion = emote
 
-/obj/machinery/ai_status_display/process()
+/obj/machinery/ai_status_display/Process()
 	return
 
 /obj/machinery/ai_status_display/update_icon()

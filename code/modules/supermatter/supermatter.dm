@@ -289,7 +289,7 @@
 			public_alert = 0
 
 
-/obj/machinery/power/supermatter/process()
+/obj/machinery/power/supermatter/Process()
 
 	var/turf/L = loc
 

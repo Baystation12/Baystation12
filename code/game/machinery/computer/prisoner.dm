@@ -61,7 +61,7 @@
 		return
 
 
-	process()
+	Process()
 		if(!..())
 			src.updateDialog()
 		return

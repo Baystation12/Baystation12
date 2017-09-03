@@ -42,7 +42,7 @@
 		if(neighbor.seed == src.seed)
 			neighbor.neighbors -= T
 
-/obj/effect/plant/process()
+/obj/effect/plant/Process()
 
 	// Something is very wrong, kill ourselves.
 	if(!seed)

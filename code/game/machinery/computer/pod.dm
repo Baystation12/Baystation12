@@ -143,7 +143,7 @@
 	return
 
 
-/obj/machinery/computer/pod/process()
+/obj/machinery/computer/pod/Process()
 	if(!..())
 		return
 	if(timing)

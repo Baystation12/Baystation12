@@ -179,7 +179,7 @@
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding)
-		GLOB.processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
@@ -225,7 +225,7 @@
 	return
 
 
-/obj/item/weapon/weldingtool/process()
+/obj/item/weapon/weldingtool/Process()
 	if(welding)
 		if(!remove_fuel(0.05))
 			setWelding(0)
@@ -325,14 +325,14 @@
 			src.damtype = "fire"
 			welding = 1
 			update_icon()
-			GLOB.processing_objects |= src
+			START_PROCESSING(SSobj, src)
 		else
 			if(M)
 				to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 			return
 	//Otherwise
 	else if(!set_welding && welding)
-		GLOB.processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 		if(M)
 			to_chat(M, "<span class='notice'>You switch \the [src] off.</span>")
 		else if(T)

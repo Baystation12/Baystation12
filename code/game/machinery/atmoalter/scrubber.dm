@@ -30,7 +30,7 @@
 		for(var/g in gas_data.gases)
 			if(g != "oxygen" && g != "nitrogen")
 				scrubbing_gas += g
-				
+
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -59,7 +59,7 @@
 
 	return
 
-/obj/machinery/portable_atmospherics/powered/scrubber/process()
+/obj/machinery/portable_atmospherics/powered/scrubber/Process()
 	..()
 
 	var/power_draw = -1
@@ -188,7 +188,7 @@
 	if (old_stat != stat)
 		update_icon()
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/process()
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/Process()
 	if(!on || (stat & (NOPOWER|BROKEN)))
 		update_use_power(0)
 		last_flow_rate = 0

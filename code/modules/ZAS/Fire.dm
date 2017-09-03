@@ -121,7 +121,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
 
-/obj/fire/process()
+/obj/fire/Process()
 	. = 1
 
 	var/turf/simulated/my_tile = loc

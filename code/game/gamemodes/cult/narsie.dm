@@ -58,7 +58,7 @@ var/global/list/narsie_list = list()
 				evacuation_controller.call_evacuation(null, TRUE, 1)
 				evacuation_controller.evac_no_return = 0 // Cannot recall
 
-/obj/singularity/narsie/process()
+/obj/singularity/narsie/Process()
 	eat()
 
 	if (!target || prob(5))

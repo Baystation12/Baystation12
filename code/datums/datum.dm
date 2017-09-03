@@ -1,5 +1,6 @@
 /datum
 	var/gc_destroyed //Time when this object was destroyed.
+	var/is_processing = FALSE
 
 #ifdef TESTING
     var/running_find_references
@@ -13,3 +14,7 @@
 	tag = null
 	GLOB.nanomanager && GLOB.nanomanager.close_uis(src)
 	return QDEL_HINT_QUEUE
+
+/datum/proc/Process()
+	set waitfor = 0
+	return PROCESS_KILL

@@ -41,7 +41,7 @@
 	ignite()
 	return
 
-/obj/machinery/igniter/process()	//ugh why is this even in process()?
+/obj/machinery/igniter/Process()	//ugh why is this even in process()?
 	if (on && powered() )
 		var/turf/location = src.loc
 		if (isturf(location))

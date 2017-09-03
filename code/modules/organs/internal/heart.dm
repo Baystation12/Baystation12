@@ -21,7 +21,7 @@
 	. = ..()
 	icon_state = "heart-prosthetic"
 
-/obj/item/organ/internal/heart/process()
+/obj/item/organ/internal/heart/Process()
 	if(owner)
 		handle_pulse()
 		if(pulse)

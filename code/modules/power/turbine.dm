@@ -59,7 +59,7 @@
 #define COMPFRICTION 5e5
 #define COMPSTARTERLOAD 2800
 
-/obj/machinery/compressor/process()
+/obj/machinery/compressor/Process()
 	if(!starter)
 		return
 	overlays.Cut()
@@ -117,7 +117,7 @@
 #define TURBGENQ 20000
 #define TURBGENG 0.8
 
-/obj/machinery/power/turbine/process()
+/obj/machinery/power/turbine/Process()
 	if(!compressor.starter)
 		return
 	overlays.Cut()
@@ -314,6 +314,6 @@
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/turbine_computer/process()
+/obj/machinery/computer/turbine_computer/Process()
 	src.updateDialog()
 	return

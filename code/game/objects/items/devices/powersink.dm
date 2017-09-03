@@ -26,7 +26,6 @@
 	var/obj/structure/cable/attached		// the attached cable
 
 /obj/item/device/powersink/Destroy()
-	GLOB.processing_objects.Remove(src)
 	SSmachines.power_objects.Remove(src)
 	. = ..()
 
@@ -49,7 +48,6 @@
 				return
 		else
 			if (mode == 2)
-				GLOB.processing_objects.Remove(src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
 				SSmachines.power_objects.Remove(src)
 			anchored = 0
 			mode = 0
@@ -72,14 +70,12 @@
 			src.visible_message("<span class='notice'>[user] activates [src]!</span>")
 			mode = 2
 			icon_state = "powersink1"
-			GLOB.processing_objects.Add(src)
 			SSmachines.power_objects.Add(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
 			mode = 1
 			set_light(0)
 			icon_state = "powersink0"
-			GLOB.processing_objects.Remove(src)
 			SSmachines.power_objects.Remove(src)
 
 /obj/item/device/powersink/pwr_drain()
@@ -117,7 +113,7 @@
 	return 1
 
 
-/obj/item/device/powersink/process()
+/obj/item/device/powersink/Process()
 	drained_this_tick = 0
 	power_drained -= min(dissipation_rate, power_drained)
 	if(power_drained > max_power * 0.95)

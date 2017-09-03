@@ -91,12 +91,18 @@
 			return global.SMALLSIZEBLOCK;
 		if("SSatoms")
 			return global.SSatoms;
+		if("SSfastprocess")
+			return global.SSfastprocess;
 		if("SSgarbage")
 			return global.SSgarbage;
 		if("SSlegacy")
 			return global.SSlegacy;
 		if("SSmachines")
 			return global.SSmachines;
+		if("SSobj")
+			return global.SSobj;
+		if("SSprocessing")
+			return global.SSprocessing;
 		if("TELEBLOCK")
 			return global.TELEBLOCK;
 		if("TWITCHBLOCK")
@@ -1288,12 +1294,18 @@
 			global.SMALLSIZEBLOCK=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
+		if("SSfastprocess")
+			global.SSfastprocess=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
 		if("SSlegacy")
 			global.SSlegacy=newval;
 		if("SSmachines")
 			global.SSmachines=newval;
+		if("SSobj")
+			global.SSobj=newval;
+		if("SSprocessing")
+			global.SSprocessing=newval;
 		if("TELEBLOCK")
 			global.TELEBLOCK=newval;
 		if("TWITCHBLOCK")
@@ -2439,9 +2451,12 @@
 	"SKILLS",
 	"SMALLSIZEBLOCK",
 	"SSatoms",
+	"SSfastprocess",
 	"SSgarbage",
 	"SSlegacy",
 	"SSmachines",
+	"SSobj",
+	"SSprocessing",
 	"TELEBLOCK",
 	"TWITCHBLOCK",
 	"Tier1Runes",

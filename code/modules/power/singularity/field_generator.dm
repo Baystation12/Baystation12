@@ -59,9 +59,8 @@ field_generator power level display
 	..()
 	fields = list()
 	connected_gens = list()
-	return
 
-/obj/machinery/field_generator/process()
+/obj/machinery/field_generator/Process()
 	if(Varedit_start == 1)
 		if(active == 0)
 			active = 1
@@ -76,7 +75,6 @@ field_generator power level display
 	if(src.active == 2)
 		calc_power()
 		update_icon()
-	return
 
 
 /obj/machinery/field_generator/attack_hand(mob/user as mob)
