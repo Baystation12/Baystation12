@@ -26,7 +26,7 @@
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
 	name = "\improper Canister: \[N2O\]"
-	icon_state = "redws"
+	icon_state = "redws" //Red - White Stripe
 	canister_color = "redws"
 	can_label = 0
 
@@ -51,8 +51,8 @@
 
 /obj/machinery/portable_atmospherics/canister/hydrogen
 	name = "\improper Canister: \[Hydrogen\]"
-	icon_state = "red"
-	canister_color = "red"
+	icon_state = "redhs" //Red - Hazard Stripe
+	canister_color = "redhs"
 	can_label = 0
 
 
@@ -353,6 +353,7 @@ update_flag
 			"\[CO2\]" = "black", \
 			"\[Air\]" = "grey", \
 			"\[CAUTION\]" = "yellow", \
+			"\[Hydrogen\]" = "redhs", \
 		)
 		var/label = input("Choose canister label", "Gas canister") as null|anything in colors
 		if (label)
