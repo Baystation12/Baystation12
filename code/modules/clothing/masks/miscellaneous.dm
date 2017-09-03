@@ -248,3 +248,11 @@
 	desc = "A rubber skrell mask."
 	icon_state = "skrellmet"
 	species = SPECIES_SKRELL
+
+/obj/item/clothing/mask/spirit
+	name = "spirit mask"
+	desc = "An eerie mask of ancient, pitted wood."
+	icon_state = "spirit_mask"
+	item_state = "spirit_mask"
+	flags_inv = HIDEFACE
+	body_parts_covered = FACE|EYES
