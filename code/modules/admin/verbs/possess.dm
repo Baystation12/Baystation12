@@ -1,10 +1,10 @@
-/proc/possess(obj/O as obj in world)
+/proc/possess(obj/O as obj in range(world.view))
 	set name = "Possess Obj"
 	set category = "Object"
 
-	if(istype(O,/obj/machinery/singularity))
+	if(istype(O,/obj/singularity))
 		if(config.forbid_singulo_possession)
-			usr << "It is forbidden to possess singularities."
+			to_chat(usr, "It is forbidden to possess singularities.")
 			return
 
 	var/turf/T = get_turf(O)
@@ -19,14 +19,14 @@
 	if(!usr.control_object) //If you're not already possessing something...
 		usr.name_archive = usr.real_name
 
-	usr.loc = O
+	usr.forceMove(O)
 	usr.real_name = O.name
 	usr.name = O.name
 	usr.client.eye = O
 	usr.control_object = O
 	feedback_add_details("admin_verb","PO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/proc/release(obj/O as obj in world)
+/proc/release(obj/O as obj in range(world.view))
 	set name = "Release Obj"
 	set category = "Object"
 	//usr.loc = get_turf(usr)
@@ -39,12 +39,12 @@
 			H.name = H.get_visible_name()
 //		usr.regenerate_icons() //So the name is updated properly
 
-	usr.loc = O.loc // Appear where the object you were controlling is -- TLE
+	usr.forceMove(O.loc) // Appear where the object you were controlling is -- TLE
 	usr.client.eye = usr
 	usr.control_object = null
 	feedback_add_details("admin_verb","RO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/proc/givetestverbs(mob/M as mob in mob_list)
+/proc/givetestverbs(mob/M as mob in GLOB.mob_list)
 	set desc = "Give this guy possess/release verbs"
 	set category = "Debug"
 	set name = "Give Possessing Verbs"

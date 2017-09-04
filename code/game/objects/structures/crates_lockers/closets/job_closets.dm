@@ -14,19 +14,39 @@
 	icon_state = "black"
 	icon_closed = "black"
 
-/obj/structure/closet/gmcloset/New()
-	..()
-	sleep(2)
-	new /obj/item/clothing/head/that(src)
-	new /obj/item/clothing/head/that(src)
-	new /obj/item/clothing/under/sl_suit(src)
-	new /obj/item/clothing/under/sl_suit(src)
-	new /obj/item/clothing/under/rank/bartender(src)
-	new /obj/item/clothing/under/rank/bartender(src)
-	new /obj/item/clothing/suit/wcoat(src)
-	new /obj/item/clothing/suit/wcoat(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
+/obj/structure/closet/gmcloset/WillContain()
+	return list(
+		/obj/item/clothing/head/that = 2,
+		/obj/item/device/radio/headset/headset_service = 2,
+		/obj/item/clothing/head/hairflower,
+		/obj/item/clothing/head/hairflower/pink,
+		/obj/item/clothing/head/hairflower/yellow,
+		/obj/item/clothing/head/hairflower/blue,
+		/obj/item/clothing/under/sl_suit = 2,
+		/obj/item/clothing/under/rank/bartender = 2,
+		/obj/item/clothing/under/dress/dress_saloon,
+		/obj/item/clothing/accessory/wcoat = 2,
+		/obj/item/clothing/shoes/black = 2
+	)
+
+/*
+ * Chef
+ */
+/obj/structure/closet/chefcloset
+	name = "chef's closet"
+	desc = "It's a storage unit for foodservice garments."
+	icon_state = "black"
+	icon_closed = "black"
+
+/obj/structure/closet/chefcloset/WillContain()
+	return list(
+		/obj/item/clothing/under/sundress,
+		/obj/item/clothing/under/waiter = 2,
+		/obj/item/device/radio/headset/headset_service = 2,
+		/obj/item/weapon/storage/box/mousetraps = 2,
+		/obj/item/clothing/under/rank/chef,
+		/obj/item/clothing/head/chefhat
+	)
 
 /*
  * Janitor
@@ -37,22 +57,20 @@
 	icon_state = "mixed"
 	icon_closed = "mixed"
 
-/obj/structure/closet/jcloset/New()
-	..()
-	sleep(2)
-	new /obj/item/clothing/under/rank/janitor(src)
-	new /obj/item/weapon/cartridge/janitor(src)
-	new /obj/item/device/flashlight(src)
-	new /obj/item/clothing/shoes/galoshes(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/caution(src)
-	new /obj/item/weapon/trashbag(src)
-	new /obj/item/device/lightreplacer(src)
-	new /obj/item/clothing/head/soft/purple(src)
+/obj/structure/closet/jcloset/WillContain()
+	return list(
+		/obj/item/clothing/under/rank/janitor,
+		/obj/item/device/radio/headset/headset_service,
+		/obj/item/weapon/cartridge/janitor,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/clothing/head/soft/purple,
+		/obj/item/clothing/head/beret/purple,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/caution = 4,
+		/obj/item/device/lightreplacer,
+		/obj/item/weapon/storage/bag/trash,
+		/obj/item/clothing/shoes/galoshes,
+		/obj/item/weapon/soap/nanotrasen)
 
 /*
  * Lawyer
@@ -63,13 +81,15 @@
 	icon_state = "blue"
 	icon_closed = "blue"
 
-/obj/structure/closet/lawcloset/New()
-	new /obj/item/clothing/under/lawyer/female(src)
-	new /obj/item/clothing/under/lawyer/black(src)
-	new /obj/item/clothing/under/lawyer/red(src)
-	new /obj/item/clothing/under/lawyer/bluesuit(src)
-	new /obj/item/clothing/suit/lawyer/bluejacket(src)
-	new /obj/item/clothing/under/lawyer/purpsuit(src)
-	new /obj/item/clothing/suit/lawyer/purpjacket(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/black(src)
+/obj/structure/closet/lawcloset/WillContain()
+	return list(
+		/obj/item/clothing/under/lawyer/female,
+		/obj/item/clothing/under/lawyer/black,
+		/obj/item/clothing/under/lawyer/red,
+		/obj/item/clothing/under/lawyer/bluesuit,
+		/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
+		/obj/item/clothing/under/lawyer/purpsuit,
+		/obj/item/clothing/suit/storage/lawyer/purpjacket,
+		/obj/item/clothing/shoes/brown,
+		/obj/item/clothing/shoes/black
+	)

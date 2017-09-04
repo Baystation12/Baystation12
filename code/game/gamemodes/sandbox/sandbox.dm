@@ -1,19 +1,17 @@
 /datum/game_mode/sandbox
-	name = "sandbox"
+	name = "Sandbox"
 	config_tag = "sandbox"
 	required_players = 0
-
-	uplink_welcome = "Syndicate Uplink Console:"
-	uplink_uses = 10
-
-/datum/game_mode/sandbox/announce()
-	world << "<B>The current game mode is - Sandbox!</B>"
-	world << "<B>Build your own station with the sandbox-panel command!</B>"
+	votable = 0
+	round_description = "Build your own station!"
+	extended_round_description = "You can use the sandbox-panel command to access build options."
 
 /datum/game_mode/sandbox/pre_setup()
-	for(var/mob/M in player_list)
+	for(var/mob/M in GLOB.player_list)
 		M.CanBuild()
 	return 1
 
-/datum/game_mode/sandbox/check_finished()
-	return 0
+/datum/game_mode/sandbox/post_setup()
+	..()
+	if(emergency_shuttle)
+		emergency_shuttle.auto_recall = 1

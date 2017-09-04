@@ -22,19 +22,20 @@
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
-	directwired = 1
 	var/turf/simulated/outturf
 	var/lastgen
 
 /obj/machinery/computer/turbine_computer
 	name = "Gas turbine control computer"
-	desc = "A computer to remotely control a gas turbine"
+	desc = "A computer to remotely control a gas turbine."
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "airtunnel0e"
+	icon_keyboard = "tech_key"
+	icon_screen = "turbinecomp"
+	circuit = /obj/item/weapon/circuitboard/turbine_control
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
-	var/list/obj/machinery/door/poddoor/doors
+	var/list/obj/machinery/door/blast/doors
 	var/id = 0
 	var/door_status = 0
 
@@ -50,6 +51,9 @@
 		turbine = locate() in get_step(src, get_dir(inturf, src))
 		if(!turbine)
 			stat |= BROKEN
+		else
+			turbine.stat &= !BROKEN
+			turbine.compressor = src
 
 
 #define COMPFRICTION 5e5
@@ -58,7 +62,7 @@
 /obj/machinery/compressor/process()
 	if(!starter)
 		return
-	overlays = null
+	overlays.Cut()
 	if(stat & BROKEN)
 		return
 	if(!turbine)
@@ -66,7 +70,7 @@
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
-	var/transfer_moles = environment.total_moles()/10
+	var/transfer_moles = environment.total_moles / 10
 	//var/transfer_moles = rpm/10000*capacity
 	var/datum/gas_mixture/removed = inturf.remove_air(transfer_moles)
 	gas_contained.merge(removed)
@@ -104,6 +108,9 @@
 		compressor = locate() in get_step(src, get_dir(outturf, src))
 		if(!compressor)
 			stat |= BROKEN
+		else
+			compressor.stat &= !BROKEN
+			compressor.turbine = src
 
 
 #define TURBPRES 9000000
@@ -113,7 +120,7 @@
 /obj/machinery/power/turbine/process()
 	if(!compressor.starter)
 		return
-	overlays = null
+	overlays.Cut()
 	if(stat & BROKEN)
 		return
 	if(!compressor)
@@ -122,14 +129,14 @@
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
 	add_avail(lastgen)
-	var/newrpm = ((compressor.gas_contained.temperature) * compressor.gas_contained.total_moles())/4
+	var/newrpm = ((compressor.gas_contained.temperature) * compressor.gas_contained.total_moles)/4
 	newrpm = max(0, newrpm)
 
 	if(!compressor.starter || newrpm > 1000)
 		compressor.rpmtarget = newrpm
 
-	if(compressor.gas_contained.total_moles()>0)
-		var/oamount = min(compressor.gas_contained.total_moles(), (compressor.rpm+100)/35000*compressor.capacity)
+	if(compressor.gas_contained.total_moles>0)
+		var/oamount = min(compressor.gas_contained.total_moles, (compressor.rpm+100)/35000*compressor.capacity)
 		var/datum/gas_mixture/removed = compressor.gas_contained.remove(oamount)
 		outturf.assume_air(removed)
 
@@ -142,24 +149,7 @@
 			src.interact(M)
 	AutoUpdateAI(src)
 
-
-/obj/machinery/power/turbine/attack_ai(mob/user)
-
-	if(stat & (BROKEN|NOPOWER))
-		return
-
-	interact(user)
-
-/obj/machinery/power/turbine/attack_hand(mob/user)
-
-	add_fingerprint(user)
-
-	if(stat & (BROKEN|NOPOWER))
-		return
-
-	interact(user)
-
-/obj/machinery/power/turbine/proc/interact(mob/user)
+/obj/machinery/power/turbine/interact(mob/user)
 
 	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
@@ -192,7 +182,7 @@
 		return
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		if(!istype(usr, /mob/living/silicon/ai))
-			usr << "\red You don't have the dexterity to do this!"
+			to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
 			return
 
 	if (( usr.machine==src && ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon/ai)))
@@ -229,22 +219,23 @@
 /obj/machinery/computer/turbine_computer/New()
 	..()
 	spawn(5)
-		for(var/obj/machinery/compressor/C in world)
+		for(var/obj/machinery/compressor/C in GLOB.machines)
 			if(id == C.comp_id)
 				compressor = C
 		doors = new /list()
-		for(var/obj/machinery/door/poddoor/P in world)
+		for(var/obj/machinery/door/blast/P in GLOB.machines)
 			if(P.id == id)
 				doors += P
 
+/*
 /obj/machinery/computer/turbine_computer/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
+				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/shard( src.loc )
+				new /obj/item/weapon/material/shard( src.loc )
 				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
 				for (var/obj/C in src)
 					C.loc = src.loc
@@ -253,9 +244,9 @@
 				A.state = 3
 				A.icon_state = "3"
 				A.anchored = 1
-				del(src)
+				qdel(src)
 			else
-				user << "\blue You disconnect the monitor."
+				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
 				for (var/obj/C in src)
@@ -265,10 +256,11 @@
 				A.state = 4
 				A.icon_state = "4"
 				A.anchored = 1
-				del(src)
+				qdel(src)
 	else
 		src.attack_hand(user)
 	return
+*/
 
 /obj/machinery/computer/turbine_computer/attack_hand(var/mob/user as mob)
 	user.machine = src
@@ -286,7 +278,7 @@
 		\n<BR>
 		\n"}
 	else
-		dat += "\red<B>No compatible attached compressor found."
+		dat += "<span class='danger'>No compatible attached compressor found.</span>"
 
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
@@ -305,7 +297,7 @@
 		else if( href_list["str"] )
 			src.compressor.starter = !src.compressor.starter
 		else if (href_list["doors"])
-			for(var/obj/machinery/door/poddoor/D in src.doors)
+			for(var/obj/machinery/door/blast/D in src.doors)
 				if (door_status == 0)
 					spawn( 0 )
 						D.open()

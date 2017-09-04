@@ -11,73 +11,94 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0
 	var/menustat = "menu"
+	var/build_eff = 1
+	var/eat_eff = 1
 
-	New()
-		..()
-		var/datum/reagents/R = new/datum/reagents(1000)
-		reagents = R
-		R.my_atom = src
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 
-	on_reagent_change()			//When the reagents change, change the icon as well.
-		update_icon()
+/obj/machinery/biogenerator/New()
+	..()
+	var/datum/reagents/R = new/datum/reagents(1000)
+	reagents = R
+	R.my_atom = src
+	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
 
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/biogenerator(src)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+
+	RefreshParts()
+
+/obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
-		if(!src.beaker)
-			icon_state = "biogen-empty"
-		else if(!src.processing)
-			icon_state = "biogen-stand"
-		else
-			icon_state = "biogen-work"
-		return
+
+/obj/machinery/biogenerator/update_icon()
+	if(!beaker)
+		icon_state = "biogen-empty"
+	else if(!processing)
+		icon_state = "biogen-stand"
+	else
+		icon_state = "biogen-work"
+	return
 
 /obj/machinery/biogenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(default_deconstruction_screwdriver(user, O))
+		return
+	if(default_deconstruction_crowbar(user, O))
+		return
+	if(default_part_replacement(user, O))
+		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "\red The biogenerator already occuped."
+			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 		else
-			user.before_take_item(O)
-			O.loc = src
+			user.remove_from_mob(O)
+			O.forceMove(src)
 			beaker = O
 			updateUsrDialog()
 	else if(processing)
-		user << "\red The biogenerator is currently processing."
-	else if(istype(O, /obj/item/weapon/plantbag))
+		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
+	else if(istype(O, /obj/item/weapon/storage/plants))
+		var/obj/item/weapon/storage/plants/P = O
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
-			user << "\red The biogenerator is already full! Activate it."
+			to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 		else
-			for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
-				G.loc = src
+			var/hadPlants = 0
+			for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in P.contents)
+				hadPlants = 1
+				P.remove_from_storage(G, src)
 				i++
 				if(i >= 10)
-					user << "\blue You fill the biogenerator to its capacity."
+					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
 					break
-			if(i<10)
-				user << "\blue You empty the plant bag into the biogenerator."
+			if(!hadPlants)
+				to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
+			else if(i < 10)
+				to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
 
 
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		user << "\red You cannot put this in [src.name]"
+		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
-			user << "\red The biogenerator is full! Activate it."
+			to_chat(user, "<span class='notice'>\The [src] is full! Activate it.</span>")
 		else
-			user.before_take_item(O)
-			O.loc = src
-			user << "\blue You put [O.name] in [src.name]"
+			user.remove_from_mob(O)
+			O.forceMove(src)
+			to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()
 	return
 
-/obj/machinery/biogenerator/proc/interact(mob/user as mob)
+/obj/machinery/biogenerator/interact(mob/user as mob)
 	if(stat & BROKEN)
 		return
-	user.machine = src
+	user.set_machine(src)
 	var/dat = "<TITLE>Biogenerator</TITLE>Biogenerator:<BR>"
 	if (processing)
 		dat += "<FONT COLOR=red>Biogenerator is processing! Please wait...</FONT>"
@@ -89,29 +110,37 @@
 					dat += "<A href='?src=\ref[src];action=activate'>Activate Biogenerator!</A><BR>"
 					dat += "<A href='?src=\ref[src];action=detach'>Detach Container</A><BR><BR>"
 					dat += "Food<BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=milk;cost=20'>10 milk</A> <FONT COLOR=blue>(20)</FONT><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=meat;cost=50'>Slab of meat</A> <FONT COLOR=blue>(50)</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=milk;cost=20'>10 milk</A> <FONT COLOR=blue>([round(20/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=meat;cost=50'>Slab of meat</A> <FONT COLOR=blue>([round(50/build_eff)])</FONT><BR>"
 					dat += "Nutrient<BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=ez;cost=10'>E-Z-Nutrient</A> <FONT COLOR=blue>(10)</FONT> | <A href='?src=\ref[src];action=create;item=ez5;cost=50'>x5</A><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=l4z;cost=20'>Left 4 Zed</A> <FONT COLOR=blue>(20)</FONT> | <A href='?src=\ref[src];action=create;item=l4z5;cost=100'>x5</A><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=rh;cost=25'>Robust Harvest</A> <FONT COLOR=blue>(25)</FONT> | <A href='?src=\ref[src];action=create;item=rh5;cost=125'>x5</A><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=ez;cost=60'>E-Z-Nutrient</A> <FONT COLOR=blue>([round(60/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=ez5;cost=300'>x5</A><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=l4z;cost=120'>Left 4 Zed</A> <FONT COLOR=blue>([round(120/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=l4z5;cost=600'>x5</A><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=rh;cost=150'>Robust Harvest</A> <FONT COLOR=blue>([round(150/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=rh5;cost=750'>x5</A><BR>"
 					dat += "Leather<BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=wallet;cost=100'>Wallet</A> <FONT COLOR=blue>(100)</FONT><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=gloves;cost=250'>Botanical gloves</A> <FONT COLOR=blue>(250)</FONT><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=tbelt;cost=300'>Utility belt</A> <FONT COLOR=blue>(300)</FONT><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=satchel;cost=400'>Leather Satchel</A> <FONT COLOR=blue>(400)</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=wallet;cost=100'>Wallet</A> <FONT COLOR=blue>([round(100/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=gloves;cost=250'>Botanical gloves</A> <FONT COLOR=blue>([round(250/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=tbelt;cost=300'>Utility belt</A> <FONT COLOR=blue>([round(300/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=satchel;cost=400'>Leather Satchel</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=cashbag;cost=400'>Cash Bag</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=workboots;cost=400'>Workboots</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=leathershoes;cost=400'>Leather Shoes</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=dressshoes;cost=400'>Dress Shoes</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=leathercoat;cost=500'>Leather Coat</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=leatherjacket;cost=500'>Leather Jacket</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=bomberjacket;cost=500'>Bomber Jacket</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=wintercoat;cost=500'>Winter Coat</A> <FONT COLOR=blue>([round(500/build_eff)])</FONT><BR>"
 					//dat += "Other<BR>"
 					//dat += "<A href='?src=\ref[src];action=create;item=monkey;cost=500'>Monkey</A> <FONT COLOR=blue>(500)</FONT><BR>"
 				else
 					dat += "<BR><FONT COLOR=red>No beaker inside. Please insert a beaker.</FONT><BR>"
 			if("nopoints")
-				dat += "You do not have biomass to create products.<BR>Please, put growns into reactor and activate it.<BR>"
+				dat += "You do not have biomass to create products.<BR>Please, put produce into reactor and activate it.<BR>"
 				dat += "<A href='?src=\ref[src];action=menu'>Return to menu</A>"
 			if("complete")
 				dat += "Operation complete.<BR>"
 				dat += "<A href='?src=\ref[src];action=menu'>Return to menu</A>"
 			if("void")
-				dat += "<FONT COLOR=red>Error: No growns inside.</FONT><BR>Please, put growns into reactor.<BR>"
+				dat += "<FONT COLOR=red>Error: No produce inside.</FONT><BR>Please, put produce into reactor.<BR>"
 				dat += "<A href='?src=\ref[src];action=menu'>Return to menu</A>"
 	user << browse(dat, "window=biogenerator")
 	onclose(user, "biogenerator")
@@ -121,34 +150,35 @@
 	interact(user)
 
 /obj/machinery/biogenerator/proc/activate()
-	if (usr.stat != 0)
+	if (usr.stat)
 		return
-	if (src.stat != 0) //NOPOWER etc
+	if (stat) //NOPOWER etc
 		return
-	if(src.processing)
-		usr << "\red The biogenerator is in the process of working."
+	if(processing)
+		to_chat(usr, "<span class='notice'>The biogenerator is in the process of working.</span>")
 		return
 	var/S = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/I in contents)
 		S += 5
-		if(I.reagents.get_reagent_amount("nutriment") < 0.1)
+		if(I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)
 			points += 1
-		else points += I.reagents.get_reagent_amount("nutriment")*10
-		del(I)
+		else points += I.reagents.get_reagent_amount(/datum/reagent/nutriment) * 10 * eat_eff
+		qdel(I)
 	if(S)
 		processing = 1
 		update_icon()
 		updateUsrDialog()
 		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
-		use_power(S*30)
-		sleep(S+15)
+		use_power(S * 30)
+		sleep((S + 15) / eat_eff)
 		processing = 0
 		update_icon()
 	else
 		menustat = "void"
 	return
 
-/obj/machinery/biogenerator/proc/create_product(var/item,var/cost)
+/obj/machinery/biogenerator/proc/create_product(var/item, var/cost)
+	cost = round(cost/build_eff)
 	if(cost > points)
 		menustat = "nopoints"
 		return 0
@@ -159,43 +189,59 @@
 	sleep(30)
 	switch(item)
 		if("milk")
-			beaker.reagents.add_reagent("milk",10)
+			beaker.reagents.add_reagent(/datum/reagent/drink/milk, 10)
 		if("meat")
-			new/obj/item/weapon/reagent_containers/food/snacks/meat(src.loc)
+			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
 		if("ez")
-			new/obj/item/nutrient/ez(src.loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
 		if("l4z")
-			new/obj/item/nutrient/l4z(src.loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/left4zed(loc)
 		if("rh")
-			new/obj/item/nutrient/rh(src.loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/robustharvest(loc)
 		if("ez5") //It's not an elegant method, but it's safe and easy. -Cheridan
-			new/obj/item/nutrient/ez(src.loc)
-			new/obj/item/nutrient/ez(src.loc)
-			new/obj/item/nutrient/ez(src.loc)
-			new/obj/item/nutrient/ez(src.loc)
-			new/obj/item/nutrient/ez(src.loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
 		if("l4z5")
-			new/obj/item/nutrient/l4z(src.loc)
-			new/obj/item/nutrient/l4z(src.loc)
-			new/obj/item/nutrient/l4z(src.loc)
-			new/obj/item/nutrient/l4z(src.loc)
-			new/obj/item/nutrient/l4z(src.loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/left4zed(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/left4zed(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/left4zed(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/left4zed(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/left4zed(loc)
 		if("rh5")
-			new/obj/item/nutrient/rh(src.loc)
-			new/obj/item/nutrient/rh(src.loc)
-			new/obj/item/nutrient/rh(src.loc)
-			new/obj/item/nutrient/rh(src.loc)
-			new/obj/item/nutrient/rh(src.loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/robustharvest(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/robustharvest(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/robustharvest(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/robustharvest(loc)
+			new/obj/item/weapon/reagent_containers/glass/bottle/robustharvest(loc)
 		if("wallet")
-			new/obj/item/weapon/storage/wallet(src.loc)
+			new/obj/item/weapon/storage/wallet/leather(loc)
 		if("gloves")
-			new/obj/item/clothing/gloves/botanic_leather(src.loc)
+			new/obj/item/clothing/gloves/thick/botany(loc)
 		if("tbelt")
-			new/obj/item/weapon/storage/belt/utility(src.loc)
+			new/obj/item/weapon/storage/belt/utility(loc)
 		if("satchel")
-			new/obj/item/weapon/storage/backpack/satchel(src.loc)
+			new/obj/item/weapon/storage/backpack/satchel(loc)
+		if("cashbag")
+			new/obj/item/weapon/storage/bag/cash(loc)
 		if("monkey")
-			new/mob/living/carbon/monkey(src.loc)
+			new/mob/living/carbon/human/monkey(loc)
+		if("workboots")
+			new/obj/item/clothing/shoes/workboots(loc)
+		if("leathershoes")
+			new/obj/item/clothing/shoes/leather(loc)
+		if("dressshoes")
+			new/obj/item/clothing/shoes/dress(loc)
+		if("leathercoat")
+			new/obj/item/clothing/suit/leathercoat(loc)
+		if("leatherjacket")
+			new/obj/item/clothing/suit/storage/toggle/brown_jacket(loc)
+		if("bomberjacket")
+			new/obj/item/clothing/suit/storage/toggle/bomber(loc)
+		if("wintercoat")
+			new/obj/item/clothing/suit/storage/hooded/wintercoat(loc)
 	processing = 0
 	menustat = "complete"
 	update_icon()
@@ -206,18 +252,32 @@
 	if(usr.stat || usr.restrained()) return
 	if(!in_range(src, usr)) return
 
-	usr.machine = src
+	usr.set_machine(src)
 
 	switch(href_list["action"])
 		if("activate")
 			activate()
 		if("detach")
 			if(beaker)
-				beaker.loc = src.loc
+				beaker.dropInto(src.loc)
 				beaker = null
 				update_icon()
 		if("create")
-			create_product(href_list["item"],text2num(href_list["cost"]))
+			create_product(href_list["item"], text2num(href_list["cost"]))
 		if("menu")
 			menustat = "menu"
 	updateUsrDialog()
+
+/obj/machinery/biogenerator/RefreshParts()
+	..()
+	var/man_rating = 0
+	var/bin_rating = 0
+
+	for(var/obj/item/weapon/stock_parts/P in component_parts)
+		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
+			bin_rating += P.rating
+		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
+			man_rating += P.rating
+
+	build_eff = man_rating
+	eat_eff = bin_rating

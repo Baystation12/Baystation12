@@ -2,22 +2,18 @@
 	name = "igniter"
 	desc = "A small electronic device able to ignite combustable substances."
 	icon_state = "igniter"
-	m_amt = 500
-	g_amt = 50
-	w_amt = 10
-	origin_tech = "magnets=1"
-
-	wires = WIRE_RECEIVE
+	origin_tech = list(TECH_MAGNET = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 50, "waste" = 10)
 
 	secured = 1
-
+	wires = WIRE_RECEIVE
 
 	activate()
 		if(!..())	return 0//Cooldown check
 
 		if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
 			var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
-			grenade.prime()
+			grenade.detonate()
 		else
 			var/turf/location = get_turf(loc)
 			if(location)

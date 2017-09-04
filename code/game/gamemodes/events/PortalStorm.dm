@@ -18,9 +18,9 @@
 					var/obj/portal/P = new /obj/portal( T )
 					P.target = picked
 					P.creator = null
-					P.icon = 'objects.dmi'
+					P.icon = 'icons/obj/objects.dmi'
 					P.failchance = 0
 					P.icon_state = "anom"
 					P.name = "wormhole"
 					spawn(rand(100,150))
-						del(P)
+						qdel(P)

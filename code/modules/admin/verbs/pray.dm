@@ -2,45 +2,21 @@
 	set category = "IC"
 	set name = "Pray"
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
-
-	if (!msg)
-		return
-
-	if (usr.client)
-		if(usr.client.muted & MUTE_PRAY)
-			usr << "\red You cannot pray (muted)."
-			return
-
-		if (src.client.handle_spam_prevention(msg,MUTE_PRAY))
-			return
-
-	var/icon/cross = icon('icons/obj/storage.dmi',"bible")
-
-	for (var/client/C in admin_list)
-		if (C.seeprayers)
-			C << "\blue \icon[cross] <b><font color=purple>PRAY: </font>[key_name(src, C)] (<A HREF='?src=\ref[C.holder];adminmoreinfo=\ref[src]'>?</A>) (<A HREF='?src=\ref[C.holder];adminplayeropts=\ref[src]'>PP</A>) (<A HREF='?src=\ref[C.holder];adminplayervars=\ref[src]'>VV</A>) (<A HREF='?src=\ref[C.holder];adminplayersubtlemessage=\ref[src]'>SM</A>) (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[src]'>JMP</A>) (<A HREF='?src=\ref[C.holder];secretsadmin=check_antagonist'>CA</A>) (<A HREF='?src=\ref[C.holder];adminspawncookie=\ref[src]'>SC</a>):</b> [msg]"
-
-	usr << "Your prayers have been received by the gods."
+	sanitize_and_communicate(/decl/communication_channel/pray, src, msg)
 	feedback_add_details("admin_verb","PR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	//log_admin("HELP: [key_name(src)]: [msg]")
 
+/proc/Centcomm_announce(var/msg, var/mob/Sender, var/iamessage)
+	var/mob/intercepted = check_for_interception()
+	msg = "<span class='notice'><b><font color=orange>[uppertext(GLOB.using_map.boss_short)]M[iamessage ? " IA" : ""][intercepted ? "(Intercepted by [intercepted])" : null]:</font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) ([admin_jump_link(Sender, src)]) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<A HREF='?_src_=holder;BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A HREF='?_src_=holder;CentcommReply=\ref[Sender]'>RPLY</A>):</b> [msg]</span>"
+	for(var/client/C in GLOB.admins)
+		if(R_ADMIN & C.holder.rights)
+			to_chat(C, msg)
+			sound_to(C, 'sound/machines/signal.ogg')
 
-/proc/Centcomm_announce(var/text , var/mob/Sender)
-
-	var/msg = copytext(sanitize(text), 1, MAX_MESSAGE_LEN)
-
-//	log_admin("[key_name(Sender)] sent a message to Centcomm!  The message was [msg]")  // Handled somewhere else
-
-	for (var/client/C in admin_list)
-		C << "\blue <b><font color=orange>CENTCOMM:</font>[key_name(Sender, C)] (<A HREF='?src=\ref[C.holder];adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?src=\ref[C.holder];adminplayervars=\ref[Sender]'>VV</A>) (<A HREF='?src=\ref[C.holder];adminplayersubtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?src=\ref[C.holder];secretsadmin=check_antagonist'>CA</A>) (<A HREF='?src=\ref[C.holder];BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A HREF='?src=\ref[C.holder];CentcommReply=\ref[Sender]'>RPLY</A>):</b> [msg]"
-			//
-/proc/Syndicate_announce(var/text , var/mob/Sender)
-
-	var/msg = copytext(sanitize(text), 1, MAX_MESSAGE_LEN)
-
-//	log_admin("[key_name(Sender)] sent a message to the Syndicate!  The message was [msg]")  // Handled somewhere else
-
-	for (var/client/C in admin_list)
-		C << "\blue <b><font color=crimson>SYNDICATE:</font>[key_name(Sender, C)] (<A HREF='?src=\ref[C.holder];adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?src=\ref[C.holder];adminplayervars=\ref[Sender]'>VV</A>) (<A HREF='?src=\ref[C.holder];adminplayersubtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?src=\ref[C.holder];secretsadmin=check_antagonist'>CA</A>) (<A HREF='?src=\ref[C.holder];BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A HREF='?src=\ref[C.holder];SyndicateReply=\ref[Sender]'>RPLY</A>):</b> [msg]"
-			//
+/proc/Syndicate_announce(var/msg, var/mob/Sender)
+	var/mob/intercepted = check_for_interception()
+	msg = "<span class='notice'><b><font color=crimson>ILLEGAL[intercepted ? "(Intercepted by [intercepted])" : null]:</font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) ([admin_jump_link(Sender, src)]) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<A HREF='?_src_=holder;BlueSpaceArtillery=\ref[Sender]'>BSA</A>) (<A HREF='?_src_=holder;take_ic=\ref[src]'>TAKE</a>) (<A HREF='?_src_=holder;SyndicateReply=\ref[Sender]'>RPLY</A>):</b> [msg]</span>"
+	for(var/client/C in GLOB.admins)
+		if(R_ADMIN & C.holder.rights)
+			to_chat(C, msg)
+			sound_to(C, 'sound/machines/signal.ogg')

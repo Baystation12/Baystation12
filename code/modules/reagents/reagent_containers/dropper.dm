@@ -7,86 +7,102 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dropper0"
 	amount_per_transfer_from_this = 5
-	possible_transfer_amounts = list(1,2,3,4,5)
+	possible_transfer_amounts = "1;2;3;4;5"
+	w_class = ITEM_SIZE_TINY
+	slot_flags = SLOT_EARS
 	volume = 5
-	var/filled = 0
 
-	afterattack(obj/target, mob/user , flag)
-		if(!target.reagents) return
+	afterattack(var/obj/target, var/mob/user, var/proximity)
+		if(!target.reagents || !proximity) return
 
-		if(filled)
+		if(reagents.total_volume)
 
-			if(target.reagents.total_volume >= target.reagents.maximum_volume)
-				user << "\red [target] is full."
+			if(!target.reagents.get_free_space())
+				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
-			if(!target.is_open_container() && !ismob(target) && !istype(target,/obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/cigarette)) //You can inject humans and food but you cant remove the shit.
-				user << "\red You cannot directly fill this object."
+			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
+				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 
 			var/trans = 0
 
 			if(ismob(target))
-				if(istype(target , /mob/living/carbon/human))
+				if(user.a_intent == I_HELP)
+					return
+
+				var/time = 20 //2/3rds the time of a syringe
+				user.visible_message("<span class='warning'>[user] is trying to squirt something into [target]'s eyes!</span>")
+
+				if(!do_mob(user, target, time))
+					return
+
+				if(istype(target, /mob/living/carbon/human))
 					var/mob/living/carbon/human/victim = target
 
 					var/obj/item/safe_thing = null
-					if( victim.wear_mask )
-						if ( victim.wear_mask.flags & MASKCOVERSEYES )
+					if(victim.wear_mask)
+						if (victim.wear_mask.body_parts_covered & EYES)
 							safe_thing = victim.wear_mask
-					if( victim.head )
-						if ( victim.head.flags & MASKCOVERSEYES )
+					if(victim.head)
+						if (victim.head.body_parts_covered & EYES)
 							safe_thing = victim.head
 					if(victim.glasses)
-						if ( !safe_thing )
+						if (victim.glasses.body_parts_covered & EYES)
 							safe_thing = victim.glasses
 
 					if(safe_thing)
-						if(!safe_thing.reagents)
-							safe_thing.create_reagents(100)
-						trans = src.reagents.trans_to(safe_thing, amount_per_transfer_from_this)
-
-						for(var/mob/O in viewers(world.view, user))
-							O.show_message(text("\red <B>[] tries to squirt something into []'s eyes, but fails!</B>", user, target), 1)
-						spawn(5)
-							src.reagents.reaction(safe_thing, TOUCH)
-
-
-						user << "\blue You transfer [trans] units of the solution."
-						if (src.reagents.total_volume<=0)
-							filled = 0
-							icon_state = "dropper[filled]"
+						trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
+						user.visible_message("<span class='warning'>[user] tries to squirt something into [target]'s eyes, but fails!</span>", "<span class='notice'>You transfer [trans] units of the solution.</span>")
 						return
 
+				var/mob/living/M = target
+				var/contained = reagentlist()
+				admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 
-				for(var/mob/O in viewers(world.view, user))
-					O.show_message(text("\red <B>[] squirts something into []'s eyes!</B>", user, target), 1)
-				src.reagents.reaction(target, TOUCH)
+				var/spill_amt = M.incapacitated()? 0 : 30
+				trans += reagents.splash(target, reagents.total_volume/2, max_spill = spill_amt)
+				trans += reagents.trans_to_mob(target, reagents.total_volume/2, CHEM_BLOOD) //I guess it gets into the bloodstream through the eyes or something
+				user.visible_message("<span class='warning'>[user] squirts something into [target]'s eyes!</span>", "<span class='notice'>You transfer [trans] units of the solution.</span>")
 
-			trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
-			user << "\blue You transfer [trans] units of the solution."
-			if (src.reagents.total_volume<=0)
-				filled = 0
-				icon_state = "dropper[filled]"
 
-		else
+				return
+
+			else
+				trans = reagents.splash(target, amount_per_transfer_from_this, max_spill=0) //sprinkling reagents on generic non-mobs. Droppers are very precise
+				to_chat(user, "<span class='notice'>You transfer [trans] units of the solution.</span>")
+
+		else // Taking from something
 
 			if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
-				user << "\red You cannot directly remove reagents from [target]."
+				to_chat(user, "<span class='notice'>You cannot directly remove reagents from [target].</span>")
 				return
 
-			if(!target.reagents.total_volume)
-				user << "\red [target] is empty."
+			if(!target.reagents || !target.reagents.total_volume)
+				to_chat(user, "<span class='notice'>[target] is empty.</span>")
 				return
 
-			var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this)
+			var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 
-			user << "\blue You fill the dropper with [trans] units of the solution."
-
-			filled = 1
-			icon_state = "dropper[filled]"
+			to_chat(user, "<span class='notice'>You fill the dropper with [trans] units of the solution.</span>")
 
 		return
+
+	on_reagent_change()
+		update_icon()
+
+	update_icon()
+		if(reagents.total_volume)
+			icon_state = "dropper1"
+		else
+			icon_state = "dropper0"
+
+/obj/item/weapon/reagent_containers/dropper/industrial
+	name = "Industrial Dropper"
+	desc = "A larger dropper. Transfers 10 units."
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = "1;2;3;4;5;6;7;8;9;10"
+	volume = 10
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Droppers. END

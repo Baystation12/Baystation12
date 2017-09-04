@@ -1,32 +1,59 @@
 var/global/datum/controller/occupations/job_master
 
+#define GET_RANDOM_JOB 0
+#define BE_ASSISTANT 1
+#define RETURN_TO_LOBBY 2
+
 /datum/controller/occupations
 		//List of all jobs
 	var/list/occupations = list()
+		//Associative list of all jobs, by type
+	var/list/occupations_by_type
+	//Associative list of all jobs, by title
+	var/list/occupations_by_title
 		//Players who need jobs
 	var/list/unassigned = list()
 		//Debug info
 	var/list/job_debug = list()
 
 
-	New()
-		spawn(1)
-			SetupOccupations()
-		return
-
-
-	proc/SetupOccupations(var/faction = "Station")
+	proc/SetupOccupations(var/setup_titles = 0)
 		occupations = list()
-		var/list/all_jobs = typesof(/datum/job)
+		occupations_by_type = list()
+		occupations_by_title = list()
+		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
-			world << "\red \b Error setting up jobs, no job datums found"
+			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
-			var/datum/job/job = new J()
+			var/datum/job/job = decls_repository.get_decl(J)
 			if(!job)	continue
-			if(job.faction != faction)	continue
 			occupations += job
-
+			occupations_by_type[job.type] = job
+			occupations_by_title[job.title] = job
+			if(!setup_titles) continue
+			if(job.department_flag & COM)
+				command_positions |= job.title
+			if(job.department_flag & SPT)
+				support_positions |= job.title
+			if(job.department_flag & SEC)
+				security_positions |= job.title
+			if(job.department_flag & ENG)
+				engineering_positions += job.title
+			if(job.department_flag & MED)
+				medical_positions |= job.title
+			if(job.department_flag & SCI)
+				science_positions |= job.title
+			if(job.department_flag & SUP)
+				supply_positions |= job.title
+			if(job.department_flag & SRV)
+				service_positions |= job.title
+			if(job.department_flag & CRG)
+				cargo_positions |= job.title
+			if(job.department_flag & CIV)
+				civilian_positions |= job.title
+			if(job.department_flag & MSC)
+				nonhuman_positions |= job.title
 
 		return 1
 
@@ -44,28 +71,49 @@ var/global/datum/controller/occupations/job_master
 			if(J.title == rank)	return J
 		return null
 
-	proc/GetAltTitle(mob/new_player/player, rank)
-		return player.preferences.GetAltTitle(GetJob(rank))
+	proc/ShouldCreateRecords(var/rank)
+		if(!rank) return 0
+		var/datum/job/job = GetJob(rank)
+		if(!job) return 0
+		return job.create_record
+
+	proc/GetPlayerAltTitle(mob/new_player/player, rank)
+		return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
 
 	proc/AssignRole(var/mob/new_player/player, var/rank, var/latejoin = 0)
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
 		if(player && player.mind && rank)
 			var/datum/job/job = GetJob(rank)
-			if(!job)	return 0
-			if(jobban_isbanned(player, rank))	return 0
+			if(!job)
+				return 0
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				return 0
+			if(jobban_isbanned(player, rank))
+				return 0
+			if(!job.player_old_enough(player.client))
+				return 0
+			if(job.is_restricted(player.client.prefs))
+				return 0
+
 			var/position_limit = job.total_positions
 			if(!latejoin)
 				position_limit = job.spawn_positions
 			if((job.current_positions < position_limit) || position_limit == -1)
 				Debug("Player: [player] is now Rank: [rank], JCP:[job.current_positions], JPL:[position_limit]")
 				player.mind.assigned_role = rank
-				player.mind.role_alt_title = GetAltTitle(player, rank)
+				player.mind.role_alt_title = GetPlayerAltTitle(player, rank)
 				unassigned -= player
 				job.current_positions++
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
 
+	proc/FreeRole(var/rank)	//making additional slot on the fly
+		var/datum/job/job = GetJob(rank)
+		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
+			job.total_positions++
+			return 1
+		return 0
 
 	proc/FindOccupationCandidates(datum/job/job, level, flag)
 		Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
@@ -74,38 +122,54 @@ var/global/datum/controller/occupations/job_master
 			if(jobban_isbanned(player, job.title))
 				Debug("FOC isbanned failed, Player: [player]")
 				continue
-			if(flag && (!player.preferences.be_special & flag))
+			if(!job.player_old_enough(player.client))
+				Debug("FOC player not old enough, Player: [player]")
+				continue
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
+				Debug("FOC character not old enough, Player: [player]")
+				continue
+			if(flag && !(flag in player.client.prefs.be_special_role))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
-			if(player.preferences.GetJobDepartment(job, level) & job.flag)
+			if(player.client.prefs.CorrectLevel(job,level))
 				Debug("FOC pass, Player: [player], Level:[level]")
 				candidates += player
 		return candidates
 
 	proc/GiveRandomJob(var/mob/new_player/player)
-		Debug("FOC Giving random job, Player: [player]")
+		Debug("GRJ Giving random job, Player: [player]")
 		for(var/datum/job/job in shuffle(occupations))
 			if(!job)
+				continue
+
+			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
 				continue
 
-			if(job in command_positions) //If you want a command position, select it!
+			if(job.is_restricted(player.client.prefs))
+				continue
+
+			if(job.title in command_positions) //If you want a command position, select it!
 				continue
 
 			if(jobban_isbanned(player, job.title))
-				Debug("FOC isbanned failed, Player: [player], Job: [job.title]")
+				Debug("GRJ isbanned failed, Player: [player], Job: [job.title]")
+				continue
+
+			if(!job.player_old_enough(player.client))
+				Debug("GRJ player not old enough, Player: [player]")
 				continue
 
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
-				Debug("FOC Random job given, Player: [player], Job: [job]")
+				Debug("GRJ Random job given, Player: [player], Job: [job]")
 				AssignRole(player, job.title)
 				unassigned -= player
 				break
 
 	proc/ResetOccupations()
-		for(var/mob/new_player/player in player_list)
+		for(var/mob/new_player/player in GLOB.player_list)
 			if((player) && (player.mind))
 				player.mind.assigned_role = null
 				player.mind.special_role = null
@@ -122,7 +186,34 @@ var/global/datum/controller/occupations/job_master
 				if(!job)	continue
 				var/list/candidates = FindOccupationCandidates(job, level)
 				if(!candidates.len)	continue
-				var/mob/new_player/candidate = pick(candidates)
+
+				// Build a weighted list, weight by age.
+				var/list/weightedCandidates = list()
+				for(var/mob/V in candidates)
+					// Log-out during round-start? What a bad boy, no head position for you!
+					if(!V.client) continue
+					var/age = V.client.prefs.age
+
+					if(age < job.minimum_character_age) // Nope.
+						continue
+
+					switch(age)
+						if(job.minimum_character_age to (job.minimum_character_age+10))
+							weightedCandidates[V] = 3 // Still a bit young.
+						if((job.minimum_character_age+10) to (job.ideal_character_age-10))
+							weightedCandidates[V] = 6 // Better.
+						if((job.ideal_character_age-10) to (job.ideal_character_age+10))
+							weightedCandidates[V] = 10 // Great.
+						if((job.ideal_character_age+10) to (job.ideal_character_age+20))
+							weightedCandidates[V] = 6 // Still good.
+						if((job.ideal_character_age+20) to INFINITY)
+							weightedCandidates[V] = 3 // Geezer.
+						else
+							// If there's ABSOLUTELY NOBODY ELSE
+							if(candidates.len == 1) weightedCandidates[V] = 1
+
+
+				var/mob/new_player/candidate = pickweight(weightedCandidates)
 				if(AssignRole(candidate, command_position))
 					return 1
 		return 0
@@ -140,36 +231,6 @@ var/global/datum/controller/occupations/job_master
 		return
 
 
-	proc/FillAIPosition()
-		var/ai_selected = 0
-		var/datum/job/job = GetJob("AI")
-		if(!job)	return 0
-		if((job.title == "AI") && (config) && (!config.allow_ai))	return 0
-
-		for(var/i = job.total_positions, i > 0, i--)
-			for(var/level = 1 to 3)
-				var/list/candidates = list()
-				if(ticker.mode.name == "AI malfunction")//Make sure they want to malf if its malf
-					candidates = FindOccupationCandidates(job, level, BE_MALF)
-				else
-					candidates = FindOccupationCandidates(job, level)
-				if(candidates.len)
-					var/mob/new_player/candidate = pick(candidates)
-					if(AssignRole(candidate, "AI"))
-						ai_selected++
-						break
-			//Malf NEEDS an AI so force one if we didn't get a player who wanted it
-			if((ticker.mode.name == "AI malfunction")&&(!ai_selected))
-				unassigned = shuffle(unassigned)
-				for(var/mob/new_player/player in unassigned)
-					if(jobban_isbanned(player, "AI"))	continue
-					if(AssignRole(player, "AI"))
-						ai_selected++
-						break
-			if(ai_selected)	return 1
-			return 0
-
-
 /** Proc DivideOccupations
  *  fills var "assigned_role" for all ready players.
  *  This proc must not have any side effect besides of modifying "assigned_role".
@@ -180,14 +241,15 @@ var/global/datum/controller/occupations/job_master
 		SetupOccupations()
 
 		//Holder for Triumvirate is stored in the ticker, this just processes it
-		if(ticker)
-			for(var/datum/job/ai/A in occupations)
-				if(ticker.triai)
+		if(ticker && ticker.triai)
+			for(var/datum/job/A in occupations)
+				if(A.title == "AI")
 					A.spawn_positions = 3
+					break
 
 		//Get the players who are ready
-		for(var/mob/new_player/player in player_list)
-			if((player) && (player.client) && (player.ready) && (player.mind) && (!player.mind.assigned_role))
+		for(var/mob/new_player/player in GLOB.player_list)
+			if(player.ready && player.mind && !player.mind.assigned_role)
 				unassigned += player
 
 		Debug("DO, Len: [unassigned.len]")
@@ -200,7 +262,7 @@ var/global/datum/controller/occupations/job_master
 
 		//People who wants to be assistants, sure, go on.
 		Debug("DO, Running Assistant Check 1")
-		var/datum/job/assist = new /datum/job/assistant()
+		var/datum/job/assist = new DEFAULT_JOB_TYPE ()
 		var/list/assistant_candidates = FindOccupationCandidates(assist, 3)
 		Debug("AC1, Candidates: [assistant_candidates.len]")
 		for(var/mob/new_player/player in assistant_candidates)
@@ -214,11 +276,6 @@ var/global/datum/controller/occupations/job_master
 		FillHeadPosition()
 		Debug("DO, Head Check end")
 
-		//Check for an AI
-		Debug("DO, Running AI Check")
-		FillAIPosition()
-		Debug("DO, AI Check end")
-
 		//Other jobs are now checked
 		Debug("DO, Running Standard Check")
 
@@ -229,6 +286,7 @@ var/global/datum/controller/occupations/job_master
 
 		// Loop through all levels from high to low
 		var/list/shuffledoccupations = shuffle(occupations)
+		// var/list/disabled_jobs = ticker.mode.disabled_jobs  // So we can use .Find down below without a colon.
 		for(var/level = 1 to 3)
 			//Check the head jobs first each level
 			CheckHeadPositions(level)
@@ -238,19 +296,23 @@ var/global/datum/controller/occupations/job_master
 
 				// Loop through all jobs
 				for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-					if(!job)
+					if(!job || ticker.mode.disabled_jobs.Find(job.title) )
 						continue
 
 					if(jobban_isbanned(player, job.title))
-						Debug("FOC isbanned failed, Player: [player], Job:[job.title]")
+						Debug("DO isbanned failed, Player: [player], Job:[job.title]")
+						continue
+
+					if(!job.player_old_enough(player.client))
+						Debug("DO player not old enough, Player: [player], Job:[job.title]")
 						continue
 
 					// If the player wants that job on this level, then try give it to him.
-					if(player.preferences.GetJobDepartment(job, level) & job.flag)
+					if(player.client.prefs.CorrectLevel(job,level))
 
 						// If the job isn't filled
 						if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
-							Debug("FOC pass, Player: [player], Level:[level], Job:[job.title]")
+							Debug("DO pass, Player: [player], Level:[level], Job:[job.title]")
 							AssignRole(player, job.title)
 							unassigned -= player
 							break
@@ -258,26 +320,8 @@ var/global/datum/controller/occupations/job_master
 		// Hand out random jobs to the people who didn't get any in the last check
 		// Also makes sure that they got their preference correct
 		for(var/mob/new_player/player in unassigned)
-			if(player.preferences.userandomjob)
+			if(player.client.prefs.alternate_option == GET_RANDOM_JOB)
 				GiveRandomJob(player)
-
-		/*
-		Old job system
-		for(var/level = 1 to 3)
-			for(var/datum/job/job in occupations)
-				Debug("Checking job: [job]")
-				if(!job)
-					continue
-				if(!unassigned.len)
-					break
-				if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
-					continue
-				var/list/candidates = FindOccupationCandidates(job, level)
-				while(candidates.len && ((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
-					var/mob/new_player/candidate = pick(candidates)
-					Debug("Selcted: [candidate], for: [job.title]")
-					AssignRole(candidate, job.title)
-					candidates -= candidate*/
 
 		Debug("DO, Standard Check end")
 
@@ -285,123 +329,224 @@ var/global/datum/controller/occupations/job_master
 
 		// For those who wanted to be assistant if their preferences were filled, here you go.
 		for(var/mob/new_player/player in unassigned)
-			Debug("AC2 Assistant located, Player: [player]")
-			AssignRole(player, "Assistant")
+			if(player.client.prefs.alternate_option == BE_ASSISTANT)
+				Debug("AC2 Assistant located, Player: [player]")
+				if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+					var/datum/mil_branch/branch = mil_branches.get_branch(player.get_branch_pref())
+					AssignRole(player, branch.assistant_job)
+				else
+					AssignRole(player, "Assistant")
+
+		//For ones returning to lobby
+		for(var/mob/new_player/player in unassigned)
+			if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
+				player.ready = 0
+				player.new_player_panel_proc()
+				unassigned -= player
 		return 1
 
 
 	proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
-		if(!H)	return 0
+		if(!H)	return null
+
 		var/datum/job/job = GetJob(rank)
+		var/list/spawn_in_storage = list()
+
 		if(job)
-			job.equip(H)
+
+			//Equip custom gear loadout.
+			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
+			var/list/custom_equip_leftovers = list()
+			if(H.client.prefs.Gear() && job.loadout_allowed)
+				for(var/thing in H.client.prefs.Gear())
+					var/datum/gear/G = gear_datums[thing]
+					if(G)
+						var/permitted
+						if(G.allowed_roles)
+							for(var/job_type in G.allowed_roles)
+								if(job.type == job_type)
+									permitted = 1
+						else
+							permitted = 1
+
+						if(G.whitelisted && (!(H.species.name in G.whitelisted)))
+							permitted = 0
+
+						if(!permitted)
+							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+							continue
+
+						if(G.slot && !(G.slot in custom_equip_slots))
+							// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
+							// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
+							var/metadata = H.client.prefs.Gear()[G.display_name]
+							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
+								custom_equip_leftovers += thing
+							else if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
+								to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
+								custom_equip_slots.Add(G.slot)
+							else
+								custom_equip_leftovers.Add(thing)
+						else
+							spawn_in_storage += thing
+			//Equip job items.
+			job.setup_account(H)
+			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
+			job.apply_fingerprints(H)
+
+			if(H.char_rank && H.char_rank.accessory)
+				for(var/accessory_path in H.char_rank.accessory)
+					var/list/accessory_data = H.char_rank.accessory[accessory_path]
+					if(islist(accessory_data))
+						var/amt = accessory_data[1]
+						var/list/accessory_args = accessory_data.Copy()
+						accessory_args[1] = src
+						for(var/i in 1 to amt)
+							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
+					else
+						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
+			//If some custom items could not be equipped before, try again now.
+			for(var/thing in custom_equip_leftovers)
+				var/datum/gear/G = gear_datums[thing]
+				if(G.slot in custom_equip_slots)
+					spawn_in_storage += thing
+				else
+					var/metadata = H.client.prefs.Gear()[G.display_name]
+					if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
+						to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
+						custom_equip_slots.Add(G.slot)
+					else
+						spawn_in_storage += thing
 		else
-			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
+			to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
 		H.job = rank
-		if(H.mind && H.mind.assigned_role != rank)
-			H.mind.assigned_role = rank
-			H.mind.role_alt_title = null
 
-		if(!joined_late)
-			var/obj/S = null
-			for(var/obj/effect/landmark/start/sloc in landmarks_list)
-				if(sloc.name != rank)	continue
-				if(locate(/mob/living) in sloc.loc)	continue
-				S = sloc
-				break
-			if(!S)
-				S = locate("start*[rank]") // use old stype
+		if(!joined_late || job.latejoin_at_spawnpoints)
+			var/obj/S = get_roundstart_spawnpoint(rank)
+
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
-				H.loc = S.loc
+				H.forceMove(S.loc)
+			else
+				var/datum/spawnpoint/spawnpoint = get_spawnpoint_for(H.client, rank)
+				H.forceMove(pick(spawnpoint.turfs))
 
+			// Moving wheelchair if they have one
+			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
+				H.buckled.forceMove(H.loc)
+				H.buckled.set_dir(H.dir)
 
+		// If they're head, give them the account info for their department
+		if(H.mind && job.head_position)
+			var/remembered_info = ""
+			var/datum/money_account/department_account = department_accounts[job.department]
 
+			if(department_account)
+				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
+				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
+				remembered_info += "<b>Your department's account funds are:</b> T[department_account.money]<br>"
+
+			H.mind.store_memory(remembered_info)
+
+		var/alt_title = null
 		if(H.mind)
 			H.mind.assigned_role = rank
+			alt_title = H.mind.role_alt_title
 
 			switch(rank)
 				if("Cyborg")
-					H.Robotize()
-					return 1
-				if("AI","Clown")	//don't need bag preference stuff!
-				else
-					switch(H.backbag) //BS12 EDIT
-						if(1)
-							H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-						if(2)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack(H)
-							new /obj/item/weapon/storage/box(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(3)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel_norm(H)
-							new /obj/item/weapon/storage/box(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
-						if(4)
-							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
-							new /obj/item/weapon/storage/box(BPK)
-							H.equip_to_slot_or_del(BPK, slot_back,1)
+					return H.Robotize()
+				if("AI")
+					return H
+				if("Captain")
+					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/boatswain.ogg', volume=20)
+					captain_announcement.Announce("All hands, Captain [H.real_name] on deck!", new_sound=announce_sound)
 
-		H << "<B>You are the [rank].</B>"
-		H << "<b>As the [rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+			//Deferred item spawning.
+			for(var/thing in spawn_in_storage)
+				var/datum/gear/G = gear_datums[thing]
+				var/metadata = H.client.prefs.Gear()[G.display_name]
+				var/item = G.spawn_item(null, metadata)
 
-		if(H.mind.assigned_role == rank && H.mind.role_alt_title)
-			spawnId(H, rank, H.mind.role_alt_title)
+				var/atom/placed_in = H.equip_to_storage(item)
+				if(placed_in)
+					to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
+					continue
+				if(H.equip_to_appropriate_slot(item))
+					to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
+					continue
+				if(H.put_in_hands(item))
+					to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
+					continue
+				to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
+				qdel(item)
+
+		if(istype(H)) //give humans wheelchairs, if they need them.
+			var/obj/item/organ/external/l_foot = H.get_organ(BP_L_FOOT)
+			var/obj/item/organ/external/r_foot = H.get_organ(BP_R_FOOT)
+			if(!l_foot || !r_foot)
+				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
+				H.buckled = W
+				H.update_canmove()
+				W.set_dir(H.dir)
+				W.buckled_mob = H
+				W.add_fingerprint(H)
+
+		to_chat(H, "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>")
+
+		if(job.supervisors)
+			to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+
+		to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
+
+		if(job.req_admin_notify)
+			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
+
+
+		// EMAIL GENERATION
+		var/domain
+		if(H.char_branch && H.char_branch.email_domain)
+			domain = H.char_branch.email_domain
 		else
-			spawnId(H,rank)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_ears)
-//		H.update_icons()
-		return 1
+			domain = "freemail.nt"
+		var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
+		var/complete_login = "[sanitized_name]@[domain]"
 
+		// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+		// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+		if(ntnet_global.does_email_exist(complete_login))
+			complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
 
-	proc/spawnId(var/mob/living/carbon/human/H, rank, title)
-		if(!H)	return 0
-		if(!title) title = rank
-		var/obj/item/weapon/card/id/C = null
-
-		var/datum/job/job = null
-		for(var/datum/job/J in occupations)
-			if(J.title == rank)
-				job = J
-				break
-
-		if(job)
-			if(job.title == "Cyborg")
-				return
-			else
-				C = new job.idtype(H)
+		// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+		if(ntnet_global.does_email_exist(complete_login))
+			to_chat(H, "You were not assigned an email address.")
+			H.mind.store_memory("You were not assigned an email address.")
 		else
-			C = new /obj/item/weapon/card/id(H)
-		if(C)
-			C.registered_name = H.real_name
-			C.assignment = title
-			C.name = "[C.registered_name]'s ID Card ([C.assignment])"
-			C.access = get_access(rank)
-			H.equip_to_slot_or_del(C, slot_wear_id)
-	/*	if(prob(50))
-			H.equip_to_slot_or_del(new /obj/item/weapon/pen(H), slot_r_store)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/pen/blue(H), slot_r_store)*/
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
-		if(locate(/obj/item/device/pda,H))//I bet this could just use locate.  It can --SkyMarshal
-			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
-			pda.owner = H.real_name
-			pda.ownjob = H.wear_id.assignment
-			pda.name = "PDA-[H.real_name] ([pda.ownjob])"
-		return 1
+			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+			EA.password = GenerateKey()
+			EA.login = 	complete_login
+			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
+			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+		// END EMAIL GENERATION
 
+		//Gives glasses to the vision impaired
+		if(H.disabilities & NEARSIGHTED)
+			var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(H), slot_glasses)
+			if(equipped)
+				var/obj/item/clothing/glasses/G = H.glasses
+				G.prescription = 7
+
+		BITSET(H.hud_updateflag, ID_HUD)
+		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
+		return H
 
 	proc/LoadJobs(jobsfile) //ran during round setup, reads info from jobs.txt -- Urist
 		if(!config.load_jobs_from_txt)
 			return 0
 
-		var/text = file2text(jobsfile)
-
-		if(!text)
-			world << "No jobs.txt found, using defaults."
-			return
-
-		var/list/jobEntries = dd_text2list(text, "\n")
+		var/list/jobEntries = file2list(jobsfile)
 
 		for(var/job in jobEntries)
 			if(!job)
@@ -441,19 +586,85 @@ var/global/datum/controller/occupations/job_master
 			var/level3 = 0 //low
 			var/level4 = 0 //never
 			var/level5 = 0 //banned
-			for(var/mob/new_player/player in player_list)
-				if(!((player) && (player.client) && (player.ready) && (player.mind) && (!player.mind.assigned_role)))
+			var/level6 = 0 //account too young
+			for(var/mob/new_player/player in GLOB.player_list)
+				if(!(player.ready && player.mind && !player.mind.assigned_role))
 					continue //This player is not ready
 				if(jobban_isbanned(player, job.title))
 					level5++
 					continue
-				if(player.preferences.GetJobDepartment(job, 1) & job.flag)
+				if(!job.player_old_enough(player.client))
+					level6++
+					continue
+				if(player.client.prefs.CorrectLevel(job, 1))
 					level1++
-				else if(player.preferences.GetJobDepartment(job, 2) & job.flag)
+				else if(player.client.prefs.CorrectLevel(job, 2))
 					level2++
-				else if(player.preferences.GetJobDepartment(job, 3) & job.flag)
+				else if(player.client.prefs.CorrectLevel(job, 3))
 					level3++
 				else level4++ //not selected
 
-			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|-"
+			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 			feedback_add_details("job_preferences",tmp_str)
+
+
+/**
+ *  Return appropriate /datum/spawnpoint for given client and rank
+ *
+ *  Spawnpoint will be the one set in preferences for the client, unless the
+ *  preference is not set, or the preference is not appropriate for the rank, in
+ *  which case a fallback will be selected.
+ */
+/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)
+
+	if(!C)
+		CRASH("Null client passed to get_spawnpoint_for() proc!")
+
+	var/mob/H = C.mob
+	var/spawnpoint = C.prefs.spawnpoint
+	var/datum/spawnpoint/spawnpos
+
+	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
+		spawnpoint = GLOB.using_map.default_spawn
+
+	if(spawnpoint)
+		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
+			if(H)
+				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
+			spawnpos = null
+		else
+			spawnpos = spawntypes()[spawnpoint]
+
+	if(spawnpos && !spawnpos.check_job_spawning(rank))
+		if(H)
+			to_chat(H, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([rank]). Spawning you at another spawn point instead.</span>")
+		spawnpos = null
+
+	if(!spawnpos)
+		// Step through all spawnpoints and pick first appropriate for job
+		for(var/spawntype in GLOB.using_map.allowed_spawns)
+			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
+			if(candidate.check_job_spawning(rank))
+				spawnpos = candidate
+				break
+
+	if(!spawnpos)
+		// Pick at random from all the (wrong) spawnpoints, just so we have one
+		warning("Could not find an appropriate spawnpoint for job [rank].")
+		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
+
+	return spawnpos
+
+/datum/controller/occupations/proc/GetJobByType(var/job_type)
+	return occupations_by_type[job_type]
+
+/datum/controller/occupations/proc/get_roundstart_spawnpoint(var/rank)
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	if(loc_list.len)
+		return pick(loc_list)
+	else
+		return locate("start*[rank]") // use old stype

@@ -2,7 +2,7 @@
 
 /obj/item/device/violin
 	name = "space violin"
-	desc = "A wooden musical instrument with four strings and a bow. \"The devil went down to space, he was looking for an assistant to grief.\""
+	desc = "A wooden musical instrument with four strings and a bow. \"The devil went down to space, he was looking for an assistant to grief.\"."
 	icon = 'icons/obj/musician.dmi'
 	icon_state = "violin"
 	item_state = "violin"
@@ -14,7 +14,8 @@
 	var/repeat = 0
 
 /obj/item/device/violin/proc/playnote(var/note as text)
-	//world << "Note: [note]"
+//	log_debug("Note: [note]")
+
 	var/soundfile
 	/*BYOND loads resource files at compile time if they are ''. This means you can't really manipulate them dynamically.
 	Tried doing it dynamically at first but its more trouble than its worth. Would have saved many lines tho.*/
@@ -190,7 +191,7 @@
 		if("Cn9")	soundfile = 'sound/violin/Cn9.mid'
 		else		return
 
-	hearers(15, get_turf(src)) << sound(soundfile)
+	sound_to(hearers(15, get_turf(src)), sound(soundfile))
 
 /obj/item/device/violin/proc/playsong()
 	do
@@ -201,18 +202,22 @@
 			cur_acc[i] = "n"
 
 		for(var/line in song.lines)
-			//world << line
-			for(var/beat in dd_text2list(lowertext(line), ","))
-				//world << "beat: [beat]"
-				var/list/notes = dd_text2list(beat, "/")
-				for(var/note in dd_text2list(notes[1], "-"))
-					//world << "note: [note]"
+//			log_debug(line)
+
+			for(var/beat in splittext(lowertext(line), ","))
+//				log_debug("beat: [beat]")
+
+				var/list/notes = splittext(beat, "/")
+				for(var/note in splittext(notes[1], "-"))
+//					log_debug("note: [note]")
+
 					if(!playing || !isliving(loc))//If the violin is playing, or isn't held by a person
 						playing = 0
 						return
 					if(lentext(note) == 0)
 						continue
-					//world << "Parse: [copytext(note,1,2)]"
+//					log_debug("Parse: [copytext(note,1,2)]")
+
 					var/cur_note = text2ascii(note) - 96
 					if(cur_note < 1 || cur_note > 7)
 						continue
@@ -237,7 +242,7 @@
 
 /obj/item/device/violin/attack_self(mob/user as mob)
 	if(!isliving(user) || user.stat || user.restrained() || user.lying)	return
-	user.machine = src
+	user.set_machine(src)
 
 	var/dat = "<HEAD><TITLE>Violin</TITLE></HEAD><BODY>"
 
@@ -271,7 +276,7 @@
 					Notes are played by the names of the note, and optionally, the accidental, and/or the octave number.<br>
 					By default, every note is natural and in octave 3. Defining otherwise is remembered for each note.<br>
 					Example: <i>C,D,E,F,G,A,B</i> will play a C major scale.<br>
-					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is C3,C4,C4,C3</i><br>
+					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is <i>C3,C4,C4,C3</i><br>
 					Chords can be played simply by seperating each note with a hyphon: <i>A-C#,Cn-E,E-G#,Gn-B</i><br>
 					A pause may be denoted by an empty chord: <i>C,E,,C,G</i><br>
 					To make a chord be a different time, end it with /x, where the chord length will be length<br>
@@ -367,18 +372,18 @@
 
 			//split into lines
 			spawn()
-				var/list/lines = dd_text2list(t, "\n")
+				var/list/lines = splittext(t, "\n")
 				var/tempo = 5
 				if(copytext(lines[1],1,6) == "BPM: ")
 					tempo = 600 / text2num(copytext(lines[1],6))
 					lines.Cut(1,2)
 				if(lines.len > 50)
-					usr << "Too many lines!"
+					to_chat(usr, "Too many lines!")
 					lines.Cut(51)
 				var/linenum = 1
 				for(var/l in lines)
 					if(lentext(l) > 50)
-						usr << "Line [linenum] too long!"
+						to_chat(usr, "Line [linenum] too long!")
 						lines.Remove(l)
 					else
 						linenum++

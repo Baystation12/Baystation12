@@ -13,35 +13,32 @@
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
-	speed = -1
-	stop_automated_movement_when_pulled = 0
+	speed = 4
 	maxHealth = 25
 	health = 25
 
 	harm_intent_damage = 8
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	attacktext = "bites"
+	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	//Space carp aren't affected by atmos.
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 
-/mob/living/simple_animal/hostile/carp/Process_Spacemove(var/check_drift = 0)
-	return	//No drifting in space for space carp!	//original comments do not steal
+	break_stuff_probability = 15
+
+	faction = "carp"
+
+/mob/living/simple_animal/hostile/carp/Allow_Spacemove(var/check_drift = 0)
+	return 1	//No drifting in space for space carp!	//original comments do not steal
 
 /mob/living/simple_animal/hostile/carp/FindTarget()
 	. = ..()
 	if(.)
-		emote("nashes at [.]")
+		custom_emote(1,"nashes at [.]")
 
 /mob/living/simple_animal/hostile/carp/AttackingTarget()
 	. =..()

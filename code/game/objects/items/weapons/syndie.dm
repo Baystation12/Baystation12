@@ -1,5 +1,5 @@
 /obj/item/weapon/syndie
-	icon = 'syndieweapons.dmi'
+	icon = 'icons/obj/syndieweapons.dmi'
 
 /*C-4 explosive charge and etc, replaces the old syndie transfer valve bomb.*/
 
@@ -11,7 +11,7 @@
 	item_state = "c-4small"
 	name = "normal-sized package"
 	desc = "A small wrapped package."
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 	var/power = 1  /*Size of the explosion.*/
 	var/size = "small"  /*Used for the icon, this one will make c-4small_0 for the off state.*/
@@ -44,7 +44,7 @@
 					D.open()
 			if(istype(T,/turf/simulated/wall))
 				T.dismantle_wall(1)
-		del(src)
+		qdel(src)
 
 
 /*Detonator, disguised as a lighter*/
@@ -55,7 +55,7 @@
 	item_state = "c-4detonator"
 	name = "\improper Zippo lighter"  /*Sneaky, thanks Dreyfus.*/
 	desc = "The zippo."
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 	var/obj/item/weapon/syndie/c4explosive/bomb
 	var/pr_open = 0  /*Is the "What do you want to do?" prompt open?*/
@@ -64,21 +64,21 @@
 	switch(src.icon_state)
 		if("c-4detonator_0")
 			src.icon_state = "c-4detonator_1"
-			user << "You flick open the lighter."
+			to_chat(user, "You flick open the lighter.")
 
 		if("c-4detonator_1")
 			if(!pr_open)
 				pr_open = 1
 				switch(alert(user, "What would you like to do?", "Lighter", "Press the button.", "Close the lighter."))
 					if("Press the button.")
-						user << "\red You press the button."
+						to_chat(user, "<span class='warning'>You press the button.</span>")
 						flick("c-4detonator_click", src)
 						if(src.bomb)
 							src.bomb.detonate()
-							log_admin("[user.real_name]([user.ckey]) has triggered [src.bomb] with [src].")
-							message_admins("\red [user.real_name]([user.ckey]) has triggered [src.bomb] with [src].")
+							log_admin("[key_name(user)] has triggered [src.bomb] with [src].")
+							message_admins("<span class='danger'>[key_name_admin(user)] has triggered [src.bomb] with [src].</span>")
 
 					if("Close the lighter.")
 						src.icon_state = "c-4detonator_0"
-						user << "You close the lighter."
+						to_chat(user, "You close the lighter.")
 				pr_open = 0

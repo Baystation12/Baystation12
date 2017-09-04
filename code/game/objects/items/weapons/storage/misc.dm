@@ -1,124 +1,49 @@
-/*
- * Contains:
- *		Monkey Cube Box
- *		Candle Packs
- *		Snap Pop Box
- *		Crayon Box
- *		Beaker Box
- */
+/obj/item/weapon/storage/pill_bottle/dice	//7d6
+	name = "bag of dice"
+	desc = "It's a small bag with dice inside."
+	icon = 'icons/obj/dice.dmi'
+	icon_state = "dicebag"
+
+/obj/item/weapon/storage/pill_bottle/dice/New()
+	..()
+	for(var/i = 1 to 7)
+		new /obj/item/weapon/dice( src )
+
+/obj/item/weapon/storage/pill_bottle/dice_nerd	//DnD dice
+	name = "bag of gaming dice"
+	desc = "It's a small bag with gaming dice inside."
+	icon = 'icons/obj/dice.dmi'
+	icon_state = "magicdicebag"
+
+/obj/item/weapon/storage/pill_bottle/dice_nerd/New()
+	..()
+	new /obj/item/weapon/dice/d4( src )
+	new /obj/item/weapon/dice( src )
+	new /obj/item/weapon/dice/d8( src )
+	new /obj/item/weapon/dice/d10( src )
+	new /obj/item/weapon/dice/d12( src )
+	new /obj/item/weapon/dice/d20( src )
+	new /obj/item/weapon/dice/d100( src )
 
 /*
- * Monkey Cube Box
+ * Donut Box
  */
 
-/obj/item/weapon/storage/monkeycube_box
-	name = "monkey cube box"
-	desc = "Drymate brand monkey cubes. Just add water!"
+/obj/item/weapon/storage/box/donut
 	icon = 'icons/obj/food.dmi'
-	icon_state = "monkeycubebox"
-	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
+	icon_state = "donutbox"
+	name = "donut box"
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/donut)
+	foldable = /obj/item/stack/material/cardboard
 
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 6)
 
-/obj/item/weapon/storage/monkeycube_box/New()
-	..()
-	new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped(src)
-	return
+/obj/item/weapon/storage/box/donut/update_icon()
+	overlays.Cut()
+	var/i = 0
+	for(var/obj/item/weapon/reagent_containers/food/snacks/donut/D in contents)
+		overlays += image('icons/obj/food.dmi', "[i][D.overlay_state]")
+		i++
 
-/*
- * Snap Pop Box
- */
-
-/obj/item/weapon/storage/snappopbox
-	name = "snap pop box"
-	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "spbox"
-	storage_slots = 8
-	can_hold = list("/obj/item/toy/snappop")
-
-/obj/item/weapon/storage/snappopbox/New()
-	..()
-	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/toy/snappop(src)
-
-/*
- * Match Box
- */
-
-/obj/item/weapon/storage/matchbox
-	name = "Matchbox"
-	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
-	icon = 'icons/obj/cigarettes.dmi'
-	icon_state = "matchbox"
-	item_state = "zippo"
-	storage_slots = 10
-	w_class = 1
-	flags = TABLEPASS
-	slot_flags = SLOT_BELT
-
-
-/obj/item/weapon/storage/matchbox/New()
-	..()
-	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/weapon/match(src)
-	return
-
-/obj/item/weapon/storage/matchbox/attackby(obj/item/weapon/match/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/match) && W.lit == 0)
-		W.lit = 1
-		W.icon_state = "match_lit"
-		processing_objects.Add(W)
-	W.update_icon()
-	return
-
-/*
- * Crayon Box
- */
-
-/obj/item/weapon/storage/crayonbox/New()
-	..()
-	new /obj/item/toy/crayon/red(src)
-	new /obj/item/toy/crayon/orange(src)
-	new /obj/item/toy/crayon/yellow(src)
-	new /obj/item/toy/crayon/green(src)
-	new /obj/item/toy/crayon/blue(src)
-	new /obj/item/toy/crayon/purple(src)
-	update_icon()
-
-/obj/item/weapon/storage/crayonbox/update_icon()
-	overlays = list() //resets list
-	overlays += image('icons/obj/crayons.dmi',"crayonbox")
-	for(var/obj/item/toy/crayon/crayon in contents)
-		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
-
-/obj/item/weapon/storage/crayonbox/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/toy/crayon))
-		switch(W:colourName)
-			if("mime")
-				usr << "This crayon is too sad to be contained in this box."
-				return
-			if("rainbow")
-				usr << "This crayon is too powerful to be contained in this box."
-				return
-	..()
-
-/*
- * Beaker Box
- */
-/obj/item/weapon/storage/beakerbox
-	name = "Beaker Box"
-	icon_state = "beaker"
-	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard	//BubbleWrap
-
-/obj/item/weapon/storage/beakerbox/New()
-	..()
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
-	new /obj/item/weapon/reagent_containers/glass/beaker( src )
+/obj/item/weapon/storage/box/donut/empty
+	startswith = null

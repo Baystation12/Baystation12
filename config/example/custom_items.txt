@@ -1,0 +1,41 @@
+##
+# Custom items go here. They are modifications of existing paths; look at the example for details.
+# Item will spawn if the target has one of the req_titles and if their on-spawn ID has the required access level.
+# req_access is going to be a shit to maintain since the config file can't grab constants and has to use integers, use it minimally.
+# Separate titles with a single comma and a space (', ') or they'll bork.
+#
+# EX:
+# {
+# ckey: zuhayr
+# character_name: Jane Doe
+# item_path: /obj/item/toy/plushie
+# item_name: ugly plush toy
+# item_icon: flagmask     
+# item_desc: It's truly hideous.
+# req_titles: Assistant, Security Officer
+# req_access: 1
+# }
+#
+# {
+# ckey: zuhayr
+# character_name: Jane Doe
+# item_path: /obj/item/device/kit/paint
+# item_name: APLU customisation kit
+# item_desc: A customisation kit with all the parts needed to turn an APLU into a "Titan's Fist" model.
+# kit_name: APLU "Titan's Fist"
+# kit_desc: Looks like an overworked, under-maintained Ripley with some horrific damage.
+# kit_icon: titan
+# additional_data: ripley, firefighter
+# }
+#
+# {
+# ckey: zuhayr
+# character_name: Jane Doe
+# item_path: /obj/item/device/kit/suit
+# item_name: salvage suit customisation kit
+# item_desc: A customisation kit with all the parts needed to convert a suit.
+# kit_name: salvage
+# kit_desc: An orange voidsuit. Reinforced!
+# kit_icon: salvage
+# }
+##

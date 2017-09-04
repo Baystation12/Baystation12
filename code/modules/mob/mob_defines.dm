@@ -1,20 +1,24 @@
 /mob
 	density = 1
-	layer = 4.0
+	plane = MOB_PLANE
+
+	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
-//	flags = NOREACT
+	flags = PROXMOVE
+
+	virtual_mob = /mob/observer/virtual/mob
+
+	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
+
+	var/lastKnownIP = null
+	var/computer_id = null
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
-	//Not in use yet
-	var/obj/effect/organstructure/organStructure = null
-
-//	var/uses_hud = 0
-	var/obj/screen/flash = null
-	var/obj/screen/blind = null
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
+	var/obj/screen/purged = null
 	var/obj/screen/internals = null
 	var/obj/screen/oxygen = null
 	var/obj/screen/i_select = null
@@ -26,8 +30,14 @@
 	var/obj/screen/throw_icon = null
 	var/obj/screen/nutrition_icon = null
 	var/obj/screen/pressure = null
-	var/obj/screen/damageoverlay = null
 	var/obj/screen/pain = null
+	var/obj/screen/gun/item/item_use_icon = null
+	var/obj/screen/gun/radio/radio_use_icon = null
+	var/obj/screen/gun/move/gun_move_icon = null
+	var/obj/screen/gun/run/gun_run_icon = null
+	var/obj/screen/gun/mode/gun_setting_icon = null
+
+	var/obj/screen/movable/ability_master/ability_master = null
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
 	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
@@ -37,193 +47,121 @@
 	*/
 	var/obj/screen/zone_sel/zone_sel = null
 
-	var/emote_allowed = 1
-	var/computer_id = null
-	var/lastattacker = null
-	var/lastattacked = null
-	var/attack_log = list( )
-	var/already_placed = 0.0
+	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
+	var/damageoverlaytemp = 0
 	var/obj/machinery/machine = null
-	var/other_mobs = null
-	var/memory = ""
 	var/poll_answer = 0.0
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
+
 	var/atom/movable/pulling = null
+	var/other_mobs = null
 	var/next_move = null
-	var/prev_move = null
-	var/monkeyizing = null	//Carbon
-	var/other = 0.0
+	var/transforming = null	//Carbon
 	var/hand = null
-	var/eye_blind = null	//Carbon
-	var/eye_blurry = null	//Carbon
-	var/ear_deaf = null		//Carbon
-	var/ear_damage = null	//Carbon
-	var/stuttering = null	//Carbon
-	var/slurring = null		//Carbon
 	var/real_name = null
-//	var/original_name = null //Original name is only used in ghost chat! Depracated, now used bb
-	var/flavor_text = ""
-	var/med_record = ""
-	var/sec_record = ""
-	var/blinded = null
+
 	var/bhunger = 0			//Carbon
-	var/ajourn = 0
-//	var/rejuv = null
+
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
-	var/antitoxs = null
-	var/plasma = null
 	var/sleeping = 0		//Carbon
 	var/resting = 0			//Carbon
 	var/lying = 0
 	var/lying_prev = 0
 	var/canmove = 1
-	var/eye_stat = null//Living, potentially Carbon
-	var/lastpuke = 0
+	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
+	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
 	var/unacidable = 0
+	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
+	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
+	var/list/languages = list()         // For speaking/listening.
+	var/species_language = null			// For species who want reset to use a specified default.
+	var/only_species_language  = 0		// For species who can only speak their default and no other languages. Does not effect understanding.
+	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
+	var/facing_dir = null   // Used for the ancient art of moonwalking.
 
 	var/name_archive //For admin things like possession
 
-	var/timeofdeath = 0.0//Living
-	var/cpr_time = 1.0//Carbon
-
+	var/timeofdeath = 0
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/drowsyness = 0.0//Carbon
-	var/dizziness = 0//Carbon
-	var/is_dizzy = 0
-	var/is_jittery = 0
-	var/jitteriness = 0//Carbon
-	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/default_pixel_x = 0
+	var/default_pixel_y = 0
 
-	var/overeatduration = 0		// How long this guy is overeating //Carbon
-	var/paralysis = 0.0
-	var/stunned = 0.0
-	var/weakened = 0.0
-	var/losebreath = 0.0//Carbon
-	var/intent = null//Living
 	var/shakecamera = 0
-	var/a_intent = "help"//Living
-	var/m_int = null//Living
+	var/a_intent = I_HELP//Living
 	var/m_intent = "run"//Living
-	var/lastDblClick = 0
-	var/lastKnownIP = null
-	var/obj/structure/stool/bed/buckled = null//Living
-	var/obj/item/handcuffed = null//Living
-	var/obj/item/legcuffed = null//Living
+	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
 	var/obj/item/weapon/back = null//Human/Monkey
-	var/obj/item/weapon/tank/internal = null//Human/Monkey
 	var/obj/item/weapon/storage/s_active = null//Carbon
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
-	var/seer = 0 //for cult//Carbon, probably Human
 
 	var/datum/hud/hud_used = null
 
-	//var/list/organs = list(  ) //moved to human.
 	var/list/grabbed_by = list(  )
-	var/list/requests = list(  )
-
-	var/list/mapobjs = list()
 
 	var/in_throw_mode = 0
 
-	var/coughedtime = null
-
 	var/inertia_dir = 0
-	var/footstep = 1
 
-	var/music_lastplayed = "null"
+//	var/job = null//Living
 
-	var/job = null//Living
-
-	var/nodamage = 0
-
-	var/be_syndicate = 0//This really should be a client variable.
-	var/be_random_name = 0
-	var/const/blindness = 1//Carbon
-	var/const/deafness = 2//Carbon
-	var/const/muteness = 4//Carbon
-
+	var/can_pull_size = ITEM_SIZE_NO_CONTAINER // Maximum w_class the mob can pull.
+	var/can_pull_mobs = MOB_PULL_SAME          // Whether or not the mob can pull other mobs.
 
 	var/datum/dna/dna = null//Carbon
-	var/radiation = 0.0//Carbon
-
+	var/list/active_genes=list()
 	var/list/mutations = list() //Carbon -- Doohl
 	//see: setup.dm for list of mutations
 
-	var/list/augmentations = list() //Carbon -- Doohl
-	//see: setup.dm for list of augmentations
+	var/radiation = 0.0//Carbon
 
 	var/voice_name = "unidentifiable voice"
-	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)
-	var/say_message = null // When you are understood by others. Currently only used by aliens and monkeys in their say_quote procs
 
-//Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
-	var/proc_holder_list[] = list()//Right now unused.
-	//Also unlike the spell list, this would only store the object in contents, not an object in itself.
+	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
+	var/blinded = null
+	var/ear_deaf = null		//Carbon
 
-	/* Add this line to whatever stat module you need in order to use the proc holder list.
-	Unlike the object spell system, it's also possible to attach verb procs from these objects to right-click menus.
-	This requires creating a verb for the object proc holder.
-
-	if (proc_holder_list.len)//Generic list for proc_holder objects.
-		for(var/obj/effect/proc_holder/P in proc_holder_list)
-			statpanel("[P.panel]","",P)
-	*/
-
-//The last mob/living/carbon to push/drag/grab this mob (mostly used by Metroids friend recognition)
+//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
-
-//Wizard mode, but can be used in other modes thanks to the brand new "Give Spell" badmin button
-	var/obj/effect/proc_holder/spell/list/spell_list = list()
-
-//Changlings, but can be used in other modes
-	var/obj/effect/proc_holder/changpower/list/power_list = list()
-
-//List of active diseases
-
-	var/viruses = list() // replaces var/datum/disease/virus
-
-//Monkey/infected mode
-	var/list/resistances = list()
-	var/datum/disease/virus = null
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	var/update_icon = 1 //Set to 1 to trigger update_icons() at the next life() call
 
-	var/UI = 'icons/mob/screen1_Midnight.dmi' // For changing the UI from preferences
-
-	var/status_flags = 255	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
-	var/nopush = 0 //Can they be shoved?
+	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
 
 	var/area/lastarea = null
 
 	var/digitalcamo = 0 // Can they be tracked by the AI?
 
-	var/datum/preferences/storedpreferences = null
-
-
-	var/list/radar_blips = list() // list of screen objects, radar blips
-	var/radar_open = 0 	// nonzero is radar is open
-
-
 	var/obj/control_object //Used by admins to possess objects. All mobs should have this var
 
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
-	var/robot_talk_understand = 0
-	var/alien_talk_understand = 0
-	var/tajaran_talk_understand = 0
-	var/soghun_talk_understand = 0
-	var/skrell_talk_understand = 0
+	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
 
-	var/has_limbs = 1 //Whether this mob have any limbs he can move with
-	var/can_stand = 1 //Whether this mob have ability to stand
+	//If set, indicates that the client "belonging" to this (clientless) mob is currently controlling some other mob
+	//so don't treat them as being SSD even though their client var is null.
+	var/mob/teleop = null
 
-	var/immune_to_ssd = 0
+	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
+	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
+
+	var/mob_size = MOB_MEDIUM
+	var/throw_multiplier = 1
+
+	var/paralysis = 0
+	var/stunned = 0
+	var/weakened = 0
+	var/drowsyness = 0.0//Carbon
+
+	var/memory = ""
+	var/flavor_text = ""
+
+	var/nabbing = 0  // Whether a creature with a CAN_NAB tag is grabbing normally or in nab mode.

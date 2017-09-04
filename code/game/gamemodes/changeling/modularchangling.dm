@@ -53,7 +53,7 @@ var/list/datum/power/changeling/powerinstances = list()
 /datum/power/changeling/lesser_form
 	name = "Lesser Form"
 	desc = "We debase ourselves and become lesser.  We become a monkey."
-	genomecost = 1
+	genomecost = 4
 	verbpath = /mob/proc/changeling_lesser_form
 
 /datum/power/changeling/deaf_sting
@@ -74,36 +74,29 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Silence Sting"
 	desc = "We silently sting a human, completely silencing them for a short time."
 	helptext = "Does not provide a warning to a victim that they have been stung, until they try to speak and cannot."
-	genomecost = 2
+	genomecost = 3
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_silence_sting
 
 /datum/power/changeling/mimicvoice
 	name = "Mimic Voice"
 	desc = "We shape our vocal glands to sound like a desired voice."
-	helptext = "Will turn your voice into the name that you enter."
-	genomecost = 3
+	helptext = "Will turn your voice into the name that you enter. We must constantly expend chemicals to maintain our form like this"
+	genomecost = 1
 	verbpath = /mob/proc/changeling_mimicvoice
 
 /datum/power/changeling/extractdna
 	name = "Extract DNA"
 	desc = "We stealthily sting a target and extract the DNA from them."
 	helptext = "Will give you the DNA of your target, allowing you to transform into them. Does not count towards absorb objectives."
-	genomecost = 4
+	genomecost = 2
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_extract_dna_sting
-
-/datum/power/changeling/transformation_sting
-	name = "Transformation Sting"
-	desc = "We silently sting a human, injecting a retrovirus that forces them to transform into another."
-	helptext = "Does not provide a warning to others. The victim will transform much like a changeling would."
-	genomecost = 3
-	verbpath = /mob/proc/changeling_transformation_sting
 
 /datum/power/changeling/paralysis_sting
 	name = "Paralysis Sting"
 	desc = "We silently sting a human, paralyzing them for a short time."
-	genomecost = 3
+	genomecost = 8
 	verbpath = /mob/proc/changeling_paralysis_sting
 
 /datum/power/changeling/LSDSting
@@ -115,15 +108,11 @@ var/list/datum/power/changeling/powerinstances = list()
 
 /datum/power/changeling/DeathSting
 	name = "Death Sting"
-	desc = "We silently sting a human, filling him with potent chemicals. His rapid death is all but assured."
+	desc = "We sting a human, filling them with potent chemicals. Their rapid death is all but assured, but our crime will be obvious."
+	helptext = "It will be clear to any surrounding witnesses if you use this power."
 	genomecost = 10
 	verbpath = /mob/proc/changeling_DEATHsting
 
-/datum/power/changeling/unfat_sting
-	name = "Unfat Sting"
-	desc = "We silently sting a human, forcing them to rapidly metobolize their fat."
-	genomecost = 1
-	verbpath = /mob/proc/changeling_unfat_sting
 
 /datum/power/changeling/boost_range
 	name = "Boost Range"
@@ -136,7 +125,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Epinephrine sacs"
 	desc = "We evolve additional sacs of adrenaline throughout our body."
 	helptext = "Gives the ability to instantly recover from stuns.  High chemical cost."
-	genomecost = 4
+	genomecost = 3
 	verbpath = /mob/proc/changeling_unstun
 
 /datum/power/changeling/ChemicalSynth
@@ -167,7 +156,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Digital Camoflauge"
 	desc = "We evolve the ability to distort our form and proprtions, defeating common altgorthms used to detect lifeforms on cameras."
 	helptext = "We cannot be tracked by camera while using this skill.  However, humans looking at us will find us.. uncanny.  We must constantly expend chemicals to maintain our form like this."
-	genomecost = 3
+	genomecost = 1
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_digitalcamo
 
@@ -175,7 +164,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Rapid Regeneration"
 	desc = "We evolve the ability to rapidly regenerate, negating the need for stasis."
 	helptext = "Heals a moderate amount of damage every tick."
-	genomecost = 8
+	genomecost = 7
 	verbpath = /mob/proc/changeling_rapidregen
 
 
@@ -263,7 +252,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font> <BR>"
+					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font><BR>"
 
 					if(!ownsthis)
 					{
@@ -422,7 +411,7 @@ var/list/datum/power/changeling/powerinstances = list()
 					<a id='link[i]'
 					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P]",[ownsthis])'
 					>
-					<b id='search[i]'>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b>
+					<span id='search[i]'><b>Evolve [P] - Cost: [ownsthis ? "Purchased" : P.genomecost]</b></span>
 					</a>
 					<br><span id='item[i]'></span>
 				</td>
@@ -470,23 +459,24 @@ var/list/datum/power/changeling/powerinstances = list()
 
 
 	for (var/datum/power/changeling/P in powerinstances)
-		//world << "[P] - [Pname] = [P.name == Pname ? "True" : "False"]"
+//		log_debug("[P] - [Pname] = [P.name == Pname ? "True" : "False"]")
+
 		if(P.name == Pname)
 			Thepower = P
 			break
 
 
 	if(Thepower == null)
-		M.current << "This is awkward.  Changeling power purchase failed, please report this bug to a coder!"
+		to_chat(M.current, "This is awkward.  Changeling power purchase failed, please report this bug to a coder!")
 		return
 
 	if(Thepower in purchasedpowers)
-		M.current << "We have already evolved this ability!"
+		to_chat(M.current, "We have already evolved this ability!")
 		return
 
 
 	if(geneticpoints < Thepower.genomecost)
-		M.current << "We cannot evolve this... yet.  We must acquire more DNA."
+		to_chat(M.current, "We cannot evolve this... yet.  We must acquire more DNA.")
 		return
 
 	geneticpoints -= Thepower.genomecost
@@ -494,7 +484,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	purchasedpowers += Thepower
 
 	if(!Thepower.isVerb && Thepower.verbpath)
-		call(Thepower.verbpath)()
+		call(M.current, Thepower.verbpath)()
 	else if(remake_verbs)
 		M.current.make_changeling()
 

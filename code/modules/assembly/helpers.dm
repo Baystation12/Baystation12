@@ -8,11 +8,6 @@
 		return 1
 	return 0
 
-/proc/isinfared(O)
-	if(istype(O, /obj/item/device/assembly/infra))
-		return 1
-	return 0
-
 /proc/isprox(O)
 	if(istype(O, /obj/item/device/assembly/prox_sensor))
 		return 1
@@ -30,7 +25,7 @@
 
 /*
 Name:	IsSpecialAssembly
-Desc:	If true is an object that can be attached to an assembly holder but is a special thing like a plasma can or door
+Desc:	If true is an object that can be attached to an assembly holder but is a special thing like a phoron can or door
 */
 
 /obj/proc/IsSpecialAssembly()

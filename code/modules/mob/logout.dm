@@ -1,32 +1,21 @@
 /mob/Logout()
-	player_list -= src
+	GLOB.nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
+	tgui_process && tgui_process.on_logout(src)
+	GLOB.player_list -= src
 	log_access("Logout: [key_name(src)]")
-	if(admins[src.ckey])
-		if (ticker && ticker.current_state == GAME_STATE_PLAYING) //Only report this stuff if we are currently playing.
-			var/admins_number = admin_list.len
-
-			message_admins("Admin logout: [key_name(src)]")
-			if(admins_number == 0) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
-				var/cheesy_message = pick( list(  \
-					"I have no admins online!",\
-					"I'm all alone :(",\
-					"I'm feeling lonely :(",\
-					"I'm so lonely :(",\
-					"Why does nobody love me? :(",\
-					"I want a man :(",\
-					"Where has everyone gone?",\
-					"I need a hug :(",\
-					"Someone come hold me :(",\
-					"I need someone on me :(",\
-					"What happened? Where has everyone gone?",\
-					"Forever alone :("\
-				) )
-
-				if(cheesy_message)
-					cheesy_message += " (No admins online)"
-
-
-				send2irc("Server", "[cheesy_message]")
+	handle_admin_logout()
+	hide_client_images()
 	..()
 
+	my_client = null
 	return 1
+
+/mob/proc/handle_admin_logout()
+	if(admin_datums[ckey] && ticker && ticker.current_state == GAME_STATE_PLAYING) //Only report this stuff if we are currently playing.
+		var/datum/admins/holder = admin_datums[ckey]
+		message_staff("[holder.rank] logout: [key_name(src)]")
+		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
+			send2adminirc("[key_name(src)] logged out - no more admins online.")
+			if(config.delist_when_no_admins && world.visibility)
+				world.visibility = FALSE
+				send2adminirc("Toggled hub visibility. The server is now invisible ([world.visibility]).")

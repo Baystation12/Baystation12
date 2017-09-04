@@ -1,7 +1,21 @@
+#ignore misc BYOND files
+Thumbs.db
 *.log
 *.int
 *.rsc
 *.dmb
 *.lk
-info.json
-/config/admins.txt
+*.backup
+*.before
+data/
+cfg/
+build_log.txt
+use_map
+stopserver
+reboot_called
+atupdate
+__pycache__
+
+# ignore config, but not subdirs
+config/*
+!config/*/

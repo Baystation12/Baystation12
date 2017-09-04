@@ -18,6 +18,7 @@
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
+			computer.table = src
 			break
 //	spawn(100) //Wont the MC just call this process() before and at the 10 second mark anyway?
 //		process()
@@ -27,47 +28,24 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
-				src.density = 0
+				src.set_density(0)
 		else
 	return
 
-/obj/machinery/optable/blob_act()
-	if(prob(75))
-		del(src)
-
-/obj/machinery/optable/hand_p(mob/user as mob)
-
-	return src.attack_paw(user)
-	return
-
-/obj/machinery/optable/attack_paw(mob/user as mob)
-	if ((HULK in usr.mutations))
-		usr << text("\blue You destroy the operating table.")
-		visible_message("\red [usr] destroys the operating table!")
-		src.density = 0
-		del(src)
-	if (!( locate(/obj/machinery/optable, user.loc) ))
-		step(user, get_dir(user, src))
-		if (user.loc == src.loc)
-			user.layer = TURF_LAYER
-			visible_message("The monkey hides under the table!")
-	return
-
 /obj/machinery/optable/attack_hand(mob/user as mob)
-	if ((HULK in usr.mutations) || (SUPRSTR in usr.augmentations))
-		usr << text("\blue You destroy the table.")
-		visible_message("\red [usr] destroys the operating table!")
-		src.density = 0
-		del(src)
+	if (HULK in usr.mutations)
+		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
+		src.set_density(0)
+		qdel(src)
 	return
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -90,10 +68,10 @@
 
 /obj/machinery/optable/proc/check_victim()
 	if(locate(/mob/living/carbon/human, src.loc))
-		var/mob/M = locate(/mob/living/carbon/human, src.loc)
-		if(M.resting)
+		var/mob/living/carbon/human/M = locate(/mob/living/carbon/human, src.loc)
+		if(M.lying)
 			src.victim = M
-			icon_state = "table2-active"
+			icon_state = M.pulse() ? "table2-active" : "table2-idle"
 			return 1
 	src.victim = null
 	icon_state = "table2-idle"
@@ -102,25 +80,56 @@
 /obj/machinery/optable/process()
 	check_victim()
 
-/obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
+/obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
+	if (C == user)
+		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
+	else
+		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>", 3)
+	if (C.client)
+		C.client.perspective = EYE_PERSPECTIVE
+		C.client.eye = src
+	C.resting = 1
+	C.dropInto(loc)
+	for(var/obj/O in src)
+		O.dropInto(loc)
+	src.add_fingerprint(user)
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = C
+		src.victim = H
+		icon_state = H.pulse() ? "table2-active" : "table2-idle"
+	else
+		icon_state = "table2-idle"
 
-	if (istype(W, /obj/item/weapon/grab))
-		if(ismob(W:affecting))
-			var/mob/M = W:affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.resting = 1
-			M.loc = src.loc
-			visible_message("\red [M] has been laid on the operating table by [user].", 3)
-			for(var/obj/O in src)
-				O.loc = src.loc
-			src.add_fingerprint(user)
-			icon_state = "table2-active"
-			src.victim = M
-			del(W)
+/obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
+
+	var/mob/living/M = user
+	if(user.stat || user.restrained() || !check_table(user) || !iscarbon(target))
+		return
+	if(istype(M))
+		take_victim(target,user)
+	else
+		return ..()
+
+/obj/machinery/optable/climb_on()
+	if(usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))
+		return
+
+	take_victim(usr,usr)
+
+/obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
+	if (istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
+		if(iscarbon(G.affecting) && check_table(G.affecting))
+			take_victim(G.affecting,usr)
+			qdel(W)
 			return
-	user.drop_item()
-	if(W && W.loc)
-		W.loc = src.loc
-	return
+
+/obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
+	check_victim()
+	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
+		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
+		return 0
+	if(patient.buckled)
+		to_chat(usr, "<span class='notice'>Unbuckle \the [patient] first!</span>")
+		return 0
+	return 1

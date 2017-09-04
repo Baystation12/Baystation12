@@ -50,7 +50,8 @@ proc/dmp2swapmap(filename)
 	while(txt)
 		if(text2ascii(txt)==34)
 			if(mode!=34)
-				world << "Corrupt map file [filename]: Unexpected code found after z-level [z]"
+				to_world("Corrupt map file [filename]: Unexpected code found after z-level [z]")
+
 				return
 			// standard line:
 			// "a" = (/obj, /obj, /turf, /area)
@@ -59,20 +60,24 @@ proc/dmp2swapmap(filename)
 			codelen=length(code)
 			i=findtext(txt,"(",i)
 			if(!i)
-				world << "Corrupt map file [filename]: No type list follows \"[code]\""
+				to_world("Corrupt map file [filename]: No type list follows \"[code]\"")
+
 				return
 			k=findtext(txt,"\n",++i)
 			j=(k || length(txt+1))
 			while(--j>=i && text2ascii(txt,j)!=41)
 			if(j<i)
-				world << "Corrupt map file [filename]: Type list following \"[code]\" is incomplete"
+				to_world("Corrupt map file [filename]: Type list following \"[code]\" is incomplete")
+
 				return
 			var/list/L = d2sm_ParseCommaList(copytext(txt,i,j))
 			if(istext(L))
-				world << "Corrupt map file [filename]: [L]"
+				to_world("Corrupt map file [filename]: [L]")
+
 				return
 			if(L.len<2)
-				world << "Corrupt map file [filename]: Type list following \"[code]\" has only 1 item"
+				to_world("Corrupt map file [filename]: Type list following \"[code]\" has only 1 item")
+
 				return
 			txt=k?copytext(txt,k+1):null
 			if(L[L.len] == "[world.area]") L[L.len]=0
@@ -96,25 +101,32 @@ proc/dmp2swapmap(filename)
 			// "}
 			i=d2sm_MatchBrace(txt,1,40)
 			if(!i)
-				world << "Corrupt map file [filename]: No matching ) for coordinates: [copytext(txt,1,findtext(txt,"\n"))]"
+				to_world("Corrupt map file [filename]: No matching ) for coordinates: [copytext(txt,1,findtext(txt,"\n"))]")
+
 				return
 			var/list/coords=d2sm_ParseCommaList(copytext(txt,2,i))
 			if(istext(coords) || coords.len!=3)
-				world << "Corrupt map file [filename]: [istext(coords)?(coords):"[copytext(txt,1,i+1)] is not a valid (x,y,z) coordinate"]"
+				to_world("Corrupt map file [filename]: [istext(coords)?(coords):"[copytext(txt,1,i+1)] is not a valid (x,y,z) coordinate"]")
+
 				return
 			j=findtext(txt,"{",i+1)
 			if(!j)
-				world << "Corrupt map file [filename]: No braces {} following [copytext(txt,1,i+1)]"
+				to_world("Corrupt map file [filename]: No braces {} following [copytext(txt,1,i+1)]")
+
 				return
 			k=d2sm_MatchBrace(txt,j,123)
 			if(!k)
-				world << "Corrupt map file [filename]: No closing brace } following [copytext(txt,1,i+1)]"
+				to_world("Corrupt map file [filename]: No closing brace } following [copytext(txt,1,i+1)]")
+
 				return
 			var/mtxt=copytext(txt,j+1,k)
 			if(findText(mtxt,"\"\n")!=1 || !findText(mtxt,"\n\"",length(mtxt)-1))
-				world << findText(mtxt,"\"\n")
-				world << findText(mtxt,"\n\"",length(mtxt)-1)
-				world << "Corrupt map file [filename]: No quotes in braces following [copytext(txt,1,i+1)]"
+				to_world(findText(mtxt,"\"\n"))
+
+				to_world(findText(mtxt,"\n\"",length(mtxt)-1))
+
+				to_world("Corrupt map file [filename]: No quotes in braces following [copytext(txt,1,i+1)]")
+
 				return
 			mtxt=copytext(mtxt,2,length(mtxt))
 			var/_x=0,_y=0
@@ -131,9 +143,11 @@ proc/dmp2swapmap(filename)
 		else
 			i=findtext(txt,"\n")
 			txt=i?copytext(txt,i+1):null
-	world << "Map size: [X],[Y],[Z]"
+	to_world("Map size: [X],[Y],[Z]")
+
 	//for(var/code in codes)
-	//	world << "Code \"[code]\":\n[codes[code]]"
+//		to_world("Code \"[code]\":\n[codes[code]]")
+
 	fdel("map_[mapname].txt")
 	var/F = file("map_[mapname].txt")
 	F << ". = object(\".0\")\n.0\n\ttype = /swapmap\n\tid = \"[mapname]\"\n\tz = [Z]\n\ty = [Y]\n\tx = [X]"

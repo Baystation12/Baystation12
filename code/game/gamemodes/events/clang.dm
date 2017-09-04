@@ -34,19 +34,23 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 
 		else if (istype(clong, /mob))
 			if(clong.density || prob(10))
-				clong.meteorhit(src)
+				clong.ex_act(2)
 		else
-			del(src)
+			qdel(src)
 
 		if(clong && prob(25))
-			src.loc = clong.loc
+			src.forceMove(clong.loc)
+
+	Destroy()
+		walk(src, 0) // Because we might have called walk_towards, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+		return ..()
 
 /proc/immovablerod()
 	var/startx = 0
 	var/starty = 0
 	var/endy = 0
 	var/endx = 0
-	var/startside = pick(cardinal)
+	var/startside = pick(GLOB.cardinal)
 
 	switch(startside)
 		if(NORTH)
@@ -72,18 +76,19 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 
 	//rod time!
 	var/obj/effect/immovablerod/immrod = new /obj/effect/immovablerod(locate(startx, starty, 1))
-//	world << "Rod in play, starting at [start.loc.x],[start.loc.y] and going to [end.loc.x],[end.loc.y]"
+//	log_debug("Rod in play, starting at [start.loc.x],[start.loc.y] and going to [end.loc.x],[end.loc.y]")
+
 	var/end = locate(endx, endy, 1)
 	spawn(0)
 		walk_towards(immrod, end,1)
 	sleep(1)
 	while (immrod)
-		if (immrod.z != 1)
-			immrod.z = 1
+		if (isNotStationLevel(immrod.z))
+			immrod.z = pick(GLOB.using_map.station_levels)
 		if(immrod.loc == end)
-			del(immrod)
+			qdel(immrod)
 		sleep(10)
 	for(var/obj/effect/immovablerod/imm in world)
 		return
 	sleep(50)
-	command_alert("What the fuck was that?!", "General Alert")
+	command_announcement.Announce("What the fuck was that?!", "General Alert")

@@ -24,7 +24,6 @@ Slayer
 Awesome
 Ender
 Dr.
-Noob
 Night
 Crimson
 Grappler
@@ -44,3 +43,4 @@ Nickel
 Silver
 Singing
 Snake
+Acid

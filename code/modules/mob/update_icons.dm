@@ -13,9 +13,6 @@
 /mob/proc/update_inv_handcuffed()
 	return
 
-/mob/proc/update_inv_legcuffed()
-	return
-
 /mob/proc/update_inv_back()
 	return
 
@@ -62,4 +59,7 @@
 	return
 
 /mob/proc/update_inv_ears()
+	return
+
+/mob/proc/update_targeted()
 	return

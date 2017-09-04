@@ -12,6 +12,10 @@ var/global/Holiday = null
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 //																							~Carn
 
+/hook/startup/proc/updateHoliday()
+	Get_Holiday()
+	return 1
+
 //sets up the Holiday global variable. Shouldbe called on game configuration or something.
 /proc/Get_Holiday()
 	if(!Holiday)	return		// Holiday stuff was not enabled in the config!
@@ -101,6 +105,7 @@ var/global/Holiday = null
 			switch(DD)
 				if(10)							Holiday = "Human-Rights Day"
 				if(14)							Holiday = "Monkey Day"
+				if(21)							if(YY==12)	Holiday = "End of the World"
 				if(22)							Holiday = "Orgasming Day"		//lol. These all actually exist
 				if(24)							Holiday = "Christmas Eve"
 				if(25)							Holiday = "Christmas"
@@ -118,37 +123,31 @@ var/global/Holiday = null
 	set name = ".Set Holiday"
 	set category = "Fun"
 	set desc = "Force-set the Holiday variable to make the game think it's a certain day."
-
-	if( !holder || !(holder.rank in list("Game Master","Game Admin")) )
-		src << "<font color='red'>Error: Set_Holiday: You hold insufficient rank to perform this action.</font>"
-		return
-
-	if(!T)	return
+	if(!check_rights(R_SERVER))	return
 
 	Holiday = T
 	//get a new station name
-	station_name = null
+	GLOB.using_map.station_name = null
 	station_name()
 	//update our hub status
 	world.update_status()
-//	Holiday_Game_Start()
+	Holiday_Game_Start()
 
-	message_admins("\blue ADMIN: Event: [key_name(src)] force-set Holiday to \"[Holiday]\"")
+	message_admins("<span class='notice'>ADMIN: Event: [key_name(src)] force-set Holiday to \"[Holiday]\"</span>")
 	log_admin("[key_name(src)] force-set Holiday to \"[Holiday]\"")
 
 
 //Run at the  start of a round
 /proc/Holiday_Game_Start()
 	if(Holiday)
-		world << "<font color='blue'>and...</font>"
-		world << "<h4>Happy [Holiday] Everybody!</h4>"
+		to_world("<font color='blue'>and...</font>")
+		to_world("<h4>Happy [Holiday] Everybody!</h4>")
 		switch(Holiday)			//special holidays
 			if("Easter")
 				//do easter stuff
-			if("Christmas ")
-				//do christmas stuff
-			else
-				//etc. you get what I'm getting at
+			if("Christmas Eve","Christmas")
+				Christmas_Game_Start()
+
 	return
 
 //Nested in the random events loop. Will be triggered every 2 minutes
@@ -172,7 +171,12 @@ var/global/Holiday = null
 */
 /*			var/list/obj/containers = list()
 			for(var/obj/item/weapon/storage/S in world)
-				if(S.z != 1)	continue
+				if(isNotStationLevel(S.z))	continue
 				containers += S
 
-			message_admins("\blue DEBUG: Event: Egg spawned at [Egg.loc] ([Egg.x],[Egg.y],[Egg.z])")*/
+			message_admins("<span class='notice'>DEBUG: Event: Egg spawned at [Egg.loc] ([Egg.x],[Egg.y],[Egg.z])</span>")*/
+		if("End of the World")
+			if(prob(eventchance))	GameOver()
+
+		if("Christmas","Christmas Eve")
+			if(prob(eventchance))	ChristmasEvent()

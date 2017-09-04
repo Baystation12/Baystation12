@@ -3,9 +3,9 @@
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = "holder"
 	item_state = "assembly"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT | PROXMOVE
 	throwforce = 5
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3
 	throw_range = 10
 
@@ -64,13 +64,13 @@
 
 
 	update_icon()
-		overlays = null
+		overlays.Cut()
 		if(a_left)
-			overlays += "[initial(a_left.icon_state)]_left"	//the initial() is probably unnecessary, but you just know
-			for(var/O in a_left.attached_overlays)		//someone is gonna fuck around with the icon_state in the future
+			overlays += "[a_left.icon_state]_left"
+			for(var/O in a_left.attached_overlays)
 				overlays += "[O]_l"
 		if(a_right)
-			src.overlays += "[initial(a_right.icon_state)]_right"
+			src.overlays += "[a_right.icon_state]_right"
 			for(var/O in a_right.attached_overlays)
 				overlays += "[O]_r"
 		if(master)
@@ -84,14 +84,13 @@
 					src.overlays += O
 */
 
-	examine()
-		set src in view()
-		..()
-		if ((in_range(src, usr) || src.loc == usr))
+	examine(mob/user)
+		. = ..(user)
+		if ((in_range(src, user) || src.loc == user))
 			if (src.secured)
-				usr << "\The [src] is ready!"
+				to_chat(user, "\The [src] is ready!")
 			else
-				usr << "\The [src] can be attached!"
+				to_chat(user, "\The [src] can be attached!")
 		return
 
 
@@ -102,7 +101,26 @@
 			a_right.HasProximity(AM)
 		if(special_assembly)
 			special_assembly.HasProximity(AM)
-		return
+
+
+	Crossed(atom/movable/AM as mob|obj)
+		if(a_left)
+			a_left.Crossed(AM)
+		if(a_right)
+			a_right.Crossed(AM)
+		if(special_assembly)
+			special_assembly.Crossed(AM)
+
+
+	on_found(mob/finder as mob)
+		if(a_left)
+			a_left.on_found(finder)
+		if(a_right)
+			a_right.on_found(finder)
+		if(special_assembly)
+			if(istype(special_assembly, /obj/item))
+				var/obj/item/S = special_assembly
+				S.on_found(finder)
 
 
 	Move()
@@ -128,15 +146,15 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(isscrewdriver(W))
 			if(!a_left || !a_right)
-				user << "\red BUG:Assembly part missing, please report this!"
+				to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")
 				return
 			a_left.toggle_secure()
 			a_right.toggle_secure()
 			secured = !secured
 			if(secured)
-				user << "\blue \The [src] is ready!"
+				to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 			else
-				user << "\blue \The [src] can now be taken apart!"
+				to_chat(user, "<span class='notice'>\The [src] can now be taken apart!</span>")
 			update_icon()
 			return
 		else if(W.IsSpecialAssembly())
@@ -150,7 +168,7 @@
 		src.add_fingerprint(user)
 		if(src.secured)
 			if(!a_left || !a_right)
-				user << "\red Assembly part missing!"
+				to_chat(user, "<span class='warning'>Assembly part missing!</span>")
 				return
 			if(istype(a_left,a_right.type))//If they are the same type it causes issues due to window code
 				switch(alert("Which side would you like to use?",,"Left","Right"))
@@ -172,7 +190,7 @@
 				a_right:holder = null
 				a_right.loc = T
 			spawn(0)
-				del(src)
+				qdel(src)
 		return
 
 
@@ -193,7 +211,20 @@
 		return 1
 
 
+/obj/item/device/assembly_holder/New()
+	..()
+	GLOB.listening_objects += src
 
+/obj/item/device/assembly_holder/Destroy()
+	GLOB.listening_objects -= src
+	return ..()
+
+
+/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
+	if(a_right)
+		a_right.hear_talk(M,msg,verb,speaking)
+	if(a_left)
+		a_left.hear_talk(M,msg,verb,speaking)
 
 
 
@@ -211,7 +242,7 @@
 		tmr.time=5
 		tmr.secured = 1
 		tmr.holder = src
-		processing_objects.Add(tmr)
+		GLOB.processing_objects.Add(tmr)
 		a_left = tmr
 		a_right = ign
 		secured = 1
@@ -238,18 +269,18 @@
 			if(!istype(tmr,/obj/item/device/assembly/timer))
 				tmr = holder.a_right
 			if(!istype(tmr,/obj/item/device/assembly/timer))
-				usr << "<span class='notice'>This detonator has no timer.</span>"
+				to_chat(usr, "<span class='notice'>This detonator has no timer.</span>")
 				return
 
 			if(tmr.timing)
-				usr << "<span class='notice'>Clock is ticking already.</span>"
+				to_chat(usr, "<span class='notice'>Clock is ticking already.</span>")
 			else
 				var/ntime = input("Enter desired time in seconds", "Time", "5") as num
 				if (ntime>0 && ntime<1000)
 					tmr.time = ntime
 					name = initial(name) + "([tmr.time] secs)"
-					usr << "<span class='notice'>Timer set to [tmr.time] seconds.</span>"
+					to_chat(usr, "<span class='notice'>Timer set to [tmr.time] seconds.</span>")
 				else
-					usr << "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>"
+					to_chat(usr, "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>")
 		else
-			usr << "<span class='notice'>You cannot do this while [usr.stat?"unconscious/dead":"restrained"].</span>"
+			to_chat(usr, "<span class='notice'>You cannot do this while [usr.stat?"unconscious/dead":"restrained"].</span>")

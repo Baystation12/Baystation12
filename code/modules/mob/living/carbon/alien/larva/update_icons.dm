@@ -1,1 +1,0 @@
-//No special icons processing

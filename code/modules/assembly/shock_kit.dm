@@ -5,12 +5,12 @@
 	var/obj/item/clothing/head/helmet/part1 = null
 	var/obj/item/device/radio/electropack/part2 = null
 	var/status = 0
-	w_class = 5.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	w_class = ITEM_SIZE_HUGE
+	flags = CONDUCT
 
-/obj/item/assembly/shock_kit/Del()
-	del(part1)
-	del(part2)
+/obj/item/assembly/shock_kit/Destroy()
+	qdel(part1)
+	qdel(part2)
 	..()
 	return
 
@@ -25,11 +25,11 @@
 		part2.master = null
 		part1 = null
 		part2 = null
-		del(src)
+		qdel(src)
 		return
 	if(istype(W, /obj/item/weapon/screwdriver))
 		status = !status
-		user << "<span class='notice'>[src] is now [status ? "secured" : "unsecured"]!</span>"
+		to_chat(user, "<span class='notice'>[src] is now [status ? "secured" : "unsecured"]!</span>")
 	add_fingerprint(user)
 	return
 
@@ -40,7 +40,7 @@
 	return
 
 /obj/item/assembly/shock_kit/receive_signal()
-	if(istype(loc, /obj/structure/stool/bed/chair/e_chair))
-		var/obj/structure/stool/bed/chair/e_chair/C = loc
+	if(istype(loc, /obj/structure/bed/chair/e_chair))
+		var/obj/structure/bed/chair/e_chair/C = loc
 		C.shock()
 	return

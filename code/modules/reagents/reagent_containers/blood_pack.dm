@@ -1,16 +1,44 @@
+/obj/item/weapon/storage/box/bloodpacks
+	name = "blood packs bags"
+	desc = "This box contains blood packs."
+	icon_state = "sterile"
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+
 /obj/item/weapon/reagent_containers/blood
 	name = "BloodPack"
-	desc = "Contains blood used for transfusion."
+	desc = "Flexible bag for IV injectors."
 	icon = 'icons/obj/bloodpack.dmi'
+	icon_state = "empty"
 	volume = 200
 
 	var/blood_type = null
 
-	New()
-		..()
-		if(blood_type != null)
-			name = "BloodPack [blood_type]"
-			reagents.add_reagent("blood", 200, list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=blood_type,"resistances"=null,"trace_chem"=null))
+/obj/item/weapon/reagent_containers/blood/New()
+	..()
+	if(blood_type)
+		name = "BloodPack [blood_type]"
+		reagents.add_reagent(/datum/reagent/blood, 200, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list()))
+		update_icon()
+
+/obj/item/weapon/reagent_containers/blood/on_reagent_change()
+	update_icon()
+
+/obj/item/weapon/reagent_containers/blood/update_icon()
+	overlays.Cut()
+	var/percent = round(reagents.total_volume / volume * 100)
+	if(reagents.total_volume)
+		var/image/filling = image('icons/obj/bloodpack.dmi', "[round(percent,25)]")
+		filling.color = reagents.get_color()
+		overlays += filling
+	overlays += image('icons/obj/bloodpack.dmi', "top")
 
 /obj/item/weapon/reagent_containers/blood/APlus
 	blood_type = "A+"
@@ -31,6 +59,3 @@
 	blood_type = "O-"
 
 /obj/item/weapon/reagent_containers/blood/empty
-	name = "Empty BloodPack"
-	desc = "Seems pretty useless... Maybe if there were a way to fill it?"
-	icon_state = "empty"

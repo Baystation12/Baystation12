@@ -2,7 +2,7 @@
 /mob/living/simple_animal/kobold
 	name = "kobold"
 	desc = "A small, rat-like creature."
-	icon = 'mob.dmi'
+	icon = 'icons/mob/mob.dmi'
 	icon_state = "kobold_idle"
 	icon_living = "kobold_idle"
 	icon_dead = "kobold_dead"
@@ -14,9 +14,9 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "kicks the"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "kicks"
 	minbodytemp = 250
 	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius

@@ -2,12 +2,13 @@
 	desc = "A lightweight, security exosuit. Popular among private and corporate security."
 	name = "Gygax"
 	icon_state = "gygax"
+	initial_icon = "gygax"
 	step_in = 3
 	dir_in = 1 //Facing North.
 	health = 300
 	deflect_chance = 15
 	damage_absorption = list("brute"=0.75,"fire"=1,"bullet"=0.8,"laser"=0.7,"energy"=0.85,"bomb"=1)
-	max_temperature = 3500
+	max_temperature = 25000
 	infra_luminosity = 6
 	var/overload = 0
 	var/overload_coeff = 2
@@ -16,13 +17,14 @@
 	max_equip = 3
 
 /obj/mecha/combat/gygax/dark
-	desc = "A lightweight exosuit used by Nanotrasen Death Squads. A significantly upgraded Gygax security mech."
+	desc = "A lightweight exosuit used by Heavy Asset Protection. A significantly upgraded Gygax security mech."
 	name = "Dark Gygax"
 	icon_state = "darkgygax"
+	initial_icon = "darkgygax"
 	health = 400
 	deflect_chance = 25
 	damage_absorption = list("brute"=0.6,"fire"=0.8,"bullet"=0.6,"laser"=0.5,"energy"=0.65,"bomb"=0.8)
-	max_temperature = 4500
+	max_temperature = 45000
 	overload_coeff = 1
 	wreckage = /obj/effect/decal/mecha_wreckage/gygax/dark
 	max_equip = 4
@@ -40,15 +42,8 @@
 	ME.attach(src)
 	return
 
-/obj/mecha/combat/gygax/dark/add_cell(var/obj/item/weapon/cell/C=null)
-	if(C)
-		C.forceMove(src)
-		cell = C
-		return
-	cell = new(src)
-	cell.charge = 30000
-	cell.maxcharge = 30000
-
+/obj/mecha/combat/gygax/dark/add_cell()
+	cell = new /obj/item/weapon/cell/hyper(src)
 
 /obj/mecha/combat/gygax/verb/overload()
 	set category = "Exosuit Interface"
@@ -70,7 +65,7 @@
 	src.log_message("Toggled leg actuators overload.")
 	return
 
-/obj/mecha/combat/gygax/dyndomove(direction)
+/obj/mecha/combat/gygax/do_move(direction)
 	if(!..()) return
 	if(overload)
 		health--

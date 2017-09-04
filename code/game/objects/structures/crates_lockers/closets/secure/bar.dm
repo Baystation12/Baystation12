@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/bar
-	name = "Booze"
+	name = "booze closet"
 	req_access = list(access_bar)
 	icon_state = "cabinetdetective_locked"
 	icon_closed = "cabinetdetective"
@@ -8,30 +8,5 @@
 	icon_broken = "cabinetdetective_broken"
 	icon_off = "cabinetdetective_broken"
 
-
-	New()
-		..()
-		sleep(2)
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
-		return
-
-/obj/structure/closet/secure_closet/bar/update_icon()
-	if(broken)
-		icon_state = icon_broken
-	else
-		if(!opened)
-			if(locked)
-				icon_state = icon_locked
-			else
-				icon_state = icon_closed
-		else
-			icon_state = icon_opened
+/obj/structure/closet/secure_closet/bar/WillContain()
+	return list(/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 10)

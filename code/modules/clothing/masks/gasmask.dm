@@ -1,50 +1,74 @@
 /obj/item/clothing/mask/gas
 	name = "gas mask"
-	desc = "A face-covering mask that can be connected to an air supply."
-	icon_state = "gas_alt"
-	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
+	desc = "A face-covering mask that can be connected to an air supply. Filters harmful gases from the air."
+	icon_state = "fullgas"
+	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
-	w_class = 3.0
+	body_parts_covered = FACE|EYES
+	w_class = ITEM_SIZE_NORMAL
 	item_state = "gas_alt"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
+	siemens_coefficient = 0.9
+	var/gas_filter_strength = 1			//For gas mask filters
+	var/list/filtered_gases = list("phoron", "sleeping_agent")
+	armor = list(melee = 5, bullet = 5, laser = 5, energy = 0, bomb = 0, bio = 75, rad = 0)
+
+/obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
+	var/datum/gas_mixture/filtered = new
+
+	for(var/g in filtered_gases)
+		if(air.gas[g])
+			filtered.gas[g] = air.gas[g] * gas_filter_strength
+			air.gas[g] -= filtered.gas[g]
+
+	air.update_values()
+	filtered.update_values()
+
+	return filtered
+
+/obj/item/clothing/mask/gas/half
+	name = "face mask"
+	desc = "A compact, durable gas mask that can be connected to an air supply."
+	icon_state = "halfgas"
+	siemens_coefficient = 0.7
+	body_parts_covered = FACE
+	w_class = ITEM_SIZE_SMALL
+	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 55, rad = 0)
 
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
-	desc = "A modernised version of the classic design, this mask will not only filter out toxins but it can also be connected to an air supply."
+	desc = "A modernised version of the classic design, this mask will not only filter out phoron but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
-	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 75, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
+	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
+	siemens_coefficient = 0.7
+	body_parts_covered = FACE|EYES
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)
+
+/obj/item/clothing/mask/gas/swat/vox
+	name = "alien mask"
+	desc = "Clearly not designed for a human face."
+	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
+	species_restricted = list(SPECIES_VOX)
 
 /obj/item/clothing/mask/gas/syndicate
-	name = "syndicate mask"
+	name = "tactical mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
-
-/obj/item/clothing/mask/gas/voice
-	name = "gas mask"
-	//desc = "A face-covering mask that can be connected to an air supply. It seems to house some odd electronics."
-	var/mode = 0// 0==Scouter | 1==Night Vision | 2==Thermal | 3==Meson
-	var/voice = "Unknown"
-	var/vchange = 0//This didn't do anything before. It now checks if the mask has special functions/N
-	origin_tech = "syndicate=4"
-
-/obj/item/clothing/mask/gas/voice/space_ninja
-	name = "ninja mask"
-	desc = "A close-fitting mask that acts both as an air filter and a post-modern fashion statement."
-	icon_state = "s-ninja"
-	item_state = "s-ninja_mask"
-	vchange = 1
+	siemens_coefficient = 0.7
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
-	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	desc = "A true prankster's facial attire. A clown is incomplete without their wig and mask."
 	icon_state = "clown"
 	item_state = "clown_hat"
 
@@ -65,6 +89,7 @@
 	desc = "A mask used when acting as a monkey."
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
+	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
@@ -76,8 +101,24 @@
 	name = "Death Commando Mask"
 	icon_state = "death_commando_mask"
 	item_state = "death_commando_mask"
+	siemens_coefficient = 0.2
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
-	desc = "Beep boop"
+	desc = "Beep boop!"
 	icon_state = "death"
+
+/obj/item/clothing/mask/gas/owl_mask
+	name = "owl mask"
+	desc = "Twoooo!"
+	icon_state = "owl"
+	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/mask/gas/vox
+	name = "vox breathing mask"
+	desc = "A small oxygen filter for use by Vox"
+	icon_state = "respirator"
+	flags_inv = 0
+	body_parts_covered = 0
+	species_restricted = list(SPECIES_VOX)
+	filtered_gases = list("phoron", "sleeping_agent", "oxygen")

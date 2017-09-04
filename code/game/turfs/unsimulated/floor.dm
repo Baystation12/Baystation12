@@ -3,22 +3,19 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "Floor3"
 
-/turf/unsimulated/floor/attack_paw(user as mob)
-	return src.attack_hand(user)
+/turf/unsimulated/floor/bluespace //non-doomsday version of bluespace for transit and wizden
+	name = "\improper bluespace"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "bluespace"
+	desc = "Looks like infinity."
 
-/turf/unsimulated/floor/attack_hand(var/mob/user as mob)
-	if ((!( user.canmove ) || user.restrained() || !( user.pulling )))
-		return
-	if (user.pulling.anchored)
-		return
-	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
-		return
-	if (ismob(user.pulling))
-		var/mob/M = user.pulling
-		var/mob/t = M.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		M.start_pulling(t)
-	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-	return
+/turf/unsimulated/mask
+	name = "mask"
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "rockvault"
+
+/turf/unsimulated/floor/rescue_base
+	icon_state = "asteroidfloor"
+
+/turf/unsimulated/floor/shuttle_ceiling
+	icon_state = "reinforced"

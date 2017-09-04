@@ -20,19 +20,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	use_power = 1
 	idle_power_usage = 25
 	machinetype = 5
-	heatgen = 0
+	produces_heat = 0
 	delay = 7
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/broadcaster"
+	circuitboard = /obj/item/weapon/circuitboard/telecomms/broadcaster
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	// Don't broadcast rejected signals
 	if(signal.data["reject"])
-		return
-
-	//Is it a test signal?
-	if(signal.data["type"] == 4)
-		signal.data["done"] = 1
-		signal.data["level"] += listening_level
 		return
 
 	if(signal.data["message"])
@@ -43,15 +37,18 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/datum/signal/original = signal.data["original"]
 		if(original)
 			original.data["done"] = 1
+			original.data["compression"] = signal.data["compression"]
+			original.data["level"] = signal.data["level"]
 
-		var/datum/radio_frequency/connection = signal.data["connection"]
-		var/signal_message = "[connection.frequency]:[signal.data["message"]]:[signal.data["realname"]]:[listening_level]"
+		var/signal_message = "[signal.frequency]:[signal.data["message"]]:[signal.data["realname"]]"
 		if(signal_message in recentmessages)
 			return
 		recentmessages.Add(signal_message)
 
 		if(signal.data["slow"] > 0)
 			sleep(signal.data["slow"]) // simulate the network lag if necessary
+
+		signal.data["level"] |= listening_level
 
 	   /** #### - Normal Broadcast - #### **/
 
@@ -62,7 +59,9 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], listening_level)
+							  signal.data["realname"], signal.data["vname"],,
+							  signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["verb"], signal.data["language"]	)
 
 
 	   /** #### - Simple Broadcast - #### **/
@@ -87,7 +86,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], listening_level)
+							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["verb"], signal.data["language"])
 
 		if(!message_delay)
 			message_delay = 1
@@ -98,10 +98,11 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		/* --- Do a snazzy animation! --- */
 		flick("broadcaster_send", src)
 
-/obj/machinery/telecomms/broadcaster/Del()
+/obj/machinery/telecomms/broadcaster/Destroy()
 	// In case message_delay is left on 1, otherwise it won't reset the list and people can't say the same thing twice anymore.
 	if(message_delay)
 		message_delay = 0
+	..()
 
 
 /*
@@ -119,7 +120,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	use_power = 0
 	idle_power_usage = 0
 	machinetype = 6
-	heatgen = 0
+	produces_heat = 0
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
 
 /obj/machinery/telecomms/allinone/receive_signal(datum/signal/signal)
@@ -144,19 +145,21 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		var/datum/radio_frequency/connection = signal.data["connection"]
 
-		if(connection.frequency == SYND_FREQ) // if syndicate broadcast, just
+		if(connection.frequency in ANTAG_FREQS) // if antag broadcast, just
 			Broadcast_Message(signal.data["connection"], signal.data["mob"],
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], 0)
+							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["verb"], signal.data["language"])
 		else
 			if(intercept)
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], 0)
+							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["verb"], signal.data["language"])
 
 
 
@@ -210,24 +213,29 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		If nonzero, the signal may be partially inaudible or just complete gibberish.
 
 	@param level:
-		The Z level that the sending radio is on. 0 = Broadcast on all levels
+		The list of Z levels that the sending radio is broadcasting to. Having 0 in the list broadcasts on all levels
+
+	@param freq
+		The frequency of the signal
 
 **/
 
 /proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
-						var/data, var/compression, var/level)
+						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null)
+
 
   /* ###### Prepare the radio connection ###### */
 
-	var/display_freq = connection.frequency
+	var/display_freq = freq
 
 	var/list/obj/item/device/radio/radios = list()
 
 	// --- Broadcast only to intercom devices ---
 
 	if(data == 1)
+
 		for (var/obj/item/device/radio/intercom/R in connection.devices["[RADIO_CHAT]"])
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
@@ -235,6 +243,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	// --- Broadcast only to intercoms and station-bounced radios ---
 
 	else if(data == 2)
+
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
 
 			if(istype(R, /obj/item/device/radio/headset))
@@ -243,25 +252,25 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
 
-	// --- Broadcast to syndicate radio! ---
+	// --- Broadcast to antag radios! ---
 
 	else if(data == 3)
-		var/datum/radio_frequency/syndicateconnection = radio_controller.return_frequency(SYND_FREQ)
-
-		for (var/obj/item/device/radio/R in syndicateconnection.devices["[RADIO_CHAT]"])
-
-			if(R.receive_range(SYND_FREQ, level) > -1)
-				radios += R
+		for(var/antag_freq in ANTAG_FREQS)
+			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(antag_freq)
+			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
+				if(R.receive_range(antag_freq, level) > -1)
+					radios += R
 
 	// --- Broadcast to ALL radio devices ---
 
 	else
+
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
 
 	// Get a list of mobs who can hear from the radios we collected.
-	var/list/receive = get_mobs_in_radio_ranges(radios, level)
+	var/list/receive = get_mobs_in_radio_ranges(radios)
 
   /* ###### Organize the receivers into categories for displaying the message ###### */
 
@@ -277,13 +286,12 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	for (var/mob/R in receive)
 
 	  /* --- Loop through the receivers and categorize them --- */
-
-		if (R.client && R.client.STFU_radio) //Adminning with 80 people on can be fun when you're trying to talk and all you can hear is radios.
+		if(istype(R, /mob/new_player)) // we don't want new players to hear messages. rare but generates runtimes.
 			continue
 
-		if(istype(M, /mob/new_player)) // we don't want new players to hear messages. rare but generates runtimes.
+		// Ghosts hearing all radio chat don't want to hear syndicate intercepts, they're duplicates
+		if(data == 3 && isghost(R) && R.is_preference_enabled(/datum/client_preference/ghost_radio))
 			continue
-
 
 		// --- Check for compression ---
 		if(compression > 0)
@@ -292,10 +300,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		// --- Can understand the speech ---
 
-		if (R.say_understands(M))
+		if (!M || R.say_understands(M))
 
 			// - Not human or wearing a voice mask -
-			if (!ishuman(M) || vmask)
+			if (!M || !ishuman(M) || vmask)
 				heard_masked += R
 
 			// - Human and not wearing voice mask -
@@ -318,56 +326,25 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='radio'><span class='name'>" // goes in the actual output
-		var/freq_text // the name of the channel
-
-		// --- Set the name of the channel ---
-		switch(display_freq)
-
-			if(SYND_FREQ)
-				freq_text = "#unkn"
-			if(COMM_FREQ)
-				freq_text = "Command"
-			if(1351)
-				freq_text = "Science"
-			if(1355)
-				freq_text = "Medical"
-			if(1357)
-				freq_text = "Engineering"
-			if(1359)
-				freq_text = "Security"
-			if(1349)
-				freq_text = "Mining"
-			if(1347)
-				freq_text = "Cargo"
-		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
-
-
-		// --- If the frequency has not been assigned a name, just use the frequency as the name ---
-
-		if(!freq_text)
-			freq_text = format_frequency(display_freq)
-
-		// --- Some more pre-message formatting ---
+		var/freq_text = get_frequency_name(display_freq)
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
-		var/part_c = "</span></span>"
+		var/part_a = "<span class='[frequency_span_class(display_freq)]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
-		if (display_freq==SYND_FREQ)
-			part_a = "<span class='syndradio'><span class='name'>"
-		else if (display_freq==COMM_FREQ)
-			part_a = "<span class='comradio'><span class='name'>"
-		else if (display_freq in DEPT_FREQS)
-			part_a = "<span class='deptradio'><span class='name'>"
+		// --- Some more pre-message formatting ---
+		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
+		var/part_c = "</span></span>"
 
 
 		// --- Filter the message; place it in quotes apply a verb ---
 
-		if(!M) return
-		var/quotedmsg = M.say_quote(message)
+		var/quotedmsg = null
+		if(M)
+			quotedmsg = M.say_quote(message)
+		else
+			quotedmsg = "says, \"[message]\""
 
 		// --- This following recording is intended for research and feedback in the use of department radio channels ---
 
@@ -378,32 +355,32 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		//BR.messages_admin += blackbox_admin_msg
 		if(istype(blackbox))
 			switch(display_freq)
-				if(1459)
+				if(PUB_FREQ)
 					blackbox.msg_common += blackbox_msg
-				if(1351)
+				if(SCI_FREQ)
 					blackbox.msg_science += blackbox_msg
-				if(1353)
+				if(COMM_FREQ)
 					blackbox.msg_command += blackbox_msg
-				if(1355)
+				if(MED_FREQ)
 					blackbox.msg_medical += blackbox_msg
-				if(1357)
+				if(ENG_FREQ)
 					blackbox.msg_engineering += blackbox_msg
-				if(1359)
+				if(SEC_FREQ)
 					blackbox.msg_security += blackbox_msg
-				if(1441)
+				if(DTH_FREQ)
 					blackbox.msg_deathsquad += blackbox_msg
-				if(1213)
+				if(SYND_FREQ)
 					blackbox.msg_syndicate += blackbox_msg
-				if(1349)
-					blackbox.msg_mining += blackbox_msg
-				if(1347)
+				if(RAID_FREQ)
+					blackbox.msg_raider += blackbox_msg
+				if(SUP_FREQ)
 					blackbox.msg_cargo += blackbox_msg
+				if(SRV_FREQ)
+					blackbox.msg_service += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
 		//End of research and feedback code.
-
-		var/aitrack = ""
 
 	 /* ###### Send the message ###### */
 
@@ -411,91 +388,38 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	  	/* --- Process all the mobs that heard a masked voice (understood) --- */
 
 		if (length(heard_masked))
-			var/N = name
-			var/J = job
-			var/rendered = "[part_a][N][part_b][quotedmsg][part_c]"
 			for (var/mob/R in heard_masked)
-				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
-				if(data == 4)
-					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
-
-				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][N] ([J]) </a>[part_b][quotedmsg][part_c]", 2)
-				else
-					R.show_message(rendered, 2)
+				R.hear_radio(message,verbage, speaking, part_a, part_b, part_c, M, 0, name)
 
 		/* --- Process all the mobs that heard the voice normally (understood) --- */
 
 		if (length(heard_normal))
-			var/rendered = "[part_a][realname][part_b][quotedmsg][part_c]"
-
 			for (var/mob/R in heard_normal)
-				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
-				if(data == 4)
-					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
-
-				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][realname] ([job]) </a>[part_b][quotedmsg][part_c]", 2)
-				else
-					R.show_message(rendered, 2)
+				R.hear_radio(message, verbage, speaking, part_a, part_b, part_c, M, 0, realname)
 
 		/* --- Process all the mobs that heard the voice normally (did not understand) --- */
-			// Does not display message; displayes the mob's voice_message (ie "chimpers")
 
 		if (length(heard_voice))
-			var/rendered = "[part_a][vname][part_b][M.voice_message][part_c]"
-
 			for (var/mob/R in heard_voice)
-				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
-				if(data == 4)
-					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
-
-
-				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][vname] ([job]) </a>[part_b][vmessage]][part_c]", 2)
-				else
-					R.show_message(rendered, 2)
+				R.hear_radio(message,verbage, speaking, part_a, part_b, part_c, M,0, vname)
 
 		/* --- Process all the mobs that heard a garbled voice (did not understand) --- */
 			// Displays garbled message (ie "f*c* **u, **i*er!")
 
 		if (length(heard_garbled))
-			quotedmsg = M.say_quote(stars(message))
-			var/rendered = "[part_a][vname][part_b][quotedmsg][part_c]"
-
 			for (var/mob/R in heard_garbled)
-				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
-				if(data == 4)
-					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
-
-
-				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][vname]</a>[part_b][quotedmsg][part_c]", 2)
-				else
-					R.show_message(rendered, 2)
+				R.hear_radio(message, verbage, speaking, part_a, part_b, part_c, M, 1, vname)
 
 
 		/* --- Complete gibberish. Usually happens when there's a compressed message --- */
 
 		if (length(heard_gibberish))
-			quotedmsg = M.say_quote(Gibberish(message, compression + 50))
-			var/rendered = "[part_a][Gibberish(M.real_name, compression + 50)][part_b][quotedmsg][part_c]"
-
 			for (var/mob/R in heard_gibberish)
-				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
-				if(data == 4)
-					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
+				R.hear_radio(message, verbage, speaking, part_a, part_b, part_c, M, compression)
 
-
-				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][Gibberish(realname, compression + 50)] ([Gibberish(job, compression + 50)]) </a>[part_b][quotedmsg][part_c]", 2)
-				else
-					R.show_message(rendered, 2)
-
-
+	return 1
 
 /proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
-
 
   /* ###### Prepare the radio connection ###### */
 
@@ -531,15 +455,15 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				receive |= R.send_hear(display_freq)
 
 
-	// --- Broadcast to syndicate radio! ---
+	// --- Broadcast to antag radios! ---
 
 	else if(data == 3)
-		var/datum/radio_frequency/syndicateconnection = radio_controller.return_frequency(SYND_FREQ)
-
-		for (var/obj/item/device/radio/R in syndicateconnection.devices["[RADIO_CHAT]"])
-			var/turf/position = get_turf(R)
-			if(position && position.z == level)
-				receive |= R.send_hear(SYND_FREQ)
+		for(var/freq in ANTAG_FREQS)
+			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(freq)
+			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
+				var/turf/position = get_turf(R)
+				if(position && position.z == level)
+					receive |= R.send_hear(freq)
 
 
 	// --- Broadcast to ALL radio devices ---
@@ -563,11 +487,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	for (var/mob/R in receive)
 
 	  /* --- Loop through the receivers and categorize them --- */
-
-		if (R.client && R.client.STFU_radio) //Adminning with 80 people on can be fun when you're trying to talk and all you can hear is radios.
-			continue
-
-
 		// --- Check for compression ---
 		if(compression > 0)
 
@@ -592,35 +511,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='radio'><span class='name'>" // goes in the actual output
-		var/freq_text // the name of the channel
-
-		// --- Set the name of the channel ---
-		switch(display_freq)
-
-			if(SYND_FREQ)
-				freq_text = "#unkn"
-			if(COMM_FREQ)
-				freq_text = "Command"
-			if(1351)
-				freq_text = "Science"
-			if(1355)
-				freq_text = "Medical"
-			if(1357)
-				freq_text = "Engineering"
-			if(1359)
-				freq_text = "Security"
-			if(1349)
-				freq_text = "Mining"
-			if(1347)
-				freq_text = "Cargo"
-		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
-
-
-		// --- If the frequency has not been assigned a name, just use the frequency as the name ---
-
-		if(!freq_text)
-			freq_text = format_frequency(display_freq)
+		var/part_a = "<span class='[frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
+		var/freq_text = get_frequency_name(display_freq)
 
 		// --- Some more pre-message formatting ---
 
@@ -632,44 +524,36 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/obj/item/device/radio/headset/radio = new
 
 		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
+		var/part_blackbox_b = "</span><b> \[[freq_text]\]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
 
-		if (display_freq==SYND_FREQ)
-			part_a = "<span class='syndradio'><span class='name'>"
-		else if (display_freq==COMM_FREQ)
-			part_a = "<span class='comradio'><span class='name'>"
-		else if (display_freq in DEPT_FREQS)
-			part_a = "<span class='deptradio'><span class='name'>"
-
-		// --- This following recording is intended for research and feedback in the use of department radio channels ---
-
-		var/part_blackbox_b = "</span><b> \[[freq_text]\]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/blackbox_msg = "[part_a][source][part_blackbox_b]\"[text]\"[part_c]"
-		//var/blackbox_admin_msg = "[part_a][M.name] (Real name: [M.real_name])[part_blackbox_b][quotedmsg][part_c]"
 
 		//BR.messages_admin += blackbox_admin_msg
 		if(istype(blackbox))
 			switch(display_freq)
-				if(1459)
+				if(PUB_FREQ)
 					blackbox.msg_common += blackbox_msg
-				if(1351)
+				if(SCI_FREQ)
 					blackbox.msg_science += blackbox_msg
-				if(1353)
+				if(COMM_FREQ)
 					blackbox.msg_command += blackbox_msg
-				if(1355)
+				if(MED_FREQ)
 					blackbox.msg_medical += blackbox_msg
-				if(1357)
+				if(ENG_FREQ)
 					blackbox.msg_engineering += blackbox_msg
-				if(1359)
+				if(SEC_FREQ)
 					blackbox.msg_security += blackbox_msg
-				if(1441)
+				if(DTH_FREQ)
 					blackbox.msg_deathsquad += blackbox_msg
-				if(1213)
+				if(SYND_FREQ)
 					blackbox.msg_syndicate += blackbox_msg
-				if(1349)
-					blackbox.msg_mining += blackbox_msg
-				if(1347)
+				if(RAID_FREQ)
+					blackbox.msg_raider += blackbox_msg
+				if(SUP_FREQ)
 					blackbox.msg_cargo += blackbox_msg
+				if(SRV_FREQ)
+					blackbox.msg_service += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
@@ -712,7 +596,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	var/turf/position = get_turf(src)
 	return (position.z in signal.data["level"] && signal.data["done"])
 
-/atom/proc/telecomms_process()
+/atom/proc/telecomms_process(var/do_sleep = 1)
 
 	// First, we want to generate a new radio signal
 	var/datum/signal/signal = new
@@ -728,15 +612,16 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		"type" = 4, // determines what type of radio input it is: test broadcast
 		"reject" = 0,
 		"done" = 0,
-		"level" = pos.z // The level it is being broadcasted at.
+		"level" = pos ? pos.z : 0 // The level it is being broadcasted at.
 	)
-	signal.frequency = 1459// Common channel
+	signal.frequency = PUB_FREQ// Common channel
 
   //#### Sending the signal to all subspace receivers ####//
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
-	sleep(rand(10,25))
+	if(do_sleep)
+		sleep(rand(10,25))
 
 	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
 

@@ -1,145 +1,134 @@
-var/list/beam_master = list()
-//Use: Caches beam state images and holds turfs that had these images overlaid.
-//Structure:
-//beam_master
-//    icon_states/dirs of beams
-//        image for that beam
-//    references for fired beams
-//        icon_states/dirs for each placed beam image
-//            turfs that have that icon_state/dir
-
 /obj/item/projectile/beam
 	name = "laser"
 	icon_state = "laser"
+	fire_sound='sound/weapons/Laser.ogg'
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
-	flag = "laser"
+	sharp = 1 //concentrated burns
+	check_armour = "laser"
 	eyeblur = 4
-	var/frequency = 1
-	process()
-		var/reference = "\ref[src]" //So we do not have to recalculate it a ton
-		var/first = 1 //So we don't make the overlay in the same tile as the firer
+	hitscan = 1
+	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 
-		spawn(0)
-			while(!bumped) //Move until we hit something
-				step_towards(src, current) //Move~
-
-				for(var/mob/living/M in loc)
-					Bump(M) //Bump anyone we touch
-
-				if((!( current ) || loc == current)) //If we pass our target
-					current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
-
-				if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
-					del(src) //Delete if it passes the world edge
-					return
-
-				if(!first) //Add the overlay as we pass over tiles
-					var/target_dir = get_dir(src, current) //So we don't call this too much
-
-					//If the icon has not been added yet
-					if( !("[icon_state][target_dir]" in beam_master) )
-						var/image/I = image(icon,icon_state,10,target_dir) //Generate it.
-						beam_master["[icon_state][target_dir]"] = I //And cache it!
-
-					//Finally add the overlay
-					src.loc.overlays += beam_master["[icon_state][target_dir]"]
-
-					//Add the turf to a list in the beam master so they can be cleaned up easily.
-					if(reference in beam_master)
-						var/list/turf_master = beam_master[reference]
-						if("[icon_state][target_dir]" in turf_master)
-							var/list/turfs = turf_master["[icon_state][target_dir]"]
-							turfs += loc
-						else
-							turf_master["[icon_state][target_dir]"] = list(loc)
-					else
-						var/list/turfs = list()
-						turfs["[icon_state][target_dir]"] = list(loc)
-						beam_master[reference] = turfs
-				else
-					first = 0
-
-		cleanup(reference)
-		return
-
-	proc/cleanup(reference) //Waits .3 seconds then removes the overlay.
-		src = null
-		sleep(3)
-		var/list/turf_master = beam_master[reference]
-		for(var/laser_state in turf_master)
-			var/list/turfs = turf_master[laser_state]
-			for(var/turf/T in turfs)
-				T.overlays -= beam_master[laser_state]
-		return
+	muzzle_type = /obj/effect/projectile/laser/muzzle
+	tracer_type = /obj/effect/projectile/laser/tracer
+	impact_type = /obj/effect/projectile/laser/impact
 
 /obj/item/projectile/beam/practice
 	name = "laser"
 	icon_state = "laser"
+	fire_sound = 'sound/weapons/Taser.ogg'
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 	eyeblur = 2
 
+/obj/item/projectile/beam/smalllaser
+	damage = 25
+
+/obj/item/projectile/beam/midlaser
+	damage = 40
+	armor_penetration = 10
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
-	damage = 40
+	fire_sound = 'sound/weapons/lasercannonfire.ogg'
+	damage = 60
+	armor_penetration = 30
+
+	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
+	tracer_type = /obj/effect/projectile/laser_heavy/tracer
+	impact_type = /obj/effect/projectile/laser_heavy/impact
 
 /obj/item/projectile/beam/xray
-	name = "xray beam"
+	name = "x-ray beam"
 	icon_state = "xray"
+	fire_sound = 'sound/weapons/laser3.ogg'
 	damage = 30
+	armor_penetration = 30
+
+	muzzle_type = /obj/effect/projectile/xray/muzzle
+	tracer_type = /obj/effect/projectile/xray/tracer
+	impact_type = /obj/effect/projectile/xray/impact
+
+/obj/item/projectile/beam/xray/midlaser
+	damage = 30
+	armor_penetration = 50
 
 /obj/item/projectile/beam/pulse
 	name = "pulse"
 	icon_state = "u_laser"
-	damage = 50
+	fire_sound='sound/weapons/pulse.ogg'
+	damage = 15 //lower damage, but fires in bursts
 
+	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
+	tracer_type = /obj/effect/projectile/laser_pulse/tracer
+	impact_type = /obj/effect/projectile/laser_pulse/impact
 
-/obj/item/projectile/beam/deathlaser
-	name = "death laser"
-	icon_state = "heavylaser"
-	damage = 60
+/obj/item/projectile/beam/pulse/mid
+	damage = 20
+
+/obj/item/projectile/beam/pulse/heavy
+	damage = 25
+
+/obj/item/projectile/beam/pulse/destroy
+	name = "destroyer pulse"
+	damage = 100 //badmins be badmins I don't give a fuck
+	armor_penetration = 100
+
+/obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
+	if(isturf(target))
+		target.ex_act(2)
+	..()
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
 	icon_state = "emitter"
+	fire_sound = 'sound/weapons/emitter.ogg'
+	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
 
-
+	muzzle_type = /obj/effect/projectile/emitter/muzzle
+	tracer_type = /obj/effect/projectile/emitter/tracer
+	impact_type = /obj/effect/projectile/emitter/impact
 
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"
 	icon_state = "bluelaser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
+	no_attack_log = 1
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 
-	on_hit(var/atom/target, var/blocked = 0)
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = target
-			if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
-				M.Weaken(5)
-		return 1
+	muzzle_type = /obj/effect/projectile/laser_blue/muzzle
+	tracer_type = /obj/effect/projectile/laser_blue/tracer
+	impact_type = /obj/effect/projectile/laser_blue/impact
+
+/obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
+			M.Weaken(5)
+	return 1
 
 /obj/item/projectile/beam/lastertag/red
 	name = "lasertag beam"
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
+	no_attack_log = 1
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 
-	on_hit(var/atom/target, var/blocked = 0)
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = target
-			if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
-				M.Weaken(5)
-		return 1
+/obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
+			M.Weaken(5)
+	return 1
 
 /obj/item/projectile/beam/lastertag/omni//A laser tag bolt that stuns EVERYONE
 	name = "lasertag beam"
@@ -147,11 +136,60 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 
-	on_hit(var/atom/target, var/blocked = 0)
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = target
-			if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
-				M.Weaken(5)
-		return 1
+	muzzle_type = /obj/effect/projectile/laser_omni/muzzle
+	tracer_type = /obj/effect/projectile/laser_omni/tracer
+	impact_type = /obj/effect/projectile/laser_omni/impact
+
+/obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
+			M.Weaken(5)
+	return 1
+
+/obj/item/projectile/beam/sniper
+	name = "sniper beam"
+	icon_state = "xray"
+	fire_sound = 'sound/weapons/marauder.ogg'
+	damage = 50
+	armor_penetration = 10
+	stun = 3
+	weaken = 3
+	stutter = 3
+
+	muzzle_type = /obj/effect/projectile/xray/muzzle
+	tracer_type = /obj/effect/projectile/xray/tracer
+	impact_type = /obj/effect/projectile/xray/impact
+
+/obj/item/projectile/beam/stun
+	name = "stun beam"
+	icon_state = "stun"
+	fire_sound = 'sound/weapons/Taser.ogg'
+	check_armour = "energy"
+	sharp = 0 //not a laser
+	taser_effect = 1
+	agony = 40
+	damage_type = STUN
+
+	muzzle_type = /obj/effect/projectile/stun/muzzle
+	tracer_type = /obj/effect/projectile/stun/tracer
+	impact_type = /obj/effect/projectile/stun/impact
+
+/obj/item/projectile/beam/stun/heavy
+	name = "heavy stun beam"
+	agony = 60
+	armor_penetration = 10
+
+/obj/item/projectile/beam/stun/shock
+	name = "shock beam"
+	damage_type = ELECTROCUTE
+	damage = 10
+	agony  = 5
+	fire_sound='sound/weapons/pulse.ogg'
+
+/obj/item/projectile/beam/stun/shock/heavy
+	name = "heavy shock beam"
+	damage = 20
+	agony  = 10

@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/hydroponics
-	name = "Botanist's locker"
+	name = "botanist's locker"
 	req_access = list(access_hydroponics)
 	icon_state = "hydrosecure1"
 	icon_closed = "hydrosecure"
@@ -8,19 +8,16 @@
 	icon_broken = "hydrosecurebroken"
 	icon_off = "hydrosecureoff"
 
-
-	New()
-		..()
-		sleep(2)
-		switch(rand(1,2))
-			if(1)
-				new /obj/item/clothing/suit/apron(src)
-			if(2)
-				new /obj/item/clothing/suit/apron/overalls(src)
-		new /obj/item/weapon/plantbag(src)
-		new /obj/item/clothing/under/rank/hydroponics(src)
-		new /obj/item/device/analyzer/plant_analyzer(src)
-		new /obj/item/clothing/head/greenbandana(src)
-		new /obj/item/weapon/minihoe(src)
-		new /obj/item/weapon/hatchet(src)
-		return
+/obj/structure/closet/secure_closet/hydroponics/WillContain()
+	return list(
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
+		/obj/item/weapon/storage/plants,
+		/obj/item/clothing/under/rank/hydroponics,
+		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/device/radio/headset/headset_service,
+		/obj/item/clothing/head/greenbandana,
+		/obj/item/weapon/material/minihoe,
+		/obj/item/weapon/material/hatchet,
+		/obj/item/weapon/wirecutters/clippers,
+		/obj/item/weapon/reagent_containers/spray/plantbgone,
+	)

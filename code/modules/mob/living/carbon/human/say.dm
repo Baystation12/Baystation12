@@ -1,149 +1,226 @@
-/mob/living/carbon/human/say(var/message)
+/mob/living/carbon/human/say(var/message, var/datum/language/language = null)
+	var/alt_name = ""
+	if(name != GetVoice())
+		if(get_id_name("Unknown") != GetVoice())
+			alt_name = "(as [get_id_name("Unknown")])"
+		else
+			name = get_id_name("Unknown")
 
-	if (silent)
-		return
+	message = sanitize(message)
+	..(message, alt_name = alt_name, speaking = language)
 
-	//Mimes dont speak! Changeling hivemind and emotes are allowed.
-	if(miming)
-		if(length(message) >= 2)
-			if(mind && mind.changeling)
-				if(copytext(message, 1, 2) != "*" && copytext(message, 1, 3) != ":g" && copytext(message, 1, 3) != ":G" && copytext(message, 1, 3) != ":ï")
+/mob/living/carbon/human/proc/forcesay(list/append)
+	if(stat == CONSCIOUS)
+		if(client)
+			var/virgin = 1	//has the text been modified yet?
+			var/temp = winget(client, "input", "text")
+			if(findtextEx(temp, "Say \"", 1, 7) && length(temp) > 5)	//case sensitive means
+
+				temp = replacetext(temp, ";", "")	//general radio
+
+				if(findtext(trim_left(temp), ":", 6, 7))	//dept radio
+					temp = copytext(trim_left(temp), 8)
+					virgin = 0
+
+				if(virgin)
+					temp = copytext(trim_left(temp), 6)	//normal speech
+					virgin = 0
+
+				while(findtext(trim_left(temp), ":", 1, 2))	//dept radio again (necessary)
+					temp = copytext(trim_left(temp), 3)
+
+				if(findtext(temp, "*", 1, 2))	//emotes
 					return
-				else
-					return ..(message)
-			if(stat == DEAD)
-				return ..(message)
+				temp = copytext(trim_left(temp), 1, rand(5,8))
 
-		if(length(message) >= 1) //In case people forget the '*help' command, this will slow them the message and prevent people from saying one letter at a time
-			if (copytext(message, 1, 2) != "*")
-				return
+				var/trimmed = trim_left(temp)
+				if(length(trimmed))
+					if(append)
+						temp += pick(append)
 
-	if(src.dna)
-		/*if(src.dna.mutantrace == "lizard") //Soghun stutterss-s-ss-sss.
-			if(copytext(message, 1, 2) != "*")
-				message = dd_replacetext(message, "s", stutter("ss"))
-*/
-		if(src.dna.mutantrace == "metroid" && prob(5))
-			if(copytext(message, 1, 2) != "*")
-				if(copytext(message, 1, 2) == ";")
-					message = ";"
-				else
-					message = ""
-				message += "SKR"
-				var/imax = rand(5,20)
-				for(var/i = 0,i<imax,i++)
-					message += "E"
+					say(temp)
+				winset(client, "input", "text=[null]")
 
-	if(stat != DEAD)
-		for(var/datum/disease/pierrot_throat/D in viruses)
-			var/list/temp_message = dd_text2list(message, " ") //List each word in the message
-			var/list/pick_list = list()
-			for(var/i = 1, i <= temp_message.len, i++) //Create a second list for excluding words down the line
-				pick_list += i
-			for(var/i=1, ((i <= D.stage) && (i <= temp_message.len)), i++) //Loop for each stage of the disease or until we run out of words
-				if(prob(3 * D.stage)) //Stage 1: 3% Stage 2: 6% Stage 3: 9% Stage 4: 12%
-					var/H = pick(pick_list)
-					if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
-					temp_message[H] = "HONK"
-					pick_list -= H //Make sure that you dont HONK the same word twice
-				message = dd_list2text(temp_message, " ")
+/mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
 
-	if(istype(src.wear_mask, /obj/item/clothing/mask/luchador))
-		if(copytext(message, 1, 2) != "*")
-			message = dd_replacetext(message, "captain", "CAPITÁN")
-			message = dd_replacetext(message, "station", "ESTACIÓN")
-			message = dd_replacetext(message, "sir", "SEÑOR")
-			message = dd_replacetext(message, "the ", "el ")
-			message = dd_replacetext(message, "my ", "mi ")
-			message = dd_replacetext(message, "is ", "es ")
-			message = dd_replacetext(message, "it's", "es")
-			message = dd_replacetext(message, "friend", "amigo")
-			message = dd_replacetext(message, "buddy", "amigo")
-			message = dd_replacetext(message, "hello", "hola")
-			message = dd_replacetext(message, " hot", " caliente")
-			message = dd_replacetext(message, " very ", " muy ")
-			message = dd_replacetext(message, "sword", "espada")
-			message = dd_replacetext(message, "library", "biblioteca")
-			message = dd_replacetext(message, "traitor", "traidor")
-			message = dd_replacetext(message, "wizard", "mago")
-			message = uppertext(message) //Things end up looking better this way (no mixed cases), and it fits the macho wrestler image.
-			if(prob(25))
-				message += " OLE!"
+	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
+		return 1
 
-	//Ninja mask obscures text and voice if set to do so.
-	//Would make it more global but it's sort of ninja specific.
-	if(istype(src.wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja)&&src.wear_mask:voice=="Unknown")
-		if(copytext(message, 1, 2) != "*")
-			var/list/temp_message = dd_text2list(message, " ")
-			var/list/pick_list = list()
-			for(var/i = 1, i <= temp_message.len, i++)
-				pick_list += i
-			for(var/i=1, i <= abs(temp_message.len/3), i++)
-				var/H = pick(pick_list)
-				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
-				temp_message[H] = ninjaspeak(temp_message[H])
-				pick_list -= H
-			message = dd_list2text(temp_message, " ")
-			message = dd_replacetext(message, "o", "¤")
-			message = dd_replacetext(message, "p", "þ")
-			message = dd_replacetext(message, "l", "£")
-			message = dd_replacetext(message, "s", "§")
-			message = dd_replacetext(message, "u", "µ")
-			message = dd_replacetext(message, "b", "ß")
-			/*This text is hilarious but also absolutely retarded.
-			message = dd_replacetext(message, "l", "r")
-			message = dd_replacetext(message, "rr", "ru")
-			message = dd_replacetext(message, "v", "b")
-			message = dd_replacetext(message, "f", "hu")
-			message = dd_replacetext(message, "'t", "")
-			message = dd_replacetext(message, "t ", "to ")
-			message = dd_replacetext(message, " I ", " ai ")
-			message = dd_replacetext(message, "th", "z")
-			message = dd_replacetext(message, "ish", "isu")
-			message = dd_replacetext(message, "is", "izu")
-			message = dd_replacetext(message, "ziz", "zis")
-			message = dd_replacetext(message, "se", "su")
-			message = dd_replacetext(message, "br", "bur")
-			message = dd_replacetext(message, "ry", "ri")
-			message = dd_replacetext(message, "you", "yuu")
-			message = dd_replacetext(message, "ck", "cku")
-			message = dd_replacetext(message, "eu", "uu")
-			message = dd_replacetext(message, "ow", "au")
-			message = dd_replacetext(message, "are", "aa")
-			message = dd_replacetext(message, "ay", "ayu")
-			message = dd_replacetext(message, "ea", "ii")
-			message = dd_replacetext(message, "ch", "chi")
-			message = dd_replacetext(message, "than", "sen")
-			message = dd_replacetext(message, ".", "")
-			message = lowertext(message)
-			*/
-	if (src.slurring)
-		message = slur(message)
-	..(message)
+	if(species.can_understand(other))
+		return 1
 
-/mob/living/carbon/human/say_understands(var/other)
-	if (istype(other, /mob/living/silicon/ai))
-		return 1
-	if (istype(other, /mob/living/silicon/decoy))
-		return 1
-	if (istype(other, /mob/living/silicon/pai))
-		return 1
-	if (istype(other, /mob/living/silicon/robot))
-		return 1
-	if (istype(other, /mob/living/carbon/brain))
-		return 1
-	if (istype(other, /mob/living/carbon/metroid))
-		return 1
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon/alien/diona))
+			if(other.languages.len >= 2) //They've sucked down some blood and can speak common now.
+				return 1
+		if (istype(other, /mob/living/silicon))
+			return 1
+		if (istype(other, /mob/living/carbon/brain))
+			return 1
+		if (istype(other, /mob/living/carbon/slime))
+			return 1
+
+	//This is already covered by mob/say_understands()
+	//if (istype(other, /mob/living/simple_animal))
+	//	if((other.universal_speak && !speaking) || src.universal_speak || src.universal_understand)
+	//		return 1
+	//	return 0
+
 	return ..()
 
 /mob/living/carbon/human/GetVoice()
-	if(istype(src.wear_mask, /obj/item/clothing/mask/gas/voice))
-		var/obj/item/clothing/mask/gas/voice/V = src.wear_mask
-		if(V.vchange)
-			return V.voice
-		else
-			return name
+
+	var/voice_sub
+	if(istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		// todo: fix this shit
+		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
+			voice_sub = rig.speech.voice_holder.voice
+	else
+		for(var/obj/item/gear in list(wear_mask,wear_suit,head))
+			if(!gear)
+				continue
+			var/obj/item/voice_changer/changer = locate() in gear
+			if(changer && changer.active && changer.voice)
+				voice_sub = changer.voice
+	if(voice_sub)
+		return voice_sub
 	if(mind && mind.changeling && mind.changeling.mimicing)
 		return mind.changeling.mimicing
+	if(GetSpecialVoice())
+		return GetSpecialVoice()
 	return real_name
 
+/mob/living/carbon/human/proc/SetSpecialVoice(var/new_voice)
+	if(new_voice)
+		special_voice = new_voice
+	return
+
+/mob/living/carbon/human/proc/UnsetSpecialVoice()
+	special_voice = ""
+	return
+
+/mob/living/carbon/human/proc/GetSpecialVoice()
+	return special_voice
+
+
+/mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
+	var/verb = "says"
+	var/ending = copytext(message, length(message))
+
+	if(speaking)
+		verb = speaking.get_spoken_verb(ending)
+	else
+		if(ending == "!")
+			verb=pick("exclaims","shouts","yells")
+		else if(ending == "?")
+			verb="asks"
+
+	return verb
+
+/mob/living/carbon/human/handle_speech_problems(var/list/message_data)
+	if(silent || (sdisabilities & MUTE))
+		message_data[1] = ""
+		. = 1
+
+	else if(istype(wear_mask, /obj/item/clothing/mask))
+		var/obj/item/clothing/mask/M = wear_mask
+		if(M.voicechange)
+			message_data[1] = pick(M.say_messages)
+			message_data[2] = pick(M.say_verbs)
+			. = 1
+
+	else
+		. = ..(message_data)
+
+/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+	switch(message_mode)
+		if("intercom")
+			if(!src.restrained())
+				for(var/obj/item/device/radio/intercom/I in view(1))
+					I.talk_into(src, message, null, verb, speaking)
+					I.add_fingerprint(src)
+					used_radios += I
+		if("headset")
+			if(l_ear && istype(l_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = l_ear
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += l_ear
+			else if(r_ear && istype(r_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = r_ear
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += r_ear
+		if("right ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
+			if(r_ear && istype(r_ear,/obj/item/device/radio))
+				R = r_ear
+				has_radio = 1
+			if(r_hand && istype(r_hand, /obj/item/device/radio))
+				R = r_hand
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
+		if("left ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
+			if(l_ear && istype(l_ear,/obj/item/device/radio))
+				R = l_ear
+				has_radio = 1
+			if(l_hand && istype(l_hand,/obj/item/device/radio))
+				R = l_hand
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
+		if("whisper")
+			whisper_say(message, speaking, alt_name)
+			return 1
+		else
+			if(message_mode)
+				if(l_ear && istype(l_ear,/obj/item/device/radio))
+					l_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += l_ear
+				else if(r_ear && istype(r_ear,/obj/item/device/radio))
+					r_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += r_ear
+
+/mob/living/carbon/human/handle_speech_sound()
+	if(species.speech_sounds && prob(species.speech_chance))
+		var/list/returns[2]
+		returns[1] = sound(pick(species.speech_sounds))
+		returns[2] = 50
+		return returns
+	return ..()
+
+/mob/living/carbon/human/can_speak(datum/language/speaking)
+	var/needs_assist = 0
+	var/can_speak_assist = 0
+
+	if(species && speaking.name in species.assisted_langs)
+		needs_assist = 1
+		for(var/obj/item/organ/internal/I in src.internal_organs)
+			if((speaking in I.assists_languages) && (I.is_usable()))
+				can_speak_assist = 1
+
+	if(needs_assist && !can_speak_assist)
+		return 0
+	else if(needs_assist && can_speak_assist)
+		return 1
+
+	return ..()
+
+/mob/living/carbon/human/parse_language(var/message)
+	var/prefix = copytext(message,1,2)
+	if(length(message) >= 1 && prefix == "!")
+		return all_languages["Noise"]
+
+	if(length(message) >= 2 && is_language_prefix(prefix))
+		var/language_prefix = lowertext(copytext(message, 2 ,3))
+		var/datum/language/L = language_keys[language_prefix]
+		if (can_speak(L))
+			return L
+
+	return null

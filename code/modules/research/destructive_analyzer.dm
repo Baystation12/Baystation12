@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
 /*
 Destructive Analyzer
 
@@ -7,11 +5,16 @@ It is used to destroy hand-held objects and advance technological research. Cont
 
 Note: Must be placed within 3 tiles of the R&D Console
 */
+
 /obj/machinery/r_n_d/destructive_analyzer
-	name = "Destructive Analyzer"
+	name = "destructive analyzer"
 	icon_state = "d_analyzer"
 	var/obj/item/weapon/loaded_item = null
-	var/decon_mod = 1
+	var/decon_mod = 0
+
+	use_power = 1
+	idle_power_usage = 30
+	active_power_usage = 2500
 
 /obj/machinery/r_n_d/destructive_analyzer/New()
 	..()
@@ -25,88 +28,62 @@ Note: Must be placed within 3 tiles of the R&D Console
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
 	for(var/obj/item/weapon/stock_parts/S in src)
-		T += S.rating * 0.1
-	T = between (0, T, 1)
-	decon_mod = T
+		T += S.rating
+	decon_mod = T * 0.1
 
-/obj/machinery/r_n_d/destructive_analyzer/meteorhit()
-	del(src)
-	return
+/obj/machinery/r_n_d/destructive_analyzer/update_icon()
+	if(panel_open)
+		icon_state = "d_analyzer_t"
+	else if(loaded_item)
+		icon_state = "d_analyzer_l"
+	else
+		icon_state = "d_analyzer"
 
-/obj/machinery/r_n_d/destructive_analyzer/proc/ConvertReqString2List(var/list/source_list)
-	var/list/temp_list = params2list(source_list)
-	for(var/O in temp_list)
-		temp_list[O] = text2num(temp_list[O])
-	return temp_list
-
-
-/obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/O as obj, var/mob/user as mob)
-	if (shocked)
-		shock(user,50)
-	if (istype(O, /obj/item/weapon/screwdriver))
-		if (!opened)
-			opened = 1
-			if(linked_console)
-				linked_console.linked_destroy = null
-				linked_console = null
-			icon_state = "d_analyzer_t"
-			user << "You open the maintenance hatch of [src]."
-		else
-			opened = 0
-			icon_state = "d_analyzer"
-			user << "You close the maintenance hatch of [src]."
+/obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(busy)
+		to_chat(user, "<span class='notice'>\The [src] is busy right now.</span>")
 		return
-	if (opened)
-		if(istype(O, /obj/item/weapon/crowbar))
-			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-			M.state = 2
-			M.icon_state = "box_1"
-			for(var/obj/I in component_parts)
-				I.loc = src.loc
-			del(src)
-			return 1
-		else
-			user << "\red You can't load the [src.name] while it's opened."
-			return 1
-	if (disabled)
+	if(loaded_item)
+		to_chat(user, "<span class='notice'>There is something already loaded into \the [src].</span>")
+		return 1
+	if(default_deconstruction_screwdriver(user, O))
+		if(linked_console)
+			linked_console.linked_destroy = null
+			linked_console = null
 		return
-	if (!linked_console)
-		user << "\red The protolathe must be linked to an R&D console first!"
+	if(default_deconstruction_crowbar(user, O))
 		return
-	if (busy)
-		user << "\red The protolathe is busy right now."
+	if(default_part_replacement(user, O))
 		return
-	if (istype(O, /obj/item) && !loaded_item)
+	if(panel_open)
+		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
+		return 1
+	if(!linked_console)
+		to_chat(user, "<span class='notice'>\The [src] must be linked to an R&D console first.</span>")
+		return
+	if(!loaded_item)
 		if(isrobot(user)) //Don't put your module items in there!
 			return
-		if(!O.origin_tech)
-			user << "\red This doesn't seem to have a tech origin!"
-			return
-		var/list/temp_tech = ConvertReqString2List(O.origin_tech)
-		if (temp_tech.len == 0)
-			user << "\red You cannot deconstruct this item!"
-			return
-		if(O.reliability < 90 && O.crit_fail == 0)
-			usr << "\red Item is neither reliable enough or broken enough to learn from."
-			return
+		if(istype(O, /obj/item/device/electronic_assembly)) //A few things
+			var/obj/item/device/electronic_assembly/assembly = O
+			if(!assembly.contents.len) //Make sure they don't use this to get cheap assemblies.
+				return
+		else
+			if(!O.origin_tech)
+				to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
+				return
+			if(O.origin_tech.len == 0)
+				to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
+				return
+
 		busy = 1
 		loaded_item = O
 		user.drop_item()
 		O.loc = src
-		user << "\blue You add the [O.name] to the machine!"
+		to_chat(user, "<span class='notice'>You add \the [O] to \the [src].</span>")
 		flick("d_analyzer_la", src)
 		spawn(10)
-			icon_state = "d_analyzer_l"
+			update_icon()
 			busy = 0
+		return 1
 	return
-
-//For testing purposes only.
-/*/obj/item/weapon/deconstruction_test
-	name = "Test Item"
-	desc = "WTF?"
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "d20"
-	g_amt = 5000
-	m_amt = 5000
-	origin_tech = "materials=5;plasmatech=5;syndicate=5;programming=9"*/

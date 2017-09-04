@@ -2,59 +2,37 @@
 	set category = "Special Verbs"
 	set name = "Asay" //Gave this shit a shorter name so you only have to time out "asay" rather than "admin say" to use it --NeoFite
 	set hidden = 1
+	if(!check_rights(R_ADMIN))	return
 
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
+	msg = sanitize(msg)
+	if(!msg)	return
 
-	if (src.muted & MUTE_ADMINHELP)
-		src << "You cannot send ASAY messages (muted)."
-		return
+	log_admin("ADMIN: [key_name(src)] : [msg]")
 
-	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
+	if(check_rights(R_ADMIN,0))
+		for(var/client/C in GLOB.admins)
+			if(R_ADMIN & C.holder.rights)
+				to_chat(C, "<span class='admin_channel'>" + create_text_tag("admin", "ADMIN:", C) + " <span class='name'>[key_name(usr, 1)]</span>([admin_jump_link(mob, src)]): <span class='message'>[msg]</span></span>")
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
-	log_admin("[key_name(src)] : [msg]")
-
-
-	if (!msg)
-		return
 	feedback_add_details("admin_verb","M") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-	for (var/client/C in admin_list)
-		if (src.holder.rank == "Admin Observer")
-			C << "<span class='adminobserver'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, C)]:</EM> <span class='message'>[msg]</span></span>"
-		else if(C.holder && C.holder.level != 0)
-			C << "<span class='admin'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, C)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 
 /client/proc/cmd_mod_say(msg as text)
 	set category = "Special Verbs"
 	set name = "Msay"
 	set hidden = 1
 
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
+	if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
 
-	//todo: what? why does this not compile
-	/*if (src.muted || src.muted_complete)
-		src << "You are muted."
-		return*/
-
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = sanitize(msg)
 	log_admin("MOD: [key_name(src)] : [msg]")
-
 
 	if (!msg)
 		return
-	//feedback_add_details("admin_verb","M") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-	for (var/mob/M in world)
-		if (M.client && M.client.holder)
-			if (src.holder.rank == "Admin Observer")
-				M << "<span class='adminobserver'><span class='prefix'>MOD:</span> <EM>[key_name(usr, M)]:</EM> <span class='message'>[msg]</span></span>"
-			else if (src.holder.rank == "Moderator")
-				M << "<span class='mod'><span class='prefix'>MOD:</span> <EM>[key_name(usr, M)]</EM> (<A HREF='?src=\ref[M.client.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
-			else
-				M << "<span class='adminmod'><span class='prefix'>MOD:</span> <EM>[key_name(usr, M)]</EM> (<A HREF='?src=\ref[M.client.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+	var/sender_name = key_name(usr, 1)
+	if(check_rights(R_ADMIN, 0))
+		sender_name = "<span class='admin'>[sender_name]</span>"
+	for(var/client/C in GLOB.admins)
+		to_chat(C, "<span class='mod_channel'>" + create_text_tag("mod", "MOD:", C) + " <span class='name'>[sender_name]</span>([admin_jump_link(mob, C.holder)]): <span class='message'>[msg]</span></span>")
+
+	feedback_add_details("admin_verb","MS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

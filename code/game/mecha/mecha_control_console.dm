@@ -1,9 +1,11 @@
 /obj/machinery/computer/mecha
 	name = "Exosuit Control"
 	icon = 'icons/obj/computer.dmi'
-	icon_state = "mecha"
+	icon_keyboard = "rd_key"
+	icon_screen = "mecha"
+	light_color = "#a97faa"
 	req_access = list(access_robotics)
-	circuit = "/obj/item/weapon/circuitboard/mecha_control"
+	circuit = /obj/item/weapon/circuitboard/mecha_control
 	var/list/located = list()
 	var/screen = 0
 	var/stored_data
@@ -11,13 +13,10 @@
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
 
-	attack_paw(var/mob/user as mob)
-		return src.attack_hand(user)
-
 	attack_hand(var/mob/user as mob)
 		if(..())
 			return
-		user.machine = src
+		user.set_machine(src)
 		var/dat = "<html><head><title>[src.name]</title><style>h3 {margin: 0px; padding: 0px;}</style></head><body>"
 		if(screen == 0)
 			dat += "<h3>Tracking beacons data</h3>"
@@ -46,9 +45,9 @@
 		var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
 		if(href_list["send_message"])
 			var/obj/item/mecha_parts/mecha_tracking/MT = filter.getObj("send_message")
-			var/message = strip_html_simple(input(usr,"Input message","Transmit message") as text)
+			var/message = sanitize(input(usr,"Input message","Transmit message") as text)
 			var/obj/mecha/M = MT.in_mecha()
-			if(trim(message) && M)
+			if(message && M)
 				M.occupant_message(message)
 			return
 		if(href_list["shock"])
@@ -70,9 +69,7 @@
 	desc = "Device used to transmit exosuit data."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "motion2"
-	origin_tech = "programming=2;magnets=2"
-	construction_time = 50
-	construction_cost = list("metal"=500)
+	origin_tech = list(TECH_DATA = 2, TECH_MAGNET = 2)
 
 	proc/get_mecha_info()
 		if(!in_mecha())
@@ -93,11 +90,11 @@
 		return answer
 
 	emp_act()
-		del src
+		qdel(src)
 		return
 
 	ex_act()
-		del src
+		qdel(src)
 		return
 
 	proc/in_mecha()
@@ -109,7 +106,7 @@
 		var/obj/mecha/M = in_mecha()
 		if(M)
 			M.emp_act(2)
-		del(src)
+		qdel(src)
 
 	proc/get_mecha_log()
 		if(!src.in_mecha())
@@ -118,15 +115,8 @@
 		return M.get_log_html()
 
 
-/obj/item/weapon/storage/mechatrackingbox
+/obj/structure/closet/crate/mechabeacons
+	name = "exosuit tracking beacons crate"
 
-	New()
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-		..()
-		return
+/obj/structure/closet/crate/mechabeacons/WillContain()
+	return list(/obj/item/mecha_parts/mecha_tracking = 7)

@@ -3,35 +3,34 @@
 	name = "breath mask"
 	icon_state = "breath"
 	item_state = "breath"
-	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKINTERNALS
-	w_class = 2
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
+	body_parts_covered = FACE
+	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
-	var/hanging = 0
-
-	verb/toggle()
-		set category = "Object"
-		set name = "Adjust mask"
-		set src in usr
-
-		if(usr.canmove && !usr.stat && !usr.restrained())
-			if(!src.hanging)
-				src.hanging = !src.hanging
-				gas_transfer_coefficient = 1 //gas is now escaping to the turf and vice versa
-				flags_inv |= MASKCOVERSMOUTH | MASKINTERNALS
-				icon_state = "breathdown"
-				usr << "Your mask is now hanging on your neck."
-
-			else
-				src.hanging = !src.hanging
-				gas_transfer_coefficient = 0.10
-				flags_inv &= ~(MASKCOVERSMOUTH | MASKINTERNALS)
-				icon_state = "breath"
-				usr << "You pull the mask up to cover your face."
-			usr.update_inv_wear_mask()
+	down_gas_transfer_coefficient = 1
+	down_body_parts_covered = null
+	down_item_flags = FLEXIBLEMATERIAL
+	down_icon_state = "breathdown"
+	pull_mask = 1
 
 /obj/item/clothing/mask/breath/medical
-	desc = "A close-fitting sterile mask that can be connected to an air supply."
+	desc = "A close-fitting sterile mask that can be manually connected to an air supply for treatment."
 	name = "medical mask"
 	icon_state = "medical"
 	item_state = "medical"
+	permeability_coefficient = 0.01
+
+/obj/item/clothing/mask/breath/anesthetic
+	desc = "A close-fitting sterile mask that is used by the anesthetic wallmounted pump."
+	name = "anesthetic mask"
+	icon_state = "medical"
+	item_state = "medical"
+	permeability_coefficient = 0.01
+	
+/obj/item/clothing/mask/breath/emergency
+	desc = "A close-fitting  mask that is used by the wallmounted emergency oxygen pump."
+	name = "emergency mask"
+	icon_state = "breath"
+	item_state = "breath"
+	permeability_coefficient = 0.50

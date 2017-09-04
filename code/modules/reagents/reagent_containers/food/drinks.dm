@@ -3,134 +3,102 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/weapon/reagent_containers/food/drinks
 	name = "drink"
-	desc = "yummy"
+	desc = "Yummy!"
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
-	var/gulp_size = 5 //This is now officially broken ... need to think of a nice way to fix it.
-	possible_transfer_amounts = list(5,10,25)
+	flags = OPENCONTAINER
+	amount_per_transfer_from_this = 5
 	volume = 50
+	var/filling_states   // List of percentages full that have icons
+	var/base_name = null // Name to put in front of drinks, i.e. "[base_name] of [contents]"
+	var/base_icon = null // Base icon name for fill states
 
-	on_reagent_change()
-		if (gulp_size < 5) gulp_size = 5
-		else gulp_size = max(round(reagents.total_volume / 5), 5)
+/obj/item/weapon/reagent_containers/food/drinks/on_reagent_change()
+	update_icon()
+	return
 
-	attack_self(mob/user as mob)
+/obj/item/weapon/reagent_containers/food/drinks/attack_self(mob/user as mob)
+	if(!is_open_container())
+		open(user)
+
+/obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
+	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
+	flags |= OPENCONTAINER
+
+/obj/item/weapon/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+	if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
+		return ..()
+
+	if(standard_feed_mob(user, M))
 		return
 
-	attack(mob/M as mob, mob/user as mob, def_zone)
-		var/datum/reagents/R = src.reagents
-		var/fillevel = gulp_size
+	return 0
 
-		if(!R.total_volume || !R)
-			user << "\red None of [src] left, oh no!"
-			return 0
+/obj/item/weapon/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
+	if(!proximity) return
 
-		if(M == user)
-			M << "\blue You swallow a gulp of [src]."
-			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, gulp_size)
-
-			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
-			return 1
-		else if( istype(M, /mob/living/carbon/human) )
-
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] attempts to feed [M] [src].", 1)
-			if(!do_mob(user, M)) return
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message("\red [user] feeds [M] [src].", 1)
-
-			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [M.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-
-			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
-
-			log_admin("ATTACK: [user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
-			msg_admin_attack("ATTACK: [user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])") //BS12 EDIT ALG
-
-			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, gulp_size)
-
-			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
-				var/mob/living/silicon/robot/bro = user
-				bro.cell.use(30)
-				var/refill = R.get_master_reagent_id()
-				spawn(600)
-					R.add_reagent(refill, fillevel)
-
-			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
-			return 1
-
-		return 0
-
-
-	afterattack(obj/target, mob/user , flag)
-
-		if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
-
-			if(!target.reagents.total_volume)
-				user << "\red [target] is empty."
-				return
-
-			if(reagents.total_volume >= reagents.maximum_volume)
-				user << "\red [src] is full."
-				return
-
-			var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
-			user << "\blue You fill [src] with [trans] units of the contents of [target]."
-
-		else if(target.is_open_container()) //Something like a glass. Player probably wants to transfer TO it.
-			if(!reagents.total_volume)
-				user << "\red [src] is empty."
-				return
-
-			if(target.reagents.total_volume >= target.reagents.maximum_volume)
-				user << "\red [target] is full."
-				return
-
-
-
-			var/datum/reagent/refill
-			var/datum/reagent/refillName
-			if(isrobot(user))
-				refill = reagents.get_master_reagent_id()
-				refillName = reagents.get_master_reagent_name()
-
-			var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
-			user << "\blue You transfer [trans] units of the solution to [target]."
-
-			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
-				var/mob/living/silicon/robot/bro = user
-				var/chargeAmount = max(30,4*trans)
-				bro.cell.use(chargeAmount)
-				user << "Now synthesizing [trans] units of [refillName]..."
-
-
-				spawn(300)
-					reagents.add_reagent(refill, trans)
-					user << "Cyborg [src] refilled."
-
+	if(standard_dispenser_refill(user, target))
 		return
+	if(standard_pour_into(user, target))
+		return
+	return ..()
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in range(0)) && usr!=src.loc) return
-		if(!reagents || reagents.total_volume==0)
-			usr << "\blue \The [src] is empty!"
-		else if (reagents.total_volume<src.volume/4)
-			usr << "\blue \The [src] is almost empty!"
-		else if (reagents.total_volume<src.volume/2)
-			usr << "\blue \The [src] is half full!"
-		else if (reagents.total_volume<src.volume/0.90)
-			usr << "\blue \The [src] is almost full!"
-		else
-			usr << "\blue \The [src] is full!"
+/obj/item/weapon/reagent_containers/food/drinks/standard_feed_mob(var/mob/user, var/mob/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
+
+/obj/item/weapon/reagent_containers/food/drinks/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
+
+/obj/item/weapon/reagent_containers/food/drinks/standard_pour_into(var/mob/user, var/atom/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src]!</span>")
+		return 1
+	return ..()
+
+/obj/item/weapon/reagent_containers/food/drinks/self_feed_message(var/mob/user)
+	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
+
+/obj/item/weapon/reagent_containers/food/drinks/feed_sound(var/mob/user)
+	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
+
+/obj/item/weapon/reagent_containers/food/drinks/examine(mob/user)
+	if(!..(user, 1))
+		return
+	if(!reagents || reagents.total_volume == 0)
+		to_chat(user, "<span class='notice'>\The [src] is empty!</span>")
+	else if (reagents.total_volume <= volume * 0.25)
+		to_chat(user, "<span class='notice'>\The [src] is almost empty!</span>")
+	else if (reagents.total_volume <= volume * 0.66)
+		to_chat(user, "<span class='notice'>\The [src] is half full!</span>")
+	else if (reagents.total_volume <= volume * 0.90)
+		to_chat(user, "<span class='notice'>\The [src] is almost full!</span>")
+	else
+		to_chat(user, "<span class='notice'>\The [src] is full!</span>")
+
+/obj/item/weapon/reagent_containers/food/drinks/proc/get_filling_state()
+	var/percent = round((reagents.total_volume / volume) * 100)
+	for(var/k in cached_number_list_decode(filling_states))
+		if(percent <= k)
+			return k
+
+/obj/item/weapon/reagent_containers/food/drinks/update_icon()
+	overlays.Cut()
+	if(reagents.reagent_list.len > 0)
+		if(base_name)
+			var/datum/reagent/R = reagents.get_master_reagent()
+			name = "[base_name] of [R.glass_name ? R.glass_name : "something"]"
+			desc = R.glass_desc ? R.glass_desc : initial(desc)
+		if(filling_states)
+			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
+			filling.color = reagents.get_color()
+			overlays += filling
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -138,21 +106,17 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /obj/item/weapon/reagent_containers/food/drinks/golden_cup
-	desc = "A golden cup"
+	desc = "A golden cup."
 	name = "golden cup"
 	icon_state = "golden_cup"
 	item_state = "" //nope :(
-	w_class = 4
+	w_class = ITEM_SIZE_HUGE
 	force = 14
 	throwforce = 10
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
 	volume = 150
-	flags = FPRINT | CONDUCT | TABLEPASS | OPENCONTAINER
-
-/obj/item/weapon/reagent_containers/food/drinks/golden_cup/tournament_26_06_2011
-	desc = "A golden cup. It will be presented to a winner of tournament 26 june and name of the winner will be graved on it."
-
+	flags = CONDUCT | OPENCONTAINER
 
 ///////////////////////////////////////////////Drinks
 //Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be ingested directly
@@ -160,235 +124,270 @@
 //	Formatting is the same as food.
 
 /obj/item/weapon/reagent_containers/food/drinks/milk
-	name = "Space Milk"
+	name = "milk carton"
 	desc = "It's milk. White and nutritious goodness!"
 	icon_state = "milk"
 	item_state = "carton"
-	New()
-		..()
-		reagents.add_reagent("milk", 50)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/flour
-	name = "flour sack"
-	desc = "A big bag of flour. Good for baking!"
-	icon = 'icons/obj/food.dmi'
-	icon_state = "flour"
-	item_state = "flour"
-	New()
-		..()
-		reagents.add_reagent("flour", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+	center_of_mass = "x=16;y=9"
+/obj/item/weapon/reagent_containers/food/drinks/milk/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/milk, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/soymilk
-	name = "SoyMilk"
+	name = "soymilk carton"
 	desc = "It's soy milk. White and nutritious goodness!"
 	icon_state = "soymilk"
 	item_state = "carton"
+	center_of_mass = "x=16;y=9"
 	New()
 		..()
-		reagents.add_reagent("soymilk", 50)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+		reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 50)
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton
+	name = "small milk carton"
+	volume = 30
+	icon_state = "mini-milk"
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/milk, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate
+	name = "small chocolate milk carton"
+	desc = "It's milk! This one is in delicious chocolate flavour."
+
+/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/milk/chocolate, 30)
+
 
 /obj/item/weapon/reagent_containers/food/drinks/coffee
-	name = "Robust Coffee"
+	name = "\improper Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
-	New()
-		..()
-		reagents.add_reagent("coffee", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+	center_of_mass = "x=15;y=10"
+/obj/item/weapon/reagent_containers/food/drinks/coffee/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/coffee, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/tea
-	name = "Duke Purple Tea"
+	name = "cup of Duke Purple Tea"
 	desc = "An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea."
-	icon_state = "tea"
+	icon_state = "teacup"
 	item_state = "coffee"
+	center_of_mass = "x=16;y=14"
+	filling_states = "100"
+	base_name = "cup"
+	base_icon = "teacup"
 	New()
 		..()
-		reagents.add_reagent("tea", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+		reagents.add_reagent(/datum/reagent/drink/tea, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/ice
-	name = "Ice Cup"
+	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
-	New()
-		..()
-		reagents.add_reagent("ice", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+	center_of_mass = "x=15;y=10"
+/obj/item/weapon/reagent_containers/food/drinks/ice/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/ice, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
-	name = "Dutch Hot Coco"
+	name = "cup of Dutch hot coco"
 	desc = "Made in Space South America."
-	icon_state = "tea"
+	icon_state = "hot_coco"
 	item_state = "coffee"
-	New()
-		..()
-		reagents.add_reagent("hot_coco", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+	center_of_mass = "x=15;y=13"
+/obj/item/weapon/reagent_containers/food/drinks/h_chocolate/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen
-	name = "Cup Ramen"
+	name = "cup ramen"
+	gender = PLURAL
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
+	center_of_mass = "x=16;y=11"
 	New()
 		..()
-		reagents.add_reagent("dry_ramen", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/cola
-	name = "Space Cola"
-	desc = "Cola. in space."
-	icon_state = "cola"
-	New()
-		..()
-		reagents.add_reagent("cola", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/beer
-	name = "Space Beer"
-	desc = "Beer. In space."
-	icon_state = "beer"
-	New()
-		..()
-		reagents.add_reagent("beer", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/ale
-	name = "Magm-Ale"
-	desc = "A true dorf's drink of choice."
-	icon_state = "alebottle"
-	item_state = "beer"
-	New()
-		..()
-		reagents.add_reagent("ale", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind
-	name = "Space Mountain Wind"
-	desc = "Blows right through you like a space wind."
-	icon_state = "space_mountain_wind"
-	New()
-		..()
-		reagents.add_reagent("spacemountainwind", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/thirteenloko
-	name = "Thirteen Loko"
-	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsably."
-	icon_state = "thirteen_loko"
-	New()
-		..()
-		reagents.add_reagent("thirteenloko", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/dr_gibb
-	name = "Dr. Gibb"
-	desc = "A delicious mixture of 42 different flavors."
-	icon_state = "dr_gibb"
-	New()
-		..()
-		reagents.add_reagent("dr_gibb", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/starkist
-	name = "Star-kist"
-	desc = "The taste of a star in liquid form. And, a bit of tuna...?"
-	icon_state = "starkist"
-	New()
-		..()
-		reagents.add_reagent("cola", 15)
-		reagents.add_reagent("orangejuice", 15)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/space_up
-	name = "Space-Up"
-	desc = "Tastes like a hull breach in your mouth."
-	icon_state = "space-up"
-	New()
-		..()
-		reagents.add_reagent("space_up", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/lemon_lime
-	name = "Lemon-Lime"
-	desc = "You wanted ORANGE. It gave you Lemon Lime."
-	icon_state = "lemon-lime"
-	New()
-		..()
-		reagents.add_reagent("lemon_lime", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+		reagents.add_reagent(/datum/reagent/drink/dry_ramen, 30)
 
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup
-	name = "Paper Cup"
+	name = "paper cup"
 	desc = "A paper water cup."
 	icon_state = "water_cup_e"
 	possible_transfer_amounts = null
 	volume = 10
+	center_of_mass = "x=16;y=12"
 	New()
 		..()
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 	on_reagent_change()
 		if(reagents.total_volume)
 			icon_state = "water_cup"
 		else
 			icon_state = "water_cup_e"
 
-/obj/item/weapon/reagent_containers/food/drinks/tonic
-	name = "T-Borg's Tonic Water"
-	desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
-	icon_state = "tonic"
-	New()
-		..()
-		reagents.add_reagent("tonic", 50)
 
-/obj/item/weapon/reagent_containers/food/drinks/sodawater
-	name = "Soda Water"
-	desc = "A can of soda water. Why not make a scotch and soda?"
-	icon_state = "sodawater"
-	New()
-		..()
-		reagents.add_reagent("sodawater", 50)
 //////////////////////////drinkingglass and shaker//
 //Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink
 //	itself), in Chemistry-Recipes.dm (for the reaction that changes the components into the drink), and here (for the drinking glass
 //	icon states.
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker
-	name = "Shaker"
+	name = "shaker"
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
-	volume = 100
+	volume = 120
+	center_of_mass = "x=17;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/teapot
+	name = "teapot"
+	desc = "An elegant teapot. It simply oozes class."
+	icon_state = "teapot"
+	item_state = "teapot"
+	amount_per_transfer_from_this = 10
+	volume = 120
+	center_of_mass = "x=17;y=7"
+
+/obj/item/weapon/reagent_containers/food/drinks/pitcher
+	name = "pitcher"
+	desc = "Everyone's best friend in the morning."
+	icon_state = "pitcher"
+	volume = 120
+	amount_per_transfer_from_this = 10
+	center_of_mass = "x=16;y=9"
+	filling_states = "15;30;50;70;85;100"
+	base_icon = "pitcher"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
-	name = "Captain's Flask"
-	desc = "A metal flask belonging to the captain"
+	name = "\improper Captain's flask"
+	desc = "A metal flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
+	center_of_mass = "x=17;y=7"
 
-/obj/item/weapon/reagent_containers/food/drinks/britcup
-	name = "cup"
-	desc = "A cup with the british flag emblazoned on it."
-	icon_state = "britcup"
+/obj/item/weapon/reagent_containers/food/drinks/flask/shiny
+	name = "shiny flask"
+	desc = "A shiny metal flask. It appears to have a Greek symbol inscribed on it."
+	icon_state = "shinyflask"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/lithium
+	name = "lithium flask"
+	desc = "A flask with a Lithium Atom symbol on it."
+	icon_state = "lithiumflask"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/detflask
+	name = "\improper Detective's flask"
+	desc = "A metal flask with a leather band and golden badge belonging to the detective."
+	icon_state = "detflask"
+	volume = 60
+	center_of_mass = "x=17;y=8"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/barflask
+	name = "flask"
+	desc = "For those who can't be bothered to hang out at the bar to drink."
+	icon_state = "barflask"
+	volume = 60
+	center_of_mass = "x=17;y=7"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
+	name = "vacuum flask"
+	desc = "Keeping your drinks at the perfect temperature since 1892."
+	icon_state = "vacuumflask"
+	volume = 60
+	center_of_mass = "x=15;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup
+	name = "coffee cup"
+	desc = "A plain white coffee cup."
+	icon_state = "coffeecup"
+	item_state = "coffee"
 	volume = 30
+	center_of_mass = "x=15;y=13"
+	filling_states = "40;80;100"
+	base_name = "cup"
+	base_icon = "coffeecup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/black
+	name = "black coffee cup"
+	desc = "A sleek black coffee cup."
+	icon_state = "coffeecup_black"
+	base_name = "black cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/green
+	name = "green coffee cup"
+	desc = "A pale green and pink coffee cup."
+	icon_state = "coffeecup_green"
+	base_name = "green cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/heart
+	name = "heart coffee cup"
+	desc = "A white coffee cup, it prominently features a red heart."
+	icon_state = "coffeecup_heart"
+	base_name = "heart cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/SCG
+	name = "SCG coffee cup"
+	desc = "A blue coffee cup emblazoned with the crest of the Sol Central Government."
+	icon_state = "coffeecup_SCG"
+	base_name = "SCG cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT
+	name = "NT coffee cup"
+	desc = "A red NanoTrasen coffee cup. 90% Guaranteed to not be laced with mind-control drugs."
+	icon_state = "coffeecup_NT"
+	base_name = "NT cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
+	name = "#1 coffee cup"
+	desc = "A white coffee cup, prominently featuring a #1."
+	icon_state = "coffeecup_one"
+	base_name = "#1 cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/rainbow
+	name = "rainbow coffee cup"
+	desc = "A rainbow coffee cup. The colors are almost as blinding as a welder."
+	icon_state = "coffeecup_rainbow"
+	base_name = "rainbow cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/metal
+	name = "metal coffee cup"
+	desc = "A metal coffee cup. You're not sure which metal."
+	icon_state = "coffeecup_metal"
+	base_name = "metal cup"
+	flags = CONDUCT | OPENCONTAINER
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/STC
+	name = "STC coffee cup"
+	desc = "A coffee cup adorned with the flag of the Sovereign Terran Confederacy, for when you need some espionage charges to go with your morning coffee."
+	icon_state = "coffeecup_STC"
+	base_name = "STC cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/pawn
+	name = "pawn coffee cup"
+	desc = "A black coffee cup adorned with the image of a red chess pawn."
+	icon_state = "coffeecup_pawn"
+	base_name = "pawn cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/diona
+	name = "diona nymph coffee cup"
+	desc = "A green coffee cup featuring the image of a diona nymph."
+	icon_state = "coffeecup_diona"
+	base_name = "diona cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/britcup
+	name = "british coffee cup"
+	desc = "A coffee cup with the British flag emblazoned on it."
+	icon_state = "coffeecup_brit"
+	base_name = "british cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/tall
+	name = "tall coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
+	icon_state = "coffeecup_tall"
+	volume = 60
+	center_of_mass = "x=15;y=19"
+	filling_states = "50;70;90;100"
+	base_name = "tall cup"
+	base_icon = "coffeecup_tall"

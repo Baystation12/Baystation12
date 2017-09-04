@@ -1,2 +1,0 @@
-/mob/dead/observer/Login()
-	..()

@@ -62,14 +62,13 @@
 		interpreter.SetVar("WEST" 	, 	WEST)			// WEST  (8)
 
 		// Channel macros
-		interpreter.SetVar("$common",	1459)
-		interpreter.SetVar("$science",	1351)
-		interpreter.SetVar("$command",	1353)
-		interpreter.SetVar("$medical",	1355)
-		interpreter.SetVar("$engineering",1357)
-		interpreter.SetVar("$security",	1359)
-		interpreter.SetVar("$mining",	1349)
-		interpreter.SetVar("$cargo",	1347)
+		interpreter.SetVar("$common",	PUB_FREQ)
+		interpreter.SetVar("$science",	SCI_FREQ)
+		interpreter.SetVar("$command",	COMM_FREQ)
+		interpreter.SetVar("$medical",	MED_FREQ)
+		interpreter.SetVar("$engineering",ENG_FREQ)
+		interpreter.SetVar("$security",	SEC_FREQ)
+		interpreter.SetVar("$supply",	SUP_FREQ)
 
 		// Signal data
 
@@ -119,7 +118,7 @@
 					@param replacestring: 	the string to replace the substring with
 
 		*/
-		interpreter.SetProc("replace", /proc/dd_replacetext)
+		interpreter.SetProc("replace", /proc/string_replacetext)
 
 		/*
 			-> Locates an element/substring inside of a list or string
@@ -223,10 +222,13 @@ datum/signal
 
 	proc/tcombroadcast(var/message, var/freq, var/source, var/job)
 
-		var/mob/living/carbon/human/H = new
 		var/datum/signal/newsign = new
 		var/obj/machinery/telecomms/server/S = data["server"]
-		var/obj/item/device/radio/hradio
+		var/obj/item/device/radio/hradio = S.server_radio
+
+		if(!hradio)
+			error("[src] has no radio.")
+			return
 
 		if((!message || message == "") && message != 0)
 			message = "*beep*"
@@ -234,19 +236,19 @@ datum/signal
 			source = "[html_encode(uppertext(S.id))]"
 			hradio = new // sets the hradio as a radio intercom
 		if(!freq)
-			freq = 1459
+			freq = PUB_FREQ
 		if(findtext(num2text(freq), ".")) // if the frequency has been set as a decimal
 			freq *= 10 // shift the decimal one place
 
 		if(!job)
 			job = "?"
 
-		newsign.data["mob"] = H
-		newsign.data["mobtype"] = H.type
+		newsign.data["mob"] = null
+		newsign.data["mobtype"] = /mob/living/carbon/human
 		if(source in S.stored_names)
 			newsign.data["name"] = source
 		else
-			newsign.data["name"] = "<i>[html_encode(uppertext(source))]<i>"
+			newsign.data["name"] = "<i>[html_encode(uppertext(source))]</i>"
 		newsign.data["realname"] = newsign.data["name"]
 		newsign.data["job"] = job
 		newsign.data["compression"] = 0
@@ -259,15 +261,14 @@ datum/signal
 		var/datum/radio_frequency/connection = radio_controller.return_frequency(freq)
 		newsign.data["connection"] = connection
 
-		// The radio is a radio headset!
-
-		if(!hradio)
-			hradio = new /obj/item/device/radio/headset
 
 		newsign.data["radio"] = hradio
-		newsign.data["vmessage"] = H.voice_message
-		newsign.data["vname"] = H.voice_name
+		newsign.data["vmessage"] = message
+		newsign.data["vname"] = source
 		newsign.data["vmask"] = 0
+		newsign.data["level"] = list()
 
-		S.relay_information(newsign, "/obj/machinery/telecomms/broadcaster") // send this simple message to broadcasters
-		S.relay_information(newsign, "/obj/machinery/telecomms/hub")
+		var/pass = S.relay_information(newsign, /obj/machinery/telecomms/hub)
+		if(!pass)
+			S.relay_information(newsign, /obj/machinery/telecomms/broadcaster) // send this simple message to broadcasters
+

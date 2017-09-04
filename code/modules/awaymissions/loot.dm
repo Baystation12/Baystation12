@@ -5,14 +5,20 @@
 	var/lootdoubles = 0		//if the same item can be spawned twice
 	var/loot = ""			//a list of possible items to spawn- a string of paths
 
-/obj/effect/spawner/lootdrop/initialize()
+/obj/effect/spawner/lootdrop/Initialize()
 	var/list/things = params2list(loot)
+
 	if(things && things.len)
 		for(var/i = lootcount, i > 0, i--)
-			if(!things.len) return
-			var/lootspawn = text2path(pick(things))
-			if(!lootdoubles)
-				things.Remove(lootspawn)
+			if(!things.len)
+				return
 
-			new lootspawn(get_turf(src))
-	del(src)
+			var/loot_spawn = pick(things)
+			var/loot_path = text2path(loot_spawn)
+
+			if(!loot_path || !lootdoubles)
+				things.Remove(loot_spawn)
+				continue
+
+			new loot_path(get_turf(src))
+	return INITIALIZE_HINT_QDEL

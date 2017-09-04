@@ -1,10 +1,11 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/aiupload
-	name = "AI Upload"
+	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
-	icon_state = "command"
-	circuit = "/obj/item/weapon/circuitboard/aiupload"
+	icon_keyboard = "rd_key"
+	icon_screen = "command"
+	circuit = /obj/item/weapon/circuitboard/aiupload
 	var/mob/living/silicon/ai/current = null
 	var/opened = 0
 
@@ -18,15 +19,15 @@
 
 		opened = !opened
 		if(opened)
-			usr << "\blue The access panel is now open."
+			to_chat(usr, "<span class='notice'>The access panel is now open.</span>")
 		else
-			usr << "\blue The access panel is now closed."
+			to_chat(usr, "<span class='notice'>The access panel is now closed.</span>")
 		return
 
 
 	attackby(obj/item/weapon/O as obj, mob/user as mob)
 		if (user.z > 6)
-			user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
+			to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the [station_name()]!")
 			return
 		if(istype(O, /obj/item/weapon/aiModule))
 			var/obj/item/weapon/aiModule/M = O
@@ -37,27 +38,30 @@
 
 	attack_hand(var/mob/user as mob)
 		if(src.stat & NOPOWER)
-			usr << "The upload computer has no power!"
+			to_chat(usr, "The upload computer has no power!")
 			return
 		if(src.stat & BROKEN)
-			usr << "The upload computer is broken!"
+			to_chat(usr, "The upload computer is broken!")
 			return
 
 		src.current = select_active_ai(user)
 
 		if (!src.current)
-			usr << "No active AIs detected."
+			to_chat(usr, "No active AIs detected.")
 		else
-			usr << "[src.current.name] selected for law changes."
+			to_chat(usr, "[src.current.name] selected for law changes.")
 		return
 
+	attack_ghost(user as mob)
+		return 1
 
 
 /obj/machinery/computer/borgupload
-	name = "Cyborg Upload"
+	name = "cyborg upload console"
 	desc = "Used to upload laws to Cyborgs."
-	icon_state = "command"
-	circuit = "/obj/item/weapon/circuitboard/borgupload"
+	icon_keyboard = "rd_key"
+	icon_screen = "command"
+	circuit = /obj/item/weapon/circuitboard/borgupload
 	var/mob/living/silicon/robot/current = null
 
 
@@ -70,16 +74,19 @@
 
 	attack_hand(var/mob/user as mob)
 		if(src.stat & NOPOWER)
-			usr << "The upload computer has no power!"
+			to_chat(usr, "The upload computer has no power!")
 			return
 		if(src.stat & BROKEN)
-			usr << "The upload computer is broken!"
+			to_chat(usr, "The upload computer is broken!")
 			return
 
 		src.current = freeborg()
 
 		if (!src.current)
-			usr << "No free cyborgs detected."
+			to_chat(usr, "No free cyborgs detected.")
 		else
-			usr << "[src.current.name] selected for law changes."
+			to_chat(usr, "[src.current.name] selected for law changes.")
 		return
+
+	attack_ghost(user as mob)
+		return 1

@@ -177,7 +177,7 @@
 				if(!killobjectives.len)
 					continue
 				var/datum/objective/assassinate/objective = pickweight(killobjectives)
-				world << objective
+				to_world(objective)
 				for(1 to 10)
 					if(objective.points + total_weight <= 100 || !killobjectives.len)
 						break
@@ -267,14 +267,14 @@ datum
 				explanation_text = "Frame [target.current.real_name], the [target.assigned_role] for a crime and make sure they are arrested and brought back to the Centcom station alive.  We'll handle the rest from there."
 
 			check_completion()
-				if(emergency_shuttle.location<2)
+				if(!emergency_shuttle.returned())
 					return 0
 				if(target.current.stat == 2)
 					return 0
 				var/turf/location = get_turf(target.current.loc)
 				if(!location)
 					return 0
-				if(!target.current:handcuffed && !istype(location, /turf/simulated/shuttle/floor4))
+				if(!target.current.incapacitated(INCAPACITATION_RESTRAINED)) //might also need to check if they are in the shuttle brig, perhaps
 					return 0
 
 				if(location in locate(/area/shuttle/escape/centcom))
@@ -310,10 +310,10 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] Syndicate [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the station safely, while minimizing intervention."
+				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] mercenary [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the [station_name()] safely, while minimizing intervention."
 
 			check_completion()
-				if(emergency_shuttle.location<2)
+				if(!emergency_shuttle.returned())
 					return 0
 
 				if(target.current.stat == 2)
@@ -477,7 +477,7 @@ datum
 			explanation_text = "Hijack the emergency shuttle by escaping alone."
 
 			check_completion()
-				if(emergency_shuttle.location<2)
+				if(!emergency_shuttle.returned())
 					return 0
 
 				if(!owner.current || owner.current.stat == 2)
@@ -512,7 +512,7 @@ datum
 			explanation_text = "Escape on the shuttle alive, without being arrested."
 
 			check_completion()
-				if(emergency_shuttle.location<2)
+				if(!emergency_shuttle.returned())
 					return 0
 
 				if(!owner.current || owner.current.stat ==2)
@@ -522,7 +522,7 @@ datum
 				if(!location)
 					return 0
 
-				if(owner.current:handcuffed || istype(location, /turf/simulated/shuttle/floor4))
+				if(target.current.incapacitated(INCAPACITATION_RESTRAINED)) //might also need to check if they are in the shuttle brig, perhaps
 					return 0
 
 				if(location in locate(/area/shuttle/escape/centcom))
@@ -563,7 +563,7 @@ datum
 
 
 			captainslaser
-				steal_target = /obj/item/weapon/gun/energy/laser/captain
+				steal_target = /obj/item/weapon/gun/energy/captain
 				explanation_text = "Steal the captain's antique laser gun."
 				weight = 20
 
@@ -593,7 +593,7 @@ datum
 				weight = 20
 
 				get_points(var/job)
-					if(job in science_positions || job in command_positions)
+					if((job in science_positions) || (job in command_positions))
 						return 20
 					return 40
 
@@ -604,7 +604,7 @@ datum
 					var/list/all_items = owner.current.get_contents()
 					for(var/obj/item/I in all_items)
 						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						if(I:air_contents:toxins) return 1 //If they got one with plasma
+						if(I:air_contents:phoron) return 1 //If they got one with plasma
 					return 0
 
 
@@ -750,7 +750,7 @@ datum
 
 			blueprints
 				steal_target = /obj/item/blueprints
-				explanation_text = "Steal the station's blueprints."
+				explanation_text = "Steal the [station_name()]'s blueprints."
 				weight = 20
 
 				get_points(var/job)
@@ -797,7 +797,7 @@ datum
 
 			nuke_disk
 				steal_target = /obj/item/weapon/disk/nuclear
-				explanation_text = "Steal the station's nuclear authentication disk."
+				explanation_text = "Steal the [station_name()]'s nuclear authentication disk."
 				weight = 20
 
 				get_points(var/job)
@@ -928,8 +928,10 @@ datum
 					var/target_amount = 10
 					var/found_amount = 0.0//Always starts as zero.
 					for(var/obj/item/I in owner.current.get_contents())
-						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						found_amount += I:amount
+						if(!istype(I, steal_target))
+							continue//If it's not actually that item.
+						var/obj/item/stack/sheet/diamond/D = I
+						found_amount += D.get_amount()
 					return found_amount>=target_amount
 
 			gold
@@ -957,8 +959,10 @@ datum
 					var/target_amount = 50
 					var/found_amount = 0.0//Always starts as zero.
 					for(var/obj/item/I in owner.current.get_contents())
-						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						found_amount += I:amount
+						if(!istype(I, steal_target))
+							continue//If it's not actually that item.
+						var/obj/item/stack/sheet/gold/G = I
+						found_amount += G.get_amount()
 					return found_amount>=target_amount
 
 			uranium
@@ -986,8 +990,10 @@ datum
 					var/target_amount = 25
 					var/found_amount = 0.0//Always starts as zero.
 					for(var/obj/item/I in owner.current.get_contents())
-						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						found_amount += I:amount
+						if(!istype(I, steal_target))
+							continue//If it's not actually that item.
+						var/obj/item/stack/sheet/uranium/U = I
+						found_amount += U.get_amount()
 					return found_amount>=target_amount
 
 
@@ -1012,7 +1018,7 @@ datum
 			*/
 			cyborg
 				steal_target = /obj/item/robot_parts/robot_suit
-				explanation_text = "Steal a completed cyborg shell (no brain)"
+				explanation_text = "Steal a completed robot shell (no brain)"
 				weight = 30
 
 				get_points(var/job)
@@ -1039,7 +1045,7 @@ datum
 					return 20
 			AI
 				steal_target = /obj/structure/AIcore
-				explanation_text = "Steal a finished AI, either by intellicard or stealing the whole construct."
+				explanation_text = "Steal a finished AI, either by inteliCard or stealing the whole construct."
 				weight = 50
 
 				get_points(var/job)
@@ -1214,7 +1220,7 @@ datum
 
 
 		nuclear
-			explanation_text = "Destroy the station with a nuclear device."
+			explanation_text = "Destroy the [station_name()] with a nuclear device."
 
 
 		block
@@ -1224,7 +1230,7 @@ datum
 			check_completion()
 				if(!istype(owner.current, /mob/living/silicon))
 					return 0
-				if(emergency_shuttle.location<2)
+				if(!emergency_shuttle.returned())
 					return 0
 				if(!owner.current)
 					return 0
@@ -1246,7 +1252,7 @@ datum
 			proc/find_target()
 				..()
 				if(target && target.current)
-					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role], has defied us for the last time.  Make an example of him, and bring us his severed head."
+					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role], has defied us for the last time.  Make an example of [target.current.gender == MALE ? "him" : target.current.gender == FEMALE ? "her" : "them"], and bring us [target.current.gender == MALE ? "his" : target.current.gender == FEMALE ? "her" : "their"] severed head."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1255,7 +1261,7 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)], has defied us for the last time.  Make an example of him, and bring us his severed head."
+					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)], has defied us for the last time.  Make an example of [target.current.gender == MALE ? "him" : target.current.gender == FEMALE ? "her" : "them"], and bring us [target.current.gender == MALE ? "his" : target.current.gender == FEMALE ? "her" : "their"] severed head."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1325,11 +1331,13 @@ datum
 					return 0
 				if(!owner.current || owner.current.stat == 2)
 					return 0
-				if(!(istype(owner.current:wear_suit, /obj/item/clothing/suit/space/space_ninja)&&owner.current:wear_suit:s_initialized))
-					return 0
+
 				var/current_amount
-				var/obj/item/clothing/suit/space/space_ninja/S = owner.current:wear_suit
-				if(!S.stored_research.len)
+				var/obj/item/weapon/rig/S
+				if(istype(owner.current,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = owner.current
+					S = H.back
+				if(!S || !istype(S) || !S.stored_research.len)
 					return 0
 				else
 					for(var/datum/tech/current_data in S.stored_research)
@@ -1370,7 +1378,7 @@ datum
 				var/list/all_items = owner.current.get_contents()
 				for(var/obj/item/device/mmi/mmi in all_items)
 					if(mmi.brainmob&&mmi.brainmob.mind==target)	return 1
-				for(var/obj/item/brain/brain in all_items)
+				for(var/obj/item/organ/brain/brain in all_items)
 					if(brain.brainmob&&brain.brainmob.mind==target)	return 1
 				return 0
 
@@ -1398,7 +1406,7 @@ datum
 					var/turf/T = get_turf(target.current)
 					if(target.current.stat == 2)
 						return 1
-					else if((T) && (T.z != 1))//If they leave the station they count as dead for this
+					else if((T) && (isNotStationLevel(T.z)))//If they leave the station they count as dead for this
 						return 2
 					else
 						return 0
@@ -1444,10 +1452,10 @@ datum
 				return 1
 
 datum/objective/silence
-	explanation_text = "Do not allow anyone to escape the station.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
+	explanation_text = "Do not allow anyone to escape the [station_name()].  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
 
 	check_completion()
-		if(emergency_shuttle.location<2)
+		if(!emergency_shuttle.returned())
 			return 0
 
 		var/area/shuttle = locate(/area/shuttle/escape/centcom)

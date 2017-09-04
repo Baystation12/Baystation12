@@ -1,17 +1,19 @@
 /var/security_level = 0
 //0 = code green
-//1 = code blue
+//1 = code orange
 //2 = code red
 //3 = code delta
 
-//config.alert_desc_blue_downto
+//config.alert_desc_orange_downto
+/var/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
+/var/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1)
 
 /proc/set_security_level(var/level)
 	switch(level)
 		if("green")
 			level = SEC_LEVEL_GREEN
-		if("blue")
-			level = SEC_LEVEL_BLUE
+		if("orange")
+			level = SEC_LEVEL_ORANGE
 		if("red")
 			level = SEC_LEVEL_RED
 		if("delta")
@@ -21,60 +23,40 @@
 	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_DELTA && level != security_level)
 		switch(level)
 			if(SEC_LEVEL_GREEN)
-				world << "<font size=4 color='red'>Attention! Security level lowered to green</font>"
-				world << "<font color='red'>[config.alert_desc_green]</font>"
+				security_announcement_down.Announce("[config.alert_desc_green]", "Attention! Security level lowered to green")
 				security_level = SEC_LEVEL_GREEN
-				for(var/obj/machinery/firealarm/FA in world)
-					if(FA.z == 1)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_green")
-			if(SEC_LEVEL_BLUE)
-				if(security_level < SEC_LEVEL_BLUE)
-					world << "<font size=4 color='red'>Attention! Security level elevated to blue</font>"
-					world << "<font color='red'>[config.alert_desc_blue_upto]</font>"
+				post_status("alert", "greenalert")
+			if(SEC_LEVEL_ORANGE)
+				if(security_level < SEC_LEVEL_ORANGE)
+					security_announcement_up.Announce("[config.alert_desc_orange_upto]", "Attention! Security level elevated to orange")
 				else
-					world << "<font size=4 color='red'>Attention! Security level lowered to blue</font>"
-					world << "<font color='red'>[config.alert_desc_blue_downto]</font>"
-				security_level = SEC_LEVEL_BLUE
-				for(var/obj/machinery/firealarm/FA in world)
-					if(FA.z == 1)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
+					security_announcement_down.Announce("[config.alert_desc_orange_downto]", "Attention! Security level lowered to orange")
+				security_level = SEC_LEVEL_ORANGE
+				post_status("alert", "orangealert")
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
-					world << "<font size=4 color='red'>Attention! Code red!</font>"
-					world << "<font color='red'>[config.alert_desc_red_upto]</font>"
+					security_announcement_up.Announce("[config.alert_desc_red_upto]", "Attention! Code red!")
 				else
-					world << "<font size=4 color='red'>Attention! Code red!</font>"
-					world << "<font color='red'>[config.alert_desc_red_downto]</font>"
+					security_announcement_down.Announce("[config.alert_desc_red_downto]", "Attention! Code red!")
 				security_level = SEC_LEVEL_RED
-
-				/*	- At the time of commit, setting status displays didn't work properly
-				var/obj/machinery/computer/communications/CC = locate(/obj/machinery/computer/communications,world)
-				if(CC)
-					CC.post_status("alert", "redalert")*/
-
-				for(var/obj/machinery/firealarm/FA in world)
-					if(FA.z == 1)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
+				post_status("alert", "redalert")
 			if(SEC_LEVEL_DELTA)
-				world << "<font size=4 color='red'>Attention! Delta security level reached!</font>"
-				world << "<font color='red'>[config.alert_desc_delta]</font>"
+				security_announcement_up.Announce("[config.alert_desc_delta]", "Attention! Delta security level reached!", new_sound = 'sound/effects/siren.ogg')
 				security_level = SEC_LEVEL_DELTA
-				for(var/obj/machinery/firealarm/FA in world)
-					if(FA.z == 1)
-						FA.overlays = list()
-						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
-	else
-		return
+				post_status("alert", "deltaalert")
+
+		var/newlevel = get_security_level()
+		for(var/obj/machinery/firealarm/FA in GLOB.machines)
+			if(FA.z in GLOB.using_map.contact_levels)
+				FA.set_security_level(newlevel)
+
 
 /proc/get_security_level()
 	switch(security_level)
 		if(SEC_LEVEL_GREEN)
 			return "green"
-		if(SEC_LEVEL_BLUE)
-			return "blue"
+		if(SEC_LEVEL_ORANGE)
+			return "orange"
 		if(SEC_LEVEL_RED)
 			return "red"
 		if(SEC_LEVEL_DELTA)
@@ -84,8 +66,8 @@
 	switch(num)
 		if(SEC_LEVEL_GREEN)
 			return "green"
-		if(SEC_LEVEL_BLUE)
-			return "blue"
+		if(SEC_LEVEL_ORANGE)
+			return "orange"
 		if(SEC_LEVEL_RED)
 			return "red"
 		if(SEC_LEVEL_DELTA)
@@ -95,8 +77,8 @@
 	switch( lowertext(seclevel) )
 		if("green")
 			return SEC_LEVEL_GREEN
-		if("blue")
-			return SEC_LEVEL_BLUE
+		if("orange")
+			return SEC_LEVEL_ORANGE
 		if("red")
 			return SEC_LEVEL_RED
 		if("delta")

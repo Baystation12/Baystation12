@@ -8,6 +8,7 @@ var/const  //Ascii values of characters
 	ascii_z  =122
 	ascii_DOLLAR = 36 // $
 	ascii_ZERO=48
+	ascii_THALER = 254
 	ascii_NINE=57
 	ascii_UNDERSCORE=95	// _
 

@@ -1,18 +1,13 @@
 //Lallander was here
 /mob/living/carbon/human/whisper(message as text)
-	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
+	var/alt_name = ""
 
-	if (!message || silent || miming)
-		return
-
+	message = sanitize(message)
 	log_whisper("[src.name]/[src.key] : [message]")
 
 	if (src.client)
-		if (src.client.muted & MUTE_IC)
-			src << "\red You cannot whisper (muted)."
-			return
-
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
+		if (src.client.prefs.muted & MUTE_IC)
+			to_chat(src, "<span class='warning'>You cannot whisper (muted).</span>")
 			return
 
 
@@ -22,119 +17,112 @@
 	if (src.stat)
 		return
 
-	var/alt_name = ""
-	if (istype(src, /mob/living/carbon/human) && src.name != GetVoice())
-		var/mob/living/carbon/human/H = src
-		alt_name = " (as [H.get_id_name("Unknown")])"
-	// Mute disability
-	if (src.sdisabilities & MUTE)
-		return
+	if(name != GetVoice())
+		alt_name = "(as [get_id_name("Unknown")])"
+
+	//parse the language code and consume it
+	var/datum/language/speaking = parse_language(message)
+	if (speaking)
+		message = copytext(message,2+length(speaking.key))
+
+	whisper_say(message, speaking, alt_name)
+
+
+//This is used by both the whisper verb and human/say() to handle whispering
+/mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
 
 	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
-	var/italics = 1
 	var/message_range = 1
+	var/eavesdropping_range = 2
+	var/watching_range = 5
+	var/italics = 1
 
-	if(istype(src.wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja)&&src.wear_mask:voice=="Unknown")
-		if(copytext(message, 1, 2) != "*")
-			var/list/temp_message = dd_text2list(message, " ")
-			var/list/pick_list = list()
-			for(var/i = 1, i <= temp_message.len, i++)
-				pick_list += i
-			for(var/i=1, i <= abs(temp_message.len/3), i++)
-				var/H = pick(pick_list)
-				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
-				temp_message[H] = ninjaspeak(temp_message[H])
-				pick_list -= H
-			message = dd_list2text(temp_message, " ")
-			message = dd_replacetext(message, "o", "¤")
-			message = dd_replacetext(message, "p", "þ")
-			message = dd_replacetext(message, "l", "£")
-			message = dd_replacetext(message, "s", "§")
-			message = dd_replacetext(message, "u", "µ")
-			message = dd_replacetext(message, "b", "ß")
+	var/not_heard //the message displayed to people who could not hear the whispering
+	var/adverb
+	if (speaking)
+		if (speaking.whisper_verb)
+			verb = speaking.whisper_verb
+			not_heard = "[verb] something"
+		else
+			adverb = pick("quietly", "softly")
+			verb = speaking.speech_verb
+			not_heard = "[speaking.speech_verb] something [adverb]"
+	else
+		not_heard = "[verb] something" //TODO get rid of the null language and just prevent speech if language is null
 
-	if (src.stuttering)
-		message = stutter(message)
+	message = capitalize(trim(message))
 
+	//speech problems
+	if(!(speaking && (speaking.flags & NO_STUTTER)))
+		var/list/message_data = list(message, verb, 1)
+		if(handle_speech_problems(message_data))
+			message = message_data[1]
+
+			if(!message_data[3]) //if a speech problem like hulk forces someone to yell then everyone hears it
+				verb = message_data[2] //assume that if they are going to force not-whispering then they will set an appropriate verb too
+				message_range = world.view
+			else if(verb != message_data[2])
+				adverb = pick("quietly", "softly") //new verb given, so 'whisperize' it with an adverb
+				verb = message_data[2]
+
+	//consoldiate the adverb if we have one
+	if(adverb) verb = "[verb] [adverb]"
+
+	if(!message || message=="")
+		return
+
+	var/list/listening = hearers(message_range, src)
+	listening |= src
+
+	//ghosts
+	for (var/mob/M in GLOB.player_list)
+		if (istype(M, /mob/new_player))
+			continue
+		if (!(M.client))
+			continue
+		if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
+			listening |= M
+
+	//Pass whispers on to anything inside the immediate listeners.
+	for(var/mob/L in listening)
+		for(var/mob/C in L.contents)
+			if(istype(C,/mob/living))
+				listening += C
+
+	//pass on the message to objects that can hear us.
 	for (var/obj/O in view(message_range, src))
 		spawn (0)
 			if (O)
-				O.hear_talk(src, message)
+				O.hear_talk(src, message, verb, speaking)
 
-	var/list/listening = hearers(message_range, src)
-	listening -= src
-	listening += src
-	var/list/eavesdropping = hearers(2, src)
+	var/list/eavesdropping = hearers(eavesdropping_range, src)
 	eavesdropping -= src
 	eavesdropping -= listening
-	var/list/watching  = hearers(5, src)
+
+	var/list/watching  = hearers(watching_range, src)
 	watching  -= src
 	watching  -= listening
 	watching  -= eavesdropping
 
-	var/list/heard_a = list() // understood us
-	var/list/heard_b = list() // didn't understand us
+	//now mobs
+	var/speech_bubble_test = say_test(message)
+	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
+	spawn(30) qdel(speech_bubble)
 
-	for (var/mob/M in listening)
-		if (M.say_understands(src))
-			heard_a += M
-		else
-			heard_b += M
+	for(var/mob/M in listening)
+		M << speech_bubble
+		M.hear_say(message, verb, speaking, alt_name, italics, src)
 
-	var/rendered = null
+	if (eavesdropping.len)
+		var/new_message = stars(message)	//hopefully passing the message twice through stars() won't hurt... I guess if you already don't understand the language, when they speak it too quietly to hear normally you would be able to catch even less.
+		for(var/mob/M in eavesdropping)
+			M << speech_bubble
+			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
 
-	for (var/mob/M in watching)
-		if (M.say_understands(src))
-			rendered = "<span class='game say'><span class='name'>[src.name]</span> whispers something.</span>"
-		else
-			rendered = "<span class='game say'><span class='name'>[src.voice_name]</span> whispers something.</span>"
-		M.show_message(rendered, 2)
-
-	if (length(heard_a))
-		var/message_a = message
-
-		if (italics)
-			message_a = "<i>[message_a]</i>"
-		//This appears copied from carbon/living say.dm so the istype check for mob is probably not needed. Appending for src is also not needed as the game will check that automatically.
-		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[message_a]\"</span></span>"
-
-		for (var/mob/M in heard_a)
-			M.show_message(rendered, 2)
-
-	if (length(heard_b))
-		var/message_b
-
-		if (src.voice_message)
-			message_b = src.voice_message
-		else
-			message_b = stars(message)
-
-		if (italics)
-			message_b = "<i>[message_b]</i>"
-
-		rendered = "<span class='game say'><span class='name'>[src.voice_name]</span> whispers, <span class='message'>\"[message_b]\"</span></span>"
-
-		for (var/mob/M in heard_b)
-			M.show_message(rendered, 2)
-
-	for (var/mob/M in eavesdropping)
-		if (M.say_understands(src))
-			var/message_c
-			message_c = stars(message)
-			rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[message_c]\"</span></span>"
-			M.show_message(rendered, 2)
-		else
-			rendered = "<span class='game say'><span class='name'>[src.voice_name]</span> whispers something.</span>"
-			M.show_message(rendered, 2)
-
-	if (italics)
-		message = "<i>[message]</i>"
-	rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[message]\"</span></span>"
-
-	for (var/mob/M in dead_mob_list)
-		if (!(M.client))
-			continue
-		if (M.stat > 1 && !(M in heard_a))
+	if (watching.len)
+		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> [not_heard].</span>"
+		for (var/mob/M in watching)
 			M.show_message(rendered, 2)

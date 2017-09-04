@@ -1,99 +1,120 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/item/weapon/airlock_electronics
-	name = "Airlock Electronics"
+	name = "airlock electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
-	w_class = 2.0 //It should be tiny! -Agouri
-	m_amt = 50
-	g_amt = 50
+	w_class = ITEM_SIZE_SMALL //It should be tiny! -Agouri
+
+	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
 	req_access = list(access_engine)
 
-	var/list/conf_access = null
+	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
+	var/list/conf_access = list()
+	var/one_access = 0 //if set to 1, door would receive req_one_access instead of req_access
 	var/last_configurator = null
 	var/locked = 1
-
-	attack_self(mob/user as mob)
-		if (!ishuman(user))
-			return ..(user)
-
-		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 60)
-			return
-
-		var/t1 = text("<B>Access control</B><br>\n")
+	var/lockable = 1
 
 
-		if (last_configurator)
-			t1 += "Operator: [last_configurator]<br>"
+/obj/item/weapon/airlock_electronics/attack_self(mob/user as mob)
+	if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
+		return ..(user)
 
-		if (locked)
-			t1 += "<a href='?src=\ref[src];login=1'>Swipe ID</a><hr>"
-		else
-			t1 += "<a href='?src=\ref[src];logout=1'>Block</a><hr>"
+	tg_ui_interact(user)
 
 
-			t1 += conf_access == null ? "<font color=red>All</font><br>" : "<a href='?src=\ref[src];access=all'>All</a><br>"
 
-			t1 += "<br>"
+//tgui interact code generously lifted from tgstation.
+/obj/item/weapon/airlock_electronics/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, \
+	datum/tgui/master_ui = null, datum/ui_state/state = tg_hands_state)
 
-			var/list/accesses = get_all_accesses()
-			for (var/acc in accesses)
-				var/aname = get_access_desc(acc)
+	tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "airlock_electronics", src.name, 1000, 500, master_ui, state)
+		ui.open()
 
-				if (!conf_access || !conf_access.len || !(acc in conf_access))
-					t1 += "<a href='?src=\ref[src];access=[acc]'>[aname]</a><br>"
-				else
-					t1 += "<a style='color: red' href='?src=\ref[src];access=[acc]'>[aname]</a><br>"
+/obj/item/weapon/airlock_electronics/ui_data(mob/user)
+	var/list/data = list()
+	var/list/regions = list()
 
-		t1 += text("<p><a href='?src=\ref[];close=1'>Close</a></p>\n", src)
+	for(var/i in ACCESS_REGION_SECURITY to ACCESS_REGION_SUPPLY) //code/game/jobs/_access_defs.dm
+		var/list/region = list()
+		var/list/accesses = list()
+		for(var/j in get_region_accesses(i))
+			var/list/access = list()
+			access["name"] = get_access_desc(j)
+			access["id"] = j
+			access["req"] = (j in src.conf_access)
+			accesses[++accesses.len] = access
+		region["name"] = get_region_accesses_name(i)
+		region["accesses"] = accesses
+		regions[++regions.len] = region
+	data["regions"] = regions
+	data["oneAccess"] = one_access
+	data["locked"] = locked
+	data["lockable"] = lockable
 
-		user << browse(t1, "window=airlock_electronics")
-		onclose(user, "airlock")
+	return data
 
-	Topic(href, href_list)
-		..()
-		if (usr.stat || usr.restrained() || !ishuman(usr))
-			return
-		if (href_list["close"])
-			usr << browse(null, "window=airlock")
-			return
-
-		if (href_list["login"])
-			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/device/pda))
-				var/obj/item/device/pda/pda = I
-				I = pda.id
-			if (I && src.check_access(I))
-				src.locked = 0
-				src.last_configurator = I:registered_name
-
-		if (locked)
-			return
-
-		if (href_list["logout"])
-			locked = 1
-
-		if (href_list["access"])
-			toggle_access(href_list["access"])
-
-		attack_self(usr)
-
-	proc
-		toggle_access(var/acc)
-			if (acc == "all")
-				conf_access = null
+/obj/item/weapon/airlock_electronics/ui_act(action, params)
+	if(..())
+		return TRUE
+	switch(action)
+		if("clear")
+			conf_access = list()
+			one_access = 0
+			return TRUE
+		if("one_access")
+			one_access = !one_access
+			return TRUE
+		if("set")
+			var/access = text2num(params["access"])
+			if (!(access in conf_access))
+				conf_access += access
 			else
-				var/req = text2num(acc)
-
-				if (conf_access == null)
-					conf_access = list()
-
-				if (!(req in conf_access))
-					conf_access += req
+				conf_access -= access
+			return TRUE
+		if("unlock")
+			if(!lockable)
+				return TRUE
+			if(!req_access || istype(usr,/mob/living/silicon))
+				locked = 0
+				last_configurator = usr.name
+				return TRUE
+			else
+				var/obj/item/weapon/card/id/I = usr.get_active_hand()
+				I = I ? I.GetIdCard() : null
+				if(!istype(I, /obj/item/weapon/card/id))
+					to_chat(usr, "<span class='warning'>[\src] flashes a yellow LED near the ID scanner. Did you remember to scan your ID or PDA?</span>")
+					return TRUE
+				if (check_access(I))
+					locked = 0
+					last_configurator = I.registered_name
 				else
-					conf_access -= req
-					if (!conf_access.len)
-						conf_access = null
+					to_chat(usr, "<span class='warning'>[\src] flashes a red LED near the ID scanner, indicating your access has been denied.</span>")
+					return TRUE
+		if("lock")
+			if(!lockable)
+				return TRUE
+			locked = 1
+			. = TRUE
 
+/obj/item/weapon/airlock_electronics/secure
+	name = "secure airlock electronics"
+	desc = "designed to be somewhat more resistant to hacking than standard electronics."
+	origin_tech = list(TECH_DATA = 2)
+	secure = 1
+
+/obj/item/weapon/airlock_electronics/brace
+	name = "airlock brace access circuit"
+	req_access = list()
+	locked = 0
+	lockable = 0
+
+/obj/item/weapon/airlock_electronics/brace/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_deep_inventory_state)
+	tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "airlock_electronics", src.name, 1000, 500, master_ui, state)
+		ui.open()

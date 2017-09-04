@@ -3,34 +3,8 @@
 /**********************************************************************
 						Cyborg Spec Items
 ***********************************************************************/
-//Might want to move this into several files later but for now it works here
-/obj/item/borg/stun
-	name = "Electrified Arm"
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "shock"
-
-	attack(mob/M as mob, mob/living/silicon/robot/user as mob)
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-
-		log_attack(" <font color='red'>[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])</font>")
-
-		log_admin("ATTACK: [user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])")
-		msg_admin_attack("ATTACK: [user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey])") //BS12 EDIT ALG
-
-		user.cell.charge -= 30
-
-		M.Weaken(5)
-		if (M.stuttering < 5)
-			M.stuttering = 5
-		M.Stun(5)
-
-		for(var/mob/O in viewers(M, null))
-			if (O.client)
-				O.show_message("\red <B>[user] has prodded [M] with an electrically-charged arm!</B>", 1, "\red You hear someone fall", 2)
-
 /obj/item/borg/overdrive
-	name = "Overdrive"
+	name = "overdrive"
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
 
@@ -44,28 +18,36 @@
 
 
 /obj/item/borg/sight/xray
-	name = "X-ray Vision"
+	name = "\proper x-ray vision"
 	sight_mode = BORGXRAY
 
 
 /obj/item/borg/sight/thermal
-	name = "Thermal Vision"
+	name = "\proper thermal vision"
 	sight_mode = BORGTHERM
+	icon_state = "thermal"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 
 /obj/item/borg/sight/meson
-	name = "Meson Vision"
+	name = "\proper meson vision"
 	sight_mode = BORGMESON
+	icon_state = "meson"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
+/obj/item/borg/sight/material
+	name = "\proper material scanner vision"
+	sight_mode = BORGMATERIAL
 
 /obj/item/borg/sight/hud
-	name = "Hud"
+	name = "hud"
 	var/obj/item/clothing/glasses/hud/hud = null
 
 
 /obj/item/borg/sight/hud/med
-	name = "Medical Hud"
-
+	name = "medical hud"
+	icon_state = "healthhud"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 	New()
 		..()
@@ -74,8 +56,9 @@
 
 
 /obj/item/borg/sight/hud/sec
-	name = "Security Hud"
-
+	name = "security hud"
+	icon_state = "securityhud"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 	New()
 		..()

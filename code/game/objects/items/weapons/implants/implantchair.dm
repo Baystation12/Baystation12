@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
 /obj/machinery/implantchair
-	name = "Loyalty Implanter"
+	name = "loyalty implanter"
 	desc = "Used to implant occupants with loyalty implants."
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"
@@ -32,7 +32,7 @@
 
 
 	attack_hand(mob/user as mob)
-		user.machine = src
+		user.set_machine(src)
 		var/health_text = ""
 		if(src.occupant)
 			if(src.occupant.health <= -100)
@@ -48,7 +48,7 @@
 		dat += "<B>Implants:</B> [src.implant_list.len ? "[implant_list.len]" : "<A href='?src=\ref[src];replenish=1'>Replenish</A>"]<BR>"
 		if(src.occupant)
 			dat += "[src.ready ? "<A href='?src=\ref[src];implant=1'>Implant</A>" : "Recharging"]<BR>"
-		user.machine = src
+		user.set_machine(src)
 		user << browse(dat, "window=implant")
 		onclose(user, "implant")
 
@@ -75,16 +75,17 @@
 
 
 	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
-		if(istype(G, /obj/item/weapon/grab))
-			if(!ismob(G:affecting))
+		if(istype(G, /obj/item/grab))
+			var/obj/item/grab/grab = G
+			if(!ismob(grab.affecting))
 				return
-			for(var/mob/living/carbon/metroid/M in range(1,G:affecting))
-				if(M.Victim == G:affecting)
-					usr << "[G:affecting:name] will not fit into the [src.name] because they have a Metroid latched onto their head."
+			for(var/mob/living/carbon/slime/M in range(1,G:affecting))
+				if(M.Victim == grab.affecting)
+					to_chat(usr, "[grab.affecting:name] will not fit into the [src.name] because they have a slime latched onto their head.")
 					return
 			var/mob/M = G:affecting
 			if(put_mob(M))
-				del(G)
+				qdel(G)
 		src.updateUsrDialog()
 		return
 
@@ -108,10 +109,10 @@
 
 	put_mob(mob/living/carbon/M as mob)
 		if(!iscarbon(M))
-			usr << "\red <B>The [src.name] cannot hold this!</B>"
+			to_chat(usr, "<span class='warning'>\The [src] cannot hold this!</span>")
 			return
 		if(src.occupant)
-			usr << "\red <B>The [src.name] is already occupied!</B>"
+			to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 			return
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
@@ -132,7 +133,7 @@
 			if(!imp)	continue
 			if(istype(imp, /obj/item/weapon/implant/loyalty))
 				for (var/mob/O in viewers(M, null))
-					O.show_message("\red [M] has been implanted by the [src.name].", 1)
+					O.show_message("<span class='warning'>\The [M] has been implanted by \the [src].</span>", 1)
 
 				if(imp.implanted(M))
 					imp.loc = M
