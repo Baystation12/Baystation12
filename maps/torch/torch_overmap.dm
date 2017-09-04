@@ -184,7 +184,7 @@
 	req_access = list(access_aquila_helm)
 
 /obj/machinery/computer/shuttle_control/explore/exploration_shuttle
-	name = "calypso control console"
+	name = "shuttle control console"
 	shuttle_tag = "Charon"
 	req_access = list(access_expedition_shuttle_helm)
 
