@@ -150,7 +150,7 @@
 /obj/item/projectile/chameleon
 	name = "bullet"
 	icon_state = "bullet"
-	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
+	damage = 1 // stop trying to murderbone with a fake gun d******!!!
 	embed = 0 // nope
 	nodamage = 1
 	damage_type = PAIN
