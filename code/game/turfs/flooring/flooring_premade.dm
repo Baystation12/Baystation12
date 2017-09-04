@@ -107,10 +107,6 @@
 	icon_state = "cult"
 	initial_flooring = /decl/flooring/reinforced/cult
 
-/turf/simulated/floor/cult/New()
-	..()
-	new /obj/effect/overlay/cult/cultfloor(src)
-
 /turf/simulated/floor/cult/cultify()
 	return
 
