@@ -531,12 +531,13 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/toxgun
 	sort_string = "TAAAD"
 
-/datum/design/item/weapon/decloner
-	id = "decloner"
-	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
-	materials = list("gold" = 5000,"uranium" = 10000, "mutagen" = 40)
-	build_path = /obj/item/weapon/gun/energy/decloner
-	sort_string = "TAAAE"
+ /datum/design/item/weapon/decloner
+ 	id = "decloner"
+ 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
+ 	materials = list("gold" = 5000,"uranium" = 10000)
+ 	chemicals = list(/datum/reagent/mutagen = 40)
+ 	build_path = /obj/item/weapon/gun/energy/decloner
+ 	sort_string = "TAAAE"
 
 /datum/design/item/weapon/smg
 	id = "smg"
