@@ -55,7 +55,7 @@
 	heat_level_2 = 440 //Default 400
 	heat_level_3 = 600 //Default 1000
 
-	flags = NO_SLIP | CAN_NAB | NO_BLOCK
+	flags = NO_SLIP | CAN_NAB | NO_BLOCK | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
