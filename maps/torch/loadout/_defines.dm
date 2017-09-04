@@ -65,3 +65,14 @@
 
 //For jobs that spawn with weapons in their lockers
 #define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
+
+
+/* BRANCH RESTRICTIONS */
+// All ranks in the civilian branch
+#define CIVILIAN_BRANCH list("branches" = list("Civilian"), "ranks" = list("ALL"))
+
+// Nanotrasen rank only in the civilian branch
+#define NANOTRASEN_BRANCH list("branches" = list("Civilian"), "ranks" = list("NanoTrasen"))
+
+// All military branches
+#define MILITARY_BRANCH list("branches" = list("Expeditionary Corps", "Fleet", "Marine Corps"), "ranks" = list("ALL"))

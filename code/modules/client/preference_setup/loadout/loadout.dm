@@ -145,39 +145,76 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><hr></td></tr>"
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
+	
+	// Fetch job list and branch/rank here, so we're not doing this for every single custom item
 	var/jobs = list()
 	if(job_master)
 		for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
 			var/datum/job/J = job_master.occupations_by_title[job_title]
 			if(J)
 				dd_insertObjectList(jobs, J)
-
+	
+	var/branch = ""
+	if (pref.char_branch)
+		branch = pref.char_branch
+	
+	var/rank = ""
+	if (pref.char_rank)
+		rank = pref.char_rank
+	
+	// Loop through each loadout item
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
+		var/list/display_role_list = list() // List of entries to be displayed
+		
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2>[G.description]</font>"
-		if(G.allowed_roles)
-			. += "<br><i>"
-			var/ind = 0
-			for(var/datum/job/J in jobs)
-				++ind
-				if(ind > 1)
-					. += ", "
-				if(J.type in G.allowed_roles)
-					. += "<font color=55cc55>[J.title]</font>"
+		
+		/* Fetch gear by branch restrictions (NEW) */
+		if (G.allowed_branches)
+			var/allowed_branch = TRUE
+			
+			// Allowed_branches is a list containing two additional lists. We'll compare branch and rank separately.
+			if (G.allowed_branches["branches"])
+				if ((branch in G.allowed_branches["branches"]) || ("ALL" in G.allowed_branches["branches"])) // Branch is allowed
+					display_role_list += "<font color=55cc55>[branch]</font>"
+				else // Branch is not allowed
+					display_role_list += "<font color=cc5555>[branch]</font>"
+					allowed_branch = FALSE
+			
+			// Only check rank if branch is allowed
+			if (allowed_branch)
+				// Ranks may be empty, indicating 'Allow all ranks from the selected branches'
+				if (G.allowed_branches["ranks"])
+					if ((rank in G.allowed_branches["ranks"]) || ("ALL" in G.allowed_branches["ranks"])) // Rank is allowed
+						display_role_list += "<font color=55cc55>[rank]</font>"
+					else // Rank is not allowed
+						display_role_list += "<font color=cc5555>[rank]</font>"
+		
+		/* Fetch gear by job restrictions (OLD) */
+		if (G.allowed_roles)
+		
+			for (var/datum/job/J in jobs)
+				if (J.type in G.allowed_roles)
+					display_role_list += "<font color=55cc55>[J.title]</font>"
 				else
-					. += "<font color=cc5555>[J.title]</font>"
-			. += "</i>"
+					display_role_list += "<font color=cc5555>[J.title]</font>"
+		
+		// Convert display list to HTML formatted list
+		. += "<br><i>"
+		. += english_list(display_role_list, "", ", ")
+		. += "</i>"
 		.+= "</tr>"
 		if(ticked)
 			. += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
 				. += " <a href='?src=\ref[src];gear=[G.display_name];tweak=\ref[tweak]'>[tweak.get_contents(get_tweak_metadata(G, tweak))]</a>"
 			. += "</td></tr>"
+
 	. += "</table>"
 	. = jointext(.,null)
 
@@ -265,15 +302,16 @@ var/list/gear_datums = list()
 		return 1
 
 /datum/gear
-	var/display_name       //Name/index. Must be unique.
-	var/description        //Description of this gear. If left blank will default to the description of the pathed item.
-	var/path               //Path to item.
-	var/cost = 1           //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
-	var/slot               //Slot to equip to.
-	var/list/allowed_roles //Roles that can spawn with this item.
-	var/whitelisted        //Term to check the whitelist for..
+	var/display_name          //Name/index. Must be unique.
+	var/description           //Description of this gear. If left blank will default to the description of the pathed item.
+	var/path                  //Path to item.
+	var/cost = 1              //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
+	var/slot                  //Slot to equip to.
+	var/list/allowed_roles    //Roles that can spawn with this item.
+	var/list/allowed_branches //Branches that can spawn with this item.
+	var/whitelisted           //Term to check the whitelist for..
 	var/sort_category = "General"
-	var/flags              //Special tweaks in new
+	var/flags                 //Special tweaks in new
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 

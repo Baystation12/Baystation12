@@ -19,3 +19,7 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
+
+# ignore notepad ++ stuff
+*.npss
+*.npws
