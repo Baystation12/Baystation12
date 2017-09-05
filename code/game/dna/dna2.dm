@@ -84,6 +84,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	// New stuff
 	var/species = SPECIES_HUMAN
+	var/list/body_markings = list()
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
@@ -93,6 +94,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.b_type=b_type
 	new_dna.real_name=real_name
 	new_dna.species=species
+	new_dna.body_markings=body_markings.Copy()
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
 		if(b<=DNA_UI_LENGTH)
@@ -151,6 +153,11 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  hair_styles_list.len,       1)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, facial_hair_styles_list.len,1)
+
+	body_markings.Cut()
+	for(var/obj/item/organ/external/E in character.organs)
+		if(E.markings.len)
+			body_markings[E.organ_tag] = E.markings.Copy()
 
 	UpdateUI()
 

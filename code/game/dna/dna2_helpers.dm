@@ -164,6 +164,13 @@
 			else
 				H.gender = MALE
 
+		//Body markings
+		for(var/tag in dna.body_markings)
+			var/obj/item/organ/external/E = H.organs_by_name[tag]
+			if(E)
+				var/list/marklist = dna.body_markings[tag]
+				E.markings = marklist.Copy()
+
 		//Hair
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,hair_styles_list.len)
 		if((0 < hair) && (hair <= hair_styles_list.len))

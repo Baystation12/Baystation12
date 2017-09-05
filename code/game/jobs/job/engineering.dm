@@ -3,7 +3,7 @@
 	head_position = 1
 	department = "Engineering"
 	department_flag = ENG|COM
-	faction = "Station"
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
@@ -24,13 +24,12 @@
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
 	minimal_player_age = 14
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
-	announced = 1
 
 /datum/job/engineer
 	title = "Engineer"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 8
 	spawn_positions = 7
 	supervisors = "the chief engineer"
@@ -47,7 +46,7 @@
 	title = "Atmospheric Technician"
 	department = "Engineering"
 	department_flag = ENG
-	faction = "Station"
+
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the chief engineer"

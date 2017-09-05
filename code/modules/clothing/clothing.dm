@@ -229,6 +229,7 @@ BLIND     // can't see anything
 	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/gloves.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
 
@@ -548,7 +549,6 @@ BLIND     // can't see anything
 	holding.forceMove(get_turf(usr))
 
 	if(usr.put_in_hands(holding))
-		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
 		holding = null
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
@@ -574,7 +574,6 @@ BLIND     // can't see anything
 		user.unEquip(I)
 		I.forceMove(src)
 		holding = I
-		user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>")
 		verbs |= /obj/item/clothing/shoes/proc/draw_knife
 		update_icon()
 	else
@@ -664,8 +663,8 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK)
+	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
 
 /obj/item/clothing/under/New()
 	..()

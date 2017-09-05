@@ -87,10 +87,10 @@
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
 	if(reagents)
-		if(reagents.has_reagent("hyperzine")) // Hyperzine slows slimes down
+		if(reagents.has_reagent(/datum/reagent/hyperzine)) // Hyperzine slows slimes down
 			tally *= 2
 
-		if(reagents.has_reagent("frostoil")) // Frostoil also makes them move VEEERRYYYYY slow
+		if(reagents.has_reagent(/datum/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
 	if(health <= 0) // if damaged, the slime moves twice as slow

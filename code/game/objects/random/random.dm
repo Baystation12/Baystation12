@@ -1,8 +1,3 @@
-GLOBAL_LIST_EMPTY(random_spawner_probabilities)
-#ifdef UNIT_TEST
-GLOBAL_LIST_EMPTY(random_cache)
-#endif
-
 /obj/random
 	name = "random object"
 	desc = "This item type is used to spawn random objects at round-start."
@@ -10,46 +5,32 @@ GLOBAL_LIST_EMPTY(random_cache)
 	icon_state = "rup"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 
+	var/spawn_method = /obj/random/proc/spawn_item
+
 // creates a new object and deletes itself
 /obj/random/Initialize()
 	..()
-	spawn_item()
+	call(src, spawn_method)()
 	return INITIALIZE_HINT_QDEL
 
 // creates the random item
 /obj/random/proc/spawn_item()
-#ifndef UNIT_TEST
 	if(prob(spawn_nothing_percentage))
 		return
-#endif
 
 	if(isnull(loc))
 		return
 
-	if(isnull(GLOB.random_spawner_probabilities[type]))
-		GLOB.random_spawner_probabilities[type] = spawn_choices()
-	var/build_path = controlled_pick(GLOB.random_spawner_probabilities[type])
+	var/build_path = pickweight(spawn_choices())
 
 	var/atom/A = new build_path(src.loc)
 	if(pixel_x || pixel_y)
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 
-// Returns an associative list in format path:weight. Cached after first fetch.
+// Returns an associative list in format path:weight
 /obj/random/proc/spawn_choices()
 	return list()
-
-/obj/random/proc/controlled_pick(var/list/paths)
-#ifdef UNIT_TEST
-	// Pick the largest possible object during unit tests. Needed for container overflow tests.
-	// Recursive lookups are very expensive, so we are caching them.
-	if(isnull(GLOB.random_cache[type]))
-		var/largest = get_largest(paths)
-		GLOB.random_cache[type] = largest
-	return GLOB.random_cache[type]
-#else
-	return pickweight(paths)
-#endif
 
 /obj/random/single
 	name = "randomly spawned object"
@@ -1103,6 +1084,18 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/weapon/rig/light,
 				/obj/item/weapon/rig/unathi,
 				/obj/item/weapon/rig/unathi/fancy)
+
+/obj/random/hostile
+	name = "Random Hostile Mob"
+	desc = "This is a random hostile mob."
+	icon = 'icons/mob/amorph.dmi'
+	icon_state = "standing"
+	spawn_nothing_percentage = 80
+
+obj/random/hostile/spawn_choices()
+	return list(/mob/living/simple_animal/hostile/viscerator,
+				/mob/living/simple_animal/hostile/carp,
+				/mob/living/simple_animal/hostile/carp/pike)
 
 /*
 	Selects one spawn point out of a group of points with the same ID and asks it to generate its items

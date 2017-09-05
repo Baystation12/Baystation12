@@ -72,6 +72,10 @@
 	if(!istype(target))
 		return
 
+	if(user.a_intent == I_HELP)
+		to_chat(user, "<span class='notice'>You can't splash people on help intent.</span>")
+		return 1
+
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='notice'>[src] is empty.</span>")
 		return 1
@@ -178,5 +182,8 @@
 		return ..()
 
 /obj/item/weapon/reagent_containers/AltClick(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		set_APTFT()
+	if(possible_transfer_amounts)
+		if(CanPhysicallyInteract(user))
+			set_APTFT()
+	else
+		return ..()

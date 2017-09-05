@@ -8,7 +8,9 @@
 	icon_state = "toolcloset"
 	icon_closed = "toolcloset"
 	icon_opened = "toolclosetopen"
-	will_contain = list(
+
+/obj/structure/closet/toolcloset/excavation/WillContain()
+	return list(
 		/obj/item/weapon/storage/belt/archaeology,
 		/obj/item/weapon/storage/excavation,
 		/obj/item/device/flashlight/lantern,
@@ -26,13 +28,16 @@
 		/obj/item/weapon/storage/bag/fossils,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/taperoll/research,
-		/obj/item/device/spaceflare)
+		/obj/item/device/spaceflare
+	)
 
 /obj/structure/closet/wardrobe/ptgear
 	name = "pt gear wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
-	will_contain = list(
+
+/obj/structure/closet/wardrobe/ptgear/WillContain()
+	return list(
 		/obj/item/clothing/under/pt/expeditionary = 4,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/shoes/black = 2)

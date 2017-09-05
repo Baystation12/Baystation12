@@ -2,7 +2,7 @@
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
 	anchored = 0
-	density = 1
+	density = 0
 
 
 /obj/machinery/iv_drip/var/mob/living/carbon/human/attached = null
@@ -118,7 +118,7 @@
 				return
 
 			// If the human is losing too much blood, beep.
-			if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
+			if(((T.vessel.get_reagent_amount(/datum/reagent/blood)/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
 				visible_message("\The [src] beeps loudly.")
 
 			if(T.take_blood(beaker,amount))
@@ -131,6 +131,10 @@
 		update_icon()
 	else
 		return ..()
+
+/obj/machinery/iv_drip/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
 
 obj/machinery/iv_drip/attack_ai(mob/user as mob)
 	return

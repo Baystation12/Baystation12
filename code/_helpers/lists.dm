@@ -104,6 +104,24 @@ proc/listclearnulls(list/list)
 		result = first ^ second
 	return result
 
+/proc/assoc_merge_add(var/value_a, var/value_b)
+	return value_a + value_b
+
+// This proc merges two associative lists
+/proc/merge_assoc_lists(var/list/a, var/list/b, var/merge_method, var/default_if_null_value = null)
+	. = list()
+	for(var/key in a)
+		var/a_value = a[key]
+		a_value = isnull(a_value) ? default_if_null_value : a_value
+		.[key] = a_value
+	for(var/key in b)
+		var/b_value = b[key]
+		b_value = isnull(b_value) ? default_if_null_value : b_value
+		if(!(key in .))
+			.[key] = b_value
+		else
+			.[key] = call(merge_method)(.[key], b_value)
+
 //Pretends to pick an element based on its weight but really just seems to pick a random element.
 /proc/pickweight(list/L)
 	var/total = 0
@@ -406,6 +424,30 @@ proc/listclearnulls(list/list)
 	var/list/out = insertion_sort_numeric_list_ascending(L)
 	//world.log << "	output: [out.len]"
 	return reverselist(out)
+
+
+// Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
+// Use ADD_SORTED(list, A, cmp_proc)
+
+// Return the index using dichotomic search
+/proc/FindElementIndex(atom/A, list/L, cmp)
+	var/i = 1
+	var/j = L.len
+	var/mid
+
+	while(i < j)
+		mid = round((i+j)/2)
+
+		if(call(cmp)(L[mid],A) < 0)
+			i = mid + 1
+		else
+			j = mid
+
+	if(i == 1 || i ==  L.len) // Edge cases
+		return (call(cmp)(L[i],A) > 0) ? i : i+1
+	else
+		return i
+
 
 /proc/dd_sortedObjectList(var/list/L, var/cache=list())
 	if(L.len < 2)

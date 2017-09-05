@@ -221,6 +221,7 @@
 /obj/item/clothing/mask/rubber/species
 	name = "human mask"
 	desc = "A rubber human mask."
+	icon_state = "manmet"
 	var/species = SPECIES_HUMAN
 
 /obj/item/clothing/mask/rubber/species/New()
@@ -245,5 +246,5 @@
 /obj/item/clothing/mask/rubber/species/skrell
 	name = "skrell mask"
 	desc = "A rubber skrell mask."
-	icon_state = "skrelmet"
+	icon_state = "skrellmet"
 	species = SPECIES_SKRELL

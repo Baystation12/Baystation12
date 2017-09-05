@@ -214,13 +214,54 @@
 
 			APPLY_CORNER(C)
 
+
+
 		if(!T.affecting_lights)
 			T.affecting_lights = list()
 
 		T.affecting_lights += src
 		affecting_turfs    += T
 
+		var/turf/simulated/open/O = T
+		if(istype(O) && O.below)
+			// Consider the turf below us as well. (Z-lights)
+			//Do subprocessing for open turfs
+			for(T = O.below; !isnull(T); T = process_the_turf(T,update_gen));
+
+
+
 	update_gen++
+
+/datum/light_source/proc/process_the_turf(var/turf/T, update_gen)
+
+	if(!T.lighting_corners_initialised)
+		T.generate_missing_corners()
+
+	for(var/datum/lighting_corner/C in T.get_corners())
+		if(C.update_gen == update_gen)
+			continue
+
+		C.update_gen = update_gen
+		C.affecting += src
+
+		if(!C.active)
+			effect_str[C] = 0
+			continue
+
+		APPLY_CORNER(C)
+
+
+
+	if(!T.affecting_lights)
+		T.affecting_lights = list()
+
+	T.affecting_lights += src
+	affecting_turfs    += T
+
+	var/turf/simulated/open/O = T
+	if(istype(O) && O.below)
+		return O.below
+	return null
 
 /datum/light_source/proc/remove_lum()
 	applied = FALSE
@@ -255,6 +296,11 @@
 		corners |= T.get_corners()
 		turfs   += T
 
+		var/turf/simulated/open/O = T
+		if(istype(O) && O.below)
+			// Consider the turf below us as well. (Z-lights)
+			for(T = O.below; !isnull(T); T = update_the_turf(T,corners, turfs));
+
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.
 	affecting_turfs += L
 	for(var/turf/T in L)
@@ -280,6 +326,18 @@
 		REMOVE_CORNER(C)
 		C.affecting -= src
 		effect_str -= C
+
+
+/datum/light_source/proc/update_the_turf(var/turf/T, var/list/datum/lighting_corner/corners, var/list/turf/turfs)
+	if(!T.lighting_corners_initialised)
+		T.generate_missing_corners()
+	corners |= T.get_corners()
+	turfs   += T
+
+	var/turf/simulated/open/O = T
+	if(istype(O) && O.below)
+		return O.below
+	return null
 
 #undef effect_update
 #undef LUM_FALLOFF

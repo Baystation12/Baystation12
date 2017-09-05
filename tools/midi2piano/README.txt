@@ -7,6 +7,9 @@ Simply run midi2piano.py and choose midi file you want to convert.
 The "sheet music" will be copied to the clipboard.
 
 There are some constants defined at the top of midi2piano.py.
+
+TICK_LAG - CHANGE THIS VALUE TO TICK LAG OF YOUR SERVER!
+
 Change their value if needed.
 
 LINE_LENGTH_LIM - max length of line allowed in the sheet music

@@ -30,6 +30,6 @@
 				/obj/item/weapon/contract/apprentice = 				1
 				)
 
-	sacrifice_reagents = list("peridaxon",
-							"adminordrazine")
+	sacrifice_reagents = list(/datum/reagent/peridaxon,
+							/datum/reagent/adminordrazine)
 	sacrifice_objects = list(/obj/item/seeds/mtearseed)
