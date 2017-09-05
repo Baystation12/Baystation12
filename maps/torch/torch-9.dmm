@@ -389,7 +389,7 @@
 "ib" = (/obj/effect/shuttle_landmark/away/skipjack,/turf/simulated/floor/asteroid,/area/mine/explored)
 "jb" = (/obj/effect/shuttle_landmark/away/guppy,/turf/simulated/floor/asteroid,/area/mine/explored)
 "kb" = (/obj/effect/shuttle_landmark/away/aquila,/turf/simulated/floor/asteroid,/area/mine/explored)
-"lb" = (/obj/effect/shuttle_landmark/away/calypso,/turf/simulated/floor/asteroid,/area/mine/explored)
+"lb" = (/obj/effect/shuttle_landmark/away/exploration_shuttle,/turf/simulated/floor/asteroid,/area/mine/explored)
 "mb" = (/obj/effect/shuttle_landmark/away/ninja,/turf/simulated/floor/asteroid,/area/mine/explored)
 "nb" = (/obj/effect/shuttle_landmark/away/syndie,/turf/simulated/floor/asteroid,/area/mine/explored)
 "ob" = (/obj/effect/shuttle_landmark/away/ert,/turf/simulated/floor/asteroid,/area/mine/explored)

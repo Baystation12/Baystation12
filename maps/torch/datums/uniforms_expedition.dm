@@ -128,9 +128,11 @@
 	name = "EC service"
 	departments = SRV
 
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/service, /obj/item/clothing/head/ushanka/expedition)
 	utility_under = /obj/item/clothing/under/utility/expeditionary/service
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/service
+	service_over = /obj/item/clothing/suit/storage/service/expeditionary/service
 
 /decl/hierarchy/mil_uniform/ec/srv/officer
 	name = "EC service CO"

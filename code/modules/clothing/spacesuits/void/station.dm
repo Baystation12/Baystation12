@@ -288,3 +288,27 @@
 	..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/engineering/salvage
 	boots = new /obj/item/clothing/shoes/magboots
+	
+//Pilot
+/obj/item/clothing/head/helmet/space/void/pilot
+	desc = "An atmos resistant helmet for space and planet exploration."
+	name = "pilot voidsuit helmet"
+	icon_state = "rig0_pilot"
+	item_state = "pilot_helm"
+	armor = list(melee = 40, bullet = 5, laser = 15,energy = 5, bomb = 5, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	light_overlay = "helmet_light_dual"
+
+/obj/item/clothing/suit/space/void/pilot
+	desc = "An atmos resistant voidsuit for space and planet exploration."
+	icon_state = "rig-pilot"
+	item_state = "rig-pilot"
+	name = "pilot voidsuit"
+	armor = list(melee = 40, bullet = 5, laser = 15,energy = 5, bomb = 5, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
+
+/obj/item/clothing/suit/space/void/pilot/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/pilot
+	boots = new /obj/item/clothing/shoes/magboots

@@ -20,7 +20,7 @@
 
 	proc/is_active(mob/living/silicon/pai/user)
 		return 0
-	
+
 	proc/on_purchase(mob/living/silicon/pai/user)
 		return
 
@@ -143,7 +143,7 @@
 	ram_cost = 5
 	id = "messenger"
 	toggle = 0
-	
+
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
 		var/data[0]
 
@@ -221,7 +221,7 @@
 	if(user && !user.pda)
 		user.pda = new(user)
 		user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
-				
+
 /datum/pai_software/med_records
 	name = "Medical Records"
 	ram_cost = 15
@@ -474,7 +474,7 @@
 	name = "Universal Translator"
 	ram_cost = 35
 	id = "translator"
-	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
+	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER, LANGUAGE_LUNAR)
 
 	toggle(mob/living/silicon/pai/user)
 		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
