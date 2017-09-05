@@ -12,10 +12,10 @@
 
 	New()
 		..()
-		reagents.add_reagent("triadrenaline",5)
-		reagents.add_reagent("biofoam",5)
-		reagents.add_reagent("tricordrazine",5)
-		reagents.add_reagent("tramadol",5)
+		reagents.add_reagent(/datum/reagent/triadrenaline,5)
+		reagents.add_reagent(/datum/reagent/biofoam,5)
+		reagents.add_reagent(/datum/reagent/tricordrazine,5)
+		reagents.add_reagent(/datum/reagent/tramadol,5)
 		mode = SYRINGE_INJECT
 		update_icon()
 
@@ -29,7 +29,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("triadrenaline", 15)
+		reagents.add_reagent(/datum/reagent/triadrenaline, 15)
 		mode = SYRINGE_INJECT
 		update_icon()
 
