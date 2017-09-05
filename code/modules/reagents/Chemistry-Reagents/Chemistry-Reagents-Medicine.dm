@@ -567,7 +567,7 @@
 /datum/reagent/menthol
 	name = "Menthol"
 	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
-	taste_description = /datum/reagent/nutriment/mint
+	taste_description = "mint"
 	reagent_state = LIQUID
 	color = "#80AF9C"
 	metabolism = REM * 0.002

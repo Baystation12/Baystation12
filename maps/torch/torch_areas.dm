@@ -347,15 +347,26 @@
 	name = "\improper Escape Pod Twelve"
 	flags = AREA_RAD_SHIELDED
 
-//Calypso
+//Charon
 
-/area/calypso_hangar/start
-	name = "\improper Calypso"
+/area/exploration_shuttle/
+	name = "\improper Charon"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/plating
-	requires_power = 1
-	dynamic_lighting = 1
 	flags = AREA_RAD_SHIELDED
+
+/area/exploration_shuttle/cockpit
+	name = "\improper Charon - Cockpit"
+/area/exploration_shuttle/atmos
+	name = "\improper Charon - Atmos Compartment"
+/area/exploration_shuttle/power
+	name = "\improper Charon - Power Compartment"
+/area/exploration_shuttle/crew
+	name = "\improper Charon - Crew Compartment"
+/area/exploration_shuttle/cargo
+	name = "\improper Charon - Cargo Bay"
+/area/exploration_shuttle/airlock
+	name = "\improper Charon - Airlock Compartment"
 
 //Aquila
 
@@ -645,9 +656,14 @@
 	name = "\improper Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
 
-/area/vacant/cannon
-	name = "\improper Main Gun"
+/area/vacant/prototype/control
+	name = "\improper Prototype Fusion Reactor Control Room"
+	icon_state = "engine_monitoring"
+
+/area/vacant/prototype/engine
+	name = "\improper Prototype Fusion Reactor Chamber"
 	icon_state = "firingrange"
+
 
 /area/vacant/cargo
 	name = "\improper Requisitions Office"

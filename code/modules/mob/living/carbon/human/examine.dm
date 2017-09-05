@@ -23,6 +23,10 @@
 
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
+	
+	//no accuately spotting headsets from across the room.
+	if(get_dist(user, src) > 3)
+		skipears = 1
 
 	var/list/msg = list("<span class='info'>*---------*\nThis is ")
 

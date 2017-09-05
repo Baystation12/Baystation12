@@ -26,6 +26,8 @@
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
+		else if("[tmp_icon_state]_tie" in icon_states(default_onmob_icons[slot_tie_str]))
+			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
 			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
 	inv_overlay.color = color
@@ -46,8 +48,8 @@
 			var/obj/item/clothing/under/C = loc
 			if(on_rolled["down"] && C.rolled_down > 0)
 				tmp_icon_state = on_rolled["down"]
-			else if(on_rolled["sleeves"] && C.rolled_sleeves > 0)
-				tmp_icon_state = on_rolled["sleeves"]
+			else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled["rolled"]
 
 		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
@@ -603,13 +605,12 @@
 /obj/item/clothing/accessory/department/command
 	name = "command insignia"
 	desc = "Insignia denoting assignment to the command department. These fit Expeditionary Corps uniforms."
-	overlay_state = "dept_exped_over"
 	color = "#E5EA4F"
 
 /obj/item/clothing/accessory/department/command/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
-	on_rolled = list("down" = "none")
+	on_rolled = list("rolled" = "none", "down" = "none")
 
 /obj/item/clothing/accessory/department/command/marine
 	icon_state = "dept_marine"
@@ -619,13 +620,12 @@
 /obj/item/clothing/accessory/department/engineering
 	name = "engineering insignia"
 	desc = "Insignia denoting assignment to the engineering department. These fit Expeditionary Corps uniforms."
-	overlay_state = "dept_exped_over"
 	color = "#FF7F00"
 
 /obj/item/clothing/accessory/department/engineering/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the engineering department. These fit Fleet uniforms."
-	on_rolled = list("down" = "none")
+	on_rolled = list("rolled" = "none", "down" = "none")
 
 /obj/item/clothing/accessory/department/engineering/marine
 	icon_state = "dept_marine"
@@ -635,13 +635,12 @@
 /obj/item/clothing/accessory/department/security
 	name = "security insignia"
 	desc = "Insignia denoting assignment to the security department. These fit Expeditionary Corps uniforms."
-	overlay_state = "dept_exped_over"
 	color = "#BF0000"
 
 /obj/item/clothing/accessory/department/security/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the security department. These fit Fleet uniforms."
-	on_rolled = list("down" = "none")
+	on_rolled = list("rolled" = "none", "down" = "none")
 
 /obj/item/clothing/accessory/department/security/marine
 	icon_state = "dept_marine"
@@ -651,13 +650,12 @@
 /obj/item/clothing/accessory/department/medical
 	name = "medical insignia"
 	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
-	overlay_state = "dept_exped_over"
 	color = "#4C9CE4"
 
 /obj/item/clothing/accessory/department/medical/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the medical department. These fit Fleet uniforms."
-	on_rolled = list("down" = "none")
+	on_rolled = list("rolled" = "none", "down" = "none")
 
 /obj/item/clothing/accessory/department/medical/marine
 	icon_state = "dept_marine"
@@ -667,13 +665,12 @@
 /obj/item/clothing/accessory/department/supply
 	name = "supply insignia"
 	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
-	overlay_state = "dept_exped_over"
 	color = "#BB9042"
 
 /obj/item/clothing/accessory/department/supply/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the supply department. These fit Fleet uniforms."
-	on_rolled = list("down" = "none")
+	on_rolled = list("rolled" = "none", "down" = "none")
 
 /obj/item/clothing/accessory/department/supply/marine
 	icon_state = "dept_marine"
@@ -683,13 +680,12 @@
 /obj/item/clothing/accessory/department/service
 	name = "service insignia"
 	desc = "Insignia denoting assignment to the service department. These fit Expeditionary Corps uniforms."
-	overlay_state = "dept_exped_over"
 	color = "#6EAA2C"
 
 /obj/item/clothing/accessory/department/service/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the service department. These fit Fleet uniforms."
-	on_rolled = list("down" = "none")
+	on_rolled = list("rolled" = "none", "down" = "none")
 
 /obj/item/clothing/accessory/department/service/marine
 	icon_state = "dept_marine"

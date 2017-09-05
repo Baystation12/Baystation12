@@ -367,7 +367,7 @@
 
 /obj/item/weapon/book/manual/rust_engine
 	name = "R-UST Operating Manual"
-	icon_state = "bookSupermatter"
+	icon_state = "bookMagazine"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
 
@@ -388,14 +388,19 @@
 				<body>
 				<i>This guide appears to have been scribbled in haste on the back of a WetSkrell magazine...</i>
 				<br><br>
+				So you're the poor fucker who has to try and set this piece of shit up this shift. Congratulations! Here's what you need to know: this is a tokamak fusion reactor that uses a high energy plasma stream in a magnetic field enclosure to achieve fusion. It gets extremely hot extremely quickly, and the field is tempramental. The main principle of operation: maximize plasma temperature while minimizing field instability.
+				<br><br>
+				Deuterium and tritium are generally the most available fuel for the beast. If you're cautious, deut-deut reactions are capable of producing power without being unstable. Deut-trit is the bread and butter of the R-UST. You can keep field instability down by using the gyrotron near the core and not sticking your dick into the fusion torus.
+				<br><br>
+				Here's the idiot's guide to setting up a functional fusion cycle:
 				<ol>
-				<li>Put uranium in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core.</li>
+				<li>Put fuel (uranium, tritium) in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core. If the gen is fucked, hook it into the main grid.</li>
 				<li>Enable and max output on the SMES in the engine room. This is to power the gyrotron.</li>
-				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 501. Any bigger and it will start EMPing the doors. Any smaller and the fuel pellets might miss.</li>
-				<li>Interact with the gyrotron control computer, set power as high as the SMES can support, usually around 4, and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
+				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 200. Any bigger and it will start EMP the machinery. Any smaller and the fuel pellets might miss.</li>
+				<li>Interact with the gyrotron control computer, set power as high as the SMES can support, usually around 3-5, and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
 				<li>Go into the engine room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
 				<li>Go back to the control room and turn the fuel injectors on. This will start firing pellets into the field.</li>
-				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop). Turn the gyrotron power down until it's keeping up with field instability. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium instability isn't a problem and you can turn the gyrotron off.</li>
+				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop, forming helium if you're using deut-trit). Adjust the gyrotron power and delay around until it's keeping up with field instability. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium and NOTHING ELSE, instability isn't a problem and you can turn the gyrotron off.</li>
 				<li>Configure the SMES, turn the PACMAN off before it explodes.</li>
 				</ol>
 				<br>
@@ -403,7 +408,17 @@
 				<br>
 				Anything touching the field will mess with its stability and eventually cause it to rupture. Rupturing is bad. Use the gyrotron to keep instability down if you're running the engine on unstable fuel.
 				<br><br>
+				The more fuel in the field, the more fuel will react. Obvious, right? Don't load the field up with the ingredients for an unstable reaction (tritium and deuterium) before it has reached the point of fusion, or you will be trying to deal with a massive instability burst all at once.
+				<br><br>
 				Likewise, no matter how sad the core seems, don't fucking hug it, you'll blow the field out and set the engine room on fire.
+				<br><br>
+				IN CASE OF EMERGENCY:
+				<ol>
+				<li>Turn off the fuel injectors.</li>
+				<li>Maximize the gyrotron fire rate and shot power.</li>
+				<li>Open the main core chamber to vaccuum if you can.</li>
+				<li>Prep for irradiated crewmembers, a large EMP, and broken glass.</li>
+				<ol>
 				</body>
 			</html>"}
 

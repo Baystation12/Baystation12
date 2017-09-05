@@ -37,12 +37,21 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 //  phoron
 //  supermatter
 
-// Virtual fuels
-//  helium-3
-//  lithium-6
-//  boron-11
+// Gaseous/reagent fuels
+// hydrogen
+//  helium
+//  lithium
+//  boron
 
 // Basic power production reactions.
+// This is not necessarily realistic, but it makes a basic failure more spectacular.
+/decl/fusion_reaction/hydrogen_hydrogen
+	p_react = "hydrogen"
+	s_react = "hydrogen"
+	energy_consumption = 1
+	energy_production = 2
+	products = list("helium" = 1)
+
 /decl/fusion_reaction/deuterium_deuterium
 	p_react = "deuterium"
 	s_react = "deuterium"
@@ -52,7 +61,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
 	p_react = "deuterium"
-	s_react = "helium-3"
+	s_react = "helium"
 	energy_consumption = 1
 	energy_production = 5
 	radiation = 2
@@ -62,7 +71,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	s_react = "tritium"
 	energy_consumption = 1
 	energy_production = 1
-	products = list("helium-3" = 1)
+	products = list("helium" = 1)
 	instability = 0.5
 	radiation = 3
 
@@ -153,12 +162,3 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_production = 15
 	radiation = 3
 	instability = 3
-
-/decl/fusion_reaction/hydrogen_hydrogen
-	p_react = "hydrogen"
-	s_react = "hydrogen"
-	minimum_energy_level = FUSION_HEAT_CAP * 0.75
-	energy_consumption = 0
-	energy_production = 20
-	radiation = 5
-	instability = 5

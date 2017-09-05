@@ -1,6 +1,0 @@
-author: TheGreyWolf
-
-delete-after: True
-
-changes: 
-  - rscadd: "Fixed up pathfinder and explorer loadout."
