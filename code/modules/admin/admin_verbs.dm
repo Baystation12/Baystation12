@@ -199,7 +199,9 @@ var/list/admin_verbs_debug = list(
 	/turf/proc/view_chunk,
 	/turf/proc/update_chunk,
 	/datum/admins/proc/capture_map,
-	/datum/admins/proc/view_runtimes
+	/datum/admins/proc/view_runtimes,
+	/client/proc/cmd_analyse_health_context,
+	/client/proc/cmd_analyse_health_panel
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -782,7 +784,7 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 
 	if(!check_rights(R_ADMIN))	return
-	var sec_level = input(usr, "It's currently code [get_security_level()].", "Select Security Level")  as null|anything in (list("green","blue","red","delta")-get_security_level())
+	var sec_level = input(usr, "It's currently code [get_security_level()].", "Select Security Level")  as null|anything in (list("green","orange","red","delta")-get_security_level())
 	if(!sec_level)
 		return
 

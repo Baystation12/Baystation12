@@ -98,7 +98,7 @@ datum/unit_test/proc/get_safe_turf()
 			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
 				safe_landmark = landmark
 				break
-	return safe_landmark
+	return get_turf(safe_landmark)
 
 datum/unit_test/proc/get_space_turf()
 	if(!space_landmark)
@@ -106,7 +106,7 @@ datum/unit_test/proc/get_space_turf()
 			if(istype(landmark, /obj/effect/landmark/test/space_turf))
 				space_landmark = landmark
 				break
-	return space_landmark
+	return get_turf(space_landmark)
 
 proc/load_unit_test_changes()
 /*

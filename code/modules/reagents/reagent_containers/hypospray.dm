@@ -17,7 +17,7 @@
 
 ///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 //	..()
-//	reagents.add_reagent("tricordrazine", 30)
+//	reagents.add_reagent(/datum/reagent/tricordrazine, 30)
 //	return
 
 /obj/item/weapon/reagent_containers/hypospray/do_surgery(mob/living/carbon/M, mob/living/user)
@@ -47,6 +47,7 @@
 	user.do_attack_animation(M)
 	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
 	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
 
 	if(M.reagents)
 		var/contained = reagentlist()
@@ -66,7 +67,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.add_reagent("inaprovaline", 5)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 5)
 	update_icon()
 	return
 

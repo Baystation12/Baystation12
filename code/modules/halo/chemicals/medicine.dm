@@ -1,7 +1,6 @@
 
 /datum/reagent/triadrenaline
 	name = "Tri-Adrenaline"
-	id = "triadrenaline"
 	description = "An extremely powerful synthetic stimulant. Capable of restarting the hearts of the dead."
 	reagent_state = LIQUID
 	color = "#00BFFF" //Same as inaprovaline because why not!
@@ -47,7 +46,6 @@
 
 /datum/reagent/biofoam
 	name = "Bio-Foam"
-	id = "biofoam"
 	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding"
 	reagent_state = LIQUID
 	color = "#edd9c0"

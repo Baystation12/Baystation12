@@ -200,3 +200,8 @@
 
 //Error handler defines
 #define ERROR_USEFUL_LEN 2
+
+#define RAD_LEVEL_LOW 0.5 // Around the level at which radiation starts to become harmful
+#define RAD_LEVEL_MODERATE 5
+#define RAD_LEVEL_HIGH 25
+#define RAD_LEVEL_VERY_HIGH 75

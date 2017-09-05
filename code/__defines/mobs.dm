@@ -246,6 +246,7 @@
 #define SPECIES_UNATHI "Unathi"
 #define SPECIES_SKRELL "Skrell"
 #define SPECIES_NABBER "Giant Armoured Serpentid"
+#define SPECIES_PROMETHEAN "Promethean"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

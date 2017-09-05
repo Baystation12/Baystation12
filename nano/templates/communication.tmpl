@@ -67,7 +67,7 @@
 			<div class=item><font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font></div>
 		{{else}}
 			<div class=item>Set status: </div>
-			<div class=item>{{:helper.link('Blue', null, {'action' : 'setalert', 'target' : data.def_SEC_LEVEL_BLUE}, data.current_security_level === data.def_SEC_LEVEL_BLUE || data.isAI ? 'disabled' : null)}} </div>
+			<div class=item>{{:helper.link('Orange', null, {'action' : 'setalert', 'target' : data.def_SEC_LEVEL_ORANGE}, data.current_security_level === data.def_SEC_LEVEL_ORANGE || data.isAI ? 'disabled' : null)}} </div>
 			<div class=item>{{:helper.link('Green', null, {'action' : 'setalert', 'target' : data.def_SEC_LEVEL_GREEN}, data.current_security_level === data.def_SEC_LEVEL_GREEN || data.isAI ? 'disabled' : null)}} </div>
 		{{/if}}
 		</br>

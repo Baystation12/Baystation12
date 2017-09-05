@@ -10,7 +10,7 @@
 
 /datum/uplink_item/deity/boon/narsie_sacrificing/sac_spell
 	name = "Sacrifice Spell"
-	desc = "This spell allows your followers to pay the ultimate price for another."
+	desc = "This ability makes the user take INCREDIBLE amounts of damage to heal a target for a similar amount of damage."
 	item_cost = 10
 	path = /spell/targeted/heal_target/sacrifice
 
@@ -25,7 +25,7 @@
 	desc = "Unlocks the blood stone building, which allows followers to increase your power through ritual and prayer."
 	item_cost = 50
 	category = /datum/uplink_category/deity_narsie_sacrifice
-	required_feats = list("Nar-Sie", "Sacrificing")
+	required_feats = list(DEITY_TREE_SACRIFICE)
 
 /datum/uplink_item/deity/feat/blood_stone/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
 	. = ..()

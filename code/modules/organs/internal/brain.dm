@@ -18,6 +18,7 @@
 	var/mob/living/carbon/brain/brainmob = null
 	var/const/damage_threshold_count = 10
 	var/damage_threshold_value
+	var/healed_threshold = 1
 
 /obj/item/organ/internal/brain/robotize()
 	replace_self_with(/obj/item/organ/internal/mmi_holder/posibrain)
@@ -134,6 +135,13 @@
 /obj/item/organ/internal/brain/process()
 
 	if(owner)
+		if(damage > max_damage / 2 && healed_threshold)
+			spawn()
+				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+			healed_threshold = 0
+
+		if(damage < (max_damage / 4))
+			healed_threshold = 1
 
 		if(owner.paralysis < 1) // Skip it if we're already down.
 
@@ -171,21 +179,11 @@
 		if(owner.should_have_organ(BP_HEART))
 
 			// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
-			var/blood_volume = owner.get_effective_blood_volume()
+			var/blood_volume = owner.get_blood_oxygenation()
 
 			if(owner.is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
-				blood_volume = min(blood_volume, BLOOD_VOLUME_SURVIVE)
 				owner.Paralyse(3)
 
-			else if(owner.need_breathe())
-				var/blood_volume_mod = max(0, 1 - owner.getOxyLoss()/(owner.maxHealth/2))
-				var/oxygenated_mult = 0
-				if(owner.chem_effects[CE_OXYGENATED] == 1) // Dexalin.
-					oxygenated_mult = 0.5
-				else if(owner.chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
-					oxygenated_mult = 0.8
-				blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
-				blood_volume = blood_volume * blood_volume_mod
 			//Effects of bloodloss
 			switch(blood_volume)
 

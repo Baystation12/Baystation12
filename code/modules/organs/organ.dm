@@ -28,6 +28,8 @@ var/list/organ_cache = list()
 	var/max_damage                    // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
 
+	var/death_time
+
 /obj/item/organ/Destroy()
 
 	if(owner)           owner = null
@@ -67,7 +69,7 @@ var/list/organ_cache = list()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 
 	create_reagents(5 * (w_class-1)**2)
-	reagents.add_reagent("protein", reagents.maximum_volume)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, reagents.maximum_volume)
 
 	update_icon()
 
@@ -84,6 +86,7 @@ var/list/organ_cache = list()
 	damage = max_damage
 	status |= ORGAN_DEAD
 	GLOB.processing_objects -= src
+	death_time = world.time
 	if(owner && vital)
 		owner.death()
 
@@ -106,7 +109,7 @@ var/list/organ_cache = list()
 	if(!owner && reagents)
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
 		if(B && prob(40))
-			reagents.remove_reagent("blood",0.1)
+			reagents.remove_reagent(/datum/reagent/blood,0.1)
 			blood_splatter(src,B,1)
 		if(config.organs_decay) damage += rand(1,3)
 		if(damage >= max_damage)
@@ -144,7 +147,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
 
 	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(owner.virus_immunity()*0.3))
 		germ_level--
@@ -188,7 +191,7 @@ var/list/organ_cache = list()
 						germ_level += rand(2,3)
 					if(501 to INFINITY)
 						germ_level += rand(3,5)
-						owner.reagents.add_reagent("toxin", rand(1,2))
+						owner.reagents.add_reagent(/datum/reagent/toxin, rand(1,2))
 
 /obj/item/organ/proc/receive_chem(chemical as obj)
 	return 0
@@ -219,7 +222,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/handle_antibiotics()
 	var/antibiotics = 0
 	if(owner)
-		antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+		antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
 
 	if (!germ_level || antibiotics < 5)
 		return
@@ -246,17 +249,21 @@ var/list/organ_cache = list()
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
 	amount = round(amount, 0.1)
-
 	if(src.robotic >= ORGAN_ROBOT)
 		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
 		src.damage = between(0, src.damage + amount, max_damage)
 
 		//only show this if the organ is not robotic
-		if(owner && parent_organ && amount > 0)
+		if(owner && parent_organ && (amount > 5 || prob(10)))
 			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 			if(parent && !silent)
-				owner.custom_pain("Something inside your [parent.name] hurts a lot.", amount, affecting = parent)
+				var/degree = ""
+				if(is_bruised())
+					degree = " a lot"
+				if(damage < 5)
+					degree = " a bit"
+				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
 
 /obj/item/organ/proc/bruise()
 	damage = max(damage, min_bruised_damage)
@@ -369,6 +376,9 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
 
+/obj/item/organ/proc/can_recover()
+	return (!(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD)
+
 /obj/item/organ/proc/get_scan_results()
 	. = list()
 	if(robotic == ORGAN_ASSISTED)
@@ -380,7 +390,10 @@ var/list/organ_cache = list()
 	if(status & ORGAN_MUTATED)
 		. += "Genetic Deformation"
 	if(status & ORGAN_DEAD)
-		. += "Necrotic"
+		if(can_recover())
+			. += "Decaying"
+		else
+			. += "Necrotic"
 	switch (germ_level)
 		if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
 			. +=  "Mild Infection"

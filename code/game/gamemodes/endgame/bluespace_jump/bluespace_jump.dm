@@ -82,12 +82,15 @@
 		qdel(src)
 		return
 	daddy = ndaddy
+	set_dir(daddy.dir)
 	appearance = daddy.appearance
-	GLOB.moved_event.register(daddy, src,/obj/effect/bluegoast/proc/mirror)
+	GLOB.moved_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror)
+	GLOB.dir_set_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
 	GLOB.destroyed_event.register(daddy, src, /datum/proc/qdel_self)
 
 /obj/effect/bluegoast/Destroy()
-	GLOB.destroyed_event.unregister(daddy,src)
+	GLOB.destroyed_event.unregister(daddy, src)
+	GLOB.dir_set_event.unregister(daddy, src)
 	GLOB.moved_event.unregister(daddy, src)
 	daddy = null
 	. = ..()
@@ -95,7 +98,6 @@
 /obj/effect/bluegoast/proc/mirror(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/ndir = get_dir(new_loc,old_loc)
 	appearance = daddy.appearance
-	set_dir(ndir)
 	var/nloc = get_step(src, ndir)
 	if(nloc)
 		forceMove(nloc)
@@ -108,6 +110,9 @@
 			to_chat(daddy, "<span class='danger'>Something is definitely wrong. Why do you think YOU are the original?</span>")
 		else
 			to_chat(daddy, "<span class='warning'>You feel a bit less real. Which one of you two was original again?..</span>")
+
+/obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
+	set_dir(GLOB.reverse_dir[new_dir])
 
 /obj/effect/bluegoast/examine(user)
 	return daddy.examine(user)

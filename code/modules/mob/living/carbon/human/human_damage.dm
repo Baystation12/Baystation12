@@ -171,7 +171,7 @@
 		return 0
 	var/amount = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.organ_tag == BP_BRAIN)
+		if(I.organ_tag in list(BP_BRAIN, BP_STACK))
 			continue
 		amount += I.damage
 	return amount
@@ -190,7 +190,7 @@
 	amount = abs(amount)
 
 	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 0.75
+		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -330,7 +330,7 @@ This function restores the subjects blood to max.
 	if(!should_have_organ(BP_HEART))
 		return
 	if(vessel.total_volume < species.blood_volume)
-		vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
+		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
 
 /*
 This function restores all organs.
@@ -415,3 +415,8 @@ This function restores all organs.
 		traumatic_shock *= 0.5
 
 	return max(0,traumatic_shock)
+
+/mob/living/carbon/human/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+	if(effecttype == IRRADIATE && (effect * blocked_mult(blocked) <= RAD_LEVEL_LOW))
+		return 0
+	return ..()

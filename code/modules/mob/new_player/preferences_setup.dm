@@ -23,7 +23,7 @@ datum/preferences
 				randomize_hair_color("facial")
 		if(current_species.appearance_flags & HAS_UNDERWEAR)
 			all_underwear.Cut()
-			for(var/datum/category_group/underwear/WRC in global_underwear.categories)
+			for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
 				var/datum/category_item/underwear/WRI = pick(WRC.items)
 				all_underwear[WRC.name] = WRI.name
 
@@ -215,8 +215,8 @@ datum/preferences
 				var/permitted = 0
 				if(G.allowed_roles && G.allowed_roles.len)
 					if(previewJob)
-						for(var/job_name in G.allowed_roles)
-							if(previewJob.title == job_name)
+						for(var/job_type in G.allowed_roles)
+							if(previewJob.type == job_type)
 								permitted = 1
 				else
 					permitted = 1

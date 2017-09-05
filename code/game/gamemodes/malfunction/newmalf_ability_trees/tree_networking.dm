@@ -11,29 +11,29 @@
 
 /datum/malf_research_ability/networking/basic_hack
 	ability = new/datum/game_mode/malfunction/verb/basic_encryption_hack()
-	price = 25
+	price = 25		// Until you have this ability your CPU generation sucks, therefore it's very cheap.
 	next = new/datum/malf_research_ability/networking/advanced_hack()
-	name = "Basic Encryption Hack"
+	name = "T1 - Basic Encryption Hack"
 
 
 /datum/malf_research_ability/networking/advanced_hack
 	ability = new/datum/game_mode/malfunction/verb/advanced_encryption_hack()
-	price = 400
+	price = 1000
 	next = new/datum/malf_research_ability/networking/elite_hack()
-	name = "Advanced Encryption Hack"
+	name = "T2 - Advanced Encryption Hack"
 
 
 /datum/malf_research_ability/networking/elite_hack
 	ability = new/datum/game_mode/malfunction/verb/elite_encryption_hack()
-	price = 1000
+	price = 2000
 	next = new/datum/malf_research_ability/networking/system_override()
-	name = "Elite Encryption Hack"
+	name = "T3 - Elite Encryption Hack"
 
 
 /datum/malf_research_ability/networking/system_override
 	ability = new/datum/game_mode/malfunction/verb/system_override()
-	price = 2750
-	name = "System Override"
+	price = 4000
+	name = "T4 - System Override"
 
 // END RESEARCH DATUMS
 // BEGIN ABILITY VERBS
@@ -163,7 +163,7 @@
 		remaining_apcs += A
 
 	var/duration = (remaining_apcs.len * 100)		// Calculates duration for announcing system
-	if(duration > 3000)								// Two types of announcements. Short hacks trigger immediate warnings. Long hacks are more "progressive".
+	if(user.hack_can_fail)								// Two types of announcements. Short hacks trigger immediate warnings. Long hacks are more "progressive".
 		spawn(0)
 			sleep(duration/5)
 			if(!user || user.stat == DEAD)
@@ -181,8 +181,7 @@
 			if(!user || user.stat == DEAD)
 				return
 			command_announcement.Announce("We have traced the intrude#, it seem& t( e yo3r AI s7stem, it &# *#ck@ng th$ sel$ destru$t mechani&m, stop i# bef*@!)$#&&@@  <CONNECTION LOST>", "Network Monitoring")
-	else
-		command_announcement.Announce("We have detected a strong brute-force attack on your firewall which seems to be originating from your AI system. It already controls almost the whole network, and the only thing that's preventing it from accessing the self-destruct is this firewall. You don't have much time before it succeeds.", "Network Monitoring")
+
 	to_chat(user, "## BEGINNING SYSTEM OVERRIDE.")
 	to_chat(user, "## ESTIMATED DURATION: [round((duration+300)/600)] MINUTES")
 	user.hacking = 1
@@ -199,7 +198,7 @@
 			to_chat(user, "## OVERRIDDEN: [A.name]")
 
 	to_chat(user, "## REACHABLE APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
-	sleep(300)
+	sleep(1 MINUTE)
 	// Hack all APCs, including those built during hack sequence.
 	for(var/obj/machinery/power/apc/A in GLOB.machines)
 		if((!A.hacker || A.hacker != src) && !A.aidisabled && A.z in GLOB.using_map.station_levels)
@@ -207,11 +206,10 @@
 
 	log_ability_use(user, "system override (FINISHED)")
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
-	command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [GLOB.using_map.station_name]'s systems.", "Network Administration Center")
+
+	if(user.hack_can_fail)
+		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [GLOB.using_map.station_name]'s systems.", "Network Administration Center")
 	user.hack_can_fail = 0
 	user.hacking = 0
 	user.system_override = 2
 	user.verbs += new/datum/game_mode/malfunction/verb/ai_destroy_station()
-
-
-// END ABILITY VERBS

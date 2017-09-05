@@ -12,6 +12,7 @@
 #define DEITY_VOID_CRAFT "Void Crafting"
 #define DEITY_UNLOCK_HEAL "Unlock Healing Spells"
 #define DEITY_UNLOCK_ARMS "Unlock Wizard Armaments"
+#define DEITY_POWER_BONUS "Increase Power Syphon"
 
 //Unlockable trees
 #define DEITY_TREE_SACRIFICE "Sacrificing"

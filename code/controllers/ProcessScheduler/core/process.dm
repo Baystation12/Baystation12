@@ -315,6 +315,9 @@
 /datum/controller/process/proc/getHighestRunTime()
 	return main.getProcessHighestRunTime(src)
 
+/datum/controller/process/proc/getTotalRunTime()
+	return main.getProcessTotalRunTime(src)
+
 /datum/controller/process/proc/getTicks()
 	return ticks
 

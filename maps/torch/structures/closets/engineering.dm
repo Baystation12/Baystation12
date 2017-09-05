@@ -12,7 +12,8 @@
 	icon_broken = "securecebroken"
 	icon_off = "secureceoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_chief_torch/WillContain()
+	return list(
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/blueprints,
 		/obj/item/clothing/head/hardhat/white,
@@ -53,7 +54,8 @@
 	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/weapon/storage/belt/utility/full,
@@ -80,7 +82,8 @@
 	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_contractor/WillContain()
+	return list(
 		/obj/item/clothing/under/rank/engineer,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/weapon/storage/belt/utility/full,
@@ -104,7 +107,8 @@
 	icon_broken = "securesenengbroken"
 	icon_off = "securesenengoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_senior/WillContain()
+	return list(
 		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/device/radio/headset/headset_eng,
@@ -135,7 +139,8 @@
 	icon_broken = "secureatmbroken"
 	icon_off = "secureatmoff"
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/atmos_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/head/hardhat/red,
