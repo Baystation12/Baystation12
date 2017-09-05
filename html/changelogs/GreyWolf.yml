@@ -3,4 +3,4 @@ author: TheGreyWolf
 delete-after: True
 
 changes: 
-  - rscremove: "Removes the Zhan-Khazan outfit from the loadout (Taj relevant only)."
+  - rscdel: "Removes the Zhan-Khazan outfit from the loadout (Taj relevant only)."
