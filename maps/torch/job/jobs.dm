@@ -207,7 +207,6 @@
 	title = "NanoTrasen Liaison"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "NanoTrasen and Corporate Regulations"
@@ -227,7 +226,6 @@
 	title = "SolGov Representative"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
@@ -246,7 +244,6 @@
 	title = "Senior Enlisted Advisor"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -277,7 +274,6 @@
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Commanding Officer and heads of staff"
@@ -303,9 +299,8 @@
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
-	department = "Support"
-	department_flag = SPT
-
+	department = "Utility"
+	department_flag = UTL
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -329,9 +324,8 @@
 
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Service"
-	department_flag = SRV
-
+	department = "Utility"
+	department_flag = UTL
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -352,8 +346,8 @@
 
 /datum/job/explorer
 	title = "Explorer"
-	department = "Service"
-	department_flag = SRV
+	department = "Utility"
+	department_flag = UTL
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
@@ -377,7 +371,6 @@
 	title = "Senior Engineer"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -449,7 +442,6 @@
 	title = "Maintenance Assistant"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
@@ -470,7 +462,6 @@
 	title = "Roboticist"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -581,7 +572,6 @@
 	title = "Physician"
 	department = "Medical"
 	department_flag = MED
-
 	minimal_player_age = 14
 	ideal_character_age = 45
 	total_positions = 2
@@ -640,7 +630,6 @@
 	title = "Medical Contractor"
 	department = "Medical"
 	department_flag = MED
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
@@ -767,7 +756,6 @@
 	title = "Supply Assistant"
 	department = "Supply"
 	department_flag = SUP
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Deck Officer and Supply Personnel"
@@ -861,7 +849,6 @@
 	title = "Crewman"
 	department = "Service"
 	department_flag = SRV
-
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
@@ -893,7 +880,6 @@
 	title = "Senior Researcher"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director"
@@ -916,7 +902,6 @@
 	supervisors = "the Research Director"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -985,7 +970,6 @@
 	title = "Security Guard"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1005,7 +989,6 @@
 	title = "Research Assistant"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1059,7 +1042,6 @@
 	title = "Merchant"
 	department = "Civilian"
 	department_flag = CIV
-
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 30
@@ -1079,7 +1061,6 @@
 	title = "Stowaway"
 	department = "Civilian"
 	department_flag = CIV
-
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 20
