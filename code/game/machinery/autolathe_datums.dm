@@ -505,3 +505,8 @@
 	name = "device cell"
 	path = /obj/item/weapon/cell/device/standard
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/cable_coil
+	name = "cable coil"
+	path = /obj/item/stack/cable_coil
+	category = "Devices and Components"
