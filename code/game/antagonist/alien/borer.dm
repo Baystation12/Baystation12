@@ -6,7 +6,7 @@ var/datum/antagonist/xenos/borer/borers
 	role_text_plural = "Cortical Borers"
 	mob_path = /mob/living/simple_animal/borer
 	welcome_text = "Use your Infest power to crawl into the ear of a host and fuse with their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your fellow borers with :x."
-	antag_indicator = "brainworm"
+	antag_indicator = "hudborer"
 	antaghud_indicator = "hudborer"
 
 	faction_role_text = "Borer Thrall"
@@ -35,20 +35,21 @@ var/datum/antagonist/xenos/borer/borers
 	var/mob/living/simple_animal/borer/borer = mob
 	if(istype(borer))
 		var/mob/living/carbon/human/host
-		for(var/mob/living/carbon/human/H in mob_list)
+		for(var/mob/living/carbon/human/H in GLOB.mob_list)
 			if(H.stat != DEAD && !H.has_brain_worms())
-				var/obj/item/organ/external/head = H.get_organ("head")
+				var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 				if(head && !(head.robotic >= ORGAN_ROBOT))
 					host = H
 					break
 		if(istype(host))
-			var/obj/item/organ/external/head = host.get_organ("head")
-			borer.host = host
-			head.implants += borer
-			borer.forceMove(head)
-			if(!borer.host_brain)
-				borer.host_brain = new(borer)
-			borer.host_brain.name = host.name
-			borer.host_brain.real_name = host.real_name
-			return
+			var/obj/item/organ/external/head = host.get_organ(BP_HEAD)
+			if(head)
+				borer.host = host
+				head.implants += borer
+				borer.forceMove(head)
+				if(!borer.host_brain)
+					borer.host_brain = new(borer)
+				borer.host_brain.name = host.name
+				borer.host_brain.real_name = host.real_name
+				return
 	..() // Place them at a vent if they can't get a host.

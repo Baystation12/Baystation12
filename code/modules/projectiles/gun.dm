@@ -41,7 +41,7 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 5
@@ -62,7 +62,7 @@
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
-	var/requires_two_hands
+	var/one_hand_penalty
 	var/wielded_item_state
 
 	var/next_fire_time = 0
@@ -88,7 +88,7 @@
 		scoped_accuracy = accuracy
 
 /obj/item/weapon/gun/update_twohanding()
-	if(requires_two_hands)
+	if(one_hand_penalty)
 		var/mob/living/M = loc
 		if(istype(M))
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))
@@ -121,12 +121,12 @@
 
 	var/mob/living/M = user
 	if(HULK in M.mutations)
-		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
+		to_chat(M, "<span class='danger'>Your fingers are much too large for the trigger guard!</span>")
 		return 0
 	if((CLUMSY in M.mutations) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
 		if(P)
-			if(process_projectile(P, user, user, pick("l_foot", "r_foot")))
+			if(process_projectile(P, user, user, pick(BP_L_FOOT, BP_R_FOOT)))
 				handle_post_fire(user, user)
 				user.visible_message(
 					"<span class='danger'>\The [user] shoots \himself in the foot with \the [src]!</span>",
@@ -153,12 +153,12 @@
 		return
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
-		user << "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>"
+		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
-	if (A == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
+	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
 		handle_suicide(user)
 	else if(user.a_intent == I_HURT) //point blank shooting
 		Fire(A, user, pointblank=1)
@@ -176,7 +176,7 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!</span>"
+			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
 
 	var/shoot_time = (burst - 1)* burst_delay
@@ -251,29 +251,29 @@
 				"You hear a [fire_sound_text]!"
 				)
 
-	if(requires_two_hands)
+	if(one_hand_penalty)
 		if(!src.is_held_twohanded(user))
-			switch(requires_two_hands)
+			switch(one_hand_penalty)
 				if(1)
 					if(prob(50)) //don't need to tell them every single time
-						user << "<span class='warning'>Your aim wavers slightly.</span>"
+						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
 				if(2)
-					user << "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>"
+					to_chat(user, "<span class='warning'>Your aim wavers as you fire \the [src] with just one hand.</span>")
 				if(3)
-					user << "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>"
+					to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
 				if(4 to INFINITY)
-					user << "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>"
+					to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
 		else if(!user.can_wield_item(src))
-			switch(requires_two_hands)
+			switch(one_hand_penalty)
 				if(1)
 					if(prob(50)) //don't need to tell them every single time
-						user << "<span class='warning'>Your aim wavers slightly.</span>"
+						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
 				if(2)
-					user << "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>"
+					to_chat(user, "<span class='warning'>Your aim wavers as you try to hold \the [src] steady.</span>")
 				if(3)
-					user << "<span class='warning'>You have trouble holding \the [src] steady.</span>"
+					to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
 				if(4 to INFINITY)
-					user << "<span class='warning'>You struggle to hold \the [src] steady!</span>"
+					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
 		spawn()
@@ -287,20 +287,15 @@
 		return //default behaviour only applies to true projectiles
 
 	//default point blank multiplier
-	var/damage_mult = 1.3
+	var/max_mult = 1.3
 
 	//determine multiplier due to the target being grabbed
-	if(ismob(target))
-		var/mob/M = target
-		if(M.grabbed_by.len)
-			var/grabstate = 0
-			for(var/obj/item/weapon/grab/G in M.grabbed_by)
-				grabstate = max(grabstate, G.state)
-			if(grabstate >= GRAB_NECK)
-				damage_mult = 2.5
-			else if(grabstate >= GRAB_AGGRESSIVE)
-				damage_mult = 1.5
-	P.damage *= damage_mult
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		for(var/obj/item/grab/G in H.grabbed_by)
+			if(G.point_blank_mult() > max_mult)
+				max_mult = G.point_blank_mult()
+	P.damage *= max_mult
 
 /obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
@@ -310,10 +305,10 @@
 	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
 
-	if(requires_two_hands)
+	if(one_hand_penalty)
 		if(!held_twohanded)
-			acc_mod += -ceil(requires_two_hands/2)
-			disp_mod += requires_two_hands*0.5 //dispersion per point of two-handedness
+			acc_mod += -ceil(one_hand_penalty/2)
+			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
 
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
@@ -338,8 +333,8 @@
 	//shooting while in shock
 	var/x_offset = 0
 	var/y_offset = 0
-	if(istype(user, /mob/living/carbon))
-		var/mob/living/carbon/mob = user
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/mob = user
 		if(mob.shock_stage > 120)
 			y_offset = rand(-2,2)
 			x_offset = rand(-2,2)
@@ -350,13 +345,16 @@
 	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
 
 	if(launched)
-		var/shot_sound = P.fire_sound? P.fire_sound : fire_sound
-		if(silenced)
-			playsound(user, shot_sound, 10, 1)
-		else
-			playsound(user, shot_sound, 50, 1)
+		play_fire_sound(user,P)
 
 	return launched
+
+/obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
+	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
+	if(silenced)
+		playsound(user, shot_sound, 10, 1)
+	else
+		playsound(user, shot_sound, 50, 1)
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
@@ -385,13 +383,13 @@
 			return
 
 		in_chamber.on_hit(M)
-		if (in_chamber.damage_type != HALLOSS)
+		if (in_chamber.damage_type != PAIN)
 			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
-			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
+			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, 0, in_chamber.damage_flags(), used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
 			user.death()
 		else
-			user << "<span class = 'notice'>Ow...</span>"
-			user.apply_effect(110,AGONY,0)
+			to_chat(user, "<span class = 'notice'>Ow...</span>")
+			user.apply_effect(110,PAIN,0)
 		qdel(in_chamber)
 		mouthshoot = 0
 		return
@@ -421,10 +419,10 @@
 		screen_shake = initial(screen_shake)
 
 /obj/item/weapon/gun/examine(mob/user)
-	..()
+	. = ..()
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
-		user << "The fire selector is set to [current_mode.name]."
+		to_chat(user, "The fire selector is set to [current_mode.name].")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)
@@ -441,5 +439,5 @@
 /obj/item/weapon/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(new_mode)
-		user << "<span class='notice'>\The [src] is now set to [new_mode.name].</span>"
+		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 

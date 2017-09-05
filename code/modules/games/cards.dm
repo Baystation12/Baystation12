@@ -5,7 +5,7 @@
 	var/desc = "regular old playing card."
 
 /obj/item/weapon/deck
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
 
@@ -58,7 +58,7 @@
 		for(var/datum/playingcard/P in H.cards)
 			cards += P
 		qdel(O)
-		user << "You place your cards on the bottom of \the [src]."
+		to_chat(user, "You place your cards on the bottom of \the [src].")
 		return
 	..()
 
@@ -77,7 +77,7 @@
 	var/mob/living/carbon/user = usr
 
 	if(!cards.len)
-		usr << "There are no cards in the deck."
+		to_chat(usr, "There are no cards in the deck.")
 		return
 
 	var/obj/item/weapon/hand/H
@@ -96,7 +96,7 @@
 	cards -= P
 	H.update_icon()
 	user.visible_message("\The [user] draws a card.")
-	user << "It's the [P]."
+	to_chat(user, "It's the [P].")
 
 /obj/item/weapon/deck/verb/deal_card()
 
@@ -108,7 +108,7 @@
 	if(usr.stat || !Adjacent(usr)) return
 
 	if(!cards.len)
-		usr << "There are no cards in the deck."
+		to_chat(usr, "There are no cards in the deck.")
 		return
 
 	var/list/players = list()
@@ -149,12 +149,7 @@
 
 /obj/item/weapon/deck/attack_self(var/mob/user as mob)
 
-	var/list/newcards = list()
-	while(cards.len)
-		var/datum/playingcard/P = pick(cards)
-		newcards += P
-		cards -= P
-	cards = newcards
+	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
 
 /obj/item/weapon/deck/MouseDrop(atom/over)
@@ -164,7 +159,7 @@
 	if(!ishuman(over) || !(over in viewers(3))) return
 
 	if(!cards.len)
-		usr << "There are no cards in the deck."
+		to_chat(usr, "There are no cards in the deck.")
 		return
 
 	deal_at(usr, over)
@@ -175,7 +170,7 @@
 
 	icon_state = "card_pack"
 	icon = 'icons/obj/playing_cards.dmi'
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/list/cards = list()
 
 
@@ -196,7 +191,7 @@
 	desc = "Some playing cards."
 	icon = 'icons/obj/playing_cards.dmi'
 	icon_state = "empty"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 	var/concealed = 0
 	var/list/cards = list()
@@ -234,11 +229,11 @@
 	user.visible_message("\The [user] [concealed ? "conceals" : "reveals"] their hand.")
 
 /obj/item/weapon/hand/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if((!concealed || src.loc == user) && cards.len)
-		user << "It contains: "
+		to_chat(user, "It contains: ")
 		for(var/datum/playingcard/P in cards)
-			user << "The [P.name]."
+			to_chat(user, "The [P.name].")
 
 /obj/item/weapon/hand/update_icon(var/direction = 0)
 
@@ -308,3 +303,28 @@
 
 /obj/item/weapon/hand/pickup(mob/user as mob)
 	src.update_icon()
+
+
+/*** A special thing that steals a card from a deck, probably lost in maint somewhere. ***/
+/obj/item/weapon/hand/missing_card
+	name = "missing playing card"
+
+/obj/item/weapon/hand/missing_card/Initialize()
+	. = ..()
+
+	var/list/deck_list = list()
+	for(var/obj/item/weapon/deck/D in world)
+		if(isturf(D.loc))		//Decks hiding in inventories are safe. Respect the sanctity of loadout items.
+			deck_list += D
+
+	if(deck_list.len)
+		var/obj/item/weapon/deck/the_deck = pick(deck_list)
+		var/datum/playingcard/the_card = length(the_deck.cards) ? pick(the_deck.cards) : null
+
+		if(the_card)
+			cards += the_card
+			the_deck.cards -= the_card
+
+			concealed = pick(0,1)	//Maybe up, maybe down.
+
+	update_icon()	//Automatically qdels if no card can be found.

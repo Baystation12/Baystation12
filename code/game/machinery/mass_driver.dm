@@ -17,8 +17,8 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/mass_driver/wifi_receiver
 
-/obj/machinery/mass_driver/initialize()
-	..()
+/obj/machinery/mass_driver/Initialize()
+	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
@@ -38,7 +38,7 @@
 			O_limit++
 			if(O_limit >= 20)
 				for(var/mob/M in hearers(src, null))
-					M << "<span class='notice'>The mass driver lets out a screech, it mustn't be able to handle any more items.</span>"
+					to_chat(M, "<span class='notice'>The mass driver lets out a screech, it mustn't be able to handle any more items.</span>")
 				break
 			use_power(500)
 			spawn( 0 )

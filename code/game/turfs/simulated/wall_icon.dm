@@ -23,6 +23,7 @@
 
 	set_opacity(material.opacity >= 0.5)
 
+	radiation_repository.resistance_cache.Remove(src)
 	update_connections(1)
 	update_icon()
 

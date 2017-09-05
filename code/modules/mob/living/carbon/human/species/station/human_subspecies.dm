@@ -22,13 +22,13 @@
 	lack both light and atmosphere. As such, they're quite resistant to asphyxiation as well as \
 	toxins, but they suffer from weakened bone structure and a marked vulnerability to bright lights."
 	icobase = 'icons/mob/human_races/subspecies/r_spacer.dmi'
-	health_hud_intensity = 1.2
 
 	oxy_mod =   0.8
 	toxins_mod =   0.9
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
+	darksight = 6
 
 /datum/species/human/vatgrown
 	name = "Vat-Grown Human"
@@ -40,12 +40,12 @@
 
 	toxins_mod =   1.1
 	has_organ = list(
-		"heart" =    /obj/item/organ/heart,
-		"lungs" =    /obj/item/organ/lungs,
-		"liver" =    /obj/item/organ/liver,
-		"kidneys" =  /obj/item/organ/kidneys,
-		"brain" =    /obj/item/organ/brain,
-		"eyes" =     /obj/item/organ/eyes
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 
 /datum/species/human/vatgrown/sanitize_name(name)
@@ -55,7 +55,7 @@
 	// #defines so it's easier to read what's actually being generated
 	#define LTR ascii2text(rand(65,90)) // A-Z
 	#define NUM ascii2text(rand(48,57)) // 0-9
-	#define NAME capitalize(pick(gender == FEMALE ? first_names_female : first_names_male))
+	#define NAME capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male))
 	switch(rand(1,4))
 		if(1) return NAME
 		if(2) return "[LTR][LTR]-[NAME]"

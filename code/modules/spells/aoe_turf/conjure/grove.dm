@@ -4,7 +4,7 @@
 
 	spell_flags = IGNOREDENSE | IGNORESPACE | NEEDSCLOTHES | Z2NOCAST | IGNOREPREV
 	charge_max = 1200
-	school = "conjuration"
+	school = "transmutation"
 
 	range = 1
 	cooldown_min = 600
@@ -34,7 +34,7 @@
 	name = "Sanctuary"
 	desc = "Creates a sanctuary of nature around the wizard as well as creating a healing plant."
 	feedback = "SY"
-	invocation = "Bo k'itan"
+	invocation = "Bo K'Iitan!"
 	invocation_type = SpI_SHOUT
 	spell_flags = IGNOREDENSE | IGNORESPACE | NEEDSCLOTHES | Z2NOCAST | IGNOREPREV
 	cooldown_min = 600
@@ -57,7 +57,7 @@
 	name = "merlin tears"
 	seed_name = "merlin tears"
 	display_name = "merlin tears"
-	chems = list("bicaridine" = list(3,7), "dermaline" = list(3,7), "anti_toxin" = list(3,7), "tricordrazine" = list(3,7), "alkysine" = list(1,2), "imidazoline" = list(1,2), "peridaxon" = list(4,5))
+	chems = list(/datum/reagent/bicaridine = list(3,7), /datum/reagent/dermaline = list(3,7), /datum/reagent/dylovene = list(3,7), /datum/reagent/tricordrazine = list(3,7), /datum/reagent/alkysine = list(1,2), /datum/reagent/imidazoline = list(1,2), /datum/reagent/peridaxon = list(4,5))
 	kitchen_tag = "berries"
 
 /datum/seed/merlin_tear/New()

@@ -13,6 +13,7 @@
 		broken = rand(0,flooring.has_damage_range)
 	else
 		broken = 0
+	remove_decals()
 	update_icon()
 
 /turf/simulated/floor/proc/burn_tile(var/exposed_temperature)
@@ -22,4 +23,5 @@
 		burnt = rand(0,flooring.has_burn_range)
 	else
 		burnt = 0
+	remove_decals()
 	update_icon()

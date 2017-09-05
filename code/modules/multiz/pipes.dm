@@ -13,9 +13,6 @@ obj/machinery/atmospherics/pipe/zpipe
 		dir = SOUTH
 		initialize_directions = SOUTH
 
-		var/obj/machinery/atmospherics/node1	//connection on the same Z
-		var/obj/machinery/atmospherics/node2	//connection on the other Z
-
 		var/minimum_temperature_difference = 300
 		var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
@@ -51,7 +48,7 @@ obj/machinery/atmospherics/pipe/zpipe/New()
 		invisibility = i ? 101 : 0
 	update_icon()
 
-obj/machinery/atmospherics/pipe/up/process()
+obj/machinery/atmospherics/pipe/zpipe/process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
 	else
@@ -81,10 +78,10 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	qdel(src) // NOT qdel.
 
 obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
-	if(dir==3)
-		set_dir(1)
-	else if(dir==12)
-		set_dir(4)
+	if(dir == (NORTH|SOUTH))
+		set_dir(NORTH)
+	else if(dir == (EAST|WEST))
+		set_dir(EAST)
 
 obj/machinery/atmospherics/pipe/zpipe/Destroy()
 	if(node1)
@@ -121,11 +118,12 @@ obj/machinery/atmospherics/pipe/zpipe/up
 		name = "upwards pipe"
 		desc = "A pipe segment to connect upwards."
 
-obj/machinery/atmospherics/pipe/zpipe/up/initialize()
+obj/machinery/atmospherics/pipe/zpipe/up/atmos_init()
+	..()
 	normalize_dir()
 	var/node1_dir
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -159,11 +157,12 @@ obj/machinery/atmospherics/pipe/zpipe/down
 		name = "downwards pipe"
 		desc = "A pipe segment to connect downwards."
 
-obj/machinery/atmospherics/pipe/zpipe/down/initialize()
+obj/machinery/atmospherics/pipe/zpipe/down/atmos_init()
+	..()
 	normalize_dir()
 	var/node1_dir
 
-	for(var/direction in cardinal)
+	for(var/direction in GLOB.cardinal)
 		if(direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
@@ -195,7 +194,6 @@ obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
 	name = "upwards scrubbers pipe"
 	desc = "A scrubbers pipe segment to connect upwards."
 	connect_types = CONNECT_TYPE_SCRUBBER
-	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
@@ -204,7 +202,6 @@ obj/machinery/atmospherics/pipe/zpipe/up/supply
 	name = "upwards supply pipe"
 	desc = "A supply pipe segment to connect upwards."
 	connect_types = CONNECT_TYPE_SUPPLY
-	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
@@ -213,7 +210,6 @@ obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
 	name = "downwards scrubbers pipe"
 	desc = "A scrubbers pipe segment to connect downwards."
 	connect_types = CONNECT_TYPE_SCRUBBER
-	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
@@ -222,6 +218,30 @@ obj/machinery/atmospherics/pipe/zpipe/down/supply
 	name = "downwards supply pipe"
 	desc = "A supply pipe segment to connect downwards."
 	connect_types = CONNECT_TYPE_SUPPLY
-	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
+
+// Colored misc. pipes
+obj/machinery/atmospherics/pipe/zpipe/up/cyan
+	color = PIPE_COLOR_CYAN
+obj/machinery/atmospherics/pipe/zpipe/down/cyan
+	color = PIPE_COLOR_CYAN
+
+obj/machinery/atmospherics/pipe/zpipe/up/red
+	color = PIPE_COLOR_RED
+obj/machinery/atmospherics/pipe/zpipe/down/red
+	color = PIPE_COLOR_RED
+
+obj/machinery/atmospherics/pipe/zpipe/up/fuel
+	name = "upwards fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
+
+obj/machinery/atmospherics/pipe/zpipe/down/fuel
+	name = "downwards fuel pipe"
+	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE

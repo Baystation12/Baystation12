@@ -2,18 +2,17 @@
 
 /var/const/DRINK_FIZZ = "fizz"
 /var/const/DRINK_ICE = "ice"
+/var/const/DRINK_VAPOR = "vapor"
 /var/const/DRINK_ICON_DEFAULT = ""
 /var/const/DRINK_ICON_NOISY = "_noise"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
-	var/base_name = "glass" // Name to put in front of drinks, i.e. "[base_name] of [contents]"
+	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
 	icon = DRINK_ICON_FILE
-	var/base_icon = "square" // Base icon name
+	base_icon = "square" // Base icon name
 	volume = 30
-
-	var/filling_states // List of percentages full that have icons
 
 	var/list/extras = list() // List of extras. Two extras maximum
 
@@ -26,27 +25,27 @@
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
-	..()
+	. = ..()
 
 	for(var/I in extras)
 		if(istype(I, /obj/item/weapon/glass_extra))
-			M << "There is \a [I] in \the [src]."
+			to_chat(M, "There is \a [I] in \the [src].")
 		else if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
-			M << "There is \a [I] on the rim."
+			to_chat(M, "There is \a [I] on the rim.")
 		else
-			M << "There is \a [I] somewhere on the glass. Somehow."
+			to_chat(M, "There is \a [I] somewhere on the glass. Somehow.")
 
 	if(has_ice())
-		M << "There is some ice floating in the drink."
+		to_chat(M, "There is some ice floating in the drink.")
 
 	if(has_fizz())
-		M << "It is fizzing slightly."
+		to_chat(M, "It is fizzing slightly.")
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_ice()
 	if(reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
-		if(!((R.id == "ice") || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent("ice", reagents.total_volume / 10)) // 10% ice by volume
+		if(!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
+			if(reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
 				return 1
 
 	return 0
@@ -60,6 +59,18 @@
 				if("fizz" in re.glass_special)
 					totalfizzy += re.volume
 			if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
+				return 1
+	return 0
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_vapor()
+	if(reagents.reagent_list.len > 0)
+		var/datum/reagent/R = reagents.get_master_reagent()
+		if(!("vapor" in R.glass_special))
+			var/totalvape = 0
+			for(var/datum/reagent/re in reagents.reagent_list)
+				if("vapor" in re.glass_special)
+					totalvape += re.volume
+			if(totalvape >= volume * 0.6) // 60% vapor by container volume
 				return 1
 	return 0
 
@@ -89,18 +100,16 @@
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
-		var/amnt = 100
-		var/percent = round((reagents.total_volume / volume) * 100)
-		for(var/k in cached_number_list_decode(filling_states))
-			if(percent <= k)
-				amnt = k
-				break
+		var/amnt = get_filling_state()
 
 		if(has_ice())
 			over_liquid |= "[base_icon][amnt]_ice"
 
 		if(has_fizz())
 			over_liquid |= "[base_icon][amnt]_fizz"
+
+		if(has_vapor())
+			over_liquid |= "[base_icon]_vapor"
 
 		for(var/S in R.glass_special)
 			if("[base_icon]_[S]" in icon_states(DRINK_ICON_FILE))

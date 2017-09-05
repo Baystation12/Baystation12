@@ -44,7 +44,7 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/suit/wcoat,
+					/obj/item/clothing/accessory/wcoat,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
@@ -55,7 +55,7 @@
 					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/under/rank/mailman,
 					/obj/item/clothing/under/dress/dress_saloon,
-					/obj/item/clothing/suit/suspenders,
+					/obj/item/clothing/accessory/suspenders,
 					/obj/item/clothing/suit/storage/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
 					/obj/item/clothing/under/schoolgirl,
@@ -68,7 +68,10 @@
 					/obj/item/clothing/suit/chef,
 					/obj/item/clothing/suit/apron/overalls,
 					/obj/item/clothing/under/redcoat,
-					/obj/item/clothing/under/kilt)
+					/obj/item/clothing/under/kilt,
+					/obj/item/clothing/under/savage_hunter,
+					/obj/item/clothing/under/savage_hunter/female,
+					/obj/item/clothing/under/wetsuit)
 	name = "Costumes crate"
 	cost = 10
 	containername = "\improper Actor Costumes"
@@ -88,7 +91,7 @@
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/leather,
-					/obj/item/clothing/suit/wcoat)
+					/obj/item/clothing/accessory/wcoat)
 	name = "Formalwear closet"
 	cost = 30
 	containertype = /obj/structure/closet
@@ -168,7 +171,8 @@
 					/obj/item/clothing/mask/gas/owl_mask,
 					/obj/item/clothing/mask/gas/monkeymask,
 					/obj/item/clothing/head/helmet/gladiator,
-					/obj/item/clothing/head/ushanka)
+					/obj/item/clothing/head/ushanka,
+					/obj/item/clothing/mask/spirit)
 	cost = 10
 	containername = "\improper Actor hats crate"
 	containertype = /obj/structure/closet
@@ -245,3 +249,11 @@
 					/obj/item/weapon/storage/fancy/candle_box = 3)
 	cost = 10
 	containername = "\improper Chaplain equipment crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/mousetrap
+	num_contained = 3
+	contains = list(/obj/item/weapon/storage/box/mousetraps)
+	name = "\improper Pest Control Crate"
+	cost = 10
+	containername = "\improper Pest Control Crate"
+

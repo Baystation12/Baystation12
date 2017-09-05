@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = default_state)
+/mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = GLOB.default_state)
 	var/datum/nano_module/appearance_changer/AC = new(location, src, check_species_whitelist, species_whitelist, species_blacklist)
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
@@ -143,7 +143,7 @@
 		var/datum/species/current_species = all_species[current_species_name]
 
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
-			if((current_species.spawn_flags & IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))
+			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))
 				continue
 			if(!is_alien_whitelisted(src, current_species))
 				continue
@@ -157,30 +157,44 @@
 	return valid_species
 
 /mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
+
+	var/use_species = species.get_bodytype(src)
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
+	if(H) use_species = H.species.get_bodytype(src)
+
 	var/list/valid_hairstyles = new()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
 
-		if(check_gender && gender == MALE && S.gender == FEMALE)
-			continue
-		if(check_gender && gender == FEMALE && S.gender == MALE)
-			continue
-		if(!(species.get_bodytype() in S.species_allowed))
+		if(check_gender && gender != NEUTER)
+			if(gender == MALE && S.gender == FEMALE)
+				continue
+			else if(gender == FEMALE && S.gender == MALE)
+				continue
+
+		if(!(use_species in S.species_allowed))
 			continue
 		valid_hairstyles += hairstyle
 
 	return valid_hairstyles
 
 /mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
+
+	var/use_species = species.get_bodytype(src)
+	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
+	if(H) use_species = H.species.get_bodytype(src)
+
 	var/list/valid_facial_hairstyles = new()
 	for(var/facialhairstyle in facial_hair_styles_list)
 		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
 
-		if(gender == MALE && S.gender == FEMALE)
-			continue
-		if(gender == FEMALE && S.gender == MALE)
-			continue
-		if(!(species.get_bodytype() in S.species_allowed))
+		if(gender != NEUTER)
+			if(gender == MALE && S.gender == FEMALE)
+				continue
+			else if(gender == FEMALE && S.gender == MALE)
+				continue
+
+		if(!(use_species in S.species_allowed))
 			continue
 
 		valid_facial_hairstyles += facialhairstyle

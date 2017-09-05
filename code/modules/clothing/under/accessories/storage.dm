@@ -2,14 +2,17 @@
 	name = "load bearing equipment"
 	desc = "Used to hold things when you don't have enough hands."
 	icon_state = "webbing"
-	slot = "utility"
+	slot = ACCESSORY_SLOT_UTILITY
 	var/slots = 3
-	var/max_w_class = 2 //pocket sized
+	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
 	var/obj/item/weapon/storage/internal/pockets/hold
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/clothing/accessory/storage/New()
 	..()
+	create_storage()
+
+/obj/item/clothing/accessory/storage/proc/create_storage()
 	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
@@ -35,7 +38,7 @@
 	..()
 
 /obj/item/clothing/accessory/storage/attack_self(mob/user as mob)
-	user << "<span class='notice'>You empty [src].</span>"
+	to_chat(user, "<span class='notice'>You empty [src].</span>")
 	var/turf/T = get_turf(src)
 	hold.hide_from(usr)
 	for(var/obj/item/I in hold.contents)
@@ -71,12 +74,33 @@
 	icon_state = "vest_white"
 	slots = 5
 
+/obj/item/clothing/accessory/storage/drop_pouches
+	slots = 4 //to accomodate it being slotless
+
+/obj/item/clothing/accessory/storage/drop_pouches/create_storage()
+	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*base_storage_cost(max_w_class))
+
+/obj/item/clothing/accessory/storage/drop_pouches/black
+	name = "black drop pouches"
+	desc = "Robust black synthcotton bags to hold whatever you need, but cannot hold in hands."
+	icon_state = "thigh_black"
+
+/obj/item/clothing/accessory/storage/drop_pouches/brown
+	name = "brown drop pouches"
+	desc = "Worn brownish synthcotton bags to hold whatever you need, but cannot hold in hands."
+	icon_state = "thigh_brown"
+
+/obj/item/clothing/accessory/storage/drop_pouches/white
+	name = "white drop pouches"
+	desc = "Durable white synthcotton bags to hold whatever you need, but cannot hold in hands."
+	icon_state = "thigh_white"
+
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
 	icon_state = "unathiharness2"
 	slots = 2
-	max_w_class = 3 //for knives
+	max_w_class = ITEM_SIZE_NORMAL //for knives
 
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
@@ -95,7 +119,7 @@
 	desc = "A lightweight synthethic bandolier with straps for holding ammunition or other small objects."
 	icon_state = "bandolier"
 	slots = 10
-	max_w_class = 3
+	max_w_class = ITEM_SIZE_NORMAL
 
 /obj/item/clothing/accessory/storage/bandolier/New()
 	..()
@@ -108,8 +132,14 @@
 		/obj/item/weapon/material/star,
 		/obj/item/weapon/rcd_ammo,
 		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/weapon/syringe_cartridge,
 		/obj/item/weapon/plastique,
-		/obj/item/clothing/mask/smokable
+		/obj/item/clothing/mask/smokable,
+		/obj/item/weapon/screwdriver,
+		/obj/item/device/multitool,
+		/obj/item/weapon/magnetic_ammo,
+		/obj/item/ammo_magazine
 	)
 

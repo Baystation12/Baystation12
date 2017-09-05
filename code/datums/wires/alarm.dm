@@ -26,24 +26,28 @@ var/const/AALARM_WIRE_AALARM = 16
 		if(AALARM_WIRE_IDSCAN)
 			if(!mended)
 				A.locked = 1
-				//world << "Idscan wire cut"
+//				log_debug("Idscan wire cut")
+
 
 		if(AALARM_WIRE_POWER)
 			A.shock(usr, 50)
 			A.shorted = !mended
 			A.update_icon()
-			//world << "Power wire cut"
+//			log_debug("Power wire cut")
+
 
 		if (AALARM_WIRE_AI_CONTROL)
 			if (A.aidisabled == !mended)
 				A.aidisabled = mended
-				//world << "AI Control Wire Cut"
+//				log_debug("AI Control Wire Cut")
+
 
 		if(AALARM_WIRE_SYPHON)
 			if(!mended)
 				A.mode = 3 // AALARM_MODE_PANIC
 				A.apply_mode()
-				//world << "Syphon Wire Cut"
+//				log_debug("Syphon Wire Cut")
+
 
 		if(AALARM_WIRE_AALARM)
 			if (A.alarm_area.atmosalert(2, A))
@@ -55,10 +59,12 @@ var/const/AALARM_WIRE_AALARM = 16
 	switch(index)
 		if(AALARM_WIRE_IDSCAN)
 			A.locked = !A.locked
-		//	world << "Idscan wire pulsed"
+//			log_debug("Idscan wire pulsed")
+
 
 		if (AALARM_WIRE_POWER)
-		//	world << "Power wire pulsed"
+//			log_debug("Power wire pulsed")
+
 			if(A.shorted == 0)
 				A.shorted = 1
 				A.update_icon()
@@ -70,7 +76,8 @@ var/const/AALARM_WIRE_AALARM = 16
 
 
 		if (AALARM_WIRE_AI_CONTROL)
-		//	world << "AI Control wire pulsed"
+//			log_debug("AI Control wire pulsed")
+
 			if (A.aidisabled == 0)
 				A.aidisabled = 1
 			A.updateDialog()
@@ -79,7 +86,8 @@ var/const/AALARM_WIRE_AALARM = 16
 					A.aidisabled = 0
 
 		if(AALARM_WIRE_SYPHON)
-		//	world << "Syphon wire pulsed"
+//			log_debug("Syphon wire pulsed")
+
 			if(A.mode == 1) // AALARM_MODE_SCRUB
 				A.mode = 3 // AALARM_MODE_PANIC
 			else
@@ -87,7 +95,8 @@ var/const/AALARM_WIRE_AALARM = 16
 			A.apply_mode()
 
 		if(AALARM_WIRE_AALARM)
-		//	world << "Aalarm wire pulsed"
+//			log_debug("Aalarm wire pulsed")
+
 			if (A.alarm_area.atmosalert(0, A))
 				A.post_alert(0)
 			A.update_icon()

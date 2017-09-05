@@ -45,10 +45,10 @@
 	var/mob/living/carbon/xenos = user
 	var/mob/living/carbon/victim = M
 
-	if(istype(victim) && locate(/obj/item/organ/xenos/hivenode) in victim.internal_organs)
+	if(istype(victim) && locate(/obj/item/organ/internal/xenos/hivenode) in victim.internal_organs)
 		return
 
-	if(istype(xenos) && !(locate(/obj/item/organ/xenos/hivenode) in xenos.internal_organs))
+	if(istype(xenos) && !(locate(/obj/item/organ/internal/xenos/hivenode) in xenos.internal_organs))
 		return
 
 	if(M == usr)
@@ -72,6 +72,6 @@
 
 /obj/structure/bed/nest/proc/healthcheck()
 	if(health <=0)
-		density = 0
+		set_density(0)
 		qdel(src)
 	return

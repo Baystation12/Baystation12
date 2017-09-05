@@ -16,14 +16,8 @@
 	universal_speak = 0
 	universal_understand = 1
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 	show_stat_health = 1
 	faction = "cult"
@@ -48,14 +42,18 @@
 	add_language("Occult")
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
-	updateicon()
-	add_glow()
+	update_icon()
 
-/mob/living/simple_animal/construct/death()
+/mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
 	new /obj/item/weapon/ectoplasm (src.loc)
-	..(null,"collapses in a shattered heap.")
+	..(null,"collapses in a shattered heap.","The bonds tying you to this mortal plane have been severed.")
 	ghostize()
 	qdel(src)
+
+/mob/living/simple_animal/construct/update_icon()
+	overlays.Cut()
+	..()
+	add_glow()
 
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
@@ -63,12 +61,12 @@
 			adjustBruteLoss(-5)
 			user.visible_message("<span class='notice'>\The [user] mends some of \the [src]'s wounds.</span>")
 		else
-			user << "<span class='notice'>\The [src] is undamaged.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is undamaged.</span>")
 		return
 	return ..()
 
 /mob/living/simple_animal/construct/examine(mob/user)
-	..(user)
+	. = ..(user)
 	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
@@ -79,8 +77,14 @@
 		msg += "</span>"
 	msg += "*---------*</span>"
 
-	user << msg
+	to_chat(user, msg)
 
+/obj/item/weapon/ectoplasm
+	name = "ectoplasm"
+	desc = "Spooky."
+	gender = PLURAL
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "ectoplasm"
 
 /////////////////Juggernaut///////////////
 
@@ -147,6 +151,7 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "floating"
 	icon_living = "floating"
+	icon_dead = "floating_dead"
 	maxHealth = 75
 	health = 75
 	melee_damage_lower = 25
@@ -221,10 +226,11 @@
 /mob/living/simple_animal/construct/harvester
 	name = "Harvester"
 	real_name = "Harvester"
-	desc = "The promised reward of the livings who follow narsie. Obtained by offering their bodies to the geometer of blood"
+	desc = "The promised reward of the livings who follow Nar-Sie. Obtained by offering their bodies to the geometer of blood"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "harvester"
 	icon_living = "harvester"
+	icon_dead = "harvester_dead"
 	maxHealth = 150
 	health = 150
 	melee_damage_lower = 25
@@ -236,20 +242,16 @@
 	attack_sound = 'sound/weapons/pierce.ogg'
 
 	construct_spells = list(
-			/spell/targeted/harvest,
-			/spell/aoe_turf/knock/harvester,
-			/spell/rune_write
+			/spell/targeted/harvest
 		)
 
 ////////////////Glow//////////////////
 /mob/living/simple_animal/construct/proc/add_glow()
-	overlays = 0
-	var/overlay_layer = LIGHTING_LAYER+0.1
-	if(layer != MOB_LAYER)
-		overlay_layer=TURF_LAYER+0.2
-
-	overlays += image(icon,"glow-[icon_state]",overlay_layer)
-	set_light(2, -2, l_color = "#FFFFFF")
+	var/image/eye_glow = image(icon,"glow-[icon_state]")
+	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	eye_glow.layer = EYE_GLOW_LAYER
+	overlays += eye_glow
+	set_light(3, -10, l_color = "#FFFFFF")
 
 ////////////////HUD//////////////////////
 

@@ -182,8 +182,15 @@
 	processing_uis.Remove(ui) // Remove it from the list of processing UIs.
 	if(ui.user)	// If the user exists, remove it from them too.
 		ui.user.tg_open_uis.Remove(ui)
-	var/list/uis = tg_open_uis[src_object_key][ui.ui_key] // Remove it from the list of open UIs.
+	var/Ukey = ui.ui_key
+	var/list/uis = tg_open_uis[src_object_key][Ukey] // Remove it from the list of open UIs.
 	uis.Remove(ui)
+	if(!uis.len)
+		var/list/uiobj = tg_open_uis[src_object_key]
+		uiobj.Remove(Ukey)
+		if(!uiobj.len)
+			tg_open_uis.Remove(src_object_key)
+
 	return 1 // Let the caller know we did it.
 
  /**

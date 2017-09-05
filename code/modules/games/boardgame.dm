@@ -1,6 +1,6 @@
 /obj/item/weapon/board
 	name = "board"
-	desc = "A standard 12' checkerboard. Well used."
+	desc = "A standard 16\" checkerboard. Well used." //Goddamn imperial system.
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "board"
 
@@ -27,7 +27,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 		..()
 
 /obj/item/weapon/board/proc/addPiece(obj/item/I as obj, mob/user as mob, var/tile = 0)
-	if(I.w_class != TINY_ITEM) //only small stuff
+	if(I.w_class != ITEM_SIZE_TINY) //only small stuff
 		user.show_message("<span class='warning'>\The [I] is too big to be used as a board piece.</span>")
 		return 0
 	if(num == 64)
@@ -141,6 +141,8 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 					addPiece(O,H,text2num(s))
 		if(href_list["remove"])
 			var/obj/item/I = board["[selected]"]
+			if(!I)
+				return
 			board["[selected]"] = null
 			board -= "[selected]"
 			board -= null
@@ -167,7 +169,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	desc = "It is plastic and shiny."
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	center_of_mass = "x=16;y=16"
 	nutriment_desc = list("a choking hazard" = 4)
 	nutriment_amt = 1

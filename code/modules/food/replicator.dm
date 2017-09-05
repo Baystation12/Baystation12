@@ -7,6 +7,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 40
+	flags = OBJ_ANCHORABLE
 	var/biomass = 100
 	var/biomass_max = 100
 	var/biomass_per = 10
@@ -41,7 +42,7 @@
 	else if(istype(O, /obj/item/weapon/storage/plants))
 		if(!O.contents || !O.contents.len)
 			return
-		user << "You empty \the [O] into \the [src]"
+		to_chat(user, "You empty \the [O] into \the [src]")
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
 			var/obj/item/weapon/storage/S = O
 			S.remove_from_storage(G, null)
@@ -49,19 +50,7 @@
 				biomass = Clamp(biomass + round(N.volume*deconstruct_eff),1,biomass_max)
 			qdel(G)
 
-	if (istype(O, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		if(anchored)
-			user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
-		else
-			user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-
-		if(do_after(user, 20, src))
-			if(!src) return
-			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
-			anchored = !anchored
-		return
-	else if(default_deconstruction_screwdriver(user, O))
+	if(default_deconstruction_screwdriver(user, O))
 		return
 	else if(default_deconstruction_crowbar(user, O))
 		return
@@ -69,6 +58,7 @@
 		return
 	else
 		..()
+	return
 
 /obj/machinery/food_replicator/update_icon()
 	if(stat & BROKEN)
@@ -166,6 +156,6 @@
 	..()
 
 /obj/machinery/food_replicator/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(panel_open)
-		user << "The maintenance hatch is open."
+		to_chat(user, "The maintenance hatch is open.")

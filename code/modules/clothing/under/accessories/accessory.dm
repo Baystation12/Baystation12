@@ -5,14 +5,17 @@
 	icon_state = "bluetie"
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
-	w_class = 2.0
-	var/slot = "decor"
+	w_class = ITEM_SIZE_SMALL
+	var/slot = ACCESSORY_SLOT_DECOR
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
-
-	sprite_sheets = list("Resomi" = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
+	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi', slot_wear_suit_str = 'icons/mob/ties.dmi')
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi'
+		)
+	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
@@ -23,28 +26,39 @@
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
+		else if("[tmp_icon_state]_tie" in icon_states(default_onmob_icons[slot_tie_str]))
+			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
-			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
+			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
+	inv_overlay.color = color
 	return inv_overlay
 
-/obj/item/clothing/accessory/proc/get_mob_overlay(var/mob/user_mob)
+/obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
+	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
+		return ..()
 	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		if(user_human.species.get_bodytype() in sprite_sheets)
-			bodytype = user_human.species.get_bodytype()
+		if(user_human.species.get_bodytype(user_human) in sprite_sheets)
+			bodytype = user_human.species.get_bodytype(user_human)
 
-	if(!mob_overlay[bodytype])
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
-		var/use_sprite_sheet = INV_ACCESSORIES_DEF_ICON
+
+		if(istype(loc,/obj/item/clothing/under))
+			var/obj/item/clothing/under/C = loc
+			if(on_rolled["down"] && C.rolled_down > 0)
+				tmp_icon_state = on_rolled["down"]
+			else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled["rolled"]
+
+		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
 
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
-			mob_overlay[bodytype] = image(icon = icon_override, icon_state = "[tmp_icon_state]_mob")
+			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)
 		else
-			mob_overlay[bodytype] = image(icon = use_sprite_sheet, icon_state = tmp_icon_state)
-	return mob_overlay[bodytype]
+			return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
@@ -55,7 +69,7 @@
 	has_suit.overlays += get_inv_overlay()
 
 	if(user)
-		user << "<span class='notice'>You attach \the [src] to \the [has_suit].</span>"
+		to_chat(user, "<span class='notice'>You attach \the [src] to \the [has_suit].</span>")
 		src.add_fingerprint(user)
 
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
@@ -112,6 +126,15 @@
 	desc = "A neosilk clip-on tie. This one is disgusting."
 	icon_state = "horribletie"
 
+/obj/item/clothing/accessory/brown
+	name = "brown tie"
+	icon_state = "browntie"
+
+/obj/item/clothing/accessory/nt
+	name = "\improper NanoTrasen tie with a clip"
+	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears 'NT' on it."
+	icon_state = "ntcliptie"
+
 /obj/item/clothing/accessory/stethoscope
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
@@ -130,33 +153,31 @@
 				var/sound = "heartbeat"
 				var/sound_strength = "cannot hear"
 				var/heartbeat = 0
-				if(M.species && M.species.has_organ["heart"])
-					var/obj/item/organ/heart/heart = M.internal_organs_by_name["heart"]
-					if(heart && !heart.robotic)
-						heartbeat = 1
+				var/obj/item/organ/internal/heart/heart = M.internal_organs_by_name[BP_HEART]
+				if(heart && !(heart.robotic >= ORGAN_ROBOT))
+					heartbeat = 1
 				if(M.stat == DEAD || (M.status_flags&FAKEDEATH))
 					sound_strength = "cannot hear"
 					sound = "anything"
 				else
 					switch(body_part)
-						if("chest")
+						if(BP_CHEST)
 							sound_strength = "hear"
 							sound = "no heartbeat"
 							if(heartbeat)
-								var/obj/item/organ/heart/heart = M.internal_organs_by_name["heart"]
 								if(heart.is_bruised() || M.getOxyLoss() > 50)
 									sound = "[pick("odd noises in","weak")] heartbeat"
 								else
 									sound = "healthy heartbeat"
 
-							var/obj/item/organ/heart/L = M.internal_organs_by_name["lungs"]
-							if(!L || M.losebreath)
+							var/obj/item/organ/internal/lungs/L = M.internal_organs_by_name[M.species.breathing_organ]
+							if(!L || M.losebreath || !L.active_breathing)
 								sound += " and no respiration"
 							else if(M.is_lung_ruptured() || M.getOxyLoss() > 50)
 								sound += " and [pick("wheezing","gurgling")] sounds"
 							else
 								sound += " and healthy respiration"
-						if("eyes","mouth")
+						if(BP_EYES,BP_MOUTH)
 							sound_strength = "cannot hear"
 							sound = "anything"
 						else
@@ -171,9 +192,10 @@
 
 //Medals
 /obj/item/clothing/accessory/medal
-	name = "medal"
+	name = ACCESSORY_SLOT_MEDAL
 	desc = "A simple medal."
 	icon_state = "bronze"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"
@@ -279,6 +301,7 @@
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/ribbon/marksman
 	name = "marksmanship ribbon"
@@ -305,6 +328,7 @@
 	name = "speciality blaze"
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
 	icon_state = "marinerank_command"
+	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/specialty/janitor
 	name = "custodial blazes"
@@ -346,12 +370,19 @@
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
 
+
+/obj/item/clothing/accessory/speciality/pilot
+	name = "pilot's qualification pin"
+	desc = "An iron pin denoting the qualification to fly in the SGDF."
+	icon_state = "pin_pilot"
+
 //Ranks
 /obj/item/clothing/accessory/rank
 	name = "ranks"
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon_state = "fleetrank"
-	slot = "rank"
+	on_rolled = list("down" = "none")
+	slot = ACCESSORY_SLOT_RANK
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"
@@ -359,84 +390,108 @@
 	icon_state = "fleetrank"
 
 /obj/item/clothing/accessory/rank/fleet/enlisted
-	name = "ranks (crewman recruit)"
+	name = "ranks (E-1 crewman recruit)"
 	desc = "Insignia denoting the rank of Crewman Recruit."
 	icon_state = "fleetrank_enlisted"
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e2
-	name = "ranks (crewman apprentice)"
+	name = "ranks (E-2 crewman apprentice)"
 	desc = "Insignia denoting the rank of Crewman Apprentice."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e3
-	name = "ranks (crewman)"
+	name = "ranks (E-3 crewman)"
 	desc = "Insignia denoting the rank of Crewman."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e4
-	name = "ranks (petty officer third class)"
+	name = "ranks (E-4 petty officer third class)"
 	desc = "Insignia denoting the rank of Petty Officer Third Class."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e5
-	name = "ranks (petty officer second class)"
+	name = "ranks (E-5 petty officer second class)"
 	desc = "Insignia denoting the rank of Petty Officer Second Class."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e6
-	name = "ranks (petty officer first class)"
+	name = "ranks (E-6 petty officer first class)"
 	desc = "Insignia denoting the rank of Petty Officer First Class."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e7
-	name = "ranks (chief petty officer)"
+	name = "ranks (E-7 chief petty officer)"
 	desc = "Insignia denoting the rank of Chief Petty Officer."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e8
-	name = "ranks (senior chief petty officer)"
+	name = "ranks (E-8 senior chief petty officer)"
 	desc = "Insignia denoting the rank of Senior Chief Petty Officer."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e9
-	name = "ranks (master chief petty officer)"
+	name = "ranks (E-9 master chief petty officer)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer."
 
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt1
+	name = "ranks (E-9 command master chief petty officer)"
+	desc = "Insignia denoting the rank of Command Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt2
+	name = "ranks (E-9 fleet master chief petty officer)"
+	desc = "Insignia denoting the rank of Fleet Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt3
+	name = "ranks (E-9 force master chief petty officer)"
+	desc = "Insignia denoting the rank of Force Master Chief Petty Officer."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt4
+	name = "ranks (E-9 master chief petty officer of the Fleet)"
+	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Fleet."
+
+/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt5
+	name = "ranks (E-9 master chief petty officer of the Expeditionary Corps)"
+	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Expeditionary Corps."
+
 /obj/item/clothing/accessory/rank/fleet/officer
-	name = "ranks (ensign)"
+	name = "ranks (O-1 ensign)"
 	desc = "Insignia denoting the rank of Ensign."
 	icon_state = "fleetrank_officer"
 
 /obj/item/clothing/accessory/rank/fleet/officer/o2
-	name = "ranks (lieutenant junior grade)"
+	name = "ranks (O-2 lieutenant junior grade)"
 	desc = "Insignia denoting the rank of Lieutenant Junior Grade."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o3
-	name = "ranks (lieutenant ranks)"
+	name = "ranks (O-3 lieutenant)"
 	desc = "Insignia denoting the rank of Lieutenant."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o4
-	name = "ranks (lieutenant commander)"
+	name = "ranks (O-4 lieutenant commander)"
 	desc = "Insignia denoting the rank of Lieutenant Commander."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o5
-	name = "ranks (commander)"
+	name = "ranks (O-5 commander)"
 	desc = "Insignia denoting the rank of Commander."
 
 /obj/item/clothing/accessory/rank/fleet/officer/o6
-	name = "ranks (captain)"
+	name = "ranks (O-6 captain)"
 	desc = "Insignia denoting the rank of Captain."
 	icon_state = "fleetrank_command"
 
 /obj/item/clothing/accessory/rank/fleet/flag
-	name = "ranks (rear admiral lower half)"
+	name = "ranks (O-7 rear admiral lower half)"
 	desc = "Insignia denoting the rank of Rear Admiral Lower Half."
 	icon_state = "fleetrank_command"
 
 /obj/item/clothing/accessory/rank/fleet/flag/o8
-	name = "ranks (rear admiral upper half)"
+	name = "ranks (O-8 rear admiral upper half)"
 	desc = "Insignia denoting the rank of Rear Admiral Upper Half."
 
 /obj/item/clothing/accessory/rank/fleet/flag/o9
-	name = "ranks (vice admiral)"
+	name = "ranks (O-9 vice admiral)"
 	desc = "Insignia denoting the rank of Vice Admiral."
 
 /obj/item/clothing/accessory/rank/fleet/flag/o10
-	name = "ranks (admiral)"
+	name = "ranks (O-10 admiral)"
 	desc = "Insignia denoting the rank of Admiral."
+
+/obj/item/clothing/accessory/rank/fleet/flag/o10_alt
+	name = "ranks (O-10 fleet admiral)"
+	desc = "Insignia denoting the rank of Fleet Admiral."
 
 /obj/item/clothing/accessory/rank/marine
 	name = "marine ranks"
@@ -444,98 +499,206 @@
 	icon_state = "marinerank_enlisted"
 
 /obj/item/clothing/accessory/rank/marine/enlisted
-	name = "ranks (private)"
+	name = "ranks (E-1 private)"
 	desc = "Insignia denoting the rank of Private."
 	icon_state = "marinerank_enlisted"
 
-/obj/item/clothing/accessory/rank/marine/e2
-	name = "ranks (private first class)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e2
+	name = "ranks (E-2 private first class)"
 	desc = "Insignia denoting the rank of Private First Class."
 
-/obj/item/clothing/accessory/rank/marine/e3
-	name = "ranks (lance corporal)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e3
+	name = "ranks (E-3 lance corporal)"
 	desc = "Insignia denoting the rank of Lance Corporal."
 
-/obj/item/clothing/accessory/rank/marine/e4
-	name = "ranks (corporal)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e4
+	name = "ranks (E-4 corporal)"
 	desc = "Insignia denoting the rank of Corporal."
 
-/obj/item/clothing/accessory/rank/marine/e5
-	name = "ranks (sergeant)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e5
+	name = "ranks (E-5 sergeant)"
 	desc = "Insignia denoting the rank of Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e6
-	name = "ranks (staff sergeant)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e6
+	name = "ranks (E-6 staff sergeant)"
 	desc = "Insignia denoting the rank of Staff Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e7
-	name = "ranks (gunnery sergeant)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e7
+	name = "ranks (E-7 gunnery sergeant)"
 	desc = "Insignia denoting the rank of Gunnery Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e8
-	name = "ranks (master sergeant)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e8
+	name = "ranks (E-8 master sergeant)"
 	desc = "Insignia denoting the rank of Master Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e8alt
-	name = "ranks (first sergeant)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e8_alt
+	name = "ranks (E-8 first sergeant)"
 	desc = "Insignia denoting the rank of First Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e9
-	name = "ranks (master gunnery sergeant)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e9
+	name = "ranks (E-9 master gunnery sergeant)"
 	desc = "Insignia denoting the rank of Master Gunnery Sergeant."
 
-/obj/item/clothing/accessory/rank/marine/e9alt
-	name = "ranks (sergeant major)"
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt1
+	name = "ranks (E-9 sergeant major)"
 	desc = "Insignia denoting the rank of Sergeant Major."
 
+/obj/item/clothing/accessory/rank/marine/enlisted/e9_alt2
+	name = "ranks (E-9 sergeant major of the Marine Corps)"
+	desc = "Insignia denoting the rank of Sergeant Major of the Marine Corps."
+
 /obj/item/clothing/accessory/rank/marine/officer
-	name = "ranks (second lieutenant)"
+	name = "ranks (O-1 second lieutenant)"
 	desc = "Insignia denoting the rank of Second Lieutenant."
 	icon_state = "marinerank_officer"
 
 /obj/item/clothing/accessory/rank/marine/officer/o2
-	name = "ranks (first lieutenant)"
+	name = "ranks (O-2 first lieutenant)"
 	desc = "Insignia denoting the rank of First Lieutenant."
 
 /obj/item/clothing/accessory/rank/marine/officer/o3
-	name = "ranks (captain)"
+	name = "ranks (O-3 captain)"
 	desc = "Insignia denoting the rank of Captain."
 
 /obj/item/clothing/accessory/rank/marine/officer/o4
-	name = "ranks (major)"
+	name = "ranks (O-4 major)"
 	desc = "Insignia denoting the rank of Major."
 
 /obj/item/clothing/accessory/rank/marine/officer/o5
-	name = "ranks (lieutenant commander)"
-	desc = "Insignia denoting the rank of Lieutenant Commander."
+	name = "ranks (O-5 lieutenant colonel)"
+	desc = "Insignia denoting the rank of Lieutenant Colonel."
 
 /obj/item/clothing/accessory/rank/marine/officer/o6
-	name = "ranks (colonel)"
+	name = "ranks (O-6 colonel)"
 	desc = "Insignia denoting the rank of Colonel."
 
 /obj/item/clothing/accessory/rank/marine/flag
-	name = "ranks (brigadier general)"
+	name = "ranks (O-7 brigadier general)"
 	desc = "Insignia denoting the rank of Brigadier General."
 	icon_state = "marinerank_command"
 
 /obj/item/clothing/accessory/rank/marine/flag/o8
-	name = "ranks (major general)"
+	name = "ranks (O-8 major general)"
 	desc = "Insignia denoting the rank of Major General."
 
 /obj/item/clothing/accessory/rank/marine/flag/o9
-	name = "ranks (lieutenant general)"
+	name = "ranks (O-9 lieutenant general)"
 	desc = "Insignia denoting the rank of lieutenant general."
 
 /obj/item/clothing/accessory/rank/marine/flag/o10
-	name = "ranks (general)"
+	name = "ranks (O-10 general)"
 	desc = "Insignia denoting the rank of General."
+
+/obj/item/clothing/accessory/rank/marine/flag/o10_alt
+	name = "ranks (O-10 commandant of the Marine Corps)"
+	desc = "Insignia denoting the rank of Commandant of the Marine Corps."
+
+
+//Department insignia
+/obj/item/clothing/accessory/department
+	name = "department insignia"
+	desc = "Insignia denoting assignment to a department. These appear blank."
+	icon_state = "dept_exped"
+	on_rolled = list("down" = "dept_exped_rolled")
+	slot = ACCESSORY_SLOT_DEPT
+
+/obj/item/clothing/accessory/department/command
+	name = "command insignia"
+	desc = "Insignia denoting assignment to the command department. These fit Expeditionary Corps uniforms."
+	color = "#E5EA4F"
+
+/obj/item/clothing/accessory/department/command/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "none", "down" = "none")
+
+/obj/item/clothing/accessory/department/command/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the command department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/department/engineering
+	name = "engineering insignia"
+	desc = "Insignia denoting assignment to the engineering department. These fit Expeditionary Corps uniforms."
+	color = "#FF7F00"
+
+/obj/item/clothing/accessory/department/engineering/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the engineering department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "none", "down" = "none")
+
+/obj/item/clothing/accessory/department/engineering/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the engineering department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/department/security
+	name = "security insignia"
+	desc = "Insignia denoting assignment to the security department. These fit Expeditionary Corps uniforms."
+	color = "#BF0000"
+
+/obj/item/clothing/accessory/department/security/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the security department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "none", "down" = "none")
+
+/obj/item/clothing/accessory/department/security/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the security department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/department/medical
+	name = "medical insignia"
+	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
+	color = "#4C9CE4"
+
+/obj/item/clothing/accessory/department/medical/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the medical department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "none", "down" = "none")
+
+/obj/item/clothing/accessory/department/medical/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the medical department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/department/supply
+	name = "supply insignia"
+	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
+	color = "#BB9042"
+
+/obj/item/clothing/accessory/department/supply/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the supply department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "none", "down" = "none")
+
+/obj/item/clothing/accessory/department/supply/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the supply department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/department/service
+	name = "service insignia"
+	desc = "Insignia denoting assignment to the service department. These fit Expeditionary Corps uniforms."
+	color = "#6EAA2C"
+
+/obj/item/clothing/accessory/department/service/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the service department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "none", "down" = "none")
+
+/obj/item/clothing/accessory/department/service/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the service department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
 
 
 //Necklaces
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
-	desc = "A simple silver necklace."
-	icon_state = "locket"
+	desc = "A simple necklace."
+	icon_state = "necklace"
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 
 //Misc
@@ -543,3 +706,66 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
+
+//Scarves
+/obj/item/clothing/accessory/scarf
+	name = "scarf"
+	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "whitescarf"
+
+//Bowties
+/obj/item/clothing/accessory/bowtie
+	var/icon_tied
+/obj/item/clothing/accessory/bowtie/New()
+	icon_tied = icon_tied || icon_state
+	..()
+
+/obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user as mob)
+	..()
+	has_suit.verbs += /obj/item/clothing/accessory/bowtie/verb/toggle
+
+/obj/item/clothing/accessory/bowtie/on_removed(mob/user as mob)
+	if(has_suit)
+		has_suit.verbs -= /obj/item/clothing/accessory/bowtie/verb/toggle
+	..()
+
+/obj/item/clothing/accessory/bowtie/verb/toggle()
+	set name = "Toggle Bowtie"
+	set category = "Object"
+	set src in usr
+
+	if(usr.incapacitated())
+		return 0
+
+	var/obj/item/clothing/accessory/bowtie/H = null
+	if (istype(src, /obj/item/clothing/accessory/bowtie))
+		H = src
+	else
+		H = locate() in src
+
+	if(H)
+		H.do_toggle(usr)
+
+/obj/item/clothing/accessory/bowtie/proc/do_toggle(user)
+	if(icon_state == icon_tied)
+		to_chat(usr, "You untie [src].")
+	else
+		to_chat(usr, "You tie [src].")
+
+	update_icon()
+
+/obj/item/clothing/accessory/bowtie/update_icon()
+	if(icon_state == icon_tied)
+		icon_state = "[icon_tied]_untied"
+	else
+		icon_state = icon_tied
+
+/obj/item/clothing/accessory/bowtie/color
+	name = "bowtie"
+	desc = "A neosilk hand-tied bowtie."
+	icon_state = "bowtie"
+
+/obj/item/clothing/accessory/bowtie/ugly
+	name = "horrible bowtie"
+	desc = "A neosilk hand-tied bowtie. This one is disgusting."
+	icon_state = "bowtie_ugly"

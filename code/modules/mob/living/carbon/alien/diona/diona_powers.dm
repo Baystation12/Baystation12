@@ -19,22 +19,22 @@
 
 		if(istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/D = C
-			if(D.species && D.species.name == "Diona")
+			if(D.species && D.species.name == SPECIES_DIONA)
 				choices += C
 
 	var/mob/living/M = input(src,"Who do you wish to merge with?") in null|choices
 
 	if(!M)
-		src << "There is nothing nearby to merge with."
+		to_chat(src, "There is nothing nearby to merge with.")
 	else if(!do_merge(M))
-		src << "You fail to merge with \the [M]..."
+		to_chat(src, "You fail to merge with \the [M]...")
 
 /mob/living/carbon/alien/diona/proc/do_merge(var/mob/living/carbon/human/H)
 	if(!istype(H) || !src || !(src.Adjacent(H)))
 		return 0
-	H << "You feel your being twine with that of \the [src] as it merges with your biomass."
+	to_chat(H, "You feel your being twine with that of \the [src] as it merges with your biomass.")
 	H.status_flags |= PASSEMOTES
-	src << "You feel your being twine with that of \the [H] as you merge with its biomass."
+	to_chat(src, "You feel your being twine with that of \the [H] as you merge with its biomass.")
 	loc = H
 	verbs += /mob/living/carbon/alien/diona/proc/split
 	verbs -= /mob/living/carbon/alien/diona/proc/merge
@@ -53,8 +53,8 @@
 		src.verbs -= /mob/living/carbon/alien/diona/proc/split
 		return
 
-	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
-	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
+	to_chat(src.loc, "You feel a pang of loss as [src] splits away from your biomass.")
+	to_chat(src, "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground.")
 
 	var/mob/living/M = src.loc
 

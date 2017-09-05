@@ -3,15 +3,15 @@
 	desc = "Some kind of strange, pulsating structure."
 	icon_state = "weednode"
 	health = 100
-	layer = 3.1
+	layer = ABOVE_OBJ_LAYER
 
 /obj/structure/alien/node/New()
 	..()
-	processing_objects += src
+	GLOB.processing_objects += src
 
 /obj/structure/alien/node/Destroy()
-	processing_objects -= src
-	..()
+	GLOB.processing_objects -= src
+	. = ..()
 
 /obj/structure/alien/node/process()
 	if(locate(/obj/effect/plant) in loc)

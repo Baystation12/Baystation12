@@ -36,7 +36,7 @@
 	dna.SetSEState(MONKEYBLOCK,1)
 	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
-	src << "<B>You are now [species.name]. </B>"
+	to_chat(src, "<B>You are now [species.name]. </B>")
 	qdel(animation)
 
 	return src
@@ -50,7 +50,7 @@
 		return
 	for(var/t in organs)
 		qdel(t)
-
+	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
 /mob/living/carbon/AIize()
@@ -66,11 +66,12 @@
 
 /mob/proc/AIize(move=1)
 	if(client)
-		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jams for AIs
-	var/mob/living/silicon/ai/O = new (loc, base_law_type,,1)//No MMI but safety is in effect.
+		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))// stop the jams for AIs
+
+
+	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
-
 	if(mind)
 		mind.transfer_to(O)
 		O.mind.original = O
@@ -92,14 +93,12 @@
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)
-			O << "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone."
+			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
-
-		O.loc = loc_landmark.loc
-
-	O.on_mob_init()
+		O.forceMove(loc_landmark.loc)
+		O.on_mob_init()
 
 	O.add_ai_verbs()
 
@@ -112,6 +111,7 @@
 /mob/living/carbon/human/proc/Robotize()
 	if (transforming)
 		return
+	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
@@ -123,12 +123,6 @@
 		qdel(t)
 
 	var/mob/living/silicon/robot/O = new /mob/living/silicon/robot( loc )
-
-	// cyborgs produced by Robotize get an automatic power cell
-	O.cell = new(O)
-	O.cell.maxcharge = 7500
-	O.cell.charge = 7500
-
 
 	O.gender = gender
 	O.invisibility = 0
@@ -191,7 +185,7 @@
 		else
 	new_slime.key = key
 
-	new_slime << "<B>You are now a slime. Skreee!</B>"
+	to_chat(new_slime, "<B>You are now a slime. Skreee!</B>")
 	qdel(src)
 	return
 
@@ -212,7 +206,7 @@
 	new_corgi.a_intent = I_HURT
 	new_corgi.key = key
 
-	new_corgi << "<B>You are now a Corgi. Yap Yap!</B>"
+	to_chat(new_corgi, "<B>You are now a Corgi. Yap Yap!</B>")
 	qdel(src)
 	return
 
@@ -222,7 +216,7 @@
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
 	if(!safe_animal(mobpath))
-		usr << "\red Sorry but this mob type is currently unavailable."
+		to_chat(usr, "<span class='warning'>Sorry but this mob type is currently unavailable.</span>")
 		return
 
 	if(transforming)
@@ -245,7 +239,7 @@
 	new_mob.a_intent = I_HURT
 
 
-	new_mob << "You suddenly feel more... animalistic."
+	to_chat(new_mob, "You suddenly feel more... animalistic.")
 	spawn()
 		qdel(src)
 	return
@@ -256,14 +250,14 @@
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
 	if(!safe_animal(mobpath))
-		usr << "\red Sorry but this mob type is currently unavailable."
+		to_chat(usr, "<span class='warning'>Sorry but this mob type is currently unavailable.</span>")
 		return
 
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
 	new_mob.a_intent = I_HURT
-	new_mob << "You feel more... animalistic"
+	to_chat(new_mob, "You feel more... animalistic")
 
 	qdel(src)
 
@@ -319,4 +313,22 @@
 	return 0
 
 
-
+//This is barely a transformation but probably best file for it.
+/mob/living/carbon/human/proc/zombieze()
+	ChangeToHusk()
+	mutations |= CLUMSY //cause zombie
+	src.visible_message("<span class='danger'>\The [src]'s flesh decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You... hunger. Not only for flesh, but to spread your disease.</span>")
+	if(src.mind)
+		src.mind.special_role = "Zombie"
+	log_admin("[key_name(src)] has transformed into a zombie!")
+	Weaken(5)
+	if(should_have_organ(BP_HEART))
+		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
+	for(var/o in organs)
+		var/obj/item/organ/organ = o
+		organ.vital = 0
+		organ.rejuvenate(1)
+		organ.max_damage *= 5
+		organ.min_broken_damage *= 5
+	verbs += /mob/living/proc/breath_death
+	verbs += /mob/living/proc/consume

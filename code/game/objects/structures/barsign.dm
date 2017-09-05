@@ -1,4 +1,6 @@
 /obj/structure/sign/double/barsign
+	desc = "A jumbo-sized LED sign. This one seems to be showing its age."
+	description_info = "If your ID has bar access, you may swipe it on this sign to alter its display."
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
 	appearance_flags = 0
@@ -14,16 +16,16 @@
 		. -= "Off"
 
 /obj/structure/sign/double/barsign/examine(mob/user)
-	..()
+	. = ..()
 	switch(icon_state)
 		if("Off")
-			user << "It appears to be switched off."
+			to_chat(user, "It appears to be switched off.")
 		if("narsiebistro")
-			user << "It shows a picture of a large black and red being. Spooky!"
+			to_chat(user, "It shows a picture of a large black and red being. Spooky!")
 		if("on", "empty")
-			user << "The lights are on, but there's no picture."
+			to_chat(user, "The lights are on, but there's no picture.")
 		else
-			user << "It says '[icon_state]'"
+			to_chat(user, "It says '[icon_state]'")
 
 /obj/structure/sign/double/barsign/New()
 	..()
@@ -33,16 +35,16 @@
 	if(cult)
 		return ..()
 
-	var/obj/item/weapon/card/id/card = I.GetID()
+	var/obj/item/weapon/card/id/card = I.GetIdCard()
 	if(istype(card))
 		if(access_bar in card.GetAccess())
 			var/sign_type = input(user, "What would you like to change the barsign to?") as null|anything in get_valid_states(0)
 			if(!sign_type)
 				return
 			icon_state = sign_type
-			user << "<span class='notice'>You change the barsign.</span>"
+			to_chat(user, "<span class='notice'>You change the barsign.</span>")
 		else
-			user << "<span class='warning'>Access denied.</span>"
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	return ..()

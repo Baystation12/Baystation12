@@ -55,14 +55,14 @@
 	var/mob/M = usr
 	if(!M.mind)	return 0
 	if(!M.mind.assigned_role == "Detective")
-		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
+		to_chat(M, "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>")
 		return 0
 
 	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
 
 	if(src && input && !M.stat && in_range(M,src))
 		name = input
-		M << "You name the gun [input]. Say hello to your new friend."
+		to_chat(M, "You name the gun [input]. Say hello to your new friend.")
 		return 1
 
 // Blade Runner pistol.
@@ -71,6 +71,9 @@
 	desc = "A custom-built revolver, based off the semi-popular Detective Special model."
 	icon_state = "deckard-empty"
 	ammo_type = /obj/item/ammo_magazine/c38/rubber
+
+/obj/item/weapon/gun/projectile/revolver/deckard/emp
+	ammo_type = /obj/item/ammo_casing/c38/emp
 
 /obj/item/weapon/gun/projectile/revolver/deckard/update_icon()
 	..()
@@ -87,7 +90,7 @@
 /obj/item/weapon/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
-	icon_state = "revolver"
+	icon_state = "revolver-toy"
 	item_state = "revolver"
 	caliber = "caps"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
@@ -95,3 +98,11 @@
 	max_shells = 7
 	ammo_type = /obj/item/ammo_casing/cap
 
+/obj/item/weapon/gun/projectile/revolver/capgun/attackby(obj/item/weapon/wirecutters/W, mob/user)
+	if(!istype(W) || icon_state == "revolver")
+		return ..()
+	to_chat(user, "<span class='notice'>You snip off the toy markings off the [src].</span>")
+	name = "revolver"
+	icon_state = "revolver"
+	desc += " Someone snipped off the barrel's toy mark. How dastardly."
+	return 1

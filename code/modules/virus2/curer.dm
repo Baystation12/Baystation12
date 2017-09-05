@@ -19,13 +19,13 @@
 		return
 	if(istype(I,/obj/item/weapon/virusdish))
 		if(virusing)
-			user << "<b>The pathogen materializer is still recharging..</b>"
+			to_chat(user, "<b>The pathogen materializer is still recharging..</b>")
 			return
 		var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)
 
-		var/list/data = list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"virus2"=list(),"antibodies"=list())
+		var/list/data = list("donor" = null, "blood_DNA" = null, "blood_type" = null, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
 		data["virus2"] |= I:virus2
-		product.reagents.add_reagent("blood",30,data)
+		product.reagents.add_reagent(/datum/reagent/blood,30,data)
 
 		virusing = 1
 		spawn(1200) virusing = 0
@@ -101,6 +101,6 @@
 
 	var/list/data = list()
 	data["antibodies"] = B.data["antibodies"]
-	product.reagents.add_reagent("antibodies",30,data)
+	product.reagents.add_reagent(/datum/reagent/antibodies,30,data)
 
 	state("\The [src.name] buzzes", "blue")

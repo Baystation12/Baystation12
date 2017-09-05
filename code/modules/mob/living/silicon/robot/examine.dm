@@ -1,6 +1,6 @@
 /mob/living/silicon/robot/examine(mob/user)
 	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
-	..(user, infix = custom_infix)
+	. = ..(user, infix = custom_infix)
 
 	var/msg = ""
 	msg += "<span class='warning'>"
@@ -38,6 +38,6 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\nIt is [pose]"
 
-	user << msg
+	to_chat(user, msg)
 	user.showLaws(src)
 	return

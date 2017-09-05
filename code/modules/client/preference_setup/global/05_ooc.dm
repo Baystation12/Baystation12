@@ -1,3 +1,7 @@
+/datum/preferences
+	// OOC Metadata:
+	var/list/ignored_players = list()
+
 /datum/category_item/player_setup_item/player_global/ooc
 	name = "OOC"
 	sort_order = 5

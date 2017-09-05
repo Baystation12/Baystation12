@@ -25,21 +25,15 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	attacktext = "attacked"
 	attack_sound = 'sound/weapons/bite.ogg'
 
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 
 	faction = "mimic"
 	move_to_delay = 8
 
-	var/datum/weakref/copy_of
-	var/datum/weakref/creator // the creator
+	var/weakref/copy_of
+	var/weakref/creator // the creator
 	var/destroy_objects = 0
 	var/knockdown_people = 0
 

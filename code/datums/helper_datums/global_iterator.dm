@@ -139,7 +139,8 @@ Data storage vars:
 			arg_list = arguments
 			return 1
 		else
-//			world << "<span class='danger'>Invalid arguments supplied for [src.type], ref = \ref[src]</span>"
+//			log_error("<span class='danger'>Invalid arguments supplied for [src.type], ref = \ref[src]</span>")
+
 			return 0
 
 	proc/toggle_null_checks()
@@ -155,4 +156,5 @@ Data storage vars:
 	tag = null
 	arg_list.Cut()
 	stop()
+	return QDEL_HINT_LETMELIVE
 	//Do not call ..()

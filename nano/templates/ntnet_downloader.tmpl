@@ -16,35 +16,37 @@
 {{else data.downloadname}}
 	<h2>Download Running</h2>
 	<i>Please wait...</i>
-	<div class="itemLabel">
-		File name: 
-	</div>
-	<div class="itemContent">
-		{{:data.downloadname}}
-	</div>
-	<div class="itemLabel">
-		File description: 
-	</div>
-	<div class="itemContent">
-		{{:data.downloaddesc}}
-	</div>
-	<div class="itemLabel">
-		File size: 
-	</div>
-	<div class="itemContent">
-		{{:data.downloadcompletion}}GQ / {{:data.downloadsize}}GQ
-	</div>
-	<div class="itemLabel">
-		Transfer Rate: 
-	</div>
-	<div class="itemContent">
-		{{:data.downloadspeed}} GQ/s
-	</div>
-	<div class="itemLabel">
-		Download progress: 
-	</div>
-	<div class="itemContent">
-		{{:helper.displayBar(data.downloadcompletion, 0, data.downloadsize, 'good')}}
+	<div class="item">
+		<div class="itemLabel">
+			File name: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadname}}
+		</div>
+		<div class="itemLabel">
+			File description: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloaddesc}}
+		</div>
+		<div class="itemLabel">
+			File size: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadcompletion}}GQ / {{:data.downloadsize}}GQ
+		</div>
+		<div class="itemLabel">
+			Transfer Rate: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadspeed}} GQ/s
+		</div>
+		<div class="itemLabel">
+			Download progress: 
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(data.downloadcompletion, 0, data.downloadsize, 'good')}}
+		</div>
 	</div>
 {{else}}
 	<h2>Primary software repository</h2>

@@ -35,7 +35,6 @@
 	 * Config vars
 	 */
 	// Process name
-	var/name
 
 	// Process schedule interval
 	// This controls how often the process would run under ideal conditions.
@@ -181,7 +180,7 @@
 		onKill()
 
 		// This should del
-		del(src)
+		qdel(src)
 
 // Do not call this directly - use SHECK or SCHECK_EVERY
 /datum/controller/process/proc/sleepCheck(var/tickId = 0)
@@ -316,6 +315,9 @@
 /datum/controller/process/proc/getHighestRunTime()
 	return main.getProcessHighestRunTime(src)
 
+/datum/controller/process/proc/getTotalRunTime()
+	return main.getProcessTotalRunTime(src)
+
 /datum/controller/process/proc/getTicks()
 	return ticks
 
@@ -327,10 +329,7 @@
 
 /datum/controller/process/proc/catchException(var/exception/e, var/thrower)
 	if(istype(e)) // Real runtimes go to the real error handler
-		// There are two newlines here, because handling desc sucks
-		e.desc = "  Caught by process: [name]\n\n" + e.desc
-		world.Error(e, e_src = thrower)
-		return
+		throw e
 	var/etext = "[e]"
 	var/eid = "[e]" // Exception ID, for tracking repeated exceptions
 	var/ptext = "" // "processing..." text, for what was being processed (if known)
@@ -355,6 +354,6 @@
 			exceptions[eid] = 0
 
 /datum/controller/process/proc/catchBadType(var/datum/caught)
-	if(isnull(caught) || !istype(caught) || !isnull(caught.gcDestroyed))
+	if(isnull(caught) || !istype(caught) || QDELETED(caught))
 		return // Only bother with types we can identify and that don't belong
 	catchException("Type [caught.type] does not belong in process' queue")

@@ -12,7 +12,7 @@
 
 /obj/item/weapon/storage/internal/Destroy()
 	master_item = null
-	..()
+	. = ..()
 
 /obj/item/weapon/storage/internal/attack_hand()
 	return		//make sure this is never picked up
@@ -50,10 +50,10 @@
 		//TODO make this less terrible
 		if (!( user.restrained() ) && !( user.stat ))
 			switch(over_object.name)
-				if("r_hand")
+				if(BP_R_HAND)
 					if(user.unEquip(master_item))
 						user.put_in_r_hand(master_item)
-				if("l_hand")
+				if(BP_L_HAND)
 					if(user.unEquip(master_item))
 						user.put_in_l_hand(master_item)
 			master_item.add_fingerprint(user)
@@ -93,4 +93,8 @@
 /obj/item/weapon/storage/internal/pockets/New(var/newloc, var/slots, var/slot_size)
 	storage_slots = slots
 	max_w_class = slot_size
+	..()
+
+/obj/item/weapon/storage/internal/pouch/New(var/newloc, var/storage_space)
+	max_storage_space = storage_space
 	..()

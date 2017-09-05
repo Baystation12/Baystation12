@@ -79,11 +79,6 @@
 
 	//should have already been set if we are attacking a mob, but it doesn't hurt and will cover attacking non-mobs too
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(Atkcool)
-		return
-	Atkcool = 1
-	spawn(45)
-		Atkcool = 0
 	var/mob/living/M = A
 	if(!istype(M))
 		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
@@ -143,7 +138,7 @@
 			custom_emote(1,"[friendly] [A]!")
 			return
 		if(ckey)
-			add_logs(src, A, attacktext)
+			admin_attack_log(src, A, "Has [attacktext] its victim.", "Has been [attacktext] by its attacker.", attacktext)
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
 	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)

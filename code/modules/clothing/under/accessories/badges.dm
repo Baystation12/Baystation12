@@ -9,7 +9,7 @@
 	desc = "A simple badge, made from gold."
 	icon_state = "goldbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
-
+	slot = ACCESSORY_SLOT_INSIGNIA
 	var/stored_name
 	var/badge_string = "Private Investigator"
 
@@ -25,7 +25,7 @@
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
-		user << "You polish your [src.name] fondly, shining up the surface."
+		to_chat(user, "You polish your [src.name] fondly, shining up the surface.")
 		set_name(user.real_name)
 		return
 
@@ -54,17 +54,17 @@
 
 /obj/item/clothing/accessory/badge/holo/attack_self(mob/user as mob)
 	if(!stored_name)
-		user << "Waving around a holobadge before swiping an ID would be pretty pointless."
+		to_chat(user, "Waving around a holobadge before swiping an ID would be pretty pointless.")
 		return
 	return ..()
 
 /obj/item/clothing/accessory/badge/holo/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
-		user << "<span class='danger'>\The [src] is already cracked.</span>"
+		to_chat(user, "<span class='danger'>\The [src] is already cracked.</span>")
 		return
 	else
 		emagged = 1
-		user << "<span class='danger'>You crack the holobadge security checks.</span>"
+		to_chat(user, "<span class='danger'>You crack the holobadge security checks.</span>")
 		return 1
 
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -79,10 +79,10 @@
 			id_card = pda.id
 
 		if(access_security in id_card.access || emagged)
-			user << "You imprint your ID details onto the badge."
+			to_chat(user, "You imprint your ID details onto the badge.")
 			set_name(user.real_name)
 		else
-			user << "[src] rejects your insufficient access rights."
+			to_chat(user, "[src] rejects your insufficient access rights.")
 		return
 	..()
 
@@ -98,6 +98,12 @@
 		new /obj/item/clothing/accessory/badge/holo/cord(src)
 		..()
 		return
+
+
+/obj/item/weapon/storage/box/holobadge_solgov
+	name = "holobadge box"
+	desc = "A box claiming to contain holobadges, this one has 'Master at Arms' written on it in fine print."
+	startswith = list(/obj/item/clothing/accessory/badge/security = 6)
 
 
 /obj/item/clothing/accessory/badge/security
@@ -116,6 +122,7 @@
 /obj/item/clothing/accessory/badge/tags //child of a badge for now because I'd rather not copy-paste their code
 	name = "dog tags"
 	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
+	gender = PLURAL
 	icon_state = "tags"
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE

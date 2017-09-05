@@ -54,8 +54,8 @@
 
 		if(paralysis && paralysis > 0)
 			blinded = 1
-			stat = UNCONSCIOUS
-			if(halloss > 0)
+			set_stat(UNCONSCIOUS)
+			if(getHalLoss() > 0)
 				adjustHalLoss(-3)
 
 		if(sleeping)
@@ -64,14 +64,14 @@
 				if(mind.active && client != null)
 					sleeping = max(sleeping-1, 0)
 			blinded = 1
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else if(resting)
-			if(halloss > 0)
+			if(getHalLoss() > 0)
 				adjustHalLoss(-3)
 
 		else
-			stat = CONSCIOUS
-			if(halloss > 0)
+			set_stat(CONSCIOUS)
+			if(getHalLoss() > 0)
 				adjustHalLoss(-1)
 
 		// Eyes and blindness.
@@ -90,20 +90,7 @@
 	return 1
 
 /mob/living/carbon/alien/handle_regular_hud_updates()
-
-	if (stat == 2 || (XRAY in src.mutations))
-		sight |= SEE_TURFS
-		sight |= SEE_MOBS
-		sight |= SEE_OBJS
-		see_in_dark = 8
-		see_invisible = SEE_INVISIBLE_LEVEL_TWO
-	else if (stat != 2)
-		sight &= ~SEE_TURFS
-		sight &= ~SEE_MOBS
-		sight &= ~SEE_OBJS
-		see_in_dark = 2
-		see_invisible = SEE_INVISIBLE_LIVING
-
+	update_sight()
 	if (healths)
 		if (stat != 2)
 			switch(health)
@@ -123,9 +110,6 @@
 					healths.icon_state = "health6"
 		else
 			healths.icon_state = "health7"
-
-	if (client)
-		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
 
 	if(stat != DEAD)
 		if(blinded)
@@ -153,7 +137,7 @@
 		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
 		if (fire) fire.icon_state = "fire2"
 		if(prob(20))
-			src << "<span class='danger'>You feel a searing heat!</span>"
+			to_chat(src, "<span class='danger'>You feel a searing heat!</span>")
 	else
 		if (fire) fire.icon_state = "fire0"
 

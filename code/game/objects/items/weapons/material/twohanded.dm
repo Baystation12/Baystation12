@@ -17,7 +17,7 @@
  * Twohanded
  */
 /obj/item/weapon/material/twohanded
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	var/wielded = 0
 	var/force_wielded = 0
 	var/force_unwielded
@@ -50,7 +50,8 @@
 	force_unwielded = round(force_wielded*unwielded_force_divisor)
 	force = force_unwielded
 	throwforce = round(force*thrown_force_divisor)
-	//world << "[src] has unwielded force [force_unwielded], wielded force [force_wielded] and throwforce [throwforce] when made from default material [material.name]"
+//	log_debug("[src] has unwielded force [force_unwielded], wielded force [force_wielded] and throwforce [throwforce] when made from default material [material.name]")
+
 
 /obj/item/weapon/material/twohanded/New()
 	..()
@@ -83,7 +84,7 @@
 	unwielded_force_divisor = 0.25
 	sharp = 1
 	edge = 1
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
@@ -109,7 +110,7 @@
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	force = 10
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 
 	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)

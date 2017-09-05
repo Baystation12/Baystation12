@@ -4,7 +4,7 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
 	var/uses = 4.0
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	item_state = "paper"
 	throw_speed = 4
 	throw_range = 20
@@ -12,7 +12,7 @@
 
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
-		usr << "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>"
+		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
 		return
 
 	user.set_machine(src)
@@ -27,9 +27,8 @@
 	return
 
 /obj/item/weapon/teleportation_scroll/Topic(href, href_list)
-	..()
-	if (usr.stat || usr.restrained() || src.loc != usr)
-		return
+	if(..())
+		return 1
 	var/mob/living/carbon/human/H = usr
 	if (!( istype(H, /mob/living/carbon/human)))
 		return 1
@@ -42,15 +41,10 @@
 	return
 
 /obj/item/weapon/teleportation_scroll/proc/teleportscroll(var/mob/user)
+	var/area/thearea = input(user, "Area to jump to", "BOOYEA") as null|anything in teleportlocs
+	thearea = thearea ? teleportlocs[thearea] : thearea
 
-	var/A
-
-	A = input(user, "Area to jump to", "BOOYEA", A) in teleportlocs
-	var/area/thearea = teleportlocs[A]
-
-	if (user.stat || user.restrained())
-		return
-	if(!((user == loc || (in_range(src, user) && istype(src.loc, /turf)))))
+	if (!thearea || CanUseTopic(user) != STATUS_INTERACTIVE)
 		return
 
 	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
@@ -69,7 +63,7 @@
 				L+=T
 
 	if(!L.len)
-		user <<"The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry."
+		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
 
 	if(user && user.buckled)
@@ -87,7 +81,7 @@
 			break
 
 	if(!success)
-		user.loc = pick(L)
+		user.forceMove(pick(L))
 
 	smoke.start()
 	src.uses -= 1

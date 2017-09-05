@@ -6,7 +6,7 @@
 /obj/effect/overlay/beam//Not actually a projectile, just an effect.
 	name="beam"
 	icon='icons/effects/beam.dmi'
-	icon_state="b_beam"
+	icon_state= "b_beam"
 	var/tmp/atom/BeamSource
 	New()
 		..()
@@ -17,7 +17,8 @@
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "palm1"
 	density = 1
-	layer = 5
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	anchored = 1
 
 /obj/effect/overlay/palmtree_l
@@ -25,7 +26,8 @@
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "palm2"
 	density = 1
-	layer = 5
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
 	anchored = 1
 
 /obj/effect/overlay/coconut
@@ -37,7 +39,8 @@
 	name = "Bluespace"
 	icon = 'icons/turf/space.dmi'
 	icon_state = "bluespacify"
-	layer = 10
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	layer = SUPERMATTER_WALL_LAYER
 
 /obj/effect/overlay/wallrot
 	name = "wallrot"
@@ -45,7 +48,8 @@
 	icon = 'icons/effects/wallrot.dmi'
 	anchored = 1
 	density = 1
-	layer = 5
+	plane = ABOVE_TURF_PLANE
+	layer = ABOVE_TILE_LAYER
 	mouse_opacity = 0
 
 /obj/effect/overlay/wallrot/New()

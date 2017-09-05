@@ -34,8 +34,6 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 
 datum/controller/game_controller/proc/setup()
-	world.tick_lag = config.Ticklag
-
 	spawn(20)
 		createRandomZlevel()
 
@@ -45,7 +43,7 @@ datum/controller/game_controller/proc/setup()
 
 	transfer_controller = new
 
-	admin_notice("<span class='danger'>Initializations complete.</span>", R_DEBUG)
+	report_progress("Initializations complete")
 	initialization_stage |= INITIALIZATION_COMPLETE
 
 #ifdef UNIT_TEST
@@ -55,36 +53,26 @@ datum/controller/game_controller/proc/setup()
 #endif
 
 datum/controller/game_controller/proc/setup_objects()
+	set background=1
 #ifndef UNIT_TEST
 	var/initialized_objects = 0
 #endif
 
 	// Do these first since character setup will rely on them
 
-	// Set up antagonists.
-	populate_antag_type_list()
+	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
-	//Set up spawn points.
-	populate_spawn_points()
-
-	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
-	for(var/atom/movable/object in world)
-		if(!deleted(object))
-			object.initialize()
-			CHECK_SLEEP_MASTER
-
-	admin_notice("<span class='danger'>Initializing areas</span>", R_DEBUG)
-	for(var/area/area in all_areas)
-		area.initialize()
+	if(GLOB.using_map.use_overmap)
+		report_progress("Initializing overmap events")
+		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
 		CHECK_SLEEP_MASTER
 
-	admin_notice("<span class='danger'>Initializing pipe networks</span>", R_DEBUG)
-	for(var/obj/machinery/atmospherics/machine in machines)
-		machine.build_network()
+	report_progress("Initializing atmos machinery")
+	for(var/obj/machinery/atmospherics/A in GLOB.machines)
+		A.atmos_init()
 		CHECK_SLEEP_MASTER
 
-	admin_notice("<span class='danger'>Initializing atmos machinery.</span>", R_DEBUG)
-	for(var/obj/machinery/atmospherics/unary/U in machines)
+	for(var/obj/machinery/atmospherics/unary/U in GLOB.machines)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
 			T.broadcast_status()
@@ -93,4 +81,16 @@ datum/controller/game_controller/proc/setup_objects()
 			T.broadcast_status()
 		CHECK_SLEEP_MASTER
 
+	report_progress("Initializing pipe networks")
+	for(var/obj/machinery/atmospherics/machine in GLOB.machines)
+		machine.build_network()
+		CHECK_SLEEP_MASTER
+
+	report_progress("Initializing lathe recipes")
+	populate_lathe_recipes()
+
 #undef CHECK_SLEEP_MASTER
+
+/proc/report_progress(var/progress_message)
+	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
+	to_world_log(progress_message)

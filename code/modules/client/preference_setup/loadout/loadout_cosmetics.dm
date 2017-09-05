@@ -1,16 +1,17 @@
-/datum/gear/lipstick
-	display_name = "lipstick, black"
-	path = /obj/item/weapon/lipstick/black
+/datum/gear/cosmetic
+	display_name = "purple comb"
+	path = /obj/item/weapon/haircomb
 	sort_category = "Cosmetics"
 
-/datum/gear/lipstick/jade
-	display_name = "lipstick, jade"
-	path = /obj/item/weapon/lipstick/jade
+/datum/gear/cosmetic/lipstick
+	display_name = "lipstick selection"
+	path = /obj/item/weapon/lipstick/black
 
-/datum/gear/lipstick/purple
-	display_name = "lipstick, purple"
-	path = /obj/item/weapon/lipstick/purple
+/datum/gear/cosmetic/lipstick/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/weapon/lipstick)
 
-/datum/gear/lipstick/red
-	display_name = "lipstick, red"
-	path = /obj/item/weapon/lipstick
+/datum/gear/cosmetic/mirror
+	display_name = "handheld mirror"
+	path = /obj/item/weapon/mirror
+	path = /obj/item/weapon/mirror

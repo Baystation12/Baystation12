@@ -12,11 +12,15 @@
 				"trade_found_unwanted" = "Nah! That's not what I'm looking for. Something rarer.",
 				"trade_not_enough"   = "Just cause they're made of cardboard doesn't mean they don't cost money...",
 				"how_much"          = "Uuuuuuuh... I'm thinking like... VALUE. Right? Or something rare that complements my interest.",
+				"what_want"         = "Uuuuum..... I guess I want",
 
 				"compliment_deny"   = "Ha! Very funny! You should write your own television show.",
 				"compliment_accept" = "Why yes, I do work out.",
 				"insult_good"       = "Well well well. Guess we learned who was the troll here.",
 				"insult_bad"        = "I've already written a nasty spacebook post in my mind about you.",
+
+				"bribe_refusal"     = "Nah. I need to get moving as soon as uh... possible.",
+				"bribe_accept"      = "You know what, I wasn't doing anything for TIME minutes anyways.",
 				)
 
 	possible_wanted_items = list(/obj/item/toy/figure       = TRADER_THIS_TYPE,
@@ -57,6 +61,9 @@
 				"compliment_accept" = "That's very nice of you!",
 				"insult_good"       = "That was uncalled for, sir. Don't make me get my manager.",
 				"insult_bad"        = "Sir, I am allowed to hang up the phone if you continue, sir.",
+
+				"bribe_refusal"     = "Sorry, sir, but I can't really do that.",
+				"bribe_accept"      = "Why not! Glad to be here for a few more minutes.",
 				)
 
 	possible_trading_items = list(/obj/item/weapon/computer_hardware/battery_module      = TRADER_SUBTYPES_ONLY,
@@ -73,7 +80,6 @@
 								/obj/item/weapon/circuitboard/broken                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil                               = TRADER_SUBTYPES_ONLY,
 								/obj/item/stack/cable_coil/cyborg                        = TRADER_BLACKLIST,
-								/obj/item/stack/cable_coil/heavyduty                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/random                        = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/cut                           = TRADER_BLACKLIST,
 								/obj/item/weapon/airalarm_electronics                    = TRADER_THIS_TYPE,
@@ -108,6 +114,9 @@
 				"compliment_accept" = "Aw, you're so nice!",
 				"insult_good"       = "Sir.",
 				"insult_bad"        = "Wow. I don't have to take this.",
+
+				"bribe_refusal"     = "ORIGIN policy clearly states we cannot stay for more than the designated time.",
+				"bribe_accept"      = "Hm.... sure! We'll have a few minutes of 'engine troubles'.",
 				)
 
 	possible_trading_items = list(/obj/item/clothing/under                = TRADER_SUBTYPES_ONLY,
@@ -184,7 +193,7 @@ Sells devices, odds and ends, and medical stuff
 	possible_origins = list("Buy 'n Save", "Drug Carnival", "C&B", "Fentles", "Dr. Goods", "Beevees")
 	possible_trading_items = list(/obj/item/device/flashlight              = TRADER_ALL,
 								/obj/item/device/kit/paint                 = TRADER_SUBTYPES_ONLY,
-								/obj/item/device/aicard                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/aicard                    = TRADER_THIS_TYPE,
 								/obj/item/device/binoculars                = TRADER_THIS_TYPE,
 								/obj/item/device/cable_painter             = TRADER_THIS_TYPE,
 								/obj/item/device/flash                     = TRADER_THIS_TYPE,
@@ -234,4 +243,41 @@ Sells devices, odds and ends, and medical stuff
 				"compliment_accept" = "Mhm! I can agree to that!",
 				"insult_good"       = "Wow, where was that coming from?",
 				"insult_bad"        = "Don't make me blacklist your connection.",
+
+				"bribe_refusal"     = "Well, as much as I'd love to say 'yes', you realize I operate on a station, correct?",
+				)
+
+/datum/trader/ship/robots
+	name = "Robot Seller"
+	name_language = TRADER_DEFAULT_NAME
+	origin = "Robot Store"
+	possible_origins = list("AI for the Straight Guy", "Mechanical Buddies", "Bot Chop Shop", "Omni Consumer Projects")
+	possible_trading_items = list(/obj/item/weapon/secbot_assembly/ed209_assembly = TRADER_THIS_TYPE,
+								/obj/item/weapon/toolbox_tiles                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/toolbox_tiles_sensor             = TRADER_THIS_TYPE,
+								/obj/item/weapon/secbot_assembly                  = TRADER_ALL,
+								/obj/item/weapon/farmbot_arm_assembly             = TRADER_THIS_TYPE,
+								/obj/item/weapon/firstaid_arm_assembly            = TRADER_THIS_TYPE,
+								/obj/item/weapon/bucket_sensor                    = TRADER_THIS_TYPE,
+								/obj/item/device/bot_kit                          = TRADER_THIS_TYPE,
+								/obj/item/device/paicard                          = TRADER_THIS_TYPE,
+								/obj/item/weapon/aicard                           = TRADER_THIS_TYPE,
+								/mob/living/bot                                   = TRADER_SUBTYPES_ONLY)
+	speech = list("hail_generic" = "Welcome to ORIGIN! Let me walk you through our fine robotic selection!",
+				"hail_silicon"   = "Welcome to ORIGIN! Le-well, you're a synth! Well, your money is good anyways, welcome welcome!",
+				"hail_deny"      = "ORIGIN no longer wants to speak to you.",
+
+				"trade_complete" = "I hope you enjoy your new robot!",
+				"trade_blacklist"= "I work with robots, sir. Not that.",
+				"trade_no_goods" = "You gotta buy the robots, sir. I don't do trades.",
+				"trade_not_enough" = "You're coming up short on cash.",
+				"how_much"       = "My fine selection of robots will cost you VALUE!",
+
+				"compliment_deny"= "Well, I almost believed that.",
+				"compliment_accept"= "Thank you! My craftsmanship is my life.",
+				"insult_good"    = "Uncalled for.... uncalled for.",
+				"insult_bad"     = "I've programmed AIs better at insulting than you!",
+
+				"bribe_refusal"  = "I've got too many customers waiting in other sectors, sorry.",
+				"bribe_accept"   = "Hm. Don't keep me waiting too long, though.",
 				)

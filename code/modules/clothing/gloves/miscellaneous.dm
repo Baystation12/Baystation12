@@ -12,10 +12,11 @@
 	siemens_coefficient = 1.0
 
 /obj/item/clothing/gloves/insulated
-	desc = "These gloves will protect the wearer from electric shock."
+	desc = "These gloves will protect the wearer from electric shocks."
 	name = "insulated gloves"
-	icon_state = "yellow"
-	item_state = "ygloves"
+	color = COLOR_YELLOW
+	icon_state = "white"
+	item_state = "lgloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 
@@ -34,16 +35,21 @@
 	name = "forensic gloves"
 	icon_state = "forensic"
 	item_state = "bgloves"
+	siemens_coefficient = 0.50
+	permeability_coefficient = 0.05
+
+	cold_protection = HANDS
+	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = HANDS
+	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/gloves/thick
 	desc = "These work gloves are thick and fire-resistant."
 	name = "work gloves"
 	icon_state = "black"
 	item_state = "bgloves"
-	siemens_coefficient = 0.40
+	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
-	force = 5
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
@@ -54,6 +60,8 @@
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
 	name = "\improper SWAT Gloves"
 	item_state = "swat_gl"
+	force = 5
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 
 /obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
@@ -63,7 +71,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	force = 5
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
@@ -84,6 +92,12 @@
 	permeability_coefficient = 0.01
 	germ_level = 0
 
+/obj/item/clothing/gloves/latex/nitrile
+	name = "nitrile gloves"
+	desc = "Sterile nitrile gloves"
+	icon_state = "nitrile"
+	item_state = "ngloves"
+
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	name = "botanist's leather gloves"
@@ -92,8 +106,8 @@
 	permeability_coefficient = 0.05
 	siemens_coefficient = 0.50 //thick work gloves
 
-/obj/item/clothing/gloves/work
-	desc = "These brown tactical gloves are made from a durable synthetic."
+/obj/item/clothing/gloves/duty
+	desc = "These brown duty gloves are made from a durable synthetic."
 	name = "work gloves"
 	icon_state = "work"
 	item_state = "wgloves"
@@ -116,7 +130,7 @@
 	icon_state = "guards"
 	item_state = "guards"
 	body_parts_covered = HANDS|ARMS
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	siemens_coefficient = 0.7
 	permeability_coefficient = 0.03
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)

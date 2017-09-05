@@ -5,9 +5,9 @@
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
+	sharp = 1 //concentrated burns
 	check_armour = "laser"
 	eyeblur = 4
-	var/frequency = 1
 	hitscan = 1
 	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 
@@ -24,6 +24,9 @@
 	damage_type = BURN
 	check_armour = "laser"
 	eyeblur = 2
+
+/obj/item/projectile/beam/smalllaser
+	damage = 25
 
 /obj/item/projectile/beam/midlaser
 	damage = 40
@@ -59,14 +62,24 @@
 	name = "pulse"
 	icon_state = "u_laser"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 50
-	armor_penetration = 30
+	damage = 15 //lower damage, but fires in bursts
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
 	tracer_type = /obj/effect/projectile/laser_pulse/tracer
 	impact_type = /obj/effect/projectile/laser_pulse/impact
 
-/obj/item/projectile/beam/pulse/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/pulse/mid
+	damage = 20
+
+/obj/item/projectile/beam/pulse/heavy
+	damage = 25
+
+/obj/item/projectile/beam/pulse/destroy
+	name = "destroyer pulse"
+	damage = 100 //badmins be badmins I don't give a fuck
+	armor_penetration = 100
+
+/obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
 		target.ex_act(2)
 	..()
@@ -154,11 +167,29 @@
 	name = "stun beam"
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	nodamage = 1
+	check_armour = "energy"
+	sharp = 0 //not a laser
 	taser_effect = 1
 	agony = 40
-	damage_type = HALLOSS
-	
+	damage_type = STUN
+
 	muzzle_type = /obj/effect/projectile/stun/muzzle
 	tracer_type = /obj/effect/projectile/stun/tracer
 	impact_type = /obj/effect/projectile/stun/impact
+
+/obj/item/projectile/beam/stun/heavy
+	name = "heavy stun beam"
+	agony = 60
+	armor_penetration = 10
+
+/obj/item/projectile/beam/stun/shock
+	name = "shock beam"
+	damage_type = ELECTROCUTE
+	damage = 10
+	agony  = 5
+	fire_sound='sound/weapons/pulse.ogg'
+
+/obj/item/projectile/beam/stun/shock/heavy
+	name = "heavy shock beam"
+	damage = 20
+	agony  = 10

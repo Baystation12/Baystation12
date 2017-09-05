@@ -27,6 +27,9 @@
 		candidate = new()
 
 	. += "<b>pAI:</b><br>"
+	if(!candidate)
+		log_debug("[user] pAI prefs have a null candidate var.")
+		return .
 	. += "Name: <a href='?src=\ref[src];option=name'>[candidate.name ? candidate.name : "None Set"]</a><br>"
 	. += "Description: <a href='?src=\ref[src];option=desc'>[candidate.description ? TextPreview(candidate.description, 40) : "None Set"]</a><br>"
 	. += "Role: <a href='?src=\ref[src];option=role'>[candidate.role ? TextPreview(candidate.role, 40) : "None Set"]</a><br>"

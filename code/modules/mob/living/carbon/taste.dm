@@ -6,7 +6,8 @@
 
 		var/text_output = temp.generate_taste_message(src)
 		if(text_output != last_taste_text || last_taste_time + 100 < world.time) //We dont want to spam the same message over and over again at the person. Give it a bit of a buffer.
-			src << "<span class='notice'>You can taste [text_output]</span>" //no taste means there are too many tastes and not enough flavor.
+			to_chat(src, "<span class='notice'>You can taste [text_output]</span>")//no taste means there are too many tastes and not enough flavor.
+
 			last_taste_time = world.time
 			last_taste_text = text_output
 	return from.trans_to_holder(target,amount,multiplier,copy) //complete transfer
@@ -19,7 +20,7 @@ calculate text size per text.
 	var/minimum_percent = 15
 	if(ishuman(taster))
 		var/mob/living/carbon/human/H = taster
-		minimum_percent = round(15/H.species.taste_sensitivity)
+		minimum_percent = round(15/ (H.isSynthetic() ? TASTE_DULL : H.species.taste_sensitivity))
 
 	var/list/out = list()
 	var/list/tastes = list() //descriptor = strength
@@ -27,7 +28,7 @@ calculate text size per text.
 		for(var/datum/reagent/R in reagent_list)
 			if(!R.taste_mult)
 				continue
-			if(R.id == "nutriment") //this is ugly but apparently only nutriment (not subtypes) has taste data TODO figure out why
+			if(R.type == /datum/reagent/nutriment) //this is ugly but apparently only nutriment (not subtypes) has taste data TODO figure out why
 				var/list/taste_data = R.get_data()
 				for(var/taste in taste_data)
 					if(taste in tastes)
@@ -36,7 +37,7 @@ calculate text size per text.
 						tastes[taste] = taste_data[taste]
 			else
 				var/taste_desc = R.taste_description
-				var/taste_amount = get_reagent_amount(R.id) * R.taste_mult
+				var/taste_amount = get_reagent_amount(R.type) * R.taste_mult
 				if(R.taste_description in tastes)
 					tastes[taste_desc] += taste_amount
 				else
@@ -55,6 +56,9 @@ calculate text size per text.
 				intensity_desc = ""
 			else if(percent > minimum_percent * 3)
 				intensity_desc = "the strong flavor of"
-			out += "[intensity_desc] [taste_desc]"
+			if(intensity_desc == "")
+				out += "[taste_desc]"
+			else
+				out += "[intensity_desc] [taste_desc]"
 
 	return english_list(out, "something indescribable")

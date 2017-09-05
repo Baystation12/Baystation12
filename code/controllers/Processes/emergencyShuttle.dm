@@ -1,9 +1,10 @@
-/datum/controller/process/emergencyShuttle/setup()
-	name = "emergency shuttle"
+/datum/controller/process/evac/setup()
+	name = "evacuation"
 	schedule_interval = 20 // every 2 seconds
 
-	if(!emergency_shuttle)
-		emergency_shuttle = new
+	if(!evacuation_controller)
+		evacuation_controller = new GLOB.using_map.evac_controller_type ()
+		evacuation_controller.set_up()
 
-/datum/controller/process/emergencyShuttle/doWork()
-	emergency_shuttle.process()
+/datum/controller/process/evac/doWork()
+	evacuation_controller.process()

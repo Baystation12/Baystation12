@@ -25,6 +25,9 @@
 
 /turf/simulated/floor/is_plating()
 	return !flooring
+	
+/turf/simulated/floor/protects_atom(var/atom/A)
+	return (A.level <= 1 && !is_plating()) || ..()
 
 /turf/simulated/floor/New(var/newloc, var/floortype)
 	..(newloc)
@@ -44,16 +47,15 @@
 /turf/simulated/floor/proc/make_plating(var/place_product, var/defer_icon_update)
 
 	overlays.Cut()
-	if(islist(decals))
-		decals.Cut()
-		decals = null
 
 	name = base_name
 	desc = base_desc
 	icon = base_icon
 	icon_state = base_icon_state
+	plane = PLATING_PLANE
 
 	if(flooring)
+		flooring.on_remove()
 		if(flooring.build_type && place_product)
 			new flooring.build_type(src)
 		flooring = null
@@ -70,3 +72,8 @@
 /turf/simulated/floor/levelupdate()
 	for(var/obj/O in src)
 		O.hide(O.hides_under_flooring() && src.flooring)
+
+	if(flooring)
+		plane = TURF_PLANE
+	else
+		plane = PLATING_PLANE

@@ -20,7 +20,7 @@ var/command_name = null
 	if (command_name)
 		return command_name
 
-	var/name = "[boss_name]"
+	var/name = "[GLOB.using_map.boss_name]"
 
 	command_name = name
 	return name
@@ -44,69 +44,79 @@ var/religion_name = null
 	return capitalize(name)
 
 /proc/system_name()
-	return "Nyx"
+	return GLOB.using_map.system_name ? GLOB.using_map.system_name : generate_system_name()
+
+/proc/generate_system_name()
+	return "[pick("Gilese","GSC", "Luyten", "GJ", "HD", "SCGECO")][prob(10) ? " Eridani" : ""] [rand(100,999)]"
+
+/proc/generate_planet_name()
+	return "[capitalize(pick(GLOB.last_names))]-[pick(GLOB.greek_letters)]"
+
+/proc/generate_planet_type()
+	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
 
 /proc/station_name()
-	if (station_name)
-		return station_name
+	if(!GLOB.using_map)
+		return server_name
+	if (GLOB.using_map.station_name)
+		return GLOB.using_map.station_name
 
 	var/random = rand(1,5)
 	var/name = ""
 
 	//Rare: Pre-Prefix
 	if (prob(10))
-		name = pick("Imperium", "Heretical", "Cuban", "Psychic", "Elegant", "Common", "Uncommon", "Rare", "Unique", "Houseruled", "Religious", "Atheist", "Traditional", "Houseruled", "Mad", "Super", "Ultra", "Secret", "Top Secret", "Deep", "Death", "Zybourne", "Central", "Main", "Government", "Uoi", "Fat", "Automated", "Experimental", "Augmented")
-		station_name = name + " "
+		name = pick(GLOB.station_prefixes)
+		GLOB.using_map.station_name = name + " "
 
 	// Prefix
 	switch(Holiday)
 		//get normal name
 		if(null,"",0)
-			name = pick("", "Stanford", "Dorf", "Alium", "Prefix", "Clowning", "Aegis", "Ishimura", "Scaredy", "Death-World", "Mime", "Honk", "Rogue", "MacRagge", "Ultrameens", "Safety", "Paranoia", "Explosive", "Neckbear", "Donk", "Muppet", "North", "West", "East", "South", "Slant-ways", "Widdershins", "Rimward", "Expensive", "Procreatory", "Imperial", "Unidentified", "Immoral", "Carp", "Ork", "Pete", "Control", "Nettle", "Aspie", "Class", "Crab", "Fist","Corrogated","Skeleton","Race", "Fatguy", "Gentleman", "Capitalist", "Communist", "Bear", "Beard", "Derp", "Space", "Spess", "Star", "Moon", "System", "Mining", "Neckbeard", "Research", "Supply", "Military", "Orbital", "Battle", "Science", "Asteroid", "Home", "Production", "Transport", "Delivery", "Extraplanetary", "Orbital", "Correctional", "Robot", "Hats", "Pizza")
+			name = pick(GLOB.station_names)
 			if(name)
-				station_name += name + " "
+				GLOB.using_map.station_name += name + " "
 
 		//For special days like christmas, easter, new-years etc ~Carn
 		if("Friday the 13th")
 			name = pick("Mike","Friday","Evil","Myers","Murder","Deathly","Stabby")
-			station_name += name + " "
+			GLOB.using_map.station_name += name + " "
 			random = 13
 		else
 			//get the first word of the Holiday and use that
 			var/i = findtext(Holiday," ",1,0)
 			name = copytext(Holiday,1,i)
-			station_name += name + " "
+			GLOB.using_map.station_name += name + " "
 
 	// Suffix
-	name = pick("Station", "Fortress", "Frontier", "Suffix", "Death-trap", "Space-hulk", "Lab", "Hazard","Spess Junk", "Fishery", "No-Moon", "Tomb", "Crypt", "Hut", "Monkey", "Bomb", "Trade Post", "Fortress", "Village", "Town", "City", "Edition", "Hive", "Complex", "Base", "Facility", "Depot", "Outpost", "Installation", "Drydock", "Observatory", "Array", "Relay", "Monitor", "Platform", "Construct", "Hangar", "Prison", "Center", "Port", "Waystation", "Factory", "Waypoint", "Stopover", "Hub", "HQ", "Office", "Object", "Fortification", "Colony", "Planet-Cracker", "Roost", "Fat Camp")
-	station_name += name + " "
+	name = pick(GLOB.station_suffixes)
+	GLOB.using_map.station_name += name + " "
 
 	// ID Number
 	switch(random)
 		if(1)
-			station_name += "[rand(1, 99)]"
+			GLOB.using_map.station_name += "[rand(1, 99)]"
 		if(2)
-			station_name += pick("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega")
+			GLOB.using_map.station_name += pick(GLOB.greek_letters)
 		if(3)
-			station_name += pick("II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX")
+			GLOB.using_map.station_name += "\Roman[rand(1,99)]"
 		if(4)
-			station_name += pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu")
+			GLOB.using_map.station_name += pick(GLOB.phonetic_alphabet)
 		if(5)
-			station_name += pick("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen")
+			GLOB.using_map.station_name += pick(GLOB.numbers_as_words)
 		if(13)
-			station_name += pick("13","XIII","Thirteen")
+			GLOB.using_map.station_name += pick("13","XIII","Thirteen")
 
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
 	else
-		world.name = station_name
+		world.name = GLOB.using_map.station_name
 
-	return station_name
+	return GLOB.using_map.station_name
 
 /proc/world_name(var/name)
-
-	station_name = name
+	GLOB.using_map.station_name = name
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
@@ -177,10 +187,10 @@ var/syndicate_code_response//Code response for traitors.
 	var/safety[] = list(1,2,3)//Tells the proc which options to remove later on.
 	var/nouns[] = list("love","hate","anger","peace","pride","sympathy","bravery","loyalty","honesty","integrity","compassion","charity","success","courage","deceit","skill","beauty","brilliance","pain","misery","beliefs","dreams","justice","truth","faith","liberty","knowledge","thought","information","culture","trust","dedication","progress","education","hospitality","leisure","trouble","friendships", "relaxation")
 	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepksy Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","wine","moonshine")
-	var/locations[] = teleportlocs.len ? teleportlocs : drinks//if null, defaults to drinks instead.
+	var/locations[] = length(stationlocs) ? stationlocs : drinks//if null, defaults to drinks instead.
 
 	var/names[] = list()
-	for(var/datum/data/record/t in data_core.general)//Picks from crew manifest.
+	for(var/datum/data/record/t in GLOB.data_core.general)//Picks from crew manifest.
 		names += t.fields["name"]
 
 	var/maxwords = words//Extra var to check for duplicates.
@@ -199,9 +209,9 @@ var/syndicate_code_response//Code response for traitors.
 						if(names.len&&prob(70))
 							code_phrase += pick(names)
 						else
-							code_phrase += pick(pick(first_names_male,first_names_female))
+							code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))
 							code_phrase += " "
-							code_phrase += pick(last_names)
+							code_phrase += pick(GLOB.last_names)
 					if(2)
 						code_phrase += pick(joblist)//Returns a job.
 				safety -= 1
@@ -217,12 +227,18 @@ var/syndicate_code_response//Code response for traitors.
 					if(1)
 						code_phrase += pick(nouns)
 					if(2)
-						code_phrase += pick(adjectives)
+						code_phrase += pick(GLOB.adjectives)
 					if(3)
-						code_phrase += pick(verbs)
+						code_phrase += pick(GLOB.verbs)
 		if(words==1)
 			code_phrase += "."
 		else
 			code_phrase += ", "
 
 	return code_phrase
+
+/proc/get_name(var/atom/A)
+	return A.name
+
+/proc/get_name_and_coordinates(var/atom/A)
+	return "[A.name] \[[A.x],[A.y],[A.z]\]"

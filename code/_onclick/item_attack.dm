@@ -39,7 +39,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/attackby(obj/item/I, mob/user)
 	if(!ismob(user))
 		return 0
-	if(can_operate(src) && I.do_surgery(src,user)) //Surgery
+	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
 		return 1
 	return I.attack(src, user, user.zone_sel.selecting)
 
@@ -47,7 +47,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(user == src && src.a_intent == I_DISARM && src.zone_sel.selecting == "mouth")
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
-			user << "<span class='warning'>\The [blocked] is in the way!</span>"
+			to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 			return 1
 		else if(devour(I))
 			return 1
@@ -66,13 +66,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 
 	/////////////////////////
-	user.lastattacked = M
-	M.lastattacker = user
 
 	if(!no_attack_log)
-		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-		M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-		msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
+		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
 	/////////////////////////
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

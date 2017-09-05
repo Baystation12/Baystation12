@@ -16,14 +16,14 @@ var/global/ntnet_card_uid = 1
 
 /obj/item/weapon/computer_hardware/network_card/diagnostics(var/mob/user)
 	..()
-	user << "NIX Unique ID: [identification_id]"
-	user << "NIX User Tag: [identification_string]"
-	user << "Supported protocols:"
-	user << "511.m SFS (Subspace) - Standard Frequency Spread"
+	to_chat(user, "NIX Unique ID: [identification_id]")
+	to_chat(user, "NIX User Tag: [identification_string]")
+	to_chat(user, "Supported protocols:")
+	to_chat(user, "511.m SFS (Subspace) - Standard Frequency Spread")
 	if(long_range)
-		user << "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth"
+		to_chat(user, "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth")
 	if(ethernet)
-		user << "OpenEth (Physical Connection) - Physical network connection port"
+		to_chat(user, "OpenEth (Physical Connection) - Physical network connection port")
 
 /obj/item/weapon/computer_hardware/network_card/New(var/l)
 	..(l)
@@ -32,7 +32,7 @@ var/global/ntnet_card_uid = 1
 
 /obj/item/weapon/computer_hardware/network_card/advanced
 	name = "advanced NTNet network card"
-	desc = "An advanced network card for usage with standard NTNet frequencies. It's transmitter is strong enough to connect even off-station."
+	desc = "An advanced network card for usage with standard NTNet frequencies. It's transmitter is strong enough to connect even when far away."
 	long_range = 1
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
 	power_usage = 100 // Better range but higher power usage.
@@ -52,11 +52,14 @@ var/global/ntnet_card_uid = 1
 	if(holder2 && (holder2.network_card == src))
 		holder2.network_card = null
 	holder2 = null
-	..()
+	return ..()
 
 // Returns a string identifier of this network card
 /obj/item/weapon/computer_hardware/network_card/proc/get_network_tag()
 	return "[identification_string] (NID [identification_id])"
+
+/obj/item/weapon/computer_hardware/network_card/proc/is_banned()
+	return ntnet_global.check_banned(identification_id)
 
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
 /obj/item/weapon/computer_hardware/network_card/proc/get_signal(var/specific_action = 0)
@@ -66,26 +69,28 @@ var/global/ntnet_card_uid = 1
 	if(!enabled)
 		return 0
 
-	if(!check_functionality())
+	if(!check_functionality() || !ntnet_global || is_banned())
 		return 0
 
 	if(ethernet) // Computer is connected via wired connection.
 		return 3
 
-	if(!ntnet_global || !ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
+	if(!ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
 		return 0
 
 	if(holder2)
 		var/turf/T = get_turf(holder2)
-		if((T && istype(T)) && T.z in using_map.station_levels)
+		if(!istype(T)) //no reception in nullspace
+			return 0
+		if(T.z in GLOB.using_map.station_levels)
 			// Computer is on station. Low/High signal depending on what type of network card you have
 			if(long_range)
 				return 2
 			else
 				return 1
-
-	if(long_range) // Computer is not on station, but it has upgraded network card. Low signal.
-		return 1
+		if(T.z in GLOB.using_map.contact_levels) //not on station, but close enough for radio signal to travel
+			if(long_range) // Computer is not on station, but it has upgraded network card. Low signal.
+				return 1
 
 	return 0 // Computer is not on station and does not have upgraded network card. No signal.
 

@@ -105,7 +105,7 @@
   </div>
   {{:helper.link('Save To Disk', 'disk', { 'disk' : 1 }, (data.buffer || data.species_buffer) ? null : 'disabled')}}
   {{if data.species_buffer}}
-    {{:helper.link('Splice Species', 'pencil', { 'splice' : 5 }, (data.species_buffer && !data.info) ? null : 'disabled')}}
+    {{:helper.link('Splice Species', 'pencil', { 'splice' : -1 }, (data.species_buffer && !data.info) ? null : 'disabled')}}
   {{else data.buffer}}
 	{{:helper.link('Splice #1', 'pencil', { 'splice' : 1 }, data.buffer.stage > 1 ? 'disabled' : null)}}
 	{{:helper.link('Splice #2', 'pencil', { 'splice' : 2 }, data.buffer.stage > 2 ? 'disabled' : null)}}

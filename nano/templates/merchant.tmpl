@@ -6,6 +6,7 @@
 	</table>
 	</center>
 {{else}}
+	<center><h3>Balance: {{:data.bank}} Thalers</h3><br>
 	{{if data.mode}}
 		<div>
 			<div style="float: left">{{:helper.link('<=', null, {'PRG_scroll' : 'left'})}}</div>
@@ -28,13 +29,16 @@
 				{{for data.trades}}
 					<tr><td>{{:value}}</td>
 					<td>{{:helper.link('Trade', null, {'PRG_offer_item' : index})}}</td>
+					<td>{{:helper.link('Offer Money', null, {'PRG_offer_money_for_item' : index})}}</td>
 					<td>{{:helper.link('Ask Cost', null, {'PRG_how_much_do_you_want' : index})}}</td>
 				{{/for}}
 				</table>
 			{{else}}
-				{{:helper.link('List Goods', null, {'PRG_show_trades' : 1})}}
-				<br><br>
+				{{:helper.link('List Goods', null, {'PRG_show_trades' : 1})}}<br><br>
+				{{:helper.link('Sell Items', null, {'PRG_sell_items' : 1})}}<br><br>
 				{{:helper.link('Compliment', null, {'PRG_compliment' : 1})}}<br><br>
+				<span class=itemLabel>Pay them to stay longer: </span><span class=itemContent>{{:helper.link('100', null, {'PRG_bribe' : 100})}} {{:helper.link('500', null, {'PRG_bribe' : 500})}} {{:helper.link('1000', null, {'PRG_bribe' : 1000})}}</span><br><br>
+				{{:helper.link('Ask What They Want', null, {'PRG_what_do_you_want': 1})}}<br><br>
 				{{:helper.link('Insult', null, {'PRG_insult' : 1})}}<br><br>
 			{{/if}}
 		{{else}}
@@ -53,6 +57,8 @@
 			<font color="red">DISCONNECTED</font>
 		{{/if}}
 		</td>
+		<tr><td>{{:helper.link('Deposit Money', null, {'PRG_transfer_to_bank' : 1})}}</td>
+		<tr><td>{{:helper.link('Retrieve Money', null, {'PRG_get_money' : 1})}}</td>
 		</table>
 		</center>
 	{{/if}}

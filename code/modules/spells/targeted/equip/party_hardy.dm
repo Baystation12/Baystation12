@@ -2,12 +2,12 @@
 	name = "Summon Party"
 	desc = "This spell was invented for the sole purpose of getting crunked at 11am on a Tuesday. Does not require wizard garb."
 	feedback = "PY"
-	school = "transmutation"
+	school = "conjuration"
 	charge_type = Sp_RECHARGE
 	charge_max = 900
 	cooldown_min = 600
 	spell_flags = INCLUDEUSER
-	invocation = "LSET SU G'ET RUCKEND!"
+	invocation = "Llet'Su G'iit Rrkned!" //Let's get wrecked.
 	invocation_type = SpI_SHOUT
 	range = 6
 	max_targets = 0

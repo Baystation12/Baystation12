@@ -17,6 +17,8 @@
 <A href='?src=\ref[src];make=1;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=5;dir=1'>Manifold</A><BR>
 <A href='?src=\ref[src];make=8;dir=1'>Manual Valve</A><BR>
+<A href='?src=\ref[src];make=9;dir=1'>Digital Valve</A><BR>
+<A href='?src=\ref[src];make=44;dir=1'>Automatic Shutoff Valve</A><BR>
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=18;dir=1'>Manual T-Valve</A><BR>
@@ -39,14 +41,22 @@
 <A href='?src=\ref[src];make=36;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=38;dir=1'>Upward Pipe</A><BR>
 <A href='?src=\ref[src];make=40;dir=1'>Downward Pipe</A><BR>
+<b>Fuel pipes:</b><BR>
+<A href='?src=\ref[src];make=45;dir=1'>Pipe</A><BR>
+<A href='?src=\ref[src];make=46;dir=5'>Bent Pipe</A><BR>
+<A href='?src=\ref[src];make=47;dir=1'>Manifold</A><BR>
+<A href='?src=\ref[src];make=51;dir=1'>Pipe Cap</A><BR>
+<A href='?src=\ref[src];make=48;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=49;dir=1'>Upward Pipe</A><BR>
+<A href='?src=\ref[src];make=50;dir=1'>Downward Pipe</A><BR>
 <b>Devices:</b><BR>
 <A href='?src=\ref[src];make=28;dir=1'>Universal pipe adapter</A><BR>
 <A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>
 <A href='?src=\ref[src];make=7;dir=1'>Unary Vent</A><BR>
-<A href='?src=\ref[src];make=9;dir=1'>Gas Pump</A><BR>
+<A href='?src=\ref[src];make=10;dir=1'>Gas Pump</A><BR>
 <A href='?src=\ref[src];make=15;dir=1'>Pressure Regulator</A><BR>
 <A href='?src=\ref[src];make=16;dir=1'>High Power Gas Pump</A><BR>
-<A href='?src=\ref[src];make=10;dir=1'>Scrubber</A><BR>
+<A href='?src=\ref[src];make=11;dir=1'>Scrubber</A><BR>
 <A href='?src=\ref[src];makemeter=1'>Meter</A><BR>
 <A href='?src=\ref[src];make=13;dir=1'>Gas Filter</A><BR>
 <A href='?src=\ref[src];make=23;dir=1'>Gas Filter - Mirrored</A><BR>
@@ -60,9 +70,6 @@
 <A href='?src=\ref[src];make=3;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=6;dir=1'>Junction</A><BR>
 <A href='?src=\ref[src];make=17;dir=1'>Heat Exchanger</A><BR>
-<b>Insulated pipes:</b><BR>
-<A href='?src=\ref[src];make=11;dir=1'>Pipe</A><BR>
-<A href='?src=\ref[src];make=12;dir=5'>Bent Pipe</A><BR>
 
 "}
 ///// Z-Level stuff
@@ -101,14 +108,14 @@
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	src.add_fingerprint(usr)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
-		usr << "<span class='notice'>You put [W] back to [src].</span>"
+		to_chat(usr, "<span class='notice'>You put \the [W] back into \the [src].</span>")
 		user.drop_item()
 		qdel(W)
 		return
 	else if (istype(W, /obj/item/weapon/wrench))
 		if (unwrenched==0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>"
+			to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")
 			if (do_after(user, 40, src))
 				user.visible_message( \
 					"<span class='notice'>\The [user] unfastens \the [src].</span>", \
@@ -121,7 +128,7 @@
 					usr << browse(null, "window=pipedispenser")
 		else /*if (unwrenched==1)*/
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			user << "<span class='notice'>You begin to fasten \the [src] to the floor...</span>"
+			to_chat(user, "<span class='notice'>You begin to fasten \the [src] to the floor...</span>")
 			if (do_after(user, 20, src))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fastens \the [src].</span>", \
@@ -184,6 +191,8 @@ Nah
 <A href='?src=\ref[src];dmake=10'>Sorting (Untagged)</A><BR>
 <A href='?src=\ref[src];dmake=11'>Tagger</A><BR>
 <A href='?src=\ref[src];dmake=12'>Tagger (Partial)</A><BR>
+<A href='?src=\ref[src];dmake=13'>Diversion</A><BR>
+<A href='?src=\ref[src];dmake=14'>Diversion Switch</A><BR>
 "}
 ///// Z-Level stuff
 
@@ -204,48 +213,53 @@ Nah
 			return
 		if(!wait)
 			var/p_type = text2num(href_list["dmake"])
-			var/obj/structure/disposalconstruct/C = new (src.loc)
-			switch(p_type)
-				if(0)
-					C.ptype = 0
-				if(1)
-					C.ptype = 1
-				if(2)
-					C.ptype = 2
-				if(3)
-					C.ptype = 4
-				if(4)
-					C.ptype = 5
-				if(5)
-					C.ptype = 6
-					C.density = 1
-				if(6)
-					C.ptype = 7
-					C.density = 1
-				if(7)
-					C.ptype = 8
-					C.density = 1
-				if(8)
-					C.ptype = 9
-					C.subtype = 0
-				if(9)
-					C.ptype = 9
-					C.subtype = 1
-				if(10)
-					C.ptype = 9
-					C.subtype = 2
-				if(11)
-					C.ptype = 13
-				if(12)
-					C.ptype = 14
+			if(p_type == 15)
+				new /obj/machinery/disposal_switch (get_turf(src))
+			else
+				var/obj/structure/disposalconstruct/C = new (src.loc)
+				switch(p_type)
+					if(0)
+						C.ptype = 0
+					if(1)
+						C.ptype = 1
+					if(2)
+						C.ptype = 2
+					if(3)
+						C.ptype = 4
+					if(4)
+						C.ptype = 5
+					if(5)
+						C.ptype = 6
+						C.set_density(1)
+					if(6)
+						C.ptype = 7
+						C.set_density(1)
+					if(7)
+						C.ptype = 8
+						C.set_density(1)
+					if(8)
+						C.ptype = 9
+						C.subtype = 0
+					if(9)
+						C.ptype = 9
+						C.subtype = 1
+					if(10)
+						C.ptype = 9
+						C.subtype = 2
+					if(11)
+						C.ptype = 13
+					if(12)
+						C.ptype = 14
+					if(13)
+						C.ptype = 15
 ///// Z-Level stuff
-				if(21)
-					C.ptype = 11
-				if(22)
-					C.ptype = 12
+					if(21)
+						C.ptype = 11
+					if(22)
+						C.ptype = 12
 ///// Z-Level stuff
-			C.add_fingerprint(usr)
-			C.update()
+				C.add_fingerprint(usr)
+				C.update()
 			wait = 1
 			spawn(15)
 				wait = 0

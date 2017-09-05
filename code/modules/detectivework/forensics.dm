@@ -1,6 +1,6 @@
 /obj/item/weapon/forensics
 	icon = 'icons/obj/forensics.dmi'
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 //This is the output of the stringpercent(print) proc, and means about 80% of
 //the print must be there for it to be complete.  (Prints are 32 digits)
@@ -9,8 +9,111 @@ proc/is_complete_print(var/print)
 	return stringpercent(print) <= FINGERPRINT_COMPLETE
 
 atom/var/list/suit_fibers
+atom/var/var/list/fingerprints
+atom/var/var/list/fingerprintshidden
+atom/var/var/fingerprintslast = null
+
+/atom/proc/add_hiddenprint(mob/M)
+	if(!M || !M.key)
+		return
+	if(fingerprintslast == M.key)
+		return
+	fingerprintslast = M.key
+	if(!fingerprintshidden)
+		fingerprintshidden = list()
+	if (ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if (H.gloves)
+			src.fingerprintshidden += "\[[time_stamp()]\] (Wearing gloves). Real name: [H.real_name], Key: [H.key]"
+			return 0
+
+	src.fingerprintshidden += "\[[time_stamp()]\] Real name: [M.real_name], Key: [M.key]"
+	return 1
+
+/atom/proc/add_fingerprint(mob/M, ignoregloves)
+	if(isnull(M)) return
+	if(isAI(M)) return
+	if(!M || !M.key)
+		return
+
+	add_hiddenprint(M)
+	add_fibers(M)
+
+	if(!fingerprints)
+		fingerprints = list()
+
+	//Hash this shit.
+	var/full_print = M.get_full_print(ignoregloves)
+	if(!full_print)
+		return
+
+	var/obj/item/organ/external/E = M.get_active_hand()
+	if(src != E && istype(E) && E.get_fingerprint())
+		full_print = E.get_fingerprint()
+		ignoregloves = 1
+
+	if(!ignoregloves && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if (H.gloves && H.gloves.body_parts_covered & HANDS && H.gloves != src)
+			H.gloves.add_fingerprint(M)
+			if(!istype(H.gloves, /obj/item/clothing/gloves/latex))
+				return 0
+			else if(prob(75))
+				return 0
+
+	// Add the fingerprints
+	add_partial_print(full_print)
+	return 1
+
+/atom/proc/add_partial_print(full_print)
+	if(!fingerprints[full_print])
+		fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+	else
+		switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+			if(28 to 32)
+				if(prob(1))
+					fingerprints[full_print] = full_print 		// You rolled a one buddy.
+				else
+					fingerprints[full_print] = stars(full_print, rand(0,40)) // 24 to 32
+
+			if(24 to 27)
+				if(prob(3))
+					fingerprints[full_print] = full_print     	//Sucks to be you.
+				else
+					fingerprints[full_print] = stars(full_print, rand(15, 55)) // 20 to 29
+
+			if(20 to 23)
+				if(prob(5))
+					fingerprints[full_print] = full_print		//Had a good run didn't ya.
+				else
+					fingerprints[full_print] = stars(full_print, rand(30, 70)) // 15 to 25
+
+			if(16 to 19)
+				if(prob(5))
+					fingerprints[full_print] = full_print		//Welp.
+				else
+					fingerprints[full_print]  = stars(full_print, rand(40, 100))  // 0 to 21
+
+			if(0 to 15)
+				if(prob(5))
+					fingerprints[full_print] = stars(full_print, rand(0,50)) 	// small chance you can smudge.
+				else
+					fingerprints[full_print] = full_print
+
+/atom/proc/transfer_fingerprints_to(var/atom/A)
+	if(fingerprints)
+		if(!A.fingerprints)
+			A.fingerprints = list()
+		A.fingerprints |= fingerprints.Copy()            //detective
+	if(fingerprintshidden)
+		if(!A.fingerprintshidden)
+			A.fingerprintshidden = list()
+		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
+		A.fingerprintslast = fingerprintslast
 
 atom/proc/add_fibers(mob/living/carbon/human/M)
+	if(!istype(M))
+		return
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = M.gloves
 		if(G.transfer_blood) //bloodied gloves transfer blood to touched objects
@@ -38,48 +141,36 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(M.gloves && (M.gloves.body_parts_covered & ~suit_coverage))
 		fibertext = "Material from a pair of [M.gloves.name]."
 		if(prob(20*item_multiplier) && !(fibertext in suit_fibers))
-			suit_fibers += "Material from a pair of [M.gloves.name]."
+			suit_fibers += fibertext
 
-/datum/data/record/forensic
-	name = "forensic data"
-	var/uid
+/mob/proc/get_full_print()
+	return FALSE
 
-/datum/data/record/forensic/New(var/atom/A)
-	uid = "\ref [A]"
-	fields["name"] = sanitize(A.name)
-	fields["area"] = sanitize("[get_area(A)]")
-	fields["fprints"] = A.fingerprints ? A.fingerprints.Copy() : list()
-	fields["fibers"] = A.suit_fibers ? A.suit_fibers.Copy() : list()
-	fields["blood"] = A.blood_DNA ? A.blood_DNA.Copy() : list()
-	fields["time"] = world.time
+/mob/living/carbon/get_full_print()
+	if (!dna || (mFingerprints in mutations))
+		return FALSE
+	return md5(dna.uni_identity)
 
-/datum/data/record/forensic/proc/merge(var/datum/data/record/other)
-	var/list/prints = fields["fprints"]
-	var/list/o_prints = other.fields["fprints"]
-	for(var/print in o_prints)
-		if(!prints[print])
-			prints[print] = o_prints[print]
-		else
-			prints[print] = stringmerge(prints[print], o_prints[print])
-	fields["fprints"] = prints
+/mob/living/carbon/human/get_full_print(ignoregloves)
+	if(!..())
+		return FALSE
 
-	var/list/fibers = fields["fibers"]
-	var/list/o_fibers = other.fields["fibers"]
-	fibers |= o_fibers
-	fields["fibers"] = fibers
+	var/obj/item/organ/external/E = organs_by_name[hand ? BP_L_HAND : BP_R_HAND]
+	if(E)
+		return E.get_fingerprint()
 
-	var/list/blood = other.fields["blood"]
-	var/list/o_blood = other.fields["blood"]
-	blood |= o_blood
-	fields["blood"] = blood
+/obj/item/organ/external/proc/get_fingerprint()
+	return
 
-	fields["area"] = other.fields["area"]
-	fields["time"] = other.fields["time"]
+/obj/item/organ/external/arm/get_fingerprint()
+	for(var/obj/item/organ/external/hand/H in children)
+		return H.get_fingerprint()
 
-/datum/data/record/forensic/proc/update_prints(var/list/o_prints)
-	var/list/prints = fields["fprints"]
-	for(var/print in o_prints)
-		if(prints[print])
-			prints[print] = stringmerge(prints[print], o_prints[print])
-			.=1
-	fields["fprints"] = prints
+/obj/item/organ/external/hand/get_fingerprint()
+	if(dna && !is_stump())
+		return md5(dna.uni_identity)
+
+/obj/item/organ/external/afterattack(atom/A, mob/user, proximity)
+	..()
+	if(proximity && get_fingerprint())
+		A.add_partial_print(get_fingerprint())

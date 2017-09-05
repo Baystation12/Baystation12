@@ -7,29 +7,41 @@
 /datum/uplink_item/item/badassery/balloon
 	name = "For showing that You Are The BOSS (Useless Balloon)"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	path = /obj/item/toy/syndicateballoon
+	path = /obj/item/toy/balloon
 
 /datum/uplink_item/item/badassery/balloon/NT
 	name = "For showing that you love NT SOO much (Useless Balloon)"
-	path = /obj/item/toy/nanotrasenballoon
+	path = /obj/item/toy/balloon/nanotrasen
+
+/datum/uplink_item/item/badassery/balloon/random
+	name = "For showing 'Whatevah~' (Useless Balloon)"
+	desc = "Randomly selects a ballon for you!"
+	path = /obj/item/toy/balloon
+
+/datum/uplink_item/item/badassery/balloon/random/get_goods(var/obj/item/device/uplink/U, var/loc)
+	var/balloon_type = pick(typesof(path))
+	var/obj/item/I = new balloon_type(loc)
+	return I
 
 /**************
 * Random Item *
 **************/
 /datum/uplink_item/item/badassery/random_one
 	name = "Random Item"
-	desc = "Buys you one random item."
+	desc = "Buys you a random item for at least 1TC. Careful: No upper price cap!"
+	item_cost = 1
 
 /datum/uplink_item/item/badassery/random_one/buy(var/obj/item/device/uplink/U, var/mob/user)
-	var/datum/uplink_item/item = default_uplink_selection.get_random_item(U.uses)
-	return item.buy(U, user)
+	var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/default)
+	var/datum/uplink_item/item = uplink_selection.get_random_item(U.uses, U)
+	return item && item.buy(U, user)
 
 /datum/uplink_item/item/badassery/random_one/can_buy(obj/item/device/uplink/U)
-	return default_uplink_selection.get_random_item(U.uses, U) != null
+	return U.uses
 
 /datum/uplink_item/item/badassery/random_many
 	name = "Random Items"
-	desc = "Buys you as many random items you can afford. Convenient packaging NOT included."
+	desc = "Buys you as many random items as you can afford. Convenient packaging NOT included!"
 
 /datum/uplink_item/item/badassery/random_many/cost(var/telecrystals, obj/item/device/uplink/U)
 	return max(1, telecrystals)
@@ -52,7 +64,7 @@
 * Surplus Crate *
 ****************/
 /datum/uplink_item/item/badassery/surplus
-	name = "Surplus Crate"
+	name = "\improper Surplus Crate"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT * 4
 	var/item_worth = DEFAULT_TELECRYSTAL_AMOUNT * 6
 	var/icon
@@ -64,7 +76,7 @@
 
 /datum/uplink_item/item/badassery/surplus/get_goods(var/obj/item/device/uplink/U, var/loc)
 	var/obj/structure/largecrate/C = new(loc)
-	var/random_items = get_random_uplink_items(null, item_worth, C)
+	var/random_items = get_random_uplink_items(U, item_worth, C)
 	for(var/datum/uplink_item/I in random_items)
 		I.purchase_log(U)
 		I.get_goods(U, C)

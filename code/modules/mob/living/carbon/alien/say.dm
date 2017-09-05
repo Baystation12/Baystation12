@@ -4,7 +4,7 @@
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			src << "\red You cannot speak in IC (Muted)."
+			to_chat(src, "<span class='warning'>You cannot speak in IC (Muted).</span>")
 			return
 
 	message = sanitize(message)
@@ -16,9 +16,6 @@
 		return emote(copytext(message,2))
 
 	var/datum/language/speaking = parse_language(message)
-
-	if(speaking)
-		message = copytext(message, 2+length(speaking.key))
 
 	message = trim(message)
 

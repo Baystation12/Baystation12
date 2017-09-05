@@ -5,7 +5,7 @@
 
 // Security levels.
 #define SEC_LEVEL_GREEN 0
-#define SEC_LEVEL_BLUE  1
+#define SEC_LEVEL_ORANGE  1
 #define SEC_LEVEL_RED   2
 #define SEC_LEVEL_DELTA 3
 
@@ -25,6 +25,7 @@
 #define ANTAG_RANDSPAWN         0x100 // Potentially randomly spawns due to events.
 #define ANTAG_VOTABLE           0x200 // Can be voted as an additional antagonist before roundstart.
 #define ANTAG_SET_APPEARANCE    0x400 // Causes antagonists to use an appearance modifier on spawn.
+#define ANTAG_RANDOM_EXCEPTED   0x800 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
 // Mode/antag template macros.
 #define MODE_BORER "borer"
@@ -41,15 +42,16 @@
 #define MODE_WIZARD "wizard"
 #define MODE_CHANGELING "changeling"
 #define MODE_CULTIST "cultist"
-#define MODE_HIGHLANDER "highlander"
 #define MODE_MONKEY "monkey"
 #define MODE_RENEGADE "renegade"
 #define MODE_REVOLUTIONARY "revolutionary"
 #define MODE_LOYALIST "loyalist"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
+#define MODE_DEITY "deity"
+#define MODE_GODCULTIST "god cultist"
 
-#define DEFAULT_TELECRYSTAL_AMOUNT 25
+#define DEFAULT_TELECRYSTAL_AMOUNT 130
 
 /////////////////
 ////WIZARD //////
@@ -90,5 +92,6 @@
 #define Sp_HOLDVAR	"holdervar"
 
 #define INITIALIZATION_NOW 1
-#define INITIALIZATION_COMPLETE 2
+#define INITIALIZATION_HAS_BEGUN 2
+#define INITIALIZATION_COMPLETE 4
 #define INITIALIZATION_NOW_AND_COMPLETE (INITIALIZATION_NOW|INITIALIZATION_COMPLETE)

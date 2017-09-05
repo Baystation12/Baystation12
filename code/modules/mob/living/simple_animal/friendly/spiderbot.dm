@@ -1,8 +1,7 @@
 /mob/living/simple_animal/spiderbot
 
-	min_oxy = 0
-	max_tox = 0
-	max_co2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 	maxbodytemp = 500
 	mob_size = MOB_SMALL
@@ -17,7 +16,7 @@
 
 	name = "spider-bot"
 	desc = "A skittering robotic friend!"
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robots_misc.dmi'
 	icon_state = "spiderbot-chassis"
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
@@ -43,8 +42,8 @@
 
 /mob/living/simple_animal/spiderbot/New()
 	..()
-	add_language("Galactic Common")
-	default_language = all_languages["Galactic Common"]
+	add_language(LANGUAGE_GALCOM)
+	default_language = all_languages[LANGUAGE_GALCOM]
 	verbs |= /mob/living/proc/ventcrawl
 	verbs |= /mob/living/proc/hide
 
@@ -53,32 +52,31 @@
 	if(istype(O, /obj/item/device/mmi))
 		var/obj/item/device/mmi/B = O
 		if(src.mmi)
-			user << "<span class='warning'>There's already a brain in [src]!</span>"
+			to_chat(user, "<span class='warning'>There's already a brain in [src]!</span>")
 			return
 		if(!B.brainmob)
-			user << "<span class='warning'>Sticking an empty MMI into the frame would sort of defeat the purpose.</span>"
+			to_chat(user, "<span class='warning'>Sticking an empty MMI into the frame would sort of defeat the purpose.</span>")
 			return
 		if(!B.brainmob.key)
 			var/ghost_can_reenter = 0
 			if(B.brainmob.mind)
-				for(var/mob/observer/ghost/G in player_list)
+				for(var/mob/observer/ghost/G in GLOB.player_list)
 					if(G.can_reenter_corpse && G.mind == B.brainmob.mind)
 						ghost_can_reenter = 1
 						break
 			if(!ghost_can_reenter)
-				user << "<span class='notice'>[O] is completely unresponsive; there's no point.</span>"
+				to_chat(user, "<span class='notice'>[O] is completely unresponsive; there's no point.</span>")
 				return
 
 		if(B.brainmob.stat == DEAD)
-			user << "<span class='warning'>[O] is dead. Sticking it into the frame would sort of defeat the purpose.</span>"
+			to_chat(user, "<span class='warning'>[O] is dead. Sticking it into the frame would sort of defeat the purpose.</span>")
 			return
 
 		if(jobban_isbanned(B.brainmob, "Cyborg"))
-			user << "<span class='warning'>\The [O] does not seem to fit.</span>"
+			to_chat(user, "<span class='warning'>\The [O] does not seem to fit.</span>")
 			return
 
-		user << "<span class='notice'>You install \the [O] in \the [src]!</span>"
-
+		to_chat(user, "<span class='notice'>You install \the [O] in \the [src]!</span>")
 		if(istype(O, /obj/item/device/mmi/digital))
 			positronic = 1
 			add_language("Robot Talk")
@@ -101,13 +99,13 @@
 				add_fingerprint(user)
 				src.visible_message("<span class='notice'>\The [user] has spot-welded some of the damage to \the [src]!</span>")
 			else
-				user << "<span class='warning'>\The [src] is undamaged!</span>"
+				to_chat(user, "<span class='warning'>\The [src] is undamaged!</span>")
 		else
-			user << "<span class='danger'>You need more welding fuel for this task!</span>"
+			to_chat(user, "<span class='danger'>You need more welding fuel for this task!</span>")
 			return
 	else if(istype(O, /obj/item/weapon/card/id)||istype(O, /obj/item/device/pda))
 		if (!mmi)
-			user << "<span class='danger'>There's no reason to swipe your ID - \the [src] has no brain to remove.</span>"
+			to_chat(user, "<span class='danger'>There's no reason to swipe your ID - \the [src] has no brain to remove.</span>")
 			return 0
 
 		var/obj/item/weapon/card/id/id_card
@@ -119,14 +117,14 @@
 			id_card = pda.id
 
 		if(access_robotics in id_card.access)
-			user << "<span class='notice'>You swipe your access card and pop the brain out of \the [src].</span>"
+			to_chat(user, "<span class='notice'>You swipe your access card and pop the brain out of \the [src].</span>")
 			eject_brain()
 			if(held_item)
 				held_item.loc = src.loc
 				held_item = null
 			return 1
 		else
-			user << "<span class='danger'>You swipe your card with no effect.</span>"
+			to_chat(user, "<span class='danger'>You swipe your card with no effect.</span>")
 			return 0
 
 	else
@@ -134,12 +132,12 @@
 
 /mob/living/simple_animal/spiderbot/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
-		user << "<span class='warning'>[src] is already overloaded - better run.</span>"
+		to_chat(user, "<span class='warning'>[src] is already overloaded - better run.</span>")
 		return 0
 	else
-		user << "<span class='notice'>You short out the security protocols and overload [src]'s cell, priming it to explode in a short time.</span>"
-		spawn(100)	src << "<span class='danger'>Your cell seems to be outputting a lot of power...</span>"
-		spawn(200)	src << "<span class='danger'>Internal heat sensors are spiking! Something is badly wrong with your cell!</span>"
+		to_chat(user, "<span class='notice'>You short out the security protocols and overload [src]'s cell, priming it to explode in a short time.</span>")
+		spawn(100)	to_chat(src, "<span class='danger'>Your cell seems to be outputting a lot of power...</span>")
+		spawn(200)	to_chat(src, "<span class='danger'>Internal heat sensors are spiking! Something is badly wrong with your cell!</span>")
 		spawn(300)	src.explode()
 
 /mob/living/simple_animal/spiderbot/proc/transfer_personality(var/obj/item/device/mmi/M as obj)
@@ -155,7 +153,7 @@
 	eject_brain()
 	death()
 
-/mob/living/simple_animal/spiderbot/proc/update_icon()
+/mob/living/simple_animal/spiderbot/update_icon()
 	if(mmi)
 		if(positronic)
 			icon_state = "spiderbot-chassis-posi"
@@ -216,7 +214,7 @@
 		return
 
 	if(!held_item)
-		usr << "\red You have nothing to drop!"
+		to_chat(usr, "<span class='warning'>You have nothing to drop!</span>")
 		return 0
 
 	if(istype(held_item, /obj/item/weapon/grenade))
@@ -248,12 +246,12 @@
 		return -1
 
 	if(held_item)
-		src << "<span class='warning'>You are already holding \the [held_item]</span>"
+		to_chat(src, "<span class='warning'>You are already holding \the [held_item]</span>")
 		return 1
 
 	var/list/items = list()
 	for(var/obj/item/I in view(1,src))
-		if(I.loc != src && I.w_class <= SMALL_ITEM && I.Adjacent(src) )
+		if(I.loc != src && I.w_class <= ITEM_SIZE_SMALL && I.Adjacent(src) )
 			items.Add(I)
 
 	var/obj/selection = input("Select an item.", "Pickup") in items
@@ -267,15 +265,15 @@
 					"<span class='notice'>You grab \the [held_item].</span>", \
 					"You hear a skittering noise and a clink.")
 				return held_item
-		src << "<span class='warning'>\The [selection] is too far away.</span>"
+		to_chat(src, "<span class='warning'>\The [selection] is too far away.</span>")
 		return 0
 
-	src << "<span class='warning'>There is nothing of interest to take.</span>"
+	to_chat(src, "<span class='warning'>There is nothing of interest to take.</span>")
 	return 0
 
 /mob/living/simple_animal/spiderbot/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(src.held_item)
-		user << "It is carrying \icon[src.held_item] \a [src.held_item]."
+		to_chat(user, "It is carrying \icon[src.held_item] \a [src.held_item].")
 /mob/living/simple_animal/spiderbot/binarycheck()
 	return positronic

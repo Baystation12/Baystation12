@@ -1,20 +1,21 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
-	desc = "An Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts."
+	desc = "A Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	force = 10
-	requires_two_hands = 2
+	one_hand_penalty = 2
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
+	wielded_item_state = "laser-wielded"
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
-	requires_two_hands = 0 //just in case
+	one_hand_penalty = 0 //just in case
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser carbine"
@@ -27,7 +28,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 15 //old technology, and a pistol
 
@@ -38,11 +39,11 @@ obj/item/weapon/gun/energy/retro
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	force = 5
 	slot_flags = SLOT_BELT //too unusually shaped to fit in a holster
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
 	max_shots = 5 //to compensate a bit for self-recharging
-	requires_two_hands = 1 //a little bulky
+	one_hand_penalty = 1 //a little bulky
 	self_recharge = 1
 
 /obj/item/weapon/gun/energy/lasercannon
@@ -52,10 +53,10 @@ obj/item/weapon/gun/energy/retro
 	item_state = null
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
-	requires_two_hands = 6 //large and heavy
-	w_class = 5
+	one_hand_penalty = 6 //large and heavy
+	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/beam/heavylaser
-	charge_cost = 400
+	charge_cost = 40
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
@@ -66,7 +67,7 @@ obj/item/weapon/gun/energy/retro
 	use_external_power = 1
 	recharge_time = 10
 	accuracy = 0 //mounted laser cannons don't need any help, thanks
-	requires_two_hands = 0
+	one_hand_penalty = 0
 
 /obj/item/weapon/gun/energy/xray
 	name = "x-ray laser carbine"
@@ -76,18 +77,19 @@ obj/item/weapon/gun/energy/retro
 	slot_flags = SLOT_BELT|SLOT_BACK
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
-	requires_two_hands = 2
-	w_class = 4
-	charge_cost = 150
+	one_hand_penalty = 2
+	w_class = ITEM_SIZE_LARGE
+	charge_cost = 15
 	max_shots = 10
 
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
 	icon_state = "oldxray"
+	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	projectile_type = /obj/item/projectile/beam/xray
-	requires_two_hands = 1
-	w_class = 3
+	one_hand_penalty = 1
+	w_class = ITEM_SIZE_NORMAL
 	fire_delay = 10
 
 /obj/item/weapon/gun/energy/sniperrifle
@@ -97,13 +99,13 @@ obj/item/weapon/gun/energy/retro
 	item_state = "laser"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
-	requires_two_hands = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
+	one_hand_penalty = 5 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	slot_flags = SLOT_BACK
-	charge_cost = 400
+	charge_cost = 40
 	max_shots = 4
 	fire_delay = 35
 	force = 10
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
 
@@ -133,7 +135,7 @@ obj/item/weapon/gun/energy/retro
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))
 		if(!istype(M.wear_suit, required_vest))
-			M << "<span class='warning'>You need to be wearing your laser tag vest!</span>"
+			to_chat(M, "<span class='warning'>You need to be wearing your laser tag vest!</span>")
 			return 0
 	return ..()
 

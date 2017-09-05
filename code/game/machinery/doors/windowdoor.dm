@@ -51,16 +51,19 @@
 	if(operating == -1)
 		ae.icon_state = "door_electronics_smoked"
 		operating = 0
-	src.density = 0
+	set_density(0)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
 	qdel(src)
 
+/obj/machinery/door/window/deconstruct(mob/user, var/moved = FALSE)
+	shatter()
+
 /obj/machinery/door/window/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
-	..()
+	return ..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
 	if (!( ismob(AM) ))
@@ -122,7 +125,7 @@
 	sleep(10)
 
 	explosion_resistance = 0
-	density = 0
+	set_density(0)
 	update_icon()
 	update_nearby_tiles()
 	
@@ -136,7 +139,7 @@
 	operating = 1
 	flick(text("[]closing", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
-	density = 1
+	set_density(1)
 	update_icon()
 	explosion_resistance = initial(explosion_resistance)
 	update_nearby_tiles()
@@ -201,7 +204,7 @@
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
 		if (do_after(user,40,src))
-			user << "<span class='notice'>You removed the windoor electronics!</span>"
+			to_chat(user, "<span class='notice'>You removed the windoor electronics!</span>")
 
 			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)
 			if (istype(src, /obj/machinery/door/window/brigdoor))

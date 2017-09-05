@@ -1,7 +1,7 @@
 //////Kitchen Spike
 
 /obj/structure/kitchenspike
-	name = "a meat spike"
+	name = "meat spike"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "spike"
 	desc = "A spike for collecting meat from animals."
@@ -12,18 +12,18 @@
 	var/meat_type
 	var/victim_name = "corpse"
 
-/obj/structure/kitchenspike/attackby(obj/item/weapon/grab/G as obj, mob/user as mob)
-	if(!istype(G, /obj/item/weapon/grab) || !G.affecting)
+/obj/structure/kitchenspike/attackby(obj/item/grab/G, mob/living/carbon/human/user)
+	if(!istype(G) || !G.affecting)
 		return
 	if(occupied)
-		user << "<span class = 'danger'>The spike already has something on it, finish collecting its meat first!</span>"
+		to_chat(user, "<span class = 'danger'>The spike already has something on it, finish collecting its meat first!</span>")
 	else
 		if(spike(G.affecting))
 			visible_message("<span class = 'danger'>[user] has forced [G.affecting] onto the spike, killing them instantly!</span>")
 			qdel(G.affecting)
 			qdel(G)
 		else
-			user << "<span class='danger'>They are too big for the spike, try something smaller!</span>"
+			to_chat(user, "<span class='danger'>They are too big for the spike, try something smaller!</span>")
 
 /obj/structure/kitchenspike/proc/spike(var/mob/living/victim)
 
@@ -53,8 +53,8 @@
 	meat--
 	new meat_type(get_turf(src))
 	if(src.meat > 1)
-		user << "You remove some meat from \the [victim_name]."
+		to_chat(user, "You remove some meat from \the [victim_name].")
 	else if(src.meat == 1)
-		user << "You remove the last piece of meat from \the [victim_name]!"
+		to_chat(user, "You remove the last piece of meat from \the [victim_name]!")
 		icon_state = "spike"
 		occupied = 0

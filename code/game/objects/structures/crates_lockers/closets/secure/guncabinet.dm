@@ -9,11 +9,15 @@
 	icon_closed ="base"
 	icon_opened = "base"
 
-/obj/structure/closet/secure_closet/guncabinet/New()
-	..()
+/obj/structure/closet/secure_closet/guncabinet/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/structure/closet/secure_closet/guncabinet/toggle()
+	..()
+	update_icon()
+
+/obj/structure/closet/secure_closet/guncabinet/open() //There are plenty of things that can open it that don't use toggle
 	..()
 	update_icon()
 
@@ -29,21 +33,22 @@
 				lazors++
 			if (istype(G, /obj/item/weapon/gun/projectile/))
 				shottas++
-		if (lazors || shottas)
-			for (var/i = 0 to 2)
+		for (var/i = 0 to 2)
+			if(lazors || shottas) // only make icons if we have one of the two types.
 				var/image/gun = image(icon(src.icon))
-
-				if (lazors > 0 && (shottas <= 0 || prob(50)))
+				if (lazors > shottas)
 					lazors--
 					gun.icon_state = "laser"
-				else if (shottas > 0)
+				else if (shottas)
 					shottas--
 					gun.icon_state = "projectile"
-
 				gun.pixel_x = i*4
 				overlays += gun
 
-		overlays += icon(src.icon,"door")
+		overlays += icon(src.icon, "door")
+
+		if(welded)
+			overlays += icon(src.icon,"welded")
 
 		if(broken)
 			overlays += icon(src.icon,"broken")
@@ -51,3 +56,4 @@
 			overlays += icon(src.icon,"locked")
 		else
 			overlays += icon(src.icon,"open")
+

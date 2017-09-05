@@ -10,7 +10,7 @@
 
 /obj/item/weapon/grenade/smokebomb/New()
 	..()
-	src.smoke = PoolOrNew(/datum/effect/effect/system/smoke_spread/bad)
+	src.smoke = new /datum/effect/effect/system/smoke_spread/bad()
 	src.smoke.attach(src)
 
 /obj/item/weapon/grenade/smokebomb/Destroy()

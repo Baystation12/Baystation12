@@ -1,4 +1,5 @@
 /obj
+	layer = OBJ_LAYER
 	//Used to store information about the contents of the object.
 	var/list/matter
 	var/w_class // Size of the object.
@@ -12,10 +13,10 @@
 	var/armor_penetration = 0
 
 /obj/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	return ..()
 
-/obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
+/obj/Topic(href, href_list, var/datum/topic_state/state = GLOB.default_state)
 	if(..())
 		return 1
 
@@ -31,7 +32,7 @@
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
 	if(user.CanUseObjTopic(src))
 		return ..()
-	user << "<span class='danger'>\icon[src]Access Denied!</span>"
+	to_chat(user, "<span class='danger'>\icon[src]Access Denied!</span>")
 	return STATUS_CLOSE
 
 /mob/living/silicon/CanUseObjTopic(var/obj/O)
@@ -68,7 +69,7 @@
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/proc/process()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return 0
 
 /obj/assume_air(datum/gas_mixture/giver)
@@ -135,9 +136,6 @@
 /obj/proc/interact(mob/user)
 	return
 
-/obj/proc/update_icon()
-	return
-
 /mob/proc/unset_machine()
 	src.machine = null
 
@@ -175,3 +173,32 @@
 
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	return
+
+/obj/proc/damage_flags()
+	. = 0
+	if(has_edge(src))
+		. |= DAM_EDGE
+	if(is_sharp(src))
+		. |= DAM_SHARP
+		if(damtype == BURN)
+			. |= DAM_LASER
+
+/obj/attackby(obj/item/O as obj, mob/user as mob)
+	if(flags & OBJ_ANCHORABLE)
+		if(istype(O, /obj/item/weapon/wrench))
+			wrench_floor_bolts(user)
+			update_icon()
+			return
+	return ..()
+
+/obj/proc/wrench_floor_bolts(mob/user, delay=20)
+	playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+	if(anchored)
+		user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+	else
+		user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+	if(do_after(user, delay, src))
+		if(!src) return
+		to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
+		anchored = !anchored
+	return 1

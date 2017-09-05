@@ -3,13 +3,7 @@
 
 /obj/item/weapon/implanter/exile
 	name = "implanter-exile"
-
-/obj/item/weapon/implanter/exile/New()
-	src.imp = new /obj/item/weapon/implant/exile( src )
-	..()
-	update()
-	return
-
+	imp = /obj/item/weapon/implant/exile
 
 /obj/item/weapon/implant/exile
 	name = "exile"
@@ -18,7 +12,7 @@
 	get_data()
 		var/dat = {"
 <b>Implant Specifications:</b><BR>
-<b>Name:</b> [company_name] Employee Exile Implant<BR>
+<b>Name:</b> [GLOB.using_map.company_name] Employee Exile Implant<BR>
 <b>Implant Details:</b> The onboard gateway system has been modified to reject entry by individuals containing this implant<BR>"}
 		return dat
 
@@ -27,13 +21,7 @@
 	desc = "A case containing an exile implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-r"
-
-
-	New()
-		src.imp = new /obj/item/weapon/implant/exile( src )
-		..()
-		return
-
+	imp = /obj/item/weapon/implant/exile
 
 /obj/structure/closet/secure_closet/exile
 	name = "Exile Implants"

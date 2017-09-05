@@ -22,14 +22,22 @@
 #define SLOT_TIE        0x4000
 #define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
 
+#define ACCESSORY_SLOT_UTILITY  "Utility"
+#define ACCESSORY_SLOT_ARMBAND  "Armband"
+#define ACCESSORY_SLOT_RANK     "Rank"
+#define ACCESSORY_SLOT_DEPT		"Department"
+#define ACCESSORY_SLOT_DECOR    "Decor"
+#define ACCESSORY_SLOT_MEDAL    "Medal"
+#define ACCESSORY_SLOT_INSIGNIA "Insignia"
+
 // Flags bitmasks.
-#define NOBLUDGEON         0x1    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
+#define NOBLUDGEON         0x1   // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
 #define CONDUCT            0x2   // Conducts electricity. (metal etc.)
 #define ON_BORDER          0x4   // Item has priority to check when entering or leaving.
 #define NOBLOODY           0x8   // Used for items if they don't want to get a blood overlay.
-#define OPENCONTAINER      0x10 // Is an open container for chemistry purposes.
-#define PHORONGUARD        0x20 // Does not get contaminated by phoron.
-#define	NOREACT            0x40 // Reagents don't react inside this container.
+#define OPENCONTAINER      0x10  // Is an open container for chemistry purposes.
+#define PHORONGUARD        0x20  // Does not get contaminated by phoron.
+#define	NOREACT            0x40  // Reagents don't react inside this container.
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
 
 //Flags for items (equipment)
@@ -97,6 +105,20 @@
 #define slot_w_uniform_str	"slot_w_uniform"
 #define slot_head_str		"slot_head"
 #define slot_wear_suit_str	"slot_suit"
+#define slot_l_ear_str      "slot_l_ear"
+#define slot_r_ear_str      "slot_r_ear"
+#define slot_belt_str       "slot_belt"
+#define slot_shoes_str      "slot_shoes"
+#define slot_head_str      	"slot_head"
+#define slot_wear_mask_str 	"slot_wear_mask"
+#define slot_handcuffed_str "slot_handcuffed"
+#define slot_legcuffed_str "slot_legcuffed"
+#define slot_wear_mask_str 	"slot_wear_mask"
+#define slot_wear_id_str  	"slot_wear_id"
+#define slot_gloves_str  	"slot_gloves"
+#define slot_glasses_str  	"slot_glasses"
+#define slot_s_store_str	"slot_s_store"
+#define slot_tie_str		"slot_tie"
 
 // Bitflags for clothing parts.
 #define HEAD        0x1
@@ -199,20 +221,24 @@
 	7 - things that are large enough to contain humans, like closets, but smaller than entire turfs
 	8 - things that take up an entire turf, like wall girders or door assemblies
 */
-#define TINY_ITEM   1
-#define SMALL_ITEM  2
-#define NORMAL_ITEM 3
-#define LARGE_ITEM  4
-#define BULKY_ITEM  5
 
-#define base_storage_cost(w_class) (2**(w_class-1)) //1,2,4,8,16,...
-
-#define DO_NOT_STORE INFINITY //A special storage "cost" that indicates an item should not be storable
-
-//linear increase. Using many small storage containers is more space-efficient than using large ones,
-//in exchange for being limited in the w_class of items that will fit
-#define base_storage_capacity(w_class) (7*(w_class-1))
-
-#define DEFAULT_BACKPACK_STORAGE base_storage_capacity(5)
-#define DEFAULT_LARGEBOX_STORAGE base_storage_capacity(4)
-#define DEFAULT_BOX_STORAGE      base_storage_capacity(3)
+var/list/default_onmob_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand.dmi',
+		slot_belt_str = 'icons/mob/belt.dmi',
+		slot_back_str = 'icons/mob/back.dmi',
+		slot_l_ear_str = 'icons/mob/ears.dmi',
+		slot_r_ear_str = 'icons/mob/ears.dmi',
+		slot_glasses_str = 'icons/mob/eyes.dmi',
+		slot_wear_id_str = 'icons/mob/mob.dmi',
+		slot_w_uniform_str = 'icons/mob/uniform.dmi',
+		slot_wear_suit_str = 'icons/mob/suit.dmi',
+		slot_head_str = 'icons/mob/head.dmi',
+		slot_shoes_str = 'icons/mob/feet.dmi',
+		slot_wear_mask_str = 'icons/mob/mask.dmi',
+		slot_handcuffed_str = 'icons/mob/mob.dmi',
+		slot_legcuffed_str = 'icons/mob/mob.dmi',
+		slot_gloves_str = 'icons/mob/hands.dmi',
+		slot_s_store_str = 'icons/mob/belt_mirror.dmi',
+		slot_tie_str = 'icons/mob/ties.dmi'
+		)

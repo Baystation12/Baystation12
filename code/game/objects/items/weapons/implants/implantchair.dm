@@ -75,12 +75,13 @@
 
 
 	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
-		if(istype(G, /obj/item/weapon/grab))
-			if(!ismob(G:affecting))
+		if(istype(G, /obj/item/grab))
+			var/obj/item/grab/grab = G
+			if(!ismob(grab.affecting))
 				return
 			for(var/mob/living/carbon/slime/M in range(1,G:affecting))
-				if(M.Victim == G:affecting)
-					usr << "[G:affecting:name] will not fit into the [src.name] because they have a slime latched onto their head."
+				if(M.Victim == grab.affecting)
+					to_chat(usr, "[grab.affecting:name] will not fit into the [src.name] because they have a slime latched onto their head.")
 					return
 			var/mob/M = G:affecting
 			if(put_mob(M))
@@ -108,10 +109,10 @@
 
 	put_mob(mob/living/carbon/M as mob)
 		if(!iscarbon(M))
-			usr << "<span class='warning'>\The [src] cannot hold this!</span>"
+			to_chat(usr, "<span class='warning'>\The [src] cannot hold this!</span>")
 			return
 		if(src.occupant)
-			usr << "<span class='warning'>\The [src] is already occupied!</span>"
+			to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 			return
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE

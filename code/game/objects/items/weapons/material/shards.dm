@@ -8,7 +8,7 @@
 	randpixel = 8
 	sharp = 1
 	edge = 1
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	force_divisor = 0.2 // 6 with hardness 30 (glass)
 	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
@@ -72,19 +72,18 @@
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
 				return
 
-			M << "<span class='danger'>You step on \the [src]!</span>"
+			to_chat(M, "<span class='danger'>You step on \the [src]!</span>")
 
-			var/list/check = list("l_foot", "r_foot")
+			var/list/check = list(BP_L_FOOT, BP_R_FOOT)
 			while(check.len)
 				var/picked = pick(check)
 				var/obj/item/organ/external/affecting = H.get_organ(picked)
 				if(affecting)
 					if(affecting.robotic >= ORGAN_ROBOT)
 						return
-					if(affecting.take_damage(5, 0))
-						H.UpdateDamageIcon()
+					affecting.take_damage(5, 0)
 					H.updatehealth()
-					if(!(H.species.flags & NO_PAIN))
+					if(affecting.can_feel_pain())
 						H.Weaken(3)
 					return
 				check -= picked

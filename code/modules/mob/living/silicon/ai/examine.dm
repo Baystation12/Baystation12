@@ -32,7 +32,7 @@
 	if(hardware && (hardware.owner == src))
 		msg += "<br>"
 		msg += hardware.get_examine_desc()
-	user << msg
+	to_chat(user, msg)
 	user.showLaws(src)
 	return
 

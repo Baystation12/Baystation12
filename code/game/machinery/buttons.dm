@@ -13,8 +13,8 @@
 	var/_wifi_id
 	var/datum/wifi/sender/wifi_sender
 
-/obj/machinery/button/initialize()
-	..()
+/obj/machinery/button/Initialize()
+	. = ..()
 	update_icon()
 	if(_wifi_id && !wifi_sender)
 		wifi_sender = new/datum/wifi/sender/button(_wifi_id, src)
@@ -32,6 +32,8 @@
 
 /obj/machinery/button/attack_hand(mob/living/user)
 	if(..()) return 1
+	if(istype(user, /mob/living/carbon))
+		playsound(src, "button", 60)
 	activate(user)
 
 /obj/machinery/button/proc/activate(mob/living/user)
@@ -96,6 +98,8 @@
 /obj/machinery/button/toggle/switch/update_icon()
 	icon_state = "light[active]"
 
+
+
 //alternate button with the same toggle functionality, except has a door control sprite instead
 /obj/machinery/button/toggle/alternate
 	icon = 'icons/obj/stationobjs.dmi'
@@ -114,10 +118,10 @@
 /obj/machinery/button/mass_driver
 	name = "mass driver button"
 
-/obj/machinery/button/mass_driver/initialize()
+/obj/machinery/button/mass_driver/Initialize()
 	if(_wifi_id)
 		wifi_sender = new/datum/wifi/sender/mass_driver(_wifi_id, src)
-	..()
+	. = ..()
 
 /obj/machinery/button/mass_driver/activate(mob/living/user)
 	if(active || !istype(wifi_sender))
@@ -159,10 +163,10 @@
 	else
 		icon_state = "doorctrl2"
 
-/obj/machinery/button/toggle/door/initialize()
+/obj/machinery/button/toggle/door/Initialize()
 	if(_wifi_id)
 		wifi_sender = new/datum/wifi/sender/door(_wifi_id, src)
-	..()
+	. = ..()
 
 /obj/machinery/button/toggle/door/activate(mob/living/user)
 	if(operating || !istype(wifi_sender))
@@ -201,3 +205,30 @@
 #undef BOLTS
 #undef SHOCK
 #undef SAFE
+
+/obj/machinery/button/toggle/valve
+	name = "remote valve control"
+	var/frequency = 0
+	var/datum/radio_frequency/radio_connection
+
+/obj/machinery/button/toggle/valve/Initialize()
+	. = ..()
+	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+
+/obj/machinery/button/toggle/valve/update_icon()
+	if(!active)
+		icon_state = "launcherbtt"
+	else
+		icon_state = "launcheract"
+
+
+/obj/machinery/button/toggle/valve/activate(mob/living/user)
+	var/datum/signal/signal = new
+	signal.transmission_method = 1 // radio transmission
+	signal.source = src
+	signal.frequency = frequency
+	signal.data["tag"] = id
+	signal.data["command"] = "valve_toggle"
+	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	active = !active
+	update_icon()

@@ -81,10 +81,25 @@
 		  <tr>
 			<th>Special</th>
 			<td>
-			  {{:helper.link("Captain", '', {'action' : 'assign', 'assign_target' : 'Captain'}, data.id_rank == 'Captain' ? 'disabled' : null)}}
 			  {{:helper.link("Custom", '', {'action' : 'assign', 'assign_target' : 'Custom'})}}
 			</td>
 		  </tr>
+		  <tr>
+			<th style="color: '#800080';">Command</th>
+			<td>
+			  {{for data.command_jobs}}
+				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>
+		  <tr>
+			<th style="color: '#800080';">Support</th>
+			<td>
+			  {{for data.support_jobs}}
+				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>	  
 		  <tr>
 			<th style="color: '#FFA500';">Engineering</th>
 			<td>
@@ -113,17 +128,22 @@
 			<th style="color: '#DD0000';">Security</th>
 			<td>
 			  {{for data.security_jobs}}
+			{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>
+		  <tr>
+			<th style="color: '#800080';">Supply</th>
+			<td>
+			  {{for data.supply_jobs}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
 			  {{/for}}
 			</td>
 		  </tr>
 		  <tr>
-			<th style="color: '#cc6600';">Cargo</th>
+			<th style="color: '#800080';">Service</th>
 			<td>
-			  {{for data.cargo_jobs}}
-				{{if index && index % 6 === 0}}
-				  </td></tr><tr><th></th><td>
-				{{/if}}
+			  {{for data.service_jobs}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
 			  {{/for}}
 			</td>
@@ -133,7 +153,6 @@
 			<td>
 			  {{for data.civilian_jobs}}
 				{{if index && index % 6 === 0}}
-				  </td></tr><tr><th></th><td>
 				{{/if}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
 			  {{/for}}

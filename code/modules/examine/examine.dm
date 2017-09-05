@@ -49,17 +49,17 @@
 	description_holders["icon"] = "\icon[A]"
 	description_holders["desc"] = A.desc
 
-/client/Stat()
+/mob/Stat()
 	. = ..()
-	if(usr && statpanel("Examine"))
-		stat(null,"[description_holders["icon"]]    <font size='5'>[description_holders["name"]]</font>") //The name, written in big letters.
-		stat(null,"[description_holders["desc"]]") //the default examine text.
-		if(description_holders["info"])
-			stat(null,"<font color='#084B8A'><b>[description_holders["info"]]</b></font>") //Blue, informative text.
-		if(description_holders["fluff"])
-			stat(null,"<font color='#298A08'><b>[description_holders["fluff"]]</b></font>") //Yellow, fluff-related text.
-		if(description_holders["antag"])
-			stat(null,"<font color='#8A0808'><b>[description_holders["antag"]]</b></font>") //Red, malicious antag-related text
+	if(client && statpanel("Examine"))
+		stat(null,"[client.description_holders["icon"]]    <font size='5'>[client.description_holders["name"]]</font>") //The name, written in big letters.
+		stat(null,"[client.description_holders["desc"]]") //the default examine text.
+		if(client.description_holders["info"])
+			stat(null,"<font color='#084B8A'><b>[client.description_holders["info"]]</b></font>") //Blue, informative text.
+		if(client.description_holders["fluff"])
+			stat(null,"<font color='#298A08'><b>[client.description_holders["fluff"]]</b></font>") //Yellow, fluff-related text.
+		if(client.description_holders["antag"])
+			stat(null,"<font color='#8A0808'><b>[client.description_holders["antag"]]</b></font>") //Red, malicious antag-related text
 
 //override examinate verb to update description holders when things are examined
 /mob/examinate(atom/A as mob|obj|turf in view())

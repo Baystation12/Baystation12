@@ -7,7 +7,7 @@
 //basic spider mob, these generally guard nests
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
-	desc = "Furry and black, it makes you shudder to look at it. This one has deep red eyes."
+	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
 	icon_state = "guard"
 	icon_living = "guard"
 	icon_dead = "guard_dead"
@@ -28,7 +28,7 @@
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	var/poison_per_bite = 5
-	var/poison_type = "toxin"
+	var/poison_type = /datum/reagent/toxin
 	faction = "spiders"
 	var/busy = 0
 	pass_flags = PASSTABLE
@@ -37,7 +37,7 @@
 
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/giant_spider/nurse
-	desc = "Furry and black, it makes you shudder to look at it. This one has brilliant green eyes."
+	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."
 	icon_state = "nurse"
 	icon_living = "nurse"
 	icon_dead = "nurse_dead"
@@ -47,7 +47,7 @@
 	melee_damage_upper = 10
 	poison_per_bite = 10
 	var/atom/cocoon_target
-	poison_type = "stoxin"
+	poison_type = /datum/reagent/soporific
 	var/fed = 0
 
 //hunters have the most poison and move the fastest, so they can find prey
@@ -68,23 +68,23 @@
 	..()
 
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
-	var/target = ..()
-	if(isliving(target))
-		var/mob/living/L = target
+	. = ..()
+	if(isliving(.))
+		var/mob/living/L = .
 		if(L.reagents)
-			L.reagents.add_reagent("toxin", poison_per_bite)
+			L.reagents.add_reagent(/datum/reagent/toxin, poison_per_bite)
 			if(prob(poison_per_bite))
-				L << "\red You feel a tiny prick."
+				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 				L.reagents.add_reagent(poison_type, 5)
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/AttackingTarget()
-	var/target = ..()
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+	. = ..()
+	if(ishuman(.))
+		var/mob/living/carbon/human/H = .
 		if(prob(poison_per_bite))
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(!(O.robotic >= ORGAN_ROBOT))
-				var/eggs = PoolOrNew(/obj/effect/spider/eggcluster/, list(O, src))
+				var/eggs = new /obj/effect/spider/eggcluster(O, src)
 				O.implants += eggs
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
@@ -149,7 +149,7 @@
 							if(busy == LAYING_EGGS)
 								E = locate() in get_turf(src)
 								if(!E)
-									PoolOrNew(/obj/effect/spider/eggcluster, list(loc, src))
+									new /obj/effect/spider/eggcluster(loc, src)
 									fed--
 								busy = 0
 								stop_automated_movement = 0

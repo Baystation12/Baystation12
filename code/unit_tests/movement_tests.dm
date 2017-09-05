@@ -6,8 +6,8 @@
 	name = "MOVEMENT - Force Move Shall Trigger Crossed When Entering Turf"
 
 /datum/unit_test/movement/force_move_shall_trigger_crossed_when_entering_turf/start_test()
-	var/turf/start = locate(20,20,1)
-	var/turf/target = locate(20,21,1)
+	var/turf/start = get_safe_turf()
+	var/turf/target = get_step(start, NORTH)
 
 	var/obj/mover = new /obj/test(start, 1)
 	var/obj/test/crossed_obj/crossed = new(target, 1)
@@ -29,7 +29,7 @@
 	name = "MOVEMENT - Force Move Shall Trigger Entered"
 
 /datum/unit_test/movement/force_move_shall_trigger_entered/start_test()
-	var/turf/start = locate(20,20,1)
+	var/turf/start = get_safe_turf()
 	var/obj/mover = new /obj/test(start, 1)
 	var/obj/test/entered_obj/target = new(start, 1)
 

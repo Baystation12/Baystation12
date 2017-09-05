@@ -1,20 +1,8 @@
-// KEYCARD - Can be paired with a brace to instantly unlock it.
-/obj/item/weapon/brace_keycard
-	name = "brace keycard"
-	desc = "A small keycard that seems to fit into an airlock brace's card slot."
-	w_class = 2
-	var/obj/item/weapon/airlock_brace/brace = null
-	icon = 'icons/obj/card.dmi'
-	icon_state = "guest_invalid"
-
-
-
-
-// MAINTENANCE JACK - Acts as an universal keycard, but works with a 15-30s delay
+// MAINTENANCE JACK - Allows removing of braces with certain delay.
 /obj/item/weapon/crowbar/brace_jack
 	name = "maintenance jack"
 	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "maintenance_jack"
 	force = 8 //It has a hammer head, should probably do some more damage. - Cirra
@@ -27,18 +15,18 @@
 /obj/item/weapon/airlock_brace
 	name = "airlock brace"
 	desc = "A sturdy device that can be attached to an airlock to reinforce it and provide additional security."
-	w_class = 4
+	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "brace_open"
 	var/cur_health
 	var/max_health = 450
 	var/obj/machinery/door/airlock/airlock = null
-	var/list/keycards = list()
+	var/obj/item/weapon/airlock_electronics/brace/electronics
 
 
 /obj/item/weapon/airlock_brace/examine(var/mob/user)
-	..()
-	user << examine_health()
+	. = ..()
+	to_chat(user, examine_health())
 
 
 // This is also called from airlock's examine, so it's a different proc to prevent code copypaste.
@@ -66,59 +54,63 @@
 /obj/item/weapon/airlock_brace/New()
 	..()
 	cur_health = max_health
-
+	electronics = new/obj/item/weapon/airlock_electronics/brace(src)
+	update_access()
 
 /obj/item/weapon/airlock_brace/Destroy()
-	for(var/obj/item/weapon/brace_keycard/C in keycards)
-		C.brace = null
-		keycards.Remove(C)
-	keycards = null
 	if(airlock)
 		airlock.brace = null
 		airlock = null
+	qdel(electronics)
+	electronics = null
 	..()
+
+
+// Interact with the electronics to set access requirements.
+/obj/item/weapon/airlock_brace/attack_self(mob/user as mob)
+	electronics.attack_self(user)
 
 
 /obj/item/weapon/airlock_brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if (istype(W, /obj/item/weapon/brace_keycard))
-		var/obj/item/weapon/brace_keycard/C = W
+	if (istype(W.GetIdCard(), /obj/item/weapon/card/id))
 		if(!airlock)
-			C.brace = src
-			keycards |= C
-			user << "You swipe \the [C] through \the [src]. A small green light blinks on \the [C]."
+			attack_self(user)
+			return
 		else
-			if(C.brace == src)
-				user << "You swipe \the [C] through \the [src]."
+			var/obj/item/weapon/card/id/C = W.GetIdCard()
+			update_access()
+			if(check_access(C))
+				to_chat(user, "You swipe \the [C] through \the [src].")
 				if(do_after(user, 10, airlock))
-					user << "\The [src] clicks few times and detaches itself from \the [airlock]!"
+					to_chat(user, "\The [src] clicks a few times and detaches itself from \the [airlock]!")
 					unlock_brace(usr)
 			else
-				user << "You swipe \the [C] through \the [src], but it does not react."
+				to_chat(user, "You swipe \the [C] through \the [src], but it does not react.")
 		return
 
 	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
 		if(!airlock)
 			return
 		var/obj/item/weapon/crowbar/brace_jack/C = W
-		user << "You begin forcibly removing \the [src] with \the [C]."
+		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
 		if(do_after(user, rand(150,300), airlock))
-			user << "You finish removing \the [src]."
+			to_chat(user, "You finish removing \the [src].")
 			unlock_brace(user)
 		return
 
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/C = W
 		if(cur_health == max_health)
-			user << "\The [src] does not require repairs."
+			to_chat(user, "\The [src] does not require repairs.")
 			return
 		if(C.remove_fuel(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			cur_health = min(cur_health + rand(80,120), max_health)
 			if(cur_health == max_health)
-				user << "You repair some dents on \the [src]. It is in perfect condition now."
+				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
-				user << "You repair some dents on \the [src]."
+				to_chat(user, "You repair some dents on \the [src].")
 
 
 /obj/item/weapon/airlock_brace/proc/take_damage(var/amount)
@@ -148,3 +140,13 @@
 	if(!max_health)
 		return 0
 	return (cur_health / max_health) * 100
+
+/obj/item/weapon/airlock_brace/proc/update_access()
+	if(!electronics)
+		return
+	if(electronics.one_access)
+		req_access = list()
+		req_one_access = electronics.conf_access
+	else
+		req_access = electronics.conf_access
+		req_one_access = list()

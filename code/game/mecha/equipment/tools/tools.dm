@@ -2,7 +2,7 @@
 	name = "hydraulic clamp"
 	icon_state = "mecha_clamp"
 	equip_cooldown = 15
-	energy_drain = 10
+	energy_drain = 1 KILOWATTS
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
 	required_type = /obj/mecha/working
@@ -29,6 +29,9 @@
 				return
 			if(cargo_holder.cargo.len >= cargo_holder.cargo_capacity)
 				occupant_message("<span class='warning'>Not enough room in cargo compartment.</span>")
+				return
+			if(istype(O, /obj/machinery/power/supermatter))
+				occupant_message("<span class='warning'>Warning: Safety systems prevent the loading of [target] into the cargo compartment.</span>")
 				return
 
 			occupant_message("You lift [target] and start to load it into cargo compartment.")
@@ -189,7 +192,7 @@
 	New()
 		reagents = new/datum/reagents(max_water)
 		reagents.my_atom = src
-		reagents.add_reagent("water", max_water)
+		reagents.add_reagent(/datum/reagent/water, max_water)
 		..()
 		return
 
@@ -221,7 +224,7 @@
 
 			for(var/a = 1 to 5)
 				spawn(0)
-					var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(chassis))
+					var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
 					var/turf/my_target
 					if(a == 1)
 						my_target = T
@@ -252,7 +255,7 @@
 	icon_state = "mecha_rcd"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4)
 	equip_cooldown = 10
-	energy_drain = 250
+	energy_drain = 25 KILOWATTS
 	range = MELEE|RANGED
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
@@ -355,18 +358,19 @@
 	icon_state = "mecha_teleport"
 	origin_tech = list(TECH_BLUESPACE = 10)
 	equip_cooldown = 150
-	energy_drain = 1000
+	energy_drain = 200 KILOWATTS
 	range = RANGED
 
-	action(atom/target)
-		if(!action_checks(target) || src.loc.z == 2) return
-		var/turf/T = get_turf(target)
-		if(T)
-			set_ready_state(0)
-			chassis.use_power(energy_drain)
-			do_teleport(chassis, T, 4)
-			do_after_cooldown()
-		return
+/obj/item/mecha_parts/mecha_equipment/teleporter/action(atom/target)
+	if(!action_checks(target)) return
+	var/turf/T = get_turf(target)
+	if(T)
+		if(isAdminLevel(T.z))
+			return
+		set_ready_state(0)
+		chassis.use_power(energy_drain)
+		do_teleport(chassis, T, 4)
+		do_after_cooldown()
 
 
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator
@@ -375,7 +379,7 @@
 	icon_state = "mecha_wholegen"
 	origin_tech = list(TECH_BLUESPACE = 3)
 	equip_cooldown = 50
-	energy_drain = 300
+	energy_drain = 50 KILOWATTS
 	range = RANGED
 
 
@@ -425,7 +429,7 @@
 	icon_state = "mecha_teleport"
 	origin_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 3)
 	equip_cooldown = 10
-	energy_drain = 100
+	energy_drain = 10 KILOWATTS
 	range = MELEE|RANGED
 	var/atom/movable/locked
 	var/mode = 1 //1 - gravsling 2 - gravpush
@@ -500,7 +504,7 @@
 	desc = "Powered armor-enhancing mech equipment."
 	icon_state = "mecha_abooster_proj"
 	equip_cooldown = 10
-	energy_drain = 50
+	energy_drain = 5 KILOWATTS
 	range = 0
 	var/deflect_coeff = 1
 	var/damage_coeff = 1
@@ -590,7 +594,7 @@
 	icon_state = "repair_droid"
 	origin_tech = list(TECH_MAGNET = 3, TECH_DATA = 3)
 	equip_cooldown = 20
-	energy_drain = 100
+	energy_drain = 10 KILOWATTS
 	range = 0
 	var/health_boost = 2
 	var/datum/global_iterator/pr_repair_droid
@@ -777,7 +781,7 @@
 	var/max_fuel = 150000
 	var/fuel_per_cycle_idle = 100
 	var/fuel_per_cycle_active = 500
-	var/power_per_cycle = 20
+	var/power_per_cycle = 1 KILOWATTS
 
 	New()
 		..()
@@ -851,7 +855,7 @@
 		if(isnull(result))
 			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<span class='warning'>[fuel] traces minimal. [weapon] cannot be used as fuel.</span>")
 		else if(!result)
-			user << "Unit is full."
+			to_chat(user, "Unit is full.")
 		else
 			user.visible_message("[user] loads [src] with [fuel].","[result] unit\s of [fuel] successfully loaded.")
 		return
@@ -908,7 +912,7 @@
 	max_fuel = 50000
 	fuel_per_cycle_idle = 10
 	fuel_per_cycle_active = 30
-	power_per_cycle = 50
+	power_per_cycle = 5 KILOWATTS
 	var/rad_per_cycle = 0.3
 
 	init()
@@ -925,8 +929,7 @@
 
 	process(var/obj/item/mecha_parts/mecha_equipment/generator/nuclear/EG)
 		if(..())
-			for(var/mob/living/carbon/M in view(EG.chassis))
-				M.apply_effect((EG.rad_per_cycle*3),IRRADIATE, blocked = M.getarmor(null, "rad"))
+			radiation_repository.radiate(EG, (EG.rad_per_cycle * 3))
 		return 1
 
 
@@ -997,7 +1000,7 @@
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
-	energy_drain = 10
+	energy_drain = 1 KILOWATTS
 	range = MELEE
 	equip_cooldown = 20
 	var/mob/living/carbon/occupant = null
@@ -1007,7 +1010,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
-		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!</span>"
+		to_chat(AM, "<span class='danger'>You tumble out of the destroyed [src.name]!</span>")
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)
@@ -1024,9 +1027,9 @@
 			log_message("\The [user] boarded.")
 			occupant_message("\The [user] boarded.")
 		else if(src.occupant != user)
-			user << "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>"
+			to_chat(user, "<span class='warning'>[src.occupant] was faster. Try better next time, loser.</span>")
 	else
-		user << "You stop entering the exosuit."
+		to_chat(user, "You stop entering the exosuit.")
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/verb/eject()
 	set name = "Eject"
@@ -1036,7 +1039,7 @@
 
 	if(usr != occupant)
 		return
-	occupant << "You climb out from \the [src]."
+	to_chat(occupant, "You climb out from \the [src].")
 	go_out()
 	occupant_message("[occupant] disembarked.")
 	log_message("[occupant] disembarked.")
@@ -1098,18 +1101,18 @@
 		return
 
 	if (!isturf(usr.loc))
-		usr << "<span class='danger'>You can't reach the passenger compartment from here.</span>"
+		to_chat(usr, "<span class='danger'>You can't reach the passenger compartment from here.</span>")
 		return
 
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			usr << "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>"
+			to_chat(usr, "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
 			return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
-			usr << "<span class='danger'>You're too busy getting your life sucked out of you.</span>"
+			to_chat(usr, "<span class='danger'>You're too busy getting your life sucked out of you.</span>")
 			return
 
 	//search for a valid passenger compartment
@@ -1129,13 +1132,151 @@
 	//didn't find anything
 	switch (feedback)
 		if (OCCUPIED)
-			usr << "<span class='danger'>The passenger compartment is already occupied!</span>"
+			to_chat(usr, "<span class='danger'>The passenger compartment is already occupied!</span>")
 		if (LOCKED)
-			usr << "<span class='warning'>The passenger compartment hatch is locked!</span>"
+			to_chat(usr, "<span class='warning'>The passenger compartment hatch is locked!</span>")
 		if (OCCUPIED|LOCKED)
-			usr << "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>"
+			to_chat(usr, "<span class='danger'>All of the passenger compartments are already occupied or locked!</span>")
 		if (0)
-			usr << "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>"
+			to_chat(usr, "<span class='warning'>\The [src] doesn't have a passenger compartment.</span>")
 
 #undef LOCKED
 #undef OCCUPIED
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer
+	name = "Cable Layer"
+	icon_state = "mecha_wire"
+	var/datum/event/event
+	var/turf/old_turf
+	var/obj/structure/cable/last_piece
+	var/obj/item/stack/cable_coil/cable
+	var/max_cable = 1000
+	required_type = /obj/mecha/working
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/New()
+	cable = new(src)
+	cable.amount = 0
+	..()
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/attach()
+	..()
+	event = chassis.events.addEvent("onMove",src,"layCable")
+	return
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/detach()
+	chassis.events.clearEvent("onMove",event)
+	return ..()
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/destroy()
+	chassis.events.clearEvent("onMove",event)
+	return ..()
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/action(var/obj/item/stack/cable_coil/target)
+	if(!action_checks(target))
+		return
+	var/result = load_cable(target)
+	var/message
+	if(isnull(result))
+		message = "<font color='red'>Unable to load [target] - no cable found.</font>"
+	else if(!result)
+		message = "Reel is full."
+	else
+		message = "[result] meters of cable successfully loaded."
+		send_byjax(chassis.occupant,"exosuit.browser","\ref[src]",src.get_equip_info())
+	occupant_message(message)
+	return
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/Topic(href,href_list)
+	..()
+	if(href_list["toggle"])
+		set_ready_state(!equip_ready)
+		occupant_message("[src] [equip_ready?"dea":"a"]ctivated.")
+		log_message("[equip_ready?"Dea":"A"]ctivated.")
+		return
+	if(href_list["cut"])
+		if(cable && cable.amount)
+			var/m = round(input(chassis.occupant,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
+			m = min(m, cable.amount)
+			if(m)
+				use_cable(m)
+				var/obj/item/stack/cable_coil/CC = new (get_turf(chassis))
+				CC.amount = m
+		else
+			occupant_message("There's no more cable on the reel.")
+	return
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/get_equip_info()
+	var/output = ..()
+	if(output)
+		return "[output] \[Cable: [cable ? cable.amount : 0] m\][(cable && cable.amount) ? "- <a href='?src=\ref[src];toggle=1'>[!equip_ready?"Dea":"A"]ctivate</a>|<a href='?src=\ref[src];cut=1'>Cut</a>" : null]"
+	return
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/proc/load_cable(var/obj/item/stack/cable_coil/CC)
+	if(istype(CC) && CC.amount)
+		var/cur_amount = cable? cable.amount : 0
+		var/to_load = max(max_cable - cur_amount,0)
+		if(to_load)
+			to_load = min(CC.amount, to_load)
+			if(!cable)
+				cable = new(src)
+				cable.amount = 0
+			cable.amount += to_load
+			CC.use(to_load)
+			return to_load
+		else
+			return 0
+	return
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/proc/use_cable(amount)
+	if(!cable || cable.amount<1)
+		set_ready_state(1)
+		occupant_message("Cable depleted, [src] deactivated.")
+		log_message("Cable depleted, [src] deactivated.")
+		return
+	if(cable.amount < amount)
+		occupant_message("No enough cable to finish the task.")
+		return
+	cable.use(amount)
+	update_equip_info()
+	return 1
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/proc/reset()
+	last_piece = null
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/proc/dismantleFloor(var/turf/new_turf)
+	if(istype(new_turf, /turf/simulated/floor))
+		var/turf/simulated/floor/T = new_turf
+		if(!T.is_plating())
+			T.make_plating(!(T.broken || T.burnt))
+	return new_turf.is_plating()
+
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/proc/layCable(var/turf/new_turf)
+	if(equip_ready || !istype(new_turf) || !dismantleFloor(new_turf))
+		return reset()
+	var/fdirn = turn(chassis.dir,180)
+	for(var/obj/structure/cable/LC in new_turf)		// check to make sure there's not a cable there already
+		if(LC.d1 == fdirn || LC.d2 == fdirn)
+			return reset()
+	if(!use_cable(1))
+		return reset()
+	var/obj/structure/cable/NC = new(new_turf)
+	NC.cableColor("red")
+	NC.d1 = 0
+	NC.d2 = fdirn
+	NC.update_icon()
+
+	var/datum/powernet/PN
+	if(last_piece && last_piece.d2 != chassis.dir)
+		last_piece.d1 = min(last_piece.d2, chassis.dir)
+		last_piece.d2 = max(last_piece.d2, chassis.dir)
+		last_piece.update_icon()
+		PN = last_piece.powernet
+
+	if(!PN)
+		PN = new()
+	PN.add_cable(NC)
+	NC.mergeConnectedNetworks(NC.d2)
+
+	//NC.mergeConnectedNetworksOnTurf()
+	last_piece = NC
+	return 1

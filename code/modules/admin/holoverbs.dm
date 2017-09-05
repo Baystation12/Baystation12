@@ -7,7 +7,7 @@
 	if(!check_rights(R_FUN)) return
 
 	var/list/AIs = list()
-	for(var/mob/living/silicon/ai/AI in mob_list)
+	for(var/mob/living/silicon/ai/AI in GLOB.mob_list)
 		AIs += AI
 
 	var/mob/living/silicon/ai/AI = input("Which AI do you want to apply [appear] to as a hologram?") as null|anything in AIs
@@ -41,5 +41,5 @@
 	I2.color = rgb(125, 180, 225) // make it blue!
 	AI.holo_icon = I2
 
-	AI << "Your hologram icon has been set to [appear]."
+	to_chat(AI, "Your hologram icon has been set to [appear].")
 	log_and_message_admins("set [key_name(AI)]'s hologram icon to [key_name(appear)]")

@@ -23,7 +23,7 @@
 	available_abilities += new/datum/malf_research_ability/networking/basic_hack()
 	available_abilities += new/datum/malf_research_ability/interdiction/recall_shuttle()
 	available_abilities += new/datum/malf_research_ability/manipulation/electrical_pulse()
-
+	available_abilities += new/datum/malf_research_ability/passive/intellicard_interception
 
 // Proc:		finish_research()
 // Parameters: 	None
@@ -31,14 +31,15 @@
 /datum/malf_research/proc/finish_research()
 	if(!focus)
 		return
-	owner << "<b>Research Completed</b>: [focus.name]"
-	owner.verbs.Add(focus.ability)
-	available_abilities -= focus
+	to_chat(owner, "<b>Research Completed</b>: [focus.name]")
+	if(focus.ability)
+		owner.verbs.Add(focus.ability)
+	focus.research_finished(owner)
 	if(focus.next)
 		available_abilities += focus.next
 	unlocked_abilities += focus
+	available_abilities -= focus
 	focus = null
-
 
 // Proc:		process()
 // Parameters: 	None
@@ -63,7 +64,7 @@
 		if(focus.unlocked)
 			finish_research()
 
-
-
-
-
+/datum/malf_research/proc/advance_all()
+	for(var/MRA in available_abilities.Copy())
+		focus = MRA
+		finish_research()

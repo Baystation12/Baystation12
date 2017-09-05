@@ -2,10 +2,10 @@
 	name = "Teleport"
 	desc = "This spell teleports you to a type of area of your selection."
 	feedback = "TP"
-	school = "abjuration"
+	school = "conjuration"
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES
-	invocation = "SCYAR NILA"
+	invocation = "Scyar Nila!"
 	invocation_type = SpI_SHOUT
 	cooldown_min = 200 //100 deciseconds reduction per rank
 
@@ -23,18 +23,16 @@
 	return
 
 /spell/area_teleport/choose_targets()
-	var/A = null
-
+	var/area/thearea
 	if(!randomise_selection)
-		A = input("Area to teleport to", "Teleport", A) in teleportlocs
+		thearea = input("Area to teleport to", "Teleport") as null|anything in teleportlocs
+		if(!thearea) return
 	else
-		A = pick(teleportlocs)
-
-	var/area/thearea = teleportlocs[A]
-
-	return list(thearea)
+		thearea = pick(teleportlocs)
+	return list(teleportlocs[thearea])
 
 /spell/area_teleport/cast(area/thearea, mob/user)
+	playsound(get_turf(user),cast_sound,50,1)
 	if(!istype(thearea))
 		if(istype(thearea, /list))
 			thearea = thearea[1]
@@ -50,7 +48,7 @@
 				L+=T
 
 	if(!L.len)
-		user <<"The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry."
+		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
 
 	if(user && user.buckled)

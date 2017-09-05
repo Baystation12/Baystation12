@@ -20,7 +20,7 @@
 
 // 'basic' language; spoken by default.
 /datum/language/common
-	name = "Galactic Common"
+	name = LANGUAGE_GALCOM
 	desc = "The common galactic tongue."
 	speech_verb = "says"
 	whisper_verb = "whispers"
@@ -38,11 +38,11 @@
 	return speech_verb
 
 // Galactic common languages (systemwide accepted standards).
-/datum/language/trader
-	name = "Tradeband"
-	desc = "Maintained by the various trading cartels in major systems, this elegant, structured language is used for bartering and bargaining."
+/datum/language/lunar
+	name = LANGUAGE_LUNAR
+	desc = "An older language primarily spoken on Earth's only natural satellite, this language is commonly heard from the mouths of aristocracy."
 	speech_verb = "enunciates"
-	colour = "say_quote"
+	colour = "moon"
 	key = "2"
 	space_chance = 100
 	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
@@ -57,8 +57,16 @@
 // Criminal language.
 /datum/language/gutter
 	name = "Gutter"
-	desc = "Much like Standard, this crude pidgin tongue descended from numerous languages and serves as Tradeband for criminal elements."
+	desc = "Much like Common, this crude pidgin tongue descended from numerous languages and serves as a trade language for criminal elements."
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
+
+/datum/language/sign
+	name = LANGUAGE_SIGN
+	desc = "A sign language commonly used for those who are deaf or mute."
+	signlang_verb = list("gestures")
+	colour = "say_quote"
+	key = "s"
+	flags = SIGNLANG | NO_STUTTER | NONVERBAL

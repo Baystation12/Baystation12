@@ -60,10 +60,11 @@ for reference:
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "barricade"
 	anchored = 1.0
-	density = 1.0
+	density = 1
 	var/health = 100
 	var/maxhealth = 100
 	var/material/material
+	flags = OBJ_CLIMBABLE
 
 /obj/structure/barricade/New(var/newloc, var/material_name)
 	..(newloc)
@@ -89,7 +90,7 @@ for reference:
 			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
 		if (health < maxhealth)
 			if (D.get_amount() < 1)
-				user << "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>"
+				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
 				return
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
 			if(do_after(user,20,src) && health < maxhealth)
@@ -151,7 +152,7 @@ for reference:
 	desc = "A deployable barrier. Swipe your ID card to lock/unlock it."
 	icon = 'icons/obj/objects.dmi'
 	anchored = 0.0
-	density = 1.0
+	density = 1
 	icon_state = "barrier0"
 	var/health = 100.0
 	var/maxhealth = 100.0
@@ -171,10 +172,10 @@ for reference:
 					src.anchored = !src.anchored
 					src.icon_state = "barrier[src.locked]"
 					if ((src.locked == 1.0) && (src.emagged < 2.0))
-						user << "Barrier lock toggled on."
+						to_chat(user, "Barrier lock toggled on.")
 						return
 					else if ((src.locked == 0.0) && (src.emagged < 2.0))
-						user << "Barrier lock toggled off."
+						to_chat(user, "Barrier lock toggled off.")
 						return
 				else
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -237,9 +238,7 @@ for reference:
 
 		visible_message("<span class='danger'>[src] blows apart!</span>")
 		var/turf/Tsec = get_turf(src)
-
-	/*	var/obj/item/stack/rods/ =*/
-		PoolOrNew(/obj/item/stack/rods, Tsec)
+		new /obj/item/stack/rods(Tsec)
 
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, src)
@@ -255,7 +254,7 @@ for reference:
 		src.emagged = 1
 		src.req_access.Cut()
 		src.req_one_access.Cut()
-		user << "You break the ID authentication lock on \the [src]."
+		to_chat(user, "You break the ID authentication lock on \the [src].")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(2, 1, src)
 		s.start()
@@ -263,7 +262,7 @@ for reference:
 		return 1
 	else if (src.emagged == 1)
 		src.emagged = 2
-		user << "You short out the anchoring mechanism on \the [src]."
+		to_chat(user, "You short out the anchoring mechanism on \the [src].")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(2, 1, src)
 		s.start()

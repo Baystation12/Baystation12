@@ -15,15 +15,18 @@ var/repository/uplink_purchases/uplink_purchase_repository = new()
 
 /repository/uplink_purchases/proc/print_entries()
 	if(purchases_by_mind.len)
-		world << "<b>The following went shopping:</b>"
+		to_world("<b>The following went shopping:</b>")
+
 	var/list/pur_log = list()
 	for(var/datum/mind/ply in purchases_by_mind)
 		pur_log.Cut()
 		var/uplink_purchase_entry/upe = purchases_by_mind[ply]
-		world << "<b>[ply.name]</b> (<b>[ply.key]</b>) (used [upe.total_cost] TC\s):"
+		to_world("<b>[ply.name]</b> (<b>[ply.key]</b>) (used [upe.total_cost] TC\s):")
+
 		for(var/datum/uplink_item/UI in upe.purchased_items)
 			pur_log += "[upe.purchased_items[UI]]x[UI.log_icon()][UI.name]"
-		world << english_list(pur_log, nothing_text = "")
+		to_world(english_list(pur_log, nothing_text = ""))
+
 
 /proc/debug_print()
 	uplink_purchase_repository.print_entries()

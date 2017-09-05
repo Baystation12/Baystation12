@@ -8,7 +8,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 
 /obj/item/weapon/mining_scanner/attack_self(mob/user as mob)
-	user << "You begin sweeping \the [src] about, scanning for metal deposits."
+	to_chat(user, "You begin sweeping \the [src] about, scanning for metal deposits.")
 
 	if(!do_after(user, 50,src))
 		return
@@ -36,7 +36,7 @@
 
 			if(ore_type) metals[ore_type] += T.resources[metal]
 
-	user << "\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>"
+	to_chat(user, "\icon[src] <span class='notice'>The scanner beeps and displays a readout.</span>")
 
 	for(var/ore_type in metals)
 		var/result = "no sign"
@@ -46,4 +46,4 @@
 			if(26 to 75) result = "significant amounts"
 			if(76 to INFINITY) result = "huge quantities"
 
-		user << "- [result] of [ore_type]."
+		to_chat(user, "- [result] of [ore_type].")

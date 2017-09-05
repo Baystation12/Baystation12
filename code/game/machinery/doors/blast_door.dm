@@ -2,7 +2,7 @@
 //
 // Refactored 27.12.2014 by Atlantis
 //
-// Blast doors are suposed to be reinforced versions of regular doors. Instead of being manually
+// Blast doors are supposed to be reinforced versions of regular doors. Instead of being manually
 // controlled they use buttons or other means of remote control. This is why they cannot be emagged
 // as they lack any ID scanning system, they just handle remote control signals. Subtypes have
 // different icons, which are defined by set of variables. Subtypes are on bottom of this file.
@@ -19,7 +19,10 @@
 	var/icon_state_closed = null
 	var/icon_state_closing = null
 
-	closed_layer = 3.3 // Above airlocks when closed
+	var/open_sound = 'sound/machines/airlock_heavy.ogg'
+	var/close_sound = 'sound/machines/AirlockClose_heavy.ogg'
+
+	closed_layer = ABOVE_WINDOW_LAYER
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
@@ -28,13 +31,23 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
+	var/begins_closed = TRUE
 	var/_wifi_id
 	var/datum/wifi/receiver/button/door/wifi_receiver
+	var/material/implicit_material
 
-/obj/machinery/door/blast/initialize()
-	..()
+/obj/machinery/door/blast/Initialize()
+	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
+
+	if(!begins_closed)
+		icon_state = icon_state_open
+		set_density(0)
+		set_opacity(0)
+		layer = open_layer
+
+	implicit_material = get_material_by_name("plasteel")
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wifi_receiver)
@@ -58,6 +71,7 @@
 		icon_state = icon_state_closed
 	else
 		icon_state = icon_state_open
+	radiation_repository.resistance_cache.Remove(get_turf(src))
 	return
 
 // Proc: force_open()
@@ -65,8 +79,9 @@
 // Description: Opens the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_open()
 	src.operating = 1
+	playsound(src.loc, open_sound, 100, 1)
 	flick(icon_state_opening, src)
-	src.density = 0
+	src.set_density(0)
 	update_nearby_tiles()
 	src.update_icon()
 	src.set_opacity(0)
@@ -79,9 +94,10 @@
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
 	src.operating = 1
+	playsound(src.loc, close_sound, 100, 1)
 	src.layer = closed_layer
 	flick(icon_state_closing, src)
-	src.density = 1
+	src.set_density(1)
 	update_nearby_tiles()
 	src.update_icon()
 	src.set_opacity(1)
@@ -97,6 +113,9 @@
 	else
 		src.force_close()
 
+/obj/machinery/door/blast/get_material()
+	return implicit_material
+
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
 // Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
@@ -107,24 +126,24 @@
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( src.operating ))
 			force_toggle()
 		else
-			usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
+			to_chat(usr, "<span class='notice'>[src]'s motors resist your effort.</span>")
 		return
 	if(istype(C, /obj/item/stack/material) && C.get_material_name() == "plasteel")
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
-			usr << "<span class='notice'>\The [src] is already fully repaired.</span>"
+			to_chat(usr, "<span class='notice'>\The [src] is already fully repaired.</span>")
 			return
 		var/obj/item/stack/P = C
 		if(P.amount < amt)
-			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
+			to_chat(usr, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 			return
-		usr << "<span class='notice'>You begin repairing [src]...</span>"
+		to_chat(usr, "<span class='notice'>You begin repairing [src]...</span>")
 		if(do_after(usr, 30, src))
 			if(P.use(amt))
-				usr << "<span class='notice'>You have repaired \the [src]</span>"
+				to_chat(usr, "<span class='notice'>You have repaired \the [src]</span>")
 				src.repair()
 			else
-				usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
+				to_chat(usr, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 
 
 
@@ -166,7 +185,7 @@
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
-obj/machinery/door/blast/regular
+/obj/machinery/door/blast/regular
 	icon_state_open = "pdoor0"
 	icon_state_opening = "pdoorc0"
 	icon_state_closed = "pdoor1"
@@ -175,10 +194,8 @@ obj/machinery/door/blast/regular
 	maxhealth = 600
 	block_air_zones = 1
 
-obj/machinery/door/blast/regular/open
-	icon_state = "pdoor0"
-	density = 0
-	opacity = 0
+/obj/machinery/door/blast/regular/open
+	begins_closed = FALSE
 
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
@@ -188,3 +205,8 @@ obj/machinery/door/blast/regular/open
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
+	open_sound = 'sound/machines/shutters_open.ogg'
+	close_sound = 'sound/machines/shutters_close.ogg'
+
+/obj/machinery/door/blast/shutters/open
+	begins_closed = FALSE

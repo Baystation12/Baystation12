@@ -13,11 +13,11 @@
 /obj/machinery/microscope/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(sample)
-		user << "<span class='warning'>There is already a slide in the microscope.</span>"
+		to_chat(user, "<span class='warning'>There is already a slide in the microscope.</span>")
 		return
 
 	if(istype(W, /obj/item/weapon/forensics/swab)|| istype(W, /obj/item/weapon/sample/fibers) || istype(W, /obj/item/weapon/sample/print))
-		user << "<span class='notice'>You insert \the [W] into the microscope.</span>"
+		to_chat(user, "<span class='notice'>You insert \the [W] into the microscope.</span>")
 		user.unEquip(W)
 		W.forceMove(src)
 		sample = W
@@ -27,16 +27,16 @@
 /obj/machinery/microscope/attack_hand(mob/user)
 
 	if(!sample)
-		user << "<span class='warning'>The microscope has no sample to examine.</span>"
+		to_chat(user, "<span class='warning'>The microscope has no sample to examine.</span>")
 		return
 
-	user << "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>"
+	to_chat(user, "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>")
 
 	if(!do_after(user, 25, src) || !sample)
-		user << "<span class='notice'>You stop examining \the [sample].</span>"
+		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
 		return
 
-	user << "<span class='notice'>Printing findings now...</span>"
+	to_chat(user, "<span class='notice'>Printing findings now...</span>")
 	var/obj/item/weapon/paper/report = new(get_turf(src))
 	report.stamped = list(/obj/item/weapon/stamp)
 	report.overlays = list("paper_stamped")
@@ -82,16 +82,16 @@
 	if(report)
 		report.update_icon()
 		if(report.info)
-			user << report.info
+			to_chat(user, report.info)
 	return
 
 /obj/machinery/microscope/proc/remove_sample(var/mob/living/remover)
 	if(!istype(remover) || remover.incapacitated() || !Adjacent(remover))
 		return ..()
 	if(!sample)
-		remover << "<span class='warning'>\The [src] does not have a sample in it.</span>"
+		to_chat(remover, "<span class='warning'>\The [src] does not have a sample in it.</span>")
 		return
-	remover << "<span class='notice'>You remove \the [sample] from \the [src].</span>"
+	to_chat(remover, "<span class='notice'>You remove \the [sample] from \the [src].</span>")
 	sample.forceMove(get_turf(src))
 	remover.put_in_hands(sample)
 	sample = null

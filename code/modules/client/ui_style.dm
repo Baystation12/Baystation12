@@ -21,7 +21,7 @@
 	set desc = "Configure your user interface"
 
 	if(!ishuman(usr))
-		usr << "<span class='warning'>You must be human to use this verb.</span>"
+		to_chat(usr, "<span class='warning'>You must be human to use this verb.</span>")
 		return
 
 	var/UI_style_new = input(usr, "Select a style. White is recommended for customization") as null|anything in all_ui_styles
@@ -55,4 +55,4 @@
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
 		prefs.save_preferences()
-		usr << "UI was saved"
+		to_chat(usr, "UI was saved")

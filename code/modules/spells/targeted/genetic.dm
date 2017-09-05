@@ -32,12 +32,13 @@ code\game\dna\genes\goon_powers.dm
 	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
 	feedback = "BD"
 	disabilities = 1
+	school = "illusion"
 	duration = 300
 
 	charge_max = 300
 
 	spell_flags = 0
-	invocation = "STI KALY"
+	invocation = "Sty Kaly."
 	invocation_type = SpI_WHISPER
 	message = "<span class='danger'>Your eyes cry out in pain!</span>"
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 1, Sp_POWER = 3)

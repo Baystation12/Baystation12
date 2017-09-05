@@ -13,11 +13,11 @@
 	if(!holder)	return
 
 	if(!plant_controller || !plant_controller.gene_tag_masks)
-		usr << "Gene masks not set."
+		to_chat(usr, "Gene masks not set.")
 		return
 
 	for(var/mask in plant_controller.gene_tag_masks)
-		usr << "[mask]: [plant_controller.gene_tag_masks[mask]]"
+		to_chat(usr, "[mask]: [plant_controller.gene_tag_masks[mask]]")
 
 var/global/datum/controller/plants/plant_controller // Set in New().
 
@@ -33,6 +33,8 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	var/list/plant_sprites = list()         // List of all harvested product sprites.
 	var/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
 	var/processing = 0                      // Off/on.
+	var/list/gene_masked_list = list()		// Stored gene masked list, rather than recreating it when needed.
+	var/list/plant_gene_datums = list()		// Stored datum versions of the gene masked list.
 
 /datum/controller/plants/New()
 	if(plant_controller && plant_controller != src)
@@ -83,6 +85,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		S.update_seed()
 
 	//Might as well mask the gene types while we're at it.
+	var/list/gene_datums = decls_repository.get_decls_of_subtype(/decl/plantgene)
 	var/list/used_masks = list()
 	var/list/plant_traits = ALL_GENES
 	while(plant_traits && plant_traits.len)
@@ -92,9 +95,18 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		while(gene_mask in used_masks)
 			gene_mask = "[uppertext(num2hex(rand(0,255)))]"
 
+		var/decl/plantgene/G
+
+		for(var/D in gene_datums)
+			var/decl/plantgene/P = gene_datums[D]
+			if(gene_tag == P.gene_tag)
+				G = P
+				gene_datums -= D
 		used_masks += gene_mask
 		plant_traits -= gene_tag
 		gene_tag_masks[gene_tag] = gene_mask
+		plant_gene_datums[gene_mask] = G
+		gene_masked_list.Add(list(list("tag" = gene_tag, "mask" = gene_mask)))
 
 // Proc for creating a random seed type.
 /datum/controller/plants/proc/create_random_seed(var/survive_on_station)
@@ -108,8 +120,8 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		if(seed.consume_gasses)
 			seed.consume_gasses["phoron"] = null
 			seed.consume_gasses["carbon_dioxide"] = null
-		if(seed.chems && !isnull(seed.chems["pacid"]))
-			seed.chems["pacid"] = null // Eating through the hull will make these plants completely inviable, albeit very dangerous.
+		if(seed.chems && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
+			seed.chems[/datum/reagent/acid/polyacid] = null // Eating through the hull will make these plants completely inviable, albeit very dangerous.
 			seed.chems -= null // Setting to null does not actually remove the entry, which is weird.
 		seed.set_trait(TRAIT_IDEAL_HEAT,293)
 		seed.set_trait(TRAIT_HEAT_TOLERANCE,20)

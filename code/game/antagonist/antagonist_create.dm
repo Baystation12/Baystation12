@@ -42,12 +42,15 @@
 /datum/antagonist/proc/create_radio(var/freq, var/mob/living/carbon/human/player)
 	var/obj/item/device/radio/R
 
-	if(freq == SYND_FREQ)
-		R = new/obj/item/device/radio/headset/syndicate(player)
-	else
-		R = new/obj/item/device/radio/headset(player)
+	switch(freq)
+		if(SYND_FREQ)
+			R = new/obj/item/device/radio/headset/syndicate(player)
+		if(RAID_FREQ)
+			R = new/obj/item/device/radio/headset/raider(player)
+		else
+			R = new/obj/item/device/radio/headset(player)
+			R.set_frequency(freq)
 
-	R.set_frequency(freq)
 	player.equip_to_slot_or_del(R, slot_l_ear)
 	return R
 
@@ -82,7 +85,7 @@
 			code_owner = leader
 		if(code_owner)
 			code_owner.store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
-			code_owner.current << "The nuclear authorization code is: <B>[code]</B>"
+			to_chat(code_owner.current, "The nuclear authorization code is: <B>[code]</B>")
 	else
 		message_admins("<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>")
 		return
@@ -93,13 +96,13 @@
 /datum/antagonist/proc/greet(var/datum/mind/player)
 
 	// Basic intro text.
-	player.current << "<span class='danger'><font size=3>You are a [role_text]!</font></span>"
+	to_chat(player.current, "<span class='danger'><font size=3>You are a [role_text]!</font></span>")
 	if(leader_welcome_text && player == leader)
-		player.current << "<span class='notice'>[leader_welcome_text]</span>"
+		to_chat(player.current, "<span class='notice'>[leader_welcome_text]</span>")
 	else
-		player.current << "<span class='notice'>[welcome_text]</span>"
+		to_chat(player.current, "<span class='notice'>[welcome_text]</span>")
 	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
-		player.current << "<span class='notice'>[antag_text]</span>"
+		to_chat(player.current, "<span class='notice'>[antag_text]</span>")
 
 	if((flags & ANTAG_HAS_NUKE) && !spawned_nuke)
 		create_nuke()
@@ -113,7 +116,8 @@
 	if (newname)
 		player.real_name = newname
 		player.name = player.real_name
-		player.dna.real_name = newname
+		if(player.dna)
+			player.dna.real_name = newname
 	if(player.mind) player.mind.name = player.name
 	// Update any ID cards.
 	update_access(player)

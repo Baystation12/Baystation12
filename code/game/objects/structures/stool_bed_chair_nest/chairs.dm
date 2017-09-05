@@ -1,6 +1,6 @@
 /obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
-	desc = "You sit in this. Either by will or force."
+	desc = "You sit in this, either by will or force."
 	icon_state = "chair_preview"
 	color = "#666666"
 	base_icon = "chair"
@@ -13,14 +13,14 @@
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
 		if(!SK.status)
-			user << "<span class='notice'>\The [SK] is not ready to be attached!</span>"
+			to_chat(user, "<span class='notice'>\The [SK] is not ready to be attached!</span>")
 			return
 		user.drop_item()
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
 		E.part = SK
-		SK.loc = E
+		SK.forceMove(E)
 		SK.master = E
 		qdel(src)
 
@@ -43,7 +43,8 @@
 		var/image/I = image('icons/obj/furniture.dmi', "[base_icon]_over")
 		if(material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
-		I.layer = FLY_LAYER
+		I.plane = ABOVE_HUMAN_PLANE
+		I.layer = ABOVE_HUMAN_LAYER
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
 	// Padding overlay.
@@ -53,7 +54,8 @@
 			var/image/I =  image(icon, "[base_icon]_padding_over")
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
-			I.layer = FLY_LAYER
+			I.plane = ABOVE_HUMAN_PLANE
+			I.layer = ABOVE_HUMAN_LAYER
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 
@@ -61,7 +63,8 @@
 		cache_key = "[base_icon]-armrest-[padding_material.name]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
-			I.layer = MOB_LAYER + 0.1
+			I.plane = ABOVE_HUMAN_PLANE
+			I.layer = ABOVE_HUMAN_LAYER
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
 			stool_cache[cache_key] = I
@@ -71,6 +74,9 @@
 	..()
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
+
+/obj/structure/bed/chair/AltClick()
+	rotate()
 
 /obj/structure/bed/chair/verb/rotate()
 	set name = "Rotate Chair"
@@ -82,7 +88,7 @@
 
 	if(usr.stat == DEAD)
 		if(!round_is_spooky())
-			src << "<span class='warning'>The veil is not thin enough for you to do that.</span>"
+			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
 			return
 	else if(usr.incapacitated())
 		return
@@ -121,6 +127,16 @@
 
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/comfy/captain
+	name = "captain chair"
+	desc = "It's a chair. Only for the highest ranked asses."
+	icon_state = "capchair_preview"
+	base_icon = "capchair"
+	buckle_movable = 1
+
+/obj/structure/bed/chair/comfy/captain/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
 
 /obj/structure/bed/chair/office
 	anchored = 0

@@ -1,26 +1,27 @@
 /obj/machinery/computer/teleporter
 	name = "Teleporter Control Console"
-	desc = "Used to control a linked teleportation Hub and Station."
+	desc = "Used to control a linked teleportation hub and station."
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	circuit = /obj/item/weapon/circuitboard/teleporter
 	dir = 4
+	var/obj/machinery/teleport/station/station = null
+	var/obj/machinery/teleport/hub/hub = null
 	var/obj/item/locked = null
 	var/id = null
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
 						 //Setting this to 1 will set src.locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
 
 /obj/machinery/computer/teleporter/New()
-	src.id = "[rand(1000, 9999)]"
+	src.id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 	..()
 	underlays.Cut()
 	underlays += image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires")
 	return
 
-/obj/machinery/computer/teleporter/initialize()
-	..()
-	var/obj/machinery/teleport/station/station = locate(/obj/machinery/teleport/station, get_step(src, dir))
-	var/obj/machinery/teleport/hub/hub
+/obj/machinery/computer/teleporter/Initialize()
+	. = ..()
+	station = locate(/obj/machinery/teleport/station, get_step(src, dir))
 	if(station)
 		hub = locate(/obj/machinery/teleport/hub, get_step(station, dir))
 
@@ -31,6 +32,17 @@
 	if(istype(hub))
 		hub.com = src
 		hub.set_dir(dir)
+
+/obj/machinery/computer/teleporter/examine(mob/user)
+	. = ..()
+	if(locked)
+		var/turf/T = get_turf(locked)
+		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
+		if(hub.accurate)
+			to_chat(user, "<span class='notice'>Test fire completed.</span>")
+		else
+			to_chat(user, "<span class='warning'>Destination untested. Test firing recommended.</span>")
+
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
@@ -51,8 +63,8 @@
 
 
 		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
-			usr << "You insert the coordinates into the machine."
-			usr << "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the station at all times."
+			to_chat(usr, "You insert the coordinates into the machine.")
+			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
 			user.drop_item()
 			qdel(I)
 
@@ -94,7 +106,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(!(T.z in using_map.player_levels))
+		if(!(T.z in GLOB.using_map.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -128,6 +140,7 @@
 		return
 
 	src.locked = L[desc]
+	hub.accurate = 0
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
 	src.add_fingerprint(usr)
@@ -194,7 +207,9 @@
 		return
 	if (istype(M, /atom/movable))
 		if(prob(5) && !accurate) //oh dear a problem, put em in deep space
-			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), 3), 2)
+			var/turf/T = get_turf(M)
+			var/destination_z = T ? GLOB.using_map.get_transit_zlevel(T.z) : pick(GLOB.using_map.player_levels)
+			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), destination_z), 2)
 		else
 			do_teleport(M, com.locked) //dead-on precision
 
@@ -206,7 +221,6 @@
 		s.set_up(5, 1, src)
 		s.start()
 		accurate = 1
-		spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes
 		for(var/mob/B in hearers(src, null))
 			B.show_message("<span class='notice'>Test fire completed.</span>")
 	return
@@ -222,7 +236,7 @@
 	if (istype(M, /mob/living))
 		var/mob/living/MM = M
 		if(MM.check_contents_for(/obj/item/weapon/disk/nuclear))
-			MM << "<span class='warning'>Something you are carrying seems to be unable to pass through the portal. Better drop it if you want to go through.</span>"
+			to_chat(MM, "<span class='warning'>Something you are carrying seems to be unable to pass through the portal. Better drop it if you want to go through.</span>")
 			return
 	var/disky = 0
 	for (var/atom/O in M.contents) //I'm pretty sure this accounts for the maximum amount of container in container stacking. --NeoFite
@@ -249,7 +263,7 @@
 	if (istype(M, /mob/living))
 		var/mob/living/MM = M
 		if(MM.check_contents_for(/obj/item/weapon/storage/backpack/holding))
-			MM << "<span class='warning'>The Bluespace interface on your Bag of Holding interferes with the teleport!</span>"
+			to_chat(MM, "<span class='warning'>The Bluespace interface on your Bag of Holding interferes with the teleport!</span>")
 			precision = rand(1,100)
 	if (istype(M, /obj/item/weapon/storage/backpack/holding))
 		precision = rand(1,100)
@@ -288,7 +302,7 @@
 	if(tmploc==null)
 		return
 
-	M.loc = tmploc
+	M.forceMove(tmploc)
 	sleep(2)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -356,6 +370,11 @@
 	src.engaged = 0
 	return
 
+/obj/machinery/teleport/station/AltClick()
+	if(!usr.incapacitated() && Adjacent(usr))
+		testfire()
+
+
 /obj/machinery/teleport/station/verb/testfire()
 	set name = "Test Fire Teleporter"
 	set category = "Object"
@@ -385,15 +404,3 @@
 			com.icon_state = "tele0"
 	else
 		icon_state = "controller"
-
-
-/obj/effect/laser/Bump()
-	src.range--
-	return
-
-/obj/effect/laser/Move()
-	src.range--
-	return
-
-/atom/proc/laserhit(L as obj)
-	return 1

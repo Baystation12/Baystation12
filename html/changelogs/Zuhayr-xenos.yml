@@ -1,5 +1,0 @@
-author: Zuhayr
-delete-after: True
-changes: 
-  - rscadd: "Prevented xenomorphs from taking shrapnel or breaking limbs. Buffed non-queen xeno weed health regen. Remember to rest to not take a heal penalty."
-  - rscadd: "Prevented weeds from entangling species with the NO_SLIP flag."

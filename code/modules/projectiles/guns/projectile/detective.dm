@@ -10,7 +10,7 @@
 		gun_options = init_subtypes(/datum/detective_gun_skin)
 
 /obj/item/weapon/gun/projectile/colt/detective/update_icon()
-	if(ammo_magazine)
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		if(unique_reskin)
 			icon_state = unique_reskin.icon_state
 		else
@@ -30,7 +30,7 @@
 	if(!M.mind)	return 0
 	if(M.incapacitated()) return 0
 	if(!M.mind.assigned_role == "Detective")
-		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
+		to_chat(M, "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>")
 		return 0
 
 	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
@@ -40,7 +40,7 @@
 			input = "\improper [input]"
 		name = input
 		unique_name = input
-		M << "You name the gun '[input]'. Say hello to your new friend."
+		to_chat(M, "You name the gun '[input]'. Say hello to your new friend.")
 		return 1
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
@@ -58,7 +58,7 @@
 		unique_reskin = choice
 		if(!unique_name)
 			name = choice.name
-		M << "Your gun is now skinned as \a [choice]. Say hello to your new friend."
+		to_chat(M, "Your gun is now skinned as \a [choice]. Say hello to your new friend.")
 		return 1
 
 

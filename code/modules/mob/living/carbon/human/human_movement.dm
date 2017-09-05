@@ -4,6 +4,8 @@
 	if(species.slowdown)
 		tally += species.slowdown
 
+	tally += species.handle_movement_delay_special(src)
+
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
 	if(embedded_flag || (stomach_contents && stomach_contents.len))
@@ -15,18 +17,15 @@
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
-	if (!(species && (species.flags & NO_PAIN)))
-		if(halloss >= 10) tally += (halloss / 10) //halloss shouldn't slow you down if you can't even feel it
-
-	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
-	if (hungry >= 70) tally += hungry/50
+	if(can_feel_pain())
+		if(getHalLoss() >= 10) tally += (getHalLoss() / 10) //halloss shouldn't slow you down if you can't even feel it
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
-		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
+		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
-			if(E.splinted)
+			else if(E.splinted)
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
@@ -37,7 +36,7 @@
 				tally += I.slowdown_general
 				tally += I.slowdown_per_slot[slot]
 
-		for(var/organ_name in list("l_foot","r_foot","l_leg","r_leg"))
+		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
@@ -92,9 +91,9 @@
 
 	//Check hands and mod slip
 	if(!l_hand)	prob_slip -= 2
-	else if(l_hand.w_class <= SMALL_ITEM)	prob_slip -= 1
+	else if(l_hand.w_class <= ITEM_SIZE_SMALL)	prob_slip -= 1
 	if (!r_hand)	prob_slip -= 2
-	else if(r_hand.w_class <= SMALL_ITEM)	prob_slip -= 1
+	else if(r_hand.w_class <= ITEM_SIZE_SMALL)	prob_slip -= 1
 
 	return prob_slip
 

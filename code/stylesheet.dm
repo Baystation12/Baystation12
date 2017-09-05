@@ -26,6 +26,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .admin				{color: #b82e00;}
 .ooc .aooc				{color: #960018;}
 
+.staffwarn				{color: #ff0000; font-weight:bold; font-size: 150%;}
 /* Admin: Private Messages */
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
@@ -74,6 +75,7 @@ h1.alert, h2.alert		{color: #000000;}
 
 .danger					{color: #ff0000; font-weight: bold;}
 .warning				{color: #ff0000; font-style: italic;}
+.boldannounce			{color: #ff0000; font-weight: bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
@@ -89,11 +91,15 @@ h1.alert, h2.alert		{color: #000000;}
 .tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
+.nabber_lang			{color: #525252;}
 .solcom					{color: #22228B;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
+.terran					{color: #9C250B;}
+.moon					{color: #422863;}
+.spacer					{color: #FF6600;}
 
 .interface				{color: #330033;}
 

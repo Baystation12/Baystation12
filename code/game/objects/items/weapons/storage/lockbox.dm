@@ -5,8 +5,8 @@
 	desc = "A locked box."
 	icon_state = "lockbox+l"
 	item_state = "syringe_kit"
-	w_class = 5
-	max_w_class = 3
+	w_class = ITEM_SIZE_HUGE
+	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 32 //The sum of the w_classes of all the items in this storage item.
 	req_access = list(access_armory)
 	var/locked = 1
@@ -19,21 +19,21 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if (istype(W, /obj/item/weapon/card/id))
 			if(src.broken)
-				user << "<span class='warning'>It appears to be broken.</span>"
+				to_chat(user, "<span class='warning'>It appears to be broken.</span>")
 				return
 			if(src.allowed(user))
 				src.locked = !( src.locked )
 				if(src.locked)
 					src.icon_state = src.icon_locked
-					user << "<span class='notice'>You lock \the [src]!</span>"
+					to_chat(user, "<span class='notice'>You lock \the [src]!</span>")
 					close_all()
 					return
 				else
 					src.icon_state = src.icon_closed
-					user << "<span class='notice'>You unlock \the [src]!</span>"
+					to_chat(user, "<span class='notice'>You unlock \the [src]!</span>")
 					return
 			else
-				user << "<span class='warning'>Access Denied</span>"
+				to_chat(user, "<span class='warning'>Access Denied</span>")
 		else if(istype(W, /obj/item/weapon/melee/energy/blade))
 			if(emag_act(INFINITY, user, W, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -44,13 +44,13 @@
 		if(!locked)
 			..()
 		else
-			user << "<span class='warning'>It's locked!</span>"
+			to_chat(user, "<span class='warning'>It's locked!</span>")
 		return
 
 
 	show_to(mob/user as mob)
 		if(locked)
-			user << "<span class='warning'>It's locked!</span>"
+			to_chat(user, "<span class='warning'>It's locked!</span>")
 		else
 			..()
 		return

@@ -11,8 +11,13 @@
 	if(!I)
 		I = usr.get_inactive_hand()
 	if(!I)
-		usr << "<span class='warning'>You don't have anything in your hands to give to \the [target].</span>"
+		to_chat(usr, "<span class='warning'>You don't have anything in your hands to give to \the [target].</span>")
 		return
+
+	if(istype(I, /obj/item/grab))
+		to_chat(usr, "<span class='warning'>You can't give someone a grab.</span>")
+		return
+
 
 	if(alert(target,"[usr] wants to give you \a [I]. Will you accept it?",,"Yes","No") == "No")
 		target.visible_message("<span class='notice'>\The [usr] tried to hand \the [I] to \the [target], \
@@ -22,18 +27,18 @@
 	if(!I) return
 
 	if(!Adjacent(target))
-		usr << "<span class='warning'>You need to stay in reaching distance while giving an object.</span>"
-		target << "<span class='warning'>\The [usr] moved too far away.</span>"
+		to_chat(usr, "<span class='warning'>You need to stay in reaching distance while giving an object.</span>")
+		to_chat(target, "<span class='warning'>\The [usr] moved too far away.</span>")
 		return
 
 	if(I.loc != usr || (usr.l_hand != I && usr.r_hand != I))
-		usr << "<span class='warning'>You need to keep the item in your hands.</span>"
-		target << "<span class='warning'>\The [usr] seems to have given up on passing \the [I] to you.</span>"
+		to_chat(usr, "<span class='warning'>You need to keep the item in your hands.</span>")
+		to_chat(target, "<span class='warning'>\The [usr] seems to have given up on passing \the [I] to you.</span>")
 		return
 
 	if(target.r_hand != null && target.l_hand != null)
-		target << "<span class='warning'>Your hands are full.</span>"
-		usr << "<span class='warning'>Their hands are full.</span>"
+		to_chat(target, "<span class='warning'>Your hands are full.</span>")
+		to_chat(usr, "<span class='warning'>Their hands are full.</span>")
 		return
 
 	if(usr.unEquip(I))

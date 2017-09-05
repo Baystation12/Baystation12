@@ -17,7 +17,7 @@
 
 ///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 //	..()
-//	reagents.add_reagent("tricordrazine", 30)
+//	reagents.add_reagent(/datum/reagent/tricordrazine, 30)
 //	return
 
 /obj/item/weapon/reagent_containers/hypospray/do_surgery(mob/living/carbon/M, mob/living/user)
@@ -28,7 +28,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
-		user << "<span class='warning'>[src] is empty.</span>"
+		to_chat(user, "<span class='warning'>[src] is empty.</span>")
 		return
 	if (!istype(M))
 		return
@@ -37,22 +37,23 @@
 	if(istype(H))
 		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 		if(!affected)
-			user << "<span class='danger'>\The [H] is missing that limb!</span>"
+			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
 			return
 		else if(affected.robotic >= ORGAN_ROBOT)
-			user << "<span class='danger'>You cannot inject a robotic limb.</span>"
+			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
-	user << "<span class='notice'>You inject [M] with [src].</span>"
-	M << "<span class='notice'>You feel a tiny prick!</span>"
+	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
+	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
 
 	if(M.reagents)
 		var/contained = reagentlist()
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 		admin_inject_log(user, M, src, contained, trans)
-		user << "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>"
+		to_chat(user, "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>")
 
 	return
 
@@ -66,7 +67,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.add_reagent("inaprovaline", 5)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 5)
 	update_icon()
 	return
 
@@ -84,8 +85,8 @@
 		icon_state = "[initial(icon_state)]0"
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if(reagents && reagents.reagent_list.len)
-		user << "<span class='notice'>It is currently loaded.</span>"
+		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
 	else
-		user << "<span class='notice'>It is spent.</span>"
+		to_chat(user, "<span class='notice'>It is spent.</span>")

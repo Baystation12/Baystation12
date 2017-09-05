@@ -27,6 +27,11 @@
 /obj/item/clothing/head/hairflower/yellow
 	icon_state = "hairflower_yellow"
 
+/obj/item/clothing/head/hairflower/bow
+	icon_state = "bow"
+	name = "hair bow"
+	desc = "A ribbon tied into a bow with a clip on the back to attach to hair."
+
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
 	desc = "A powdered wig."
@@ -48,7 +53,7 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/mailman
-	name = "station cap"
+	name = "mail cap"
 	icon_state = "mailman"
 	desc = "<i>Choo-choo</i>!"
 	body_parts_covered = 0
@@ -111,8 +116,8 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/head/cardborg/initialize()
-	..()
+/obj/item/clothing/head/cardborg/Initialize()
+	. = ..()
 	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 
 /obj/item/clothing/head/justice
@@ -242,7 +247,7 @@
 		slot_r_hand_str = "xenos_helm",
 		)
 	desc = "A helmet made out of chitinous alien hide."
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
@@ -290,3 +295,19 @@
 	icon_state = "cowboyhat"
 	item_state = "cowboy_hat"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/taqiyah
+	name = "taqiyah"
+	desc = "A short, rounded skullcap usually worn for religious purposes."
+	icon_state = "taqiyah"
+	item_state = "taqiyah"
+	body_parts_covered = 0
+
+/obj/item/clothing/head/helmet/facecover
+	name = "face cover"
+	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."
+	icon_state = "facecover"
+	tint = TINT_BLIND
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	body_parts_covered = HEAD|FACE|EYES
+	flash_protection = FLASH_PROTECTION_MAJOR

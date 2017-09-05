@@ -6,10 +6,20 @@
 	desc = "It's a blue ballcap in SCG colors."
 	icon_state = "solsoft"
 
+/obj/item/clothing/head/soft/veteranhat
+	name = "veteran hat"
+	desc = "It's a tacky black ballcap bearing the yellow service ribbon of the Gaia Conflict."
+	icon_state = "cap_veteran"
+
 /obj/item/clothing/head/soft/sol/expedition
 	name = "\improper Expeditionary Corps cap"
 	desc = "It's a black ballcap bearing the Expeditonary Corps crest."
 	icon_state = "expeditionsoft"
+
+/obj/item/clothing/head/soft/sol/expedition/co
+	name = "\improper Expeditionary Corps command cap"
+	desc = "It's a black ballcap bearing the Expeditonary Corps crest. It has golden leaf on the brim."
+	icon_state = "expeditioncomsoft"
 
 /obj/item/clothing/head/soft/sol/fleet
 	name = "fleet cap"
@@ -107,7 +117,7 @@
 	icon_state = "greydresscap"
 
 /obj/item/clothing/head/dress/expedition/command
-	name = "expedition command dress cap"
+	name = "expedition officer's dress cap"
 	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
 	icon_state = "greydresscap_com"
 
@@ -117,7 +127,7 @@
 	icon_state = "whitepeakcap"
 
 /obj/item/clothing/head/dress/fleet/command
-	name = "fleet command dress wheel cover"
+	name = "fleet officer's dress wheel cover"
 	desc = "A white dress uniform cover. This one has a gold stripe and an SCG Fleet crest."
 	icon_state = "whitepeakcap_com"
 
@@ -130,3 +140,154 @@
 	name = "marine officer's dress wheel cover"
 	desc = "A white dress uniform cover with an SCG Marine Corps crest and gold stripe."
 	icon_state = "whitewheelcap_com"
+
+//Berets
+
+/obj/item/clothing/head/beret/sol
+	name = "peacekeeper beret"
+	desc = "A beret in Sol Central Government colors. For peacekeepers that are more inclined towards style than safety."
+	icon_state = "beret_lightblue"
+
+/obj/item/clothing/head/beret/sol/homeguard
+	name = "home guard beret"
+	desc = "A red beret denoting service in the Sol Home Guard. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_red"
+
+/obj/item/clothing/head/beret/sol/gateway
+	name = "gateway administration beret"
+	desc = "An orange beret denoting service in the Gateway Administration. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_orange"
+
+/obj/item/clothing/head/beret/sol/customs
+	name = "customs and trade beret"
+	desc = "A purple beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_purpleyellow"
+
+/obj/item/clothing/head/beret/sol/orbital
+	name = "orbital assault beret"
+	desc = "A blue beret denoting orbital assault training. For helljumpers that are more inclined towards style than safety."
+	icon_state = "beret_blue"
+
+/obj/item/clothing/head/beret/sol/research
+	name = "government research beret"
+	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
+	icon_state = "beret_green"
+
+/obj/item/clothing/head/beret/sol/health
+	name = "health service beret"
+	desc = "A white beret denoting service in the Interstellar Health Service. For medics that are more inclined towards style than safety."
+	icon_state = "beret_white"
+
+/obj/item/clothing/head/beret/sol/marcom
+	name = "\improper MARSCOM beret"
+	desc = "A red beret with a gold insignia, denoting service in the SCGDF Mars Central Command. For brass who are more inclined towards style than safety."
+	icon_state = "beret_redgold"
+
+/obj/item/clothing/head/beret/sol/stratcom
+	name = "\improper STRATCOM beret"
+	desc = "A grey beret with a silver insignia, denoting service in the SCGDF Strategic Command. For intelligence personnel who are more inclined towards style than safety."
+	icon_state = "beret_graysilver"
+
+/obj/item/clothing/head/beret/sol/diplomatic
+	name = "diplomatic security beret"
+	desc = "A tan beret denoting service in the SCG Marine Corps Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
+	icon_state = "beret_tan"
+
+/obj/item/clothing/head/beret/sol/borderguard
+	name = "border security beret"
+	desc = "A green beret with a silver emblem, denoting service in the Bureau of Border Security. For border guards who are more inclined towards style than safety."
+	icon_state = "beret_greensilver"
+
+/obj/item/clothing/head/beret/sol/expedition
+	name = "expeditionary beret"
+	desc = "A black beret belonging to the SCG Expeditionary Corps. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black"
+
+/obj/item/clothing/head/beret/sol/expedition/security
+	name = "expeditionary security beret"
+	desc = "An SCG Expeditionary Corps beret with a security crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_security"
+
+/obj/item/clothing/head/beret/sol/expedition/medical
+	name = "expeditionary medical beret"
+	desc = "An SCG Expeditionary Corps beret with a medical crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_medical"
+
+/obj/item/clothing/head/beret/sol/expedition/engineering
+	name = "expeditionary engineering beret"
+	desc = "An SCG Expeditionary Corps beret with an engineering crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_engineering"
+
+/obj/item/clothing/head/beret/sol/expedition/supply
+	name = "expeditionary supply beret"
+	desc = "An SCG Expeditionary Corps beret with a supply crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_supply"
+
+/obj/item/clothing/head/beret/sol/expedition/service
+	name = "expeditionary service beret"
+	desc = "An SCG Expeditionary Corps beret with a service crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_service"
+
+/obj/item/clothing/head/beret/sol/expedition/command
+	name = "expeditionary officer's beret"
+	desc = "An SCG Expeditionary Corps beret with a golden crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_command"
+
+/obj/item/clothing/head/beret/sol/fleet
+	name = "fleet beret"
+	desc = "A navy blue beret belonging to the SCG Fleet. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy"
+
+/obj/item/clothing/head/beret/sol/fleet/security
+	name = "fleet security beret"
+	desc = "An SCG Fleet beret with a security crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_security"
+
+/obj/item/clothing/head/beret/sol/fleet/medical
+	name = "fleet medical beret"
+	desc = "An SCG Fleet beret with a medical crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_medical"
+
+/obj/item/clothing/head/beret/sol/fleet/engineering
+	name = "fleet engineering beret"
+	desc = "An SCG Fleet with an engineering crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_engineering"
+
+/obj/item/clothing/head/beret/sol/fleet/supply
+	name = "fleet supply beret"
+	desc = "An SCG Fleet beret with a supply crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_supply"
+
+/obj/item/clothing/head/beret/sol/fleet/service
+	name = "fleet service beret"
+	desc = "An SCG Fleet beret with a service crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_service"
+
+/obj/item/clothing/head/beret/sol/fleet/command
+	name = "fleet officer's beret"
+	desc = "An SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_command"
+
+/obj/item/clothing/head/ushanka/fleet
+	name = "fleet fur hat"
+	desc = "An SCG Fleet synthfur-lined hat for operating in cold environment."
+	icon_state = "flushankadown"
+	icon_state_up = "flushankaup"
+
+/obj/item/clothing/head/ushanka/expedition
+	name = "expeditionary fur hat"
+	desc = "An SCG Expeditionary Corps synthfur-lined hat for operating in cold environment."
+	icon_state = "ecushankadown"
+	icon_state_up = "ecushankaup"
+
+/obj/item/clothing/head/ushanka/marine
+	name = "marine fur hat"
+	desc = "An SCG Marine Corps synthfur-lined hat for operating in cold environment."
+	icon_state = "bmcushankadown"
+	icon_state_up = "bmcushankaup"
+
+/obj/item/clothing/head/ushanka/marine/green
+	name = "green marine fur hat"
+	desc = "An SCG Marine Corps synthfur-lined hat for operating in cold environment."
+	icon_state = "mcushankadown"
+	icon_state_up = "mcushankaup"

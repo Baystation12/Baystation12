@@ -2,10 +2,10 @@
 	name = "Magic Missile"
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
 	feedback = "MM"
-	school = "evocation"
+	school = "conjuration"
 	charge_max = 150
 	spell_flags = NEEDSCLOTHES
-	invocation = "FORTI GY AMA"
+	invocation = "Forti Gy-Ama!"
 	invocation_type = SpI_SHOUT
 	range = 7
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 3, Sp_POWER = 3)

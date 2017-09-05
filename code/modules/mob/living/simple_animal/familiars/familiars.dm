@@ -10,15 +10,15 @@
 	universal_speak = 0
 	universal_understand = 1
 
-	min_oxy = 1 //still require a /bit/ of air.
-	max_co2 = 0
+	min_gas = list("oxygen" = 1)
+	max_gas = null
 	unsuitable_atoms_damage = 1
 
 	var/list/wizardy_spells = list()
 
 /mob/living/simple_animal/familiar/New()
 	..()
-	add_language("Galactic Common")
+	add_language(LANGUAGE_GALCOM)
 	for(var/spell in wizardy_spells)
 		src.add_spell(new spell, "const_spell_ready")
 
@@ -60,7 +60,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 
-	min_oxy = 0
+	min_gas = null
 
 	wizardy_spells = list(/spell/aoe_turf/conjure/forcewall)
 
@@ -86,8 +86,8 @@
 
 	wizardy_spells = list(/spell/targeted/torment)
 
-/mob/living/simple_animal/familiar/horror/death()
-	..(null,"rapidly deteriorates")
+/mob/living/simple_animal/familiar/horror/death(gibbed, deathmessage, show_dead_message)
+	..(null,"rapidly deteriorates","The bonds tying you to this mortal plane have been severed.")
 
 	ghostize()
 	gibs(src.loc)
@@ -116,16 +116,6 @@
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
 	icon = 'icons/mob/animal.dmi'
 	var/icon_rest //so that we can have resting little guys.
-
-/mob/living/simple_animal/familiar/pet/MouseDrop(atom/over_object)
-	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
-
-	if(H.a_intent == "help" && holder_type)
-		get_scooped(H)
-		return
-	else
-		return ..()
 
 /mob/living/simple_animal/familiar/pet/Life()
 	..()

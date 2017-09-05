@@ -5,7 +5,7 @@
 	singular_name = "telecrystal"
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "telecrystal"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	max_amount = 50
 	flags = NOBLUDGEON
 	origin_tech = list(TECH_MATERIAL = 6, TECH_BLUESPACE = 4)
@@ -17,12 +17,12 @@
 		if(I.hidden_uplink && I.hidden_uplink.active) //No metagaming by using this on every PDA around just to see if it gets used up.
 			I.hidden_uplink.uses += amount
 			I.hidden_uplink.update_nano_data()
-			nanomanager.update_uis(I.hidden_uplink)
+			GLOB.nanomanager.update_uis(I.hidden_uplink)
 			use(amount)
-			user << "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>"
+			to_chat(user, "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>")
 
 /obj/item/stack/telecrystal/attack_self(var/mob/user)
-	if(use(1))
+	if(use(ceil(DEFAULT_TELECRYSTAL_AMOUNT/20)))
 		user.visible_message("<span class='warning'>\The [user] crushes a crystal!</span>", "<span class='warning'>You crush \a [src]!</span>", "You hear the sound of a crystal breaking just before a sudden crack of electricity.")
 		var/turf/T = get_random_turf_in_range(user, 7, 3)
 		if(T)

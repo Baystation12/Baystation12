@@ -1,6 +1,9 @@
+#define WORLD_ICON_SIZE 32
+
+/var/server_name = "Baystation 12"
 
 /var/game_id = null
-/proc/generate_gameid()
+/hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
 	game_id = ""
@@ -17,6 +20,51 @@
 	for(var/_ = 1 to 3)
 		game_id = "[c[(t % l) + 1]][game_id]"
 		t = round(t / l)
+	return 1
+
+// Find mobs matching a given string
+//
+// search_string: the string to search for, in params format; for example, "some_key;mob_name"
+// restrict_type: A mob type to restrict the search to, or null to not restrict
+//
+// Partial matches will be found, but exact matches will be preferred by the search
+//
+// Returns: A possibly-empty list of the strongest matches
+/proc/text_find_mobs(search_string, restrict_type = null)
+	var/list/search = params2list(search_string)
+	var/list/ckeysearch = list()
+	for(var/text in search)
+		ckeysearch += ckey(text)
+
+	var/list/match = list()
+
+	for(var/mob/M in GLOB.mob_list)
+		if(restrict_type && !istype(M, restrict_type))
+			continue
+		var/strings = list(M.name, M.ckey)
+		if(M.mind)
+			strings += M.mind.assigned_role
+			strings += M.mind.special_role
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species)
+				strings += H.species.name
+		for(var/text in strings)
+			if(ckey(text) in ckeysearch)
+				match[M] += 10 // an exact match is far better than a partial one
+			else
+				for(var/searchstr in search)
+					if(findtext(text, searchstr))
+						match[M] += 1
+
+	var/maxstrength = 0
+	for(var/mob/M in match)
+		maxstrength = max(match[M], maxstrength)
+	for(var/mob/M in match)
+		if(match[M] < maxstrength)
+			match -= M
+
+	return match
 
 
 /world
@@ -25,11 +73,19 @@
 	area = /area/space
 	view = "15x15"
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
+	icon_size = WORLD_ICON_SIZE
+	fps = 20
+#ifdef GC_FAILURE_HARD_LOOKUP
+	loop_checks = FALSE
+#endif
 
-
-#define RECOMMENDED_VERSION 509
+#define RECOMMENDED_VERSION 511
 /world/New()
+	//set window title
+	name = "[server_name] - [GLOB.using_map.full_name]"
+
 	//logs
+	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
@@ -46,7 +102,7 @@
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
-		var/runtime_log = file("data/logs/runtime/[date_string]-[game_id].log")
+		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
 		log = runtime_log
 
@@ -55,16 +111,10 @@
 	load_mods()
 	//end-emergency fix
 
-	src.update_status()
-
 	. = ..()
 
-#ifndef UNIT_TEST
-
-	sleep_offline = 1
-
-#else
-	log_unit_test("Unit Tests Enabled.  This will destroy the world when testing is complete.")
+#ifdef UNIT_TEST
+	log_unit_test("Unit Tests Enabled. This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
 
@@ -74,46 +124,31 @@
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
 
-	if(config.generate_asteroid)
-		// These values determine the specific area that the map is applied to.
-		// If you do not use the official Baycode moonbase map, you will need to change them.
-		//Create the mining Z-level.
-		new /datum/random_map/automata/cave_system(null,1,1,5,255,255)
-		//new /datum/random_map/noise/volcanism(null,1,1,5,255,255) // Not done yet! Pretty, though.
-		// Create the mining ore distribution map.
-		new /datum/random_map/noise/ore(null, 1, 1, 5, 64, 64)
-		// Update all turfs to ensure everything looks good post-generation. Yes,
-		// it's brute-forcey, but frankly the alternative is a mine turf rewrite.
-		for(var/turf/simulated/mineral/M in world) // Ugh.
-			M.updateMineralOverlays()
-		for(var/turf/simulated/floor/asteroid/M in world) // Uuuuuugh.
-			M.updateMineralOverlays()
-
-	// Create autolathe recipes, as above.
-	populate_lathe_recipes()
+	if(config.generate_map)
+		if(GLOB.using_map.perform_map_generation())
+			GLOB.using_map.refresh_mining_turfs()
+	GLOB.using_map.build_exoplanets()
 
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
-	spawn(1)
-		processScheduler.deferSetupFor(/datum/controller/process/ticker)
-		processScheduler.setup()
-		master_controller.setup()
+
+	processScheduler.deferSetupFor(/datum/controller/process/ticker)
+	processScheduler.setup()
+	Master.Initialize(10, FALSE)
+
 #ifdef UNIT_TEST
+	spawn(1)
 		initialize_unit_tests()
 #endif
-
-
 
 	spawn(3000)		//so we aren't adding to the round-start lag
 		if(config.ToRban)
 			ToRban_autoupdate()
 
 #undef RECOMMENDED_VERSION
-
-	return
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
@@ -129,7 +164,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(T == "players")
 		var/n = 0
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				n++
 		return n
@@ -149,15 +184,15 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = using_map.full_name
+		s["map"] = GLOB.using_map.full_name
 
 		if(input["status"] == "2")
 			var/list/players = list()
 			var/list/admins = list()
 
-			for(var/client/C in clients)
+			for(var/client/C in GLOB.clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue
 					admins[C.key] = C.holder.rank
 				players += C.key
@@ -170,9 +205,9 @@ var/world_topic_spam_protect_time = world.timeofday
 			var/n = 0
 			var/admins = 0
 
-			for(var/client/C in clients)
+			for(var/client/C in GLOB.clients)
 				if(C.holder)
-					if(C.holder.fakekey)
+					if(C.is_stealthed())
 						continue	//so stealthmins aren't revealed by the hub
 					admins++
 				s["player[n]"] = C.key
@@ -184,7 +219,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(s)
 
 	else if(T == "manifest")
-		data_core.get_manifest_list()
+		GLOB.data_core.get_manifest_list()
 		var/list/positions = list()
 
 		// We rebuild the list in the format external tools expect
@@ -215,6 +250,56 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		return list2params(L)
 
+	else if(copytext(T,1,5) == "laws")
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+
+			return "Bad Key"
+
+		var/list/match = text_find_mobs(input["laws"], /mob/living/silicon)
+
+		if(!match.len)
+			return "No matches"
+		else if(match.len == 1)
+			var/mob/living/silicon/S = match[1]
+			var/info = list()
+			info["name"] = S.name
+			info["key"] = S.key
+
+			if(!S.laws)
+				info["laws"] = null
+				return list2params(info)
+
+			var/list/lawset_parts = list(
+				"ion" = S.laws.ion_laws,
+				"inherent" = S.laws.inherent_laws,
+				"supplied" = S.laws.supplied_laws
+			)
+
+			for(var/law_type in lawset_parts)
+				var/laws = list()
+				for(var/datum/ai_law/L in lawset_parts[law_type])
+					laws += L.law
+				info[law_type] = list2params(laws)
+
+			info["zero"] = S.laws.zeroth_law ? S.laws.zeroth_law.law : null
+
+			return list2params(info)
+
+		else
+			var/list/ret = list()
+			for(var/mob/M in match)
+				ret[M.key] = M.name
+			return list2params(ret)
+
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
@@ -229,36 +314,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			return "Bad Key"
 
-		var/list/search = params2list(input["info"])
-		var/list/ckeysearch = list()
-		for(var/text in search)
-			ckeysearch += ckey(text)
-
-		var/list/match = list()
-
-		for(var/mob/M in mob_list)
-			var/strings = list(M.name, M.ckey)
-			if(M.mind)
-				strings += M.mind.assigned_role
-				strings += M.mind.special_role
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.species)
-					strings += H.species.name
-			for(var/text in strings)
-				if(ckey(text) in ckeysearch)
-					match[M] += 10 // an exact match is far better than a partial one
-				else
-					for(var/searchstr in search)
-						if(findtext(text, searchstr))
-							match[M] += 1
-
-		var/maxstrength = 0
-		for(var/mob/M in match)
-			maxstrength = max(match[M], maxstrength)
-		for(var/mob/M in match)
-			if(match[M] < maxstrength)
-				match -= M
+		var/list/match = text_find_mobs(input["info"])
 
 		if(!match.len)
 			return "No matches"
@@ -329,7 +385,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/client/C
 		var/req_ckey = ckey(input["adminmsg"])
 
-		for(var/client/K in clients)
+		for(var/client/K in GLOB.clients)
 			if(K.ckey == req_ckey)
 				C = K
 				break
@@ -339,21 +395,21 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/rank = input["rank"]
 		if(!rank)
 			rank = "Admin"
+		if(rank == "Unknown")
+			rank = "Staff"
 
-		var/message =	"<font color='red'>IRC-[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>IRC-[rank] PM from <a href='?irc_msg=[input["sender"]]'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</font>"
+		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
 
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]
 
-		C << 'sound/effects/adminhelp.ogg'
-		C << message
+		sound_to(C, 'sound/effects/adminhelp.ogg')
+		to_chat(C, message)
 
-
-		for(var/client/A in admins)
+		for(var/client/A in GLOB.admins)
 			if(A != C)
-				A << amessage
-
+				to_chat(A, amessage)
 		return "Message Successful"
 
 	else if(copytext(T,1,6) == "notes")
@@ -398,24 +454,78 @@ var/world_topic_spam_protect_time = world.timeofday
 		else
 			return "Database connection failed or not set up"
 
+	else if(copytext(T,1,14) == "placepermaban")
+		var/input[] = params2list(T)
+		if(!config.ban_comms_password)
+			return "Not enabled"
+		if(input["bankey"] != config.ban_comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		var/target = ckey(input["target"])
+
+		var/client/C
+		for(var/client/K in GLOB.clients)
+			if(K.ckey == target)
+				C = K
+				break
+		if(!C)
+			return "No client with that name found on server"
+		if(!C.mob)
+			return "Client missing mob"
+
+		if(!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
+			return "Save failed"
+		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
+		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
+		qdel(C)
+
+	else if(copytext(T,1,19) == "prometheus_metrics")
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		if(!GLOB || !GLOB.prometheus_metrics)
+			return "Metrics not ready"
+
+		return GLOB.prometheus_metrics.collect()
+		
 
 /world/Reboot(var/reason)
 	/*spawn(0)
-		world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')) // random end sounds!! - LastyBatsy
+		sound_to(world, sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')))// random end sounds!! - LastyBatsy
+
 		*/
 
 	processScheduler.stop()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-		for(var/client/C in clients)
-			C << link("byond://[config.server]")
+		for(var/client/C in GLOB.clients)
+			to_chat(C, link("byond://[config.server]"))
 
 	if(config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")
-		world << "<span class=danger>World reboot waiting for external scripts. Please be patient.</span>"
+		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
 		return
 
 	..(reason)
+
+/world/Del()
+	callHook("shutdown")
+	return ..()
 
 /hook/startup/proc/loadMode()
 	world.load_mode()
@@ -436,7 +546,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	fdel(F)
 	F << the_mode
 
-
 /hook/startup/proc/loadMOTD()
 	world.load_motd()
 	return 1
@@ -450,7 +559,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")
-	config.loadforumsql("config/forumdbconfig.txt")
+	config.load_event("config/custom_event.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
@@ -476,7 +585,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(directory[ckey])
+				D.associate(GLOB.ckey_directory[ckey])
 
 /world/proc/load_mentors()
 	if(config.admin_legacy_system)
@@ -496,7 +605,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(directory[ckey])
+				D.associate(GLOB.ckey_directory[ckey])
 
 /world/proc/update_status()
 	var/s = ""
@@ -532,7 +641,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		features += "AI allowed"
 
 	var/n = 0
-	for (var/mob/M in player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (M.client)
 			n++
 
@@ -551,6 +660,15 @@ var/world_topic_spam_protect_time = world.timeofday
 	/* does this help? I do not know */
 	if (src.status != s)
 		src.status = s
+
+/world/proc/SetupLogs()
+	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
+	if(game_id)
+		GLOB.log_directory += "[game_id]"
+	else
+		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
+
+	GLOB.world_runtime_log << "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------"
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0

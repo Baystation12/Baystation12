@@ -36,13 +36,14 @@ var/list/ghost_traps
 	..()
 
 // Check for bans, proper atom types, etc.
-/datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target)
+/datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
 	if(!candidate.MayRespawn(1, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
 			if(jobban_isbanned(candidate, "[bantype]"))
-				candidate << "You are banned from one or more required roles and hence cannot enter play as \a [object]."
+				if(feedback)
+					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
 				return 0
 	return 1
 
@@ -50,24 +51,21 @@ var/list/ghost_traps
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	if(request_timeout)
 		request_timeouts[target] = world.time + request_timeout
-		destroyed_event.register(target, src, /datum/ghosttrap/proc/target_destroyed)
+		GLOB.destroyed_event.register(target, src, /datum/ghosttrap/proc/unregister_target)
 	else
-		request_timeouts -= target
+		unregister_target(target)
 
-	for(var/mob/observer/ghost/O in player_list)
-		if(!O.MayRespawn())
-			continue
-		if(islist(ban_checks))
-			for(var/bantype in ban_checks)
-				if(jobban_isbanned(O, "[bantype]"))
-					continue
-		if(pref_check && !(pref_check in O.client.prefs.be_special_role))
+	for(var/mob/observer/ghost/O in GLOB.player_list)
+		if(!assess_candidate(O, target, FALSE))
+			return
+		if(pref_check && !O.client.wishes_to_be_role(pref_check))
 			continue
 		if(O.client)
-			O << "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])"
+			to_chat(O, "[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")
 
-/datum/ghosttrap/proc/target_destroyed(var/destroyed_target)
-	request_timeouts -= destroyed_target
+/datum/ghosttrap/proc/unregister_target(var/target)
+	request_timeouts -= target
+	GLOB.destroyed_event.unregister(target, src, /datum/ghosttrap/proc/unregister_target)
 
 // Handles a response to request_player().
 /datum/ghosttrap/Topic(href, href_list)
@@ -81,10 +79,10 @@ var/list/ghost_traps
 		if(candidate != usr)
 			return
 		if(request_timeouts[target] && world.time > request_timeouts[target])
-			candidate << "This occupation request is no longer valid."
+			to_chat(candidate, "This occupation request is no longer valid.")
 			return
 		if(target.key)
-			candidate << "The target is already occupied."
+			to_chat(candidate, "The target is already occupied.")
 			return
 		if(assess_candidate(candidate, target))
 			transfer_personality(candidate,target)
@@ -92,7 +90,7 @@ var/list/ghost_traps
 
 // Shunts the ckey/mind into the target mob.
 /datum/ghosttrap/proc/transfer_personality(var/mob/candidate, var/mob/target)
-	if(!assess_candidate(candidate))
+	if(!assess_candidate(candidate, target))
 		return 0
 	target.ckey = candidate.ckey
 	if(target.mind)
@@ -104,10 +102,10 @@ var/list/ghost_traps
 
 // Fluff!
 /datum/ghosttrap/proc/welcome_candidate(var/mob/target)
-	target << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
-	target << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
-	target << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
-	target << "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>"
+	to_chat(target, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+	to_chat(target, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
+	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the [station_name()]. Above all else, do no harm.</b>")
+	to_chat(target, "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>")
 	var/turf/T = get_turf(target)
 	var/obj/item/device/mmi/digital/posibrain/P = target.loc
 	T.visible_message("<span class='notice'>\The [P] chimes quietly.</span>")
@@ -138,12 +136,11 @@ var/list/ghost_traps
 	ghost_trap_role = "Plant"
 
 /datum/ghosttrap/plant/welcome_candidate(var/mob/target)
-	target << "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>"
+	to_chat(target, "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>")
 	// This is a hack, replace with some kind of species blurb proc.
 	if(istype(target,/mob/living/carbon/alien/diona))
-		target << "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
-		target << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
-
+		to_chat(target, "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>")
+		to_chat(target, "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>")
 /*****************
 * Cortical Borer *
 *****************/
@@ -157,11 +154,10 @@ var/list/ghost_traps
 	list_as_special_role = FALSE
 
 /datum/ghosttrap/borer/welcome_candidate(var/mob/target)
-	target << "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
+	to_chat(target, "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
 	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
-	your host and your eventual spawn safe and warm."
-	target << "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers."
-
+	your host and your eventual spawn safe and warm.")
+	to_chat(target, "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers.")
 /********************
 * Maintenance Drone *
 *********************/
@@ -214,3 +210,26 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 
 /datum/ghosttrap/familiar/welcome_candidate(var/mob/target)
 	return 0
+
+/datum/ghosttrap/cult
+	object = "cultist"
+	ban_checks = list("cultist")
+	pref_check = MODE_CULTIST
+	can_set_own_name = FALSE
+	ghost_trap_message = "They are occupying a cultist's body now."
+	ghost_trap_role = "Cultist"
+
+/datum/ghosttrap/cult/welcome_candidate(var/mob/target)
+	var/obj/item/device/soulstone/S = target.loc
+	if(istype(S))
+		if(S.is_evil)
+			cult.add_antagonist(target.mind)
+			to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
+		else
+			to_chat(target, "<b>This soultone has been purified. You do not belong to the cult.</b>")
+			to_chat(target, "<b>Remember, you only serve the one who summoned you.</b>")
+
+/datum/ghosttrap/cult/shade
+	object = "soul stone"
+	ghost_trap_message = "They are occupying a soul stone now."
+	ghost_trap_role = "Shade"

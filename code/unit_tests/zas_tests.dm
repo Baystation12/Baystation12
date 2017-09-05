@@ -48,7 +48,7 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 	// BYOND creates an instance of every area, so this can't be !A or !istype(A, test_area)
 	if(!(A.x || A.y || A.z))
 		test_result["msg"] = "Unable to get [test_area]"
-		test_result["result"] = SKIP
+		test_result["result"] = FAILURE
 		return test_result
 
 	var/list/GM_checked = list()
@@ -104,71 +104,6 @@ proc/test_air_in_area(var/test_area, var/expectation = UT_NORMAL)
 
 // ==================================================================================================
 
-datum/unit_test/zas_area_test/supply_centcomm
-	name = "ZAS: Supply Shuttle (CentComm)"
-	area_path = /area/supply/dock
-
-datum/unit_test/zas_area_test/emergency_shuttle
-	name = "ZAS: Emergency Shuttle"
-	area_path = /area/shuttle/escape/centcom
-
-datum/unit_test/zas_area_test/ai_chamber
-	name = "ZAS: AI Chamber"
-	area_path = /area/turret_protected/ai
-
-datum/unit_test/zas_area_test/arrival_maint
-	name = "ZAS: Arrival Maintenance"
-	area_path = /area/maintenance/arrivals
-
-datum/unit_test/zas_area_test/mining_shuttle_at_station
-	name = "ZAS: Mining Shuttle (Station)"
-	area_path = /area/shuttle/mining/station
-
-datum/unit_test/zas_area_test/
-	name = "ZAS: Cargo Maintenance"
-	area_path = /area/maintenance/cargo
-
-datum/unit_test/zas_area_test/eng_shuttle
-	name = "ZAS: Construction Site Shuttle (Station)"
-	area_path = /area/shuttle/constructionsite/station
-
-datum/unit_test/zas_area_test/incinerator
-	name = "ZAS: Incinerator"
-	area_path = /area/maintenance/incinerator
-	disabled = 1
-	why_disabled = "Scrubber pulls air, this area cannot be tested."
-
-datum/unit_test/zas_area_test/virology
-	name = "ZAS: Virology"
-	area_path = /area/medical/virology
-
-datum/unit_test/zas_area_test/xenobio
-	name = "ZAS: Xenobiology"
-	area_path = /area/rnd/xenobiology
-
-datum/unit_test/zas_area_test/research_maint_starboard
-	name = "ZAS: Research Starboard Maintenance"
-	area_path = /area/maintenance/research_starboard
-
-datum/unit_test/zas_area_test/west_hall_mining_outpost
-	name = "ZAS: Mining outpost West Hallway"
-	area_path = /area/outpost/mining_main/west_hall
-
-/*
-datum/unit_test/zas_area_test/mining_area
-	name = "ZAS: Mining Area (Vacuum)"
-	area_path = /area/mine/explored
-	expectation = UT_VACUUM
-	disabled = 1
-	why_disabled = "Asteroid Generation disabled"
- */
-datum/unit_test/zas_area_test/
-	name = "ZAS: Cargo Bay"
-	area_path = /area/quartermaster/storage
-
-
-// ==================================================================================================
-
 
 // Here we move a shuttle then test it's area once the shuttle has arrived.
 
@@ -176,7 +111,7 @@ datum/unit_test/zas_supply_shuttle_moved
 	name = "ZAS: Supply Shuttle (When Moved)"
 	async=1				// We're moving the shuttle using built in procs.
 
-	var/datum/shuttle/ferry/supply/shuttle = null
+	var/datum/shuttle/autodock/ferry/supply/shuttle = null
 
 	var/testtime = 0	//Used as a timer.
 
@@ -195,7 +130,7 @@ datum/unit_test/zas_supply_shuttle_moved/start_test()
 
 	// Initiate the Move.
 	supply_controller.movetime = 5 // Speed up the shuttle movement.
-	shuttle.short_jump(shuttle.area_offsite, shuttle.area_station)
+	shuttle.short_jump(shuttle.get_location_waypoint(!shuttle.location)) //TODO
 
 	return 1
 
@@ -216,16 +151,16 @@ datum/unit_test/zas_supply_shuttle_moved/check_result()
 
 	if(world.time < testtime)
 		return 0
+	for(var/area/A in shuttle.shuttle_area)
+		var/list/test = test_air_in_area(A.type)
+		if(isnull(test))
+			fail("Check Runtimed")
+			return 1
 
-	var/list/test = test_air_in_area(/area/supply/station)
-	if(isnull(test))
-		fail("Check Runtimed")
-		return 1
-
-	switch(test["result"])
-		if(SUCCESS) pass(test["msg"])
-		if(SKIP)    skip(test["msg"])
-		else        fail(test["msg"])
+		switch(test["result"])
+			if(SUCCESS) pass(test["msg"])
+			if(SKIP)    skip(test["msg"])
+			else        fail(test["msg"])
 	return 1
 
 #undef UT_NORMAL

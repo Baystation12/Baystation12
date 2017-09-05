@@ -2,7 +2,7 @@
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
 	anchored = 0
-	density = 1
+	density = 0
 
 
 /obj/machinery/iv_drip/var/mob/living/carbon/human/attached = null
@@ -19,10 +19,10 @@
 
 	if(beaker)
 		var/datum/reagents/reagents = beaker.reagents
+		var/percent = round((reagents.total_volume / beaker.volume) * 100)
 		if(reagents.total_volume)
 			var/image/filling = image('icons/obj/iv_drip.dmi', src, "reagent")
 
-			var/percent = round((reagents.total_volume / beaker.volume) * 100)
 			switch(percent)
 				if(0 to 9)		filling.icon_state = "reagent0"
 				if(10 to 24) 	filling.icon_state = "reagent10"
@@ -31,9 +31,16 @@
 				if(75 to 79)	filling.icon_state = "reagent75"
 				if(80 to 90)	filling.icon_state = "reagent80"
 				if(91 to INFINITY)	filling.icon_state = "reagent100"
-
 			filling.icon += reagents.get_color()
 			overlays += filling
+
+		if(attached)
+			var/image/light = image('icons/obj/iv_drip.dmi', "light_full")
+			if(percent < 15)
+				light.icon_state = "light_low"
+			else if(percent < 60)
+				light.icon_state = "light_mid"
+			overlays += light
 
 /obj/machinery/iv_drip/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))
@@ -54,13 +61,13 @@
 /obj/machinery/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/reagent_containers))
 		if(!isnull(src.beaker))
-			user << "There is already a reagent container loaded!"
+			to_chat(user, "There is already a reagent container loaded!")
 			return
 
 		user.drop_item()
 		W.loc = src
 		src.beaker = W
-		user << "You attach \the [W] to \the [src]."
+		to_chat(user, "You attach \the [W] to \the [src].")
 		src.update_icon()
 		return
 	else
@@ -74,7 +81,7 @@
 
 		if(!(get_dist(src, src.attached) <= 1 && isturf(src.attached.loc)))
 			visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
-			src.attached:apply_damage(3, BRUTE, pick("r_arm", "l_arm"))
+			src.attached.apply_damage(3, BRUTE, pick(BP_R_ARM, BP_L_ARM))
 			src.attached = null
 			src.update_icon()
 			return
@@ -107,20 +114,14 @@
 			if(NOCLONE in T.mutations)
 				return
 
-			if(T.species.flags & NO_BLOOD)
+			if(!T.should_have_organ(BP_HEART))
 				return
 
 			// If the human is losing too much blood, beep.
-			if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
+			if(((T.vessel.get_reagent_amount(/datum/reagent/blood)/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
 				visible_message("\The [src] beeps loudly.")
 
-			var/datum/reagent/B = T.take_blood(beaker,amount)
-
-			if (B)
-				beaker.reagents.reagent_list |= B
-				beaker.reagents.update_total()
-				beaker.on_reagent_change()
-				beaker.reagents.handle_reactions()
+			if(T.take_blood(beaker,amount))
 				update_icon()
 
 /obj/machinery/iv_drip/attack_hand(mob/user as mob)
@@ -131,6 +132,12 @@
 	else
 		return ..()
 
+/obj/machinery/iv_drip/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
+
+obj/machinery/iv_drip/attack_ai(mob/user as mob)
+	return
 
 /obj/machinery/iv_drip/verb/toggle_mode()
 	set category = "Object"
@@ -138,30 +145,30 @@
 	set src in view(1)
 
 	if(!istype(usr, /mob/living))
-		usr << "<span class='warning'>You can't do that.</span>"
+		to_chat(usr, "<span class='warning'>You can't do that.</span>")
 		return
 
 	if(usr.stat)
 		return
 
 	mode = !mode
-	usr << "The IV drip is now [mode ? "injecting" : "taking blood"]."
+	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
 /obj/machinery/iv_drip/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (!(user in view(2)) && user!=src.loc) return
 
-	user << "The IV drip is [mode ? "injecting" : "taking blood"]."
+	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")
 
 	if(beaker)
 		if(beaker.reagents && beaker.reagents.reagent_list.len)
-			usr << "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>"
+			to_chat(usr, "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>")
 		else
-			usr << "<span class='notice'>Attached is an empty [beaker].</span>"
+			to_chat(usr, "<span class='notice'>Attached is an empty [beaker].</span>")
 	else
-		usr << "<span class='notice'>No chemicals are attached.</span>"
+		to_chat(usr, "<span class='notice'>No chemicals are attached.</span>")
 
-	usr << "<span class='notice'>[attached ? attached : "No one"] is attached.</span>"
+	to_chat(usr, "<span class='notice'>[attached ? attached : "No one"] is attached.</span>")
 
 /obj/machinery/iv_drip/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(height && istype(mover) && mover.checkpass(PASSTABLE)) //allow bullets, beams, thrown objects, mice, drones, and the like through.

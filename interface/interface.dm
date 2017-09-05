@@ -8,7 +8,7 @@
 			return
 		src << link(config.wikiurl)
 	else
-		src << "<span class='warning'>The wiki URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
 	return
 
 /client/verb/forum()
@@ -20,7 +20,7 @@
 			return
 		src << link(config.forumurl)
 	else
-		src << "<span class='warning'>The forum URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
 	return
 
 #define RULES_FILE "config/rules.html"
@@ -30,6 +30,14 @@
 	set hidden = 1
 	src << browse(file(RULES_FILE), "window=rules;size=480x320")
 #undef RULES_FILE
+
+#define LORE_FILE "config/lore.html"
+/client/verb/lore_splash()
+	set name = "Lore"
+	set desc = "Links to the beginner Lore wiki."
+	set hidden = 1
+	show_browser(src, file(LORE_FILE), "window=lore;size=480x320")
+#undef LORE_FILE
 
 /client/verb/hotkeys_help()
 	set name = "hotkeys-help"
@@ -50,6 +58,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \ts = down
 \td = right
 \tw = up
+\t, = move-upwards
+\t. = move-down
 \tq = drop
 \te = equip
 \tr = throw
@@ -145,10 +155,10 @@ Any-Mode: (hotkey doesn't need to be on)
 </font>"}
 
 	if(isrobot(src.mob))
-		src << robot_hotkey_mode
-		src << robot_other
+		to_chat(src, robot_hotkey_mode)
+		to_chat(src, robot_other)
 	else
-		src << hotkey_mode
-		src << other
+		to_chat(src, hotkey_mode)
+		to_chat(src, other)
 	if(holder)
-		src << admin
+		to_chat(src, admin)

@@ -39,7 +39,10 @@
 		return
 	var/list/turfs = list()
 	for(var/turf/T in orange(origin, outer_range))
-		if(get_dist(origin, T) >= inner_range)
+		if(!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
+			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
+			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
+		if(!inner_range || get_dist(origin, T) >= inner_range)
 			turfs += T
 	if(turfs.len)
 		return pick(turfs)
@@ -61,6 +64,12 @@
 	Predicate helpers
 */
 
+/proc/is_holy_turf(var/turf/T)
+	return T && T.holy
+
+/proc/is_not_holy_turf(var/turf/T)
+	return !is_holy_turf(T)
+
 /proc/turf_contains_dense_objects(var/turf/T)
 	return T.contains_dense_objects()
 
@@ -69,6 +78,9 @@
 
 /proc/is_station_turf(var/turf/T)
 	return T && isStationLevel(T.z)
+
+/proc/has_air(var/turf/T)
+	return !!T.return_air()
 
 /proc/IsTurfAtmosUnsafe(var/turf/T)
 	if(istype(T, /turf/space)) // Space tiles
@@ -80,3 +92,63 @@
 
 /proc/IsTurfAtmosSafe(var/turf/T)
 	return !IsTurfAtmosUnsafe(T)
+
+/proc/is_below_sound_pressure(var/turf/T)
+	var/datum/gas_mixture/environment = T ? T.return_air() : null
+	var/pressure =  environment ? environment.return_pressure() : 0
+	if(pressure < SOUND_MINIMUM_PRESSURE)
+		return TRUE
+	return FALSE
+
+/*
+	Turf manipulation
+*/
+
+//Returns an assoc list that describes how turfs would be changed if the
+//turfs in turfs_src were translated by shifting the src_origin to the dst_origin
+/proc/get_turf_translation(turf/src_origin, turf/dst_origin, list/turfs_src)
+	var/list/turf_map = list()
+	for(var/turf/source in turfs_src)
+		var/x_pos = (source.x - src_origin.x)
+		var/y_pos = (source.y - src_origin.y)
+		var/z_pos = (source.z - src_origin.z)
+
+		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
+		if(!target)
+			error("Null turf in translation @ ([dst_origin.x + x_pos], [dst_origin.y + y_pos], [dst_origin.z + z_pos])")
+		turf_map[source] = target //if target is null, preserve that information in the turf map
+
+	return turf_map
+
+
+/proc/translate_turfs(var/list/translation, var/area/base_area = null, var/turf/base_turf)
+	for(var/turf/source in translation)
+
+		var/turf/target = translation[source]
+
+		if(target)
+			//update area first so that area/Entered() will be called with the correct area when atoms are moved
+			if(base_area)
+				source.loc.contents.Add(target)
+				base_area.contents.Add(source)
+			transport_turf_contents(source, target)
+
+	//change the old turfs
+	for(var/turf/source in translation)
+		source.ChangeTurf(base_turf ? base_turf : get_base_turf_by_area(source), 1, 1)
+
+//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
+/proc/transport_turf_contents(turf/source, turf/target)
+
+	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
+	new_turf.transport_properties_from(source)
+
+	for(var/obj/O in source)
+		if(O.simulated)
+			O.forceMove(new_turf)
+
+	for(var/mob/M in source)
+		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
+		M.forceMove(new_turf)
+
+	return new_turf

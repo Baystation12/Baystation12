@@ -9,9 +9,12 @@
 /obj/screen
 	name = ""
 	icon = 'icons/mob/screen1.dmi'
-	layer = SCREEN_LAYER
+	plane = HUD_PLANE
+	layer = HUD_BASE_LAYER
+	appearance_flags = NO_CLIENT_COLOR
 	unacidable = 1
-	var/obj/master = null	//A reference to the object in the slot. Grabs or items, generally.
+	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
+	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
 /obj/screen/Destroy()
 	master = null
@@ -63,21 +66,6 @@
 	owner.ui_action_click()
 	return 1
 
-/obj/screen/grab
-	name = "grab"
-
-/obj/screen/grab/Click()
-	var/obj/item/weapon/grab/G = master
-	G.s_click(src)
-	return 1
-
-/obj/screen/grab/attack_hand()
-	return
-
-/obj/screen/grab/attackby()
-	return
-
-
 /obj/screen/storage
 	name = "storage"
 
@@ -98,7 +86,7 @@
 	name = "damage zone"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
-	var/selecting = "chest"
+	var/selecting = BP_CHEST
 
 /obj/screen/zone_sel/Click(location, control,params)
 	var/list/PL = params2list(params)
@@ -110,61 +98,91 @@
 		if(1 to 3) //Feet
 			switch(icon_x)
 				if(10 to 15)
-					selecting = "r_foot"
+					selecting = BP_R_FOOT
 				if(17 to 22)
-					selecting = "l_foot"
+					selecting = BP_L_FOOT
 				else
 					return 1
 		if(4 to 9) //Legs
 			switch(icon_x)
 				if(10 to 15)
-					selecting = "r_leg"
+					selecting = BP_R_LEG
 				if(17 to 22)
-					selecting = "l_leg"
+					selecting = BP_L_LEG
 				else
 					return 1
 		if(10 to 13) //Hands and groin
 			switch(icon_x)
 				if(8 to 11)
-					selecting = "r_hand"
+					selecting = BP_R_HAND
 				if(12 to 20)
-					selecting = "groin"
+					selecting = BP_GROIN
 				if(21 to 24)
-					selecting = "l_hand"
+					selecting = BP_L_HAND
 				else
 					return 1
 		if(14 to 22) //Chest and arms to shoulders
 			switch(icon_x)
 				if(8 to 11)
-					selecting = "r_arm"
+					selecting = BP_R_ARM
 				if(12 to 20)
-					selecting = "chest"
+					selecting = BP_CHEST
 				if(21 to 24)
-					selecting = "l_arm"
+					selecting = BP_L_ARM
 				else
 					return 1
 		if(23 to 30) //Head, but we need to check for eye or mouth
 			if(icon_x in 12 to 20)
-				selecting = "head"
+				selecting = BP_HEAD
 				switch(icon_y)
 					if(23 to 24)
 						if(icon_x in 15 to 17)
-							selecting = "mouth"
+							selecting = BP_MOUTH
 					if(26) //Eyeline, eyes are on 15 and 17
 						if(icon_x in 14 to 18)
-							selecting = "eyes"
+							selecting = BP_EYES
 					if(25 to 27)
 						if(icon_x in 15 to 17)
-							selecting = "eyes"
+							selecting = BP_EYES
 
 	if(old_selecting != selecting)
 		update_icon()
 	return 1
 
+/obj/screen/zone_sel/proc/set_selected_zone(bodypart)
+	var/old_selecting = selecting
+	selecting = bodypart
+	if(old_selecting != selecting)
+		update_icon()
+
 /obj/screen/zone_sel/update_icon()
 	overlays.Cut()
 	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
 
+/obj/screen/intent
+	name = "intent"
+	icon = 'icons/mob/screen1_White.dmi'
+	icon_state = "intent_help"
+	screen_loc = ui_acti
+	var/intent = I_HELP
+
+/obj/screen/intent/Click(var/location, var/control, var/params)
+	var/list/P = params2list(params)
+	var/icon_x = text2num(P["icon-x"])
+	var/icon_y = text2num(P["icon-y"])
+	intent = I_DISARM
+	if(icon_x <= world.icon_size/2)
+		if(icon_y <= world.icon_size/2)
+			intent = I_HURT
+		else
+			intent = I_HELP
+	else if(icon_y <= world.icon_size/2)
+		intent = I_GRAB
+	update_icon()
+	usr.a_intent = intent
+
+/obj/screen/intent/update_icon()
+	icon_state = "intent_[intent]"
 
 /obj/screen/Click(location, control, params)
 	if(!usr)	return 1
@@ -192,20 +210,13 @@
 				L.resist()
 
 		if("mov_intent")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				if(C.legcuffed)
-					C << "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>"
-					C.m_intent = "walk"	//Just incase
-					C.hud_used.move_intent.icon_state = "walking"
-					return 1
-				switch(usr.m_intent)
-					if("run")
-						usr.m_intent = "walk"
-						usr.hud_used.move_intent.icon_state = "walking"
-					if("walk")
-						usr.m_intent = "run"
-						usr.hud_used.move_intent.icon_state = "running"
+			switch(usr.m_intent)
+				if("run")
+					usr.m_intent = "walk"
+					usr.hud_used.move_intent.icon_state = "walking"
+				if("walk")
+					usr.m_intent = "run"
+					usr.hud_used.move_intent.icon_state = "running"
 
 		if("Reset Machine")
 			usr.unset_machine()
@@ -215,7 +226,7 @@
 				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
 					if(C.internal)
 						C.internal = null
-						C << "<span class='notice'>No longer running on internals.</span>"
+						to_chat(C, "<span class='notice'>No longer running on internals.</span>")
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
@@ -227,7 +238,7 @@
 								no_mask = 1
 
 						if(no_mask)
-							C << "<span class='notice'>You are not wearing a suitable mask or helmet.</span>"
+							to_chat(C, "<span class='notice'>You are not wearing a suitable mask or helmet.</span>")
 							return 1
 						else
 							var/list/nicename = null
@@ -301,7 +312,8 @@
 							//We've determined the best container now we set it as our internals
 
 							if(best)
-								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>"
+								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
+								playsound(usr, 'sound/effects/internals.ogg', 50, 0)
 								C.internal = tankcheck[best]
 
 
@@ -309,21 +321,9 @@
 								if(C.internals)
 									C.internals.icon_state = "internal1"
 							else
-								C << "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>"
+								to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
 		if("act_intent")
 			usr.a_intent_change("right")
-		if(I_HELP)
-			usr.a_intent = I_HELP
-			usr.hud_used.action_intent.icon_state = "intent_help"
-		if(I_HURT)
-			usr.a_intent = I_HURT
-			usr.hud_used.action_intent.icon_state = "intent_harm"
-		if(I_GRAB)
-			usr.a_intent = I_GRAB
-			usr.hud_used.action_intent.icon_state = "intent_grab"
-		if(I_DISARM)
-			usr.a_intent = I_DISARM
-			usr.hud_used.action_intent.icon_state = "intent_disarm"
 
 		if("pull")
 			usr.stop_pulling()
@@ -349,7 +349,7 @@
 					R.hud_used.toggle_show_robot_modules()
 					return 1
 				else
-					R << "You haven't selected a module yet."
+					to_chat(R, "You haven't selected a module yet.")
 
 		if("radio")
 			if(issilicon(usr))
@@ -365,7 +365,7 @@
 					R.uneq_active()
 					R.hud_used.update_robot_modules_display()
 				else
-					R << "You haven't selected a module yet."
+					to_chat(R, "You haven't selected a module yet.")
 
 		if("module1")
 			if(istype(usr, /mob/living/silicon/robot))

@@ -19,8 +19,12 @@
 	var/shuttletarget = null
 	var/enroute = 0
 
-/mob/living/simple_animal/hostile/proc/FindTarget()
+	var/damtype = BRUTE
+	var/defense = "melee" //what armor protects against its attacks
 
+/mob/living/simple_animal/hostile/proc/FindTarget()
+	if(!faction) //No faction, no reason to attack anybody.
+		return null
 	var/atom/T = null
 	stop_automated_movement = 0
 	for(var/atom/A in ListTargets(10))
@@ -50,13 +54,6 @@
 			if (M.occupant)
 				stance = HOSTILE_STANCE_ATTACK
 				T = M
-				break
-
-		if(istype(A, /obj/machinery/bot))
-			var/obj/machinery/bot/B = A
-			if (B.health > 0)
-				stance = HOSTILE_STANCE_ATTACK
-				T = B
 				break
 	return T
 
@@ -98,16 +95,12 @@
 		return
 	if(isliving(target_mob))
 		var/mob/living/L = target_mob
-		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,damtype,defense)
 		return L
 	if(istype(target_mob,/obj/mecha))
 		var/obj/mecha/M = target_mob
 		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 		return M
-	if(istype(target_mob,/obj/machinery/bot))
-		var/obj/machinery/bot/B = target_mob
-		B.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
-		return B
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -128,8 +121,8 @@
 
 	return L
 
-/mob/living/simple_animal/hostile/death()
-	..()
+/mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
+	..(gibbed, deathmessage, show_dead_message)
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/Life()
@@ -140,21 +133,28 @@
 		return 0
 	if(client)
 		return 0
+	if(isturf(src.loc))
+		if(!stat)
+			switch(stance)
+				if(HOSTILE_STANCE_IDLE)
+					target_mob = FindTarget()
 
-	if(!stat)
-		switch(stance)
-			if(HOSTILE_STANCE_IDLE)
-				target_mob = FindTarget()
+				if(HOSTILE_STANCE_ATTACK)
+					if(destroy_surroundings)
+						DestroySurroundings()
+					MoveToTarget()
 
-			if(HOSTILE_STANCE_ATTACK)
-				if(destroy_surroundings)
-					DestroySurroundings()
-				MoveToTarget()
-
-			if(HOSTILE_STANCE_ATTACKING)
-				if(destroy_surroundings)
-					DestroySurroundings()
-				AttackTarget()
+				if(HOSTILE_STANCE_ATTACKING)
+					if(destroy_surroundings)
+						DestroySurroundings()
+					AttackTarget()
+				if(HOSTILE_STANCE_INSIDE) //we aren't inside something so just switch
+					stance = HOSTILE_STANCE_IDLE
+	else
+		if(stance != HOSTILE_STANCE_INSIDE)
+			stance = HOSTILE_STANCE_INSIDE
+			walk(src,0)
+			target_mob = null
 
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
@@ -179,7 +179,7 @@
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	var/target = target_mob
-	visible_message("\red <b>[src]</b> fires at [target]!", 1)
+	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
 
 	if(rapid)
 		spawn(1)
@@ -216,45 +216,15 @@
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
-		for(var/dir in cardinal) // North, South, East, West
+		for(var/dir in GLOB.cardinal) // North, South, East, West
+			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, dir))
+			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
+				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+				return
 			for(var/obj/structure/window/obstacle in get_step(src, dir))
-				if(obstacle.dir == reverse_dir[dir]) // So that windows get smashed in the right order
+				if(obstacle.dir == GLOB.reverse_dir[dir]) // So that windows get smashed in the right order
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 					return
 			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
 			if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
 				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
-
-
-/mob/living/simple_animal/hostile/proc/check_horde()
-	return 0
-	if(emergency_shuttle.shuttle.location)
-		if(!enroute && !target_mob)	//The shuttle docked, all monsters rush for the escape hallway
-			if(!shuttletarget && escape_list.len) //Make sure we didn't already assign it a target, and that there are targets to pick
-				shuttletarget = pick(escape_list) //Pick a shuttle target
-			enroute = 1
-			stop_automated_movement = 1
-			spawn()
-				if(!src.stat)
-					horde()
-
-		if(get_dist(src, shuttletarget) <= 2)		//The monster reached the escape hallway
-			enroute = 0
-			stop_automated_movement = 0
-
-/mob/living/simple_animal/hostile/proc/horde()
-	var/turf/T = get_step_to(src, shuttletarget)
-	for(var/atom/A in T)
-		if(istype(A,/obj/machinery/door/))
-			var/obj/machinery/door/D = A
-			D.open(1)
-		else if(istype(A,/obj/structure/cult/pylon))
-			A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper))
-		else if(istype(A, /obj/structure/window) || istype(A, /obj/structure/closet) || istype(A, /obj/structure/table) || istype(A, /obj/structure/grille))
-			A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper))
-	Move(T)
-	FindTarget()
-	if(!target_mob || enroute)
-		spawn(10)
-			if(!src.stat)
-				horde()

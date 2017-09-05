@@ -4,9 +4,13 @@
 	full_name = "The Example"
 	path = "example"
 
-	station_levels = list(1)
-	contact_levels = list(1)
-	player_levels = list(1)
+	lobby_icon = 'maps/example/example_lobby.dmi'
+
+	station_levels = list(1,2)
+	contact_levels = list(1,2)
+	player_levels = list(1,2)
+
+	allowed_spawns = list("Arrivals Shuttle")
 
 	shuttle_docked_message = "The shuttle has docked."
 	shuttle_leaving_dock = "The shuttle has departed from home dock."

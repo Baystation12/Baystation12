@@ -4,7 +4,7 @@
 	name = "antibody scanner"
 	desc = "Scans living beings for antibodies in their blood."
 	icon_state = "health"
-	w_class = 2.0
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	flags = CONDUCT
 
@@ -16,7 +16,7 @@
 	var/mob/living/carbon/C = M
 	if (istype(C,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = C
-		if(H.species.flags & NO_BLOOD)
+		if(!H.should_have_organ(BP_HEART))
 			report("Scan aborted: The target does not have blood.", user)
 			return
 
@@ -31,7 +31,7 @@
 		report("Antibodies detected: [antigens2string(C.antibodies)]", user)
 
 /obj/item/device/antibody_scanner/proc/report(var/text, mob/user as mob)
-	user << "\blue \icon[src] \The [src] beeps, \"[text]\""
+	to_chat(user, "<span class='notice'>\icon[src] \The [src] beeps, \"[text]\"</span>")
 
 ///////////////VIRUS DISH///////////////
 
@@ -59,7 +59,7 @@
 		return
 	..()
 	if(prob(50))
-		user << "<span class='danger'>\The [src] shatters!</span>"
+		to_chat(user, "<span class='danger'>\The [src] shatters!</span>")
 		if(virus2.infectionchance > 0)
 			for(var/mob/living/carbon/target in view(1, get_turf(src)))
 				if(airborne_can_reach(get_turf(src), get_turf(target)))
@@ -67,9 +67,9 @@
 		qdel(src)
 
 /obj/item/weapon/virusdish/examine(mob/user)
-	..()
+	. = ..()
 	if(basic_info)
-		user << "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>"
+		to_chat(user, "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>")
 
 /obj/item/weapon/virusdish/Topic(href, href_list)
 	. = ..()
@@ -90,7 +90,7 @@
 		return ..()
 
 	if(prob(50))
-		user << "\The [src] shatters!"
+		to_chat(user, "\The [src] shatters!")
 		qdel(src)
 
 ///////////////GNA DISK///////////////
@@ -99,14 +99,13 @@
 	name = "blank GNA disk"
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk0"
-	w_class = 1
-	var/datum/disease2/effectholder/effect = null
+	w_class = ITEM_SIZE_TINY
+	var/datum/disease2/effect/effect = null
 	var/list/species = null
 	var/stage = 1
 	var/analysed = 1
 
 /obj/item/weapon/diseasedisk/premade/New()
 	name = "blank GNA disk (stage: [stage])"
-	effect = new /datum/disease2/effectholder
-	effect.effect = new /datum/disease2/effect/invisible
+	effect = new /datum/disease2/effect/invisible
 	effect.stage = stage

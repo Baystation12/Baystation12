@@ -8,7 +8,7 @@
 	charge_max = 6
 	charge_counter = 6
 	spell_flags = 0
-	invocation = "Fu'Reai Diakan"
+	invocation = "Fu'Reai Diakan!"
 	invocation_type = SpI_SHOUT
 	range = 20
 

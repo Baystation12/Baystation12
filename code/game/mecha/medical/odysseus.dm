@@ -9,7 +9,6 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/odysseus
 	internal_damage_threshold = 35
 	deflect_chance = 15
-	step_energy_drain = 6
 	var/obj/item/clothing/glasses/hud/health/mech/hud
 
 	New()
@@ -42,7 +41,8 @@
 		var/perspective = input("Select a perspective type.",
                       "Client perspective",
                       occupant.client.perspective) in list(MOB_PERSPECTIVE,EYE_PERSPECTIVE)
-		world << "[perspective]"
+		log_debug("[perspective]")
+
 		occupant.client.perspective = perspective
 		return
 
@@ -54,7 +54,8 @@
 			occupant.client.eye = src
 		else
 			occupant.client.eye = occupant
-		world << "[occupant.client.eye]"
+		log_debug("[occupant.client.eye]")
+
 		return
 */
 
@@ -65,15 +66,21 @@
 
 	process_hud(var/mob/M)
 /*
-		world<< "view(M)"
+		log_debug("view(M)")
+
 		for(var/mob/mob in view(M))
-			world << "[mob]"
-		world<< "view(M.client)"
+			log_debug("[mob]")
+
+		log_debug("view(M.client)")
+
 		for(var/mob/mob in view(M.client))
-			world << "[mob]"
-		world<< "view(M.loc)"
+			log_debug("[mob]")
+
+		log_debug("view(M.loc)")
+
 		for(var/mob/mob in view(M.loc))
-			world << "[mob]"
+			log_debug("[mob]")
+
 */
 
 		if(!M || M.stat || !(M in view(M)))	return
@@ -95,7 +102,7 @@
 				holder.icon_state = "hudhealth-100"
 				C.images += holder
 			else
-				holder.icon_state = RoundHealth((patient.health-config.health_threshold_crit)/(patient.maxHealth-config.health_threshold_crit)*100)
+				holder.icon_state = "hudhealth-100" // TODO
 				C.images += holder
 
 			holder = patient.hud_list[STATUS_HUD]

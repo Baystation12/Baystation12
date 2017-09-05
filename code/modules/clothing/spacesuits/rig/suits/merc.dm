@@ -1,13 +1,13 @@
 /obj/item/clothing/head/helmet/space/rig/merc
 	light_overlay = "helmet_light_dual_green"
-	camera_networks = list(NETWORK_MERCENARY)
+	camera = /obj/machinery/camera/network/mercenary
 
 /obj/item/weapon/rig/merc
 	name = "crimson hardsuit control module"
 	desc = "A blood-red hardsuit featuring some fairly illegal technology."
 	icon_state = "merc_rig"
 	suit_type = "crimson hardsuit"
-	armor = list(melee = 80, bullet = 65, laser = 50, energy = 15, bomb = 80, bio = 100, rad = 60)
+	armor = list(melee = 80, bullet = 65, laser = 65, energy = 15, bomb = 80, bio = 100, rad = 60)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY
@@ -28,6 +28,20 @@
 
 //Has most of the modules removed
 /obj/item/weapon/rig/merc/empty
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/electrowarfare_suite, //might as well
+		)
+
+/obj/item/weapon/rig/merc/heavy
+	name = "heavy crimson hardsuit control module"
+	desc = "A blood-red hardsuit featuring some fairly illegal technology and real curves."
+	icon_state = "merc_rig_heavy"
+	armor = list(melee = 90, bullet = 80, laser = 80, energy = 25, bomb = 90, bio = 100, rad = 70)
+	offline_slowdown = 4
+	online_slowdown = 2
+
+/obj/item/weapon/rig/merc/heavy/empty
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/electrowarfare_suite, //might as well

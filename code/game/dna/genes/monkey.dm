@@ -76,10 +76,10 @@
 	O.take_overall_damage(M.getBruteLoss() + 40, M.getFireLoss())
 	O.adjustToxLoss(M.getToxLoss() + 20)
 	O.adjustOxyLoss(M.getOxyLoss())
-	O.stat = M.stat
+	O.set_stat(M.stat)
 	O.a_intent = I_HURT
 	for (var/obj/item/weapon/implant/I in implants)
-		I.loc = O
+		I.forceMove(O)
 		I.implanted = O
 //		O.update_icon = 1	//queue a full icon update at next life() call
 	qdel(M)
@@ -166,9 +166,9 @@
 	O.take_overall_damage(M.getBruteLoss(), M.getFireLoss())
 	O.adjustToxLoss(M.getToxLoss())
 	O.adjustOxyLoss(M.getOxyLoss())
-	O.stat = M.stat
+	O.set_stat(M.stat)
 	for (var/obj/item/weapon/implant/I in implants)
-		I.loc = O
+		I.forceMove(O)
 		I.implanted = O
 //		O.update_icon = 1	//queue a full icon update at next life() call
 	qdel(M)

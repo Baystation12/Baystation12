@@ -18,7 +18,8 @@
 	anchored = 1
 	density = 1
 	opacity = 0
-	layer = TURF_LAYER + 0.01
+	plane = ABOVE_TURF_PLANE
+	layer = PLANT_LAYER
 
 /obj/structure/diona/vines
 	name = "alien vines"

@@ -1,6 +1,6 @@
 /datum/language/diona
-	name = LANGUAGE_ROOTSPEAK
-	desc = "A creaking, subvocal language spoken instinctively by the Dionaea. Due to the unique makeup of the average Diona, a phrase of Rootspeak can be a combination of anywhere from one to twelve individual voices and notes."
+	name = LANGUAGE_ROOTLOCAL
+	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses high frequency waves for quick communication at short ranges."
 	speech_verb = "creaks and rustles"
 	ask_verb = "creaks"
 	exclaim_verb = "rustles"
@@ -13,6 +13,12 @@
 	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
 	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
 	return new_name
+
+/datum/language/diona/global
+	name = LANGUAGE_ROOTGLOBAL
+	desc = "A complex language known instinctively by Dionaea, 'spoken' by emitting modulated radio waves. This version uses low frequency waves for slow communication at long ranges."
+	key = "w"
+	flags = RESTRICTED | HIVEMIND
 
 /datum/language/unathi
 	name = LANGUAGE_UNATHI
@@ -90,47 +96,31 @@
 /datum/language/human/get_random_name(var/gender)
 	if (prob(80))
 		if(gender==FEMALE)
-			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
-			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	else
 		return ..()
 
 /datum/language/machine
 	name = LANGUAGE_EAL
-	desc = "A language of encoded tones that allow for IPCs to communicate auditorily between each other in a manner that allows for easier transfer of information."
-	speech_verb = "beeps"
-	ask_verb = "beeps"
-	exclaim_verb = "loudly beeps"
+	desc = "An efficient language of encoded tones developed by synthetics and cyborgs."
+	speech_verb = "whistles"
+	ask_verb = "chirps"
+	exclaim_verb = "whistles loudly"
 	colour = "changeling"
 	key = "6"
-	flags = RESTRICTED | NO_STUTTER
+	flags = NO_STUTTER
 	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
 	space_chance = 10
+
+/datum/language/machine/can_speak_special(var/mob/living/speaker)
+	return speaker.isSynthetic()
 
 /datum/language/machine/get_random_name()
 	if(prob(70))
 		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
-	return pick(ai_names)
-
-/datum/language/resomi
-	name = LANGUAGE_RESOMI
-	desc = "A trilling language spoken by the diminutive Resomi."
-	speech_verb = "chirps"
-	ask_verb = "chirrups"
-	exclaim_verb = "trills"
-	colour = "alien"
-	key = "v"
-	flags = WHITELISTED
-	space_chance = 50
-	syllables = list(
-			"ca", "ra", "ma", "sa", "na", "ta", "la", "sha", "scha", "a", "a",
-			"ce", "re", "me", "se", "ne", "te", "le", "she", "sche", "e", "e",
-			"ci", "ri", "mi", "si", "ni", "ti", "li", "shi", "schi", "i", "i"
-		)
-
-/datum/language/resomi/get_random_name(gender)
-	return ..(gender, 1, 4, 1.5)
+	return pick(GLOB.ai_names)
 
 //Syllable Lists
 /*
@@ -192,3 +182,44 @@
 "le", "me", "nd", "ne", "ng", "nt", "on", "or", "ou", "re", "se", "st", "te", "th", "ti", "to",
 "ve", "wa", "all", "and", "are", "but", "ent", "era", "ere", "eve", "for", "had", "hat", "hen", "her", "hin",
 "his", "ing", "ion", "ith", "not", "ome", "oul", "our", "sho", "ted", "ter", "tha", "the", "thi")
+
+/datum/language/tajsign
+	name = LANGUAGE_SIIK_TAJR
+	desc = "A type of sign language mostly based on tail movements that was used during the Tajaran rebellion."
+	signlang_verb = list("uses their tail to convey", "gestures with their tail", "gestures with their tail elaborately")
+	colour = "tajaran"
+	key = "l"
+	flags = WHITELISTED | SIGNLANG | NO_STUTTER | NONVERBAL
+
+/datum/language/confederate
+	name = LANGUAGE_INDEPENDENT
+	desc = "The official language of the Terran Confederacy, evolved from the languages of Eastern Europe and Northern Asia."
+	speech_verb = "speaks"
+	colour = "terran"
+	key = "r"
+	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
+	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
+	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
+
+/datum/language/nabber
+	name = LANGUAGE_NABBER
+	desc = "A strange language that can be understood both by the sounds made and by the movement needed to create those sounds."
+	signlang_verb = list("chitters", "grinds its mouthparts", "chitters and grinds its mouthparts")
+	key = "n"
+	flags = RESTRICTED | SIGNLANG | NO_STUTTER | NONVERBAL
+	colour = ".nabber_lang"
+
+/datum/language/nabber/get_random_name(var/gender)
+	if(gender == FEMALE)
+		return capitalize(pick(GLOB.first_names_female))
+	else
+		return capitalize(pick(GLOB.first_names_male))
+
+/datum/language/spacer
+	name = LANGUAGE_SPACER
+	desc = "A pidgin language spoken by haulers, merchants, traders, travellers, and cocky fly-boys across the galaxy."
+	colour = "spacer"
+	key = "v"
+	syllables = list ("die", "en", "skei", "van", "son", "der", "aar", "ch", "op", "ruk", "aa", "be", "ne", "het",
+ 	"ek", "ras", "ver", "zan", "das", "waa", "geb", "vol", "lu", "min", "breh", "rus", "stv", "ee", "goe", "sk",
+ 	"la", "ver", "we", "ge", "luk", "an", "ar", "at", "es", "et", "bel", "du", "jaa", "ch", "kk", "gh", "ll", "uu", "wat")

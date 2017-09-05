@@ -10,6 +10,8 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/available_news = list()
 	var/list/chat_channels = list()
 	var/list/fileservers = list()
+	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
+	var/list/banned_nids = list()
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100
@@ -29,12 +31,17 @@ var/global/datum/ntnet/ntnet_global = new()
 /datum/ntnet/New()
 	if(ntnet_global && (ntnet_global != src))
 		ntnet_global = src // There can be only one.
-	for(var/obj/machinery/ntnet_relay/R in machines)
+	for(var/obj/machinery/ntnet_relay/R in GLOB.machines)
 		relays.Add(R)
 		R.NTNet = src
 	build_software_lists()
 	build_news_list()
+	build_emails_list()
 	add_log("NTNet logging system activated.")
+
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+	if(intrusion_detection_enabled)
+		add_log(log_string, source)
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
 /datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
@@ -54,6 +61,16 @@ var/global/datum/ntnet/ntnet_global = new()
 			else
 				break
 
+/datum/ntnet/proc/check_banned(var/NID)
+	if(!relays || !relays.len)
+		return FALSE
+
+	for(var/obj/machinery/ntnet_relay/R in relays)
+		if(R.operable())
+			return (NID in banned_nids)
+
+	return FALSE
+
 // Checks whether NTNet operates. If parameter is passed checks whether specific function is enabled.
 /datum/ntnet/proc/check_function(var/specific_action = 0)
 	if(!relays || !relays.len) // No relays found. NTNet is down
@@ -63,7 +80,7 @@ var/global/datum/ntnet/ntnet_global = new()
 
 	// Check all relays. If we have at least one working relay, network is up.
 	for(var/obj/machinery/ntnet_relay/R in relays)
-		if(R.is_operational())
+		if(R.operable())
 			operating = 1
 			break
 
@@ -103,6 +120,10 @@ var/global/datum/ntnet/ntnet_global = new()
 		if(news.stored_data)
 			available_news.Add(news)
 
+// Generates service email list. Currently only used by broadcaster service
+/datum/ntnet/proc/build_emails_list()
+	for(var/F in subtypesof(/datum/computer_file/data/email_account/service))
+		new F()
 
 // Attempts to find a downloadable file according to filename var
 /datum/ntnet/proc/find_ntnet_file_by_name(var/filename)
@@ -151,9 +172,13 @@ var/global/datum/ntnet/ntnet_global = new()
 			add_log("Configuration Updated. Wireless network firewall now [setting_communication ? "allows" : "disallows"] instant messaging and similar communication services.")
 		if(NTNET_SYSTEMCONTROL)
 			setting_systemcontrol = !setting_systemcontrol
-			add_log("Configuration Updated. Wireless network firewall now [setting_systemcontrol ? "allows" : "disallows"] remote control of station's systems.")
+			add_log("Configuration Updated. Wireless network firewall now [setting_systemcontrol ? "allows" : "disallows"] remote control of [station_name()]'s systems.")
 
-
+/datum/ntnet/proc/does_email_exist(var/login)
+	for(var/datum/computer_file/data/email_account/A in ntnet_global.email_accounts)
+		if(A.login == login)
+			return 1
+	return 0
 
 
 

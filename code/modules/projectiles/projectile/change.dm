@@ -32,8 +32,9 @@
 		var/options = list("robot", "slime")
 		for(var/t in all_species)
 			options += t
-		options -= "Xenomorph Queen"
-		options -= "Xenomorph"
+		options -= "Xenophage Queen"
+		options -= "Xenophage Drone"
+		options -= "Xenophage"
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.species)
@@ -66,11 +67,15 @@
 
 				if(M.gender == MALE)
 					H.gender = MALE
-					H.name = pick(first_names_male)
-				else
+					H.name = pick(GLOB.first_names_male)
+				else if(M.gender == FEMALE)
 					H.gender = FEMALE
-					H.name = pick(first_names_female)
-				H.name += " [pick(last_names)]"
+					H.name = pick(GLOB.first_names_female)
+				else
+					H.gender = NEUTER
+					H.name = pick(GLOB.first_names_female|GLOB.first_names_male)
+
+				H.name += " [pick(GLOB.last_names)]"
 				H.real_name = H.name
 
 				H.set_species(randomize)
@@ -79,7 +84,7 @@
 				A.randomize_appearance_and_body_for(H)
 
 		if(new_mob)
-			for (var/spell/S in M.spell_list)
+			for (var/spell/S in M.mind.learned_spells)
 				new_mob.add_spell(new S.type)
 
 			new_mob.a_intent = "hurt"
@@ -88,10 +93,10 @@
 			else
 				new_mob.key = M.key
 
-			new_mob << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
+			to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>")
 
 			qdel(M)
 			return
 		else
-			M << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
+			to_chat(M, "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>")
 			return

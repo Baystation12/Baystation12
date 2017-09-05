@@ -4,7 +4,7 @@
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "cart"
 	item_state = "electronic"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 
 	var/obj/item/radio/integrated/radio = null
 	var/access_security = 0
@@ -33,6 +33,10 @@
 	var/message2
 	var/list/stored_data = list()
 
+/obj/item/weapon/cartridge/Destroy()
+	QDEL_NULL(radio)
+	return ..()
+
 /obj/item/weapon/cartridge/engineering
 	name = "\improper Power-ON cartridge"
 	icon_state = "cart-e"
@@ -58,9 +62,9 @@
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/security/initialize()
+/obj/item/weapon/cartridge/security/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/cartridge/detective
 	name = "\improper D.E.T.E.C.T. cartridge"
@@ -110,23 +114,15 @@
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/signal/initialize()
+/obj/item/weapon/cartridge/signal/Initialize()
     radio = new /obj/item/radio/integrated/signal(src)
-    ..()
-
-/obj/item/weapon/cartridge/signal/Destroy()
-	qdel(radio)
-	..()
+    . = ..()
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"
 	desc = "Perfect for the Quartermaster on the go!"
 	icon_state = "cart-q"
 	access_quartermaster = 1
-
-/obj/item/weapon/cartridge/quartermaster/initialize()
-	radio = new /obj/item/radio/integrated/mule(src)
-	..()
 
 /obj/item/weapon/cartridge/head
 	name = "\improper Easy-Record DELUXE"
@@ -141,18 +137,15 @@
 	access_janitor = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hop/initialize()
-	radio = new /obj/item/radio/integrated/mule(src)
-
 /obj/item/weapon/cartridge/hos
 	name = "\improper R.O.B.U.S.T. DELUXE"
 	icon_state = "cart-hos"
 	access_status_display = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos/initialize()
+/obj/item/weapon/cartridge/hos/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/cartridge/ce
 	name = "\improper Power-On DELUXE"
@@ -175,9 +168,9 @@
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/rd/initialize()
+/obj/item/weapon/cartridge/rd/Initialize()
 	radio = new /obj/item/radio/integrated/signal(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/cartridge/captain
 	name = "\improper Value-PAK cartridge"
@@ -263,7 +256,7 @@
 		var/list/sensors = list()
 		var/obj/machinery/power/sensor/MS = null
 
-		for(var/obj/machinery/power/sensor/S in machines)
+		for(var/obj/machinery/power/sensor/S in GLOB.machines)
 			sensors.Add(list(list("name_tag" = S.name_tag)))
 			if(S.name_tag == selected_sensor)
 				MS = S
@@ -274,7 +267,7 @@
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
 	if(mode == 44 || mode == 441 || mode == 45 || mode ==451)
-		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
+		if(istype(active1, /datum/data/record) && (active1 in GLOB.data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
 
@@ -287,11 +280,11 @@
 
 	if(mode == 44 || mode == 441)
 		var/medData[0]
-		for(var/datum/data/record/R in sortRecord(data_core.general))
+		for(var/datum/data/record/R in sortRecord(GLOB.data_core.general))
 			medData[++medData.len] = list(Name = R.fields["name"],"ref" = "\ref[R]")
 		values["medical_records"] = medData
 
-		if(istype(active2, /datum/data/record) && (active2 in data_core.medical))
+		if(istype(active2, /datum/data/record) && (active2 in GLOB.data_core.medical))
 			values["medical"] = active2.fields
 			values["medical_exists"] = 1
 		else
@@ -301,11 +294,11 @@
 
 	if(mode == 45 || mode == 451)
 		var/secData[0]
-		for (var/datum/data/record/R in sortRecord(data_core.general))
+		for (var/datum/data/record/R in sortRecord(GLOB.data_core.general))
 			secData[++secData.len] = list(Name = R.fields["name"], "ref" = "\ref[R]")
 		values["security_records"] = secData
 
-		if(istype(active3, /datum/data/record) && (active3 in data_core.security))
+		if(istype(active3, /datum/data/record) && (active3 in GLOB.data_core.security))
 			values["security"] = active3.fields
 			values["security_exists"] = 1
 		else
@@ -351,40 +344,26 @@
 	/*		MULEBOT Control	(Mode: 48)		*/
 
 	if(mode==48)
-		var/muleData[0]
 		var/mulebotsData[0]
-		if(istype(radio,/obj/item/radio/integrated/mule))
-			var/obj/item/radio/integrated/mule/QC = radio
-			muleData["active"] = QC.active
-			if(QC.active && !isnull(QC.botstatus))
-				var/area/loca = QC.botstatus["loca"]
-				var/loca_name = sanitize(loca.name)
-				muleData["botstatus"] =  list("loca" = loca_name, "mode" = QC.botstatus["mode"],"home"=QC.botstatus["home"],"powr" = QC.botstatus["powr"],"retn" =QC.botstatus["retn"], "pick"=QC.botstatus["pick"], "load" = QC.botstatus["load"], "dest" = sanitize(QC.botstatus["dest"]))
+		var/count = 0
 
-			else
-				muleData["botstatus"] = list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
+		for(var/mob/living/bot/mulebot/M in GLOB.living_mob_list_)
+			if(!M.on)
+				continue
+			++count
+			var/muleData[0]
+			muleData["name"] = M.suffix
+			muleData["location"] = get_area(M)
+			muleData["paused"] = M.paused
+			muleData["home"] = M.homeName
+			muleData["target"] = M.targetName
+			muleData["ref"] = "\ref[M]"
+			muleData["load"] = M.load ? M.load.name : "Nothing"
 
+			mulebotsData[++mulebotsData.len] = muleData.Copy()
 
-			var/mulebotsCount=0
-			for(var/obj/machinery/bot/B in QC.botlist)
-				mulebotsCount++
-				if(B.loc)
-					mulebotsData[++mulebotsData.len] = list("Name" = sanitize(B.name), "Location" = sanitize(B.loc.loc.name), "ref" = "\ref[B]")
-
-			if(!mulebotsData.len)
-				mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
-
-			muleData["bots"] = mulebotsData
-			muleData["count"] = mulebotsCount
-
-		else
-			muleData["botstatus"] =  list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
-			muleData["active"] = 0
-			mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
-			muleData["bots"] = mulebotsData
-			muleData["count"] = 0
-
-		values["mulebot"] = muleData
+		values["mulebotcount"] = count
+		values["mulebots"] = mulebotsData
 
 
 
@@ -392,7 +371,7 @@
 
 	if(mode==47)
 		var/supplyData[0]
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+		var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			supplyData["shuttle_moving"] = shuttle.has_arrive_time()
 			supplyData["shuttle_eta"] = shuttle.eta_minutes()
@@ -515,8 +494,8 @@
 			var/datum/data/record/M = locate(href_list["target"])
 			loc:mode = 441
 			mode = 441
-			if (R in data_core.general)
-				for (var/datum/data/record/E in data_core.medical)
+			if (R in GLOB.data_core.general)
+				for (var/datum/data/record/E in GLOB.data_core.medical)
 					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 						M = E
 						break
@@ -528,8 +507,8 @@
 			var/datum/data/record/S = locate(href_list["target"])
 			loc:mode = 451
 			mode = 451
-			if (R in data_core.general)
-				for (var/datum/data/record/E in data_core.security)
+			if (R in GLOB.data_core.general)
+				for (var/datum/data/record/E in GLOB.data_core.security)
 					if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 						S = E
 						break
@@ -574,6 +553,11 @@
 			selected_sensor = null
 			loc:mode = 43
 			mode = 43
+
+		if("MULEbot")
+			var/mob/living/bot/mulebot/M = locate(href_list["ref"])
+			if(istype(M))
+				M.obeyCommand(href_list["command"])
 
 
 	return 1

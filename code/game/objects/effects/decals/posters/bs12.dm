@@ -142,7 +142,7 @@
 /datum/poster/bay_29
 	icon_state="bsposter29"
 	name = "Winter Is Coming"
-	desc = "On the poster is a frighteningly large wolf, he warns: \"Only YOU can keep the station from freezing during planetary occultation!\""
+	desc = "On the poster is a frighteningly large wolf, he warns: \"Only YOU can keep humanity from freezing during planetary occultation!\""
 
 /datum/poster/bay_30
 	icon_state="bsposter30"
@@ -288,3 +288,8 @@
 	icon_state="bsposter58"
 	name = "space carp information poster"
 	desc = "This poster showcases an old spacer saying on the dangers of migrant space carp."
+
+/datum/poster/bay_59
+	icon_state="bsposter59"
+	name = "poster - Miss Science 2558"
+	desc = "A large piece of space-resistant printed paper. This pin-up poster depicts a woman wearing a NanoTrasen labcoat, a bikini, and a sheepish grin. She's shyly posing atop some highly specialized research equipment."

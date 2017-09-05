@@ -6,7 +6,7 @@
 	charge_max = 150
 	charge_counter = 0
 	spell_flags = 0
-	invocation = "KN'A FTAGHU, PUCK 'BTHNK!"
+	invocation = "Kn'a Ftaghu, Puck'Bthnk!"
 	invocation_type = SpI_SHOUT
 	range = 7
 	max_targets = 1

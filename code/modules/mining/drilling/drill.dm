@@ -3,7 +3,8 @@
 	anchored = 0
 	use_power = 0 //The drill takes power directly from a cell.
 	density = 1
-	layer = MOB_LAYER+0.1 //So it draws over mobs in the tile north of it.
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER //So it draws over mobs in the tile north of it.
 
 /obj/machinery/mining/drill
 	name = "mining drill head"
@@ -12,6 +13,8 @@
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
+	var/base_power_usage = 10 KILOWATTS // Base power usage when the drill is running.
+	var/actual_power_usage = 10 KILOWATTS // Actual power usage, with upgrades in mind.
 	var/active = 0
 	var/list/resource_field = list()
 
@@ -31,7 +34,6 @@
 	//Upgrades
 	var/harvest_speed
 	var/capacity
-	var/charge_use
 	var/obj/item/weapon/cell/cell = null
 
 	//Flags
@@ -152,13 +154,13 @@
 
 	if(istype(O, /obj/item/weapon/cell))
 		if(cell)
-			user << "The drill already has a cell installed."
+			to_chat(user, "The drill already has a cell installed.")
 		else
 			user.drop_item()
 			O.loc = src
 			cell = O
 			component_parts += O
-			user << "You install \the [O]."
+			to_chat(user, "You install \the [O].")
 		return
 	..()
 
@@ -166,13 +168,13 @@
 	check_supports()
 
 	if (panel_open && cell && user.Adjacent(src))
-		user << "You take out \the [cell]."
+		to_chat(user, "You take out \the [cell].")
 		cell.loc = get_turf(user)
 		component_parts -= cell
 		cell = null
 		return
 	else if(need_player_check)
-		user << "You hit the manual override and reset the drill's error checking."
+		to_chat(user, "You hit the manual override and reset the drill's error checking.")
 		need_player_check = 0
 		if(anchored)
 			get_resource_field()
@@ -187,9 +189,9 @@
 			else
 				visible_message("<span class='notice'>\The [src] shudders to a grinding halt.</span>")
 		else
-			user << "<span class='notice'>The drill is unpowered.</span>"
+			to_chat(user, "<span class='notice'>The drill is unpowered.</span>")
 	else
-		user << "<span class='notice'>Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea.</span>"
+		to_chat(user, "<span class='notice'>Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea.</span>")
 
 	update_icon()
 
@@ -208,7 +210,7 @@
 	..()
 	harvest_speed = 0
 	capacity = 0
-	charge_use = 50
+	var/charge_multiplier = 0
 
 	for(var/obj/item/weapon/stock_parts/P in component_parts)
 		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
@@ -216,8 +218,12 @@
 		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
 			capacity = 200 * P.rating
 		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			charge_use -= 10 * P.rating
+			charge_multiplier += P.rating
 	cell = locate(/obj/item/weapon/cell) in component_parts
+	if(charge_multiplier)
+		actual_power_usage = base_power_usage / charge_multiplier
+	else
+		actual_power_usage = base_power_usage
 
 /obj/machinery/mining/drill/proc/check_supports()
 
@@ -264,11 +270,7 @@
 		system_error("resources depleted")
 
 /obj/machinery/mining/drill/proc/use_cell_power()
-	if(!cell) return 0
-	if(cell.charge >= charge_use)
-		cell.use(charge_use)
-		return 1
-	return 0
+	return cell && cell.checked_use(actual_power_usage * CELLRATE)
 
 /obj/machinery/mining/drill/verb/unload()
 	set name = "Unload Drill"
@@ -281,9 +283,9 @@
 	if(B)
 		for(var/obj/item/weapon/ore/O in contents)
 			O.loc = B
-		usr << "<span class='notice'>You unload the drill's storage cache into the ore box.</span>"
+		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
 	else
-		usr << "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>"
+		to_chat(usr, "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>")
 
 
 /obj/machinery/mining/brace
@@ -294,13 +296,13 @@
 
 /obj/machinery/mining/brace/New()
 	..()
-	
+
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/miningdrillbrace(src)
 
 /obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(connected && connected.active)
-		user << "<span class='notice'>You can't work with the brace of a running drill!</span>"
+		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
 		return
 
 	if(default_deconstruction_screwdriver(user, W))
@@ -311,11 +313,11 @@
 	if(istype(W,/obj/item/weapon/wrench))
 
 		if(istype(get_turf(src), /turf/space))
-			user << "<span class='notice'>You can't anchor something to empty space. Idiot.</span>"
+			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")
 			return
 
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		user << "<span class='notice'>You [anchored ? "un" : ""]anchor the brace.</span>"
+		to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]anchor the brace.</span>")
 
 		anchored = !anchored
 		if(anchored)
@@ -363,7 +365,7 @@
 	if(usr.stat) return
 
 	if (src.anchored)
-		usr << "It is anchored in place!"
+		to_chat(usr, "It is anchored in place!")
 		return 0
 
 	src.set_dir(turn(src.dir, 90))

@@ -10,12 +10,16 @@
 	icon_state = "suitstorage000000100" //order is: [has helmet][has suit][has human][is open][is locked][is UV cycling][is powered][is dirty/broken] [is superUVcycling]
 	anchored = 1
 	density = 1
-	req_access = list(access_captain,access_heads)
+	req_access = list()
 	var/mob/living/carbon/human/OCCUPANT = null
 	var/obj/item/clothing/suit/space/SUIT = null
 	var/SUIT_TYPE = null
 	var/obj/item/clothing/head/helmet/space/HELMET = null
 	var/HELMET_TYPE = null
+	var/obj/item/clothing/shoes/magboots/BOOTS = null
+	var/BOOTS_TYPE = null
+	var/obj/item/weapon/tank/TANK = null
+	var/TANK_TYPE = null
 	var/obj/item/clothing/mask/MASK = null  //All the stuff that's gonna be stored insiiiiiiiiiiiiiiiiiiide, nyoro~n
 	var/MASK_TYPE = null //Erro's idea on standarising SSUs whle keeping creation of other SSU types easy: Make a child SSU, name it something then set the TYPE vars to your desired suit output. New() should take it from there by itself.
 	var/isopen = 0
@@ -33,6 +37,7 @@
 /obj/machinery/suit_storage_unit/standard_unit
 	SUIT_TYPE = /obj/item/clothing/suit/space
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_eva)
 
@@ -40,38 +45,72 @@
 	name = "Atmospherics Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/atmos
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/atmos
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_atmospherics)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/atmos/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/atmos/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/atmos/alt
 
 /obj/machinery/suit_storage_unit/engineering
 	name = "Engineering Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/engineering
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_engine)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/engineering/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/engineering/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
+
+/obj/machinery/suit_storage_unit/engineering/salvage
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/engineering/salvage
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/engineering/salvage
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/medical
 	name = "Medical Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/medical
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/medical
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_medical)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/medical/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/medical/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/medical/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/mining
 	name = "Mining Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/mining
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/mining
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_mining)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/mining/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/mining/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/mining/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/science
 	name = "Excavation Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/excavation
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/excavation
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_xenoarch)
 	islocked = 1
@@ -80,14 +119,23 @@
 	name = "Security Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/security
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/security
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_security)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/security/alt
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/security/alt
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/security/alt
+	MASK_TYPE = /obj/item/clothing/mask/breath
 
 /obj/machinery/suit_storage_unit/merc
 	name = "Nonstandard Voidsuit Storage Unit"
 	SUIT_TYPE = /obj/item/clothing/suit/space/void/merc
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/merc
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
 	req_access = list(access_syndicate)
 	islocked = 1
@@ -100,6 +148,10 @@
 		SUIT = new SUIT_TYPE(src)
 	if(HELMET_TYPE)
 		HELMET = new HELMET_TYPE(src)
+	if(BOOTS_TYPE)
+		BOOTS = new BOOTS_TYPE(src)
+	if(TANK_TYPE)
+		TANK = new TANK_TYPE(src)
 	if(MASK_TYPE)
 		MASK = new MASK_TYPE(src)
 
@@ -180,9 +232,15 @@
 			dat+= text("<font color='black'>Helmet storage compartment: <B>[]</B></font><BR>",(src.HELMET ? HELMET.name : "</font><font color ='grey'>No helmet detected.") )
 			if(HELMET && src.isopen)
 				dat+=text("<A href='?src=\ref[];dispense_helmet=1'>Dispense helmet</A><BR>",src)
-			dat+= text("<font color='black'>Suit storage compartment: <B>[]</B></font><BR>",(src.SUIT ? SUIT.name : "</font><font color ='grey'>No exosuit detected.") )
+			dat+= text("<font color='black'>Suit storage compartment: <B>[]</B></font><BR>",(src.SUIT ? SUIT.name : "</font><font color ='grey'>No suit detected.") )
 			if(SUIT && src.isopen)
 				dat+=text("<A href='?src=\ref[];dispense_suit=1'>Dispense suit</A><BR>",src)
+			dat+= text("<font color='black'>Footwear storage compartment: <B>[]</B></font><BR>",(src.BOOTS ? BOOTS.name : "</font><font color ='grey'>No footwear detected.") )
+			if(BOOTS && src.isopen)
+				dat+=text("<A href='?src=\ref[];dispense_boots=1'>Dispense footwear</A><BR>",src)
+			dat+= text("<font color='black'>Tank storage compartment: <B>[]</B></font><BR>",(src.TANK ? TANK.name : "</font><font color ='grey'>No air tank detected.") )
+			if(TANK && src.isopen)
+				dat+=text("<A href='?src=\ref[];dispense_tank=1'>Dispense air tank</A><BR>",src)
 			dat+= text("<font color='black'>Breathmask storage compartment: <B>[]</B></font><BR>",(src.MASK ? MASK.name : "</font><font color ='grey'>No breathmask detected.") )
 			if(MASK && src.isopen)
 				dat+=text("<A href='?src=\ref[];dispense_mask=1'>Dispense mask</A><BR>",src)
@@ -232,6 +290,14 @@
 			src.dispense_suit(usr)
 			src.updateUsrDialog()
 			src.update_icon()
+		if (href_list["dispense_boots"])
+			src.dispense_boots(usr)
+			src.updateUsrDialog()
+			src.update_icon()
+		if (href_list["dispense_tank"])
+			src.dispense_tank(usr)
+			src.updateUsrDialog()
+			src.update_icon()
 		if (href_list["dispense_mask"])
 			src.dispense_mask(usr)
 			src.updateUsrDialog()
@@ -272,14 +338,14 @@
 
 	if(!protected)
 		playsound(src.loc, "sparks", 75, 1, -1)
-		user << "<font color='red'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</font>"
+		to_chat(user, "<span class='warning'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</span>")
 		return*/
 	else  //welp, the guy is protected, we can continue
 		if(src.issuperUV)
-			user << "You slide the dial back towards \"185nm\"."
+			to_chat(user, "You slide the dial back towards \"185nm\".")
 			src.issuperUV = 0
 		else
-			user << "You crank the dial all the way up to \"15nm\"."
+			to_chat(user, "You crank the dial all the way up to \"15nm\".")
 			src.issuperUV = 1
 		return
 
@@ -298,59 +364,46 @@
 
 	if(!protected)
 		playsound(src.loc, "sparks", 75, 1, -1)
-		user << "<font color='red'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</font>"
+		to_chat(user, "<span class='warning'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</span>")
 		return*/
 	else
-		user << "You push the button. The coloured LED next to it changes."
+		to_chat(user, "You push the button. The coloured LED next to it changes.")
 		src.safetieson = !src.safetieson
 
+#define dispense_clothing(item) if(src.item){item.dropInto(loc); src.item = null}
 
 /obj/machinery/suit_storage_unit/proc/dispense_helmet(mob/user as mob)
-	if(!src.HELMET)
-		return //Do I even need this sanity check? Nyoro~n
-	else
-		src.HELMET.loc = src.loc
-		src.HELMET = null
-		return
-
+	dispense_clothing(HELMET)
 
 /obj/machinery/suit_storage_unit/proc/dispense_suit(mob/user as mob)
-	if(!src.SUIT)
-		return
-	else
-		src.SUIT.loc = src.loc
-		src.SUIT = null
-		return
+	dispense_clothing(SUIT)
 
+/obj/machinery/suit_storage_unit/proc/dispense_boots(mob/user as mob)
+	dispense_clothing(BOOTS)
+
+/obj/machinery/suit_storage_unit/proc/dispense_tank(mob/user as mob)
+	dispense_clothing(TANK)
 
 /obj/machinery/suit_storage_unit/proc/dispense_mask(mob/user as mob)
-	if(!src.MASK)
-		return
-	else
-		src.MASK.loc = src.loc
-		src.MASK = null
-		return
+	dispense_clothing(MASK)
 
 
 /obj/machinery/suit_storage_unit/proc/dump_everything()
 	src.islocked = 0 //locks go free
-	if(src.SUIT)
-		src.SUIT.loc = src.loc
-		src.SUIT = null
-	if(src.HELMET)
-		src.HELMET.loc = src.loc
-		src.HELMET = null
-	if(src.MASK)
-		src.MASK.loc = src.loc
-		src.MASK = null
+	dispense_clothing(SUIT)
+	dispense_clothing(HELMET)
+	dispense_clothing(BOOTS)
+	dispense_clothing(TANK)
+	dispense_clothing(MASK)
 	if(src.OCCUPANT)
 		src.eject_occupant(OCCUPANT)
 	return
 
+#undef dispense_clothing
 
 /obj/machinery/suit_storage_unit/proc/toggle_open(mob/user as mob)
 	if(src.islocked || src.isUV)
-		user << "<font color='red'>Unable to open unit.</font>"
+		to_chat(user, "<span class='warning'>Unable to open unit.</span>")
 		return
 	if(src.OCCUPANT)
 		src.eject_occupant(user)
@@ -361,7 +414,7 @@
 
 /obj/machinery/suit_storage_unit/proc/toggle_lock(mob/user as mob)
 	if(src.OCCUPANT && src.safetieson)
-		user << "<font color='red'>The Unit's safety protocols disallow locking when a biological form is detected inside its compartments.</font>"
+		to_chat(user, "<span class='warning'>The Unit's safety protocols disallow locking when a biological form is detected inside its compartments.</span>")
 		return
 	if(src.isopen)
 		return
@@ -373,12 +426,12 @@
 	if(src.isUV || src.isopen) //I'm bored of all these sanity checks
 		return
 	if(src.OCCUPANT && src.safetieson)
-		user << "<font color='red'><B>WARNING:</B> Biological entity detected in the confines of the Unit's storage. Cannot initiate cycle.</font>"
+		to_chat(user, "<span class='danger'>WARNING:</span><span class='warning'> Biological entity detected in the confines of the Unit's storage. Cannot initiate cycle.</span>")
 		return
-	if(!src.HELMET && !src.MASK && !src.SUIT && !src.OCCUPANT ) //shit's empty yo
-		user << "<font color='red'>Unit storage bays empty. Nothing to disinfect -- Aborting.</font>"
+	if(!src.HELMET && !src.MASK && !src.SUIT && !src.BOOTS && !src.TANK && !src.OCCUPANT ) //shit's empty yo
+		to_chat(user, "<span class='warning'>Unit storage bays empty. Nothing to disinfect -- Aborting.</span>")
 		return
-	user << "You start the Unit's cauterisation cycle."
+	to_chat(user, "You start the Unit's cauterisation cycle.")
 	src.cycletime_left = 20
 	src.isUV = 1
 	if(src.OCCUPANT && !src.islocked)
@@ -391,24 +444,26 @@
 		sleep(50)
 		if(src.OCCUPANT)
 			OCCUPANT.apply_effect(50, IRRADIATE, blocked = OCCUPANT.getarmor(null, "rad"))
-			var/obj/item/organ/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
+			var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
 			if (!rad_organ)
+				if (OCCUPANT.can_feel_pain())
+					OCCUPANT.emote("scream")
 				if(src.issuperUV)
 					var/burndamage = rand(28,35)
 					OCCUPANT.take_organ_damage(0,burndamage)
-					if (!(OCCUPANT.species && (OCCUPANT.species.flags & NO_PAIN)))
-						OCCUPANT.emote("scream")
 				else
 					var/burndamage = rand(6,10)
 					OCCUPANT.take_organ_damage(0,burndamage)
-					if (!(OCCUPANT.species && (OCCUPANT.species.flags & NO_PAIN)))
-						OCCUPANT.emote("scream")
 		if(i==3) //End of the cycle
 			if(!src.issuperUV)
 				if(src.HELMET)
 					HELMET.clean_blood()
 				if(src.SUIT)
 					SUIT.clean_blood()
+				if(src.BOOTS)
+					BOOTS.clean_blood()
+				if(src.TANK)
+					TANK.clean_blood()
 				if(src.MASK)
 					MASK.clean_blood()
 			else //It was supercycling, destroy everything
@@ -416,6 +471,10 @@
 					src.HELMET = null
 				if(src.SUIT)
 					src.SUIT = null
+				if(src.BOOTS)
+					src.BOOTS = null
+				if(src.TANK)
+					src.TANK = null
 				if(src.MASK)
 					src.MASK = null
 				visible_message("<font color='red'>With a loud whining noise, the Suit Storage Unit's door grinds open. Puffs of ashen smoke come out of its chamber.</font>", 3)
@@ -445,10 +504,10 @@
 			if(src.OCCUPANT)
 				if(src.issuperUV)
 					OCCUPANT.take_organ_damage(0,40)
-					user << "Test. You gave him 40 damage"
+					to_chat(user, "Test. You gave him 40 damage")
 				else
 					OCCUPANT.take_organ_damage(0,8)
-					user << "Test. You gave him 8 damage"
+					to_chat(user, "Test. You gave him 8 damage")
 	return*/
 
 
@@ -469,9 +528,9 @@
 
 	if (src.OCCUPANT.client)
 		if(user != OCCUPANT)
-			OCCUPANT << "<font color='blue'>The machine kicks you out!</font>"
+			to_chat(OCCUPANT, "<span class='notice'>The machine kicks you out!</span>")
 		if(user.loc != src.loc)
-			OCCUPANT << "<font color='blue'>You leave the not-so-cozy confines of the SSU.</font>"
+			to_chat(OCCUPANT, "<span class='notice'>You leave the not-so-cozy confines of the SSU.</span>")
 
 		src.OCCUPANT.client.eye = src.OCCUPANT.client.mob
 		src.OCCUPANT.client.perspective = MOB_PERSPECTIVE
@@ -505,13 +564,13 @@
 	if (usr.stat != 0)
 		return
 	if (!src.isopen)
-		usr << "<font color='red'>The unit's doors are shut.</font>"
+		to_chat(usr, "<span class='warning'>The unit's doors are shut.</span>")
 		return
 	if (!src.ispowered || src.isbroken)
-		usr << "<font color='red'>The unit is not operational.</font>"
+		to_chat(usr, "<span class='warning'>The unit is not operational.</span>")
 		return
 	if ( (src.OCCUPANT) || (src.HELMET) || (src.SUIT) )
-		usr << "<font color='red'>It's too cluttered inside for you to fit in!</font>"
+		to_chat(usr, "<span class='warning'>It's too cluttered inside for you to fit in!</span>")
 		return
 	visible_message("\The [usr] starts squeezing into the suit storage unit!", 3)
 	if(do_after(usr, 10, src))
@@ -541,21 +600,21 @@
 	if(istype(I, /obj/item/weapon/screwdriver))
 		src.panelopen = !src.panelopen
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user << text("<font color='blue'>You [] the unit's maintenance panel.</font>",(src.panelopen ? "open up" : "close") )
+		to_chat(user, text("<span class='notice'>You [] the unit's maintenance panel.</span>",(src.panelopen ? "open up" : "close") ))
 		src.updateUsrDialog()
 		return
-	if ( istype(I, /obj/item/weapon/grab) )
-		var/obj/item/weapon/grab/G = I
+	if ( istype(I, /obj/item/grab) )
+		var/obj/item/grab/G = I
 		if( !(ismob(G.affecting)) )
 			return
 		if (!src.isopen)
-			usr << "<font color='red'>The unit's doors are shut.</font>"
+			to_chat(usr, "<span class='warning'>The unit's doors are shut.</span>")
 			return
 		if (!src.ispowered || src.isbroken)
-			usr << "<font color='red'>The unit is not operational.</font>"
+			to_chat(usr, "<span class='warning'>The unit is not operational.</span>")
 			return
-		if ( (src.OCCUPANT) || (src.HELMET) || (src.SUIT) ) //Unit needs to be absolutely empty
-			user << "<font color='red'>The unit's storage area is too cluttered.</font>"
+		if ( (src.OCCUPANT) || (src.HELMET) || (src.SUIT) || (src.BOOTS) || (src.TANK) || (src.MASK)) //Unit needs to be absolutely empty
+			to_chat(user, "<span class='warning'>The unit's storage area is too cluttered.</span>")
 			return
 		visible_message("[user] starts putting [G.affecting.name] into the Suit Storage Unit.", 3)
 		if(do_after(user, 20, src))
@@ -581,26 +640,54 @@
 			return
 		var/obj/item/clothing/suit/space/S = I
 		if(src.SUIT)
-			user << "<font color='blue'>The unit already contains a suit.</font>"
+			to_chat(user, "<span class='notice'>The unit already contains a suit.</span>")
 			return
-		user << "You load the [S.name] into the storage compartment."
+		to_chat(user, "You load the [S.name] into the storage compartment.")
 		user.drop_item()
-		S.loc = src
+		S.forceMove(src)
 		src.SUIT = S
 		src.update_icon()
 		src.updateUsrDialog()
 		return
-	if( istype(I,/obj/item/clothing/head/helmet) )
+	if( istype(I,/obj/item/clothing/head/helmet/space) )
 		if(!src.isopen)
 			return
 		var/obj/item/clothing/head/helmet/H = I
 		if(src.HELMET)
-			user << "<font color='blue'>The unit already contains a helmet.</font>"
+			to_chat(user, "<span class='notice'>The unit already contains a helmet.</span>")
 			return
-		user << "You load the [H.name] into the storage compartment."
+		to_chat(user, "You load the [H.name] into the storage compartment.")
 		user.drop_item()
-		H.loc = src
+		H.forceMove(src)
 		src.HELMET = H
+		src.update_icon()
+		src.updateUsrDialog()
+		return
+	if( istype(I,/obj/item/clothing/shoes/magboots) )
+		if(!src.isopen)
+			return
+		var/obj/item/clothing/shoes/magboots/B = I
+		if(src.BOOTS)
+			to_chat(user, "<span class='notice'>The unit already contains a pair of magboots.</span>")
+			return
+		to_chat(user, "You load the [B.name] into the storage compartment.")
+		user.drop_item()
+		B.forceMove(src)
+		src.BOOTS = B
+		src.update_icon()
+		src.updateUsrDialog()
+		return
+	if( istype(I,/obj/item/weapon/tank) )
+		if(!src.isopen)
+			return
+		var/obj/item/weapon/tank/T = I
+		if(src.TANK)
+			to_chat(user, "<span class='notice'>The unit already contains an air tank.</span>")
+			return
+		to_chat(user, "You load the [T.name] into the storage compartment.")
+		user.drop_item()
+		T.forceMove(src)
+		src.TANK = T
 		src.update_icon()
 		src.updateUsrDialog()
 		return
@@ -609,11 +696,11 @@
 			return
 		var/obj/item/clothing/mask/M = I
 		if(src.MASK)
-			user << "<font color='blue'>The unit already contains a mask.</font>"
+			to_chat(user, "<span class='notice'>The unit already contains a mask.</span>")
 			return
-		user << "You load the [M.name] into the storage compartment."
+		to_chat(user, "You load the [M.name] into the storage compartment.")
 		user.drop_item()
-		M.loc = src
+		M.forceMove(src)
 		src.MASK = M
 		src.update_icon()
 		src.updateUsrDialog()
@@ -653,9 +740,9 @@
 	var/electrified = 0
 
 	//Departments that the cycler can paint suits to look like.
-	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","Science")
+	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","Science","Pilot")
 	//Species that the suits can be configured to fit.
-	var/list/species = list("Human","Skrell","Unathi","Tajara","Resomi")
+	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_TAJARA)
 
 	var/target_department
 	var/target_species
@@ -684,43 +771,50 @@
 	model_text = "Engineering"
 	req_access = list(access_construction)
 	departments = list("Engineering","Atmos")
-	species = list("Human","Tajara","Skrell","Unathi","Resomi") //Add Unathi when sprites exist for their suits.
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
 	req_access = list(access_mining)
 	departments = list("Mining")
-	species = list("Human","Tajara","Skrell","Unathi","Resomi")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/science
 	name = "Excavation suit cycler"
 	model_text = "Excavation"
 	req_access = list(access_xenoarch)
 	departments = list("Science")
-	species = list("Human","Tajara","Skrell","Unathi","Resomi")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/security
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
 	departments = list("Security")
-	species = list("Human","Tajara","Skrell","Unathi","Resomi")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
 	model_text = "Medical"
 	req_access = list(access_medical)
 	departments = list("Medical")
-	species = list("Human","Tajara","Skrell","Unathi","Resomi")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"
 	req_access = list(access_syndicate)
 	departments = list("Mercenary")
-	species = list("Human","Tajara","Skrell","Unathi","Resomi")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 	can_repair = 1
+	
+/obj/machinery/suit_cycler/pilot
+	name = "Pilot suit cycler"
+	model_text = "Pilot"
+	req_access = list(access_mining_office)
+	departments = list("Pilot")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -737,18 +831,18 @@
 			attack_hand(user)
 		return
 	//Other interface stuff.
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 
 		if(!(ismob(G.affecting)))
 			return
 
 		if(locked)
-			user << "<span class='danger'>The suit cycler is locked.</span>"
+			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
 			return
 
 		if(src.contents.len > 0)
-			user << "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>"
+			to_chat(user, "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>")
 			return
 
 		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", 3)
@@ -771,25 +865,25 @@
 	else if(istype(I,/obj/item/weapon/screwdriver))
 
 		panel_open = !panel_open
-		user << "You [panel_open ?  "open" : "close"] the maintenance panel."
+		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
 		src.updateUsrDialog()
 		return
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
-			user << "<span class='danger'>The suit cycler is locked.</span>"
+			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
 			return
 
 		if(helmet)
-			user << "<span class='danger'>The cycler already contains a helmet.</span>"
+			to_chat(user, "<span class='danger'>The cycler already contains a helmet.</span>")
 			return
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
-			user << "You cannot refit a customised voidsuit."
+			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
 
-		user << "You fit \the [I] into the suit cycler."
+		to_chat(user, "You fit \the [I] into the suit cycler.")
 		user.drop_item()
 		I.loc = src
 		helmet = I
@@ -801,18 +895,18 @@
 	else if(istype(I,/obj/item/clothing/suit/space/void))
 
 		if(locked)
-			user << "<span class='danger'>The suit cycler is locked.</span>"
+			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
 			return
 
 		if(suit)
-			user << "<span class='danger'>The cycler already contains a voidsuit.</span>"
+			to_chat(user, "<span class='danger'>The cycler already contains a voidsuit.</span>")
 			return
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
-			user << "You cannot refit a customised voidsuit."
+			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
 
-		user << "You fit \the [I] into the suit cycler."
+		to_chat(user, "You fit \the [I] into the suit cycler.")
 		user.drop_item()
 		I.loc = src
 		suit = I
@@ -825,11 +919,11 @@
 
 /obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)
-		user << "<span class='danger'>The cycler has already been subverted.</span>"
+		to_chat(user, "<span class='danger'>The cycler has already been subverted.</span>")
 		return
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
-	user << "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>"
+	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
 	departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
 	emagged = 1
 	safeties = 0
@@ -931,14 +1025,14 @@
 
 		if(src.allowed(usr))
 			locked = !locked
-			usr << "You [locked ? "" : "un"]lock \the [src]."
+			to_chat(usr, "You [locked ? "" : "un"]lock \the [src].")
 		else
-			usr << "<span class='danger'>Access denied.</span>"
+			to_chat(usr, "<span class='danger'>Access denied.</span>")
 
 	else if(href_list["begin_decontamination"])
 
 		if(safeties && occupant)
-			usr << "<span class='danger'>The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle.</span>"
+			to_chat(usr, "<span class='danger'>The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle.</span>")
 			return
 
 		active = 1
@@ -1020,7 +1114,7 @@
 /obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
 
 	if(locked || active)
-		user << "<span class='warning'>The cycler is locked.</span>"
+		to_chat(user, "<span class='warning'>The cycler is locked.</span>")
 		return
 
 	if (!occupant)
@@ -1058,7 +1152,10 @@
 			if(suit)
 				suit.name = "engineering voidsuit"
 				suit.icon_state = "rig-engineering"
-				suit.item_state = "eng_voidsuit"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "eng_voidsuit",
+					slot_r_hand_str = "eng_voidsuit",
+				)
 		if("Mining")
 			if(helmet)
 				helmet.name = "mining voidsuit helmet"
@@ -1067,7 +1164,10 @@
 			if(suit)
 				suit.name = "mining voidsuit"
 				suit.icon_state = "rig-mining"
-				suit.item_state = "mining_voidsuit"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "mining_voidsuit",
+					slot_r_hand_str = "mining_voidsuit",
+				)
 		if("Science")
 			if(helmet)
 				helmet.name = "excavation voidsuit helmet"
@@ -1076,7 +1176,10 @@
 			if(suit)
 				suit.name = "excavation voidsuit"
 				suit.icon_state = "rig-excavation"
-				suit.item_state = "excavation_voidsuit"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "excavation_voidsuit",
+					slot_r_hand_str = "excavation_voidsuit",
+				)
 		if("Medical")
 			if(helmet)
 				helmet.name = "medical voidsuit helmet"
@@ -1085,7 +1188,10 @@
 			if(suit)
 				suit.name = "medical voidsuit"
 				suit.icon_state = "rig-medical"
-				suit.item_state = "medical_voidsuit"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "medical_voidsuit",
+					slot_r_hand_str = "medical_voidsuit",
+				)
 		if("Security")
 			if(helmet)
 				helmet.name = "security voidsuit helmet"
@@ -1094,7 +1200,10 @@
 			if(suit)
 				suit.name = "security voidsuit"
 				suit.icon_state = "rig-sec"
-				suit.item_state = "sec_voidsuit"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "sec_voidsuit",
+					slot_r_hand_str = "sec_voidsuit",
+				)
 		if("Atmos")
 			if(helmet)
 				helmet.name = "atmospherics voidsuit helmet"
@@ -1103,7 +1212,10 @@
 			if(suit)
 				suit.name = "atmospherics voidsuit"
 				suit.icon_state = "rig-atmos"
-				suit.item_state = "atmos_voidsuit"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "atmos_voidsuit",
+					slot_r_hand_str = "atmos_voidsuit",
+				)
 		if("^%###^%$" || "Mercenary")
 			if(helmet)
 				helmet.name = "blood-red voidsuit helmet"
@@ -1111,8 +1223,19 @@
 				helmet.item_state = "syndie_helm"
 			if(suit)
 				suit.name = "blood-red voidsuit"
-				suit.item_state = "syndie_voidsuit"
 				suit.icon_state = "rig-syndie"
+				suit.item_state_slots = list(
+					slot_l_hand_str = "syndie_voidsuit",
+					slot_r_hand_str = "syndie_voidsuit",
+				)
+		if("Pilot")
+			if(helmet)
+				helmet.name = "pilot voidsuit helmet"
+				helmet.icon_state = "rig0_pilot"
+				helmet.item_state = "pilot_helm"
+			if(suit)
+				suit.name = "pilot voidsuit"
+				suit.icon_state = "rig-pilot"
 
 	if(helmet) helmet.name = "refitted [helmet.name]"
 	if(suit) suit.name = "refitted [suit.name]"

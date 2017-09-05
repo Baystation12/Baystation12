@@ -16,20 +16,6 @@
 	//req_access = list(access_research)
 	circuit = /obj/item/weapon/circuitboard/research_shuttle
 
-/obj/machinery/computer/shuttle_control/multi/calypso
-	name = "calypso control console"
-	icon_keyboard = "rd_key"
-	icon_screen = "shuttle"
-	//req_access = list(access_mining)
-	shuttle_tag = "Calypso"
-
-/obj/machinery/computer/shuttle_control/multi/guppy
-	name = "general utility pod control console"
-	icon_keyboard = "power_key"
-	icon_screen = "supply"
-	//req_access = list(access_mining)
-	shuttle_tag = "GUP"
-
 /obj/machinery/computer/shuttle_control/merchant
 	name = "merchant shuttle control console"
 	icon_keyboard = "power_key"

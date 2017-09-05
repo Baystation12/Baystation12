@@ -1,7 +1,7 @@
 
 /obj/machinery/computer/station_alert
-	name = "station alert console"
-	desc = "Used to access the station's automated alert system."
+	name = "alert console"
+	desc = "Used to access the automated alert system."
 	icon_keyboard = "tech_key"
 	icon_screen = "alert:0"
 	light_color = "#e6ffff"
@@ -18,10 +18,10 @@
 /obj/machinery/computer/station_alert/all
 	monitor_type = /datum/nano_module/alarm_monitor/all
 
-/obj/machinery/computer/station_alert/initialize()
+/obj/machinery/computer/station_alert/Initialize()
 	alarm_monitor = new monitor_type(src)
 	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
-	..()
+	. = ..()
 	if(monitor_type)
 		register_monitor(new monitor_type(src))
 

@@ -14,7 +14,9 @@
 		goal = goal_number
 	bar = image('icons/effects/progessbar.dmi', target, "prog_bar_0")
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	bar.pixel_y = 32
+	bar.plane = HUD_PLANE
+	bar.layer = HUD_ABOVE_ITEM_LAYER
+	bar.pixel_y = WORLD_ICON_SIZE
 	src.user = user
 	if(user)
 		client = user.client
@@ -26,7 +28,8 @@
 	. = ..()
 
 /datum/progressbar/proc/update(progress)
-	//world << "Update [progress] - [goal] - [(progress / goal)] - [((progress / goal) * 100)] - [round(((progress / goal) * 100), 5)]"
+//	log_debug("Update [progress] - [goal] - [(progress / goal)] - [((progress / goal) * 100)] - [round(((progress / goal) * 100), 5)]")
+
 	if (!user || !user.client)
 		shown = 0
 		return

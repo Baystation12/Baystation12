@@ -1,7 +1,8 @@
 datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 	proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
-		var/datum/species/current_species = all_species[species ? species : "Human"]
+		var/datum/species/current_species = all_species[species]
+		if(!current_species) current_species = all_species[SPECIES_HUMAN]
 		gender = pick(current_species.genders)
 
 		h_style = random_hair_style(gender, species)
@@ -22,11 +23,11 @@ datum/preferences
 				randomize_hair_color("facial")
 		if(current_species.appearance_flags & HAS_UNDERWEAR)
 			all_underwear.Cut()
-			for(var/datum/category_group/underwear/WRC in global_underwear.categories)
+			for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
 				var/datum/category_item/underwear/WRI = pick(WRC.items)
 				all_underwear[WRC.name] = WRI.name
 
-		backbag = rand(1,4)
+		backbag = rand(1,5)
 		age = rand(current_species.min_age, current_species.max_age)
 		b_type = RANDOM_BLOOD_TYPE
 		if(H)
@@ -194,7 +195,7 @@ datum/preferences
 	copy_to(mannequin, TRUE)
 
 	var/datum/job/previewJob
-	if(equip_preview_mob)
+	if(equip_preview_mob && job_master)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
 		if("Assistant" in job_low)
 			previewJob = job_master.GetJob("Assistant")
@@ -208,14 +209,14 @@ datum/preferences
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		var/list/equipped_slots = list() //If more than one item takes the same slot only spawn the first
-		for(var/thing in gear)
+		for(var/thing in Gear())
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
 				if(G.allowed_roles && G.allowed_roles.len)
 					if(previewJob)
-						for(var/job_name in G.allowed_roles)
-							if(previewJob.title == job_name)
+						for(var/job_type in G.allowed_roles)
+							if(previewJob.type == job_type)
 								permitted = 1
 				else
 					permitted = 1
@@ -227,14 +228,14 @@ datum/preferences
 					continue
 
 				if(G.slot && !(G.slot in equipped_slots))
-					var/metadata = gear[G.display_name]
+					var/metadata = gear_list[gear_slot][G.display_name]
 					if(mannequin.equip_to_slot_or_del(G.spawn_item(mannequin, metadata), G.slot))
 						equipped_slots += G.slot
 						update_icon = TRUE
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title
-		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], mannequin.char_branch)
 		update_icon = TRUE
 
 	if(update_icon)

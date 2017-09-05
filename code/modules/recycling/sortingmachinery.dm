@@ -18,11 +18,7 @@
 	unwrap()
 
 /obj/structure/bigDelivery/proc/unwrap()
-	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.forceMove(get_turf(src.loc))
-		if(istype(wrapped, /obj/structure/closet))
-			var/obj/structure/closet/O = wrapped
-			O.welded = 0
+	// Destroy will drop our wrapped object on the turf, so let it.
 	qdel(src)
 
 /obj/structure/bigDelivery/attackby(obj/item/W as obj, mob/user as mob)
@@ -30,7 +26,7 @@
 		var/obj/item/device/destTagger/O = W
 		if(O.currTag)
 			if(src.sortTag != O.currTag)
-				user << "<span class='notice'>You have labeled the destination as [O.currTag].</span>"
+				to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
 				if(!src.sortTag)
 					src.sortTag = O.currTag
 					update_icon()
@@ -38,16 +34,16 @@
 					src.sortTag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 			else
-				user << "<span class='warning'>The package is already labeled for [O.currTag].</span>"
+				to_chat(user, "<span class='warning'>The package is already labeled for [O.currTag].</span>")
 		else
-			user << "<span class='warning'>You need to set a destination first!</span>"
+			to_chat(user, "<span class='warning'>You need to set a destination first!</span>")
 
 	else if(istype(W, /obj/item/weapon/pen))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if("Title")
 				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if(!str || !length(str))
-					usr << "<span class='warning'> Invalid text.</span>"
+					to_chat(usr, "<span class='warning'> Invalid text.</span>")
 					return
 				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
 				"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
@@ -61,7 +57,7 @@
 			if("Description")
 				var/str = sanitize(input(usr,"Label text?","Set label",""))
 				if(!str || !length(str))
-					usr << "\red Invalid text."
+					to_chat(usr, "<span class='warning'>Invalid text.</span>")
 					return
 				if(!examtext && !nameset)
 					examtext = str
@@ -105,9 +101,9 @@
 /obj/structure/bigDelivery/examine(mob/user)
 	if(..(user, 4))
 		if(sortTag)
-			user << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
+			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
-			user << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
 	return
 
 /obj/item/smallDelivery
@@ -124,6 +120,7 @@
 /obj/item/smallDelivery/attack_self(mob/user as mob)
 	if (src.wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
 		wrapped.forceMove(user.loc)
+		user.drop_item()
 		if(ishuman(user))
 			user.put_in_hands(wrapped)
 		else
@@ -137,7 +134,7 @@
 		var/obj/item/device/destTagger/O = W
 		if(O.currTag)
 			if(src.sortTag != O.currTag)
-				user << "<span class='notice'>You have labeled the destination as [O.currTag].</span>"
+				to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
 				if(!src.sortTag)
 					src.sortTag = O.currTag
 					update_icon()
@@ -145,16 +142,16 @@
 					src.sortTag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 			else
-				user << "<span class='warning'>The package is already labeled for [O.currTag].</span>"
+				to_chat(user, "<span class='warning'>The package is already labeled for [O.currTag].</span>")
 		else
-			user << "<span class='warning'>You need to set a destination first!</span>"
+			to_chat(user, "<span class='warning'>You need to set a destination first!</span>")
 
 	else if(istype(W, /obj/item/weapon/pen))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if("Title")
 				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if(!str || !length(str))
-					usr << "<span class='warning'> Invalid text.</span>"
+					to_chat(usr, "<span class='warning'> Invalid text.</span>")
 					return
 				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
 				"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
@@ -169,7 +166,7 @@
 			if("Description")
 				var/str = sanitize(input(usr,"Label text?","Set label",""))
 				if(!str || !length(str))
-					usr << "\red Invalid text."
+					to_chat(usr, "<span class='warning'>Invalid text.</span>")
 					return
 				if(!examtext && !nameset)
 					examtext = str
@@ -209,18 +206,27 @@
 /obj/item/smallDelivery/examine(mob/user)
 	if(..(user, 4))
 		if(sortTag)
-			user << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
+			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
-			user << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
 	return
 
 /obj/item/weapon/packageWrap
 	name = "package wrapper"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "deliveryPaper"
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	var/amount = 25.0
 
+/obj/item/weapon/c_tube
+	name = "cardboard tube"
+	desc = "A tube... of cardboard."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "c_tube"
+	throwforce = 1
+	w_class = ITEM_SIZE_SMALL
+	throw_speed = 4
+	throw_range = 5
 
 /obj/item/weapon/packageWrap/afterattack(var/obj/target as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -235,9 +241,6 @@
 		return
 	if(user in target) //no wrapping closets that you are inside - it's not physically possible
 		return
-
-	user.attack_log += text("\[[time_stamp()]\] <font color='blue'>Has used [src.name] on \ref[target]</font>")
-
 
 	if (istype(target, /obj/item) && !(istype(target, /obj/item/weapon/storage) && !istype(target,/obj/item/weapon/storage/box)))
 		var/obj/item/O = target
@@ -282,7 +285,7 @@
 			"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
 			"You hear someone taping paper around a large object.")
 		else if(src.amount < 3)
-			user << "<span class='warning'>You need more paper.</span>"
+			to_chat(user, "<span class='warning'>You need more paper.</span>")
 	else if (istype (target, /obj/structure/closet))
 		var/obj/structure/closet/O = target
 		if (src.amount > 3 && !O.opened)
@@ -295,9 +298,9 @@
 			"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
 			"You hear someone taping paper around a large object.")
 		else if(src.amount < 3)
-			user << "<span class='warning'>You need more paper.</span>"
+			to_chat(user, "<span class='warning'>You need more paper.</span>")
 	else
-		user << "\blue The object you are trying to wrap is unsuitable for the sorting machinery!"
+		to_chat(user, "<span class='notice'>The object you are trying to wrap is unsuitable for the sorting machinery!</span>")
 	if (src.amount <= 0)
 		new /obj/item/weapon/c_tube( src.loc )
 		qdel(src)
@@ -306,20 +309,20 @@
 
 /obj/item/weapon/packageWrap/examine(mob/user)
 	if(..(user, 0))
-		user << "\blue There are [amount] units of package wrap left!"
-
+		to_chat(user, "<span class='notice'>There are [amount] units of package wrap left!</span>")
 	return
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.loc = (get_turf(loc))
+		wrapped.forceMove(get_turf(src))
 		if(istype(wrapped, /obj/structure/closet))
 			var/obj/structure/closet/O = wrapped
 			O.welded = 0
+		wrapped = null
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/AM in contents)
-		AM.loc = T
-	..()
+		AM.forceMove(T)
+	return ..()
 
 /obj/item/device/destTagger
 	name = "destination tagger"
@@ -327,7 +330,7 @@
 	icon_state = "dest_tagger"
 	var/currTag = 0
 
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
@@ -336,8 +339,8 @@
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
-	for(var/i = 1, i <= tagger_locations.len, i++)
-		dat += "<td><a href='?src=\ref[src];nextTag=[tagger_locations[i]]'>[tagger_locations[i]]</a></td>"
+	for(var/i = 1, i <= GLOB.tagger_locations.len, i++)
+		dat += "<td><a href='?src=\ref[src];nextTag=[GLOB.tagger_locations[i]]'>[GLOB.tagger_locations[i]]</a></td>"
 
 		if (i%4==0)
 			dat += "</tr><tr>"
@@ -353,7 +356,7 @@
 
 /obj/item/device/destTagger/Topic(href, href_list)
 	src.add_fingerprint(usr)
-	if(href_list["nextTag"] && href_list["nextTag"] in tagger_locations)
+	if(href_list["nextTag"] && href_list["nextTag"] in GLOB.tagger_locations)
 		src.currTag = href_list["nextTag"]
 	if(href_list["nextTag"] == "CUSTOM")
 		var/dest = input("Please enter custom location.", "Location", src.currTag ? src.currTag : "None")
@@ -434,30 +437,30 @@
 		if(c_mode==0)
 			c_mode=1
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			user << "You remove the screws around the power connection."
+			to_chat(user, "You remove the screws around the power connection.")
 			return
 		else if(c_mode==1)
 			c_mode=0
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			user << "You attach the screws around the power connection."
+			to_chat(user, "You attach the screws around the power connection.")
 			return
 	else if(istype(I,/obj/item/weapon/weldingtool) && c_mode==1)
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.remove_fuel(1,user))
-			user << "You start slicing the floorweld off the delivery chute."
+			to_chat(user, "You start slicing the floorweld off the delivery chute.")
 			if(do_after(user,20, src))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
-				user << "You sliced the floorweld off the delivery chute."
+				to_chat(user, "You sliced the floorweld off the delivery chute.")
 				var/obj/structure/disposalconstruct/C = new (src.loc)
 				C.ptype = 8 // 8 =  Delivery chute
 				C.update()
 				C.anchored = 1
-				C.density = 1
+				C.set_density(1)
 				qdel(src)
 			return
 		else
-			user << "You need more welding fuel to complete this task."
+			to_chat(user, "You need more welding fuel to complete this task.")
 			return
 
 /obj/machinery/disposal/deliveryChute/Destroy()

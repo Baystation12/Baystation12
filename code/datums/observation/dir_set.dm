@@ -8,7 +8,7 @@
 //			/old_dir: The dir before the change.
 //			/new_dir: The dir after the change.
 
-var/decl/observ/dir_set/dir_set_event = new()
+GLOBAL_DATUM_INIT(dir_set_event, /decl/observ/dir_set, new)
 
 /decl/observ/dir_set
 	name = "Direction Set"
@@ -25,11 +25,17 @@ var/decl/observ/dir_set/dir_set_event = new()
 * Direction Handling *
 *********************/
 
+/atom/set_dir()
+	var/old_dir = dir
+	. = ..()
+	if(old_dir != dir)
+		GLOB.dir_set_event.raise_event(src, old_dir, dir)
+
 /atom/movable/Entered(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	if(. != CANCEL_MOVE_EVENT && dir_set_event.has_listeners(am))
-		dir_set_event.register(src, am, /atom/proc/recursive_dir_set)
+	if(GLOB.dir_set_event.has_listeners(am))
+		GLOB.dir_set_event.register(src, am, /atom/proc/recursive_dir_set)
 
 /atom/movable/Exited(var/atom/movable/am, atom/old_loc)
 	. = ..()
-	dir_set_event.unregister(src, am, /atom/proc/recursive_dir_set)
+	GLOB.dir_set_event.unregister(src, am, /atom/proc/recursive_dir_set)

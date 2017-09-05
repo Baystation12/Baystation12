@@ -36,14 +36,8 @@
 	var/exploding = 0
 
 	//Drones aren't affected by atmos.
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 
 	var/has_loot = 1
@@ -72,20 +66,20 @@
 
 	//emps and lots of damage can temporarily shut us down
 	if(disabled > 0)
-		stat = UNCONSCIOUS
+		set_stat(UNCONSCIOUS)
 		icon_state = "drone_dead"
 		disabled--
 		wander = 0
 		speak_chance = 0
 		if(disabled <= 0)
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 			icon_state = "drone0"
 			wander = 1
 			speak_chance = 5
 
 	//repair a bit of damage
 	if(prob(1))
-		src.visible_message("\red \icon[src] [src] shudders and shakes as some of it's damaged systems come back online.")
+		src.visible_message("<span class='warning'>\icon[src] [src] shudders and shakes as some of it's damaged systems come back online.</span>")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, src)
 		s.start()
@@ -100,10 +94,10 @@
 	//sometimes our targetting sensors malfunction, and we attack anyone nearby
 	if(prob(disabled ? 0 : 1))
 		if(hostile_drone)
-			src.visible_message("\blue \icon[src] [src] retracts several targetting vanes, and dulls it's running lights.")
+			src.visible_message("<span class='notice'>\icon[src] [src] retracts several targetting vanes, and dulls it's running lights.</span>")
 			hostile_drone = 0
 		else
-			src.visible_message("\red \icon[src] [src] suddenly lights up, and additional targetting vanes slide into place.")
+			src.visible_message("<span class='warning'>\icon[src] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
 			hostile_drone = 1
 
 	if(health / maxHealth > 0.9)
@@ -124,24 +118,24 @@
 		exploding = 0
 		if(!disabled)
 			if(prob(50))
-				src.visible_message("\blue \icon[src] [src] suddenly shuts down!")
+				src.visible_message("<span class='notice'>\icon[src] [src] suddenly shuts down!</span>")
 			else
-				src.visible_message("\blue \icon[src] [src] suddenly lies still and quiet.")
+				src.visible_message("<span class='notice'>\icon[src] [src] suddenly lies still and quiet.</span>")
 			disabled = rand(150, 600)
 			walk(src,0)
 
 	if(exploding && prob(20))
 		if(prob(50))
-			src.visible_message("\red \icon[src] [src] begins to spark and shake violenty!")
+			src.visible_message("<span class='warning'>\icon[src] [src] begins to spark and shake violenty!</span>")
 		else
-			src.visible_message("\red \icon[src] [src] sparks and shakes like it's about to explode!")
+			src.visible_message("<span class='warning'>\icon[src] [src] sparks and shakes like it's about to explode!</span>")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, src)
 		s.start()
 
 	if(!exploding && !disabled && prob(explode_chance))
 		exploding = 1
-		stat = UNCONSCIOUS
+		set_stat(UNCONSCIOUS)
 		wander = 1
 		walk(src,0)
 		spawn(rand(50,150))
@@ -158,7 +152,7 @@
 	walk(src,0)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
-	..(null,"suddenly breaks apart.")
+	..(null,"suddenly breaks apart.", "You have been destroyed.")
 	qdel(src)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
@@ -183,16 +177,16 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//rods
-		O = PoolOrNew(/obj/item/stack/rods, src.loc)
+		O = new /obj/item/stack/rods(loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = PoolOrNew(/obj/item/stack/rods, src.loc)
+			O = new /obj/item/stack/rods(loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = PoolOrNew(/obj/item/stack/rods, src.loc)
+			O = new /obj/item/stack/rods(loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = PoolOrNew(/obj/item/stack/rods, src.loc)
+			O = new /obj/item/stack/rods(loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//plasteel

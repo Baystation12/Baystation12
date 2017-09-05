@@ -78,11 +78,18 @@ var/datum/admin_secrets/admin_secrets = new()
 		feedback_add_details("admin_secrets_used","[name]")
 	return 1
 
+/datum/admin_secret_item/Topic()
+	. = ..()
+	return !. && !can_execute(usr)
+
 /*************************
 * Pre-defined categories *
 *************************/
 /datum/admin_secret_category/admin_secrets
 	name = "Admin Secrets"
+
+/datum/admin_secret_category/investigation
+	name = "Investigation"
 
 /datum/admin_secret_category/random_events
 	name = "'Random' Events"
@@ -101,6 +108,11 @@ var/datum/admin_secrets/admin_secrets = new()
 	category = /datum/admin_secret_category/admin_secrets
 	log = 0
 	permissions = R_ADMIN
+
+/datum/admin_secret_item/investigation
+	category = /datum/admin_secret_category/investigation
+	log = 0
+	permissions = R_INVESTIGATE
 
 /datum/admin_secret_item/random_event
 	category = /datum/admin_secret_category/random_events

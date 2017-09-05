@@ -18,7 +18,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 	<br>
 	<div class="item">
 		<div class="itemLabelNarrow">
-			<b>Station Time</b>:
+			<b>Local Time</b>:
 		</div>
 		<div class="itemContent">
 			<span class="average">{{:data.stationTime}}</span>
@@ -128,7 +128,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     </div>
                     <div class="itemContent">
                         {{:helper.link('Supply Records', 'gear', {'choice' : "47"}, null, 'fixedLeftWide')}}
-                        {{if data.cartridge.radio == 3}} {{:helper.link('Delivery Bot Control', 'gear', {'choice' : "48"}, null, 'fixedLeftWide')}} {{/if}}
+                        {{:helper.link('Delivery Bot Control', 'gear', {'choice' : "48"}, null, 'fixedLeftWide')}}
                          <br>
                     </div>
                 </div>
@@ -298,22 +298,28 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 	    <div class="item">
             <center><table class="pmon"><tbody>
                 {{if data.manifest.heads.length}}
-                    <tr><th colspan="3" class="command">Command</th></tr>
+                    <tr><th colspan="3" class="command">Heads of Staff</th></tr>
                     {{for data.manifest["heads"]}}
                         {{if value.rank == "Captain"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
+                    {{/for}}
+                {{/if}}
+				{{if data.manifest.spt.length}}
+                    <tr><th colspan="3" class="spt">Command Support</th></tr>
+                    {{for data.manifest["spt"]}}
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                     {{/for}}
                 {{/if}}
                 {{if data.manifest.sec.length}}
                     <tr><th colspan="3" class="sec">Security</th></tr>
                     {{for data.manifest["sec"]}}
                         {{if value.rank == "Head of Security"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
                     {{/for}}
                 {{/if}}
@@ -321,9 +327,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     <tr><th colspan="3" class="eng">Engineering</th></tr>
                     {{for data.manifest["eng"]}}
                         {{if value.rank == "Chief Engineer"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
                     {{/for}}
                 {{/if}}
@@ -331,9 +337,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     <tr><th colspan="3" class="med">Medical</th></tr>
                     {{for data.manifest["med"]}}
                         {{if value.rank == "Chief Medical Officer"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
                     {{/for}}
                 {{/if}}
@@ -341,9 +347,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     <tr><th colspan="3" class="sci">Science</th></tr>
                     {{for data.manifest["sci"]}}
                         {{if value.rank == "Research Director"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
                     {{/for}}
                 {{/if}}
@@ -351,9 +357,29 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     <tr><th colspan="3" class="car">Cargo</th></tr>
                     {{for data.manifest["car"]}}
                         {{if value.rank == "Quartermaster"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                        {{/if}}
+                    {{/for}}
+                {{/if}}
+				{{if data.manifest.sup.length}}
+                    <tr><th colspan="3" class="sup">Supply</th></tr>
+                    {{for data.manifest["sup"]}}
+                        {{if value.rank == "Quartermaster"}}
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                        {{else}}
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                        {{/if}}
+                    {{/for}}
+                {{/if}}
+				{{if data.manifest.srv.length}}
+                    <tr><th colspan="3" class="srv">Service</th></tr>
+                    {{for data.manifest["srv"]}}
+                        {{if value.rank == "Head of Personnel"}}
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                        {{else}}
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
                     {{/for}}
                 {{/if}}
@@ -361,22 +387,22 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     <tr><th colspan="3" class="civ">Civilian</th></tr>
                     {{for data.manifest["civ"]}}
                         {{if value.rank == "Head of Personnel"}}
-                            <tr><td><span class="good">{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
-                            <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                            <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                         {{/if}}
                     {{/for}}
                 {{/if}}
                 {{if data.manifest.misc.length}}
                     <tr><th colspan="3" class="misc">Misc</th></tr>
                     {{for data.manifest["misc"]}}
-                        <tr><td><span class="average">{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
+                        <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="average">{{:value.rank}}</span></td><td><span class="average">{{:value.active}}</span></td></tr>
                     {{/for}}
                 {{/if}}
                 {{if data.manifest.bot.length}}
                     <tr><th colspan="3" class="bot">Synthetic</th></tr>
                     {{for data.manifest["bot"]}}
-                        <tr><td><span class="average">{{:value.name}}</span></td><td colspan="2"><span class="average">{{:value.rank}}</span></td></tr>
+                        <tr><td><span class="average">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td colspan="2"><span class="average">{{:value.rank}}</span></td></tr>
                     {{/for}}
                 {{/if}}
             </tbody></table></center>
@@ -482,7 +508,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
 
     {{else data.mode == 42}}
-        <H2>Station Status Displays Interlink</H2>
+        <H2>Status Displays Interlink</H2>
         <div class="item">
             <div class="itemLabel">
                 <b>Code</b>:
@@ -518,6 +544,8 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             </div>
             <div class="itemContent">
                 {{:helper.link('None', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "default"}, null, null)}}
+                {{:helper.link('Green Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "greenalert"}, null, null)}}
+                {{:helper.link('Blue Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "bluealert"}, null, null)}}
                 {{:helper.link('Red Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "redalert"}, null, null)}}
                 {{:helper.link('Lockdown', 'caution', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "lockdown"}, null, null)}}
                 {{:helper.link('Biohazard', 'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "biohazard"}, null, null)}}
@@ -735,7 +763,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 			<div class="itemContent">
 				<span class="average">
 					{{if data.records.supply.shuttle_moving}}
-					    Moving to station ({{:data.records.supply.shuttle_eta}})
+					    Moving to dock ({{:data.records.supply.shuttle_eta}})
 					{{else}}
 					    Shuttle at {{:data.records.supply.shuttle_loc}}
 					{{/if}}
@@ -768,128 +796,38 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
 
 	{{else data.mode == 48}}
- 		<H2>Mule Control </H2>
-        {{if data.records.mulebot.active == null || data.records.mulebot.active == 0}}
-            {{if data.records.mulebot.count == 0}}
-                <H1><span class="bad">No bots found.</span></H1>
-            {{else}}
-                <H2>Mule List</H2>
-                <div class="item">
-                    Select A Mulebot
-                </div>
-                <br>
-                {{for data.records.mulebot.bots}}
-                    <div class="item">
-                         {{:helper.link(value.Name, 'gear', {'radiomenu' : "1", 'op' : "control",'bot' : value.ref}, null, null)}} (Location: {{:value.Location}})
-                    </div>
-                {{/for}}
-            {{/if}}
-            <br>
-            {{:helper.link('Scan for Bots','gear', {'radiomenu' : "1", 'op' : "scanbots"}, null, null)}}
-        {{else}}
-            {{if data.records.mulebot.botstatus.mode == -1}}
-                <H1><span class="bad">Waiting for response...</span></H1>
-            {{else}}
-                <H1><span class="average">Status:</span></H1>
-                <br>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Location:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">{{:data.records.mulebot.botstatus.loca}}</span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Mode:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">
-                            {{if data.records.mulebot.botstatus.mode ==0}}
-                                Ready
-                            {{else data.records.mulebot.botstatus.mode == 1}}
-                                Loading/Unloading
-                            {{else data.records.mulebot.botstatus.mode ==2}}
-                                Navigating to Delivery Location
-                            {{else data.records.mulebot.botstatus.mode == 3}}
-                                Navigating to Home
-                            {{else data.records.mulebot.botstatus.mode ==4}}
-                                Waiting for Clear Path
-                            {{else data.records.mulebot.botstatus.mode ==5 || data.records.mulebot.botstatus.mode == 6}}
-                                Calculating navigation Path
-                            {{else data.records.mulebot.botstatus.mode ==7}}
-                                Unable to locate destination
-                            {{/if}}
-                        </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Current Load:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">
-                            {{:helper.link(data.records.mulebot.botstatus.load == null ? 'None (Unload)' : data.records.mulebot.botstatus.load + ' (Unload)', 'gear', {'radiomenu' : "1", 'op' : "unload"},data.records.mulebot.botstatus.load == null ? 'disabled' : null, null)}}
-                        </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Power:</span>
-                    </div>
-                    <div class="itemContent">
-                        <span class="average">
-                            {{:data.records.mulebot.botstatus.powr}}%
-                        </span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Destination:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link(data.records.mulebot.botstatus.dest == null || data.records.mulebot.botstatus.dest == "" ? 'None (Set)': data.records.mulebot.botstatus.dest+ ' (Set)', 'gear', {'radiomenu' : "1", 'op' : "setdest"}, null, null)}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Home:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{if data.records.mulebot.botstatus.home == null}} None {{else}} {{:data.records.mulebot.botstatus.home}} {{/if}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Auto Return:</span>
-                    </div>
-                    <div class="itemContent">
-                       {{:helper.link(data.records.mulebot.botstatus.retn == 1 ? 'ON' : 'OFF', 'gear', {'radiomenu' : "1", 'op' : data.records.mulebot.botstatus.retn==1 ? "retoff" : "reton"}, null, null)}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Auto Pickup:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link(data.records.mulebot.botstatus.pick==1? 'ON' : 'OFF', 'gear', {'radiomenu' : "1", 'op' : data.records.mulebot.botstatus.pick==1 ? "pickoff" : "pickon"}, null, null)}}
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="itemLabel">
-                        <span class="good">Functions:</span>
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link('Stop', 'gear', {'radiomenu' : "1", 'op' : "stop"}, null, null)}}
-                        {{:helper.link('Proceed', 'gear', {'radiomenu' : "1", 'op' : "go"}, null, null)}}
-                        {{:helper.link('Return Home', 'gear', {'radiomenu' : "1", 'op' : "home"}, null, null)}}
-                    </div>
-                </div>
-                <br><br>
-                {{:helper.link('Return to Bot list', 'gear', {'radiomenu' : "1", 'op' : "botlist"}, null, null)}}
-            {{/if}}
-        {{/if}}
+		<H2>Mule Control</H2>
+		{{if data.records.mulebotcount == 0}}
+			<H1><span class="bad">No bots found.</span></H1>
+		{{else}}
+			<H2>Mule List</H2>
+			{{for data.records.mulebots}}
+				<div class="item">
+					<div class="itemLabel">Mulebot #{{:value.name}}</div>
+					<div class="itemContent">Location: {{:value.location}}<br>Home: {{:value.home}}<br>Target: {{:value.target}}<br>Load: {{:value.load}}</div>
+				</div>
+				<div class="item">
+					<div class="itemLabel">Status:</div>
+					<div class="itemContent">
+						{{if value.mode == 0}}
+							Idle
+						{{else value.mode == 1}}
+							Moving
+						{{else value.mode == 2}}
+							Unloading
+						{{else}}
+							Calculating path
+						{{/if}}
+					</div>
+				</div>
+				<div class="item">
+					{{:helper.link('Go home', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "Home"})}}
+					{{:helper.link('Set destination', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "SetD"})}}
+					{{:helper.link('Go', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "GoTD"})}}
+					{{:helper.link('Stop', null, {'cartmenu' : "1", 'choice' : "MULEbot", 'ref' : value.ref, 'command' : "Stop"})}}
+				</div>
+			{{/for}}
+		{{/if}}
 
 
 	{{else data.mode == 49}}
@@ -941,10 +879,10 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         <span class="average">({{:value.x}} / {{:value.y}}) - {{:value.dir}} - Status: {{:value.status}}</span><br>
                     {{/if}}
                 {{/for}}
-                
+
     {{else data.mode == 6}}
         <H2><span class="white">InstaNews ED 2.0.9</span></H2>
-        
+
         <div class="item">
             <div class="itemLabelNarrow">
                 <b>Functions</b>:
@@ -954,11 +892,11 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 {{:helper.link('Set news tone', 'comment', {'choice' : "Newstone"}, null, 'fixedLeftWide')}}
             </div>
         </div>
-        
+
 		{{if data.reception != 1}}
 			<span class="bad">No reception with newscaster network.</span>
 		{{/if}}
-		
+
 		<div class="item">
             <div class="itemContent">
                 {{for data.feedChannels}}
@@ -973,20 +911,23 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             </div>
 		</div>
 
-    {{else data.mode == 61}}      
+    {{else data.mode == 61}}
         <H2><span class="white">{{:data.feed.channel}}</span></H2>
-        <span class="white">Created by: </span><span class="average">{{:data.feed.author}}<br></span>
-		
+        <div style="overflow: hidden;">
+            <div style="float: left;"><span class="white">Created by: </span><span class="average">{{:data.feed.author}}</span></div>
+            <div style="float: right;"><span class="white">Views: </span><span class="average">{{:data.feed.views}} </span></div>
+        </div>
+
 		{{if data.reception != 1}}
 			<span class="bad">No reception with newscaster network.</span>
 		{{/if}}
-		
+
         <div class="statusDisplay" style="overflow: auto;">
             <div class="item">
                 <div class="itemContent" style="width: 100%;">
 					{{if data.feed.censored}}
 						<H3><span class="bad">Attention</span></H3>
-						This channel has been deemed as threatening to the welfare of the station, and marked with a Nanotrasen D-Notice.<br>
+						This channel has been deemed as threatening to the welfare of the crew, and marked with a D-Notice.<br>
 						No further feed story additions are allowed while the D-Notice is in effect.<br>
 					{{else}}
 						{{for data.feed.messages}}
@@ -1006,7 +947,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 				</div>
             </div>
         </div>
-        
+
     {{/if}}
 {{else}}
     <div class="wholeScreen">

@@ -1,104 +1,87 @@
 /*
 The overmap system allows adding new maps to the big 'galaxy' map.
-Idea is that new sectors can be added by just ticking in new maps and recompiling.
-Not real hot-plugging, but still pretty modular.
-It uses the fact that all ticked in .dme maps are melded together into one as different zlevels.
-Metaobjects are used to make it not affected by map order in .dme and carry some additional info.
+There's overmap zlevel, that looks like a map. On it, token objects (overmap objects) are moved, representing ship movement etc.
+No actual turfs are moved, you would need exploration shuttles or teleports to move atoms between different sectors/ships.
+Unless stated otherwise, you just need to place any of things below somewhere on the map and they'll handle the rest.
 
 *************************************************************
-Metaobject
+# How to make new sector
 *************************************************************
-/obj/effect/mapinfo, sectors.dm
-Used to build overmap in beginning, has basic information needed to create overmap objects and make shuttles work.
-Its name and icon (if non-standard) vars will be applied to resulting overmap object.
-'mapy' and 'mapx' vars are optional, sector will be assigned random overmap coordinates if they are not set.
-Has two important vars:
-	obj_type	-	type of overmap object it spawns. Could be overriden for custom overmap objects.
-	landing_area -	type of area used as inbound shuttle landing, null if no shuttle landing area.
-
-Object could be placed anywhere on zlevel. Should only be placed on zlevel that should appear on overmap as a separate entitety.
-Right after creation it sends itself to nullspace and creates an overmap object, corresponding to this zlevel.
+0. Map whatever.
+1. Make /obj/effect/overmap/sector/[whatever]
+	If you want explorations shuttles be able to dock here, remember to set waypoints lists
+2. Put /obj/effect/overmap/sector/[whatever] on the map. Even if it's multiz, only one is needed, on any z.
+3. Done.
 
 *************************************************************
-Overmap object
+# How to make new ship
 *************************************************************
-/obj/effect/map, sectors.dm
-Represents a zlevel on the overmap. Spawned by metaobjects at the startup.
-	var/area/shuttle/shuttle_landing - keeps a reference to the area of where inbound shuttles should land
-
--CanPass should be overriden for access restrictions
--Crossed/Uncrossed can be overriden for applying custom effects.
-Remember to call ..() in children, it updates ship's current sector.
-
-subtype /ship of this object represents spacefaring vessels.
-It has 'current_sector' var that keeps refernce to, well, sector ship currently in.
+0. Map whatever.
+1. Make /obj/effect/overmap/ship/[whatever]
+	If you want explorations shuttles be able to dock here, remember to set waypoints lists
+2. Put /obj/effect/overmap/ship/[whatever] on the map. If it's multiz, only one is needed, on any z.
+3. Put Helm Console anywhere on the map.
+4. Put Engines Control Console anywhere on the map.
+5. Put some engines hooked up to gas supply anywhere on the map.
+6. Done.
 
 *************************************************************
-Helm console
+# Overmap object
 *************************************************************
-/obj/machinery/computer/helm, helm.dm
-On creation console seeks a ship overmap object corresponding to this zlevel and links it.
-Clicking with empty hand on it starts steering, Cancel-Camera-View stops it.
-Helm console relays movement of mob to the linked overmap object.
-Helm console currently has no interface. All travel happens instanceously too.
-Sector shuttles are not supported currently, only ship shuttles.
+/obj/effect/overmap
+### WHAT IT DOES
+Lets overmap know this place should be represented on the map as a sector/ship.
+If this zlevel (or any of connected ones for multiz) doesn't have this object, you won't be able to travel there by ovemap means.
+### HOW TO USE
+1. Create subtype for your ship/sector. Use /ship one for ships.
+2. Put it anywhere on the ship/sector map. It will do the rest on its own during init.
+If your thing is multiz, only one is needed per multiz sector/ship.
 
-*************************************************************
-Exploration shuttle terminal
-*************************************************************
-A generic shuttle controller.
-Has a var landing_type defining type of area shuttle should be landing at.
-On initalizing, checks for a shuttle corresponding to this zlevel, and creates one if it's not there.
-Changes desitnation area depending on current sector ship is in.
-Currently updating is called in attack_hand(), until a better place is found.
-Currently no modifications were made to interface to display availability of landing area in sector.
-
+If it's player's main base (e.g Exodus), set 'base' var to 1, so it adds itself to station_levels list.
+If this place cannot be reached or left with EVA, set 'in_space' var to 0
+If you want exploration shuttles (look below) to be able to dock here, set up waypoints lists.
+generic_waypoints is list of landmark_tags of waypoints any shttle should be able to visit.
+restricted_waypoints is list of 'shuttle name = list(landmark_tags)' pairs for waypoints only those shuttles can visit
 
 *************************************************************
-Guide to how make new sector
+# Helm console
 *************************************************************
-0.Map
-Remember to define shuttle areas if you want sector be accessible via shuttles.
-Currently there are no other ways to reach sectors from ships.
-In examples, 4x6 shuttle area is used. In case of shuttle area being too big, it will apear in bottom left corner of it.
+/obj/machinery/computer/helm
+### WHAT IT DOES
+Lets you steer ship around on overmap.
+Lets you use autopilot.
+### HOW TO USE
+Just place it anywhere on the ship.
 
-Remember to put a helm console and engine control console on ship maps.
-Ships need engines to move. Currently there are only thermal engines.
-Thermal engines are just a unary atmopheric machine, like a vent. They need high-pressure gas input to produce more thrust.
+*************************************************************
+# Engines control console
+*************************************************************
+/obj/machinery/computer/engines
+### WHAT IT DOES
+Lets use set thrust limits for engines of your ship.
+Lets you shutdown/restart the engines.
+Lets you check status of engines.
+### HOW TO USE
+Just place it anywhere on the ship.
 
+*************************************************************
+# Thermal engines
+*************************************************************
+/obj/machinery/atmospherics/unary/engine
+### WHAT IT DOES
+Lets your ship move on the map at all.
+### HOW TO USE
+Put them on map, hook up to pipes with any gas. Heavier gas (CO2/plasma) + More pressure = more thrust.
 
-1.Metaobject
-All vars needed for it to work could be set directly in map editor, so in most cases you won't have to define new in code.
-Remember to set landing_area var for sectors.
-
-2.Overmap object
-If you need custom behaviour on entering/leaving this sector, or restricting access to it, you can define your custom map object.
-Remember to put this new type into spawn_type var of metaobject.
-
-3.Shuttle console
-Remember to place one on the actual shuttle too, or it won't be able to return from sector without ship-side recall.
-Remember to set landing_type var to ship-side shuttle area type.
-shuttle_tag can be set to custom name (it shows up in console interface)
-
-5.Engines
-Actual engines could be any type of machinery, as long as it creates a ship_engine datum for itself.
-
-6.Tick map in and compile.
-Sector should appear on overmap (in random place if you didn't set mapx,mapy)
-
-
-TODO:
-shuttle console:
-	checking occupied pad or not with docking controllers
-	?landing pad size detection
-non-zlevel overmap objects
-	field generator
-		meteor fields
-			speed-based chance for a rock in the ship
-		debris fields
-			speed-based chance of
-				debirs in the ship
-				a drone
-				EMP
-		nebulaes
+*************************************************************
+# Exploration shuttle terminal
+*************************************************************
+/obj/machinery/computer/shuttle_control/explore
+### WHAT IT DOES
+Lets you control shuttles that can change destinations and visit other sectors/ships.
+### HOW TO USE
+1. Define starting shuttle landmark.
+2. Define a /datum/shuttle/autodock/overmap for your shuttle. Same as normal shuttle, aside from 'range' var - how many squares on overmap it can travel on its own.
+3. Place console anywhere on the ship/sector. Set shuttle_tag to shuttle's name.
+4. Use. You can select destinations if you're in range (on same tile by defualt) on the map and sector has waypoints lists defined
 */

@@ -1,8 +1,8 @@
 /proc/alien_queen_exists(var/ignore_self,var/mob/living/carbon/human/self)
-	for(var/mob/living/carbon/human/Q in living_mob_list_)
+	for(var/mob/living/carbon/human/Q in GLOB.living_mob_list_)
 		if(self && ignore_self && self == Q)
 			continue
-		if(Q.species.name != "Xenomorph Queen")
+		if(Q.species.name != "Xenophage Queen")
 			continue
 		if(!Q.key || !Q.client || Q.stat)
 			continue
@@ -11,7 +11,7 @@
 
 /mob/living/carbon/human/proc/gain_plasma(var/amount)
 
-	var/obj/item/organ/xenos/plasmavessel/I = internal_organs_by_name["plasma vessel"]
+	var/obj/item/organ/internal/xenos/plasmavessel/I = internal_organs_by_name[BP_PLASMA]
 	if(!istype(I)) return
 
 	if(amount)
@@ -20,22 +20,22 @@
 
 /mob/living/carbon/human/proc/check_alien_ability(var/cost,var/needs_foundation,var/needs_organ)
 
-	var/obj/item/organ/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
+	var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name[BP_PLASMA]
 	if(!istype(P))
-		src << "<span class='danger'>Your plasma vessel has been removed!</span>"
+		to_chat(src, "<span class='danger'>Your plasma vessel has been removed!</span>")
 		return
 
 	if(needs_organ)
-		var/obj/item/organ/I = internal_organs_by_name[needs_organ]
+		var/obj/item/organ/internal/I = internal_organs_by_name[needs_organ]
 		if(!I)
-			src << "<span class='danger'>Your [needs_organ] has been removed!</span>"
+			to_chat(src, "<span class='danger'>Your [needs_organ] has been removed!</span>")
 			return
-		else if((I.status & ORGAN_CUT_AWAY) || I.is_broken())
-			src << "<span class='danger'>Your [needs_organ] is too damaged to function!</span>"
+		else if(!I.is_usable())
+			to_chat(src, "<span class='danger'>Your [needs_organ] is too damaged to function!</span>")
 			return
 
 	if(P.stored_plasma < cost)
-		src << "\red You don't have enough phoron stored to do that."
+		to_chat(src, "<span class='warning'>You don't have enough phoron stored to do that.</span>")
 		return 0
 
 	if(needs_foundation)
@@ -46,7 +46,7 @@
 			if(!(istype(T,/turf/space)))
 				has_foundation = 1
 		if(!has_foundation)
-			src << "\red You need a solid foundation to do that on."
+			to_chat(src, "<span class='warning'>You need a solid foundation to do that on.</span>")
 			return 0
 
 	P.stored_plasma -= cost
@@ -59,21 +59,21 @@
 	set category = "Abilities"
 
 	if (get_dist(src,M) > 1)
-		src << "<span class='alium'>You need to be closer.</span>"
+		to_chat(src, "<span class='alium'>You need to be closer.</span>")
 		return
 
-	var/obj/item/organ/xenos/plasmavessel/I = M.internal_organs_by_name["plasma vessel"]
+	var/obj/item/organ/internal/xenos/plasmavessel/I = M.internal_organs_by_name[BP_PLASMA]
 	if(!istype(I))
-		src << "<span class='alium'>Their plasma vessel is missing.</span>"
+		to_chat(src, "<span class='alium'>Their plasma vessel is missing.</span>")
 		return
 
 	var/amount = input("Amount:", "Transfer Plasma to [M]") as num
 	if (amount)
 		amount = abs(round(amount))
-		if(check_alien_ability(amount,0,"plasma vessel"))
+		if(check_alien_ability(amount,0,BP_PLASMA))
 			M.gain_plasma(amount)
-			M << "<span class='alium'>[src] has transfered [amount] plasma to you.</span>"
-			src << "<span class='alium'>You have transferred [amount] plasma to [M].</span>"
+			to_chat(M, "<span class='alium'>[src] has transfered [amount] plasma to you.</span>")
+			to_chat(src, "<span class='alium'>You have transferred [amount] plasma to [M].</span>")
 	return
 
 // Queen verbs.
@@ -84,15 +84,15 @@
 	set category = "Abilities"
 
 	if(!config.alien_eggs_allowed)
-		src << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
+		to_chat(src, "You begin to lay an egg, but hesitate. You suspect it isn't allowed.")
 		verbs -= /mob/living/carbon/human/proc/lay_egg
 		return
 
 	if(locate(/obj/structure/alien/egg) in get_turf(src))
-		src << "There's already an egg here."
+		to_chat(src, "There's already an egg here.")
 		return
 
-	if(check_alien_ability(75,1,"egg sac"))
+	if(check_alien_ability(75,1,BP_EGG))
 		visible_message("<span class='alium'><B>[src] has laid an egg!</B></span>")
 		new /obj/structure/alien/egg(loc)
 
@@ -105,12 +105,12 @@
 	set category = "Abilities"
 
 	if(alien_queen_exists())
-		src << "<span class='notice'>We already have an active queen.</span>"
+		to_chat(src, "<span class='notice'>We already have an active queen.</span>")
 		return
 
 	if(check_alien_ability(500))
 		visible_message("<span class='alium'><B>[src] begins to twist and contort!</B></span>", "<span class='alium'>You begin to evolve!</span>")
-		src.set_species("Xenomorph Queen")
+		src.set_species("Xenophage Queen")
 
 	return
 
@@ -119,7 +119,7 @@
 	set desc = "Plants some alien weeds"
 	set category = "Abilities"
 
-	if(check_alien_ability(50,1,"resin spinner"))
+	if(check_alien_ability(50,1,BP_RESIN))
 		visible_message("<span class='alium'><B>[src] has planted some alien weeds!</B></span>")
 		new /obj/structure/alien/node(loc)
 	return
@@ -130,7 +130,7 @@
 	set category = "Abilities"
 
 	if(!O in oview(1))
-		src << "<span class='alium'>[O] is too far away.</span>"
+		to_chat(src, "<span class='alium'>[O] is too far away.</span>")
 		return
 
 	// OBJ CHECK
@@ -150,10 +150,10 @@
 				cannot_melt = 1
 
 	if(cannot_melt)
-		src << "<span class='alium'>You cannot dissolve this object.</span>"
+		to_chat(src, "<span class='alium'>You cannot dissolve this object.</span>")
 		return
 
-	if(check_alien_ability(200,0,"acid gland"))
+	if(check_alien_ability(200,0,BP_ACID))
 		new /obj/effect/acid(get_turf(O), O)
 		visible_message("<span class='alium'><B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B></span>")
 
@@ -164,11 +164,11 @@
 	set desc = "Spits neurotoxin at someone, paralyzing them for a short time if they are not wearing protective gear."
 	set category = "Abilities"
 
-	if(!check_alien_ability(50,0,"acid gland"))
+	if(!check_alien_ability(50,0,BP_ACID))
 		return
 
 	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot spit neurotoxin in your current state."
+		to_chat(src, "You cannot spit neurotoxin in your current state.")
 		return
 
 	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "<span class='alium'>You spit neurotoxin at [target].</span>")
@@ -185,7 +185,7 @@
 	if(!choice)
 		return
 
-	if(!check_alien_ability(75,1,"resin spinner"))
+	if(!check_alien_ability(75,1,BP_RESIN))
 		return
 
 	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [choice].</span>")
@@ -206,20 +206,20 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 	set category = "Abilities"
 
 	if(!M.Adjacent(src))
-		src << "<span class='warning'>They are too far away.</span>"
+		to_chat(src, "<span class='warning'>They are too far away.</span>")
 		return
 
 	if(!M.mind)
-		src << "<span class='warning'>This mindless flesh adds nothing to the hive.</span>"
+		to_chat(src, "<span class='warning'>This mindless flesh adds nothing to the hive.</span>")
 		return
 
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]))
-		src << "<span class='warning'>They are already part of the hive.</span>"
+	if(M.species.get_bodytype(M) == "Xenophage" || !isnull(M.internal_organs_by_name["hive node"]))
+		to_chat(src, "<span class='warning'>They are already part of the hive.</span>")
 		return
 
-	var/obj/item/organ/affecting = M.get_organ("chest")
+	var/obj/item/organ/affecting = M.get_organ(BP_CHEST)
 	if(!affecting || (affecting.robotic >= ORGAN_ROBOT))
-		src << "<span class='warning'>This form is not compatible with our physiology.</span>"
+		to_chat(src, "<span class='warning'>This form is not compatible with our physiology.</span>")
 		return
 
 	src.visible_message("<span class='danger'>\The [src] crouches over \the [M], extending a hideous protuberance from its head!</span>")
@@ -228,18 +228,18 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		return
 
 	if(!M || !M.Adjacent(src))
-		src << "<span class='warning'>They are too far away.</span>"
+		to_chat(src, "<span class='warning'>They are too far away.</span>")
 		return
 
-	if(M.species.get_bodytype() == "Xenomorph" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.robotic >= ORGAN_ROBOT))
+	if(M.species.get_bodytype(M) == "Xenophage" || !isnull(M.internal_organs_by_name["hive node"]) || !affecting || (affecting.robotic >= ORGAN_ROBOT))
 		return
 
 	if(!check_alien_ability(500,1,"egg sac"))
 		return
 
 	src.visible_message("<span class='danger'>\The [src] regurgitates something into \the [M]'s torso!</span>")
-	M << "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>"
-	var/obj/item/organ/xenos/hivenode/node = new(affecting)
+	to_chat(M, "<span class='danger'>A hideous lump of alien mass strains your ribcage as it settles within!</span>")
+	var/obj/item/organ/internal/xenos/hivenode/node = new(affecting)
 	node.replaced(M,affecting)
 
 /mob/living/carbon/human/proc/pry_open(obj/machinery/door/A in filter_list(oview(1), /obj/machinery/door))
@@ -251,7 +251,7 @@ mob/living/carbon/human/proc/xeno_infest(mob/living/carbon/human/M as mob in ovi
 		return
 
 	if(!A.Adjacent(src))
-		src << "<span class='warning'>\The [A] is too far away.</span>"
+		to_chat(src, "<span class='warning'>\The [A] is too far away.</span>")
 		return
 
 	if(!A.density)

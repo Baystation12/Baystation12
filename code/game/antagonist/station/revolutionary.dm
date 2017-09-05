@@ -5,7 +5,7 @@ var/datum/antagonist/revolutionary/revs
 	role_text = "Head Revolutionary"
 	role_text_plural = "Revolutionaries"
 	feedback_tag = "rev_objective"
-	antag_indicator = "rev_head"
+	antag_indicator = "hudheadrevolutionary"
 	welcome_text = "Down with the capitalists! Down with the Bourgeoise!"
 	victory_text = "The heads of staff were relieved of their posts! The revolutionaries win!"
 	loss_text = "The heads of staff managed to stop the revolution!"
@@ -24,12 +24,13 @@ var/datum/antagonist/revolutionary/revs
 	faction_descriptor = "Revolution"
 	faction_verb = /mob/living/proc/convert_to_rev
 	faction_welcome = "Help the cause overturn the ruling class. Do not harm your fellow freedom fighters."
-	faction_indicator = "rev"
+	faction_indicator = "hudrevolutionary"
 	faction_invisible = 1
 	faction = "revolutionary"
 
-	restricted_jobs = list("Internal Affairs Agent", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
+	restricted_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo, /datum/job/lawyer)
+	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
 
 
 /datum/antagonist/revolutionary/New()
@@ -40,7 +41,7 @@ var/datum/antagonist/revolutionary/revs
 	if(!..())
 		return
 	global_objectives = list()
-	for(var/mob/living/carbon/human/player in mob_list)
+	for(var/mob/living/carbon/human/player in GLOB.mob_list)
 		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in command_positions))
 			continue
 		var/datum/objective/rev/rev_obj = new

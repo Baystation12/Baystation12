@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Title: Request Console
 Used In File(s): \code\game\machinery\requests_console.dm
 
@@ -89,7 +89,7 @@ Used In File(s): \code\game\machinery\requests_console.dm
 		{{:helper.link('Back', 'arrowreturnthick-1-w', { 'setScreen' : 0 })}}
 	</div>
 {{else data.screen == 8}}
-	<div class="item"><h2>Station wide announcement</h2></div>
+	<div class="item"><h2>Announcement</h2></div>
 	<div class="item"><b>Message:</b> {{:data.message}} {{:helper.link('Write Message', 'pencil', { 'writeAnnouncement' : 1 })}}</div>
 	<br>
 	{{if data.announceAuth}}
@@ -115,7 +115,7 @@ Used In File(s): \code\game\machinery\requests_console.dm
 	<div class="item">{{:helper.link('Relay Anonymous Information', 'gear', { 'setScreen' : 3})}}</div>
 	<br>
 	{{if data.announcementConsole}}
-		<div class="item">{{:helper.link('Send Station-wide Announcement', 'signal-diag', { 'setScreen' : 8})}}</div>
+		<div class="item">{{:helper.link('Send Announcement', 'signal-diag', { 'setScreen' : 8})}}</div>
 		<br>
 	{{/if}}
 	<div class="item">{{:helper.link(data.silent ? 'Speaker OFF' : 'Speaker ON', data.silent ? 'volume-off' : 'volume-on', { 'toggleSilent' : 1})}}</div>

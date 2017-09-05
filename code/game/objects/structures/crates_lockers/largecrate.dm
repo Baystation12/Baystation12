@@ -4,16 +4,17 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "densecrate"
 	density = 1
+	flags = OBJ_CLIMBABLE
 
-/obj/structure/largecrate/initialize()
-	..()
+/obj/structure/largecrate/Initialize()
+	. = ..()
 	for(var/obj/I in src.loc)
 		if(I.density || I.anchored || I == src || !I.simulated)
 			continue
 		I.forceMove(src)
 
 /obj/structure/largecrate/attack_hand(mob/user as mob)
-	user << "<span class='notice'>You need a crowbar to pry this open!</span>"
+	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
 	return
 
 /obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -57,6 +58,10 @@
 	..()
 	for(var/i = 1;i<=held_count;i++)
 		new held_type(src)
+
+/obj/structure/largecrate/animal/mulebot
+	name = "Mulebot crate"
+	held_type = /mob/living/bot/mulebot
 
 /obj/structure/largecrate/animal/corgi
 	name = "corgi carrier"

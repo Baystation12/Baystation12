@@ -10,6 +10,7 @@
 
 /datum/extension/Destroy()
 	holder = null
+	. = ..()
 
 /datum
 	var/list/datum/extension/extensions
@@ -24,10 +25,6 @@
 				qdel(extension)
 		extensions = null
 	return ..()
-
-/datum/ResetVars(var/list/exclude = list())
-	exclude += "extensions"
-	..(exclude)
 
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
 /proc/set_extension(var/datum/source, var/datum/extension/base_type, var/extension_type)

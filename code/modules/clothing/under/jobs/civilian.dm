@@ -89,9 +89,24 @@
 	worn_state = "internalaffairs"
 	starting_accessories = list(/obj/item/clothing/accessory/black)
 
+/obj/item/clothing/under/rank/internalaffairs/plain
+	desc = "A plain shirt and pair of pressed black pants."
+	name = "formal outfit"
+	starting_accessories = null
+
+/obj/item/clothing/under/rank/internalaffairs/plain/solgov
+	desc = "A plain shirt and pair of pressed black pants."
+	name = "formal outfit"
+	starting_accessories = list(/obj/item/clothing/accessory/blue_clip,/obj/item/clothing/accessory/badge/representative)
+
+/obj/item/clothing/under/rank/internalaffairs/plain/nt
+	desc = "A plain shirt and pair of pressed black pants."
+	name = "formal outfit"
+	starting_accessories = list(/obj/item/clothing/accessory/red_long,/obj/item/clothing/accessory/badge/nanotrasen)
+
 
 /obj/item/clothing/under/rank/janitor
-	desc = "It's the official uniform of the station's janitor. It has minor protection from biohazards."
+	desc = "It's the official uniform of the janitor. It has minor protection from biohazards."
 	name = "janitor's jumpsuit"
 	icon_state = "janitor"
 	worn_state = "janitor"

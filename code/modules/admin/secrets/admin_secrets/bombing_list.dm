@@ -7,6 +7,6 @@
 		return
 
 	var/dat = "<B>Bombing List</B>"
-	for(var/l in bombers)
+	for(var/l in GLOB.bombers)
 		dat += text("[l]<BR>")
 	user << browse(dat, "window=bombers")

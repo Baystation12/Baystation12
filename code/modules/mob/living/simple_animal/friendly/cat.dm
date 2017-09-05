@@ -20,7 +20,6 @@
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
 	var/mob/flee_target
-	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
@@ -128,17 +127,6 @@
 	. = ..()
 	set_flee_target(AM.thrower? AM.thrower : src.loc)
 
-/mob/living/simple_animal/cat/MouseDrop(atom/over_object)
-
-	var/mob/living/carbon/H = over_object
-	if(!istype(H) || !Adjacent(H)) return ..()
-
-	if(H.a_intent == I_HELP)
-		get_scooped(H)
-		return
-	else
-		return ..()
-
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
 	var/mob/living/carbon/human/friend
@@ -147,7 +135,7 @@
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
 	if (friend)
 		var/follow_dist = 4
-		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit) //danger
+		if (friend.stat >= DEAD || friend.is_asystole()) //danger
 			follow_dist = 1
 		else if (friend.stat || friend.health <= 50) //danger or just sleeping
 			follow_dist = 2
@@ -181,7 +169,7 @@
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)
-		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit)
+		if (friend.stat >= DEAD || friend.is_asystole())
 			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")
 				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))
@@ -216,7 +204,7 @@
 						   "rubs against [friend].",
 						   "purrs."))
 	else
-		usr << "<span class='notice'>[src] ignores you.</span>"
+		to_chat(usr, "<span class='notice'>[src] ignores you.</span>")
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~

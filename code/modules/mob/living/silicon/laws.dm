@@ -1,10 +1,18 @@
 /mob/living/silicon
-	var/datum/ai_laws/laws = null
+	var/datum/ai_laws/laws
 	var/list/additional_law_channels = list("State" = "")
+
+/mob/living/silicon/New()
+	..()
+	if(!laws)
+		laws = GLOB.using_map.default_law_type
+	if(ispath(laws))
+		laws = new laws()
+	laws_sanity_check()
 
 /mob/living/silicon/proc/laws_sanity_check()
 	if (!src.laws)
-		laws = new base_law_type
+		laws = new GLOB.using_map.default_law_type
 
 /mob/living/silicon/proc/has_zeroth_law()
 	return laws.zeroth_law != null
@@ -17,7 +25,7 @@
 /mob/living/silicon/robot/set_zeroth_law(var/law, var/law_borg)
 	..()
 	if(tracking_entities)
-		src << "<span class='warning'>Internal camera is currently being accessed.</span>"
+		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
 
 /mob/living/silicon/proc/add_ion_law(var/law)
 	laws_sanity_check()
@@ -72,7 +80,7 @@
 
 /mob/living/silicon/proc/dostatelaws(var/method, var/prefix, var/datum/ai_laws/laws)
 	if(stating_laws[prefix])
-		src << "<span class='notice'>[method]: Already stating laws using this communication method.</span>"
+		to_chat(src, "<span class='notice'>[method]: Already stating laws using this communication method.</span>")
 		return
 
 	stating_laws[prefix] = 1
@@ -85,7 +93,7 @@
 			break
 
 	if(!can_state)
-		src << "<span class='danger'>[method]: Unable to state laws. Communication method unavailable.</span>"
+		to_chat(src, "<span class='danger'>[method]: Unable to state laws. Communication method unavailable.</span>")
 	stating_laws[prefix] = 0
 
 /mob/living/silicon/proc/statelaw(var/law)
@@ -109,4 +117,4 @@
 
 /mob/living/silicon/proc/log_law(var/law_message)
 	log_and_message_admins(law_message)
-	lawchanges += "[stationtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"
+	GLOB.lawchanges += "[stationtime2text()] - [usr ? "[key_name(usr)]" : "EVENT"] [law_message]"

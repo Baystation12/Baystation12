@@ -28,7 +28,7 @@
 		M.vessel.trans_to(src,min(M.vessel.total_volume,MIN_LARVA_BLOOD_DRINK))
 		update_progression()
 	else
-		src << "<span class='danger'>This host is depleted of blood...</span>"
+		to_chat(src, "<span class='danger'>This host is depleted of blood...</span>")
 		leave_host()
 
 #undef MIN_LARVA_BLOOD_DRINK

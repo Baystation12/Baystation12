@@ -11,10 +11,11 @@
 	throwforce = 1.0
 	throw_speed = 1
 	throw_range = 2
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
+	var/global/denominations = list(1000,500,200,100,50,20,10,1)
 
 /obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash))
@@ -36,8 +37,12 @@
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		user << "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>"
+		to_chat(user, "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>")
 		qdel(src)
+
+/obj/item/weapon/spacecash/proc/getMoneyImages()
+	if(icon_state)
+		return list(icon_state)
 
 /obj/item/weapon/spacecash/bundle
 	name = "pile of thalers"
@@ -45,38 +50,42 @@
 	desc = "They are worth 0 Thalers."
 	worth = 0
 
-/obj/item/weapon/spacecash/bundle/update_icon()
-	overlays.Cut()
+/obj/item/weapon/spacecash/bundle/getMoneyImages()
+	if(icon_state)
+		return list(icon_state)
+	. = list()
 	var/sum = src.worth
 	var/num = 0
-	var/list/denominations = list(1000,500,200,100,50,20,10,1)
 	for(var/i in denominations)
 		while(sum >= i && num < 50)
 			sum -= i
 			num++
-			var/image/banknote = image('icons/obj/items.dmi', "spacecash[i]")
-			var/matrix/M = matrix()
-			M.Translate(rand(-6, 6), rand(-4, 8))
-			M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
-			banknote.transform = M
-			src.overlays += banknote
+			. += "spacecash[i]"
 	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
-		var/image/banknote = image('icons/obj/items.dmi', "spacecash1")
+		. += "spacecash1"
+
+/obj/item/weapon/spacecash/bundle/update_icon()
+	overlays.Cut()
+	var/list/images = src.getMoneyImages()
+
+	for(var/A in images)
+		var/image/banknote = image('icons/obj/items.dmi', A)
 		var/matrix/M = matrix()
 		M.Translate(rand(-6, 6), rand(-4, 8))
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 		banknote.transform = M
 		src.overlays += banknote
+
 	src.desc = "They are worth [worth] Thalers."
 	if(worth in denominations)
 		src.name = "[worth] Thaler"
 	else
-		src.name = "pile of thalers"
+		src.name = "pile of [worth] thalers"
 
 	if(overlays.len <= 2)
-		w_class = 1
+		w_class = ITEM_SIZE_TINY
 	else
-		w_class = 2
+		w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/spacecash/bundle/attack_self()
 	var/amount = input(usr, "How many Thalers do you want to take? (0 to [src.worth])", "Take Money", 20) as num
@@ -168,6 +177,6 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
 
 /obj/item/weapon/spacecash/ewallet/examine(mob/user)
-	..(user)
+	. = ..(user)
 	if (!(user in view(2)) && user!=src.loc) return
-	user << "\blue Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth]."
+	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</span>")

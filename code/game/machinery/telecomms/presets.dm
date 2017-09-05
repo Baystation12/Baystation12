@@ -6,8 +6,8 @@
 	network = "tcommsat"
 
 /obj/machinery/telecomms/relay/preset/station
-	id = "Station Relay"
-	listening_level = 1
+	id = "Primary Relay"
+	listening_level = 2
 	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/telecomms
@@ -17,6 +17,10 @@
 /obj/machinery/telecomms/relay/preset/mining
 	id = "Mining Relay"
 	autolinkers = list("m_relay")
+
+/obj/machinery/telecomms/relay/preset/bridge
+	id = "Bridge Relay"
+	autolinkers = list("b_relay")
 
 /obj/machinery/telecomms/relay/preset/firstdeck
 	id = "First Deck Relay"
@@ -34,9 +38,9 @@
 	id = "Fourth Deck Relay"
 	autolinkers = list("4_relay")
 
-/obj/machinery/telecomms/relay/preset/shuttle
-	id = "Calypso Relay"
-	autolinkers = list("s_relay")
+/obj/machinery/telecomms/relay/preset/fifthdeck
+	id = "Fifth Deck Relay"
+	autolinkers = list("5_relay")
 
 /obj/machinery/telecomms/relay/preset/ruskie
 	id = "Ruskie Relay"
@@ -59,7 +63,7 @@
 /obj/machinery/telecomms/hub/preset
 	id = "Hub"
 	network = "tcommsat"
-	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "1_relay", "2_relay", "3_relay", "4_relay", "s_relay", "science", "medical",
+	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "b_relay", "1_relay", "2_relay", "3_relay", "4_relay", "5_relay", "s_relay", "science", "medical",
 	"supply", "service", "common", "command", "engineering", "security", "unused",
 	"receiverA", "broadcasterA")
 

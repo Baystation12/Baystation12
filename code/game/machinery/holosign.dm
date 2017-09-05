@@ -4,7 +4,7 @@
 	desc = "Small wall-mounted holographic projector."
 	icon = 'icons/obj/holosign.dmi'
 	icon_state = "sign_off"
-	layer = 4
+	layer = ABOVE_DOOR_LAYER
 	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 70
@@ -15,8 +15,8 @@
 	var/_wifi_id
 	var/datum/wifi/receiver/button/holosign/wifi_receiver
 
-/obj/machinery/holosign/initialize()
-	..()
+/obj/machinery/holosign/Initialize()
+	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
@@ -59,12 +59,16 @@
 	use_power(5)
 
 	active = !active
-	icon_state = "light[active]"
+	update_icon()
 
-	for(var/obj/machinery/holosign/M in machines)
+	for(var/obj/machinery/holosign/M in GLOB.machines)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.toggle()
 				return
 
+	return
+
+/obj/machinery/button/holosign/update_icon()
+	icon_state = "light[active]"
 	return

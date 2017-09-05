@@ -26,9 +26,8 @@
 
 	minbodytemp = 0
 	maxbodytemp = 350
-	min_oxy = 0
-	max_co2 = 0
-	max_tox = 0
+	min_gas = null
+	max_gas = null
 
 	a_intent = I_HURT //so they don't get pushed around
 
@@ -101,7 +100,7 @@
 	Destroy() //if a chunk a destroyed, make a new worm out of the split halves
 		if(previous)
 			previous.Detach()
-		..()
+		. = ..()
 
 	Move()
 		var/attachementNextPosition = loc
@@ -123,7 +122,7 @@
 
 		return
 
-	proc/update_icon() //only for the sake of consistency with the other update icon procs
+	update_icon() //only for the sake of consistency with the other update icon procs
 		if(stat == CONSCIOUS || stat == UNCONSCIOUS)
 			if(previous) //midsection
 				icon_state = "spaceworm[get_dir(src,previous) | get_dir(src,next)]" //see 3 lines below
@@ -160,16 +159,11 @@
 
 	proc/Detach(die = 0)
 		var/mob/living/simple_animal/space_worm/newHead = new /mob/living/simple_animal/space_worm/head(loc,0)
-		var/mob/living/simple_animal/space_worm/newHeadPrevious = previous
 
-		previous = null //so that no extra heads are spawned
-
-		newHead.Attach(newHeadPrevious)
+		newHead.Attach(src)
 
 		if(die)
 			newHead.death()
-
-		qdel(src)
 
 	proc/ProcessStomach()
 		for(var/atom/movable/stomachContent in contents)

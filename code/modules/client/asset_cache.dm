@@ -89,7 +89,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	if(!unreceived || !unreceived.len)
 		return 0
 	if (unreceived.len >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
-		client << "Sending Resources..."
+		to_chat(client, "Sending Resources...")
 	for(var/asset in unreceived)
 		if (asset in asset_cache.cache)
 			client << browse_rsc(asset_cache.cache[asset], asset)
@@ -214,10 +214,12 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		"nano/css/",
 		"nano/images/",
 		"nano/images/status_icons/",
+		"nano/images/modular_computers/",
 		"nano/js/"
 	)
 	var/list/uncommon_dirs = list(
-		"nano/templates/"
+		"nano/templates/",
+		"news_articles/images/"
 	)
 
 /datum/asset/nanoui/register()
@@ -237,7 +239,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 					register_asset(filename, fcopy_rsc(path + filename))
 
 	var/list/mapnames = list()
-	for(var/z in using_map.map_levels)
+	for(var/z in GLOB.using_map.map_levels)
 		mapnames += map_image_file_name(z)
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
@@ -272,7 +274,7 @@ var/decl/asset_cache/asset_cache = new()
 		var/datum/asset/A = new type()
 		A.register()
 
-	for(var/client/C in clients)
+	for(var/client/C in GLOB.clients)
 		// Doing this to a client too soon after they've connected can cause issues, also the proc we call sleeps.
 		spawn(10)
 			getFilesSlow(C, asset_cache.cache, FALSE)

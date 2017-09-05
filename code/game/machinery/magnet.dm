@@ -9,9 +9,10 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_magnet-f"
 	name = "Electromagnetic Generator"
-	desc = "A device that uses station power to create points of magnetic energy."
+	desc = "A device that uses powernet to create points of magnetic energy."
 	level = 1		// underfloor
-	layer = 2.5
+	plane = ABOVE_PLATING_PLANE
+	layer = ABOVE_WIRE_LAYER
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 50
@@ -45,10 +46,10 @@
 	// update the invisibility and icon
 	hide(var/intact)
 		invisibility = intact ? 101 : 0
-		updateicon()
+		update_icon()
 
 	// update the icon_state
-	proc/updateicon()
+	update_icon()
 		var/state="floor_magnet"
 		var/onstate=""
 		if(!on)
@@ -167,7 +168,7 @@
 						qdel(src)
 		*/
 
-		updateicon()
+		update_icon()
 
 
 	proc/magnetic_process() // proc that actually does the pulling

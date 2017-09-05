@@ -39,3 +39,8 @@
 	power_usage = 75
 	max_idle_programs = 2
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+
+/obj/item/weapon/computer_hardware/processor_unit/Destroy()
+	if(holder2 && (holder2.processor_unit == src))
+		holder2.processor_unit = null
+	return ..()

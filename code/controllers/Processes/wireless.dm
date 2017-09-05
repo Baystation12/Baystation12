@@ -6,7 +6,7 @@
 	Unlike the radio controller, the wireless controller does not pass communications between devices. Once the devices
 	have been connected they call each others procs directly, they do not use the wireless controller to communicate.
 
-	See code\modules\wireless\interfaces.dm for details of how to connect devices.
+	See code/modules/wireless/interfaces.dm for details of how to connect devices.
 */
 //-------------------------------
 

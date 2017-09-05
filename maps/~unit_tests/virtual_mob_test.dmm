@@ -1,0 +1,35 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/unsimulated/wall,/area/test_area/powered_dynamic_lighting)
+"c" = (/turf/unsimulated/wall,/area/test_area/requires_power_dynamic_lighting)
+"d" = (/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_dynamic_lighting)
+"e" = (/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/requires_power_dynamic_lighting)
+"f" = (/turf/unsimulated/wall,/area/test_area/powered_non_dynamic_lighting)
+"g" = (/turf/unsimulated/wall,/area/test_area/requires_power_non_dynamic_lighting)
+"h" = (/obj/effect/landmark/virtual_spawn/two,/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_non_dynamic_lighting)
+"i" = (/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_non_dynamic_lighting)
+"j" = (/obj/effect/landmark/virtual_spawn/one,/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_non_dynamic_lighting)
+"k" = (/obj/effect/landmark/virtual_spawn/three,/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/powered_non_dynamic_lighting)
+"l" = (/turf/unsimulated/floor{icon_state = "hydrofloor"},/area/test_area/requires_power_non_dynamic_lighting)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabbbbbbbcccccccaaaaaaa
+aaaaaaabdddbdbceeececaaaaaaa
+aaaaaaabbbbbbbcccccccaaaaaaa
+aaaaaaafffffffgggggggaaaaaaa
+aaaaaaafhijfkfglllglgaaaaaaa
+aaaaaaafffffffgggggggaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

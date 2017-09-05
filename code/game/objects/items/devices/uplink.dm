@@ -36,8 +36,8 @@
 	return loc
 
 /obj/item/device/uplink/New(var/atom/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
-	if(!istype(location, /obj/item))
-		CRASH("Invalid spawn location. Expected /obj/item, was [location ? location.type : "NULL"]")
+	if(!istype(location, /atom))
+		CRASH("Invalid spawn location. Expected /atom, was [location ? location.type : "NULL"]")
 
 	..()
 	nanoui_data = list()
@@ -46,12 +46,12 @@
 	src.uplink_owner = owner
 	world_uplinks += src
 	uses = telecrystals
-	processing_objects += src
+	GLOB.processing_objects += src
 
 /obj/item/device/uplink/Destroy()
 	uplink_owner = null
 	world_uplinks -= src
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	return ..()
 
 /obj/item/device/uplink/process()
@@ -59,16 +59,34 @@
 		next_offer_time = world.time + offer_time
 		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
 
+		var/datum/uplink_item/new_discount_item
 		do
-			discount_item = default_uplink_selection.get_random_item(INFINITY)
+			var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/blacklist)
+			new_discount_item = uplink_selection.get_random_item(INFINITY, src)
 		// Ensures we only only get items for which we get an actual discount and that this particular uplink can actually view (can buy would risk near-infinite loops).
-		while(discount_item && (discount_item.cost(uses) == discount_item.cost(uses) * discount_amount) || !discount_item.can_view(src))
+		while(is_improper_item(new_discount_item, discount_amount))
+		if(!new_discount_item)
+			return
 
-		if(!discount_item)
-			discount_amount = 0
-
+		discount_item = new_discount_item
 		update_nano_data()
-		nanomanager.update_uis(src)
+		GLOB.nanomanager.update_uis(src)
+
+/obj/item/device/uplink/proc/is_improper_item(var/datum/uplink_item/new_discount_item, discount_amount)
+	if(!new_discount_item)
+		return FALSE
+
+	if(istype(new_discount_item, /datum/uplink_item/item/stealthy_weapons/soap))
+		return FALSE
+
+	var/discount_price = round(new_discount_item.cost(uses) * discount_amount)
+	if(!discount_price || new_discount_item.cost(uses) == discount_price)
+		return TRUE
+
+	if(!new_discount_item.can_view(src))
+		return TRUE
+
+	return FALSE
 
 /obj/item/device/uplink/proc/get_item_cost(var/item_type, var/item_cost)
 	return item_type == discount_item ? max(1, round(item_cost*discount_amount)) : item_cost
@@ -95,7 +113,7 @@
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.inventory_state)
 	var/title = "Remote Uplink"
 	var/data[0]
 
@@ -110,9 +128,9 @@
 	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)	// No auto-refresh
-		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = inventory_state)
+		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = uistate)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -137,7 +155,7 @@
 		UI.buy(src, usr)
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+		var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
 		ui.close()
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
@@ -164,17 +182,17 @@
 			if(item.can_view(src))
 				var/cost = item.cost(uses, src)
 				if(!cost) cost = "???"
-				items[++items.len] = list("name" = item.name, "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
+				items[++items.len] = list("name" = item.name(), "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
-		for(var/datum/data/record/L in sortRecord(data_core.locked))
+		for(var/datum/data/record/L in sortRecord(GLOB.data_core.locked))
 			permanentData[++permanentData.len] = list(Name = L.fields["name"],"id" = L.fields["id"])
 		nanoui_data["exploit_records"] = permanentData
 	else if(nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0
 
-		for(var/datum/data/record/L in data_core.locked)
+		for(var/datum/data/record/L in GLOB.data_core.locked)
 			if(L.fields["id"] == exploit_id)
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
@@ -236,4 +254,6 @@
 /obj/item/device/radio/headset/uplink/New()
 	..()
 	hidden_uplink = new(src)
-	hidden_uplink.uses = DEFAULT_TELECRYSTAL_AMOUNT
+
+/obj/item/device/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.contained_state)
+	return ..()

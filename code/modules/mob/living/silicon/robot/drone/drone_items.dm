@@ -21,7 +21,9 @@
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/smes_coil
+		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/computer_hardware,
+		/obj/item/weapon/fuel_assembly
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -57,7 +59,9 @@
 
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/weapon/storage/pill_bottle
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/reagent_containers/blood,
+		/obj/item/weapon/storage/pill_bottle,
 		)
 
 /obj/item/weapon/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
@@ -71,14 +75,21 @@
 		/obj/item/device/mmi,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
-		/obj/item/device/flash, //to build borgs,
-		/obj/item/organ/brain, //to insert into MMIs,
-		/obj/item/stack/cable_coil, //again, for borg building,
+		/obj/item/device/flash,
+		/obj/item/organ/internal/brain,
+		/obj/item/stack/cable_coil,
 		/obj/item/weapon/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/mecha_parts
+		/obj/item/mecha_parts,
+		/obj/item/weapon/computer_hardware,
+		/obj/item/device/transfer_valve,
+		/obj/item/device/assembly/signaler,
+		/obj/item/device/assembly/timer,
+		/obj/item/device/assembly/igniter,
+		/obj/item/device/assembly/infra,
+		/obj/item/weapon/tank
 		)
 
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
@@ -90,8 +101,19 @@
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food,
 		/obj/item/seeds,
-		/obj/item/weapon/grown
+		/obj/item/weapon/grown,
+		/obj/item/weapon/glass_extra
 		)
+
+/obj/item/weapon/gripper/organ //Used to handle organs.
+	name = "organ gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool for holding and manipulating organic and mechanical organs, both internal and external."
+
+	can_hold = list(
+	/obj/item/organ,
+	/obj/item/robot_parts
+	)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
@@ -108,9 +130,9 @@
 		)
 
 /obj/item/weapon/gripper/examine(mob/user)
-	..()
+	. = ..()
 	if(wrapped)
-		user << "It is holding \a [wrapped]."
+		to_chat(user, "It is holding \a [wrapped].")
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
@@ -133,7 +155,7 @@
 		wrapped = null
 		return
 
-	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
+	to_chat(src.loc, "<span class='warning'>You drop \the [wrapped].</span>")
 	wrapped.loc = get_turf(src)
 	wrapped = null
 	//update_icon()
@@ -163,7 +185,8 @@
 		if(!resolved && wrapped && target)
 			wrapped.afterattack(target,user,1,params)
 
-		wrapped.force = force_holder
+		if(wrapped)
+			wrapped.force = force_holder
 
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
@@ -189,12 +212,12 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			user << "You collect \the [I]."
+			to_chat(user, "<span class='notice'>You collect \the [I].</span>")
 			I.loc = src
 			wrapped = I
 			return
 		else
-			user << "<span class='danger'>Your gripper cannot hold \the [target].</span>"
+			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
@@ -222,7 +245,7 @@
 
 				A.cell.add_fingerprint(user)
 				A.cell.update_icon()
-				A.updateicon()
+				A.update_icon()
 				A.cell.loc = src
 				A.cell = null
 
@@ -275,15 +298,15 @@
 			if(!istype(D))
 				return
 
-			D << "<span class='danger'>You begin decompiling [M].</span>"
+			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
 			if(!do_after(D,50,M))
-				D << "<span class='danger'>You need to remain still while decompiling such a large object.</span>"
+				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
 				return
 
 			if(!M || !D) return
 
-			D << "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>"
+			to_chat(D, "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>")
 			qdel(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
@@ -356,16 +379,16 @@
 		grabbed_something = 1
 
 	if(grabbed_something)
-		user << "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>"
+		to_chat(user, "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>")
 	else
-		user << "<span class='danger'>Nothing on \the [T] is useful to you.</span>"
+		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
 	return
 
 //PRETTIER TOOL LIST.
 /mob/living/silicon/robot/drone/installed_modules()
 
 	if(weapon_lock)
-		src << "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>"
+		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
 		return
 
 	if(!module)

@@ -148,6 +148,10 @@ h4 {
     font-size: 12px;
 }
 
+abbr {
+    border-bottom: .1em dotted;
+}
+
 .white {
     color: white;
     font-weight: bold;
@@ -592,6 +596,12 @@ th.command {
     color: #ffffff;
 }
 
+th.spt {
+    background: #4f4ff2;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.sec {
     background: #8e0000;
     font-weight: bold;
@@ -622,8 +632,20 @@ th.car {
     color: #ffffff;
 }
 
+th.sup {
+    background: #bb9040;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.civ {
     background: #a32800;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+th.srv {
+    background: #88b764;
     font-weight: bold;
     color: #ffffff;
 }
@@ -633,6 +655,7 @@ th.misc {
     font-weight: bold;
     color: #ffffff;
 }
+
 th.bot {
     background: #414249;
     font-weight: bold;
@@ -654,10 +677,13 @@ th.bot {
 }
 
 .oxyloss {
-    color: blue;
+    color: cyan;
 }
 
 /* 75px width used in power monitoring console buttons */
 .width75btn {
     width: 75px;
+}
+.wideTable tr:nth-child(odd) {
+    background-color: #272727;
 }

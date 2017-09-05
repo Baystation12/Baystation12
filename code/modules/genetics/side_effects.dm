@@ -21,11 +21,11 @@
 	duration = 10*30
 
 	start(mob/living/carbon/human/H)
-		H.emote("me", 1, "starts turning very red..")
+		H.visible_message("<B>\The [H]</B> starts turning very red...")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("dexalin"))
-			for(var/organ_name in list("chest","l_arm","r_arm","r_leg","l_leg","head","groin"))
+		if(!H.reagents.has_reagent(/datum/reagent/dexalin))
+			for(var/organ_name in BP_ALL_LIMBS)
 				var/obj/item/organ/external/E = H.get_organ(organ_name)
 				E.take_damage(0, 5, 0)
 
@@ -37,28 +37,14 @@
 	duration = 10*60
 
 	start(mob/living/carbon/human/H)
-		H.emote("me", 1, "'s limbs start shivering uncontrollably.")
+		H.visible_message("<B>\The [H]</B>'s limbs start shivering uncontrollably.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("bicaridine"))
-			var/organ_name = pick("chest","l_arm","r_arm","r_leg","l_leg","head","groin")
+		if(!H.reagents.has_reagent(/datum/reagent/bicaridine))
+			var/organ_name = pick(BP_ALL_LIMBS)
 			var/obj/item/organ/external/E = H.get_organ(organ_name)
 			E.take_damage(20, 0, 0)
 			E.fracture()
-
-/*/datum/genetics/side_effect/monkey
-	name = "Monkey"
-	symptom = "Subject starts drooling uncontrollably."
-	treatment = "Inject small dose of dylovene."
-	effect = "Subject turns into monkey."
-	duration = 10*90
-
-	start(mob/living/carbon/human/H)
-		H.emote("me", 1, "has drool running down from [H.gender == MALE ? "his" : H.gender == FEMALE ? "her" : "their"] mouth.")
-
-	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("anti_toxin"))
-			H.monkeyize()**/
 
 /datum/genetics/side_effect/confuse
 	name = "Confuse"
@@ -68,10 +54,10 @@
 	duration = 10*30
 
 	start(mob/living/carbon/human/H)
-		H.emote("me", 1, "has drool running down from [H.gender == MALE ? "his" : H.gender == FEMALE ? "her" : "their"] mouth.")
+		H.visible_message("<B>\The [H]</B> drools.")
 
 	finish(mob/living/carbon/human/H)
-		if(!H.reagents.has_reagent("anti_toxin"))
+		if(!H.reagents.has_reagent(/datum/reagent/dylovene))
 			H.confused += 100
 
 proc/trigger_side_effect(mob/living/carbon/human/H)

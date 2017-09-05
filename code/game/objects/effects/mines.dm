@@ -3,7 +3,8 @@
 	desc = "I Better stay away from that thing."
 	density = 1
 	anchored = 1
-	layer = 3
+	plane = OBJ_PLANE
+	layer = OBJ_LAYER
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "uglymine"
 	var/triggerproc = "explode" //name of the proc thats called when the mine is triggered
@@ -21,12 +22,12 @@
 
 	if(istype(M, /mob/living/carbon/human))
 		for(var/mob/O in viewers(world.view, src.loc))
-			O << "<font color='red'>[M] triggered the \icon[src] [src]</font>"
+			to_chat(O, "<span class='warning'>\The [M] triggered the \icon[src] [src]</span>")
 		triggered = 1
 		call(src,triggerproc)(M)
 
 /obj/effect/mine/proc/triggerrad(obj)
-	var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
 	obj:radiation += 50
@@ -39,7 +40,7 @@
 	if(ismob(obj))
 		var/mob/M = obj
 		M.Stun(30)
-	var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
 	spawn(0)
@@ -67,7 +68,7 @@
 		qdel(src)
 
 /obj/effect/mine/proc/triggerkick(obj)
-	var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(obj:client)

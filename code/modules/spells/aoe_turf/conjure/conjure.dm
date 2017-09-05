@@ -25,7 +25,6 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 	cast_sound = 'sound/items/welder.ogg'
 
 /spell/aoe_turf/conjure/cast(list/targets, mob/user)
-	playsound(get_turf(user), cast_sound, 50, 1)
 
 	for(var/i=1,i <= summon_amt,i++)
 		if(!targets.len)
@@ -45,7 +44,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		var/atom/summoned_object
 		if(ispath(summoned_object_type,/turf))
 			if(istype(get_turf(user),/turf/simulated/shuttle) || istype(spawn_place, /turf/simulated/shuttle))
-				user << "<span class='warning'>You can't build things on shuttles!</span>"
+				to_chat(user, "<span class='warning'>You can't build things on shuttles!</span>")
 				continue
 			spawn_place.ChangeTurf(summoned_object_type)
 			summoned_object = spawn_place
@@ -53,10 +52,11 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 			summoned_object = new summoned_object_type(spawn_place)
 		var/atom/movable/overlay/animation = new /atom/movable/overlay(spawn_place)
 		animation.name = "conjure"
-		animation.density = 0
+		animation.set_density(0)
 		animation.anchored = 1
 		animation.icon = 'icons/effects/effects.dmi'
-		animation.layer = 3
+		animation.plane = HUMAN_PLANE
+		animation.layer = MOB_LAYER
 		animation.master = summoned_object
 		if(istype(summoned_object,/mob)) //we want them to NOT attack us.
 			var/mob/M = summoned_object

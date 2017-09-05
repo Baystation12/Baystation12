@@ -2,10 +2,12 @@
 
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
-	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
+	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
+	description_info = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 3x3 area around you."
+	description_fluff = "The T-ray scanner is a modern spectroscopy solution and labor-saving device. Why work yourself to the bone removing floor panels when you can simply look through them with submillimeter radiation?"
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
@@ -28,10 +30,10 @@
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
 	if(on)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 		flicker = 0
 	else
-		processing_objects.Remove(src)
+		GLOB.processing_objects.Remove(src)
 		set_user_client(null)
 	update_icon()
 
@@ -81,13 +83,16 @@
 	if(scanned in overlay_cache)
 		. = overlay_cache[scanned]
 	else
-		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state, layer = HUD_LAYER)
+		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
+		I.plane = HUD_PLANE
+		I.layer = UNDER_HUD_LAYER
 
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))
 			var/obj/machinery/atmospherics/pipe/P = scanned
 			I.color = P.pipe_color
 			I.overlays += P.overlays
+			I.underlays += P.underlays
 
 		I.alpha = 128
 		I.mouse_opacity = 0

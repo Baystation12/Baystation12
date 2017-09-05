@@ -3,7 +3,7 @@
 	desc = "A small handheld black light."
 	icon_state = "uv_off"
 	slot_flags = SLOT_BELT
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
 	action_button_name = "Toggle UV light"
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
@@ -21,12 +21,12 @@
 	on = !on
 	if(on)
 		set_light(range, 2, "#007fff")
-		processing_objects |= src
+		GLOB.processing_objects |= src
 		icon_state = "uv_on"
 	else
 		set_light(0)
 		clear_last_scan()
-		processing_objects -= src
+		GLOB.processing_objects -= src
 		icon_state = "uv_off"
 
 /obj/item/device/uv_light/proc/clear_last_scan()

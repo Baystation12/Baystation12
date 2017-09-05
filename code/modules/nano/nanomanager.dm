@@ -1,3 +1,5 @@
+GLOBAL_DATUM_INIT(nanomanager, /datum/nanomanager, new) // NanoManager, the manager for Nano UIs.
+
 // This is the window/UI manager for Nano UI
 // There should only ever be one (global) instance of nanomanger
 /datum/nanomanager
@@ -18,6 +20,7 @@
 	var/list/nano_asset_dirs = list(\
 		"nano/css/",\
 		"nano/images/",\
+		"nano/images/modular_computers/",\
 		"nano/images/status_icons/",\
 		"nano/js/",\
 		"nano/templates/"\

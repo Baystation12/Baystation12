@@ -5,7 +5,7 @@
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "cypherkey"
 	item_state = ""
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	var/translate_binary = 0
 	var/translate_hive = 0
@@ -19,6 +19,12 @@
 	channels = list("Mercenary" = 1)
 	origin_tech = list(TECH_ILLEGAL = 3)
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
+
+/obj/item/device/encryptionkey/raider
+	icon_state = "cypherkey"
+	channels = list("Raider" = 1)
+	origin_tech = list(TECH_ILLEGAL = 2)
+	syndie = 1
 
 /obj/item/device/encryptionkey/binary
 	icon_state = "cypherkey"
@@ -96,18 +102,6 @@
 	icon_state = "hop_cypherkey"
 	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Security" = 0)
 
-
-/*
-/obj/item/device/encryptionkey/headset_mine
-	name = "mining radio encryption key"
-	icon_state = "mine_cypherkey"
-	channels = list("Mining" = 1)
-
-/obj/item/device/encryptionkey/heads/qm
-	name = "quartermaster's encryption key"
-	icon_state = "qm_cypherkey"
-	channels = list("Cargo" = 1, "Mining" = 1)
-*/
 /obj/item/device/encryptionkey/headset_cargo
 	name = "supply radio encryption key"
 	icon_state = "cargo_cypherkey"
@@ -121,6 +115,12 @@
 /obj/item/device/encryptionkey/ert
 	name = "\improper ERT radio encryption key"
 	channels = list("Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1)
+
+/obj/item/device/encryptionkey/specops //for events
+	name = "special operations radio encryption key"
+	icon_state = "bin_cypherkey"
+	channels = list("Special Ops" = 1)
+	origin_tech = list(TECH_ILLEGAL = 2)
 
 /obj/item/device/encryptionkey/entertainment
 	name = "entertainment radio key"

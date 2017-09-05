@@ -8,6 +8,10 @@
 		return
 	if(!loc)
 		return
+
+	if(machine && !CanMouseDrop(machine, src))
+		machine = null
+
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	if(stat != DEAD)
@@ -20,14 +24,16 @@
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
-		//Blood - do this after chemicals so that dexplus doesn't keep people awake with no heart
-		handle_blood()
-
 		//Random events (vomiting etc)
 		handle_random_events()
 
 		//stuff in the stomach
 		handle_stomach()
+
+		. = 1
+	else if(timeofdeath && (world.time - timeofdeath < 150))
+		//This is to make dead people process reagents for a few ticks, so they can be treated and defibrilated
+		handle_chemicals_in_body()
 
 		. = 1
 
@@ -40,7 +46,7 @@
 
 	update_pulling()
 
-	for(var/obj/item/weapon/grab/G in src)
+	for(var/obj/item/grab/G in src)
 		G.process()
 
 	blinded = 0 // Placing this here just show how out of place it is.
@@ -64,9 +70,6 @@
 /mob/living/proc/handle_chemicals_in_body()
 	return
 
-/mob/living/proc/handle_blood()
-	return
-
 /mob/living/proc/handle_random_events()
 	return
 
@@ -86,11 +89,11 @@
 	updatehealth()
 	if(stat != DEAD)
 		if(paralysis)
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else if (status_flags & FAKEDEATH)
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 		return 1
 
 /mob/living/proc/handle_statuses()
@@ -194,7 +197,7 @@
 		if(viewflags < 0)
 			reset_view(null, 0)
 		else if(viewflags)
-			sight |= viewflags
+			set_sight(viewflags)
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
@@ -205,16 +208,17 @@
 	if(stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
-		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_in_dark = initial(see_in_dark)
-		see_invisible = initial(see_invisible)
+		update_living_sight()
+
+/mob/living/proc/update_living_sight()
+	set_sight(sight&(~(SEE_TURFS|SEE_MOBS|SEE_OBJS)))
+	set_see_in_dark(initial(see_in_dark))
+	set_see_invisible(initial(see_invisible))
 
 /mob/living/proc/update_dead_sight()
-	sight |= SEE_TURFS
-	sight |= SEE_MOBS
-	sight |= SEE_OBJS
-	see_in_dark = 8
-	see_invisible = SEE_INVISIBLE_LEVEL_TWO
+	set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+	set_see_in_dark(8)
+	set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()

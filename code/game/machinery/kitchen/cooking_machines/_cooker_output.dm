@@ -40,6 +40,13 @@
 	name = "waffles"
 	desc = "Made with love."
 	icon_state = "waffles"
+	gender = PLURAL
+
+/obj/item/weapon/reagent_containers/food/snacks/variable/pancakes
+	name = "pancakes"
+	desc = "How does an oven make pancakes?"
+	icon_state = "pancakescustom"
+	gender = PLURAL
 
 /obj/item/weapon/reagent_containers/food/snacks/variable/cookie
 	name = "cookie"

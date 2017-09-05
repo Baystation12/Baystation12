@@ -127,7 +127,7 @@ var/global/Holiday = null
 
 	Holiday = T
 	//get a new station name
-	station_name = null
+	GLOB.using_map.station_name = null
 	station_name()
 	//update our hub status
 	world.update_status()
@@ -140,8 +140,8 @@ var/global/Holiday = null
 //Run at the  start of a round
 /proc/Holiday_Game_Start()
 	if(Holiday)
-		world << "<font color='blue'>and...</font>"
-		world << "<h4>Happy [Holiday] Everybody!</h4>"
+		to_world("<font color='blue'>and...</font>")
+		to_world("<h4>Happy [Holiday] Everybody!</h4>")
 		switch(Holiday)			//special holidays
 			if("Easter")
 				//do easter stuff

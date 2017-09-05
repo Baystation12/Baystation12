@@ -70,3 +70,13 @@
 	volume = 25
 	possible_transfer_amounts = "5;10;15;25"
 	rim_pos = "y=25;x_left=12;x_right=21"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe
+	name = "carafe"
+	base_name = "carafe"
+	base_icon = "carafe"
+	filling_states = "10;20;30;40;50;60;70;80;90;100"
+	volume = 120
+	possible_transfer_amounts = "5;10;15;30;60;120"
+	rim_pos = "y=26;x_left=12;x_right=21"
+	center_of_mass = "x=16;y=7"

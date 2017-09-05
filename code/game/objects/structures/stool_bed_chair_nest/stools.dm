@@ -10,8 +10,8 @@ var/global/list/stool_cache = list() //haha stool
 	randpixel = 0
 	force = 10
 	throwforce = 10
-	w_class = 5
-	var/base_icon = "stool_base"
+	w_class = ITEM_SIZE_HUGE
+	var/base_icon = "stool"
 	var/material/material
 	var/material/padding_material
 
@@ -34,25 +34,38 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
 	..(newloc, "steel", "carpet")
 
+/obj/item/weapon/stool/bar
+	name = "bar stool"
+	icon_state = "bar_stool_preview" //set for the map
+	item_state = "bar_stool"
+	base_icon = "bar_stool"
+
+/obj/item/weapon/stool/bar/padded
+	icon_state = "bar_stool_padded_preview"
+
+/obj/item/weapon/stool/bar/padded/New(var/newloc, var/new_material)
+	..(newloc, "steel", "carpet")
+
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
 	icon_state = ""
-	overlays.Cut()
 	// Base icon.
-	var/cache_key = "stool-[material.name]"
+	var/list/noverlays = list()
+	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image(icon, base_icon)
+		var/image/I = image(icon, "[base_icon]_base")
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
-	overlays |= stool_cache[cache_key]
+	noverlays |= stool_cache[cache_key]
 	// Padding overlay.
 	if(padding_material)
-		var/padding_cache_key = "stool-padding-[padding_material.name]"
+		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image(icon, "stool_padding")
+			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
-		overlays |= stool_cache[padding_cache_key]
+		noverlays |= stool_cache[padding_cache_key]
+	overlays = noverlays
 	// Strings.
 	if(padding_material)
 		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
@@ -115,7 +128,7 @@ var/global/list/stool_cache = list() //haha stool
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
 		if(padding_material)
-			user << "\The [src] is already padded."
+			to_chat(user, "\The [src] is already padded.")
 			return
 		var/obj/item/stack/C = W
 		if(C.get_amount() < 1) // How??
@@ -130,20 +143,20 @@ var/global/list/stool_cache = list() //haha stool
 			if(M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
-			user << "You cannot pad \the [src] with that."
+			to_chat(user, "You cannot pad \the [src] with that.")
 			return
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
-			src.loc = get_turf(src)
-		user << "You add padding to \the [src]."
+			src.dropInto(loc)
+		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
 	else if (istype(W, /obj/item/weapon/wirecutters))
 		if(!padding_material)
-			user << "\The [src] has no padding to remove."
+			to_chat(user, "\The [src] has no padding to remove.")
 			return
-		user << "You remove the padding from \the [src]."
+		to_chat(user, "You remove the padding from \the [src].")
 		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 		remove_padding()
 	else

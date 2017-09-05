@@ -192,9 +192,9 @@
 
 /decl/hierarchy/supply_pack/security/securitybarriers
 	name = "Wall shield Generators"
-	contains = list(/obj/machinery/shieldwallgen = 4)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
+	contains = list(/obj/machinery/shieldwallgen = 2)
+	cost = 10
+	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper wall shield generators crate"
 	access = access_teleporter
 
@@ -406,7 +406,7 @@
 					/obj/item/clothing/suit/storage/vest/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
-					/obj/item/clothing/glasses/sunglasses/sechud/tactical,
+					/obj/item/clothing/glasses/tacgoggles,
 					/obj/item/weapon/storage/belt/security/tactical,
 					/obj/item/clothing/shoes/tactical,
 					/obj/item/clothing/gloves/tactical)
@@ -414,3 +414,11 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Tactical Suit Locker"
 	access = access_armory
+
+/decl/hierarchy/supply_pack/security/practicelasers
+	name = "Practice Laser Carbines"
+	contains = list(/obj/item/weapon/gun/energy/laser/practice = 4)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Practice laser carbine crate"
+	access = access_brig

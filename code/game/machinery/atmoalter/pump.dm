@@ -4,7 +4,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "psiphon:0"
 	density = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 
 	var/on = 0
 	var/direction_out = 0 //0 = siphoning, 1 = releasing
@@ -108,9 +108,6 @@
 
 	src.updateDialog()
 
-/obj/machinery/portable_atmospherics/powered/pump/return_air()
-	return air_contents
-
 /obj/machinery/portable_atmospherics/powered/pump/attack_ai(var/mob/user)
 	src.add_hiddenprint(user)
 	return src.attack_hand(user)
@@ -138,9 +135,9 @@
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0))
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "portpump.tmpl", "Portable Pump", 480, 410, state = physical_state)
+		ui = new(user, src, ui_key, "portpump.tmpl", "Portable Pump", 480, 410, state = GLOB.physical_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -157,7 +154,7 @@
 		. = 1
 	if (href_list["remove_tank"])
 		if(holding)
-			holding.loc = loc
+			holding.dropInto(loc)
 			holding = null
 		. = 1
 	if (href_list["pressure_adj"])

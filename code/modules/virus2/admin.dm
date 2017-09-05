@@ -6,19 +6,19 @@
 		// spawn or admin privileges to see info about viruses
 		if(!check_rights(R_ADMIN|R_SPAWN)) return
 
-		usr << "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]"
-		usr << "Affected species: [english_list(affected_species)]"
-		usr << "Effects:"
-		for(var/datum/disease2/effectholder/E in effects)
-			usr << "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]"
-		usr << "Antigens: [antigens2string(antigen)]"
+		to_chat(usr, "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]")
+		to_chat(usr, "Affected species: [english_list(affected_species)]")
+		to_chat(usr, "Effects:")
+		for(var/datum/disease2/effect/E in effects)
+			to_chat(usr, "[E.stage]: [E.name]; chance=[E.chance]; multiplier=[E.multiplier]")
+		to_chat(usr, "Antigens: [antigens2string(antigen)]")
 
 		return 1
 
 /datum/disease2/disease/get_view_variables_header()
 	. = list()
-	for(var/datum/disease2/effectholder/E in effects)
-		. += "[E.stage]: [E.effect.name]"
+	for(var/datum/disease2/effect/E in effects)
+		. += "[E.stage]: [E.name]"
 	return {"
 		<b>[name()]</b><br><font size=1>
 		[jointext(., "<br>")]</font>
@@ -87,7 +87,7 @@
 		var/f = 1
 		for(var/k in all_species)
 			var/datum/species/S = all_species[k]
-			if(S.virus_immune)
+			if(S.get_virus_immune())
 				continue
 			if(!f) H += " | "
 			else f = 0
@@ -124,17 +124,17 @@
 					if(!E) return
 					s[stage] = E
 					// set a default chance and multiplier of half the maximum (roughly average)
-					s_chance[stage] = max(1, round(initial(E.chance_maxm)/2))
-					s_multiplier[stage] = max(1, round(initial(E.maxm)/2))
+					s_chance[stage] = max(1, round(initial(E.chance_max)/2))
+					s_multiplier[stage] = max(1, round(initial(E.multiplier_max)/2))
 				else if(href_list["chance"])
 					var/datum/disease2/effect/Eff = s[stage]
-					var/I = input("Chance, per tick, of this effect happening (min 0, max [initial(Eff.chance_maxm)])", "Effect Chance", s_chance[stage]) as null|num
-					if(I == null || I < 0 || I > initial(Eff.chance_maxm)) return
+					var/I = input("Chance, per tick, of this effect happening (min 0, max [initial(Eff.chance_max)])", "Effect Chance", s_chance[stage]) as null|num
+					if(I == null || I < 0 || I > initial(Eff.chance_max)) return
 					s_chance[stage] = I
 				else if(href_list["multiplier"])
 					var/datum/disease2/effect/Eff = s[stage]
-					var/I = input("Multiplier for this effect (min 1, max [initial(Eff.maxm)])", "Effect Multiplier", s_multiplier[stage]) as null|num
-					if(I == null || I < 1 || I > initial(Eff.maxm)) return
+					var/I = input("Multiplier for this effect (min 1, max [initial(Eff.multiplier_max)])", "Effect Multiplier", s_multiplier[stage]) as null|num
+					if(I == null || I < 1 || I > initial(Eff.multiplier_max)) return
 					s_multiplier[stage] = I
 			if("species")
 				if(href_list["toggle"])
@@ -146,7 +146,7 @@
 				else if(href_list["reset"])
 					species = list()
 				if(infectee)
-					if(!infectee.species || !(infectee.species.get_bodytype() in species))
+					if(!infectee.species || !(infectee.species.get_bodytype(infectee) in species))
 						infectee = null
 			if("ichance")
 				var/I = input("Input infection chance", "Infection Chance", infectionchance) as null|num
@@ -172,18 +172,18 @@
 					antigens = list()
 			if("infectee")
 				var/list/candidates = list()
-				for(var/mob/living/carbon/G in living_mob_list_)
+				for(var/mob/living/carbon/G in GLOB.living_mob_list_)
 					if(G.stat != DEAD && G.species)
-						if(G.species.get_bodytype() in species)
+						if(G.species.get_bodytype(G) in species)
 							candidates["[G.name][G.client ? "" : " (no client)"]"] = G
 						else
-							candidates["[G.name] ([G.species.get_bodytype()])[G.client ? "" : " (no client)"]"] = G
-				if(!candidates.len) usr << "No possible candidates found!"
+							candidates["[G.name] ([G.species.get_bodytype(G)])[G.client ? "" : " (no client)"]"] = G
+				if(!candidates.len) to_chat(usr, "No possible candidates found!")
 
 				var/I = input("Choose initial infectee", "Infectee", infectee) as null|anything in candidates
 				if(!I || !candidates[I]) return
 				infectee = candidates[I]
-				species |= infectee.species.get_bodytype()
+				species |= infectee.species.get_bodytype(infectee)
 			if("go")
 				if(!antigens.len)
 					var/a = alert("This disease has no antigens; it will be impossible to permanently immunise anyone without them.\
@@ -196,10 +196,10 @@
 				D.affected_species = species
 				D.speed = speed
 				for(var/i in 1 to 4)
-					var/datum/disease2/effectholder/E = new
+					var/datum/disease2/effect/E = new
 					var/Etype = s[i]
-					E.effect = new Etype()
-					E.effect.generate()
+					E = new Etype()
+					E.generate()
 					E.chance = s_chance[i]
 					E.multiplier = s_multiplier[i]
 					E.stage = i

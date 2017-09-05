@@ -10,51 +10,48 @@
 
 /obj/effect/landmark/New()
 	..()
-	tag = text("landmark*[]", name)
+	tag = "landmark*[name]"
 
+	//TODO clean up this mess
 	switch(name)			//some of these are probably obsolete
 		if("monkey")
-			monkeystart += loc
+			GLOB.monkeystart += loc
 			delete_me = 1
 			return
 		if("start")
-			newplayer_start += loc
+			GLOB.newplayer_start += loc
 			delete_me = 1
 			return
 		if("JoinLate")
-			latejoin += loc
+			GLOB.latejoin += loc
 			delete_me = 1
 			return
 		if("JoinLateGateway")
-			latejoin_gateway += loc
+			GLOB.latejoin_gateway += loc
 			delete_me = 1
 			return
 		if("JoinLateCryo")
-			latejoin_cryo += loc
+			GLOB.latejoin_cryo += loc
 			delete_me = 1
 			return
 		if("JoinLateCyborg")
-			latejoin_cyborg += loc
+			GLOB.latejoin_cyborg += loc
 			delete_me = 1
 			return
 		if("prisonwarp")
-			prisonwarp += loc
+			GLOB.prisonwarp += loc
 			delete_me = 1
 			return
 		if("tdome1")
-			tdome1 += loc
+			GLOB.tdome1 += loc
 		if("tdome2")
-			tdome2 += loc
+			GLOB.tdome2 += loc
 		if("tdomeadmin")
-			tdomeadmin += loc
+			GLOB.tdomeadmin += loc
 		if("tdomeobserve")
-			tdomeobserve += loc
+			GLOB.tdomeobserve += loc
 		if("prisonsecuritywarp")
-			prisonsecuritywarp += loc
-			delete_me = 1
-			return
-		if("xeno_spawn")
-			xeno_spawn += loc
+			GLOB.prisonsecuritywarp += loc
 			delete_me = 1
 			return
 		if("endgame_exit")
@@ -72,10 +69,10 @@
 /obj/effect/landmark/proc/delete()
 	delete_me = 1
 
-/obj/effect/landmark/initialize()
-	..()
+/obj/effect/landmark/Initialize()
+	. = ..()
 	if(delete_me)
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/Destroy()
 	landmarks_list -= src
@@ -102,10 +99,15 @@
 	delete_me = 1
 
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
-/obj/effect/landmark/costume/chicken/New()
-	new /obj/item/clothing/suit/chickensuit(src.loc)
-	new /obj/item/clothing/head/chicken(src.loc)
-	new /obj/item/weapon/reagent_containers/food/snacks/egg(src.loc)
+/obj/effect/landmark/costume/chameleon/New()
+	new /obj/item/clothing/mask/chameleon(src.loc)
+	new /obj/item/clothing/under/chameleon(src.loc)
+	new /obj/item/clothing/glasses/chameleon(src.loc)
+	new /obj/item/clothing/shoes/chameleon(src.loc)
+	new /obj/item/clothing/gloves/chameleon(src.loc)
+	new /obj/item/clothing/suit/chameleon(src.loc)
+	new /obj/item/clothing/head/chameleon(src.loc)
+	new /obj/item/weapon/storage/backpack/chameleon(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/gladiator/New()
@@ -140,7 +142,7 @@
 	delete_me = 1
 
 /obj/effect/landmark/costume/butler/New()
-	new /obj/item/clothing/suit/wcoat(src.loc)
+	new /obj/item/clothing/accessory/wcoat(src.loc)
 	new /obj/item/clothing/under/suit_jacket(src.loc)
 	new /obj/item/clothing/head/that(src.loc)
 	delete_me = 1
@@ -153,13 +155,8 @@
 		new /obj/item/clothing/head/cueball(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/highlander/New()
-	new /obj/item/clothing/under/kilt(src.loc)
-	new /obj/item/clothing/head/beret(src.loc)
-	delete_me = 1
-
 /obj/effect/landmark/costume/prig/New()
-	new /obj/item/clothing/suit/wcoat(src.loc)
+	new /obj/item/clothing/accessory/wcoat(src.loc)
 	new /obj/item/clothing/glasses/monocle(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
 	new CHOICE(src.loc)
@@ -234,4 +231,14 @@
 /obj/effect/landmark/costume/sexymime/New()
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
+	delete_me = 1
+
+/obj/effect/landmark/costume/savagehunter/New()
+	new /obj/item/clothing/mask/spirit(src.loc)
+	new /obj/item/clothing/under/savage_hunter(src.loc)
+	delete_me = 1
+
+/obj/effect/landmark/costume/savagehuntress/New()
+	new /obj/item/clothing/mask/spirit(src.loc)
+	new /obj/item/clothing/under/savage_hunter/female(src.loc)
 	delete_me = 1

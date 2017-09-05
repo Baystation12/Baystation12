@@ -5,7 +5,7 @@
 	initial_icon = "phazon"
 	step_in = 1
 	dir_in = 1 //Facing North.
-	step_energy_drain = 3
+	step_energy_drain = 100
 	health = 200
 	deflect_chance = 30
 	damage_absorption = list("brute"=0.7,"fire"=0.7,"bullet"=0.7,"laser"=0.7,"energy"=0.7,"bomb"=0.7)
@@ -17,7 +17,7 @@
 	internal_damage_threshold = 25
 	force = 15
 	var/phasing = 0
-	var/phasing_energy_drain = 200
+	var/phasing_energy_drain = 5 KILOWATTS
 	max_equip = 4
 
 

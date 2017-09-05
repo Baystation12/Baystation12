@@ -3,7 +3,7 @@
 	name = "Microwave"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
-	layer = 2.9
+	layer = BELOW_OBJ_LAYER
 	density = 1
 	anchored = 1
 	use_power = 1
@@ -80,7 +80,7 @@
 				src.dirty = 0 // just to be sure
 				src.flags = OPENCONTAINER
 		else
-			user << "<span class='warning'>It's broken!</span>"
+			to_chat(user, "<span class='warning'>It's broken!</span>")
 			return 1
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner)) // If they're trying to clean it then let them
@@ -98,11 +98,11 @@
 				src.icon_state = "mw"
 				src.flags = OPENCONTAINER
 		else //Otherwise bad luck!!
-			user << "<span class='warning'>It's dirty!</span>"
+			to_chat(user, "<span class='warning'>It's dirty!</span>")
 			return 1
 	else if(is_type_in_list(O,acceptable_items))
 		if (length(InsertedContents())>=(max_n_of_items))
-			user << "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>"
+			to_chat(user, "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>")
 			return 1
 		if(istype(O, /obj/item/stack) && O:get_amount() > 1) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
@@ -115,7 +115,7 @@
 		else
 		//	user.remove_from_mob(O)	//This just causes problems so far as I can tell. -Pete
 			user.drop_item()
-			O.loc = src
+			O.forceMove(src)
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -127,13 +127,13 @@
 		if (!O.reagents)
 			return 1
 		for (var/datum/reagent/R in O.reagents.reagent_list)
-			if (!(R.id in acceptable_reagents))
-				user << "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>"
+			if (!(R.type in acceptable_reagents))
+				to_chat(user, "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>")
 				return 1
 		return
-	else if(istype(O,/obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = O
-		user << "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>"
+	else if(istype(O,/obj/item/grab))
+		var/obj/item/grab/G = O
+		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
 	else if(istype(O,/obj/item/weapon/crowbar))
 		user.visible_message( \
@@ -147,10 +147,10 @@
 			)
 			src.anchored = !src.anchored
 		else
-			user << "<span class='notice'>You decide not to do that.</span>"
+			to_chat(user, "<span class='notice'>You decide not to do that.</span>")
 	else
 
-		user << "<span class='warning'>You have no idea what you can cook with this [O].</span>"
+		to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
 	..()
 	src.updateUsrDialog()
 
@@ -209,9 +209,9 @@
 
 		for (var/datum/reagent/R in reagents.reagent_list)
 			var/display_name = R.name
-			if (R.id == "capsaicin")
+			if (R.type == /datum/reagent/capsaicin)
 				display_name = "Hotsauce"
-			if (R.id == "frostoil")
+			if (R.type == /datum/reagent/frostoil)
 				display_name = "Coldsauce"
 			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
 
@@ -257,7 +257,7 @@
 			wzhzhzh(4)
 			muck_finish()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 		else if (has_extra_item())
 			if (!wzhzhzh(4))
@@ -265,7 +265,7 @@
 				return
 			broke()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 		else
 			if (!wzhzhzh(10))
@@ -273,7 +273,7 @@
 				return
 			stop()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 	else
 		var/halftime = round(recipe.time/10/2)
@@ -283,12 +283,12 @@
 		if (!wzhzhzh(halftime))
 			abort()
 			cooked = fail()
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 			return
 		cooked = recipe.make_food(src)
 		stop()
 		if(cooked)
-			cooked.loc = src.loc
+			cooked.dropInto(loc)
 		return
 
 /obj/machinery/microwave/proc/wzhzhzh(var/seconds as num) // Whoever named this proc is fucking literally Satan. ~ Z
@@ -327,11 +327,11 @@
 
 /obj/machinery/microwave/proc/dispose()
 	for (var/obj/O in InsertedContents())
-		O.loc = src.loc
+		O.dropInto(loc)
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()
-	usr << "<span class='notice'>You dispose of the microwave contents.</span>"
+	to_chat(usr, "<span class='notice'>You dispose of the microwave contents.</span>")
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/muck_start()
@@ -364,13 +364,13 @@
 	for (var/obj/O in (InsertedContents()-ffuu))
 		amount++
 		if (O.reagents)
-			var/id = O.reagents.get_master_reagent_id()
-			if (id)
-				amount+=O.reagents.get_reagent_amount(id)
+			var/reagent_type = O.reagents.get_master_reagent_type()
+			if (reagent_type)
+				amount+=O.reagents.get_reagent_amount(reagent_type)
 		qdel(O)
 	src.reagents.clear_reagents()
-	ffuu.reagents.add_reagent("carbon", amount)
-	ffuu.reagents.add_reagent("toxin", amount/10)
+	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
+	ffuu.reagents.add_reagent(/datum/reagent/toxin, amount/10)
 	return ffuu
 
 /obj/machinery/microwave/Topic(href, href_list)

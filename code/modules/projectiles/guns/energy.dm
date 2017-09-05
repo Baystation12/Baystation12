@@ -6,7 +6,7 @@
 	fire_sound_text = "laser blast"
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
-	var/charge_cost = 200 //How much energy is needed to fire.
+	var/charge_cost = 20 //How much energy is needed to fire.
 	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
 	var/cell_type = null
 	var/projectile_type = /obj/item/projectile/beam/practice
@@ -35,13 +35,13 @@
 	else
 		power_supply = new /obj/item/weapon/cell/device/variable(src, max_shots*charge_cost)
 	if(self_recharge)
-		processing_objects.Add(src)
+		GLOB.processing_objects.Add(src)
 	update_icon()
 
 /obj/item/weapon/gun/energy/Destroy()
 	if(self_recharge)
-		processing_objects.Remove(src)
-	..()
+		GLOB.processing_objects.Remove(src)
+	return ..()
 
 /obj/item/weapon/gun/energy/process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
@@ -82,21 +82,21 @@
 	return null
 
 /obj/item/weapon/gun/energy/examine(mob/user)
-	..(user)
+	. = ..(user)
 	var/shots_remaining = round(power_supply.charge / charge_cost)
-	user << "Has [shots_remaining] shot\s remaining."
+	to_chat(user, "Has [shots_remaining] shot\s remaining.")
 	return
 
 /obj/item/weapon/gun/energy/update_icon()
 	..()
 	if(charge_meter)
-		var/ratio = power_supply.charge / power_supply.maxcharge
+		var/ratio = power_supply.percent()
 
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
-			ratio = max(round(ratio, 0.25) * 100, 25)
+			ratio = max(round(ratio, 25), 25)
 
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"

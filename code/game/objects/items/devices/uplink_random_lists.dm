@@ -1,5 +1,3 @@
-var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_random_selection/default()
-
 /datum/uplink_random_item
 	var/uplink_item				// The uplink item
 	var/keep_probability		// The probability we'll decide to keep this item if selected
@@ -34,6 +32,15 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 		if(U && !I.can_buy(U))
 			continue
 		return I
+	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
+
+var/list/uplink_random_selections_
+/proc/get_uplink_random_selection_by_type(var/uplist_selection_type)
+	if(!uplink_random_selections_)
+		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
+		for(var/datum/entry in uplink_random_selections_)
+			uplink_random_selections_[entry.type] = entry
+	return uplink_random_selections_[uplist_selection_type]
 
 /datum/uplink_random_selection/default/New()
 	..()
@@ -65,7 +72,7 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/clerical)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/space_suit, 50, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/thermal)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_vest)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_armor)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/teleporter, 10, 0)
@@ -94,13 +101,51 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_shutdown, 75, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/services/suit_sensor_garble, 75, 0)
 
+/datum/uplink_random_selection/blacklist
+	var/list/blacklist = list(
+			/datum/uplink_item/item/ammo,
+			/datum/uplink_item/item/badassery,
+			/datum/uplink_item/item/telecrystal,
+			/datum/uplink_item/item/tools/teleporter,
+			/datum/uplink_item/item/tools/supply_beacon,
+			/datum/uplink_item/item/implants/imp_uplink,
+			/datum/uplink_item/deity
+		)
+
+/datum/uplink_random_selection/blacklist/New()
+	..()
+	for(var/uplink_item_type in subtypesof(/datum/uplink_item/item))
+		var/datum/uplink_item/item/ui = uplink_item_type
+		if(!initial(ui.name))
+			continue
+		if(is_path_in_list(uplink_item_type, blacklist))
+			continue
+		var/new_thing = new/datum/uplink_random_item(uplink_item_type)
+		items += new_thing
+
+/datum/uplink_random_selection/blacklist/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items)
+	var/const/attempts = 50
+	for(var/i = 0; i < attempts; i++)
+		var/datum/uplink_random_item/RI = pick(items)
+		if(!prob(RI.keep_probability))
+			continue
+		var/datum/uplink_item/I = uplink.items_assoc[RI.uplink_item]
+		if(I.cost(telecrystals, U) > telecrystals)
+			continue
+		if(bought_items && (I in bought_items) && !prob(RI.reselect_probability))
+			continue
+		return I
+	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
+
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()
+	var/list/all_antag_types = all_antag_types()
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/A = all_antag_types[antag_type]
 		A.print_player_summary()
 
 /proc/debug_uplink_item_assoc_list()
 	for(var/key in uplink.items_assoc)
-		world << "[key] - [uplink.items_assoc[key]]"
+		log_debug("[key] - [uplink.items_assoc[key]]")
+
 #endif

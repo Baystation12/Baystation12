@@ -61,6 +61,11 @@ datum/unit_test
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
+	var/safe_landmark
+	var/space_landmark
+
+datum/unit_test/proc/log_debug(var/message)
+	log_unit_test("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
 
 datum/unit_test/proc/log_bad(var/message)
 	log_unit_test("[ascii_red]\[[name]\]: [message][ascii_reset]")
@@ -87,19 +92,34 @@ datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
 
+datum/unit_test/proc/get_safe_turf()
+	if(!safe_landmark)
+		for(var/landmark in landmarks_list)
+			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+				safe_landmark = landmark
+				break
+	return get_turf(safe_landmark)
+
+datum/unit_test/proc/get_space_turf()
+	if(!space_landmark)
+		for(var/landmark in landmarks_list)
+			if(istype(landmark, /obj/effect/landmark/test/space_turf))
+				space_landmark = landmark
+				break
+	return get_turf(space_landmark)
 
 proc/load_unit_test_changes()
 /*
 	//This takes about 60 seconds to run on Travis and is only used for the ZAS vacume check on The Asteroid.
-	if(config.generate_asteroid != 1)
+	if(config.generate_map != 1)
 		log_unit_test("Overiding Configuration option for Asteroid Generation to ENABLED")
-		config.generate_asteroid = 1	// The default map requires it, the example config doesn't have this enabled.
+		config.generate_map = 1	// The default map requires it, the example config doesn't have this enabled.
  */
 
 
 
 
-proc/initialize_unit_tests()
+/proc/initialize_unit_tests()
 	#ifndef UNIT_TEST_COLOURED
 	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
 		ascii_esc = ""
@@ -124,16 +144,23 @@ proc/initialize_unit_tests()
 		if(ticker.pregame_timeleft < 175 && !said_msg)
 			said_msg = 1
 			log_unit_test("Pregame Count down has started, giving it 20 seconds to finish.")
-		sleep(1)
+		sleep(world.tick_lag)
+
+	log_unit_test("Awaiting the master process...")
+	while(Master.current_runlevel < RUNLEVEL_LOBBY)
+		sleep(world.tick_lag)
+	log_unit_test("Master process setup.")
 
 	world.save_mode("extended")
 
 	sleep(1)
 
 	ticker.current_state = GAME_STATE_SETTING_UP
+	Master.SetRunLevel(RUNLEVEL_SETUP)
 
 	log_unit_test("Round has been started.  Waiting 10 seconds to start tests.")
 	sleep(100)
+	log_unit_test("Initiating tests.")
 
 	//
 	// Run Tests
@@ -141,6 +168,7 @@ proc/initialize_unit_tests()
 
 	var/list/test_datums = get_test_datums()
 	run_unit_tests(test_datums)
+	log_unit_test("Caught [GLOB.total_runtimes] Runtime\s.")
 	del(world)
 
 /proc/run_unit_tests(var/list/test_datums, var/skip_disabled_tests = TRUE)

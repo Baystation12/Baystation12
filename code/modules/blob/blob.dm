@@ -3,18 +3,25 @@
 	name = "blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob"
-	light_range = 3
+	light_range = 2
+	light_color = "#b5ff5b"
 	desc = "Some blob creature thingy."
 	density = 1
-	opacity = 0
+	opacity = 1
 	anchored = 1
 	mouse_opacity = 2
 
+	plane = BLOB_PLANE
+	layer = BLOB_SHIELD_LAYER
+
 	var/maxHealth = 30
 	var/health
+	var/regen_rate = 5
 	var/brute_resist = 4
 	var/fire_resist = 1
+	var/laser_resist = 4	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
 	var/expandType = /obj/effect/blob
+	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 
 /obj/effect/blob/New(loc)
 	health = maxHealth
@@ -50,7 +57,7 @@
 		update_icon()
 
 /obj/effect/blob/proc/regen()
-	health = min(health + 1, maxHealth)
+	health = min(health + regen_rate, maxHealth)
 	update_icon()
 
 /obj/effect/blob/proc/expand(var/turf/T)
@@ -90,14 +97,14 @@
 	if(V)
 		V.ex_act(2)
 		return
-	var/obj/machinery/bot/B = locate() in T
-	if(B)
-		B.ex_act(2)
-		return
 	var/obj/mecha/M = locate() in T
 	if(M)
 		M.visible_message("<span class='danger'>The blob attacks \the [M]!</span>")
 		M.take_damage(40)
+		return
+	var/obj/machinery/camera/CA = locate() in T
+	if(CA)
+		CA.take_damage(30)
 		return
 
 	// Above things, we destroy completely and thus can use locate. Mobs are different.
@@ -108,11 +115,14 @@
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		L.take_organ_damage(rand(30, 40))
 		return
-	new expandType(T, min(health, 30))
+	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
+		new/obj/effect/blob/core/secondary(T)
+	else
+		new expandType(T, min(health, 30))
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
 	regen()
-	sleep(5)
+	sleep(4)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
 	var/obj/effect/blob/B = (locate() in T)
@@ -131,13 +141,13 @@
 		if(BRUTE)
 			take_damage(Proj.damage / brute_resist)
 		if(BURN)
-			take_damage(Proj.damage / fire_resist)
+			take_damage((Proj.damage / laser_resist) / fire_resist)
 	return 0
 
 /obj/effect/blob/attackby(var/obj/item/weapon/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	visible_message("<span class='danger'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 	var/damage = 0
 	switch(W.damtype)
 		if("fire")
@@ -157,19 +167,32 @@
 	maxHealth = 200
 	brute_resist = 2
 	fire_resist = 2
+	laser_resist = 8
+	regen_rate = 2
+
+	layer = BLOB_CORE_LAYER
 
 	expandType = /obj/effect/blob/shield
 	var/blob_may_process = 1
+	var/growth_range = 10 // Maximal distance for new blob pieces from this core.
 
+// Rough icon state changes that reflect the core's health
 /obj/effect/blob/core/update_icon()
-	return
+	var/health_percent = (health / maxHealth) * 100
+	switch(health_percent)
+		if(66 to INFINITY)
+			icon_state = "blob_core"
+		if(33 to 66)
+			icon_state = "blob_node"
+		if(-INFINITY to 33)
+			icon_state = "blob_factory"
 
 /obj/effect/blob/core/New(loc)
-	processing_objects.Add(src)
+	GLOB.processing_objects.Add(src)
 	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
-	processing_objects.Remove(src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
 /obj/effect/blob/core/process()
@@ -184,6 +207,23 @@
 	pulse(20, list(SOUTH, WEST))
 	blob_may_process = 1
 
+// Half the stats of a normal core. Blob has a very small probability of growing these when spreading. These will spread the blob further.
+/obj/effect/blob/core/secondary
+	name = "small blob core"
+	icon = 'icons/mob/blob.dmi'
+	icon_state = "blob_node"
+	maxHealth = 100
+	brute_resist = 1
+	fire_resist = 1
+	laser_resist = 5
+	regen_rate = 1
+	growth_range = 3
+
+	layer = BLOB_NODE_LAYER
+
+/obj/effect/blob/core/secondary/update_icon()
+	icon_state = (health / maxHealth >= 0.5) ? "blob_node" : "blob_factory"
+
 /obj/effect/blob/shield
 	name = "strong blob"
 	icon = 'icons/mob/blob.dmi'
@@ -192,13 +232,13 @@
 	maxHealth = 60
 	brute_resist = 1
 	fire_resist = 2
-
+	laser_resist = 6
 /obj/effect/blob/shield/New()
 	..()
 	update_nearby_tiles()
 
 /obj/effect/blob/shield/Destroy()
-	density = 0
+	set_density(0)
 	update_nearby_tiles()
 	..()
 

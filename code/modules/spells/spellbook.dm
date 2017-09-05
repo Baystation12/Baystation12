@@ -24,7 +24,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	icon_state = "spellbook"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	var/uses = 1
 	var/temp = null
 	var/datum/spellbook/spellbook
@@ -47,14 +47,14 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 /obj/item/weapon/spellbook/attack_self(mob/user as mob)
 	if(user.mind)
 		if(!wizards.is_antagonist(user.mind))
-			user << "You can't make heads or tails of this book."
+			to_chat(user, "You can't make heads or tails of this book.")
 			return
 		if(spellbook.book_flags & LOCKED)
 			if(user.mind.special_role == "apprentice")
-				user << "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>"
+				to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>")
 				return
 			else
-				user << "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways."
+				to_chat(user, "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways.")
 
 	interact(user)
 
@@ -68,11 +68,11 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(istype(I,/obj/item/stack))
 			var/obj/item/stack/S = I
 			if(S.amount < S.max_amount)
-				usr << "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>"
+				to_chat(usr, "<span class='warning'>You must sacrifice [S.max_amount] stacks of [S]!</span>")
 				return
 		user.remove_from_mob(I)
 		qdel(I)
-	user << "<span class='notice'>Your sacrifice was accepted!</span>"
+	to_chat(user, "<span class='notice'>Your sacrifice was accepted!</span>")
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -92,7 +92,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				for(var/id in reagent_list)
 					if(R.has_reagent(id,5))
 						make_sacrifice(I,user, id)
-						return
+						return 1
 	..()
 
 /obj/item/weapon/spellbook/interact(mob/user as mob)
@@ -102,6 +102,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
 		dat += "<center><font color='#ff33cc'>Requires Wizard Garb</font><br><font color='#ff6600'>Selectable Target</font><br><font color='#33cc33'>Spell Charge Type: Recharge, Sacrifice, Charges</font></center><br>"
+		dat += "<center><b>To use a contract, first bind it to your soul, then give it to someone to sign. This will bind their soul to you.</b></center><br>"
 		for(var/i in 1 to spellbook.spells.len)
 			var/name = "" //name of target
 			var/desc = "" //description of target
@@ -140,7 +141,10 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
-			dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 30 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
+			if(investing_time)
+				dat += "<center><b>Currently investing in a slot...</b></center>"
+			else
+				dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 15 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
 		if(!(spellbook.book_flags & NOREVERT))
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
@@ -188,7 +192,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(!(path in spellbook.spells))
 			return
 		if(uses < spellbook.spells[path])
-			usr << "<span class='notice'>You do not have enough spell slots to purchase this.</span>"
+			to_chat(usr, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
 			return
 		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
@@ -224,7 +228,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 			feedback_add_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
-			usr << "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>"
+			to_chat(usr, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
 
 	src.interact(usr)
 
@@ -234,7 +238,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	if(investing_time)
 		return "You can only invest one spell slot at a time."
 	uses--
-	processing_objects += src
+	GLOB.processing_objects += src
 	investing_time = world.time + (15 MINUTES)
 	return "You invest a spellslot and will recieve two in return in 15 minutes."
 
@@ -245,11 +249,11 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(uses > spellbook.max_uses)
 			spellbook.max_uses = uses
 		investing_time = 0
-		processing_objects -= src
+		GLOB.processing_objects -= src
 	return 1
 
 /obj/item/weapon/spellbook/Destroy()
-	processing_objects -= src
+	GLOB.processing_objects -= src
 	..()
 
 /obj/item/weapon/spellbook/proc/send_feedback(var/path)
@@ -264,7 +268,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 
 /obj/item/weapon/spellbook/proc/add_spell(var/mob/user, var/spell_path)
-	for(var/spell/S in user.spell_list)
+	for(var/spell/S in user.mind.learned_spells)
 		if(istype(S,spell_path))
 			if(!S.can_improve())
 				return

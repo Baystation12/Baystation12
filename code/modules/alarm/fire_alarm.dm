@@ -1,5 +1,5 @@
 /datum/alarm_handler/fire
-	category = "Fire Alarms"
+	category = NETWORK_ALARM_FIRE
 
 /datum/alarm_handler/fire/on_alarm_change(var/datum/alarm/alarm, var/was_raised)
 	var/area/A = alarm.origin

@@ -35,16 +35,16 @@ var/global/list/narsie_list = list()
 	light_range = 1
 	light_color = "#3e0000"
 
-	current_size = 12
-	consume_range = 12 // How many tiles out do we eat.
+	current_size = 6
+	consume_range = 6 // How many tiles out do we eat.
 	var/announce=1
 	var/cause_hell = 1
 
 /obj/singularity/narsie/large/New()
 	..()
 	if(announce)
-		world << "<font size='15' color='red'><b>[uppertext(name)] HAS RISEN</b></font>"
-		world << sound('sound/effects/wind/wind_5_1.ogg')
+		to_world("<font size='15' color='red'><b>[uppertext(name)] HAS RISEN</b></font>")
+		sound_to(world, sound('sound/effects/wind/wind_5_1.ogg'))
 
 	narsie_spawn_animation()
 
@@ -54,9 +54,9 @@ var/global/list/narsie_list = list()
 		narsie_cometh = 1
 
 		spawn(10 SECONDS)
-			if(emergency_shuttle)
-				emergency_shuttle.call_evac()
-				emergency_shuttle.launch_time = 0	// Cannot recall
+			if(evacuation_controller)
+				evacuation_controller.call_evacuation(null, TRUE, 1)
+				evacuation_controller.evac_no_return = 0 // Cannot recall
 
 /obj/singularity/narsie/process()
 	eat()
@@ -79,7 +79,7 @@ var/global/list/narsie_list = list()
 			if(M.status_flags & GODMODE)
 				continue
 			if(!iscultist(M))
-				M << "<span class='danger'> You feel your sanity crumble away in an instant as you gaze upon [src.name]...</span>"
+				to_chat(M, "<span class='danger'> You feel your sanity crumble away in an instant as you gaze upon [src.name]...</span>")
 				M.apply_effect(3, STUN)
 
 
@@ -101,7 +101,7 @@ var/global/list/narsie_list = list()
 	if(!move_self)
 		return 0
 
-	var/movement_dir = pick(alldirs - last_failed_movement)
+	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
 
 	if(force_move)
 		movement_dir = force_move
@@ -119,7 +119,7 @@ var/global/list/narsie_list = list()
 	if(!move_self)
 		return 0
 
-	var/movement_dir = pick(alldirs - last_failed_movement)
+	var/movement_dir = pick(GLOB.alldirs - last_failed_movement)
 
 	if(force_move)
 		movement_dir = force_move
@@ -129,13 +129,13 @@ var/global/list/narsie_list = list()
 	spawn(0)
 		step(src, movement_dir)
 		narsiefloor(get_turf(loc))
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	spawn(10)
 		step(src, movement_dir)
 		narsiefloor(get_turf(loc))
-		for(var/mob/M in player_list)
+		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				M.see_narsie(src,movement_dir)
 	return 1
@@ -152,8 +152,8 @@ var/global/list/narsie_list = list()
 	T.desc = "An opening has been made on that wall, but who can say if what you seek truly lies on the other side?"
 	T.icon = 'icons/turf/walls.dmi'
 	T.icon_state = "cult-narsie"
-	T.opacity = 0
-	T.density = 0
+	T.set_opacity(0)
+	T.set_density(0)
 	set_light(1)
 
 /obj/singularity/narsie/large/consume(const/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
@@ -174,11 +174,6 @@ var/global/list/narsie_list = list()
 			return 0
 
 		M.cultify()
-
-//ITEM PROCESSING
-	else if (istype(A, /obj/))
-		var/obj/O = A
-		O.cultify()
 
 //TURF PROCESSING
 	else if (isturf(A))
@@ -287,10 +282,12 @@ var/global/list/narsie_list = list()
 		acquire(pick(cultists))
 		return
 		//If there was living cultists, it picks one to follow.
-	for(var/mob/living/carbon/human/food in living_mob_list_)
+	for(var/mob/living/carbon/human/food in GLOB.living_mob_list_)
 		if(food.stat)
 			continue
 		var/turf/pos = get_turf(food)
+		if(!pos)	//Catches failure of get_turf.
+			continue
 		if(pos.z != src.z)
 			continue
 		cultists += food
@@ -298,7 +295,7 @@ var/global/list/narsie_list = list()
 		acquire(pick(cultists))
 		return
 		//no living cultists, pick a living human instead.
-	for(var/mob/observer/ghost/ghost in player_list)
+	for(var/mob/observer/ghost/ghost in GLOB.player_list)
 		if(!ghost.client)
 			continue
 		var/turf/pos = get_turf(ghost)
@@ -313,14 +310,13 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/proc/acquire(const/mob/food)
 	var/capname = uppertext(name)
 
-	target << "<span class='notice'><b>[capname] HAS LOST INTEREST IN YOU.</b></span>"
+	to_chat(target, "<span class='notice'><b>[capname] HAS LOST INTEREST IN YOU.</b></span>")
 	target = food
 
 	if (ishuman(target))
-		target << "<span class='danger'>[capname] HUNGERS FOR YOUR SOUL.</span>"
+		to_chat(target, "<span class='danger'>[capname] HUNGERS FOR YOUR SOUL.</span>")
 	else
-		target << "<span class='danger'>[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL.</span>"
-
+		to_chat(target, "<span class='danger'>[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL.</span>")
 /obj/singularity/narsie/on_capture()
 	chained = 1
 	move_self = 0
@@ -335,7 +331,7 @@ var/global/list/narsie_list = list()
 	chained = 1
 	move_self = 0
 	icon_state ="narsie-chains"
-	for(var/mob/M in mob_list)//removing the client image of nar-sie while it is chained
+	for(var/mob/M in GLOB.mob_list)//removing the client image of nar-sie while it is chained
 		if(M.client)
 			M.see_narsie(src)
 
@@ -343,9 +339,6 @@ var/global/list/narsie_list = list()
 	chained = 0
 	move_self = 1
 	icon_state ="narsie"
-
-/obj/singularity/narsie/cultify()
-	return
 
 /**
  * Wizard narsie.

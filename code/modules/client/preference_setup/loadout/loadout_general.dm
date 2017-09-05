@@ -46,20 +46,18 @@
 	..()
 	gear_tweaks += new/datum/gear_tweak/reagents(lunchables_drink_reagents())
 
-/datum/gear/comb
-	display_name = "purple comb"
-	path = /obj/item/weapon/haircomb
+/datum/gear/coffeecup
+	display_name = "coffee cup"
+	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
+
+/datum/gear/coffeecup/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path(/obj/item/weapon/reagent_containers/food/drinks/coffeecup)
 
 /datum/gear/boot_knife
 	display_name = "boot knife"
 	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
 	cost = 3
-
-/datum/gear/mirror
-	display_name = "handheld mirror"
-	path = /obj/item/weapon/mirror
-	cost = 1
-	path = /obj/item/weapon/mirror
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"
@@ -81,3 +79,19 @@
 	display_name = "towel"
 	path = /obj/item/weapon/towel
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/plush_toy
+	display_name = "plush toy"
+	description = "A plush toy."
+	path = /obj/item/toy/plushie
+
+/datum/gear/plush_toy/New()
+	..()
+	var/plushes = list()
+	plushes["diona nymph plush"] = /obj/item/toy/plushie/nymph
+	plushes["mouse plush"] = /obj/item/toy/plushie/mouse
+	plushes["kitten plush"] = /obj/item/toy/plushie/kitten
+	plushes["lizard plush"] = /obj/item/toy/plushie/lizard
+	plushes["spider plush"] = /obj/item/toy/plushie/spider
+	plushes["farwa plush"] = /obj/item/toy/plushie/farwa
+	gear_tweaks += new /datum/gear_tweak/path(plushes)

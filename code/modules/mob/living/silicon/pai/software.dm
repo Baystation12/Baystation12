@@ -25,7 +25,7 @@ var/global/list/default_pai_software = list()
 		var/datum/pai_software/P = new type()
 		if(pai_software_by_key[P.id])
 			var/datum/pai_software/O = pai_software_by_key[P.id]
-			world << "<span class='warning'>pAI software module [P.name] has the same key as [O.name]!</span>"
+			log_error("<span class='warning'>pAI software module [P.name] has the same key as [O.name]!</span>")
 			r = 0
 			continue
 		pai_software_by_key[P.id] = P
@@ -90,7 +90,7 @@ var/global/list/default_pai_software = list()
 	data["emotions"] = emotions
 	data["current_emotion"] = card.current_emotion
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "pai_interface.tmpl", "pAI Software Interface", 450, 600)
 		ui.set_initial_data(data)
@@ -122,10 +122,11 @@ var/global/list/default_pai_software = list()
 		if(S && (ram >= S.ram_cost))
 			ram -= S.ram_cost
 			software[S.id] = S
+			S.on_purchase(src)
 		return 1
 
 	else if(href_list["image"])
 		var/img = text2num(href_list["image"])
-		if(1 <= img && img <= 9)
+		if(1 <= img && img <= pai_emotions.len)
 			card.setEmotion(img)
 		return 1

@@ -1,18 +1,15 @@
 
-//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-/proc/initialize_chemical_reagents()
-	var/paths = typesof(/datum/reagent) - /datum/reagent
-	chemical_reagents_list = list()
-	for(var/path in paths)
+//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent type
+/proc/do_initialize_chemical_reagents()
+	. = list()
+	for(var/path in subtypesof(/datum/reagent))
 		var/datum/reagent/D = new path()
 		if(!D.name)
 			continue
-		chemical_reagents_list[D.id] = D
-
+		.[D.type] = D
 
 /datum/reagent
 	var/name = "Reagent"
-	var/id = "reagent"
 	var/description = "A non-descript chemical."
 	var/taste_description = "old rotten bandaids"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
@@ -37,7 +34,7 @@
 	var/list/glass_special = null // null equivalent to list()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
-	holder.remove_reagent(id, amount)
+	holder.remove_reagent(type, amount)
 
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /datum/reagent/proc/touch_mob(var/mob/M, var/amount)
@@ -52,7 +49,7 @@
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(!istype(M))
 		return
-	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD)
+	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
 	if(overdose && (location != CHEM_TOUCH))
 		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_MEDIUM/M.mob_size)
@@ -65,7 +62,8 @@
 		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
-	removed = min(removed, volume)
+	removed = M.get_adjusted_metabolism(removed)
+
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
@@ -117,8 +115,8 @@
 	return null
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
-	..()
 	holder = null
+	. = ..()
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 

@@ -3,8 +3,8 @@
 	anchored = 1
 	opacity = 0
 	density = 0
-	layer = 3.5
-	w_class = 3
+	layer = ABOVE_WINDOW_LAYER
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
@@ -22,13 +22,11 @@
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
 	if(istype(tool, /obj/item/weapon/screwdriver) && !istype(src, /obj/structure/sign/double))
-		user << "You unfasten the sign with your [tool]."
+		to_chat(user, "You unfasten the sign with your [tool.name].")
 		var/obj/item/sign/S = new(src.loc)
 		S.name = name
 		S.desc = desc
 		S.icon_state = icon_state
-		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
-		//S.icon = I.Scale(24, 24)
 		S.sign_state = icon_state
 		qdel(src)
 	else ..()
@@ -37,7 +35,7 @@
 	name = "sign"
 	desc = ""
 	icon = 'icons/obj/decals.dmi'
-	w_class = 3		//big
+	w_class = ITEM_SIZE_NORMAL		//big
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
@@ -58,13 +56,17 @@
 		S.name = name
 		S.desc = desc
 		S.icon_state = sign_state
-		user << "You fasten \the [S] with your [tool]."
+		to_chat(user, "You fasten \the [S] with your [tool].")
 		qdel(src)
 	else ..()
 
 /obj/structure/sign/double/map
-	name = "station map"
-	desc = "A framed picture of the station."
+	name = "map"
+	desc = "A framed map."
+
+/obj/structure/sign/double/map/New()
+	..()
+	desc = "A framed map of the [station_name()]."
 
 /obj/structure/sign/double/map/left
 	icon_state = "map-left"
@@ -72,55 +74,123 @@
 /obj/structure/sign/double/map/right
 	icon_state = "map-right"
 
-/obj/structure/sign/securearea
-	name = "\improper SECURE AREA"
-	desc = "A warning sign which reads 'SECURE AREA'."
+/obj/structure/sign/monkey_painting
+	name = "\improper Mr. Deempisi portrait"
+	desc = "Under the painting a plaque reads: 'While the meat grinder may not have spared you, fear not. Not one part of you has gone to waste... You were delicious.'"
+	icon_state = "monkey_painting"
+
+/obj/structure/sign/warning
+	name = "\improper WARNING"
 	icon_state = "securearea"
 
-/obj/structure/sign/biohazard
+/obj/structure/sign/warning/detailed
+	name = "\improper WARNING 2"
+	icon_state = "securearea2"
+
+/obj/structure/sign/warning/New()
+	..()
+	desc = "A warning sign which reads '[sanitize(name)]'."
+
+/obj/structure/sign/warning/airlock
+	name = "\improper EXTERNAL AIRLOCK"
+	icon_state = "doors"
+
+/obj/structure/sign/warning/biohazard
 	name = "\improper BIOHAZARD"
-	desc = "A warning sign which reads 'BIOHAZARD'."
 	icon_state = "bio"
 
-/obj/structure/sign/electricshock
-	name = "\improper HIGH VOLTAGE"
-	desc = "A warning sign which reads 'HIGH VOLTAGE'."
-	icon_state = "shock"
+/obj/structure/sign/warning/bomb_range
+	name = "\improper BOMB RANGE"
+	icon_state = "blast"
 
-/obj/structure/sign/examroom
-	name = "\improper EXAM"
-	desc = "A guidance sign which reads 'EXAM ROOM'."
-	icon_state = "examroom"
+/obj/structure/sign/warning/caution
+	name = "\improper CAUTION"
 
-/obj/structure/sign/vacuum
-	name = "\improper HARD VACUUM AHEAD"
-	desc = "A warning sign which reads 'HARD VACUUM AHEAD'."
-	icon_state = "space"
+/obj/structure/sign/warning/compressed_gas
+	name = "\improper COMPRESSED GAS"
+	icon_state = "hikpa"
 
-/obj/structure/sign/deathsposal
+/obj/structure/sign/warning/deathsposal
 	name = "\improper DISPOSAL LEADS TO SPACE"
-	desc = "A warning sign which reads 'DISPOSAL LEADS TO SPACE'."
 	icon_state = "deathsposal"
 
-/obj/structure/sign/pods
-	name = "\improper ESCAPE PODS"
-	desc = "A warning sign which reads 'ESCAPE PODS'."
-	icon_state = "pods"
+/obj/structure/sign/warning/docking_area
+	name = "\improper KEEP CLEAR: DOCKING AREA"
 
-/obj/structure/sign/fire
+/obj/structure/sign/warning/engineering_access
+	name = "\improper ENGINEERING ACCESS"
+
+/obj/structure/sign/warning/fall
+	name = "\improper FALL HAZARD"
+	icon_state = "falling"
+
+/obj/structure/sign/warning/fire
 	name = "\improper DANGER: FIRE"
-	desc = "A warning sign which reads 'DANGER: FIRE'."
 	icon_state = "fire"
 
-/obj/structure/sign/nosmoking_1
+/obj/structure/sign/warning/high_voltage
+	name = "\improper HIGH VOLTAGE"
+	icon_state = "shock"
+
+/obj/structure/sign/warning/hot_exhaust
+	name = "\improper HOT EXHAUST"
+	icon_state = "fire"
+
+/obj/structure/sign/warning/internals_required
+	name = "\improper INTERNALS REQUIRED"
+
+/obj/structure/sign/warning/lethal_turrets
+	name = "\improper LETHAL TURRETS"
+	icon_state = "turrets"
+
+/obj/structure/sign/warning/lethal_turrets/New()
+	..()
+	desc += " Enter at own risk!."
+
+/obj/structure/sign/warning/mail_delivery
+	name = "\improper MAIL DELIVERY"
+	icon_state = "mail"
+
+/obj/structure/sign/warning/moving_parts
+	name = "\improper MOVING PARTS"
+	icon_state = "movingparts"
+
+/obj/structure/sign/warning/nosmoking_1
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking"
 
-/obj/structure/sign/nosmoking_2
+/obj/structure/sign/warning/nosmoking_2
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking2"
+
+/obj/structure/sign/warning/pods
+	name = "\improper ESCAPE PODS"
+	icon_state = "pods"
+
+/obj/structure/sign/warning/radioactive
+	name = "\improper RADIOACTIVE AREA"
+	icon_state = "radiation"
+
+/obj/structure/sign/warning/secure_area
+	name = "\improper SECURE AREA"
+
+/obj/structure/sign/warning/secure_area/armory
+	name = "\improper ARMORY"
+	icon_state = "armory"
+
+/obj/structure/sign/warning/server_room
+	name = "\improper SERVER ROOM"
+	icon_state = "server"
+
+/obj/structure/sign/warning/siphon_valve
+	name = "\improper SIPHON VALVE"
+
+/obj/structure/sign/warning/vacuum
+	name = "\improper HARD VACUUM AHEAD"
+	icon_state = "space"
+
+/obj/structure/sign/warning/vent_port
+	name = "\improper EJECTION/VENTING PORT"
 
 /obj/structure/sign/redcross
 	name = "medbay"
@@ -165,11 +235,6 @@
 	desc = "This plaque memorializes those engineers and technicians who made the ultimate sacrifice to save their vessel and its crew."
 	icon_state = "atmosplaque"
 
-/obj/structure/sign/dedicationplaque
-	name = "\improper SEV Torch dedication plaque"
-	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched 2560 - Sol Central Government - 'Never was anything great achieved without danger.'"
-	icon_state = "lightplaque"
-
 /obj/structure/sign/floorplaque
 	name = "\improper commemorative plaque"
 	desc = "A list of dead explorers who gave their lives in search of the next great discovery. Hope you don't join them."
@@ -195,10 +260,15 @@
 /obj/structure/sign/double/maltesefalcon/right
 	icon_state = "maltesefalcon-right"
 
-/obj/structure/sign/science
+/obj/structure/sign/warning/science
 	name = "\improper SCIENCE!"
-	desc = "A warning sign which reads 'SCIENCE!'."
 	icon_state = "science1"
+
+/obj/structure/sign/warning/science/anomalous_materials
+	name = "\improper ANOMALOUS MATERIALS"
+
+/obj/structure/sign/warning/science/mass_spectrometry
+	name = "\improper MASS SPECTROMETRY"
 
 /obj/structure/sign/science_1
 	name = "\improper RESEARCH WING"
@@ -230,6 +300,11 @@
 	desc = "A sign labelling an area as a place where xenobiological entites are researched."
 	icon_state = "xenobio4"
 
+/obj/structure/sign/xenoarch
+	name = "\improper XENOARCHAEOLOGY"
+	desc = "A sign labelling an area as a place where xenoarchaeological finds are researched."
+	icon_state = "xenobio4"
+
 /obj/structure/sign/chemistry
 	name = "\improper CHEMISTRY"
 	desc = "A sign labelling an area containing chemical equipment."
@@ -255,47 +330,73 @@
 	desc = "A sign labelling an area as a place where plant growing supplies are kept."
 	icon_state = "hydro3"
 
+/obj/structure/sign/solgov
+	name = "\improper SolGov Seal"
+	desc = "A sign which signifies who this vessel belongs to."
+	icon_state = "solgovseal"
+
 /obj/structure/sign/directions
 	name = "direction sign"
 	desc = "A direction sign, claiming to know the way."
 	icon_state = "direction"
 
+/obj/structure/sign/directions/New()
+	..()
+	desc = "A direction sign, pointing out which way \the [src] is."
+
 /obj/structure/sign/directions/science
 	name = "\improper Research Division"
-	desc = "A direction sign, pointing out which way the Research Division is."
 	icon_state = "direction_sci"
 
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering Bay"
-	desc = "A direction sign, pointing out which way the Engineering Bay is."
 	icon_state = "direction_eng"
 
 /obj/structure/sign/directions/security
 	name = "\improper Security Wing"
-	desc = "A direction sign, pointing out which way the Security Wing is."
 	icon_state = "direction_sec"
 
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
-	desc = "A direction sign, pointing out which way the Medical Bay is."
 	icon_state = "direction_med"
 
 /obj/structure/sign/directions/evac
 	name = "\improper Evacuation Wing"
-	desc = "A direction sign, pointing out which way the Evacuation Wing is."
 	icon_state = "direction_evac"
 
 /obj/structure/sign/directions/bridge
 	name = "\improper Bridge"
-	desc = "A direction sign, pointing out which way the Bridge is."
 	icon_state = "direction_bridge"
 
 /obj/structure/sign/directions/supply
 	name = "\improper Supply Office"
-	desc = "A direction sign, pointing out which way the Supply Office is."
 	icon_state = "direction_supply"
 
 /obj/structure/sign/directions/infirmary
 	name = "\improper Infirmary"
-	desc = "A direction sign, pointing out which way the Infirmary is."
 	icon_state = "direction_infirm"
+
+/obj/structure/sign/directions/examroom
+	name = "\improper Exam Room"
+	icon_state = "examroom"
+
+/obj/structure/sign/deck/bridge
+	name = "\improper Bridge Deck"
+	icon_state = "deck-b"
+
+/obj/structure/sign/deck/first
+	name = "\improper First Deck"
+	icon_state = "deck-1"
+
+/obj/structure/sign/deck/second
+	name = "\improper Second Deck"
+	icon_state = "deck-2"
+
+/obj/structure/sign/deck/third
+	name = "\improper Third Deck"
+	icon_state = "deck-3"
+
+/obj/structure/sign/deck/fourth
+	name = "\improper Fourth Deck"
+	icon_state = "deck-4"
+

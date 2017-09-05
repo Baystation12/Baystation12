@@ -3,6 +3,7 @@
 /datum/wires/airlock/secure
 	random = 1
 	wire_count = 14
+	window_y = 680
 
 /datum/wires/airlock
 	holder_type = /obj/machinery/door/airlock

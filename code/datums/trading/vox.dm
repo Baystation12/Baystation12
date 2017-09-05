@@ -13,9 +13,7 @@
 				"hail_silicon1"      = "YOU KNOW VOX? Yes is good, yes yes, MOB. Trade GOOD!",
 				"hail_Human0"        = "Hello hueman! Kiikikikiki! MOB trade with us, yes? Good!",
 				"hail_Human1"        = "Friend of Vox is friend of all Vox! MOB you trade now!",
-				"hail_Vox1"          = "SKREEEE! May the Shaol make this trade good, MOB!",
-				"hail_Resomi0"       = "Hello MOB! You tiny thing, how pilot ship? Maybe come for dinner! KIKIKIKI!",
-				"hail_Resomi1"       = "Greetings, MOB, be dinner or friend? KIKIKIKIKII!",
+				"hail_Vox1"          = "SKREEEE! May the Shoal make this trade good, MOB!",
 				"hail_deny0"         = "Trade closed, GO AWAY!",
 				"hail_deny-1"        = "We no trade with shit like you!",
 				"hail_deny1"         = "Trade gone now. Goodbye.",
@@ -30,6 +28,8 @@
 				"trade_refuse1"      = "You know as well as it that is not a good trade.",
 				"how_much0"          = "You give it something worth VALUE, yes?",
 				"how_much1"          = "Hmm.... VALUE. Something like that.",
+				"what_want0"         = "Vox wants",
+				"what_want1"         = "Shoal wants",
 
 				"compliment_deny0"   = "No.",
 				"compliment_deny1"   = "You know better than that!",
@@ -66,12 +66,9 @@
 		var/mob/living/carbon/human/H = user
 		if(H.species)
 			switch(H.species.name)
-				if("Vox")
+				if(SPECIES_VOX)
 					disposition = 1000
 					hailed_vox = 1
-				if("Vox Pariah")
-					hailed_vox = -1
-					disposition = -1000
 			specific = H.species.name
 	else if(istype(user, /mob/living/silicon))
 		specific = "silicon"

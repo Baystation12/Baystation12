@@ -22,7 +22,7 @@
 	malf_process()
 
 	if(APU_power && (hardware_integrity() < 50))
-		src << "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>"
+		to_chat(src, "<span class='notice'><b>APU GENERATOR FAILURE! (System Damaged)</b></span>")
 		stop_apu(1)
 
 	// We aren't shut down, and we lack external power. Try to fix it using the restoration routine.
@@ -49,7 +49,7 @@
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)
 		health = 100
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 		setOxyLoss(0)
 	else
 		health = 100 - getFireLoss() - getBruteLoss() // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
@@ -58,15 +58,13 @@
 	..()
 	add_ai_verbs(src)
 
-/mob/living/silicon/ai/update_sight()
+/mob/living/silicon/ai/update_living_sight()
 	if(!has_power() || self_shutdown)
-		updateicon()
+		update_icon()
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		sight = sight&~SEE_TURFS
-		sight = sight&~SEE_MOBS
-		sight = sight&~SEE_OBJS
-		see_in_dark = 0
-		see_invisible = SEE_INVISIBLE_LIVING
+		set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
+		set_see_in_dark(0)
+		set_see_invisible(SEE_INVISIBLE_LIVING)
 	else
 		clear_fullscreen("blind")
-		update_dead_sight()
+		..()

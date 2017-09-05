@@ -30,8 +30,8 @@
 /obj/item/weapon/storage/box/large
 	name = "large box"
 	icon_state = "largebox"
-	w_class = 4
-	max_w_class = 3
+	w_class = ITEM_SIZE_LARGE
+	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 
 // BubbleWrap - A box can be folded up to make card
@@ -54,7 +54,7 @@
 	if ( !found )	// User is too far away
 		return
 	// Now make the cardboard
-	user << "<span class='notice'>You fold [src] flat.</span>"
+	to_chat(user, "<span class='notice'>You fold [src] flat.</span>")
 	if(ispath(foldable, /obj/item/stack))
 		var/stack_amt = max(2**(w_class - 3), 1)
 		new src.foldable(get_turf(src), stack_amt)
@@ -79,10 +79,11 @@
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1)
 
 /obj/item/weapon/storage/box/gloves
-	name = "box of latex gloves"
-	desc = "Contains white gloves."
+	name = "box of sterile gloves"
+	desc = "Contains sterile gloves."
 	icon_state = "latex"
-	startswith = list(/obj/item/clothing/gloves/latex = 7)
+	startswith = list(/obj/item/clothing/gloves/latex = 5,
+					/obj/item/clothing/gloves/latex/nitrile = 2)
 
 /obj/item/weapon/storage/box/masks
 	name = "box of sterile masks"
@@ -108,12 +109,6 @@
 	name = "box of beakers"
 	icon_state = "beaker"
 	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker = 7)
-
-/obj/item/weapon/storage/box/injectors
-	name = "box of DNA injectors"
-	desc = "This box contains injectors it seems."
-	startswith = list(/obj/item/weapon/dnainjector/h2m = 6)
-
 
 /obj/item/weapon/storage/box/blanks
 	name = "box of blank shells"
@@ -197,6 +192,12 @@
 	icon_state = "flashbang"
 	startswith = list(/obj/item/weapon/grenade/anti_photon = 5)
 
+/obj/item/weapon/storage/box/supermatters
+	name = "box of supermatter grenades"
+	desc = "A box containing 5 highly experimental supermatter grenades."
+	icon_state = "radbox"
+	startswith = list(/obj/item/weapon/grenade/supermatter = 5)
+
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."
@@ -213,8 +214,6 @@
 	startswith = list(/obj/item/weapon/implantcase/chem = 5,
 					/obj/item/weapon/implanter = 1,
 					/obj/item/weapon/implantpad = 1)
-
-
 
 /obj/item/weapon/storage/box/rxglasses
 	name = "box of prescription glasses"
@@ -298,6 +297,9 @@
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
+	
+/obj/item/weapon/storage/box/mousetraps/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/pillbottles
 	name = "box of pill bottles"
@@ -318,7 +320,7 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_BELT
 	can_hold = list(/obj/item/weapon/flame/match)
 	startswith = list(/obj/item/weapon/flame/match = 10)
@@ -328,7 +330,7 @@
 			W.lit = 1
 			W.damtype = "burn"
 			W.icon_state = "match_lit"
-			processing_objects.Add(W)
+			GLOB.processing_objects.Add(W)
 		W.update_icon()
 		return
 
@@ -347,23 +349,41 @@
 	item_state = "syringe_kit"
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
-/obj/item/weapon/storage/box/lights/New()
-	..()
+/obj/item/weapon/storage/box/lights/Initialize()
+	. = ..()
 	make_exact_fit()
 
 /obj/item/weapon/storage/box/lights/bulbs
 	startswith = list(/obj/item/weapon/light/bulb = 21)
+	
+/obj/item/weapon/storage/box/lights/bulbs/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/lights/tubes
 	name = "box of replacement tubes"
 	icon_state = "lighttube"
-	startswith = list(/obj/item/weapon/light/tube = 21)
+	startswith = list(/obj/item/weapon/light/tube = 17,
+					/obj/item/weapon/light/tube/large = 4)
+					
+/obj/item/weapon/storage/box/lights/tubes/empty
+	startswith = null
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"
-	startswith = list(/obj/item/weapon/light/tube = 14,
-					/obj/item/weapon/light/bulb = 7)
+	startswith = list(/obj/item/weapon/light/tube = 12,
+					/obj/item/weapon/light/tube/large = 4,
+					/obj/item/weapon/light/bulb = 5)
+					
+/obj/item/weapon/storage/box/lights/mixed/empty
+	startswith = null
+
+/obj/item/weapon/storage/box/glowsticks
+	name = "box of mixed glowsticks"
+	icon_state = "box"
+	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
+					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
+					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"
@@ -372,8 +392,8 @@
 	icon_state = "portafreezer"
 	item_state = "medicalpack"
 	foldable = null
-	max_w_class = 3
-	w_class = 5
+	max_w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
@@ -409,3 +429,26 @@
 				/obj/item/weapon/reagent_containers/food/snacks/checker/rook/red = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/checker/queen/red = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/checker/king/red = 1)
+
+
+/obj/item/weapon/storage/box/headset
+	name = "box of spare headsets"
+	desc = "A box full of headsets."
+	startswith = list(/obj/item/device/radio/headset = 7)
+
+//Spare Armbands
+
+/obj/item/weapon/storage/box/armband
+	name = "box of spare military police armbands"
+	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband/mp = 5)
+
+/obj/item/weapon/storage/box/armband/engine
+	name = "box of spare engineering armbands"
+	desc = "A box full of engineering armbands. For use in emergencies when provisional engineering peronnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband/engine = 5)
+
+/obj/item/weapon/storage/box/armband/med
+	name = "box of spare medical armbands"
+	desc = "A box full of medical armbands. For use in emergencies when provisional medical personnel are needed."
+	startswith = list(/obj/item/clothing/accessory/armband/med = 5)

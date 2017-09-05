@@ -24,20 +24,20 @@
 /datum/robot_component/proc/uninstall()
 
 /datum/robot_component/proc/destroy()
-	var/brokenstate = "broken" // Generic icon
 	if (istype(wrapped, /obj/item/robot_parts/robot_component))
 		var/obj/item/robot_parts/robot_component/comp = wrapped
-		brokenstate = comp.icon_state_broken
-	if(wrapped)
-		qdel(wrapped)
+		wrapped.icon_state = comp.icon_state_broken
 
-
-	wrapped = new/obj/item/broken_device
-	wrapped.icon_state = brokenstate // Module-specific broken icons! Yay!
-
-	// The thing itself isn't there anymore, but some fried remains are.
 	installed = -1
 	uninstall()
+
+/datum/robot_component/proc/repair()
+	if (istype(wrapped, /obj/item/robot_parts/robot_component))
+		var/obj/item/robot_parts/robot_component/comp = wrapped
+		wrapped.icon_state = comp.icon_state
+
+	installed = 1
+	install()
 
 /datum/robot_component/proc/take_damage(brute, electronics, sharp, edge)
 	if(installed != 1) return
@@ -62,8 +62,7 @@
 	if(toggled == 0)
 		powered = 0
 		return
-	if(owner.cell && owner.cell.charge >= idle_usage)
-		owner.cell_use_power(idle_usage)
+	if(owner.cell_use_power(idle_usage))
 		powered = 1
 	else
 		powered = 0
@@ -100,11 +99,16 @@
 /datum/robot_component/cell
 	name = "power cell"
 	max_damage = 50
+	var/obj/item/weapon/cell/stored_cell = null
 
 /datum/robot_component/cell/destroy()
 	..()
+	stored_cell = owner.cell
 	owner.cell = null
 
+/datum/robot_component/cell/repair()
+	owner.cell = stored_cell
+	stored_cell = null
 
 // RADIO
 // Enables radio communications
@@ -145,9 +149,6 @@
 /datum/robot_component/camera/update_power_state()
 	..()
 	if (camera)
-		//check if camera component was deactivated
-		if (!powered && camera.status != powered)
-			camera.kick_viewers()
 		camera.status = powered
 
 /datum/robot_component/camera/install()
@@ -157,12 +158,10 @@
 /datum/robot_component/camera/uninstall()
 	if (camera)
 		camera.status = 0
-		camera.kick_viewers()
 
 /datum/robot_component/camera/destroy()
 	if (camera)
 		camera.status = 0
-		camera.kick_viewers()
 
 // SELF DIAGNOSIS MODULE
 // Analyses cyborg's modules, providing damage readouts and basic information
@@ -208,12 +207,6 @@
 
 // Component Objects
 // These objects are visual representation of modules
-
-/obj/item/broken_device
-	name = "broken component"
-	icon = 'icons/obj/robot_component.dmi'
-	icon_state = "broken"
-
 /obj/item/robot_parts/robot_component
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"

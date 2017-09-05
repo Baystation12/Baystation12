@@ -4,26 +4,32 @@
 	icon_state = "ionrifle"
 	item_state = "ionrifle"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	requires_two_hands = 4
-	charge_cost = 300
+	one_hand_penalty = 4
+	charge_cost = 30
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
+	wielded_item_state = "ionrifle-wielded"
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
 
-/obj/item/weapon/gun/energy/ionrifle/update_icon()
-	..()
-	if(power_supply.charge < charge_cost)
-		item_state_slots[slot_l_hand_str] = "ionrifle-empty"
-		item_state_slots[slot_r_hand_str] = "ionrifle-empty"
-	else
-		item_state_slots[slot_l_hand_str] = initial(item_state)
-		item_state_slots[slot_r_hand_str] = initial(item_state)
+/obj/item/weapon/gun/energy/ionrifle/small
+	name = "ion pistol"
+	desc = "The NT Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."
+	icon_state = "ionpistol"
+	item_state = "ionpistol"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
+	w_class = ITEM_SIZE_NORMAL
+	force = 5
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	one_hand_penalty = 0
+	charge_cost = 20
+	max_shots = 8
+	projectile_type = /obj/item/projectile/ion/small
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"
@@ -39,16 +45,18 @@
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"
 	item_state = "floramut"
-	charge_cost = 100
+	charge_cost = 10
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
 	self_recharge = 1
+	var/decl/plantgene/gene = null
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
 		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
+		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
@@ -59,13 +67,36 @@
 		return
 	..()
 
+/obj/item/weapon/gun/energy/floragun/verb/select_gene()
+	set name = "Select Gene"
+	set category = "Object"
+	set src in view(1)
+
+	var/genemask = input("Choose a gene to modify.") as null|anything in plant_controller.plant_gene_datums
+
+	if(!genemask)
+		return
+
+	gene = plant_controller.plant_gene_datums[genemask]
+
+	to_chat(usr, "<span class='info'>You set the [src]'s targeted genetic area to [genemask].</span>")
+
+	return
+
+
+/obj/item/weapon/gun/energy/floragun/consume_next_projectile()
+	. = ..()
+	var/obj/item/projectile/energy/floramut/gene/G = .
+	if(istype(G))
+		G.gene = gene
+
 /obj/item/weapon/gun/energy/meteorgun
 	name = "meteor gun"
 	desc = "For the love of god, make sure you're aiming this the right way!"
 	icon_state = "riotgun"
 	item_state = "c20r"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/meteor
 	cell_type = /obj/item/weapon/cell/potato
 	self_recharge = 1
@@ -78,7 +109,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"
-	w_class = 1
+	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_BELT
 
 
@@ -92,7 +123,7 @@
 	name = "phoron pistol"
 	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon_state = "toxgun"
-	w_class = 3.0
+	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	projectile_type = /obj/item/projectile/energy/phoron
 
@@ -108,7 +139,7 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 5
+	w_class = ITEM_SIZE_HUGE
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
@@ -117,7 +148,7 @@
 
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
-		usr << "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>"
+		to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
 		return 0
 
 	return ..()
@@ -147,10 +178,10 @@ obj/item/weapon/gun/energy/staff/focus
 	attack_self(mob/living/user as mob)
 		if(projectile_type == /obj/item/projectile/forcebolt)
 			charge_cost = 400
-			user << "<span class='warning'>The [src.name] will now strike a small area.</span>"
+			to_chat(user, "<span class='warning'>The [src.name] will now strike a small area.</span>")
 			projectile_type = /obj/item/projectile/forcebolt/strong
 		else
 			charge_cost = 200
-			user << "<span class='warning'>The [src.name] will now strike only a single person.</span>"
+			to_chat(user, "<span class='warning'>The [src.name] will now strike only a single person.</span>")
 			projectile_type = /obj/item/projectile/forcebolt"
 	*/

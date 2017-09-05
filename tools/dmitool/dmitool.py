@@ -5,7 +5,7 @@ import os
 from subprocess import Popen, PIPE
 
 _JAVA_PATH = ["java"]
-_DMITOOL_CMD = ["-jar", "dmitool.jar"]
+_DMITOOL_CMD = ["-jar", os.path.dirname(os.path.realpath(__file__)) + "/dmitool.jar"]
 
 
 def _dmitool_call(*dmitool_args, **popen_args):

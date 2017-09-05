@@ -2,10 +2,10 @@
 	name = "Subjugation"
 	desc = "This spell temporarily subjugates a target's mind and does not require wizard garb."
 	feedback = "SJ"
-	school = "transmutation"
+	school = "illusion"
 	charge_max = 500
 	spell_flags = 0
-	invocation = "DII ODA BAJI"
+	invocation = "Dii Oda Baji."
 	invocation_type = SpI_WHISPER
 
 	message = "<span class='danger'>You suddenly feel completely overwhelmed!</span>"

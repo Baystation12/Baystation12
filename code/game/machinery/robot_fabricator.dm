@@ -26,11 +26,11 @@
 						M.use(1)
 						count++
 
-					user << "You insert [count] metal sheet\s into the fabricator."
+					to_chat(user, "You insert [count] metal sheet\s into the fabricator.")
 					src.overlays -= "fab-load-metal"
 					updateDialog()
 		else
-			user << "The robot part maker is full. Please remove metal from the robot part maker in order to insert more."
+			to_chat(user, "The robot part maker is full. Please remove metal from the robot part maker in order to insert more.")
 
 /obj/machinery/robotic_fabricator/attack_hand(user as mob)
 	var/dat

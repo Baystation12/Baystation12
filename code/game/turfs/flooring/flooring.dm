@@ -38,6 +38,9 @@ var/list/flooring_types
 	var/flags
 	var/can_paint
 
+/decl/flooring/proc/on_remove()
+	return
+
 /decl/flooring/grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
@@ -90,13 +93,6 @@ var/list/flooring_types
 	can_paint = 1
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
-
-/decl/flooring/tiling/steel
-	name = "floor"
-	icon_base = "steel"
-	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
-	build_type = /obj/item/stack/tile/floor_steel
 
 /decl/flooring/tiling/white
 	name = "floor"
@@ -169,8 +165,11 @@ var/list/flooring_types
 	icon_base = "cult"
 	build_type = null
 	has_damage_range = 6
-	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_WRENCH
 	can_paint = null
+
+/decl/flooring/reinforced/cult/on_remove()
+	cult.remove_cultiness(CULTINESS_PER_TURF)
 
 /decl/flooring/reinforced/shuttle
 	name = "floor"

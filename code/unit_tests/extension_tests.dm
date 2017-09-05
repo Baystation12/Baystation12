@@ -6,7 +6,7 @@
 	name = "EXTENSIONS - Shall Initialize as Expected"
 
 /datum/unit_test/extensions/shall_initalize_as_expected/start_test()
-	var/turf/start = locate(20,20,1)
+	var/turf/start = get_safe_turf()
 	var/obj/test/extensions/expansion_obj = new(start, TRUE)
 
 	var/number_of_failures = 0
@@ -21,8 +21,8 @@
 		number_of_failures++
 
 	var/datum/extension/interactive/multitool/multi = get_extension(expansion_obj, /datum/extension/interactive/multitool)
-	if(multi.type != /datum/extension/interactive/multitool/cryo)
-		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension/interactive/multitool/cryo.")
+	if(multi.type != /datum/extension/interactive/multitool/items/cable)
+		log_unit_test("[exp]/([exp.type]) was not strictly of the type /datum/extension/interactive/multitool/items/cable.")
 		number_of_failures++
 	else
 		if(multi.host_predicates.len != 2)
@@ -45,5 +45,5 @@
 
 /obj/test/extensions/New()
 	set_extension(src, /datum/extension, /datum/extension)
-	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/cryo, list(/proc/is_operable, /proc/is_operable))
+	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/items/cable, list(/proc/is_operable, /proc/is_operable))
 	..()

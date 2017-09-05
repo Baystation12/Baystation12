@@ -7,7 +7,7 @@
 
 	if (src.client)
 		if (src.client.prefs.muted & MUTE_IC)
-			src << "\red You cannot whisper (muted)."
+			to_chat(src, "<span class='warning'>You cannot whisper (muted).</span>")
 			return
 
 
@@ -32,7 +32,7 @@
 /mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
 
 	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
-		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 
 	var/message_range = 1
@@ -78,7 +78,9 @@
 	listening |= src
 
 	//ghosts
-	for (var/mob/M in dead_mob_list_)	//does this include players who joined as observers as well?
+	for (var/mob/M in GLOB.player_list)
+		if (istype(M, /mob/new_player))
+			continue
 		if (!(M.client))
 			continue
 		if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))

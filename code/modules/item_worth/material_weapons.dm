@@ -25,6 +25,12 @@
 /obj/item/weapon/material/sword
 	worth_multiplier = 30
 
+/obj/item/weapon/material/sword/replica
+	worth_multiplier = 15
+
+/obj/item/weapon/material/sword/katana/replica
+	worth_multiplier = 17
+
 /obj/item/weapon/material/twohanded/fireaxe
 	worth_multiplier = 31
 

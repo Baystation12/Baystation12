@@ -1,7 +1,16 @@
 /datum/reagent/blood
-	data = new/list("donor" = null, "viruses" = null, "species" = "Human", "blood_DNA" = null, "blood_type" = null, "blood_colour" = "#A10808", "resistances" = null, "trace_chem" = null, "antibodies" = list())
+	data = new/list(
+		"donor" = null,
+		"species" = SPECIES_HUMAN,
+		"blood_DNA" = null,
+		"blood_type" = null,
+		"blood_colour" = "#A10808",
+		"trace_chem" = null,
+		"virus2" = list(),
+		"antibodies" = list(),
+		"has_oxy" = 1
+	)
 	name = "Blood"
-	id = "blood"
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#C80000"
@@ -15,6 +24,33 @@
 	if(data && data["blood_colour"])
 		color = data["blood_colour"]
 	return
+
+/datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
+	data["donor"] = C
+	if (!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= virus_copylist(C.virus2)
+	data["antibodies"] = C.antibodies
+	data["blood_DNA"] = C.dna.unique_enzymes
+	data["blood_type"] = C.dna.b_type
+	data["species"] = C.species.name
+	data["has_oxy"] = C.species.blood_oxy
+	var/list/temp_chem = list()
+	for(var/datum/reagent/R in C.reagents.reagent_list)
+		temp_chem[R.type] = R.volume
+	data["trace_chem"] = list2params(temp_chem)
+	data["blood_colour"] = C.species.get_blood_colour(C)
+	color = data["blood_colour"]
+
+/datum/reagent/blood/mix_data(var/newdata, var/newamount)
+	if(!islist(newdata))
+		return
+	if(!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= newdata["virus2"]
+	if(!data["antibodies"])
+		data["antibodies"] = list()
+	data["antibodies"] |= newdata["antibodies"]
 
 /datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
 	var/t = data.Copy()
@@ -44,12 +80,14 @@
 		if(vlist.len)
 			for(var/ID in vlist)
 				var/datum/disease2/disease/V = vlist[ID]
-				if(V.spreadtype == "Contact")
+				if(V && V.spreadtype == "Contact")
 					infect_virus2(M, V.getcopy())
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_MACHINE)
-		return
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.isSynthetic())
+			return
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
@@ -69,7 +107,6 @@
 	data = list("antibodies"=list())
 	name = "Antibodies"
 	taste_description = "slime"
-	id = "antibodies"
 	reagent_state = LIQUID
 	color = "#0050F0"
 
@@ -81,7 +118,6 @@
 #define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 /datum/reagent/water
 	name = "Water"
-	id = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064C877"
@@ -89,6 +125,16 @@
 	taste_description = "water"
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
+
+/datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+		return
+	M.adjustToxLoss(2 * removed)
+
+/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+		return
+	M.adjustToxLoss(2 * removed)
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -112,7 +158,9 @@
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
 
 	else if(volume >= 10)
-		T.wet_floor(1)
+		var/turf/simulated/S = T
+		S.wet_floor(1, TRUE)
+
 
 /datum/reagent/water/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
@@ -132,19 +180,21 @@
 			remove_self(amount)
 
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(istype(M, /mob/living/carbon/slime))
-		var/mob/living/carbon/slime/S = M
-		S.adjustToxLoss(5 * removed) // Babies have 150 health, adults have 200; So, 30 units and 40
-		if(!S.client)
-			if(S.Target) // Like cats
-				S.Target = null
-				++S.Discipline
-		if(dose == removed)
-			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
+		return
+	M.adjustToxLoss(10 * removed)	// Babies have 150 health, adults have 200; So, 15 units and 20
+	var/mob/living/carbon/slime/S = M
+	if(!S.client && istype(S))
+		if(S.Target) // Like cats
+			S.Target = null
+		if(S.Victim)
+			S.Feedstop()
+	if(dose == removed)
+		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+		M.confused = max(M.confused, 2)
 
 /datum/reagent/fuel
 	name = "Welding fuel"
-	id = "fuel"
 	description = "Required for welders. Flamable."
 	taste_description = "gross metal"
 	reagent_state = LIQUID

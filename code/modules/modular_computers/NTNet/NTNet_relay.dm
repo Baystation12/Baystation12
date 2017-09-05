@@ -20,8 +20,8 @@
 
 
 // TODO: Implement more logic here. For now it's only a placeholder.
-/obj/machinery/ntnet_relay/proc/is_operational()
-	if(stat & (BROKEN | NOPOWER | EMPED))
+/obj/machinery/ntnet_relay/operable()
+	if(!..(EMPED))
 		return 0
 	if(dos_failure)
 		return 0
@@ -30,13 +30,13 @@
 	return 1
 
 /obj/machinery/ntnet_relay/update_icon()
-	if(is_operational())
+	if(operable())
 		icon_state = "bus"
 	else
 		icon_state = "bus_off"
 
 /obj/machinery/ntnet_relay/process()
-	if(is_operational())
+	if(operable())
 		use_power = 2
 	else
 		use_power = 1
@@ -56,14 +56,14 @@
 		ntnet_global.add_log("Quantum relay switched from overload recovery mode to normal operation mode.")
 	..()
 
-/obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
 	data["enabled"] = enabled
 	data["dos_capacity"] = dos_capacity
 	data["dos_overload"] = dos_overload
 	data["dos_crashed"] = dos_failure
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_relay.tmpl", "NTNet Quantum Relay", 500, 300, state = state)
 		ui.set_initial_data(data)
@@ -81,10 +81,16 @@
 		dos_failure = 0
 		update_icon()
 		ntnet_global.add_log("Quantum relay manually restarted from overload recovery mode to normal operation mode.")
+		return 1
 	else if(href_list["toggle"])
 		enabled = !enabled
 		ntnet_global.add_log("Quantum relay manually [enabled ? "enabled" : "disabled"].")
 		update_icon()
+		return 1
+	else if(href_list["purge"])
+		ntnet_global.banned_nids.Cut()
+		ntnet_global.add_log("Manual override: Network blacklist cleared.")
+		return 1
 
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid
@@ -113,14 +119,14 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		panel_open = !panel_open
-		user << "You [panel_open ? "open" : "close"] the maintenance hatch"
+		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance hatch")
 		return
 	if(istype(W, /obj/item/weapon/crowbar))
 		if(!panel_open)
-			user << "Open the maintenance panel first."
+			to_chat(user, "Open the maintenance panel first.")
 			return
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		user << "You disassemble \the [src]!"
+		to_chat(user, "You disassemble \the [src]!")
 
 		for(var/atom/movable/A in component_parts)
 			A.forceMove(src.loc)

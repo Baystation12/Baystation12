@@ -4,16 +4,16 @@
 
 /datum/controller/process/nanoui/statProcess()
 	..()
-	stat(null, "[nanomanager.processing_uis.len] UIs")
+	stat(null, "[GLOB.nanomanager.processing_uis.len] UIs")
 
 /datum/controller/process/nanoui/doWork()
-	for(last_object in nanomanager.processing_uis)
+	for(last_object in GLOB.nanomanager.processing_uis)
 		var/datum/nanoui/NUI = last_object
-		if(istype(NUI) && isnull(NUI.gcDestroyed))
+		if(istype(NUI) && !QDELETED(NUI))
 			try
 				NUI.process()
 			catch(var/exception/e)
 				catchException(e, NUI)
 		else
 			catchBadType(NUI)
-			nanomanager.processing_uis -= NUI
+			GLOB.nanomanager.processing_uis -= NUI

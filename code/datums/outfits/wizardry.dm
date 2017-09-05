@@ -7,6 +7,7 @@
 	r_hand = /obj/item/weapon/spellbook
 	back = /obj/item/weapon/storage/backpack
 	backpack_contents = list(/obj/item/weapon/storage/box = 1)
+	hierarchy_type = /decl/hierarchy/outfit/wizard
 
 /decl/hierarchy/outfit/wizard/blue
 	name = "Wizard - Blue"

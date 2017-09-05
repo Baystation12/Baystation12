@@ -38,18 +38,18 @@
 	player.current.client.verbs += /client/proc/aooc
 
 	spawn(1 SECOND) //Added a delay so that this should pop up at the bottom and not the top of the text flood the new antag gets.
-		player.current << "<span class='notice'>Once you decide on a goal to pursue, you can optionally display it to \
+		to_chat(player.current, "<span class='notice'>Once you decide on a goal to pursue, you can optionally display it to \
 			everyone at the end of the shift with the <b>Set Ambition</b> verb, located in the IC tab.  You can change this at any time, \
-			and it otherwise has no bearing on your round.</span>"
+			and it otherwise has no bearing on your round.</span>")
 	player.current.verbs += /mob/living/proc/write_ambition
 
 	// Handle only adding a mind and not bothering with gear etc.
 	if(nonstandard_role_type)
 		faction_members |= player
-		player.current << "<span class='danger'><font size=3>You are \a [nonstandard_role_type]!</font></span>"
+		to_chat(player.current, "<span class='danger'><font size=3>You are \a [nonstandard_role_type]!</font></span>")
 		player.special_role = nonstandard_role_type
 		if(nonstandard_role_msg)
-			player.current << "<span class='notice'>[nonstandard_role_msg]</span>"
+			to_chat(player.current, "<span class='notice'>[nonstandard_role_msg]</span>")
 		update_icons_added(player)
 	return 1
 
@@ -59,7 +59,7 @@
 	if(player.current && faction_verb)
 		player.current.verbs -= faction_verb
 	if(player in current_antagonists)
-		player.current << "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>"
+		to_chat(player.current, "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>")
 		current_antagonists -= player
 		faction_members -= player
 		player.special_role = null

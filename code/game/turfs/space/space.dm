@@ -1,4 +1,5 @@
 /turf/space
+	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
@@ -6,13 +7,33 @@
 
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	var/keep_sprite = 0
 //	heat_capacity = 700000 No.
 
 /turf/space/New()
-	if(!istype(src, /turf/space/transit))
-		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+	if((icon_state == "0") && (!keep_sprite))
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
 	..()
+
+/turf/space/Initialize()
+	. = ..()
+	if(!HasBelow(z))
+		return
+	var/turf/below = GetBelow(src)
+	if(istype(below, /turf/space))
+		return
+	var/area/A = below.loc
+	if(A.flags & AREA_EXTERNAL)
+		return
+	if(!below.density && istype(below.loc, /area/space))
+		return
+
+	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
+	if(GLOB.using_map.base_floor_area)
+		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
+		new_area.contents.Add(src)
+	ChangeTurf(GLOB.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything
 /turf/space/levelupdate()
@@ -38,7 +59,7 @@
 			return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
-			user << "<span class='notice'>Constructing support lattice ...</span>"
+			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			ReplaceWithLattice()
 		return
@@ -55,7 +76,7 @@
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
-			user << "<span class='warning'>The plating is going to need some support.</span>"
+			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 	return
 
 
@@ -79,7 +100,7 @@
 	var/list/y_arr
 
 	if(src.x <= 1)
-		if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
+		if(istype(A, /obj/effect/meteor))
 			qdel(A)
 			return
 
@@ -87,14 +108,15 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		next_x = (--cur_x||global_map.len)
-		y_arr = global_map[next_x]
+		next_x = (--cur_x||GLOB.global_map.len)
+		y_arr = GLOB.global_map[next_x]
 		target_z = y_arr[cur_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Target Z = [target_z]"
-		world << "Next X = [next_x]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Target Z = [target_z]")
+		log_debug("Next X = [next_x]")
+
 		//debug
 */
 		if(target_z)
@@ -112,14 +134,15 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		next_x = (++cur_x > global_map.len ? 1 : cur_x)
-		y_arr = global_map[next_x]
+		next_x = (++cur_x > GLOB.global_map.len ? 1 : cur_x)
+		y_arr = GLOB.global_map[next_x]
 		target_z = y_arr[cur_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Target Z = [target_z]"
-		world << "Next X = [next_x]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Target Z = [target_z]")
+		log_debug("Next X = [next_x]")
+
 		//debug
 */
 		if(target_z)
@@ -136,14 +159,15 @@
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		y_arr = global_map[cur_x]
+		y_arr = GLOB.global_map[cur_x]
 		next_y = (--cur_y||y_arr.len)
 		target_z = y_arr[next_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Next Y = [next_y]"
-		world << "Target Z = [target_z]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Next Y = [next_y]")
+		log_debug("Target Z = [target_z]")
+
 		//debug
 */
 		if(target_z)
@@ -154,21 +178,22 @@
 					A.loc.Entered(A)
 
 	else if (src.y >= world.maxy)
-		if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
+		if(istype(A, /obj/effect/meteor))
 			qdel(A)
 			return
 		var/list/cur_pos = src.get_global_map_pos()
 		if(!cur_pos) return
 		cur_x = cur_pos["x"]
 		cur_y = cur_pos["y"]
-		y_arr = global_map[cur_x]
+		y_arr = GLOB.global_map[cur_x]
 		next_y = (++cur_y > y_arr.len ? 1 : cur_y)
 		target_z = y_arr[next_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Next Y = [next_y]"
-		world << "Target Z = [target_z]"
+		log_debug("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		log_debug("Next Y = [next_y]")
+		log_debug("Target Z = [target_z]")
+
 		//debug
 */
 		if(target_z)
@@ -181,3 +206,9 @@
 
 /turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	return ..(N, tell_universe, 1)
+
+//Bluespace turfs for shuttles and possible future transit use
+/turf/space/bluespace
+	name = "bluespace"
+	icon_state = "bluespace"
+	keep_sprite = 1

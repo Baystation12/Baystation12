@@ -2,10 +2,10 @@
 	name = "Entangle"
 	desc = "This spell creates vines that immediately entangle a nearby victim."
 	feedback = "ET"
-	school = "conjuration"
+	school = "transmutation"
 	charge_max = 600
 	spell_flags = NEEDSCLOTHES | SELECTABLE | IGNOREPREV
-	invocation = "BU EKEL 'INAS"
+	invocation = "Bu-Ekel'Inas!"
 	invocation_type = SpI_SHOUT
 	range = 3
 	max_casts = 1
@@ -16,6 +16,7 @@
 	compatible_targets = list(/mob)
 
 	hud_state = "wiz_entangle"
+	show_message = " points towards the ground, causing plants to erupt"
 	var/datum/seed/seed
 
 /spell/hand/charges/entangle/New()
@@ -28,7 +29,7 @@
 	seed.name = "heirlooms"
 	seed.seed_name = "heirloom"
 	seed.display_name = "vines"
-	seed.chems = list("nutriment" = list(1,20))
+	seed.chems = list(/datum/reagent/nutriment = list(1,20))
 
 /spell/hand/charges/entangle/cast_hand(var/mob/M,var/mob/user)
 	var/turf/T = get_turf(M)
@@ -36,7 +37,7 @@
 	P.can_buckle = 1
 
 	P.buckle_mob(M)
-	M.set_dir(pick(cardinal))
+	M.set_dir(pick(GLOB.cardinal))
 	M.visible_message("<span class='danger'>[P] appear from the floor, spinning around \the [M] tightly!</span>")
 	return ..()
 

@@ -36,15 +36,15 @@
 
 		if(istype(target, /obj/item/weapon/reagent_containers/food/snacks)) // These are not opencontainers but we can transfer to them
 			if(!reagents || !reagents.total_volume)
-				user << "<span class='notice'>There is no condiment left in \the [src].</span>"
+				to_chat(user, "<span class='notice'>There is no condiment left in \the [src].</span>")
 				return
 
 			if(!target.reagents.get_free_space())
-				user << "<span class='notice'>You can't add more condiment to \the [target].</span>"
+				to_chat(user, "<span class='notice'>You can't add more condiment to \the [target].</span>")
 				return
 
 			var/trans = reagents.trans_to_obj(target, amount_per_transfer_from_this)
-			user << "<span class='notice'>You add [trans] units of the condiment to \the [target].</span>"
+			to_chat(user, "<span class='notice'>You add [trans] units of the condiment to \the [target].</span>")
 		else
 			..()
 
@@ -52,54 +52,57 @@
 		playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
 
 	self_feed_message(var/mob/user)
-		user << "<span class='notice'>You swallow some of contents of \the [src].</span>"
+		to_chat(user, "<span class='notice'>You swallow some of contents of \the [src].</span>")
 
 	on_reagent_change()
-		if(icon_state == "saltshakersmall" || icon_state == "peppermillsmall" || icon_state == "flour")
-			return
 		if(reagents.reagent_list.len > 0)
-			switch(reagents.get_master_reagent_id())
-				if("ketchup")
+			switch(reagents.get_master_reagent_type())
+				if(/datum/reagent/nutriment/ketchup)
 					name = "Ketchup"
 					desc = "You feel more American already."
 					icon_state = "ketchup"
 					center_of_mass = "x=16;y=6"
-				if("capsaicin")
+				if(/datum/reagent/nutriment/barbecue)
+					name = "Barbecue Sauce"
+					desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
+					icon_state = "barbecue"
+					center_of_mass = "x=16;y=6"
+				if(/datum/reagent/capsaicin)
 					name = "Hotsauce"
 					desc = "You can almost TASTE the stomach ulcers now!"
 					icon_state = "hotsauce"
 					center_of_mass = "x=16;y=6"
-				if("enzyme")
+				if(/datum/reagent/enzyme)
 					name = "Universal Enzyme"
 					desc = "Used in cooking various dishes."
 					icon_state = "enzyme"
 					center_of_mass = "x=16;y=6"
-				if("soysauce")
+				if(/datum/reagent/nutriment/soysauce)
 					name = "Soy Sauce"
 					desc = "A salty soy-based flavoring."
 					icon_state = "soysauce"
 					center_of_mass = "x=16;y=6"
-				if("frostoil")
+				if(/datum/reagent/frostoil)
 					name = "Coldsauce"
 					desc = "Leaves the tongue numb in its passage."
 					icon_state = "coldsauce"
 					center_of_mass = "x=16;y=6"
-				if("sodiumchloride")
+				if(/datum/reagent/sodiumchloride)
 					name = "Salt Shaker"
 					desc = "Salt. From space oceans, presumably."
 					icon_state = "saltshaker"
 					center_of_mass = "x=16;y=10"
-				if("blackpepper")
+				if(/datum/reagent/blackpepper)
 					name = "Pepper Mill"
 					desc = "Often used to flavor food or make people sneeze."
 					icon_state = "peppermillsmall"
 					center_of_mass = "x=16;y=10"
-				if("cornoil")
+				if(/datum/reagent/nutriment/cornoil)
 					name = "Corn Oil"
 					desc = "A delicious oil used in cooking. Made from corn."
 					icon_state = "oliveoil"
 					center_of_mass = "x=16;y=6"
-				if("sugar")
+				if(/datum/reagent/sugar)
 					name = "Sugar"
 					desc = "Tastey space sugar!"
 					center_of_mass = "x=16;y=6"
@@ -122,36 +125,56 @@
 	name = "Universal Enzyme"
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
-	New()
-		..()
-		reagents.add_reagent("enzyme", 50)
+/obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/enzyme, 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/sugar
-	New()
-		..()
-		reagents.add_reagent("sugar", 50)
+/obj/item/weapon/reagent_containers/food/condiment/barbecue
+	name = "Barbecue Sauce"
+	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
+	icon_state = "barbecue"
+/obj/item/weapon/reagent_containers/food/condiment/barbecue/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/saltshaker		//Seperate from above since it's a small shaker rather then
-	name = "Salt Shaker"											//	a large one.
+/obj/item/weapon/reagent_containers/food/condiment/sugar/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/sugar, 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/small
+	possible_transfer_amounts = "1;20"
+	amount_per_transfer_from_this = 1
+	volume = 20
+
+/obj/item/weapon/reagent_containers/food/condiment/small/on_reagent_change()
+	return
+
+/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker
+	name = "salt shaker"
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
-	possible_transfer_amounts = "1;20" //for clown turning the lid off
-	amount_per_transfer_from_this = 1
-	volume = 20
+	center_of_mass = "x=16;y=9"
 	New()
 		..()
-		reagents.add_reagent("sodiumchloride", 20)
+		reagents.add_reagent(/datum/reagent/sodiumchloride, 20)
 
-/obj/item/weapon/reagent_containers/food/condiment/peppermill
-	name = "Pepper Mill"
+/obj/item/weapon/reagent_containers/food/condiment/small/peppermill
+	name = "pepper mill"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
-	possible_transfer_amounts = "1;20" //for clown turning the lid off
-	amount_per_transfer_from_this = 1
-	volume = 20
+	center_of_mass = "x=16;y=8"
 	New()
 		..()
-		reagents.add_reagent("blackpepper", 20)
+		reagents.add_reagent(/datum/reagent/blackpepper, 20)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/sugar
+	name = "sugar"
+	desc = "Sweetness in a bottle"
+	icon_state = "sugarsmall"
+	center_of_mass = "x=17;y=9"
+/obj/item/weapon/reagent_containers/food/condiment/small/sugar/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/sugar, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/flour
 	name = "flour sack"
@@ -159,7 +182,8 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "flour"
 	item_state = "flour"
+	on_reagent_change()	return
 	randpixel = 10
 	New()
 		..()
-		reagents.add_reagent("flour", 30)
+		reagents.add_reagent(/datum/reagent/nutriment/flour, 30)

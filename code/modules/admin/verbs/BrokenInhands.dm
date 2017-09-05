@@ -31,6 +31,7 @@
 		var/F = file("broken_icons.txt")
 		fdel(F)
 		F << text
-		world << "Completeled successfully and written to [F]"
+		log_debug("Completeled successfully and written to [F]")
+
 
 

@@ -19,8 +19,13 @@ datum/track/New(var/title_name, var/audio)
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 100
+	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0
+	var/volume = 20
+
+	var/sound_id
+	var/datum/sound_token/sound_token
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
@@ -38,18 +43,17 @@ datum/track/New(var/title_name, var/audio)
 /obj/machinery/media/jukebox/New()
 	..()
 	update_icon()
+	sound_id = "[type]_[sequential_id(type)]"
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
 	. = ..()
 
+/obj/machinery/media/jukebox/powered()
+	return anchored && ..()
+
 /obj/machinery/media/jukebox/power_change()
 	. = ..()
-	if(!anchored)
-		stat |= NOPOWER
-	else
-		stat &= ~NOPOWER
-
 	if(stat & (NOPOWER|BROKEN) && playing)
 		StopPlaying()
 
@@ -70,11 +74,11 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(!anchored)
-		usr << "<span class='warning'>You must secure \the [src] first.</span>"
+		to_chat(usr, "<span class='warning'>You must secure \the [src] first.</span>")
 		return
 
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
+		to_chat(usr, "\The [src] doesn't appear to function.")
 		return
 
 	tg_ui_interact(user)
@@ -98,7 +102,8 @@ datum/track/New(var/title_name, var/audio)
 	var/list/data = list(
 		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
-		"tracks" = juke_tracks
+		"tracks" = juke_tracks,
+		"volume" = volume
 	)
 
 	return data
@@ -121,9 +126,12 @@ datum/track/New(var/title_name, var/audio)
 			if(emagged)
 				emag_play()
 			else if(!current_track)
-				usr << "No track selected."
+				to_chat(usr, "No track selected.")
 			else
 				StartPlaying()
+			. = TRUE
+		if("volume")
+			AdjustVolume(text2num(params["level"]))
 			. = TRUE
 
 /obj/machinery/media/jukebox/proc/emag_play()
@@ -141,7 +149,7 @@ datum/track/New(var/title_name, var/audio)
 			M.Stun(10)
 			M.Paralyse(4)
 		else
-			M.make_jittery(500)
+			M.make_jittery(400)
 	spawn(15)
 		explode()
 
@@ -168,13 +176,8 @@ datum/track/New(var/title_name, var/audio)
 	src.add_fingerprint(user)
 
 	if(istype(W, /obj/item/weapon/wrench))
-		if(playing)
-			StopPlaying()
-		user.visible_message("<span class='warning'>[user] has [anchored ? "un" : ""]secured \the [src].</span>", "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
-		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		wrench_floor_bolts(user, 0)
 		power_change()
-		update_icon()
 		return
 	return ..()
 
@@ -187,14 +190,10 @@ datum/track/New(var/title_name, var/audio)
 		return 1
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
-	var/area/main_area = get_area(src)
-	// Always kill the current sound
-	for(var/mob/living/M in mobs_in_area(main_area))
-		M << sound(null, channel = 1)
-		main_area.forced_ambience = null
 	playing = 0
 	update_use_power(1)
 	update_icon()
+	QDEL_NULL(sound_token)
 
 
 /obj/machinery/media/jukebox/proc/StartPlaying()
@@ -202,12 +201,14 @@ datum/track/New(var/title_name, var/audio)
 	if(!current_track)
 		return
 
-	var/area/main_area = get_area(src)
-	main_area.forced_ambience = list(current_track.sound)
-	for(var/mob/living/M in mobs_in_area(main_area))
-		if(M.mind)
-			main_area.play_ambience(M)
+	// Jukeboxes cheat massively and actually don't share id. This is only done because it's music rather than ambient noise.
+	sound_token = sound_player.PlayLoopingSound(src, sound_id, current_track.sound, volume = volume, range = 7, falloff = 3, prefer_mute = TRUE)
 
 	playing = 1
 	update_use_power(2)
 	update_icon()
+
+/obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)
+	volume = Clamp(new_volume, 0, 50)
+	if(sound_token)
+		sound_token.SetVolume(volume)

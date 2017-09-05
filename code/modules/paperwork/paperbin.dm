@@ -5,10 +5,10 @@
 	item_state = "sheet-metal"
 	randpixel = 0
 	throwforce = 1
-	w_class = 3
+	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 3
 	throw_range = 7
-	layer = OBJ_LAYER - 0.1
+	layer = BELOW_OBJ_LAYER
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
 
@@ -18,15 +18,15 @@
 		if(!istype(usr, /mob/living/carbon/slime) && !istype(usr, /mob/living/simple_animal))
 			if( !usr.get_active_hand() )		//if active hand is empty
 				var/mob/living/carbon/human/H = user
-				var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+				var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 
 				if (H.hand)
-					temp = H.organs_by_name["l_hand"]
+					temp = H.organs_by_name[BP_L_HAND]
 				if(temp && !temp.is_usable())
-					user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+					to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 					return
 
-				user << "<span class='notice'>You pick up the [src].</span>"
+				to_chat(user, "<span class='notice'>You pick up the [src].</span>")
 				user.put_in_hands(src)
 
 	return
@@ -34,11 +34,11 @@
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (H.hand)
-			temp = H.organs_by_name["l_hand"]
+			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 			return
 	var/response = ""
 	if(!papers.len > 0)
@@ -68,32 +68,48 @@
 
 		P.loc = user.loc
 		user.put_in_hands(P)
-		user << "<span class='notice'>You take [P] out of the [src].</span>"
+		to_chat(user, "<span class='notice'>You take [P] out of the [src].</span>")
 	else
-		user << "<span class='notice'>[src] is empty!</span>"
+		to_chat(user, "<span class='notice'>[src] is empty!</span>")
 
 	add_fingerprint(user)
 	return
 
 
-/obj/item/weapon/paper_bin/attackby(obj/item/weapon/paper/i as obj, mob/user as mob)
-	if(!istype(i))
-		return
-
-	user.drop_item()
-	i.loc = src
-	user << "<span class='notice'>You put [i] in [src].</span>"
-	papers.Add(i)
-	update_icon()
-	amount++
+/obj/item/weapon/paper_bin/attackby(obj/item/weapon/i as obj, mob/user as mob)
+	if(istype(i, /obj/item/weapon/paper))
+		user.drop_item()
+		i.forceMove(src)
+		to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
+		papers.Add(i)
+		update_icon()
+		amount++
+	else if(istype(i, /obj/item/weapon/paper_bundle))
+		to_chat(user, "<span class='notice'>You loosen \the [i] and add its papers into \the [src].</span>")
+		var/was_there_a_photo = 0
+		for(var/obj/item/weapon/bundleitem in i) //loop through items in bundle
+			if(istype(bundleitem, /obj/item/weapon/paper)) //if item is paper, add into the bin
+				papers.Add(bundleitem)
+				update_icon()
+				amount++
+			else if(istype(bundleitem, /obj/item/weapon/photo)) //if item is photo, drop it on the ground
+				was_there_a_photo = 1
+				bundleitem.dropInto(user.loc)
+				bundleitem.reset_plane_and_layer()
+		user.drop_from_inventory(i)
+		qdel(i)
+		if(was_there_a_photo)
+			to_chat(user, "<span class='notice'>The photo cannot go into \the [src].</span>")
+	return
 
 
 /obj/item/weapon/paper_bin/examine(mob/user)
+	. = ..()
 	if(get_dist(src, user) <= 1)
 		if(amount)
-			user << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+			to_chat(user, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
 		else
-			user << "<span class='notice'>There are no papers in the bin.</span>"
+			to_chat(user, "<span class='notice'>There are no papers in the bin.</span>")
 	return
 
 

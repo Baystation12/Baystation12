@@ -25,6 +25,13 @@
 /mob/living/blocks_airlock()
 	return 1
 
+/obj/structure/closet/body_bag/blocks_airlock()
+	if (locate(/mob) in src)
+		return 1
+	else
+		return 0				//Prevents Airlocks from closing on Bodybags and Cryobags with people inside
+
+
 //*** Airlock Crushing
 
 #define AIRLOCK_CRUSH_INCREMENT 10 // Damage caused by airlock crushing a mob is split into multiple smaller hits. Makes door crushing behave more like a "slow" crushing effect rather than high-speed impacts.
@@ -64,10 +71,12 @@
 	SetStunned(round(crush_damage / 8, 1))
 	SetWeakened(round(crush_damage / 8, 1))
 
-	var/turf/T = get_turf(src)
-	
+	var/turf/T = loc
+	if(!istype(T))
+		return
+
 	var/list/valid_turfs = list()
-	for(var/dir_to_test in cardinal)
+	for(var/dir_to_test in GLOB.cardinal)
 		var/turf/new_turf = get_step(T, dir_to_test)
 		if(!new_turf.contains_dense_objects())
 			valid_turfs |= new_turf
@@ -81,7 +90,7 @@
 
 /mob/living/carbon/airlock_crush(var/crush_damage)
 	. = ..()
-	if (!(species && (species.flags & NO_PAIN)))
+	if (can_feel_pain())
 		emote("scream")
 
 /mob/living/silicon/robot/airlock_crush(var/crush_damage)

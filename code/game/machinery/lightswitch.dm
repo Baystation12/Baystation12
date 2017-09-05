@@ -15,7 +15,8 @@
 	var/other_area = null
 	var/image/overlay
 
-/obj/machinery/light_switch/initialize()
+/obj/machinery/light_switch/Initialize()
+	. = ..()
 	if(other_area)
 		src.connected_area = locate(other_area)
 	else
@@ -28,7 +29,9 @@
 
 /obj/machinery/light_switch/update_icon()
 	if(!overlay)
-		overlay = image(icon, "light1-overlay", LIGHTING_LAYER+0.1)
+		overlay = image(icon, "light1-overlay")
+		overlay.plane = LIGHTING_PLANE
+		overlay.layer = ABOVE_LIGHTING_LAYER
 
 	overlays.Cut()
 	if(stat & (NOPOWER|BROKEN))
@@ -42,7 +45,7 @@
 
 /obj/machinery/light_switch/examine(mob/user)
 	if(..(user, 1))
-		user << "A light switch. It is [on? "on" : "off"]."
+		to_chat(user, "A light switch. It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/proc/set_state(var/newstate)
 	if(on != newstate)
@@ -57,6 +60,7 @@
 		return 1
 
 /obj/machinery/light_switch/attack_hand(mob/user)
+	playsound(src, "switch", 30)
 	set_state(!on)
 
 /obj/machinery/light_switch/powered()

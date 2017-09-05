@@ -259,7 +259,7 @@
 /var/const/access_network = 42
 /datum/access/network
 	id = access_network
-	desc = "Station Network"
+	desc = "Primary Network"
 	region = ACCESS_REGION_RESEARCH
 
 // /var/const/free_access_id = 43

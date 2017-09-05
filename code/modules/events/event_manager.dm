@@ -1,3 +1,5 @@
+GLOBAL_DATUM_INIT(event_manager, /datum/event_manager, new)
+
 /datum/event_manager
 	var/window_x = 700
 	var/window_y = 600
@@ -54,7 +56,7 @@
 	if(!report_at_round_end)
 		return
 
-	world << "<br><br><br><font size=3><b>Random Events This Round:</b></font>"
+	to_world("<br><br><br><font size=3><b>Random Events This Round:</b></font>")
 	for(var/datum/event/E in active_events|finished_events)
 		var/datum/event_meta/EM = E.event_meta
 		if(EM.name == "Nothing")
@@ -68,7 +70,7 @@
 			else
 				message += "and ran to completion."
 
-		world << message
+		to_world(message)
 
 /datum/event_manager/proc/GetInteractWindow()
 	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
@@ -272,11 +274,12 @@
 		var/datum/event_container/EC = locate(href_list["clear"])
 		if(EC.next_event)
 			log_and_message_admins("has dequeued the [severity_to_string[EC.severity]] event '[EC.next_event.name]'.")
+			EC.available_events += EC.next_event
 			EC.next_event = null
 
 	Interact(usr)
 
-/client/proc/forceEvent(var/type in event_manager.allEvents)
+/client/proc/forceEvent(var/type in GLOB.event_manager.allEvents)
 	set name = "Trigger Event (Debug Only)"
 	set category = "Debug"
 
@@ -290,7 +293,7 @@
 /client/proc/event_manager_panel()
 	set name = "Event Manager Panel"
 	set category = "Admin"
-	if(event_manager)
-		event_manager.Interact(usr)
+	if(GLOB.event_manager)
+		GLOB.event_manager.Interact(usr)
 	feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return

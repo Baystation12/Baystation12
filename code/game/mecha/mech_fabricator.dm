@@ -40,9 +40,10 @@
 	files = new /datum/research(src) //Setup the research data holder.
 	return
 
-/obj/machinery/mecha_part_fabricator/initialize()
+/obj/machinery/mecha_part_fabricator/Initialize()
 	manufacturer = basic_robolimb.company
 	update_categories()
+	. = ..()
 
 /obj/machinery/mecha_part_fabricator/process()
 	..()
@@ -89,7 +90,7 @@
 		return
 	ui_interact(user)
 
-/obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1) 
+/obj/machinery/mecha_part_fabricator/ui_interact(var/mob/user, var/ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 
 	var/datum/design/current = queue.len ? queue[1] : null
@@ -103,6 +104,8 @@
 		var/list/T = list()
 		for(var/A in all_robolimbs)
 			var/datum/robolimb/R = all_robolimbs[A]
+			if(R.unavailable_at_fab || R.applies_to_part.len)
+				continue
 			T += list(list("id" = A, "company" = R.company))
 		data["manufacturers"] = T
 		data["manufacturer"] = manufacturer
@@ -112,7 +115,7 @@
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Exosuit Fabricator UI", 800, 600)
 		ui.set_initial_data(data)
@@ -149,7 +152,7 @@
 
 /obj/machinery/mecha_part_fabricator/attackby(var/obj/item/I, var/mob/user)
 	if(busy)
-		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
 	if(default_deconstruction_screwdriver(user, I))
 		return
@@ -168,7 +171,7 @@
 	var/amnt = stack.perunit
 
 	if(!(material in materials))
-		user << "<span class=warning>\The [src] does not accept [stack_plural]!</span>"
+		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
 		return
 
 	if(materials[material] + amnt <= res_max_amount)
@@ -181,10 +184,12 @@
 				materials[material] += amnt
 				stack.use(1)
 				count++
-			user << "You insert [count] [count==1 ? stack_singular : stack_plural] into the fabricator." // 0 steel sheets, 1 steel sheet, 2 steel sheets, etc
+			to_chat(user, "You insert [count] [count==1 ? stack_singular : stack_plural] into the fabricator.")// 0 steel sheets, 1 steel sheet, 2 steel sheets, etc
+
 			update_busy()
 	else
-		user << "The fabricator cannot hold more [stack_plural]." // use the plural form even if the given sheet is singular
+		to_chat(user, "The fabricator cannot hold more [stack_plural].")// use the plural form even if the given sheet is singular
+
 
 /obj/machinery/mecha_part_fabricator/emag_act(var/remaining_charges, var/mob/user)
 	switch(emagged)
@@ -196,7 +201,7 @@
 			sleep(15)
 			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
 			sleep(30)
-			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [company_name] system operator for future assistance.\"")
+			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [GLOB.using_map.company_name] system operator for future assistance.\"")
 			req_access = null
 			emagged = 1
 			return 1
@@ -227,7 +232,7 @@
 
 /obj/machinery/mecha_part_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	return 1
 

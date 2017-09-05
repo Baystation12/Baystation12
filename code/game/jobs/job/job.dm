@@ -6,10 +6,11 @@
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/department_flag = 0
-	var/faction = "None"	              // Players will be allowed to spawn in as jobs that are set to "Station"
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
+	var/availablity_chance = 100          // Percentage chance job is available each round
+
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#ffffff"       // Selection screen color
 	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.
@@ -21,21 +22,39 @@
 	var/ideal_character_age = 30
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
-	var/account_allowed = 1				  // Does this job type come with a station account?
-	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
+	var/account_allowed = 1               // Does this job type come with a station account?
+	var/economic_modifier = 2             // With how much does this job modify the initial account amount?
 
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
-/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
+	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
+	var/list/allowed_ranks                // Ditto
+
+	var/announced = TRUE                  //If their arrival is announced on radio
+	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+
+/datum/job/New()
+	..()
+	if(prob(100-availablity_chance))	//Close positions, blah blah.
+		total_positions = 0
+		spawn_positions = 0
+
+/datum/job/dd_SortValue()
+    return title
+
+/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
 
-/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
-	. = . ? . : outfit_type
+	if(allowed_branches && branch)
+		. = allowed_branches[branch.type] || .
+	. = . || outfit_type
 	. = outfit_by_type(.)
 
 /datum/job/proc/setup_account(var/mob/living/carbon/human/H)
@@ -63,7 +82,7 @@
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
-		remembered_info += "<b>Your account funds are:</b> þ[M.money]<br>"
+		remembered_info += "<b>Your account funds are:</b> T[M.money]<br>"
 
 		if(M.transaction_log.len)
 			var/datum/transaction/T = M.transaction_log[1]
@@ -72,17 +91,17 @@
 
 		H.mind.initial_account = M
 
-	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
+	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
-// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip_base(H, title, alt_title)
 
 /datum/job/proc/get_access()
-	if(!config || config.jobs_have_minimal_access)
+	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
 		return src.minimal_access.Copy()
 	else
 		return src.access.Copy()
@@ -92,7 +111,7 @@
 	return (available_in_days(C) == 0) //Available in 0 days = available right now = player is old enough to play.
 
 /datum/job/proc/available_in_days(client/C)
-	if(C && config.use_age_restriction_for_jobs && isnum(C.player_age) && isnum(minimal_player_age))
+	if(C && config.use_age_restriction_for_jobs && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
 		return max(0, minimal_player_age - C.player_age)
 	return 0
 
@@ -114,3 +133,90 @@
 
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
+
+/datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	if(!is_branch_allowed(prefs.char_branch))
+		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
+		return TRUE
+
+	if(!is_rank_allowed(prefs.char_branch, prefs.char_rank))
+		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.char_branch] are: [get_ranks(prefs.char_branch)].</span>")
+		return TRUE
+
+	var/datum/species/S = all_species[prefs.species]
+	if(!is_species_allowed(S))
+		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		return TRUE
+
+	return FALSE
+
+/datum/job/proc/is_species_allowed(var/datum/species/S)
+	return !GLOB.using_map.is_species_job_restricted(S, src)
+
+/**
+ *  Check if members of the given branch are allowed in the job
+ *
+ *  This proc should only be used after the global branch list has been initialized.
+ *
+ *  branch_name - String key for the branch to check
+ */
+/datum/job/proc/is_branch_allowed(var/branch_name)
+	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+		return 1
+	if(branch_name == "None")
+		return 0
+
+	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
+
+	if(!branch)
+		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
+		return 0
+
+	if(is_type_in_list(branch, allowed_branches))
+		return 1
+	else
+		return 0
+
+/**
+ *  Check if people with given rank are allowed in this job
+ *
+ *  This proc should only be used after the global branch list has been initialized.
+ *
+ *  branch_name - String key for the branch to which the rank belongs
+ *  rank_name - String key for the rank itself
+ */
+/datum/job/proc/is_rank_allowed(var/branch_name, var/rank_name)
+	if(!allowed_ranks || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_RANK))
+		return 1
+	if(branch_name == "None" || rank_name == "None")
+		return 0
+
+	var/datum/mil_rank/rank = mil_branches.get_rank(branch_name, rank_name)
+
+	if(!rank)
+		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
+		return 0
+
+	if(is_type_in_list(rank, allowed_ranks))
+		return 1
+	else
+		return 0
+
+//Returns human-readable list of branches this job allows.
+/datum/job/proc/get_branches()
+	var/list/res = list()
+	for(var/T in allowed_branches)
+		var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+		res += B.name
+	return english_list(res)
+
+//Same as above but ranks
+/datum/job/proc/get_ranks(branch)
+	var/list/res = list()
+	var/datum/mil_branch/B = mil_branches.get_branch(branch)
+	for(var/T in allowed_ranks)
+		var/datum/mil_rank/R = T
+		if(B && !(initial(R.name) in B.ranks))
+			continue
+		res += initial(R.name)
+	return english_list(res)

@@ -3,6 +3,7 @@
 	desc = "Used to unlock things."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "keys"
+	w_class = 1
 	var/key_data = ""
 
 /obj/item/weapon/key/New(var/newloc,var/data)
@@ -21,9 +22,9 @@
 /obj/item/weapon/key/soap/get_data(var/mob/user)
 	uses--
 	if(uses == 1)
-		user << "<span class='warning'>\The [src] is going to break soon!</span>"
+		to_chat(user, "<span class='warning'>\The [src] is going to break soon!</span>")
 	else if(uses <= 0)
 		user.drop_item(src)
-		user << "<span class='warning'>\The [src] crumbles in your hands.</span>"
+		to_chat(user, "<span class='warning'>\The [src] crumbles in your hands.</span>")
 		qdel(src)
 	return ..()

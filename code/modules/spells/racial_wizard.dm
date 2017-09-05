@@ -5,26 +5,31 @@
 	desc = "Legends say that this rock will unlock the true potential of anyone who touches it."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "magic rock"
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	throw_speed = 1
 	throw_range = 3
 	force = 15
-	var/list/potentials = list("Resomi" = /spell/aoe_turf/conjure/summon/resomi, "Human" = /obj/item/weapon/storage/bag/cash/infinite, "Vox" = /spell/targeted/shapeshift/true_form,
-		"Tajara" = /spell/messa_shroud, "Unathi" = /spell/moghes_blessing, "Diona" = /spell/aoe_turf/conjure/grove/gestalt, "Skrell" = /obj/item/weapon/contract/apprentice/skrell,
-		"Machine" = /spell/camera_connection)
+	var/list/potentials = list(
+		SPECIES_HUMAN = /obj/item/weapon/storage/bag/cash/infinite,
+		SPECIES_VOX = /spell/targeted/shapeshift/true_form,
+		SPECIES_TAJARA = /spell/messa_shroud,
+		SPECIES_UNATHI = /spell/moghes_blessing,
+		SPECIES_DIONA = /spell/aoe_turf/conjure/grove/gestalt,
+		SPECIES_SKRELL = /obj/item/weapon/contract/apprentice/skrell,
+		SPECIES_IPC = /spell/camera_connection)
 
 /obj/item/weapon/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
-		user << "\The [src] can do nothing for such a simple being."
+		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
 	var/mob/living/carbon/human/H = user
-	var/reward = potentials[H.species.get_bodytype()] //we get body type because that lets us ignore subspecies.
+	var/reward = potentials[H.species.get_bodytype(H)] //we get body type because that lets us ignore subspecies.
 	if(!reward)
-		user << "\The [src] does not know what to make of you."
+		to_chat(user, "\The [src] does not know what to make of you.")
 		return
-	for(var/spell/S in user.spell_list)
+	for(var/spell/S in user.mind.learned_spells)
 		if(istype(S,reward))
-			user << "\The [src] can do no more for you."
+			to_chat(user, "\The [src] can do no more for you.")
 			return
 	user.drop_from_inventory(src)
 	var/a = new reward()
@@ -32,47 +37,11 @@
 		H.add_spell(a)
 	else if(ispath(reward,/obj))
 		H.put_in_hands(a)
-	user << "\The [src] crumbles in your hands."
+	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
-
-//RESOMI
-/spell/aoe_turf/conjure/summon/resomi
-	name = "Summon Nano Machines"
-	desc = "This spell summons nano machines from the wizard's body to help them."
-
-	school = "racial"
-	spell_flags = Z2NOCAST
-	invocation_type = SpI_EMOTE
-	invocation = "spasms a moment as nanomachines come out of a port on their back!"
-
-	level_max = list(Sp_TOTAL = 0, Sp_SPEED = 0, Sp_POWER = 0)
-
-	name_summon = 1
-
-	charge_type = Sp_HOLDVAR
-	holder_var_type = "shock_stage"
-	holder_var_amount = 15
-
-	hud_state = "wiz_resomi"
-
-	summon_amt = 1
-	summon_type = list(/mob/living/simple_animal/hostile/commanded/nanomachine)
-
-/spell/aoe_turf/conjure/summon/resomi/before_cast()
-	..()
-	newVars["master"] = holder
-
-/spell/aoe_turf/conjure/summon/resomi/take_charge(mob/user = user, var/skipcharge)
-	. = ..()
-	var/mob/living/carbon/human/H = user
-	if(H && H.shock_stage >= 30)
-		H.visible_message("<b>[user]</b> drops to the floor, thrashing wildly while foam comes from their mouth.")
-		H.Paralyse(20)
-		H.adjustBrainLoss(10)
 
 /obj/item/weapon/storage/bag/cash/infinite
 	startswith = list(/obj/item/weapon/spacecash/bundle/c1000 = 1)
-
 
 //HUMAN
 /obj/item/weapon/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -111,7 +80,6 @@
 		return
 
 	var/obj/O = new /obj(T)
-	playsound(T,cast_sound,50,1)
 	O.set_light(range, -10, "#FFFFFF")
 
 	spawn(duration)
@@ -221,14 +189,14 @@
 
 /obj/item/weapon/contract/apprentice/skrell/attack_self(mob/user as mob)
 	if(!linked)
-		user << "<span class='warning'>This contract requires a link to a spellbook.</span>"
+		to_chat(user, "<span class='warning'>This contract requires a link to a spellbook.</span>")
 		return
 	..()
 
 /obj/item/weapon/contract/apprentice/skrell/afterattack(atom/A, mob/user as mob, proximity)
 	if(!linked && istype(A,/obj/item/weapon/spellbook))
 		linked = A
-		user << "<span class='notice'>You've linked \the [A] to \the [src]</span>"
+		to_chat(user, "<span class='notice'>You've linked \the [A] to \the [src]</span>")
 		return
 	..()
 
@@ -256,11 +224,12 @@
 
 	spell_flags = Z2NOCAST
 	hud_state = "wiz_IPC"
-	var/mob/observer/eye/wizard_eye/vision
+	var/mob/observer/eye/vision
+	var/eye_type = /mob/observer/eye/wizard_eye
 
 /spell/camera_connection/New()
 	..()
-	vision = new(src)
+	vision = new eye_type(src)
 
 /spell/camera_connection/Destroy()
 	qdel(vision)
@@ -277,7 +246,15 @@
 	var/mob/living/L = targets[1]
 
 	vision.possess(L)
+	GLOB.destroyed_event.register(L, src, /spell/camera_connection/proc/release)
+	GLOB.logged_out_event.register(L, src, /spell/camera_connection/proc/release)
 	L.verbs += /mob/living/proc/release_eye
+
+/spell/camera_connection/proc/release(var/mob/living/L)
+	vision.release(L)
+	L.verbs -= /mob/living/proc/release_eye
+	GLOB.destroyed_event.unregister(L, src)
+	GLOB.logged_out_event.unregister(L, src)
 
 /mob/observer/eye/wizard_eye
 	name_sufix = "Wizard Eye"
@@ -296,3 +273,10 @@
 	if(!eyeobj)
 		return
 	eyeobj.release(src)
+
+/mob/observer/eye/wizard_eye/Destroy()
+	if(istype(eyeobj.owner, /mob/living))
+		var/mob/living/L = eyeobj.owner
+		L.release_eye()
+	qdel(eyeobj)
+	return ..()

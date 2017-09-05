@@ -74,14 +74,14 @@
 // Turns a direction into text
 /proc/dir2text(direction)
 	switch (direction)
-		if (1.0)  return "north"
-		if (2.0)  return "south"
-		if (4.0)  return "east"
-		if (8.0)  return "west"
-		if (5.0)  return "northeast"
-		if (6.0)  return "southeast"
-		if (9.0)  return "northwest"
-		if (10.0) return "southwest"
+		if (NORTH)     return "north"
+		if (SOUTH)     return "south"
+		if (EAST)      return "east"
+		if (WEST)      return "west"
+		if (NORTHEAST) return "northeast"
+		if (SOUTHEAST) return "southeast"
+		if (NORTHWEST) return "northwest"
+		if (SOUTHWEST) return "southwest"
 
 // Turns text into proper directions
 /proc/text2dir(direction)
@@ -97,7 +97,7 @@
 
 // Converts an angle (degrees) into an ss13 direction
 /proc/angle2dir(var/degree)
-	degree = (degree + 22.5) % 365 // 22.5 = 45 / 2
+	degree = (degree + 22.5) % 360 // 22.5 = 45 / 2
 	if (degree < 45)  return NORTH
 	if (degree < 90)  return NORTHEAST
 	if (degree < 135) return EAST
@@ -228,3 +228,7 @@
 		var/atom/A = sub_atom_type
 		.[initial(A.name)] = sub_atom_type
 	. = sortAssoc(.)
+
+//Splits the text of a file at seperator and returns them in a list.
+/world/proc/file2list(filename, seperator="\n")
+	return splittext(file2text(filename), seperator)
