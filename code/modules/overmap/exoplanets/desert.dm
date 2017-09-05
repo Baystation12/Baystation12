@@ -57,7 +57,6 @@
 
 /turf/simulated/floor/exoplanet/desert
 	name = "sand"
-	has_resources = 1
 
 /turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"
