@@ -18,6 +18,7 @@
 
 /obj/machinery/atmospherics/binary/fusion_cooling/Initialize()
 	..()
+	. = INITIALIZE_HINT_NORMAL
 
 	target_reactor = locate() in get_step(src, turn(src.dir, -90))
 	if(target_reactor)

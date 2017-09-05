@@ -30,12 +30,15 @@
 	heat_energy = T20C * internal_heat_capacity
 
 /obj/machinery/power/fusion_drive/Initialize()
+	..()
+	. = INITIALIZE_HINT_NORMAL
 	update_overlays()
 	connect_to_network()
 
 	//connect any exhaust manifolds within range
 	/*for(var/obj/machinery/atmospherics/binary/fusion_cooling/M in range(1))
 		M.target_reactor = locate() in get_step(M, turn(M.dir, -90))*/
+
 
 /obj/machinery/power/fusion_drive/proc/update_overlays()
 	if(heat_overlay)

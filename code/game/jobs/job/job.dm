@@ -34,6 +34,10 @@
 	var/announced = TRUE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
+	var/generate_email = 1
+	var/track_players = 0
+	var/list/assigned_players = list()
+
 /datum/job/New()
 	..()
 	if(prob(100-availablity_chance))	//Close positions, blah blah.
@@ -41,7 +45,7 @@
 		spawn_positions = 0
 
 /datum/job/dd_SortValue()
-    return title
+	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
