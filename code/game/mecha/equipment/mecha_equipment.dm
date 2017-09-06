@@ -137,7 +137,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/proc/occupant_message(message)
 	if(chassis)
-		chassis.occupant_message("[icon2html(src, world)] [message]")
+		chassis.occupant_message("\icon[src] [message]")
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/log_message(message)

@@ -136,7 +136,7 @@
 
 	if(!holder)
 		for(var/mob/O in hearers(1, src.loc))
-			O.show_message("[icon2html(src, O)] *beep* *beep*", 3, "*beep* *beep*", 2)
+			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
 	return
 
 
