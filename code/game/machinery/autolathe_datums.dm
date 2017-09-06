@@ -1,6 +1,9 @@
 /var/global/list/autolathe_recipes
 /var/global/list/autolathe_categories
 
+var/const/EXTRA_COST_FACTOR = 1.25
+// Items are more expensive to produce than they are to recycle.
+
 /proc/populate_lathe_recipes()
 
 	//Create global autolathe recipe list if it hasn't been made already.
@@ -15,7 +18,7 @@
 		if(I.matter && !recipe.resources) //This can be overidden in the datums.
 			recipe.resources = list()
 			for(var/material in I.matter)
-				recipe.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
+				recipe.resources[material] = I.matter[material] * EXTRA_COST_FACTOR
 		qdel(I)
 
 /datum/autolathe/recipe
@@ -345,6 +348,13 @@
 	path = /obj/item/device/assembly/prox_sensor
 	category = "Devices and Components"
 
+/datum/autolathe/recipe/cable_coil
+	name = "cable coil"
+	path = /obj/item/stack/cable_coil
+	category = "Devices and Components"
+	resources = list(DEFAULT_WALL_MATERIAL = 50 * 30 * EXTRA_COST_FACTOR, "glass" = 20 * 30 * EXTRA_COST_FACTOR)
+	//the machine will print a stack of 30 coils, so the cost should be multiplied by 30
+
 /datum/autolathe/recipe/tube/large
 	name = "spotlight tube"
 	path = /obj/item/weapon/light/tube/large
@@ -504,9 +514,4 @@
 /datum/autolathe/recipe/cell_device
 	name = "device cell"
 	path = /obj/item/weapon/cell/device/standard
-	category = "Devices and Components"
-
-/datum/autolathe/recipe/cable_coil
-	name = "cable coil"
-	path = /obj/item/stack/cable_coil
 	category = "Devices and Components"
