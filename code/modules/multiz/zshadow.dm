@@ -24,6 +24,7 @@
 	owner = L
 	sync_icon(L)
 	GLOB.dir_set_event.register(L, src, /mob/zshadow/proc/update_dir)
+	GLOB.invisibility_set_event.register(L, src, /mob/zshadow/proc/update_invisibility)
 
 
 /mob/Destroy()
@@ -34,6 +35,7 @@
 
 /mob/zshadow/Destroy()
 	GLOB.dir_set_event.unregister(owner, src, /mob/zshadow/proc/update_dir)
+	GLOB.invisibility_set_event.unregister(owner, src, /mob/zshadow/proc/update_invisibility)
 	. = ..()
 
 /mob/zshadow/examine(mob/user, distance, infix, suffix)
@@ -61,14 +63,14 @@
 /mob/living/proc/check_shadow()
 	var/mob/M = src
 	if(isturf(M.loc))
-		var/turf/simulated/open/OS = GetAbove(src)
-		while(OS && istype(OS))
+		for(var/turf/simulated/open/OS = GetAbove(src); OS && istype(OS); OS = GetAbove(OS))
+			//Check above
 			if(!M.shadow)
 				M.shadow = new /mob/zshadow(M)
 			M.shadow.forceMove(OS)
 			M = M.shadow
-			OS = GetAbove(M)
-	// The topmost level does not need a shadow!
+
+	// Clean up mob shadow if it has one
 	if(M.shadow)
 		qdel(M.shadow)
 		M.shadow = null
@@ -101,3 +103,5 @@
 		shadow.fully_replace_character_name(new_name)
 
 
+/mob/zshadow/proc/update_invisibility()
+	set_invisibility(owner.invisibility)
