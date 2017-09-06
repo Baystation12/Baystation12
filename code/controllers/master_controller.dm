@@ -65,6 +65,11 @@ datum/controller/game_controller/proc/setup_objects()
 
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
+	if(config.generate_map)
+		report_progress("Performing mining outpost generation..")
+		if(GLOB.using_map.perform_map_generation())
+			GLOB.using_map.refresh_mining_turfs()
+
 	if(GLOB.using_map.use_overmap)
 		report_progress("Initializing overmap events")
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
