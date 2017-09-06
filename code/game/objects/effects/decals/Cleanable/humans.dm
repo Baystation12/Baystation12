@@ -30,7 +30,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/clean_blood()
 	fluorescent = 0
 	if(invisibility != 100)
-		invisibility = 100
+		set_invisibility(100)
 		amount = 0
 		GLOB.processing_objects -= src
 	..(ignore=1)

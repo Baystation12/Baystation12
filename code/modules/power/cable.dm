@@ -127,7 +127,7 @@ var/list/possible_cable_coil_colours
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
 	if(istype(loc, /turf))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	update_icon()
 
 /obj/structure/cable/hides_under_flooring()

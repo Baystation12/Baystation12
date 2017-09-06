@@ -189,7 +189,7 @@
 			user.drop_item()
 
 			O.mmi = W
-			O.invisibility = 0
+			O.set_invisibility(0)
 			O.custom_name = created_name
 			O.updatename("Default")
 
