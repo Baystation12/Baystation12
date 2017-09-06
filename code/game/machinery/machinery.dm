@@ -199,9 +199,21 @@ Class Procs:
 		return 0
 	switch(use_power)
 		if(1)
-			MyArea.use_power(idle_power_usage,power_channel, 1)
+			switch(power_channel)
+				if(EQUIP)
+					MyArea.used_equip += idle_power_usage
+				if(LIGHT)
+					MyArea.used_light += idle_power_usage
+				if(ENVIRON)
+					MyArea.used_environ += idle_power_usage
 		if(2)
-			MyArea.use_power(active_power_usage,power_channel, 1)
+			switch(power_channel)
+				if(EQUIP)
+					MyArea.used_equip += active_power_usage
+				if(LIGHT)
+					MyArea.used_light += active_power_usage
+				if(ENVIRON)
+					MyArea.used_environ += active_power_usage
 	return 1
 
 /proc/is_operable(var/obj/machinery/M, var/mob/user)
