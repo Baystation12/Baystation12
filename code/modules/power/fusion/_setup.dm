@@ -18,7 +18,7 @@
 		return
 
 	if(!(locate(/obj/machinery/power/fusion_core/mapped) in world))
-		to_chat(usr, "This map is not appropriate for this verb.")
+		to_chat(usr, "This map is not appropriate for this verb. Please spawn an \"obj/machinery/power/fusion_core/mapped\" first.")
 		return
 
 	var/response = input(usr, "Are you sure?", "Engine setup") as null|anything in list("No", "Yes")
@@ -75,7 +75,7 @@
 		log_and_message_admins("## FUSION CORE SETUP - Error encountered! Aborting.")
 		errors++
 
-	log_and_message_admins("## FUSION CORE SETUP - Setup completed with [errors] errors, [warnings] warnings and [success] successful steps.")
+	log_and_message_admins("## FUSION CORE SETUP - Setup completed with [errors] errors, [warnings] warnings and [success] successful steps. Be sure to activate the gyrotrons, or else the core might explode!")
 
 #undef SETUP_OK
 #undef SETUP_WARNING
