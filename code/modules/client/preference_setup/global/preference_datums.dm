@@ -98,12 +98,6 @@ var/list/_client_preferences_by_type
 	enabled_description = "Short"
 	disabled_description = "Long"
 
-/datum/client_preference/chat_tags
-	description ="Chat tags"
-	key = "CHAT_SHOWICONS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
-
 /datum/client_preference/show_typing_indicator
 	description ="Typing indicator"
 	key = "SHOW_TYPING"
