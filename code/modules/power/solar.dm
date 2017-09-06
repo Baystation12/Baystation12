@@ -20,6 +20,7 @@ var/list/solars_list = list()
 	var/adir = SOUTH // actual dir
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
+	var/next_process_time = 0
 	var/obj/machinery/power/solar_control/control = null
 	var/global/list/status_overlays
 
@@ -127,8 +128,9 @@ var/list/solars_list = list()
 		return
 	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
 		return
-
-	if(powernet)
+	if(obscured)
+		next_process_time = world.time + 150 // 15 second delay because obscured any way
+	if(powernet && next_process_time <= world.time)
 		if(powernet == control.powernet)//check if the panel is still connected to the computer
 			if(obscured) //get no light from the sun, so don't generate power
 				return
