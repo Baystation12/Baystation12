@@ -272,7 +272,7 @@
 	activate_pin(2)
 
 	for(var/mob/O in hearers(1, get_turf(src)))
-		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+		O.show_message("[icon2html(src, O)] *beep* *beep*", 3, "*beep* *beep*", 2)
 
 	return 1
 

@@ -20,7 +20,7 @@
 		recorded = msg
 		listening = 0
 		var/turf/T = get_turf(src)	//otherwise it won't work in hand
-		T.visible_message("\icon[src] beeps, \"Activation message is '[recorded]'.\"")
+		T.visible_message("[icon2html(src, world)] beeps, \"Activation message is '[recorded]'.\"")
 	else
 		if(findtext(msg, recorded))
 			pulse(0)
@@ -30,7 +30,7 @@
 		if(!holder)
 			listening = !listening
 			var/turf/T = get_turf(src)
-			T.visible_message("\icon[src] beeps, \"[listening ? "Now" : "No longer"] recording input.\"")
+			T.visible_message("[icon2html(src, world)] beeps, \"[listening ? "Now" : "No longer"] recording input.\"")
 
 
 /obj/item/device/assembly/voice/attack_self(mob/user)
