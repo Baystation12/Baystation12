@@ -287,7 +287,8 @@
 		for(var/obj/M in mob.loc)
 			if(istype(M, /obj/structure/bed) || istype(M, /obj/item/weapon/stool))
 				move_delay += 2
-				if(prob(3))
+				if(prob(2))
+					mob.visible_message("<span class='notice'>[mob.name] trips and falls over the [M.name]!.</span>")
 					to_chat(mob, "<span class='warning'>You trip and fall over the [M.name]!</span>")
 					mob.weakened = 5
 					mob:apply_damage(rand(3, 6), BRUTE)
