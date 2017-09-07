@@ -1,7 +1,7 @@
 /datum/job/ai
 	title = "AI"
 	department_flag = MSC
-	faction = "Station"
+
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
 	selection_color = "#3f823f"
@@ -23,7 +23,7 @@
 /datum/job/cyborg
 	title = "Cyborg"
 	department_flag = MSC
-	faction = "Station"
+
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "your laws and the AI"	//Nodrak

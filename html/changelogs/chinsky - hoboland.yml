@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Wildlife will now respawn if more than half is killed off. Beware."
+  - rscdel: "Added new type of planets - settled ones. Full of xenoarch-filled garbage piles and hostile robots."

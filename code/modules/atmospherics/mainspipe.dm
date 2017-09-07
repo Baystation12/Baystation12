@@ -68,7 +68,7 @@ obj/machinery/atmospherics/mains_pipe
 
 	hide(var/i)
 		if(level == 1 && istype(loc, /turf/simulated))
-			invisibility = i ? 101 : 0
+			set_invisibility(i ? 101 : 0)
 		update_icon()
 
 	proc/burst()

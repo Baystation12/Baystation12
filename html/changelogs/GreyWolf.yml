@@ -1,0 +1,6 @@
+author: TheGreyWolf
+
+delete-after: True
+
+changes: 
+  - rscdel: "Removes the Zhan-Khazan outfit from the loadout (Taj relevant only)."

@@ -531,7 +531,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	alpha = pre_alpha
 	plane = pre_plane
 	layer = pre_layer
-	invisibility = pre_invis
+	set_invisibility(pre_invis)
 	transform = null	//make goast stand up
 
 /mob/observer/ghost/verb/respawn()

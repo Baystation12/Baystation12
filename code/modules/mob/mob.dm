@@ -253,7 +253,7 @@
 		return 0
 
 	var/obj/P = new /obj/effect/decal/point(tile)
-	P.invisibility = invisibility
+	P.set_invisibility(invisibility)
 	spawn (20)
 		if(P)
 			qdel(P)	// qdel

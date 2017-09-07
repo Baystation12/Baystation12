@@ -20,10 +20,7 @@
 	if(chemistryProcess)
 		chemistryProcess.active_holders -= src
 
-	for(var/datum/reagent/R in reagent_list)
-		qdel(R)
-	reagent_list.Cut()
-	reagent_list = null
+	QDEL_NULL_LIST(reagent_list)
 	if(my_atom && my_atom.reagents == src)
 		my_atom.reagents = null
 

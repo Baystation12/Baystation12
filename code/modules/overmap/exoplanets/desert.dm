@@ -57,7 +57,6 @@
 
 /turf/simulated/floor/exoplanet/desert
 	name = "sand"
-	has_resources = 1
 
 /turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"
@@ -74,6 +73,7 @@
 	icon = 'icons/obj/quicksand.dmi'
 	icon_state = "intact0"
 	density = 0
+	anchored = 1
 	can_buckle = 1
 	buckle_dir = SOUTH
 	var/exposed = 0

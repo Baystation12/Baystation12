@@ -20,18 +20,16 @@
 	qdel(src)
 
 /obj/item/weapon/fossil/bone
-	name = "Fossilised bone"
+	name = "fossilised bone"
 	icon_state = "bone"
-	desc = "It's a fossilised bone."
+	desc = "A fossilised part of an alien, long dead."
 
 /obj/item/weapon/fossil/skull
-	name = "Fossilised skull"
+	name = "fossilised skull"
 	icon_state = "skull"
-	desc = "It's a fossilised skull."
 
 /obj/item/weapon/fossil/skull/horned
 	icon_state = "hskull"
-	desc = "It's a fossilised, horned skull."
 
 /obj/item/weapon/fossil/skull/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/fossil/bone))
@@ -90,14 +88,14 @@
 
 //shells and plants do not make skeletons
 /obj/item/weapon/fossil/shell
-	name = "Fossilised shell"
+	name = "fossilised shell"
 	icon_state = "shell"
-	desc = "It's a fossilised shell."
+	desc = "A fossilised, pre-Stygian alien crustacean."
 
 /obj/item/weapon/fossil/plant
-	name = "Fossilised plant"
+	name = "fossilised plant"
 	icon_state = "plant1"
-	desc = "It's fossilised plant remains."
+	desc = " A fossilised shred of alien plant matter."
 	animal = 0
 
 /obj/item/weapon/fossil/plant/New()

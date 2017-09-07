@@ -1,0 +1,5 @@
+author: CrimsonShrike
+delete-after: True
+changes: 
+  - bugfix: "Stacking machine will now stack materials again."
+

@@ -137,7 +137,7 @@
 		var/obj/effect/beam/ir_beam/beam = b
 		if(beam.loc in turfs_that_need_beams)
 			turfs_that_need_beams -= beam.loc
-			beam.invisibility = visible ? 0 : INVISIBILITY_MAXIMUM
+			beam.set_invisibility(visible ? 0 : INVISIBILITY_MAXIMUM)
 		else
 			existing_beams -= beam
 			qdel(beam)

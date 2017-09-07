@@ -352,6 +352,7 @@
 
 /datum/chemical_reaction/ethylredoxrazine
 	name = "Ethylredoxrazine"
+	result = /datum/reagent/ethylredoxrazine
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/dylovene = 1, /datum/reagent/carbon = 1)
 	result_amount = 3
 
@@ -1567,7 +1568,7 @@
 
 /datum/chemical_reaction/screwdriver
 	name = "Screwdriver"
-	result = "screwdrivercocktail"
+	result = /datum/reagent/ethanol/screwdrivercocktail
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/orange = 1)
 	result_amount = 3
 

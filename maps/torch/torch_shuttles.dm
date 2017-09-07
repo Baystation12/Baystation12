@@ -530,40 +530,40 @@
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/datum/shuttle/autodock/overmap/calypso
-	name = "Calypso"
+/datum/shuttle/autodock/overmap/exploration_shuttle
+	name = "Charon"
 	move_time = 90
-	shuttle_area = /area/calypso_hangar/start
+	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
 	current_location = "nav_hangar_calypso"
 	landmark_transition = "nav_transit_calypso"
 
-/obj/effect/shuttle_landmark/torch/hangar/calypso
-	name = "Calypso Hangar"
+/obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle
+	name = "Charon Hangar"
 	landmark_tag = "nav_hangar_calypso"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/torch/deck1/calypso
+/obj/effect/shuttle_landmark/torch/deck1/exploration_shuttle
 	name = "Space near Deck Four"
 	landmark_tag = "nav_deck1_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck2/calypso
+/obj/effect/shuttle_landmark/torch/deck2/exploration_shuttle
 	name = "Space near Deck Three"
 	landmark_tag = "nav_deck2_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck3/calypso
+/obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle
 	name = "Space near Deck Two"
 	landmark_tag = "nav_deck3_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck4/calypso
+/obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle
 	name = "Space near Deck One"
 	landmark_tag = "nav_deck4_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck5/calypso
+/obj/effect/shuttle_landmark/torch/deck5/exploration_shuttle
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_calypso"
 
-/obj/effect/shuttle_landmark/torch/transit/calypso
+/obj/effect/shuttle_landmark/torch/transit/exploration_shuttle
 	name = "In transit"
 	landmark_tag = "nav_transit_calypso"
 
