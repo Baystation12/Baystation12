@@ -33,7 +33,7 @@
 /obj/item/device/geiger/attack_self(var/mob/user)
 	scanning = !scanning
 	update_icon()
-	to_chat(user, "<span class='notice'>[icon2html(src, user)] You switch [scanning ? "on" : "off"] [src].</span>")
+	to_chat(user, "<span class='notice'>\icon[src] You switch [scanning ? "on" : "off"] [src].</span>")
 
 /obj/item/device/geiger/update_icon()
 	if(!scanning)

@@ -293,7 +293,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		end_call()
 	if (caller_id&&sourcepad)
 		if(caller_id.loc!=sourcepad.loc)
-			to_chat(sourcepad.caller_id, "Severing connection to distant holopad.")
+			sourcepad.to_chat(caller_id, "Severing connection to distant holopad.")
 			end_call()
 			audible_message("The connection has been terminated by the caller.")
 	return 1
