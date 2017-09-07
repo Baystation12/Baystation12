@@ -350,10 +350,9 @@ var/const/EXTRA_COST_FACTOR = 1.25
 
 /datum/autolathe/recipe/cable_coil
 	name = "cable coil"
-	path = /obj/item/stack/cable_coil
+	path = /obj/item/stack/cable_coil/single
 	category = "Devices and Components"
-	resources = list(DEFAULT_WALL_MATERIAL = 50 * 30 * EXTRA_COST_FACTOR, "glass" = 20 * 30 * EXTRA_COST_FACTOR)
-	//the machine will print a stack of 30 coils, so the cost should be multiplied by 30
+	is_stack = 1
 
 /datum/autolathe/recipe/tube/large
 	name = "spotlight tube"
