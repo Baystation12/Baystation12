@@ -1,6 +1,6 @@
 #define WORLD_ICON_SIZE 32
 
-/var/server_name = "Baystation 12"
+/var/server_name = "Halo Spacestation Evolved"
 
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()
@@ -502,7 +502,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Metrics not ready"
 
 		return GLOB.prometheus_metrics.collect()
-		
+
 
 /world/Reboot(var/reason)
 	/*spawn(0)
