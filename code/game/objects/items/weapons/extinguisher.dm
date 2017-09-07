@@ -41,7 +41,7 @@
 
 /obj/item/weapon/extinguisher/examine(mob/user)
 	if(..(user, 0))
-		to_chat(user, "[icon2html(src, user)] [src.name] contains [src.reagents.total_volume] units of water left!")
+		to_chat(user, text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume))
 	return
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
@@ -61,10 +61,10 @@
 
 		src.last_use = world.time
 		reagents.splash(M, min(reagents.total_volume, spray_amount))
-
+		
 		user.visible_message("<span class='notice'>\The [user] sprays \the [M] with \the [src].</span>")
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
-
+		
 		return 1 // No afterattack
 	return ..()
 

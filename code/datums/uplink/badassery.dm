@@ -88,4 +88,4 @@
 		var/obj/structure/largecrate/C = /obj/structure/largecrate
 		icon = image(initial(C.icon), initial(C.icon_state))
 
-	return "[icon2html(icon, world)]"
+	return "\icon[icon]"
