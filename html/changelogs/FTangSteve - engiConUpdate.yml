@@ -1,6 +1,0 @@
-author: FTangSteve
-
-delete-after: True
-
-changes: 
-  - tweak: "Updates engineering contractor to have access to atmos, EVA, etc."
