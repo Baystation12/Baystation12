@@ -239,9 +239,11 @@
 	return 1
 
 /obj/item/organ/external/proc/sever_artery()
-	if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && species && species.has_organ[BP_HEART])
-		status |= ORGAN_ARTERY_CUT
-		return TRUE
+	if(species && species.has_organ[BP_HEART])
+		var/obj/item/organ/internal/heart/O = species.has_organ[BP_HEART]
+		if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && !initial(O.open))
+			status |= ORGAN_ARTERY_CUT
+			return TRUE
 	return FALSE
 
 /obj/item/organ/external/proc/sever_tendon()

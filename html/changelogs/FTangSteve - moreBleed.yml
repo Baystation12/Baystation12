@@ -1,0 +1,7 @@
+author: FTangSteve
+
+delete-after: True
+
+changes: 
+  - rscadd: "Electricity now shocks many parts of your body in a line to the ground rather than just your hand."
+  - tweak: "Species with an open circulatory system now don't get cut veins or arteries."
