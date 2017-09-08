@@ -121,7 +121,8 @@
 	var/new_organ = products[choice][1]
 	var/obj/item/organ/O = new new_organ(get_turf(src))
 	O.status |= ORGAN_CUT_AWAY
-	var/mob/living/carbon/C = loaded_dna["donor"]
+	var/weakref/W = loaded_dna["donor"]
+	var/mob/living/carbon/C = W.resolve()
 	O.set_dna(C.dna)
 
 	if(O.species)
