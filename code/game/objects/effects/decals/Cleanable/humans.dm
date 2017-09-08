@@ -148,11 +148,11 @@ var/global/list/image/splatter_cache=list()
 	icon_state = "1"
 	random_icon_states = list("1","2","3","4","5")
 	amount = 0
-	var/list/drips = list()
+	var/list/drips
 
-/obj/effect/decal/cleanable/blood/drip/New()
-	..()
-	drips |= icon_state
+/obj/effect/decal/cleanable/blood/drip/Initialize()
+	. = ..()
+	drips = list(icon_state)
 
 /obj/effect/decal/cleanable/blood/writing
 	icon_state = "tracks"
@@ -164,7 +164,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/New()
 	..()
-	if(random_icon_states.len)
+	if(LAZYLEN(random_icon_states))
 		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
 			random_icon_states.Remove(W.icon_state)
 		icon_state = pick(random_icon_states)
@@ -239,7 +239,6 @@ var/global/list/image/splatter_cache=list()
 	anchored = 1
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mucus"
-	random_icon_states = list("mucus")
 
 	var/list/datum/disease2/disease/virus2 = list()
 	var/dry=0 // Keeps the lag down
