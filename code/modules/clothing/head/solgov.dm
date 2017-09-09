@@ -46,8 +46,8 @@
 
 /obj/item/clothing/head/utility/marine
 	name = "marine utility cover"
-	desc = "A grey utility cover bearing the crest of the SCG Marine Corps."
-	icon_state = "greyutility"
+	desc = "A green utility cover bearing the crest of the SCG Marine Corps."
+	icon_state = "greenutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/utility/marine/tan
@@ -55,10 +55,10 @@
 	desc = "A tan utility cover bearing the crest of the SCG Marine Corps."
 	icon_state = "tanutility"
 
-/obj/item/clothing/head/utility/marine/green
-	name = "green utility cover"
-	desc = "A green utility cover bearing the crest of the SCG Marine Corps."
-	icon_state = "greenutility"
+/obj/item/clothing/head/utility/marine/urban
+	name = "urban utility cover"
+	desc = "A grey utility cover bearing the crest of the SCG Marine Corps."
+	icon_state = "greyutility"
 
 //Service
 

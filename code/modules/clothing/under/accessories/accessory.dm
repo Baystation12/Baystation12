@@ -610,7 +610,7 @@
 /obj/item/clothing/accessory/department/command/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "none", "down" = "none")
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
 
 /obj/item/clothing/accessory/department/command/marine
 	icon_state = "dept_marine"
@@ -625,7 +625,7 @@
 /obj/item/clothing/accessory/department/engineering/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the engineering department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "none", "down" = "none")
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
 
 /obj/item/clothing/accessory/department/engineering/marine
 	icon_state = "dept_marine"
@@ -640,7 +640,7 @@
 /obj/item/clothing/accessory/department/security/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the security department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "none", "down" = "none")
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
 
 /obj/item/clothing/accessory/department/security/marine
 	icon_state = "dept_marine"
@@ -655,7 +655,7 @@
 /obj/item/clothing/accessory/department/medical/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the medical department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "none", "down" = "none")
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
 
 /obj/item/clothing/accessory/department/medical/marine
 	icon_state = "dept_marine"
@@ -670,7 +670,7 @@
 /obj/item/clothing/accessory/department/supply/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the supply department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "none", "down" = "none")
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
 
 /obj/item/clothing/accessory/department/supply/marine
 	icon_state = "dept_marine"
@@ -685,7 +685,7 @@
 /obj/item/clothing/accessory/department/service/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the service department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "none", "down" = "none")
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
 
 /obj/item/clothing/accessory/department/service/marine
 	icon_state = "dept_marine"
