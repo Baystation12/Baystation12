@@ -19,8 +19,15 @@
 
 #define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover();qdel(varname);}varname = src;}
 
-#define START_PROCESSING(Processor, Datum) if (!Datum.is_processing) {Datum.is_processing = TRUE;ADD_SORTED(Processor.processing, Datum, /proc/cmp_name_or_type_asc)}
-#define STOP_PROCESSING(Processor, Datum) Datum.is_processing = FALSE;Processor.processing -= Datum
+#define START_PROCESSING(Processor, Datum) if (!Datum.is_processing) {Datum.is_processing = #Processor;Processor.processing += Datum}
+#define STOP_PROCESSING(Processor, Datum) \
+if(Datum.is_processing) {\
+	if(Processor.processing.Remove(Datum)) {\
+		Datum.is_processing = null;\
+	} else {\
+		crash_with("Failed to stop processing. [log_info_line(Datum)] is being processed by [Datum.is_processing] but de-queue attempt occured on [#Processor]."); \
+	}\
+}
 
 //SubSystem flags (Please design any new flags so that the default is off, to make adding flags to subsystems easier)
 
@@ -76,8 +83,8 @@
 	PreInit();\
 }\
 /datum/controller/subsystem/processing/##X/Recover() {\
-    if(istype(SS##X.processing)) {\
-        processing = SS##X.processing; \
-    }\
+	if(istype(SS##X.processing)) {\
+		processing = SS##X.processing; \
+	}\
 }\
 /datum/controller/subsystem/processing/##X

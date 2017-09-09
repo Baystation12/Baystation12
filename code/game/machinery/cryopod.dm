@@ -224,7 +224,7 @@
 	var/turf/T = get_turf(src)
 	if(T)
 		airtank.copy_from(T.air)
-	
+
 /obj/machinery/cryopod/lifepod/return_air()
 	return airtank
 
@@ -243,7 +243,7 @@
 		for(var/obj/effect/overmap/OO in range(O,2))
 			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
 				possible_locations |= text2num(level)
-	
+
 	var/newz = GLOB.using_map.get_empty_zlevel()
 	if(possible_locations.len && prob(10))
 		newz = pick(possible_locations)
@@ -254,7 +254,7 @@
 	forceMove(nloc)
 
 //Don't use these for in-round leaving
-/obj/machinery/cryopod/lifepod/process()
+/obj/machinery/cryopod/lifepod/Process()
 	if(evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
 		if(occupant && !launched)
 			launch()

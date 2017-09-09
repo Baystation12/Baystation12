@@ -301,8 +301,6 @@
 			return global.camera_repository;
 		if("cameranet")
 			return global.cameranet;
-		if("cameranet_")
-			return global.cameranet_;
 		if("can_call_ert")
 			return global.can_call_ert;
 		if("captain_announcement")
@@ -795,8 +793,6 @@
 			return global.photo_count;
 		if("pipe_colors")
 			return global.pipe_colors;
-		if("pipe_networks")
-			return global.pipe_networks;
 		if("pipe_processing_killed")
 			return global.pipe_processing_killed;
 		if("plant_controller")
@@ -1478,8 +1474,6 @@
 			global.camera_repository=newval;
 		if("cameranet")
 			global.cameranet=newval;
-		if("cameranet_")
-			global.cameranet_=newval;
 		if("can_call_ert")
 			global.can_call_ert=newval;
 		if("captain_announcement")
@@ -1972,8 +1966,6 @@
 			global.photo_count=newval;
 		if("pipe_colors")
 			global.pipe_colors=newval;
-		if("pipe_networks")
-			global.pipe_networks=newval;
 		if("pipe_processing_killed")
 			global.pipe_processing_killed=newval;
 		if("plant_controller")
@@ -2504,7 +2496,6 @@
 	"camera_range_display_status",
 	"camera_repository",
 	"cameranet",
-	"cameranet_",
 	"can_call_ert",
 	"captain_announcement",
 	"cargo_supply_pack_root",
@@ -2751,7 +2742,6 @@
 	"paramslist_cache",
 	"photo_count",
 	"pipe_colors",
-	"pipe_networks",
 	"pipe_processing_killed",
 	"plant_controller",
 	"plant_seed_sprites",

@@ -25,6 +25,7 @@ SUBSYSTEM_DEF(processing)
 		var/datum/thing = current_run[current_run.len]
 		current_run.len--
 		if(QDELETED(thing) || (call(thing, process_proc)(wait, times_fired) == PROCESS_KILL))
+			thing.is_processing = null
 			processing -= thing
 		if (MC_TICK_CHECK)
 			return

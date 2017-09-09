@@ -84,7 +84,7 @@
 	node1 = null
 	node2 = null
 
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/valve/proc/open()
 	if(open) return 0
@@ -139,9 +139,7 @@
 
 /obj/machinery/atmospherics/valve/Process()
 	..()
-	. = PROCESS_KILL
-
-	return
+	return PROCESS_KILL
 
 /obj/machinery/atmospherics/valve/atmos_init()
 	..()

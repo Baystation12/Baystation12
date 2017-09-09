@@ -459,9 +459,6 @@ datum/unit_test/ladder_check/start_test()
 			return TRUE
 	return FALSE
 
-
-/obj/machinery/atmospherics/pipe/simple
-
 //=======================================================================================
 
 /datum/unit_test/simple_pipes_shall_not_face_north_or_west // The init code is worthless and cannot handle it

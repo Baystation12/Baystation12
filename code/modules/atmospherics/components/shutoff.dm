@@ -62,5 +62,3 @@
 	node2_last_pressure = node2_pressure
 	if(override_counter)
 		override_counter--
-
-	return

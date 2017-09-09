@@ -176,7 +176,7 @@
 	notify_station()
 
 /decl/security_level/default/proc/notify_station()
-	for(var/obj/machinery/firealarm/FA in GLOB.machines)
+	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
 		if(FA.z in GLOB.using_map.contact_levels)
 			FA.update_icon()
 	post_status("alert")

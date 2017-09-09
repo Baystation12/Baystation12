@@ -66,7 +66,7 @@ var/list/points_of_interest = list()
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
-	for(var/obj/machinery/computer/sensors/S in GLOB.machines)
+	for(var/obj/machinery/computer/sensors/S in SSmachines.machinery)
 		if (S.z in map_z)
 			S.linked = src
 			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")

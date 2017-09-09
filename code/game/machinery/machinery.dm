@@ -133,10 +133,7 @@ Class Procs:
 				qdel(A)
 			else // Otherwise we assume they were dropped to the ground during deconstruction, and were not removed from the component_parts list by deconstruction code.
 				component_parts -= A
-	if(contents) // The same for contents.
-		for(var/atom/A in contents)
-			qdel(A)
-	return ..()
+	. = ..()
 
 /obj/machinery/Process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))

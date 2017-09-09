@@ -3,6 +3,25 @@
 #define SSMACHINES_POWERNETS     3
 #define SSMACHINES_POWER_OBJECTS 4
 
+#define START_PROCESSING_IN_LIST(Datum, List) if (!Datum.is_processing) {Datum.is_processing = "SSmachines.[#List]"; SSmachines.List += Datum}
+#define STOP_PROCESSING_IN_LIST(Datum, List) \
+if(Datum.is_processing) {\
+	if(SSmachines.List.Remove(Datum)) {\
+		Datum.is_processing = null;\
+	} else {\
+		crash_with("Failed to stop processing. [log_info_line(Datum)] is being processed by [is_processing] and not found in SSmachines.[#List]"); \
+	}\
+}
+
+#define START_PROCESSING_PIPENET(Datum) START_PROCESSING_IN_LIST(Datum, pipenets)
+#define STOP_PROCESSING_PIPENET(Datum) STOP_PROCESSING_IN_LIST(Datum, pipenets)
+
+#define START_PROCESSING_POWERNET(Datum) START_PROCESSING_IN_LIST(Datum, powernets)
+#define STOP_PROCESSING_POWERNET(Datum) STOP_PROCESSING_IN_LIST(Datum, powernets)
+
+#define START_PROCESSING_POWER_OBJECT(Datum) START_PROCESSING_IN_LIST(Datum, power_objects)
+#define STOP_PROCESSING_POWER_OBJECT(Datum) STOP_PROCESSING_IN_LIST(Datum, power_objects)
+
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = INIT_ORDER_MACHINES
@@ -94,6 +113,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			PN.Process(wait)
 		else
 			pipenets.Remove(PN)
+			PN.is_processing = null
 		if(MC_TICK_CHECK)
 			return
 
@@ -110,6 +130,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 				M.auto_use_power()
 		else
 			machinery.Remove(M)
+			M.is_processing = null
 		if(MC_TICK_CHECK)
 			return
 
@@ -125,6 +146,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			PN.reset(wait)
 		else
 			powernets.Remove(PN)
+			PN.is_processing = null
 		if(MC_TICK_CHECK)
 			return
 
@@ -138,6 +160,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 		current_run.len--
 		if(!I.pwr_drain(wait)) // 0 = Process Kill, remove from processing list.
 			power_objects.Remove(I)
+			I.is_processing = null
 		if(MC_TICK_CHECK)
 			return
 

@@ -53,7 +53,7 @@
 /obj/machinery/atmospherics/omni/mixer/Destroy()
 	inputs.Cut()
 	output = null
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/omni/mixer/sort_ports()
 	for(var/datum/omni_port/P in ports)

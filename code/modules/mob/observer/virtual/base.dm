@@ -28,8 +28,8 @@ var/list/all_virtual_listeners = list()
 	update_icon()
    
 /mob/observer/virtual/Initialize()
-    . = ..()
-    STOP_PROCESSING(SSmobs, src)
+	. = ..()
+	STOP_PROCESSING(SSmobs, src)
 
 /mob/observer/virtual/Destroy()
 	GLOB.moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)

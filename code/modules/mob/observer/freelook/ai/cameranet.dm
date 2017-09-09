@@ -2,12 +2,6 @@
 //
 // The datum containing all the chunks.
 
-var/datum/visualnet/camera/cameranet_
-/proc/cameranet()
-	if(!cameranet_)
-		cameranet_ = new()
-	return cameranet_
-
 /datum/visualnet/camera
 	// The cameras on the map, no matter if they work or not.
 	var/list/cameras
@@ -28,10 +22,12 @@ var/datum/visualnet/camera/cameranet_
 			return FALSE
 		. = ..(c, c.can_use())
 		if(.)
-			dd_insertObjectList(cameras, c)
+			ADD_SORTED(cameras, c, /proc/cmp_camera_ctag_asc)
 	else if(isAI(c))
 		var/mob/living/silicon/AI = c
 		return ..(AI, AI.stat != DEAD)
+	else
+		..()
 
 // Add a camera to a chunk.
 
@@ -41,3 +37,5 @@ var/datum/visualnet/camera/cameranet_
 	if(isAI(c))
 		var/mob/living/silicon/AI = c
 		return ..(AI, AI.stat != DEAD)
+	else
+		..()

@@ -253,9 +253,17 @@ var/global/chicken_count = 0
 		E.pixel_x = rand(-6,6)
 		E.pixel_y = rand(-6,6)
 		if(chicken_count < MAX_CHICKENS && prob(10))
-			STOP_PROCESSING(SSobj, E)
+			E.amount_grown = 1
+			START_PROCESSING(SSobj, E)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/var/amount_grown = 0
+/obj/item/weapon/reagent_containers/food/snacks/egg
+	var/amount_grown = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/egg/Destroy()
+	if(amount_grown)
+		STOP_PROCESSING(SSobj, src)
+	. = ..()
+
 /obj/item/weapon/reagent_containers/food/snacks/egg/Process()
 	if(isturf(loc))
 		amount_grown += rand(1,2)
@@ -265,4 +273,4 @@ var/global/chicken_count = 0
 			STOP_PROCESSING(SSobj, src)
 			qdel(src)
 	else
-		STOP_PROCESSING(SSobj, src)
+		return PROCESS_KILL
