@@ -105,6 +105,34 @@
 		/obj/item/weapon/glass_extra
 		)
 
+
+/obj/item/weapon/gripper/service/resolve_attackby(var/atom/target, var/mob/living/user, params)
+
+	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
+	if(!wrapped)
+		for(var/obj/item/thing in src.contents)
+			wrapped = thing
+			break
+
+	//Service Droids can take eggs out from egg cartons now
+	if (!wrapped && istype(target,/obj/item/weapon/storage/fancy/egg_box) )
+		var/obj/item/weapon/egg
+		for(var/obj/item/weapon/reagent_containers/food/snacks/egg/thing in target.contents)
+			egg = thing;
+			break;
+		if ( egg )
+			to_chat(user, "<span class='notice'>You collect \the [egg] from \the [target].</span>")
+			egg.loc = src
+			wrapped = egg
+			var/obj/item/weapon/storage/fancy/egg_box/box = target
+			box.opened = 1
+			box.update_icon()
+			return
+		else
+			to_chat(user, "<span class='notice'>\The [target] is empty.</span>")
+			return
+	return ..()
+
 /obj/item/weapon/gripper/organ //Used to handle organs.
 	name = "organ gripper"
 	icon_state = "gripper"
