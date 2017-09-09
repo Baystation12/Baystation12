@@ -1,10 +1,10 @@
 /datum
-	var/gc_destroyed //Time when this object was destroyed.
-	var/is_processing = FALSE
+	var/tmp/gc_destroyed //Time when this object was destroyed.
+	var/tmp/is_processing = FALSE
 
 #ifdef TESTING
-    var/running_find_references
-    var/last_find_references = 0
+	var/tmp/running_find_references
+	var/tmp/last_find_references = 0
 #endif
 
 // Default implementation of clean-up code.

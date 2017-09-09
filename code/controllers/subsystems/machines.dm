@@ -3,6 +3,25 @@
 #define SSMACHINES_POWERNETS     3
 #define SSMACHINES_POWER_OBJECTS 4
 
+#define START_PROCESSING_IN_LIST(Datum, List) if (!Datum.is_processing) {Datum.is_processing = TRUE; SSmachines.List += Datum}
+#define STOP_PROCESSING_IN_LIST(Datum, List) \
+if(Datum.is_processing) {\
+	if(SSmachines.List.Remove(Datum)) {\
+		Datum.is_processing = FALSE;\
+	} else {\
+		CRASH("Failed to stop processing. [log_info_line(Datum)] is being processed but not found in SSmachines.[#List]"); \
+	}\
+}
+
+#define START_PROCESSING_PIPENET(Datum) START_PROCESSING_IN_LIST(Datum, pipenets)
+#define STOP_PROCESSING_PIPENET(Datum) STOP_PROCESSING_IN_LIST(Datum, pipenets)
+
+#define START_PROCESSING_POWERNET(Datum) START_PROCESSING_IN_LIST(Datum, powernets)
+#define STOP_PROCESSING_POWERNET(Datum) STOP_PROCESSING_IN_LIST(Datum, powernets)
+
+#define START_PROCESSING_POWER_OBJECT(Datum) START_PROCESSING_IN_LIST(Datum, power_objects)
+#define STOP_PROCESSING_POWER_OBJECT(Datum) STOP_PROCESSING_IN_LIST(Datum, power_objects)
+
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = INIT_ORDER_MACHINES

@@ -813,8 +813,6 @@
 			return global.photo_count;
 		if("pipe_colors")
 			return global.pipe_colors;
-		if("pipe_networks")
-			return global.pipe_networks;
 		if("pipe_processing_killed")
 			return global.pipe_processing_killed;
 		if("plant_controller")
@@ -2018,8 +2016,6 @@
 			global.photo_count=newval;
 		if("pipe_colors")
 			global.pipe_colors=newval;
-		if("pipe_networks")
-			global.pipe_networks=newval;
 		if("pipe_processing_killed")
 			global.pipe_processing_killed=newval;
 		if("plant_controller")
@@ -2816,7 +2812,6 @@
 	"paramslist_cache",
 	"photo_count",
 	"pipe_colors",
-	"pipe_networks",
 	"pipe_processing_killed",
 	"plant_controller",
 	"plant_seed_sprites",
