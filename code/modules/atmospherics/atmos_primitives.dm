@@ -15,7 +15,7 @@
 
 /obj/machinery/atmospherics/var/debug = 0
 
-/client/proc/atmos_toggle_debug(var/obj/machinery/atmospherics/M in range(world.view))
+/client/proc/atmos_toggle_debug(var/obj/machinery/atmospherics/M in world)
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	M.debug = !M.debug
