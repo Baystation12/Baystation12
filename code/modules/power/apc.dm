@@ -180,7 +180,6 @@
 	if (building)
 		set_dir(ndir)
 	src.tdir = dir		// to fix Vars bug
-	set_dir(SOUTH)
 
 	pixel_x = (src.tdir & 3)? 0 : (src.tdir == 4 ? 24 : -24)
 	pixel_y = (src.tdir & 3)? (src.tdir ==1 ? 24 : -24) : 0
