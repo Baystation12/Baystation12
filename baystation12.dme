@@ -1329,6 +1329,7 @@
 #include "code\modules\events\apc_damage.dm"
 #include "code\modules\events\blob.dm"
 #include "code\modules\events\brand_intelligence.dm"
+#include "code\modules\events\breaktime.dm"
 #include "code\modules\events\camera_damage.dm"
 #include "code\modules\events\carp_migration.dm"
 #include "code\modules\events\comms_blackout.dm"
