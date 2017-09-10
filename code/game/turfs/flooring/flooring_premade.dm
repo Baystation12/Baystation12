@@ -78,6 +78,8 @@
 /turf/simulated/floor/reinforced/nitrogen
 	initial_gas = list("nitrogen" = ATMOSTANK_NITROGEN)
 
+/turf/simulated/floor/reinforced/hydrogen
+	initial_gas = list("hydrogen" = ATMOSTANK_HYDROGEN)
 
 /turf/simulated/floor/reinforced/oxygen
 	initial_gas = list("oxygen" = ATMOSTANK_OXYGEN)
@@ -104,10 +106,6 @@
 	icon = 'icons/turf/flooring/cult.dmi'
 	icon_state = "cult"
 	initial_flooring = /decl/flooring/reinforced/cult
-
-/turf/simulated/floor/cult/New()
-	..()
-	new /obj/effect/overlay/cult/cultfloor(src)
 
 /turf/simulated/floor/cult/cultify()
 	return

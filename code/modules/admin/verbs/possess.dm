@@ -1,4 +1,4 @@
-/proc/possess(obj/O as obj in range(world.view))
+/proc/possess(obj/O as obj)
 	set name = "Possess Obj"
 	set category = "Object"
 
@@ -26,7 +26,7 @@
 	usr.control_object = O
 	feedback_add_details("admin_verb","PO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/proc/release(obj/O as obj in range(world.view))
+/proc/release(obj/O)
 	set name = "Release Obj"
 	set category = "Object"
 	//usr.loc = get_turf(usr)

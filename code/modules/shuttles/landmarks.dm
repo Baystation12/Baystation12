@@ -19,11 +19,19 @@
 	var/area/base_area
 	//Will also leave this type of turf behind if set.
 	var/turf/base_turf
+	//If set, will set base area and turf type to same as where it was spawned at
+	var/autoset
 
 /obj/effect/shuttle_landmark/New()
 	..()
 	tag = landmark_tag //since tags cannot be set at compile time
-	base_area = locate(base_area || world.area)
+	if(autoset)
+		base_area = get_area(src)
+		var/turf/T = get_turf(src)
+		if(T)
+			base_turf = T.type
+	else
+		base_area = locate(base_area || world.area)
 	name = name + " ([x],[y])"
 
 /obj/effect/shuttle_landmark/Initialize()
@@ -58,6 +66,7 @@
 /obj/effect/shuttle_landmark/automatic
 	name = "Navpoint"
 	landmark_tag = "navpoint"
+	autoset = 1
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
 /obj/effect/shuttle_landmark/automatic/New()

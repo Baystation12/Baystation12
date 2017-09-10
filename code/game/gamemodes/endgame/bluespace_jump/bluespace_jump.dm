@@ -21,7 +21,7 @@
 				apply_bluespaced(M)
 	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = 0	//can't let you click that Dave
-		goast.invisibility = SEE_INVISIBLE_LIVING
+		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
 	old_accessible_z_levels = GLOB.using_map.accessible_z_levels.Copy()
 	for(var/z in affected_levels)
@@ -62,7 +62,7 @@
 	M.confused = 0
 	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
-		goast.invisibility = initial(goast.invisibility)
+		goast.set_invisibility(initial(goast.invisibility))
 		goast.alpha = initial(goast.alpha)
 	for(var/G in bluegoasts)
 		qdel(G)

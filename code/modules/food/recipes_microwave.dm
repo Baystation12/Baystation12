@@ -368,7 +368,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread
 
 /datum/recipe/loadedbakedpotato
-	fruit = list(/datum/reagent/drink/juice/potato = 1)
+	fruit = list("potato" = 1)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/cheesewedge)
 	result = /obj/item/weapon/reagent_containers/food/snacks/loadedbakedpotato
 
@@ -494,18 +494,18 @@ I said no!
 		return being_cooked
 
 /datum/recipe/meatballsoup
-	fruit = list("carrot" = 1, /datum/reagent/drink/juice/potato = 1)
+	fruit = list("carrot" = 1, "potato" = 1)
 	reagents = list(/datum/reagent/water = 10)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meatball)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatballsoup
 
 /datum/recipe/vegetablesoup
-	fruit = list("carrot" = 1, /datum/reagent/drink/juice/potato = 1, "corn" = 1, "eggplant" = 1)
+	fruit = list("carrot" = 1, "potato" = 1, "corn" = 1, "eggplant" = 1)
 	reagents = list(/datum/reagent/water = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/vegetablesoup
 
 /datum/recipe/nettlesoup
-	fruit = list("nettle" = 1, /datum/reagent/drink/juice/potato = 1)
+	fruit = list("nettle" = 1, "potato" = 1)
 	reagents = list(/datum/reagent/water = 10)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/egg
@@ -641,7 +641,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/rofflewaffles
 
 /datum/recipe/stew
-	fruit = list(/datum/reagent/drink/juice/potato = 1, "tomato" = 1, "carrot" = 1, "eggplant" = 1, "mushroom" = 1)
+	fruit = list("potato" = 1, "tomato" = 1, "carrot" = 1, "eggplant" = 1, "mushroom" = 1)
 	reagents = list(/datum/reagent/water = 10)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
 	result = /obj/item/weapon/reagent_containers/food/snacks/stew
@@ -891,7 +891,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/aesirsalad
 
 /datum/recipe/validsalad
-	fruit = list(/datum/reagent/drink/juice/potato = 1, "ambrosia" = 3)
+	fruit = list("potato" = 1, "ambrosia" = 3)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meatball)
 	result = /obj/item/weapon/reagent_containers/food/snacks/validsalad
 	make_food(var/obj/container as obj)

@@ -16,7 +16,6 @@
 /obj/item/organ/internal/liver/process()
 
 	..()
-
 	if(!owner)
 		return
 
@@ -66,7 +65,8 @@
 
 		// If you drink alcohol, your liver won't heal.
 		if(owner.chem_effects[CE_ALCOHOL])
-			take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * PROCESS_ACCURACY, prob(1)) // Chance to warn them
+			if(owner.chem_effects[CE_ALCOHOL_TOXIC])
+				take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC] * PROCESS_ACCURACY, prob(90)) // Chance to warn them
 
 		// Heal a bit if needed. This allows recovery from low amounts of toxloss.
 		else if(damage < min_broken_damage && !owner.chem_effects[CE_TOXIN] && !owner.radiation)
@@ -82,7 +82,7 @@
 				B.volume += owner.chem_effects[CE_BLOODRESTORE]
 
 	// Blood loss or liver damage make you lose nutriments
-	var/blood_volume = owner.get_effective_blood_volume()
+	var/blood_volume = owner.get_blood_volume()
 	if(blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
 		if(owner.nutrition >= 300)
 			owner.nutrition -= 10

@@ -10,7 +10,7 @@
 
 	language = LANGUAGE_NABBER
 	default_language = LANGUAGE_NABBER
-	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_TRADEBAND, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
+	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
 	additional_langs = list(LANGUAGE_GALCOM)
 	name_language = LANGUAGE_NABBER
 	min_age = 8
@@ -26,6 +26,7 @@
 
 	blood_color = "#525252"
 	flesh_color = "#525252"
+	blood_oxy = 0
 
 	reagent_tag = IS_NABBER
 
@@ -41,7 +42,7 @@
 	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/nabber
-	total_health = 150
+	total_health = 200
 	brute_mod = 0.85
 	burn_mod =  1.35
 	gluttonous = GLUT_SMALLER

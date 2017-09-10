@@ -25,10 +25,10 @@
 	desc = "General Utility Pod Helm"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_calypso_helm = 77
-/datum/access/calypso_helm
-	id = access_calypso_helm
-	desc = "Calypso Helm"
+/var/const/access_expedition_shuttle_helm = 77
+/datum/access/exploration_shuttle_helm
+	id = access_expedition_shuttle_helm
+	desc = "Charon Helm"
 	region = ACCESS_REGION_GENERAL
 
 /var/const/access_aquila = 78
@@ -93,10 +93,10 @@
 	desc = "Gunnery"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_calypso = 88
-/datum/access/calypso
-	id = access_calypso
-	desc = "Calypso"
+/var/const/access_expedition_shuttle = 88
+/datum/access/exploration_shuttle
+	id = access_expedition_shuttle
+	desc = "Charon"
 	region = ACCESS_REGION_GENERAL
 
 /var/const/access_guppy = 89

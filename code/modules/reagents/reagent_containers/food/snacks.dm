@@ -564,7 +564,7 @@
 	icon_state = "egg"
 	filling_color = "#FFFFFF"
 
-/obj/item/weapon/reagent_containers/food/snacks/New()
+/obj/item/weapon/reagent_containers/food/snacks/boiledegg/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 

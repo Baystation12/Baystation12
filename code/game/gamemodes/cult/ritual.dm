@@ -210,7 +210,7 @@ var/list/Tier4Runes = list(
 	set category = "Cult Magic"
 	set name = "Rune: Mass Defile"
 
-	make_rune(/obj/effect/rune/massdefile, cost= 80)
+	make_rune(/obj/effect/rune/massdefile, tome_required = 1, cost = 20)
 
 /mob/proc/armor_rune()
 	set category = "Cult Magic"

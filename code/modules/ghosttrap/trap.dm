@@ -215,6 +215,7 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	object = "cultist"
 	ban_checks = list("cultist")
 	pref_check = MODE_CULTIST
+	can_set_own_name = FALSE
 	ghost_trap_message = "They are occupying a cultist's body now."
 	ghost_trap_role = "Cultist"
 

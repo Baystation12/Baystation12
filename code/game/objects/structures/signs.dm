@@ -84,7 +84,6 @@
 	icon_state = "securearea"
 
 /obj/structure/sign/warning/detailed
-	name = "\improper WARNING 2"
 	icon_state = "securearea2"
 
 /obj/structure/sign/warning/New()

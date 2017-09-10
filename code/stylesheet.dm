@@ -57,6 +57,7 @@ em						{font-style: normal;font-weight: bold;}
 .sciradio				{color: #993399;}
 .supradio				{color: #5F4519;}
 .srvradio				{color: #6eaa2c;}
+.utlradio				{color: #68099E;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
@@ -98,6 +99,8 @@ h1.alert, h2.alert		{color: #000000;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 .terran					{color: #9C250B;}
+.moon					{color: #422863;}
+.spacer					{color: #FF6600;}
 
 .interface				{color: #330033;}
 
