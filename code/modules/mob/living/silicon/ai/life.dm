@@ -2,6 +2,10 @@
 	if (src.stat == DEAD)
 		return
 
+	if(health <= 0)
+		death()
+		return
+
 	if (src.stat!=CONSCIOUS)
 		src.cameraFollow = null
 		src.reset_view(null)
