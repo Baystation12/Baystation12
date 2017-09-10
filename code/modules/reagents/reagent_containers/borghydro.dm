@@ -23,7 +23,7 @@
 /obj/item/weapon/reagent_containers/borghypo/crisis
 	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/tramadol)
 
-/obj/item/weapon/reagent_containers/borghypo/New()
+/obj/item/weapon/reagent_containers/borghypo/Initialize()
 	. = ..()
 
 	for(var/T in reagent_ids)
@@ -89,7 +89,7 @@
 		if(mode == i)
 			t += "<b>[reagent_names[i]]</b>"
 		else
-			t += "<a href='?src=\ref[src];reagent=[reagent_ids[i]]'>[reagent_names[i]]</a>"
+			t += "<a href='?src=\ref[src];reagent_index=[i]'>[reagent_names[i]]</a>"
 	t = "Available reagents: [t]."
 	to_chat(user, t)
 
@@ -98,11 +98,11 @@
 /obj/item/weapon/reagent_containers/borghypo/Topic(var/href, var/list/href_list)
 	if((. = ..()))
 		return
-	if(href_list["reagent"])
-		var/t = reagent_ids.Find(href_list["reagent"])
-		if(t)
+	if(href_list["reagent_index"])
+		var/index = text2num(href_list["reagent_index"])
+		if(index > 0 && index <= reagent_ids.len)
 			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
-			mode = t
+			mode = index
 			var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_ids[mode]]
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>")
 		return 1
