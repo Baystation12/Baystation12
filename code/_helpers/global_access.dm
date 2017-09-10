@@ -249,8 +249,6 @@
 			return global.assigned;
 		if("assigned_blocks")
 			return global.assigned_blocks;
-		if("assistant_occupations")
-			return global.assistant_occupations;
 		if("atmosphere_alarm")
 			return global.atmosphere_alarm;
 		if("attack_log_repository")
@@ -299,8 +297,6 @@
 			return global.can_call_ert;
 		if("captain_announcement")
 			return global.captain_announcement;
-		if("cargo_positions")
-			return global.cargo_positions;
 		if("cargo_supply_pack_root")
 			return global.cargo_supply_pack_root;
 		if("cargo_supply_packs")
@@ -325,8 +321,6 @@
 			return global.church_name;
 		if("citizenship_choices")
 			return global.citizenship_choices;
-		if("civilian_positions")
-			return global.civilian_positions;
 		if("client_preference_stats_")
 			return global.client_preference_stats_;
 		if("client_repository")
@@ -341,8 +335,6 @@
 			return global.command_announcement;
 		if("command_name")
 			return global.command_name;
-		if("command_positions")
-			return global.command_positions;
 		if("commandos")
 			return global.commandos;
 		if("common_tools")
@@ -427,8 +419,6 @@
 			return global.endgame_exits;
 		if("endgame_safespawns")
 			return global.endgame_safespawns;
-		if("engineering_positions")
-			return global.engineering_positions;
 		if("ert")
 			return global.ert;
 		if("ert_base_chance")
@@ -685,8 +675,6 @@
 			return global.mechas_list;
 		if("mechtoys")
 			return global.mechtoys;
-		if("medical_positions")
-			return global.medical_positions;
 		if("mercs")
 			return global.mercs;
 		if("merged")
@@ -761,8 +749,6 @@
 			return global.ninjastart;
 		if("non_fakeattack_weapons")
 			return global.non_fakeattack_weapons;
-		if("nonhuman_positions")
-			return global.nonhuman_positions;
 		if("not_incapacitated_turf_state")
 			return global.not_incapacitated_turf_state;
 		if("ntnet_card_uid")
@@ -931,8 +917,6 @@
 			return global.same_wires;
 		if("scheduler")
 			return global.scheduler;
-		if("science_positions")
-			return global.science_positions;
 		if("secondary_mode")
 			return global.secondary_mode;
 		if("secret_force_mode")
@@ -945,8 +929,6 @@
 			return global.security_announcement_up;
 		if("security_level")
 			return global.security_level;
-		if("security_positions")
-			return global.security_positions;
 		if("seen_citizenships")
 			return global.seen_citizenships;
 		if("seen_factions")
@@ -961,8 +943,6 @@
 			return global.sent_spiders_to_station;
 		if("server_name")
 			return global.server_name;
-		if("service_positions")
-			return global.service_positions;
 		if("severity_to_string")
 			return global.severity_to_string;
 		if("shatter_sound")
@@ -1039,10 +1019,6 @@
 			return global.supply_drop;
 		if("supply_methods_")
 			return global.supply_methods_;
-		if("supply_positions")
-			return global.supply_positions;
-		if("support_positions")
-			return global.support_positions;
 		if("surgery_steps")
 			return global.surgery_steps;
 		if("swapmaps_byname")
@@ -1458,8 +1434,6 @@
 			global.assigned=newval;
 		if("assigned_blocks")
 			global.assigned_blocks=newval;
-		if("assistant_occupations")
-			global.assistant_occupations=newval;
 		if("atmosphere_alarm")
 			global.atmosphere_alarm=newval;
 		if("attack_log_repository")
@@ -1508,8 +1482,6 @@
 			global.can_call_ert=newval;
 		if("captain_announcement")
 			global.captain_announcement=newval;
-		if("cargo_positions")
-			global.cargo_positions=newval;
 		if("cargo_supply_pack_root")
 			global.cargo_supply_pack_root=newval;
 		if("cargo_supply_packs")
@@ -1534,8 +1506,6 @@
 			global.church_name=newval;
 		if("citizenship_choices")
 			global.citizenship_choices=newval;
-		if("civilian_positions")
-			global.civilian_positions=newval;
 		if("client_preference_stats_")
 			global.client_preference_stats_=newval;
 		if("client_repository")
@@ -1550,8 +1520,6 @@
 			global.command_announcement=newval;
 		if("command_name")
 			global.command_name=newval;
-		if("command_positions")
-			global.command_positions=newval;
 		if("commandos")
 			global.commandos=newval;
 		if("common_tools")
@@ -1636,8 +1604,6 @@
 			global.endgame_exits=newval;
 		if("endgame_safespawns")
 			global.endgame_safespawns=newval;
-		if("engineering_positions")
-			global.engineering_positions=newval;
 		if("ert")
 			global.ert=newval;
 		if("ert_base_chance")
@@ -1894,8 +1860,6 @@
 			global.mechas_list=newval;
 		if("mechtoys")
 			global.mechtoys=newval;
-		if("medical_positions")
-			global.medical_positions=newval;
 		if("mercs")
 			global.mercs=newval;
 		if("merged")
@@ -1970,8 +1934,6 @@
 			global.ninjastart=newval;
 		if("non_fakeattack_weapons")
 			global.non_fakeattack_weapons=newval;
-		if("nonhuman_positions")
-			global.nonhuman_positions=newval;
 		if("not_incapacitated_turf_state")
 			global.not_incapacitated_turf_state=newval;
 		if("ntnet_card_uid")
@@ -2140,8 +2102,6 @@
 			global.same_wires=newval;
 		if("scheduler")
 			global.scheduler=newval;
-		if("science_positions")
-			global.science_positions=newval;
 		if("secondary_mode")
 			global.secondary_mode=newval;
 		if("secret_force_mode")
@@ -2154,8 +2114,6 @@
 			global.security_announcement_up=newval;
 		if("security_level")
 			global.security_level=newval;
-		if("security_positions")
-			global.security_positions=newval;
 		if("seen_citizenships")
 			global.seen_citizenships=newval;
 		if("seen_factions")
@@ -2170,8 +2128,6 @@
 			global.sent_spiders_to_station=newval;
 		if("server_name")
 			global.server_name=newval;
-		if("service_positions")
-			global.service_positions=newval;
 		if("severity_to_string")
 			global.severity_to_string=newval;
 		if("shatter_sound")
@@ -2248,10 +2204,6 @@
 			global.supply_drop=newval;
 		if("supply_methods_")
 			global.supply_methods_=newval;
-		if("supply_positions")
-			global.supply_positions=newval;
-		if("support_positions")
-			global.support_positions=newval;
 		if("surgery_steps")
 			global.surgery_steps=newval;
 		if("swapmaps_byname")
@@ -2542,7 +2494,6 @@
 	"asset_datums",
 	"assigned",
 	"assigned_blocks",
-	"assistant_occupations",
 	"atmosphere_alarm",
 	"attack_log_repository",
 	"autolathe_categories",
@@ -2567,7 +2518,6 @@
 	"cameranet_",
 	"can_call_ert",
 	"captain_announcement",
-	"cargo_positions",
 	"cargo_supply_pack_root",
 	"cargo_supply_packs",
 	"changelog_hash",
@@ -2580,7 +2530,6 @@
 	"chicken_count",
 	"church_name",
 	"citizenship_choices",
-	"civilian_positions",
 	"client_preference_stats_",
 	"client_repository",
 	"clown_sound",
@@ -2588,7 +2537,6 @@
 	"comm_message_listeners",
 	"command_announcement",
 	"command_name",
-	"command_positions",
 	"commandos",
 	"common_tools",
 	"config",
@@ -2631,7 +2579,6 @@
 	"empty_playable_ai_cores",
 	"endgame_exits",
 	"endgame_safespawns",
-	"engineering_positions",
 	"ert",
 	"ert_base_chance",
 	"escape_pods",
@@ -2760,7 +2707,6 @@
 	"maze_cell_count",
 	"mechas_list",
 	"mechtoys",
-	"medical_positions",
 	"mercs",
 	"merged",
 	"message_delay",
@@ -2798,7 +2744,6 @@
 	"ninjas",
 	"ninjastart",
 	"non_fakeattack_weapons",
-	"nonhuman_positions",
 	"not_incapacitated_turf_state",
 	"ntnet_card_uid",
 	"ntnet_global",
@@ -2883,14 +2828,12 @@
 	"rustle_sound",
 	"same_wires",
 	"scheduler",
-	"science_positions",
 	"secondary_mode",
 	"secret_force_mode",
 	"sector_shuttles",
 	"security_announcement_down",
 	"security_announcement_up",
 	"security_level",
-	"security_positions",
 	"seen_citizenships",
 	"seen_factions",
 	"seen_religions",
@@ -2898,7 +2841,6 @@
 	"send_emergency_team",
 	"sent_spiders_to_station",
 	"server_name",
-	"service_positions",
 	"severity_to_string",
 	"shatter_sound",
 	"ship_engines",
@@ -2937,8 +2879,6 @@
 	"supply_controller",
 	"supply_drop",
 	"supply_methods_",
-	"supply_positions",
-	"support_positions",
 	"surgery_steps",
 	"swapmaps_byname",
 	"swapmaps_compiled_maxx",

@@ -138,4 +138,6 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 		return "Science"
 	if(job.department_flag & SRV)
 		return "Service"
+	if(job.department_flag & UTL)
+		return "Utility"
 	return "Common"

@@ -650,6 +650,12 @@ th.srv {
     color: #ffffff;
 }
 
+th.utl {
+    background: #a3a332;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.misc {
     background: #666666;
     font-weight: bold;
