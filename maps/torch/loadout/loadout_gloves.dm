@@ -67,7 +67,7 @@
 	display_name = "gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany
 	cost = 3
-	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Cook", "Bartender", "Passenger", "Merchant")
+	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chef, /datum/job/bartender, /datum/job/assistant, /datum/job/merchant)
 
 /datum/gear/gloves/dress
 	display_name = "gloves, dress"

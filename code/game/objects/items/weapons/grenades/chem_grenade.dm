@@ -178,7 +178,7 @@
 			C.drop_from_inventory(src)
 			C.throw_mode_off()
 
-		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
+		set_invisibility(INVISIBILITY_MAXIMUM) //Why am i doing this?
 		spawn(50)		   //To make sure all reagents can work
 			qdel(src)	   //correctly before deleting the grenade.
 
@@ -202,9 +202,9 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("aluminum", 30)
-		B2.reagents.add_reagent("foaming_agent", 10)
-		B2.reagents.add_reagent("pacid", 10)
+		B1.reagents.add_reagent(/datum/reagent/aluminum, 30)
+		B2.reagents.add_reagent(/datum/reagent/foaming_agent, 10)
+		B2.reagents.add_reagent(/datum/reagent/acid/polyacid, 10)
 
 		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 
@@ -223,11 +223,11 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("aluminum", 15)
-		B1.reagents.add_reagent("fuel",20)
-		B2.reagents.add_reagent("phoron", 15)
-		B2.reagents.add_reagent("sacid", 15)
-		B1.reagents.add_reagent("fuel",20)
+		B1.reagents.add_reagent(/datum/reagent/aluminum, 15)
+		B1.reagents.add_reagent(/datum/reagent/fuel,20)
+		B2.reagents.add_reagent(/datum/reagent/toxin/phoron, 15)
+		B2.reagents.add_reagent(/datum/reagent/acid, 15)
+		B1.reagents.add_reagent(/datum/reagent/fuel,20)
 
 		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 
@@ -246,10 +246,10 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("plantbgone", 25)
-		B1.reagents.add_reagent("potassium", 25)
-		B2.reagents.add_reagent("phosphorus", 25)
-		B2.reagents.add_reagent("sugar", 25)
+		B1.reagents.add_reagent(/datum/reagent/toxin/plantbgone, 25)
+		B1.reagents.add_reagent(/datum/reagent/potassium, 25)
+		B2.reagents.add_reagent(/datum/reagent/phosphorus, 25)
+		B2.reagents.add_reagent(/datum/reagent/sugar, 25)
 
 		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 
@@ -268,9 +268,9 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("surfactant", 40)
-		B2.reagents.add_reagent("water", 40)
-		B2.reagents.add_reagent("cleaner", 10)
+		B1.reagents.add_reagent(/datum/reagent/surfactant, 40)
+		B2.reagents.add_reagent(/datum/reagent/water, 40)
+		B2.reagents.add_reagent(/datum/reagent/space_cleaner, 10)
 
 		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 
@@ -289,11 +289,11 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/large/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/large/B2 = new(src)
 
-		B1.reagents.add_reagent("phosphorus", 40)
-		B1.reagents.add_reagent("potassium", 40)
-		B1.reagents.add_reagent("condensedcapsaicin", 40)
-		B2.reagents.add_reagent("sugar", 40)
-		B2.reagents.add_reagent("condensedcapsaicin", 80)
+		B1.reagents.add_reagent(/datum/reagent/phosphorus, 40)
+		B1.reagents.add_reagent(/datum/reagent/potassium, 40)
+		B1.reagents.add_reagent(/datum/reagent/capsaicin/condensed, 40)
+		B2.reagents.add_reagent(/datum/reagent/sugar, 40)
+		B2.reagents.add_reagent(/datum/reagent/capsaicin/condensed, 80)
 
 		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 

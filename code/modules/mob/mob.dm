@@ -138,6 +138,9 @@
 
 /mob/proc/movement_delay()
 	. = 0
+	if(istype(loc, /turf))
+		var/turf/T = loc
+		. += T.movement_delay
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
@@ -250,7 +253,7 @@
 		return 0
 
 	var/obj/P = new /obj/effect/decal/point(tile)
-	P.invisibility = invisibility
+	P.set_invisibility(invisibility)
 	spawn (20)
 		if(P)
 			qdel(P)	// qdel

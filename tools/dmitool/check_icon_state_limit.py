@@ -19,7 +19,6 @@ for root, subdirs, files in walk(args.dir):
             file_path = path.join(root, filename)
             dmi_info = dmitool.info(file_path)
             number_of_icon_states = len(dmi_info["states"])
-            print("{0} - {1}".format(file_path, number_of_icon_states))
             if number_of_icon_states > 512:
                 bad_dmi_files.append((file_path, number_of_icon_states))
 

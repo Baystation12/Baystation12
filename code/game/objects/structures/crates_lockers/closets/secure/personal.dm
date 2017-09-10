@@ -48,7 +48,7 @@
 		..()
 
 /obj/structure/closet/secure_closet/personal/CanToggleLock(var/mob/user, var/obj/item/weapon/card/id/id_card)
-	return ..() || !registered_name || ((istype(id_card) && (registered_name == id_card.registered_name)))
+	return ..() || (istype(id_card) && id_card.registered_name && (!registered_name || (registered_name == id_card.registered_name)))
 
 /obj/structure/closet/secure_closet/personal/verb/reset()
 	set src in oview(1) // One square distance

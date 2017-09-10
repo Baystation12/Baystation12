@@ -50,7 +50,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/CO
 	name = OUTFIT_JOB_NAME("Commanding Officer")
 	glasses = /obj/item/clothing/glasses/sunglasses
-	uniform = /obj/item/clothing/under/utility/expeditionary/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/command
 	l_ear = /obj/item/device/radio/headset/heads/torchcaptain
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition/co
@@ -62,7 +62,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO
 	name = OUTFIT_JOB_NAME("Executive Officer")
-	uniform = /obj/item/clothing/under/utility/expeditionary/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/command
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
@@ -93,7 +93,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer - Torch")
 	l_ear  =/obj/item/device/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/under/utility/expeditionary/medical/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/silver/medical
@@ -111,7 +111,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	name = OUTFIT_JOB_NAME("Chief Engineer - Torch")
-	uniform = /obj/item/clothing/under/utility/expeditionary/engineering/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	l_ear = /obj/item/device/radio/headset/heads/ce
@@ -138,7 +138,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/command/cos
 	name = OUTFIT_JOB_NAME("Chief of Security")
 	l_ear = /obj/item/device/radio/headset/heads/cos
-	uniform = /obj/item/clothing/under/utility/expeditionary/security/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/silver/security
@@ -201,7 +201,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
-	uniform = /obj/item/clothing/under/utility/expeditionary/command
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/bridgeofficer
@@ -369,7 +369,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	name = OUTFIT_JOB_NAME("Physician")
-	uniform = /obj/item/clothing/under/utility/expeditionary/medical
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/medical/senior
@@ -467,7 +467,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
 	name = OUTFIT_JOB_NAME("Counselor - Expeditionary Corps")
-	uniform = /obj/item/clothing/under/utility/expeditionary/medical
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 
@@ -552,7 +552,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/ec
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Expeditionary Corps")
-	uniform = /obj/item/clothing/under/utility/expeditionary
+	uniform = /obj/item/clothing/under/utility/expeditionary/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
@@ -560,13 +560,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet
+	uniform = /obj/item/clothing/under/utility/fleet/service
 	head = /obj/item/clothing/head/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/marine
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Marine")
-	uniform = /obj/item/clothing/under/utility/marine
+	uniform = /obj/item/clothing/under/utility/marine/service
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
@@ -580,7 +580,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook/ec
 	name = OUTFIT_JOB_NAME("Cook - Expeditionary Corps")
-	uniform = /obj/item/clothing/under/utility/expeditionary
+	uniform = /obj/item/clothing/under/utility/expeditionary/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/service/chef
@@ -588,19 +588,19 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet
 	name = OUTFIT_JOB_NAME("Cook - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet
+	uniform = /obj/item/clothing/under/utility/fleet/service
 	head = /obj/item/clothing/head/utility/fleet
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook/marine
 	name = OUTFIT_JOB_NAME("Cook - Marine")
-	uniform = /obj/item/clothing/under/utility/marine
+	uniform = /obj/item/clothing/under/utility/marine/service
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot //until they get a better uniform
 	name = OUTFIT_JOB_NAME("SolGov Pilot")
-	uniform = /obj/item/clothing/under/utility/expeditionary/command/pilot
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/command/pilot
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
@@ -646,6 +646,26 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/utility/marine
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
+
+//Explorer Outfits
+
+/decl/hierarchy/outfit/job/torch/crew/service/pathfinder
+	name = OUTFIT_JOB_NAME("Pathfinder")
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/service 
+	shoes = /obj/item/clothing/shoes/dutyboots
+	head = /obj/item/clothing/head/soft/sol/expedition
+	id_type = /obj/item/weapon/card/id/torch/crew/pathfinder
+	pda_type = /obj/item/device/pda
+	l_ear = /obj/item/device/radio/headset/pilot
+
+/decl/hierarchy/outfit/job/torch/crew/service/explorer
+	name = OUTFIT_JOB_NAME("Explorer")
+	uniform = /obj/item/clothing/under/utility/expeditionary/service
+	head = /obj/item/clothing/head/soft/sol/expedition
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/explorer
+	pda_type = /obj/item/device/pda
+	l_ear = /obj/item/device/radio/headset
 
 //Passenger Outfits
 

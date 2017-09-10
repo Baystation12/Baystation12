@@ -188,7 +188,7 @@
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
-	fill_cigarre_package(src,list("fuel" = 4))
+	fill_cigarre_package(src,list(/datum/reagent/fuel = 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 

@@ -1,7 +1,7 @@
 /datum/phenomena/communicate
 	name = "Direct Communication"
 	cost = 0
-	flags = 0
+	flags = PHENOMENA_FOLLOWER | PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 
 /datum/phenomena/communicate/activate(var/mob/living/L)

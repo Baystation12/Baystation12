@@ -105,3 +105,8 @@
 /decl/vv_set_handler/icon_state_handler
 	handled_type = /atom
 	handled_vars = list("icon_state" = /atom/proc/set_icon_state)
+
+/decl/vv_set_handler/invisibility_handler
+	handled_type = /atom
+	handled_vars = list("invisibility" = /atom/proc/set_invisibility)
+	predicates = list(/proc/is_num_predicate)

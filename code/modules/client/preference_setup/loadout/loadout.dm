@@ -43,6 +43,7 @@ var/list/gear_datums = list()
 	name = "Loadout"
 	sort_order = 1
 	var/current_tab = "General"
+	var/hide_unavailable_gear = 0
 
 /datum/category_item/player_setup_item/loadout/load_character(var/savefile/S)
 	from_file(S["gear_list"], pref.gear_list)
@@ -113,7 +114,11 @@ var/list/gear_datums = list()
 	if(total_cost < MAX_GEAR_COST)
 		fcolor = "#E67300"
 	. += "<table align = 'center' width = 100%>"
-	. += "<tr><td colspan=3><center><a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
+	. += "<tr><td colspan=3><center>"
+	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\>"
+	. += "</a><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b>"
+	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
+	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
 
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
@@ -146,40 +151,46 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
 	. += "<tr><td colspan=3><hr></td></tr>"
 	var/jobs = list()
-	if(pref.job_high || pref.job_medium || pref.job_low)
-		if(pref.job_high) //Is not a list like the others so a check just in case
-			jobs += pref.job_high
-		jobs += pref.job_medium
-		jobs += pref.job_low
+	if(job_master)
+		for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
+			var/datum/job/J = job_master.occupations_by_title[job_title]
+			if(J)
+				dd_insertObjectList(jobs, J)
 	for(var/gear_name in LC.gear)
 		if(!(gear_name in valid_gear_choices()))
 			continue
+		var/list/entry = list()
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
-		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
-		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
-		. += "<td><font size=2>[G.description]</font>"
+		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
+		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
+		entry += "<td><font size=2>[G.description]</font>"
+		var/allowed = 1
 		if(G.allowed_roles)
-			. += "<br><i>"
+			var/good_job = 0
+			var/bad_job = 0
+			entry += "<br><i>"
 			var/ind = 0
-			for(var/J in jobs)
-				if(J in G.allowed_roles)
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=55cc55>[J]</font>"
+			for(var/datum/job/J in jobs)
+				++ind
+				if(ind > 1)
+					entry += ", "
+				if(J.type in G.allowed_roles)
+					entry += "<font color=55cc55>[J.title]</font>"
+					good_job = 1
 				else
-					++ind
-					if(ind > 1)
-						. += ", "
-					. += "<font color=cc5555>[J]</font>"
-			. += "</i>"
-		.+= "</tr>"
+					entry += "<font color=cc5555>[J.title]</font>"
+					bad_job = 1
+			allowed = good_job || !bad_job
+			entry += "</i>"
+		entry += "</tr>"
 		if(ticked)
-			. += "<tr><td colspan=3>"
+			entry += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
-				. += " <a href='?src=\ref[src];gear=[G.display_name];tweak=\ref[tweak]'>[tweak.get_contents(get_tweak_metadata(G, tweak))]</a>"
-			. += "</td></tr>"
+				entry += " <a href='?src=\ref[src];gear=[G.display_name];tweak=\ref[tweak]'>[tweak.get_contents(get_tweak_metadata(G, tweak))]</a>"
+			entry += "</td></tr>"
+		if(!hide_unavailable_gear || allowed || ticked)
+			. += entry
 	. += "</table>"
 	. = jointext(.,null)
 
@@ -241,6 +252,9 @@ var/list/gear_datums = list()
 		var/list/gear = pref.gear_list[pref.gear_slot]
 		gear.Cut()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+	if(href_list["toggle_hiding"])
+		hide_unavailable_gear = !hide_unavailable_gear
+		return TOPIC_REFRESH
 	return ..()
 
 /datum/category_item/player_setup_item/loadout/update_setup(var/savefile/preferences, var/savefile/character)

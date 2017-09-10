@@ -7,19 +7,19 @@
 	var/datum/geosample/geologic_data
 	var/ore/ore = null // set to a type to find the right instance on init
 
-	New()
-		..()
-		if(ispath(ore))
-			ensure_ore_data_initialised()
-			ore = ores_by_type[ore]
-			if(ore.ore != type)
-				world.log << "[src] ([src.type]) had ore type [ore.type] but that type does not have [src.type] set as its ore item!"
-			update_ore()
+/obj/item/weapon/ore/Initialize()
+	. = ..()
+	if(ispath(ore))
+		ensure_ore_data_initialised()
+		ore = ores_by_type[ore]
+		if(ore.ore != type)
+			log_error("[src] ([src.type]) had ore type [ore.type] but that type does not have [src.type] set as its ore item!")
+		update_ore()
 
-	proc/update_ore()
-		name = ore.display_name
-		icon_state = "ore_[ore.icon_tag]"
-		origin_tech = ore.origin_tech.Copy()
+/obj/item/weapon/ore/proc/update_ore()
+	name = ore.display_name
+	icon_state = "ore_[ore.icon_tag]"
+	origin_tech = ore.origin_tech.Copy()
 
 /obj/item/weapon/ore/slag
 	name = "Slag"

@@ -8,10 +8,7 @@
 	var/holy = 0
 
 	// Initial air contents (in moles)
-	var/oxygen = 0
-	var/carbon_dioxide = 0
-	var/nitrogen = 0
-	var/phoron = 0
+	var/list/initial_gas
 
 	//Properties for airtight tiles (/wall)
 	var/thermal_conductivity = 0.05
@@ -28,24 +25,21 @@
 
 	var/list/decals
 
+	var/movement_delay
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
 		spawn( 0 )
 			src.Entered(AM)
 			return
-	turfs |= src
 
 	if(dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
 
-/turf/proc/initialize()
-	return
-
 /turf/Destroy()
-	turfs -= src
 	remove_cleanables()
 	..()
 	return QDEL_HINT_IWILLGC
@@ -162,6 +156,9 @@ var/const/enterloopsanity = 100
 /turf/proc/is_plating()
 	return 0
 
+/turf/proc/protects_atom(var/atom/A)
+	return FALSE
+
 /turf/proc/inertial_drift(atom/movable/A)
 	if(!(A.last_move))	return
 	if((istype(A, /mob/) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
@@ -226,7 +223,7 @@ var/const/enterloopsanity = 100
 
 //expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source, mob/user = null)
-	if(source.reagents.has_reagent("water", 1) || source.reagents.has_reagent("cleaner", 1))
+	if(source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/space_cleaner, 1))
 		clean_blood()
 		remove_cleanables()
 	else

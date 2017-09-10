@@ -74,7 +74,7 @@
 
 	afterattack(var/obj/target, var/mob/user, var/proximity)
 
-		if(!is_open_container() || !proximity || user.a_intent == I_HELP)
+		if(!is_open_container() || !proximity)
 			return
 
 		for(var/type in can_be_placed_into)
@@ -191,13 +191,13 @@
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
 	New()
 		..()
-		reagents.add_reagent("cryoxadone", 30)
+		reagents.add_reagent(/datum/reagent/cryoxadone, 30)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/beaker/sulphuric
 	New()
 		..()
-		reagents.add_reagent("sacid", 60)
+		reagents.add_reagent(/datum/reagent/acid, 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket

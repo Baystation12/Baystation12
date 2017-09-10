@@ -167,9 +167,9 @@
 
 			if(no_longer_contained_atoms.len)
 				bad_tests++
-				log_bad("[log_info_line(C)] no longer contains the following atoms: [json_encode(no_longer_contained_atoms)]")
+				log_bad("[log_info_line(C)] no longer contains the following atoms: [log_info_line(no_longer_contained_atoms)]")
 			if(previously_not_contained_atoms.len)
-				log_debug("[log_info_line(C)] now contains the following atoms: [json_encode(previously_not_contained_atoms)]")
+				log_debug("[log_info_line(C)] now contains the following atoms: [log_info_line(previously_not_contained_atoms)]")
 
 	if(bad_tests)
 		fail("[bad_tests] closet\s with inconsistent pre/post-open contents found.")

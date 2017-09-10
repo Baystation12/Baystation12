@@ -70,7 +70,7 @@
 	icon_state = "coatwinter"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	action_button_name = "Toggle Winter Hood"
 	hoodtype = /obj/item/clothing/head/winterhood
@@ -83,7 +83,7 @@
 	body_parts_covered = HEAD
 	cold_protection = HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/captain
 	name = "captain's winter coat"
@@ -126,3 +126,22 @@
 	name = "mining winter coat"
 	icon_state = "coatminer"
 	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/hooded/hoodie
+	name = "hoodie"
+	desc = "A warm sweatshirt."
+	icon_state = "hoodie"
+	item_state = "hoodie"
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	action_button_name = "Toggle Hood"
+	hoodtype = /obj/item/clothing/head/hoodiehood
+	
+/obj/item/clothing/head/hoodiehood
+	name = "hoodie hood"
+	desc = "A hood attached to a warm sweatshirt."
+	icon_state = "generic_hood"
+	body_parts_covered = HEAD
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = HEAD
+	flags_inv = HIDEEARS | BLOCKHAIR
