@@ -275,7 +275,7 @@
 
 
 	if(total_damage)
-		user.visible_message("<span class='danger'>\The [user] slit [src]'s throat open with \the [W]!</span>")
+		user.visible_message("<span class='danger'>\The [user] slit [affecting]'s throat open with \the [W]!</span>")
 
 		if(W.hitsound)
 			playsound(affecting.loc, W.hitsound, 50, 1, -1)
