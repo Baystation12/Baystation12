@@ -9,13 +9,27 @@
 	var/list/cidlogs = list() //List of most recent computer IDs
 	var/list/relatedaccounts = list() //List of (possible) related accounts
 
-/client/proc/saveclientdb()
+/client/proc/saveclientdb(var/key = key)
 	//Loading list of notes for this key
 	var/savefile/clientdb = new("data/player_saves/[copytext(key, 1, 2)]/[key]/clientdb.sav")
+	clientdb["ckey"] << key
 	clientdb["donator"] << donator
 	clientdb["enforcingmod"] << enforcingmod
 	clientdb["alien_whitelist"] << alien_whitelist
 	clientdb["command_whitelist"] << command_whitelist
+	return 1
+
+/client/proc/loadclientdb(var/key = key)
+	//Loading list of notes for this key
+	var/savefile/clientdb = new("data/player_saves/[copytext(key, 1, 2)]/[key]/clientdb.sav")
+	clientdb["donator"] >> donator
+	clientdb["alien_whitelist"] >> alien_whitelist
+	clientdb["enforcingmod"] >> enforcingmod
+	clientdb["command_whitelist"] >> command_whitelist
+	clientdb["datejoined"] >> datejoined
+	if(!datejoined) // No join time set, so we assume he's new.
+		datejoined = world.realtime
+		clientdb["datejoined"] << datejoined
 	return 1
 
 /client/proc/refreshclientdb() // Refreshes the client DB with recent information.

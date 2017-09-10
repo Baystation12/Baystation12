@@ -133,6 +133,9 @@
 
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
+	enfmods = new
+
+	sleep_offline = 1
 
 	processScheduler.deferSetupFor(/datum/controller/process/ticker)
 	processScheduler.setup()
@@ -140,6 +143,7 @@
 
 	spawn(1)
 		CPUUpdater()
+		enfmods.CheckScore()
 
 #ifdef UNIT_TEST
 	spawn(1)
@@ -567,6 +571,8 @@ world/proc/CPUUpdater()
 /hook/startup/proc/loadMods()
 	world.load_mods()
 	world.load_mentors() // no need to write another hook.
+	spawn(20)
+		world.load_enfmods()
 	return 1
 
 /world/proc/load_mods()
@@ -609,6 +615,22 @@ world/proc/CPUUpdater()
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(GLOB.ckey_directory[ckey])
+
+/world/proc/load_enfmods()
+	if(config.admin_legacy_system)
+		var/text = file2text("config/enfmods.txt")
+		if (!text)
+			error("Failed to load config/enfmods.txt")
+		else
+			var/list/lines = splittext(text, "\n")
+			for(var/line in lines)
+				if (!line)
+					continue
+				if (copytext(line, 1, 2) == ";")
+					continue
+				var/ckey = copytext(line, 1, length(line)+1)
+				enfmods.enforcingmods.Add(ckey)
+
 
 /world/proc/update_status()
 	var/s = ""

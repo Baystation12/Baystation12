@@ -615,7 +615,7 @@
 
 /mob/Stat()
 	..()
-	. = (is_client_active(10 MINUTES))
+	. = (is_client_active(5 MINUTES))
 	if(!.)
 		return
 
@@ -627,6 +627,7 @@
 			stat("CPU Status", cpustate)
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
+			stat("Enf. Score:", "[enfmods.modscore]")
 
 	if(client.holder)
 		if(statpanel("Processes") && processScheduler)

@@ -175,9 +175,12 @@
 //	log_client_to_db() Feck off SQL
 
 	send_resources()
-
-	loadclientdb() // Load their files.
+	loadclientdb(src.key) // Load their files.
 	player_age = get_player_age()
+
+	spawn(30)
+		Login()
+
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
@@ -216,6 +219,8 @@
 /client/proc/get_player_age()
 	return round((world.realtime - datejoined) / 864000, 0.1)
 
+/client/proc/Login() //Makeshift login function for clients.
+	refreshclientdb()
 
 
 /client/proc/log_client_to_db()
