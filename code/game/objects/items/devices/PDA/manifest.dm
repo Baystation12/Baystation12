@@ -26,6 +26,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 	var/sci[0]
 	var/car[0]
 	var/sup[0]
+	var/utl[0]
 	var/srv[0]
 	var/civ[0]
 	var/bot[0]
@@ -53,7 +54,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 				mil_rank = list("full" = mil_rank_datum.name, "short" = mil_rank_datum.name_short)
 
 
-		if(real_rank in command_positions)
+		if(real_rank in GLOB.command_positions)
 			heads[++heads.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -64,7 +65,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(rank=="Captain" && heads.len != 1)
 				heads.Swap(1,heads.len)
 
-		if(real_rank in support_positions)
+		if(real_rank in GLOB.support_positions)
 			spt[++spt.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -74,7 +75,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && spt.len != 1)
 				spt.Swap(1,spt.len)
 
-		if(real_rank in security_positions)
+		if(real_rank in GLOB.security_positions)
 			sec[++sec.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -84,7 +85,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && sec.len != 1)
 				sec.Swap(1,sec.len)
 
-		if(real_rank in engineering_positions)
+		if(real_rank in GLOB.engineering_positions)
 			eng[++eng.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -94,7 +95,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && eng.len != 1)
 				eng.Swap(1,eng.len)
 
-		if(real_rank in medical_positions)
+		if(real_rank in GLOB.medical_positions)
 			med[++med.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -104,7 +105,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && med.len != 1)
 				med.Swap(1,med.len)
 
-		if(real_rank in science_positions)
+		if(real_rank in GLOB.science_positions)
 			sci[++sci.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -114,7 +115,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && sci.len != 1)
 				sci.Swap(1,sci.len)
 
-		if(real_rank in cargo_positions)
+		if(real_rank in GLOB.cargo_positions)
 			car[++car.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -124,7 +125,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && car.len != 1)
 				car.Swap(1,car.len)
 
-		if(real_rank in supply_positions)
+		if(real_rank in GLOB.supply_positions)
 			sup[++sup.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -134,7 +135,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && sup.len != 1)
 				sup.Swap(1,sup.len)
 
-		if(real_rank in service_positions)
+		if(real_rank in GLOB.service_positions)
 			srv[++srv.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -144,7 +145,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && srv.len != 1)
 				srv.Swap(1,srv.len)
 
-		if(real_rank in civilian_positions)
+		if(real_rank in GLOB.civilian_positions)
 			civ[++civ.len] = list("name" = name,
 				"rank" = rank,
 				"active" = isactive,
@@ -183,6 +184,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 		"sci" = sci,\
 		"car" = car,\
 		"sup" = sup,\
+		"utl" = utl,\
 		"srv" = srv,\
 		"civ" = civ,\
 		"bot" = bot,\

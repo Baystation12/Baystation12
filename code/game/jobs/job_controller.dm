@@ -33,27 +33,29 @@ var/global/datum/controller/occupations/job_master
 			occupations_by_title[job.title] = job
 			if(!setup_titles) continue
 			if(job.department_flag & COM)
-				command_positions |= job.title
+				GLOB.command_positions |= job.title
 			if(job.department_flag & SPT)
-				support_positions |= job.title
+				GLOB.support_positions |= job.title
 			if(job.department_flag & SEC)
-				security_positions |= job.title
+				GLOB.security_positions |= job.title
 			if(job.department_flag & ENG)
-				engineering_positions += job.title
+				GLOB.engineering_positions += job.title
 			if(job.department_flag & MED)
-				medical_positions |= job.title
+				GLOB.medical_positions |= job.title
 			if(job.department_flag & SCI)
-				science_positions |= job.title
+				GLOB.science_positions |= job.title
+			if(job.department_flag & UTL)
+				GLOB.utility_positions |= job.title
 			if(job.department_flag & SUP)
-				supply_positions |= job.title
+				GLOB.supply_positions |= job.title
 			if(job.department_flag & SRV)
-				service_positions |= job.title
+				GLOB.service_positions |= job.title
 			if(job.department_flag & CRG)
-				cargo_positions |= job.title
+				GLOB.cargo_positions |= job.title
 			if(job.department_flag & CIV)
-				civilian_positions |= job.title
+				GLOB.civilian_positions |= job.title
 			if(job.department_flag & MSC)
-				nonhuman_positions |= job.title
+				GLOB.nonhuman_positions |= job.title
 
 		return 1
 
@@ -151,7 +153,7 @@ var/global/datum/controller/occupations/job_master
 			if(job.is_restricted(player.client.prefs))
 				continue
 
-			if(job.title in command_positions) //If you want a command position, select it!
+			if(job.title in GLOB.command_positions) //If you want a command position, select it!
 				continue
 
 			if(jobban_isbanned(player, job.title))
@@ -181,7 +183,7 @@ var/global/datum/controller/occupations/job_master
 	///This proc is called before the level loop of DivideOccupations() and will try to select a head, ignoring ALL non-head preferences for every level until it locates a head or runs out of levels to check
 	proc/FillHeadPosition()
 		for(var/level = 1 to 3)
-			for(var/command_position in command_positions)
+			for(var/command_position in GLOB.command_positions)
 				var/datum/job/job = GetJob(command_position)
 				if(!job)	continue
 				var/list/candidates = FindOccupationCandidates(job, level)
@@ -221,7 +223,7 @@ var/global/datum/controller/occupations/job_master
 
 	///This proc is called at the start of the level loop of DivideOccupations() and will cause head jobs to be checked before any other jobs of the same level
 	proc/CheckHeadPositions(var/level)
-		for(var/command_position in command_positions)
+		for(var/command_position in GLOB.command_positions)
 			var/datum/job/job = GetJob(command_position)
 			if(!job)	continue
 			var/list/candidates = FindOccupationCandidates(job, level)
