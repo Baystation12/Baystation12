@@ -1886,7 +1886,7 @@ mob/living/carbon/human/can_centcom_reply()
 	return istype(l_ear, /obj/item/device/radio/headset) || istype(r_ear, /obj/item/device/radio/headset)
 
 mob/living/silicon/ai/can_centcom_reply()
-	return common_radio != null && !check_unable(2)
+	return silicon_radio != null && !check_unable(2)
 
 /datum/proc/extra_admin_link(var/prefix, var/sufix, var/short_links)
 	return list()

@@ -137,11 +137,11 @@
 	if (src.stat != 0)
 		uneq_all()
 
-	if(radio)
+	if(silicon_radio)
 		if(!is_component_functioning("radio"))
-			radio.on = 0
+			silicon_radio.on = 0
 		else
-			radio.on = 1
+			silicon_radio.on = 1
 
 	if(is_component_functioning("camera"))
 		src.blinded = 0
