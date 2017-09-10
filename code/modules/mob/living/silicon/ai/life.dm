@@ -2,15 +2,15 @@
 	if (src.stat == DEAD)
 		return
 
-	if(health <= 0)
-		death()
-		return
-
 	if (src.stat!=CONSCIOUS)
 		src.cameraFollow = null
 		src.reset_view(null)
 
 	src.updatehealth()
+
+	if(health <= 0)
+		death()
+		return
 
 	if (!hardware_integrity() || !backup_capacitor())
 		death()
