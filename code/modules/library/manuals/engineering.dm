@@ -366,14 +366,13 @@
 
 
 /obj/item/weapon/book/manual/rust_engine
-	name = "R-UST Operating Manual"
+	name = "R-UST Operating Manual 2553"
 	icon_state = "bookMagazine"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
 
 /obj/item/weapon/book/manual/rust_engine/New()
 	..()
-	name = "<s>WetSkrell Magazine, March 2553</s> [name]"
 	dat = {"<html>
 				<head>
 				<style>
@@ -386,8 +385,6 @@
 				</style>
 				</head>
 				<body>
-				<i>This guide appears to have been scribbled in haste on the back of a WetSkrell magazine...</i>
-				<br><br>
 				So you're the poor fucker who has to try and set this piece of shit up this shift. Congratulations! Here's what you need to know: this is a tokamak fusion reactor that uses a high energy plasma stream in a magnetic field enclosure to achieve fusion. It gets extremely hot extremely quickly, and the field is tempramental. The main principle of operation: maximize plasma temperature while minimizing field instability.
 				<br><br>
 				Deuterium and tritium are generally the most available fuel for the beast. If you're cautious, deut-deut reactions are capable of producing power without being unstable. Deut-trit is the bread and butter of the R-UST. You can keep field instability down by using the gyrotron near the core and not sticking your dick into the fusion torus.

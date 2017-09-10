@@ -127,9 +127,9 @@
 /obj/item/clothing/under/utility/marine
 	name = "marine fatigues"
 	desc = "The utility uniform of the SCG Marine Corps, made from durable material."
-	icon_state = "greyutility"
-	item_state = "gy_suit"
-	worn_state = "greyutility"
+	icon_state = "greenutility"
+	item_state = "jensensuit"
+	worn_state = "greenutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/under/utility/marine/command
@@ -156,12 +156,12 @@
 /obj/item/clothing/under/utility/marine/service
 	starting_accessories = list(/obj/item/clothing/accessory/department/service/marine)
 
-/obj/item/clothing/under/utility/marine/green
-	name = "green fatigues"
-	desc = "A green version of the SCG marine utility uniform, made from durable material."
-	icon_state = "greenutility"
-	item_state = "jensensuit"
-	worn_state = "greenutility"
+/obj/item/clothing/under/utility/marine/urban
+	name = "urban fatigues"
+	desc = "An urban version of the SCG marine utility uniform, made from durable material."
+	icon_state = "greyutility"
+	item_state = "gy_suit"
+	worn_state = "greyutility"
 
 /obj/item/clothing/under/utility/marine/tan
 	name = "tan fatigues"
