@@ -8,6 +8,10 @@
 
 	src.updatehealth()
 
+	if(health <= 0)
+		death()
+		return
+
 	if (!hardware_integrity() || !backup_capacitor())
 		death()
 		return
