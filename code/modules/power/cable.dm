@@ -492,6 +492,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/single
 	amount = 1
 
+/obj/item/stack/cable_coil/single/New(var/loc, var/length = 1, var/param_color = null)
+	..(loc, length, param_color)
+
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"
 	desc = "A device that makes cable."
