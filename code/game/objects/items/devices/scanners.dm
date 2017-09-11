@@ -69,12 +69,14 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			if(H.has_brain_worms())
 				brain_result = "<span class='danger'>ERROR - aberrant/unknown brainwave patterns, advanced scanner recommended</span>"
 			else
-				switch((brain.damage / brain.max_damage)*100)
-					if(0 to 20)
+				switch(brain.get_current_damage_threshold())
+					if(0)
 						brain_result = "<span class='notice'>normal</span>"
-					if(20 to 60)
+					if(1 to 2)
+						brain_result = "<span class='notice'>minor brain damage</span>"
+					if(3 to 5)
 						brain_result = "<span class='warning'>weak</span>"
-					if(60 to INFINITY)
+					if(6 to INFINITY)
 						brain_result = "<span class='danger'>extremely weak</span>"
 					else
 						brain_result = "<span class='danger'>ERROR - Hardware fault</span>"

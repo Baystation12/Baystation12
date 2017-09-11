@@ -311,7 +311,6 @@
 	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
-		breath_fail_ratio = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
 	return !failed_last_breath
