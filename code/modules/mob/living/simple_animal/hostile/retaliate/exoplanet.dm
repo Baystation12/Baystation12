@@ -8,11 +8,16 @@
 	if(see.len)
 		return see
 	if(prey.len)
-		return prey
+		. = list()
+		for(var/weakref/W in prey)
+			var/mob/M = W.resolve()
+			if(M)
+				. += M
+		return
 	if(hunger > 500) //time to look for some food
 		for(var/mob/living/L in view(src, dist))
 			if(!attack_same && L.faction != faction)
-				prey |= L
+				prey |= weakref(L)
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()
