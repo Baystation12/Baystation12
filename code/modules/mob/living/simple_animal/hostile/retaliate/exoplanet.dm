@@ -23,19 +23,20 @@
 	. = ..()
 	if(!stat)
 		hunger++
-		for(var/mob/living/simple_animal/S in range(src,1))
-			if(S.stat == DEAD)
-				visible_message("[src] consumes \the body of [S]!")
-				var/turf/T = get_turf(S)
-				var/obj/item/remains/xeno/X = new(T)
-				X.desc += "These look like they belong to \a [S.name]."
-				hunger = max(0, hunger - 5*S.maxHealth)
-				if(prob(5))
-					S.gib()
-				else
-					qdel(S)
 		if(hunger < 100) //stop hunting when satiated
 			prey.Cut()
+		else
+			for(var/mob/living/simple_animal/S in range(src,1))
+				if(S.stat == DEAD)
+					visible_message("[src] consumes \the body of [S]!")
+					var/turf/T = get_turf(S)
+					var/obj/item/remains/xeno/X = new(T)
+					X.desc += "These look like they belong to \a [S.name]."
+					hunger = max(0, hunger - 5*S.maxHealth)
+					if(prob(5))
+						S.gib()
+					else
+						qdel(S)
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak
 	name = "samak"
