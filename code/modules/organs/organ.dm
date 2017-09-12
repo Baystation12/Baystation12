@@ -411,3 +411,6 @@ var/list/organ_cache = list()
 			. +=  "Septic"
 	if(rejecting)
 		. += "Genetic Rejection"
+		
+/obj/item/organ/proc/isrobotic()
+	return robotic >= ORGAN_ROBOT
