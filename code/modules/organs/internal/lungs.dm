@@ -278,7 +278,10 @@
 				else
 					damage = COLD_GAS_DAMAGE_LEVEL_1
 
-			owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+			if(prob(20))
+				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+			else
+				src.damage += damage
 			owner.fire_alert = 1
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
@@ -292,7 +295,10 @@
 				else
 					damage = HEAT_GAS_DAMAGE_LEVEL_3
 
-			owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+			if(prob(20))
+				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+			else
+				src.damage += damage
 			owner.fire_alert = 2
 
 		//breathing in hot/cold air also heats/cools you a bit
