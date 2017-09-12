@@ -119,6 +119,8 @@
 			createwound( LASER, burn )
 		else
 			createwound( BURN, burn )
+
+	add_pain(0.6*burn + 0.4*brute)
 	//If there are still hurties to dispense
 	if (spillover)
 		owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
@@ -212,7 +214,10 @@
 		lasting_pain += 10
 	else if(is_dislocated())
 		lasting_pain += 5
-	return pain + lasting_pain + 1.2 * brute_dam + 1.5 * burn_dam
+	var/tox_dam = 0
+	for(var/obj/item/organ/internal/I in internal_organs)
+		tox_dam += I.getToxLoss()
+	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)

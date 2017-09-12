@@ -673,7 +673,7 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(getHalLoss() >= (species.total_health - 100))
+		if(get_shock() >= (species.total_health - 100))
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
@@ -807,7 +807,7 @@
 						var/no_damage = 1
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 						if(can_feel_pain())
-							trauma_val = max(shock_stage,getHalLoss())/(species.total_health-100)
+							trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()
 						for(var/obj/item/organ/external/E in organs)
@@ -973,13 +973,18 @@
 
 	if(is_asystole())
 		shock_stage = max(shock_stage, 61)
-	if(get_shock() >= max(50, shock_stage))
+	var/traumatic_shock = get_shock()
+	if(traumatic_shock >= max(50, shock_stage))
 		shock_stage += 1
 	else
 		shock_stage = min(shock_stage, 160)
-		shock_stage = max(shock_stage-1, 0)
+		var/recovery = 1
+		if(traumatic_shock < 0.5 * shock_stage) //lower shock faster if pain is gone completely
+			recovery++
+		if(traumatic_shock < 0.25 * shock_stage)
+			recovery++
+		shock_stage = max(shock_stage - recovery, 0)
 		return
-
 	if(stat) return 0
 
 	if(shock_stage == 10)
@@ -1000,7 +1005,7 @@
 		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = 0)
-			Weaken(20)
+			Weaken(10)
 
 	if(shock_stage >= 80)
 		if (prob(5))
