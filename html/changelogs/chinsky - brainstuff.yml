@@ -1,7 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Changed way lung damage affects people. Instead of straight up oxyloss, it now makes you require higher oxygen pressure - so you can work around it with high pressure internals. Of course it's not 100% failsafe, as blood coughing and breathing stops still remain."
-  - rscadd: "Inapro does more things now. It can heal brain damage up to 60, and also slows down brain damaging a general, more effective at higher oxygenation."
-  - rscadd: "Health analyzers report brain damage a bit different now. They don't report damage that will self-heal without meds. New stage 'minor brain damage' covers range that can be healed with inapro. Rest are more or less same."
-  - rscadd: "Painstuff tweaked around, should generally see slightly less instant KOs from lethal damages."
