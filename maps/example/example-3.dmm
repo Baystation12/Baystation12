@@ -1,0 +1,63 @@
+"a" = (/turf/space,/area/space)
+"b" = (/obj/effect/landmark/map_data{height = 2},/turf/space,/area/space)
+"c" = (/turf/simulated/wall,/area/maintenance/fsmaint2)
+"d" = (/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"e" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"f" = (/obj/structure/lattice,/turf/simulated/open,/area/maintenance/fsmaint2)
+"g" = (/turf/simulated/open,/area/maintenance/fsmaint2)
+"h" = (/obj/machinery/light_switch{pixel_x = 25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"i" = (/obj/effect/shuttle_landmark/upper_level,/turf/space,/area/space)
+"j" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"k" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/ladder,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"l" = (/turf/simulated/floor,/area/maintenance/fsmaint2)
+"m" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{id_tag = "upper_level_dock"; pixel_x = 8; pixel_y = -25},/turf/simulated/floor,/area/maintenance/fsmaint2)
+"n" = (/obj/machinery/door/airlock/external/bolted{frequency = 1379},/turf/simulated/floor,/area/maintenance/fsmaint2)
+"o" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"p" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"q" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"r" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"s" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/air,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"t" = (/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"u" = (/obj/machinery/atmospherics/portables_connector{tag = "icon-map_connector (WEST)"; icon_state = "map_connector"; dir = 8},/obj/machinery/portable_atmospherics/canister/empty,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"v" = (/obj/machinery/light_switch{pixel_x = -25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"w" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{tag = "icon-map_scrubber_on (NORTH)"; icon_state = "map_scrubber_on"; dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"x" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"y" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"z" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"A" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+"B" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/maintenance/fsmaint2)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabaaacccccccccccccccaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddeddfddedddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddfffdddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddgggddddhccccaiaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacjdddkgggdddddllmnaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddodpccccaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddqrscaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdddddddddddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacddddddddddtrucaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacvdddddddddwddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacjdddddddddddxcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacyddddddddddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaczddddddddddddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacAddBdddddBdddcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacccccccccccccccaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

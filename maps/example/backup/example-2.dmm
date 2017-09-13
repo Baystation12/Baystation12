@@ -1,0 +1,74 @@
+"a" = (/turf/space,/area/space)
+"b" = (/obj/effect/landmark/map_data{height = 2},/turf/space,/area/space)
+"c" = (/turf/simulated/wall,/area/medical/surgery2)
+"d" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/iv_drip,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"e" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"f" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/computer/operating,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"g" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/table/glass,/obj/item/weapon/storage/box/syringes,/obj/item/weapon/storage/box/freezer,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"h" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/table/glass,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/storage/box/masks,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"i" = (/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"j" = (/obj/structure/lattice,/turf/simulated/open,/area/medical/surgery2)
+"k" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"l" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/table/glass,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"m" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/sink{tag = "icon-sink (EAST)"; icon_state = "sink"; dir = 4},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"n" = (/turf/simulated/open,/area/medical/surgery2)
+"o" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/table/glass,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/chem_disp_cartridge/peridaxon,/obj/item/stack/nanopaste,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"p" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (EAST)"; icon_state = "body_scannerconsole"; dir = 4},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"q" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (EAST)"; icon_state = "body_scanner_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"r" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/sleeper{tag = "icon-sleeper_0 (WEST)"; icon_state = "sleeper_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"s" = (/obj/machinery/light_switch{pixel_x = 25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"t" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/table/glass,/obj/item/weapon/scalpel/laser1,/obj/item/weapon/scalpel/laser2,/obj/item/weapon/scalpel/laser3,/obj/item/device/robotanalyzer,/obj/item/device/healthanalyzer,/obj/item/weapon/storage/firstaid/adv,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"u" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/ladder/updown,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"v" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/atmospherics/unary/freezer,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"w" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"x" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"y" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"z" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/mecha_part_fabricator,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"A" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/atmospherics/pipe/simple/visible/blue{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"B" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/atmospherics/pipe/manifold/visible/blue,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"C" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/atmospherics/pipe/simple/visible/blue{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"D" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"E" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/organ_printer/flesh/mapped,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"F" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"G" = (/obj/machinery/light_switch{pixel_x = -25},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"H" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"I" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"J" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"K" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"L" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+"M" = (/obj/machinery/light,/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled/white,/area/medical/surgery2)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabaaacccccccccccccccaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacdefghijiikiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacliiimjjniiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacopqirnnniiiiscaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaactiiiuvwxiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacyiziiABCiiiiDcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacEiiiiiiiiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacFiiiiiiiiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaciiiiiiiiiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacGiiiiiiiiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacHiiiiiiiiiiiIcaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacJiiiiiiiiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacKiiiiiiiiiiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacLiiMiiiiiMiiicaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacccccccccccccccaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
