@@ -18,7 +18,7 @@
 	if(!affected)
 		return 0
 	if(affected.robotic >= ORGAN_ROBOT)
-		return affected.hatch == 3
+		return affected.hatch_state == HATCH_OPENED
 	else
 		return affected.open() == (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
 

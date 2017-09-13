@@ -74,7 +74,7 @@
 
 	// Surgery vars.
 	var/cavity_max_w_class = 0
-	var/hatch = 0
+	var/hatch_state = 0
 	var/stage = 0
 	var/cavity = 0
 	var/atom/movable/applied_pressure
@@ -321,7 +321,7 @@
 		else return 0
 
 	if(!damage_amount)
-		if(src.hatch != 2)
+		if(src.hatch_state != HATCH_OPENED)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 		return 0
 
@@ -1212,8 +1212,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 					descriptors += "some burns"
 				if(21 to INFINITY)
 					descriptors += pick("a lot of burns","severe melting")
-		if(hatch)
-			descriptors += "an open panel"
+		switch(hatch_state)
+			if(HATCH_UNSCREWED)
+				descriptors += "a closed but unsecured panel"
+			if(HATCH_OPENED)
+				descriptors += "an open panel"
 
 		return english_list(descriptors)
 
