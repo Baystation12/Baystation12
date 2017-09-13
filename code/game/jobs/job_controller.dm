@@ -44,8 +44,8 @@ var/global/datum/controller/occupations/job_master
 				GLOB.medical_positions |= job.title
 			if(job.department_flag & SCI)
 				GLOB.science_positions |= job.title
-			if(job.department_flag & UTL)
-				GLOB.utility_positions |= job.title
+			if(job.department_flag & EXP)
+				GLOB.exploration_positions |= job.title
 			if(job.department_flag & SUP)
 				GLOB.supply_positions |= job.title
 			if(job.department_flag & SRV)

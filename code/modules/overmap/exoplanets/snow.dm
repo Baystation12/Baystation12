@@ -23,7 +23,7 @@
 	land_type = /turf/simulated/floor/exoplanet/snow
 	water_type = /turf/simulated/floor/exoplanet/ice
 	planetary_area = /area/exoplanet/snow
-	fauna_types = list(/mob/living/simple_animal/hostile/samak, /mob/living/simple_animal/hostile/diyaab, /mob/living/simple_animal/hostile/shantak)
+	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
 	plantcolors = list("#D0FEF5","#93E1D8","#93E1D8", "#B2ABBF", "#3590F3", "#4B4E6D")
 
 /area/exoplanet/snow

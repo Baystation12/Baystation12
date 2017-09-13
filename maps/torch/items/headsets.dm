@@ -47,21 +47,21 @@
 
 /obj/item/device/radio/headset/pilot
 	name = "pilot's headset"
-	desc = "A headset with access to the command, engineering and utility channels."
+	desc = "A headset with access to the command, engineering and exploration channels."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/pilot
 
-/obj/item/device/radio/headset/utility
-	name = "utility headset"
-	desc = "A headset for real tools, with access to the utility channel."
+/obj/item/device/radio/headset/exploration
+	name = "exploration headset"
+	desc = "A headset for real tools, with access to the exploration channel."
 	icon_state = "srv_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/utility
+	ks2type = /obj/item/device/encryptionkey/exploration
 
 /obj/item/device/radio/headset/pathfinder
 	name = "pathfinder's headset"
-	desc = "A headset with access to the command and utility channels."
+	desc = "A headset with access to the command and exploration channels."
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/pathfinder

@@ -16,7 +16,7 @@ var/list/department_radio_keys = list(
 	  ":v" = "Service",		".v" = "Service",
 	  ":p" = "AI Private",	".p" = "AI Private",
 	  ":z" = "Entertainment",".z" = "Entertainment",
-	  ":y" = "Utility",		".y" = "Utility",
+	  ":y" = "Exploration",		".y" = "Exploration",
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -34,7 +34,7 @@ var/list/department_radio_keys = list(
 	  ":V" = "Service",		".V" = "Service",
 	  ":P" = "AI Private",	".P" = "AI Private",
 	  ":Z" = "Entertainment",".Z" = "Entertainment",
-	  ":Y" = "Utility",		".Y" = "Utility",
+	  ":Y" = "Exploration",		".Y" = "Exploration",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -89,7 +89,7 @@ proc/get_radio_key_from_channel(var/channel)
 	return default_language
 
 /mob/proc/is_muzzled()
-	return 0
+	return istype(wear_mask, /obj/item/clothing/mask/muzzle)
 
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise

@@ -69,7 +69,7 @@
 		interpreter.SetVar("$engineering",ENG_FREQ)
 		interpreter.SetVar("$security",	SEC_FREQ)
 		interpreter.SetVar("$supply",	SUP_FREQ)
-		interpreter.SetVar("$utility",	UTL_FREQ)
+		interpreter.SetVar("$exploration",	EXP_FREQ)
 
 		// Signal data
 

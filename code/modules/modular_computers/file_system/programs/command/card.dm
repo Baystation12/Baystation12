@@ -48,7 +48,7 @@
 	data["medical_jobs"] = format_jobs(GLOB.medical_positions)
 	data["science_jobs"] = format_jobs(GLOB.science_positions)
 	data["security_jobs"] = format_jobs(GLOB.security_positions)
-	data["utility_jobs"] = format_jobs(GLOB.utility_positions)
+	data["exploration_jobs"] = format_jobs(GLOB.exploration_positions)
 	data["service_jobs"] = format_jobs(GLOB.service_positions)
 	data["supply_jobs"] = format_jobs(GLOB.supply_positions)
 	data["civilian_jobs"] = format_jobs(GLOB.civilian_positions)

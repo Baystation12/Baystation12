@@ -30,7 +30,7 @@
 	var/list/misc = new()
 	var/list/srv = new()
 	var/list/sup = new()
-	var/list/utl = new()
+	var/list/exp = new()
 	var/list/isactive = new()
 	var/list/mil_ranks = list() // HTML to prepend to name
 	var/dat = {"
@@ -152,9 +152,9 @@
 		for(name in sup)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
-	if(utl.len > 0)
-		dat += "<tr><th colspan=3>Utility</th></tr>"
-		for(name in utl)
+	if(exp.len > 0)
+		dat += "<tr><th colspan=3>Exploration</th></tr>"
+		for(name in exp)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(srv.len > 0)

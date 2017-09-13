@@ -373,9 +373,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         {{/if}}
                     {{/for}}
                 {{/if}}
-				{{if data.manifest.utl.length}}
-                    <tr><th colspan="3" class="utl">Utility</th></tr>
-                    {{for data.manifest["utl"]}}
+				{{if data.manifest.exp.length}}
+                    <tr><th colspan="3" class="exp">Exploration</th></tr>
+                    {{for data.manifest["exp"]}}
                         {{if value.rank == "Head of Personnel"}}
                             <tr><td><span class="good">{{if (value.mil_rank && value.mil_rank.short)}}<abbr title="{{:value.mil_rank.full}}, {{:value.mil_branch.full}}">{{:value.mil_rank.short}}</abbr> {{/if}}{{:value.name}}</span></td><td><span class="good">{{:value.rank}}</span></td><td><span class="good">{{:value.active}}</span></td></tr>
                         {{else}}
@@ -521,12 +521,13 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
         <H2>Status Displays Interlink</H2>
         <div class="item">
             <div class="itemLabel">
-                <b>Code</b>:
+                <b>General</b>:
             </div>
             <div class="itemContent">
-                {{:helper.link('Clear', 'trash', {'cartmenu' : "1", 'choice' : "Status", 'statdisp' : "blank"}, null, null)}}
-                {{:helper.link('Shuttle ETA', 'gear', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "shuttle"}, null, null)}}
-                {{:helper.link('Message', 'gear', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "message"}, null, null)}}
+                {{:helper.link('Clear',       'trash', {'cartmenu' : "1", 'choice' : "Status", 'statdisp' : "blank"},   null, null)}}
+                {{:helper.link('Local Time',  'gear',  {'cartmenu' : "1", 'choice' : 'Status', 'statdisp' : "time"},    null, null)}}
+                {{:helper.link('Shuttle ETA', 'gear',  {'cartmenu' : "1", 'choice' : "Status", 'statdisp' : "shuttle"}, null, null)}}
+                {{:helper.link('Message',     'gear',  {'cartmenu' : "1", 'choice' : "Status", 'statdisp' : "message"}, null, null)}}
             </div>
         </div>
         <br>
@@ -550,15 +551,13 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
         <br>
         <div class="item">
             <div class="itemLabel">
-                <b> ALERT!</b>:
+                <b>Alert:</b>
             </div>
             <div class="itemContent">
-                {{:helper.link('None', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "default"}, null, null)}}
-                {{:helper.link('Green Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "greenalert"}, null, null)}}
-                {{:helper.link('Blue Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "bluealert"}, null, null)}}
-                {{:helper.link('Red Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "redalert"}, null, null)}}
-                {{:helper.link('Lockdown', 'caution', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "lockdown"}, null, null)}}
-                {{:helper.link('Biohazard', 'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "biohazard"}, null, null)}}
+                {{:helper.link('None',                   'alert',     {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "image", 'image' : "default"}, null, null)}}
+                {{:helper.link('Current Security Level', 'alert',     {'cartmenu' : "1", 'choice' : "Status",'statdisp' : 'alert'}, null, null)}}
+                {{:helper.link('Lockdown',               'caution',   {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "image", 'image' : "lockdown"}, null, null)}}
+                {{:helper.link('Biohazard',              'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "image", 'image' : "biohazard"}, null, null)}}
             </div>
         </div>
 

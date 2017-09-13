@@ -303,8 +303,8 @@
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
-	department = "Utility"
-	department_flag = UTL
+	department = "Exploration"
+	department_flag = EXP
 
 	total_positions = 1
 	spawn_positions = 1
@@ -329,8 +329,8 @@
 
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Utility"
-	department_flag = UTL
+	department = "Exploration"
+	department_flag = EXP
 
 	total_positions = 1
 	spawn_positions = 1
@@ -352,8 +352,8 @@
 
 /datum/job/explorer
 	title = "Explorer"
-	department = "Utility"
-	department_flag = UTL
+	department = "Exploration"
+	department_flag = EXP
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"

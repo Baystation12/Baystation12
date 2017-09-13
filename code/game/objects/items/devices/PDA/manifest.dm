@@ -26,7 +26,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 	var/sci[0]
 	var/car[0]
 	var/sup[0]
-	var/utl[0]
+	var/exp[0]
 	var/srv[0]
 	var/civ[0]
 	var/bot[0]
@@ -135,6 +135,16 @@ name updates also zero the list; although they are not in data_core, synths are 
 			if(depthead && sup.len != 1)
 				sup.Swap(1,sup.len)
 
+		if(real_rank in GLOB.exploration_positions)
+			exp[++exp.len] = list("name" = name,
+				"rank" = rank,
+				"active" = isactive,
+				"mil_branch" = mil_branch,
+				"mil_rank" = mil_rank)
+			department = 1
+			if(depthead && exp.len != 1)
+				sup.Swap(1,exp.len)
+
 		if(real_rank in GLOB.service_positions)
 			srv[++srv.len] = list("name" = name,
 				"rank" = rank,
@@ -184,7 +194,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 		"sci" = sci,\
 		"car" = car,\
 		"sup" = sup,\
-		"utl" = utl,\
+		"exp" = exp,\
 		"srv" = srv,\
 		"civ" = civ,\
 		"bot" = bot,\

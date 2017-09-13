@@ -9,7 +9,7 @@ var/const/MSC               =(1<<7)
 var/const/SRV               =(1<<8)
 var/const/SUP               =(1<<9)
 var/const/SPT               =(1<<10)
-var/const/UTL               =(1<<11)
+var/const/EXP               =(1<<11)
 
 GLOBAL_LIST_EMPTY(assistant_occupations)
 
@@ -35,7 +35,7 @@ GLOBAL_LIST_EMPTY(supply_positions)
 
 GLOBAL_LIST_EMPTY(support_positions)
 
-GLOBAL_LIST_EMPTY(utility_positions)
+GLOBAL_LIST_EMPTY(exploration_positions)
 
 
 /proc/guest_jobbans(var/job)

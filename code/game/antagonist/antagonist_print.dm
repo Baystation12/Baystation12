@@ -24,10 +24,10 @@
 					feedback_add_details(feedback_tag,"[O.type]|FAIL")
 					failed = 1
 				num++
-				if(failed)
-					text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
-				else
-					text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
+			if(failed)
+				text += "<br><font color='red'><B>The [role_text] has failed.</B></font>"
+			else
+				text += "<br><font color='green'><B>The [role_text] was successful!</B></font>"
 
 	if(global_objectives && global_objectives.len)
 		text += "<BR><FONT size = 2>Their objectives were:</FONT>"
