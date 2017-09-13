@@ -161,9 +161,6 @@
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return 1
 
-/obj/machinery/teleport/station/AIAltClick()
-	testfire()
-
 /atom/proc/AIMiddleClick(var/mob/living/silicon/user)
 	return 0
 

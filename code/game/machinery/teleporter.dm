@@ -38,11 +38,6 @@
 	if(locked)
 		var/turf/T = get_turf(locked)
 		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
-		if(hub.accurate)
-			to_chat(user, "<span class='notice'>Test fire completed.</span>")
-		else
-			to_chat(user, "<span class='warning'>Destination untested. Test firing recommended.</span>")
-
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
@@ -140,7 +135,6 @@
 		return
 
 	src.locked = L[desc]
-	hub.accurate = 0
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
 	src.add_fingerprint(usr)
@@ -179,7 +173,6 @@
 	desc = "It's the hub of a teleporting machine."
 	icon_state = "tele0"
 	dir = 4
-	var/accurate = 0
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
@@ -205,111 +198,13 @@
 		for(var/mob/O in hearers(src, null))
 			O.show_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
-	if (istype(M, /atom/movable))
-		if(prob(5) && !accurate) //oh dear a problem, put em in deep space
-			var/turf/T = get_turf(M)
-			var/destination_z = T ? GLOB.using_map.get_transit_zlevel(T.z) : pick(GLOB.using_map.player_levels)
-			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), destination_z), 2)
-		else
-			do_teleport(M, com.locked) //dead-on precision
 
-		if(com.one_time_use) //Make one-time-use cards only usable one time!
-			com.one_time_use = 0
-			com.locked = null
-	else
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, src)
-		s.start()
-		accurate = 1
-		for(var/mob/B in hearers(src, null))
-			B.show_message("<span class='notice'>Test fire completed.</span>")
+	do_teleport(M, com.locked)
+
+	if(com.one_time_use) //Make one-time-use cards only usable one time!
+		com.one_time_use = 0
+		com.locked = null
 	return
-/*
-/proc/do_teleport(atom/movable/M as mob|obj, atom/destination, precision)
-	if(istype(M, /obj/effect))
-		qdel(M)
-		return
-	if (istype(M, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks get teleported --NeoFite
-		for(var/mob/O in viewers(M, null))
-			O.show_message(text("<span class='danger'>The [] bounces off of the portal!</span>", M.name), 1)
-		return
-	if (istype(M, /mob/living))
-		var/mob/living/MM = M
-		if(MM.check_contents_for(/obj/item/weapon/disk/nuclear))
-			to_chat(MM, "<span class='warning'>Something you are carrying seems to be unable to pass through the portal. Better drop it if you want to go through.</span>")
-			return
-	var/disky = 0
-	for (var/atom/O in M.contents) //I'm pretty sure this accounts for the maximum amount of container in container stacking. --NeoFite
-		if (istype(O, /obj/item/weapon/storage) || istype(O, /obj/item/weapon/gift))
-			for (var/obj/OO in O.contents)
-				if (istype(OO, /obj/item/weapon/storage) || istype(OO, /obj/item/weapon/gift))
-					for (var/obj/OOO in OO.contents)
-						if (istype(OOO, /obj/item/weapon/disk/nuclear))
-							disky = 1
-				if (istype(OO, /obj/item/weapon/disk/nuclear))
-					disky = 1
-		if (istype(O, /obj/item/weapon/disk/nuclear))
-			disky = 1
-		if (istype(O, /mob/living))
-			var/mob/living/MM = O
-			if(MM.check_contents_for(/obj/item/weapon/disk/nuclear))
-				disky = 1
-	if (disky)
-		for(var/mob/P in viewers(M, null))
-			P.show_message(text("<span class='danger'>The [] bounces off of the portal!</span>", M.name), 1)
-		return
-
-//Bags of Holding cause bluespace teleportation to go funky. --NeoFite
-	if (istype(M, /mob/living))
-		var/mob/living/MM = M
-		if(MM.check_contents_for(/obj/item/weapon/storage/backpack/holding))
-			to_chat(MM, "<span class='warning'>The Bluespace interface on your Bag of Holding interferes with the teleport!</span>")
-			precision = rand(1,100)
-	if (istype(M, /obj/item/weapon/storage/backpack/holding))
-		precision = rand(1,100)
-	for (var/atom/O in M.contents) //I'm pretty sure this accounts for the maximum amount of container in container stacking. --NeoFite
-		if (istype(O, /obj/item/weapon/storage) || istype(O, /obj/item/weapon/gift))
-			for (var/obj/OO in O.contents)
-				if (istype(OO, /obj/item/weapon/storage) || istype(OO, /obj/item/weapon/gift))
-					for (var/obj/OOO in OO.contents)
-						if (istype(OOO, /obj/item/weapon/storage/backpack/holding))
-							precision = rand(1,100)
-				if (istype(OO, /obj/item/weapon/storage/backpack/holding))
-					precision = rand(1,100)
-		if (istype(O, /obj/item/weapon/storage/backpack/holding))
-			precision = rand(1,100)
-		if (istype(O, /mob/living))
-			var/mob/living/MM = O
-			if(MM.check_contents_for(/obj/item/weapon/storage/backpack/holding))
-				precision = rand(1,100)
-
-
-	var/turf/destturf = get_turf(destination)
-
-	var/tx = destturf.x + rand(precision * -1, precision)
-	var/ty = destturf.y + rand(precision * -1, precision)
-
-	var/tmploc
-
-	if (ismob(destination.loc)) //If this is an implant.
-		tmploc = locate(tx, ty, destturf.z)
-	else
-		tmploc = locate(tx, ty, destination.z)
-
-	if(tx == destturf.x && ty == destturf.y && (istype(destination.loc, /obj/structure/closet) || istype(destination.loc, /obj/structure/closet/secure_closet)))
-		tmploc = destination.loc
-
-	if(tmploc==null)
-		return
-
-	M.forceMove(tmploc)
-	sleep(2)
-
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, M)
-	s.start()
-	return
-*/
 
 /obj/machinery/teleport/station
 	name = "station"
@@ -361,39 +256,12 @@
 
 	if (com)
 		com.icon_state = "tele0"
-		com.accurate = 0
 		com.update_use_power(1)
 		update_use_power(1)
 		for(var/mob/O in hearers(src, null))
 			O.show_message("<span class='notice'>Teleporter disengaged!</span>", 2)
 	src.add_fingerprint(usr)
 	src.engaged = 0
-	return
-
-/obj/machinery/teleport/station/AltClick()
-	if(!usr.incapacitated() && Adjacent(usr))
-		testfire()
-
-
-/obj/machinery/teleport/station/verb/testfire()
-	set name = "Test Fire Teleporter"
-	set category = "Object"
-	set src in oview(1)
-
-	if(stat & (BROKEN|NOPOWER) || !istype(usr,/mob/living))
-		return
-
-	if (com && !active)
-		active = 1
-		for(var/mob/O in hearers(src, null))
-			O.show_message("<span class='notice'>Test firing!</span>", 2)
-		com.teleport()
-		use_power(5000)
-
-		spawn(30)
-			active=0
-
-	src.add_fingerprint(usr)
 	return
 
 /obj/machinery/teleport/station/update_icon()
