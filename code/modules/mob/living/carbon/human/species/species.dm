@@ -82,10 +82,10 @@
 	var/gibbed_anim = "gibbed-h"
 	var/dusted_anim = "dust-h"
 	var/death_sound
-	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
-	var/knockout_message = "has been knocked unconscious!"
-	var/halloss_message = "slumps to the ground, too weak to continue fighting."
-	var/halloss_message_self = "You're in too much pain to keep going..."
+	var/death_message = "seizes up and falls limp. Their eyes are unmoving, dead and lifeless..."
+	var/knockout_message = "collapses, having been knocked unconscious."
+	var/halloss_message = "slumps over with a weak groan, too weak to continue fighting..."
+	var/halloss_message_self = "The pain is too severe for you to keep going. You give up."
 
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
