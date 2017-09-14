@@ -1,0 +1,5 @@
+author: atlantiscze
+
+delete-after: True
+changes:
+  - tweak: "Cyborgs can now click ladders to climb. AIs can now click ladders to move their view to different Z."
