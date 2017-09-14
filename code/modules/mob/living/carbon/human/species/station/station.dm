@@ -154,14 +154,14 @@
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
-	min_age = 17
-	max_age = 80
+	min_age = 19
+	max_age = 140
 
-	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
-	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
-	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
-	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
-	using unique inflections their mouths form."
+	blurb = "The Tajaran race is a species of long lived mammalian bipeds hailing from the planet of Ahdomai in the \
+	Shyihie system. They have been introduced to bluespace travel by the humans and Skrell, and their policies have been \
+	structured to prevent another reign of the Overseers. They hold a very spiritual outlook on life and \
+	have recently been fascinated by cybernetic enhancement. They prefer colder environments, \
+	and evolved a layer of thick fur to accommodate this. "
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
