@@ -85,7 +85,7 @@
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
 	var/knockout_message = "collapses, having been knocked unconscious."
 	var/halloss_message = "slumps over, too weak to continue fighting..."
-	var/halloss_message_self = "The pain is too severe for you to keep going. You give up."
+	var/halloss_message_self = "The pain is too severe for you to keep going..."
 
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
