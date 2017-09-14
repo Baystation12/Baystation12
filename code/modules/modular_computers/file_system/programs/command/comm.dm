@@ -5,10 +5,10 @@
 #define STATE_ALERT_LEVEL	5
 /datum/computer_file/program/comm
 	filename = "comm"
-	filedesc = "Command and communications program."
+	filedesc = "Command and Communications Program"
 	program_icon_state = "comm"
 	nanomodule_path = /datum/nano_module/program/comm
-	extended_desc = "Used to effect command and control. Can relay long-range communications. This program can not be run on tablet computers."
+	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_heads
 	requires_ntnet = 1
 	size = 12
@@ -23,7 +23,7 @@
 	return temp
 
 /datum/nano_module/program/comm
-	name = "Command and communications program"
+	name = "Command and Communications Program"
 	available_to_ai = TRUE
 	var/current_status = STATE_DEFAULT
 	var/msg_line1 = ""
@@ -219,7 +219,7 @@
 						if(security_state.set_security_level(target_level))
 							feedback_inc(target_level.type,1)
 			else
-				to_chat(usr, "You press button, but red light flashes and nothing happens.")//This should never happen
+				to_chat(usr, "You press the button, but a red light flashes and nothing happens.") //This should never happen
 
 			current_status = STATE_DEFAULT
 		if("viewmessage")
@@ -240,9 +240,9 @@
 			if(is_autenthicated(user) && ntn_comm)
 				if(program && program.computer && program.computer.nano_printer)
 					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
-						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
+						to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
 					else
-						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out paper.</span>")
+						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out a paper.</span>")
 
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
