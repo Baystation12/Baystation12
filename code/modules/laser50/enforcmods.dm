@@ -58,7 +58,8 @@ var/datum/enforcingmods/enfmods
 
 			for(var/client/C in acceptedinvites)
 				while(modsneeded)
-					C.holder = new /datum/admins("Enforcing Moderator",R_MOD,C)
+					var/datum/admins/D = new /datum/admins("Enforcing Moderator",R_MOD,C)
+					D.associate(C)											//link up with the client and add verbs
 					C.holder.associate(src)
 					message_admins("[C.key] has been auto-modded based on score ([modscore])")
 					modsneeded--
