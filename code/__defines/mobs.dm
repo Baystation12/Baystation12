@@ -239,6 +239,7 @@
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
 #define SPECIES_HUMAN "Human"
+#define SPECIES_RESOMI "Resomi"
 #define SPECIES_TAJARA "Tajara"
 #define SPECIES_DIONA "Diona"
 #define SPECIES_VOX "Vox"

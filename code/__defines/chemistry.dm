@@ -23,6 +23,7 @@
 #define IS_UNATHI  4
 #define IS_TAJARA  5
 #define IS_XENOS   6
+#define IS_RESOMI  7
 #define IS_SLIME   8
 #define IS_NABBER  9
 

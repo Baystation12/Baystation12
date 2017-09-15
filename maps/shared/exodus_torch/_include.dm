@@ -7,3 +7,4 @@
 #include "./loadout/loadout_suit.dm"
 #include "./loadout/loadout_accessories.dm"
 #include "./loadout/loadout_uniform.dm"
+#include "./loadout/loadout_xeno.dm"

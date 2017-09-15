@@ -29,7 +29,17 @@
 	icon_state = "zhan_scarf"
 	body_parts_covered = HEAD|FACE
 
-//Voxclothing
+//Resomi clothing
+
+/obj/item/clothing/suit/storage/toggle/Resomicoat
+ 	name = "small coat"
+ 	desc = "A coat that seems too small to fit a human."
+ 	icon_state = "resomicoat"
+ 	item_state = "resomicoat"
+ 	icon_open = "resomicoat_open"
+ 	icon_closed = "resomicoat"
+ 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
+ 	species_restricted = list(SPECIES_RESOMI)
 
 /obj/item/clothing/suit/armor/vox_scrap
 	name = "rusted metal armor"
