@@ -89,9 +89,11 @@
 
 /decl/dsay_communication/proc/get_message(var/client/C, var/mob/M, var/message)
 	var say_verb = pick("complains","moans","whines","laments","blubbers")
+	message = process_chat_markup(message, list("~", "_"))
 	return "[get_name(C, M)] [say_verb], <span class='message'>\"[message]\"</span>"
 
 /decl/dsay_communication/emote/get_message(var/client/C, var/mob/M, var/message)
+	message = process_chat_markup(message, list("~", "_"))
 	return "[get_name(C, M)] <span class='message'>[message]</span>"
 
 /decl/dsay_communication/proc/adjust_channel(var/decl/communication_channel/dsay)
