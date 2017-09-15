@@ -1,8 +1,8 @@
 //Due to how large this one is it gets its own file
 /datum/job/chaplain
 	title = "Chaplain"
-	department = "Civilian"
-	department_flag = CIV
+	department = "Service"
+	department_flag = SRV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1

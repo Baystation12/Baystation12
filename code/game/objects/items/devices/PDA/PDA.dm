@@ -47,6 +47,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/new_message = 0			//To remove hackish overlay check
 	var/new_news = 0
 	var/list/tempmessage = list() // Used to store message in memory if sending failed
+	var/list/ntprofilecache = list()
 
 	var/active_feed				// The selected feed
 	var/list/warrant			// The warrant as we last knew it
@@ -462,7 +463,27 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(mode==41)
 		GLOB.data_core.get_manifest_list()
 
-
+	if(mode==31)
+		if(!user || !user.client)	return
+		var/recommends = ""
+		for(var/T in user.client.prefs.recommendations)
+			recommends = "[T]\n"
+		var/datum/job/job = job_master.GetJob(user:job)
+		data["ntprofile"] = list(\
+			"name" = "[owner]",\
+			"department" = "[user.client.prefs.char_department]",\
+			"deptrank" = "[calculate_department_rank(user)]",\
+			"job" = "[user:job]",\
+			"basepay" = "[job.base_pay]",\
+			"bank" = "[user.client.prefs.bank_balance]",\
+			"paycheck" = "[calculate_paycheck(user)]",\
+			"pension" = "[user.client.prefs.pension_balance]",\
+			"activehours" = "[user.client.prefs.department_playtime / 3600]",\
+			"recommendations" = "[recommends]",\
+			"neurallaces" = "[user.client.prefs.neurallaces]",\
+			"permadeath" = "[user.client.prefs.permadeath]"\
+			)
+		ntprofilecache = data["ntprofile"] //Cacheing for saving unneeded shit?
 	if(mode==3)
 		var/turf/T = get_turf(user.loc)
 		if(!isnull(T))
@@ -670,6 +691,27 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				scanmode = 0
 			else if((!isnull(cartridge)) && (cartridge.access_atmos))
 				scanmode = 5
+//NT PROFILE FUNCTIONALITY===================================
+		if("Neurallace")
+			var/mob/living/carbon/human/M = usr
+			if(M && M.client && owner == M.name)
+				switch(alert("Would you like to buy a neural lace for $3,000?", "Buy Neural Lace", "Yes", "Abort"))
+					if("Yes")
+						if(M.client.prefs.bank_balance < 3000) //Insufficient in bank.
+							if((M.client.prefs.bank_balance+M.client.prefs.pension_balance) < 3000)
+								to_chat(M, "You do not have sufficient funds for this!.")
+								return
+							else
+								var/topay = (3000-M.client.prefs.bank_balance)
+								M.client.prefs.bank_balance -= (3000-topay)
+								M.client.prefs.pension_balance -= topay
+						else
+							M.client.prefs.bank_balance -= 3000
+						M.client.prefs.neurallaces++ //Buy neural lace.
+						M.client.prefs.save_character(1)
+					if("Abort")
+						to_chat(M, "Purchase Aborted.")
+						return
 
 //MESSENGER/NOTE FUNCTIONS===================================
 

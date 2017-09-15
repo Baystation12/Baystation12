@@ -34,20 +34,21 @@ datum/preferences/proc/contentOccupation()
 	if(!job_master)
 		return
 
-	var/datum/mil_branch/player_branch = null
-	var/datum/mil_rank/player_rank = null
+//	var/datum/mil_rank/player_rank = null
 
 	data += "<tt><center>"
 	data += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+//	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
-		player_branch = mil_branches.get_branch(char_branch)
+//		player_branch = char_department
+	if(char_lock)
+		data += "<b>Department of Service:</b> [char_department]"
+	else
+		data += "<b>Department of Service:</b> <a href='?src=\ref[src];char_department=1'>[char_department]</a>"
+//	if(GLOB.using_map.flags & MAP_HAS_RANK)
+//		player_rank = mil_branches.get_rank(char_branch, char_rank)
 
-		data += "Department of Service: <a href='?src=\ref[src];char_department=1'>[char_department]</a>	"
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		player_rank = mil_branches.get_rank(char_branch, char_rank)
-
-		data += "Rank: <a href='?src=\ref[src];char_rank=1'>[char_rank]</a>	"
+//		data += "Rank: <a href='?src=\ref[src];char_rank=1'>[char_rank]</a>	"
 	data += "<br>"
 	data += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more columns.
 	data += "<table width='100%' cellpadding='1' cellspacing='0'>"
@@ -88,23 +89,17 @@ datum/preferences/proc/contentOccupation()
 		if(job.minimum_character_age && usr.client && (usr.client.prefs.age < job.minimum_character_age))
 			data += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
-		if(job.allowed_branches)
+		if(job.department != char_department)
+			data += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [char_department]]</b></a></td></tr>"
+			continue
+/*		if(job.allowed_branches)
 			if(!player_branch)
 				data += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
 				continue
 			if(!is_type_in_list(player_branch, job.allowed_branches))
 				data += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
 				continue
-
-		if(job.allowed_ranks)
-			if(!player_rank)
-				data += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_ranks=[rank]'><b> \[RANK RESTRICTED]</b></a></td></tr>"
-				continue
-
-			if(!is_type_in_list(player_rank, job.allowed_ranks))
-				data += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_ranks=[rank]'><b> \[NOT FOR [player_rank.name_short || player_rank.name]]</b></a></td></tr>"
-				continue
-
+*/
 		if(("Assistant" in job_low) && (rank != "Assistant"))
 			data += "<font color=grey>[rank]</font></td><td></td></tr>"
 			continue

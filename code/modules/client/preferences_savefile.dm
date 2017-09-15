@@ -45,13 +45,18 @@
 	else
 		S["default_slot"] << default_slot
 
+
 	if(slot != SAVE_RESET)
 		S.cd = GLOB.using_map.character_load_path(S, slot)
 		load_char(S)
 	else
 		load_char(S)
 		S.cd = GLOB.using_map.character_load_path(S, default_slot)
+
 	if(persistent) //Only saves persistent if toggled.
+		load_persistent(S)
+		return 1
+	else
 		load_persistent(S)
 
 	loaded_character = S
@@ -68,6 +73,8 @@
 	if(persistent) //Only saves persistent if toggled.
 		save_persistent(S)
 		return S
+	else
+		save_persistent(S)
 	save_char(S)
 	loaded_character = S
 	return S

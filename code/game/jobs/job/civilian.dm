@@ -51,6 +51,7 @@
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
 	economic_modifier = 5
+	base_pay = 14
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_player_age = 3
@@ -80,6 +81,7 @@
 	supervisors = "the quartermaster and the head of personnel"
 	selection_color = "#515151"
 	economic_modifier = 5
+	base_pay = 12.5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 	alt_titles = list("Drill Technician","Prospector")
@@ -102,8 +104,8 @@
 //More or less assistants
 /datum/job/librarian
 	title = "Librarian"
-	department = "Civilian"
-	department_flag = CIV
+	department = "Service"
+	department_flag = SRV
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -116,14 +118,15 @@
 
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
-	department = "Support"
-	department_flag = SPT
+	department = "Security"
+	department_flag = SEC
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#515151"
 	economic_modifier = 7
+	base_pay = 13
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 	minimal_player_age = 10

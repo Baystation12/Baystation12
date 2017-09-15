@@ -8,6 +8,13 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/start = world.timeofday
 		epicenter = get_turf(epicenter)
 		if(!epicenter) return
+		explosion_in_progress = 1
+//		var/loopbreak = 0
+//		while(explosion_in_progress)
+//			if(loopbreak > 10)
+//				loopbreak = 0
+//			loopbreak++
+//			sleep(2)
 
 		// Handles recursive propagation of explosions.
 		if(z_transfer)
@@ -25,7 +32,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range, flame_range)
 
-		sleep(1)
+		sleep(-1)
 
 		// Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
 		// Stereo users will also hear the direction of the explosion!
@@ -76,7 +83,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			if(flash_range)
 				for(var/mob/living/L in viewers(flash_range, epicenter))
 					L.flash_eyes()
-			var/list/affected_turfs = spiral_range_turfs(max_range, epicenter)
+			var/list/affected_turfs = trange(max_range, epicenter)
 			for(var/TU in affected_turfs)
 				var/turf/T = TU
 				if (!T)
@@ -88,34 +95,35 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				else if(dist < heavy_impact_range)	dist = 2
 				else if(dist < light_impact_range)	dist = 3
 				else								continue
-
-				if(flame_range && prob(40) && !isspace(T) && !T.density)
-					var/obj/fire/F = new(T)
-					sleep(0)
-					qdel(F)
-				if(dist > 0)
-					T.ex_act(dist)
-
-				if(!T)
-					T = locate(x0,y0,z0)
-				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
-					var/atom/movable/AM = atom_movable
+				fireyexplosion(flame_range, T)
+				for(var/atom/movable/AM in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
 					if(AM && AM.simulated)	AM.ex_act(dist)
-					sleep(0)
-				CHECK_TICK
+
+				T.ex_act(dist)
+				CHECK_TICK2(90)
 
 
 		var/took = (world.timeofday-start)/10
 		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
 		if(Debug2) world.log << "## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds."
+		explosion_in_progress = 0
 
 		sleep(8)
-
 	return 1
 
 
+/proc/fireyexplosion(var/flame_range, var/turf/T)
+	set waitfor = 0
+	if(flame_range && prob(40) && !isspace(T) && !T.density)
+		var/obj/fire/F = new(T)
+		sleep(5)
+		qdel(F)
 
 proc/secondaryexplosion(turf/epicenter, range)
-	for(var/turf/tile in spiral_range_turfs(range, epicenter))
+	for(var/turf/tile in trange(range, epicenter))
 		tile.ex_act(2)
-		sleep(0)
+		sleep(2)
+/*
+/proc/GatherSpiralTurfs(range, turf/epicenter)
+	. = spiral_range_turfs(range, epicenter, tick_checked = TRUE)
+*/
