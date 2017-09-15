@@ -1,6 +1,6 @@
 
 /obj/machinery/microwave
-	name = "microwave" //Whoever capitalized this is literally Satan. ~R
+	name = "microwave"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
