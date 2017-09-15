@@ -105,35 +105,37 @@ var/list/support_positions = list(
 	return 1
 
 
-/proc/get_department_rank_title(var/department, var/rank)
+/proc/get_department_rank_title(var/department, var/rank, var/ishead = 0)
 	if(department && rank)
-		if(department == "Command" && rank == 4)
-			return "Senior"
-		else
-			switch(rank)
-				if(0 to 1) //Intern
-					switch(department)
-						if("Civilian")
-							return "Assistant"
-						if("Security")
-							return "Cadet"
-						if("Medical")
-							return "Assistant"
-						if("Engineering")
-							return "Assistant"
-						else
-							return "Intern"
-				if(2) //Junior
-					return "Junior"
-				if(3) //Regular
-					return null // No rank.
-				if(4) //Senior
-					return "Senior"
-				if(5) //Lead
-					switch(department)
-						if("Civilian")
-							return "Expert" //Different name because Lead is weird for civvies.
-						else return "Lead"
+		if(ishead)
+			if(rank == 4)
+				return "Senior"
+			else
+				return null
+		switch(rank)
+			if(0 to 1) //Intern
+				switch(department)
+					if("Civilian")
+						return "Assistant"
+					if("Security")
+						return "Cadet"
+					if("Medical")
+						return "Assistant"
+					if("Engineering")
+						return "Assistant"
+					else
+						return "Intern"
+			if(2) //Junior
+				return "Junior"
+			if(3) //Regular
+				return null // No rank.
+			if(4) //Senior
+				return "Senior"
+			if(5) //Lead
+				switch(department)
+					if("Civilian")
+						return "Expert" //Different name because Lead is weird for civvies.
+					else return "Lead"
 
 /mob/verb/ForcePaycheck()
 	set name = "Force to get paid"

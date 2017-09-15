@@ -148,7 +148,7 @@ var/const/NO_EMAG_ACT = -50
 	popup.open()
 	return
 
-/obj/item/weapon/card/id/proc/update_name()
+/obj/item/weapon/card/id/proc/update_name(var/mob/M)
 	if(assignment)
 		name = "[registered_name]'s ID Card ([assignment])"
 	else
@@ -168,17 +168,19 @@ var/const/NO_EMAG_ACT = -50
 		id_card.blood_type		= dna.b_type
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
-	id_card.update_name()
+	id_card.update_name(src)
 
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()
 	id_card.age = age
 
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-		id_card.military_branch = char_branch
-
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		id_card.military_rank = char_rank
+		id_card.military_branch = src.client.prefs.char_department
+	spawn(20)
+		if(id_card.access:Find(19))
+			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(src.client.prefs.char_department, src.client.prefs.department_rank, ishead = 1)] [id_card.assignment])"
+		else
+			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(src.client.prefs.char_department, src.client.prefs.department_rank)] [id_card.assignment])"
 
 /obj/item/weapon/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
@@ -187,9 +189,9 @@ var/const/NO_EMAG_ACT = -50
 	dat += text("Age: []</A><BR>\n", age)
 
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
+		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch : "\[UNSET\]")
+//	if(GLOB.using_map.flags & MAP_HAS_RANK)
+//		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
 
 	dat += text("Assignment: []</A><BR>\n", assignment)
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)

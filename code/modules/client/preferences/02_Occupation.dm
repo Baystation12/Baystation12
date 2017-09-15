@@ -89,7 +89,7 @@ datum/preferences/proc/contentOccupation()
 		if(job.minimum_character_age && usr.client && (usr.client.prefs.age < job.minimum_character_age))
 			data += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
-		if(job.department != char_department)
+		if(job.department != char_department || promoted != 2)
 			data += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [char_department]]</b></a></td></tr>"
 			continue
 /*		if(job.allowed_branches)
