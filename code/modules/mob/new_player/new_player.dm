@@ -106,7 +106,10 @@
 	if(!client)	return 0
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src)
+		if(!finished_init)
+			return to_chat(src, "Server is still initializing, please hold..")
+		else
+			client.prefs.ShowChoices(src)
 		return 1
 
 	if(href_list["ready"])

@@ -3,6 +3,7 @@
 /var/server_name = "Apollo Gaming"
 
 /var/game_id = null
+/var/finished_init = 0
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
@@ -105,7 +106,8 @@
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
 		log = runtime_log
 
-	callHook("startup")
+	if(callHook("startup"))
+		finished_init = 1
 	//Emergency Fix
 	load_mods()
 	//end-emergency fix
